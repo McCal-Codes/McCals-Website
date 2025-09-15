@@ -4,16 +4,25 @@ on:
     branches: [ main ]
     paths:
       - 'images/**'
+      - 'scripts/gen-manifest.js'
       - '.github/workflows/build-manifest.yml'
+
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
+
+      - name: Generate manifest (Book Club)
+        run: node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
+
       - name: Commit & push manifest
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
