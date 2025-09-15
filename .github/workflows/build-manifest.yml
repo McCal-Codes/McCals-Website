@@ -1,4 +1,5 @@
 name: Build manifests
+
 on:
   push:
     branches: [ main ]
@@ -14,15 +15,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Generate manifest (Book Club)
-        run: node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
+      # --- DIAGNOSTICS (helps if something goes wrong) ---
+      - name: Show working tree & confirm script exists
+        run: |
+          pwd
+          ls -la
+          ls -la scripts || true
+          test -f scripts/gen-manifest.js && echo "✅ scripts/gen-manifest.js found" || (echo "❌ Missing scripts/gen-manifest.js" && exit 1)
+          test -d "images/Portfolios/Concert/The Book Club/The Book Club" && echo "✅ Target image dir exists" || (echo "❌ Target image dir missing" && exit 1)
 
+      # --- GENERATE MANIFEST ---
+      - name: Generate manifest (Book Club)
+        run: |
+          node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
+
+      # --- COMMIT IF CHANGED ---
       - name: Commit & push manifest
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
@@ -31,4 +48,6 @@ jobs:
             git add -A
             git commit -m "Auto-update manifest.json"
             git push
+          else
+            echo "No changes to commit."
           fi
