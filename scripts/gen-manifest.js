@@ -1,34 +1,24 @@
-- name: Show working tree & confirm script exists
-  run: |
-    echo "== PWD =="
-    pwd
-    echo "== Branch =="
-    git rev-parse --abbrev-ref HEAD || true
+// scripts/gen-manifest.js
+// Usage: node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
+const fs = require('fs');
+const path = require('path');
 
-    echo "== Top-level listing =="
-    ls -la
+const dir = process.argv[2];
+if (!dir) {
+  console.error('Usage: node scripts/gen-manifest.js "<relative/images/folder>"');
+  process.exit(1);
+}
 
-    echo "== List 'scripts' directory (if present) =="
-    ls -la scripts || true
+const abs = path.resolve(process.cwd(), dir);
+if (!fs.existsSync(abs)) {
+  console.error('Directory not found:', abs);
+  process.exit(2);
+}
 
-    echo "== Tracked files (git ls-files) =="
-    git ls-files | sed -n '1,200p'
+const files = fs.readdirSync(abs)
+  .filter(f => /\.(jpe?g|png|webp)$/i.test(f))
+  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
 
-    echo "== Find any gen-manifest files regardless of case =="
-    find . -maxdepth 4 -iregex '.*gen-.*manifest.*\.js' -print || true
-
-    echo "== Hard check for the expected path =="
-    if [ -f scripts/gen-manifest.js ]; then
-      echo "✅ scripts/gen-manifest.js found"
-    else
-      echo "❌ scripts/gen-manifest.js NOT found in this checkout"
-      exit 1
-    fi
-
-    echo "== Verify target images directory =="
-    if [ -d "images/Portfolios/Concert/The Book Club/The Book Club" ]; then
-      echo "✅ Target image dir exists"
-    else
-      echo "❌ Target image dir missing"
-      exit 1
-    fi
+const outPath = path.join(abs, 'manifest.json');
+fs.writeFileSync(outPath, JSON.stringify(files, null, 2) + '\n');
+console.log(`Wrote ${files.length} entries to ${outPath}`);
