@@ -1,24 +1,48 @@
-// scripts/gen-manifest.js
-// Usage: node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
-const fs = require('fs');
-const path = require('path');
+name: Build manifests
 
-const dir = process.argv[2];
-if (!dir) {
-  console.error('Usage: node scripts/gen-manifest.js "<relative/images/folder>"');
-  process.exit(1);
-}
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'images/**'
+      - 'scripts/gen-manifest.js'
+      - '.github/workflows/build-manifest.yml'
 
-const abs = path.resolve(process.cwd(), dir);
-if (!fs.existsSync(abs)) {
-  console.error('Directory not found:', abs);
-  process.exit(2);
-}
+permissions:
+  contents: write
 
-const files = fs.readdirSync(abs)
-  .filter(f => /\.(jpe?g|png|webp)$/i.test(f))
-  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-const outPath = path.join(abs, 'manifest.json');
-fs.writeFileSync(outPath, JSON.stringify(files, null, 2) + '\n');
-console.log(`Wrote ${files.length} entries to ${outPath}`);
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Show working tree & confirm script exists
+        run: |
+          pwd
+          ls -la scripts || true
+          test -f scripts/gen-manifest.js || (echo "❌ Missing scripts/gen-manifest.js" && exit 1)
+
+      - name: Generate manifest (Concert – The Book Club)
+        run: node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
+
+      - name: Generate manifest (Journalism Portfolio)
+        run: node scripts/gen-manifest.js "images/Portfolios/Journalism"
+
+      - name: Commit & push manifests
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions"
+            git config user.email "actions@users.noreply.github.com"
+            git add -A
+            git commit -m "Auto-update manifests"
+            git push
+          else
+            echo "No changes to commit."
+          fi
