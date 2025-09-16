@@ -1,0 +1,496 @@
+<!-- GitHub Portfolio Gallery - Single Code Block for Squarespace -->
+<div id="github-portfolio-gallery">
+  <div class="loading-spinner">Loading portfolio...</div>
+</div>
+
+<!-- Lightbox Modal -->
+<div id="portfolioLightbox" class="portfolio-lightbox" aria-hidden="true">
+  <div class="lightbox-content">
+    <button class="lightbox-close" aria-label="Close gallery">&times;</button>
+    <div class="lightbox-header">
+      <h2 id="lightboxTitle"></h2>
+      <p id="lightboxMeta"></p>
+    </div>
+    <div class="lightbox-gallery" id="lightboxGallery">
+      <div class="loading-spinner">Loading images...</div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* GitHub Portfolio Gallery Styles */
+#github-portfolio-gallery {
+  margin: 20px 0;
+  min-height: 200px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.portfolio-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #f5f5f5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.portfolio-card:hover,
+.portfolio-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.portfolio-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.portfolio-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-thumbnail img {
+  transform: scale(1.05);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: white;
+  padding: 30px 15px 15px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-overlay,
+.portfolio-card:focus .portfolio-overlay {
+  transform: translateY(0);
+}
+
+.portfolio-title {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.portfolio-count {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Lightbox Styles */
+.portfolio-lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+}
+
+.portfolio-lightbox.is-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content {
+  width: 90%;
+  height: 90%;
+  max-width: 1200px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 10001;
+  padding: 5px 10px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.lightbox-header {
+  color: white;
+  text-align: center;
+  padding: 0 0 20px 0;
+}
+
+.lightbox-header h2 {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+}
+
+.lightbox-header p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.lightbox-gallery {
+  flex: 1;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.lightbox-gallery img {
+  max-width: 100%;
+  max-height: 80vh;
+  margin: 10px auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 50px;
+  font-size: 16px;
+  color: #666;
+}
+
+.portfolio-lightbox .loading-spinner {
+  color: white;
+}
+
+/* Error Message */
+.error-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .portfolio-thumbnail {
+    height: 150px;
+  }
+  
+  .lightbox-content {
+    width: 95%;
+    height: 95%;
+  }
+  
+  .lightbox-gallery {
+    padding: 10px;
+  }
+  
+  .lightbox-header h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .portfolio-thumbnail {
+    height: 180px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration - Update these for your GitHub repo
+  const GITHUB_CONFIG = {
+    owner: 'McCal-Codes',
+    repo: 'McCals-Website',
+    path: 'images/Portfolios/concert', // Only pull from concert folder
+    branch: 'main'
+  };
+  
+  // GitHub API URLs
+  const GITHUB_API_BASE = 'https://api.github.com';
+  const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com';
+  
+  // Supported image extensions
+  const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+  
+  /**
+   * Shuffle array randomly using Fisher-Yates algorithm
+   */
+  function shuffleArray(array) {
+    const shuffled = [...array]; // Create a copy
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  // Cache for better performance
+  let concertCache = null;
+  let cacheTimestamp = null;
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+  
+  /**
+   * Check if cached data is still valid
+   */
+  function isCacheValid() {
+    return concertCache && cacheTimestamp && 
+           (Date.now() - cacheTimestamp) < CACHE_DURATION;
+  }
+  
+  /**
+   * Get concert folders from GitHub API
+   */
+  async function getConcertFolders() {
+    if (isCacheValid()) {
+      return shuffleArray(concertCache); // Shuffle even cached results
+    }
+    
+    try {
+      const url = `${GITHUB_API_BASE}/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const folders = data.filter(item => item.type === 'dir');
+      
+      // Get images for each concert folder using manifest.json
+      const portfolios = await Promise.all(
+        folders.map(async folder => {
+          try {
+            // First, try to fetch manifest.json
+            const manifestResponse = await fetch(
+              `${GITHUB_RAW_BASE}/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.path}/${folder.name}/manifest.json`
+            );
+            
+            if (!manifestResponse.ok) {
+              console.warn(`No manifest.json found for concert: ${folder.name}`);
+              return null;
+            }
+            
+            const manifest = await manifestResponse.json();
+            
+            if (!Array.isArray(manifest) || manifest.length === 0) {
+              console.warn(`Invalid or empty manifest for concert: ${folder.name}`);
+              return null;
+            }
+            
+            // Create image objects from manifest list
+            const imageFiles = manifest
+              .filter(filename => IMAGE_EXTENSIONS.some(ext => 
+                filename.toLowerCase().endsWith(ext)
+              ))
+              .map(filename => ({
+                name: filename,
+                url: `${GITHUB_RAW_BASE}/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.path}/${folder.name}/${encodeURIComponent(filename)}`
+              }));
+            
+            if (imageFiles.length === 0) {
+              console.warn(`No valid images in manifest for concert: ${folder.name}`);
+              return null;
+            }
+            
+            // Shuffle images within this concert for random order
+            const shuffledImages = shuffleArray(imageFiles);
+            
+            return {
+              name: folder.name,
+              displayName: folder.name.replace(/[-_]/g, ' '), // Clean up concert names
+              images: shuffledImages, // Use shuffled images
+              thumbnail: shuffledImages[0] // Use first shuffled image as thumbnail
+            };
+          } catch (error) {
+            console.warn(`Error fetching manifest for concert: ${folder.name}:`, error);
+            return null;
+          }
+        })
+      );
+      
+      // Filter out failed requests, shuffle, and cache result
+      const validConcerts = portfolios.filter(portfolio => portfolio !== null);
+      concertCache = validConcerts; // Cache unshuffled for consistent data
+      cacheTimestamp = Date.now();
+      
+      return shuffleArray(validConcerts); // Return shuffled version
+    } catch (error) {
+      console.error('Error fetching portfolio data:', error);
+      throw error;
+    }
+  }
+  
+  /**
+   * Create gallery HTML structure
+   */
+  function createGalleryHTML(portfolios) {
+    return `
+      <div class="portfolio-grid">
+        ${portfolios.map(portfolio => `
+          <div class="portfolio-card" data-portfolio="${portfolio.name}" tabindex="0" role="button" aria-label="Open ${portfolio.displayName} concert gallery">
+            <div class="portfolio-thumbnail">
+              <img src="${portfolio.thumbnail.url}" 
+                   alt="${portfolio.displayName}" 
+                   loading="lazy"
+                   onerror="this.style.display='none'">
+              <div class="portfolio-overlay">
+                <h3 class="portfolio-title">${portfolio.displayName}</h3>
+                <p class="portfolio-count">${portfolio.images.length} image${portfolio.images.length !== 1 ? 's' : ''}</p>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+  
+  /**
+   * Open lightbox with portfolio images
+   */
+  async function openLightbox(portfolio) {
+    const lightbox = document.getElementById('portfolioLightbox');
+    const gallery = document.getElementById('lightboxGallery');
+    const title = document.getElementById('lightboxTitle');
+    const meta = document.getElementById('lightboxMeta');
+    
+    // Set title and meta
+    title.textContent = portfolio.displayName;
+    meta.textContent = `${portfolio.images.length} image${portfolio.images.length !== 1 ? 's' : ''}`;
+    
+    // Show loading spinner
+    gallery.innerHTML = '<div class="loading-spinner">Loading images...</div>';
+    
+    // Open lightbox
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    
+    // Load images
+    const imageElements = portfolio.images.map(image => 
+      `<img src="${image.url}" alt="${image.name}" loading="lazy" onerror="this.style.display='none'">`
+    ).join('');
+    
+    gallery.innerHTML = imageElements;
+  }
+  
+  /**
+   * Close lightbox
+   */
+  function closeLightbox() {
+    const lightbox = document.getElementById('portfolioLightbox');
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  
+  /**
+   * Initialize the gallery
+   */
+  async function initGallery() {
+    const container = document.getElementById('github-portfolio-gallery');
+    
+    if (!container) {
+      console.warn('Gallery container not found');
+      return;
+    }
+    
+    try {
+      // Fetch concert data
+      const portfolios = await getConcertFolders();
+      
+      if (portfolios.length === 0) {
+        container.innerHTML = '<div class="error-message">No concerts found in your GitHub repository.</div>';
+        return;
+      }
+      
+      // Create gallery
+      container.innerHTML = createGalleryHTML(portfolios);
+      
+      // Add event listeners to cards
+      const cards = container.querySelectorAll('.portfolio-card');
+      cards.forEach(card => {
+        const portfolioName = card.dataset.portfolio;
+        const portfolio = portfolios.find(p => p.name === portfolioName);
+        
+        if (portfolio) {
+          // Click handler
+          card.addEventListener('click', () => openLightbox(portfolio));
+          
+          // Keyboard handler
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openLightbox(portfolio);
+            }
+          });
+        }
+      });
+      
+      // Lightbox close handlers
+      const lightbox = document.getElementById('portfolioLightbox');
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+      
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      
+      // ESC key handler
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+          closeLightbox();
+        }
+      });
+      
+    } catch (error) {
+      console.error('Error initializing gallery:', error);
+      container.innerHTML = '<div class="error-message">Error loading portfolio. Please check your GitHub repository settings and try again.</div>';
+    }
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGallery);
+  } else {
+    initGallery();
+  }
+  
+})();
+</script>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>McCal Media — Galleries</title>
+  <meta name="description" content="Photo galleries for McCal Media." />
+  <link rel="preload" href="./styles.css" as="style">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>McCal Media</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="view-list">
+      <div class="toolbar">
+        <h2>Galleries</h2>
+        <label class="filter">
+          <span>Category:</span>
+          <select id="category-filter">
+            <option value="">All</option>
+          </select>
+        </label>
+      </div>
+      <div id="galleries" class="grid" aria-live="polite"></div>
+    </section>
+
+    <section id="view-gallery" hidden>
+      <p><button id="back" class="btn">← Back to galleries</button></p>
+      <h2 id="gallery-title"></h2>
+      <div id="thumbs" class="thumbs" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

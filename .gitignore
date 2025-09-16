@@ -1,0 +1,11 @@
+# System files
+.DS_Store
+*/.DS_Store
+**/.DS_Store
+
+# Sensitive recovery codes
+site-workspace/Recoveryy/github-recovery-codes.txt
+
+# Development workspace temporary files
+site-workspace/temp/
+site-workspace/drafts/
