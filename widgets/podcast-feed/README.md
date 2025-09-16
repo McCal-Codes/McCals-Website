@@ -12,11 +12,13 @@ High-performance RSS feed widget with liquid glass design and performance optimi
 - **Performance Monitoring**: Real-time metrics with debug mode
 
 ### Visual 🎨
+- **Dark Card Aesthetic**: Rich dark backgrounds matching your website design
 - **Liquid Glass Design**: Glassmorphism buttons and interface elements
+- **Audio Player**: 30-second previews with play/pause and progress controls
+- **Platform Integration**: Spotify and Apple Podcasts buttons with official branding
 - **Responsive Masonry**: CSS-based masonry layout with breakpoints
 - **Smooth Animations**: Staggered loading with cubic-bezier easing
-- **Dark/Light Mode**: Automatic theme detection and adaptation
-- **Expandable Content**: "Read more" functionality for descriptions
+- **Enhanced Typography**: Larger titles and improved content hierarchy
 
 ### Developer Experience 🛠️
 - **Debug Toggle**: Click button to view performance metrics
@@ -48,7 +50,8 @@ High-performance RSS feed widget with liquid glass design and performance optimi
 - Show artwork and branding
 
 ## Versions
-- **v1.0** (Latest): Initial release with glassmorphism design
+- **v1.1** (Latest): Audio previews, platform links, enhanced dark styling
+- **v1.0**: Initial release with glassmorphism design
 - Performance-optimized RSS parsing with caching
 - Responsive masonry layout with smooth animations
 - Debug mode with performance metrics

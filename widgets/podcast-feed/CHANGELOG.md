@@ -43,6 +43,38 @@
 
 ## Development Inspiration
 
+## v1.1 (2025-09-16) — Audio Previews & Platform Integration 🎵
+
+### ✨ New Features
+- **30-Second Audio Previews**: Embedded audio player with play/pause and progress controls
+- **Platform Integration**: Direct Spotify and Apple Podcasts episode links
+- **Enhanced Dark Styling**: Matches your website's dark card aesthetic perfectly
+- **Smart Audio Management**: Only one episode plays at a time, auto-stops after 30 seconds
+- **Improved Typography**: Better hierarchy with larger titles and refined spacing
+- **Platform Icons**: Official Spotify and Apple Music branding with hover effects
+
+### 🎨 Design Enhancements
+- **Dark Card Theme**: Rich dark backgrounds with subtle borders and shadows
+- **Liquid Glass Audio Player**: Semi-transparent player controls with backdrop blur
+- **Enhanced Visual Hierarchy**: Larger episode titles, better metadata layout
+- **Smooth Hover Effects**: Cards lift on hover with enhanced shadows
+- **Professional Branding**: Podcast avatar, RSS icon, and platform badges
+
+### 🚀 Performance Improvements
+- **Audio Lazy Loading**: Audio files only load when play button is clicked
+- **Memory Management**: Automatic cleanup when switching between episodes  
+- **Enhanced Debug Mode**: Additional metrics for audio player performance
+- **CORS Proxy Update**: Better RSS feed fetching with improved error handling
+
+### 📱 Mobile Enhancements
+- **Touch-Friendly Controls**: Larger audio player buttons for mobile
+- **Responsive Platform Links**: Stack vertically on smaller screens
+- **Optimized Loading States**: Better skeleton animations for all components
+
+---
+
+## Development Inspiration
+
 Built from analyzing the existing Elfsight RSS feed widget structure, extracting key design patterns:
 - Masonry container with positioned cards
 - Episode metadata display (title, description, date, podcast branding)
