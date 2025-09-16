@@ -7,10 +7,11 @@ Performance Features:
  - Enhanced EXIF parsing with 60% faster processing
  - Request batching reduces API calls by 70%
  - Shimmer loading animations and error states
- - Performance monitoring (add ?debug=true to URL)
+ - Performance monitoring (double-click heading or console command)
  - 3x faster load times with memory optimization
 
 Usage: Paste this entire block into a Squarespace Code Block
+Debug: Double-click "Concert Portfolio" heading to toggle performance metrics
 -->
 <style>
   :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
@@ -146,7 +147,10 @@ Usage: Paste this entire block into a Squarespace Code Block
   if (!grid) return;
 
   const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
-  const DEBUG_MODE = new URLSearchParams(window.location.search).has('debug');
+  // Debug mode activation for Squarespace (URL params don't work in Code Blocks)
+  // Enable debug by adding 'debug' to localStorage or double-clicking the heading
+  const DEBUG_MODE = localStorage.getItem('concert-debug') === 'true' || 
+                     sessionStorage.getItem('concert-debug') === 'true';
 
   // Performance-optimized cache system
   const cache = new Map();
@@ -616,8 +620,23 @@ Usage: Paste this entire block into a Squarespace Code Block
 
       const loadTime = performance.now() - startTime;
       console.log(`Concert portfolio loaded in ${Math.round(loadTime)}ms`);
+      
+      // Console instructions for debug mode
+      if (!DEBUG_MODE) {
+        console.log('%cConcert Portfolio Debug Mode Available', 'color: #4ade80; font-weight: bold; font-size: 14px;');
+        console.log('%cActivate by:', 'color: #94a3b8; font-weight: bold;');
+        console.log('%c1. Double-click the "Concert Portfolio" heading', 'color: #64748b;');
+        console.log('%c2. Run: localStorage.setItem("concert-debug", "true")', 'color: #64748b;');
+        console.log('%c3. Then refresh the page', 'color: #64748b;');
+      } else {
+        console.log('%cDEBUG MODE ACTIVE', 'color: #f59e0b; font-weight: bold; font-size: 16px;');
+        console.log('%cMetrics visible in top-right corner', 'color: #64748b;');
+      }
 
       if (DEBUG_MODE) setupPerformanceMonitoring();
+
+      // Setup debug toggle (double-click heading to enable/disable)
+      setupDebugToggle();
 
     } catch (error) {
       console.error('Concert gallery failed:', error);
@@ -668,6 +687,73 @@ Usage: Paste this entire block into a Squarespace Code Block
       <div style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">⚠️</div>
       <div>${message}</div>
     `;
+  }
+
+  function setupDebugToggle() {
+    const heading = document.querySelector('.concert-heading');
+    if (!heading) return;
+    
+    let clickCount = 0;
+    let clickTimer = null;
+    
+    heading.addEventListener('click', () => {
+      clickCount++;
+      
+      if (clickCount === 1) {
+        clickTimer = setTimeout(() => {
+          clickCount = 0;
+        }, 500); // Reset after 500ms
+      } else if (clickCount === 2) {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        
+        // Toggle debug mode
+        const currentDebug = localStorage.getItem('concert-debug') === 'true';
+        const newDebug = !currentDebug;
+        
+        localStorage.setItem('concert-debug', newDebug.toString());
+        sessionStorage.setItem('concert-debug', newDebug.toString());
+        
+        // Show feedback
+        const feedback = document.createElement('div');
+        feedback.style.cssText = `
+          position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+          background: ${newDebug ? '#4ade80' : '#f87171'}; color: white;
+          padding: 8px 16px; border-radius: 8px; font: 600 14px/1 ui-sans-serif,system-ui;
+          z-index: 10000; animation: fadeInOut 2s ease-in-out forwards;
+        `;
+        feedback.textContent = `Debug mode ${newDebug ? 'ENABLED' : 'DISABLED'} - Refresh to see changes`;
+        
+        // Add fade animation
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            20%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+          }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(feedback);
+        
+        // Cleanup
+        setTimeout(() => {
+          feedback.remove();
+          style.remove();
+        }, 2000);
+        
+        // If enabling debug, start metrics immediately
+        if (newDebug && !metrics.classList.contains('visible')) {
+          setupPerformanceMonitoring();
+        } else if (!newDebug && metrics.classList.contains('visible')) {
+          metrics.classList.remove('visible');
+        }
+      }
+    });
+    
+    // Add subtle hint in heading title
+    heading.title = 'Double-click to toggle debug mode';
+    heading.style.cursor = 'pointer';
   }
 
   // Enhanced lightbox
