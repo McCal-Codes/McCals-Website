@@ -1,0 +1,563 @@
+<!-- Podcast Feed Widget v1.0 — Liquid Glass Design with RSS Integration -->
+<style>
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  --text-primary: #f5f5f5;
+  --text-secondary: #cfcfcf;
+  --text-muted: #9a9a9a;
+  --accent: #6366f1;
+  --backdrop-blur: 16px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.9);
+    --glass-shadow: rgba(0, 0, 0, 0.08);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6b7280;
+  }
+}
+
+.podcast-feed {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.podcast-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.podcast-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.podcast-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Debug Toggle */
+.debug-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(var(--backdrop-blur));
+  font-size: 12px;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.debug-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px var(--glass-shadow);
+}
+
+.debug-panel {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--backdrop-blur));
+  border-radius: 12px;
+  padding: 16px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  z-index: 999;
+  display: none;
+  min-width: 200px;
+}
+
+.debug-panel.active {
+  display: block;
+}
+
+/* Episodes Grid */
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.episode-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(var(--backdrop-blur));
+  box-shadow: 0 4px 20px var(--glass-shadow);
+  padding: 24px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.episode-card.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.episode-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px var(--glass-shadow);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.episode-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.episode-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.podcast-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.episode-date {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.episode-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 16px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.episode-description.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+}
+
+.episode-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.action-button {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px var(--glass-shadow);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.read-more-btn {
+  margin-left: auto;
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--glass-bg) 25%, rgba(255,255,255,0.1) 50%, var(--glass-bg) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+  height: 20px;
+  margin: 8px 0;
+}
+
+.loading-skeleton.title { height: 24px; width: 80%; }
+.loading-skeleton.text { height: 16px; width: 100%; }
+.loading-skeleton.text:nth-child(2) { width: 70%; }
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* RSS Feed Source */
+.feed-source {
+  text-align: center;
+  margin-top: 40px;
+  padding: 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(var(--backdrop-blur));
+}
+
+.feed-source a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.feed-source a:hover {
+  color: var(--accent);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .podcast-feed { padding: 24px 16px; }
+  .episodes-grid { grid-template-columns: 1fr; gap: 16px; }
+  .episode-card { padding: 20px; }
+  .debug-toggle, .debug-panel { display: none; }
+}
+
+/* RSS Icon */
+.rss-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+</style>
+
+<div class="podcast-feed" id="podcastFeed" data-feed-url="https://rss.com/podcasts/cafeconnectpod/feed.xml" data-max-episodes="6">
+  <!-- Debug Toggle -->
+  <button class="debug-toggle" onclick="toggleDebug()">Debug</button>
+  <div class="debug-panel" id="debugPanel">
+    <div>Load Time: <span id="loadTime">--</span>ms</div>
+    <div>Episodes: <span id="episodeCount">--</span></div>
+    <div>Cache Status: <span id="cacheStatus">--</span></div>
+    <div>RSS Requests: <span id="requestCount">--</span></div>
+  </div>
+
+  <!-- Header -->
+  <div class="podcast-header">
+    <h1 class="podcast-title">Latest Episodes</h1>
+    <p class="podcast-subtitle">Caffeinated Connections</p>
+  </div>
+
+  <!-- Loading State -->
+  <div class="episodes-grid" id="episodesGrid">
+    <!-- Loading skeletons will be replaced with actual episodes -->
+    <div class="episode-card loading">
+      <div class="loading-skeleton title"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+    </div>
+    <div class="episode-card loading">
+      <div class="loading-skeleton title"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+    </div>
+    <div class="episode-card loading">
+      <div class="loading-skeleton title"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+    </div>
+  </div>
+
+  <!-- RSS Source Attribution -->
+  <div class="feed-source">
+    <a href="https://rss.com/podcasts/cafeconnectpod" target="_blank" rel="noopener">
+      <svg class="rss-icon" viewBox="0 0 24 24">
+        <path d="M5.043 21.524a2.58 2.58 0 0 1-2.581-2.577 2.58 2.58 0 0 1 2.58-2.578 2.578 2.578 0 1 1 0 5.155Zm6.167 0c-.049-4.795-3.946-8.688-8.748-8.736V8.97c6.92.048 12.522 5.642 12.571 12.554H11.21Zm6.477 0a15.167 15.167 0 0 0-4.478-10.755A15.202 15.202 0 0 0 2.462 6.295V2.476c10.512.037 19.024 8.547 19.048 19.048h-3.823Z"/>
+      </svg>
+      Powered by RSS
+    </a>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Performance tracking
+  const startTime = performance.now();
+  let debugActive = false;
+  let episodeData = [];
+  let requestCount = 0;
+  
+  // RSS Feed cache with TTL
+  const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+  const CACHE_KEY = 'podcast_feed_cache';
+  
+  function getCachedFeed() {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
+      
+      const { data, timestamp } = JSON.parse(cached);
+      if (Date.now() - timestamp > CACHE_TTL) {
+        localStorage.removeItem(CACHE_KEY);
+        return null;
+      }
+      return data;
+    } catch {
+      return null;
+    }
+  }
+  
+  function setCachedFeed(data) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        data,
+        timestamp: Date.now()
+      }));
+    } catch {
+      // Cache failed, continue without caching
+    }
+  }
+  
+  // Parse RSS/XML feed
+  function parseRSSFeed(xmlText) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'text/xml');
+    
+    // Handle parsing errors
+    if (doc.querySelector('parsererror')) {
+      throw new Error('Invalid RSS feed format');
+    }
+    
+    const items = doc.querySelectorAll('item');
+    const podcastTitle = doc.querySelector('channel > title')?.textContent || 'Podcast';
+    const podcastImage = doc.querySelector('channel > image > url')?.textContent || 
+                        doc.querySelector('channel > *[href*=".jpg"], channel > *[href*=".png"]')?.getAttribute('href') ||
+                        'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';
+    
+    return {
+      title: podcastTitle,
+      image: podcastImage,
+      episodes: Array.from(items).map(item => ({
+        title: item.querySelector('title')?.textContent?.trim() || 'Untitled Episode',
+        description: item.querySelector('description')?.textContent?.trim() || '',
+        pubDate: item.querySelector('pubDate')?.textContent?.trim() || '',
+        link: item.querySelector('link')?.textContent?.trim() || '#',
+        guid: item.querySelector('guid')?.textContent?.trim() || Math.random().toString()
+      }))
+    };
+  }
+  
+  // Format date for display
+  function formatDate(dateStr) {
+    try {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } catch {
+      return dateStr || 'Recent';
+    }
+  }
+  
+  // Clean HTML from descriptions
+  function cleanDescription(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  }
+  
+  // Create episode card HTML
+  function createEpisodeCard(episode, podcastImage, index) {
+    const description = cleanDescription(episode.description);
+    const shortDesc = description.length > 200 ? description.substring(0, 200) + '...' : description;
+    
+    return `
+      <div class="episode-card" style="animation-delay: ${index * 0.1}s">
+        <h3 class="episode-title">${episode.title}</h3>
+        <div class="episode-meta">
+          <img class="podcast-avatar" src="${podcastImage}" alt="Podcast" onerror="this.style.display='none'">
+          <span class="episode-date">${formatDate(episode.pubDate)}</span>
+        </div>
+        <div class="episode-description" id="desc-${episode.guid}">
+          ${shortDesc}
+        </div>
+        <div class="episode-actions">
+          <button class="action-button" onclick="shareEpisode('${episode.title}', '${episode.link}')">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M9.483 1.589a.933.933 0 0 0-.208.587v1.71l-.269.014C3.713 4.224.566 7.57.566 14c0 .678.923.818 1.154.234l.031-.098c.018-.075.08-.246.21-.48a4.391 4.391 0 0 1 1.036-1.228l.171-.138c1.285-1 3.22-1.638 5.944-1.738l.163-.005v2.071a.6.6 0 0 0 .397.565l.091.025c.089.017.306.088.4.094l.045.002c.185 0 .36-.074.49-.206l5.237-5.345a.6.6 0 0 0 .009-.83l-5.055-5.386a.933.933 0 0 0-1.32-.042l-.086.094Z"/>
+            </svg>
+            Share
+          </button>
+          ${description.length > 200 ? `
+            <button class="action-button read-more-btn" onclick="toggleDescription('${episode.guid}', this)">
+              Read more
+            </button>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }
+  
+  // Load and display episodes
+  async function loadEpisodes() {
+    const feedContainer = document.getElementById('podcastFeed');
+    const feedUrl = feedContainer.dataset.feedUrl;
+    const maxEpisodes = parseInt(feedContainer.dataset.maxEpisodes) || 6;
+    
+    if (!feedUrl) {
+      showError('RSS feed URL not specified');
+      return;
+    }
+    
+    try {
+      // Check cache first
+      let feedData = getCachedFeed();
+      
+      if (!feedData) {
+        requestCount++;
+        
+        // Use a CORS proxy service
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`;
+        const response = await fetch(proxyUrl);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const xmlText = await response.text();
+        feedData = parseRSSFeed(xmlText);
+        setCachedFeed(feedData);
+      }
+      
+      episodeData = feedData.episodes.slice(0, maxEpisodes);
+      
+      // Update podcast title
+      document.querySelector('.podcast-subtitle').textContent = feedData.title;
+      
+      // Generate episode cards
+      const episodesHTML = episodeData.map((episode, index) => 
+        createEpisodeCard(episode, feedData.image, index)
+      ).join('');
+      
+      // Replace loading state with episodes
+      const grid = document.getElementById('episodesGrid');
+      grid.innerHTML = episodesHTML;
+      
+      // Trigger loading animation
+      setTimeout(() => {
+        grid.querySelectorAll('.episode-card').forEach(card => {
+          card.classList.add('loaded');
+        });
+      }, 100);
+      
+      updateDebugInfo();
+      
+    } catch (error) {
+      console.error('Failed to load podcast feed:', error);
+      showError(`Failed to load episodes: ${error.message}`);
+    }
+  }
+  
+  function showError(message) {
+    const grid = document.getElementById('episodesGrid');
+    grid.innerHTML = `
+      <div class="episode-card loaded" style="text-align: center; color: var(--text-secondary);">
+        <h3>Unable to Load Episodes</h3>
+        <p>${message}</p>
+        <button class="action-button" onclick="location.reload()">Try Again</button>
+      </div>
+    `;
+  }
+  
+  function updateDebugInfo() {
+    const loadTime = Math.round(performance.now() - startTime);
+    document.getElementById('loadTime').textContent = loadTime;
+    document.getElementById('episodeCount').textContent = episodeData.length;
+    document.getElementById('cacheStatus').textContent = getCachedFeed() ? 'HIT' : 'MISS';
+    document.getElementById('requestCount').textContent = requestCount;
+  }
+  
+  // Global functions for UI interactions
+  window.toggleDebug = function() {
+    debugActive = !debugActive;
+    document.getElementById('debugPanel').classList.toggle('active', debugActive);
+  };
+  
+  window.shareEpisode = function(title, url) {
+    if (navigator.share) {
+      navigator.share({ title, url }).catch(() => {});
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(url).then(() => {
+        // Visual feedback
+        event.target.textContent = 'Copied!';
+        setTimeout(() => {
+          event.target.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M9.483 1.589a.933.933 0 0 0-.208.587v1.71l-.269.014C3.713 4.224.566 7.57.566 14c0 .678.923.818 1.154.234l.031-.098c.018-.075.08-.246.21-.48a4.391 4.391 0 0 1 1.036-1.228l.171-.138c1.285-1 3.22-1.638 5.944-1.738l.163-.005v2.071a.6.6 0 0 0 .397.565l.091.025c.089.017.306.088.4.094l.045.002c.185 0 .36-.074.49-.206l5.237-5.345a.6.6 0 0 0 .009-.83l-5.055-5.386a.933.933 0 0 0-1.32-.042l-.086.094Z"/>
+            </svg>
+            Share
+          `;
+        }, 2000);
+      }).catch(() => {});
+    }
+  };
+  
+  window.toggleDescription = function(guid, button) {
+    const desc = document.getElementById(`desc-${guid}`);
+    const isExpanded = desc.classList.contains('expanded');
+    
+    if (isExpanded) {
+      desc.classList.remove('expanded');
+      button.textContent = 'Read more';
+    } else {
+      desc.classList.add('expanded');
+      button.textContent = 'Read less';
+    }
+  };
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadEpisodes);
+  } else {
+    loadEpisodes();
+  }
+})();
+</script>
