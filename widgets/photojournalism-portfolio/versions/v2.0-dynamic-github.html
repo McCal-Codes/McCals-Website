@@ -1,0 +1,879 @@
+<!-- Photojournalism Portfolio v2.0 — Dynamic GitHub Integration
+Author: Caleb McCartney / McCal-Codes
+Version: 2.0 Dynamic GitHub Integration
+Features:
+ - Automatic image discovery from GitHub repo
+ - EXIF date extraction with commit date fallback
+ - Category filtering (Politics, Events, Portraits)
+ - Natural-height masonry layout
+ - Performance optimized with caching
+ - Hover overlays with metadata
+ - Lightbox with full image viewing
+ - Debug mode with performance metrics
+
+Usage: Paste this entire block into a Squarespace Code Block
+GitHub Structure: images/photojournalism/[category]/[image files]
+Debug: Add ?debug=true to URL or localStorage.setItem('pj-debug', 'true')
+-->
+<style>
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
+  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  .photojournalism-portfolio { max-width:1600px; margin:80px auto; padding:40px 20px; text-align:center; position:relative; }
+  .portfolio-heading { font:800 36px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 18px; }
+
+  /* Loading states */
+  .portfolio-loading {
+    display: flex; align-items: center; justify-content: center; min-height: 300px;
+    font: 600 16px/1.4 ui-sans-serif,system-ui; color: var(--fg); opacity: 0.7;
+  }
+  .portfolio-spinner {
+    width: 20px; height: 20px; border: 2px solid var(--line); border-top: 2px solid var(--accent);
+    border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Debug toggle button */
+  .pj-debug-toggle {
+    margin: 20px auto 0; text-align: center;
+  }
+  
+  .pj-debug-btn {
+    background: rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    color: rgba(255, 255, 255, 0.8); 
+    padding: 8px 16px;
+    border-radius: 12px; 
+    font: 600 12px/1 ui-sans-serif,system-ui; 
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    opacity: 0.7;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .pj-debug-btn:hover { 
+    opacity: 1; 
+    background: rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+  }
+  
+  .pj-debug-btn.active { 
+    background: rgba(0, 0, 0, 0.3); 
+    color: rgba(255, 255, 255, 1); 
+    opacity: 1;
+  }
+  
+  @media (prefers-color-scheme: light) {
+    .pj-debug-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .pj-debug-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: rgba(0, 0, 0, 0.95);
+    }
+    
+    .pj-debug-btn.active {
+      background: rgba(255, 255, 255, 0.35);
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+
+  /* Performance metrics */
+  .pj-metrics {
+    position: absolute; top: 60px; right: 20px; background: rgba(0,0,0,0.85); color: #fff;
+    padding: 8px 12px; border-radius: 6px; font: 600 11px/1.3 ui-monospace,monospace;
+    z-index: 100; opacity: 0; transition: opacity 0.3s ease; max-width: 200px;
+    border: 1px solid var(--line);
+  }
+  .pj-metrics.visible { opacity: 1; }
+  .pj-metrics.left { right: auto; left: 20px; }
+  
+  @media (max-width: 768px) {
+    .pj-metrics { position: static; margin: 10px auto 0; max-width: none; }
+  }
+
+  /* Filter buttons */
+  .portfolio-filters { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:36px; }
+  .filter-btn {
+    background:transparent; border:1px solid var(--fg); color:var(--fg);
+    padding:12px 20px; border-radius:999px; cursor:pointer; font:600 14px/1 ui-sans-serif,system-ui;
+    transition:all 0.25s cubic-bezier(0.4,0,0.2,1); opacity:0.6;
+  }
+  .filter-btn:hover { transform:translateY(-2px); opacity:1; }
+  .filter-btn[aria-pressed="true"] { 
+    background:var(--fg); color:var(--bg); opacity:1; 
+    box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  }
+
+  /* Masonry grid */
+  .portfolio-grid { 
+    column-count:4; column-gap:24px; text-align:left; margin-top:40px; opacity:0; 
+    transition:opacity 0.5s ease;
+  }
+  .portfolio-grid.loaded { opacity: 1; }
+  @media (max-width:1200px) { .portfolio-grid { column-count:3; column-gap:20px; } }
+  @media (max-width:860px) { .portfolio-grid { column-count:2; column-gap:18px; } }
+  @media (max-width:520px) { .portfolio-grid { column-count:1; } }
+
+  /* Portfolio cards */
+  .portfolio-card {
+    position:relative; display:inline-block; width:100%; margin:0 0 24px;
+    border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+    opacity:0; transform:translateY(20px); transition:all 0.3s ease;
+  }
+  .portfolio-card.loaded { opacity: 1; transform: translateY(0); }
+  .portfolio-card.is-hidden { opacity:0; transform:scale(0.98); pointer-events:none; }
+  .portfolio-card img {
+    display:block; width:100%; height:auto; border-radius:inherit;
+    transition:transform 0.35s ease, filter 0.35s ease;
+  }
+  .portfolio-card:hover img { transform:scale(1.02); filter:contrast(1.05) saturate(1.05); }
+
+  /* Hover overlay */
+  .portfolio-info {
+    position:absolute; left:0; right:0; bottom:0; 
+    background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.85) 80%);
+    color:#fff; padding:14px 16px; text-align:center;
+    opacity:0; transform:translateY(8px);
+    transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  .portfolio-card:hover .portfolio-info,
+  .portfolio-card:focus-within .portfolio-info { opacity:1; transform:translateY(0); }
+
+  .portfolio-title { margin:0 0 4px; font:800 16px/1.25 ui-sans-serif,system-ui; }
+  .portfolio-meta { 
+    margin:0; color:#e5e5e5; font:600 12px/1.3 ui-sans-serif,system-ui;
+  }
+
+  /* Loading shimmer effect */
+  .portfolio-card.loading::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  
+  .portfolio-card.error { background: #2a1a1a; border: 1px solid #4a2a2a; }
+  .portfolio-card.error::after {
+    content: '⚠️'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 24px; opacity: 0.5;
+  }
+
+  /* Lightbox */
+  .pj-lightbox {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.9); z-index:2147483647; padding:24px;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  }
+  .pj-lightbox.is-open { display:flex; }
+  .pj-dialog { 
+    position:relative; background:#000; color:#fff; border-radius:16px; 
+    box-shadow:0 20px 60px rgba(0,0,0,0.6); max-width:min(1100px,96vw); max-height:90vh; 
+    overflow:hidden; outline:none;
+  }
+  .pj-media { display:block; width:100%; height:auto; max-height:70vh; object-fit:contain; }
+  .pj-caption { padding:20px 24px; border-top:1px solid rgba(255,255,255,0.1); }
+  .pj-caption h3 { margin:0 0 8px; font:800 20px/1.25 ui-sans-serif,system-ui; }
+  .pj-caption .pj-meta { 
+    margin:0 0 12px; color:#cfcfcf; font:600 13px/1.3 ui-sans-serif,system-ui; 
+  }
+  .pj-close {
+    position:absolute; top:12px; right:12px; width:36px; height:36px;
+    background:rgba(0,0,0,0.4); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:50%;
+    cursor:pointer; font-size:18px; font-weight:600; display:flex;
+    align-items:center; justify-content:center; 
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    box-shadow:0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .pj-close:hover { 
+    background:rgba(0,0,0,0.6); transform:scale(1.05);
+    box-shadow:0 6px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  /* Responsive improvements */
+  @media (max-width:768px) {
+    .photojournalism-portfolio { margin:60px auto; padding:20px; }
+    .portfolio-heading { font-size:28px; }
+    .portfolio-filters { gap:8px; }
+    .filter-btn { padding:10px 16px; font-size:13px; }
+    .portfolio-grid { margin-top:28px; }
+    .pj-dialog { max-width:95vw; max-height:95vh; }
+    .pj-caption { padding:16px 20px; }
+  }
+</style>
+
+<div class="photojournalism-portfolio" id="pjPortfolio">
+  <!-- Heading -->
+  <h2 class="portfolio-heading">Photojournalism Portfolio</h2>
+  
+  <!-- Category Filters -->
+  <div class="portfolio-filters" role="tablist" aria-label="Portfolio categories">
+    <button type="button" class="filter-btn" data-filter="*" aria-pressed="true" role="tab">All</button>
+    <button type="button" class="filter-btn" data-filter="Politics" aria-pressed="false" role="tab">Politics</button>
+    <button type="button" class="filter-btn" data-filter="Events" aria-pressed="false" role="tab">Events</button>
+    <button type="button" class="filter-btn" data-filter="Portraits" aria-pressed="false" role="tab">Portraits</button>
+    <button type="button" class="filter-btn" data-filter="Featured" aria-pressed="false" role="tab">Featured Stories</button>
+  </div>
+
+  <!-- Loading State -->
+  <div class="portfolio-loading" id="pjLoading">
+    <div class="portfolio-spinner"></div>
+    Loading photojournalism portfolio...
+  </div>
+
+  <!-- Portfolio Grid -->
+  <div class="portfolio-grid" id="pjGrid"></div>
+  
+  <!-- Debug toggle button -->
+  <div class="pj-debug-toggle">
+    <button class="pj-debug-btn" id="pjDebugToggle" title="Toggle performance metrics">
+      🔧 Debug Mode
+    </button>
+  </div>
+</div>
+
+<!-- Performance metrics -->
+<div class="pj-metrics" id="pjMetrics"></div>
+
+<!-- Lightbox -->
+<div class="pj-lightbox" id="pjLightbox" aria-hidden="true">
+  <div class="pj-dialog" role="dialog" aria-modal="true" aria-labelledby="pjLbTitle" tabindex="-1">
+    <button class="pj-close" type="button" aria-label="Close">×</button>
+    <img class="pj-media" id="pjLbImg" alt="">
+    <div class="pj-caption">
+      <h3 id="pjLbTitle"></h3>
+      <p class="pj-meta" id="pjLbMeta"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const YEAR = new Date().getFullYear();
+  const pf = document.getElementById('pjPortfolio');
+  const grid = document.getElementById('pjGrid');
+  const loading = document.getElementById('pjLoading');
+  const metrics = document.getElementById('pjMetrics');
+  
+  if (!grid) return;
+
+  // Debug mode state management
+  let DEBUG_MODE = localStorage.getItem('pj-debug') === 'true';
+  const debugToggle = document.getElementById('pjDebugToggle');
+  
+  // Update debug button state
+  function updateDebugButton() {
+    if (debugToggle) {
+      debugToggle.classList.toggle('active', DEBUG_MODE);
+      debugToggle.textContent = DEBUG_MODE ? '🔧 Debug ON' : '🔧 Debug Mode';
+    }
+  }
+  
+  updateDebugButton();
+
+  // Performance-optimized cache system
+  const cache = new Map();
+  const requestQueue = new Map();
+  let performanceMetrics = { requests: 0, cacheHits: 0, cacheMisses: 0, errors: 0, avgResponseTime: 0 };
+
+  // GitHub API configuration
+  const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main', base:['images','Portfolios','Journalism'] };
+  const EXT_RX = /\.(jpe?g|png|webp|gif)$/i;
+  const apiBase = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/`;
+  const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+
+  function apiUrl(parts) { return apiBase + parts.map(encodeURIComponent).join('/'); }
+  function rawUrl(parts) { return rawBase + parts.map(encodeURIComponent).join('/'); }
+
+  // Enhanced caching with TTL
+  function getCached(key) {
+    const entry = cache.get(key);
+    if (!entry) return null;
+    if (Date.now() > entry.expires) { cache.delete(key); return null; }
+    return entry.data;
+  }
+
+  function setCache(key, data, ttl = 10 * 60 * 1000) {
+    cache.set(key, { data, expires: Date.now() + ttl });
+  }
+
+  // Performance-optimized HTTP requests
+  async function makeRequest(url, options = {}) {
+    const startTime = performance.now();
+    performanceMetrics.requests++;
+    
+    // Request deduplication
+    const requestKey = `${options.method || 'GET'}:${url}`;
+    if (requestQueue.has(requestKey)) {
+      return requestQueue.get(requestKey);
+    }
+
+    const requestPromise = executeRequest(url, options);
+    requestQueue.set(requestKey, requestPromise);
+    
+    try {
+      const result = await requestPromise;
+      const duration = performance.now() - startTime;
+      performanceMetrics.avgResponseTime = (performanceMetrics.avgResponseTime + duration) / 2;
+      return result;
+    } catch (error) {
+      performanceMetrics.errors++;
+      throw error;
+    } finally {
+      setTimeout(() => requestQueue.delete(requestKey), 1000);
+    }
+  }
+
+  async function executeRequest(url, options) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    
+    try {
+      const response = await fetch(url, { 
+        ...options, 
+        signal: controller.signal,
+        headers: { 'Accept': 'application/vnd.github+json', ...options.headers }
+      });
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
+    }
+  }
+
+  async function ghList(parts) {
+    const cacheKey = `list:${parts.join('/')}`;
+    const cached = getCached(cacheKey);
+    if (cached) {
+      performanceMetrics.cacheHits++;
+      return cached;
+    }
+    
+    performanceMetrics.cacheMisses++;
+    const result = await makeRequest(apiUrl(parts));
+    setCache(cacheKey, result);
+    return result;
+  }
+
+  // Enhanced EXIF parsing (optimized subset)
+  async function extractEXIFDate(folderPath, filename) {
+    const cacheKey = `exif:${folderPath}/${filename}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const url = rawUrl([folderPath, filename].join('/').split('/'));
+      const response = await fetch(url, {
+        headers: { 'Range': 'bytes=0-65535' },
+        mode: 'cors'
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      
+      const buffer = await response.arrayBuffer();
+      const date = parseEXIFDateFromJPEG(buffer);
+      
+      setCache(cacheKey, date, 60 * 60 * 1000);
+      return date;
+    } catch (error) {
+      console.warn(`EXIF extraction failed for ${filename}:`, error);
+      return null;
+    }
+  }
+
+  function parseEXIFDateFromJPEG(buffer) {
+    const view = new DataView(buffer);
+    if (view.byteLength < 4 || view.getUint16(0, false) !== 0xFFD8) return null;
+    
+    let offset = 2;
+    while (offset < view.byteLength - 1) {
+      const marker = view.getUint16(offset, false);
+      offset += 2;
+      if (offset >= view.byteLength - 1) break;
+      
+      const size = view.getUint16(offset, false);
+      offset += 2;
+      
+      if (marker === 0xFFE1) {
+        const start = offset;
+        if (getString(view, start, 4) === 'Exif') {
+          const tiff = start + 6;
+          const little = getString(view, tiff, 2) === 'II';
+          const ifd0 = tiff + view.getUint32(tiff + 4, little);
+          const tags0 = readIFD(view, ifd0, little, tiff);
+          const exifOffset = tags0[0x8769];
+          let dateStr = tags0[0x0132];
+          
+          if (exifOffset) {
+            const exifTags = readIFD(view, tiff + exifOffset, little, tiff);
+            dateStr = exifTags[0x9003] || exifTags[0x9004] || dateStr;
+          }
+          
+          if (dateStr && /\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2}/.test(dateStr)) {
+            return dateStr.replace(/(\\d{4}):(\\d{2}):(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2}).*/, '$1-$2-$3T$4:$5:$6Z');
+          }
+        }
+      }
+      offset += (size - 2);
+    }
+    return null;
+  }
+
+  function getString(view, offset, length) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      if (offset + i >= view.byteLength) break;
+      result += String.fromCharCode(view.getUint8(offset + i));
+    }
+    return result;
+  }
+
+  function readIFD(view, offset, little, tiffStart) {
+    if (offset + 2 > view.byteLength) return {};
+    const entries = view.getUint16(offset, little);
+    const tags = {};
+    
+    for (let i = 0; i < entries && offset + 2 + (i + 1) * 12 <= view.byteLength; i++) {
+      const entry = offset + 2 + i * 12;
+      const tag = view.getUint16(entry, little);
+      const type = view.getUint16(entry + 2, little);
+      const count = view.getUint32(entry + 4, little);
+      
+      if (type === 2 && count < 100) { // ASCII strings
+        const valueOffset = count <= 4 ? entry + 8 : (tiffStart + view.getUint32(entry + 8, little));
+        if (valueOffset + count <= view.byteLength) {
+          tags[tag] = getString(view, valueOffset, count - 1);
+        }
+      } else if (type === 4 && count === 1) { // LONG
+        tags[tag] = view.getUint32(entry + 8, little);
+      }
+    }
+    return tags;
+  }
+
+  // Commit date fallback
+  async function fetchCommitDate(path) {
+    const cacheKey = `commit:${path}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const url = `https://api.github.com/repos/${GH.owner}/${GH.repo}/commits?path=${encodeURIComponent(path)}&per_page=1`;
+      const response = await makeRequest(url);
+      const date = response[0]?.commit?.author?.date || null;
+      
+      setCache(cacheKey, date, 30 * 60 * 1000);
+      return date;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  // Process all journalism images from the main directory
+  async function processJournalismImages() {
+    try {
+      const items = await ghList(GH.base);
+      const files = items.filter(it => it.type === 'file' && EXT_RX.test(it.name));
+      
+      const images = [];
+      for (const file of files) {
+        let dateISO = null;
+        
+        // Try EXIF first for JPEG files
+        if (/\.jpe?g$/i.test(file.name)) {
+          dateISO = await extractEXIFDate(GH.base.join('/'), file.name);
+        }
+        
+        // Fallback to commit date
+        if (!dateISO) {
+          dateISO = await fetchCommitDate(GH.base.concat([file.name]).join('/'));
+        }
+        
+        // Auto-categorize based on filename patterns
+        const categories = categorizeFromFilename(file.name);
+        
+        images.push({
+          filename: file.name,
+          categories: categories,
+          category: categories[0], // Primary category for display
+          dateISO: dateISO,
+          title: titleFromFilename(file.name),
+          imagePath: GH.base.concat([file.name])
+        });
+      }
+      
+      return images;
+    } catch (error) {
+      console.warn(`Failed to process journalism images:`, error);
+      return [];
+    }
+  }
+  
+  // Auto-categorize images based on filename patterns (supports multiple categories)
+  function categorizeFromFilename(filename) {
+    const name = filename.toLowerCase();
+    const categories = [];
+    
+    // Political figures detection
+    const politicalFigures = [
+      // National figures
+      'trump', 'biden', 'harris', 'kamala', 'obama', 'clinton', 'hillary', 'bernie', 'sanders',
+      'pence', 'desantis', 'newsom', 'pelosi', 'mcconnell', 'schumer', 'AOC', 'ocasio',
+      'vance', 'walz', 'ramaswamy', 'haley', 'christie', 'vivek', 'rfk', 'kennedy',
+      
+      // Pennsylvania/Local figures
+      'fetterman', 'shapiro', 'wolf', 'casey', 'toomey', 'lamb', 'doyle',
+      'oz', 'mehmet', 'mastriano', 'mccormick', 'dave', 'conor',
+      
+      // Positions/Titles
+      'mayor', 'governor', 'senator', 'congressman', 'representative', 'president',
+      'vice president', 'vp', 'candidate', 'nominee'
+    ];
+    
+    // Check for political figures in filename
+    const hasPoliticalFigure = politicalFigures.some(figure => name.includes(figure));
+    if (hasPoliticalFigure) {
+      categories.push('politics');
+    }
+    
+    // Politics keywords and topics
+    if (name.includes('protest') || name.includes('democracy') || name.includes('butler') || 
+        name.includes('trump') || name.includes('politics') || name.includes('election') ||
+        name.includes('government') || name.includes('rally') || name.includes('vote') ||
+        name.includes('campaign') || name.includes('debate') || name.includes('congress') ||
+        name.includes('senate') || name.includes('house')) {
+      if (!categories.includes('politics')) categories.push('politics');
+    }
+    
+    // Events keywords
+    if (name.includes('rooney') || name.includes('rule') || name.includes('event') || 
+        name.includes('conference') || name.includes('meeting') || name.includes('drag') ||
+        name.includes('show') || name.includes('performance') || name.includes('gathering')) {
+      categories.push('events');
+    }
+    
+    // Portrait keywords
+    if (name.includes('portrait') || name.includes('headshot') || name.includes('profile') ||
+        name.includes('person') || name.includes('interview') || name.includes('ceo') ||
+        name.includes('director') || name.includes('leader') || name.includes('executive') ||
+        name.includes('artist') || name.includes('musician') || name.includes('author') ||
+        name.includes('doctor') || name.includes('professor') || name.includes('expert')) {
+      categories.push('portraits');
+    }
+    
+    // Featured Stories keywords (high-profile, award-worthy, or major stories)
+    if (name.includes('featured') || name.includes('story') || name.includes('exclusive') ||
+        name.includes('breaking') || name.includes('investigation') || name.includes('expose') ||
+        name.includes('special') || name.includes('award') || name.includes('pulitzer') ||
+        name.includes('major') || name.includes('historic') || name.includes('landmark') ||
+        name.includes('crisis') || name.includes('disaster') || name.includes('scandal')) {
+      categories.push('featured');
+    }
+    
+    // Some images can be both political events
+    if (name.includes('protest') || name.includes('rally')) {
+      if (!categories.includes('politics')) categories.push('politics');
+      if (!categories.includes('events')) categories.push('events');
+    }
+    
+    // High-profile political events could be featured stories
+    if (hasPoliticalFigure && (name.includes('speech') || name.includes('address') || 
+        name.includes('announcement') || name.includes('debate'))) {
+      if (!categories.includes('featured')) categories.push('featured');
+    }
+    
+    // Special events or coverage that could be featured
+    if (name.includes('rooney') && name.includes('rule')) {
+      // The Rooney Rule discussion is a significant story
+      if (!categories.includes('featured')) categories.push('featured');
+    }
+    
+    // Default to events if no clear category
+    if (categories.length === 0) {
+      categories.push('events');
+    }
+    
+    return categories;
+  }
+
+  // Date formatting
+  function fmtDate(iso, mode = 'shortMonthYear') {
+    if (!iso) return null;
+    const d = new Date(iso);
+    if (mode === 'shortMonthYear') return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short' });
+    return String(d.getFullYear());
+  }
+
+  function titleFromFilename(filename) {
+    return filename
+      .replace(/\.[^/.]+$/, '') // Remove extension
+      .replace(/^\d+[-_]/, '') // Remove date prefix
+      .replace(/[-_]/g, ' ') // Replace hyphens/underscores with spaces
+      .replace(/\s+/g, ' ') // Collapse multiple spaces
+      .trim()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Main build function
+  async function build() {
+    const startTime = performance.now();
+    
+    try {
+      loading.style.display = 'flex';
+      grid.style.display = 'none';
+
+      // Process all journalism images from the main directory
+      const allImages = await processJournalismImages();
+      
+      if (allImages.length === 0) {
+        showError('No photojournalism images found in your GitHub repository.');
+        return;
+      }
+
+      // Shuffle and create cards
+      const shuffledImages = shuffle(allImages);
+      const fragment = document.createDocumentFragment();
+      const cards = [];
+
+      shuffledImages.forEach((image, index) => {
+        const card = document.createElement('article');
+        card.className = 'portfolio-card loading';
+        card.tabIndex = 0;
+        card.dataset.category = image.category;
+        card.dataset.categories = image.categories.join(',');
+
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = image.title;
+
+        const info = document.createElement('div');
+        info.className = 'portfolio-info';
+        
+        const dateLabel = image.dateISO ? fmtDate(image.dateISO) : YEAR;
+        const categoryLabel = image.category.charAt(0).toUpperCase() + image.category.slice(1);
+        
+        info.innerHTML = `
+          <h3 class="portfolio-title">${image.title}</h3>
+          <p class="portfolio-meta">${categoryLabel} • ${dateLabel}</p>
+        `;
+
+        card.appendChild(img);
+        card.appendChild(info);
+        fragment.appendChild(card);
+        
+        cards.push({ card, image, img });
+
+        // Lightbox handler
+        const openLightbox = () => openLB(card, image);
+        card.addEventListener('click', openLightbox);
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox();
+          }
+        });
+      });
+
+      grid.appendChild(fragment);
+
+      // Load images progressively
+      cards.forEach(({ card, image, img }, index) => {
+        setTimeout(() => {
+          loadCardImage({ card, image, img });
+        }, index * 100);
+      });
+
+      // Show results
+      loading.style.display = 'none';
+      grid.style.display = 'block';
+      requestAnimationFrame(() => {
+        grid.classList.add('loaded');
+      });
+
+      const loadTime = performance.now() - startTime;
+      console.log(`Photojournalism portfolio loaded in ${Math.round(loadTime)}ms`);
+      
+      if (DEBUG_MODE) {
+        setupPerformanceMonitoring();
+        metrics.classList.add('visible');
+        
+        // Position metrics intelligently
+        const rect = pf.getBoundingClientRect();
+        const hasSpaceRight = window.innerWidth - rect.right > 220;
+        metrics.classList.toggle('left', !hasSpaceRight);
+      }
+
+      setupDebugToggle();
+      setupFilters();
+
+    } catch (error) {
+      console.error('Photojournalism portfolio failed:', error);
+      showError('Error loading portfolio. Please try again.');
+    }
+  }
+
+  async function loadCardImage({ card, image, img }) {
+    try {
+      const src = rawUrl(image.imagePath);
+      await loadImageWithRetry(img, src, 3);
+      card.classList.remove('loading');
+      card.classList.add('loaded');
+    } catch (error) {
+      console.warn(`Failed to load image for ${image.title}:`, error);
+      card.classList.remove('loading');
+      card.classList.add('error');
+    }
+  }
+
+  async function loadImageWithRetry(img, src, maxRetries = 3) {
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+      const tryLoad = () => {
+        const tempImg = new Image();
+        tempImg.onload = () => { img.src = src; resolve(); };
+        tempImg.onerror = () => {
+          attempts++;
+          if (attempts >= maxRetries) {
+            reject(new Error(`Failed to load after ${maxRetries} attempts`));
+          } else {
+            setTimeout(tryLoad, Math.pow(2, attempts) * 500);
+          }
+        };
+        tempImg.src = src + `?retry=${attempts}`;
+      };
+      tryLoad();
+    });
+  }
+
+  function setupFilters() {
+    const btns = [...pf.querySelectorAll('.filter-btn')];
+    const cards = [...grid.querySelectorAll('.portfolio-card')];
+    
+    function setActive(btn) { 
+      btns.forEach(b => b.setAttribute('aria-pressed', 'false')); 
+      btn.setAttribute('aria-pressed', 'true'); 
+    }
+    
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        setActive(btn);
+        
+        const showAll = (filter === '*');
+        cards.forEach(card => {
+          const categories = (card.dataset.categories || '').split(',').map(c => c.trim());
+          const visible = showAll || categories.includes(filter.toLowerCase());
+          card.classList.toggle('is-hidden', !visible);
+        });
+      });
+    });
+  }
+
+  function setupPerformanceMonitoring() {
+    const updateMetrics = () => {
+      metrics.innerHTML = `
+        <div>API: ${performanceMetrics.requests} reqs, ${performanceMetrics.cacheHits}/${performanceMetrics.cacheMisses} cache</div>
+        <div>Avg: ${Math.round(performanceMetrics.avgResponseTime)}ms</div>
+        <div>Errors: ${performanceMetrics.errors}</div>
+        <div>Hit Rate: ${performanceMetrics.requests > 0 ? Math.round(performanceMetrics.cacheHits / performanceMetrics.requests * 100) : 0}%</div>
+      `;
+      metrics.classList.add('visible');
+    };
+    setInterval(updateMetrics, 2000);
+    updateMetrics();
+  }
+
+  function showError(message) {
+    loading.innerHTML = `
+      <div style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">⚠️</div>
+      <div>${message}</div>
+    `;
+  }
+
+  function setupDebugToggle() {
+    if (!debugToggle) return;
+    
+    debugToggle.addEventListener('click', () => {
+      DEBUG_MODE = !DEBUG_MODE;
+      localStorage.setItem('pj-debug', DEBUG_MODE.toString());
+      
+      updateDebugButton();
+      
+      if (DEBUG_MODE) {
+        setupPerformanceMonitoring();
+        metrics.classList.add('visible');
+        
+        const rect = pf.getBoundingClientRect();
+        const hasSpaceRight = window.innerWidth - rect.right > 220;
+        metrics.classList.toggle('left', !hasSpaceRight);
+      } else {
+        metrics.classList.remove('visible');
+      }
+    });
+  }
+
+  // Lightbox functionality
+  const lb = document.getElementById('pjLightbox');
+  const lbImg = document.getElementById('pjLbImg');
+  const lbTitle = document.getElementById('pjLbTitle');
+  const lbMeta = document.getElementById('pjLbMeta');
+  const lbDialog = lb?.querySelector('.pj-dialog');
+  const lbClose = lb?.querySelector('.pj-close');
+
+  function openLB(card, image) {
+    const img = card.querySelector('img');
+    
+    lbImg.src = img?.src || '';
+    lbImg.alt = img?.alt || image.title;
+    lbTitle.textContent = image.title;
+    lbMeta.textContent = `${image.category.charAt(0).toUpperCase() + image.category.slice(1)} • ${image.dateISO ? fmtDate(image.dateISO) : YEAR}`;
+
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => lbDialog?.focus(), 0);
+  }
+
+  function closeLB() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lbImg.removeAttribute('src');
+  }
+
+  // Event handlers
+  lbClose?.addEventListener('click', closeLB);
+  lb?.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', e => { 
+    if (lb?.classList.contains('is-open') && e.key === 'Escape') closeLB();
+  });
+
+  // Initialize
+  build().catch(err => {
+    console.error('Photojournalism portfolio failed:', err);
+    showError('Failed to initialize portfolio. Please refresh.');
+  });
+
+})();
+</script>
