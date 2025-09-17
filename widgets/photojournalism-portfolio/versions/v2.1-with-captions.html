@@ -1,18 +1,19 @@
-<!-- Photojournalism Portfolio v2.0 — Dynamic GitHub Integration
+<!-- Photojournalism Portfolio v2.1 — With Caption Support
 Author: Caleb McCartney / McCal-Codes
-Version: 2.0 Dynamic GitHub Integration
+Version: 2.1 With Caption Support
 Features:
  - Automatic image discovery from GitHub repo
- - EXIF date extraction with commit date fallback
- - Category filtering (Politics, Events, Portraits)
- - Natural-height masonry layout
- - Performance optimized with caching
- - Hover overlays with metadata
- - Lightbox with full image viewing
+ - EXIF/IPTC caption extraction (journalism standard)
+ - manifest.json support for custom captions
+ - Smart auto-categorization with political figure detection
+ - Multi-category support (Politics, Events, Portraits, Featured Stories)
+ - Performance optimized with intelligent caching
+ - Enhanced lightbox with full captions
  - Debug mode with performance metrics
+ - Responsive masonry layout
 
 Usage: Paste this entire block into a Squarespace Code Block
-GitHub Structure: images/photojournalism/[category]/[image files]
+GitHub Structure: images/Portfolios/Journalism/[image files] + manifest.json
 Debug: Add ?debug=true to URL or localStorage.setItem('pj-debug', 'true')
 -->
 <style>

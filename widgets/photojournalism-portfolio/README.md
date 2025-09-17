@@ -35,22 +35,37 @@ Filterable masonry gallery for displaying photojournalism work with categories. 
 
 ### GitHub Repository Structure
 ```
-images/photojournalism/
-├── politics/
-│   ├── butler-protest.jpg
-│   └── cmu-trump-protest.jpg
-├── events/
-│   ├── rooney-rule.jpg
-│   └── drag-carnegie.jpg
-└── portraits/
-    ├── cole-gessner.jpg
-    └── jody-bechtold.jpg
+images/Portfolios/Journalism/
+├── manifest.json (optional - for custom captions)
+├── 250315_Butler Democracy Protest_CAL9773.jpg
+├── 250417 The Rooney Rule_CAL3148.jpg
+└── [your journalism photos]
 ```
 
+### Caption Sources (Priority Order)
+1. **manifest.json** - Custom captions and metadata
+2. **EXIF/IPTC data** - Embedded photo captions (journalism standard)
+3. **Auto-generated** - Fallback based on filename
+
 ### Configuration
-Update the GitHub base path in the script section:
+Update the GitHub repository in the script section:
 ```javascript
-const PF_BASE = "https://cdn.jsdelivr.net/gh/YOUR-USERNAME/YOUR-REPO@main/images/photojournalism/";
+const GH = { owner:'YOUR-USERNAME', repo:'YOUR-REPO', branch:'main', base:['images','Portfolios','Journalism'] };
+```
+
+### Custom Captions with manifest.json
+Create a `manifest.json` file in your Journalism directory:
+```json
+{
+  "your-photo.jpg": {
+    "caption": "Detailed caption for lightbox display",
+    "description": "Brief description", 
+    "date": "2025-03-15",
+    "categories": ["politics", "events"],
+    "publication": "Your Publication Name",
+    "location": "City, State"
+  }
+}
 ```
 
 ### Adding New Images
