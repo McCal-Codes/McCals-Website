@@ -378,13 +378,17 @@ function updateDebugMetrics() {
       const items = await ghList(band);
       const subfolders = items.filter(it => it.type === 'dir');
       
-      // Try each subfolder to find one with a manifest
+      logDebug(`Found ${subfolders.length} subfolders in ${bandName}`, subfolders.map(s => s.name));
+      
+      // Try each subfolder to find one with a manifest or images
       for (const subfolder of subfolders) {
         const monthYearPattern = /^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}$/i;
         
         // Check if this looks like a "Month Year" folder or is a band name folder
         if (monthYearPattern.test(subfolder.name) || subfolder.name === bandName) {
           const bandSubfolder = band.concat([subfolder.name]);
+          
+          // Try to load manifest first
           const manifest = await loadManifest(bandSubfolder);
           
           if (manifest && manifest.images && manifest.images.length > 0) {
@@ -400,6 +404,25 @@ function updateDebugMetrics() {
               manifest: manifest,
               enhanced: true
             };
+          }
+          
+          // If no manifest, try to get images directly from subfolder
+          logDebug(`No manifest found, trying direct images in ${bandName}/${subfolder.name}`);
+          
+          try {
+            const subItems = await ghList(bandSubfolder);
+            const subFiles = subItems.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
+            
+            if (subFiles.length > 0) {
+              logDebug(`Found ${subFiles.length} images in ${bandName}/${subfolder.name}`);
+              return {
+                parts: bandSubfolder,
+                list: subFiles,
+                enhanced: false
+              };
+            }
+          } catch (subError) {
+            logDebug(`Failed to load subfolder ${subfolder.name}`, subError.message);
           }
         }
       }
