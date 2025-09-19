@@ -374,7 +374,37 @@ function updateDebugMetrics() {
     logDebug(`Processing band: ${bandName}`, band.join('/'));
     
     try {
-      // First, try to load enhanced manifest
+      // Look for Month Year subfolders (e.g., "December 2024", "August 2025")
+      const items = await ghList(band);
+      const subfolders = items.filter(it => it.type === 'dir');
+      
+      // Try each subfolder to find one with a manifest
+      for (const subfolder of subfolders) {
+        const monthYearPattern = /^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}$/i;
+        
+        // Check if this looks like a "Month Year" folder or is a band name folder
+        if (monthYearPattern.test(subfolder.name) || subfolder.name === bandName) {
+          const bandSubfolder = band.concat([subfolder.name]);
+          const manifest = await loadManifest(bandSubfolder);
+          
+          if (manifest && manifest.images && manifest.images.length > 0) {
+            logDebug(`Using enhanced manifest for ${bandName}/${subfolder.name}`, {
+              images: manifest.images.length,
+              bandName: manifest.bandName,
+              date: manifest.concertDate
+            });
+            
+            return {
+              parts: bandSubfolder,
+              list: manifest.images,
+              manifest: manifest,
+              enhanced: true
+            };
+          }
+        }
+      }
+      
+      // First, try to load enhanced manifest from band root
       const manifest = await loadManifest(band);
       
       if (manifest && manifest.images && manifest.images.length > 0) {

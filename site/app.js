@@ -21,22 +21,14 @@ class GalleryApp {
     this.setupCategories();
   }
 
-  async loadGalleryFromManifest(basePath) {
-    try {
-      const response = await fetch(`${basePath}/manifest.json`);
-      const files = await response.json();
-      return files.map(file => `${basePath}/${file}`);
-    } catch (error) {
-      console.error(`Error loading manifest from ${basePath}:`, error);
-      return [];
-    }
-  }
 
   async loadGalleries() {
     try {
       // Load Funky Lamp images from manifest
-      const funkyLampBasePath = './images/Portfolios/Concert/Funky Lamp';
-      const funkyLampImages = await this.loadGalleryFromManifest(funkyLampBasePath);
+      const funkyLampBasePath = './images/Portfolios/Concert/Funky Lamp/December 2024';
+      const funkyLampManifestResponse = await fetch(`${funkyLampBasePath}/manifest.json`);
+      const funkyLampManifest = await funkyLampManifestResponse.json();
+      const funkyLampImages = funkyLampManifest.images.map(image => `${funkyLampBasePath}/${image}`);
       
       // In a real app, this would fetch from your images API
       // For now, we'll simulate your portfolio structure
@@ -45,10 +37,10 @@ class GalleryApp {
           id: 'funky-lamp',
           title: 'Funky Lamp',
           category: 'Concert',
-          description: 'Live concert photography at Black Lodge Music (touched up December 2024)',
-          date: '2024-01-13',
-          coverImage: `${funkyLampBasePath}/2024/12/13-01-24_Black Lodge Music 183.jpg`,
-          imageCount: funkyLampImages.length,
+          description: 'Live concert photography at Black Lodge Music (December 2024)',
+          date: '2024-12-13',
+          coverImage: `${funkyLampBasePath}/${funkyLampManifest.images[0]}`,
+          imageCount: funkyLampManifest.totalImages,
           images: funkyLampImages
         },
         {
