@@ -1,0 +1,41 @@
+<!-- Blog Feed Widget (Google Sheets) - Single Page Example -->
+<div id="blogFeed" data-blog-feed data-provider="sheets"
+     data-sheet-id="YOUR_SHEET_ID" data-sheet-name="Blog" data-max-posts="5"
+     data-show-dates="true" data-show-images="true" data-auto-captions="true">
+  <div class="blog-loading">Loading…</div>
+</div>
+
+<style>
+/* Minimal styling for the blog feed */
+#blogFeed { margin: 20px 0; }
+.blog-feed { display: grid; gap: 24px; }
+.blog-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow: hidden; }
+.blog-card-header { padding: 18px 18px 0 18px; }
+.blog-title { margin: 0 0 6px 0; font-size: 1.3rem; line-height: 1.2; }
+.blog-date { display: inline-block; color: #666; font-size: 0.9rem; }
+.blog-body { padding: 12px 18px 18px; color: #333; }
+.blog-body p { margin: 0 0 12px 0; }
+.blog-image { margin: 0; position: relative; }
+.blog-image img { width: 100%; height: auto; display: block; object-fit: cover; }
+.blog-image-caption { font-size: 0.9rem; color: #555; padding: 8px 12px 12px; }
+.blog-loading, .blog-error { padding: 24px; text-align: center; color: #666; }
+
+@media (min-width: 768px) { .blog-feed { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .blog-feed { grid-template-columns: repeat(3, 1fr); } }
+</style>
+
+<!-- Auto captions (EXIF/IPTC) -->
+<script src="../shared/universal-caption-system.js"></script>
+<!-- Blog Feed logic -->
+<script src="./blog-feed.js"></script>
+
+<!-- Configuration notes:
+1) Create a Google Sheet with columns (case-insensitive): Title, Date, Image, Body, Images (optional)
+   - Image: URL for the hero image
+   - Images: Extra image URLs separated by commas or new lines
+   - Body: may contain simple HTML (p, a, ul, li, strong, em)
+2) Share the sheet: Anyone with the link can view (no sign-in)
+3) Set data-sheet-id to the spreadsheet ID and data-sheet-name to the sheet/tab name (e.g., Blog)
+4) Optional: data-max-posts="5" limits the number of posts shown
+5) Auto-captions use image metadata when available; otherwise fallback to alt/filename
+-->

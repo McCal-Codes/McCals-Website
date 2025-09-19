@@ -18,22 +18,36 @@
     "package": "npm pack",
     "docker:build": "docker build -t mccal-media-website .",
     "docker:run": "docker run -p 8080:8080 mccal-media-website",
-    "docker:deploy": "docker build -t mccal-media-website . && docker run -d -p 8080:8080 --name mccal-website mccal-media-website"
+    "docker:deploy": "docker build -t mccal-media-website . && docker run -d -p 8080:8080 --name mccal-website mccal-media-website",
+    "manifest:generate": "node scripts/enhanced-manifest-generator.js --auto",
+    "manifest:dry-run": "node scripts/enhanced-manifest-generator.js --auto --dry --verbose",
+    "manifest:single": "node scripts/enhanced-manifest-generator.js",
+    "manifest:auto-update": "node scripts/auto-manifest-updater.js",
+    "organize:concerts": "node scripts/auto-concert-organizer.js --auto",
+    "organize:preview": "node scripts/auto-concert-organizer.js --auto --dry"
   },
-  "keywords": ["photography", "gallery", "portfolio", "website"],
+  "keywords": [
+    "photography",
+    "gallery",
+    "portfolio",
+    "website"
+  ],
   "author": "McCal Media",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "^14.1.1",
     "chokidar": "^3.5.3",
+    "http-server": "^14.1.1",
     "open": "^10.1.0"
   },
   "optionalDependencies": {
     "netlify-cli": "^17.0.0",
-    "vercel": "^32.0.0",
-    "surge": "^0.23.1"
+    "surge": "^0.23.1",
+    "vercel": "^32.0.0"
   },
   "engines": {
     "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "exif-parser": "^0.1.12"
   }
 }

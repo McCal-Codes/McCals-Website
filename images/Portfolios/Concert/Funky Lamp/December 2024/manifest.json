@@ -1,0 +1,31 @@
+{
+  "bandName": "Funky Lamp",
+  "folderName": "December 2024",
+  "totalImages": 12,
+  "images": [
+    "13-01-24_Black Lodge Music 183.jpg",
+    "13-01-24_Black Lodge Music 187.jpg",
+    "13-01-24_Black Lodge Music 217.jpg",
+    "13-01-24_Black Lodge Music 240.jpg",
+    "13-01-24_Black Lodge Music 312.jpg",
+    "13-01-24_Black Lodge Music 344.jpg",
+    "13-01-24_Black Lodge Music 356.jpg",
+    "13-01-24_Black Lodge Music 359.jpg",
+    "13-01-24_Black Lodge Music 373.jpg",
+    "13-01-24_Black Lodge Music 381.jpg",
+    "13-01-24_Black Lodge Music 388.jpg",
+    "13-01-24_Black Lodge Music 398 1.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-19T04:44:34.571Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2024,
+    "month": 12,
+    "monthName": "December",
+    "day": 13,
+    "iso": "2024-12-13",
+    "source": "filename_ddmmyy_special"
+  }
+}

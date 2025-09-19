@@ -1,0 +1,24 @@
+{
+  "bandName": "We Are All Made Of Stardust",
+  "folderName": "August 2025",
+  "totalImages": 5,
+  "images": [
+    "250829_Haven_CAL4356.jpg",
+    "250829_Haven_CAL4363.jpg",
+    "250829_Haven_CAL4373.jpg",
+    "250829_Haven_CAL4376.jpg",
+    "250829_Haven_CAL4382.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-19T04:44:34.573Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2025,
+    "month": 8,
+    "monthName": "August",
+    "day": 29,
+    "iso": "2025-08-29",
+    "source": "filename_yymmdd"
+  }
+}

@@ -21,8 +21,23 @@ class GalleryApp {
     this.setupCategories();
   }
 
+  async loadGalleryFromManifest(basePath) {
+    try {
+      const response = await fetch(`${basePath}/manifest.json`);
+      const files = await response.json();
+      return files.map(file => `${basePath}/${file}`);
+    } catch (error) {
+      console.error(`Error loading manifest from ${basePath}:`, error);
+      return [];
+    }
+  }
+
   async loadGalleries() {
     try {
+      // Load Funky Lamp images from manifest
+      const funkyLampBasePath = './images/Portfolios/Concert/Funky Lamp';
+      const funkyLampImages = await this.loadGalleryFromManifest(funkyLampBasePath);
+      
       // In a real app, this would fetch from your images API
       // For now, we'll simulate your portfolio structure
       this.galleries = [
@@ -30,24 +45,11 @@ class GalleryApp {
           id: 'funky-lamp',
           title: 'Funky Lamp',
           category: 'Concert',
-          description: 'Live concert photography at Black Lodge Music',
+          description: 'Live concert photography at Black Lodge Music (touched up December 2024)',
           date: '2024-01-13',
-          coverImage: './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 183.jpg',
-          imageCount: 12,
-          images: [
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 183.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 187.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 217.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 240.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 312.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 344.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 356.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 359.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 373.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 381.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 388.jpg',
-            './images/Portfolios/Concert/Funky Lamp/13-01-24_Black Lodge Music 398 1.jpg'
-          ]
+          coverImage: `${funkyLampBasePath}/2024/12/13-01-24_Black Lodge Music 183.jpg`,
+          imageCount: funkyLampImages.length,
+          images: funkyLampImages
         },
         {
           id: 'the-book-club',

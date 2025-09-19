@@ -166,26 +166,30 @@ Debug: Click the "🔧 Debug Mode" button to view performance metrics
   .cl-source { margin:8px 0 0; color:#888; font:500 11px/1.2 ui-sans-serif,system-ui; opacity:0.7; }
   
   .cl-close { 
-    position: absolute; 
-    top: 20px; 
-    right: 20px; 
+    position: fixed; 
+    top: 30px; 
+    right: 30px; 
     border: 1px solid rgba(255, 255, 255, 0.2); 
     background: rgba(0, 0, 0, 0.4); 
     backdrop-filter: blur(16px); 
     -webkit-backdrop-filter: blur(16px);
     color: rgba(255, 255, 255, 0.9); 
     border-radius: 50%; 
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     cursor: pointer; 
     font-weight: 600;
-    font-size: 18px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); 
     z-index: 2147483648;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Ensure it's always visible */
+    margin: 0;
+    min-width: 44px;
+    min-height: 44px;
   }
   
   .cl-close:hover { 
@@ -208,6 +212,28 @@ Debug: Click the "🔧 Debug Mode" button to view performance metrics
     transition: opacity 0.4s ease;
   }
   .cl-hint.fade { opacity:0 }
+
+  /* Mobile responsiveness for close button */
+  @media (max-width: 768px) {
+    .cl-close {
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+  }
+  
+  /* Ensure close button is always above everything */
+  @media (max-width: 480px) {
+    .cl-close {
+      top: 15px;
+      right: 15px;
+      width: 38px;
+      height: 38px;
+      font-size: 16px;
+    }
+  }
 
   /* Header overlay prevention */
   html.lb-open header,html.lb-open .Header,html.lb-open [id*="Header"],html.lb-open .site-header,html.lb-open .sqs-announcement-bar { pointer-events:none; }
