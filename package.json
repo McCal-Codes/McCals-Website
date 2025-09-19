@@ -23,6 +23,8 @@
     "manifest:dry-run": "node scripts/enhanced-manifest-generator.js --auto --dry --verbose",
     "manifest:single": "node scripts/enhanced-manifest-generator.js",
     "manifest:auto-update": "node scripts/auto-manifest-updater.js",
+    "manifest:cleanup": "node scripts/cleanup-manifests.js",
+    "manifest:cleanup-preview": "node scripts/cleanup-manifests.js --dry",
     "organize:concerts": "node scripts/auto-concert-organizer.js --auto",
     "organize:preview": "node scripts/auto-concert-organizer.js --auto --dry"
   },

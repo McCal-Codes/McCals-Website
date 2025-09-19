@@ -207,6 +207,48 @@ function getMonthName(month) {
 }
 
 /**
+ * Clean up old conflicting manifest files
+ */
+function cleanupOldManifests(dirPath, options = {}) {
+    const { dryRun = false, verbose = false } = options;
+    const concertBasePath = path.resolve(__dirname, '../images/Portfolios/Concert');
+    
+    // Find all manifest files in band root directories (not in date subdirectories)
+    const entries = fs.readdirSync(concertBasePath);
+    const bandDirs = entries.filter(entry => {
+        const fullPath = path.join(concertBasePath, entry);
+        return fs.statSync(fullPath).isDirectory();
+    });
+    
+    for (const bandDir of bandDirs) {
+        const bandPath = path.join(concertBasePath, bandDir);
+        const manifestPath = path.join(bandPath, 'manifest.json');
+        
+        if (fs.existsSync(manifestPath)) {
+            // Check if this band has organized subdirectories
+            const bandEntries = fs.readdirSync(bandPath);
+            const hasSubdirs = bandEntries.some(entry => {
+                const fullPath = path.join(bandPath, entry);
+                return fs.statSync(fullPath).isDirectory();
+            });
+            
+            if (hasSubdirs) {
+                if (verbose) {
+                    console.log(`🧹 Found conflicting manifest in ${bandDir} (has subdirectories)`);
+                }
+                
+                if (!dryRun) {
+                    fs.unlinkSync(manifestPath);
+                    console.log(`✅ Removed conflicting manifest: ${manifestPath}`);
+                } else {
+                    console.log(`🏃 DRY RUN - Would remove: ${manifestPath}`);
+                }
+            }
+        }
+    }
+}
+
+/**
  * Process a single concert directory
  */
 async function processDirectory(dirPath, options = {}) {
@@ -368,6 +410,10 @@ async function processAllDirectories(options = {}) {
         return;
     }
     
+    // First, clean up any conflicting old manifests
+    console.log(`🧹 Cleaning up conflicting manifests...`);
+    cleanupOldManifests(CONCERT_BASE_DIR, options);
+    
     const directories = findImageDirectories(CONCERT_BASE_DIR, 3);
     
     console.log(`📁 Found ${directories.length} directories with images`);
@@ -462,5 +508,6 @@ module.exports = {
     extractExifDate,
     formatBandName,
     findBandName,
-    isDateFolder
+    isDateFolder,
+    cleanupOldManifests
 };
