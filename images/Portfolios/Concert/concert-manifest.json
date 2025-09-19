@@ -1,0 +1,131 @@
+{
+  "version": "1.0",
+  "generated": "2025-09-19T10:47:02.884Z",
+  "totalBands": 5,
+  "bands": [
+    {
+      "bandName": "Casino Six",
+      "folderPath": "Casino Six/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 8,
+      "images": [
+        "250820_Haven Block Party_CAL3301.jpg",
+        "250820_Haven Block Party_CAL3304.jpg",
+        "250820_Haven Block Party_CAL3315.jpg",
+        "250820_Haven Block Party_CAL3351.jpg",
+        "250820_Haven Block Party_CAL3364.jpg",
+        "250820_Haven Block Party_CAL3390.jpg",
+        "250820_Haven Block Party_CAL3411.jpg",
+        "250820_Haven Block Party_CAL3443.jpg"
+      ]
+    },
+    {
+      "bandName": "The Book Club",
+      "folderPath": "The Book Club/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 23,
+      "images": [
+        "250829_Haven_CAL4584.jpg",
+        "250829_Haven_CAL4587.jpg",
+        "250829_Haven_CAL4588.jpg",
+        "250829_Haven_CAL4607.jpg",
+        "250829_Haven_CAL4610.jpg",
+        "250829_Haven_CAL4634.jpg",
+        "250829_Haven_CAL4640.jpg",
+        "250829_Haven_CAL4649.jpg",
+        "250829_Haven_CAL4652.jpg",
+        "250829_Haven_CAL4659.jpg",
+        "250829_Haven_CAL4667.jpg",
+        "250829_Haven_CAL4670.jpg",
+        "250829_Haven_CAL4677.jpg",
+        "250829_Haven_CAL4678.jpg",
+        "250829_Haven_CAL4691.jpg",
+        "250829_Haven_CAL4694.jpg",
+        "250829_Haven_CAL4700.jpg",
+        "250829_Haven_CAL4701.jpg",
+        "250829_Haven_CAL4709.jpg",
+        "250829_Haven_CAL4712.jpg",
+        "250829_Haven_CAL4730.jpg",
+        "250829_Haven_CAL4742.jpg",
+        "250829_Haven_CAL4746.jpg"
+      ]
+    },
+    {
+      "bandName": "Turtle Park",
+      "folderPath": "Turtle Park/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 7,
+      "images": [
+        "250829_Haven_CAL4388.jpg",
+        "250829_Haven_CAL4401.jpg",
+        "250829_Haven_CAL4437.jpg",
+        "250829_Haven_CAL4482.jpg",
+        "250829_Haven_CAL4490.jpg",
+        "250829_Haven_CAL4543.jpg",
+        "250829_Haven_CAL4570.jpg"
+      ]
+    },
+    {
+      "bandName": "We Are All Made of Stardust",
+      "folderPath": "We Are All Made of Stardust/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 5,
+      "images": [
+        "250829_Haven_CAL4356.jpg",
+        "250829_Haven_CAL4363.jpg",
+        "250829_Haven_CAL4373.jpg",
+        "250829_Haven_CAL4376.jpg",
+        "250829_Haven_CAL4382.jpg"
+      ]
+    },
+    {
+      "bandName": "Funky Lamp",
+      "folderPath": "Funky Lamp/April 2024",
+      "dateDisplay": "April 2024",
+      "concertDate": {
+        "year": 2024,
+        "month": 4,
+        "monthName": "April",
+        "day": 1,
+        "iso": "2024-04-01"
+      },
+      "totalImages": 6,
+      "images": [
+        "2404_Funky Lamp Indie Fest_1548_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1558_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1563_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1567_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1569_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1570_CAL.jpg"
+      ]
+    }
+  ]
+}

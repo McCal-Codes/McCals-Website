@@ -1,0 +1,358 @@
+<!-- Photojournalism Portfolio v1.0 — Filterable Masonry
+Author: Caleb McCartney / McCal-Codes
+Version: 1.0 Filterable Masonry
+Features:
+ - Category filtering (Politics, Events, Portraits)
+ - Natural-height masonry layout using CSS columns
+ - GitHub CDN integration with data-file pattern
+ - Hover overlay with title and metadata
+ - Click-to-open lightbox with full captions
+ - Responsive design with mobile optimization
+ - Multi-category support per image
+
+Usage: Paste this entire block into a Squarespace Code Block
+GitHub Structure: images/photojournalism/[category]/[filename]
+-->
+<style>
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
+  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  .photojournalism-portfolio { max-width:1600px; margin:80px auto; padding:40px 20px; text-align:center; }
+  .portfolio-heading { font:800 36px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 32px; }
+
+  /* Filter buttons */
+  .portfolio-filters { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:36px; }
+  .filter-btn {
+    background:transparent; border:1px solid var(--fg); color:var(--fg);
+    padding:12px 20px; border-radius:999px; cursor:pointer; font:600 14px/1 ui-sans-serif,system-ui;
+    transition:all 0.25s cubic-bezier(0.4,0,0.2,1); opacity:0.6;
+  }
+  .filter-btn:hover { transform:translateY(-2px); opacity:1; }
+  .filter-btn[aria-pressed="true"] { 
+    background:var(--fg); color:var(--bg); opacity:1; 
+    box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  }
+
+  /* Masonry grid */
+  .portfolio-grid { 
+    column-count:4; column-gap:24px; text-align:left; margin-top:40px;
+  }
+  @media (max-width:1200px) { .portfolio-grid { column-count:3; column-gap:20px; } }
+  @media (max-width:860px) { .portfolio-grid { column-count:2; column-gap:18px; } }
+  @media (max-width:520px) { .portfolio-grid { column-count:1; } }
+
+  /* Portfolio cards */
+  .portfolio-card {
+    position:relative; display:inline-block; width:100%; margin:0 0 24px;
+    border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1); opacity:1;
+  }
+  .portfolio-card.is-hidden { opacity:0; transform:scale(0.98); pointer-events:none; }
+  .portfolio-card img {
+    display:block; width:100%; height:auto; border-radius:inherit;
+    transition:transform 0.35s ease;
+  }
+  .portfolio-card:hover img { transform:scale(1.02); }
+
+  /* Hover overlay */
+  .portfolio-info {
+    position:absolute; left:0; right:0; bottom:0; 
+    background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 80%);
+    color:#fff; padding:16px 18px; text-align:center;
+    opacity:0; transform:translateY(8px);
+    transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  .portfolio-card:hover .portfolio-info,
+  .portfolio-card:focus-within .portfolio-info { opacity:1; transform:translateY(0); }
+
+  .portfolio-title { margin:0 0 6px; font:800 18px/1.25 ui-sans-serif,system-ui; }
+  .portfolio-meta { 
+    margin:0; color:#eaeaea; font:600 12px/1.3 ui-sans-serif,system-ui;
+    display:flex; gap:8px; flex-wrap:wrap; justify-content:center; align-items:center;
+  }
+  .portfolio-meta span::after { content:'·'; margin:0 0 0 8px; opacity:0.7; }
+  .portfolio-meta span:last-child::after { display:none; }
+
+  /* Hidden description for lightbox */
+  .portfolio-desc { display:none; }
+
+  /* Lightbox */
+  .pf-lightbox {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.9); z-index:2147483647; padding:24px;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  }
+  .pf-lightbox.is-open { display:flex; }
+  .pf-dialog { 
+    position:relative; background:#000; color:#fff; border-radius:16px; 
+    box-shadow:0 20px 60px rgba(0,0,0,0.6); max-width:min(1100px,96vw); max-height:90vh; 
+    overflow:hidden; outline:none;
+  }
+  .pf-media { display:block; width:100%; height:auto; max-height:70vh; object-fit:contain; }
+  .pf-caption { padding:20px 24px; border-top:1px solid rgba(255,255,255,0.1); }
+  .pf-caption h3 { margin:0 0 8px; font:800 20px/1.25 ui-sans-serif,system-ui; }
+  .pf-caption .pf-meta { 
+    margin:0 0 12px; color:#cfcfcf; font:600 13px/1.3 ui-sans-serif,system-ui; 
+  }
+  .pf-caption .pf-desc { margin:0; color:#f5f5f5; font:400 15px/1.5 ui-sans-serif,system-ui; }
+  .pf-close {
+    position:absolute; top:12px; right:12px; width:36px; height:36px;
+    background:rgba(0,0,0,0.4); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:50%;
+    cursor:pointer; font-size:18px; font-weight:600; display:flex;
+    align-items:center; justify-content:center; 
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    box-shadow:0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .pf-close:hover { 
+    background:rgba(0,0,0,0.6); transform:scale(1.05);
+    box-shadow:0 6px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  /* Loading state */
+  .portfolio-loading {
+    display:flex; align-items:center; justify-content:center; min-height:200px;
+    font:600 16px/1.4 ui-sans-serif,system-ui; color:var(--fg); opacity:0.7;
+  }
+  .portfolio-spinner {
+    width:20px; height:20px; border:2px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:50%; animation:spin 1s linear infinite; margin-right:12px;
+  }
+  @keyframes spin { 0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); } }
+
+  /* Responsive improvements */
+  @media (max-width:768px) {
+    .photojournalism-portfolio { margin:60px auto; padding:20px; }
+    .portfolio-heading { font-size:28px; }
+    .portfolio-filters { gap:8px; }
+    .filter-btn { padding:10px 16px; font-size:13px; }
+    .portfolio-grid { margin-top:28px; }
+    .pf-dialog { max-width:95vw; max-height:95vh; }
+    .pf-caption { padding:16px 20px; }
+  }
+</style>
+
+<div class="photojournalism-portfolio" id="pf">
+  <!-- Heading -->
+  <h2 class="portfolio-heading">Photojournalism Portfolio</h2>
+  
+  <!-- Category Filters -->
+  <div class="portfolio-filters" role="tablist" aria-label="Portfolio categories">
+    <button type="button" class="filter-btn" data-filter="*" aria-pressed="true" role="tab">All</button>
+    <button type="button" class="filter-btn" data-filter="Politics" aria-pressed="false" role="tab">Politics</button>
+    <button type="button" class="filter-btn" data-filter="Events" aria-pressed="false" role="tab">Events</button>
+    <button type="button" class="filter-btn" data-filter="Portraits" aria-pressed="false" role="tab">Portraits</button>
+  </div>
+
+  <!-- Loading State -->
+  <div class="portfolio-loading" id="pfLoading">
+    <div class="portfolio-spinner"></div>
+    Loading portfolio...
+  </div>
+
+  <!-- Portfolio Grid -->
+  <div class="portfolio-grid" id="pfGrid" style="display:none;">
+    <!-- Sample cards - replace with your actual images -->
+    <article class="portfolio-card" data-cats="Politics" tabindex="0">
+      <img data-file="politics/butler-protest.jpg" alt="Butler Democracy Protest">
+      <div class="portfolio-info">
+        <h3 class="portfolio-title">Butler Democracy Protest</h3>
+        <div class="portfolio-meta">
+          <span>March 15, 2025</span>
+          <span>Politics</span>
+        </div>
+        <p class="portfolio-desc">Despite ongoing political tensions, protests persist even in conservative regions like Butler, Pennsylvania. Roughly 150 residents gathered to voice disapproval of recent decisions, particularly regarding federal employee dismissals affecting the Veterans Affairs office.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" data-cats="Events" tabindex="0">
+      <img data-file="events/rooney-rule.jpg" alt="The Rooney Rule Discussion">
+      <div class="portfolio-info">
+        <h3 class="portfolio-title">The Rooney Rule</h3>
+        <div class="portfolio-meta">
+          <span>April 17, 2025</span>
+          <span>Published with Point Park CMI</span>
+          <span>Events</span>
+        </div>
+        <p class="portfolio-desc">At Pittsburgh's Playhouse, Jim Rooney and scholar N. Jeremi Duru sat down with Andrew Conte to dissect the NFL's Rooney Rule, a policy born in this city that continues to spark debate nationwide.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" data-cats="Events" tabindex="0">
+      <img data-file="events/drag-carnegie.jpg" alt="Drag Show at Carnegie Coffee">
+      <div class="portfolio-info">
+        <h3 class="portfolio-title">Drag's Place in Pittsburgh</h3>
+        <div class="portfolio-meta">
+          <span>March 9, 2025</span>
+          <span>Events</span>
+        </div>
+        <p class="portfolio-desc">An unconventional Sunday evening drag show at Carnegie Coffee Company brought together a community that keeps Pittsburgh's drag scene vibrant and very much alive.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" data-cats="Portraits" tabindex="0">
+      <img data-file="portraits/cole-gessner.jpg" alt="Cole Gessner Portrait">
+      <div class="portfolio-info">
+        <h3 class="portfolio-title">Cole Gessner</h3>
+        <div class="portfolio-meta">
+          <span>Next Generation Newsroom</span>
+          <span>Portraits</span>
+        </div>
+        <p class="portfolio-desc">Cole Gessner, head of the Responsible AI program at Carnegie Mellon University's Block Center for Technology and Society, shares insights on how AI shapes our broader society.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" data-cats="Portraits" tabindex="0">
+      <img data-file="portraits/jody-bechtold.jpg" alt="Jody Bechtold Portrait">
+      <div class="portfolio-info">
+        <h3 class="portfolio-title">Jody Bechtold</h3>
+        <div class="portfolio-meta">
+          <span>Published with Next Generation</span>
+          <span>Portraits</span>
+        </div>
+        <p class="portfolio-desc">An expert on gambling addiction in Pittsburgh, Pennsylvania, bringing important awareness to this growing issue in our community.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" data-cats="Politics, Events" tabindex="0">
+      <img data-file="politics/cmu-trump-protest.jpg" alt="Carnegie Mellon Trump Protest">
+      <div class="portfolio-info">
+        <h3 class="portfolio-title">Protest at Carnegie Mellon</h3>
+        <div class="portfolio-meta">
+          <span>July 15, 2025</span>
+          <span>Published with Technical.ly</span>
+          <span>Politics</span>
+        </div>
+        <p class="portfolio-desc">Students and community members gathered to protest Trump's visit to Carnegie Mellon University, demonstrating the ongoing political engagement on college campuses.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="pf-lightbox" id="pfLightbox" aria-hidden="true">
+  <div data-close aria-hidden="true"></div>
+  <div class="pf-dialog" role="dialog" aria-modal="true" aria-labelledby="pfLbTitle" tabindex="-1">
+    <button class="pf-close" type="button" aria-label="Close">×</button>
+    <img class="pf-media" id="pfLbImg" alt="">
+    <div class="pf-caption">
+      <h3 id="pfLbTitle"></h3>
+      <p class="pf-meta" id="pfLbMeta"></p>
+      <p class="pf-desc" id="pfLbDesc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const root = document.getElementById('pf');
+  if (!root) return;
+  
+  const grid = document.getElementById('pfGrid');
+  const loading = document.getElementById('pfLoading');
+  const cards = [...grid.querySelectorAll('.portfolio-card')];
+  const btns = [...root.querySelectorAll('.filter-btn')];
+  
+  // GitHub Base Path - Update this to your repo structure
+  const PF_BASE = "https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main/images/photojournalism/";
+  
+  // Load images from GitHub
+  grid.querySelectorAll('img[data-file]').forEach(img => {
+    const src = PF_BASE + img.getAttribute('data-file');
+    img.src = src;
+    
+    // Handle loading states
+    img.addEventListener('load', () => {
+      img.parentElement.classList.add('loaded');
+    });
+    
+    img.addEventListener('error', () => {
+      console.warn(`Failed to load image: ${src}`);
+      img.parentElement.classList.add('error');
+    });
+  });
+
+  // Filter functionality with multi-category support
+  function setActive(btn) { 
+    btns.forEach(b => b.setAttribute('aria-pressed', 'false')); 
+    btn.setAttribute('aria-pressed', 'true'); 
+  }
+  
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      setActive(btn);
+      
+      const showAll = (filter === '*');
+      cards.forEach(card => {
+        const cats = (card.dataset.cats || '').split(',').map(s => s.trim());
+        const visible = showAll || cats.includes(filter);
+        card.classList.toggle('is-hidden', !visible);
+      });
+    });
+  });
+
+  // Lightbox functionality
+  const lb = document.getElementById('pfLightbox');
+  const lbImg = document.getElementById('pfLbImg');
+  const lbTitle = document.getElementById('pfLbTitle');
+  const lbMeta = document.getElementById('pfLbMeta');
+  const lbDesc = document.getElementById('pfLbDesc');
+  const lbDialog = lb?.querySelector('.pf-dialog');
+  const lbClose = lb?.querySelector('.pf-close');
+  let lastFocus = null;
+
+  function openLB(card) {
+    lastFocus = document.activeElement;
+    const img = card.querySelector('img');
+    const title = card.querySelector('.portfolio-title')?.textContent?.trim() || img?.alt || '';
+    const meta = card.querySelector('.portfolio-meta')?.textContent?.trim() || '';
+    const desc = card.querySelector('.portfolio-desc')?.textContent?.trim() || '';
+
+    lbImg.src = img?.src || '';
+    lbImg.alt = img?.alt || title;
+    lbTitle.textContent = title;
+    lbMeta.textContent = meta;
+    lbDesc.textContent = desc;
+
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => lbDialog?.focus(), 0);
+  }
+
+  function closeLB() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lbImg.removeAttribute('src');
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+
+  // Event listeners
+  lb?.addEventListener('click', (e) => { 
+    if (e.target === lb || e.target.hasAttribute('data-close')) closeLB(); 
+  });
+  lbClose?.addEventListener('click', closeLB);
+  document.addEventListener('keydown', (e) => { 
+    if (lb?.classList.contains('is-open') && e.key === 'Escape') closeLB(); 
+  });
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => openLB(card));
+    card.addEventListener('keydown', (e) => { 
+      if (e.key === 'Enter' || e.key === ' ') { 
+        e.preventDefault(); 
+        openLB(card); 
+      } 
+    });
+  });
+
+  // Initialize - hide loading and show grid
+  setTimeout(() => {
+    loading.style.display = 'none';
+    grid.style.display = 'block';
+  }, 800);
+
+})();
+</script>

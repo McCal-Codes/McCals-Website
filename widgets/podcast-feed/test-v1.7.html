@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Podcast Widget v1.7 Test</title>
+  <style>
+    body { margin: 0; padding: 20px; background: #1a1a1a; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .card { background: rgba(40,40,40,0.8); border: 1px solid rgba(60,60,60,0.6); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; }
+    .metric { background: rgba(0,0,0,0.25); border-radius: 8px; padding: 12px; text-align: center; }
+    .metric .val { font-size: 1.5rem; color: #1db954; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h2>Podcast Widget v1.7 Test</h2>
+      <div class="row">
+        <div class="metric"><div class="val" id="mtLoad">--</div><div>Load (ms)</div></div>
+        <div class="metric"><div class="val" id="mtEpisodes">--</div><div>Episodes</div></div>
+        <div class="metric"><div class="val" id="mtAudio">--</div><div>Audio Status</div></div>
+      </div>
+    </div>
+
+    <iframe id="widgetFrame" src="./versions/v1.7.html" style="width:100%;height:1150px;border:0;border-radius:12px;background:transparent" loading="lazy" title="Podcast Widget v1.7"></iframe>
+  </div>
+
+  <script>
+    const t0 = performance.now();
+    const frame = document.getElementById('widgetFrame');
+    let loaded = false;
+
+    frame.addEventListener('load', () => {
+      loaded = true;
+      const t = Math.round(performance.now() - t0);
+      document.getElementById('mtLoad').textContent = t;
+      // Best-effort: peek inside the iframe for counts (same-origin only)
+      try {
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        const cards = doc.querySelectorAll('.episode-card').length;
+        document.getElementById('mtEpisodes').textContent = cards;
+        const audio = doc.getElementById('audioStatus');
+        document.getElementById('mtAudio').textContent = audio ? audio.textContent : 'disabled';
+      } catch (_) {
+        document.getElementById('mtEpisodes').textContent = 'n/a';
+        document.getElementById('mtAudio').textContent = 'n/a';
+      }
+    });
+
+    // Fallback if no load fires
+    setTimeout(() => {
+      if (!loaded) {
+        document.getElementById('mtLoad').textContent = 'timeout';
+      }
+    }, 5000);
+  </script>
+</body>
+</html>

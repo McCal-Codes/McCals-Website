@@ -1,0 +1,63 @@
+{
+  "processed": 4,
+  "total": 4,
+  "results": [
+    {
+      "bandName": "Funky Lamp",
+      "folderName": "December 2024",
+      "imageCount": 12,
+      "date": {
+        "year": 2024,
+        "month": 12,
+        "monthName": "December",
+        "day": 13,
+        "iso": "2024-12-13",
+        "source": "filename_ddmmyy_special"
+      },
+      "directory": "December 2024"
+    },
+    {
+      "bandName": "The Book Club",
+      "folderName": "August 2025",
+      "imageCount": 23,
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "directory": "August 2025"
+    },
+    {
+      "bandName": "Turtle Park",
+      "folderName": "August 2025",
+      "imageCount": 7,
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "directory": "August 2025"
+    },
+    {
+      "bandName": "We Are All Made Of Stardust",
+      "folderName": "August 2025",
+      "imageCount": 5,
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "directory": "August 2025"
+    }
+  ],
+  "generated": "2025-09-19T05:13:06.253Z"
+}

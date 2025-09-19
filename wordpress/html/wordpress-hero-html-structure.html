@@ -1,0 +1,97 @@
+<!-- Squarespace-Style Hero Section for WordPress -->
+<!-- STEP 1: Add this CSS class to your page/post -->
+<!-- Go to Page Settings > Advanced > CSS Classes and add: has-hero-image -->
+
+<!-- STEP 2: Add this HTML to a Custom HTML block at the top of your page -->
+<div class="hero-image-container">
+  <!-- Replace with your actual hero image URL -->
+  <img 
+    class="hero-image" 
+    src="https://mcc-cal.com/wp-content/uploads/your-hero-image.jpg" 
+    alt="Caleb McCartney Photography"
+    loading="eager"
+  >
+  
+  <!-- Subtle overlay (like Squarespace) -->
+  <div class="hero-overlay"></div>
+  
+  <!-- Photo caption/credit (bottom left like "Boyd Station") -->
+  <div class="hero-caption">Boyd Station</div>
+  
+  <!-- Navigation arrows (optional - for multiple hero images) -->
+  <button class="hero-nav hero-nav-prev" onclick="prevImage()">‹</button>
+  <button class="hero-nav hero-nav-next" onclick="nextImage()">›</button>
+</div>
+
+<!-- Your existing content goes here -->
+<div class="content-after-hero">
+  <!-- This is where your current WordPress content will appear -->
+  <!-- Your galleries, about section, contact info, etc. -->
+</div>
+
+<script>
+// Hero image navigation (for multiple images - optional)
+const heroImages = [
+  {
+    src: 'https://mcc-cal.com/wp-content/uploads/hero-image-1.jpg',
+    caption: 'Boyd Station'
+  },
+  {
+    src: 'https://mcc-cal.com/wp-content/uploads/hero-image-2.jpg', 
+    caption: 'Another Location'
+  }
+  // Add more images as needed
+];
+
+let currentImageIndex = 0;
+
+function nextImage() {
+  if (heroImages.length <= 1) return;
+  currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+  updateHeroImage();
+}
+
+function prevImage() {
+  if (heroImages.length <= 1) return;
+  currentImageIndex = (currentImageIndex - 1 + heroImages.length) % heroImages.length;
+  updateHeroImage();
+}
+
+function updateHeroImage() {
+  const heroImg = document.querySelector('.hero-image');
+  const heroCaption = document.querySelector('.hero-caption');
+  
+  if (heroImg && heroImages[currentImageIndex]) {
+    heroImg.style.opacity = '0';
+    setTimeout(() => {
+      heroImg.src = heroImages[currentImageIndex].src;
+      heroCaption.textContent = heroImages[currentImageIndex].caption;
+      heroImg.style.opacity = '1';
+    }, 300);
+  }
+}
+
+// Hide navigation arrows if only one image
+document.addEventListener('DOMContentLoaded', function() {
+  if (heroImages.length <= 1) {
+    document.querySelectorAll('.hero-nav').forEach(nav => {
+      nav.style.display = 'none';
+    });
+  }
+  
+  // Preload hero images for smooth transitions
+  heroImages.forEach(img => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = img.src;
+    document.head.appendChild(link);
+  });
+  
+  // Add smooth transition to hero image
+  const heroImg = document.querySelector('.hero-image');
+  if (heroImg) {
+    heroImg.style.transition = 'opacity 0.3s ease';
+  }
+});
+</script>

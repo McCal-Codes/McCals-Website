@@ -1,0 +1,316 @@
+<!-- Concert Portfolio — Natural Masonry + Auto-Date + Target Panes (v2.0)
+Author: Caleb McCartney / McCal-Codes
+Version: 2.0
+Description: Natural-height masonry using CSS columns, pulls from GitHub images/Portfolios/Concert.
+ - Uses manifest.json when present (array or {images, date})
+ - Auto date fallback via latest GitHub commit date (cached in sessionStorage)
+ - Randomizes bands and images; round-robin fill up to data-panes count
+ - Lightbox overlays site header (z-index + header pointer-events lock)
+ - Meta shows short month and year (e.g., "Sep 2025")
+Paste this entire block into a Squarespace Code Block.
+-->
+<style>
+  :root{ --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
+  @media (prefers-color-scheme: light){ :root{ --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  .concert-portfolio{max-width:1600px;margin:60px auto;padding:40px 20px;text-align:center}
+  .concert-heading{font:800 34px/1.2 ui-sans-serif,system-ui;color:var(--fg);margin:0 0 18px}
+
+  /* Natural-height Masonry via CSS columns */
+  .concert-grid{column-width:320px;column-gap:20px;text-align:left}
+  @media (max-width:1024px){.concert-grid{column-width:280px}}
+  @media (max-width:768px){ .concert-grid{column-width:240px}}
+  @media (max-width:520px){ .concert-grid{column-width:100%}}
+
+  .concert-card{
+    position:relative;display:inline-block;width:100%;margin:0 0 20px;
+    background:#111;border-radius:16px;overflow:hidden;cursor:pointer;break-inside:avoid;
+  }
+  .concert-card img{
+    display:block;width:100%;height:auto;object-fit:contain;border-radius:inherit;
+    transition:transform .35s ease, filter .35s ease;
+  }
+  .concert-card:hover img{transform:scale(1.02);filter:contrast(1.08) saturate(1.08)}
+
+  .concert-info{
+    position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:10px 14px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85));color:#fff
+  }
+  .concert-title{margin:0;font:800 16px/1.2 ui-sans-serif,system-ui}
+  .concert-meta{margin:2px 0 0;font:600 12px/1.2 ui-sans-serif,system-ui;color:#e5e5e5}
+
+  /* Lightbox (vertical scroll) */
+  .concert-lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:2147483647 !important;padding:24px}
+  .concert-lightbox.is-open{display:flex}
+  .cl-dialog{position:relative;max-width:95vw;max-height:92vh;overflow:auto;background:transparent;outline:none}
+  .cl-gallery{display:flex;flex-direction:column;gap:20px;overflow-y:auto;scroll-snap-type:y mandatory;padding-right:12px}
+  .cl-gallery img{max-width:92vw;max-height:82vh;width:auto;height:auto;scroll-snap-align:center;border-radius:14px;margin:0 auto}
+  .cl-caption{text-align:center;color:#fff;margin-top:14px}
+  .cl-title{margin:0 0 6px;font:800 20px/1.25 ui-sans-serif,system-ui}
+  .cl-meta{margin:0 0 10px;color:#cfcfcf;font:600 12px/1.3 ui-sans-serif,system-ui}
+  .cl-close{position:absolute;top:6px;right:6px;border:none;background:#fff;color:#000;border-radius:999px;padding:6px 10px;cursor:pointer}
+  .cl-hint{position:sticky;top:6px;align-self:center;background:rgba(0,0,0,.55);color:#fff;padding:6px 10px;border-radius:999px;font:600 12px/1 ui-sans-serif,system-ui;transition:opacity .4s ease}
+  .cl-hint.fade{opacity:0}
+
+  /* While lightbox is open, prevent header intercepting clicks */
+  html.lb-open header,
+  html.lb-open .Header,
+  html.lb-open [id*="Header"],
+  html.lb-open .site-header,
+  html.lb-open .sqs-announcement-bar { pointer-events:none; }
+</style>
+
+<div class="concert-portfolio" id="concertPf" data-panes="12">
+  <h2 class="concert-heading">Concert Portfolio</h2>
+  <div class="concert-grid" id="concertGrid"></div>
+</div>
+
+<div class="concert-lightbox" id="concertLightbox" aria-hidden="true">
+  <div class="cl-dialog" role="dialog" aria-modal="true" aria-labelledby="clLbTitle" tabindex="-1">
+    <button class="cl-close" type="button" aria-label="Close">×</button>
+    <div class="cl-gallery" id="clGallery"><div class="cl-hint">Scroll ↓</div></div>
+    <div class="cl-caption">
+      <h3 class="cl-title" id="clLbTitle"></h3>
+      <p class="cl-meta" id="clLbMeta"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const YEAR = new Date().getFullYear();
+  const pf   = document.getElementById('concertPf');
+  const grid = document.getElementById('concertGrid');
+  if(!grid) return;
+
+  const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
+
+  // Only pulls from images/Portfolios/Concert
+  const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main', base:['images','Portfolios','Concert'] };
+
+  const EXT_RX = /(\.jpe?g|\.png|\.webp|\.gif)$/i;
+  const apiBase = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/`;
+  function apiUrl(parts){ return apiBase + parts.map(encodeURIComponent).join('/'); }
+  function rawUrl(parts){ return `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/` + parts.map(encodeURIComponent).join('/'); }
+
+  async function ghList(parts){
+    const res = await fetch(apiUrl(parts), {headers:{'Accept':'application/vnd.github+json'}});
+    if(!res.ok) throw new Error('GitHub API '+res.status);
+    return res.json();
+  }
+
+  // Manifest can be Array or Object { images:[], date:"YYYY-MM-DD" }
+  async function loadManifestWithDate(parts){
+    try{
+      const res = await fetch(rawUrl(parts)+'?v='+Date.now(), {mode:'cors'});
+      if(!res.ok) return null;
+      const json = await res.json();
+      if(Array.isArray(json)) return {images: json, date: null};
+      if(json && Array.isArray(json.images)) return {images: json.images, date: json.date || null};
+      return null;
+    }catch(_){ return null; }
+  }
+
+  // Commit-date helpers
+  function fmtDate(iso, mode='shortMonthYear'){
+    if(!iso) return null;
+    const d = new Date(iso);
+    if(mode === 'full') return d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+    if(mode === 'monthYear') return d.toLocaleDateString(undefined,{year:'numeric',month:'long'});
+    if(mode === 'shortMonthYear') return d.toLocaleDateString(undefined,{year:'numeric',month:'short'});
+    return String(d.getFullYear());
+  }
+  function ssGet(k){ try{ return sessionStorage.getItem(k); }catch(_){ return null; } }
+  function ssSet(k,v){ try{ sessionStorage.setItem(k,v); }catch(_){ } }
+  async function fetchLastCommitISOForPath(pathStr){
+    const key = 'gh_commit_iso:'+pathStr;
+    const cached = ssGet(key);
+    if(cached) return cached;
+    const url = `https://api.github.com/repos/${GH.owner}/${GH.repo}/commits?path=${encodeURIComponent(pathStr)}&sha=${encodeURIComponent(GH.branch)}&per_page=1`;
+    try{
+      const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
+      if(!res.ok) return null;
+      const arr = await res.json();
+      const iso = Array.isArray(arr) && arr[0] ? arr[0].commit.author.date : null;
+      if(iso) ssSet(key, iso);
+      return iso;
+    }catch(_){ return null; }
+  }
+
+  function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function titleFromFolder(name){ try{ return decodeURIComponent(name).replace(/[-_]/g,' ').replace(/\s+/g,' ').trim(); }catch(_){ return name; } }
+  function setRawImg(img, parts, fname){ img.loading='lazy'; img.decoding='async'; img.src = rawUrl(parts.concat([fname])) + '?v=' + Date.now(); }
+
+  // Resolve band's album (images + date)
+  async function resolveAlbumMeta(bandName){
+    const band = GH.base.concat([bandName]);
+
+    // 1) manifest at band/
+    const m1 = await loadManifestWithDate(band.concat(['manifest.json']));
+    if(m1 && m1.images.length){
+      let dateISO = m1.date || await fetchLastCommitISOForPath(band.join('/') + '/manifest.json');
+      return {parts: band, list: m1.images.filter(n=>EXT_RX.test(n)), dateISO};
+    }
+
+    // 2) files directly in band/
+    try{
+      const items = await ghList(band);
+      const files = items.filter(it=>it.type==='file' && EXT_RX.test(it.name)).map(it=>it.name);
+      if(files.length){
+        const dateISO = await fetchLastCommitISOForPath(band.join('/'));
+        return {parts: band, list: files, dateISO};
+      }
+      // 3) scan subfolders
+      const subs = items.filter(it=>it.type==='dir').map(it=>it.name);
+      for(const sub of subs){
+        const subParts = band.concat([sub]);
+        const m2 = await loadManifestWithDate(subParts.concat(['manifest.json']));
+        if(m2 && m2.images.length){
+          let dateISO = m2.date || await fetchLastCommitISOForPath(subParts.join('/') + '/manifest.json');
+          return {parts: subParts, list: m2.images.filter(n=>EXT_RX.test(n)), dateISO};
+        }
+        try{
+          const subItems = await ghList(subParts);
+          const subFiles = subItems.filter(it=>it.type==='file' && EXT_RX.test(it.name)).map(it=>it.name);
+          if(subFiles.length){
+            const dateISO = await fetchLastCommitISOForPath(subParts.join('/'));
+            return {parts: subParts, list: subFiles, dateISO};
+          }
+        }catch(_){ }
+      }
+    }catch(_){ }
+    return null;
+  }
+
+  async function build(){
+    grid.innerHTML = '';
+
+    // List bands (subfolders under Concert)
+    let bands = [];
+    try{
+      const entries = await ghList(GH.base);
+      bands = entries.filter(it=>it.type==='dir').map(it=>it.name);
+    }catch(e){ console.error('Failed to list Concert folders:', e); }
+    if(!bands.length){
+      grid.innerHTML = '<p style="color:var(--fg);opacity:.7;margin:20px auto">No concerts found.</p>';
+      return;
+    }
+
+    // Resolve albums (images + date) in random order
+    const order = shuffle(bands);
+    const pools = []; // {dir, parts, title, meta, images:[]}
+    const bandImagesMap = new Map(); // dir -> full list
+
+    for(const band of order){
+      const r = await resolveAlbumMeta(band);
+      if(!r || !r.list.length) continue;
+      const images = shuffle(r.list.slice());
+      const dirKey = r.parts.join('/');
+      bandImagesMap.set(dirKey, r.list.slice());
+      const monthLabel = r.dateISO ? fmtDate(r.dateISO, 'shortMonthYear') : null; // e.g., "Sep 2025"
+      pools.push({ dir:dirKey, parts:r.parts, title:titleFromFolder(band), meta:'Live · ' + (monthLabel || YEAR), images });
+    }
+
+    if(!pools.length){
+      grid.innerHTML = '<p style="color:var(--fg);opacity:.7;margin:20px auto">No concert images available.</p>';
+      return;
+    }
+
+    // Fill up to TARGET_PANES (round-robin across pools for variety)
+    const slots = []; // {dir, parts, title, meta, thumb}
+    let progress = true;
+    while(slots.length < TARGET_PANES && progress){
+      progress = false;
+      for(const pool of pools){
+        if(slots.length >= TARGET_PANES) break;
+        const fname = pool.images.shift();
+        if(fname){ slots.push({dir:pool.dir, parts:pool.parts, title:pool.title, meta:pool.meta, thumb:fname}); progress = true; }
+      }
+    }
+
+    // Render
+    for(const slot of slots){
+      const card = document.createElement('article');
+      card.className = 'concert-card';
+      card.tabIndex = 0;
+      card.dataset.dir = slot.dir;
+      card.dataset.title = slot.title;
+      card.dataset.meta = slot.meta;
+
+      const img = document.createElement('img');
+      setRawImg(img, slot.parts, slot.thumb);
+
+      const info = document.createElement('div');
+      info.className = 'concert-info';
+      info.innerHTML = `<h3 class="concert-title">${slot.title}</h3><p class="concert-meta">${slot.meta}</p>`;
+
+      card.appendChild(img);
+      card.appendChild(info);
+      grid.appendChild(card);
+
+      // Lightbox uses full band's list (reshuffled on open)
+      card.addEventListener('click', ()=>{
+        const all = bandImagesMap.get(slot.dir) || [];
+        openLB(card, shuffle(all));
+      });
+      card.addEventListener('keydown', e=>{
+        if(e.key==='Enter'||e.key===' '){
+          e.preventDefault();
+          const all = bandImagesMap.get(slot.dir) || [];
+          openLB(card, shuffle(all));
+        }
+      });
+    }
+  }
+
+  // Lightbox
+  const lb = document.getElementById('concertLightbox');
+  const lbDialog = lb.querySelector('.cl-dialog');
+  const lbGallery = document.getElementById('clGallery');
+  const lbTitle = document.getElementById('clLbTitle');
+  const lbMeta = document.getElementById('clLbMeta');
+  const lbClose = lb.querySelector('.cl-close');
+
+  function openLB(card, imageNames){
+    const parts = card.dataset.dir.split('/').filter(Boolean);
+    const names = Array.isArray(imageNames) ? imageNames : [];
+    lbGallery.innerHTML = '<div class="cl-hint">Scroll ↓</div>';
+    for(const fname of names){
+      const im = document.createElement('img');
+      setRawImg(im, parts, fname);
+      lbGallery.appendChild(im);
+    }
+    lbTitle.textContent = card.dataset.title;
+    lbMeta.textContent  = card.dataset.meta;
+    lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    document.documentElement.classList.add('lb-open'); // prevent header clicks
+    setTimeout(()=> lbDialog.focus(), 0);
+  }
+  function closeLB(){
+    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+    document.documentElement.classList.remove('lb-open');
+    lbGallery.innerHTML = '';
+  }
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+  document.addEventListener('keydown', e=>{ if(lb.classList.contains('is-open') && e.key==='Escape') closeLB(); });
+
+  // Lightbox scroll hint + arrow/j keys
+  (function(){
+    const scroller = document.getElementById('clGallery');
+    const hideHint = ()=>{ const hint=scroller.querySelector('.cl-hint'); if(hint) hint.classList.add('fade'); scroller.removeEventListener('scroll', hideHint); };
+    scroller.addEventListener('scroll', hideHint, {passive:true});
+    document.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('is-open')) return;
+      const step = Math.round(window.innerHeight * 0.9);
+      if(e.key==='ArrowDown'||e.key==='j'){ e.preventDefault(); scroller.scrollBy({top:step,behavior:'smooth'}); }
+      if(e.key==='ArrowUp'||e.key==='k'){   e.preventDefault(); scroller.scrollBy({top:-step,behavior:'smooth'}); }
+    });
+  })();
+
+  build().catch(err=>{
+    console.error('Concert gallery failed to build:', err);
+    grid.innerHTML = '<p style="color:var(--fg);opacity:.7;margin:20px auto">Error loading concerts.</p>';
+  });
+})();
+</script>

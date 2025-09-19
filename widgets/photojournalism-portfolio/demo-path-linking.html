@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path-Based Category Linking Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #0a0a0a;
+            color: #f5f5f5;
+        }
+        h1 { color: #ff4d6d; margin-bottom: 30px; }
+        .demo-section { 
+            background: rgba(255,255,255,0.05); 
+            padding: 20px; 
+            border-radius: 12px; 
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .url-example { 
+            background: #1a1a1a; 
+            padding: 10px; 
+            border-radius: 6px; 
+            font-family: 'Monaco', monospace; 
+            margin: 10px 0;
+            border: 1px solid #333;
+        }
+        .feature { margin: 15px 0; }
+        .feature strong { color: #4d79ff; }
+        .note { 
+            background: rgba(255, 193, 7, 0.1); 
+            border-left: 3px solid #ffc107; 
+            padding: 12px; 
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .test-links { display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0; }
+        .test-link {
+            background: #ff4d6d;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .test-link:hover { background: #e63946; }
+    </style>
+</head>
+<body>
+    <h1>📸 Path-Based Category Linking Demo</h1>
+
+    <div class="demo-section">
+        <h2>🔗 URL Structure</h2>
+        <p>The enhanced photojournalism portfolio now supports clean, shareable URLs for each category:</p>
+        
+        <div class="url-example">yoursite.com/photojournalism</div>
+        <div class="url-example">yoursite.com/photojournalism/politics</div>
+        <div class="url-example">yoursite.com/photojournalism/events</div>
+        <div class="url-example">yoursite.com/photojournalism/portraits</div>
+        <div class="url-example">yoursite.com/photojournalism/featured</div>
+    </div>
+
+    <div class="demo-section">
+        <h2>✨ Features</h2>
+        <div class="feature"><strong>Path Detection:</strong> Automatically detects category from URL path</div>
+        <div class="feature"><strong>Clean URLs:</strong> Generated links use path-based format (preferred)</div>
+        <div class="feature"><strong>Hash Fallback:</strong> Still supports hash-based navigation (#politics)</div>
+        <div class="feature"><strong>Copy to Clipboard:</strong> Link icons copy clean URLs</div>
+        <div class="feature"><strong>Browser History:</strong> Back/forward buttons work correctly</div>
+        <div class="feature"><strong>SEO Friendly:</strong> Search engines can index category pages</div>
+    </div>
+
+    <div class="demo-section">
+        <h2>🛠️ How It Works</h2>
+        <p><strong>1. URL Parsing:</strong> Widget checks the last segment of the URL path</p>
+        <p><strong>2. Category Mapping:</strong> Maps URL segments to filter values:</p>
+        <div class="url-example">
+politics → Politics filter<br>
+events → Events filter<br>
+portraits → Portraits filter<br>
+featured → Featured filter
+        </div>
+        <p><strong>3. Link Generation:</strong> Creates clean URLs when copying category links</p>
+        <p><strong>4. History Management:</strong> Updates browser history without page reloads</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>📋 Implementation</h2>
+        <p>To use path-based category linking:</p>
+        <ol>
+            <li><strong>Deploy the widget</strong> on a page with URL structure support</li>
+            <li><strong>Configure your server</strong> to serve the same HTML for all category paths</li>
+            <li><strong>Test navigation</strong> using the link icons (🔗) on category buttons</li>
+            <li><strong>Share URLs</strong> directly to specific categories</li>
+        </ol>
+
+        <div class="note">
+            <strong>Note:</strong> For full functionality, your web server should be configured to serve the same HTML content for all photojournalism portfolio paths. The JavaScript will handle the category filtering client-side.
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>🧪 Test Examples</h2>
+        <p>Try these example URLs (they would work on a live site):</p>
+        <div class="test-links">
+            <a href="#" class="test-link" onclick="simulateNavigation('/photojournalism/politics')">Politics</a>
+            <a href="#" class="test-link" onclick="simulateNavigation('/photojournalism/events')">Events</a>
+            <a href="#" class="test-link" onclick="simulateNavigation('/photojournalism/portraits')">Portraits</a>
+            <a href="#" class="test-link" onclick="simulateNavigation('/photojournalism/featured')">Featured</a>
+        </div>
+        <div id="demo-output" style="margin-top: 15px; padding: 10px; background: #1a1a1a; border-radius: 6px; font-family: monospace; min-height: 20px;"></div>
+    </div>
+
+    <script>
+        function simulateNavigation(path) {
+            const output = document.getElementById('demo-output');
+            const pathParts = path.split('/');
+            const category = pathParts[pathParts.length - 1];
+            
+            output.innerHTML = `
+                <div style="color: #4d79ff;">🔄 Navigation Simulation</div>
+                <div>Path: ${path}</div>
+                <div>Detected Category: ${category}</div>
+                <div style="color: #28a745;">✅ Would filter to "${category}" category</div>
+            `;
+        }
+
+        // Show current URL info
+        window.onload = function() {
+            const output = document.getElementById('demo-output');
+            output.innerHTML = `
+                <div style="color: #666;">Current URL: ${window.location.href}</div>
+                <div style="color: #666;">Click test buttons above to see path detection in action</div>
+            `;
+        };
+    </script>
+</body>
+</html>

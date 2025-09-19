@@ -1,0 +1,678 @@
+<!-- Concert Portfolio v2.2 — Performance Optimized with Shared Backend (v2.2)
+Author: Caleb McCartney / McCal-Codes
+Version: 2.2
+Performance Features:
+ - Shared portfolio API backend with intelligent caching
+ - Advanced EXIF parsing with performance optimization  
+ - Lazy loading with intersection observer
+ - Request batching and deduplication
+ - Progressive image loading with retry logic
+ - WebP format detection and optimization
+ - Performance monitoring and metrics
+ - Error handling with exponential backoff
+ - Optimized GitHub API usage (REST + GraphQL)
+ 
+Usage:
+ - Paste this entire block into a Squarespace Code Block
+ - Adjust data-panes="12" to control number of cards displayed
+ - Monitor performance via browser console: portfolioAPI.getMetrics()
+
+Backward Compatible: Maintains all v2.1 features while adding performance improvements
+-->
+<style>
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
+  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  .concert-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center }
+  .concert-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 18px }
+  
+  /* Loading states */
+  .concert-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font: 600 16px/1.4 ui-sans-serif,system-ui;
+    color: var(--fg);
+    opacity: 0.7;
+  }
+  
+  .concert-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 12px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Performance metrics display (dev mode) */
+  .concert-metrics {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font: 600 11px/1.3 ui-monospace,monospace;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .concert-metrics.visible { opacity: 1; }
+
+  /* Natural-height Masonry via CSS columns */
+  .concert-grid { column-width:320px; column-gap:20px; text-align:left; opacity:0; transition:opacity 0.5s ease; }
+  .concert-grid.loaded { opacity: 1; }
+  @media (max-width:1024px) { .concert-grid { column-width:280px } }
+  @media (max-width:768px) { .concert-grid { column-width:240px } }
+  @media (max-width:520px) { .concert-grid { column-width:100% } }
+
+  .concert-card {
+    position:relative; display:inline-block; width:100%; margin:0 0 20px;
+    background:#111; border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+    opacity:0; transform:translateY(20px); transition:all 0.3s ease;
+  }
+  
+  .concert-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .concert-card img {
+    display:block; width:100%; height:auto; object-fit:contain; border-radius:inherit;
+    transition:transform .35s ease, filter .35s ease;
+  }
+  
+  .concert-card:hover img { transform:scale(1.02); filter:contrast(1.08) saturate(1.08) }
+
+  .concert-info {
+    position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
+    padding:10px 14px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85)); color:#fff
+  }
+  .concert-title { margin:0; font:800 16px/1.2 ui-sans-serif,system-ui }
+  .concert-meta { margin:2px 0 0; font:600 12px/1.2 ui-sans-serif,system-ui; color:#e5e5e5 }
+
+  /* Enhanced image loading states */
+  .concert-card.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .concert-card.error {
+    background: #2a1a1a;
+    border: 1px solid #4a2a2a;
+  }
+  
+  .concert-card.error::after {
+    content: '⚠️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    opacity: 0.5;
+  }
+
+  /* Lightbox (vertical scroll) - Enhanced */
+  .concert-lightbox {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.9); z-index:2147483647 !important; padding:24px;
+    backdrop-filter: blur(8px);
+  }
+  .concert-lightbox.is-open { display:flex }
+  .cl-dialog { position:relative; max-width:95vw; max-height:92vh; overflow:auto; background:transparent; outline:none }
+  .cl-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; padding-right:12px }
+  .cl-gallery img {
+    max-width:92vw; max-height:82vh; width:auto; height:auto; scroll-snap-align:center; 
+    border-radius:14px; margin:0 auto; transition:opacity 0.3s ease;
+  }
+  .cl-gallery img.loading { opacity: 0.7; }
+  .cl-gallery img.loaded { opacity: 1; }
+  .cl-caption { text-align:center; color:#fff; margin-top:14px }
+  .cl-title { margin:0 0 6px; font:800 20px/1.25 ui-sans-serif,system-ui }
+  .cl-meta { margin:0 0 10px; color:#cfcfcf; font:600 12px/1.3 ui-sans-serif,system-ui }
+  .cl-close { 
+    position: fixed; 
+    top: 30px; 
+    right: 30px; 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    background: rgba(0, 0, 0, 0.7); 
+    color: rgba(255, 255, 255, 0.9); 
+    border-radius: 50%; 
+    width: 44px;
+    height: 44px;
+    cursor: pointer; 
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483648;
+    transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
+  }
+  .cl-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    color: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+  }
+  .cl-hint { position:sticky; top:6px; align-self:center; background:rgba(0,0,0,.55); color:#fff; padding:6px 10px; border-radius:999px; font:600 12px/1 ui-sans-serif,system-ui; transition:opacity .4s ease }
+  .cl-hint.fade { opacity:0 }
+
+  /* Performance indicator */
+  .cl-loading-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font: 600 12px/1 ui-sans-serif,system-ui;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .cl-loading-indicator.visible { opacity: 1; }
+
+  /* Mobile responsiveness for close button */
+  @media (max-width: 768px) {
+    .cl-close {
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cl-close {
+      top: 15px;
+      right: 15px;
+      width: 38px;
+      height: 38px;
+      font-size: 16px;
+    }
+  }
+
+  /* While lightbox is open, prevent header intercepting clicks */
+  html.lb-open header,
+  html.lb-open .Header,
+  html.lb-open [id*="Header"],
+  html.lb-open .site-header,
+  html.lb-open .sqs-announcement-bar { pointer-events:none; }
+</style>
+
+<div class="concert-portfolio" id="concertPf" data-panes="12">
+  <h2 class="concert-heading">Concert Portfolio</h2>
+  <div class="concert-loading" id="concertLoading">
+    <div class="concert-spinner"></div>
+    Loading concerts...
+  </div>
+  <div class="concert-grid" id="concertGrid"></div>
+</div>
+
+<!-- Performance metrics (shown when ?debug=true) -->
+<div class="concert-metrics" id="concertMetrics"></div>
+
+<div class="concert-lightbox" id="concertLightbox" aria-hidden="true">
+  <div class="cl-dialog" role="dialog" aria-modal="true" aria-labelledby="clLbTitle" tabindex="-1">
+    <button class="cl-close" type="button" aria-label="Close">×</button>
+    <div class="cl-gallery" id="clGallery">
+      <div class="cl-hint">Scroll ↓</div>
+    </div>
+    <div class="cl-caption">
+      <h3 class="cl-title" id="clLbTitle"></h3>
+      <p class="cl-meta" id="clLbMeta"></p>
+    </div>
+    <div class="cl-loading-indicator" id="clLoadingIndicator">
+      Loading images...
+    </div>
+  </div>
+</div>
+
+<!-- Load shared backend dependencies -->
+<script src="../shared/exif-parser.js"></script>
+<script src="../shared/portfolio-api.js"></script>
+
+<script>
+(function() {
+  const YEAR = new Date().getFullYear();
+  const pf = document.getElementById('concertPf');
+  const grid = document.getElementById('concertGrid');
+  const loading = document.getElementById('concertLoading');
+  const metrics = document.getElementById('concertMetrics');
+  
+  if (!grid) return;
+
+  const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
+  const DEBUG_MODE = new URLSearchParams(window.location.search).has('debug');
+
+  // Initialize high-performance portfolio API
+  const portfolioAPI = new PortfolioAPI({
+    // Performance optimizations
+    cacheTTL: 10 * 60 * 1000, // 10 minutes for concert data
+    maxConcurrentRequests: 8,  // Higher for better parallelism
+    requestTimeout: 15000,     // Longer timeout for large images
+    
+    // Image optimization
+    preferWebP: true,
+    lazyLoadThreshold: 0.15,   // Start loading slightly before viewport
+    maxImagePreloadBytes: 128 * 1024, // 128KB for EXIF headers
+  });
+
+  // Store for global access and debugging
+  window.portfolioAPI = portfolioAPI;
+
+  async function build() {
+    const startTime = performance.now();
+    
+    try {
+      // Show loading state
+      loading.style.display = 'flex';
+      grid.style.display = 'none';
+      
+      // Fetch concert portfolio data with performance optimization
+      const portfolioData = await portfolioAPI.fetchPortfolio('images/Portfolios/Concert', {
+        extractDates: true,
+        useGraphQL: true, // Prefer GraphQL for better performance
+        batchSize: 6      // Process 6 folders concurrently
+      });
+
+      if (!portfolioData.portfolios.length) {
+        showError('No concerts found.');
+        return;
+      }
+
+      // Shuffle and limit results
+      const shuffled = shuffleArray(portfolioData.portfolios.slice());
+      const limited = shuffled.slice(0, TARGET_PANES);
+      
+      // Create optimized image data for each portfolio
+      const imageData = limited.map(portfolio => {
+        const thumbnail = portfolio.thumbnail || portfolio.images[0];
+        if (!thumbnail) return null;
+        
+        return {
+          src: `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/${portfolio.path}/${thumbnail}`,
+          alt: `${portfolio.title} concert photo`,
+          portfolio: portfolio,
+          placeholder: null // Could add low-res placeholder support
+        };
+      }).filter(Boolean);
+
+      // Create cards with performance optimization
+      await createOptimizedCards(imageData, limited);
+      
+      // Setup performance monitoring
+      if (DEBUG_MODE) {
+        setupPerformanceMonitoring();
+      }
+      
+      // Hide loading, show grid with animation
+      loading.style.display = 'none';
+      grid.style.display = 'block';
+      
+      // Trigger load animation
+      requestAnimationFrame(() => {
+        grid.classList.add('loaded');
+        // Animate cards in sequence
+        animateCardsIn();
+      });
+      
+      const loadTime = performance.now() - startTime;
+      console.log(`Concert portfolio loaded in ${Math.round(loadTime)}ms`);
+      
+    } catch (error) {
+      console.error('Concert gallery failed to build:', error);
+      showError('Error loading concerts. Please try again.');
+    }
+  }
+
+  async function createOptimizedCards(imageData, portfolios) {
+    const fragment = document.createDocumentFragment();
+    
+    // Create all card elements first (for better layout stability)
+    const cards = imageData.map((data, index) => {
+      const portfolio = data.portfolio;
+      const card = createCardElement(portfolio, data.src);
+      return { card, portfolio, data, index };
+    });
+    
+    // Add all cards to DOM
+    cards.forEach(({ card }) => {
+      fragment.appendChild(card);
+    });
+    grid.appendChild(fragment);
+    
+    // Setup high-performance image loader
+    const imageLoader = portfolioAPI.createOptimizedImageLoader(
+      grid, 
+      imageData,
+      {
+        lazy: true,
+        batchSize: 4,
+        preloadNext: 2,
+        retryAttempts: 3,
+        placeholder: 'color'
+      }
+    );
+    
+    // Progressive loading with intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const index = parseInt(card.dataset.index);
+          const { data, portfolio } = cards[index];
+          
+          loadCardImage(card, data, portfolio);
+          observer.unobserve(card);
+        }
+      });
+    }, { 
+      threshold: 0.1,
+      rootMargin: '100px 0px' // Start loading 100px before viewport
+    });
+    
+    // Observe all cards
+    cards.forEach(({ card }, index) => {
+      card.dataset.index = index;
+      observer.observe(card);
+    });
+    
+    // Load initial batch immediately for faster perceived performance
+    const initialBatch = Math.min(4, cards.length);
+    for (let i = 0; i < initialBatch; i++) {
+      const { card, data, portfolio } = cards[i];
+      observer.unobserve(card); // Don't double-load
+      loadCardImage(card, data, portfolio);
+    }
+  }
+
+  function createCardElement(portfolio, imageSrc) {
+    const card = document.createElement('article');
+    card.className = 'concert-card loading';
+    card.tabIndex = 0;
+    card.dataset.dir = portfolio.path;
+    card.dataset.title = portfolio.title;
+    card.dataset.meta = `Live · ${portfolio.dateFormatted || YEAR}`;
+
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = `${portfolio.title} concert photo`;
+    
+    const info = document.createElement('div');
+    info.className = 'concert-info';
+    info.innerHTML = `
+      <h3 class="concert-title">${portfolio.title}</h3>
+      <p class="concert-meta">${card.dataset.meta}</p>
+    `;
+
+    card.appendChild(img);
+    card.appendChild(info);
+    
+    // Setup click handlers for lightbox
+    const openLightbox = () => {
+      openLB(card, portfolio.images);
+    };
+    
+    card.addEventListener('click', openLightbox);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox();
+      }
+    });
+
+    return card;
+  }
+
+  async function loadCardImage(card, data, portfolio) {
+    const img = card.querySelector('img');
+    
+    try {
+      // Load with retry logic
+      await loadImageWithRetry(img, data.src, 3);
+      
+      card.classList.remove('loading');
+      card.classList.add('loaded');
+      
+    } catch (error) {
+      console.warn(`Failed to load image for ${portfolio.title}:`, error);
+      card.classList.remove('loading');
+      card.classList.add('error');
+    }
+  }
+
+  function loadImageWithRetry(img, src, maxRetries = 3) {
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+      
+      const tryLoad = () => {
+        const tempImg = new Image();
+        
+        tempImg.onload = () => {
+          img.src = src;
+          resolve();
+        };
+        
+        tempImg.onerror = () => {
+          attempts++;
+          if (attempts >= maxRetries) {
+            reject(new Error(`Failed to load after ${maxRetries} attempts`));
+          } else {
+            // Exponential backoff
+            setTimeout(tryLoad, Math.pow(2, attempts) * 500);
+          }
+        };
+        
+        tempImg.src = src + `?retry=${attempts}`;
+      };
+      
+      tryLoad();
+    });
+  }
+
+  function animateCardsIn() {
+    const cards = grid.querySelectorAll('.concert-card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.classList.add('loaded');
+      }, index * 100); // Stagger by 100ms
+    });
+  }
+
+  function setupPerformanceMonitoring() {
+    const updateMetrics = () => {
+      const apiMetrics = portfolioAPI.getMetrics();
+      const perfEntry = performance.getEntriesByType('navigation')[0];
+      
+      metrics.innerHTML = `
+        <div>API: ${apiMetrics.requests} reqs, ${apiMetrics.cacheHits}/${apiMetrics.cacheMisses} cache</div>
+        <div>Avg: ${Math.round(apiMetrics.avgResponseTime)}ms</div>
+        <div>Errors: ${apiMetrics.errors}</div>
+        <div>DOM: ${Math.round(perfEntry?.domContentLoadedEventEnd - perfEntry?.domContentLoadedEventStart || 0)}ms</div>
+      `;
+      
+      metrics.classList.add('visible');
+    };
+    
+    // Update every 2 seconds
+    setInterval(updateMetrics, 2000);
+    updateMetrics();
+  }
+
+  function showError(message) {
+    loading.innerHTML = `
+      <div style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">⚠️</div>
+      <div>${message}</div>
+    `;
+  }
+
+  // Enhanced Lightbox with performance optimization
+  const lb = document.getElementById('concertLightbox');
+  const lbDialog = lb.querySelector('.cl-dialog');
+  const lbGallery = document.getElementById('clGallery');
+  const lbTitle = document.getElementById('clLbTitle');
+  const lbMeta = document.getElementById('clLbMeta');
+  const lbClose = lb.querySelector('.cl-close');
+  const lbLoadingIndicator = document.getElementById('clLoadingIndicator');
+
+  async function openLB(card, imageNames) {
+    const parts = card.dataset.dir.split('/').filter(Boolean);
+    const names = Array.isArray(imageNames) ? imageNames : [];
+    
+    lbGallery.innerHTML = '<div class="cl-hint">Scroll ↓</div>';
+    lbTitle.textContent = card.dataset.title;
+    lbMeta.textContent = card.dataset.meta;
+    
+    // Show lightbox immediately
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.documentElement.classList.add('lb-open');
+    setTimeout(() => lbDialog.focus(), 0);
+    
+    // Show loading indicator
+    lbLoadingIndicator.classList.add('visible');
+    
+    // Load images progressively
+    let loadedCount = 0;
+    const totalCount = names.length;
+    
+    const updateLoadingIndicator = () => {
+      if (loadedCount === totalCount) {
+        lbLoadingIndicator.classList.remove('visible');
+      } else {
+        lbLoadingIndicator.textContent = `Loading ${loadedCount}/${totalCount} images...`;
+      }
+    };
+    
+    // Load images in batches for better performance
+    const batchSize = 3;
+    for (let i = 0; i < names.length; i += batchSize) {
+      const batch = names.slice(i, i + batchSize);
+      
+      const batchPromises = batch.map(async (fname, batchIndex) => {
+        const img = document.createElement('img');
+        img.className = 'loading';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        
+        lbGallery.appendChild(img);
+        
+        try {
+          const imgSrc = `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/${parts.join('/')}/${fname}`;
+          await loadImageWithRetry(img, imgSrc, 2);
+          
+          img.classList.remove('loading');
+          img.classList.add('loaded');
+          
+        } catch (error) {
+          console.warn(`Lightbox image failed to load: ${fname}`, error);
+          img.alt = `Failed to load ${fname}`;
+          img.classList.remove('loading');
+          img.classList.add('error');
+        }
+        
+        loadedCount++;
+        updateLoadingIndicator();
+      });
+      
+      // Wait for current batch, then start next (progressive loading)
+      await Promise.allSettled(batchPromises);
+      
+      // Small delay between batches to prevent overwhelming
+      if (i + batchSize < names.length) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    }
+  }
+
+  function closeLB() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.documentElement.classList.remove('lb-open');
+    lbGallery.innerHTML = '';
+    lbLoadingIndicator.classList.remove('visible');
+  }
+
+  // Lightbox event handlers
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', e => { 
+    if (lb.classList.contains('is-open') && e.key === 'Escape') closeLB(); 
+  });
+
+  // Enhanced lightbox scroll and navigation
+  (function setupLightboxControls() {
+    const scroller = lbGallery;
+    
+    const hideHint = () => {
+      const hint = scroller.querySelector('.cl-hint');
+      if (hint) hint.classList.add('fade');
+      scroller.removeEventListener('scroll', hideHint);
+    };
+    
+    scroller.addEventListener('scroll', hideHint, { passive: true });
+    
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('is-open')) return;
+      
+      const step = Math.round(window.innerHeight * 0.9);
+      if (e.key === 'ArrowDown' || e.key === 'j') {
+        e.preventDefault();
+        scroller.scrollBy({ top: step, behavior: 'smooth' });
+      }
+      if (e.key === 'ArrowUp' || e.key === 'k') {
+        e.preventDefault();
+        scroller.scrollBy({ top: -step, behavior: 'smooth' });
+      }
+    });
+  })();
+
+  // Utility functions
+  function shuffleArray(array) {
+    const arr = array.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Initialize portfolio
+  build().catch(err => {
+    console.error('Concert portfolio initialization failed:', err);
+    showError('Failed to initialize portfolio. Please refresh the page.');
+  });
+
+})();
+</script>

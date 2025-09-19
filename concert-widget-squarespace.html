@@ -1,0 +1,680 @@
+<!-- Concert Portfolio v4.1 — Fixed & Clean
+Author: Caleb McCartney / McCal-Codes
+Version: 4.1
+Purpose: Simplified concert widget with reliable GitHub integration
+
+Features:
+- Single API call using master manifest (stable loading)
+- Simple 10-minute auto-refresh
+- Clean error handling
+- Debug panel for troubleshooting
+- Simplified codebase, easier to maintain
+
+Usage: Paste this entire block into a Squarespace Code Block
+Requirements: Master manifest at images/Portfolios/Concert/concert-manifest.json
+-->
+
+<style>
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
+  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  .concert-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
+  .concert-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 18px }
+  
+  /* Loading states */
+  .concert-loading {
+    display: flex; align-items: center; justify-content: center; min-height: 200px;
+    font: 600 16px/1.4 ui-sans-serif,system-ui; color: var(--fg); opacity: 0.7;
+  }
+  .concert-spinner {
+    width: 20px; height: 20px; border: 2px solid var(--line); border-top: 2px solid var(--accent);
+    border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Auto-refresh indicator */
+  .auto-refresh-indicator {
+    position: fixed;
+    bottom: 8px;
+    right: 50px;
+    font: 400 10px/1 ui-sans-serif,system-ui;
+    color: rgba(128, 128, 128, 0.6);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Version indicator - minimal bottom right */
+  .version-indicator {
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    font: 400 10px/1 ui-sans-serif,system-ui;
+    color: rgba(128, 128, 128, 0.6);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Debug Toggle Button */
+  .debug-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    font: 600 12px/1 ui-sans-serif,system-ui;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .debug-toggle:hover {
+    background: rgba(0,0,0,0.95);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    opacity: 0.9;
+  }
+
+  /* Debug info panel */
+  .debug-info {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font: 600 11px/1.3 ui-monospace,monospace;
+    z-index: 999;
+    max-width: 500px;
+    border: 1px solid var(--line);
+    display: none;
+    backdrop-filter: blur(10px);
+  }
+
+  .debug-info.active {
+    display: block;
+  }
+
+  /* Natural-height Masonry */
+  .concert-grid { 
+    column-width:320px; column-gap:20px; text-align:left; opacity:0; transition:opacity 0.5s ease;
+  }
+  .concert-grid.loaded { opacity: 1; }
+  @media (max-width:1024px) { .concert-grid { column-width:280px } }
+  @media (max-width:768px) { .concert-grid { column-width:240px } }
+  @media (max-width:520px) { .concert-grid { column-width:100% } }
+
+  .concert-card {
+    position:relative; display:inline-block; width:100%; margin:0 0 20px;
+    background:#111; border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+    opacity:0; transform:translateY(20px); transition:all 0.3s ease;
+  }
+  .concert-card.loaded { opacity: 1; transform: translateY(0); }
+  .concert-card img {
+    display:block; width:100%; height:auto; object-fit:contain; border-radius:inherit;
+    transition:transform .35s ease, filter .35s ease;
+  }
+  .concert-card:hover img { transform:scale(1.02); filter:contrast(1.08) saturate(1.08) }
+
+  .concert-info {
+    position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
+    padding:10px 14px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85)); color:#fff
+  }
+  .concert-title { margin:0; font:800 16px/1.2 ui-sans-serif,system-ui }
+  .concert-meta { margin:2px 0 0; font:600 12px/1.2 ui-sans-serif,system-ui; color:#e5e5e5 }
+
+  /* Loading states */
+  .concert-card.loading::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  
+  .concert-card.error { background: #2a1a1a; border: 1px solid #4a2a2a; }
+  .concert-card.error::after {
+    content: '⚠️'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 24px; opacity: 0.5;
+  }
+
+  /* Lightbox (vertical scroll) */
+  .concert-lightbox {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.9); z-index:2147483647 !important; padding:24px;
+    backdrop-filter: blur(8px);
+  }
+  .concert-lightbox.is-open { display:flex }
+  .cl-dialog { position:relative; max-width:95vw; max-height:92vh; overflow:auto; background:transparent; outline:none }
+  .cl-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; padding-right:12px }
+  .cl-gallery img {
+    max-width:92vw; max-height:82vh; width:auto; height:auto; scroll-snap-align:center; 
+    border-radius:14px; margin:0 auto; transition:opacity 0.3s ease;
+  }
+  .cl-gallery img.loading { opacity: 0.7; }
+  .cl-gallery img.loaded { opacity: 1; }
+  .cl-caption { text-align:center; color:#fff; margin-top:14px }
+  .cl-title { margin:0 0 6px; font:800 20px/1.25 ui-sans-serif,system-ui }
+  .cl-meta { margin:0 0 10px; color:#cfcfcf; font:600 12px/1.3 ui-sans-serif,system-ui }
+  .cl-close { 
+    position: absolute; 
+    top: 15px; 
+    right: 15px; 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    background: rgba(0, 0, 0, 0.8); 
+    color: rgba(255, 255, 255, 0.9); 
+    border-radius: 50%; 
+    width: 36px;
+    height: 36px;
+    cursor: pointer; 
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
+  }
+  .cl-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    color: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+  }
+  .cl-hint { position:sticky; top:6px; align-self:center; background:rgba(0,0,0,.55); color:#fff; padding:6px 10px; border-radius:999px; font:600 12px/1 ui-sans-serif,system-ui; transition:opacity .4s ease }
+  .cl-hint.fade { opacity:0 }
+
+  /* Mobile responsiveness for close button */
+  @media (max-width: 768px) {
+    .cl-close {
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cl-close {
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+  }
+
+  /* While lightbox is open, prevent header intercepting clicks */
+  html.lb-open header,
+  html.lb-open .Header,
+  html.lb-open [id*="Header"],
+  html.lb-open .site-header,
+  html.lb-open .sqs-announcement-bar { pointer-events:none; }
+
+  /* Hide debug elements on mobile */
+  @media (max-width: 768px) {
+    .debug-toggle,
+    .debug-info {
+      display: none;
+    }
+  }
+</style>
+
+<div class="concert-portfolio" id="concertPf" data-panes="12">
+  <h2 class="concert-heading">Concert Portfolio</h2>
+  
+  <div class="concert-loading" id="concertLoading">
+    <div class="concert-spinner"></div>
+    Loading concerts...
+  </div>
+  <div class="concert-grid" id="concertGrid"></div>
+</div>
+
+<div class="concert-lightbox" id="concertLightbox" aria-hidden="true">
+  <div class="cl-dialog" role="dialog" aria-modal="true" aria-labelledby="clLbTitle" tabindex="-1">
+    <button class="cl-close" type="button" aria-label="Close">&times;</button>
+    <div class="cl-gallery" id="clGallery">
+      <div class="cl-hint">Scroll ↓</div>
+    </div>
+    <div class="cl-caption">
+      <h3 class="cl-title" id="clLbTitle"></h3>
+      <p class="cl-meta" id="clLbMeta"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Version indicator -->
+<div class="version-indicator">v4.1</div>
+<div class="auto-refresh-indicator" id="autoRefreshIndicator">Next refresh: --</div>
+
+<!-- Debug Toggle Button -->
+<button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
+
+<!-- Debug info panel -->
+<div class="debug-info" id="debugInfo">
+  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug v4.1</div>
+  <div>Status: <span id="debugStatus">Ready</span></div>
+  <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
+  <div>Concerts: <span id="debugConcertCount">--</span></div>
+  <div>Images: <span id="debugImageCount">--</span></div>
+  <div>API Calls: <span id="debugApiCalls">--</span></div>
+  <div>Last Refresh: <span id="debugLastRefresh">--</span></div>
+  <div>Auto-Refresh: <span id="debugAutoRefresh">Enabled</span></div>
+</div>
+
+<script>
+// Debug toggle functionality
+let debugActive = false;
+let debugMetrics = {
+  startTime: performance.now(),
+  apiCalls: 0,
+  concertCount: 0,
+  imageCount: 0,
+  lastRefresh: 'Never'
+};
+
+// Auto-refresh configuration - Simplified to 10 minutes
+const AUTO_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
+let autoRefreshTimer = null;
+
+function toggleDebug() {
+  debugActive = !debugActive;
+  const debugPanel = document.getElementById('debugInfo');
+  if (debugPanel) {
+    debugPanel.classList.toggle('active', debugActive);
+    if (debugActive) {
+      updateDebugMetrics();
+    }
+  }
+}
+
+function updateDebugMetrics() {
+  const loadTime = Math.round(performance.now() - debugMetrics.startTime);
+  document.getElementById('debugLoadTime').textContent = loadTime;
+  document.getElementById('debugConcertCount').textContent = debugMetrics.concertCount;
+  document.getElementById('debugImageCount').textContent = debugMetrics.imageCount;
+  document.getElementById('debugApiCalls').textContent = debugMetrics.apiCalls;
+  document.getElementById('debugLastRefresh').textContent = debugMetrics.lastRefresh;
+}
+
+function updateNextRefreshIndicator() {
+  const indicator = document.getElementById('autoRefreshIndicator');
+  if (!indicator) return;
+  
+  let timeLeft = AUTO_REFRESH_INTERVAL;
+  
+  const updateCountdown = () => {
+    const minutes = Math.floor(timeLeft / 60000);
+    const seconds = Math.floor((timeLeft % 60000) / 1000);
+    indicator.textContent = `Next refresh: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (timeLeft > 0) {
+      timeLeft -= 1000;
+      setTimeout(updateCountdown, 1000);
+    }
+  };
+  
+  updateCountdown();
+}
+
+(function() {
+  const pf = document.getElementById('concertPf');
+  const grid = document.getElementById('concertGrid');
+  const loading = document.getElementById('concertLoading');
+  const debugStatus = document.getElementById('debugStatus');
+  
+  if (!grid) return;
+
+  const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
+  
+  // Debug logging
+  function logDebug(message, data = null) {
+    if (debugActive) {
+      console.log(`[Concert Debug v4.1] ${message}`, data || '');
+      if (debugStatus) {
+        debugStatus.textContent = message;
+        updateDebugMetrics();
+      }
+    }
+  }
+
+  // GitHub configuration - STABLE APPROACH
+  const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main' };
+  const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+  const manifestUrl = rawBase + 'images/Portfolios/Concert/concert-manifest.json';
+
+  function rawUrl(parts) { 
+    return rawBase + 'images/Portfolios/Concert/' + parts.map(encodeURIComponent).join('/'); 
+  }
+
+  // Load master manifest - SINGLE API CALL!
+  async function loadMasterManifest() {
+    debugMetrics.apiCalls++;
+    logDebug('Loading master manifest...');
+    
+    try {
+      const response = await fetch(manifestUrl);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const manifest = await response.json();
+      logDebug('Master manifest loaded', `${manifest.bands?.length || 0} bands (Generated: ${manifest.generated})`);
+      
+      debugMetrics.lastRefresh = new Date().toLocaleTimeString();
+      return manifest;
+    } catch (error) {
+      logDebug('Master manifest failed', error.message);
+      throw error;
+    }
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Main build function with stable error handling
+  async function build() {
+    const startTime = performance.now();
+    
+    try {
+      loading.style.display = 'flex';
+      grid.style.display = 'none';
+
+      logDebug('Starting build process...');
+
+      // Load master manifest - ONLY ONE API CALL!
+      const manifest = await loadMasterManifest();
+      
+      if (!manifest || !manifest.bands || manifest.bands.length === 0) {
+        throw new Error('No concert data found in manifest.');
+      }
+
+      logDebug(`Loaded ${manifest.bands.length} bands from manifest (Generated: ${manifest.generated})`);
+      
+      const pools = [];
+      
+      // Process bands from manifest
+      for (const band of manifest.bands) {
+        const images = shuffle(band.images.slice());
+        pools.push({
+          dir: band.folderPath,
+          parts: band.folderPath.split('/'),
+          title: band.bandName,
+          dateDisplay: band.dateDisplay,
+          images,
+          allImages: band.images.slice()
+        });
+        logDebug(`Added pool for ${band.bandName}`, `${images.length} images, date: ${band.dateDisplay}`);
+      }
+
+      debugMetrics.concertCount = pools.length;
+      logDebug(`Created ${pools.length} image pools`);
+
+      if (!pools.length) {
+        throw new Error('No concert images available from manifest.');
+      }
+
+      // Clear existing grid
+      grid.innerHTML = '';
+
+      // Create cards with round-robin
+      const slots = [];
+      let progress = true;
+      while (slots.length < TARGET_PANES && progress) {
+        progress = false;
+        for (const pool of pools) {
+          if (slots.length >= TARGET_PANES) break;
+          const fname = pool.images.shift();
+          if (fname) {
+            slots.push({
+              dir: pool.dir,
+              parts: pool.parts,
+              title: pool.title,
+              dateDisplay: pool.dateDisplay,
+              thumb: fname,
+              allImages: pool.allImages
+            });
+            progress = true;
+          }
+        }
+      }
+
+      debugMetrics.imageCount = slots.length;
+      logDebug(`Created ${slots.length} image slots`);
+
+      // Render cards
+      const fragment = document.createDocumentFragment();
+      const cards = [];
+
+      for (let i = 0; i < slots.length; i++) {
+        const slot = slots[i];
+        const card = document.createElement('article');
+        card.className = 'concert-card loading';
+        card.tabIndex = 0;
+        card.dataset.dir = slot.dir;
+
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = `${slot.title} concert photo`;
+
+        const info = document.createElement('div');
+        info.className = 'concert-info';
+        info.innerHTML = `
+          <h3 class="concert-title">${slot.title}</h3>
+          <p class="concert-meta">${slot.dateDisplay}</p>
+        `;
+
+        card.appendChild(img);
+        card.appendChild(info);
+        fragment.appendChild(card);
+        
+        cards.push({ card, slot, img });
+        
+        // Add lightbox click handler
+        const openLightbox = () => {
+          openLB(card, slot.allImages, slot);
+        };
+        
+        card.addEventListener('click', openLightbox);
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox();
+          }
+        });
+      }
+
+      grid.appendChild(fragment);
+
+      // Load images progressively
+      cards.forEach(({ card, slot, img }, index) => {
+        setTimeout(() => {
+          loadCardImage({ card, slot, img });
+        }, index * 100);
+      });
+
+      // Show results
+      loading.style.display = 'none';
+      grid.style.display = 'block';
+      requestAnimationFrame(() => {
+        grid.classList.add('loaded');
+        animateCardsIn();
+      });
+
+      const loadTime = performance.now() - startTime;
+      logDebug(`Concert portfolio loaded successfully!`, `${Math.round(loadTime)}ms with ${debugMetrics.apiCalls} API call(s)`);
+
+    } catch (error) {
+      logDebug('Concert gallery failed', error.message);
+      console.error('Concert gallery failed:', error);
+      showError(`Error loading concerts: ${error.message}`);
+    }
+  }
+
+  async function loadCardImage({ card, slot, img }) {
+    try {
+      const src = rawUrl(slot.parts.concat([slot.thumb]));
+      await loadImageWithRetry(img, src, 2);
+      card.classList.remove('loading');
+      card.classList.add('loaded');
+    } catch (error) {
+      console.warn(`Failed to load image for ${slot.title}:`, error);
+      card.classList.remove('loading');
+      card.classList.add('error');
+    }
+  }
+
+  async function loadImageWithRetry(img, src, maxRetries = 2) {
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+      const tryLoad = () => {
+        const tempImg = new Image();
+        tempImg.onload = () => { 
+          img.src = src; 
+          resolve(); 
+        };
+        tempImg.onerror = () => {
+          attempts++;
+          if (attempts >= maxRetries) {
+            reject(new Error(`Failed to load after ${maxRetries} attempts`));
+          } else {
+            setTimeout(tryLoad, Math.pow(2, attempts) * 500);
+          }
+        };
+        tempImg.src = src + `?retry=${attempts}`;
+      };
+      tryLoad();
+    });
+  }
+
+  function animateCardsIn() {
+    const cards = grid.querySelectorAll('.concert-card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.classList.add('loaded');
+      }, index * 100);
+    });
+  }
+
+  function showError(message) {
+    loading.innerHTML = `
+      <div style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">⚠️</div>
+      <div style="margin-bottom: 12px;">${message}</div>
+      <div style="margin-top: 12px;">
+        <button onclick="window.location.reload()" style="background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+          Retry
+        </button>
+      </div>
+    `;
+    logDebug('ERROR', message);
+  }
+
+  // Auto-refresh functionality
+  function setupAutoRefresh() {
+    logDebug('Setting up auto-refresh', `Every ${AUTO_REFRESH_INTERVAL / 60000} minutes`);
+    
+    autoRefreshTimer = setInterval(() => {
+      logDebug('Auto-refreshing concert portfolio...');
+      build();
+      updateNextRefreshIndicator();
+    }, AUTO_REFRESH_INTERVAL);
+    
+    updateNextRefreshIndicator();
+  }
+
+  // Lightbox functionality
+  const lb = document.getElementById('concertLightbox');
+  const lbDialog = lb.querySelector('.cl-dialog');
+  const lbGallery = document.getElementById('clGallery');
+  const lbTitle = document.getElementById('clLbTitle');
+  const lbMeta = document.getElementById('clLbMeta');
+  const lbClose = lb.querySelector('.cl-close');
+
+  function openLB(card, imageNames, slot) {
+    const parts = card.dataset.dir.split('/').filter(Boolean);
+    const names = Array.isArray(imageNames) ? imageNames : [];
+    
+    lbGallery.innerHTML = '<div class="cl-hint">Scroll ↓</div>';
+    
+    for (const fname of names) {
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.alt = `Concert photo: ${fname}`;
+      img.src = rawUrl(parts.concat([fname])) + '?v=' + Date.now();
+      img.className = 'loading';
+      
+      img.addEventListener('load', () => {
+        img.classList.remove('loading');
+        img.classList.add('loaded');
+      });
+      
+      lbGallery.appendChild(img);
+    }
+    
+    lbTitle.textContent = slot?.title || 'Concert Photos';
+    lbMeta.textContent = `${slot?.dateDisplay || 'Live'} • ${names.length} photos`;
+    
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('lb-open');
+    lbDialog.focus();
+    
+    // Fade hint after delay
+    const hint = lbGallery.querySelector('.cl-hint');
+    if (hint && names.length > 1) {
+      setTimeout(() => hint.classList.add('fade'), 3000);
+    }
+  }
+
+  function closeLB() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('lb-open');
+  }
+
+  // Lightbox event handlers
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+  
+  document.addEventListener('keydown', e => {
+    if (lb.classList.contains('is-open') && e.key === 'Escape') {
+      e.preventDefault();
+      closeLB();
+    }
+  });
+
+  // Initialize
+  build().then(() => {
+    setupAutoRefresh();
+  }).catch(error => {
+    console.error('Failed to initialize concert portfolio:', error);
+    showError('Failed to load concert portfolio. Please try refreshing the page.');
+  });
+
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    if (autoRefreshTimer) {
+      clearInterval(autoRefreshTimer);
+    }
+    if (nextRefreshTimer) {
+      clearInterval(nextRefreshTimer);
+    }
+  });
+
+})();
+</script>

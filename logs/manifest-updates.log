@@ -1,0 +1,33 @@
+[2025-09-19T04:29:37.067Z] [INFO] 🚀 Starting automated manifest update
+
+[2025-09-19T04:29:37.072Z] [INFO] Starting manifest generation with args: --auto
+
+[2025-09-19T04:29:37.121Z] [INFO] Manifest generation completed successfully
+
+[2025-09-19T04:29:37.122Z] [INFO] 📊 Manifest update summary
+{
+  "processedCount": 3,
+  "totalCount": 3,
+  "enhancedCount": 3,
+  "directories": [
+    "The Book Club",
+    "Turtle Park",
+    "We Are All Made of Stardust"
+  ],
+  "timestamp": "2025-09-19T04:29:37.121Z"
+}
+
+[2025-09-19T04:29:37.122Z] [INFO] 💾 Summary saved to /Users/mccal/McCals-Website/logs/last-update-summary.json
+
+[2025-09-19T04:29:37.140Z] [INFO] Found 4 manifest changes
+[
+  " M \"images/Portfolios/Concert/Funky Lamp/manifest.json\"",
+  " M \"images/Portfolios/Concert/The Book Club/The Book Club/manifest.json\"",
+  " M \"images/Portfolios/Concert/Turtle Park/manifest.json\"",
+  " M \"images/Portfolios/Concert/We Are All Made of Stardust/manifest.json\""
+]
+
+[2025-09-19T04:29:37.140Z] [INFO] Would commit changes (auto-commit disabled for safety)
+
+[2025-09-19T04:29:37.140Z] [INFO] ✅ Automated manifest update completed in 73ms
+
