@@ -1,0 +1,118 @@
+{
+  "version": "1.0",
+  "generated": "2025-09-19T05:30:34.216Z",
+  "totalBands": 4,
+  "bands": [
+    {
+      "bandName": "The Book Club",
+      "folderPath": "The Book Club/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 23,
+      "images": [
+        "250829_Haven_CAL4584.jpg",
+        "250829_Haven_CAL4587.jpg",
+        "250829_Haven_CAL4588.jpg",
+        "250829_Haven_CAL4607.jpg",
+        "250829_Haven_CAL4610.jpg",
+        "250829_Haven_CAL4634.jpg",
+        "250829_Haven_CAL4640.jpg",
+        "250829_Haven_CAL4649.jpg",
+        "250829_Haven_CAL4652.jpg",
+        "250829_Haven_CAL4659.jpg",
+        "250829_Haven_CAL4667.jpg",
+        "250829_Haven_CAL4670.jpg",
+        "250829_Haven_CAL4677.jpg",
+        "250829_Haven_CAL4678.jpg",
+        "250829_Haven_CAL4691.jpg",
+        "250829_Haven_CAL4694.jpg",
+        "250829_Haven_CAL4700.jpg",
+        "250829_Haven_CAL4701.jpg",
+        "250829_Haven_CAL4709.jpg",
+        "250829_Haven_CAL4712.jpg",
+        "250829_Haven_CAL4730.jpg",
+        "250829_Haven_CAL4742.jpg",
+        "250829_Haven_CAL4746.jpg"
+      ]
+    },
+    {
+      "bandName": "Turtle Park",
+      "folderPath": "Turtle Park/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 7,
+      "images": [
+        "250829_Haven_CAL4388.jpg",
+        "250829_Haven_CAL4401.jpg",
+        "250829_Haven_CAL4437.jpg",
+        "250829_Haven_CAL4482.jpg",
+        "250829_Haven_CAL4490.jpg",
+        "250829_Haven_CAL4543.jpg",
+        "250829_Haven_CAL4570.jpg"
+      ]
+    },
+    {
+      "bandName": "We Are All Made of Stardust",
+      "folderPath": "We Are All Made of Stardust/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 5,
+      "images": [
+        "250829_Haven_CAL4356.jpg",
+        "250829_Haven_CAL4363.jpg",
+        "250829_Haven_CAL4373.jpg",
+        "250829_Haven_CAL4376.jpg",
+        "250829_Haven_CAL4382.jpg"
+      ]
+    },
+    {
+      "bandName": "Funky Lamp",
+      "folderPath": "Funky Lamp/December 2024",
+      "dateDisplay": "December 2024",
+      "concertDate": {
+        "year": 2024,
+        "month": 12,
+        "monthName": "December",
+        "day": 13,
+        "iso": "2024-12-13",
+        "source": "filename_ddmmyy_special"
+      },
+      "totalImages": 12,
+      "images": [
+        "13-01-24_Black Lodge Music 183.jpg",
+        "13-01-24_Black Lodge Music 187.jpg",
+        "13-01-24_Black Lodge Music 217.jpg",
+        "13-01-24_Black Lodge Music 240.jpg",
+        "13-01-24_Black Lodge Music 312.jpg",
+        "13-01-24_Black Lodge Music 344.jpg",
+        "13-01-24_Black Lodge Music 356.jpg",
+        "13-01-24_Black Lodge Music 359.jpg",
+        "13-01-24_Black Lodge Music 373.jpg",
+        "13-01-24_Black Lodge Music 381.jpg",
+        "13-01-24_Black Lodge Music 388.jpg",
+        "13-01-24_Black Lodge Music 398 1.jpg"
+      ]
+    }
+  ]
+}

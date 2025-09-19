@@ -28,7 +28,10 @@
     "organize:concerts": "node scripts/auto-concert-organizer.js --auto",
     "organize:preview": "node scripts/auto-concert-organizer.js --auto --dry",
     "organize:folders": "node scripts/auto-concert-folder-organizer.js",
-    "organize:folders-preview": "node scripts/auto-concert-folder-organizer.js --dry-run"
+    "organize:folders-preview": "node scripts/auto-concert-folder-organizer.js --dry-run",
+    "manifest:concert": "node scripts/generate-concert-manifest.js",
+    "build:concert": "npm run organize:folders && npm run manifest:concert",
+    "watch:concert": "node scripts/watch-concert-folders.js"
   },
   "keywords": [
     "photography",
