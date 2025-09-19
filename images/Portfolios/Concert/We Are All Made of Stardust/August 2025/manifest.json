@@ -1,0 +1,42 @@
+{
+  "bandName": "We Are All Made of Stardust",
+  "folderName": "August 2025",
+  "dateDisplay": "August 2025",
+  "concertDate": {
+    "year": 2025,
+    "month": 8,
+    "monthName": "August",
+    "day": 1,
+    "iso": "2025-08-01"
+  },
+  "totalImages": 25,
+  "images": [
+    "250829_Haven_CAL4356.jpg",
+    "250829_Haven_CAL4356_med.jpg",
+    "250829_Haven_CAL4356_med.webp",
+    "250829_Haven_CAL4356_thumb.jpg",
+    "250829_Haven_CAL4356_thumb.webp",
+    "250829_Haven_CAL4363.jpg",
+    "250829_Haven_CAL4363_med.jpg",
+    "250829_Haven_CAL4363_med.webp",
+    "250829_Haven_CAL4363_thumb.jpg",
+    "250829_Haven_CAL4363_thumb.webp",
+    "250829_Haven_CAL4373.jpg",
+    "250829_Haven_CAL4373_med.jpg",
+    "250829_Haven_CAL4373_med.webp",
+    "250829_Haven_CAL4373_thumb.jpg",
+    "250829_Haven_CAL4373_thumb.webp",
+    "250829_Haven_CAL4376.jpg",
+    "250829_Haven_CAL4376_med.jpg",
+    "250829_Haven_CAL4376_med.webp",
+    "250829_Haven_CAL4376_thumb.jpg",
+    "250829_Haven_CAL4376_thumb.webp",
+    "250829_Haven_CAL4382.jpg",
+    "250829_Haven_CAL4382_med.jpg",
+    "250829_Haven_CAL4382_med.webp",
+    "250829_Haven_CAL4382_thumb.jpg",
+    "250829_Haven_CAL4382_thumb.webp"
+  ],
+  "generated": "2025-09-19T09:28:38.177Z",
+  "version": "1.0"
+}

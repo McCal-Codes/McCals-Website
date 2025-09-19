@@ -1,0 +1,678 @@
+<!-- Concert Portfolio v3.1 — Debug with Fixed Lightbox Close Button
+Author: Caleb McCartney / McCal-Codes
+Version: 3.1
+Purpose: Debug version with proper lightbox close button positioning
+
+Features:
+- Debug panel with performance metrics
+- Lightbox with properly positioned close button (on image frame, not viewport)
+- Click/keyboard navigation support
+- Mobile responsive design
+
+Usage: Paste this entire block into a Squarespace Code Block
+GitHub Structure: images/Portfolios/Concert/[Band-Name]/[image files]
+-->
+
+<style>
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
+  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  .concert-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
+  .concert-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 18px }
+  
+  /* Loading states */
+  .concert-loading {
+    display: flex; align-items: center; justify-content: center; min-height: 200px;
+    font: 600 16px/1.4 ui-sans-serif,system-ui; color: var(--fg); opacity: 0.7;
+  }
+  .concert-spinner {
+    width: 20px; height: 20px; border: 2px solid var(--line); border-top: 2px solid var(--accent);
+    border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Debug Toggle Button */
+  .debug-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    font: 600 12px/1 ui-sans-serif,system-ui;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .debug-toggle:hover {
+    background: rgba(0,0,0,0.95);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    opacity: 0.9;
+  }
+
+  /* Debug info panel - compact style */
+  .debug-info {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font: 600 11px/1.3 ui-monospace,monospace;
+    z-index: 999;
+    max-width: 400px;
+    border: 1px solid var(--line);
+    display: none;
+    backdrop-filter: blur(10px);
+  }
+
+  .debug-info.active {
+    display: block;
+  }
+
+  /* Natural-height Masonry */
+  .concert-grid { 
+    column-width:320px; column-gap:20px; text-align:left; opacity:0; transition:opacity 0.5s ease;
+  }
+  .concert-grid.loaded { opacity: 1; }
+  @media (max-width:1024px) { .concert-grid { column-width:280px } }
+  @media (max-width:768px) { .concert-grid { column-width:240px } }
+  @media (max-width:520px) { .concert-grid { column-width:100% } }
+
+  .concert-card {
+    position:relative; display:inline-block; width:100%; margin:0 0 20px;
+    background:#111; border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+    opacity:0; transform:translateY(20px); transition:all 0.3s ease;
+  }
+  .concert-card.loaded { opacity: 1; transform: translateY(0); }
+  .concert-card img {
+    display:block; width:100%; height:auto; object-fit:contain; border-radius:inherit;
+    transition:transform .35s ease, filter .35s ease;
+  }
+  .concert-card:hover img { transform:scale(1.02); filter:contrast(1.08) saturate(1.08) }
+
+  .concert-info {
+    position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
+    padding:10px 14px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85)); color:#fff
+  }
+  .concert-title { margin:0; font:800 16px/1.2 ui-sans-serif,system-ui }
+  .concert-meta { margin:2px 0 0; font:600 12px/1.2 ui-sans-serif,system-ui; color:#e5e5e5 }
+
+  /* Loading states */
+  .concert-card.loading::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  
+  .concert-card.error { background: #2a1a1a; border: 1px solid #4a2a2a; }
+  .concert-card.error::after {
+    content: '⚠️'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 24px; opacity: 0.5;
+  }
+
+  /* Lightbox (vertical scroll) - Enhanced */
+  .concert-lightbox {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.9); z-index:2147483647 !important; padding:24px;
+    backdrop-filter: blur(8px);
+  }
+  .concert-lightbox.is-open { display:flex }
+  .cl-dialog { position:relative; max-width:95vw; max-height:92vh; overflow:auto; background:transparent; outline:none }
+  .cl-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; padding-right:12px }
+  .cl-gallery img {
+    max-width:92vw; max-height:82vh; width:auto; height:auto; scroll-snap-align:center; 
+    border-radius:14px; margin:0 auto; transition:opacity 0.3s ease;
+  }
+  .cl-gallery img.loading { opacity: 0.7; }
+  .cl-gallery img.loaded { opacity: 1; }
+  .cl-caption { text-align:center; color:#fff; margin-top:14px }
+  .cl-title { margin:0 0 6px; font:800 20px/1.25 ui-sans-serif,system-ui }
+  .cl-meta { margin:0 0 10px; color:#cfcfcf; font:600 12px/1.3 ui-sans-serif,system-ui }
+  .cl-close { 
+    position: absolute; 
+    top: 15px; 
+    right: 15px; 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    background: rgba(0, 0, 0, 0.8); 
+    color: rgba(255, 255, 255, 0.9); 
+    border-radius: 50%; 
+    width: 36px;
+    height: 36px;
+    cursor: pointer; 
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
+  }
+  .cl-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    color: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+  }
+  .cl-hint { position:sticky; top:6px; align-self:center; background:rgba(0,0,0,.55); color:#fff; padding:6px 10px; border-radius:999px; font:600 12px/1 ui-sans-serif,system-ui; transition:opacity .4s ease }
+  .cl-hint.fade { opacity:0 }
+
+  /* Mobile responsiveness for close button */
+  @media (max-width: 768px) {
+    .cl-close {
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cl-close {
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+  }
+
+  /* While lightbox is open, prevent header intercepting clicks */
+  html.lb-open header,
+  html.lb-open .Header,
+  html.lb-open [id*="Header"],
+  html.lb-open .site-header,
+  html.lb-open .sqs-announcement-bar { pointer-events:none; }
+
+  /* Hide debug elements on mobile */
+  @media (max-width: 768px) {
+    .debug-toggle,
+    .debug-info {
+      display: none;
+    }
+  }
+</style>
+
+<div class="concert-portfolio" id="concertPf" data-panes="12">
+  <h2 class="concert-heading">Concert Portfolio v3.1 (Debug)</h2>
+  
+  <div class="concert-loading" id="concertLoading">
+    <div class="concert-spinner"></div>
+    Loading concerts...
+  </div>
+  <div class="concert-grid" id="concertGrid"></div>
+</div>
+
+<div class="concert-lightbox" id="concertLightbox" aria-hidden="true">
+  <div class="cl-dialog" role="dialog" aria-modal="true" aria-labelledby="clLbTitle" tabindex="-1">
+    <button class="cl-close" type="button" aria-label="Close">&times;</button>
+    <div class="cl-gallery" id="clGallery">
+      <div class="cl-hint">Scroll ↓</div>
+    </div>
+    <div class="cl-caption">
+      <h3 class="cl-title" id="clLbTitle"></h3>
+      <p class="cl-meta" id="clLbMeta"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Debug Toggle Button -->
+<button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
+
+<!-- Debug info panel -->
+<div class="debug-info" id="debugInfo">
+  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug</div>
+  <div>Status: <span id="debugStatus">Ready</span></div>
+  <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
+  <div>Concerts: <span id="debugConcertCount">--</span></div>
+  <div>Images: <span id="debugImageCount">--</span></div>
+  <div>API Calls: <span id="debugApiCalls">--</span></div>
+</div>
+
+<script>
+// Debug toggle functionality
+let debugActive = false;
+let debugMetrics = {
+  startTime: performance.now(),
+  apiCalls: 0,
+  concertCount: 0,
+  imageCount: 0
+};
+
+function toggleDebug() {
+  debugActive = !debugActive;
+  const debugPanel = document.getElementById('debugInfo');
+  if (debugPanel) {
+    debugPanel.classList.toggle('active', debugActive);
+    if (debugActive) {
+      updateDebugMetrics();
+    }
+  }
+}
+
+function updateDebugMetrics() {
+  const loadTime = Math.round(performance.now() - debugMetrics.startTime);
+  document.getElementById('debugLoadTime').textContent = loadTime;
+  document.getElementById('debugConcertCount').textContent = debugMetrics.concertCount;
+  document.getElementById('debugImageCount').textContent = debugMetrics.imageCount;
+  document.getElementById('debugApiCalls').textContent = debugMetrics.apiCalls;
+}
+
+(function() {
+  const YEAR = new Date().getFullYear();
+  const pf = document.getElementById('concertPf');
+  const grid = document.getElementById('concertGrid');
+  const loading = document.getElementById('concertLoading');
+  const debugStatus = document.getElementById('debugStatus');
+  
+  if (!grid) return;
+
+  const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
+  
+  // Debug logging
+  function logDebug(message, data = null) {
+    if (debugActive) {
+      console.log(`[Concert Debug] ${message}`, data || '');
+      if (debugStatus) {
+        debugStatus.textContent = message;
+        updateDebugMetrics();
+      }
+    }
+  }
+
+  // GitHub API configuration
+  const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main', base:['images','Portfolios','Concert'] };
+  const EXT_RX = /\.(jpe?g|png|webp|gif)$/i;
+  const apiBase = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/`;
+  const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+
+  function apiUrl(parts) { return apiBase + parts.map(encodeURIComponent).join('/'); }
+  function rawUrl(parts) { return rawBase + parts.map(encodeURIComponent).join('/'); }
+
+  logDebug('API Base URL', apiBase);
+  logDebug('Raw Base URL', rawBase);
+  logDebug('Concert path', GH.base.join('/'));
+
+  // Enhanced HTTP requests
+  async function makeRequest(url, options = {}) {
+    debugMetrics.apiCalls++;
+    logDebug('Making request to', url);
+    
+    try {
+      const response = await fetch(url, { 
+        ...options, 
+        headers: { 'Accept': 'application/vnd.github+json', ...options.headers }
+      });
+      
+      logDebug(`Response status: ${response.status}`, response.statusText);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        logDebug('Error response body', errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+      
+      const result = await response.json();
+      logDebug('Response success', `${result.length || 0} items`);
+      return result;
+    } catch (error) {
+      logDebug('Request failed', error.message);
+      throw error;
+    }
+  }
+
+  async function ghList(parts) {
+    const url = apiUrl(parts);
+    return await makeRequest(url);
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function titleFromFolder(name) {
+    return decodeURIComponent(name).replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  // Process band albums
+  async function processBandAlbum(bandName) {
+    const band = GH.base.concat([bandName]);
+    logDebug(`Processing band: ${bandName}`, band.join('/'));
+    
+    try {
+      // Try direct files
+      const items = await ghList(band);
+      logDebug(`Found ${items.length} items in ${bandName}`);
+      
+      const files = items.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
+      logDebug(`Found ${files.length} image files`, files.slice(0, 3));
+      
+      if (files.length) {
+        return { parts: band, list: files };
+      }
+
+      // Try subfolders
+      const subs = items.filter(it => it.type === 'dir');
+      logDebug(`Found ${subs.length} subdirectories`, subs.map(s => s.name));
+      
+      for (const sub of subs.slice(0, 3)) { // Limit subfolder checking
+        try {
+          const subParts = band.concat([sub.name]);
+          const subItems = await ghList(subParts);
+          const subFiles = subItems.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
+          
+          if (subFiles.length > 0) {
+            logDebug(`Found ${subFiles.length} images in subfolder ${sub.name}`);
+            return { parts: subParts, list: subFiles };
+          }
+        } catch (subError) {
+          logDebug(`Subfolder ${sub.name} failed`, subError.message);
+        }
+      }
+    } catch (error) {
+      logDebug(`Failed to process ${bandName}`, error.message);
+    }
+    return null;
+  }
+
+  // Main build function
+  async function build() {
+    const startTime = performance.now();
+    
+    try {
+      loading.style.display = 'flex';
+      grid.style.display = 'none';
+
+      logDebug('Starting build process...');
+
+      // Fetch band list
+      logDebug('Fetching band list from GitHub...');
+      const entries = await ghList(GH.base);
+      const bands = entries.filter(it => it.type === 'dir').map(it => it.name);
+      
+      logDebug(`Found ${bands.length} bands`, bands.slice(0, 5));
+      
+      if (!bands.length) {
+        showError('No concert directories found.');
+        return;
+      }
+
+      // Process bands in batches - limit for debugging
+      const shuffledBands = shuffle(bands).slice(0, Math.min(6, bands.length));
+      logDebug(`Processing ${shuffledBands.length} bands for debugging`, shuffledBands);
+      
+      const pools = [];
+      
+      for (const band of shuffledBands) {
+        try {
+          const result = await processBandAlbum(band);
+          if (result && result.list.length > 0) {
+            const images = shuffle(result.list.slice());
+            pools.push({
+              dir: result.parts.join('/'),
+              parts: result.parts,
+              title: titleFromFolder(band),
+              images,
+              allImages: result.list.slice()
+            });
+            logDebug(`Added pool for ${band}`, `${images.length} images`);
+          }
+        } catch (error) {
+          logDebug(`Failed to process band ${band}`, error.message);
+        }
+      }
+
+      debugMetrics.concertCount = pools.length;
+      logDebug(`Created ${pools.length} image pools`);
+
+      if (!pools.length) {
+        showError('No concert images available after processing bands.');
+        return;
+      }
+
+      // Create cards with round-robin
+      const slots = [];
+      let progress = true;
+      while (slots.length < TARGET_PANES && progress) {
+        progress = false;
+        for (const pool of pools) {
+          if (slots.length >= TARGET_PANES) break;
+          const fname = pool.images.shift();
+          if (fname) {
+            slots.push({
+              dir: pool.dir,
+              parts: pool.parts,
+              title: pool.title,
+              thumb: fname,
+              allImages: pool.allImages
+            });
+            progress = true;
+          }
+        }
+      }
+
+      debugMetrics.imageCount = slots.length;
+      logDebug(`Created ${slots.length} image slots`);
+
+      // Render cards
+      const fragment = document.createDocumentFragment();
+      const cards = [];
+
+      for (let i = 0; i < slots.length; i++) {
+        const slot = slots[i];
+        const card = document.createElement('article');
+        card.className = 'concert-card loading';
+        card.tabIndex = 0;
+        card.dataset.dir = slot.dir;
+
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = `${slot.title} concert photo`;
+
+        const info = document.createElement('div');
+        info.className = 'concert-info';
+        info.innerHTML = `
+          <h3 class="concert-title">${slot.title}</h3>
+          <p class="concert-meta">Live • ${YEAR}</p>
+        `;
+
+        card.appendChild(img);
+        card.appendChild(info);
+        fragment.appendChild(card);
+        
+        cards.push({ card, slot, img });
+        
+        // Add lightbox click handler
+        const openLightbox = () => {
+          openLB(card, slot.allImages);
+        };
+        
+        card.addEventListener('click', openLightbox);
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox();
+          }
+        });
+      }
+
+      grid.appendChild(fragment);
+
+      // Load images progressively
+      cards.forEach(({ card, slot, img }, index) => {
+        setTimeout(() => {
+          loadCardImage({ card, slot, img });
+        }, index * 100);
+      });
+
+      // Show results
+      loading.style.display = 'none';
+      grid.style.display = 'block';
+      requestAnimationFrame(() => {
+        grid.classList.add('loaded');
+        animateCardsIn();
+      });
+
+      const loadTime = performance.now() - startTime;
+      logDebug(`Concert portfolio loaded successfully!`, `${Math.round(loadTime)}ms`);
+
+    } catch (error) {
+      logDebug('Concert gallery failed', error.message);
+      console.error('Concert gallery failed:', error);
+      showError(`Error loading concerts: ${error.message}`);
+    }
+  }
+
+  async function loadCardImage({ card, slot, img }) {
+    try {
+      const src = rawUrl(slot.parts.concat([slot.thumb]));
+      await loadImageWithRetry(img, src, 2);
+      card.classList.remove('loading');
+      card.classList.add('loaded');
+    } catch (error) {
+      console.warn(`Failed to load image for ${slot.title}:`, error);
+      card.classList.remove('loading');
+      card.classList.add('error');
+    }
+  }
+
+  async function loadImageWithRetry(img, src, maxRetries = 2) {
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+      const tryLoad = () => {
+        const tempImg = new Image();
+        tempImg.onload = () => { img.src = src; resolve(); };
+        tempImg.onerror = () => {
+          attempts++;
+          if (attempts >= maxRetries) {
+            reject(new Error(`Failed to load after ${maxRetries} attempts`));
+          } else {
+            setTimeout(tryLoad, Math.pow(2, attempts) * 500);
+          }
+        };
+        tempImg.src = src + `?retry=${attempts}`;
+      };
+      tryLoad();
+    });
+  }
+
+  function animateCardsIn() {
+    const cards = grid.querySelectorAll('.concert-card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.classList.add('loaded');
+      }, index * 100);
+    });
+  }
+
+  function showError(message) {
+    loading.innerHTML = `
+      <div style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">⚠️</div>
+      <div>${message}</div>
+    `;
+    logDebug('ERROR', message);
+  }
+
+  // Lightbox functionality
+  const lb = document.getElementById('concertLightbox');
+  const lbDialog = lb.querySelector('.cl-dialog');
+  const lbGallery = document.getElementById('clGallery');
+  const lbTitle = document.getElementById('clLbTitle');
+  const lbMeta = document.getElementById('clLbMeta');
+  const lbClose = lb.querySelector('.cl-close');
+
+  function openLB(card, imageNames) {
+    const parts = card.dataset.dir.split('/').filter(Boolean);
+    const names = Array.isArray(imageNames) ? imageNames : [];
+    
+    lbGallery.innerHTML = '<div class="cl-hint">Scroll ↓</div>';
+    
+    for (const fname of names) {
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.alt = `Concert photo: ${fname}`;
+      img.src = rawUrl(parts.concat([fname])) + '?v=' + Date.now();
+      lbGallery.appendChild(img);
+    }
+    
+    lbTitle.textContent = titleFromFolder(parts[parts.length - 1]);
+    lbMeta.textContent = `Live • ${new Date().getFullYear()}`;
+    
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.documentElement.classList.add('lb-open');
+    setTimeout(() => lbDialog.focus(), 0);
+    
+    logDebug(`Opened lightbox with ${names.length} images`);
+  }
+
+  function closeLB() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.documentElement.classList.remove('lb-open');
+    lbGallery.innerHTML = '';
+    logDebug('Closed lightbox');
+  }
+
+  // Lightbox event handlers
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', e => {
+    if (lb.classList.contains('is-open') && e.key === 'Escape') closeLB();
+  });
+
+  // Lightbox scroll hint + navigation
+  (function setupLightboxControls() {
+    const scroller = lbGallery;
+    
+    const hideHint = () => {
+      const hint = scroller.querySelector('.cl-hint');
+      if (hint) hint.classList.add('fade');
+      scroller.removeEventListener('scroll', hideHint);
+    };
+    
+    scroller.addEventListener('scroll', hideHint, { passive: true });
+    
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('is-open')) return;
+      
+      const step = Math.round(window.innerHeight * 0.9);
+      if (e.key === 'ArrowDown' || e.key === 'j') {
+        e.preventDefault();
+        scroller.scrollBy({ top: step, behavior: 'smooth' });
+      }
+      if (e.key === 'ArrowUp' || e.key === 'k') {
+        e.preventDefault();
+        scroller.scrollBy({ top: -step, behavior: 'smooth' });
+      }
+    });
+  })();
+
+  // Initialize
+  logDebug('Initializing concert portfolio...');
+  build().catch(err => {
+    console.error('Concert portfolio failed:', err);
+    showError(`Failed to initialize portfolio: ${err.message}`);
+  });
+
+})();
+</script>

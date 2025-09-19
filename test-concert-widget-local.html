@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Portfolio Test (Local Files)</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: #111; 
+            color: #fff; 
+        }
+        .test-info {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h1>🎸 Concert Portfolio Widget Test (Local Files)</h1>
+        <p><strong>Note:</strong> This version uses local files instead of GitHub API.</p>
+        <p><strong>Open in browser:</strong> <code>file:///Users/mccal/McCals-Website/test-concert-widget-local.html</code></p>
+        <p><strong>Check console</strong> (F12) for debug information and any errors.</p>
+    </div>
+
+    <!-- Concert Portfolio Widget - Local Version -->
+    <style>
+      :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
+      @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+      .concert-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
+      .concert-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 18px }
+      
+      /* Loading states */
+      .concert-loading {
+        display: flex; align-items: center; justify-content: center; min-height: 200px;
+        font: 600 16px/1.4 ui-sans-serif,system-ui; color: var(--fg); opacity: 0.7;
+      }
+      .concert-spinner {
+        width: 20px; height: 20px; border: 2px solid var(--line); border-top: 2px solid var(--accent);
+        border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px;
+      }
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+      /* Debug info panel */
+      .debug-info {
+        background: rgba(0,0,0,0.85);
+        color: #fff;
+        padding: 12px 16px;
+        border-radius: 6px;
+        font: 600 11px/1.3 ui-monospace,monospace;
+        max-width: 600px;
+        margin: 20px auto;
+        border: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+      }
+
+      /* Natural-height Masonry */
+      .concert-grid { 
+        column-width:320px; column-gap:20px; text-align:left; opacity:0; transition:opacity 0.5s ease;
+      }
+      .concert-grid.loaded { opacity: 1; }
+      @media (max-width:1024px) { .concert-grid { column-width:280px } }
+      @media (max-width:768px) { .concert-grid { column-width:240px } }
+      @media (max-width:520px) { .concert-grid { column-width:100% } }
+
+      .concert-card {
+        position:relative; display:inline-block; width:100%; margin:0 0 20px;
+        background:#111; border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+        opacity:0; transform:translateY(20px); transition:all 0.3s ease;
+      }
+      .concert-card.loaded { opacity: 1; transform: translateY(0); }
+      .concert-card img {
+        display:block; width:100%; height:auto; object-fit:contain; border-radius:inherit;
+        transition:transform .35s ease, filter .35s ease;
+      }
+      .concert-card:hover img { transform:scale(1.02); filter:contrast(1.08) saturate(1.08) }
+
+      .concert-info {
+        position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
+        padding:10px 14px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85)); color:#fff
+      }
+      .concert-title { margin:0; font:800 16px/1.2 ui-sans-serif,system-ui }
+      .concert-meta { margin:2px 0 0; font:600 12px/1.2 ui-sans-serif,system-ui; color:#e5e5e5 }
+
+      /* Loading states */
+      .concert-card.loading::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: shimmer 1.5s infinite;
+      }
+      @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+      
+      .concert-card.error { background: #2a1a1a; border: 1px solid #4a2a2a; }
+      .concert-card.error::after {
+        content: '⚠️'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        font-size: 24px; opacity: 0.5;
+      }
+
+      /* Error display */
+      .error-display {
+        background: #2a1a1a;
+        border: 1px solid #4a2a2a;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px;
+        text-align: center;
+      }
+    </style>
+
+    <div class="concert-portfolio" id="concertPf" data-panes="12">
+      <h2 class="concert-heading">Concert Portfolio (Local Test)</h2>
+      
+      <div class="concert-loading" id="concertLoading">
+        <div class="concert-spinner"></div>
+        Loading concerts...
+      </div>
+      <div class="concert-grid" id="concertGrid"></div>
+      
+      <!-- Debug info panel -->
+      <div class="debug-info" id="debugInfo">
+        <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug (Local Files)</div>
+        <div>Status: <span id="debugStatus">Initializing...</span></div>
+        <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
+        <div>Concerts: <span id="debugConcertCount">--</span></div>
+        <div>Images: <span id="debugImageCount">--</span></div>
+        <div>Source: <span id="debugSource">Local embedded manifest</span></div>
+        <div>Last Error: <span id="debugLastError">None</span></div>
+      </div>
+    </div>
+
+    <script>
+    // Embedded manifest data (from your local file)
+    const localManifest = {
+      "version": "1.0",
+      "generated": "2025-09-19T07:15:47.093Z",
+      "totalBands": 10,
+      "bands": [
+        {
+          "bandName": "Big Slime",
+          "folderPath": "Big Slime/August 2025",
+          "dateDisplay": "August 2025",
+          "concertDate": {
+            "year": 2025,
+            "month": 8,
+            "monthName": "August",
+            "day": 1,
+            "iso": "2025-08-01"
+          },
+          "totalImages": 12,
+          "images": [
+            "250820_Haven Block Party_CAL3068.jpg",
+            "250820_Haven Block Party_CAL3110.jpg",
+            "250820_Haven Block Party_CAL3152.jpg",
+            "250820_Haven Block Party_CAL3154.jpg",
+            "250820_Haven Block Party_CAL3200.jpg",
+            "250820_Haven Block Party_CAL3236.jpg",
+            "250820_Haven Block Party_CAL3253.jpg",
+            "250820_Haven Block Party_CAL3255.jpg",
+            "250820_Haven Block Party_CAL3269.jpg",
+            "250820_Haven Block Party_CAL3277.jpg",
+            "250820_Haven Block Party_CAL3281.jpg",
+            "250820_Haven Block Party_CAL3286.jpg"
+          ]
+        },
+        {
+          "bandName": "Casino Six",
+          "folderPath": "Casino Six/August 2025",
+          "dateDisplay": "August 2025",
+          "concertDate": {
+            "year": 2025,
+            "month": 8,
+            "monthName": "August",
+            "day": 1,
+            "iso": "2025-08-01"
+          },
+          "totalImages": 15,
+          "images": [
+            "250820_Haven Block Party_CAL3301.jpg",
+            "250820_Haven Block Party_CAL3304.jpg",
+            "250820_Haven Block Party_CAL3315.jpg",
+            "250820_Haven Block Party_CAL3351.jpg",
+            "250820_Haven Block Party_CAL3364.jpg",
+            "250820_Haven Block Party_CAL3379.jpg",
+            "250820_Haven Block Party_CAL3381.jpg",
+            "250820_Haven Block Party_CAL3390.jpg",
+            "250820_Haven Block Party_CAL3405.jpg",
+            "250820_Haven Block Party_CAL3408.jpg",
+            "250820_Haven Block Party_CAL3411.jpg",
+            "250820_Haven Block Party_CAL3425.jpg",
+            "250820_Haven Block Party_CAL3429.jpg",
+            "250820_Haven Block Party_CAL3443.jpg",
+            "250820_Haven Block Party_CAL3493.jpg"
+          ]
+        },
+        {
+          "bandName": "The Book Club",
+          "folderPath": "The Book Club/August 2025",
+          "dateDisplay": "August 2025",
+          "concertDate": {
+            "year": 2025,
+            "month": 8,
+            "monthName": "August",
+            "day": 1,
+            "iso": "2025-08-01"
+          },
+          "totalImages": 23,
+          "images": [
+            "250829_Haven_CAL4584.jpg",
+            "250829_Haven_CAL4587.jpg",
+            "250829_Haven_CAL4588.jpg",
+            "250829_Haven_CAL4607.jpg",
+            "250829_Haven_CAL4610.jpg",
+            "250829_Haven_CAL4634.jpg",
+            "250829_Haven_CAL4640.jpg",
+            "250829_Haven_CAL4649.jpg",
+            "250829_Haven_CAL4652.jpg",
+            "250829_Haven_CAL4659.jpg",
+            "250829_Haven_CAL4667.jpg",
+            "250829_Haven_CAL4670.jpg",
+            "250829_Haven_CAL4677.jpg",
+            "250829_Haven_CAL4678.jpg",
+            "250829_Haven_CAL4691.jpg",
+            "250829_Haven_CAL4694.jpg",
+            "250829_Haven_CAL4700.jpg",
+            "250829_Haven_CAL4701.jpg",
+            "250829_Haven_CAL4709.jpg",
+            "250829_Haven_CAL4712.jpg",
+            "250829_Haven_CAL4730.jpg",
+            "250829_Haven_CAL4742.jpg",
+            "250829_Haven_CAL4746.jpg"
+          ]
+        },
+        {
+          "bandName": "The Head Trips",
+          "folderPath": "The Head Trips/August 2025",
+          "dateDisplay": "August 2025",
+          "concertDate": {
+            "year": 2025,
+            "month": 8,
+            "monthName": "August",
+            "day": 1,
+            "iso": "2025-08-01"
+          },
+          "totalImages": 9,
+          "images": [
+            "250820_Haven Block Party_CAL2893.jpg",
+            "250820_Haven Block Party_CAL2906.jpg",
+            "250820_Haven Block Party_CAL2911.jpg",
+            "250820_Haven Block Party_CAL2916.jpg",
+            "250820_Haven Block Party_CAL2918.jpg",
+            "250820_Haven Block Party_CAL2920.jpg",
+            "250820_Haven Block Party_CAL2925.jpg",
+            "250820_Haven Block Party_CAL2937.jpg",
+            "250820_Haven Block Party_CAL2946.jpg"
+          ]
+        },
+        {
+          "bandName": "Turtle Park",
+          "folderPath": "Turtle Park/August 2025",
+          "dateDisplay": "August 2025",
+          "concertDate": {
+            "year": 2025,
+            "month": 8,
+            "monthName": "August",
+            "day": 1,
+            "iso": "2025-08-01"
+          },
+          "totalImages": 7,
+          "images": [
+            "250829_Haven_CAL4388.jpg",
+            "250829_Haven_CAL4401.jpg",
+            "250829_Haven_CAL4437.jpg",
+            "250829_Haven_CAL4482.jpg",
+            "250829_Haven_CAL4490.jpg",
+            "250829_Haven_CAL4543.jpg",
+            "250829_Haven_CAL4570.jpg"
+          ]
+        },
+        {
+          "bandName": "We Are All Made of Stardust",
+          "folderPath": "We Are All Made of Stardust/August 2025",
+          "dateDisplay": "August 2025",
+          "concertDate": {
+            "year": 2025,
+            "month": 8,
+            "monthName": "August",
+            "day": 1,
+            "iso": "2025-08-01"
+          },
+          "totalImages": 5,
+          "images": [
+            "250829_Haven_CAL4356.jpg",
+            "250829_Haven_CAL4363.jpg",
+            "250829_Haven_CAL4373.jpg",
+            "250829_Haven_CAL4376.jpg",
+            "250829_Haven_CAL4382.jpg"
+          ]
+        },
+        {
+          "bandName": "Wild Blue Yonder",
+          "folderPath": "Wild Blue Yonder/August 2025",
+          "dateDisplay": "August 2025",
+          "concertDate": {
+            "year": 2025,
+            "month": 8,
+            "monthName": "August",
+            "day": 1,
+            "iso": "2025-08-01"
+          },
+          "totalImages": 19,
+          "images": [
+            "250820_Haven Block Party_CAL3635.jpg",
+            "250820_Haven Block Party_CAL3665.jpg",
+            "250820_Haven Block Party_CAL3667.jpg",
+            "250820_Haven Block Party_CAL3671.jpg",
+            "250820_Haven Block Party_CAL3673.jpg",
+            "250820_Haven Block Party_CAL3674.jpg",
+            "250820_Haven Block Party_CAL3680 1.jpg",
+            "250820_Haven Block Party_CAL3680.jpg",
+            "250820_Haven Block Party_CAL3687 1.jpg",
+            "250820_Haven Block Party_CAL3687.jpg",
+            "250820_Haven Block Party_CAL3698.jpg",
+            "250820_Haven Block Party_CAL3706.jpg",
+            "250820_Haven Block Party_CAL3719.jpg",
+            "250820_Haven Block Party_CAL3720.jpg",
+            "250820_Haven Block Party_CAL3721.jpg",
+            "250820_Haven Block Party_CAL3731.jpg",
+            "250820_Haven Block Party_CAL3735.jpg",
+            "250820_Haven Block Party_CAL3739.jpg",
+            "250820_Haven Block Party_CAL3767.jpg"
+          ]
+        },
+        {
+          "bandName": "Funky Lamp",
+          "folderPath": "Funky Lamp/April 2024",
+          "dateDisplay": "April 2024",
+          "concertDate": {
+            "year": 2024,
+            "month": 4,
+            "monthName": "April",
+            "day": 1,
+            "iso": "2024-04-01"
+          },
+          "totalImages": 6,
+          "images": [
+            "2404_Funky Lamp Indie Fest_1548_CAL.jpg",
+            "2404_Funky Lamp Indie Fest_1558_CAL.jpg",
+            "2404_Funky Lamp Indie Fest_1563_CAL.jpg",
+            "2404_Funky Lamp Indie Fest_1567_CAL.jpg",
+            "2404_Funky Lamp Indie Fest_1569_CAL.jpg",
+            "2404_Funky Lamp Indie Fest_1570_CAL.jpg"
+          ]
+        },
+        {
+          "bandName": "9 Fifty Seven",
+          "folderPath": "9 Fifty Seven/March 2024",
+          "dateDisplay": "March 2024",
+          "concertDate": {
+            "year": 2024,
+            "month": 3,
+            "monthName": "March",
+            "day": 1,
+            "iso": "2024-03-01"
+          },
+          "totalImages": 5,
+          "images": [
+            "240315_Genesis Volume 1_599.jpg",
+            "240315_Genesis Volume 1_600.jpg",
+            "240315_Genesis Volume 1_602.jpg",
+            "240315_Genesis Volume 1_603.jpg",
+            "240315_Genesis Volume 1_606.jpg"
+          ]
+        },
+        {
+          "bandName": "Heading North",
+          "folderPath": "Heading North/March 2024",
+          "dateDisplay": "March 2024",
+          "concertDate": {
+            "year": 2024,
+            "month": 3,
+            "monthName": "March",
+            "day": 1,
+            "iso": "2024-03-01"
+          },
+          "totalImages": 19,
+          "images": [
+            "240315_Genesis Volume 1_464.jpg",
+            "240315_Genesis Volume 1_466.jpg",
+            "240315_Genesis Volume 1_470.jpg",
+            "240315_Genesis Volume 1_488.jpg",
+            "240315_Genesis Volume 1_491.jpg",
+            "240315_Genesis Volume 1_497.jpg",
+            "240315_Genesis Volume 1_501.jpg",
+            "240315_Genesis Volume 1_502.jpg",
+            "240315_Genesis Volume 1_503.jpg",
+            "240315_Genesis Volume 1_507.jpg",
+            "240315_Genesis Volume 1_510.jpg",
+            "240315_Genesis Volume 1_511.jpg",
+            "240315_Genesis Volume 1_515.jpg",
+            "240315_Genesis Volume 1_520.jpg",
+            "240315_Genesis Volume 1_526.jpg",
+            "240315_Genesis Volume 1_530.jpg",
+            "240315_Genesis Volume 1_549.jpg",
+            "240315_Genesis Volume 1_556.jpg",
+            "240315_Genesis Volume 1_558.jpg"
+          ]
+        }
+      ]
+    };
+
+    // Debug metrics
+    let debugMetrics = {
+      startTime: performance.now(),
+      concertCount: 0,
+      imageCount: 0,
+      lastError: 'None'
+    };
+
+    function updateDebugMetrics() {
+      const loadTime = Math.round(performance.now() - debugMetrics.startTime);
+      document.getElementById('debugLoadTime').textContent = loadTime;
+      document.getElementById('debugConcertCount').textContent = debugMetrics.concertCount;
+      document.getElementById('debugImageCount').textContent = debugMetrics.imageCount;
+      document.getElementById('debugLastError').textContent = debugMetrics.lastError;
+    }
+
+    (function() {
+      const pf = document.getElementById('concertPf');
+      const grid = document.getElementById('concertGrid');
+      const loading = document.getElementById('concertLoading');
+      const debugStatus = document.getElementById('debugStatus');
+      
+      if (!grid) return;
+
+      const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
+      
+      // Debug logging
+      function logDebug(message, data = null) {
+        console.log(`[Concert Debug] ${message}`, data || '');
+        if (debugStatus) {
+          debugStatus.textContent = message;
+          updateDebugMetrics();
+        }
+      }
+
+      // Local file URL builder
+      function localImageUrl(folderPath, filename) {
+        // Create file:// URL to local image
+        return `images/Portfolios/Concert/${folderPath}/${filename}`;
+      }
+
+      function shuffle(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      // Main build function
+      async function build() {
+        const startTime = performance.now();
+        
+        try {
+          loading.style.display = 'flex';
+          grid.style.display = 'none';
+
+          logDebug('Starting build process with local manifest...');
+
+          // Use embedded manifest data
+          const manifest = localManifest;
+          
+          if (!manifest || !manifest.bands || manifest.bands.length === 0) {
+            throw new Error('No concert data found in local manifest.');
+          }
+
+          logDebug(`Loaded ${manifest.bands.length} bands from local manifest`);
+          
+          const pools = [];
+          
+          // Process bands from manifest
+          for (const band of manifest.bands) {
+            const images = shuffle(band.images.slice());
+            pools.push({
+              dir: band.folderPath,
+              parts: band.folderPath.split('/'),
+              title: band.bandName,
+              dateDisplay: band.dateDisplay,
+              images,
+              allImages: band.images.slice()
+            });
+            logDebug(`Added pool for ${band.bandName}`, `${images.length} images, date: ${band.dateDisplay}`);
+          }
+
+          debugMetrics.concertCount = pools.length;
+          logDebug(`Created ${pools.length} image pools`);
+
+          if (!pools.length) {
+            throw new Error('No concert images available from manifest.');
+          }
+
+          // Clear existing grid
+          grid.innerHTML = '';
+
+          // Create cards with round-robin
+          const slots = [];
+          let progress = true;
+          while (slots.length < TARGET_PANES && progress) {
+            progress = false;
+            for (const pool of pools) {
+              if (slots.length >= TARGET_PANES) break;
+              const fname = pool.images.shift();
+              if (fname) {
+                slots.push({
+                  dir: pool.dir,
+                  parts: pool.parts,
+                  title: pool.title,
+                  dateDisplay: pool.dateDisplay,
+                  thumb: fname,
+                  allImages: pool.allImages
+                });
+                progress = true;
+              }
+            }
+          }
+
+          debugMetrics.imageCount = slots.length;
+          logDebug(`Created ${slots.length} image slots`);
+
+          // Render cards
+          const fragment = document.createDocumentFragment();
+          const cards = [];
+
+          for (let i = 0; i < slots.length; i++) {
+            const slot = slots[i];
+            const card = document.createElement('article');
+            card.className = 'concert-card loading';
+            card.tabIndex = 0;
+            card.dataset.dir = slot.dir;
+
+            const img = document.createElement('img');
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.alt = `${slot.title} concert photo`;
+
+            const info = document.createElement('div');
+            info.className = 'concert-info';
+            info.innerHTML = `
+              <h3 class="concert-title">${slot.title}</h3>
+              <p class="concert-meta">${slot.dateDisplay}</p>
+            `;
+
+            card.appendChild(img);
+            card.appendChild(info);
+            fragment.appendChild(card);
+            
+            cards.push({ card, slot, img });
+          }
+
+          grid.appendChild(fragment);
+
+          // Load images progressively
+          cards.forEach(({ card, slot, img }, index) => {
+            setTimeout(() => {
+              loadCardImage({ card, slot, img });
+            }, index * 100);
+          });
+
+          // Show results
+          loading.style.display = 'none';
+          grid.style.display = 'block';
+          requestAnimationFrame(() => {
+            grid.classList.add('loaded');
+            animateCardsIn();
+          });
+
+          const loadTime = performance.now() - startTime;
+          logDebug(`Concert portfolio loaded successfully!`, `${Math.round(loadTime)}ms`);
+
+        } catch (error) {
+          logDebug('Concert gallery failed', error.message);
+          console.error('Concert gallery failed:', error);
+          debugMetrics.lastError = error.message;
+          updateDebugMetrics();
+          showError(`Error loading concerts: ${error.message}`);
+        }
+      }
+
+      async function loadCardImage({ card, slot, img }) {
+        try {
+          const src = localImageUrl(slot.dir, slot.thumb);
+          logDebug(`Loading image: ${src}`);
+          
+          // Try to load the image
+          await loadImageWithTimeout(img, src, 5000);
+          card.classList.remove('loading');
+          card.classList.add('loaded');
+          
+        } catch (error) {
+          console.warn(`Failed to load image for ${slot.title}:`, error);
+          logDebug(`Image failed: ${slot.thumb} - ${error.message}`);
+          card.classList.remove('loading');
+          card.classList.add('error');
+          
+          // Add error details to the card
+          const errorInfo = document.createElement('div');
+          errorInfo.style.cssText = 'position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#ff4d6d; text-align:center; font-size:11px; font-weight:600;';
+          errorInfo.innerHTML = `Image not found:<br>${slot.thumb}`;
+          card.appendChild(errorInfo);
+        }
+      }
+
+      function loadImageWithTimeout(img, src, timeout = 5000) {
+        return new Promise((resolve, reject) => {
+          const timer = setTimeout(() => {
+            reject(new Error(`Image load timeout after ${timeout}ms`));
+          }, timeout);
+
+          const tempImg = new Image();
+          tempImg.onload = () => { 
+            clearTimeout(timer);
+            img.src = src; 
+            logDebug(`Image loaded: ${src}`);
+            resolve(); 
+          };
+          tempImg.onerror = () => {
+            clearTimeout(timer);
+            reject(new Error(`Image failed to load: ${src}`));
+          };
+          tempImg.src = src;
+        });
+      }
+
+      function animateCardsIn() {
+        const cards = grid.querySelectorAll('.concert-card');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            card.classList.add('loaded');
+          }, index * 100);
+        });
+      }
+
+      function showError(message) {
+        loading.innerHTML = `
+          <div class="error-display">
+            <div style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">⚠️</div>
+            <div style="margin-bottom: 12px;">${message}</div>
+            <div>Check the browser console (F12) for more details.</div>
+            <div style="margin-top: 12px;">
+              <button onclick="window.location.reload()" style="background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                Retry
+              </button>
+            </div>
+          </div>
+        `;
+        logDebug('ERROR', message);
+      }
+
+      // Initialize
+      logDebug('Initializing concert portfolio with local files...');
+      build().catch(error => {
+        console.error('Failed to initialize concert portfolio:', error);
+        showError('Failed to load concert portfolio. Check console for details.');
+      });
+
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+{
+  "version": "1.0",
+  "generated": "2025-09-19T06:36:31.766Z",
+  "totalPortfolios": 3,
+  "totalItems": 11,
+  "totalImages": 122,
+  "categories": [
+    "Concert Photography",
+    "Journalism"
+  ],
+  "portfolioSummary": {
+    "Concert": {
+      "count": 10,
+      "totalImages": 120
+    },
+    "Events": {
+      "count": 0,
+      "totalImages": 0
+    },
+    "Journalism": {
+      "count": 1,
+      "totalImages": 2
+    }
+  },
+  "items": [
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "The Book Club",
+      "folderPath": "Concert/The Book Club/August 2025",
+      "dateDisplay": "August 2025",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 23,
+      "images": [
+        "250829_Haven_CAL4584.jpg",
+        "250829_Haven_CAL4587.jpg",
+        "250829_Haven_CAL4588.jpg",
+        "250829_Haven_CAL4607.jpg",
+        "250829_Haven_CAL4610.jpg",
+        "250829_Haven_CAL4634.jpg",
+        "250829_Haven_CAL4640.jpg",
+        "250829_Haven_CAL4649.jpg",
+        "250829_Haven_CAL4652.jpg",
+        "250829_Haven_CAL4659.jpg",
+        "250829_Haven_CAL4667.jpg",
+        "250829_Haven_CAL4670.jpg",
+        "250829_Haven_CAL4677.jpg",
+        "250829_Haven_CAL4678.jpg",
+        "250829_Haven_CAL4691.jpg",
+        "250829_Haven_CAL4694.jpg",
+        "250829_Haven_CAL4700.jpg",
+        "250829_Haven_CAL4701.jpg",
+        "250829_Haven_CAL4709.jpg",
+        "250829_Haven_CAL4712.jpg",
+        "250829_Haven_CAL4730.jpg",
+        "250829_Haven_CAL4742.jpg",
+        "250829_Haven_CAL4746.jpg"
+      ],
+      "coverImage": "250829_Haven_CAL4584.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "Turtle Park",
+      "folderPath": "Concert/Turtle Park/August 2025",
+      "dateDisplay": "August 2025",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 7,
+      "images": [
+        "250829_Haven_CAL4388.jpg",
+        "250829_Haven_CAL4401.jpg",
+        "250829_Haven_CAL4437.jpg",
+        "250829_Haven_CAL4482.jpg",
+        "250829_Haven_CAL4490.jpg",
+        "250829_Haven_CAL4543.jpg",
+        "250829_Haven_CAL4570.jpg"
+      ],
+      "coverImage": "250829_Haven_CAL4388.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "We Are All Made Of Stardust",
+      "folderPath": "Concert/We Are All Made of Stardust/August 2025",
+      "dateDisplay": "August 2025",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 5,
+      "images": [
+        "250829_Haven_CAL4356.jpg",
+        "250829_Haven_CAL4363.jpg",
+        "250829_Haven_CAL4373.jpg",
+        "250829_Haven_CAL4376.jpg",
+        "250829_Haven_CAL4382.jpg"
+      ],
+      "coverImage": "250829_Haven_CAL4356.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "Big Slime",
+      "folderPath": "Concert/Big Slime/August 2025",
+      "dateDisplay": "August 2025",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 12,
+      "images": [
+        "250820_Haven Block Party_CAL3068.jpg",
+        "250820_Haven Block Party_CAL3110.jpg",
+        "250820_Haven Block Party_CAL3152.jpg",
+        "250820_Haven Block Party_CAL3154.jpg",
+        "250820_Haven Block Party_CAL3200.jpg",
+        "250820_Haven Block Party_CAL3236.jpg",
+        "250820_Haven Block Party_CAL3253.jpg",
+        "250820_Haven Block Party_CAL3255.jpg",
+        "250820_Haven Block Party_CAL3269.jpg",
+        "250820_Haven Block Party_CAL3277.jpg",
+        "250820_Haven Block Party_CAL3281.jpg",
+        "250820_Haven Block Party_CAL3286.jpg"
+      ],
+      "coverImage": "250820_Haven Block Party_CAL3068.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "Casino Six",
+      "folderPath": "Concert/Casino Six/August 2025",
+      "dateDisplay": "August 2025",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 15,
+      "images": [
+        "250820_Haven Block Party_CAL3301.jpg",
+        "250820_Haven Block Party_CAL3304.jpg",
+        "250820_Haven Block Party_CAL3315.jpg",
+        "250820_Haven Block Party_CAL3351.jpg",
+        "250820_Haven Block Party_CAL3364.jpg",
+        "250820_Haven Block Party_CAL3379.jpg",
+        "250820_Haven Block Party_CAL3381.jpg",
+        "250820_Haven Block Party_CAL3390.jpg",
+        "250820_Haven Block Party_CAL3405.jpg",
+        "250820_Haven Block Party_CAL3408.jpg",
+        "250820_Haven Block Party_CAL3411.jpg",
+        "250820_Haven Block Party_CAL3425.jpg",
+        "250820_Haven Block Party_CAL3429.jpg",
+        "250820_Haven Block Party_CAL3443.jpg",
+        "250820_Haven Block Party_CAL3493.jpg"
+      ],
+      "coverImage": "250820_Haven Block Party_CAL3301.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "The Head Trips",
+      "folderPath": "Concert/The Head Trips/August 2025",
+      "dateDisplay": "August 2025",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 9,
+      "images": [
+        "250820_Haven Block Party_CAL2893.jpg",
+        "250820_Haven Block Party_CAL2906.jpg",
+        "250820_Haven Block Party_CAL2911.jpg",
+        "250820_Haven Block Party_CAL2916.jpg",
+        "250820_Haven Block Party_CAL2918.jpg",
+        "250820_Haven Block Party_CAL2920.jpg",
+        "250820_Haven Block Party_CAL2925.jpg",
+        "250820_Haven Block Party_CAL2937.jpg",
+        "250820_Haven Block Party_CAL2946.jpg"
+      ],
+      "coverImage": "250820_Haven Block Party_CAL2893.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "Wild Blue Yonder",
+      "folderPath": "Concert/Wild Blue Yonder/August 2025",
+      "dateDisplay": "August 2025",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 19,
+      "images": [
+        "250820_Haven Block Party_CAL3635.jpg",
+        "250820_Haven Block Party_CAL3665.jpg",
+        "250820_Haven Block Party_CAL3667.jpg",
+        "250820_Haven Block Party_CAL3671.jpg",
+        "250820_Haven Block Party_CAL3673.jpg",
+        "250820_Haven Block Party_CAL3674.jpg",
+        "250820_Haven Block Party_CAL3680 1.jpg",
+        "250820_Haven Block Party_CAL3680.jpg",
+        "250820_Haven Block Party_CAL3687 1.jpg",
+        "250820_Haven Block Party_CAL3687.jpg",
+        "250820_Haven Block Party_CAL3698.jpg",
+        "250820_Haven Block Party_CAL3706.jpg",
+        "250820_Haven Block Party_CAL3719.jpg",
+        "250820_Haven Block Party_CAL3720.jpg",
+        "250820_Haven Block Party_CAL3721.jpg",
+        "250820_Haven Block Party_CAL3731.jpg",
+        "250820_Haven Block Party_CAL3735.jpg",
+        "250820_Haven Block Party_CAL3739.jpg",
+        "250820_Haven Block Party_CAL3767.jpg"
+      ],
+      "coverImage": "250820_Haven Block Party_CAL3635.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "Funky Lamp",
+      "folderPath": "Concert/Funky Lamp/April 2024",
+      "dateDisplay": "April 2024",
+      "date": {
+        "year": 2024,
+        "month": 4,
+        "monthName": "April",
+        "day": 1,
+        "iso": "2024-04-01"
+      },
+      "totalImages": 6,
+      "images": [
+        "2404_Funky Lamp Indie Fest_1548_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1558_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1563_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1567_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1569_CAL.jpg",
+        "2404_Funky Lamp Indie Fest_1570_CAL.jpg"
+      ],
+      "coverImage": "2404_Funky Lamp Indie Fest_1548_CAL.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "9 Fifty Seven",
+      "folderPath": "Concert/9 Fifty Seven/March 2024",
+      "dateDisplay": "March 2024",
+      "date": {
+        "year": 2024,
+        "month": 3,
+        "monthName": "March",
+        "day": 1,
+        "iso": "2024-03-01"
+      },
+      "totalImages": 5,
+      "images": [
+        "240315_Genesis Volume 1_599.jpg",
+        "240315_Genesis Volume 1_600.jpg",
+        "240315_Genesis Volume 1_602.jpg",
+        "240315_Genesis Volume 1_603.jpg",
+        "240315_Genesis Volume 1_606.jpg"
+      ],
+      "coverImage": "240315_Genesis Volume 1_599.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "Heading North",
+      "folderPath": "Concert/Heading North/March 2024",
+      "dateDisplay": "March 2024",
+      "date": {
+        "year": 2024,
+        "month": 3,
+        "monthName": "March",
+        "day": 1,
+        "iso": "2024-03-01"
+      },
+      "totalImages": 19,
+      "images": [
+        "240315_Genesis Volume 1_464.jpg",
+        "240315_Genesis Volume 1_466.jpg",
+        "240315_Genesis Volume 1_470.jpg",
+        "240315_Genesis Volume 1_488.jpg",
+        "240315_Genesis Volume 1_491.jpg",
+        "240315_Genesis Volume 1_497.jpg",
+        "240315_Genesis Volume 1_501.jpg",
+        "240315_Genesis Volume 1_502.jpg",
+        "240315_Genesis Volume 1_503.jpg",
+        "240315_Genesis Volume 1_507.jpg",
+        "240315_Genesis Volume 1_510.jpg",
+        "240315_Genesis Volume 1_511.jpg",
+        "240315_Genesis Volume 1_515.jpg",
+        "240315_Genesis Volume 1_520.jpg",
+        "240315_Genesis Volume 1_526.jpg",
+        "240315_Genesis Volume 1_530.jpg",
+        "240315_Genesis Volume 1_549.jpg",
+        "240315_Genesis Volume 1_556.jpg",
+        "240315_Genesis Volume 1_558.jpg"
+      ],
+      "coverImage": "240315_Genesis Volume 1_464.jpg"
+    },
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Journalism Portfolio",
+      "folderPath": "Journalism",
+      "dateDisplay": "March 2015",
+      "date": {
+        "day": 25,
+        "month": 3,
+        "year": 2015,
+        "monthName": "March",
+        "iso": "2015-03-25",
+        "source": "ddmmyy_solid"
+      },
+      "totalImages": 2,
+      "images": [
+        "250315_Butler Democracy Protest_CAL9773.jpg",
+        "250417 The Rooney Rule_CAL3148.jpg"
+      ],
+      "coverImage": "250315_Butler Democracy Protest_CAL9773.jpg"
+    }
+  ]
+}

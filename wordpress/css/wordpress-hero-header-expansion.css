@@ -1,0 +1,219 @@
+/* Squarespace-Style Hero Section - WordPress Custom CSS */
+/* Add this to WordPress: Appearance > Customize > Additional CSS */
+
+/* Only apply transparent header to pages with hero-image-container */
+.has-hero-image .site-header,
+.has-hero-image header {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100% !important;
+  z-index: 1000;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 20px 40px !important;
+}
+
+/* Squarespace-style header layout */
+.has-hero-image .site-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Brand/Logo styling */
+.has-hero-image .site-title,
+.has-hero-image .site-branding {
+  color: white !important;
+  font-size: 1.8rem !important;
+  font-weight: 400 !important;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important;
+  margin: 0 !important;
+  letter-spacing: -0.01em;
+}
+
+/* Navigation styling to match Squarespace */
+.has-hero-image .main-navigation,
+.has-hero-image .primary-menu {
+  display: flex !important;
+  gap: 35px !important;
+  margin: 0 !important;
+}
+
+.has-hero-image .main-navigation a,
+.has-hero-image .primary-menu a {
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  text-decoration: none !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6) !important;
+  padding: 8px 0 !important;
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+.has-hero-image .main-navigation a:hover,
+.has-hero-image .primary-menu a:hover {
+  border-bottom-color: white !important;
+  opacity: 0.8 !important;
+}
+
+/* Remove default spacing from main content */
+.has-hero-image .site-main,
+.has-hero-image main,
+.has-hero-image .content-area {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Squarespace-style hero section */
+.hero-image-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: block;
+}
+
+/* Full-bleed hero image */
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Subtle overlay like Squarespace */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.15);
+  pointer-events: none;
+}
+
+/* Photo credit/caption (like "Boyd Station" in your image) */
+.hero-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  opacity: 0.9;
+  z-index: 100;
+}
+
+/* Navigation arrows (like in Squarespace galleries) */
+.hero-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.3);
+  border: none;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 100;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.hero-nav:hover {
+  background: rgba(0,0,0,0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.hero-nav-prev {
+  left: 30px;
+}
+
+.hero-nav-next {
+  right: 30px;
+}
+
+/* Remove default hero content since we're matching Squarespace */
+.hero-content {
+  display: none;
+}
+
+/* Navigation improvements for transparent header */
+.home .main-navigation ul li a:hover {
+  background: rgba(255,255,255,0.1) !important;
+  border-radius: 4px;
+}
+
+/* Scroll indicator (optional) */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 2rem;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  z-index: 10;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-image-container {
+    height: 70vh; /* Slightly shorter on mobile */
+  }
+  
+  .hero-content {
+    bottom: 15%;
+    left: 20px;
+    right: 20px;
+    transform: none;
+  }
+  
+  /* Ensure mobile menu still works */
+  .home .mobile-menu-button,
+  .home .menu-toggle {
+    color: white !important;
+    background: rgba(0,0,0,0.3) !important;
+    border-radius: 4px;
+  }
+}
+
+/* Content after hero section */
+.content-after-hero {
+  padding-top: 4rem;
+  background: white;
+  position: relative;
+  z-index: 5;
+}
+
+/* Fix for some WordPress themes that might interfere */
+.home .entry-header {
+  display: none; /* Hide default page title */
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}

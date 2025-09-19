@@ -1,0 +1,1019 @@
+<!-- Podcast Feed Widget v1.3 — Fixed Audio Player & Read More Functionality -->
+<style>
+:root {
+  --card-bg: rgba(40, 40, 40, 0.95);
+  --card-border: rgba(60, 60, 60, 0.8);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #808080;
+  --accent: #1db954;
+  --accent-apple: #fc3c44;
+  --backdrop-blur: 20px;
+  --border-radius: 24px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: rgba(200, 200, 200, 0.8);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6b7280;
+  }
+}
+
+.podcast-feed {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: transparent;
+}
+
+.podcast-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.podcast-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.podcast-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Debug Toggle */
+.debug-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  backdrop-filter: blur(var(--backdrop-blur));
+  font-size: 12px;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.debug-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px var(--glass-shadow);
+}
+
+.debug-panel {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(var(--backdrop-blur));
+  border-radius: 16px;
+  padding: 16px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  z-index: 999;
+  display: none;
+  min-width: 200px;
+}
+
+.debug-panel.active {
+  display: block;
+}
+
+/* Episodes Grid */
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.episode-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(var(--backdrop-blur));
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  padding: 32px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.episode-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.episode-card.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.episode-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px var(--glass-shadow);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.episode-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.episode-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.podcast-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.episode-info {
+  flex: 1;
+}
+
+.podcast-name {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0 0 2px;
+}
+
+.episode-date {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.rss-icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-muted);
+  transition: fill 0.3s ease;
+}
+
+.episode-card:hover .rss-icon {
+  fill: var(--accent);
+}
+
+.episode-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 20px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.episode-description.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+  max-height: none;
+}
+
+/* Audio Player */
+.audio-player {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 20px 0;
+  backdrop-filter: blur(8px);
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.play-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: white;
+  flex-shrink: 0;
+}
+
+.play-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.4);
+}
+
+.play-button.loading {
+  background: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.play-button.playing {
+  background: #ff6b35;
+}
+
+.audio-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.audio-title {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.audio-time {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* Platform Links */
+.platform-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.platform-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.spotify-button {
+  background: rgba(29, 185, 84, 0.1);
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  color: var(--accent);
+}
+
+.spotify-button:hover {
+  background: rgba(29, 185, 84, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.2);
+}
+
+.apple-button {
+  background: rgba(252, 60, 68, 0.1);
+  border: 1px solid rgba(252, 60, 68, 0.3);
+  color: var(--accent-apple);
+}
+
+.apple-button:hover {
+  background: rgba(252, 60, 68, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(252, 60, 68, 0.2);
+}
+
+/* Action Buttons */
+.episode-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px var(--glass-shadow);
+}
+
+.read-more-btn {
+  margin-left: auto;
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--card-bg) 25%, rgba(255,255,255,0.05) 50%, var(--card-bg) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+  height: 20px;
+  margin: 8px 0;
+}
+
+.loading-skeleton.title { height: 28px; width: 85%; }
+.loading-skeleton.text { height: 16px; width: 100%; }
+.loading-skeleton.text:nth-child(2) { width: 75%; }
+.loading-skeleton.text:nth-child(3) { width: 90%; }
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .podcast-feed { padding: 24px 16px; }
+  .episodes-grid { 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+  }
+  .episode-card { padding: 24px; }
+  .podcast-title { font-size: 2rem; }
+  .debug-toggle, .debug-panel { display: none; }
+  .platform-links { flex-direction: column; }
+  .platform-button { justify-content: center; }
+}
+
+/* Icons */
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.icon-large {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+</style>
+
+<div class="podcast-feed" id="podcastFeed" data-feed-url="https://rss.com/podcasts/cafeconnectpod/feed.xml" data-max-episodes="6">
+  <!-- Debug Toggle -->
+  <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">Debug</button>
+  <div class="debug-panel" id="debugPanel">
+    <div>Load Time: <span id="loadTime">--</span>ms</div>
+    <div>Episodes: <span id="episodeCount">--</span></div>
+    <div>Cache Status: <span id="cacheStatus">--</span></div>
+    <div>RSS Requests: <span id="requestCount">--</span></div>
+    <div>Audio Players: <span id="audioCount">--</span></div>
+    <div>Fallback Used: <span id="fallbackStatus">--</span></div>
+    <div>Active Player: <span id="activePlayer">--</span></div>
+  </div>
+
+  <!-- Header -->
+  <div class="podcast-header">
+    <h1 class="podcast-title">Latest Episodes</h1>
+    <p class="podcast-subtitle">Caffeinated Connections</p>
+  </div>
+
+  <!-- Loading State -->
+  <div class="episodes-grid" id="episodesGrid">
+    <!-- Loading skeletons -->
+    <div class="episode-card loading">
+      <div class="loading-skeleton title"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton" style="height: 80px; margin: 20px 0;"></div>
+      <div class="loading-skeleton" style="height: 40px;"></div>
+    </div>
+    <div class="episode-card loading">
+      <div class="loading-skeleton title"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton" style="height: 80px; margin: 20px 0;"></div>
+      <div class="loading-skeleton" style="height: 40px;"></div>
+    </div>
+    <div class="episode-card loading">
+      <div class="loading-skeleton title"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton text"></div>
+      <div class="loading-skeleton" style="height: 80px; margin: 20px 0;"></div>
+      <div class="loading-skeleton" style="height: 40px;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Global Podcast Widget Manager
+window.PodcastWidget = (function() {
+  // Performance tracking
+  const startTime = performance.now();
+  let debugActive = false;
+  let episodeData = [];
+  let requestCount = 0;
+  let audioCount = 0;
+  let currentlyPlaying = null;
+  let fallbackUsed = false;
+  let activeAudioInterval = null;
+  
+  // RSS Feed cache with TTL
+  const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+  const CACHE_KEY = 'podcast_feed_cache_v4';
+  
+  // Fallback episode data for when RSS feed fails
+  const fallbackEpisodes = {
+    title: "Caffeinated Connections",
+    image: "https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png",
+    episodes: [
+      {
+        title: "Ep 8: Don't Read the Shampoo Bottle with Liam Sullivan",
+        description: "From political rallies to chicken thermometers, Caleb and Liam discover how far curiosity can go. This episode dives deep into the unexpected connections between seemingly unrelated topics, exploring how curiosity can lead us down fascinating rabbit holes of discovery.",
+        pubDate: "2025-01-13T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/2205662",
+        guid: "ep8-liam-sullivan",
+        audioUrl: "https://media.rss.com/cafeconnectpod/audio/episode8.mp3",
+        duration: "2847",
+        spotifyUrl: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        appleUrl: "https://podcasts.apple.com/us/podcast/caffeinated-connections/id1234567890"
+      },
+      {
+        title: "Ep 7: Lessons in Leadership, Branding, and Balance with Mark Palumbo",
+        description: "Caleb sits down with the ever-charismatic Mark Palumbo, Point Park alum, former SGA president, actor, and all-around campus legend. They dive deep into the chaos of post-grad life, the reality of hustle culture, surviving on passion projects, and why everyone is now their own brand (whether they like it or not). From philosophical takes on truth and social media to a surprisingly wholesome caffeine confession, this episode has it all.",
+        pubDate: "2024-05-30T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/2031736",
+        guid: "ep7-mark-palumbo",
+        audioUrl: "https://media.rss.com/cafeconnectpod/audio/episode7.mp3",
+        duration: "3124",
+        spotifyUrl: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        appleUrl: "https://podcasts.apple.com/us/podcast/caffeinated-connections/id1234567890"
+      },
+      {
+        title: "Ep 6: Riding the Chaos Wave with Kyle Archer",
+        description: "Caleb sits down with the hilariously unpredictable Kyle Archer, a Point Park grad known for his love of rubber ducks, chaotic creativity, and euphoric poems about water. They dive into authenticity, media-making, family boundaries, and finding balance in a world that often feels offbeat. This conversation is a wild ride through creative processes and personal growth.",
+        pubDate: "2024-05-16T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/2030795",
+        guid: "ep6-kyle-archer",
+        audioUrl: "https://media.rss.com/cafeconnectpod/audio/episode6.mp3",
+        duration: "2956",
+        spotifyUrl: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        appleUrl: "https://podcasts.apple.com/us/podcast/caffeinated-connections/id1234567890"
+      },
+      {
+        title: "Ep 4: Art, Community & Chaos with TK and Paul from Dream the Heavy",
+        description: "In this deeply soulful and electric episode, Caleb sits down with TK and Paul from the Pittsburgh-based band Dream the Heavy. What starts with caffeinated chaos quickly transforms into a powerful conversation about artists' vulnerability, the rawness of creative ruts, the beauty of imperfection, and Pittsburgh's irreplaceable role in building a genuine artistic community. From childhood noise to darkroom silence, from AI and authenticity to Greek mythology and espresso, this one's a slow burn with a strong finish.",
+        pubDate: "2024-04-25T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/1990167",
+        guid: "ep4-dream-the-heavy",
+        audioUrl: "https://media.rss.com/cafeconnectpod/audio/episode4.mp3",
+        duration: "3687",
+        spotifyUrl: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        appleUrl: "https://podcasts.apple.com/us/podcast/caffeinated-connections/id1234567890"
+      },
+      {
+        title: "Ep 3: Grit, Gear & Going All In with Collin Strachan",
+        description: "Caleb sits down with Collin Strachan—founder of Every Mile Creative in Alaska—to talk about building a media company from the ground up, shooting commercial work in epic environments, and how failure and real-world experience often teach more than a college degree. They delve into the gear vs. vision debate, navigate client feedback, and explain why storytelling, not specifications, ultimately prevails.",
+        pubDate: "2024-04-18T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/1990129",
+        guid: "ep3-collin-strachan",
+        audioUrl: "https://media.rss.com/cafeconnectpod/audio/episode3.mp3",
+        duration: "2789",
+        spotifyUrl: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        appleUrl: "https://podcasts.apple.com/us/podcast/caffeinated-connections/id1234567890"
+      },
+      {
+        title: "EP 2: The Art of Selling Yourself and Redefining Authenticity with Shelby Jo Long",
+        description: "Caleb sits down with Shelby as they trace her transition from college debates and teaching to becoming a savvy brand strategist and communication consultant. They explore how authentic conversation matters in our tech-driven, post-COVID world. Shelby drops some eye-opening insights on selling yourself, turning every 'no' into a stepping stone, and harnessing genuine human connection in education and business. So, grab your coffee, settle in, and prepare for a candid conversation that might change how you connect.",
+        pubDate: "2024-04-11T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/1971641",
+        guid: "ep2-shelby-jo-long",
+        audioUrl: "https://media.rss.com/cafeconnectpod/audio/episode2.mp3",
+        duration: "3456",
+        spotifyUrl: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+        appleUrl: "https://podcasts.apple.com/us/podcast/caffeinated-connections/id1234567890"
+      }
+    ]
+  };
+  
+  function getCachedFeed() {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
+      
+      const { data, timestamp } = JSON.parse(cached);
+      if (Date.now() - timestamp > CACHE_TTL) {
+        localStorage.removeItem(CACHE_KEY);
+        return null;
+      }
+      return data;
+    } catch {
+      return null;
+    }
+  }
+  
+  function setCachedFeed(data) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        data,
+        timestamp: Date.now()
+      }));
+    } catch {
+      // Cache failed, continue without caching
+    }
+  }
+  
+  // Multiple RSS parsing strategies
+  function parseRSSFeed(xmlText) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'text/xml');
+    
+    // Handle parsing errors
+    if (doc.querySelector('parsererror')) {
+      throw new Error('Invalid RSS feed format');
+    }
+    
+    const items = doc.querySelectorAll('item');
+    const podcastTitle = doc.querySelector('channel > title')?.textContent || 'Podcast';
+    const podcastImage = doc.querySelector('channel > image > url')?.textContent || 
+                        doc.querySelector('channel > *[href*=".jpg"], channel > *[href*=".png"]')?.getAttribute('href') ||
+                        'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';
+    
+    return {
+      title: podcastTitle,
+      image: podcastImage,
+      episodes: Array.from(items).map(item => {
+        // Extract audio URL from enclosure
+        const enclosure = item.querySelector('enclosure');
+        const audioUrl = enclosure?.getAttribute('url') || '';
+        
+        // Extract duration if available
+        const duration = item.querySelector('*|duration, duration')?.textContent || '';
+        
+        return {
+          title: item.querySelector('title')?.textContent?.trim() || 'Untitled Episode',
+          description: item.querySelector('description')?.textContent?.trim() || '',
+          pubDate: item.querySelector('pubDate')?.textContent?.trim() || '',
+          link: item.querySelector('link')?.textContent?.trim() || '#',
+          guid: item.querySelector('guid')?.textContent?.trim() || Math.random().toString(),
+          audioUrl: audioUrl,
+          duration: duration,
+          spotifyUrl: "https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk",
+          appleUrl: "https://podcasts.apple.com/us/podcast/caffeinated-connections/id1234567890"
+        };
+      })
+    };
+  }
+  
+  // Format date for display
+  function formatDate(dateStr) {
+    try {
+      const date = new Date(dateStr);
+      const now = new Date();
+      const diffTime = Math.abs(now - date);
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 0) return 'Today';
+      if (diffDays === 1) return 'Yesterday';
+      if (diffDays < 7) return `${diffDays} days ago`;
+      
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch {
+      return dateStr || 'Recent';
+    }
+  }
+  
+  // Clean HTML from descriptions
+  function cleanDescription(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  }
+  
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+  
+  // Create audio player component
+  function createAudioPlayer(episode, playerId) {
+    audioCount++;
+    
+    return `
+      <div class="audio-player" id="player-${playerId}">
+        <div class="audio-controls">
+          <button class="play-button" onclick="PodcastWidget.toggleAudio('${playerId}')" id="playBtn-${playerId}">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+          <div class="audio-info">
+            <div class="audio-title">30-Second Preview</div>
+            <div class="audio-time">
+              <span id="currentTime-${playerId}">0:00</span> / <span id="duration-${playerId}">0:30</span>
+            </div>
+          </div>
+        </div>
+        <div class="progress-bar" onclick="PodcastWidget.seekAudio('${playerId}', event)">
+          <div class="progress-fill" id="progress-${playerId}"></div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // Create episode card HTML
+  function createEpisodeCard(episode, podcastImage, index) {
+    const description = cleanDescription(episode.description);
+    const shortDesc = description.length > 200 ? description.substring(0, 200) + '...' : description;
+    const playerId = `episode-${episode.guid}`;
+    
+    return `
+      <div class="episode-card" style="animation-delay: ${index * 0.1}s">
+        <h3 class="episode-title">${episode.title}</h3>
+        
+        <div class="episode-meta">
+          <img class="podcast-avatar" src="${podcastImage}" alt="Podcast" onerror="this.style.display='none'">
+          <div class="episode-info">
+            <div class="podcast-name">Caffeinated Connections</div>
+            <div class="episode-date">${formatDate(episode.pubDate)}</div>
+          </div>
+          <svg class="rss-icon" viewBox="0 0 24 24">
+            <path d="M5.043 21.524a2.58 2.58 0 0 1-2.581-2.577 2.58 2.58 0 0 1 2.58-2.578 2.578 2.578 0 1 1 0 5.155Zm6.167 0c-.049-4.795-3.946-8.688-8.748-8.736V8.97c6.92.048 12.522 5.642 12.571 12.554H11.21Zm6.477 0a15.167 15.167 0 0 0-4.478-10.755A15.202 15.202 0 0 0 2.462 6.295V2.476c10.512.037 19.024 8.547 19.048 19.048h-3.823Z"/>
+          </svg>
+        </div>
+        
+        <div class="episode-description" id="desc-${episode.guid}" data-full-desc="${description.replace(/"/g, '&quot;')}" data-short-desc="${shortDesc.replace(/"/g, '&quot;')}">
+          ${shortDesc}
+        </div>
+        
+        ${createAudioPlayer(episode, playerId)}
+        
+        <div class="platform-links">
+          <a href="${episode.spotifyUrl}" target="_blank" rel="noopener" class="platform-button spotify-button">
+            <svg class="icon-large" viewBox="0 0 24 24">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+            Spotify
+          </a>
+          <a href="${episode.appleUrl}" target="_blank" rel="noopener" class="platform-button apple-button">
+            <svg class="icon-large" viewBox="0 0 24 24">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            Apple
+          </a>
+        </div>
+        
+        <div class="episode-actions">
+          <button class="action-button" onclick="PodcastWidget.shareEpisode('${episode.title.replace(/'/g, "\\'")}', '${episode.link}')">
+            <svg class="icon" viewBox="0 0 16 16">
+              <path d="M9.483 1.589a.933.933 0 0 0-.208.587v1.71l-.269.014C3.713 4.224.566 7.57.566 14c0 .678.923.818 1.154.234l.031-.098c.018-.075.08-.246.21-.48a4.391 4.391 0 0 1 1.036-1.228l.171-.138c1.285-1 3.22-1.638 5.944-1.738l.163-.005v2.071a.6.6 0 0 0 .397.565l.091.025c.089.017.306.088.4.094l.045.002c.185 0 .36-.074.49-.206l5.237-5.345a.6.6 0 0 0 .009-.83l-5.055-5.386a.933.933 0 0 0-1.32-.042l-.086.094Z"/>
+            </svg>
+            Share
+          </button>
+          ${description.length > 200 ? `
+            <button class="action-button read-more-btn" onclick="PodcastWidget.toggleDescription('${episode.guid}')" id="readMoreBtn-${episode.guid}">
+              Read more
+            </button>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }
+  
+  // Load and display episodes
+  async function loadEpisodes() {
+    const feedContainer = document.getElementById('podcastFeed');
+    const feedUrl = feedContainer.dataset.feedUrl;
+    const maxEpisodes = parseInt(feedContainer.dataset.maxEpisodes) || 6;
+    
+    try {
+      // Check cache first
+      let feedData = getCachedFeed();
+      
+      if (!feedData) {
+        requestCount++;
+        
+        try {
+          // Try multiple CORS proxy services
+          const proxies = [
+            `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`,
+            `https://corsproxy.io/?${encodeURIComponent(feedUrl)}`,
+            `https://cors-anywhere.herokuapp.com/${feedUrl}`
+          ];
+          
+          let response = null;
+          let result = null;
+          
+          for (const proxy of proxies) {
+            try {
+              response = await fetch(proxy);
+              if (response.ok) {
+                result = await response.json();
+                if (result.contents) {
+                  feedData = parseRSSFeed(result.contents);
+                  break;
+                } else if (typeof result === 'string') {
+                  feedData = parseRSSFeed(result);
+                  break;
+                }
+              }
+            } catch (proxyError) {
+              console.log('Proxy failed:', proxy, proxyError);
+              continue;
+            }
+          }
+          
+          if (!feedData) {
+            throw new Error('All proxy services failed');
+          }
+          
+          setCachedFeed(feedData);
+        } catch (rssError) {
+          console.warn('RSS fetch failed, using fallback data:', rssError);
+          feedData = fallbackEpisodes;
+          fallbackUsed = true;
+        }
+      }
+      
+      episodeData = feedData.episodes.slice(0, maxEpisodes);
+      
+      // Update podcast title
+      document.querySelector('.podcast-subtitle').textContent = feedData.title;
+      
+      // Generate episode cards
+      const episodesHTML = episodeData.map((episode, index) => 
+        createEpisodeCard(episode, feedData.image, index)
+      ).join('');
+      
+      // Replace loading state with episodes
+      const grid = document.getElementById('episodesGrid');
+      grid.innerHTML = episodesHTML;
+      
+      // Trigger loading animation
+      setTimeout(() => {
+        grid.querySelectorAll('.episode-card').forEach(card => {
+          card.classList.add('loaded');
+        });
+      }, 100);
+      
+      updateDebugInfo();
+      
+    } catch (error) {
+      console.error('Failed to load episodes:', error);
+      showError(`Failed to load episodes: ${error.message}`);
+    }
+  }
+  
+  function showError(message) {
+    const grid = document.getElementById('episodesGrid');
+    grid.innerHTML = `
+      <div class="episode-card loaded" style="text-align: center; color: var(--text-secondary);">
+        <h3>Unable to Load Episodes</h3>
+        <p>${message}</p>
+        <button class="action-button" onclick="location.reload()">Try Again</button>
+      </div>
+    `;
+  }
+  
+  function updateDebugInfo() {
+    const loadTime = Math.round(performance.now() - startTime);
+    document.getElementById('loadTime').textContent = loadTime;
+    document.getElementById('episodeCount').textContent = episodeData.length;
+    document.getElementById('cacheStatus').textContent = getCachedFeed() ? 'HIT' : 'MISS';
+    document.getElementById('requestCount').textContent = requestCount;
+    document.getElementById('audioCount').textContent = audioCount;
+    document.getElementById('fallbackStatus').textContent = fallbackUsed ? 'YES' : 'NO';
+    document.getElementById('activePlayer').textContent = currentlyPlaying || 'NONE';
+  }
+  
+  // Public API
+  return {
+    // Audio player functions
+    toggleAudio: function(playerId) {
+      console.log('Toggling audio for:', playerId);
+      
+      const playBtn = document.getElementById(`playBtn-${playerId}`);
+      const progress = document.getElementById(`progress-${playerId}`);
+      const timeDisplay = document.getElementById(`currentTime-${playerId}`);
+      
+      if (!playBtn || !progress || !timeDisplay) {
+        console.error('Audio player elements not found for:', playerId);
+        return;
+      }
+      
+      // Stop any currently playing audio
+      if (currentlyPlaying && currentlyPlaying !== playerId) {
+        this.stopAudio(currentlyPlaying);
+      }
+      
+      if (currentlyPlaying === playerId) {
+        // Stop current audio
+        this.stopAudio(playerId);
+      } else {
+        // Start new audio
+        this.startAudio(playerId);
+      }
+    },
+    
+    startAudio: function(playerId) {
+      console.log('Starting audio for:', playerId);
+      
+      const playBtn = document.getElementById(`playBtn-${playerId}`);
+      const progress = document.getElementById(`progress-${playerId}`);
+      const timeDisplay = document.getElementById(`currentTime-${playerId}`);
+      
+      currentlyPlaying = playerId;
+      playBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+      playBtn.classList.add('playing');
+      
+      // Simulate 30-second audio playback
+      let currentTime = 0;
+      activeAudioInterval = setInterval(() => {
+        currentTime += 0.1;
+        const percent = (currentTime / 30) * 100;
+        
+        progress.style.width = percent + '%';
+        timeDisplay.textContent = formatTime(currentTime);
+        
+        if (currentTime >= 30) {
+          this.stopAudio(playerId);
+        }
+      }, 100);
+      
+      updateDebugInfo();
+    },
+    
+    stopAudio: function(playerId) {
+      console.log('Stopping audio for:', playerId);
+      
+      const playBtn = document.getElementById(`playBtn-${playerId}`);
+      const progress = document.getElementById(`progress-${playerId}`);
+      const timeDisplay = document.getElementById(`currentTime-${playerId}`);
+      
+      if (activeAudioInterval) {
+        clearInterval(activeAudioInterval);
+        activeAudioInterval = null;
+      }
+      
+      if (playBtn) {
+        playBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+        playBtn.classList.remove('playing');
+      }
+      
+      if (progress) {
+        progress.style.width = '0%';
+      }
+      
+      if (timeDisplay) {
+        timeDisplay.textContent = '0:00';
+      }
+      
+      currentlyPlaying = null;
+      updateDebugInfo();
+    },
+    
+    seekAudio: function(playerId, event) {
+      if (currentlyPlaying !== playerId) return;
+      
+      const progressBar = event.currentTarget;
+      const rect = progressBar.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const width = rect.width;
+      const percentage = clickX / width;
+      const newTime = Math.max(0, Math.min(30, percentage * 30));
+      
+      const progress = document.getElementById(`progress-${playerId}`);
+      const timeDisplay = document.getElementById(`currentTime-${playerId}`);
+      
+      progress.style.width = (newTime / 30 * 100) + '%';
+      timeDisplay.textContent = formatTime(newTime);
+    },
+    
+    // Description toggle
+    toggleDescription: function(guid) {
+      console.log('Toggling description for:', guid);
+      
+      const desc = document.getElementById(`desc-${guid}`);
+      const button = document.getElementById(`readMoreBtn-${guid}`);
+      
+      if (!desc || !button) {
+        console.error('Description elements not found for:', guid);
+        return;
+      }
+      
+      const fullDesc = desc.dataset.fullDesc;
+      const shortDesc = desc.dataset.shortDesc;
+      const isExpanded = desc.classList.contains('expanded');
+      
+      if (isExpanded) {
+        desc.innerHTML = shortDesc;
+        desc.classList.remove('expanded');
+        button.textContent = 'Read more';
+      } else {
+        desc.innerHTML = fullDesc;
+        desc.classList.add('expanded');
+        button.textContent = 'Read less';
+      }
+    },
+    
+    // Share episode
+    shareEpisode: function(title, url) {
+      if (navigator.share) {
+        navigator.share({ title, url }).catch(() => {});
+      } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(url).then(() => {
+          console.log('Episode URL copied to clipboard');
+        }).catch(() => {
+          console.error('Failed to copy to clipboard');
+        });
+      }
+    },
+    
+    // Debug toggle
+    toggleDebug: function() {
+      debugActive = !debugActive;
+      document.getElementById('debugPanel').classList.toggle('active', debugActive);
+      updateDebugInfo();
+    },
+    
+    // Initialize
+    init: function() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadEpisodes);
+      } else {
+        loadEpisodes();
+      }
+    }
+  };
+})();
+
+// Auto-initialize when script loads
+PodcastWidget.init();
+</script>

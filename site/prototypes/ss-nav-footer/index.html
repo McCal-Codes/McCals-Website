@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nav + Footer Prototype</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header id="header" class="header" data-header-style="dynamic">
+      <div class="container header-inner">
+        <div class="header-title">
+          <a id="site-title" href="/">Caleb McCartney</a>
+        </div>
+        <nav class="header-nav" aria-label="Primary">
+          <button class="burger" aria-controls="primary-menu" aria-expanded="false">
+            <span class="sr-only">Toggle menu</span>
+            <div class="burger-inner">
+              <span></span><span></span><span></span>
+            </div>
+          </button>
+          <ul id="primary-menu" class="header-nav-list">
+            <li class="header-nav-item header-nav-item--active"><a href="/">Work</a></li>
+            <li class="header-nav-item"><a href="/podcast">Podcast</a></li>
+            <li class="header-nav-item"><a href="/blog">Blog</a></li>
+            <li class="header-nav-item"><a href="/about">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container" id="page" tabindex="-1">
+      <h1>Squarespace Navigation + Footer Prototype</h1>
+      <p>This page replicates the navigation and footer structure so you can iterate locally.</p>
+    </main>
+
+    <footer id="site-footer" role="contentinfo" aria-label="Footer">
+      <div class="footer-row container">
+        <nav class="footer-section" aria-label="About">
+          <h4>About</h4>
+          <ul>
+            <li><a href="/about-us">About Me</a></li>
+            <li><a href="/policies-legal">Policies & Legal</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-section" aria-label="Contact">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="/contact-us">Contact Form</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="mailto:contact@mcc-cal.com">contact@mcc-cal.com</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-section" aria-label="Portfolio">
+          <h4>Portfolio</h4>
+          <ul>
+            <li><a href="/portfolio">Portfolio</a></li>
+            <li><a href="/featured-projects">Featured Projects</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/licensing">Licensing</a></li>
+          </ul>
+        </nav>
+
+        <section class="footer-section" aria-label="Follow">
+          <h4>Follow</h4>
+          <div class="social">
+            <a href="https://www.facebook.com/mccalphotography" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5.01 3.66 9.16 8.44 9.94v-7.03H7.9V12.1h2.54V9.96c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56v1.81h2.76l-.44 2.87h-2.32V22c4.78-.78 8.44-4.93 8.44-9.94Z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/mcc_cal" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm6.75-2.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>
+            </a>
+          </div>
+          <div class="newsletter">
+            <form action="https://mcc-cal.us14.list-manage.com/subscribe/post?u=da029ed85760894c33e8b119d&amp;id=fb992a38c8&amp;f_id=00cf8ae0f0" method="post" target="_blank" aria-label="Newsletter signup" novalidate>
+              <label class="sr-only" for="footer-email">Email address</label>
+              <input id="footer-email" name="EMAIL" type="email" placeholder="Your email" required>
+              <div style="position:absolute; left:-5000px;" aria-hidden="true">
+                <input type="text" name="b_da029ed85760894c33e8b119d_fb992a38c8" tabindex="-1" value="">
+              </div>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span id="year"></span> Caleb McCartney. All rights reserved.</div>
+        <div class="links">
+          <a href="/accessibility">Accessibility</a>
+          <a href="/cookies">Cookies</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Year in footer
+      (function(){
+        var y = document.getElementById('year');
+        if (y) y.textContent = new Date().getFullYear();
+      })();
+      // Mobile burger toggle
+      (function(){
+        var btn = document.querySelector('.burger');
+        var menu = document.getElementById('primary-menu');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function(){
+          var open = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!open));
+          menu.classList.toggle('open', !open);
+          document.body.classList.toggle('nav-open', !open);
+        });
+      })();
+    </script>
+  </body>
+</html>

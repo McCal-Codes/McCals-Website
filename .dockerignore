@@ -1,0 +1,40 @@
+# Docker ignore file - McCal Media Website
+
+# Node modules (will be installed in container)
+node_modules/
+
+# Build output (will be generated in container)
+dist/
+
+# Development files
+site-workspace/
+.agent_memory.db
+*.log
+*.tmp
+
+# Git files
+.git/
+.gitignore
+
+# Documentation (optional - remove if you want docs in container)
+DEPLOYMENT.md
+DEPLOY-CHEATSHEET.md
+notes/
+
+# Development tools
+scripts/deploy-test.sh
+dev-server.js
+
+# Platform-specific files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
