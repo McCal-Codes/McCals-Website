@@ -2,6 +2,15 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v3.1 — 2025-09-19
+### Version Management & Documentation 📝
+- **NEW**: Complete v3.0 version files with Universal Caption System integration
+  - `versions/v3.0-universal-captions.html` - Production-ready UCS implementation
+  - `versions/v3.0-debug-simple.html` - Debug version with performance monitoring
+  - `versions/v3.0-README.md` - Comprehensive implementation guide
+- **IMPROVED**: Version control system for easier deployment tracking
+- **IMPROVED**: Documentation structure for better developer experience
+
 ## v3.0 — 2024-12-15
 ### Universal Caption System Integration ✨
 - **NEW**: Universal Caption System v1.0 integration for professional metadata handling
