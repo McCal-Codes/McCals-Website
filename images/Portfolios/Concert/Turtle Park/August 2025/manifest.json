@@ -1,9 +1,26 @@
-[
-  "250829_Haven_CAL4388.jpg",
-  "250829_Haven_CAL4401.jpg",
-  "250829_Haven_CAL4437.jpg",
-  "250829_Haven_CAL4482.jpg",
-  "250829_Haven_CAL4490.jpg",
-  "250829_Haven_CAL4543.jpg",
-  "250829_Haven_CAL4570.jpg"
-]
+{
+  "bandName": "Turtle Park",
+  "folderName": "August 2025",
+  "totalImages": 7,
+  "images": [
+    "250829_Haven_CAL4388.jpg",
+    "250829_Haven_CAL4401.jpg",
+    "250829_Haven_CAL4437.jpg",
+    "250829_Haven_CAL4482.jpg",
+    "250829_Haven_CAL4490.jpg",
+    "250829_Haven_CAL4543.jpg",
+    "250829_Haven_CAL4570.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-19T04:57:26.770Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2025,
+    "month": 8,
+    "monthName": "August",
+    "day": 29,
+    "iso": "2025-08-29",
+    "source": "filename_yymmdd"
+  }
+}
