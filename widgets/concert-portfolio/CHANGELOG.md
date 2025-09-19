@@ -2,6 +2,22 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v3.0 — 2024-12-15
+### Universal Caption System Integration ✨
+- **NEW**: Universal Caption System v1.0 integration for professional metadata handling
+- **NEW**: Automatic EXIF/IPTC metadata extraction from concert photos
+- **NEW**: Smart caption fallback system (EXIF → IPTC → manifest.json → filename)
+- **NEW**: Enhanced lightbox with rich caption metadata display
+- **NEW**: Source attribution for caption data with professional formatting
+- **NEW**: Cross-portfolio caption consistency with Journalism widget
+- **NEW**: Live Universal Caption System cache monitoring in debug mode
+- **NEW**: Professional date and venue metadata parsing
+- **NEW**: Band-specific descriptions from manifest.json integration
+- **IMPROVED**: Enhanced performance monitoring with UCS cache statistics
+- **IMPROVED**: Professional caption display in both card overlays and lightbox
+- **IMPROVED**: Metadata processing optimization with intelligent caching
+- **IMPROVED**: Debug mode with Universal Caption System performance metrics
+
 ## v2.2 — 2025-09-16
 ### Performance Revolution 🚀
 - **NEW**: Shared portfolio API backend with intelligent caching and request deduplication

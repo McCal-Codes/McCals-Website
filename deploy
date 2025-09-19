@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# McCal Media Website - Super Simple Deploy
+# Usage: ./deploy [platform]
+# If no platform specified, deploys to Netlify (default)
+
+set -e  # Exit on any error
+
+echo "🚀 McCal Media Website Deployment"
+echo "=================================="
+
+# Default to netlify if no platform specified
+PLATFORM=${1:-netlify}
+
+echo "📦 Building website..."
+npm run build
+
+echo "🚀 Deploying to $PLATFORM..."
+case $PLATFORM in
+  "netlify"|"n")
+    npm run deploy:netlify
+    echo "✅ Deployed to Netlify!"
+    echo "🔗 Your site should be live at your Netlify URL"
+    ;;
+  "vercel"|"v")
+    npm run deploy:vercel
+    echo "✅ Deployed to Vercel!"
+    ;;
+  "surge"|"s")
+    npm run deploy:surge
+    echo "✅ Deployed to Surge!"
+    echo "🔗 Your site should be live at: https://mccal-media.surge.sh"
+    ;;
+  "all"|"a")
+    echo "🚀 Deploying to all platforms..."
+    npm run deploy:netlify && echo "✅ Netlify done!"
+    npm run deploy:vercel && echo "✅ Vercel done!"
+    npm run deploy:surge && echo "✅ Surge done!"
+    echo "🎉 All deployments complete!"
+    ;;
+  *)
+    echo "❌ Unknown platform: $PLATFORM"
+    echo "Available platforms: netlify (n), vercel (v), surge (s), all (a)"
+    exit 1
+    ;;
+esac
+
+echo ""
+echo "🎉 Deployment complete! Your website is live!"

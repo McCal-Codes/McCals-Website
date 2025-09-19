@@ -9,3 +9,6 @@ site-workspace/Recoveryy/github-recovery-codes.txt
 # Development workspace temporary files
 site-workspace/temp/
 site-workspace/drafts/
+
+# Local Netlify folder
+.netlify

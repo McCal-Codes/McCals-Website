@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Widget Fix Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .test-results {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(40, 40, 40, 0.9);
+            border: 1px solid rgba(60, 60, 60, 0.6);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        .test-metric {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>🎧 Podcast Widget Fix Test</h1>
+        <p>Testing the corrected initialization and debug info update.</p>
+    </div>
+
+    <div class="test-results" id="testResults">
+        <div class="test-metric">Status: <span id="testStatus">Loading...</span></div>
+        <div class="test-metric">Episodes Found: <span id="testEpisodes">0</span></div>
+        <div class="test-metric">Debug Working: <span id="testDebug">No</span></div>
+    </div>
+
+    <!-- Load the widget directly -->
+    <div id="widgetContainer"></div>
+
+    <script>
+        // Load the fixed widget
+        fetch('./widgets/podcast-feed/versions/v1.6.html')
+            .then(response => response.text())
+            .then(html => {
+                // Extract just the widget content
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const widgetContent = doc.body.innerHTML;
+                
+                // Inject the widget
+                document.getElementById('widgetContainer').innerHTML = widgetContent;
+                
+                // Test the fix after a short delay
+                setTimeout(() => {
+                    testTheFixedWidget();
+                }, 200);
+            })
+            .catch(error => {
+                console.error('Failed to load widget:', error);
+                document.getElementById('testStatus').textContent = 'Failed to load';
+            });
+
+        function testTheFixedWidget() {
+            const statusEl = document.getElementById('testStatus');
+            const episodesEl = document.getElementById('testEpisodes');
+            const debugEl = document.getElementById('testDebug');
+            
+            // Check if episodes loaded
+            const episodeCards = document.querySelectorAll('.episode-card');
+            episodesEl.textContent = episodeCards.length;
+            
+            // Check if debug info is working
+            const loadTimeEl = document.getElementById('loadTime');
+            const episodeCountEl = document.getElementById('episodeCount');
+            
+            let debugWorking = false;
+            if (loadTimeEl && episodeCountEl) {
+                // Debug elements exist, check if they have real values (not "--")
+                if (loadTimeEl.textContent !== '--' && episodeCountEl.textContent !== '--') {
+                    debugWorking = true;
+                }
+            }
+            
+            debugEl.textContent = debugWorking ? 'Yes' : 'No';
+            
+            // Overall status
+            if (episodeCards.length === 6 && debugWorking) {
+                statusEl.textContent = '✅ Fixed!';
+                statusEl.style.color = '#1db954';
+            } else if (episodeCards.length > 0) {
+                statusEl.textContent = '⚠️ Partially working';
+                statusEl.style.color = '#ff6b35';
+            } else {
+                statusEl.textContent = '❌ Still broken';
+                statusEl.style.color = '#ff4444';
+            }
+        }
+    </script>
+</body>
+</html>

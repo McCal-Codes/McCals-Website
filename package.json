@@ -1,0 +1,34 @@
+{
+  "name": "mccal-media-website",
+  "version": "1.0.0",
+  "description": "McCal Media photo gallery website with development tools",
+  "main": "site/index.html",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "start": "npm run dev",
+    "build": "node scripts/build.js",
+    "serve": "node dev-server.js --production",
+    "deploy": "node deploy.js",
+    "deploy:quick": "node deploy.js netlify",
+    "deploy:all": "node deploy.js all",
+    "deploy:netlify": "npx netlify deploy --dir=dist --prod",
+    "deploy:vercel": "npx vercel dist --prod",
+    "deploy:surge": "npx surge dist/ --domain mccal-media.surge.sh"
+  },
+  "keywords": ["photography", "gallery", "portfolio", "website"],
+  "author": "McCal Media",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "chokidar": "^3.5.3",
+    "open": "^10.1.0"
+  },
+  "optionalDependencies": {
+    "netlify-cli": "^17.0.0",
+    "vercel": "^32.0.0",
+    "surge": "^0.23.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

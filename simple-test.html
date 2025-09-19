@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Widget Test</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Widget Test</h1>
+    <div id="widget-container"></div>
+    
+    <script>
+    // Test 1: Check if we can load the widget HTML
+    console.log('Starting test...');
+    
+    fetch('./widgets/podcast-feed/versions/v1.6.html')
+        .then(response => {
+            console.log('Fetch response status:', response.status);
+            return response.text();
+        })
+        .then(html => {
+            console.log('HTML loaded, length:', html.length);
+            
+            // Insert widget HTML
+            const container = document.getElementById('widget-container');
+            container.innerHTML = html;
+            
+            // Check if debug elements exist after insertion
+            setTimeout(() => {
+                const loadTime = document.getElementById('loadTime');
+                const episodeCount = document.getElementById('episodeCount');
+                
+                console.log('LoadTime element:', loadTime);
+                console.log('LoadTime value:', loadTime ? loadTime.textContent : 'null');
+                console.log('EpisodeCount element:', episodeCount);
+                console.log('EpisodeCount value:', episodeCount ? episodeCount.textContent : 'null');
+                
+                // Check if PodcastWidget exists
+                console.log('PodcastWidget:', typeof window.PodcastWidget);
+                
+                // Check episodes grid
+                const grid = document.getElementById('episodesGrid');
+                console.log('Episodes grid:', grid);
+                console.log('Grid content length:', grid ? grid.innerHTML.length : 'null');
+                
+            }, 1000);
+            
+        })
+        .catch(error => {
+            console.error('Error loading widget:', error);
+        });
+    </script>
+</body>
+</html>
