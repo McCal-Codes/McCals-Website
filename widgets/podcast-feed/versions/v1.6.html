@@ -53,45 +53,87 @@
 }
 
 /* Debug Toggle */
+.debug-toggle-container {
+  margin: 20px auto 0;
+  text-align: center;
+}
+
 .debug-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
   padding: 8px 16px;
-  border-radius: 16px;
+  border-radius: 12px;
+  font: 600 12px/1 ui-sans-serif, system-ui;
   cursor: pointer;
-  backdrop-filter: blur(var(--backdrop-blur));
-  font-size: 12px;
-  z-index: 1000;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .debug-toggle:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
   transform: translateY(-1px);
-  box-shadow: 0 8px 25px var(--glass-shadow);
+}
+
+.debug-toggle.active {
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 1);
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: light) {
+  .debug-toggle {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .debug-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: rgba(0, 0, 0, 0.95);
+  }
+  
+  .debug-toggle.active {
+    background: rgba(255, 255, 255, 0.35);
+    color: rgba(0, 0, 0, 1);
+  }
 }
 
 .debug-panel {
-  position: fixed;
+  position: absolute;
   top: 60px;
   right: 20px;
-  background: var(--card-bg);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font: 600 11px/1.3 ui-monospace, monospace;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  max-width: 200px;
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(var(--backdrop-blur));
-  border-radius: 16px;
-  padding: 16px;
-  color: var(--text-secondary);
-  font-size: 12px;
-  z-index: 999;
-  display: none;
-  min-width: 200px;
 }
 
 .debug-panel.active {
-  display: block;
+  opacity: 1;
+}
+
+.debug-panel.left {
+  right: auto;
+  left: 20px;
+}
+
+@media (max-width: 768px) {
+  .debug-panel {
+    position: static;
+    margin: 10px auto 0;
+    max-width: none;
+  }
 }
 
 /* Episodes Grid */
@@ -383,19 +425,6 @@
 </style>
 
 <div class="podcast-feed" id="podcastFeed" data-max-episodes="6">
-  <!-- Debug Toggle -->
-  <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">Debug</button>
-  <div class="debug-panel" id="debugPanel">
-    <div>Load Time: <span id="loadTime">--</span>ms</div>
-    <div>Episodes: <span id="episodeCount">--</span></div>
-    <div>Cache Status: <span id="cacheStatus">--</span></div>
-    <div>RSS Requests: <span id="requestCount">--</span></div>
-    <div>Audio Players: <span id="audioCount">--</span></div>
-    <div>Fallback Used: <span id="fallbackStatus">--</span></div>
-    <div>Active Player: <span id="activePlayer">--</span></div>
-    <div>Audio Status: <span id="audioStatus">--</span></div>
-  </div>
-
   <!-- Header -->
   <div class="podcast-header">
     <h1 class="podcast-title">Latest Episodes</h1>
@@ -405,6 +434,22 @@
   <!-- Episodes Grid -->
   <div class="episodes-grid" id="episodesGrid">
     <!-- Content will be loaded instantly -->
+  </div>
+  
+  <!-- Debug Toggle - Bottom positioned like concert widget -->
+  <div class="debug-toggle-container">
+    <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">Debug</button>
+  </div>
+  
+  <div class="debug-panel" id="debugPanel">
+    <div>Load Time: <span id="loadTime">--</span>ms</div>
+    <div>Episodes: <span id="episodeCount">--</span></div>
+    <div>Cache Status: <span id="cacheStatus">--</span></div>
+    <div>RSS Requests: <span id="requestCount">--</span></div>
+    <div>Audio Players: <span id="audioCount">--</span></div>
+    <div>Fallback Used: <span id="fallbackStatus">--</span></div>
+    <div>Active Player: <span id="activePlayer">--</span></div>
+    <div>Audio Status: <span id="audioStatus">--</span></div>
   </div>
 </div>
 

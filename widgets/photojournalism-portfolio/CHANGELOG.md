@@ -2,6 +2,24 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v2.2 (2025-09-19) — Path-Based Category Linking 🔗
+### Advanced URL Navigation 🌐
+- **NEW**: Path-based category URLs (e.g., `/photojournalism-portfolio/politics`)
+- **NEW**: Clean, shareable category links with SEO-friendly structure
+- **NEW**: Link icons (🔗) on category buttons for easy sharing
+- **NEW**: Copy-to-clipboard functionality with visual feedback
+- **NEW**: Browser history support for category navigation
+- **NEW**: Automatic path detection and category filtering
+- **IMPROVED**: URL structure supports both hash and path-based navigation
+- **ENHANCED**: Link generation creates clean URLs for better sharing
+
+### URL Structure Support 🔍
+- `yoursite.com/photojournalism` - All categories
+- `yoursite.com/photojournalism/politics` - Politics category
+- `yoursite.com/photojournalism/events` - Events category  
+- `yoursite.com/photojournalism/portraits` - Portraits category
+- `yoursite.com/photojournalism/featured` - Featured stories
+
 ## v2.1 (2025-09-16)
 - **Caption Support**: Reads captions from EXIF/IPTC data (journalism standard)
 - **manifest.json Support**: Custom captions, descriptions, and metadata

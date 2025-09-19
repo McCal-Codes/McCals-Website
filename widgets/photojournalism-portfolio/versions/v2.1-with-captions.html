@@ -104,11 +104,35 @@ Debug: Add ?debug=true to URL or localStorage.setItem('pj-debug', 'true')
     background:transparent; border:1px solid var(--fg); color:var(--fg);
     padding:12px 20px; border-radius:999px; cursor:pointer; font:600 14px/1 ui-sans-serif,system-ui;
     transition:all 0.25s cubic-bezier(0.4,0,0.2,1); opacity:0.6;
+    display: flex; align-items: center; gap: 8px; position: relative;
   }
   .filter-btn:hover { transform:translateY(-2px); opacity:1; }
+  .filter-btn:hover .filter-link { opacity: 1; }
   .filter-btn[aria-pressed="true"] { 
     background:var(--fg); color:var(--bg); opacity:1; 
     box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  }
+  
+  /* Category link icons */
+  .filter-link {
+    opacity: 0;
+    font-size: 12px;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 4px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+  }
+  
+  .filter-btn[aria-pressed="true"] .filter-link {
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0.7;
+  }
+  
+  .filter-link:hover {
+    transform: scale(1.1);
+    opacity: 1 !important;
   }
 
   /* Masonry grid */
@@ -216,11 +240,26 @@ Debug: Add ?debug=true to URL or localStorage.setItem('pj-debug', 'true')
   
   <!-- Category Filters -->
   <div class="portfolio-filters" role="tablist" aria-label="Portfolio categories">
-    <button type="button" class="filter-btn" data-filter="*" aria-pressed="true" role="tab">All</button>
-    <button type="button" class="filter-btn" data-filter="Politics" aria-pressed="false" role="tab">Politics</button>
-    <button type="button" class="filter-btn" data-filter="Events" aria-pressed="false" role="tab">Events</button>
-    <button type="button" class="filter-btn" data-filter="Portraits" aria-pressed="false" role="tab">Portraits</button>
-    <button type="button" class="filter-btn" data-filter="Featured" aria-pressed="false" role="tab">Featured Stories</button>
+    <button type="button" class="filter-btn" data-filter="*" data-hash="all" aria-pressed="true" role="tab">
+      <span>All</span>
+      <span class="filter-link" title="Link to this category">🔗</span>
+    </button>
+    <button type="button" class="filter-btn" data-filter="Politics" data-hash="politics" aria-pressed="false" role="tab">
+      <span>Politics</span>
+      <span class="filter-link" title="Link to this category">🔗</span>
+    </button>
+    <button type="button" class="filter-btn" data-filter="Events" data-hash="events" aria-pressed="false" role="tab">
+      <span>Events</span>
+      <span class="filter-link" title="Link to this category">🔗</span>
+    </button>
+    <button type="button" class="filter-btn" data-filter="Portraits" data-hash="portraits" aria-pressed="false" role="tab">
+      <span>Portraits</span>
+      <span class="filter-link" title="Link to this category">🔗</span>
+    </button>
+    <button type="button" class="filter-btn" data-filter="Featured" data-hash="featured" aria-pressed="false" role="tab">
+      <span>Featured Stories</span>
+      <span class="filter-link" title="Link to this category">🔗</span>
+    </button>
   </div>
 
   <!-- Loading State -->
@@ -864,19 +903,171 @@ Debug: Add ?debug=true to URL or localStorage.setItem('pj-debug', 'true')
       btn.setAttribute('aria-pressed', 'true'); 
     }
     
+    function applyFilter(filter, updateHash = true) {
+      const showAll = (filter === '*');
+      cards.forEach(card => {
+        const categories = (card.dataset.categories || '').split(',').map(c => c.trim());
+        const visible = showAll || categories.includes(filter.toLowerCase());
+        card.classList.toggle('is-hidden', !visible);
+      });
+      
+      // Update URL hash if requested
+      if (updateHash) {
+        const btn = btns.find(b => b.dataset.filter === filter);
+        const hash = btn?.dataset.hash || 'all';
+        window.history.replaceState(null, null, '#' + hash);
+      }
+    }
+    
+    // Check for hash or path on load
+    function initializeFromHashOrPath() {
+      // First check for path-based routing (e.g., /photojournalism/politics)
+      const pathParts = window.location.pathname.split('/');
+      const categoryFromPath = pathParts[pathParts.length - 1].toLowerCase();
+      
+      // Map common URL variations to our filter values
+      const pathToFilter = {
+        'politics': 'Politics',
+        'political': 'Politics', 
+        'events': 'Events',
+        'event': 'Events',
+        'portraits': 'Portraits',
+        'portrait': 'Portraits',
+        'featured': 'Featured',
+        'featured-stories': 'Featured',
+        'stories': 'Featured',
+        'all': '*',
+        'photojournalism': '*' // Base path defaults to all
+      };
+      
+      if (pathToFilter[categoryFromPath]) {
+        const filter = pathToFilter[categoryFromPath];
+        const btn = btns.find(b => b.dataset.filter === filter);
+        if (btn) {
+          setActive(btn);
+          applyFilter(btn.dataset.filter, false);
+          // Update hash to match the path
+          const hash = btn.dataset.hash;
+          if (window.location.hash !== '#' + hash) {
+            window.history.replaceState(null, null, window.location.pathname + '#' + hash);
+          }
+          return;
+        }
+      }
+      
+      // Fallback to hash-based routing
+      const hash = window.location.hash.slice(1); // Remove #
+      if (hash) {
+        const btn = btns.find(b => b.dataset.hash === hash);
+        if (btn) {
+          setActive(btn);
+          applyFilter(btn.dataset.filter, false);
+          return;
+        }
+      }
+      
+      // Default to 'All' if no valid hash or path
+      const defaultBtn = btns.find(b => b.dataset.filter === '*');
+      if (defaultBtn) setActive(defaultBtn);
+    }
+    
     btns.forEach(btn => {
-      btn.addEventListener('click', () => {
+      // Main button click handler
+      btn.addEventListener('click', (e) => {
+        // Check if the link icon was clicked
+        if (e.target.classList.contains('filter-link')) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Generate both path-based and hash-based URLs
+          const hash = btn.dataset.hash;
+          const filter = btn.dataset.filter;
+          
+          // Create path-based URL (preferred)
+          let pathBasedUrl;
+          const basePath = window.location.pathname.replace(/\/[^/]*$/, ''); // Remove last segment
+          
+          if (filter === '*') {
+            pathBasedUrl = window.location.origin + basePath + '/photojournalism';
+          } else {
+            const categoryPath = filter.toLowerCase();
+            pathBasedUrl = window.location.origin + basePath + '/photojournalism/' + categoryPath;
+          }
+          
+          // Fallback hash-based URL
+          const hashBasedUrl = window.location.origin + window.location.pathname + '#' + hash;
+          
+          // Use path-based URL as primary, hash as fallback
+          const urlToCopy = pathBasedUrl;
+          
+          navigator.clipboard.writeText(urlToCopy).then(() => {
+            // Show temporary feedback
+            const originalText = e.target.textContent;
+            e.target.textContent = '✓';
+            setTimeout(() => {
+              e.target.textContent = originalText;
+            }, 1000);
+            
+            // Show helpful tooltip
+            const tooltip = document.createElement('div');
+            tooltip.style.cssText = `
+              position: absolute;
+              top: -30px;
+              left: 50%;
+              transform: translateX(-50%);
+              background: var(--fg);
+              color: var(--bg);
+              padding: 4px 8px;
+              border-radius: 4px;
+              font-size: 11px;
+              white-space: nowrap;
+              z-index: 1000;
+              pointer-events: none;
+            `;
+            tooltip.textContent = 'Link copied!';
+            btn.style.position = 'relative';
+            btn.appendChild(tooltip);
+            
+            setTimeout(() => {
+              if (tooltip.parentNode) {
+                tooltip.parentNode.removeChild(tooltip);
+              }
+            }, 2000);
+          }).catch(() => {
+            // Fallback for older browsers
+            console.log('Link copied: ' + urlToCopy);
+            alert('Link copied to clipboard!\n' + urlToCopy);
+          });
+          return;
+        }
+        
+        // Regular filter button click
         const filter = btn.dataset.filter;
         setActive(btn);
-        
-        const showAll = (filter === '*');
-        cards.forEach(card => {
-          const categories = (card.dataset.categories || '').split(',').map(c => c.trim());
-          const visible = showAll || categories.includes(filter.toLowerCase());
-          card.classList.toggle('is-hidden', !visible);
-        });
+        applyFilter(filter, true);
       });
+      
+      // Add click handler specifically for link icons
+      const linkIcon = btn.querySelector('.filter-link');
+      if (linkIcon) {
+        linkIcon.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+      }
     });
+    
+    // Handle browser back/forward and path changes
+    window.addEventListener('hashchange', () => {
+      initializeFromHashOrPath();
+    });
+    
+    window.addEventListener('popstate', () => {
+      initializeFromHashOrPath();
+    });
+    
+    // Initialize based on current hash or path
+    initializeFromHashOrPath();
   }
 
   function setupPerformanceMonitoring() {
