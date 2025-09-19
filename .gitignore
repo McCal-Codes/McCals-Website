@@ -3,6 +3,12 @@
 */.DS_Store
 **/.DS_Store
 
+# Build directories (generated from source)
+dist/
+
+# Package files (generated from source)
+*.tgz
+
 # Sensitive recovery codes
 site-workspace/Recoveryy/github-recovery-codes.txt
 

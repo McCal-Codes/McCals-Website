@@ -5,7 +5,8 @@ This repository contains both the production website and development workspace f
 ## Repository Structure
 
 ### Production Site
-- `site/`: Main website with photo galleries
+- `site/`: **Main website source code** with photo galleries
+- `dist/`: **Build output directory** (auto-generated, not tracked in git)
 - `images/`: Photo assets organized by portfolio type
 - `.github/`: GitHub Actions for automated workflows
 
@@ -16,9 +17,26 @@ This repository contains both the production website and development workspace f
 - `sites/`: Platform-specific setup documentation
   - `squarespace/`: Setup notes for embedding widgets via Code Block
 - `notes/`: Development notes and website history
-- `site-workspace/`: Local development files and recovery codes
+- `site-workspace/`: Local development files, test files, and backups
+  - `public-site-standalone/`: Alternative standalone website version
+  - `squarespace-backup/`: Extracted Squarespace admin interface backup
+  - Test files and debugging utilities
 
 ## Quick Start
+
+### Deploying a Test Site
+1. **Interactive deployment** (recommended): `npm run test-deploy`
+2. **Quick deployments**:
+   - **Build first**: `npm run build`
+   - **Test locally**: `npm run serve` (opens at http://localhost:8080)
+   - **Deploy**: `npm run deploy:netlify` | `npm run deploy:vercel` | `npm run deploy:surge`
+3. **Deploy standalone version**: Use files from `site-workspace/public-site-standalone/`
+4. **Quick reference**: See `DEPLOY-CHEATSHEET.md` for common commands
+
+### Deploying as Package
+1. **NPM Package**: `npm run package` (creates redistributable .tgz file)
+2. **Docker Container**: `npm run docker:build` then `npm run docker:run`
+3. **Distribution Archive**: See `PACKAGE-DEPLOYMENT.md` for comprehensive options
 
 ### Using Widgets (Squarespace)
 1. Navigate to `widgets/[widget-name]/versions/`
@@ -45,6 +63,9 @@ This repository contains both the production website and development workspace f
 - Repository-level changes tracked in root CHANGELOG.md
 
 ## Documentation
+- **Deployment Guide**: `DEPLOYMENT.md` - Complete tutorial for deploying test sites
+- **Package Deployment**: `PACKAGE-DEPLOYMENT.md` - Deploy as NPM package, Docker container, or distribution archive
+- **Quick Deploy**: `DEPLOY-CHEATSHEET.md` - Common deployment commands
 - Widget-specific docs: See individual `widgets/[name]/README.md`
 - Development notes: `notes/site-notes.md`
 - Platform setup: `sites/[platform]/README.md`

@@ -1,0 +1,527 @@
+<!-- Podcast Feed Widget v1.7 Debug — Debug version with integrated debug panel (similar to concert portfolio debug style) -->
+<style>
+:root {
+  --card-bg: rgba(40, 40, 40, 0.95);
+  --card-border: rgba(60, 60, 60, 0.8);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #808080;
+  --accent: #1db954;
+  --accent-apple: #fc3c44;
+  --backdrop-blur: 20px;
+  --border-radius: 24px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: rgba(200, 200, 200, 0.8);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6b7280;
+  }
+}
+
+.podcast-feed {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: transparent;
+  position: relative;
+}
+
+.podcast-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.podcast-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.podcast-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Debug info panel - compact style matching concert debug */
+.debug-info {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font: 600 11px/1.3 ui-monospace, monospace;
+  z-index: 100;
+  max-width: 300px;
+  border: 1px solid var(--card-border);
+}
+
+.debug-info h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.debug-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.debug-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+}
+
+.debug-label {
+  color: #b0b0b0;
+  font-size: 10px;
+}
+
+.debug-value {
+  color: #fff;
+  font-weight: 700;
+  font-size: 10px;
+  margin-left: 8px;
+}
+
+.debug-status {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 8px;
+  border-radius: 4px;
+  margin-top: 6px;
+  font-size: 9px;
+  line-height: 1.3;
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Episodes Grid */
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.episode-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(var(--backdrop-blur));
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  padding: 32px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.episode-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px var(--glass-shadow);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.episode-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.episode-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.podcast-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.episode-info { flex: 1; }
+.podcast-name { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; margin: 0 0 2px; }
+.episode-date { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
+
+.rss-icon { width: 20px; height: 20px; fill: var(--text-muted); transition: fill 0.3s ease; }
+.episode-card:hover .rss-icon { fill: var(--accent); }
+
+.episode-description { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 20px 0; }
+
+/* Audio player */
+.audio-player { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px; margin: 16px 0; backdrop-filter: blur(8px); }
+.audio-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.play-button { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s ease; flex-shrink: 0; }
+.play-button.playing { background: #eab308; color: #1a1a1a; }
+.play-button.loading { opacity: 0.7; cursor: wait; }
+.play-button.error { background: #ef4444; }
+.preview-button { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.06); color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease; }
+.preview-button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); color: var(--text-primary); }
+.audio-info { flex: 1; min-width: 0; }
+.audio-title { color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; margin: 0 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.audio-time { color: var(--text-muted); font-size: 0.8rem; margin: 0; }
+.progress-bar { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; overflow: hidden; cursor: pointer; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0%; }
+.volume-control { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+.volume-slider { width: 140px; }
+
+/* Platform Links */
+.platform-links { display: flex; gap: 12px; margin-top: 12px; }
+.platform-button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 16px; border-radius: 12px; text-decoration: none; font-size: 0.9rem; border: 1px solid var(--card-border); color: var(--text-secondary); backdrop-filter: blur(8px); transition: all 0.3s ease; }
+.platform-button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); color: var(--text-primary); }
+.spotify-button { background: rgba(29,185,84,0.1); border-color: rgba(29,185,84,0.3); color: var(--accent); }
+.apple-button { background: rgba(252,60,68,0.1); border-color: rgba(252,60,68,0.3); color: var(--accent-apple); }
+.icon-large { width: 20px; height: 20px; fill: currentColor; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .podcast-feed { padding: 24px 16px; }
+  .episodes-grid { grid-template-columns: 1fr; gap: 24px; }
+  .episode-card { padding: 24px; }
+  .podcast-title { font-size: 2rem; }
+  .debug-info { display: none; }
+}
+
+/* Optional Spotify show embed */
+.spotify-embed { margin: 16px auto 0; max-width: 640px; }
+</style>
+
+<div class="podcast-feed" id="podcastFeed"
+     data-max-episodes="6"
+     data-spotify-show-url="https://open.spotify.com/show/1GcE0Tt669WrdAOXz73w0S"
+     data-apple-show-url="https://podcasts.apple.com/us/podcast/caffeinated-connections/id1806715605"
+     data-feed-url="https://media.rss.com/cafeconnectpod/feed.xml"
+     data-spotify-embed="false">
+
+  <!-- Header -->
+  <div class="podcast-header">
+    <h1 class="podcast-title">Latest Episodes (Debug)</h1>
+    <p class="podcast-subtitle">Caffeinated Connections</p>
+  </div>
+
+  <!-- Optional Spotify embed will render here -->
+  <div id="spotifyEmbedMount" class="spotify-embed"></div>
+
+  <!-- Episodes Grid -->
+  <div class="episodes-grid" id="episodesGrid"></div>
+
+  <!-- Debug info panel - positioned below podcast episodes -->
+  <div class="debug-info" id="debugInfo">
+    <h4>🧪 Podcast Widget Debug Info</h4>
+    
+    <div class="debug-row">
+      <div class="debug-item">
+        <span class="debug-label">Load Time:</span>
+        <span class="debug-value" id="loadTime">--</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Episodes:</span>
+        <span class="debug-value" id="episodeCount">--</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Audio Players:</span>
+        <span class="debug-value" id="audioCount">--</span>
+      </div>
+    </div>
+
+    <div class="debug-row">
+      <div class="debug-item">
+        <span class="debug-label">RSS Requests:</span>
+        <span class="debug-value" id="requestCount">--</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Cache Status:</span>
+        <span class="debug-value" id="cacheStatus">--</span>
+      </div>
+      <div class="debug-item">
+        <span class="debug-label">Fallback Used:</span>
+        <span class="debug-value" id="fallbackStatus">--</span>
+      </div>
+    </div>
+
+    <div class="debug-status" id="debugStatus">
+      Status: Initializing podcast widget...
+    </div>
+  </div>
+</div>
+
+<script>
+// Podcast Widget v1.7 Debug
+window.PodcastWidget = (function() {
+  // Performance tracking
+  const startTime = performance.now();
+  let debugActive = true; // Always active in debug version
+  let episodeData = [];
+  let requestCount = 0;
+  let audioCount = 0;
+  let currentlyPlaying = null;
+  let fallbackUsed = true;
+  let audioStatus = 'disabled';
+  const audioByLink = new Map();
+
+  // Debug logging function
+  function logDebug(message, data = null) {
+    console.log(`[Podcast Debug] ${message}`, data || '');
+    const debugStatus = document.getElementById('debugStatus');
+    if (debugStatus) {
+      debugStatus.innerHTML = `Status: ${message}` + (data ? `<br><small style="opacity:0.7">${JSON.stringify(data, null, 1).slice(0, 100)}${JSON.stringify(data, null, 1).length > 100 ? '...' : ''}</small>` : '');
+    }
+  }
+
+  // Update debug info
+  function updateDebugInfo() {
+    const loadTime = Math.round(performance.now() - startTime);
+    
+    document.getElementById('loadTime').textContent = `${loadTime}ms`;
+    document.getElementById('episodeCount').textContent = episodeData.length;
+    document.getElementById('audioCount').textContent = audioCount;
+    document.getElementById('requestCount').textContent = requestCount;
+    document.getElementById('cacheStatus').textContent = fallbackUsed ? 'Using Cache' : 'Live RSS';
+    document.getElementById('fallbackStatus').textContent = fallbackUsed ? 'Yes' : 'No';
+    
+    logDebug(`Updated debug info - ${episodeData.length} episodes loaded in ${loadTime}ms`);
+  }
+
+  // Curated episode data (instant load, no remote fetch required)
+  const episodes = [
+    {
+      title: "Ep 8: Don't Read the Shampoo Bottle with Liam Sullivan",
+      description: "From political rallies to chicken thermometers, Caleb and Liam discover how far curiosity can go. This episode dives deep into the unexpected connections between seemingly unrelated topics, exploring how curiosity can lead us down fascinating rabbit holes of discovery.",
+      pubDate: "2025-01-13T12:00:00Z",
+      link: "https://rss.com/podcasts/cafeconnectpod/2205662",
+      guid: "ep8-liam-sullivan"
+    },
+    {
+      title: "Ep 7: Lessons in Leadership, Branding, and Balance with Mark Palumbo",
+      description: "Caleb sits down with the ever-charismatic Mark Palumbo, Point Park alum, former SGA president, actor, and all-around campus legend. They dive deep into the chaos of post-grad life, the reality of hustle culture, surviving on passion projects, and why everyone is now their own brand (whether they like it or not). From philosophical takes on truth and social media to a surprisingly wholesome caffeine confession, this episode has it all.",
+      pubDate: "2024-05-30T12:00:00Z",
+      link: "https://rss.com/podcasts/cafeconnectpod/2031736",
+      guid: "ep7-mark-palumbo"
+    },
+    {
+      title: "Ep 6: Riding the Chaos Wave with Kyle Archer",
+      description: "Caleb sits down with the hilariously unpredictable Kyle Archer, a Point Park grad known for his love of rubber ducks, chaotic creativity, and euphoric poems about water. They dive into authenticity, media-making, family boundaries, and finding balance in a world that often feels offbeat. This conversation is a wild ride through creative processes and personal growth.",
+      pubDate: "2024-05-16T12:00:00Z",
+      link: "https://rss.com/podcasts/cafeconnectpod/2030795",
+      guid: "ep6-kyle-archer"
+    },
+    {
+      title: "Ep 4: Art, Community & Chaos with TK and Paul from Dream the Heavy",
+      description: "In this deeply soulful and electric episode, Caleb sits down with TK and Paul from the Pittsburgh-based band Dream the Heavy. What starts with caffeinated chaos quickly transforms into a powerful conversation about artists' vulnerability, the rawness of creative ruts, the beauty of imperfection, and Pittsburgh's irreplaceable role in building a genuine artistic community. From childhood noise to darkroom silence, from AI and authenticity to Greek mythology and espresso, this one's a slow burn with a strong finish.",
+      pubDate: "2024-04-25T12:00:00Z",
+      link: "https://rss.com/podcasts/cafeconnectpod/1990167",
+      guid: "ep4-dream-the-heavy"
+    },
+    {
+      title: "Ep 3: Grit, Gear & Going All In with Collin Strachan",
+      description: "Caleb sits down with Collin Strachan—founder of Every Mile Creative in Alaska—to talk about building a media company from the ground up, shooting commercial work in epic environments, and how failure and real-world experience often teach more than a college degree. They delve into the gear vs. vision debate, navigate client feedback, and explain why storytelling, not specifications, ultimately prevails.",
+      pubDate: "2024-04-18T12:00:00Z",
+      link: "https://rss.com/podcasts/cafeconnectpod/1990129",
+      guid: "ep3-collin-strachan"
+    },
+    {
+      title: "EP 2: The Art of Selling Yourself and Redefining Authenticity with Shelby Jo Long",
+      description: "Caleb sits down with Shelby as they trace her transition from college debates and teaching to becoming a savvy brand strategist and communication consultant. They explore how authentic conversation matters in our tech-driven, post-COVID world. Shelby drops some eye-opening insights on selling yourself, turning every 'no' into a stepping stone, and harnessing genuine human connection in education and business. So, grab your coffee, settle in, and prepare for a candid conversation that might change how you connect.",
+      pubDate: "2024-04-11T12:00:00Z",
+      link: "https://rss.com/podcasts/cafeconnectpod/1971641",
+      guid: "ep2-shelby-jo-long"
+    }
+  ];
+
+  // Helpers
+  function formatDate(dateStr) {
+    try {
+      const date = new Date(dateStr);
+      const now = new Date();
+      const diffTime = Math.abs(now - date);
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      if (diffDays === 0) return 'Today';
+      if (diffDays === 1) return 'Yesterday';
+      if (diffDays < 7) return `${diffDays} days ago`;
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    } catch { return dateStr || 'Recent'; }
+  }
+
+  function cleanDescription(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  }
+
+  function extractSpotifyShowId(url) {
+    const m = (url || '').match(/open\.?spotify\.com\/show\/([A-Za-z0-9]+)/);
+    return m ? m[1] : null;
+  }
+
+  // Audio player (full playback via RSS enclosure)
+  function createAudioPlayer(episode, playerId) {
+    audioCount++;
+    logDebug(`Creating audio player ${playerId} for episode: ${episode.title.slice(0, 30)}...`);
+    return `
+      <div class="audio-player" id="player-${playerId}" data-episode-link="${episode.link}">
+        <div class="audio-controls">
+          <button class="play-button" id="playBtn-${playerId}" onclick="PodcastWidget.toggleAudio('${playerId}')" title="Play/Pause">
+            <svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="preview-button" id="previewBtn-${playerId}" onclick="PodcastWidget.previewAudio('${playerId}', 15)" title="Play 15s random preview">Preview 15s</button>
+          <div class="audio-info">
+            <div class="audio-title">Ready to play</div>
+            <div class="audio-time"><span id="currentTime-${playerId}">0:00</span> / <span id="duration-${playerId}">--:--</span></div>
+          </div>
+        </div>
+        <div class="progress-bar" onclick="PodcastWidget.seekAudio('${playerId}', event)">
+          <div class="progress-fill" id="progress-${playerId}"></div>
+        </div>
+        <div class="volume-control">
+          <input type="range" class="volume-slider" id="volume-${playerId}" min="0" max="100" value="80" onchange="PodcastWidget.setVolume('${playerId}', this.value)">
+        </div>
+        <audio id="audio-${playerId}" preload="metadata"
+               onloadedmetadata="PodcastWidget.onAudioLoaded('${playerId}')"
+               ontimeupdate="PodcastWidget.onTimeUpdate('${playerId}')"
+               onended="PodcastWidget.onAudioEnded('${playerId}')"
+               onerror="PodcastWidget.onAudioError('${playerId}')"></audio>
+      </div>
+    `;
+  }
+
+  // Episode card
+  function createEpisodeCard(episode) {
+    const description = cleanDescription(episode.description);
+    const shortDesc = description.length > 200 ? description.substring(0, 200) + '...' : description;
+    const feed = document.getElementById('podcastFeed');
+    const spotifyShowUrl = feed?.dataset?.spotifyShowUrl || '#';
+    const appleShowUrl = feed?.dataset?.appleShowUrl || '#';
+
+    return `
+      <div class="episode-card">
+        <h3 class="episode-title">${episode.title}</h3>
+        <div class="episode-meta">
+          <img class="podcast-avatar" src="https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png" alt="Podcast" onerror="this.style.display='none'">
+          <div class="episode-info">
+            <div class="podcast-name">Caffeinated Connections</div>
+            <div class="episode-date">${formatDate(episode.pubDate)}</div>
+          </div>
+          <svg class="rss-icon" viewBox="0 0 24 24"><path d="M5.043 21.524a2.58 2.58 0 0 1-2.581-2.577 2.58 2.58 0 0 1 2.58-2.578 2.578 2.578 0 1 1 0 5.155Zm6.167 0c-.049-4.795-3.946-8.688-8.748-8.736V8.97c6.92.048 12.522 5.642 12.571 12.554H11.21Zm6.477 0a15.167 15.167 0 0 0-4.478-10.755A15.202 15.202 0 0 0 2.462 6.295V2.476c10.512.037 19.024 8.547 19.048 19.048h-3.823Z"/></svg>
+        </div>
+        <div class="episode-description">${shortDesc}</div>
+        ${createAudioPlayer(episode, `episode-${episode.guid}`)}
+        <div class="platform-links">
+          <a href="${spotifyShowUrl}" target="_blank" rel="noopener" class="platform-button spotify-button">
+            <svg class="icon-large" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            Spotify
+          </a>
+          <a href="${appleShowUrl}" target="_blank" rel="noopener" class="platform-button apple-button">
+            <svg class="icon-large" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Apple
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  // Instant load
+  function loadEpisodes() {
+    logDebug('Starting episode load...');
+    const feedContainer = document.getElementById('podcastFeed');
+    const maxEpisodes = parseInt(feedContainer?.dataset?.maxEpisodes) || 6;
+    episodeData = episodes.slice(0, maxEpisodes);
+    
+    logDebug(`Loading ${episodeData.length} episodes (max: ${maxEpisodes})`);
+    
+    const episodesHTML = episodeData.map(e => createEpisodeCard(e)).join('');
+    const grid = document.getElementById('episodesGrid');
+    if (grid) {
+      grid.innerHTML = episodesHTML;
+      logDebug('Episodes rendered to grid');
+    }
+    
+    updateDebugInfo();
+  }
+
+  // Audio functionality (simplified for debug)
+  function toggleAudio(playerId) {
+    logDebug(`Audio toggle requested for ${playerId}`);
+    const audio = document.getElementById(`audio-${playerId}`);
+    const btn = document.getElementById(`playBtn-${playerId}`);
+    
+    if (!audio) {
+      logDebug(`Audio element not found: ${playerId}`, 'error');
+      return;
+    }
+
+    if (audio.paused) {
+      logDebug(`Attempting to play ${playerId}`);
+      // In debug version, show a message instead of trying to play
+      const titleEl = audio.parentElement.querySelector('.audio-title');
+      if (titleEl) {
+        titleEl.textContent = 'Audio playback temporarily disabled in debug mode';
+        logDebug('Audio playback disabled in debug mode');
+      }
+    } else {
+      audio.pause();
+      logDebug(`Paused ${playerId}`);
+    }
+  }
+
+  function previewAudio(playerId, seconds) {
+    logDebug(`Preview requested for ${playerId} (${seconds}s)`);
+    // In debug version, just show a message
+    const titleEl = document.querySelector(`#player-${playerId} .audio-title`);
+    if (titleEl) {
+      titleEl.textContent = `Preview mode: ${seconds}s sample (debug mode)`;
+    }
+  }
+
+  // Stub functions for compatibility
+  function onAudioLoaded(playerId) { logDebug(`Audio loaded: ${playerId}`); }
+  function onTimeUpdate(playerId) { /* Debug mode - no updates */ }
+  function onAudioEnded(playerId) { logDebug(`Audio ended: ${playerId}`); }
+  function onAudioError(playerId) { logDebug(`Audio error: ${playerId}`, 'error'); }
+  function seekAudio(playerId, event) { logDebug(`Seek requested for ${playerId}`); }
+  function setVolume(playerId, value) { logDebug(`Volume set to ${value} for ${playerId}`); }
+
+  // Initialize
+  function init() {
+    logDebug('Initializing Podcast Widget Debug v1.7...');
+    loadEpisodes();
+    logDebug('Podcast widget initialization complete');
+  }
+
+  // Public API
+  return {
+    init,
+    toggleAudio,
+    previewAudio,
+    onAudioLoaded,
+    onTimeUpdate,
+    onAudioEnded,
+    onAudioError,
+    seekAudio,
+    setVolume
+  };
+})();
+
+// Auto-initialize
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', PodcastWidget.init);
+} else {
+  PodcastWidget.init();
+}
+</script>

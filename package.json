@@ -8,12 +8,17 @@
     "start": "npm run dev",
     "build": "node scripts/build.js",
     "serve": "node dev-server.js --production",
+    "test-deploy": "./scripts/deploy-test.sh",
     "deploy": "node deploy.js",
     "deploy:quick": "node deploy.js netlify",
     "deploy:all": "node deploy.js all",
     "deploy:netlify": "npx netlify deploy --dir=dist --prod",
     "deploy:vercel": "npx vercel dist --prod",
-    "deploy:surge": "npx surge dist/ --domain mccal-media.surge.sh"
+    "deploy:surge": "npx surge dist/ --domain mccal-media.surge.sh",
+    "package": "npm pack",
+    "docker:build": "docker build -t mccal-media-website .",
+    "docker:run": "docker run -p 8080:8080 mccal-media-website",
+    "docker:deploy": "docker build -t mccal-media-website . && docker run -d -p 8080:8080 --name mccal-website mccal-media-website"
   },
   "keywords": ["photography", "gallery", "portfolio", "website"],
   "author": "McCal Media",
