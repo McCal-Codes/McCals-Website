@@ -17,22 +17,40 @@ Professional event photography portfolio widget for displaying corporate events,
 
 ### Squarespace Integration
 ```html
-<!-- Copy and paste the entire v1.0-universal-captions.html file into a Code Block -->
+<!-- Copy and paste the entire v1.1-manifest.html file into a Code Block -->
 ```
 
-### GitHub Structure
+### GitHub Structure (v1.1 Manifest Approach)
 ```
 images/Portfolios/Events/
+├── events-manifest.json (REQUIRED - single API call!)
 ├── Corporate-Summit-2025/
 │   ├── image1.jpg
-│   ├── image2.jpg
-│   └── manifest.json (optional)
+│   └── image2.jpg
 ├── Tech-Conference/
 │   ├── keynote.jpg
 │   └── networking.jpg
 └── Wedding-Reception/
     ├── ceremony.jpg
     └── reception.jpg
+```
+
+#### Manifest Format
+```json
+{
+  "version": "1.0",
+  "generated": "2025-09-19T05:39:00.000Z",
+  "totalEvents": 2,
+  "events": [
+    {
+      "eventName": "Corporate Summit 2025",
+      "folderPath": "Corporate-Summit-2025",
+      "dateDisplay": "March 2025",
+      "totalImages": 2,
+      "images": ["image1.jpg", "image2.jpg"]
+    }
+  ]
+}
 ```
 
 ### Debug Mode
@@ -62,4 +80,5 @@ images/Portfolios/Events/
 
 ## Version History
 
+- **v1.1** (2025-09-19): Single manifest API call approach - ultra-efficient performance
 - **v1.0** (2025-09-19): Initial release with full event portfolio functionality

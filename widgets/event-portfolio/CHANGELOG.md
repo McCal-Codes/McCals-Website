@@ -2,6 +2,29 @@
 
 All notable changes to the Event Portfolio widget.
 
+## v1.1 (2025-09-19) — Single Manifest API Call 🚀
+### Ultra-Efficient Performance Revolution ⚡
+- **NEW**: Single API call approach using `events-manifest.json` (no rate limiting needed!)
+- **PERFORMANCE**: Eliminates multiple GitHub API calls - now uses only ONE request
+- **EFFICIENCY**: Follows the same manifest pattern as Concert Portfolio v3.4
+- **RELIABILITY**: No more API rate limiting concerns or request queue management
+- **SPEED**: Faster load times with pre-structured event data
+- **SCALABILITY**: Can handle unlimited events without API throttling
+
+### Technical Implementation 🔧
+- **Manifest-based architecture**: All event data loaded from single JSON file
+- **Round-robin card distribution**: Balanced image selection across all events
+- **Progressive image loading**: Staggered loading with visual feedback
+- **Debug mode enhancements**: API call count monitoring (should always show "1")
+- **Error handling**: Graceful fallback for missing or malformed manifest
+
+### File Structure 📁
+- `events-manifest.json` → Central data source for all event information
+- No more recursive folder scanning or multiple API requests
+- Compatible with existing Universal Caption System integration
+
+---
+
 ## v1.0 (2025-09-19) — Initial Release 🎯
 ### Event-Focused Portfolio System ✨
 - **NEW**: Complete event portfolio system based on Concert Portfolio architecture
