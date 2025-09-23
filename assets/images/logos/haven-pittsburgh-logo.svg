@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="background: transparent;">
+  <defs>
+    <!-- Gradient for modern look -->
+    <linearGradient id="havenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Text gradient for premium look -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1B5E20;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle with subtle gradient -->
+  <circle cx="30" cy="40" r="18" fill="url(#havenGradient)" opacity="0.9"/>
+  
+  <!-- House icon representing Haven/shelter -->
+  <g transform="translate(22, 28)">
+    <!-- House roof -->
+    <polygon points="8,4 2,10 14,10" fill="#ffffff" stroke="#ffffff" stroke-width="0.5"/>
+    <!-- House base -->
+    <rect x="4" y="10" width="8" height="8" fill="#ffffff" stroke="#ffffff" stroke-width="0.3"/>
+    <!-- Door -->
+    <rect x="6.5" y="13" width="3" height="5" fill="url(#havenGradient)" opacity="0.8"/>
+    <!-- Window -->
+    <rect x="9" y="11.5" width="2" height="2" fill="url(#havenGradient)" opacity="0.6"/>
+  </g>
+  
+  <!-- Heart symbol for care/support -->
+  <g transform="translate(40, 32)">
+    <path d="M6,4 C4,2 1,2 1,5 C1,8 6,12 6,12 C6,12 11,8 11,5 C11,2 8,2 6,4 Z" 
+          fill="url(#havenGradient)" opacity="0.7"/>
+  </g>
+  
+  <!-- Company name -->
+  <text x="65" y="28" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" 
+        fill="url(#textGradient)" letter-spacing="0.5px">HAVEN</text>
+  <text x="65" y="48" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" 
+        fill="#4A5568" letter-spacing="1px">PITTSBURGH</text>
+  
+  <!-- Subtle tagline or descriptor -->
+  <text x="65" y="58" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="400" 
+        fill="#718096" letter-spacing="0.3px" opacity="0.8">SUPPORT • COMMUNITY • HOPE</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="180" cy="20" r="2" fill="url(#havenGradient)" opacity="0.4"/>
+  <circle cx="185" cy="60" r="1.5" fill="url(#havenGradient)" opacity="0.3"/>
+  <circle cx="175" cy="65" r="1" fill="url(#havenGradient)" opacity="0.2"/>
+</svg>
