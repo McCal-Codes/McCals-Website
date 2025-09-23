@@ -35,7 +35,9 @@
     "manifest:universal": "node scripts/generate-universal-manifest.js",
     "build:universal": "npm run organize:folders && npm run manifest:concert && npm run manifest:universal",
     "watch:universal": "node scripts/watch-universal-portfolios.js",
-    "build:optimized": "npm run build:universal"
+    "build:optimized": "npm run build:universal",
+    "watch:auto-manifest": "node scripts/watch-auto-manifest.js",
+    "dev:auto": "npm run watch:auto-manifest"
   },
   "keywords": [
     "photography",
