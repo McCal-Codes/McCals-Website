@@ -1,6 +1,28 @@
 # About Widgets Changelog
 
-## Version 1.3.0 - GitHub Asset Integration (2025-01-23)
+## Version 1.4.1 - Universal Versioning System (2025-01-23)
+
+### ✨ Universal Widget Features
+- **Clickable Version Indicator**: Fixed bottom-right corner shows current version
+- **Interactive Changelog**: Click version to view complete changelog history
+- **Standardized Versioning**: Following concert widget pattern for consistency
+- **Professional UI**: Smooth animations and backdrop blur effects
+
+### 🎯 Versioning Standards
+- **Version Format**: `v1.4.1` following semantic versioning
+- **Position**: Bottom-right corner, subtle gray text
+- **Interaction**: Click to toggle changelog panel
+- **Mobile Responsive**: Adapts to different screen sizes
+
+### 📱 Changelog Panel Features
+- **Complete History**: All versions from v1.0.0 to current
+- **Feature Highlights**: Key improvements and additions per version
+- **Professional Design**: Dark backdrop with blur effects
+- **Easy Navigation**: Close button and click-outside to dismiss
+
+---
+
+## Version 1.4.0 - Advanced Debugging System (2025-01-23)
 
 ### ✨ Major Features
 - **GitHub Asset Hosting**: All client logos now load directly from GitHub repository
