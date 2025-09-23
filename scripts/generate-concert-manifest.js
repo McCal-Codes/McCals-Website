@@ -154,10 +154,12 @@ async function processBand(bandName, bandPath) {
     
     if (subfolders.length === 0) {
       warning(`No subfolders found in ${bandName}`);
-      return null;
+      return [];
     }
     
-    // Look for Month Year subfolders or existing manifests
+    const concertDates = [];
+    
+    // Process ALL subfolders, not just the first one
     for (const subfolder of subfolders) {
       const folderItems = await fs.readdir(subfolder.path);
       const imageFiles = folderItems.filter(item => IMAGE_EXTENSIONS.test(item));
@@ -226,22 +228,25 @@ async function processBand(bandName, bandPath) {
       
       const dateDisplay = getDateDisplayFromFolder(subfolder.name) || `${concertDate.monthName} ${concertDate.year}`;
       
-      return {
+      concertDates.push({
         bandName: bandName,
         folderPath: `${bandName}/${subfolder.name}`,
         dateDisplay: dateDisplay,
         concertDate: concertDate,
         totalImages: imageFiles.length,
         images: imageFiles.sort() // Sort filenames
-      };
+      });
     }
     
-    warning(`No valid subfolders with images found in ${bandName}`);
-    return null;
+    if (concertDates.length === 0) {
+      warning(`No valid subfolders with images found in ${bandName}`);
+    }
+    
+    return concertDates;
     
   } catch (err) {
     error(`Failed to process ${bandName}:`, err.message);
-    return null;
+    return [];
   }
 }
 
@@ -274,9 +279,9 @@ async function generateMasterManifest() {
     const processedBands = [];
     
     for (const band of bandFolders) {
-      const result = await processBand(band.name, band.path);
-      if (result) {
-        processedBands.push(result);
+      const results = await processBand(band.name, band.path);
+      if (results && results.length > 0) {
+        processedBands.push(...results); // Spread all concert dates
       }
     }
     
