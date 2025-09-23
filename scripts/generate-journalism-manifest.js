@@ -76,10 +76,25 @@ async function main() {
     console.log('🏗️  Processing images by events...');
     const eventMap = new Map();
     const categoryStats = {};
+    const seenFilenames = new Set(); // Track filenames to prevent duplicates
     
     for (const image of images) {
       const key = image.relativePath;
       const existing = individualManifest[key] || individualManifest[image.filename] || {};
+      
+      // Create normalized filename for duplicate detection (remove -min, -small, etc.)
+      const normalizedFilename = image.filename
+        .replace(/-min\./i, '.')
+        .replace(/-small\./i, '.')
+        .replace(/-compressed\./i, '.')
+        .replace(/-thumb\./i, '.');
+      
+      // Skip duplicates based on normalized filename (ignore path differences and variants)
+      if (seenFilenames.has(normalizedFilename)) {
+        console.log(`   ⚠️  Skipping duplicate/variant: ${image.filename}`);
+        continue;
+      }
+      seenFilenames.add(normalizedFilename);
       
       // Extract event name from filename
       const eventName = extractEventFromFilename(image.filename);
