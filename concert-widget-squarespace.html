@@ -333,8 +333,45 @@ Requirements: Master manifest at images/Portfolios/Concert/concert-manifest.json
 </div>
 
 <!-- Version indicator -->
-<div class="version-indicator">v4.2</div>
+<div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v4.2</div>
 <div class="auto-refresh-indicator" id="autoRefreshIndicator">Next refresh: --</div>
+
+<!-- Changelog Modal -->
+<div class="changelog-modal" id="changelogModal">
+  <div class="changelog-content">
+    <div class="changelog-header">
+      <h3 class="changelog-title">🎸 Concert Widget Changelog</h3>
+      <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v4.2 - API Optimized (Current)</div>
+      <ul class="changelog-items">
+        <li>Smart localStorage caching (10-minute duration)</li>
+        <li>Intelligent 15-minute auto-refresh with tab visibility detection</li>
+        <li>Single API call using master manifest</li>
+        <li>Reduced API calls by ~60% for better performance</li>
+        <li>Enhanced debug panel with detailed metrics</li>
+        <li>Improved error handling and retry logic</li>
+      </ul>
+      
+      <div class="changelog-version">v4.1 - Enhanced UX</div>
+      <ul class="changelog-items">
+        <li>Added masonry layout for natural image flow</li>
+        <li>Improved lightbox with vertical scrolling</li>
+        <li>Better mobile responsiveness</li>
+        <li>Enhanced loading states and animations</li>
+      </ul>
+      
+      <div class="changelog-version">v4.0 - Major Rebuild</div>
+      <ul class="changelog-items">
+        <li>Complete rewrite for stability and performance</li>
+        <li>GitHub raw content integration</li>
+        <li>Dynamic image shuffling and distribution</li>
+        <li>Round-robin allocation for balanced display</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 <!-- Debug Toggle Button -->
 <button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
@@ -361,6 +398,45 @@ let debugMetrics = {
   imageCount: 0,
   lastRefresh: 'Never'
 };
+
+// Changelog modal functions
+function showChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function hideChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Close changelog on background click
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        hideChangelog();
+      }
+    });
+  }
+});
+
+// Close changelog on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('changelogModal');
+    if (modal && modal.classList.contains('active')) {
+      hideChangelog();
+    }
+  }
+});
 
 // Auto-refresh configuration - Optimized to 15 minutes with intelligent refresh
 const AUTO_REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes

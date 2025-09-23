@@ -95,8 +95,12 @@
         right: 12px;
         font: 400 10px/1 ui-sans-serif,system-ui;
         color: rgba(128, 128, 128, 0.6);
-        pointer-events: none;
+        cursor: pointer;
         z-index: 1;
+        transition: color 0.2s ease;
+      }
+      .version-indicator:hover {
+        color: var(--accent);
       }
 
       /* Debug Toggle Button */
@@ -268,6 +272,85 @@
           display: none;
         }
       }
+
+      /* Changelog Modal */
+      .changelog-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+      }
+      .changelog-modal.active {
+        display: flex;
+      }
+      .changelog-content {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        max-width: 500px;
+        width: 100%;
+        max-height: 70vh;
+        overflow-y: auto;
+        position: relative;
+      }
+      .changelog-header {
+        padding: 20px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .changelog-title {
+        margin: 0;
+        color: var(--accent);
+        font: 700 18px/1.2 ui-sans-serif, system-ui;
+      }
+      .changelog-close {
+        background: none;
+        border: none;
+        color: var(--fg);
+        font-size: 20px;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background 0.2s ease;
+      }
+      .changelog-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .changelog-body {
+        padding: 20px;
+        font: 400 14px/1.5 ui-sans-serif, system-ui;
+        color: var(--fg);
+      }
+      .changelog-version {
+        margin: 0 0 16px 0;
+        color: var(--accent);
+        font: 600 16px/1.3 ui-sans-serif, system-ui;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 8px;
+      }
+      .changelog-items {
+        margin: 12px 0;
+        padding-left: 0;
+        list-style: none;
+      }
+      .changelog-items li {
+        margin: 8px 0;
+        padding-left: 16px;
+        position: relative;
+      }
+      .changelog-items li:before {
+        content: '•';
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+      }
     </style>
 
     <div class="concert-portfolio" id="concertPf" data-panes="24">
@@ -294,8 +377,45 @@
     </div>
 
     <!-- Version indicator -->
-    <div class="version-indicator">v4.2</div>
+    <div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v4.2</div>
     <div class="auto-refresh-indicator" id="autoRefreshIndicator">Next refresh: --</div>
+
+    <!-- Changelog Modal -->
+    <div class="changelog-modal" id="changelogModal">
+      <div class="changelog-content">
+        <div class="changelog-header">
+          <h3 class="changelog-title">🎸 Concert Widget Changelog</h3>
+          <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+        </div>
+        <div class="changelog-body">
+          <div class="changelog-version">v4.2 - API Optimized (Current)</div>
+          <ul class="changelog-items">
+            <li>Smart localStorage caching (10-minute duration)</li>
+            <li>Intelligent 15-minute auto-refresh with tab visibility detection</li>
+            <li>Single API call using master manifest</li>
+            <li>Reduced API calls by ~60% for better performance</li>
+            <li>Enhanced debug panel with detailed metrics</li>
+            <li>Improved error handling and retry logic</li>
+          </ul>
+          
+          <div class="changelog-version">v4.1 - Enhanced UX</div>
+          <ul class="changelog-items">
+            <li>Added masonry layout for natural image flow</li>
+            <li>Improved lightbox with vertical scrolling</li>
+            <li>Better mobile responsiveness</li>
+            <li>Enhanced loading states and animations</li>
+          </ul>
+          
+          <div class="changelog-version">v4.0 - Major Rebuild</div>
+          <ul class="changelog-items">
+            <li>Complete rewrite for stability and performance</li>
+            <li>GitHub raw content integration</li>
+            <li>Dynamic image shuffling and distribution</li>
+            <li>Round-robin allocation for balanced display</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <!-- Debug Toggle Button -->
     <button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
@@ -322,6 +442,45 @@
       imageCount: 0,
       lastRefresh: 'Never'
     };
+
+    // Changelog modal functions
+    function showChangelog() {
+      const modal = document.getElementById('changelogModal');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function hideChangelog() {
+      const modal = document.getElementById('changelogModal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Close changelog on background click
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('changelogModal');
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            hideChangelog();
+          }
+        });
+      }
+    });
+
+    // Close changelog on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('changelogModal');
+        if (modal && modal.classList.contains('active')) {
+          hideChangelog();
+        }
+      }
+    });
 
     // Auto-refresh configuration - Optimized to 15 minutes with intelligent refresh
     const AUTO_REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes
