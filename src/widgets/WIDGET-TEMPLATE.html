@@ -1,0 +1,194 @@
+<!-- Widget Template with Required Version Indicator & Changelog
+Copy this template for new widgets - replace [WIDGET-NAME] and version details
+-->
+
+<style>
+  /* Version Indicator & Changelog Modal - REQUIRED FOR ALL WIDGETS */
+  .version-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    color: rgba(255,255,255,0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font: 600 10px/1 ui-monospace,monospace;
+    cursor: pointer;
+    z-index: 500;
+    transition: color 0.2s ease;
+    pointer-events: auto;
+    backdrop-filter: blur(4px);
+  }
+  .version-indicator:hover {
+    color: var(--accent, #ff4d6d);
+  }
+
+  /* Changelog Modal */
+  .changelog-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483647 !important;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+  }
+  .changelog-modal.active {
+    display: flex;
+  }
+  .changelog-content {
+    background: var(--bg, #fff);
+    border-radius: 12px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--line, #e5e5e5);
+  }
+  .changelog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--line, #e5e5e5);
+  }
+  .changelog-title {
+    margin: 0;
+    color: var(--accent, #ff4d6d);
+    font: 700 18px/1.2 ui-sans-serif, system-ui;
+  }
+  .changelog-close {
+    background: none;
+    border: none;
+    color: var(--fg, #333);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+  .changelog-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .changelog-body {
+    padding: 20px;
+    font: 400 14px/1.5 ui-sans-serif, system-ui;
+    color: var(--fg, #333);
+  }
+  .changelog-version {
+    margin: 0 0 16px 0;
+    color: var(--accent, #ff4d6d);
+    font: 600 16px/1.3 ui-sans-serif, system-ui;
+    border-bottom: 1px solid var(--line, #e5e5e5);
+    padding-bottom: 8px;
+  }
+  .changelog-items {
+    margin: 12px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .changelog-items li {
+    margin: 8px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .changelog-items li:before {
+    content: '•';
+    color: var(--accent, #ff4d6d);
+    position: absolute;
+    left: 0;
+  }
+
+  /* Hide version indicator on mobile to avoid clutter */
+  @media (max-width: 768px) {
+    .version-indicator {
+      bottom: 15px;
+      right: 15px;
+      font-size: 9px;
+    }
+  }
+</style>
+
+<!-- Your Widget Content Here -->
+<div class="[widget-name]-portfolio" id="[widget-name]Pf">
+  <h2>[Widget Name] Portfolio</h2>
+  <!-- Widget implementation goes here -->
+</div>
+
+<!-- REQUIRED: Version indicator -->
+<div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v1.0</div>
+
+<!-- REQUIRED: Changelog Modal -->
+<div class="changelog-modal" id="changelogModal">
+  <div class="changelog-content">
+    <div class="changelog-header">
+      <h3 class="changelog-title">📸 [Widget Name] Changelog</h3>
+      <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v1.0 - Initial Release (Current)</div>
+      <ul class="changelog-items">
+        <li>Initial widget implementation</li>
+        <li>Basic functionality and styling</li>
+        <li>Responsive design support</li>
+      </ul>
+      
+      <!-- Add more versions as you update -->
+      <!-- 
+      <div class="changelog-version">v1.1 - Feature Update</div>
+      <ul class="changelog-items">
+        <li>New feature description</li>
+        <li>Bug fixes and improvements</li>
+      </ul>
+      -->
+    </div>
+  </div>
+</div>
+
+<script>
+// REQUIRED: Changelog modal functions
+function showChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function hideChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Close changelog on background click
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        hideChangelog();
+      }
+    });
+  }
+});
+
+// Close changelog on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('changelogModal');
+    if (modal && modal.classList.contains('active')) {
+      hideChangelog();
+    }
+  }
+});
+
+// Your widget logic goes here
+(function() {
+  // Widget implementation
+})();
+</script>
