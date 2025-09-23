@@ -232,7 +232,7 @@ async function createManifestEntry(image, isTemplate = false) {
   if (isTemplate) {
     entry._template_instructions = {
       published: "Set to true if this work has been published",
-      outlet: "Name of the publication/outlet (e.g., 'Local News Network')",
+      outlet: "Name of the publication/outlet (e.g., 'New York Post', 'Pittsburgh Union Progress', 'Technically', 'Next Generation Newsroom', 'The Globe')",
       outletUrl: "Homepage URL of the outlet",
       articleUrl: "Direct link to the published article/story",
       articleTitle: "Headline/title of the published article",
