@@ -508,7 +508,7 @@ function updateNextRefreshIndicator() {
   // Debug logging
   function logDebug(message, data = null) {
     if (debugActive) {
-console.log(`[Concert Debug v4.3] ${message}`, data || '');
+      console.log(`[Concert Debug v4.3] ${message}`, data || '');
       if (debugStatus) {
         debugStatus.textContent = message;
         updateDebugMetrics();
@@ -716,9 +716,9 @@ console.log(`[Concert Debug v4.3] ${message}`, data || '');
         card.appendChild(info);
         fragment.appendChild(card);
         
+        // Track for progressive image loading
         cards.push({ card, slot, img });
         
-        // Add lightbox click handler
         const openLightbox = () => {
           openLB(card, slot.allImages, slot);
         };
