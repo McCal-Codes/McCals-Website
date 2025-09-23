@@ -2,7 +2,11 @@
 
 All notable changes to this widget will be documented in this file.
 
-## v3.0 (2024-09-23) — Published Work Support 📰
+## v3.0.1 (2024-09-23) — Data Correction
+• Fixed Rooney Rule image marked as unpublished
+• Updated test data accuracy
+
+## v3.0 (2024-09-23) — Published Work Support 📰 [Pushed 2024-09-23]
 ### Major Release - Publication Tracking 🎉
 - **NEW**: Green "Published" badges for published images
 - **NEW**: Outlet information display in card overlays
