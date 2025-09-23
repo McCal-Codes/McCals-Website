@@ -166,125 +166,125 @@
 (function() {
   'use strict';
 
-  // Client data with local paths for testing
+  // Client data with local absolute file paths for testing
   const clientsData = [
     { 
       name: "New York Post", 
-      logo: "../assets/images/logos/new-york-post-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/new-york-post-logo.svg", 
       website: "https://nypost.com", 
       project: "Photojournalist" 
     },
     { 
       name: "Pittsburgh Magazine", 
-      logo: "../assets/images/logos/pittsburgh-magazine-real-logo.png", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/pittsburgh-magazine-real-logo.png", 
       website: "https://pittsburghmagazine.com", 
       project: "Feature Photography" 
     },
     { 
       name: "The Globe", 
-      logo: "../assets/images/logos/the-globe-real-logo.jpg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/the-globe-real-logo.jpg", 
       website: "https://ppuglobe.com", 
       project: "Photo Editor" 
     },
     { 
       name: "Point Park University", 
-      logo: "../assets/images/logos/point-park-university-real-logo.jpg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/point-park-university-real-logo.jpg", 
       website: "https://pointpark.edu", 
       project: "BFA Photography Student" 
     },
     { 
       name: "Pittsburgh Union Progress", 
-      logo: "../assets/images/logos/pittsburgh-union-progress-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/pittsburgh-union-progress-logo.svg", 
       website: "https://pittsburghunionprogress.com", 
       project: "Staff Photographer" 
     },
     { 
       name: "Yinzers Meet", 
-      logo: "../assets/images/logos/yinzers-meet-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/yinzers-meet-logo.svg", 
       website: "https://yinzersmeet.com", 
       project: "Event Photography" 
     },
     { 
       name: "Jagoff Media", 
-      logo: "../assets/images/logos/jagoff-media-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/jagoff-media-logo.svg", 
       website: "https://jagoffmedia.com", 
       project: "Content Photography" 
     },
     { 
       name: "Terrible Tailgate", 
-      logo: "../assets/images/logos/terrible-tailgate-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/terrible-tailgate-logo.svg", 
       website: "https://terribletailgate.com", 
       project: "Sports Event Photography" 
     },
     { 
       name: "Next Generation News", 
-      logo: "../assets/images/logos/next-generation-news-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/next-generation-news-logo.svg", 
       website: "https://nextgenerationnews.com", 
       project: "Photojournalist" 
     },
     { 
       name: "Ghostlight Theatre Company", 
-      logo: "../assets/images/logos/ghostlight-theatre-company-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/ghostlight-theatre-company-logo.svg", 
       website: "https://ghostlighttheatre.com", 
       project: "Theatre Photography" 
     },
     { 
       name: "Center for Media Innovation", 
-      logo: "../assets/images/logos/center-for-media-innovation-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/center-for-media-innovation-logo.svg", 
       website: "https://www.pointpark.edu/academics/rowlandhall/cmi", 
       project: "Media Innovation Photography" 
     },
     { 
       name: "Western PA Press Club", 
-      logo: "../assets/images/logos/western-pa-press-club-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/western-pa-press-club-logo.svg", 
       website: "https://www.westernpapress.org", 
       project: "Press Club Events" 
     },
     { 
       name: "Carnegie Mellon University", 
-      logo: "../assets/images/logos/carnegie-mellon-university-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/carnegie-mellon-university-logo.svg", 
       website: "https://www.cmu.edu", 
       project: "University Photography" 
     },
     { 
       name: "University of Pittsburgh", 
-      logo: "../assets/images/logos/university-of-pittsburgh-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/university-of-pittsburgh-logo.svg", 
       website: "https://www.pitt.edu", 
       project: "University Photography" 
     },
     { 
       name: "Butler County Community College", 
-      logo: "../assets/images/logos/bc3-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/bc3-logo.svg", 
       website: "https://www.bc3.edu", 
       project: "College Photography" 
     },
     { 
       name: "Penn State Fayette", 
-      logo: "../assets/images/logos/penn-state-fayette-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/penn-state-fayette-logo.svg", 
       website: "https://fayette.psu.edu", 
       project: "Campus Photography" 
     },
     { 
       name: "The Watchful Shepherd", 
-      logo: "../assets/images/logos/the-watchful-shepherd-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/the-watchful-shepherd-logo.svg", 
       website: "https://watchfulshepherd.org", 
       project: "Advocacy Photography" 
     },
     { 
       name: "Voyage Visuals", 
-      logo: "../assets/images/logos/voyage-visuals-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/voyage-visuals-logo.svg", 
       website: "https://voyagevisuals.com", 
       project: "Visual Production" 
     },
     { 
       name: "The Space Upstairs", 
-      logo: "../assets/images/logos/the-space-upstairs-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/the-space-upstairs-logo.svg", 
       website: "https://thespaceupstairs.com", 
       project: "Venue Photography" 
     },
     { 
       name: "Haven Pittsburgh", 
-      logo: "../assets/images/logos/haven-pittsburgh-logo.svg", 
+      logo: "file:///Users/mccal/McCals-Website/assets/images/logos/haven-pittsburgh-logo.svg", 
       website: "https://havenpittsburgh.org", 
       project: "Community Support Photography" 
     }
