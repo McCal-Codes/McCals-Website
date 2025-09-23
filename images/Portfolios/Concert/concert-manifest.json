@@ -1,8 +1,33 @@
 {
   "version": "1.0",
-  "generated": "2025-09-23T01:49:28.095Z",
-  "totalBands": 7,
+  "generated": "2025-09-23T02:02:05.040Z",
+  "totalBands": 15,
   "bands": [
+    {
+      "bandName": "Big Slime",
+      "folderPath": "Big Slime/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 10,
+      "images": [
+        "250820_Haven Block Party_CAL3068.jpg",
+        "250820_Haven Block Party_CAL3110.jpg",
+        "250820_Haven Block Party_CAL3152.jpg",
+        "250820_Haven Block Party_CAL3200.jpg",
+        "250820_Haven Block Party_CAL3236.jpg",
+        "250820_Haven Block Party_CAL3253.jpg",
+        "250820_Haven Block Party_CAL3269.jpg",
+        "250820_Haven Block Party_CAL3277.jpg",
+        "250820_Haven Block Party_CAL3281.jpg",
+        "250820_Haven Block Party_CAL3286.jpg"
+      ]
+    },
     {
       "bandName": "Casino Six",
       "folderPath": "Casino Six/August 2025",
@@ -91,6 +116,30 @@
       ]
     },
     {
+      "bandName": "The Head Trips",
+      "folderPath": "The Head Trips/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 9,
+      "images": [
+        "250820_Haven Block Party_CAL2893.jpg",
+        "250820_Haven Block Party_CAL2906.jpg",
+        "250820_Haven Block Party_CAL2911.jpg",
+        "250820_Haven Block Party_CAL2916.jpg",
+        "250820_Haven Block Party_CAL2918.jpg",
+        "250820_Haven Block Party_CAL2920.jpg",
+        "250820_Haven Block Party_CAL2925.jpg",
+        "250820_Haven Block Party_CAL2937.jpg",
+        "250820_Haven Block Party_CAL2946.jpg"
+      ]
+    },
+    {
       "bandName": "Turtle Park",
       "folderPath": "Turtle Park/August 2025",
       "dateDisplay": "August 2025",
@@ -130,6 +179,100 @@
         "250829_Haven_CAL4373.jpg",
         "250829_Haven_CAL4376.jpg",
         "250829_Haven_CAL4382.jpg"
+      ]
+    },
+    {
+      "bandName": "Wild Blue Yonder",
+      "folderPath": "Wild Blue Yonder/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 19,
+      "images": [
+        "250820_Haven Block Party_CAL3635.jpg",
+        "250820_Haven Block Party_CAL3665.jpg",
+        "250820_Haven Block Party_CAL3667.jpg",
+        "250820_Haven Block Party_CAL3671.jpg",
+        "250820_Haven Block Party_CAL3673.jpg",
+        "250820_Haven Block Party_CAL3674.jpg",
+        "250820_Haven Block Party_CAL3680 1.jpg",
+        "250820_Haven Block Party_CAL3680.jpg",
+        "250820_Haven Block Party_CAL3687 1.jpg",
+        "250820_Haven Block Party_CAL3687.jpg",
+        "250820_Haven Block Party_CAL3698.jpg",
+        "250820_Haven Block Party_CAL3706.jpg",
+        "250820_Haven Block Party_CAL3719.jpg",
+        "250820_Haven Block Party_CAL3720.jpg",
+        "250820_Haven Block Party_CAL3721.jpg",
+        "250820_Haven Block Party_CAL3731.jpg",
+        "250820_Haven Block Party_CAL3735.jpg",
+        "250820_Haven Block Party_CAL3739.jpg",
+        "250820_Haven Block Party_CAL3767.jpg"
+      ]
+    },
+    {
+      "bandName": "Dream The Heavy",
+      "folderPath": "Dream The Heavy/April 2025",
+      "dateDisplay": "April 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 4,
+        "monthName": "April",
+        "day": 1,
+        "iso": "2025-04-01"
+      },
+      "totalImages": 14,
+      "images": [
+        "250404 Haven Concert_CAL1915.jpg",
+        "250404 Haven Concert_CAL1919.jpg",
+        "250404 Haven Concert_CAL1992.jpg",
+        "250404 Haven Concert_CAL2036.jpg",
+        "250404 Haven Concert_CAL2041.jpg",
+        "250404 Haven Concert_CAL2157.jpg",
+        "250404 Haven Concert_CAL2190.jpg",
+        "250404 Haven Concert_CAL2238.jpg",
+        "250404 Haven Concert_CAL2243.jpg",
+        "250404 Haven Concert_CAL2282.jpg",
+        "250404 Haven Concert_CAL2349.jpg",
+        "250404 Haven Concert_CAL2368.jpg",
+        "250404 Haven Concert_CAL8785.jpg",
+        "250404 Haven Concert_CAL8787.jpg"
+      ]
+    },
+    {
+      "bandName": "Funky Lamp",
+      "folderPath": "Funky Lamp/April 2025",
+      "dateDisplay": "April 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 4,
+        "monthName": "April",
+        "day": 1,
+        "iso": "2025-04-01"
+      },
+      "totalImages": 16,
+      "images": [
+        "250404 Haven Concert_CAL2416.jpg",
+        "250404 Haven Concert_CAL2423.jpg",
+        "250404 Haven Concert_CAL2558.jpg",
+        "250404 Haven Concert_CAL8962.jpg",
+        "250404 Haven Concert_CAL8975.jpg",
+        "250404 Haven Concert_CAL8987.jpg",
+        "250404 Haven Concert_CAL8996.jpg",
+        "250404 Haven Concert_CAL9008.jpg",
+        "250404 Haven Concert_CAL9009.jpg",
+        "250404 Haven Concert_CAL9011.jpg",
+        "250404 Haven Concert_CAL9024.jpg",
+        "250404 Haven Concert_CAL9034.jpg",
+        "250404 Haven Concert_CAL9043.jpg",
+        "250404 Haven Concert_CAL9051.jpg",
+        "250404 Haven Concert_CAL9073.jpg",
+        "250404 Haven Concert_CAL9075.jpg"
       ]
     },
     {
@@ -178,6 +321,92 @@
         "2404_Funky Lamp Indie Fest_1567_CAL.jpg",
         "2404_Funky Lamp Indie Fest_1569_CAL.jpg",
         "2404_Funky Lamp Indie Fest_1570_CAL.jpg"
+      ]
+    },
+    {
+      "bandName": "9 Fifty Seven",
+      "folderPath": "9 Fifty Seven/March 2024",
+      "dateDisplay": "March 2024",
+      "concertDate": {
+        "year": 2024,
+        "month": 3,
+        "monthName": "March",
+        "day": 1,
+        "iso": "2024-03-01"
+      },
+      "totalImages": 5,
+      "images": [
+        "240315_Genesis Volume 1_599.jpg",
+        "240315_Genesis Volume 1_600.jpg",
+        "240315_Genesis Volume 1_602.jpg",
+        "240315_Genesis Volume 1_603.jpg",
+        "240315_Genesis Volume 1_606.jpg"
+      ]
+    },
+    {
+      "bandName": "Heading North",
+      "folderPath": "Heading North/March 2024",
+      "dateDisplay": "March 2024",
+      "concertDate": {
+        "year": 2024,
+        "month": 3,
+        "monthName": "March",
+        "day": 1,
+        "iso": "2024-03-01"
+      },
+      "totalImages": 19,
+      "images": [
+        "240315_Genesis Volume 1_464.jpg",
+        "240315_Genesis Volume 1_466.jpg",
+        "240315_Genesis Volume 1_470.jpg",
+        "240315_Genesis Volume 1_488.jpg",
+        "240315_Genesis Volume 1_491.jpg",
+        "240315_Genesis Volume 1_497.jpg",
+        "240315_Genesis Volume 1_501.jpg",
+        "240315_Genesis Volume 1_502.jpg",
+        "240315_Genesis Volume 1_503.jpg",
+        "240315_Genesis Volume 1_507.jpg",
+        "240315_Genesis Volume 1_510.jpg",
+        "240315_Genesis Volume 1_511.jpg",
+        "240315_Genesis Volume 1_515.jpg",
+        "240315_Genesis Volume 1_520.jpg",
+        "240315_Genesis Volume 1_526.jpg",
+        "240315_Genesis Volume 1_530.jpg",
+        "240315_Genesis Volume 1_549.jpg",
+        "240315_Genesis Volume 1_556.jpg",
+        "240315_Genesis Volume 1_558.jpg"
+      ]
+    },
+    {
+      "bandName": "Wild Blue Yonder",
+      "folderPath": "Wild Blue Yonder/March 2024",
+      "dateDisplay": "March 2024",
+      "concertDate": {
+        "year": 2024,
+        "month": 3,
+        "monthName": "March",
+        "day": 1,
+        "iso": "2024-03-01"
+      },
+      "totalImages": 17,
+      "images": [
+        "240315_Genesis Volume 1_561.jpg",
+        "240315_Genesis Volume 1_563.jpg",
+        "240315_Genesis Volume 1_566.jpg",
+        "240315_Genesis Volume 1_567.jpg",
+        "240315_Genesis Volume 1_570.jpg",
+        "240315_Genesis Volume 1_571.jpg",
+        "240315_Genesis Volume 1_574.jpg",
+        "240315_Genesis Volume 1_576.jpg",
+        "240315_Genesis Volume 1_578.jpg",
+        "240315_Genesis Volume 1_580.jpg",
+        "240315_Genesis Volume 1_587.jpg",
+        "240315_Genesis Volume 1_588.jpg",
+        "240315_Genesis Volume 1_589.jpg",
+        "240315_Genesis Volume 1_591.jpg",
+        "240315_Genesis Volume 1_595.jpg",
+        "240315_Genesis Volume 1_596.jpg",
+        "240315_Genesis Volume 1_597.jpg"
       ]
     }
   ]
