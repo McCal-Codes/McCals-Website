@@ -1,8 +1,8 @@
 {
   "version": "1.0",
-  "generated": "2025-09-23T22:12:24.265Z",
+  "generated": "2025-09-23T22:30:11.282Z",
   "totalEvents": 2,
-  "totalImages": 13,
+  "totalImages": 12,
   "categories": [
     "Politics",
     "Events",
@@ -12,7 +12,7 @@
   ],
   "categoryStats": {
     "Events": 1,
-    "Politics": 12
+    "Politics": 11
   },
   "events": [
     {
@@ -54,7 +54,7 @@
         "iso": "2024-03-15",
         "source": "filename_extraction"
       },
-      "totalImages": 12,
+      "totalImages": 11,
       "images": [
         {
           "filename": "250315_Butler Democracy Protest_CAL9773.jpg",
@@ -187,22 +187,6 @@
         {
           "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9759-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9773-min.jpg",
           "category": "Politics",
           "date": "2025-03-15T04:00:00.000Z",
           "caption": "Butler Democracy Protest - Politics photography",
