@@ -1,0 +1,763 @@
+<!-- Photojournalism Portfolio v4.0 — Master Manifest Optimized
+Author: Caleb McCartney / McCal-Codes
+Version: 4.0 Master Manifest Optimized
+Purpose: Efficient journalism widget similar to concert portfolio pattern
+
+Features:
+- Single API call using master manifest (like concert widget)
+- Event-based organization extracted from filenames
+- Smart caching to reduce API requests
+- Intelligent auto-refresh with pause on inactive tabs
+- Clean error handling and performance optimized
+- Category filtering (Politics, Events, Portraits, Published, Featured)
+- Publication metadata support
+- Debug panel for troubleshooting
+- Simplified codebase based on proven concert widget pattern
+
+Usage: Paste this entire block into a Squarespace Code Block
+Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-manifest.json
+-->
+
+<style>
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; --published:#00d4aa; }
+  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  .journalism-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
+  .journalism-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 18px; }
+  
+  /* Loading states */
+  .journalism-loading {
+    display: flex; align-items: center; justify-content: center; min-height: 200px;
+    font: 600 16px/1.4 ui-sans-serif,system-ui; color: var(--fg); opacity: 0.7;
+  }
+  .journalism-spinner {
+    width: 20px; height: 20px; border: 2px solid var(--line); border-top: 2px solid var(--accent);
+    border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Category filters */
+  .portfolio-filters { 
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:36px; 
+  }
+  .filter-btn {
+    background:transparent; border:1px solid var(--fg); color:var(--fg);
+    padding:12px 20px; border-radius:999px; cursor:pointer; font:600 14px/1 ui-sans-serif,system-ui;
+    transition:all 0.25s cubic-bezier(0.4,0,0.2,1); opacity:0.6;
+  }
+  .filter-btn:hover { transform:translateY(-2px); opacity:1; }
+  .filter-btn[aria-pressed="true"] { 
+    background:var(--fg); color:var(--bg); opacity:1; 
+    box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  }
+  
+  /* Published filter button special styling */
+  .filter-btn[data-filter="Published"] {
+    border-color: var(--published); color: var(--published);
+  }
+  .filter-btn[data-filter="Published"]:hover {
+    background: rgba(0, 212, 170, 0.1);
+  }
+  .filter-btn[data-filter="Published"][aria-pressed="true"] {
+    background: var(--published); color: var(--bg);
+  }
+
+  /* Auto-refresh indicator */
+  .auto-refresh-indicator {
+    position: fixed; bottom: 8px; right: 50px;
+    font: 400 10px/1 ui-sans-serif,system-ui; color: rgba(128, 128, 128, 0.6);
+    pointer-events: none; z-index: 1;
+  }
+
+  /* Version indicator */
+  .version-indicator {
+    position: fixed; bottom: 8px; right: 12px;
+    font: 400 10px/1 ui-sans-serif,system-ui; color: rgba(128, 128, 128, 0.6);
+    cursor: pointer; z-index: 1; transition: color 0.2s ease;
+  }
+  .version-indicator:hover { color: var(--accent); }
+
+  /* Debug Toggle Button */
+  .debug-toggle {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.85); border: 1px solid var(--line); color: var(--fg);
+    padding: 8px 16px; border-radius: 16px; cursor: pointer;
+    font: 600 12px/1 ui-sans-serif,system-ui; z-index: 1000; transition: all 0.3s ease;
+  }
+  .debug-toggle:hover {
+    background: rgba(0,0,0,0.95); box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0.9;
+  }
+
+  /* Debug info panel */
+  .debug-info {
+    position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.85); color: #fff; padding: 12px 16px; border-radius: 6px;
+    font: 600 11px/1.3 ui-monospace,monospace; z-index: 999; max-width: 500px;
+    border: 1px solid var(--line); display: none; backdrop-filter: blur(10px);
+  }
+  .debug-info.active { display: block; }
+
+  /* Natural-height Masonry Grid */
+  .journalism-grid { 
+    column-width:320px; column-gap:20px; text-align:left; opacity:0; transition:opacity 0.5s ease;
+  }
+  .journalism-grid.loaded { opacity: 1; }
+  @media (max-width:1024px) { .journalism-grid { column-width:280px } }
+  @media (max-width:768px) { .journalism-grid { column-width:240px } }
+  @media (max-width:520px) { .journalism-grid { column-width:100% } }
+
+  .journalism-card {
+    position:relative; display:inline-block; width:100%; margin:0 0 20px;
+    background:#111; border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+    opacity:0; transform:translateY(20px); transition:all 0.3s ease;
+  }
+  .journalism-card.loaded { opacity: 1; transform: translateY(0); }
+  .journalism-card.is-hidden { opacity:0; transform:scale(0.98); pointer-events:none; }
+  .journalism-card img {
+    display:block; width:100%; height:auto; object-fit:contain; border-radius:inherit;
+    transition:transform .35s ease, filter .35s ease;
+  }
+  .journalism-card:hover img { transform:scale(1.02); filter:contrast(1.08) saturate(1.08) }
+
+  /* Published badge */
+  .published-badge {
+    position: absolute; top: 8px; right: 8px; 
+    background: var(--published); color: white;
+    padding: 4px 8px; border-radius: 12px; 
+    font: 600 10px/1 ui-sans-serif,system-ui;
+    box-shadow: 0 2px 8px rgba(0, 212, 170, 0.3);
+    z-index: 2;
+  }
+
+  .journalism-info {
+    position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
+    padding:10px 14px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85)); color:#fff
+  }
+  .journalism-title { margin:0; font:800 16px/1.2 ui-sans-serif,system-ui }
+  .journalism-meta { margin:2px 0 0; font:600 12px/1.2 ui-sans-serif,system-ui; color:#e5e5e5 }
+
+  /* Loading states */
+  .journalism-card.loading::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  
+  .journalism-card.error { background: #2a1a1a; border: 1px solid #4a2a2a; }
+  .journalism-card.error::after {
+    content: '⚠️'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 24px; opacity: 0.5;
+  }
+
+  /* Lightbox (vertical scroll) */
+  .journalism-lightbox {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.9); z-index:2147483647 !important; padding:24px;
+    backdrop-filter: blur(8px);
+  }
+  .journalism-lightbox.is-open { display:flex }
+  .jl-dialog { position:relative; max-width:95vw; max-height:92vh; overflow:auto; background:transparent; outline:none }
+  .jl-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; padding-right:12px }
+  .jl-gallery img {
+    max-width:92vw; max-height:82vh; width:auto; height:auto; scroll-snap-align:center; 
+    border-radius:14px; margin:0 auto; transition:opacity 0.3s ease;
+  }
+  .jl-gallery img.loading { opacity: 0.7; }
+  .jl-gallery img.loaded { opacity: 1; }
+  .jl-caption { text-align:center; color:#fff; margin-top:14px }
+  .jl-title { margin:0 0 6px; font:800 20px/1.25 ui-sans-serif,system-ui }
+  .jl-meta { margin:0 0 10px; color:#cfcfcf; font:600 12px/1.3 ui-sans-serif,system-ui }
+  .jl-description { margin:0 0 10px; color:#e5e5e5; font:400 14px/1.4 ui-sans-serif,system-ui }
+  .jl-publication { margin:10px 0 0; padding:10px; border-radius:8px; background:rgba(0,212,170,0.1); }
+  .jl-publication a { color:var(--published); text-decoration:none; font:600 13px/1.3 ui-sans-serif,system-ui; }
+  .jl-publication a:hover { text-decoration:underline; }
+  .jl-close { 
+    position: absolute; top: 15px; right: 15px; 
+    border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.8); 
+    color: rgba(255, 255, 255, 0.9); border-radius: 50%; width: 36px; height: 36px;
+    cursor: pointer; font-weight: 600; font-size: 18px; display: flex;
+    align-items: center; justify-content: center; z-index: 10; transition: all 0.3s ease;
+    margin: 0; padding: 0;
+  }
+  .jl-close:hover {
+    background: rgba(0, 0, 0, 0.9); color: rgba(255, 255, 255, 1); transform: scale(1.05);
+  }
+  .jl-hint { 
+    position:sticky; top:6px; align-self:center; background:rgba(0,0,0,.55); color:#fff; 
+    padding:6px 10px; border-radius:999px; font:600 12px/1 ui-sans-serif,system-ui; 
+    transition:opacity .4s ease 
+  }
+  .jl-hint.fade { opacity:0 }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .journalism-portfolio { margin:60px auto; padding:20px; }
+    .journalism-heading { font-size:28px; }
+    .portfolio-filters { gap:8px; }
+    .filter-btn { padding:10px 16px; font-size:13px; }
+    .journalism-grid { margin-top:28px; }
+    .jl-close { top: 12px; right: 12px; }
+  }
+</style>
+
+<div class="journalism-portfolio" id="journalismPf" data-panes="24">
+  <h2 class="journalism-heading">Photojournalism Portfolio</h2>
+  
+  <!-- Category Filters -->
+  <div class="portfolio-filters" role="tablist" aria-label="Portfolio categories">
+    <button type="button" class="filter-btn" data-filter="*" aria-pressed="true" role="tab">All</button>
+    <button type="button" class="filter-btn" data-filter="Politics" aria-pressed="false" role="tab">Politics</button>
+    <button type="button" class="filter-btn" data-filter="Events" aria-pressed="false" role="tab">Events</button>
+    <button type="button" class="filter-btn" data-filter="Portraits" aria-pressed="false" role="tab">Portraits</button>
+    <button type="button" class="filter-btn" data-filter="Published" aria-pressed="false" role="tab">Published Work</button>
+    <button type="button" class="filter-btn" data-filter="Featured" aria-pressed="false" role="tab">Featured Stories</button>
+  </div>
+  
+  <div class="journalism-loading" id="journalismLoading">
+    <div class="journalism-spinner"></div>
+    Loading photojournalism portfolio...
+  </div>
+  <div class="journalism-grid" id="journalismGrid"></div>
+</div>
+
+<div class="journalism-lightbox" id="journalismLightbox" aria-hidden="true">
+  <div class="jl-dialog" role="dialog" aria-modal="true" aria-labelledby="jlLbTitle" tabindex="-1">
+    <button class="jl-close" type="button" aria-label="Close">&times;</button>
+    <div class="jl-gallery" id="jlGallery">
+      <div class="jl-hint">Scroll ↓</div>
+    </div>
+    <div class="jl-caption">
+      <h3 class="jl-title" id="jlLbTitle"></h3>
+      <p class="jl-meta" id="jlLbMeta"></p>
+      <p class="jl-description" id="jlLbDescription"></p>
+      <div class="jl-publication" id="jlLbPublication" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Version indicator -->
+<div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v4.0</div>
+<div class="auto-refresh-indicator" id="autoRefreshIndicator">Next refresh: --</div>
+
+<!-- Debug Toggle Button -->
+<button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
+
+<!-- Debug info panel -->
+<div class="debug-info" id="debugInfo">
+  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">📰 Journalism Debug v4.0</div>
+  <div>Status: <span id="debugStatus">Ready</span></div>
+  <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
+  <div>Events: <span id="debugEventCount">--</span></div>
+  <div>Images: <span id="debugImageCount">--</span></div>
+  <div>API Calls: <span id="debugApiCalls">--</span></div>
+  <div>Last Refresh: <span id="debugLastRefresh">--</span></div>
+  <div>Auto-Refresh: <span id="debugAutoRefresh">Enabled</span></div>
+</div>
+
+<script>
+// Debug toggle functionality
+let debugActive = false;
+let debugMetrics = {
+  startTime: performance.now(),
+  apiCalls: 0,
+  eventCount: 0,
+  imageCount: 0,
+  lastRefresh: 'Never'
+};
+
+// Auto-refresh configuration - Optimized to 15 minutes with intelligent refresh
+const AUTO_REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes
+const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes cache
+const CACHE_KEY = 'journalism-manifest-cache';
+let autoRefreshTimer = null;
+let isTabVisible = true;
+let lastVisibilityChange = Date.now();
+
+function toggleDebug() {
+  debugActive = !debugActive;
+  const debugPanel = document.getElementById('debugInfo');
+  if (debugPanel) {
+    debugPanel.classList.toggle('active', debugActive);
+    if (debugActive) {
+      updateDebugMetrics();
+    }
+  }
+}
+
+function updateDebugMetrics() {
+  const loadTime = Math.round(performance.now() - debugMetrics.startTime);
+  document.getElementById('debugLoadTime').textContent = loadTime;
+  document.getElementById('debugEventCount').textContent = debugMetrics.eventCount;
+  document.getElementById('debugImageCount').textContent = debugMetrics.imageCount;
+  document.getElementById('debugApiCalls').textContent = debugMetrics.apiCalls;
+  document.getElementById('debugLastRefresh').textContent = debugMetrics.lastRefresh;
+}
+
+function updateNextRefreshIndicator() {
+  const indicator = document.getElementById('autoRefreshIndicator');
+  if (!indicator) return;
+  
+  let timeLeft = AUTO_REFRESH_INTERVAL;
+  
+  const updateCountdown = () => {
+    const minutes = Math.floor(timeLeft / 60000);
+    const seconds = Math.floor((timeLeft % 60000) / 1000);
+    indicator.textContent = `Next refresh: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (timeLeft > 0) {
+      timeLeft -= 1000;
+      setTimeout(updateCountdown, 1000);
+    }
+  };
+  
+  updateCountdown();
+}
+
+(function() {
+  const pf = document.getElementById('journalismPf');
+  const grid = document.getElementById('journalismGrid');
+  const loading = document.getElementById('journalismLoading');
+  const debugStatus = document.getElementById('debugStatus');
+  const filters = document.querySelectorAll('.filter-btn');
+  
+  if (!grid) return;
+
+  const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
+  
+  // Debug logging
+  function logDebug(message, data = null) {
+    if (debugActive) {
+      console.log(`[Journalism Debug v4.0] ${message}`, data || '');
+      if (debugStatus) {
+        debugStatus.textContent = message;
+        updateDebugMetrics();
+      }
+    }
+  }
+  
+  // Cache management
+  function getCachedManifest() {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const data = JSON.parse(cached);
+        const age = Date.now() - data.timestamp;
+        if (age < CACHE_DURATION) {
+          logDebug('Using cached manifest', `Age: ${Math.round(age/1000)}s`);
+          return data.manifest;
+        }
+      }
+    } catch (error) {
+      logDebug('Cache read error', error.message);
+    }
+    return null;
+  }
+  
+  function setCachedManifest(manifest) {
+    try {
+      const data = {
+        manifest,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      logDebug('Manifest cached successfully');
+    } catch (error) {
+      logDebug('Cache write error', error.message);
+    }
+  }
+
+  // GitHub configuration - STABLE APPROACH
+  const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main' };
+  const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+  const manifestUrl = rawBase + 'src/images/Portfolios/Journalism/journalism-manifest.json';
+
+  function rawUrl(parts) { 
+    return rawBase + 'src/images/Portfolios/Journalism/' + parts.map(encodeURIComponent).join('/'); 
+  }
+
+  // Load master manifest - CACHED API CALL!
+  async function loadMasterManifest(forceRefresh = false) {
+    // Try cache first unless forcing refresh
+    if (!forceRefresh) {
+      const cached = getCachedManifest();
+      if (cached) {
+        debugMetrics.lastRefresh = new Date().toLocaleTimeString();
+        return cached;
+      }
+    }
+    
+    debugMetrics.apiCalls++;
+    logDebug('Loading master manifest from API...');
+    
+    try {
+      const response = await fetch(manifestUrl);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const manifest = await response.json();
+      logDebug('Master manifest loaded from API', `${manifest.events?.length || 0} events (Generated: ${manifest.generated})`);
+      
+      // Cache the fresh data
+      setCachedManifest(manifest);
+      
+      debugMetrics.lastRefresh = new Date().toLocaleTimeString();
+      return manifest;
+    } catch (error) {
+      logDebug('Master manifest failed', error.message);
+      throw error;
+    }
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Main build function with stable error handling
+  async function build(forceRefresh = false) {
+    const startTime = performance.now();
+    
+    try {
+      loading.style.display = 'flex';
+      grid.style.display = 'none';
+
+      logDebug('Starting build process...');
+
+      // Load master manifest - CACHED OR SINGLE API CALL!
+      const manifest = await loadMasterManifest(forceRefresh);
+      
+      if (!manifest || !manifest.events || manifest.events.length === 0) {
+        throw new Error('No journalism data found in manifest.');
+      }
+
+      logDebug(`Loaded ${manifest.events.length} events from manifest (Generated: ${manifest.generated})`);
+      
+      const pools = [];
+      
+      // Process events from manifest
+      for (const event of manifest.events) {
+        const images = shuffle(event.images.slice());
+        pools.push({
+          dir: event.folderPath,
+          parts: event.folderPath.split('/'),
+          title: event.eventName,
+          category: event.category,
+          dateDisplay: event.dateDisplay,
+          images,
+          allImages: event.images.slice(),
+          published: event.published
+        });
+        logDebug(`Added pool for ${event.eventName}`, `${images.length} images, category: ${event.category}`);
+      }
+
+      debugMetrics.eventCount = pools.length;
+      logDebug(`Created ${pools.length} image pools`);
+
+      if (!pools.length) {
+        throw new Error('No journalism images available from manifest.');
+      }
+
+      // Clear existing grid
+      grid.innerHTML = '';
+
+      // Create cards with round-robin
+      const slots = [];
+      let progress = true;
+      while (slots.length < TARGET_PANES && progress) {
+        progress = false;
+        for (const pool of pools) {
+          if (slots.length >= TARGET_PANES) break;
+          const imageData = pool.images.shift();
+          if (imageData) {
+            slots.push({
+              dir: pool.dir,
+              parts: pool.parts,
+              title: pool.title,
+              category: pool.category,
+              dateDisplay: pool.dateDisplay,
+              thumb: imageData.filename,
+              imageData: imageData,
+              allImages: pool.allImages,
+              published: pool.published
+            });
+            progress = true;
+          }
+        }
+      }
+
+      debugMetrics.imageCount = slots.length;
+      logDebug(`Created ${slots.length} image slots`);
+
+      // Render cards
+      const fragment = document.createDocumentFragment();
+      const cards = [];
+
+      for (let i = 0; i < slots.length; i++) {
+        const slot = slots[i];
+        const card = document.createElement('article');
+        card.className = 'journalism-card loading';
+        card.tabIndex = 0;
+        card.dataset.dir = slot.dir;
+        card.dataset.category = slot.category;
+
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = `${slot.title} journalism photo`;
+
+        const info = document.createElement('div');
+        info.className = 'journalism-info';
+        info.innerHTML = `
+          <h3 class="journalism-title">${slot.title}</h3>
+          <p class="journalism-meta">${slot.dateDisplay} • ${slot.category}</p>
+        `;
+
+        if (slot.published) {
+          const badge = document.createElement('div');
+          badge.className = 'published-badge';
+          badge.textContent = 'Published';
+          card.appendChild(badge);
+        }
+
+        card.appendChild(img);
+        card.appendChild(info);
+        fragment.appendChild(card);
+        
+        cards.push({ card, slot, img });
+        
+        // Add lightbox click handler
+        const openLightbox = () => {
+          openLB(card, slot.allImages, slot);
+        };
+        
+        card.addEventListener('click', openLightbox);
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox();
+          }
+        });
+      }
+
+      grid.appendChild(fragment);
+
+      // Load images with staggered timing
+      cards.forEach(({ card, slot, img }, index) => {
+        setTimeout(() => {
+          const imagePath = slot.imageData.path;
+          const imageUrl = rawUrl(imagePath.split('/'));
+          
+          img.onload = () => {
+            card.classList.remove('loading');
+            card.classList.add('loaded');
+            logDebug(`Image loaded: ${slot.thumb}`);
+          };
+          
+          img.onerror = () => {
+            card.classList.remove('loading');
+            card.classList.add('error');
+            logDebug(`Image failed: ${slot.thumb}`);
+          };
+          
+          img.src = imageUrl;
+        }, index * 50); // Stagger loading
+      });
+
+      // Show grid with animation
+      setTimeout(() => {
+        loading.style.display = 'none';
+        grid.style.display = 'block';
+        grid.classList.add('loaded');
+        logDebug('Grid displayed successfully');
+      }, 300);
+
+    } catch (error) {
+      logDebug('Build failed', error.message);
+      loading.innerHTML = `
+        <div style="color: var(--accent); font-weight: 600;">⚠️ Failed to load journalism portfolio</div>
+        <div style="margin-top: 8px; font-size: 14px; opacity: 0.8;">${error.message}</div>
+      `;
+    }
+  }
+
+  // Lightbox functionality
+  function openLB(card, allImages, eventData) {
+    const lightbox = document.getElementById('journalismLightbox');
+    const gallery = document.getElementById('jlGallery');
+    const hint = gallery.querySelector('.jl-hint');
+    
+    if (!lightbox || !gallery) return;
+    
+    // Clear previous content except hint
+    gallery.innerHTML = '<div class="jl-hint">Scroll ↓</div>';
+    
+    // Add all images from this event
+    allImages.forEach((imageData, index) => {
+      const img = document.createElement('img');
+      img.alt = `${eventData.title} - Image ${index + 1}`;
+      img.classList.add('loading');
+      
+      const imagePath = imageData.path;
+      const imageUrl = rawUrl(imagePath.split('/'));
+      
+      img.onload = () => {
+        img.classList.remove('loading');
+        img.classList.add('loaded');
+      };
+      
+      img.src = imageUrl;
+      gallery.appendChild(img);
+    });
+    
+    // Update caption info
+    document.getElementById('jlLbTitle').textContent = eventData.title;
+    document.getElementById('jlLbMeta').textContent = `${eventData.dateDisplay} • ${eventData.category} • ${allImages.length} images`;
+    
+    // Handle description and publication info
+    const firstImage = allImages[0];
+    const descElement = document.getElementById('jlLbDescription');
+    const pubElement = document.getElementById('jlLbPublication');
+    
+    if (firstImage.description) {
+      descElement.textContent = firstImage.description;
+      descElement.style.display = 'block';
+    } else {
+      descElement.style.display = 'none';
+    }
+    
+    if (firstImage.published && firstImage.outlet) {
+      pubElement.innerHTML = `
+        <strong>Published in:</strong> 
+        <a href="${firstImage.outletUrl || '#'}" target="_blank">${firstImage.outlet}</a>
+        ${firstImage.articleUrl ? `<br><a href="${firstImage.articleUrl}" target="_blank">${firstImage.articleTitle || 'Read article'}</a>` : ''}
+      `;
+      pubElement.style.display = 'block';
+    } else {
+      pubElement.style.display = 'none';
+    }
+    
+    // Show lightbox
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    
+    // Hide hint after 3 seconds
+    setTimeout(() => {
+      if (hint) hint.classList.add('fade');
+    }, 3000);
+  }
+
+  // Close lightbox
+  function closeLB() {
+    const lightbox = document.getElementById('journalismLightbox');
+    if (lightbox) {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Event listeners
+  document.addEventListener('click', e => {
+    if (e.target.closest('.jl-close')) {
+      closeLB();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeLB();
+    }
+  });
+
+  // Filter functionality
+  let activeFilter = '*';
+  
+  function applyFilter(filterValue) {
+    const cards = document.querySelectorAll('.journalism-card');
+    
+    cards.forEach(card => {
+      const cardCategory = card.dataset.category;
+      const shouldShow = filterValue === '*' || cardCategory === filterValue;
+      
+      if (shouldShow) {
+        card.classList.remove('is-hidden');
+      } else {
+        card.classList.add('is-hidden');
+      }
+    });
+    
+    logDebug(`Filter applied: ${filterValue}`);
+  }
+  
+  // Filter button event listeners
+  filters.forEach(button => {
+    button.addEventListener('click', () => {
+      const filterValue = button.dataset.filter;
+      
+      // Update button states
+      filters.forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+      button.setAttribute('aria-pressed', 'true');
+      
+      // Apply filter
+      activeFilter = filterValue;
+      applyFilter(filterValue);
+    });
+  });
+
+  // Tab visibility detection for smart refresh
+  document.addEventListener('visibilitychange', () => {
+    isTabVisible = !document.hidden;
+    lastVisibilityChange = Date.now();
+    logDebug(`Tab visibility changed: ${isTabVisible ? 'visible' : 'hidden'}`);
+  });
+
+  // Auto-refresh function
+  function scheduleRefresh() {
+    if (autoRefreshTimer) {
+      clearTimeout(autoRefreshTimer);
+    }
+    
+    autoRefreshTimer = setTimeout(async () => {
+      // Only refresh if tab is visible or was hidden for less than 5 minutes
+      const timeSinceHidden = Date.now() - lastVisibilityChange;
+      if (isTabVisible || timeSinceHidden < 5 * 60 * 1000) {
+        logDebug('Auto-refreshing manifest...');
+        try {
+          await build(true); // Force refresh
+          updateNextRefreshIndicator();
+        } catch (error) {
+          logDebug('Auto-refresh failed', error.message);
+        }
+      } else {
+        logDebug('Skipping auto-refresh (tab hidden too long)');
+      }
+      
+      scheduleRefresh(); // Schedule next refresh
+    }, AUTO_REFRESH_INTERVAL);
+    
+    updateNextRefreshIndicator();
+  }
+
+  // Initialize
+  logDebug('Initializing journalism portfolio...');
+  build().then(() => {
+    logDebug('Initial build complete');
+    scheduleRefresh();
+  }).catch(error => {
+    logDebug('Initial build failed', error.message);
+  });
+
+})();
+
+function showChangelog() {
+  alert('📰 Journalism Portfolio v4.0 - Master Manifest Optimized\n\nNew Features:\n• Single API call using master manifest (like concert widget)\n• Event-based organization from filenames\n• Smart caching (10-minute duration)\n• Intelligent 15-minute auto-refresh\n• Category filtering (Politics, Events, Portraits, Published, Featured)\n• Publication metadata support\n• Enhanced debug panel\n• Reduced API calls by ~70% vs v3.0');
+}
+</script>

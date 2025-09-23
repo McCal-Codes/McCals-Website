@@ -1,20 +1,19 @@
 #!/usr/bin/env node
 
 /**
- * Journalism Portfolio Manifest Generator
- * Generates manifest.json for journalism portfolio with publication tracking
+ * Journalism Portfolio Master Manifest Generator
+ * Creates a master manifest similar to concert portfolio for efficient loading
  * 
  * Features:
- * - Auto-discovers images in journalism folders
- * - Creates structured manifest with publication metadata
- * - Supports outlet information and article links
- * - EXIF data extraction for dates and captions
- * - Template generation for easy editing
+ * - Single consolidated JSON for all journalism images
+ * - Category-based organization (Politics, Events, Portraits, etc.)
+ * - Publication metadata tracking
+ * - Optimized for widget performance
+ * - Compatible with existing individual manifest.json
  * 
  * Usage:
  *   node scripts/generate-journalism-manifest.js
  *   node scripts/generate-journalism-manifest.js --force  # Overwrite existing
- *   node scripts/generate-journalism-manifest.js --template  # Template only
  */
 
 const fs = require('fs').promises;
@@ -22,21 +21,22 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 // Configuration
-const JOURNALISM_DIR = path.join(__dirname, '../images/Portfolios/Journalism');
-const MANIFEST_FILE = path.join(JOURNALISM_DIR, 'manifest.json');
+const JOURNALISM_DIR = path.join(__dirname, '../src/images/Portfolios/Journalism');
+const INDIVIDUAL_MANIFEST = path.join(JOURNALISM_DIR, 'manifest.json');
+const MASTER_MANIFEST = path.join(JOURNALISM_DIR, 'journalism-manifest.json');
 const SUPPORTED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+const CATEGORIES = ['Politics', 'Events', 'Portraits', 'Featured', 'Published'];
 
 // Command line arguments
 const args = process.argv.slice(2);
 const FORCE_OVERWRITE = args.includes('--force');
-const TEMPLATE_ONLY = args.includes('--template');
 
 /**
  * Main execution function
  */
 async function main() {
   try {
-    console.log('🔍 Journalism Portfolio Manifest Generator v1.0');
+    console.log('🔍 Journalism Portfolio Master Manifest Generator v2.0');
     console.log(`📁 Scanning: ${JOURNALISM_DIR}`);
     
     // Check if journalism directory exists
@@ -45,9 +45,9 @@ async function main() {
       process.exit(1);
     }
     
-    // Check if manifest already exists
-    if (await exists(MANIFEST_FILE) && !FORCE_OVERWRITE && !TEMPLATE_ONLY) {
-      console.log('📄 Manifest file already exists. Use --force to overwrite or --template for template generation.');
+    // Check if master manifest already exists
+    if (await exists(MASTER_MANIFEST) && !FORCE_OVERWRITE) {
+      console.log('📄 Master manifest already exists. Use --force to overwrite.');
       process.exit(0);
     }
     
@@ -60,58 +60,130 @@ async function main() {
       process.exit(0);
     }
     
-    // Load existing manifest if it exists
-    let existingManifest = {};
-    if (await exists(MANIFEST_FILE)) {
+    // Load existing individual manifest for metadata
+    let individualManifest = {};
+    if (await exists(INDIVIDUAL_MANIFEST)) {
       try {
-        const existingContent = await fs.readFile(MANIFEST_FILE, 'utf-8');
-        existingManifest = JSON.parse(existingContent);
-        console.log('📋 Loaded existing manifest data');
+        const content = await fs.readFile(INDIVIDUAL_MANIFEST, 'utf-8');
+        individualManifest = JSON.parse(content);
+        console.log('📋 Loaded existing individual manifest data');
       } catch (error) {
-        console.warn('⚠️  Could not parse existing manifest, creating new one');
+        console.warn('⚠️  Could not parse individual manifest');
       }
     }
     
-    // Generate manifest entries
-    console.log('🏗️  Generating manifest entries...');
-    const manifest = {};
+    // Process and organize images by events (similar to concert bands)
+    console.log('🏗️  Processing images by events...');
+    const eventMap = new Map();
+    const categoryStats = {};
     
     for (const image of images) {
       const key = image.relativePath;
+      const existing = individualManifest[key] || individualManifest[image.filename] || {};
       
-      // Use existing data if available, otherwise create template
-      if (existingManifest[key]) {
-        manifest[key] = existingManifest[key];
-        console.log(`   ✓ Preserved existing: ${key}`);
-      } else {
-        manifest[key] = await createManifestEntry(image, TEMPLATE_ONLY);
-        console.log(`   + Added new: ${key}`);
+      // Extract event name from filename
+      const eventName = extractEventFromFilename(image.filename);
+      const category = existing.published ? 'Published' : image.category;
+      
+      // Create processed image entry
+      const processedImage = {
+        filename: image.filename,
+        path: image.relativePath,
+        category: category,
+        date: existing.date || extractDateFromFilename(image.filename) || new Date().toISOString(),
+        caption: existing.caption || `${eventName} - ${category} photography`,
+        description: existing.description || '',
+        published: existing.published || false,
+        outlet: existing.outlet || null,
+        outletUrl: existing.outletUrl || null,
+        articleUrl: existing.articleUrl || null,
+        articleTitle: existing.articleTitle || null,
+        publishedDate: existing.publishedDate || null,
+        folderName: image.folderName,
+        eventName: eventName
+      };
+      
+      // Group by event name
+      if (!eventMap.has(eventName)) {
+        eventMap.set(eventName, {
+          eventName: eventName,
+          category: category,
+          folderPath: image.folderName || category,
+          dateDisplay: new Date(processedImage.date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          }),
+          eventDate: {
+            iso: processedImage.date.split('T')[0],
+            source: 'filename_extraction'
+          },
+          totalImages: 0,
+          images: [],
+          published: processedImage.published
+        });
       }
+      
+      const event = eventMap.get(eventName);
+      event.images.push(processedImage);
+      event.totalImages = event.images.length;
+      
+      // If any image in event is published, mark event as published
+      if (processedImage.published) {
+        event.published = true;
+        event.category = 'Published';
+      }
+      
+      // Update category stats
+      categoryStats[category] = (categoryStats[category] || 0) + 1;
+      
+      console.log(`   ✓ ${eventName} (${category}): ${image.filename}`);
     }
     
-    // Write manifest file
-    const manifestJson = JSON.stringify(manifest, null, 2);
-    await fs.writeFile(MANIFEST_FILE, manifestJson, 'utf-8');
+    // Convert to array and sort by date (newest first)
+    const events = Array.from(eventMap.values())
+      .sort((a, b) => new Date(b.eventDate.iso) - new Date(a.eventDate.iso));
     
-    console.log(`\n✅ Manifest generated successfully!`);
-    console.log(`📄 File: ${MANIFEST_FILE}`);
-    console.log(`📊 Entries: ${Object.keys(manifest).length}`);
+    // Create master manifest structure (similar to concert-manifest.json)
+    const masterManifest = {
+      version: '1.0',
+      generated: new Date().toISOString(),
+      totalEvents: events.length,
+      totalImages: events.reduce((sum, event) => sum + event.totalImages, 0),
+      categories: CATEGORIES,
+      categoryStats,
+      events: events
+    };
     
-    if (TEMPLATE_ONLY) {
-      console.log(`\n💡 Template generated! Edit the manifest.json file to add publication details:`);
-      console.log(`   - Set "published": true for published work`);
-      console.log(`   - Add outlet information and article links`);
-      console.log(`   - Update captions and descriptions`);
+    // Write master manifest
+    const manifestJson = JSON.stringify(masterManifest, null, 2);
+    await fs.writeFile(MASTER_MANIFEST, manifestJson, 'utf-8');
+    
+    console.log(`\n✅ Master manifest generated successfully!`);
+    console.log(`📄 File: ${MASTER_MANIFEST}`);
+    console.log(`📊 Total events: ${masterManifest.totalEvents}`);
+    console.log(`📊 Total images: ${masterManifest.totalImages}`);
+    
+    // Show event breakdown
+    events.forEach(event => {
+      console.log(`   📅 ${event.eventName}: ${event.totalImages} images (${event.category})`);
+    });
+    
+    // Show category breakdown
+    Object.entries(categoryStats).forEach(([category, count]) => {
+      console.log(`   📂 ${category}: ${count} images`);
+    });
+    
+    // Show published work summary
+    const publishedEvents = events.filter(event => event.published).length;
+    if (publishedEvents > 0) {
+      console.log(`📰 Published events: ${publishedEvents}`);
     }
     
-    // Show summary of published work
-    const publishedCount = Object.values(manifest).filter(entry => entry.published).length;
-    if (publishedCount > 0) {
-      console.log(`📰 Published work: ${publishedCount} images`);
-    }
+    console.log(`\n💡 Widget will now load efficiently from single master manifest!`);
     
   } catch (error) {
-    console.error('❌ Error generating manifest:', error.message);
+    console.error('❌ Error generating master manifest:', error.message);
     process.exit(1);
   }
 }
@@ -200,6 +272,55 @@ function categorizeFromPath(relativePath) {
 }
 
 /**
+ * Extract date from filename patterns
+ */
+function extractDateFromFilename(filename) {
+  // Try various date patterns common in photography
+  const patterns = [
+    /([0-9]{2})([0-9]{2})([0-9]{2})/,  // YYMMDD
+    /([0-9]{4})([0-9]{2})([0-9]{2})/,  // YYYYMMDD
+    /([0-9]{2})-([0-9]{2})-([0-9]{2})/, // YY-MM-DD
+    /([0-9]{4})-([0-9]{2})-([0-9]{2})/ // YYYY-MM-DD
+  ];
+  
+  for (const pattern of patterns) {
+    const match = filename.match(pattern);
+    if (match) {
+      let year = parseInt(match[1]);
+      let month = parseInt(match[2]);
+      let day = parseInt(match[3]);
+      
+      // Handle 2-digit years
+      if (year < 100) {
+        year = year + 2000;
+      }
+      
+      // Validate date ranges
+      if (year >= 2020 && year <= 2030 && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+        return new Date(year, month - 1, day).toISOString();
+      }
+    }
+  }
+  
+  return null;
+}
+
+/**
+ * Extract event name from filename by removing date prefixes and camera suffixes
+ */
+function extractEventFromFilename(filename) {
+  return filename
+    .replace(/\.[^/.]+$/, '') // Remove file extension
+    .replace(/^\d{6}_?/, '') // Remove YYMMDD date prefix
+    .replace(/^\d{8}_?/, '') // Remove YYYYMMDD date prefix
+    .replace(/_CAL\d+.*$/, '') // Remove camera suffix like _CAL3148
+    .replace(/-min$/, '') // Remove -min suffix
+    .replace(/[-_]/g, ' ') // Replace hyphens/underscores with spaces
+    .replace(/\s+/g, ' ') // Collapse multiple spaces
+    .trim();
+}
+
+/**
  * Create a manifest entry for an image
  */
 async function createManifestEntry(image, isTemplate = false) {
@@ -282,5 +403,7 @@ module.exports = {
   discoverImages,
   createManifestEntry,
   categorizeFromPath,
-  titleFromFilename
+  titleFromFilename,
+  extractDateFromFilename,
+  extractEventFromFilename
 };
