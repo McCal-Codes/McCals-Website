@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background: transparent;">
+  <!-- Voyage Visuals logo based on geometric V design -->
+  
+  <!-- Left side of V with internal geometric pattern -->
+  <path d="M 50 50 L 150 50 L 200 250 L 120 250 Z" fill="#C9A961" stroke="#C9A961" stroke-width="2"/>
+  
+  <!-- Left internal geometric lines -->
+  <path d="M 70 70 L 130 70 L 170 200 L 140 200 Z" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <path d="M 90 90 L 110 90 L 130 150 L 120 150 Z" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+  
+  <!-- Right side of V with internal geometric pattern -->
+  <path d="M 250 50 L 350 50 L 280 250 L 200 250 Z" fill="#C9A961" stroke="#C9A961" stroke-width="2"/>
+  
+  <!-- Right internal geometric lines -->
+  <path d="M 270 70 L 330 70 L 260 200 L 230 200 Z" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <path d="M 290 90 L 310 90 L 280 150 L 270 150 Z" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+  
+  <!-- Additional geometric details -->
+  <path d="M 80 100 L 120 140" stroke="#FFFFFF" stroke-width="2"/>
+  <path d="M 280 100 L 320 140" stroke="#FFFFFF" stroke-width="2"/>
+  
+  <!-- Small geometric accent shapes at top -->
+  <polygon points="100,60 110,60 115,75 95,75" fill="#FFFFFF" opacity="0.8"/>
+  <polygon points="285,60 305,60 300,75 290,75" fill="#FFFFFF" opacity="0.8"/>
+</svg>

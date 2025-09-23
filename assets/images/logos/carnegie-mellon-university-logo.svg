@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="background: transparent;">
+  <defs>
+    <!-- CMU colors gradient -->
+    <linearGradient id="cmuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CC0000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Text gradient -->
+    <linearGradient id="cmuTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8B0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#660000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield background -->
+  <path d="M15 15 L15 55 L30 65 L45 55 L45 15 Z" fill="url(#cmuGradient)" stroke="#660000" stroke-width="1"/>
+  
+  <!-- Scottish thistle representation -->
+  <g transform="translate(22, 20)">
+    <!-- Thistle flower -->
+    <ellipse cx="8" cy="8" rx="6" ry="4" fill="#ffffff" opacity="0.9"/>
+    <!-- Thistle leaves -->
+    <path d="M2,15 Q5,12 8,15 Q11,12 14,15 L14,25 Q11,28 8,25 Q5,28 2,25 Z" 
+          fill="#ffffff" opacity="0.8"/>
+    <!-- Stem -->
+    <line x1="8" y1="12" x2="8" y2="30" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  
+  <!-- University name -->
+  <text x="55" y="22" font-family="Times, serif" font-size="12" font-weight="bold" 
+        fill="url(#cmuTextGradient)" letter-spacing="0.3px">CARNEGIE</text>
+  <text x="55" y="36" font-family="Times, serif" font-size="12" font-weight="bold" 
+        fill="url(#cmuTextGradient)" letter-spacing="0.3px">MELLON</text>
+  <text x="55" y="50" font-family="Times, serif" font-size="12" font-weight="bold" 
+        fill="url(#cmuTextGradient)" letter-spacing="0.3px">UNIVERSITY</text>
+  
+  <!-- Tagline -->
+  <text x="55" y="62" font-family="Arial, sans-serif" font-size="8" font-weight="400" 
+        fill="#666666" letter-spacing="0.2px">INNOVATION • EXCELLENCE</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="180" cy="20" r="2" fill="url(#cmuGradient)" opacity="0.4"/>
+  <circle cx="185" cy="60" r="1.5" fill="url(#cmuGradient)" opacity="0.3"/>
+</svg>
