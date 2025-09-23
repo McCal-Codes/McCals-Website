@@ -1,5 +1,19 @@
 <!-- COMPLETE ABOUT SECTION WITH CLIENT CAROUSEL FOR SQUARESPACE -->
 <!-- Copy this entire code block into a Squarespace Code Block -->
+<!--
+🔧 DEBUGGING:
+To troubleshoot logo loading issues in Squarespace:
+1. Open browser Developer Tools (F12)
+2. Go to Console tab
+3. Look for [Squarespace Widget Debug] messages
+4. Debug logging shows:
+   - Widget initialization details
+   - Each client logo loading attempt
+   - Success/failure for each image
+   - Fallback usage when needed
+   
+💡 To disable debug logging, change DEBUG = false in the script below
+-->
 
 <style>
   /* Complete About Section Styles */
@@ -198,6 +212,48 @@
 
   .ss-reviews-cta {
     padding-top: 20px;
+  }
+
+  /* Debug Button Styles */
+  .ss-debug-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .ss-debug-btn {
+    background: linear-gradient(135deg, #ff4757, #ff3742);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .ss-debug-btn:hover {
+    background: linear-gradient(135deg, #ff3742, #ff2f3a);
+    transform: translateY(-2px);
+  }
+
+  .ss-debug-info {
+    background: rgba(0, 0, 0, 0.8);
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: left;
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+  }
     border-top: 1px solid rgba(255,255,255,0.1);
   }
 
@@ -558,12 +614,135 @@
       </div>
     </div>
   </div>
+  
+  <!-- Debug Section -->
+  <div class="ss-debug-section" id="ss-debug-section">
+    <button class="ss-debug-btn" onclick="toggleDebugInfo()">🔧 Debug Widget Status</button>
+    <div class="ss-debug-info" id="ss-debug-info"></div>
+  </div>
 </div>
 
 <script>
 (function() {
   'use strict';
 
+  // Debug logging for Squarespace troubleshooting
+  const DEBUG = true;
+  let debugMessages = [];
+  
+  function debugLog(message, data = null) {
+    const timestamp = new Date().toISOString();
+    const logEntry = {
+      timestamp,
+      message,
+      data: data || null
+    };
+    
+    debugMessages.push(logEntry);
+    
+    if (DEBUG) {
+      console.log(`[Squarespace Widget Debug] ${message}`, data || '');
+    }
+  }
+  
+  // Debug functions
+  function getSystemInfo() {
+    return {
+      userAgent: navigator.userAgent,
+      currentURL: window.location.href,
+      isSquarespace: window.location.hostname.includes('squarespace'),
+      documentReadyState: document.readyState,
+      timestamp: new Date().toISOString(),
+      screenSize: `${window.screen.width}x${window.screen.height}`,
+      viewportSize: `${window.innerWidth}x${window.innerHeight}`
+    };
+  }
+  
+  function testImageLoading() {
+    const results = [];
+    const promises = clientsData.slice(0, 5).map(client => { // Test first 5 clients
+      return new Promise((resolve) => {
+        const img = new Image();
+        const startTime = Date.now();
+        
+        img.onload = () => {
+          const loadTime = Date.now() - startTime;
+          resolve({
+            name: client.name,
+            url: client.logo,
+            status: 'SUCCESS',
+            loadTime: `${loadTime}ms`,
+            dimensions: `${img.naturalWidth}x${img.naturalHeight}`
+          });
+        };
+        
+        img.onerror = () => {
+          const loadTime = Date.now() - startTime;
+          resolve({
+            name: client.name,
+            url: client.logo,
+            status: 'FAILED',
+            loadTime: `${loadTime}ms`,
+            error: 'Image failed to load'
+          });
+        };
+        
+        img.src = client.logo;
+      });
+    });
+    
+    return Promise.all(promises);
+  }
+  
+  window.toggleDebugInfo = async function() {
+    const debugInfo = document.getElementById('ss-debug-info');
+    
+    if (debugInfo.style.display === 'none' || !debugInfo.style.display) {
+      debugInfo.style.display = 'block';
+      
+      const systemInfo = getSystemInfo();
+      const imageTests = await testImageLoading();
+      
+      const debugOutput = `
+SYSTEM INFORMATION:
+==================
+URL: ${systemInfo.currentURL}
+Squarespace Site: ${systemInfo.isSquarespace ? 'YES' : 'NO'}
+User Agent: ${systemInfo.userAgent}
+Screen: ${systemInfo.screenSize}
+Viewport: ${systemInfo.viewportSize}
+Document State: ${systemInfo.documentReadyState}
+Timestamp: ${systemInfo.timestamp}
+
+CLIENT LOGO TEST RESULTS:
+========================
+${imageTests.map(test => 
+  `${test.name}: ${test.status} (${test.loadTime})${test.dimensions ? ` - ${test.dimensions}` : ''}${test.error ? ` - ${test.error}` : ''}`
+).join('\n')}
+
+TOTAL CLIENTS: ${clientsData.length}
+CARROUSEL ELEMENTS: ${clientsData.length * 2} (doubled for infinite scroll)
+
+RECENT DEBUG MESSAGES:
+=====================
+${debugMessages.slice(-10).map(msg => 
+  `[${msg.timestamp.split('T')[1].split('.')[0]}] ${msg.message}${msg.data ? ' - ' + JSON.stringify(msg.data) : ''}`
+).join('\n')}
+
+TROUBLESHOOTING TIPS:
+====================
+- If logos show as placeholders, check GitHub URLs are accessible
+- Check browser console for additional error messages
+- Verify Squarespace Code Block is in HTML mode, not Markdown
+- Test on different devices/browsers for compatibility
+`;
+      
+      debugInfo.textContent = debugOutput;
+    } else {
+      debugInfo.style.display = 'none';
+    }
+  };
+  
   // Client data - Using GitHub raw URLs for logo hosting
   const clientsData = [
     { 
@@ -689,6 +868,11 @@
   ];
 
   function handleLogoError(img, client) {
+    debugLog(`Logo failed to load for ${client.name}`, {
+      originalSrc: client.logo,
+      clientData: client
+    });
+    
     const fallbacks = {
       'New York Post': 'https://via.placeholder.com/200x80/1a1a1a/FFFFFF?text=New+York+Post',
       'Pittsburgh Magazine': 'https://via.placeholder.com/200x80/2a2a2a/FFFFFF?text=Pittsburgh+Magazine',
@@ -711,20 +895,31 @@
       'The Space Upstairs': 'https://via.placeholder.com/200x80/262626/FFFFFF?text=Space+Upstairs',
       'Haven Pittsburgh': 'https://via.placeholder.com/200x80/2E7D32/FFFFFF?text=Haven+Pittsburgh'
     };
-    img.src = fallbacks[client.name] || `https://via.placeholder.com/200x80/222222/FFFFFF?text=${encodeURIComponent(client.name)}`;
+    
+    const fallbackSrc = fallbacks[client.name] || `https://via.placeholder.com/200x80/222222/FFFFFF?text=${encodeURIComponent(client.name)}`;
+    debugLog(`Using fallback image for ${client.name}`, { fallbackSrc });
+    img.src = fallbackSrc;
   }
 
   function createClientCarousel() {
+    debugLog('Starting client carousel creation');
+    
     const container = document.getElementById('ss-client-container');
-    if (!container) return;
-
+    if (!container) {
+      debugLog('ERROR: Container ss-client-container not found!');
+      return;
+    }
+    
+    debugLog(`Found container, creating carousel with ${clientsData.length} clients`);
     const doubledClients = [...clientsData, ...clientsData];
     const carousel = document.createElement('div');
     carousel.className = 'ss-client-carousel';
     const track = document.createElement('div');
     track.className = 'ss-client-track';
 
-    doubledClients.forEach(client => {
+    doubledClients.forEach((client, index) => {
+      debugLog(`Processing client ${index + 1}: ${client.name}`, { logoUrl: client.logo });
+      
       const logoElement = document.createElement('div');
       logoElement.className = 'ss-client-logo';
       logoElement.setAttribute('title', `${client.name} - ${client.project}`);
@@ -732,11 +927,21 @@
       const img = document.createElement('img');
       img.alt = `${client.name} logo`;
       img.loading = 'lazy';
-      img.onerror = () => handleLogoError(img, client);
+      
+      img.onerror = () => {
+        debugLog(`Image load error for ${client.name}`);
+        handleLogoError(img, client);
+      };
+      
+      img.onload = () => {
+        debugLog(`Image loaded successfully for ${client.name}`);
+      };
+      
       img.src = client.logo;
 
       logoElement.appendChild(img);
       logoElement.addEventListener('click', () => {
+        debugLog(`Client logo clicked: ${client.name}`);
         if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
       });
 
@@ -747,11 +952,26 @@
     container.className = 'ss-client-container';
     container.innerHTML = '';
     container.appendChild(carousel);
+    
+    debugLog('Client carousel creation completed');
   }
 
+  // Initialize carousel with debug logging
+  debugLog('Widget initialization starting', {
+    documentReadyState: document.readyState,
+    userAgent: navigator.userAgent,
+    currentURL: window.location.href,
+    isSquarespace: window.location.hostname.includes('squarespace')
+  });
+  
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', createClientCarousel);
+    debugLog('Document still loading, waiting for DOMContentLoaded');
+    document.addEventListener('DOMContentLoaded', () => {
+      debugLog('DOMContentLoaded fired, creating carousel');
+      createClientCarousel();
+    });
   } else {
+    debugLog('Document ready, creating carousel immediately');
     createClientCarousel();
   }
 })();
