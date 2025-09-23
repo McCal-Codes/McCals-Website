@@ -1,16 +1,24 @@
-<!-- COMPLETE ABOUT SECTION WITH CLIENT CAROUSEL FOR SQUARESPACE -->
-<!-- Copy this entire code block into a Squarespace Code Block -->
-<!--
+<!-- About Section Widget v1.4.1 — Universal Versioning System
+Author: Caleb McCartney / McCal-Codes
+Version: 1.4.1
+Purpose: Complete about section with bio, photo, reviews, and client carousel for Squarespace
+
+Features:
+- Professional bio with GitHub-hosted photo
+- Client logo carousel with 20+ brands
+- LinkedIn and Google reviews section
+- Interactive debug system with real-time logo testing
+- GitHub asset hosting for easy maintenance
+
+Usage: Paste this entire block into a Squarespace Code Block
+Requirements: GitHub repository with logo assets
+
 🔧 DEBUGGING:
 To troubleshoot logo loading issues in Squarespace:
-1. Open browser Developer Tools (F12)
-2. Go to Console tab
+1. Click the 🔧 Debug Widget Status button at bottom
+2. Or open browser Developer Tools (F12) → Console tab
 3. Look for [Squarespace Widget Debug] messages
-4. Debug logging shows:
-   - Widget initialization details
-   - Each client logo loading attempt
-   - Success/failure for each image
-   - Fallback usage when needed
+4. Debug logging shows initialization, logo loading, and errors
    
 💡 To disable debug logging, change DEBUG = false in the script below
 -->
@@ -253,6 +261,115 @@ To troubleshoot logo loading issues in Squarespace:
     max-height: 300px;
     overflow-y: auto;
     display: none;
+  }
+
+  /* Version indicator - bottom right */
+  .ss-version-indicator {
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    font: 400 10px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: rgba(128, 128, 128, 0.6);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+
+  .ss-version-indicator:hover {
+    color: rgba(128, 128, 128, 1);
+    transform: scale(1.1);
+  }
+
+  /* Changelog panel */
+  .ss-changelog-panel {
+    position: fixed;
+    bottom: 40px;
+    right: 12px;
+    width: 400px;
+    max-height: 500px;
+    background: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+    display: none;
+    overflow-y: auto;
+  }
+
+  .ss-changelog-panel.active {
+    display: block;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ss-changelog-header {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ff4d6d;
+  }
+
+  .ss-changelog-version {
+    font-weight: 600;
+    margin: 15px 0 8px 0;
+    color: #fff;
+  }
+
+  .ss-changelog-feature {
+    margin: 4px 0;
+    padding-left: 12px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .ss-changelog-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    transition: color 0.3s ease;
+  }
+
+  .ss-changelog-close:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  /* Mobile responsive changelog */
+  @media (max-width: 768px) {
+    .ss-changelog-panel {
+      width: calc(100vw - 24px);
+      right: 12px;
+      left: 12px;
+      max-height: 60vh;
+    }
+    
+    .ss-version-indicator {
+      bottom: 12px;
+      right: 16px;
+      font-size: 11px;
+    }
   }
     border-top: 1px solid rgba(255,255,255,0.1);
   }
@@ -518,7 +635,6 @@ To troubleshoot logo loading issues in Squarespace:
       <div class="ss-about-photo">
         <!-- Replace this src with your actual photo URL in Squarespace -->
         <img src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg" alt="Caleb McCartney - Professional Photographer">
-             alt="Caleb McCartney - Professional Photographer">
       </div>
       
       <!-- Bio Text -->
@@ -622,6 +738,46 @@ To troubleshoot logo loading issues in Squarespace:
   </div>
 </div>
 
+<!-- Version Indicator -->
+<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.1</div>
+
+<!-- Changelog Panel -->
+<div class="ss-changelog-panel" id="ss-changelog-panel">
+  <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
+  <div class="ss-changelog-header">About Widget Changelog</div>
+  <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v1.4.0 — Advanced Debugging System</div>
+    <div class="ss-changelog-feature">• Interactive debug button with real-time logo testing</div>
+    <div class="ss-changelog-feature">• System information display (URL, browser, viewport)</div>
+    <div class="ss-changelog-feature">• Debug message logging with timestamps</div>
+    <div class="ss-changelog-feature">• Professional debugging interface</div>
+    
+    <div class="ss-changelog-version">v1.3.0 — GitHub Asset Integration</div>
+    <div class="ss-changelog-feature">• All client logos load directly from GitHub repository</div>
+    <div class="ss-changelog-feature">• Profile photo loads from GitHub (no Squarespace upload needed)</div>
+    <div class="ss-changelog-feature">• Simplified deployment process</div>
+    <div class="ss-changelog-feature">• Auto-updates when logos change in repository</div>
+    
+    <div class="ss-changelog-version">v1.2.0 — Complete About Section</div>
+    <div class="ss-changelog-feature">• Combined bio, photo, reviews, and client carousel</div>
+    <div class="ss-changelog-feature">• LinkedIn and Google testimonials section</div>
+    <div class="ss-changelog-feature">• Enhanced mobile responsive design</div>
+    <div class="ss-changelog-feature">• Dark liquid glass professional aesthetic</div>
+    
+    <div class="ss-changelog-version">v1.1.0 — Client Carousel Integration</div>
+    <div class="ss-changelog-feature">• Infinite scrolling showcase of 20+ client logos</div>
+    <div class="ss-changelog-feature">• Interactive hover effects and clickable logos</div>
+    <div class="ss-changelog-feature">• Statistics display (clients, projects, experience)</div>
+    <div class="ss-changelog-feature">• Smooth 25-second animation loop</div>
+    
+    <div class="ss-changelog-version">v1.0.0 — Initial About Section</div>
+    <div class="ss-changelog-feature">• Professional bio with current status</div>
+    <div class="ss-changelog-feature">• Photo integration and call-to-action buttons</div>
+    <div class="ss-changelog-feature">• Squarespace Code Block optimized</div>
+    <div class="ss-changelog-feature">• Self-contained CSS with unique class names</div>
+  </div>
+</div>
+
 <script>
 (function() {
   'use strict';
@@ -693,6 +849,12 @@ To troubleshoot logo loading issues in Squarespace:
     
     return Promise.all(promises);
   }
+  
+  // Changelog toggle function
+  window.toggleChangelog = function() {
+    const changelogPanel = document.getElementById('ss-changelog-panel');
+    changelogPanel.classList.toggle('active');
+  };
   
   window.toggleDebugInfo = async function() {
     const debugInfo = document.getElementById('ss-debug-info');
