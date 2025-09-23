@@ -1,18 +1,18 @@
-<!-- Photojournalism Portfolio v4.0 — Master Manifest Optimized
+<!-- Photojournalism Portfolio v4.2 — Event Cards & Modal Changelog
 Author: Caleb McCartney / McCal-Codes
-Version: 4.0 Master Manifest Optimized
-Purpose: Efficient journalism widget similar to concert portfolio pattern
+Version: 4.2 Event Cards & Modal Changelog
+Purpose: Event-based journalism widget similar to concert portfolio structure
 
 Features:
-- Single API call using master manifest (like concert widget)
-- Event-based organization extracted from filenames
-- Smart caching to reduce API requests
-- Intelligent auto-refresh with pause on inactive tabs
-- Clean error handling and performance optimized
-- Category filtering (Politics, Events, Portraits, Published, Featured)
+- Single API call using master manifest
+- Event-based cards (one card per story/event)
+- Shuffled thumbnail images from each event
+- Gallery lightbox showing all images from clicked event
+- Modal changelog similar to concert widget
+- Category filtering by event types
 - Publication metadata support
+- Smart caching and auto-refresh
 - Debug panel for troubleshooting
-- Simplified codebase based on proven concert widget pattern
 
 Usage: Paste this entire block into a Squarespace Code Block
 Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-manifest.json
@@ -97,6 +97,46 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
   }
   .debug-info.active { display: block; }
 
+  /* Changelog Modal */
+  .changelog-modal {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); display: none;
+    align-items: center; justify-content: center; z-index: 10000; padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .changelog-modal.active { display: flex; }
+  .changelog-content {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+    max-width: 500px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative;
+  }
+  .changelog-header {
+    padding: 20px; border-bottom: 1px solid var(--line); display: flex;
+    align-items: center; justify-content: space-between;
+  }
+  .changelog-title {
+    margin: 0; color: var(--fg); font: 700 18px/1.2 ui-sans-serif, system-ui;
+  }
+  .changelog-close {
+    background: none; border: none; color: var(--fg); font-size: 20px;
+    cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: background 0.2s ease;
+  }
+  .changelog-close:hover { background: rgba(255, 255, 255, 0.1); }
+  .changelog-body {
+    padding: 20px; font: 400 14px/1.5 ui-sans-serif, system-ui; color: var(--fg);
+  }
+  .changelog-version {
+    margin: 0 0 16px 0; color: var(--fg); font: 600 16px/1.3 ui-sans-serif, system-ui;
+    border-bottom: 1px solid var(--line); padding-bottom: 8px;
+  }
+  .changelog-items {
+    margin: 12px 0; padding-left: 0; list-style: none;
+  }
+  .changelog-items li {
+    margin: 8px 0; padding-left: 16px; position: relative;
+  }
+  .changelog-items li:before {
+    content: '•'; color: var(--fg); position: absolute; left: 0;
+  }
+
   /* Natural-height Masonry Grid */
   .journalism-grid { 
     column-width:320px; column-gap:20px; text-align:left; opacity:0; transition:opacity 0.5s ease;
@@ -129,6 +169,16 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
     z-index: 2;
   }
 
+  /* Image count badge */
+  .image-count-badge {
+    position: absolute; top: 8px; left: 8px; 
+    background: rgba(0, 0, 0, 0.7); color: white;
+    padding: 4px 8px; border-radius: 12px; 
+    font: 600 10px/1 ui-sans-serif,system-ui;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+  }
+
   .journalism-info {
     position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
     padding:10px 14px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85)); color:#fff
@@ -150,7 +200,7 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
     font-size: 24px; opacity: 0.5;
   }
 
-  /* Lightbox (vertical scroll) */
+  /* Event Gallery Lightbox */
   .journalism-lightbox {
     position:fixed; inset:0; display:none; align-items:center; justify-content:center;
     background:rgba(0,0,0,.9); z-index:2147483647 !important; padding:24px;
@@ -165,7 +215,7 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
   }
   .jl-gallery img.loading { opacity: 0.7; }
   .jl-gallery img.loaded { opacity: 1; }
-  .jl-caption { text-align:center; color:#fff; margin-top:14px }
+  .jl-caption { text-align:center; color:#fff; margin-top:14px; max-width:600px; margin-left:auto; margin-right:auto; }
   .jl-title { margin:0 0 6px; font:800 20px/1.25 ui-sans-serif,system-ui }
   .jl-meta { margin:0 0 10px; color:#cfcfcf; font:600 12px/1.3 ui-sans-serif,system-ui }
   .jl-description { margin:0 0 10px; color:#e5e5e5; font:400 14px/1.4 ui-sans-serif,system-ui }
@@ -198,10 +248,11 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
     .filter-btn { padding:10px 16px; font-size:13px; }
     .journalism-grid { margin-top:28px; }
     .jl-close { top: 12px; right: 12px; }
+    .debug-toggle, .debug-info { display: none; }
   }
 </style>
 
-<div class="journalism-portfolio" id="journalismPf" data-panes="24">
+<div class="journalism-portfolio" id="journalismPf" data-events="all">
   <h2 class="journalism-heading">Photojournalism Portfolio</h2>
   
   <!-- Category Filters -->
@@ -216,7 +267,7 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
   
   <div class="journalism-loading" id="journalismLoading">
     <div class="journalism-spinner"></div>
-    Loading photojournalism portfolio...
+    Loading journalism events...
   </div>
   <div class="journalism-grid" id="journalismGrid"></div>
 </div>
@@ -237,15 +288,52 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
 </div>
 
 <!-- Version indicator -->
-<div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v4.0</div>
+<div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v4.2</div>
 <div class="auto-refresh-indicator" id="autoRefreshIndicator">Next refresh: --</div>
+
+<!-- Changelog Modal -->
+<div class="changelog-modal" id="changelogModal">
+  <div class="changelog-content">
+    <div class="changelog-header">
+      <h3 class="changelog-title">📰 Journalism Widget Changelog</h3>
+      <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v4.2 - Event Cards & Modal Changelog (Current)</div>
+      <ul class="changelog-items">
+        <li>Event-based cards (one card per story/event)</li>
+        <li>Shuffled thumbnail images for variety</li>
+        <li>Gallery lightbox showing all event images</li>
+        <li>Modal changelog (like concert widget)</li>
+        <li>Image count badges on cards</li>
+        <li>Smart deduplication prevents duplicates</li>
+      </ul>
+      
+      <div class="changelog-version">v4.1 - Individual Lightbox & Shuffled</div>
+      <ul class="changelog-items">
+        <li>Individual image lightboxes</li>
+        <li>Shuffled image display across events</li>
+        <li>Enhanced performance with single API call</li>
+        <li>Category filtering on shuffled grid</li>
+      </ul>
+      
+      <div class="changelog-version">v4.0 - Master Manifest Optimized</div>
+      <ul class="changelog-items">
+        <li>Master manifest system for efficiency</li>
+        <li>Event organization from filenames</li>
+        <li>Smart caching (10-minute duration)</li>
+        <li>Reduced API calls by 70% vs v3.0</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 <!-- Debug Toggle Button -->
 <button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
 
 <!-- Debug info panel -->
 <div class="debug-info" id="debugInfo">
-  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">📰 Journalism Debug v4.0</div>
+  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">📰 Journalism Debug v4.2</div>
   <div>Status: <span id="debugStatus">Ready</span></div>
   <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
   <div>Events: <span id="debugEventCount">--</span></div>
@@ -266,13 +354,52 @@ let debugMetrics = {
   lastRefresh: 'Never'
 };
 
-// Auto-refresh configuration - Optimized to 15 minutes with intelligent refresh
+// Auto-refresh configuration
 const AUTO_REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes
 const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes cache
 const CACHE_KEY = 'journalism-manifest-cache';
 let autoRefreshTimer = null;
 let isTabVisible = true;
 let lastVisibilityChange = Date.now();
+
+// Changelog modal functions
+function showChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function hideChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Close changelog on background click
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        hideChangelog();
+      }
+    });
+  }
+});
+
+// Close changelog on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('changelogModal');
+    if (modal && modal.classList.contains('active')) {
+      hideChangelog();
+    }
+  }
+});
 
 function toggleDebug() {
   debugActive = !debugActive;
@@ -323,12 +450,10 @@ function updateNextRefreshIndicator() {
   
   if (!grid) return;
 
-  const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
-  
   // Debug logging
   function logDebug(message, data = null) {
     if (debugActive) {
-      console.log(`[Journalism Debug v4.0] ${message}`, data || '');
+      console.log(`[Journalism Debug v4.2] ${message}`, data || '');
       if (debugStatus) {
         debugStatus.textContent = message;
         updateDebugMetrics();
@@ -367,7 +492,7 @@ function updateNextRefreshIndicator() {
     }
   }
 
-  // GitHub configuration - STABLE APPROACH
+  // GitHub configuration
   const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main' };
   const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
   const manifestUrl = rawBase + 'src/images/Portfolios/Journalism/journalism-manifest.json';
@@ -376,7 +501,7 @@ function updateNextRefreshIndicator() {
     return rawBase + 'src/images/Portfolios/Journalism/' + parts.map(encodeURIComponent).join('/'); 
   }
 
-  // Load master manifest - CACHED API CALL!
+  // Load master manifest
   async function loadMasterManifest(forceRefresh = false) {
     // Try cache first unless forcing refresh
     if (!forceRefresh) {
@@ -420,7 +545,7 @@ function updateNextRefreshIndicator() {
     return a;
   }
 
-  // Main build function with stable error handling
+  // Main build function
   async function build(forceRefresh = false) {
     const startTime = performance.now();
     
@@ -430,7 +555,7 @@ function updateNextRefreshIndicator() {
 
       logDebug('Starting build process...');
 
-      // Load master manifest - CACHED OR SINGLE API CALL!
+      // Load master manifest
       const manifest = await loadMasterManifest(forceRefresh);
       
       if (!manifest || !manifest.events || manifest.events.length === 0) {
@@ -439,99 +564,75 @@ function updateNextRefreshIndicator() {
 
       logDebug(`Loaded ${manifest.events.length} events from manifest (Generated: ${manifest.generated})`);
       
-      const pools = [];
+      // Process events - one card per event
+      const events = manifest.events.map(event => ({
+        ...event,
+        // Shuffle images and pick first as thumbnail
+        shuffledImages: shuffle(event.images.slice()),
+        thumbnail: null // Will be set below
+      }));
       
-      // Process events from manifest
-      for (const event of manifest.events) {
-        const images = shuffle(event.images.slice());
-        pools.push({
-          dir: event.folderPath,
-          parts: event.folderPath.split('/'),
-          title: event.eventName,
-          category: event.category,
-          dateDisplay: event.dateDisplay,
-          images,
-          allImages: event.images.slice(),
-          published: event.published
-        });
-        logDebug(`Added pool for ${event.eventName}`, `${images.length} images, category: ${event.category}`);
-      }
+      // Set thumbnail as first shuffled image
+      events.forEach(event => {
+        event.thumbnail = event.shuffledImages[0] || event.images[0];
+      });
 
-      debugMetrics.eventCount = pools.length;
-      logDebug(`Created ${pools.length} image pools`);
-
-      if (!pools.length) {
-        throw new Error('No journalism images available from manifest.');
-      }
+      debugMetrics.eventCount = events.length;
+      debugMetrics.imageCount = events.reduce((sum, event) => sum + event.totalImages, 0);
+      logDebug(`Created ${events.length} event cards with ${debugMetrics.imageCount} total images`);
 
       // Clear existing grid
       grid.innerHTML = '';
 
-      // Collect all images from all events and shuffle them
-      const allImages = [];
-      for (const pool of pools) {
-        for (const imageData of pool.images) {
-          allImages.push({
-            dir: pool.dir,
-            parts: pool.parts,
-            title: pool.title,
-            category: pool.category,
-            dateDisplay: pool.dateDisplay,
-            thumb: imageData.filename,
-            imageData: imageData,
-            allImages: pool.allImages,
-            published: pool.published
-          });
-        }
-      }
-      
-      // Shuffle all images and take the requested number
-      const shuffledImages = shuffle(allImages);
-      const slots = shuffledImages.slice(0, TARGET_PANES);
-
-      debugMetrics.imageCount = slots.length;
-      logDebug(`Created ${slots.length} image slots`);
-
-      // Render cards
+      // Render event cards
       const fragment = document.createDocumentFragment();
       const cards = [];
 
-      for (let i = 0; i < slots.length; i++) {
-        const slot = slots[i];
+      for (let i = 0; i < events.length; i++) {
+        const event = events[i];
         const card = document.createElement('article');
         card.className = 'journalism-card loading';
         card.tabIndex = 0;
-        card.dataset.dir = slot.dir;
-        card.dataset.category = slot.category;
+        card.dataset.category = event.category;
+        card.dataset.eventName = event.eventName;
 
         const img = document.createElement('img');
         img.loading = 'lazy';
         img.decoding = 'async';
-        img.alt = `${slot.title} journalism photo`;
+        img.alt = `${event.eventName} journalism photos`;
 
         const info = document.createElement('div');
         info.className = 'journalism-info';
         info.innerHTML = `
-          <h3 class="journalism-title">${slot.title}</h3>
-          <p class="journalism-meta">${slot.dateDisplay} • ${slot.category}</p>
+          <h3 class="journalism-title">${event.eventName}</h3>
+          <p class="journalism-meta">${event.dateDisplay} • ${event.category}</p>
         `;
 
-        if (slot.published) {
+        // Add published badge if event has published work
+        if (event.published) {
           const badge = document.createElement('div');
           badge.className = 'published-badge';
           badge.textContent = 'Published';
           card.appendChild(badge);
         }
 
+        // Add image count badge
+        if (event.totalImages > 1) {
+          const countBadge = document.createElement('div');
+          countBadge.className = 'image-count-badge';
+          countBadge.textContent = `${event.totalImages} photos`;
+          card.appendChild(countBadge);
+        }
+
         card.appendChild(img);
         card.appendChild(info);
         fragment.appendChild(card);
         
-        cards.push({ card, slot, img });
+        cards.push({ card, event, img });
         
-        // Add lightbox click handler for individual image
+        // Add lightbox click handler for event gallery
         const openLightbox = () => {
-          openSingleImageLB(slot.imageData, slot);
+          openEventGalleryLB(event);
         };
         
         card.addEventListener('click', openLightbox);
@@ -545,26 +646,26 @@ function updateNextRefreshIndicator() {
 
       grid.appendChild(fragment);
 
-      // Load images with staggered timing
-      cards.forEach(({ card, slot, img }, index) => {
+      // Load thumbnail images with staggered timing
+      cards.forEach(({ card, event, img }, index) => {
         setTimeout(() => {
-          const imagePath = slot.imageData.path;
-          const imageUrl = rawUrl(imagePath.split('/'));
+          const thumbnailPath = event.thumbnail.path;
+          const imageUrl = rawUrl(thumbnailPath.split('/'));
           
           img.onload = () => {
             card.classList.remove('loading');
             card.classList.add('loaded');
-            logDebug(`Image loaded: ${slot.thumb}`);
+            logDebug(`Thumbnail loaded: ${event.eventName}`);
           };
           
           img.onerror = () => {
             card.classList.remove('loading');
             card.classList.add('error');
-            logDebug(`Image failed: ${slot.thumb}`);
+            logDebug(`Thumbnail failed: ${event.eventName}`);
           };
           
           img.src = imageUrl;
-        }, index * 50); // Stagger loading
+        }, index * 100); // Stagger loading
       });
 
       // Show grid with animation
@@ -584,52 +685,56 @@ function updateNextRefreshIndicator() {
     }
   }
 
-  // Individual image lightbox functionality
-  function openSingleImageLB(imageData, slot) {
+  // Event gallery lightbox functionality
+  function openEventGalleryLB(event) {
     const lightbox = document.getElementById('journalismLightbox');
     const gallery = document.getElementById('jlGallery');
+    const hint = gallery.querySelector('.jl-hint');
     
     if (!lightbox || !gallery) return;
     
-    // Clear previous content - no hint needed for single image
-    gallery.innerHTML = '';
+    // Clear previous content except hint
+    gallery.innerHTML = '<div class="jl-hint">Scroll ↓</div>';
     
-    // Add single image
-    const img = document.createElement('img');
-    img.alt = `${slot.title} - ${imageData.filename}`;
-    img.classList.add('loading');
+    // Add all images from this event
+    event.images.forEach((imageData, index) => {
+      const img = document.createElement('img');
+      img.alt = `${event.eventName} - Image ${index + 1}`;
+      img.classList.add('loading');
+      
+      const imagePath = imageData.path;
+      const imageUrl = rawUrl(imagePath.split('/'));
+      
+      img.onload = () => {
+        img.classList.remove('loading');
+        img.classList.add('loaded');
+      };
+      
+      img.src = imageUrl;
+      gallery.appendChild(img);
+    });
     
-    const imagePath = imageData.path;
-    const imageUrl = rawUrl(imagePath.split('/'));
+    // Update caption info
+    document.getElementById('jlLbTitle').textContent = event.eventName;
+    document.getElementById('jlLbMeta').textContent = `${event.dateDisplay} • ${event.category} • ${event.totalImages} images`;
     
-    img.onload = () => {
-      img.classList.remove('loading');
-      img.classList.add('loaded');
-    };
-    
-    img.src = imageUrl;
-    gallery.appendChild(img);
-    
-    // Update caption info for individual image
-    document.getElementById('jlLbTitle').textContent = slot.title;
-    document.getElementById('jlLbMeta').textContent = `${slot.dateDisplay} • ${slot.category}`;
-    
-    // Handle description and publication info
+    // Handle description and publication info from first image
+    const firstImage = event.images[0];
     const descElement = document.getElementById('jlLbDescription');
     const pubElement = document.getElementById('jlLbPublication');
     
-    if (imageData.description) {
-      descElement.textContent = imageData.description;
+    if (firstImage && firstImage.description) {
+      descElement.textContent = firstImage.description;
       descElement.style.display = 'block';
     } else {
       descElement.style.display = 'none';
     }
     
-    if (imageData.published && imageData.outlet) {
+    if (firstImage && firstImage.published && firstImage.outlet) {
       pubElement.innerHTML = `
         <strong>Published in:</strong> 
-        <a href="${imageData.outletUrl || '#'}" target="_blank">${imageData.outlet}</a>
-        ${imageData.articleUrl ? `<br><a href="${imageData.articleUrl}" target="_blank">${imageData.articleTitle || 'Read article'}</a>` : ''}
+        <a href="${firstImage.outletUrl || '#'}" target="_blank">${firstImage.outlet}</a>
+        ${firstImage.articleUrl ? `<br><a href="${firstImage.articleUrl}" target="_blank">${firstImage.articleTitle || 'Read article'}</a>` : ''}
       `;
       pubElement.style.display = 'block';
     } else {
@@ -640,6 +745,12 @@ function updateNextRefreshIndicator() {
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    
+    // Hide hint after 3 seconds
+    setTimeout(() => {
+      const currentHint = gallery.querySelector('.jl-hint');
+      if (currentHint) currentHint.classList.add('fade');
+    }, 3000);
   }
 
   // Close lightbox
@@ -744,8 +855,4 @@ function updateNextRefreshIndicator() {
   });
 
 })();
-
-function showChangelog() {
-  alert('📰 Journalism Portfolio v4.0 - Master Manifest Optimized\n\nNew Features:\n• Single API call using master manifest (like concert widget)\n• Event-based organization from filenames\n• Smart caching (10-minute duration)\n• Intelligent 15-minute auto-refresh\n• Category filtering (Politics, Events, Portraits, Published, Featured)\n• Publication metadata support\n• Enhanced debug panel\n• Reduced API calls by ~70% vs v3.0');
-}
 </script>
