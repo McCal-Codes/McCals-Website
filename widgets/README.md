@@ -4,11 +4,14 @@ This folder contains Squarespace-compatible versions of your about page componen
 
 ## Available Widgets
 
-### 1. `about-section-squarespace.html`
-Complete about section with bio, photo, and reviews.
+### 1. `complete-about-squarespace.html` ⭐ **RECOMMENDED**
+Complete about section with bio, photo, reviews, AND client carousel - everything in one widget.
 
-### 2. `client-carousel-squarespace.html` 
-Standalone client logo carousel with statistics.
+### 2. `about-section-squarespace.html`
+About section with bio, photo, and reviews (without client carousel).
+
+### 3. `client-carousel-squarespace.html` 
+Standalone client logo carousel with statistics only.
 
 ## How to Use in Squarespace
 
@@ -22,21 +25,22 @@ Standalone client logo carousel with statistics.
    - Upload `caleb-mccartney-resume.pdf` 
    - Copy the generated URL
 
-3. **Upload client logos**:
-   - Upload all logo files from `assets/images/logos/`
-   - Copy each logo URL
+**Note:** Client logos are already configured to load from GitHub, so no upload needed!
 
-### Step 2: Update Widget Code
+### Step 2: Update Widget Code (if needed)
 1. Open the widget HTML file you want to use
-2. Replace placeholder URLs with your actual Squarespace URLs:
+2. **Client logos**: Already configured with GitHub URLs - no changes needed!
+3. **Update only these assets**:
 
 ```html
 <!-- Replace this -->
 <img src="https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/caleb-mccartney-photo.jpg">
 
-<!-- With your actual URL -->
+<!-- With your actual Squarespace URL -->
 <img src="https://images.squarespace-cdn.com/content/v1/abc123/xyz789/caleb-mccartney-photo.jpg">
 ```
+
+**✅ Client logos automatically load from GitHub - no updates needed!**
 
 ### Step 3: Add to Squarespace Page
 1. **Edit your page** in Squarespace
