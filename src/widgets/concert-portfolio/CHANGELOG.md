@@ -2,6 +2,13 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.3 — 2025-09-23
+### Images-first path + fallback 🔧
+- Prefer `images/Portfolios/Concert/` with automatic fallback to `src/images/Portfolios/Concert/`
+- Cache selected basePath alongside manifest for consistent image URLs
+- Fix: define `nextRefreshTimer` to avoid unload-time reference errors
+- Retains all v4.2 optimizations (single API call, 10-min cache, 15-min auto-refresh)
+
 ## v4.2 — 2025-09-23
 ### GitHub Path Fix & Organization 🗂️
 - **CRITICAL FIX**: Updated GitHub API paths after repository reorganization
