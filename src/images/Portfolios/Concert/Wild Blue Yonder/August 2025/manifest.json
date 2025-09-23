@@ -1,0 +1,38 @@
+{
+  "bandName": "Wild Blue Yonder",
+  "folderName": "August 2025",
+  "totalImages": 19,
+  "images": [
+    "250820_Haven Block Party_CAL3635.jpg",
+    "250820_Haven Block Party_CAL3665.jpg",
+    "250820_Haven Block Party_CAL3667.jpg",
+    "250820_Haven Block Party_CAL3671.jpg",
+    "250820_Haven Block Party_CAL3673.jpg",
+    "250820_Haven Block Party_CAL3674.jpg",
+    "250820_Haven Block Party_CAL3680 1.jpg",
+    "250820_Haven Block Party_CAL3680.jpg",
+    "250820_Haven Block Party_CAL3687 1.jpg",
+    "250820_Haven Block Party_CAL3687.jpg",
+    "250820_Haven Block Party_CAL3698.jpg",
+    "250820_Haven Block Party_CAL3706.jpg",
+    "250820_Haven Block Party_CAL3719.jpg",
+    "250820_Haven Block Party_CAL3720.jpg",
+    "250820_Haven Block Party_CAL3721.jpg",
+    "250820_Haven Block Party_CAL3731.jpg",
+    "250820_Haven Block Party_CAL3735.jpg",
+    "250820_Haven Block Party_CAL3739.jpg",
+    "250820_Haven Block Party_CAL3767.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-23T21:42:43.656Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2025,
+    "month": 8,
+    "monthName": "August",
+    "day": 20,
+    "iso": "2025-08-20",
+    "source": "filename_yymmdd"
+  }
+}
