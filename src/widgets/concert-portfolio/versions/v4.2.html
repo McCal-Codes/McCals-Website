@@ -443,6 +443,7 @@ const AUTO_REFRESH_INTERVAL = 15 * 60 * 1000; // 15 minutes
 const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes cache
 const CACHE_KEY = 'concert-manifest-cache';
 let autoRefreshTimer = null;
+let nextRefreshTimer = null; // defined to avoid unload-time reference errors
 let isTabVisible = true;
 let lastVisibilityChange = Date.now();
 
@@ -516,7 +517,11 @@ function updateNextRefreshIndicator() {
         const age = Date.now() - data.timestamp;
         if (age < CACHE_DURATION) {
           logDebug('Using cached manifest', `Age: ${Math.round(age/1000)}s`);
-          return data.manifest;
+          // Restore selected base path for image URLs
+          if (data.basePath) {
+            selectedBasePath = data.basePath;
+          }
+          return { manifest: data.manifest, basePath: data.basePath };
         }
       }
     } catch (error) {
@@ -525,10 +530,11 @@ function updateNextRefreshIndicator() {
     return null;
   }
   
-  function setCachedManifest(manifest) {
+  function setCachedManifest(manifest, basePath) {
     try {
       const data = {
         manifest,
+        basePath,
         timestamp: Date.now()
       };
       localStorage.setItem(CACHE_KEY, JSON.stringify(data));
@@ -538,48 +544,62 @@ function updateNextRefreshIndicator() {
     }
   }
 
-  // GitHub configuration - STABLE APPROACH
+  // GitHub configuration - prefer 'images' path with fallback to 'src/images'
   const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main' };
   const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
-  const manifestUrl = rawBase + 'src/images/Portfolios/Concert/concert-manifest.json';
+  const BASE_PATHS = ['images/Portfolios/Concert/', 'src/images/Portfolios/Concert/'];
+  let selectedBasePath = BASE_PATHS[0]; // prefer 'images' by default per request
 
-  function rawUrl(parts) { 
-    return rawBase + 'src/images/Portfolios/Concert/' + parts.map(encodeURIComponent).join('/'); 
+  function buildManifestUrl(basePath) {
+    return rawBase + basePath + 'concert-manifest.json';
   }
 
-  // Load master manifest - CACHED API CALL!
+  function rawUrl(parts) { 
+    return rawBase + selectedBasePath + parts.map(encodeURIComponent).join('/'); 
+  }
+
+  // Load master manifest - CACHED API CALL with path fallback
   async function loadMasterManifest(forceRefresh = false) {
     // Try cache first unless forcing refresh
     if (!forceRefresh) {
       const cached = getCachedManifest();
-      if (cached) {
+      if (cached && cached.manifest) {
+        // Ensure base path is restored for image URLs
+        if (cached.basePath) {
+          selectedBasePath = cached.basePath;
+        }
         debugMetrics.lastRefresh = new Date().toLocaleTimeString();
-        return cached;
+        return cached.manifest;
       }
     }
     
-    debugMetrics.apiCalls++;
-    logDebug('Loading master manifest from API...');
+    logDebug('Loading master manifest from API (with path fallback)...');
     
-    try {
-      const response = await fetch(manifestUrl);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    let lastError = null;
+    for (const basePath of BASE_PATHS) {
+      try {
+        debugMetrics.apiCalls++;
+        const url = buildManifestUrl(basePath);
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        const manifest = await response.json();
+        selectedBasePath = basePath;
+        logDebug('Master manifest loaded from API', `${manifest.bands?.length || 0} bands (Generated: ${manifest.generated}) from ${basePath}`);
+        // Cache the fresh data with the basePath used
+        setCachedManifest(manifest, basePath);
+        debugMetrics.lastRefresh = new Date().toLocaleTimeString();
+        return manifest;
+      } catch (error) {
+        lastError = error;
+        logDebug(`Attempt with base "${basePath}" failed`, error.message);
       }
-      
-      const manifest = await response.json();
-      logDebug('Master manifest loaded from API', `${manifest.bands?.length || 0} bands (Generated: ${manifest.generated})`);
-      
-      // Cache the fresh data
-      setCachedManifest(manifest);
-      
-      debugMetrics.lastRefresh = new Date().toLocaleTimeString();
-      return manifest;
-    } catch (error) {
-      logDebug('Master manifest failed', error.message);
-      throw error;
     }
+    
+    // If all attempts failed
+    logDebug('Master manifest failed for all base paths', lastError ? lastError.message : 'Unknown error');
+    throw lastError || new Error('Failed to load manifest from all base paths');
   }
 
   function shuffle(arr) {
