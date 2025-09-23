@@ -1,0 +1,382 @@
+<!-- ABOUT SECTION WIDGET FOR SQUARESPACE -->
+<!-- Copy this entire code block into a Squarespace Code Block -->
+
+<style>
+  /* About Section Styles */
+  .ss-about-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    color: #e5e5e5;
+  }
+
+  .ss-about-header {
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .ss-about-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: #f0f0f0;
+  }
+
+  .ss-about-bio {
+    padding: 60px 0;
+    background: rgba(15,15,15,0.6);
+    backdrop-filter: blur(20px);
+    margin: 30px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .ss-about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    padding: 0 30px;
+  }
+
+  .ss-about-photo {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+  }
+
+  .ss-about-photo img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    filter: contrast(1.1) brightness(1.05);
+  }
+
+  .ss-about-text {
+    flex: 1.5;
+    min-width: 350px;
+  }
+
+  .ss-about-text p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #d0d0d0;
+  }
+
+  .ss-about-text a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.4);
+  }
+
+  .ss-about-text strong {
+    color: #f0f0f0;
+  }
+
+  .ss-about-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+  }
+
+  .ss-about-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .ss-about-btn-primary {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    color: white;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .ss-about-btn-secondary {
+    background: transparent;
+    color: #e0e0e0;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+
+  /* Reviews Section */
+  .ss-reviews-section {
+    padding: 50px 0;
+    background: rgba(15,15,15,0.4);
+    backdrop-filter: blur(20px);
+    margin: 30px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .ss-reviews-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 30px;
+    text-align: center;
+  }
+
+  .ss-reviews-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ss-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  .ss-review-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    padding: 25px;
+    border-radius: 12px;
+    margin: 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .ss-review-platform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .ss-platform-badge {
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .ss-platform-linkedin { background: #0077b5; }
+  .ss-platform-google { background: #4285f4; }
+
+  .ss-review-stars {
+    color: #ffd700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .ss-review-text {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 0 0 15px;
+    line-height: 1.5;
+    color: #d0d0d0;
+  }
+
+  .ss-review-author {
+    font-weight: 600;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+  }
+
+  .ss-review-title {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 3px;
+    color: #b0b0b0;
+  }
+
+  .ss-reviews-cta {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .ss-reviews-rating {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin: 0 0 15px;
+    color: #d0d0d0;
+  }
+
+  .ss-reviews-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(66,133,244,0.8) 0%, rgba(66,133,244,0.6) 100%);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .ss-about-header h1 {
+      font-size: 1.5rem;
+    }
+
+    .ss-about-header {
+      padding: 20px 15px;
+    }
+
+    .ss-about-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 30px;
+    }
+
+    .ss-about-text {
+      min-width: auto;
+    }
+
+    .ss-about-photo img {
+      max-width: 250px;
+      margin-bottom: 20px;
+    }
+
+    .ss-about-buttons {
+      justify-content: center;
+    }
+
+    .ss-about-btn {
+      min-width: 120px;
+    }
+
+    .ss-about-bio, .ss-reviews-section {
+      padding: 40px 0;
+      margin: 20px 0;
+    }
+
+    .ss-about-text p {
+      font-size: 0.9rem;
+    }
+
+    .ss-reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ss-review-card {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ss-about-header {
+      padding: 15px 10px;
+    }
+
+    .ss-about-header h1 {
+      font-size: 1.3rem;
+    }
+
+    .ss-about-bio, .ss-reviews-section {
+      padding: 30px 0;
+      margin: 15px 0;
+    }
+
+    .ss-about-photo img {
+      max-width: 200px;
+    }
+  }
+</style>
+
+<div class="ss-about-section">
+  <!-- Header -->
+  <div class="ss-about-header">
+    <h1>About</h1>
+  </div>
+
+  <!-- Bio Section -->
+  <div class="ss-about-bio">
+    <div class="ss-about-content">
+      <!-- Photo -->
+      <div class="ss-about-photo">
+        <!-- Replace this src with your actual photo URL in Squarespace -->
+        <img src="https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/caleb-mccartney-photo.jpg" 
+             alt="Caleb McCartney - Professional Photographer">
+      </div>
+      
+      <!-- Bio Text -->
+      <div class="ss-about-text">
+        <p>
+          Caleb McCartney is a Pittsburgh‑based photojournalist and commercial storyteller who is finishing a BFA in Photography at <a href="https://pointpark.edu" target="_blank" rel="noopener">Point Park University</a>. After serving as Photo Editor of <a href="https://ppuglobe.com" target="_blank" rel="noopener">The Globe</a> for several months, he stepped back in March 2025 to devote full focus to his capstone thesis, <strong>"One Nation Divided,"</strong> a visual study of political polarization during the 2024 election cycle.
+        </p>
+        
+        <p>
+          Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage, corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he broadened his skill set by joining Pittsburgh production company <a href="https://wearecovalent.com/" target="_blank" rel="noopener">Covalent</a> as a Creative Production Intern, collaborating on projects that blend stills, motion, and sound.
+        </p>
+        
+        <p>
+          He also hosts the weekly podcast <a href="/podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
+        </p>
+        
+        <div class="ss-about-buttons">
+          <a href="mailto:contact@mcc-cal.com" class="ss-about-btn ss-about-btn-primary">
+            Get In Touch
+          </a>
+          <!-- Replace this href with your actual resume URL in Squarespace -->
+          <a href="https://static1.squarespace.com/static/YOUR-SITE-ID/t/YOUR-FILE-ID/caleb-mccartney-resume.pdf" download="Caleb-McCartney-Resume-August-2025.pdf" class="ss-about-btn ss-about-btn-secondary">
+            📄 Resume
+          </a>
+          <a href="/work" class="ss-about-btn ss-about-btn-secondary">
+            View Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="ss-reviews-section">
+    <div class="ss-reviews-content">
+      <h2 class="ss-reviews-title">What Clients Say</h2>
+      
+      <div class="ss-reviews-grid">
+        <!-- LinkedIn Review -->
+        <blockquote class="ss-review-card">
+          <div class="ss-review-platform">
+            <div class="ss-platform-badge ss-platform-linkedin">LinkedIn</div>
+          </div>
+          <p class="ss-review-text">"Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress."</p>
+          <cite class="ss-review-author">— Logan Spiker</cite>
+          <div class="ss-review-title">Former Argo AI, Business Owner</div>
+        </blockquote>
+        
+        <!-- Google Review -->
+        <blockquote class="ss-review-card">
+          <div class="ss-review-platform">
+            <div class="ss-platform-badge ss-platform-google">Google</div>
+          </div>
+          <div class="ss-review-stars">★★★★★</div>
+          <p class="ss-review-text">"Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it."</p>
+          <cite class="ss-review-author">— Ben Orr</cite>
+          <div class="ss-review-title">Concert Photography Client</div>
+        </blockquote>
+      </div>
+      
+      <!-- Review CTA -->
+      <div class="ss-reviews-cta">
+        <p class="ss-reviews-rating">⭐ 5.0 Star Rating on Google</p>
+        <a href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8" target="_blank" rel="noopener" class="ss-reviews-btn">
+          📍 View All Reviews
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End of Squarespace Code Block -->

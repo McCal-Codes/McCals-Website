@@ -1,0 +1,760 @@
+<!-- COMPLETE ABOUT SECTION WITH CLIENT CAROUSEL FOR SQUARESPACE -->
+<!-- Copy this entire code block into a Squarespace Code Block -->
+
+<style>
+  /* Complete About Section Styles */
+  .ss-about-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    color: #e5e5e5;
+  }
+
+  /* Header */
+  .ss-about-header {
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .ss-about-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: #f0f0f0;
+  }
+
+  /* Bio Section */
+  .ss-about-bio {
+    padding: 60px 0;
+    background: rgba(15,15,15,0.6);
+    backdrop-filter: blur(20px);
+    margin: 30px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .ss-about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    padding: 0 30px;
+  }
+
+  .ss-about-photo {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+  }
+
+  .ss-about-photo img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    filter: contrast(1.1) brightness(1.05);
+  }
+
+  .ss-about-text {
+    flex: 1.5;
+    min-width: 350px;
+  }
+
+  .ss-about-text p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #d0d0d0;
+  }
+
+  .ss-about-text a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.4);
+  }
+
+  .ss-about-text strong {
+    color: #f0f0f0;
+  }
+
+  .ss-about-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+  }
+
+  .ss-about-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .ss-about-btn-primary {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    color: white;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .ss-about-btn-secondary {
+    background: transparent;
+    color: #e0e0e0;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+
+  /* Reviews Section */
+  .ss-reviews-section {
+    padding: 50px 0;
+    background: rgba(15,15,15,0.4);
+    backdrop-filter: blur(20px);
+    margin: 30px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .ss-reviews-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 30px;
+    text-align: center;
+  }
+
+  .ss-reviews-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ss-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  .ss-review-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    padding: 25px;
+    border-radius: 12px;
+    margin: 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .ss-review-platform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .ss-platform-badge {
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .ss-platform-linkedin { background: #0077b5; }
+  .ss-platform-google { background: #4285f4; }
+
+  .ss-review-stars {
+    color: #ffd700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .ss-review-text {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 0 0 15px;
+    line-height: 1.5;
+    color: #d0d0d0;
+  }
+
+  .ss-review-author {
+    font-weight: 600;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+  }
+
+  .ss-review-title {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 3px;
+    color: #b0b0b0;
+  }
+
+  .ss-reviews-cta {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .ss-reviews-rating {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin: 0 0 15px;
+    color: #d0d0d0;
+  }
+
+  .ss-reviews-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(66,133,244,0.8) 0%, rgba(66,133,244,0.6) 100%);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Client Carousel Section */
+  .ss-client-showcase {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 50px 20px;
+    text-align: center;
+    background: rgba(15,15,15,0.3);
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .ss-client-heading {
+    font: 700 24px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #f5f5f5;
+    margin: 0 0 10px;
+  }
+
+  .ss-client-subtitle {
+    font: 400 14px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #888;
+    margin: 0 0 30px;
+  }
+
+  .ss-client-carousel {
+    position: relative;
+    overflow: hidden;
+    padding: 15px 0;
+  }
+
+  .ss-client-track {
+    display: flex;
+    animation: ss-scroll 25s linear infinite;
+    width: calc(180px * 20);
+  }
+
+  .ss-client-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ss-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-180px * 10)); }
+  }
+
+  .ss-client-logo {
+    flex: 0 0 160px;
+    height: 100px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    border-radius: 10px;
+    border: 1px solid #2a2a2a;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .ss-client-logo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .ss-client-logo img {
+    max-width: 120px;
+    max-height: 70px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.7);
+    transition: filter 0.3s ease;
+  }
+
+  .ss-client-logo:hover img {
+    filter: grayscale(0) opacity(1);
+  }
+
+  .ss-client-stats {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .ss-stat-item {
+    text-align: center;
+  }
+
+  .ss-stat-number {
+    font: 700 20px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #f5f5f5;
+    display: block;
+  }
+
+  .ss-stat-label {
+    font: 600 11px/1.3 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .ss-client-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font: 600 16px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #f5f5f5;
+    opacity: 0.7;
+  }
+
+  .ss-client-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2a2a2a;
+    border-top: 2px solid #ff4d6d;
+    border-radius: 50%;
+    animation: ss-spin 1s linear infinite;
+    margin-right: 12px;
+  }
+
+  @keyframes ss-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .ss-about-header h1 {
+      font-size: 1.5rem;
+    }
+
+    .ss-about-header {
+      padding: 20px 15px;
+    }
+
+    .ss-about-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 30px;
+    }
+
+    .ss-about-text {
+      min-width: auto;
+    }
+
+    .ss-about-photo img {
+      max-width: 250px;
+      margin-bottom: 20px;
+    }
+
+    .ss-about-buttons {
+      justify-content: center;
+    }
+
+    .ss-about-btn {
+      min-width: 120px;
+    }
+
+    .ss-about-bio, .ss-reviews-section, .ss-client-showcase {
+      padding: 40px 0;
+      margin: 20px 0;
+    }
+
+    .ss-about-text p {
+      font-size: 0.9rem;
+    }
+
+    .ss-reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ss-review-card {
+      padding: 20px;
+    }
+
+    .ss-client-logo {
+      flex: 0 0 120px;
+      height: 80px;
+      margin: 0 6px;
+    }
+
+    .ss-client-logo img {
+      max-width: 80px;
+      max-height: 50px;
+    }
+
+    .ss-client-stats {
+      gap: 20px;
+    }
+
+    .ss-stat-number {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ss-about-header {
+      padding: 15px 10px;
+    }
+
+    .ss-about-header h1 {
+      font-size: 1.3rem;
+    }
+
+    .ss-about-bio, .ss-reviews-section, .ss-client-showcase {
+      padding: 30px 0;
+      margin: 15px 0;
+    }
+
+    .ss-about-photo img {
+      max-width: 200px;
+    }
+
+    .ss-client-showcase {
+      padding: 20px 10px;
+    }
+  }
+</style>
+
+<div class="ss-about-section">
+  <!-- Header -->
+  <div class="ss-about-header">
+    <h1>About</h1>
+  </div>
+
+  <!-- Bio Section -->
+  <div class="ss-about-bio">
+    <div class="ss-about-content">
+      <!-- Photo -->
+      <div class="ss-about-photo">
+        <!-- Replace this src with your actual photo URL in Squarespace -->
+        <img src="https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/caleb-mccartney-photo.jpg" 
+             alt="Caleb McCartney - Professional Photographer">
+      </div>
+      
+      <!-- Bio Text -->
+      <div class="ss-about-text">
+        <p>
+          Caleb McCartney is a Pittsburgh‑based photojournalist and commercial storyteller who is finishing a BFA in Photography at <a href="https://pointpark.edu" target="_blank" rel="noopener">Point Park University</a>. After serving as Photo Editor of <a href="https://ppuglobe.com" target="_blank" rel="noopener">The Globe</a> for several months, he stepped back in March 2025 to devote full focus to his capstone thesis, <strong>"One Nation Divided,"</strong> a visual study of political polarization during the 2024 election cycle.
+        </p>
+        
+        <p>
+          Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage, corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he broadened his skill set by joining Pittsburgh production company <a href="https://wearecovalent.com/" target="_blank" rel="noopener">Covalent</a> as a Creative Production Intern, collaborating on projects that blend stills, motion, and sound.
+        </p>
+        
+        <p>
+          He also hosts the weekly podcast <a href="/podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
+        </p>
+        
+        <div class="ss-about-buttons">
+          <a href="mailto:contact@mcc-cal.com" class="ss-about-btn ss-about-btn-primary">
+            Get In Touch
+          </a>
+          <!-- Replace this href with your actual resume URL in Squarespace -->
+          <a href="https://static1.squarespace.com/static/YOUR-SITE-ID/t/YOUR-FILE-ID/caleb-mccartney-resume.pdf" download="Caleb-McCartney-Resume-August-2025.pdf" class="ss-about-btn ss-about-btn-secondary">
+            📄 Resume
+          </a>
+          <a href="/work" class="ss-about-btn ss-about-btn-secondary">
+            View Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="ss-reviews-section">
+    <div class="ss-reviews-content">
+      <h2 class="ss-reviews-title">What Clients Say</h2>
+      
+      <div class="ss-reviews-grid">
+        <!-- LinkedIn Review -->
+        <blockquote class="ss-review-card">
+          <div class="ss-review-platform">
+            <div class="ss-platform-badge ss-platform-linkedin">LinkedIn</div>
+          </div>
+          <p class="ss-review-text">"Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress."</p>
+          <cite class="ss-review-author">— Logan Spiker</cite>
+          <div class="ss-review-title">Former Argo AI, Business Owner</div>
+        </blockquote>
+        
+        <!-- Google Review -->
+        <blockquote class="ss-review-card">
+          <div class="ss-review-platform">
+            <div class="ss-platform-badge ss-platform-google">Google</div>
+          </div>
+          <div class="ss-review-stars">★★★★★</div>
+          <p class="ss-review-text">"Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it."</p>
+          <cite class="ss-review-author">— Ben Orr</cite>
+          <div class="ss-review-title">Concert Photography Client</div>
+        </blockquote>
+      </div>
+      
+      <!-- Review CTA -->
+      <div class="ss-reviews-cta">
+        <p class="ss-reviews-rating">⭐ 5.0 Star Rating on Google</p>
+        <a href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8" target="_blank" rel="noopener" class="ss-reviews-btn">
+          📍 View All Reviews
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Carousel Section -->
+  <div class="ss-client-showcase">
+    <h2 class="ss-client-heading">Trusted by Leading Brands</h2>
+    <p class="ss-client-subtitle">Collaborating with these amazing clients</p>
+
+    <div id="ss-client-container" class="ss-client-loading">
+      <div class="ss-client-spinner"></div>
+      Loading clients...
+    </div>
+
+    <div class="ss-client-stats">
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-client-count">20</span>
+        <div class="ss-stat-label">Happy Clients</div>
+      </div>
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-project-count">65+</span>
+        <div class="ss-stat-label">Projects</div>
+      </div>
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-years-experience">5+</span>
+        <div class="ss-stat-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // Client data - Update these URLs to your Squarespace-hosted images
+  const clientsData = [
+    { 
+      name: "New York Post", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/new-york-post-logo.svg", 
+      website: "https://nypost.com", 
+      project: "Photojournalist" 
+    },
+    { 
+      name: "Pittsburgh Magazine", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/pittsburgh-magazine-logo.png", 
+      website: "https://pittsburghmagazine.com", 
+      project: "Feature Photography" 
+    },
+    { 
+      name: "The Globe", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/the-globe-logo.jpg", 
+      website: "https://ppuglobe.com", 
+      project: "Photo Editor" 
+    },
+    { 
+      name: "Point Park University", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/point-park-university-logo.jpg", 
+      website: "https://pointpark.edu", 
+      project: "BFA Photography Student" 
+    },
+    { 
+      name: "Pittsburgh Union Progress", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/pittsburgh-union-progress-logo.svg", 
+      website: "https://pittsburghunionprogress.com", 
+      project: "Staff Photographer" 
+    },
+    { 
+      name: "Yinzers Meet", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/yinzers-meet-logo.svg", 
+      website: "https://yinzersmeet.com", 
+      project: "Event Photography" 
+    },
+    { 
+      name: "Jagoff Media", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/jagoff-media-logo.svg", 
+      website: "https://jagoffmedia.com", 
+      project: "Content Photography" 
+    },
+    { 
+      name: "Terrible Tailgate", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/terrible-tailgate-logo.svg", 
+      website: "https://terribletailgate.com", 
+      project: "Sports Event Photography" 
+    },
+    { 
+      name: "Next Generation News", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/next-generation-news-logo.svg", 
+      website: "https://nextgenerationnews.com", 
+      project: "Photojournalist" 
+    },
+    { 
+      name: "Ghostlight Theatre Company", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/ghostlight-theatre-logo.svg", 
+      website: "https://ghostlighttheatre.com", 
+      project: "Theatre Photography" 
+    },
+    { 
+      name: "Center for Media Innovation", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/cmi-logo.svg", 
+      website: "https://www.pointpark.edu/academics/rowlandhall/cmi", 
+      project: "Media Innovation Photography" 
+    },
+    { 
+      name: "Western PA Press Club", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/western-pa-press-club-logo.svg", 
+      website: "https://www.westernpapress.org", 
+      project: "Press Club Events" 
+    },
+    { 
+      name: "Carnegie Mellon University", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/carnegie-mellon-logo.svg", 
+      website: "https://www.cmu.edu", 
+      project: "University Photography" 
+    },
+    { 
+      name: "University of Pittsburgh", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/university-of-pittsburgh-logo.svg", 
+      website: "https://www.pitt.edu", 
+      project: "University Photography" 
+    },
+    { 
+      name: "Butler County Community College", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/bc3-logo.svg", 
+      website: "https://www.bc3.edu", 
+      project: "College Photography" 
+    },
+    { 
+      name: "Penn State Fayette", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/penn-state-fayette-logo.svg", 
+      website: "https://fayette.psu.edu", 
+      project: "Campus Photography" 
+    },
+    { 
+      name: "The Watchful Shepherd", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/watchful-shepherd-logo.svg", 
+      website: "https://watchfulshepherd.org", 
+      project: "Advocacy Photography" 
+    },
+    { 
+      name: "Voyage Visuals", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/voyage-visuals-logo.svg", 
+      website: "https://voyagevisuals.com", 
+      project: "Visual Production" 
+    },
+    { 
+      name: "The Space Upstairs", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/space-upstairs-logo.svg", 
+      website: "https://thespaceupstairs.com", 
+      project: "Venue Photography" 
+    },
+    { 
+      name: "Haven Pittsburgh", 
+      logo: "https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/haven-pittsburgh-logo.svg", 
+      website: "https://havenpittsburgh.org", 
+      project: "Community Support Photography" 
+    }
+  ];
+
+  function handleLogoError(img, client) {
+    const fallbacks = {
+      'New York Post': 'https://via.placeholder.com/200x80/1a1a1a/FFFFFF?text=New+York+Post',
+      'Pittsburgh Magazine': 'https://via.placeholder.com/200x80/2a2a2a/FFFFFF?text=Pittsburgh+Magazine',
+      'The Globe': 'https://via.placeholder.com/200x80/262626/FFFFFF?text=The+Globe',
+      'Point Park University': 'https://via.placeholder.com/200x80/333333/FFFFFF?text=Point+Park+U',
+      'Pittsburgh Union Progress': 'https://via.placeholder.com/200x80/2a2a2a/FFFFFF?text=Union+Progress',
+      'Yinzers Meet': 'https://via.placeholder.com/200x80/2d2d2d/FFFFFF?text=Yinzers+Meet',
+      'Jagoff Media': 'https://via.placeholder.com/200x80/262626/FFFFFF?text=Jagoff+Media',
+      'Terrible Tailgate': 'https://via.placeholder.com/200x80/242424/FFFFFF?text=Terrible+Tailgate',
+      'Next Generation News': 'https://via.placeholder.com/200x80/242424/FFFFFF?text=Next+Gen+News',
+      'Ghostlight Theatre Company': 'https://via.placeholder.com/200x80/2d2d2d/FFFFFF?text=Ghostlight+Theatre',
+      'Center for Media Innovation': 'https://via.placeholder.com/200x80/6B8E6B/FFFFFF?text=CMI+Point+Park',
+      'Western PA Press Club': 'https://via.placeholder.com/200x80/2a2a2a/FFFFFF?text=Western+PA+Press',
+      'Carnegie Mellon University': 'https://via.placeholder.com/200x80/8B0000/FFFFFF?text=Carnegie+Mellon',
+      'University of Pittsburgh': 'https://via.placeholder.com/200x80/003594/FFFFFF?text=Pitt',
+      'Butler County Community College': 'https://via.placeholder.com/200x80/2d2d2d/FFFFFF?text=BC3',
+      'Penn State Fayette': 'https://via.placeholder.com/200x80/041E42/FFFFFF?text=Penn+State+Fayette',
+      'The Watchful Shepherd': 'https://via.placeholder.com/200x80/4A5568/FFFFFF?text=Watchful+Shepherd',
+      'Voyage Visuals': 'https://via.placeholder.com/200x80/2d2d2d/FFFFFF?text=Voyage+Visuals',
+      'The Space Upstairs': 'https://via.placeholder.com/200x80/262626/FFFFFF?text=Space+Upstairs',
+      'Haven Pittsburgh': 'https://via.placeholder.com/200x80/2E7D32/FFFFFF?text=Haven+Pittsburgh'
+    };
+    img.src = fallbacks[client.name] || `https://via.placeholder.com/200x80/222222/FFFFFF?text=${encodeURIComponent(client.name)}`;
+  }
+
+  function createClientCarousel() {
+    const container = document.getElementById('ss-client-container');
+    if (!container) return;
+
+    const doubledClients = [...clientsData, ...clientsData];
+    const carousel = document.createElement('div');
+    carousel.className = 'ss-client-carousel';
+    const track = document.createElement('div');
+    track.className = 'ss-client-track';
+
+    doubledClients.forEach(client => {
+      const logoElement = document.createElement('div');
+      logoElement.className = 'ss-client-logo';
+      logoElement.setAttribute('title', `${client.name} - ${client.project}`);
+
+      const img = document.createElement('img');
+      img.alt = `${client.name} logo`;
+      img.loading = 'lazy';
+      img.onerror = () => handleLogoError(img, client);
+      img.src = client.logo;
+
+      logoElement.appendChild(img);
+      logoElement.addEventListener('click', () => {
+        if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
+      });
+
+      track.appendChild(logoElement);
+    });
+
+    carousel.appendChild(track);
+    container.className = 'ss-client-container';
+    container.innerHTML = '';
+    container.appendChild(carousel);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', createClientCarousel);
+  } else {
+    createClientCarousel();
+  }
+})();
+</script>
+
+<!-- End of Squarespace Code Block -->
