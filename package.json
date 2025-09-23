@@ -25,6 +25,7 @@
     "manifest:auto-update": "node scripts/auto-manifest-updater.js",
     "manifest:cleanup": "node scripts/cleanup-manifests.js",
     "manifest:cleanup-preview": "node scripts/cleanup-manifests.js --dry",
+    "manifest:journalism": "node scripts/generate-journalism-manifest.js",
     "organize:concerts": "node scripts/auto-concert-organizer.js --auto",
     "organize:preview": "node scripts/auto-concert-organizer.js --auto --dry",
     "organize:folders": "node scripts/auto-concert-folder-organizer.js",
