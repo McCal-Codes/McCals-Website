@@ -2,6 +2,23 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v3.0 (2024-09-23) — Published Work Support 📰
+### Major Release - Publication Tracking 🎉
+- **NEW**: Green "Published" badges for published images
+- **NEW**: Outlet information display in card overlays
+- **NEW**: Clickable outlet links when provided  
+- **NEW**: Enhanced lightbox with publication details section
+- **NEW**: Article titles with direct links to published stories
+- **NEW**: Published dates with proper formatting
+- **NEW**: "Published Work" filter category with special green styling
+- **NEW**: `generate-journalism-manifest.js` script for manifest management
+- **NEW**: Publication metadata in manifest.json (`published`, `outlet`, `outletUrl`, `articleUrl`, `articleTitle`, `publishedDate`)
+- **ENHANCED**: Improved auto-categorization based on folder structure
+- **ENHANCED**: Support for nested folder structures
+- **ENHANCED**: Distinctive green color scheme for published work (`--published:#00d4aa`)
+- **FIXED**: Better error handling for missing manifest files
+- **TECHNICAL**: Full backwards compatibility with v2.x, optimized caching system
+
 ## v2.2 (2025-09-19) — Path-Based Category Linking 🔗
 ### Advanced URL Navigation 🌐
 - **NEW**: Path-based category URLs (e.g., `/photojournalism-portfolio/politics`)

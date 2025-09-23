@@ -1,67 +1,122 @@
-name: Build manifests
+name: Auto-Generate Concert Manifest
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'images/**'
-      - 'scripts/gen-manifest.js'
+      - 'images/Portfolios/Concert/**'
+      - 'scripts/generate-concert-manifest.js'
       - '.github/workflows/build-manifest.yml'
+  
+  # Also run on manual trigger
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  update-concert-manifest:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      # Optional: quick sanity info in logs
-      - name: Show repo tree (top level)
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check for concert images
+        id: check_images
         run: |
-          pwd
-          ls -la
-          test -f scripts/gen-manifest.js && echo "✅ scripts/gen-manifest.js found" || (echo "❌ Missing scripts/gen-manifest.js" && exit 1)
-
-      # Generate manifests for EVERY images/* subdirectory containing image files
-      - name: Generate manifests for all image directories
-        shell: bash
-        run: |
-          set -euo pipefail
-          changed=0
-          while IFS= read -r -d '' dir; do
-            # Does this dir contain any jpg/jpeg/png/webp (case-insensitive)?
-            if compgen -G "$dir/*.[jJ][pP][gG]" > /dev/null || \
-               compgen -G "$dir/*.[jJ][pP][eE][gG]" > /dev/null || \
-               compgen -G "$dir/*.[pP][nN][gG]" > /dev/null || \
-               compgen -G "$dir/*.[wW][eE][bB][pP]" > /dev/null; then
-              echo "↻ Generating manifest for: $dir"
-              node scripts/gen-manifest.js "$dir"
-              changed=1
-            fi
-          done < <(find images -type d -print0)
-
-          if [[ $changed -eq 0 ]]; then
-            echo "No image directories found (or no changes)."
+          echo "🔍 Checking for concert images..."
+          
+          # Count total images in concert directory
+          IMAGE_COUNT=$(find images/Portfolios/Concert -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | wc -l)
+          echo "📸 Found $IMAGE_COUNT concert images"
+          
+          # Count band directories
+          BAND_COUNT=$(find images/Portfolios/Concert -mindepth 1 -maxdepth 1 -type d ! -name ".*" | wc -l)
+          echo "🎵 Found $BAND_COUNT band directories"
+          
+          # Set outputs
+          echo "image_count=$IMAGE_COUNT" >> $GITHUB_OUTPUT
+          echo "band_count=$BAND_COUNT" >> $GITHUB_OUTPUT
+          
+          # Check if concert manifest script exists
+          if [ -f "scripts/generate-concert-manifest.js" ]; then
+            echo "✅ Concert manifest generator found"
+            echo "has_generator=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Concert manifest generator not found"
+            echo "has_generator=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit & push manifests
+      - name: Generate concert manifest
+        if: steps.check_images.outputs.has_generator == 'true'
+        run: |
+          echo "🔄 Regenerating concert manifest..."
+          npm run manifest:concert
+          
+          # Show manifest summary
+          if [ -f "images/Portfolios/Concert/concert-manifest.json" ]; then
+            echo "✅ Concert manifest generated successfully"
+            
+            # Extract key info from manifest
+            MANIFEST_BANDS=$(grep -o '"totalBands":[0-9]*' images/Portfolios/Concert/concert-manifest.json | cut -d':' -f2)
+            MANIFEST_VERSION=$(grep -o '"version":"[^"]*"' images/Portfolios/Concert/concert-manifest.json | cut -d'"' -f4)
+            
+            echo "📊 Manifest info:"
+            echo "   - Version: $MANIFEST_VERSION"
+            echo "   - Total bands: $MANIFEST_BANDS"
+            echo "   - Generated: $(date)"
+          else
+            echo "❌ Concert manifest not found after generation"
+            exit 1
+          fi
+
+      - name: Check for changes
+        id: check_changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
-            git config user.name "github-actions"
-            git config user.email "actions@users.noreply.github.com"
-            git add -A
-            git commit -m "Auto-update manifests"
-            git push
+            echo "📝 Changes detected in manifest"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            
+            echo "Changed files:"
+            git status --porcelain
           else
-            echo "No changes to commit."
+            echo "✅ No changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
+
+      - name: Commit and push manifest
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          
+          # Add only manifest files
+          git add images/Portfolios/Concert/concert-manifest.json
+          git add images/Portfolios/Concert/**/manifest.json
+          
+          # Create descriptive commit message
+          BANDS=${{ steps.check_images.outputs.band_count }}
+          IMAGES=${{ steps.check_images.outputs.image_count }}
+          
+          git commit -m "🎬 Auto-update concert manifest
+          
+          - Bands: $BANDS
+          - Images: $IMAGES
+          - Generated: $(date -u)
+          - Trigger: ${{ github.event_name }}"
+          
+          git push
+          
+          echo "✅ Concert manifest updated and pushed successfully!"
