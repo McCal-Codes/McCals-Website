@@ -1,8 +1,8 @@
 {
   "name": "mccal-media-website",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "McCal Media photo gallery website with development tools",
-  "main": "site/index.html",
+  "main": "src/site/index.html",
   "scripts": {
     "dev": "node dev-server.js",
     "start": "npm run dev",

@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SOURCE_DIR = path.join(__dirname, '..', 'site');
+const SOURCE_DIR = path.join(__dirname, '..', 'src', 'site');
 const BUILD_DIR = path.join(__dirname, '..', 'dist');
 
 console.log('🔧 Building McCal Media Website...');
@@ -28,6 +28,11 @@ function copyDirectory(src, dest) {
     if (entry.isDirectory()) {
       copyDirectory(srcPath, destPath);
     } else {
+      // Ensure parent directory exists before copying file
+      const destDir = path.dirname(destPath);
+      if (!fs.existsSync(destDir)) {
+        fs.mkdirSync(destDir, { recursive: true });
+      }
       fs.copyFileSync(srcPath, destPath);
       console.log(`  ✓ ${path.relative(SOURCE_DIR, srcPath)}`);
     }
@@ -39,7 +44,7 @@ console.log('📁 Copying files...');
 copyDirectory(SOURCE_DIR, BUILD_DIR);
 
 // Copy images directory if it exists
-const IMAGES_DIR = path.join(__dirname, '..', 'images');
+const IMAGES_DIR = path.join(__dirname, '..', 'src', 'images');
 if (fs.existsSync(IMAGES_DIR)) {
   const destImagesDir = path.join(BUILD_DIR, 'images');
   console.log('🖼️  Copying images...');

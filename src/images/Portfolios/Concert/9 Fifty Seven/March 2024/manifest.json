@@ -1,0 +1,24 @@
+{
+  "bandName": "9 Fifty Seven",
+  "folderName": "March 2024",
+  "totalImages": 5,
+  "images": [
+    "240315_Genesis Volume 1_599.jpg",
+    "240315_Genesis Volume 1_600.jpg",
+    "240315_Genesis Volume 1_602.jpg",
+    "240315_Genesis Volume 1_603.jpg",
+    "240315_Genesis Volume 1_606.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-23T21:42:43.645Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2024,
+    "month": 3,
+    "monthName": "March",
+    "day": 15,
+    "iso": "2024-03-15",
+    "source": "filename_yymmdd"
+  }
+}

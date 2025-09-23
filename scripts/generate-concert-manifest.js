@@ -13,7 +13,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const CONCERT_BASE = path.join(process.cwd(), 'images', 'Portfolios', 'Concert');
+const CONCERT_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Concert');
 const MANIFEST_OUTPUT = path.join(CONCERT_BASE, 'concert-manifest.json');
 
 const MONTHS = [
