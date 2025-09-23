@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" style="background: transparent;">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d2d2d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e1e1e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="80" rx="8" fill="url(#grad2)" stroke="#333" stroke-width="1"/>
+  <text x="150" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">YINZERS MEET</text>
+  <text x="150" y="55" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#999999">PITTSBURGH EVENTS</text>
+</svg>

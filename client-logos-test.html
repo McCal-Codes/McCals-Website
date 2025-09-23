@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Logos Widget Test - McCal Media</title>
+    <meta name="description" content="Test page for client logos widget">
+</head>
+<body style="margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f5f5f5;">
+
+<div style="max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h1 style="text-align: center; color: #333; margin-bottom: 20px;">Client Logos Widget Test</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 40px;">Testing the widget before adding to Squarespace</p>
+
+    <!-- THIS IS THE WIDGET CODE THAT GOES INTO SQUARESPACE -->
+    <!-- Client Logos Widget v1.0 — SEO-Optimized for Squarespace
+    Author: Caleb McCartney / McCal Media
+    Version: 1.0
+    Purpose: Rotating client logos showcase with SEO metadata
+
+    Features:
+    - Rotating client logos carousel
+    - Built-in JSON-LD structured data for SEO
+    - Mobile responsive design
+    - Easy client management through simple array
+    - Hover effects and smooth animations
+    - Google search result optimization
+
+    Usage: Paste this entire block into a Squarespace Code Block
+    Requirements: Add your client logo URLs and details in the clientsData array below
+    -->
+
+    <style>
+      :root { 
+        --fg: #f5f5f5; 
+        --bg: #0a0a0a; 
+        --line: #2a2a2a; 
+        --accent: #ff4d6d;
+        --card-bg: #111;
+        --text-muted: #888;
+      }
+      @media (prefers-color-scheme: light) { 
+        :root { 
+          --fg: #0a0a0a; 
+          --bg: #fff; 
+          --line: #e5e5e5; 
+          --card-bg: #f8f9fa;
+          --text-muted: #666;
+        } 
+      }
+
+      .client-showcase { 
+        max-width: 1400px; 
+        margin: 60px auto; 
+        padding: 40px 20px; 
+        text-align: center; 
+        position: relative; 
+      }
+      
+      .client-heading { 
+        font: 800 32px/1.2 ui-sans-serif, system-ui; 
+        color: var(--fg); 
+        margin: 0 0 12px;
+      }
+      
+      .client-subtitle {
+        font: 400 16px/1.4 ui-sans-serif, system-ui;
+        color: var(--text-muted);
+        margin: 0 0 40px;
+      }
+
+      /* Rotating carousel container */
+      .client-carousel {
+        position: relative;
+        overflow: hidden;
+        padding: 20px 0;
+      }
+
+      .client-track {
+        display: flex;
+        animation: scroll 30s linear infinite;
+        width: calc(200px * 20); /* Adjust based on number of clients */
+      }
+
+      .client-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-200px * 10)); } /* Half of total width for seamless loop */
+      }
+
+      .client-logo {
+        flex: 0 0 180px;
+        height: 120px;
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .client-logo:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        border-color: var(--accent);
+      }
+
+      .client-logo img {
+        max-width: 140px;
+        max-height: 80px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        filter: grayscale(1) opacity(0.7);
+        transition: filter 0.3s ease;
+      }
+
+      .client-logo:hover img {
+        filter: grayscale(0) opacity(1);
+      }
+
+      .client-logo::after {
+        content: attr(data-name);
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        font: 600 11px/1 ui-sans-serif, system-ui;
+        color: var(--text-muted);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .client-logo:hover::after {
+        opacity: 1;
+      }
+
+      /* Stats section */
+      .client-stats {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font: 800 28px/1 ui-sans-serif, system-ui;
+        color: var(--accent);
+        display: block;
+      }
+
+      .stat-label {
+        font: 600 12px/1.3 ui-sans-serif, system-ui;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 4px;
+      }
+
+      /* Loading state */
+      .client-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        font: 600 16px/1.4 ui-sans-serif, system-ui;
+        color: var(--fg);
+        opacity: 0.7;
+      }
+
+      .client-spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--line);
+        border-top: 2px solid var(--accent);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 12px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        .client-heading { font-size: 24px; }
+        .client-subtitle { font-size: 14px; }
+        .client-logo { 
+          flex: 0 0 140px; 
+          height: 100px; 
+          margin: 0 8px; 
+        }
+        .client-logo img { 
+          max-width: 100px; 
+          max-height: 60px; 
+        }
+        .client-stats { gap: 20px; }
+        .stat-number { font-size: 22px; }
+      }
+
+      /* Version indicator */
+      .version-indicator {
+        position: fixed;
+        bottom: 8px;
+        right: 12px;
+        font: 400 10px/1 ui-sans-serif, system-ui;
+        color: rgba(128, 128, 128, 0.6);
+        z-index: 1;
+      }
+    </style>
+
+    <div class="client-showcase">
+      <h2 class="client-heading">Trusted by Leading Brands</h2>
+      <p class="client-subtitle">Proud to have collaborated with these amazing clients</p>
+      
+      <div id="client-container" class="client-loading">
+        <div class="client-spinner"></div>
+        Loading clients...
+      </div>
+      
+      <div class="client-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="client-count">0</span>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="project-count">0</span>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="years-experience">5+</span>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="version-indicator" title="Client Widget v1.0">v1.0</div>
+
+    <script type="application/ld+json" id="client-structured-data">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "McCal Media",
+      "description": "Professional photography services specializing in concert, journalism, and portrait photography",
+      "url": "https://mccalmedia.com",
+      "logo": "https://mccalmedia.com/logo.png",
+      "sameAs": [
+        "https://www.instagram.com/mcc_cal",
+        "https://www.facebook.com/mccalphotography"
+      ],
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Professional Photography Certification"
+        }
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Concert Photography",
+            "description": "Professional concert and live event photography services"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Journalism Photography",
+            "description": "Editorial and news photography services"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service", 
+            "name": "Portrait Photography",
+            "description": "Professional portrait and headshot photography"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script>
+    (function() {
+      'use strict';
+      
+      // ===== CLIENT DATA CONFIGURATION =====
+      // Add your clients here - just update the data below
+      const clientsData = [
+        {
+          name: "Apple Music",
+          logo: "https://via.placeholder.com/200x80/000000/FFFFFF?text=Apple+Music",
+          website: "https://music.apple.com",
+          project: "Concert Photography"
+        },
+        {
+          name: "Rolling Stone",
+          logo: "https://via.placeholder.com/200x80/DC143C/FFFFFF?text=Rolling+Stone", 
+          website: "https://rollingstone.com",
+          project: "Editorial Photography"
+        },
+        {
+          name: "Billboard",
+          logo: "https://via.placeholder.com/200x80/FF6B35/FFFFFF?text=Billboard",
+          website: "https://billboard.com", 
+          project: "Music Industry Coverage"
+        },
+        {
+          name: "Live Nation",
+          logo: "https://via.placeholder.com/200x80/1E3A8A/FFFFFF?text=Live+Nation",
+          website: "https://livenation.com",
+          project: "Concert Documentation"
+        },
+        {
+          name: "Spotify",
+          logo: "https://via.placeholder.com/200x80/1DB954/FFFFFF?text=Spotify",
+          website: "https://spotify.com",
+          project: "Artist Portraits"
+        },
+        {
+          name: "Warner Music",
+          logo: "https://via.placeholder.com/200x80/8B5CF6/FFFFFF?text=Warner+Music",
+          website: "https://warnermusic.com",
+          project: "Album Photography"
+        },
+        {
+          name: "Universal Music",
+          logo: "https://via.placeholder.com/200x80/EF4444/FFFFFF?text=Universal",
+          website: "https://universalmusic.com",
+          project: "Press Photography"
+        },
+        {
+          name: "Sony Music",
+          logo: "https://via.placeholder.com/200x80/000000/FFFFFF?text=Sony+Music",
+          website: "https://sonymusic.com",
+          project: "Event Coverage"
+        }
+        // Add more clients here as needed
+      ];
+
+      // Stats configuration
+      const statsConfig = {
+        clientCount: clientsData.length,
+        projectCount: clientsData.length * 3, // Assuming 3 projects per client on average
+        yearsExperience: '5+'
+      };
+      
+      // ===== WIDGET FUNCTIONALITY =====
+      let isLoaded = false;
+      
+      function updateStats() {
+        const clientCountEl = document.getElementById('client-count');
+        const projectCountEl = document.getElementById('project-count');
+        const yearsExperienceEl = document.getElementById('years-experience');
+        
+        if (clientCountEl) clientCountEl.textContent = statsConfig.clientCount;
+        if (projectCountEl) projectCountEl.textContent = statsConfig.projectCount + '+';
+        if (yearsExperienceEl) yearsExperienceEl.textContent = statsConfig.yearsExperience;
+      }
+      
+      function updateStructuredData() {
+        const structuredDataScript = document.getElementById('client-structured-data');
+        if (!structuredDataScript) return;
+        
+        const structuredData = JSON.parse(structuredDataScript.textContent);
+        
+        // Add client relationships to structured data
+        structuredData.knowsAbout = clientsData.map(client => ({
+          "@type": "Organization",
+          "name": client.name,
+          "url": client.website
+        }));
+        
+        structuredData.numberOfEmployees = "1-10";
+        structuredData.foundingDate = new Date().getFullYear() - 5; // Adjust as needed
+        
+        structuredDataScript.textContent = JSON.stringify(structuredData, null, 2);
+      }
+      
+      function createClientCarousel() {
+        const container = document.getElementById('client-container');
+        if (!container) return;
+        
+        // Double the clients array for seamless infinite scroll
+        const doubledClients = [...clientsData, ...clientsData];
+        
+        const carousel = document.createElement('div');
+        carousel.className = 'client-carousel';
+        
+        const track = document.createElement('div');
+        track.className = 'client-track';
+        
+        doubledClients.forEach(client => {
+          const logoElement = document.createElement('div');
+          logoElement.className = 'client-logo';
+          logoElement.setAttribute('data-name', client.name);
+          logoElement.setAttribute('title', `${client.name} - ${client.project}`);
+          
+          const img = document.createElement('img');
+          img.src = client.logo;
+          img.alt = `${client.name} logo`;
+          img.loading = 'lazy';
+          
+          logoElement.appendChild(img);
+          
+          // Add click handler to visit client website
+          logoElement.addEventListener('click', () => {
+            if (client.website) {
+              window.open(client.website, '_blank', 'noopener noreferrer');
+            }
+          });
+          
+          track.appendChild(logoElement);
+        });
+        
+        carousel.appendChild(track);
+        
+        // Replace loading state with carousel
+        container.className = 'client-container';
+        container.innerHTML = '';
+        container.appendChild(carousel);
+        
+        isLoaded = true;
+      }
+      
+      function init() {
+        if (isLoaded) return;
+        
+        try {
+          createClientCarousel();
+          updateStats();
+          updateStructuredData();
+          
+          console.log(`✅ Client Widget v1.0 loaded successfully with ${clientsData.length} clients`);
+        } catch (error) {
+          console.error('❌ Client Widget initialization failed:', error);
+          
+          const container = document.getElementById('client-container');
+          if (container) {
+            container.innerHTML = '<div style="color: var(--text-muted); font: 600 14px/1.4 ui-sans-serif,system-ui;">Unable to load clients</div>';
+          }
+        }
+      }
+      
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+
+    <!-- END OF WIDGET CODE -->
+</div>
+
+<div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #ff4d6d;">
+    <h3 style="margin-top: 0; color: #333;">📋 Instructions for Squarespace:</h3>
+    <ol style="color: #666; line-height: 1.6;">
+        <li><strong>Copy the widget code</strong> from the comments above (everything between the HTML comments)</li>
+        <li><strong>Go to your Squarespace page</strong> where you want the widget</li>
+        <li><strong>Add a Code Block</strong> and paste the entire widget code</li>
+        <li><strong>Update the clientsData array</strong> with your real client info</li>
+        <li><strong>Save and publish!</strong></li>
+    </ol>
+    <p style="color: #666; font-style: italic;">The widget will automatically adapt to your Squarespace theme colors and be mobile responsive.</p>
+</div>
+
+</body>
+</html>
