@@ -79,6 +79,62 @@ function rawUrl(parts) {
 - **Always increment** when making changes - never overwrite existing versions
 - **Keep old versions** for compatibility with existing Squarespace sites
 
+## Required Widget Features
+
+### Version Indicator & Changelog Modal
+**ALL widgets must include:**
+
+1. **Fixed version indicator** (bottom-right corner)
+   ```css
+   .version-indicator {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     background: rgba(0,0,0,0.7);
+     color: rgba(255,255,255,0.6);
+     padding: 4px 8px;
+     border-radius: 4px;
+     font: 600 10px/1 ui-monospace,monospace;
+     cursor: pointer;
+     z-index: 500;
+     transition: color 0.2s ease;
+   }
+   .version-indicator:hover { color: var(--accent); }
+   ```
+
+2. **Clickable changelog modal** (like Concert Portfolio v4.2)
+   - Modal opens when version indicator is clicked
+   - Shows version history with features/changes
+   - Clean, accessible modal design
+   - ESC key and background click to close
+
+3. **Implementation example:**
+   ```html
+   <!-- Version indicator -->
+   <div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v2.1</div>
+   
+   <!-- Changelog Modal -->
+   <div class="changelog-modal" id="changelogModal">
+     <div class="changelog-content">
+       <div class="changelog-header">
+         <h3 class="changelog-title">🎸 Widget Changelog</h3>
+         <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+       </div>
+       <div class="changelog-body">
+         <div class="changelog-version">v2.1 - Latest Features (Current)</div>
+         <ul class="changelog-items">
+           <li>New feature description</li>
+           <li>Bug fixes and improvements</li>
+         </ul>
+       </div>
+     </div>
+   </div>
+   ```
+
+This ensures consistent UX across all McCal Media widgets and helps users understand what version they're using.
+
+**📄 Template Available:** Use `src/widgets/WIDGET-TEMPLATE.html` as your starting point - it includes all required components pre-configured.
+
 ## Testing Workflow
 
 1. Create widget in `/demo/` folder first
