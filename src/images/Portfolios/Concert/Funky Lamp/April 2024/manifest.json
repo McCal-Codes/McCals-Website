@@ -1,0 +1,25 @@
+{
+  "bandName": "Funky Lamp",
+  "folderName": "April 2024",
+  "totalImages": 6,
+  "images": [
+    "2404_Funky Lamp Indie Fest_1548_CAL.jpg",
+    "2404_Funky Lamp Indie Fest_1558_CAL.jpg",
+    "2404_Funky Lamp Indie Fest_1563_CAL.jpg",
+    "2404_Funky Lamp Indie Fest_1567_CAL.jpg",
+    "2404_Funky Lamp Indie Fest_1569_CAL.jpg",
+    "2404_Funky Lamp Indie Fest_1570_CAL.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-23T21:42:43.652Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2024,
+    "month": 4,
+    "monthName": "April",
+    "day": 20,
+    "iso": "2024-04-20",
+    "source": "exif_original"
+  }
+}

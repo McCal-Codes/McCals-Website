@@ -1,0 +1,27 @@
+{
+  "bandName": "Casino Six",
+  "folderName": "August 2025",
+  "totalImages": 8,
+  "images": [
+    "250820_Haven Block Party_CAL3301.jpg",
+    "250820_Haven Block Party_CAL3304.jpg",
+    "250820_Haven Block Party_CAL3315.jpg",
+    "250820_Haven Block Party_CAL3351.jpg",
+    "250820_Haven Block Party_CAL3364.jpg",
+    "250820_Haven Block Party_CAL3390.jpg",
+    "250820_Haven Block Party_CAL3411.jpg",
+    "250820_Haven Block Party_CAL3443.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-23T21:42:43.647Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2025,
+    "month": 8,
+    "monthName": "August",
+    "day": 20,
+    "iso": "2025-08-20",
+    "source": "filename_yymmdd"
+  }
+}

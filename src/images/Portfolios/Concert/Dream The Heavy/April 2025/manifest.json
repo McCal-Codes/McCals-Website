@@ -1,0 +1,33 @@
+{
+  "bandName": "Dream The Heavy",
+  "folderName": "April 2025",
+  "totalImages": 14,
+  "images": [
+    "250404 Haven Concert_CAL1915.jpg",
+    "250404 Haven Concert_CAL1919.jpg",
+    "250404 Haven Concert_CAL1992.jpg",
+    "250404 Haven Concert_CAL2036.jpg",
+    "250404 Haven Concert_CAL2041.jpg",
+    "250404 Haven Concert_CAL2157.jpg",
+    "250404 Haven Concert_CAL2190.jpg",
+    "250404 Haven Concert_CAL2238.jpg",
+    "250404 Haven Concert_CAL2243.jpg",
+    "250404 Haven Concert_CAL2282.jpg",
+    "250404 Haven Concert_CAL2349.jpg",
+    "250404 Haven Concert_CAL2368.jpg",
+    "250404 Haven Concert_CAL8785.jpg",
+    "250404 Haven Concert_CAL8787.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-23T21:42:43.648Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2025,
+    "month": 4,
+    "monthName": "April",
+    "day": 4,
+    "iso": "2025-04-04",
+    "source": "filename_yymmdd"
+  }
+}

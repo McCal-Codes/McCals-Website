@@ -13,7 +13,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const PORTFOLIOS_BASE = path.join(process.cwd(), 'images', 'Portfolios');
+const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const MANIFEST_OUTPUT = path.join(PORTFOLIOS_BASE, 'portfolio-manifest.json');
 
 const MONTHS = [

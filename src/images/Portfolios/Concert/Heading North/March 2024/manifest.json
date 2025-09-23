@@ -1,0 +1,38 @@
+{
+  "bandName": "Heading North",
+  "folderName": "March 2024",
+  "totalImages": 19,
+  "images": [
+    "240315_Genesis Volume 1_464.jpg",
+    "240315_Genesis Volume 1_466.jpg",
+    "240315_Genesis Volume 1_470.jpg",
+    "240315_Genesis Volume 1_488.jpg",
+    "240315_Genesis Volume 1_491.jpg",
+    "240315_Genesis Volume 1_497.jpg",
+    "240315_Genesis Volume 1_501.jpg",
+    "240315_Genesis Volume 1_502.jpg",
+    "240315_Genesis Volume 1_503.jpg",
+    "240315_Genesis Volume 1_507.jpg",
+    "240315_Genesis Volume 1_510.jpg",
+    "240315_Genesis Volume 1_511.jpg",
+    "240315_Genesis Volume 1_515.jpg",
+    "240315_Genesis Volume 1_520.jpg",
+    "240315_Genesis Volume 1_526.jpg",
+    "240315_Genesis Volume 1_530.jpg",
+    "240315_Genesis Volume 1_549.jpg",
+    "240315_Genesis Volume 1_556.jpg",
+    "240315_Genesis Volume 1_558.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-23T21:42:43.654Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2024,
+    "month": 3,
+    "monthName": "March",
+    "day": 15,
+    "iso": "2024-03-15",
+    "source": "filename_yymmdd"
+  }
+}

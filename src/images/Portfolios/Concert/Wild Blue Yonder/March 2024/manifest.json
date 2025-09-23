@@ -1,0 +1,36 @@
+{
+  "bandName": "Wild Blue Yonder",
+  "folderName": "March 2024",
+  "totalImages": 17,
+  "images": [
+    "240315_Genesis Volume 1_561.jpg",
+    "240315_Genesis Volume 1_563.jpg",
+    "240315_Genesis Volume 1_566.jpg",
+    "240315_Genesis Volume 1_567.jpg",
+    "240315_Genesis Volume 1_570.jpg",
+    "240315_Genesis Volume 1_571.jpg",
+    "240315_Genesis Volume 1_574.jpg",
+    "240315_Genesis Volume 1_576.jpg",
+    "240315_Genesis Volume 1_578.jpg",
+    "240315_Genesis Volume 1_580.jpg",
+    "240315_Genesis Volume 1_587.jpg",
+    "240315_Genesis Volume 1_588.jpg",
+    "240315_Genesis Volume 1_589.jpg",
+    "240315_Genesis Volume 1_591.jpg",
+    "240315_Genesis Volume 1_595.jpg",
+    "240315_Genesis Volume 1_596.jpg",
+    "240315_Genesis Volume 1_597.jpg"
+  ],
+  "metadata": {
+    "generated": "2025-09-23T21:42:43.656Z",
+    "version": "1.0"
+  },
+  "concertDate": {
+    "year": 2024,
+    "month": 3,
+    "monthName": "March",
+    "day": 15,
+    "iso": "2024-03-15",
+    "source": "filename_yymmdd"
+  }
+}
