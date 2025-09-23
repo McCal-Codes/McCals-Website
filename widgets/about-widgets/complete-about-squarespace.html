@@ -663,9 +663,13 @@ To troubleshoot logo loading issues in Squarespace:
           <a href="mailto:contact@mcc-cal.com" class="ss-about-btn ss-about-btn-primary">
             Get In Touch
           </a>
-          <!-- Replace this href with your actual resume URL in Squarespace -->
-          <a href="https://static1.squarespace.com/static/YOUR-SITE-ID/t/YOUR-FILE-ID/caleb-mccartney-resume.pdf" download="Caleb-McCartney-Resume-August-2025.pdf" class="ss-about-btn ss-about-btn-secondary">
+          <!-- GitHub raw URL for resume download -->
+          <a href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/caleb-mccartney-resume.pdf" download="Caleb-McCartney-Resume-August-2025.pdf" class="ss-about-btn ss-about-btn-secondary">
             📄 Resume
+          </a>
+          <!-- CV temporarily offline -->
+          <a href="#" onclick="alert('CV coming soon! Currently being updated.'); return false;" class="ss-about-btn ss-about-btn-secondary" style="opacity: 0.6; color: #a0a0a0; border-color: rgba(255,255,255,0.2);">
+            📋 CV (Offline)
           </a>
           <a href="/work" class="ss-about-btn ss-about-btn-secondary">
             View Work
@@ -746,13 +750,23 @@ To troubleshoot logo loading issues in Squarespace:
 <div class="ss-debug-info" id="ss-debug-info"></div>
 
 <!-- Version Indicator -->
-<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.1</div>
+<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.3</div>
 
 <!-- Changelog Panel -->
 <div class="ss-changelog-panel" id="ss-changelog-panel">
   <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
   <div class="ss-changelog-header">About Widget Changelog</div>
   <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v1.4.3 — CV Download Button Added</div>
+    <div class="ss-changelog-feature">• Added CV download button next to Resume button</div>
+    <div class="ss-changelog-feature">• Points to detailed CV file when uploaded</div>
+    <div class="ss-changelog-feature">• Uses GitHub raw URL for reliable hosting</div>
+    
+    <div class="ss-changelog-version">v1.4.2 — Resume Download Fix</div>
+    <div class="ss-changelog-feature">• Fixed broken resume download link</div>
+    <div class="ss-changelog-feature">• Replaced Squarespace placeholders with GitHub raw URL</div>
+    <div class="ss-changelog-feature">• Resume now downloads correctly from GitHub repository</div>
+    
     <div class="ss-changelog-version">v1.4.0 — Advanced Debugging System</div>
     <div class="ss-changelog-feature">• Interactive debug button with real-time logo testing</div>
     <div class="ss-changelog-feature">• System information display (URL, browser, viewport)</div>
