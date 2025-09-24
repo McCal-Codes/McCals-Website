@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated": "2025-09-24T07:33:56.628Z",
+  "generated": "2025-09-24T07:34:34.825Z",
   "totalEvents": 4,
   "totalImages": 41,
   "categories": [
@@ -307,199 +307,261 @@
       "eventName": "Obama Speaks At Pitt",
       "category": "Politics",
       "tags": [
-        "Politics"
+        "Politics",
+        "Published Work",
+        "Presidential Campaign"
       ],
       "folderPath": "Politics/Obama Speaks at Pitt",
       "eventDate": {
-        "iso": "2010-10-24",
-        "source": "filename_extraction"
+        "iso": "2024-10-10",
+        "source": "metadata"
       },
-      "dateDisplay": "October 23, 2010",
+      "dateDisplay": "October 9, 2024",
       "totalImages": 20,
       "images": [
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
           "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
-          "description": "Obama Speaks at Pitt photography",
-          "caption": "Obama Speaks at Pitt - Politics",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
           "tags": [
-            "Politics"
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
           ]
         }
       ],
-      "published": false,
-      "metadata": {}
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Published Work",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-10",
+        "description": "Barack Obama speaks at University of Pittsburgh rally",
+        "caption": "Obama campaign event at Pittsburgh",
+        "outlet": "New York Post",
+        "outletUrl": "https://nypost.com",
+        "articleUrl": "",
+        "articleTitle": "Barack Obama Rallies Pittsburgh Voters",
+        "publishedDate": "2024-10-10"
+      },
+      "outlet": "New York Post",
+      "outletUrl": "https://nypost.com",
+      "articleUrl": "",
+      "articleTitle": "Barack Obama Rallies Pittsburgh Voters",
+      "publishedDate": "2024-10-10"
     }
   ]
 }
