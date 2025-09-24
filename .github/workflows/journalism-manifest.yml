@@ -1,0 +1,110 @@
+name: Auto-Generate Journalism Manifest
+
+on:
+  push:
+    paths:
+      - 'src/images/Portfolios/Journalism/**'
+    branches:
+      - main
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  regenerate-manifest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Check for journalism changes
+        id: changes
+        run: |
+          echo "Checking for journalism portfolio changes..."
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^src/images/Portfolios/Journalism/'; then
+            echo "journalism_changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Journalism portfolio changes detected"
+          else
+            echo "journalism_changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No journalism portfolio changes"
+          fi
+          
+      - name: Generate journalism manifest
+        if: steps.changes.outputs.journalism_changed == 'true'
+        run: |
+          echo "📰 Regenerating journalism manifest..."
+          npm run manifest:journalism -- --force
+          
+      - name: Check if manifest was updated
+        id: manifest_check
+        if: steps.changes.outputs.journalism_changed == 'true'
+        run: |
+          if git diff --quiet src/images/Portfolios/Journalism/journalism-manifest.json; then
+            echo "manifest_updated=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  Manifest unchanged"
+          else
+            echo "manifest_updated=true" >> $GITHUB_OUTPUT
+            echo "✅ Manifest updated"
+          fi
+          
+      - name: Commit and push updated manifest
+        if: steps.manifest_check.outputs.manifest_updated == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add src/images/Portfolios/Journalism/journalism-manifest.json
+          
+          # Get commit info
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          
+          git commit -m "chore: auto-regenerate journalism manifest
+
+          Triggered by: $COMMIT_MSG
+          
+          Auto-generated via GitHub Actions"
+          
+          git push
+          
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 📰 Journalism Manifest Auto-Generation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.changes.outputs.journalism_changed }}" == "true" ]; then
+            echo "✅ **Journalism changes detected**" >> $GITHUB_STEP_SUMMARY
+            
+            if [ "${{ steps.manifest_check.outputs.manifest_updated }}" == "true" ]; then
+              echo "✅ **Manifest regenerated and committed**" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "The journalism widget will pick up changes within 15 minutes!" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "ℹ️  **Manifest unchanged** - no updates needed" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "ℹ️  **No journalism changes** - workflow skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Current Events" >> $GITHUB_STEP_SUMMARY
+          if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json" ]; then
+            node -e "
+              const fs = require('fs');
+              const manifest = JSON.parse(fs.readFileSync('src/images/Portfolios/Journalism/journalism-manifest.json', 'utf8'));
+              console.log('| Event | Category | Images | Tags |');
+              console.log('|-------|----------|---------|------|');
+              manifest.events.forEach(event => {
+                console.log(\`| \${event.eventName} | \${event.category} | \${event.totalImages} | \${event.tags.join(', ')} |\`);
+              });
+            " >> $GITHUB_STEP_SUMMARY
+          fi
