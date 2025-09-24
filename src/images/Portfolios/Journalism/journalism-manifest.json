@@ -1,397 +1,307 @@
 {
-  "version": "1.0",
-  "generated": "2025-09-24T07:12:08.997Z",
+  "version": "2.0",
+  "generated": "2025-09-24T07:30:01.875Z",
   "totalEvents": 3,
   "totalImages": 21,
   "categories": [
-    "Politics",
     "Events",
-    "Portraits",
-    "Featured",
-    "Published"
+    "Politics",
+    "Portraits"
+  ],
+  "tags": [
+    "Events",
+    "Politics",
+    "Presidential Campaign",
+    "Published Work"
   ],
   "categoryStats": {
     "Events": 1,
-    "Politics": 20
+    "Politics": 2,
+    "Portraits": 0
   },
   "events": [
     {
-      "eventName": "Butler Democracy Protest",
+      "eventName": "Events Portfolio",
+      "category": "Events",
+      "tags": [
+        "Events"
+      ],
+      "folderPath": "Events/Events Portfolio",
+      "eventDate": {
+        "iso": "2025-04-17",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "April 16, 2025",
+      "totalImages": 1,
+      "images": [
+        {
+          "filename": "250417 The Rooney Rule_CAL3148.jpg",
+          "path": "Events/Events Portfolio/250417 The Rooney Rule_CAL3148.jpg",
+          "description": "Events Portfolio photography",
+          "caption": "Events Portfolio - Events",
+          "tags": [
+            "Events"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "Butler Protest",
       "category": "Politics",
+      "tags": [
+        "Politics"
+      ],
       "folderPath": "Politics/Butler Protest",
-      "dateDisplay": "March 15, 2025",
       "eventDate": {
         "iso": "2025-03-15",
         "source": "filename_extraction"
       },
+      "dateDisplay": "March 14, 2025",
       "totalImages": 11,
       "images": [
         {
           "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9640-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9666-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9674-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9703-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9709-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9717-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9739-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9759-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9773-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9825-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9832-min.jpg",
-          "category": "Politics",
-          "date": "2025-03-15T04:00:00.000Z",
-          "caption": "Butler Democracy Protest - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics/Butler Protest",
-          "eventName": "Butler Democracy Protest"
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         }
       ],
-      "published": false
+      "published": false,
+      "metadata": {}
     },
     {
-      "eventName": "Clinton Speaks at Pitt Greensburgh",
+      "eventName": "Clinton Speaks At Pitt Greensburgh",
       "category": "Politics",
-      "folderPath": "Politics",
-      "dateDisplay": "October 29, 2024",
+      "tags": [
+        "Politics",
+        "Published Work",
+        "Presidential Campaign"
+      ],
+      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
       "eventDate": {
         "iso": "2024-10-29",
-        "source": "filename_extraction"
+        "source": "metadata"
       },
+      "dateDisplay": "October 28, 2024",
       "totalImages": 9,
       "images": [
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
-          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
-          "category": "Politics",
-          "date": "2024-10-29T04:00:00.000Z",
-          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
-          "description": "",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Clinton Speaks at Pitt Greensburgh"
+          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         }
       ],
-      "published": false
-    },
-    {
-      "eventName": "The Rooney Rule",
-      "category": "Events",
-      "folderPath": "Events",
-      "dateDisplay": "April 17, 2024",
-      "eventDate": {
-        "iso": "2024-04-17",
-        "source": "filename_extraction"
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Published Work",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-29",
+        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+        "caption": "Clinton campaign event at Pitt Greensburg",
+        "outlet": "New York Post",
+        "outletUrl": "https://nypost.com",
+        "articleUrl": "",
+        "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
+        "publishedDate": "2024-10-29"
       },
-      "totalImages": 1,
-      "images": [
-        {
-          "filename": "250417 The Rooney Rule_CAL3148.jpg",
-          "path": "Events/250417 The Rooney Rule_CAL3148.jpg",
-          "category": "Events",
-          "date": "2024-04-17T14:30:00Z",
-          "caption": "Panel discussion on the Rooney Rule and diversity in professional sports leadership",
-          "description": "Sports executives and advocates discuss the impact and future of diversity hiring practices",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Events",
-          "eventName": "The Rooney Rule"
-        }
-      ],
-      "published": false
+      "outlet": "New York Post",
+      "outletUrl": "https://nypost.com",
+      "articleUrl": "",
+      "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
+      "publishedDate": "2024-10-29"
     }
   ]
 }
