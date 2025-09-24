@@ -1,6 +1,6 @@
 {
   "name": "mccal-media-website",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "McCal Media photo gallery website with development tools",
   "main": "src/site/index.html",
   "scripts": {
@@ -27,6 +27,7 @@
     "manifest:cleanup-preview": "node scripts/cleanup-manifests.js --dry",
     "manifest:journalism": "node scripts/generate-journalism-manifest.js",
     "import:journalism": "node scripts/import-journalism.js",
+    "watch:journalism": "node scripts/watch-journalism-import.js",
     "organize:concerts": "node scripts/auto-concert-organizer.js --auto",
     "organize:preview": "node scripts/auto-concert-organizer.js --auto --dry",
     "organize:folders": "node scripts/auto-concert-folder-organizer.js",
