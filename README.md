@@ -1,6 +1,6 @@
 # McCal Media — Widget Development Workspace
 
-> **Version 2.0.0** — Squarespace widget development and testing environment
+> **Version 2.1.0** — Squarespace widget development and testing environment
 
 This repository is primarily a **development workspace for Squarespace widgets**, containing reusable web components that embed into your Squarespace site. The standalone site is used only for testing widgets before deployment to Squarespace.
 
