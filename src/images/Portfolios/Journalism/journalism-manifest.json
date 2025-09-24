@@ -1,8 +1,8 @@
 {
   "version": "2.0",
-  "generated": "2025-09-24T07:30:01.875Z",
-  "totalEvents": 3,
-  "totalImages": 21,
+  "generated": "2025-09-24T07:33:56.628Z",
+  "totalEvents": 4,
+  "totalImages": 41,
   "categories": [
     "Events",
     "Politics",
@@ -16,7 +16,7 @@
   ],
   "categoryStats": {
     "Events": 1,
-    "Politics": 2,
+    "Politics": 3,
     "Portraits": 0
   },
   "events": [
@@ -302,6 +302,204 @@
       "articleUrl": "",
       "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
       "publishedDate": "2024-10-29"
+    },
+    {
+      "eventName": "Obama Speaks At Pitt",
+      "category": "Politics",
+      "tags": [
+        "Politics"
+      ],
+      "folderPath": "Politics/Obama Speaks at Pitt",
+      "eventDate": {
+        "iso": "2010-10-24",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 23, 2010",
+      "totalImages": 20,
+      "images": [
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
+          "path": "Politics/Obama Speaks at Pitt/101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
+          "description": "Obama Speaks at Pitt photography",
+          "caption": "Obama Speaks at Pitt - Politics",
+          "tags": [
+            "Politics"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
     }
   ]
 }
