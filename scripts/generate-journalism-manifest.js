@@ -72,8 +72,8 @@ async function main() {
       }
     }
     
-    // Process and organize images by events (similar to concert bands)
-    console.log('🏗️  Processing images by events...');
+    // Process and organize images by events (like concert bands/venues)
+    console.log('🏠️  Processing images by events...');
     const eventMap = new Map();
     const categoryStats = {};
     const seenFilenames = new Set(); // Track filenames to prevent duplicates
@@ -96,17 +96,32 @@ async function main() {
       }
       seenFilenames.add(normalizedFilename);
       
-      // Extract event name from filename
-      const eventName = extractEventFromFilename(image.filename);
-      const category = existing.published ? 'Published' : image.category;
+      // Extract event name - prefer folder structure over filename
+      let eventName = extractEventFromFilename(image.filename);
+      let category = image.category || 'Events';
+      
+      // If image is in a folder structure like Politics/Clinton Rally, use folder as event name
+      const pathParts = image.relativePath.split('/');
+      if (pathParts.length >= 3) {
+        // Structure: Journalism/Category/EventName/filename
+        category = pathParts[1];
+        eventName = pathParts[2];
+      } else if (pathParts.length === 2) {
+        // Structure: Journalism/Category/filename (loose files in category)
+        category = pathParts[1];
+        // Keep eventName from filename
+      }
+      
+      // Override with published status if applicable
+      const finalCategory = existing.published ? 'Published' : category;
       
       // Create processed image entry
       const processedImage = {
         filename: image.filename,
         path: image.relativePath,
-        category: category,
+        category: finalCategory,
         date: existing.date || extractDateFromFilename(image.filename) || new Date().toISOString(),
-        caption: existing.caption || `${eventName} - ${category} photography`,
+        caption: existing.caption || `${eventName} - ${finalCategory} photography`,
         description: existing.description || '',
         published: existing.published || false,
         outlet: existing.outlet || null,
@@ -115,15 +130,16 @@ async function main() {
         articleTitle: existing.articleTitle || null,
         publishedDate: existing.publishedDate || null,
         folderName: image.folderName,
-        eventName: eventName
+        eventName: eventName,
+        eventFolder: pathParts.length >= 3 ? pathParts[2] : null
       };
       
       // Group by event name
       if (!eventMap.has(eventName)) {
         eventMap.set(eventName, {
           eventName: eventName,
-          category: category,
-          folderPath: image.folderName || category,
+          category: finalCategory,
+          folderPath: pathParts.length >= 3 ? `${category}/${eventName}` : (image.folderName || category),
           dateDisplay: new Date(processedImage.date).toLocaleDateString('en-US', { 
             year: 'numeric', 
             month: 'long', 
@@ -135,7 +151,8 @@ async function main() {
           },
           totalImages: 0,
           images: [],
-          published: processedImage.published
+          published: processedImage.published,
+          hasEventFolder: pathParts.length >= 3
         });
       }
       
@@ -150,9 +167,9 @@ async function main() {
       }
       
       // Update category stats
-      categoryStats[category] = (categoryStats[category] || 0) + 1;
+      categoryStats[finalCategory] = (categoryStats[finalCategory] || 0) + 1;
       
-      console.log(`   ✓ ${eventName} (${category}): ${image.filename}`);
+      console.log(`   ✓ ${eventName} (${finalCategory}): ${image.filename}`);
     }
     
     // Convert to array and sort by date (newest first)
