@@ -1,0 +1,86 @@
+
+> mccal-media-website@2.2.0 watch:journalism-manifest
+> node scripts/watch-journalism-manifest.js
+
+📰 [3:35:18 AM] Starting Journalism manifest watcher...
+📰 [3:35:18 AM] Watching: /Users/mccal/McCals-Website/src/images/Portfolios/Journalism
+✅ [3:35:18 AM] Journalism manifest watcher is ready!
+✅ [3:35:18 AM] Any changes to the journalism folder will trigger manifest regeneration.
+📰 [3:36:31 AM] Directory added: Events/The Rooney Rule
+📰 [3:36:33 AM] 🔄 Regenerating journalism manifest...
+
+> mccal-media-website@2.2.0 manifest:journalism
+> node scripts/generate-journalism-manifest-v2.js --force
+
+📰 Generating journalism manifest v2.0...
+📰 Processing category: Events
+📰 Found 1 direct images in Events
+📰 Processing event: Events/Events Portfolio
+📰 ✓ Events Portfolio: 1 images, tags: [Events]
+📰 Processing event: Events/The Rooney Rule
+⚠️  No images found in Events/The Rooney Rule
+📰 Processing category: Politics
+📰 Processing event: Politics/Butler Protest
+📰 ✓ Butler Protest: 11 images, tags: [Politics]
+📰 Processing event: Politics/Clinton Speaks at Pitt Greensburgh
+📰 Loaded metadata for Clinton Speaks at Pitt Greensburgh
+📰 ✓ Clinton Speaks at Pitt Greensburgh: 9 images, tags: [Politics, Published Work, Presidential Campaign]
+📰 Processing event: Politics/Obama Speaks at Pitt
+📰 Loaded metadata for Obama Speaks at Pitt
+📰 ✓ Obama Speaks at Pitt: 20 images, tags: [Politics, Published Work, Presidential Campaign]
+📰 Processing category: Portraits
+✅ Journalism manifest generated successfully!
+✅ 📄 File: /Users/mccal/McCals-Website/src/images/Portfolios/Journalism/journalism-manifest.json
+✅ 📊 Events: 4, Images: 41
+
+📋 Category Breakdown:
+   📂 Events: 1 events
+   📂 Politics: 3 events
+   📂 Portraits: 0 events
+
+🏷️  Available Tags:
+   • Events: 1 events
+   • Politics: 3 events
+   • Published Work: 2 events
+   • Presidential Campaign: 2 events
+
+📰 Published Work: 2 events
+✅ [3:36:33 AM] Journalism manifest regenerated successfully!
+📰 [3:36:38 AM] File removed: Events/250417 The Rooney Rule_CAL3148.jpg
+📰 [3:36:39 AM] File added: Events/The Rooney Rule/250417 The Rooney Rule_CAL3148.jpg
+📰 [3:36:41 AM] 🔄 Regenerating journalism manifest...
+
+> mccal-media-website@2.2.0 manifest:journalism
+> node scripts/generate-journalism-manifest-v2.js --force
+
+📰 Generating journalism manifest v2.0...
+📰 Processing category: Events
+📰 Processing event: Events/The Rooney Rule
+📰 ✓ The Rooney Rule: 1 images, tags: [Events]
+📰 Processing category: Politics
+📰 Processing event: Politics/Butler Protest
+📰 ✓ Butler Protest: 11 images, tags: [Politics]
+📰 Processing event: Politics/Clinton Speaks at Pitt Greensburgh
+📰 Loaded metadata for Clinton Speaks at Pitt Greensburgh
+📰 ✓ Clinton Speaks at Pitt Greensburgh: 9 images, tags: [Politics, Published Work, Presidential Campaign]
+📰 Processing event: Politics/Obama Speaks at Pitt
+📰 Loaded metadata for Obama Speaks at Pitt
+📰 ✓ Obama Speaks at Pitt: 20 images, tags: [Politics, Published Work, Presidential Campaign]
+📰 Processing category: Portraits
+✅ Journalism manifest generated successfully!
+✅ 📄 File: /Users/mccal/McCals-Website/src/images/Portfolios/Journalism/journalism-manifest.json
+✅ 📊 Events: 4, Images: 41
+
+📋 Category Breakdown:
+   📂 Events: 1 events
+   📂 Politics: 3 events
+   📂 Portraits: 0 events
+
+🏷️  Available Tags:
+   • Events: 1 events
+   • Politics: 3 events
+   • Published Work: 2 events
+   • Presidential Campaign: 2 events
+
+📰 Published Work: 2 events
+✅ [3:36:41 AM] Journalism manifest regenerated successfully!

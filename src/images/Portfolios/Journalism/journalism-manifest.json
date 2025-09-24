@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated": "2025-09-24T07:34:34.825Z",
+  "generated": "2025-09-24T07:36:41.307Z",
   "totalEvents": 4,
   "totalImages": 41,
   "categories": [
@@ -21,12 +21,12 @@
   },
   "events": [
     {
-      "eventName": "Events Portfolio",
+      "eventName": "The Rooney Rule",
       "category": "Events",
       "tags": [
         "Events"
       ],
-      "folderPath": "Events/Events Portfolio",
+      "folderPath": "Events/The Rooney Rule",
       "eventDate": {
         "iso": "2025-04-17",
         "source": "filename_extraction"
@@ -36,9 +36,9 @@
       "images": [
         {
           "filename": "250417 The Rooney Rule_CAL3148.jpg",
-          "path": "Events/Events Portfolio/250417 The Rooney Rule_CAL3148.jpg",
-          "description": "Events Portfolio photography",
-          "caption": "Events Portfolio - Events",
+          "path": "Events/The Rooney Rule/250417 The Rooney Rule_CAL3148.jpg",
+          "description": "The Rooney Rule photography",
+          "caption": "The Rooney Rule - Events",
           "tags": [
             "Events"
           ]
