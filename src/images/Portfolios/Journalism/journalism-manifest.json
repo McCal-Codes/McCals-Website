@@ -1,8 +1,8 @@
 {
   "version": "2.0",
-  "generated": "2025-09-24T08:08:16.089Z",
-  "totalEvents": 6,
-  "totalImages": 68,
+  "generated": "2025-09-24T08:13:57.169Z",
+  "totalEvents": 7,
+  "totalImages": 74,
   "categories": [
     "Events",
     "Politics",
@@ -16,7 +16,7 @@
   ],
   "categoryStats": {
     "Events": 1,
-    "Politics": 5,
+    "Politics": 6,
     "Portraits": 0
   },
   "events": [
@@ -491,6 +491,78 @@
       "articleUrl": "",
       "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
       "publishedDate": "2024-10-29"
+    },
+    {
+      "eventName": "JD Vance In Johnstown",
+      "category": "Politics",
+      "tags": [
+        "Politics"
+      ],
+      "folderPath": "Politics/JD Vance in Johnstown",
+      "eventDate": {
+        "iso": "2024-10-12",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 12, 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3507.jpg",
+          "path": "Politics/JD Vance in Johnstown/241012_JD Vance in Johnstown_CAL3507.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3516.jpg",
+          "path": "Politics/JD Vance in Johnstown/241012_JD Vance in Johnstown_CAL3516.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3518.jpg",
+          "path": "Politics/JD Vance in Johnstown/241012_JD Vance in Johnstown_CAL3518.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3636.jpg",
+          "path": "Politics/JD Vance in Johnstown/241012_JD Vance in Johnstown_CAL3636.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3648.jpg",
+          "path": "Politics/JD Vance in Johnstown/241012_JD Vance in Johnstown_CAL3648.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6576.jpg",
+          "path": "Politics/JD Vance in Johnstown/241012_JD Vance in Johnstown_CAL6576.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
     },
     {
       "eventName": "Obama Speaks At Pitt",
