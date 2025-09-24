@@ -1,8 +1,8 @@
 {
   "version": "1.0",
-  "generated": "2025-09-23T22:30:11.282Z",
-  "totalEvents": 2,
-  "totalImages": 12,
+  "generated": "2025-09-24T07:12:08.997Z",
+  "totalEvents": 3,
+  "totalImages": 21,
   "categories": [
     "Politics",
     "Events",
@@ -12,66 +12,20 @@
   ],
   "categoryStats": {
     "Events": 1,
-    "Politics": 11
+    "Politics": 20
   },
   "events": [
     {
-      "eventName": "The Rooney Rule",
-      "category": "Events",
-      "folderPath": "Events",
-      "dateDisplay": "April 17, 2024",
-      "eventDate": {
-        "iso": "2024-04-17",
-        "source": "filename_extraction"
-      },
-      "totalImages": 1,
-      "images": [
-        {
-          "filename": "250417 The Rooney Rule_CAL3148.jpg",
-          "path": "Events/250417 The Rooney Rule_CAL3148.jpg",
-          "category": "Events",
-          "date": "2024-04-17T14:30:00Z",
-          "caption": "Panel discussion on the Rooney Rule and diversity in professional sports leadership",
-          "description": "Sports executives and advocates discuss the impact and future of diversity hiring practices",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Events",
-          "eventName": "The Rooney Rule"
-        }
-      ],
-      "published": false
-    },
-    {
       "eventName": "Butler Democracy Protest",
       "category": "Politics",
-      "folderPath": "Politics",
-      "dateDisplay": "March 15, 2024",
+      "folderPath": "Politics/Butler Protest",
+      "dateDisplay": "March 15, 2025",
       "eventDate": {
-        "iso": "2024-03-15",
+        "iso": "2025-03-15",
         "source": "filename_extraction"
       },
       "totalImages": 11,
       "images": [
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9773.jpg",
-          "path": "Politics/250315_Butler Democracy Protest_CAL9773.jpg",
-          "category": "Politics",
-          "date": "2024-03-15T10:00:00Z",
-          "caption": "Protesters gather outside the Butler County Democracy Center during ongoing political demonstrations",
-          "description": "Citizens exercise their right to peaceful protest as democracy debates continue in Butler County",
-          "published": false,
-          "outlet": null,
-          "outletUrl": null,
-          "articleUrl": null,
-          "articleTitle": null,
-          "publishedDate": null,
-          "folderName": "Politics",
-          "eventName": "Butler Democracy Protest"
-        },
         {
           "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9640-min.jpg",
@@ -201,6 +155,22 @@
           "eventName": "Butler Democracy Protest"
         },
         {
+          "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15T04:00:00.000Z",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics/Butler Protest",
+          "eventName": "Butler Democracy Protest"
+        },
+        {
           "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
           "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9825-min.jpg",
           "category": "Politics",
@@ -231,6 +201,194 @@
           "publishedDate": null,
           "folderName": "Politics/Butler Protest",
           "eventName": "Butler Democracy Protest"
+        }
+      ],
+      "published": false
+    },
+    {
+      "eventName": "Clinton Speaks at Pitt Greensburgh",
+      "category": "Politics",
+      "folderPath": "Politics",
+      "dateDisplay": "October 29, 2024",
+      "eventDate": {
+        "iso": "2024-10-29",
+        "source": "filename_extraction"
+      },
+      "totalImages": 9,
+      "images": [
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "path": "Politics/241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "category": "Politics",
+          "date": "2024-10-29T04:00:00.000Z",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics",
+          "eventName": "Clinton Speaks at Pitt Greensburgh"
+        }
+      ],
+      "published": false
+    },
+    {
+      "eventName": "The Rooney Rule",
+      "category": "Events",
+      "folderPath": "Events",
+      "dateDisplay": "April 17, 2024",
+      "eventDate": {
+        "iso": "2024-04-17",
+        "source": "filename_extraction"
+      },
+      "totalImages": 1,
+      "images": [
+        {
+          "filename": "250417 The Rooney Rule_CAL3148.jpg",
+          "path": "Events/250417 The Rooney Rule_CAL3148.jpg",
+          "category": "Events",
+          "date": "2024-04-17T14:30:00Z",
+          "caption": "Panel discussion on the Rooney Rule and diversity in professional sports leadership",
+          "description": "Sports executives and advocates discuss the impact and future of diversity hiring practices",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Events",
+          "eventName": "The Rooney Rule"
         }
       ],
       "published": false
