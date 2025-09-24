@@ -84,3 +84,61 @@
 
 📰 Published Work: 2 events
 ✅ [3:36:41 AM] Journalism manifest regenerated successfully!
+📰 [3:42:23 AM] Directory added: Politics/Kamala in Pittsburgh amid Election Eve
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg
+📰 [3:42:24 AM] File added: Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg
+📰 [3:42:26 AM] 🔄 Regenerating journalism manifest...
+
+> mccal-media-website@2.2.0 manifest:journalism
+> node scripts/generate-journalism-manifest-v2.js --force
+
+📰 Generating journalism manifest v2.0...
+📰 Processing category: Events
+📰 Processing event: Events/The Rooney Rule
+📰 ✓ The Rooney Rule: 1 images, tags: [Events]
+📰 Processing category: Politics
+📰 Processing event: Politics/Butler Protest
+📰 ✓ Butler Protest: 11 images, tags: [Politics]
+📰 Processing event: Politics/Clinton Speaks at Pitt Greensburgh
+📰 Loaded metadata for Clinton Speaks at Pitt Greensburgh
+📰 ✓ Clinton Speaks at Pitt Greensburgh: 9 images, tags: [Politics, Published Work, Presidential Campaign]
+📰 Processing event: Politics/Kamala in Pittsburgh amid Election Eve
+📰 ✓ Kamala in Pittsburgh amid Election Eve: 19 images, tags: [Politics]
+📰 Processing event: Politics/Obama Speaks at Pitt
+📰 Loaded metadata for Obama Speaks at Pitt
+📰 ✓ Obama Speaks at Pitt: 20 images, tags: [Politics, Published Work, Presidential Campaign]
+📰 Processing category: Portraits
+✅ Journalism manifest generated successfully!
+✅ 📄 File: /Users/mccal/McCals-Website/src/images/Portfolios/Journalism/journalism-manifest.json
+✅ 📊 Events: 5, Images: 60
+
+📋 Category Breakdown:
+   📂 Events: 1 events
+   📂 Politics: 4 events
+   📂 Portraits: 0 events
+
+🏷️  Available Tags:
+   • Events: 1 events
+   • Politics: 4 events
+   • Published Work: 2 events
+   • Presidential Campaign: 2 events
+
+📰 Published Work: 2 events
+✅ [3:42:26 AM] Journalism manifest regenerated successfully!
