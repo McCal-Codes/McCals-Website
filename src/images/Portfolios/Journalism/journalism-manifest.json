@@ -1,8 +1,8 @@
 {
   "version": "2.0",
-  "generated": "2025-09-24T07:42:26.400Z",
-  "totalEvents": 5,
-  "totalImages": 60,
+  "generated": "2025-09-24T07:56:18.623Z",
+  "totalEvents": 6,
+  "totalImages": 68,
   "categories": [
     "Events",
     "Politics",
@@ -16,7 +16,7 @@
   ],
   "categoryStats": {
     "Events": 1,
-    "Politics": 4,
+    "Politics": 5,
     "Portraits": 0
   },
   "events": [
@@ -751,6 +751,96 @@
       "articleUrl": "",
       "articleTitle": "Barack Obama Rallies Pittsburgh Voters",
       "publishedDate": "2024-10-10"
+    },
+    {
+      "eventName": "Kamla In Speaks At Erie",
+      "category": "Politics",
+      "tags": [
+        "Politics"
+      ],
+      "folderPath": "Politics/Kamla in Speaks at Erie",
+      "eventDate": {
+        "iso": "2014-10-24",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 23, 2014",
+      "totalImages": 8,
+      "images": [
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3741.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL3741.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3757.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL3757.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3766.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL3766.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3804.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL3804.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3851.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL3851.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4115.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL4115.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4248.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL4248.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6948.jpg",
+          "path": "Politics/Kamla in Speaks at Erie/141024_Kamala Speaks at Erie_CAL6948.jpg",
+          "description": "Kamla in Speaks at Erie photography",
+          "caption": "Kamla in Speaks at Erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
     }
   ]
 }
