@@ -2,6 +2,21 @@
 
 All notable changes to the Event Portfolio widget.
 
+## v2.0 (2025-09-20) — Smart Sync & Event Ops Console 🎟️
+### Live Experience Enhancements ✨
+- **NEW**: LocalStorage-backed manifest cache with a 10-minute TTL to keep galleries fast and resilient.
+- **NEW**: 15-minute auto-refresh cadence with countdown badge so producers know the next sync.
+- **NEW**: On-brand changelog modal and v2.0 badge to communicate release notes to stakeholders.
+- **NEW**: Event Operations debug console surfaces cache source, sync timing, manifest version, and API call metrics.
+
+### Reliability Improvements 🔁
+- **Single manifest flow preserved** ensuring image paths continue to load from `src/images/Portfolios/Events/`.
+- **Force refresh logic** skips cache on demand for auto-refresh or tab re-activation scenarios.
+- **Live cache age ticker** keeps producers informed about how fresh the manifest data is during long monitoring sessions.
+- **Graceful fallback messaging** for manifest outages with event-centric copy.
+
+---
+
 ## v1.1 (2025-09-19) — Single Manifest API Call 🚀
 ### Ultra-Efficient Performance Revolution ⚡
 - **NEW**: Single API call approach using `events-manifest.json` (no rate limiting needed!)
