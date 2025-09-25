@@ -27,32 +27,58 @@ Professional event photography portfolio widget for displaying corporate events,
 images/Portfolios/Events/
 ├── events-manifest.json (REQUIRED - single API call!)
 ├── Corporate-Summit-2025/
-│   ├── image1.jpg
-│   └── image2.jpg
-├── Tech-Conference/
-│   ├── keynote.jpg
-│   └── networking.jpg
-└── Wedding-Reception/
-    ├── ceremony.jpg
-    └── reception.jpg
+│   ├── 250315_Corporate_Summit_Keynote.jpg
+│   └── 250315_Corporate_Summit_Panel.jpg
+├── Charity-Gala-2024/
+│   ├── 241105_Charity_Gala_Auction.jpg
+│   ├── 241105_Charity_Gala_Ballroom.jpg
+│   └── 241105_Charity_Gala_Red_Carpet.jpg
+└── Product-Launch-Expo-2025/
+    ├── 250620_Product_Launch_Expo_Demo.jpg
+    └── 250620_Product_Launch_Expo_Showcase.jpg
 ```
 
 #### Manifest Format
 ```json
 {
-  "version": "1.0",
+  "version": "2.0",
   "generated": "2025-09-19T05:39:00.000Z",
   "totalEvents": 2,
+  "totalImages": 4,
   "events": [
     {
       "eventName": "Corporate Summit 2025",
+      "category": "Events",
+      "tags": ["Events"],
       "folderPath": "Corporate-Summit-2025",
-      "dateDisplay": "March 2025",
+      "eventDate": {
+        "iso": "2025-03-15",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "March 15, 2025",
       "totalImages": 2,
-      "images": ["image1.jpg", "image2.jpg"]
+      "images": [
+        {
+          "filename": "250315_Corporate_Summit_Keynote.jpg",
+          "path": "Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg",
+          "description": "Corporate Summit 2025 photography",
+          "caption": "Corporate Summit 2025",
+          "tags": ["Events"]
+        }
+      ],
+      "published": false,
+      "metadata": {}
     }
   ]
 }
+```
+
+#### Regenerating the Manifest
+
+Run the automation script after adding or removing event folders or images:
+
+```bash
+npm run manifest:events
 ```
 
 ### Debug Mode
