@@ -26,6 +26,7 @@
     "manifest:cleanup": "node scripts/cleanup-manifests.js",
     "manifest:cleanup-preview": "node scripts/cleanup-manifests.js --dry",
     "manifest:journalism": "node scripts/generate-journalism-manifest-v2.js",
+    "manifest:events": "node scripts/generate-events-manifest.js",
     "watch:journalism-manifest": "node scripts/watch-journalism-manifest.js",
     "organize:concerts": "node scripts/auto-concert-organizer.js --auto",
     "organize:preview": "node scripts/auto-concert-organizer.js --auto --dry",
