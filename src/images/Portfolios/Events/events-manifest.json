@@ -1,6 +1,125 @@
 {
-  "version": "1.0",
-  "generated": "2025-09-19T05:39:00.000Z",
-  "totalEvents": 0,
-  "events": []
+  "version": "2.0",
+  "generated": "2025-09-25T21:27:14.497Z",
+  "totalEvents": 3,
+  "totalImages": 7,
+  "events": [
+    {
+      "eventName": "Product Launch Expo 2025",
+      "category": "Events",
+      "tags": [
+        "Events"
+      ],
+      "folderPath": "Product-Launch-Expo-2025",
+      "eventDate": {
+        "iso": "2025-06-20",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "June 20, 2025",
+      "totalImages": 2,
+      "images": [
+        {
+          "filename": "250620_Product_Launch_Expo_Demo.jpg",
+          "path": "Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg",
+          "description": "Product Launch Expo 2025 photography",
+          "caption": "Product Launch Expo 2025",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250620_Product_Launch_Expo_Showcase.jpg",
+          "path": "Product-Launch-Expo-2025/250620_Product_Launch_Expo_Showcase.jpg",
+          "description": "Product Launch Expo 2025 photography",
+          "caption": "Product Launch Expo 2025",
+          "tags": [
+            "Events"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "Corporate Summit 2025",
+      "category": "Events",
+      "tags": [
+        "Events"
+      ],
+      "folderPath": "Corporate-Summit-2025",
+      "eventDate": {
+        "iso": "2025-03-15",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "March 15, 2025",
+      "totalImages": 2,
+      "images": [
+        {
+          "filename": "250315_Corporate_Summit_Keynote.jpg",
+          "path": "Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg",
+          "description": "Corporate Summit 2025 photography",
+          "caption": "Corporate Summit 2025",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250315_Corporate_Summit_Panel.jpg",
+          "path": "Corporate-Summit-2025/250315_Corporate_Summit_Panel.jpg",
+          "description": "Corporate Summit 2025 photography",
+          "caption": "Corporate Summit 2025",
+          "tags": [
+            "Events"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "Charity Gala 2024",
+      "category": "Events",
+      "tags": [
+        "Events"
+      ],
+      "folderPath": "Charity-Gala-2024",
+      "eventDate": {
+        "iso": "2024-11-05",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "November 5, 2024",
+      "totalImages": 3,
+      "images": [
+        {
+          "filename": "241105_Charity_Gala_Auction.jpg",
+          "path": "Charity-Gala-2024/241105_Charity_Gala_Auction.jpg",
+          "description": "Charity Gala 2024 photography",
+          "caption": "Charity Gala 2024",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "241105_Charity_Gala_Ballroom.jpg",
+          "path": "Charity-Gala-2024/241105_Charity_Gala_Ballroom.jpg",
+          "description": "Charity Gala 2024 photography",
+          "caption": "Charity Gala 2024",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "241105_Charity_Gala_Red_Carpet.jpg",
+          "path": "Charity-Gala-2024/241105_Charity_Gala_Red_Carpet.jpg",
+          "description": "Charity Gala 2024 photography",
+          "caption": "Charity Gala 2024",
+          "tags": [
+            "Events"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    }
+  ]
 }
