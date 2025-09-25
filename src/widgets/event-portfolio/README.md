@@ -4,23 +4,25 @@ Professional event photography portfolio widget for displaying corporate events,
 
 ## Features
 
+- **Smart manifest caching** keeps galleries fast with a 10-minute freshness window
+- **15-minute auto-refresh cadence** with live countdown badge for event control rooms
+- **Modal changelog + version badge** to communicate release notes on-brand
 - **Event-focused design** with professional purple-blue color scheme
 - **Universal Caption System integration** for consistent metadata handling
-- **GitHub API integration** for automatic event discovery
+- **GitHub manifest integration** for automatic event discovery via single fetch
 - **Natural-height masonry layout** optimized for event photography
 - **Enhanced lightbox** with professional event context
-- **Performance optimized** with intelligent caching and lazy loading
-- **Debug mode** with event-specific metrics
+- **Event Ops debug console** surfaces cache source, sync timing, manifest version, and API metrics
 - **Mobile responsive** with adaptive grid layout
 
 ## Usage
 
 ### Squarespace Integration
 ```html
-<!-- Copy and paste the entire v1.1-manifest.html file into a Code Block -->
+<!-- Copy and paste the entire v2.0-manifest.html file into a Code Block -->
 ```
 
-### GitHub Structure (v1.1 Manifest Approach)
+### GitHub Structure (v2.0 Smart Sync)
 ```
 images/Portfolios/Events/
 ├── events-manifest.json (REQUIRED - single API call!)
@@ -54,9 +56,9 @@ images/Portfolios/Events/
 ```
 
 ### Debug Mode
-- Click the "🔧 Debug Mode" button to view performance metrics
-- Monitor load times, event count, and Universal Caption System status
-- Mobile-friendly debug panel positioning
+- Click the "🛠️ Event Ops Console" button to open the debug panel
+- Monitor cache source, API call count, sync timing, and Universal Caption System status
+- Countdown badge in the lower corner shows time until the next auto-refresh
 
 ## Styling
 
@@ -80,5 +82,6 @@ images/Portfolios/Events/
 
 ## Version History
 
+- **v2.0** (2025-09-20): Smart manifest cache, auto-refresh cadence, changelog modal, and Event Ops console
 - **v1.1** (2025-09-19): Single manifest API call approach - ultra-efficient performance
 - **v1.0** (2025-09-19): Initial release with full event portfolio functionality
