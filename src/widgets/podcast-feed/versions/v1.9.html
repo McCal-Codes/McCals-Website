@@ -11,9 +11,11 @@
   --accent-apple: #fc3c44;
   --backdrop-blur: 20px;
   --border-radius: 24px;
-  --cta-bg: linear-gradient(135deg, #1db954, #6366f1);
-  --cta-hover: linear-gradient(135deg, #22c55e, #4f46e5);
-  --cta-text: #0f172a;
+  --cta-bg: var(--card-bg);
+  --cta-hover: linear-gradient(135deg, rgba(63, 42, 28, 0.92), rgba(149, 90, 40, 0.85));
+  --cta-text: var(--text-primary);
+  --cta-border: rgba(86, 92, 105, 0.55);
+  --cta-border-hover: rgba(148, 163, 184, 0.75);
 }
 
 @media (prefers-color-scheme: light) {
@@ -24,6 +26,11 @@
     --text-primary: #1a1a1a;
     --text-secondary: #4a4a4a;
     --text-muted: #6b7280;
+    --cta-bg: var(--card-bg);
+    --cta-hover: linear-gradient(135deg, rgba(237, 224, 206, 0.92), rgba(199, 151, 108, 0.85));
+    --cta-text: var(--text-primary);
+    --cta-border: rgba(203, 213, 225, 0.65);
+    --cta-border-hover: rgba(148, 163, 184, 0.75);
   }
 }
 
@@ -93,36 +100,66 @@
   flex-wrap: wrap;
 }
 
-.join-button {
+.join-button span {
+  position: relative;
+  z-index: 1;
+}
+
+.join-button-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 16px 28px;
-  border-radius: 999px;
+  justify-content: center;
+  text-align: center;
+}
+
+.join-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 32px;
+  border-radius: 20px;
   background: var(--cta-bg);
   color: var(--cta-text);
   font-weight: 600;
   font-size: 1.05rem;
   min-width: 220px;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 16px 38px rgba(22, 101, 52, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border: 1px solid var(--cta-border);
+  box-shadow: 0 18px 44px var(--glass-shadow);
+  backdrop-filter: blur(var(--backdrop-blur));
+  transition: transform 0.25s ease, box-shadow 0.35s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   letter-spacing: 0.01em;
-}
-
-.join-button svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+  outline: none;
 }
 
 .join-button:hover,
 .join-button:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 20px 44px rgba(22, 101, 52, 0.35);
+  box-shadow: 0 24px 54px var(--glass-shadow);
   background: var(--cta-hover);
-  color: var(--cta-text);
+  border-color: var(--cta-border-hover);
+}
+
+.join-button:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.4);
+  outline-offset: 3px;
+}
+
+.join-button svg {
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.join-button:hover svg,
+.join-button:focus-visible svg {
+  transform: scale(1.05);
 }
 /* Debug Toggle */
 .debug-toggle {
@@ -182,9 +219,9 @@
   backdrop-filter: blur(var(--backdrop-blur));
   box-shadow: 0 8px 32px var(--glass-shadow);
   padding: 32px;
+  overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  overflow: hidden;
 }
 
 .episode-card:hover {
@@ -252,11 +289,7 @@
   .podcast-title { font-size: 2rem; }
   .podcast-description { font-size: 1rem; padding: 0 12px; }
   .podcast-actions { width: 100%; }
-  .join-button { width: 100%; justify-content: center; }
-  .debug-toggle, .debug-panel { display: none; }
-  .episodes-grid { grid-template-columns: 1fr; gap: 24px; }
-  .episode-card { padding: 24px; }
-  .podcast-title { font-size: 2rem; }
+  .join-button { width: 100%; }
   .debug-toggle, .debug-panel { display: none; }
 }
 
@@ -323,7 +356,7 @@
     <div class="podcast-actions">
       <a class="join-button" id="podcastJoinButton" href="#" target="_blank" rel="noopener noreferrer" aria-label="Book a coffee chat with Caleb">
         <svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 6H4.5a.5.5 0 0 0-.5.5V10h17V8.5a.5.5 0 0 0-.5-.5Zm.5 4H4v7.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5V12Zm-11 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Z"/></svg>
-        <span>Book a Coffee</span>
+        <span class="join-button-label">Let's Grab a Drink!</span>
       </a>
     </div>
   </div>
@@ -853,27 +886,3 @@ if (document.readyState === 'loading') {
   PodcastWidget.init();
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
