@@ -1,7 +1,7 @@
 {
   "version": "2.5.3",
   "generated": "2025-09-26",
-  "totalEvents": 4,
+  "totalEvents": 5,
   "events": [
     {
       "eventName": "CMU Business Graduation",
@@ -154,6 +154,53 @@
         }
       ],
       "totalImages": 2
+    },
+    {
+      "eventName": "Pennsylvania Media Awards 24",
+      "category": "Conference",
+      "dateDisplay": "Sep 2025",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-892-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-893-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-894-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-895-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-896-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-897-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-898-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-899-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-902-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-903-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-906-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-907-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-980-published.jpg"
+        }
+      ],
+      "totalImages": 13
     }
   ]
 }

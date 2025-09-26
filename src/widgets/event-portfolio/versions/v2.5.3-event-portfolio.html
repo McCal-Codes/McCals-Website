@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -52,7 +52,7 @@
     .badge{ position:absolute; top:8px; left:8px; font:700 10px ui-sans-serif,system-ui; color:#fff; background:rgba(0,0,0,.6); border:1px solid rgba(255,255,255,.15); padding:3px 6px; border-radius:10px }
 
     /* Lightbox */
-    .lightbox{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.9); z-index:9999; padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)) }
+    .lightbox{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.9); z-index:2147483647 !important; padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)) }
     .lightbox.is-open{ display:flex }
     .lb-dialog{ position:relative; max-width:94vw; max-height:92vh; overflow:auto; margin:12px; -ms-overflow-style:none; scrollbar-width:none; overscroll-behavior:contain }
     .lb-gallery{ display:flex; flex-direction:column; gap:16px; overflow:auto; -ms-overflow-style:none; scrollbar-width:none }
@@ -62,6 +62,21 @@
     .lb-meta{ font:600 12px/1.2 ui-sans-serif,system-ui; opacity:.9; margin:0 0 8px }
     .lb-desc{ font:400 13px/1.4 ui-sans-serif,system-ui; opacity:.95; margin:0 }
     .lb-close{ position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%; border:1px solid rgba(255,255,255,.2); background:rgba(0,0,0,.6); color:#fff; font-weight:800; cursor:pointer }
+    /* Block background interaction when the lightbox is open */
+    html.lb-open .events-portfolio,
+    html.lb-open .version,
+    html.lb-open .refresh,
+    html.lb-open .dbg-toggle,
+    html.lb-open .dbg,
+    html.lb-open #cl{ pointer-events:none; }
+    html.lb-open .lightbox,
+    html.lb-open .lightbox *{ pointer-events:auto; }
+    /* Guard against host headers or announcement bars capturing clicks */
+    html.lb-open header,
+    html.lb-open .Header,
+    html.lb-open [id*='Header'],
+    html.lb-open .site-header,
+    html.lb-open .sqs-announcement-bar{ pointer-events:none; }
 
     /* Version + countdown */
     .version{ position:fixed; bottom:max(8px, env(safe-area-inset-bottom)); right:max(12px, env(safe-area-inset-right)); font:600 10px ui-sans-serif,system-ui; color:var(--muted); cursor:pointer }
@@ -87,7 +102,7 @@
   </style>
 </head>
 <body>
-  <main class="events-portfolio" id="eventsPf" data-events="all" data-manifest="">
+  <main class="events-portfolio" id="eventsPf" data-events="all" data-manifest="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Events/events-manifest.json">
     <h2 class="events-heading">Event Portfolio</h2>
 
     <div class="filters" role="tablist" aria-label="Event categories">
@@ -153,31 +168,13 @@
       <div style="font:600 12px/1.5 ui-sans-serif,system-ui; color:var(--muted); text-align:left">
         <p style="margin:0 0 8px">Recent updates (full):</p>
         <ul style="margin:0 0 10px 18px">
-          <li><strong>2.5</strong> - Featured first, shuffle per-load, per-event image shuffle, gradient fallback, centered Debug, hidden scrollbars (lightbox + widget/page), pane spacing fixes, resilient manifest (8s timeout, 10m cache, multi-source, embedded fallback), expanded tests.</li>
-          <li><strong>2.1</strong> - Embedded manifest fallback; safer cache + timeout; initial centered debug console.</li>
-          <li><strong>2.0</strong> - Smart Sync & Event Ops Console
-            <ul class="changelog-sub" style="margin:6px 0 8px 16px">
-              <li>10-minute manifest caching for fast galleries.</li>
-              <li>15-minute auto-refresh with visible countdown.</li>
-              <li>On-brand changelog modal + version badge.</li>
-              <li>Event Ops Console: cache source, sync timing, API activity.</li>
-            </ul>
-          </li>
-          <li><strong>1.1</strong> - Accessibility & polish
-            <ul class="changelog-sub" style="margin:6px 0 8px 16px">
-              <li>ARIA labeling and keyboard support for dialogs and cards.</li>
-              <li>Column-break avoidance for clean masonry rendering.</li>
-              <li>Refined typography and spacing; smaller controls on mobile.</li>
-            </ul>
-          </li>
-          <li><strong>1.0</strong> - First public release
-            <ul class="changelog-sub" style="margin:6px 0 8px 16px">
-              <li>Event cards grid with categories and basic filters.</li>
-              <li>Lightbox viewer with overlay close and Esc support.</li>
-              <li>Initial JSON manifest loader.</li>
-            </ul>
-          </li>
+          <li><strong>2.5.3</strong> - Updated fallback art to glass gradient, repositioned close button, tightened manifest heuristics, cache version bump.</li>
+          <li><strong>2.5.1</strong> - Added CMU Business Graduation gallery assets, manifest watch script, README workflow updates, manifest path handling fixes.</li>
+          <li><strong>2.5</strong> - Featured-first ordering, shuffle on load, gradient fallback, centered Debug, hidden scrollbars, resilient manifest loader with timeout + cache.</li>
+          <li><strong>2.0</strong> - Smart Sync (10m cache, 15m auto-refresh) with Event Ops Console.</li>
+          <li><strong>1.0</strong> - Initial release.</li>
         </ul>
+        <p style="margin:6px 0 0">Full changelog: <a href="https://github.com/McCal-Codes/McCals-Website/blob/main/src/widgets/event-portfolio/CHANGELOG.md" target="_blank" rel="noopener">View on GitHub</a></p>
       </div>
     </div>
   </div>
@@ -432,9 +429,9 @@
     var c=ev.totalImages||(ev.images?ev.images.length:0);
     setText('#lbMeta', (ev.dateDisplay||'')+' * '+(ev.category||'Event')+' * '+c+' images');
     var d=(ev.images&&ev.images[0]&&ev.images[0].description)||''; var desc=$('#lbDesc'); if(d){ desc.style.display='block'; desc.textContent=d } else { desc.style.display='none' }
-    lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'
+    lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false'); document.documentElement.classList.add('lb-open'); document.body.style.overflow='hidden'
   }
-  function closeLB(){ var lb=$('#lightbox'); if(lb){ lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; LOG('lightbox closed') } }
+  function closeLB(){ var lb=$('#lightbox'); if(lb){ lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true'); document.documentElement.classList.remove('lb-open'); document.body.style.overflow=''; LOG('lightbox closed') } }
   document.addEventListener('click', function(e){ if(e.target && (e.target.classList.contains('lb-close')|| e.target.id==='lightbox')) closeLB() });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLB() });
 
@@ -579,8 +576,12 @@
     t('normalize: root array accepted', nm2.events.length===1 && nm2.events[0].images.length===1);
     var nm3 = normalizeManifest({ events:{ a:{ eventName:'Z', images:['images/Portfolios/Events/demo.jpg'] } } });
     t('normalize: object map accepted', nm3.events.length===1);
-    var u1 = toUrl('images/Portfolios/Events/sample.jpg'); t('toUrl: no double prefix', /src\\/images\\/Portfolios\\/Events\\/sample\\.jpg$/.test(u1));
-    var u2 = toUrl('folder/sample2.jpg'); t('toUrl: folder path prefixed', /src\\/images\\/Portfolios\\/Events\\/folder\\/sample2\\.jpg$/.test(u2));
+    var expectedSample = 'src/images/Portfolios/Events/sample.jpg';
+    var expectedSample2 = 'src/images/Portfolios/Events/folder/sample2.jpg';
+    var u1 = toUrl('images/Portfolios/Events/sample.jpg');
+    t('toUrl: no double prefix', u1 && u1.endsWith(expectedSample));
+    var u2 = toUrl('folder/sample2.jpg');
+    t('toUrl: folder path prefixed', u2 && u2.endsWith(expectedSample2));
     t('toUrl: empty path returns empty', toUrl('')==='');
 
     // I) Embedded manifest available
@@ -626,11 +627,3 @@
   </noscript>
 </body>
 </html>
-
-
-
-
-
-
-
-
