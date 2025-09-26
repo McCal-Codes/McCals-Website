@@ -154,3 +154,6 @@ This ensures consistent UX across all McCal Media widgets and helps users unders
 ---
 
 *This ensures all widgets are properly organized and maintainable for the McCal Media Squarespace site.*
+## Event Portfolio Asset Ingest
+
+Refer to docs/development/event-portfolio-ingest.md for the repeatable asset import workflow (slug naming, manifest regeneration, and PR prep).
