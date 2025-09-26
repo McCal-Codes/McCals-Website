@@ -1,5 +1,10 @@
 # Changelog - Event Portfolio
 
+## 2.5.3
+- Updated fallback art to glass gradient + repositioned close button
+- Reordered filters (All/Featured first) and renamed snippet files to v2.5.3
+- Fixed manifest category heuristics + cache version bump
+
 ## 2.5.1
 - Added CMU Business Graduation gallery assets to base manifest
 - Added `watch:events-manifest` script for automatic manifest regeneration
@@ -16,3 +21,4 @@
 
 ## 1.0
 - Initial release
+
