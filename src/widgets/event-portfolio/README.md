@@ -13,3 +13,8 @@ Squarespace-ready single-file widget. Featured-first + shuffle, lightbox, debug 
 ```bash
 node scripts/generate-events-manifest-v2.js --root src/images/Portfolios/Events --force
 ```
+
+## Live watch
+```bash
+npm run watch:events-manifest
+```
