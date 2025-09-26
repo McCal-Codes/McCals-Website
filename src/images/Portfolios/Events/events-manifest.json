@@ -5,7 +5,7 @@
   "events": [
     {
       "eventName": "CMU Business Graduation",
-      "category": "Corporate",
+      "category": "Celebration",
       "dateDisplay": "Sep 2025",
       "images": [
         {
@@ -112,7 +112,7 @@
     },
     {
       "eventName": "Charity Gala 2024",
-      "category": "Corporate",
+      "category": "Celebration",
       "dateDisplay": "Sep 2025",
       "images": [
         {
@@ -129,7 +129,7 @@
     },
     {
       "eventName": "Corporate Summit 2025",
-      "category": "Corporate",
+      "category": "Conference",
       "dateDisplay": "Sep 2025",
       "images": [
         {

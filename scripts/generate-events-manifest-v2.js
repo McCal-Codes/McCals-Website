@@ -16,6 +16,15 @@ function parseDate(text){
   return new Date();
 }
 async function readDirSafe(p){ try{ return await fsp.readdir(p); }catch{ return []; } }
+function deriveCategory(dir){
+  const slug = dir.toLowerCase();
+  if(/(gala|celebration|festival|party|wedding|graduation)/.test(slug)) return "Celebration";
+  if(/(conference|summit|forum|symposium)/.test(slug)) return "Conference";
+  if(/(on-location|location|travel|tour)/.test(slug)) return "On-Location";
+  if(/(published|press|feature|media)/.test(slug)) return "Published";
+  return "Corporate";
+}
+
 async function exists(p){ try{ await fsp.access(p, fs.constants.F_OK); return true; }catch{ return false; } }
 
 async function main(){
@@ -33,7 +42,7 @@ async function main(){
     const images = files.map(f=>({ path: path.posix.join(ROOT.replace(/^.*?src\//,'src/'), dir, f) }));
     events.push({
       eventName: titleCase(dir),
-      category: 'Corporate',
+      category: deriveCategory(dir),
       dateDisplay: parseDate(dir).toLocaleString('en-US',{month:'short',year:'numeric',timeZone:'UTC'}),
       images, totalImages: images.length
     });
