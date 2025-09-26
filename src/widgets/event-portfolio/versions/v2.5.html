@@ -76,7 +76,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.events-portfolio::-webkit-scrol
 
 <script type="application/json" id="manifest-embedded">{"version":"2.5","generated":"local","events":[{"eventName":"Showcase — Corporate Summit","category":"Corporate","dateDisplay":"May 2025","totalImages":3,"images":[{"path":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3C/svg%3E"},{"path":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3C/svg%3E"},{"path":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3C/svg%3E"}]},{"eventName":"Showcase — Celebration Gala","category":"Celebration","dateDisplay":"Aug 2025","images":[{"path":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3C/svg%3E","srcset":[{"path":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3C/svg%3E","w":320},{"path":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3C/svg%3E","w":640}],"sizes":"(max-width: 680px) 100vw, 300px"}]}]}</script>
 <script>
-const LOG_PREFIX='[Events v2.5]'; window.DEBUG=false; var CACHE_KEY='events-manifest-cache-v2',CACHE_MS=6e5,REFRESH_MS=9e5;
+const LOG_PREFIX='[Events v2.5]'; window.DEBUG=false; var CACHE_KEY='events-manifest-cache-v2_5_1',CACHE_MS=6e5,REFRESH_MS=9e5;
 function LOG(){if(!window.DEBUG)return;try{console.log.apply(console,[LOG_PREFIX].concat([].slice.call(arguments)))}catch(e){}}
 function WARN(){if(!window.DEBUG)return;try{console.warn.apply(console,[LOG_PREFIX,'⚠️'].concat([].slice.call(arguments)))}catch(e){}}
 function ERR(){try{if(window.DEBUG){console.error.apply(console,[LOG_PREFIX,'❌'].concat([].slice.call(arguments)))}else{console.warn.apply(console,[LOG_PREFIX,'non‑fatal'].concat([].slice.call(arguments)))}}catch(e){}}
@@ -88,8 +88,8 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){let j=(Math.random()*(i+1))|0;
 function ts(s){if(!s)return 0;let d=new Date(s);if(!isNaN(d))return d.getTime();let t=new Date(String(s)+' 1');return isNaN(t)?0:t.getTime()}
 function order(events){let list=events.slice();list.forEach(ev=>{ev._ts=ts(ev.dateDisplay);if(Array.isArray(ev.images))shuffle(ev.images)});let sorted=list.slice().sort((a,b)=>(b._ts||0)-(a._ts||0));let top=Math.min(6,sorted.length);sorted.slice(0,top).forEach(ev=>ev.featured=true);let others=sorted.slice(top);shuffle(others);return sorted.slice(0,top).concat(others)}
 var RAW='https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/', PF=document.getElementById('eventsPf');
-var MANIFEST=(PF&&PF.dataset.manifest&&PF.dataset.manifest.trim())||(RAW+'images/Portfolios/Events/events-manifest.json');
-function toUrl(p){if(!p)return''; if(/^https?:\/\//i.test(p)||/^data:/i.test(p))return p; let s=String(p).replace(/^\.\/+/,'').replace(/^\/+/,''); if(s.indexOf('images/Portfolios/Events/')===0)return RAW+s; return RAW+'images/Portfolios/Events/'+s}
+var MANIFEST=(PF&&PF.dataset.manifest&&PF.dataset.manifest.trim())||(RAW+'src/images/Portfolios/Events/events-manifest.json');
+function toUrl(p){if(!p)return''; if(/^https?:\/\//i.test(p)||/^data:/i.test(p))return p; let s=String(p).replace(/^\.\/+/,'').replace(/^\/+/,''); if(s.indexOf('src/images/Portfolios/Events/')===0)return RAW+s;if(s.indexOf('images/Portfolios/Events/')===0)return RAW+'src/'+s; return RAW+'src/images/Portfolios/Events/'+s}
 function getCache(){try{let s=localStorage.getItem(CACHE_KEY); if(!s)return null; let d=JSON.parse(s),age=Date.now()-d.t; if(age<CACHE_MS)return d.m}catch(e){} return null}
 function setCache(m){try{localStorage.setItem(CACHE_KEY,JSON.stringify({m:m,t:Date.now()}))}catch(e){} }
 function clearCache(){try{localStorage.removeItem(CACHE_KEY)}catch(e){} }
