@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "manifest:events": "node scripts/generate-events-manifest-v2.js --root src/images/Portfolios/Events --force",
+    "manifest:generate": "npm run manifest:events"
+  }
+}

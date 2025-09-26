@@ -1,0 +1,23 @@
+{
+  "version": "2.5",
+  "generated": "2025-09-26",
+  "events": [
+    {
+      "eventName": "Sample \u2014 Corporate Summit",
+      "category": "Corporate",
+      "dateDisplay": "Sep 2025",
+      "totalImages": 3,
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/sample-169.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/sample-43.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/sample-34.jpg"
+        }
+      ]
+    }
+  ]
+}
