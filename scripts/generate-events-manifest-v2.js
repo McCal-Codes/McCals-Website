@@ -43,7 +43,7 @@ async function main(){
   events.sort((a,b)=>ts(b.dateDisplay)-ts(a.dateDisplay));
 
   const outPath = path.join(abs, OUTPUT_FILE);
-  await fsp.writeFile(outPath, JSON.stringify({version:'2.5',generated:new Date().toISOString().slice(0,10),totalEvents:events.length,events}, null, 2)+'\n','utf8');
+  await fsp.writeFile(outPath, JSON.stringify({version:'2.5.1',generated:new Date().toISOString().slice(0,10),totalEvents:events.length,events}, null, 2)+'\n','utf8');
   console.log('✅ Wrote manifest:', path.relative(process.cwd(), outPath));
 }
 main().catch(e=>{ console.error('❌', e && e.stack || e); process.exit(1); });
