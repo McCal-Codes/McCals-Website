@@ -1,0 +1,48 @@
+{
+  "version": "2.5",
+  "generated": "2025-09-26",
+  "events": [
+    {
+      "eventName": "Sample \u2014 Corporate Summit",
+      "category": "Corporate",
+      "dateDisplay": "Sep 2025",
+      "totalImages": 3,
+      "images": [
+        {
+          "path": "images/Portfolios/Events/sample-169.jpg"
+        },
+        {
+          "path": "images/Portfolios/Events/sample-43.jpg"
+        },
+        {
+          "path": "images/Portfolios/Events/sample-34.jpg"
+        }
+      ]
+    },
+    {
+      "eventName": "Sample \u2014 Celebration Gala",
+      "category": "Celebration",
+      "dateDisplay": "Aug 2025",
+      "images": [
+        {
+          "path": "images/Portfolios/Events/gala-320.jpg",
+          "srcset": [
+            {
+              "path": "images/Portfolios/Events/gala-320.jpg",
+              "w": 320
+            },
+            {
+              "path": "images/Portfolios/Events/gala-640.jpg",
+              "w": 640
+            },
+            {
+              "path": "images/Portfolios/Events/gala-1280.jpg",
+              "w": 1280
+            }
+          ],
+          "sizes": "(max-width: 680px) 100vw, 300px"
+        }
+      ]
+    }
+  ]
+}
