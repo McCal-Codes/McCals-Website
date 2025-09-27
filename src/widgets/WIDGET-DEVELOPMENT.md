@@ -1,19 +1,19 @@
-# Widget Development Guidelines
+﻿# Widget Development Guidelines
 
 ## Proper Widget Organization
 
-All Squarespace widgets should be organized in the `src/widgets/` directory using this structure:
+All Squarespace widgets live under `src/widgets/` using this structure:
 
 ```
 src/widgets/
 └── [widget-name]/
     ├── README.md           # Widget documentation
     ├── CHANGELOG.md        # Version history
-    ├── versions/           # Production widget versions
+    ├── versions/           # Production-ready builds
     │   ├── v1.0.html
     │   ├── v1.1.html
-    │   └── v2.0.html      # Latest stable version
-    └── demo/               # Test versions and demos
+    │   └── v2.0.html
+    └── demo/               # Experiments and test harnesses
         ├── test-demo.html
         └── debug-version.html
 ```
@@ -22,20 +22,16 @@ src/widgets/
 
 ### ✅ Properly Organized Widgets
 - **Concert Portfolio** (`src/widgets/concert-portfolio/`)
-  - Latest: `v4.2.html` (API-optimized, uses master manifest)
-  - Path: `src/images/Portfolios/Concert/`
-  
+  - Latest: `v4.2.html` (API optimised, master manifest)
+  - Assets: `src/images/Portfolios/Concert/`
 - **Event Portfolio** (`src/widgets/event-portfolio/`)
   - Latest: `v1.1-manifest.html`
-  - Path: `src/images/Portfolios/Events/`
-  
+  - Assets: `src/images/Portfolios/Events/`
 - **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`)
   - Latest: `v3.0-published-tags.html`
-  - Path: `src/images/Portfolios/Journalism/`
-  
+  - Assets: `src/images/Portfolios/Journalism/`
 - **Podcast Feed** (`src/widgets/podcast-feed/`)
   - Latest: `v1.8.html`
-  
 - **About Widgets** (`src/widgets/about-widgets/`)
   - Multiple utility widgets for about pages, client carousels, etc.
 
@@ -47,42 +43,41 @@ mkdir -p src/widgets/[new-widget-name]/{versions,demo}
 ```
 
 ### 2. Required Files
-- `README.md` - Widget documentation and usage instructions
-- `CHANGELOG.md` - Version history starting with v1.0
-- `versions/v1.0.html` - First stable version
+- `README.md` – usage instructions
+- `CHANGELOG.md` – version history (start at v1.0.0)
+- `versions/v1.0.0.html` – first stable release
 
 ### 3. GitHub Integration
-For widgets that access GitHub-hosted images, use these paths:
+For widgets that pull assets from GitHub, base URLs should follow the shared helper pattern:
 
 ```javascript
-// Correct paths (after reorganization)
-const GH = { 
-  owner: 'McCal-Codes', 
-  repo: 'McCals-Website', 
+const GH = {
+  owner: 'McCal-Codes',
+  repo: 'McCals-Website',
   branch: 'main',
-  base: ['src', 'images', 'Portfolios', '[Type]'] 
+  base: ['src', 'images', 'Portfolios', '[Type]']
 };
 
-// Manifest URLs
 const manifestUrl = rawBase + 'src/images/Portfolios/[Type]/[type]-manifest.json';
 
-// Raw content URLs  
-function rawUrl(parts) { 
-  return rawBase + 'src/images/Portfolios/[Type]/' + parts.join('/'); 
+function rawUrl(parts) {
+  return rawBase + 'src/images/Portfolios/[Type]/' + parts.join('/');
 }
 ```
 
 ## Versioning Rules
 
-- **Major versions (v2.0, v3.0)**: New features, breaking changes
-- **Minor versions (v1.1, v1.2)**: Improvements, fixes, new options
-- **Always increment** when making changes - never overwrite existing versions
-- **Keep old versions** for compatibility with existing Squarespace sites
+- Follow semantic versioning (MAJOR.MINOR.PATCH) for every widget.
+- Before editing, duplicate the latest file in `versions/`, rename it to the new semantic version, then modify the copy only.
+- **Patch (0.0.1)** – micro fixes: copy tweaks, aria labels, tiny visual adjustments.
+- **Minor (0.1.0)** – additive improvements: new sections, responsive updates, optional feature toggles.
+- **Major (1.0.0)** – breaking or foundational work: redesigns, rewrites, new data sources.
+- Never delete older versions; Squarespace embeds rely on fast rollback.
 
 ## Required Widget Features
 
 ### Version Indicator & Changelog Modal
-**ALL widgets must include:**
+**Every widget must ship with:**
 
 1. **Fixed version indicator** (bottom-right corner)
    ```css
@@ -102,26 +97,23 @@ function rawUrl(parts) {
    .version-indicator:hover { color: var(--accent); }
    ```
 
-2. **Clickable changelog modal** (like Concert Portfolio v4.2)
-   - Modal opens when version indicator is clicked
-   - Shows version history with features/changes
-   - Clean, accessible modal design
-   - ESC key and background click to close
+2. **Clickable changelog modal** (patterned after Concert Portfolio v4.2)
+   - Opens from the version indicator
+   - Lists version history with key changes
+   - Accessible: ESC closes, background click closes, focus trapped
 
-3. **Implementation example:**
+3. **Implementation example**
    ```html
-   <!-- Version indicator -->
    <div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v2.1</div>
-   
-   <!-- Changelog Modal -->
+
    <div class="changelog-modal" id="changelogModal">
      <div class="changelog-content">
        <div class="changelog-header">
-         <h3 class="changelog-title">🎸 Widget Changelog</h3>
+         <h3 class="changelog-title">Widget Changelog</h3>
          <button class="changelog-close" onclick="hideChangelog()">&times;</button>
        </div>
        <div class="changelog-body">
-         <div class="changelog-version">v2.1 - Latest Features (Current)</div>
+         <div class="changelog-version">v2.1 – Latest Features (Current)</div>
          <ul class="changelog-items">
            <li>New feature description</li>
            <li>Bug fixes and improvements</li>
@@ -131,29 +123,25 @@ function rawUrl(parts) {
    </div>
    ```
 
-This ensures consistent UX across all McCal Media widgets and helps users understand what version they're using.
-
-**📄 Template Available:** Use `src/widgets/WIDGET-TEMPLATE.html` as your starting point - it includes all required components pre-configured.
-
 ## Testing Workflow
 
-1. Create widget in `/demo/` folder first
-2. Test thoroughly using local test site (`npm run serve`)
-3. Once stable, copy to `/versions/` with proper version number
-4. Update CHANGELOG.md with changes
-5. Update main README with new version info
+1. Prototype inside the widget’s `demo/` folder first.
+2. Test thoroughly with the local site shell (`npm run serve`).
+3. Promote to `versions/` with the correct semantic version once stable.
+4. Update the widget `CHANGELOG.md` with a concise entry.
+5. Refresh the widget README to point at the new latest version if needed.
 
 ## Deployment to Squarespace
 
-1. Navigate to `src/widgets/[widget-name]/versions/`
-2. Copy latest version HTML content
-3. In Squarespace, add **Code Block** 
-4. Paste widget HTML
-5. Adjust `data-panes` or other parameters as needed
+1. Open `src/widgets/[widget-name]/versions/`.
+2. Copy the latest production HTML file.
+3. In Squarespace, add a **Code Block** (or Code Injection snippet).
+4. Paste the HTML and adjust config options (dataset attributes, manifest URLs, etc.).
 
 ---
 
-*This ensures all widgets are properly organized and maintainable for the McCal Media Squarespace site.*
+*Keep widgets tidy and versioned so Squarespace embeds stay reliable and easy to roll forward or back.*
+
 ## Event Portfolio Asset Ingest
 
-Refer to docs/development/event-portfolio-ingest.md for the repeatable asset import workflow (slug naming, manifest regeneration, and PR prep).
+Refer to `docs/development/event-portfolio-ingest.md` for the repeatable workflow (slug naming, manifest regeneration, PR prep).
