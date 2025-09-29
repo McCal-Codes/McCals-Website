@@ -19,3 +19,9 @@ site-workspace/drafts/
 # Local Netlify folder
 .netlify
 .vscode/
+node_modules
+# Squarespace developer theme repo
+sites/squarespace/theme/
+node_modules
+node_modules
+node_modules
