@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2025-09-29
+### Added
+- “Work” submenu with: Photojournalism, Concert, Event, Nature, Corporate.
+- Mobile submenu toggle with ARIA; closes on outside-click and Escape.
+- Desktop submenu: hover/focus activation with invisible hover bridge.
+- Route-change handler to collapse menus and refresh highlights.
+
+### Changed
+- Restored gradient background on main bar; kept blur disabled on main bar; blur enabled for desktop submenu only.
+- Updated scrolled-state styles; threshold set to 35% of nav height.
+- Simplified submenu link state: removed “current” highlight; underline on hover only.
+- Refined mobile layout to one row: [text | arrow]; consistent spacing/indent.
+
+### Fixed
+- Hide default Squarespace header when widget is active.
+- Prevent horizontal overflow; update CSS var --mcc-nav-height on load/resize.
+- Close mobile menu and submenus on resize and route change.
+- Prevent submenu hover flicker when moving cursor into submenu.
+
 ## [1.6.1] - 2024-12-19
 
 ### Changed
