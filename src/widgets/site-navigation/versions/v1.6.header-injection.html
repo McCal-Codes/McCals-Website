@@ -3,7 +3,11 @@
 <style>
   :root {
     --mcc-nav-height: 0px;
+    --mcc-nav-text-color: #f5f5f5;
+    --mcc-nav-text-secondary: rgba(255, 255, 255, 0.86);
+    --mcc-nav-brand-color: #f5f5f5;
   }
+
   .mcc-nav-widget,
   .mcc-nav-widget * {
     box-sizing: border-box;
@@ -17,6 +21,7 @@
     display: none !important;
     visibility: hidden;
   }
+  
   .sr-only {
     position: absolute;
     width: 1px;
@@ -29,8 +34,11 @@
     border: 0;
   }
   .mcc-nav-shell {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    z-index: 9999;
   }
   .mcc-nav {
     position: relative;
@@ -43,27 +51,31 @@
     align-items: center;
     justify-content: space-between;
     gap: clamp(18px, 5vw, 72px);
-    color: #f5f5f5;
+    color: var(--mcc-nav-text-color);
     font-family: 'Inter','Segoe UI',system-ui,sans-serif;
-    background: transparent;
-    pointer-events: auto;``n      z-index: 1000;\n      z-index: 1000;
-    transition: background 0.25s ease, border-bottom-color 0.25s ease, backdrop-filter 0.25s ease;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.15) 85%, transparent 100%);
+    pointer-events: auto;
+    z-index: 10000;
+    transition: background 0.3s ease, border-bottom-color 0.3s ease, color 0.3s ease;
   }
   .mcc-nav.is-scrolled {
     background: rgba(10, 10, 16, 0.68);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    color: #f5f5f5;
   }
   .mcc-nav__brand a {
     font-family: 'Libre Baskerville','Georgia',serif;
     font-size: clamp(1.35rem, 2.6vw, 1.9rem);
     font-weight: 600;
-    color: inherit;
+    color: var(--mcc-nav-brand-color);
     text-decoration: none;
     letter-spacing: 0.015em;
     text-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
     white-space: nowrap;
+    transition: color 0.3s ease;
+  }
+  .mcc-nav.is-scrolled .mcc-nav__brand a {
+    color: #f5f5f5;
   }
   .mcc-nav__menu {
     display: flex;
@@ -82,14 +94,18 @@
     position: relative;
   }
   .mcc-nav__link a {
-    color: rgba(255, 255, 255, 0.86);
+    color: var(--mcc-nav-text-secondary);
     text-decoration: none;
     font-weight: 500;
     letter-spacing: 0.02em;
     padding-bottom: 6px;
     display: inline-flex;
     align-items: center;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  }
+  .mcc-nav.is-scrolled .mcc-nav__link a {
+    color: rgba(255, 255, 255, 0.86);
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
   }
   .mcc-nav__link a::after {
@@ -108,8 +124,12 @@
   }
   .mcc-nav__link a:hover,
   .mcc-nav__link a:focus-visible {
-    color: #ffffff;
+    color: var(--mcc-nav-text-color);
     outline: none;
+  }
+  .mcc-nav.is-scrolled .mcc-nav__link a:hover,
+  .mcc-nav.is-scrolled .mcc-nav__link a:focus-visible {
+    color: #ffffff;
   }
   .mcc-nav__link a:hover::after,
   .mcc-nav__link a:focus-visible::after,
@@ -128,7 +148,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
   .mcc-nav__toggle:hover,
   .mcc-nav__toggle:focus-visible {
@@ -156,6 +176,7 @@
   .mcc-nav.is-scrolled .mcc-nav__toggle {
     background: rgba(10, 10, 16, 0.78);
     border-color: rgba(255, 255, 255, 0.26);
+    color: rgba(255, 255, 255, 0.92);
   }
   @media (max-width: 1024px) {
     .mcc-nav {
@@ -183,9 +204,7 @@
       background: rgba(10, 10, 14, 0.82);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 24px 40px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      z-index: 12;
+      z-index: 10001;
     }
     .mcc-nav__links {
       flex-direction: column;
