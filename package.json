@@ -65,6 +65,7 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
-    "exif-parser": "^0.1.12"
+    "exif-parser": "^0.1.12",
+    "lottie-web": "^5.13.0"
   }
 }
