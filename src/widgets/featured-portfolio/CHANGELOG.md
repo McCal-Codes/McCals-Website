@@ -1,16 +1,9 @@
-# Featured Portfolio Widget Changelog
-
-## v1.5.0 - 2025-10-03
-- **Enhanced Title Extraction**: Journalism articles now display proper titles like "The Rooney Rule" and "Butler Democracy Protest" instead of generic folder names
-- **Improved Masonry Layout**: Increased spacing with 16px column gaps and 16px card margins for less congested appearance
-- **Randomized Cover Images**: Album covers now randomize on each page load using Fisher-Yates shuffle algorithm for visual variety
-- **Minimal Design Refresh**: Updated accent colors from bright (#ff4d6d) to subtle gray (#888888) for professional appearance
-- **Ultra-Minimal Scrollbars**: 4px width with 0.15 opacity, nearly invisible until hover, universal design across all elements
-- **Enhanced Lightbox**: Smooth scrolling gallery with repositioned close button for better UX
-- **Journalism Content Recognition**: Smart detection differentiates between concert albums and journalism articles for appropriate title handling
-- **Production-Ready Version**: Clean version without debug elements, configured for up to 15 items, ready for Squarespace deployment
-- **Changelog Modal**: Added minimal changelog overlay with GitHub link for full version history
-- **Responsive Improvements**: Better spacing across all screen sizes (desktop: 16px, tablet: 12px, mobile: 10px, small mobile: 8px)
+# Featured Portfolio Widget### Follow-up Tasks
+- ✅ Created scripts/generate-featured-manifest.js for automated featured manifest generation
+- ✅ Enhanced widget to ensure diverse portfolio type representation
+- Backfill existing portfolio manifests with cover image references for lightbox quality
+- Validate image paths across Concert, Events, Journalism, and future collections
+- Add featured manifest generation to CI/CD pipelinengelog
 
 ## v1.3.0 - 2025-10-03
 - **Diverse Selection Algorithm**: Ensures representation from all portfolio types (Concert, Events, Journalism)

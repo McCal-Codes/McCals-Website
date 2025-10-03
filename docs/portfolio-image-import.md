@@ -1,4 +1,4 @@
-# Portfolio Image Import Guide
+﻿# Portfolio Image Import Guide
 
 This guide walks through the process of adding new photo sets so they appear in the legacy widgets, the unified widgets, and the universal manifest.
 
@@ -36,6 +36,22 @@ Each portfolio has its own manifest JSON in the corresponding folder (for exampl
 - Use the same property names that already exist in the file (`eventName`, `dateDisplay`, etc.).
 - Only list the image sizes you want exposed. If you include multiple resolutions, the widgets pick the first entry as the cover.
 
+For nature and wildlife collections, update `src/images/Portfolios/Nature/nature-manifest.json` instead. Nature entries use `collectionName` for the display title:
+
+```json
+{
+  "collectionName": "Mist Valley Sunrise",
+  "folderPath": "Landscapes/Mist-Valley-Sunrise",
+  "dateDisplay": "September 2025",
+  "images": [
+    "Mist-Valley-Sunrise-1280.jpg"
+  ],
+  "tags": ["landscape", "sunrise"]
+}
+```
+
+Keep the folder path in sync with your image directories so the widget resolves the files.
+
 ## 3. Refresh the universal manifest
 
 After saving the per-portfolio manifest, regenerate `portfolio-manifest.json` so the unified widgets discover the new entry.
@@ -58,6 +74,7 @@ The script scans every per-portfolio manifest under `src/images/Portfolios/**` a
 2. Open one of the unified pages, for example `src/widgets/event-portfolio/versions/v2.6-unified.html`.
 3. Confirm the new entry appears with the correct title, date, and image preview.
 4. Optionally open `src/widgets/unified-portfolio-demo.html?type=event` to make sure the universal view sees the update.
+5. Open `src/widgets/nature-portfolio/versions/v1.0.html` in your browser or Squarespace code block to confirm the dedicated nature widget picks up the new collections.
 
 ## 5. Commit the assets
 
@@ -68,3 +85,6 @@ When you are ready to push, commit:
 - The regenerated `portfolio-manifest.json`
 
 Keeping these three pieces in sync ensures both the legacy and unified widgets can load your photos without additional configuration.
+
+
+
