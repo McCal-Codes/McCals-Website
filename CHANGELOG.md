@@ -8,6 +8,10 @@
 - Accessibility: Escape key to close mobile menu, outside-click to close, aria-haspopup on toggle.
 - Reduced motion support for users preferring less animation.
 
+### Docs/Meta
+- Added `.github/canvas-instructions.md` for ChatGPT Canvas usage and `.github/codex-instructions.md` for efficient VS Code agent usage under rate limits.
+- Updated `copilot-instructions-guardian.yml` to enforce changelog entries when AI instructions change and to watch Canvas/Codex instruction files.
+
 <!-- ...existing code... -->
 // ...existing code...
 

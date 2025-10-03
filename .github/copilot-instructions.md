@@ -18,6 +18,11 @@ Run/build/deploy workflows
 - Local dev server: `npm run dev` (serves `src/site/` via `dev-server.js` on http://localhost:3000; opens browser). Production-like: `npm run serve`.
 - Build static site: `npm run build` (copies `src/site/` and `src/images/` to `dist/`).
 - Optional test-site deploys: `npm run deploy` (interactive) or `deploy:netlify|vercel|surge`. The real production site is Squarespace.
+- Watchers (auto-regenerate): `npm run watch:auto-manifest` (Concerts), `npm run watch:events-manifest`, `npm run watch:journalism-manifest`, `npm run watch:universal`.
+
+Platform tip (Windows)
+
+- Helper: `scripts/win-generate-universal-manifest.ps1` can run the universal manifest generator on Windows.
 
 Images and manifests pipeline (critical)
 
@@ -27,10 +32,20 @@ Images and manifests pipeline (critical)
 - Generator details: `scripts/enhanced-manifest-generator.js` extracts dates from filenames (YYMMDD, YYYYMMDD, some DD-MM-YY cases like `13-01-24` → 2024-12-13) or EXIF (`DateTime`, `DateTimeOriginal`). Writes `manifest.json` in each date folder and `processing-summary.json` at Concert root.
 - Do not hand-edit generated `manifest.json` files; change images/folders and re-run generators instead. Use `npm run manifest:cleanup` if you reorganize bands.
 
+Key manifest outputs
+
+- Per-folder (Concert): `src/images/Portfolios/Concert/<Band>/<Month Year>/manifest.json`
+- Concert rollup: `src/images/Portfolios/Concert/concert-manifest.json`
+- Events rollup: `src/images/Portfolios/Events/events-manifest.json`
+- Journalism rollup: `src/images/Portfolios/Journalism/journalism-manifest.json`
+- Universal rollup: `src/images/Portfolios/portfolio-manifest.json`
+- Summary: `src/images/Portfolios/Concert/processing-summary.json`
+
 CI automation
 
 - `.github/workflows/build-manifest.yml` runs on pushes touching `images/Portfolios/Concert/**` and regenerates/commits concert manifests (uses Node 20). It commits `images/Portfolios/Concert/concert-manifest.json` and per-folder `manifest.json` when changed.
 - Similar jobs exist for Events and Journalism: `events-manifest.yml` and `journalism-manifest.yml` watch `src/images/Portfolios/{Events|Journalism}/**` and commit their respective `*-manifest.json` outputs.
+- Docs guard: `copilot-instructions-guardian.yml` reminds/fails PRs when core flows change without updating `.github/copilot-instructions.md`, and requires a `CHANGELOG.md` entry when the instructions change (bypass labels: `docs-acknowledged`, `skip-copilot-instructions`).
 
 Widget authoring conventions
 
@@ -64,3 +79,7 @@ Good starting references
 Change management
 
 - When you update this file, add a brief entry to `CHANGELOG.md` under Docs/Meta noting what changed. A PR check will remind/fail if missing.
+
+Recent updates
+
+- Entries below are appended by the AI finalize script to record what the last agent session changed.

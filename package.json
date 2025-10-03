@@ -4,6 +4,10 @@
   "description": "McCal Media photo gallery website with development tools",
   "main": "src/site/index.html",
   "scripts": {
+    "ai:preflight": "node scripts/ai-instructions-preflight.js",
+    "ai:preflight:short": "node scripts/ai-instructions-preflight.js --short",
+    "ai:preflight:json": "node scripts/ai-instructions-preflight.js --json",
+    "ai:finalize": "node scripts/ai-finalize-session.js --summary",
     "dev": "node dev-server.js",
     "start": "npm run dev",
     "build": "node scripts/build.js",

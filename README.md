@@ -4,6 +4,20 @@
 
 This repository is primarily a **development workspace for Squarespace widgets**, containing reusable web components that embed into your Squarespace site. The standalone site is used only for testing widgets before deployment to Squarespace.
 
+## Before you start (AI assistants)
+
+- Read these short instruction pages first:
+	- Copilot: `.github/copilot-instructions.md`
+	- Canvas: `.github/canvas-instructions.md`
+	- Codex (rate‑limit efficient): `.github/codex-instructions.md`
+- Run a quick preflight summary before large edits:
+	- VS Code task: “AI: Preflight (short)”
+	- Or via npm:
+		- `npm run ai:preflight:short`
+		- `npm run ai:preflight`
+		- `npm run ai:preflight:json`
+	- This summarizes key bullets from the instruction docs so agents validate context fast.
+
 ## Primary Purpose: Squarespace Widgets
 
 ### Available Widgets
