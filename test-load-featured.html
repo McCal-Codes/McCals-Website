@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Featured Widget Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; border-left: 3px solid #007bff; }
+        .error { background: #ffe6e6; border-left-color: #dc3545; }
+        .success { background: #e6ffe6; border-left-color: #28a745; }
+    </style>
+</head>
+<body>
+    <h1>Featured Portfolio Widget Test</h1>
+    <button onclick="testLoadFeaturedItems()">Test loadFeaturedItems Function</button>
+    <div id="debug-output"></div>
+
+    <script>
+        const debugOutput = document.getElementById('debug-output');
+        
+        function log(message, isError = false) {
+            const div = document.createElement('div');
+            div.className = isError ? 'debug error' : 'debug';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            debugOutput.appendChild(div);
+            console.log(message);
+        }
+
+        // Copy the essential functions from the widget
+        const GH = { owner: 'McCal-Codes', repo: 'McCals-Website', branch: 'main' };
+        const RAW_ROOT = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+
+        function resolveManifestUrl(candidate) {
+            if (/^https?:/i.test(candidate)) return candidate;
+            const cleaned = candidate
+                .replace(/^(\.\.?\/)+/, '')
+                .replace(/^\.\/+/, '')
+                .replace(/^\/+/, '');
+            return RAW_ROOT + cleaned;
+        }
+
+        async function fetchManifest(url, forceRefresh = false) {
+            log(`Fetching manifest: ${url}`);
+            const response = await fetch(url, { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return await response.json();
+        }
+
+        async function testLoadFeaturedItems() {
+            debugOutput.innerHTML = '';
+            log('🚀 Testing loadFeaturedItems function...');
+            
+            try {
+                const sources = [
+                    { 
+                        type: 'Concert', 
+                        path: 'src/images/Portfolios/Concert/concert-manifest.json',
+                        arrayKey: 'bands',
+                        count: 2,
+                        formatItem: (band) => {
+                            log(`Processing Concert: ${band.bandName}`);
+                            return {
+                                type: 'Concert',
+                                title: band.bandName,
+                                folderPath: `Concert/${band.folderPath}`,
+                                dateValue: band.concertDate?.iso || '1970-01-01',
+                                dateDisplay: band.dateDisplay || (band.concertDate?.monthName + ' ' + band.concertDate?.year),
+                                pathSegments: ['Concert', band.bandName, band.folderPath.split('/')[1]],
+                                images: band.images?.slice(0, 2) || [],
+                                cover: band.images?.[0] || null
+                            };
+                        }
+                    },
+                    {
+                        type: 'Events',
+                        path: 'src/images/Portfolios/Events/events-manifest.json', 
+                        arrayKey: 'events',  // Fixed: was 'items'
+                        count: 1,
+                        formatItem: (event) => {
+                            log(`Processing Event: ${event.eventName}`);
+                            let pathSegments = ['Events'];
+                            if (event.images && event.images[0] && event.images[0].path) {
+                                const pathParts = event.images[0].path.split('/');
+                                const eventsIndex = pathParts.indexOf('Events');
+                                if (eventsIndex !== -1 && pathParts[eventsIndex + 1]) {
+                                    pathSegments = ['Events', pathParts[eventsIndex + 1]];
+                                }
+                            }
+                            return {
+                                type: 'Events', 
+                                title: event.eventName || event.title,
+                                folderPath: event.folderPath,
+                                dateValue: event.dateISO || event.date?.iso || '1970-01-01',
+                                dateDisplay: event.dateDisplay || event.date?.display,
+                                pathSegments: pathSegments,
+                                images: event.images?.slice(0, 1).map(img => (img.path || img).split('/').pop()) || [],
+                                cover: event.images?.[0] ? (event.images[0].path || event.images[0]).split('/').pop() : null
+                            };
+                        }
+                    }
+                ];
+
+                const allItems = [];
+                
+                for (const source of sources) {
+                    try {
+                        const url = resolveManifestUrl(source.path);
+                        log(`📋 Loading ${source.type}: ${url}`);
+                        
+                        const manifest = await fetchManifest(url);
+                        const sourceArray = manifest[source.arrayKey] || [];
+                        
+                        log(`✅ ${source.type}: Found ${sourceArray.length} items in manifest`);
+                        
+                        if (sourceArray.length === 0) {
+                            log(`⚠️ ${source.type}: No items found in ${source.arrayKey} array`, true);
+                            continue;
+                        }
+                        
+                        const latestItems = sourceArray
+                            .slice(0, source.count)  // Just take first few for testing
+                            .map(source.formatItem)
+                            .filter(Boolean);
+                            
+                        allItems.push(...latestItems);
+                        log(`📊 Added ${latestItems.length} items from ${source.type}`);
+                        
+                        // Log first item details
+                        if (latestItems.length > 0) {
+                            const item = latestItems[0];
+                            log(`Sample item: ${item.title} | Segments: ${JSON.stringify(item.pathSegments)} | Images: ${item.images.length}`);
+                        }
+                        
+                    } catch (error) {
+                        log(`❌ Failed to load ${source.type}: ${error.message}`, true);
+                    }
+                }
+                
+                log(`🎯 Final result: ${allItems.length} total items loaded`);
+                
+                if (allItems.length > 0) {
+                    const div = document.createElement('div');
+                    div.className = 'debug success';
+                    div.innerHTML = `<strong>SUCCESS!</strong> Loaded ${allItems.length} items:<br><pre>${JSON.stringify(allItems, null, 2)}</pre>`;
+                    debugOutput.appendChild(div);
+                } else {
+                    log('❌ No items were loaded from any source', true);
+                }
+                
+            } catch (error) {
+                log(`💥 Test failed: ${error.message}`, true);
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
