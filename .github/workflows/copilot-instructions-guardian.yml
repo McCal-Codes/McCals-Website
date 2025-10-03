@@ -12,6 +12,8 @@ on:
       - 'src/widgets/**'
       - 'docs/**'
       - '.github/workflows/**'
+      - '.github/canvas-instructions.md'
+      - '.github/codex-instructions.md'
       - 'README.md'
       - 'docs/README.md'
 
@@ -38,7 +40,7 @@ jobs:
           echo "Comparing $BASE_SHA...$HEAD_SHA"
           CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | tr '\n' ' ')
           echo "changed_files=$CHANGED" >> $GITHUB_OUTPUT
-          if echo "$CHANGED" | grep -qw ".github/copilot-instructions.md"; then
+          if echo "$CHANGED" | grep -Egqw "\.github/copilot-instructions\.md|\.github/canvas-instructions\.md|\.github/codex-instructions\.md"; then
             echo "needs_update=false" >> $GITHUB_OUTPUT
           else
             echo "needs_update=true" >> $GITHUB_OUTPUT
@@ -96,8 +98,10 @@ jobs:
           script: |
             const changed = `${{ steps.changed.outputs.changed_files }}`.split(' ').filter(Boolean);
             const instructionsChanged = changed.includes('.github/copilot-instructions.md');
+            const canvasChanged = changed.includes('.github/canvas-instructions.md');
+            const codexChanged = changed.includes('.github/codex-instructions.md');
             const changelogChanged = changed.includes('CHANGELOG.md') || changed.includes('docs/CHANGELOG.md');
-            if (instructionsChanged && !changelogChanged) {
+            if ((instructionsChanged || canvasChanged || codexChanged) && !changelogChanged) {
               const { data: labels } = await github.issues.listLabelsOnIssue({
                 owner: context.repo.owner,
                 repo: context.repo.repo,

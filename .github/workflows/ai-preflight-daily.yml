@@ -1,0 +1,33 @@
+name: AI instructions preflight (daily)
+
+on:
+  schedule:
+    - cron: '15 9 * * *' # daily at 09:15 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Preflight summary
+        run: |
+          node scripts/ai-instructions-preflight.js --short | tee preflight-summary.txt
+
+      - name: Upload summary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-instructions-preflight
+          path: preflight-summary.txt

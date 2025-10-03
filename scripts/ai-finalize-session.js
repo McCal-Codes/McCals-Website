@@ -1,0 +1,115 @@
+#!/usr/bin/env node
+/**
+ * AI Finalize Session
+ * - Appends a short summary to each instructions file under a "Recent updates" section
+ * - Bumps version if requested (package.json version and optional widget version file naming is manual)
+ * - Appends a Docs/Meta entry to CHANGELOG.md
+ *
+ * Usage:
+ *   node scripts/ai-finalize-session.js --summary "What changed" [--bump patch|minor|major]
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..');
+const INSTRUCTIONS = [
+  path.join(ROOT, '.github', 'copilot-instructions.md'),
+  path.join(ROOT, '.github', 'canvas-instructions.md'),
+  path.join(ROOT, '.github', 'codex-instructions.md'),
+];
+const CHANGELOG = path.join(ROOT, 'CHANGELOG.md');
+const PKG = path.join(ROOT, 'package.json');
+
+const args = process.argv.slice(2);
+function argVal(name) {
+  const i = args.indexOf(name);
+  return i >= 0 ? args[i + 1] : undefined;
+}
+const summary = argVal('--summary') || 'Session complete.';
+const bump = argVal('--bump'); // patch|minor|major|none
+
+function bumpSemver(v, type) {
+  const [major, minor, patch] = v.split('.').map(Number);
+  if (type === 'major') return `${major + 1}.0.0`;
+  if (type === 'minor') return `${major}.${minor + 1}.0`;
+  return `${major}.${minor}.${(patch || 0) + 1}`; // patch default
+}
+
+function appendRecentUpdate(file, tag) {
+  try {
+    let txt = fs.readFileSync(file, 'utf8');
+    const marker = 'Recent updates';
+    const idx = txt.indexOf(marker);
+    const entry = `- ${new Date().toISOString()} — ${summary}\n`;
+    if (idx === -1) {
+      // append a section
+      txt += `\n\n${marker}\n\n${entry}`;
+    } else {
+      // insert after marker line
+      const lines = txt.split(/\r?\n/);
+      const mLine = lines.findIndex(l => l.trim() === marker);
+      if (mLine !== -1) {
+        // find first blank after marker; insert after marker or directly after heading
+        lines.splice(mLine + 2, 0, entry.trim());
+        txt = lines.join('\n');
+      } else {
+        txt += `\n${entry}`;
+      }
+    }
+    fs.writeFileSync(file, txt);
+    console.log(`✅ Updated recent updates in ${path.relative(ROOT, file)}`);
+  } catch (e) {
+    console.warn(`⚠️  Could not update ${file}: ${e.message}`);
+  }
+}
+
+function updateChangelog() {
+  try {
+    const exists = fs.existsSync(CHANGELOG);
+    if (!exists) return;
+    const now = new Date().toISOString().slice(0, 10);
+    const line = `- ${now}: AI session — ${summary}`;
+    let txt = fs.readFileSync(CHANGELOG, 'utf8');
+    const target = '## [1.6.2] - Unreleased';
+    const idx = txt.indexOf(target);
+    if (idx !== -1) {
+      // Insert under Docs/Meta section if present; else add one
+      if (!/### Docs\/Meta/.test(txt)) {
+        txt = txt.replace(target, `${target}\n### Docs/Meta\n${line}`);
+      } else {
+        txt = txt.replace(/### Docs\/Meta[\s\S]*?(?=\n## |$)/, (block) => {
+          // append line to the block
+          return block.trimEnd() + `\n${line}`;
+        });
+      }
+      fs.writeFileSync(CHANGELOG, txt);
+      console.log('✅ CHANGELOG updated');
+    }
+  } catch (e) {
+    console.warn(`⚠️  Could not update CHANGELOG: ${e.message}`);
+  }
+}
+
+function bumpPackageVersion() {
+  if (!bump || bump === 'none') return;
+  try {
+    const pkg = JSON.parse(fs.readFileSync(PKG, 'utf8'));
+    const next = bumpSemver(pkg.version || '0.0.0', bump);
+    pkg.version = next;
+    fs.writeFileSync(PKG, JSON.stringify(pkg, null, 2) + '\n');
+    console.log(`✅ package.json version bumped to ${next}`);
+  } catch (e) {
+    console.warn(`⚠️  Could not bump version: ${e.message}`);
+  }
+}
+
+function main() {
+  INSTRUCTIONS.forEach(f => appendRecentUpdate(f));
+  updateChangelog();
+  bumpPackageVersion();
+}
+
+if (require.main === module) {
+  main();
+}
