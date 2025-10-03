@@ -1,24 +1,41 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "type": "featured",
-  "generated": "2025-10-03T07:24:51.122Z",
-  "source": "portfolio-manifest.json",
-  "totalItems": 10,
-  "totalImages": 97,
+  "generated": "2025-10-03T07:51:30.155Z",
+  "generatedBy": "enhanced-featured-manifest-generator",
+  "sources": [
+    "concert-manifest.json",
+    "events-manifest.json",
+    "journalism-manifest.json"
+  ],
+  "totalItems": 12,
+  "totalImages": 125,
   "categories": [
     "Concert Photography",
-    "Event Photography",
+    "Events Photography",
+    "Journalism Photography"
+  ],
+  "portfolioTypes": [
+    "Concert",
+    "Events",
     "Journalism"
   ],
-  "description": "Curated selection of newest portfolio highlights across all categories",
+  "dateRange": {
+    "newest": "2025-08-29",
+    "oldest": "2024-10-29"
+  },
+  "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
+  "config": {
+    "itemsPerCategory": 4,
+    "totalLimit": 12,
+    "usesSharedDateParsing": true
+  },
   "items": [
     {
-      "type": "Concert",
-      "category": "Concert Photography",
-      "name": "The Book Club",
-      "folderPath": "Concert/The Book Club/August 2025",
+      "bandName": "The Book Club",
+      "folderPath": "The Book Club/August 2025",
       "dateDisplay": "August 2025",
-      "date": {
+      "concertDate": {
         "year": 2025,
         "month": 8,
         "monthName": "August",
@@ -52,17 +69,31 @@
         "250829_Haven_CAL4742.jpg",
         "250829_Haven_CAL4746.jpg"
       ],
-      "coverImage": "250829_Haven_CAL4584.jpg",
-      "id": "The Book Club",
-      "title": "The Book Club"
-    },
-    {
+      "name": "The Book Club",
+      "title": "The Book Club",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
       "type": "Concert",
       "category": "Concert Photography",
-      "name": "Turtle Park",
-      "folderPath": "Concert/Turtle Park/August 2025",
+      "id": "The Book Club",
+      "coverImage": "250829_Haven_CAL4584.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
+      "bandName": "Turtle Park",
+      "folderPath": "Turtle Park/August 2025",
       "dateDisplay": "August 2025",
-      "date": {
+      "concertDate": {
         "year": 2025,
         "month": 8,
         "monthName": "August",
@@ -80,17 +111,31 @@
         "250829_Haven_CAL4543.jpg",
         "250829_Haven_CAL4570.jpg"
       ],
-      "coverImage": "250829_Haven_CAL4388.jpg",
-      "id": "Turtle Park",
-      "title": "Turtle Park"
-    },
-    {
+      "name": "Turtle Park",
+      "title": "Turtle Park",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
       "type": "Concert",
       "category": "Concert Photography",
-      "name": "We Are All Made Of Stardust",
-      "folderPath": "Concert/We Are All Made of Stardust/August 2025",
+      "id": "Turtle Park",
+      "coverImage": "250829_Haven_CAL4388.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
+      "bandName": "We Are All Made of Stardust",
+      "folderPath": "We Are All Made of Stardust/August 2025",
       "dateDisplay": "August 2025",
-      "date": {
+      "concertDate": {
         "year": 2025,
         "month": 8,
         "monthName": "August",
@@ -106,17 +151,31 @@
         "250829_Haven_CAL4376.jpg",
         "250829_Haven_CAL4382.jpg"
       ],
-      "coverImage": "250829_Haven_CAL4356.jpg",
-      "id": "We Are All Made Of Stardust",
-      "title": "We Are All Made Of Stardust"
-    },
-    {
+      "name": "We Are All Made of Stardust",
+      "title": "We Are All Made of Stardust",
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 29,
+        "iso": "2025-08-29",
+        "source": "filename_yymmdd"
+      },
       "type": "Concert",
       "category": "Concert Photography",
-      "name": "Big Slime",
-      "folderPath": "Concert/Big Slime/August 2025",
+      "id": "We Are All Made of Stardust",
+      "coverImage": "250829_Haven_CAL4356.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
+      "bandName": "Big Slime",
+      "folderPath": "Big Slime/August 2025",
       "dateDisplay": "August 2025",
-      "date": {
+      "concertDate": {
         "year": 2025,
         "month": 8,
         "monthName": "August",
@@ -137,193 +196,1397 @@
         "250820_Haven Block Party_CAL3281.jpg",
         "250820_Haven Block Party_CAL3286.jpg"
       ],
-      "coverImage": "250820_Haven Block Party_CAL3068.jpg",
-      "id": "Big Slime",
-      "title": "Big Slime"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Product Launch Expo 2025",
-      "folderPath": "Events/Product-Launch-Expo-2025",
-      "dateDisplay": "June 2025",
+      "name": "Big Slime",
+      "title": "Big Slime",
       "date": {
         "year": 2025,
-        "month": 6,
+        "month": 8,
+        "monthName": "August",
         "day": 20,
-        "monthName": "June",
-        "iso": "2025-06-20",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "iso": "2025-08-20",
+        "source": "filename_yymmdd"
       },
+      "type": "Concert",
+      "category": "Concert Photography",
+      "id": "Big Slime",
+      "coverImage": "250820_Haven Block Party_CAL3068.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
+      "eventName": "Product Launch Expo 2025",
+      "category": "Events Photography",
+      "tags": [
+        "Events",
+        "Event",
+        "Corporate",
+        "Professional"
+      ],
+      "folderPath": "Product-Launch-Expo-2025",
+      "eventDate": {
+        "iso": "2025-06-20",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "undefined undefined",
       "totalImages": 2,
       "images": [
-        "250620_Product_Launch_Expo_Demo.jpg",
-        "250620_Product_Launch_Expo_Showcase.jpg"
+        {
+          "filename": "250620_Product_Launch_Expo_Demo.jpg",
+          "path": "Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg",
+          "description": "Product Launch Expo 2025 photography",
+          "caption": "Product Launch Expo 2025",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250620_Product_Launch_Expo_Showcase.jpg",
+          "path": "Product-Launch-Expo-2025/250620_Product_Launch_Expo_Showcase.jpg",
+          "description": "Product Launch Expo 2025 photography",
+          "caption": "Product Launch Expo 2025",
+          "tags": [
+            "Events"
+          ]
+        }
       ],
-      "coverImage": "250620_Product_Launch_Expo_Demo.jpg",
+      "published": false,
+      "metadata": {},
+      "name": "Product Launch Expo 2025",
+      "title": "Product Launch Expo 2025",
+      "date": {
+        "iso": "2025-06-20",
+        "source": "filename_extraction"
+      },
+      "type": "Events",
       "id": "Product Launch Expo 2025",
-      "title": "Product Launch Expo 2025"
+      "coverImage": {
+        "filename": "250620_Product_Launch_Expo_Demo.jpg",
+        "path": "Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg",
+        "description": "Product Launch Expo 2025 photography",
+        "caption": "Product Launch Expo 2025",
+        "tags": [
+          "Events"
+        ]
+      }
     },
     {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "CMU Business Graduation",
-      "folderPath": "Events/CMU-Business-Graduation",
-      "dateDisplay": "May 2025",
-      "date": {
-        "year": 2025,
-        "month": 5,
-        "day": 11,
-        "monthName": "May",
+      "eventName": "CMU Business Graduation",
+      "category": "Events Photography",
+      "tags": [
+        "Events",
+        "Event",
+        "Corporate",
+        "Professional"
+      ],
+      "folderPath": "CMU-Business-Graduation",
+      "eventDate": {
         "iso": "2025-05-11",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "source": "filename_extraction"
       },
+      "dateDisplay": "undefined undefined",
       "totalImages": 33,
       "images": [
-        "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6485-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6485-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-640.jpg"
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6485-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6485-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6526-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6526-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6526-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6532-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6532-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6532-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6561-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6561-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6561-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6572-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6572-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6572-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6622-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6622-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6622-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6655-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6655-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6655-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6681-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6681-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6681-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6691-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6691-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6691-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6694-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6694-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6694-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6697-1280.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-1280.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6697-320.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-320.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250511_CMU-Business-Graduation-_CAL6697-640.jpg",
+          "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-640.jpg",
+          "description": "CMU Business Graduation photography",
+          "caption": "CMU Business Graduation",
+          "tags": [
+            "Events"
+          ]
+        }
       ],
-      "coverImage": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+      "published": false,
+      "metadata": {},
+      "name": "CMU Business Graduation",
+      "title": "CMU Business Graduation",
+      "date": {
+        "iso": "2025-05-11",
+        "source": "filename_extraction"
+      },
+      "type": "Events",
       "id": "CMU Business Graduation",
-      "title": "CMU Business Graduation"
+      "coverImage": {
+        "filename": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+        "path": "CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+        "description": "CMU Business Graduation photography",
+        "caption": "CMU Business Graduation",
+        "tags": [
+          "Events"
+        ]
+      }
     },
     {
-      "type": "Journalism",
-      "category": "Journalism",
-      "name": "Events",
-      "folderPath": "Journalism/Events/The Rooney Rule",
-      "dateDisplay": "April 2025",
-      "date": {
-        "year": 2025,
-        "month": 4,
-        "day": 17,
-        "monthName": "April",
+      "eventName": "The Rooney Rule",
+      "category": "Journalism Photography",
+      "folderPath": "Events\\The Rooney Rule",
+      "dateDisplay": "undefined undefined",
+      "eventDate": {
         "iso": "2025-04-17",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "source": "filename_extraction"
       },
       "totalImages": 1,
       "images": [
-        "250417 The Rooney Rule_CAL3148.jpg"
+        {
+          "filename": "250417 The Rooney Rule_CAL3148.jpg",
+          "path": "Events\\The Rooney Rule\\250417 The Rooney Rule_CAL3148.jpg",
+          "category": "Events",
+          "date": "2025-04-17",
+          "caption": "The Rooney Rule - Events photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Events\\The Rooney Rule",
+          "eventName": "The Rooney Rule",
+          "eventFolder": null
+        }
       ],
-      "coverImage": "250417 The Rooney Rule_CAL3148.jpg",
-      "id": "Events",
-      "title": "Events"
+      "published": false,
+      "hasEventFolder": false,
+      "name": "The Rooney Rule",
+      "title": "The Rooney Rule",
+      "date": {
+        "iso": "2025-04-17",
+        "source": "filename_extraction"
+      },
+      "type": "Journalism",
+      "id": "The Rooney Rule",
+      "coverImage": {
+        "filename": "250417 The Rooney Rule_CAL3148.jpg",
+        "path": "Events\\The Rooney Rule\\250417 The Rooney Rule_CAL3148.jpg",
+        "category": "Events",
+        "date": "2025-04-17",
+        "caption": "The Rooney Rule - Events photography",
+        "description": "",
+        "published": false,
+        "outlet": null,
+        "outletUrl": null,
+        "articleUrl": null,
+        "articleTitle": null,
+        "publishedDate": null,
+        "folderName": "Events\\The Rooney Rule",
+        "eventName": "The Rooney Rule",
+        "eventFolder": null
+      },
+      "tags": [
+        "Documentary",
+        "Journalism",
+        "Story"
+      ]
     },
     {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Corporate Summit 2025",
-      "folderPath": "Events/Corporate-Summit-2025",
-      "dateDisplay": "March 2025",
-      "date": {
-        "year": 2025,
-        "month": 3,
-        "day": 15,
-        "monthName": "March",
+      "eventName": "Corporate Summit 2025",
+      "category": "Events Photography",
+      "tags": [
+        "Events",
+        "Event",
+        "Corporate",
+        "Professional"
+      ],
+      "folderPath": "Corporate-Summit-2025",
+      "eventDate": {
         "iso": "2025-03-15",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "source": "filename_extraction"
       },
+      "dateDisplay": "undefined undefined",
       "totalImages": 2,
       "images": [
-        "250315_Corporate_Summit_Keynote.jpg",
-        "250315_Corporate_Summit_Panel.jpg"
+        {
+          "filename": "250315_Corporate_Summit_Keynote.jpg",
+          "path": "Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg",
+          "description": "Corporate Summit 2025 photography",
+          "caption": "Corporate Summit 2025",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250315_Corporate_Summit_Panel.jpg",
+          "path": "Corporate-Summit-2025/250315_Corporate_Summit_Panel.jpg",
+          "description": "Corporate Summit 2025 photography",
+          "caption": "Corporate Summit 2025",
+          "tags": [
+            "Events"
+          ]
+        }
       ],
-      "coverImage": "250315_Corporate_Summit_Keynote.jpg",
+      "published": false,
+      "metadata": {},
+      "name": "Corporate Summit 2025",
+      "title": "Corporate Summit 2025",
+      "date": {
+        "iso": "2025-03-15",
+        "source": "filename_extraction"
+      },
+      "type": "Events",
       "id": "Corporate Summit 2025",
-      "title": "Corporate Summit 2025"
+      "coverImage": {
+        "filename": "250315_Corporate_Summit_Keynote.jpg",
+        "path": "Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg",
+        "description": "Corporate Summit 2025 photography",
+        "caption": "Corporate Summit 2025",
+        "tags": [
+          "Events"
+        ]
+      }
     },
     {
-      "type": "Journalism",
-      "category": "Journalism",
-      "name": "Politics",
-      "folderPath": "Journalism/Politics/Butler Protest",
-      "dateDisplay": "March 2025",
-      "date": {
-        "year": 2025,
-        "month": 3,
-        "day": 15,
-        "monthName": "March",
+      "eventName": "Butler Democracy Protest",
+      "category": "Journalism Photography",
+      "folderPath": "Politics\\Butler Protest",
+      "dateDisplay": "undefined undefined",
+      "eventDate": {
         "iso": "2025-03-15",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "source": "filename_extraction"
       },
       "totalImages": 11,
       "images": [
-        "250315_Butler Democracy Protest_CAL9640-min.jpg",
-        "250315_Butler Democracy Protest_CAL9666-min.jpg",
-        "250315_Butler Democracy Protest_CAL9674-min.jpg",
-        "250315_Butler Democracy Protest_CAL9703-min.jpg",
-        "250315_Butler Democracy Protest_CAL9709-min.jpg",
-        "250315_Butler Democracy Protest_CAL9717-min.jpg",
-        "250315_Butler Democracy Protest_CAL9739-min.jpg",
-        "250315_Butler Democracy Protest_CAL9759-min.jpg",
-        "250315_Butler Democracy Protest_CAL9773-min.jpg",
-        "250315_Butler Democracy Protest_CAL9825-min.jpg",
-        "250315_Butler Democracy Protest_CAL9832-min.jpg"
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9640-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9666-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9674-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9703-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9709-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9717-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9739-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9759-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9825-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
+          "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9832-min.jpg",
+          "category": "Politics",
+          "date": "2025-03-15",
+          "caption": "Butler Democracy Protest - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Butler Protest",
+          "eventName": "Butler Democracy Protest",
+          "eventFolder": null
+        }
       ],
-      "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-      "id": "Politics",
-      "title": "Politics"
+      "published": false,
+      "hasEventFolder": false,
+      "name": "Butler Democracy Protest",
+      "title": "Butler Democracy Protest",
+      "date": {
+        "iso": "2025-03-15",
+        "source": "filename_extraction"
+      },
+      "type": "Journalism",
+      "id": "Butler Democracy Protest",
+      "coverImage": {
+        "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+        "path": "Politics\\Butler Protest\\250315_Butler Democracy Protest_CAL9640-min.jpg",
+        "category": "Politics",
+        "date": "2025-03-15",
+        "caption": "Butler Democracy Protest - Politics photography",
+        "description": "",
+        "published": false,
+        "outlet": null,
+        "outletUrl": null,
+        "articleUrl": null,
+        "articleTitle": null,
+        "publishedDate": null,
+        "folderName": "Politics\\Butler Protest",
+        "eventName": "Butler Democracy Protest",
+        "eventFolder": null
+      },
+      "tags": [
+        "Documentary",
+        "Journalism",
+        "Story"
+      ]
     },
     {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Charity Gala 2024",
-      "folderPath": "Events/Charity-Gala-2024",
-      "dateDisplay": "November 2024",
-      "date": {
-        "year": 2024,
-        "month": 11,
-        "day": 5,
-        "monthName": "November",
+      "eventName": "Charity Gala 2024",
+      "category": "Events Photography",
+      "tags": [
+        "Events",
+        "Event",
+        "Corporate",
+        "Professional"
+      ],
+      "folderPath": "Charity-Gala-2024",
+      "eventDate": {
         "iso": "2024-11-05",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "source": "filename_extraction"
       },
+      "dateDisplay": "undefined undefined",
       "totalImages": 3,
       "images": [
-        "241105_Charity_Gala_Auction.jpg",
-        "241105_Charity_Gala_Ballroom.jpg",
-        "241105_Charity_Gala_Red_Carpet.jpg"
+        {
+          "filename": "241105_Charity_Gala_Auction.jpg",
+          "path": "Charity-Gala-2024/241105_Charity_Gala_Auction.jpg",
+          "description": "Charity Gala 2024 photography",
+          "caption": "Charity Gala 2024",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "241105_Charity_Gala_Ballroom.jpg",
+          "path": "Charity-Gala-2024/241105_Charity_Gala_Ballroom.jpg",
+          "description": "Charity Gala 2024 photography",
+          "caption": "Charity Gala 2024",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "241105_Charity_Gala_Red_Carpet.jpg",
+          "path": "Charity-Gala-2024/241105_Charity_Gala_Red_Carpet.jpg",
+          "description": "Charity Gala 2024 photography",
+          "caption": "Charity Gala 2024",
+          "tags": [
+            "Events"
+          ]
+        }
       ],
-      "coverImage": "241105_Charity_Gala_Auction.jpg",
+      "published": false,
+      "metadata": {},
+      "name": "Charity Gala 2024",
+      "title": "Charity Gala 2024",
+      "date": {
+        "iso": "2024-11-05",
+        "source": "filename_extraction"
+      },
+      "type": "Events",
       "id": "Charity Gala 2024",
-      "title": "Charity Gala 2024"
+      "coverImage": {
+        "filename": "241105_Charity_Gala_Auction.jpg",
+        "path": "Charity-Gala-2024/241105_Charity_Gala_Auction.jpg",
+        "description": "Charity Gala 2024 photography",
+        "caption": "Charity Gala 2024",
+        "tags": [
+          "Events"
+        ]
+      }
+    },
+    {
+      "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+      "category": "Journalism Photography",
+      "folderPath": "Politics\\Kamala in Pittsburgh amid Election Eve",
+      "dateDisplay": "undefined undefined",
+      "eventDate": {
+        "iso": "2024-11-04",
+        "source": "filename_extraction"
+      },
+      "totalImages": 19,
+      "images": [
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
+          "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
+          "category": "Politics",
+          "date": "2024-11-04",
+          "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+          "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+          "eventFolder": null
+        }
+      ],
+      "published": false,
+      "hasEventFolder": false,
+      "name": "Kamla Speaks in Pittsburgh on Election Eve",
+      "title": "Kamla Speaks in Pittsburgh on Election Eve",
+      "date": {
+        "iso": "2024-11-04",
+        "source": "filename_extraction"
+      },
+      "type": "Journalism",
+      "id": "Kamla Speaks in Pittsburgh on Election Eve",
+      "coverImage": {
+        "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+        "path": "Politics\\Kamala in Pittsburgh amid Election Eve\\241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+        "category": "Politics",
+        "date": "2024-11-04",
+        "caption": "Kamla Speaks in Pittsburgh on Election Eve - Politics photography",
+        "description": "",
+        "published": false,
+        "outlet": null,
+        "outletUrl": null,
+        "articleUrl": null,
+        "articleTitle": null,
+        "publishedDate": null,
+        "folderName": "Politics\\Kamala in Pittsburgh amid Election Eve",
+        "eventName": "Kamla Speaks in Pittsburgh on Election Eve",
+        "eventFolder": null
+      },
+      "tags": [
+        "Documentary",
+        "Journalism",
+        "Story"
+      ]
+    },
+    {
+      "eventName": "Clinton Speaks at Pitt Greensburgh",
+      "category": "Journalism Photography",
+      "folderPath": "Politics\\Clinton Speaks at Pitt Greensburgh",
+      "dateDisplay": "undefined undefined",
+      "eventDate": {
+        "iso": "2024-10-29",
+        "source": "filename_extraction"
+      },
+      "totalImages": 9,
+      "images": [
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "category": "Politics",
+          "date": "2024-10-29",
+          "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+          "description": "",
+          "published": false,
+          "outlet": null,
+          "outletUrl": null,
+          "articleUrl": null,
+          "articleTitle": null,
+          "publishedDate": null,
+          "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+          "eventName": "Clinton Speaks at Pitt Greensburgh",
+          "eventFolder": null
+        }
+      ],
+      "published": false,
+      "hasEventFolder": false,
+      "name": "Clinton Speaks at Pitt Greensburgh",
+      "title": "Clinton Speaks at Pitt Greensburgh",
+      "date": {
+        "iso": "2024-10-29",
+        "source": "filename_extraction"
+      },
+      "type": "Journalism",
+      "id": "Clinton Speaks at Pitt Greensburgh",
+      "coverImage": {
+        "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+        "path": "Politics\\Clinton Speaks at Pitt Greensburgh\\241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+        "category": "Politics",
+        "date": "2024-10-29",
+        "caption": "Clinton Speaks at Pitt Greensburgh - Politics photography",
+        "description": "",
+        "published": false,
+        "outlet": null,
+        "outletUrl": null,
+        "articleUrl": null,
+        "articleTitle": null,
+        "publishedDate": null,
+        "folderName": "Politics\\Clinton Speaks at Pitt Greensburgh",
+        "eventName": "Clinton Speaks at Pitt Greensburgh",
+        "eventFolder": null
+      },
+      "tags": [
+        "Documentary",
+        "Journalism",
+        "Story"
+      ]
     }
   ]
 }
