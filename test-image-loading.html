@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Loading Test - Local vs GitHub</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            font-family: ui-sans-serif, system-ui, sans-serif;
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+        }
+        .test-section h3 {
+            margin: 0 0 15px 0;
+            color: #888;
+        }
+        .image-test {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .image-item {
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px;
+            background: #111;
+            max-width: 300px;
+        }
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+        }
+        .image-item .info {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #999;
+            word-break: break-all;
+        }
+        .loading-status {
+            margin-top: 5px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .status-loading { background: #444; color: #fff; }
+        .status-success { background: #4CAF50; color: #fff; }
+        .status-error { background: #f44336; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>🖼️ Image Loading Test</h1>
+    <p>Testing different image path resolution methods for local development vs production.</p>
+
+    <div class="test-section">
+        <h3>Local Server Images (Relative Paths)</h3>
+        <div class="image-test" id="localImages"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>GitHub Raw Images (Production URLs)</h3>
+        <div class="image-test" id="githubImages"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Environment Info</h3>
+        <div style="font-family: monospace; font-size: 12px;">
+            <div>Protocol: <span id="protocol"></span></div>
+            <div>Hostname: <span id="hostname"></span></div>
+            <div>Is Local Detected: <span id="isLocal"></span></div>
+            <div>Local Base: <span id="localBase"></span></div>
+            <div>GitHub Base: <span id="githubBase"></span></div>
+        </div>
+    </div>
+
+    <script>
+        const isLocal = window.location.protocol === 'file:' || 
+                        window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+        
+        const LOCAL_ROOT = '/src/images/Portfolios/';
+        const GITHUB_ROOT = 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/';
+        
+        // Update environment info
+        document.getElementById('protocol').textContent = window.location.protocol;
+        document.getElementById('hostname').textContent = window.location.hostname || 'N/A';
+        document.getElementById('isLocal').textContent = isLocal ? 'YES' : 'NO';
+        document.getElementById('localBase').textContent = LOCAL_ROOT;
+        document.getElementById('githubBase').textContent = GITHUB_ROOT;
+        
+        // Test image samples from the Events portfolio
+        const testImages = [
+            'Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg',
+            'Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6498-1280.jpg',
+            'Events/Product-Launch-Expo-2025/250620_Product-Launch-Expo-2025_CAL8234-1280.jpg'
+        ];
+        
+        function createImageTest(container, baseUrl, label) {
+            testImages.forEach((imagePath, index) => {
+                const fullUrl = baseUrl + imagePath;
+                const item = document.createElement('div');
+                item.className = 'image-item';
+                
+                const img = document.createElement('img');
+                const status = document.createElement('div');
+                status.className = 'loading-status status-loading';
+                status.textContent = 'Loading...';
+                
+                const info = document.createElement('div');
+                info.className = 'info';
+                info.innerHTML = `
+                    <strong>${label} ${index + 1}</strong><br>
+                    Path: ${imagePath}<br>
+                    URL: ${fullUrl}
+                `;
+                
+                img.onload = () => {
+                    status.className = 'loading-status status-success';
+                    status.textContent = `✓ Loaded (${img.naturalWidth}×${img.naturalHeight})`;
+                };
+                
+                img.onerror = () => {
+                    status.className = 'loading-status status-error';
+                    status.textContent = '✗ Failed to load';
+                    img.style.display = 'none';
+                };
+                
+                img.src = fullUrl;
+                img.alt = `Test image ${index + 1}`;
+                
+                item.appendChild(img);
+                item.appendChild(status);
+                item.appendChild(info);
+                container.appendChild(item);
+            });
+        }
+        
+        // Create tests for both local and GitHub paths
+        createImageTest(document.getElementById('localImages'), LOCAL_ROOT, 'Local');
+        createImageTest(document.getElementById('githubImages'), GITHUB_ROOT, 'GitHub');
+        
+        console.log('Image loading test initialized');
+        console.log('Local detection:', isLocal);
+        console.log('Testing paths:', testImages);
+    </script>
+</body>
+</html>
