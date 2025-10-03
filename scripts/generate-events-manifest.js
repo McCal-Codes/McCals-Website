@@ -1,137 +1,182 @@
 #!/usr/bin/env node
+const fs = require('fs');
+const fsp = fs.promises;
+const path = require('path');
+
+// Import shared date parsing utilities
+const { detectDateFromFilename, extractEXIFDate } = require('./shared-date-parsing.js');
+
+// NOTE: Adjusted to include leading 'src/' so default matches repo structure
+const DEFAULT_ROOT = 'src/images/Portfolios/Events';
+const OUTPUT_FILE = 'events-manifest.json';
+
+function titleCase(slug) {
+  return slug.replace(/[_-]+/g, ' ').trim().split(/\s+/).map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
+}
 
 /**
- * Event Portfolio Manifest Generator
- *
- * Scans src/images/Portfolios/Events for event folders and produces
- * events-manifest.json mirroring the schema used for journalism manifests.
+ * Enhanced date parsing that uses shared date parsing utilities
+ * Looks for dates in filenames first, then folder names, then falls back to current date
  */
-
-const fs = require('fs').promises;
-const path = require('path');
-const { detectDateFromFilename, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing.js');
-
-const EVENTS_DIR = path.join(__dirname, '../src/images/Portfolios/Events');
-const MANIFEST_PATH = path.join(EVENTS_DIR, 'events-manifest.json');
-const SUPPORTED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-
-function isImageFile(filename) {
-  const ext = path.extname(filename).toLowerCase();
-  return SUPPORTED_EXTENSIONS.includes(ext);
-}
-
-function cleanTitle(name) {
-  return name
-    .replace(/[_-]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .replace(/\b\w/g, letter => letter.toUpperCase());
-}
-
-// Date parsing functions moved to shared-date-parsing.js module
-
-async function ensureEventsDirExists() {
-  try {
-    await fs.access(EVENTS_DIR);
-  } catch (error) {
-    throw new Error(`Events directory not found: ${EVENTS_DIR}`);
+function parseEventDate(folderName, imageFiles = []) {
+  // First try to extract date from the first image filename (most accurate)
+  for (const fileName of imageFiles) {
+    const dateInfo = detectDateFromFilename(fileName);
+    if (dateInfo) {
+      return {
+        year: dateInfo.year,
+        month: dateInfo.month,
+        day: dateInfo.day,
+        iso: dateInfo.iso,
+        monthName: dateInfo.monthName,
+        display: `${dateInfo.monthName} ${dateInfo.year}`,
+        source: `filename:${fileName}`,
+        confidence: 'high'
+      };
+    }
   }
-}
-
-async function collectEventData() {
-  const entries = await fs.readdir(EVENTS_DIR, { withFileTypes: true });
-  const events = [];
-
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-
-    const eventFolder = entry.name;
-    const eventDir = path.join(EVENTS_DIR, eventFolder);
-    const files = await fs.readdir(eventDir);
-    const imageFiles = files.filter(isImageFile).sort();
-
-    if (imageFiles.length === 0) {
-      // Skip empty folders to keep manifest clean
-      continue;
-    }
-
-    const eventName = cleanTitle(eventFolder);
-    let eventDateIso = null;
-    let eventDateSource = null;
-
-    for (const filename of imageFiles) {
-      const dateResult = detectDateFromFilename(filename);
-      if (dateResult) {
-        eventDateIso = dateResult.iso;
-        eventDateSource = 'filename_extraction';
-        break;
-      }
-    }
-
-    if (!eventDateIso) {
-      const fallbackDate = createFallbackDate();
-      eventDateIso = fallbackDate.iso;
-      eventDateSource = 'fallback_current_date';
-    }
-
-    const images = imageFiles.map(filename => ({
-      filename,
-      path: `${eventFolder}/${filename}`,
-      description: `${eventName} photography`,
-      caption: `${eventName}`,
-      tags: ['Events']
-    }));
-
-    events.push({
-      eventName,
-      category: 'Events',
-      tags: ['Events'],
-      folderPath: eventFolder,
-      eventDate: {
-        iso: eventDateIso,
-        source: eventDateSource
-      },
-      dateDisplay: formatDisplayDate(eventDateIso),
-      totalImages: images.length,
-      images,
-      published: false,
-      metadata: {}
-    });
+  
+  // Try to extract date from folder name
+  const folderDateInfo = detectDateFromFilename(folderName);
+  if (folderDateInfo) {
+    return {
+      year: folderDateInfo.year,
+      month: folderDateInfo.month,
+      day: folderDateInfo.day,
+      iso: folderDateInfo.iso,
+      monthName: folderDateInfo.monthName,
+      display: `${folderDateInfo.monthName} ${folderDateInfo.year}`,
+      source: `folder:${folderName}`,
+      confidence: 'medium'
+    };
   }
-
-  // Sort events newest first by date
-  events.sort((a, b) => (a.eventDate.iso < b.eventDate.iso ? 1 : -1));
-  return events;
-}
-
-async function buildManifest(events) {
-  const totalImages = events.reduce((sum, event) => sum + event.totalImages, 0);
-
+  
+  // Fallback to current date
+  const now = new Date();
+  const monthName = ['January', 'February', 'March', 'April', 'May', 'June',
+                     'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()];
+  
   return {
-    version: '2.0',
-    generated: new Date().toISOString(),
-    totalEvents: events.length,
-    totalImages,
-    events
+    year: now.getFullYear(),
+    month: now.getMonth() + 1,
+    day: now.getDate(),
+    iso: now.toISOString().slice(0, 10),
+    monthName: monthName,
+    display: `${monthName} ${now.getFullYear()}`,
+    source: 'fallback:current',
+    confidence: 'low'
   };
 }
 
-async function writeManifest(manifest) {
-  const content = `${JSON.stringify(manifest, null, 2)}\n`;
-  await fs.writeFile(MANIFEST_PATH, content, 'utf-8');
+async function readDirSafe(dir) {
+  try { return await fsp.readdir(dir); }
+  catch { return []; }
 }
 
-async function main() {
+function deriveCategory(dir) {
+  const slug = dir.toLowerCase();
+  if (/(gala|celebration|festival|party|wedding|graduation)/.test(slug)) return 'Celebration';
+  if (/(conference|summit|forum|symposium)/.test(slug)) return 'Conference';
+  if (/(on-location|location|travel|tour)/.test(slug)) return 'On-Location';
+  if (/(published|press|feature|media)/.test(slug)) return 'Published';
+  return 'Corporate';
+}
+
+async function exists(target) {
   try {
-    await ensureEventsDirExists();
-    const events = await collectEventData();
-    const manifest = await buildManifest(events);
-    await writeManifest(manifest);
-    console.log(`✅ Generated ${manifest.totalEvents} events with ${manifest.totalImages} images`);
-  } catch (error) {
-    console.error('❌ Failed to generate events manifest:', error.message);
-    process.exitCode = 1;
+    await fsp.access(target, fs.constants.F_OK);
+    return true;
+  } catch {
+    return false;
   }
 }
 
-main();
+async function main() {
+  const argv = process.argv.slice(2);
+  const rootFlag = argv.indexOf('--root');
+  const rootDir = (rootFlag >= 0 && argv[rootFlag + 1]) ? argv[rootFlag + 1] : DEFAULT_ROOT;
+  const absRoot = path.resolve(rootDir);
+
+  if (!(await exists(absRoot))) {
+    console.error('[ERR] Events root not found: - generate-events-manifest.js:100', absRoot);
+    process.exit(1);
+  }
+
+  const entries = await fsp.readdir(absRoot, { withFileTypes: true });
+  const dirs = entries.filter(d => d.isDirectory()).map(d => d.name).sort();
+
+  const events = [];
+  for (const dir of dirs) {
+    const files = (await readDirSafe(path.join(absRoot, dir))).filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f));
+    if (!files.length) continue;
+
+    // Parse date from filenames and folder name
+    const dateInfo = parseEventDate(dir, files);
+
+    const images = files.map(file => ({
+      path: path.posix.join(rootDir.replace(/^.*?src\//, 'src/'), dir, file)
+    }));
+
+    events.push({
+      eventName: titleCase(dir),
+      category: deriveCategory(dir),
+      dateDisplay: dateInfo.display,
+      dateISO: dateInfo.iso,
+      date: {
+        year: dateInfo.year,
+        month: dateInfo.month,
+        day: dateInfo.day,
+        monthName: dateInfo.monthName,
+        iso: dateInfo.iso,
+        display: dateInfo.display
+      },
+      dateSource: dateInfo.source,
+      dateConfidence: dateInfo.confidence,
+      images,
+      totalImages: images.length
+    });
+  }
+
+  // Sort by ISO date (most accurate) then by dateDisplay as fallback
+  events.sort((a, b) => {
+    const aDate = new Date(a.dateISO);
+    const bDate = new Date(b.dateISO);
+    if (!isNaN(aDate) && !isNaN(bDate)) {
+      return bDate.getTime() - aDate.getTime();
+    }
+    // Fallback to string comparison of dateDisplay
+    return (b.dateDisplay || '').localeCompare(a.dateDisplay || '');
+  });
+
+  const manifest = {
+    version: '2.5.3',
+    generated: new Date().toISOString().slice(0, 10),
+    totalEvents: events.length,
+    events,
+    // Provide a generic alias so generic-consuming widgets can read .items
+    items: events.map(e => ({
+      title: e.eventName,
+      eventName: e.eventName,
+      category: e.category,
+      dateDisplay: e.dateDisplay,
+      dateISO: e.dateISO,
+      date: e.date,
+      images: e.images,
+      // Provide a folderPath derived from first image path if possible
+      folderPath: (e.images && e.images[0] && e.images[0].path)
+        ? e.images[0].path
+            .replace(/^src\/images\/Portfolios\//,'')
+            .split('/').slice(0,-1).join('/')
+        : ''
+    }))
+  };
+
+  const outFile = path.join(absRoot, OUTPUT_FILE);
+  await fsp.writeFile(outFile, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
+  console.log('[OK] Wrote manifest: - generate-events-manifest.js:159', path.relative(process.cwd(), outFile));
+}
+
+main().catch(err => {
+  console.error('[ERR] - generate-events-manifest.js:163', err && err.stack || err);
+  process.exit(1);
+});

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget Debug - Image URL Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            font-family: ui-sans-serif, system-ui, sans-serif;
+        }
+        .debug-panel {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .url-test {
+            background: #111;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .url-test .label {
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .url-test .url {
+            color: #4CAF50;
+            word-break: break-all;
+        }
+        .test-image {
+            max-width: 200px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        .status.loading { background: #666; color: #fff; }
+        .status.success { background: #4CAF50; color: #fff; }
+        .status.error { background: #f44336; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Widget Image URL Debug</h1>
+    
+    <div class="debug-panel">
+        <h3>Environment Detection</h3>
+        <div>Protocol: <strong id="protocol"></strong></div>
+        <div>Hostname: <strong id="hostname"></strong></div>
+        <div>Is Local: <strong id="isLocalDetected"></strong></div>
+        <div>RAW_ROOT: <strong id="rawRoot"></strong></div>
+    </div>
+    
+    <div class="debug-panel">
+        <h3>Manifest Test</h3>
+        <div id="manifestTest">Loading manifest...</div>
+    </div>
+    
+    <div class="debug-panel">
+        <h3>Image URL Tests</h3>
+        <div id="imageTests">Generating test URLs...</div>
+    </div>
+
+    <script>
+        // Environment detection (copied from widget)
+        const isLocal = window.location.protocol === 'file:' || 
+                        window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+                        
+        const RAW_ROOT = isLocal ? 
+          '../../../../' : // Local development - relative path from tests folder to repo root
+          'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/';
+          
+        const PATH_PREFIX = 'src/images/Portfolios/';
+
+        // Update debug info
+        document.getElementById('protocol').textContent = window.location.protocol;
+        document.getElementById('hostname').textContent = window.location.hostname || 'N/A';
+        document.getElementById('isLocalDetected').textContent = isLocal ? 'YES' : 'NO';
+        document.getElementById('rawRoot').textContent = RAW_ROOT;
+        
+        // Function from widget to build image URLs
+        function buildImageUrl(pathSegments, imageRef) {
+            if (!imageRef) return '';
+            if (/^(https?:)?\/\//i.test(imageRef) || imageRef.startsWith('data:')) {
+              return imageRef;
+            }
+            const normalized = imageRef.replace(/\\+/g, '/');
+            if (!normalized) return '';
+            if (normalized.startsWith('src/')) {
+              return RAW_ROOT + normalized;
+            }
+            if (normalized.startsWith('images/')) {
+              return RAW_ROOT + normalized;
+            }
+            if (normalized.startsWith('Portfolios/')) {
+              return RAW_ROOT + 'src/images/' + normalized.split('/').map(seg => encodeURIComponent(seg)).join('/');
+            }
+            if (normalized.startsWith('../')) {
+              const trimmed = normalized.replace(/^\.\.\/+/, '');
+              return RAW_ROOT + trimmed.split('/').map(seg => encodeURIComponent(seg)).join('/');
+            }
+            if (normalized.includes('/')) {
+              return RAW_ROOT + PATH_PREFIX + normalized.split('/').map(seg => encodeURIComponent(seg)).join('/');
+            }
+            const basePath = pathSegments.map(seg => encodeURIComponent(seg)).join('/');
+            return RAW_ROOT + PATH_PREFIX + basePath + '/' + encodeURIComponent(normalized);
+        }
+        
+        // Test manifest loading
+        async function testManifest() {
+            try {
+                const manifestUrl = RAW_ROOT + 'src/images/Portfolios/featured-manifest.json';
+                console.log('Testing manifest URL:', manifestUrl);
+                
+                const response = await fetch(manifestUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                const manifest = await response.json();
+                
+                document.getElementById('manifestTest').innerHTML = `
+                    <div class="url-test">
+                        <div class="label">Manifest URL:</div>
+                        <div class="url">${manifestUrl}</div>
+                        <div class="status success">✓ Loaded successfully (${manifest.items?.length || 0} items)</div>
+                    </div>
+                `;
+                
+                // Test some image URLs
+                testImageUrls(manifest);
+                
+            } catch (error) {
+                console.error('Manifest test failed:', error);
+                document.getElementById('manifestTest').innerHTML = `
+                    <div class="url-test">
+                        <div class="label">Manifest URL:</div>
+                        <div class="url">${RAW_ROOT}src/images/Portfolios/featured-manifest.json</div>
+                        <div class="status error">✗ Failed: ${error.message}</div>
+                    </div>
+                `;
+            }
+        }
+        
+        function testImageUrls(manifest) {
+            const container = document.getElementById('imageTests');
+            
+            if (!manifest.items || manifest.items.length === 0) {
+                container.innerHTML = '<div>No items in manifest to test</div>';
+                return;
+            }
+            
+            // Test first few items
+            const testItems = manifest.items.slice(0, 3);
+            container.innerHTML = '';
+            
+            testItems.forEach((item, index) => {
+                const pathSegments = item.folderPath ? item.folderPath.split('/').filter(Boolean) : [];
+                const firstImage = item.images && item.images[0];
+                
+                if (!firstImage) return;
+                
+                const imageUrl = buildImageUrl(pathSegments, firstImage);
+                
+                const testDiv = document.createElement('div');
+                testDiv.className = 'url-test';
+                
+                const statusSpan = document.createElement('span');
+                statusSpan.className = 'status loading';
+                statusSpan.textContent = 'Testing...';
+                
+                testDiv.innerHTML = `
+                    <div class="label">Item ${index + 1}: ${item.bandName || item.eventName || 'Unknown'}</div>
+                    <div>Path Segments: [${pathSegments.join(', ')}]</div>
+                    <div>Image Ref: ${firstImage}</div>
+                    <div class="url">${imageUrl}</div>
+                `;
+                testDiv.appendChild(statusSpan);
+                
+                // Test the actual image loading
+                const testImg = document.createElement('img');
+                testImg.className = 'test-image';
+                testImg.style.display = 'none';
+                
+                testImg.onload = () => {
+                    statusSpan.className = 'status success';
+                    statusSpan.textContent = `✓ Image loaded (${testImg.naturalWidth}×${testImg.naturalHeight})`;
+                    testImg.style.display = 'block';
+                };
+                
+                testImg.onerror = () => {
+                    statusSpan.className = 'status error';
+                    statusSpan.textContent = '✗ Image failed to load';
+                };
+                
+                testImg.src = imageUrl;
+                testDiv.appendChild(testImg);
+                container.appendChild(testDiv);
+            });
+        }
+        
+        // Start the tests
+        testManifest();
+    </script>
+</body>
+</html>

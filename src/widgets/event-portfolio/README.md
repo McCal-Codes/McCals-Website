@@ -11,7 +11,7 @@ Squarespace-ready single-file widget. Featured-first + shuffle, lightbox, debug 
 
 ## Local generation
 ```bash
-node scripts/generate-events-manifest-v2.js --root src/images/Portfolios/Events --force
+node scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force
 ```
 
 ## Live watch

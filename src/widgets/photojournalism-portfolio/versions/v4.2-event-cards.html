@@ -451,15 +451,34 @@ function updateNextRefreshIndicator() {
   if (!grid) return;
 
   // Debug logging
-  function logDebug(message, data = null) {
-    if (debugActive) {
-      console.log(`[Journalism Debug v4.2] ${message}`, data || '');
-      if (debugStatus) {
-        debugStatus.textContent = message;
-        updateDebugMetrics();
+    function logDebug(message, data = null) {
+      if (window && window.console) {
+        console.log('[Journalism Debug]', message, data || '');
       }
+      const debugPanel = document.getElementById('debugInfo');
+      if (debugPanel && debugActive) {
+        const msg = document.createElement('div');
+        msg.textContent = `[${new Date().toLocaleTimeString()}] ${message}` + (data ? `: ${JSON.stringify(data)}` : '');
+        debugPanel.appendChild(msg);
+        debugPanel.scrollTop = debugPanel.scrollHeight;
+      }
+      if (debugStatus) debugStatus.textContent = message;
     }
-  }
+
+    // Show error message in UI
+    function showError(message) {
+      if (loading) {
+        loading.innerHTML = `<span style='color:var(--accent);font-weight:700;'>${message}</span>`;
+        loading.style.display = 'flex';
+      }
+      if (grid) {
+        grid.innerHTML = '';
+        grid.classList.remove('loaded');
+        grid.style.display = 'none';
+      }
+      logDebug('ERROR', message);
+      if (debugStatus) debugStatus.textContent = 'Error';
+    }
   
   // Cache management
   function getCachedManifest() {
@@ -497,41 +516,56 @@ function updateNextRefreshIndicator() {
   const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
   const manifestUrl = rawBase + 'src/images/Portfolios/Journalism/journalism-manifest.json';
 
+  logDebug('GitHub configuration initialized', {
+    owner: GH.owner,
+    repo: GH.repo,
+    branch: GH.branch,
+    rawBase: rawBase,
+    manifestUrl: manifestUrl
+  });
+
   function rawUrl(parts) { 
     return rawBase + 'src/images/Portfolios/Journalism/' + parts.map(encodeURIComponent).join('/'); 
   }
 
   // Load master manifest
   async function loadMasterManifest(forceRefresh = false) {
-    // Try cache first unless forcing refresh
-    if (!forceRefresh) {
-      const cached = getCachedManifest();
-      if (cached) {
-        debugMetrics.lastRefresh = new Date().toLocaleTimeString();
-        return cached;
-      }
-    }
-    
-    debugMetrics.apiCalls++;
-    logDebug('Loading master manifest from API...');
-    
     try {
+      // Try cache first unless forcing refresh
+      if (!forceRefresh) {
+        const cached = getCachedManifest();
+        if (cached) {
+          debugMetrics.lastRefresh = new Date().toLocaleTimeString();
+          return cached;
+        }
+      }
+      debugMetrics.apiCalls++;
+      logDebug('Loading master manifest from API...');
       const response = await fetch(manifestUrl);
-      
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
-      
-      const manifest = await response.json();
-      logDebug('Master manifest loaded from API', `${manifest.events?.length || 0} events (Generated: ${manifest.generated})`);
-      
-      // Cache the fresh data
-      setCachedManifest(manifest);
-      
+      const text = await response.text();
+      if (!text || text.trim().length === 0) throw new Error('Manifest file is empty');
+      let manifestJson = null;
+      try {
+        manifestJson = JSON.parse(text);
+      } catch (parseErr) {
+        throw new Error('Manifest JSON parse error');
+      }
+      if (!manifestJson || !manifestJson.events || !Array.isArray(manifestJson.events)) {
+        throw new Error('Manifest missing events array');
+      }
+      if (manifestJson.events.length === 0) {
+        throw new Error('Manifest events array is empty');
+      }
+      setCachedManifest(manifestJson);
       debugMetrics.lastRefresh = new Date().toLocaleTimeString();
-      return manifest;
+      logDebug('Master manifest loaded from API', `${manifestJson.events.length} events (Generated: ${manifestJson.generated})`);
+      return manifestJson;
     } catch (error) {
       logDebug('Master manifest failed', error.message);
+      showError('Portfolio failed to load: ' + error.message);
       throw error;
     }
   }
@@ -557,13 +591,10 @@ function updateNextRefreshIndicator() {
 
       // Load master manifest
       const manifest = await loadMasterManifest(forceRefresh);
-      
-      if (!manifest || !manifest.events || manifest.events.length === 0) {
-        throw new Error('No journalism data found in manifest.');
-      }
 
+      // Defensive: manifest loader now throws on error, so this is safe
       logDebug(`Loaded ${manifest.events.length} events from manifest (Generated: ${manifest.generated})`);
-      
+
       // Process events - one card per event
       const events = manifest.events.map(event => ({
         ...event,
@@ -571,10 +602,18 @@ function updateNextRefreshIndicator() {
         shuffledImages: shuffle(event.images.slice()),
         thumbnail: null // Will be set below
       }));
-      
+
       // Set thumbnail as first shuffled image
       events.forEach(event => {
         event.thumbnail = event.shuffledImages[0] || event.images[0];
+        
+        logDebug(`Event processed: ${event.eventName}`, {
+          totalImages: event.totalImages,
+          thumbnailPath: event.thumbnail?.path,
+          firstImagePath: event.images[0]?.path,
+          folderPath: event.folderPath,
+          category: event.category
+        });
       });
 
       debugMetrics.eventCount = events.length;
@@ -646,29 +685,45 @@ function updateNextRefreshIndicator() {
 
       grid.appendChild(fragment);
 
-      // Load thumbnail images with staggered timing
-      cards.forEach(({ card, event, img }, index) => {
-        setTimeout(() => {
-          const thumbnailPath = event.thumbnail.path;
-          const imageUrl = rawUrl(thumbnailPath.split('/'));
-          
-          img.onload = () => {
-            card.classList.remove('loading');
-            card.classList.add('loaded');
-            logDebug(`Thumbnail loaded: ${event.eventName}`);
-          };
-          
-          img.onerror = () => {
-            card.classList.remove('loading');
-            card.classList.add('error');
-            logDebug(`Thumbnail failed: ${event.eventName}`);
-          };
-          
-          img.src = imageUrl;
-        }, index * 100); // Stagger loading
+  // Load thumbnail images with staggered timing
+  cards.forEach(({ card, event, img }, index) => {
+    setTimeout(() => {
+      const thumbnailPath = event.thumbnail.path;
+      // Encode the full path for spaces/special chars
+      const imageUrl = rawBase + 'src/images/Portfolios/Journalism/' + encodeURI(thumbnailPath);
+      
+      logDebug(`Loading thumbnail ${index + 1}/${cards.length}`, {
+        eventName: event.eventName,
+        thumbnailPath: thumbnailPath,
+        imageUrl: imageUrl,
+        rawBase: rawBase
       });
 
-      // Show grid with animation
+      img.onload = () => {
+        card.classList.remove('loading');
+        card.classList.add('loaded');
+        logDebug(`✅ Thumbnail loaded successfully: ${event.eventName}`, imageUrl);
+      };
+
+      img.onerror = (error) => {
+        card.classList.remove('loading');
+        card.classList.add('error');
+        logDebug(`❌ Thumbnail failed to load: ${event.eventName}`, {
+          imageUrl: imageUrl,
+          error: error,
+          status: 'Network error or 404'
+        });
+        
+        // Add visible error indicator
+        const errorMsg = document.createElement('div');
+        errorMsg.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ff4d6d;font:600 12px ui-sans-serif;text-align:center;background:rgba(0,0,0,0.8);padding:8px;border-radius:4px;';
+        errorMsg.innerHTML = '⚠️ Image failed<br>Check console';
+        card.appendChild(errorMsg);
+      };
+
+      img.src = imageUrl;
+    }, index * 100); // Stagger loading
+  });      // Show grid with animation
       setTimeout(() => {
         loading.style.display = 'none';
         grid.style.display = 'block';
@@ -678,10 +733,7 @@ function updateNextRefreshIndicator() {
 
     } catch (error) {
       logDebug('Build failed', error.message);
-      loading.innerHTML = `
-        <div style="color: var(--accent); font-weight: 600;">⚠️ Failed to load journalism portfolio</div>
-        <div style="margin-top: 8px; font-size: 14px; opacity: 0.8;">${error.message}</div>
-      `;
+      showError('Portfolio failed to load: ' + error.message);
     }
   }
 
@@ -701,15 +753,51 @@ function updateNextRefreshIndicator() {
       const img = document.createElement('img');
       img.alt = `${event.eventName} - Image ${index + 1}`;
       img.classList.add('loading');
-      
+
+      // Use robust URL encoding for full path
       const imagePath = imageData.path;
-      const imageUrl = rawUrl(imagePath.split('/'));
-      
+      const imageUrl = rawBase + 'src/images/Portfolios/Journalism/' + encodeURI(imagePath);
+
+      logDebug(`Loading lightbox image ${index + 1}/${event.images.length}`, {
+        eventName: event.eventName,
+        imagePath: imagePath,
+        imageUrl: imageUrl,
+        filename: imageData.filename || 'unknown'
+      });
+
       img.onload = () => {
         img.classList.remove('loading');
         img.classList.add('loaded');
+        logDebug(`✅ Lightbox image loaded: ${event.eventName} #${index + 1}`, imageUrl);
       };
-      
+
+      img.onerror = (error) => {
+        img.classList.remove('loading');
+        img.classList.add('error');
+        img.alt = '⚠️ Image failed to load';
+        img.style.opacity = '0.5';
+        img.style.border = '2px solid #ff4d6d';
+        img.style.borderRadius = '8px';
+        img.style.minHeight = '200px';
+        img.style.background = 'rgba(255,77,109,0.1)';
+        
+        logDebug(`❌ Lightbox image failed: ${event.eventName} #${index + 1}`, {
+          imageUrl: imageUrl,
+          error: error,
+          status: 'Network error or 404',
+          imagePath: imagePath
+        });
+        
+        // Replace with error message
+        img.style.display = 'flex';
+        img.style.alignItems = 'center';
+        img.style.justifyContent = 'center';
+        img.style.color = '#ff4d6d';
+        img.style.fontSize = '14px';
+        img.style.fontWeight = '600';
+        img.innerHTML = `⚠️ Failed to load<br>${imageData.filename || 'Unknown file'}`;
+      };
+
       img.src = imageUrl;
       gallery.appendChild(img);
     });
@@ -847,6 +935,13 @@ function updateNextRefreshIndicator() {
 
   // Initialize
   logDebug('Initializing journalism portfolio...');
+  logDebug('Current environment', {
+    userAgent: navigator.userAgent,
+    location: window.location.href,
+    protocol: window.location.protocol,
+    hostname: window.location.hostname
+  });
+  
   build().then(() => {
     logDebug('Initial build complete');
     scheduleRefresh();

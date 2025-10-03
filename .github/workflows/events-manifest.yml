@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'src/images/Portfolios/Events/**'
-      - 'scripts/generate-events-manifest-v2.js'
+      - 'scripts/generate-events-manifest.js'
       - '.github/workflows/events-manifest.yml'
   workflow_dispatch:
 
@@ -39,7 +39,7 @@ jobs:
 
       - name: Generate manifest
         run: |
-          node scripts/generate-events-manifest-v2.js --root src/images/Portfolios/Events --force
+          node scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force
           test -f src/images/Portfolios/Events/events-manifest.json
 
       - name: Commit + push

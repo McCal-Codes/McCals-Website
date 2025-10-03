@@ -31,10 +31,10 @@ This workflow ingests a new event into the Event Portfolio widget whenever you r
    - If a name collision occurs, suffix with `-<counter>`.
 
 3. **Regenerate the manifest**
-   - Ensure `scripts/generate-events-manifest-v2.js` exists.
+   - Ensure `scripts/generate-events-manifest.js` exists.
    - Run:
      ```powershell
-     & 'C:\Program Files\nodejs\node.exe' scripts/generate-events-manifest-v2.js --root src/images/Portfolios/Events --force
+     & 'C:\Program Files\nodejs\node.exe' scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force
      ```
    - (If Node is already on PATH, you can run `node` instead of the absolute path.)
 
@@ -89,13 +89,13 @@ This workflow ingests a new event into the Event Portfolio widget whenever you r
      - images: <count>
 
      ## Verification
-     - node scripts/generate-events-manifest-v2.js --root src/images/Portfolios/Events --force
+     - node scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force
      ```
 
 ## Troubleshooting
 
 - If `node` is not recognized, call it via the absolute path shown above or add Node.js to your PATH.
-- Missing generator? Copy `scripts/generate-events-manifest-v2.js` from main or recreate it from version control (see repo history).
+- Missing generator? Copy `scripts/generate-events-manifest.js` from main or recreate it from version control (see repo history).
 - If the manifest shows `category: Published` for media-centric slugs, override it by editing the manifest entry before committing.
 - When SOURCE is invalid, double-check the path; PowerShell accepts both `/` and `\\` separators.
 
