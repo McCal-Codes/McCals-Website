@@ -2,7 +2,11 @@ name: Copilot Instructions Guardian
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
     paths:
       - 'package.json'
       - 'dev-server.js'
@@ -12,6 +16,7 @@ on:
       - 'src/widgets/**'
       - 'docs/**'
       - '.github/workflows/**'
+      - '.github/copilot-instructions.md'
       - '.github/canvas-instructions.md'
       - '.github/codex-instructions.md'
       - 'README.md'
