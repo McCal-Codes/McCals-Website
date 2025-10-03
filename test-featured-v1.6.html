@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Portfolio v1.6 Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0a0a0a;
+            color: white;
+            font-family: ui-sans-serif, system-ui;
+        }
+        .test-info {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .loading {
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Featured Portfolio v1.6 Widget Test</h1>
+    
+    <div class="loading" id="loadingStatus">Loading widget...</div>
+    
+    <div id="testResults" class="test-info"></div>
+    
+    <div id="widgetContainer"></div>
+
+    <script>
+        const testResults = document.getElementById('testResults');
+        const loadingStatus = document.getElementById('loadingStatus');
+        const widgetContainer = document.getElementById('widgetContainer');
+        
+        function log(message) {
+            console.log(message);
+            testResults.textContent += new Date().toISOString() + ': ' + message + '\n';
+        }
+        
+        log('Starting v1.6 widget test...');
+        
+        // Load the widget from local file
+        fetch('./src/widgets/featured-portfolio/versions/v1.6.html')
+        .then(response => {
+            log('Widget HTML loaded, status: ' + response.status);
+            return response.text();
+        })
+        .then(html => {
+            log('Widget HTML received, length: ' + html.length);
+            loadingStatus.textContent = 'Widget loaded, initializing...';
+            
+            // Extract and inject the HTML
+            widgetContainer.innerHTML = html;
+            
+            log('Widget HTML injected into DOM');
+            
+            // Wait a bit and check for debug info
+            setTimeout(() => {
+                const debugToggle = document.getElementById('debugToggle');
+                if (debugToggle) {
+                    log('Debug toggle found, clicking it...');
+                    debugToggle.click();
+                    
+                    setTimeout(() => {
+                        const debugStatus = document.getElementById('debugStatus');
+                        if (debugStatus) {
+                            log('Debug status: ' + debugStatus.textContent);
+                        }
+                        
+                        const debugLog = document.getElementById('debugLog');
+                        if (debugLog && debugLog.textContent) {
+                            log('Debug log content: ' + debugLog.textContent.substring(0, 500) + '...');
+                        }
+                        
+                        const featuredGrid = document.getElementById('featuredGrid');
+                        if (featuredGrid) {
+                            log('Grid found, children: ' + featuredGrid.children.length);
+                            log('Grid innerHTML length: ' + featuredGrid.innerHTML.length);
+                            if (featuredGrid.children.length > 0) {
+                                log('First child class: ' + featuredGrid.children[0].className);
+                                log('First child content preview: ' + featuredGrid.children[0].textContent.substring(0, 100));
+                            }
+                        }
+                        
+                        const metaCount = document.getElementById('metaCount');
+                        const metaUpdated = document.getElementById('metaUpdated');
+                        const metaSource = document.getElementById('metaSource');
+                        if (metaCount) log('Meta count: ' + metaCount.textContent);
+                        if (metaUpdated) log('Meta updated: ' + metaUpdated.textContent);
+                        if (metaSource) log('Meta source: ' + metaSource.textContent);
+                        
+                        loadingStatus.textContent = 'Test complete - check results above and debug panel';
+                    }, 5000);
+                } else {
+                    log('Debug toggle not found');
+                }
+            }, 3000);
+        })
+        .catch(error => {
+            log('Error loading widget: ' + error.message);
+            loadingStatus.textContent = 'Error: ' + error.message;
+        });
+    </script>
+</body>
+</html>

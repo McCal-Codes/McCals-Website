@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Portfolio Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; color: #0c5460; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; font-size: 12px; }
+        .console-log { margin: 5px 0; padding: 8px; background: #f8f9fa; border-left: 3px solid #007bff; font-family: monospace; font-size: 11px; }
+        .console-error { border-left-color: #dc3545; background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Featured Portfolio Debug Test</h1>
+    
+    <div class="test-section info">
+        <h3>Debug Console</h3>
+        <div id="console-output"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Manual Manifest Loading Test</h3>
+        <button onclick="testManifestLoading()">Test All Manifests</button>
+        <div id="manifest-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Path Construction Test</h3>
+        <button onclick="testPathConstruction()">Test Path Building</button>
+        <div id="path-results"></div>
+    </div>
+
+    <script>
+        const GH = { owner: 'McCal-Codes', repo: 'McCals-Website', branch: 'main' };
+        const RAW_ROOT = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+        const PATH_PREFIX = 'src/images/Portfolios/';
+
+        const consoleOutput = document.getElementById('console-output');
+        
+        // Capture console logs
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            logToPage('log', args.join(' '));
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            logToPage('error', args.join(' '));
+        };
+        
+        function logToPage(type, message) {
+            const div = document.createElement('div');
+            div.className = `console-${type}`;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleOutput.appendChild(div);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        // Test manifest loading
+        async function testManifestLoading() {
+            const results = document.getElementById('manifest-results');
+            results.innerHTML = '<p>Testing manifest loading...</p>';
+            
+            const manifestUrls = [
+                'src/images/Portfolios/Concert/concert-manifest.json',
+                'src/images/Portfolios/Events/events-manifest.json', 
+                'src/images/Portfolios/Journalism/journalism-manifest.json'
+            ];
+            
+            for (const manifestPath of manifestUrls) {
+                try {
+                    const url = RAW_ROOT + manifestPath;
+                    console.log(`Testing manifest: ${url}`);
+                    
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    const itemCount = data.bands?.length || data.events?.length || data.items?.length || 0;
+                    
+                    const div = document.createElement('div');
+                    div.className = 'success';
+                    div.innerHTML = `
+                        <h4>✅ ${manifestPath.split('/').pop()}</h4>
+                        <p><strong>Items:</strong> ${itemCount}</p>
+                        <p><strong>Generated:</strong> ${data.generated || 'N/A'}</p>
+                        <pre>${JSON.stringify(data, null, 2).substring(0, 300)}...</pre>
+                    `;
+                    results.appendChild(div);
+                    
+                } catch (error) {
+                    console.error(`Manifest failed: ${manifestPath}`, error.message);
+                    
+                    const div = document.createElement('div');
+                    div.className = 'error';
+                    div.innerHTML = `
+                        <h4>❌ ${manifestPath.split('/').pop()}</h4>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    `;
+                    results.appendChild(div);
+                }
+            }
+        }
+
+        // Test path construction using the actual widget logic
+        function buildImageUrl(pathSegments, imageRef) {
+            if (!imageRef) return '';
+            if (/^(https?:)?\/\//i.test(imageRef) || imageRef.startsWith('data:')) {
+                return imageRef;
+            }
+            
+            const normalized = imageRef.replace(/\\+/g, '/').trim();
+            if (!normalized) return '';
+            
+            if (normalized.startsWith('src/')) {
+                return RAW_ROOT + normalized;
+            }
+            if (normalized.startsWith('images/')) {
+                return RAW_ROOT + normalized;
+            }
+            if (normalized.startsWith('Portfolios/')) {
+                return `${RAW_ROOT}src/images/${encodeSegments(normalized)}`;
+            }
+            if (normalized.startsWith('../')) {
+                const trimmed = normalized.replace(/^\.\.\/+/, '');
+                return `${RAW_ROOT}${encodeSegments(trimmed)}`;
+            }
+            if (normalized.includes('/')) {
+                return `${RAW_ROOT}${PATH_PREFIX}${encodeSegments(normalized)}`;
+            }
+            const basePath = pathSegments.map(seg => encodeURIComponent(seg)).join('/');
+            return `${RAW_ROOT}${PATH_PREFIX}${basePath}/${encodeURIComponent(normalized)}`;
+        }
+
+        function encodeSegments(path) {
+            return path.split('/').filter(Boolean).map(seg => encodeURIComponent(seg)).join('/');
+        }
+
+        async function testPathConstruction() {
+            const results = document.getElementById('path-results');
+            results.innerHTML = '<p>Testing path construction...</p>';
+            
+            const testCases = [
+                {
+                    name: 'Concert Image',
+                    pathSegments: ['Concert', 'The Book Club', 'August 2025'],
+                    fileName: '250829_Haven_CAL4584.jpg'
+                },
+                {
+                    name: 'Events Image', 
+                    pathSegments: ['Events', 'Product-Launch-Expo-2025'],
+                    fileName: '250620_Product_Launch_Expo_Demo.jpg'
+                },
+                {
+                    name: 'Journalism Image',
+                    pathSegments: ['Journalism', 'Politics', 'Butler Protest'],
+                    fileName: '250315_Butler Democracy Protest_CAL9640-min.jpg'
+                }
+            ];
+            
+            for (const testCase of testCases) {
+                const imageUrl = buildImageUrl(testCase.pathSegments, testCase.fileName);
+                
+                try {
+                    console.log(`Testing image URL: ${imageUrl}`);
+                    
+                    // Test if image loads
+                    await new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.onload = resolve;
+                        img.onerror = reject;
+                        img.src = imageUrl;
+                        setTimeout(() => reject(new Error('Timeout')), 5000);
+                    });
+                    
+                    const div = document.createElement('div');
+                    div.className = 'success';
+                    div.innerHTML = `
+                        <h4>✅ ${testCase.name}</h4>
+                        <p><strong>Path Segments:</strong> ${JSON.stringify(testCase.pathSegments)}</p>
+                        <p><strong>File Name:</strong> ${testCase.fileName}</p>
+                        <p><strong>URL:</strong> <a href="${imageUrl}" target="_blank">${imageUrl}</a></p>
+                        <img src="${imageUrl}" style="max-width: 200px; height: auto;">
+                    `;
+                    results.appendChild(div);
+                    
+                } catch (error) {
+                    console.error(`Image failed: ${testCase.name}`, error.message);
+                    
+                    const div = document.createElement('div');
+                    div.className = 'error';
+                    div.innerHTML = `
+                        <h4>❌ ${testCase.name}</h4>
+                        <p><strong>Path Segments:</strong> ${JSON.stringify(testCase.pathSegments)}</p>
+                        <p><strong>File Name:</strong> ${testCase.fileName}</p>
+                        <p><strong>URL:</strong> <a href="${imageUrl}" target="_blank">${imageUrl}</a></p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    `;
+                    results.appendChild(div);
+                }
+            }
+        }
+
+        // Auto-start tests
+        console.log('🚀 Debug test page loaded');
+        console.log('RAW_ROOT:', RAW_ROOT);
+        console.log('PATH_PREFIX:', PATH_PREFIX);
+    </script>
+</body>
+</html>

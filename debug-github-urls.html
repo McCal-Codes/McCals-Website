@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub URL Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .loading { background-color: #fff3cd; border-color: #ffeaa7; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        .url { word-break: break-all; font-family: monospace; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 GitHub URL Debug Test</h1>
+    
+    <div class="test-section">
+        <h3>Testing GitHub Raw URLs</h3>
+        <div id="url-test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Manifest Loading Test</h3>
+        <div id="manifest-test-results"></div>
+    </div>
+
+    <script>
+        const GH = {
+            owner: 'McCal-Codes',
+            repo: 'McCals-Website', 
+            branch: 'main'
+        };
+        
+        const RAW_ROOT = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+        
+        console.log('🔗 RAW_ROOT:', RAW_ROOT);
+
+        async function testUrl(url, description) {
+            const container = document.getElementById('url-test-results');
+            const testDiv = document.createElement('div');
+            testDiv.className = 'loading';
+            testDiv.innerHTML = `
+                <h4>Testing: ${description}</h4>
+                <div class="url">${url}</div>
+                <p>⏳ Testing...</p>
+            `;
+            container.appendChild(testDiv);
+            
+            try {
+                const response = await fetch(url);
+                const status = response.status;
+                const statusText = response.statusText;
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    testDiv.className = 'success';
+                    testDiv.innerHTML = `
+                        <h4>✅ ${description}</h4>
+                        <div class="url">${url}</div>
+                        <p><strong>Status:</strong> ${status} ${statusText}</p>
+                        <p><strong>Data Preview:</strong></p>
+                        <pre>${JSON.stringify(data, null, 2).substring(0, 500)}${JSON.stringify(data, null, 2).length > 500 ? '...' : ''}</pre>
+                    `;
+                } else {
+                    testDiv.className = 'error';
+                    testDiv.innerHTML = `
+                        <h4>❌ ${description}</h4>
+                        <div class="url">${url}</div>
+                        <p><strong>Status:</strong> ${status} ${statusText}</p>
+                        <p><strong>Error:</strong> Failed to load manifest</p>
+                    `;
+                }
+            } catch (error) {
+                testDiv.className = 'error';
+                testDiv.innerHTML = `
+                    <h4>❌ ${description}</h4>
+                    <div class="url">${url}</div>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        async function runTests() {
+            console.log('🚀 Starting GitHub URL tests...');
+            
+            // Test all three manifests
+            await testUrl(
+                `${RAW_ROOT}src/images/Portfolios/Concert/concert-manifest.json`,
+                'Concert Manifest'
+            );
+            
+            await testUrl(
+                `${RAW_ROOT}src/images/Portfolios/Events/events-manifest.json`, 
+                'Events Manifest'
+            );
+            
+            await testUrl(
+                `${RAW_ROOT}src/images/Portfolios/Journalism/journalism-manifest.json`,
+                'Journalism Manifest'
+            );
+
+            // Test if a sample image loads (using actual path from manifest)
+            const testImageUrl = `${RAW_ROOT}src/images/Portfolios/Concert/The Book Club/August 2025/250829_Haven_CAL4584.jpg`;
+            await testImageUrl2(testImageUrl, 'Sample Concert Image');
+        }
+
+        async function testImageUrl2(url, description) {
+            const container = document.getElementById('manifest-test-results');
+            const testDiv = document.createElement('div');
+            testDiv.className = 'loading';
+            testDiv.innerHTML = `
+                <h4>Testing: ${description}</h4>
+                <div class="url">${url}</div>
+                <p>⏳ Testing image load...</p>
+            `;
+            container.appendChild(testDiv);
+            
+            return new Promise((resolve) => {
+                const img = new Image();
+                
+                img.onload = () => {
+                    testDiv.className = 'success';
+                    testDiv.innerHTML = `
+                        <h4>✅ ${description}</h4>
+                        <div class="url">${url}</div>
+                        <p><strong>Status:</strong> Image loaded successfully (${img.naturalWidth}x${img.naturalHeight})</p>
+                        <img src="${url}" style="max-width: 200px; height: auto; border: 1px solid #ddd;">
+                    `;
+                    resolve();
+                };
+                
+                img.onerror = () => {
+                    testDiv.className = 'error';
+                    testDiv.innerHTML = `
+                        <h4>❌ ${description}</h4>
+                        <div class="url">${url}</div>
+                        <p><strong>Error:</strong> Image failed to load</p>
+                    `;
+                    resolve();
+                };
+                
+                img.src = url;
+                
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                    if (testDiv.className === 'loading') {
+                        testDiv.className = 'error';
+                        testDiv.innerHTML = `
+                            <h4>⏰ ${description}</h4>
+                            <div class="url">${url}</div>
+                            <p><strong>Error:</strong> Timeout - image took too long to load</p>
+                        `;
+                        resolve();
+                    }
+                }, 10000);
+            });
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>
