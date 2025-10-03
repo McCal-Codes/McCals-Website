@@ -1,7 +1,7 @@
 {
   "version": "2.5.3",
   "generated": "2025-10-03",
-  "totalEvents": 5,
+  "totalEvents": 6,
   "events": [
     {
       "eventName": "CMU Business Graduation",
@@ -140,6 +140,107 @@
         }
       ],
       "totalImages": 2
+    },
+    {
+      "eventName": "Dance For A Cause",
+      "category": "Corporate",
+      "dateDisplay": "Oct 2025",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1012-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1038-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1068-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1108-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1145-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1174-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1276-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1282-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL130-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL140-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL168-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL256-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL353-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL38-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL420-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL497-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL512-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL545-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL55-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL626-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL63-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL667-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL693-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL79-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL826-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL832-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL84-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL892-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL91-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL949-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL972-min.jpg"
+        }
+      ],
+      "totalImages": 31
     },
     {
       "eventName": "Product Launch Expo 2025",
