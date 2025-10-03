@@ -69,3 +69,19 @@ All notable changes to this widget will be documented in this file.
 - Lightbox with full caption
 - Basic GitHub CDN integration using data-file pattern
 - Responsive CSS columns layout
+
+// ...existing code...
+
+## 4.3.0 — 2025-09-29
+- Added versions/v4.3-unified.html using shared theme and unified manifest loader.
+- Backward-compatible; older versions untouched.
+
+
+## 4.3.1 — 2025-09-29
+- Matched v4.3 unified styling to the live Photojournalism grid with neutral cards, eyebrow dates, and tag emphasis.
+
+## 4.3.2 — 2025-09-30
+- Reworked the v4.3 unified look with on-image overlays, monochrome gradients, and date-forward captions like the Concert grid.
+
+## 4.3.3 — 2025-09-30
+- Reworked the v4.3 unified journalism gallery with tall full-width frames, shuffled sequencing, and caption stacks for tags and locales.
