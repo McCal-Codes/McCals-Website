@@ -1,25 +1,26 @@
 {
   "version": "1.0",
-  "generated": "2025-09-19T06:36:31.766Z",
+  "generated": "2025-09-30T04:02:32.751Z",
   "totalPortfolios": 3,
-  "totalItems": 11,
-  "totalImages": 122,
+  "totalItems": 18,
+  "totalImages": 190,
   "categories": [
     "Concert Photography",
+    "Event Photography",
     "Journalism"
   ],
   "portfolioSummary": {
     "Concert": {
-      "count": 10,
-      "totalImages": 120
+      "count": 11,
+      "totalImages": 125
     },
     "Events": {
-      "count": 0,
-      "totalImages": 0
+      "count": 5,
+      "totalImages": 53
     },
     "Journalism": {
-      "count": 1,
-      "totalImages": 2
+      "count": 2,
+      "totalImages": 12
     }
   },
   "items": [
@@ -125,19 +126,18 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 1,
-        "iso": "2025-08-01"
+        "day": 20,
+        "iso": "2025-08-20",
+        "source": "filename_yymmdd"
       },
-      "totalImages": 12,
+      "totalImages": 10,
       "images": [
         "250820_Haven Block Party_CAL3068.jpg",
         "250820_Haven Block Party_CAL3110.jpg",
         "250820_Haven Block Party_CAL3152.jpg",
-        "250820_Haven Block Party_CAL3154.jpg",
         "250820_Haven Block Party_CAL3200.jpg",
         "250820_Haven Block Party_CAL3236.jpg",
         "250820_Haven Block Party_CAL3253.jpg",
-        "250820_Haven Block Party_CAL3255.jpg",
         "250820_Haven Block Party_CAL3269.jpg",
         "250820_Haven Block Party_CAL3277.jpg",
         "250820_Haven Block Party_CAL3281.jpg",
@@ -155,26 +155,20 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 1,
-        "iso": "2025-08-01"
+        "day": 20,
+        "iso": "2025-08-20",
+        "source": "filename_yymmdd"
       },
-      "totalImages": 15,
+      "totalImages": 8,
       "images": [
         "250820_Haven Block Party_CAL3301.jpg",
         "250820_Haven Block Party_CAL3304.jpg",
         "250820_Haven Block Party_CAL3315.jpg",
         "250820_Haven Block Party_CAL3351.jpg",
         "250820_Haven Block Party_CAL3364.jpg",
-        "250820_Haven Block Party_CAL3379.jpg",
-        "250820_Haven Block Party_CAL3381.jpg",
         "250820_Haven Block Party_CAL3390.jpg",
-        "250820_Haven Block Party_CAL3405.jpg",
-        "250820_Haven Block Party_CAL3408.jpg",
         "250820_Haven Block Party_CAL3411.jpg",
-        "250820_Haven Block Party_CAL3425.jpg",
-        "250820_Haven Block Party_CAL3429.jpg",
-        "250820_Haven Block Party_CAL3443.jpg",
-        "250820_Haven Block Party_CAL3493.jpg"
+        "250820_Haven Block Party_CAL3443.jpg"
       ],
       "coverImage": "250820_Haven Block Party_CAL3301.jpg"
     },
@@ -188,8 +182,9 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 1,
-        "iso": "2025-08-01"
+        "day": 20,
+        "iso": "2025-08-20",
+        "source": "filename_yymmdd"
       },
       "totalImages": 9,
       "images": [
@@ -215,8 +210,9 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 1,
-        "iso": "2025-08-01"
+        "day": 20,
+        "iso": "2025-08-20",
+        "source": "filename_yymmdd"
       },
       "totalImages": 19,
       "images": [
@@ -245,6 +241,39 @@
     {
       "type": "Concert",
       "category": "Concert Photography",
+      "name": "Dream The Heavy",
+      "folderPath": "Concert/Dream The Heavy/April 2025",
+      "dateDisplay": "April 2025",
+      "date": {
+        "year": 2025,
+        "month": 4,
+        "monthName": "April",
+        "day": 4,
+        "iso": "2025-04-04",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 14,
+      "images": [
+        "250404 Haven Concert_CAL1915.jpg",
+        "250404 Haven Concert_CAL1919.jpg",
+        "250404 Haven Concert_CAL1992.jpg",
+        "250404 Haven Concert_CAL2036.jpg",
+        "250404 Haven Concert_CAL2041.jpg",
+        "250404 Haven Concert_CAL2157.jpg",
+        "250404 Haven Concert_CAL2190.jpg",
+        "250404 Haven Concert_CAL2238.jpg",
+        "250404 Haven Concert_CAL2243.jpg",
+        "250404 Haven Concert_CAL2282.jpg",
+        "250404 Haven Concert_CAL2349.jpg",
+        "250404 Haven Concert_CAL2368.jpg",
+        "250404 Haven Concert_CAL8785.jpg",
+        "250404 Haven Concert_CAL8787.jpg"
+      ],
+      "coverImage": "250404 Haven Concert_CAL1915.jpg"
+    },
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
       "name": "Funky Lamp",
       "folderPath": "Concert/Funky Lamp/April 2024",
       "dateDisplay": "April 2024",
@@ -252,8 +281,9 @@
         "year": 2024,
         "month": 4,
         "monthName": "April",
-        "day": 1,
-        "iso": "2024-04-01"
+        "day": 20,
+        "iso": "2024-04-20",
+        "source": "exif_original"
       },
       "totalImages": 6,
       "images": [
@@ -276,8 +306,9 @@
         "year": 2024,
         "month": 3,
         "monthName": "March",
-        "day": 1,
-        "iso": "2024-03-01"
+        "day": 15,
+        "iso": "2024-03-15",
+        "source": "filename_yymmdd"
       },
       "totalImages": 5,
       "images": [
@@ -299,8 +330,9 @@
         "year": 2024,
         "month": 3,
         "monthName": "March",
-        "day": 1,
-        "iso": "2024-03-01"
+        "day": 15,
+        "iso": "2024-03-15",
+        "source": "filename_yymmdd"
       },
       "totalImages": 19,
       "images": [
@@ -327,10 +359,83 @@
       "coverImage": "240315_Genesis Volume 1_464.jpg"
     },
     {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Product Launch Expo 2025",
+      "folderPath": "Events/Product-Launch-Expo-2025",
+      "dateDisplay": "June 2020",
+      "date": {
+        "day": 25,
+        "month": 6,
+        "year": 2020,
+        "monthName": "June",
+        "iso": "2020-06-25",
+        "source": "ddmmyy_solid"
+      },
+      "totalImages": 2,
+      "images": [
+        "250620_Product_Launch_Expo_Demo.jpg",
+        "250620_Product_Launch_Expo_Showcase.jpg"
+      ],
+      "coverImage": "250620_Product_Launch_Expo_Demo.jpg"
+    },
+    {
       "type": "Journalism",
       "category": "Journalism",
-      "name": "Journalism Portfolio",
-      "folderPath": "Journalism",
+      "name": "Events",
+      "folderPath": "Journalism/Events/The Rooney Rule",
+      "dateDisplay": "April 2017",
+      "date": {
+        "day": 25,
+        "month": 4,
+        "year": 2017,
+        "monthName": "April",
+        "iso": "2017-04-25",
+        "source": "ddmmyy_solid"
+      },
+      "totalImages": 1,
+      "images": [
+        "250417 The Rooney Rule_CAL3148.jpg"
+      ],
+      "coverImage": "250417 The Rooney Rule_CAL3148.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Pennsylvania Media Awards 24",
+      "folderPath": "Events/pennsylvania-media-awards-24",
+      "dateDisplay": "April 2016",
+      "date": {
+        "day": 24,
+        "month": 4,
+        "year": 2016,
+        "monthName": "April",
+        "iso": "2016-04-24",
+        "source": "ddmmyy_solid"
+      },
+      "totalImages": 13,
+      "images": [
+        "240416-pennsylvania-media-awards-892-published.jpg",
+        "240416-pennsylvania-media-awards-893-published.jpg",
+        "240416-pennsylvania-media-awards-894-published.jpg",
+        "240416-pennsylvania-media-awards-895-published.jpg",
+        "240416-pennsylvania-media-awards-896-published.jpg",
+        "240416-pennsylvania-media-awards-897-published.jpg",
+        "240416-pennsylvania-media-awards-898-published.jpg",
+        "240416-pennsylvania-media-awards-899-published.jpg",
+        "240416-pennsylvania-media-awards-902-published.jpg",
+        "240416-pennsylvania-media-awards-903-published.jpg",
+        "240416-pennsylvania-media-awards-906-published.jpg",
+        "240416-pennsylvania-media-awards-907-published.jpg",
+        "240416-pennsylvania-media-awards-980-published.jpg"
+      ],
+      "coverImage": "240416-pennsylvania-media-awards-892-published.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Corporate Summit 2025",
+      "folderPath": "Events/Corporate-Summit-2025",
       "dateDisplay": "March 2015",
       "date": {
         "day": 25,
@@ -342,10 +447,114 @@
       },
       "totalImages": 2,
       "images": [
-        "250315_Butler Democracy Protest_CAL9773.jpg",
-        "250417 The Rooney Rule_CAL3148.jpg"
+        "250315_Corporate_Summit_Keynote.jpg",
+        "250315_Corporate_Summit_Panel.jpg"
       ],
-      "coverImage": "250315_Butler Democracy Protest_CAL9773.jpg"
+      "coverImage": "250315_Corporate_Summit_Keynote.jpg"
+    },
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Politics",
+      "folderPath": "Journalism/Politics/Butler Protest",
+      "dateDisplay": "March 2015",
+      "date": {
+        "day": 25,
+        "month": 3,
+        "year": 2015,
+        "monthName": "March",
+        "iso": "2015-03-25",
+        "source": "ddmmyy_solid"
+      },
+      "totalImages": 11,
+      "images": [
+        "250315_Butler Democracy Protest_CAL9640-min.jpg",
+        "250315_Butler Democracy Protest_CAL9666-min.jpg",
+        "250315_Butler Democracy Protest_CAL9674-min.jpg",
+        "250315_Butler Democracy Protest_CAL9703-min.jpg",
+        "250315_Butler Democracy Protest_CAL9709-min.jpg",
+        "250315_Butler Democracy Protest_CAL9717-min.jpg",
+        "250315_Butler Democracy Protest_CAL9739-min.jpg",
+        "250315_Butler Democracy Protest_CAL9759-min.jpg",
+        "250315_Butler Democracy Protest_CAL9773-min.jpg",
+        "250315_Butler Democracy Protest_CAL9825-min.jpg",
+        "250315_Butler Democracy Protest_CAL9832-min.jpg"
+      ],
+      "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "CMU Business Graduation",
+      "folderPath": "Events/CMU-Business-Graduation",
+      "dateDisplay": "May 2011",
+      "date": {
+        "day": 25,
+        "month": 5,
+        "year": 2011,
+        "monthName": "May",
+        "iso": "2011-05-25",
+        "source": "ddmmyy_solid"
+      },
+      "totalImages": 33,
+      "images": [
+        "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6485-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6485-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6526-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6526-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6526-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6532-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6532-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6532-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6561-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6561-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6561-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6572-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6572-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6572-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6622-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6622-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6622-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6655-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6655-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6655-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6681-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6681-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6681-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6691-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6691-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6691-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6694-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6694-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6694-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6697-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6697-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6697-640.jpg"
+      ],
+      "coverImage": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Charity Gala 2024",
+      "folderPath": "Events/Charity-Gala-2024",
+      "dateDisplay": "November 2005",
+      "date": {
+        "day": 24,
+        "month": 11,
+        "year": 2005,
+        "monthName": "November",
+        "iso": "2005-11-24",
+        "source": "ddmmyy_solid"
+      },
+      "totalImages": 3,
+      "images": [
+        "241105_Charity_Gala_Auction.jpg",
+        "241105_Charity_Gala_Ballroom.jpg",
+        "241105_Charity_Gala_Red_Carpet.jpg"
+      ],
+      "coverImage": "241105_Charity_Gala_Auction.jpg"
     }
   ]
 }

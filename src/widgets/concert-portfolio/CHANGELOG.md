@@ -92,3 +92,19 @@ All notable changes to the Squarespace concert portfolio snippet.
 - Initial grid-based gallery and lightbox
 - GitHub API fetch for folders and images
 - Basic styling and interactions
+
+// ...existing code...
+
+## 4.4.0 — 2025-09-29
+- Added versions/v4.4-unified.html using shared theme and unified manifest loader.
+- Backward-compatible; older versions untouched.
+
+
+## 4.4.1 — 2025-09-29
+- Updated v4.4 unified view with new card layout, eyebrow dates, and venue stack to echo the live Concert page design.
+
+## 4.4.2 — 2025-09-30
+- Shifted the v4.4 unified overlay to display titles and dates directly on the imagery with a monochrome gradient treatment.
+
+## 4.4.3 — 2025-09-30
+- Refined the v4.4 unified gallery with shuffled ordering, full-width concert art, and stacked captions beneath each image.
