@@ -14,8 +14,11 @@
 
 <!-- ...existing code... -->
 // ...existing code...
+- 2025-10-03: AI session — Enhanced Featured Portfolio Widget v1.5 with journalism title extraction, ultra-minimal scrollbars, improved spacing, and production deployment
 - 2025-10-03: AI session — Validation: preflight/guardian/canvas/codex added and tasks wired
 - 2025-10-03: AI session — Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging
+- 2025-10-03: AI session — Session complete: minor updates.
+- 2025-10-03: AI session — Featured Portfolio Widget v1.5 complete: Enhanced journalism titles, ultra-minimal scrollbars (4px, 0.15 opacity), improved masonry spacing (16px gaps), randomized cover images with Fisher-Yates shuffle, minimal gray accents (#888888), production-ready deployment with 15-item limit, scrollable lightbox, and comprehensive changelog documentation
 ## 1.5.0 — 2025-09-29
 - Added unified-portfolio-demo.html (master demo with ?type= and ?manifest=).
 - Links to unified versions for Concert, Event, and Photojournalism.

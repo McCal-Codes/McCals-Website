@@ -81,6 +81,11 @@ function isValidDate(day, month, year) {
  * @returns {Object|null} - Date object with year, month, day, iso, monthName, source
  */
 function detectDateFromFilename(filename) {
+  // Ensure filename is a string
+  if (!filename || typeof filename !== 'string') {
+    return null;
+  }
+  
   for (const [patternName, { pattern, parse, description }] of Object.entries(DATE_PATTERNS)) {
     const match = filename.match(pattern);
     if (match) {
@@ -106,10 +111,18 @@ function detectDateFromFilename(filename) {
  * @returns {Object|null} - Date object or null
  */
 function detectDateFromImages(imageFiles) {
+  // Ensure imageFiles is an array
+  if (!Array.isArray(imageFiles)) {
+    return null;
+  }
+  
   for (const filename of imageFiles) {
-    const date = detectDateFromFilename(filename);
-    if (date) {
-      return date;
+    // Ensure each filename is a string
+    if (typeof filename === 'string') {
+      const date = detectDateFromFilename(filename);
+      if (date) {
+        return date;
+      }
     }
   }
   return null;

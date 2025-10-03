@@ -1,0 +1,1060 @@
+<!-- Featured Portfolio Widget v1.5 – Enhanced Titles & Journalism Display -->
+<!-- Production-ready version for Squarespace Code Blocks -->
+<!-- Shows up to 15 newest portfolio items with enhanced title extraction and ultra-minimal scrollbars -->
+
+<style>
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#888888; }
+  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
+
+  /* Ultra Minimal Scrollbar Design */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(136,136,136,0.15) transparent;
+  }
+  
+  *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background: rgba(136,136,136,0.15);
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(136,136,136,0.25);
+  }
+  
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  
+  /* Slightly more visible for dark backgrounds only when needed */
+  .fp-lightbox *::-webkit-scrollbar-thumb,
+  .changelog-modal *::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.12);
+  }
+  
+  .fp-lightbox *::-webkit-scrollbar-thumb:hover,
+  .changelog-modal *::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .featured-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
+  .featured-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 12px }
+  .featured-subhead { font:500 16px/1.5 ui-sans-serif,system-ui; color:rgba(255,255,255,.72); margin:0 0 28px }
+  .featured-meta-bar { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; font:600 11px/1.4 ui-sans-serif,system-ui; color:rgba(255,255,255,.55); margin-bottom:30px; letter-spacing:0.18em; text-transform:uppercase; }
+  .featured-meta-bar span { display:inline-flex; align-items:center; gap:6px; }
+  .featured-meta-bar strong { font:700 13px/1 ui-sans-serif,system-ui; color:var(--fg); letter-spacing:0.22em; }
+
+  .featured-loading {
+    display:flex; align-items:center; justify-content:center; min-height:200px;
+    font:600 16px/1.4 ui-sans-serif,system-ui; color:var(--fg); opacity:0.7;
+  }
+  .featured-spinner {
+    width:20px; height:20px; border:2px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:50%; animation:spin 1s linear infinite; margin-right:12px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  .auto-refresh-indicator {
+    position:fixed; bottom:12px; right:100px; font:400 10px/1 ui-sans-serif,system-ui;
+    color:rgba(128,128,128,0.65); pointer-events:none; z-index:10;
+    padding:4px 8px; background:rgba(0,0,0,0.3); border-radius:4px;
+  }
+  .version-indicator {
+    position:fixed; bottom:12px; right:12px; font:600 11px/1.2 ui-sans-serif,system-ui;
+    color:rgba(255,255,255,0.8); cursor:pointer; z-index:10; transition:all .2s ease;
+    padding:6px 10px; background:rgba(0,0,0,0.6); border-radius:6px; border:1px solid rgba(255,255,255,0.1);
+  }
+    .version-indicator:hover { color:var(--accent); background:rgba(0,0,0,0.8); transform:scale(1.05); }
+  
+  .changelog-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95); z-index: 2000; padding: 2rem; 
+    overflow-y: auto; box-sizing: border-box; display: none;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+  .changelog-content {
+    max-width: 600px; margin: 0 auto; background: #222; 
+    border-radius: 8px; padding: 2rem; color: #e5e5e5;
+    position: relative;
+  }
+  .changelog-close {
+    position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1);
+    border: none; color: #fff; font-size: 20px; width: 32px; height: 32px;
+    border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .changelog-close:hover { background: rgba(255,255,255,0.2); }
+  .changelog h2 { color: var(--accent); margin: 0 0 0.5rem 0; }
+  .changelog h3 { color: #fff; margin: 1.5rem 0 0.5rem 0; font-size: 16px; }
+  .changelog p { color: #ccc; margin: 0 0 1rem 0; font-style: italic; }
+  .changelog ul { margin: 0.5rem 0 1.5rem 0; padding-left: 1.5rem; }
+  .changelog li { margin: 0.25rem 0; color: #ccc; }
+  .changelog-link { 
+    padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); 
+    text-align: center; 
+  }
+  .changelog-link a { 
+    color: var(--accent); text-decoration: none; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem; border: 1px solid rgba(136,136,136,0.3);
+    border-radius: 6px; transition: all 0.2s ease;
+  }
+  .changelog-link a:hover { 
+    background: rgba(136,136,136,0.1); border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .featured-grid {
+    column-width:320px; column-gap:16px; text-align:left; opacity:0; transition:opacity .5s ease;
+  }
+  .featured-grid.loaded { opacity:1; }
+  @media (max-width:1024px) { .featured-grid { column-width:280px; column-gap:12px; } }
+  @media (max-width:768px) { .featured-grid { column-width:240px; column-gap:10px; } }
+  @media (max-width:520px) { .featured-grid { column-width:100%; column-gap:8px; } }
+
+  .featured-card {
+    position:relative; display:inline-block; width:100%; margin:0 0 16px;
+    background:#111; border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+    opacity:0; transform:translateY(20px); transition:all .3s ease;
+  }
+  .featured-card.loaded { opacity:1; transform:translateY(0); }
+  .featured-card img { display:block; width:100%; height:auto; object-fit:cover; border-radius:inherit; transition:transform .35s ease, filter .35s ease; }
+  .featured-card:hover img { transform:scale(1.03); filter:contrast(1.08) saturate(1.08); }
+
+  .featured-info {
+    position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
+    padding:12px 16px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.9)); color:#fff;
+  }
+  .featured-title { margin:0; font:800 18px/1.25 ui-sans-serif,system-ui; letter-spacing:0.02em; }
+  .featured-meta { margin:4px 0 0; font:600 12px/1.3 ui-sans-serif,system-ui; color:rgba(255,255,255,.78); }
+  .featured-tags { margin:6px 0 0; display:flex; flex-wrap:wrap; gap:6px; }
+  .featured-tag { background:rgba(255,255,255,0.08); border-radius:999px; padding:4px 10px; font:600 10px/1 ui-sans-serif,system-ui; letter-spacing:0.12em; text-transform:uppercase; }
+  .featured-tag-category { background:rgba(255,77,109,0.2); color:rgba(255,255,255,0.95); }
+
+  .featured-empty { text-align:center; padding:80px 20px; color:rgba(255,255,255,.6); font:600 16px/1.4 ui-sans-serif,system-ui; }
+
+  .featured-error {
+    margin:30px auto; padding:24px; max-width:520px; border-radius:16px; background:rgba(255,77,109,0.08);
+    border:1px solid rgba(255,77,109,0.28); color:#fff; font:600 14px/1.5 ui-sans-serif,system-ui;
+  }
+
+
+
+  .fp-lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.92); display:none; align-items:center; justify-content:center; z-index:9999; overflow:hidden; }
+  .fp-lightbox.is-open { display:flex; }
+  .fp-dialog { position:relative; max-width:90vw; max-height:85vh; display:flex; flex-direction:column; background:transparent; outline:none; }
+  .fp-close { position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%; border:none; background:rgba(0,0,0,0.7); color:#fff; font-size:18px; cursor:pointer; transition:all .2s ease; z-index:10001; backdrop-filter:blur(4px); }
+  .fp-close:hover { background:rgba(0,0,0,0.9); transform:scale(1.1); }
+  .fp-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; flex:1; min-height:0; }
+  .fp-gallery img { display:block; max-height:70vh; width:auto; align-self:center; border-radius:12px; box-shadow:0 20px 40px rgba(0,0,0,0.55); background:#050505; scroll-snap-align:start; }
+  .fp-gallery img.loading { opacity:0.6; filter:blur(4px); }
+  .fp-gallery img.loaded { opacity:1; filter:none; transition:opacity .35s ease, filter .35s ease; }
+  .fp-hint { position:sticky; top:6px; align-self:center; background:rgba(0,0,0,0.55); color:#fff; padding:6px 10px; border-radius:999px; font:600 12px/1 ui-sans-serif,system-ui; transition:opacity .4s ease; }
+  .fp-hint.fade { opacity:0; }
+  .fp-caption { text-align:center; color:#fff; margin-top:14px; }
+  .fp-title { margin:0 0 6px; font:700 18px/1.3 ui-sans-serif,system-ui; }
+  .fp-meta { margin:0; color:rgba(255,255,255,0.7); font:500 12px/1.4 ui-sans-serif,system-ui; }
+
+  html.fp-open, body.fp-open { overflow:hidden; }
+  .header { position:relative; z-index:100; }
+  .status { position:relative; z-index:100; }
+  
+  @media (max-width:720px) {
+    .featured-subhead { margin-bottom:22px; font-size:15px; }
+    .featured-meta-bar { gap:20px; }
+    .fp-close { top:15px; right:15px; width:36px; height:36px; font-size:20px; }
+    .fp-dialog { max-width:95vw; max-height:90vh; }
+    .auto-refresh-indicator { 
+      bottom:8px; right:8px; font-size:9px; 
+      max-width:120px; text-align:center; line-height:1.2;
+    }
+    .version-indicator { 
+      bottom:32px; right:8px; font-size:9px;
+    }
+  }
+</style>
+
+<div class="featured-portfolio" id="featuredPf" data-panes="8" data-range-days="0" data-force-diverse="true">
+  <div class="featured-header">
+    <h2 class="featured-heading">Featured Highlights</h2>
+    <p class="featured-subhead">Latest additions across every portfolio collection.</p>
+  </div>
+
+  <div class="featured-meta-bar">
+    <span><strong id="metaCount">--</strong> items</span>
+    <span><strong id="metaUpdated">--</strong> updated</span>
+    <span><strong id="metaSource">--</strong> source</span>
+  </div>
+
+  <div class="featured-loading" id="featuredLoading" role="status">
+    <div class="featured-spinner" aria-hidden="true"></div>
+    Loading featured images...
+  </div>
+
+  <div class="featured-grid" id="featuredGrid" aria-live="polite"></div>
+
+  <div class="auto-refresh-indicator" id="autoRefreshIndicator" aria-hidden="true"></div>
+  <div class="version-indicator" id="versionIndicator" title="Featured Portfolio v1.5" onclick="showChangelog()">Featured v1.5</div>
+</div>
+
+<div id="changelog-modal" class="changelog-modal" onclick="event.target === this && hideChangelog()">
+  <div class="changelog-content">
+    <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+    <div class="changelog">
+      <h2>Featured Portfolio v1.5</h2>
+      <p>Enhanced journalism titles & improved masonry layout</p>
+      
+      <h3>✨ What's New</h3>
+      <ul>
+        <li>Journalism articles show proper titles (e.g., "The Rooney Rule")</li>
+        <li>Tighter masonry grid spacing for better visual density</li>
+        <li>Randomized cover images for variety on each load</li>
+        <li>Improved lightbox with repositioned close button</li>
+      </ul>
+      
+      <div class="changelog-link">
+        <a href="https://github.com/McCal-Codes/McCals-Website/blob/main/src/widgets/featured-portfolio/CHANGELOG.md" target="_blank" rel="noopener">
+          View Full Changelog on GitHub →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="fp-lightbox" id="featuredLightbox" aria-hidden="true">
+  <div class="fp-dialog" role="dialog" aria-modal="true" aria-labelledby="fpTitle" tabindex="-1">
+    <button class="fp-close" type="button" aria-label="Close">&times;</button>
+    <div class="fp-gallery" id="fpGallery">
+      <div class="fp-hint">Scroll -></div>
+    </div>
+    <div class="fp-caption">
+      <h3 class="fp-title" id="fpTitle"></h3>
+      <p class="fp-meta" id="fpMeta"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const pf = document.getElementById('featuredPf');
+  if (!pf) return;
+
+  const grid = document.getElementById('featuredGrid');
+  const loading = document.getElementById('featuredLoading');
+  const metaCount = document.getElementById('metaCount');
+  const metaUpdated = document.getElementById('metaUpdated');
+  const metaSource = document.getElementById('metaSource');
+  const versionIndicator = document.getElementById('versionIndicator');
+
+  const lb = document.getElementById('featuredLightbox');
+  const lbDialog = lb.querySelector('.fp-dialog');
+  const lbGallery = document.getElementById('fpGallery');
+  const lbTitle = document.getElementById('fpTitle');
+  const lbMeta = document.getElementById('fpMeta');
+  const lbClose = lb.querySelector('.fp-close');
+
+  const AUTO_REFRESH_INTERVAL = 15 * 60 * 1000;
+  const CACHE_TTL = 15 * 60 * 1000;
+  const CACHE_KEY_PREFIX = 'featured-portfolio-cache:v1.5:';
+  const MAX_LIGHTBOX_IMAGES = Math.max(1, parseInt(pf.dataset.lightboxLimit || '24', 10));
+  const TARGET_PANES = Math.max(1, parseInt(pf.dataset.panes || '15', 10));
+  const rangeDaysRaw = parseInt(pf.dataset.rangeDays || '0', 10);
+  const RANGE_DAYS = Number.isFinite(rangeDaysRaw) ? rangeDaysRaw : 0;
+  const FORCE_DIVERSE = (pf.dataset.forceDiverse || 'true').toLowerCase() === 'true';
+  const CARDS_STAGGER = 100;
+
+  const debugMetrics = {
+    startTime: performance.now(),
+    apiCalls: 0,
+    itemCount: 0,
+    imageCount: 0,
+    lastRefresh: 'Never',
+    manifest: '--'
+  };
+
+  let autoRefreshTimer = null;
+  let nextRefreshTimer = null;
+  let debugActive = false;
+  let isTabVisible = true;
+  let activeManifestUrl = '';
+
+  const GH = { owner: 'McCal-Codes', repo: 'McCals-Website', branch: 'main' };
+  const RAW_ROOT = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+  const PATH_PREFIX = 'src/images/Portfolios/';
+
+  const providedManifest = (pf.dataset.manifest || '').trim();
+  const manifestCandidates = [];
+  if (providedManifest) manifestCandidates.push(providedManifest);
+  manifestCandidates.push('src/images/Portfolios/featured-manifest.json');
+  manifestCandidates.push('src/images/Portfolios/portfolio-manifest.json');
+  manifestCandidates.push('src/images/Portfolios/Concert/concert-manifest.json');
+  manifestCandidates.push('src/images/Portfolios/Events/events-manifest.json');
+  manifestCandidates.push('src/images/Portfolios/Journalism/journalism-manifest.json');
+
+  const manifestSources = Array.from(new Set(manifestCandidates.filter(Boolean)));
+
+  function logDebug(message, data = null) {
+    // Production version - simplified logging
+    if (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) {
+      console.error('[Featured Portfolio v1.5]', message, data || '');
+    }
+  }
+  document.addEventListener('visibilitychange', () => {
+    isTabVisible = !document.hidden;
+  });
+
+  function cacheKey(url) {
+    return `${CACHE_KEY_PREFIX}${url}`;
+  }
+
+  function readCache(url) {
+    try {
+      const payload = localStorage.getItem(cacheKey(url));
+      if (!payload) return null;
+      const parsed = JSON.parse(payload);
+      if (!parsed || typeof parsed !== 'object') return null;
+      const age = Date.now() - parsed.timestamp;
+      if (age > CACHE_TTL) return null;
+      return parsed.manifest;
+    } catch (error) {
+      logDebug('Cache read failed', error.message);
+      return null;
+    }
+  }
+
+  function writeCache(url, manifest) {
+    try {
+      const payload = { timestamp: Date.now(), manifest };
+      localStorage.setItem(cacheKey(url), JSON.stringify(payload));
+    } catch (error) {
+      logDebug('Cache write failed', error.message);
+    }
+  }
+
+  function resolveManifestUrl(candidate) {
+    if (/^https?:/i.test(candidate)) return candidate;
+    const cleaned = candidate
+      .replace(/^(\.\.?\/)+/, '')
+      .replace(/^\.\/+/, '')
+      .replace(/^\/+/, '');
+    return RAW_ROOT + cleaned;
+  }
+
+  async function fetchManifest(url, forceRefresh = false) {
+    if (!forceRefresh) {
+      const cacheHit = readCache(url);
+      if (cacheHit) {
+        logDebug('Using cached manifest', url);
+        return cacheHit;
+      }
+    }
+
+    debugMetrics.apiCalls += 1;
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    const json = await response.json();
+    writeCache(url, json);
+    return json;
+  }
+
+  function cleanPath(value) {
+    if (!value) return '';
+    return String(value).replace(/\\+/g, '/').trim();
+  }
+
+  function canonicalizeType(value) {
+    if (!value) return 'portfolio';
+    const normalized = String(value).trim().toLowerCase();
+    if (!normalized) return 'portfolio';
+    if (['concert', 'concerts', 'music', 'music photography', 'concert photography'].includes(normalized)) return 'concert';
+    if (['event', 'events', 'event photography', 'corporate', 'events photography'].includes(normalized)) return 'events';
+    if (['journalism', 'photojournalism', 'photo journalism', 'documentary', 'journalism photography', 'politics'].includes(normalized)) return 'journalism';
+    if (['portfolio', 'work', 'projects', 'featured'].includes(normalized)) return 'portfolio';
+    return normalized;
+  }
+
+  function titleCase(value) {
+    if (!value) return '';
+    return String(value)
+      .replace(/[_-]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/\b\w/g, char => char.toUpperCase());
+  }
+
+  function ensurePrefix(parts, prefix) {
+    if (!Array.isArray(prefix) || !prefix.length) {
+      return parts.slice();
+    }
+    const prefixLower = prefix.map(seg => seg.toLowerCase());
+    const currentLower = parts.slice(0, prefix.length).map(seg => seg.toLowerCase());
+    if (currentLower.join('/') === prefixLower.join('/')) {
+      return parts.slice();
+    }
+    return prefix.concat(parts);
+  }
+
+  function resolvePathSegments(parts, item, rootSegments) {
+    let resolved = parts.slice();
+    const itemBase = cleanPath(item.basePath || item.base || item.collectionPath || item.rootPath || item.folderRoot || '');
+    if (itemBase) {
+      const baseParts = itemBase.split('/').filter(Boolean);
+      resolved = ensurePrefix(resolved, baseParts);
+    }
+    if (item.collection && typeof item.collection === 'string') {
+      const collectionParts = cleanPath(item.collection).split('/').filter(Boolean);
+      resolved = ensurePrefix(resolved, collectionParts);
+    }
+    resolved = ensurePrefix(resolved, rootSegments);
+    return resolved;
+  }
+
+  function extractRootSegments(url) {
+    try {
+      const parsed = new URL(url);
+      const segments = parsed.pathname.split('/').filter(Boolean);
+      const marker = segments.lastIndexOf('Portfolios');
+      if (marker === -1) return [];
+      return segments.slice(marker + 1, segments.length - 1);
+    } catch {
+      return [];
+    }
+  }
+
+  function normalizeImageRef(value) {
+    if (!value) return null;
+    const str = String(value).trim();
+    if (!str) return null;
+    return str.replace(/\\+/g, '/');
+  }
+
+  function normalizeImageEntries(images, cover) {
+    const list = [];
+    for (const entry of images) {
+      const ref = normalizeImageRef(
+        typeof entry === 'object'
+          ? (entry && (entry.src || entry.file || entry.filename || entry.path || entry.url))
+          : entry
+      );
+      if (ref) list.push(ref);
+    }
+    const coverRef = normalizeImageRef(cover);
+    if (coverRef) {
+      if (!list.includes(coverRef)) list.unshift(coverRef);
+    }
+    return list.slice(0, MAX_LIGHTBOX_IMAGES);
+  }
+
+  function encodeSegments(path) {
+    return path.split('/').filter(Boolean).map(seg => encodeURIComponent(seg)).join('/');
+  }
+
+  function buildImageUrl(pathSegments, imageRef) {
+    if (!imageRef) return '';
+    if (/^(https?:)?\/\//i.test(imageRef) || imageRef.startsWith('data:')) {
+      return imageRef;
+    }
+    const normalized = normalizeImageRef(imageRef);
+    if (!normalized) return '';
+    if (normalized.startsWith('src/')) {
+      return RAW_ROOT + normalized;
+    }
+    if (normalized.startsWith('images/')) {
+      return RAW_ROOT + normalized;
+    }
+    if (normalized.startsWith('Portfolios/')) {
+      return `${RAW_ROOT}src/images/${encodeSegments(normalized)}`;
+    }
+    if (normalized.startsWith('../')) {
+      const trimmed = normalized.replace(/^\.\.\/+/, '');
+      return `${RAW_ROOT}${encodeSegments(trimmed)}`;
+    }
+    if (normalized.includes('/')) {
+      return `${RAW_ROOT}${PATH_PREFIX}${encodeSegments(normalized)}`;
+    }
+    const basePath = pathSegments.map(seg => encodeURIComponent(seg)).join('/');
+    return `${RAW_ROOT}${PATH_PREFIX}${basePath}/${encodeURIComponent(normalized)}`;
+  }
+
+  function dedupeItems(items) {
+    const seen = new Set();
+    const result = [];
+    for (const item of items) {
+      const key = `${item.id || ''}|${item.folderKey}|${item.cover || ''}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      result.push(item);
+    }
+    return result;
+  }
+
+  function extractDate(entry) {
+    const dateData = entry.date || entry.datetime || entry.metaDate || null;
+    const displayCandidates = [entry.dateDisplay, entry.displayDate, entry.prettyDate, entry.dateText];
+    const isoCandidates = [];
+    if (typeof entry.dateISO === 'string') isoCandidates.push(entry.dateISO);
+    if (typeof entry.dateIso === 'string') isoCandidates.push(entry.dateIso);
+    if (typeof entry.date === 'string') isoCandidates.push(entry.date);
+    if (typeof entry.lastUpdated === 'string') isoCandidates.push(entry.lastUpdated);
+    if (typeof entry.generatedAt === 'string') isoCandidates.push(entry.generatedAt);
+    if (typeof entry.generated === 'string') isoCandidates.push(entry.generated);
+
+    if (dateData && typeof dateData === 'object') {
+      if (typeof dateData.iso === 'string') isoCandidates.push(dateData.iso);
+      if (typeof dateData.utc === 'string') isoCandidates.push(dateData.utc);
+      if (typeof dateData.value === 'string') isoCandidates.push(dateData.value);
+      if (dateData.year && dateData.month) {
+        const day = dateData.day || 1;
+        const iso = `${dateData.year}-${String(dateData.month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        isoCandidates.push(iso);
+      }
+      if (dateData.display) displayCandidates.push(dateData.display);
+      if (dateData.dateDisplay) displayCandidates.push(dateData.dateDisplay);
+      if (dateData.monthName && dateData.year) {
+        displayCandidates.push(`${dateData.monthName} ${dateData.year}`);
+      }
+    }
+
+    let iso = isoCandidates.find(Boolean) || null;
+    let value = iso ? Date.parse(iso.replace(/\//g, '-')) : NaN;
+    if (!Number.isFinite(value)) {
+      value = 0;
+      iso = null;
+    }
+    let display = displayCandidates.find(Boolean) || '';
+    if (!display && iso) {
+      try {
+        display = new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long' });
+      } catch {
+        display = iso;
+      }
+    }
+    return { iso, display, value };
+  }
+
+  function normalizeItems(manifest, rootSegments = []) {
+    const rawItems = Array.isArray(manifest?.items) ? manifest.items : [];
+    return rawItems
+      .map((item, index) => {
+        const folderPath = cleanPath(item.folderPath || item.path || item.source || '');
+        const rawParts = folderPath ? folderPath.split('/').filter(Boolean) : [];
+        const parts = rawParts.length ? rawParts : [];
+        if (!parts.length) return null;
+
+        const pathSegments = resolvePathSegments(parts, item, rootSegments);
+        if (!pathSegments.length) return null;
+
+        const rawImages = Array.isArray(item.images) ? item.images : [];
+        const coverCandidate = item.coverImage || item.cover || item.heroImage || item.thumbnail || null;
+        const images = normalizeImageEntries(rawImages, coverCandidate);
+        if (!images.length) return null;
+        
+        // Shuffle the images array to randomize the cover selection
+        const shuffledImages = [...images];
+        for (let i = shuffledImages.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]];
+        }
+
+        const { iso, display, value } = extractDate(item);
+        const id = item.id || item.slug || item.uid || `${pathSegments.join('-')}-${index}`;
+        const type = canonicalizeType(item.type || item.category || pathSegments[0] || 'portfolio');
+        const typeLabel = titleCase(type).trim();
+        
+        // Enhanced title extraction - prioritize specific names by content type
+        let title;
+        
+        // For journalism, extract the actual article title from folder path
+        if (type === 'journalism') {
+          // Path format: "Journalism/Events/The Rooney Rule" or "Journalism/Politics/Butler Protest"
+          // We want the last segment which is the actual article title
+          const folderSegments = folderPath.split('/').filter(Boolean);
+          if (folderSegments.length >= 3) {
+            // Use the last segment as the article title
+            title = folderSegments[folderSegments.length - 1];
+          } else if (folderSegments.length >= 2) {
+            // Fallback to second-to-last segment
+            title = folderSegments[folderSegments.length - 1];
+          }
+          
+          // If we still don't have a good title, try image filename
+          if (!title || title === 'Events' || title === 'Politics') {
+            const firstImage = rawImages[0];
+            if (typeof firstImage === 'string') {
+              // Extract title from filename like "250417 The Rooney Rule_CAL3148.jpg"
+              const match = firstImage.match(/^\d+\s+(.+?)_/);
+              if (match) {
+                title = match[1];
+              }
+            }
+          }
+        }
+        
+        // For other types, use standard fields
+        if (!title) {
+          const titleCandidates = [
+            item.title,
+            item.name,
+            item.eventName,
+            item.bandName,
+            item.articleTitle,
+            item.headline
+          ].filter(Boolean);
+          
+          if (titleCandidates.length > 0) {
+            title = titleCandidates[0];
+          } else {
+            // Fallback to folder name or path segment
+            title = pathSegments[pathSegments.length - 1] || `Item ${index + 1}`;
+          }
+        }
+        
+        // Clean the title
+        title = String(title).replace(/\s+/g, ' ').trim();
+        
+        // If title is still generic or matches type, try harder
+        if (title === type || title === typeLabel || 
+            title === 'Events' || title === 'Politics' || title === 'Journalism' ||
+            title === 'Concert' || title === 'Event') {
+          
+          // Try other fields or use folder name
+          title = item.eventName || item.name || item.id || 
+                  pathSegments[pathSegments.length - 1] || 
+                  `${typeLabel} ${index + 1}`;
+        }
+
+        // Get tags and handle journalism vs other types differently
+        let tags = Array.isArray(item.tags) ? item.tags.filter(Boolean) : [];
+        let primaryTag;
+        if (type === 'journalism') {
+          primaryTag = 'Journalism';
+        } else {
+          primaryTag = item.category || `${typeLabel} Photography`;
+        }
+        
+        if (!tags.includes(primaryTag) && !tags.some(tag => tag.toLowerCase().includes(typeLabel.toLowerCase()))) {
+          tags.unshift(primaryTag);
+        }
+        
+        const sourceLabel = titleCase(
+          item.collection || item.collectionName || item.source || pathSegments[0] || typeLabel || 'Portfolio'
+        );
+
+        // Clean up date display
+        let cleanDateDisplay = display ? String(display).replace(/\s+/g, ' ').replace(/undefined\s*/g, '').replace(/^\s+|\s+$/g, '') : '';
+        if (!cleanDateDisplay && iso) {
+          try {
+            cleanDateDisplay = new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long' });
+          } catch {
+            cleanDateDisplay = iso;
+          }
+        }
+
+        return {
+          id,
+          title,
+          type,
+          typeLabel,
+          source: sourceLabel,
+          pathSegments,
+          folderKey: pathSegments.join('/'),
+          dateDisplay: cleanDateDisplay,
+          dateValue: value,
+          isoDate: iso,
+          cover: shuffledImages[0], // Use first image from shuffled array
+          images: shuffledImages,   // Use shuffled order for lightbox too
+          tags: tags.slice(0, 4)
+        };
+      })
+      .filter(Boolean);
+  }
+
+  function applyRangeFilter(items) {
+    if (!Number.isFinite(RANGE_DAYS) || RANGE_DAYS <= 0) {
+      logDebug('Range filter disabled - showing all items');
+      return items;
+    }
+    
+    const cutoff = Date.now() - RANGE_DAYS * 24 * 60 * 60 * 1000;
+    const filtered = items.filter(item => item.dateValue >= cutoff);
+    logDebug(`Range filter: ${items.length} items -> ${filtered.length} items after filtering`);
+    
+    return filtered.length ? filtered : items;
+  }
+
+  function ensureDiverseSelection(items, targetCount) {
+    if (items.length <= targetCount) return items;
+    
+    const byType = {};
+    items.forEach(item => {
+      const type = canonicalizeType(item.type);
+      if (!byType[type]) byType[type] = [];
+      byType[type].push(item);
+    });
+    
+    const types = Object.keys(byType);
+    const itemsPerType = Math.floor(targetCount / types.length);
+    const remainder = targetCount % types.length;
+    
+    logDebug(`Diverse selection: ${types.length} types, ${itemsPerType} items per type, ${remainder} remainder`);
+    
+    const selected = [];
+    types.forEach((type, index) => {
+      const typeItems = byType[type].sort((a, b) => b.dateValue - a.dateValue);
+      const limit = itemsPerType + (index < remainder ? 1 : 0);
+      selected.push(...typeItems.slice(0, limit));
+      logDebug(`Type "${type}": ${typeItems.length} available, selected ${Math.min(limit, typeItems.length)}`);
+    });
+    
+    return selected.sort((a, b) => b.dateValue - a.dateValue);
+  }
+
+  async function loadAndRender(forceRefresh = false) {
+    try {
+      debugMetrics.lastRefresh = new Date().toLocaleTimeString();
+      logDebug('Loading featured portfolio...', { forceRefresh, sources: manifestSources.length });
+
+      let manifest = null;
+      let usedUrl = '';
+      
+      for (const candidate of manifestSources) {
+        try {
+          const url = resolveManifestUrl(candidate);
+          logDebug(`Trying manifest: ${candidate} -> ${url}`);
+          manifest = await fetchManifest(url, forceRefresh);
+          usedUrl = candidate;
+          break;
+        } catch (error) {
+          logDebug(`Manifest failed: ${candidate}`, error.message);
+          console.warn(`Failed to load manifest ${candidate}:`, error.message);
+        }
+      }
+
+      if (!manifest) {
+        throw new Error('No valid manifest found');
+      }
+
+      activeManifestUrl = usedUrl;
+      debugMetrics.manifest = usedUrl.split('/').pop() || usedUrl;
+      logDebug('Manifest loaded successfully', usedUrl);
+
+      const rootSegments = extractRootSegments(resolveManifestUrl(usedUrl));
+      const allItems = normalizeItems(manifest, rootSegments);
+      
+      logDebug(`Normalized ${allItems.length} items from manifest`);
+      
+      const rangeFiltered = applyRangeFilter(allItems);
+      logDebug(`After range filter: ${rangeFiltered.length} items`);
+      
+      let selectedItems;
+      if (FORCE_DIVERSE && rangeFiltered.length > TARGET_PANES) {
+        selectedItems = ensureDiverseSelection(rangeFiltered, TARGET_PANES);
+        logDebug(`After diverse selection: ${selectedItems.length} items`);
+      } else {
+        selectedItems = rangeFiltered
+          .sort((a, b) => b.dateValue - a.dateValue)
+          .slice(0, TARGET_PANES);
+        logDebug(`After simple selection: ${selectedItems.length} items`);
+      }
+
+      const uniqueItems = dedupeItems(selectedItems);
+      logDebug(`After deduplication: ${uniqueItems.length} items`);
+
+      debugMetrics.itemCount = uniqueItems.length;
+      debugMetrics.imageCount = uniqueItems.reduce((sum, item) => sum + (item.images?.length || 0), 0);
+
+      renderGallery(uniqueItems);
+      
+      const typeDistribution = {};
+      uniqueItems.forEach(item => {
+        typeDistribution[item.type] = (typeDistribution[item.type] || 0) + 1;
+      });
+      logDebug('Type distribution:', typeDistribution);
+
+    } catch (error) {
+      console.error('Featured portfolio loading failed:', error);
+      showError(`Failed to load featured portfolio: ${error.message}`);
+    }
+  }
+
+  function showError(message) {
+    loading.style.display = 'none';
+    grid.innerHTML = `<div class="featured-error" role="alert">${message}</div>`;
+    metaCount.textContent = '0';
+    metaUpdated.textContent = 'Failed';
+    metaSource.textContent = 'Error';
+  }
+
+  function renderGallery(slots) {
+    try {
+      loading.style.display = 'none';
+      grid.innerHTML = '';
+      grid.classList.remove('loaded');
+
+      if (!slots.length) {
+        grid.innerHTML = '<div class="featured-empty">No featured items available.</div>';
+        return;
+      }
+
+      metaCount.textContent = slots.length;
+      metaUpdated.textContent = new Date().toLocaleDateString();
+      metaSource.textContent = debugMetrics.manifest;
+
+      const fragment = document.createDocumentFragment();
+      const cards = [];
+
+      slots.forEach((slot, index) => {
+        const card = document.createElement('article');
+        card.className = 'featured-card loading';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `View ${slot.title} gallery`);
+
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = slot.title;
+
+        const info = document.createElement('div');
+        info.className = 'featured-info';
+        
+        const title = document.createElement('h3');
+        title.className = 'featured-title';
+        title.textContent = slot.title;
+        
+        const meta = document.createElement('div');
+        meta.className = 'featured-meta';
+        
+        // For journalism, show just "Journalism", for others show full typeLabel
+        const displayType = slot.type === 'journalism' ? 'Journalism' : slot.typeLabel;
+        const metaParts = [displayType, slot.dateDisplay]
+          .filter(Boolean)
+          .map(part => String(part).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''));
+        meta.textContent = metaParts.join(' | ');
+        
+        info.appendChild(title);
+        info.appendChild(meta);
+        
+        // Always show tags
+        const tags = document.createElement('div');
+        tags.className = 'featured-tags';
+        
+        if (slot.tags && slot.tags.length > 0) {
+          slot.tags.slice(0, 3).forEach((tag, tagIndex) => {
+            const tagEl = document.createElement('span');
+            tagEl.className = tagIndex === 0 ? 'featured-tag featured-tag-category' : 'featured-tag';
+            tagEl.textContent = String(tag).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+            tags.appendChild(tagEl);
+          });
+        } else {
+          // Fallback tag based on type
+          const fallbackTag = slot.type === 'journalism' ? 'Journalism' : slot.typeLabel;
+          const tagEl = document.createElement('span');
+          tagEl.className = 'featured-tag featured-tag-category';
+          tagEl.textContent = fallbackTag;
+          tags.appendChild(tagEl);
+        }
+        
+        info.appendChild(tags);
+
+        card.appendChild(img);
+        card.appendChild(info);
+        fragment.appendChild(card);
+
+        cards.push({ card, slot, img, index });
+
+        const openLightbox = () => openLightboxFor(slot);
+        card.addEventListener('click', openLightbox);
+        card.addEventListener('keydown', evt => {
+          if (evt.key === 'Enter' || evt.key === ' ') {
+            evt.preventDefault();
+            openLightbox();
+          }
+        });
+      });
+
+      grid.appendChild(fragment);
+      grid.style.display = 'block';
+
+      cards.forEach(({ card, slot, img, index }) => {
+        setTimeout(() => loadCardImage({ card, slot, img }), index * CARDS_STAGGER);
+      });
+
+      requestAnimationFrame(() => {
+        grid.classList.add('loaded');
+      });
+
+      logDebug('Featured gallery loaded', `${slots.length} items from ${debugMetrics.manifest}`);
+    } catch (error) {
+      console.error('Featured gallery failed:', error);
+      showError(`Error loading featured gallery: ${error.message}`);
+    }
+  }
+
+  async function loadCardImage({ card, slot, img }) {
+    try {
+      const coverRef = slot.cover || slot.images[0];
+      const src = buildImageUrl(slot.pathSegments, coverRef);
+      await loadImageWithRetry(img, src, 2);
+      card.classList.remove('loading');
+      card.classList.add('loaded');
+    } catch (error) {
+      console.warn(`Failed to load image for ${slot.title}:`, error);
+      card.classList.remove('loading');
+      card.classList.add('error');
+    }
+  }
+
+  function loadImageWithRetry(img, src, maxRetries = 2) {
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+      const attempt = () => {
+        const probe = new Image();
+        probe.onload = () => {
+          img.src = src;
+          img.classList.add('loaded');
+          resolve();
+        };
+        probe.onerror = () => {
+          attempts += 1;
+          if (attempts > maxRetries) {
+            reject(new Error('Image failed to load'));
+          } else {
+            const backoff = Math.pow(2, attempts) * 1000;
+            setTimeout(attempt, backoff);
+          }
+        };
+        probe.src = src;
+      };
+      attempt();
+    });
+  }
+
+  function openLightboxFor(slot) {
+    lbGallery.innerHTML = '<div class="fp-hint">Scroll -></div>';
+
+    slot.images.forEach(fileName => {
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.alt = `${slot.title} photo`;
+      img.className = 'loading';
+      img.src = buildImageUrl(slot.pathSegments, fileName);
+      img.addEventListener('load', () => {
+        img.classList.remove('loading');
+        img.classList.add('loaded');
+      });
+      lbGallery.appendChild(img);
+    });
+
+    lbTitle.textContent = slot.title;
+    const metaBits = [
+      slot.typeLabel,
+      slot.dateDisplay,
+      `${slot.images.length} photo${slot.images.length === 1 ? '' : 's'}`
+    ].filter(Boolean);
+    lbMeta.textContent = metaBits.join(' | ');
+
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('fp-open');
+    document.body.classList.add('fp-open');
+    lbDialog.focus();
+
+    const hint = lbGallery.querySelector('.fp-hint');
+    if (hint && slot.images.length > 1) {
+      setTimeout(() => hint.classList.add('fade'), 3000);
+    }
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('fp-open');
+    document.body.classList.remove('fp-open');
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', evt => {
+    if (evt.target === lb) closeLightbox();
+  });
+  document.addEventListener('keydown', evt => {
+    if (evt.key === 'Escape' && lb.classList.contains('is-open')) {
+      evt.preventDefault();
+      closeLightbox();
+    }
+  });
+
+  function updateDebugMetrics() {
+    // Debug metrics tracking (UI removed for production)
+  }
+
+  function updateNextRefreshIndicator() {
+    const indicator = document.getElementById('autoRefreshIndicator');
+    if (!indicator) return;
+
+    let timeLeft = AUTO_REFRESH_INTERVAL;
+    function tick() {
+      const minutes = Math.floor(timeLeft / 60000);
+      const seconds = Math.floor((timeLeft % 60000) / 1000);
+      indicator.textContent = `Next refresh: ${minutes}:${String(seconds).padStart(2, '0')}`;
+      if (timeLeft > 0) {
+        timeLeft -= 1000;
+        nextRefreshTimer = setTimeout(tick, 1000);
+      }
+    }
+    tick();
+  }
+
+  function setupAutoRefresh() {
+    if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+    autoRefreshTimer = setInterval(() => {
+      if (isTabVisible) {
+        debugMetrics.startTime = performance.now();
+        loadAndRender(true);
+        updateNextRefreshIndicator();
+      }
+    }, AUTO_REFRESH_INTERVAL);
+    updateNextRefreshIndicator();
+  }
+
+  // Changelog modal functions
+  function showChangelog() {
+    const modal = document.getElementById('changelog-modal');
+    if (modal) {
+      modal.style.display = 'block';
+    }
+  }
+  
+  function hideChangelog() {
+    const modal = document.getElementById('changelog-modal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  // Make functions global for onclick handlers
+  window.showChangelog = showChangelog;
+  window.hideChangelog = hideChangelog;
+
+  versionIndicator.addEventListener('click', showChangelog);
+
+  loadAndRender();
+  setupAutoRefresh();
+
+  window.addEventListener('beforeunload', () => {
+    if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+    if (nextRefreshTimer) clearTimeout(nextRefreshTimer);
+  });
+})();
+</script>
