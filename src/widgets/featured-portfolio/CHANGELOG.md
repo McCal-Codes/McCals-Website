@@ -1,4 +1,15 @@
-# Featured Portfolio Widget Changelog
+# Featured Portfolio### Follow-up Tasks
+- ✅ Created scripts/generate-featured-manifest.js for automated featured manifest generation
+- Backfill existing portfolio manifests with cover image references for lightbox quality
+- Validate image paths across Concert, Events, Journalism, and future collections
+- Add featured manifest generation to CI/CD pipelineget Changelog
+
+## v1.2.0 - 2025-10-03
+- Enhanced debug information with console logging for better troubleshooting
+- Improved error handling and reporting for manifest loading failures
+- Added console logging to track manifest loading process
+- Fixed Unicode characters in debug messages
+- Generated featured-manifest.json now available via scripts/generate-featured-manifest.js
 
 ## v1.1.0 - 2025-10-03
 - Hardened manifest selection order so aggregate feeds load reliably even without a dedicated featured manifest.
