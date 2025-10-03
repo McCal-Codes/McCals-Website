@@ -1,7 +1,7 @@
 {
   "version": "2.5.3",
   "generated": "2025-10-03",
-  "totalEvents": 6,
+  "totalEvents": 7,
   "events": [
     {
       "eventName": "CMU Business Graduation",
@@ -241,6 +241,35 @@
         }
       ],
       "totalImages": 31
+    },
+    {
+      "eventName": "Franks Script Reading",
+      "category": "Corporate",
+      "dateDisplay": "Oct 2025",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7377-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7391-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7394-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7423-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7461-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7462-min.jpg"
+        }
+      ],
+      "totalImages": 7
     },
     {
       "eventName": "Product Launch Expo 2025",
