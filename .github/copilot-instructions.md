@@ -82,5 +82,6 @@ Change management
 
 Recent updates
 
+- 2025-10-03T07:08:00.400Z — Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging
 - 2025-10-03T06:29:14.357Z — Validation: preflight/guardian/canvas/codex added and tasks wired
 - Entries below are appended by the AI finalize script to record what the last agent session changed.
