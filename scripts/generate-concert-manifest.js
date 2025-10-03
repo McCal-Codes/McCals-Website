@@ -12,6 +12,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const { detectDateFromFilename, detectDateFromImages, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing.js');
 
 const CONCERT_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Concert');
 const MANIFEST_OUTPUT = path.join(CONCERT_BASE, 'concert-manifest.json');
@@ -23,24 +24,7 @@ const MONTHS = [
 
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 
-// Date detection patterns (same as the folder organizer)
-const DATE_PATTERNS = {
-  // DDMMYY format: 13-01-24, 13_01_24, 130124
-  ddmmyy_dash: { pattern: /(\d{2})[\-_](\d{2})[\-_](\d{2})/, parse: (m) => ({ day: +m[1], month: +m[2], year: 2000 + (+m[3]) }) },
-  ddmmyy_solid: { pattern: /(\d{2})(\d{2})(\d{2})(?![\d])/, parse: (m) => ({ day: +m[1], month: +m[2], year: 2000 + (+m[3]) }) },
-  
-  // YYMMDD format: 250829, 25-08-29
-  yymmdd_dash: { pattern: /(\d{2})[\-_](\d{2})[\-_](\d{2})/, parse: (m) => ({ year: 2000 + (+m[1]), month: +m[2], day: +m[3] }) },
-  yymmdd_solid: { pattern: /(\d{2})(\d{2})(\d{2})(?![\d])/, parse: (m) => ({ year: 2000 + (+m[1]), month: +m[2], day: +m[3] }) },
-  
-  // YYYYMMDD format: 20241213, 2024-12-13
-  yyyymmdd_dash: { pattern: /(\d{4})[\-_](\d{2})[\-_](\d{2})/, parse: (m) => ({ year: +m[1], month: +m[2], day: +m[3] }) },
-  yyyymmdd_solid: { pattern: /(\d{4})(\d{2})(\d{2})(?![\d])/, parse: (m) => ({ year: +m[1], month: +m[2], day: +m[3] }) },
-
-  // DDMMYYYY format: 13122024, 13-12-2024
-  ddmmyyyy_dash: { pattern: /(\d{2})[\-_](\d{2})[\-_](\d{4})/, parse: (m) => ({ day: +m[1], month: +m[2], year: +m[3] }) },
-  ddmmyyyy_solid: { pattern: /(\d{2})(\d{2})(\d{4})(?![\d])/, parse: (m) => ({ day: +m[1], month: +m[2], year: +m[3] }) }
-};
+// Date parsing functions moved to shared-date-parsing.js module
 
 async function log(message, ...args) {
   console.log(`🎸 ${message}`, ...args);
@@ -97,34 +81,8 @@ function isValidDate(day, month, year) {
          date.getDate() === day;
 }
 
-function detectDateFromFilename(filename) {
-  for (const [patternName, { pattern, parse }] of Object.entries(DATE_PATTERNS)) {
-    const match = filename.match(pattern);
-    if (match) {
-      const dateInfo = parse(match);
-      
-      if (isValidDate(dateInfo.day, dateInfo.month, dateInfo.year)) {
-        return {
-          ...dateInfo,
-          monthName: MONTHS[dateInfo.month - 1],
-          iso: `${dateInfo.year}-${String(dateInfo.month).padStart(2, '0')}-${String(dateInfo.day).padStart(2, '0')}`,
-          source: patternName
-        };
-      }
-    }
-  }
-  return null;
-}
-
-function detectDateFromImages(imageFiles) {
-  for (const filename of imageFiles) {
-    const date = detectDateFromFilename(filename);
-    if (date) {
-      return date;
-    }
-  }
-  return null;
-}
+// Date detection functions moved to shared-date-parsing.js module
+// Use detectDateFromFilename() and detectDateFromImages() from shared module
 
 function getDateDisplayFromFolder(folderName) {
   // Try to extract "Month Year" from folder name

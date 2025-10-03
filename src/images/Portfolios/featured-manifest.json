@@ -1,10 +1,10 @@
 {
   "version": "1.0",
   "type": "featured",
-  "generated": "2025-10-03T07:04:28.269Z",
+  "generated": "2025-10-03T07:24:51.122Z",
   "source": "portfolio-manifest.json",
   "totalItems": 10,
-  "totalImages": 107,
+  "totalImages": 97,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -146,14 +146,15 @@
       "category": "Event Photography",
       "name": "Product Launch Expo 2025",
       "folderPath": "Events/Product-Launch-Expo-2025",
-      "dateDisplay": "June 2020",
+      "dateDisplay": "June 2025",
       "date": {
-        "day": 25,
+        "year": 2025,
         "month": 6,
-        "year": 2020,
+        "day": 20,
         "monthName": "June",
-        "iso": "2020-06-25",
-        "source": "ddmmyy_solid"
+        "iso": "2025-06-20",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
       },
       "totalImages": 2,
       "images": [
@@ -165,129 +166,19 @@
       "title": "Product Launch Expo 2025"
     },
     {
-      "type": "Journalism",
-      "category": "Journalism",
-      "name": "Events",
-      "folderPath": "Journalism/Events/The Rooney Rule",
-      "dateDisplay": "April 2017",
-      "date": {
-        "day": 25,
-        "month": 4,
-        "year": 2017,
-        "monthName": "April",
-        "iso": "2017-04-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 1,
-      "images": [
-        "250417 The Rooney Rule_CAL3148.jpg"
-      ],
-      "coverImage": "250417 The Rooney Rule_CAL3148.jpg",
-      "id": "Events",
-      "title": "Events"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Pennsylvania Media Awards 24",
-      "folderPath": "Events/pennsylvania-media-awards-24",
-      "dateDisplay": "April 2016",
-      "date": {
-        "day": 24,
-        "month": 4,
-        "year": 2016,
-        "monthName": "April",
-        "iso": "2016-04-24",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 13,
-      "images": [
-        "240416-pennsylvania-media-awards-892-published.jpg",
-        "240416-pennsylvania-media-awards-893-published.jpg",
-        "240416-pennsylvania-media-awards-894-published.jpg",
-        "240416-pennsylvania-media-awards-895-published.jpg",
-        "240416-pennsylvania-media-awards-896-published.jpg",
-        "240416-pennsylvania-media-awards-897-published.jpg",
-        "240416-pennsylvania-media-awards-898-published.jpg",
-        "240416-pennsylvania-media-awards-899-published.jpg",
-        "240416-pennsylvania-media-awards-902-published.jpg",
-        "240416-pennsylvania-media-awards-903-published.jpg",
-        "240416-pennsylvania-media-awards-906-published.jpg",
-        "240416-pennsylvania-media-awards-907-published.jpg",
-        "240416-pennsylvania-media-awards-980-published.jpg"
-      ],
-      "coverImage": "240416-pennsylvania-media-awards-892-published.jpg",
-      "id": "Pennsylvania Media Awards 24",
-      "title": "Pennsylvania Media Awards 24"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Corporate Summit 2025",
-      "folderPath": "Events/Corporate-Summit-2025",
-      "dateDisplay": "March 2015",
-      "date": {
-        "day": 25,
-        "month": 3,
-        "year": 2015,
-        "monthName": "March",
-        "iso": "2015-03-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 2,
-      "images": [
-        "250315_Corporate_Summit_Keynote.jpg",
-        "250315_Corporate_Summit_Panel.jpg"
-      ],
-      "coverImage": "250315_Corporate_Summit_Keynote.jpg",
-      "id": "Corporate Summit 2025",
-      "title": "Corporate Summit 2025"
-    },
-    {
-      "type": "Journalism",
-      "category": "Journalism",
-      "name": "Politics",
-      "folderPath": "Journalism/Politics/Butler Protest",
-      "dateDisplay": "March 2015",
-      "date": {
-        "day": 25,
-        "month": 3,
-        "year": 2015,
-        "monthName": "March",
-        "iso": "2015-03-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 11,
-      "images": [
-        "250315_Butler Democracy Protest_CAL9640-min.jpg",
-        "250315_Butler Democracy Protest_CAL9666-min.jpg",
-        "250315_Butler Democracy Protest_CAL9674-min.jpg",
-        "250315_Butler Democracy Protest_CAL9703-min.jpg",
-        "250315_Butler Democracy Protest_CAL9709-min.jpg",
-        "250315_Butler Democracy Protest_CAL9717-min.jpg",
-        "250315_Butler Democracy Protest_CAL9739-min.jpg",
-        "250315_Butler Democracy Protest_CAL9759-min.jpg",
-        "250315_Butler Democracy Protest_CAL9773-min.jpg",
-        "250315_Butler Democracy Protest_CAL9825-min.jpg",
-        "250315_Butler Democracy Protest_CAL9832-min.jpg"
-      ],
-      "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-      "id": "Politics",
-      "title": "Politics"
-    },
-    {
       "type": "Events",
       "category": "Event Photography",
       "name": "CMU Business Graduation",
       "folderPath": "Events/CMU-Business-Graduation",
-      "dateDisplay": "May 2011",
+      "dateDisplay": "May 2025",
       "date": {
-        "day": 25,
+        "year": 2025,
         "month": 5,
-        "year": 2011,
+        "day": 11,
         "monthName": "May",
-        "iso": "2011-05-25",
-        "source": "ddmmyy_solid"
+        "iso": "2025-05-11",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
       },
       "totalImages": 33,
       "images": [
@@ -328,6 +219,111 @@
       "coverImage": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
       "id": "CMU Business Graduation",
       "title": "CMU Business Graduation"
+    },
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Events",
+      "folderPath": "Journalism/Events/The Rooney Rule",
+      "dateDisplay": "April 2025",
+      "date": {
+        "year": 2025,
+        "month": 4,
+        "day": 17,
+        "monthName": "April",
+        "iso": "2025-04-17",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 1,
+      "images": [
+        "250417 The Rooney Rule_CAL3148.jpg"
+      ],
+      "coverImage": "250417 The Rooney Rule_CAL3148.jpg",
+      "id": "Events",
+      "title": "Events"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Corporate Summit 2025",
+      "folderPath": "Events/Corporate-Summit-2025",
+      "dateDisplay": "March 2025",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 15,
+        "monthName": "March",
+        "iso": "2025-03-15",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 2,
+      "images": [
+        "250315_Corporate_Summit_Keynote.jpg",
+        "250315_Corporate_Summit_Panel.jpg"
+      ],
+      "coverImage": "250315_Corporate_Summit_Keynote.jpg",
+      "id": "Corporate Summit 2025",
+      "title": "Corporate Summit 2025"
+    },
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Politics",
+      "folderPath": "Journalism/Politics/Butler Protest",
+      "dateDisplay": "March 2025",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 15,
+        "monthName": "March",
+        "iso": "2025-03-15",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 11,
+      "images": [
+        "250315_Butler Democracy Protest_CAL9640-min.jpg",
+        "250315_Butler Democracy Protest_CAL9666-min.jpg",
+        "250315_Butler Democracy Protest_CAL9674-min.jpg",
+        "250315_Butler Democracy Protest_CAL9703-min.jpg",
+        "250315_Butler Democracy Protest_CAL9709-min.jpg",
+        "250315_Butler Democracy Protest_CAL9717-min.jpg",
+        "250315_Butler Democracy Protest_CAL9739-min.jpg",
+        "250315_Butler Democracy Protest_CAL9759-min.jpg",
+        "250315_Butler Democracy Protest_CAL9773-min.jpg",
+        "250315_Butler Democracy Protest_CAL9825-min.jpg",
+        "250315_Butler Democracy Protest_CAL9832-min.jpg"
+      ],
+      "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+      "id": "Politics",
+      "title": "Politics"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Charity Gala 2024",
+      "folderPath": "Events/Charity-Gala-2024",
+      "dateDisplay": "November 2024",
+      "date": {
+        "year": 2024,
+        "month": 11,
+        "day": 5,
+        "monthName": "November",
+        "iso": "2024-11-05",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 3,
+      "images": [
+        "241105_Charity_Gala_Auction.jpg",
+        "241105_Charity_Gala_Ballroom.jpg",
+        "241105_Charity_Gala_Red_Carpet.jpg"
+      ],
+      "coverImage": "241105_Charity_Gala_Auction.jpg",
+      "id": "Charity Gala 2024",
+      "title": "Charity Gala 2024"
     }
   ]
 }
