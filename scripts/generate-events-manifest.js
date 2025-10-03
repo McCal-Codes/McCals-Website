@@ -9,6 +9,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const { detectDateFromFilename, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing.js');
 
 const EVENTS_DIR = path.join(__dirname, '../src/images/Portfolios/Events');
 const MANIFEST_PATH = path.join(EVENTS_DIR, 'events-manifest.json');
@@ -27,40 +28,7 @@ function cleanTitle(name) {
     .replace(/\b\w/g, letter => letter.toUpperCase());
 }
 
-function extractDateFromFilename(filename) {
-  const patterns = [
-    /(\d{6})_/, // 241105_EventName_
-    /(\d{6})-/, // 241105-EventName-
-    /^(\d{6})/ // 241105EventName
-  ];
-
-  for (const pattern of patterns) {
-    const match = filename.match(pattern);
-    if (!match) continue;
-
-    const value = match[1];
-    const year = 2000 + parseInt(value.substring(0, 2), 10);
-    const month = parseInt(value.substring(2, 4), 10);
-    const day = parseInt(value.substring(4, 6), 10);
-
-    const date = new Date(Date.UTC(year, month - 1, day));
-    if (date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day) {
-      return date.toISOString().split('T')[0];
-    }
-  }
-
-  return null;
-}
-
-function formatDisplayDate(iso) {
-  if (!iso) return 'Date TBD';
-  const date = new Date(iso);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-}
+// Date parsing functions moved to shared-date-parsing.js module
 
 async function ensureEventsDirExists() {
   try {
@@ -92,16 +60,17 @@ async function collectEventData() {
     let eventDateSource = null;
 
     for (const filename of imageFiles) {
-      const extracted = extractDateFromFilename(filename);
-      if (extracted) {
-        eventDateIso = extracted;
+      const dateResult = detectDateFromFilename(filename);
+      if (dateResult) {
+        eventDateIso = dateResult.iso;
         eventDateSource = 'filename_extraction';
         break;
       }
     }
 
     if (!eventDateIso) {
-      eventDateIso = new Date().toISOString().split('T')[0];
+      const fallbackDate = createFallbackDate();
+      eventDateIso = fallbackDate.iso;
       eventDateSource = 'fallback_current_date';
     }
 

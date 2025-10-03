@@ -19,6 +19,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { execSync } = require('child_process');
+const { detectDateFromFilename, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing.js');
 
 // Configuration
 const JOURNALISM_DIR = path.join(__dirname, '../src/images/Portfolios/Journalism');
@@ -36,27 +37,27 @@ const FORCE_OVERWRITE = args.includes('--force');
  */
 async function main() {
   try {
-    console.log('🔍 Journalism Portfolio Master Manifest Generator v2.0');
-    console.log(`📁 Scanning: ${JOURNALISM_DIR}`);
+    console.log('🔍 Journalism Portfolio Master Manifest Generator v2.0 - generate-journalism-manifest.js:40');
+    console.log(`📁 Scanning: ${JOURNALISM_DIR} - generate-journalism-manifest.js:41`);
     
     // Check if journalism directory exists
     if (!await exists(JOURNALISM_DIR)) {
-      console.error(`❌ Journalism directory not found: ${JOURNALISM_DIR}`);
+      console.error(`❌ Journalism directory not found: ${JOURNALISM_DIR} - generate-journalism-manifest.js:45`);
       process.exit(1);
     }
     
     // Check if master manifest already exists
     if (await exists(MASTER_MANIFEST) && !FORCE_OVERWRITE) {
-      console.log('📄 Master manifest already exists. Use --force to overwrite.');
+      console.log('📄 Master manifest already exists. Use force to overwrite. - generate-journalism-manifest.js:51');
       process.exit(0);
     }
     
     // Discover all journalism images
     const images = await discoverImages(JOURNALISM_DIR);
-    console.log(`📸 Found ${images.length} journalism images`);
+    console.log(`📸 Found ${images.length} journalism images - generate-journalism-manifest.js:57`);
     
     if (images.length === 0) {
-      console.log('⚠️  No images found in journalism directory');
+      console.log('⚠️  No images found in journalism directory - generate-journalism-manifest.js:60');
       process.exit(0);
     }
     
@@ -66,14 +67,14 @@ async function main() {
       try {
         const content = await fs.readFile(INDIVIDUAL_MANIFEST, 'utf-8');
         individualManifest = JSON.parse(content);
-        console.log('📋 Loaded existing individual manifest data');
+        console.log('📋 Loaded existing individual manifest data - generate-journalism-manifest.js:70');
       } catch (error) {
-        console.warn('⚠️  Could not parse individual manifest');
+        console.warn('⚠️  Could not parse individual manifest - generate-journalism-manifest.js:72');
       }
     }
     
     // Process and organize images by events (like concert bands/venues)
-    console.log('🏠️  Processing images by events...');
+    console.log('🏠️  Processing images by events... - generate-journalism-manifest.js:77');
     const eventMap = new Map();
     const categoryStats = {};
     const seenFilenames = new Set(); // Track filenames to prevent duplicates
@@ -91,7 +92,7 @@ async function main() {
       
       // Skip duplicates based on normalized filename (ignore path differences and variants)
       if (seenFilenames.has(normalizedFilename)) {
-        console.log(`   ⚠️  Skipping duplicate/variant: ${image.filename}`);
+        console.log(`⚠️  Skipping duplicate/variant: ${image.filename} - generate-journalism-manifest.js:95`);
         continue;
       }
       seenFilenames.add(normalizedFilename);
@@ -115,12 +116,16 @@ async function main() {
       // Override with published status if applicable
       const finalCategory = existing.published ? 'Published' : category;
       
+      // Extract date from filename using shared date parsing
+      const dateResult = detectDateFromFilename(image.filename);
+      const imageDate = dateResult ? dateResult.iso : createFallbackDate().iso;
+      
       // Create processed image entry
       const processedImage = {
         filename: image.filename,
         path: image.relativePath,
         category: finalCategory,
-        date: existing.date || extractDateFromFilename(image.filename) || new Date().toISOString(),
+        date: existing.date || imageDate,
         caption: existing.caption || `${eventName} - ${finalCategory} photography`,
         description: existing.description || '',
         published: existing.published || false,
@@ -136,17 +141,17 @@ async function main() {
       
       // Group by event name
       if (!eventMap.has(eventName)) {
+        // Use the date from the first image in the event for event dating
+        const eventDateResult = detectDateFromFilename(image.filename);
+        const eventDateData = eventDateResult || createFallbackDate();
+        
         eventMap.set(eventName, {
           eventName: eventName,
           category: finalCategory,
           folderPath: pathParts.length >= 3 ? `${category}/${eventName}` : (image.folderName || category),
-          dateDisplay: new Date(processedImage.date).toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          }),
+          dateDisplay: formatDisplayDate(eventDateData),
           eventDate: {
-            iso: processedImage.date.split('T')[0],
+            iso: eventDateData.iso,
             source: 'filename_extraction'
           },
           totalImages: 0,
@@ -169,7 +174,7 @@ async function main() {
       // Update category stats
       categoryStats[finalCategory] = (categoryStats[finalCategory] || 0) + 1;
       
-      console.log(`   ✓ ${eventName} (${finalCategory}): ${image.filename}`);
+      console.log(`✓ ${eventName} (${finalCategory}): ${image.filename} - generate-journalism-manifest.js:177`);
     }
     
     // Convert to array and sort by date (newest first)
@@ -191,31 +196,31 @@ async function main() {
     const manifestJson = JSON.stringify(masterManifest, null, 2);
     await fs.writeFile(MASTER_MANIFEST, manifestJson, 'utf-8');
     
-    console.log(`\n✅ Master manifest generated successfully!`);
-    console.log(`📄 File: ${MASTER_MANIFEST}`);
-    console.log(`📊 Total events: ${masterManifest.totalEvents}`);
-    console.log(`📊 Total images: ${masterManifest.totalImages}`);
+    console.log(`\n✅ Master manifest generated successfully! - generate-journalism-manifest.js:199`);
+    console.log(`📄 File: ${MASTER_MANIFEST} - generate-journalism-manifest.js:200`);
+    console.log(`📊 Total events: ${masterManifest.totalEvents} - generate-journalism-manifest.js:201`);
+    console.log(`📊 Total images: ${masterManifest.totalImages} - generate-journalism-manifest.js:202`);
     
     // Show event breakdown
     events.forEach(event => {
-      console.log(`   📅 ${event.eventName}: ${event.totalImages} images (${event.category})`);
+      console.log(`📅 ${event.eventName}: ${event.totalImages} images (${event.category}) - generate-journalism-manifest.js:206`);
     });
     
     // Show category breakdown
     Object.entries(categoryStats).forEach(([category, count]) => {
-      console.log(`   📂 ${category}: ${count} images`);
+      console.log(`📂 ${category}: ${count} images - generate-journalism-manifest.js:211`);
     });
     
     // Show published work summary
     const publishedEvents = events.filter(event => event.published).length;
     if (publishedEvents > 0) {
-      console.log(`📰 Published events: ${publishedEvents}`);
+      console.log(`📰 Published events: ${publishedEvents} - generate-journalism-manifest.js:217`);
     }
     
-    console.log(`\n💡 Widget will now load efficiently from single master manifest!`);
+    console.log(`\n💡 Widget will now load efficiently from single master manifest! - generate-journalism-manifest.js:220`);
     
   } catch (error) {
-    console.error('❌ Error generating master manifest:', error.message);
+    console.error('❌ Error generating master manifest: - generate-journalism-manifest.js:223', error.message);
     process.exit(1);
   }
 }
@@ -249,7 +254,7 @@ async function discoverImages(dir, baseDir = dir, images = []) {
     
     return images.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
   } catch (error) {
-    console.warn(`Warning: Could not scan directory ${dir}: ${error.message}`);
+    console.warn(`Warning: Could not scan directory ${dir}: ${error.message} - generate-journalism-manifest.js:257`);
     return images;
   }
 }
@@ -303,39 +308,7 @@ function categorizeFromPath(relativePath) {
   return 'Events';
 }
 
-/**
- * Extract date from filename patterns
- */
-function extractDateFromFilename(filename) {
-  // Try various date patterns common in photography
-  const patterns = [
-    /([0-9]{2})([0-9]{2})([0-9]{2})/,  // YYMMDD
-    /([0-9]{4})([0-9]{2})([0-9]{2})/,  // YYYYMMDD
-    /([0-9]{2})-([0-9]{2})-([0-9]{2})/, // YY-MM-DD
-    /([0-9]{4})-([0-9]{2})-([0-9]{2})/ // YYYY-MM-DD
-  ];
-  
-  for (const pattern of patterns) {
-    const match = filename.match(pattern);
-    if (match) {
-      let year = parseInt(match[1]);
-      let month = parseInt(match[2]);
-      let day = parseInt(match[3]);
-      
-      // Handle 2-digit years
-      if (year < 100) {
-        year = year + 2000;
-      }
-      
-      // Validate date ranges
-      if (year >= 2020 && year <= 2030 && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
-        return new Date(year, month - 1, day).toISOString();
-      }
-    }
-  }
-  
-  return null;
-}
+// Date parsing function removed - now using shared-date-parsing.js module
 
 /**
  * Extract event name from filename by removing date prefixes and camera suffixes
@@ -426,7 +399,7 @@ async function exists(filePath) {
 // Run the script
 if (require.main === module) {
   main().catch(error => {
-    console.error('💥 Fatal error:', error);
+    console.error('💥 Fatal error: - generate-journalism-manifest.js:402', error);
     process.exit(1);
   });
 }
@@ -436,6 +409,5 @@ module.exports = {
   createManifestEntry,
   categorizeFromPath,
   titleFromFilename,
-  extractDateFromFilename,
   extractEventFromFilename
 };

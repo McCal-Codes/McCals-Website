@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Portfolio v1.3 Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            font-family: ui-sans-serif, system-ui, sans-serif;
+        }
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .test-notes {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>Featured Portfolio v1.3 Test</h1>
+        <p>Testing diverse portfolio selection across all categories</p>
+    </div>
+
+    <div class="test-notes">
+        <h3>What's New in v1.3:</h3>
+        <ul>
+            <li><strong>Diverse Selection Algorithm:</strong> Ensures representation from all portfolio types (Concert, Events, Journalism)</li>
+            <li><strong>Extended Date Range:</strong> Now looks back 3 years (1095 days) instead of 1 year to include older portfolio content</li>
+            <li><strong>Better Debug Info:</strong> Shows portfolio type distribution in debug panel</li>
+            <li><strong>Smart Fallbacks:</strong> If not enough recent items exist, falls back to showing all available items</li>
+        </ul>
+        <p><strong>Expected Result:</strong> You should now see items from Concert, Events, AND Journalism portfolios, not just concerts.</p>
+        <p><strong>Debug:</strong> Click "Toggle Featured Debug" at the bottom to see the portfolio type distribution.</p>
+    </div>
+
+    <!-- Include the Featured Portfolio v1.3 Widget -->
+</body>
+</html>
+
+<script>
+// Load the widget content from v1.3.html
+fetch('src/widgets/featured-portfolio/versions/v1.3.html')
+    .then(response => response.text())
+    .then(html => {
+        // Extract just the widget HTML (skip the comment header)
+        const widgetStart = html.indexOf('<style>');
+        const widgetHtml = html.substring(widgetStart);
+        
+        // Insert the widget
+        document.body.insertAdjacentHTML('beforeend', widgetHtml);
+    })
+    .catch(error => {
+        document.body.insertAdjacentHTML('beforeend', `
+            <div style="color: #ff4d6d; text-align: center; padding: 40px;">
+                Failed to load widget: ${error.message}
+                <br><br>
+                <a href="src/widgets/featured-portfolio/versions/v1.3.html" style="color: #ff4d6d;">
+                    View widget directly
+                </a>
+            </div>
+        `);
+    });
+</script>
+</html>

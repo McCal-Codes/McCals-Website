@@ -12,50 +12,29 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const { detectDateFromFilename, detectDateFromImages, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing');
 
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const MANIFEST_OUTPUT = path.join(PORTFOLIOS_BASE, 'portfolio-manifest.json');
 
-const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
-
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 
-// Date detection patterns (same as concert organizer)
-const DATE_PATTERNS = {
-  // DDMMYY format: 13-01-24, 13_01_24, 130124
-  ddmmyy_dash: { pattern: /(\d{2})[\-_](\d{2})[\-_](\d{2})/, parse: (m) => ({ day: +m[1], month: +m[2], year: 2000 + (+m[3]) }) },
-  ddmmyy_solid: { pattern: /(\d{2})(\d{2})(\d{2})(?![\d])/, parse: (m) => ({ day: +m[1], month: +m[2], year: 2000 + (+m[3]) }) },
-  
-  // YYMMDD format: 250829, 25-08-29
-  yymmdd_dash: { pattern: /(\d{2})[\-_](\d{2})[\-_](\d{2})/, parse: (m) => ({ year: 2000 + (+m[1]), month: +m[2], day: +m[3] }) },
-  yymmdd_solid: { pattern: /(\d{2})(\d{2})(\d{2})(?![\d])/, parse: (m) => ({ year: 2000 + (+m[1]), month: +m[2], day: +m[3] }) },
-  
-  // YYYYMMDD format: 20241213, 2024-12-13
-  yyyymmdd_dash: { pattern: /(\d{4})[\-_](\d{2})[\-_](\d{2})/, parse: (m) => ({ year: +m[1], month: +m[2], day: +m[3] }) },
-  yyyymmdd_solid: { pattern: /(\d{4})(\d{2})(\d{2})(?![\d])/, parse: (m) => ({ year: +m[1], month: +m[2], day: +m[3] }) },
-
-  // DDMMYYYY format: 13122024, 13-12-2024
-  ddmmyyyy_dash: { pattern: /(\d{2})[\-_](\d{2})[\-_](\d{4})/, parse: (m) => ({ day: +m[1], month: +m[2], year: +m[3] }) },
-  ddmmyyyy_solid: { pattern: /(\d{2})(\d{2})(\d{4})(?![\d])/, parse: (m) => ({ day: +m[1], month: +m[2], year: +m[3] }) }
-};
+// Now using shared date parsing module for consistency across all generators
 
 async function log(message, ...args) {
-  console.log(`📸 ${message}`, ...args);
+  console.log(`📸 ${message} - generate-universal-manifest.js:50`, ...args);
 }
 
 async function error(message, ...args) {
-  console.error(`❌ ${message}`, ...args);
+  console.error(`❌ ${message} - generate-universal-manifest.js:54`, ...args);
 }
 
 async function success(message, ...args) {
-  console.log(`✅ ${message}`, ...args);
+  console.log(`✅ ${message} - generate-universal-manifest.js:58`, ...args);
 }
 
 async function warning(message, ...args) {
-  console.log(`⚠️  ${message}`, ...args);
+  console.log(`⚠️  ${message} - generate-universal-manifest.js:62`, ...args);
 }
 
 async function exists(filePath) {
@@ -85,45 +64,7 @@ async function readManifest(manifestPath) {
   }
 }
 
-function isValidDate(day, month, year) {
-  if (month < 1 || month > 12) return false;
-  if (day < 1 || day > 31) return false;
-  if (year < 1900 || year > 2100) return false;
-  
-  const date = new Date(year, month - 1, day);
-  return date.getFullYear() === year && 
-         date.getMonth() === month - 1 && 
-         date.getDate() === day;
-}
-
-function detectDateFromFilename(filename) {
-  for (const [patternName, { pattern, parse }] of Object.entries(DATE_PATTERNS)) {
-    const match = filename.match(pattern);
-    if (match) {
-      const dateInfo = parse(match);
-      
-      if (isValidDate(dateInfo.day, dateInfo.month, dateInfo.year)) {
-        return {
-          ...dateInfo,
-          monthName: MONTHS[dateInfo.month - 1],
-          iso: `${dateInfo.year}-${String(dateInfo.month).padStart(2, '0')}-${String(dateInfo.day).padStart(2, '0')}`,
-          source: patternName
-        };
-      }
-    }
-  }
-  return null;
-}
-
-function detectDateFromImages(imageFiles) {
-  for (const filename of imageFiles) {
-    const date = detectDateFromFilename(filename);
-    if (date) {
-      return date;
-    }
-  }
-  return null;
-}
+// Date parsing functions now handled by shared-date-parsing module
 
 function getDateDisplayFromFolder(folderName) {
   // Try to extract "Month Year" from folder name
@@ -177,18 +118,14 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
       log(`Found ${imageFiles.length} direct images in ${itemName}`);
       
       const detectedDate = detectDateFromImages(imageFiles);
-      const currentYear = new Date().getFullYear();
+      if (detectedDate) {
+        log(`Detected date from images: ${detectedDate.iso}`);
+      } else {
+        log(`No date detected from images, using fallback`);
+      }
       
-      const fallbackDate = {
-        year: currentYear,
-        month: 1,
-        monthName: 'January',
-        day: 1,
-        iso: `${currentYear}-01-01`
-      };
-      
-      const date = detectedDate || fallbackDate;
-      const dateDisplay = `${date.monthName} ${date.year}`;
+      const date = detectedDate || createFallbackDate();
+      const dateDisplay = formatDisplayDate(date);
       
       return {
         type: portfolioType,
@@ -433,15 +370,15 @@ async function generateUniversalManifest() {
     success(`Processed ${allItems.length} portfolio items with ${universalManifest.totalImages} total images`);
     
     // Log summary
-    console.log('\n📋 Portfolio Summary:');
+    console.log('\n📋 Portfolio Summary: - generate-universal-manifest.js:445');
     Object.entries(portfolioSummary).forEach(([type, stats]) => {
-      console.log(`   • ${type}: ${stats.count} items, ${stats.totalImages} images`);
+      console.log(`• ${type}: ${stats.count} items, ${stats.totalImages} images - generate-universal-manifest.js:447`);
     });
     
-    console.log('\n🏷️  Categories:');
+    console.log('\n🏷️  Categories: - generate-universal-manifest.js:450');
     categories.forEach(category => {
       const categoryItems = allItems.filter(item => item.category === category);
-      console.log(`   • ${category}: ${categoryItems.length} items`);
+      console.log(`• ${category}: ${categoryItems.length} items - generate-universal-manifest.js:453`);
     });
     
   } catch (err) {

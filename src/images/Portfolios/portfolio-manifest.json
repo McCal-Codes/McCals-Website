@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated": "2025-10-03T07:03:54.391Z",
+  "generated": "2025-10-03T07:24:44.288Z",
   "totalPortfolios": 3,
   "totalItems": 18,
   "totalImages": 190,
@@ -239,6 +239,102 @@
       "coverImage": "250820_Haven Block Party_CAL3635.jpg"
     },
     {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Product Launch Expo 2025",
+      "folderPath": "Events/Product-Launch-Expo-2025",
+      "dateDisplay": "June 2025",
+      "date": {
+        "year": 2025,
+        "month": 6,
+        "day": 20,
+        "monthName": "June",
+        "iso": "2025-06-20",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 2,
+      "images": [
+        "250620_Product_Launch_Expo_Demo.jpg",
+        "250620_Product_Launch_Expo_Showcase.jpg"
+      ],
+      "coverImage": "250620_Product_Launch_Expo_Demo.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "CMU Business Graduation",
+      "folderPath": "Events/CMU-Business-Graduation",
+      "dateDisplay": "May 2025",
+      "date": {
+        "year": 2025,
+        "month": 5,
+        "day": 11,
+        "monthName": "May",
+        "iso": "2025-05-11",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 33,
+      "images": [
+        "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6485-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6485-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6526-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6526-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6526-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6532-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6532-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6532-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6561-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6561-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6561-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6572-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6572-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6572-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6622-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6622-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6622-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6655-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6655-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6655-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6681-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6681-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6681-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6691-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6691-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6691-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6694-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6694-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6694-640.jpg",
+        "250511_CMU-Business-Graduation-_CAL6697-1280.jpg",
+        "250511_CMU-Business-Graduation-_CAL6697-320.jpg",
+        "250511_CMU-Business-Graduation-_CAL6697-640.jpg"
+      ],
+      "coverImage": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
+    },
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Events",
+      "folderPath": "Journalism/Events/The Rooney Rule",
+      "dateDisplay": "April 2025",
+      "date": {
+        "year": 2025,
+        "month": 4,
+        "day": 17,
+        "monthName": "April",
+        "iso": "2025-04-17",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 1,
+      "images": [
+        "250417 The Rooney Rule_CAL3148.jpg"
+      ],
+      "coverImage": "250417 The Rooney Rule_CAL3148.jpg"
+    },
+    {
       "type": "Concert",
       "category": "Concert Photography",
       "name": "Dream The Heavy",
@@ -272,6 +368,82 @@
       "coverImage": "250404 Haven Concert_CAL1915.jpg"
     },
     {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Corporate Summit 2025",
+      "folderPath": "Events/Corporate-Summit-2025",
+      "dateDisplay": "March 2025",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 15,
+        "monthName": "March",
+        "iso": "2025-03-15",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 2,
+      "images": [
+        "250315_Corporate_Summit_Keynote.jpg",
+        "250315_Corporate_Summit_Panel.jpg"
+      ],
+      "coverImage": "250315_Corporate_Summit_Keynote.jpg"
+    },
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Politics",
+      "folderPath": "Journalism/Politics/Butler Protest",
+      "dateDisplay": "March 2025",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 15,
+        "monthName": "March",
+        "iso": "2025-03-15",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 11,
+      "images": [
+        "250315_Butler Democracy Protest_CAL9640-min.jpg",
+        "250315_Butler Democracy Protest_CAL9666-min.jpg",
+        "250315_Butler Democracy Protest_CAL9674-min.jpg",
+        "250315_Butler Democracy Protest_CAL9703-min.jpg",
+        "250315_Butler Democracy Protest_CAL9709-min.jpg",
+        "250315_Butler Democracy Protest_CAL9717-min.jpg",
+        "250315_Butler Democracy Protest_CAL9739-min.jpg",
+        "250315_Butler Democracy Protest_CAL9759-min.jpg",
+        "250315_Butler Democracy Protest_CAL9773-min.jpg",
+        "250315_Butler Democracy Protest_CAL9825-min.jpg",
+        "250315_Butler Democracy Protest_CAL9832-min.jpg"
+      ],
+      "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Charity Gala 2024",
+      "folderPath": "Events/Charity-Gala-2024",
+      "dateDisplay": "November 2024",
+      "date": {
+        "year": 2024,
+        "month": 11,
+        "day": 5,
+        "monthName": "November",
+        "iso": "2024-11-05",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 3,
+      "images": [
+        "241105_Charity_Gala_Auction.jpg",
+        "241105_Charity_Gala_Ballroom.jpg",
+        "241105_Charity_Gala_Red_Carpet.jpg"
+      ],
+      "coverImage": "241105_Charity_Gala_Auction.jpg"
+    },
+    {
       "type": "Concert",
       "category": "Concert Photography",
       "name": "Funky Lamp",
@@ -295,6 +467,39 @@
         "2404_Funky Lamp Indie Fest_1570_CAL.jpg"
       ],
       "coverImage": "2404_Funky Lamp Indie Fest_1548_CAL.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Pennsylvania Media Awards 24",
+      "folderPath": "Events/pennsylvania-media-awards-24",
+      "dateDisplay": "April 2024",
+      "date": {
+        "year": 2024,
+        "month": 4,
+        "day": 16,
+        "monthName": "April",
+        "iso": "2024-04-16",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 13,
+      "images": [
+        "240416-pennsylvania-media-awards-892-published.jpg",
+        "240416-pennsylvania-media-awards-893-published.jpg",
+        "240416-pennsylvania-media-awards-894-published.jpg",
+        "240416-pennsylvania-media-awards-895-published.jpg",
+        "240416-pennsylvania-media-awards-896-published.jpg",
+        "240416-pennsylvania-media-awards-897-published.jpg",
+        "240416-pennsylvania-media-awards-898-published.jpg",
+        "240416-pennsylvania-media-awards-899-published.jpg",
+        "240416-pennsylvania-media-awards-902-published.jpg",
+        "240416-pennsylvania-media-awards-903-published.jpg",
+        "240416-pennsylvania-media-awards-906-published.jpg",
+        "240416-pennsylvania-media-awards-907-published.jpg",
+        "240416-pennsylvania-media-awards-980-published.jpg"
+      ],
+      "coverImage": "240416-pennsylvania-media-awards-892-published.jpg"
     },
     {
       "type": "Concert",
@@ -357,204 +562,6 @@
         "240315_Genesis Volume 1_558.jpg"
       ],
       "coverImage": "240315_Genesis Volume 1_464.jpg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Product Launch Expo 2025",
-      "folderPath": "Events/Product-Launch-Expo-2025",
-      "dateDisplay": "June 2020",
-      "date": {
-        "day": 25,
-        "month": 6,
-        "year": 2020,
-        "monthName": "June",
-        "iso": "2020-06-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 2,
-      "images": [
-        "250620_Product_Launch_Expo_Demo.jpg",
-        "250620_Product_Launch_Expo_Showcase.jpg"
-      ],
-      "coverImage": "250620_Product_Launch_Expo_Demo.jpg"
-    },
-    {
-      "type": "Journalism",
-      "category": "Journalism",
-      "name": "Events",
-      "folderPath": "Journalism/Events/The Rooney Rule",
-      "dateDisplay": "April 2017",
-      "date": {
-        "day": 25,
-        "month": 4,
-        "year": 2017,
-        "monthName": "April",
-        "iso": "2017-04-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 1,
-      "images": [
-        "250417 The Rooney Rule_CAL3148.jpg"
-      ],
-      "coverImage": "250417 The Rooney Rule_CAL3148.jpg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Pennsylvania Media Awards 24",
-      "folderPath": "Events/pennsylvania-media-awards-24",
-      "dateDisplay": "April 2016",
-      "date": {
-        "day": 24,
-        "month": 4,
-        "year": 2016,
-        "monthName": "April",
-        "iso": "2016-04-24",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 13,
-      "images": [
-        "240416-pennsylvania-media-awards-892-published.jpg",
-        "240416-pennsylvania-media-awards-893-published.jpg",
-        "240416-pennsylvania-media-awards-894-published.jpg",
-        "240416-pennsylvania-media-awards-895-published.jpg",
-        "240416-pennsylvania-media-awards-896-published.jpg",
-        "240416-pennsylvania-media-awards-897-published.jpg",
-        "240416-pennsylvania-media-awards-898-published.jpg",
-        "240416-pennsylvania-media-awards-899-published.jpg",
-        "240416-pennsylvania-media-awards-902-published.jpg",
-        "240416-pennsylvania-media-awards-903-published.jpg",
-        "240416-pennsylvania-media-awards-906-published.jpg",
-        "240416-pennsylvania-media-awards-907-published.jpg",
-        "240416-pennsylvania-media-awards-980-published.jpg"
-      ],
-      "coverImage": "240416-pennsylvania-media-awards-892-published.jpg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Corporate Summit 2025",
-      "folderPath": "Events/Corporate-Summit-2025",
-      "dateDisplay": "March 2015",
-      "date": {
-        "day": 25,
-        "month": 3,
-        "year": 2015,
-        "monthName": "March",
-        "iso": "2015-03-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 2,
-      "images": [
-        "250315_Corporate_Summit_Keynote.jpg",
-        "250315_Corporate_Summit_Panel.jpg"
-      ],
-      "coverImage": "250315_Corporate_Summit_Keynote.jpg"
-    },
-    {
-      "type": "Journalism",
-      "category": "Journalism",
-      "name": "Politics",
-      "folderPath": "Journalism/Politics/Butler Protest",
-      "dateDisplay": "March 2015",
-      "date": {
-        "day": 25,
-        "month": 3,
-        "year": 2015,
-        "monthName": "March",
-        "iso": "2015-03-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 11,
-      "images": [
-        "250315_Butler Democracy Protest_CAL9640-min.jpg",
-        "250315_Butler Democracy Protest_CAL9666-min.jpg",
-        "250315_Butler Democracy Protest_CAL9674-min.jpg",
-        "250315_Butler Democracy Protest_CAL9703-min.jpg",
-        "250315_Butler Democracy Protest_CAL9709-min.jpg",
-        "250315_Butler Democracy Protest_CAL9717-min.jpg",
-        "250315_Butler Democracy Protest_CAL9739-min.jpg",
-        "250315_Butler Democracy Protest_CAL9759-min.jpg",
-        "250315_Butler Democracy Protest_CAL9773-min.jpg",
-        "250315_Butler Democracy Protest_CAL9825-min.jpg",
-        "250315_Butler Democracy Protest_CAL9832-min.jpg"
-      ],
-      "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "CMU Business Graduation",
-      "folderPath": "Events/CMU-Business-Graduation",
-      "dateDisplay": "May 2011",
-      "date": {
-        "day": 25,
-        "month": 5,
-        "year": 2011,
-        "monthName": "May",
-        "iso": "2011-05-25",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 33,
-      "images": [
-        "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6485-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6485-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-640.jpg"
-      ],
-      "coverImage": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Charity Gala 2024",
-      "folderPath": "Events/Charity-Gala-2024",
-      "dateDisplay": "November 2005",
-      "date": {
-        "day": 24,
-        "month": 11,
-        "year": 2005,
-        "monthName": "November",
-        "iso": "2005-11-24",
-        "source": "ddmmyy_solid"
-      },
-      "totalImages": 3,
-      "images": [
-        "241105_Charity_Gala_Auction.jpg",
-        "241105_Charity_Gala_Ballroom.jpg",
-        "241105_Charity_Gala_Red_Carpet.jpg"
-      ],
-      "coverImage": "241105_Charity_Gala_Auction.jpg"
     }
   ]
 }
