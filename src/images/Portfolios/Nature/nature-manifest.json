@@ -1,0 +1,74 @@
+﻿{
+  "version": "1.0",
+  "generated": "2025-10-03T15:30:00.000Z",
+  "totalCollections": 3,
+  "collections": [
+    {
+      "collectionName": "Mist Valley Sunrise",
+      "folderPath": "Landscapes/Mist-Valley-Sunrise",
+      "dateDisplay": "September 2025",
+      "captureDate": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "iso": "2025-09-12",
+        "source": "manual"
+      },
+      "totalImages": 6,
+      "images": [
+        "Mist-Valley-Sunrise-1280.jpg",
+        "Mist-Valley-Sunrise-1270.jpg",
+        "Mist-Valley-Sunrise-1220.jpg",
+        "Mist-Valley-Sunrise-1190.jpg",
+        "Mist-Valley-Sunrise-1140.jpg",
+        "Mist-Valley-Sunrise-1100.jpg"
+      ],
+      "tags": ["landscape", "golden hour", "mountains"]
+    },
+    {
+      "collectionName": "Redwood Rain",
+      "folderPath": "Forests/Redwood-Rain",
+      "dateDisplay": "April 2025",
+      "captureDate": {
+        "year": 2025,
+        "month": 4,
+        "monthName": "April",
+        "iso": "2025-04-18",
+        "source": "manual"
+      },
+      "totalImages": 8,
+      "images": [
+        "Redwood-Rain-1280.jpg",
+        "Redwood-Rain-1250.jpg",
+        "Redwood-Rain-1220.jpg",
+        "Redwood-Rain-1180.jpg",
+        "Redwood-Rain-1150.jpg",
+        "Redwood-Rain-1120.jpg",
+        "Redwood-Rain-1090.jpg",
+        "Redwood-Rain-1060.jpg"
+      ],
+      "tags": ["forest", "fog", "macro"]
+    },
+    {
+      "collectionName": "Arctic Fox Watch",
+      "folderPath": "Wildlife/Arctic-Fox-Watch",
+      "dateDisplay": "February 2025",
+      "captureDate": {
+        "year": 2025,
+        "month": 2,
+        "monthName": "February",
+        "iso": "2025-02-03",
+        "source": "manual"
+      },
+      "totalImages": 5,
+      "images": [
+        "Arctic-Fox-Watch-1280.jpg",
+        "Arctic-Fox-Watch-1230.jpg",
+        "Arctic-Fox-Watch-1190.jpg",
+        "Arctic-Fox-Watch-1160.jpg",
+        "Arctic-Fox-Watch-1120.jpg"
+      ],
+      "tags": ["wildlife", "winter", "animals"]
+    }
+  ]
+}

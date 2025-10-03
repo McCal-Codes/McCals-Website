@@ -4,9 +4,45 @@
   "totalEvents": 5,
   "events": [
     {
+      "eventName": "Product Launch Expo 2025",
+      "category": "Corporate",
+      "dateDisplay": "June 2025",
+      "dateISO": "2025-06-20",
+      "date": {
+        "year": 2025,
+        "month": 6,
+        "day": 20,
+        "monthName": "June",
+        "iso": "2025-06-20",
+        "display": "June 2025"
+      },
+      "dateSource": "filename:250620_Product_Launch_Expo_Demo.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Showcase.jpg"
+        }
+      ],
+      "totalImages": 2
+    },
+    {
       "eventName": "CMU Business Graduation",
       "category": "Celebration",
-      "dateDisplay": "Oct 2025",
+      "dateDisplay": "May 2025",
+      "dateISO": "2025-05-11",
+      "date": {
+        "year": 2025,
+        "month": 5,
+        "day": 11,
+        "monthName": "May",
+        "iso": "2025-05-11",
+        "display": "May 2025"
+      },
+      "dateSource": "filename:250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
+      "dateConfidence": "high",
       "images": [
         {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
@@ -111,9 +147,45 @@
       "totalImages": 33
     },
     {
+      "eventName": "Corporate Summit 2025",
+      "category": "Conference",
+      "dateDisplay": "March 2025",
+      "dateISO": "2025-03-15",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 15,
+        "monthName": "March",
+        "iso": "2025-03-15",
+        "display": "March 2025"
+      },
+      "dateSource": "filename:250315_Corporate_Summit_Keynote.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Panel.jpg"
+        }
+      ],
+      "totalImages": 2
+    },
+    {
       "eventName": "Charity Gala 2024",
       "category": "Celebration",
-      "dateDisplay": "Oct 2025",
+      "dateDisplay": "November 2024",
+      "dateISO": "2024-11-05",
+      "date": {
+        "year": 2024,
+        "month": 11,
+        "day": 5,
+        "monthName": "November",
+        "iso": "2024-11-05",
+        "display": "November 2024"
+      },
+      "dateSource": "filename:241105_Charity_Gala_Auction.jpg",
+      "dateConfidence": "high",
       "images": [
         {
           "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Auction.jpg"
@@ -128,37 +200,20 @@
       "totalImages": 3
     },
     {
-      "eventName": "Corporate Summit 2025",
-      "category": "Conference",
-      "dateDisplay": "Oct 2025",
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Panel.jpg"
-        }
-      ],
-      "totalImages": 2
-    },
-    {
-      "eventName": "Product Launch Expo 2025",
-      "category": "Corporate",
-      "dateDisplay": "Oct 2025",
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Showcase.jpg"
-        }
-      ],
-      "totalImages": 2
-    },
-    {
       "eventName": "Pennsylvania Media Awards 24",
       "category": "Published",
-      "dateDisplay": "Oct 2025",
+      "dateDisplay": "April 2024",
+      "dateISO": "2024-04-16",
+      "date": {
+        "year": 2024,
+        "month": 4,
+        "day": 16,
+        "monthName": "April",
+        "iso": "2024-04-16",
+        "display": "April 2024"
+      },
+      "dateSource": "filename:240416-pennsylvania-media-awards-892-published.jpg",
+      "dateConfidence": "high",
       "images": [
         {
           "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-892-published.jpg"

@@ -3,6 +3,9 @@ const fs = require('fs');
 const fsp = fs.promises;
 const path = require('path');
 
+// Import shared date parsing utilities
+const { detectDateFromFilename, extractEXIFDate } = require('./shared-date-parsing.js');
+
 const DEFAULT_ROOT = 'images/Portfolios/Events';
 const OUTPUT_FILE = 'events-manifest.json';
 
@@ -10,14 +13,58 @@ function titleCase(slug) {
   return slug.replace(/[_-]+/g, ' ').trim().split(/\s+/).map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
 }
 
-function parseDate(text) {
-  const match = /(20\d{2})[-/_]?(0[1-9]|1[0-2])/.exec(text);
-  if (match) {
-    const year = Number(match[1]);
-    const month = Number(match[2]);
-    return new Date(Date.UTC(year, month - 1, 1));
+/**
+ * Enhanced date parsing that uses shared date parsing utilities
+ * Looks for dates in filenames first, then folder names, then falls back to current date
+ */
+function parseEventDate(folderName, imageFiles = []) {
+  // First try to extract date from the first image filename (most accurate)
+  for (const fileName of imageFiles) {
+    const dateInfo = detectDateFromFilename(fileName);
+    if (dateInfo) {
+      return {
+        year: dateInfo.year,
+        month: dateInfo.month,
+        day: dateInfo.day,
+        iso: dateInfo.iso,
+        monthName: dateInfo.monthName,
+        display: `${dateInfo.monthName} ${dateInfo.year}`,
+        source: `filename:${fileName}`,
+        confidence: 'high'
+      };
+    }
   }
-  return new Date();
+  
+  // Try to extract date from folder name
+  const folderDateInfo = detectDateFromFilename(folderName);
+  if (folderDateInfo) {
+    return {
+      year: folderDateInfo.year,
+      month: folderDateInfo.month,
+      day: folderDateInfo.day,
+      iso: folderDateInfo.iso,
+      monthName: folderDateInfo.monthName,
+      display: `${folderDateInfo.monthName} ${folderDateInfo.year}`,
+      source: `folder:${folderName}`,
+      confidence: 'medium'
+    };
+  }
+  
+  // Fallback to current date
+  const now = new Date();
+  const monthName = ['January', 'February', 'March', 'April', 'May', 'June',
+                     'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()];
+  
+  return {
+    year: now.getFullYear(),
+    month: now.getMonth() + 1,
+    day: now.getDate(),
+    iso: now.toISOString().slice(0, 10),
+    monthName: monthName,
+    display: `${monthName} ${now.getFullYear()}`,
+    source: 'fallback:current',
+    confidence: 'low'
+  };
 }
 
 async function readDirSafe(dir) {
@@ -50,7 +97,7 @@ async function main() {
   const absRoot = path.resolve(rootDir);
 
   if (!(await exists(absRoot))) {
-    console.error('[ERR] Events root not found:', absRoot);
+    console.error('[ERR] Events root not found: - generate-events-manifest-v2.js:100', absRoot);
     process.exit(1);
   }
 
@@ -62,6 +109,9 @@ async function main() {
     const files = (await readDirSafe(path.join(absRoot, dir))).filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f));
     if (!files.length) continue;
 
+    // Parse date from filenames and folder name
+    const dateInfo = parseEventDate(dir, files);
+
     const images = files.map(file => ({
       path: path.posix.join(rootDir.replace(/^.*?src\//, 'src/'), dir, file)
     }));
@@ -69,14 +119,33 @@ async function main() {
     events.push({
       eventName: titleCase(dir),
       category: deriveCategory(dir),
-      dateDisplay: parseDate(dir).toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }),
+      dateDisplay: dateInfo.display,
+      dateISO: dateInfo.iso,
+      date: {
+        year: dateInfo.year,
+        month: dateInfo.month,
+        day: dateInfo.day,
+        monthName: dateInfo.monthName,
+        iso: dateInfo.iso,
+        display: dateInfo.display
+      },
+      dateSource: dateInfo.source,
+      dateConfidence: dateInfo.confidence,
       images,
       totalImages: images.length
     });
   }
 
-  const stamp = value => Date.parse('01 ' + value) || 0;
-  events.sort((a, b) => stamp(b.dateDisplay) - stamp(a.dateDisplay));
+  // Sort by ISO date (most accurate) then by dateDisplay as fallback
+  events.sort((a, b) => {
+    const aDate = new Date(a.dateISO);
+    const bDate = new Date(b.dateISO);
+    if (!isNaN(aDate) && !isNaN(bDate)) {
+      return bDate.getTime() - aDate.getTime();
+    }
+    // Fallback to string comparison of dateDisplay
+    return (b.dateDisplay || '').localeCompare(a.dateDisplay || '');
+  });
 
   const manifest = {
     version: '2.5.3',
@@ -87,10 +156,10 @@ async function main() {
 
   const outFile = path.join(absRoot, OUTPUT_FILE);
   await fsp.writeFile(outFile, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
-  console.log('[OK] Wrote manifest:', path.relative(process.cwd(), outFile));
+  console.log('[OK] Wrote manifest: - generate-events-manifest-v2.js:159', path.relative(process.cwd(), outFile));
 }
 
 main().catch(err => {
-  console.error('[ERR]', err && err.stack || err);
+  console.error('[ERR] - generate-events-manifest-v2.js:163', err && err.stack || err);
   process.exit(1);
 });

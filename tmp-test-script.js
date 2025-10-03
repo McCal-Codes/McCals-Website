@@ -1,304 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Featured Portfolio v1.5 Test</title>
-    <style>
-        body { margin: 0; padding: 0; background: #0a0a0a; color: #fff; font-family: ui-sans-serif, system-ui; }
-    </style>
-</head>
-<body>
-    <!-- Featured Portfolio Widget v1.5 – Enhanced Titles & Journalism Display -->
-
-<style>
-  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#888888; }
-  @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
-
-  /* Universal Minimal Scrollbar Design */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(136,136,136,0.4) transparent;
-  }
-  
-  *::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  *::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.1);
-    border-radius: 4px;
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    background: rgba(136,136,136,0.4);
-    border-radius: 4px;
-    border: 1px solid rgba(0,0,0,0.1);
-    transition: all 0.2s ease;
-  }
-  
-  *::-webkit-scrollbar-thumb:hover {
-    background: rgba(136,136,136,0.6);
-    border-color: rgba(0,0,0,0.2);
-  }
-  
-  *::-webkit-scrollbar-thumb:active {
-    background: rgba(136,136,136,0.8);
-  }
-  
-  *::-webkit-scrollbar-corner {
-    background: rgba(0,0,0,0.05);
-  }
-  
-  /* Enhanced scrollbar for dark backgrounds (lightbox, modals) */
-  .fp-lightbox *::-webkit-scrollbar-thumb,
-  .changelog-modal *::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-  
-  .fp-lightbox *::-webkit-scrollbar-thumb:hover,
-  .changelog-modal *::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,0.3);
-    border-color: rgba(255,255,255,0.2);
-  }
-  
-  .fp-lightbox *::-webkit-scrollbar-track,
-  .changelog-modal *::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.05);
-  }
-
-  .featured-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
-  .featured-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 12px }
-  .featured-subhead { font:500 16px/1.5 ui-sans-serif,system-ui; color:rgba(255,255,255,.72); margin:0 0 28px }
-  .featured-meta-bar { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; font:600 11px/1.4 ui-sans-serif,system-ui; color:rgba(255,255,255,.55); margin-bottom:30px; letter-spacing:0.18em; text-transform:uppercase; }
-  .featured-meta-bar span { display:inline-flex; align-items:center; gap:6px; }
-  .featured-meta-bar strong { font:700 13px/1 ui-sans-serif,system-ui; color:var(--fg); letter-spacing:0.22em; }
-
-  .featured-loading {
-    display:flex; align-items:center; justify-content:center; min-height:200px;
-    font:600 16px/1.4 ui-sans-serif,system-ui; color:var(--fg); opacity:0.7;
-  }
-  .featured-spinner {
-    width:20px; height:20px; border:2px solid var(--line); border-top:2px solid var(--accent);
-    border-radius:50%; animation:spin 1s linear infinite; margin-right:12px;
-  }
-  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-  .auto-refresh-indicator {
-    position:fixed; bottom:12px; right:100px; font:400 10px/1 ui-sans-serif,system-ui;
-    color:rgba(128,128,128,0.65); pointer-events:none; z-index:10;
-    padding:4px 8px; background:rgba(0,0,0,0.3); border-radius:4px;
-  }
-  .version-indicator {
-    position:fixed; bottom:12px; right:12px; font:600 11px/1.2 ui-sans-serif,system-ui;
-    color:rgba(255,255,255,0.8); cursor:pointer; z-index:10; transition:all .2s ease;
-    padding:6px 10px; background:rgba(0,0,0,0.6); border-radius:6px; border:1px solid rgba(255,255,255,0.1);
-  }
-    .version-indicator:hover { color:var(--accent); background:rgba(0,0,0,0.8); transform:scale(1.05); }
-  
-  .changelog-modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95); z-index: 2000; padding: 2rem; 
-    overflow-y: auto; box-sizing: border-box; display: none;
-    font-family: ui-sans-serif, system-ui, sans-serif;
-  }
-  .changelog-content {
-    max-width: 600px; margin: 0 auto; background: #222; 
-    border-radius: 8px; padding: 2rem; color: #e5e5e5;
-    position: relative;
-  }
-  .changelog-close {
-    position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1);
-    border: none; color: #fff; font-size: 20px; width: 32px; height: 32px;
-    border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  }
-  .changelog-close:hover { background: rgba(255,255,255,0.2); }
-  .changelog h2 { color: var(--accent); margin: 0 0 0.5rem 0; }
-  .changelog h3 { color: #fff; margin: 1.5rem 0 0.5rem 0; font-size: 16px; }
-  .changelog p { color: #ccc; margin: 0 0 1rem 0; font-style: italic; }
-  .changelog ul { margin: 0.5rem 0 1.5rem 0; padding-left: 1.5rem; }
-  .changelog li { margin: 0.25rem 0; color: #ccc; }
-  .changelog-link { 
-    padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); 
-    text-align: center; 
-  }
-  .changelog-link a { 
-    color: var(--accent); text-decoration: none; font-weight: 600;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.5rem 1rem; border: 1px solid rgba(136,136,136,0.3);
-    border-radius: 6px; transition: all 0.2s ease;
-  }
-  .changelog-link a:hover { 
-    background: rgba(136,136,136,0.1); border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-
-  .featured-grid {
-    column-width:320px; column-gap:16px; text-align:left; opacity:0; transition:opacity .5s ease;
-  }
-  .featured-grid.loaded { opacity:1; }
-  @media (max-width:1024px) { .featured-grid { column-width:280px; column-gap:12px; } }
-  @media (max-width:768px) { .featured-grid { column-width:240px; column-gap:10px; } }
-  @media (max-width:520px) { .featured-grid { column-width:100%; column-gap:8px; } }
-
-  .featured-card {
-    position:relative; display:inline-block; width:100%; margin:0 0 16px;
-    background:#111; border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
-    opacity:0; transform:translateY(20px); transition:all .3s ease;
-  }
-  .featured-card.loaded { opacity:1; transform:translateY(0); }
-  .featured-card img { display:block; width:100%; height:auto; object-fit:cover; border-radius:inherit; transition:transform .35s ease, filter .35s ease; }
-  .featured-card:hover img { transform:scale(1.03); filter:contrast(1.08) saturate(1.08); }
-
-  .featured-info {
-    position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
-    padding:12px 16px; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.9)); color:#fff;
-  }
-  .featured-title { margin:0; font:800 18px/1.25 ui-sans-serif,system-ui; letter-spacing:0.02em; }
-  .featured-meta { margin:4px 0 0; font:600 12px/1.3 ui-sans-serif,system-ui; color:rgba(255,255,255,.78); }
-  .featured-tags { margin:6px 0 0; display:flex; flex-wrap:wrap; gap:6px; }
-  .featured-tag { background:rgba(255,255,255,0.08); border-radius:999px; padding:4px 10px; font:600 10px/1 ui-sans-serif,system-ui; letter-spacing:0.12em; text-transform:uppercase; }
-  .featured-tag-category { background:rgba(255,77,109,0.2); color:rgba(255,255,255,0.95); }
-
-  .featured-empty { text-align:center; padding:80px 20px; color:rgba(255,255,255,.6); font:600 16px/1.4 ui-sans-serif,system-ui; }
-
-  .featured-error {
-    margin:30px auto; padding:24px; max-width:520px; border-radius:16px; background:rgba(255,77,109,0.08);
-    border:1px solid rgba(255,77,109,0.28); color:#fff; font:600 14px/1.5 ui-sans-serif,system-ui;
-  }
-
-  .debug-toggle {
-    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
-    background:rgba(0,0,0,0.85); border:1px solid var(--line); color:var(--fg);
-    padding:8px 16px; border-radius:16px; cursor:pointer; font:600 12px/1 ui-sans-serif,system-ui;
-    z-index:1000; transition:all .3s ease;
-  }
-  .debug-toggle:hover { background:rgba(0,0,0,0.95); box-shadow:0 4px 12px rgba(0,0,0,0.3); }
-
-  .debug-info {
-    position:fixed; bottom:60px; left:50%; transform:translateX(-50%);
-    background:rgba(0,0,0,0.88); color:#fff; padding:14px 18px; border-radius:10px;
-    font:600 11px/1.4 ui-monospace,monospace; z-index:999; max-width:520px; border:1px solid var(--line);
-    display:none; backdrop-filter:blur(12px);
-  }
-  .debug-info.active { display:block; }
-  .debug-info h4 { margin:0 0 10px; font:700 12px/1.2 ui-sans-serif,system-ui; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); }
-  .debug-info dl { margin:0; display:grid; grid-template-columns:auto auto; gap:6px 16px; }
-  .debug-info dt { opacity:0.7; }
-  .debug-info dd { margin:0; }
-
-  .fp-lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.92); display:none; align-items:center; justify-content:center; z-index:9999; overflow:hidden; }
-  .fp-lightbox.is-open { display:flex; }
-  .fp-dialog { position:relative; max-width:90vw; max-height:85vh; overflow:hidden; background:transparent; outline:none; }
-  .fp-close { position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%; border:none; background:rgba(0,0,0,0.7); color:#fff; font-size:18px; cursor:pointer; transition:all .2s ease; z-index:10001; backdrop-filter:blur(4px); }
-  .fp-close:hover { background:rgba(0,0,0,0.9); transform:scale(1.1); }
-  .fp-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; }
-  .fp-gallery img { display:block; max-height:80vh; width:auto; align-self:center; border-radius:12px; box-shadow:0 20px 40px rgba(0,0,0,0.55); background:#050505; }
-  .fp-gallery img.loading { opacity:0.6; filter:blur(4px); }
-  .fp-gallery img.loaded { opacity:1; filter:none; transition:opacity .35s ease, filter .35s ease; }
-  .fp-hint { position:sticky; top:6px; align-self:center; background:rgba(0,0,0,0.55); color:#fff; padding:6px 10px; border-radius:999px; font:600 12px/1 ui-sans-serif,system-ui; transition:opacity .4s ease; }
-  .fp-hint.fade { opacity:0; }
-  .fp-caption { text-align:center; color:#fff; margin-top:14px; }
-  .fp-title { margin:0 0 6px; font:700 18px/1.3 ui-sans-serif,system-ui; }
-  .fp-meta { margin:0; color:rgba(255,255,255,0.7); font:500 12px/1.4 ui-sans-serif,system-ui; }
-
-  html.fp-open, body.fp-open { overflow:hidden; }
-  .header { position:relative; z-index:100; }
-  .status { position:relative; z-index:100; }
-  
-  @media (max-width:720px) {
-    .featured-subhead { margin-bottom:22px; font-size:15px; }
-    .featured-meta-bar { gap:20px; }
-    .debug-info { width:90vw; }
-    .fp-close { top:15px; right:15px; width:36px; height:36px; font-size:20px; }
-    .fp-dialog { max-width:95vw; max-height:90vh; }
-    .auto-refresh-indicator { 
-      bottom:8px; right:8px; font-size:9px; 
-      max-width:120px; text-align:center; line-height:1.2;
-    }
-    .version-indicator { 
-      bottom:32px; right:8px; font-size:9px;
-    }
-  }
-</style>
-
-<div class="featured-portfolio" id="featuredPf" data-panes="8" data-range-days="0" data-force-diverse="true">
-  <div class="featured-header">
-    <h2 class="featured-heading">Featured Highlights</h2>
-    <p class="featured-subhead">Latest additions across every portfolio collection.</p>
-  </div>
-
-  <div class="featured-meta-bar">
-    <span><strong id="metaCount">--</strong> items</span>
-    <span><strong id="metaUpdated">--</strong> updated</span>
-    <span><strong id="metaSource">--</strong> source</span>
-  </div>
-
-  <div class="featured-loading" id="featuredLoading" role="status">
-    <div class="featured-spinner" aria-hidden="true"></div>
-    Loading featured images...
-  </div>
-
-  <div class="featured-grid" id="featuredGrid" aria-live="polite"></div>
-
-  <div class="auto-refresh-indicator" id="autoRefreshIndicator" aria-hidden="true"></div>
-  <div class="version-indicator" id="versionIndicator" title="Featured Portfolio v1.5" onclick="showChangelog()">Featured v1.5</div>
-</div>
-
-<div id="changelog-modal" class="changelog-modal" onclick="event.target === this && hideChangelog()">
-  <div class="changelog-content">
-    <button class="changelog-close" onclick="hideChangelog()">&times;</button>
-    <div class="changelog">
-      <h2>Featured Portfolio v1.5</h2>
-      <p>Enhanced journalism titles & improved masonry layout</p>
-      
-      <h3>✨ What's New</h3>
-      <ul>
-        <li>Journalism articles show proper titles (e.g., "The Rooney Rule")</li>
-        <li>Tighter masonry grid spacing for better visual density</li>
-        <li>Randomized cover images for variety on each load</li>
-        <li>Improved lightbox with repositioned close button</li>
-      </ul>
-      
-      <div class="changelog-link">
-        <a href="https://github.com/McCal-Codes/McCals-Website/blob/main/src/widgets/featured-portfolio/CHANGELOG.md" target="_blank" rel="noopener">
-          View Full Changelog on GitHub →
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<button class="debug-toggle" id="debugToggle" type="button">Toggle Debug</button>
-<div class="debug-info" id="debugInfo">
-  <h4>Featured Debug v1.5</h4>
-  <div id="debugStatus">Initializing...</div>
-  <dl>
-    <dt>Load time</dt><dd><span id="debugLoadTime">--</span> ms</dd>
-    <dt>Items</dt><dd><span id="debugItemCount">--</span></dd>
-    <dt>Images</dt><dd><span id="debugImageCount">--</span></dd>
-    <dt>API calls</dt><dd><span id="debugApiCalls">--</span></dd>
-    <dt>Last refresh</dt><dd><span id="debugLastRefresh">Never</span></dd>
-    <dt>Manifest</dt><dd><span id="debugManifest">--</span></dd>
-  </dl>
-</div>
-
-<div class="fp-lightbox" id="featuredLightbox" aria-hidden="true">
-  <div class="fp-dialog" role="dialog" aria-modal="true" aria-labelledby="fpTitle" tabindex="-1">
-    <button class="fp-close" type="button" aria-label="Close">&times;</button>
-    <div class="fp-gallery" id="fpGallery">
-      <div class="fp-hint">Scroll -></div>
-    </div>
-    <div class="fp-caption">
-      <h3 class="fp-title" id="fpTitle"></h3>
-      <p class="fp-meta" id="fpMeta"></p>
-    </div>
-  </div>
-</div>
-
-<script>
+﻿
 (() => {
   const pf = document.getElementById('featuredPf');
   if (!pf) return;
@@ -308,6 +8,7 @@
   const debugToggle = document.getElementById('debugToggle');
   const debugPanel = document.getElementById('debugInfo');
   const debugStatus = document.getElementById('debugStatus');
+  const hasDebugPanel = !!(debugToggle && debugPanel && debugStatus);
   const metaCount = document.getElementById('metaCount');
   const metaUpdated = document.getElementById('metaUpdated');
   const metaSource = document.getElementById('metaSource');
@@ -349,29 +50,25 @@
   const RAW_ROOT = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
   const PATH_PREFIX = 'src/images/Portfolios/';
 
-  const providedManifest = (pf.dataset.manifest || '').trim();
-  const manifestCandidates = [];
-  if (providedManifest) manifestCandidates.push(providedManifest);
-  manifestCandidates.push('src/images/Portfolios/featured-manifest.json');
-  manifestCandidates.push('src/images/Portfolios/portfolio-manifest.json');
-  manifestCandidates.push('src/images/Portfolios/Concert/concert-manifest.json');
-  manifestCandidates.push('src/images/Portfolios/Events/events-manifest.json');
-  manifestCandidates.push('src/images/Portfolios/Journalism/journalism-manifest.json');
+  const manifestCandidates = ['src/images/Portfolios/featured-manifest.json'];
 
   const manifestSources = Array.from(new Set(manifestCandidates.filter(Boolean)));
 
   function logDebug(message, data = null) {
-    if (debugActive) {
+    if (debugActive && hasDebugPanel) {
       console.log('[Featured Debug v1.5]', message, data || '');
-      debugStatus.textContent = message;
-      updateDebugMetrics();
+      if (debugStatus) {
+        debugStatus.textContent = message;
+        updateDebugMetrics();
+      }
     }
-    if (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) {
+    if (typeof message === 'string' && (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed'))) {
       console.error('[Featured Portfolio v1.5]', message, data || '');
     }
   }
 
   function toggleDebug() {
+    if (!hasDebugPanel) return;
     debugActive = !debugActive;
     debugPanel.classList.toggle('active', debugActive);
     if (debugActive) {
@@ -379,7 +76,9 @@
     }
   }
 
-  debugToggle.addEventListener('click', toggleDebug);
+  if (debugToggle && hasDebugPanel) {
+    debugToggle.addEventListener('click', toggleDebug);
+  }
   document.addEventListener('visibilitychange', () => {
     isTabVisible = !document.hidden;
   });
@@ -1070,13 +769,19 @@
   });
 
   function updateDebugMetrics() {
+    if (!hasDebugPanel) return;
     const loadTime = Math.round(performance.now() - debugMetrics.startTime);
-    document.getElementById('debugLoadTime').textContent = loadTime;
-    document.getElementById('debugItemCount').textContent = debugMetrics.itemCount;
-    document.getElementById('debugImageCount').textContent = debugMetrics.imageCount;
-    document.getElementById('debugApiCalls').textContent = debugMetrics.apiCalls;
-    document.getElementById('debugLastRefresh').textContent = debugMetrics.lastRefresh;
-    document.getElementById('debugManifest').textContent = debugMetrics.manifest;
+    const setText = id => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      return el;
+    };
+    const loadEl = setText('debugLoadTime'); if (loadEl) loadEl.textContent = loadTime;
+    const itemEl = setText('debugItemCount'); if (itemEl) itemEl.textContent = debugMetrics.itemCount;
+    const imageEl = setText('debugImageCount'); if (imageEl) imageEl.textContent = debugMetrics.imageCount;
+    const apiEl = setText('debugApiCalls'); if (apiEl) apiEl.textContent = debugMetrics.apiCalls;
+    const lastEl = setText('debugLastRefresh'); if (lastEl) lastEl.textContent = debugMetrics.lastRefresh;
+    const manifestEl = setText('debugManifest'); if (manifestEl) manifestEl.textContent = debugMetrics.manifest;
   }
 
   function updateNextRefreshIndicator() {
@@ -1137,7 +842,10 @@
     if (nextRefreshTimer) clearTimeout(nextRefreshTimer);
   });
 })();
-</script>
 
-</body>
-</html>
+
+
+
+
+
+

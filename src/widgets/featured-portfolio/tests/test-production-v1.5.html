@@ -54,26 +54,14 @@
         </div>
     </div>
 
-    <!-- Include the production widget -->
-    <script>
-        // Load the production widget content
-        fetch('src/widgets/featured-portfolio/versions/v1.5.html')
-            .then(response => response.text())
-            .then(html => {
-                // Extract the widget content (everything inside the body, excluding test wrapper)
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const widgetContent = doc.body.innerHTML;
-                
-                // Append to current page
-                document.body.insertAdjacentHTML('beforeend', widgetContent);
-            })
-            .catch(error => {
-                document.body.insertAdjacentHTML('beforeend', 
-                    '<div style="color: red; text-align: center; padding: 50px;">Error loading widget: ' + error.message + '</div>'
-                );
-            });
-    </script>
+    <!-- Widget preview via iframe (remove fetch and server warning) -->
+    <div style="max-width:1200px;margin:40px auto;">
+        <iframe src="../versions/v1.5.html"
+            style="width:100%;height:900px;border:none;border-radius:12px;box-shadow:0 2px 24px #0004;background:#fff;"
+            title="Featured Portfolio Widget Preview"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin"
+        ></iframe>
+    </div>
 </body>
 </html>
-</code>
