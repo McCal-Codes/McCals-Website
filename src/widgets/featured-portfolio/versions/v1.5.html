@@ -486,8 +486,24 @@
       const collectionParts = cleanPath(item.collection).split('/').filter(Boolean);
       resolved = ensurePrefix(resolved, collectionParts);
     }
-    resolved = ensurePrefix(resolved, rootSegments);
-    return resolved;
+    
+      // For featured manifest items, add the portfolio type prefix if missing
+      // This handles cases where featured manifest items have folderPath "Band Name/Date"
+      // but need "Concert/Band Name/Date" for correct image URLs
+      const itemType = item.type || item.category || '';
+      if (itemType) {
+        const normalizedType = canonicalizeType(itemType);
+        const typePrefix = normalizedType === 'concert' ? 'Concert' : 
+                          normalizedType === 'events' ? 'Events' : 
+                          normalizedType === 'journalism' ? 'Journalism' : '';
+      
+        if (typePrefix && resolved.length > 0 && resolved[0].toLowerCase() !== typePrefix.toLowerCase()) {
+          resolved = [typePrefix, ...resolved];
+        }
+      }
+    
+      resolved = ensurePrefix(resolved, rootSegments);
+      return resolved;
   }
 
   function extractRootSegments(url) {
