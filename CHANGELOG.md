@@ -14,7 +14,7 @@
 
 <!-- ...existing code... -->
 // ...existing code...
-
+- 2025-10-03: AI session — Validation: preflight/guardian/canvas/codex added and tasks wired
 ## 1.5.0 — 2025-09-29
 - Added unified-portfolio-demo.html (master demo with ?type= and ?manifest=).
 - Links to unified versions for Concert, Event, and Photojournalism.

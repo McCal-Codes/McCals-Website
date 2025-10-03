@@ -49,4 +49,5 @@ Windows tip
 
 Recent updates
 
+- 2025-10-03T06:29:14.362Z — Validation: preflight/guardian/canvas/codex added and tasks wired
 - Entries below are appended by the AI finalize script to summarize the last Canvas/agent session changes.

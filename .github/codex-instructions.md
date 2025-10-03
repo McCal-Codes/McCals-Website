@@ -51,4 +51,5 @@ PR/Docs discipline
 
 Recent updates
 
+- 2025-10-03T06:29:14.363Z — Validation: preflight/guardian/canvas/codex added and tasks wired
 - Entries below are appended by the AI finalize script to summarize what the last VS Code agent session changed.

@@ -82,4 +82,5 @@ Change management
 
 Recent updates
 
+- 2025-10-03T06:29:14.357Z — Validation: preflight/guardian/canvas/codex added and tasks wired
 - Entries below are appended by the AI finalize script to record what the last agent session changed.
