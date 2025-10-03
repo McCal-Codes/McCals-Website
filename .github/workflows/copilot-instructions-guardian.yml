@@ -1,3 +1,4 @@
+---
 name: Copilot Instructions Guardian
 
 on:
@@ -45,7 +46,9 @@ jobs:
           echo "Comparing $BASE_SHA...$HEAD_SHA"
           CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | tr '\n' ' ')
           echo "changed_files=$CHANGED" >> $GITHUB_OUTPUT
-          if echo "$CHANGED" | grep -Egqw "\.github/copilot-instructions\.md|\.github/canvas-instructions\.md|\.github/codex-instructions\.md"; then
+          # Detect if any of the AI instruction docs are in the changed set.
+          # Note: avoid -w because patterns contain hyphens/dots which can break word-boundary matching.
+          if echo "$CHANGED" | grep -E -q "(\.|^|\s)\.github/(copilot|canvas|codex)-instructions\.md(\s|$)"; then
             echo "needs_update=false" >> $GITHUB_OUTPUT
           else
             echo "needs_update=true" >> $GITHUB_OUTPUT
