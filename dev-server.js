@@ -7,7 +7,7 @@ const { spawn } = require('child_process');
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || 'localhost';
-const SITE_DIR = path.join(__dirname, 'site');
+const SITE_DIR = __dirname; // Serve from repo root to access all files
 const IS_PRODUCTION = process.argv.includes('--production');
 
 // MIME types for different file extensions
@@ -49,7 +49,7 @@ const server = http.createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  let filePath = path.join(SITE_DIR, req.url === '/' ? 'index.html' : req.url);
+  let filePath = path.join(SITE_DIR, req.url === '/' ? 'src/site/index.html' : req.url);
   
   // Security check - prevent directory traversal
   if (!filePath.startsWith(SITE_DIR)) {
@@ -61,7 +61,7 @@ const server = http.createServer((req, res) => {
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
       // If file doesn't exist, try to serve index.html for SPA routing
-      filePath = path.join(SITE_DIR, 'index.html');
+      filePath = path.join(SITE_DIR, 'src/site/index.html');
     }
     
     serveFile(res, filePath);

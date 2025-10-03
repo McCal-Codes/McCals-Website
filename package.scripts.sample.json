@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "manifest:events": "node scripts/generate-events-manifest-v2.js --root src/images/Portfolios/Events --force",
+    "manifest:events": "node scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force",
     "manifest:generate": "npm run manifest:events",
-    "watch:events-manifest": "node scripts/watch-events-manifest-v2.js"
+    "watch:events-manifest": "node scripts/watch-events-manifest.js"
   }
 }

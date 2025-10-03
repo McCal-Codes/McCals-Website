@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Widget Diagnostic</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 4px; }
+        .error { color: red; }
+        .success { color: green; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Widget Diagnostic Test</h1>
+    
+    <div class="test-section">
+        <h3>1. Basic JavaScript Test</h3>
+        <div id="js-test">Testing...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. Fetch API Test</h3>
+        <div id="fetch-test">Testing...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. Widget File Access Test</h3>
+        <div id="widget-test">Testing...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. Console Errors</h3>
+        <div id="console-errors">Monitoring console...</div>
+    </div>
+    
+    <script>
+        // Capture console errors
+        const originalError = console.error;
+        let errorCount = 0;
+        console.error = (...args) => {
+            originalError(...args);
+            errorCount++;
+            document.getElementById('console-errors').innerHTML = `
+                <div class="error">Error #${errorCount}: ${args.join(' ')}</div>
+                ${document.getElementById('console-errors').innerHTML}
+            `;
+        };
+        
+        // 1. Basic JavaScript test
+        setTimeout(() => {
+            document.getElementById('js-test').innerHTML = '<div class="success">✅ JavaScript is working</div>';
+        }, 100);
+        
+        // 2. Fetch API test
+        async function testFetch() {
+            try {
+                const response = await fetch('src/images/Portfolios/Concert/concert-manifest.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('fetch-test').innerHTML = `
+                        <div class="success">✅ Fetch working - Concert manifest loaded</div>
+                        <pre>Bands: ${data.bands?.length || 0}, Total: ${data.totalBands || 0}</pre>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                document.getElementById('fetch-test').innerHTML = `
+                    <div class="error">❌ Fetch failed: ${error.message}</div>
+                `;
+            }
+        }
+        
+        // 3. Widget file access test
+        async function testWidgetFile() {
+            try {
+                // Add cache busting
+                const cacheBuster = `?diagnostic=${Date.now()}`;
+                const response = await fetch(`src/widgets/featured-portfolio/versions/v1.5.html${cacheBuster}`, {
+                    cache: 'no-store',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                });
+                
+                if (response.ok) {
+                    const text = await response.text();
+                    const hasScript = text.includes('<script>');
+                    const hasLoadFromAllPortfolios = text.includes('loadFromAllPortfolios');
+                    const loadFromAllPortfoliosCount = (text.match(/loadFromAllPortfolios/g) || []).length;
+                    const hasInitMessage = text.includes('Featured Portfolio Widget v1.5 initializing');
+                    
+                    document.getElementById('widget-test').innerHTML = `
+                        <div class="success">✅ Widget file accessible (cache-busted)</div>
+                        <pre>Size: ${text.length} chars
+Has script tag: ${hasScript}
+Has loadFromAllPortfolios: ${hasLoadFromAllPortfolios}
+loadFromAllPortfolios occurrences: ${loadFromAllPortfoliosCount}
+Has init message: ${hasInitMessage}
+URL: ${response.url}</pre>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                document.getElementById('widget-test').innerHTML = `
+                    <div class="error">❌ Widget file access failed: ${error.message}</div>
+                `;
+            }
+        }
+        
+        // Run tests
+        setTimeout(testFetch, 200);
+        setTimeout(testWidgetFile, 400);
+        
+        // Monitor for 5 seconds
+        setTimeout(() => {
+            if (errorCount === 0) {
+                document.getElementById('console-errors').innerHTML = '<div class="success">✅ No console errors detected</div>';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

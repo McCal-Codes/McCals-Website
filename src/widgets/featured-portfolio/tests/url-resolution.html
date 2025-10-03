@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head><title>Path Test</title></head>
+<body>
+<h2>URL Resolution Test</h2>
+<div id="output"></div>
+
+<script>
+const output = document.getElementById('output');
+
+function log(msg) {
+    output.innerHTML += '<div style="margin: 5px 0; font-family: monospace;">' + msg + '</div>';
+}
+
+// Test the exact same logic as the widget
+const isLocal = window.location.protocol === 'file:' || 
+                window.location.hostname === 'localhost' || 
+                window.location.hostname === '127.0.0.1';
+
+  const RAW_ROOT = isLocal ? 
+    '../../../' : // Local development - relative path from tests folder to repo root  
+    `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+
+const manifestCandidates = [
+    'src/images/Portfolios/featured-manifest.json',
+    'src/images/Portfolios/portfolio-manifest.json'
+];
+
+function resolveManifestUrl(candidate) {
+    if (/^https?:/i.test(candidate)) return candidate;
+    const cleaned = candidate
+        .replace(/^(\.\.?\/)+/, '')
+        .replace(/^\.\/+/, '')
+        .replace(/^\/+/, '');
+    return RAW_ROOT + cleaned;
+}
+
+log('Current location: ' + window.location.href);
+log('Detected as local: ' + isLocal);
+log('RAW_ROOT: "' + RAW_ROOT + '"');
+log('');
+
+manifestCandidates.forEach(candidate => {
+    const resolved = resolveManifestUrl(candidate);
+    log('Candidate: ' + candidate);
+    log('Resolved: ' + resolved);
+    log('');
+    
+    // Test if this URL works
+    fetch(resolved)
+        .then(response => {
+            log('✅ ' + candidate + ' → HTTP ' + response.status);
+        })
+        .catch(error => {
+            log('❌ ' + candidate + ' → ERROR: ' + error.message);
+        });
+});
+</script>
+</body>
+</html>

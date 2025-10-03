@@ -409,5 +409,406 @@
       ],
       "totalImages": 7
     }
+  ],
+  "items": [
+    {
+      "title": "Product Launch Expo 2025",
+      "eventName": "Product Launch Expo 2025",
+      "category": "Corporate",
+      "dateDisplay": "June 2025",
+      "dateISO": "2025-06-20",
+      "date": {
+        "year": 2025,
+        "month": 6,
+        "day": 20,
+        "monthName": "June",
+        "iso": "2025-06-20",
+        "display": "June 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Showcase.jpg"
+        }
+      ],
+      "folderPath": "Events/Product-Launch-Expo-2025"
+    },
+    {
+      "title": "CMU Business Graduation",
+      "eventName": "CMU Business Graduation",
+      "category": "Celebration",
+      "dateDisplay": "May 2025",
+      "dateISO": "2025-05-11",
+      "date": {
+        "year": 2025,
+        "month": 5,
+        "day": 11,
+        "monthName": "May",
+        "iso": "2025-05-11",
+        "display": "May 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-1280.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-320.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-640.jpg"
+        }
+      ],
+      "folderPath": "Events/CMU-Business-Graduation"
+    },
+    {
+      "title": "Corporate Summit 2025",
+      "eventName": "Corporate Summit 2025",
+      "category": "Conference",
+      "dateDisplay": "March 2025",
+      "dateISO": "2025-03-15",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 15,
+        "monthName": "March",
+        "iso": "2025-03-15",
+        "display": "March 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Panel.jpg"
+        }
+      ],
+      "folderPath": "Events/Corporate-Summit-2025"
+    },
+    {
+      "title": "Charity Gala 2024",
+      "eventName": "Charity Gala 2024",
+      "category": "Celebration",
+      "dateDisplay": "November 2024",
+      "dateISO": "2024-11-05",
+      "date": {
+        "year": 2024,
+        "month": 11,
+        "day": 5,
+        "monthName": "November",
+        "iso": "2024-11-05",
+        "display": "November 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Auction.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Ballroom.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Red_Carpet.jpg"
+        }
+      ],
+      "folderPath": "Events/Charity-Gala-2024"
+    },
+    {
+      "title": "Dance For A Cause",
+      "eventName": "Dance For A Cause",
+      "category": "Corporate",
+      "dateDisplay": "October 2024",
+      "dateISO": "2024-10-18",
+      "date": {
+        "year": 2024,
+        "month": 10,
+        "day": 18,
+        "monthName": "October",
+        "iso": "2024-10-18",
+        "display": "October 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1012-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1038-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1068-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1108-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1145-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1174-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1276-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1282-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL130-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL140-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL168-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL256-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL353-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL38-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL420-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL497-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL512-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL545-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL55-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL626-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL63-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL667-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL693-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL79-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL826-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL832-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL84-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL892-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL91-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL949-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL972-min.jpg"
+        }
+      ],
+      "folderPath": "Events/Dance for a Cause"
+    },
+    {
+      "title": "Pennsylvania Media Awards 24",
+      "eventName": "Pennsylvania Media Awards 24",
+      "category": "Published",
+      "dateDisplay": "April 2024",
+      "dateISO": "2024-04-16",
+      "date": {
+        "year": 2024,
+        "month": 4,
+        "day": 16,
+        "monthName": "April",
+        "iso": "2024-04-16",
+        "display": "April 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-892-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-893-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-894-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-895-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-896-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-897-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-898-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-899-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-902-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-903-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-906-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-907-published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-980-published.jpg"
+        }
+      ],
+      "folderPath": "Events/pennsylvania-media-awards-24"
+    },
+    {
+      "title": "Franks Script Reading",
+      "eventName": "Franks Script Reading",
+      "category": "Corporate",
+      "dateDisplay": "November 2023",
+      "dateISO": "2023-11-10",
+      "date": {
+        "year": 2023,
+        "month": 11,
+        "day": 10,
+        "monthName": "November",
+        "iso": "2023-11-10",
+        "display": "November 2023"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7377-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7391-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7394-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7423-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7461-min.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7462-min.jpg"
+        }
+      ],
+      "folderPath": "Events/Franks Script Reading"
+    }
   ]
 }

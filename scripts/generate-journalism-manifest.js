@@ -101,17 +101,12 @@ async function main() {
       let eventName = extractEventFromFilename(image.filename);
       let category = image.category || 'Events';
       
-      // If image is in a folder structure like Politics/Clinton Rally, use folder as event name
-      const pathParts = image.relativePath.split('/');
-      if (pathParts.length >= 3) {
-        // Structure: Journalism/Category/EventName/filename
-        category = pathParts[1];
-        eventName = pathParts[2];
-      } else if (pathParts.length === 2) {
-        // Structure: Journalism/Category/filename (loose files in category)
-        category = pathParts[1];
-        // Keep eventName from filename
+      const pathParts = image.relativePath.split('/').filter(Boolean);
+      const folderSegments = pathParts.slice(0, -1);
+      if (folderSegments.length) {
+        category = folderSegments[0];
       }
+      const eventFolder = folderSegments.slice(1).join('/');
       
       // Override with published status if applicable
       const finalCategory = existing.published ? 'Published' : category;
@@ -121,12 +116,14 @@ async function main() {
       const imageDate = dateResult ? dateResult.iso : createFallbackDate().iso;
       
       // Create processed image entry
+      const folderPath = folderSegments.length ? folderSegments.join('/') : (image.folderName || category);
+      const normalizedFolderPath = folderPath ? normalizeSlashes(folderPath) : category;
       const processedImage = {
         filename: image.filename,
         path: image.relativePath,
         category: finalCategory,
         date: existing.date || imageDate,
-        caption: existing.caption || `${eventName} - ${finalCategory} photography`,
+        caption: existing.caption || ${eventName} -  photography,
         description: existing.description || '',
         published: existing.published || false,
         outlet: existing.outlet || null,
@@ -134,9 +131,9 @@ async function main() {
         articleUrl: existing.articleUrl || null,
         articleTitle: existing.articleTitle || null,
         publishedDate: existing.publishedDate || null,
-        folderName: image.folderName,
+        folderName: normalizedFolderPath,
         eventName: eventName,
-        eventFolder: pathParts.length >= 3 ? pathParts[2] : null
+        eventFolder: eventFolder || null
       };
       
       // Group by event name
@@ -148,7 +145,7 @@ async function main() {
         eventMap.set(eventName, {
           eventName: eventName,
           category: finalCategory,
-          folderPath: pathParts.length >= 3 ? `${category}/${eventName}` : (image.folderName || category),
+          folderPath: normalizedFolderPath || category,
           dateDisplay: formatDisplayDate(eventDateData),
           eventDate: {
             iso: eventDateData.iso,
@@ -157,10 +154,9 @@ async function main() {
           totalImages: 0,
           images: [],
           published: processedImage.published,
-          hasEventFolder: pathParts.length >= 3
+          hasEventFolder: folderSegments.length >= 2
         });
-      }
-      
+      }      
       const event = eventMap.get(eventName);
       event.images.push(processedImage);
       event.totalImages = event.images.length;
@@ -239,8 +235,10 @@ async function discoverImages(dir, baseDir = dir, images = []) {
         // Recursively scan subdirectories
         await discoverImages(fullPath, baseDir, images);
       } else if (entry.isFile() && isImageFile(entry.name)) {
-        const relativePath = path.relative(baseDir, fullPath);
-        const folderName = path.dirname(relativePath) === '.' ? '' : path.dirname(relativePath);
+        const relativePathRaw = path.relative(baseDir, fullPath);
+        const relativePath = normalizeSlashes(relativePathRaw);
+        const folderSegments = relativePath.split('/').filter(Boolean);
+        const folderName = folderSegments.slice(0, -1).join('/');
         
         images.push({
           filename: entry.name,
@@ -254,17 +252,20 @@ async function discoverImages(dir, baseDir = dir, images = []) {
     
     return images.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
   } catch (error) {
-    console.warn(`Warning: Could not scan directory ${dir}: ${error.message} - generate-journalism-manifest.js:257`);
+    console.warn(Warning: Could not scan directory :  - generate-journalism-manifest.js:257);
     return images;
   }
 }
-
 /**
  * Check if file is a supported image
  */
 function isImageFile(filename) {
   const ext = path.extname(filename).toLowerCase();
   return SUPPORTED_EXTENSIONS.includes(ext);
+}
+
+function normalizeSlashes(value) {
+  return typeof value === 'string' ? value.replace(/\\+/g, '/') : '';
 }
 
 /**

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Path Test</title>
+</head>
+<body>
+    <h1>Quick Path Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        const results = document.getElementById('results');
+        
+        async function testPaths() {
+            const paths = [
+                'src/images/Portfolios/Concert/concert-manifest.json',
+                'src/images/Portfolios/Events/events-manifest.json', 
+                'src/images/Portfolios/Journalism/journalism-manifest.json'
+            ];
+            
+            results.innerHTML = '<h3>Testing paths...</h3>';
+            
+            for (const path of paths) {
+                try {
+                    const response = await fetch(path);
+                    const status = response.ok ? '✅ OK' : `❌ ${response.status}`;
+                    results.innerHTML += `<p>${path} → ${status}</p>`;
+                } catch (error) {
+                    results.innerHTML += `<p>${path} → ❌ ${error.message}</p>`;
+                }
+            }
+        }
+        
+        testPaths();
+    </script>
+</body>
+</html>
