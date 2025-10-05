@@ -17,20 +17,6 @@
       "directory": "March 2024"
     },
     {
-      "bandName": "Bellueve Music Festival",
-      "folderName": "September 2025",
-      "imageCount": 30,
-      "date": {
-        "year": 2025,
-        "month": 9,
-        "monthName": "September",
-        "day": 27,
-        "iso": "2025-09-27",
-        "source": "filename_yymmdd"
-      },
-      "directory": "September 2025"
-    },
-    {
       "bandName": "Big Slime",
       "folderName": "August 2025",
       "imageCount": 10,
@@ -43,6 +29,20 @@
         "source": "filename_yymmdd"
       },
       "directory": "August 2025"
+    },
+    {
+      "bandName": "Brahctopus",
+      "folderName": "September 2025",
+      "imageCount": 30,
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 27,
+        "iso": "2025-09-27",
+        "source": "filename_yymmdd"
+      },
+      "directory": "September 2025"
     },
     {
       "bandName": "Casino Six",
@@ -227,5 +227,5 @@
       "directory": "March 2024"
     }
   ],
-  "generated": "2025-10-05T06:50:33.259Z"
+  "generated": "2025-10-05T07:17:21.091Z"
 }

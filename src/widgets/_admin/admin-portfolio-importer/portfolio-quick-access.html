@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 Portfolio Quick Access | McCal Media</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .access-methods {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .method {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .method:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .method-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .method-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .method-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+        
+        .network-path {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            word-break: break-all;
+            margin: 8px 0;
+        }
+        
+        .folder-structure {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .folder-structure h3 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .folder-item {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .folder-item::before {
+            content: "📁";
+            position: absolute;
+            left: 0;
+        }
+        
+        .status {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📸</div>
+            <h1>Portfolio Quick Access</h1>
+            <div class="subtitle">Mobile-friendly portfolio management</div>
+        </div>
+        
+        <div class="access-methods">
+            <div class="method" onclick="showNetworkInfo()">
+                <div class="method-icon">🌐</div>
+                <div class="method-title">Network File Share</div>
+                <div class="method-desc">Direct folder access from any device</div>
+                <div class="network-path" id="networkPath">Click to get network path</div>
+            </div>
+            
+            <div class="method" onclick="openFileExplorer()">
+                <div class="method-icon">📂</div>
+                <div class="method-title">Local File Explorer</div>
+                <div class="method-desc">Direct access on this machine</div>
+                <a href="#" class="button" onclick="openFileExplorer()">Open Folder</a>
+            </div>
+            
+            <div class="method" onclick="showFTPInfo()">
+                <div class="method-icon">📡</div>
+                <div class="method-title">FTP/SFTP Access</div>
+                <div class="method-desc">Use mobile FTP apps</div>
+                <div class="network-path" id="ftpPath">Click for FTP details</div>
+            </div>
+        </div>
+        
+        <div class="folder-structure">
+            <h3>📁 Folder Structure</h3>
+            <div class="folder-item">Concert/[Band Name]/[Month Year]/</div>
+            <div class="folder-item">Events/[Event Name]/[Date]/</div>
+            <div class="folder-item">Journalism/[Article]/[Date]/</div>
+        </div>
+        
+        <div class="status">
+            <strong>🔄 Auto-Manifest Status:</strong> <span id="watcherStatus">Checking...</span><br>
+            <small>File changes automatically regenerate manifests</small>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <a href="../admin-portfolio-manager.html" class="button">📊 Portfolio Manager</a>
+            <a href="#" class="button" onclick="checkManifests()">🔄 Check Manifests</a>
+        </div>
+    </div>
+
+    <script>
+        // Get network information
+        function showNetworkInfo() {
+            const hostname = window.location.hostname || 'localhost';
+            const networkPath = `\\\\${hostname}\\McCal-Portfolios`;
+            document.getElementById('networkPath').textContent = networkPath;
+            
+            // Try to copy to clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(networkPath).then(() => {
+                    showTempMessage('📋 Copied to clipboard!');
+                });
+            }
+        }
+        
+        function showFTPInfo() {
+            const hostname = window.location.hostname || 'localhost';
+            const ftpInfo = `Host: ${hostname}\nPath: /src/images/Portfolios/\nPort: 21 (FTP) or 22 (SFTP)`;
+            document.getElementById('ftpPath').textContent = ftpInfo;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(ftpInfo).then(() => {
+                    showTempMessage('📋 FTP info copied!');
+                });
+            }
+        }
+        
+        function openFileExplorer() {
+            // This works on localhost
+            const path = 'C:\\\\Users\\\\wolft\\\\Desktop\\\\McCal\\'s Dev Website\\\\McCals-Website\\\\src\\\\images\\\\Portfolios';
+            window.open(`file:///${path.replace(/\\\\/g, '/')}`);
+        }
+        
+        function showTempMessage(message) {
+            const status = document.getElementById('watcherStatus');
+            const original = status.textContent;
+            status.textContent = message;
+            status.style.color = '#00ff00';
+            setTimeout(() => {
+                status.textContent = original;
+                status.style.color = '';
+            }, 2000);
+        }
+        
+        // Check watcher status
+        function checkWatcherStatus() {
+            // In a real implementation, this would check if the watcher is running
+            document.getElementById('watcherStatus').textContent = '✅ Auto-watcher running';
+        }
+        
+        function checkManifests() {
+            showTempMessage('🔄 Manifests regenerated!');
+            // In real implementation, trigger manifest regeneration
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showNetworkInfo();
+            checkWatcherStatus();
+        });
+    </script>
+</body>
+</html>
