@@ -1,7 +1,7 @@
 {
   "version": "2.5.3",
   "generated": "2025-10-05",
-  "totalEvents": 8,
+  "totalEvents": 9,
   "events": [
     {
       "eventName": "Denver Robotics Convention",
@@ -640,6 +640,88 @@
         }
       ],
       "totalImages": 7
+    },
+    {
+      "eventName": "James Bond Cocktail Party 2023",
+      "category": "Celebration",
+      "dateDisplay": "April 2023",
+      "dateISO": "2023-04-11",
+      "date": {
+        "year": 2023,
+        "month": 4,
+        "day": 11,
+        "monthName": "April",
+        "iso": "2023-04-11",
+        "display": "April 2023"
+      },
+      "dateSource": "filename:230411_Cock Tail Hour - James Bond Event_843_Published.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_843_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_847_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_848_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_849_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_854_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_857_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_859_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_861_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_862_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_863_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_865_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_867_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_868_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_874_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_875_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_876_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_878_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_884_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_888_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_890_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230825_Cocktail_Reception_CAL2807_1.jpg"
+        }
+      ],
+      "totalImages": 21
     }
   ],
   "items": [
@@ -1272,6 +1354,87 @@
         }
       ],
       "folderPath": "Events/Franks Script Reading"
+    },
+    {
+      "title": "James Bond Cocktail Party 2023",
+      "eventName": "James Bond Cocktail Party 2023",
+      "category": "Celebration",
+      "dateDisplay": "April 2023",
+      "dateISO": "2023-04-11",
+      "date": {
+        "year": 2023,
+        "month": 4,
+        "day": 11,
+        "monthName": "April",
+        "iso": "2023-04-11",
+        "display": "April 2023"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_843_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_847_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_848_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_849_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_854_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_857_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_859_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_861_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_862_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_863_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_865_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_867_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_868_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_874_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_875_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_876_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_878_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_884_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_888_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230411_Cock Tail Hour - James Bond Event_890_Published.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/James Bond Cocktail Party 2023/230825_Cocktail_Reception_CAL2807_1.jpg"
+        }
+      ],
+      "folderPath": "Events/James Bond Cocktail Party 2023"
     }
   ]
 }
