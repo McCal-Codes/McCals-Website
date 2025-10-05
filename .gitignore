@@ -1,28 +1,122 @@
-# System files
-.DS_Store
-*/.DS_Store
-**/.DS_Store
+# System files# System files
 
-# Build directories (generated from source)
-dist/
+.DS_Store.DS_Store
 
-# Package files (generated from source)
-*.tgz
+*/.DS_Store*/.DS_Store
 
-# Sensitive recovery codes
-site-workspace/Recoveryy/github-recovery-codes.txt
+**/.DS_Store**/.DS_Store
 
-# Development workspace temporary files
-site-workspace/temp/
-site-workspace/drafts/
+Thumbs.dbThumbs.db
 
-# Local Netlify folder
-.netlify
-.vscode/
-node_modules
-# Squarespace developer theme repo
-sites/squarespace/theme/
-node_modules
+*.swp*.swp
+
+*.swo*.swo
+
+*~*~
+
+
+
+# Dependencies# Dependencies
+
+node_modules/node_modules/
+
+npm-debug.log*npm-debug.log*
+
+yarn-debug.log*yarn-debug.log*
+
+yarn-error.log*yarn-error.log*
+
+package-lock.jsonpackage-lock.json
+
+
+
+# Build directories (generated from source)# Build directories (generated from source)
+
+dist/dist/
+
+
+
+# Package files (generated from source)  # Package files (generated from source)  
+
+*.tgz*.tgz
+
+
+
+# Environment variables# Environment variables
+
+.env.env
+
+.env.local.env.local
+
+.env.development.local.env.development.local
+
+.env.test.local.env.test.local
+
+.env.production.local.env.production.local
+
+
+
+# IDE and Editor files# IDE and Editor files
+
+.vscode/.vscode/
+
+.idea/.idea/
+
+*.sublime-project*.sublime-project
+
+*.sublime-workspace*.sublime-workspace
+
+
+
+# Local development files# Local development files
+
+.netlify/.netlify/
+
+.vercel/.vercel/
+
+
+
+# Sensitive recovery codes# Sensitive recovery codes
+
+site-workspace/Recoveryy/github-recovery-codes.txtsite-workspace/Recoveryy/github-recovery-codes.txt
+
+
+
+# Development workspace temporary files# Development workspace temporary files
+
+site-workspace/temp/site-workspace/temp/
+
+site-workspace/drafts/site-workspace/drafts/
+
+
+
+# Log files# Log files
+
+logs/logs/
+
+*.log*.log
+
+
+
+# Runtime files# Runtime files
+
+*.pid*.pid
+
+*.seed*.seed
+
+*.pid.lock*.pid.lock
+
+
+
+# Admin backend server (local only)# Admin backend server (local only)
+
+admin-import-backend-*.logadmin-import-backend-*.log
+
+
+
+# Squarespace developer theme repo# Squarespace developer theme repo
+
+sites/squarespace/theme/sites/squarespace/theme/
 node_modules
 node_modules
 node_modules/.package-lock.json
@@ -19507,3 +19601,4 @@ node_modules/netlify-cli/node_modules/is-stream/readme.md
 node_modules/netlify-cli/node_modules/is-typedarray/index.js
 node_modules/netlify-cli/node_modules/is-typedarray/LICENSE.md
 node_modules/netlify-cli/node_modules/is-typedarray/README.md
+node_modules
