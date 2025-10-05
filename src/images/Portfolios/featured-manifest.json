@@ -22,7 +22,7 @@
   ],
   "dateRange": {
     "newest": "2025-10-05",
-    "oldest": "2024-10-18"
+    "oldest": "2019-04-15"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
@@ -35,15 +35,15 @@
       "title": "Denver Robotics Convention",
       "eventName": "Denver Robotics Convention",
       "category": "Events Photography",
-      "dateDisplay": "October 2025",
-      "dateISO": "2025-10-05",
+      "dateDisplay": "April 2019",
+      "dateISO": "2019-04-15",
       "date": {
-        "year": 2025,
-        "month": 10,
-        "day": 5,
-        "monthName": "October",
-        "iso": "2025-10-05",
-        "display": "October 2025"
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "display": "April 2019"
       },
       "images": [
         {

@@ -6,18 +6,18 @@
     {
       "eventName": "Denver Robotics Convention",
       "category": "Corporate",
-      "dateDisplay": "October 2025",
-      "dateISO": "2025-10-05",
+      "dateDisplay": "April 2019",
+      "dateISO": "2019-04-15",
       "date": {
-        "year": 2025,
-        "month": 10,
-        "day": 5,
-        "monthName": "October",
-        "iso": "2025-10-05",
-        "display": "October 2025"
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "display": "April 2019"
       },
-      "dateSource": "fallback:current",
-      "dateConfidence": "low",
+      "dateSource": "manual:update",
+      "dateConfidence": "medium",
       "images": [
         {
           "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
@@ -663,15 +663,15 @@
       "title": "Denver Robotics Convention",
       "eventName": "Denver Robotics Convention",
       "category": "Corporate",
-      "dateDisplay": "October 2025",
-      "dateISO": "2025-10-05",
+      "dateDisplay": "April 2019",
+      "dateISO": "2019-04-15",
       "date": {
-        "year": 2025,
-        "month": 10,
-        "day": 5,
-        "monthName": "October",
-        "iso": "2025-10-05",
-        "display": "October 2025"
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "display": "April 2019"
       },
       "images": [
         {

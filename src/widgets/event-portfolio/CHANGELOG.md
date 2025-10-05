@@ -13,7 +13,7 @@
 ## 2.6.1 — 2025-01-05
 ### Data Updates & Display Enhancement 📊
 - **ENHANCED**: Increased featured items display from 6 to 12 cards for more content visibility
-- **CORRECTED**: Denver Robotics Convention date from October 2025 to October 2019 (historical accuracy)
+- **CORRECTED**: Denver Robotics Convention date from October 2025 to April 2019 (spring timeline) (historical accuracy)
 - **ADDED**: Local Insulators Union Officers Conference (March 2024, Corporate category)
 - **UPDATED**: Total events count from 7 to 8 reflecting new addition
 - **IMPROVED**: All journalism widget v4.9 UX patterns retained with data corrections
