@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "type": "featured",
-  "generated": "2025-10-05T08:09:54.599Z",
+  "generated": "2025-10-05T11:07:13.590Z",
   "generatedBy": "enhanced-featured-manifest-generator",
   "sources": [
     "concert-manifest.json",
@@ -9,7 +9,7 @@
     "journalism-manifest.json"
   ],
   "totalItems": 12,
-  "totalImages": 189,
+  "totalImages": 230,
   "categories": [
     "Concert Photography",
     "Events Photography",
@@ -21,8 +21,8 @@
     "Journalism"
   ],
   "dateRange": {
-    "newest": "2025-09-27",
-    "oldest": "2023-11-10"
+    "newest": "2025-10-05",
+    "oldest": "2024-10-18"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
@@ -31,6 +31,56 @@
     "usesSharedDateParsing": true
   },
   "items": [
+    {
+      "title": "Denver Robotics Convention",
+      "eventName": "Denver Robotics Convention",
+      "category": "Events Photography",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-05",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 5,
+        "monthName": "October",
+        "iso": "2025-10-05",
+        "display": "October 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+        }
+      ],
+      "folderPath": "Events/Denver Robotics Convention",
+      "type": "Events",
+      "id": "Denver Robotics Convention",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+      },
+      "totalImages": 7,
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
+    },
     {
       "bandName": "Brahctopus",
       "folderPath": "Brahctopus/September 2025",
@@ -97,6 +147,115 @@
       ]
     },
     {
+      "bandName": "Big Slime",
+      "folderPath": "Big Slime/September 2025",
+      "dateDisplay": "September 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 1,
+        "iso": "2025-09-01"
+      },
+      "totalImages": 17,
+      "images": [
+        "250927_Bellueve Music Festival_CAL6199_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6212_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6213_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6224_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6234_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6249_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6249_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6269_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6274_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6274_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6277_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6277_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6284_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6290_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6296_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6302_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6302_webuse.jpg"
+      ],
+      "name": "Big Slime",
+      "title": "Big Slime",
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 1,
+        "iso": "2025-09-01"
+      },
+      "type": "Concert",
+      "category": "Concert Photography",
+      "id": "Big Slime",
+      "coverImage": "250927_Bellueve Music Festival_CAL6199_webuse.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
+      "bandName": "Funky Lamp",
+      "folderPath": "Funky Lamp/September 2025",
+      "dateDisplay": "September 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 1,
+        "iso": "2025-09-01"
+      },
+      "totalImages": 26,
+      "images": [
+        "250927_Bellueve Music Festival_CAL6043_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6043_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6051_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6051_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6054_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6054_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6057_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6060_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6061_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6061_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6062_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6064_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6064_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6073_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6077_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6108_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6119_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6134_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6141_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6143_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6148_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6148_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6162_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6167_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6169_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6183_webuse.jpg"
+      ],
+      "name": "Funky Lamp",
+      "title": "Funky Lamp",
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 1,
+        "iso": "2025-09-01"
+      },
+      "type": "Concert",
+      "category": "Concert Photography",
+      "id": "Funky Lamp",
+      "coverImage": "250927_Bellueve Music Festival_CAL6043_webuse 1.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
       "bandName": "The Book Club",
       "folderPath": "The Book Club/August 2025",
       "dateDisplay": "August 2025",
@@ -148,88 +307,6 @@
       "category": "Concert Photography",
       "id": "The Book Club",
       "coverImage": "250829_Haven_CAL4584.jpg",
-      "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
-      ]
-    },
-    {
-      "bandName": "Turtle Park",
-      "folderPath": "Turtle Park/August 2025",
-      "dateDisplay": "August 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
-      },
-      "totalImages": 7,
-      "images": [
-        "250829_Haven_CAL4388.jpg",
-        "250829_Haven_CAL4401.jpg",
-        "250829_Haven_CAL4437.jpg",
-        "250829_Haven_CAL4482.jpg",
-        "250829_Haven_CAL4490.jpg",
-        "250829_Haven_CAL4543.jpg",
-        "250829_Haven_CAL4570.jpg"
-      ],
-      "name": "Turtle Park",
-      "title": "Turtle Park",
-      "date": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
-      },
-      "type": "Concert",
-      "category": "Concert Photography",
-      "id": "Turtle Park",
-      "coverImage": "250829_Haven_CAL4388.jpg",
-      "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
-      ]
-    },
-    {
-      "bandName": "We Are All Made of Stardust",
-      "folderPath": "We Are All Made of Stardust/August 2025",
-      "dateDisplay": "August 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
-      },
-      "totalImages": 5,
-      "images": [
-        "250829_Haven_CAL4356.jpg",
-        "250829_Haven_CAL4363.jpg",
-        "250829_Haven_CAL4373.jpg",
-        "250829_Haven_CAL4376.jpg",
-        "250829_Haven_CAL4382.jpg"
-      ],
-      "name": "We Are All Made of Stardust",
-      "title": "We Are All Made of Stardust",
-      "date": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
-      },
-      "type": "Concert",
-      "category": "Concert Photography",
-      "id": "We Are All Made of Stardust",
-      "coverImage": "250829_Haven_CAL4356.jpg",
       "tags": [
         "Live Music",
         "Concert",
@@ -547,6 +624,104 @@
           "Politics"
         ]
       }
+    },
+    {
+      "title": "Pitt University Graduation Winter 2024",
+      "eventName": "Pitt University Graduation Winter 2024",
+      "category": "Events Photography",
+      "dateDisplay": "December 2024",
+      "dateISO": "2024-12-18",
+      "date": {
+        "year": 2024,
+        "month": 12,
+        "day": 18,
+        "monthName": "December",
+        "iso": "2024-12-18",
+        "display": "December 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7109.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7117.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7132.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7136.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7146.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7154.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7166.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7169.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7174.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7182.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7195.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7200.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7272.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7290.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7317.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7357.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7383.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7452.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7502.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7512.jpg"
+        }
+      ],
+      "folderPath": "Events/Pitt University Graduation Winter 2024",
+      "type": "Events",
+      "id": "Pitt University Graduation Winter 2024",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
+      },
+      "totalImages": 23,
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
     },
     {
       "eventName": "Kamala In Pittsburgh Amid Election Eve",
@@ -1034,124 +1209,6 @@
         "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1012-min.jpg"
       },
       "totalImages": 31,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
-    },
-    {
-      "title": "Pennsylvania Media Awards 24",
-      "eventName": "Pennsylvania Media Awards 24",
-      "category": "Events Photography",
-      "dateDisplay": "April 2024",
-      "dateISO": "2024-04-16",
-      "date": {
-        "year": 2024,
-        "month": 4,
-        "day": 16,
-        "monthName": "April",
-        "iso": "2024-04-16",
-        "display": "April 2024"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-892-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-893-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-894-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-895-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-896-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-897-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-898-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-899-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-902-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-903-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-906-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-907-published.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-980-published.jpg"
-        }
-      ],
-      "folderPath": "Events/pennsylvania-media-awards-24",
-      "type": "Events",
-      "id": "Pennsylvania Media Awards 24",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/pennsylvania-media-awards-24/240416-pennsylvania-media-awards-892-published.jpg"
-      },
-      "totalImages": 13,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
-    },
-    {
-      "title": "Franks Script Reading",
-      "eventName": "Franks Script Reading",
-      "category": "Events Photography",
-      "dateDisplay": "November 2023",
-      "dateISO": "2023-11-10",
-      "date": {
-        "year": 2023,
-        "month": 11,
-        "day": 10,
-        "monthName": "November",
-        "iso": "2023-11-10",
-        "display": "November 2023"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7377-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7391-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7394-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7423-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7461-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7462-min.jpg"
-        }
-      ],
-      "folderPath": "Events/Franks Script Reading",
-      "type": "Events",
-      "id": "Franks Script Reading",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.jpg"
-      },
-      "totalImages": 7,
       "tags": [
         "Event",
         "Corporate",
