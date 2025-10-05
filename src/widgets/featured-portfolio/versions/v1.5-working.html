@@ -1148,18 +1148,27 @@
                 pathSegments: item.pathSegments
               })));
 
-              renderGallery(uniqueItems);    } catch (error) {
-      console.error('Featured portfolio loading failed:', error);
-      showError(`Failed to load featured portfolio: ${error.message}`);
-    }
-  }
+              // Shuffle featured items before rendering
+              function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+              }
+              renderGallery(shuffle(uniqueItems));
+            } catch (error) {
+              console.error('Featured portfolio loading failed:', error);
+              showError(`Failed to load featured portfolio: ${error.message}`);
+            }
+          }
 
   function showError(message) {
     loading.style.display = 'none';
     grid.innerHTML = `<div class="featured-error" role="alert">${message}</div>`;
     metaCount.textContent = '0';
     metaUpdated.textContent = 'Failed';
-    metaSource.textContent = 'Error';
+  metaSource.textContent = 'All Portfolios | Error';
   }
 
           function renderGallery(slots) {
@@ -1175,7 +1184,9 @@
 
               metaCount.textContent = slots.length;
       metaUpdated.textContent = new Date().toLocaleDateString();
-      metaSource.textContent = 'Portfolio';
+  const today = new Date();
+  const dateStr = today.toLocaleDateString(undefined,{ month:'short', day:'numeric'});
+  metaSource.textContent = `All Portfolios | ${dateStr}`;
 
       const fragment = document.createDocumentFragment();
       const cards = [];
@@ -1543,8 +1554,18 @@
     refreshButton.style.opacity = '0.5';
     refreshButton.disabled = true;
     refreshButton.textContent = '↻ Refreshing...';
-    
-    loadAndRender(true).finally(() => {
+    // Clear localStorage cache entries for featured widget before forcing reload
+    try {
+      const prefix = CACHE_KEY_PREFIX;
+      const toDelete = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith(prefix)) toDelete.push(k);
+      }
+      toDelete.forEach(k => localStorage.removeItem(k));
+    } catch(e) { /* ignore cache clear errors */ }
+
+    loadAndRender(true, { reason: 'manual-refresh', bust: Date.now() }).finally(() => {
       refreshButton.style.opacity = '1';
       refreshButton.disabled = false;
       refreshButton.textContent = '↻ Refresh';

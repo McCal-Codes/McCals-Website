@@ -1,9 +1,10 @@
 # Changelog - Event Portfolio
 
-## 2.5.3
-- Updated fallback art to glass gradient + repositioned close button
-- Reordered filters (All/Featured first) and renamed snippet files to v2.5.3
-- Fixed manifest category heuristics + cache version bump
+## 2.5.4
+- Added explicit cache-busting param on manual (Force + Bust) refresh to defeat CDN edge caching.
+- Scoped cache key by manifest generated date (regenerations invalidate immediately).
+- Added separate Force + Bust button to debug panel; updates manifest URL display when used.
+- Improved debug status line to include manifest generated date.
 
 ## 2.5.1
 - Added CMU Business Graduation gallery assets to base manifest

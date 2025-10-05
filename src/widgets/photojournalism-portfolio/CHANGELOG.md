@@ -2,6 +2,16 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v4.3.4 (2025-10-05) — Cache Bust + Header Isolation ♻️
+- NEW: Generated-date–scoped cache key automatically invalidates stale localStorage entries when the manifest regenerates
+- NEW: Force + Bust debug control adds a timestamp query parameter to defeat CDN / edge caching immediately
+- NEW: Global `html.lb-open` pointer-events isolation (prevents Squarespace header / announcement bar interaction under lightbox)
+- NEW: Debug panel fields for Manifest Generated date and active Bust token
+- IMPROVED: Unified debug action layout (Force, Force + Bust, Clear Cache, Logs toggle, Tests)
+- IMPROVED: Lightbox overlay receives explicit max z-index (2,147,483,647) parity with Events / Featured widgets
+- TECHNICAL: Local cache TTL remains 10m; scheduled background refresh every 15m now uses new generated-date key
+- NOTE: Previous 4.3.x experimental styling entries retained below for historical record
+
 ## v3.0.1 (2024-09-23) — Data Correction
 • Fixed Rooney Rule image marked as unpublished
 • Updated test data accuracy
