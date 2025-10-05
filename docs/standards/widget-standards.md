@@ -241,6 +241,18 @@ For portfolio and gallery widgets:
   backdrop-filter: blur(8px);
 }
 
+/* Lightbox images - prevent stretching/distortion */
+.lightbox img {
+  max-width: 92vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* Preserves aspect ratio */
+  display: block;      /* Proper block rendering */
+  margin: 0 auto;      /* Centers horizontally */
+  border-radius: 10px;
+}
+
 /* Navigation hiding during lightbox */
 html.lb-open header,
 html.lb-open .Header,

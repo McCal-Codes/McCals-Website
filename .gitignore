@@ -1,63 +1,122 @@
-# System files# System files
+# System files# System files# System files
 
-.DS_Store.DS_Store
+.DS_Store
 
-*/.DS_Store*/.DS_Store
+*/.DS_Store.DS_Store.DS_Store
 
-**/.DS_Store**/.DS_Store
+**/.DS_Store
+
+Thumbs.db*/.DS_Store*/.DS_Store
+
+*.swp
+
+*.swo**/.DS_Store**/.DS_Store
+
+*~
 
 Thumbs.dbThumbs.db
 
-*.swp*.swp
+# Dependencies
 
-*.swo*.swo
+node_modules/*.swp*.swp
 
-*~*~
+npm-debug.log*
+
+yarn-debug.log**.swo*.swo
+
+yarn-error.log*
+
+package-lock.json*~*~
 
 
+
+# Build directories (generated from source)
+
+dist/
 
 # Dependencies# Dependencies
 
-node_modules/node_modules/
+# Package files (generated from source)  
 
-npm-debug.log*npm-debug.log*
+*.tgznode_modules/node_modules/
 
-yarn-debug.log*yarn-debug.log*
 
-yarn-error.log*yarn-error.log*
+
+# Environment variablesnpm-debug.log*npm-debug.log*
+
+.env
+
+.env.localyarn-debug.log*yarn-debug.log*
+
+.env.development.local
+
+.env.test.localyarn-error.log*yarn-error.log*
+
+.env.production.local
 
 package-lock.jsonpackage-lock.json
 
+# IDE and Editor files
 
+.vscode/
 
-# Build directories (generated from source)# Build directories (generated from source)
+.idea/
+
+*.sublime-project# Build directories (generated from source)# Build directories (generated from source)
+
+*.sublime-workspace
 
 dist/dist/
 
+# Local development files
 
+.netlify/
+
+.vercel/
 
 # Package files (generated from source)  # Package files (generated from source)  
 
-*.tgz*.tgz
+# Sensitive recovery codes
+
+site-workspace/Recoveryy/github-recovery-codes.txt*.tgz*.tgz
 
 
 
-# Environment variables# Environment variables
+# Development workspace temporary files
 
-.env.env
+site-workspace/temp/
 
-.env.local.env.local
+site-workspace/drafts/# Environment variables# Environment variables
 
-.env.development.local.env.development.local
 
-.env.test.local.env.test.local
+
+# Log files.env.env
+
+logs/
+
+*.log.env.local.env.local
+
+
+
+# Runtime files.env.development.local.env.development.local
+
+*.pid
+
+*.seed.env.test.local.env.test.local
+
+*.pid.lock
 
 .env.production.local.env.production.local
 
+# Admin backend server (local only)
+
+admin-import-backend-*.log
 
 
-# IDE and Editor files# IDE and Editor files
 
+# Squarespace developer theme repo# IDE and Editor files# IDE and Editor files
+
+sites/squarespace/theme/
 .vscode/.vscode/
 
 .idea/.idea/
