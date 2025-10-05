@@ -1,6 +1,12 @@
 # Complete About Page Widget Changelog
 
-## Version 1.4.1 - Organized Structure (2025-01-14)
+## Version 1.4.4 - Client Carousel v1.2.3 Integration (2025-10-05)
+
+### 🚀 Carousel Upgrade
+- **Integrated v1.2.3 Client Carousel**: Replaced previous carousel logic with triple-array infinite loop, Fisher-Yates shuffle, and robust error handling
+- **Branding Fixes**: Pittsburgh Union Progress logo always white; Pittsburgh Magazine logo filter for visibility
+- **Performance Enhancements**: All carousel optimizations and workspace standards applied
+- **Changelog Panel**: Updated to document carousel integration and improvements
 
 ### 🗂️ Structure Reorganization
 - **New Location**: Moved to `src/widgets/about/complete-about-page/`
@@ -41,6 +47,10 @@
 - **`about-section-squarespace.html`**: Simplified bio-focused version without carousel/reviews
 
 ## Version History (Legacy)
+
+### v1.4.1 (2025-01-14)
+- Structure reorganization and documentation
+- All v1.4.1 features maintained
 
 ### v1.4.0 (2025-10-05)
 - Added comprehensive debug system
@@ -88,6 +98,6 @@
 
 ---
 
-**Archive Date**: January 14, 2025  
+**Archive Date**: October 5, 2025  
 **Current Status**: Production Ready ✅  
 **Maintained By**: McCal Media Development Team

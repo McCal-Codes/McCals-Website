@@ -6,11 +6,12 @@ This directory contains widgets related to the About section of the website, org
 
 ### Client Carousel (`client-carousel/`)
 - **Purpose**: Professional client showcase carousel for Squarespace
-- **Current Version**: v1.1.5
-- **Features**: Randomized order, seamless infinite loop, high-quality logos
+- **Current Version**: v1.1.8
+- **Features**: 22 clients, enhanced university branding, seamless infinite loop, reliable logo loading
 - **Status**: Production Ready ✅
 
 #### Key Features:
+- 22 trusted client partners including media, education, and hospitality
 - Fisher-Yates shuffle algorithm for random client display
 - Triple array system for seamless infinite scrolling
 - High-quality transparent logos optimized for dark themes
@@ -56,7 +57,10 @@ src/widgets/about/
 │   │   ├── v1.1.2-client-carousel-squarespace.html
 │   │   ├── v1.1.3-client-carousel-squarespace.html
 │   │   ├── v1.1.4-client-carousel-squarespace.html
-│   │   └── v1.1.5-client-carousel-squarespace.html
+│   │   ├── v1.1.5-client-carousel-squarespace.html
+│   │   ├── v1.1.6-client-carousel-squarespace.html
+│   │   ├── v1.1.7-client-carousel-squarespace.html
+│   │   └── v1.1.8-client-carousel-squarespace.html
 │   ├── README.md                           # Widget documentation
 │   └── CHANGELOG.md                        # Change history
 ├── complete-about-page/
