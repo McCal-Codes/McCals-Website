@@ -56,8 +56,11 @@ Key manifest outputs
 
 CI automation
 
-- `.github/workflows/build-manifest.yml` runs on pushes touching `images/Portfolios/Concert/**` and regenerates/commits concert manifests (uses Node 20). It commits `images/Portfolios/Concert/concert-manifest.json` and per-folder `manifest.json` when changed.
-- Similar jobs exist for Events and Journalism: `events-manifest.yml` and `journalism-manifest.yml` watch `src/images/Portfolios/{Events|Journalism}/**` and commit their respective `*-manifest.json` outputs.
+- `.github/workflows/build-manifest.yml` runs on pushes touching `src/images/Portfolios/Concert/**` and regenerates/commits concert manifests (uses Node 20). Features retry logic, JSON validation, and robust error handling.
+- Similar jobs exist for Events and Journalism: `events-manifest.yml` and `journalism-manifest.yml` watch `src/images/Portfolios/{Events|Journalism}/**` with full error recovery.
+- Emergency recovery: `regenerate-all-manifests.yml` can manually regenerate any combination of manifests with force option.
+- Health monitoring: `workflow-health-check.yml` runs daily to validate all manifest files and generation scripts.
+- All workflows include: retry logic (3 attempts), JSON validation, data integrity checks, proper error reporting.
 - Docs guard: `copilot-instructions-guardian.yml` reminds/fails PRs when core flows change without updating `.github/copilot-instructions.md`, and requires a `CHANGELOG.md` entry when the instructions change (bypass labels: `docs-acknowledged`, `skip-copilot-instructions`).
 
 Widget authoring conventions
@@ -95,6 +98,15 @@ Safe-change checklist for agents
 - Test locally: Use `npm run dev` to preview widgets in test harness before Squarespace deployment.
 - **Widget preview workflow**: When testing widgets, let the user preview them in VS Code's built-in browser or locally first, then have the user describe what they see or what issues they encounter rather than automatically hosting on external servers.
 - Performance: Monitor widget performance with `?debug=true` URL parameter and `window.portfolioAPI.getMetrics()` in console.
+
+Workflow troubleshooting
+
+- **Manifest generation fails**: Use GitHub Actions "Regenerate All Manifests" workflow with force option to recover
+- **Path errors**: All manifest workflows expect `src/images/Portfolios/` structure (not `images/Portfolios/`)
+- **JSON validation fails**: Workflows include automatic JSON validation with jq; invalid JSON will fail with clear error messages
+- **Retry failures**: Workflows attempt generation 3 times with 5-second delays; persistent failures indicate script or data issues
+- **Manual recovery**: Access Actions tab → "Regenerate All Manifests" → "Run workflow" to force regeneration of specific manifests
+- **Health monitoring**: Check "Workflow Health Check" results for daily validation of all manifest files and scripts
 
 Widget performance and debugging
 

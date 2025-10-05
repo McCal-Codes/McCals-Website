@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated": "2025-10-03T21:27:14.263Z",
+  "generated": "2025-10-05T08:04:28.523Z",
   "totalEvents": 7,
   "totalImages": 74,
   "categories": [
@@ -31,7 +31,7 @@
         "iso": "2025-04-17",
         "source": "filename_extraction"
       },
-      "dateDisplay": "April 17, 2025",
+      "dateDisplay": "April 16, 2025",
       "totalImages": 1,
       "images": [
         {
@@ -58,7 +58,7 @@
         "iso": "2025-03-15",
         "source": "filename_extraction"
       },
-      "dateDisplay": "March 15, 2025",
+      "dateDisplay": "March 14, 2025",
       "totalImages": 11,
       "images": [
         {
@@ -175,7 +175,7 @@
         "iso": "2024-11-04",
         "source": "filename_extraction"
       },
-      "dateDisplay": "November 4, 2024",
+      "dateDisplay": "November 3, 2024",
       "totalImages": 19,
       "images": [
         {
@@ -366,7 +366,7 @@
         "iso": "2024-10-29",
         "source": "metadata"
       },
-      "dateDisplay": "October 29, 2024",
+      "dateDisplay": "October 28, 2024",
       "totalImages": 9,
       "images": [
         {
@@ -503,7 +503,7 @@
         "iso": "2024-10-14",
         "source": "filename_extraction"
       },
-      "dateDisplay": "October 14, 2024",
+      "dateDisplay": "October 13, 2024",
       "totalImages": 8,
       "images": [
         {
@@ -593,7 +593,7 @@
         "iso": "2024-10-12",
         "source": "filename_extraction"
       },
-      "dateDisplay": "October 12, 2024",
+      "dateDisplay": "October 11, 2024",
       "totalImages": 6,
       "images": [
         {
@@ -667,7 +667,7 @@
         "iso": "2024-10-10",
         "source": "metadata"
       },
-      "dateDisplay": "October 10, 2024",
+      "dateDisplay": "October 9, 2024",
       "totalImages": 20,
       "images": [
         {

@@ -1,0 +1,177 @@
+name: Regenerate All Manifests
+
+on:
+  # Manual trigger only - for emergency recovery
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force regeneration even if no changes detected'
+        required: false
+        default: false
+        type: boolean
+      manifests:
+        description: 'Which manifests to regenerate (comma-separated: concert,events,journalism,universal,featured)'
+        required: false
+        default: 'concert,events,journalism,universal,featured'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate-manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Parse manifest selection
+        id: parse_manifests
+        run: |
+          MANIFESTS="${{ github.event.inputs.manifests || 'concert,events,journalism,universal,featured' }}"
+          echo "manifests=$MANIFESTS" >> $GITHUB_OUTPUT
+          
+          # Parse individual flags
+          if [[ "$MANIFESTS" == *"concert"* ]]; then
+            echo "do_concert=true" >> $GITHUB_OUTPUT
+          else
+            echo "do_concert=false" >> $GITHUB_OUTPUT
+          fi
+          
+          if [[ "$MANIFESTS" == *"events"* ]]; then
+            echo "do_events=true" >> $GITHUB_OUTPUT
+          else
+            echo "do_events=false" >> $GITHUB_OUTPUT
+          fi
+          
+          if [[ "$MANIFESTS" == *"journalism"* ]]; then
+            echo "do_journalism=true" >> $GITHUB_OUTPUT
+          else
+            echo "do_journalism=false" >> $GITHUB_OUTPUT
+          fi
+          
+          if [[ "$MANIFESTS" == *"universal"* ]]; then
+            echo "do_universal=true" >> $GITHUB_OUTPUT
+          else
+            echo "do_universal=false" >> $GITHUB_OUTPUT
+          fi
+          
+          if [[ "$MANIFESTS" == *"featured"* ]]; then
+            echo "do_featured=true" >> $GITHUB_OUTPUT
+          else
+            echo "do_featured=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Regenerate concert manifest
+        if: steps.parse_manifests.outputs.do_concert == 'true'
+        run: |
+          echo "🎸 Regenerating concert manifest..."
+          npm run manifest:concert
+          
+          if [ -f "src/images/Portfolios/Concert/concert-manifest.json" ]; then
+            echo "✅ Concert manifest regenerated successfully"
+          else
+            echo "❌ Concert manifest generation failed"
+            exit 1
+          fi
+
+      - name: Regenerate events manifest
+        if: steps.parse_manifests.outputs.do_events == 'true'
+        run: |
+          echo "🎞️ Regenerating events manifest..."
+          npm run manifest:events
+          
+          if [ -f "src/images/Portfolios/Events/events-manifest.json" ]; then
+            echo "✅ Events manifest regenerated successfully"
+          else
+            echo "❌ Events manifest generation failed"
+            exit 1
+          fi
+
+      - name: Regenerate journalism manifest
+        if: steps.parse_manifests.outputs.do_journalism == 'true'
+        run: |
+          echo "📰 Regenerating journalism manifest..."
+          npm run manifest:journalism -- --force
+          
+          if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json" ]; then
+            echo "✅ Journalism manifest regenerated successfully"
+          else
+            echo "❌ Journalism manifest generation failed"
+            exit 1
+          fi
+
+      - name: Regenerate universal manifest
+        if: steps.parse_manifests.outputs.do_universal == 'true'
+        run: |
+          echo "🌍 Regenerating universal manifest..."
+          npm run manifest:universal
+          
+          if [ -f "src/images/Portfolios/portfolio-manifest.json" ]; then
+            echo "✅ Universal manifest regenerated successfully"
+          else
+            echo "❌ Universal manifest generation failed"
+            exit 1
+          fi
+
+      - name: Regenerate featured manifest
+        if: steps.parse_manifests.outputs.do_featured == 'true'
+        run: |
+          echo "⭐ Regenerating featured manifest..."
+          npm run manifest:featured
+          
+          if [ -f "src/images/Portfolios/featured-manifest.json" ]; then
+            echo "✅ Featured manifest regenerated successfully"
+          else
+            echo "❌ Featured manifest generation failed"
+            exit 1
+          fi
+
+      - name: Check for changes and commit
+        run: |
+          if [[ -n "$(git status --porcelain)" ]] || [[ "${{ github.event.inputs.force }}" == "true" ]]; then
+            echo "📝 Changes detected or force flag set"
+            
+            git config --local user.email "actions@github.com"
+            git config --local user.name "GitHub Actions"
+            
+            # Add all manifest files
+            git add src/images/Portfolios/Concert/concert-manifest.json 2>/dev/null || true
+            git add src/images/Portfolios/Concert/**/manifest.json 2>/dev/null || true
+            git add src/images/Portfolios/Events/events-manifest.json 2>/dev/null || true
+            git add src/images/Portfolios/Journalism/journalism-manifest.json 2>/dev/null || true
+            git add src/images/Portfolios/Journalism/**/tags.json 2>/dev/null || true
+            git add src/images/Portfolios/portfolio-manifest.json 2>/dev/null || true
+            git add src/images/Portfolios/featured-manifest.json 2>/dev/null || true
+            
+            # Show what's being committed
+            echo "Files to commit:"
+            git status --porcelain
+            
+            # Create commit message
+            MANIFESTS="${{ steps.parse_manifests.outputs.manifests }}"
+            git commit -m "🔄 Manual regeneration of manifests: $MANIFESTS
+            
+            - Manifests: $MANIFESTS
+            - Force: ${{ github.event.inputs.force }}
+            - Generated: $(date -u)
+            - Trigger: Manual workflow dispatch"
+            
+            git push
+            
+            echo "✅ All manifests regenerated and pushed successfully!"
+          else
+            echo "✅ No changes detected and force flag not set"
+          fi

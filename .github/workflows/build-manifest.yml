@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'images/Portfolios/Concert/**'
+      - 'src/images/Portfolios/Concert/**'
       - 'scripts/generate-concert-manifest.js'
       - '.github/workflows/build-manifest.yml'
   
@@ -13,6 +13,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: concert-manifest-${{ github.ref }}
+  cancel-in-progress: false  # Don't cancel - let it complete to avoid corruption
 
 jobs:
   update-concert-manifest:
@@ -39,11 +43,11 @@ jobs:
           echo "🔍 Checking for concert images..."
           
           # Count total images in concert directory
-          IMAGE_COUNT=$(find images/Portfolios/Concert -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | wc -l)
+          IMAGE_COUNT=$(find src/images/Portfolios/Concert -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | wc -l)
           echo "📸 Found $IMAGE_COUNT concert images"
           
           # Count band directories
-          BAND_COUNT=$(find images/Portfolios/Concert -mindepth 1 -maxdepth 1 -type d ! -name ".*" | wc -l)
+          BAND_COUNT=$(find src/images/Portfolios/Concert -mindepth 1 -maxdepth 1 -type d ! -name ".*" | wc -l)
           echo "🎵 Found $BAND_COUNT band directories"
           
           # Set outputs
@@ -63,23 +67,94 @@ jobs:
         if: steps.check_images.outputs.has_generator == 'true'
         run: |
           echo "🔄 Regenerating concert manifest..."
-          npm run manifest:concert
           
-          # Show manifest summary
-          if [ -f "images/Portfolios/Concert/concert-manifest.json" ]; then
-            echo "✅ Concert manifest generated successfully"
+          # Create backup of existing manifest for widget protection
+          if [ -f "src/images/Portfolios/Concert/concert-manifest.json" ]; then
+            cp "src/images/Portfolios/Concert/concert-manifest.json" "src/images/Portfolios/Concert/concert-manifest.json.backup"
+            echo "📋 Created backup of existing manifest"
+          fi
+          
+          # Retry logic for manifest generation
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3..."
             
-            # Extract key info from manifest
-            MANIFEST_BANDS=$(grep -o '"totalBands":[0-9]*' images/Portfolios/Concert/concert-manifest.json | cut -d':' -f2)
-            MANIFEST_VERSION=$(grep -o '"version":"[^"]*"' images/Portfolios/Concert/concert-manifest.json | cut -d'"' -f4)
-            
-            echo "📊 Manifest info:"
-            echo "   - Version: $MANIFEST_VERSION"
-            echo "   - Total bands: $MANIFEST_BANDS"
-            echo "   - Generated: $(date)"
+            if npm run manifest:concert; then
+              echo "✅ Concert manifest generation completed"
+              break
+            else
+              echo "⚠️ Attempt $attempt failed"
+              if [ $attempt -eq 3 ]; then
+                echo "❌ All attempts failed"
+                exit 1
+              fi
+              sleep 5
+            fi
+          done
+          
+          # Validate manifest exists and is valid JSON
+          if [ -f "src/images/Portfolios/Concert/concert-manifest.json" ]; then
+            # Test if it's valid JSON
+            if jq empty src/images/Portfolios/Concert/concert-manifest.json 2>/dev/null; then
+              echo "✅ Concert manifest generated successfully"
+              
+              # Extract key info from manifest
+              MANIFEST_BANDS=$(jq -r '.totalBands // 0' src/images/Portfolios/Concert/concert-manifest.json)
+              MANIFEST_VERSION=$(jq -r '.version // "unknown"' src/images/Portfolios/Concert/concert-manifest.json)
+              
+              echo "📊 Manifest info:"
+              echo "   - Version: $MANIFEST_VERSION"
+              echo "   - Total bands: $MANIFEST_BANDS"
+              echo "   - Generated: $(date)"
+              
+              # Widget compatibility checks - ensure required fields exist
+              echo "🔍 Checking widget compatibility..."
+              REQUIRED_FIELDS=("version" "generated" "totalBands" "bands")
+              for field in "${REQUIRED_FIELDS[@]}"; do
+                if jq -e ".$field" src/images/Portfolios/Concert/concert-manifest.json > /dev/null 2>&1; then
+                  echo "✅ Required field '$field': Present"
+                else
+                  echo "❌ Required field '$field': Missing"
+                  echo "::error::Manifest missing required field '$field' - this could break widgets"
+                  exit 1
+                fi
+              done
+              
+              # Check bands array structure
+              if jq -e '.bands[0] | has("bandName") and has("folderPath") and has("totalImages") and has("images")' src/images/Portfolios/Concert/concert-manifest.json > /dev/null 2>&1; then
+                echo "✅ Band structure: Compatible with widgets"
+              else
+                echo "⚠️ Band structure: May be incompatible - checking first band"
+                # Show structure for debugging
+                jq -r '.bands[0] // "No bands found"' src/images/Portfolios/Concert/concert-manifest.json
+              fi
+              
+              # Verify minimum data integrity
+              if [ "$MANIFEST_BANDS" -eq 0 ]; then
+                echo "⚠️ Warning: No bands found in manifest"
+              fi
+            else
+              echo "❌ Concert manifest is not valid JSON"
+              # Restore backup if it exists
+              if [ -f "src/images/Portfolios/Concert/concert-manifest.json.backup" ]; then
+                echo "🔄 Restoring backup manifest"
+                mv "src/images/Portfolios/Concert/concert-manifest.json.backup" "src/images/Portfolios/Concert/concert-manifest.json"
+              fi
+              exit 1
+            fi
           else
             echo "❌ Concert manifest not found after generation"
+            # Restore backup if it exists
+            if [ -f "src/images/Portfolios/Concert/concert-manifest.json.backup" ]; then
+              echo "🔄 Restoring backup manifest"
+              mv "src/images/Portfolios/Concert/concert-manifest.json.backup" "src/images/Portfolios/Concert/concert-manifest.json"
+            fi
             exit 1
+          fi
+          
+          # Clean up backup on success
+          if [ -f "src/images/Portfolios/Concert/concert-manifest.json.backup" ]; then
+            rm "src/images/Portfolios/Concert/concert-manifest.json.backup"
+            echo "🗑️ Cleaned up backup file"
           fi
 
       - name: Check for changes
@@ -103,8 +178,8 @@ jobs:
           git config --local user.name "GitHub Actions"
           
           # Add only manifest files
-          git add images/Portfolios/Concert/concert-manifest.json
-          git add images/Portfolios/Concert/**/manifest.json
+          git add src/images/Portfolios/Concert/concert-manifest.json
+          git add src/images/Portfolios/Concert/**/manifest.json
           
           # Create descriptive commit message
           BANDS=${{ steps.check_images.outputs.band_count }}

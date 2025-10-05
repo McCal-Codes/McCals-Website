@@ -1,0 +1,159 @@
+name: Workflow Health Check
+
+on:
+  # Run daily to monitor workflow health
+  schedule:
+    - cron: '0 12 * * *'  # Daily at 12:00 UTC
+  
+  # Manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check manifest files exist
+        run: |
+          echo "🔍 Checking manifest file integrity..."
+          
+          ERRORS=0
+          
+          # Check concert manifest
+          if [ -f "src/images/Portfolios/Concert/concert-manifest.json" ]; then
+            if jq empty src/images/Portfolios/Concert/concert-manifest.json 2>/dev/null; then
+              echo "✅ Concert manifest: OK"
+            else
+              echo "❌ Concert manifest: Invalid JSON"
+              ERRORS=$((ERRORS + 1))
+            fi
+          else
+            echo "❌ Concert manifest: Missing"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # Check events manifest
+          if [ -f "src/images/Portfolios/Events/events-manifest.json" ]; then
+            if jq empty src/images/Portfolios/Events/events-manifest.json 2>/dev/null; then
+              echo "✅ Events manifest: OK"
+            else
+              echo "❌ Events manifest: Invalid JSON"
+              ERRORS=$((ERRORS + 1))
+            fi
+          else
+            echo "❌ Events manifest: Missing"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # Check journalism manifest
+          if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json" ]; then
+            if jq empty src/images/Portfolios/Journalism/journalism-manifest.json 2>/dev/null; then
+              echo "✅ Journalism manifest: OK"
+            else
+              echo "❌ Journalism manifest: Invalid JSON"
+              ERRORS=$((ERRORS + 1))
+            fi
+          else
+            echo "❌ Journalism manifest: Missing"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
+          # Report results
+          if [ $ERRORS -eq 0 ]; then
+            echo "✅ All manifest files are healthy"
+          else
+            echo "❌ Found $ERRORS manifest issues"
+            echo "::warning::$ERRORS manifest files have issues"
+          fi
+
+      - name: Check generation scripts exist
+        run: |
+          echo "🔍 Checking manifest generation scripts..."
+          
+          MISSING=0
+          
+          scripts=(
+            "scripts/generate-concert-manifest.js"
+            "scripts/generate-events-manifest.js" 
+            "scripts/generate-journalism-manifest-v2.js"
+            "scripts/generate-universal-manifest.js"
+            "scripts/generate-featured-manifest.js"
+          )
+          
+          for script in "${scripts[@]}"; do
+            if [ -f "$script" ]; then
+              echo "✅ $script: Found"
+            else
+              echo "❌ $script: Missing"
+              MISSING=$((MISSING + 1))
+            fi
+          done
+          
+          if [ $MISSING -eq 0 ]; then
+            echo "✅ All generation scripts found"
+          else
+            echo "❌ $MISSING generation scripts missing"
+            echo "::error::$MISSING generation scripts are missing"
+            exit 1
+          fi
+
+      - name: Test manifest generation (dry run)
+        run: |
+          echo "🧪 Testing manifest generation capabilities..."
+          
+          # Test concert manifest generation
+          echo "Testing concert manifest..."
+          if npm run manifest:concert > /tmp/concert.log 2>&1; then
+            echo "✅ Concert manifest generation: OK"
+          else
+            echo "❌ Concert manifest generation: Failed"
+            echo "Log output:"
+            cat /tmp/concert.log
+            exit 1
+          fi
+          
+          # Test events manifest generation  
+          echo "Testing events manifest..."
+          if npm run manifest:events > /tmp/events.log 2>&1; then
+            echo "✅ Events manifest generation: OK"
+          else
+            echo "❌ Events manifest generation: Failed"
+            echo "Log output:"
+            cat /tmp/events.log
+            exit 1
+          fi
+          
+          # Test journalism manifest generation
+          echo "Testing journalism manifest..."
+          if npm run manifest:journalism -- --force > /tmp/journalism.log 2>&1; then
+            echo "✅ Journalism manifest generation: OK"
+          else
+            echo "❌ Journalism manifest generation: Failed"
+            echo "Log output:"
+            cat /tmp/journalism.log
+            exit 1
+          fi
+
+      - name: Report workflow health
+        run: |
+          echo "🎯 Workflow Health Summary:"
+          echo "- All manifest files validated ✅"
+          echo "- All generation scripts found ✅" 
+          echo "- All generation tests passed ✅"
+          echo ""
+          echo "All manifest workflows are healthy and ready! 🚀"

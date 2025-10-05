@@ -7,6 +7,8 @@ on:
       - 'src/images/Portfolios/Events/**'
       - 'scripts/generate-events-manifest.js'
       - '.github/workflows/events-manifest.yml'
+  
+  # Also run on manual trigger
   workflow_dispatch:
 
 permissions:
@@ -14,42 +16,182 @@ permissions:
 
 concurrency:
   group: events-manifest-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false  # Don't cancel - let it complete to avoid corruption
 
 jobs:
   update-events-manifest:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.15.1'
+          node-version: '20'
           cache: 'npm'
 
-      - name: Install deps
-        run: |
-          npm cache clean --force
-          npm ci
+      - name: Install dependencies
+        run: npm install
 
-      - name: Generate manifest
+      - name: Check for event images
+        id: check_images
         run: |
-          node scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force
-          test -f src/images/Portfolios/Events/events-manifest.json
+          echo "🔍 Checking for event images..."
+          
+          # Count total images in events directory
+          IMAGE_COUNT=$(find src/images/Portfolios/Events -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | wc -l)
+          echo "📸 Found $IMAGE_COUNT event images"
+          
+          # Count event directories
+          EVENT_COUNT=$(find src/images/Portfolios/Events -mindepth 1 -maxdepth 1 -type d ! -name ".*" | wc -l)
+          echo "🎞️ Found $EVENT_COUNT event directories"
+          
+          # Set outputs
+          echo "image_count=$IMAGE_COUNT" >> $GITHUB_OUTPUT
+          echo "event_count=$EVENT_COUNT" >> $GITHUB_OUTPUT
+          
+          # Check if events manifest script exists
+          if [ -f "scripts/generate-events-manifest.js" ]; then
+            echo "✅ Events manifest generator found"
+            echo "has_generator=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Events manifest generator not found"
+            echo "has_generator=false" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Commit + push
+      - name: Generate events manifest
+        if: steps.check_images.outputs.has_generator == 'true'
+        run: |
+          echo "🔄 Regenerating events manifest..."
+          
+          # Create backup of existing manifest for widget protection
+          if [ -f "src/images/Portfolios/Events/events-manifest.json" ]; then
+            cp "src/images/Portfolios/Events/events-manifest.json" "src/images/Portfolios/Events/events-manifest.json.backup"
+            echo "📋 Created backup of existing manifest"
+          fi
+          
+          # Retry logic for manifest generation
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3..."
+            
+            if npm run manifest:events; then
+              echo "✅ Events manifest generation completed"
+              break
+            else
+              echo "⚠️ Attempt $attempt failed"
+              if [ $attempt -eq 3 ]; then
+                echo "❌ All attempts failed"
+                exit 1
+              fi
+              sleep 5
+            fi
+          done
+          
+          # Validate manifest exists and is valid JSON
+          if [ -f "src/images/Portfolios/Events/events-manifest.json" ]; then
+            # Test if it's valid JSON
+            if jq empty src/images/Portfolios/Events/events-manifest.json 2>/dev/null; then
+              echo "✅ Events manifest generated successfully"
+              
+              # Extract key info from manifest
+              MANIFEST_EVENTS=$(jq -r '.totalEvents // 0' src/images/Portfolios/Events/events-manifest.json)
+              MANIFEST_VERSION=$(jq -r '.version // "unknown"' src/images/Portfolios/Events/events-manifest.json)
+              
+              echo "📊 Manifest info:"
+              echo "   - Version: $MANIFEST_VERSION"
+              echo "   - Total events: $MANIFEST_EVENTS"
+              echo "   - Generated: $(date)"
+              
+              # Widget compatibility checks - ensure required fields exist
+              echo "🔍 Checking widget compatibility..."
+              REQUIRED_FIELDS=("version" "generated" "totalEvents" "events")
+              for field in "${REQUIRED_FIELDS[@]}"; do
+                if jq -e ".$field" src/images/Portfolios/Events/events-manifest.json > /dev/null 2>&1; then
+                  echo "✅ Required field '$field': Present"
+                else
+                  echo "❌ Required field '$field': Missing"
+                  echo "::error::Manifest missing required field '$field' - this could break widgets"
+                  exit 1
+                fi
+              done
+              
+              # Check events array structure (if events exist)
+              if [ "$MANIFEST_EVENTS" -gt 0 ]; then
+                if jq -e '.events[0] | has("eventName") and has("totalImages") and has("images")' src/images/Portfolios/Events/events-manifest.json > /dev/null 2>&1; then
+                  echo "✅ Event structure: Compatible with widgets"
+                else
+                  echo "⚠️ Event structure: May be incompatible - checking first event"
+                  jq -r '.events[0] // "No events found"' src/images/Portfolios/Events/events-manifest.json
+                fi
+              fi
+              
+              # Verify minimum data integrity
+              if [ "$MANIFEST_EVENTS" -eq 0 ]; then
+                echo "⚠️ Warning: No events found in manifest"
+              fi
+            else
+              echo "❌ Events manifest is not valid JSON"
+              # Restore backup if it exists
+              if [ -f "src/images/Portfolios/Events/events-manifest.json.backup" ]; then
+                echo "🔄 Restoring backup manifest"
+                mv "src/images/Portfolios/Events/events-manifest.json.backup" "src/images/Portfolios/Events/events-manifest.json"
+              fi
+              exit 1
+            fi
+          else
+            echo "❌ Events manifest not found after generation"
+            # Restore backup if it exists
+            if [ -f "src/images/Portfolios/Events/events-manifest.json.backup" ]; then
+              echo "🔄 Restoring backup manifest"
+              mv "src/images/Portfolios/Events/events-manifest.json.backup" "src/images/Portfolios/Events/events-manifest.json"
+            fi
+            exit 1
+          fi
+          
+          # Clean up backup on success
+          if [ -f "src/images/Portfolios/Events/events-manifest.json.backup" ]; then
+            rm "src/images/Portfolios/Events/events-manifest.json.backup"
+            echo "🗑️ Cleaned up backup file"
+          fi
+
+      - name: Check for changes
+        id: check_changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
-            git config --local user.email "actions@github.com"
-            git config --local user.name "GitHub Actions"
-            git add src/images/Portfolios/Events/events-manifest.json
-            git commit -m "🎞️ Auto-update events manifest (src/) — $(date -u +%F)"
-            git push
+            echo "📝 Changes detected in manifest"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            
+            echo "Changed files:"
+            git status --porcelain
           else
-            echo "No changes"
+            echo "✅ No changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
+
+      - name: Commit and push manifest
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          
+          # Add only manifest files
+          git add src/images/Portfolios/Events/events-manifest.json
+          
+          # Create descriptive commit message
+          EVENTS=${{ steps.check_images.outputs.event_count }}
+          IMAGES=${{ steps.check_images.outputs.image_count }}
+          
+          git commit -m "🎞️ Auto-update events manifest
+          
+          - Events: $EVENTS
+          - Images: $IMAGES
+          - Generated: $(date -u)
+          - Trigger: ${{ github.event_name }}"
+          
+          git push
+          
+          echo "✅ Events manifest updated and pushed successfully!"
