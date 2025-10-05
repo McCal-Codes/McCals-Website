@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated": "2025-10-05T08:09:54.427Z",
+  "generated": "2025-10-05T11:07:13.403Z",
   "totalPortfolios": 4,
-  "totalItems": 18,
-  "totalImages": 251,
+  "totalItems": 21,
+  "totalImages": 288,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -15,8 +15,8 @@
       "totalImages": 155
     },
     "Events": {
-      "count": 4,
-      "totalImages": 84
+      "count": 7,
+      "totalImages": 121
     },
     "Journalism": {
       "count": 2,
@@ -432,6 +432,76 @@
     {
       "type": "Events",
       "category": "Event Photography",
+      "name": "Denver Robotics Convention",
+      "folderPath": "Events/Denver Robotics Convention",
+      "dateDisplay": "January 2025",
+      "date": {
+        "year": 2025,
+        "month": 1,
+        "day": 1,
+        "monthName": "January",
+        "iso": "2025-01-01",
+        "source": "fallback_current_year",
+        "description": "Fallback to current year"
+      },
+      "totalImages": 7,
+      "images": [
+        "09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg",
+        "1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg",
+        "25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg",
+        "3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg",
+        "5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg",
+        "6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg",
+        "F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+      ],
+      "coverImage": "09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Pitt University Graduation Winter 2024",
+      "folderPath": "Events/Pitt University Graduation Winter 2024",
+      "dateDisplay": "December 2024",
+      "date": {
+        "year": 2024,
+        "month": 12,
+        "day": 18,
+        "monthName": "December",
+        "iso": "2024-12-18",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 23,
+      "images": [
+        "241218_Pitt Graduation - Winter Semester_CAL7045.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7109.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7114.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7117.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7129.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7132.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7136.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7146.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7154.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7166.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7169.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7174.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7182.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7195.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7200.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7272.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7290.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7317.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7357.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7383.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7452.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7502.jpg",
+        "241218_Pitt Graduation - Winter Semester_CAL7512.jpg"
+      ],
+      "coverImage": "241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
       "name": "Dance For A Cause",
       "folderPath": "Events/Dance for a Cause",
       "dateDisplay": "October 2024",
@@ -479,6 +549,33 @@
         "241018_Dance for a Cause_CAL972-min.jpg"
       ],
       "coverImage": "241018_Dance for a Cause_CAL1012-min.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Myron Cope Awards 2024",
+      "folderPath": "Events/Myron Cope Awards 2024",
+      "dateDisplay": "June 2024",
+      "date": {
+        "year": 2024,
+        "month": 6,
+        "day": 2,
+        "monthName": "June",
+        "iso": "2024-06-02",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 7,
+      "images": [
+        "240602_Point Park Cope Awards 2024 _1646_CAL_2048px.jpg",
+        "240602_Point Park Cope Awards 2024 _1647_CAL_2048px.jpg",
+        "240602_Point Park Cope Awards 2024 _1650_CAL_2048px.jpg",
+        "240602_Point Park Cope Awards 2024 _1651_CAL_2048px.jpg",
+        "240602_Point Park Cope Awards 2024 _1655_CAL_2048px.jpg",
+        "240602_Point Park Cope Awards 2024 _1656_CAL_2048px.jpg",
+        "240602_Point Park Cope Awards 2024 _1657_CAL_2048px.jpg"
+      ],
+      "coverImage": "240602_Point Park Cope Awards 2024 _1646_CAL_2048px.jpg"
     },
     {
       "type": "Concert",
