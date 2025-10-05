@@ -64,7 +64,7 @@ Widget authoring conventions
 
 - Widgets are drop-in HTML for Squarespace Code Blocks: inline CSS, minimal JS, no external fonts; prefer self-contained assets. See `src/widgets/**/README.md` for usage.
 - Self-contained architecture: Each widget HTML file contains all CSS/JS inline to avoid external dependencies in Squarespace.
-- Versioning: keep versioned HTML files (e.g., `versions/v2.5.3-event-portfolio.html`) and update per-widget CHANGELOGs if present; repo-level policy is in `docs/standards/VERSIONING.md`.
+- Versioning: keep versioned HTML files (e.g., `versions/v2.5.3-event-portfolio.html`) and update per-widget CHANGELOGs if present; repo-level policy is in `docs/standards/versioning.md`.
 - Don't couple widgets to the local test site; widgets read from manifests and/or remote assets. Keep selectors/namespaces stable for Squarespace.
 - Performance patterns: Use CSS columns for masonry layouts, intersection observers for progressive loading, and intelligent caching for GitHub API calls.
 - Configuration via data attributes: Widgets use `data-panes`, `data-category` etc. for Squarespace customization without code changes.
@@ -110,6 +110,10 @@ Good starting references
 - `scripts/watch-auto-manifest.js`  recommended dev loop.
 - `src/widgets/**/README.md`  embedding instructions and constraints.
 - `src/site/app.js`  example data flow from manifests to UI.
+- `docs/standards/widget-reference.md` ⭐ **START HERE**: quick reference for widget development patterns.
+- `docs/standards/widget-standards.md`  comprehensive widget standards and architecture guide.
+- `docs/standards/widget-enhancements.md`  proven improvement patterns for widget optimization.
+- `docs/standards/widget-development.md`  comprehensive guide for applying enhancement patterns systematically.
 
 Change management
 
@@ -117,6 +121,9 @@ Change management
 
 Recent updates
 
+- 2025-10-05T06:15:00.000Z  Widget standardization documentation complete: Created comprehensive `widget-standards.md` establishing consistent patterns across all widget types (portfolio, navigation, content, hero). Added `widget-reference.md` as quick development checklist. Documented architecture standards, CSS patterns, performance guidelines, accessibility requirements, and debug patterns. Simplified all file names from UPPER-CASE-NAMES.md to lowercase-names.md for better organization. Updated docs organization and copilot instructions to reference new standardization guides.
+- 2025-10-05T06:00:00.000Z  Widget enhancement framework complete: Created comprehensive `widget-development.md` providing systematic methodology for applying proven patterns across all widgets. Updated photojournalism README with enhancement pattern references. Established quality assurance standards, implementation checklists, and continuous improvement processes. All workspace rules validated and documentation aligned.
+- 2025-10-05T01:45:00.000Z  Photojournalism widget optimization complete (v4.4→v4.8): Fixed Published Work filter functionality, enhanced filtering UX (no gaps), minimal status indicators, comprehensive navigation hiding in lightbox, hidden scrollbars for immersive experience. Created comprehensive widget enhancement patterns documentation (`docs/standards/widget-enhancements.md`) cataloging proven improvements for systematic application across all widgets.
 - 2025-10-05T00:30:00.000Z  Footer widget v1.2.0 compliance: Removed modal functionality for simplified UX, updated README and CHANGELOG documentation, added to main README Available Widgets list. Widget now fully compliant with workspace standards including accessibility, performance patterns, and self-contained architecture.
 - 2025-10-05T00:00:00.000Z  Widget optimization updates: Enhanced site-navigation v1.6.3 with improved blur effects, hover states, and performance optimizations. Created site-footer v1.2.0 with CSS custom properties, enhanced accessibility, mobile optimizations, and comprehensive compliance with workspace standards.
 - 2025-10-04T11:30:00.000Z  Widget status organization: Archived GitHub portfolio to src/widgets/_archived/, marked blog feed and nature portfolio as work-in-progress with STATUS.md files. Updated README to show 7 production widgets + 2 WIP. Created archival system for widget management.

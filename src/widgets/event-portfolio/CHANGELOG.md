@@ -1,5 +1,17 @@
 # Changelog - Event Portfolio
 
+## 2.5.6
+- Removed "On-Location", "Published", and "Conference" filter tabs for streamlined navigation
+- Moved "Dance For A Cause" from Corporate to Celebration category for better categorization
+- Updated cache key to reflect manifest changes
+
+## 2.5.5
+- Optimized lightbox close button positioning: fixed to viewport instead of relative to dialog
+- Enhanced close button with backdrop blur effect and improved hover states
+- Removed card borders for cleaner, more minimal appearance
+- Removed debug panel border for consistent design
+- Improved close button accessibility with larger hit target (44px)
+
 ## 2.5.4
 - Added explicit cache-busting param on manual (Force + Bust) refresh to defeat CDN edge caching.
 - Scoped cache key by manifest generated date (regenerations invalidate immediately).

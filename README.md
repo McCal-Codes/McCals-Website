@@ -70,6 +70,11 @@ This repository is primarily a **development workspace for Squarespace widgets**
 5. Adjust `data-panes` or other attributes as needed
 6. Each widget has its own README with specific instructions
 
+### Widget Development Standards ⭐ **NEW**
+- **Quick Reference**: `docs/standards/widget-reference.md` - Essential checklist for widget development
+- **Complete Guide**: `docs/standards/widget-standards.md` - Comprehensive architecture and design standards
+- **Enhancement Patterns**: Proven improvement patterns for optimizing existing widgets
+
 ## Development & Testing
 
 ### Quick Commands
@@ -176,6 +181,7 @@ When making significant changes:
 3. Update this README for major structural changes
 4. Add entries to `CHANGELOG.md`
 5. Run `npm run ai:preflight` to validate structure
+6. For widget improvements, reference `docs/standards/widget-enhancements.md`
 
 ### Getting Help
 - 📖 **Documentation**: [docs/README.md](docs/README.md) - Comprehensive guides

@@ -1,4 +1,4 @@
-<!-- Photojournalism Portfolio v4.3 — Cache Bust + Header Isolation -->
+<!-- Photojournalism Portfolio v4.8 — Enhanced UX & Navigation Isolation -->
 <style>
   :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; --published:#00d4aa; }
   @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
@@ -97,9 +97,9 @@
 <script>
 // v4.8 Implementation
 (function(){
-  const CFG={RAW:`https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/`,MANIFEST_PATH:`src/images/Portfolios/Journalism/journalism-manifest.json`,VERSION:'4.4'};
+  const CFG={RAW:`https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/`,MANIFEST_PATH:`src/images/Portfolios/Journalism/journalism-manifest.json`,VERSION:'4.8'};
   let DEBUG=false, BUST=0, manifestGenerated='';
-  let cacheBase='journalism-manifest-cache-v4_4';
+  let cacheBase='journalism-manifest-cache-v4_8';
   const sel=s=>document.querySelector(s); const all=s=>Array.prototype.slice.call(document.querySelectorAll(s));
   const grid=sel('#journalismGrid'), loading=sel('#journalismLoading');
   const dbg={panel:sel('#debugInfo'),status:sel('#debugStatus'),load:sel('#debugLoadTime'),ev:sel('#debugEventCount'),img:sel('#debugImageCount'),api:sel('#debugApiCalls'),last:sel('#debugLastRefresh'),gen:sel('#debugGenerated'),b:sel('#debugBust'),logsBtn:sel('#dbgLogs')};

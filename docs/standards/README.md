@@ -1,0 +1,66 @@
+# Standards Documentation
+
+Guidelines, conventions, and best practices for the McCal Media workspace.
+
+## Widget Development Standards
+
+### 📋 **widget-reference.md** ⭐ **START HERE**
+Quick reference checklist and common patterns for widget development. Essential for daily development.
+
+### 📖 **widget-standards.md**
+Comprehensive widget standards documentation covering architecture, design patterns, performance, and accessibility requirements.
+
+### 🎯 **widget-enhancements.md**
+Catalog of proven UX and technical improvements extracted from successful widget optimizations (photojournalism v4.4-v4.8).
+
+### 🔄 **widget-development.md**
+Systematic methodology for applying enhancement patterns across widgets with implementation checklists and quality standards.
+
+## Repository Standards
+
+### 📅 **date-naming.md**
+Naming conventions for photo organization and date parsing in manifest generation.
+
+### 🏷️ **versioning.md**
+Semantic versioning guidelines for widgets, manifests, and repository components.
+
+---
+
+## Quick Start Guide
+
+### For New Widget Development
+1. **Read**: `widget-reference.md` (quick checklist)
+2. **Reference**: `widget-standards.md` (detailed patterns)
+3. **Follow**: Repository versioning from `versioning.md`
+
+### For Widget Enhancement  
+1. **Review**: `widget-enhancements.md` (proven improvements)
+2. **Apply**: `widget-development.md` (systematic process)
+3. **Test**: Validate with existing standards
+
+### For Asset Organization
+1. **Follow**: `date-naming.md` (photo naming)
+2. **Version**: Use `versioning.md` guidelines
+
+---
+
+## Development Workflow
+
+```mermaid
+graph TD
+    A[New Widget] --> B[Standards Reference]
+    B --> C[Implement Patterns]
+    C --> D[Test & Validate]
+    D --> E[Document & Version]
+    
+    F[Enhance Existing] --> G[Enhancement Patterns]
+    G --> H[Apply Systematically]
+    H --> D
+    
+    I[Organize Assets] --> J[Date Standards]
+    J --> K[Generate Manifests]
+```
+
+---
+
+*These standards ensure consistency, maintainability, and quality across all McCal Media widgets and assets.*
