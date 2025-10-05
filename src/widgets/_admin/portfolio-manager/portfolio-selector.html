@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📂 Portfolio Selector | McCal Media</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .portfolio-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .portfolio-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        .portfolio-card.selected {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+        
+        .portfolio-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-icon {
+            font-size: 2.5rem;
+        }
+        
+        .portfolio-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #666;
+        }
+        
+        .portfolio-status.checking {
+            background: #ff9800;
+            animation: pulse 1s infinite;
+        }
+        
+        .portfolio-status.success {
+            background: #4CAF50;
+        }
+        
+        .portfolio-status.error {
+            background: #f44336;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .portfolio-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .portfolio-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .portfolio-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .action-btn.primary {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4CAF50;
+        }
+        
+        .selected-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .selected-info.show {
+            display: block;
+        }
+        
+        .folder-path {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .quick-action {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .quick-action:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .system-status {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .status-row:last-child {
+            border-bottom: none;
+        }
+        
+        .refresh-all {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .refresh-all:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📂</div>
+            <h1>Portfolio Selector</h1>
+            <div class="subtitle">Choose your portfolio and manage your images</div>
+        </div>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-card" id="concert-card" onclick="selectPortfolio('Concert')">
+                <div class="portfolio-header">
+                    <span class="portfolio-icon">🎸</span>
+                    <div class="portfolio-status" id="concert-status"></div>
+                </div>
+                <div class="portfolio-title">Concert Portfolio</div>
+                <div class="portfolio-desc">Live music photography and concert events</div>
+                <div class="portfolio-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="concert-bands">-</div>
+                        <div>Bands</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="concert-images">-</div>
+                        <div>Images</div>
+                    </div>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="checkPortfolio('Concert', event)">🔄 Check</button>
+                    <button class="action-btn primary" onclick="openPortfolio('Concert', event)">📂 Open</button>
+                </div>
+            </div>
+            
+            <div class="portfolio-card" id="events-card" onclick="selectPortfolio('Events')">
+                <div class="portfolio-header">
+                    <span class="portfolio-icon">🎉</span>
+                    <div class="portfolio-status" id="events-status"></div>
+                </div>
+                <div class="portfolio-title">Events Portfolio</div>
+                <div class="portfolio-desc">Corporate events, parties, and special occasions</div>
+                <div class="portfolio-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="events-count">-</div>
+                        <div>Events</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="events-images">-</div>
+                        <div>Images</div>
+                    </div>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="checkPortfolio('Events', event)">🔄 Check</button>
+                    <button class="action-btn primary" onclick="openPortfolio('Events', event)">📂 Open</button>
+                </div>
+            </div>
+            
+            <div class="portfolio-card" id="journalism-card" onclick="selectPortfolio('Journalism')">
+                <div class="portfolio-header">
+                    <span class="portfolio-icon">📰</span>
+                    <div class="portfolio-status" id="journalism-status"></div>
+                </div>
+                <div class="portfolio-title">Journalism Portfolio</div>
+                <div class="portfolio-desc">Editorial photography and published works</div>
+                <div class="portfolio-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="journalism-articles">-</div>
+                        <div>Articles</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="journalism-images">-</div>
+                        <div>Images</div>
+                    </div>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="checkPortfolio('Journalism', event)">🔄 Check</button>
+                    <button class="action-btn primary" onclick="openPortfolio('Journalism', event)">📂 Open</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="selected-info" id="selected-info">
+            <h3>📂 <span id="selected-title">Selected Portfolio</span></h3>
+            <div class="folder-path" id="selected-path">Select a portfolio to see details</div>
+            
+            <div class="quick-actions">
+                <a href="#" class="quick-action" id="folder-link">📁 Open Folder</a>
+                <a href="#" class="quick-action" id="manifest-link">📄 View Manifest</a>
+                <a href="#" class="quick-action" id="widget-link">🎨 Test Widget</a>
+                <a href="#" class="quick-action" id="upload-link">📤 Upload Images</a>
+            </div>
+        </div>
+        
+        <button class="refresh-all" onclick="checkAllPortfolios()">🔄 Check All Portfolios</button>
+        
+        <div class="system-status">
+            <h3 style="margin-bottom: 15px;">🔧 System Status</h3>
+            <div class="status-row">
+                <span>Development Server</span>
+                <span id="dev-server-status">🔄 Checking...</span>
+            </div>
+            <div class="status-row">
+                <span>Auto-Manifest Watcher</span>
+                <span id="watcher-status">✅ Running</span>
+            </div>
+            <div class="status-row">
+                <span>Total Images</span>
+                <span id="total-images">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPortfolio = null;
+        const portfolioData = {
+            Concert: { path: 'Concert', manifestFile: 'concert-manifest.json', widgetPath: 'concert-portfolio/demo/test-concert-widget-local.html' },
+            Events: { path: 'Events', manifestFile: 'events-manifest.json', widgetPath: 'event-portfolio/demo/' },
+            Journalism: { path: 'Journalism', manifestFile: 'journalism-manifest.json', widgetPath: 'photojournalism-portfolio/demo/test-journalism-widget.html' }
+        };
+        
+        function selectPortfolio(type) {
+            // Remove previous selection
+            document.querySelectorAll('.portfolio-card').forEach(card => card.classList.remove('selected'));
+            
+            // Select new portfolio
+            document.getElementById(`${type.toLowerCase()}-card`).classList.add('selected');
+            selectedPortfolio = type;
+            
+            // Update selected info
+            const info = document.getElementById('selected-info');
+            const data = portfolioData[type];
+            
+            document.getElementById('selected-title').textContent = `${type} Portfolio`;
+            document.getElementById('selected-path').textContent = 
+                `C:\\Users\\wolft\\Desktop\\McCal's Dev Website\\McCals-Website\\src\\images\\Portfolios\\${data.path}`;
+            
+            // Update links
+            document.getElementById('folder-link').onclick = () => openPortfolio(type);
+            document.getElementById('manifest-link').href = `/src/images/Portfolios/${data.path}/${data.manifestFile}`;
+            document.getElementById('widget-link').href = `../../${data.widgetPath}`;
+            document.getElementById('upload-link').href = '../admin-portfolio-importer/admin-portfolio-manager.html';
+            
+            info.classList.add('show');
+            
+            // Auto-check the selected portfolio
+            checkPortfolio(type);
+        }
+        
+        function checkPortfolio(type, event = null) {
+            if (event) event.stopPropagation();
+            
+            const statusElement = document.getElementById(`${type.toLowerCase()}-status`);
+            statusElement.className = 'portfolio-status checking';
+            
+            const data = portfolioData[type];
+            const manifestUrl = `/src/images/Portfolios/${data.path}/${data.manifestFile}`;
+            
+            fetch(manifestUrl)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error(`HTTP ${response.status}`);
+                })
+                .then(manifest => {
+                    statusElement.className = 'portfolio-status success';
+                    updatePortfolioStats(type, manifest);
+                })
+                .catch(error => {
+                    statusElement.className = 'portfolio-status error';
+                    console.error(`${type} portfolio check failed:`, error);
+                    updatePortfolioStats(type, null);
+                });
+        }
+        
+        function updatePortfolioStats(type, manifest) {
+            if (!manifest) {
+                // Set error state
+                if (type === 'Concert') {
+                    document.getElementById('concert-bands').textContent = '❌';
+                    document.getElementById('concert-images').textContent = '❌';
+                } else if (type === 'Events') {
+                    document.getElementById('events-count').textContent = '❌';
+                    document.getElementById('events-images').textContent = '❌';
+                } else if (type === 'Journalism') {
+                    document.getElementById('journalism-articles').textContent = '❌';
+                    document.getElementById('journalism-images').textContent = '❌';
+                }
+                return;
+            }
+            
+            if (type === 'Concert') {
+                document.getElementById('concert-bands').textContent = manifest.totalBands || 0;
+                const totalImages = manifest.bands ? manifest.bands.reduce((sum, band) => sum + (band.totalImages || 0), 0) : 0;
+                document.getElementById('concert-images').textContent = totalImages;
+            } else if (type === 'Events') {
+                document.getElementById('events-count').textContent = manifest.totalEvents || 0;
+                document.getElementById('events-images').textContent = manifest.totalImages || 0;
+            } else if (type === 'Journalism') {
+                document.getElementById('journalism-articles').textContent = manifest.totalArticles || 0;
+                document.getElementById('journalism-images').textContent = manifest.totalImages || 0;
+            }
+        }
+        
+        function openPortfolio(type, event = null) {
+            if (event) event.stopPropagation();
+            
+            const data = portfolioData[type];
+            const folderPath = `C:\\\\Users\\\\wolft\\\\Desktop\\\\McCal's Dev Website\\\\McCals-Website\\\\src\\\\images\\\\Portfolios\\\\${data.path}`;
+            
+            // Try to open in file explorer (works on localhost)
+            try {
+                window.open(`file:///${folderPath.replace(/\\\\\\\\/g, '/')}`);
+            } catch (error) {
+                alert(`Portfolio Path: ${folderPath}\n\nCopy this path and open in File Explorer`);
+            }
+        }
+        
+        function checkAllPortfolios() {
+            checkPortfolio('Concert');
+            checkPortfolio('Events');
+            checkPortfolio('Journalism');
+            
+            // Check dev server
+            fetch(window.location.origin)
+                .then(response => {
+                    document.getElementById('dev-server-status').textContent = 
+                        response.ok ? '✅ Online' : '⚠️ Issues';
+                })
+                .catch(() => {
+                    document.getElementById('dev-server-status').textContent = '❌ Offline';
+                });
+        }
+        
+        // Auto-check all portfolios on load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(checkAllPortfolios, 500);
+            
+            // Auto-select Concert portfolio
+            setTimeout(() => selectPortfolio('Concert'), 1000);
+        });
+        
+        // Update total images counter
+        function updateTotalImages() {
+            const concertImages = parseInt(document.getElementById('concert-images').textContent) || 0;
+            const eventsImages = parseInt(document.getElementById('events-images').textContent) || 0;
+            const journalismImages = parseInt(document.getElementById('journalism-images').textContent) || 0;
+            
+            const total = concertImages + eventsImages + journalismImages;
+            document.getElementById('total-images').textContent = total > 0 ? total : '-';
+        }
+        
+        // Update total periodically
+        setInterval(updateTotalImages, 2000);
+    </script>
+</body>
+</html>

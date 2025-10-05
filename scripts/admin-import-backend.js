@@ -349,17 +349,53 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
     if (successCount > 0) {
       try {
         const { spawn } = require('child_process');
-        const manifestScript = path.join(__dirname, 'enhanced-manifest-generator.js');
         
         if (portfolioType === 'Concert') {
-          spawn('node', [manifestScript, '--auto'], { 
+          // First generate individual manifests
+          const enhancedScript = path.join(__dirname, 'enhanced-manifest-generator.js');
+          spawn('node', [enhancedScript, '--auto'], { 
             detached: true, 
             stdio: 'ignore' 
           }).unref();
+          
+          // Then generate the concert rollup manifest (after a small delay)
+          setTimeout(() => {
+            const concertScript = path.join(__dirname, 'generate-concert-manifest.js');
+            spawn('node', [concertScript], { 
+              detached: true, 
+              stdio: 'ignore' 
+            }).unref();
+          }, 2000); // 2 second delay to let individual manifests complete
+        } else if (portfolioType === 'Events') {
+          // Generate events manifest
+          setTimeout(() => {
+            const eventsScript = path.join(__dirname, 'generate-events-manifest.js');
+            spawn('node', [eventsScript], { 
+              detached: true, 
+              stdio: 'ignore' 
+            }).unref();
+          }, 1000);
+        } else if (portfolioType === 'Journalism') {
+          // Generate journalism manifest
+          setTimeout(() => {
+            const journalismScript = path.join(__dirname, 'generate-journalism-manifest.js');
+            spawn('node', [journalismScript], { 
+              detached: true, 
+              stdio: 'ignore' 
+            }).unref();
+          }, 1000);
         }
-        // Add similar triggers for Events and Journalism if needed
+        
+        // Always regenerate the universal manifest after any portfolio change
+        setTimeout(() => {
+          const universalScript = path.join(__dirname, 'generate-universal-manifest.js');
+          spawn('node', [universalScript], { 
+            detached: true, 
+            stdio: 'ignore' 
+          }).unref();
+        }, 3000); // Delay to let portfolio-specific manifests complete first
       } catch (manifestError) {
-        console.warn('Failed to trigger manifest regeneration: - admin-import-backend.js:362', manifestError);
+        console.warn('Failed to trigger manifest regeneration: - admin-import-backend.js:398', manifestError);
       }
     }
 
@@ -373,12 +409,12 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
     });
 
   } catch (error) {
-    console.error('Import execution error: - admin-import-backend.js:376', error);
+    console.error('Import execution error: - admin-import-backend.js:412', error);
     res.status(500).json({ error: 'Failed to execute import' });
   }
 });
 
-// Get portfolio status
+// Get portfolio status with folder details
 app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
   try {
     const portfolioType = req.params.type;
@@ -393,17 +429,57 @@ app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
       const stats = await fs.stat(portfolioPath);
       const entries = await fs.readdir(portfolioPath, { withFileTypes: true });
       
-      const folders = entries.filter(entry => entry.isDirectory()).length;
-      const files = entries.filter(entry => entry.isFile()).length;
+      const folders = entries.filter(entry => entry.isDirectory());
+      const files = entries.filter(entry => entry.isFile());
+
+      // Get detailed folder information
+      const folderDetails = [];
+      for (const folder of folders) {
+        const folderPath = path.join(portfolioPath, folder.name);
+        try {
+          const folderStats = await fs.stat(folderPath);
+          const folderEntries = await fs.readdir(folderPath, { withFileTypes: true });
+          
+          // Get subfolders (date folders)
+          const subfolders = [];
+          for (const subfolder of folderEntries.filter(e => e.isDirectory())) {
+            const subfolderPath = path.join(folderPath, subfolder.name);
+            const subStats = await fs.stat(subfolderPath);
+            const subEntries = await fs.readdir(subfolderPath);
+            const imageCount = subEntries.filter(f => f.toLowerCase().match(/\.(jpg|jpeg|png|gif|bmp|webp)$/)).length;
+            
+            subfolders.push({
+              name: subfolder.name,
+              imageCount: imageCount,
+              lastModified: subStats.mtime,
+              hasManifest: subEntries.includes('manifest.json')
+            });
+          }
+          
+          folderDetails.push({
+            name: folder.name,
+            subfolderCount: subfolders.length,
+            subfolders: subfolders,
+            lastModified: folderStats.mtime,
+            totalImages: subfolders.reduce((sum, sf) => sum + sf.imageCount, 0)
+          });
+        } catch (err) {
+          folderDetails.push({
+            name: folder.name,
+            error: 'Could not read folder details'
+          });
+        }
+      }
 
       res.json({
         success: true,
         portfolioType: portfolioType,
         path: portfolioPath,
         exists: true,
-        folderCount: folders,
-        fileCount: files,
-        lastModified: stats.mtime
+        folderCount: folders.length,
+        fileCount: files.length,
+        lastModified: stats.mtime,
+        folders: folderDetails
       });
 
     } catch (error) {
@@ -417,8 +493,134 @@ app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
     }
 
   } catch (error) {
-    console.error('Portfolio status error: - admin-import-backend.js:420', error);
+    console.error('Portfolio status error: - admin-import-backend.js:496', error);
     res.status(500).json({ error: 'Failed to get portfolio status' });
+  }
+});
+
+// Folder management operations
+app.post('/api/admin/portfolios/:type/folders/:folderName/rename', requireAuth, async (req, res) => {
+  try {
+    const { portfolioType, folderName } = req.params;
+    const { newName } = req.body;
+    
+    if (!CONFIG.portfolioTypes[portfolioType]) {
+      return res.status(400).json({ error: 'Invalid portfolio type' });
+    }
+    
+    if (!newName || newName.trim() === '') {
+      return res.status(400).json({ error: 'New folder name required' });
+    }
+    
+    const portfolioPath = path.join(CONFIG.portfolioBasePath, portfolioType);
+    const oldPath = path.join(portfolioPath, folderName);
+    const newPath = path.join(portfolioPath, newName.trim());
+    
+    // Check if old folder exists
+    try {
+      await fs.access(oldPath);
+    } catch {
+      return res.status(404).json({ error: 'Folder not found' });
+    }
+    
+    // Check if new name already exists
+    try {
+      await fs.access(newPath);
+      return res.status(400).json({ error: 'Folder with new name already exists' });
+    } catch {
+      // Good - new name doesn't exist
+    }
+    
+    // Rename folder
+    await fs.rename(oldPath, newPath);
+    
+    res.json({ 
+      success: true, 
+      message: `Folder renamed from "${folderName}" to "${newName.trim()}"`,
+      oldName: folderName,
+      newName: newName.trim()
+    });
+    
+  } catch (error) {
+    console.error('Folder rename error: - admin-import-backend.js:545', error);
+    res.status(500).json({ error: 'Failed to rename folder' });
+  }
+});
+
+app.delete('/api/admin/portfolios/:type/folders/:folderName', requireAuth, async (req, res) => {
+  try {
+    const { portfolioType, folderName } = req.params;
+    const { confirm } = req.body;
+    
+    if (!CONFIG.portfolioTypes[portfolioType]) {
+      return res.status(400).json({ error: 'Invalid portfolio type' });
+    }
+    
+    if (!confirm) {
+      return res.status(400).json({ error: 'Confirmation required for deletion' });
+    }
+    
+    const portfolioPath = path.join(CONFIG.portfolioBasePath, portfolioType);
+    const folderPath = path.join(portfolioPath, folderName);
+    
+    // Check if folder exists
+    try {
+      const stats = await fs.stat(folderPath);
+      if (!stats.isDirectory()) {
+        return res.status(400).json({ error: 'Path is not a directory' });
+      }
+    } catch {
+      return res.status(404).json({ error: 'Folder not found' });
+    }
+    
+    // Delete folder recursively
+    await fs.rmdir(folderPath, { recursive: true });
+    
+    res.json({ 
+      success: true, 
+      message: `Folder "${folderName}" deleted successfully`
+    });
+    
+  } catch (error) {
+    console.error('Folder delete error: - admin-import-backend.js:585', error);
+    res.status(500).json({ error: 'Failed to delete folder' });
+  }
+});
+
+// Get server info for remote access
+app.get('/api/admin/server/info', requireAuth, async (req, res) => {
+  try {
+    const os = require('os');
+    const networkInterfaces = os.networkInterfaces();
+    
+    // Get local IP addresses
+    const localIPs = [];
+    Object.keys(networkInterfaces).forEach(interface => {
+      networkInterfaces[interface].forEach(address => {
+        if (address.family === 'IPv4' && !address.internal) {
+          localIPs.push(address.address);
+        }
+      });
+    });
+    
+    res.json({
+      success: true,
+      server: {
+        port: PORT,
+        localIPs: localIPs,
+        hostname: os.hostname(),
+        platform: os.platform(),
+        uptime: process.uptime()
+      },
+      access: {
+        local: `http://localhost:${PORT}`,
+        network: localIPs.map(ip => `http://${ip}:${PORT}`)
+      }
+    });
+    
+  } catch (error) {
+    console.error('Server info error: - admin-import-backend.js:622', error);
+    res.status(500).json({ error: 'Failed to get server info' });
   }
 });
 
@@ -433,20 +635,23 @@ app.use((error, req, res, next) => {
     }
   }
   
-  console.error('Server error: - admin-import-backend.js:436', error);
+  console.error('Server error: - admin-import-backend.js:638', error);
   res.status(500).json({ error: 'Internal server error' });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🔧 Admin Portfolio Import Backend running on http://localhost:${PORT} - admin-import-backend.js:442`);
-  console.log(`📁 Portfolio base path: ${CONFIG.portfolioBasePath} - admin-import-backend.js:443`);
-  console.log(`🔐 Admin password required for all operations - admin-import-backend.js:444`);
-  console.log(`📝 Available endpoints: - admin-import-backend.js:445`);
-  console.log(`GET  /health  Health check - admin-import-backend.js:446`);
-  console.log(`POST /api/admin/import/preview  Preview import - admin-import-backend.js:447`);
-  console.log(`POST /api/admin/import/execute  Execute import - admin-import-backend.js:448`);
-  console.log(`GET  /api/admin/portfolios/:type/status  Portfolio status - admin-import-backend.js:449`);
+  console.log(`🔧 Admin Portfolio Import Backend running on http://localhost:${PORT} - admin-import-backend.js:644`);
+  console.log(`📁 Portfolio base path: ${CONFIG.portfolioBasePath} - admin-import-backend.js:645`);
+  console.log(`🔐 Admin password required for all operations - admin-import-backend.js:646`);
+  console.log(`📝 Available endpoints: - admin-import-backend.js:647`);
+  console.log(`GET  /health  Health check - admin-import-backend.js:648`);
+  console.log(`POST /api/admin/import/preview  Preview import - admin-import-backend.js:649`);
+  console.log(`POST /api/admin/import/execute  Execute import - admin-import-backend.js:650`);
+  console.log(`GET  /api/admin/portfolios/:type/status  Portfolio status with folder details - admin-import-backend.js:651`);
+  console.log(`POST /api/admin/portfolios/:type/folders/:name/rename  Rename folder - admin-import-backend.js:652`);
+  console.log(`DELETE /api/admin/portfolios/:type/folders/:name  Delete folder - admin-import-backend.js:653`);
+  console.log(`GET  /api/admin/server/info  Server info for remote access - admin-import-backend.js:654`);
 });
 
 module.exports = app;

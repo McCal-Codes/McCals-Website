@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 Portfolio Quick Access | McCal Media</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .access-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .method-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .path-display {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .folder-structure {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+        }
+        
+        .folder-structure h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .folder-item {
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            margin: 8px 0;
+            padding: 5px 0 5px 25px;
+            position: relative;
+            opacity: 0.9;
+        }
+        
+        .folder-item::before {
+            content: "📁";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        
+        .instructions {
+            background: rgba(0, 255, 100, 0.15);
+            border: 1px solid rgba(0, 255, 100, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 15px;
+            color: #90EE90;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #90EE90;
+            font-weight: bold;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .quick-link {
+            display: block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 18px 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .quick-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .status-bar {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 0.85rem;
+        }
+        
+        .highlight {
+            background: rgba(255, 255, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📸</div>
+            <h1>Portfolio Quick Access</h1>
+            <div class="subtitle">Simple portfolio management for McCal Media</div>
+        </div>
+        
+        <div class="access-section">
+            <div class="section-title">
+                🌐 Network File Share Access
+            </div>
+            <div class="method-desc">
+                Access your portfolio folders directly from any device on your network using the file path below:
+            </div>
+            <div class="path-display">\\\\localhost\\McCal-Portfolios</div>
+            <div class="method-desc">
+                <strong>From your phone:</strong> Use any file manager app (Files, ES File Explorer, etc.) and connect to this network path.
+            </div>
+        </div>
+        
+        <div class="access-section">
+            <div class="section-title">
+                📂 Direct Folder Access
+            </div>
+            <div class="method-desc">
+                Direct path to portfolio folders on this computer:
+            </div>
+            <div class="path-display">C:\\Users\\wolft\\Desktop\\McCal's Dev Website\\McCals-Website\\src\\images\\Portfolios</div>
+        </div>
+        
+        <div class="folder-structure">
+            <h3>📁 Required Folder Structure</h3>
+            <div class="folder-item">Concert/[Band Name]/[Month Year]/</div>
+            <div class="folder-item">Events/[Event Name]/[Date]/</div>
+            <div class="folder-item">Journalism/[Article]/[Date]/</div>
+            <br>
+            <div style="font-size: 0.85rem; opacity: 0.8; text-align: center;">
+                Example: Concert/Brahctopus/September 2025/
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>🚀 How to Use</h3>
+            <div class="step">Copy images to the correct folder structure above</div>
+            <div class="step">The <span class="highlight">auto-manifest watcher</span> detects changes automatically</div>
+            <div class="step">Manifests regenerate within seconds</div>
+            <div class="step">Your portfolio widgets update immediately</div>
+        </div>
+        
+        <div class="links-grid">
+            <a href="admin-portfolio-manager.html" class="quick-link">
+                📊 Portfolio Manager<br>
+                <small>Manage existing portfolios</small>
+            </a>
+            <a href="system-diagnostic.html" class="quick-link">
+                🔧 System Diagnostic<br>
+                <small>Check system status</small>
+            </a>
+            <a href="../concert-portfolio/demo/test-concert-widget-local.html" class="quick-link">
+                🎸 Concert Widget<br>
+                <small>Test portfolio display</small>
+            </a>
+            <a href="../../images/Portfolios/Concert/concert-manifest.json" class="quick-link">
+                📄 Concert Manifest<br>
+                <small>View generated data</small>
+            </a>
+        </div>
+        
+        <div class="status-bar">
+            <strong>🔄 Auto-Manifest Status:</strong> File watcher running<br>
+            <strong>📡 Services:</strong> Dev server (3000) • Admin backend (3001)<br>
+            <strong>🎯 Latest:</strong> Brahctopus folder added with 30 images
+        </div>
+    </div>
+</body>
+</html>
