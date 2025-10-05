@@ -434,15 +434,16 @@
       "category": "Event Photography",
       "name": "Denver Robotics Convention",
       "folderPath": "Events/Denver Robotics Convention",
-      "dateDisplay": "January 2025",
+      "dateDisplay": "April 2019",
       "date": {
-        "year": 2025,
-        "month": 1,
-        "day": 1,
-        "monthName": "January",
-        "iso": "2025-01-01",
-        "source": "fallback_current_year",
-        "description": "Fallback to current year"
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "source": "manual_update",
+        "description": "Manually set per client request",
+        "display": "April 2019"
       },
       "totalImages": 7,
       "images": [
