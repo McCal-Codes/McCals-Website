@@ -56,6 +56,7 @@ This repository is primarily a **development workspace for Squarespace widgets**
 - **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays
 - **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections
 - **Site Footer** (`src/widgets/site-footer/`) - Glass design footer with social links and newsletter
+- **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only)*
 
 ### Work in Progress
 - **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration *(in development)*
