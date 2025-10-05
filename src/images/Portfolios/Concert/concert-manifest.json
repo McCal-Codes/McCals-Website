@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated": "2025-10-05T08:14:40.771Z",
-  "totalBands": 16,
+  "generated": "2025-10-05T11:01:03.653Z",
+  "totalBands": 17,
   "bands": [
     {
       "bandName": "Brahctopus",
@@ -47,6 +47,47 @@
         "250927_Bellueve Music Festival_CAL6472_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6477_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6483_webuse.jpg"
+      ]
+    },
+    {
+      "bandName": "Funky Lamp",
+      "folderPath": "Funky Lamp/September 2025",
+      "dateDisplay": "September 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 1,
+        "iso": "2025-09-01"
+      },
+      "totalImages": 26,
+      "images": [
+        "250927_Bellueve Music Festival_CAL6043_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6043_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6051_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6051_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6054_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6054_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6057_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6060_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6061_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6061_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6062_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6064_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6064_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6073_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6077_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6108_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6119_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6134_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6141_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6143_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6148_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6148_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6162_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6167_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6169_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6183_webuse.jpg"
       ]
     },
     {
