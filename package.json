@@ -12,6 +12,8 @@
     "ci:simulate:sample1": "node scripts/ci-simulate-changed.js --changed 'scripts/build.js docs/README.md'",
     "ci:simulate:sample2": "node scripts/ci-simulate-changed.js --changed '.github/copilot-instructions.md src/site/app.js'",
     "dev": "node dev-server.js",
+    "admin:backend": "node scripts/admin-import-backend.js",
+    "admin:start": "concurrently \"npm run dev\" \"npm run admin:backend\"",
     "start": "npm run dev",
     "build": "node scripts/build.js",
     "serve": "node dev-server.js --production",
@@ -61,6 +63,7 @@
   "license": "MIT",
   "devDependencies": {
     "chokidar": "^3.5.3",
+    "concurrently": "^9.2.1",
     "http-server": "^14.1.1",
     "open": "^10.1.0"
   },
@@ -73,7 +76,10 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "exif-parser": "^0.1.12",
-    "lottie-web": "^5.13.0"
+    "express": "^5.1.0",
+    "lottie-web": "^5.13.0",
+    "multer": "^2.0.2"
   }
 }
