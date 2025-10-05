@@ -2,6 +2,36 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v4.8 (2025-10-05) — Hidden Lightbox Scrollbars 🖼️
+- NEW: Completely hidden scrollbars in lightbox gallery for cleaner appearance
+- NEW: Cross-browser scrollbar hiding (webkit, firefox, IE/Edge) 
+- IMPROVED: Maintains scroll functionality while removing visual scrollbar clutter
+- IMPROVED: Enhanced immersive fullscreen viewing experience
+
+## v4.7 (2025-10-05) — Enhanced Navigation Hiding 🚫
+- NEW: Comprehensive navigation bar hiding when lightbox is open
+- NEW: Triple isolation with opacity + visibility + pointer-events rules
+- IMPROVED: Enhanced CSS selectors target all common navigation patterns  
+- IMPROVED: Prevents navigation interference with fullscreen image viewing
+
+## v4.6 (2025-10-05) — Enhanced Filtering & Minimal Published Badge ✨
+- FIXED: Spacing issue with filters - hidden cards no longer take up space
+- NEW: Redesigned published indicator as minimal dot at top-left of card
+- IMPROVED: Enhanced published badge with subtle backdrop blur styling
+- IMPROVED: Cards now appear at top when filtered without awkward gaps
+
+## v4.5 (2025-10-05) — Fixed Published Work Filter 🔧
+- FIXED: "Published Work" filter now shows items tagged with "Published Work"
+- IMPROVED: Enhanced buildCard function detects published items from tags array
+- IMPROVED: Updated filter logic properly handles published content categorization
+- IMPROVED: Streamlined filter tabs by removing unused categories
+
+## v4.4 (2025-10-05) — Optimized Close Button 🎯
+- FIXED: Close button positioning to avoid header overlap (fixed to viewport)
+- IMPROVED: Enhanced close button with backdrop blur and improved styling
+- IMPROVED: Increased button size to 44px for better accessibility
+- IMPROVED: Higher z-index ensures button stays above all headers
+
 ## v4.3.4 (2025-10-05) — Cache Bust + Header Isolation ♻️
 - NEW: Generated-date–scoped cache key automatically invalidates stale localStorage entries when the manifest regenerates
 - NEW: Force + Bust debug control adds a timestamp query parameter to defeat CDN / edge caching immediately

@@ -23,6 +23,17 @@ Filterable masonry gallery for displaying photojournalism work with categories. 
 - **ARIA Attributes**: Proper screen reader compatibility
 - **Focus Management**: Lightbox focus trapping and restoration
 
+## Current Version
+
+**Latest**: v4.8 (`versions/v4.8-event-cards.html`)
+
+### Recent Updates (v4.4→v4.8)
+- **v4.8**: Hidden scrollbars in lightbox for immersive experience
+- **v4.7**: Comprehensive navigation hiding during lightbox viewing  
+- **v4.6**: Enhanced filtering (no gaps) + minimal published indicators
+- **v4.5**: Fixed "Published Work" filter functionality with tag support
+- **v4.4**: Optimized close button positioning and accessibility
+
 ## Usage
 
 ### Basic Implementation
@@ -146,3 +157,16 @@ For images that belong to multiple categories:
   - Basic GitHub CDN integration
 
 See CHANGELOG.md for detailed version history.
+
+## Enhancement Patterns
+
+This widget (v4.4-v4.8) served as the foundation for establishing systematic UX improvement patterns documented in `docs/standards/widget-enhancements.md`. These patterns include:
+
+- **Close Button Optimization**: Fixed positioning to avoid header overlap
+- **Enhanced Filter Layout**: No gaps when filtering content  
+- **Minimal Status Indicators**: Clean, unobtrusive publication badges
+- **Comprehensive Navigation Hiding**: Full isolation during lightbox viewing
+- **Hidden Scrollbars**: Immersive gallery experience
+- **Version Indicator Standards**: Consistent placement and styling
+
+These patterns can be systematically applied to enhance all other widgets in the McCal Media ecosystem.

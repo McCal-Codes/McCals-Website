@@ -13,6 +13,14 @@
 - Added `.github/canvas-instructions.md` for ChatGPT Canvas usage and `.github/codex-instructions.md` for efficient VS Code agent usage under rate limits.
 - Updated `copilot-instructions-guardian.yml` to enforce changelog entries when AI instructions change and to watch Canvas/Codex instruction files.
 - Removed demo Event portfolio folders (Charity Gala 2024, Corporate Summit 2025, Product Launch Expo 2025) and regenerated `events-manifest.json` (now 4 real events). Cleanup documented for repository clarity.
+- **Widget Standardization Complete**: Created comprehensive widget standards documentation with simplified naming:
+  - `docs/standards/widget-standards.md` - Complete architecture, CSS patterns, performance guidelines, accessibility standards
+  - `docs/standards/widget-reference.md` - Quick reference checklist for daily development
+  - `docs/standards/README.md` - Standards directory organization and workflow guidance
+  - Simplified all file names from UPPER-CASE-NAMES.md to lowercase-names.md for better organization
+  - Updated main README, docs organization, and copilot instructions to reference new standards
+- Created comprehensive widget enhancement framework: `docs/standards/widget-enhancements.md` documents proven optimization patterns, `docs/standards/widget-development.md` provides systematic implementation methodology for applying improvements across all widgets.
+- Updated photojournalism widget documentation with enhancement pattern references and established QA standards for future widget development.
 
 <!-- ...existing code... -->
 // ...existing code...

@@ -22,10 +22,14 @@ Integration guides and external resource documentation:
 - `squarespace/` - Squarespace-specific integration docs
 - `wordpress/` - WordPress integration documentation
 
-### 📏 **standards/** - Coding & Naming Standards
+### 📏 **standards/** - Coding & Naming Standards ⭐ **EXPANDED**
 Project standards, conventions, and versioning:
-- `DATE-NAMING-STANDARDS.md` - File and folder naming conventions
-- `VERSIONING.md` - Project versioning guidelines
+- `widget-reference.md` - **NEW**: Quick reference for widget development
+- `widget-standards.md` - **NEW**: Comprehensive widget standards guide
+- `widget-enhancements.md` - Proven widget improvement patterns
+- `widget-development.md` - Systematic enhancement methodology
+- `date-naming.md` - File and folder naming conventions
+- `versioning.md` - Project versioning guidelines
 
 ### 🚀 **deployment/** - Deployment & Publishing
 Deployment guides and hosting setup:
@@ -48,8 +52,10 @@ Archived documentation and completed project records:
 ### Common Tasks
 - **Adding new photos**: `workflows/portfolio-image-import.md`
 - **Deploying changes**: `deployment/DEPLOY-CHEATSHEET.md`
-- **File naming**: `standards/DATE-NAMING-STANDARDS.md`
-- **Version updates**: `standards/VERSIONING.md`
+- **File naming**: `standards/date-naming.md`
+- **Version updates**: `standards/versioning.md`
+- **Widget development**: `standards/widget-reference.md` ⭐
+- **Widget enhancement**: `standards/widget-enhancements.md`
 
 ### Development
 - **Automation scripts**: `automation/`
@@ -73,7 +79,7 @@ When adding new documentation:
    - `deployment/` - Deployment and hosting
    - `archive/` - Completed or outdated docs
 
-2. **Use descriptive filenames** following the DATE-NAMING-STANDARDS
+2. **Use descriptive filenames** following the date-naming standards
 3. **Update this README** if adding new categories
 4. **Cross-reference** related documents when helpful
 
