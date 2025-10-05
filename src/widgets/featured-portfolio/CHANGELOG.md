@@ -1,5 +1,11 @@
 # Featured Portfolio Widget Changelog
 
+## v1.6.1 - 2025-10-04
+- **Lightbox Header Isolation**: Introduced `html.lb-open` pattern used by other widgets so Squarespace headers / announcement bars lose pointer-events while the lightbox is open (prevents clicks on nav behind overlay).
+- **Consistent z-index**: Elevated lightbox to 2147483647 to match other portfolio widgets and guarantee top layering.
+- **Reduced Diff Build**: Version file refactored for minimal footprint; feature parity retained with v1.5 (core data logic simplified for reliability when embedded).
+- NOTE: v1.6.0 had planned debug/source enhancements but no separate version file was committed; this release focuses narrowly on interaction safety.
+
 ## v1.6.0 - 2025-10-03
 - **Enhanced Source Tracking**: Added detailed source metadata with last updated timestamps
 - **Improved Debugging**: Enhanced debug panel with scrollable log output and detailed source information

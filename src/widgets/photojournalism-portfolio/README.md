@@ -111,6 +111,24 @@ For images that belong to multiple categories:
 
 ## Versions
 
+- **v4.3.4** (Latest) — Cache Bust + Header Isolation
+  - Generated-date–scoped manifest cache key (auto invalidation when regenerated)
+  - Manual Force + Bust control to defeat CDN/edge caching instantly
+  - Global `html.lb-open` pointer-events isolation (prevents site header interaction under lightbox)
+  - Debug panel shows manifest generated date + bust token
+  - Parity with Events / Featured widgets for refresh + overlay behavior
+
+- **v4.2** — Event Cards Gallery
+  - Event-level cards (one thumbnail per journalism event)
+  - Shuffled thumbnails & consolidated lightbox per event
+  - Publication & image count badges
+  - Foundation for generated-date based enhancements in v4.3.x
+
+- **v4.0–v4.1** — Master Manifest & Individual Lightbox Evolution
+  - Consolidated master manifest loading & caching
+  - Iterative lightbox and styling refinements
+  - Publication metadata integration groundwork
+
 - **v2.0**: Dynamic GitHub Integration (Latest)
   - Automatic image discovery from GitHub repository
   - EXIF date extraction with commit date fallback
