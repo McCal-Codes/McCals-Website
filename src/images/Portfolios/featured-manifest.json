@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "type": "featured",
-  "generated": "2025-10-05T11:07:13.590Z",
+  "generated": "2025-10-05T23:26:23.002Z",
   "generatedBy": "enhanced-featured-manifest-generator",
   "sources": [
     "concert-manifest.json",
@@ -9,7 +9,7 @@
     "journalism-manifest.json"
   ],
   "totalItems": 12,
-  "totalImages": 230,
+  "totalImages": 242,
   "categories": [
     "Concert Photography",
     "Events Photography",
@@ -21,8 +21,8 @@
     "Journalism"
   ],
   "dateRange": {
-    "newest": "2025-10-05",
-    "oldest": "2019-04-15"
+    "newest": "2025-09-27",
+    "oldest": "2024-10-18"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
@@ -31,56 +31,6 @@
     "usesSharedDateParsing": true
   },
   "items": [
-    {
-      "title": "Denver Robotics Convention",
-      "eventName": "Denver Robotics Convention",
-      "category": "Events Photography",
-      "dateDisplay": "April 2019",
-      "dateISO": "2019-04-15",
-      "date": {
-        "year": 2019,
-        "month": 4,
-        "day": 15,
-        "monthName": "April",
-        "iso": "2019-04-15",
-        "display": "April 2019"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
-        }
-      ],
-      "folderPath": "Events/Denver Robotics Convention",
-      "type": "Events",
-      "id": "Denver Robotics Convention",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
-      },
-      "totalImages": 7,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
-    },
     {
       "bandName": "Brahctopus",
       "folderPath": "Brahctopus/September 2025",
@@ -314,6 +264,158 @@
       ]
     },
     {
+      "title": "Local Union Officers Conference 2025",
+      "eventName": "Local Union Officers Conference 2025",
+      "category": "Events Photography",
+      "dateDisplay": "July 2025",
+      "dateISO": "2025-07-20",
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 20,
+        "monthName": "July",
+        "iso": "2025-07-20",
+        "display": "July 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1837.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1894.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2068.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2070.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2074.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2083.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2094.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2097.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2099.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2107.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2116.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2134.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2152.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2158.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2161.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2188.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2197.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2199.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2201.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2205.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2208.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2299.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2323.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2348.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2351.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2375.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2380.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2382.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2385.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2388.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2391.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2392.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2398.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2403.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2410.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2416.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2422.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2424.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2438.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2450.jpg"
+        }
+      ],
+      "folderPath": "Events/Local Union Officers Conference 2025",
+      "type": "Events",
+      "id": "Local Union Officers Conference 2025",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1837.jpg"
+      },
+      "totalImages": 41,
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
+    },
+    {
       "title": "CMU Business Graduation",
       "eventName": "CMU Business Graduation",
       "category": "Events Photography",
@@ -332,100 +434,34 @@
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-640.jpg"
-        },
-        {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-1280.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-640.jpg"
         },
         {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-1280.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-640.jpg"
-        },
-        {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-1280.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-640.jpg"
         },
         {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-1280.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-640.jpg"
-        },
-        {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-1280.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-640.jpg"
         },
         {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-1280.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-640.jpg"
-        },
-        {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-1280.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-640.jpg"
         },
         {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-1280.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-640.jpg"
-        },
-        {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-1280.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-640.jpg"
-        },
-        {
           "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-1280.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-320.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-640.jpg"
         }
       ],
       "folderPath": "Events/CMU-Business-Graduation",
@@ -434,7 +470,7 @@
       "coverImage": {
         "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
       },
-      "totalImages": 33,
+      "totalImages": 11,
       "tags": [
         "Event",
         "Corporate",
