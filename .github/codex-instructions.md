@@ -1,5 +1,11 @@
 ## Codex instructions — efficient usage in VS Code (rate‑limit friendly)
 
+Agent responsibilities
+
+- **Always read these instructions first** when starting any session in this workspace
+- **Update these instructions** if you discover new patterns, workflows, or critical information that would help future agents
+- **Add entries to Recent updates** section when you make significant changes to document what was learned or improved
+
 Goal
 
 - Minimize calls while preserving accuracy. Prefer small, surgical edits and single-pass diffs. Avoid exploratory multi-turns when the repo already encodes the answer.
@@ -39,6 +45,7 @@ Validate cheaply
 
 - Sanity-check diffs compile: basic syntax, correct paths, and consistent version increments.
 - If needed, run the minimal local check: build copies `src/site` and `src/images` → `dist/`; server at http://localhost:3000.
+- **Widget preview workflow**: When testing widgets, let the user preview them in VS Code's built-in browser or locally first, then have the user describe what they see or what issues they encounter rather than automatically hosting on external servers.
 
 Avoids
 
@@ -51,6 +58,7 @@ PR/Docs discipline
 
 Recent updates
 
+- 2025-10-04T00:00:00.003Z — Added agent responsibilities and widget preview workflow guidance: agents must read/update instructions and use user-driven preview workflow instead of external hosting
 - 2025-10-03T09:15:17.087Z — Featured Portfolio Widget v1.5 complete: Enhanced journalism titles, ultra-minimal scrollbars (4px, 0.15 opacity), improved masonry spacing (16px gaps), randomized cover images with Fisher-Yates shuffle, minimal gray accents (#888888), production-ready deployment with 15-item limit, scrollable lightbox, and comprehensive changelog documentation
 - 2025-10-03T09:15:11.680Z — Session complete: minor updates.
 - 2025-10-03T07:08:00.405Z — Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging

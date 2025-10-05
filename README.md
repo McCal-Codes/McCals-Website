@@ -1,8 +1,35 @@
-# McCal Media — Widget Development Workspace
+# McCal Media ## AI Development Support
 
-> **Version 2.1.0** — Squarespace widget development and testing environment
+This workspace includes comprehensive AI assistant instructions and validation tools:
+
+### AI Instructions (Read First)
+- **Copilot**: `.github/copilot-instructions.md` - Full development workflow
+- **Canvas**: `.github/canvas-instructions.md` - Focused widget editing  
+- **Codex**: `.github/codex-instructions.md` - Rate-limit efficient patterns
+
+### Preflight Validation
+Run before making large changes to validate context awareness:
+- **VS Code Task**: "AI: Preflight (short)" 
+- **Command Line**: `npm run ai:preflight:short` (quick) or `npm run ai:preflight` (full)
+- **JSON Output**: `npm run ai:preflight:json` for programmatic use
+
+### Agent Responsibilities
+- **Always read instructions first** when starting sessions
+- **Update instructions** when discovering new patterns or workflows  
+- **Add entries to Recent updates** section for significant changeslopment Workspace
+
+> **Version 2.4.0** — Squarespace widget development and testing environment
 
 This repository is primarily a **development workspace for Squarespace widgets**, containing reusable web components that embed into your Squarespace site. The standalone site is used only for testing widgets before deployment to Squarespace.
+
+## 🆕 Recent Updates (October 2025)
+
+✅ **Repository Organization Complete**:
+- **Test files organized**: All debug/test files moved to categorized `tests/html/` directories
+- **Documentation restructured**: Docs organized by category (`workflows/`, `automation/`, `integrations/`, etc.)
+- **Widget status clarified**: GitHub portfolio archived, blog feed & nature portfolio marked as WIP
+- **Cleaner root directory**: Removed 15+ scattered test files from root level
+- **Preserved functionality**: All builds, deployments, and workflows still work perfectly
 
 ## Before you start (AI assistants)
 
@@ -22,11 +49,16 @@ This repository is primarily a **development workspace for Squarespace widgets**
 
 ### Available Widgets
 - **Concert Portfolio** (`src/widgets/concert-portfolio/`) - Photo galleries for concert photography
-- **Event Portfolio** (`src/widgets/event-portfolio/`) - Event photography displays
+- **Event Portfolio** (`src/widgets/event-portfolio/`) - Event photography displays  
+- **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights
 - **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos
 - **About Widgets** (`src/widgets/about-widgets/`) - Client logos, carousels, about sections
-- **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration
 - **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays
+- **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections
+
+### Work in Progress
+- **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration *(in development)*
+- **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays *(in development)*
 
 ### Using Widgets in Squarespace
 
@@ -47,11 +79,21 @@ npm run manifest:generate
 # Build test site (for widget testing only)
 npm run build
 
-# Test widgets locally
-npm run serve
+# Test widgets locally  
+npm run serve                    # Production-like server
+npm run dev                      # Development server with auto-reload
 
 # Auto-organize photos
 npm run organize:concerts
+
+# Deploy test site (optional - main site is Squarespace)
+npm run deploy                   # Interactive deployment
+npm run deploy:netlify           # Deploy to Netlify
+npm run deploy:vercel            # Deploy to Vercel
+
+# AI Development Tools
+npm run ai:preflight:short       # Quick context validation
+npm run ai:preflight             # Full preflight check
 ```
 
 ### Adding Concert Photos for Widgets
@@ -64,31 +106,80 @@ npm run organize:concerts
 ```
 McCals-Website/
 ├── src/
-│   ├── widgets/           # ⭐ MAIN: Squarespace widgets
-│   ├── images/            # Photo assets for widgets
-│   └── site/              # Test site (widget testing only)
-├── scripts/               # Photo organization & manifest generation
-├── docs/                  # Documentation
-├── tests/                 # Widget demos and testing
-└── config/                # Build configuration
+│   ├── widgets/           # ⭐ MAIN: Squarespace widgets (7 production + 2 WIP)
+│   │   └── _archived/     # Temporarily archived widgets
+│   ├── images/            # Photo assets organized by portfolio type
+│   └── site/              # Local test harness (development only)
+├── scripts/               # Build scripts, manifest generators, deployment tools
+├── docs/                  # 📁 ORGANIZED: Categorized documentation
+│   ├── workflows/         # Step-by-step processes (photo import, etc.)
+│   ├── automation/        # Automated system documentation  
+│   ├── integrations/      # External service guides (Squarespace, etc.)
+│   ├── standards/         # Naming conventions & versioning
+│   ├── deployment/        # Deployment & hosting guides
+│   └── archive/           # Historical & completed documentation
+├── tests/                 # 🧪 ORGANIZED: Categorized test files
+│   └── html/              # Test files by widget type and purpose
+├── config/                # Build configuration & automation
+└── .github/               # CI/CD workflows & AI instructions
 ```
 
 ## Documentation
 
-📖 **[Complete Documentation](docs/README.md)** — Full development guide
+📖 **[Complete Documentation](docs/README.md)** — Organized by category for easy navigation
+
+### Quick Reference
+- 🔄 **[Workflows](docs/workflows/)** - Adding photos, content import processes
+- 🤖 **[Automation](docs/automation/)** - Photo organization & manifest generation
+- 🔌 **[Integrations](docs/integrations/)** - Squarespace, external services
+- 📏 **[Standards](docs/standards/)** - Naming conventions & versioning guidelines
+- 🚀 **[Deployment](docs/deployment/)** - Build & deployment guides
 
 ### Widget Documentation
 - **Concert Widget**: [src/widgets/concert-portfolio/README.md](src/widgets/concert-portfolio/README.md)
 - **Event Widget**: [src/widgets/event-portfolio/README.md](src/widgets/event-portfolio/README.md)  
+- **Featured Widget**: [src/widgets/featured-portfolio/README.md](src/widgets/featured-portfolio/README.md)
 - **Journalism Widget**: [src/widgets/photojournalism-portfolio/README.md](src/widgets/photojournalism-portfolio/README.md)
+- **All Widgets**: See individual `src/widgets/[name]/README.md` files
 
-## What's New in v2.0
+## What's New in v2.4
 
-✨ **Better organized for Squarespace development**:
+✨ **Comprehensive Repository Organization (October 2025)**:
+- **📁 Organized Documentation**: Docs categorized by purpose (workflows, automation, standards, etc.)
+- **🧪 Organized Testing**: Test files categorized by widget type and purpose
+- **🗂️ Clean Structure**: Removed 15+ scattered files from root directory
+- **📚 7 Production Widgets**: Core portfolio widgets ready for Squarespace deployment
+- **🚧 Work-in-Progress Tracking**: Clear status indicators for widgets under development
+- **🗄️ Widget Archival System**: Organized storage for temporarily inactive widgets
+- **🤖 AI Development Support**: Preflight checks, comprehensive instructions
+- **⚡ Enhanced Automation**: Concert photo organization, manifest generation
+- **🔄 Improved Workflows**: Streamlined development and deployment processes
+
+### Previous Updates (v2.0-2.3)
 - Widget HTML files grouped with changelogs
-- Clear separation of widgets vs test site
+- Clear separation of widgets vs test site  
 - Improved photo organization scripts
 - Streamlined development workflow
+
+## Maintenance & Updates
+
+### Update Schedule
+This README is updated with major repository changes. Key update dates:
+- **October 4, 2025**: Repository & documentation reorganization (v2.4.0)
+- **Previous**: Widget expansion and AI development support (v2.0-2.3)
+
+### Contributing
+When making significant changes:
+1. Update relevant documentation in `docs/` categories
+2. Update widget READMEs for widget changes  
+3. Update this README for major structural changes
+4. Add entries to `CHANGELOG.md`
+5. Run `npm run ai:preflight` to validate structure
+
+### Getting Help
+- 📖 **Documentation**: [docs/README.md](docs/README.md) - Comprehensive guides
+- 🔧 **Widget Issues**: Check individual widget READMEs and changelogs
+- 🤖 **AI Development**: See `.github/copilot-instructions.md`
 
 ---
 

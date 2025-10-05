@@ -346,75 +346,52 @@
   var metrics={ start:performance.now(), api:0, events:0, images:0, last:'Never' };
   function updDbg(){ setText('#dbgLoad', Math.round(performance.now()-metrics.start)); setText('#dbgEvents', metrics.events); setText('#dbgImages', metrics.images); LOG('metrics', JSON.stringify(metrics)) }
 
-  // Card builder (+ gradient fallback)
+  // Card builder (neutral placeholders when images are missing)
   function buildCard(ev){
     LOG('buildCard:', (ev&&ev.eventName)||'(no name)');
     var a=document.createElement('article'); a.className='card'; a.tabIndex=0; a.setAttribute('data-category',ev.category||'Event'); a.setAttribute('data-featured', ev.featured?'true':'false');
 
-    // Explicit demo card path
-    if(ev.demoFallback){
-      a.classList.add('demo-fallback');
-      a.textContent='Coming Soon';
-      LOG('buildCard: demo fallback card created');
-      return a;
-    }
-
+    // Create image element and keep the info overlay even when images are missing/broken.
     var img=document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=(ev.eventName||'Event')+' photo';
     var info=document.createElement('div'); info.className='info'; info.innerHTML='<h3 class="title">'+(ev.eventName||'Event')+'</h3><p class="meta">'+(ev.dateDisplay||'')+' * '+(ev.category||'Event')+'</p>';
     var count=ev.totalImages || (ev.images?ev.images.length:0); if(count>1){ var b=document.createElement('div'); b.className='badge'; b.textContent=count+' photos'; a.appendChild(b) }
     a.appendChild(img); a.appendChild(info);
 
     var open=function(){ LOG('openLB via card click:', ev.eventName||'Event'); openLB(ev) };
-    a.addEventListener('click',open); a.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key==='[Events v2.5.3]'){ e.preventDefault(); open() } });
+    a.addEventListener('click',open); a.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); open() } });
 
     var first=(ev.images&&ev.images[0])||null;
     if(first && (first.path || first.srcset)){
-      // src/url setup with optional responsive candidates
       var url = first.path ? toUrl(first.path) : '';
-
-      // Assign responsive attributes if provided
       if(first.srcset){
         var srcsetStr='';
         if(typeof first.srcset==='string'){ srcsetStr = first.srcset; }
         else if(Array.isArray(first.srcset)){
-          srcsetStr = first.srcset.map(function(c){
-            if(!c) return '';
-            var cp = c.path ? toUrl(c.path) : (c.url||'');
-            var desc = c.d || c.descriptor || (c.w? (c.w+'w') : (c.x? (c.x+'x') : ''));
-            return cp && desc ? (cp+'[Events v2.5.3]'+desc) : '';
-          }).filter(Boolean).join(', ');
+          srcsetStr = first.srcset.map(function(c){ if(!c) return ''; var cp = c.path ? toUrl(c.path) : (c.url||''); var desc = c.d || c.descriptor || (c.w? (c.w+'w') : (c.x? (c.x+'x') : '')); return cp && desc ? (cp+' '+desc) : ''; }).filter(Boolean).join(', ');
         }
         if(srcsetStr){ img.setAttribute('srcset', srcsetStr); LOG('img srcset set', srcsetStr) }
-        var sz = first.sizes || '(max-width: 680px) 100vw, 300px';
-        img.setAttribute('sizes', sz); LOG('img sizes set', sz)
+        var sz = first.sizes || '(max-width: 680px) 100vw, 300px'; img.setAttribute('sizes', sz); LOG('img sizes set', sz)
       }
 
       img.onload=function(){ a.classList.add('loaded'); LOG('thumb loaded:', url || '[srcset candidate]') };
       img.onerror=function(){
         a.classList.add('loaded');
         WARN('thumb failed:', url || '[srcset candidate]');
-        // Per-card gradient fallback when the thumbnail fails
+        // Replace the broken image with a neutral placeholder but keep the info overlay
         try{
-          if(img && img.parentNode) img.parentNode.removeChild(img);
-          var inf=a.querySelector('.info'); if(inf && inf.parentNode) inf.parentNode.removeChild(inf);
-          a.classList.add('demo-fallback');
-          a.textContent='Coming Soon';
-          LOG('thumb fallback: gradient applied');
-        }catch(e){ WARN('thumb fallback error', e) }
+          var placeholder='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"%3E%3Crect width="100%25" height="100%25" fill="%230b0c0f"/%3E%3Ctext x="50%25" y="50%25" fill="%23ffffff" font-size="18" text-anchor="middle" dominant-baseline="middle" font-family="Arial, Helvetica, sans-serif"%3EImage unavailable%3C/text%3E%3C/svg%3E';
+          img.src = placeholder; img.classList.add('broken');
+        }catch(e){ WARN('thumb placeholder error', e) }
       };
 
-      // If we have a base path, set it; otherwise rely on srcset-only selection
       if(url) img.src=url; else if(!img.getAttribute('srcset')) { WARN('no src or srcset provided for image') }
     } else {
-      // No image path provided: immediate gradient fallback
+      // No image path provided: show neutral placeholder but keep info overlay
       WARN('no image for event', ev && ev.eventName);
       try{
-        if(img && img.parentNode) img.parentNode.removeChild(img);
-        var inf2=a.querySelector('.info'); if(inf2 && inf2.parentNode) inf2.parentNode.removeChild(inf2);
-        a.classList.add('demo-fallback');
-        a.textContent='Coming Soon';
-      }catch(e){ WARN('no-image fallback error', e) }
-      a.classList.add('loaded');
+        var placeholderEl=document.createElement('img'); placeholderEl.loading='lazy'; placeholderEl.decoding='async'; placeholderEl.alt='No image available'; placeholderEl.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"%3E%3Crect width="100%25" height="100%25" fill="%230b0c0f"/%3E%3Ctext x="50%25" y="50%25" fill="%23ffffff" font-size="18" text-anchor="middle" dominant-baseline="middle" font-family="Arial, Helvetica, sans-serif"%3ENo image%3C/text%3E%3C/svg%3E';
+        a.replaceChild(placeholderEl,img); placeholderEl.classList.add('loaded');
+      }catch(e){ WARN('no-image placeholder error', e) }
     }
     return a
   }
@@ -464,10 +441,11 @@
       setTimeout(function(){ load.style.display='none'; grid.style.display='block'; grid.classList.add('loaded'); updDbg(); LOG('build: done'); }, 150)
     }catch(err){
       setText('#loadingErr', String(err.message||err)); $('#loadingErr').style.display='block'; ERR('build: error', err);
-      // Minimal fallback so the widget still functions for local demos
-      var fallback={ events:[{ eventName:'Coming Soon', category:'Corporate', dateDisplay:'', demoFallback:true, images:[] }] };
-      grid.innerHTML=''; grid.appendChild(buildCard(fallback.events[0]));
-      load.style.display='none'; grid.style.display='block'; grid.classList.add('loaded'); updDbg(); LOG('build: fallback rendered')
+      // Do not inject a 'Coming Soon' panel; show an informative empty state instead.
+      grid.innerHTML='';
+      var empty=document.createElement('div'); empty.style.padding='28px'; empty.style.color='var(--muted)'; empty.style.textAlign='center'; empty.textContent='No events available.';
+      grid.appendChild(empty);
+      load.style.display='none'; grid.style.display='block'; grid.classList.add('loaded'); updDbg(); LOG('build: empty state rendered')
     }
   }
 

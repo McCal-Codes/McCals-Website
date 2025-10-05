@@ -1,6 +1,19 @@
-# Squarespace Widgets Setup Guide
+# Squarespace Widgets
 
-This folder contains Squarespace-compatible versions of your about page components that can be easily embedded into your Squarespace site.
+This directory contains production-ready and work-in-progress widgets for the McCal Media Squarespace site.
+
+## Widget Status System
+
+📖 **[Complete Status Guide](WIDGET-STATUS-GUIDE.md)** - Full development workflow and criteria
+
+### Quick Reference
+- **🟢 Production Ready**: Listed in main README "Available Widgets" - ready for Squarespace
+- **🟡 Work in Progress**: Has `STATUS.md` file - under development, do not use in production  
+- **🔴 Archived**: In `_archived/` directory - temporarily inactive
+
+## Legacy About Widgets
+
+*The content below refers to legacy about page widgets. See individual widget directories for current widgets.*
 
 ## Available Widgets
 
