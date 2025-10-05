@@ -14,6 +14,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: journalism-manifest-${{ github.ref }}
+  cancel-in-progress: false  # Don't cancel - let it complete to avoid corruption
+
 jobs:
   update-journalism-manifest:
     runs-on: ubuntu-latest
@@ -70,23 +74,95 @@ jobs:
         if: steps.check_images.outputs.has_generator == 'true'
         run: |
           echo "🔄 Regenerating journalism manifest..."
-          npm run manifest:journalism -- --force
           
-          # Show manifest summary
+          # Create backup of existing manifest for widget protection
           if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json" ]; then
-            echo "✅ Journalism manifest generated successfully"
+            cp "src/images/Portfolios/Journalism/journalism-manifest.json" "src/images/Portfolios/Journalism/journalism-manifest.json.backup"
+            echo "📋 Created backup of existing manifest"
+          fi
+          
+          # Retry logic for manifest generation
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3..."
             
-            # Extract key info from manifest
-            MANIFEST_EVENTS=$(grep -o '"totalEvents":[0-9]*' src/images/Portfolios/Journalism/journalism-manifest.json | cut -d':' -f2)
-            MANIFEST_VERSION=$(grep -o '"version":"[^"]*"' src/images/Portfolios/Journalism/journalism-manifest.json | cut -d'"' -f4)
-            
-            echo "📊 Manifest info:"
-            echo "   - Version: $MANIFEST_VERSION"
-            echo "   - Total events: $MANIFEST_EVENTS"
-            echo "   - Generated: $(date)"
+            if npm run manifest:journalism -- --force; then
+              echo "✅ Journalism manifest generation completed"
+              break
+            else
+              echo "⚠️ Attempt $attempt failed"
+              if [ $attempt -eq 3 ]; then
+                echo "❌ All attempts failed"
+                exit 1
+              fi
+              sleep 5
+            fi
+          done
+          
+          # Validate manifest exists and is valid JSON
+          if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json" ]; then
+            # Test if it's valid JSON
+            if jq empty src/images/Portfolios/Journalism/journalism-manifest.json 2>/dev/null; then
+              echo "✅ Journalism manifest generated successfully"
+              
+              # Extract key info from manifest
+              MANIFEST_EVENTS=$(jq -r '.totalEvents // 0' src/images/Portfolios/Journalism/journalism-manifest.json)
+              MANIFEST_VERSION=$(jq -r '.version // "unknown"' src/images/Portfolios/Journalism/journalism-manifest.json)
+              
+              echo "📊 Manifest info:"
+              echo "   - Version: $MANIFEST_VERSION"
+              echo "   - Total events: $MANIFEST_EVENTS"
+              echo "   - Generated: $(date)"
+              
+              # Widget compatibility checks - ensure required fields exist
+              echo "🔍 Checking widget compatibility..."
+              REQUIRED_FIELDS=("version" "generated" "totalEvents" "events")
+              for field in "${REQUIRED_FIELDS[@]}"; do
+                if jq -e ".$field" src/images/Portfolios/Journalism/journalism-manifest.json > /dev/null 2>&1; then
+                  echo "✅ Required field '$field': Present"
+                else
+                  echo "❌ Required field '$field': Missing"
+                  echo "::error::Manifest missing required field '$field' - this could break widgets"
+                  exit 1
+                fi
+              done
+              
+              # Check events array structure (if events exist)
+              if [ "$MANIFEST_EVENTS" -gt 0 ]; then
+                if jq -e '.events[0] | has("eventName") and has("totalImages") and has("images")' src/images/Portfolios/Journalism/journalism-manifest.json > /dev/null 2>&1; then
+                  echo "✅ Event structure: Compatible with widgets"
+                else
+                  echo "⚠️ Event structure: May be incompatible - checking first event"
+                  jq -r '.events[0] // "No events found"' src/images/Portfolios/Journalism/journalism-manifest.json
+                fi
+              fi
+              
+              # Verify minimum data integrity
+              if [ "$MANIFEST_EVENTS" -eq 0 ]; then
+                echo "⚠️ Warning: No events found in manifest"
+              fi
+            else
+              echo "❌ Journalism manifest is not valid JSON"
+              # Restore backup if it exists
+              if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json.backup" ]; then
+                echo "🔄 Restoring backup manifest"
+                mv "src/images/Portfolios/Journalism/journalism-manifest.json.backup" "src/images/Portfolios/Journalism/journalism-manifest.json"
+              fi
+              exit 1
+            fi
           else
             echo "❌ Journalism manifest not found after generation"
+            # Restore backup if it exists
+            if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json.backup" ]; then
+              echo "🔄 Restoring backup manifest"
+              mv "src/images/Portfolios/Journalism/journalism-manifest.json.backup" "src/images/Portfolios/Journalism/journalism-manifest.json"
+            fi
             exit 1
+          fi
+          
+          # Clean up backup on success
+          if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json.backup" ]; then
+            rm "src/images/Portfolios/Journalism/journalism-manifest.json.backup"
+            echo "🗑️ Cleaned up backup file"
           fi
 
       - name: Check for changes
