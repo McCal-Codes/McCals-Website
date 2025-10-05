@@ -1,0 +1,941 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>McCal Media - Event Portfolio v2.6.2</title>
+<style>:root{--fg:#0e0f10;--bg:#fff;--line:#e7e7e7;--muted:#6b7280;--accent:#4d79ff;--demo:#00d4aa}
+@media (prefers-color-scheme:dark){:root{--fg:#f3f4f6;--bg:#0b0c0f;--line:#22252a;--muted:#a3aab7;--accent:#7aa0ff}}
+body{background:var(--bg);color:var(--fg);margin:0;font:400 14px/1.4 ui-sans-serif,system-ui}
+.events-portfolio{max-width:1200px;margin:48px auto;padding:0 16px 96px;text-align:center}
+.events-heading{font:800 28px/1.2 ui-sans-serif,system-ui;margin:0 0 8px}
+.events-sub{margin:0 0 18px;color:var(--muted);font:400 15px/1.45 ui-sans-serif,system-ui}
+
+/* Enhanced version indicator integrated in heading */
+.version-indicator {
+  display: inline-block;
+  margin-left: 12px;
+  font: 600 14px/1.2 ui-sans-serif,system-ui;
+  color: rgba(128,128,128,.7);
+  cursor: pointer;
+  transition: all .3s ease;
+  background: rgba(0,0,0,.08);
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(128,128,128,.2);
+  vertical-align: baseline;
+}
+.version-indicator:hover {
+  color: var(--accent);
+  background: rgba(77,121,255,.12);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px}
+.filter-btn{border:1px solid var(--line);background:transparent;color:var(--fg);padding:8px 12px;border-radius:999px;font:600 12px ui-sans-serif,system-ui;cursor:pointer;opacity:.85;transition:background .2s,border-color .2s,opacity .2s}
+.filter-btn[aria-pressed="true"],.filter-btn:hover{opacity:1;border-color:var(--fg)}
+.loading{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 0;color:var(--muted)}
+.spinner{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.grid{column-width:300px;column-gap:16px;text-align:left;opacity:0;transition:opacity .3s;margin-bottom:32px}
+.grid.loaded{opacity:1}
+@media (max-width:960px){.grid{column-width:260px}}
+@media (max-width:680px){.grid{column-width:100%}}
+.card{position:relative;display:inline-block;width:100%;margin:0 0 16px;background:#0b0c0f;border:none;border-radius:12px;overflow:hidden;cursor:pointer;break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;box-sizing:border-box;opacity:0;transform:translateY(12px);transition:all .25s}
+.card.loaded{opacity:1;transform:translateY(0)}
+.card img{width:100%;height:auto;display:block;object-fit:contain}
+.card.demo-fallback{background:linear-gradient(135deg,rgba(10,10,10,0.95),rgba(200,200,200,0.6));color:#fff;display:flex;align-items:center;justify-content:center;font:700 14px/1.4 ui-sans-serif,system-ui;padding:40px;text-align:center;min-height:clamp(180px,30vw,280px)}
+.info{position:absolute;inset:auto 0 0 0;padding:10px 12px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7));color:#fff}
+.title{margin:0;font:800 14px/1.2 ui-sans-serif,system-ui}
+.meta{margin:4px 0 0;font:600 11px/1.2 ui-sans-serif,system-ui;opacity:.9}
+.badge{position:absolute;top:8px;left:8px;font:700 10px ui-sans-serif,system-ui;color:#fff;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);padding:3px 6px;border-radius:10px}
+
+/* Hidden scrollbars for immersive experience */
+body, html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer/Edge */
+}
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/WebKit */
+}
+
+/* Enhanced Lightbox with scrollable gallery */
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:2147483647 !important;padding:max(20px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
+.lightbox.is-open{display:flex}
+.lb-dialog{position:relative;max-width:94vw;max-height:92vh;overflow:auto;margin:12px;overscroll-behavior:contain}
+
+/* Hidden scrollbars for immersive gallery experience */
+.lb-dialog{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.lb-dialog::-webkit-scrollbar{
+  display: none;
+}
+
+.lb-gallery{
+  display:flex;flex-direction:column;gap:16px;overflow:auto;
+  -ms-overflow-style: none;              /* IE/Edge */
+  scrollbar-width: none;                 /* Firefox */
+}
+.lb-gallery::-webkit-scrollbar{
+  display: none;                         /* Chrome/Safari */
+}
+
+/* Fixed image stretching with proper aspect ratio preservation */
+.lb-gallery img{
+  max-width:92vw;max-height:80vh;margin:0 auto;
+  object-fit: contain;                   /* Prevent stretching */
+  display: block;                        /* Proper centering */
+  border-radius:10px;
+}
+
+.lb-title{font:800 18px/1.25 ui-sans-serif,system-ui;margin:0 0 6px}
+.lb-meta{font:600 12px/1.2 ui-sans-serif,system-ui;opacity:.9;margin:0 0 8px}
+.lb-desc{font:400 13px/1.4 ui-sans-serif,system-ui;opacity:.95;margin:0}
+
+/* Enhanced close button with fixed positioning */
+.lb-close{
+  position:fixed;
+  top:max(24px,env(safe-area-inset-top));
+  right:max(24px,env(safe-area-inset-right));
+  width:44px;height:44px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.4);
+  background:rgba(0,0,0,.7);color:#fff;
+  font:800 18px ui-sans-serif,system-ui;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease;z-index:2147483648;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.lb-close:hover{
+  background:rgba(0,0,0,.9);
+  border-color:rgba(255,255,255,.6);
+  transform:scale(1.05);
+}
+
+.lb-close:active{
+  transform:scale(0.95);
+}
+
+/* Essential lb-open class functionality */
+html.lb-open .events-portfolio,
+html.lb-open .version,
+html.lb-open .refresh,
+html.lb-open .debug-panel,
+html.lb-open .changelog-modal{
+  pointer-events:none;
+}
+html.lb-open .lightbox,
+html.lb-open .lightbox *{
+  pointer-events:auto;
+}
+
+/* Comprehensive navigation hiding during lightbox */
+html.lb-open header,
+html.lb-open .Header,
+html.lb-open [id*="Header"],
+html.lb-open .site-header,
+html.lb-open .sqs-announcement-bar,
+html.lb-open nav,
+html.lb-open .nav,
+html.lb-open .navbar,
+html.lb-open .navigation,
+html.lb-open .site-nav,
+html.lb-open .main-nav,
+html.lb-open .top-nav,
+html.lb-open [class*="nav"],
+html.lb-open [id*="nav"],
+html.lb-open [class*="menu"],
+html.lb-open [id*="menu"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Comprehensive navigation hiding during lightbox */
+.lightbox.is-open ~ nav,
+.lightbox.is-open ~ .nav,
+.lightbox.is-open ~ .navigation,
+.lightbox.is-open ~ header,
+.lightbox.is-open ~ .header,
+.lightbox.is-open ~ .site-header,
+.lightbox.is-open ~ .site-nav,
+.lightbox.is-open ~ .main-nav,
+.lightbox.is-open ~ .primary-nav,
+.lightbox.is-open ~ .top-nav,
+.lightbox.is-open ~ .navbar,
+.lightbox.is-open ~ .menu,
+.lightbox.is-open ~ .site-menu,
+.lightbox.is-open ~ footer,
+.lightbox.is-open ~ .footer,
+.lightbox.active ~ .site-footer {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+/* Ensure lightbox is fully interactive */
+.lightbox.active {
+  pointer-events: all;
+}
+.lightbox:not(.active) {
+  pointer-events: none;
+}
+
+/* Changelog Modal Styles */
+.changelog-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.changelog-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.changelog-content {
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.changelog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.changelog-title {
+  margin: 0;
+  font: 700 20px/1.2 ui-sans-serif, system-ui;
+  color: var(--fg);
+}
+
+.changelog-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.changelog-close:hover {
+  color: var(--fg);
+}
+
+.changelog-body {
+  padding: 24px;
+}
+
+.changelog-version {
+  font: 700 16px/1.3 ui-sans-serif, system-ui;
+  color: var(--accent);
+  margin: 16px 0 8px;
+}
+
+.changelog-version:first-child {
+  margin-top: 0;
+}
+
+.changelog-items {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.changelog-items li {
+  margin: 6px 0;
+  position: relative;
+  font: 400 14px/1.4 ui-sans-serif, system-ui;
+  color: var(--fg);
+}
+
+.changelog-items li::before {
+  content: '•';
+  color: var(--accent);
+  position: absolute;
+  left: -12px;
+}
+
+/* Debug panel - comprehensive metrics and controls */
+.debug-panel {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  font: 600 11px/1.3 ui-monospace, monospace;
+  z-index: 1000000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  max-width: 280px;
+  display: none;
+}
+
+.debug-panel.active {
+  display: block;
+}
+
+.debug-section {
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.debug-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.debug-title {
+  color: #4d79ff;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.debug-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.debug-controls {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.debug-btn {
+  background: rgba(77, 121, 255, 0.8);
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font: 600 10px ui-sans-serif, system-ui;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.debug-btn:hover {
+  background: rgba(77, 121, 255, 1);
+}
+
+.debug-btn.danger {
+  background: rgba(239, 68, 68, 0.8);
+}
+
+.debug-btn.danger:hover {
+  background: rgba(239, 68, 68, 1);
+}
+
+</style></head><body>
+<div class="events-portfolio" id="eventsPf" data-manifest="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Events/events-manifest.json">
+  <h1 class="events-heading">
+    Event Photography
+    <span class="version-indicator" onclick="showChangelog()" title="View changelog">v2.6.2</span>
+  </h1>
+  <p class="events-sub">Corporate events, conferences, and special occasions</p>
+  
+  <div class="filters" id="filters" style="display: none;">
+    <button class="filter-btn" data-filter="all" aria-pressed="true" onclick="filterEvents('all')">All Events</button>
+  </div>
+  
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div>Loading events...</div>
+  </div>
+  
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lb-dialog" role="dialog" aria-modal="true" aria-labelledby="lbTitle" tabindex="-1">
+    <button class="lb-close" type="button" aria-label="Close" onclick="closeLightbox()">&times;</button>
+    <div class="lb-gallery" id="lbGallery"></div>
+    <div class="lb-caption">
+      <h3 class="lb-title" id="lbTitle"></h3>
+      <p class="lb-meta" id="lbMeta"></p>
+      <p class="lb-desc" id="lbDesc"></p>
+    </div>
+  </div>
+</div>
+
+<div class="debug-panel" id="debugPanel">
+  <div class="debug-section">
+    <div class="debug-title">Performance</div>
+    <div class="debug-item">
+      <span>Load Time:</span>
+      <span id="debugLoadTime">-</span>
+    </div>
+    <div class="debug-item">
+      <span>Image Count:</span>
+      <span id="debugImageCount">-</span>
+    </div>
+    <div class="debug-item">
+      <span>Render Time:</span>
+      <span id="debugRenderTime">-</span>
+    </div>
+  </div>
+  
+  <div class="debug-section">
+    <div class="debug-title">Cache</div>
+    <div class="debug-item">
+      <span>Hit Rate:</span>
+      <span id="debugCacheHits">-</span>
+    </div>
+    <div class="debug-item">
+      <span>API Calls:</span>
+      <span id="debugApiCalls">-</span>
+    </div>
+    <div class="debug-item">
+      <span>Cache Size:</span>
+      <span id="debugCacheSize">-</span>
+    </div>
+  </div>
+  
+  <div class="debug-section">
+    <div class="debug-title">Status</div>
+    <div class="debug-item">
+      <span>Manifest:</span>
+      <span id="debugManifestStatus">-</span>
+    </div>
+    <div class="debug-item">
+      <span>Source:</span>
+      <span id="debugManifestSource">GitHub</span>
+    </div>
+    <div class="debug-item">
+      <span>Filters:</span>
+      <span id="debugFilterCount">-</span>
+    </div>
+    <div class="debug-item">
+      <span>Version:</span>
+      <span>2.6.2</span>
+    </div>
+  </div>
+  
+  <div class="debug-controls">
+    <button class="debug-btn" onclick="refreshCache()">Refresh</button>
+    <button class="debug-btn danger" onclick="clearCache()">Clear Cache</button>
+    <button class="debug-btn" onclick="exportMetrics()">Export</button>
+  </div>
+</div>
+
+<!-- Changelog Modal -->
+<div id="changelogModal" class="changelog-modal">
+  <div class="changelog-content">
+    <div class="changelog-header">
+      <h3 class="changelog-title">Event Portfolio Changelog</h3>
+      <button class="changelog-close" onclick="hideChangelog()">×</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v2.6.2</div>
+      <ul class="changelog-items">
+        <li>Fixed version indicator to show changelog instead of debug panel</li>
+        <li>Corrected onclick handler for proper version information display</li>
+        <li>Maintained v2.6.0 UX patterns for consistency</li>
+      </ul>
+      
+      <div class="changelog-version">v2.6.1</div>
+      <ul class="changelog-items">
+        <li>Implemented robust GitHub-first manifest loading</li>
+        <li>Added fallback manifest loading logic</li>
+        <li>Enhanced error handling for remote resources</li>
+      </ul>
+      
+      <div class="changelog-version">v2.6.0</div>
+      <ul class="changelog-items">
+        <li>Applied journalism widget v4.9 enhancement patterns</li>
+        <li>Fixed lightbox image stretching with object-fit: contain</li>
+        <li>Added hidden scrollbars for immersive experience</li>
+        <li>Enhanced navigation hiding with comprehensive selectors</li>
+        <li>Improved close button with fixed positioning and accessibility</li>
+        <li>Integrated version indicator in heading</li>
+        <li>Added comprehensive debug panel with detailed metrics</li>
+      </ul>
+      
+      <div class="changelog-version">v2.5.6</div>
+      <ul class="changelog-items">
+        <li>Stable baseline version with core functionality</li>
+        <li>Standard lightbox gallery implementation</li>
+        <li>Basic event portfolio display and navigation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const startTime = performance.now();
+let debugMode = false;
+let eventData = null;
+let renderStartTime = 0;
+let apiCallCount = 0;
+let cacheHits = 0;
+let manifestSource = 'Unknown';
+
+// Enhanced debug controls
+function toggleDebug() {
+  debugMode = !debugMode;
+  const panel = document.getElementById('debugPanel');
+  panel.classList.toggle('active', debugMode);
+  if (debugMode) {
+    updateDebugInfo();
+  }
+}
+
+function refreshCache() {
+  localStorage.removeItem('events_manifest_cache');
+  localStorage.removeItem('events_manifest_timestamp');
+  location.reload();
+}
+
+function clearCache() {
+  localStorage.clear();
+  cacheHits = 0;
+  apiCallCount = 0;
+  updateDebugInfo();
+}
+
+function exportMetrics() {
+  const metrics = {
+    loadTime: (performance.now() - startTime).toFixed(2) + 'ms',
+    imageCount: eventData?.events?.length || 0,
+    renderTime: renderStartTime ? (performance.now() - renderStartTime).toFixed(2) + 'ms' : 'N/A',
+    cacheHitRate: apiCallCount > 0 ? ((cacheHits / apiCallCount * 100).toFixed(1) + '%') : '0%',
+    apiCalls: apiCallCount,
+    cacheSize: Object.keys(localStorage).length,
+    manifestStatus: eventData ? 'Loaded' : 'Failed',
+    manifestSource: manifestSource,
+    version: '2.6.2',
+    timestamp: new Date().toISOString()
+  };
+  
+  console.log('Event Portfolio Metrics:', metrics);
+  
+  // Copy to clipboard
+  navigator.clipboard.writeText(JSON.stringify(metrics, null, 2))
+    .then(() => console.log('Metrics copied to clipboard'))
+    .catch(() => console.log('Manual copy required'));
+}
+
+function updateDebugInfo() {
+  if (!debugMode) return;
+  
+  document.getElementById('debugLoadTime').textContent = (performance.now() - startTime).toFixed(2) + 'ms';
+  document.getElementById('debugImageCount').textContent = eventData?.events?.length || '0';
+  document.getElementById('debugRenderTime').textContent = renderStartTime ? (performance.now() - renderStartTime).toFixed(2) + 'ms' : 'N/A';
+  document.getElementById('debugCacheHits').textContent = apiCallCount > 0 ? ((cacheHits / apiCallCount * 100).toFixed(1) + '%') : '0%';
+  document.getElementById('debugApiCalls').textContent = apiCallCount;
+  document.getElementById('debugCacheSize').textContent = Object.keys(localStorage).length;
+  document.getElementById('debugManifestStatus').textContent = eventData ? 'Loaded' : 'Failed';
+  document.getElementById('debugManifestSource').textContent = manifestSource;
+  document.getElementById('debugFilterCount').textContent = document.querySelectorAll('.filter-btn').length - 1; // -1 for "All" button
+}
+
+// Check for debug mode from URL
+if (new URLSearchParams(window.location.search).has('debug')) {
+  debugMode = true;
+  document.getElementById('debugPanel').classList.add('active');
+}
+
+// Changelog modal functions
+function showChangelog() {
+  const modal = document.getElementById('changelogModal');
+  modal.classList.add('active');
+  hidePageNavigation();
+}
+
+function hideChangelog() {
+  const modal = document.getElementById('changelogModal');
+  modal.classList.remove('active');
+  showPageNavigation();
+}
+
+// Close changelog on outside click
+document.getElementById('changelogModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    hideChangelog();
+  }
+});
+
+// Robust manifest loading with GitHub-first approach
+const RAW = 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/';
+const PF = document.getElementById('eventsPf');
+const MANIFEST_BASE = (PF && PF.dataset.manifest && PF.dataset.manifest.trim()) || (RAW + 'src/images/Portfolios/Events/events-manifest.json');
+
+function manifestUrl() {
+  return MANIFEST_BASE + (window.__EP_BUST ? ((MANIFEST_BASE.indexOf('?') > -1 ? '&' : '?') + 'b=' + window.__EP_BUST) : '');
+}
+
+function toUrl(p) {
+  if (!p) return '';
+  if (/^https?:\/\//i.test(p) || /^data:/i.test(p)) return p;
+  let s = String(p).replace(/^\.\/+/, '').replace(/^\/+/, '');
+  if (s.indexOf('src/images/Portfolios/Events/') === 0) return RAW + s;
+  if (s.indexOf('images/Portfolios/Events/') === 0) return RAW + 'src/' + s;
+  return RAW + 'src/images/Portfolios/Events/' + s;
+}
+
+function withTimeout(run, ms) {
+  let ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  let t = setTimeout(() => { if (ctrl) ctrl.abort() }, ms);
+  return Promise.race([
+    run(ctrl ? ctrl.signal : undefined),
+    new Promise((_, rej) => setTimeout(() => rej(new Error('Request timed out after ' + ms + 'ms')), ms + 10))
+  ]).finally(() => clearTimeout(t));
+}
+
+function norm(j) {
+  let ev = [];
+  if (Array.isArray(j)) ev = j;
+  else if (j && Array.isArray(j.events)) ev = j.events;
+  else if (j && j.events && typeof j.events === 'object') ev = Object.values(j.events);
+  
+  ev = (ev || []).filter(Boolean).map(e => {
+    let imgs = Array.isArray(e.images) ? e.images.slice() : [];
+    imgs = imgs.map(im => {
+      if (typeof im === 'string') return { path: im };
+      if (im && (im.path || im.url)) return { path: im.path || im.url, srcset: im.srcset, sizes: im.sizes };
+      return null;
+    }).filter(Boolean);
+    
+    return {
+      id: e.id || e.eventName || e.name || 'event-' + Math.random(),
+      eventName: e.eventName || e.name || 'Event',
+      category: e.category || 'Event',
+      dateDisplay: e.dateDisplay || e.date || '',
+      dateISO: e.dateISO || e.iso || '',
+      images: imgs,
+      totalImages: e.totalImages || imgs.length,
+      demoFallback: e.demoFallback || imgs.length === 0
+    };
+  });
+  
+  return {
+    version: (j && j.version) || '2.6.2',
+    generated: (j && j.generated) || '',
+    events: ev,
+    items: j && j.items ? j.items : ev // Support both formats
+  };
+}
+
+async function fetchManifest() {
+  // GitHub-first approach - prioritize production reliability
+  const fallbackPaths = [
+    manifestUrl(), // GitHub RAW (primary)
+    RAW + 'src/images/Portfolios/Events/events-manifest.json', // GitHub RAW fallback
+    'src/images/Portfolios/Events/events-manifest.json', // Local production
+    '../../../images/Portfolios/Events/events-manifest.json', // Local development
+    '../../images/Portfolios/Events/events-manifest.json' // Local alternative
+  ];
+  
+  let lastError = null;
+  
+  for (let i = 0; i < fallbackPaths.length; i++) {
+    try {
+      const url = fallbackPaths[i] + (fallbackPaths[i].includes('?') ? '&' : '?') + 'v=' + Date.now();
+      const data = await withTimeout(sig => fetch(url, { cache: 'no-store', signal: sig }), 10000)
+        .then(r => {
+          if (!r.ok) throw new Error('HTTP ' + r.status + ': ' + (r.statusText || ''));
+          return r.text();
+        })
+        .then(t => {
+          try {
+            return norm(JSON.parse(t));
+          } catch (e) {
+            throw new Error('Parse error: ' + e.message);
+          }
+        });
+      
+      // Track successful source
+      if (fallbackPaths[i].includes('github') || fallbackPaths[i].includes('raw.githubusercontent')) {
+        manifestSource = 'GitHub';
+      } else {
+        manifestSource = 'Local';
+      }
+      
+      console.log('✅ Loaded manifest from:', fallbackPaths[i], '(' + manifestSource + ')');
+      return data;
+    } catch (err) {
+      console.warn('❌ Failed to load from:', fallbackPaths[i], err.message);
+      lastError = err;
+    }
+  }
+  
+  manifestSource = 'Failed';
+  throw lastError || new Error('All manifest sources failed');
+}
+
+async function loadEvents() {
+  try {
+    renderStartTime = performance.now();
+    
+    // Check cache first
+    const cacheKey = 'events_manifest_cache';
+    const cacheTimeKey = 'events_manifest_timestamp';
+    const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+    
+    const cachedData = localStorage.getItem(cacheKey);
+    const cacheTime = localStorage.getItem(cacheTimeKey);
+    
+    if (cachedData && cacheTime && (Date.now() - parseInt(cacheTime)) < cacheExpiry) {
+      cacheHits++;
+      eventData = JSON.parse(cachedData);
+      manifestSource = 'Cache';
+    } else {
+      apiCallCount++;
+      eventData = await fetchManifest();
+      
+      // Cache the result
+      localStorage.setItem(cacheKey, JSON.stringify(eventData));
+      localStorage.setItem(cacheTimeKey, Date.now().toString());
+    }
+
+    createFilters(eventData.events || []);
+    displayEvents(eventData.events || [], 'all');
+    
+    if (debugMode) {
+      updateDebugInfo();
+    }
+    
+  } catch (error) {
+    console.error('Error loading events:', error);
+    manifestSource = 'Failed';
+    document.getElementById('loading').innerHTML = `
+      <div style="color: var(--muted); text-align: center; padding: 40px;">
+        <div style="font: 700 16px/1.4 ui-sans-serif,system-ui; margin-bottom: 8px; color: #ef4444;">Unable to load events</div>
+        <div style="margin-bottom: 12px;">Trying GitHub and local sources failed</div>
+        <div style="font: 600 12px ui-monospace; color: var(--muted);">Error: ${error.message}</div>
+      </div>
+    `;
+    
+    if (debugMode) {
+      updateDebugInfo();
+    }
+  }
+}
+
+function createFilters(events) {
+  const filtersDiv = document.getElementById('filters');
+  const categories = [...new Set(events.map(e => e.category))].sort();
+  
+  // Clear existing filters except "All"
+  const allBtn = filtersDiv.querySelector('[data-filter="all"]');
+  filtersDiv.innerHTML = '';
+  if (allBtn) {
+    allBtn.onclick = () => filterEvents('all');
+    filtersDiv.appendChild(allBtn);
+  }
+  
+  categories.forEach(category => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.filter = category;
+    btn.setAttribute('aria-pressed', 'false');
+    btn.textContent = category;
+    btn.onclick = () => filterEvents(category);
+    filtersDiv.appendChild(btn);
+  });
+  
+  if (categories.length > 0) {
+    filtersDiv.style.display = 'flex';
+  }
+}
+
+function filterEvents(category) {
+  // Update button states
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.setAttribute('aria-pressed', btn.dataset.filter === category);
+  });
+  
+  displayEvents(eventData.events || [], category);
+}
+
+function displayEvents(events, filterCategory = 'all') {
+  renderStartTime = performance.now();
+  const grid = document.getElementById('grid');
+  const loading = document.getElementById('loading');
+  
+  // Filter events
+  let filteredEvents = events;
+  if (filterCategory !== 'all') {
+    filteredEvents = events.filter(event => event.category === filterCategory);
+  }
+  
+  // Sort by date (most recent first) and limit to 12 featured items
+  const sorted = filteredEvents
+    .sort((a, b) => new Date(b.dateISO || '1970-01-01') - new Date(a.dateISO || '1970-01-01'))
+    .slice(0, Math.min(12, filteredEvents.length));
+  
+  if (sorted.length === 0) {
+    grid.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: var(--muted); grid-column: 1 / -1;">
+        <div style="font: 700 16px/1.4 ui-sans-serif,system-ui; margin-bottom: 8px;">Coming Soon</div>
+        <div>New ${filterCategory} events will be added regularly.</div>
+      </div>
+    `;
+    grid.classList.add('loaded');
+    loading.style.display = 'none';
+    return;
+  }
+  
+  grid.innerHTML = sorted.map((event, index) => {
+    const eventName = event.eventName || 'Event';
+    const category = event.category || '';
+    const date = formatDate(event.dateISO || '');
+    const firstImage = (event.images && event.images[0]) || null;
+    const thumbnail = firstImage ? toUrl(firstImage.path) : '';
+    
+    if (!thumbnail) {
+      return `
+        <div class="card demo-fallback">
+          Coming Soon
+        </div>
+      `;
+    }
+    
+    return `
+      <div class="card event-card" data-event-index="${index}" role="button" tabindex="0">
+        <img src="${thumbnail}" alt="${eventName}" loading="lazy"/>
+        <div class="info">
+          <h3 class="title">${eventName}</h3>
+          <div class="meta">${date}</div>
+        </div>
+        ${category ? `<div class="badge">${category}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+  
+  // Add click handlers for event cards
+  setTimeout(() => {
+    document.querySelectorAll('.event-card').forEach((card, index) => {
+      const event = sorted[index];
+      card.addEventListener('click', () => openLB(event));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLB(event);
+        }
+      });
+    });
+  }, 50);
+  
+  // Animate cards in
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.card').forEach((card, i) => {
+      setTimeout(() => card.classList.add('loaded'), i * 50);
+    });
+    grid.classList.add('loaded');
+    loading.style.display = 'none';
+  });
+  
+  if (debugMode) {
+    updateDebugInfo();
+  }
+}
+
+function formatDate(dateString) {
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long' 
+    });
+  } catch {
+    return 'Date Unknown';
+  }
+}
+
+// Helper function for element selection
+function $(sel) { return document.querySelector(sel); }
+
+// Helper function for setting text content
+function setText(sel, text) {
+  const el = $(sel);
+  if (el) el.textContent = text;
+}
+
+function openLB(ev){let lb=$('#lightbox'),gal=$('#lbGallery'); if(!lb||!gal)return; gal.innerHTML=''; (ev.images||[]).forEach((it,i)=>{let im=new Image(); im.loading='lazy'; im.alt=(ev.eventName||'Event')+' - '+(i+1); im.src=toUrl(it.path); gal.appendChild(im)}); setText('#lbTitle',ev.eventName||'Event'); let c=ev.totalImages||(ev.images?ev.images.length:0); setText('#lbMeta',(ev.dateDisplay||'')+' * '+(ev.category||'Event')+' * '+c+' images'); let d=(ev.images&&ev.images[0]&&ev.images[0].description)||''; let desc=$('#lbDesc'); if(desc){if(d){desc.textContent=d; desc.style.display='block'}else{desc.style.display='none'}} lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false'); document.documentElement.classList.add('lb-open'); document.body.style.overflow='hidden'; hidePageNavigation()}
+
+function closeLB(){let lb=$('#lightbox'); if(lb){lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true'); document.documentElement.classList.remove('lb-open'); document.body.style.overflow=''; showPageNavigation()}}
+
+// Update the card click handlers to use openLB instead of openLightbox
+function openLightbox(imgSrc) {
+  // For compatibility with existing calls, find the event and open the gallery
+  if (eventData && eventData.events) {
+    for (let event of eventData.events) {
+      if (event.images && event.images.some(img => toUrl(img.path) === imgSrc)) {
+        openLB(event);
+        return;
+      }
+    }
+  }
+}
+
+function closeLightbox(event) {
+  closeLB();
+}
+
+// Keyboard and click navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const changelogModal = document.getElementById('changelogModal');
+    if (changelogModal.classList.contains('active')) {
+      hideChangelog();
+    } else {
+      closeLB();
+    }
+  }
+});
+
+// Lightbox click handlers
+document.addEventListener('click',e=>{if(e.target&&(e.target.classList&&e.target.classList.contains('lb-close')||e.target.id==='lightbox'))closeLB()});
+
+// Initialize
+loadEvents();
+
+// Global API for external access and debugging
+window.portfolioAPI = {
+  getMetrics: () => ({
+    loadTime: (performance.now() - startTime).toFixed(2) + 'ms',
+    imageCount: eventData?.events?.length || 0,
+    renderTime: renderStartTime ? (performance.now() - renderStartTime).toFixed(2) + 'ms' : 'N/A',
+    cacheHitRate: apiCallCount > 0 ? ((cacheHits / apiCallCount * 100).toFixed(1) + '%') : '0%',
+    apiCalls: apiCallCount,
+    cacheHits: cacheHits,
+    cacheSize: Object.keys(localStorage).length,
+    manifestStatus: eventData ? 'Loaded' : 'Failed',
+    manifestSource: manifestSource,
+    version: '2.6.2'
+  }),
+  toggleDebug: () => toggleDebug(),
+  refreshData: () => loadEvents(),
+  clearCache: () => clearCache(),
+  exportMetrics: () => exportMetrics()
+};
+</script>
+</body></html>

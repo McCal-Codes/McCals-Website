@@ -58,6 +58,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     overflow: hidden;
+    position: relative;
   }
 
   .ss-client-logo:hover {
@@ -219,7 +220,7 @@
 (function() {
   'use strict';
 
-  // Enhanced Client data with transparent high-quality logos and text fallbacks
+  // Enhanced Client data with randomized order and seamless looping
   const clientsData = [
     { 
       name: "New York Post", 
@@ -426,8 +427,8 @@
       
       img.src = client.logo;
       img.style.opacity = '0.9'; // Slightly transparent initially
-
       logoElement.appendChild(img);
+
       logoElement.addEventListener('click', () => {
         if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
       });

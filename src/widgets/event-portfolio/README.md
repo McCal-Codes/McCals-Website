@@ -1,6 +1,6 @@
-# Event Portfolio Widget (v2.6.0)
+# Event Portfolio Widget (v2.6.2)
 
-**Current Version: v2.6.0** — Squarespace-ready single-file widget with enhanced UX patterns. Featured-first + shuffle, immersive lightbox, comprehensive debug console.
+**Current Version: v2.6.2** — Production-optimized Squarespace widget with GitHub-first manifest loading. Enhanced UX patterns, bulletproof reliability, comprehensive fallbacks.
 
 ## Use in Squarespace
 1. Open `src/widgets/event-portfolio/versions/v2.6.0-event-portfolio.html`

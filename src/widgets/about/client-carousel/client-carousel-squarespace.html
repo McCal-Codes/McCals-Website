@@ -1,9 +1,9 @@
-<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.4 -->
+<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.5 -->
 <!-- Copy this entire code block into a Squarespace Code Block -->
-<!-- Enhanced with randomized client order and seamless infinite looping -->
+<!-- Enhanced with improved logo URLs and organized structure -->
 
 <style>
-  /* Client Carousel Squarespace Styles v1.1.4 */
+  /* Client Carousel Squarespace Styles v1.1.5 */
   .ss-client-showcase {
     max-width: 1000px;
     margin: 0 auto;
@@ -58,6 +58,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     overflow: hidden;
+    position: relative;
   }
 
   .ss-client-logo:hover {
@@ -219,7 +220,7 @@
 (function() {
   'use strict';
 
-  // Enhanced Client data with transparent high-quality logos and text fallbacks
+  // Enhanced Client data with improved logo URLs and randomized order
   const clientsData = [
     { 
       name: "New York Post", 
@@ -237,7 +238,7 @@
     },
     { 
       name: "The Globe", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/the-globe-logo.svg",
+      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fppuglobe.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fthumbnail_globeheadnew-04.png&f=1&nofb=1&ipt=2b605a69d2d38820829fff50502d65bf0256a213e5b1cc99ad2e39eca215c62c",
       textFallback: { company: "The Globe", tagline: "Point Park U" },
       website: "https://ppuglobe.com", 
       project: "Photo Editor" 
@@ -328,21 +329,21 @@
     },
     { 
       name: "Penn State Fayette", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/Pennsylvania_State_University_logo.svg",
+      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Fthumbs%2F2x%2Fpennsylvania-state-university-logo.png&f=1&nofb=1&ipt=69d959415424e5d345bc761fcffd346a966b2b3e435b0d340615f5ffc252e74e",
       textFallback: { company: "Penn State Fayette", tagline: "We Are Penn State" },
       website: "https://fayette.psu.edu", 
       project: "Campus Photography" 
     },
     { 
       name: "The Watchful Shepherd", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/the-watchful-shepherd-logo.svg",
+      logo: "https://watchful.org/wp-content/uploads/2024/06/Watchful-Shepherd-Logo-2024.png",
       textFallback: { company: "The Watchful Shepherd", tagline: "Advocacy & Justice" },
       website: "https://watchfulshepherd.org", 
       project: "Advocacy Photography" 
     },
     { 
       name: "Voyage Visuals", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/voyage-visuals-logo.svg",
+      logo: "https://cdn.prod.website-files.com/5e90f121241fd84dcd6daccc/5ea37d79c07d78a6bf30d2b1_Voyage_V%20(1).png",
       textFallback: { company: "Voyage Visuals", tagline: "Creative Production" },
       website: "https://voyagevisuals.com", 
       project: "Visual Production" 
@@ -426,8 +427,8 @@
       
       img.src = client.logo;
       img.style.opacity = '0.9'; // Slightly transparent initially
-
       logoElement.appendChild(img);
+
       logoElement.addEventListener('click', () => {
         if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
       });
