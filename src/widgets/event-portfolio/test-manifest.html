@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Portfolio Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .loading { text-align: center; padding: 20px; }
+        .error { color: red; padding: 20px; }
+        .success { color: green; padding: 20px; }
+        .debug { background: #f5f5f5; padding: 10px; margin: 10px 0; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Event Portfolio Widget Test</h1>
+    <div id="status">Loading...</div>
+    <div id="debug"></div>
+    <div id="content"></div>
+
+    <script>
+        async function testManifestLoad() {
+            const debugDiv = document.getElementById('debug');
+            const statusDiv = document.getElementById('status');
+            const contentDiv = document.getElementById('content');
+            
+            const paths = [
+                '../../../images/Portfolios/Events/events-manifest.json',
+                '../../images/Portfolios/Events/events-manifest.json',
+                '../images/Portfolios/Events/events-manifest.json',
+                '/src/images/Portfolios/Events/events-manifest.json'
+            ];
+            
+            debugDiv.innerHTML = '<h3>Testing paths:</h3>';
+            
+            for (const path of paths) {
+                debugDiv.innerHTML += `<div class="debug">Trying: ${path}</div>`;
+                
+                try {
+                    const response = await fetch(path + '?v=' + Date.now());
+                    debugDiv.innerHTML += `<div class="debug">Status: ${response.status} ${response.statusText}</div>`;
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        statusDiv.innerHTML = `<div class="success">✅ Success! Found manifest with ${data.totalEvents} events</div>`;
+                        contentDiv.innerHTML = `
+                            <h3>Events loaded:</h3>
+                            <ul>
+                                ${data.events.map(e => `<li>${e.eventName} (${e.category})</li>`).join('')}
+                            </ul>
+                        `;
+                        return;
+                    }
+                } catch (error) {
+                    debugDiv.innerHTML += `<div class="debug">Error: ${error.message}</div>`;
+                }
+            }
+            
+            statusDiv.innerHTML = '<div class="error">❌ All paths failed</div>';
+        }
+        
+        testManifestLoad();
+    </script>
+</body>
+</html>

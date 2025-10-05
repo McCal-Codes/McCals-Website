@@ -1,9 +1,9 @@
-<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.4 -->
+<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.3 -->
 <!-- Copy this entire code block into a Squarespace Code Block -->
-<!-- Enhanced with randomized client order and seamless infinite looping -->
+<!-- Enhanced with transparent logos and larger containers for better visibility -->
 
 <style>
-  /* Client Carousel Squarespace Styles v1.1.4 */
+  /* Client Carousel Squarespace Styles v1.1.3 */
   .ss-client-showcase {
     max-width: 1000px;
     margin: 0 auto;
@@ -58,6 +58,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     overflow: hidden;
+    position: relative;
   }
 
   .ss-client-logo:hover {
@@ -426,8 +427,8 @@
       
       img.src = client.logo;
       img.style.opacity = '0.9'; // Slightly transparent initially
-
       logoElement.appendChild(img);
+
       logoElement.addEventListener('click', () => {
         if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
       });

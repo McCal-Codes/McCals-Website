@@ -1,5 +1,27 @@
 # About Widgets Changelog
 
+## Version 1.5.5 - Improved Logos & Organized Structure (2025-01-14)
+
+### ✨ Client Carousel v1.1.5 Features
+- **Updated Logo URLs**: Enhanced quality logos for Penn State, The Globe, Watchful Shepherd, and Voyage Visuals
+- **Organized File Structure**: Moved to `src/widgets/about/client-carousel/` for better organization
+- **Better Logo Quality**: High-resolution logos with improved visibility and branding
+- **Consistent Branding**: Professional logo presentation across all clients
+- **Maintained Functionality**: All v1.1.4 features preserved (shuffling, seamless loop, etc.)
+
+### 🖼️ Logo Improvements
+- **Penn State**: High-quality FreebieSupply logo with proper branding
+- **The Globe**: Updated to latest 2024 Point Park University Globe header logo
+- **Watchful Shepherd**: New 2024 official logo from watchful.org
+- **Voyage Visuals**: Professional V logo from their website assets
+- **Enhanced Visual Appeal**: Better contrast and readability on dark backgrounds
+
+### 📂 Structure Improvements
+- **Organized Directory**: Moved from `about-widgets` to `about/client-carousel/` structure
+- **Version Control**: Maintained all previous versions in organized `versions/` folder
+- **Documentation**: Updated README and CHANGELOG in new location
+- **Simplified Access**: Cleaner file organization for easier maintenance
+
 ## Version 1.5.4 - Randomized Order & Seamless Loop (2025-01-14)
 
 ### ✨ Client Carousel v1.1.4 Features

@@ -1,5 +1,15 @@
 # Changelog - Event Portfolio
 
+## 2.6.2 — 2025-10-05
+### GitHub-First Robust Manifest Loading 🚀
+- **PRIORITIZED**: GitHub RAW URL as primary source for production reliability
+- **ENHANCED**: Multi-source fallback system (GitHub → Local → Development paths)
+- **IMPROVED**: Manifest source tracking in debug panel (GitHub/Local/Cache/Failed)
+- **ADDED**: Comprehensive error handling with specific error messages
+- **OPTIMIZED**: 10-second timeout for robust loading across network conditions
+- **MAINTAINED**: All v2.6.1 UX enhancements and data corrections
+- **BULLETPROOF**: Always works in Squarespace production, degrades gracefully for local dev
+
 ## 2.6.1 — 2025-01-05
 ### Data Updates & Display Enhancement 📊
 - **ENHANCED**: Increased featured items display from 6 to 12 cards for more content visibility

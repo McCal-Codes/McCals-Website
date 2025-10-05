@@ -1,9 +1,9 @@
-<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.4 -->
+<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.2 -->
 <!-- Copy this entire code block into a Squarespace Code Block -->
-<!-- Enhanced with randomized client order and seamless infinite looping -->
+<!-- Enhanced with official logos and better brand recognition -->
 
 <style>
-  /* Client Carousel Squarespace Styles v1.1.4 */
+  /* Client Carousel Squarespace Styles v1.1.2 */
   .ss-client-showcase {
     max-width: 1000px;
     margin: 0 auto;
@@ -32,8 +32,8 @@
 
   .ss-client-track {
     display: flex;
-    animation: ss-scroll 45s linear infinite;
-    width: calc(200px * 60);
+    animation: ss-scroll 30s linear infinite;
+    width: calc(200px * 20);
   }
 
   .ss-client-track:hover {
@@ -42,7 +42,7 @@
 
   @keyframes ss-scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-200px * 20)); }
+    100% { transform: translateX(calc(-200px * 10)); }
   }
 
   .ss-client-logo {
@@ -58,6 +58,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     overflow: hidden;
+    position: relative;
   }
 
   .ss-client-logo:hover {
@@ -219,11 +220,11 @@
 (function() {
   'use strict';
 
-  // Enhanced Client data with transparent high-quality logos and text fallbacks
+  // Enhanced Client data with premium official logos and text fallbacks
   const clientsData = [
     { 
       name: "New York Post", 
-      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F6091530bf9f20800044365a0.png&f=1&nofb=1&ipt=07f44853005cf078f2502ea7312f6d6a8b026a5bae019365b00a35e28395b34d",
+      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.liblogo.com%2Fimg-logo%2Fne4858n15c-new-york-post-logo-new-york-post-logo-png-4-pri.png&f=1&nofb=1&ipt=86a45ae1eaa28e409512f1737fda574a561052eb936e9c7294d63eaa1647e38f",
       textFallback: { company: "New York Post", tagline: "Since 1801" },
       website: "https://nypost.com", 
       project: "Photojournalist" 
@@ -380,32 +381,17 @@
     logoElement.appendChild(textLogo);
   }
 
-  // Fisher-Yates shuffle algorithm for random client order
-  function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  }
-
   function createClientCarousel() {
     const container = document.getElementById('ss-client-container');
     if (!container) return;
 
-    // Shuffle the clients for random order each time
-    const shuffledClients = shuffleArray(clientsData);
-    
-    // Create three copies for seamless infinite loop
-    const tripleClients = [...shuffledClients, ...shuffledClients, ...shuffledClients];
-    
+    const doubledClients = [...clientsData, ...clientsData];
     const carousel = document.createElement('div');
     carousel.className = 'ss-client-carousel';
     const track = document.createElement('div');
     track.className = 'ss-client-track';
 
-    tripleClients.forEach(client => {
+    doubledClients.forEach(client => {
       const logoElement = document.createElement('div');
       logoElement.className = 'ss-client-logo';
       logoElement.setAttribute('title', `${client.name} - ${client.project}`);
@@ -426,8 +412,8 @@
       
       img.src = client.logo;
       img.style.opacity = '0.9'; // Slightly transparent initially
-
       logoElement.appendChild(img);
+
       logoElement.addEventListener('click', () => {
         if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
       });
