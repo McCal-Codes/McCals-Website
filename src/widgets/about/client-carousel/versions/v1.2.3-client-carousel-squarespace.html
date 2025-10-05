@@ -1,9 +1,9 @@
-<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.1 -->
+<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.2.3 -->
 <!-- Copy this entire code block into a Squarespace Code Block -->
-<!-- Enhanced with higher quality logos for better brand recognition -->
+<!-- Official CMU brand logo + Haven white filter + university sources -->
 
 <style>
-  /* Client Carousel Squarespace Styles v1.1.1 */
+  /* Client Carousel Squarespace Styles v1.2.3 */
   .ss-client-showcase {
     max-width: 1000px;
     margin: 0 auto;
@@ -32,8 +32,8 @@
 
   .ss-client-track {
     display: flex;
-    animation: ss-scroll 30s linear infinite;
-    width: calc(180px * 20);
+    animation: ss-scroll 50s linear infinite;
+    width: calc(200px * 66);
   }
 
   .ss-client-track:hover {
@@ -42,12 +42,12 @@
 
   @keyframes ss-scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-180px * 10)); }
+    100% { transform: translateX(calc(-200px * 22)); }
   }
 
   .ss-client-logo {
-    flex: 0 0 160px;
-    height: 100px;
+    flex: 0 0 180px;
+    height: 110px;
     margin: 0 10px;
     display: flex;
     align-items: center;
@@ -69,8 +69,8 @@
   }
 
   .ss-client-logo img {
-    max-width: 120px;
-    max-height: 70px;
+    max-width: 160px;
+    max-height: 90px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -81,6 +81,25 @@
   .ss-client-logo:hover img {
     filter: brightness(1.3) contrast(1.2);
     transform: scale(1.05);
+  }
+
+  /* Special styling for Haven logo - make it white */
+  .haven-logo-white {
+    filter: brightness(0) invert(1) brightness(1.1) contrast(1.1);
+  }
+
+  .ss-client-logo:hover .haven-logo-white {
+    filter: brightness(0) invert(1) brightness(1.3) contrast(1.2);
+  }
+
+  /* Special styling for Pittsburgh Union Progress logo - make it white */
+  .pup-logo-white {
+    filter: brightness(0) invert(1) brightness(1.1) contrast(1.1) !important;
+    opacity: 1 !important;
+  }
+
+  .ss-client-logo:hover .pup-logo-white {
+    filter: brightness(0) invert(1) brightness(1.3) contrast(1.2);
   }
 
   /* Text-based logo styles for better readability */
@@ -162,13 +181,13 @@
   /* Mobile responsive */
   @media (max-width: 768px) {
     .ss-client-logo {
-      flex: 0 0 120px;
-      height: 80px;
+      flex: 0 0 140px;
+      height: 90px;
       margin: 0 6px;
     }
     .ss-client-logo img {
-      max-width: 80px;
-      max-height: 50px;
+      max-width: 100px;
+      max-height: 60px;
     }
     .ss-client-text-logo .company-name {
       font-size: 14px;
@@ -202,7 +221,7 @@
 
   <div class="ss-client-stats">
     <div class="ss-stat-item">
-      <span class="ss-stat-number" id="ss-client-count">20</span>
+      <span class="ss-stat-number" id="ss-client-count">22</span>
       <div class="ss-stat-label">Happy Clients</div>
     </div>
     <div class="ss-stat-item">
@@ -220,11 +239,11 @@
 (function() {
   'use strict';
 
-  // Enhanced Client data with high-quality logo URLs and text fallbacks
+  // Enhanced Client data with improved logo URLs and randomized order
   const clientsData = [
     { 
       name: "New York Post", 
-      logo: "https://logos-world.net/wp-content/uploads/2023/01/New-York-Post-Symbol.png",
+      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F6091530bf9f20800044365a0.png&f=1&nofb=1&ipt=07f44853005cf078f2502ea7312f6d6a8b026a5bae019365b00a35e28395b34d",
       textFallback: { company: "New York Post", tagline: "Since 1801" },
       website: "https://nypost.com", 
       project: "Photojournalist" 
@@ -238,24 +257,25 @@
     },
     { 
       name: "The Globe", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/the-globe-logo.svg",
+      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fppuglobe.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fthumbnail_globeheadnew-04.png&f=1&nofb=1&ipt=2b605a69d2d38820829fff50502d65bf0256a213e5b1cc99ad2e39eca215c62c",
       textFallback: { company: "The Globe", tagline: "Point Park U" },
       website: "https://ppuglobe.com", 
       project: "Photo Editor" 
     },
     { 
       name: "Point Park University", 
-      logo: "https://www.pointpark.edu/sites/default/files/PPU_horizontal_white_4c.png",
+      logo: "https://www.pointpark.edu/_files/images/logo-vertical--green.svg",
       textFallback: { company: "Point Park University", tagline: "Downtown Pittsburgh" },
       website: "https://pointpark.edu", 
       project: "BFA Photography Student" 
     },
     { 
       name: "Pittsburgh Union Progress", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/pittsburgh-union-progress-logo.svg",
+      logo: "https://i0.wp.com/www.unionprogress.com/wp-content/uploads/2022/12/cropped-pup-logo-retina.png?w=544&ssl=1",
       textFallback: { company: "Pittsburgh Union Progress", tagline: "Labor News" },
       website: "https://pittsburghunionprogress.com", 
-      project: "Staff Photographer" 
+      project: "Staff Photographer",
+      logoClass: "pup-logo-white"
     },
     { 
       name: "Yinzers Meet", 
@@ -308,14 +328,14 @@
     },
     { 
       name: "Carnegie Mellon University", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/8/88/Carnegie_Mellon_University_logo.svg",
+      logo: "https://www.cmu.edu/brand/brand-guidelines/images/wm-space-600x600-min.jpg",
       textFallback: { company: "Carnegie Mellon", tagline: "Pittsburgh, PA" },
       website: "https://www.cmu.edu", 
       project: "University Photography" 
     },
     { 
       name: "University of Pittsburgh", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/f/f4/University_of_Pittsburgh_seal.svg",
+      logo: "https://logos-world.net/wp-content/uploads/2023/09/University-of-Pittsburgh-Logo-500x281.png",
       textFallback: { company: "University of Pittsburgh", tagline: "Hail to Pitt" },
       website: "https://www.pitt.edu", 
       project: "University Photography" 
@@ -329,21 +349,21 @@
     },
     { 
       name: "Penn State Fayette", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/Pennsylvania_State_University_logo.svg",
+      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Fthumbs%2F2x%2Fpennsylvania-state-university-logo.png&f=1&nofb=1&ipt=69d959415424e5d345bc761fcffd346a966b2b3e435b0d340615f5ffc252e74e",
       textFallback: { company: "Penn State Fayette", tagline: "We Are Penn State" },
       website: "https://fayette.psu.edu", 
       project: "Campus Photography" 
     },
     { 
       name: "The Watchful Shepherd", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/the-watchful-shepherd-logo.svg",
+      logo: "https://watchful.org/wp-content/uploads/2024/06/Watchful-Shepherd-Logo-2024.png",
       textFallback: { company: "The Watchful Shepherd", tagline: "Advocacy & Justice" },
       website: "https://watchfulshepherd.org", 
       project: "Advocacy Photography" 
     },
     { 
       name: "Voyage Visuals", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/voyage-visuals-logo.svg",
+      logo: "https://cdn.prod.website-files.com/5e90f121241fd84dcd6daccc/5ea37d79c07d78a6bf30d2b1_Voyage_V%20(1).png",
       textFallback: { company: "Voyage Visuals", tagline: "Creative Production" },
       website: "https://voyagevisuals.com", 
       project: "Visual Production" 
@@ -357,10 +377,25 @@
     },
     { 
       name: "Haven Pittsburgh", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/haven-pittsburgh-logo.svg",
+      logo: "https://www.havenvenue.com/media/havenpngvirile2.png",
       textFallback: { company: "Haven Pittsburgh", tagline: "Community Support" },
       website: "https://havenpittsburgh.org", 
-      project: "Community Support Photography" 
+      project: "Community Support Photography",
+      logoClass: "haven-logo-white"
+    },
+    { 
+      name: "West Hills Gazette", 
+      logo: "https://i0.wp.com/westhillsgazette.com/wp-content/uploads/2024/10/West-Hills-Gazette_20241031_100707_0000.jpeg?w=475&quality=89&ssl=1",
+      textFallback: { company: "West Hills Gazette", tagline: "Local News" },
+      website: "https://westhillsgazette.com", 
+      project: "Photojournalist" 
+    },
+    { 
+      name: "Capo's on Carson", 
+      logo: "https://caposoncarson.com/wp-content/uploads/2025/08/Capos_White_Text_Transparent_250x40.png",
+      textFallback: { company: "Capo's on Carson", tagline: "Italian Cuisine" },
+      website: "https://caposoncarson.com", 
+      project: "Restaurant Photography" 
     }
   ];
 
@@ -381,17 +416,32 @@
     logoElement.appendChild(textLogo);
   }
 
+  // Fisher-Yates shuffle algorithm for random client order
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
   function createClientCarousel() {
     const container = document.getElementById('ss-client-container');
     if (!container) return;
 
-    const doubledClients = [...clientsData, ...clientsData];
+    // Shuffle the clients for random order each time
+    const shuffledClients = shuffleArray(clientsData);
+    
+    // Create three copies for seamless infinite loop
+    const tripleClients = [...shuffledClients, ...shuffledClients, ...shuffledClients];
+    
     const carousel = document.createElement('div');
     carousel.className = 'ss-client-carousel';
     const track = document.createElement('div');
     track.className = 'ss-client-track';
 
-    doubledClients.forEach(client => {
+    tripleClients.forEach(client => {
       const logoElement = document.createElement('div');
       logoElement.className = 'ss-client-logo';
       logoElement.setAttribute('title', `${client.name} - ${client.project}`);
@@ -408,6 +458,10 @@
       img.onload = () => {
         // Image loaded successfully, keep as is
         img.style.opacity = '1';
+        // Apply special class if specified
+        if (client.logoClass) {
+          img.className = client.logoClass;
+        }
       };
       
       img.src = client.logo;

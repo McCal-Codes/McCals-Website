@@ -4,6 +4,12 @@ A comprehensive about section widget for Squarespace that includes bio, photo, r
 
 ## Features
 
+### v1.4.4 - Client Carousel v1.2.3 Integration
+- **Upgraded Client Carousel**: Uses v1.2.3 widget logic (triple-array infinite loop, Fisher-Yates shuffle, robust error handling)
+- **Branding Fixes**: Pittsburgh Union Progress logo always white; Pittsburgh Magazine logo filter for visibility
+- **Performance Enhancements**: All carousel optimizations and workspace standards applied
+- **Changelog Panel**: Updated to document carousel integration and improvements
+
 ### v1.4.1 - Complete About Section
 - **Professional Bio**: GitHub-hosted photo with detailed biography
 - **Integrated Client Carousel**: 20+ client logos with smooth animations
@@ -63,7 +69,7 @@ const clientsData = [
 
 ### Complete About Page (`complete-about-squarespace.html`)
 - **Full Integration**: Combines all about page elements
-- **Client Carousel**: Built-in rotating client showcase
+- **Client Carousel**: Built-in rotating client showcase (v1.2.3 logic)
 - **Review System**: LinkedIn and Google reviews
 - **Debug Tools**: Development troubleshooting
 - **Responsive Design**: Mobile-optimized layout
@@ -127,7 +133,11 @@ Change `DEBUG = false` in the script section to disable logging.
 
 ## Version History
 
-### v1.4.1 (Current)
+### v1.4.4 (Current)
+- Integrated v1.2.3 client carousel logic and branding fixes
+- Debug system and changelog panel updated
+
+### v1.4.1
 - Complete about section with integrated client carousel
 - Debug system with interactive troubleshooting
 - GitHub asset hosting integration
@@ -152,5 +162,5 @@ Change `DEBUG = false` in the script section to disable logging.
 
 ---
 
-**Last Updated**: January 14, 2025  
+**Last Updated**: October 5, 2025  
 **Maintained By**: McCal Media Development Team

@@ -4,6 +4,27 @@ A professional client showcase carousel widget for Squarespace that displays tru
 
 ## Features
 
+### v1.2.0 - Enhanced University Branding & Larger Display
+- **Specific University Logos**: Updated to exact branded versions (Point Park green, Carnegie Mellon red square)
+- **Larger Logo Display**: Increased size from 140x80px to 160x90px for better visibility
+- **Enhanced Branding**: Professional university logos matching official institutional identity
+- **Better Recognition**: Improved visibility and brand consistency across all 22 clients
+- **Maintained Excellence**: All previous functionality preserved (shuffling, seamless loop, reliable loading)
+
+### v1.1.7 - Fixed University Logo Loading
+- **Fixed Logo Issues**: Resolved Carnegie Mellon and University of Pittsburgh logo loading problems
+- **Reliable Sources**: Updated to stable Logos-World CDN for consistent display
+- **Enhanced Reliability**: All 22 client logos now load properly across environments
+- **Better Performance**: Faster loading with reliable hosting sources
+- **Maintained Excellence**: All v1.1.6 functionality preserved (22 clients, shuffling, seamless loop)
+
+### v1.1.6 - New Clients & Updated Logo
+- **New Client Partners**: Added West Hills Gazette and Capo's on Carson restaurant
+- **Updated Union Progress**: High-quality retina logo from official website
+- **Expanded Showcase**: Now featuring 22 trusted clients (up from 20)
+- **Enhanced Animation**: Optimized 50s timing for smooth scrolling with additional clients
+- **Maintained Excellence**: All v1.1.5 functionality preserved (shuffling, seamless loop, organization)
+
 ### v1.1.5 - Improved Logos & Organized Structure
 - **Enhanced Logo Quality**: Updated high-resolution logos for Penn State, The Globe, Watchful Shepherd, and Voyage Visuals
 - **Better Branding**: Professional logos with improved contrast and visibility
@@ -122,6 +143,28 @@ Key CSS customization points:
 - Focus indicators for interactive elements
 
 ## Version History
+
+### v1.1.8 (2025-01-14)
+- Enhanced University of Pittsburgh logo with optimized 500x281 version
+- Updated Point Park University logo to professional green branding
+- Improved university logo quality and institutional identity representation
+- Maintained Carnegie Mellon and all other client logos
+- Preserved all carousel functionality and reliability
+
+### v1.1.7 (2025-01-14)
+- Fixed Carnegie Mellon University logo loading issue
+- Fixed University of Pittsburgh logo loading issue  
+- Updated both universities to reliable Logos-World CDN sources
+- Improved overall logo loading reliability and performance
+- Maintained all 22 client showcase functionality
+
+### v1.1.6 (2025-01-14)
+- Added West Hills Gazette (local news publication)
+- Added Capo's on Carson (Italian restaurant with elegant branding)
+- Updated Pittsburgh Union Progress logo to official retina version
+- Expanded client count from 20 to 22 partners
+- Optimized animation timing to 50s for enhanced user experience
+- Maintained all shuffling and seamless loop functionality
 
 ### v1.1.5 (2025-01-14)
 - Updated high-quality logos for Penn State, The Globe, Watchful Shepherd, and Voyage Visuals

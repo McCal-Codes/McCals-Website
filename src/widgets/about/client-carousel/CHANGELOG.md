@@ -1,5 +1,122 @@
 # About Widgets Changelog
 
+## Version 1.6.1 - Official University Logo Sources (2025-01-14)
+
+### ✨ Client Carousel v1.2.1 Features
+- **Official Point Park Logo**: Updated to official vertical green SVG from pointpark.edu
+- **Official Carnegie Mellon Logo**: Updated to high-quality official source
+- **Direct University Sources**: Logos now sourced directly from official university websites
+- **Enhanced Reliability**: Official sources ensure consistent branding and availability
+- **Maintained Excellence**: All v1.2.0 functionality preserved (larger display, 22 clients, animations)
+
+### 🏫 Official Logo Sources
+- **Point Park University**: `https://www.pointpark.edu/_files/images/logo-vertical--green.svg`
+- **Carnegie Mellon University**: Official high-quality PNG source via secure CDN
+- **Professional Quality**: Vector SVG for Point Park ensures perfect scaling
+- **Institutional Accuracy**: Logos match exact university branding standards
+
+## Version 1.6.0 - Enhanced University Branding & Larger Display (2025-01-14)
+
+### ✨ Client Carousel v1.2.0 Features
+- **Specific University Logos**: Updated to exact branded versions for Point Park (green) and Carnegie Mellon (red square)
+- **Larger Logo Display**: Increased logo size from 140x80px to 160x90px for better visibility
+- **Enhanced Branding**: Professional university logos that match official institutional identity
+- **Better Recognition**: Improved visibility and brand consistency across all 22 clients
+- **Maintained Performance**: All animation and functionality preserved with enhanced sizing and branding
+
+### 🏫 Updated University Logos
+- **Point Park University**: Updated to official green logo version for enhanced brand recognition
+- **Carnegie Mellon University**: Updated to square red logo format matching institutional branding
+- **Professional Quality**: High-resolution versions with proper university color schemes
+- **Better Visibility**: Enhanced sizing (160x90px) improves logo clarity and impact
+
+### 📏 Size Improvements
+- **Logo Dimensions**: Updated max-width from 140px to 160px (+14% increase)
+- **Height Enhancement**: Updated max-height from 80px to 90px (+12% increase)
+- **Better Proportions**: Improved logo visibility without compromising carousel flow
+- **Responsive Design**: Size increases work across all device sizes
+
+## Version 1.5.9 - Larger Logo Display (2025-01-14)
+
+### ✨ Client Carousel v1.1.9 Features
+- **Larger Logo Display**: Increased logo size from 140x80px to 160x90px for better visibility
+- **Enhanced Visual Impact**: Improved logo prominence while maintaining responsive design
+- **Better Readability**: Client logos now display with increased clarity and presence
+- **Maintained Performance**: All animation and functionality preserved with enhanced sizing
+- **All v1.1.8 Features**: University branding enhancements, 22 clients, reliable loading retained
+
+### 📏 Size Improvements
+- **Logo Dimensions**: Updated max-width from 140px to 160px (+14% increase)
+- **Height Enhancement**: Updated max-height from 80px to 90px (+12% increase)
+- **Better Proportions**: Improved logo visibility without compromising carousel flow
+- **Responsive Design**: Size increases work across all device sizes
+
+## Version 1.5.8 - Enhanced University Branding (2025-01-14)
+
+### ✨ Client Carousel v1.1.8 Features
+- **Updated University of Pittsburgh Logo**: Enhanced branding with optimized 500x281 version
+- **Improved Point Park University Logo**: Professional green branding that matches university identity
+- **Better Logo Quality**: High-resolution versions with proper aspect ratios
+- **Consistent Branding**: All university logos now display with professional quality
+- **Maintained Reliability**: All v1.1.7 functionality preserved (22 clients, reliable loading)
+
+### 🏫 University Logo Enhancements
+- **University of Pittsburgh**: Updated to `logos-world.net/wp-content/uploads/2023/09/University-of-Pittsburgh-Logo-500x281.png`
+- **Point Park University**: Updated to professional green logo matching university branding
+- **Carnegie Mellon**: Maintained reliable logos-world.net source
+- **Better Visibility**: Optimized sizing and quality for carousel display
+
+### 📈 Visual Improvements
+- **Enhanced Branding**: University logos now properly represent institutional identity
+- **Professional Quality**: High-resolution logos with transparent backgrounds
+- **Consistent Display**: All university clients display uniformly with other partners
+- **Better Recognition**: Clear, readable logos that enhance credibility
+
+## Version 1.5.7 - Fixed University Logo Loading (2025-01-14)
+
+### 🔧 Client Carousel v1.1.7 Fixes
+- **Fixed Carnegie Mellon Logo**: Replaced broken SeekVectors URL with reliable Logos-World source
+- **Fixed University of Pittsburgh Logo**: Replaced broken PNGMart URL with reliable Logos-World source
+- **Improved Reliability**: Both university logos now load consistently across all environments
+- **Better Source**: Logos-World provides stable, high-quality PNG versions with transparent backgrounds
+- **Maintained Quality**: All v1.1.6 features preserved (22 clients, shuffling, seamless loop)
+
+### 🖼️ Logo URL Updates
+- **Carnegie Mellon**: `https://logos-world.net/wp-content/uploads/2021/11/Carnegie-Mellon-University-Logo.png`
+- **University of Pittsburgh**: `https://logos-world.net/wp-content/uploads/2021/11/University-of-Pittsburgh-Logo.png`
+- **Reliable Hosting**: Logos-World provides consistent uptime and fast loading
+- **High Quality**: Professional university branding with proper transparent backgrounds
+
+### 📈 Technical Improvements
+- **Error Resolution**: Fixed broken logo loading that caused fallback text display
+- **Consistent Display**: University logos now display properly alongside other clients
+- **Performance**: Faster loading times with reliable CDN sources
+- **User Experience**: Smoother carousel operation without missing logo gaps
+
+## Version 1.5.6 - New Clients & Updated Logo (2025-01-14)
+
+### ✨ Client Carousel v1.1.6 Features
+- **New Clients Added**: West Hills Gazette and Capo's on Carson restaurant
+- **Updated Pittsburgh Union Progress Logo**: High-quality retina logo from unionprogress.com
+- **Expanded Client Count**: Now showcasing 22 trusted partners (up from 20)
+- **Enhanced Animation**: Adjusted timing to 50s for smoother scrolling with additional clients
+- **Maintained Quality**: All v1.1.5 features preserved (shuffling, seamless loop, etc.)
+
+### 🏢 New Client Additions
+- **West Hills Gazette**: Local news publication with professional branding
+- **Capo's on Carson**: Italian restaurant with elegant white transparent logo
+- **Updated Statistics**: Client count increased from 20 to 22 happy clients
+
+### 🖼️ Logo Improvements
+- **Pittsburgh Union Progress**: Updated to official retina logo from their website
+- **Better Quality**: High-resolution logos with improved visibility
+- **Consistent Branding**: Professional logo presentation across all clients
+
+### 📈 Technical Enhancements
+- **Animation Optimization**: Increased duration to 50s for optimal pacing with 22 clients
+- **CSS Calculations**: Updated track width to calc(200px * 66) for triple-array system
+- **Seamless Loop**: Maintained perfect infinite scrolling with expanded client list
+
 ## Version 1.5.5 - Improved Logos & Organized Structure (2025-01-14)
 
 ### ✨ Client Carousel v1.1.5 Features

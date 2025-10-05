@@ -1,9 +1,9 @@
-<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.1.5 -->
+<!-- CLIENT CAROUSEL WIDGET FOR SQUARESPACE v1.2.3 -->
 <!-- Copy this entire code block into a Squarespace Code Block -->
-<!-- Enhanced with improved logo URLs and organized structure -->
+<!-- Official CMU brand logo + Haven white filter + university sources -->
 
 <style>
-  /* Client Carousel Squarespace Styles v1.1.5 */
+  /* Client Carousel Squarespace Styles v1.2.3 */
   .ss-client-showcase {
     max-width: 1000px;
     margin: 0 auto;
@@ -32,8 +32,8 @@
 
   .ss-client-track {
     display: flex;
-    animation: ss-scroll 45s linear infinite;
-    width: calc(200px * 60);
+    animation: ss-scroll 50s linear infinite;
+    width: calc(200px * 66);
   }
 
   .ss-client-track:hover {
@@ -42,13 +42,13 @@
 
   @keyframes ss-scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-200px * 20)); }
+    100% { transform: translateX(calc(-200px * 22)); }
   }
 
   .ss-client-logo {
-    flex: 0 0 180px;
-    height: 110px;
-    margin: 0 10px;
+    flex: 0 0 200px;
+    height: 130px;
+    margin: 0 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,18 +69,29 @@
   }
 
   .ss-client-logo img {
-    max-width: 140px;
-    max-height: 80px;
-    width: auto;
-    height: auto;
+    max-width: 184px;
+    max-height: 112px;
+    width: 96%;
+    height: 92%;
     object-fit: contain;
     filter: brightness(1.1) contrast(1.1);
     transition: all 0.3s ease;
+    margin: 0 auto;
+    display: block;
   }
 
   .ss-client-logo:hover img {
     filter: brightness(1.3) contrast(1.2);
     transform: scale(1.05);
+  }
+
+  /* Special styling for Haven logo - make it white */
+  .haven-logo-white {
+    filter: brightness(0) invert(1) brightness(1.1) contrast(1.1);
+  }
+
+  .ss-client-logo:hover .haven-logo-white {
+    filter: brightness(0) invert(1) brightness(1.3) contrast(1.2);
   }
 
   /* Text-based logo styles for better readability */
@@ -202,7 +213,7 @@
 
   <div class="ss-client-stats">
     <div class="ss-stat-item">
-      <span class="ss-stat-number" id="ss-client-count">20</span>
+      <span class="ss-stat-number" id="ss-client-count">22</span>
       <div class="ss-stat-label">Happy Clients</div>
     </div>
     <div class="ss-stat-item">
@@ -245,14 +256,14 @@
     },
     { 
       name: "Point Park University", 
-      logo: "https://www.pointpark.edu/sites/default/files/PPU_horizontal_white_4c.png",
+      logo: "https://www.pointpark.edu/_files/images/logo-vertical--green.svg",
       textFallback: { company: "Point Park University", tagline: "Downtown Pittsburgh" },
       website: "https://pointpark.edu", 
       project: "BFA Photography Student" 
     },
     { 
       name: "Pittsburgh Union Progress", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/pittsburgh-union-progress-logo.svg",
+      logo: "https://i0.wp.com/www.unionprogress.com/wp-content/uploads/2022/12/cropped-pup-logo-retina.png?w=544&ssl=1",
       textFallback: { company: "Pittsburgh Union Progress", tagline: "Labor News" },
       website: "https://pittsburghunionprogress.com", 
       project: "Staff Photographer" 
@@ -308,14 +319,14 @@
     },
     { 
       name: "Carnegie Mellon University", 
-      logo: "https://seekvectors.com/files/download/Carnegie-Mellon-University-Logo-02.png",
+      logo: "https://www.cmu.edu/brand/brand-guidelines/images/wm-space-600x600-min.jpg",
       textFallback: { company: "Carnegie Mellon", tagline: "Pittsburgh, PA" },
       website: "https://www.cmu.edu", 
       project: "University Photography" 
     },
     { 
       name: "University of Pittsburgh", 
-      logo: "https://www.pngmart.com/files/22/University-of-Pittsburgh-PNG-File.png",
+      logo: "https://logos-world.net/wp-content/uploads/2023/09/University-of-Pittsburgh-Logo-500x281.png",
       textFallback: { company: "University of Pittsburgh", tagline: "Hail to Pitt" },
       website: "https://www.pitt.edu", 
       project: "University Photography" 
@@ -357,10 +368,25 @@
     },
     { 
       name: "Haven Pittsburgh", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/haven-pittsburgh-logo.svg",
+      logo: "https://www.havenvenue.com/media/havenpngvirile2.png",
       textFallback: { company: "Haven Pittsburgh", tagline: "Community Support" },
       website: "https://havenpittsburgh.org", 
-      project: "Community Support Photography" 
+      project: "Community Support Photography",
+      logoClass: "haven-logo-white"
+    },
+    { 
+      name: "West Hills Gazette", 
+      logo: "https://i0.wp.com/westhillsgazette.com/wp-content/uploads/2024/10/West-Hills-Gazette_20241031_100707_0000.jpeg?w=475&quality=89&ssl=1",
+      textFallback: { company: "West Hills Gazette", tagline: "Local News" },
+      website: "https://westhillsgazette.com", 
+      project: "Photojournalist" 
+    },
+    { 
+      name: "Capo's on Carson", 
+      logo: "https://caposoncarson.com/wp-content/uploads/2025/08/Capos_White_Text_Transparent_250x40.png",
+      textFallback: { company: "Capo's on Carson", tagline: "Italian Cuisine" },
+      website: "https://caposoncarson.com", 
+      project: "Restaurant Photography" 
     }
   ];
 
@@ -423,6 +449,10 @@
       img.onload = () => {
         // Image loaded successfully, keep as is
         img.style.opacity = '1';
+        // Apply special class if specified
+        if (client.logoClass) {
+          img.className = client.logoClass;
+        }
       };
       
       img.src = client.logo;
