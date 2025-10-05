@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated": "2025-10-03T07:24:44.288Z",
-  "totalPortfolios": 3,
+  "generated": "2025-10-05T08:09:54.427Z",
+  "totalPortfolios": 4,
   "totalItems": 18,
-  "totalImages": 190,
+  "totalImages": 251,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -11,19 +11,72 @@
   ],
   "portfolioSummary": {
     "Concert": {
-      "count": 11,
-      "totalImages": 125
+      "count": 12,
+      "totalImages": 155
     },
     "Events": {
-      "count": 5,
-      "totalImages": 53
+      "count": 4,
+      "totalImages": 84
     },
     "Journalism": {
       "count": 2,
       "totalImages": 12
+    },
+    "Nature": {
+      "count": 0,
+      "totalImages": 0
     }
   },
   "items": [
+    {
+      "type": "Concert",
+      "category": "Concert Photography",
+      "name": "Brahctopus",
+      "folderPath": "Concert/Brahctopus/September 2025",
+      "dateDisplay": "September 2025",
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 27,
+        "iso": "2025-09-27",
+        "source": "filename_yymmdd"
+      },
+      "totalImages": 30,
+      "images": [
+        "250927_Bellueve Music Festival_CAL6311_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6319_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6352_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6365_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6373_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6381_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6383_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6388_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6389_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6409_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6412_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6416_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6421_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6422_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6426_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6426_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6432_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6434_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6436_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6440_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6441_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6447_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6464_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6466_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6469_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6469_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6471_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6472_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6477_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6483_webuse.jpg"
+      ],
+      "coverImage": "250927_Bellueve Music Festival_CAL6311_webuse.jpg"
+    },
     {
       "type": "Concert",
       "category": "Concert Photography",
@@ -241,28 +294,6 @@
     {
       "type": "Events",
       "category": "Event Photography",
-      "name": "Product Launch Expo 2025",
-      "folderPath": "Events/Product-Launch-Expo-2025",
-      "dateDisplay": "June 2025",
-      "date": {
-        "year": 2025,
-        "month": 6,
-        "day": 20,
-        "monthName": "June",
-        "iso": "2025-06-20",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
-      },
-      "totalImages": 2,
-      "images": [
-        "250620_Product_Launch_Expo_Demo.jpg",
-        "250620_Product_Launch_Expo_Showcase.jpg"
-      ],
-      "coverImage": "250620_Product_Launch_Expo_Demo.jpg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
       "name": "CMU Business Graduation",
       "folderPath": "Events/CMU-Business-Graduation",
       "dateDisplay": "May 2025",
@@ -368,28 +399,6 @@
       "coverImage": "250404 Haven Concert_CAL1915.jpg"
     },
     {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "Corporate Summit 2025",
-      "folderPath": "Events/Corporate-Summit-2025",
-      "dateDisplay": "March 2025",
-      "date": {
-        "year": 2025,
-        "month": 3,
-        "day": 15,
-        "monthName": "March",
-        "iso": "2025-03-15",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
-      },
-      "totalImages": 2,
-      "images": [
-        "250315_Corporate_Summit_Keynote.jpg",
-        "250315_Corporate_Summit_Panel.jpg"
-      ],
-      "coverImage": "250315_Corporate_Summit_Keynote.jpg"
-    },
-    {
       "type": "Journalism",
       "category": "Journalism",
       "name": "Politics",
@@ -423,25 +432,53 @@
     {
       "type": "Events",
       "category": "Event Photography",
-      "name": "Charity Gala 2024",
-      "folderPath": "Events/Charity-Gala-2024",
-      "dateDisplay": "November 2024",
+      "name": "Dance For A Cause",
+      "folderPath": "Events/Dance for a Cause",
+      "dateDisplay": "October 2024",
       "date": {
         "year": 2024,
-        "month": 11,
-        "day": 5,
-        "monthName": "November",
-        "iso": "2024-11-05",
+        "month": 10,
+        "day": 18,
+        "monthName": "October",
+        "iso": "2024-10-18",
         "source": "yymmdd_solid",
         "description": "YYMMDD (from start of filename)"
       },
-      "totalImages": 3,
+      "totalImages": 31,
       "images": [
-        "241105_Charity_Gala_Auction.jpg",
-        "241105_Charity_Gala_Ballroom.jpg",
-        "241105_Charity_Gala_Red_Carpet.jpg"
+        "241018_Dance for a Cause_CAL1012-min.jpg",
+        "241018_Dance for a Cause_CAL1038-min.jpg",
+        "241018_Dance for a Cause_CAL1068-min.jpg",
+        "241018_Dance for a Cause_CAL1108-min.jpg",
+        "241018_Dance for a Cause_CAL1145-min.jpg",
+        "241018_Dance for a Cause_CAL1174-min.jpg",
+        "241018_Dance for a Cause_CAL1276-min.jpg",
+        "241018_Dance for a Cause_CAL1282-min.jpg",
+        "241018_Dance for a Cause_CAL130-min.jpg",
+        "241018_Dance for a Cause_CAL140-min.jpg",
+        "241018_Dance for a Cause_CAL168-min.jpg",
+        "241018_Dance for a Cause_CAL256-min.jpg",
+        "241018_Dance for a Cause_CAL353-min.jpg",
+        "241018_Dance for a Cause_CAL38-min.jpg",
+        "241018_Dance for a Cause_CAL420-min.jpg",
+        "241018_Dance for a Cause_CAL497-min.jpg",
+        "241018_Dance for a Cause_CAL512-min.jpg",
+        "241018_Dance for a Cause_CAL545-min.jpg",
+        "241018_Dance for a Cause_CAL55-min.jpg",
+        "241018_Dance for a Cause_CAL626-min.jpg",
+        "241018_Dance for a Cause_CAL63-min.jpg",
+        "241018_Dance for a Cause_CAL667-min.jpg",
+        "241018_Dance for a Cause_CAL693-min.jpg",
+        "241018_Dance for a Cause_CAL79-min.jpg",
+        "241018_Dance for a Cause_CAL826-min.jpg",
+        "241018_Dance for a Cause_CAL832-min.jpg",
+        "241018_Dance for a Cause_CAL84-min.jpg",
+        "241018_Dance for a Cause_CAL892-min.jpg",
+        "241018_Dance for a Cause_CAL91-min.jpg",
+        "241018_Dance for a Cause_CAL949-min.jpg",
+        "241018_Dance for a Cause_CAL972-min.jpg"
       ],
-      "coverImage": "241105_Charity_Gala_Auction.jpg"
+      "coverImage": "241018_Dance for a Cause_CAL1012-min.jpg"
     },
     {
       "type": "Concert",
@@ -562,6 +599,33 @@
         "240315_Genesis Volume 1_558.jpg"
       ],
       "coverImage": "240315_Genesis Volume 1_464.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Franks Script Reading",
+      "folderPath": "Events/Franks Script Reading",
+      "dateDisplay": "November 2023",
+      "date": {
+        "year": 2023,
+        "month": 11,
+        "day": 10,
+        "monthName": "November",
+        "iso": "2023-11-10",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)"
+      },
+      "totalImages": 7,
+      "images": [
+        "231110_Franks Script Reading_CAL7368-min.jpg",
+        "231110_Franks Script Reading_CAL7377-min.jpg",
+        "231110_Franks Script Reading_CAL7391-min.jpg",
+        "231110_Franks Script Reading_CAL7394-min.jpg",
+        "231110_Franks Script Reading_CAL7423-min.jpg",
+        "231110_Franks Script Reading_CAL7461-min.jpg",
+        "231110_Franks Script Reading_CAL7462-min.jpg"
+      ],
+      "coverImage": "231110_Franks Script Reading_CAL7368-min.jpg"
     }
   ]
 }
