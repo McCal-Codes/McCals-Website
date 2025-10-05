@@ -55,6 +55,7 @@ This repository is primarily a **development workspace for Squarespace widgets**
 - **About Widgets** (`src/widgets/about-widgets/`) - Client logos, carousels, about sections
 - **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays
 - **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections
+- **Site Footer** (`src/widgets/site-footer/`) - Glass design footer with social links and newsletter
 
 ### Work in Progress
 - **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration *(in development)*
