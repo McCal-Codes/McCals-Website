@@ -2,6 +2,12 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v4.9 (2025-10-05) — Fixed Image Stretching in Lightbox 🔧
+- FIXED: Image aspect ratio preservation in lightbox gallery
+- IMPROVED: Added `object-fit: contain` to prevent image stretching/distortion
+- IMPROVED: Enhanced image centering with `display: block` and `margin: 0 auto`
+- IMPROVED: Maintains proper image proportions regardless of viewport size or image dimensions
+
 ## v4.8 (2025-10-05) — Hidden Lightbox Scrollbars 🖼️
 - NEW: Completely hidden scrollbars in lightbox gallery for cleaner appearance
 - NEW: Cross-browser scrollbar hiding (webkit, firefox, IE/Edge) 
