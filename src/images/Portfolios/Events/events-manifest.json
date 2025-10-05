@@ -1,7 +1,7 @@
 {
   "version": "2.5.3",
   "generated": "2025-10-05",
-  "totalEvents": 4,
+  "totalEvents": 5,
   "events": [
     {
       "eventName": "CMU Business Graduation",
@@ -120,6 +120,94 @@
         }
       ],
       "totalImages": 33
+    },
+    {
+      "eventName": "Pitt University Graduation Winter 2024",
+      "category": "Celebration",
+      "dateDisplay": "December 2024",
+      "dateISO": "2024-12-18",
+      "date": {
+        "year": 2024,
+        "month": 12,
+        "day": 18,
+        "monthName": "December",
+        "iso": "2024-12-18",
+        "display": "December 2024"
+      },
+      "dateSource": "filename:241218_Pitt Graduation - Winter Semester_CAL7045.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7109.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7117.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7132.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7136.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7146.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7154.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7166.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7169.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7174.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7182.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7195.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7200.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7272.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7290.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7317.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7357.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7383.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7452.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7502.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7512.jpg"
+        }
+      ],
+      "totalImages": 23
     },
     {
       "eventName": "Dance For A Cause",
@@ -449,6 +537,93 @@
         }
       ],
       "folderPath": "Events/CMU-Business-Graduation"
+    },
+    {
+      "title": "Pitt University Graduation Winter 2024",
+      "eventName": "Pitt University Graduation Winter 2024",
+      "category": "Celebration",
+      "dateDisplay": "December 2024",
+      "dateISO": "2024-12-18",
+      "date": {
+        "year": 2024,
+        "month": 12,
+        "day": 18,
+        "monthName": "December",
+        "iso": "2024-12-18",
+        "display": "December 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7109.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7117.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7132.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7136.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7146.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7154.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7166.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7169.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7174.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7182.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7195.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7200.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7272.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7290.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7317.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7357.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7383.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7452.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7502.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7512.jpg"
+        }
+      ],
+      "folderPath": "Events/Pitt University Graduation Winter 2024"
     },
     {
       "title": "Dance For A Cause",
