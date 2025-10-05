@@ -1,5 +1,23 @@
 # Changelog - Event Portfolio
 
+## 2.6.1 — 2025-01-05
+### Data Updates & Display Enhancement 📊
+- **ENHANCED**: Increased featured items display from 6 to 12 cards for more content visibility
+- **CORRECTED**: Denver Robotics Convention date from October 2025 to October 2019 (historical accuracy)
+- **ADDED**: Local Insulators Union Officers Conference (March 2024, Corporate category)
+- **UPDATED**: Total events count from 7 to 8 reflecting new addition
+- **IMPROVED**: All journalism widget v4.9 UX patterns retained with data corrections
+
+## 2.6.0 — 2025-10-05
+### Enhanced UX Patterns from Journalism Widget 🎨
+- **FIXED**: Lightbox image stretching with `object-fit: contain` and proper centering
+- **NEW**: Hidden scrollbars in lightbox gallery for immersive viewing experience  
+- **ENHANCED**: Navigation hiding with comprehensive selectors during lightbox
+- **IMPROVED**: Close button with fixed positioning and better accessibility
+- **NEW**: Version indicator integrated into heading with enhanced styling
+- **ENHANCED**: Debug panel with detailed metrics and comprehensive controls
+- **RETAINED**: All v2.5.6 optimizations (caching, auto-refresh, filters)
+
 ## 2.5.6
 - Removed "On-Location", "Published", and "Conference" filter tabs for streamlined navigation
 - Moved "Dance For A Cause" from Corporate to Celebration category for better categorization

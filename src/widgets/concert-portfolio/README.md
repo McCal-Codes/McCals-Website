@@ -1,6 +1,6 @@
 # Concert Portfolio Widget
 
-High-performance natural-height masonry gallery with advanced GitHub integration. Features intelligent caching, progressive loading, and comprehensive performance optimizations.
+**Current Version: v4.4** — High-performance natural-height masonry gallery with enhanced UX patterns and advanced GitHub integration. Features intelligent caching, progressive loading, and comprehensive performance optimizations.
 
 ## Features
 
@@ -17,14 +17,23 @@ High-performance natural-height masonry gallery with advanced GitHub integration
 - **Natural Masonry**: CSS columns with responsive breakpoints
 - **Smooth Animations**: Staggered card loading with cubic-bezier easing
 - **Loading States**: Shimmer effects and progress indicators
-- **Enhanced Lightbox**: Vertical scroll with batch image loading
+- **Enhanced Lightbox**: Vertical scroll with fixed image stretching and hidden scrollbars
+- **Immersive Experience**: Comprehensive navigation hiding during fullscreen viewing
 - **Dark/Light Mode**: Automatic theme detection and adaptation
 
+### UX Enhancements (v4.4) ✨
+- **Fixed Image Stretching**: Proper aspect ratio preservation in lightbox gallery
+- **Hidden Scrollbars**: Immersive fullscreen experience without visual clutter  
+- **Enhanced Close Button**: Fixed positioning with better accessibility and safe areas
+- **Navigation Isolation**: Comprehensive hiding of site navigation during lightbox
+- **Integrated Version Display**: Version indicator in heading with interactive changelog
+
 ### Developer Experience 🛠️
+- **Enhanced Debug Panel**: Comprehensive metrics with force refresh and cache controls
 - **Performance Monitoring**: Real-time metrics with `?debug=true`
 - **Error Tracking**: Comprehensive logging and user feedback
-- **Backward Compatibility**: Maintains all v2.1 features
-- **Global API Access**: `window.portfolioAPI.getMetrics()` for debugging
+- **Backward Compatibility**: Maintains all v4.3 features
+- **Interactive Changelog**: Built-in version history and feature documentation
 
 ## Usage
 
