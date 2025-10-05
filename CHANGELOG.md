@@ -7,10 +7,12 @@
 - Backdrop blur (with fallback) to improve text contrast while preserving background context.
 - Accessibility: Escape key to close mobile menu, outside-click to close, aria-haspopup on toggle.
 - Reduced motion support for users preferring less animation.
+- Dev server auto-port selection (will try sequential ports if 3000 is occupied) to reduce friction when multiple sessions are open.
 
 ### Docs/Meta
 - Added `.github/canvas-instructions.md` for ChatGPT Canvas usage and `.github/codex-instructions.md` for efficient VS Code agent usage under rate limits.
 - Updated `copilot-instructions-guardian.yml` to enforce changelog entries when AI instructions change and to watch Canvas/Codex instruction files.
+- Removed demo Event portfolio folders (Charity Gala 2024, Corporate Summit 2025, Product Launch Expo 2025) and regenerated `events-manifest.json` (now 4 real events). Cleanup documented for repository clarity.
 
 <!-- ...existing code... -->
 // ...existing code...
