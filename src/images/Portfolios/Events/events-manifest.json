@@ -1,7 +1,7 @@
 {
   "version": "2.5.3",
   "generated": "2025-10-05",
-  "totalEvents": 7,
+  "totalEvents": 8,
   "events": [
     {
       "eventName": "Denver Robotics Convention",
@@ -42,6 +42,148 @@
         }
       ],
       "totalImages": 7
+    },
+    {
+      "eventName": "Local Union Officers Conference 2025",
+      "category": "Conference",
+      "dateDisplay": "July 2025",
+      "dateISO": "2025-07-20",
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 20,
+        "monthName": "July",
+        "iso": "2025-07-20",
+        "display": "July 2025"
+      },
+      "dateSource": "filename:250720_H & F Insulators Local Union_CAL1837.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1837.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1894.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2068.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2070.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2074.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2083.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2094.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2097.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2099.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2107.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2116.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2134.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2152.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2158.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2161.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2188.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2197.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2199.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2201.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2205.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2208.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2299.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2323.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2348.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2351.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2375.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2380.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2382.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2385.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2388.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2391.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2392.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2398.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2403.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2410.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2416.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2422.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2424.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2438.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2450.jpg"
+        }
+      ],
+      "totalImages": 41
     },
     {
       "eventName": "CMU Business Graduation",
@@ -539,6 +681,147 @@
         }
       ],
       "folderPath": "Events/Denver Robotics Convention"
+    },
+    {
+      "title": "Local Union Officers Conference 2025",
+      "eventName": "Local Union Officers Conference 2025",
+      "category": "Conference",
+      "dateDisplay": "July 2025",
+      "dateISO": "2025-07-20",
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 20,
+        "monthName": "July",
+        "iso": "2025-07-20",
+        "display": "July 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1837.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1894.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2068.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2070.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2074.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2083.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2094.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2097.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2099.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2107.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2116.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2134.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2152.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2158.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2161.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2188.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2197.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2199.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2201.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2205.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2208.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2299.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2323.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2348.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2351.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2375.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2380.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2382.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2385.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2388.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2391.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2392.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2398.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2403.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2410.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2416.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2422.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2424.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2438.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2450.jpg"
+        }
+      ],
+      "folderPath": "Events/Local Union Officers Conference 2025"
     },
     {
       "title": "CMU Business Graduation",
