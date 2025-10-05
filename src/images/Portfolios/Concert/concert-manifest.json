@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated": "2025-10-05T11:01:03.653Z",
-  "totalBands": 17,
+  "generated": "2025-10-05T11:03:55.075Z",
+  "totalBands": 18,
   "bands": [
     {
       "bandName": "Brahctopus",
@@ -47,6 +47,38 @@
         "250927_Bellueve Music Festival_CAL6472_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6477_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6483_webuse.jpg"
+      ]
+    },
+    {
+      "bandName": "Big Slime",
+      "folderPath": "Big Slime/September 2025",
+      "dateDisplay": "September 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 1,
+        "iso": "2025-09-01"
+      },
+      "totalImages": 17,
+      "images": [
+        "250927_Bellueve Music Festival_CAL6199_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6212_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6213_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6224_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6234_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6249_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6249_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6269_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6274_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6274_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6277_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6277_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6284_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6290_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6296_webuse.jpg",
+        "250927_Bellueve Music Festival_CAL6302_webuse 1.jpg",
+        "250927_Bellueve Music Festival_CAL6302_webuse.jpg"
       ]
     },
     {
