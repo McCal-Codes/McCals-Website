@@ -12,7 +12,8 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const { detectDateFromFilename, detectDateFromImages, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing');
+const { detectDateFromFilename, detectDateFromImages, formatDisplayDate, createFallbackDate, MONTHS } = require('./shared-date-parsing');
+const { resolveDateOverride } = require('./date-overrides');
 
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const MANIFEST_OUTPUT = path.join(PORTFOLIOS_BASE, 'portfolio-manifest.json');
@@ -121,13 +122,24 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
       if (detectedDate) {
         log(`Detected date from images: ${detectedDate.iso}`);
       } else {
-        log(`No date detected from images, using fallback`);
+        log('No date detected from images, using fallback');
       }
-      
-      const date = detectedDate || createFallbackDate();
-      const dateDisplay = formatDisplayDate(date);
-      
-      return {
+
+      const folderKey = `${portfolioType}/${itemName}`;
+      const override = resolveDateOverride([folderKey, itemName]);
+
+      let date = detectedDate || createFallbackDate();
+      if (override) {
+        date = {
+          ...date,
+          ...override.date
+        };
+      }
+
+      const dateDisplay = override ? override.dateDisplay : (date.display || formatDisplayDate(date));
+      date.display = dateDisplay;
+
+      const result = {
         type: portfolioType,
         category: inferCategoryFromPath(portfolioType, itemName),
         name: cleanTitle(itemName),
@@ -138,6 +150,12 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
         images: imageFiles.sort(),
         coverImage: imageFiles[0]
       };
+
+      if (override && override.notes) {
+        result.dateNotes = override.notes;
+      }
+
+      return result;
     }
     
     // Look for subfolders
@@ -217,10 +235,21 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
         };
         warning(`Could not detect date for ${itemName}/${subfolder.name}, using default`);
       }
-      
-      const dateDisplay = getDateDisplayFromFolder(subfolder.name) || `${date.monthName} ${date.year}`;
-      
-      return {
+
+      const folderKey = `${portfolioType}/${itemName}/${subfolder.name}`;
+      const override = resolveDateOverride([folderKey, `${itemName}/${subfolder.name}`, subfolder.name]);
+
+      if (override) {
+        date = {
+          ...date,
+          ...override.date
+        };
+      }
+
+      const dateDisplay = override ? override.dateDisplay : (getDateDisplayFromFolder(subfolder.name) || `${date.monthName} ${date.year}`);
+      date.display = dateDisplay;
+
+      const result = {
         type: portfolioType,
         category: inferCategoryFromPath(portfolioType, itemName),
         name: cleanTitle(itemName),
@@ -231,6 +260,12 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
         images: folderImages.sort(),
         coverImage: folderImages[0]
       };
+
+      if (override && override.notes) {
+        result.dateNotes = override.notes;
+      }
+
+      return result;
     }
     
     warning(`No valid subfolders with images found in ${portfolioType}/${itemName}`);

@@ -4,46 +4,6 @@
   "totalEvents": 9,
   "events": [
     {
-      "eventName": "Denver Robotics Convention",
-      "category": "Corporate",
-      "dateDisplay": "October 2025",
-      "dateISO": "2025-10-05",
-      "date": {
-        "year": 2025,
-        "month": 10,
-        "day": 5,
-        "monthName": "October",
-        "iso": "2025-10-05",
-        "display": "October 2025"
-      },
-      "dateSource": "fallback:current",
-      "dateConfidence": "low",
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
-        }
-      ],
-      "totalImages": 7
-    },
-    {
       "eventName": "Local Union Officers Conference 2025",
       "category": "Conference",
       "dateDisplay": "July 2025",
@@ -656,23 +616,22 @@
         }
       ],
       "totalImages": 21
-    }
-  ],
-  "items": [
+    },
     {
-      "title": "Denver Robotics Convention",
       "eventName": "Denver Robotics Convention",
       "category": "Corporate",
-      "dateDisplay": "October 2025",
-      "dateISO": "2025-10-05",
+      "dateDisplay": "April 2019",
+      "dateISO": "2019-04-15",
       "date": {
-        "year": 2025,
-        "month": 10,
-        "day": 5,
-        "monthName": "October",
-        "iso": "2025-10-05",
-        "display": "October 2025"
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "display": "April 2019"
       },
+      "dateSource": "manual:client-verified",
+      "dateConfidence": "high",
       "images": [
         {
           "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
@@ -696,8 +655,11 @@
           "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
         }
       ],
-      "folderPath": "Events/Denver Robotics Convention"
-    },
+      "totalImages": 7,
+      "dateNotes": "Set per client request to reflect spring 2019 convention"
+    }
+  ],
+  "items": [
     {
       "title": "Local Union Officers Conference 2025",
       "eventName": "Local Union Officers Conference 2025",
@@ -1303,6 +1265,45 @@
         }
       ],
       "folderPath": "Events/James Bond Cocktail Party 2023"
+    },
+    {
+      "title": "Denver Robotics Convention",
+      "eventName": "Denver Robotics Convention",
+      "category": "Corporate",
+      "dateDisplay": "April 2019",
+      "dateISO": "2019-04-15",
+      "date": {
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "display": "April 2019"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+        }
+      ],
+      "folderPath": "Events/Denver Robotics Convention"
     }
   ]
 }

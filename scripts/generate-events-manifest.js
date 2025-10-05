@@ -5,6 +5,7 @@ const path = require('path');
 
 // Import shared date parsing utilities
 const { detectDateFromFilename, extractEXIFDate } = require('./shared-date-parsing.js');
+const { resolveDateOverride } = require('./date-overrides');
 
 // NOTE: Adjusted to include leading 'src/' so default matches repo structure
 const DEFAULT_ROOT = 'src/images/Portfolios/Events';
@@ -96,6 +97,8 @@ async function main() {
   const rootFlag = argv.indexOf('--root');
   const rootDir = (rootFlag >= 0 && argv[rootFlag + 1]) ? argv[rootFlag + 1] : DEFAULT_ROOT;
   const absRoot = path.resolve(rootDir);
+  const portfoliosBase = path.join(process.cwd(), 'src', 'images', 'Portfolios');
+  const relativeRoot = path.relative(portfoliosBase, absRoot).replace(/\\\\/g, '/');
 
   if (!(await exists(absRoot))) {
     console.error('[ERR] Events root not found: - generate-events-manifest.js:100', absRoot);
@@ -110,17 +113,36 @@ async function main() {
     const files = (await readDirSafe(path.join(absRoot, dir))).filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f));
     if (!files.length) continue;
 
-    // Parse date from filenames and folder name
-    const dateInfo = parseEventDate(dir, files);
+    const eventName = titleCase(dir);
+    const folderSegments = [];
+    if (relativeRoot && relativeRoot !== '' && relativeRoot !== '.') {
+      folderSegments.push(relativeRoot);
+    }
+    folderSegments.push(dir);
+    const folderKey = folderSegments.join('/');
+
+    let dateInfo = parseEventDate(dir, files);
+    const override = resolveDateOverride([folderKey, eventName, dir]);
+
+    if (override) {
+      dateInfo = {
+        ...dateInfo,
+        ...override.date
+      };
+    }
 
     const images = files.map(file => ({
       path: path.posix.join(rootDir.replace(/^.*?src\//, 'src/'), dir, file)
     }));
 
-    events.push({
-      eventName: titleCase(dir),
+    const dateDisplay = override ? override.dateDisplay : dateInfo.display;
+    const dateSource = override ? override.dateSource : dateInfo.source;
+    const dateConfidence = override ? override.dateConfidence : dateInfo.confidence;
+
+    const eventEntry = {
+      eventName,
       category: deriveCategory(dir),
-      dateDisplay: dateInfo.display,
+      dateDisplay,
       dateISO: dateInfo.iso,
       date: {
         year: dateInfo.year,
@@ -128,13 +150,19 @@ async function main() {
         day: dateInfo.day,
         monthName: dateInfo.monthName,
         iso: dateInfo.iso,
-        display: dateInfo.display
+        display: dateDisplay
       },
-      dateSource: dateInfo.source,
-      dateConfidence: dateInfo.confidence,
+      dateSource: dateSource,
+      dateConfidence: dateConfidence,
       images,
       totalImages: images.length
-    });
+    };
+
+    if (override && override.notes) {
+      eventEntry.dateNotes = override.notes;
+    }
+
+    events.push(eventEntry);
   }
 
   // Sort by ISO date (most accurate) then by dateDisplay as fallback

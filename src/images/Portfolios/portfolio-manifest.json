@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated": "2025-10-05T11:07:13.403Z",
+  "generated": "2025-10-05T23:26:17.732Z",
   "totalPortfolios": 4,
-  "totalItems": 21,
-  "totalImages": 288,
+  "totalItems": 23,
+  "totalImages": 328,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -15,8 +15,8 @@
       "totalImages": 155
     },
     "Events": {
-      "count": 7,
-      "totalImages": 121
+      "count": 9,
+      "totalImages": 161
     },
     "Journalism": {
       "count": 2,
@@ -40,7 +40,8 @@
         "monthName": "September",
         "day": 27,
         "iso": "2025-09-27",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "September 2025"
       },
       "totalImages": 30,
       "images": [
@@ -89,7 +90,8 @@
         "monthName": "August",
         "day": 29,
         "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "August 2025"
       },
       "totalImages": 23,
       "images": [
@@ -131,7 +133,8 @@
         "monthName": "August",
         "day": 29,
         "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "August 2025"
       },
       "totalImages": 7,
       "images": [
@@ -157,7 +160,8 @@
         "monthName": "August",
         "day": 29,
         "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "August 2025"
       },
       "totalImages": 5,
       "images": [
@@ -181,7 +185,8 @@
         "monthName": "August",
         "day": 20,
         "iso": "2025-08-20",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "August 2025"
       },
       "totalImages": 10,
       "images": [
@@ -210,7 +215,8 @@
         "monthName": "August",
         "day": 20,
         "iso": "2025-08-20",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "August 2025"
       },
       "totalImages": 8,
       "images": [
@@ -237,7 +243,8 @@
         "monthName": "August",
         "day": 20,
         "iso": "2025-08-20",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "August 2025"
       },
       "totalImages": 9,
       "images": [
@@ -265,7 +272,8 @@
         "monthName": "August",
         "day": 20,
         "iso": "2025-08-20",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "August 2025"
       },
       "totalImages": 19,
       "images": [
@@ -294,6 +302,68 @@
     {
       "type": "Events",
       "category": "Event Photography",
+      "name": "Local Union Officers Conference 2025",
+      "folderPath": "Events/Local Union Officers Conference 2025",
+      "dateDisplay": "July 2025",
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 20,
+        "monthName": "July",
+        "iso": "2025-07-20",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)",
+        "display": "July 2025"
+      },
+      "totalImages": 41,
+      "images": [
+        "250720_H & F Insulators Local Union_CAL1837.jpg",
+        "250720_H & F Insulators Local Union_CAL1894.jpg",
+        "250721_H & F Insulators Local Union_CAL2068.jpg",
+        "250721_H & F Insulators Local Union_CAL2070.jpg",
+        "250721_H & F Insulators Local Union_CAL2074.jpg",
+        "250721_H & F Insulators Local Union_CAL2083.jpg",
+        "250721_H & F Insulators Local Union_CAL2094.jpg",
+        "250721_H & F Insulators Local Union_CAL2097.jpg",
+        "250721_H & F Insulators Local Union_CAL2099.jpg",
+        "250721_H & F Insulators Local Union_CAL2107.jpg",
+        "250721_H & F Insulators Local Union_CAL2116.jpg",
+        "250721_H & F Insulators Local Union_CAL2129.jpg",
+        "250721_H & F Insulators Local Union_CAL2134.jpg",
+        "250721_H & F Insulators Local Union_CAL2152.jpg",
+        "250721_H & F Insulators Local Union_CAL2158.jpg",
+        "250721_H & F Insulators Local Union_CAL2161.jpg",
+        "250721_H & F Insulators Local Union_CAL2188.jpg",
+        "250721_H & F Insulators Local Union_CAL2197.jpg",
+        "250721_H & F Insulators Local Union_CAL2199.jpg",
+        "250721_H & F Insulators Local Union_CAL2201.jpg",
+        "250721_H & F Insulators Local Union_CAL2205.jpg",
+        "250721_H & F Insulators Local Union_CAL2208.jpg",
+        "250721_H & F Insulators Local Union_CAL2299.jpg",
+        "250721_H & F Insulators Local Union_CAL2323.jpg",
+        "250721_H & F Insulators Local Union_CAL2348.jpg",
+        "250721_H & F Insulators Local Union_CAL2351.jpg",
+        "250721_H & F Insulators Local Union_CAL2375.jpg",
+        "250721_H & F Insulators Local Union_CAL2380.jpg",
+        "250721_H & F Insulators Local Union_CAL2382.jpg",
+        "250721_H & F Insulators Local Union_CAL2385.jpg",
+        "250721_H & F Insulators Local Union_CAL2388.jpg",
+        "250721_H & F Insulators Local Union_CAL2391.jpg",
+        "250721_H & F Insulators Local Union_CAL2392.jpg",
+        "250721_H & F Insulators Local Union_CAL2398.jpg",
+        "250721_H & F Insulators Local Union_CAL2403.jpg",
+        "250721_H & F Insulators Local Union_CAL2410.jpg",
+        "250721_H & F Insulators Local Union_CAL2416.jpg",
+        "250721_H & F Insulators Local Union_CAL2422.jpg",
+        "250721_H & F Insulators Local Union_CAL2424.jpg",
+        "250721_H & F Insulators Local Union_CAL2438.jpg",
+        "250721_H & F Insulators Local Union_CAL2450.jpg"
+      ],
+      "coverImage": "250720_H & F Insulators Local Union_CAL1837.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
       "name": "CMU Business Graduation",
       "folderPath": "Events/CMU-Business-Graduation",
       "dateDisplay": "May 2025",
@@ -304,43 +374,22 @@
         "monthName": "May",
         "iso": "2025-05-11",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "May 2025"
       },
-      "totalImages": 33,
+      "totalImages": 11,
       "images": [
         "250511_CMU-Business-Graduation-_CAL6485-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6485-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6485-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6526-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6526-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6532-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6532-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6561-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6561-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6572-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6572-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6622-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6622-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6655-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6655-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6681-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6681-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6691-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6691-640.jpg",
         "250511_CMU-Business-Graduation-_CAL6694-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6694-640.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-1280.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-320.jpg",
-        "250511_CMU-Business-Graduation-_CAL6697-640.jpg"
+        "250511_CMU-Business-Graduation-_CAL6697-1280.jpg"
       ],
       "coverImage": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
     },
@@ -357,7 +406,8 @@
         "monthName": "April",
         "iso": "2025-04-17",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "April 2025"
       },
       "totalImages": 1,
       "images": [
@@ -377,7 +427,8 @@
         "monthName": "April",
         "day": 4,
         "iso": "2025-04-04",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "April 2025"
       },
       "totalImages": 14,
       "images": [
@@ -411,7 +462,8 @@
         "monthName": "March",
         "iso": "2025-03-15",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "March 2025"
       },
       "totalImages": 11,
       "images": [
@@ -432,34 +484,6 @@
     {
       "type": "Events",
       "category": "Event Photography",
-      "name": "Denver Robotics Convention",
-      "folderPath": "Events/Denver Robotics Convention",
-      "dateDisplay": "April 2019",
-      "date": {
-        "year": 2019,
-        "month": 4,
-        "day": 15,
-        "monthName": "April",
-        "iso": "2019-04-15",
-        "source": "manual_update",
-        "description": "Manually set per client request",
-        "display": "April 2019"
-      },
-      "totalImages": 7,
-      "images": [
-        "09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg",
-        "1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg",
-        "25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg",
-        "3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg",
-        "5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg",
-        "6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg",
-        "F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
-      ],
-      "coverImage": "09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
       "name": "Pitt University Graduation Winter 2024",
       "folderPath": "Events/Pitt University Graduation Winter 2024",
       "dateDisplay": "December 2024",
@@ -470,7 +494,8 @@
         "monthName": "December",
         "iso": "2024-12-18",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "December 2024"
       },
       "totalImages": 23,
       "images": [
@@ -513,7 +538,8 @@
         "monthName": "October",
         "iso": "2024-10-18",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "October 2024"
       },
       "totalImages": 31,
       "images": [
@@ -564,7 +590,8 @@
         "monthName": "June",
         "iso": "2024-06-02",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "June 2024"
       },
       "totalImages": 7,
       "images": [
@@ -590,7 +617,8 @@
         "monthName": "April",
         "day": 20,
         "iso": "2024-04-20",
-        "source": "exif_original"
+        "source": "exif_original",
+        "display": "April 2024"
       },
       "totalImages": 6,
       "images": [
@@ -616,7 +644,8 @@
         "monthName": "April",
         "iso": "2024-04-16",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "April 2024"
       },
       "totalImages": 13,
       "images": [
@@ -648,7 +677,8 @@
         "monthName": "March",
         "day": 15,
         "iso": "2024-03-15",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "March 2024"
       },
       "totalImages": 5,
       "images": [
@@ -672,7 +702,8 @@
         "monthName": "March",
         "day": 15,
         "iso": "2024-03-15",
-        "source": "filename_yymmdd"
+        "source": "filename_yymmdd",
+        "display": "March 2024"
       },
       "totalImages": 19,
       "images": [
@@ -711,7 +742,8 @@
         "monthName": "November",
         "iso": "2023-11-10",
         "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)"
+        "description": "YYMMDD (from start of filename)",
+        "display": "November 2023"
       },
       "totalImages": 7,
       "images": [
@@ -724,6 +756,78 @@
         "231110_Franks Script Reading_CAL7462-min.jpg"
       ],
       "coverImage": "231110_Franks Script Reading_CAL7368-min.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "James Bond Cocktail Party 2023",
+      "folderPath": "Events/James Bond Cocktail Party 2023",
+      "dateDisplay": "April 2023",
+      "date": {
+        "year": 2023,
+        "month": 4,
+        "day": 11,
+        "monthName": "April",
+        "iso": "2023-04-11",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)",
+        "display": "April 2023"
+      },
+      "totalImages": 21,
+      "images": [
+        "230411_Cock Tail Hour - James Bond Event_843_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_847_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_848_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_849_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_854_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_857_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_859_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_861_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_862_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_863_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_865_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_867_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_868_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_874_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_875_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_876_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_878_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_884_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_888_Published.jpg",
+        "230411_Cock Tail Hour - James Bond Event_890_Published.jpg",
+        "230825_Cocktail_Reception_CAL2807_1.jpg"
+      ],
+      "coverImage": "230411_Cock Tail Hour - James Bond Event_843_Published.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Denver Robotics Convention",
+      "folderPath": "Events/Denver Robotics Convention",
+      "dateDisplay": "April 2019",
+      "date": {
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "source": "manual:client-verified",
+        "description": "Set per client request to reflect spring 2019 convention",
+        "display": "April 2019",
+        "confidence": "high"
+      },
+      "totalImages": 7,
+      "images": [
+        "09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg",
+        "1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg",
+        "25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg",
+        "3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg",
+        "5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg",
+        "6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg",
+        "F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+      ],
+      "coverImage": "09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg",
+      "dateNotes": "Set per client request to reflect spring 2019 convention"
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "Events/Denver Robotics Convention": {
+    "dateISO": "2019-04-15",
+    "dateDisplay": "April 2019",
+    "source": "manual:client-verified",
+    "confidence": "high",
+    "notes": "Set per client request to reflect spring 2019 convention"
+  }
+}
