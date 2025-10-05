@@ -1,67 +1,90 @@
-# McCal Media — Widget Development Workspace
+# McCal's Website Documentation
 
-This repository is primarily a **development workspace for Squarespace widgets**. The main McCal Media website is hosted on Squarespace, and this repo contains the reusable widgets that embed into that site. The standalone site files are used only for testing widgets during development.
+Welcome to the comprehensive documentation for McCal's Website project. This documentation is organized by category for easy navigation.
 
-## Repository Structure
+## 📁 Directory Structure
 
-### Source Code
-- `src/`: **All source code and assets**
-  - `widgets/`: **PRIMARY:** Reusable web widgets for Squarespace
-    - `concert-portfolio/`: Photo galleries for concert photography
-    - `event-portfolio/`: Event photography displays
-    - `photojournalism-portfolio/`: News and journalism photos
-    - `about-widgets/`: Client logos, carousels, about sections
-    - `blog-feed/`: External blog integration
-    - `podcast-feed/`: Podcast episode displays
-  - `images/`: Photo assets organized by portfolio type (feeds into widgets)
-  - `site/`: Test site for widget development (not production)
+### 🔄 **workflows/** - Content & Development Workflows
+Step-by-step guides for content creation and management:
+- `portfolio-image-import.md` - How to add new portfolio images
+- `journalism-import-workflow.md` - Process for importing journalism content
+- `event-portfolio-ingest.md` - Event portfolio content ingestion
 
-### Documentation
-- `docs/`: **All project documentation**
-  - `deployment/`: Deployment guides and cheat sheets
-  - `development/`: Development notes, site history, and platform setup
-  - `VERSIONING.md`: Version management guidelines
+### 🤖 **automation/** - Automated Processes
+Documentation for automated systems and scripts:
+- `CONCERT-AUTO-READER.md` - Concert photo organization automation
 
-### Development Tools
-- `scripts/`: Build scripts, manifest generators, and automation tools
-- `tests/`: Test files, HTML examples, and development workspace
-  - `html/`: HTML test files and widget examples
-  - `site-workspace/`: Local development files and backups
-- `config/`: Configuration files (Docker, plist files)
+### 🔌 **integrations/** - External Services & Platforms
+Integration guides and external resource documentation:
+- `google-reviews-extraction.md` - Google Reviews data extraction
+- `google-reviews-integration-options.md` - Integration options for reviews
+- `logo-sources.md` - External logo and branding resources
+- `squarespace/` - Squarespace-specific integration docs
+- `wordpress/` - WordPress integration documentation
 
-### Build Output
-- `dist/`: **Build output directory** (auto-generated, not tracked in git)
-- `.github/`: GitHub Actions for automated workflows
+### 📏 **standards/** - Coding & Naming Standards
+Project standards, conventions, and versioning:
+- `DATE-NAMING-STANDARDS.md` - File and folder naming conventions
+- `VERSIONING.md` - Project versioning guidelines
 
-## Quick Start
+### 🚀 **deployment/** - Deployment & Publishing
+Deployment guides and hosting setup:
+- `DEPLOYMENT.md` - Main deployment documentation
+- `DEPLOY-CHEATSHEET.md` - Quick deployment reference
+- `PACKAGE-DEPLOYMENT.md` - Package-based deployment
+- `SETUP-GITHUB-HOSTING.md` - GitHub Pages hosting setup
 
-### Widget Development Workflow
-1. **Add photos**: Place in `src/images/Portfolios/[Type]/[Name]/[Date]/`
-2. **Generate manifests**: `npm run manifest:generate`
-3. **Test widgets locally**: `npm run build && npm run serve`
-4. **Copy widget code**: From `src/widgets/[name]/versions/[latest].html`
-5. **Deploy to Squarespace**: Paste into Code Block
+### 🗄️ **archive/** - Completed & Historical Documents
+Archived documentation and completed project records:
+- `widget-unification-todo.md` - Completed widget unification tasks
+- `REORGANIZATION-2025-10-04.md` - Repository reorganization log
 
-### Testing & Development
-- **Build test site**: `npm run build`
-- **Test locally**: `npm run serve` (opens at http://localhost:8080)
-- **Auto-organize photos**: `npm run organize:concerts`
-- **Quick reference**: See `deployment/DEPLOY-CHEATSHEET.md`
+### 📋 **Root Level Documents**
+- `README.md` - This overview document
+- `CHANGELOG.md` - Project change history
 
-### Optional: Deploy Test Site
-- **Interactive deployment**: `npm run deploy`
-- **Specific platforms**: `npm run deploy:netlify` | `npm run deploy:vercel`
-- *Note: Test site deployment is optional - main site is on Squarespace*
+## 🔍 Quick Find
 
-### Using Widgets (Squarespace)
-1. Navigate to `src/widgets/[widget-name]/versions/`
-2. Copy the latest version HTML file (e.g., `v2.1.html`)
-3. Paste into a Squarespace Code Block
-4. Adjust `data-panes` attribute to control number of items displayed
-5. Ensure GitHub repo has proper image structure (see widget README)
+### Common Tasks
+- **Adding new photos**: `workflows/portfolio-image-import.md`
+- **Deploying changes**: `deployment/DEPLOY-CHEATSHEET.md`
+- **File naming**: `standards/DATE-NAMING-STANDARDS.md`
+- **Version updates**: `standards/VERSIONING.md`
 
-### Adding Concert Photos
-1. Create folder: `src/images/Portfolios/Concert/[Band-Name]/`
+### Development
+- **Automation scripts**: `automation/`
+- **External integrations**: `integrations/`
+- **Deployment setup**: `deployment/`
+
+### Reference
+- **Project standards**: `standards/`
+- **Historical records**: `archive/`
+- **Change history**: `CHANGELOG.md`
+
+## 📝 Contributing to Documentation
+
+When adding new documentation:
+
+1. **Choose the right category**:
+   - `workflows/` - Step-by-step processes
+   - `automation/` - Script and automation docs
+   - `integrations/` - External service docs
+   - `standards/` - Rules and conventions
+   - `deployment/` - Deployment and hosting
+   - `archive/` - Completed or outdated docs
+
+2. **Use descriptive filenames** following the DATE-NAMING-STANDARDS
+3. **Update this README** if adding new categories
+4. **Cross-reference** related documents when helpful
+
+## 🏗️ Project Architecture
+
+This is a Squarespace widget development workspace where:
+- **Production**: Squarespace site embeds versioned widget HTML from `src/widgets/`
+- **Development**: Local test harness in `src/site/` 
+- **Pipeline**: Photo assets → manifest generation → self-contained HTML widgets
+
+For technical details, see the main project README and individual widget documentation.
 2. Add images and optional `manifest.json`:
    ```json
    {
@@ -77,11 +100,4 @@ This repository is primarily a **development workspace for Squarespace widgets**
 - Each widget maintains its own CHANGELOG.md
 - Repository-level changes tracked in root CHANGELOG.md
 
-## Documentation
-- **Deployment Guide**: `docs/deployment/DEPLOYMENT.md` - Complete tutorial for deploying test sites
-- **Package Deployment**: `docs/deployment/PACKAGE-DEPLOYMENT.md` - Deploy as NPM package, Docker container, or distribution archive
-- **Quick Deploy**: `docs/deployment/DEPLOY-CHEATSHEET.md` - Common deployment commands
-- Widget-specific docs: See individual `src/widgets/[name]/README.md`
-- Development notes: `docs/development/notes/site-notes.md`
-- Platform setup: `docs/development/[platform]/README.md`
-- Change history: `CHANGELOG.md`
+

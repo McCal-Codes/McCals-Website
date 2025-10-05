@@ -1,4 +1,15 @@
-## Canvas instructions — McCal Media widgets workspace
+## Canvas instructions — McCal Media wEdit etiquette in Canvas
+
+- Don't modify `dist/**` (build output) or generated `manifest.json` files.
+- When changing manifest fields, update: generator(s), CI (if needed), docs, and any consumers (e.g., `src/site/app.js`, relevant widgets).
+- For meaningful widget changes, add a new `versions/vN.M.html` file rather than rewriting older versions used in Squarespace.
+- **Widget preview workflow**: When testing widgets, let the user preview them in VS Code's built-in browser or locally first, then have the user describe what they see or what issues they encounter rather than automatically hosting on external servers.s workspace
+
+Agent responsibilities
+
+- **Always read these instructions first** when starting any session in this workspace
+- **Update these instructions** if you discover new patterns, workflows, or critical information that would help future agents
+- **Add entries to Recent updates** section when you make significant changes to document what was learned or improved
 
 Scope and intent
 
@@ -49,8 +60,10 @@ Windows tip
 
 Recent updates
 
+- 2025-10-04T00:00:00.002Z — Added agent responsibilities and widget preview workflow guidance: agents must read/update instructions and use user-driven preview workflow instead of external hosting
 - 2025-10-03T09:15:17.087Z — Featured Portfolio Widget v1.5 complete: Enhanced journalism titles, ultra-minimal scrollbars (4px, 0.15 opacity), improved masonry spacing (16px gaps), randomized cover images with Fisher-Yates shuffle, minimal gray accents (#888888), production-ready deployment with 15-item limit, scrollable lightbox, and comprehensive changelog documentation
 - 2025-10-03T09:15:11.679Z — Session complete: minor updates.
 - 2025-10-03T07:08:00.405Z — Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging
+- Entries below are appended by the AI finalize script to record what the last agent session changed.
 - 2025-10-03T06:29:14.362Z — Validation: preflight/guardian/canvas/codex added and tasks wired
 - Entries below are appended by the AI finalize script to summarize the last Canvas/agent session changes.
