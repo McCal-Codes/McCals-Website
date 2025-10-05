@@ -2,6 +2,16 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.4 — 2025-10-05
+### Enhanced UX Patterns from Journalism Widget 🎨
+- **FIXED**: Lightbox image stretching with `object-fit: contain` and proper centering
+- **NEW**: Hidden scrollbars in lightbox gallery for immersive viewing experience  
+- **ENHANCED**: Navigation hiding with comprehensive selectors during lightbox
+- **IMPROVED**: Close button with fixed positioning and better accessibility
+- **NEW**: Version indicator integrated into heading with enhanced styling
+- **ENHANCED**: Debug panel with detailed metrics and comprehensive controls
+- **RETAINED**: All v4.3 optimizations (caching, auto-refresh, single API call)
+
 ## v4.3 — 2025-09-23
 ### Images-first path + fallback 🔧
 - Prefer `images/Portfolios/Concert/` with automatic fallback to `src/images/Portfolios/Concert/`
