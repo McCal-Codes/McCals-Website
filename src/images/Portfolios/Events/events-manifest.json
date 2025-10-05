@@ -1,33 +1,8 @@
 {
   "version": "2.5.3",
-  "generated": "2025-10-04",
-  "totalEvents": 7,
+  "generated": "2025-10-05",
+  "totalEvents": 4,
   "events": [
-    {
-      "eventName": "Product Launch Expo 2025",
-      "category": "Corporate",
-      "dateDisplay": "June 2025",
-      "dateISO": "2025-06-20",
-      "date": {
-        "year": 2025,
-        "month": 6,
-        "day": 20,
-        "monthName": "June",
-        "iso": "2025-06-20",
-        "display": "June 2025"
-      },
-      "dateSource": "filename:250620_Product_Launch_Expo_Demo.jpg",
-      "dateConfidence": "high",
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Showcase.jpg"
-        }
-      ],
-      "totalImages": 2
-    },
     {
       "eventName": "CMU Business Graduation",
       "category": "Celebration",
@@ -145,59 +120,6 @@
         }
       ],
       "totalImages": 33
-    },
-    {
-      "eventName": "Corporate Summit 2025",
-      "category": "Conference",
-      "dateDisplay": "March 2025",
-      "dateISO": "2025-03-15",
-      "date": {
-        "year": 2025,
-        "month": 3,
-        "day": 15,
-        "monthName": "March",
-        "iso": "2025-03-15",
-        "display": "March 2025"
-      },
-      "dateSource": "filename:250315_Corporate_Summit_Keynote.jpg",
-      "dateConfidence": "high",
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Panel.jpg"
-        }
-      ],
-      "totalImages": 2
-    },
-    {
-      "eventName": "Charity Gala 2024",
-      "category": "Celebration",
-      "dateDisplay": "November 2024",
-      "dateISO": "2024-11-05",
-      "date": {
-        "year": 2024,
-        "month": 11,
-        "day": 5,
-        "monthName": "November",
-        "iso": "2024-11-05",
-        "display": "November 2024"
-      },
-      "dateSource": "filename:241105_Charity_Gala_Auction.jpg",
-      "dateConfidence": "high",
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Auction.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Ballroom.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Red_Carpet.jpg"
-        }
-      ],
-      "totalImages": 3
     },
     {
       "eventName": "Dance For A Cause",
@@ -412,30 +334,6 @@
   ],
   "items": [
     {
-      "title": "Product Launch Expo 2025",
-      "eventName": "Product Launch Expo 2025",
-      "category": "Corporate",
-      "dateDisplay": "June 2025",
-      "dateISO": "2025-06-20",
-      "date": {
-        "year": 2025,
-        "month": 6,
-        "day": 20,
-        "monthName": "June",
-        "iso": "2025-06-20",
-        "display": "June 2025"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Demo.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Product-Launch-Expo-2025/250620_Product_Launch_Expo_Showcase.jpg"
-        }
-      ],
-      "folderPath": "Events/Product-Launch-Expo-2025"
-    },
-    {
       "title": "CMU Business Graduation",
       "eventName": "CMU Business Graduation",
       "category": "Celebration",
@@ -551,57 +449,6 @@
         }
       ],
       "folderPath": "Events/CMU-Business-Graduation"
-    },
-    {
-      "title": "Corporate Summit 2025",
-      "eventName": "Corporate Summit 2025",
-      "category": "Conference",
-      "dateDisplay": "March 2025",
-      "dateISO": "2025-03-15",
-      "date": {
-        "year": 2025,
-        "month": 3,
-        "day": 15,
-        "monthName": "March",
-        "iso": "2025-03-15",
-        "display": "March 2025"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Keynote.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Corporate-Summit-2025/250315_Corporate_Summit_Panel.jpg"
-        }
-      ],
-      "folderPath": "Events/Corporate-Summit-2025"
-    },
-    {
-      "title": "Charity Gala 2024",
-      "eventName": "Charity Gala 2024",
-      "category": "Celebration",
-      "dateDisplay": "November 2024",
-      "dateISO": "2024-11-05",
-      "date": {
-        "year": 2024,
-        "month": 11,
-        "day": 5,
-        "monthName": "November",
-        "iso": "2024-11-05",
-        "display": "November 2024"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Auction.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Ballroom.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Charity-Gala-2024/241105_Charity_Gala_Red_Carpet.jpg"
-        }
-      ],
-      "folderPath": "Events/Charity-Gala-2024"
     },
     {
       "title": "Dance For A Cause",
