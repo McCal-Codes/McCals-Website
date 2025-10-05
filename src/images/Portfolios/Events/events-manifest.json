@@ -1,8 +1,48 @@
 {
   "version": "2.5.3",
   "generated": "2025-10-05",
-  "totalEvents": 5,
+  "totalEvents": 7,
   "events": [
+    {
+      "eventName": "Denver Robotics Convention",
+      "category": "Corporate",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-05",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 5,
+        "monthName": "October",
+        "iso": "2025-10-05",
+        "display": "October 2025"
+      },
+      "dateSource": "fallback:current",
+      "dateConfidence": "low",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+        }
+      ],
+      "totalImages": 7
+    },
     {
       "eventName": "CMU Business Graduation",
       "category": "Celebration",
@@ -322,6 +362,46 @@
       "totalImages": 31
     },
     {
+      "eventName": "Myron Cope Awards 2024",
+      "category": "Corporate",
+      "dateDisplay": "June 2024",
+      "dateISO": "2024-06-02",
+      "date": {
+        "year": 2024,
+        "month": 6,
+        "day": 2,
+        "monthName": "June",
+        "iso": "2024-06-02",
+        "display": "June 2024"
+      },
+      "dateSource": "filename:240602_Point Park Cope Awards 2024 _1646_CAL_2048px.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1646_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1647_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1650_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1651_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1655_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1656_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1657_CAL_2048px.jpg"
+        }
+      ],
+      "totalImages": 7
+    },
+    {
       "eventName": "Pennsylvania Media Awards 24",
       "category": "Published",
       "dateDisplay": "April 2024",
@@ -421,6 +501,45 @@
     }
   ],
   "items": [
+    {
+      "title": "Denver Robotics Convention",
+      "eventName": "Denver Robotics Convention",
+      "category": "Corporate",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-05",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 5,
+        "monthName": "October",
+        "iso": "2025-10-05",
+        "display": "October 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+        }
+      ],
+      "folderPath": "Events/Denver Robotics Convention"
+    },
     {
       "title": "CMU Business Graduation",
       "eventName": "CMU Business Graduation",
@@ -735,6 +854,45 @@
         }
       ],
       "folderPath": "Events/Dance for a Cause"
+    },
+    {
+      "title": "Myron Cope Awards 2024",
+      "eventName": "Myron Cope Awards 2024",
+      "category": "Corporate",
+      "dateDisplay": "June 2024",
+      "dateISO": "2024-06-02",
+      "date": {
+        "year": 2024,
+        "month": 6,
+        "day": 2,
+        "monthName": "June",
+        "iso": "2024-06-02",
+        "display": "June 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1646_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1647_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1650_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1651_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1655_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1656_CAL_2048px.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Myron Cope Awards 2024/240602_Point Park Cope Awards 2024 _1657_CAL_2048px.jpg"
+        }
+      ],
+      "folderPath": "Events/Myron Cope Awards 2024"
     },
     {
       "title": "Pennsylvania Media Awards 24",
