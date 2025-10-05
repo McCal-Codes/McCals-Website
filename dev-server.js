@@ -5,7 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
-const PORT = process.env.PORT || 3000;
+// Base/default port preference
+const BASE_PORT = parseInt(process.env.PORT, 10) || 3000;
+let PORT = BASE_PORT;
 const HOST = process.env.HOST || 'localhost';
 const SITE_DIR = __dirname; // Serve from repo root to access all files
 const IS_PRODUCTION = process.argv.includes('--production');
@@ -43,7 +45,8 @@ function serveFile(res, filePath) {
   });
 }
 
-const server = http.createServer((req, res) => {
+function createServer() {
+  return http.createServer((req, res) => {
   // Enable CORS for development
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -66,39 +69,66 @@ const server = http.createServer((req, res) => {
     
     serveFile(res, filePath);
   });
-});
-
-server.listen(PORT, HOST, () => {
-  console.log(`🚀 McCal Media Dev Server running at http://${HOST}:${PORT}/`);
-  console.log(`📁 Serving files from: ${SITE_DIR}`);
-  console.log(`🔄 Mode: ${IS_PRODUCTION ? 'Production' : 'Development'}`);
-  console.log('');
-  console.log('Available commands:');
-  console.log('  npm run dev     - Start development server');
-  console.log('  npm run serve   - Start production server');
-  console.log('  npm run build   - Build for production');
-  console.log('');
-  
-  if (!IS_PRODUCTION) {
-    console.log('💡 Tip: Press Ctrl+C to stop the server');
-    
-    // Try to open browser automatically
-    const open = () => {
-      try {
-        require('open')(`http://${HOST}:${PORT}`);
-      } catch (e) {
-        console.log('📱 Open your browser and navigate to the URL above');
-      }
-    };
-    
-    setTimeout(open, 1000);
-  }
-});
-
-// Graceful shutdown
-process.on('SIGINT', () => {
-  console.log('\n👋 Shutting down dev server...');
-  server.close(() => {
-    process.exit(0);
   });
-});
+}
+
+function startServer(attempt = 0) {
+  const server = createServer();
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE' && attempt < 15) {
+      PORT += 1; // increment and retry
+      if (attempt === 0) {
+        console.log(`⚠️  Port ${PORT - 1} in use. Searching for a free port...`);
+      }
+      setTimeout(() => startServer(attempt + 1), 100);
+    } else if (err.code === 'EADDRINUSE') {
+      console.error('❌ Could not find a free port after multiple attempts. Aborting.');
+      process.exit(1);
+    } else {
+      console.error('Server error:', err);
+      process.exit(1);
+    }
+  });
+
+  server.listen(PORT, HOST, () => {
+    const picked = PORT !== BASE_PORT;
+    console.log(`🚀 McCal Media Dev Server running at http://${HOST}:${PORT}/`);
+    if (picked) {
+      console.log(`🔀 Auto-selected free port (base was ${BASE_PORT}).`);
+    }
+    console.log(`📁 Serving files from: ${SITE_DIR}`);
+    console.log(`🔄 Mode: ${IS_PRODUCTION ? 'Production' : 'Development'}`);
+    console.log('');
+    console.log('Available commands:');
+    console.log('  npm run dev     - Start development server');
+    console.log('  npm run serve   - Start production server');
+    console.log('  npm run build   - Build for production');
+    console.log('');
+    
+    if (!IS_PRODUCTION) {
+      console.log('💡 Tip: Press Ctrl+C to stop the server');
+      if (picked) {
+        console.log('ℹ️  Set PORT env var to lock a specific port, e.g. PORT=3010 npm run dev');
+      }
+      // Try to open browser automatically
+      const open = () => {
+        try {
+          require('open')(`http://${HOST}:${PORT}`);
+        } catch (e) {
+          console.log('📱 Open your browser and navigate to the URL above');
+        }
+      };
+      setTimeout(open, 1000);
+    }
+
+    // Graceful shutdown
+    process.on('SIGINT', () => {
+      console.log('\n👋 Shutting down dev server...');
+      server.close(() => {
+        process.exit(0);
+      });
+    });
+  });
+}
+
+startServer();
