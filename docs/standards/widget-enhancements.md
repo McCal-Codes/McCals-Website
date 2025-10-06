@@ -11,6 +11,22 @@ The photojournalism portfolio widget underwent significant optimization from v4.
 
 ---
 
+## Performance Optimization Stack *(Reference: Concert Portfolio v4.6)*
+
+Leverage the concert portfolio v4.6 implementation as the baseline for modern performance tooling across every widget. The following optimizations should be treated as the default stack when refactoring or creating widgets:
+
+- Critical CSS inlining with deferred non-critical styles
+- Modern JavaScript with async loading patterns
+- Reduced main-thread blocking with `requestIdleCallback`
+- Optimized font loading with `font-display: swap`
+- Lazy-loaded audio features and advanced functionality
+- Structured data optimization for SEO
+- Progressive enhancement for better performance
+
+> **Roll-out expectation**: replicate the v4.6 concert portfolio approach across all portfolio, event, and hero widgets. Use the v4.6 code as a working example when back-porting improvements.
+
+---
+
 ## 🎯 Core Enhancement Patterns
 
 ### 1. **Close Button Optimization** *(Applied in v4.4)*
