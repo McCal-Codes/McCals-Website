@@ -1,0 +1,90 @@
+{
+  // AI preflight and helper tasks
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AI: Preflight (short)",
+      "type": "shell",
+      "command": "node",
+      "args": ["scripts/utils/ai-instructions-preflight.js", "--short"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "AI: Preflight (full)",
+      "type": "shell",
+      "command": "node",
+      "args": ["scripts/utils/ai-instructions-preflight.js"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "AI: Preflight (json)",
+      "type": "shell",
+      "command": "node",
+      "args": ["scripts/utils/ai-instructions-preflight.js", "--json"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+    ,
+    {
+      "label": "AI: Finalize (prompt)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "scripts/utils/ai-finalize-session.js",
+        "--summary",
+        "${input:aiSummary}",
+        "--bump",
+        "${input:aiBump}"
+      ],
+      "group": "build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Terminal: Shell Integration Check",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "Write-Host 'TERM_PROGRAM=' $env:TERM_PROGRAM; Write-Host 'VSCODE_SHELL_INTEGRATION=' $env:VSCODE_SHELL_INTEGRATION; if ($env:VSCODE_SHELL_INTEGRATION -and (Test-Path $env:VSCODE_SHELL_INTEGRATION)) { Write-Host 'Shell Integration: OK' } else { Write-Host 'Shell Integration: NOT LOADED'; exit 1 }"
+      ],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "aiSummary",
+      "type": "promptString",
+      "description": "Brief summary to append to instructions and changelog",
+      "default": "Session complete: minor updates."
+    },
+    {
+      "id": "aiBump",
+      "type": "pickString",
+      "description": "Optional version bump (package.json)",
+      "options": ["none", "patch", "minor", "major"],
+      "default": "none"
+    }
+  ]
+}

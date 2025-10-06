@@ -22,10 +22,13 @@ Integration guides and external resource documentation:
 - `squarespace/` - Squarespace-specific integration docs
 - `wordpress/` - WordPress integration documentation
 
-### 📏 **standards/** - Coding & Naming Standards ⭐ **EXPANDED**
+
+
+### 📏 **standards/** - Coding, Organization & Validation Standards ⭐ **EXPANDED**
 Project standards, conventions, and versioning:
-- `widget-reference.md` - **NEW**: Quick reference for widget development
-- `widget-standards.md` - **NEW**: Comprehensive widget standards guide
+- `workspace-organization.md` - **Single source of truth for scripts folder structure, archival, workspace validation, and preflight/afterflight checklists**
+- `widget-reference.md` - Quick reference for widget development
+- `widget-standards.md` - Comprehensive widget standards guide
 - `widget-enhancements.md` - Proven widget improvement patterns
 - `widget-development.md` - Systematic enhancement methodology
 - `date-naming.md` - File and folder naming conventions

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Journalism Watcher Control Script
 # Manages the background journalism manifest watcher process
 

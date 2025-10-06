@@ -1,3 +1,4 @@
+# See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
 # Widget Development Enhancement Guide
 
 > **Status**: Active Development Guidelines  

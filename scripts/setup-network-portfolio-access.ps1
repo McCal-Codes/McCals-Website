@@ -1,6 +1,5 @@
 # Setup Network Portfolio Access
 # Run as Administrator
-
 Write-Host "🔧 Setting up network access to portfolio folders..." -ForegroundColor Green
 
 # Share the portfolio folder for network access

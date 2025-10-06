@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Create directories
 mkdir -p squarespace-site/css
 mkdir -p squarespace-site/js
