@@ -145,6 +145,8 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-10-06T21:19:20.735Z — Session complete: minor updates.
+- 2025-10-06T21:19:09.064Z — Successfully tested and fixed VS Code tasks for Copilot AI workflow. Fixed PowerShell quoting issues in widget validation task, created proper Node.js validation script, and verified all core tasks work correctly.
 - 2025-10-06T21:13:03.271Z — Session complete: minor updates.
 - 2025-10-05T16:00:00.000Z  **CRITICAL LESSON LEARNED**: Event portfolio widget debugging session revealed critical pattern - widget lightbox system is extremely fragile. v2.6.0 works perfectly, but v2.6.1, v2.6.2, and v2.6.3 all broke when trying to "upgrade" functionality. **Key insight**: NEVER mix incompatible patterns. Always copy complete working systems (CSS+HTML+JS together) or build from stable foundation. Created `docs/standards/WIDGET-DEBUGGING-LESSONS.md` with emergency recovery protocol. **Latest stable**: v2.6.0 (perfect), v2.6.2 (has changelog but lightbox issues). Future agents must read debugging lessons before widget modifications.
 - 2025-10-05T15:00:00.000Z  Event Portfolio v2.6.0 enhancement complete: Applied journalism widget v4.9 patterns to event portfolio. Fixed lightbox image stretching (`object-fit: contain`, `display: block`, `margin: 0 auto`), added hidden scrollbars for immersive experience, enhanced navigation hiding with comprehensive selectors, improved close button with fixed positioning and accessibility, integrated version indicator in heading, comprehensive debug panel with detailed metrics and controls. All v2.5.6 optimizations retained. Remaining widget (featured) still needs similar enhancements.

@@ -371,11 +371,8 @@
     {
       "label": "Widget: Validate HTML",
       "type": "shell",
-      "command": "powershell",
-      "args": [
-        "-Command",
-        "Get-ChildItem -Path 'src/widgets' -Filter '*.html' -Recurse | ForEach-Object { Write-Host \"Validating: $($_.FullName)\"; $content = Get-Content $_.FullName -Raw; if ($content -match '<!DOCTYPE html>|<html') { Write-Host \"✅ Valid HTML structure\" } else { Write-Host \"❌ Missing HTML structure\" } }"
-      ],
+      "command": "npm",
+      "args": ["run", "validate:widgets"],
       "group": "test",
       "presentation": {
         "reveal": "always",

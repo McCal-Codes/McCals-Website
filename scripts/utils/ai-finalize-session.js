@@ -58,9 +58,9 @@ function appendRecentUpdate(file, tag) {
       }
     }
     fs.writeFileSync(file, txt);
-    console.log(`✅ Updated recent updates in ${path.relative(ROOT, file)}`);
+    console.log(`✅ Updated recent updates in ${path.relative(ROOT, file)} - ai-finalize-session.js:61`);
   } catch (e) {
-    console.warn(`⚠️  Could not update ${file}: ${e.message}`);
+    console.warn(`⚠️  Could not update ${file}: ${e.message} - ai-finalize-session.js:63`);
   }
 }
 
@@ -84,10 +84,10 @@ function updateChangelog() {
         });
       }
       fs.writeFileSync(CHANGELOG, txt);
-      console.log('✅ CHANGELOG updated');
+      console.log('✅ CHANGELOG updated - ai-finalize-session.js:87');
     }
   } catch (e) {
-    console.warn(`⚠️  Could not update CHANGELOG: ${e.message}`);
+    console.warn(`⚠️  Could not update CHANGELOG: ${e.message} - ai-finalize-session.js:90`);
   }
 }
 
@@ -98,9 +98,9 @@ function bumpPackageVersion() {
     const next = bumpSemver(pkg.version || '0.0.0', bump);
     pkg.version = next;
     fs.writeFileSync(PKG, JSON.stringify(pkg, null, 2) + '\n');
-    console.log(`✅ package.json version bumped to ${next}`);
+    console.log(`✅ package.json version bumped to ${next} - ai-finalize-session.js:101`);
   } catch (e) {
-    console.warn(`⚠️  Could not bump version: ${e.message}`);
+    console.warn(`⚠️  Could not bump version: ${e.message} - ai-finalize-session.js:103`);
   }
 }
 
