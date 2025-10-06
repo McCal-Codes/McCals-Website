@@ -7,6 +7,9 @@ Guidelines, conventions, and best practices for the McCal Media workspace.
 ### 📋 **widget-reference.md** ⭐ **START HERE**
 Quick reference checklist and common patterns for widget development. Essential for daily development.
 
+### ⚡ **performance-standards.md** ⭐ **PERFORMANCE FIRST**
+Lighthouse optimization guide using Concert Portfolio v4.6 as case study. **Required reading for all widget development.**
+
 ### 📖 **widget-standards.md**
 Comprehensive widget standards documentation covering architecture, design patterns, performance, and accessibility requirements.
 

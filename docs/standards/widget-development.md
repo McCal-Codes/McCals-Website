@@ -5,6 +5,32 @@
 > **Created**: October 5, 2025  
 > **Purpose**: Systematic approach to applying proven enhancement patterns across all McCal Media widgets
 
+## ⚡ Performance First — Critical Requirement
+
+**ALL widget development must prioritize performance optimization from day one.**
+
+### Performance Standards Reference
+- **Primary Guide**: `performance-standards.md` — Lighthouse optimization using Concert Portfolio v4.6 as case study
+- **Target Score**: 90+ Lighthouse performance score
+- **Case Study**: Concert Portfolio v4.6 demonstrates how to achieve 90+ scores through:
+  - Critical CSS inlining
+  - Modern JavaScript patterns
+  - Resource hints and preloading
+  - Progressive enhancement
+  - Optimized font loading
+
+### Performance Checklist (Required)
+- [ ] **Critical CSS**: Inline essential styles (<14KB)
+- [ ] **JavaScript Optimization**: Async loading, intelligent caching
+- [ ] **Resource Hints**: Preconnect to external domains
+- [ ] **Lazy Loading**: Progressive image loading with priorities
+- [ ] **Font Optimization**: Use system fonts, avoid loading delays
+- [ ] **Lighthouse Validation**: Score 90+ before release
+
+**Reference Implementation**: `src/widgets/concert-portfolio/versions/v4.6.html`
+
+---
+
 ## Overview
 
 This guide provides a structured methodology for implementing proven enhancement patterns across the McCal Media widget ecosystem. Based on successful optimizations from photojournalism portfolio v4.4-v4.8, these guidelines ensure consistent, high-quality improvements.

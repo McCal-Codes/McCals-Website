@@ -110,6 +110,7 @@ Workflow troubleshooting
 
 Widget performance and debugging
 
+- **Performance Standards**: All widgets must follow `docs/standards/performance-standards.md` for Lighthouse optimization. Use Concert Portfolio v4.6 as the primary performance reference implementation.
 - Debug mode: Add `?debug=true` to any widget URL to enable performance overlays and metrics
 - Console access: Use `window.portfolioAPI.getMetrics()` in browser console for cache hit rates and API performance
 - Lightbox patterns: Widgets use fixed positioning with z-index 2147483647, hidden scrollbars, and pointer-events blocking
@@ -126,6 +127,7 @@ Good starting references
 - `docs/standards/widget-standards.md`  comprehensive widget standards and architecture guide.
 - `docs/standards/widget-enhancements.md`  proven improvement patterns for widget optimization.
 - `docs/standards/widget-development.md`  comprehensive guide for applying enhancement patterns systematically.
+- `docs/standards/performance-standards.md` ⭐ **PERFORMANCE REFERENCE**: Lighthouse optimization standards using Concert Portfolio v4.6 as case study.
 - `docs/standards/image-seo-standards.md`  comprehensive guide for optimizing portfolio images for search engines and accessibility.
 
 Change management
@@ -146,6 +148,11 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-10-06T22:05:00.000Z — Updated copilot instructions to reference new performance standards document and establish Concert Portfolio v4.6 as the primary performance reference implementation for all widgets. Added performance standards to good starting references with priority star rating.
+- 2025-10-06T21:59:34.417Z — Fixed concert portfolio widget v4.6 image loading and layout issues. Updated CSS to use responsive column-width layout with overlay info styling, matching journalism widget patterns. Images now load properly in masonry-style grid with smooth transitions and loading animations.
+- 2025-10-06T21:54:49.562Z — Created performance-optimized concert portfolio widget v4.6 with critical CSS inlining, modern JavaScript patterns, and reduced main-thread blocking. Addresses PageSpeed issues: render blocking resources, unused CSS/JS, and long tasks.
+- 2025-10-06T21:54:42.897Z — Created performance-optimized concert portfolio widget v4.6 with critical CSS inlining, modern JavaScript patterns, and reduced main-thread blocking. Addresses PageSpeed issues: render blocking resources, unused CSS/JS, and long tasks. Added resource hints and lazy-loaded features.
+- 2025-10-06T22:00:00.000Z — Repository cleanup: Removed entire `tests/` directory containing obsolete test files, debug artifacts, and site workspace backups. Repository structure simplified and professionalized. All test files archived and committed for record-keeping.
 - 2025-10-06T21:42:37.712Z — Fixed structured data detection issues in concert portfolio widget v4.5. Updated addBasicStructuredData function to properly calculate total images from manifest bands, generate absolute image URLs, and add comprehensive metadata. Added debug functionality to check structured data locally. Structured data now includes proper Schema.org ImageGallery markup with image URLs, author info, and SEO metadata.
 - 2025-10-06T21:37:13.763Z — Successfully implemented SEO enhancements for concert portfolio widget v4.5 including structured data, enhanced alt text generation, and accessibility improvements. Images are now loading properly and SEO features are working.
 - 2025-10-06T21:30:00.000Z — Created `docs/standards/image-seo-standards.md` documenting comprehensive SEO best practices for portfolio images including alt text, file naming, structured data, lazy loading, and accessibility standards for improved search engine optimization and user experience.
