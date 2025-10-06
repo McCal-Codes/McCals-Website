@@ -55,16 +55,157 @@
       }
     },
     {
-      "label": "Terminal: Shell Integration Check",
+      "label": "Manifest: Generate All",
       "type": "shell",
-      "command": "powershell.exe",
-      "args": [
-        "-NoLogo",
-        "-NoProfile",
-        "-Command",
-        "Write-Host 'TERM_PROGRAM=' $env:TERM_PROGRAM; Write-Host 'VSCODE_SHELL_INTEGRATION=' $env:VSCODE_SHELL_INTEGRATION; if ($env:VSCODE_SHELL_INTEGRATION -and (Test-Path $env:VSCODE_SHELL_INTEGRATION)) { Write-Host 'Shell Integration: OK' } else { Write-Host 'Shell Integration: NOT LOADED'; exit 1 }"
-      ],
+      "command": "npm",
+      "args": ["run", "manifest:generate"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Manifest: Concert Only",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "manifest:concert"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Manifest: Events Only",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "manifest:events"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Manifest: Journalism Only",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "manifest:journalism"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev Server: Start",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev:auto"],
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build: Universal Portfolio",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build:universal"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Repository: Health Check",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "repo:health"],
       "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Analyze: Large Files",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "analyze:large-files"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Analyze: Duplicates",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "analyze:duplicates"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Organize: Concert Folders",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "organize:folders"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Watch: Auto Manifest",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "watch:auto-manifest"],
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Git: Status",
+      "type": "shell",
+      "command": "git",
+      "args": ["status", "--short"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Git: Quick Commit",
+      "type": "shell",
+      "command": "git",
+      "args": ["add", ".", "&&", "git", "commit", "-m", "${input:commitMessage}"],
+      "group": "build",
       "presentation": {
         "reveal": "always",
         "panel": "shared"
@@ -85,6 +226,12 @@
       "description": "Optional version bump (package.json)",
       "options": ["none", "patch", "minor", "major"],
       "default": "none"
+    },
+    {
+      "id": "commitMessage",
+      "type": "promptString",
+      "description": "Commit message for quick commit",
+      "default": "Minor updates and improvements"
     }
   ]
 }
