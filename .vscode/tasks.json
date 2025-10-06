@@ -211,6 +211,216 @@
         "panel": "shared"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Security: Audit",
+      "type": "shell",
+      "command": "npm",
+      "args": ["audit"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dependencies: Update",
+      "type": "shell",
+      "command": "npm",
+      "args": ["update"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Manifest: Dry Run",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "manifest:dry-run"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Manifest: Featured",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "manifest:featured"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build: Concert Portfolio",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build:concert"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build: Optimized",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build:optimized"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Organize: Preview",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "organize:preview"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Admin: Backend",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "admin:backend"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CI: Simulate Sample 1",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "ci:simulate:sample1"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CI: Simulate Sample 2",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "ci:simulate:sample2"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker: Build",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "docker:build"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Package: Create",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "package"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean & Rebuild",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "clean", "&&", "npm", "run", "build:universal"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Widget: Validate HTML",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "Get-ChildItem -Path 'src/widgets' -Filter '*.html' -Recurse | ForEach-Object { Write-Host \"Validating: $($_.FullName)\"; $content = Get-Content $_.FullName -Raw; if ($content -match '<!DOCTYPE html>|<html') { Write-Host \"✅ Valid HTML structure\" } else { Write-Host \"❌ Missing HTML structure\" } }"
+      ],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backup: Repository",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "$timestamp = Get-Date -Format 'yyyy-MM-dd_HH-mm-ss'; $backupPath = \"backup_$timestamp.zip\"; Compress-Archive -Path . -DestinationPath $backupPath -Force; Write-Host \"Backup created: $backupPath\""
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Manifest: Generate Selected",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "manifest:${input:manifestType}"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build: Selected Type",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build:${input:buildType}"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
     }
   ],
   "inputs": [
@@ -232,6 +442,20 @@
       "type": "promptString",
       "description": "Commit message for quick commit",
       "default": "Minor updates and improvements"
+    },
+    {
+      "id": "manifestType",
+      "type": "pickString",
+      "description": "Type of manifest to generate",
+      "options": ["all", "concert", "events", "journalism", "universal", "featured"],
+      "default": "all"
+    },
+    {
+      "id": "buildType",
+      "type": "pickString",
+      "description": "Type of build to perform",
+      "options": ["universal", "concert", "optimized"],
+      "default": "universal"
     }
   ]
 }
