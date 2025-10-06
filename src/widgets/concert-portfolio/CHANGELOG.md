@@ -2,6 +2,15 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.5 — 2025-10-06 (SEO Enhanced - Work in Progress)
+### SEO and Accessibility Improvements 🎯
+- **ENHANCED**: Alt text generation using manifest data for descriptive, keyword-rich attributes
+- **NEW**: JSON-LD structured data with Schema.org markup for search engines
+- **IMPROVED**: Lazy loading with proper `loading` attributes and `fetchpriority` settings
+- **ENHANCED**: Accessibility with better ARIA labels and semantic markup
+- **NEW**: Image optimization with proper dimensions and responsive handling
+- **RETAINED**: All v4.4 UX enhancements (lightbox improvements, navigation hiding)
+
 ## v4.4 — 2025-10-05
 ### Enhanced UX Patterns from Journalism Widget 🎨
 - **FIXED**: Lightbox image stretching with `object-fit: contain` and proper centering
