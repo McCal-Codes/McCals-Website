@@ -131,6 +131,18 @@ Change management
 
 - When you update this file, add a brief entry to `CHANGELOG.md` under Docs/Meta noting what changed. A PR check will remind/fail if missing.
 
+
+Scripts folder organization and archival (2025-10-06)
+
+- All scripts must be organized by function: `manifest/` for manifest generators, `watchers/` for watchers, `utils/` for utilities, `admin/` for admin/import tools. Do not place new scripts directly in the root `scripts/` folder.
+- Any script not referenced by npm scripts, not used by widgets, or not part of the active automation pipeline should be moved to `scripts/_archived/`.
+- When archiving, move the file and add a comment/header indicating it is not actively used.
+- Before adding new scripts, check for existing patterns and update the relevant README in each subfolder.
+- After any reorganization, validate all npm scripts and workflows to ensure nothing is broken.
+- Document all changes in this instruction file and in the main `CHANGELOG.md` under Docs/Meta.
+- Periodically review the scripts folder for unused or obsolete files and archive as needed.
+- Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
+
 Recent updates
 
 - 2025-10-05T16:00:00.000Z  **CRITICAL LESSON LEARNED**: Event portfolio widget debugging session revealed critical pattern - widget lightbox system is extremely fragile. v2.6.0 works perfectly, but v2.6.1, v2.6.2, and v2.6.3 all broke when trying to "upgrade" functionality. **Key insight**: NEVER mix incompatible patterns. Always copy complete working systems (CSS+HTML+JS together) or build from stable foundation. Created `docs/standards/WIDGET-DEBUGGING-LESSONS.md` with emergency recovery protocol. **Latest stable**: v2.6.0 (perfect), v2.6.2 (has changelog but lightbox issues). Future agents must read debugging lessons before widget modifications.
@@ -156,3 +168,4 @@ Recent updates
 - 2025-10-03T07:08:00.400Z  Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging
 - 2025-10-03T06:29:14.357Z  Validation: preflight/guardian/canvas/codex added and tasks wired
 - Entries below are appended by the AI finalize script to record what the last agent session changed.
+**Start Here:** For workspace/process standards, scripts organization, and validation checklists, see [docs/standards/workspace-organization.md](../docs/standards/workspace-organization.md).

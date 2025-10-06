@@ -1,3 +1,4 @@
+# See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
 # Date Naming Standards for Portfolio Images
 
 ## Standard Format: YYMMDD

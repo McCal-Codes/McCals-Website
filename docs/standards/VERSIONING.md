@@ -1,4 +1,5 @@
-﻿# Versioning Guidelines
+﻿# See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
+# Versioning Guidelines
 
 All widgets use semantic versioning (MAJOR.MINOR.PATCH). Always duplicate the previous `versions/` file before editing so history stays intact.
 

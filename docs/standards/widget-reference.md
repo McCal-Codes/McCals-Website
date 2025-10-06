@@ -1,3 +1,4 @@
+# See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
 # Widget Standards Quick Reference
 
 > **Quick access guide for McCal Media widget development standards**  

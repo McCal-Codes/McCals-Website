@@ -3,15 +3,19 @@
 This workspace includes comprehensive AI assistant instructions and validation tools:
 
 ### AI Instructions (Read First)
-- **Copilot**: `.github/copilot-instructions.md` - Full development workflow
-- **Canvas**: `.github/canvas-instructions.md` - Focused widget editing  
-- **Codex**: `.github/codex-instructions.md` - Rate-limit efficient patterns
+- **Copilot**: `.github/copilot-instructions.md` — Efficient, full-stack development workflow. For longer or more complex tasks, break work into clear steps, use preflight validation, and document your process in the Recent Updates section. Always update instructions and standards after major changes.
+- **Canvas**: `.github/canvas-instructions.md` — Efficient, focused widget editing
+- **Codex**: `.github/codex-instructions.md` — Efficient, rate-limit optimized patterns
 
 ### Preflight Validation
-Run before making large changes to validate context awareness:
-- **VS Code Task**: "AI: Preflight (short)" 
-- **Command Line**: `npm run ai:preflight:short` (quick) or `npm run ai:preflight` (full)
-- **JSON Output**: `npm run ai:preflight:json` for programmatic use
+
+### Afterflight Validation
+Run after making changes to ensure workspace health and documentation:
+- **Checklist**: See [Afterflight section in workspace-organization.md](docs/standards/workspace-organization.md#4-preflight--afterflight-checklists)
+- **Validate scripts**: Run all npm scripts and workflows to ensure nothing is broken
+- **Archive unused scripts**: Move obsolete scripts to `scripts/_archived/` and add a comment/header
+- **Update documentation**: Record changes in `.github/copilot-instructions.md`, `CHANGELOG.md`, and standards docs
+- **Final review**: Confirm workspace is organized, efficient, and easy to maintain
 
 ### Agent Responsibilities
 - **Always read instructions first** when starting sessions
@@ -33,10 +37,12 @@ This repository is primarily a **development workspace for Squarespace widgets**
 
 ## Before you start (AI assistants)
 
+**Start Here:** For workspace/process standards, scripts organization, and validation checklists, see [docs/standards/workspace-organization.md](docs/standards/workspace-organization.md).
+
 - Read these short instruction pages first:
 	- Copilot: `.github/copilot-instructions.md`
 	- Canvas: `.github/canvas-instructions.md`
-	- Codex (rate‑limit efficient): `.github/codex-instructions.md`
+	- Codex (ratelimit efficient): `.github/codex-instructions.md`
 - Run a quick preflight summary before large edits:
 	- VS Code task: “AI: Preflight (short)”
 	- Or via npm:

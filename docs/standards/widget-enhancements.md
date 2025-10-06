@@ -1,3 +1,4 @@
+# See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
 # Widget Enhancement Patterns
 
 > **Status**: Documentation of proven improvements from photojournalism widget v4.4-v4.8

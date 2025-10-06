@@ -16,7 +16,13 @@ Catalog of proven UX and technical improvements extracted from successful widget
 ### 🔄 **widget-development.md**
 Systematic methodology for applying enhancement patterns across widgets with implementation checklists and quality standards.
 
+
+
 ## Repository Standards
+
+### �️ **workspace-organization.md**
+**Single source of truth for scripts folder structure, archival, workspace validation, and preflight/afterflight checklists.**
+All contributors must follow this document for any changes to scripts or workspace organization.
 
 ### 📅 **date-naming.md**
 Naming conventions for photo organization and date parsing in manifest generation.
