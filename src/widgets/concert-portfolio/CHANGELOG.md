@@ -2,6 +2,16 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.6 — 2025-10-06 (Performance Optimized - Production Ready)
+### Performance Optimizations 🚀
+- **CRITICAL**: Separated critical CSS from non-critical styles for faster initial render
+- **OPTIMIZED**: Modern JavaScript with async patterns and reduced main-thread blocking
+- **IMPROVED**: Font loading with `font-display: swap` for better performance
+- **REDUCED**: Bundle size by lazy-loading debug features and advanced functionality
+- **ENHANCED**: Resource hints with preconnect/dns-prefetch for GitHub API
+- **OPTIMIZED**: Structured data generation with compact JSON for better SEO
+- **RETAINED**: All v4.5 SEO features and v4.4 UX enhancements
+
 ## v4.5 — 2025-10-06 (SEO Enhanced - Work in Progress)
 ### SEO and Accessibility Improvements 🎯
 - **ENHANCED**: Alt text generation using manifest data for descriptive, keyword-rich attributes

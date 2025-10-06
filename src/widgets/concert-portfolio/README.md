@@ -1,8 +1,17 @@
 # Concert Portfolio Widget
 
-**Current Version: v4.5** — SEO-enhanced natural-height masonry gallery with structured data, improved alt text generation, and comprehensive accessibility features. Features intelligent caching, progressive loading, and advanced performance optimizations.
+**Current Version: v4.6** — Performance-optimized concert portfolio with critical rendering improvements, modern JavaScript patterns, and enhanced SEO. Features lazy-loaded advanced features, optimized font loading, and reduced main-thread blocking for better Core Web Vitals.
 
 ## Features
+
+### Performance 🚀 (v4.6)
+- **Critical CSS Inlining**: Only essential styles loaded initially, non-critical styles lazy-loaded
+- **Modern JavaScript**: Async patterns with reduced main-thread blocking using requestIdleCallback
+- **Optimized Font Loading**: `font-display: swap` for better rendering performance
+- **Resource Hints**: Preconnect and DNS prefetch for GitHub API calls
+- **Lazy-Loaded Features**: Debug panel and advanced functionality loaded on-demand
+- **Reduced Bundle Size**: Removed unused code paths for production deployment
+- **SEO Structured Data**: Compact JSON-LD with optimized generation
 
 ### Performance 🚀
 - **Shared API Backend**: Intelligent caching with 5-10min TTL reduces redundant requests
