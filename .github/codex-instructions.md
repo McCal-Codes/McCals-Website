@@ -58,6 +58,7 @@ PR/Docs discipline
 
 Recent updates
 
+- 2025-10-06T21:13:03.277Z — Session complete: minor updates.
 - 2025-10-05T07:48:39.395Z — Updated test widgets to latest versions - journalism widget updated from v3.0 to v4.9 with latest features
 - 2025-10-04T00:00:00.003Z — Added agent responsibilities and widget preview workflow guidance: agents must read/update instructions and use user-driven preview workflow instead of external hosting
 - 2025-10-03T09:15:17.087Z — Featured Portfolio Widget v1.5 complete: Enhanced journalism titles, ultra-minimal scrollbars (4px, 0.15 opacity), improved masonry spacing (16px gaps), randomized cover images with Fisher-Yates shuffle, minimal gray accents (#888888), production-ready deployment with 15-item limit, scrollable lightbox, and comprehensive changelog documentation

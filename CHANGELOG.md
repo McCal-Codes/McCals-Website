@@ -28,6 +28,7 @@
 - 2025-10-03: AI session — Validation: preflight/guardian/canvas/codex added and tasks wired
 - 2025-10-03: AI session — Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging
 - 2025-10-05: AI session — Updated test widgets to latest versions - journalism widget updated from v3.0 to v4.9 with latest features
+- 2025-10-06: AI session — Session complete: minor updates.
 ## 1.5.0 — 2025-09-29
 - Added unified-portfolio-demo.html (master demo with ?type= and ?manifest=).
 - Links to unified versions for Concert, Event, and Photojournalism.

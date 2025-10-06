@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const INSTRUCTIONS = [
   path.join(ROOT, '.github', 'copilot-instructions.md'),
   path.join(ROOT, '.github', 'canvas-instructions.md'),
