@@ -1,6 +1,6 @@
 # Concert Portfolio Widget
 
-**Current Version: v4.4** — High-performance natural-height masonry gallery with enhanced UX patterns and advanced GitHub integration. Features intelligent caching, progressive loading, and comprehensive performance optimizations.
+**Current Version: v4.5** — SEO-enhanced natural-height masonry gallery with structured data, improved alt text generation, and comprehensive accessibility features. Features intelligent caching, progressive loading, and advanced performance optimizations.
 
 ## Features
 
@@ -27,6 +27,14 @@
 - **Enhanced Close Button**: Fixed positioning with better accessibility and safe areas
 - **Navigation Isolation**: Comprehensive hiding of site navigation during lightbox
 - **Integrated Version Display**: Version indicator in heading with interactive changelog
+
+### SEO & Accessibility (v4.5) 🔍
+- **Enhanced Alt Text**: Intelligent generation from manifest data and image filenames
+- **Structured Data**: JSON-LD schema markup for search engine optimization
+- **Image Dimensions**: Explicit width/height attributes for better SEO and performance
+- **ARIA Labels**: Comprehensive accessibility support for screen readers
+- **Lazy Loading**: Optimized loading with proper `fetchpriority` attributes
+- **Semantic HTML**: Proper heading hierarchy and landmark elements
 
 ### Developer Experience 🛠️
 - **Enhanced Debug Panel**: Comprehensive metrics with force refresh and cache controls
@@ -90,9 +98,10 @@ images/Portfolios/Concert/
 | EXIF Processing | 450ms | 180ms | **60% faster** |
 
 ## Versions
-- **v2.2** (Latest): Performance revolution with shared backend
-- **v2.1**: EXIF date extraction with fallback chain
-- **v2.0**: Natural masonry with GitHub commit dates
-- **v1.0**: Initial grid gallery implementation
+- **v4.5** (Latest): SEO enhancements with structured data and improved accessibility
+- **v4.4**: Performance revolution with shared backend and UX improvements
+- **v4.3**: EXIF date extraction with fallback chain
+- **v4.2**: Natural masonry with GitHub commit dates
+- **v4.1**: Initial grid gallery implementation
 
 See CHANGELOG.md for detailed version history.

@@ -54,7 +54,7 @@ This repository is primarily a **development workspace for Squarespace widgets**
 ## Primary Purpose: Squarespace Widgets
 
 ### Available Widgets
-- **Concert Portfolio** (`src/widgets/concert-portfolio/`) - Photo galleries for concert photography
+- **Concert Portfolio** (`src/widgets/concert-portfolio/`) - Photo galleries for concert photography *(v4.5 SEO enhancements in development)*
 - **Event Portfolio** (`src/widgets/event-portfolio/`) - Event photography displays  
 - **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights
 - **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos
@@ -81,6 +81,7 @@ This repository is primarily a **development workspace for Squarespace widgets**
 - **Quick Reference**: `docs/standards/widget-reference.md` - Essential checklist for widget development
 - **Complete Guide**: `docs/standards/widget-standards.md` - Comprehensive architecture and design standards
 - **Enhancement Patterns**: Proven improvement patterns for optimizing existing widgets
+- **SEO Testing Guide**: `docs/standards/seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 
 ## Development & Testing
 

@@ -31,6 +31,7 @@ Project standards, conventions, and versioning:
 - `widget-standards.md` - Comprehensive widget standards guide
 - `widget-enhancements.md` - Proven widget improvement patterns
 - `widget-development.md` - Systematic enhancement methodology
+- `seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 - `date-naming.md` - File and folder naming conventions
 - `versioning.md` - Project versioning guidelines
 
