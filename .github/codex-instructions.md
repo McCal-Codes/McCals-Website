@@ -30,6 +30,7 @@ Single-pass edit strategy
 - Draft the minimal diff with context comments instead of restating the whole file.
 - For widgets: create a new `versions/vN.M.html` (don’t overwrite older versions). Copy only what’s needed; keep CSS/JS inline.
 - For manifest schema changes: update generator(s) first, then consumers (`src/site/app.js`, widgets), then CI.
+- When touching shared data (manifests, loaders, or image folders), re-load the production widget version to confirm regressions were not introduced before handing off.
 
 Batch related changes
 
