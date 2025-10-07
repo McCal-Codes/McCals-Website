@@ -2,7 +2,26 @@
 
 /**
  * Journalism Portfolio Master Manifest Generator
- * Creates a master manifest similar to concert portfolio for efficient loading
+ * Creates a master manifest similar t      // Create processed image entry
+      const folderPath = folderSegments.length ? folderSegments.join('/') : (image.folderName || category);
+      const normalizedFolderPath = folderPath ? normalizeSlashes(folderPath) : category;
+      const processedImage = {
+        filename: image.filename,
+        path: image.filename, // Use just filename, not relativePath
+        category: finalCategory,
+        date: existing.date || imageDate,
+        caption: existing.caption || `${eventName} - photography`,
+        description: existing.description || '',
+        published: existing.published || false,
+        outlet: existing.outlet || null,
+        outletUrl: existing.outletUrl || null,
+        articleUrl: existing.articleUrl || null,
+        articleTitle: existing.articleTitle || null,
+        publishedDate: existing.publishedDate || null,
+        folderName: normalizedFolderPath,
+        eventName: eventName,
+        eventFolder: eventFolder || null
+      };for efficient loading
  * 
  * Features:
  * - Single consolidated JSON for all journalism images
@@ -37,27 +56,27 @@ const FORCE_OVERWRITE = args.includes('--force');
  */
 async function main() {
   try {
-    console.log('🔍 Journalism Portfolio Master Manifest Generator v2.0 - generate-journalism-manifest.js:40');
-    console.log(`📁 Scanning: ${JOURNALISM_DIR} - generate-journalism-manifest.js:41`);
+    console.log('🔍 Journalism Portfolio Master Manifest Generator v2.0 - generate-journalism-manifest.js:59');
+    console.log(`📁 Scanning: ${JOURNALISM_DIR} - generate-journalism-manifest.js:60`);
     
     // Check if journalism directory exists
     if (!await exists(JOURNALISM_DIR)) {
-      console.error(`❌ Journalism directory not found: ${JOURNALISM_DIR} - generate-journalism-manifest.js:45`);
+      console.error(`❌ Journalism directory not found: ${JOURNALISM_DIR} - generate-journalism-manifest.js:64`);
       process.exit(1);
     }
     
     // Check if master manifest already exists
     if (await exists(MASTER_MANIFEST) && !FORCE_OVERWRITE) {
-      console.log('📄 Master manifest already exists. Use force to overwrite. - generate-journalism-manifest.js:51');
+      console.log('📄 Master manifest already exists. Use force to overwrite. - generate-journalism-manifest.js:70');
       process.exit(0);
     }
     
     // Discover all journalism images
     const images = await discoverImages(JOURNALISM_DIR);
-    console.log(`📸 Found ${images.length} journalism images - generate-journalism-manifest.js:57`);
+    console.log(`📸 Found ${images.length} journalism images - generate-journalism-manifest.js:76`);
     
     if (images.length === 0) {
-      console.log('⚠️  No images found in journalism directory - generate-journalism-manifest.js:60');
+      console.log('⚠️  No images found in journalism directory - generate-journalism-manifest.js:79');
       process.exit(0);
     }
     
@@ -67,14 +86,14 @@ async function main() {
       try {
         const content = await fs.readFile(INDIVIDUAL_MANIFEST, 'utf-8');
         individualManifest = JSON.parse(content);
-        console.log('📋 Loaded existing individual manifest data - generate-journalism-manifest.js:70');
+        console.log('📋 Loaded existing individual manifest data - generate-journalism-manifest.js:89');
       } catch (error) {
-        console.warn('⚠️  Could not parse individual manifest - generate-journalism-manifest.js:72');
+        console.warn('⚠️  Could not parse individual manifest - generate-journalism-manifest.js:91');
       }
     }
     
     // Process and organize images by events (like concert bands/venues)
-    console.log('🏠️  Processing images by events... - generate-journalism-manifest.js:77');
+    console.log('🏠️  Processing images by events... - generate-journalism-manifest.js:96');
     const eventMap = new Map();
     const categoryStats = {};
     const seenFilenames = new Set(); // Track filenames to prevent duplicates
@@ -92,7 +111,7 @@ async function main() {
       
       // Skip duplicates based on normalized filename (ignore path differences and variants)
       if (seenFilenames.has(normalizedFilename)) {
-        console.log(`⚠️  Skipping duplicate/variant: ${image.filename} - generate-journalism-manifest.js:95`);
+        console.log(`⚠️  Skipping duplicate/variant: ${image.filename} - generate-journalism-manifest.js:114`);
         continue;
       }
       seenFilenames.add(normalizedFilename);
@@ -170,7 +189,7 @@ async function main() {
       // Update category stats
       categoryStats[finalCategory] = (categoryStats[finalCategory] || 0) + 1;
       
-      console.log(`✓ ${eventName} (${finalCategory}): ${image.filename} - generate-journalism-manifest.js:173`);
+      console.log(`✓ ${eventName} (${finalCategory}): ${image.filename} - generate-journalism-manifest.js:192`);
     }
     
     // Convert to array and sort by date (newest first)
@@ -192,31 +211,31 @@ async function main() {
     const manifestJson = JSON.stringify(masterManifest, null, 2);
     await fs.writeFile(MASTER_MANIFEST, manifestJson, 'utf-8');
     
-    console.log(`\n✅ Master manifest generated successfully! - generate-journalism-manifest.js:195`);
-    console.log(`📄 File: ${MASTER_MANIFEST} - generate-journalism-manifest.js:196`);
-    console.log(`📊 Total events: ${masterManifest.totalEvents} - generate-journalism-manifest.js:197`);
-    console.log(`📊 Total images: ${masterManifest.totalImages} - generate-journalism-manifest.js:198`);
+    console.log(`\n✅ Master manifest generated successfully! - generate-journalism-manifest.js:214`);
+    console.log(`📄 File: ${MASTER_MANIFEST} - generate-journalism-manifest.js:215`);
+    console.log(`📊 Total events: ${masterManifest.totalEvents} - generate-journalism-manifest.js:216`);
+    console.log(`📊 Total images: ${masterManifest.totalImages} - generate-journalism-manifest.js:217`);
     
     // Show event breakdown
     events.forEach(event => {
-      console.log(`📅 ${event.eventName}: ${event.totalImages} images (${event.category}) - generate-journalism-manifest.js:202`);
+      console.log(`📅 ${event.eventName}: ${event.totalImages} images (${event.category}) - generate-journalism-manifest.js:221`);
     });
     
     // Show category breakdown
     Object.entries(categoryStats).forEach(([category, count]) => {
-      console.log(`📂 ${category}: ${count} images - generate-journalism-manifest.js:207`);
+      console.log(`📂 ${category}: ${count} images - generate-journalism-manifest.js:226`);
     });
     
     // Show published work summary
     const publishedEvents = events.filter(event => event.published).length;
     if (publishedEvents > 0) {
-      console.log(`📰 Published events: ${publishedEvents} - generate-journalism-manifest.js:213`);
+      console.log(`📰 Published events: ${publishedEvents} - generate-journalism-manifest.js:232`);
     }
     
-    console.log(`\n💡 Widget will now load efficiently from single master manifest! - generate-journalism-manifest.js:216`);
+    console.log(`\n💡 Widget will now load efficiently from single master manifest! - generate-journalism-manifest.js:235`);
     
   } catch (error) {
-    console.error('❌ Error generating master manifest: - generate-journalism-manifest.js:219', error.message);
+    console.error('❌ Error generating master manifest: - generate-journalism-manifest.js:238', error.message);
     process.exit(1);
   }
 }
@@ -252,7 +271,7 @@ async function discoverImages(dir, baseDir = dir, images = []) {
     
     return images.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
   } catch (error) {
-    console.warn('Warning: Could not scan directory : - generate-journalism-manifest.js:255');
+    console.warn('Warning: Could not scan directory : - generate-journalism-manifest.js:274');
     return images;
   }
 }
@@ -400,7 +419,7 @@ async function exists(filePath) {
 // Run the script
 if (require.main === module) {
   main().catch(error => {
-    console.error('💥 Fatal error: - generate-journalism-manifest.js:403', error);
+    console.error('💥 Fatal error: - generate-journalism-manifest.js:422', error);
     process.exit(1);
   });
 }

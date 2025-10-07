@@ -65,6 +65,7 @@ This repository is primarily a **development workspace for Squarespace widgets**
 - **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only)*
 
 ### Work in Progress
+- **Photojournalism Portfolio v5.1** (`src/widgets/photojournalism-portfolio/versions/v5.1-performance-optimized.html`) - Performance optimization pass in development
 - **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration *(in development)*
 - **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays *(in development)*
 
@@ -82,6 +83,7 @@ This repository is primarily a **development workspace for Squarespace widgets**
 - **Complete Guide**: `docs/standards/widget-standards.md` - Comprehensive architecture and design standards
 - **Enhancement Patterns**: Proven improvement patterns for optimizing existing widgets
 - **SEO Testing Guide**: `docs/standards/seo-testing-guide.md` - Comprehensive SEO testing and validation methods
+- **SEO Starter Guide**: `docs/standards/seo-starter-guide.md` - Practical Squarespace SEO playbook for McCal Media
 
 ## Development & Testing
 
