@@ -2,6 +2,13 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v5.1 (WIP) - Performance Optimization Preview
+- STATUS: Work in progress; keep using v4.9 for production embeds
+- NEW: Critical CSS inlined with deferred non-critical stylesheet loading
+- NEW: Async manifest loading, requestIdleCallback, and smarter cache key handling to reduce main-thread blocking
+- NEW: Resource hints, lazy debugging imports, and structured data refinements for SEO improvements
+- TODO: Finalize Squarespace regression testing, polish accessibility, and validate auto-refresh timing against live manifests
+
 ## v4.9 (2025-10-05) — Fixed Image Stretching in Lightbox 🔧
 - FIXED: Image aspect ratio preservation in lightbox gallery
 - IMPROVED: Added `object-fit: contain` to prevent image stretching/distortion

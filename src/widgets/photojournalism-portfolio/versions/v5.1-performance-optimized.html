@@ -1,6 +1,6 @@
-<!-- Photojournalism Portfolio v5.0 — Performance Optimized
+﻿<!-- Photojournalism Portfolio v5.1 - Performance Optimized
 Author: Caleb McCartney / McCal-Codes
-Version: 5.0
+Version: 5.1
 Purpose: High-performance photojournalism widget with critical rendering optimizations
 
 Performance Optimizations:
@@ -15,13 +15,17 @@ Performance Optimizations:
 Usage: Paste this entire block into a Squarespace Code Block
 Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-manifest.json
 -->
-
 <!-- Critical CSS - Only essential styles for initial render -->
 <style>
-:root{--fg:#f5f5f5;--bg:#0a0a0a;--line:#2a2a2a;--accent:#ff4d6d;--published:#00d4aa}
-@media(prefers-color-scheme:light){:root{--fg:#0a0a0a;--bg:#fff;--line:#e5e5e5}}
+:root{--fg:#f5f5f5;--bg:#0a0a0a;--line:#2a2a2a;--accent:#ff4d6d;--published:#00d4aa;--status-wip:#ffb347}
+@media(prefers-color-scheme:light){:root{--fg:#0a0a0a;--bg:#fff;--line:#e5e5e5;--status-wip:#d47500}}
 .journalism-portfolio{max-width:1600px;margin:60px auto;padding:40px 20px;text-align:center;position:relative}
-.journalism-heading{font:800 34px/1.2 ui-sans-serif,system-ui;color:var(--fg);margin:0 0 18px}
+.journalism-heading{font:800 34px/1.2 ui-sans-serif,system-ui;color:var(--fg);margin:0 0 18px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.journalism-version{display:inline-flex;align-items:center;justify-content:center;padding:4px 10px;font:600 14px/1 ui-sans-serif,system-ui;color:rgba(255,255,255,.75);background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:all .2s ease;cursor:default}
+@media(prefers-color-scheme:light){.journalism-version{color:rgba(26,26,26,.8);background:rgba(255,255,255,.65);border-color:rgba(26,26,26,.15)}}
+.journalism-version:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.journalism-status{display:inline-flex;align-items:center;justify-content:center;padding:4px 12px;font:600 12px/1.1 ui-sans-serif,system-ui;color:var(--status-wip);background:rgba(255,179,71,.1);border:1px dashed rgba(255,179,71,.4);border-radius:999px;text-transform:uppercase;letter-spacing:.08em}
+@media(prefers-color-scheme:light){.journalism-status{background:rgba(255,179,71,.18);border-color:rgba(212,117,0,.35)}}
 .journalism-loading{display:flex;align-items:center;justify-content:center;min-height:200px;font:600 16px/1.4 ui-sans-serif,system-ui;color:var(--fg);opacity:.7}
 .journalism-spinner{width:20px;height:20px;border:2px solid var(--line);border-top:2px solid var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-right:12px}
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
@@ -56,8 +60,8 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
 <link rel="preconnect" href="https://raw.githubusercontent.com">
 <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 
-<div class="journalism-portfolio" id="journalismPf" data-panes="24">
-  <h2 class="journalism-heading">Photojournalism Portfolio</h2>
+<div class="journalism-portfolio" id="journalismPf" data-panes="24" data-widget-version="5.1">
+  <h2 class="journalism-heading">Photojournalism Portfolio <span class="journalism-version" aria-label="Widget version 5.1" title="Photojournalism Portfolio widget version 5.1">v5.1</span><span class="journalism-status" data-status="wip" title="v5.1 is still being finalized">Work in Progress</span></h2>
   <div class="portfolio-filters" id="portfolioFilters">
     <button class="filter-btn" data-filter="*" aria-pressed="true">All Work</button>
     <button class="filter-btn" data-filter="Published">Published Work</button>
@@ -83,11 +87,33 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
   </div>
 </div>
 
+<!-- Version Modal -->
+<div class="journalism-version-modal" id="journalismVersionModal" aria-hidden="true">
+  <div class="jvm-content" role="dialog" aria-modal="true" aria-labelledby="jvmTitle">
+    <h3 class="jvm-title" id="jvmTitle">Photojournalism Portfolio v5.1</h3>
+    <p class="jvm-description">Performance-optimized photojournalism widget with advanced lightbox and filtering capabilities.</p>
+    <div class="jvm-features">
+      <p class="jvm-feature">• Critical CSS inlining for faster rendering</p>
+      <p class="jvm-feature">• Advanced lightbox with scroll-snap navigation</p>
+      <p class="jvm-feature">• Published work filtering and badges</p>
+      <p class="jvm-feature">• Structured data for SEO optimization</p>
+      <p class="jvm-feature">• Progressive enhancement and lazy loading</p>
+    </div>
+    <div class="jvm-meta">
+      <span class="jvm-badge">v5.1</span>
+      <span class="jvm-status" data-status="wip">Work in Progress</span>
+      <span class="jvm-author">McCal-Codes</span>
+    </div>
+  </div>
+</div>
+
 <!-- Core JavaScript - Optimized for performance -->
 <script>
 // Performance-optimized core functionality
 (function(){
   'use strict';
+
+  const DEBUG = typeof window !== 'undefined' && window.location.search.includes('debug');
 
   // Configuration
   const CONFIG = {
@@ -108,14 +134,14 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
   let state = {
     manifest: null,
     basePath: CONFIG.basePaths[0],
-    cacheKey: 'journalism-manifest-v5.0',
+    cacheKey: 'journalism-manifest-v5.1',
     isVisible: true,
     timers: { autoRefresh: null, nextRefresh: null },
     currentFilter: '*'
   };
 
   // Utility functions
-  const log = (DEBUG ? console.log.bind(console, '[Journalism v5.0]') : () => {});
+  const log = (DEBUG ? console.log.bind(console, '[Journalism v5.1]') : () => {});
   const shuffle = arr => arr.slice().sort(() => Math.random() - 0.5);
 
   // Cache management
@@ -133,10 +159,73 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
     }
   };
 
+  // Path helpers and GitHub URL builders
+  const RAW_ROOT = `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${CONFIG.github.branch}/`;
+  const ensureTrailingSlash = value => {
+    if (!value) return '';
+    return value.endsWith('/') ? value : `${value}/`;
+  };
+
+  const stripLeadingSlash = value => typeof value === 'string' ? value.replace(/^\/+/, '') : value;
+  const isAbsoluteUrl = value => typeof value === 'string' && /^https?:\/\//i.test(value);
+
+  CONFIG.basePaths = CONFIG.basePaths.map(base => ensureTrailingSlash(stripLeadingSlash(base)));
+  state.basePath = ensureTrailingSlash(stripLeadingSlash(state.basePath));
+
+  const extractPathString = source => {
+    if (!source) return '';
+    if (typeof source === 'string') return source;
+    if (typeof source === 'object') return source.path || source.filename || source.key || '';
+    return '';
+  };
+
+  const buildManifestUrl = basePath => {
+    const base = ensureTrailingSlash(stripLeadingSlash(basePath));
+    return `${RAW_ROOT}${base}journalism-manifest.json`;
+  };
+
+  const encodePath = value => value
+    .split('/')
+    .filter(Boolean)
+    .map(segment => encodeURIComponent(segment))
+    .join('/');
+
+  const buildImageUrl = (basePath, eventPath, file) => {
+    const base = ensureTrailingSlash(stripLeadingSlash(basePath || state.basePath));
+    let relative = extractPathString(file);
+
+    if (isAbsoluteUrl(relative)) return relative;
+
+    const baseWithoutSlash = base.slice(0, -1);
+    relative = stripLeadingSlash(relative || '');
+
+    if (relative.startsWith(base)) {
+      relative = relative.slice(base.length);
+    } else if (relative.startsWith(baseWithoutSlash)) {
+      relative = relative.slice(baseWithoutSlash.length);
+      relative = stripLeadingSlash(relative);
+    }
+
+    const eventSegment = stripLeadingSlash(eventPath || '');
+    if (eventSegment) {
+      if (relative) {
+        if (!relative.startsWith(eventSegment)) {
+          relative = `${eventSegment}/${relative}`;
+        }
+      } else {
+        relative = eventSegment;
+      }
+    }
+
+    const encoded = encodePath(relative || '');
+
+    return `${RAW_ROOT}${base}${encoded}`;
+  };
+
   // GitHub URL builders
   const buildUrls = {
     manifest: basePath => `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${CONFIG.github.branch}/${basePath}journalism-manifest.json`,
-    image: (basePath, eventPath, filename) => `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${CONFIG.github.branch}/${basePath}${eventPath}/${encodeURIComponent(filename)}`
+    image: (basePath, parts, filename) => `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${CONFIG.github.branch}/${basePath}${parts.concat(filename).map(encodeURIComponent).join('/')}`
   };
 
   // Enhanced alt text generation
@@ -151,7 +240,7 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
     const publishedEvents = manifest.events?.filter(event => event.tags?.includes('Published Work')) || [];
     const sampleImages = publishedEvents.slice(0, 3).flatMap(event =>
       event.images?.slice(0, 2).map(img =>
-        buildUrls.image(state.basePath, event.folderPath || '', img.path || img)
+        buildUrls.image(state.basePath, (event.folderPath || '').split('/').filter(Boolean), img.path || img)
       ) || []
     ).slice(0, 5) || [];
 
@@ -178,7 +267,7 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
     if (!force) {
       const cached = cache.get();
       if (cached) {
-        state.basePath = cached.basePath;
+        state.basePath = ensureTrailingSlash(stripLeadingSlash(cached.basePath));
         return cached.manifest;
       }
     }
@@ -188,8 +277,9 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
         const response = await fetch(buildUrls.manifest(basePath), { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const manifest = await response.json();
-        state.basePath = basePath;
-        cache.set({ manifest, basePath });
+        const sanitizedBase = ensureTrailingSlash(stripLeadingSlash(basePath));
+        state.basePath = sanitizedBase;
+        cache.set({ manifest, basePath: sanitizedBase });
         log('Manifest loaded from', basePath);
         return manifest;
       } catch (error) {
@@ -257,8 +347,8 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
         const thumbnail = event.thumbnail || event.images?.[0];
         if (thumbnail) {
           const imageUrl = thumbnail.path ?
-            buildUrls.image(state.basePath, event.folderPath || '', thumbnail.path) :
-            buildUrls.image(state.basePath, event.folderPath || '', thumbnail);
+            buildUrls.image(state.basePath, (event.folderPath || '').split('/').filter(Boolean), thumbnail.path) :
+            buildUrls.image(state.basePath, (event.folderPath || '').split('/').filter(Boolean), thumbnail);
           log('Image URL for', event.eventName, ':', imageUrl);
           img.src = imageUrl;
 
@@ -273,13 +363,13 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
 
         const info = document.createElement('div');
         info.className = 'journalism-info';
-        info.innerHTML = `<h3 class="journalism-title">${event.eventName}</h3><p class="journalism-meta">${event.dateDisplay} • ${event.category}</p>`;
+        info.innerHTML = `<h3 class="journalism-title">${event.eventName}</h3><p class="journalism-meta">${event.dateDisplay} | ${event.category}</p>`;
 
         // Add badges
         if (isPublished) {
           const badge = document.createElement('div');
           badge.className = 'published-badge';
-          badge.textContent = '●';
+          badge.textContent = 'Published';
           card.appendChild(badge);
         }
 
@@ -333,13 +423,50 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
         .jl-dialog{max-width:90vw;max-height:90vh;position:relative}
         .jl-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;max-height:80vh}
         .jl-gallery img{max-height:70vh;object-fit:contain;display:block;margin:0 auto;flex-shrink:0;scroll-snap-align:center}
-        .jl-close{position:fixed;top:20px;right:20px;background:rgba(0,0,0,.7);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:50%;width:44px;height:44px;font:800 18px ui-sans-serif,system-ui;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2147483648}
+        .jl-close{position:fixed;top:max(24px, env(safe-area-inset-top, 24px));right:max(24px, env(safe-area-inset-right, 24px));background:rgba(0,0,0,.72);color:#fff;border:2px solid rgba(255,255,255,.45);border-radius:50%;width:48px;height:48px;font:800 18px ui-sans-serif,system-ui;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2147483647;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .2s ease,background .2s ease,border-color .2s ease}
+        .jl-close:hover{transform:translateY(-2px);background:rgba(0,0,0,.85);border-color:rgba(255,255,255,.6)}
+        @media(max-width:640px){.jl-close{width:44px;height:44px}}
         .jl-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;padding:12px 16px;border-radius:8px;text-align:center;max-width:80vw}
         .jl-title{margin:0 0 4px;font:800 18px/1.2 ui-sans-serif,system-ui}
         .jl-meta{margin:0;font:600 14px/1.3 ui-sans-serif,system-ui;color:#cfcfcf}
         .jl-description,.jl-publication{margin:8px 0 0;font:500 13px/1.4 ui-sans-serif,system-ui;color:#e5e5e5}
         html.lb-open body{overflow:hidden}
         html.lb-open .journalism-portfolio{pointer-events:none}
+        html.lb-open header,
+        html.lb-open .Header,
+        html.lb-open [id*="Header"],
+        html.lb-open .site-header,
+        html.lb-open .sqs-announcement-bar,
+        html.lb-open nav,
+        html.lb-open .nav,
+        html.lb-open .navbar,
+        html.lb-open .navigation,
+        html.lb-open .site-nav,
+        html.lb-open .main-nav,
+        html.lb-open .top-nav,
+        html.lb-open [class*="nav"],
+        html.lb-open [id*="nav"],
+        html.lb-open [class*="menu"],
+        html.lb-open [id*="menu"],
+        html.lb-open footer,
+        html.lb-open .Footer,
+        html.lb-open [class*="footer"]{
+          opacity:0 !important;
+          visibility:hidden !important;
+          pointer-events:none !important;
+        }
+        .journalism-version-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.9);color:#fff;padding:20px;border-radius:12px;z-index:2147483648;text-align:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);display:none;max-width:90vw}
+        .journalism-version-modal.show{display:block}
+        .jvm-content{outline:none}
+        .jvm-title{margin:0 0 8px;font:800 18px/1.2 ui-sans-serif,system-ui;color:var(--accent)}
+        .jvm-description{margin:4px 0 12px;font:400 14px/1.4 ui-sans-serif,system-ui;color:#ccc}
+        .jvm-features{margin:12px 0;text-align:left}
+        .jvm-feature{margin:4px 0;font:400 13px/1.4 ui-sans-serif,system-ui;color:#e5e5e5;padding-left:12px;position:relative}
+        .jvm-feature:before{content:'\u2022';color:var(--accent);position:absolute;left:0}
+        .jvm-meta{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px}
+        .jvm-badge{background:var(--accent);color:#000;padding:4px 8px;border-radius:12px;font:600 12px/1 ui-sans-serif,system-ui}
+        .jvm-status{padding:4px 10px;border-radius:999px;font:600 11px/1 ui-sans-serif,system-ui;color:var(--status-wip);background:rgba(255,179,71,.12);border:1px dashed rgba(255,179,71,.4);text-transform:uppercase;letter-spacing:.08em}
+        .jvm-author{font:500 12px/1 ui-sans-serif,system-ui;color:#aaa}
       `;
       document.head.appendChild(style);
     }
@@ -361,13 +488,13 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
         img.decoding = 'async';
         img.alt = generateAltText(event, imgData.path || imgData);
         img.src = imgData.path ?
-          buildUrls.image(state.basePath, event.folderPath || '', imgData.path) :
-          buildUrls.image(state.basePath, event.folderPath || '', imgData);
+          buildUrls.image(state.basePath, (event.folderPath || '').split('/').filter(Boolean), imgData.path) :
+          buildUrls.image(state.basePath, (event.folderPath || '').split('/').filter(Boolean), imgData);
         gallery.appendChild(img);
       });
 
       title.textContent = event.eventName;
-      meta.textContent = `${event.dateDisplay} • ${event.category} • ${images.length} images`;
+      meta.textContent = `${event.dateDisplay} | ${event.category} | ${images.length} images`;
 
       // Show description and publication if available
       const firstImage = images[0];
@@ -420,6 +547,24 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
         closeLightbox();
       }
     });
+
+    // Version modal functionality
+    const versionModal = document.getElementById('journalismVersionModal');
+    const heading = document.querySelector('.journalism-heading');
+
+    if (heading && versionModal) {
+      heading.addEventListener('dblclick', () => {
+        versionModal.classList.add('show');
+        setTimeout(() => {
+          versionModal.classList.remove('show');
+        }, 3000); // Auto-hide after 3 seconds
+      });
+
+      // Close version modal on click
+      versionModal.addEventListener('click', () => {
+        versionModal.classList.remove('show');
+      });
+    }
   };
 
   // Filter button handlers
@@ -501,4 +646,10 @@ Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-man
 
 })();
 </script></content>
-<parameter name="filePath">c:\Users\wolft\Desktop\McCal's Dev Website\McCals-Website\src\widgets\photojournalism-portfolio\versions\v5.0-performance-optimized.html
+<parameter name="filePath">c:\Users\wolft\Desktop\McCal's Dev Website\McCals-Website\src\widgets\photojournalism-portfolio\versions\v5.1-performance-optimized.html
+
+
+
+
+
+

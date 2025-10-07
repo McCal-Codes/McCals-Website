@@ -175,7 +175,7 @@ async function processEvent(categoryName, eventName, eventDir) {
     // Create processed images
     const images = imageFiles.map(filename => ({
       filename,
-      path: `${categoryName}/${eventName}/${filename}`,
+      path: filename, // Use just filename, not full path
       description: metadata?.description || `${eventName} photography`,
       caption: metadata?.caption || `${eventName} - ${categoryName}`,
       tags: tags

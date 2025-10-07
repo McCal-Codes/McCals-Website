@@ -148,6 +148,8 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-10-06T23:41:05.924Z — Session complete: minor updates.
+- 2025-10-06T23:40:47.789Z — Created comprehensive SEO starter guide document tailored for McCal Media's Squarespace implementation, covering site structure, titles/meta descriptions, image optimization, structured data, internal linking, and technical hygiene. Added to docs/standards/ and updated main README and CHANGELOG.
 - 2025-10-06T22:05:00.000Z — Updated copilot instructions to reference new performance standards document and establish Concert Portfolio v4.6 as the primary performance reference implementation for all widgets. Added performance standards to good starting references with priority star rating.
 - 2025-10-06T21:59:34.417Z — Fixed concert portfolio widget v4.6 image loading and layout issues. Updated CSS to use responsive column-width layout with overlay info styling, matching journalism widget patterns. Images now load properly in masonry-style grid with smooth transitions and loading animations.
 - 2025-10-06T21:54:49.562Z — Created performance-optimized concert portfolio widget v4.6 with critical CSS inlining, modern JavaScript patterns, and reduced main-thread blocking. Addresses PageSpeed issues: render blocking resources, unused CSS/JS, and long tasks.
