@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>McCal Media — Photography Portfolio</title>
-  <meta name="description" content="Professional photography portfolio by Caleb McCartney - Concert, journalism, and portrait photography." />
+  <title>About — McCal Media</title>
+  <meta name="description" content="About Caleb McCartney - Professional photographer, photojournalist, and storyteller based in Pittsburgh." />
   <link rel="preload" href="./styles.css" as="style">
   <link rel="stylesheet" href="./styles.css">
 </head>
@@ -22,9 +22,9 @@
           </div>
         </button>
         <ul id="primary-menu" class="header-nav-list">
-          <li class="header-nav-item header-nav-item--active"><a href="/">Portfolios</a></li>
+          <li class="header-nav-item"><a href="/">Portfolios</a></li>
           <li class="header-nav-item"><a href="/blog">Blog</a></li>
-          <li class="header-nav-item"><a href="/about">About</a></li>
+          <li class="header-nav-item header-nav-item--active"><a href="/about">About</a></li>
           <li class="header-nav-item"><a href="/contact">Contact</a></li>
           <li class="header-nav-item"><a href="src/site/prototypes/vision-api/index.html">Vision API</a></li>
         </ul>
@@ -33,23 +33,35 @@
   </header>
 
   <main class="container" id="page" tabindex="-1">
-    <section id="view-list">
-      <div class="toolbar">
-        <h1>Photography Portfolios</h1>
-        <label class="filter">
-          <span>Category:</span>
-          <select id="category-filter">
-            <option value="">All</option>
-          </select>
-        </label>
+    <section id="about-section" class="about-section">
+      <div class="about-header">
+        <h1>About Me</h1>
       </div>
-      <div id="galleries" class="grid" aria-live="polite"></div>
-    </section>
 
-    <section id="view-gallery" hidden>
-      <p><button id="back" class="btn">← Back to portfolios</button></p>
-      <h2 id="gallery-title"></h2>
-      <div id="thumbs" class="thumbs" aria-live="polite"></div>
+      <div class="about-content">
+        <div class="about-photo">
+          <img src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg" alt="Caleb McCartney - Professional Photographer">
+        </div>
+
+        <div class="about-text">
+          <p>
+            Caleb McCartney is a Pittsburgh-based photojournalist and commercial storyteller, and a proud alumni of Point Park University's BFA in Photography program. As a freelance photographer and photojournalist, he has served as The Globe's photo editor over the last fall, working with more clients into the summer and even collaborating on a project out in Kentucky.
+          </p>
+
+          <p>
+            Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage, corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he broadened his skill set by joining Pittsburgh production company <a href="https://wearecovalent.com/" target="_blank" rel="noopener">Covalent</a> as a Creative Production Intern, collaborating on projects that blend stills, motion, and sound.
+          </p>
+
+          <p>
+            He also hosts the weekly podcast <a href="/podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
+          </p>
+
+          <div class="about-buttons">
+            <a href="/" class="btn btn-primary">View My Work</a>
+            <a href="/contact" class="btn btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 

@@ -524,6 +524,136 @@ main {
   }
 }
 
+/* ABOUT PAGE STYLES */
+.about-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #000;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.about-photo {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+}
+
+.about-photo img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  filter: contrast(1.1) brightness(1.05);
+}
+
+.about-text {
+  flex: 1.5;
+  min-width: 350px;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.about-text a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+.about-text a:hover {
+  text-decoration: underline;
+}
+
+.about-text strong {
+  font-weight: 600;
+}
+
+.about-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: #007acc;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #007acc;
+  border: 2px solid #007acc;
+}
+
+.btn-secondary:hover {
+  background: #007acc;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments for about section */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .about-photo {
+    order: -1;
+  }
+
+  .about-header h1 {
+    font-size: 2rem;
+  }
+
+  .about-text {
+    min-width: auto;
+  }
+
+  .about-buttons {
+    justify-content: center;
+  }
+}
+
 /* Hidden utility */
 [hidden] {
   display: none !important;
