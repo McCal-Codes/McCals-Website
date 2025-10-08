@@ -148,6 +148,7 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-10-08T10:00:00.000Z — About page widget v1.4.4 updated: Refreshed bio to reflect alumni status from Point Park, freelance photographer/photojournalist work, Globe photo editor role over last fall, client work extending into summer, and Kentucky project collaboration. Enhanced contact options with clean dropdown menu offering email and Calendly coffee chat booking. Removed non-functional blog button, updated portfolio link to /featured-work. Improved contact UX with elegant slide-down menu and proper Calendly integration.
 - 2025-10-06T23:41:05.924Z — Session complete: minor updates.
 - 2025-10-06T23:40:47.789Z — Created comprehensive SEO starter guide document tailored for McCal Media's Squarespace implementation, covering site structure, titles/meta descriptions, image optimization, structured data, internal linking, and technical hygiene. Added to docs/standards/ and updated main README and CHANGELOG.
 - 2025-10-06T22:05:00.000Z — Updated copilot instructions to reference new performance standards document and establish Concert Portfolio v4.6 as the primary performance reference implementation for all widgets. Added performance standards to good starting references with priority star rating.
