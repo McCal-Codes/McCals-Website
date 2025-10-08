@@ -40,6 +40,11 @@ dist/
 # Sensitive recovery codes
 .github-recovery-codes.txt
 
+# API Keys and Credentials
+src/site/prototypes/vision-api/google-service-account.json
+*service-account*.json
+*credentials*.json
+
 # Development workspace temporary files
 site-workspace/temp/
 site-workspace/drafts/
