@@ -45,13 +45,13 @@ Before applying any enhancements, complete this checklist:
 
 - [ ] **Widget Status**: Confirm widget is in production or ready for production
 - [ ] **Current Version**: Document baseline version for comparison
-- [ ] **Enhancement Priorities**: Review `widget-enhancements.md` priority order
+- [ ] **Enhancement Priorities**: Review `widget-standards.md` and `widget-reference.md` for current priorities
 - [ ] **User Requirements**: Understand specific functionality needs
 - [ ] **Performance Baseline**: Record current performance metrics if applicable
 
 ### Enhancement Process
 
-1. **Read Enhancement Patterns**: Review `docs/standards/widget-enhancements.md`
+1. **Read Enhancement Patterns**: Review `docs/standards/widget-standards.md` and `widget-reference.md`
 2. **Select Applicable Patterns**: Choose patterns relevant to widget functionality
 3. **Create Implementation Plan**: Document which patterns to apply and why
 4. **Version Planning**: Determine version increment strategy (patch/minor/major)

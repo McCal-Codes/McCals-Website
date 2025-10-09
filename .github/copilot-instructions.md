@@ -1,4 +1,25 @@
-﻿## Copilot instructions for McCal Media widgets workspace
+﻿## TODO Tree Extension Compatibility (2025-10-09)
+
+
+All TODO/task files (including markdown in `docs/todo/`, code comments, and Copilot writeups) must use standard tags like `TODO`, `FIXME`, `BUG`, etc., and/or markdown checklists (`- [ ]`, `- [x]`) for compatibility with the VS Code Todo Tree extension.
+
+Copilot may add `TODO:` or `FIXME:` tags in any writeup, code, or documentation to indicate next steps, unresolved issues, or bugs.
+
+- Use `TODO:` or `FIXME:` at the start of a line or after a comment marker in code or markdown.
+- For markdown, use checklist items (`- [ ]` for incomplete, `- [x]` for complete) to have them appear in the tree.
+- You can add custom tags (e.g., `WDGTBUG`, `REFACTOR`, etc.) to the tree by adding them to the extension's tag list in your VS Code settings (see `todo-tree.general.tags`).
+- The extension will automatically show these in the tree view, let you jump to them, and highlight them in the editor.
+- See the extension wiki for advanced configuration (color, icon, grouping, etc.).
+
+**Example:**
+```markdown
+# Widget TODOs
+- [ ] TODO: Refactor widget loader
+- [ ] FIXME: Fix lightbox bug
+```
+
+Agents must follow these conventions for all new and updated todo/task files to ensure discoverability and navigation in VS Code. When using custom tags, document them in your workspace or extension settings for clarity.
+## Copilot instructions for McCal Media widgets workspace
 
 Purpose and scope
 
@@ -125,7 +146,7 @@ Good starting references
 - `src/site/app.js`  example data flow from manifests to UI.
 - `docs/standards/widget-reference.md` ⭐ **START HERE**: quick reference for widget development patterns.
 - `docs/standards/widget-standards.md`  comprehensive widget standards and architecture guide.
-- `docs/standards/widget-enhancements.md`  proven improvement patterns for widget optimization.
+- `docs/standards/widget-standards.md` and `docs/standards/widget-development.md`  proven improvement patterns and systematic methodology for widget optimization.
 - `docs/standards/widget-development.md`  comprehensive guide for applying enhancement patterns systematically.
 - `docs/standards/performance-standards.md` ⭐ **PERFORMANCE REFERENCE**: Lighthouse optimization standards using Concert Portfolio v4.6 as case study.
 - `docs/standards/image-seo-standards.md`  comprehensive guide for optimizing portfolio images for search engines and accessibility.

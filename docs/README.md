@@ -29,7 +29,7 @@ Project standards, conventions, and versioning:
 - `workspace-organization.md` - **Single source of truth for scripts folder structure, archival, workspace validation, and preflight/afterflight checklists**
 - `widget-reference.md` - Quick reference for widget development
 - `widget-standards.md` - Comprehensive widget standards guide
-- `widget-enhancements.md` - Proven widget improvement patterns
+- `widget-standards.md` - Proven widget improvement patterns and standards
 - `widget-development.md` - Systematic enhancement methodology
 - `seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 - `date-naming.md` - File and folder naming conventions
@@ -59,7 +59,7 @@ Archived documentation and completed project records:
 - **File naming**: `standards/date-naming.md`
 - **Version updates**: `standards/versioning.md`
 - **Widget development**: `standards/widget-reference.md` ⭐
-- **Widget enhancement**: `standards/widget-enhancements.md`
+- **Widget enhancement**: `standards/widget-standards.md` and `standards/widget-development.md`
 
 ### Development
 - **Automation scripts**: `automation/`

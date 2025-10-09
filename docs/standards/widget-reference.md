@@ -30,20 +30,22 @@ src/widgets/widget-name/
     └── v1.0.0-widget-name.html # Widget code
 ```
 
+
 ### CSS Variables ✅
 ```css
 :root {
-  --fg: #f5f5f5;          /* Text color */
-  --bg: #0a0a0a;          /* Background */
-  --line: #2a2a2a;        /* Borders */
-  --accent: #b8b8b8ff;      /* Interactive elements */
-  --published: #2e944cff;   /* Success indicators */
-}
-
-@media (prefers-color-scheme: light) {
-  :root { --fg: #0a0a0a; --bg: #fff; --line: #e5e5e5; }
+  /* See src/widgets/shared/theme.css for full variable list */
+  --mc-bg: #050506;           /* Base background (dark only) */
+  --mc-text: #f3f5f8;         /* Text color */
+  --mc-accent-black: #272423; /* Accent (business palette) */
+  --mc-accent-taupe: #B8B0AA; /* Accent (business palette) */
+  --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #B8B0AA 100%); /* Accent gradient */
 }
 ```
+
+> **Accent/Gradient System:**
+> - Use `--mc-accent-*` and `--mc-gradient-*` for highlights, chips, overlays, and accent lines only.
+> - Never use as base backgrounds. See `theme.css` and `widget-ui-colors-and-buttons.md` for details.
 
 ---
 
@@ -270,7 +272,7 @@ v2.0.0-redesigned-widget.html    # Major changes
 - **Content**: `podcast-feed/v1.1.html`
 
 ### Enhancement Patterns
-- **Proven improvements**: `docs/standards/widget-enhancements.md`
+- **Proven improvements**: `docs/standards/widget-standards.md`
 - **Systematic application**: `docs/standards/widget-development.md`
 
 ---

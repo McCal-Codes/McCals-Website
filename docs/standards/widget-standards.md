@@ -57,7 +57,17 @@ versions/
 
 ---
 
+
 ## 🎨 Visual Design Standards
+
+### Accent & Gradient System (2025-10-09)
+
+- All widgets must use the dark base palette for backgrounds and cards (see `src/widgets/shared/theme.css`).
+- The business palette is integrated as accent/gradient variables ONLY—never as base backgrounds.
+- Use `--mc-accent-*` and `--mc-gradient-*` variables for highlights, chips, overlays, and accent lines.
+- Do NOT use these as base backgrounds or for large surfaces.
+- For usage examples, see `docs/standards/widget-ui-colors-and-buttons.md` and the comment block in `theme.css`.
+- All widgets must remain dark mode by default. Light/dark toggle is a future enhancement.
 
 ### 1. **CSS Custom Properties (Variables)**
 Standardized color palette and design tokens:
@@ -86,6 +96,35 @@ Standardized color palette and design tokens:
   }
 }
 ```
+
+### 1a. **Accent Highlight Button (Minimal, Randomized)**
+For accent highlights (chips, callouts, or special buttons), use a dark base with a subtle accent border or shadow. To add variety, you can randomly select from the accent palette for the border or shadow, but keep the effect minimal and never use a full gradient background for buttons.
+
+**Example CSS:**
+```css
+.accent-highlight-btn {
+  background: var(--mc-accent-black);
+  color: var(--mc-accent-taupe);
+  border: 2px solid var(--mc-accent-dark); /* Default accent border */
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(95, 212, 240, 0.08); /* Subtle blue accent shadow */
+}
+.accent-highlight-btn:hover {
+  border-color: var(--mc-accent-slate); /* Or randomly pick: --mc-accent-stone, --mc-accent-taupe */
+  box-shadow: 0 4px 16px 0 rgba(184, 176, 170, 0.12); /* Subtle taupe accent shadow */
+  transform: translateY(-1px);
+}
+/* Optional: Add a JS snippet to randomize accent border/shadow on mount for extra variety */
+```
+
+> **Tip:** For a more dynamic effect, use JavaScript to randomly assign one of the accent border colors or shadow colors from the palette when the button is rendered. Always keep the effect subtle and minimal to maintain a professional look.
+
+> **Never** use the accent gradient as a button background. Use it only for chips, overlays, or accent lines.
 
 ### 2. **Typography Standards**
 Consistent font stacks and sizing:
@@ -540,7 +579,8 @@ See `src/widgets/podcast-feed/` for:
 ## 🔄 Continuous Improvement
 
 ### Enhancement Application Process
-1. **Reference**: Review `docs/standards/widget-enhancements.md`
+
+1. **Reference**: Review `docs/standards/widget-standards.md`, `widget-reference.md`, and `widget-development.md` for all enhancement patterns and best practices
 2. **Plan**: Create implementation plan for pattern application
 3. **Apply**: Implement patterns incrementally
 4. **Test**: Validate functionality and performance
