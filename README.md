@@ -1,3 +1,6 @@
+# TODO Auto-Checker System
+
+The workspace includes an automated TODO checker that marks checklist items as done based on commit message keywords or changed files. See `docs/standards/widget-standards.md` and `scripts/welcome.js` for configuration and details.
 # McCal Media ## AI Development Support
 
 This workspace includes comprehensive AI assistant instructions and validation tools:

@@ -19,6 +19,13 @@ Copilot may add `TODO:` or `FIXME:` tags in any writeup, code, or documentation 
 ```
 
 Agents must follow these conventions for all new and updated todo/task files to ensure discoverability and navigation in VS Code. When using custom tags, document them in your workspace or extension settings for clarity.
+
+**Special note for `updates/todo.md`:**
+- Only use explicit `TODO:` tags for changelog/code-related checklist items or those that must appear in the Todo Tree for code tracking.
+- General checklist items should not use `TODO:` tags unless they are important for code or changelog tracking.
+- For older or less-recent checklist items that should not appear in the Todo Tree, use an `IGNORE` or similar tag (and add it to your VS Code Todo Tree ignore list if needed).
+- If you add a `TODO:` in code (e.g., in a widget or script), you must also add a matching entry in `updates/todo.md` or, if completed, move it to a `done.md` or `finished.md` document for traceability.
+- This keeps the Todo Tree focused and avoids clutter from generic planning items, while ensuring all actionable TODOs are tracked and discoverable.
 ## Copilot instructions for McCal Media widgets workspace
 
 Purpose and scope

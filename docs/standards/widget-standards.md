@@ -1,3 +1,22 @@
+# TODO Auto-Checker: Keyword & Diff Heuristics (2025-10-09)
+
+The workspace auto-checker (see `scripts/welcome.js`) now supports:
+
+- **Keyword-based auto-checking**: If a commit message contains a configured keyword (e.g., `Close Button Optimization`), any TODO containing that phrase will be checked off automatically.
+- **File-diff-based auto-checking**: If a changed file matches a configured substring or path (e.g., `src/widgets/site-navigation/`), any TODO mentioning the mapped pattern (e.g., `Navigation Hiding pattern`) will be checked off.
+
+To add a new auto-check rule, update the `AUTO_CHECK_MAP` array in `scripts/welcome.js`:
+
+```js
+// Example:
+{ keyword: 'Close Button Optimization', todoMatch: 'Close Button Optimization' },
+{ file: 'src/widgets/site-navigation/', todoMatch: 'Navigation Hiding pattern' },
+```
+
+**Pinning the Welcome File:**
+To keep your dashboard visible, right-click the `updates/welcome.md` tab in VS Code and select **Pin**. It will always be there when you return!
+
+_See also: `updates/welcome.md` for the latest pinned tips and checklist status._
 # See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
 # Widget Standardization Guide
 

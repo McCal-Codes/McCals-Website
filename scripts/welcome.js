@@ -1,6 +1,34 @@
+
+/**
+ * Welcome Dashboard & TODO Auto-Checker
+ *
+ * Enhancements:
+ * - Supports keyword-based and file-diff-based auto-checking of TODOs.
+ * - To add a new keyword or file pattern, update the `AUTO_CHECK_MAP` below.
+ * - If a commit message contains a keyword, or a changed file matches a pattern, the corresponding TODO is checked off.
+ *
+ * Example:
+ *   'Close Button Optimization' keyword in commit message will check off any TODO containing that phrase.
+ *   'src/widgets/site-navigation/' in changed files will check off TODOs mentioning 'Navigation Hiding pattern'.
+ */
 const fs = require('fs');
 const cp = require('child_process');
 const path = require('path');
+// Map of keywords and file patterns to TODO substring triggers
+const AUTO_CHECK_MAP = [
+  // Keyword-based
+  { keyword: 'Close Button Optimization', todoMatch: 'Close Button Optimization' },
+  { keyword: 'Navigation Hiding pattern', todoMatch: 'Navigation Hiding pattern' },
+  { keyword: 'Filter Layout Fix', todoMatch: 'Filter Layout Fix' },
+  { keyword: 'Minimal Status Indicators', todoMatch: 'Minimal Status Indicators' },
+  { keyword: 'Version Indicator', todoMatch: 'Version Indicator' },
+  // File-diff-based
+  { file: 'src/widgets/site-navigation/', todoMatch: 'Navigation Hiding pattern' },
+  { file: 'src/widgets/photojournalism-portfolio/', todoMatch: 'Close Button Optimization' },
+  { file: 'src/widgets/podcast-feed/', todoMatch: 'version indicator pattern' },
+  { file: 'src/widgets/site-footer/', todoMatch: 'version indicator' },
+  // Add more as needed
+];
 
 const ROOT = process.cwd();
 const TODO = path.join(ROOT, 'updates', 'todo.md');
@@ -32,7 +60,8 @@ function parseChecklist(md) {
   return items;
 }
 
-function autoCheck(todoText, commitMsg) {
+
+function autoCheck(todoText, commitMsg, changedFiles = []) {
   // Flip to done if a todo line ends with "(done)" or mentions the short hash in parentheses
   // or if its leading phrase is contained in the last commit message.
   const lines = todoText.split(/\r?\n/);
@@ -55,15 +84,30 @@ function autoCheck(todoText, commitMsg) {
 
     // Heuristic: first 40 chars must appear in the commit message to auto-check
     const key = simplified(body).slice(0, 40);
-    if (key.length >= 10 && simplified(commitMsg).includes(key)) {
-      if (mark !== 'x' && mark !== 'X') {
-        lines[i] = `${prefix}[x]${gap}${body} (done)`;
-        changed = true;
+    let shouldCheck = key.length >= 10 && simplified(commitMsg).includes(key);
+
+    // Keyword-based auto-check
+    for (const rule of AUTO_CHECK_MAP) {
+      if (rule.keyword && commitMsg.toLowerCase().includes(rule.keyword.toLowerCase()) && body.toLowerCase().includes(rule.todoMatch.toLowerCase())) {
+        shouldCheck = true;
       }
+    }
+
+    // File-diff-based auto-check
+    for (const rule of AUTO_CHECK_MAP) {
+      if (rule.file && changedFiles.some(f => f.includes(rule.file)) && body.toLowerCase().includes(rule.todoMatch.toLowerCase())) {
+        shouldCheck = true;
+      }
+    }
+
+    if (shouldCheck && mark !== 'x' && mark !== 'X') {
+      lines[i] = `${prefix}[x]${gap}${body} (done)`;
+      changed = true;
     }
   }
   return { text: lines.join('\n'), changed };
 }
+
 
 function main() {
   // Git data
@@ -81,7 +125,7 @@ function main() {
     todo = '# TODO\n\n- [ ] Start adding tasks here.\n';
   }
 
-  const { text: maybeChecked, changed } = autoCheck(todo, lastMessage);
+  const { text: maybeChecked, changed } = autoCheck(todo, lastMessage, files);
   if (changed) write(TODO, maybeChecked);
   const items = parseChecklist(maybeChecked);
   const open = items.filter(i => !i.done).length;
@@ -115,6 +159,7 @@ function main() {
     '',
     '—',
     '_Tip: mark a line as done by adding `(done)` or `(done in <hash>)` at the end. The next open will auto-check it._',
+    '_Tip: To pin this file in VS Code, right-click the tab and select "Pin". It will always be visible when you return!_',
     ''
   ].join('\n');
 

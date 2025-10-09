@@ -1,61 +1,60 @@
 # Widget Enhancement To-Do (October 2025)
 
+
 Reference standards:
 - `docs/standards/preflight-afterflight.md`
 - `docs/standards/widget-standards.md`
-- `docs/standards/widget-standards.md` and `docs/standards/widget-development.md`
+- `docs/standards/widget-development.md`
 
 Follow portfolio -> podcast -> navigation -> footer priority.
 
 ## Preflight / Afterflight Anchors
-- [ ] Run `npm run ai:preflight:short` (or VS Code task) before edits to confirm context.
-- [ ] Confirm planned changes align with widget standards and enhancement patterns before touching code.
-- [ ] After each batch of edits, run targeted lint/tests if applicable and re-run preflight summary to capture updated guidance.
-- [ ] Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and related standards after completing implementation batches.
+- [ ] TODO: Run `npm run ai:preflight:short` (or VS Code task) before edits to confirm context.
+- [ ] TODO: Confirm planned changes align with widget standards and enhancement patterns before touching code.
+- [ ] TODO: After each batch of edits, run targeted lint/tests if applicable and re-run preflight summary to capture updated guidance.
+- [ ] TODO: Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and related standards after completing implementation batches.
 
 ## Performance Context - Concert Page Audit (Lighthouse 2025-10-06)
-- FCP 4.6 s, LCP 14.5 s, TBT 170 ms, Speed Index 7.7 s (Moto G Power, Slow 4G).
-- Primary issues: render-blocking Squarespace CSS/JS, 3.9 MB of oversized GitHub-hosted images, short cache TTLs, legacy JS payloads.
-- Action items:
-  - Inline or defer non-critical CSS/JS within widgets; lean on critical CSS model to offset Squarespace assets.
-  - Implement responsive image sizing, compression, and format upgrades (WebP/AVIF) for gallery content.
-  - Ensure widget-delivered assets ship with aggressive caching headers when feasible.
-  - Avoid legacy polyfills in custom scripts; rely on modern browser targets.
+- [ ] TODO: Review FCP/LCP/TBT/Speed Index metrics and address primary issues: render-blocking Squarespace CSS/JS, oversized images, cache TTLs, legacy JS payloads.
+- [ ] TODO: Inline or defer non-critical CSS/JS within widgets; lean on critical CSS model to offset Squarespace assets.
+- [ ] TODO: Implement responsive image sizing, compression, and format upgrades (WebP/AVIF) for gallery content.
+- [ ] TODO: Ensure widget-delivered assets ship with aggressive caching headers when feasible.
+- [ ] TODO: Avoid legacy polyfills in custom scripts; rely on modern browser targets.
 
 ## Priority 1 - Photojournalism Portfolio v5.0 (`src/widgets/photojournalism-portfolio/versions/v5.0-performance-optimized.html`)
-- [ ] Apply **Close Button Optimization**: adopt `max(24px, env(safe-area-inset-*)))` spacing and backdrop blur per enhancement pattern section 1.
-- [ ] Implement **Navigation Hiding** pattern so fullscreen/lightbox mode suppresses site nav/footer.
-- [ ] Verify **Filter Layout Fix**: ensure filtered cards use `display:none` with no masonry gaps and review dataset attributes.
-- [ ] Align **Minimal Status Indicators** styling to shared badge specs (size, opacity, blur).
-- [ ] Standardize **Version Indicator** near heading using widget standards typography.
-- [ ] Audit deferred feature loading (`requestIdleCallback`) and structured data against performance checklist.
-- [ ] Document resulting adjustments in widget README and enhancement doc once shipped.
+- [ ] TODO: Apply Close Button Optimization: adopt `max(24px, env(safe-area-inset-*)))` spacing and backdrop blur per enhancement pattern section 1.
+- [ ] TODO: Implement Navigation Hiding pattern so fullscreen/lightbox mode suppresses site nav/footer.
+- [ ] TODO: Verify Filter Layout Fix: ensure filtered cards use `display:none` with no masonry gaps and review dataset attributes.
+- [ ] TODO: Align Minimal Status Indicators styling to shared badge specs (size, opacity, blur).
+- [ ] TODO: Standardize Version Indicator near heading using widget standards typography.
+- [ ] TODO: Audit deferred feature loading (`requestIdleCallback`) and structured data against performance checklist.
+- [ ] TODO: Document resulting adjustments in widget README and enhancement doc once shipped.
 
 ## Priority 2 - Podcast Feed v2.0 (`src/widgets/podcast-feed/versions/v2.0-performance-optimized.html`)
-- [ ] Replace corrupted icon text (e.g., button labels) with accessible inline SVG or ASCII labels.
-- [ ] Ensure call-to-action buttons meet enhancement typography/spacing standards.
-- [ ] Add minimal status / episode badges if relevant (published, featured) following enhancement pattern section 3.
-- [ ] Review lazy-loading strategy for audio/debug features; confirm alignment with performance stack (requestIdleCallback, async scripts).
-- [ ] Introduce version indicator pattern if missing and cross-check structured data output.
-- [ ] Update widget README/changelog after functional improvements.
+- [ ] TODO: Replace corrupted icon text (e.g., button labels) with accessible inline SVG or ASCII labels.
+- [ ] TODO: Ensure call-to-action buttons meet enhancement typography/spacing standards.
+- [ ] TODO: Add minimal status / episode badges if relevant (published, featured) following enhancement pattern section 3.
+- [ ] TODO: Review lazy-loading strategy for audio/debug features; confirm alignment with performance stack (requestIdleCallback, async scripts).
+- [ ] TODO: Introduce version indicator pattern if missing and cross-check structured data output.
+- [ ] TODO: Update widget README/changelog after functional improvements.
 
 ## Priority 3 - Site Navigation v1.7.0 (`src/widgets/site-navigation/versions/v1.7.0-performance-optimized.html`)
-- [ ] Review glassmorphism variables vs. standards (consistent color tokens, hover states).
-- [ ] Confirm responsive breakpoints and mobile drawer align with navigation enhancement guidance (keyboard support, focus states).
-- [ ] Add/version indicator badge within nav heading container per standards doc.
-- [ ] Evaluate deferred analytics/debug loading for performance compliance.
-- [ ] Prepare documentation updates reflecting navigation refinements.
+- [ ] TODO: Review glassmorphism variables vs. standards (consistent color tokens, hover states).
+- [ ] TODO: Confirm responsive breakpoints and mobile drawer align with navigation enhancement guidance (keyboard support, focus states).
+- [ ] TODO: Add/version indicator badge within nav heading container per standards doc.
+- [ ] TODO: Evaluate deferred analytics/debug loading for performance compliance.
+- [ ] TODO: Prepare documentation updates reflecting navigation refinements.
 
 ## Priority 4 - Site Footer v1.3.0 (`src/widgets/site-footer/versions/v1.3.0-performance-optimized.html`)
-- [ ] Normalize typography, button, and link spacing with current standards.
-- [ ] Ensure newsletter form accessibility (labels, focus styles) and safe-area spacing for any fixed elements.
-- [ ] Add version indicator + changelog hook in footer heading per standards.
-- [ ] Validate structured data snippet and lazy-loaded features follow enhancement stack.
+- [ ] TODO: Normalize typography, button, and link spacing with current standards.
+- [ ] TODO: Ensure newsletter form accessibility (labels, focus styles) and safe-area spacing for any fixed elements.
+- [ ] TODO: Add version indicator + changelog hook in footer heading per standards.
+- [ ] TODO: Validate structured data snippet and lazy-loaded features follow enhancement stack.
 
 ## Cross-Cutting Tasks
-- [ ] `scripts/utils/ai-instructions-preflight.js`: update to reflect new bullet points or icons once widget changes land; verify console output remains ASCII-only.
-- [ ] `docs/standards/widget-standards.md`: incorporate any newly adopted patterns or revisions.
-- [ ] `docs/standards/widget-standards.md`: append details on portfolio/podcast/nav/footer refinements after implementation.
+- [ ] Update `scripts/utils/ai-instructions-preflight.js` to reflect new bullet points or icons once widget changes land; verify console output remains ASCII-only.
+- [ ] Update `docs/standards/widget-standards.md` to incorporate any newly adopted patterns or revisions. <!-- Only use TODO: tags for changelog/code-related items for tree compatibility -->
+- [ ] Append details on portfolio/podcast/nav/footer refinements to `docs/standards/widget-standards.md` after implementation.
 - [ ] Re-run afterflight checklist (`docs/standards/preflight-afterflight.md`) before final hand-off.
 
 _Last updated: 2025-10-06_
