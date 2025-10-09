@@ -6,6 +6,13 @@
 - Added pinning tip to `updates/welcome.md` for persistent dashboard visibility in VS Code.
 # Changelog
 
+## 2025-10-09
+### Journalism Portfolio Widget v5.1 (Work in Progress)
+- Extracted all widget JavaScript to an external file (`journalism-widget-v5.1.js`) for CSP/DOMPurify compatibility and Squarespace embedding.
+- Updated widget HTML to reference the external JS file via `<script src="...">` (user must update to public URL for production).
+- Documented the CSP/DOMPurify issue and provided migration steps for external JS hosting.
+- Widget remains marked as **Work in Progress**: lightbox and event listeners require verification in production Squarespace/CSP environments.
+
 <!-- ...existing code... -->
 
 ## [1.6.2] - Unreleased
