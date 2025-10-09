@@ -1,3 +1,20 @@
+
+/*
+  McCal Media Widget Theme — Accent & Gradient System (2025-10-09)
+  ---------------------------------------------------------------
+  This theme uses a dark base palette for backgrounds and cards.
+  The business palette is integrated as accent/gradient variables ONLY —
+  never as base backgrounds. For standards, see:
+    docs/standards/widget-ui-colors-and-buttons.md
+
+  Usage:
+    - Use --mc-accent-* variables for highlights, buttons, chips, borders, and gradients.
+    - Do NOT use these as base backgrounds or for large surfaces.
+    - Gradients: Use --mc-gradient-* for overlays, chips, or accent lines.
+    - All widgets must remain dark mode by default.
+    - For accessibility, ensure contrast with --mc-text or --mc-muted.
+*/
+
 :root {
   --mc-font: "Neue Haas Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mc-bg: #050506;
@@ -12,6 +29,18 @@
   --mc-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
   --mc-chip-bg: rgba(255, 255, 255, 0.06);
   --mc-chip-border: rgba(255, 255, 255, 0.12);
+
+  /* Business palette accents (for highlights/gradients only) */
+  --mc-accent-black: #272423;
+  --mc-accent-dark: #302C2C;
+  --mc-accent-slate: #363230;
+  --mc-accent-stone: #5B5553;
+  --mc-accent-taupe: #B8B0AA;
+
+  /* Accent gradients (for overlays, chips, lines) */
+  --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #B8B0AA 100%);
+  --mc-gradient-stone: linear-gradient(90deg, #5B5553 0%, #B8B0AA 100%);
+  --mc-gradient-slate: linear-gradient(90deg, #363230 0%, #5B5553 100%);
 }
 
 .mc-portfolio {

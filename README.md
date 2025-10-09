@@ -20,11 +20,20 @@ Run after making changes to ensure workspace health and documentation:
 ### Agent Responsibilities
 - **Always read instructions first** when starting sessions
 - **Update instructions** when discovering new patterns or workflows  
-- **Add entries to Recent updates** section for significant changeslopment Workspace
+- **Add entries to Recent updates** section for significant changes in the Development Workspace
 
 > **Version 2.4.0** — Squarespace widget development and testing environment
 
 This repository is primarily a **development workspace for Squarespace widgets**, containing reusable web components that embed into your Squarespace site. The standalone site is used only for testing widgets before deployment to Squarespace.
+
+
+## 📝 Important Notes
+
+Critical repository events, security incidents, and recovery steps are documented in [docs/important-notes/](docs/important-notes/).
+
+**Latest:** [2025-10-09-secret-removal.md](docs/important-notes/2025-10-09-secret-removal.md) — Google Cloud service account secret removal and repository history rewrite. All collaborators must re-clone the repository.
+
+---
 
 ## 🆕 Recent Updates (October 2025)
 
@@ -191,7 +200,7 @@ When making significant changes:
 3. Update this README for major structural changes
 4. Add entries to `CHANGELOG.md`
 5. Run `npm run ai:preflight` to validate structure
-6. For widget improvements, reference `docs/standards/widget-enhancements.md`
+6. For widget improvements, reference `docs/standards/widget-standards.md` and `docs/standards/widget-development.md`
 
 ### Getting Help
 - 📖 **Documentation**: [docs/README.md](docs/README.md) - Comprehensive guides

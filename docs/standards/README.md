@@ -13,8 +13,8 @@ Lighthouse optimization guide using Concert Portfolio v4.6 as case study. **Requ
 ### 📖 **widget-standards.md**
 Comprehensive widget standards documentation covering architecture, design patterns, performance, and accessibility requirements.
 
-### 🎯 **widget-enhancements.md**
-Catalog of proven UX and technical improvements extracted from successful widget optimizations (photojournalism v4.4-v4.8).
+### � **widget-standards.md**
+Comprehensive widget standards, proven UX and technical improvements, and best practices for all widgets. All enhancement patterns are now integrated here.
 
 ### 🔄 **widget-development.md**
 Systematic methodology for applying enhancement patterns across widgets with implementation checklists and quality standards.
@@ -43,7 +43,7 @@ Semantic versioning guidelines for widgets, manifests, and repository components
 3. **Follow**: Repository versioning from `versioning.md`
 
 ### For Widget Enhancement  
-1. **Review**: `widget-enhancements.md` (proven improvements)
+1. **Review**: `widget-standards.md` (proven improvements)
 2. **Apply**: `widget-development.md` (systematic process)
 3. **Test**: Validate with existing standards
 
