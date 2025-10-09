@@ -13,6 +13,16 @@
 - Documented the CSP/DOMPurify issue and provided migration steps for external JS hosting.
 - Widget remains marked as **Work in Progress**: lightbox and event listeners require verification in production Squarespace/CSP environments.
 
+### Journalism Portfolio Widget v5.2 — 2025-10-09
+- UI: Glass-like filter buttons with subtle outline and backdrop blur for better separation from page backgrounds.
+- Behavior: Randomized selection using Fisher–Yates; widget now displays one main shuffled image per album (no duplicates) and reshuffles on each load. Added an adjacency minimizer and constrained shuffle to avoid same-folder clustering.
+- Data & organization: Events that live in an `Events` folder (and items matching "rooney") are excluded from this Photojournalism feed so they belong to the Event portfolio instead.
+- Filters: Removed per-category filters — the widget now exposes only "All" and "Published" filters to simplify navigation.
+- Theming: Published accent switched to a muted green (`--published: #5fb189`) with a stronger hover variant (`--published-strong: #3f8f6d`).
+- Config: Honor the root `data-panes` attribute (clamped between 4 and 48) to control how many cards are shown.
+- Content: Subheading updated to note the portfolio currently contains political work only; more journalism will be added over time.
+- Files: Changes applied to `src/widgets/photojournalism-portfolio/versions/v5.2-performance-optimized.html` and validated with the workspace HTML validator.
+
 <!-- ...existing code... -->
 
 ## [1.6.2] - Unreleased
