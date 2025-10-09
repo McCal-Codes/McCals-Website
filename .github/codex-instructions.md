@@ -59,6 +59,7 @@ PR/Docs discipline
 
 Recent updates
 
+- 2025-10-09T17:15:26.710Z — Close Button Optimization and Navigation Hiding pattern implemented
 - 2025-10-06T23:41:05.929Z — Session complete: minor updates.
 - 2025-10-06T23:40:47.795Z — Created comprehensive SEO starter guide document tailored for McCal Media's Squarespace implementation, covering site structure, titles/meta descriptions, image optimization, structured data, internal linking, and technical hygiene. Added to docs/standards/ and updated main README and CHANGELOG.
 - 2025-10-06T21:59:34.422Z — Fixed concert portfolio widget v4.6 image loading and layout issues. Updated CSS to use responsive column-width layout with overlay info styling, matching journalism widget patterns. Images now load properly in masonry-style grid with smooth transitions and loading animations.

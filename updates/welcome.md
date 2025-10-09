@@ -1,20 +1,19 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `81a58bf5` — 30 minutes ago
-> chore: Update widget standards and documentation for accent/gradient system
+**Last commit**: `cad5dc55` — 5 minutes ago
+> feat: Enhance TODO auto-checker with keyword and file-diff heuristics; update documentation and changelog
 ## 🔄 Changes in last commit
+- .github/chatmodes/Debugging.chatmode.md
 - .github/copilot-instructions.md
+- CHANGELOG.md
 - README.md
-- docs/README.md
-- docs/important-notes/2025-10-09-secret-removal.md
-- docs/important-notes/widget-enhancement-todo.md
-- docs/standards/README.md
-- docs/standards/archive/widget-enhancements.md
-- docs/standards/widget-development.md
-- docs/standards/widget-enhancement-todo.md
-- docs/standards/widget-enhancements.md
-- docs/standards/widget-reference.md
+- docs/CHANGELOG.md
 - docs/standards/widget-standards.md
-- …and 9 more
+- package.json
+- scripts/.welcome-state.json
+- scripts/welcome.js
+- updates/todo-archive-2025-10-09.md
+- updates/todo.md
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **35** | Done: **0**
 ## 🎯 Today’s focus (from `updates/todo.md`)
