@@ -1,3 +1,7 @@
+
+## 2025-10-09
+- Documented new TODO auto-checker system (keyword/diff heuristics) in `widget-standards.md`.
+- Added pinning tip for `updates/welcome.md`.
 # Changelog — McCal Media Repository
 
 This changelog tracks repository-level changes. Individual widgets maintain their own changelogs.
