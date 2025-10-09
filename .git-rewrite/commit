@@ -1,6 +1,22 @@
-tree adb480a2842a45d22db5c881d3efb72bb122dddd
-parent 63ea86bf4efd2d605b475b14b83b6036bc7ec4f7
-author McCal Codes <175259256+McCal-Codes@users.noreply.github.com> 1758937948 -0400
-committer McCal Codes <175259256+McCal-Codes@users.noreply.github.com> 1758937948 -0400
+tree 64fc5b5ea3acb1b7bf897ea628f0f7c4751f73f6
+author McCal-Codes <business@mcc-cal.com> 1723862123 -0400
+committer GitHub <noreply@github.com> 1723862123 -0400
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJmwAxrCRC1aQ7uu5UhlAAATAIQAD5kflYapYyi+3xDd61aoT65
+ btHY1UsvMgpyAjRld3PXmeNzzoEnOsFXYVGG4JAomZIYlwyb8TDHHQ6xTzNcuwAj
+ qLxYeEpcD+LgjgCCXYufAfJyVRdpPwJn0qkBPKZhX6CDiXrWg7nnL/A01JkGWQA1
+ vDmV5kKZ/srmY/o+876YkngqejtY00Lvxf/JrRIYeiG85m7B4AyySBCQ2sOjPdX4
+ TrvjvWuhuK9Zmb5DYGNQ11Maalmtm0PUYmTRX8ylymD/V13SBScsbFkXbUtF/16D
+ kBxFK+J720Ss7jlOf8pGanDgzwmoSsrQ2uNRFUj5jjCCivpJ8DcAMMeVKnqcmNIM
+ CFQ01uCmBUdOZV5yYDCt49+JJ70+umYnpdoFAiaBgBTDEsr81qkrJMJBBMK4NJ+U
+ eMLaufTAqdmWB7eeUCvcLG80Torz6p0vZBLDr8OcBEpEtNTisfrMzR/6Bc3uaB0p
+ SDSRDWaTZDgmTr3UsGBb3g0sdK4lsl40v8XOWJ27Nqxi+11eBVNuD4p6YgWfA2Ut
+ YRtE3wizkBHCGd5TV1yb/jMO0ikpwJery3JiJp3SOEHxXXxQn8MNjIHB6qMHppiq
+ AdZyVz6OTuKS3gA2CBGEvNV8SquxU10v3JQa073UD0luycVMOLULLdShL0NLa36i
+ VBRAHC71xXc+EhNpCyRE
+ =KVMt
+ -----END PGP SIGNATURE-----
+ 
 
-Docs: Update versioning guidelines and add widget unification todo
+Initial commit
