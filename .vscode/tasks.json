@@ -1,7 +1,21 @@
 {
-  // AI preflight and helper tasks
+  // AI preflight, helper, and onboarding tasks
   "version": "2.0.0",
   "tasks": [
+    // Welcome/onboarding
+    {
+      "label": "Welcome: Show Welcome Message",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "welcome"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    // AI preflight tasks
     {
       "label": "AI: Preflight (short)",
       "type": "shell",
@@ -34,8 +48,8 @@
         "reveal": "always",
         "panel": "shared"
       }
-    }
-    ,
+  },
+    // AI finalize
     {
       "label": "AI: Finalize (prompt)",
       "type": "shell",

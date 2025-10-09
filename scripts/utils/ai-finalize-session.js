@@ -21,6 +21,8 @@ const INSTRUCTIONS = [
 const CHANGELOG = path.join(ROOT, 'CHANGELOG.md');
 const PKG = path.join(ROOT, 'package.json');
 
+
+const autoCheck = require('./auto-check-todo.js');
 const args = process.argv.slice(2);
 function argVal(name) {
   const i = args.indexOf(name);
@@ -28,6 +30,8 @@ function argVal(name) {
 }
 const summary = argVal('--summary') || 'Session complete.';
 const bump = argVal('--bump'); // patch|minor|major|none
+const commitMsg = argVal('--commit') || summary;
+const changedFiles = argVal('--changed') ? argVal('--changed').split(',') : [];
 
 function bumpSemver(v, type) {
   const [major, minor, patch] = v.split('.').map(Number);
@@ -104,7 +108,12 @@ function bumpPackageVersion() {
   }
 }
 
+
 function main() {
+  // Auto-check TODOs in updates/todo.md if commitMsg or changedFiles are present
+  if (commitMsg || changedFiles.length) {
+    autoCheck.autoCheckTodos({ commitMsg, changedFiles });
+  }
   INSTRUCTIONS.forEach(f => appendRecentUpdate(f));
   updateChangelog();
   bumpPackageVersion();

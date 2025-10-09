@@ -49,6 +49,7 @@
 - 2025-10-06: AI session — Fixed concert portfolio widget v4.6 image loading and layout issues. Updated CSS to use responsive column-width layout with overlay info styling, matching journalism widget patterns. Images now load properly in masonry-style grid with smooth transitions and loading animations.
 - 2025-10-06: AI session — Created comprehensive SEO starter guide document tailored for McCal Media's Squarespace implementation, covering site structure, titles/meta descriptions, image optimization, structured data, internal linking, and technical hygiene. Added to docs/standards/ and updated main README and CHANGELOG.
 - 2025-10-06: AI session — Session complete: minor updates.
+- 2025-10-09: AI session — Close Button Optimization and Navigation Hiding pattern implemented
 ## 1.5.0 — 2025-09-29
 - Added unified-portfolio-demo.html (master demo with ?type= and ?manifest=).
 - Links to unified versions for Concert, Event, and Photojournalism.

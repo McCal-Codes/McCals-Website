@@ -131,7 +131,7 @@ function main() {
   const open = items.filter(i => !i.done).length;
   const done = items.filter(i => i.done).length;
 
-  // Cozy welcome
+  // Cozy welcome (markdown)
   const header = [
     '# 👋 Welcome back, McCal!',
     '',
@@ -164,6 +164,24 @@ function main() {
   ].join('\n');
 
   write(WELCOME, `${header}\n\n${agenda}${footer}`);
+
+  // Terminal summary (concise, readable)
+  const termHeader = `\n👋 Welcome back, McCal!\nLast commit: ${lastHash || '—'} — ${when}`;
+  const termMsg = lastMessage ? `> ${lastMessage.split('\n').map(s => s.trim()).filter(Boolean)[0]}` : '';
+  const termFiles = files.length ? files.slice(0, 6).map(f => `- ${f}`).join('\n') : '- No file changes detected.';
+  const termFilesMore = files.length > 6 ? `- …and ${files.length - 6} more` : '';
+  const termChecklist = `Checklist: Open ${open} | Done ${done}`;
+  // Only show first 3 priorities for brevity
+  const termAgenda = maybeChecked
+    .split(/\n(?=## )/g)
+    .filter(s => /^## Priority [1-3]/.test(s))
+    .map(s => {
+      const lines = s.split('\n');
+      return `${lines[0]}\n  ${lines.slice(1, 5).map(l => l.replace(/^- \[.\] /, '').replace(/^\s+/, '')).join('\n  ')}`;
+    })
+    .join('\n\n');
+  const termFooter = '\n—\n(Tip: See updates/welcome.md for full dashboard)\n';
+  console.log([termHeader, termMsg, '', 'Files changed:', termFiles, termFilesMore, '', termChecklist, '', 'Today’s focus:', termAgenda, termFooter].filter(Boolean).join('\n'));
 
   // Save state
   write(STATE, JSON.stringify({ lastHash, lastMessage }, null, 2));
