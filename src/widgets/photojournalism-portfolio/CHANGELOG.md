@@ -2,6 +2,15 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v5.2 (2025-10-09) — Glass Buttons & One Image Per Album ✨
+- UI: Glass-like filter buttons with subtle outline and backdrop blur for better separation from page backgrounds.
+- Behavior: Randomized selection using Fisher-Yates; widget now displays one main shuffled image per album (no duplicates) and reshuffles on each load. Added an adjacency minimizer and constrained shuffle to avoid same-folder clustering.
+- Data & organization: Events that live in an `Events` folder (and items matching "rooney") are excluded from this Photojournalism feed so they belong to the Event portfolio instead.
+- Filters: Removed per-category filters — the widget now exposes only "All" and "Published" filters to simplify navigation.
+- Theming: Published accent switched to a muted green (`--published: #5fb189`) with a stronger hover variant (`--published-strong: #3f8f6d`).
+- Config: Honor the root `data-panes` attribute (clamped between 4 and 48) to control how many cards are shown.
+- Content: Subheading updated to note the portfolio currently contains political work only; more journalism will be added over time.
+
 ## v5.1 (WIP) - Performance Optimization Preview
 - STATUS: Work in progress; keep using v4.9 for production embeds
 - NEW: Critical CSS inlined with deferred non-critical stylesheet loading

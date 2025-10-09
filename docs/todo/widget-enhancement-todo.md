@@ -22,22 +22,25 @@ Follow portfolio -> podcast -> navigation -> footer priority.
   - Ensure widget-delivered assets ship with aggressive caching headers when feasible.
   - Avoid legacy polyfills in custom scripts; rely on modern browser targets.
 
-## Priority 1 - Photojournalism Portfolio v5.0 (`src/widgets/photojournalism-portfolio/versions/v5.0-performance-optimized.html`)
-- [ ] Apply **Close Button Optimization**: adopt `max(24px, env(safe-area-inset-*)))` spacing and backdrop blur per enhancement pattern section 1.
-- [ ] Implement **Navigation Hiding** pattern so fullscreen/lightbox mode suppresses site nav/footer.
-- [ ] Verify **Filter Layout Fix**: ensure filtered cards use `display:none` with no masonry gaps and review dataset attributes.
-- [ ] Align **Minimal Status Indicators** styling to shared badge specs (size, opacity, blur).
-- [ ] Standardize **Version Indicator** near heading using widget standards typography.
-- [ ] Audit deferred feature loading (`requestIdleCallback`) and structured data against performance checklist.
-- [ ] Document resulting adjustments in widget README and enhancement doc once shipped.
+## Priority 1 - Photojournalism Portfolio v5.2 (`src/widgets/photojournalism-portfolio/versions/v5.2-performance-optimized.html`) ✅ COMPLETE
+- [x] **Glass-like filter buttons** with backdrop blur and subtle outlines
+- [x] **Fisher-Yates shuffle** for true randomization with one image per album
+- [x] **Adjacency minimization** to avoid same-folder clustering
+- [x] **Excluded Events folder and Rooney events** from photojournalism feed
+- [x] **Simplified filters** to "All" and "Published" only
+- [x] **Muted green Published accent** (`#5fb189` → `#3f8f6d`)
+- [x] **Updated subheading** for political work focus
+- [x] **Added comprehensive changelog entries** to widget CHANGELOG.md and internal modal
+- [x] **HTML validation passed** and production-ready
 
-## Priority 2 - Podcast Feed v2.0 (`src/widgets/podcast-feed/versions/v2.0-performance-optimized.html`)
-- [ ] Replace corrupted icon text (e.g., button labels) with accessible inline SVG or ASCII labels.
-- [ ] Ensure call-to-action buttons meet enhancement typography/spacing standards.
-- [ ] Add minimal status / episode badges if relevant (published, featured) following enhancement pattern section 3.
-- [ ] Review lazy-loading strategy for audio/debug features; confirm alignment with performance stack (requestIdleCallback, async scripts).
-- [ ] Introduce version indicator pattern if missing and cross-check structured data output.
-- [ ] Update widget README/changelog after functional improvements.
+## Priority 2 - Podcast Feed v2.0 (`src/widgets/podcast-feed/versions/v2.0-performance-optimized.html`) 🎯 NEXT
+- [ ] Add **sponsorship tab** with dedicated sponsorship content section
+- [ ] Replace corrupted icon text (e.g., button labels) with accessible inline SVG or ASCII labels
+- [ ] Ensure call-to-action buttons meet enhancement typography/spacing standards
+- [ ] Add minimal status / episode badges if relevant (published, featured, sponsored) following enhancement pattern section 3
+- [ ] Review lazy-loading strategy for audio/debug features; confirm alignment with performance stack (requestIdleCallback, async scripts)
+- [ ] Introduce version indicator pattern if missing and cross-check structured data output
+- [ ] Update widget README/changelog after functional improvements
 
 ## Priority 3 - Site Navigation v1.7.0 (`src/widgets/site-navigation/versions/v1.7.0-performance-optimized.html`)
 - [ ] Review glassmorphism variables vs. standards (consistent color tokens, hover states).
@@ -58,4 +61,4 @@ Follow portfolio -> podcast -> navigation -> footer priority.
 - [ ] `docs/standards/widget-standards.md`: append details on portfolio/podcast/nav/footer refinements after implementation.
 - [ ] Re-run afterflight checklist (`docs/standards/preflight-afterflight.md`) before final hand-off.
 
-_Last updated: 2025-10-06_
+_Last updated: 2025-10-09_
