@@ -1,4 +1,7 @@
 
+## 2025-10-10
+- Nature Manifest Generator v2.0: Now supports all animal types under Wildlife, auto-generates per-species manifest.json files tagged with animal type, and aggregates all collections into nature-manifest.json. Documentation and workflow updated.
+
 ## 2025-10-09
 - Documented new TODO auto-checker system (keyword/diff heuristics) in `widget-standards.md`.
 - Added pinning tip for `updates/welcome.md`.

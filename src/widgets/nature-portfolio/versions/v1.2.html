@@ -90,16 +90,161 @@
 </div>
 
 <script>
-(()=>{const root=document.getElementById('natureWidget');if(!root) return;const grid=document.getElementById('natureGrid');const loading=document.getElementById('natureLoading');const metaCount=document.getElementById('natureMetaCount');const metaUpdated=document.getElementById('natureMetaUpdated');const metaSource=document.getElementById('natureMetaSource');const lb=document.getElementById('natureLightbox');const lbDialog=lb.querySelector('.nl-dialog');const lbGallery=document.getElementById('nlGallery');const lbTitle=document.getElementById('nlTitle');const lbMeta=document.getElementById('nlMeta');const lbClose=lb.querySelector('.nl-close');const TARGET=Math.max(1,parseInt(root.dataset.panes||'12',10));const GH={owner:'McCal-Codes',repo:'McCals-Website',branch:'main'};const RAW=`https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;const MANIFEST_PATH='src/images/Portfolios/Nature/nature-manifest.json';const CACHE_KEY='nature-v1.2-cache';const CACHE_MS=10*60*1000;function now(){return Date.now();}
-function readCache(){try{const raw=localStorage.getItem(CACHE_KEY);if(!raw) return null;const data=JSON.parse(raw);if(now()-data.t > CACHE_MS) return null;return data.m;}catch{return null;}}
-function writeCache(m){try{localStorage.setItem(CACHE_KEY,JSON.stringify({m,t:now()}));}catch{}}
-async function fetchManifest(force){if(!force){const c=readCache();if(c) return c;}const r=await fetch(RAW+MANIFEST_PATH,{cache:'no-store'});if(!r.ok) throw new Error('HTTP '+r.status);const j=await r.json();writeCache(j);return j;}
-function parseDate(col){const iso=col.captureDate?.iso||col.dateISO||null;let val=0;if(iso){const p=Date.parse(iso.replace(/\//g,'-'));if(!Number.isNaN(p)) val=p;}const disp=col.dateDisplay||col.captureDate?.display|| (iso? new Date(val).toLocaleDateString(undefined,{year:'numeric',month:'long'}):'');return {iso:iso||null,value:val,display:disp};}
-function buildItems(man){const raw=Array.isArray(man?.collections)?man.collections:[];const items=raw.map((c,i)=>{const parts=String(c.folderPath||'').split('/').filter(Boolean);if(!parts.length) return null;const imgs=Array.isArray(c.images)?c.images.filter(Boolean):[];if(!imgs.length) return null;const d=parseDate(c);const title=String(c.collectionName||parts[parts.length-1]||`Collection ${i+1}`).trim();const tags=Array.isArray(c.tags)?c.tags.filter(Boolean):[];if(!tags.some(t=>/nature/i.test(t))) tags.unshift('Nature');return {title,parts,images:imgs,cover:imgs[0],dateDisplay:d.display,dateValue:d.value};}).filter(Boolean);items.sort((a,b)=>b.dateValue-a.dateValue);return items.slice(0,TARGET);} 
-function imageUrl(item,file){return RAW+'src/images/Portfolios/Nature/'+item.parts.map(encodeURIComponent).join('/')+'/'+encodeURIComponent(file);}
-function render(items,manifest){if(!items.length){grid.innerHTML='<div class="nature-empty">No nature collections found.</div>';grid.hidden=false;return;}const frag=document.createDocumentFragment();items.forEach((it,idx)=>{const card=document.createElement('article');card.className='nature-card loading';card.tabIndex=0;const img=document.createElement('img');img.alt=it.title;const info=document.createElement('div');info.className='nature-info';const h=document.createElement('h3');h.className='nature-title';h.textContent=it.title;info.appendChild(h);if(it.dateDisplay){const m=document.createElement('p');m.className='nature-meta';m.textContent=it.dateDisplay;info.appendChild(m);}const tagsWrap=document.createElement('div');tagsWrap.className='nature-tags';const tg=document.createElement('span');tg.className='nature-tag nature-tag-primary';tg.textContent='Nature';tagsWrap.appendChild(tg);info.appendChild(tagsWrap);card.appendChild(img);card.appendChild(info);frag.appendChild(card);function open(){openLightbox(it);}card.addEventListener('click',open);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});setTimeout(()=>{const src=imageUrl(it,it.cover);const probe=new Image();probe.onload=()=>{img.src=src;card.classList.remove('loading');card.classList.add('loaded');};probe.onerror=()=>{card.classList.remove('loading');card.classList.add('error');};probe.src=src;}, idx*90);});grid.innerHTML='';grid.appendChild(frag);grid.hidden=false;grid.classList.add('loaded');metaCount.textContent=items.length.toString().padStart(2,'0');metaUpdated.textContent=new Date().toLocaleDateString();metaSource.textContent='Nature Manifest';}
-function openLightbox(item){lbGallery.innerHTML='<div class="nl-hint">Scroll to explore</div>';item.images.forEach(f=>{const im=document.createElement('img');im.alt=item.title+' nature photo';im.className='loading';im.src=imageUrl(item,f);im.onload=()=>{im.classList.remove('loading');im.classList.add('loaded');};lbGallery.appendChild(im);});lbTitle.textContent=item.title;lbMeta.textContent=[item.dateDisplay,`${item.images.length} photos`].filter(Boolean).join(' – ');lb.classList.add('is-open');lb.setAttribute('aria-hidden','false');document.documentElement.classList.add('lb-open');lbDialog.focus();const hint=lbGallery.querySelector('.nl-hint');if(hint && item.images.length>1){setTimeout(()=>hint.classList.add('fade'),3000);} }
-function close(){lb.classList.remove('is-open');lb.setAttribute('aria-hidden','true');document.documentElement.classList.remove('lb-open');}
-lbClose.addEventListener('click',close);lb.addEventListener('click',e=>{if(e.target===lb) close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('is-open')){e.preventDefault();close();}});
-fetchManifest(false).then(m=>{const items=buildItems(m);render(items,m);}).catch(err=>{loading.innerHTML='<div class="nature-error">Failed to load nature collections: '+err.message+'</div>';});})();
+(()=>{
+  const root=document.getElementById('natureWidget');if(!root) return;
+  const grid=document.getElementById('natureGrid');
+  const loading=document.getElementById('natureLoading');
+  const metaCount=document.getElementById('natureMetaCount');
+  const metaUpdated=document.getElementById('natureMetaUpdated');
+  const metaSource=document.getElementById('natureMetaSource');
+  const lb=document.getElementById('natureLightbox');
+  const lbDialog=lb.querySelector('.nl-dialog');
+  const lbGallery=document.getElementById('nlGallery');
+  const lbTitle=document.getElementById('nlTitle');
+  const lbMeta=document.getElementById('nlMeta');
+  const lbClose=lb.querySelector('.nl-close');
+  const TARGET=Math.max(1,parseInt(root.dataset.panes||'12',10));
+  const GH={owner:'McCal-Codes',repo:'McCals-Website',branch:'main'};
+  const RAW=`https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+  const MANIFEST_PATH='src/images/Portfolios/Nature/nature-manifest.json';
+  const CACHE_KEY='nature-v1.2-cache';
+  const CACHE_MS=10*60*1000;
+  function now(){return Date.now();}
+  function readCache(){try{const raw=localStorage.getItem(CACHE_KEY);if(!raw) return null;const data=JSON.parse(raw);if(now()-data.t > CACHE_MS) return null;return data.m;}catch{return null;}}
+  function writeCache(m){try{localStorage.setItem(CACHE_KEY,JSON.stringify({m,t:now()}));}catch{}}
+  async function fetchManifest(force){
+    if(!force){const c=readCache();if(c) return c;}
+    try {
+      const r=await fetch(RAW+MANIFEST_PATH,{cache:'no-store'});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const j=await r.json();
+      writeCache(j);
+      return j;
+    } catch (err) {
+      // Show error immediately
+      showError('Failed to fetch manifest: '+(err.message||err));
+      throw err;
+    }
+  }
+  function parseDate(col){
+    const iso=col.captureDate?.iso||col.dateISO||null;let val=0;
+    if(iso){const p=Date.parse(iso.replace(/\//g,'-'));if(!Number.isNaN(p)) val=p;}
+    const disp=col.dateDisplay||col.captureDate?.display|| (iso? new Date(val).toLocaleDateString(undefined,{year:'numeric',month:'long'}):'');
+    return {iso:iso||null,value:val,display:disp};
+  }
+  function buildItems(man){
+    const raw=Array.isArray(man?.collections)?man.collections:[];
+    const items=raw.map((c,i)=>{
+      const parts=String(c.folderPath||'').split('/').filter(Boolean);
+      if(!parts.length) return null;
+      const imgs=Array.isArray(c.images)?c.images.filter(Boolean):[];
+      if(!imgs.length) return null;
+      const d=parseDate(c);
+      const title=String(c.collectionName||parts[parts.length-1]||`Collection ${i+1}`).trim();
+      const tags=Array.isArray(c.tags)?c.tags.filter(Boolean):[];
+      if(!tags.some(t=>/nature/i.test(t))) tags.unshift('Nature');
+      return {title,parts,images:imgs,cover:imgs[0],dateDisplay:d.display,dateValue:d.value};
+    }).filter(Boolean);
+    items.sort((a,b)=>b.dateValue-a.dateValue);
+    return items.slice(0,TARGET);
+  }
+  function imageUrl(item,file){
+    return RAW+'src/images/Portfolios/Nature/'+item.parts.map(encodeURIComponent).join('/')+'/'+encodeURIComponent(file);
+  }
+  function showError(msg){
+    loading.innerHTML='<div class="nature-error" role="alert">'+msg+'</div>';
+    loading.style.display='block';
+    grid.hidden=true;
+    // Optionally, set focus for screen readers
+    loading.setAttribute('tabindex','-1');
+    loading.focus&&loading.focus();
+  }
+  function render(items,manifest){
+    loading.style.display='none';
+    if(!items.length){
+      grid.innerHTML='<div class="nature-empty">No nature collections found.</div>';
+      grid.hidden=false;
+      return;
+    }
+    const frag=document.createDocumentFragment();
+    items.forEach((it,idx)=>{
+      const card=document.createElement('article');
+      card.className='nature-card loading';
+      card.tabIndex=0;
+      const img=document.createElement('img');
+      img.alt=it.title;
+      const info=document.createElement('div');
+      info.className='nature-info';
+      const h=document.createElement('h3');
+      h.className='nature-title';
+      h.textContent=it.title;
+      info.appendChild(h);
+      if(it.dateDisplay){
+        const m=document.createElement('p');
+        m.className='nature-meta';
+        m.textContent=it.dateDisplay;
+        info.appendChild(m);
+      }
+      const tagsWrap=document.createElement('div');
+      tagsWrap.className='nature-tags';
+      const tg=document.createElement('span');
+      tg.className='nature-tag nature-tag-primary';
+      tg.textContent='Nature';
+      tagsWrap.appendChild(tg);
+      info.appendChild(tagsWrap);
+      card.appendChild(img);
+      card.appendChild(info);
+      frag.appendChild(card);
+      function open(){openLightbox(it);}
+      card.addEventListener('click',open);
+      card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+      setTimeout(()=>{
+        const src=imageUrl(it,it.cover);
+        const probe=new Image();
+        probe.onload=()=>{img.src=src;card.classList.remove('loading');card.classList.add('loaded');};
+        probe.onerror=()=>{card.classList.remove('loading');card.classList.add('error');img.alt+=' (failed to load image)';};
+        probe.src=src;
+      }, idx*90);
+    });
+    grid.innerHTML='';
+    grid.appendChild(frag);
+    grid.hidden=false;
+    grid.classList.add('loaded');
+    metaCount.textContent=items.length.toString().padStart(2,'0');
+    metaUpdated.textContent=new Date().toLocaleDateString();
+    metaSource.textContent='Nature Manifest';
+  }
+  function openLightbox(item){
+    lbGallery.innerHTML='<div class="nl-hint">Scroll to explore</div>';
+    item.images.forEach(f=>{
+      const im=document.createElement('img');
+      im.alt=item.title+' nature photo';
+      im.className='loading';
+      im.src=imageUrl(item,f);
+      im.onload=()=>{im.classList.remove('loading');im.classList.add('loaded');};
+      im.onerror=()=>{im.classList.remove('loading');im.classList.add('error');im.alt+=' (failed to load image)';};
+      lbGallery.appendChild(im);
+    });
+    lbTitle.textContent=item.title;
+    lbMeta.textContent=[item.dateDisplay,`${item.images.length} photos`].filter(Boolean).join(' – ');
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('lb-open');
+    lbDialog.focus();
+    const hint=lbGallery.querySelector('.nl-hint');
+    if(hint && item.images.length>1){setTimeout(()=>hint.classList.add('fade'),3000);}
+  }
+  function close(){
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden','true');
+    document.documentElement.classList.remove('lb-open');
+  }
+  lbClose.addEventListener('click',close);
+  lb.addEventListener('click',e=>{if(e.target===lb) close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('is-open')){e.preventDefault();close();}});
+  // Fetch and render manifest
+  fetchManifest(false)
+    .then(m=>{const items=buildItems(m);render(items,m);})
+    .catch(err=>{showError('Failed to load nature collections: '+(err.message||err));});
+})();
 </script>

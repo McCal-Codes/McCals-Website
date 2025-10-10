@@ -83,6 +83,8 @@ function deriveCategory(dir) {
   return 'Corporate';
 }
 
+
+
 async function exists(target) {
   try {
     await fsp.access(target, fs.constants.F_OK);
@@ -157,6 +159,7 @@ async function main() {
       images,
       totalImages: images.length
     };
+
 
     if (override && override.notes) {
       eventEntry.dateNotes = override.notes;

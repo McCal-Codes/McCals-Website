@@ -200,6 +200,8 @@ async function processEvent(categoryName, eventName, eventDir) {
       published: isPublished,
       metadata: metadata || {}
     };
+    // Add categoryInfo if relevant
+
     
     // Add publication info if available
     if (metadata?.outlet) {

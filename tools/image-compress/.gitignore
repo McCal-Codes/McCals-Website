@@ -1,0 +1,26 @@
+# Ignore all files by default
+*
+# But not this gitignore
+!.gitignore
+# Allow source code/scripts
+!*.js
+!*.ts
+!*.json
+!*.md
+# Ignore executables and output
+*.exe
+*.app
+*.dmg
+*.zip
+*.tar.gz
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.bmp
+*.tiff
+*.out
+*.log
+output/
+temp/

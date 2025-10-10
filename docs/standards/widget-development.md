@@ -77,6 +77,82 @@ Before applying any enhancements, complete this checklist:
 ### Filter-Based Widgets  
 - **Enhanced Filter Layout**: Prevent spacing issues with hidden content
 - **Tag Support**: Flexible categorization beyond simple categories
+  - For nature imports, if the first category is 'animal', the main tag will be the animal type (the folder name, e.g., 'bird'). This ensures manifest.json output is consistent and discoverable for animal/landscape subcategories.
+
+**Example: Wildlife/Birds Manifest**
+
+**Per-Bird Folder Pattern (Multiple Birds):**
+
+**Per-Animal Folder Pattern (All Animals):**
+
+**Per-Location/Title Folder Pattern (Landscapes):**
+When importing multiple landscapes, each location or title gets its own folder and manifest.json:
+
+```
+Nature/
+  Landscape/
+    Mist Valley Sunrise/
+      Mist Valley Sunrise.jpg
+      manifest.json
+    Redwood Rain/
+      Redwood Rain.jpg
+      manifest.json
+```
+
+Each manifest.json (example for Mist Valley Sunrise):
+```json
+{
+  "collectionName": "Mist Valley Sunrise",
+  "folderPath": "Nature/Landscape/Mist Valley Sunrise",
+  "totalImages": 1,
+  "images": ["Mist Valley Sunrise.jpg"],
+  "tags": ["landscape"],
+  "metadata": {
+    "generated": "2025-10-09T12:00:00.000Z",
+    "version": "1.0"
+  }
+}
+```
+*Each landscape is placed in its own folder under 'Nature/Landscape'. The manifest uses the location or title as collectionName and folderPath, and tags is always ['landscape'] for landscape category.*
+When importing multiple animals (e.g., birds, mammals, reptiles), each animal gets its own folder and manifest.json:
+
+```
+Wildlife/
+  Birds/
+    Cardinal/
+      Cardinal.jpg
+      manifest.json
+    Blue Jay/
+      Blue Jay.jpg
+      manifest.json
+  Mammals/
+    Fox/
+      Fox.jpg
+      manifest.json
+    Squirrel/
+      Squirrel.jpg
+      manifest.json
+  Reptiles/
+    Turtle/
+      Turtle.jpg
+      manifest.json
+```
+
+Each manifest.json (example for Fox):
+```json
+{
+  "collectionName": "Fox",
+  "folderPath": "Wildlife/Mammals/Fox",
+  "totalImages": 1,
+  "images": ["Fox.jpg"],
+  "tags": ["mammal"],
+  "metadata": {
+    "generated": "2025-10-09T12:00:00.000Z",
+    "version": "1.0"
+  }
+}
+```
+*Each animal is placed in its own folder under the appropriate group (e.g., 'Wildlife/Birds', 'Wildlife/Mammals'). The manifest uses the animal name as collectionName and folderPath, and tags is always the animal type (e.g., ['bird'], ['mammal']) for animal category.*
 - **Status Indicators**: Minimal, consistent badge design
 
 ### Gallery/Portfolio Widgets

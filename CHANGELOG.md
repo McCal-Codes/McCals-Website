@@ -1,3 +1,23 @@
+## 2025-10-10
+### Nature Manifest Generator v2.0
+- Major upgrade: Now scans all animal types under Wildlife (not just Birds) and auto-generates per-species manifest.json files tagged with the animal type.
+- Aggregates all animal and landscape/location collections into nature-manifest.json for portfolio widgets.
+- Documentation updated in scripts/manifest/README.md to reflect multi-animal support and workflow.
+- Fully tested: Adding new animal types/species auto-populates manifests and tags correctly.
+
+# 2025-10-09
+### Image Compressor App v1.6.0
+- Major efficiency and robustness improvements:
+  - Parallel image compression for faster batch processing.
+  - Skips existing files and images already smaller than the target size, with clear error/skipped reporting in the UI.
+  - Input and file type validation before processing; invalid files are rejected with user feedback.
+  - Progress bar and output folder display for improved user feedback.
+  - Error summary panel shows skipped, failed, and manifest validation errors after each run.
+  - Manifest.json is validated after writing; errors are reported in the UI.
+  - Output folder and filenames are sanitized for cross-platform safety.
+  - User settings (format, quality, last used folder, etc.) are persisted and reloaded automatically.
+- All changes follow widget and workspace standards for seamless integration and reliability.
+
 
 ## 2025-10-09
 - Added npm script `welcome` to run the dashboard (`node scripts/welcome.js`).

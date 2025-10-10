@@ -147,6 +147,25 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
         images: imageFiles.sort(),
         coverImage: imageFiles[0]
       };
+      // Add categoryInfo if relevant
+      const slug = `${portfolioType}/${itemName}`.toLowerCase();
+      if (slug.startsWith('animal/')) {
+        const parts = result.folderPath.split('/');
+        result.categoryInfo = {
+          category: 'Animal',
+          animalType: parts[1] || '',
+          animalName: parts[2] || ''
+        };
+      } else if (slug.startsWith('landscape/')) {
+        const parts = result.folderPath.split('/');
+        result.categoryInfo = {
+          category: 'Landscape',
+          location: parts[1] || '',
+          placeName: parts[2] || ''
+        };
+      } else if (slug === 'nature') {
+        result.categoryInfo = { category: 'Nature' };
+      }
 
       if (override && override.notes) {
         result.dateNotes = override.notes;
