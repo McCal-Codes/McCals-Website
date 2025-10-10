@@ -1,6 +1,6 @@
 {
-  "processed": 16,
-  "total": 16,
+  "processed": 18,
+  "total": 18,
   "results": [
     {
       "bandName": "9 Fifty Seven",
@@ -29,6 +29,20 @@
         "source": "filename_yymmdd"
       },
       "directory": "August 2025"
+    },
+    {
+      "bandName": "Big Slime",
+      "folderName": "September 2025",
+      "imageCount": 17,
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 27,
+        "iso": "2025-09-27",
+        "source": "filename_yymmdd"
+      },
+      "directory": "September 2025"
     },
     {
       "bandName": "Brahctopus",
@@ -129,6 +143,20 @@
       "directory": "December 2024"
     },
     {
+      "bandName": "Funky Lamp",
+      "folderName": "September 2025",
+      "imageCount": 26,
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "monthName": "September",
+        "day": 27,
+        "iso": "2025-09-27",
+        "source": "filename_yymmdd"
+      },
+      "directory": "September 2025"
+    },
+    {
       "bandName": "Heading North",
       "folderName": "March 2024",
       "imageCount": 19,
@@ -227,5 +255,5 @@
       "directory": "March 2024"
     }
   ],
-  "generated": "2025-10-05T07:17:21.091Z"
+  "generated": "2025-10-10T00:28:16.975Z"
 }

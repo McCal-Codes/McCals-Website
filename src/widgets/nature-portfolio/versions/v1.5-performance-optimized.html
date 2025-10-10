@@ -1,0 +1,684 @@
+<!-- Nature Portfolio Widget v1.5 - Performance Optimized, Photojournalism v5.2 Architecture -->
+<!-- See README for usage. This version adds 'All' tab, nature-specific filtering, and 'Birds' tag. -->
+<style>
+  :root{--fg:#f5f5f5;--bg:#0a0a0a;--line:#2a2a2a;--accent:#ceadee}
+  @media(prefers-color-scheme:light){:root{--fg:#0a0a0a;--bg:#fff;--line:#e5e5e5}}
+  .nature-portfolio{max-width:1600px;margin:60px auto;padding:40px 20px;text-align:center;position:relative}
+  .nature-heading{font:800 34px/1.2 ui-sans-serif,system-ui;color:var(--fg);margin:0 0 12px}
+  .nature-subheading{max-width:760px;margin:0 auto 28px;font:400 16px/1.6 ui-sans-serif,system-ui;color:rgba(245,245,245,.78)}
+  @media(prefers-color-scheme:light){.nature-subheading{color:rgba(10,10,10,.72)}}
+  .version-indicator{display:inline-block;margin-left:12px;font:600 14px/1.2 ui-sans-serif,system-ui;color:rgba(128,128,128,.7);cursor:pointer;transition:all .3s ease;background:rgba(0,0,0,.08);padding:4px 8px;border-radius:4px;backdrop-filter:blur(4px);border:1px solid rgba(128,128,128,.2);vertical-align:baseline}
+  .version-indicator:hover{color:var(--accent);background:rgba(206,173,238,.12);border-color:var(--accent);transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .nature-info{background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85));color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  /* --- Modal Changelog Styles (copied from journalism v5.2) --- */
+  .changelog-modal{position:fixed;inset:0;background:transparent;display:none;align-items:center;justify-content:center;z-index:10000;padding:20px;backdrop-filter:blur(8px)}
+  .changelog-modal.active{display:flex}
+  .changelog-content{background:var(--bg,#181818);border:1px solid var(--line,#333);border-radius:12px;max-width:520px;width:100%;max-height:70vh;overflow-y:auto;position:relative}
+  .changelog-header{padding:20px;border-bottom:1px solid var(--line,#333);display:flex;align-items:center;justify-content:space-between}
+  .changelog-title{margin:0;font:700 18px/1.2 ui-sans-serif,system-ui;color:var(--fg,#fff)}
+  .changelog-close{background:none;border:none;color:var(--fg,#fff);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:4px}
+  .changelog-close:hover{background:rgba(255,255,255,.1)}
+  .changelog-body{padding:20px;font:400 14px/1.5 ui-sans-serif,system-ui;color:var(--fg,#fff)}
+  .changelog-version{margin:0 0 16px;font:600 16px/1.3 ui-sans-serif,system-ui;border-bottom:1px solid var(--line,#333);padding-bottom:8px}
+  .changelog-items{margin:12px 0;list-style:none;padding:0}
+  .changelog-items li{margin:6px 0 0 0;padding-left:14px;position:relative;font:500 13px/1.4 ui-sans-serif,system-ui}
+  .changelog-items li:before{content:'•';position:absolute;left:0}
+  /* --- Journalism v5.2 style adaptation for Nature Portfolio --- */
+  .portfolio-filters{display:flex;gap:12px;margin:24px 0 18px 0;flex-wrap:wrap;justify-content:center}
+  .filter-btn{background:rgba(255,255,255,0.08);border:1px solid #2a2a2a;color:#e5e5e5;font:600 14px/1.1 ui-sans-serif,system-ui;padding:12px 20px;border-radius:14px;cursor:pointer;letter-spacing:.2px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 2px 8px rgba(0,0,0,0.08);transition:background .18s,border .18s,color .18s}
+  .filter-btn.active, .filter-btn:focus {
+    background: #7fcfcf;
+    border-color: #7fcfcf;
+    color: #fff;
+    outline: 2px solid #7fcfcf;
+    box-shadow: 0 2px 12px rgba(127,207,207,0.13);
+    z-index: 2;
+  }
+    .filter-btn:hover {
+    background: rgba(127,207,207,0.16);
+    border-color: #7fcfcf;
+    color: #fff;
+    outline: 1px solid #7fcfcf;
+    }
+  .tag-chip {
+    display: inline-block;
+    background: rgba(79,161,110,0.18);
+    color: #4fa16e;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin: 4px 4px 0 0;
+    vertical-align: middle;
+    letter-spacing: .1px;
+  }
+  .nature-grid{column-width:320px;column-gap:20px;text-align:left;opacity:0;transition:opacity .5s;background:transparent;margin-bottom:32px;}
+  .nature-grid.loaded{opacity:1}
+  @media (max-width:1024px){.nature-grid{column-width:280px}}
+  @media (max-width:768px){.nature-grid{column-width:240px;margin-top:28px}.portfolio-filters{gap:8px}.filter-btn{padding:10px 16px;font-size:13px}}
+  @media (max-width:520px){.nature-grid{column-width:100%}}
+  .nature-card{position:relative;display:inline-block;width:100%;margin:0 0 20px;background:transparent;border-radius:16px;overflow:hidden;cursor:pointer;break-inside:avoid;opacity:0;transform:translateY(20px);transition:all .3s}
+  .nature-card.loaded{opacity:1;transform:translateY(0)}
+  .nature-card.is-hidden{display:none}
+  .nature-card img{display:block;width:100%;height:auto;object-fit:contain;border-radius:inherit;transition:transform .35s,filter .35s}
+  .nature-card:hover img{transform:scale(1.02);filter:contrast(1.08) saturate(1.08)}
+  .birds-badge{position:absolute;top:8px;left:8px;background:rgba(95,177,137,0.7);color:#fff;font-size:11px;padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px);font-weight:600;z-index:2;display:inline-flex;align-items:center;gap:8px;box-shadow:0 0 0 4px rgba(95,177,137,0.08)}
+  .birds-badge:before{content:'';}
+  .image-count-badge{
+    position:absolute;
+    top:16px;
+    right:16px;
+    background:rgba(0,0,0,.6);
+    color:#fff;
+    backdrop-filter:blur(4px);
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:999px;
+    z-index:2;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
+  }
+  .nature-info{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:flex-end;padding:10px 14px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.85));color:#fff}
+.nature-date {
+  margin: 0 0 6px 0;
+  font: 600 13px/1.3 ui-sans-serif,system-ui;
+  color: #e5e5e5;
+  opacity: 0.85;
+}
+  .nature-title{
+    margin:0 0 10px 0;
+    font:800 16px/1.2 ui-sans-serif,system-ui;
+  }
+  .nature-meta{margin:2px 0 0;font:600 12px/1.2 ui-sans-serif,system-ui;color:#e5e5e5}
+  .nature-card.loading::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:shimmer 1.5s infinite}
+  @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)} }
+  .nature-card.error{background:#2a1a1a;border:1px solid #4a2a2a}
+  .nature-lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:2147483647 !important;padding:24px;backdrop-filter:blur(8px)}
+  .nature-lightbox.is-open{display:flex}
+  .nl-dialog{position:relative;max-width:95vw;max-height:92vh;overflow:auto;background:transparent;outline:none}
+  .nl-gallery{display:flex;flex-direction:column;gap:20px;overflow-y:auto;scroll-snap-type:y mandatory;padding-right:12px;scrollbar-width:none;-ms-overflow-style:none}
+  .nl-gallery::-webkit-scrollbar{display:none}
+  .nl-gallery img{max-width:92vw;max-height:82vh;width:auto;height:auto;object-fit:contain;scroll-snap-align:center;border-radius:14px;transition:opacity .3s;display:block;margin:0 auto}
+  .nl-gallery img.loading{opacity:.65}
+  .nl-gallery img.loaded{opacity:1}
+  .nl-caption{text-align:center;color:#fff;margin-top:14px;max-width:600px;margin-inline:auto}
+  .nl-title{margin:0 0 6px;font:800 20px/1.25 ui-sans-serif,system-ui}
+  .nl-meta{margin:0 0 10px;color:#cfcfcf;font:600 12px/1.3 ui-sans-serif,system-ui}
+  .nl-description{margin:0 0 10px;color:#e5e5e5;font:400 14px/1.4 ui-sans-serif,system-ui}
+  .nl-close{position:fixed;top:max(24px,env(safe-area-inset-top));right:max(24px,env(safe-area-inset-right));border:2px solid rgba(255,255,255,.4);background:rgba(0,0,0,.7);color:#fff;border-radius:50%;width:44px;height:44px;cursor:pointer;font:800 18px ui-sans-serif,system-ui;display:flex;align-items:center;justify-content:center;z-index:2147483648;transition:all .2s ease;margin:0;padding:0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .nl-close:hover{background:rgba(0,0,0,.85);border-color:rgba(255,255,255,.6);transform:scale(1.05)}
+  html.lb-open .nature-portfolio,html.lb-open .version-indicator{pointer-events:none}
+  html.lb-open .nature-lightbox,html.lb-open .nature-lightbox *{pointer-events:auto}
+  html.lb-open header,html.lb-open .Header,html.lb-open [id*="Header"],html.lb-open .site-header,html.lb-open .sqs-announcement-bar,html.lb-open nav,html.lb-open .nav,html.lb-open .navbar,html.lb-open .navigation,html.lb-open .site-nav,html.lb-open .main-nav,html.lb-open .top-nav,html.lb-open [class*="nav"],html.lb-open [id*="nav"],html.lb-open [class*="menu"],html.lb-open [id*="menu"]{opacity:0 !important;visibility:hidden !important;pointer-events:none !important}
+</style>
+
+<div class="nature-portfolio" id="naturePf" data-panes="16" data-widget-version="1.6">
+  <h2 class="nature-heading">Nature Portfolio <span class="version-indicator" title="View changelog" onclick="showChangelog()">v1.6</span></h2>
+  <p class="nature-subheading">Portfolio includes wildlife, birds, and landscapes. Use the filters to view specific animal types or all collections.</p>
+  <div class="portfolio-filters" role="tablist" aria-label="Portfolio categories" id="filterBar"></div>
+  <div class="nature-loading" id="natureLoading">
+    <span class="nature-spinner"></span> Loading nature collections...
+  </div>
+  <div class="nature-grid" id="natureGrid"></div>
+</div>
+
+<!-- Lightbox -->
+<div class="nature-lightbox" id="natureLightbox" aria-hidden="true">
+  <div class="nl-dialog" role="dialog" aria-modal="true" aria-labelledby="nlLbTitle" tabindex="-1">
+    <button class="nl-close" type="button" aria-label="Close">&times;</button>
+    <div class="nl-gallery" id="nlGallery"></div>
+    <div class="nl-caption">
+      <h3 class="nl-title" id="nlLbTitle"></h3>
+      <p class="nl-meta" id="nlLbMeta"></p>
+      <div class="nl-description" id="nlLbDescription" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Changelog Modal -->
+<div class="changelog-modal" id="changelogModal" aria-hidden="true">
+  <div class="changelog-content" role="dialog" aria-modal="true" aria-labelledby="changelogTitle">
+    <div class="changelog-header">
+      <h3 class="changelog-title" id="changelogTitle">Nature Widget Changelog</h3>
+      <button class="changelog-close" type="button" aria-label="Close changelog" onclick="hideChangelog()">&times;</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v1.6 - Subtle Filter Tab Accent</div>
+      <ul class="changelog-items">
+        <li>UI: Filter tab accent color made even more subtle and elegant (soft aquamarine)</li>
+        <li>Version indicator and changelog updated to reflect visual refinement</li>
+      </ul>
+      <div class="changelog-version">v1.5 - All Tab & Birds Tag</div>
+      <ul class="changelog-items">
+        <li>UI: Added 'All' tab and nature-specific filtering for animal types and landscapes</li>
+        <li>Feature: 'Birds' tag badge for bird images/collections</li>
+        <li>Performance: Optimized grid rendering and manifest caching</li>
+        <li>Lightbox: Improved accessibility and navigation hiding</li>
+      </ul>
+      <div class="changelog-version">v1.2 - Unified Lightbox Header Isolation</div>
+      <ul class="changelog-items">
+        <li>Lightbox disables Squarespace navigation/announcement bars for safe interaction</li>
+        <li>Masonry grid, overlay, tag chips, nature accent colors</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+// Nature Portfolio v1.5 - Photojournalism v5.2 Architecture
+(function(){
+'use strict';
+let DEBUG = false;
+let manifestGenerated = '';
+let autoRefreshTimer = null;
+let isTabVisible = true;
+let lastVisibilityChange = Date.now();
+const grid = document.getElementById('natureGrid');
+const loading = document.getElementById('natureLoading');
+const portfolio = document.getElementById('naturePf');
+const changelogModal = document.getElementById('changelogModal');
+const filterBar = document.getElementById('filterBar');
+let state = {
+  manifest: null,
+  cacheKey: 'nature-manifest-v1.5',
+  isVisible: true,
+  filter: '*',
+  manifestGenerated: ''
+};
+const log = () => {};
+const shuffle = arr => {
+  const a = Array.isArray(arr) ? arr.slice() : [];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+};
+const setText = (el, v) => { if (el) el.textContent = v; };
+const encodePath = path => path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+const normalizeFolder = value => value ? value.replace(/^\/+/,'').replace(/\/+$/,'') : '';
+function resolveImagePath(collection, image) {
+  if (!image) return '';
+  const raw = (image.path || image.src || image.url || image.filename || image).trim ? (image.path || image.src || image.url || image.filename || image).trim() : image;
+  if (!raw) return '';
+  if (/^https?:\/\//i.test(raw)) return raw;
+  let relative = raw.replace(/^\.?\//,'');
+  if (relative.startsWith('src/')) {
+    return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/${encodePath(relative)}`;
+  }
+  if (relative.includes('/')) {
+    return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Nature/${encodePath(relative)}`;
+  }
+  const folder = normalizeFolder(image.folderPath || collection.folderPath || '');
+  const composed = folder ? `${folder}/${relative}` : relative;
+  return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Nature/${encodePath(composed)}`;
+}
+const cache = {
+  get: () => {
+    try {
+      const data = JSON.parse(localStorage.getItem(state.cacheKey));
+      return data && Date.now() - data.timestamp < 10*60*1000 ? data : null;
+    } catch { return null; }
+  },
+  set: data => {
+    try {
+      localStorage.setItem(state.cacheKey, JSON.stringify({ ...data, timestamp: Date.now() }));
+    } catch (e) { log('Cache write failed:', e.message); }
+  },
+  clear: () => {
+    try { localStorage.removeItem(state.cacheKey); } catch(e){}
+  }
+};
+const showChangelog = () => {
+  if (!changelogModal) return;
+  changelogModal.classList.add('active');
+  changelogModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  const content = changelogModal.querySelector('.changelog-content');
+  if (content) content.scrollTop = 0;
+};
+const hideChangelog = () => {
+  if (!changelogModal) return;
+  changelogModal.classList.remove('active');
+  changelogModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+};
+window.showChangelog = showChangelog;
+window.hideChangelog = hideChangelog;
+const generateAltText = (col, imageName = '') => {
+  const base = `${col.collectionName} nature photos`;
+  let nameStr = '';
+  if (typeof imageName === 'string') {
+    nameStr = imageName;
+  } else if (imageName && typeof imageName === 'object') {
+    nameStr = imageName.filename || imageName.path || imageName.url || imageName.src || '';
+  }
+  if (nameStr && typeof nameStr === 'string') {
+    return `${base} - ${nameStr.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ')}`;
+  }
+  return `${base}, ${col.folderPath}`;
+};
+const addStructuredData = manifest => {
+  const totalImages = manifest.collections?.reduce((sum, col) => sum + (col.totalImages || col.images?.length || 0), 0) || 0;
+  const sampleImages = manifest.collections?.slice(0, 3).flatMap(col =>
+    (col.images||[]).slice(0, 2).map(img => resolveImagePath(col, img)) || []
+  ).slice(0, 5) || [];
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Nature Portfolio",
+    "description": "Professional nature portfolio featuring wildlife, birds, and landscapes",
+    "url": window.location.href,
+    "image": sampleImages,
+    "author": { "@type": "Person", "name": "Caleb McCartney", "jobTitle": "Photographer", "url": "https://mccalmedia.com" },
+    "datePublished": manifest.generated ? new Date(manifest.generated).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+    "numberOfItems": totalImages,
+    "genre": "Nature Photography"
+  });
+  document.head.appendChild(script);
+  log('Structured data added for', totalImages, 'images');
+};
+const loadManifest = async (force = false) => {
+  const manifestUrl = 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Nature/nature-manifest.json';
+  if (!force) {
+    const cached = cache.get();
+    if (cached) {
+      state.manifestGenerated = cached.manifest.generated || '';
+      return cached.manifest;
+    }
+  }
+  try {
+    const response = await fetch(manifestUrl, { cache: 'no-store' });
+    if (!response.ok) throw new Error('Manifest fetch failed: ' + response.status);
+    const manifest = await response.json();
+    state.manifestGenerated = manifest.generated || '';
+    cache.set({ manifest });
+    log('Manifest loaded');
+    return manifest;
+  } catch (error) {
+    log('Failed to load manifest:', error.message);
+    throw error;
+  }
+};
+// Build filter bar: Only 'All' and 'Birds'
+// Build filter bar: Main categories (Animals, Landscapes, etc) from top-level folders
+const buildFilterBar = () => {
+  // Only show tabs for categories with at least one collection
+  if (!state.manifest || !state.manifest.collections) return;
+  const animalsFolders = ['Wildlife', 'Birds', 'Mammals', 'Insects', 'Reptiles', 'Animals'];
+  const landscapesFolders = ['Landscapes', 'Scenery', 'West Virginia', 'Mountains', 'Rivers'];
+  let hasAnimals = false, hasLandscapes = false, hasEtc = false;
+  state.manifest.collections.forEach(col => {
+    const folderPath = col.folderPath || '';
+    const isAnimal = animalsFolders.some(animal => folderPath.includes(animal));
+    const isLandscape = landscapesFolders.some(land => folderPath.includes(land));
+    if (isAnimal) hasAnimals = true;
+    if (isLandscape && !isAnimal) hasLandscapes = true;
+    if (!isAnimal && !isLandscape) hasEtc = true;
+  });
+  const filters = [{key:'*',label:'All'},
+    ...(hasAnimals ? [{key:'Animals',label:'Animals'}] : []),
+    ...(hasLandscapes ? [{key:'Landscapes',label:'Landscapes'}] : []),
+    ...(hasEtc ? [{key:'Etc',label:'Etc'}] : [])
+  ];
+  filterBar.innerHTML = '';
+  filters.forEach(f => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = f.label;
+    btn.dataset.filter = f.key;
+    btn.setAttribute('aria-pressed', state.filter === f.key ? 'true' : 'false');
+    if (state.filter === f.key) btn.classList.add('active');
+    btn.addEventListener('click', () => {
+      state.filter = f.key;
+      Array.from(filterBar.children).forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      buildGrid();
+    });
+    filterBar.appendChild(btn);
+  });
+};
+const buildGrid = async () => {
+  try {
+    loading.style.display = 'flex';
+    grid.style.display = 'none';
+    portfolio.style.background = '';
+    grid.style.background = '';
+    const manifest = state.manifest || await loadManifest();
+    state.manifest = manifest;
+    if (!manifest?.collections?.length) throw new Error('No nature collections available');
+    addStructuredData(manifest);
+    buildFilterBar();
+    // Filter collections by semantic category
+    let collections = manifest.collections.slice();
+    if (state.filter && state.filter !== '*') {
+      // Robust mapping: extract top-level category from folderPath
+      const animalsFolders = ['Wildlife', 'Birds', 'Mammals', 'Insects', 'Reptiles', 'Animals'];
+      const landscapesFolders = ['Landscapes', 'Scenery', 'West Virginia', 'Mountains', 'Rivers'];
+      collections = collections.filter(col => {
+        const folderPath = col.folderPath || '';
+        // Check for landscape and animal keywords anywhere in folderPath
+        const isAnimal = animalsFolders.some(animal => folderPath.includes(animal));
+        const isLandscape = landscapesFolders.some(land => folderPath.includes(land));
+        if (state.filter === 'Animals') {
+          return isAnimal;
+        } else if (state.filter === 'Landscapes') {
+          return isLandscape && !isAnimal;
+        } else if (state.filter === 'Etc') {
+          return !isAnimal && !isLandscape;
+        }
+        return true;
+      });
+    }
+    // If filter results in zero collections, reset to All and show message
+    if (collections.length === 0 && state.filter !== '*' && !state._filterReset) {
+      state._filterReset = true;
+      state.filter = '*';
+      buildGrid();
+      return;
+    }
+    state._filterReset = false;
+    // Shuffle collections for variety
+    collections = shuffle(collections);
+    // Build pools for round-robin
+    const pools = collections.map(col => ({
+      collection: col,
+      images: shuffle((col.images || []).slice()),
+      allImages: (col.images || []).slice(),
+      title: col.collectionName,
+      totalImages: col.totalImages || (col.images ? col.images.length : 0),
+      tags: col.tags || [],
+      folderPath: col.folderPath
+    }));
+    const requested = parseInt((portfolio && portfolio.dataset && portfolio.dataset.panes) || '', 10);
+    const TARGET_PANES = Math.min(Math.max(isNaN(requested) ? 8 : requested, 4), 48);
+    let slots = [];
+    const usedImages = new Set();
+    const MAX_PER_FOLDER = 1;
+    const perFolderCount = new Map();
+    const tryAddFromPool = (pool) => {
+      while (pool.images.length) {
+        const img = pool.images.shift();
+        const imgUrl = resolveImagePath(pool.collection, img);
+        if (!imgUrl) continue;
+        if (usedImages.has(imgUrl)) continue;
+        usedImages.add(imgUrl);
+        const count = perFolderCount.get(pool.folderPath) || 0;
+        perFolderCount.set(pool.folderPath, count + 1);
+        slots.push({
+          collection: pool.collection,
+          img,
+          allImages: pool.allImages,
+          title: pool.title,
+          totalImages: pool.totalImages,
+          tags: pool.tags,
+          folderPath: pool.folderPath
+        });
+        return true;
+      }
+      return false;
+    };
+    let progress = true;
+    while (slots.length < TARGET_PANES && progress) {
+      progress = false;
+      for (const pool of pools) {
+        if (slots.length >= TARGET_PANES) break;
+        const currentCount = perFolderCount.get(pool.folderPath) || 0;
+        if (currentCount >= 1) continue;
+        const added = tryAddFromPool(pool);
+        if (added) progress = true;
+      }
+      if (!progress) break;
+    }
+    // Minimize same-folder adjacency
+    const minimizeSameFolderAdjacency = (arr) => {
+      for (let i = 0; i < arr.length - 1; i++) {
+        const curr = arr[i] && arr[i].folderPath ? arr[i].folderPath : null;
+        if (!curr) continue;
+        if (arr[i + 1] && arr[i + 1].folderPath === curr) {
+          let j = i + 2;
+          while (j < arr.length && arr[j] && arr[j].folderPath === curr) j++;
+          if (j < arr.length) {
+            const tmp = arr[i + 1]; arr[i + 1] = arr[j]; arr[j] = tmp;
+          }
+        }
+      }
+      return arr;
+    };
+    minimizeSameFolderAdjacency(slots);
+    const adjacencyScore = (arr) => {
+      let s = 0;
+      for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] && arr[i + 1] && arr[i].folderPath && arr[i + 1].folderPath && arr[i].folderPath === arr[i + 1].folderPath) s++;
+      }
+      return s;
+    };
+    const constrainedShuffle = (arr, tries = 8) => {
+      if (!Array.isArray(arr) || arr.length <= 1) return arr;
+      let best = arr.slice();
+      let bestScore = adjacencyScore(best);
+      for (let t = 0; t < tries; t++) {
+        const candidate = shuffle(arr);
+        const score = adjacencyScore(candidate);
+        if (score < bestScore) { best = candidate.slice(); bestScore = score; if (bestScore === 0) break; }
+      }
+      return best;
+    };
+    slots = constrainedShuffle(slots, 8);
+    // Render cards
+    const fragment = document.createDocumentFragment();
+    let totalImages = 0;
+    slots.forEach(slot => {
+      const col = slot.collection;
+      const card = document.createElement('article');
+      card.className = 'nature-card loading';
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `View ${slot.title} nature photos`);
+      card.dataset.tags = (slot.tags || []).join(',');
+      // Remove birds badge at top
+      // Image count badge
+      if (slot.totalImages > 1) {
+        const c = document.createElement('div');
+        c.className = 'image-count-badge';
+        c.textContent = slot.totalImages + ' photos';
+        card.appendChild(c);
+      }
+      // Tag chips are only rendered inside info section below
+      // Main image
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.alt = generateAltText(col, slot.img);
+      img.width = 400;
+      img.height = 300;
+      const thumbUrl = resolveImagePath(col, slot.img);
+      img.src = thumbUrl;
+      img.onload = () => { card.classList.remove('loading'); card.classList.add('loaded'); };
+      img.onerror = () => { card.classList.remove('loading'); card.classList.add('error'); };
+      card.appendChild(img);
+      // Info
+      const info = document.createElement('div');
+      info.className = 'nature-info';
+      // Album name
+      info.innerHTML = `<h3 class=\"nature-title\">${slot.title}</h3>`;
+      // Date (year and month from manifest)
+      let dateStr = '';
+      if (col.concertDate && col.concertDate.year && col.concertDate.month) {
+        dateStr = `${col.concertDate.year}-${String(col.concertDate.month).padStart(2, '0')}`;
+      } else if (col.year && col.month) {
+        dateStr = `${col.year}-${String(col.month).padStart(2, '0')}`;
+      } else if (col.date || col.collectionDate) {
+        // Fallback: try to extract year/month from date string
+        const match = (col.date || col.collectionDate).match(/(\d{4})[-/](\d{1,2})/);
+        if (match) {
+          dateStr = `${match[1]}-${match[2].padStart(2, '0')}`;
+        }
+      }
+      if (dateStr) {
+        const dateEl = document.createElement('div');
+        dateEl.className = 'nature-date';
+        dateEl.textContent = dateStr;
+        info.appendChild(dateEl);
+      }
+      // Tag chips (type of animal or place) at bottom
+      if (slot.tags && slot.tags.length) {
+  // Only append tagBar to info section inside card
+  const tagBar = document.createElement('div');
+  tagBar.style.margin = '0 0 4px 0';
+  tagBar.style.display = 'flex';
+  tagBar.style.flexWrap = 'wrap';
+        // Add 'Animal' tag for animal collections
+        const animalFolders = ['Wildlife', 'Birds', 'Mammals', 'Insects', 'Reptiles'];
+        const folderType = slot.folderPath && slot.folderPath.split('/')[2];
+        if (animalFolders.includes(folderType)) {
+          const animalChip = document.createElement('span');
+          animalChip.className = 'tag-chip';
+          animalChip.textContent = 'Animal';
+          tagBar.appendChild(animalChip);
+        }
+        slot.tags.forEach(tag => {
+          const chip = document.createElement('span');
+          chip.className = 'tag-chip';
+          chip.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+          tagBar.appendChild(chip);
+        });
+        // Ensure tagBar is only appended to info, not grid or filterBar
+        if (info) info.appendChild(tagBar);
+      }
+      card.appendChild(info);
+      // Lightbox open
+      card.addEventListener('click', () => openLightbox(col));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(col); } });
+      fragment.appendChild(card);
+      totalImages += slot.totalImages;
+    });
+    grid.innerHTML = '';
+    if (slots.length === 0) {
+      loading.innerHTML = `<div style=\"text-align: center; color: #ff4d6d;\"><p>No nature cards to display (collections: ${collections.length}, pools: ${pools.length}).</p></div>`;
+    } else {
+      grid.appendChild(fragment);
+      loading.style.display = 'none';
+      grid.style.display = 'block';
+      grid.classList.add('loaded');
+    }
+  } catch (error) {
+    console.error('Failed to build nature portfolio:', error);
+    loading.style.display = 'none';
+    grid.style.display = 'none';
+    portfolio.style.background = '';
+    grid.style.background = '';
+    const errMsg = `Failed to load nature portfolio: ${error.message}`;
+    loading.innerHTML = `<div style=\"text-align: center; color: #ff4d6d;\"><p>${errMsg}</p><button onclick=\"location.reload()\" style=\"background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 8px;\">Retry</button></div>`;
+    loading.style.display = 'flex';
+  }
+};
+// Lightbox
+const lightbox = document.getElementById('natureLightbox');
+const gallery = document.getElementById('nlGallery');
+const dialog = lightbox.querySelector('.nl-dialog');
+const title = lightbox.querySelector('.nl-title');
+const meta = lightbox.querySelector('.nl-meta');
+const desc = lightbox.querySelector('.nl-description');
+const openLightbox = (col) => {
+  gallery.innerHTML = '';
+  (col.images || []).forEach((img, i) => {
+    const im = document.createElement('img');
+    im.loading = 'lazy';
+    im.decoding = 'async';
+    im.alt = generateAltText(col, img);
+    im.src = resolveImagePath(col, img);
+    im.className = 'loading';
+    im.onload = () => { im.classList.remove('loading'); im.classList.add('loaded'); };
+    im.onerror = () => { im.classList.remove('loading'); im.classList.add('error'); im.alt = 'Image failed'; };
+    gallery.appendChild(im);
+  });
+  title.textContent = col.collectionName;
+  meta.textContent = `${col.folderPath} • ${(col.totalImages || (col.images ? col.images.length : 0))} images`;
+  if (col.images && col.images[0] && col.images[0].description) {
+    desc.textContent = col.images[0].description;
+    desc.style.display = 'block';
+  } else {
+    desc.style.display = 'none';
+  }
+  lightbox.classList.add('is-open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.documentElement.classList.add('lb-open');
+  document.body.style.overflow = 'hidden';
+  if (dialog) dialog.focus();
+};
+const closeLightbox = () => {
+  lightbox.classList.remove('is-open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.documentElement.classList.remove('lb-open');
+  document.body.style.overflow = '';
+};
+lightbox.querySelector('.nl-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    let handled = false;
+    if (lightbox.classList.contains('is-open')) { closeLightbox(); handled = true; }
+    if (changelogModal && changelogModal.classList.contains('active')) { hideChangelog(); handled = true; }
+    if (handled) e.preventDefault();
+  }
+});
+function setupAutoRefresh() {
+  log('Setting up intelligent auto-refresh', 'Every 15 minutes');
+  document.addEventListener('visibilitychange', () => {
+    const wasVisible = isTabVisible;
+    isTabVisible = !document.hidden;
+    lastVisibilityChange = Date.now();
+    if (wasVisible && !isTabVisible) {
+      log('Tab became hidden, pausing refresh checks');
+    } else if (!wasVisible && isTabVisible) {
+      log('Tab became visible, resuming refresh checks');
+      const hiddenTime = Date.now() - lastVisibilityChange;
+      if (hiddenTime > 15*60*1000) {
+        log('Tab was hidden for a while, refreshing now');
+        buildGrid();
+      }
+    }
+  });
+  autoRefreshTimer = setInterval(() => {
+    if (isTabVisible) {
+      log('Auto-refreshing nature portfolio...');
+      buildGrid();
+    } else {
+      log('Skipping refresh - tab not visible');
+    }
+  }, 15*60*1000);
+}
+const loadDeferredFeatures = () => {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      if (window.location.search.includes('debug')) {
+        // toggleDebug();
+      }
+    });
+  }
+};
+const init = async () => {
+  try {
+    await buildGrid();
+    setupAutoRefresh();
+    loadDeferredFeatures();
+  } catch (error) {
+    console.error('Failed to initialize nature portfolio:', error);
+  }
+};
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+window.addEventListener('beforeunload', () => {
+  if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+});
+})();
+</script>

@@ -187,10 +187,18 @@
       }
       const tagsWrap=document.createElement('div');
       tagsWrap.className='nature-tags';
+      // Always add Nature tag
       const tg=document.createElement('span');
       tg.className='nature-tag nature-tag-primary';
       tg.textContent='Nature';
       tagsWrap.appendChild(tg);
+      // Add Birds tag if in Birds folder
+      if(it.parts.length>=3 && it.parts[0]==='Wildlife' && it.parts[1]==='Birds'){
+        const birdsTag=document.createElement('span');
+        birdsTag.className='nature-tag';
+        birdsTag.textContent='Birds';
+        tagsWrap.appendChild(birdsTag);
+      }
       info.appendChild(tagsWrap);
       card.appendChild(img);
       card.appendChild(info);
