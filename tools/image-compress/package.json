@@ -1,0 +1,38 @@
+{
+  "name": "mccals-importer",
+  "author": "McCal Media",
+  "companyName": "McCal Media",
+  "version": "1.1.0",
+  "description": "A robust local image/portfolio importer and compressor for McCal Media, with manifest output and widget-ready integration.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win --x64",
+    "dist:mac": "electron-builder --mac --x64"
+  },
+  "build": {
+  "appId": "com.mccal.importer",
+  "productName": "McCals Importer",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "versions/v${version}"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    }
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.6.0"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  }
+}

@@ -154,6 +154,8 @@ async function main() {
         eventName: eventName,
         eventFolder: eventFolder || null
       };
+      // Add categoryInfo if relevant
+
       
       // Group by event name
       if (!eventMap.has(eventName)) {
