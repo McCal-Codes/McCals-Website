@@ -17,7 +17,7 @@ const path = require('path');
 const ExifParser = require('exif-parser');
 
 // Configuration
-const CONCERT_BASE_DIR = path.resolve(__dirname, '../src/images/Portfolios/Concert');
+const CONCERT_BASE_DIR = path.resolve(__dirname, '../../src/images/Portfolios/Concert');
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp)$/i;
 
 /**
@@ -212,7 +212,7 @@ function getMonthName(month) {
  */
 function cleanupOldManifests(dirPath, options = {}) {
     const { dryRun = false, verbose = false } = options;
-    const concertBasePath = path.resolve(__dirname, '../src/images/Portfolios/Concert');
+    const concertBasePath = path.resolve(__dirname, '../../src/images/Portfolios/Concert');
     
     // Find all manifest files in band root directories (not in date subdirectories)
     const entries = fs.readdirSync(concertBasePath);
