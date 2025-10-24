@@ -21,15 +21,6 @@ Follow portfolio -> podcast -> navigation -> footer priority.
 - [ ] TODO: Ensure widget-delivered assets ship with aggressive caching headers when feasible.
 - [ ] TODO: Avoid legacy polyfills in custom scripts; rely on modern browser targets.
 
-## Priority 1 - Photojournalism Portfolio v5.0 (`src/widgets/photojournalism-portfolio/versions/v5.0-performance-optimized.html`)
-- [ ] TODO: Apply Close Button Optimization: adopt `max(24px, env(safe-area-inset-*)))` spacing and backdrop blur per enhancement pattern section 1.
-- [ ] TODO: Implement Navigation Hiding pattern so fullscreen/lightbox mode suppresses site nav/footer.
-- [ ] TODO: Verify Filter Layout Fix: ensure filtered cards use `display:none` with no masonry gaps and review dataset attributes.
-- [ ] TODO: Align Minimal Status Indicators styling to shared badge specs (size, opacity, blur).
-- [ ] TODO: Standardize Version Indicator near heading using widget standards typography.
-- [ ] TODO: Audit deferred feature loading (`requestIdleCallback`) and structured data against performance checklist.
-- [ ] TODO: Document resulting adjustments in widget README and enhancement doc once shipped.
-
 ## Priority 2 - Podcast Feed v2.0 (`src/widgets/podcast-feed/versions/v2.0-performance-optimized.html`)
 - [ ] TODO: Replace corrupted icon text (e.g., button labels) with accessible inline SVG or ASCII labels.
 - [ ] TODO: Ensure call-to-action buttons meet enhancement typography/spacing standards.

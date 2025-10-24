@@ -1,5 +1,25 @@
 ﻿# Changelog â€” Podcast Feed Widget
 
+## v2.0.0 (2025-10-25) - Performance Optimization & Accessibility Enhancement
+
+### Performance 🚀
+- **Lazy Loading**: Debug panel now loads on-demand, reducing initial HTML size and improving page load times
+- **Deferred Initialization**: Debug panel creation moved to user interaction, eliminating unnecessary DOM elements on initial render
+
+### Accessibility ♿
+- **Episode Badges**: Added "New" badges for episodes published within the last 7 days to highlight fresh content
+- **Enhanced Button Styling**: CTA buttons now use standardized McCal accent color variables for consistent theming
+- **Version Indicator**: Added version display in debug panel for better transparency and debugging
+
+### UI/UX 🎨
+- **McCal Accent Variables**: All buttons now use `--mc-accent-black`, `--mc-accent-slate`, and `--mc-accent-gold` for brand consistency
+- **Badge System**: Date-based episode badges with subtle styling that doesn't interfere with card aesthetics
+- **Improved Debug Panel**: Lazy-loaded debug interface with comprehensive performance metrics
+
+### Developer Experience 🛠️
+- **Performance Monitoring**: Enhanced debug panel with load times, episode counts, and cache status tracking
+- **Lazy Loading Pattern**: Established pattern for deferring non-critical UI elements until needed
+
 ## v1.9.5 (2025-10-24) - Auto-Hydrating Episode List
 
 ### Data

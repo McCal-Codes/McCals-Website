@@ -71,7 +71,7 @@ Critical repository events, security incidents, and recovery steps are documente
 - **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights
 - **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos
 - **About Widgets** (`src/widgets/about-widgets/`) - Client logos, carousels, about sections
-- **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays
+- **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays *(v2.0.0 with performance optimizations)*
 - **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections
 - **Site Footer** (`src/widgets/site-footer/`) - Glass design footer with social links and newsletter
 - **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only)*
