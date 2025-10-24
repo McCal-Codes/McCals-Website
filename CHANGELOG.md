@@ -88,6 +88,7 @@
 - 2025-10-06: AI session — Session complete: minor updates.
 - 2025-10-09: AI session — Close Button Optimization and Navigation Hiding pattern implemented
 - 2025-10-24: AI session — Successfully implemented podcast widget v1.9.5 with auto-hydrating RSS episodes. Added Ep 9 fallback data, live RSS caching, and updated show branding. Created test page that works properly. Widget now auto-populates new episodes without manual updates.
+- 2025-10-24: AI session — Successfully created Portrait Portfolio v1.0 widget - portrait photography showcase with vertical composition focus, 3:4 aspect ratios, enhanced detail viewing, performance optimizations, and SEO features. Added to available widgets list and created sample manifest.
 ## 1.5.0 — 2025-09-29
 - Added unified-portfolio-demo.html (master demo with ?type= and ?manifest=).
 - Links to unified versions for Concert, Event, and Photojournalism.

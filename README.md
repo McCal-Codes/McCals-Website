@@ -67,9 +67,10 @@ Critical repository events, security incidents, and recovery steps are documente
 
 ### Available Widgets
 - **Concert Portfolio** (`src/widgets/concert-portfolio/`) - Photo galleries for concert photography *(v4.5 SEO enhancements in development)*
-- **Event Portfolio** (`src/widgets/event-portfolio/`) - Event photography displays  
+- **Event Portfolio** (`src/widgets/event-portfolio/`) - Event photography displays
 - **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights
 - **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos
+- **Portrait Portfolio** (`src/widgets/portrait-portfolio/`) - Portrait photography displays with vertical composition focus *(v1.0)*
 - **About Widgets** (`src/widgets/about-widgets/`) - Client logos, carousels, about sections
 - **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays *(v2.0.0 with performance optimizations)*
 - **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections

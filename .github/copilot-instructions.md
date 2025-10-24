@@ -176,6 +176,7 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-10-24T23:14:01.897Z — Successfully created Portrait Portfolio v1.0 widget - portrait photography showcase with vertical composition focus, 3:4 aspect ratios, enhanced detail viewing, performance optimizations, and SEO features. Added to available widgets list and created sample manifest.
 - 2025-10-24T22:21:24.272Z — Successfully implemented podcast widget v1.9.5 with auto-hydrating RSS episodes. Added Ep 9 fallback data, live RSS caching, and updated show branding. Created test page that works properly. Widget now auto-populates new episodes without manual updates.
 - 2025-10-09T17:15:26.708Z — Close Button Optimization and Navigation Hiding pattern implemented
 - 2025-10-09T17:30:00.000Z — Photojournalism Portfolio Widget v5.2 complete: Glass-like filter buttons with backdrop blur, Fisher-Yates shuffle with one image per album, adjacency minimization, excluded Events folder/Rooney events, simplified All/Published filters, muted green Published accent, updated subheading for political work focus. Added comprehensive changelog entries to both widget CHANGELOG.md and internal modal. All changes validated and production-ready.

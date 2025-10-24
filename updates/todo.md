@@ -1,51 +1,92 @@
 # Widget Enhancement To-Do (October 2025)
 
+*Updated: October 24, 2025*
 
 Reference standards:
 - `docs/standards/preflight-afterflight.md`
 - `docs/standards/widget-standards.md`
 - `docs/standards/widget-development.md`
+- `docs/standards/performance-standards.md`
+- `docs/standards/image-seo-standards.md`
 
-Follow portfolio -> podcast -> navigation -> footer priority.
+## Status Overview
+- **Portfolio widgets**: Mostly complete (concert v4.6, photojournalism v5.2, event portfolio v2.6.0, portrait v1.0)
+- **Podcast widget**: Complete (v1.9.5 with RSS auto-hydration)
+- **Navigation widget**: Complete (v1.6.3/v1.7.0 with enhancements)
+- **Footer widget**: Complete (v1.2.0/v1.3.0 compliance)
+- **About page widget**: Complete (v1.4.4 with updated bio and contact)
 
-## Preflight / Afterflight Anchors
+## ✅ COMPLETED TODAY (October 24, 2025)
+- [x] **Portrait Portfolio v1.0**: New portrait photography widget with vertical composition focus, 3:4 aspect ratios, enhanced detail viewing, performance optimizations, and SEO features. Added to available widgets list and created sample manifest.
+
+## 📍 CURRENT STATE (Ready for Break)
+- **Portrait Portfolio Widget**: Fully implemented and production-ready
+- **Files Created**: Widget code, README, CHANGELOG, STATUS.md, sample manifest
+- **Integration**: Added to main README "Available Widgets" list
+- **Validation**: Preflight checks passed, session finalized
+- **Next Steps**: Ready for testing in Squarespace or local development
+
+## Completed Items (Mark as Done)
+- [x] Podcast Feed v1.9.5: Auto-hydrating RSS episodes, live RSS caching, updated branding (Oct 24, 2025)
+- [x] Site Navigation enhancements: Glassmorphism, hover states, mobile drawer, close button optimization (Oct 9, 2025)
+- [x] Photojournalism Portfolio v5.2: Glass filter buttons, Fisher-Yates shuffle, adjacency minimization (Oct 9, 2025)
+- [x] About Page v1.4.4: Updated bio, contact dropdown, Calendly integration (Oct 8, 2025)
+- [x] Concert Portfolio v4.6: Performance optimized with critical CSS inlining (Oct 6, 2025)
+- [x] Site Footer v1.2.0: Compliance with standards, accessibility improvements (Oct 5, 2025)
+- [x] **Portrait Portfolio v1.0**: New portrait photography widget with vertical composition focus, 3:4 aspect ratios, and enhanced detail viewing (Oct 24, 2025)
+
+## Remaining/In Progress Items
 - [ ] TODO: Run `npm run ai:preflight:short` (or VS Code task) before edits to confirm context.
 - [ ] TODO: Confirm planned changes align with widget standards and enhancement patterns before touching code.
 - [ ] TODO: After each batch of edits, run targeted lint/tests if applicable and re-run preflight summary to capture updated guidance.
 - [ ] TODO: Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and related standards after completing implementation batches.
 
-## Performance Context - Concert Page Audit (Lighthouse 2025-10-06)
-- [ ] TODO: Review FCP/LCP/TBT/Speed Index metrics and address primary issues: render-blocking Squarespace CSS/JS, oversized images, cache TTLs, legacy JS payloads.
-- [ ] TODO: Inline or defer non-critical CSS/JS within widgets; lean on critical CSS model to offset Squarespace assets.
-- [ ] TODO: Implement responsive image sizing, compression, and format upgrades (WebP/AVIF) for gallery content.
-- [ ] TODO: Ensure widget-delivered assets ship with aggressive caching headers when feasible.
-- [ ] TODO: Avoid legacy polyfills in custom scripts; rely on modern browser targets.
+## Performance & SEO Enhancements (New Priority)
+- [ ] TODO: Implement comprehensive SEO standards across all widgets: structured data, enhanced alt text, meta descriptions
+- [ ] TODO: Audit and optimize Lighthouse performance metrics (FCP/LCP/TBT) for all portfolio widgets
+- [ ] TODO: Add responsive image optimization (WebP/AVIF formats, lazy loading) to remaining widgets
+- [ ] TODO: Implement aggressive caching strategies for widget-delivered assets
+- [ ] TODO: Add accessibility improvements: ARIA labels, keyboard navigation, screen reader support
+- [ ] TODO: Create performance monitoring dashboard widget for real-time metrics tracking
 
-## Priority 2 - Podcast Feed v2.0 (`src/widgets/podcast-feed/versions/v2.0-performance-optimized.html`)
-- [ ] TODO: Replace corrupted icon text (e.g., button labels) with accessible inline SVG or ASCII labels.
-- [ ] TODO: Ensure call-to-action buttons meet enhancement typography/spacing standards.
-- [ ] TODO: Add minimal status / episode badges if relevant (published, featured) following enhancement pattern section 3.
-- [ ] TODO: Review lazy-loading strategy for audio/debug features; confirm alignment with performance stack (requestIdleCallback, async scripts).
-- [ ] TODO: Introduce version indicator pattern if missing and cross-check structured data output.
-- [ ] TODO: Update widget README/changelog after functional improvements.
+## New Widget Development Ideas
+- [x] **Portrait Portfolio Widget**: COMPLETED v1.0 - Portrait photography showcase with vertical compositions (Oct 24, 2025)
+- [ ] TODO: Develop Testimonials/Reviews widget with star ratings and client quotes
+- [ ] TODO: Create Contact Form widget with validation and spam protection
+- [ ] TODO: Build Newsletter Signup widget with Mailchimp/ConvertKit integration
+- [ ] TODO: Design Services/Portfolio showcase widget for different work categories
+- [ ] TODO: Implement Blog Post preview widget with RSS feed integration
+- [ ] TODO: Create Social Media feed aggregator widget
+- [ ] TODO: Develop Event calendar/scheduling widget with Google Calendar integration
+- [ ] TODO: Build Interactive FAQ accordion widget
+- [ ] TODO: Create Video portfolio/gallery widget for multimedia content
 
-## Priority 3 - Site Navigation v1.7.0 (`src/widgets/site-navigation/versions/v1.7.0-performance-optimized.html`)
-- [ ] TODO: Review glassmorphism variables vs. standards (consistent color tokens, hover states).
-- [ ] TODO: Confirm responsive breakpoints and mobile drawer align with navigation enhancement guidance (keyboard support, focus states).
-- [ ] TODO: Add/version indicator badge within nav heading container per standards doc.
-- [ ] TODO: Evaluate deferred analytics/debug loading for performance compliance.
-- [ ] TODO: Prepare documentation updates reflecting navigation refinements.
+## Maintenance & Infrastructure
+- [ ] TODO: Update `scripts/utils/ai-instructions-preflight.js` to reflect completed enhancements
+- [ ] TODO: Consolidate and update all widget README files with current versions and features
+- [ ] TODO: Create comprehensive widget testing suite with automated validation
+- [ ] TODO: Implement version control system for widget deployments to Squarespace
+- [ ] TODO: Add automated performance regression testing for all widgets
+- [ ] TODO: Create widget documentation site or comprehensive guide
+- [ ] TODO: Implement dark mode support across all widgets
+- [ ] TODO: Add internationalization (i18n) support for multi-language sites
 
-## Priority 4 - Site Footer v1.3.0 (`src/widgets/site-footer/versions/v1.3.0-performance-optimized.html`)
-- [ ] TODO: Normalize typography, button, and link spacing with current standards.
-- [ ] TODO: Ensure newsletter form accessibility (labels, focus styles) and safe-area spacing for any fixed elements.
-- [ ] TODO: Add version indicator + changelog hook in footer heading per standards.
-- [ ] TODO: Validate structured data snippet and lazy-loaded features follow enhancement stack.
+## Advanced Features & Integrations
+- [ ] TODO: Integrate AI-powered image alt-text generation for accessibility
+- [ ] TODO: Add real-time analytics and user interaction tracking
+- [ ] TODO: Implement progressive web app (PWA) features for offline viewing
+- [ ] TODO: Create admin dashboard for content management and widget configuration
+- [ ] TODO: Add A/B testing framework for widget variations
+- [ ] TODO: Implement advanced filtering and search capabilities for portfolio widgets
+- [ ] TODO: Create widget customization API for client-specific branding
+- [ ] TODO: Add automated backup and recovery system for widget configurations
 
-## Cross-Cutting Tasks
-- [ ] Update `scripts/utils/ai-instructions-preflight.js` to reflect new bullet points or icons once widget changes land; verify console output remains ASCII-only.
-- [ ] Update `docs/standards/widget-standards.md` to incorporate any newly adopted patterns or revisions. <!-- Only use TODO: tags for changelog/code-related items for tree compatibility -->
-- [ ] Append details on portfolio/podcast/nav/footer refinements to `docs/standards/widget-standards.md` after implementation.
-- [ ] Re-run afterflight checklist (`docs/standards/preflight-afterflight.md`) before final hand-off.
+## Documentation & Standards Updates
+- [ ] TODO: Update `docs/standards/widget-standards.md` with new patterns and best practices
+- [ ] TODO: Create case studies documenting performance improvements and SEO gains
+- [ ] TODO: Develop widget development tutorial series for future contributors
+- [ ] TODO: Update workspace organization standards to reflect current structure
+- [ ] TODO: Create comprehensive changelog system for all widget versions
+- [ ] TODO: Document integration patterns for third-party services (RSS, calendars, etc.)
 
-_Last updated: 2025-10-06_
+_Last updated: 2025-10-24_
