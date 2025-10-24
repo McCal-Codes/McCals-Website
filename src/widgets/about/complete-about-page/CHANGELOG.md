@@ -1,5 +1,22 @@
 # Complete About Page Widget Changelog
 
+## Version 1.4.5 - Button & Dropdown Refinements (2025-10-24)
+
+### 🎨 Button Polish
+- **Unified Styling**: Rebuilt Get In Touch, Documents, and View Portfolio buttons with matching typography, spacing, and glass borders.
+- **Minimal Footprint**: Reduced padding and min-width for a lighter, more refined CTA row on desktop and mobile.
+- **Consistent Palette**: Standardized text color and hover states to match current widget standards.
+
+### 📂 Documents & Contact Menus
+- **Shared Dropdown Styling**: Consolidated contact and documents menus around a single glassmorphism pattern with flex row items.
+- **Mutual Exclusivity**: Opening one menu now closes the other for predictable behavior.
+- **Disabled State Enhancements**: Updated CV (Coming Soon) item with clearer visual affordances.
+
+### 📱 Mobile Experience
+- **Stacked CTA Layout**: Buttons now expand to full width on small screens with even spacing.
+- **Inline Dropdowns**: Menus switch to in-flow positioning on mobile to prevent overlap with the Client Testimonials section.
+- **Additional Spacing**: Added bio-section margin to preserve breathing room around expanded menus.
+
 ## Version 1.4.4 - Client Carousel v1.2.3 Integration (2025-10-05)
 
 ### 🚀 Carousel Upgrade
