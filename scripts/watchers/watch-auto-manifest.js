@@ -5,27 +5,53 @@ const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-// Configuration
-const CONFIG = {
-  watchPath: 'images/Portfolios/Concert',
-  manifestScript: 'manifest:concert',
-  debounceMs: 2000, // Wait 2 seconds after changes before regenerating
-  logFile: 'logs/auto-manifest.log'
+const DEFAULT_TARGET = 'concert';
+
+const TARGET_CONFIGS = {
+  concert: {
+    label: 'Concert Portfolio',
+    watchPath: path.join('src', 'images', 'Portfolios', 'Concert'),
+    manifestScript: 'manifest:concert',
+    logFile: path.join('logs', 'auto-concert-manifest.log'),
+    emoji: '🎸'
+  },
+  events: {
+    label: 'Events Portfolio',
+    watchPath: path.join('src', 'images', 'Portfolios', 'Events'),
+    manifestScript: 'manifest:events',
+    logFile: path.join('logs', 'auto-events-manifest.log'),
+    emoji: '🎪'
+  },
+  nature: {
+    label: 'Nature Portfolio',
+    watchPath: path.join('src', 'images', 'Portfolios', 'Nature'),
+    manifestScript: 'manifest:nature',
+    logFile: path.join('logs', 'auto-nature-manifest.log'),
+    emoji: '🌿'
+  },
+  journalism: {
+    label: 'Journalism Portfolio',
+    watchPath: path.join('src', 'images', 'Portfolios', 'Journalism'),
+    manifestScript: 'manifest:journalism',
+    logFile: path.join('logs', 'auto-journalism-manifest.log'),
+    emoji: '📰'
+  }
 };
 
 class AutoManifestWatcher {
-  constructor() {
+  constructor(targetName, config) {
+    this.targetName = targetName;
+    this.config = config;
     this.debounceTimer = null;
     this.isGenerating = false;
     this.changeQueue = new Set();
-    
-    // Ensure log directory exists
+    this.watcherInstance = null;
     this.ensureLogDir();
-    this.log('🎬 Auto-manifest watcher starting...');
+    this.log(`${this.config.label} watcher starting...`);
   }
 
   ensureLogDir() {
-    const logDir = path.dirname(CONFIG.logFile);
+    const logDir = path.dirname(this.config.logFile);
     if (!fs.existsSync(logDir)) {
       fs.mkdirSync(logDir, { recursive: true });
     }
@@ -33,42 +59,40 @@ class AutoManifestWatcher {
 
   log(message, isError = false) {
     const timestamp = new Date().toISOString();
-    const logMessage = `[${timestamp}] ${message}`;
-    
-    console.log(logMessage);
-    
-    // Append to log file
+    const prefix = this.config.emoji ? `${this.config.emoji} ` : '';
+    const logMessage = `[${timestamp}] ${prefix}${message}`;
+
+    if (isError) {
+      console.error(logMessage);
+    } else {
+      console.log(logMessage);
+    }
+
     try {
-      fs.appendFileSync(CONFIG.logFile, logMessage + '\n');
+      fs.appendFileSync(this.config.logFile, logMessage + '\n');
     } catch (error) {
-      console.error('Failed to write to log file:', error.message);
+      console.error(`[${this.config.label}] Failed to write to log file:`, error.message);
     }
   }
 
   async regenerateManifest() {
     if (this.isGenerating) {
-      this.log('⏳ Manifest generation already in progress, skipping...');
+      this.log('Manifest generation already in progress, skipping...');
       return;
     }
 
     this.isGenerating = true;
-    
+
     try {
-      this.log('🔄 Regenerating concert manifest...');
-      
-      // Run the manifest generation script
-      const output = execSync(`npm run ${CONFIG.manifestScript}`, { 
+      this.log('Regenerating manifest...');
+      execSync(`npm run ${this.config.manifestScript}`, {
         encoding: 'utf8',
         cwd: process.cwd()
       });
-      
-      this.log('✅ Manifest regenerated successfully');
-      
-      // Clear the change queue after successful generation
+      this.log('Manifest regenerated successfully');
       this.changeQueue.clear();
-      
     } catch (error) {
-      this.log(`❌ Error regenerating manifest: ${error.message}`, true);
+      this.log(`Error regenerating manifest: ${error.message}`, true);
     } finally {
       this.isGenerating = false;
     }
@@ -76,38 +100,31 @@ class AutoManifestWatcher {
 
   scheduleRegeneration(filePath, eventType) {
     this.changeQueue.add(`${eventType}:${filePath}`);
-    
-    // Clear existing timer
     if (this.debounceTimer) {
       clearTimeout(this.debounceTimer);
     }
-
-    // Schedule new regeneration
     this.debounceTimer = setTimeout(() => {
-      this.log(`📁 Changes detected: ${Array.from(this.changeQueue).join(', ')}`);
+      this.log(`Changes detected: ${Array.from(this.changeQueue).join(', ')}`);
       this.regenerateManifest();
-    }, CONFIG.debounceMs);
+    }, 2000);
   }
 
   isRelevantFile(filePath) {
-    // Check if it's an image file
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
     const extension = path.extname(filePath).toLowerCase();
-    
-    // Check if it's an image or a directory
     return imageExtensions.includes(extension) || !extension;
   }
 
   isRelevantDirectory(dirPath) {
-    // Skip manifest files and hidden directories
     const dirName = path.basename(dirPath);
     return !dirName.startsWith('.') && !dirName.includes('manifest');
   }
 
   startWatching() {
-    this.log(`👀 Watching directory: ${CONFIG.watchPath}`);
-    
-    const watcher = chokidar.watch(CONFIG.watchPath, {
+    const absoluteWatchPath = path.resolve(process.cwd(), this.config.watchPath);
+    this.log(`Watching directory: ${absoluteWatchPath}`);
+
+    const watcher = chokidar.watch(absoluteWatchPath, {
       ignored: [
         /node_modules/,
         /\.git/,
@@ -117,85 +134,140 @@ class AutoManifestWatcher {
       ],
       ignoreInitial: true,
       persistent: true,
-      depth: 10 // Watch up to 10 levels deep
+      depth: 10
     });
 
-    // File events
     watcher.on('add', (filePath) => {
       if (this.isRelevantFile(filePath)) {
-        this.log(`➕ New file added: ${filePath}`);
+        this.log(`New file added: ${filePath}`);
         this.scheduleRegeneration(filePath, 'add');
       }
     });
 
     watcher.on('unlink', (filePath) => {
       if (this.isRelevantFile(filePath)) {
-        this.log(`➖ File removed: ${filePath}`);
+        this.log(`File removed: ${filePath}`);
         this.scheduleRegeneration(filePath, 'remove');
       }
     });
 
-    // Directory events
     watcher.on('addDir', (dirPath) => {
       if (this.isRelevantDirectory(dirPath)) {
-        this.log(`📁 New directory added: ${dirPath}`);
+        this.log(`Directory added: ${dirPath}`);
         this.scheduleRegeneration(dirPath, 'addDir');
       }
     });
 
     watcher.on('unlinkDir', (dirPath) => {
       if (this.isRelevantDirectory(dirPath)) {
-        this.log(`📁 Directory removed: ${dirPath}`);
+        this.log(`Directory removed: ${dirPath}`);
         this.scheduleRegeneration(dirPath, 'removeDir');
       }
     });
 
-    // Error handling
     watcher.on('error', (error) => {
-      this.log(`❌ Watcher error: ${error.message}`, true);
+      this.log(`Watcher error: ${error.message}`, true);
     });
 
-    this.log('✅ File watcher ready! Add images to trigger auto-regeneration.');
-    
-    // Keep process alive
-    process.on('SIGINT', () => {
-      this.log('🛑 Stopping file watcher...');
-      watcher.close();
-      process.exit(0);
-    });
+    this.log('File watcher ready! Add images to trigger auto-regeneration.');
+    this.watcherInstance = watcher;
+  }
 
-    return watcher;
+  async stopWatching() {
+    if (this.watcherInstance) {
+      await this.watcherInstance.close();
+      this.log('Watcher stopped.');
+    }
   }
 }
 
-// CLI handling
-const args = process.argv.slice(2);
-const showHelp = args.includes('--help') || args.includes('-h');
+function parseTargets(argv) {
+  if (argv.includes('--all')) {
+    return Object.keys(TARGET_CONFIGS);
+  }
 
-if (showHelp) {
+  const targetFlagIndex = argv.findIndex(arg => arg === '--target' || arg === '-t');
+  if (targetFlagIndex !== -1) {
+    const targetArg = argv[targetFlagIndex + 1];
+    if (!targetArg || targetArg.startsWith('-')) {
+      console.error('Missing value for --target option.');
+      process.exit(1);
+    }
+    return targetArg.split(',').map(name => name.trim().toLowerCase()).filter(Boolean);
+  }
+
+  return [DEFAULT_TARGET];
+}
+
+function showHelp() {
+  const targetsList = Object.entries(TARGET_CONFIGS)
+    .map(([key, cfg]) => `  • ${key} – ${cfg.label}`)
+    .join('\n');
   console.log(`
 🎬 Auto-Manifest Watcher
 
-Automatically regenerates the concert manifest when images or folders are added/removed.
+Automatically regenerates manifests when images or folders are added/removed.
 
 Usage:
-  node scripts/watch-auto-manifest.js [options]
+  node scripts/watchers/watch-auto-manifest.js [options]
 
 Options:
-  --help, -h     Show this help message
-  
-Features:
-  • Watches images/Portfolios/Concert for changes
-  • Debounces changes (waits 2 seconds after last change)
-  • Logs all activity to logs/auto-manifest.log
-  • Handles multiple file formats (.jpg, .jpeg, .png, .gif, .webp)
-  • Ignores system files and existing manifest files
+  --help, -h          Show this help message
+  --target <names>    Comma-separated targets to watch (default: ${DEFAULT_TARGET})
+  --all               Watch all supported targets simultaneously
+  --list              List available targets
+
+Available targets:
+${targetsList}
+
+Examples:
+  node scripts/watchers/watch-auto-manifest.js --target nature
+  node scripts/watchers/watch-auto-manifest.js --target concert,nature
+  node scripts/watchers/watch-auto-manifest.js --all
 
 Press Ctrl+C to stop watching.
   `);
-  process.exit(0);
 }
 
-// Start the watcher
-const watcher = new AutoManifestWatcher();
-watcher.startWatching();
+function listTargets() {
+  console.log('Available auto-manifest targets:');
+  Object.entries(TARGET_CONFIGS).forEach(([key, cfg]) => {
+    console.log(`  • ${key} – ${cfg.label} (${cfg.watchPath})`);
+  });
+}
+
+async function main() {
+    const args = process.argv.slice(2);
+    if (args.includes('--help') || args.includes('-h')) {
+      showHelp();
+      process.exit(0);
+    }
+
+    if (args.includes('--list')) {
+      listTargets();
+      process.exit(0);
+    }
+
+    const targetNames = parseTargets(args);
+    const uniqueTargets = [...new Set(targetNames)];
+    const invalidTargets = uniqueTargets.filter(name => !TARGET_CONFIGS[name]);
+    if (invalidTargets.length > 0) {
+      console.error(`Unknown target(s): ${invalidTargets.join(', ')}`);
+      listTargets();
+      process.exit(1);
+    }
+
+    const watchers = uniqueTargets.map(name => new AutoManifestWatcher(name, TARGET_CONFIGS[name]));
+    watchers.forEach(watcher => watcher.startWatching());
+
+    process.on('SIGINT', async () => {
+      console.log('\nStopping auto-manifest watchers...');
+      await Promise.all(watchers.map(watcher => watcher.stopWatching()));
+      process.exit(0);
+    });
+}
+
+main().catch(error => {
+  console.error('Auto-manifest watcher failed:', error.message);
+  process.exit(1);
+});

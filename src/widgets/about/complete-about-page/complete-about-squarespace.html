@@ -1,6 +1,6 @@
-<!-- About Section Widget v1.4.1 — Universal Versioning System
+<!-- About Section Widget v1.4.5 — Universal Versioning System
 Author: Caleb McCartney / McCal-Codes
-Version: 1.4.1
+Version: 1.4.5
 Purpose: Complete about section with bio, photo, reviews, and client carousel for Squarespace
 
 Features:
@@ -9,6 +9,32 @@ Features:
 - LinkedIn and Google reviews section
 - Interactive debug system with real-time logo testing
 - GitHub asset hosting for easy maintenance
+- SEO optimized with structured data and semantic HTML
+
+SEO OPTIMIZATION:
+Add these meta tags to your Squarespace page Advanced settings:
+
+<meta name="description" content="Caleb McCartney is a Pittsburgh-based photojournalist and commercial storyteller specializing in event coverage, corporate campaigns, and authentic brand visuals.">
+<meta name="keywords" content="photojournalist, photographer, Pittsburgh, commercial photography, event coverage, brand visuals, McCal Media">
+<meta name="author" content="Caleb McCartney">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Caleb McCartney - Photojournalist & Commercial Storyteller">
+<meta property="og:description" content="Pittsburgh-based photojournalist and commercial storyteller specializing in authentic brand visuals and event coverage.">
+<meta property="og:image" content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg">
+<meta property="og:url" content="https://yourwebsite.com/about">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Caleb McCartney - Photojournalist & Commercial Storyteller">
+<meta name="twitter:description" content="Pittsburgh-based photojournalist and commercial storyteller specializing in authentic brand visuals and event coverage.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg">
+
+<!-- Additional SEO -->
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yourwebsite.com/about">
+<link rel="author" href="https://mccalmedia.com">
 
 Usage: Paste this entire block into a Squarespace Code Block
 Requirements: GitHub repository with logo assets
@@ -24,7 +50,18 @@ To troubleshoot logo loading issues in Squarespace:
 -->
 
 <style>
-  /* Complete About Section Styles */
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
   .ss-about-section {
     max-width: 900px;
     margin: 0 auto;
@@ -52,7 +89,7 @@ To troubleshoot logo loading issues in Squarespace:
     padding: 60px 0;
     background: rgba(15,15,15,0.6);
     backdrop-filter: blur(20px);
-    margin: 30px 0;
+  margin: 30px 0 120px;
     border-radius: 15px;
     border: 1px solid rgba(255,255,255,0.05);
   }
@@ -102,37 +139,59 @@ To troubleshoot logo loading issues in Squarespace:
 
   .ss-about-buttons {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     flex-wrap: wrap;
     margin-top: 25px;
+    margin-bottom: 20px;
+    justify-content: center;
   }
 
   .ss-about-btn {
-    display: inline-block;
-    padding: 12px 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    min-width: 120px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: #f5f5f5;
   }
 
-  .ss-about-btn-primary {
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    color: white;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
+  .ss-about-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+  }
+
+  .ss-about-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.18);
   }
 
   .ss-about-btn-secondary {
-    background: transparent;
-    color: #e0e0e0;
-    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.06);
+    color: #f4f4f4;
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+  }
+
+  .ss-about-btn-secondary:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.32);
   }
 
   /* Contact Options Menu */
   .ss-contact-container {
     position: relative;
     display: inline-block;
+    z-index: 30;
   }
 
   .ss-contact-options {
@@ -141,66 +200,57 @@ To troubleshoot logo loading issues in Squarespace:
 
   .ss-contact-main-btn {
     position: relative;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    color: white;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    font-weight: 600;
-    padding: 12px 24px;
-    border-radius: 8px;
-    display: inline-block;
-    text-decoration: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.1);
+    box-sizing: border-box;
   }
 
-  .ss-contact-main-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  .ss-contact-menu {
+  .ss-contact-menu,
+  .ss-documents-menu {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(15,15,15,0.98);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.15);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    background: rgba(12,12,12,0.96);
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 12px;
-    margin-top: 8px;
-    z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    overflow: hidden;
-    animation: ss-menu-slide-down 0.2s ease-out;
+    margin-top: 4px;
+    z-index: 20000;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    min-width: 180px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(18px);
   }
 
-  @keyframes ss-menu-slide-down {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .ss-contact-menu.show,
+  .ss-documents-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
   }
 
   .ss-contact-item {
     display: flex;
     align-items: center;
-    padding: 14px 18px;
-    color: #e0e0e0;
+    gap: 10px;
+    padding: 10px 18px;
+    color: #e6e6e6;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.2s ease;
-    font-size: 0.95rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background 0.18s ease, color 0.18s ease;
+    border-radius: 6px;
+    margin: 4px 12px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.1);
   }
 
   .ss-contact-item:hover {
     background: rgba(255,255,255,0.08);
-    color: white;
-    transform: translateX(4px);
+    color: #ffffff;
   }
 
   .ss-contact-item:last-child {
@@ -208,25 +258,26 @@ To troubleshoot logo loading issues in Squarespace:
   }
 
   .ss-contact-icon {
-    font-size: 1.1rem;
-    margin-right: 12px;
-    width: 20px;
-    text-align: center;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .ss-contact-text {
-    flex: 1;
+    display: inline;
     font-weight: 500;
   }
 
   .ss-contact-coming-soon {
-    opacity: 0.7;
+    opacity: 0.65;
     cursor: not-allowed;
+    color: #9f9f9f;
   }
 
   .ss-contact-coming-soon:hover {
     background: rgba(255,255,255,0.04);
-    color: #a0a0a0;
+    color: #9f9f9f;
     transform: none;
   }
 
@@ -238,6 +289,74 @@ To troubleshoot logo loading issues in Squarespace:
     font-size: 0.75rem;
     font-weight: 600;
     border: 1px solid rgba(255,193,7,0.3);
+  }
+
+  /* Documents Dropdown Menu */
+  .ss-documents-container {
+    position: relative;
+    display: inline-block;
+    z-index: 30;
+  }
+
+  .ss-documents-options {
+    position: relative;
+  }
+
+  .ss-documents-main-btn {
+    position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.1);
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 640px) {
+    .ss-about-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .ss-about-buttons > * {
+      width: 100%;
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    .ss-about-buttons .ss-about-btn,
+    .ss-contact-main-btn,
+    .ss-documents-main-btn {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .ss-contact-container,
+    .ss-documents-container,
+    .ss-contact-options,
+    .ss-documents-options {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .ss-contact-menu,
+    .ss-documents-menu {
+      position: static;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      min-width: 0;
+      margin-top: 8px;
+      box-shadow: none;
+      display: none;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .ss-contact-menu.show,
+    .ss-documents-menu.show {
+      transform: none;
+      display: block;
+    }
   }
 
   /* Reviews Section */
@@ -331,55 +450,6 @@ To troubleshoot logo loading issues in Squarespace:
 
   .ss-reviews-cta {
     padding-top: 20px;
-  }
-
-  /* Debug Toggle Button - Concert Widget Style */
-  .ss-debug-toggle {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.85);
-    border: 1px solid #2a2a2a;
-    color: #f5f5f5;
-    padding: 8px 16px;
-    border-radius: 16px;
-    cursor: pointer;
-    font: 600 12px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    z-index: 1000;
-    transition: all 0.3s ease;
-    user-select: none;
-  }
-
-  .ss-debug-toggle:hover {
-    background: rgba(0,0,0,0.95);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    opacity: 0.9;
-  }
-
-  /* Debug info panel - Concert Widget Style */
-  .ss-debug-info {
-    position: fixed;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.85);
-    color: #fff;
-    padding: 12px 16px;
-    border-radius: 6px;
-    font: 600 11px/1.3 ui-monospace, monospace;
-    z-index: 999;
-    max-width: 500px;
-    border: 1px solid #2a2a2a;
-    display: none;
-    backdrop-filter: blur(10px);
-    white-space: pre-wrap;
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
-  .ss-debug-info.active {
-    display: block;
   }
 
   /* Version indicator - bottom right */
@@ -496,22 +566,6 @@ To troubleshoot logo loading issues in Squarespace:
     opacity: 0.8;
     margin: 0 0 15px;
     color: #d0d0d0;
-  }
-
-  .ss-reviews-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: linear-gradient(135deg, rgba(66,133,244,0.8) 0%, rgba(66,133,244,0.6) 100%);
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
   }
 
   /* Client Carousel Squarespace Styles v1.2.3 */
@@ -812,7 +866,7 @@ To troubleshoot logo loading issues in Squarespace:
     }
 
     .ss-about-btn {
-      min-width: 120px;
+      min-width: 140px;
     }
 
     .ss-about-bio, .ss-reviews-section, .ss-client-showcase {
@@ -878,24 +932,96 @@ To troubleshoot logo loading issues in Squarespace:
 </style>
 
 <div class="ss-about-section">
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Caleb McCartney",
+    "jobTitle": "Photojournalist & Commercial Storyteller",
+    "description": "Pittsburgh-based photojournalist and commercial storyteller specializing in event coverage, corporate campaigns, and authentic brand visuals.",
+    "image": "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg",
+    "url": "https://mccalmedia.com",
+    "sameAs": [
+      "https://linkedin.com/company/mccalmedia",
+      "https://calendly.com/wolftech029/30min"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pittsburgh",
+      "addressRegion": "PA",
+      "addressCountry": "US"
+    },
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Point Park University",
+      "degree": "BFA in Photography"
+    },
+    "worksFor": [
+      {
+        "@type": "Organization",
+        "name": "McCal Media",
+        "foundingDate": "2023",
+        "description": "Photography studio specializing in event coverage and brand visuals"
+      },
+      {
+        "@type": "Organization",
+        "name": "Covalent",
+        "description": "Pittsburgh production company"
+      }
+    ],
+    "hasOccupation": [
+      {
+        "@type": "Occupation",
+        "name": "Photojournalist",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Pittsburgh",
+          "addressCountry": "US"
+        }
+      },
+      {
+        "@type": "Occupation",
+        "name": "Commercial Photographer",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Pittsburgh",
+          "addressCountry": "US"
+        }
+      }
+    ],
+    "knowsAbout": [
+      "Photography",
+      "Photojournalism",
+      "Commercial Storytelling",
+      "Event Coverage",
+      "Brand Visuals",
+      "Podcast Production"
+    ]
+  }
+  </script>
+
   <!-- Header -->
-  <div class="ss-about-header">
-    <h1>About</h1>
-  </div>
+  <header class="ss-about-header">
+    <h1>About Caleb McCartney</h1>
+  </header>
 
   <!-- Bio Section -->
-  <div class="ss-about-bio">
+  <section class="ss-about-bio" itemscope itemtype="https://schema.org/Person">
     <div class="ss-about-content">
       <!-- Photo -->
-      <div class="ss-about-photo">
-        <!-- Replace this src with your actual photo URL in Squarespace -->
-        <img src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg" alt="Caleb McCartney - Professional Photographer">
-      </div>
-      
+      <figure class="ss-about-photo">
+        <img src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
+             alt="Caleb McCartney - Professional Photojournalist and Commercial Photographer in Pittsburgh"
+             itemprop="image"
+             loading="lazy">
+        <figcaption class="sr-only">Professional headshot of Caleb McCartney</figcaption>
+      </figure>
+
       <!-- Bio Text -->
-      <div class="ss-about-text">
+      <div class="ss-about-text" itemprop="description">
         <p>
-          Caleb McCartney is a Pittsburgh‑based photojournalist and commercial storyteller, and a proud alumni of Point Park University's BFA in Photography program. As a freelance photographer and photojournalist, he served as The Globe's photo editor over the last fall, working with more clients into the summer and even collaborating on a project out in Kentucky.
+          Caleb McCartney is a Pittsburgh‑based photojournalist and commercial storyteller, and a proud alumni of Point Park University's BFA in Photography program. With 6+ years of experience as a freelance photographer and photojournalist, he has served as The Globe's photo editor and worked with over 30+ happy clients, including collaborations on projects across Kentucky and beyond.
         </p>
         
         <p>
@@ -903,35 +1029,45 @@ To troubleshoot logo loading issues in Squarespace:
         </p>
         
         <p>
-          He also hosts the weekly podcast <a href="/podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
+          He also hosts the weekly podcast <a href="/podcast" rel="noopener" title="Caffeinated Connections Podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
         </p>
         
         <div class="ss-about-buttons">
           <div class="ss-contact-container">
             <div class="ss-contact-options">
-              <button class="ss-about-btn ss-about-btn-primary ss-contact-main-btn" onclick="toggleContactMenu()">
+              <button class="ss-about-btn ss-about-btn-secondary ss-contact-main-btn">
                 Get In Touch
               </button>
-              <div class="ss-contact-menu" id="contactMenu" style="display: none;">
-                <a href="mailto:contact@mcc-cal.com" class="ss-contact-item">
-                  <span class="ss-contact-icon">📧</span>
+              <div class="ss-contact-menu" id="contactMenu">
+                <a href="mailto:contact@mcc-cal.com" class="ss-contact-item" aria-label="Send email to Caleb McCartney">
+                  <span class="ss-contact-icon" aria-hidden="true">📧</span>
                   <span class="ss-contact-text">Send Email</span>
                 </a>
-                <a href="https://calendly.com/wolftech029/30min" target="_blank" rel="noopener" class="ss-contact-item">
-                  <span class="ss-contact-icon">☕</span>
+                <a href="https://calendly.com/wolftech029/30min" target="_blank" rel="noopener" class="ss-contact-item" aria-label="Schedule a coffee chat with Caleb">
+                  <span class="ss-contact-icon" aria-hidden="true">☕</span>
                   <span class="ss-contact-text">Grab a Coffee</span>
                 </a>
               </div>
             </div>
           </div>
-          <!-- GitHub raw URL for resume download -->
-          <a href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/caleb-mccartney-resume.pdf" download="Caleb-McCartney-Resume-August-2025.pdf" class="ss-about-btn ss-about-btn-secondary">
-            📄 Resume
-          </a>
-          <!-- CV temporarily offline -->
-          <a href="#" onclick="alert('CV coming soon! Currently being updated.'); return false;" class="ss-about-btn ss-about-btn-secondary" style="opacity: 0.6; color: #a0a0a0; border-color: rgba(255,255,255,0.2);">
-            📋 CV (Offline)
-          </a>
+          <!-- Documents Dropdown -->
+          <div class="ss-documents-container">
+            <div class="ss-documents-options">
+              <button class="ss-about-btn ss-about-btn-secondary ss-documents-main-btn">
+                📄 Documents
+              </button>
+              <div class="ss-documents-menu" id="documentsMenu">
+                <a href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/caleb-mccartney-resume.pdf" download="Caleb-McCartney-Resume-August-2025.pdf" class="ss-contact-item" aria-label="Download Caleb McCartney's Resume">
+                  <span class="ss-contact-icon" aria-hidden="true">📄</span>
+                  <span class="ss-contact-text">Resume</span>
+                </a>
+                <a href="#" onclick="alert('CV coming soon! Currently being updated.'); return false;" class="ss-contact-item ss-contact-coming-soon" aria-label="CV currently unavailable">
+                  <span class="ss-contact-icon" aria-hidden="true">📋</span>
+                  <span class="ss-contact-text">CV (Coming Soon)</span>
+                </a>
+              </div>
+            </div>
+          </div>
           <a href="/featured-work" class="ss-about-btn ss-about-btn-secondary">
             View Portfolio
           </a>
@@ -941,37 +1077,89 @@ To troubleshoot logo loading issues in Squarespace:
   </div>
 
   <!-- Reviews Section -->
-  <div class="ss-reviews-section">
+  <section class="ss-reviews-section">
+    <!-- JSON-LD Structured Data for Reviews -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "McCal Media",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "50",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Logan Spiker"
+          },
+          "reviewBody": "Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Ben Orr"
+          },
+          "reviewBody": "Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        }
+      ]
+    }
+    </script>
+
     <div class="ss-reviews-content">
-      <h2 class="ss-reviews-title">What Clients Say</h2>
+      <h2 class="ss-reviews-title">Client Testimonials</h2>
       
       <div class="ss-reviews-grid">
         <!-- LinkedIn Review -->
-        <blockquote class="ss-review-card">
+        <blockquote class="ss-review-card" itemscope itemtype="https://schema.org/Review">
           <div class="ss-review-platform">
             <div class="ss-platform-badge ss-platform-linkedin">LinkedIn</div>
           </div>
-          <p class="ss-review-text">"Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress."</p>
-          <cite class="ss-review-author">— Logan Spiker</cite>
-          <div class="ss-review-title">Former Argo AI, Business Owner</div>
+          <p class="ss-review-text" itemprop="reviewBody">"Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress."</p>
+          <footer>
+            <cite class="ss-review-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+              <span itemprop="name">Logan Spiker</span>
+            </cite>
+            <div class="ss-review-title">Former Argo AI, Business Owner</div>
+          </footer>
         </blockquote>
-        
+
         <!-- Google Review -->
-        <blockquote class="ss-review-card">
+        <blockquote class="ss-review-card" itemscope itemtype="https://schema.org/Review">
           <div class="ss-review-platform">
             <div class="ss-platform-badge ss-platform-google">Google</div>
           </div>
-          <div class="ss-review-stars">★★★★★</div>
-          <p class="ss-review-text">"Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it."</p>
-          <cite class="ss-review-author">— Ben Orr</cite>
-          <div class="ss-review-title">Concert Photography Client</div>
+          <div class="ss-review-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="ss-review-text" itemprop="reviewBody">"Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it."</p>
+          <footer>
+            <cite class="ss-review-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+              <span itemprop="name">Ben Orr</span>
+            </cite>
+            <div class="ss-review-title">Concert Photography Client</div>
+          </footer>
         </blockquote>
       </div>
       
       <!-- Review CTA -->
       <div class="ss-reviews-cta">
         <p class="ss-reviews-rating">⭐ 5.0 Star Rating on Google</p>
-        <a href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8" target="_blank" rel="noopener" class="ss-reviews-btn">
+        <a href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8" target="_blank" rel="noopener" class="ss-about-btn ss-about-btn-secondary">
           📍 View All Reviews
         </a>
       </div>
@@ -990,7 +1178,7 @@ To troubleshoot logo loading issues in Squarespace:
 
     <div class="ss-client-stats">
       <div class="ss-stat-item">
-        <span class="ss-stat-number" id="ss-client-count">20</span>
+        <span class="ss-stat-number" id="ss-client-count">30+</span>
         <div class="ss-stat-label">Happy Clients</div>
       </div>
       <div class="ss-stat-item">
@@ -998,7 +1186,7 @@ To troubleshoot logo loading issues in Squarespace:
         <div class="ss-stat-label">Projects</div>
       </div>
       <div class="ss-stat-item">
-        <span class="ss-stat-number" id="ss-years-experience">5+</span>
+        <span class="ss-stat-number" id="ss-years-experience">6+</span>
         <div class="ss-stat-label">Years Experience</div>
       </div>
     </div>
@@ -1006,18 +1194,21 @@ To troubleshoot logo loading issues in Squarespace:
   
 </div>
 
-<!-- Minimal Debug Toggle (Concert Widget Style) -->
-<div class="ss-debug-toggle" onclick="toggleDebugInfo()">🔧 Debug</div>
-<div class="ss-debug-info" id="ss-debug-info"></div>
-
 <!-- Version Indicator -->
-<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.3</div>
+<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.5</div>
 
 <!-- Changelog Panel -->
 <div class="ss-changelog-panel" id="ss-changelog-panel">
   <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
   <div class="ss-changelog-header">About Widget Changelog</div>
   <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v1.4.5 — Buttons & Dropdown Refinements</div>
+    <div class="ss-changelog-feature">• Rebuilt Get In Touch/Documents controls with unified glass buttons and consistent typography</div>
+    <div class="ss-changelog-feature">• Simplified button sizing for a minimal footprint while preserving balanced spacing</div>
+    <div class="ss-changelog-feature">• Aligned contact/document dropdown styling, added mutual exclusivity, and improved disabled states</div>
+    <div class="ss-changelog-feature">• Mobile dropdowns now stack in-flow to avoid overlapping the Client Testimonials section</div>
+    <div class="ss-changelog-feature">• Added shared outside-click handling and extra bio spacing for reliable menu behavior</div>
+
     <div class="ss-changelog-version">v1.4.4 — Client Carousel v1.2.3 Integration</div>
     <div class="ss-changelog-feature">• Replaced client carousel logic with v1.2.3 widget code (triple-array infinite loop, Fisher-Yates shuffle, error handling)</div>
     <div class="ss-changelog-feature">• Pittsburgh Union Progress logo always white (branding fix)</div>
@@ -1312,25 +1503,94 @@ To troubleshoot logo loading issues in Squarespace:
 })();
 
 // Contact menu toggle function
-function toggleContactMenu() {
+function toggleContactMenu(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   const menu = document.getElementById('contactMenu');
-  const isVisible = menu.style.display !== 'none';
-  
+  const otherMenu = document.getElementById('documentsMenu');
+
+  if (!menu) return;
+
+  const isVisible = menu.classList.contains('show');
+
   if (isVisible) {
-    menu.style.display = 'none';
+    menu.classList.remove('show');
   } else {
-    menu.style.display = 'block';
+    if (otherMenu && otherMenu.classList.contains('show')) {
+      otherMenu.classList.remove('show');
+    }
+    menu.classList.add('show');
   }
 }
 
-// Close contact menu when clicking outside
-document.addEventListener('click', function(event) {
-  const contactContainer = document.querySelector('.ss-contact-container');
-  const menu = document.getElementById('contactMenu');
-  
-  if (!contactContainer.contains(event.target) && menu.style.display === 'block') {
-    menu.style.display = 'none';
+// Documents menu toggle function
+function toggleDocumentsMenu(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
   }
+
+  const menu = document.getElementById('documentsMenu');
+  const otherMenu = document.getElementById('contactMenu');
+
+  if (!menu) return;
+
+  const isVisible = menu.classList.contains('show');
+
+  if (isVisible) {
+    menu.classList.remove('show');
+  } else {
+    if (otherMenu && otherMenu.classList.contains('show')) {
+      otherMenu.classList.remove('show');
+    }
+    menu.classList.add('show');
+  }
+}
+
+// Initialize touch events for mobile
+document.addEventListener('DOMContentLoaded', function() {
+  const contactBtn = document.querySelector('.ss-contact-main-btn');
+  if (contactBtn) {
+    // Handle both click and touch events
+    contactBtn.addEventListener('click', toggleContactMenu);
+    contactBtn.addEventListener('touchend', function(event) {
+      event.preventDefault();
+      toggleContactMenu(event);
+    });
+  }
+
+  const documentsBtn = document.querySelector('.ss-documents-main-btn');
+  if (documentsBtn) {
+    // Handle both click and touch events
+    documentsBtn.addEventListener('click', toggleDocumentsMenu);
+    documentsBtn.addEventListener('touchend', function(event) {
+      event.preventDefault();
+      toggleDocumentsMenu(event);
+    });
+  }
+});
+
+// Close menus when clicking/touching outside
+function closeMenuOnOutside(event, containerSelector, menuId) {
+  const container = document.querySelector(containerSelector);
+  const menu = document.getElementById(menuId);
+
+  if (container && menu && !container.contains(event.target) && menu.classList.contains('show')) {
+    menu.classList.remove('show');
+  }
+}
+
+document.addEventListener('click', function(event) {
+  closeMenuOnOutside(event, '.ss-contact-container', 'contactMenu');
+  closeMenuOnOutside(event, '.ss-documents-container', 'documentsMenu');
+});
+
+document.addEventListener('touchend', function(event) {
+  closeMenuOnOutside(event, '.ss-contact-container', 'contactMenu');
+  closeMenuOnOutside(event, '.ss-documents-container', 'documentsMenu');
 });
 </script>
 

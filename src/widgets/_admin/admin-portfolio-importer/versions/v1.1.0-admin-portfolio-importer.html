@@ -137,7 +137,7 @@
   }
 
   .admin-auth-submit:hover {
-    background: #ff3355;
+    background: #a13245;
   }
 
   .admin-auth-error {
@@ -434,6 +434,13 @@
     font-family: ui-monospace, monospace;
   }
 
+  .admin-preview-optimization {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.6);
+    font-family: ui-sans-serif, system-ui;
+    margin-top: 4px;
+  }
+
   .admin-preview-status {
     padding: 4px 8px;
     border-radius: 4px;
@@ -643,6 +650,12 @@
       flex-direction: column;
     }
   }
+
+  @media (prefers-color-scheme: light) {
+    .admin-preview-optimization {
+      color: rgba(10,10,10,0.6);
+    }
+  }
 </style>
 
 <!-- Authentication Screen -->
@@ -688,6 +701,9 @@
       </button>
       <button class="portfolio-type-btn" data-type="Journalism" onclick="selectPortfolioType('Journalism')">
         📰 Journalism Portfolio
+      </button>
+      <button class="portfolio-type-btn" data-type="Nature" onclick="selectPortfolioType('Nature')">
+        🌿 Nature Portfolio
       </button>
     </div>
   </div>
@@ -745,7 +761,7 @@
 
 <!-- Version Indicator -->
 <div class="admin-version-indicator" onclick="showAdminInfo()">
-  Admin v1.0.0
+  Admin v1.1.0
 </div>
 
 <script>
@@ -767,7 +783,16 @@
     portfolioStructure: {
       Concert: 'src/images/Portfolios/Concert/{band}/{monthYear}/',
       Events: 'src/images/Portfolios/Events/{event}/{monthYear}/',
-      Journalism: 'src/images/Portfolios/Journalism/{category}/'
+      Journalism: 'src/images/Portfolios/Journalism/{category}/',
+      Nature: 'src/images/Portfolios/Nature/{category}/'
+    },
+    optimization: {
+      enabled: true,
+      maxDimension: 3840, // target longest edge in pixels
+      sizeThreshold: 8 * 1024 * 1024, // optimise files larger than 8MB
+      quality: 0.85,
+      minReductionRatio: 0.08, // require at least 8% size reduction to keep optimized version
+      supportedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
     }
   };
 
@@ -778,7 +803,12 @@
     processing: false,
     sessionTimeout: null,
     backendRunning: false,
-    backendChecked: false
+    backendChecked: false,
+    optimizationStats: {
+      optimized: 0,
+      totalOriginalBytes: 0,
+      totalOptimizedBytes: 0
+    }
   };
 
   // Initialize widget
@@ -973,7 +1003,6 @@ The backend server is required for file import operations.
 
   window.adminLogout = function() {
     state.authenticated = false;
-    state.selectedFiles = [];
     clearTimeout(state.sessionTimeout);
     document.getElementById('adminPassword').value = '';
     showAuthScreen();
@@ -1027,41 +1056,36 @@ The backend server is required for file import operations.
     e.currentTarget.classList.remove('drag-over');
   }
 
-  function handleDrop(e) {
+  async function handleDrop(e) {
     e.preventDefault();
     e.currentTarget.classList.remove('drag-over');
-    
-    // Handle both files and directories from drag-and-drop
+
     const files = [];
     const items = e.dataTransfer.items;
-    
+
     if (items) {
-      // Modern browsers with DataTransferItemList
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        if (item.kind === 'file') {
-          const entry = item.webkitGetAsEntry ? item.webkitGetAsEntry() : null;
-          if (entry) {
-            if (entry.isDirectory) {
-              readDirectoryRecursive(entry, files).then(() => {
-                processSelectedFiles(files);
-              });
-              return; // Exit early for async processing
-            } else {
-              files.push(item.getAsFile());
-            }
+        if (item.kind !== 'file') continue;
+        const entry = item.webkitGetAsEntry ? item.webkitGetAsEntry() : null;
+        if (entry) {
+          if (entry.isDirectory) {
+            await readDirectoryRecursive(entry, files);
           } else {
-            files.push(item.getAsFile());
+            const file = item.getAsFile();
+            if (file) files.push(file);
           }
+        } else {
+          const file = item.getAsFile();
+          if (file) files.push(file);
         }
       }
     } else {
-      // Fallback for older browsers
       files.push(...Array.from(e.dataTransfer.files));
     }
-    
+
     if (files.length > 0) {
-      processSelectedFiles(files);
+      await processSelectedFiles(files);
     }
   }
 
@@ -1101,27 +1125,27 @@ The backend server is required for file import operations.
     });
   }
 
-  function handleFileSelect(e) {
+  async function handleFileSelect(e) {
     const files = Array.from(e.target.files);
-    
-    // Add relative path information for folder uploads
+
     files.forEach(file => {
       if (file.webkitRelativePath) {
         file.relativePath = '/' + file.webkitRelativePath;
       }
     });
-    
-    processSelectedFiles(files);
+
+    if (files.length > 0) {
+      await processSelectedFiles(files);
+    }
   }
 
   // File processing
-  function processSelectedFiles(files) {
+  async function processSelectedFiles(files) {
     if (!state.authenticated) {
       showNotification('Authentication required', 'error');
       return;
     }
 
-    // Filter valid files
     const validFiles = files.filter(file => {
       if (!CONFIG.allowedTypes.includes(file.type)) {
         showNotification(`Skipped ${file.name}: unsupported file type`, 'warning');
@@ -1144,16 +1168,39 @@ The backend server is required for file import operations.
       return;
     }
 
-    state.selectedFiles = validFiles;
-    
-    // Analyze folder structure if available
-    const folderInfo = analyzeFolderStructure(validFiles);
-    if (folderInfo.hasMultipleFolders) {
-      showNotification(`Found ${folderInfo.folderCount} folders with ${validFiles.length} images`, 'success');
-    } else {
-      showNotification(`${validFiles.length} files ready for import`, 'success');
+    const folderSummary = analyzeFolderStructure(validFiles);
+
+    releasePreviewUrls(state.selectedFiles);
+    state.selectedFiles = [];
+    state.optimizationStats = {
+      optimized: 0,
+      totalOriginalBytes: 0,
+      totalOptimizedBytes: 0
+    };
+
+    const preparedEntries = [];
+    for (const file of validFiles) {
+      const entry = await prepareFileEntry(file);
+      preparedEntries.push(entry);
+      state.optimizationStats.totalOriginalBytes += entry.optimization.originalSize;
+      state.optimizationStats.totalOptimizedBytes += entry.optimization.optimized ? entry.optimization.optimizedSize : entry.optimization.originalSize;
+      if (entry.optimization.optimized) {
+        state.optimizationStats.optimized += 1;
+      }
     }
-    
+
+    state.selectedFiles = preparedEntries;
+
+    const optimizedMessage = state.optimizationStats.optimized > 0
+      ? ` • Optimized ${state.optimizationStats.optimized} (${bytesToSize(state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes)} saved)`
+      : '';
+
+    if (folderSummary.hasMultipleFolders) {
+      showNotification(`Found ${folderSummary.folderCount} folders with ${validFiles.length} images${optimizedMessage}`, 'success');
+    } else {
+      showNotification(`${validFiles.length} files ready for import${optimizedMessage}`, 'success');
+    }
+
     updatePreview();
   }
 
@@ -1172,35 +1219,44 @@ The backend server is required for file import operations.
 
     previewPanel.classList.add('visible');
     actionButtons.style.display = 'flex';
-    previewCount.textContent = `${state.selectedFiles.length} files selected`;
+    const optimizedCount = state.selectedFiles.filter(entry => entry.optimization.optimized).length;
+    const bytesSaved = Math.max(0, state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes);
+    let summary = `${state.selectedFiles.length} files selected`;
+    if (optimizedCount > 0 && bytesSaved > 0) {
+      summary += ` • ${optimizedCount} optimized (${bytesToSize(bytesSaved)} saved)`;
+    }
+    previewCount.textContent = summary;
 
     // Generate preview items
     previewList.innerHTML = '';
-    state.selectedFiles.forEach((file, index) => {
-      const item = createPreviewItem(file, index);
+    state.selectedFiles.forEach(entry => {
+      const item = createPreviewItem(entry);
       previewList.appendChild(item);
     });
   }
 
-  function createPreviewItem(file, index) {
+  function createPreviewItem(entry) {
     const item = document.createElement('div');
     item.className = 'admin-preview-item';
 
     // Extract date and generate path - use folder structure if available
-    const dateInfo = extractDateFromFilename(file.name);
-    const folderInfo = extractFolderInfo(file);
-    const targetPath = generateTargetPath(file.name, dateInfo, folderInfo);
-    const status = validateImport(file, dateInfo, folderInfo);
+    const targetPath = generateTargetPath(entry.uploadFile.name, entry.dateInfo, entry.folderInfo);
+    const status = validateImport(entry);
 
     // Show folder indicator if file came from a folder
-    const folderIndicator = folderInfo.sourceFolder ? 
-      `<span class="admin-folder-indicator">📁 ${folderInfo.sourceFolder}</span>` : '';
+    const folderIndicator = entry.folderInfo && entry.folderInfo.sourceFolder ? 
+      `<span class="admin-folder-indicator">📁 ${entry.folderInfo.folderPath || entry.folderInfo.sourceFolder}</span>` : '';
+
+    const optimizationLine = entry.optimization.optimized
+      ? `<div class="admin-preview-optimization">Optimized ${bytesToSize(entry.optimization.originalSize)} → ${bytesToSize(entry.optimization.optimizedSize)} (${Math.round(entry.optimization.reduction * 100)}% smaller)</div>`
+      : '';
 
     item.innerHTML = `
-      <img class="admin-preview-thumbnail" src="${URL.createObjectURL(file)}" alt="${file.name}">
+      <img class="admin-preview-thumbnail" src="${entry.previewUrl}" alt="${entry.uploadFile.name}">
       <div class="admin-preview-info">
-        <div class="admin-preview-filename">${file.name}${folderIndicator}</div>
+        <div class="admin-preview-filename">${entry.uploadFile.name}${folderIndicator}</div>
         <div class="admin-preview-path">${targetPath}</div>
+        ${optimizationLine}
       </div>
       <div class="admin-preview-status ${status.type}">${status.message}</div>
     `;
@@ -1283,30 +1339,241 @@ The backend server is required for file import operations.
     return { sourceFolder: null, folderPath: null };
   }
 
+  const bytesToSize = (bytes) => {
+    if (!bytes || bytes <= 0) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB'];
+    const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+    const value = bytes / Math.pow(1024, exponent);
+    return `${value.toFixed(value >= 10 || exponent === 0 ? 0 : 1)} ${units[exponent]}`;
+  };
+
+  const canvasToBlob = (canvas, mimeType, quality) => new Promise(resolve => {
+    if (!canvas || typeof canvas.toBlob !== 'function') {
+      resolve(null);
+      return;
+    }
+    canvas.toBlob(blob => resolve(blob), mimeType, quality);
+  });
+
+  const loadImageForProcessing = async (file) => {
+    if (!file) throw new Error('No file provided');
+
+    if ('createImageBitmap' in window) {
+      try {
+        const bitmap = await createImageBitmap(file);
+        return {
+          width: bitmap.width,
+          height: bitmap.height,
+          renderTo(canvas, width, height) {
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(bitmap, 0, 0, width, height);
+          },
+          dispose() {
+            bitmap.close();
+          }
+        };
+      } catch (error) {
+        console.warn('createImageBitmap failed, falling back to Image()', error);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        resolve({
+          width: img.naturalWidth,
+          height: img.naturalHeight,
+          renderTo(canvas, width, height) {
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+          },
+          dispose() {
+            URL.revokeObjectURL(url);
+          }
+        });
+      };
+      img.onerror = (err) => {
+        URL.revokeObjectURL(url);
+        reject(err);
+      };
+      img.src = url;
+    });
+  };
+
+  async function optimizeImageIfNeeded(file) {
+    const result = {
+      optimized: false,
+      file,
+      originalSize: file.size,
+      optimizedSize: file.size,
+      originalDimensions: null,
+      optimizedDimensions: null,
+      reduction: 0,
+      reason: '',
+      error: null
+    };
+
+    if (!CONFIG.optimization.enabled) {
+      return result;
+    }
+
+    if (!CONFIG.optimization.supportedTypes.includes(file.type)) {
+      return result;
+    }
+
+    try {
+      const image = await loadImageForProcessing(file);
+      if (!image.width || !image.height) {
+        image.dispose();
+        return result;
+      }
+
+      result.originalDimensions = { width: image.width, height: image.height };
+
+      const longestEdge = Math.max(image.width, image.height);
+      const shouldResize = longestEdge > CONFIG.optimization.maxDimension;
+      const shouldCompress = file.size > CONFIG.optimization.sizeThreshold;
+
+      if (!shouldResize && !shouldCompress) {
+        image.dispose();
+        return result;
+      }
+
+      const scale = shouldResize ? Math.min(CONFIG.optimization.maxDimension / longestEdge, 1) : 1;
+      const targetWidth = Math.round(image.width * scale);
+      const targetHeight = Math.round(image.height * scale);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = targetWidth || image.width;
+      canvas.height = targetHeight || image.height;
+      image.renderTo(canvas, canvas.width, canvas.height);
+      image.dispose();
+
+      const outputType = file.type === 'image/png'
+        ? 'image/png'
+        : (file.type === 'image/webp' ? 'image/webp' : 'image/jpeg');
+      const quality = outputType === 'image/png' ? undefined : CONFIG.optimization.quality;
+
+      const optimizedBlob = await canvasToBlob(canvas, outputType, quality);
+      if (!optimizedBlob) {
+        return result;
+      }
+
+      result.optimizedSize = optimizedBlob.size;
+      result.optimizedDimensions = { width: canvas.width, height: canvas.height };
+      result.reduction = file.size > 0 ? 1 - (optimizedBlob.size / file.size) : 0;
+
+      if (result.optimizedSize >= file.size || result.reduction < CONFIG.optimization.minReductionRatio) {
+        return result;
+      }
+
+      const optimizedFile = new File([optimizedBlob], file.name, { type: outputType, lastModified: Date.now() });
+      optimizedFile.relativePath = file.relativePath;
+      optimizedFile.webkitRelativePath = file.webkitRelativePath;
+      optimizedFile.__optimizedFrom = file.name;
+      result.optimized = true;
+      result.reason = shouldResize ? 'dimension' : 'size';
+      result.file = optimizedFile;
+      return result;
+    } catch (error) {
+      console.error('Image optimization failed:', error);
+      result.error = error && error.message ? error.message : 'Optimization failed';
+      return result;
+    }
+  }
+
+  async function prepareFileEntry(file) {
+    const folderInfo = extractFolderInfo(file);
+    const dateInfo = extractDateFromFilename(file.name);
+    const optimization = await optimizeImageIfNeeded(file);
+    const uploadFile = optimization.file || file;
+    if (file.relativePath) {
+      uploadFile.relativePath = file.relativePath;
+    }
+    if (file.webkitRelativePath) {
+      uploadFile.webkitRelativePath = file.webkitRelativePath;
+    }
+
+    const previewUrl = URL.createObjectURL(file);
+
+    return {
+      originalFile: file,
+      uploadFile,
+      relativePath: file.relativePath || (file.webkitRelativePath ? '/' + file.webkitRelativePath : ''),
+      folderInfo,
+      dateInfo,
+      optimization,
+      previewUrl
+    };
+  }
+
+  function releasePreviewUrls(entries) {
+    if (!Array.isArray(entries)) return;
+    entries.forEach(entry => {
+      if (entry && entry.previewUrl) {
+        try {
+          URL.revokeObjectURL(entry.previewUrl);
+        } catch (error) {
+          console.warn('Failed to revoke preview URL', error);
+        }
+      }
+    });
+  }
+
   // Enhanced path generation with folder support
   function generateTargetPath(filename, dateInfo, folderInfo = null) {
     const portfolio = CONFIG.currentPortfolio;
-    let basePath = CONFIG.portfolioStructure[portfolio];
+    let basePath = CONFIG.portfolioStructure[portfolio] || '';
+
+    if (!basePath) {
+      return filename;
+    }
 
     if (portfolio === 'Concert' || portfolio === 'Events') {
-      // Use folder name as entity name if available, otherwise extract from filename
-      const entityName = (folderInfo && folderInfo.sourceFolder) ? 
-        folderInfo.sourceFolder : 
-        (extractEntityName(filename) || 'Unknown');
+      const entityName = (folderInfo && folderInfo.sourceFolder)
+        ? folderInfo.sourceFolder
+        : (extractEntityName(filename) || 'Unknown');
       const monthYear = dateInfo ? formatMonthYear(dateInfo.date) : 'Unknown Date';
-      
+
       basePath = basePath
         .replace('{band}', entityName)
         .replace('{event}', entityName)
         .replace('{monthYear}', monthYear);
     } else if (portfolio === 'Journalism') {
-      // Use folder name as category if available
-      const category = (folderInfo && folderInfo.sourceFolder) ? 
-        folderInfo.sourceFolder : 'General';
+      const category = (folderInfo && (folderInfo.folderPath || folderInfo.sourceFolder))
+        ? (folderInfo.folderPath || folderInfo.sourceFolder)
+        : 'General';
       basePath = basePath.replace('{category}', category);
+    } else if (portfolio === 'Nature') {
+      let categoryPath = (folderInfo && folderInfo.folderPath) || (extractEntityName(filename) || 'General');
+      categoryPath = categoryPath.replace(/^\/+/, '');
+      basePath = basePath.replace('{category}', categoryPath);
     }
 
     return basePath + filename;
+  }
+
+  function determineMappingValue(entry) {
+    if (!entry) return null;
+    const relPath = entry.relativePath || '';
+    const parts = relPath.split('/').filter(Boolean);
+
+    if (CONFIG.currentPortfolio === 'Nature') {
+      if (entry.folderInfo && entry.folderInfo.folderPath) {
+        return entry.folderInfo.folderPath;
+      }
+      return extractEntityName(entry.uploadFile.name) || 'General';
+    }
+
+    if (CONFIG.currentPortfolio === 'Journalism') {
+      if (entry.folderInfo && (entry.folderInfo.folderPath || entry.folderInfo.sourceFolder)) {
+        return entry.folderInfo.folderPath || entry.folderInfo.sourceFolder;
+      }
+    }
+
+    const candidate = parts.find(part => part && part !== entry.uploadFile.name);
+    return candidate || extractEntityName(entry.uploadFile.name) || null;
   }
 
   function extractEntityName(filename) {
@@ -1327,28 +1594,31 @@ The backend server is required for file import operations.
   }
 
   // Enhanced import validation with folder support
-  function validateImport(file, dateInfo, folderInfo = null) {
-    const issues = [];
-    
+  function validateImport(entry) {
+    const { dateInfo, folderInfo, optimization } = entry;
+    let type = 'success';
+    let message = 'Ready to import';
+
     if (!dateInfo) {
-      issues.push('No date found');
+      type = 'warning';
+      message = 'No date found';
     }
-    
+
     if (folderInfo && folderInfo.sourceFolder) {
-      // File came from folder - this is good for organization
-      if (issues.length === 0) {
-        return { type: 'success', message: 'Folder organized' };
-      } else {
-        return { type: 'warning', message: issues.join(', ') + ' (folder)' };
-      }
-    } else {
-      // Single file upload
-      if (issues.length === 0) {
-        return { type: 'success', message: 'Ready to import' };
-      } else {
-        return { type: 'warning', message: issues.join(', ') };
-      }
+      message = type === 'success' ? 'Folder organized' : `${message} (folder)`;
     }
+
+    if (optimization && optimization.error) {
+      type = 'error';
+      message = optimization.error;
+    }
+
+    if (optimization && optimization.optimized) {
+      const reductionPercent = Math.max(1, Math.round(optimization.reduction * 100));
+      message += ` • Saved ${reductionPercent}%`;
+    }
+
+    return { type, message };
   }
 
   // Preview import with backend
@@ -1358,7 +1628,6 @@ The backend server is required for file import operations.
       return;
     }
 
-    // Check backend health first
     const backendHealthy = await checkBackendHealth();
     if (!backendHealthy) {
       showNotification('Backend server not running. Please start: node scripts/admin-import-backend.js', 'error');
@@ -1370,23 +1639,27 @@ The backend server is required for file import operations.
     previewBtn.textContent = '🔄 Previewing...';
 
     try {
-      // Create FormData for backend preview
       const formData = new FormData();
       formData.append('portfolioType', CONFIG.currentPortfolio);
       formData.append('adminPassword', CONFIG.adminPassword);
       formData.append('previewOnly', 'true');
-      
 
+      const folderMapping = {};
 
-      // Add files and their metadata
-      state.selectedFiles.forEach((file, index) => {
-        formData.append('files', file);
-        if (file.relativePath) {
-          formData.append(`relativePath_${index}`, file.relativePath);
+      state.selectedFiles.forEach((entry, index) => {
+        formData.append('files', entry.uploadFile, entry.uploadFile.name);
+        const relPath = entry.uploadFile.relativePath || entry.relativePath;
+        if (relPath) {
+          formData.append(`relativePath_${index}`, relPath);
+        }
+        const mappingValue = determineMappingValue(entry);
+        if (mappingValue) {
+          folderMapping[entry.uploadFile.name] = mappingValue;
         }
       });
 
-      // Call backend preview API
+      formData.append('folderMapping', JSON.stringify(folderMapping));
+
       const response = await fetch(`${CONFIG.backendUrl}/api/admin/import/preview`, {
         method: 'POST',
         body: formData
@@ -1405,7 +1678,7 @@ The backend server is required for file import operations.
       }
     } catch (error) {
       console.error('Preview error:', error);
-      if (error.message.includes('fetch')) {
+      if (error.message && error.message.includes('fetch')) {
         showNotification('Backend server not responding. Please start: node scripts/admin-import-backend.js', 'error');
       } else {
         showNotification(`Preview failed: ${error.message}`, 'error');
@@ -1432,7 +1705,7 @@ The backend server is required for file import operations.
     state.processing = true;
     const processBtn = document.getElementById('processBtn');
     processBtn.disabled = true;
-    processBtn.textContent = 'Importing...';
+  processBtn.textContent = 'Importing...';
 
     // Show progress
     const progressContainer = document.getElementById('progressContainer');
@@ -1448,27 +1721,20 @@ The backend server is required for file import operations.
       
       // Build folder mapping for band/entity names
       const folderMapping = {};
-      state.selectedFiles.forEach(file => {
-        if (file.relativePath) {
-          const pathParts = file.relativePath.split('/');
-          if (pathParts.length > 1) {
-            // For structure like "Brahctopus/image.jpg" -> use pathParts[0] (Brahctopus)
-            // For structure like "root/Brahctopus/image.jpg" -> use pathParts[1] (Brahctopus)
-            // Use the first non-empty folder name that's not a file
-            const bandName = pathParts.find(part => part && part !== file.name);
-            if (bandName) {
-              folderMapping[file.name] = bandName;
-            }
-          }
+      state.selectedFiles.forEach(entry => {
+        const mappingValue = determineMappingValue(entry);
+        if (mappingValue) {
+          folderMapping[entry.uploadFile.name] = mappingValue;
         }
       });
       formData.append('folderMapping', JSON.stringify(folderMapping));
 
       // Add files and their metadata
-      state.selectedFiles.forEach((file, index) => {
-        formData.append('files', file);
-        if (file.relativePath) {
-          formData.append(`relativePath_${index}`, file.relativePath);
+      state.selectedFiles.forEach((entry, index) => {
+        formData.append('files', entry.uploadFile, entry.uploadFile.name);
+        const relPath = entry.uploadFile.relativePath || entry.relativePath;
+        if (relPath) {
+          formData.append(`relativePath_${index}`, relPath);
         }
       });
 
@@ -1499,7 +1765,7 @@ The backend server is required for file import operations.
       setTimeout(() => {
         state.processing = false;
         processBtn.disabled = false;
-        processBtn.textContent = 'Process Import';
+  processBtn.textContent = '📁 Import Files';
         progressContainer.style.display = 'none';
 
         const successCount = result.successCount || 0;
@@ -1535,7 +1801,7 @@ The backend server is required for file import operations.
       
       state.processing = false;
       processBtn.disabled = false;
-      processBtn.textContent = 'Process Import';
+      processBtn.textContent = '📁 Import Files';
       progressContainer.style.display = 'none';
       
       showNotification(`Import failed: ${error.message}`, 'error');
@@ -1543,7 +1809,13 @@ The backend server is required for file import operations.
   };
 
   window.clearFiles = function() {
+    releasePreviewUrls(state.selectedFiles);
     state.selectedFiles = [];
+    state.optimizationStats = {
+      optimized: 0,
+      totalOriginalBytes: 0,
+      totalOptimizedBytes: 0
+    };
     document.getElementById('fileInput').value = '';
     document.getElementById('fileInputSingle').value = '';
     document.getElementById('previewPanel').classList.remove('visible');
@@ -1562,71 +1834,6 @@ The backend server is required for file import operations.
     }, 4000);
   }
 
-  // Backend preview function
-  window.previewImport = async function() {
-    if (!state.authenticated || state.selectedFiles.length === 0) {
-      return;
-    }
-
-    const previewBtn = document.getElementById('previewBtn');
-    previewBtn.disabled = true;
-    previewBtn.textContent = 'Previewing...';
-
-    try {
-      // Prepare FormData for backend preview
-      const formData = new FormData();
-      
-      state.selectedFiles.forEach(file => {
-        formData.append('files', file);
-      });
-      
-      formData.append('portfolioType', CONFIG.currentPortfolio);
-      
-      const folderMapping = {};
-      state.selectedFiles.forEach(file => {
-        if (file.relativePath) {
-          const pathParts = file.relativePath.split('/');
-          if (pathParts.length > 1) {
-            // For structure like "Brahctopus/image.jpg" -> use pathParts[0] (Brahctopus)
-            // For structure like "root/Brahctopus/image.jpg" -> use pathParts[1] (Brahctopus)
-            // Use the first non-empty folder name that's not a file
-            const bandName = pathParts.find(part => part && part !== file.name);
-            if (bandName) {
-              folderMapping[file.name] = bandName;
-            }
-          }
-        }
-      });
-      formData.append('folderMapping', JSON.stringify(folderMapping));
-
-      const response = await fetch(`${CONFIG.backendUrl}/api/admin/import/preview`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${CONFIG.adminPassword}`
-        },
-        body: formData
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Preview failed');
-      }
-
-      const result = await response.json();
-      
-      // Update preview with backend results
-      updatePreviewFromBackend(result);
-      showNotification(`Backend preview completed: ${result.fileCount} files analyzed`, 'success');
-
-    } catch (error) {
-      console.error('Preview error:', error);
-      showNotification(`Preview failed: ${error.message}`, 'error');
-    } finally {
-      previewBtn.disabled = false;
-      previewBtn.textContent = '🔍 Preview Backend';
-    }
-  };
-
   // Update preview with backend data
   function updatePreviewFromBackend(backendResult) {
     const previewList = document.getElementById('previewList');
@@ -1635,13 +1842,13 @@ The backend server is required for file import operations.
     previewCount.textContent = `${backendResult.fileCount} files (backend validated)`;
     previewList.innerHTML = '';
 
-    backendResult.preview.forEach((item, index) => {
+    backendResult.preview.forEach((item) => {
       const previewItem = document.createElement('div');
       previewItem.className = 'admin-preview-item';
 
       // Find the original file for thumbnail
-      const originalFile = state.selectedFiles.find(f => f.name === item.filename);
-      const thumbnailSrc = originalFile ? URL.createObjectURL(originalFile) : '';
+      const matchedEntry = state.selectedFiles.find(entry => entry.uploadFile.name === item.filename);
+      const thumbnailSrc = matchedEntry ? matchedEntry.previewUrl : '';
 
       const folderIndicator = item.entityName !== 'Unknown' ? 
         `<span class="admin-folder-indicator">📁 ${item.entityName}</span>` : '';
@@ -1671,10 +1878,13 @@ Backend: ${CONFIG.backendUrl}
 Current Portfolio: ${CONFIG.currentPortfolio}
 Auto Manifest: ${CONFIG.autoManifest ? 'Enabled' : 'Disabled'}
 Preview Mode: ${CONFIG.previewMode ? 'Enabled' : 'Disabled'}
+Optimization: ${CONFIG.optimization.enabled ? 'Enabled' : 'Disabled'}
 Max Files: ${CONFIG.maxFiles}
 Max File Size: ${CONFIG.maxFileSize / (1024 * 1024)}MB
 
 Files Selected: ${state.selectedFiles.length}
+Optimized During Selection: ${state.optimizationStats.optimized}
+Estimated Savings: ${bytesToSize(Math.max(0, state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes))}
 Authentication: ${state.authenticated ? 'Active' : 'Required'}
     `;
     alert(info);
