@@ -73,6 +73,19 @@ jobs:
             ERRORS=$((ERRORS + 1))
           fi
           
+          # Check nature manifest
+          if [ -f "src/images/Portfolios/Nature/nature-manifest.json" ]; then
+            if jq empty src/images/Portfolios/Nature/nature-manifest.json 2>/dev/null; then
+              echo "✅ Nature manifest: OK"
+            else
+              echo "❌ Nature manifest: Invalid JSON"
+              ERRORS=$((ERRORS + 1))
+            fi
+          else
+            echo "❌ Nature manifest: Missing"
+            ERRORS=$((ERRORS + 1))
+          fi
+          
           # Report results
           if [ $ERRORS -eq 0 ]; then
             echo "✅ All manifest files are healthy"
@@ -88,11 +101,12 @@ jobs:
           MISSING=0
           
           scripts=(
-            "scripts/generate-concert-manifest.js"
-            "scripts/generate-events-manifest.js" 
-            "scripts/generate-journalism-manifest-v2.js"
-            "scripts/generate-universal-manifest.js"
-            "scripts/generate-featured-manifest.js"
+            "scripts/manifest/generate-concert-manifest.js"
+            "scripts/manifest/generate-events-manifest.js" 
+            "scripts/manifest/generate-journalism-manifest-v2.js"
+            "scripts/manifest/generate-nature-manifest.js"
+            "scripts/manifest/generate-universal-manifest.js"
+            "scripts/manifest/generate-featured-manifest.js"
           )
           
           for script in "${scripts[@]}"; do
@@ -146,6 +160,17 @@ jobs:
             echo "❌ Journalism manifest generation: Failed"
             echo "Log output:"
             cat /tmp/journalism.log
+            exit 1
+          fi
+          
+          # Test nature manifest generation
+          echo "Testing nature manifest..."
+          if node scripts/manifest/generate-nature-manifest.js > /tmp/nature.log 2>&1; then
+            echo "✅ Nature manifest generation: OK"
+          else
+            echo "❌ Nature manifest generation: Failed"
+            echo "Log output:"
+            cat /tmp/nature.log
             exit 1
           fi
 
