@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated": "2025-10-10T00:10:36.884Z",
-  "totalCollections": 3,
+  "generated": "2025-10-24T16:56:23.318Z",
+  "totalCollections": 4,
   "collections": [
     {
       "collectionName": "Bare-faced Curassow",
@@ -32,6 +32,20 @@
       "images": [],
       "tags": [
         "birds"
+      ]
+    },
+    {
+      "collectionName": "West Virginia",
+      "folderPath": "Landscapes/West Virginia",
+      "totalImages": 4,
+      "images": [
+        "barn.jpg",
+        "seneca-rocks-night.jpg",
+        "seneca-rocks.jpg",
+        "tractor.jpg"
+      ],
+      "tags": [
+        "landscape"
       ]
     }
   ]
