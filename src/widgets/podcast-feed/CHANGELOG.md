@@ -1,5 +1,14 @@
 ﻿# Changelog â€” Podcast Feed Widget
 
+## v1.9.5 (2025-10-24) - Auto-Hydrating Episode List
+
+### Data
+- Added live RSS hydration with caching so new episodes publish automatically without manual edits.
+- Seeded the fallback episode list with Ep 9 (Austin Carns) and refreshed legacy titles to match current show naming.
+
+### UI
+- Updated widget subtitle and invite copy to reflect Caffeinated Connections branding refresh.
+
 ## v1.9 (2025-09-25) - Calendar Invite Refresh
 
 ### UI

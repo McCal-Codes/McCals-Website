@@ -59,6 +59,7 @@ PR/Docs discipline
 
 Recent updates
 
+- 2025-10-24T22:21:24.274Z — Successfully implemented podcast widget v1.9.5 with auto-hydrating RSS episodes. Added Ep 9 fallback data, live RSS caching, and updated show branding. Created test page that works properly. Widget now auto-populates new episodes without manual updates.
 - 2025-10-09T17:15:26.710Z — Close Button Optimization and Navigation Hiding pattern implemented
 - 2025-10-06T23:41:05.929Z — Session complete: minor updates.
 - 2025-10-06T23:40:47.795Z — Created comprehensive SEO starter guide document tailored for McCal Media's Squarespace implementation, covering site structure, titles/meta descriptions, image optimization, structured data, internal linking, and technical hygiene. Added to docs/standards/ and updated main README and CHANGELOG.

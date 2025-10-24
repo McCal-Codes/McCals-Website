@@ -50,7 +50,9 @@ High-performance RSS feed widget with liquid glass design and performance optimi
 - Show artwork and branding
 
 ## Versions
-- **v1.1** (Latest): Audio previews, platform links, enhanced dark styling
+- **v1.9.5** (Latest): Auto-hydrating RSS episodes with caching, Ep 9 fallback data, updated show naming
+- **v1.9**: Calendar invite refresh with data attributes for intro copy
+- **v1.1**: Audio previews, platform links, enhanced dark styling
 - **v1.0**: Initial release with glassmorphism design
 - Performance-optimized RSS parsing with caching
 - Responsive masonry layout with smooth animations
