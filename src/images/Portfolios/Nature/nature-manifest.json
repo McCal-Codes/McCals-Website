@@ -1,13 +1,16 @@
 {
   "version": "1.0",
-  "generated": "2025-10-24T16:57:52.183Z",
+  "generated": "2025-10-24T23:00:59.838Z",
   "totalCollections": 4,
   "collections": [
     {
       "collectionName": "Bare-faced Curassow",
       "folderPath": "Wildlife/Birds/Bare-faced Curassow",
-      "totalImages": 0,
-      "images": [],
+      "totalImages": 2,
+      "images": [
+        "230727_Aviary_Soot__CAL4536.jpg",
+        "230727_Aviary_Soot__CAL4596.jpg"
+      ],
       "tags": [
         "birds"
       ]
@@ -28,8 +31,10 @@
     {
       "collectionName": "Steller's Sea Eagle",
       "folderPath": "Wildlife/Birds/Steller's Sea Eagle",
-      "totalImages": 0,
-      "images": [],
+      "totalImages": 1,
+      "images": [
+        "230204_McCal__CAL3164.jpg"
+      ],
       "tags": [
         "birds"
       ]
