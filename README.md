@@ -75,6 +75,7 @@ Critical repository events, security incidents, and recovery steps are documente
 - **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays *(v2.0.0 with performance optimizations)*
 - **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections
 - **Site Footer** (`src/widgets/site-footer/`) - Glass design footer with social links and newsletter
+- **Policies & Legal** (`src/widgets/policies-legal/`) - Comprehensive legal documentation page with Terms, Privacy, Cookie Policy, License, FAQ *(v1.0.0 SEO-enhanced)*
 - **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only)*
 
 ### Work in Progress

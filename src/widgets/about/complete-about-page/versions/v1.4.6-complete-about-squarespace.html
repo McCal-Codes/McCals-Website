@@ -11,30 +11,30 @@ Features:
 - GitHub asset hosting for easy maintenance
 - SEO optimized with structured data and semantic HTML
 
-SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → Page Header (do not paste into the Code Block):
+SEO OPTIMIZATION:
+Add these meta tags to your Squarespace page Advanced settings:
 
-<!-- Page Title and Meta Description -->
-<title>About Caleb McCartney | Photojournalist & Commercial Photographer | McCal Media</title>
-<meta name="description" content="Pittsburgh-based photojournalist Caleb McCartney specializes in event coverage, corporate campaigns, and authentic brand visuals. Point Park University BFA, featured in NY Post and Pittsburgh Magazine.">
+<meta name="description" content="Caleb McCartney is a Pittsburgh-based photojournalist and commercial storyteller specializing in event coverage, corporate campaigns, and authentic brand visuals.">
+<meta name="keywords" content="photojournalist, photographer, Pittsburgh, commercial photography, event coverage, brand visuals, McCal Media">
+<meta name="author" content="Caleb McCartney">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="profile">
-<meta property="og:title" content="About Caleb McCartney | Photojournalist | McCal Media">
-<meta property="og:description" content="Pittsburgh photojournalist specializing in event coverage and commercial storytelling. Point Park University BFA graduate.">
+<meta property="og:title" content="Caleb McCartney - Photojournalist & Commercial Storyteller">
+<meta property="og:description" content="Pittsburgh-based photojournalist and commercial storyteller specializing in authentic brand visuals and event coverage.">
 <meta property="og:image" content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg">
-<meta property="og:url" content="https://mccalmedia.com/about">
-<meta property="og:profile:first_name" content="Caleb">
-<meta property="og:profile:last_name" content="McCartney">
+<meta property="og:url" content="https://yourwebsite.com/about">
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Caleb McCartney | Photojournalist & Commercial Photographer">
-<meta name="twitter:description" content="Pittsburgh-based photojournalist specializing in event coverage and commercial storytelling.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Caleb McCartney - Photojournalist & Commercial Storyteller">
+<meta name="twitter:description" content="Pittsburgh-based photojournalist and commercial storyteller specializing in authentic brand visuals and event coverage.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg">
 
-<!-- Canonical & Robots -->
-<link rel="canonical" href="https://mccalmedia.com/about">
+<!-- Additional SEO -->
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yourwebsite.com/about">
+<link rel="author" href="https://mccalmedia.com">
 
 <style>
   /* Screen reader only content */
@@ -586,9 +586,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     display: flex;
     animation: ss-scroll 55s linear infinite;
     width: calc(200px * 75); /* 25 clients × 3 copies = 75 */
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 
   .ss-client-track:hover {
@@ -991,72 +988,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   }
   </script>
 
-  <!-- LocalBusiness JSON-LD for McCal Media -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness", "Photographer"],
-    "name": "McCal Media",
-    "image": "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg",
-    "url": "https://mccalmedia.com",
-    "telephone": "+1-570-299-1214",
-    "email": "business@mcc-cal.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "320 Pointview Rd, Apt 2",
-      "addressLocality": "Pittsburgh",
-      "addressRegion": "PA",
-      "postalCode": "15227",
-      "addressCountry": "US"
-    },
-    "areaServed": ["Pittsburgh", "Erie", "Western Pennsylvania"],
-    "priceRange": "$$",
-    "sameAs": [
-      "https://www.instagram.com/mccal.media",
-      "https://www.linkedin.com/company/mccal-media"
-    ]
-  }
-  </script>
-
-  <!-- BreadcrumbList JSON-LD: Home > About -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mccalmedia.com/"},
-      {"@type": "ListItem", "position": 2, "name": "About", "item": "https://mccalmedia.com/about"}
-    ]
-  }
-  </script>
-
-  <!-- Key Services JSON-LD (Event, Commercial, Photojournalism) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "serviceType": "Event Photography",
-        "provider": {"@type": "LocalBusiness", "name": "McCal Media", "url": "https://mccalmedia.com"},
-        "areaServed": "Pittsburgh, PA"
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Commercial Photography",
-        "provider": {"@type": "LocalBusiness", "name": "McCal Media", "url": "https://mccalmedia.com"},
-        "areaServed": "Pittsburgh, PA"
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Photojournalism",
-        "provider": {"@type": "LocalBusiness", "name": "McCal Media", "url": "https://mccalmedia.com"},
-        "areaServed": "Pittsburgh, PA"
-      }
-    ]
-  }
-  </script>
-
   <!-- Header -->
   <header class="ss-about-header">
     <h1>About Caleb McCartney</h1>
@@ -1224,8 +1155,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
   <!-- Client Carousel Section -->
   <div class="ss-client-showcase">
-  <h2 class="ss-client-heading">Trusted by Leading Brands</h2>
-  <h2 class="ss-client-subtitle">Collaborating with these amazing clients</h2>
+    <h2 class="ss-client-heading">Trusted by Leading Brands</h2>
+    <p class="ss-client-subtitle">Collaborating with these amazing clients</p>
 
     <div id="ss-client-container" class="ss-client-loading">
       <div class="ss-client-spinner"></div>
@@ -1553,72 +1484,38 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     const tripleClients = [...shuffledClients, ...shuffledClients, ...shuffledClients];
     const carousel = document.createElement('div');
     carousel.className = 'ss-client-carousel';
-    const track = document.createElement('ul');
+    const track = document.createElement('div');
     track.className = 'ss-client-track';
-    track.setAttribute('role', 'list');
-    track.setAttribute('aria-label', 'Client logos carousel');
 
     tripleClients.forEach(client => {
-      const logoElement = document.createElement('li');
+      const logoElement = document.createElement('div');
       logoElement.className = 'ss-client-logo';
       logoElement.setAttribute('title', `${client.name} - ${client.project}`);
       // Try loading image first
       const img = document.createElement('img');
-      img.alt = `${client.name} logo - ${client.project}`;
+      img.alt = `${client.name} logo`;
       img.loading = 'lazy';
-      if (client.logoClass) {
-        img.classList.add(client.logoClass);
-      }
       // Set up error handling before setting src
       img.onerror = () => handleLogoError(logoElement, client);
       // Add load event to ensure proper display
       img.onload = () => {
         img.style.opacity = '1';
+        if (client.logoClass) {
+          img.className = client.logoClass;
+        }
       };
       img.src = client.logo;
       img.style.opacity = '0.9';
       logoElement.appendChild(img);
-      if (client.website) {
-        logoElement.setAttribute('role', 'button');
-        logoElement.setAttribute('aria-label', `Open ${client.name} website`);
-        logoElement.addEventListener('click', () => {
-          window.open(client.website, '_blank', 'noopener noreferrer');
-        });
-      }
+      logoElement.addEventListener('click', () => {
+        if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
+      });
       track.appendChild(logoElement);
     });
     carousel.appendChild(track);
     container.className = 'ss-client-container';
     container.innerHTML = '';
     container.appendChild(carousel);
-
-    // Inject Organization JSON-LD structured data for SEO
-    try {
-      const uniqueClients = Array.from(new Map(clientsData.map(c => [c.name, c])).values());
-      const orgSchema = {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "McCal Media",
-        "url": "https://mccalmedia.com",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "50",
-          "bestRating": "5"
-        },
-        "partner": uniqueClients.map(c => ({
-          "@type": "Organization",
-          "name": c.name,
-          ...(c.website ? { url: c.website } : {})
-        }))
-      };
-      const ld = document.createElement('script');
-      ld.type = 'application/ld+json';
-      ld.textContent = JSON.stringify(orgSchema);
-      container.parentElement.appendChild(ld);
-    } catch (e) {
-      console.warn('JSON-LD injection failed:', e);
-    }
   }
 
   // Initialize when DOM is ready

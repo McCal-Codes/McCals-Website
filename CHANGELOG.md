@@ -1,3 +1,9 @@
+## 2025-10-28
+### Policies & Legal Widget v1.0.0 — Hotfix
+- Fixed stray "-->" rendering at top by closing the initial comment block properly; no functional or visual regressions.
+- Confirmed PDF download wiring via `data-terms-pdf` (with fallback), floating menu, and version badge interactions remain intact.
+- Widget HTML validation: PASS.
+
 ## 2025-10-10
 ### Nature Manifest Generator v2.0
 - Major upgrade: Now scans all animal types under Wildlife (not just Birds) and auto-generates per-species manifest.json files tagged with the animal type.
