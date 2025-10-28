@@ -176,6 +176,8 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-10-28T23:59:00.000Z — Policies & Legal v1.0.0 hotfix: fixed top comment closure to eliminate stray "-->" rendering. Revalidated widget (PASS). Download button wired via data-terms-pdf with fallback remains intact; floating menu and version badge interactions confirmed.
+- 2025-01-27T18:30:00.000Z — Created Policies & Legal Widget v1.0.0: Comprehensive legal documentation page with sidebar navigation featuring Terms & Conditions (23 sections), Privacy Policy, Cookie Policy, Usage License, FAQ (7 questions), and Contact. SEO-enhanced with WebPage, BreadcrumbList, and FAQPage schemas. Full accessibility with ARIA labels, semantic HTML, and keyboard navigation. Responsive mobile drawer menu. Unsplash-inspired clean design with dark/light mode support. Auto-updating effective date and copyright year. Added to main README available widgets list. Complete documentation (README, CHANGELOG) created.
 - 2025-10-24T23:14:01.897Z — Successfully created Portrait Portfolio v1.0 widget - portrait photography showcase with vertical composition focus, 3:4 aspect ratios, enhanced detail viewing, performance optimizations, and SEO features. Added to available widgets list and created sample manifest.
 - 2025-10-24T22:21:24.272Z — Successfully implemented podcast widget v1.9.5 with auto-hydrating RSS episodes. Added Ep 9 fallback data, live RSS caching, and updated show branding. Created test page that works properly. Widget now auto-populates new episodes without manual updates.
 - 2025-10-09T17:15:26.708Z — Close Button Optimization and Navigation Hiding pattern implemented

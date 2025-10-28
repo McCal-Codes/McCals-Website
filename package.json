@@ -29,6 +29,7 @@
     "manifest:journalism": "node scripts/manifest/generate-journalism-manifest-v2.js",
     "manifest:events": "node scripts/manifest/generate-events-manifest.js --root src/images/Portfolios/Events --force",
     "manifest:nature": "node scripts/manifest/generate-nature-manifest.js",
+    "manifest:portrait": "node scripts/manifest/generate-portrait-manifest.js",
     "watch:journalism-manifest": "node scripts/watch-journalism-manifest.js",
     "watch:events-manifest": "node scripts/watch-events-manifest.js",
     "manifest:concert": "node scripts/manifest/generate-concert-manifest.js",
