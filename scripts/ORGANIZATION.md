@@ -19,10 +19,6 @@ Unreferenced script files (detected by `node scripts/utils/find-unreferenced-scr
 (these may be safe to archive or review; they are not referenced by package.json scripts or workflows):
 
 - scripts/deploy.js
-- scripts/manifest/gen-manifest.js
-- scripts/manifest/generate-individual-manifests.js
-- scripts/manifest/generate-journalism-manifest.js
-- scripts/manifest/simple-concert-manifest.js
 - scripts/utils/add-shebangs-and-chmod.js
 - scripts/utils/auto-check-todo.js
 - scripts/utils/cleanup-manifests.js
@@ -32,6 +28,12 @@ Unreferenced script files (detected by `node scripts/utils/find-unreferenced-scr
 - scripts/utils/refresh-concerts.js
 - scripts/utils/shared-date-parsing.js
 - scripts/watchers/auto-manifest-updater.js
+
+Recently archived (2025-11-03):
+- scripts/manifest/gen-manifest.js → scripts/_archived/gen-manifest.js.archived-20251103-145720
+- scripts/manifest/generate-individual-manifests.js → scripts/_archived/generate-individual-manifests.js.archived-20251103-145720
+- scripts/manifest/generate-journalism-manifest.js → scripts/_archived/generate-journalism-manifest.js.archived-20251103-145720
+- scripts/manifest/simple-concert-manifest.js → scripts/_archived/simple-concert-manifest.js.archived-20251103-145720
 
 Next steps (recommended, conservative)
 - Review each unreferenced script manually to ensure it isn't called by an external process or used interactively.

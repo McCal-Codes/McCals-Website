@@ -1,0 +1,690 @@
+<!-- Hire to Unlock Résumé v1.0.0 -->
+<div class="hire-to-unlock-widget" data-widget-version="1.0.0">
+  <style>
+    /* Hire to Unlock Résumé Widget Styles */
+    .hire-to-unlock-widget {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .hire-to-unlock-widget * {
+      box-sizing: border-box;
+    }
+
+    /* CSS Custom Properties (Theme Variables) */
+    .hire-to-unlock-widget {
+      --mc-bg: #050506;
+      --mc-text: #f3f5f8;
+      --mc-line: #272423;
+      --mc-accent: #5fd4f0;
+      --mc-accent-black: #272423;
+      --mc-accent-taupe: #B8B0AA;
+      --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #B8B0AA 100%);
+      --mc-success: #00d4aa;
+    }
+
+    /* Hero Section */
+    .hire-to-unlock-hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: var(--mc-bg);
+      color: var(--mc-text);
+      margin-bottom: 2rem;
+    }
+
+    .hire-to-unlock-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hire-to-unlock-mission {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* Resume Section */
+    .hire-to-unlock-resume {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hire-to-unlock-resume-container {
+      background: var(--mc-bg);
+      border: 1px solid var(--mc-line);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      position: relative;
+    }
+
+    .hire-to-unlock-resume-header {
+      border-bottom: 2px solid var(--mc-line);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hire-to-unlock-resume-header h2 {
+      font-size: 2rem;
+      color: var(--mc-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .hire-to-unlock-contact-info {
+      color: var(--mc-accent-taupe);
+      font-size: 0.9rem;
+    }
+
+    .hire-to-unlock-section-content {
+      margin-bottom: 2rem;
+    }
+
+    .hire-to-unlock-section-content h3 {
+      color: var(--mc-text);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--mc-line);
+      padding-bottom: 0.5rem;
+    }
+
+    .hire-to-unlock-job-entry {
+      margin-bottom: 1.5rem;
+    }
+
+    .hire-to-unlock-job-entry h4 {
+      color: var(--mc-text);
+      margin-bottom: 0.25rem;
+    }
+
+    .hire-to-unlock-job-meta {
+      color: var(--mc-accent-taupe);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hire-to-unlock-job-entry ul {
+      margin-left: 1.5rem;
+    }
+
+    .hire-to-unlock-job-entry li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .hire-to-unlock-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .hire-to-unlock-skill {
+      background: var(--mc-line);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--mc-text);
+    }
+
+    .hire-to-unlock-education-entry h4 {
+      color: var(--mc-text);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Redaction Styles */
+    .hire-to-unlock-redacted {
+      background: #000;
+      color: #000;
+      border-radius: 2px;
+      user-select: none;
+      position: relative;
+    }
+
+    .hire-to-unlock-redacted::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.1) 2px,
+        rgba(255, 255, 255, 0.1) 4px
+      );
+      border-radius: 2px;
+    }
+
+    /* Unlock Overlay */
+    .hire-to-unlock-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .hire-to-unlock-content {
+      background: var(--mc-bg);
+      border: 1px solid var(--mc-line);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .hire-to-unlock-content h3 {
+      font-size: 1.5rem;
+      color: var(--mc-text);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hire-to-unlock-content p {
+      color: var(--mc-accent-taupe);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .hire-to-unlock-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hire-to-unlock-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .hire-to-unlock-btn-primary {
+      background: var(--mc-accent);
+      color: var(--mc-bg);
+    }
+
+    .hire-to-unlock-btn-primary:hover {
+      background: var(--mc-accent);
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(95, 212, 240, 0.3);
+    }
+
+    .hire-to-unlock-btn-primary svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .hire-to-unlock-btn-secondary {
+      background: var(--mc-line);
+      color: var(--mc-text);
+      border: 1px solid var(--mc-accent-taupe);
+    }
+
+    .hire-to-unlock-btn-secondary:hover {
+      background: var(--mc-accent-black);
+      border-color: var(--mc-accent);
+    }
+
+    .hire-to-unlock-footer {
+      border-top: 1px solid var(--mc-line);
+      padding-top: 1rem;
+    }
+
+    .hire-to-unlock-privacy,
+    .hire-to-unlock-fallback {
+      margin: 0.5rem 0;
+      color: var(--mc-accent-taupe);
+    }
+
+    .hire-to-unlock-privacy a,
+    .hire-to-unlock-fallback a {
+      color: var(--mc-accent);
+      text-decoration: underline;
+    }
+
+    .hire-to-unlock-privacy a:hover,
+    .hire-to-unlock-fallback a:hover {
+      color: var(--mc-accent);
+      opacity: 0.8;
+    }
+
+    /* Animation States */
+    .hire-to-unlock-resume-container.unlocked .hire-to-unlock-redacted {
+      animation: hire-to-unlock-reveal 0.8s ease-out forwards;
+    }
+
+    .hire-to-unlock-resume-container.unlocked .hire-to-unlock-overlay {
+      animation: hire-to-unlock-fadeOut 0.5s ease-out forwards;
+    }
+
+    @keyframes hire-to-unlock-reveal {
+      0%, 50% {
+        background: #000;
+        color: #000;
+      }
+      100% {
+        background: transparent;
+        color: inherit;
+      }
+    }
+
+    @keyframes hire-to-unlock-fadeOut {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+    }
+
+    /* Peek animation for Easter egg */
+    .hire-to-unlock-redacted.peek {
+      animation: hire-to-unlock-peek 2s ease-in-out;
+    }
+
+    @keyframes hire-to-unlock-peek {
+      0%, 100% { background: #000; color: #000; }
+      50% { background: transparent; color: inherit; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hire-to-unlock-hero {
+        padding: 2rem 1rem;
+      }
+
+      .hire-to-unlock-hero h1 {
+        font-size: 2rem;
+      }
+
+      .hire-to-unlock-mission {
+        font-size: 1rem;
+      }
+
+      .hire-to-unlock-resume-container {
+        padding: 1rem;
+        margin: 0 1rem;
+      }
+
+      .hire-to-unlock-content {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+
+      .hire-to-unlock-actions {
+        flex-direction: column;
+      }
+
+      .hire-to-unlock-btn {
+        width: 100%;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .hire-to-unlock-resume-container.unlocked .hire-to-unlock-redacted,
+      .hire-to-unlock-resume-container.unlocked .hire-to-unlock-overlay {
+        animation: none;
+      }
+
+      .hire-to-unlock-btn {
+        transition: none;
+      }
+    }
+
+    /* Focus states for keyboard navigation */
+    .hire-to-unlock-btn:focus {
+      outline: 2px solid var(--mc-accent);
+      outline-offset: 2px;
+    }
+
+    /* Print styles */
+    @media print {
+      .hire-to-unlock-redacted {
+        background: white !important;
+        color: black !important;
+      }
+
+      .hire-to-unlock-overlay {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <section class="hire-to-unlock-hero">
+    <h1>Hire to Unlock Résumé</h1>
+    <p class="hire-to-unlock-mission">
+      <em>Qualified but gatekept.</em> This résumé contains real achievements, metrics, and impact — but they're hidden behind a playful authentication wall.
+      If you're genuinely interested in hiring, prove it by connecting with LinkedIn.
+    </p>
+  </section>
+
+  <section class="hire-to-unlock-resume">
+    <div class="hire-to-unlock-resume-container" id="hire-to-unlock-resume-container">
+      <div class="hire-to-unlock-resume-header">
+        <h2>Caleb McCartney</h2>
+        <p class="hire-to-unlock-contact-info">
+          <span class="hire-to-unlock-redacted">██████████, ██</span> |
+          <span class="hire-to-unlock-redacted">████████@██████.███</span> |
+          <span class="hire-to-unlock-redacted">██████████</span>
+        </p>
+      </div>
+
+      <div class="hire-to-unlock-section-content">
+        <h3>Professional Summary</h3>
+        <p class="hire-to-unlock-redacted">
+          ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████
+          ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████
+          ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████
+        </p>
+      </div>
+
+      <div class="hire-to-unlock-section-content">
+        <h3>Experience</h3>
+
+        <div class="hire-to-unlock-job-entry">
+          <h4><span class="hire-to-unlock-redacted">██████████ ████████</span></h4>
+          <p class="hire-to-unlock-job-meta">
+            <span class="hire-to-unlock-redacted">██████████ ████████</span> |
+            <span class="hire-to-unlock-redacted">██ ████████ ████ - ████████ ████</span>
+          </p>
+          <ul class="hire-to-unlock-redacted">
+            <li>████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████</li>
+            <li>████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████</li>
+            <li>████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████</li>
+          </ul>
+        </div>
+
+        <div class="hire-to-unlock-job-entry">
+          <h4><span class="hire-to-unlock-redacted">██████████ ████████ ████████</span></h4>
+          <p class="hire-to-unlock-job-meta">
+            <span class="hire-to-unlock-redacted">██████████ ████████</span> |
+            <span class="hire-to-unlock-redacted">██ ████████ ████ - ██ ████████ ████</span>
+          </p>
+          <ul class="hire-to-unlock-redacted">
+            <li>████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████</li>
+            <li>████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████ ████████</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hire-to-unlock-section-content">
+        <h3>Skills & Technologies</h3>
+        <div class="hire-to-unlock-skills-grid">
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+          <span class="hire-to-unlock-redacted hire-to-unlock-skill">██████████</span>
+        </div>
+      </div>
+
+      <div class="hire-to-unlock-section-content">
+        <h3>Education</h3>
+        <div class="hire-to-unlock-education-entry">
+          <h4><span class="hire-to-unlock-redacted">██████████ ████████ ████████</span></h4>
+          <p class="hire-to-unlock-redacted">██████████ ██ ████████ ████</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hire-to-unlock-overlay" id="hire-to-unlock-overlay">
+      <div class="hire-to-unlock-content">
+        <h3>▮▮▮ Hire to Unlock ▮▮▮</h3>
+        <p>This résumé contains real achievements and metrics that demonstrate impact. To view the complete, unredacted version:</p>
+
+        <div class="hire-to-unlock-actions">
+          <button id="hire-to-unlock-linkedin-auth" class="hire-to-unlock-btn hire-to-unlock-btn-primary">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            Sign in with LinkedIn
+          </button>
+
+          <button id="hire-to-unlock-mock-unlock" class="hire-to-unlock-btn hire-to-unlock-btn-secondary">
+            Mock Unlock (Demo)
+          </button>
+        </div>
+
+        <div class="hire-to-unlock-footer">
+          <p class="hire-to-unlock-privacy">
+            <small>We collect minimal information (name, email, LinkedIn profile) to verify genuine hiring interest.
+            Your data is never sold or shared. See our <a href="/privacy">Privacy Policy</a>.</small>
+          </p>
+
+          <p class="hire-to-unlock-fallback">
+            <small>Need accessibility or prefer traditional format?
+            <a href="/downloads/resume-ats.pdf" download>Download ATS-friendly résumé</a></small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Hire to Unlock Résumé Widget JavaScript
+    (function() {
+      'use strict';
+
+      class HireToUnlockWidget {
+        constructor(widgetElement) {
+          this.widget = widgetElement;
+          this.resumeContainer = this.widget.querySelector('#hire-to-unlock-resume-container');
+          this.overlay = this.widget.querySelector('#hire-to-unlock-overlay');
+          this.linkedinAuthBtn = this.widget.querySelector('#hire-to-unlock-linkedin-auth');
+          this.mockUnlockBtn = this.widget.querySelector('#hire-to-unlock-mock-unlock');
+
+          this.init();
+        }
+
+        init() {
+          // Bind event listeners
+          this.mockUnlockBtn.addEventListener('click', () => this.mockUnlock());
+          this.linkedinAuthBtn.addEventListener('click', () => this.startLinkedInAuth());
+
+          // Check for URL parameters (OAuth callback)
+          this.checkAuthCallback();
+
+          // Easter egg: keyboard shortcut to peek
+          document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+        }
+
+        mockUnlock() {
+          // Add unlocked class for animation
+          this.resumeContainer.classList.add('unlocked');
+
+          // Remove overlay after animation
+          setTimeout(() => {
+            this.overlay.style.display = 'none';
+          }, 500);
+
+          // Track the event
+          this.trackEvent('mock_unlock', { timestamp: new Date().toISOString() });
+        }
+
+        startLinkedInAuth() {
+          // TODO: Implement LinkedIn OAuth flow
+          alert('LinkedIn OAuth integration coming soon! For now, use the Mock Unlock button to see the reveal animation.');
+
+          // Placeholder for OAuth URL construction
+          // const authUrl = this.buildLinkedInAuthUrl();
+          // window.location.href = authUrl;
+        }
+
+        buildLinkedInAuthUrl() {
+          // TODO: Implement OAuth URL construction
+          const clientId = 'YOUR_LINKEDIN_CLIENT_ID';
+          const redirectUri = encodeURIComponent(window.location.origin + '/hire-to-unlock');
+          const scope = encodeURIComponent('r_liteprofile r_emailaddress');
+          const state = this.generateState();
+
+          return `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${state}`;
+        }
+
+        checkAuthCallback() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const code = urlParams.get('code');
+          const state = urlParams.get('state');
+          const error = urlParams.get('error');
+
+          if (error) {
+            console.error('OAuth error:', error);
+            this.showError('Authentication failed. Please try again.');
+            return;
+          }
+
+          if (code && state) {
+            // TODO: Exchange code for access token
+            this.handleAuthSuccess(code, state);
+          }
+        }
+
+        async handleAuthSuccess(code, state) {
+          try {
+            // TODO: Call backend to exchange code for token and get user info
+            // const response = await fetch('/api/auth/linkedin/callback', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ code, state })
+            // });
+            // const userData = await response.json();
+
+            // For now, simulate success
+            this.showIntentForm();
+          } catch (error) {
+            console.error('Auth callback error:', error);
+            this.showError('Failed to complete authentication. Please try again.');
+          }
+        }
+
+        showIntentForm() {
+          // TODO: Show micro-form for intent selection
+          const intentForm = `
+            <div class="hire-to-unlock-intent-form">
+              <h4>What brings you here?</h4>
+              <form id="hire-to-unlock-intent-form">
+                <label><input type="checkbox" name="intent" value="recruiter"> I'm a recruiter</label>
+                <label><input type="checkbox" name="intent" value="collaborator"> I'm looking for a collaborator</label>
+                <label><input type="checkbox" name="intent" value="hiring-manager"> I'm a hiring manager</label>
+                <label><input type="checkbox" name="intent" value="other"> Other</label>
+                <button type="submit" class="hire-to-unlock-btn hire-to-unlock-btn-primary">Complete Unlock</button>
+              </form>
+            </div>
+          `;
+
+          this.overlay.innerHTML = intentForm;
+
+          // Bind form submission
+          this.widget.querySelector('#hire-to-unlock-intent-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.completeUnlock(new FormData(e.target));
+          });
+        }
+
+        completeUnlock(formData) {
+          // Collect intent data
+          const intents = Array.from(formData.getAll('intent'));
+
+          // Perform the unlock animation
+          this.resumeContainer.classList.add('unlocked');
+
+          setTimeout(() => {
+            this.overlay.style.display = 'none';
+          }, 500);
+
+          // Track the event
+          this.trackEvent('linkedin_unlock', {
+            timestamp: new Date().toISOString(),
+            intents: intents,
+            userAgent: navigator.userAgent
+          });
+        }
+
+        generateState() {
+          // Generate a random state for CSRF protection
+          return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        }
+
+        showError(message) {
+          // TODO: Implement proper error display
+          alert(message);
+        }
+
+        handleKeyboard(e) {
+          // Easter egg: Ctrl+Shift+U to peek at one line
+          if (e.ctrlKey && e.shiftKey && e.key === 'U') {
+            e.preventDefault();
+            this.peekReveal();
+          }
+        }
+
+        peekReveal() {
+          // Temporarily reveal a random redacted element
+          const redactedElements = this.widget.querySelectorAll('.hire-to-unlock-redacted');
+          if (redactedElements.length === 0) return;
+
+          const randomElement = redactedElements[Math.floor(Math.random() * redactedElements.length)];
+          randomElement.classList.add('peek');
+
+          setTimeout(() => {
+            randomElement.classList.remove('peek');
+          }, 2000);
+        }
+
+        trackEvent(eventType, data) {
+          // TODO: Implement proper analytics tracking
+          console.log('Event tracked:', eventType, data);
+
+          // Placeholder for analytics integration
+          // gtag('event', eventType, data);
+          // or custom analytics endpoint
+        }
+      }
+
+      // Initialize widget when DOM is ready
+      function initWidget() {
+        const widget = document.querySelector('.hire-to-unlock-widget');
+        if (widget) {
+          new HireToUnlockWidget(widget);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWidget);
+      } else {
+        initWidget();
+      }
+    })();
+  </script>
+</div>

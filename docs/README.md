@@ -6,7 +6,7 @@ Welcome to the comprehensive documentation for McCal's Website project. This doc
 
 ### 🔄 **workflows/** - Content & Development Workflows
 Step-by-step guides for content creation and management:
-- `portfolio-image-import.md` - How to add new portfolio images
+- `workflows/portfolio-image-import.md` - How to add new portfolio images
 - `journalism-import-workflow.md` - Process for importing journalism content
 - `event-portfolio-ingest.md` - Event portfolio content ingestion
 
@@ -29,7 +29,6 @@ Project standards, conventions, and versioning:
 - `workspace-organization.md` - **Single source of truth for scripts folder structure, archival, workspace validation, and preflight/afterflight checklists**
 - `widget-reference.md` - Quick reference for widget development
 - `widget-standards.md` - Comprehensive widget standards guide
-- `widget-standards.md` - Proven widget improvement patterns and standards
 - `widget-development.md` - Systematic enhancement methodology
 - `seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 - `date-naming.md` - File and folder naming conventions

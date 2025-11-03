@@ -71,11 +71,13 @@ Critical repository events, security incidents, and recovery steps are documente
 - **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights
 - **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos
 - **Portrait Portfolio** (`src/widgets/portrait-portfolio/`) - Portrait photography displays with vertical composition focus *(v1.0)*
-- **About Widgets** (`src/widgets/about-widgets/`) - Client logos, carousels, about sections
+- **About Section Widgets** (`src/widgets/about/`) - Complete about pages and client carousels
+  - Complete About Page - Bio, photo, reviews, and integrated client carousel
+  - Client Carousel - Standalone client logo showcase
 - **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays *(v2.0.0 with performance optimizations)*
 - **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections
 - **Site Footer** (`src/widgets/site-footer/`) - Glass design footer with social links and newsletter
-- **Policies & Legal** (`src/widgets/policies-legal/`) - Comprehensive legal documentation page with Terms, Privacy, Cookie Policy, License, FAQ *(v1.0.0 SEO-enhanced)*
+- **Hire to Unlock Résumé** (`src/widgets/hire-to-unlock-resume/`) - Interactive résumé with LinkedIn authentication that critiques gatekeeping while collecting genuine hiring leads *(v1.0.0)*
 - **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only)*
 
 ### Work in Progress

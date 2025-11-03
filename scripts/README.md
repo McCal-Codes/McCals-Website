@@ -33,11 +33,6 @@ Linting & automation
 Playwright & CI caching
 - The Playwright smoke test workflow caches node modules and Playwright browser downloads to speed runs. In CI we cache `~/.npm` and `~/.cache/ms-playwright` keyed by `package-lock.json` hash.
 
-- Prefer Node.js scripts under `scripts/manifest` and `scripts/utils` to accept a `--dry` flag to run non-destructively in CI.
-- Keep one canonical implementation of a script. If a duplicate is found, move the non-canonical copy to `scripts/_archived/` with a timestamped suffix.
-- Use clear exit codes (0 success, non-zero error) and friendly logs. CI relies on exit codes to detect failures.
-- Use `#!/usr/bin/env node` for Node CLI scripts that may be executed directly.
-
 How to run validators & smoke tests (local)
 - Validate script references (report missing script files referenced in workflows/package.json):
   - `node scripts/utils/ci-validate-scripts.js`

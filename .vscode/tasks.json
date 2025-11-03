@@ -397,10 +397,10 @@
     {
       "label": "Backup: Repository",
       "type": "shell",
-      "command": "powershell",
+      "command": "bash",
       "args": [
-        "-Command",
-        "$timestamp = Get-Date -Format 'yyyy-MM-dd_HH-mm-ss'; $backupPath = \"backup_$timestamp.zip\"; Compress-Archive -Path . -DestinationPath $backupPath -Force; Write-Host \"Backup created: $backupPath\""
+        "-c",
+        "timestamp=$(date +%Y-%m-%d_%H-%M-%S); backup_path=\"backup_$timestamp.zip\"; zip -r \"$backup_path\" . -x 'node_modules/*' '.git/*' 'dist/*' 'logs/*'; echo \"Backup created: $backup_path\""
       ],
       "group": "build",
       "presentation": {
