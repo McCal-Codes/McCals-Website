@@ -215,7 +215,8 @@ Configuration (data-* attributes on #concertPf):
     cacheDuration: 10 * 60 * 1000, // 10 minutes
     autoRefreshInterval: 15 * 60 * 1000, // 15 minutes
     basePaths: ['src/images/Portfolios/Concert/'],
-    github: { owner: 'McCal-Codes', repo: 'McCals-Website', branch: 'main' }
+    // branch is the default; ref can be overridden via data-github-ref (e.g., a commit SHA)
+    github: { owner: 'McCal-Codes', repo: 'McCals-Website', branch: 'main', ref: null }
   };
 
   // DOM references
@@ -231,8 +232,18 @@ Configuration (data-* attributes on #concertPf):
     cacheKey: 'concert-manifest-v4.7',
     isVisible: true,
     timers: { autoRefresh: null, nextRefresh: null },
-    spotify: { initialized: false, artistMap: {} }
+    spotify: { initialized: false, artistMap: {} },
+    githubRef: null
   };
+
+  // Respect optional data-github-ref to force a specific commit/branch for GitHub Raw URLs
+  // This instantly reflects new content without waiting for CDN cache on the main branch.
+  if (portfolio && typeof portfolio.dataset.githubRef === 'string' && portfolio.dataset.githubRef.trim()) {
+    state.githubRef = portfolio.dataset.githubRef.trim();
+    CONFIG.github.ref = state.githubRef;
+    // Include ref in cache key to avoid stale cross-ref caching
+    state.cacheKey = `concert-manifest-v4.7-${state.githubRef.slice(0,7)}`;
+  }
 
   // Utility functions
   const log = (DEBUG ? console.log.bind(console, '[Concert v4.7]') : () => {});
@@ -272,9 +283,11 @@ Configuration (data-* attributes on #concertPf):
   window.hideChangelog = hideChangelog;
 
   // GitHub URL builders
+  const getGithubRef = () => (CONFIG.github.ref && CONFIG.github.ref.trim()) || CONFIG.github.branch;
+
   const buildUrls = {
-    manifest: basePath => `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${CONFIG.github.branch}/${basePath}concert-manifest.json`,
-    image: (basePath, parts, filename) => `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${CONFIG.github.branch}/${basePath}${parts.concat(filename).map(encodeURIComponent).join('/')}`
+    manifest: basePath => `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${getGithubRef()}/${basePath}concert-manifest.json`,
+    image: (basePath, parts, filename) => `https://raw.githubusercontent.com/${CONFIG.github.owner}/${CONFIG.github.repo}/${getGithubRef()}/${basePath}${parts.concat(filename).map(encodeURIComponent).join('/')}`
   };
 
   // Enhanced alt text generation
