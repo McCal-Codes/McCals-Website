@@ -40,6 +40,7 @@ Reference standards:
 - [ ] TODO: Confirm planned changes align with widget standards and enhancement patterns before touching code.
 - [ ] TODO: After each batch of edits, run targeted lint/tests if applicable and re-run preflight summary to capture updated guidance.
 - [ ] TODO: Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and related standards after completing implementation batches.
+- [ ] TODO: Concert Portfolio v4.7 — Add random Spotify song preview per artist (when ID known): fetch top tracks, embed one at random (track embed), add optional "Shuffle" button, cache results, and gracefully fallback to search when no preview is available.
 
 ## Performance & SEO Enhancements (New Priority)
 - [ ] TODO: Implement comprehensive SEO standards across all widgets: structured data, enhanced alt text, meta descriptions
@@ -89,4 +90,4 @@ Reference standards:
 - [ ] TODO: Create comprehensive changelog system for all widget versions
 - [ ] TODO: Document integration patterns for third-party services (RSS, calendars, etc.)
 
-_Last updated: 2025-10-24_
+_Last updated: 2025-11-02_
