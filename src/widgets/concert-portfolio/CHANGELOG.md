@@ -2,6 +2,18 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.7 — 2025-11-02 (Artist Support — Spotify)
+### Audience Support & UX ❤️🎵
+- **NEW**: Non-intrusive floating button to support artists with Spotify integration
+- **AUTO**: Lists bands directly from `concert-manifest.json`
+- **SEARCH**: One-click “Open on Spotify” search links (no API keys required)
+- **PREVIEW**: Optional embedded Spotify player when an artist ID is provided via inline JSON map
+- **LAZY**: Embeds are lazy-loaded on demand to preserve performance
+- **A11Y**: Keyboard accessible, semantic roles, respects lightbox layering
+- **PERF**: Retains all v4.6 performance optimizations
+ - **REFINE**: Deduplicates artists by name (case-insensitive) to avoid duplicate entries
+ - **SAFETY**: Spotify button is temporarily disabled while interacting with images (hover/drag/touch or lightbox open) to prevent accidental clicks
+
 ## v4.6 — 2025-10-06 (Performance Optimized - Production Ready)
 ### Performance Optimizations 🚀
 - **CRITICAL**: Separated critical CSS from non-critical styles for faster initial render

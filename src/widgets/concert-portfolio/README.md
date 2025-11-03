@@ -1,6 +1,6 @@
 # Concert Portfolio Widget
 
-**Current Version: v4.6** — Performance-optimized concert portfolio with critical rendering improvements, modern JavaScript patterns, and enhanced SEO. Features lazy-loaded advanced features, optimized font loading, and reduced main-thread blocking for better Core Web Vitals.
+**Current Version: v4.7** — Performance-optimized concert portfolio with a non-intrusive Spotify support button to help visitors discover and preview artists. Retains v4.6 critical rendering improvements, modern JavaScript patterns, and enhanced SEO.
 
 ## Features
 
@@ -67,6 +67,35 @@
 - `?debug=true`: Enable performance metrics overlay
 - URL parameter support for development testing
 
+### Artist Support (Spotify) — v4.7
+- Non-intrusive floating button lists all bands from your concert manifest with quick Spotify access.
+- For each band:
+  - “Open on Spotify” uses a search link (no API keys required).
+  - Optional “Preview” toggle shows an embedded Spotify player if you provide an artist ID.
+
+Config via data-attributes on the wrapper (defaults shown):
+```html
+<div id="concertPf"
+     data-panes="24"
+     data-spotify="on"
+     data-spotify-button-label="Support the Artists"
+     data-spotify-position="bottom-right"
+     data-spotify-map-id="spotifyArtistMap">
+  <!-- Paste v4.7.html here -->
+</div>
+```
+
+Provide artist IDs via an inline JSON script (keys are band names as they appear in the manifest):
+```html
+<script type="application/json" id="spotifyArtistMap">
+{
+  "The Book Club": "2mZ8XexampleId",
+  "Another Band": "7qXexampleId"
+}
+</script>
+```
+If no ID is provided for a band, the widget still shows a “Open on Spotify” search link.
+
 ### Performance Monitoring
 ```javascript
 // Access performance metrics
@@ -107,7 +136,9 @@ images/Portfolios/Concert/
 | EXIF Processing | 450ms | 180ms | **60% faster** |
 
 ## Versions
-- **v4.5** (Latest): SEO enhancements with structured data and improved accessibility
+- **v4.7** (Latest): Artist Support (Spotify) with search links and optional embedded previews
+- **v4.6**: Performance optimizations and structured data refinements
+- **v4.5**: SEO enhancements with structured data and improved accessibility
 - **v4.4**: Performance revolution with shared backend and UX improvements
 - **v4.3**: EXIF date extraction with fallback chain
 - **v4.2**: Natural masonry with GitHub commit dates
