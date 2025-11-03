@@ -100,7 +100,7 @@ Configuration (data-* attributes on #concertPf):
 
 <div class="concert-portfolio" id="concertPf" data-panes="24" data-widget-version="4.7" data-spotify="on">
   <h2 class="concert-heading">Concert Portfolio <span class="version-indicator" title="View changelog" onclick="showChangelog()">v4.7</span></h2>
-  <p class="concert-subheading">Over 2 years of friendships, images and a good time on and off stage, these images showcase the magic these bands always are sure to capture, and I cannot thank them enough.</p>
+  <p class="concert-subheading">Over 2 years of friendships, images and a good time on and off stage, these images showcase the magic these bands always are sure to capture, and I cannot thank them enough. Updated as a small thank-you to the bands I've worked with.</p>
   <div id="spotifySupportMount" class="spotify-support-container" aria-live="polite"></div>
   <div class="concert-loading" id="concertLoading">
     <div class="concert-spinner" aria-hidden="true"></div>
@@ -597,7 +597,109 @@ Configuration (data-* attributes on #concertPf):
         }
         return out;
       })();
+      // Build or refresh the list renderer so we can update on manifest changes
+      const renderSpotifyList = (listEl) => {
+        if (!listEl) return;
+        listEl.innerHTML = '';
+        // Build a unique, deduplicated artist map with most-recent iso date tracking
+        const uniqueMap = new Map();
+        for (const band of state.manifest.bands) {
+          const rawName = (band.bandName || '').trim();
+          if (!rawName) continue;
+          const key = rawName.toLowerCase();
+          const iso = (band.concertDate && band.concertDate.iso) ? band.concertDate.iso : '';
+          if (!uniqueMap.has(key)) {
+            uniqueMap.set(key, {
+              displayName: rawName,
+              dateDisplay: band.dateDisplay || '',
+              latestIso: iso || '',
+              folderPath: band.folderPath || ''
+            });
+          } else {
+            // keep the most recent iso
+            const prev = uniqueMap.get(key);
+            if ((iso || '') > (prev.latestIso || '')) {
+              prev.latestIso = iso || prev.latestIso;
+              prev.dateDisplay = band.dateDisplay || prev.dateDisplay;
+              uniqueMap.set(key, prev);
+            }
+          }
+        }
 
+        // Sort by most recent first (desc by latestIso), then by name as tiebreaker
+        const uniqueArtists = Array.from(uniqueMap.values()).sort((a, b) => {
+          if (a.latestIso && b.latestIso && a.latestIso !== b.latestIso) {
+            return a.latestIso > b.latestIso ? -1 : 1;
+          }
+          return (a.displayName || '').localeCompare(b.displayName || '', undefined, { sensitivity: 'base' });
+        });
+
+        // Render rows
+        uniqueArtists.forEach(entry => {
+          const li = document.createElement('li');
+          li.className = 'spotify-item';
+
+          const meta = document.createElement('div');
+          meta.className = 'spotify-item__meta';
+          const title = document.createElement('p');
+          title.className = 'spotify-item__title';
+          title.textContent = entry.displayName || 'Unknown Artist';
+          const dateEl = document.createElement('p');
+          dateEl.className = 'spotify-item__date';
+          dateEl.textContent = entry.dateDisplay || '';
+          meta.append(title, dateEl);
+
+          const actions = document.createElement('div');
+          actions.className = 'spotify-item__actions';
+          const searchUrl = 'https://open.spotify.com/search/' + encodeURIComponent(entry.displayName || '');
+          const link = document.createElement('a');
+          link.className = 'spotify-link';
+          link.href = searchUrl;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm5.34 17.37a.75.75 0 01-1.03.27c-2.83-1.73-6.39-2.13-10.59-1.19a.75.75 0 01-.33-1.46c4.57-1.05 8.49-.6 11.59 1.28a.75.75 0 01.36 1.1zM17.8 14.4a.94.94 0 01-1.3.33c-2.43-1.49-6.12-1.92-8.98-1.08a.94.94 0 11-.52-1.8c3.3-.96 7.39-.47 10.26 1.29a.94.94 0 01.54 1.26zm.13-3.32c-2.17-1.29-5.78-1.41-7.86-.78a1.13 1.13 0 11-.64-2.16c2.61-.77 6.73-.62 9.33.91a1.13 1.13 0 01-1.17 2.03z"/></svg> <span>Open on Spotify</span>';
+          actions.appendChild(link);
+
+          // Optional preview if artist ID is known
+          const artistId = artistIdLookup[(entry.displayName||'').trim().toLowerCase()] || state.spotify.artistMap[entry.displayName];
+          if (artistId) {
+            const previewBtn = document.createElement('button');
+            previewBtn.className = 'spotify-preview-btn';
+            previewBtn.type = 'button';
+            previewBtn.textContent = 'Preview';
+            const previewWrap = document.createElement('div');
+            previewWrap.className = 'spotify-preview';
+            previewBtn.addEventListener('click', () => {
+              const isOpen = previewWrap.classList.toggle('open');
+              previewBtn.setAttribute('aria-expanded', String(isOpen));
+              if (isOpen && !previewWrap.querySelector('iframe')) {
+                const iframe = document.createElement('iframe');
+                iframe.className = 'spotify-embed';
+                iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+                iframe.loading = 'lazy';
+                iframe.decoding = 'async';
+                iframe.title = `Spotify preview for ${entry.displayName}`;
+                iframe.src = `https://open.spotify.com/embed/artist/${encodeURIComponent(artistId)}?utm_source=generator`;
+                previewWrap.appendChild(iframe);
+              }
+            });
+            actions.appendChild(previewBtn);
+            li.appendChild(previewWrap);
+          }
+
+          li.append(meta, actions);
+          listEl.appendChild(li);
+        });
+      };
+
+      // If already initialized, just refresh the list with the latest manifest
+      if (state.spotify.initialized && state.spotify.elements && state.spotify.elements.list) {
+        renderSpotifyList(state.spotify.elements.list);
+        log('Spotify list refreshed');
+        return;
+      }
+
+      // First-time setup: mount button and panel
       const mount = document.getElementById('spotifySupportMount') || portfolio;
       const btn = document.createElement('button');
       btn.className = 'spotify-support-btn';
@@ -629,78 +731,8 @@ Configuration (data-* attributes on #concertPf):
       const list = document.createElement('ul');
       list.className = 'spotify-panel__list';
 
-      // Build a unique, deduplicated artist list from manifest bands (case-insensitive)
-      const uniqueMap = new Map();
-      for (const band of state.manifest.bands) {
-        const rawName = (band.bandName || '').trim();
-        if (!rawName) continue;
-        const key = rawName.toLowerCase();
-        if (!uniqueMap.has(key)) {
-          uniqueMap.set(key, {
-            displayName: rawName,
-            dateDisplay: band.dateDisplay || '',
-            folderPath: band.folderPath || ''
-          });
-        }
-      }
-      const uniqueArtists = Array.from(uniqueMap.values()).sort((a,b)=>a.displayName.localeCompare(b.displayName, undefined, { sensitivity: 'base' }));
-
-      // Render unique artist list
-      uniqueArtists.forEach(entry => {
-        const li = document.createElement('li');
-        li.className = 'spotify-item';
-
-        const meta = document.createElement('div');
-        meta.className = 'spotify-item__meta';
-        const title = document.createElement('p');
-        title.className = 'spotify-item__title';
-        title.textContent = entry.displayName || 'Unknown Artist';
-        const dateEl = document.createElement('p');
-        dateEl.className = 'spotify-item__date';
-        dateEl.textContent = entry.dateDisplay || '';
-        meta.append(title, dateEl);
-
-        const actions = document.createElement('div');
-        actions.className = 'spotify-item__actions';
-        const searchUrl = 'https://open.spotify.com/search/' + encodeURIComponent(entry.displayName || '');
-        const link = document.createElement('a');
-        link.className = 'spotify-link';
-        link.href = searchUrl;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm5.34 17.37a.75.75 0 01-1.03.27c-2.83-1.73-6.39-2.13-10.59-1.19a.75.75 0 01-.33-1.46c4.57-1.05 8.49-.6 11.59 1.28a.75.75 0 01.36 1.1zM17.8 14.4a.94.94 0 01-1.3.33c-2.43-1.49-6.12-1.92-8.98-1.08a.94.94 0 11-.52-1.8c3.3-.96 7.39-.47 10.26 1.29a.94.94 0 01.54 1.26zm.13-3.32c-2.17-1.29-5.78-1.41-7.86-.78a1.13 1.13 0 11-.64-2.16c2.61-.77 6.73-.62 9.33.91a1.13 1.13 0 01-1.17 2.03z"/></svg> <span>Open on Spotify</span>';
-        actions.appendChild(link);
-
-        // Optional preview if artist ID is known
-        const artistId = artistIdLookup[(entry.displayName||'').trim().toLowerCase()] || state.spotify.artistMap[entry.displayName];
-        if (artistId) {
-          const previewBtn = document.createElement('button');
-          previewBtn.className = 'spotify-preview-btn';
-          previewBtn.type = 'button';
-          previewBtn.textContent = 'Preview';
-          const previewWrap = document.createElement('div');
-          previewWrap.className = 'spotify-preview';
-          previewBtn.addEventListener('click', () => {
-            const isOpen = previewWrap.classList.toggle('open');
-            previewBtn.setAttribute('aria-expanded', String(isOpen));
-            if (isOpen && !previewWrap.querySelector('iframe')) {
-              const iframe = document.createElement('iframe');
-              iframe.className = 'spotify-embed';
-              iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-              iframe.loading = 'lazy';
-              iframe.decoding = 'async';
-              iframe.title = `Spotify preview for ${entry.displayName}`;
-              iframe.src = `https://open.spotify.com/embed/artist/${encodeURIComponent(artistId)}?utm_source=generator`;
-              previewWrap.appendChild(iframe);
-            }
-          });
-          actions.appendChild(previewBtn);
-          li.appendChild(previewWrap);
-        }
-
-        li.append(meta, actions);
-        list.appendChild(li);
-      });
+      // Initial render
+      renderSpotifyList(list);
 
       // Note about previews
       const note = document.createElement('div');
@@ -719,9 +751,12 @@ Configuration (data-* attributes on #concertPf):
       btn.addEventListener('click', toggle);
       close.addEventListener('click', () => panel.classList.remove('open'));
 
-  // Append inline under description
-  mount.appendChild(btn);
-  mount.appendChild(panel);
+      // Append inline under description
+      mount.appendChild(btn);
+      mount.appendChild(panel);
+
+      // Save elements for future refreshes
+      state.spotify.elements = { list, panel, btn };
 
       // Interaction safety: disable button while interacting with images or when lightbox is open
       const setDisabled = (on) => {
@@ -743,8 +778,8 @@ Configuration (data-* attributes on #concertPf):
       });
       observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-      state.spotify.initialized = true;
-      log('Spotify support initialized');
+  state.spotify.initialized = true;
+  log('Spotify support initialized');
     } catch (e) {
       log('Spotify support failed to initialize:', e?.message || e);
     }
