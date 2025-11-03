@@ -371,7 +371,7 @@ Track potential new patterns for future standardization:
 
 ### Internal Documentation
 - **Enhancement Patterns**: `docs/standards/widget-enhancements.md`
-- **Widget Status Guide**: `src/widgets/WIDGET-STATUS-GUIDE.md`  
+- **Widget Status Guide**: `src/widgets/widget-status-guide.md`  
 - **Version Standards**: `docs/standards/versioning.md`
 - **Copilot Instructions**: `.github/copilot-instructions.md`
 

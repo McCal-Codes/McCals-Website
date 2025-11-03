@@ -4,147 +4,154 @@ This directory contains production-ready and work-in-progress widgets for the Mc
 
 ## Widget Status System
 
-📖 **[Complete Status Guide](WIDGET-STATUS-GUIDE.md)** - Full development workflow and criteria
+📖 **[Complete Status Guide](widget-status-guide.md)** - Full development workflow and criteria
 
 ### Quick Reference
-- **🟢 Production Ready**: Listed in main README "Available Widgets" - ready for Squarespace
-- **🟡 Work in Progress**: Has `STATUS.md` file - under development, do not use in production  
-- **🔴 Archived**: In `_archived/` directory - temporarily inactive
+- **🟢 Production Ready**: Listed below - ready for Squarespace deployment
+- **🟡 Work in Progress**: Has `STATUS.md` file - under development, do not use in production
+- **🔴 Archived**: In `_archived/` directory - temporarily inactive or consolidated
 
-## Legacy About Widgets
+## Available Production Widgets
 
-*The content below refers to legacy about page widgets. See individual widget directories for current widgets.*
+### About Section Widgets (`about/`)
 
-## Available Widgets
+#### 🟢 Complete About Page (`about/complete-about-page/`)
+- **Purpose**: Full about section with bio, photo, reviews, and integrated client carousel
+- **Current Version**: v1.4.4
+- **Features**: Professional bio, GitHub-hosted photo, LinkedIn/Google reviews, integrated client showcase
+- **Use Case**: Complete about page solution
 
-### 1. `complete-about-squarespace.html` ⭐ **RECOMMENDED**
-Complete about section with bio, photo, reviews, AND client carousel - everything in one widget.
+#### 🟢 Client Carousel (`about/client-carousel/`)
+- **Purpose**: Standalone client logo carousel
+- **Current Version**: v1.1.8
+- **Features**: 22+ client logos, Fisher-Yates shuffle, infinite loop, mobile responsive
+- **Use Case**: Add to any page for brand credibility
 
-### 2. `about-section-squarespace.html`
-About section with bio, photo, and reviews (without client carousel).
+### Portfolio Widgets
 
-### 3. `client-carousel-squarespace.html` 
-Standalone client logo carousel with statistics only.
+#### 🟢 Concert Portfolio (`concert-portfolio/`)
+- **Purpose**: Concert photography portfolio with masonry layout
+- **Current Version**: v4.7
+- **Features**: Manifest-driven, lightbox gallery, Spotify integration, performance optimized
+- **Use Case**: Showcase concert photography work
 
-## How to Use in Squarespace
+#### 🟢 Event Portfolio (`event-portfolio/`)
+- **Purpose**: Event photography portfolio
+- **Current Version**: v2.6.0
+- **Features**: Featured-first ordering, lightbox gallery, responsive design
+- **Use Case**: Display event photography collections
 
-### Step 1: Upload Assets to Squarespace
-1. **Upload your photo**:
-   - Go to Design > Custom CSS > Manage Files
-   - Upload `caleb-mccartney-photo.jpg`
-   - Copy the generated URL
+#### 🟢 Photojournalism Portfolio (`photojournalism-portfolio/`)
+- **Purpose**: Photojournalism work showcase
+- **Current Version**: v5.2
+- **Features**: Filterable categories, masonry layout, lightbox viewing
+- **Use Case**: Professional photojournalism portfolio
 
-2. **Upload your resume**:
-   - Upload `caleb-mccartney-resume.pdf` 
-   - Copy the generated URL
+#### 🟢 Featured Portfolio (`featured-portfolio/`)
+- **Purpose**: Curated portfolio highlights
+- **Current Version**: v1.5
+- **Features**: Fisher-Yates shuffle, scrollable lightbox, responsive grid
+- **Use Case**: Featured work showcase
 
-**Note:** Client logos are already configured to load from GitHub, so no upload needed!
+#### 🟢 Portrait Portfolio (`portrait-portfolio/`)
+- **Purpose**: Portrait photography showcase
+- **Current Version**: v1.0
+- **Features**: Vertical composition focus, 3:4 aspect ratios, enhanced detail viewing
+- **Use Case**: Portrait photography portfolio
 
-### Step 2: Update Widget Code (if needed)
-1. Open the widget HTML file you want to use
-2. **Client logos**: Already configured with GitHub URLs - no changes needed!
-3. **Update only these assets**:
+### Content Widgets
 
-```html
-<!-- Replace this -->
-<img src="https://images.squarespace-cdn.com/content/YOUR-SITE-ID/YOUR-IMAGE-ID/caleb-mccartney-photo.jpg">
+#### 🟢 Podcast Feed (`podcast-feed/`)
+- **Purpose**: RSS-powered podcast episode display
+- **Current Version**: v1.9.5
+- **Features**: Auto-hydrating RSS episodes, live caching, show branding
+- **Use Case**: Display latest podcast episodes
 
-<!-- With your actual Squarespace URL -->
-<img src="https://images.squarespace-cdn.com/content/v1/abc123/xyz789/caleb-mccartney-photo.jpg">
-```
+#### 🟢 Blog Feed (`blog-feed/`)
+- **Purpose**: Blog post integration
+- **Status**: Work in Progress (see `STATUS.md`)
 
-**✅ Client logos automatically load from GitHub - no updates needed!**
+### Navigation & Layout Widgets
 
-### Step 3: Add to Squarespace Page
-1. **Edit your page** in Squarespace
-2. **Add a Code Block**:
-   - Click the + icon
-   - Choose "Code" from the menu
-3. **Paste the widget code**:
-   - Copy the entire HTML from the widget file
-   - Paste into the Code Block
-4. **Save and publish**
+#### 🟢 Site Navigation (`site-navigation/`)
+- **Purpose**: Header navigation with blur effects
+- **Current Version**: v1.7.0
+- **Features**: Mobile responsive, backdrop blur, smooth animations
+- **Use Case**: Main site navigation
 
-## Required URL Updates
+#### 🟢 Site Footer (`site-footer/`)
+- **Purpose**: Site footer with links and branding
+- **Current Version**: v1.3.0
+- **Features**: CSS custom properties, enhanced accessibility, mobile optimizations
+- **Use Case**: Site footer
 
-### For About Section Widget (`about-section-squarespace.html`):
-- Line 309: Update photo URL
-- Line 332: Update resume download URL
+#### 🟢 Hero Slideshow (`hero-slideshow/`)
+- **Purpose**: Hero banner slideshow
+- **Status**: Work in Progress (see `STATUS.md`)
 
-### For Client Carousel Widget (`client-carousel-squarespace.html`):
-- Lines 191, 197, 203, 209, etc.: Update all client logo URLs
+### Legal & Admin Widgets
 
-## Squarespace-Specific Optimizations
+#### 🟢 Hire to Unlock Résumé (`hire-to-unlock-resume/`)
+- **Purpose**: Interactive résumé with LinkedIn authentication
+- **Current Version**: v1.0.0
+- **Features**: Redacted sections unlock via OAuth, critiques gatekeeping, collects genuine leads
+- **Use Case**: Professional résumé presentation with authentic lead filtering
 
-### ✅ **What's Included:**
-- **Self-contained CSS**: No external dependencies
-- **Unique class names**: Prefixed with `ss-` to avoid conflicts
-- **Mobile responsive**: Works on all devices
-- **Fallback images**: Placeholder images if logos fail to load
-- **Dark theme compatible**: Matches professional aesthetics
+#### 🔴 Admin Portfolio Importer (`_admin/admin-portfolio-importer/`)
+- **Purpose**: Secure admin tool for importing portfolio images
+- **Status**: Admin Only - Not for production use
 
-### ✅ **Squarespace Compatibility:**
-- **No external fonts**: Uses system fonts for faster loading
-- **Inline styles where needed**: Ensures styling consistency
-- **Safe JavaScript**: No conflicts with Squarespace's JavaScript
-- **Lazy loading**: Images load only when needed
+## How to Use Widgets in Squarespace
 
-## Customization Options
+### Basic Deployment Steps:
+1. **Choose a widget** from the list above
+2. **Navigate** to the widget's directory (e.g., `about/complete-about-page/`)
+3. **Copy** the HTML from the latest version file (e.g., `complete-about-squarespace.html`)
+4. **Paste** into a Squarespace Code Block
+5. **Save and publish**
 
-### Colors
-To match your site's theme, update these CSS variables:
-```css
-/* Text colors */
-color: #f5f5f5; /* Main text */
-color: #888;    /* Muted text */
+### Widget-Specific Setup:
+- **Portfolio widgets**: Ensure manifest files are generated (see main project README)
+- **Image-dependent widgets**: Update image URLs if using custom assets
+- **Admin widgets**: Require authentication and backend setup
 
-/* Background colors */
-background: #111;     /* Card backgrounds */
-background: #2a2a2a;  /* Borders */
-```
-
-### Sizing
-Adjust responsive breakpoints:
-```css
-@media (max-width: 768px) { /* Tablet */ }
-@media (max-width: 480px) { /* Mobile */ }
-```
-
-### Animation Speed
-Change carousel speed:
-```css
-animation: ss-scroll 25s linear infinite; /* 25s = speed */
-```
-
-## Testing Checklist
-
-Before publishing:
-- [ ] All images load correctly
-- [ ] Resume download works
-- [ ] Links open in new tabs
-- [ ] Mobile responsive design works
-- [ ] Client carousel animations smooth
-- [ ] No JavaScript errors in browser console
-
-## Support
-
-If you experience any issues:
-1. Check browser console for JavaScript errors
-2. Verify all URLs are correct and accessible
-3. Test on different devices and browsers
-4. Ensure code block is in "HTML" mode, not "Markdown"
-
-## File Structure
+## Organization Structure
 
 ```
-widgets/
-├── about-section-squarespace.html      # Complete about section
-├── client-carousel-squarespace.html    # Standalone client carousel  
-└── README.md                           # This setup guide
+src/widgets/
+├── about/                          # About section widgets
+│   ├── client-carousel/           # Standalone client carousel
+│   └── complete-about-page/       # Full about page with integrated carousel
+├── [portfolio-type]-portfolio/     # Portfolio showcase widgets
+├── [content-type]/                 # Content display widgets
+├── site-[component]/               # Site infrastructure widgets
+├── _admin/                         # Administrative tools
+├── _archived/                      # Archived/deprecated widgets
+├── shared/                         # Common utilities and styles
+└── README.md                       # This file
 ```
+
+## Development Guidelines
+
+### Adding New Widgets:
+1. Create widget directory with proper naming
+2. Include `README.md` and `CHANGELOG.md`
+3. Add `versions/` directory for version history
+4. Update this README when production-ready
+
+### Widget Standards:
+- 📖 [Widget Standards](../standards/widget-standards.md)
+- 📖 [Widget Development Guide](../standards/widget-development.md)
+- 📖 [Performance Standards](../standards/performance-standards.md)
+
+## Recent Changes
+
+- **2025-11-03**: Consolidated duplicate about widgets, archived redundant versions
+- **2025-10-24**: Added Portrait Portfolio v1.0
+- **2025-10-09**: Added Policies & Legal v1.0.0
+- **2025-10-06**: Major widget performance optimizations and standardization
 
 ---
 
-**Version**: 1.1  
-**Compatibility**: Squarespace 7.1+  
-**Last Updated**: January 2025
+**Last Updated**: November 3, 2025
+**Total Production Widgets**: 11

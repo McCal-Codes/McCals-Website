@@ -42,7 +42,6 @@ function isRelevantChange(filePath) {
   if (fileName.endsWith('~')) return false;
   if (fileName.includes('.tmp') || fileName.includes('.temp')) return false;
   if (fileName === 'events-manifest.json') return false;
-  if (fileName === 'events-manifest.example.json') return false;
   if (fileName === 'README.md') return false;
   if (fileName === 'CHANGELOG.md') return false;
   const ext = path.extname(fileName).toLowerCase();

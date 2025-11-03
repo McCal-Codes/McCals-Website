@@ -374,8 +374,8 @@ html.lightbox-open [id*="menu"] {
 
 ## 📚 Related Documentation
 
-- **Widget Development Guidelines**: `../WIDGET-DEVELOPMENT.md`
-- **Widget Status Guide**: `../WIDGET-STATUS-GUIDE.md`
+- **Widget Development Guidelines**: `../widget-development.md`
+- **Widget Status Guide**: `../widget-status-guide.md`
 - **Copilot Instructions**: `../../../.github/copilot-instructions.md`
 - **Version Standards**: `../versioning.md`
 
