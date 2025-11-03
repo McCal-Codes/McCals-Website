@@ -661,6 +661,9 @@ Configuration (data-* attributes on #concertPf):
           actions.appendChild(link);
 
           // Optional preview if artist ID is known
+          // TODO: Random song preview — when artistId is available, fetch artist top tracks (market=US),
+          // pick a random previewable track and embed a track player instead of (or in addition to) the artist embed.
+          // Cache per-artist results with a TTL, include graceful fallback when no preview is available.
           const artistId = artistIdLookup[(entry.displayName||'').trim().toLowerCase()] || state.spotify.artistMap[entry.displayName];
           if (artistId) {
             const previewBtn = document.createElement('button');
