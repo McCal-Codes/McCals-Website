@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'src/images/Portfolios/Events/**'
-      - 'scripts/generate-events-manifest.js'
+      - 'scripts/manifest/**'
       - '.github/workflows/events-manifest.yml'
   
   # Also run on manual trigger
@@ -35,7 +35,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Check for event images
         id: check_images
@@ -54,8 +54,8 @@ jobs:
           echo "image_count=$IMAGE_COUNT" >> $GITHUB_OUTPUT
           echo "event_count=$EVENT_COUNT" >> $GITHUB_OUTPUT
           
-          # Check if events manifest script exists
-          if [ -f "scripts/generate-events-manifest.js" ]; then
+          # Check if events manifest script exists (canonical path)
+          if [ -f "scripts/manifest/generate-events-manifest.js" ]; then
             echo "✅ Events manifest generator found"
             echo "has_generator=true" >> $GITHUB_OUTPUT
           else

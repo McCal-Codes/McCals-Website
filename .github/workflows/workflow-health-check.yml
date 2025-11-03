@@ -26,7 +26,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Check manifest files exist
         run: |
@@ -128,49 +128,14 @@ jobs:
 
       - name: Test manifest generation (dry run)
         run: |
-          echo "🧪 Testing manifest generation capabilities..."
-          
-          # Test concert manifest generation
-          echo "Testing concert manifest..."
-          if npm run manifest:concert > /tmp/concert.log 2>&1; then
-            echo "✅ Concert manifest generation: OK"
+          echo "🧪 Testing manifest generation capabilities (DRY RUN)..."
+          # Use the central dry-run which uses the enhanced generator to validate generation logic without writing files
+          if npm run manifest:dry-run > /tmp/manifest-dry.log 2>&1; then
+            echo "✅ Manifest dry-run completed: OK"
           else
-            echo "❌ Concert manifest generation: Failed"
+            echo "❌ Manifest dry-run failed"
             echo "Log output:"
-            cat /tmp/concert.log
-            exit 1
-          fi
-          
-          # Test events manifest generation  
-          echo "Testing events manifest..."
-          if npm run manifest:events > /tmp/events.log 2>&1; then
-            echo "✅ Events manifest generation: OK"
-          else
-            echo "❌ Events manifest generation: Failed"
-            echo "Log output:"
-            cat /tmp/events.log
-            exit 1
-          fi
-          
-          # Test journalism manifest generation
-          echo "Testing journalism manifest..."
-          if npm run manifest:journalism -- --force > /tmp/journalism.log 2>&1; then
-            echo "✅ Journalism manifest generation: OK"
-          else
-            echo "❌ Journalism manifest generation: Failed"
-            echo "Log output:"
-            cat /tmp/journalism.log
-            exit 1
-          fi
-          
-          # Test nature manifest generation
-          echo "Testing nature manifest..."
-          if node scripts/manifest/generate-nature-manifest.js > /tmp/nature.log 2>&1; then
-            echo "✅ Nature manifest generation: OK"
-          else
-            echo "❌ Nature manifest generation: Failed"
-            echo "Log output:"
-            cat /tmp/nature.log
+            sed -n '1,400p' /tmp/manifest-dry.log || true
             exit 1
           fi
 

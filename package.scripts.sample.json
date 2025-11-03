@@ -2,6 +2,6 @@
   "scripts": {
     "manifest:events": "node scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force",
     "manifest:generate": "npm run manifest:events",
-    "watch:events-manifest": "node scripts/watch-events-manifest.js"
+    "watch:events-manifest": "node scripts/watchers/watch-events-manifest.js"
   }
 }

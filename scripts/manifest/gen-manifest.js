@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // scripts/gen-manifest.js
 // Usage: node scripts/gen-manifest.js "images/Portfolios/Concert/The Book Club/The Book Club"
 const fs = require('fs');

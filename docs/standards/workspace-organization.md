@@ -47,13 +47,35 @@ This document combines all standards for scripts folder organization, workspace 
 
 ---
 
-## 4. Preflight & Afterflight Checklists
+## 4. GitHub Actions Workflow Standards
+
+### Workflow Organization
+- **File Placement**: Keep workflows in `.github/workflows/` with clear naming (e.g., `ci-*.yml`, `deploy-*.yml`, `manifest-*.yml`)
+- **Deterministic Installs**: Always use `npm ci --prefer-offline --no-audit --no-fund` for Node dependencies
+- **Caching**: Cache npm (`~/.npm`) and heavy assets (Playwright browsers at `~/.cache/ms-playwright`) keyed by `package-lock.json` hash
+- **Dry Runs**: Use dry-run flags for validation to avoid accidental writes (e.g., `--dry` on manifest generators)
+- **Artifacts**: Upload reports and logs using `actions/upload-artifact` for diagnostics
+
+### Workflow Validation
+- **Pre-Commit Validation**: Run `node scripts/utils/ci-validate-workflows.js` locally when modifying workflows
+- **CI Validation**: Include `validate-workflows.yml` job that checks script references and best practices
+- **Cross-Platform Compatibility**: Ensure scripts work on Windows/macOS/Linux; avoid PowerShell-only commands in shared scripts
+
+### Portfolio Automation
+- **Manifest Workflows**: Every portfolio type should have automated manifest generation (e.g., `portrait-manifest.yml`, `nature-manifest.yml`)
+- **Trigger Conditions**: Watch for changes in respective portfolio directories (e.g., `src/images/Portfolios/Portrait/**`)
+- **Manual Triggers**: Include `workflow_dispatch` for manual regeneration
+
+---
+
+## 5. Preflight & Afterflight Checklists
 
 ### Preflight (Before Making Changes)
 1. **Read Standards**: Review all relevant standards in `docs/standards/` (this document).
 2. **Run Preflight Validation**: Use `npm run ai:preflight:short` or the VS Code "AI: Preflight (short)" task to check context awareness and workspace health.
 3. **Check Documentation**: Ensure any planned changes are documented or justified in the appropriate standards file or README.
 4. **Plan Organization**: Confirm new scripts, folders, or changes will follow the documented structure and archival policy.
+5. **Validate Workflows**: If modifying workflows, run `node scripts/utils/ci-validate-workflows.js` to check references and best practices.
 
 ### Afterflight (After Making Changes)
 1. **Validate Scripts**: Run all npm scripts and workflows to ensure nothing is broken after changes.
@@ -61,14 +83,16 @@ This document combines all standards for scripts folder organization, workspace 
 3. **Archive Unused**: Move any unused or obsolete scripts to `scripts/_archived/` and add a comment/header.
 4. **Update Documentation**: Record all changes in `.github/copilot-instructions.md`, `CHANGELOG.md`, and update standards docs as needed.
 5. **Final Review**: Ensure the workspace remains organized, efficient, and easy to maintain for future contributors.
+6. **Health Check**: Run `npm run repo:health` (or manual equivalent on macOS) and smoke tests to verify no regressions.
 
 ---
 
-## 5. Documentation & Reference
+## 6. Documentation & Reference
 
 - All standards and organization rules are in `docs/standards/`. Always fall back to these documents for guidance.
 - If in doubt, document your process and decisions for future maintainers.
+- Workflow standards are detailed in `.github/WORKFLOWS.md`.
 
 ---
 
-_Last updated: 2025-10-06_
+_Last updated: 2025-11-03_

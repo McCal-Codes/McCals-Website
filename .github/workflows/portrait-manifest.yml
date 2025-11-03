@@ -1,0 +1,220 @@
+name: Auto-Generate Portrait Manifest
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/images/Portfolios/Portrait/**'
+      - 'scripts/manifest/generate-portrait-manifest.js'
+      - '.github/workflows/portrait-manifest.yml'
+
+  # Also run on manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portrait-manifest-${{ github.ref }}
+  cancel-in-progress: false  # Don't cancel - let it complete to avoid corruption
+
+jobs:
+  update-portrait-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Check for portrait images
+        id: check_images
+        run: |
+          echo "🔍 Checking for portrait images..."
+
+          # Count total images in portrait directory
+          IMAGE_COUNT=$(find src/images/Portfolios/Portrait -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | wc -l)
+          echo "📸 Found $IMAGE_COUNT portrait images"
+
+          # Count portrait collections
+          COLLECTION_COUNT=$(find src/images/Portfolios/Portrait -mindepth 1 -maxdepth 1 -type d ! -name ".*" 2>/dev/null | wc -l)
+          echo "👤 Found $COLLECTION_COUNT portrait collections"
+
+          # Set outputs
+          echo "image_count=$IMAGE_COUNT" >> $GITHUB_OUTPUT
+          echo "collection_count=$COLLECTION_COUNT" >> $GITHUB_OUTPUT
+
+          # Check if portrait manifest script exists
+          if [ -f "scripts/manifest/generate-portrait-manifest.js" ]; then
+            echo "✅ Portrait manifest generator found"
+            echo "has_generator=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Portrait manifest generator not found"
+            echo "has_generator=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate portrait manifest
+        if: steps.check_images.outputs.has_generator == 'true'
+        run: |
+          echo "🔄 Regenerating portrait manifest..."
+
+          # Create backup of existing manifest for widget protection
+          if [ -f "src/images/Portfolios/Portrait/portrait-manifest.json" ]; then
+            cp "src/images/Portfolios/Portrait/portrait-manifest.json" "src/images/Portfolios/Portrait/portrait-manifest.json.backup"
+            echo "📋 Created backup of existing manifest"
+          fi
+
+          # Retry logic for manifest generation
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3..."
+
+            if npm run manifest:portrait; then
+              echo "✅ Portrait manifest generation completed"
+              break
+            else
+              echo "⚠️ Attempt $attempt failed"
+              if [ $attempt -eq 3 ]; then
+                echo "❌ All attempts failed"
+                # Restore from backup if available
+                if [ -f "src/images/Portfolios/Portrait/portrait-manifest.json.backup" ]; then
+                  mv "src/images/Portfolios/Portrait/portrait-manifest.json.backup" "src/images/Portfolios/Portrait/portrait-manifest.json"
+                  echo "🔄 Restored manifest from backup"
+                fi
+                exit 1
+              fi
+              sleep 5
+            fi
+          done
+
+          # Validate manifest exists and is valid JSON
+          if [ -f "src/images/Portfolios/Portrait/portrait-manifest.json" ]; then
+            # Test if it's valid JSON
+            if jq empty src/images/Portfolios/Portrait/portrait-manifest.json 2>/dev/null; then
+              echo "✅ Portrait manifest generated successfully"
+
+              # Extract key info from manifest
+              COLLECTIONS=$(jq '.totalCollections' src/images/Portfolios/Portrait/portrait-manifest.json)
+              echo "📁 Total collections: $COLLECTIONS"
+
+              # Clean up backup
+              rm -f "src/images/Portfolios/Portrait/portrait-manifest.json.backup"
+            else
+              echo "❌ Generated manifest is not valid JSON"
+              # Restore from backup if available
+              if [ -f "src/images/Portfolios/Portrait/portrait-manifest.json.backup" ]; then
+                mv "src/images/Portfolios/Portrait/portrait-manifest.json.backup" "src/images/Portfolios/Portrait/portrait-manifest.json"
+                echo "🔄 Restored manifest from backup"
+              fi
+              exit 1
+            fi
+          else
+            echo "❌ Manifest file was not created"
+            # Restore from backup if available
+            if [ -f "src/images/Portfolios/Portrait/portrait-manifest.json.backup" ]; then
+              mv "src/images/Portfolios/Portrait/portrait-manifest.json.backup" "src/images/Portfolios/Portrait/portrait-manifest.json"
+              echo "🔄 Restored manifest from backup"
+            fi
+            exit 1
+          fi
+
+      - name: Widget compatibility check
+        if: steps.check_images.outputs.has_generator == 'true'
+        run: |
+          echo "🔍 Checking widget compatibility..."
+
+          # Verify manifest has required structure for widgets
+          if jq -e '.version' src/images/Portfolios/Portrait/portrait-manifest.json > /dev/null; then
+            echo "✅ Manifest version field present"
+          else
+            echo "⚠️ Manifest missing version field"
+          fi
+
+          if jq -e '.collections' src/images/Portfolios/Portrait/portrait-manifest.json > /dev/null; then
+            echo "✅ Manifest collections field present"
+          else
+            echo "❌ Manifest missing collections field (CRITICAL)"
+            exit 1
+          fi
+
+          echo "✅ Widget compatibility check passed"
+
+      - name: Commit changes
+        if: steps.check_images.outputs.has_generator == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          # Stage all manifest files
+          git add src/images/Portfolios/Portrait/portrait-manifest.json
+          git add src/images/Portfolios/Portrait/**/manifest.json 2>/dev/null || true
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "📋 No changes to commit"
+          else
+            # Create commit with detailed message
+            COLLECTIONS=$(jq '.totalCollections' src/images/Portfolios/Portrait/portrait-manifest.json)
+
+            git commit -m "👤 Auto-update portrait manifest" \
+              -m "Updated portrait-manifest.json" \
+              -m "Collections: $COLLECTIONS" \
+              -m "Images: ${{ steps.check_images.outputs.image_count }}" \
+              -m "Generated by GitHub Actions"
+
+            echo "✅ Changes committed"
+          fi
+
+      - name: Push changes
+        if: steps.check_images.outputs.has_generator == 'true'
+        run: |
+          # Use retry logic for push
+          for attempt in 1 2 3; do
+            echo "Push attempt $attempt of 3..."
+
+            if git push; then
+              echo "✅ Changes pushed successfully"
+              break
+            else
+              echo "⚠️ Push attempt $attempt failed"
+              if [ $attempt -eq 3 ]; then
+                echo "❌ All push attempts failed"
+                exit 1
+              fi
+
+              # Pull with rebase before retry
+              git pull --rebase
+              sleep 3
+            fi
+          done
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "🎯 Portrait Manifest Workflow Summary:"
+          echo "- Images found: ${{ steps.check_images.outputs.image_count }}"
+          echo "- Collections: ${{ steps.check_images.outputs.collection_count }}"
+          echo "- Generator available: ${{ steps.check_images.outputs.has_generator }}"
+          echo ""
+
+          if [ -f "src/images/Portfolios/Portrait/portrait-manifest.json" ]; then
+            echo "✅ Portrait manifest exists"
+
+            # Show manifest summary
+            if command -v jq &> /dev/null; then
+              echo ""
+              echo "📊 Manifest Contents:"
+              jq -r '.collections[] | "  • \(.collectionName): \(.totalImages) images"' src/images/Portfolios/Portrait/portrait-manifest.json || echo "  (Unable to parse manifest)"
+            fi
+          else
+            echo "❌ Portrait manifest missing"
+          fi

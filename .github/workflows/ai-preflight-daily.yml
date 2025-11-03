@@ -21,10 +21,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Preflight summary
         run: |
-          node scripts/ai-instructions-preflight.js --short | tee preflight-summary.txt
+          node scripts/utils/ai-instructions-preflight.js --short | tee preflight-summary.txt
 
       - name: Upload summary artifact
         uses: actions/upload-artifact@v4
