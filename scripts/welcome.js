@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 /**
  * Welcome Dashboard & TODO Auto-Checker

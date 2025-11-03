@@ -1,6 +1,6 @@
 {
   "name": "mccal-media-website",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "McCal Media photo gallery website with development tools",
   "main": "src/site/index.html",
   "scripts": {
@@ -30,14 +30,14 @@
     "manifest:events": "node scripts/manifest/generate-events-manifest.js --root src/images/Portfolios/Events --force",
     "manifest:nature": "node scripts/manifest/generate-nature-manifest.js",
     "manifest:portrait": "node scripts/manifest/generate-portrait-manifest.js",
-    "watch:journalism-manifest": "node scripts/watch-journalism-manifest.js",
-    "watch:events-manifest": "node scripts/watch-events-manifest.js",
+    "watch:journalism-manifest": "node scripts/watchers/watch-journalism-manifest.js",
+    "watch:events-manifest": "node scripts/watchers/watch-events-manifest.js",
     "manifest:concert": "node scripts/manifest/generate-concert-manifest.js",
     "build:concert": "npm run organize:folders && npm run manifest:concert",
-    "watch:concert": "node scripts/watch-concert-folders.js",
+    "watch:concert": "node scripts/watchers/watch-concert-folders.js",
     "manifest:universal": "node scripts/manifest/generate-universal-manifest.js",
     "build:universal": "npm run organize:folders && npm run manifest:concert && npm run manifest:universal",
-    "watch:universal": "node scripts/watch-universal-portfolios.js",
+    "watch:universal": "node scripts/watchers/watch-universal-portfolios.js",
     "build:optimized": "npm run build:universal",
     "watch:auto-manifest": "node scripts/watchers/watch-auto-manifest.js",
     "watch:auto-manifest:concert": "node scripts/watchers/watch-auto-manifest.js --target concert",
@@ -51,6 +51,12 @@
     "repo:health": "npm run clean && npm run ai:preflight:short && npm run analyze:large-files",
     "analyze:duplicates": "powershell -Command \"Get-ChildItem -Recurse -File | Group-Object -Property Length | Where-Object { $_.Count -gt 1 } | ForEach-Object { $_.Group | Select-Object FullName, @{Name='SizeMB';Expression={[math]::Round($_.Length/1MB,2)}} } | Sort-Object SizeMB -Descending | Format-Table -AutoSize\"",
     "validate:widgets": "node scripts/utils/validate-widget-html.js",
+    "ci:validate-scripts": "node scripts/utils/ci-validate-scripts.js",
+    "ci:find-duplicates": "node scripts/utils/find-duplicate-scripts.js",
+    "ci:archive-duplicates": "node scripts/utils/find-duplicate-scripts.js --archive",
+    "ci:smoke-test": "node scripts/utils/smoke-test.js",
+    "test:playwright": "npx playwright test tests/playwright --reporter=list",
+    "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
     "welcome": "node scripts/welcome.js"
   },
   "keywords": [
@@ -65,7 +71,10 @@
     "chokidar": "^4.0.3",
     "concurrently": "^9.2.1",
     "http-server": "^14.1.1",
-    "open": "^10.1.0"
+    "open": "^10.1.0",
+    "playwright": "^1.39.0",
+    "@playwright/test": "^1.39.0",
+    "eslint": "^8.46.0"
   },
   "engines": {
     "node": ">=16.0.0"

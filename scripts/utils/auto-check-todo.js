@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Keyword and diff-based auto-checker for todo.md
 // This module is intended to be imported by ai-finalize-session.js or run standalone for testing.
 // It will scan commit messages and/or changed files for specific keywords or patterns and mark matching TODOs as done.

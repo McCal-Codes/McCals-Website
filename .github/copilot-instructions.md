@@ -176,6 +176,8 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-11-03T16:39:33.003Z — Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.
+- 2025-11-03T12:00:00.000Z — Workflow validation system complete: Fixed corrupted ci-validate-workflows.js script, added comprehensive workflow validation with script reference checking and best practices (npm ci, caching). Added portrait-manifest.yml workflow for Portrait portfolio automation. Completed full repository health validation including smoke tests, AI preflight, large files check, widget validation, and workflow validation. All systems functioning properly with automated workflows for all portfolio types.
 - 2025-11-02T12:00:00.000Z — Concert Portfolio v4.7 refinement: deduplicated artist list (case-insensitive) in Spotify panel and added interaction safety so the support button is temporarily disabled while interacting with images or when the lightbox is open.
 - 2025-11-02T00:00:00.000Z — Concert Portfolio v4.7: Added non-intrusive Spotify support button listing bands from the concert manifest with “Open on Spotify” search links and optional embedded previews via inline JSON artist map. Retains v4.6 performance optimizations and accessibility patterns. README and widget CHANGELOG updated.
 - 2025-10-28T23:59:00.000Z — Policies & Legal v1.0.0 hotfix: fixed top comment closure to eliminate stray "-->" rendering. Revalidated widget (PASS). Download button wired via data-terms-pdf with fallback remains intact; floating menu and version badge interactions confirmed.

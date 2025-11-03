@@ -1,0 +1,5 @@
+// NOTE: This script has been consolidated. The canonical generator lives at:
+//   scripts/manifest/generate-universal-manifest.js
+// To avoid duplicates, edit the canonical file in `scripts/manifest/` instead.
+
+console.log('Moved: use scripts/manifest/ (canonical implementation) - generate-universal-manifest.js:5');

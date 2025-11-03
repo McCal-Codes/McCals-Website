@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'src/images/Portfolios/Concert/**'
-      - 'scripts/generate-concert-manifest.js'
+      - 'scripts/manifest/**'
       - '.github/workflows/build-manifest.yml'
   
   # Also run on manual trigger
@@ -35,7 +35,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Check for concert images
         id: check_images
@@ -54,8 +54,8 @@ jobs:
           echo "image_count=$IMAGE_COUNT" >> $GITHUB_OUTPUT
           echo "band_count=$BAND_COUNT" >> $GITHUB_OUTPUT
           
-          # Check if concert manifest script exists
-          if [ -f "scripts/generate-concert-manifest.js" ]; then
+          # Check if concert manifest script exists (canonical path)
+          if [ -f "scripts/manifest/generate-concert-manifest.js" ]; then
             echo "✅ Concert manifest generator found"
             echo "has_generator=true" >> $GITHUB_OUTPUT
           else
