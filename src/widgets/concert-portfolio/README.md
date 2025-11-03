@@ -67,6 +67,20 @@
 - `?debug=true`: Enable performance metrics overlay
 - URL parameter support for development testing
 
+#### Instant content override (GitHub ref pin)
+- `data-github-ref="<ref>"` (optional): Force the widget to fetch from a specific GitHub ref instead of `main`.
+  - Accepts a full commit SHA, a tag, or another branch name.
+  - Useful to bypass GitHub Raw CDN delays after pushing new images/manifests.
+  - When set, the widget updates its cache key to include the ref to prevent stale cross-ref caching.
+  - Example:
+    ```html
+    <div id="concertPf"
+         data-panes="24"
+         data-github-ref="bbeeaf212055eb56cd342e8ff0f01729101d23fc">
+      <!-- Paste v4.7.html here -->
+    </div>
+    ```
+
 ### Artist Support (Spotify) — v4.7
 - Non-intrusive floating button lists all bands from your concert manifest with quick Spotify access.
 - For each band:
@@ -77,6 +91,7 @@ Config via data-attributes on the wrapper (defaults shown):
 ```html
 <div id="concertPf"
      data-panes="24"
+  data-github-ref="main"
      data-spotify="on"
      data-spotify-button-label="Support the Artists"
      data-spotify-position="bottom-right"
