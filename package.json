@@ -61,6 +61,7 @@
     "test:playwright": "npx playwright test tests/playwright --reporter=list",
     "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
     "images:optimize": "node scripts/optimize-images.js",
+    "seo:audit": "node scripts/utils/seo-audit.js",
     "welcome": "node scripts/welcome.js"
   },
   "files": [
