@@ -36,7 +36,22 @@ async function isDirectory(dirPath) {
 async function getImageFiles(folderPath) {
   try {
     const items = await fs.readdir(folderPath);
-    return items.filter(item => IMAGE_EXTENSIONS.test(item)).sort();
+    let imageFiles = [];
+    
+    for (const item of items) {
+      const itemPath = path.join(folderPath, item);
+      const stats = await fs.stat(itemPath);
+      
+      if (stats.isDirectory()) {
+        // Recursively scan subdirectories for images
+        const subImages = await getImageFiles(itemPath);
+        imageFiles = imageFiles.concat(subImages.map(img => path.relative(folderPath, path.join(itemPath, img))));
+      } else if (stats.isFile() && IMAGE_EXTENSIONS.test(item)) {
+        imageFiles.push(item);
+      }
+    }
+    
+    return imageFiles.sort();
   } catch (error) {
     console.warn(`⚠️  Could not read folder: ${folderPath} - generate-portrait-manifest.js:41`, error.message);
     return [];
