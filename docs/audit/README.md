@@ -9,3 +9,41 @@ Contents
 Policy
 - Keep audit documents in `docs/audit/` and reports in `docs/audit/reports/` for easy discovery.
 - Reports may contain sensitive details (file sizes, dependency info). Review before publishing publicly.
+
+How to keep this file up to date
+--------------------------------
+At the end of each commit that adds or changes audit artifacts (reports, audit summaries, housekeeping changes), add a short entry to the "Commit summary log" below. The intent is to keep an easy-to-scan record of what audits/reports were produced and what housekeeping steps were taken so reviewers and maintainers can quickly find artifacts.
+
+Template (copy and paste at the top of the log for new entries):
+
+ - YYYY-MM-DD [commit-hash] Short summary of what changed. Files: list-of-files-or-paths
+
+Example:
+
+ - 2025-11-04 [bdbcb243] Added repo audit and housekeeping artifacts. Files: `docs/audit/REPO-AUDIT-2025-11-04.md`, `docs/audit/reports/large-files-2025-11-04.txt`, `docs/audit/reports/npm-audit-2025-11-04.json`, `.gitattributes`, `CONTRIBUTING.md`, `.github/CODEOWNERS`, `.github/workflows/validate-manifests.yml`
+
+Automating the update (optional)
+--------------------------------
+If you'd like this to be automatic, you can add a small git commit hook (pre-commit or post-commit) that appends a short summary to this file. Example (post-commit hook sketch):
+
+```bash
+#!/usr/bin/env bash
+# post-commit
+COMMIT_HASH=$(git rev-parse --short HEAD)
+DATE=$(date +%F)
+MSG=$(git log -1 --pretty=%B | head -n1)
+FILES=$(git diff-tree --no-commit-id --name-only -r $COMMIT_HASH | tr '\n' ',' | sed 's/,$//')
+printf " - %s [%s] %s Files: %s\n" "$DATE" "$COMMIT_HASH" "$MSG" "$FILES" >> docs/audit/README.md
+git add docs/audit/README.md && git commit -m "chore(audit): update audit README for $COMMIT_HASH" --no-verify
+```
+
+Notes about automation:
+ - The hook above is a sketch and will commit again after each commit (it uses --no-verify to avoid recursive hooks). If you enable this pattern, consider a separate branch or a more sophisticated workflow to avoid extra commits in PRs.
+ - Alternatively, generate an audit log as part of a CI job (recommended). CI can append artifacts to a release or update a changelog file without triggering extra local commits.
+
+Commit summary log
+------------------
+Add a one-line entry for any commit that creates or modifies audit artifacts. Recent entries (manually added):
+
+ - 2025-11-04 [bdbcb243] Added repo audit and housekeeping artifacts. Files: `docs/audit/REPO-AUDIT-2025-11-04.md`, `docs/audit/reports/large-files-2025-11-04.txt`, `docs/audit/reports/npm-audit-2025-11-04.json`, `.gitattributes`, `CONTRIBUTING.md`, `.github/CODEOWNERS`, `.github/workflows/validate-manifests.yml`
+
