@@ -60,7 +60,15 @@
     "ci:smoke-test": "node scripts/utils/smoke-test.js",
     "test:playwright": "npx playwright test tests/playwright --reporter=list",
     "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
+    "images:optimize": "node scripts/optimize-images.js",
     "welcome": "node scripts/welcome.js"
+  },
+  "files": [
+    "dist/optimized-images"
+  ],
+  "optionalDependencies": {
+    "sharp": "^0.32.0",
+    "fast-glob": "^3.2.12"
   },
   "keywords": [
     "photography",
