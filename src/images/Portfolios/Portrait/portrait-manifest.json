@@ -1,8 +1,8 @@
 {
   "version": "1.0",
-  "generated": "2025-11-04T18:17:43.965Z",
+  "generated": "2025-11-04T18:43:22.736Z",
   "totalCollections": 8,
-  "totalImages": 0,
+  "totalImages": 15,
   "collections": [
     {
       "collectionName": "Couples",
@@ -83,8 +83,24 @@
     {
       "collectionName": "Studio",
       "folderPath": "Studio",
-      "totalImages": 0,
-      "images": [],
+      "totalImages": 15,
+      "images": [
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3507-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3510-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3520-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3521-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3530-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3538-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3542-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3545-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3549-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3550-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3554-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3556-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3557-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3562-min.jpg",
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3563-min.jpg"
+      ],
       "tags": [
         "portrait",
         "studio",
