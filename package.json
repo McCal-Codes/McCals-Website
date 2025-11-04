@@ -44,6 +44,7 @@
     "watch:auto-manifest:events": "node scripts/watchers/watch-auto-manifest.js --target events",
     "watch:auto-manifest:journalism": "node scripts/watchers/watch-auto-manifest.js --target journalism",
     "watch:auto-manifest:nature": "node scripts/watchers/watch-auto-manifest.js --target nature",
+    "watch:auto-manifest:portrait": "node scripts/watchers/watch-auto-manifest.js --target portrait",
     "watch:auto-manifest:all": "node scripts/watchers/watch-auto-manifest.js --all",
     "dev:auto": "npm run watch:auto-manifest",
     "manifest:featured": "node scripts/manifest/generate-featured-manifest.js",
