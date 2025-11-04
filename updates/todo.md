@@ -102,9 +102,9 @@ Reference standards:
 - [ ] Document integration patterns for third-party services (RSS, calendars, etc.)
 
 - [x] TODO: Run repository audit and follow-up housekeeping (2025-11-04)
-	- Audit file: `docs/REPO-AUDIT-2025-11-04.md`
-	- Large-file report: `reports/large-files-2025-11-04.txt`
-	- npm audit: `reports/npm-audit-2025-11-04.json`
+		- Audit file: `docs/audit/REPO-AUDIT-2025-11-04.md`
+		- Large-file report: `docs/audit/reports/large-files-2025-11-04.txt`
+		- npm audit: `docs/audit/reports/npm-audit-2025-11-04.json`
 	- Added `.gitattributes`, `CONTRIBUTING.md`, and `CODEOWNERS`
 
 _Last updated: 2025-11-04_
