@@ -171,6 +171,12 @@ async function scanAndGenerateManifests() {
       const existing = await fs.readFile(MANIFEST_OUTPUT, 'utf8');
       if (existing === content) writeIt = false;
     }
+    // Honor --force CLI flag to always overwrite
+    const FORCE = process.argv.includes('--force');
+    if (FORCE) {
+      console.log('⚡ --force provided: will overwrite aggregated manifest even if unchanged');
+      writeIt = true;
+    }
     if (writeIt) {
       await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
       console.log('\n📊 Summary: - generate-portrait-manifest.js:176');

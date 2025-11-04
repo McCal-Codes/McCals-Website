@@ -92,6 +92,20 @@ This document combines all standards for scripts folder organization, workspace 
 - All standards and organization rules are in `docs/standards/`. Always fall back to these documents for guidance.
 - If in doubt, document your process and decisions for future maintainers.
 - Workflow standards are detailed in `.github/WORKFLOWS.md`.
+ 
+## Single-Portfolio Manifest Policy (2025-11)
+
+- We now produce a single aggregated manifest per portfolio type (for example `portrait-manifest.json`, `concert-manifest.json`, `nature-manifest.json`) located at `src/images/Portfolios/<Type>/`.
+- Per-folder `manifest.json` files are deprecated and should not be created or committed. This simplifies widget consumption and CI logic.
+- If you have legacy per-folder manifests, use the cleanup utility at `scripts/manifest/remove-subfolder-manifests.js`. Example:
+
+	node scripts/manifest/remove-subfolder-manifests.js
+
+- CI/workflows were updated to stop adding per-folder `manifest.json` files; they now operate only on the aggregated manifests. If you maintain a watcher locally, run the watcher with `--force` to force regeneration when needed:
+
+	node scripts/watchers/watch-auto-manifest.js --all --force
+
+Note: This policy reduces manifest churn and avoids accidental per-folder manifest writes that previously caused confusion.
 
 ---
 

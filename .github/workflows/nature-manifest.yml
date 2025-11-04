@@ -188,7 +188,8 @@ jobs:
           
           # Stage all manifest files
           git add src/images/Portfolios/Nature/nature-manifest.json
-          git add src/images/Portfolios/Nature/**/manifest.json 2>/dev/null || true
+          # Per-folder manifests are deprecated. Do NOT add per-folder manifest.json files.
+          # If you need to remove legacy per-folder manifests, use scripts/manifest/remove-subfolder-manifests.js
           
           # Check if there are changes to commit
           if git diff --staged --quiet; then

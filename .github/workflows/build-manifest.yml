@@ -186,7 +186,8 @@ jobs:
           
           # Add only manifest files
           git add src/images/Portfolios/Concert/concert-manifest.json
-          git add src/images/Portfolios/Concert/**/manifest.json
+          # Per-folder manifests are deprecated. Do not add src/images/Portfolios/Concert/**/manifest.json anymore.
+          # Use scripts/manifest/remove-subfolder-manifests.js to clean legacy files before running this workflow.
           
           # Create descriptive commit message
           BANDS=${{ steps.check_images.outputs.band_count }}

@@ -149,12 +149,12 @@ jobs:
             
             # Add all manifest files
             git add src/images/Portfolios/Concert/concert-manifest.json 2>/dev/null || true
-            git add src/images/Portfolios/Concert/**/manifest.json 2>/dev/null || true
             git add src/images/Portfolios/Events/events-manifest.json 2>/dev/null || true
             git add src/images/Portfolios/Journalism/journalism-manifest.json 2>/dev/null || true
-            git add src/images/Portfolios/Journalism/**/tags.json 2>/dev/null || true
             git add src/images/Portfolios/portfolio-manifest.json 2>/dev/null || true
             git add src/images/Portfolios/featured-manifest.json 2>/dev/null || true
+            # Note: Per-folder `manifest.json` files are deprecated and should not be added here.
+            # To remove legacy per-folder manifests, run: `node scripts/manifest/remove-subfolder-manifests.js`
             
             # Show what's being committed
             echo "Files to commit:"
