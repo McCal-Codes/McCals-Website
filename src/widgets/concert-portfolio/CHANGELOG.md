@@ -14,6 +14,12 @@ All notable changes to the Squarespace concert portfolio snippet.
  - **REFINE**: Deduplicates artists by name (case-insensitive) to avoid duplicate entries
  - **SAFETY**: Spotify button is temporarily disabled while interacting with images (hover/drag/touch or lightbox open) to prevent accidental clicks
 
+## v4.8 — 2025-11-04 (Manifest Simplification)
+### Simplify manifest strategy
+- **CHANGE**: Portfolio manifests simplified to a single aggregated manifest per portfolio (e.g., `concert-manifest.json`).
+- **DEPRECATE**: Per-folder `manifest.json` files are now deprecated and removed by automation; the aggregated manifest is canonical for widgets and CI.
+- **TOOLING**: Manifest generators updated to produce only portfolio-level manifests; cleanup script added to remove subfolder manifests.
+
 ## v4.6 — 2025-10-06 (Performance Optimized - Production Ready)
 ### Performance Optimizations 🚀
 - **CRITICAL**: Separated critical CSS from non-critical styles for faster initial render

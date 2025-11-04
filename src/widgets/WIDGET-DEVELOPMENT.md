@@ -58,6 +58,8 @@ const GH = {
   base: ['src', 'images', 'Portfolios', '[Type]']
 };
 
+// Prefer a single portfolio-level manifest (e.g. `portrait-manifest.json`, `concert-manifest.json`).
+// Per-folder `manifest.json` files are legacy/optional and may be removed by automation.
 const manifestUrl = rawBase + 'src/images/Portfolios/[Type]/[type]-manifest.json';
 
 function rawUrl(parts) {

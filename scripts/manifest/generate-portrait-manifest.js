@@ -100,7 +100,7 @@ async function generateManifestForFolder(collectionName, folderPath) {
   };
   
   // Per-folder manifests are no longer written; we keep a single aggregated manifest per portfolio.
-  console.log(`🔎 Processed collection: ${collectionName} (${imageFiles.length} images) - generate-portrait-manifest.js:105`);
+  console.log(`🔎 Processed collection: ${collectionName} (${imageFiles.length} images) - generate-portrait-manifest.js:103`);
   
   return manifest;
 }
@@ -109,11 +109,11 @@ async function generateManifestForFolder(collectionName, folderPath) {
  * Main function: Scan Portrait folder and generate all manifests
  */
 async function scanAndGenerateManifests() {
-  console.log('🎭 Portrait Manifest Generator - generate-portrait-manifest.js:130');
-  console.log('================================\n - generate-portrait-manifest.js:131');
+  console.log('🎭 Portrait Manifest Generator - generate-portrait-manifest.js:112');
+  console.log('================================\n - generate-portrait-manifest.js:113');
   
   if (!(await exists(BASE_PORTRAIT))) {
-    console.error(`❌ Portrait folder not found: ${BASE_PORTRAIT} - generate-portrait-manifest.js:134`);
+    console.error(`❌ Portrait folder not found: ${BASE_PORTRAIT} - generate-portrait-manifest.js:116`);
     process.exit(1);
   }
   
@@ -135,7 +135,7 @@ async function scanAndGenerateManifests() {
       const manifest = await generateManifestForFolder(item, itemPath);
       collections.push(manifest);
     } catch (error) {
-      console.error(`❌ Failed to process collection: ${item} - generate-portrait-manifest.js:156`, error.message);
+      console.error(`❌ Failed to process collection: ${item} - generate-portrait-manifest.js:138`, error.message);
     }
   }
   
@@ -173,12 +173,12 @@ async function scanAndGenerateManifests() {
     }
     if (writeIt) {
       await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
-      console.log('\n📊 Summary: - generate-portrait-manifest.js:170');
-      console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:171`);
-      console.log(`Total Images: ${portraitManifest.totalImages} - generate-portrait-manifest.js:172`);
-      console.log(`\n✅ Portrait manifest generated: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:173`);
+      console.log('\n📊 Summary: - generate-portrait-manifest.js:176');
+      console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:177`);
+      console.log(`Total Images: ${portraitManifest.totalImages} - generate-portrait-manifest.js:178`);
+      console.log(`\n✅ Portrait manifest generated: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:179`);
     } else {
-      console.log(`\n↩️  Aggregated portrait manifest unchanged, skipping write: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:179`);
+      console.log(`\n↩️  Aggregated portrait manifest unchanged, skipping write: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:181`);
     }
   } catch (err) {
     console.error(`❌ Failed to write portrait manifest: ${err.message} - generate-portrait-manifest.js:184`);
@@ -187,6 +187,6 @@ async function scanAndGenerateManifests() {
 
 // Run the generator
 scanAndGenerateManifests().catch(err => {
-  console.error('❌ Failed to generate portrait manifest: - generate-portrait-manifest.js:208', err);
+  console.error('❌ Failed to generate portrait manifest: - generate-portrait-manifest.js:190', err);
   process.exit(1);
 });

@@ -121,22 +121,37 @@ console.log(`Cache hit rate: ${(metrics.cacheHits / metrics.requests * 100).toFi
 ## GitHub Repository Structure
 ```
 images/Portfolios/Concert/
+├── concert-manifest.json           # Aggregated, canonical manifest for the portfolio
 ├── Band-Name-1/
-│   ├── manifest.json (optional)
 │   ├── photo1.jpg
 │   └── photo2.webp
 └── Band-Name-2/
     ├── subfolder/ (auto-detected)
-    │   ├── manifest.json
     │   └── image.jpg
     └── direct-image.png
 ```
 
 ### Manifest Format
+
+The widget reads the aggregated `concert-manifest.json` as the canonical source. Per-folder `manifest.json` (older pattern) may exist but is optional.
+
+An example (aggregated) manifest excerpt:
+
 ```json
 {
-  "date": "2025-09-16",
-  "images": ["photo1.jpg", "photo2.webp"]
+  "version": "1.0",
+  "generated": "2025-11-04T18:00:00.000Z",
+  "totalBands": 16,
+  "bands": [
+    {
+      "bandName": "Funky Lamp",
+      "folderPath": "Funky Lamp/April 2025",
+      "dateDisplay": "April 2025",
+      "concertDate": { "year": 2025, "month": 4, "iso": "2025-04-01" },
+      "totalImages": 14,
+      "images": ["IMG_001.jpg", "IMG_002.jpg"]
+    }
+  ]
 }
 ```
 

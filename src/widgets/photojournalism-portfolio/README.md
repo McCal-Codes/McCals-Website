@@ -47,16 +47,19 @@ Filterable masonry gallery for displaying photojournalism work with categories. 
 ### GitHub Repository Structure
 ```
 images/Portfolios/Journalism/
-├── manifest.json (optional - for custom captions)
+├── journalism-manifest.json        # Aggregated, canonical manifest for the portfolio
 ├── 250315_Butler Democracy Protest_CAL9773.jpg
 ├── 250417 The Rooney Rule_CAL3148.jpg
 └── [your journalism photos]
 ```
 
+Note: Prefer a single aggregated manifest (`journalism-manifest.json`) at the portfolio root. Per-folder or per-directory `manifest.json` files are supported as legacy/optional caption sources but are no longer required.
+
 ### Caption Sources (Priority Order)
-1. **manifest.json** - Custom captions and metadata
-2. **EXIF/IPTC data** - Embedded photo captions (journalism standard)
-3. **Auto-generated** - Fallback based on filename
+1. **journalism-manifest.json** (aggregated) - Preferred canonical source for custom captions and metadata
+2. **Per-folder `manifest.json`** - Legacy/optional (supported when present for custom captions)
+3. **EXIF/IPTC data** - Embedded photo captions (journalism standard)
+4. **Auto-generated** - Fallback based on filename
 
 ### Configuration
 Update the GitHub repository in the script section:
@@ -65,12 +68,12 @@ const GH = { owner:'YOUR-USERNAME', repo:'YOUR-REPO', branch:'main', base:['imag
 ```
 
 ### Custom Captions with manifest.json
-Create a `manifest.json` file in your Journalism directory:
+Create a `journalism-manifest.json` (or a `manifest.json` mapping in legacy setups) in your Journalism directory. Example aggregated entry:
 ```json
 {
   "your-photo.jpg": {
     "caption": "Detailed caption for lightbox display",
-    "description": "Brief description", 
+    "description": "Brief description",
     "date": "2025-03-15",
     "categories": ["politics", "events"],
     "publication": "Your Publication Name",
