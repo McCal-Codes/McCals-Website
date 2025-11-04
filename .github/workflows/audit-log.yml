@@ -1,0 +1,51 @@
+name: Audit Log (CI artifact)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [closed]
+  workflow_dispatch: {}
+
+jobs:
+  audit-log:
+    runs-on: ubuntu-latest
+    # For pull_request events, only run when merged (closed + merged)
+    if: "github.event_name != 'pull_request' || github.event.pull_request.merged == true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Create audit summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMMIT_HASH=$(git rev-parse --short HEAD || echo "unknown")
+          DATE=$(date -u +"%Y-%m-%d")
+          MSG=$(git log -1 --pretty=%B | head -n1 || true)
+          FILES=$(git diff-tree --no-commit-id --name-only -r HEAD || true)
+          # Look for audit-related paths or common housekeeping files
+          AUDIT_FILES=$(echo "$FILES" | grep -E '^docs/audit/|^docs/REPO-AUDIT|^reports/|^docs/audit/reports/|^\.gitattributes$|^CONTRIBUTING.md$|^\.github/CODEOWNERS$|^\.github/workflows/validate-manifests.yml$' || true)
+          OUTFILE="audit-log-${DATE}-${COMMIT_HASH}.txt"
+          if [ -z "$AUDIT_FILES" ]; then
+            echo "No audit-related files changed in this commit." > "$OUTFILE"
+            echo "Files changed:" >> "$OUTFILE"
+            echo "$FILES" >> "$OUTFILE"
+          else
+            {
+              echo "Date: $DATE"
+              echo "Commit: $COMMIT_HASH"
+              echo "Message: $MSG"
+              echo "Changed audit files:"
+              echo "$AUDIT_FILES"
+            } > "$OUTFILE"
+          fi
+          echo "Created $OUTFILE"
+
+      - name: Upload audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-log-${{ github.run_id }}
+          path: audit-log-*.txt
