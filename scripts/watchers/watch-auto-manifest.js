@@ -92,7 +92,11 @@ class AutoManifestWatcher {
 
     try {
       this.log('Regenerating manifest...');
-      execSync(`npm run ${this.config.manifestScript}`, {
+      // Allow watcher to pass a force flag to the underlying generator if requested
+      const forceArg = this.force ? ' -- --force' : '';
+      const cmd = `npm run ${this.config.manifestScript}${forceArg}`;
+      this.log(`Executing: ${cmd}`);
+      execSync(cmd, {
         encoding: 'utf8',
         cwd: process.cwd()
       });
@@ -206,6 +210,10 @@ function parseTargets(argv) {
   return [DEFAULT_TARGET];
 }
 
+function parseForceFlag(argv) {
+  return argv.includes('--force');
+}
+
 function showHelp() {
   const targetsList = Object.entries(TARGET_CONFIGS)
     .map(([key, cfg]) => `  • ${key} – ${cfg.label}`)
@@ -264,7 +272,12 @@ async function main() {
       process.exit(1);
     }
 
-    const watchers = uniqueTargets.map(name => new AutoManifestWatcher(name, TARGET_CONFIGS[name]));
+    const forceFlag = parseForceFlag(args);
+    const watchers = uniqueTargets.map(name => {
+      const w = new AutoManifestWatcher(name, TARGET_CONFIGS[name]);
+      w.force = forceFlag;
+      return w;
+    });
     watchers.forEach(watcher => watcher.startWatching());
 
     process.on('SIGINT', async () => {

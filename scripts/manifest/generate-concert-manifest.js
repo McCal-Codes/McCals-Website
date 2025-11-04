@@ -251,6 +251,12 @@ async function generateMasterManifest() {
         const existing = await fs.readFile(MANIFEST_OUTPUT, 'utf8');
         if (existing === content) writeIt = false;
       }
+      // Honor --force flag
+      const FORCE = process.argv.includes('--force');
+      if (FORCE) {
+        console.log('⚡ --force provided: will overwrite master manifest even if unchanged');
+        writeIt = true;
+      }
       if (writeIt) {
         await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
         success(`Generated master manifest: ${MANIFEST_OUTPUT}`);

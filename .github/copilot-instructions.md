@@ -177,6 +177,24 @@ Scripts folder organization and archival (2025-10-06)
 Recent updates
 
 - 2025-11-03T16:39:33.003Z — Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.
+- 2025-11-04T12:10:00.000Z — Manifest simplification & Portrait Portfolio v1.1 release (migration & hardening).
+	- Fixed a runtime initialization error in the Portrait Portfolio widget by restoring and hardening the structured-data helper; widget now recovers gracefully when manifests or images are missing.
+	- Implemented Portrait widget v1.1 features: client-first-name extraction for titles, dynamic subject tabs (auto-discovered from manifest collections), rotating selection (1–4 images randomized per session with round-robin pooling), improved lightbox UX (safe-area close button, hidden scrollbars), and debug-panel improvements.
+	- Optimized manifest generation pipeline:
+		- Generators now perform idempotent writes (skip writing aggregated manifest files when unchanged) to reduce churn.
+		- Added `--force` support to key generators so maintainer/CI can overwrite manifests intentionally.
+		- Updated `scripts/watchers/watch-auto-manifest.js` to trigger portfolio-level generators and forward `--force` when requested.
+		- Migrated to a single aggregated manifest per portfolio (e.g., `portrait-manifest.json`, `concert-manifest.json`) and deprecated per-folder `manifest.json` outputs.
+		- Created and executed `scripts/manifest/remove-subfolder-manifests.js` to clean legacy per-folder manifests.
+	- CI/workflows updated: removed attempts to add per-folder `manifest.json` files and now operate solely on aggregated manifests; workflows still generate, validate (jq), and commit aggregated manifests with rollback/backup safety.
+	- Documentation updates: added a Single-Portfolio Manifest Policy note to `docs/standards/workspace-organization.md`, updated widget README/CHANGELOG for Portrait v1.1, and added guidance in workflow comments about the cleanup script.
+	- Validation & verification: regenerated manifests (`npm run manifest:generate`), ran the manifest validator (`node scripts/utils/validate-manifests.js`) — result: 8 aggregated manifest files checked, 0 errors. Commits created for all changes; changes are reversible via git history.
+	- Helpful commands:
+		- Clean up legacy manifests: `node scripts/manifest/remove-subfolder-manifests.js`
+		- Watch and force regeneration locally: `node scripts/watchers/watch-auto-manifest.js --all --force`
+		- Regenerate all manifests: `npm run manifest:generate`
+		- Validate manifests: `node scripts/utils/validate-manifests.js`
+	- Notes/Next steps: update any external tooling that still expects per-folder manifests; optionally update watchers/CI for other repos or add a CI cleanup check. If you want, I can update additional workflows or run the dev-server smoke test for the Portrait widget (requires explicit permission).
 - 2025-11-03T12:00:00.000Z — Workflow validation system complete: Fixed corrupted ci-validate-workflows.js script, added comprehensive workflow validation with script reference checking and best practices (npm ci, caching). Added portrait-manifest.yml workflow for Portrait portfolio automation. Completed full repository health validation including smoke tests, AI preflight, large files check, widget validation, and workflow validation. All systems functioning properly with automated workflows for all portfolio types.
 - 2025-11-02T12:00:00.000Z — Concert Portfolio v4.7 refinement: deduplicated artist list (case-insensitive) in Spotify panel and added interaction safety so the support button is temporarily disabled while interacting with images or when the lightbox is open.
 - 2025-11-02T00:00:00.000Z — Concert Portfolio v4.7: Added non-intrusive Spotify support button listing bands from the concert manifest with “Open on Spotify” search links and optional embedded previews via inline JSON artist map. Retains v4.6 performance optimizations and accessibility patterns. README and widget CHANGELOG updated.

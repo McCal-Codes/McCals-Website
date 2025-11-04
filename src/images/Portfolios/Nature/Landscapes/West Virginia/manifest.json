@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "name": "West Virginia",
+  "totalImages": 3,
+  "images": [
+    "barn.jpg",
+    "seneca-rocks-night.jpg",
+    "tractor.jpg"
+  ],
+  "tags": [
+    "landscape"
+  ]
+}
