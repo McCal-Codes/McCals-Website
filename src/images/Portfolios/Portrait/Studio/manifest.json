@@ -23,5 +23,17 @@
     "portrait",
     "studio",
     "professional"
+<<<<<<< HEAD
   ]
 }
+=======
+  ],
+  "dateDisplay": "2025",
+  "dateISO": "2025-01-01T00:00:00.000Z",
+  "description": "Professional studio portraits with controlled lighting",
+  "metadata": {
+    "generated": "2025-11-04T18:48:34.280Z",
+    "version": "1.0"
+  }
+}
+>>>>>>> 4bff3a4c6f1b542c2b19701aafc4f9d2b723a5e8
