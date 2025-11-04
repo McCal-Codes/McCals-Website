@@ -1,24 +1,8 @@
 {
   "collectionName": "Studio",
   "folderPath": "Studio",
-  "totalImages": 15,
-  "images": [
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3507-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3510-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3520-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3521-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3530-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3538-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3542-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3545-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3549-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3550-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3554-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3556-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3557-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3562-min.jpg",
-    "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3563-min.jpg"
-  ],
+  "totalImages": 0,
+  "images": [],
   "tags": [
     "portrait",
     "studio",
@@ -28,7 +12,7 @@
   "dateISO": "2025-01-01T00:00:00.000Z",
   "description": "Professional studio portraits with controlled lighting",
   "metadata": {
-    "generated": "2025-11-04T18:17:50.254Z",
+    "generated": "2025-11-04T18:17:43.957Z",
     "version": "1.0"
   }
 }
