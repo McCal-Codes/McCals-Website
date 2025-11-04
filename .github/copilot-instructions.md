@@ -145,6 +145,17 @@ Widget performance and debugging
 - Error resilience: Widgets implement exponential backoff, graceful degradation, and "Coming Soon" fallback cards
 - CSS patterns: Masonry layouts use CSS columns with `break-inside: avoid`, progressive loading with intersection observers
 
+Repository audit and optimization tools
+
+- **Audit System**: Baseline audit documentation in `docs/audit/` with README, automated reports. Use `npm run repo:health` for comprehensive health checks.
+- **SEO Auditing**: Run `npm run seo:audit` to scan widgets for structured data, alt text, meta tags, and ARIA compliance. Results show files scanned and issues found.
+- **Image Optimization**: Use `npm run images:optimize` to generate WebP/AVIF variants (requires sharp/fast-glob optionalDependencies). Non-destructive; outputs to `dist/optimized-images/`.
+- **Manifest Validation**: Use `node scripts/utils/validate-manifests.js` to check all portfolio manifests for JSON validity and structure. Schema defined in `scripts/utils/manifest-schema.json`.
+- **Performance Monitoring**: Lighthouse CI runs on PR/push for widget changes. Config in `lighthouserc.json` enforces thresholds (FCP <2s, LCP <2.5s, TBT <300ms, CLS <0.1, 90% category scores).
+- **Large File Detection**: PR workflow blocks files ≥10MB. Check `docs/audit/reports/large-files-*.txt` for current file sizes.
+- **Security**: Dependabot enabled for weekly npm and GitHub Actions updates. Run `npm audit` for manual security checks.
+- **Documentation**: See `docs/audit/README.md` for audit workflow and `docs/standards/seo-performance-guide.md` for comprehensive SEO/performance best practices.
+
 Good starting references
 
 - `scripts/enhanced-manifest-generator.js`  manifest schema and date logic.
@@ -157,6 +168,8 @@ Good starting references
 - `docs/standards/widget-development.md`  comprehensive guide for applying enhancement patterns systematically.
 - `docs/standards/performance-standards.md` ⭐ **PERFORMANCE REFERENCE**: Lighthouse optimization standards using Concert Portfolio v4.6 as case study.
 - `docs/standards/image-seo-standards.md`  comprehensive guide for optimizing portfolio images for search engines and accessibility.
+- `docs/standards/seo-performance-guide.md` ⭐ **SEO/PERFORMANCE GUIDE**: Comprehensive best practices for SEO and performance optimization.
+- `docs/audit/README.md`  repository audit workflow and health monitoring procedures.
 
 Change management
 
@@ -176,6 +189,15 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-11-04T23:00:00.000Z — Repository audit and optimization infrastructure complete:
+	- **Audit System**: Created comprehensive audit documentation in `docs/audit/` with README and automated reports (large files, npm security). Added `docs/REPO-AUDIT-2025-11-04.md` baseline audit showing 0 vulnerabilities, well-organized structure, and manifest policy compliance.
+	- **Repository Standards**: Added `.gitattributes` for binary file handling, `CONTRIBUTING.md` for contributor guidelines, `.github/CODEOWNERS` for code ownership, `.github/dependabot.yml` for automated dependency updates.
+	- **CI/CD Enhancements**: Created 5 new workflows: `validate-manifests.yml` (manifest JSON schema validation), `audit-log.yml` (CI artifact tracking), `large-file-check.yml` (PR blocker for files ≥10MB), `pr-health-check.yml` (health checks on PRs), `lighthouse-ci.yml` (automated performance audits). Updated `playwright-smoke.yml` and `validate-manifests.yml` with npm caching (fetch-depth:1, cache key).
+	- **Image Optimization**: Added `scripts/optimize-images.js` for WebP/AVIF conversion with `sharp` and `fast-glob` as optionalDependencies. New npm task: `images:optimize`.
+	- **SEO & Performance Tools**: Created `scripts/utils/seo-audit.js` for widget SEO scanning (structured data, alt text, meta tags, ARIA), `scripts/utils/manifest-schema.json` for JSON schema validation, `docs/standards/seo-performance-guide.md` comprehensive SEO/performance best practices guide, `lighthouserc.json` for Lighthouse CI config (FCP <2s, LCP <2.5s, TBT <300ms, CLS <0.1, 90% category scores). New npm task: `seo:audit`.
+	- **Workflow Fixes**: Fixed `copilot-instructions-guardian.yml` to use `github.rest.issues` API (was causing TypeError), synced `package-lock.json` with new optionalDependencies.
+	- **Key Commands**: `npm run seo:audit` (scan widgets), `npm run images:optimize` (generate WebP/AVIF), `npm run repo:health` (full health check), `npm run validate:widgets` (HTML validation).
+	- **Documentation**: All tools documented in `docs/audit/README.md`, audit workflow tracked in commit history, comprehensive standards in `docs/standards/seo-performance-guide.md`.
 - 2025-11-03T16:39:33.003Z — Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.
 - 2025-11-04T12:10:00.000Z — Manifest simplification & Portrait Portfolio v1.1 release (migration & hardening).
 	- Fixed a runtime initialization error in the Portrait Portfolio widget by restoring and hardening the structured-data helper; widget now recovers gracefully when manifests or images are missing.
