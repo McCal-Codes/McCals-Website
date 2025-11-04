@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Portfolio Manifest",
+  "type": "object",
+  "required": ["images"],
+  "properties": {
+    "manifestVersion": {"type":"string"},
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["filename","url"],
+        "properties": {
+          "filename": {"type": "string"},
+          "url": {"type": "string"},
+          "caption": {"type":"string"},
+          "dateTaken": {"type":"string"}
+        }
+      }
+    },
+    "totalImages": {"type":"integer"}
+  }
+}
