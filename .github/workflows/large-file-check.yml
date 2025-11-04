@@ -1,0 +1,44 @@
+name: PR Large File Check
+
+on:
+  pull_request:
+    paths: [ '**' ]
+
+jobs:
+  check-large-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # need full history/refs for accurate git diff between SHAs
+          fetch-depth: 0
+
+      - name: Find added files > 10MB
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          echo "Checking files in PR #$PR_NUMBER"
+          BASE_SHA=${{ github.event.pull_request.base.sha }}
+          HEAD_SHA=${{ github.event.pull_request.head.sha }}
+          echo "Comparing $BASE_SHA...$HEAD_SHA"
+          # List changed files between base and head
+          CHANGED_FILES=$(git diff --name-only $BASE_SHA $HEAD_SHA || true)
+          LARGE_FILES=""
+          for f in $CHANGED_FILES; do
+            if [ -f "$f" ]; then
+              # size in MB
+              SZ=$(du -m "$f" | cut -f1)
+              if [ "$SZ" -ge 10 ]; then
+                LARGE_FILES="$LARGE_FILES\n${SZ}M $f"
+              fi
+            fi
+          done
+          if [ -n "$LARGE_FILES" ]; then
+            echo "::error::PR contains files >= 10MB:$LARGE_FILES"
+            echo -e "$LARGE_FILES" > large-files-detected.txt
+            exit 1
+          else
+            echo "No files >= 10MB detected in PR"
+          fi
