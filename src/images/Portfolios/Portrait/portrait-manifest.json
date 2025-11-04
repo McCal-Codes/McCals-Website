@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated": "2025-11-04T18:46:50.164Z",
+  "generated": "2025-11-04T19:08:06.283Z",
   "totalCollections": 8,
   "totalImages": 15,
   "collections": [
@@ -11,10 +11,7 @@
       "images": [],
       "tags": [
         "portrait"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Portrait collection: Couples"
+      ]
     },
     {
       "collectionName": "Editorial",
@@ -25,10 +22,7 @@
         "portrait",
         "editorial",
         "fashion"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Editorial and fashion portrait photography"
+      ]
     },
     {
       "collectionName": "Family",
@@ -37,10 +31,7 @@
       "images": [],
       "tags": [
         "portrait"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Portrait collection: Family"
+      ]
     },
     {
       "collectionName": "Graduation",
@@ -49,10 +40,7 @@
       "images": [],
       "tags": [
         "portrait"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Portrait collection: Graduation"
+      ]
     },
     {
       "collectionName": "Headshots",
@@ -63,10 +51,7 @@
         "portrait",
         "studio",
         "professional"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Portrait collection: Headshots"
+      ]
     },
     {
       "collectionName": "Maternity",
@@ -75,10 +60,7 @@
       "images": [],
       "tags": [
         "portrait"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Portrait collection: Maternity"
+      ]
     },
     {
       "collectionName": "Studio",
@@ -105,10 +87,7 @@
         "portrait",
         "studio",
         "professional"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Professional studio portraits with controlled lighting"
+      ]
     },
     {
       "collectionName": "Wedding",
@@ -117,10 +96,7 @@
       "images": [],
       "tags": [
         "portrait"
-      ],
-      "dateDisplay": "2025",
-      "dateISO": "2025-01-01T00:00:00.000Z",
-      "description": "Portrait collection: Wedding"
+      ]
     }
   ]
 }

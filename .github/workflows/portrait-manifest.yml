@@ -5,9 +5,16 @@ on:
     branches: [ main ]
     paths:
       - 'src/images/Portfolios/Portrait/**'
-      - 'scripts/manifest/generate-portrait-manifest.js'
+      - 'scripts/manifest/**'
       - '.github/workflows/portrait-manifest.yml'
-
+  
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/images/Portfolios/Portrait/**'
+      - 'scripts/manifest/**'
+      - '.github/workflows/portrait-manifest.yml'
+  
   # Also run on manual trigger
   workflow_dispatch:
 
@@ -148,8 +155,23 @@ jobs:
 
           echo "✅ Widget compatibility check passed"
 
-      - name: Commit changes
+      - name: Check for changes
+        id: check_changes
         if: steps.check_images.outputs.has_generator == 'true'
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "📝 Changes detected in manifest"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            
+            echo "Changed files:"
+            git status --porcelain
+          else
+            echo "✅ No changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit changes
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -175,7 +197,7 @@ jobs:
           fi
 
       - name: Push changes
-        if: steps.check_images.outputs.has_generator == 'true'
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
         run: |
           # Use retry logic for push
           for attempt in 1 2 3; do
@@ -197,24 +219,13 @@ jobs:
             fi
           done
 
-      - name: Summary
-        if: always()
+      - name: PR Validation Summary
+        if: github.event_name == 'pull_request' && steps.check_images.outputs.has_generator == 'true'
         run: |
-          echo "🎯 Portrait Manifest Workflow Summary:"
+          echo "🔍 Pull Request Validation Summary:"
           echo "- Images found: ${{ steps.check_images.outputs.image_count }}"
-          echo "- Collections: ${{ steps.check_images.outputs.collection_count }}"
-          echo "- Generator available: ${{ steps.check_images.outputs.has_generator }}"
+          echo "- Collections found: ${{ steps.check_images.outputs.collection_count }}"
+          echo "- Manifest generated: ✅"
+          echo "- Validation passed: ✅"
           echo ""
-
-          if [ -f "src/images/Portfolios/Portrait/portrait-manifest.json" ]; then
-            echo "✅ Portrait manifest exists"
-
-            # Show manifest summary
-            if command -v jq &> /dev/null; then
-              echo ""
-              echo "📊 Manifest Contents:"
-              jq -r '.collections[] | "  • \(.collectionName): \(.totalImages) images"' src/images/Portfolios/Portrait/portrait-manifest.json || echo "  (Unable to parse manifest)"
-            fi
-          else
-            echo "❌ Portrait manifest missing"
-          fi
+          echo "Manifest files are ready for review in this PR."

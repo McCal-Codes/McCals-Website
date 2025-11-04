@@ -1,6 +1,6 @@
 # Portrait Portfolio Widget
 
-**Current Version: v1.0** — Portrait-optimized photography showcase with vertical composition layouts and enhanced detail viewing for intimate character studies.
+**Current Version: v1.1** — Portrait-optimized photography showcase with vertical composition layouts, rotating selections, and dynamic subject tabs for fresher presentations.
 
 ## Features
 
@@ -39,7 +39,7 @@
 1. **Copy the Widget Code**: Copy the entire contents of `versions/v1.0.html`
 2. **Squarespace Integration**: Paste into a Code Block on your Squarespace page
 3. **Manifest Setup**: Ensure `src/images/Portfolios/Portrait/portrait-manifest.json` exists
-4. **Customization**: Modify `data-panes` attribute to control number of displayed portraits
+4. **Customization**: Modify `data-panes` attribute to control number of displayed portraits. Note: the widget now selects a rotating subset of portraits on each load (default behavior shows 1–4 random panes per session) unless `data-panes` is explicitly set to a fixed number.
 
 ## Manifest Structure
 
@@ -68,6 +68,14 @@ The widget expects a manifest file at `src/images/Portfolios/Portrait/portrait-m
 
 - **`data-panes`**: Number of portrait cards to display (default: 20)
 - **`data-widget-version`**: Version identifier for debugging
+
+### What's new in v1.1
+
+- Client-first-name titles: captions and headings are now derived from the first name in folder paths for cleaner presentation.
+- Rotating selection: by default the widget shows a randomized subset of portraits on each page load (1–4 panes) to keep the gallery feeling fresh. You can override this with `data-panes`.
+- Subject tabs: the widget auto-generates subject tabs from manifest collections so new collections appear in the UI automatically.
+- Initialization fix: resolved a rare runtime failure related to structured-data injection.
+- Minor UX/accessibility tweaks: safe-area aware close button, hidden scrollbar handling for immersive lightbox, and improved navigation-hiding selectors.
 
 ## Performance Features
 

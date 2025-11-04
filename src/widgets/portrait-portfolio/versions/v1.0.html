@@ -1,6 +1,6 @@
-<!-- Portrait Portfolio v1.0 - Portrait Photography Showcase
+<!-- Portrait Portfolio v1.1 - Portrait Photography Showcase
 Author: Caleb McCartney / McCal-Codes
-Version: 1.0
+Version: 1.1
 Purpose: High-performance portrait portfolio widget optimized for vertical compositions
 
 Portrait-Specific Features:
@@ -9,6 +9,7 @@ Portrait-Specific Features:
 - Enhanced detail viewing for portrait compositions
 - Performance optimized for portrait image loading
 - SEO structured data for portrait photography
+- Subject tabs for different portrait categories
 
 Usage: Paste this entire block into a Squarespace Code Block
 Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manifest.json
@@ -53,16 +54,21 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 @media(max-width:1024px){.portrait-grid{column-width:240px}}
 @media(max-width:768px){.portrait-portfolio{margin:60px auto;padding:20px}.portrait-heading{font-size:28px}.portrait-grid{column-width:200px}}
-@media(max-width:520px){.portrait-grid{column-width:100%}}
+.portrait-tabs{display:flex;flex-wrap:wrap;gap:12px;margin:0 auto 32px;max-width:800px;justify-content:center;padding:0 20px}
+.portrait-tab{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--fg);padding:10px 18px;border-radius:20px;font:500 14px/1 ui-sans-serif,system-ui;cursor:pointer;transition:all .2s ease;backdrop-filter:blur(4px)}
+.portrait-tab:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.portrait-tab.active{background:var(--accent);color:#000;border-color:var(--accent);box-shadow:0 2px 8px rgba(206,173,238,.3)}
+@media(max-width:768px){.portrait-tabs{margin-bottom:24px;padding:0 10px}.portrait-tab{padding:8px 14px;font-size:13px}}
 </style>
 
 <!-- Resource hints for performance -->
 <link rel="preconnect" href="https://raw.githubusercontent.com">
 <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 
-<div class="portrait-portfolio" id="portraitPf" data-panes="20" data-widget-version="1.0">
-  <h2 class="portrait-heading">Portrait Portfolio <span class="version-indicator" title="View changelog" onclick="showPortraitChangelog()">v1.0</span></h2>
+<div class="portrait-portfolio" id="portraitPf" data-panes="20" data-widget-version="1.1">
+  <h2 class="portrait-heading">Portrait Portfolio <span class="version-indicator" title="View changelog" onclick="showPortraitChangelog()">v1.1</span></h2>
   <p class="portrait-subheading">Intimate portraits capturing the essence of personality, emotion, and human connection through carefully composed vertical frames that tell compelling visual stories.</p>
+  <div class="portrait-tabs" id="portraitTabs"></div>
   <div class="portrait-loading" id="portraitLoading">
     <div class="portrait-spinner"></div>
     Loading portraits...
@@ -92,9 +98,24 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
       <button class="changelog-close" type="button" aria-label="Close changelog" onclick="hidePortraitChangelog()">&times;</button>
     </div>
     <div class="changelog-body">
+      <div class="changelog-version">v1.1 - Subject Tabs Enhancement</div>
+      <ul class="changelog-items">
+        <li>Added dynamic subject tabs that automatically appear for new portrait categories</li>
+        <li>Filterable portfolio view by portrait subject/type</li>
+        <li>Improved navigation with tab-based organization</li>
+        <li>Responsive tab design with mobile optimization</li>
+        <li>Enhanced close button with safe-area positioning for mobile devices</li>
+        <li>Comprehensive navigation hiding for true fullscreen lightbox experience</li>
+        <li>Hidden scrollbars in lightbox gallery for immersive viewing</li>
+        <li>Improved tab styling with better spacing and hover effects</li>
+        <li>Performance optimizations with deferred feature loading</li>
+      </ul>
       <div class="changelog-version">v1.0 - Initial Release</div>
       <ul class="changelog-items">
         <li>Portrait-optimized masonry layout with 3:4 aspect ratio cards</li>
+        <li>Client name extraction from folder structure for personalized titles</li>
+        <li>Dynamic image rotation showing 1-4 random images per page load</li>
+        <li>Round-robin selection algorithm for variety across sessions</li>
         <li>Vertical composition showcase with enhanced detail viewing</li>
         <li>Performance optimized for portrait image loading patterns</li>
         <li>SEO structured data for portrait photography collections</li>
@@ -114,7 +135,7 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
   const CONFIG = {
     github: {
       owner: 'McCal-Codes',
-      repo: 'McCal-Portfolio',
+      repo: 'McCals-Website',
       branch: 'main'
     },
     basePaths: [
@@ -123,17 +144,20 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
     ],
     cacheDuration: 10 * 60 * 1000, // 10 minutes
     panes: 20,
+    maxImagesPerSession: 4, // Show 1-4 random images per session
     debug: new URLSearchParams(window.location.search).has('debug')
   };
 
   // State management
   const state = {
     basePath: null,
-    cacheKey: 'portrait_portfolio_cache_v1.0'
+    cacheKey: 'portrait_portfolio_cache_v1.1',
+    activeSubject: 'all' // Track active subject filter
   };
 
   // DOM elements
   const container = document.getElementById('portraitPf');
+  const tabs = document.getElementById('portraitTabs');
   const loading = document.getElementById('portraitLoading');
   const grid = document.getElementById('portraitGrid');
   const changelogModal = document.getElementById('portraitChangelogModal');
@@ -201,29 +225,91 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
 
   // SEO structured data for portrait photography
   const addStructuredData = manifest => {
-    const totalImages = manifest.collections?.reduce((sum, collection) => sum + (collection.totalImages || collection.images?.length || 0), 0) || 0;
-    const sampleImages = manifest.collections?.slice(0, 3).flatMap(collection =>
-      collection.images?.slice(0, 2).map(img =>
-        buildUrls.image(state.basePath, collection.folderPath.split('/').filter(Boolean), img)
-      ) || []
-    ).slice(0, 5) || [];
+    try {
+      const totalImages = manifest.collections?.reduce((sum, collection) => sum + (collection.totalImages || collection.images?.length || 0), 0) || 0;
+      const sampleImages = manifest.collections?.slice(0, 3).flatMap(collection =>
+        collection.images?.slice(0, 2).map(img =>
+          buildUrls.image(state.basePath, collection.folderPath.split('/').filter(Boolean), img)
+        ) || []
+      ).slice(0, 5) || [];
 
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ImageGallery",
-      "name": "Portrait Photography Portfolio",
-      "description": "Professional portrait photography portfolio showcasing intimate character studies and personal narratives",
-      "url": window.location.href,
-      "image": sampleImages,
-      "author": { "@type": "Person", "name": "Caleb McCartney", "jobTitle": "Portrait Photographer", "url": "https://mccalmedia.com" },
-      "datePublished": manifest.generated ? new Date(manifest.generated).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-      "numberOfItems": totalImages,
-      "genre": "Portrait Photography"
+      // Avoid adding duplicate structured data scripts
+      if (document.querySelector('script[data-portrait-ldjson]')) return;
+
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-portrait-ldjson', '1');
+      script.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": "Portrait Photography Portfolio",
+        "description": "Professional portrait photography portfolio showcasing intimate character studies and personal narratives",
+        "url": window.location.href,
+        "image": sampleImages,
+        "author": { "@type": "Person", "name": "Caleb McCartney", "jobTitle": "Portrait Photographer", "url": "https://mccalmedia.com" },
+        "datePublished": manifest.generated ? new Date(manifest.generated).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+        "numberOfItems": totalImages,
+        "genre": "Portrait Photography"
+      });
+      document.head.appendChild(script);
+      log('Structured data added for', totalImages, 'portrait images');
+    } catch (e) {
+      log('Failed to add structured data:', e?.message || e);
+    }
+  };
+
+  // Create subject tabs
+  const createSubjectTabs = (collections) => {
+    if (!tabs) return;
+
+    // Get unique subjects that have images
+    const subjectsWithImages = collections
+      .filter(collection => collection.totalImages > 0)
+      .map(collection => collection.collectionName);
+
+    if (subjectsWithImages.length <= 1) {
+      // Don't show tabs if there's only one subject or none
+      tabs.style.display = 'none';
+      return;
+    }
+
+    tabs.style.display = 'flex';
+    tabs.innerHTML = '';
+
+    // Add "All" tab
+    const allTab = document.createElement('button');
+    allTab.className = `portrait-tab ${state.activeSubject === 'all' ? 'active' : ''}`;
+    allTab.textContent = 'All';
+    allTab.setAttribute('data-subject', 'all');
+    allTab.addEventListener('click', () => switchSubject('all'));
+    tabs.appendChild(allTab);
+
+    // Add subject tabs
+    subjectsWithImages.forEach(subject => {
+      const tab = document.createElement('button');
+      tab.className = `portrait-tab ${state.activeSubject === subject ? 'active' : ''}`;
+      tab.textContent = subject;
+      tab.setAttribute('data-subject', subject);
+      tab.addEventListener('click', () => switchSubject(subject));
+      tabs.appendChild(tab);
     });
-    document.head.appendChild(script);
-    log('Structured data added for', totalImages, 'portrait images');
+  };
+
+  // Switch active subject
+  const switchSubject = async (subject) => {
+    state.activeSubject = subject;
+    updateActiveTab();
+    await buildGrid(subject);
+  };
+
+  // Update active tab styling
+  const updateActiveTab = () => {
+    if (!tabs) return;
+    const tabButtons = tabs.querySelectorAll('.portrait-tab');
+    tabButtons.forEach(tab => {
+      const subject = tab.getAttribute('data-subject');
+      tab.classList.toggle('active', subject === state.activeSubject);
+    });
   };
 
   // Manifest loading with fallback
@@ -253,9 +339,9 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
   };
 
   // Build portrait portfolio grid
-  const buildGrid = async () => {
+  const buildGrid = async (subjectFilter = 'all') => {
     try {
-      log('Starting buildGrid...');
+      log('Starting buildGrid...', subjectFilter);
       loading.style.display = 'flex';
       grid.style.display = 'none';
 
@@ -263,28 +349,66 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
       log('Manifest loaded:', manifest);
       if (!manifest?.collections?.length) throw new Error('No portrait data available');
 
-      // Add structured data for SEO
-      addStructuredData(manifest);
+      // Add structured data for SEO (only once)
+      if (!document.querySelector('script[type="application/ld+json"]')) {
+        addStructuredData(manifest);
+      }
 
-      // Create image pools from collections
-      const pools = manifest.collections.map(collection => ({
-        dir: collection.folderPath,
-        parts: collection.folderPath.split('/').filter(Boolean),
-        title: collection.collectionName,
-        dateDisplay: collection.dateDisplay || 'Various Dates',
-        date: collection.dateISO || collection.dateDisplay || new Date().toISOString(),
-        tags: collection.tags || [],
-        images: shuffle(collection.images.slice()),
-        allImages: collection.images.slice()
-      }));
+      // Create tabs for subjects
+      createSubjectTabs(manifest.collections);
 
-      // Round-robin allocation for variety
+      // Filter collections based on subject
+      let filteredCollections = manifest.collections;
+      if (subjectFilter !== 'all') {
+        filteredCollections = manifest.collections.filter(collection => collection.collectionName === subjectFilter);
+        if (filteredCollections.length === 0) {
+          // Fallback to all if subject not found
+          filteredCollections = manifest.collections;
+          state.activeSubject = 'all';
+          updateActiveTab();
+        }
+      }
+
+      // Create image pools from filtered collections
+      const pools = filteredCollections.map(collection => {
+        // Extract client name from image paths (e.g., "Liam Sulivan/filename.jpg" -> "Liam")
+        let clientName = collection.collectionName;
+        if (collection.images && collection.images.length > 0) {
+          const firstImagePath = collection.images[0];
+          const pathParts = firstImagePath.split('/');
+          if (pathParts.length > 1) {
+            const folderName = pathParts[0];
+            const nameParts = folderName.split(' ');
+            if (nameParts.length > 0) {
+              clientName = nameParts[0]; // Use first name
+            }
+          }
+        }
+
+        return {
+          dir: collection.folderPath,
+          parts: collection.folderPath.split('/').filter(Boolean),
+          title: clientName,
+          dateDisplay: collection.dateDisplay || 'Various Dates',
+          date: collection.dateISO || collection.dateDisplay || new Date().toISOString(),
+          tags: collection.tags || [],
+          images: shuffle(collection.images.slice()),
+          allImages: collection.images.slice()
+        };
+      });
+
+      // Select images with rotation - similar to concert portfolio
       const slots = [];
       let hasImages = true;
-      while (slots.length < CONFIG.panes && hasImages) {
+      // Randomly select 1-4 images for dynamic display
+      const targetImages = Math.floor(Math.random() * 4) + 1; // Random between 1-4
+      const maxImagesPerSession = Math.min(targetImages, CONFIG.panes);
+
+      // First pass: collect up to maxImagesPerSession images using round-robin
+      while (slots.length < maxImagesPerSession && hasImages) {
         hasImages = false;
         for (const pool of pools) {
-          if (slots.length >= CONFIG.panes) break;
+          if (slots.length >= maxImagesPerSession) break;
           const image = pool.images.shift();
           if (image) {
             slots.push({
@@ -343,7 +467,7 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
       grid.style.display = 'block';
       grid.classList.add('loaded');
 
-      log(`Rendered ${slots.length} portrait cards`);
+      log(`Rendered ${slots.length} portrait cards for subject: ${subjectFilter}`);
 
     } catch (error) {
       console.error('Failed to build portrait portfolio:', error);
@@ -385,7 +509,7 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
         .pl-gallery img.loaded{opacity:1;filter:none}
         .pl-hint{position:sticky;top:6px;align-self:center;background:rgba(0,0,0,.55);color:#fff;padding:6px 10px;border-radius:999px;font:600 12px/1 ui-sans-serif,system-ui;letter-spacing:.4px;transition:opacity .4s ease}
         .pl-hint.fade{opacity:0}
-        .pl-close{position:fixed;top:20px;right:20px;background:rgba(0,0,0,.7);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:50%;width:44px;height:44px;font:800 18px/1 ui-sans-serif,system-ui;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2147483648;box-shadow:0 4px 12px rgba(0,0,0,.4);transition:background .2s ease}
+        .pl-close{position:fixed;top:max(20px,env(safe-area-inset-top));right:max(20px,env(safe-area-inset-right));background:rgba(0,0,0,.7);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:50%;width:44px;height:44px;font:800 18px/1 ui-sans-serif,system-ui;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2147483648;box-shadow:0 4px 12px rgba(0,0,0,.4);transition:background .2s ease;backdrop-filter:blur(8px)}
         .pl-close:hover{background:rgba(0,0,0,.85)}
         .pl-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;padding:12px 16px;border-radius:8px;text-align:center;max-width:80vw;box-shadow:0 8px 24px rgba(0,0,0,.4)}
         .pl-title{margin:0 0 4px;font:800 18px/1.2 ui-sans-serif,system-ui}
@@ -394,6 +518,7 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
         html.pl-open body{overflow:hidden}
         html.pl-open .portrait-portfolio,html.pl-open .version-indicator{pointer-events:none}
         html.pl-open .portrait-lightbox,html.pl-open .portrait-lightbox *{pointer-events:auto}
+        html.pl-open header,html.pl-open .Header,html.pl-open [id*="Header"],html.pl-open .site-header,html.pl-open .sqs-announcement-bar,html.pl-open nav,html.pl-open .nav,html.pl-open .navbar,html.pl-open .navigation,html.pl-open .site-nav,html.pl-open .main-nav,html.pl-open .top-nav,html.pl-open [class*="nav"],html.pl-open [id*="nav"],html.pl-open [class*="menu"],html.pl-open [id*="menu"]{opacity:0 !important;visibility:hidden !important;pointer-events:none !important}
         html.pl-open header,html.pl-open .Header,html.pl-open [id*="Header"],html.pl-open .site-header,html.pl-open .sqs-announcement-bar,html.pl-open nav,html.pl-open .nav,html.pl-open .navbar,html.pl-open .navigation,html.pl-open .site-nav,html.pl-open .main-nav,html.pl-open .top-nav,html.pl-open [class*="nav"],html.pl-open [id*="nav"],html.pl-open [class*="menu"],html.pl-open [id*="menu"]{opacity:0 !important;visibility:hidden !important;pointer-events:none !important}
       `;
       document.head.appendChild(style);
@@ -506,6 +631,8 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
       <div><strong>Portrait Portfolio Debug</strong></div>
       <div>Cache: <span id="portrait-cache-status">Checking...</span></div>
       <div>Images: <span id="portrait-image-count">0</span></div>
+      <div>Subject: <span id="portrait-subject-filter">all</span></div>
+      <div>Rotation: <span id="portrait-rotation-info">1-4 random</span></div>
       <button onclick="location.reload()">Force Refresh</button>
       <button onclick="localStorage.removeItem('${state.cacheKey}'); location.reload()">Clear Cache</button>
     `;
@@ -515,41 +642,42 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
     const updateDebug = () => {
       const cached = cache.get();
       document.getElementById('portrait-cache-status').textContent = cached ? 'Valid' : 'None';
-      document.getElementById('portrait-image-count').textContent = grid.children.length;
+      const imageCount = grid.children.length;
+      document.getElementById('portrait-image-count').textContent = imageCount;
+      document.getElementById('portrait-subject-filter').textContent = state.activeSubject;
+      document.getElementById('portrait-rotation-info').textContent = `${imageCount} shown (1-4 random)`;
     };
 
     updateDebug();
     setInterval(updateDebug, 1000);
   };
 
-  // Performance monitoring
-  const initPerformanceMonitoring = () => {
-    if (!CONFIG.debug) return;
-
-    window.portraitAPI = {
-      getMetrics: () => ({
-        cacheHit: !!cache.get(),
-        imageCount: grid.children.length,
-        loadTime: performance.now(),
-        basePath: state.basePath
-      })
-    };
+  // Load non-critical styles and features
+  const loadDeferredFeatures = () => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        if (window.location.search.includes('debug')) {
+          // Debug features could be loaded here if needed
+        }
+      });
+    }
   };
 
   // Initialization
   const init = async () => {
     try {
-      log('Initializing Portrait Portfolio v1.0...');
+      log('Initializing Portrait Portfolio v1.1...');
 
       // Set panes from data attribute
       CONFIG.panes = parseInt(container.dataset.panes) || CONFIG.panes;
 
       // Initialize components
       initChangelogModal();
-      await buildGrid();
+      await buildGrid(); // Start with 'all' subjects
       initLightbox();
       initDebugPanel();
       initPerformanceMonitoring();
+      loadDeferredFeatures();
 
       log('Portrait Portfolio initialized successfully');
 

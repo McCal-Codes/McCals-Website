@@ -69,3 +69,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Analytics and engagement tracking
 - Multi-language support
 - Custom branding and theming options
+
+## [1.1.0] - 2025-11-04
+
+### Added
+- Client-first-name titles: the widget now extracts the client's first name from folder paths for cleaner captions and card headings.
+- Rotating selection: the grid shows a rotating subset of portraits on each load (randomized 1–4 panes per session) to keep the presentation fresh.
+- Subject tabs: dynamic subject tabs are generated from the manifest collections; new subjects appear automatically when collections are added.
+
+### Fixed
+- Initialization bug: resolved a runtime error that could prevent the widget from initializing (missing structured-data helper now reintroduced and guarded).
+
+### Changed
+- UX & accessibility tweaks: safe-area aware close button, hidden scrollbar handling for immersive lightbox mode, and improved navigation-hiding selectors for fullscreen viewing.
+- Debug and cache updates: cache key bumped for v1.1 and debug-panel text updated to reflect the rotating-selection behavior.
+
+### Notes
+- This release keeps the same manifest schema and read-paths; no changes are required to existing manifests. A small tooling improvement was also applied to the repository manifest generator to avoid unnecessary file writes when generated content is unchanged.
