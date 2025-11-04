@@ -1,0 +1,11 @@
+# CODEOWNERS — basic ownership
+# Format: <pattern> <owner>
+
+# Widgets and site assets
+/src/widgets/ @McCal-Codes
+/src/images/ @McCal-Codes
+/scripts/ @McCal-Codes
+/docs/ @McCal-Codes
+
+# Default fallback
+* @McCal-Codes

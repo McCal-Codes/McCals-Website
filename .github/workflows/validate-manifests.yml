@@ -1,0 +1,22 @@
+name: Validate Manifests
+
+on:
+  pull_request:
+    paths:
+      - 'src/images/Portfolios/**'
+      - 'scripts/utils/validate-manifests.js'
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps (if any)
+        run: npm ci --prefer-offline --no-audit --no-fund || true
+      - name: Run manifest validator
+        run: node scripts/utils/validate-manifests.js
