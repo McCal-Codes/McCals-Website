@@ -374,8 +374,23 @@ async function processDirectory(dirPath, options = {}) {
         console.log(`🏃 DRY RUN  Would write to: ${manifestPath} - enhanced-manifest-generator.js:373`);
         console.log(`📝 Manifest preview: - enhanced-manifest-generator.js:374`, JSON.stringify(manifest, null, 2).substring(0, 200) + '...');
     } else {
-        fs.writeFileSync(manifestPath, manifestContent);
-        console.log(`✅ Wrote manifest: ${manifestPath} - enhanced-manifest-generator.js:377`);
+        try {
+            // If manifest already exists and content is identical, skip writing to avoid churn
+            if (fs.existsSync(manifestPath)) {
+                const existing = fs.readFileSync(manifestPath, 'utf8');
+                if (existing === manifestContent) {
+                    console.log(`↩️  Unchanged manifest, skipping write: ${manifestPath} - enhanced-manifest-generator.js:376`);
+                } else {
+                    fs.writeFileSync(manifestPath, manifestContent);
+                    console.log(`✅ Wrote manifest: ${manifestPath} - enhanced-manifest-generator.js:377`);
+                }
+            } else {
+                fs.writeFileSync(manifestPath, manifestContent);
+                console.log(`✅ Wrote manifest: ${manifestPath} - enhanced-manifest-generator.js:383`);
+            }
+        } catch (err) {
+            console.error(`❌ Failed to write manifest ${manifestPath}: ${err.message} - enhanced-manifest-generator.js:387`);
+        }
     }
     
     return manifest;
@@ -465,8 +480,23 @@ async function processAllDirectories(options = {}) {
     
     const summaryPath = path.join(CONCERT_BASE_DIR, 'processing-summary.json');
     if (!options.dryRun) {
-        fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + '\n');
-        console.log(`📋 Summary report: ${summaryPath} - enhanced-manifest-generator.js:468`);
+        try {
+            const summaryContent = JSON.stringify(summary, null, 2) + '\n';
+            if (fs.existsSync(summaryPath)) {
+                const existingSummary = fs.readFileSync(summaryPath, 'utf8');
+                if (existingSummary === summaryContent) {
+                    console.log(`↩️  Summary unchanged, skipping write: ${summaryPath} - enhanced-manifest-generator.js:466`);
+                } else {
+                    fs.writeFileSync(summaryPath, summaryContent);
+                    console.log(`📋 Summary report written: ${summaryPath} - enhanced-manifest-generator.js:470`);
+                }
+            } else {
+                fs.writeFileSync(summaryPath, summaryContent);
+                console.log(`📋 Summary report written: ${summaryPath} - enhanced-manifest-generator.js:476`);
+            }
+        } catch (err) {
+            console.error(`❌ Failed to write summary ${summaryPath}: ${err.message} - enhanced-manifest-generator.js:480`);
+        }
     }
     
     return summary;

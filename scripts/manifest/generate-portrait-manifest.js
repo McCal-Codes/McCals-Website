@@ -53,22 +53,9 @@ async function getImageFiles(folderPath) {
     
     return imageFiles.sort();
   } catch (error) {
-    console.warn(`⚠️  Could not read folder: ${folderPath} - generate-portrait-manifest.js:41`, error.message);
+    console.warn(`⚠️  Could not read folder: ${folderPath} - generate-portrait-manifest.js:56`, error.message);
     return [];
   }
-}
-
-/**
- * Extract date from folder metadata or default to current year
- */
-function extractDateFromFolder(collectionName) {
-  // For portrait collections, we typically don't extract dates from filenames
-  // Instead, use manual metadata or default to current year
-  const currentYear = new Date().getFullYear();
-  return {
-    dateDisplay: currentYear.toString(),
-    dateISO: `${currentYear}-01-01T00:00:00.000Z`
-  };
 }
 
 /**
@@ -94,34 +81,11 @@ function generateTags(collectionName) {
 }
 
 /**
- * Generate collection description based on name
- */
-function generateDescription(collectionName) {
-  const nameLower = collectionName.toLowerCase();
-  
-  if (nameLower.includes('character')) {
-    return 'Intimate character studies capturing personality and emotion';
-  } else if (nameLower.includes('environmental')) {
-    return 'Portraits in natural environments and locations';
-  } else if (nameLower.includes('studio')) {
-    return 'Professional studio portraits with controlled lighting';
-  } else if (nameLower.includes('editorial')) {
-    return 'Editorial and fashion portrait photography';
-  } else if (nameLower.includes('corporate')) {
-    return 'Professional corporate and business portraits';
-  }
-  
-  return `Portrait collection: ${collectionName}`;
-}
-
-/**
  * Generate manifest.json for a single portrait collection folder
  */
 async function generateManifestForFolder(collectionName, folderPath) {
   const imageFiles = await getImageFiles(folderPath);
-  const dateInfo = extractDateFromFolder(collectionName);
   const tags = generateTags(collectionName);
-  const description = generateDescription(collectionName);
   
   const manifest = {
     collectionName,
@@ -129,19 +93,32 @@ async function generateManifestForFolder(collectionName, folderPath) {
     totalImages: imageFiles.length,
     images: imageFiles,
     tags,
-    dateDisplay: dateInfo.dateDisplay,
-    dateISO: dateInfo.dateISO,
-    description,
     metadata: {
       generated: new Date().toISOString(),
       version: '1.0'
     }
   };
   
-  // Write individual folder manifest
+  // Write individual folder manifest (idempotent: skip if unchanged)
   const manifestPath = path.join(folderPath, 'manifest.json');
-  await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
-  console.log(`✅ Generated manifest for: ${collectionName} (${imageFiles.length} images) - generate-portrait-manifest.js:129`);
+  const manifestContent = JSON.stringify(manifest, null, 2) + '\n';
+  try {
+    let writeIt = true;
+    if (await exists(manifestPath)) {
+      const existing = await fs.readFile(manifestPath, 'utf8');
+      if (existing === manifestContent) {
+        writeIt = false;
+      }
+    }
+    if (writeIt) {
+      await fs.writeFile(manifestPath, manifestContent, 'utf8');
+      console.log(`✅ Generated manifest for: ${collectionName} (${imageFiles.length} images) - generate-portrait-manifest.js:115`);
+    } else {
+      console.log(`↩️  Unchanged manifest, skipping write: ${manifestPath} - generate-portrait-manifest.js:117`);
+    }
+  } catch (err) {
+    console.error(`❌ Failed to write manifest for ${collectionName}: ${err.message} - generate-portrait-manifest.js:120`);
+  }
   
   return manifest;
 }
@@ -150,11 +127,11 @@ async function generateManifestForFolder(collectionName, folderPath) {
  * Main function: Scan Portrait folder and generate all manifests
  */
 async function scanAndGenerateManifests() {
-  console.log('🎭 Portrait Manifest Generator - generate-portrait-manifest.js:138');
-  console.log('================================\n - generate-portrait-manifest.js:139');
+  console.log('🎭 Portrait Manifest Generator - generate-portrait-manifest.js:130');
+  console.log('================================\n - generate-portrait-manifest.js:131');
   
   if (!(await exists(BASE_PORTRAIT))) {
-    console.error(`❌ Portrait folder not found: ${BASE_PORTRAIT} - generate-portrait-manifest.js:142`);
+    console.error(`❌ Portrait folder not found: ${BASE_PORTRAIT} - generate-portrait-manifest.js:134`);
     process.exit(1);
   }
   
@@ -176,7 +153,7 @@ async function scanAndGenerateManifests() {
       const manifest = await generateManifestForFolder(item, itemPath);
       collections.push(manifest);
     } catch (error) {
-      console.error(`❌ Failed to process collection: ${item} - generate-portrait-manifest.js:164`, error.message);
+      console.error(`❌ Failed to process collection: ${item} - generate-portrait-manifest.js:156`, error.message);
     }
   }
   
@@ -194,28 +171,36 @@ async function scanAndGenerateManifests() {
       folderPath, 
       totalImages, 
       images, 
-      tags, 
-      dateDisplay, 
-      dateISO, 
-      description 
+      tags 
     }) => ({
       collectionName,
       folderPath,
       totalImages,
       images,
-      tags,
-      dateDisplay,
-      dateISO,
-      description
+      tags
     }))
   };
   
-  await fs.writeFile(MANIFEST_OUTPUT, JSON.stringify(portraitManifest, null, 2), 'utf8');
-  
-  console.log('\n📊 Summary: - generate-portrait-manifest.js:200');
-  console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:201`);
-  console.log(`Total Images: ${portraitManifest.totalImages} - generate-portrait-manifest.js:202`);
-  console.log(`\n✅ Portrait manifest generated: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:203`);
+  // Write aggregated portrait manifest (idempotent)
+  try {
+    const content = JSON.stringify(portraitManifest, null, 2) + '\n';
+    let writeIt = true;
+    if (await exists(MANIFEST_OUTPUT)) {
+      const existing = await fs.readFile(MANIFEST_OUTPUT, 'utf8');
+      if (existing === content) writeIt = false;
+    }
+    if (writeIt) {
+      await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
+      console.log('\n📊 Summary: - generate-portrait-manifest.js:194');
+      console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:195`);
+      console.log(`Total Images: ${portraitManifest.totalImages} - generate-portrait-manifest.js:196`);
+      console.log(`\n✅ Portrait manifest generated: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:197`);
+    } else {
+      console.log(`\n↩️  Aggregated portrait manifest unchanged, skipping write: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:199`);
+    }
+  } catch (err) {
+    console.error(`❌ Failed to write portrait manifest: ${err.message} - generate-portrait-manifest.js:202`);
+  }
 }
 
 // Run the generator

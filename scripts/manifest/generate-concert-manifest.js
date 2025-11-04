@@ -12,7 +12,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const { detectDateFromFilename, detectDateFromImages, formatDisplayDate, createFallbackDate } = require('../utils/shared-date-parsing.js');
+const { detectDateFromImages } = require('../utils/shared-date-parsing.js');
 
 const CONCERT_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Concert');
 const MANIFEST_OUTPUT = path.join(CONCERT_BASE, 'concert-manifest.json');
@@ -69,17 +69,7 @@ async function readManifest(manifestPath) {
   }
 }
 
-function isValidDate(day, month, year) {
-  if (month < 1 || month > 12) return false;
-  if (day < 1 || day > 31) return false;
-  if (year < 1900 || year > 2100) return false;
-  
-  // More precise day validation
-  const date = new Date(year, month - 1, day);
-  return date.getFullYear() === year && 
-         date.getMonth() === month - 1 && 
-         date.getDate() === day;
-}
+// (isValidDate removed — validation handled by shared-date-parsing utilities)
 
 // Date detection functions moved to shared-date-parsing.js module
 // Use detectDateFromFilename() and detectDateFromImages() from shared module
@@ -253,10 +243,24 @@ async function generateMasterManifest() {
       bands: processedBands
     };
     
-    // Write the master manifest
-    await fs.writeFile(MANIFEST_OUTPUT, JSON.stringify(masterManifest, null, 2), 'utf8');
-    success(`Generated master manifest: ${MANIFEST_OUTPUT}`);
-    success(`Processed ${processedBands.length} bands with ${processedBands.reduce((total, band) => total + band.totalImages, 0)} total images`);
+    // Write the master manifest (idempotent)
+    try {
+      const content = JSON.stringify(masterManifest, null, 2) + '\n';
+      let writeIt = true;
+      if (await exists(MANIFEST_OUTPUT)) {
+        const existing = await fs.readFile(MANIFEST_OUTPUT, 'utf8');
+        if (existing === content) writeIt = false;
+      }
+      if (writeIt) {
+        await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
+        success(`Generated master manifest: ${MANIFEST_OUTPUT}`);
+        success(`Processed ${processedBands.length} bands with ${processedBands.reduce((total, band) => total + band.totalImages, 0)} total images`);
+      } else {
+        success(`↩️  Master manifest unchanged, skipping write: ${MANIFEST_OUTPUT}`);
+      }
+    } catch (err) {
+      error(`Failed to write master manifest: ${err.message}`);
+    }
     
     // Log summary
     console.log('\n📋 Summary:');

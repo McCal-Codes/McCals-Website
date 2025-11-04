@@ -8,6 +8,13 @@ on:
       - 'scripts/manifest/**'
       - '.github/workflows/events-manifest.yml'
   
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/images/Portfolios/Events/**'
+      - 'scripts/manifest/**'
+      - '.github/workflows/events-manifest.yml'
+  
   # Also run on manual trigger
   workflow_dispatch:
 
@@ -173,7 +180,7 @@ jobs:
           fi
 
       - name: Commit and push manifest
-        if: steps.check_changes.outputs.has_changes == 'true'
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
@@ -195,3 +202,14 @@ jobs:
           git push
           
           echo "✅ Events manifest updated and pushed successfully!"
+
+      - name: PR Validation Summary
+        if: github.event_name == 'pull_request' && steps.check_images.outputs.has_generator == 'true'
+        run: |
+          echo "🔍 Pull Request Validation Summary:"
+          echo "- Images found: ${{ steps.check_images.outputs.image_count }}"
+          echo "- Events found: ${{ steps.check_images.outputs.event_count }}"
+          echo "- Manifest generated: ✅"
+          echo "- Validation passed: ✅"
+          echo ""
+          echo "Manifest files are ready for review in this PR."

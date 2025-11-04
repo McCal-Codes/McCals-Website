@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated": "2025-11-03T20:02:26.478Z",
+  "generated": "2025-11-04T19:08:05.579Z",
   "totalBands": 22,
   "bands": [
     {
@@ -112,8 +112,9 @@
         "year": 2025,
         "month": 10,
         "monthName": "October",
-        "day": 1,
-        "iso": "2025-10-01"
+        "day": 25,
+        "iso": "2025-10-25",
+        "source": "filename_yymmdd"
       },
       "totalImages": 62,
       "images": [
@@ -189,8 +190,9 @@
         "year": 2025,
         "month": 10,
         "monthName": "October",
-        "day": 1,
-        "iso": "2025-10-01"
+        "day": 25,
+        "iso": "2025-10-25",
+        "source": "filename_yymmdd"
       },
       "totalImages": 51,
       "images": [
@@ -255,8 +257,9 @@
         "year": 2025,
         "month": 10,
         "monthName": "October",
-        "day": 1,
-        "iso": "2025-10-01"
+        "day": 25,
+        "iso": "2025-10-25",
+        "source": "filename_yymmdd"
       },
       "totalImages": 60,
       "images": [
