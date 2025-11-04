@@ -99,26 +99,8 @@ async function generateManifestForFolder(collectionName, folderPath) {
     }
   };
   
-  // Write individual folder manifest (idempotent: skip if unchanged)
-  const manifestPath = path.join(folderPath, 'manifest.json');
-  const manifestContent = JSON.stringify(manifest, null, 2) + '\n';
-  try {
-    let writeIt = true;
-    if (await exists(manifestPath)) {
-      const existing = await fs.readFile(manifestPath, 'utf8');
-      if (existing === manifestContent) {
-        writeIt = false;
-      }
-    }
-    if (writeIt) {
-      await fs.writeFile(manifestPath, manifestContent, 'utf8');
-      console.log(`✅ Generated manifest for: ${collectionName} (${imageFiles.length} images) - generate-portrait-manifest.js:115`);
-    } else {
-      console.log(`↩️  Unchanged manifest, skipping write: ${manifestPath} - generate-portrait-manifest.js:117`);
-    }
-  } catch (err) {
-    console.error(`❌ Failed to write manifest for ${collectionName}: ${err.message} - generate-portrait-manifest.js:120`);
-  }
+  // Per-folder manifests are no longer written; we keep a single aggregated manifest per portfolio.
+  console.log(`🔎 Processed collection: ${collectionName} (${imageFiles.length} images) - generate-portrait-manifest.js:105`);
   
   return manifest;
 }
@@ -191,15 +173,15 @@ async function scanAndGenerateManifests() {
     }
     if (writeIt) {
       await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
-      console.log('\n📊 Summary: - generate-portrait-manifest.js:194');
-      console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:195`);
-      console.log(`Total Images: ${portraitManifest.totalImages} - generate-portrait-manifest.js:196`);
-      console.log(`\n✅ Portrait manifest generated: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:197`);
+      console.log('\n📊 Summary: - generate-portrait-manifest.js:170');
+      console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:171`);
+      console.log(`Total Images: ${portraitManifest.totalImages} - generate-portrait-manifest.js:172`);
+      console.log(`\n✅ Portrait manifest generated: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:173`);
     } else {
-      console.log(`\n↩️  Aggregated portrait manifest unchanged, skipping write: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:199`);
+      console.log(`\n↩️  Aggregated portrait manifest unchanged, skipping write: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:179`);
     }
   } catch (err) {
-    console.error(`❌ Failed to write portrait manifest: ${err.message} - generate-portrait-manifest.js:202`);
+    console.error(`❌ Failed to write portrait manifest: ${err.message} - generate-portrait-manifest.js:184`);
   }
 }
 

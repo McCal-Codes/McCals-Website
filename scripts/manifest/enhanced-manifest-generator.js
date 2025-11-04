@@ -366,31 +366,15 @@ async function processDirectory(dirPath, options = {}) {
         console.log(`📊 Sample metadata: - enhanced-manifest-generator.js:365`, imageMetadata.slice(0, 2));
     }
     
-    // Write manifest file
-    const manifestPath = path.join(dirPath, 'manifest.json');
-    const manifestContent = JSON.stringify(manifest, null, 2) + '\n';
-    
+    // NOTE: Starting 2025-11, we simplify manifest outputs to a single portfolio-level manifest.
+    // This generator will no longer write per-directory `manifest.json` files by default.
+    // Instead it returns the manifest object to the caller so an aggregated manifest can be produced.
     if (dryRun) {
-        console.log(`🏃 DRY RUN  Would write to: ${manifestPath} - enhanced-manifest-generator.js:373`);
+        console.log(`🏃 DRY RUN  Would generate manifest for: ${path.basename(dirPath)} - enhanced-manifest-generator.js:373`);
         console.log(`📝 Manifest preview: - enhanced-manifest-generator.js:374`, JSON.stringify(manifest, null, 2).substring(0, 200) + '...');
     } else {
-        try {
-            // If manifest already exists and content is identical, skip writing to avoid churn
-            if (fs.existsSync(manifestPath)) {
-                const existing = fs.readFileSync(manifestPath, 'utf8');
-                if (existing === manifestContent) {
-                    console.log(`↩️  Unchanged manifest, skipping write: ${manifestPath} - enhanced-manifest-generator.js:376`);
-                } else {
-                    fs.writeFileSync(manifestPath, manifestContent);
-                    console.log(`✅ Wrote manifest: ${manifestPath} - enhanced-manifest-generator.js:377`);
-                }
-            } else {
-                fs.writeFileSync(manifestPath, manifestContent);
-                console.log(`✅ Wrote manifest: ${manifestPath} - enhanced-manifest-generator.js:383`);
-            }
-        } catch (err) {
-            console.error(`❌ Failed to write manifest ${manifestPath}: ${err.message} - enhanced-manifest-generator.js:387`);
-        }
+        // Just log summary — writing is handled at portfolio level to keep a single manifest per portfolio
+        console.log(`🔎 Processed manifest for: ${path.basename(dirPath)} (${files.length} images) - enhanced-manifest-generator.js:377`);
     }
     
     return manifest;
