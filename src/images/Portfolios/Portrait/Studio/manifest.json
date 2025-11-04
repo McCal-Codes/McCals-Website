@@ -23,10 +23,6 @@
     "portrait",
     "studio",
     "professional"
-<<<<<<< HEAD
-  ]
-}
-=======
   ],
   "dateDisplay": "2025",
   "dateISO": "2025-01-01T00:00:00.000Z",
@@ -36,4 +32,3 @@
     "version": "1.0"
   }
 }
->>>>>>> 4bff3a4c6f1b542c2b19701aafc4f9d2b723a5e8
