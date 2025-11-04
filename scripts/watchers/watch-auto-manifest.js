@@ -22,6 +22,13 @@ const TARGET_CONFIGS = {
     logFile: path.join('logs', 'auto-events-manifest.log'),
     emoji: '🎪'
   },
+  journalism: {
+    label: 'Journalism Portfolio',
+    watchPath: path.join('src', 'images', 'Portfolios', 'Journalism'),
+    manifestScript: 'manifest:journalism',
+    logFile: path.join('logs', 'auto-journalism-manifest.log'),
+    emoji: '📰'
+  },
   nature: {
     label: 'Nature Portfolio',
     watchPath: path.join('src', 'images', 'Portfolios', 'Nature'),
@@ -29,12 +36,12 @@ const TARGET_CONFIGS = {
     logFile: path.join('logs', 'auto-nature-manifest.log'),
     emoji: '🌿'
   },
-  journalism: {
-    label: 'Journalism Portfolio',
-    watchPath: path.join('src', 'images', 'Portfolios', 'Journalism'),
-    manifestScript: 'manifest:journalism',
-    logFile: path.join('logs', 'auto-journalism-manifest.log'),
-    emoji: '📰'
+  portrait: {
+    label: 'Portrait Portfolio',
+    watchPath: path.join('src', 'images', 'Portfolios', 'Portrait'),
+    manifestScript: 'manifest:portrait',
+    logFile: path.join('logs', 'auto-portrait-manifest.log'),
+    emoji: '🎭'
   }
 };
 
@@ -71,7 +78,7 @@ class AutoManifestWatcher {
     try {
       fs.appendFileSync(this.config.logFile, logMessage + '\n');
     } catch (error) {
-      console.error(`[${this.config.label}] Failed to write to log file:`, error.message);
+      console.error(`[${this.config.label}] Failed to write to log file: - watch-auto-manifest.js:81`, error.message);
     }
   }
 
@@ -190,7 +197,7 @@ function parseTargets(argv) {
   if (targetFlagIndex !== -1) {
     const targetArg = argv[targetFlagIndex + 1];
     if (!targetArg || targetArg.startsWith('-')) {
-      console.error('Missing value for --target option.');
+      console.error('Missing value for target option. - watch-auto-manifest.js:200');
       process.exit(1);
     }
     return targetArg.split(',').map(name => name.trim().toLowerCase()).filter(Boolean);
@@ -230,9 +237,9 @@ Press Ctrl+C to stop watching.
 }
 
 function listTargets() {
-  console.log('Available auto-manifest targets:');
+  console.log('Available automanifest targets: - watch-auto-manifest.js:240');
   Object.entries(TARGET_CONFIGS).forEach(([key, cfg]) => {
-    console.log(`  • ${key} – ${cfg.label} (${cfg.watchPath})`);
+    console.log(`• ${key}  ${cfg.label} (${cfg.watchPath}) - watch-auto-manifest.js:242`);
   });
 }
 
@@ -252,7 +259,7 @@ async function main() {
     const uniqueTargets = [...new Set(targetNames)];
     const invalidTargets = uniqueTargets.filter(name => !TARGET_CONFIGS[name]);
     if (invalidTargets.length > 0) {
-      console.error(`Unknown target(s): ${invalidTargets.join(', ')}`);
+      console.error(`Unknown target(s): ${invalidTargets.join(', ')} - watch-auto-manifest.js:262`);
       listTargets();
       process.exit(1);
     }
@@ -261,13 +268,13 @@ async function main() {
     watchers.forEach(watcher => watcher.startWatching());
 
     process.on('SIGINT', async () => {
-      console.log('\nStopping auto-manifest watchers...');
+      console.log('\nStopping automanifest watchers... - watch-auto-manifest.js:271');
       await Promise.all(watchers.map(watcher => watcher.stopWatching()));
       process.exit(0);
     });
 }
 
 main().catch(error => {
-  console.error('Auto-manifest watcher failed:', error.message);
+  console.error('Automanifest watcher failed: - watch-auto-manifest.js:278', error.message);
   process.exit(1);
 });
