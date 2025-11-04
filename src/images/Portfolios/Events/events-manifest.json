@@ -1,8 +1,171 @@
 {
   "version": "2.5.3",
-  "generated": "2025-10-24",
-  "totalEvents": 9,
+  "generated": "2025-11-03",
+  "totalEvents": 10,
   "events": [
+    {
+      "eventName": "Inclusivity Event PRSSA",
+      "category": "Corporate",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-25",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 25,
+        "monthName": "October",
+        "iso": "2025-10-25",
+        "display": "October 2025"
+      },
+      "dateSource": "filename:251025 PRSSA Workplace Inclusivity_CAL7937_webuse.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7938_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7939_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7942_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7943_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7945_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7950_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7956_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7963_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7964_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7965_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7969_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7970_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7983_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7987_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7990_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7991_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7999_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8002_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8003_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8005_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8009_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8013_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8022_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8024_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8027_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8033_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8050_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8055_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8059_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8062_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8082_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8101_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8107_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8112_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8126_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8129_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8137_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8145_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8166_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8168_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8170_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8179_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8180_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8183_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8186_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8188_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8192_webuse.jpg"
+        }
+      ],
+      "totalImages": 48
+    },
     {
       "eventName": "Local Union Officers Conference 2025",
       "category": "Conference",
@@ -660,6 +823,168 @@
     }
   ],
   "items": [
+    {
+      "title": "Inclusivity Event PRSSA",
+      "eventName": "Inclusivity Event PRSSA",
+      "category": "Corporate",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-25",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 25,
+        "monthName": "October",
+        "iso": "2025-10-25",
+        "display": "October 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7938_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7939_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7942_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7943_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7945_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7950_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7956_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7963_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7964_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7965_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7969_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7970_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7983_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7987_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7990_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7991_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7999_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8002_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8003_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8005_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8009_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8013_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8022_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8024_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8027_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8033_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8050_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8055_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8059_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8062_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8082_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8101_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8107_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8112_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8126_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8129_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8137_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8145_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8166_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8168_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8170_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8179_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8180_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8183_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8186_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8188_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8192_webuse.jpg"
+        }
+      ],
+      "folderPath": "Events/Inclusivity Event - PRSSA"
+    },
     {
       "title": "Local Union Officers Conference 2025",
       "eventName": "Local Union Officers Conference 2025",
