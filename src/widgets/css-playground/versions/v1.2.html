@@ -17,41 +17,167 @@
     </header>
 
     <!-- ============================= -->
-    <!-- Navigation Shell (v1.6.3 extraction) -->
+    <!-- Navigation Shell (v1.7.0 Production) -->
     <!-- ============================= -->
     <section aria-label="Navigation playground" class="playground-nav-demo">
-      <h2>Navigation Shell (v1.6.3 pattern)</h2>
-      <p class="section-note">Trimmed header injection snippet with hover submenu so you can adjust gradients, spacing, and toggle behaviour.</p>
+      <h2>Navigation Shell (v1.7.0 Production)</h2>
+      <p class="section-note">Complete production navigation widget with performance optimizations, scroll hide/show, mobile menu, and dropdown submenus.</p>
 
-      <nav class="mcc-nav" aria-label="Primary navigation">
-        <div class="mcc-nav__brand"><a href="#home" data-match="^/$">Caleb McCartney</a></div>
-        <button class="mcc-nav__toggle" type="button" aria-expanded="false" aria-controls="mcc-nav-links" aria-haspopup="true">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="mcc-nav__toggle-box" aria-hidden="true">
-            <span class="mcc-nav__toggle-line"></span>
-            <span class="mcc-nav__toggle-line"></span>
-            <span class="mcc-nav__toggle-line"></span>
-          </span>
-        </button>
-        <div class="mcc-nav__menu">
-          <ul class="mcc-nav__links" id="mcc-nav-links" role="list">
-            <li class="mcc-nav__link"><a href="#portfolio">Portfolio</a></li>
-            <li class="mcc-nav__link mcc-nav__link--has-submenu">
-              <a href="#work">Work</a>
-              <button class="mcc-nav__submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-work">
-                <span class="sr-only">Toggle Work submenu</span>
-              </button>
-              <ul class="mcc-nav__submenu" id="submenu-work" role="menu" aria-label="Work submenu" aria-hidden="true">
-                <li><a href="#concert" role="menuitem">Concert</a></li>
-                <li><a href="#events" role="menuitem">Events</a></li>
-                <li><a href="#journalism" role="menuitem">Journalism</a></li>
-              </ul>
-            </li>
-            <li class="mcc-nav__link"><a href="#podcast">Podcast</a></li>
-            <li class="mcc-nav__link"><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
+      <!-- Critical CSS from production widget -->
+      <style>
+      .playground-nav-demo .mcc-nav-widget{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;--mcc-nav-bg:rgba(255,255,255,.95);--mcc-nav-border:rgba(0,0,0,.08);--mcc-nav-text-primary:#1a1a1a;--mcc-nav-text-secondary:#666;--mcc-nav-text-muted:#999;--mcc-nav-hover:#007acc;--mcc-nav-active:#0056b3;--mcc-nav-button-bg:#007acc;--mcc-nav-button-text:#fff;--mcc-nav-mobile-bg:#f8f9fa;--mcc-nav-mobile-border:#e9ecef}
+      @media(prefers-color-scheme:dark){.playground-nav-demo .mcc-nav-widget{--mcc-nav-bg:rgba(18,18,18,.95);--mcc-nav-border:rgba(255,255,255,.12);--mcc-nav-text-primary:#f8f9fa;--mcc-nav-text-secondary:#adb5bd;--mcc-nav-text-muted:#6c757d;--mcc-nav-hover:#4dabf7;--mcc-nav-active:#339af0;--mcc-nav-button-bg:#339af0;--mcc-nav-button-text:#fff;--mcc-nav-mobile-bg:#212529;--mcc-nav-mobile-border:#495057}}
+      .playground-nav-demo .mcc-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--mcc-nav-bg);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--mcc-nav-border);transition:transform .3s ease}
+      .playground-nav-demo .mcc-nav--hidden{transform:translateY(-100%)}
+      .playground-nav-demo .mcc-nav__inner{max-width:1140px;margin:0 auto;padding:0 1rem;display:flex;align-items:center;justify-content:space-between;min-height:4rem}
+      .playground-nav-demo .mcc-nav__logo{font:700 1.5rem/1 ui-sans-serif,system-ui;color:var(--mcc-nav-text-primary);text-decoration:none;margin:0}
+      .playground-nav-demo .mcc-nav__logo:hover{color:var(--mcc-nav-hover)}
+      .playground-nav-demo .mcc-nav__menu{display:flex;gap:2rem;margin:0;padding:0;list-style:none}
+      .playground-nav-demo .mcc-nav__menu li{position:relative}
+      .playground-nav-demo .mcc-nav__menu a{color:var(--mcc-nav-text-primary);text-decoration:none;font:500 .875rem/1 ui-sans-serif,system-ui;padding:.5rem 0;display:block;transition:color .2s}
+      .playground-nav-demo .mcc-nav__menu a:hover{color:var(--mcc-nav-hover)}
+      .playground-nav-demo .mcc-nav__menu a.active{color:var(--mcc-nav-active);font-weight:600}
+      .playground-nav-demo .mcc-nav__menu .mcc-nav__dropdown{position:absolute;top:100%;left:0;background:var(--mcc-nav-bg);border:1px solid var(--mcc-nav-border);border-radius:.375rem;padding:.5rem 0;min-width:200px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:all .2s ease;z-index:1001}
+      .playground-nav-demo .mcc-nav__menu .mcc-nav__dropdown.show{opacity:1;visibility:visible;transform:translateY(0)}
+      .playground-nav-demo .mcc-nav__menu .mcc-nav__dropdown a{padding:.75rem 1rem;font-weight:400}
+      .playground-nav-demo .mcc-nav__menu .mcc-nav__dropdown a:hover{background:var(--mcc-nav-mobile-bg)}
+      .playground-nav-demo .mcc-nav__cta{background:var(--mcc-nav-button-bg);color:var(--mcc-nav-button-text);text-decoration:none;padding:.75rem 1.5rem;border-radius:.375rem;font:600 .875rem/1 ui-sans-serif,system-ui;transition:all .2s}
+      .playground-nav-demo .mcc-nav__cta:hover{background:var(--mcc-nav-active);transform:translateY(-1px)}
+      .playground-nav-demo .mcc-nav__mobile-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:.5rem}
+      .playground-nav-demo .mcc-nav__mobile-toggle span{width:24px;height:2px;background:var(--mcc-nav-text-primary);transition:all .3s}
+      .playground-nav-demo .mcc-nav__mobile-toggle.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+      .playground-nav-demo .mcc-nav__mobile-toggle.active span:nth-child(2){opacity:0}
+      .playground-nav-demo .mcc-nav__mobile-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+      @media(max-width:768px){.playground-nav-demo .mcc-nav__menu{display:none;position:fixed;top:4rem;left:0;right:0;background:var(--mcc-nav-mobile-bg);border-top:1px solid var(--mcc-nav-mobile-border);padding:1rem;flex-direction:column;gap:0}.playground-nav-demo .mcc-nav__menu.show{display:flex}.playground-nav-demo .mcc-nav__menu li{border-bottom:1px solid var(--mcc-nav-mobile-border)}.playground-nav-demo .mcc-nav__menu a{padding:1rem;font-size:1rem}.playground-nav-demo .mcc-nav__mobile-toggle{display:flex}.playground-nav-demo .mcc-nav__dropdown{position:static;opacity:1;visibility:visible;transform:none;border:none;padding:0;background:transparent}.playground-nav-demo .mcc-nav__dropdown a{padding:.5rem 1rem 1rem 2rem}}
+      </style>
+
+      <nav class="mcc-nav-widget" data-widget-version="1.7.0">
+        <nav class="mcc-nav" id="playgroundNav">
+          <div class="mcc-nav__inner">
+            <a href="/" class="mcc-nav__logo">McCal Media</a>
+
+            <ul class="mcc-nav__menu" id="playgroundNavMenu">
+              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/portfolio">Portfolio</a>
+                <ul class="mcc-nav__dropdown">
+                  <li><a href="/portfolio/concerts">Live Music</a></li>
+                  <li><a href="/portfolio/events">Events</a></li>
+                  <li><a href="/portfolio/journalism">Photojournalism</a></li>
+                  <li><a href="/portfolio/podcast">Café Connect</a></li>
+                </ul>
+              </li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+
+            <a href="/contact" class="mcc-nav__cta">Get In Touch</a>
+
+            <button class="mcc-nav__mobile-toggle" id="playgroundMobileToggle" aria-label="Toggle navigation menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </nav>
       </nav>
+
+      <!-- Production JavaScript (scoped for playground) -->
+      <script>
+      (function(){
+        'use strict';
+
+        // DOM references (scoped to playground)
+        const nav = document.getElementById('playgroundNav');
+        const navMenu = document.getElementById('playgroundNavMenu');
+        const mobileToggle = document.getElementById('playgroundMobileToggle');
+
+        if (!nav || !navMenu || !mobileToggle) return; // Safety check
+
+        // State management
+        let state = {
+          lastScrollY: 0,
+          isHidden: false,
+          isMobileMenuOpen: false,
+          currentPath: window.location.pathname
+        };
+
+        // Navigation hide/show on scroll
+        const handleScroll = () => {
+          const currentScrollY = window.scrollY;
+
+          if (Math.abs(currentScrollY - state.lastScrollY) < 100) return;
+
+          if (currentScrollY > state.lastScrollY && currentScrollY > 100) {
+            if (!state.isHidden) {
+              nav.classList.add('mcc-nav--hidden');
+              state.isHidden = true;
+            }
+          } else {
+            if (state.isHidden) {
+              nav.classList.remove('mcc-nav--hidden');
+              state.isHidden = false;
+            }
+          }
+
+          state.lastScrollY = currentScrollY;
+        };
+
+        // Mobile menu toggle
+        const toggleMobileMenu = () => {
+          state.isMobileMenuOpen = !state.isMobileMenuOpen;
+          navMenu.classList.toggle('show', state.isMobileMenuOpen);
+          mobileToggle.classList.toggle('active', state.isMobileMenuOpen);
+        };
+
+        // Dropdown menu handling
+        const initDropdowns = () => {
+          const dropdownTriggers = navMenu.querySelectorAll('li:has(.mcc-nav__dropdown) > a');
+
+          dropdownTriggers.forEach(trigger => {
+            const dropdown = trigger.nextElementSibling;
+
+            trigger.addEventListener('mouseenter', () => {
+              dropdown.classList.add('show');
+            });
+
+            trigger.addEventListener('mouseleave', () => {
+              setTimeout(() => {
+                if (!dropdown.matches(':hover')) {
+                  dropdown.classList.remove('show');
+                }
+              }, 100);
+            });
+
+            dropdown.addEventListener('mouseenter', () => {
+              dropdown.classList.add('show');
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+              dropdown.classList.remove('show');
+            });
+          });
+        };
+
+        // Initialize
+        const init = () => {
+          try {
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            mobileToggle.addEventListener('click', toggleMobileMenu);
+            initDropdowns();
+          } catch (error) {
+            console.error('Failed to initialize playground navigation:', error);
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+      </script>
     </section>
 
     <!-- ============================= -->

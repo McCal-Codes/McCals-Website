@@ -2,40 +2,39 @@
 
 All notable changes to the CSS Playground testing environment.
 
-## v1.2 — 2025-11-05 (Dynamic Production Widget Loader)
+## v1.2 — 2025-11-05 (Component-Based Production Showcase)
 
-### Major Feature: Dynamic Widget Loading 🚀
-- **NEW**: Dynamic widget loader that pulls directly from production files
-  - Click-to-load interface for all production widgets
-  - Automatically loads latest versions from `src/widgets/[name]/versions/`
-  - Iframe isolation for clean widget testing
-  - Real-time production widget display
-- **SUPPORTED WIDGETS**: 11 production widgets available
-  - Site Navigation (v1.6.3)
-  - Podcast Feed (v1.9.5)
-  - Concert Portfolio (v4.7)
-  - Event Portfolio (v2.6.0)
-  - Photojournalism Portfolio (v5.2)
-  - Featured Portfolio (v1.5)
-  - Portrait Portfolio (v1.1)
-  - Site Footer (v1.2.0)
-  - About Section (v1.4.4)
-  - Hero Slideshow
-  - Policies & Legal (v1.0.0)
+### Major Feature: Component-Based Widget Showcase 🚀
+- **NEW**: Static component showcase pulling key sections from production widgets
+  - Navigation shell (v1.6.3 extraction) with submenu and mobile toggle
+  - Button & badge pack from concert portfolio, podcast feed, and policies widgets
+  - Portfolio cards (Concert v4.7 masonry patterns) with hover effects
+  - Event timeline (v2.6.0 snippets) with badges and metadata
+  - Photojournalism filters (v5.2) with active states and reset
+  - Podcast episode card (v1.9.5) with working audio player controls
+  - Footer & about blocks with glass design patterns
+  - Live color palette preview with workspace brand colors
 
 ### Benefits 📈
-- **Always Up-to-Date**: Any changes to production widgets automatically reflected in playground
-- **No Duplication**: No need to copy/paste widget code - loads directly from source
-- **Version Tracking**: Button labels show current production versions
-- **Easy Testing**: One-click widget loading with clear success/error states
-- **Isolated Testing**: Iframe embedding prevents CSS/JS conflicts
+- **Self-Contained**: No external dependencies or dynamic loading required
+- **Always Accurate**: Components mirror exact production widget styling
+- **Easy Iteration**: Copy/paste individual components for testing
+- **Performance**: Fast loading with inline CSS/JS
+- **Comprehensive**: Covers all major widget patterns in one place
 
 ### Developer Experience 🛠️
-- Fetch API-based widget loading
-- Error handling with troubleshooting tips
-- Console logging for debugging
-- Clear widget path reference documentation
-- Alternative direct file testing instructions
+- Scoped CSS to prevent conflicts between components
+- Working JavaScript for nav toggles and audio player
+- Responsive design with mobile breakpoints
+- Clear section labels with production widget references
+- Easy to modify and test styling changes
+
+### Technical Implementation 🔧
+- Single HTML file with embedded CSS and JS
+- Component isolation using scoped classes
+- Production CSS variables and patterns preserved
+- Minimal JS for interactive elements (nav, audio)
+- Cross-browser compatible with modern CSS features
 
 ## v1.1 — 2025-11-05 (Production Widgets & Multi-Widget Testing)
 

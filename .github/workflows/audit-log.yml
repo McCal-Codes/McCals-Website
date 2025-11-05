@@ -10,13 +10,33 @@ on:
 jobs:
   audit-log:
     runs-on: ubuntu-latest
-    # For pull_request events, only run when merged (closed + merged)
-    if: "github.event_name != 'pull_request' || github.event.pull_request.merged == true"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+
+      - name: Skip if PR closed but not merged
+        shell: bash
+        run: |
+          # If this run was triggered by a pull_request event, check the event payload
+          # and exit early unless the PR was merged. This avoids requiring complex
+          # job-level `if` expressions that can cause YAML parsing problems.
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            if command -v jq >/dev/null 2>&1; then
+              MERGED=$(jq -r '.pull_request.merged' "$GITHUB_EVENT_PATH")
+              if [ "$MERGED" != "true" ]; then
+                echo "PR closed but not merged; skipping audit log."
+                exit 0
+              fi
+            else
+              # Fallback: simple grep check if jq is not available
+              if ! grep -q '"merged": true' "$GITHUB_EVENT_PATH"; then
+                echo "PR closed but not merged (jq not available); skipping audit log."
+                exit 0
+              fi
+            fi
+          fi
 
       - name: Create audit summary
         shell: bash

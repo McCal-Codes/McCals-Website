@@ -1,6 +1,11 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Make this script ESM-friendly (package.json sets "type": "module")
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const repoRoot = path.resolve(__dirname, '..', '..');
 const workflowsDir = path.join(repoRoot, '.github', 'workflows');
@@ -74,7 +79,10 @@ for (const wf of wfFiles) {
   // Consider cache present if actions/cache is used OR setup-node with cache: npm is present
   const hasActionsCache = /uses:\s*actions\/cache@/m.test(txt);
   const hasSetupNodeCache = /setup-node@[^\n]*[\s\S]*?cache\s*:\s*['"]?npm['"]?/m.test(txt);
-  if (!(hasActionsCache || hasSetupNodeCache)) {
+
+  // Only warn about missing cache for workflows that actually use Node/npm or setup-node
+  const usesNodeOrNpm = /\b(npm|node|setup-node|actions\/setup-node)\b/i.test(txt) || /npm\s+(ci|install)/i.test(txt);
+  if (usesNodeOrNpm && !(hasActionsCache || hasSetupNodeCache)) {
     cacheMissing.push(wf);
   }
 

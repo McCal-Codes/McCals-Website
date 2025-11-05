@@ -58,10 +58,17 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.13.x
 
-      - name: Run Lighthouse CI
+      # Run LHCI with token when available (protected branches / non-fork runs)
+      - name: Run Lighthouse CI (with LHCI_GITHUB_APP_TOKEN)
+        if: ${{ secrets.LHCI_GITHUB_APP_TOKEN != '' }}
         run: lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      # Run LHCI without token when secret is not available (fork PRs / restricted contexts)
+      - name: Run Lighthouse CI (without token)
+        if: ${{ secrets.LHCI_GITHUB_APP_TOKEN == '' }}
+        run: lhci autorun
 
       - name: Upload Lighthouse results
         uses: actions/upload-artifact@v4
@@ -76,7 +83,7 @@ jobs:
         run: kill $DEV_SERVER_PID 2>/dev/null || true
 
       - name: Comment PR with results
-        if: github.event_name == 'pull_request'
+        if: ${{ github.event_name == 'pull_request' }}
         uses: actions/github-script@v7
         with:
           script: |
