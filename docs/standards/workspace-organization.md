@@ -61,6 +61,12 @@ This document combines all standards for scripts folder organization, workspace 
 - **CI Validation**: Include `validate-workflows.yml` job that checks script references and best practices
 - **Cross-Platform Compatibility**: Ensure scripts work on Windows/macOS/Linux; avoid PowerShell-only commands in shared scripts
 
+### Caching best-practices (added 2025-11-05)
+- Use `actions/setup-node@v4` with `cache: 'npm'` in workflows that install Node dependencies to speed up CI and improve reproducibility.
+- The repository includes a workflow validator (`scripts/utils/ci-validate-workflows.js`) that will warn when a workflow uses Node/npm but does not configure caching. The validator intentionally only warns for workflows that actually use Node/npm to avoid false positives.
+- Prefer `npm ci --prefer-offline --no-audit --no-fund` in CI jobs and ensure `package-lock.json` is committed; use the `cache: 'npm'` option on `setup-node` or `actions/cache` for non-npm artifacts (Playwright browsers, large assets).
+- If a workflow intentionally doesn't use caching (short-lived, single-command scripts), add a brief comment in the workflow to document the decision so reviewers understand the tradeoff.
+
 ### Portfolio Automation
 - **Manifest Workflows**: Every portfolio type should have automated manifest generation (e.g., `portrait-manifest.yml`, `nature-manifest.yml`)
 - **Trigger Conditions**: Watch for changes in respective portfolio directories (e.g., `src/images/Portfolios/Portrait/**`)
