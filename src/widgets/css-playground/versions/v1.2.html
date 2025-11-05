@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Playground Widget v1.2</title>
+</head>
+<body style="margin: 0; padding-top: 120px; background: #f9fafb; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; color: #1f2933;">
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0 24px 64px;">
+    <header style="margin: 32px 0 40px;">
+      <h1 style="font-size: 2.75rem; margin-bottom: 8px;">CSS Playground Widget v1.2</h1>
+      <p style="font-size: 1rem; color: #52606d; max-width: 760px;">
+        Component showcase that pulls <strong>key sections</strong> from production widgets (navigation, buttons, cards, timelines, filters, podcast players, footer blocks)
+        so you can iterate quickly without loading full widgets. Each block mirrors live widget styling while remaining self-contained for experimentation.
+      </p>
+      <p style="font-size: 0.95rem; color: #7b8794;">Tip: Copy individual components into Squarespace code blocks or widget sandboxes to validate styling tweaks.</p>
+    </header>
+
+    <!-- ============================= -->
+    <!-- Navigation Shell (v1.6.3 extraction) -->
+    <!-- ============================= -->
+    <section aria-label="Navigation playground" class="playground-nav-demo">
+      <h2>Navigation Shell (v1.6.3 pattern)</h2>
+      <p class="section-note">Trimmed header injection snippet with hover submenu so you can adjust gradients, spacing, and toggle behaviour.</p>
+
+      <nav class="mcc-nav" aria-label="Primary navigation">
+        <div class="mcc-nav__brand"><a href="#home" data-match="^/$">Caleb McCartney</a></div>
+        <button class="mcc-nav__toggle" type="button" aria-expanded="false" aria-controls="mcc-nav-links" aria-haspopup="true">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="mcc-nav__toggle-box" aria-hidden="true">
+            <span class="mcc-nav__toggle-line"></span>
+            <span class="mcc-nav__toggle-line"></span>
+            <span class="mcc-nav__toggle-line"></span>
+          </span>
+        </button>
+        <div class="mcc-nav__menu">
+          <ul class="mcc-nav__links" id="mcc-nav-links" role="list">
+            <li class="mcc-nav__link"><a href="#portfolio">Portfolio</a></li>
+            <li class="mcc-nav__link mcc-nav__link--has-submenu">
+              <a href="#work">Work</a>
+              <button class="mcc-nav__submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-work">
+                <span class="sr-only">Toggle Work submenu</span>
+              </button>
+              <ul class="mcc-nav__submenu" id="submenu-work" role="menu" aria-label="Work submenu" aria-hidden="true">
+                <li><a href="#concert" role="menuitem">Concert</a></li>
+                <li><a href="#events" role="menuitem">Events</a></li>
+                <li><a href="#journalism" role="menuitem">Journalism</a></li>
+              </ul>
+            </li>
+            <li class="mcc-nav__link"><a href="#podcast">Podcast</a></li>
+            <li class="mcc-nav__link"><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Button + Badge pack (Shared patterns) -->
+    <!-- ============================= -->
+    <section aria-label="Buttons and badges" class="playground-card">
+      <h2>Button & Badge Pack</h2>
+      <p class="section-note">Reusable button set sourced from concert portfolio, podcast feed, and policies widgets.</p>
+      <div class="button-row">
+        <button type="button" class="spotify-support-btn">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 15c1.5-1 6-1 8 0"></path><path d="M9 11c2-1 6-1 8 0"></path><path d="M10 8c2.5-.5 5.5-.5 8 0"></path></svg>
+          Support the Artists
+        </button>
+        <a class="download-btn" href="#" aria-label="Download PDF">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          Download PDF
+        </a>
+        <span class="version-badge" title="Widget version badge">v1.0.0</span>
+        <button type="button" class="spotify-support-btn" disabled>Disabled State</button>
+      </div>
+      <div class="form-snippet">
+        <label for="demo-select">Accent Demo:</label>
+        <select id="demo-select" name="demo-select">
+          <option value="">Select…</option>
+          <option value="one">Option One</option>
+          <option value="two">Option Two</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Portfolio cards (Concert v4.7 aesthetic) -->
+    <!-- ============================= -->
+    <section aria-label="Portfolio grid" class="playground-card">
+      <h2>Portfolio Cards (Concert v4.7)</h2>
+      <p class="section-note">Masonry-ready cards with hover elevation pulled from concert portfolio production CSS.</p>
+      <div class="portfolio-test-grid">
+        <article class="portfolio-card">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=420&fit=crop" alt="Concert crowd">
+          <div class="portfolio-card-info">
+            <h3>Foxing • Stage AE</h3>
+            <p>June 2025 • Pittsburgh, PA</p>
+          </div>
+        </article>
+        <article class="portfolio-card">
+          <img src="https://images.unsplash.com/photo-1521336575822-6da63fb45455?w=600&h=420&fit=crop" alt="Singer closeup">
+          <div class="portfolio-card-info">
+            <h3>MUNA • Roxian</h3>
+            <p>April 2025 • McKees Rocks, PA</p>
+          </div>
+        </article>
+        <article class="portfolio-card">
+          <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=420&fit=crop" alt="Guitar solo">
+          <div class="portfolio-card-info">
+            <h3>The Maine • Stage AE</h3>
+            <p>March 2025 • Pittsburgh, PA</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Event timeline snaps (Event v2.6.0) -->
+    <!-- ============================= -->
+    <section aria-label="Event timeline" class="playground-card">
+      <h2>Event Timeline (v2.6.0 snippet)</h2>
+      <p class="section-note">Two-card timeline to iterate on labels, metadata, and inline badges.</p>
+      <div class="event-timeline">
+        <article class="event-card">
+          <header>
+            <span class="event-badge">June 12, 2025</span>
+            <h3>Tech Elevator Demo Day</h3>
+            <p class="event-meta">Panel Coverage • 28 Images</p>
+          </header>
+          <p>Full-day documentation of presenting cohorts, employer mixers, and closing speakers with on-site delivery.</p>
+          <div class="event-tags">
+            <span>#Corporate</span>
+            <span>#Editorial</span>
+          </div>
+        </article>
+        <article class="event-card">
+          <header>
+            <span class="event-badge">May 03, 2025</span>
+            <h3>Lawrenceville Art Crawl</h3>
+            <p class="event-meta">Street Festival • 64 Images</p>
+          </header>
+          <p>Neighborhood-wide arts festival featuring live murals, pop-up stages, and vendor storytelling coverage.</p>
+          <div class="event-tags">
+            <span>#Community</span>
+            <span>#Arts</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Photojournalism filters (v5.2) -->
+    <!-- ============================= -->
+    <section aria-label="Photojournalism filters" class="playground-card">
+      <h2>Photojournalism Filter Bar (v5.2)</h2>
+      <p class="section-note">Minimal filter controls with focus outlines matching production widget.</p>
+      <div class="filter-bar" role="toolbar" aria-label="Photojournalism filters">
+        <button type="button" class="filter-btn is-active">Published</button>
+        <button type="button" class="filter-btn">Assignments</button>
+        <button type="button" class="filter-btn">Politics</button>
+        <button type="button" class="filter-btn">Community</button>
+      </div>
+      <div class="filter-summary">
+        <span>Active filter: <strong>Published</strong></span>
+        <button type="button" class="filter-reset">Reset Filters</button>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Podcast snippet (v1.9.5 card) -->
+    <!-- ============================= -->
+    <section aria-label="Podcast card" class="playground-card">
+      <h2>Podcast Episode Card (v1.9.5)</h2>
+      <p class="section-note">Single episode extract with working play/pause controls.</p>
+      <article class="episode-card" id="episode-ep9">
+        <h3 class="episode-title">Ep 9: Rundown BMW, but Sold as a Lambo</h3>
+        <div class="episode-meta">
+          <img class="podcast-avatar" src="https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png" alt="Caffeinated Connections logo">
+          <div class="episode-info">
+            <span class="podcast-name">Caffeinated Connections</span>
+            <span class="episode-date">Oct 24, 2025</span>
+          </div>
+        </div>
+        <p class="episode-description">A photojournalist and a commentator unpack fear, ego, and how to keep creating while life gets messy.</p>
+
+        <div class="audio-player" data-audio="https://media.rss.com/cafeconnectpod/20250424_175529_f8d0bd73cc31a6f6f6b1a2e3aa8b0c14.mp3">
+          <button class="play-button" type="button" aria-label="Play episode">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+          </button>
+          <div class="audio-progress">
+            <div class="progress-bar"><span class="progress-fill"></span></div>
+            <div class="audio-time"><span class="time-current">0:00</span> / <span class="time-total">--:--</span></div>
+          </div>
+          <div class="audio-volume">
+            <label class="sr-only" for="volume-ep9">Volume</label>
+            <input id="volume-ep9" type="range" min="0" max="100" value="80">
+          </div>
+        </div>
+
+        <div class="platform-links">
+          <a class="platform-button" href="https://rss.com/podcasts/cafeconnectpod/2289545" target="_blank" rel="noopener">Listen</a>
+          <a class="platform-button spotify" href="https://open.spotify.com/show/1GcE0Tt669WrdAOXz73w0S" target="_blank" rel="noopener">Spotify</a>
+          <a class="platform-button apple" href="https://podcasts.apple.com/us/podcast/caffeinated-connections/id1806715605" target="_blank" rel="noopener">Apple Podcasts</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Footer + About snippets -->
+    <!-- ============================= -->
+    <section aria-label="Footer & About" class="playground-card">
+      <h2>Footer & About Blocks</h2>
+      <p class="section-note">Glass footer features and about-card typography lifted from production widgets.</p>
+      <div class="footer-test">
+        <div class="footer-content">
+          <div>
+            <h3>McCal Media</h3>
+            <p>Visual storytelling for artists, newsrooms, and ambitious brands.</p>
+          </div>
+          <div class="footer-links">
+            <a href="#work">Work</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="footer-social">
+            <a href="#instagram" aria-label="Instagram">IG</a>
+            <a href="#threads" aria-label="Threads">Th</a>
+            <a href="#linkedin" aria-label="LinkedIn">IN</a>
+          </div>
+        </div>
+        <div class="footer-bottom">© 2025 McCal Media. All rights reserved.</div>
+      </div>
+
+      <div class="about-test">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=420&fit=crop" alt="Caleb portrait">
+        <div>
+          <h3>Meet Caleb</h3>
+          <p>Photojournalist and director of photography based in Pittsburgh. Recent work includes long-form political features and concert coverage across the East Coast.</p>
+          <button type="button" class="about-cta">Schedule a Call</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Color palette quick view -->
+    <!-- ============================= -->
+    <section aria-label="Color palette" class="playground-card">
+      <h2>Live Color Preview</h2>
+      <div class="color-row">
+        <div class="color-swatch" style="--swatch:#0b111f">#0b111f</div>
+        <div class="color-swatch" style="--swatch:#f5f5f7">#f5f5f7</div>
+        <div class="color-swatch" style="--swatch:#b8003c">#b8003c</div>
+        <div class="color-swatch" style="--swatch:#1db954">#1db954</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================= -->
+  <!-- Scoped styles for playground components -->
+  <!-- ============================= -->
+  <style>
+    .section-note { color: #7b8794; font-size: 0.95rem; margin-bottom: 18px; }
+    .playground-card { background: #ffffff; border-radius: 16px; padding: 28px; margin-bottom: 40px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08); border: 1px solid rgba(15, 23, 42, 0.04); }
+
+    /* Navigation shell tweaks for embedded demo */
+    .playground-nav-demo { background: #ffffff; border-radius: 16px; padding: 32px; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06); border: 1px solid rgba(15, 23, 42, 0.06); margin-bottom: 40px; }
+    .playground-nav-demo .mcc-nav { position: static; max-width: 960px; margin: 0 auto; padding: 22px 32px; border-radius: 14px; backdrop-filter: blur(18px); background: linear-gradient(135deg, rgba(4, 10, 24, 0.85), rgba(14, 22, 42, 0.92)); color: #f8fafc; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .mcc-nav__brand a { color: inherit; font-family: 'Libre Baskerville','Georgia',serif; font-size: 1.6rem; text-decoration: none; letter-spacing: 0.02em; }
+    .mcc-nav__menu { display: flex; align-items: center; gap: 22px; }
+    .mcc-nav__links { display: flex; gap: inherit; list-style: none; margin: 0; padding: 0; }
+    .mcc-nav__link a { color: rgba(255,255,255,0.82); text-decoration: none; font-weight: 500; position: relative; padding-bottom: 6px; }
+    .mcc-nav__link a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.2s ease; }
+    .mcc-nav__link a:hover::after, .mcc-nav__link a:focus-visible::after { transform: scaleX(1); }
+    .mcc-nav__submenu { position: absolute; top: calc(100% + 10px); left: 0; padding: 12px; background: rgba(15, 23, 42, 0.96); border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2); display: none; list-style: none; }
+    .mcc-nav__submenu li a { display: block; padding: 8px 12px; color: rgba(241,245,249,0.96); border-radius: 8px; text-decoration: none; }
+    .mcc-nav__link--has-submenu:hover > .mcc-nav__submenu, .mcc-nav__link--has-submenu:focus-within > .mcc-nav__submenu { display: block; }
+    .mcc-nav__toggle { display: none; background: rgba(241,245,249,0.08); border: 1px solid rgba(148,163,184,0.32); color: inherit; width: 46px; height: 46px; border-radius: 999px; align-items: center; justify-content: center; cursor: pointer; }
+    .mcc-nav__toggle-box { display: inline-flex; flex-direction: column; justify-content: space-between; width: 20px; height: 14px; }
+    .mcc-nav__toggle-line { height: 2px; background: currentColor; border-radius: 999px; }
+    .mcc-nav__submenu-toggle { display: none; }
+    @media (max-width: 768px) {
+      .playground-nav-demo .mcc-nav { flex-wrap: wrap; }
+      .mcc-nav__toggle { display: inline-flex; }
+      .mcc-nav__menu { display: none; flex-direction: column; gap: 16px; width: 100%; }
+      .mcc-nav__links { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .mcc-nav.mcc-nav--menu-open .mcc-nav__menu { display: flex; }
+      .mcc-nav__link--has-submenu { width: 100%; }
+      .mcc-nav__submenu-toggle { display: inline-flex; margin-left: auto; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; border: 1px solid rgba(148,163,184,0.3); background: rgba(15,23,42,0.4); color: inherit; }
+      .mcc-nav__submenu { position: static; width: 100%; margin-top: 8px; padding: 8px 0; background: transparent; border: 0; }
+    }
+
+    /* Buttons & forms */
+    .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 18px; }
+  .spotify-support-btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 10px 16px; font-weight: 600; background: rgba(0,0,0,0.78); color: #f8fafc; border: 1px solid rgba(248,250,252,0.12); box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18); cursor: pointer; transition: transform 0.2s ease, background 0.2s ease; }
+    .spotify-support-btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+    .spotify-support-btn svg { width: 18px; height: 18px; stroke: #1db954; fill: none; stroke-width: 2; }
+    .spotify-support-btn:hover:not([disabled]) { transform: translateY(-1px); background: rgba(0,0,0,0.9); }
+    .download-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px; background: #b8003c; color: #fff; text-decoration: none; font-weight: 600; box-shadow: 0 10px 24px rgba(184,0,60,0.16); }
+    .download-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .version-badge { display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(148,163,184,0.4); background: rgba(148,163,184,0.12); font-weight: 600; color: #364152; }
+    .form-snippet { display: flex; align-items: center; gap: 12px; }
+    .form-snippet select { padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(148,163,184,0.5); background: #fff; color: #1f2933; }
+
+    /* Portfolio cards */
+    .portfolio-test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 20px; }
+    .portfolio-card { background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.16); }
+    .portfolio-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .portfolio-card-info { padding: 18px 20px; }
+    .portfolio-card-info h3 { margin: 0 0 8px; font-size: 1.1rem; }
+    .portfolio-card-info p { margin: 0; color: #616e7c; font-size: 0.95rem; }
+
+    /* Event timeline */
+    .event-timeline { display: grid; gap: 18px; margin-top: 20px; }
+    .event-card { background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 64, 175, 0.9)); color: #f8fafc; padding: 24px; border-radius: 16px; border: 1px solid rgba(148,163,184,0.25); box-shadow: 0 18px 40px rgba(15, 23, 42, 0.3); }
+    .event-badge { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; background: rgba(148,163,184,0.18); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+    .event-meta { margin: 6px 0 12px; color: rgba(226,232,240,0.86); font-size: 0.95rem; }
+    .event-card p { margin: 0 0 14px; line-height: 1.6; }
+    .event-tags { display: flex; gap: 10px; }
+    .event-tags span { background: rgba(15, 118, 110, 0.22); border-radius: 999px; padding: 6px 12px; font-size: 0.82rem; }
+
+    /* Filter bar */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .filter-btn { padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(148,163,184,0.4); background: rgba(148,163,184,0.1); color: #364152; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+  .filter-btn.is-active { background: #0ea5e9; border-color: #0ea5e9; color: #0b1120; box-shadow: 0 16px 30px rgba(14, 165, 233, 0.24); }
+    .filter-btn:hover { transform: translateY(-1px); }
+    .filter-summary { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; font-size: 0.95rem; }
+    .filter-reset { background: none; border: none; color: #0ea5e9; font-weight: 600; cursor: pointer; }
+
+    /* Podcast card */
+    .episode-card { background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(148,163,184,0.25); border-radius: 20px; padding: 28px; color: #f8fafc; box-shadow: 0 28px 60px rgba(15, 23, 42, 0.35); display: grid; gap: 20px; }
+    .episode-title { margin: 0; font-size: 1.35rem; }
+    .episode-meta { display: flex; align-items: center; gap: 14px; }
+    .podcast-avatar { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35); }
+    .episode-info { display: flex; flex-direction: column; }
+    .episode-info span { font-size: 0.9rem; }
+    .episode-description { margin: 0; color: rgba(226,232,240,0.82); line-height: 1.7; }
+    .audio-player { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; background: rgba(15, 23, 42, 0.72); padding: 18px; border-radius: 18px; border: 1px solid rgba(148,163,184,0.18); }
+    .play-button { width: 52px; height: 52px; border-radius: 999px; border: none; background: #1db954; color: #0b1120; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .play-button svg { fill: currentColor; }
+    .play-button.is-playing { background: #fbbf24; color: #0b1120; }
+    .play-button:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(29,185,84,0.35); }
+    .audio-progress { display: grid; gap: 8px; }
+    .progress-bar { width: 100%; height: 4px; background: rgba(148,163,184,0.25); border-radius: 999px; position: relative; overflow: hidden; }
+    .progress-fill { position: absolute; top: 0; left: 0; bottom: 0; width: 0%; background: #1db954; border-radius: inherit; transition: width 0.1s linear; }
+    .audio-time { font-size: 0.8rem; color: rgba(226,232,240,0.6); display: flex; justify-content: space-between; }
+    .audio-volume input { width: 110px; }
+    .platform-links { display: flex; gap: 12px; }
+    .platform-button { flex: 1; text-align: center; border-radius: 12px; padding: 12px 16px; background: rgba(148,163,184,0.14); color: #f8fafc; text-decoration: none; font-weight: 600; }
+    .platform-button.spotify { background: rgba(29,185,84,0.18); color: #22c55e; }
+    .platform-button.apple { background: rgba(252,70,107,0.18); color: #f87171; }
+
+    /* Footer & about */
+    .footer-test { margin-bottom: 28px; border-radius: 18px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 64, 175, 0.85)); color: #e2e8f0; padding: 28px; backdrop-filter: blur(18px); border: 1px solid rgba(148,163,184,0.25); box-shadow: 0 24px 48px rgba(15, 23, 42, 0.35); }
+    .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 28px; }
+    .footer-links { display: grid; gap: 8px; }
+    .footer-links a { color: inherit; text-decoration: none; font-weight: 600; }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social a { width: 36px; height: 36px; border-radius: 999px; background: rgba(15,23,42,0.4); display: flex; align-items: center; justify-content: center; font-weight: 600; color: inherit; }
+    .footer-bottom { margin-top: 18px; font-size: 0.85rem; color: rgba(226,232,240,0.7); }
+    .about-test { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: center; }
+    .about-test img { width: 100%; height: 240px; object-fit: cover; border-radius: 16px; box-shadow: 0 18px 42px rgba(15, 23, 42, 0.22); }
+    .about-test h3 { margin: 0 0 12px; font-size: 1.6rem; }
+    .about-test p { margin: 0 0 16px; color: #52606d; line-height: 1.7; }
+    .about-cta { padding: 12px 22px; border-radius: 999px; border: none; background: #1e40af; color: #eff6ff; font-weight: 600; cursor: pointer; box-shadow: 0 18px 34px rgba(30, 64, 175, 0.3); }
+
+    /* Color swatches */
+    .color-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .color-swatch { flex: 1 1 120px; border-radius: 12px; padding: 32px 16px; text-align: center; font-weight: 600; background: var(--swatch); color: rgba(255,255,255,0.92); box-shadow: 0 14px 26px rgba(15, 23, 42, 0.14); border: 1px solid rgba(15,23,42,0.1); }
+
+    /* Responsive tweaks */
+    @media (max-width: 900px) {
+      .footer-content { grid-template-columns: 1fr 1fr; }
+      .about-test { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .playground-card { padding: 22px; }
+      .footer-content { grid-template-columns: 1fr; }
+      .audio-player { grid-template-columns: 1fr; }
+      .platform-links { flex-direction: column; }
+      .color-swatch { flex-basis: calc(50% - 12px); }
+    }
+
+    /* Screen reader utility */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  </style>
+
+  <!-- ============================= -->
+  <!-- Minimal JS for nav toggle & podcast player -->
+  <!-- ============================= -->
+  <script>
+    // Nav toggle + submenu behaviour mirrors production logic on mobile
+    (function initNav() {
+      const nav = document.querySelector('.mcc-nav');
+      const toggle = document.querySelector('.mcc-nav__toggle');
+      const submenuToggles = document.querySelectorAll('.mcc-nav__submenu-toggle');
+
+      toggle?.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('mcc-nav--menu-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      submenuToggles.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          submenuToggles.forEach(other => other.setAttribute('aria-expanded', 'false'));
+          btn.setAttribute('aria-expanded', String(!expanded));
+        });
+      });
+    })();
+
+    // Lightweight audio player tied to production data attributes
+    (function initAudioPlayer() {
+      const player = document.querySelector('.audio-player');
+      if (!player) return;
+
+      const playButton = player.querySelector('.play-button');
+      const progressFill = player.querySelector('.progress-fill');
+      const current = player.querySelector('.time-current');
+      const total = player.querySelector('.time-total');
+      const volumeSlider = player.querySelector('input[type="range"]');
+
+      const audio = new Audio(player.dataset.audio);
+      audio.preload = 'metadata';
+
+      audio.addEventListener('loadedmetadata', () => {
+        total.textContent = formatTime(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${percent}%`;
+        current.textContent = formatTime(audio.currentTime);
+      });
+
+      audio.addEventListener('ended', () => {
+        playButton.classList.remove('is-playing');
+        playButton.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>';
+      });
+
+      playButton.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          playButton.classList.add('is-playing');
+          playButton.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M9 5h2v14H9zm4 0h2v14h-2z"></path></svg>';
+          playButton.setAttribute('aria-label', 'Pause episode');
+        } else {
+          audio.pause();
+          playButton.classList.remove('is-playing');
+          playButton.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>';
+          playButton.setAttribute('aria-label', 'Play episode');
+        }
+      });
+
+      volumeSlider.addEventListener('input', (event) => {
+        audio.volume = event.target.value / 100;
+      });
+
+      function formatTime(seconds) {
+        if (!Number.isFinite(seconds)) return '--:--';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${mins}:${secs}`;
+      }
+    })();
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Playground Widget v1.2 - Dynamic Production Loader</title>
+  <style>
+    body {
+      margin: 0;
+      padding-top: 120px;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px 48px 24px;
+    }
+    main h1 {
+      font-size: 2.5em;
+      margin: 24px 0 16px 0;
+      color: #1a1a1a;
+    }
+    main h2 {
+      font-size: 1.8em;
+      margin: 40px 0 16px 0;
+      color: #1a1a1a;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 8px;
+    }
+    main section {
+      margin-bottom: 48px;
+    }
+    main p {
+      margin: 12px 0;
+      line-height: 1.6;
+    }
+    .widget-loader {
+      background: #f8f9fa;
+      border: 2px dashed #dee2e6;
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      margin: 24px 0;
+    }
+    .widget-loader h3 {
+      margin: 0 0 16px 0;
+      color: #495057;
+    }
+    .widget-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .widget-btn {
+      background: #007acc;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font: 600 14px/1 ui-sans-serif,system-ui;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .widget-btn:hover {
+      background: #0056b3;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,122,204,0.3);
+    }
+    .widget-btn.active {
+      background: #0056b3;
+      box-shadow: 0 0 0 3px rgba(0,122,204,0.2);
+    }
+    .widget-display {
+      margin-top: 24px;
+      min-height: 200px;
+    }
+    .widget-info {
+      background: #e7f5ff;
+      border-left: 4px solid #007acc;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .widget-info strong {
+      color: #0056b3;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #6c757d;
+      font-style: italic;
+    }
+    .error {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+      color: #721c24;
+    }
+    
+    /* Widget container isolation */
+    .widget-display iframe {
+      width: 100%;
+      min-height: 600px;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>CSS Playground Widget v1.2</h1>
+    <p>This playground <strong>dynamically loads production widgets</strong> from the repository. Any changes to production widgets are automatically reflected here for testing.</p>
+    <p style="font-size:0.9em; color:#666; margin-top:8px;"><strong>v1.2 Feature:</strong> Direct production widget loading - always up-to-date with latest versions.</p>
+
+    <!-- ============================= -->
+    <!-- Dynamic Widget Loader -->
+    <!-- ============================= -->
+    <section aria-label="Dynamic Widget Loader">
+      <h2>Production Widget Loader</h2>
+      <div class="widget-info">
+        <strong>How it works:</strong> Select a widget below to load its latest production version directly from <code>src/widgets/</code>. 
+        The playground automatically detects the newest version file and displays it.
+      </div>
+      
+      <div class="widget-loader">
+        <h3>Select Widget to Test</h3>
+        <div class="widget-controls">
+          <button class="widget-btn" data-widget="site-navigation" data-version="v1.6.3-nav">Navigation (v1.6.3)</button>
+          <button class="widget-btn" data-widget="podcast-feed" data-version="v1.9.5">Podcast Feed (v1.9.5)</button>
+          <button class="widget-btn" data-widget="concert-portfolio" data-version="v4.7">Concert Portfolio (v4.7)</button>
+          <button class="widget-btn" data-widget="event-portfolio" data-version="v2.6.0">Event Portfolio (v2.6.0)</button>
+          <button class="widget-btn" data-widget="photojournalism-portfolio" data-version="v5.2">Photojournalism (v5.2)</button>
+          <button class="widget-btn" data-widget="featured-portfolio" data-version="v1.5">Featured Portfolio (v1.5)</button>
+          <button class="widget-btn" data-widget="portrait-portfolio" data-version="v1.1">Portrait Portfolio (v1.1)</button>
+          <button class="widget-btn" data-widget="site-footer" data-version="v1.2.0">Footer (v1.2.0)</button>
+          <button class="widget-btn" data-widget="about" data-version="v1.4.4">About Section (v1.4.4)</button>
+          <button class="widget-btn" data-widget="hero-slideshow" data-version="latest">Hero Slideshow</button>
+          <button class="widget-btn" data-widget="policies-legal" data-version="v1.0.0">Policies & Legal (v1.0.0)</button>
+        </div>
+        
+        <div id="widgetDisplay" class="widget-display">
+          <div class="loading">
+            👆 Select a widget above to load its production version
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Widget Path Reference -->
+    <!-- ============================= -->
+    <section aria-label="Widget Paths">
+      <h2>Production Widget Paths</h2>
+      <div class="widget-info">
+        All widgets are loaded from: <code>../../[widget-name]/versions/[version].html</code>
+        <br><br>
+        <strong>Available Widgets:</strong>
+        <ul style="margin: 8px 0; padding-left: 24px;">
+          <li><code>site-navigation/</code> - Nav bar with submenu (Squarespace injection)</li>
+          <li><code>podcast-feed/</code> - Podcast episodes with audio player</li>
+          <li><code>concert-portfolio/</code> - Concert photography galleries</li>
+          <li><code>event-portfolio/</code> - Event photography displays</li>
+          <li><code>photojournalism-portfolio/</code> - Journalism photo galleries</li>
+          <li><code>featured-portfolio/</code> - Curated portfolio highlights</li>
+          <li><code>portrait-portfolio/</code> - Portrait photography</li>
+          <li><code>site-footer/</code> - Glass design footer</li>
+          <li><code>about/</code> - About section with bio</li>
+          <li><code>hero-slideshow/</code> - Homepage hero sections</li>
+          <li><code>policies-legal/</code> - Legal documentation page</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Direct File Embedding Alternative -->
+    <!-- ============================= -->
+    <section aria-label="Direct File Testing">
+      <h2>Direct File Testing</h2>
+      <p style="font-size:0.95em; color:#333; margin-bottom:16px;">
+        To test a widget directly without the loader, open the production file in your browser:
+      </p>
+      <div class="widget-info">
+        <strong>Example paths:</strong><br>
+        • <code>file:///[path-to-repo]/src/widgets/podcast-feed/versions/v1.9.5.html</code><br>
+        • <code>file:///[path-to-repo]/src/widgets/concert-portfolio/versions/v4.7.html</code><br>
+        • <code>file:///[path-to-repo]/src/widgets/site-navigation/versions/v1.6.3-nav.html</code>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Dynamic widget loader
+    const widgetDisplay = document.getElementById('widgetDisplay');
+    const widgetButtons = document.querySelectorAll('.widget-btn');
+    
+    // Widget path mapping
+      const widgetPaths = {
+        'site-navigation': '../../site-navigation/versions/v1.6.3.header-injection.html',
+        'podcast-feed': '../../podcast-feed/versions/v1.9.5.html',
+        'concert-portfolio': '../../concert-portfolio/versions/v4.7.html',
+        'event-portfolio': '../../event-portfolio/versions/v2.6.0-event-portfolio.html',
+        'photojournalism-portfolio': '../../photojournalism-portfolio/versions/v5.2-photojournalism-portfolio.html',
+        'featured-portfolio': '../../featured-portfolio/versions/v1.5-featured-portfolio.html',
+        'portrait-portfolio': '../../portrait-portfolio/versions/v1.1-portrait-portfolio.html',
+        'site-footer': '../../site-footer/versions/v1.2.0-site-footer.html',
+        'about': '../../about/versions/v1.4.4-about.html',
+        'hero-slideshow': '../../hero-slideshow/versions/v1.2.html',
+        'policies-legal': '../../policies-legal/versions/v1.0.0-policies-legal.html'
+      };    widgetButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const widget = this.getAttribute('data-widget');
+        const version = this.getAttribute('data-version');
+        
+        // Update active state
+        widgetButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        loadWidget(widget, version);
+      });
+    });
+    
+    function loadWidget(widget, version) {
+      const basePath = widgetPaths[widget];
+      if (!basePath) {
+        showError(`Widget "${widget}" not found in path mapping`);
+        return;
+      }
+      
+      // Show loading state
+      widgetDisplay.innerHTML = '<div class="loading">Loading widget...</div>';
+      
+      // Construct widget file path
+      const widgetPath = `${basePath}${version}.html`;
+      
+      // Try to load the widget
+      fetch(widgetPath)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(html => {
+          // Display widget in iframe for isolation
+          const iframe = document.createElement('iframe');
+          iframe.style.width = '100%';
+          iframe.style.minHeight = '600px';
+          iframe.style.border = '1px solid #dee2e6';
+          iframe.style.borderRadius = '8px';
+          iframe.style.background = '#fff';
+          
+          widgetDisplay.innerHTML = '';
+          widgetDisplay.appendChild(iframe);
+          
+          // Write widget HTML into iframe
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+          iframeDoc.open();
+          iframeDoc.write(html);
+          iframeDoc.close();
+          
+          // Show success message
+          const info = document.createElement('div');
+          info.className = 'widget-info';
+          info.innerHTML = `<strong>✅ Loaded:</strong> ${widget} ${version} from <code>${widgetPath}</code>`;
+          widgetDisplay.insertBefore(info, iframe);
+        })
+        .catch(error => {
+          showError(`Failed to load ${widget} ${version}: ${error.message}<br><br>
+            <strong>Troubleshooting:</strong><br>
+            • Make sure you're running a local dev server (npm run dev)<br>
+            • Check that the file exists at: <code>${widgetPath}</code><br>
+            • Or open the widget file directly in your browser`);
+        });
+    }
+    
+    function showError(message) {
+      widgetDisplay.innerHTML = `<div class="error">${message}</div>`;
+    }
+    
+    // Log available widgets on load
+    console.log('CSS Playground v1.2 - Dynamic Widget Loader');
+    console.log('Available widgets:', Object.keys(widgetPaths));
+    console.log('Click a button above to load a production widget');
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.5.2/axe.min.js"></script>
+</head>
+<body>
+    <div class="performance-dashboard">
+        <h1>Performance Dashboard</h1>
+        <div class="metrics">
+            <div class="metric">
+                <span class="metric-name">FCP:</span>
+                <span class="metric-value" id="fcp">Loading...</span>
+            </div>
+            <div class="metric">
+                <span class="metric-name">LCP:</span>
+                <span class="metric-value" id="lcp">Loading...</span>
+            </div>
+            <div class="metric">
+                <span class="metric-name">CLS:</span>
+                <span class="metric-value" id="cls">Loading...</span>
+            </div>
+            <div class="metric">
+                <span class="metric-name">TBT:</span>
+                <span class="metric-value" id="tbt">Loading...</span>
+            </div>
+        </div>
+        <div class="advanced-metrics">
+            <h2>Advanced Metrics</h2>
+            <div class="metric">
+                <span class="metric-name">Network Requests:</span>
+                <span class="metric-value" id="network-requests">Loading...</span>
+            </div>
+            <div class="metric">
+                <span class="metric-name">JS Execution Time:</span>
+                <span class="metric-value" id="js-execution">Loading...</span>
+            </div>
+            <div class="metric">
+                <span class="metric-name">Memory Usage:</span>
+                <span class="metric-value" id="memory-usage">Loading...</span>
+            </div>
+        </div>
+        <div class="accessibility-checker">
+            <h2>Accessibility Checker</h2>
+            <button id="run-accessibility-check">Run Check</button>
+            <div id="accessibility-results">
+                <p>Results will appear here...</p>
+            </div>
+        </div>
+        <div class="log-section">
+            <h2>Log Details</h2>
+            <textarea id="log-details" readonly></textarea>
+            <button id="copy-log">Copy Log</button>
+        </div>
+        <!-- Add a button to toggle between light and dark modes -->
+        <button id="theme-toggle" style="margin: 10px; padding: 10px;">Toggle Theme</button>
+    </div>
+</body>
+</html>
