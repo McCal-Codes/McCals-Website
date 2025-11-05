@@ -107,4 +107,17 @@ Reference standards:
 		- npm audit: `docs/audit/reports/npm-audit-2025-11-04.json`
 	- Added `.gitattributes`, `CONTRIBUTING.md`, and `CODEOWNERS`
 
-_Last updated: 2025-11-04_
+## Planned: Widgets grouping (phased; paused)
+
+We will group widgets without creating overly nested folders. This plan is logged now and will be executed gradually.
+
+- [x] TODO: Add widgets-manifest generator and run initial manifest (2025-11-05)
+- [ ] TODO: Create group folders under `src/widgets/{portfolios,site,components}` (no moves yet)
+- [ ] TODO: Map each widget to a group using `src/widgets/widgets-manifest.json`
+- [ ] TODO: Phase 1 — Move site widgets (nav, footer, hero) into `src/widgets/site/` and validate
+- [ ] TODO: Phase 2 — Move portfolio widgets (concert, events, journalism, portrait, featured) into `src/widgets/portfolios/` and validate
+- [ ] TODO: Phase 3 — Move shared components into `src/widgets/components/` where applicable
+- [ ] TODO: Update generator to include `group` field and refresh docs/README
+- [ ] TODO: CI/test guard — ensure validator/tests catch broken embed paths after moves
+
+_Last updated: 2025-11-05_

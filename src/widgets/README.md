@@ -1,3 +1,29 @@
+# Widgets directory
+
+This folder contains self-contained widgets intended to be embedded into Squarespace Code Blocks or used by the local demo site in `src/site/`.
+
+Goal: provide simple, discoverable documentation and a machine-readable manifest so we can organize widgets without creating more nested, tight folders.
+
+Conventions
+- Keep each widget in a single directory under `src/widgets/`.
+- Use `versions/` inside a widget directory for versioned HTML files if needed (do not create more nested folders unless strictly necessary).
+- Use `STATUS.md` in a widget folder to mark work-in-progress state if desired. If a widget is archived, move it to `src/widgets/_archived/`.
+
+Manifest
+- The repository now contains (or can generate) `src/widgets/widgets-manifest.json`, a consolidated manifest of widgets with basic metadata (name, path, description, status, versions). This file is intended for quick discovery in the dev site and for documentation.
+- To regenerate the manifest locally, run:
+
+```sh
+# If your project is ESM (package.json has "type": "module") run the .cjs script:
+node scripts/utils/generate-widgets-manifest.cjs
+```
+
+Why this approach
+- Minimal structural change: no tight nit folders added.
+- Machine-readable manifest enables filtered lists, demo pages, and automated checks without changing how widgets are stored.
+- README + generator script keep organization discoverable and maintainable.
+
+If you'd like, I can also: add a simple dev route to the demo site that reads `widgets-manifest.json` and shows available widgets, or add an npm script to run the generator automatically.
 # Squarespace Widgets
 
 This directory contains production-ready and work-in-progress widgets for the McCal Media Squarespace site.

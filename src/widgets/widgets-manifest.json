@@ -1,0 +1,263 @@
+{
+  "generatedAt": "2025-11-05T20:40:54.333Z",
+  "count": 20,
+  "widgets": [
+    {
+      "name": "_admin",
+      "path": "src/widgets/_admin",
+      "description": "",
+      "status": "production",
+      "versions": []
+    },
+    {
+      "name": "about",
+      "path": "src/widgets/about",
+      "description": "About Section Widgets",
+      "status": "production",
+      "versions": []
+    },
+    {
+      "name": "blog-feed",
+      "path": "src/widgets/blog-feed",
+      "description": "Blog Feed Widget",
+      "status": "blog",
+      "versions": [
+        "versions/v1-google-docs.html",
+        "versions/v1-google-sheets.html"
+      ]
+    },
+    {
+      "name": "concert-portfolio",
+      "path": "src/widgets/concert-portfolio",
+      "description": "Concert Portfolio Widget",
+      "status": "work",
+      "versions": [
+        "versions/v2.0.html",
+        "versions/v2.1.html",
+        "versions/v2.2-self-contained.html",
+        "versions/v2.2.html",
+        "versions/v3.0-README.md",
+        "versions/v3.0-debug-simple.html",
+        "versions/v3.0-universal-captions.html",
+        "versions/v3.1.html",
+        "versions/v3.2.html",
+        "versions/v3.3.html",
+        "versions/v3.4-manifest.html",
+        "versions/v3.5-auto-refresh.html",
+        "versions/v3.6.html",
+        "versions/v4.1.html",
+        "versions/v4.2.html",
+        "versions/v4.3.html",
+        "versions/v4.4.html",
+        "versions/v4.5.html",
+        "versions/v4.6.html",
+        "versions/v4.7.html"
+      ]
+    },
+    {
+      "name": "css-playground",
+      "path": "src/widgets/css-playground",
+      "description": "CSS Playground Widget",
+      "status": "production",
+      "versions": [
+        "versions/README.md",
+        "versions/v1.0.html",
+        "versions/v1.1.html",
+        "versions/v1.2.html",
+        "versions/v1.3.html",
+        "versions/v1.3.html.bak.1762369952590"
+      ]
+    },
+    {
+      "name": "event-portfolio",
+      "path": "src/widgets/event-portfolio",
+      "description": "Event Portfolio Widget (v2.6.2)",
+      "status": "production",
+      "versions": [
+        "test-manifest.html",
+        "versions/v1.0-universal-captions.html",
+        "versions/v1.1-manifest.html",
+        "versions/v1.1-test-demo.html",
+        "versions/v2.0-manifest.html",
+        "versions/v2.5.3-event-portfolio.html",
+        "versions/v2.5.4-event-portfolio.html",
+        "versions/v2.5.6-event-portfolio.html",
+        "versions/v2.6.0-event-portfolio.html",
+        "versions/v2.6.1-event-portfolio.html",
+        "versions/v2.6.2-event-portfolio.html"
+      ]
+    },
+    {
+      "name": "featured-portfolio",
+      "path": "src/widgets/featured-portfolio",
+      "description": "",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.html",
+        "versions/v1.1.html",
+        "versions/v1.2.html",
+        "versions/v1.3.html",
+        "versions/v1.4.html",
+        "versions/v1.5-working.html"
+      ]
+    },
+    {
+      "name": "hero-slideshow",
+      "path": "src/widgets/hero-slideshow",
+      "description": "",
+      "status": "production",
+      "versions": [
+        "versions/hero slideshow 1.5",
+        "versions/v1.1.html",
+        "versions/v1.2.html"
+      ]
+    },
+    {
+      "name": "hire-to-unlock-resume",
+      "path": "src/widgets/hire-to-unlock-resume",
+      "description": "Hire to Unlock Résumé Widget v1.0.0",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.0-hire-to-unlock-resume.html"
+      ]
+    },
+    {
+      "name": "nature-portfolio",
+      "path": "src/widgets/nature-portfolio",
+      "description": "Nature Portfolio Widget (v1.8)",
+      "status": "nature",
+      "versions": [
+        "versions/v1.0.html",
+        "versions/v1.2.html",
+        "versions/v1.5-performance-optimized.html",
+        "versions/v1.7-enhanced-display.html",
+        "versions/v1.8-performance-optimized.html"
+      ]
+    },
+    {
+      "name": "performance-dashboard",
+      "path": "src/widgets/performance-dashboard",
+      "description": "Performance Dashboard Widget",
+      "status": "production",
+      "versions": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "photojournalism-portfolio",
+      "path": "src/widgets/photojournalism-portfolio",
+      "description": "Photojournalism Portfolio Widget",
+      "status": "photojournalism",
+      "versions": [
+        "demo-path-linking.html",
+        "versions/journalism-widget-v5.1.js",
+        "versions/v1.0-filterable-masonry.html",
+        "versions/v2.0-dynamic-github.html",
+        "versions/v2.1-with-captions.html",
+        "versions/v3.0-published-tags.html",
+        "versions/v4.0-master-manifest.html",
+        "versions/v4.1-individual-lightbox.html",
+        "versions/v4.2-event-cards.html",
+        "versions/v4.3-event-cards.html",
+        "versions/v4.8-event-cards.html",
+        "versions/v4.9-event-cards.html",
+        "versions/v5.1-performance-optimized.html",
+        "versions/v5.2-performance-optimized.html"
+      ]
+    },
+    {
+      "name": "podcast-feed",
+      "path": "src/widgets/podcast-feed",
+      "description": "Podcast Feed Widget",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.html",
+        "versions/v1.1.html",
+        "versions/v1.2.html",
+        "versions/v1.3.html",
+        "versions/v1.4.html",
+        "versions/v1.5.html",
+        "versions/v1.6.html",
+        "versions/v1.7-debug.html",
+        "versions/v1.7.html",
+        "versions/v1.8.html",
+        "versions/v1.9.5.html",
+        "versions/v1.9.html",
+        "versions/v2.0-performance-optimized.html",
+        "versions/v2.0.0.html"
+      ]
+    },
+    {
+      "name": "policies-legal",
+      "path": "src/widgets/policies-legal",
+      "description": "Policies & Legal Widget",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.0-policies-legal-squarespace.html"
+      ]
+    },
+    {
+      "name": "portrait-portfolio",
+      "path": "src/widgets/portrait-portfolio",
+      "description": "Portrait Portfolio Widget",
+      "status": "portrait",
+      "versions": [
+        "versions/v1.0.html"
+      ]
+    },
+    {
+      "name": "seo-performance-template",
+      "path": "src/widgets/seo-performance-template",
+      "description": "SEO/Performance Widget Template",
+      "status": "production",
+      "versions": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "shared",
+      "path": "src/widgets/shared",
+      "description": "",
+      "status": "production",
+      "versions": []
+    },
+    {
+      "name": "site-footer",
+      "path": "src/widgets/site-footer",
+      "description": "Site Footer Widget",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.0.html",
+        "versions/v1.1 Fixed Links.html",
+        "versions/v1.2.0.footer-widget.html",
+        "versions/v1.3.0-performance-optimized.html"
+      ]
+    },
+    {
+      "name": "site-navigation",
+      "path": "src/widgets/site-navigation",
+      "description": "Site Navigation Widget",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.0.html",
+        "versions/v1.6.2.header-injection.html",
+        "versions/v1.6.3.header-injection.html",
+        "versions/v1.6.debug.html",
+        "versions/v1.6.demo.full.html",
+        "versions/v1.6.demo.html",
+        "versions/v1.6.header-injection.html",
+        "versions/v1.6.html",
+        "versions/v1.7.0-performance-optimized.html"
+      ]
+    },
+    {
+      "name": "widget-enhancement-template",
+      "path": "src/widgets/widget-enhancement-template",
+      "description": "Widget Enhancement Template",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.html"
+      ]
+    }
+  ]
+}
