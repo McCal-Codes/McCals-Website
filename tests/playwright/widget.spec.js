@@ -1,10 +1,11 @@
-const { test, expect } = require('@playwright/test');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import path from 'path';
 
 test('load local site index and check main content', async ({ page }) => {
-  const indexPath = path.resolve(__dirname, '../../src/site/index.html');
-  const url = 'file://' + indexPath;
-  await page.goto(url);
+  const baseDir = path.dirname(new URL(import.meta.url).pathname);
+  const indexPath = path.resolve(baseDir, '../../src/site/index.html');
+  const fileUrl = 'file://' + indexPath;
+  await page.goto(fileUrl);
   // Basic assertion: page has a body and title or a main app container
   const body = await page.$('body');
   expect(body).not.toBeNull();

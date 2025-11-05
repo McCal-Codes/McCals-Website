@@ -1,0 +1,112 @@
+# Page snapshot
+
+```yaml
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - heading "CSS Playground v1.3 — Safe editable copies" [level=1] [ref=e5]
+      - paragraph [ref=e6]: This version embeds static copies of production components so you can safely tweak them without pulling live files.
+    - generic [ref=e7]:
+      - generic [ref=e8]: Theme
+      - button "Theme" [pressed] [ref=e9] [cursor=pointer]:
+        - text: ☀️
+        - generic [ref=e10]: Toggle dark mode
+  - region "Navigation playground" [ref=e11]:
+    - heading "Navigation (production copy)" [level=2] [ref=e12]
+    - paragraph [ref=e13]: Editable copy of the production navigation shell — modify safely here and test interactions.
+    - navigation:
+      - navigation [ref=e14]:
+        - generic [ref=e15]:
+          - link "McCal Media" [ref=e16] [cursor=pointer]:
+            - /url: /
+          - list [ref=e17]:
+            - listitem [ref=e18]:
+              - link "Home" [ref=e19] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e20]:
+              - link "Portfolio" [ref=e21] [cursor=pointer]:
+                - /url: /portfolio
+            - listitem [ref=e22]:
+              - link "Services" [ref=e23] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e24]:
+              - link "About" [ref=e25] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e26]:
+              - link "Contact" [ref=e27] [cursor=pointer]:
+                - /url: /contact
+          - link "Get In Touch" [ref=e28] [cursor=pointer]:
+            - /url: /contact
+  - generic [ref=e29]:
+    - button "Support the Artists" [ref=e30]:
+      - img [ref=e31]
+      - text: Support the Artists
+    - link "Download PDF" [ref=e36] [cursor=pointer]:
+      - /url: "#"
+      - img [ref=e37]
+      - text: Download PDF
+    - generic "Widget version badge" [ref=e40]: v1.0.0
+    - button "Disabled State" [disabled] [ref=e41]
+  - region "Portfolio grid" [ref=e42]:
+    - heading "Portfolio Cards (editable)" [level=2] [ref=e43]
+    - generic [ref=e44]:
+      - article [ref=e45]:
+        - img "Concert crowd" [ref=e46]
+        - generic [ref=e47]:
+          - heading "Foxing • Stage AE" [level=3] [ref=e48]
+          - paragraph [ref=e49]: June 2025 • Pittsburgh, PA
+      - article [ref=e50]:
+        - img "Singer closeup" [ref=e51]
+        - generic [ref=e52]:
+          - heading "MUNA • Roxian" [level=3] [ref=e53]
+          - paragraph [ref=e54]: April 2025 • McKees Rocks, PA
+      - article [ref=e55]:
+        - img "Guitar solo" [ref=e56]
+        - generic [ref=e57]:
+          - heading "The Maine • Stage AE" [level=3] [ref=e58]
+          - paragraph [ref=e59]: March 2025 • Pittsburgh, PA
+  - region "Podcast card" [ref=e60]:
+    - heading "Podcast Episode Card" [level=2] [ref=e61]
+    - article [ref=e62]:
+      - 'heading "Ep 9: Rundown BMW, but Sold as a Lambo" [level=3] [ref=e63]'
+      - generic [ref=e64]:
+        - img "Caffeinated Connections" [ref=e65]
+        - generic [ref=e66]:
+          - generic [ref=e67]: Caffeinated Connections
+          - generic [ref=e68]: Oct 24, 2025
+      - paragraph [ref=e69]: A photojournalist and a commentator unpack fear, ego, and how to keep creating while life gets messy.
+      - generic [ref=e70]:
+        - button "Play" [ref=e71] [cursor=pointer]: ▶
+        - generic [ref=e72]: 0:00 / --:--
+        - slider "Volume" [ref=e74]: "80"
+  - region "Footer & About" [ref=e75]:
+    - heading "Footer & About (production copy)" [level=2] [ref=e76]
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - heading "McCal Media" [level=3] [ref=e80]
+          - paragraph [ref=e81]: Visual storytelling for artists, newsrooms, and ambitious brands.
+        - generic [ref=e82]:
+          - link "Work" [ref=e83] [cursor=pointer]:
+            - /url: "#"
+          - link "Pricing" [ref=e84] [cursor=pointer]:
+            - /url: "#"
+          - link "Contact" [ref=e85] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e86]:
+          - link "Instagram" [ref=e87] [cursor=pointer]:
+            - /url: "#"
+            - text: IG
+          - link "Threads" [ref=e88] [cursor=pointer]:
+            - /url: "#"
+            - text: Th
+          - link "LinkedIn" [ref=e89] [cursor=pointer]:
+            - /url: "#"
+            - text: IN
+      - generic [ref=e90]: © 2025 McCal Media. All rights reserved.
+  - generic [ref=e91]:
+    - strong [ref=e92]: "Notes:"
+    - text: This file is static — it does not fetch production widget files. Use it to safely change markup and CSS. When you're ready, copy changes back into the production widget version files inside
+    - code [ref=e93]: src/widgets/*/versions/
+    - text: .
+```

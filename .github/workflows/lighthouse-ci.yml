@@ -58,17 +58,19 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.13.x
 
-      # Run LHCI with token when available (protected branches / non-fork runs)
-      - name: Run Lighthouse CI (with LHCI_GITHUB_APP_TOKEN)
-        if: ${{ secrets.LHCI_GITHUB_APP_TOKEN != '' }}
-        run: lhci autorun
+      # Run LHCI (use token if present). Use a shell check instead of step-level
+      # `if:` expressions to avoid YAML/linter false positives in editors.
+      - name: Run Lighthouse CI
+        run: |
+          echo "Starting LHCI autorun"
+          if [ -n "${LHCI_GITHUB_APP_TOKEN}" ]; then
+            echo "LHCI_GITHUB_APP_TOKEN provided — running with token"
+          else
+            echo "No LHCI_GITHUB_APP_TOKEN — running without token"
+          fi
+          lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-
-      # Run LHCI without token when secret is not available (fork PRs / restricted contexts)
-      - name: Run Lighthouse CI (without token)
-        if: ${{ secrets.LHCI_GITHUB_APP_TOKEN == '' }}
-        run: lhci autorun
 
       - name: Upload Lighthouse results
         uses: actions/upload-artifact@v4
@@ -121,7 +123,9 @@ jobs:
             });
             
             comment += '\n---\n';
-            comment += `📊 [View full report in artifacts](${context.payload.repository.html_url}/actions/runs/${context.runId})\n`;
+            // Build run URL without relying on `context` globals to avoid linter warnings in editors
+            const runUrl = `https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+            comment += `📊 [View full report in artifacts](${runUrl})\n`;
             
             // Post comment
             const { data: comments } = await github.rest.issues.listComments({

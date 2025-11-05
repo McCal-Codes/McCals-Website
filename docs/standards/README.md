@@ -19,6 +19,9 @@ Comprehensive widget standards, proven UX and technical improvements, and best p
 ### 🔄 **widget-development.md**
 Systematic methodology for applying enhancement patterns across widgets with implementation checklists and quality standards.
 
+### 🎨 **theming-for-widgets.md**
+Practical guidance for implementing light/dark theming across playgrounds and production widgets (tokens, data-theme, THEME_KEY, propagation, and testing).
+
 
 
 ## Repository Standards

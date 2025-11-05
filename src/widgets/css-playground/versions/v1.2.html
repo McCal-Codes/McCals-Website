@@ -5,15 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSS Playground Widget v1.2</title>
 </head>
+<!-- Theme variables: light/dark CSS custom properties and prefers-color-scheme fallback -->
+<style id="mcc-theme-variables">
+  :root{
+    --bg: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --surface: #ffffff;
+    --glass: rgba(255,255,255,0.6);
+    --brand: #007acc;
+  }
+
+  :root[data-theme="dark"]{
+    --bg: #0b111f;
+    --text: #e6eef8;
+    --muted: #94a3b8;
+    --surface: rgba(6,8,15,0.78);
+    --glass: rgba(255,255,255,0.04);
+    --brand: #4dabf7;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme]){ --bg: #0b111f; --text: #e6eef8; }
+  }
+
+  /* Apply globally where possible (playground host) */
+  body{ background: var(--bg); color: var(--text); }
+  .playground-card { background: var(--surface); }
+</style>
 <body style="margin: 0; padding-top: 120px; background: #f9fafb; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; color: #1f2933;">
   <main style="max-width: 1200px; margin: 0 auto; padding: 0 24px 64px;">
-    <header style="margin: 32px 0 40px;">
-      <h1 style="font-size: 2.75rem; margin-bottom: 8px;">CSS Playground Widget v1.2</h1>
-      <p style="font-size: 1rem; color: #52606d; max-width: 760px;">
-        Component showcase that pulls <strong>key sections</strong> from production widgets (navigation, buttons, cards, timelines, filters, podcast players, footer blocks)
-        so you can iterate quickly without loading full widgets. Each block mirrors live widget styling while remaining self-contained for experimentation.
-      </p>
-      <p style="font-size: 0.95rem; color: #7b8794;">Tip: Copy individual components into Squarespace code blocks or widget sandboxes to validate styling tweaks.</p>
+    <header style="margin: 32px 0 40px; display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+        <div style="flex:1;min-width:0;">
+          <h1 style="font-size: 2.75rem; margin-bottom: 8px;">CSS Playground Widget v1.2</h1>
+          <p style="font-size: 1rem; color: #52606d; max-width: 760px; margin:0 0 8px 0;">
+            Component showcase that pulls <strong>key sections</strong> from production widgets (navigation, buttons, cards, timelines, filters, podcast players, footer blocks)
+            so you can iterate quickly without loading full widgets. Each block mirrors live widget styling while remaining self-contained for experimentation.
+          </p>
+          <p style="font-size: 0.95rem; color: #7b8794; margin:0;">Tip: Copy individual components into Squarespace code blocks or widget sandboxes to validate styling tweaks.</p>
+        </div>
+
+        <!-- Theme toggle (accessible) -->
+        <div style="display:flex;align-items:center;gap:12px;margin-left:16px;">
+          <label id="mccThemeLabel" for="mccThemeToggle" style="font-size:0.9rem;color:var(--muted);">Theme</label>
+          <button id="mccThemeToggle" aria-pressed="false" aria-labelledby="mccThemeLabel" title="Toggle theme" style="background:var(--surface);border:1px solid rgba(15,23,42,0.06);padding:8px 12px;border-radius:999px;cursor:pointer;">
+            <span id="mccThemeIcon" aria-hidden="true">🌙</span>
+            <span class="sr-only" id="mccThemeScreenReader">Toggle dark mode</span>
+          </button>
+        </div>
+      </div>
     </header>
 
     <!-- ============================= -->
@@ -383,36 +424,98 @@
   <!-- ============================= -->
   <!-- Scoped styles for playground components -->
   <!-- ============================= -->
+  <!-- Theme toggler script: initializes theme, persists selection, and propagates to iframes -->
+  <script>
+    (function(){
+      const THEME_KEY = 'mcc-theme';
+
+      function applyTheme(theme){
+        if (theme) document.documentElement.setAttribute('data-theme', theme);
+        else document.documentElement.removeAttribute('data-theme');
+        // Update icon / aria-pressed
+        const btn = document.getElementById('mccThemeToggle');
+        const icon = document.getElementById('mccThemeIcon');
+        if (btn && icon){
+          const isDark = theme === 'dark' || (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          btn.setAttribute('aria-pressed', String(isDark));
+          icon.textContent = isDark ? '☀️' : '🌙';
+        }
+        // Propagate into same-origin iframes or postMessage for cross-origin
+        document.querySelectorAll('.widget-display iframe').forEach(iframe => {
+          try {
+            // same-origin: write directly
+            iframe.contentDocument.documentElement.setAttribute('data-theme', theme || '');
+          } catch (e) {
+            // cross-origin: send a message
+            try { iframe.contentWindow.postMessage({type:'mcc-theme', theme}, '*'); } catch(_){}
+          }
+        });
+      }
+
+      function setTheme(theme){
+        if (theme === 'system') {
+          localStorage.removeItem(THEME_KEY);
+          applyTheme();
+        } else {
+          localStorage.setItem(THEME_KEY, theme);
+          applyTheme(theme);
+        }
+      }
+
+      // initialize from localStorage, query param, or prefer-media
+      function initTheme(){
+        // URL query param overrides (useful for CI/visual tests): ?theme=dark or ?theme=light
+        try {
+          const urlTheme = new URLSearchParams(location.search).get('theme');
+          if (urlTheme === 'dark' || urlTheme === 'light') {
+            setTheme(urlTheme);
+            return;
+          }
+        } catch(e) { /* ignore URL parsing issues */ }
+
+        const saved = localStorage.getItem(THEME_KEY);
+        if (saved === 'dark' || saved === 'light') {
+          applyTheme(saved);
+        } else {
+          // respect system if not set
+          applyTheme();
+        }
+      }
+
+      // DOM hookup
+      document.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        const toggle = document.getElementById('mccThemeToggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', (ev) => {
+          // toggle between light/dark
+          const current = document.documentElement.getAttribute('data-theme');
+          const next = current === 'dark' ? 'light' : 'dark';
+          setTheme(next);
+        });
+
+        // react to changes from widgets via postMessage (widgets can request theme or set their own)
+        window.addEventListener('message', (ev) => {
+          if (!ev.data || typeof ev.data !== 'object') return;
+          if (ev.data && ev.data.type === 'mcc-theme-request'){
+            // widget asked for current theme
+            const theme = document.documentElement.getAttribute('data-theme') || null;
+            try { ev.source.postMessage({ type: 'mcc-theme', theme }, '*'); } catch(e){}
+          }
+        });
+      });
+    })();
+  </script>
   <style>
     .section-note { color: #7b8794; font-size: 0.95rem; margin-bottom: 18px; }
     .playground-card { background: #ffffff; border-radius: 16px; padding: 28px; margin-bottom: 40px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08); border: 1px solid rgba(15, 23, 42, 0.04); }
 
-    /* Navigation shell tweaks for embedded demo */
-    .playground-nav-demo { background: #ffffff; border-radius: 16px; padding: 32px; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06); border: 1px solid rgba(15, 23, 42, 0.06); margin-bottom: 40px; }
-    .playground-nav-demo .mcc-nav { position: static; max-width: 960px; margin: 0 auto; padding: 22px 32px; border-radius: 14px; backdrop-filter: blur(18px); background: linear-gradient(135deg, rgba(4, 10, 24, 0.85), rgba(14, 22, 42, 0.92)); color: #f8fafc; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .mcc-nav__brand a { color: inherit; font-family: 'Libre Baskerville','Georgia',serif; font-size: 1.6rem; text-decoration: none; letter-spacing: 0.02em; }
-    .mcc-nav__menu { display: flex; align-items: center; gap: 22px; }
-    .mcc-nav__links { display: flex; gap: inherit; list-style: none; margin: 0; padding: 0; }
-    .mcc-nav__link a { color: rgba(255,255,255,0.82); text-decoration: none; font-weight: 500; position: relative; padding-bottom: 6px; }
-    .mcc-nav__link a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.2s ease; }
-    .mcc-nav__link a:hover::after, .mcc-nav__link a:focus-visible::after { transform: scaleX(1); }
-    .mcc-nav__submenu { position: absolute; top: calc(100% + 10px); left: 0; padding: 12px; background: rgba(15, 23, 42, 0.96); border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2); display: none; list-style: none; }
-    .mcc-nav__submenu li a { display: block; padding: 8px 12px; color: rgba(241,245,249,0.96); border-radius: 8px; text-decoration: none; }
-    .mcc-nav__link--has-submenu:hover > .mcc-nav__submenu, .mcc-nav__link--has-submenu:focus-within > .mcc-nav__submenu { display: block; }
-    .mcc-nav__toggle { display: none; background: rgba(241,245,249,0.08); border: 1px solid rgba(148,163,184,0.32); color: inherit; width: 46px; height: 46px; border-radius: 999px; align-items: center; justify-content: center; cursor: pointer; }
-    .mcc-nav__toggle-box { display: inline-flex; flex-direction: column; justify-content: space-between; width: 20px; height: 14px; }
-    .mcc-nav__toggle-line { height: 2px; background: currentColor; border-radius: 999px; }
-    .mcc-nav__submenu-toggle { display: none; }
-    @media (max-width: 768px) {
-      .playground-nav-demo .mcc-nav { flex-wrap: wrap; }
-      .mcc-nav__toggle { display: inline-flex; }
-      .mcc-nav__menu { display: none; flex-direction: column; gap: 16px; width: 100%; }
-      .mcc-nav__links { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .mcc-nav.mcc-nav--menu-open .mcc-nav__menu { display: flex; }
-      .mcc-nav__link--has-submenu { width: 100%; }
-      .mcc-nav__submenu-toggle { display: inline-flex; margin-left: auto; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; border: 1px solid rgba(148,163,184,0.3); background: rgba(15,23,42,0.4); color: inherit; }
-      .mcc-nav__submenu { position: static; width: 100%; margin-top: 8px; padding: 8px 0; background: transparent; border: 0; }
-    }
+    /* Navigation shell wrapper for embedded demo
+       NOTE: Production navigation CSS is included above ("Critical CSS from production widget").
+       Keep this wrapper minimal so the playground uses the production styles without overriding them.
+    */
+    .playground-nav-demo { padding: 32px; margin-bottom: 40px; border-radius: 16px; }
+    .playground-nav-demo .mcc-nav { position: static; max-width: 960px; margin: 0 auto; }
 
     /* Buttons & forms */
     .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 18px; }
@@ -590,6 +693,48 @@
       }
     })();
   </script>
+  </script>
+
+  <!-- Theme integration snippet for production widgets (copy into widget templates) -->
+  <!--
+    Add this small snippet to production widget HTML (top-level script). It will:
+      1) Listen for theme messages from the host and apply them (postMessage).
+      2) Request the current theme from the parent when loaded (for cross-origin iframes).
+      3) Attempt to read parent.document when same-origin and inherit theme.
+
+    Paste into widget templates (inline script) so they respond in Squarespace embeds.
+  -->
+  <script id="mcc-widget-theme-snippet">
+    (function(){
+      // Apply theme when host sends it
+      function applyTheme(theme){
+        try {
+          if (theme) document.documentElement.setAttribute('data-theme', theme);
+          else document.documentElement.removeAttribute('data-theme');
+        } catch(e){ /* ignore */ }
+      }
+
+      // Listen for messages from host
+      window.addEventListener('message', (ev) => {
+        if (!ev.data || typeof ev.data !== 'object') return;
+        if (ev.data.type === 'mcc-theme'){
+          applyTheme(ev.data.theme);
+        }
+      }, false);
+
+      // If same-origin, inherit directly
+      try {
+        if (parent && parent.document){
+          const theme = parent.document.documentElement.getAttribute('data-theme');
+          if (theme) applyTheme(theme);
+        }
+      } catch(e){
+        // cross-origin, ask host for theme
+        try { parent.postMessage({ type: 'mcc-theme-request' }, '*'); } catch(_){}
+      }
+    })();
+  </script>
+
 </body>
 </html><!DOCTYPE html>
 <html lang="en">
@@ -832,7 +977,15 @@
       widgetDisplay.innerHTML = '<div class="loading">Loading widget...</div>';
       
       // Construct widget file path
-      const widgetPath = `${basePath}${version}.html`;
+      let widgetPath;
+      // If mapping already points to a concrete HTML file, use it as-is
+      if (typeof basePath === 'string' && basePath.trim().toLowerCase().endsWith('.html')) {
+        widgetPath = basePath;
+      } else {
+        // Otherwise treat basePath as a directory and append the versioned filename
+        const sep = basePath.endsWith('/') ? '' : '/';
+        widgetPath = `${basePath}${sep}${version}.html`;
+      }
       
       // Try to load the widget
       fetch(widgetPath)

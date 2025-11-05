@@ -1,8 +1,8 @@
-const path = require('path');
+import path from 'path';
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
-module.exports = {
-  testDir: path.join(__dirname, 'tests', 'playwright'),
+const config = {
+  testDir: path.join(process.cwd(), 'tests', 'playwright'),
   timeout: 30 * 1000,
   expect: { timeout: 5000 },
   retries: 0,
@@ -15,3 +15,5 @@ module.exports = {
     { name: 'chromium', use: { browserName: 'chromium' } }
   ],
 };
+
+export default config;

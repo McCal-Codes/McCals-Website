@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CSS Playground Widget v1.3 — Static Production Parts</title>
+  <style>
+  /* Theme variables (neutral light/dark) — no accent colors (black/white shades only) */
+  :root{
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --elev-1: #f3f4f6;
+    --text: #0b1220;
+    --muted: #6b7280;
+    --glass: rgba(255,255,255,0.6);
+    --focus: rgba(17,24,39,0.12);
+  }
+  :root[data-theme="dark"]{
+    --bg: #07101a;
+    --surface: rgba(6,8,15,0.88);
+    --elev-1: rgba(255,255,255,0.02);
+    --text: #e6eef8;
+    --muted: #94a3b8;
+    --glass: rgba(255,255,255,0.04);
+    --focus: rgba(255,255,255,0.06);
+  }
+  /* Respect system preference unless user explicitly set theme */
+  @media(prefers-color-scheme:dark){ :root:not([data-theme]){ --bg:#07101a; --text:#e6eef8 } }
+  html,body{height:100%;margin:0}
+  body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);padding:120px 24px 48px}
+  main{max-width:1200px;margin:0 auto}
+  h1{font-size:2.25rem;margin:0 0 8px}
+  .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .playground-card{background:var(--surface);border-radius:16px;padding:28px;margin-bottom:28px;box-shadow:0 12px 32px rgba(15,23,42,0.06);border:1px solid rgba(15,23,42,0.04)}
+  /* Ensure cards size consistently and don't overflow */
+  .playground-card{box-sizing:border-box;width:100%}
+  .playground-card > *{max-width:100%}
+  /* small wrapper only — production CSS below will style nav fully */
+  .playground-nav-demo{padding:12px;margin-bottom:24px}
+  /* Production nav critical CSS (exact copy) */
+  .mcc-nav-widget{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;--mcc-nav-bg:rgba(255,255,255,.95);--mcc-nav-border:rgba(0,0,0,.08);--mcc-nav-text-primary:#1a1a1a;--mcc-nav-text-secondary:#666;--mcc-nav-text-muted:#999;--mcc-nav-hover:#007acc;--mcc-nav-active:#0056b3;--mcc-nav-button-bg:#007acc;--mcc-nav-button-text:#fff;--mcc-nav-mobile-bg:#f8f9fa;--mcc-nav-mobile-border:#e9ecef}
+  @media(prefers-color-scheme:dark){.mcc-nav-widget{--mcc-nav-bg:rgba(18,18,18,.95);--mcc-nav-border:rgba(255,255,255,.12);--mcc-nav-text-primary:#f8f9fa;--mcc-nav-text-secondary:#adb5bd;--mcc-nav-text-muted:#6c757d;--mcc-nav-hover:#4dabf7;--mcc-nav-active:#339af0;--mcc-nav-button-bg:#339af0;--mcc-nav-button-text:#fff;--mcc-nav-mobile-bg:#212529;--mcc-nav-mobile-border:#495057}}
+  .mcc-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--mcc-nav-bg);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--mcc-nav-border);transition:transform .3s ease}
+  .mcc-nav--hidden{transform:translateY(-100%)}
+  .mcc-nav__inner{max-width:1140px;margin:0 auto;padding:0 1rem;display:flex;align-items:center;justify-content:space-between;min-height:4rem}
+  .mcc-nav__logo{font:700 1.5rem/1 ui-sans-serif,system-ui;color:var(--mcc-nav-text-primary);text-decoration:none;margin:0}
+  .mcc-nav__logo:hover{color:var(--mcc-nav-hover)}
+  .mcc-nav__menu{display:flex;gap:2rem;margin:0;padding:0;list-style:none}
+  .mcc-nav__menu li{position:relative}
+  .mcc-nav__menu a{color:var(--mcc-nav-text-primary);text-decoration:none;font:500 .875rem/1 ui-sans-serif,system-ui;padding:.5rem 0;display:block;transition:color .2s}
+  .mcc-nav__menu a:hover{color:var(--mcc-nav-hover)}
+  .mcc-nav__menu a.active{color:var(--mcc-nav-active);font-weight:600}
+  .mcc-nav__menu .mcc-nav__dropdown{position:absolute;top:100%;left:0;background:var(--mcc-nav-bg);border:1px solid var(--mcc-nav-border);border-radius:.375rem;padding:.5rem 0;min-width:200px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:all .2s ease;z-index:1001}
+  .mcc-nav__menu .mcc-nav__dropdown.show{opacity:1;visibility:visible;transform:translateY(0)}
+  .mcc-nav__menu .mcc-nav__dropdown a{padding:.75rem 1rem;font-weight:400}
+  .mcc-nav__menu .mcc-nav__dropdown a:hover{background:var(--mcc-nav-mobile-bg)}
+  .mcc-nav__cta{background:var(--mcc-nav-button-bg);color:var(--mcc-nav-button-text);text-decoration:none;padding:.75rem 1.5rem;border-radius:.375rem;font:600 .875rem/1 ui-sans-serif,system-ui;transition:all .2s}
+  .mcc-nav__cta:hover{background:var(--mcc-nav-active);transform:translateY(-1px)}
+  .mcc-nav__mobile-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:.5rem}
+  .mcc-nav__mobile-toggle span{width:24px;height:2px;background:var(--mcc-nav-text-primary);transition:all .3s}
+  .mcc-nav__mobile-toggle.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+  .mcc-nav__mobile-toggle.active span:nth-child(2){opacity:0}
+  .mcc-nav__mobile-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+  @media(max-width:768px){.mcc-nav__menu{display:none;position:fixed;top:4rem;left:0;right:0;background:var(--mcc-nav-mobile-bg);border-top:1px solid var(--mcc-nav-mobile-border);padding:1rem;flex-direction:column;gap:0}.mcc-nav__menu.show{display:flex}.mcc-nav__menu li{border-bottom:1px solid var(--mcc-nav-mobile-border)}.mcc-nav__menu a{padding:1rem;font-size:1rem}.mcc-nav__mobile-toggle{display:flex}.mcc-nav__dropdown{position:static;opacity:1;visibility:visible;transform:none;border:none;padding:0;background:transparent}.mcc-nav__dropdown a{padding:.5rem 1rem 1rem 2rem}}
+
+  /* Buttons + forms (production extract) */
+  .button-row{display:flex;gap:12px;flex-wrap:wrap}
+  /* Ensure inline SVG icons inherit button text color and size */
+  .button-row svg{width:18px;height:18px;flex:0 0 18px;fill:currentColor;display:inline-block;vertical-align:middle}
+  .button-row button svg, .button-row a svg{margin-right:8px}
+  .spotify-support-btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 16px;font-weight:600;background:var(--text);color:var(--surface);border:1px solid rgba(0,0,0,0.06)}
+  :root[data-theme="dark"] .spotify-support-btn{background:var(--surface);color:var(--text);border:1px solid rgba(255,255,255,0.06)}
+  .spotify-support-btn[disabled], .spotify-support-btn:disabled{opacity:0.5;cursor:not-allowed}
+  .download-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;background:var(--text);color:var(--surface);text-decoration:none;font-weight:600}
+  /* subtle interactive transitions */
+  .spotify-support-btn, .download-btn, .mcc-nav__cta, .play-button, .mcc-nav__menu a{
+    transition: transform .14s ease, background-color .18s ease, color .18s ease, opacity .12s ease;
+    will-change: transform, opacity;
+  }
+  .spotify-support-btn:hover, .download-btn:hover, .mcc-nav__cta:hover, .play-button:hover{
+    transform: translateY(-2px);
+  }
+  /* ensure SVG strokes also inherit color */
+  .button-row svg *{fill:currentColor;stroke:currentColor}
+  .mcc-nav svg, .mcc-nav svg *{fill:currentColor;stroke:currentColor}
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .spotify-support-btn, .download-btn, .mcc-nav__cta, .play-button, .mcc-nav__menu a{transition: none;transform:none}
+  }
+
+  /* Portfolio cards (production-like) */
+  .portfolio-test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .portfolio-card{background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:0 18px 36px rgba(15,23,42,0.12)}
+  /* Use aspect-ratio to keep cards consistent across sizes */
+  .portfolio-card img{width:100%;aspect-ratio:16/9;max-height:420px;object-fit:cover;display:block}
+  .portfolio-card-info{padding:18px}
+
+  /* Footer extract */
+  .footer-test{
+    border-radius:18px;
+    background:var(--surface);
+    color:var(--text);
+    padding:24px;
+    border:1px solid var(--elev-1);
+  }
+  .footer-content{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+  .footer-bottom{margin-top:12px;font-size:0.85rem;color:var(--muted)}
+
+  /* Podcast / Episode card neutral styling */
+  .episode-card{background:var(--surface);color:var(--text);padding:22px;border-radius:16px;border:1px solid var(--elev-1);box-shadow:0 8px 20px rgba(2,6,23,0.06)}
+  .episode-card .audio-player{background:transparent;color:inherit}
+  .play-button{width:48px;height:48px;border-radius:999px;border:none;background:var(--text);color:var(--surface);display:inline-flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer}
+  :root[data-theme="dark"] .play-button{background:var(--surface);color:var(--text);border:1px solid rgba(255,255,255,0.04)}
+
+  /* Accessible focus outlines */
+  :is(a,button,input[type="range"],[tabindex]){outline: none}
+  :is(a,button,input[type="range"],[tabindex]):focus-visible{box-shadow:0 0 0 3px var(--focus);border-radius:6px}
+  
+  /* Responsive */
+  @media(max-width:900px){.footer-content{grid-template-columns:1fr 1fr}.portfolio-card img{height:180px}}
+  @media(max-width:640px){body{padding:88px 12px 28px}.playground-nav-demo .mcc-nav__inner{padding:12px}.portfolio-card img{aspect-ratio:4/3;max-height:320px}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="header-row">
+      <div>
+        <h1>CSS Playground v1.3 — Safe editable copies</h1>
+        <p style="margin:6px 0;color:var(--muted)">This version embeds static copies of production components so you can safely tweak them without pulling live files.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <label id="mccThemeLabel" for="mccThemeToggle" style="color:var(--muted)">Theme</label>
+        <button id="mccThemeToggle" aria-pressed="false" aria-labelledby="mccThemeLabel" title="Toggle theme" style="padding:8px 12px;border-radius:999px;border:1px solid rgba(15,23,42,0.06);background:var(--surface);cursor:pointer">
+          <span id="mccThemeIcon">🌙</span>
+          <span class="sr-only">Toggle dark mode</span>
+        </button>
+      </div>
+    </div>
+
+  <!-- Static Navigation (copy from production) -->
+  <!-- BEGIN_COPY:nav -->
+    <section class="playground-card playground-nav-demo" aria-label="Navigation playground">
+      <h2 style="margin-top:0">Navigation (production copy)</h2>
+      <p class="section-note" style="margin-top:4px;color:var(--muted)">Editable copy of the production navigation shell — modify safely here and test interactions.</p>
+
+  <!-- BEGIN LITERAL COPY FROM src/widgets/site-navigation/versions/v1.7.0-performance-optimized.html -->
+
+      <nav class="mcc-nav-widget" data-widget-version="1.7.0">
+        <nav class="mcc-nav" id="mainNav">
+          <div class="mcc-nav__inner">
+            <a href="/" class="mcc-nav__logo">McCal Media</a>
+
+            <ul class="mcc-nav__menu" id="navMenu">
+              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/portfolio">Portfolio</a>
+                <ul class="mcc-nav__dropdown">
+                  <li><a href="/portfolio/concerts">Live Music</a></li>
+                  <li><a href="/portfolio/events">Events</a></li>
+                  <li><a href="/portfolio/journalism">Photojournalism</a></li>
+                  <li><a href="/portfolio/podcast">Café Connect</a></li>
+                </ul>
+              </li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+
+            <a href="/contact" class="mcc-nav__cta">Get In Touch</a>
+
+            <button class="mcc-nav__mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </nav>
+      </nav>
+
+      <script>
+      (function(){
+
+        'use strict';
+
+        const CONFIG = {
+          scrollThreshold: 100,
+          cacheDuration: 24 * 60 * 60 * 1000,
+          throttleDelay: 16
+        };
+
+        const nav = document.getElementById('mainNav');
+        const navMenu = document.getElementById('navMenu');
+        const mobileToggle = document.getElementById('mobileToggle');
+
+        let state = {
+          lastScrollY: 0,
+          isHidden: false,
+          isMobileMenuOpen: false,
+          currentPath: window.location.pathname,
+          cacheKey: 'nav-state-v1.7.0'
+        };
+
+        const throttle = (func, delay) => {
+          let timeoutId;
+          return (...args) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func.apply(null, args), delay);
+          };
+        };
+
+        const handleScroll = throttle(() => {
+          const currentScrollY = window.scrollY;
+
+          if (Math.abs(currentScrollY - state.lastScrollY) < CONFIG.scrollThreshold) return;
+
+          if (currentScrollY > state.lastScrollY && currentScrollY > CONFIG.scrollThreshold) {
+            if (!state.isHidden) {
+              nav.classList.add('mcc-nav--hidden');
+              state.isHidden = true;
+            }
+          } else {
+            if (state.isHidden) {
+              nav.classList.remove('mcc-nav--hidden');
+              state.isHidden = false;
+            }
+          }
+
+          state.lastScrollY = currentScrollY;
+        }, CONFIG.throttleDelay);
+
+        const toggleMobileMenu = () => {
+          state.isMobileMenuOpen = !state.isMobileMenuOpen;
+          navMenu.classList.toggle('show', state.isMobileMenuOpen);
+          mobileToggle.classList.toggle('active', state.isMobileMenuOpen);
+        };
+
+        const setActiveNavItem = () => {
+          const navLinks = navMenu.querySelectorAll('a');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === state.currentPath) {
+              link.classList.add('active');
+            }
+          });
+        };
+
+        const initDropdowns = () => {
+          const dropdownTriggers = navMenu.querySelectorAll('li:has(.mcc-nav__dropdown) > a');
+
+          dropdownTriggers.forEach(trigger => {
+            const dropdown = trigger.nextElementSibling;
+
+            trigger.addEventListener('mouseenter', () => {
+              dropdown.classList.add('show');
+            });
+
+            trigger.addEventListener('mouseleave', () => {
+              setTimeout(() => {
+                if (!dropdown.matches(':hover')) {
+                  dropdown.classList.remove('show');
+                }
+              }, 100);
+            });
+
+            dropdown.addEventListener('mouseenter', () => {
+              dropdown.classList.add('show');
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+              dropdown.classList.remove('show');
+            });
+          });
+        };
+
+        const addStructuredData = () => {
+          const script = document.createElement('script');
+          script.type = 'application/ld+json';
+          script.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SiteNavigationElement",
+            "name": "McCal Media Navigation",
+            "url": window.location.origin,
+            "provider": {
+              "@type": "Organization",
+              "name": "McCal Media",
+              "url": window.location.origin
+            }
+          });
+          document.head.appendChild(script);
+        };
+
+        const loadDeferredFeatures = () => {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+              // no-op in playground
+            });
+          }
+        };
+
+        const init = () => {
+          try {
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            mobileToggle.addEventListener('click', toggleMobileMenu);
+
+            setActiveNavItem();
+            initDropdowns();
+            addStructuredData();
+            loadDeferredFeatures();
+          } catch (error) {
+            console.error('Failed to initialize navigation widget:', error);
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+
+      })();
+      </script>
+      <!-- END LITERAL COPY -->
+
+    <!-- END_COPY:nav -->
+    </section>
+
+  <!-- Buttons pack (editable) -->
+  <!-- BEGIN_COPY:buttons -->
+<div class="button-row">
+        <button type="button" class="spotify-support-btn">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 15c1.5-1 6-1 8 0"></path><path d="M9 11c2-1 6-1 8 0"></path><path d="M10 8c2.5-.5 5.5-.5 8 0"></path></svg>
+          Support the Artists
+        </button>
+        <a class="download-btn" href="#" aria-label="Download PDF">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          Download PDF
+        </a>
+        <span class="version-badge" title="Widget version badge">v1.0.0</span>
+        <button type="button" class="spotify-support-btn" disabled>Disabled State</button>
+      </div>
+      <!-- END_COPY:buttons -->
+
+  <!-- Portfolio cards (editable) -->
+  <!-- BEGIN_COPY:portfolio -->
+    <section class="playground-card" aria-label="Portfolio grid">
+      <h2 style="margin-top:0">Portfolio Cards (editable)</h2>
+      <div class="portfolio-test-grid" style="margin-top:12px">
+        <article class="portfolio-card">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=420&fit=crop" alt="Concert crowd">
+          <div class="portfolio-card-info">
+            <h3 style="margin:0 0 8px">Foxing • Stage AE</h3>
+            <p style="margin:0;color:var(--muted)">June 2025 • Pittsburgh, PA</p>
+          </div>
+        </article>
+        <article class="portfolio-card">
+          <img src="https://images.unsplash.com/photo-1521336575822-6da63fb45455?w=600&h=420&fit=crop" alt="Singer closeup">
+          <div class="portfolio-card-info">
+            <h3 style="margin:0 0 8px">MUNA • Roxian</h3>
+            <p style="margin:0;color:var(--muted)">April 2025 • McKees Rocks, PA</p>
+          </div>
+        </article>
+        <article class="portfolio-card">
+          <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=420&fit=crop" alt="Guitar solo">
+          <div class="portfolio-card-info">
+            <h3 style="margin:0 0 8px">The Maine • Stage AE</h3>
+            <p style="margin:0;color:var(--muted)">March 2025 • Pittsburgh, PA</p>
+          </div>
+        </article>
+      </div>
+  </section>
+  <!-- END_COPY:portfolio -->
+
+    <!-- Podcast snippet (editable) -->
+    <section class="playground-card" aria-label="Podcast card">
+      <h2 style="margin-top:0">Podcast Episode Card</h2>
+  <article class="episode-card">
+        <h3 style="margin:0 0 8px">Ep 9: Rundown BMW, but Sold as a Lambo</h3>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+          <img src="https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png" alt="Caffeinated Connections" style="width:48px;height:48px;border-radius:8px;object-fit:cover">
+          <div style="font-size:0.95rem">
+            <div style="font-weight:600">Caffeinated Connections</div>
+            <div style="color:var(--muted);font-size:0.9rem">Oct 24, 2025</div>
+          </div>
+        </div>
+        <p style="margin:0 0 12px;color:rgba(226,232,240,0.82)">A photojournalist and a commentator unpack fear, ego, and how to keep creating while life gets messy.</p>
+        <div class="audio-player" data-audio="https://media.rss.com/cafeconnectpod/20250424_175529_f8d0bd73cc31a6f6f6b1a2e3aa8b0c14.mp3" style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center">
+          <button class="play-button" aria-label="Play">▶</button>
+          <div style="font-size:0.9rem;color:rgba(226,232,240,0.82)">0:00 / --:--</div>
+          <div style="width:110px"><input type="range" min="0" max="100" value="80" aria-label="Volume"></div>
+        </div>
+      </article>
+    </section>
+
+  <!-- Footer (editable) -->
+  <!-- BEGIN_COPY:footer -->
+    <section class="playground-card" aria-label="Footer & About">
+      <h2 style="margin-top:0">Footer & About (production copy)</h2>
+      <div class="footer-test" style="margin-top:12px">
+        <div class="footer-content">
+          <div>
+            <h3 style="margin:0 0 8px">McCal Media</h3>
+            <p style="margin:0;color:var(--muted)">Visual storytelling for artists, newsrooms, and ambitious brands.</p>
+          </div>
+          <div class="footer-links" style="display:grid;gap:8px">
+            <a href="#" style="color:inherit;text-decoration:none">Work</a>
+            <a href="#" style="color:inherit;text-decoration:none">Pricing</a>
+            <a href="#" style="color:inherit;text-decoration:none">Contact</a>
+          </div>
+          <div class="footer-social" style="display:flex;gap:8px;align-items:center">
+            <a href="#" aria-label="Instagram" style="width:36px;height:36px;border-radius:999px;background:rgba(15,23,42,0.4);display:inline-flex;align-items:center;justify-content:center;color:inherit;text-decoration:none">IG</a>
+            <a href="#" aria-label="Threads" style="width:36px;height:36px;border-radius:999px;background:rgba(15,23,42,0.4);display:inline-flex;align-items:center;justify-content:center;color:inherit;text-decoration:none">Th</a>
+            <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:999px;background:rgba(15,23,42,0.4);display:inline-flex;align-items:center;justify-content:center;color:inherit;text-decoration:none">IN</a>
+          </div>
+        </div>
+        <div class="footer-bottom">© 2025 McCal Media. All rights reserved.</div>
+      </div>
+  </section>
+  <!-- END_COPY:footer -->
+
+    <section style="margin-top:12px;color:var(--muted);font-size:0.95rem">
+      <strong>Notes:</strong> This file is static — it does not fetch production widget files. Use it to safely change markup and CSS. When you're ready, copy changes back into the production widget version files inside <code>src/widgets/*/versions/</code>.
+    </section>
+  </main>
+
+  <script>
+  // Optimized theme toggle: cache elements, avoid unnecessary writes, respect system changes when no explicit user preference
+  (function(){
+    const THEME_KEY = 'mcc-theme';
+    const prefers = window.matchMedia?.('(prefers-color-scheme: dark)');
+
+    function currentSystemIsDark(){ return prefers ? prefers.matches : false; }
+
+    function applyTheme(theme){
+      if (theme) document.documentElement.setAttribute('data-theme', theme);
+      else document.documentElement.removeAttribute('data-theme');
+
+      const isDark = theme ? theme === 'dark' : currentSystemIsDark();
+      if (cached.toggle){
+        cached.toggle.setAttribute('aria-pressed', String(isDark));
+      }
+      if (cached.icon){
+        // show sun when dark (toggle shows opposite action)
+        cached.icon.textContent = isDark ? '☀️' : '🌙';
+      }
+    }
+
+    function savePreference(theme){
+      if (theme === null){
+        localStorage.removeItem(THEME_KEY);
+        return;
+      }
+      const prev = localStorage.getItem(THEME_KEY);
+      if (prev === theme) return; // avoid unnecessary writes
+      localStorage.setItem(THEME_KEY, theme);
+    }
+
+    function getSavedPreference(){
+      const s = localStorage.getItem(THEME_KEY);
+      return (s === 'dark' || s === 'light') ? s : null;
+    }
+
+    // Cached DOM refs
+    const cached = { toggle: null, icon: null };
+
+    function initTheme(){
+      // URL param overrides (helpful for CI/visual tests)
+      try{
+        const urlTheme = new URLSearchParams(location.search).get('theme');
+        if (urlTheme === 'dark' || urlTheme === 'light'){
+          savePreference(urlTheme);
+          applyTheme(urlTheme);
+          return;
+        }
+      }catch(e){}
+
+      const saved = getSavedPreference();
+      if (saved) applyTheme(saved);
+      else applyTheme(null); // uses system
+    }
+
+    // React to system changes only when user hasn't set a preference
+    function systemChangeHandler(){
+      if (!getSavedPreference()) applyTheme(null);
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      cached.toggle = document.getElementById('mccThemeToggle');
+      cached.icon = document.getElementById('mccThemeIcon');
+
+      initTheme();
+
+      cached.toggle?.addEventListener('click', ()=>{
+        const explicit = getSavedPreference();
+        const current = explicit || (document.documentElement.getAttribute('data-theme') || (currentSystemIsDark() ? 'dark' : 'light'));
+        const next = current === 'dark' ? 'light' : 'dark';
+        savePreference(next);
+        applyTheme(next);
+      });
+
+      // listen for system changes and update when no explicit preference
+      try{ prefers?.addEventListener?.('change', systemChangeHandler); }catch(e){ /* old browsers */ }
+    });
+  })();
+  </script>
+
+</body>
+</html>
