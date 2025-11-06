@@ -59,7 +59,7 @@
     "ci:archive-duplicates": "node scripts/utils/find-duplicate-scripts.js --archive",
     "ci:smoke-test": "node scripts/utils/smoke-test.js",
     "test:playwright": "npx playwright test tests/playwright --reporter=list",
-    "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
+    "lint:scripts": "npx eslint scripts/**/*.js --max-warnings=50",
     "images:optimize": "node scripts/optimize-images.js",
     "seo:audit": "node scripts/utils/seo-audit.js",
     "welcome": "node scripts/welcome.js"

@@ -595,8 +595,8 @@ app.get('/api/admin/server/info', requireAuth, async (req, res) => {
     
     // Get local IP addresses
     const localIPs = [];
-    Object.keys(networkInterfaces).forEach(interface => {
-      networkInterfaces[interface].forEach(address => {
+    Object.keys(networkInterfaces).forEach(iface => {
+      networkInterfaces[iface].forEach(address => {
         if (address.family === 'IPv4' && !address.internal) {
           localIPs.push(address.address);
         }
