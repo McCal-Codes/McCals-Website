@@ -74,15 +74,15 @@ Critical repository events, security incidents, and recovery steps are documente
 - **About Section Widgets** (`src/widgets/about/`) - Complete about pages and client carousels
   - Complete About Page - Bio, photo, reviews, and integrated client carousel
   - Client Carousel - Standalone client logo showcase
+- **Blog Feed** (`src/widgets/blog-feed/`) - Google Docs blog integration with live updates *(v2.0.0 production ready)*
 - **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays *(v2.0.0 with performance optimizations)*
-- **Hero Slideshow** (`src/widgets/hero-slideshow/`) - Homepage hero sections
-- **Site Footer** (`src/widgets/site-footer/`) - Glass design footer with social links and newsletter
+- **Hero Slideshow** (`src/widgets/site/hero-slideshow/`) - Homepage hero sections
+- **Site Footer** (`src/widgets/site/footer/`) - Glass design footer with social links and newsletter
 - **Hire to Unlock Résumé** (`src/widgets/hire-to-unlock-resume/`) - Interactive résumé with LinkedIn authentication that critiques gatekeeping while collecting genuine hiring leads *(v1.0.0)*
 - **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only)*
 
 ### Work in Progress
 - **Photojournalism Portfolio v5.1** (`src/widgets/photojournalism-portfolio/versions/v5.1-performance-optimized.html`) - Performance optimization pass in development
-- **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration *(in development)*
 - **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays *(in development)*
 
 ### Using Widgets in Squarespace

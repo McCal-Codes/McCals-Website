@@ -3,14 +3,14 @@
 The workspace auto-checker (see `scripts/welcome.js`) now supports:
 
 - **Keyword-based auto-checking**: If a commit message contains a configured keyword (e.g., `Close Button Optimization`), any TODO containing that phrase will be checked off automatically.
-- **File-diff-based auto-checking**: If a changed file matches a configured substring or path (e.g., `src/widgets/site-navigation/`), any TODO mentioning the mapped pattern (e.g., `Navigation Hiding pattern`) will be checked off.
+- **File-diff-based auto-checking**: If a changed file matches a configured substring or path (e.g., `src/widgets/site/navigation/`), any TODO mentioning the mapped pattern (e.g., `Navigation Hiding pattern`) will be checked off.
 
 To add a new auto-check rule, update the `AUTO_CHECK_MAP` array in `scripts/welcome.js`:
 
 ```js
 // Example:
 { keyword: 'Close Button Optimization', todoMatch: 'Close Button Optimization' },
-{ file: 'src/widgets/site-navigation/', todoMatch: 'Navigation Hiding pattern' },
+{ file: 'src/widgets/site/navigation/', todoMatch: 'Navigation Hiding pattern' },
 ```
 
 **Pinning the Welcome File:**
@@ -582,7 +582,7 @@ See `src/widgets/photojournalism-portfolio/versions/v4.8-event-cards.html` for:
 - Performance optimization patterns
 
 ### Navigation Widget Template  
-See `src/widgets/site-navigation/versions/v1.6.3.header-injection.html` for:
+See `src/widgets/site/navigation/versions/v1.6.3.header-injection.html` for:
 - Glassmorphism styling
 - Active state management
 - Mobile-responsive patterns

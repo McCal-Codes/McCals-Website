@@ -1,34 +1,61 @@
 {
-  "generatedAt": "2025-11-05T20:40:54.333Z",
+  "generatedAt": "2025-11-05T22:00:08.710Z",
   "count": 20,
   "widgets": [
     {
-      "name": "_admin",
-      "path": "src/widgets/_admin",
-      "description": "",
-      "status": "production",
-      "versions": []
-    },
-    {
       "name": "about",
-      "path": "src/widgets/about",
+      "path": "src/widgets/content/about",
       "description": "About Section Widgets",
       "status": "production",
-      "versions": []
+      "versions": [],
+      "group": "content"
     },
     {
-      "name": "blog-feed",
-      "path": "src/widgets/blog-feed",
-      "description": "Blog Feed Widget",
-      "status": "blog",
+      "name": "hire-to-unlock-resume",
+      "path": "src/widgets/content/hire-to-unlock-resume",
+      "description": "Hire to Unlock Résumé Widget v1.0.0",
+      "status": "production",
       "versions": [
-        "versions/v1-google-docs.html",
-        "versions/v1-google-sheets.html"
-      ]
+        "versions/v1.0.0-hire-to-unlock-resume.html"
+      ],
+      "group": "content"
+    },
+    {
+      "name": "podcast-feed",
+      "path": "src/widgets/content/podcast-feed",
+      "description": "Podcast Feed Widget",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.html",
+        "versions/v1.1.html",
+        "versions/v1.2.html",
+        "versions/v1.3.html",
+        "versions/v1.4.html",
+        "versions/v1.5.html",
+        "versions/v1.6.html",
+        "versions/v1.7-debug.html",
+        "versions/v1.7.html",
+        "versions/v1.8.html",
+        "versions/v1.9.5.html",
+        "versions/v1.9.html",
+        "versions/v2.0-performance-optimized.html",
+        "versions/v2.0.0.html"
+      ],
+      "group": "content"
+    },
+    {
+      "name": "policies-legal",
+      "path": "src/widgets/content/policies-legal",
+      "description": "Policies & Legal Widget",
+      "status": "production",
+      "versions": [
+        "versions/v1.0.0-policies-legal-squarespace.html"
+      ],
+      "group": "content"
     },
     {
       "name": "concert-portfolio",
-      "path": "src/widgets/concert-portfolio",
+      "path": "src/widgets/portfolios/concert-portfolio",
       "description": "Concert Portfolio Widget",
       "status": "work",
       "versions": [
@@ -52,25 +79,12 @@
         "versions/v4.5.html",
         "versions/v4.6.html",
         "versions/v4.7.html"
-      ]
-    },
-    {
-      "name": "css-playground",
-      "path": "src/widgets/css-playground",
-      "description": "CSS Playground Widget",
-      "status": "production",
-      "versions": [
-        "versions/README.md",
-        "versions/v1.0.html",
-        "versions/v1.1.html",
-        "versions/v1.2.html",
-        "versions/v1.3.html",
-        "versions/v1.3.html.bak.1762369952590"
-      ]
+      ],
+      "group": "portfolios"
     },
     {
       "name": "event-portfolio",
-      "path": "src/widgets/event-portfolio",
+      "path": "src/widgets/portfolios/event-portfolio",
       "description": "Event Portfolio Widget (v2.6.2)",
       "status": "production",
       "versions": [
@@ -85,11 +99,12 @@
         "versions/v2.6.0-event-portfolio.html",
         "versions/v2.6.1-event-portfolio.html",
         "versions/v2.6.2-event-portfolio.html"
-      ]
+      ],
+      "group": "portfolios"
     },
     {
       "name": "featured-portfolio",
-      "path": "src/widgets/featured-portfolio",
+      "path": "src/widgets/portfolios/featured-portfolio",
       "description": "",
       "status": "production",
       "versions": [
@@ -99,31 +114,12 @@
         "versions/v1.3.html",
         "versions/v1.4.html",
         "versions/v1.5-working.html"
-      ]
-    },
-    {
-      "name": "hero-slideshow",
-      "path": "src/widgets/hero-slideshow",
-      "description": "",
-      "status": "production",
-      "versions": [
-        "versions/hero slideshow 1.5",
-        "versions/v1.1.html",
-        "versions/v1.2.html"
-      ]
-    },
-    {
-      "name": "hire-to-unlock-resume",
-      "path": "src/widgets/hire-to-unlock-resume",
-      "description": "Hire to Unlock Résumé Widget v1.0.0",
-      "status": "production",
-      "versions": [
-        "versions/v1.0.0-hire-to-unlock-resume.html"
-      ]
+      ],
+      "group": "portfolios"
     },
     {
       "name": "nature-portfolio",
-      "path": "src/widgets/nature-portfolio",
+      "path": "src/widgets/portfolios/nature-portfolio",
       "description": "Nature Portfolio Widget (v1.8)",
       "status": "nature",
       "versions": [
@@ -132,20 +128,12 @@
         "versions/v1.5-performance-optimized.html",
         "versions/v1.7-enhanced-display.html",
         "versions/v1.8-performance-optimized.html"
-      ]
-    },
-    {
-      "name": "performance-dashboard",
-      "path": "src/widgets/performance-dashboard",
-      "description": "Performance Dashboard Widget",
-      "status": "production",
-      "versions": [
-        "index.html"
-      ]
+      ],
+      "group": "portfolios"
     },
     {
       "name": "photojournalism-portfolio",
-      "path": "src/widgets/photojournalism-portfolio",
+      "path": "src/widgets/portfolios/photojournalism-portfolio",
       "description": "Photojournalism Portfolio Widget",
       "status": "photojournalism",
       "versions": [
@@ -163,67 +151,22 @@
         "versions/v4.9-event-cards.html",
         "versions/v5.1-performance-optimized.html",
         "versions/v5.2-performance-optimized.html"
-      ]
-    },
-    {
-      "name": "podcast-feed",
-      "path": "src/widgets/podcast-feed",
-      "description": "Podcast Feed Widget",
-      "status": "production",
-      "versions": [
-        "versions/v1.0.html",
-        "versions/v1.1.html",
-        "versions/v1.2.html",
-        "versions/v1.3.html",
-        "versions/v1.4.html",
-        "versions/v1.5.html",
-        "versions/v1.6.html",
-        "versions/v1.7-debug.html",
-        "versions/v1.7.html",
-        "versions/v1.8.html",
-        "versions/v1.9.5.html",
-        "versions/v1.9.html",
-        "versions/v2.0-performance-optimized.html",
-        "versions/v2.0.0.html"
-      ]
-    },
-    {
-      "name": "policies-legal",
-      "path": "src/widgets/policies-legal",
-      "description": "Policies & Legal Widget",
-      "status": "production",
-      "versions": [
-        "versions/v1.0.0-policies-legal-squarespace.html"
-      ]
+      ],
+      "group": "portfolios"
     },
     {
       "name": "portrait-portfolio",
-      "path": "src/widgets/portrait-portfolio",
+      "path": "src/widgets/portfolios/portrait-portfolio",
       "description": "Portrait Portfolio Widget",
       "status": "portrait",
       "versions": [
         "versions/v1.0.html"
-      ]
+      ],
+      "group": "portfolios"
     },
     {
-      "name": "seo-performance-template",
-      "path": "src/widgets/seo-performance-template",
-      "description": "SEO/Performance Widget Template",
-      "status": "production",
-      "versions": [
-        "index.html"
-      ]
-    },
-    {
-      "name": "shared",
-      "path": "src/widgets/shared",
-      "description": "",
-      "status": "production",
-      "versions": []
-    },
-    {
-      "name": "site-footer",
-      "path": "src/widgets/site-footer",
+      "name": "footer",
+      "path": "src/widgets/site/footer",
       "description": "Site Footer Widget",
       "status": "production",
       "versions": [
@@ -231,11 +174,24 @@
         "versions/v1.1 Fixed Links.html",
         "versions/v1.2.0.footer-widget.html",
         "versions/v1.3.0-performance-optimized.html"
-      ]
+      ],
+      "group": "site"
     },
     {
-      "name": "site-navigation",
-      "path": "src/widgets/site-navigation",
+      "name": "hero-slideshow",
+      "path": "src/widgets/site/hero-slideshow",
+      "description": "",
+      "status": "production",
+      "versions": [
+        "versions/hero slideshow 1.5",
+        "versions/v1.1.html",
+        "versions/v1.2.html"
+      ],
+      "group": "site"
+    },
+    {
+      "name": "navigation",
+      "path": "src/widgets/site/navigation",
       "description": "Site Navigation Widget",
       "status": "production",
       "versions": [
@@ -248,16 +204,76 @@
         "versions/v1.6.header-injection.html",
         "versions/v1.6.html",
         "versions/v1.7.0-performance-optimized.html"
-      ]
+      ],
+      "group": "site"
+    },
+    {
+      "name": "css-playground",
+      "path": "src/widgets/tools/css-playground",
+      "description": "CSS Playground Widget",
+      "status": "production",
+      "versions": [
+        "versions/README.md",
+        "versions/v1.0.html",
+        "versions/v1.1.html",
+        "versions/v1.2.html",
+        "versions/v1.3.html"
+      ],
+      "group": "tools"
+    },
+    {
+      "name": "performance-dashboard",
+      "path": "src/widgets/tools/performance-dashboard",
+      "description": "Performance Dashboard Widget",
+      "status": "production",
+      "versions": [
+        "index.html"
+      ],
+      "group": "tools"
+    },
+    {
+      "name": "seo-performance-template",
+      "path": "src/widgets/tools/seo-performance-template",
+      "description": "SEO/Performance Widget Template",
+      "status": "production",
+      "versions": [
+        "index.html"
+      ],
+      "group": "tools"
     },
     {
       "name": "widget-enhancement-template",
-      "path": "src/widgets/widget-enhancement-template",
+      "path": "src/widgets/tools/widget-enhancement-template",
       "description": "Widget Enhancement Template",
       "status": "production",
       "versions": [
         "versions/v1.0.html"
+      ],
+      "group": "tools"
+    },
+    {
+      "name": "_admin",
+      "path": "src/widgets/_admin",
+      "description": "",
+      "status": "production",
+      "versions": []
+    },
+    {
+      "name": "blog-feed",
+      "path": "src/widgets/blog-feed",
+      "description": "Blog Feed Widget",
+      "status": "blog",
+      "versions": [
+        "versions/v1-google-docs.html",
+        "versions/v1-google-sheets.html"
       ]
+    },
+    {
+      "name": "shared",
+      "path": "src/widgets/shared",
+      "description": "",
+      "status": "production",
+      "versions": []
     }
   ]
 }

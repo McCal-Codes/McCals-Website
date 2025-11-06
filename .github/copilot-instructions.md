@@ -158,18 +158,19 @@ Repository audit and optimization tools
 
 Good starting references
 
-- `scripts/enhanced-manifest-generator.js`  manifest schema and date logic.
-- `scripts/watch-auto-manifest.js`  recommended dev loop.
-- `src/widgets/**/README.md`  embedding instructions and constraints.
-- `src/site/app.js`  example data flow from manifests to UI.
+- `updates/welcome.md` ⭐ **PROJECT STATUS**: Current priorities, recent changes, and development focus areas.
+- `scripts/enhanced-manifest-generator.js` — manifest schema and date logic.
+- `scripts/watch-auto-manifest.js` — recommended dev loop.
+- `src/widgets/**/README.md` — embedding instructions and constraints.
+- `src/site/app.js` — example data flow from manifests to UI.
 - `docs/standards/widget-reference.md` ⭐ **START HERE**: quick reference for widget development patterns.
-- `docs/standards/widget-standards.md`  comprehensive widget standards and architecture guide.
-- `docs/standards/widget-standards.md` and `docs/standards/widget-development.md`  proven improvement patterns and systematic methodology for widget optimization.
-- `docs/standards/widget-development.md`  comprehensive guide for applying enhancement patterns systematically.
+- `docs/standards/widget-standards.md` — comprehensive widget standards and architecture guide.
+- `docs/standards/widget-standards.md` and `docs/standards/widget-development.md` — proven improvement patterns and systematic methodology for widget optimization.
+- `docs/standards/widget-development.md` — comprehensive guide for applying enhancement patterns systematically.
 - `docs/standards/performance-standards.md` ⭐ **PERFORMANCE REFERENCE**: Lighthouse optimization standards using Concert Portfolio v4.6 as case study.
-- `docs/standards/image-seo-standards.md`  comprehensive guide for optimizing portfolio images for search engines and accessibility.
+- `docs/standards/image-seo-standards.md` — comprehensive guide for optimizing portfolio images for search engines and accessibility.
 - `docs/standards/seo-performance-guide.md` ⭐ **SEO/PERFORMANCE GUIDE**: Comprehensive best practices for SEO and performance optimization.
-- `docs/audit/README.md`  repository audit workflow and health monitoring procedures.
+- `docs/audit/README.md` — repository audit workflow and health monitoring procedures.
 
 Change management
 

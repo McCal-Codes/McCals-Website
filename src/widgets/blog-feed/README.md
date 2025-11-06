@@ -1,6 +1,51 @@
 # Blog Feed Widget
 
-A lightweight blog feed widget you can update live via **Google Sheets** or **Google Docs** — supports images and auto captions. No API keys required.
+**Status:** Production Ready ✅  
+**Version:** 2.0.0  
+
+Self-contained blog integration widget supporting Google Docs as content source. Features inline CSS/JS, SEO optimization, structured data, and responsive layouts. Ready for Squarespace Code Block deployment.
+
+## Features
+
+- ✅ **Self-Contained**: All CSS/JS inline - perfect for Squarespace Code Blocks
+- ✅ **Live Updates**: Fetches from published Google Docs (no API keys needed)
+- ✅ **SEO Optimized**: Structured data (Schema.org BlogPosting)
+- ✅ **Responsive Design**: Mobile-first card-based layout
+- ✅ **Version Badge**: Built-in version indicator
+- ✅ **Accessible**: ARIA labels, semantic HTML, keyboard navigation
+- ✅ **Zero Dependencies**: Works standalone in any environment
+
+## Quick Start (v2.0 - Production)
+
+### For Squarespace Code Blocks:
+
+1. **Prepare Your Google Doc:**
+   - Create a Google Doc with your blog posts
+   - Use headings (H1, H2, or H3) for post titles
+   - Write content under each heading
+   - Add images directly in the document
+   - File → Share → Publish to web
+
+2. **Get Document ID:**
+   - Copy the ID from your Google Doc URL
+   - Format: `https://docs.google.com/document/d/YOUR_DOC_ID/edit`
+
+3. **Deploy to Squarespace:**
+   - Open `versions/v2.0-google-docs-squarespace.html`
+   - Find `data-doc-id="YOUR_DOC_ID"` (around line 70)
+   - Replace `YOUR_DOC_ID` with your actual document ID
+   - Copy entire HTML file
+   - Paste into Squarespace Code Block
+   - Save and publish
+
+4. **Customize (Optional):**
+   - `data-max-posts="10"` - Limit number of posts
+   - `data-show-dates="true"` - Show/hide dates
+   - `data-show-images="true"` - Show/hide images
+
+---
+
+## Legacy Versions (v1.0 - Requires External Scripts)
 
 ## Why Google Sheets or Docs?
 - **Easy to edit** from anywhere

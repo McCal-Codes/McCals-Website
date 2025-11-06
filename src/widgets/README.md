@@ -2,28 +2,65 @@
 
 This folder contains self-contained widgets intended to be embedded into Squarespace Code Blocks or used by the local demo site in `src/site/`.
 
-Goal: provide simple, discoverable documentation and a machine-readable manifest so we can organize widgets without creating more nested, tight folders.
+## Organization
 
-Conventions
-- Keep each widget in a single directory under `src/widgets/`.
-- Use `versions/` inside a widget directory for versioned HTML files if needed (do not create more nested folders unless strictly necessary).
-- Use `STATUS.md` in a widget folder to mark work-in-progress state if desired. If a widget is archived, move it to `src/widgets/_archived/`.
+Widgets are grouped by function:
+- **`portfolios/`** - Portfolio showcase widgets (concert, events, journalism, portrait, featured, nature)
+- **`site/`** - Site infrastructure widgets (navigation, footer, hero-slideshow)
+- **`content/`** - Content-focused widgets (about, podcast-feed, policies-legal, hire-to-unlock-resume)
+- **`tools/`** - Development tools and templates (css-playground, performance-dashboard, seo-performance-template, widget-enhancement-template)
+- **`components/`** - Reusable UI components (empty for now)
+- **Top-level folders** - Support folders (docs, shared, templates) and work-in-progress widgets (blog-feed)
+- **`_archived/`** - Deprecated widgets no longer in active use
+- **`_admin/`** - Admin-only tools (not for production)
 
-Manifest
-- The repository now contains (or can generate) `src/widgets/widgets-manifest.json`, a consolidated manifest of widgets with basic metadata (name, path, description, status, versions). This file is intended for quick discovery in the dev site and for documentation.
-- To regenerate the manifest locally, run:
+## Manifest
+
+The repository contains `src/widgets/widgets-manifest.json`, a consolidated manifest of widgets with basic metadata (name, path, description, status, versions, group). This file is auto-generated and provides:
+- Machine-readable widget discovery
+- Group categorization
+- Version tracking
+- Status indicators
+
+To regenerate the manifest locally:
 
 ```sh
 # If your project is ESM (package.json has "type": "module") run the .cjs script:
 node scripts/utils/generate-widgets-manifest.cjs
 ```
 
-Why this approach
-- Minimal structural change: no tight nit folders added.
-- Machine-readable manifest enables filtered lists, demo pages, and automated checks without changing how widgets are stored.
+## Conventions
+
+- Keep each widget in a single directory.
+- Use `versions/` inside a widget directory for versioned HTML files if needed.
+- Use `STATUS.md` in a widget folder to mark work-in-progress state.
+- If a widget is archived, move it to `src/widgets/_archived/`.
+- Portfolio widgets stay organized under `portfolios/`.
+- Site infrastructure widgets (nav, footer, hero) stay under `site/`.
+
+## Why this approach
+
+- Minimal structural change: no overly nested folders.
+- Machine-readable manifest enables filtered lists, demo pages, and automated checks.
+- Clear grouping makes discovery easier without breaking existing embed paths.
 - README + generator script keep organization discoverable and maintainable.
 
-If you'd like, I can also: add a simple dev route to the demo site that reads `widgets-manifest.json` and shows available widgets, or add an npm script to run the generator automatically.
+## Recent changes (2025-11-05)
+
+Phase 1 completed:
+- Created group folders (`portfolios/`, `site/`, `components/`, `content/`, `tools/`)
+- Moved site widgets: `site-navigation` → `site/navigation`, `site-footer` → `site/footer`, `hero-slideshow` → `site/hero-slideshow`
+- Updated manifest generator to scan group folders recursively and add `group` field
+- Updated all documentation references to new paths
+- Git history preserved via `git mv`
+
+Phase 2 completed:
+- Moved content widgets: `about`, `podcast-feed`, `policies-legal`, `hire-to-unlock-resume` → `content/`
+- Moved dev/template widgets: `css-playground`, `performance-dashboard`, `seo-performance-template`, `widget-enhancement-template` → `tools/`
+- Updated manifest generator to include `content` and `tools` groups
+- Remaining ungrouped: `_admin` (admin tools), `blog-feed` (WIP), support folders (`docs`, `shared`, `templates`)
+
+Portfolio widgets were already organized under `portfolios/` before this session.
 # Squarespace Widgets
 
 This directory contains production-ready and work-in-progress widgets for the McCal Media Squarespace site.

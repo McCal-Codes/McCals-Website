@@ -49,7 +49,7 @@ Migration tips
 
 Where to look next
 - Playground: `src/widgets/css-playground/versions/v1.3.html`
-- Production nav example: `src/widgets/site-navigation/versions/v1.7.0-performance-optimized.html`
+- Production nav example: `src/widgets/site/navigation/versions/v1.7.0-performance-optimized.html`
 - Theme-aware tests: `tests/playwright/nav-theme.spec.js`
 
 If you want, I can add an example widget snippet showing how to listen for `postMessage` theme changes and apply them safely (small 40–60 line example) — say the word and I'll add it to this file.

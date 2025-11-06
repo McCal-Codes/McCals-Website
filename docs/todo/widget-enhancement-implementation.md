@@ -42,14 +42,14 @@ Follow portfolio -> podcast -> navigation -> footer priority.
 - [ ] Introduce version indicator pattern if missing and cross-check structured data output
 - [ ] Update widget README/changelog after functional improvements
 
-## Priority 3 - Site Navigation v1.7.0 (`src/widgets/site-navigation/versions/v1.7.0-performance-optimized.html`)
+## Priority 3 - Site Navigation v1.7.0 (`src/widgets/site/navigation/versions/v1.7.0-performance-optimized.html`)
 - [ ] Review glassmorphism variables vs. standards (consistent color tokens, hover states).
 - [ ] Confirm responsive breakpoints and mobile drawer align with navigation enhancement guidance (keyboard support, focus states).
 - [ ] Add/version indicator badge within nav heading container per standards doc.
 - [ ] Evaluate deferred analytics/debug loading for performance compliance.
 - [ ] Prepare documentation updates reflecting navigation refinements.
 
-## Priority 4 - Site Footer v1.3.0 (`src/widgets/site-footer/versions/v1.3.0-performance-optimized.html`)
+## Priority 4 - Site Footer v1.3.0 (`src/widgets/site/footer/versions/v1.3.0-performance-optimized.html`)
 - [ ] Normalize typography, button, and link spacing with current standards.
 - [ ] Ensure newsletter form accessibility (labels, focus styles) and safe-area spacing for any fixed elements.
 - [ ] Add version indicator + changelog hook in footer heading per standards.

@@ -10,7 +10,7 @@
  *
  * Example:
  *   'Close Button Optimization' keyword in commit message will check off any TODO containing that phrase.
- *   'src/widgets/site-navigation/' in changed files will check off TODOs mentioning 'Navigation Hiding pattern'.
+ *   'src/widgets/site/navigation/' in changed files will check off TODOs mentioning 'Navigation Hiding pattern'.
  */
 const fs = require('fs');
 const cp = require('child_process');
@@ -24,10 +24,10 @@ const AUTO_CHECK_MAP = [
   { keyword: 'Minimal Status Indicators', todoMatch: 'Minimal Status Indicators' },
   { keyword: 'Version Indicator', todoMatch: 'Version Indicator' },
   // File-diff-based
-  { file: 'src/widgets/site-navigation/', todoMatch: 'Navigation Hiding pattern' },
-  { file: 'src/widgets/photojournalism-portfolio/', todoMatch: 'Close Button Optimization' },
-  { file: 'src/widgets/podcast-feed/', todoMatch: 'version indicator pattern' },
-  { file: 'src/widgets/site-footer/', todoMatch: 'version indicator' },
+    { file: 'src/widgets/site/navigation/', todoMatch: 'Navigation Hiding pattern' },
+  { file: 'src/widgets/portfolios/concert-portfolio/', todoMatch: 'Concert Portfolio' },
+  { file: 'src/widgets/portfolios/photojournalism-portfolio/', todoMatch: 'Photojournalism Portfolio' },
+  { file: 'src/widgets/site/footer/', todoMatch: 'version indicator' },
   // Add more as needed
 ];
 

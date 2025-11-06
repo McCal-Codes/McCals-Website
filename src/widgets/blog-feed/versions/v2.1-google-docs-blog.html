@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Blog Feed Widget v2.1.0 - Professional Blog Layout with SEO Optimization
+  
+  Inspired by We and the Color - Full-featured blog with:
+  - Masonry grid layout
+  - Full post view with sources
+  - Tag filtering
+  - Related posts
+  - Professional typography
+  
+  Google Doc Format:
+  1. H1: Document title (will be skipped)
+  2. H2: Article title
+  3. H4 or paragraph: "By Myself ... Date" (e.g., "10 January 2025")
+  4. Paragraphs: Article content (multiple paragraphs work!)
+  5. Add "Source: [link]" or "Sources: [link]" paragraphs for references
+  6. Use #hashtags in content or article will auto-tag by keywords
+  7. Add images anywhere - first becomes hero image
+  
+  Example Google Doc Structure:
+  ────────────────────────────────
+  H1: My Blog (skipped)
+  
+  H2: The Future of AI Photography
+  H4: 5 November 2025
+  
+  Paragraph 1: Introduction text here...
+  Paragraph 2: More detailed discussion...
+  Paragraph 3: Analysis and insights...
+  Paragraph 4: Conclusion and thoughts...
+  
+  Paragraph: Source: https://example.com (auto-detected)
+  
+  H2: Another Article Title
+  H4: 1 November 2025
+  (etc...)
+  ────────────────────────────────
+  
+  McCal Media - https://mcc-cal.com
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal blog by photographer Caleb McCartney covering politics, social commentary, and photojournalism insights.">
+  <meta name="author" content="Caleb McCartney">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="McCal Media">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@mccalmedia">
+  
+  <title>Blog - Caleb McCartney | McCal Media</title>
+  
+  <!-- Preconnect to external domains for performance -->
+  <link rel="preconnect" href="https://docs.google.com">
+  <link rel="dns-prefetch" href="https://docs.google.com">
+</head>
+<body>
+
+<!-- Widget Container -->
+<div class="blog-widget">
+  <div class="blog-header">
+    <div class="blog-title-group">
+      <h1 class="blog-heading">Latest Articles</h1>
+      <div class="blog-subtitle-row">
+        <p class="blog-description">Articles on politics, photography, and the human condition</p>
+        <span class="version-badge" title="Blog Widget v2.1.0">v2.1</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tag Filter Bar -->
+  <div class="blog-filters" id="blogFilters" style="display: none;">
+    <span class="filter-label">Filter:</span>
+    <button class="tag-filter active" data-tag="all">All Posts</button>
+  </div>
+  
+  <!-- Blog Grid -->
+  <div id="blogFeed" 
+       data-blog-feed-docs 
+       data-provider="docs"
+       data-doc-id="2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD" 
+       data-max-posts="10"
+       data-image-path="../../../images/blog/">
+    <div class="blog-loading">
+      <div class="spinner"></div>
+      Loading articles...
+    </div>
+  </div>
+</div>
+
+<!-- Full Post Modal -->
+<div class="blog-modal" id="blogModal" role="dialog" aria-modal="true" aria-labelledby="postTitle">
+  <div class="modal-overlay" onclick="BlogFeed.closeModal()"></div>
+  <div class="modal-content">
+    <button class="modal-close" onclick="BlogFeed.closeModal()" aria-label="Close article">&times;</button>
+    <article class="full-post" id="fullPost" itemscope itemtype="https://schema.org/BlogPosting"></article>
+  </div>
+</div>
+
+<style>
+/* === Blog Widget v2.1.0 === */
+/* Professional blog layout inspired by We and the Color */
+
+:root {
+  --fg: #1a1a1a;
+  --fg-light: #666;
+  --bg: #fff;
+  --line: #e5e5e5;
+  --accent: #0066cc;
+  --card-bg: #fff;
+  --shadow: rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #f5f5f5;
+    --fg-light: #999;
+    --bg: #0a0a0a;
+    --line: #2a2a2a;
+    --accent: #4a9eff;
+    --card-bg: #111;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 80px; /* Space for fixed navigation header */
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.blog-widget {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Header */
+.blog-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.blog-title-group {
+  flex: 1;
+}
+
+.blog-heading {
+  margin: 0 0 8px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.03em;
+}
+
+.blog-description {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.01em;
+}
+
+.version-badge {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 0;
+  border: none;
+  font-weight: 500;
+  cursor: help;
+  transition: color 0.2s;
+}
+
+.version-badge:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Filters */
+.blog-filters {
+  margin: 0 0 50px 0;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-right: 8px;
+}
+
+.tag-filter {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+}
+
+.tag-filter:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.tag-filter.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Loading */
+.blog-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  font-size: 1rem;
+  color: var(--fg-light);
+  gap: 12px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--line);
+  border-top: 2px solid var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Masonry Grid */
+.blog-grid {
+  column-count: 3;
+  column-gap: 30px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.blog-grid.loaded {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .blog-grid {
+    column-count: 2;
+    column-gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .blog-grid {
+    column-count: 1;
+  }
+  
+  .blog-widget {
+    padding: 40px 20px;
+  }
+}
+
+/* Blog Card */
+.blog-card {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  break-inside: avoid;
+  opacity: 0;
+  transform: translateY(20px);
+  backdrop-filter: blur(10px);
+}
+
+.blog-card.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blog-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+/* Card Image */
+.card-image {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  position: relative;
+  border-radius: 12px 12px 0 0;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+/* Card Content */
+.card-content {
+  padding: 28px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.card-tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  padding: 0;
+  border: none;
+  transition: color 0.2s;
+}
+
+.card-tag:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card-title {
+  margin: 0 0 14px 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.02em;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.card-author {
+  font-weight: 500;
+}
+
+.card-date {
+  font-weight: 400;
+}
+
+.card-excerpt {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.6);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-read-more {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.card-read-more:hover {
+  opacity: 0.7;
+}
+
+/* Modal */
+.blog-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.blog-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  margin: 20px;
+  background: rgba(20, 20, 20, 0.98);
+  border-radius: 20px;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-close {
+  position: sticky;
+  top: 20px;
+  right: 20px;
+  float: right;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 24px;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* Full Post */
+.full-post {
+  padding: 60px;
+}
+
+.post-hero {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.post-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.post-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  padding: 6px 14px;
+  border-radius: 16px;
+}
+
+.post-title {
+  margin: 0 0 20px 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--line);
+  font-size: 0.9375rem;
+  color: var(--fg-light);
+}
+
+.post-author {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.post-body {
+  margin-bottom: 48px;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--fg);
+}
+
+.post-body p {
+  margin: 0 0 1.5rem 0;
+}
+
+.post-body h2 {
+  margin: 2.5rem 0 1rem 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.post-body h3 {
+  margin: 2rem 0 0.75rem 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.post-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s;
+}
+
+.post-body a:hover {
+  opacity: 0.7;
+}
+
+.post-body ul,
+.post-body ol {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.post-body li {
+  margin: 0.5rem 0;
+}
+
+.post-body blockquote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.75rem;
+  border-left: 4px solid var(--accent);
+  background: rgba(0, 0, 0, 0.02);
+  font-style: italic;
+  color: var(--fg-light);
+}
+
+/* Sources Section */
+/* Related Posts */
+.related-posts {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.related-title {
+  margin: 0 0 24px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.related-card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.related-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.related-card-title {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.related-card-meta {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Sources Section */
+.sources-section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.sources-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.sources-toggle:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.sources-icon {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.sources-toggle-text {
+  flex: 1;
+}
+
+.sources-heading {
+  margin: 0 0 24px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.source-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.source-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.source-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.source-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.source-text {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  word-break: break-word;
+}
+
+.source-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.source-visit {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.source-visit:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.source-copy {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.source-copy:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.source-copy svg {
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-heading {
+    font-size: 2rem;
+  }
+  
+  .full-post {
+    padding: 40px 24px;
+  }
+  
+  .post-title {
+    font-size: 2rem;
+  }
+  
+  .post-hero {
+    height: 250px;
+  }
+  
+  .post-body {
+    font-size: 1rem;
+  }
+}
+</style>
+
+<script>
+const BlogFeed = {
+  posts: [],
+  
+  async init() {
+    const container = document.getElementById('blogFeed');
+    if (!container) return;
+    
+    const docId = container.dataset.docId;
+    if (!docId) {
+      container.innerHTML = '<div class="blog-loading">No document ID provided</div>';
+      return;
+    }
+    
+    try {
+      const html = await this.fetchGoogleDoc(docId);
+      this.posts = this.parseGoogleDocHTML(html);
+      this.render();
+      this.initializeFilters();
+      this.addStructuredData();
+      this.updateMetaTags();
+      
+      // Check if URL has a post slug and open that post
+      this.checkUrlForPost();
+    } catch (error) {
+      console.error('[Blog Feed] Error:', error);
+      container.innerHTML = `<div class="blog-loading">Failed to load blog posts</div>`;
+    }
+  },
+  
+  checkUrlForPost() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const postSlug = urlParams.get('post');
+    
+    if (postSlug) {
+      const post = this.posts.find(p => this.slugify(p.title) === postSlug);
+      if (post) {
+        console.log('[Blog Feed] Opening post from URL:', post.title);
+        this.openModal(post);
+      }
+    }
+  },
+  
+  async fetchGoogleDoc(docId) {
+    // Add cache-busting timestamp to force fresh content
+    const timestamp = Date.now();
+    const url = docId.startsWith('2PACX-')
+      ? `https://docs.google.com/document/d/e/${docId}/pub?cachebust=${timestamp}`
+      : `https://docs.google.com/document/d/${docId}/pub?cachebust=${timestamp}`;
+    
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.text();
+  },
+  
+  formatParagraphs(html) {
+    // Split long paragraphs into multiple paragraphs after 4-5 sentences
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    const paragraphs = tempDiv.querySelectorAll('p');
+    paragraphs.forEach(p => {
+      const text = p.textContent;
+      
+      // Split by sentences (period, exclamation, question mark followed by space)
+      const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+      
+      if (sentences.length > 5) {
+        // Break into chunks of 4-5 sentences
+        const chunks = [];
+        for (let i = 0; i < sentences.length; i += 5) {
+          chunks.push(sentences.slice(i, i + 5).join(' ').trim());
+        }
+        
+        // Replace the paragraph with multiple paragraphs
+        const fragment = document.createDocumentFragment();
+        chunks.forEach(chunk => {
+          const newP = document.createElement('p');
+          newP.innerHTML = chunk;
+          fragment.appendChild(newP);
+        });
+        
+        p.replaceWith(fragment);
+      }
+    });
+    
+    return tempDiv.innerHTML;
+  },
+  
+  parseGoogleDocHTML(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const posts = [];
+    
+    let currentPost = null;
+    let contentBuffer = [];
+    let skipFirstH1 = true;
+    let expectingDate = false;
+    let inSourcesSection = false;
+    
+    const processContent = () => {
+      if (contentBuffer.length > 0) {
+        // Wrap each paragraph in <p> tags to preserve Google Doc structure
+        const content = contentBuffer.map(html => `<p>${html}</p>`).join('\n').trim();
+        if (currentPost && content) {
+          currentPost.body = content;
+          // Create excerpt from first paragraph
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = content;
+          const text = tempDiv.textContent || '';
+          currentPost.excerpt = text.length > 150 ? text.substring(0, 150) + '...' : text;
+        }
+        contentBuffer = [];
+      }
+    };
+    
+    const walker = document.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT, null, false);
+    
+    let node;
+    while (node = walker.nextNode()) {
+      const tagName = node.tagName.toLowerCase();
+      const text = node.textContent.trim();
+      
+      // Debug: log all elements when in sources section
+      if (inSourcesSection) {
+        console.log('[Blog Feed] 🔍 Element in sources section:', tagName, 'Text:', text.substring(0, 60));
+      }
+      
+      // Skip first H1 (document title)
+      if (tagName === 'h1' && skipFirstH1) {
+        skipFirstH1 = false;
+        continue;
+      }
+      
+      // H2 = New post (skip if empty)
+      if (tagName === 'h2' && text.trim()) {
+        if (currentPost) {
+          processContent();
+          if (currentPost.title) {
+            console.log('[Blog Feed] ===== Finalizing post:', currentPost.title, '=====');
+            console.log('[Blog Feed] Sources count:', currentPost.sources.length);
+            console.log('[Blog Feed] Sources:', currentPost.sources);
+            posts.push(currentPost);
+          }
+        }
+        
+        inSourcesSection = false; // Reset sources flag for new post
+        
+        currentPost = {
+          title: text,
+          author: 'Caleb McCartney',
+          date: null,
+          hero: null,
+          images: [],
+          body: '',
+          excerpt: '',
+          tags: [],
+          sources: []
+        };
+        
+        console.log('[Blog Feed] Starting new post:', text);
+        expectingDate = true;
+      }
+      // Extract date
+      else if (tagName === 'h4' && currentPost && expectingDate) {
+        const dateMatch = text.match(/(\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})/i);
+        if (dateMatch) {
+          currentPost.date = dateMatch[1];
+        } else {
+          currentPost.date = text;
+        }
+        expectingDate = false;
+      }
+      // Check for H5 "Sources" heading OR source citations
+      else if (tagName === 'h5' && currentPost) {
+        const h5Text = text.toLowerCase();
+        
+        // First H5 with "source" is the heading
+        if (!inSourcesSection && h5Text.includes('source')) {
+          console.log('[Blog Feed] ✓ Found H5 sources heading:', text);
+          console.log('[Blog Feed] ✓ inSourcesSection is now TRUE');
+          inSourcesSection = true;
+        }
+        // Subsequent H5s in sources section are actual citations
+        else if (inSourcesSection && text.length > 10) {
+          console.log('[Blog Feed] ✓ Adding H5 source citation:', text);
+          currentPost.sources.push({
+            url: null,
+            title: text
+          });
+        }
+      }
+      // Collect content
+      else if (currentPost) {
+        if (tagName === 'p') {
+          const text = node.textContent.trim();
+          const html = node.innerHTML.trim();
+          
+          console.log('[Blog Feed] Processing paragraph. inSourcesSection:', inSourcesSection, 'Text:', text.substring(0, 50));
+          
+          // Check for date in paragraph
+          let skipThisParagraph = false;
+          if (!currentPost.date && expectingDate) {
+            const dateMatch = text.match(/(\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})/i);
+            if (dateMatch) {
+              currentPost.date = dateMatch[1];
+              expectingDate = false;
+              if (text.startsWith('By Myself')) {
+                skipThisParagraph = true;
+              }
+            }
+          }
+          
+          // Extract images
+          const images = node.querySelectorAll('img');
+          images.forEach(img => {
+            if (img.src) {
+              if (!currentPost.hero) {
+                currentPost.hero = img.src;
+              } else {
+                currentPost.images.push(img.src);
+              }
+            }
+          });
+          
+          // If we're in sources section, extract all links from paragraphs
+          if (inSourcesSection) {
+            console.log('[Blog Feed] In sources section, checking paragraph:', text);
+            const links = node.querySelectorAll('a');
+            if (links.length > 0) {
+              console.log('[Blog Feed] Found', links.length, 'links in sources paragraph');
+              links.forEach(link => {
+                if (link.href) {
+                  console.log('[Blog Feed] Adding source with link:', link.href, link.textContent.trim());
+                  currentPost.sources.push({
+                    url: link.href,
+                    title: link.textContent.trim()
+                  });
+                }
+              });
+            } else if (text) {
+              // No links, treat as plain text citation (APA format)
+              console.log('[Blog Feed] Adding plain text source:', text);
+              currentPost.sources.push({
+                url: null,
+                title: text
+              });
+            }
+            skipThisParagraph = true;
+          }
+          // Legacy: Check for sources (paragraphs starting with "Source:")
+          else if (text.toLowerCase().startsWith('source:') || text.toLowerCase().startsWith('sources:')) {
+            console.log('[Blog Feed] Found sources paragraph:', text);
+            const links = node.querySelectorAll('a');
+            console.log('[Blog Feed] Links found in sources:', links.length);
+            links.forEach(link => {
+              if (link.href) {
+                console.log('[Blog Feed] Adding source:', link.href, link.textContent.trim());
+                currentPost.sources.push({
+                  url: link.href,
+                  title: link.textContent.trim()
+                });
+              }
+            });
+            skipThisParagraph = true;
+          }
+          
+          if (text && !skipThisParagraph && !expectingDate) {
+            contentBuffer.push(html);
+          }
+        }
+        else if (['ul', 'ol', 'blockquote', 'div'].includes(tagName)) {
+          if (!expectingDate) {
+            const html = node.outerHTML;
+            if (html.trim()) contentBuffer.push(html);
+          }
+        }
+      }
+    }
+    
+    // Process last post
+    if (currentPost) {
+      processContent();
+      if (currentPost.title) {
+        console.log('[Blog Feed] Adding post:', currentPost.title, 'Sources:', currentPost.sources.length);
+        posts.push(currentPost);
+      }
+    }
+    
+    // Extract tags - only from proper hashtags (whitespace or start of text before #)
+    posts.forEach(post => {
+      if (!post.tags) post.tags = [];
+      
+      // Match hashtags that are standalone (not mid-word references like #blm in "like #blm")
+      // Only match if # follows whitespace or is at start of line
+      const tagMatches = post.body ? post.body.match(/(?:^|\s)#(\w+)/g) : null;
+      if (tagMatches) {
+        const excludedTags = ['blm']; // Tags that are references, not actual post tags
+        post.tags = tagMatches
+          .map(tag => tag.trim().substring(1).toLowerCase())
+          .filter(tag => !excludedTags.includes(tag));
+      }
+      
+      // Always add inferred tags from title regardless of hashtags found
+      const title = post.title ? post.title.toLowerCase() : '';
+      if ((title.includes('marx') || title.includes('politic')) && !post.tags.includes('politics')) {
+        post.tags.push('politics');
+      }
+      if ((title.includes('loss') || title.includes('grief') || title.includes('death') || title.includes('shadow')) && !post.tags.includes('personal')) {
+        post.tags.push('personal');
+      }
+      if (title.includes('review') && !post.tags.includes('review')) {
+        post.tags.push('review');
+      }
+      if (title.includes('tech') && !post.tags.includes('technology')) {
+        post.tags.push('technology');
+      }
+    });
+    
+    console.log('[Blog Feed] ========== FINAL POSTS ==========');
+    posts.forEach((post, idx) => {
+      console.log(`Post ${idx + 1}: ${post.title}`);
+      console.log(`  - Sources count: ${post.sources ? post.sources.length : 0}`);
+      if (post.sources && post.sources.length > 0) {
+        post.sources.forEach((src, i) => {
+          console.log(`    ${i + 1}. ${src.title ? src.title.substring(0, 50) : src.url}`);
+        });
+      }
+    });
+    console.log('[Blog Feed] =====================================');
+    
+    console.log('[Blog Feed] Parsed posts:', posts);
+    
+    // Load hero images from local src folder if not found in Google Doc
+    this.assignLocalHeroImages(posts);
+    
+    return posts;
+  },
+  
+  assignLocalHeroImages(posts) {
+    const container = document.getElementById('blogFeed');
+    const imageBasePath = container?.dataset.imagePath || '../../../images/blog/';
+    
+    posts.forEach(post => {
+      // Skip if post already has a hero image from Google Doc
+      if (post.hero) return;
+      
+      // Create slug from title for image filename matching
+      const slug = this.slugify(post.title);
+      
+      // Try common image extensions
+      const extensions = ['jpg', 'jpeg', 'png', 'webp'];
+      const imagePath = `${imageBasePath}${slug}.jpg`; // Default to .jpg
+      
+      // Set the hero image path
+      post.hero = imagePath;
+      
+      console.log(`[Blog Feed] Assigned local hero image for "${post.title}": ${imagePath}`);
+    });
+  },
+  
+  render() {
+    const container = document.getElementById('blogFeed');
+    if (!container) return;
+    
+    const grid = document.createElement('div');
+    grid.className = 'blog-grid';
+    
+    this.posts.forEach((post, index) => {
+      const card = this.createCard(post);
+      setTimeout(() => card.classList.add('loaded'), index * 50);
+      grid.appendChild(card);
+    });
+    
+    container.innerHTML = '';
+    container.appendChild(grid);
+    
+    setTimeout(() => grid.classList.add('loaded'), 100);
+  },
+  
+  createCard(post) {
+    const card = document.createElement('article');
+    card.className = 'blog-card';
+    card.dataset.tags = post.tags.join(',');
+    card.onclick = () => this.openModal(post);
+    card.setAttribute('role', 'article');
+    card.setAttribute('aria-label', post.title);
+    
+    let html = '';
+    
+    // Hero image
+    if (post.hero) {
+      html += `
+        <div class="card-image">
+          <img src="${post.hero}" alt="${post.title} - Blog post cover image" loading="lazy">
+        </div>
+      `;
+    }
+    
+    // Content
+    html += '<div class="card-content">';
+    
+    // Tags
+    if (post.tags && post.tags.length > 0) {
+      html += '<div class="card-tags">';
+      post.tags.forEach(tag => {
+        html += `<span class="card-tag">${tag}</span>`;
+      });
+      html += '</div>';
+    }
+    
+    // Title
+    html += `<h2 class="card-title">${post.title}</h2>`;
+    
+    // Meta
+    html += '<div class="card-meta">';
+    if (post.author) {
+      html += `<span class="card-author">${post.author}</span>`;
+    }
+    if (post.date) {
+      html += `<span>•</span><span class="card-date">${this.formatDate(post.date)}</span>`;
+    }
+    html += '</div>';
+    
+    // Excerpt
+    if (post.excerpt) {
+      html += `<p class="card-excerpt">${post.excerpt}</p>`;
+    }
+    
+    html += '<span class="card-read-more">Read More →</span>';
+    html += '</div>';
+    
+    card.innerHTML = html;
+    return card;
+  },
+  
+  openModal(post) {
+    const modal = document.getElementById('blogModal');
+    const fullPost = document.getElementById('fullPost');
+    
+    // Update URL with post slug
+    const slug = this.slugify(post.title);
+    const url = new URL(window.location);
+    url.searchParams.set('post', slug);
+    window.history.pushState({ post: slug }, '', url);
+    
+    let html = '';
+    
+    // Hero
+    if (post.hero) {
+      html += `<img src="${post.hero}" alt="${post.title} - Featured image" class="post-hero" itemprop="image">`;
+    }
+    
+    // Tags
+    if (post.tags && post.tags.length > 0) {
+      html += '<div class="post-tags" role="list" aria-label="Post categories">';
+      post.tags.forEach(tag => {
+        html += `<span class="post-tag" role="listitem" itemprop="keywords">${tag}</span>`;
+      });
+      html += '</div>';
+    }
+    
+    // Title
+    html += `<h1 class="post-title" itemprop="headline">${post.title}</h1>`;
+    
+    // Meta
+    html += '<div class="post-meta" role="contentinfo">';
+    if (post.author) {
+      html += `<span class="post-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">By ${post.author}</span></span>`;
+    }
+    if (post.date) {
+      html += `<span>•</span><span class="post-date"><time itemprop="datePublished" datetime="${this.parseDate(post.date)}">${this.formatDate(post.date)}</time></span>`;
+    }
+    html += '</div>';
+    
+    // Body
+    html += `<div class="post-body" itemprop="articleBody">${post.body}</div>`;
+    
+    // Related posts
+    const related = this.getRelatedPosts(post);
+    if (related.length > 0) {
+      html += '<div class="related-posts">';
+      html += '<h3 class="related-title">Related Articles</h3>';
+      html += '<div class="related-grid">';
+      related.forEach(relPost => {
+        html += `
+          <div class="related-card" onclick="BlogFeed.openModal(BlogFeed.posts.find(p => p.title === '${relPost.title.replace(/'/g, "\\'")}'))">
+            <h4 class="related-card-title">${relPost.title}</h4>
+            <div class="related-card-meta">${relPost.date || ''}</div>
+          </div>
+        `;
+      });
+      html += '</div></div>';
+    }
+    
+    // Sources - collapsible dropdown at bottom
+    if (post.sources && post.sources.length > 0) {
+      html += '<div class="sources-section" role="region" aria-label="Article sources and references">';
+      html += `
+        <button class="sources-toggle" onclick="BlogFeed.toggleSources()" aria-expanded="false" aria-controls="sources-list">
+          <svg class="sources-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+          <span class="sources-toggle-text">Sources & References (${post.sources.length})</span>
+        </button>
+      `;
+      html += '<div class="sources-list" id="sources-list" style="display: none;">';
+      post.sources.forEach((source, index) => {
+        const sourceNum = index + 1;
+        html += `
+          <div class="source-item" itemprop="citation">
+            <div class="source-number">${sourceNum}</div>
+            <div class="source-details">
+              <div class="source-text" id="source-${sourceNum}">${source.title || source.url}</div>
+              <div class="source-actions">`;
+        
+        // Only show "Visit Source" link if URL exists
+        if (source.url) {
+          html += `<a href="${source.url}" target="_blank" rel="noopener noreferrer" class="source-visit">Visit Source →</a>`;
+        }
+        
+        html += `<button class="source-copy" onclick="BlogFeed.copySource('source-${sourceNum}')" aria-label="Copy source citation">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      html += '</div></div>';
+    }
+    
+    fullPost.innerHTML = html;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  },
+  
+  copySource(elementId) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    const text = element.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      // Visual feedback
+      const button = event.target.closest('.source-copy');
+      const originalText = button.innerHTML;
+      button.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+      button.style.background = 'rgba(76, 175, 80, 0.2)';
+      button.style.borderColor = 'rgba(76, 175, 80, 0.4)';
+      
+      setTimeout(() => {
+        button.innerHTML = originalText;
+        button.style.background = '';
+        button.style.borderColor = '';
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
+  },
+  
+  toggleSources() {
+    const sourcesList = document.getElementById('sources-list');
+    const toggle = document.querySelector('.sources-toggle');
+    const icon = toggle.querySelector('.sources-icon');
+    
+    if (sourcesList.style.display === 'none') {
+      sourcesList.style.display = 'flex';
+      toggle.setAttribute('aria-expanded', 'true');
+      icon.style.transform = 'rotate(90deg)';
+    } else {
+      sourcesList.style.display = 'none';
+      toggle.setAttribute('aria-expanded', 'false');
+      icon.style.transform = 'rotate(0deg)';
+    }
+  },
+  
+  closeModal() {
+    const modal = document.getElementById('blogModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Remove post parameter from URL
+    const url = new URL(window.location);
+    url.searchParams.delete('post');
+    window.history.pushState({}, '', url);
+  },
+  
+  getRelatedPosts(currentPost) {
+    return this.posts
+      .filter(post => post.title !== currentPost.title)
+      .filter(post => {
+        // Match by tags
+        const sharedTags = post.tags.filter(tag => currentPost.tags.includes(tag));
+        return sharedTags.length > 0;
+      })
+      .slice(0, 3);
+  },
+  
+  formatDate(dateStr) {
+    const months = {
+      january: 'Jan', february: 'Feb', march: 'Mar', april: 'Apr',
+      may: 'May', june: 'Jun', july: 'Jul', august: 'Aug',
+      september: 'Sep', october: 'Oct', november: 'Nov', december: 'Dec'
+    };
+    
+    const match = dateStr.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/i);
+    if (match) {
+      const [, day, month, year] = match;
+      const shortMonth = months[month.toLowerCase()];
+      return `${shortMonth} ${day}, ${year}`;
+    }
+    return dateStr;
+  },
+  
+  initializeFilters() {
+    const allTags = new Set();
+    this.posts.forEach(post => {
+      if (post.tags) {
+        post.tags.forEach(tag => allTags.add(tag));
+      }
+    });
+    
+    if (allTags.size === 0) return;
+    
+    const filtersContainer = document.getElementById('blogFilters');
+    if (!filtersContainer) return;
+    
+    filtersContainer.style.display = 'flex';
+    
+    Array.from(allTags).sort().forEach(tag => {
+      const button = document.createElement('button');
+      button.className = 'tag-filter';
+      button.textContent = tag;
+      button.dataset.tag = tag;
+      filtersContainer.appendChild(button);
+    });
+    
+    filtersContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('tag-filter')) {
+        const selectedTag = e.target.dataset.tag;
+        
+        filtersContainer.querySelectorAll('.tag-filter').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        e.target.classList.add('active');
+        
+        const cards = document.querySelectorAll('.blog-card');
+        cards.forEach(card => {
+          if (selectedTag === 'all') {
+            card.style.display = '';
+          } else {
+            const cardTags = (card.dataset.tags || '').split(',');
+            if (cardTags.includes(selectedTag)) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      }
+    });
+  },
+  
+  addStructuredData() {
+    // Remove existing structured data if any
+    const existingScript = document.querySelector('script[type="application/ld+json"]');
+    if (existingScript) existingScript.remove();
+    
+    // Create Blog structured data
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Caleb McCartney's Blog",
+      "description": "Personal blog covering politics, photography, and social commentary",
+      "author": {
+        "@type": "Person",
+        "name": "Caleb McCartney",
+        "url": "https://mccalmedia.com"
+      },
+      "blogPost": this.posts.map(post => ({
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": post.excerpt,
+        "author": {
+          "@type": "Person",
+          "name": post.author || "Caleb McCartney"
+        },
+        "datePublished": this.parseDate(post.date),
+        "keywords": post.tags ? post.tags.join(', ') : '',
+        "image": post.hero || '',
+        "articleBody": this.stripHTML(post.body),
+        "url": window.location.href + '#' + this.slugify(post.title)
+      }))
+    };
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(structuredData, null, 2);
+    document.head.appendChild(script);
+  },
+  
+  updateMetaTags() {
+    // Update page title
+    document.title = "Blog - Caleb McCartney | McCal Media";
+    
+    // Update or create meta description
+    this.updateOrCreateMeta('description', 
+      'Personal blog by photographer Caleb McCartney covering politics, social commentary, and photojournalism insights.');
+    
+    // Open Graph tags
+    this.updateOrCreateMeta('og:title', 'Blog - Caleb McCartney', 'property');
+    this.updateOrCreateMeta('og:description', 
+      'Personal blog covering politics, photography, and social commentary', 'property');
+    this.updateOrCreateMeta('og:type', 'blog', 'property');
+    this.updateOrCreateMeta('og:url', window.location.href, 'property');
+    
+    // Twitter Card tags
+    this.updateOrCreateMeta('twitter:card', 'summary_large_image');
+    this.updateOrCreateMeta('twitter:title', 'Blog - Caleb McCartney');
+    this.updateOrCreateMeta('twitter:description', 
+      'Personal blog covering politics, photography, and social commentary');
+    
+    // Keywords
+    const allTags = [...new Set(this.posts.flatMap(p => p.tags || []))];
+    this.updateOrCreateMeta('keywords', allTags.join(', '));
+    
+    // Author
+    this.updateOrCreateMeta('author', 'Caleb McCartney');
+  },
+  
+  updateOrCreateMeta(name, content, attribute = 'name') {
+    let meta = document.querySelector(`meta[${attribute}="${name}"]`);
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute(attribute, name);
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', content);
+  },
+  
+  parseDate(dateStr) {
+    // Convert "10 January 2025" to ISO format
+    if (!dateStr) return new Date().toISOString();
+    const match = dateStr.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/i);
+    if (!match) return new Date().toISOString();
+    
+    const [, day, month, year] = match;
+    const months = {
+      january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+      july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
+    };
+    
+    const date = new Date(year, months[month.toLowerCase()], day);
+    return date.toISOString();
+  },
+  
+  stripHTML(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  },
+  
+  slugify(text) {
+    return text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+};
+
+// Initialize on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => BlogFeed.init());
+} else {
+  BlogFeed.init();
+}
+
+// Close modal on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    BlogFeed.closeModal();
+  }
+});
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', (e) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const postSlug = urlParams.get('post');
+  
+  if (postSlug) {
+    const post = BlogFeed.posts.find(p => BlogFeed.slugify(p.title) === postSlug);
+    if (post) {
+      BlogFeed.openModal(post);
+    }
+  } else {
+    BlogFeed.closeModal();
+  }
+});
+</script>
+
+</body>
+</html>

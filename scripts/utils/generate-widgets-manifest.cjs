@@ -24,6 +24,46 @@ function readFirstParagraph(filePath) {
   }
 }
 
+const GROUP_FOLDERS = ['portfolios', 'site', 'components', 'content', 'tools'];
+
+function scanWidget(widgetPath, name, group = null) {
+  const readmePath = path.join(widgetPath, 'README.md');
+  const statusPath = path.join(widgetPath, 'STATUS.md');
+  const versionsDir = path.join(widgetPath, 'versions');
+
+  const description = fs.existsSync(readmePath) ? readFirstParagraph(readmePath) : '';
+  let status = 'production';
+  if (fs.existsSync(statusPath)) {
+    const s = readFirstParagraph(statusPath).toLowerCase();
+    status = s ? s.split(/[\s\n]/)[0] : 'wip';
+  }
+
+  // collect versions
+  const versions = [];
+  if (fs.existsSync(versionsDir)) {
+    const vs = fs.readdirSync(versionsDir, { withFileTypes: true });
+    for (const v of vs) if (v.isFile()) versions.push(path.join('versions', v.name));
+  }
+
+  // top-level html files (common for widget versioned files)
+  const topFiles = fs.readdirSync(widgetPath, { withFileTypes: true });
+  for (const f of topFiles) {
+    if (f.isFile() && /\.html?$/.test(f.name)) {
+      versions.push(f.name);
+    }
+  }
+
+  const widget = {
+    name,
+    path: path.relative(ROOT, widgetPath).replace(/\\/g, '/'),
+    description,
+    status,
+    versions: versions.sort(),
+  };
+  if (group) widget.group = group;
+  return widget;
+}
+
 function scan() {
   if (!fs.existsSync(WIDGETS_DIR)) {
     console.error('Widgets directory not found:', WIDGETS_DIR);
@@ -40,43 +80,30 @@ function scan() {
     if (name === '_archived') continue;
 
     const widgetPath = path.join(WIDGETS_DIR, name);
-    const readmePath = path.join(widgetPath, 'README.md');
-    const statusPath = path.join(widgetPath, 'STATUS.md');
-    const versionsDir = path.join(widgetPath, 'versions');
 
-    const description = fs.existsSync(readmePath) ? readFirstParagraph(readmePath) : '';
-    let status = 'production';
-    if (fs.existsSync(statusPath)) {
-      const s = readFirstParagraph(statusPath).toLowerCase();
-      status = s ? s.split(/[\s\n]/)[0] : 'wip';
-    }
-
-    // collect versions
-    const versions = [];
-    if (fs.existsSync(versionsDir)) {
-      const vs = fs.readdirSync(versionsDir, { withFileTypes: true });
-      for (const v of vs) if (v.isFile()) versions.push(path.join('versions', v.name));
-    }
-
-    // top-level html files (common for widget versioned files)
-    const topFiles = fs.readdirSync(widgetPath, { withFileTypes: true });
-    for (const f of topFiles) {
-      if (f.isFile() && /\.html?$/.test(f.name)) {
-        versions.push(f.name);
+    // Check if this is a group folder
+    if (GROUP_FOLDERS.includes(name)) {
+      const groupEntries = fs.readdirSync(widgetPath, { withFileTypes: true });
+      for (const groupEntry of groupEntries) {
+        if (!groupEntry.isDirectory()) continue;
+        const groupWidgetName = groupEntry.name;
+        if (groupWidgetName.startsWith('.')) continue;
+        const groupWidgetPath = path.join(widgetPath, groupWidgetName);
+        widgets.push(scanWidget(groupWidgetPath, groupWidgetName, name));
       }
+    } else {
+      // Regular top-level widget
+      widgets.push(scanWidget(widgetPath, name));
     }
-
-    widgets.push({
-      name,
-      path: path.relative(ROOT, widgetPath).replace(/\\/g, '/'),
-      description,
-      status,
-      versions: versions.sort(),
-    });
   }
 
-  // sort by name
-  widgets.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+  // sort by group first, then name
+  widgets.sort((a, b) => {
+    const groupA = a.group || 'zzz';
+    const groupB = b.group || 'zzz';
+    if (groupA !== groupB) return groupA.localeCompare(groupB);
+    return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+  });
   return widgets;
 }
 

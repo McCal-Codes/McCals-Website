@@ -15,35 +15,30 @@
 - updates/todo.md
 - updates/welcome.md
 ## 📋 Your checklist status
-- Open: **35** | Done: **0**
-## 🎯 Today’s focus (from `updates/todo.md`)
+- Open: **8** | Done: **27**
 
-## Priority 1 - Photojournalism Portfolio v5.0 (`src/widgets/photojournalism-portfolio/versions/v5.0-performance-optimized.html`)
-- [ ] TODO: Apply Close Button Optimization: adopt `max(24px, env(safe-area-inset-*)))` spacing and backdrop blur per enhancement pattern section 1.
-- [ ] TODO: Implement Navigation Hiding pattern so fullscreen/lightbox mode suppresses site nav/footer.
-- [ ] TODO: Verify Filter Layout Fix: ensure filtered cards use `display:none` with no masonry gaps and review dataset attributes.
-- [ ] TODO: Align Minimal Status Indicators styling to shared badge specs (size, opacity, blur).
-- [ ] TODO: Standardize Version Indicator near heading using widget standards typography.
+## 🎯 Today's focus (from `updates/todo.md`)
 
-## Priority 2 - Podcast Feed v2.0 (`src/widgets/podcast-feed/versions/v2.0-performance-optimized.html`)
-- [ ] TODO: Replace corrupted icon text (e.g., button labels) with accessible inline SVG or ASCII labels.
-- [ ] TODO: Ensure call-to-action buttons meet enhancement typography/spacing standards.
-- [ ] TODO: Add minimal status / episode badges if relevant (published, featured) following enhancement pattern section 3.
-- [ ] TODO: Review lazy-loading strategy for audio/debug features; confirm alignment with performance stack (requestIdleCallback, async scripts).
-- [ ] TODO: Introduce version indicator pattern if missing and cross-check structured data output.
+### ✅ Recently Completed (2025-11-05)
+- [x] **Widget Organization Phase 1 & 2** — Grouped widgets into portfolios/, site/, content/, tools/ folders
+- [x] **Widgets Manifest Generator** — Created generator and widgets-manifest.json with group categorization
+- [x] **Documentation Updates** — Updated all widget path references across docs/
+- [x] **Cleanup & Archival** — Archived redundant WIDGET-DEVELOPMENT.md, removed empty folders, cleaned up backup files
+- [x] **Added welcome.md to Copilot References** — Now listed in .github/copilot-instructions.md "Good starting references"
 
-## Priority 3 - Site Navigation v1.7.0 (`src/widgets/site-navigation/versions/v1.7.0-performance-optimized.html`)
-- [ ] TODO: Review glassmorphism variables vs. standards (consistent color tokens, hover states).
-- [ ] TODO: Confirm responsive breakpoints and mobile drawer align with navigation enhancement guidance (keyboard support, focus states).
-- [ ] TODO: Add/version indicator badge within nav heading container per standards doc.
-- [ ] TODO: Evaluate deferred analytics/debug loading for performance compliance.
-- [ ] TODO: Prepare documentation updates reflecting navigation refinements.
+### 🔄 Current Widget Status
+- **Photojournalism Portfolio v5.x** — ✅ COMPLETE (Oct 5-9, 2025)
+- **Podcast Feed v1.9.5** — ✅ COMPLETE (Oct 24, 2025)
+- **Site Navigation v1.6.3/v1.7.0** — ✅ COMPLETE (Oct 9, 2025)
+- **Site Footer v1.2.0** — ✅ COMPLETE (Oct 5, 2025)
+- **Concert Portfolio v4.7** — ✅ COMPLETE (Nov 2, 2025)
+- **Portrait Portfolio v1.0** — ✅ COMPLETE (Oct 24, 2025)
 
-## Priority 4 - Site Footer v1.3.0 (`src/widgets/site-footer/versions/v1.3.0-performance-optimized.html`)
-- [ ] TODO: Normalize typography, button, and link spacing with current standards.
-- [ ] TODO: Ensure newsletter form accessibility (labels, focus styles) and safe-area spacing for any fixed elements.
-- [ ] TODO: Add version indicator + changelog hook in footer heading per standards.
-- [ ] TODO: Validate structured data snippet and lazy-loaded features follow enhancement stack.
+### 📍 Next Priorities
+- [ ] TODO: Add automated widget validation tests and wire into CI
+- [ ] TODO: Implement comprehensive SEO standards across remaining widgets
+- [ ] TODO: Phase 3 — Move shared components into `src/widgets/components/` where applicable
+- [ ] TODO: CI/test guard — ensure validator/tests catch broken embed paths after widget moves
 
 —
 _Tip: mark a line as done by adding `(done)` or `(done in <hash>)` at the end. The next open will auto-check it._

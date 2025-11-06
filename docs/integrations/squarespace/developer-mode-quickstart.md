@@ -55,7 +55,7 @@ sqsp sync --watch
 > Depending on your platform the binary may be named `sqsp`, `squarespace-server`, or `local-developer`. Use `sqsp --help` to list the available subcommands on your machine.
 
 ## 6. First Customization Checklist
-- Copy the navigation widget from `src/widgets/site-navigation/versions/v1.1.header-injection.html` (or the latest version you prefer) into the theme repository:
+- Copy the navigation widget from `src/widgets/site/navigation/versions/v1.1.header-injection.html` (or the latest version you prefer) into the theme repository:
   - Inject the `<style>` block into `sites/squarespace/theme/blocks/header.region` (or use **Settings -> Advanced -> Code Injection -> HEADER** if you prefer to keep it as an injection).
   - Place the `<div class="mcc-nav-widget">...</div>` markup where the built-in header lives.
   - Keep the `<script>` tag at the bottom of the file so the navigation widget mounts automatically.
@@ -84,10 +84,10 @@ git push origin main
 ## 9. Follow the Squarespace Beginner Tutorial (Recommended)
 Use https://developers.squarespace.com/beginner-tutorial alongside this checklist to get comfortable with the Developer Platform. Key actions to carry over into the McCal workflow:
 
-- **Start with the tutorial template:** Their walkthrough begins by creating a Developer Platform demo site, enabling Developer Mode, and cloning the GitHub repository. The process mirrors Sections 1–4 above; use it if you want a guided tour before customizing our theme.
+- **Start with the tutorial template:** Their walkthrough begins by creating a Developer Platform demo site, enabling Developer Mode, and cloning the GitHub repository. The process mirrors Sections 1ï¿½4 above; use it if you want a guided tour before customizing our theme.
 - **Understand the template anatomy:** Review how `site.region`, `template.conf`, `/blocks`, `/collections`, and `/styles` fit together. Map those concepts to the files in `sites/squarespace/theme/` so you know where to drop our widgets and supporting assets.
-- **Make a safe first edit:** Follow the tutorial's “Hello World” change in `site.region`, then push via Git. It is a quick smoke test that your `sqsp` login, Git remote, and watch tasks are wired correctly.
-- **Leverage JSON-T navigation blocks:** The tutorial builds a `navigation.block` with Squarespace navigation tags. Compare that baseline to our `mcc-nav` widget—if you ever need a lighter-weight fallback nav, you can adapt the tutorial snippet in `blocks/navigation.block` while keeping the custom widget for production.
+- **Make a safe first edit:** Follow the tutorial's ï¿½Hello Worldï¿½ change in `site.region`, then push via Git. It is a quick smoke test that your `sqsp` login, Git remote, and watch tasks are wired correctly.
+- **Leverage JSON-T navigation blocks:** The tutorial builds a `navigation.block` with Squarespace navigation tags. Compare that baseline to our `mcc-nav` widgetï¿½if you ever need a lighter-weight fallback nav, you can adapt the tutorial snippet in `blocks/navigation.block` while keeping the custom widget for production.
 - **Explore collections:** Parts 5 and 6 show how to add `collections/blog.conf`, `blog.list`, and `blog.item`. Use that flow when you are ready to host dynamic data (blog, podcast, galleries) directly in the theme instead of via embed widgets.
 
 Bookmark the tutorial for reference; it remains the canonical source for JSON-T directives, Squarespace tags like `<squarespace:navigation>`, and the default file hierarchy.

@@ -27,12 +27,12 @@ src/widgets/
 - **Event Portfolio** (`src/widgets/event-portfolio/`)
   - Latest: `v1.1-manifest.html`
   - Assets: `src/images/Portfolios/Events/`
-- **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`)
+- **Photojournalism Portfolio** (`src/widgets/portfolios/photojournalism-portfolio/`)
   - Latest: `v3.0-published-tags.html`
   - Assets: `src/images/Portfolios/Journalism/`
-- **Podcast Feed** (`src/widgets/podcast-feed/`)
+- **Podcast Feed** (`src/widgets/content/podcast-feed/`)
   - Latest: `v1.8.html`
-- **About Widgets** (`src/widgets/about-widgets/`)
+- **About Widgets** (`src/widgets/content/about/`)
   - Multiple utility widgets for about pages, client carousels, etc.
 
 ## Creating New Widgets
