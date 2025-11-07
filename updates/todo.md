@@ -121,3 +121,14 @@ We will group widgets without creating overly nested folders. This plan is logge
 - [ ] TODO: CI/test guard — ensure validator/tests catch broken embed paths after moves
 
 _Last updated: 2025-11-05_
+
+## Recent: 2025-11-07 — Sitemap & Performance updates
+
+- Added a Search Console-friendly sitemap and root `sitemap.xml` (base URL: https://mcc-cal.com). Generator lives at `scripts/utils/generate-sitemap.js` and is wired to `npm run sitemap:generate`.
+- Added `robots.txt` at repository root pointing crawlers to `https://mcc-cal.com/sitemap.xml`.
+- Added a GitHub Actions workflow `.github/workflows/sitemap-regenerate.yml` that regenerates the sitemap on relevant pushes and commits updates back when changed.
+- Implemented an image optimization utility (`scripts/optimize-images.cjs`) and ran it locally (optimized ~819 images into `dist/optimized-images`). Note: project is `type: module` so a CommonJS `.cjs` helper was required for compatibility (lesson learned: use `.cjs` for require-based CLI scripts or migrate to ESM `import`).
+- Made low-risk performance change by deferring a heavy shared caption script in blog-feed demo and versioned widget HTML files (`defer` attribute added where safe).
+- Next steps: add `font-display: swap` where fonts are declared, preload LCP hero images, and defer additional non-critical scripts across widgets. Plan to run Lighthouse before/after to quantify wins and include results in the PR description.
+
+_Last updated: 2025-11-07_
