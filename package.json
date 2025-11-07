@@ -62,6 +62,7 @@
     "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
     "images:optimize": "node scripts/optimize-images.js",
     "seo:audit": "node scripts/utils/seo-audit.js",
+  "sitemap:generate": "node scripts/utils/generate-sitemap.js --base https://mcc-cal.com --out dist/sitemap.xml",
     "welcome": "node scripts/welcome.js"
   },
   "files": [
