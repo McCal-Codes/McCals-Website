@@ -60,7 +60,7 @@
     "ci:smoke-test": "node scripts/utils/smoke-test.js",
     "test:playwright": "npx playwright test tests/playwright --reporter=list",
     "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
-    "images:optimize": "node scripts/optimize-images.js",
+  "images:optimize": "node scripts/optimize-images.cjs",
     "seo:audit": "node scripts/utils/seo-audit.js",
   "sitemap:generate": "node scripts/utils/generate-sitemap.js --base https://mcc-cal.com --out dist/sitemap.xml",
     "welcome": "node scripts/welcome.js"
