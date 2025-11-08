@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSS Playground Widget v1.1</title>
+  <!-- Preload hero image to improve LCP for this demo -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&h=600&fit=crop">
 </head>
 <body style="margin: 0; padding-top: 120px;">
   <main>
@@ -200,7 +202,7 @@
     <h2>Hero Slideshow Widget Test</h2>
     <p style="font-size:0.95em; color:#333; margin-bottom:16px;">Test hero section layouts, image overlays, and call-to-action patterns.</p>
     <div class="hero-test">
-      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&h=600&fit=crop" alt="Hero image" class="hero-image" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&h=600&fit=crop" alt="Hero image" class="hero-image" loading="eager">
       <div class="hero-overlay">
         <h1 class="hero-title">Welcome to McCal Media</h1>
         <p class="hero-subtitle">Capturing moments that matter</p>
