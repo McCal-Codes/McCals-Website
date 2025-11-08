@@ -1,0 +1,42 @@
+name: Lighthouse report (CI)
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  lighthouse:
+    name: Run Lighthouse (mobile)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lighthouse (mobile emulation)
+        run: |
+          mkdir -p lighthouse-results
+          npx -y lighthouse 'https://www.mcc-cal.com' \
+            --form-factor=mobile \
+            --throttling-method=simulate \
+            --output=json \
+            --output-path=./lighthouse-results/lighthouse-mobile.json \
+            --chrome-path=/usr/bin/chromium-browser \
+            --quiet
+
+      - name: Upload Lighthouse JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-mobile-json
+          path: ./lighthouse-results/lighthouse-mobile.json
