@@ -1,0 +1,19 @@
+#!/bin/sh
+# commit-msg hook: append an author note if not present
+# This script is intended to be used with repository-local hooksPath (.githooks)
+
+MSG_FILE="$1"
+if [ -z "$MSG_FILE" ]; then
+  echo "No commit message file provided" >&2
+  exit 0
+fi
+
+NOTE="\n\nAuthor: mccal"
+
+# Check if note already present
+grep -q "Author: mccal" "$MSG_FILE" && exit 0
+
+# Append the note to the commit message
+printf "%s" "$NOTE" >> "$MSG_FILE"
+
+exit 0
