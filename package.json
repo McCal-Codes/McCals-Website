@@ -62,6 +62,7 @@
   "test:sitemap-parser": "node tests/sitemap-parser.test.js",
   "lint:scripts": "npx eslint scripts/**/*.js --max-warnings=50",
   "images:optimize": "node scripts/optimize-images.js",
+  "images:optimize:local": "node scripts/optimize-images-local.js",
     "seo:audit": "node scripts/utils/seo-audit.js",
   "sitemap:generate": "node scripts/utils/generate-sitemap.js --base https://mcc-cal.com --out dist/sitemap.xml",
     "welcome": "node scripts/welcome.js"
@@ -88,8 +89,15 @@
     "eslint": "^8.46.0",
     "http-server": "^14.1.1",
     "open": "^10.1.0",
-    "playwright": "^1.39.0"
+    "playwright": "^1.39.0",
+    "husky": "^8.0.3"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "node scripts/husky-prepush.js"
+    }
+  },
+  "prepare": "husky install",
   "engines": {
     "node": ">=16.0.0"
   },

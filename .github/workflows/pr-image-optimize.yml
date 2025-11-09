@@ -1,0 +1,134 @@
+name: PR Image Optimize
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  optimize-images:
+    name: Detect & optimize large images
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # allow pushing back optimized files when PR branch is on the same repository
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Find changed image files > threshold
+        id: find_images
+        run: |
+          set -euo pipefail
+          echo "PR #${{ github.event.pull_request.number }}: comparing base...head"
+          BASE_SHA=${{ github.event.pull_request.base.sha }}
+          HEAD_SHA=${{ github.event.pull_request.head.sha }}
+          echo "BASE=$BASE_SHA HEAD=$HEAD_SHA"
+
+          # Find changed image files between base and head. Adjust extensions as needed.
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- '*.jpg' '*.jpeg' '*.png' '*.gif' '*.webp' '*.avif' || true)
+          echo "Raw changed files:\n$CHANGED"
+
+          THRESHOLD_BYTES=200000
+          LARGE_LIST=""
+          for f in $CHANGED; do
+            if [ -f "$f" ]; then
+              SZ=$(stat -c%s "$f" 2>/dev/null || echo 0)
+              if [ "$SZ" -ge $THRESHOLD_BYTES ]; then
+                LARGE_LIST="$LARGE_LIST\n$f"
+              fi
+            fi
+          done
+
+          if [ -z "$LARGE_LIST" ]; then
+            echo "no_large_files=true" >> $GITHUB_OUTPUT
+            echo "large_files=" >> $GITHUB_OUTPUT
+            echo "No changed image files exceed ${THRESHOLD_BYTES} bytes"
+            exit 0
+          fi
+
+          # output newline-separated list
+          echo "no_large_files=false" >> $GITHUB_OUTPUT
+          # trim leading newline
+          LF=$(echo "$LARGE_LIST" | sed '/^$/d')
+          echo "large_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$LF" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Show large files (debug)
+        if: steps.find_images.outputs.no_large_files == 'false'
+        run: |
+          echo "Files flagged for optimization:"
+          echo "${{ steps.find_images.outputs.large_files }}"
+
+      - name: Install dependencies
+        if: steps.find_images.outputs.no_large_files == 'false'
+        run: |
+          # install project deps and ensure sharp/fast-glob exist for image optimization
+          npm ci --prefer-offline --no-audit --no-fund
+          # make sure optimizer deps are available (sharp can be optional in repo)
+          npm install --no-audit --no-fund sharp fast-glob --no-save
+
+      - name: Run repository optimizer (generate optimized outputs)
+        if: steps.find_images.outputs.no_large_files == 'false'
+        run: |
+          node scripts/optimize-images.js
+
+      - name: Commit optimized outputs back to PR branch
+        if: steps.find_images.outputs.no_large_files == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Only attempt to push back if PR branch is in same repository (not from a fork)
+          PR_HEAD_REPO=${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPO=${{ github.event.pull_request.base.repo.full_name }}
+          echo "PR head repo: $PR_HEAD_REPO  base repo: $BASE_REPO"
+          if [ "$PR_HEAD_REPO" != "$BASE_REPO" ]; then
+            echo "PR originates from a fork — cannot push optimized files back. Will upload artifact and comment instead."
+            exit 78
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Add the outputs directory (matches repo script output)
+          if [ -d dist/optimized-images ]; then
+            git add -A dist/optimized-images
+          else
+            echo "No optimized outputs to commit"
+            exit 0
+          fi
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "chore: add optimized images for PR #${{ github.event.pull_request.number }}"
+          git push origin HEAD:refs/heads/${{ github.head_ref }}
+
+      - name: Upload optimized images artifact (forked PR case)
+        if: steps.find_images.outputs.no_large_files == 'false' && github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+        uses: actions/upload-artifact@v4
+        with:
+          name: optimized-images
+          path: dist/optimized-images
+
+      - name: Comment on PR with instructions (when cannot push)
+        if: steps.find_images.outputs.no_large_files == 'false' && github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = `I detected large images in this PR and generated optimized outputs (artifact attached). I couldn't push changes because the PR comes from a fork. You can download the optimized images from the workflow artifact and replace the originals (or ask a repo maintainer to run the optimizer and push the optimized files).\n\nFiles flagged:\n${{ steps.find_images.outputs.large_files }}`;
+            await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.number, body });

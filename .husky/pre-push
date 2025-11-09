@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running image optimizer on staged image files..."
+node scripts/husky-prepush.js
