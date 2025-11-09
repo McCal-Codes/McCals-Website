@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://mcc-cal.com/sitemap.xml
+
+# Notes:
+# - This file allows all crawlers to access the site and points them to the
+#   sitemap. If you want to block staging or test paths, add Disallow rules.
