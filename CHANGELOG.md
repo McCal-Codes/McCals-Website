@@ -1,3 +1,12 @@
+## 2025-11-09
+### Navigation widget rollout & CI
+- Added `src/widgets/site/navigation/versions/v1.7.1-rollback.html` — safe rollback implementing v1.6.3 mobile submenu behavior while providing an opt-in sitemap-driven autofill.
+- Added `scripts/utils/sitemap-parser.js` (shared parser) and unit tests `tests/sitemap-parser.test.js` with npm script `test:sitemap-parser`.
+- Introduced configurable caching: `data-sitemap-persistent` (opt-in localStorage) and `data-sitemap-cache-ttl` (TTL), defaulting to sessionStorage for safer caching.
+- Added accessible loading state and optional visible loading text (`data-sitemap-show-loading="visible"`).
+- Added documentation: `docs/widgets/navigation-widget-config.md` and `docs/widgets/navigation-widget-README.md`.
+- Added CI workflow `.github/workflows/widget-ci.yml` to run sitemap-parser tests and basic linting for widget-related changes.
+
 ## 2025-11-04
 ### Repository Audit & Optimization Infrastructure
 - **Audit System**: Created comprehensive audit documentation in `docs/audit/` with baseline report (`REPO-AUDIT-2025-11-04.md`), automated reports for large files and npm security.

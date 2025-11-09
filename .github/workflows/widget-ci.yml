@@ -1,0 +1,47 @@
+name: Widget CI
+
+on:
+  push:
+    paths:
+      - 'src/widgets/site/navigation/**'
+      - 'scripts/utils/sitemap-parser.js'
+      - 'tests/**'
+      - 'docs/widgets/**'
+  pull_request:
+    paths:
+      - 'src/widgets/site/navigation/**'
+      - 'scripts/utils/sitemap-parser.js'
+      - 'tests/**'
+      - 'docs/widgets/**'
+
+jobs:
+  test:
+    name: Run sitemap parser tests & lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint for scripts
+        run: npm run lint:scripts
+
+      - name: Run sitemap parser tests
+        run: npm run test:sitemap-parser
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: widget-ci-results
+          path: |
+            tests/sitemap-parser.test.js
+            .

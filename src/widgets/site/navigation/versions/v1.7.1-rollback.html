@@ -144,6 +144,25 @@
     .mcc-nav__submenu-toggle[aria-expanded="true"] + .mcc-nav__submenu { display: block; }
   }
 
+    /* Loading indicator for dynamic submenu autofill */
+    .mcc-nav__submenu[aria-busy="true"] {
+      position: relative;
+    }
+    .mcc-nav__submenu[aria-busy="true"]::after {
+      content: '';
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.18);
+      border-top-color: rgba(255,255,255,0.92);
+      animation: mcc-nav-spin 0.9s linear infinite;
+      display: block;
+    }
+    @keyframes mcc-nav-spin { to { transform: rotate(360deg); } }
+
   @media (prefers-reduced-motion: reduce) { .mcc-nav, .mcc-nav__toggle, .mcc-nav__link a::after { transition: none !important; } .mcc-nav__submenu { transition: none !important; } }
 </style>
 
@@ -294,25 +313,69 @@
     window.addEventListener('scroll', applyScrollState, { passive: true });
 
     // TODO: Dynamic sitemap-driven submenu (disabled by default)
-    // Enable by adding data-sitemap-autofill="true" (and optionally data-sitemap-url) on `.mcc-nav-widget`.
-    // This will rebuild the Work submenu from the site's sitemap.xml when available (same-origin in Squarespace).
+    // Enable by adding data-sitemap-autofill="true" (and optionally data-sitemap-url and data-sitemap-cache-ttl)
+    // on `.mcc-nav-widget`. You can also override labels via data-label-<slug> attributes.
     const dynamicMenu = {
-      enabled: root?.dataset.sitemapAutofill === 'true',
-      sitemapUrl: root?.dataset.sitemapUrl || '/sitemap.xml',
+        enabled: root?.dataset.sitemapAutofill === 'true',
+        sitemapUrl: root?.dataset.sitemapUrl || '/sitemap.xml',
+        cacheTtl: parseInt(root?.dataset.sitemapCacheTtl || '', 10) || 600000, // default 10 minutes
+    // By default use session-backed caching (non-persistent) to avoid stale cross-session data
+    // Set data-sitemap-persistent="true" on the widget to opt into persistent localStorage caching.
+    persistent: String(root?.dataset.sitemapPersistent || 'false') === 'true', // default: sessionStorage
+        showLoading: String(root?.dataset.sitemapShowLoading || 'sr-only') === 'visible',
       work: {
         container: nav.querySelector('#submenu-work'),
-        // Known section slugs; order determines display order
+        // Preferred order (top -> bottom). Items present in sitemap will follow this order; any
+        // additional top-level sections discovered will be appended to the end.
         order: ['featured-work','concerts','events','journalism','portraits','nature'],
-        labels: {
+        labels: Object.assign({
           'featured-work': 'Featured',
           'concerts': 'Concerts',
           'events': 'Events',
           'journalism': 'Journalism',
           'portraits': 'Portraits',
           'nature': 'Nature'
-        }
+        }, (function readOverrides(){
+          const out = {};
+          try {
+            Object.keys(root?.dataset || {}).forEach(k => {
+              if (k.indexOf('label') === 0) {
+                // dataset.labelFeaturedWork -> slug featured-work
+                const slug = k.replace(/^label/, '').replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
+                out[slug] = root.dataset[k];
+              }
+            });
+          } catch(e){}
+          return out;
+        })())
       }
     };
+
+  const cacheKey = 'mcc-nav-sitemap-cache:' + dynamicMenu.sitemapUrl;
+
+  // Log chosen storage mode for debugging/visibility in console (can be removed later)
+  console.info('[mcc-nav] sitemap autofill:', dynamicMenu.enabled ? 'enabled' : 'disabled', '; storage:', dynamicMenu.persistent ? 'localStorage' : 'sessionStorage');
+
+    // helper to set accessible busy state and optional loading text
+    function setBusy(container, isBusy) {
+      if (!container) return;
+      container.setAttribute('aria-busy', String(isBusy));
+      let loading = container.querySelector('.mcc-nav__submenu-loading');
+      if (!loading) {
+        loading = document.createElement('span');
+        loading.className = 'mcc-nav__submenu-loading sr-only';
+        loading.setAttribute('aria-hidden', 'true');
+        loading.textContent = 'Loading…';
+        container.appendChild(loading);
+      }
+      if (dynamicMenu.showLoading) {
+        loading.classList.remove('sr-only');
+        loading.style.display = isBusy ? 'inline-block' : 'none';
+      } else {
+        loading.classList.add('sr-only');
+        loading.style.display = 'none';
+      }
+    }
 
     const fetchWithTimeout = (url, opts = {}, timeoutMs = 4000) => {
       const ctrl = new AbortController();
@@ -321,39 +384,92 @@
         .finally(() => clearTimeout(id));
     };
 
+    function humanLabel(slug) {
+      return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    }
+
     async function tryAutofillWorkFromSitemap() {
       if (!dynamicMenu.enabled) return; // keep static list unless enabled
+      const container = dynamicMenu.work.container;
+      if (!container) return;
+  // show accessible loading state
+  setBusy(container, true);
+
       try {
+        // cache check: either localStorage (persistent) or sessionStorage (per session)
+        try {
+          if (dynamicMenu.persistent) {
+            const cachedRaw = localStorage.getItem(cacheKey);
+            if (cachedRaw) {
+              try {
+                const cached = JSON.parse(cachedRaw);
+                if (cached?.expires && cached.expires > Date.now() && Array.isArray(cached.items) && cached.items.length) {
+                  container.innerHTML = cached.items.map(i => `<li><a href="${i.href}" role="menuitem">${i.label}</a></li>`).join('');
+                  setBusy(container, false);
+                  return;
+                } else {
+                  try { localStorage.removeItem(cacheKey); } catch(e) {}
+                }
+              } catch (e) {
+                // ignore and fetch
+              }
+            }
+          } else {
+            const cachedRaw = sessionStorage.getItem(cacheKey);
+            if (cachedRaw) {
+              try {
+                const cached = JSON.parse(cachedRaw);
+                if (cached?.ts && (Date.now() - cached.ts) < dynamicMenu.cacheTtl && Array.isArray(cached.items) && cached.items.length) {
+                  container.innerHTML = cached.items.map(i => `<li><a href="${i.href}" role="menuitem">${i.label}</a></li>`).join('');
+                  setBusy(container, false);
+                  return;
+                } else {
+                  try { sessionStorage.removeItem(cacheKey); } catch(e) {}
+                }
+              } catch (e) {}
+            }
+          }
+        } catch (e) {
+          // storage access may throw in sandboxed contexts; ignore and fetch
+        }
+
         const res = await fetchWithTimeout(dynamicMenu.sitemapUrl);
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const text = await res.text();
-        const xml = new DOMParser().parseFromString(text, 'application/xml');
-        const locs = Array.from(xml.querySelectorAll('url > loc'))
-          .map(n => (n.textContent || '').trim())
-          .filter(Boolean);
-        const paths = locs.map(u => {
-          try { return new URL(u, window.location.origin).pathname.replace(/\/+$/, ''); }
-          catch { return null; }
-        }).filter(Boolean);
-        const present = new Set(paths);
+        // use shared parser (exposed on globalThis as mccSitemapParser)
+        const parsedSlugs = (typeof (globalThis?.mccSitemapParser?.parseTopLevelSlugs) === 'function')
+          ? globalThis.mccSitemapParser.parseTopLevelSlugs(text, window.location.origin)
+          : [];
+        const slugs = new Set(parsedSlugs);
 
-        const items = dynamicMenu.work.order
-          .map(slug => {
-            const path = '/' + slug;
-            if (!present.has(path)) return null;
-            const label = dynamicMenu.work.labels[slug] || slug.replace(/-/g,' ').replace(/\b\w/g, c => c.toUpperCase());
-            return { href: path, label };
-          })
-          .filter(Boolean);
+        // build ordered list: preferred order then append extras
+        const preferred = dynamicMenu.work.order.filter(s => slugs.has(s));
+        const extras = Array.from(slugs).filter(s => !dynamicMenu.work.order.includes(s));
+        const finalSlugs = preferred.concat(extras);
 
-        if (items.length && dynamicMenu.work.container) {
-          // Rebuild submenu items
-          dynamicMenu.work.container.innerHTML = items
-            .map(i => `<li><a href="${i.href}" role="menuitem">${i.label}</a></li>`)
-            .join('');
+        const items = finalSlugs.map(slug => {
+          const href = '/' + slug;
+          const label = dynamicMenu.work.labels[slug] || humanLabel(slug);
+          return { href, label };
+        });
+
+        if (items.length) {
+          container.innerHTML = items.map(i => `<li><a href="${i.href}" role="menuitem">${i.label}</a></li>`).join('');
+          // cache result: store with expires timestamp (persistent) or ts (session)
+          try {
+            if (dynamicMenu.persistent) {
+              const payload = { ts: Date.now(), expires: Date.now() + dynamicMenu.cacheTtl, items };
+              localStorage.setItem(cacheKey, JSON.stringify(payload));
+            } else {
+              const payload = { ts: Date.now(), items };
+              sessionStorage.setItem(cacheKey, JSON.stringify(payload));
+            }
+          } catch (e) {}
         }
       } catch (err) {
         console.warn('[mcc-nav] sitemap autofill skipped:', err?.message || err);
+      } finally {
+        setBusy(container, false);
       }
     }
 
