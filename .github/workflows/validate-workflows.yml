@@ -25,4 +25,4 @@ jobs:
         run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Run workflow validator
-        run: node scripts/utils/ci-validate-workflows.js
+        run: node scripts/utils/ci-validate-workflows.mjs

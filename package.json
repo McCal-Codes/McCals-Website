@@ -99,5 +99,5 @@
     "lottie-web": "^5.13.0",
     "multer": "^2.0.2"
   },
-  "type": "module"
+  "type": "commonjs"
 }
