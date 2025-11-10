@@ -79,6 +79,9 @@ function deriveCategory(dir) {
   
   // Performance Art - theatrical and performance events
   if (/(love.*s.*a.*game|howl.*at.*the.*moon)/i.test(dir)) return 'Performance Art';
+
+  // General - catch-all for community/outdoor activities like hikes
+  if (/(hike|hiking|meet\s*hike|outdoor|trail|walk)/i.test(slug) || /yinzers\s*meet\s*hike/i.test(dir)) return 'General';
   
   // Corporate events (including business parties/receptions)
   if (/(james.*bond.*cocktail|cocktail.*party|inclusivity|workplace|myron.*cope|franks.*script|dance.*for.*a.*cause|robotics|denver)/i.test(dir)) return 'Corporate';
@@ -118,7 +121,7 @@ async function main() {
   const relativeRoot = path.relative(portfoliosBase, absRoot).replace(/\\\\/g, '/');
 
   if (!(await exists(absRoot))) {
-    console.error('[ERR] Events root not found: - generate-events-manifest.js:104', absRoot);
+    console.error('[ERR] Events root not found: - generate-events-manifest.js:124', absRoot);
     process.exit(1);
   }
 
@@ -219,10 +222,10 @@ async function main() {
 
   const outFile = path.join(absRoot, OUTPUT_FILE);
   await fsp.writeFile(outFile, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
-  console.log('[OK] Wrote manifest: - generate-events-manifest.js:204', path.relative(process.cwd(), outFile));
+  console.log('[OK] Wrote manifest: - generate-events-manifest.js:225', path.relative(process.cwd(), outFile));
 }
 
 main().catch(err => {
-  console.error('[ERR] - generate-events-manifest.js:208', err && err.stack || err);
+  console.error('[ERR] - generate-events-manifest.js:229', err && err.stack || err);
   process.exit(1);
 });
