@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "timestamp": "2025-11-10T16:55:57.988Z",
+    "threshold": 1500000,
+    "quality": 74,
+    "force": true,
+    "backup": true,
+    "dry": false,
+    "candidates": 6,
+    "optimized": 6,
+    "skipped": 0,
+    "totalBefore": 16648028,
+    "totalAfter": 5509993,
+    "savings": 11138035,
+    "percent": "66.90"
+  },
+  "items": [
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/James Bond Cocktail Party 2023/230825_Cocktail_Reception_CAL2807_1.jpg",
+      "before": 7060865,
+      "after": 683055,
+      "status": "optimized"
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4924_webuse.jpg",
+      "before": 1976745,
+      "after": 1026303,
+      "status": "optimized"
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4939_webuse.jpg",
+      "before": 1765867,
+      "after": 856357,
+      "status": "optimized"
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4942_webuse.jpg",
+      "before": 1636966,
+      "after": 820439,
+      "status": "optimized"
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4944_webuse.jpg",
+      "before": 1753770,
+      "after": 897289,
+      "status": "optimized"
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4946_webuse.jpg",
+      "before": 2453815,
+      "after": 1226550,
+      "status": "optimized"
+    }
+  ]
+}

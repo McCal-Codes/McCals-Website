@@ -55,6 +55,7 @@
     "repo:health": "npm run clean && npm run ai:preflight:short && npm run analyze:large-files",
     "analyze:duplicates": "find . -type f -exec stat -f '%z %N' {} \\; | sort | uniq -d | sort -nr",
     "validate:widgets": "node scripts/utils/validate-widget-html.js",
+  "optimize:events": "node scripts/utils/auto-optimize-events-images.js",
     "ci:validate-scripts": "node scripts/utils/ci-validate-scripts.js",
     "ci:find-duplicates": "node scripts/utils/find-duplicate-scripts.js",
     "ci:archive-duplicates": "node scripts/utils/find-duplicate-scripts.js --archive",
