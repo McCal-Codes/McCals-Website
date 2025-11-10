@@ -1,8 +1,8 @@
 {
   "version": "2.0",
-  "generated": "2025-11-04T21:38:39.568Z",
-  "totalEvents": 7,
-  "totalImages": 74,
+  "generated": "2025-11-08T19:13:03.821Z",
+  "totalEvents": 8,
+  "totalImages": 95,
   "categories": [
     "Events",
     "Politics",
@@ -16,10 +16,217 @@
   ],
   "categoryStats": {
     "Events": 1,
-    "Politics": 6,
+    "Politics": 7,
     "Portraits": 0
   },
   "events": [
+    {
+      "eventName": "CMU Trump Protest",
+      "category": "Politics",
+      "tags": [
+        "Politics"
+      ],
+      "folderPath": "Politics/CMU Trump Protest",
+      "eventDate": {
+        "iso": "2025-07-15",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "July 15, 2025",
+      "totalImages": 21,
+      "images": [
+        {
+          "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1106-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1107-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1123-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1126-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1131-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1141-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1146-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1152-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1156-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1162-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1168-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1184-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1192-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1196-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1201-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1249-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1278-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
     {
       "eventName": "The Rooney Rule",
       "category": "Events",
