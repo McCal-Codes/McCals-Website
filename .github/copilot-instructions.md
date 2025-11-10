@@ -176,6 +176,14 @@ Scripts folder organization and archival (2025-10-06)
 
 Recent updates
 
+- 2025-11-10T00:00:00.000Z — Events performance + taxonomy updates.
+	- Image optimization: compressed oversized JPEG/PNG files in Events (≈66.9% average savings across initial batch); verified outputs and removed temporary backups.
+	- WEBP variants: added generator support and produced .webp companions for Events images; manifests updated to reference new assets.
+	- Category extension: introduced a General category in Events manifest logic and classified “Yinzers Meet Hike” as General.
+	- Widget behavior: no widget code change required for filters—Event Portfolio v2.6.x auto-discovers categories and will surface “General” alongside existing filters. “Performance Art” continues to display as “Arts” via label mapping.
+	- Validation: regenerated events-manifest.json; spot-check confirms Yinzers Meet Hike now shows category "General" and WEBP assets are listed.
+	- Notes/Next: optional follow-up to prefer WEBP sources in widget image selection (low-risk enhancement) and consider subheading copy to reflect outdoor/general events.
+
 - 2025-11-03T16:39:33.003Z — Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.
 - 2025-11-04T12:10:00.000Z — Manifest simplification & Portrait Portfolio v1.1 release (migration & hardening).
 	- Fixed a runtime initialization error in the Portrait Portfolio widget by restoring and hardening the structured-data helper; widget now recovers gracefully when manifests or images are missing.
