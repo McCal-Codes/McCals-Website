@@ -1,0 +1,227 @@
+<!-- Interactive Thesis Widget v0.3 — Live Thesis Embed + Thesis-related Podcast Excerpts
+Author: McCal Media
+Purpose: Embed the published thesis Google Doc and surface podcast excerpts specifically related to thesis topics.
+Usage: Paste entire HTML into a Squarespace Code Block. The thesis is embedded via the provided published iframe URL.
+Notes:
+- The Google Doc is embedded read-only via iframe (no cross-origin scraping). For curated inline excerpts, continue using v0.2.
+- Excerpts below are editable; update quotes, tags, and timestamps as you refine the mapping.
+Accessibility: Keyboard-accessible controls, reduced-motion support, semantic regions and labels.
+-->
+
+<style>
+/* Shared palette (aligned with blog widgets) */
+:root{--ink:#1a1a1a;--paper:#f8f9fa;--edge:#e2e8f0;--accent:#0b5fff;--accent-weak:#6fa8ff;--muted:#6b7280;--card-bg:#ffffff10}
+@media(prefers-color-scheme:dark){:root{--ink:#f3f4f6;--paper:#0d1117;--edge:#1f2937;--muted:#9ca3af;--card-bg:#ffffff08}}
+
+.itx3-root{font-family:system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+.itx3-wrap{max-width:1120px;margin:0 auto;padding:40px 24px}
+.itx3-h1{font-weight:800;font-size:clamp(30px,4vw,44px);line-height:1.15;margin:0 0 10px}
+.itx3-sub{color:var(--muted);max-width:780px;margin:0 0 20px}
+
+.section-heading{font-weight:700;font-size:clamp(22px,3vw,30px);margin:36px 0 12px;line-height:1.25}
+.thesis-embed{border:1px solid var(--edge);border-radius:16px;overflow:hidden;background:#fff}
+@media(prefers-color-scheme:dark){.thesis-embed{background:#0e1114}}
+.thesis-iframe{width:100%;height:min(75vh,900px);display:block;border:0}
+.embed-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* Blog-style controls and chips */
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.btn{background:rgba(0,0,0,.06);border:1px solid var(--edge);color:inherit;font-weight:600;border-radius:999px;padding:8px 12px;font-size:13px;cursor:pointer}
+.btn[aria-pressed="true"],.btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(11,95,255,.35)}
+
+/* Blog-style grid and cards (masonry-like columns) */
+.blog-grid{column-count:3;column-gap:24px;opacity:0;transition:opacity .4s ease}
+.blog-grid.loaded{opacity:1}
+@media(max-width:1100px){.blog-grid{column-count:2}}
+@media(max-width:720px){.blog-grid{column-count:1}}
+
+.blog-card{display:inline-block;width:100%;margin:0 0 24px 0;background:var(--card-bg);border-radius:12px;overflow:hidden;border:1px solid var(--edge);transition:transform .2s ease,background .2s ease;cursor:default;break-inside:avoid}
+.blog-card:hover{transform:translateY(-2px)}
+.blog-card-header{padding:16px 18px 0 18px}
+.blog-title{margin:0 0 6px;font-size:18px;line-height:1.3;font-weight:800}
+.blog-date{display:inline-block;color:var(--accent);font-size:12px;font-weight:600;margin:0 0 10px}
+.blog-body{padding:0 18px 16px 18px;color:inherit}
+.blog-body p{margin:0 0 10px}
+.chip{display:inline-block;background:rgba(0,0,0,.05);border:1px solid var(--edge);border-radius:999px;padding:3px 8px;font-size:12px;color:var(--muted);margin-right:6px}
+
+.actions{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.actions a,.actions button{background:var(--accent);color:#fff;font-weight:700;border:none;border-radius:8px;padding:6px 10px;font-size:13px;text-decoration:none;cursor:pointer}
+.actions a:hover,.actions button:hover{background:#0046c4}
+.actions a:focus-visible,.actions button:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(11,95,255,.35)}
+.audio{width:100%}
+
+.reveal[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;will-change:transform,opacity}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal[data-reveal]{transition:none}}
+
+.footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--edge);font-size:12px;color:var(--muted)}
+.badge{background:rgba(0,0,0,.08);padding:4px 8px;border-radius:6px;font-size:12px;font-weight:600;color:#555;margin-left:8px}
+@media(prefers-color-scheme:dark){.badge{background:rgba(255,255,255,.08);color:#bbb}}
+</style>
+
+<div class="itx3-root" id="interactiveThesisV3" data-version="v0.3-thesis-live">
+  <div class="itx3-wrap">
+    <header>
+      <h1 class="itx3-h1">Interactive Thesis — Live Embed + Thesis Mentions <span class="badge">v0.3</span></h1>
+      <p class="itx3-sub">The published thesis is embedded below. Excerpts highlight podcast moments where thesis topics come up, with short inline previews and links to full episodes.</p>
+    </header>
+
+    <h2 class="section-heading">Thesis (Live Embed)</h2>
+    <div class="thesis-embed" data-reveal>
+      <iframe class="thesis-iframe" title="Published Thesis Document" loading="lazy"
+        src="https://docs.google.com/document/d/e/2PACX-1vSC3r7mFfdtEEN0eIRlMz6_plrhCd-EcZQ82SBdCqZAJUzlKseU3xg5V01IgbjTvnkKF9XWvlTT5g8h/pub?embedded=true"></iframe>
+    </div>
+    <p class="embed-note">If you update the Google Doc, changes appear here automatically. Cross-origin content is sandboxed for safety and performance.</p>
+
+    <h2 class="section-heading">Podcast Excerpts — Thesis Mentions</h2>
+    <div class="controls" role="toolbar" aria-label="Excerpt filters">
+      <button class="btn" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="btn" type="button" data-filter="thesis">Thesis Mentions</button>
+    </div>
+    <div class="blog-grid" id="itx3Grid" role="list" aria-live="polite" aria-busy="false"></div>
+
+    <div class="footer">Self-contained embed; audio preloads none; respects reduced motion; accessible controls.
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var root = document.getElementById('interactiveThesisV3');
+  if(!root) return;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var grid = document.getElementById('itx3Grid');
+  var toolbar = root.querySelector('.controls');
+  var currentFilter = 'all';
+  var focusIndex = 0; // keyboard navigation index
+
+  // Curated thesis-related excerpts (edit freely) ----------------------------------------------
+  var excerpts = [
+    {
+      id:'ep8-liam-thesis', episode:'Ep 8 — Liam Sullivan', thesis:true,
+      quote:'“Curiosity stitches the thesis together — we follow threads until they cohere.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode8.mp3', startSeconds:64, durationPreview:26, tag:'Methodology'
+    },
+    {
+      id:'ep7-mark-thesis', episode:'Ep 7 — Mark Palumbo', thesis:true,
+      quote:'“Brand and self merge after college — the thesis is how you argue for the merge.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode7.mp3', startSeconds:302, durationPreview:28, tag:'Introduction'
+    },
+    {
+      id:'ep4-dth-thesis', episode:'Ep 4 — Dream the Heavy', thesis:true,
+      quote:'“Community edits the work while you make it — that’s the missing chapter.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode4.mp3', startSeconds:612, durationPreview:30, tag:'Findings'
+    },
+    {
+      id:'ep3-collin-context', episode:'Ep 3 — Collin Strachan', thesis:false,
+      quote:'“The gear records; staying present is the story.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode3.mp3', startSeconds:220, durationPreview:22, tag:'Context'
+    }
+  ];
+
+  function fmt(sec){var m=Math.floor(sec/60), s=sec%60; return m+':'+(''+s).padStart(2,'0');}
+
+  function render(){
+    grid.setAttribute('aria-busy','true');
+    var frag = document.createDocumentFragment();
+    var list = excerpts.filter(function(x){ return currentFilter==='all' ? true : !!x.thesis; });
+    if(list.length === 0){
+      var empty = document.createElement('div');
+      empty.className='blog-card reveal';
+      empty.setAttribute('data-reveal','');
+      empty.innerHTML = '<div class="blog-card-header"><h3 class="blog-title">No excerpts</h3><div class="blog-date">Filter: '+currentFilter+'</div></div><div class="blog-body"><p>No excerpts match this filter yet. Update the excerpts array to add more thesis-related clips.</p></div>';
+      frag.appendChild(empty);
+      focusIndex = 0;
+    }
+    list.forEach(function(x){
+      var card = document.createElement('article');
+      card.className = 'blog-card reveal';
+      card.setAttribute('data-reveal','');
+      card.setAttribute('tabindex','0');
+      card.setAttribute('role','listitem');
+      card.setAttribute('aria-label','Excerpt from '+x.episode+' — '+x.tag);
+      var header = document.createElement('div'); header.className='blog-card-header';
+      var h = document.createElement('h3'); h.className='blog-title'; h.textContent = x.episode; header.appendChild(h);
+      var date = document.createElement('div'); date.className='blog-date'; date.textContent = fmt(x.startSeconds)+'–'+fmt(x.startSeconds+x.durationPreview);
+      header.appendChild(date);
+      card.appendChild(header);
+
+      var body = document.createElement('div'); body.className='blog-body';
+      var chips = document.createElement('div');
+      var chip = document.createElement('span'); chip.className='chip'; chip.textContent = x.tag + (x.thesis ? ' • Thesis' : ''); chips.appendChild(chip);
+      body.appendChild(chips);
+
+      var q = document.createElement('p'); q.textContent = x.quote; body.appendChild(q);
+
+      var actions = document.createElement('div'); actions.className='actions';
+      var audio = document.createElement('audio'); audio.className='audio'; audio.setAttribute('preload','none'); audio.setAttribute('controls','');
+      audio.src = x.audioUrl + '#t=' + x.startSeconds + ',' + (x.startSeconds + x.durationPreview);
+      actions.appendChild(audio);
+      var full = document.createElement('a'); full.href = x.audioUrl; full.target = '_blank'; full.rel = 'noopener noreferrer'; full.textContent = 'Full Episode';
+      actions.appendChild(full);
+
+      body.appendChild(actions);
+      card.appendChild(body);
+      frag.appendChild(card);
+    });
+    grid.innerHTML=''; grid.appendChild(frag);
+    grid.setAttribute('aria-busy','false');
+    initReveal();
+    // reveal grid after first render for smoother load
+    grid.classList.add('loaded');
+    // reset focus index
+    focusIndex = 0;
+    var first = grid.querySelector('.blog-card');
+    if(first) first.focus();
+  }
+
+  function initReveal(){
+    var els=[].slice.call(root.querySelectorAll('[data-reveal]'));
+    if(!('IntersectionObserver' in window) || reduced){ els.forEach(function(el){el.classList.add('visible');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){ if(entry.isIntersecting){ entry.target.classList.add('visible'); io.unobserve(entry.target); }});
+    },{threshold:0.15, rootMargin:'0px 0px -10% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  toolbar.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-filter]');
+    if(!btn) return;
+    var filter = btn.getAttribute('data-filter');
+    currentFilter = filter;
+    // toggle aria-pressed
+    [].slice.call(toolbar.querySelectorAll('[data-filter]')).forEach(function(b){ b.setAttribute('aria-pressed', String(b===btn)); b.classList.toggle('active', b===btn); });
+    render();
+  });
+
+  // Keyboard navigation between cards (ArrowRight/ArrowLeft/ArrowDown/ArrowUp, Enter to play/pause audio)
+  root.addEventListener('keydown', function(ev){
+    var cards = [].slice.call(grid.querySelectorAll('.blog-card'));
+    if(!cards.length) return;
+    var key = ev.key;
+    var cols = getComputedStyle(grid).columnCount ? parseInt(getComputedStyle(grid).columnCount,10) : 3;
+    if(['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(key)){
+      ev.preventDefault();
+      var rowLength = cols;
+      if(key==='ArrowRight') focusIndex = Math.min(cards.length-1, focusIndex+1);
+      else if(key==='ArrowLeft') focusIndex = Math.max(0, focusIndex-1);
+      else if(key==='ArrowDown') focusIndex = Math.min(cards.length-1, focusIndex+rowLength);
+      else if(key==='ArrowUp') focusIndex = Math.max(0, focusIndex-rowLength);
+      cards[focusIndex].focus();
+    } else if(key==='Enter'){ // toggle audio play on focused card
+      var current = cards[focusIndex];
+      if(!current) return;
+      var audio = current.querySelector('audio');
+      if(audio){
+        if(audio.paused){ audio.play().catch(function(){}); }
+        else { audio.pause(); }
+      }
+    }
+  });
+
+  // init
+  render();
+})();
+</script>

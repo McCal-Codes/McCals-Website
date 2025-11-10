@@ -168,6 +168,8 @@ function getCached() {
 
 ## ♿ Accessibility Must-Haves
 
+> **📖 Complete Guide**: See `accessibility-patterns.md` for comprehensive examples and WCAG compliance patterns
+
 ### Interactive Elements
 ```html
 <!-- Cards -->
@@ -194,6 +196,38 @@ element.addEventListener('keydown', (e) => {
     handleClick();
   }
 });
+```
+
+### Skip Navigation
+```html
+<a class="skip-link" href="#main-content">Skip to main content</a>
+```
+
+```css
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 20px;
+  top: 20px;
+  z-index: 1000;
+  width: auto;
+  height: auto;
+}
+```
+
+### Focus Indicators
+```css
+:where(a, button, [role="button"]):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
 ```
 
 ---
@@ -274,6 +308,7 @@ v2.0.0-redesigned-widget.html    # Major changes
 ### Enhancement Patterns
 - **Proven improvements**: `docs/standards/widget-standards.md`
 - **Systematic application**: `docs/standards/widget-development.md`
+- **Accessibility patterns**: `docs/standards/accessibility-patterns.md` ⭐
 
 ---
 

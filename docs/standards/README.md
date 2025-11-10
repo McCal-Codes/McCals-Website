@@ -10,11 +10,11 @@ Quick reference checklist and common patterns for widget development. Essential 
 ### ⚡ **performance-standards.md** ⭐ **PERFORMANCE FIRST**
 Lighthouse optimization guide using Concert Portfolio v4.6 as case study. **Required reading for all widget development.**
 
+### ♿ **accessibility-patterns.md** ⭐ **WCAG COMPLIANCE**
+Comprehensive accessibility pattern library with code examples for skip navigation, focus management, keyboard controls, mobile drawers, scroll spy, ARIA, reduced motion, color contrast, and more. **Reference implementation: Accessibility Statement Widget v1.0.**
+
 ### 📖 **widget-standards.md**
 Comprehensive widget standards documentation covering architecture, design patterns, performance, and accessibility requirements.
-
-### � **widget-standards.md**
-Comprehensive widget standards, proven UX and technical improvements, and best practices for all widgets. All enhancement patterns are now integrated here.
 
 ### 🔄 **widget-development.md**
 Systematic methodology for applying enhancement patterns across widgets with implementation checklists and quality standards.

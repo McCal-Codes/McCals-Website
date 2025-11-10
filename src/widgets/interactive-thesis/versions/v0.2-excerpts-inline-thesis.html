@@ -1,0 +1,202 @@
+<!-- Interactive Thesis Widget v0.2 — Podcast Excerpts + Inline Thesis Placeholders
+Author: McCal Media
+Change: Adds podcast excerpt cards and structured inline thesis sections (placeholders) for direct embedding.
+Usage: Paste into Squarespace Code Block. Replace TODO thesis paragraphs with actual thesis excerpts.
+Note: Google Docs content not auto-fetched (auth required). Manually copy/paste thesis text into the marked sections below.
+Accessibility: All interactive elements keyboard accessible; aria labels provided.
+-->
+
+<style>
+:root{--ink:#1a1a1a;--paper:#f8f9fa;--edge:#e2e8f0;--accent:#0b5fff;--accent-weak:#6fa8ff;--quote-bg:#ffffff;--quote-border:#d1d5db}
+@media(prefers-color-scheme:dark){:root{--ink:#f3f4f6;--paper:#0d1117;--edge:#1f2937;--quote-bg:#161b22;--quote-border:#30363d}}
+body{margin:0}
+.itx2-root{font-family:system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.5}
+.itx2-wrap{max-width:1080px;margin:0 auto;padding:28px 18px}
+.itx2-h1{font-weight:800;font-size:clamp(30px,4vw,44px);line-height:1.15;margin:0 0 8px}
+.itx2-sub{color:#4b5563;max-width:760px;margin:0 0 24px}
+@media(prefers-color-scheme:dark){.itx2-sub{color:#9ca3af}}
+.section-heading{font-weight:700;font-size:clamp(22px,3vw,30px);margin:40px 0 12px;line-height:1.25}
+.thesis-block{background:var(--quote-bg);border:1px solid var(--quote-border);border-radius:14px;padding:20px 22px;margin:16px 0;position:relative}
+.thesis-block h3{margin:0 0 10px;font-size:18px;font-weight:600}
+.thesis-block p{margin:10px 0;font-size:16px}
+.thesis-block code{display:inline-block;background:rgba(0,0,0,.06);padding:2px 6px;border-radius:5px;font-size:13px}
+@media(prefers-color-scheme:dark){.thesis-block code{background:rgba(255,255,255,.08)}}
+.todo-marker{display:inline-block;padding:4px 8px;background:#fff0c2;color:#92400e;font-weight:600;border-radius:6px;font-size:12px;letter-spacing:.5px}
+@media(prefers-color-scheme:dark){.todo-marker{background:#3b2f00;color:#ffdf7d}}
+.excerpts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:20px}
+.excerpt-card{background:var(--quote-bg);border:1px solid var(--quote-border);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;position:relative;min-height:200px}
+.excerpt-title{margin:0;font-size:16px;font-weight:600;line-height:1.3}
+.excerpt-quote{margin:0;font-size:14px;line-height:1.45;color:#374151}
+@media(prefers-color-scheme:dark){.excerpt-quote{color:#d1d5db}}
+.excerpt-actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
+.excerpt-actions button,.excerpt-actions a{cursor:pointer;background:var(--accent);color:#fff;border:none;padding:6px 12px;font-size:13px;border-radius:8px;font-weight:600;line-height:1.2;text-decoration:none}
+.excerpt-actions button:hover,.excerpt-actions a:hover{background:#0046c4}
+.excerpt-actions button:focus-visible,.excerpt-actions a:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(11,95,255,.35)}
+.inline-audio{width:100%;margin-top:8px}
+.reveal[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;will-change:transform,opacity}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal[data-reveal]{transition:none}}
+.footer-note{margin-top:48px;padding:28px 18px;border-top:1px solid var(--edge);font-size:13px;color:#6b7280}
+@media(prefers-color-scheme:dark){.footer-note{color:#9ca3af}}
+.small-badge{background:rgba(0,0,0,.08);padding:4px 8px;border-radius:6px;font-size:12px;font-weight:600;color:#555;margin-left:8px}
+@media(prefers-color-scheme:dark){.small-badge{background:rgba(255,255,255,.08);color:#bbb}}
+</style>
+
+<div class="itx2-root" id="interactiveThesisV2" data-version="v0.2-excerpts-inline">
+  <div class="itx2-wrap">
+    <header>
+      <h1 class="itx2-h1">Interactive Thesis — Excerpts & Inline Draft <span class="small-badge">v0.2</span></h1>
+      <p class="itx2-sub">Podcast conversation fragments cross-linked with thesis section placeholders. Replace highlighted TODO blocks with your real thesis text. Each excerpt can play audio and open related show notes.</p>
+    </header>
+
+    <h2 class="section-heading">Thesis Draft (Inline)</h2>
+    <div class="thesis-block" data-reveal>
+      <h3>Abstract <span class="todo-marker">TODO</span></h3>
+      <p><!-- TODO: Replace with actual abstract paragraph from thesis --> This abstract placeholder will summarize the core argument connecting lived experience in political spaces to narrative framing in multimedia storytelling. Replace with your authentic abstract content.</p>
+      <p><code>// Add key terms: authenticity, narrative compression, civic memory</code></p>
+    </div>
+    <div class="thesis-block" data-reveal>
+      <h3>Introduction <span class="todo-marker">TODO</span></h3>
+      <p><!-- TODO: Replace with Introduction excerpt --> The introduction placeholder sets up the thesis motivation: bridging field journalism, podcast dialogue, and reflective documentation to surface layered civic textures.</p>
+      <p><code>// Describe methodology context + experiential vantage</code></p>
+    </div>
+    <div class="thesis-block" data-reveal>
+      <h3>Methodology <span class="todo-marker">TODO</span></h3>
+      <p><!-- TODO: Replace with Methodology excerpt --> This placeholder outlines observational, dialogic, and archival synthesis methods. Include criteria for selecting podcast excerpts and events documented.</p>
+    </div>
+    <div class="thesis-block" data-reveal>
+      <h3>Key Findings <span class="todo-marker">TODO</span></h3>
+      <p><!-- TODO: Replace with Findings excerpt --> Insert distilled insight paragraphs linking audience engagement patterns, authenticity signals in unscripted speech, and cross-medium retention markers.</p>
+    </div>
+    <div class="thesis-block" data-reveal>
+      <h3>Conclusion <span class="todo-marker">TODO</span></h3>
+      <p><!-- TODO: Replace with Conclusion excerpt --> Provide synthesis on how multi-channel documentation reshapes memory scaffolding for civic events and personal archives.</p>
+    </div>
+
+    <h2 class="section-heading">Podcast Excerpts</h2>
+    <div class="excerpts-grid" id="excerptsGrid" aria-label="Podcast excerpt cards"></div>
+
+    <div class="footer-note">v0.2 — Add/edit thesis sections directly here. Podcast excerpts are locally defined; refine quotes and timestamps as needed. Performance: minimal inline JS + no external libs.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var root = document.getElementById('interactiveThesisV2');
+  if(!root) return;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var excerptContainer = document.getElementById('excerptsGrid');
+
+  // Local excerpt dataset (edit quotes to match thesis narrative) ---------------------------------
+  var episodeExcerpts = [
+    {
+      id:'ep8-liam',
+      episode:'Ep 8: Liam Sullivan',
+      quote:'“Curiosity threads everything we do — we just follow the smallest spark until it becomes a project.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode8.mp3',
+      startSeconds: 45,
+      durationPreview: 28,
+      thesisTag:'Authenticity'
+    },
+    {
+      id:'ep7-mark',
+      episode:'Ep 7: Mark Palumbo',
+      quote:'“Post-grad feels like brand triage — you keep what signals truth and trim everything else.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode7.mp3',
+      startSeconds: 310,
+      durationPreview: 32,
+      thesisTag:'Identity'
+    },
+    {
+      id:'ep6-kyle',
+      episode:'Ep 6: Kyle Archer',
+      quote:'“Chaos isn’t noise, it’s unindexed meaning waiting for a pattern.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode6.mp3',
+      startSeconds: 120,
+      durationPreview: 25,
+      thesisTag:'Pattern'
+    },
+    {
+      id:'ep4-dth',
+      episode:'Ep 4: Dream the Heavy',
+      quote:'“Community is the silent collaborator — it edits you while you make.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode4.mp3',
+      startSeconds: 600,
+      durationPreview: 30,
+      thesisTag:'Community'
+    },
+    {
+      id:'ep3-collin',
+      episode:'Ep 3: Collin Strachan',
+      quote:'“The gear just records; the decision to stay in harsh conditions is where story lives.”',
+      audioUrl:'https://media.rss.com/cafeconnectpod/audio/episode3.mp3',
+      startSeconds: 240,
+      durationPreview: 26,
+      thesisTag:'Resilience'
+    }
+  ];
+
+  function formatTime(seconds){var m=Math.floor(seconds/60);var s=seconds%60;return m+':'+(''+s).padStart(2,'0');}
+
+  function renderExcerpts(){
+    var frag = document.createDocumentFragment();
+    episodeExcerpts.forEach(function(ex){
+      var card = document.createElement('article');
+      card.className='excerpt-card reveal';
+      card.setAttribute('data-reveal','');
+      card.setAttribute('tabindex','0');
+      card.setAttribute('aria-label','Excerpt from '+ex.episode+' related to '+ex.thesisTag);
+
+      var h = document.createElement('h3');
+      h.className='excerpt-title';
+      h.textContent=ex.episode;
+      card.appendChild(h);
+
+      var q = document.createElement('p');
+      q.className='excerpt-quote';
+      q.textContent=ex.quote;
+      card.appendChild(q);
+
+      var meta = document.createElement('p');
+      meta.style.margin='0';
+      meta.style.fontSize='12px';
+      meta.style.color='var(--accent)';
+      meta.textContent='Tag: '+ex.thesisTag+' • Preview '+formatTime(ex.startSeconds)+'–'+formatTime(ex.startSeconds+ex.durationPreview);
+      card.appendChild(meta);
+
+      var actions = document.createElement('div');
+      actions.className='excerpt-actions';
+
+      var audio = document.createElement('audio');
+      audio.className='inline-audio';
+      audio.setAttribute('preload','none');
+      audio.setAttribute('controls','');
+      audio.src=ex.audioUrl+'#t='+ex.startSeconds+','+(ex.startSeconds+ex.durationPreview);
+      actions.appendChild(audio);
+
+      var openFull = document.createElement('a');
+      openFull.href=ex.audioUrl;
+      openFull.target='_blank';
+      openFull.rel='noopener noreferrer';
+      openFull.textContent='Full Episode';
+      actions.appendChild(openFull);
+
+      card.appendChild(actions);
+      frag.appendChild(card);
+    });
+    excerptContainer.innerHTML='';
+    excerptContainer.appendChild(frag);
+  }
+
+  function initReveal(){
+    var items=[].slice.call(document.querySelectorAll('[data-reveal]'));
+    if(!('IntersectionObserver'in window)||reduced){items.forEach(function(el){el.classList.add('visible');});return;}
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}});},{threshold:0.15,rootMargin:'0px 0px -12% 0px'});
+    items.forEach(function(el){io.observe(el);});
+  }
+
+  function init(){renderExcerpts();initReveal();}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+})();
+</script>
