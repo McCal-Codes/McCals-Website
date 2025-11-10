@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>McCal Media Blog</title>
+  <link>/</link>
+  <description>Blog feed generated from manifest.json</description>
+  <item>
+    <title>Welcome to the new blog</title>
+    <link>/blog/welcome-to-the-new-blog</link>
+    <guid isPermaLink="false">welcome-to-the-new-blog</guid>
+    <pubDate>Mon, 10 Nov 2025 00:00:00 GMT</pubDate>
+    <description>A first sample post to demonstrate the blog scaffold and widget features.</description>
+  </item>
+</channel>
+</rss>

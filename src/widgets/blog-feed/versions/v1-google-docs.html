@@ -1,10 +1,13 @@
 <!-- Blog Feed Widget (Google Docs) - Single Page Example -->
-<div id="blogFeed" data-blog-feed-docs data-provider="docs"
-     data-doc-id="1PlnajhCPl2Np5AN_uVcxG7xIR_BGkjfk9rUDcInbJLc" 
-     data-max-posts="10"
-     data-show-dates="true" 
-     data-show-images="true" 
-     data-auto-captions="true">
+<div id="blogFeed"
+  data-provider="docs"
+  data-blog-feed-docs
+  data-doc-id="1PlnajhCPl2Np5AN_uVcxG7xIR_BGkjfk9rUDcInbJLc"
+  data-max-posts="10"
+  data-show-dates="true"
+  data-show-images="true"
+  data-auto-captions="true"
+  data-feed-url="/src/site/blog/feed.json">
   <div class="blog-loading">Loading blog posts...</div>
 </div>
 
@@ -228,6 +231,69 @@
 <script src="../shared/universal-caption-system.js"></script>
 <!-- Google Docs Blog Feed logic -->
 <script src="./blog-feed-docs.js"></script>
+
+<!-- Feed provider renderer: if `data-provider="feed"` this will render JSON feed (feed.json) into the same markup/style used by the docs renderer -->
+<script>
+  (function(){
+    const root = document.getElementById('blogFeed');
+    if(!root) return;
+  const provider = root.getAttribute('data-provider');
+  // run if explicitly set to feed, or if a feed URL is present (backwards-compatible)
+  const hasFeedUrl = root.hasAttribute('data-feed-url') && root.getAttribute('data-feed-url').trim() !== '';
+  if(provider !== 'feed' && !hasFeedUrl) return; // only run for feed mode or when feed-url is provided
+
+    const feedUrl = root.getAttribute('data-feed-url') || '/src/site/blog/feed.json';
+    const maxPosts = parseInt(root.getAttribute('data-max-posts')||'10',10);
+    const showDates = (root.getAttribute('data-show-dates')||'true') === 'true';
+    const showImages = (root.getAttribute('data-show-images')||'true') === 'true';
+
+    function esc(s){ if(s==null) return ''; return String(s); }
+
+    function render(posts){
+      root.innerHTML = '';
+      const feedEl = document.createElement('div'); feedEl.className='blog-feed';
+      posts.slice(0,maxPosts).forEach(it=>{
+        const card = document.createElement('article'); card.className='blog-card';
+        const header = document.createElement('div'); header.className='blog-card-header';
+        if(showImages && it.image){
+          const imgWrap = document.createElement('div'); imgWrap.className='blog-image';
+          const img = document.createElement('img'); img.src = it.image; img.alt = it.image_alt || '';
+          imgWrap.appendChild(img);
+          card.appendChild(imgWrap);
+        }
+        const title = document.createElement('h2'); title.className='blog-title';
+        const a = document.createElement('a'); a.href = it.url || '#'; a.textContent = it.title || 'Untitled'; a.setAttribute('aria-label', it.title || 'Post');
+        title.appendChild(a);
+        header.appendChild(title);
+        if(showDates && it.date_published){
+          const date = document.createElement('div'); date.className='blog-date';
+          const d = new Date(it.date_published); date.textContent = isNaN(d.getTime()) ? it.date_published : d.toLocaleDateString();
+          header.appendChild(date);
+        }
+        card.appendChild(header);
+
+        const body = document.createElement('div'); body.className='blog-body';
+        if(it.summary) body.innerHTML = `<p>${esc(it.summary)}</p>`;
+        feedEl.appendChild(card);
+        card.appendChild(body);
+      });
+      root.appendChild(feedEl);
+    }
+
+    // show a tiny debug hint in console for troubleshooting
+    console.debug('blog-feed: loading feed from', feedUrl);
+    fetch(feedUrl).then(r=>{
+      if(!r.ok) throw new Error('Feed fetch failed: '+r.status);
+      return r.json();
+    }).then(json=>{
+      const items = json.items || json.posts || [];
+      render(items);
+    }).catch(err=>{
+      root.innerHTML = `<div class="blog-error">Unable to load blog feed. ${esc(err.message)}</div>`;
+      console.error('Feed renderer error', err);
+    });
+  })();
+</script>
 
 <!-- Configuration notes:
 1) Your Google Doc must be "Published to web" (File > Share > Publish to web)

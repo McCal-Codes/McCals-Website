@@ -24,6 +24,7 @@
     "docker:run": "docker run -p 8080:8080 mccal-media-website",
     "docker:deploy": "docker build -t mccal-media-website . && docker run -d -p 8080:8080 --name mccal-website mccal-media-website",
     "manifest:generate": "node scripts/manifest/enhanced-manifest-generator.js --auto",
+  "blog:generate": "node scripts/blog/generate-blog-feed.js",
     "manifest:dry-run": "node scripts/manifest/enhanced-manifest-generator.js --auto --dry --verbose",
     "manifest:single": "node scripts/manifest/enhanced-manifest-generator.js",
     "manifest:journalism": "node scripts/manifest/generate-journalism-manifest-v2.js",
