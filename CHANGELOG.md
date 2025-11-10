@@ -40,6 +40,33 @@
 - Added pinning tip to `updates/welcome.md` for persistent dashboard visibility in VS Code.
 # Changelog
 
+## 2025-11-10
+### Interactive Thesis Widget v0.4 — Thesis Blog Format (No Live Embed)
+- New version: `src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html`.
+- Removes the live Google Docs iframe; thesis sections (Abstract, Introduction, Methodology, Findings, Conclusion) are formatted as standalone blog-style cards using blog-grid/blog-card patterns.
+- Keeps curated thesis-related podcast excerpts with media-fragment audio previews and full-episode links.
+- A11y: list/listitem roles, toolbar aria-pressed, keyboard navigation (arrows) between cards, Enter toggles audio; reduced motion supported.
+- Validation: widget HTML validator PASS.
+### Interactive Thesis Widget v0.3 — Thesis Live Embed + Thesis-related Podcast Excerpts
+- New version: `src/widgets/interactive-thesis/versions/v0.3-thesis-live-excerpts.html`.
+- Aligns excerpt cards with blog widget aesthetics (blog-grid/blog-card, header/body, chips) for consistent look and feel.
+- Embeds the published Google Doc via iframe (auto-updates on doc changes; no scraping) and surfaces curated thesis-related podcast clips with media fragment previews.
+- Accessibility: semantic article cards with roles, toolbar filters with aria-pressed, reduced motion support.
+- Validation: widget HTML validator PASS.
+### Interactive Thesis Widget v0.1-minimal
+### Interactive Thesis Widget v0.2 — Excerpts + Inline Thesis
+- New version: `src/widgets/interactive-thesis/versions/v0.2-excerpts-inline-thesis.html`.
+- Adds a "Thesis Draft (Inline)" section with clearly marked TODO placeholders (Abstract, Introduction, Methodology, Findings, Conclusion) for pasting actual thesis text.
+- Adds "Podcast Excerpts" grid with accessible cards, each with a quote, tag, and inline audio preview (start-end via media fragment). Links to full episode.
+- Performance: still self-contained, inline CSS/JS only. Reduced-motion respected. IntersectionObserver reveal.
+- Validation: widget HTML validator PASS.
+- Created new self-contained widget: `src/widgets/interactive-thesis/versions/v0.1-minimal.html`.
+- Features: scroll reveal (IntersectionObserver with reduced motion fallback), accessible Story Drawer (ESC + click-away, focus trap, return-focus), lazy-loaded journalism images, demo audio clip + transcript.
+- Performance: inline CSS/JS (no external frameworks) keeping footprint small; uses `loading="lazy"` and `decoding="async"` for images.
+- Accessibility: semantic elements, dialog role, focus trap, escape handling, reduced motion support.
+- Documentation: Added widget README with usage and stretch goals (podcast clips, map overlay, journal timeline).
+- Next: Add build automation & page-level SEO meta integration if promoted beyond widget embed.
+
 ## 2025-10-09
 ### Journalism Portfolio Widget v5.1 (Work in Progress)
 - Extracted all widget JavaScript to an external file (`journalism-widget-v5.1.js`) for CSP/DOMPurify compatibility and Squarespace embedding.

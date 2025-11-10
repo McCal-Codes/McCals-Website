@@ -147,16 +147,16 @@ Widget performance and debugging
 
 Good starting references
 
-- `scripts/enhanced-manifest-generator.js`  manifest schema and date logic.
-- `scripts/watch-auto-manifest.js`  recommended dev loop.
-- `src/widgets/**/README.md`  embedding instructions and constraints.
-- `src/site/app.js`  example data flow from manifests to UI.
+- `scripts/enhanced-manifest-generator.js` — manifest schema and date logic.
+- `scripts/watch-auto-manifest.js` — recommended dev loop.
+- `src/widgets/**/README.md` — embedding instructions and constraints.
+- `src/site/app.js` — example data flow from manifests to UI.
 - `docs/standards/widget-reference.md` ⭐ **START HERE**: quick reference for widget development patterns.
-- `docs/standards/widget-standards.md`  comprehensive widget standards and architecture guide.
-- `docs/standards/widget-standards.md` and `docs/standards/widget-development.md`  proven improvement patterns and systematic methodology for widget optimization.
-- `docs/standards/widget-development.md`  comprehensive guide for applying enhancement patterns systematically.
+- `docs/standards/widget-standards.md` — comprehensive widget standards and architecture guide.
+- `docs/standards/widget-development.md` — comprehensive guide for applying enhancement patterns systematically.
 - `docs/standards/performance-standards.md` ⭐ **PERFORMANCE REFERENCE**: Lighthouse optimization standards using Concert Portfolio v4.6 as case study.
-- `docs/standards/image-seo-standards.md`  comprehensive guide for optimizing portfolio images for search engines and accessibility.
+- `docs/standards/accessibility-patterns.md` ⭐ **ACCESSIBILITY REFERENCE**: WCAG 2.1 AA compliance patterns with code examples for skip navigation, focus management, keyboard controls, mobile drawers, scroll spy, ARIA, reduced motion, and color contrast. Reference implementation: Accessibility Statement Widget v1.0.
+- `docs/standards/image-seo-standards.md` — comprehensive guide for optimizing portfolio images for search engines and accessibility.
 
 Change management
 
@@ -175,6 +175,31 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+
+- 2025-11-10T12:00:00.000Z — Interactive Thesis Widget v0.1-minimal.
+	- Created self-contained thesis prototype widget with scroll-reveal, accessible Story Drawer (ESC + click-away, focus trap), and demo audio transcript.
+	- File: `src/widgets/interactive-thesis/versions/v0.1-minimal.html`. README added with usage instructions.
+	- Local preview build system added: `scripts/thesis/build-thesis-interactive.js` (esbuild + Tailwind via PostCSS) with outputs at `/thesis/interactive` and route alias `.../thesis/interactive`.
+	- NPM scripts: `build:thesis`, `dev:thesis`.
+	- HTML validator: PASS. Next: run Lighthouse and accessibility checks; optionally add page-level SEO when promoted beyond widget embed.
+
+- 2025-11-10T12:30:00.000Z — Interactive Thesis Widget v0.2 (Podcast Excerpts + Inline Thesis Placeholders).
+	- New version file: `src/widgets/interactive-thesis/versions/v0.2-excerpts-inline-thesis.html` with a structured thesis section (Abstract, Introduction, Methodology, Findings, Conclusion) and an excerpts grid tied to podcast episodes.
+	- Google Docs cannot be auto-fetched without auth; paste real thesis text into the marked TODO blocks.
+	- Excerpts include inline audio previews using audio URL time ranges and link to full episodes.
+	- HTML validator: PASS.
+
+- 2025-11-10T13:15:00.000Z — Interactive Thesis Widget v0.3 (Live Thesis Embed + Blog-styled Excerpts).
+	- New version file: `src/widgets/interactive-thesis/versions/v0.3-thesis-live-excerpts.html` embedding the published Google Doc (auto-updates on edits) and restyling podcast thesis excerpts using blog-grid/blog-card patterns for visual consistency.
+	- Accessibility: semantic article cards with roles, aria-live grid updates, toolbar buttons with `aria-pressed`, reduced motion respected.
+	- Performance: media fragment audio time-range previews (hash time ranges) with no preload, column-count masonry for efficient layout, single IntersectionObserver reveal.
+	- Validation: HTML validator PASS. Changelog and README updated.
+- 2025-11-10T13:45:00.000Z — Interactive Thesis Widget v0.4 (Blog-formatted Thesis, No Live Embed).
+	- New version file: `src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html` removes the live Google Docs iframe; thesis sections rendered as standalone blog cards with chips.
+	- Excerpts retained with keyboard navigation (arrows) + Enter to toggle audio; empty filter state added.
+	- Accessibility: list/listitem roles, distinct placeholder styling for TODO sections, reduced motion support preserved.
+	- Performance: static content (no cross-origin embed), lazy audio (no preload), single IntersectionObserver for reveal.
+	- Validation: HTML validator PASS; README and CHANGELOG updated.
 
 - 2025-11-10T00:00:00.000Z — Events performance + taxonomy updates.
 	- Image optimization: compressed oversized JPEG/PNG files in Events (≈66.9% average savings across initial batch); verified outputs and removed temporary backups.

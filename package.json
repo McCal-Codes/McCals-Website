@@ -63,7 +63,9 @@
     "ci:smoke-test": "node scripts/utils/smoke-test.js",
     "test:playwright": "npx playwright test tests/playwright --reporter=list",
     "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
-    "welcome": "node scripts/welcome.js"
+    "welcome": "node scripts/welcome.js",
+    "build:thesis": "node scripts/thesis/build-thesis-interactive.js",
+    "dev:thesis": "node scripts/thesis/build-thesis-interactive.js --watch"
   },
   "keywords": [
     "photography",
@@ -80,7 +82,11 @@
     "open": "^10.1.0",
     "playwright": "^1.39.0",
     "@playwright/test": "^1.39.0",
-    "eslint": "^8.46.0"
+    "eslint": "^8.46.0",
+    "tailwindcss": "^3.4.14",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20",
+    "esbuild": "^0.23.0"
   },
   "engines": {
     "node": ">=16.0.0"
@@ -90,6 +96,8 @@
     "exif-parser": "^0.1.12",
     "express": "^5.1.0",
     "lottie-web": "^5.13.0",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
