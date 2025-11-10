@@ -1,0 +1,164 @@
+<!--
+  Blog widget v0.1.0
+  - Reads `/src/site/blog/manifest.json` and `/src/site/blog/authors.json`
+  - Lists posts with summary
+  - Supports author pages (filter by author)
+  - Simple likes and comments stored in localStorage (MVP)
+  Usage: embed this HTML in the test site or a Code Block for local preview.
+-->
+<div class="mc-blog-widget" data-manifest="/src/site/blog/manifest.json" data-authors="/src/site/blog/authors.json">
+  <style>
+    .mc-blog-widget{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#111}
+    .mc-blog-list{display:block;max-width:900px;margin:0 auto}
+    .mc-blog-post{border-bottom:1px solid #e6e6e6;padding:18px 0}
+    .mc-blog-post h2{margin:0 0 6px;font-size:1.15rem}
+    .mc-blog-meta{color:#666;font-size:0.9rem;margin-bottom:8px}
+    .mc-blog-summary{margin:8px 0;color:#222}
+    .mc-blog-actions{display:flex;gap:12px;align-items:center}
+    .mc-btn{background:#f3f3f3;border:1px solid #ddd;padding:6px 10px;border-radius:6px;cursor:pointer}
+    .mc-comment-list{margin-top:10px}
+    .mc-comment{background:#fafafa;padding:8px;border-radius:6px;margin-bottom:6px;border:1px solid #eee}
+    .mc-author-block{text-align:center;margin:20px 0}
+    .mc-back{color:#0077cc;cursor:pointer}
+  </style>
+
+  <div class="mc-blog-list" aria-live="polite"></div>
+
+  <template id="post-template">
+    <article class="mc-blog-post">
+      <h2 class="post-title"></h2>
+      <div class="mc-blog-meta"><span class="post-date"></span> • <span class="post-author"></span></div>
+      <div class="mc-blog-summary"></div>
+      <div class="mc-blog-actions">
+        <button class="mc-btn like-btn">Like (<span class="like-count">0</span>)</button>
+        <button class="mc-btn toggle-comments">Comments</button>
+      </div>
+      <div class="mc-comments" style="display:none; margin-top:10px">
+        <div class="mc-comment-list"></div>
+        <div style="margin-top:8px"><input class="comment-input" placeholder="Write a comment..." style="width:70%" /><button class="mc-btn add-comment">Add</button></div>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    (function(){
+      const root = document.currentScript ? document.currentScript.parentElement : document.querySelector('.mc-blog-widget');
+      const listEl = root.querySelector('.mc-blog-list');
+      const manifestUrl = root.getAttribute('data-manifest') || '/src/site/blog/manifest.json';
+      const authorsUrl = root.getAttribute('data-authors') || '/src/site/blog/authors.json';
+
+      let manifest = {posts:[]};
+      let authors = {authors:[]};
+
+      function storageKey(type, slug){ return `mc-blog:${type}:${slug}` }
+
+      function getLikes(slug){ return parseInt(localStorage.getItem(storageKey('likes',slug))||'0',10) }
+      function setLikes(slug, n){ localStorage.setItem(storageKey('likes',slug), String(n)) }
+
+      function getComments(slug){ try{ return JSON.parse(localStorage.getItem(storageKey('comments',slug))||'[]') }catch(e){return[]} }
+      function setComments(slug, arr){ localStorage.setItem(storageKey('comments',slug), JSON.stringify(arr)) }
+
+      function renderList(posts){
+        listEl.innerHTML = '';
+        const backLink = document.createElement('div');
+        backLink.className = 'mc-author-block';
+
+        posts.forEach(p => {
+          const t = document.getElementById('post-template');
+          const node = t.content.cloneNode(true);
+          node.querySelector('.post-title').textContent = p.title;
+          node.querySelector('.post-date').textContent = p.date;
+          const authorEl = node.querySelector('.post-author');
+          authorEl.textContent = getAuthorName(p.author) || p.author;
+          authorEl.style.color = '#0077cc';
+          authorEl.style.cursor = 'pointer';
+          authorEl.addEventListener('click', ()=> showAuthor(p.author));
+
+          node.querySelector('.mc-blog-summary').textContent = p.summary || '';
+
+          const likeCountEl = node.querySelector('.like-count');
+          likeCountEl.textContent = getLikes(p.slug);
+          node.querySelector('.like-btn').addEventListener('click', ()=>{
+            const cur = getLikes(p.slug);
+            setLikes(p.slug, cur+1);
+            likeCountEl.textContent = cur+1;
+          });
+
+          const commentsBlock = node.querySelector('.mc-comments');
+          const commentList = node.querySelector('.mc-comment-list');
+          const toggleCommentsBtn = node.querySelector('.toggle-comments');
+          const input = node.querySelector('.comment-input');
+          const addBtn = node.querySelector('.add-comment');
+
+          function refreshComments(){
+            commentList.innerHTML = '';
+            const cs = getComments(p.slug);
+            cs.forEach(c=>{
+              const el = document.createElement('div'); el.className='mc-comment';
+              el.textContent = `${c.when || ''} — ${c.text}`;
+              commentList.appendChild(el);
+            });
+          }
+
+          toggleCommentsBtn.addEventListener('click', ()=>{
+            commentsBlock.style.display = commentsBlock.style.display === 'none' ? 'block' : 'none';
+            if(commentsBlock.style.display==='block') refreshComments();
+          });
+
+          addBtn.addEventListener('click', ()=>{
+            const v = input.value && input.value.trim();
+            if(!v) return;
+            const cs = getComments(p.slug);
+            cs.push({text:v, when: new Date().toLocaleString()});
+            setComments(p.slug, cs);
+            input.value='';
+            refreshComments();
+          });
+
+          listEl.appendChild(node);
+        });
+
+        // Add spacer at bottom
+        const spacer = document.createElement('div'); spacer.style.height='8px'; listEl.appendChild(spacer);
+      }
+
+      function getAuthorName(id){ const a = authors.authors.find(x=>x.id===id); return a && a.name }
+
+      function showAuthor(authorId){
+        const a = authors.authors.find(x=>x.id===authorId);
+        listEl.innerHTML = '';
+        const container = document.createElement('div');
+        container.className = 'mc-author-block';
+        container.innerHTML = `<div style="max-width:900px;margin:0 auto;padding:16px"><div style='display:flex;gap:12px;align-items:center'><img src='${(a && a.avatar) || ''}' alt='' style='width:72px;height:72px;border-radius:8px;object-fit:cover' onerror="this.style.display='none'"/><div><h3 style='margin:0'>${(a&&a.name)||authorId}</h3><p style='margin:6px 0 0;color:#444'>${(a&&a.bio)||''}</p><p style='margin:6px 0 0'><a href='#' class='mc-back'>&larr; Back to posts</a></p></div></div></div>`;
+        listEl.appendChild(container);
+        const postsBy = manifest.posts.filter(p=>p.author===authorId);
+        if(postsBy.length){
+          const heading = document.createElement('h4'); heading.textContent = `Posts by ${(a&&a.name)||authorId}`; heading.style.textAlign='center'; listEl.appendChild(heading);
+          renderList(postsBy);
+        } else {
+          const p = document.createElement('p'); p.textContent='No posts by this author yet.'; p.style.textAlign='center'; listEl.appendChild(p);
+        }
+
+        const back = listEl.querySelector('.mc-back');
+        if(back) back.addEventListener('click', (ev)=>{ ev.preventDefault(); renderList(manifest.posts); });
+      }
+
+      function load(){
+        Promise.all([
+          fetch(manifestUrl).then(r=>r.ok? r.json() : {posts:[]}).catch(()=>({posts:[]})),
+          fetch(authorsUrl).then(r=>r.ok? r.json() : {authors:[]}).catch(()=>({authors:[]}))
+        ]).then(([m,a])=>{
+          manifest = m || {posts:[]};
+          authors = a || {authors:[]};
+          renderList(manifest.posts || []);
+        }).catch(e=>{
+          listEl.innerHTML = `<div style='color:#900;padding:16px'>Unable to load blog manifest. See console for details.</div>`;
+          console.error('blog widget load error', e);
+        });
+      }
+
+      // Kick off
+      load();
+    })();
+  </script>
+</div>
