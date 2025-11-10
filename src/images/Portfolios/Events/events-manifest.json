@@ -1,8 +1,174 @@
 {
   "version": "2.5.3",
-  "generated": "2025-11-04",
-  "totalEvents": 10,
+  "generated": "2025-11-10",
+  "totalEvents": 12,
   "events": [
+    {
+      "eventName": "Love's A Game",
+      "category": "Corporate",
+      "dateDisplay": "November 2025",
+      "dateISO": "2025-11-06",
+      "date": {
+        "year": 2025,
+        "month": 11,
+        "day": 6,
+        "monthName": "November",
+        "iso": "2025-11-06",
+        "display": "November 2025"
+      },
+      "dateSource": "filename:251106 Love’s A Game - Ghostlight_CAL160_webuse.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL163_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL166_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL168_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL171_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL181_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL186_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL199_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL202_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL215_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL224_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL226_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL229_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL248_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL249_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL261_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL267_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL279_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL287_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL301_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL303_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL304_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL309_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL314_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL315_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL320_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL321_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL348_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL350_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL355_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL358_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL361_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL366_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL377_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL390_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL393_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL396_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL409_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL411_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL417_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL422_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL425_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL433_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL435_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL441_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL447_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL463_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL466_webuse.jpg"
+        }
+      ],
+      "totalImages": 49
+    },
     {
       "eventName": "Inclusivity Event PRSSA",
       "category": "Corporate",
@@ -165,6 +331,346 @@
         }
       ],
       "totalImages": 48
+    },
+    {
+      "eventName": "Howl At The Moon",
+      "category": "Corporate",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-24",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 24,
+        "monthName": "October",
+        "iso": "2025-10-24",
+        "display": "October 2025"
+      },
+      "dateSource": "filename:251024 Howl at the Moon _CAL7439_webuse.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7439_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7444_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7452_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7459_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7464_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7467_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7471_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7475_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7477_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7489_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7491_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7492_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7496_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7498_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7517_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7520_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7526_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7528_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7549_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7550_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7555_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7564_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7573_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7588_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7589_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7599_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7605_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7611_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7616_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7623_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7627_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7629_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7633_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7638_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7642_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7645_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7650_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7655_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7658_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7661_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7665_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7667_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7670_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7673_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7675_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7678_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7680_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7681_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7689_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7690_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7697_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7701_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7703_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7705_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7714_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7720_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7731_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7734_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7743_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7745_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7753_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7770_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7785_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7792_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7794_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7814_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7818_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7827_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7834_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7838_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7841_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7844_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7852_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7855_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7866_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7881_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7884_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7886_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7888_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7890_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7891_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7894_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7895_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7897_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7901_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7902_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7268_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7276_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7281_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7292_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7313_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7315_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7321_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7323_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7326_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7344_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7357_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7370_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7372_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7376_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7377_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7378_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7387_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7391_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7398_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7406_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7422_webuse.jpg"
+        }
+      ],
+      "totalImages": 107
     },
     {
       "eventName": "Local Union Officers Conference 2025",
@@ -824,6 +1330,171 @@
   ],
   "items": [
     {
+      "title": "Love's A Game",
+      "eventName": "Love's A Game",
+      "category": "Corporate",
+      "dateDisplay": "November 2025",
+      "dateISO": "2025-11-06",
+      "date": {
+        "year": 2025,
+        "month": 11,
+        "day": 6,
+        "monthName": "November",
+        "iso": "2025-11-06",
+        "display": "November 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL163_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL166_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL168_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL171_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL181_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL186_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL199_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL202_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL215_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL224_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL226_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL229_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL248_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL249_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL261_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL267_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL279_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL287_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL301_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL303_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL304_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL309_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL314_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL315_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL320_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL321_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL348_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL350_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL355_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL358_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL361_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL366_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL377_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL390_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL393_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL396_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL409_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL411_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL417_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL422_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL425_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL433_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL435_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL441_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL447_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL463_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL466_webuse.jpg"
+        }
+      ],
+      "folderPath": "Events/Love's A Game"
+    },
+    {
       "title": "Inclusivity Event PRSSA",
       "eventName": "Inclusivity Event PRSSA",
       "category": "Corporate",
@@ -984,6 +1655,345 @@
         }
       ],
       "folderPath": "Events/Inclusivity Event - PRSSA"
+    },
+    {
+      "title": "Howl At The Moon",
+      "eventName": "Howl At The Moon",
+      "category": "Corporate",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-24",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 24,
+        "monthName": "October",
+        "iso": "2025-10-24",
+        "display": "October 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7439_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7444_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7452_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7459_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7464_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7467_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7471_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7475_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7477_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7489_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7491_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7492_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7496_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7498_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7517_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7520_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7526_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7528_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7549_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7550_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7555_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7564_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7573_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7588_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7589_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7599_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7605_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7611_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7616_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7623_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7627_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7629_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7633_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7638_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7642_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7645_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7650_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7655_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7658_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7661_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7665_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7667_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7670_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7673_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7675_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7678_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7680_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7681_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7689_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7690_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7697_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7701_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7703_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7705_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7714_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7720_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7731_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7734_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7743_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7745_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7753_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7770_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7785_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7792_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7794_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7814_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7818_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7827_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7834_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7838_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7841_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7844_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7852_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7855_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7866_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7881_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7884_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7886_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7888_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7890_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7891_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7894_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7895_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7897_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7901_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7902_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7268_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7276_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7281_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7292_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7313_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7315_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7321_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7323_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7326_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7344_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7357_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7370_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7372_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7376_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7377_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7378_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7387_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7391_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7398_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7406_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon_CAL7422_webuse.jpg"
+        }
+      ],
+      "folderPath": "Events/Howl at the Moon"
     },
     {
       "title": "Local Union Officers Conference 2025",
