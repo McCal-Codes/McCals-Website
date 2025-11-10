@@ -1,55 +1,108 @@
 {
   "summary": {
-    "timestamp": "2025-11-10T16:55:57.988Z",
-    "threshold": 1500000,
-    "quality": 74,
-    "force": true,
-    "backup": true,
+    "timestamp": "2025-11-10T18:53:23.069Z",
+    "threshold": 1000000,
+    "quality": 80,
+    "force": false,
+    "backup": false,
     "dry": false,
-    "candidates": 6,
-    "optimized": 6,
-    "skipped": 0,
-    "totalBefore": 16648028,
-    "totalAfter": 5509993,
-    "savings": 11138035,
-    "percent": "66.90"
+    "candidates": 9,
+    "optimized": 0,
+    "skipped": 2,
+    "totalBefore": 23365813,
+    "totalAfter": 0,
+    "savings": 23365813,
+    "percent": "100.00"
   },
   "items": [
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/James Bond Cocktail Party 2023/230825_Cocktail_Reception_CAL2807_1.jpg",
-      "before": 7060865,
-      "after": 683055,
-      "status": "optimized"
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.jpg",
+      "before": 3692194,
+      "after": 3692194,
+      "status": "webp-only",
+      "webp": {
+        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.webp",
+        "size": 3062722,
+        "status": "generated"
+      }
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7377-min.jpg",
+      "before": 2731365,
+      "after": 2731365,
+      "status": "webp-only",
+      "webp": {
+        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7377-min.webp",
+        "size": 2726844,
+        "status": "generated"
+      }
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7391-min.jpg",
+      "before": 3190454,
+      "after": 3190454,
+      "status": "webp-only",
+      "webp": {
+        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7391-min.webp",
+        "size": 2493000,
+        "status": "generated"
+      }
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7394-min.jpg",
+      "before": 2856896,
+      "after": 2856896,
+      "status": "webp-only",
+      "webp": {
+        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7394-min.webp",
+        "size": 2806436,
+        "status": "generated"
+      }
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7423-min.jpg",
+      "before": 2518423,
+      "after": 2518423,
+      "status": "webp-only",
+      "webp": {
+        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7423-min.webp",
+        "size": 2545492,
+        "status": "generated"
+      }
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7461-min.jpg",
+      "before": 2823384,
+      "after": 2823384,
+      "status": "webp-only",
+      "webp": {
+        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7461-min.webp",
+        "size": 2639428,
+        "status": "generated"
+      }
+    },
+    {
+      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7462-min.jpg",
+      "before": 3300244,
+      "after": 3300244,
+      "status": "webp-only",
+      "webp": {
+        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7462-min.webp",
+        "size": 2531944,
+        "status": "generated"
+      }
     },
     {
       "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4924_webuse.jpg",
-      "before": 1976745,
+      "before": 1026303,
       "after": 1026303,
-      "status": "optimized"
-    },
-    {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4939_webuse.jpg",
-      "before": 1765867,
-      "after": 856357,
-      "status": "optimized"
-    },
-    {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4942_webuse.jpg",
-      "before": 1636966,
-      "after": 820439,
-      "status": "optimized"
-    },
-    {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4944_webuse.jpg",
-      "before": 1753770,
-      "after": 897289,
-      "status": "optimized"
+      "status": "skip-small-gain"
     },
     {
       "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4946_webuse.jpg",
-      "before": 2453815,
+      "before": 1226550,
       "after": 1226550,
-      "status": "optimized"
+      "status": "skip-small-gain"
     }
   ]
 }

@@ -56,6 +56,7 @@
     "analyze:duplicates": "find . -type f -exec stat -f '%z %N' {} \\; | sort | uniq -d | sort -nr",
     "validate:widgets": "node scripts/utils/validate-widget-html.js",
   "optimize:events": "node scripts/utils/auto-optimize-events-images.js",
+  "optimize:events:webp": "node scripts/utils/auto-optimize-events-images.js --webp",
     "ci:validate-scripts": "node scripts/utils/ci-validate-scripts.js",
     "ci:find-duplicates": "node scripts/utils/find-duplicate-scripts.js",
     "ci:archive-duplicates": "node scripts/utils/find-duplicate-scripts.js --archive",
