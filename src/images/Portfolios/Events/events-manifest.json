@@ -5,7 +5,10 @@
   "events": [
     {
       "eventName": "Love's A Game",
-      "category": "Corporate",
+      "category": "Performance Art",
+      "tags": [
+        "Performance Art"
+      ],
       "dateDisplay": "November 2025",
       "dateISO": "2025-11-06",
       "date": {
@@ -334,7 +337,7 @@
     },
     {
       "eventName": "Howl At The Moon",
-      "category": "Corporate",
+      "category": "Performance Art",
       "dateDisplay": "October 2025",
       "dateISO": "2025-10-24",
       "date": {
@@ -1332,7 +1335,8 @@
     {
       "title": "Love's A Game",
       "eventName": "Love's A Game",
-      "category": "Corporate",
+  "category": "Performance Art",
+  "tags": ["Performance Art"],
       "dateDisplay": "November 2025",
       "dateISO": "2025-11-06",
       "date": {
@@ -1659,7 +1663,7 @@
     {
       "title": "Howl At The Moon",
       "eventName": "Howl At The Moon",
-      "category": "Corporate",
+      "category": "Performance Art",
       "dateDisplay": "October 2025",
       "dateISO": "2025-10-24",
       "date": {
