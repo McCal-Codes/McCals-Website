@@ -456,6 +456,7 @@ html.lb-open [id*="menu"] {
         <li>Clarified Featured filter shows most recent or manually selected events</li>
         <li>Updated Love's A Game and Howl At The Moon as Performance Art</li>
         <li>Refined category display for better content organization</li>
+        <li>Added Fisher-Yates shuffle for randomized hero images on each refresh</li>
       </ul>
       
       <div class="changelog-version">v2.6.3</div>
@@ -759,8 +760,10 @@ function createFilters(events) {
   publishedBtn.onclick = () => filterEvents('published');
   filtersDiv.appendChild(publishedBtn);
   
-  // Extract and sort unique categories from manifest
-  const categories = [...new Set(events.map(e => e.category))].sort();
+  // Extract and sort unique categories from manifest (exclude "Published" since it's already a semantic filter)
+  const categories = [...new Set(events.map(e => e.category))]
+    .filter(cat => cat.toLowerCase() !== 'published')
+    .sort();
   
   // Add category filters dynamically
   categories.forEach(category => {
@@ -784,6 +787,16 @@ function filterEvents(category) {
   });
   
   displayEvents(eventData.events || [], category);
+}
+
+// Fisher-Yates shuffle for randomizing hero images
+function shuffleArray(array) {
+  const arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 function displayEvents(events, filterCategory = 'all') {
@@ -814,6 +827,13 @@ function displayEvents(events, filterCategory = 'all') {
   const sorted = filteredEvents
     .sort((a, b) => new Date(b.dateISO || '1970-01-01') - new Date(a.dateISO || '1970-01-01'))
     .slice(0, Math.min(12, filteredEvents.length));
+  
+  // Shuffle hero images for each event (randomize cover image on each refresh)
+  sorted.forEach(event => {
+    if (event.images && event.images.length > 1) {
+      event.images = shuffleArray(event.images);
+    }
+  });
   
   if (sorted.length === 0) {
     grid.innerHTML = `

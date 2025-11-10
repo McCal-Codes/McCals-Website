@@ -76,10 +76,25 @@ async function readDirSafe(dir) {
 
 function deriveCategory(dir) {
   const slug = dir.toLowerCase();
-  if (/(gala|celebration|festival|party|wedding|graduation)/.test(slug)) return 'Celebration';
-  if (/(conference|summit|forum|symposium)/.test(slug)) return 'Conference';
+  
+  // Performance Art - theatrical and performance events
+  if (/(love.*s.*a.*game|howl.*at.*the.*moon)/i.test(dir)) return 'Performance Art';
+  
+  // Corporate events (including business parties/receptions)
+  if (/(james.*bond.*cocktail|cocktail.*party|inclusivity|workplace|myron.*cope|franks.*script|dance.*for.*a.*cause|robotics|denver)/i.test(dir)) return 'Corporate';
+  
+  // Celebration - personal celebrations and graduations
+  if (/(gala|celebration|festival|wedding|graduation)/i.test(slug)) return 'Celebration';
+  
+  // Conference - professional conferences and summits
+  if (/(conference|summit|forum|symposium|local.*union|officers)/i.test(slug)) return 'Conference';
+  
+  // Published - media and press events
+  if (/(published|press|feature|media|pennsylvania.*media|awards)/i.test(slug)) return 'Published';
+  
+  // On-Location
   if (/(on-location|location|travel|tour)/.test(slug)) return 'On-Location';
-  if (/(published|press|feature|media)/.test(slug)) return 'Published';
+  
   return 'Corporate';
 }
 
