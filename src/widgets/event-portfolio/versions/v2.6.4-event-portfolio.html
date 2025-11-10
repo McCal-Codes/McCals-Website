@@ -580,7 +580,9 @@ const PF = document.getElementById('eventsPf');
 const MANIFEST_BASE = (PF && PF.dataset.manifest && PF.dataset.manifest.trim()) || (RAW + 'src/images/Portfolios/Events/events-manifest.json');
 
 function manifestUrl() {
-  return MANIFEST_BASE + (window.__EP_BUST ? ((MANIFEST_BASE.indexOf('?') > -1 ? '&' : '?') + 'b=' + window.__EP_BUST) : '');
+  // Force fresh load with timestamp cache buster
+  const cacheBuster = 'cb=' + Date.now();
+  return MANIFEST_BASE + (MANIFEST_BASE.indexOf('?') > -1 ? '&' : '?') + cacheBuster;
 }
 
 function toUrl(p) {
@@ -769,6 +771,14 @@ function createFilters(events) {
   console.log('📊 Discovered categories:', categories);
   console.log('📦 Total events:', events.length);
   console.log('🎭 Events by category:', events.reduce((acc, e) => { acc[e.category] = (acc[e.category] || 0) + 1; return acc; }, {}));
+
+  // UI label mapping (non-destructive). Internal filter value remains original category string.
+  // Currently only mapping Performance Art -> Arts per user request.
+  // TODO: Extend mapping here if additional display label adjustments are needed.
+  const labelMap = {
+    'Performance Art': 'Arts'
+  };
+  console.log('🎨 Category label mapping:', Object.fromEntries(categories.map(c => [c, labelMap[c] || c])));
   
   // Add category filters dynamically
   categories.forEach(category => {
@@ -776,7 +786,8 @@ function createFilters(events) {
     btn.className = 'filter-btn';
     btn.dataset.filter = category;
     btn.setAttribute('aria-pressed', 'false');
-    btn.textContent = category;
+    // Display mapped label while retaining original dataset.filter for logic
+    btn.textContent = labelMap[category] || category;
     btn.onclick = () => filterEvents(category);
     filtersDiv.appendChild(btn);
   });
