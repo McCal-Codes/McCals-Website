@@ -765,6 +765,11 @@ function createFilters(events) {
     .filter(cat => cat.toLowerCase() !== 'published')
     .sort();
   
+  // Debug: Log discovered categories
+  console.log('📊 Discovered categories:', categories);
+  console.log('📦 Total events:', events.length);
+  console.log('🎭 Events by category:', events.reduce((acc, e) => { acc[e.category] = (acc[e.category] || 0) + 1; return acc; }, {}));
+  
   // Add category filters dynamically
   categories.forEach(category => {
     const btn = document.createElement('button');
