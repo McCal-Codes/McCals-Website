@@ -11,7 +11,7 @@
        - Bottom-center Debug button (solid, not transparent).
        - Lightbox with hidden scrollbars; page/widget scrollbars hidden too.
        - Featured-first ordering (top 6 by date), shuffle others and per-event images.
-       - Robust manifest loading: timeout, cache, relative+GitHub, embedded fallback.
+       - Robust manifest loading: timeout, cache, relative+GitHub, replaceembedded fallback.
        - "Coming Soon" gradient card fallback when thumbnail is missing/broken.
        - Cards never overlap: column masonry with break-inside: avoid and safe padding.
     */
@@ -107,10 +107,10 @@
 
     <div class="filters" role="tablist" aria-label="Event categories">
       <button type="button" class="filter-btn" data-filter="*" aria-pressed="true" role="tab">All</button>
-      <button type="button" class="filter-btn" data-filter="Corporate" role="tab">Corporate</button>
+  <button type="button" class="filter-btn" data-filter="Corporate" role="tab">Corporate</button>
+  <button type="button" class="filter-btn" data-filter="Performance Art" role="tab">Performance Art</button>
       <button type="button" class="filter-btn" data-filter="Conference" role="tab">Conference</button>
       <button type="button" class="filter-btn" data-filter="Celebration" role="tab">Celebration</button>
-      <button type="button" class="filter-btn" data-filter="On-Location" role="tab">On-Location</button>
       <button type="button" class="filter-btn" data-filter="Featured" role="tab">Featured</button>
       <button type="button" class="filter-btn" data-filter="Published" role="tab">Published</button>
     </div>
