@@ -4,6 +4,7 @@ slug: "welcome-to-the-new-blog"
 date: "2025-11-10"
 author: "mccal"
 summary: "A first sample post to demonstrate the blog scaffold and widget features."
+image: "/assets/images/logos/avatar-default.png"
 ---
 
 Hello! This is a sample blog post used to exercise the new blog widget.

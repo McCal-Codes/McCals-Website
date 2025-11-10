@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog — Preview</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header style="padding:24px;text-align:center"><h1>Blog — Preview</h1></header>
+
+  <!-- Embed the feed-mode widget for local preview -->
+  <div style="max-width:980px;margin:0 auto;padding:20px">
+    <!-- Use the blog-feed widget version that supports feed mode -->
+    <!-- The widget file is self-contained; we embed it via server-relative path -->
+  <iframe src="/src/widgets/blog-feed/versions/v2.1.0-google-docs-blog.html" style="width:100%;height:900px;border:0" title="Blog widget preview"></iframe>
+  </div>
+
+  <footer style="text-align:center;padding:24px;color:#666">Preview reads <code>/src/site/blog/feed.json</code></footer>
+</body>
+</html>
