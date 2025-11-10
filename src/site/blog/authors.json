@@ -1,0 +1,11 @@
+{
+  "authors": [
+    {
+      "id": "mccal",
+      "name": "McCal",
+      "bio": "Photographer, writer, and maintainer of this repo. Welcome guest authors!",
+      "website": "https://example.com",
+      "avatar": "/assets/images/logos/avatar-default.png"
+    }
+  ]
+}
