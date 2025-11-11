@@ -13,11 +13,21 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const INSTRUCTIONS = [
-  path.join(ROOT, '.github', 'copilot-instructions.md'),
-  path.join(ROOT, '.github', 'canvas-instructions.md'),
-  path.join(ROOT, '.github', 'codex-instructions.md'),
-];
+
+// Discover all instruction docs in .github dynamically so this script is tolerant
+// to new files or renames (keeps behavior aligned with ai-instructions-preflight).
+function discoverInstructions() {
+  const dir = path.join(ROOT, '.github');
+  try {
+    return fs.readdirSync(dir)
+      .filter(f => /instructions?/.test(f) && f.endsWith('.md'))
+      .map(f => path.join(dir, f));
+  } catch (e) {
+    return [];
+  }
+}
+
+const INSTRUCTIONS = discoverInstructions();
 const CHANGELOG = path.join(ROOT, 'CHANGELOG.md');
 const PKG = path.join(ROOT, 'package.json');
 
@@ -40,7 +50,7 @@ function bumpSemver(v, type) {
   return `${major}.${minor}.${(patch || 0) + 1}`; // patch default
 }
 
-function appendRecentUpdate(file, tag) {
+function appendRecentUpdate(file) {
   try {
     let txt = fs.readFileSync(file, 'utf8');
     const marker = 'Recent updates';
@@ -62,9 +72,9 @@ function appendRecentUpdate(file, tag) {
       }
     }
     fs.writeFileSync(file, txt);
-    console.log(`✅ Updated recent updates in ${path.relative(ROOT, file)} - ai-finalize-session.js:61`);
+    console.log(`✅ Updated recent updates in ${path.relative(ROOT, file)} - ai-finalize-session.js:75`);
   } catch (e) {
-    console.warn(`⚠️  Could not update ${file}: ${e.message} - ai-finalize-session.js:63`);
+    console.warn(`⚠️  Could not update ${file}: ${e.message} - ai-finalize-session.js:77`);
   }
 }
 
@@ -88,10 +98,10 @@ function updateChangelog() {
         });
       }
       fs.writeFileSync(CHANGELOG, txt);
-      console.log('✅ CHANGELOG updated - ai-finalize-session.js:87');
+      console.log('✅ CHANGELOG updated - ai-finalize-session.js:101');
     }
   } catch (e) {
-    console.warn(`⚠️  Could not update CHANGELOG: ${e.message} - ai-finalize-session.js:90`);
+    console.warn(`⚠️  Could not update CHANGELOG: ${e.message} - ai-finalize-session.js:104`);
   }
 }
 
@@ -102,9 +112,9 @@ function bumpPackageVersion() {
     const next = bumpSemver(pkg.version || '0.0.0', bump);
     pkg.version = next;
     fs.writeFileSync(PKG, JSON.stringify(pkg, null, 2) + '\n');
-    console.log(`✅ package.json version bumped to ${next} - ai-finalize-session.js:101`);
+    console.log(`✅ package.json version bumped to ${next} - ai-finalize-session.js:115`);
   } catch (e) {
-    console.warn(`⚠️  Could not bump version: ${e.message} - ai-finalize-session.js:103`);
+    console.warn(`⚠️  Could not bump version: ${e.message} - ai-finalize-session.js:117`);
   }
 }
 

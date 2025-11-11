@@ -13,11 +13,29 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '../..');
-const DOCS = [
-  { key: 'copilot', file: path.join(ROOT, '.github', 'copilot-instructions.md'), title: 'Copilot instructions' },
-  { key: 'canvas',  file: path.join(ROOT, '.github', 'canvas-instructions.md'),  title: 'Canvas instructions' },
-  { key: 'codex',   file: path.join(ROOT, '.github', 'codex-instructions.md'),   title: 'Codex instructions'  },
-];
+
+// Dynamically discover instruction files in .github to avoid hardcoding and
+// to make the preflight tolerant to new/renamed instruction docs.
+function discoverDocs() {
+  const dir = path.join(ROOT, '.github');
+  try {
+    const files = fs.readdirSync(dir);
+    return files
+      .filter(f => /instructions?/.test(f) && f.endsWith('.md'))
+      .map(f => ({ file: path.join(dir, f), name: f }));
+  } catch (e) {
+    return [];
+  }
+}
+
+const DISCOVERED = discoverDocs();
+
+const DOCS = DISCOVERED.map(d => {
+  // make a friendly key/title from filename
+  const key = d.name.replace(/\.md$/i, '').replace(/[^a-z0-9]+/ig, '-').toLowerCase();
+  const title = d.name.replace(/[-_]/g, ' ').replace(/\.md$/i, '');
+  return { key, file: d.file, title };
+});
 
 const args = new Set(process.argv.slice(2));
 const isJSON = args.has('--json');
@@ -33,51 +51,73 @@ function readFileSafe(file) {
   }
 }
 
+function findHeadingIndex(lines, heading) {
+  const want = heading.trim().toLowerCase();
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i].trim();
+    // match markdown heading like '# Heading' or '## Heading' or a plain line 'Heading'
+    const mdMatch = l.replace(/^#+\s*/, '').trim().toLowerCase();
+    if (mdMatch === want) return i;
+    if (l.toLowerCase() === want) return i;
+  }
+  return -1;
+}
+
 function takeTopBullets(markdown, heading, max = 3) {
-  // Find a heading line that matches exactly or case-insensitive
   const lines = markdown.split(/\r?\n/);
-  const idx = lines.findIndex(l => l.trim().toLowerCase() === heading.trim().toLowerCase());
+  const idx = findHeadingIndex(lines, heading);
   if (idx === -1) return [];
-  // Collect following bullet lines until next blank line or non-bullet section
   const bullets = [];
   for (let i = idx + 1; i < lines.length; i++) {
     const line = lines[i];
     if (!line.trim()) {
-      if (bullets.length > 0) break; // stop at first blank after bullets
+      if (bullets.length > 0) break;
       continue;
     }
-    if (!/^[-*]\s+/.test(line.trim())) break; // stop if not a bullet
-    bullets.push(line.trim().replace(/^[-*]\s+/, ''));
-    if (bullets.length >= max) break;
+    const trimmed = line.trim();
+    if (/^[-*\d\.]+\s+/.test(trimmed)) {
+      // bullet or numbered list
+      bullets.push(trimmed.replace(/^[-*\d\.]+\s+/, ''));
+      if (bullets.length >= max) break;
+      continue;
+    }
+    // stop if we hit another markdown heading
+    if (/^#{1,6}\s+/.test(trimmed)) break;
+    // if it's a paragraph line and we have no bullets yet, collect first paragraph as fallback
+    if (bullets.length === 0) {
+      // collect following paragraph lines
+      let para = trimmed;
+      for (let j = i + 1; j < lines.length; j++) {
+        const l2 = lines[j].trim();
+        if (!l2) break;
+        if (/^#{1,6}\s+/.test(l2)) break;
+        para += ' ' + l2;
+      }
+      bullets.push(para.slice(0, 240)); // limit length
+    }
+    break;
   }
   return bullets;
 }
 
 function summarizeDoc(key, title, content) {
-  const common = {};
-  if (key === 'copilot') {
-    common.sections = {
-      purpose: takeTopBullets(content, 'Purpose and scope', isShort ? 2 : 3),
-      pipeline: takeTopBullets(content, 'Images and manifests pipeline (critical)', isShort ? 2 : 4),
-      ci: takeTopBullets(content, 'CI automation', isShort ? 2 : 3),
-      authoring: takeTopBullets(content, 'Widget authoring conventions', isShort ? 2 : 3),
-    };
-  } else if (key === 'canvas') {
-    common.sections = {
-      scope: takeTopBullets(content, 'Scope and intent', isShort ? 2 : 3),
-      workflows: takeTopBullets(content, 'Core workflows (Canvas-friendly)', isShort ? 2 : 3),
-      manifests: takeTopBullets(content, 'Manifests essentials', isShort ? 2 : 3),
-      etiquette: takeTopBullets(content, 'Edit etiquette in Canvas', isShort ? 2 : 3),
-    };
-  } else if (key === 'codex') {
-    common.sections = {
-      goal: takeTopBullets(content, 'Goal', 1),
-      checklist: takeTopBullets(content, 'Pre-call checklist (30–60 seconds)', isShort ? 2 : 3),
-      strategy: takeTopBullets(content, 'Single-pass edit strategy', isShort ? 2 : 3),
-      avoids: takeTopBullets(content, 'Avoids', isShort ? 2 : 3),
-    };
-  }
-  return { key, title, ...common };
+  // Attempt to extract useful sections heuristically. This keeps the preflight robust
+  // even if headings change slightly between instruction files.
+  const sections = {};
+  const tryHeading = (variants, max) => {
+    for (const h of variants) {
+      const out = takeTopBullets(content, h, max);
+      if (out && out.length) return out;
+    }
+    return [];
+  };
+
+  sections.purpose = tryHeading(['purpose', 'purpose and scope', 'purpose and scope:'], isShort ? 1 : 3);
+  sections.workflow = tryHeading(['images and manifests pipeline (critical)', 'images and manifests pipeline', 'run/build/deploy workflows', 'local workflow (short)'], isShort ? 1 : 3);
+  sections.ci = tryHeading(['ci automation', 'ci & health', 'ci & health'], isShort ? 1 : 3);
+  sections.authoring = tryHeading(['widget authoring conventions', 'golden rules', 'widgets'], isShort ? 1 : 2);
+
+  return { key, title, sections };
 }
 
 function formatPretty(results) {
@@ -118,10 +158,35 @@ function main() {
     outputs.push({ key: doc.key, title: doc.title, mtime: info.mtime, size: info.size, summary });
   }
 
+  // If --changed is provided, only show docs with newer mtimes than cache
+  const changedOnly = args.has('--changed');
+  const cacheFile = path.join(ROOT, '.cache', 'ai-preflight.json');
+  let cache = {};
+  try {
+    if (fs.existsSync(cacheFile)) cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8')) || {};
+  } catch (e) { cache = {}; }
+
+  const toReport = changedOnly ? outputs.filter(o => {
+    if (o.error) return true;
+    const prev = cache[o.key] && new Date(cache[o.key]);
+    return !prev || new Date(o.mtime) > prev;
+  }) : outputs;
+
   if (isJSON) {
-    console.log(JSON.stringify(outputs, null, 2));
+    console.log(JSON.stringify(toReport, null, 2));
   } else {
-    console.log(formatPretty(outputs));
+    console.log(formatPretty(toReport));
+  }
+
+  // update cache mtimes for next run
+  try {
+    const dir = path.dirname(cacheFile);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const toSave = {};
+    for (const o of outputs) if (!o.error) toSave[o.key] = o.mtime;
+    fs.writeFileSync(cacheFile, JSON.stringify(toSave, null, 2), 'utf8');
+  } catch (e) {
+    // non-fatal
   }
 }
 

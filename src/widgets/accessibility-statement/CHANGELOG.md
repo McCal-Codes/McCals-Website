@@ -5,6 +5,62 @@ All notable changes to the Accessibility Statement Widget will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-11-11
+
+### Added
+- Theme toggle toolbar: System / Light / Dark buttons with `aria-pressed` states
+- Persistent preference via `localStorage` (`a11yThemePref`) removed when System selected
+- Readable content panel (`.a11y-panel`) with adaptive backdrop blur and translucent high-contrast background
+- Scoped theme overrides using `data-theme` on `.a11y-root` (no global bleed)
+
+### Changed
+- Color variable strategy expanded for explicit theme overrides while preserving `prefers-color-scheme` fallback
+- Consolidated layout structure inside a single panel wrapper for improved legibility on image-heavy backgrounds
+
+### Accessibility & UX
+- Buttons fully keyboard accessible (Tab, Enter, Space) and expose clear pressed state
+- No animation added; respects `prefers-reduced-motion`
+- Contrast verified for new panel colors (WCAG AA for text, >=3:1 for UI components)
+
+### Performance
+- Minimal JS addition (~0.6KB) — still self-contained, no external dependencies
+- No reflow-intensive operations; attribute toggle only
+
+### Migration
+- Drop-in replacement: paste v1.1.0 HTML over v1.0.0 in existing Code Block
+- Previous customization (header height, contact info) remains compatible
+
+### Future
+- Potential high-contrast theme (`data-theme="contrast"`)
+- Optional user font-size scaling controls
+
+## [1.1.1] - 2025-11-11
+
+### Changed
+- Inverted forced Light/Dark theme palettes for text and backing panel:
+	- Light => light text on dark panel
+	- Dark => dark text on light panel
+- System mode unaffected (continues to follow `prefers-color-scheme`)
+
+### Accessibility
+- Verified text/background contrast remains WCAG AA-compliant in both forced modes
+- No behavioral change to keyboard navigation or scroll spy
+
+### Migration
+- Replace v1.1.0 HTML with v1.1.1 if you prefer the inverted forced modes; no other changes required
+
+## [1.1.2] - 2025-11-11
+
+### Changed
+- Forced Dark mode text is now pure white (#ffffff) for maximum clarity
+- Light and System modes unchanged
+
+### Accessibility
+- Verified contrast remains WCAG AA-compliant; no structural or behavioral changes
+
+### Migration
+- Replace v1.1.2 HTML with v1.1.3 if you want pure white text in forced Dark mode; drop-in update
+
 ## [1.0.0] - 2025-11-10
 
 ### Added - Initial Release

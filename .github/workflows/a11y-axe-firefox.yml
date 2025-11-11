@@ -1,0 +1,61 @@
+name: Accessibility — axe (Playwright/Firefox)
+
+on:
+  push:
+    branches: [ 'staging' ]
+  workflow_dispatch:
+    inputs:
+      target-url:
+        description: 'Page URL to scan (required for manual runs)'
+        required: true
+
+jobs:
+  axe-audit:
+    name: Run axe (Playwright/Firefox) and upload results
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Firefox runtime
+        run: npx playwright install firefox
+
+      - name: Ensure TARGET_URL
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+        run: |
+          # prefer workflow_dispatch input, fall back to STAGING_URL secret
+          if [ -n "${{ github.event.inputs.target-url }}" ]; then
+            TARGET_URL='${{ github.event.inputs.target-url }}'
+          else
+            TARGET_URL="$STAGING_URL"
+          fi
+          if [ -z "${TARGET_URL}" ]; then
+            echo "ERROR: TARGET_URL not set. Provide 'target-url' on workflow_dispatch or set the STAGING_URL secret for push->staging runs.";
+            exit 1;
+          fi
+          echo "TARGET_URL=${TARGET_URL}" > target_url.env
+
+      - name: Run axe-firefox audit
+        run: |
+          # shell out the target URL saved earlier
+          . ./target_url.env
+          echo "Running axe audit against: ${TARGET_URL}"
+          node scripts/a11y/axe-firefox.js "${TARGET_URL}"
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: axe-firefox-reports
+          path: |
+            reports/axe-firefox-results.json
+            reports/axe-firefox-widget-report.html
+            reports/axe-firefox-summary.md

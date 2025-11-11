@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>jsDelivr Widget Preview — McCal Media</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6;padding:28px;color:#111}
+    .box{max-width:980px;margin:0 auto}
+    pre{background:#f4f4f5;padding:12px;border-radius:8px;overflow:auto}
+    .widget-wrap{margin-top:20px;border:1px dashed #cbd5e1;padding:16px;border-radius:8px;background:#fff}
+    .note{color:#555;font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>jsDelivr Widget Loader — Preview</h1>
+    <p class="note">This page demonstrates the simple, version-pinned loader used to fetch a widget HTML file from jsDelivr and inject it into the page. Replace the URL in the snippet to preview different widget versions.</p>
+
+    <h2>Loader snippet</h2>
+    <pre>&lt;div class="mccal-widget" data-src="JSDELIVR_URL_HERE"&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function(){
+    var c = document.querySelector('.mccal-widget');
+    if(!c) return;
+    var s = c.getAttribute('data-src');
+    if(!s) return;
+    fetch(s,{mode:'cors'}).then(function(r){ if(!r.ok) throw new Error('Fetch failed'); return r.text(); }).then(function(html){ c.innerHTML = html; }).catch(function(){ /* fail closed */ });
+  })();
+&lt;/script&gt;</pre>
+
+    <h2>Example — interactive-thesis v0.4</h2>
+    <p class="note">The example below loads the interactive-thesis v0.4 widget (pinned tag).</p>
+
+    <div class="widget-wrap">
+      <div class="mccal-widget" data-src="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html"></div>
+      <script>
+        (function(){
+          var c = document.currentScript && document.currentScript.previousElementSibling && document.currentScript.previousElementSibling.classList && document.currentScript.previousElementSibling.classList.contains('mccal-widget') ? document.currentScript.previousElementSibling : document.querySelector('.mccal-widget');
+          if(!c) return;
+          var s = c.getAttribute('data-src');
+          if(!s) return;
+          fetch(s, {mode: 'cors'}).then(function(r){ if(!r.ok) throw new Error('Fetch failed'); return r.text(); }).then(function(html){ c.innerHTML = html; }).catch(function(){ c.innerHTML = '<div style="padding:20px;color:#666">Widget failed to load.</div>'; });
+        })();
+      </script>
+    </div>
+
+    <p class="note">Tip: Open this page in your dev server (npm run dev) to preview the widget locally. The loader is intentionally minimal — it expects the remote HTML to be self-contained (inline CSS/JS).</p>
+  </div>
+</body>
+</html>
