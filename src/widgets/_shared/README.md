@@ -13,6 +13,10 @@ Compatibility notes
 
 Example: the Accessibility Statement widget uses variables like `--panel-bg`, `--panel-border`, and `--panel-blur` inside its `:root` — these will now inherit site defaults unless the widget sets them locally.
 
+Light / Dark semantics
+- The shared stylesheet standardizes forced-theme semantics for the `data-theme` attribute. If a widget sets `data-theme="light"` on its root container, that indicates a light theme: dark text on a light background. If it sets `data-theme="dark"`, that indicates a dark theme: light text on a dark background. Widgets that provide their own theme variables (via `:root` inside the widget) will continue to control exact colors.
+- Historical note: some older widget versions used inverted comments/semantics (e.g., earlier accessibility widget versions). The shared stylesheet enforces the canonical mapping so site-level theming is predictable. If you maintain a widget that intentionally inverts the semantics, prefer to update the widget to the canonical mapping or explicitly document the exception in the widget README.
+
 Squarespace inclusion (recommended)
 1. Create a release tag (e.g. `site-widgets@0.1.0`) and push it.
 2. Use a pinned jsDelivr URL in Squarespace Header Injection or Code Injection (Site-wide) such as:
