@@ -33,19 +33,27 @@
     <p class="note">The example below loads the interactive-thesis v0.4 widget (pinned tag).</p>
 
     <div class="widget-wrap">
-      <div class="mccal-widget" data-src="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html"></div>
+      <div class="mccal-widget" data-src="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html" data-mode="inline"></div>
+  <!-- Use the site-wide embed loader which supports 'iframe' or 'inline' rehydration modes -->
+  <script src="/src/site/embed-loader.js"></script>
       <script>
+        // initialize loader for the specific widget block (optional - loader auto-inits on DOMContentLoaded)
         (function(){
-          var c = document.currentScript && document.currentScript.previousElementSibling && document.currentScript.previousElementSibling.classList && document.currentScript.previousElementSibling.classList.contains('mccal-widget') ? document.currentScript.previousElementSibling : document.querySelector('.mccal-widget');
-          if(!c) return;
-          var s = c.getAttribute('data-src');
-          if(!s) return;
-          fetch(s, {mode: 'cors'}).then(function(r){ if(!r.ok) throw new Error('Fetch failed'); return r.text(); }).then(function(html){ c.innerHTML = html; }).catch(function(){ c.innerHTML = '<div style="padding:20px;color:#666">Widget failed to load.</div>'; });
+          if(window.McCal && typeof window.McCal.embedLoaderInit === 'function'){
+            window.McCal.embedLoaderInit();
+          }
         })();
       </script>
     </div>
 
-    <p class="note">Tip: Open this page in your dev server (npm run dev) to preview the widget locally. The loader is intentionally minimal — it expects the remote HTML to be self-contained (inline CSS/JS).</p>
+    <h2>Example — podcast feed widget (local v1.6)</h2>
+    <p class="note">Demo loading the local podcast feed widget (`src/widgets/podcast-feed/versions/v1.6.html`). This demonstrates inline rehydration of scripts and RSS-driven UI (may require CORS access for feed fetching).</p>
+
+    <div class="widget-wrap">
+      <div class="mccal-widget" data-src="/src/widgets/podcast-feed/versions/v2.0.0.html" data-mode="inline"></div>
+    </div>
+
+    <p class="note">Tip: Open this page in your dev server (npm run dev) to preview the widget locally. The loader is intentionally minimal — it expects the remote HTML to be self-contained (inline CSS/JS). Use `data-mode="iframe"` as a fallback if inline fetch/re-execution is blocked by CORS.</p>
   </div>
 </body>
 </html>

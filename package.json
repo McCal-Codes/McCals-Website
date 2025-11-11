@@ -66,6 +66,9 @@
     "welcome": "node scripts/welcome.js",
     "build:thesis": "node scripts/thesis/build-thesis-interactive.js",
     "dev:thesis": "node scripts/thesis/build-thesis-interactive.js --watch"
+    ,
+    "site-widgets:build": "node scripts/utils/build-site-widgets.js",
+    "site-widgets:prepare-release": "npm run site-widgets:build && echo 'Built site-widgets artifacts in dist/site-widgets'"
   },
   "keywords": [
     "photography",
