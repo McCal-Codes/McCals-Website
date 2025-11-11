@@ -45,6 +45,35 @@
   --mcc-z-top: 2147483647;
 }
 
+/* Forced theme mapping (use on a widget root element like <div class="a11y-root" data-theme="dark">)
+   Semantics:
+   - data-theme="light"  = light mode: dark text on light background
+   - data-theme="dark"   = dark mode: light text on dark background
+   - data-theme="system" = follows the user's OS preference (widgets may implement JS toggles)
+   Widgets that set their own :root variables will override these site defaults. */
+[data-theme="light"] {
+  --fg: #0a0a0a;
+  --bg: #ffffff;
+  --line: #e5e5e5;
+  --panel-bg: rgba(255,255,255,0.82);
+  --panel-border: rgba(0,0,0,0.08);
+  --panel-blur: 8px;
+  --chip: #fafafa;
+  --focus: #0ea5e9;
+  --link: var(--accent);
+}
+[data-theme="dark"] {
+  --fg: #f7f7f7;
+  --bg: #06060a;
+  --line: #2a2a2a;
+  --panel-bg: rgba(20,20,20,0.78);
+  --panel-border: rgba(255,255,255,0.12);
+  --panel-blur: 8px;
+  --chip: #1b1b1b;
+  --focus: #7dd3fc;
+  --link: var(--accent);
+}
+
 /* Scope to any widget using the standard `mcc-` prefix in a class name. This keeps
    the rules narrowly targeted to widget markup while still being easy to include site-wide. */
 [class^="mcc-"] , [class*=" mcc-"] {
