@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>axe-firefox widget report</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:24px;color:#0f172a}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:20px}
+    .meta{margin-top:12px;color:#374151}
+    .counts{display:flex;gap:12px;margin-top:12px}
+    .box{background:#f8fafc;padding:12px;border-radius:6px;border:1px solid #e6eef6}
+    pre{white-space:pre-wrap;word-break:break-word;max-height:560px;overflow:auto;padding:12px;background:#0b1220;color:#fff;border-radius:6px}
+    details{margin-top:12px}
+    .recommend{margin-top:16px;background:#f1f5f9;padding:12px;border-left:4px solid #60a5fa}
+    a.small{font-size:13px;color:#2563eb}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>axe (Playwright/Firefox) — Widget accessibility report</h1>
+  </header>
+
+  <div class="meta" id="meta">Loading report…</div>
+  <div class="counts" id="counts"></div>
+
+  <div class="recommend" id="rec"></div>
+
+  <details open>
+    <summary>Raw JSON (fetched from /reports/axe-firefox-results.json)</summary>
+    <pre id="json">Loading JSON…</pre>
+  </details>
+
+  <script>
+    async function render(){
+      try{
+        const res = await fetch('/reports/axe-firefox-results.json');
+        if(!res.ok) throw new Error('HTTP '+res.status);
+        const j = await res.json();
+        document.getElementById('meta').innerHTML = `URL: <strong>${j.url}</strong> — Timestamp: <strong>${j.timestamp}</strong> — Engine: <strong>${j.testEngine.name} ${j.testEngine.version}</strong>`;
+        const violations = (j.violations || []);
+        const incomplete = (j.incomplete || []);
+        const passes = (j.passes || []);
+        document.getElementById('counts').innerHTML = `
+          <div class="box">Violations: <strong>${violations.length}</strong></div>
+          <div class="box">Incomplete: <strong>${incomplete.length}</strong></div>
+          <div class="box">Passes: <strong>${passes.length}</strong></div>
+        `;
+        const rec = document.getElementById('rec');
+        if(violations.length === 0){
+          rec.innerHTML = `Automated axe run found <strong>no WCAG 2 AA violations</strong>. Recommended next steps: keyboard testing, screen-reader check, and verifying the embed context.`;
+        } else {
+          rec.innerHTML = `Automated axe run found <strong>${violations.length}</strong> violations. See the table below for details.`;
+        }
+
+        // show JSON pretty
+        document.getElementById('json').textContent = JSON.stringify(j, null, 2);
+
+      }catch(err){
+        document.getElementById('meta').textContent = 'Failed to load report: '+err;
+        document.getElementById('json').textContent = '';
+      }
+    }
+    render();
+  </script>
+</body>
+</html>

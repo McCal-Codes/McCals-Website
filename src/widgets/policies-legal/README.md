@@ -1,6 +1,6 @@
 # Policies & Legal Widget
 
-**Current Version:** v1.0.0  
+**Current Version:** v1.1.0  
 **Status:** ✅ Production Ready  
 **Type:** Legal Documentation Page with Navigation
 
@@ -41,7 +41,7 @@ Comprehensive legal documentation page with sidebar navigation, featuring Terms 
 
 ### Step 2: Add Widget Code
 1. Add a **Code Block** to the page
-2. Copy the entire contents of `versions/v1.0.0-policies-legal-squarespace.html`
+2. Copy the entire contents of `versions/v1.1.0-policies-legal-squarespace.html`
 3. Paste into the Code Block
 4. Save the block
 
@@ -257,6 +257,16 @@ For issues, questions, or customization help:
 
 ## Version History
 
+### v1.1.0 (2025-11-11)
+- ♿ Added skip link to jump directly to main content
+- ♿ Unified focus-visible outline (3px, offset 2px) across interactive elements
+- ♿ Scroll spy now sets `aria-current="true"` on the active TOC link (and clears others)
+- ♿ Mobile menu closes on link click, overlay click, and Escape key; `aria-expanded` kept in sync
+- ♿ Hardened landmarks and roles: `role="document"`, explicit `role="navigation"` and `role="main"`
+- ♿ Respects `prefers-reduced-motion` (disables smooth scrolling)
+- 🖨️ Print styles refined to show content only (hides nav, scrim, and modal)
+- 🧼 No content changes; fully backward compatible with v1.0.0
+
 ### v1.0.0 (2025-01-27)
 - ✅ Initial release with comprehensive legal documentation
 - ✅ SEO-enhanced with WebPage, BreadcrumbList, FAQPage schemas
@@ -271,5 +281,5 @@ For issues, questions, or customization help:
 
 ---
 
-**Last Updated:** 2025-01-27  
+**Last Updated:** 2025-11-11  
 **Maintainer:** McCal Media Development Team

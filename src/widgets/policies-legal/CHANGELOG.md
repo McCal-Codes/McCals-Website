@@ -5,6 +5,24 @@ All notable changes to the Policies & Legal widget will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-11-11
+
+### Added
+- Accessibility enhancements aligned with Accessibility Statement patterns:
+  - Skip link to main content for keyboard users
+  - Unified `:focus-visible` outline (3px, offset 2px)
+  - Scroll spy sets `aria-current="true"` on active sidebar link (and clears others)
+  - Mobile nav closes on link selection, overlay click, and Escape key; `aria-expanded` kept in sync
+  - Landmark hardening with `role="document"`, explicit `role="navigation"` and `role="main"`
+  - `prefers-reduced-motion` respected (disables smooth scrolling)
+  - Print stylesheet refinement: hides navigation, scrim, modal; content only
+
+### Changed
+- Sidebar/mobile drawer behavior brought in line with documented accessibility patterns while retaining existing UI/UX
+
+### Notes
+- No breaking changes to content structure; HTML remains self-contained and Squarespace-ready
+
 ## [1.0.0] - 2025-01-27
 
 ### Added - Initial Release
@@ -171,4 +189,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 **Changelog Maintained By:** McCal Media Development Team  
-**Last Updated:** 2025-01-27
+**Last Updated:** 2025-11-11

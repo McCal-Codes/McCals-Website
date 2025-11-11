@@ -51,6 +51,10 @@ Reference standards:
 - [ ] Add automated widget validation (small unit/integration tests) and wire into CI
 - [ ] Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and docs when making further structural changes
 - [ ] Concert Portfolio additional Spotify/embed features (follow-up enhancement)
+ - [ ] TODO: Add accessibility audit notes and automation
+	- Run axe-core (Playwright/Firefox) against widget pages and save reports to `reports/axe-firefox-results.json` and `reports/axe-firefox-widget-report.html`.
+	- Document findings in `reports/axe-firefox-summary.md` and add CI automation so widget audits run on staging updates.
+	- (Logged: 2025-11-11) A focused axe run was executed locally and results saved at `reports/axe-firefox-results.json` — consider adding as a scheduled CI job.
 
 ## Performance & SEO Enhancements (Priority)
 - [ ] Implement comprehensive SEO standards across all widgets: structured data, enhanced alt text, meta descriptions (partially implemented in recent updates)

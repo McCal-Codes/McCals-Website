@@ -1,6 +1,6 @@
 # Accessibility Statement Widget
 
-**Current Version:** v1.0.0  
+**Current Version:** v1.1.3  
 **Widget Type:** Content / Documentation  
 **Status:** ✅ Production Ready
 
@@ -19,6 +19,8 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 - ✅ **Focus Management** - Modern `focus-visible` with high contrast indicators
 - ✅ **Auto-updating Dates** - Dynamic last-updated and effective dates
 - ✅ **Print Optimization** - Clean print styles hiding navigation
+- ✅ **Dynamic Theme Toggle (v1.1.0)** - System / Light / Dark buttons with persistent preference
+- ✅ **Readable Panel (v1.1.0)** - Backdrop-blurred high-contrast panel to improve text legibility over busy backgrounds
 
 ### Accessibility Features
 - ✅ **WCAG 2.1 AA Compliant** - Meets all Level AA success criteria
@@ -32,6 +34,7 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 
 ### Design System
 - **Dark/Light Mode** - Automatic theme switching via `prefers-color-scheme`
+- **Manual Theme Override (v1.1.0)** - Toolbar buttons let users force light or dark, or revert to system
 - **Glassmorphism** - Backdrop blur effects on mobile drawer
 - **Keyboard Indicators** - Styled `.kbd` elements for shortcuts
 - **Responsive Layout** - Flexbox with mobile-first approach
@@ -43,7 +46,7 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 
 1. Create a new page or section for your accessibility statement
 2. Add a **Code Block**
-3. Paste the complete widget code from `versions/v1.0.0-accessibility-statement.html`
+3. Paste the complete widget code from `versions/v1.1.3-accessibility-statement.html`
 4. Adjust `--header-h` CSS variable to match your site's header height
 5. Save and preview
 
@@ -62,6 +65,20 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 4. Update the CSS variable
 
 ## Usage Guidelines
+### Theme Toggle (System / Light / Dark) — v1.1.0
+
+Toolbar buttons allow visitors to select a theme:
+
+- System: Defers to OS/browser preference (`prefers-color-scheme`)
+- Light: Forces light palette for widget scope only
+- Dark: Forces dark palette for widget scope only
+
+Implementation details:
+- State stored in `localStorage` (`a11yThemePref`); removed when System selected
+- Applied via `data-theme` attribute on the root widget wrapper (scoped, no global bleed)
+- Buttons expose `aria-pressed` for current selection; fully keyboard accessible
+- No motion introduced; respects `prefers-reduced-motion`
+
 
 ### Content Customization
 
@@ -186,6 +203,33 @@ This widget serves as the **canonical accessibility reference** for all McCal Me
 
 ## Version History
 
+### v1.1.3 (2025-11-11)
+- Forced Dark mode text set to pure white (#ffffff) for maximum clarity against dark backgrounds/panel
+- Light and System modes unchanged
+
+### v1.1.2 (2025-11-11)
+- Corrected forced theme semantics per request:
+  - Light button now shows dark text on light backing (light panel)
+  - Dark button now shows light text on dark backing (dark panel)
+- System mode remains unchanged (follows OS/browser preference)
+
+### v1.1.1 (2025-11-11)
+- Inverted forced Light/Dark modes per request:
+  - Light button now shows light text on dark backing
+  - Dark button now shows dark text on light backing
+- System mode unchanged (still follows OS/browser preference)
+- Contrast verified to meet WCAG AA
+
+### v1.1.0 (2025-11-11)
+- Added dynamic theme toggle (System / Light / Dark) toolbar
+- Persistent preference via `localStorage` (`a11yThemePref`)
+- Readable backdrop-blurred content panel (`.a11y-panel`)
+- Scoped data-theme attributes to avoid global CSS collisions
+- Backward compatible: all existing anchors & IDs preserved
+
+### v1.0.0 (2025-11-10)
+- Initial release: skip link, scroll spy, mobile drawer, semantic landmarks, reduced motion respect, print optimization
+
 See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
 
 ## Support
@@ -197,6 +241,6 @@ For questions or issues with this widget:
 
 ---
 
-**Last Updated:** November 10, 2025  
+**Last Updated:** November 11, 2025  
 **Maintainer:** McCal Media Development Team  
 **License:** Proprietary - McCal Media

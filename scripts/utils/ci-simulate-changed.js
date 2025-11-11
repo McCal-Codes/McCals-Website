@@ -17,11 +17,21 @@ if (!changedStr) {
   process.exit(2);
 }
 const changed = changedStr.split(/\s+/).filter(Boolean);
-const instructionsDocs = new Set([
-  '.github/copilot-instructions.md',
-  '.github/canvas-instructions.md',
-  '.github/codex-instructions.md',
-]);
+
+// Discover instruction docs dynamically from .github to mirror production workflow
+const fs = require('fs');
+const path = require('path');
+function discoverInstructions() {
+  const dir = path.join(process.cwd(), '.github');
+  try {
+    return fs.readdirSync(dir)
+      .filter(f => /instructions?/.test(f) && f.endsWith('.md'))
+      .map(f => `.github/${f}`);
+  } catch (e) {
+    return ['.github/copilot-instructions.md', '.github/canvas-instructions.md', '.github/codex-instructions.md'];
+  }
+}
+const instructionsDocs = new Set(discoverInstructions());
 const changelogFiles = new Set(['CHANGELOG.md', 'docs/CHANGELOG.md']);
 
 const containsInstructions = changed.some(f => instructionsDocs.has(f));
