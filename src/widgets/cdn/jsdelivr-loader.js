@@ -1,134 +1,145 @@
-/*
- * jsDelivr Widget Loader
- *  - Loads HTML/JS/CSS fragments from jsDelivr (GitHub) into the page
- *  - Non-destructive: will inject into a target container and fall back to a local path if CDN fetch fails
- *  - Usage (example):
- *    <div class="mccal-widget" data-repo="McCal-Codes/McCals-Website" data-path="src/widgets/my-widget/versions/v1.2.0-my-widget.html" data-version="v1.2.0"></div>
- *    <script src="/src/widgets/cdn/jsdelivr-loader.js" async></script>
- *
- *  Or load loader itself from jsDelivr once published:
- *    <script src="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main/src/widgets/cdn/jsdelivr-loader.js" async></script>
- *
- * The loader finds elements with class `mccal-widget` (or `data-cdn-widget`) and replaces their contents
- * with the fetched HTML. The original element is preserved (nondestructive) and used as the injection root.
- */
-(function () {
+// McCal CDN/jsDelivr Widget Loader
+// Finds elements with class `mccal-widget` and attributes `data-repo`, `data-path`, `data-version`, `data-fallback`
+// Usage (example):
+// <div class="mccal-widget" data-repo="McCal-Codes/McCals-Website" data-path="src/widgets/example/versions/v1.0.0.html" data-version="v1.0.0" data-mode="inline" data-fallback="/src/widgets/example/versions/v1.0.0.html"></div>
+(function(){
   'use strict';
 
-  var SELECTOR = '[data-cdn-widget], .mccal-widget';
-
-  function qs(el, sel) { return (el || document).querySelector(sel); }
-  function qsa(el, sel) { return (el || document).querySelectorAll(sel); }
-
-  function buildJsDelivrUrl(repo, filePath, version) {
-    // repo: owner/repo
-    // filePath: path inside repo
-    // version: tag/commit (optional)
-    var v = version ? '@' + version : '';
-    return 'https://cdn.jsdelivr.net/gh/' + repo + v + '/' + filePath;
+  function buildJsDelivrUrl(repo, path, version){
+    if(!repo || !path) return null;
+    var base = 'https://cdn.jsdelivr.net/gh/' + repo + '/';
+    if(version) base += encodeURIComponent(version) + '/';
+    // path may start with a leading slash — remove it for jsDelivr
+    if(path.charAt(0) === '/') path = path.slice(1);
+    return base + path;
   }
 
-  function safeInsertHTML(container, html) {
-    // Insert nodes, execute scripts, keep original container element (nondestructive)
-    container.innerHTML = html;
+  function runInlineInjection(container, html, baseUrl){
+    var tpl = document.createElement('template');
+    tpl.innerHTML = html;
 
-    // Execute scripts safely: replace <script> with new script elements to run them.
-    var scripts = container.querySelectorAll('script');
-    Array.prototype.forEach.call(scripts, function (oldScript) {
-      var script = document.createElement('script');
-      // copy attributes
-      for (var i = 0; i < oldScript.attributes.length; i++) {
-        var attr = oldScript.attributes[i];
-        script.setAttribute(attr.name, attr.value);
-      }
-      var text = oldScript.textContent;
-      // remove original before executing to avoid double-run in some environments
-      var parent = oldScript.parentNode;
-      if (parent) parent.removeChild(oldScript);
-      if (text) script.text = text;
-      parent && parent.appendChild(script);
-    });
-  }
-
-  function fetchText(url, timeoutMs) {
-    timeoutMs = timeoutMs || 8000;
-    return new Promise(function (resolve, reject) {
-      var didTimeout = false;
-      var timer = setTimeout(function () {
-        didTimeout = true;
-        reject(new Error('Timeout loading ' + url));
-      }, timeoutMs);
-
-      fetch(url, { credentials: 'omit', cache: 'force-cache' }).then(function (res) {
-        clearTimeout(timer);
-        if (didTimeout) return;
-        if (!res.ok) return reject(new Error('Fetch failed ' + res.status + ' ' + url));
-        res.text().then(resolve, reject);
-      }, function (err) {
-        clearTimeout(timer);
-        if (didTimeout) return;
-        reject(err);
+    // Fix relative URLs for <link>, <img>, <a>, and script src when a baseUrl is provided
+    if(baseUrl){
+      var elems = tpl.content.querySelectorAll('link[href], img[src], script[src], a[href]');
+      elems.forEach(function(el){
+        var attr = el.hasAttribute('href') ? 'href' : (el.hasAttribute('src') ? 'src' : 'href');
+        var v = el.getAttribute(attr);
+        if(v && v.indexOf('://') === -1 && v.indexOf('//') !== 0 && v.charAt(0) !== '#'){
+          // convert relative path to absolute based on baseUrl
+          try{ el.setAttribute(attr, new URL(v, baseUrl).toString()); } catch(e){}
+        }
       });
-    });
-  }
-
-  function processElement(el) {
-    var repo = el.getAttribute('data-repo');
-    var path = el.getAttribute('data-path') || el.getAttribute('data-file');
-    var version = el.getAttribute('data-version');
-    var fallback = el.getAttribute('data-fallback'); // local path
-
-    if (!repo || !path) {
-      // nothing to do
-      return;
     }
 
-    var cdnUrl = buildJsDelivrUrl(repo, path, version);
+    // Append non-script nodes
+    Array.prototype.slice.call(tpl.content.childNodes).forEach(function(node){
+      if(node.tagName && node.tagName.toLowerCase() === 'script') return;
+      container.appendChild(node.cloneNode(true));
+    });
 
-    fetchText(cdnUrl).then(function (html) {
-      safeInsertHTML(el, html);
-    }).catch(function (err) {
-      // on any failure, attempt fallback to local path if provided
-      console.warn('jsDelivr loader: cdn fetch failed for - jsdelivr-loader.js:92', cdnUrl, err && err.message);
-      if (fallback) {
-        fetchText(fallback).then(function (html) {
-          safeInsertHTML(el, html);
-        }).catch(function (err2) {
-          console.error('jsDelivr loader: fallback fetch failed for - jsdelivr-loader.js:97', fallback, err2 && err2.message);
-        });
+    // Execute scripts: inline and external
+    var scripts = tpl.content.querySelectorAll('script');
+    scripts.forEach(function(s){
+      var newScript = document.createElement('script');
+      // copy attributes
+      for(var i=0;i<s.attributes.length;i++){ var a = s.attributes[i]; newScript.setAttribute(a.name,a.value); }
+      if(s.src){
+        // make absolute if needed
+        var src = s.getAttribute('src');
+        if(baseUrl && src && src.indexOf('://') === -1 && src.charAt(0) !== '/'){
+          try{ src = new URL(src, baseUrl).toString(); newScript.src = src; } catch(e){ newScript.src = s.src; }
+        } else {
+          newScript.src = s.src;
+        }
+      } else {
+        newScript.textContent = s.textContent || s.innerText || '';
       }
+      // Append to container so it executes in document context
+      container.appendChild(newScript);
     });
   }
 
-  function init() {
-    try {
-      var els = qsa(document, SELECTOR);
-      if (!els || els.length === 0) return;
-      Array.prototype.forEach.call(els, function (el) { processElement(el); });
-    } catch (e) {
-      console.error('jsDelivr loader init error - jsdelivr-loader.js:109', e && e.message);
+  function insertIframe(container, url){
+    var iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.style.width = '100%';
+    iframe.style.border = '0';
+    iframe.setAttribute('loading','lazy');
+    iframe.setAttribute('referrerpolicy','no-referrer');
+    container.appendChild(iframe);
+  }
+
+  function fetchAndInject(container, url, fallback){
+    var baseForRelative = null;
+    try{ baseForRelative = new URL(url).origin + new URL(url).pathname.replace(/\/[^/]*$/, '/'); }catch(e){ baseForRelative = null; }
+    return fetch(url, {mode:'cors'}).then(function(resp){
+      if(!resp.ok) throw new Error('Fetch failed: ' + resp.status);
+      return resp.text();
+    }).then(function(html){
+      runInlineInjection(container, html, baseForRelative);
+      return true;
+    }).catch(function(err){
+      // try fallback
+      if(fallback){
+        return fetch(fallback, {mode:'same-origin'}).then(function(r){ if(!r.ok) throw new Error('Fallback fetch failed'); return r.text(); }).then(function(html){ runInlineInjection(container, html); return true; });
+      }
+      throw err;
+    });
+  }
+
+  function initOne(container){
+    if(!container || container.__mccalCdnLoaded) return;
+    container.__mccalCdnLoaded = true;
+
+    // Allow two modes of configuration: compact data-src (full URL) OR data-repo+data-path(+data-version)
+    var directSrc = container.getAttribute('data-src');
+    var repo = container.getAttribute('data-repo');
+    var path = container.getAttribute('data-path');
+    var version = container.getAttribute('data-version');
+    var fallback = container.getAttribute('data-fallback');
+    var mode = (container.getAttribute('data-mode') || 'inline').toLowerCase();
+
+    var url = directSrc || (repo && path ? buildJsDelivrUrl(repo, path, version) : null);
+    if(!url && !fallback){
+      container.innerHTML = '<div style="padding:18px;color:#666">Widget configuration missing (data-src or data-repo+data-path required).</div>';
+      return Promise.resolve();
     }
+
+    if(mode === 'iframe'){
+      // prefer direct url; if missing, use fallback
+      insertIframe(container, url || fallback);
+      return Promise.resolve();
+    }
+
+    // Inline mode: fetch and inject
+    return fetchAndInject(container, url, fallback).catch(function(err){
+      console.warn('McCalJsDelivrWidgetLoader: failed to load widget - jsdelivr-loader.js:116', err);
+      container.innerHTML = '<div style="padding:18px;color:#666">Widget failed to load.</div>';
+    });
   }
 
-  // Initialize on DOMContentLoaded or immediately if ready
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(init, 0);
-  } else {
-    document.addEventListener('DOMContentLoaded', init);
+  function initAll(selector){
+    selector = selector || '.mccal-widget';
+    var nodes = document.querySelectorAll(selector);
+    nodes = Array.prototype.slice.call(nodes);
+    nodes.forEach(initOne);
   }
 
-  // Expose helper for programmatic use
-  window.McCalJsDelivrWidgetLoader = {
-    buildUrl: buildJsDelivrUrl,
-    loadInto: function (elementOrSelector, options) {
-      var el = typeof elementOrSelector === 'string' ? qs(document, elementOrSelector) : elementOrSelector;
-      if (!el) throw new Error('No element');
-      if (options && options.repo) el.setAttribute('data-repo', options.repo);
-      if (options && options.path) el.setAttribute('data-path', options.path);
-      if (options && options.version) el.setAttribute('data-version', options.version);
-      if (options && options.fallback) el.setAttribute('data-fallback', options.fallback);
-      processElement(el);
+  // public API
+  var API = {
+    loadInto: function(selectorOrNode, opts){
+      if(typeof selectorOrNode === 'string') return initAll(selectorOrNode);
+      if(selectorOrNode && selectorOrNode.nodeType) return initOne(selectorOrNode);
+      return initAll('.mccal-widget');
     }
   };
+
+  // expose
+  window.McCalJsDelivrWidgetLoader = window.McCalJsDelivrWidgetLoader || API;
+
+  // auto-init when script loads (non-blocking)
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ API.loadInto('.mccal-widget'); });
+  } else { API.loadInto('.mccal-widget'); }
 
 })();
