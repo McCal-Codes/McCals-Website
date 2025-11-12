@@ -86,7 +86,40 @@ versions/
 - Use `--mc-accent-*` and `--mc-gradient-*` variables for highlights, chips, overlays, and accent lines.
 - Do NOT use these as base backgrounds or for large surfaces.
 - For usage examples, see `docs/standards/widget-ui-colors-and-buttons.md` and the comment block in `theme.css`.
-- All widgets must remain dark mode by default. Light/dark toggle is a future enhancement.
+- All widgets must remain dark mode by default. A bright alternative ("Blinding Mode", formerly called light mode) is optional and must follow the theming standards below.
+
+### Theming & Visibility Hardening (2025-11-12)
+
+These rules are required when offering a bright/alternate theme in Squarespace Code Blocks:
+
+- Container-scoped theming only: Set `data-theme` on the widget root (e.g., `.widget-namespace`) instead of `<html>` to avoid Squarespace global clashes.
+- Keep underlying value `data-theme="light"` for CSS targeting, but present the UI as “Blinding Mode” to explicitly communicate very bright visuals. The toggle label should always indicate the action, not the current state (e.g., label shows “Blinding Mode” while in dark mode, “Dark Mode” while in light).
+- Safety color tokens: Define and use `--body-safe` and `--link-safe` variables for critical text and link colors. Resolve these to stable, high-contrast values (don’t rely on site-level variables).
+- Heading overrides to defeat site gradients: For `h1/h2/h3` within the widget, forcibly reset potential gradient/transparent text effects with:
+  - `color: var(--body-safe);`
+  - `-webkit-text-fill-color: currentColor;`
+  - `background: none !important;`
+  - `background-clip: border-box !important; -webkit-background-clip: border-box !important;`
+  - `mix-blend-mode: normal !important;`
+- Hazy overlay accessibility: If using a translucent gradient/blur overlay (the “haze”) in the bright theme:
+  - Apply it on the container `::before` behind content (`z-index: -1`), keep blur modest (≤ 8px), and use gentle opacities (e.g., 0.85 → 0.6).
+  - Never make text transparent; text must remain fully opaque. Ensure contrast remains AA/AAA where feasible.
+- Defaults & persistence: Default to dark mode. Persist choice via `localStorage` under a widget-specific key; don’t alter global document state.
+- Naming: In docs and UI, call the bright theme “Blinding Mode” to reduce ambiguity about intensity; keep CSS selectors targeting `[data-theme="light"]` for compatibility.
+
+Recommended toggle label logic:
+
+```js
+function updateLabel(theme){
+  if (theme === 'light') {
+    label.textContent = 'Dark Mode';
+  } else {
+    label.textContent = 'Blinding Mode';
+  }
+}
+```
+
+See the Policies & Legal widget v1.2.0 for a reference implementation (container-scoped theming, safety tokens, heading resets, and a gentle haze overlay).
 
 ### 1. **CSS Custom Properties (Variables)**
 Standardized color palette and design tokens:

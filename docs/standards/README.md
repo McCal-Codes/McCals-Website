@@ -22,6 +22,18 @@ Systematic methodology for applying enhancement patterns across widgets with imp
 ### 🎨 **theming-for-widgets.md**
 Practical guidance for implementing light/dark theming across playgrounds and production widgets (tokens, data-theme, THEME_KEY, propagation, and testing).
 
+### ✅ Lessons Learned (Nov 2025)
+Key theming and visibility hardening patterns (now required for new widgets and major updates):
+
+- Container-scoped theming: Set `data-theme` on the widget root (not `<html>`) to avoid Squarespace global CSS collisions.
+- “Blinding Mode” naming: Present the bright theme as “Blinding Mode” in UI while keeping CSS selectors targeting `[data-theme="light"]` for compatibility.
+- Toggle label convention: Show the action, not state (e.g., in dark mode the button says “Blinding Mode”; in light mode it says “Dark Mode”).
+- Safe color tokens: Define and apply `--body-safe` and `--link-safe` for text/links to guarantee contrast regardless of host theme.
+- Heading resets: Force `h1/h2/h3` inside the widget to neutralize host gradient/transparent text with `-webkit-text-fill-color: currentColor`, `background: none !important`, and `mix-blend-mode: normal !important`.
+- Haze overlays (bright theme): Keep overlays behind content (`::before`, `z-index: -1`), use gentle opacity/blur, and never rely on transparent text — preserve AA/AAA contrast.
+
+See the “Theming & Visibility Hardening (2025-11-12)” section in `widget-standards.md` for full guidance and example code.
+
 
 
 ## Repository Standards

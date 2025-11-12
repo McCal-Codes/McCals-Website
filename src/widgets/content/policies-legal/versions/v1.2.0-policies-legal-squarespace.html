@@ -1,10 +1,13 @@
 <!-- 
 ═══════════════════════════════════════════════════════════════════════════════
-  POLICIES & LEGAL WIDGET v1.0.0 - McCal Media
+  POLICIES & LEGAL WIDGET v1.2.0 - McCal Media
   
-  SEO-Enhanced Legal Documentation Page with Navigation
-  - Unsplash-inspired clean design with sidebar navigation
-  - Comprehensive Terms, Privacy, Cookie Policy, License, FAQ
+  SEO-Enhanced Legal Documentation Page with OLED Theme Toggle
+  - OLED dark mode (pure white on true black #000000) - default
+  - Blinding mode (high-contrast white) with translucent haze backing for Squarespace visibility
+  - Theme toggle button with localStorage persistence
+  - Glassmorphism effects with backdrop blur
+  - Comprehensive Terms, Privacy, Cookie, Harassment, Defamation, License, FAQ
   - Mobile-responsive drawer menu
   - Scroll spy active link highlighting
   - SEO: WebPage schema, BreadcrumbList, FAQPage structured data
@@ -18,8 +21,28 @@
   4. In Page Settings → SEO → Description: "McCal Media's terms of service, privacy policy, cookie policy, usage license, and frequently asked questions for photography services."
   5. Save and publish
   
-  VERSION: 1.0.0 (2025-01-27)
-  CHANGELOG: Initial release with comprehensive legal documentation and SEO
+  VERSION: 1.2.0 (2025-11-12)
+  CHANGELOG v1.2.0:
+  - Added OLED dark mode (pure white on true black #000000) as default
+  - Added Blinding Mode toggle (high-contrast white with haze backing)
+  - Theme preference saved to localStorage
+  - Added glassmorphism effects with backdrop blur
+  - Added Harassment Policy section (effective March 1, 2022)
+  - Added Defamation Policy section (effective March 1, 2022)
+  - Updated PDF download to direct GitHub link (matching about page pattern)
+  - Consistent backing/borders in both dark (OLED) and Blinding modes
+  - Small anchored theme toggle button for desktop (top-right)
+  - Menu button hidden on desktop, visible only on mobile
+  - Theme respects prefers-color-scheme
+  - Improved mobile responsive design with theme toggle repositioning
+  - Enhanced accessibility with keyboard-accessible theme toggle
+  
+  CHANGELOG v1.1.0:
+  - Updated contact information (contact@mcc-cal.com)
+  - Removed physical address for privacy
+  - Various content updates
+  
+  CHANGELOG v1.0.0: Initial release with comprehensive legal documentation and SEO
 ═══════════════════════════════════════════════════════════════════════════════
 -->
 
@@ -45,11 +68,12 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
 <meta name="twitter:image" content="https://mccalmedia.com/assets/og-policies.jpg">
 
 <meta name="robots" content="index, follow">
--->
+
 
 <!-- Squarespace Code Block: Policies & Legal (SEO-Enhanced) -->
-<!-- NOTE: Upload terms-of-conditions-mccal-media.pdf to Squarespace Files, then update data-terms-pdf below with the Squarespace file URL -->
-<div class="policy-site" data-widget-version="1.0.0" data-terms-pdf="https://www.mcc-cal.com/s/Terms-of-Conditions-McCal-Media.pdf">
+<!-- NOTE: PDF downloads hosted on GitHub for easy maintenance and version control -->
+
+<div class="policy-site" data-widget-version="1.2.0">
   <button class="toc-toggle" aria-controls="policy-toc" aria-expanded="false" onclick="toggleNav()" title="Open menu">Menu</button>
   <div class="policy-scrim" onclick="toggleNav(false)" role="presentation"></div>
 
@@ -58,14 +82,6 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
     <details open>
       <summary>License</summary>
       <nav><a href="#license">Overview</a></nav>
-    </details>
-    <details>
-      <summary>Privacy Policy</summary>
-      <nav><a href="#privacy">Overview</a></nav>
-    </details>
-    <details>
-      <summary>Cookie Policy</summary>
-      <nav><a href="#cookies">Overview</a></nav>
     </details>
     <details open>
       <summary>Terms & Conditions</summary>
@@ -100,6 +116,15 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
       <nav><a href="#faq">Overview</a></nav>
     </details>
     <details>
+      <summary>Policies</summary>
+      <nav>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#cookies">Cookie Policy</a>
+        <a href="#harassment">Harassment Policy</a>
+        <a href="#defamation">Defamation Policy</a>
+      </nav>
+    </details>
+    <details>
       <summary>Contact</summary>
       <nav><a href="#contact">Overview</a></nav>
     </details>
@@ -107,19 +132,38 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
 
   <main class="policy-main" role="main">
     <header>
-        <h1>Policies & Legal <span class="version-badge" onclick="showChangelog()" role="button" tabindex="0" aria-label="View changelog" title="v1.0.0 - Click to view changelog">v1.0.0</span></h1>
+        <h1>Policies & Legal <span class="version-badge" onclick="showChangelog()" role="button" tabindex="0" aria-label="View changelog" title="v1.2.0 - Click to view changelog">v1.2.0</span></h1>
       <span class="badge eff" aria-label="Effective date">Effective <time id="eff" datetime=""></time></span>
     </header>
 
     <!-- Download Full Terms (PDF) -->
     <div class="download-bar" role="region" aria-label="Downloads">
-      <a id="download-terms" class="download-btn download-btn-disabled" href="mailto:business@mcc-cal.com?subject=Request%20for%20Terms%20%26%20Conditions%20PDF" title="Contact us for a copy of the full Terms & Conditions (PDF)" aria-label="Contact us for Terms and Conditions PDF" style="cursor: pointer; opacity: 0.7;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
+      <a href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/terms-and-conditions-mccal-media.pdf" download="Terms-and-Conditions-McCal-Media.pdf" class="download-btn" aria-label="Download Terms and Conditions PDF">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
         </svg>
-        <span>Request Full Terms (PDF)</span>
+        <span>Download Full Terms (PDF)</span>
       </a>
+      
+      <!-- Theme Toggle Button -->
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/Blinding mode" title="Toggle dark/Blinding mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+  <span id="themeLabel">Blinding Mode</span>
+        <span class="beta-tag">BETA</span>
+      </button>
+      
+      <span class="note">Complete terms and conditions document</span>
     </div>
 
     <section id="license" aria-labelledby="license-heading">
@@ -315,6 +359,113 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
       </dl>
     </section>
 
+    <section id="harassment" aria-labelledby="harassment-heading">
+      <h2 id="harassment-heading">Harassment Policy</h2>
+      <p class="badge">Effective date: March 1, 2022</p>
+  <p class="note">This policy applies across all contact channels (site, social media, email, messaging, in-person).</p>
+      <p><strong>Applies to:</strong> Any parties in contact with and associated with McCal Media, whether online or in person. This includes all interactions through mcc-cal.com, social media platforms, email, messaging services, in-person events, and any other form of communication.</p>
+      <p>McCal Media is committed to maintaining a safe, respectful, and inclusive environment for all individuals who interact with our services, content, and community.</p>
+      
+      <h3>Zero Tolerance</h3>
+      <p>We maintain a zero-tolerance policy for harassment, discrimination, or abusive behavior of any kind. This includes but is not limited to:</p>
+      <ul>
+        <li>Harassment based on race, ethnicity, national origin, religion, gender, gender identity, sexual orientation, age, disability, or any other protected characteristic</li>
+        <li>Threats, intimidation, or abusive language</li>
+        <li>Stalking or unwanted contact</li>
+        <li>Doxxing or sharing private information without consent</li>
+        <li>Sexual harassment or inappropriate advances</li>
+        <li>Hate speech or discriminatory content</li>
+      </ul>
+
+      <h3>Reporting</h3>
+      <p>If you experience or witness harassment:</p>
+      <ul>
+        <li>Contact us immediately at <a href="mailto:contact@mcc-cal.com">contact@mcc-cal.com</a></li>
+        <li>Include details: date, time, description of incident, and any relevant evidence</li>
+        <li>All reports are taken seriously and handled confidentially</li>
+        <li>We will respond within 24 hours and investigate promptly</li>
+      </ul>
+
+      <h3>Consequences</h3>
+      <p>Individuals found to have violated this policy may face:</p>
+      <ul>
+        <li>Immediate removal from our platforms and services</li>
+        <li>Termination of business relationships</li>
+        <li>Legal action if warranted</li>
+        <li>Reporting to appropriate authorities</li>
+      </ul>
+
+      <h3>Our Commitment</h3>
+      <p>We are committed to:</p>
+      <ul>
+        <li>Investigating all reports thoroughly and fairly</li>
+        <li>Protecting reporters from retaliation</li>
+        <li>Taking appropriate action to prevent future incidents</li>
+        <li>Continuously reviewing and improving our policies</li>
+        <li>Creating a welcoming environment for all</li>
+      </ul>
+    </section>
+
+    <section id="defamation" aria-labelledby="defamation-heading">
+      <h2 id="defamation-heading">Defamation Policy</h2>
+      <p class="badge">Effective date: March 1, 2022</p>
+  <p class="note">Applies to all published or transmitted statements in any medium (site, social platforms, email, print, verbal).</p>
+      <p><strong>Applies to:</strong> Any parties in contact with and associated with McCal Media, whether online or in person. This includes all communications through mcc-cal.com, social media platforms, websites, publications, email, messaging services, in-person conversations, and any other form of public or private communication.</p>
+      <p>McCal Media takes false statements that harm reputation seriously and maintains a zero-tolerance policy for defamatory content.</p>
+      
+      <h3>What Constitutes Defamation</h3>
+      <p>Defamation includes false statements that:</p>
+      <ul>
+        <li>Damage someone's reputation, business, or livelihood</li>
+        <li>Are presented as fact (not opinion or satire)</li>
+        <li>Are published or communicated to third parties</li>
+        <li>Cause demonstrable harm</li>
+        <li>Include libel (written) or slander (spoken)</li>
+      </ul>
+
+      <h3>Prohibited Content</h3>
+      <p>We prohibit:</p>
+      <ul>
+        <li>False statements about individuals or businesses</li>
+        <li>Fabricated reviews or testimonials</li>
+        <li>Misleading claims about products or services</li>
+        <li>False accusations of criminal behavior</li>
+        <li>Knowingly spreading false information</li>
+        <li>Impersonation or misrepresentation</li>
+      </ul>
+
+      <h3>Reporting Defamatory Content</h3>
+      <p>If you believe content on our site is defamatory:</p>
+      <ul>
+        <li>Contact us immediately at <a href="mailto:contact@mcc-cal.com">contact@mcc-cal.com</a></li>
+        <li>Include: URL/location of content, explanation of false statements, evidence of harm</li>
+        <li>Provide documentation supporting your claim</li>
+        <li>We will review and respond within 48 hours</li>
+      </ul>
+
+      <h3>Our Response</h3>
+      <p>Upon receiving a valid complaint, we will:</p>
+      <ul>
+        <li>Investigate the claim thoroughly and promptly</li>
+        <li>Remove or correct content found to be defamatory</li>
+        <li>Take action against users who post defamatory content</li>
+        <li>Cooperate with legal authorities when necessary</li>
+        <li>Preserve evidence for potential legal proceedings</li>
+      </ul>
+
+      <h3>Consequences</h3>
+      <p>Users who post defamatory content may face:</p>
+      <ul>
+        <li>Immediate content removal</li>
+        <li>Account suspension or permanent ban</li>
+        <li>Legal action and liability for damages</li>
+        <li>Reporting to law enforcement if applicable</li>
+      </ul>
+
+      <h3>Legal Disclaimer</h3>
+      <p>This policy does not constitute legal advice. If you believe you have been defamed, consult with an attorney regarding your legal rights and remedies.</p>
+    </section>
+
     <section id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact</h2>
       <address>
@@ -338,6 +489,22 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
       <button class="changelog-close" onclick="hideChangelog()" aria-label="Close changelog">&times;</button>
     </div>
     <div class="changelog-body">
+      <div class="changelog-version">v1.2.0 - Theme Toggle & Policies Update (2025-11-12)</div>
+      <ul class="changelog-items">
+        <li>✅ <strong>OLED Dark Mode:</strong> Pure white text on true black (#000000) background for energy savings and reduced eye strain</li>
+  <li>✅ <strong>Blinding Mode Toggle:</strong> High-contrast white + haze backing ensures visibility on any Squarespace background</li>
+        <li>✅ <strong>Consistent Backing:</strong> Both themes have matching solid backing with borders and shadows</li>
+        <li>✅ <strong>Small Anchored Button:</strong> Compact theme toggle for desktop (top-right corner)</li>
+        <li>✅ <strong>Desktop Navigation:</strong> Sidebar always visible, menu button hidden on desktop</li>
+        <li>✅ <strong>Theme Persistence:</strong> User preference saved to localStorage and persists across sessions</li>
+        <li>✅ <strong>Glassmorphism Effects:</strong> Gradient overlays and backdrop blur for modern aesthetic</li>
+        <li>✅ <strong>Harassment Policy:</strong> Zero tolerance policy with 24-hour response commitment</li>
+        <li>✅ <strong>Defamation Policy:</strong> Clear guidelines on prohibited content with 48-hour response time</li>
+        <li>✅ <strong>PDF Download:</strong> Direct GitHub-hosted download link (matching about page pattern)</li>
+        <li>✅ <strong>Improved Accessibility:</strong> Theme toggle keyboard accessible, respects system preferences</li>
+        <li>✅ <strong>Mobile Optimized:</strong> Theme toggle repositioned for mobile viewports (bottom-right)</li>
+      </ul>
+      
       <div class="changelog-version">v1.0.0 - Initial Release (2025-01-27)</div>
       <ul class="changelog-items">
         <li>✅ <strong>Comprehensive Legal Documentation:</strong> License, Privacy, Cookies, Terms, FAQ, Contact</li>
@@ -346,17 +513,18 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
         <li>✅ <strong>Responsive Design:</strong> Desktop sidebar, mobile drawer menu with floating toggle</li>
         <li>✅ <strong>Scroll Spy:</strong> Active link highlighting based on visible section</li>
         <li>✅ <strong>Auto-Dating:</strong> Effective date and copyright year update automatically</li>
-        <li>✅ <strong>Clean Unsplash-Inspired UI:</strong> Minimalist design with dark/light mode support</li>
+  <li>✅ <strong>Clean Unsplash-Inspired UI:</strong> Minimalist design with OLED dark / Blinding mode support</li>
         <li>✅ <strong>Heading Anchors:</strong> Visible § symbols on hover for easy section linking</li>
       </ul>
       
       <div class="changelog-notes">
         <p><strong>📝 Notes:</strong></p>
         <ul>
-          <li>Add meta tags to Page Header Code Injection (see HTML comments at top)</li>
+          <li>Default theme: Dark mode (OLED black) - click "Blinding Mode" button to switch</li>
+          <li>Theme preference persists across page reloads via localStorage</li>
+          <li>Harassment/Defamation policies effective March 1, 2022</li>
           <li>Mobile menu opens via floating "Menu" button (bottom-right)</li>
-          <li>All sections have proper IDs for deep linking (#terms, #privacy, etc.)</li>
-          <li>Update contact info and terms as needed for your business</li>
+          <li>All sections have proper IDs for deep linking (#terms, #privacy, #harassment, etc.)</li>
         </ul>
       </div>
     </div>
@@ -470,28 +638,56 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
    CSS VARIABLES & BASE STYLES
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --fg: #f7f7f7;
-  --muted: #a6a6a6;
-  --line: #242424;
-  --link: #d1d5db;
-  --accent: #a878b9;
+  --sq-top: 72px;
   --gutter: 48px;
   --sidebar: 280px;
   --content: 860px;
-  --sq-top: 72px;
+  
+  /* Default: Dark mode - white text on true black */
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: #b0b0b0;
+  --line: #333333;
+  --link: #ffffff;
+  --accent: #ffffff;
+  --chip: #1a1a1a;
+  --focus: #ffffff;
+  /* Squarespace override safety variables */
+  --body-safe: var(--fg);
+  --link-safe: var(--link);
 }
 
+/* Blinding mode (formerly light mode) - minimal design */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --fg: #000000;
+  --muted: #666666;
+  --line: #e0e0e0;
+  --link: #000000;
+  --accent: #000000;
+  --chip: #f5f5f5;
+  --focus: #000000;
+  --body-safe: var(--fg);
+  --link-safe: var(--link);
+}
+
+/* Respect system preference if no manual selection */
 @media (prefers-color-scheme: light) {
-  :root {
-    --fg: #1a1a1a;
-    --muted: #5b5b5b;
-    --line: #e5e5ea;
-  --link: #0f172a;
-  --accent: #0ea5e9;
+  :root:not([data-theme]) {
+    --bg: #ffffff;
+    --fg: #000000;
+    --muted: #666666;
+    --line: #e0e0e0;
+    --link: #000000;
+    --accent: #000000;
+    --chip: #f5f5f5;
+    --focus: #000000;
+    --body-safe: var(--fg);
+    --link-safe: var(--link);
   }
 }
 
-/* Slightly transparent dark background container with glassmorphism */
+/* Solid background container with consistent backing */
 .policy-site {
   min-height: 100vh;
   display: flex;
@@ -499,33 +695,117 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
   max-width: calc(var(--sidebar) + var(--content) + var(--gutter) * 2);
   margin: 0 auto;
   padding: calc(var(--sq-top) + 16px) var(--gutter) 72px;
-  color: var(--fg);
+  color: var(--body-safe);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.7;
   position: relative;
+  background: rgba(0, 0, 0, 0.95);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Glassmorphism effect */
+/* Glassmorphism effect for dark mode */
 .policy-site::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   pointer-events: none;
   z-index: -1;
 }
 
-@media (prefers-color-scheme: light) {
-  .policy-site::before {
-    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,250,250,0.9) 100%);
-    border: 1px solid rgba(0,0,0,0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
+/* Blinding mode backing - ensures visibility on dark Squarespace backgrounds */
+.policy-site[data-theme="light"] {
+  /* Blinding mode with subtle haze: solid base for contrast + soft translucent overlay */
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.policy-site[data-theme="light"]::before {
+  /* Reintroduce translucent gradient haze (gentle, readable) */
+  background: linear-gradient(135deg,
+              rgba(255,255,255,0.85) 0%,
+              rgba(250,250,250,0.75) 40%,
+              rgba(245,245,245,0.6) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THEME TOGGLE BUTTON - Positioned under download button
+   ═══════════════════════════════════════════════════════════════════════════ */
+.theme-toggle {
+  position: static;
+  z-index: 100;
+  padding: 0.5rem 0.7rem;
+  background: rgba(30, 30, 30, 0.9);
+  color: var(--body-safe);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  margin-left: 12px;
+}
+
+.policy-site[data-theme="light"] .theme-toggle {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  background: rgba(40, 40, 40, 0.95);
+}
+
+.policy-site[data-theme="light"] .theme-toggle:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  background: rgba(255,255,255,1);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.beta-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(96, 165, 250, 1);
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+
+.policy-site[data-theme="light"] .beta-tag {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: rgba(37, 99, 235, 1);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -539,6 +819,14 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
   max-height: calc(100vh - var(--sq-top) - 32px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.policy-site[data-theme="light"] .policy-toc {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 .policy-toc .label {
@@ -560,11 +848,9 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
   -webkit-backdrop-filter: blur(8px);
 }
 
-@media (prefers-color-scheme: light) {
-  .policy-toc details {
-    background: rgba(0,0,0,0.02);
-    border: 1px solid rgba(0,0,0,0.06);
-  }
+.policy-site[data-theme="light"] .policy-toc details {
+  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.06);
 }
 
 .policy-toc summary {
@@ -607,7 +893,7 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
 
 .policy-toc nav a.active {
   background: color-mix(in srgb, var(--accent) 18%, transparent);
-  color: var(--fg);
+  color: var(--body-safe);
   font-weight: 600;
 }
 
@@ -619,6 +905,7 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
 .policy-main {
   flex: 1;
   max-width: var(--content);
+  padding-left: 24px;
 }
 
 .policy-main h1 {
@@ -630,6 +917,14 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  color: var(--body-safe);
+  /* Squarespace heading reset: some templates set gradient text via
+     background-clip + transparent fill. Force normal text rendering. */
+  -webkit-text-fill-color: var(--body-safe) !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
 }
 
 .version-badge {
@@ -706,23 +1001,34 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
   padding-bottom: 0.35rem;
   margin: 2rem 0 1rem;
   scroll-margin-top: calc(var(--sq-top) + 100px);
+  color: var(--body-safe);
+  -webkit-text-fill-color: var(--body-safe) !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
 }
 
 .policy-main h3 {
   font-size: 1.15rem;
   font-weight: 600;
   margin: 1.5rem 0 0.75rem;
-  color: var(--fg);
+  color: var(--body-safe);
   scroll-margin-top: calc(var(--sq-top) + 100px);
+  -webkit-text-fill-color: var(--body-safe) !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
 }
 
 .policy-main p {
   margin: 0 0 1rem;
-  color: color-mix(in srgb, var(--fg) 90%, transparent);
+  color: color-mix(in srgb, var(--body-safe) 90%, transparent);
 }
 
 .policy-main a {
-  color: var(--accent);
+  color: var(--link-safe);
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
   transition: text-decoration-color 0.2s ease;
@@ -730,6 +1036,7 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
 
 .policy-main a:hover {
   text-decoration-color: var(--accent);
+  color: var(--body-safe);
 }
 
 .policy-main ul, .policy-main dl {
@@ -749,7 +1056,7 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
 .policy-main dd {
   margin-left: 1.5rem;
   margin-bottom: 1rem;
-  color: color-mix(in srgb, var(--fg) 85%, transparent);
+  color: color-mix(in srgb, var(--body-safe) 85%, transparent);
 }
 
 .policy-main address {
@@ -831,6 +1138,10 @@ h3:hover .anchor {
   -webkit-backdrop-filter: blur(8px);
 }
 
+.policy-site[data-theme="light"] .changelog-modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .changelog-modal.active {
   display: flex;
 }
@@ -845,6 +1156,12 @@ h3:hover .anchor {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
+.policy-site[data-theme="light"] .changelog-content {
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .changelog-header {
   display: flex;
   justify-content: space-between;
@@ -856,7 +1173,7 @@ h3:hover .anchor {
 .changelog-title {
   margin: 0;
   font-size: 1.25rem;
-  color: var(--fg);
+  color: var(--body-safe);
 }
 
 .changelog-close {
@@ -877,12 +1194,12 @@ h3:hover .anchor {
 
 .changelog-close:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: var(--fg);
+  color: var(--body-safe);
 }
 
 .changelog-body {
   padding: 24px;
-  color: var(--fg);
+  color: var(--body-safe);
 }
 
 .changelog-version {
@@ -915,6 +1232,11 @@ h3:hover .anchor {
   border-left: 3px solid var(--accent);
 }
 
+.policy-site[data-theme="light"] .changelog-notes {
+  background: rgba(0, 0, 0, 0.04);
+  border-left: 3px solid var(--accent);
+}
+
 .changelog-notes p {
   margin: 0 0 0.5rem;
   font-weight: 600;
@@ -930,97 +1252,100 @@ h3:hover .anchor {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FLOATING MENU BUTTON (always visible) with glassmorphism
+   FLOATING MENU BUTTON (mobile only)
    ═══════════════════════════════════════════════════════════════════════════ */
 .toc-toggle {
-  display: inline-flex;
+  display: none; /* Hidden on desktop */
   position: fixed;
   right: 16px;
   bottom: 16px;
   z-index: 80;
-  background: rgba(255,255,255,0.05);
+  background: rgba(30, 30, 30, 0.9);
   color: var(--accent);
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .toc-toggle:hover {
   transform: translateY(-2px);
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.26);
+  background: rgba(40, 40, 40, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-@media (prefers-color-scheme: light) {
-  .toc-toggle {
-    background: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.08);
-  }
-  
-  .toc-toggle:hover {
-    background: rgba(255,255,255,1);
-  }
+[data-theme="light"] .toc-toggle {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+[data-theme="light"] .toc-toggle:hover {
+  background: rgba(255,255,255,1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
 .policy-scrim {
   display: none;
 }
 
-@media (max-width: 980px) {
-  .policy-site {
-    flex-direction: column;
-    gap: 24px;
-    max-width: min(1100px, 100%);
-    padding: calc(var(--sq-top) + 12px) 20px 56px;
-  }
-  
-  .policy-toc {
-    position: fixed;
-    left: 0;
-    top: var(--sq-top);
-    height: calc(100vh - var(--sq-top));
-    width: 84vw;
-    max-width: 420px;
-    background: rgba(0, 0, 0, 0.95);
-    padding: 18px 16px;
-    transform: translateX(-105%);
-    transition: transform 0.25s ease;
-    z-index: 70;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    border-right: 1px solid var(--line);
-  }
-  
-  body.nav-open .policy-toc {
-    transform: none;
-  }
-  
-  .policy-scrim {
-    position: fixed;
-    left: 0;
-    top: var(--sq-top);
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 60;
-    display: none;
-  }
-  
-  body.nav-open .policy-scrim {
-    display: block;
-  }
-  
-  /* floating button already styled globally */
-}
-
-@media (max-width: 640px) {
+  @media (max-width: 980px) {
+    .toc-toggle {
+      display: inline-flex; /* Show on mobile */
+    }
+    
+    .policy-site {
+      flex-direction: column;
+      gap: 24px;
+      max-width: min(1100px, 100%);
+      padding: calc(var(--sq-top) + 12px) 20px 56px;
+    }
+    
+    .policy-toc {
+      position: fixed;
+      left: 0;
+      top: var(--sq-top);
+      height: calc(100vh - var(--sq-top));
+      width: 84vw;
+      max-width: 420px;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 18px 16px;
+      transform: translateX(-105%);
+      transition: transform 0.25s ease;
+      z-index: 70;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      border-right: 1px solid var(--line);
+    }
+    
+    body.nav-open .policy-toc {
+      transform: none;
+    }
+    
+    .policy-scrim {
+      position: fixed;
+      left: 0;
+      top: var(--sq-top);
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 60;
+      display: none;
+    }
+    
+    body.nav-open .policy-scrim {
+      display: block;
+    }
+    
+    /* Hide download bar (and theme toggle) when mobile menu is open */
+    body.nav-open .download-bar {
+      display: none;
+    }
+  }@media (max-width: 640px) {
   .policy-main h1 {
     font-size: 1.8rem;
   }
@@ -1045,6 +1370,54 @@ h3:hover .anchor {
   
   if (window.__POLICY_INIT__) return;
   window.__POLICY_INIT__ = true;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // THEME TOGGLE (Dark mode default, mimicking accessibility widget)
+  // ═══════════════════════════════════════════════════════════════════════════
+  (function(){
+    const toggle = document.getElementById('themeToggle');
+    const label = document.getElementById('themeLabel');
+    // Scope theming to widget container to avoid Squarespace conflicts
+    const container = document.querySelector('.policy-site');
+    const html = container || document.documentElement;
+    
+    if (!toggle || !label) return;
+    
+    // Check saved preference or default to dark
+    const savedTheme = localStorage.getItem('policy-theme');
+    if(savedTheme){
+      html.setAttribute('data-theme', savedTheme);
+      updateLabel(savedTheme);
+    } else {
+      // Default to dark mode always for widget; do not override site
+      html.removeAttribute('data-theme');
+      updateLabel('dark');
+    }
+    
+    function updateLabel(theme){
+      if(theme === 'light'){
+        // When in blinding (light) mode, offer action to go back to Dark Mode
+        label.textContent = 'Dark Mode';
+      } else {
+        // When in dark mode, offer action to switch to Blinding Mode
+        label.textContent = 'Blinding Mode';
+      }
+    }
+    
+    toggle.addEventListener('click', ()=>{
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      if(newTheme === 'dark'){
+        html.removeAttribute('data-theme');
+      } else {
+        html.setAttribute('data-theme', 'light');
+      }
+      
+      localStorage.setItem('policy-theme', newTheme);
+      updateLabel(newTheme);
+    });
+  })();
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DYNAMIC SQUARESPACE HEADER HEIGHT DETECTION
@@ -1168,23 +1541,16 @@ h3:hover .anchor {
     }
   });
 
-  // Configure download URL from data-attribute - button disabled, shows email contact
-  (function configureDownload() {
-    const link = document.getElementById('download-terms');
-    if (!link) return;
-    // Button is configured to email for PDF request - no dynamic URL configuration needed
-  })();
-
-    // Version badge keyboard support (Enter/Space to open changelog)
-    const versionBadge = document.querySelector('.version-badge');
-    if (versionBadge) {
-      versionBadge.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          showChangelog();
-        }
-      });
-    }
+  // Version badge keyboard support (Enter/Space to open changelog)
+  const versionBadge = document.querySelector('.version-badge');
+  if (versionBadge) {
+    versionBadge.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showChangelog();
+      }
+    });
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SMOOTH SCROLL FOR ANCHOR LINKS

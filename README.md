@@ -66,24 +66,30 @@ Critical repository events, security incidents, and recovery steps are documente
 ## Primary Purpose: Squarespace Widgets
 
 ### Available Widgets
-- **Concert Portfolio** (`src/widgets/concert-portfolio/`) - Photo galleries for concert photography *(v4.5 SEO enhancements in development)*
-- **Event Portfolio** (`src/widgets/event-portfolio/`) - Event photography displays
-- **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights
-- **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos
-- **Portrait Portfolio** (`src/widgets/portrait-portfolio/`) - Portrait photography displays with vertical composition focus *(v1.0)*
+- **Concert Portfolio** (`src/widgets/concert-portfolio/`) - Photo galleries for concert photography *(v4.7 production-ready)*
+- **Event Portfolio** (`src/widgets/event-portfolio/`) - Event photography displays *(v2.6.2 production-ready)*
+- **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights *(v1.5 production-ready)*
+- **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos *(v5.2 production-ready)*
+- **Portrait Portfolio** (`src/widgets/portrait-portfolio/`) - Portrait photography displays with vertical composition focus *(v1.0 production-ready)*
 - **About Section Widgets** (`src/widgets/about/`) - Complete about pages and client carousels
-  - Complete About Page - Bio, photo, reviews, and integrated client carousel
-  - Client Carousel - Standalone client logo showcase
-- **Blog Feed** (`src/widgets/blog-feed/`) - Google Docs blog integration with live updates *(v2.0.0 production ready)*
-- **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays *(v2.0.0 with performance optimizations)*
-- **Hero Slideshow** (`src/widgets/site/hero-slideshow/`) - Homepage hero sections
-- **Site Footer** (`src/widgets/site/footer/`) - Glass design footer with social links and newsletter
-- **Hire to Unlock Résumé** (`src/widgets/hire-to-unlock-resume/`) - Interactive résumé with LinkedIn authentication that critiques gatekeeping while collecting genuine hiring leads *(v1.0.0)*
-- **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only)*
+  - Complete About Page - Bio, photo, reviews, and integrated client carousel *(v1.4.6 production-ready)*
+  - Client Carousel - Standalone client logo showcase *(v1.3.0 production-ready)*
+- **Podcast Feed** (`src/widgets/podcast-feed/`) - Podcast episode displays *(v2.0.0 production-ready)*
+- **Site Navigation** (`src/widgets/site/navigation/`) - Header navigation with blur effects *(v1.7.1 production-ready)*
+- **Site Footer** (`src/widgets/site/footer/`) - Glass design footer with social links and newsletter *(v1.3.0 production-ready)*
+- **Policies & Legal** (`src/widgets/content/policies-legal/`) - **Comprehensive legal hub** *(v1.0.0 production-ready)* - All-in-one widget with Terms & Conditions (23 sections), Privacy Policy, Cookie Policy, Usage License, FAQ (7 questions), and Contact. Sidebar navigation, mobile drawer, SEO-enhanced, WCAG compliant. Replaces need for separate legal pages.
+- **Accessibility Statement** (`src/widgets/content/accessibility-statement/`) - **WCAG 2.1 AA compliance documentation** *(v1.0.0 production-ready)* - Comprehensive accessibility statement with sidebar navigation, mobile drawer, keyboard shortcuts guide, and detailed standards documentation. Auto-updating dates, scroll spy, skip to content link.
+- **Hire to Unlock Résumé** (`src/widgets/hire-to-unlock-resume/`) - Interactive résumé with LinkedIn authentication that critiques gatekeeping while collecting genuine hiring leads *(v1.0.0 production-ready)*
+
+**Total: 13 production-ready widgets** | [📋 Complete Inventory](docs/WIDGET-INVENTORY.md)
 
 ### Work in Progress
-- **Photojournalism Portfolio v5.1** (`src/widgets/photojournalism-portfolio/versions/v5.1-performance-optimized.html`) - Performance optimization pass in development
-- **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays *(in development)*
+- **Blog Feed** (`src/widgets/blog-feed/`) - Google Docs blog integration *(v2.1 in development - see STATUS.md)*
+- **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays *(v1.8 in development - see STATUS.md)*
+- **Hero Slideshow** (`src/widgets/site/hero-slideshow/`) - Homepage hero sections *(v1.2 in development)*
+
+### Admin Tools (Not for Production)
+- **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) - 🔐 Private admin tool for importing and organizing portfolio images *(admin-only, do not deploy to public site)*
 
 ### Using Widgets in Squarespace
 
@@ -100,6 +106,26 @@ Critical repository events, security incidents, and recovery steps are documente
 - **Enhancement Patterns**: Proven improvement patterns for optimizing existing widgets
 - **SEO Testing Guide**: `docs/standards/seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 - **SEO Starter Guide**: `docs/standards/seo-starter-guide.md` - Practical Squarespace SEO playbook for McCal Media
+
+## 🌐 Live Site: mcc-cal.com
+
+The production site is hosted on **Squarespace** and uses widgets from this repository.
+
+### Deployment Resources
+- **Site Map & Widget Integration**: `docs/SITE-MAP-MCC-CAL.md` - Complete guide to all pages, widgets, and integrations
+- **Deployment Status**: `docs/DEPLOYMENT-STATUS.md` - Current status, deployment order, and action plan
+- **Squarespace Setup**: `docs/integrations/squarespace/developer-mode-quickstart.md` - Developer mode configuration
+
+### Quick Deployment Checklist
+1. Copy widget from `src/widgets/[widget]/versions/[latest].html`
+2. Add Code Block to Squarespace page
+3. Paste widget HTML
+4. Configure manifest URLs (if portfolio widget)
+5. Test and publish
+
+See full deployment guide in `docs/DEPLOYMENT-STATUS.md` for phased rollout plan.
+
+---
 
 ## Development & Testing
 

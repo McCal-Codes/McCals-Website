@@ -1,0 +1,25 @@
+# Prettier ignore patterns
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Archives
+_archived/
+
+# Logs
+logs/
+*.log
+
+# Generated files
+*-manifest.json
+sitemap.xml
+
+# Test outputs
+test-results/
+playwright-report/

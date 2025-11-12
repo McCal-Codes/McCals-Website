@@ -1,10 +1,11 @@
 <!-- 
 ═══════════════════════════════════════════════════════════════════════════════
-  POLICIES & LEGAL WIDGET v1.0.0 - McCal Media
+  POLICIES & LEGAL WIDGET v1.1.0 - McCal Media
   
-  SEO-Enhanced Legal Documentation Page with Navigation
-  - Unsplash-inspired clean design with sidebar navigation
-  - Comprehensive Terms, Privacy, Cookie Policy, License, FAQ
+  SEO-Enhanced Legal Documentation Page with Navigation & Theme Toggle
+  - Glassmorphism design with OLED dark mode and light mode
+  - Theme toggle button with localStorage persistence
+  - Comprehensive Terms, Privacy, Cookie, Harassment, Defamation, License, FAQ
   - Mobile-responsive drawer menu
   - Scroll spy active link highlighting
   - SEO: WebPage schema, BreadcrumbList, FAQPage structured data
@@ -18,8 +19,18 @@
   4. In Page Settings → SEO → Description: "McCal Media's terms of service, privacy policy, cookie policy, usage license, and frequently asked questions for photography services."
   5. Save and publish
   
-  VERSION: 1.0.0 (2025-01-27)
-  CHANGELOG: Initial release with comprehensive legal documentation and SEO
+  VERSION: 1.1.0 (2025-11-12)
+  CHANGELOG v1.1.0:
+  - Added OLED dark mode (pure white on true black #000000)
+  - Added light mode toggle with localStorage persistence
+  - Added glassmorphism styling with backdrop blur
+  - Added Harassment Policy section
+  - Added Defamation Policy section
+  - Theme respects prefers-color-scheme
+  - Improved mobile responsive design
+  - Enhanced accessibility with theme toggle
+  
+  CHANGELOG v1.0.0: Initial release with comprehensive legal documentation and SEO
 ═══════════════════════════════════════════════════════════════════════════════
 -->
 
@@ -470,24 +481,45 @@ SEO META TAGS - Copy to Squarespace Page Settings → Advanced → Page Header C
    CSS VARIABLES & BASE STYLES
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --fg: #f7f7f7;
-  --muted: #a6a6a6;
-  --line: #242424;
-  --link: #d1d5db;
-  --accent: #a878b9;
+  --sq-top: 72px;
   --gutter: 48px;
   --sidebar: 280px;
   --content: 860px;
-  --sq-top: 72px;
+  
+  /* Default: Dark mode - white text on true black */
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: #b0b0b0;
+  --line: #333333;
+  --link: #ffffff;
+  --accent: #ffffff;
+  --chip: #1a1a1a;
+  --focus: #ffffff;
 }
 
+/* Light mode - minimal design */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --fg: #000000;
+  --muted: #666666;
+  --line: #e0e0e0;
+  --link: #000000;
+  --accent: #000000;
+  --chip: #f5f5f5;
+  --focus: #000000;
+}
+
+/* Respect system preference if no manual selection */
 @media (prefers-color-scheme: light) {
-  :root {
-    --fg: #1a1a1a;
-    --muted: #5b5b5b;
-    --line: #e5e5ea;
-  --link: #0f172a;
-  --accent: #0ea5e9;
+  :root:not([data-theme]) {
+    --bg: #ffffff;
+    --fg: #000000;
+    --muted: #666666;
+    --line: #e0e0e0;
+    --link: #000000;
+    --accent: #000000;
+    --chip: #f5f5f5;
+    --focus: #000000;
   }
 }
 

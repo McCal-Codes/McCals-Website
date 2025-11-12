@@ -48,9 +48,20 @@ Reference standards:
 ## Remaining / In-Progress Items
 - [x] Run `npm run ai:preflight:short` — added and used during the recent sessions
 - [ ] Confirm planned changes align with `docs/standards/widget-standards.md` and `widget-development.md` before editing remaining widgets
+- [ ] TODO: Propagate “Blinding Mode” naming and container-scoped theming to other widgets (navigation, footer, portfolios) — defer until requested
 - [ ] Add automated widget validation (small unit/integration tests) and wire into CI
 - [ ] Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and docs when making further structural changes
 - [ ] Concert Portfolio additional Spotify/embed features (follow-up enhancement)
+
+### Accessibility Statement Widget Alignment (Deferred)
+- [ ] TODO: Rename Light Mode UI label to “Blinding Mode” (keep underlying `data-theme="light"` selectors)
+- [ ] TODO: Scope theming to widget container (apply `data-theme` to `.a11y-wrap` parent wrapper instead of `<html>` to avoid Squarespace overrides)
+- [ ] TODO: Introduce safety tokens `--body-safe` & `--link-safe`; switch text/link colors to those tokens for robust contrast
+- [ ] TODO: Add heading visibility hardening (reset gradients/transparent text for `h1,h2,h3`: force color, remove background, set `-webkit-text-fill-color: currentColor`, normal mix-blend)
+- [ ] TODO: Update toggle label logic to action-style (show “Blinding Mode” in dark, “Dark Mode” in blinding)
+- [ ] TODO: Optional haze overlay for Blinding Mode: gentle gradient (0.85 → 0.6 opacity) + blur ≤ 8px behind content (container `::before`)
+- [ ] TODO: Add reference note in widget README linking to Theming & Visibility Hardening section in `widget-standards.md`
+
 
 ## Performance & SEO Enhancements (Priority)
 - [ ] Implement comprehensive SEO standards across all widgets: structured data, enhanced alt text, meta descriptions (partially implemented in recent updates)
@@ -95,6 +106,8 @@ Reference standards:
 
 ## Documentation & Standards Updates
 - [ ] Update `docs/standards/widget-standards.md` with new patterns and best practices
+- [ ] TODO: Roll out Theming & Visibility Hardening guidance to other widget READMEs (reference “Blinding Mode”, safe color tokens, heading resets, haze rules)
+- [ ] TODO: Optional enhancement — add a data-haze intensity toggle pattern to standards (`off|soft|softer`) and wire into one widget as reference
 - [ ] Create case studies documenting performance improvements and SEO gains
 - [ ] Develop widget development tutorial series for future contributors
 - [ ] Update workspace organization standards to reflect current structure

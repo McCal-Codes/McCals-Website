@@ -1,4 +1,14 @@
 ## 2025-11-09
+## 2025-11-12
+### Policies & Legal Widget theming & standards update
+- Renamed user-facing "Light Mode" to **"Blinding Mode"** to clarify high-brightness intent while retaining internal `data-theme="light"` for compatibility.
+- Implemented container-scoped theming (apply `data-theme` only on widget root) to avoid Squarespace global overrides.
+- Added safety color tokens (`--body-safe`, `--link-safe`) and enforced explicit heading overrides to defeat gradient/transparent text collisions.
+- Reintroduced a gentle translucent haze overlay in Blinding Mode (gradient + blur) with accessibility contrast preserved.
+- Updated `docs/standards/widget-standards.md` with new Theming & Visibility Hardening section covering container scoping, Blinding Mode naming, heading resets, safety tokens, and haze overlay rules.
+- Updated Policies & Legal widget v1.2.0 file comments, changelog modal items, and toggle labels to reflect rename and new standards.
+- Guidance now recommends toggle labels show the *action* (e.g., display "Blinding Mode" while in dark mode, "Dark Mode" while in light) for clearer UX.
+
 ### Navigation widget rollout & CI
 - Added `src/widgets/site/navigation/versions/v1.7.1-rollback.html` — safe rollback implementing v1.6.3 mobile submenu behavior while providing an opt-in sitemap-driven autofill.
 - Added `scripts/utils/sitemap-parser.js` (shared parser) and unit tests `tests/sitemap-parser.test.js` with npm script `test:sitemap-parser`.

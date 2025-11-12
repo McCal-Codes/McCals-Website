@@ -3,8 +3,86 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>McCal Media — Photography Portfolio</title>
-  <meta name="description" content="Professional photography portfolio by Caleb McCartney - Concert, journalism, and portrait photography." />
+  <title>Caleb McCartney — Professional Photographer | McCal Media</title>
+  <meta name="description" content="Professional photography portfolio by Caleb McCartney and McCal Media - Concert, journalism, and portrait photography based in Pittsburgh, PA." />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://mcc-cal.com/" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mcc-cal.com/" />
+  <meta property="og:title" content="Caleb McCartney — Professional Photographer | McCal Media" />
+  <meta property="og:description" content="Professional photography portfolio by Caleb McCartney and McCal Media - Concert, journalism, and portrait photography based in Pittsburgh, PA." />
+  <meta property="og:image" content="https://mcc-cal.com/assets/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="McCal Media" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://mcc-cal.com/" />
+  <meta name="twitter:title" content="Caleb McCartney — Professional Photographer | McCal Media" />
+  <meta name="twitter:description" content="Professional photography portfolio by Caleb McCartney and McCal Media - Concert, journalism, and portrait photography." />
+  <meta name="twitter:image" content="https://mcc-cal.com/assets/images/og-image.jpg" />
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://mcc-cal.com/#website",
+        "url": "https://mcc-cal.com/",
+        "name": "McCal Media",
+        "alternateName": "Caleb McCartney Photography",
+        "description": "Professional photography services by Caleb McCartney and McCal Media",
+        "publisher": {
+          "@id": "https://mcc-cal.com/#organization"
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://mcc-cal.com/#organization",
+        "name": "McCal Media",
+        "alternateName": "Caleb McCartney Photography",
+        "url": "https://mcc-cal.com/",
+        "founder": {
+          "@type": "Person",
+          "name": "Caleb McCartney"
+        },
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://mcc-cal.com/assets/images/logos/mccal-media-logo.png"
+        },
+        "sameAs": [
+          "https://www.facebook.com/mccalphotography",
+          "https://www.instagram.com/mcc_cal"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pittsburgh",
+          "addressRegion": "PA",
+          "addressCountry": "US"
+        }
+      },
+      {
+        "@type": "ImageGallery",
+        "@id": "https://mcc-cal.com/#gallery",
+        "name": "Photography Portfolios",
+        "description": "Concert, journalism, and portrait photography by Caleb McCartney",
+        "author": {
+          "@type": "Person",
+          "name": "Caleb McCartney",
+          "url": "https://mcc-cal.com/about"
+        }
+      }
+    ]
+  }
+  </script>
+  
   <link rel="preload" href="./styles.css" as="style">
   <link rel="stylesheet" href="./styles.css">
   <!-- Performance: preconnect common image hosts to speed image fetch for hero and portfolio images -->
@@ -115,8 +193,56 @@
     </div>
   </footer>
 
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+    <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/>
+    </svg>
+    <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M17.293 13.293A8 8 0 0 1 6.707 2.707a8.001 8.001 0 1 0 10.586 10.586z"/>
+    </svg>
+  </button>
+
   <script type="module" src="./app.js"></script>
   <script>
+    // Theme management with localStorage persistence
+    (function() {
+      const html = document.documentElement;
+      const themeToggle = document.querySelector('.theme-toggle');
+      
+      // Get saved theme or system preference
+      function getInitialTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      
+      // Apply theme
+      function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      }
+      
+      // Initialize theme
+      setTheme(getInitialTheme());
+      
+      // Toggle theme on button click
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+          const current = html.getAttribute('data-theme');
+          const next = current === 'dark' ? 'light' : 'dark';
+          setTheme(next);
+        });
+      }
+      
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    })();
+    
     // Year in footer
     (function(){
       var y = document.getElementById('year');
