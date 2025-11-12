@@ -75,6 +75,21 @@ Reference standards:
 - [x] **Portrait Portfolio Widget**: COMPLETED v1.0 - Portrait photography showcase with vertical compositions (Oct 24, 2025)
 - [ ] TODO: Develop Testimonials/Reviews widget with star ratings and client quotes
 - [ ] TODO: Create Contact Form widget with validation and spam protection
+- [ ] TODO: Build comprehensive Contact Us page (full-page) with ARIA-compliant validation, spam protection (honeypot + optional CAPTCHA), clear success/failure UX, consent checkbox (privacy/GDPR), and email/CRM integration; align with Theming & Visibility Hardening (Blinding Mode) standards
+	- [x] WIP scaffold created at `src/widgets/site/contact-page/` (README, STATUS, CHANGELOG, versions/v0.1.0-contact-page.html)
+	- [x] Container-scoped theming (data-theme dark|light) + safe tokens + heading reset
+	- [x] ARIA hooks: labels, hints, per-field errors, summary alert, live region
+	- [x] Spam primitives: honeypot + time-to-submit heuristic; CAPTCHA adapter stub
+	- [x] Mock provider adapter (simulated latency + error)
+	- [x] Wire local preview in `src/site/` (internal route/section)
+	- [x] Add minimal unit html validation via `npm run validate:widgets`
+	- [x] Prep provider config doc (Formspree/EmailJS/custom API) and security notes
+	- [x] **v0.2.0 Complete**: Dynamic provider support (Formspree/EmailJS/Custom), improved spacing, online functionality
+	- [x] Created `PROVIDERS.md` with comprehensive setup guides and security notes
+	- [x] Added prototypes index page at `src/site/prototypes/index.html`
+	- [ ] Optional: Test with real Formspree account and verify email delivery
+	- [ ] Optional: Wire CAPTCHA integration (reCAPTCHA v3 or hCaptcha)
+	- [ ] Ready for v1.0 when: tested in production Squarespace environment, security review complete
 - [ ] TODO: Build Newsletter Signup widget with Mailchimp/ConvertKit integration
 - [ ] TODO: Design Services/Portfolio showcase widget for different work categories
 - [ ] TODO: Implement Blog Post preview widget with RSS feed integration

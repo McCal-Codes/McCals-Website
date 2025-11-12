@@ -1,0 +1,676 @@
+<!-- McCal Contact Page Widget v0.2.0 (WIP/Internal) -->
+<div class="mcc-contact-widget" data-widget-version="0.2.0" data-theme="dark" data-haze="off" data-provider="mock">
+  <style>
+    .mcc-contact-widget, .mcc-contact-widget * { box-sizing: border-box; }
+    .mcc-contact-widget { 
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
+      color: var(--body-safe);
+      line-height: 1.6;
+    }
+
+    /* Safe tokens */
+    .mcc-contact-widget {
+      --body-safe: #eaeaea;
+      --link-safe: #9ad0ff;
+      --surface-safe: rgba(24,24,27,0.85);
+      --border-safe: rgba(255,255,255,0.16);
+      --accent-safe: #6aa8ff;
+      --error: #ff5a5f; 
+      --success: #4cd37b; 
+      --warn: #ffcc66;
+      --spacing-xs: 8px;
+      --spacing-sm: 12px;
+      --spacing-md: 18px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+    }
+
+    /* Theme variants */
+    .mcc-contact-widget[data-theme="dark"] { 
+      --body-safe: #eaeaea; 
+      --link-safe: #9ad0ff; 
+      --surface-safe: rgba(24,24,27,0.85); 
+      --border-safe: rgba(255,255,255,0.16); 
+      --accent-safe: #6aa8ff; 
+    }
+    .mcc-contact-widget[data-theme="light"] { 
+      --body-safe: #0a0a0a; 
+      --link-safe: #0058b0; 
+      --surface-safe: rgba(255,255,255,0.92); 
+      --border-safe: rgba(18,18,18,0.15); 
+      --accent-safe: #0a84ff; 
+    }
+
+    /* Layout with improved spacing */
+    .mcc-contact { 
+      max-width: 860px; 
+      margin: 0 auto; 
+      padding: clamp(20px, 5vw, 36px); 
+      color: var(--body-safe); 
+    }
+    
+    .mcc-contact h1, .mcc-contact h2, .mcc-contact h3 { 
+      color: var(--body-safe); 
+      background: none !important; 
+      -webkit-text-fill-color: currentColor; 
+      mix-blend-mode: normal;
+      margin: 0 0 var(--spacing-md);
+      line-height: 1.3;
+    }
+
+    .mcc-contact h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+
+    .panel { 
+      background: var(--surface-safe); 
+      border: 1px solid var(--border-safe); 
+      border-radius: 20px; 
+      padding: clamp(24px, 5vw, 40px); 
+      backdrop-filter: blur(16px) saturate(140%); 
+      -webkit-backdrop-filter: blur(16px) saturate(140%); 
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    
+    .row { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: var(--spacing-lg); 
+      margin-bottom: var(--spacing-md);
+    }
+    
+    @media (max-width: 720px) { 
+      .row { grid-template-columns: 1fr; gap: var(--spacing-md); } 
+    }
+
+    .field { 
+      display: grid; 
+      gap: var(--spacing-xs); 
+      margin-bottom: var(--spacing-lg); 
+    }
+    
+    label { 
+      font-weight: 600; 
+      font-size: 0.95rem; 
+      display: block;
+      margin-bottom: 2px;
+    }
+    
+    .hint { 
+      font-size: 0.875rem; 
+      opacity: 0.75; 
+      margin-top: 4px;
+    }
+    
+    input:not([type="checkbox"]), textarea { 
+      width: 100%; 
+      padding: 14px 16px; 
+      border-radius: 12px; 
+      border: 1.5px solid var(--border-safe); 
+      background: rgba(0,0,0,0.25); 
+      color: var(--body-safe);
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    input:not([type="checkbox"]):hover, textarea:hover {
+      border-color: rgba(255,255,255,0.3);
+    }
+    
+    textarea { 
+      min-height: 160px; 
+      resize: vertical;
+      font-family: inherit;
+      line-height: 1.6;
+    }
+    
+    input:focus-visible, textarea:focus-visible, button:focus-visible { 
+      outline: none; 
+      border-color: var(--accent-safe);
+      box-shadow: 0 0 0 3px rgba(106, 168, 255, 0.2); 
+    }
+    
+    .error { 
+      color: var(--error); 
+      font-size: 0.875rem; 
+      min-height: 1.2em; 
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    
+    input[aria-invalid="true"], textarea[aria-invalid="true"] {
+      border-color: var(--error);
+      background: rgba(255, 90, 95, 0.08);
+    }
+
+    .controls { 
+      display: flex; 
+      align-items: center; 
+      gap: var(--spacing-md); 
+      flex-wrap: wrap; 
+      margin-bottom: var(--spacing-lg); 
+    }
+    
+    .consent { 
+      display: flex; 
+      align-items: flex-start; 
+      gap: 12px; 
+      font-size: 0.95rem;
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .consent input[type="checkbox"] {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    
+    .consent label {
+      cursor: pointer;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .actions { 
+      margin-top: var(--spacing-xl); 
+      display: flex; 
+      gap: var(--spacing-md); 
+      align-items: center; 
+      flex-wrap: wrap;
+    }
+    
+    .btn { 
+      background: var(--accent-safe); 
+      color: #fff; 
+      border: 0; 
+      padding: 14px 28px; 
+      border-radius: 12px; 
+      font-weight: 700; 
+      font-size: 1rem;
+      cursor: pointer; 
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 4px 12px rgba(106, 168, 255, 0.3);
+    }
+    
+    .btn:hover:not([disabled]) { 
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(106, 168, 255, 0.4);
+    }
+    
+    .btn[disabled] { 
+      opacity: .6; 
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-status { 
+      margin-top: var(--spacing-md); 
+      min-height: 1.4em; 
+    }
+    
+    .alert { 
+      padding: 14px 18px; 
+      border-radius: 12px; 
+      border: 1.5px solid var(--border-safe);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .alert-success { 
+      color: #0a3d20; 
+      background: rgba(76, 211, 123, 0.15); 
+      border-color: rgba(76, 211, 123, 0.4); 
+    }
+    
+    .alert-error { 
+      color: #4a0a0a; 
+      background: rgba(255, 90, 95, 0.12); 
+      border-color: rgba(255, 90, 95, 0.4); 
+    }
+    
+    .alert-info { 
+      color: #0a2844; 
+      background: rgba(106, 168, 255, 0.12); 
+      border-color: rgba(106, 168, 255, 0.4); 
+    }
+    
+    .alert ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+    
+    .alert li {
+      margin: 4px 0;
+    }
+
+    /* Haze overlay for light/blinding mode */
+    .mcc-contact-widget[data-haze="soft"] .panel::before,
+    .mcc-contact-widget[data-haze="softer"] .panel::before {
+      content: ""; 
+      position: absolute; 
+      inset: 0; 
+      border-radius: 20px; 
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06));
+      -webkit-backdrop-filter: blur(6px); 
+      backdrop-filter: blur(6px);
+    }
+    
+    .mcc-contact-widget[data-haze="softer"] .panel::before { 
+      -webkit-backdrop-filter: blur(8px); 
+      backdrop-filter: blur(8px); 
+      opacity: 0.9; 
+    }
+
+    /* Theme toggle */
+    .theme-toggle { 
+      margin-left: auto; 
+      background: transparent; 
+      color: var(--link-safe); 
+      border: 1.5px solid var(--border-safe); 
+      padding: 10px 16px; 
+      border-radius: 12px; 
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    
+    .theme-toggle:hover {
+      border-color: var(--accent-safe);
+      background: rgba(106, 168, 255, 0.08);
+    }
+    
+    .meta {
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-md);
+      opacity: 0.65;
+      font-size: 0.85rem;
+      text-align: center;
+      border-top: 1px solid var(--border-safe);
+    }
+  </style>
+
+  <section class="mcc-contact" aria-labelledby="contact-heading">
+    <header class="controls" style="justify-content: space-between; margin-bottom: var(--spacing-xl);">
+      <h1 id="contact-heading">Get in Touch</h1>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle Blinding Mode">Blinding Mode</button>
+    </header>
+
+    <div class="panel" role="region" aria-label="Contact form">
+      <form id="mcc-contact-form" novalidate>
+        <div id="error-summary" class="alert alert-error" role="alert" hidden></div>
+        
+        <div class="row">
+          <div class="field">
+            <label for="name">Full name <span style="color: var(--error);">*</span></label>
+            <input id="name" name="name" autocomplete="name" required aria-describedby="name-error" />
+            <div class="error" id="name-error" aria-live="polite"></div>
+          </div>
+          <div class="field">
+            <label for="email">Email address <span style="color: var(--error);">*</span></label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="email-error" />
+            <div class="error" id="email-error" aria-live="polite"></div>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" aria-describedby="subject-hint" />
+          <div class="hint" id="subject-hint">Optional: Add a brief summary of your inquiry</div>
+        </div>
+        
+        <div class="field">
+          <label for="message">Message <span style="color: var(--error);">*</span></label>
+          <textarea id="message" name="message" required aria-describedby="message-error message-hint"></textarea>
+          <div class="hint" id="message-hint">Tell me about your project, question, or how I can help</div>
+          <div class="error" id="message-error" aria-live="polite"></div>
+        </div>
+
+        <!-- Consent -->
+        <div class="consent">
+          <input id="consent" name="consent" type="checkbox" required aria-describedby="consent-error" />
+          <label for="consent">I agree to the <a href="/policies-legal" target="_blank" style="color: var(--link-safe);">Privacy Policy</a> and consent to processing of my personal data for this inquiry. <span style="color: var(--error);">*</span></label>
+        </div>
+        <div class="error" id="consent-error" aria-live="polite"></div>
+
+        <!-- Honeypot & timers -->
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+          <label for="_antiTime">Leave this field blank</label>
+          <input id="_antiTime" name="_antiTime" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="actions">
+          <button id="submit" class="btn" type="submit">Send Message</button>
+        </div>
+        
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <footer class="meta">
+      <span>Contact Widget v0.2.0 • Provider: <span id="provider-name">Mock</span></span>
+    </footer>
+  </section>
+
+  <script>
+  (function(){
+    const root = document.currentScript.closest('.mcc-contact-widget');
+    const state = { start: Date.now(), submitting: false, debug: /[?&]debug=/.test(location.search) };
+
+    const q = sel => root.querySelector(sel);
+    const form = q('#mcc-contact-form');
+    const statusEl = q('#form-status');
+    const submitBtn = q('#submit');
+    const errSummary = q('#error-summary');
+    const providerNameEl = q('#provider-name');
+
+    // Provider configuration
+    const getConfig = () => {
+      // Check data attributes first
+      const provider = root.dataset.provider || 'mock';
+      const config = { provider };
+      
+      if (provider === 'formspree') {
+        config.formspreeId = root.dataset.formspreeId || '';
+      } else if (provider === 'emailjs') {
+        config.emailjsService = root.dataset.emailjsService || '';
+        config.emailjsTemplate = root.dataset.emailjsTemplate || '';
+        config.emailjsUser = root.dataset.emailjsUser || '';
+      } else if (provider === 'custom') {
+        config.apiEndpoint = root.dataset.apiEndpoint || '';
+      }
+      
+      // Check for global config override
+      if (window.MCC_CONTACT_CONFIG) {
+        Object.assign(config, window.MCC_CONTACT_CONFIG);
+      }
+      
+      return config;
+    };
+
+    // Dynamic provider adapters
+    const providers = {
+      mock: {
+        name: 'Mock (Testing)',
+        send: async (payload) => {
+          await new Promise(r => setTimeout(r, 600 + Math.random() * 300));
+          if (Math.random() < 0.1) throw { ok: false, message: 'Simulated temporary error. Please try again.' };
+          return { ok: true };
+        }
+      },
+      
+      formspree: {
+        name: 'Formspree',
+        send: async (payload, config) => {
+          if (!config.formspreeId) throw { ok: false, message: 'Formspree form ID not configured.' };
+          
+          const res = await fetch(`https://formspree.io/f/${config.formspreeId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw { ok: false, message: data.error || 'Failed to send message via Formspree.' };
+          }
+          
+          return { ok: true };
+        }
+      },
+      
+      emailjs: {
+        name: 'EmailJS',
+        send: async (payload, config) => {
+          if (!config.emailjsService || !config.emailjsTemplate || !config.emailjsUser) {
+            throw { ok: false, message: 'EmailJS not properly configured.' };
+          }
+          
+          // Check if EmailJS SDK is loaded
+          if (typeof emailjs === 'undefined') {
+            throw { ok: false, message: 'EmailJS SDK not loaded. Please include the EmailJS script.' };
+          }
+          
+          try {
+            await emailjs.send(
+              config.emailjsService,
+              config.emailjsTemplate,
+              payload,
+              config.emailjsUser
+            );
+            return { ok: true };
+          } catch (err) {
+            throw { ok: false, message: err.text || 'Failed to send via EmailJS.' };
+          }
+        }
+      },
+      
+      custom: {
+        name: 'Custom API',
+        send: async (payload, config) => {
+          if (!config.apiEndpoint) throw { ok: false, message: 'Custom API endpoint not configured.' };
+          
+          const res = await fetch(config.apiEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          
+          const data = await res.json().catch(() => ({}));
+          
+          if (!res.ok) {
+            throw { ok: false, message: data.message || 'Failed to send message.' };
+          }
+          
+          return data;
+        }
+      }
+    };
+
+    // Initialize provider display
+    const config = getConfig();
+    const provider = providers[config.provider] || providers.mock;
+    providerNameEl.textContent = provider.name;
+
+    // Theme toggle
+    const toggle = q('.theme-toggle');
+    const updateToggleLabel = () => {
+      const theme = root.getAttribute('data-theme') || 'dark';
+      const label = theme === 'dark' ? 'Blinding Mode' : 'Dark Mode';
+      toggle.textContent = label;
+      toggle.setAttribute('aria-label', 'Toggle ' + label);
+      toggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+    };
+    toggle.addEventListener('click', () => {
+      const theme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // CAPTCHA adapter (pluggable)
+    const captchaAdapter = {
+      getToken: async () => {
+        const captchaType = root.dataset.captcha;
+        
+        if (captchaType === 'recaptcha' && typeof grecaptcha !== 'undefined') {
+          const siteKey = root.dataset.recaptchaKey;
+          if (!siteKey) return null;
+          return grecaptcha.execute(siteKey, { action: 'contact' });
+        }
+        
+        if (captchaType === 'hcaptcha' && typeof hcaptcha !== 'undefined') {
+          const siteKey = root.dataset.hcaptchaKey;
+          if (!siteKey) return null;
+          return hcaptcha.execute(siteKey, { async: true });
+        }
+        
+        return null;
+      }
+    };
+
+    function setFieldError(input, message) {
+      const id = input.id;
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      const err = q('#' + id + '-error');
+      if (err) err.textContent = message || '';
+    }
+
+    function validate() {
+      let ok = true;
+      const errors = [];
+      const name = q('#name');
+      const email = q('#email');
+      const message = q('#message');
+      const consent = q('#consent');
+      const hp = q('#_antiTime');
+
+      const emailValid = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+      // Reset
+      [name, email, message].forEach(i => setFieldError(i, ''));
+      setFieldError(consent, '');
+      errSummary.hidden = true;
+      errSummary.textContent = '';
+
+      // Validate fields
+      if (!name.value.trim()) {
+        ok = false;
+        setFieldError(name, 'Please enter your name.');
+        errors.push('Name is required.');
+      }
+      
+      if (!email.value.trim()) {
+        ok = false;
+        setFieldError(email, 'Please enter your email address.');
+        errors.push('Email is required.');
+      } else if (!emailValid(email.value.trim())) {
+        ok = false;
+        setFieldError(email, 'Please enter a valid email address.');
+        errors.push('Valid email address is required.');
+      }
+      
+      if (!message.value.trim()) {
+        ok = false;
+        setFieldError(message, 'Please enter a message.');
+        errors.push('Message is required.');
+      } else if (message.value.trim().length < 10) {
+        ok = false;
+        setFieldError(message, 'Message must be at least 10 characters.');
+        errors.push('Message is too short.');
+      }
+      
+      if (!consent.checked) {
+        ok = false;
+        setFieldError(consent, 'You must accept the privacy policy.');
+        errors.push('Privacy policy consent is required.');
+      }
+
+      // Spam heuristics
+      const elapsed = Date.now() - state.start;
+      if (hp.value) {
+        ok = false;
+        errors.push('Spam detected (honeypot).');
+        if (state.debug) console.warn('[ContactWidget] Honeypot triggered');
+      }
+      if (elapsed < 800) {
+        ok = false;
+        errors.push('Form submitted too quickly.');
+        if (state.debug) console.warn('[ContactWidget] Submission too fast:', elapsed + 'ms');
+      }
+
+      if (!ok) {
+        errSummary.hidden = false;
+        errSummary.innerHTML = '<strong>Please correct the following:</strong><ul>' + 
+          errors.map(e => '<li>' + e + '</li>').join('') + '</ul>';
+        errSummary.focus();
+      }
+      
+      return ok;
+    }
+
+    function serialize() {
+      const data = new FormData(form);
+      const obj = {};
+      for (const [key, value] of data.entries()) {
+        if (key !== '_antiTime') {
+          obj[key] = value;
+        }
+      }
+      return obj;
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      if (state.submitting) return;
+      if (!validate()) return;
+      
+      state.submitting = true;
+      submitBtn.disabled = true;
+      statusEl.innerHTML = '<div class="alert alert-info">Sending your message...</div>';
+      
+      try {
+        // Get CAPTCHA token if configured
+        const captchaToken = await captchaAdapter.getToken();
+        
+        // Serialize form data
+        const payload = serialize();
+        if (captchaToken) payload.captchaToken = captchaToken;
+        
+        if (state.debug) {
+          console.info('[ContactWidget] Submitting:', payload);
+          console.info('[ContactWidget] Provider:', config.provider);
+        }
+        
+        // Send via configured provider
+        const res = await provider.send(payload, config);
+        
+        if (res && res.ok) {
+          statusEl.innerHTML = '<div class="alert alert-success"><strong>Success!</strong> Your message has been sent. I\'ll get back to you soon.</div>';
+          form.reset();
+          
+          // Optional: redirect after success
+          if (root.dataset.successRedirect) {
+            setTimeout(() => {
+              window.location.href = root.dataset.successRedirect;
+            }, 2000);
+          }
+        } else {
+          throw res || { message: 'Unknown error occurred.' };
+        }
+      } catch (err) {
+        const msg = err && err.message ? err.message : 'Sorry, something went wrong. Please try again.';
+        statusEl.innerHTML = '<div class="alert alert-error"><strong>Error:</strong> ' + msg + '</div>';
+        
+        if (state.debug) {
+          console.error('[ContactWidget] Submission failed:', err);
+        }
+      } finally {
+        state.submitting = false;
+        submitBtn.disabled = false;
+      }
+    }
+
+    form.addEventListener('submit', handleSubmit);
+
+    // Debug interface
+    if (state.debug) {
+      console.info('[ContactWidget] Debug mode enabled');
+      console.info('[ContactWidget] Configuration:', config);
+      console.info('[ContactWidget] Provider:', provider.name);
+      
+      window.mccContactDebug = {
+        validate,
+        serialize,
+        getConfig,
+        setTheme: t => { root.setAttribute('data-theme', t); updateToggleLabel(); },
+        setHaze: h => root.setAttribute('data-haze', h),
+        setProvider: p => root.setAttribute('data-provider', p),
+        state
+      };
+    }
+  })();
+  </script>
+</div>

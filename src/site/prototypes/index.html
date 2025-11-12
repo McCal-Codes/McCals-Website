@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototypes & Dev Previews (Internal)</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { 
+      height: 100%; 
+      margin: 0; 
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
+      background: linear-gradient(135deg, #0b0b0c 0%, #1a1a1d 100%);
+      color: #eaeaea;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    header {
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      background: linear-gradient(135deg, #9ad0ff 0%, #6aa8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      opacity: 0.75;
+      font-size: 1.1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .card {
+      background: rgba(24,24,27,0.85);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: rgba(154, 208, 255, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(106, 168, 255, 0.15);
+    }
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      color: #9ad0ff;
+    }
+    .card p {
+      margin: 0 0 20px;
+      opacity: 0.85;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .badge-wip {
+      background: rgba(255, 204, 102, 0.15);
+      color: #ffcc66;
+      border: 1px solid rgba(255, 204, 102, 0.3);
+    }
+    .badge-stable {
+      background: rgba(76, 211, 123, 0.15);
+      color: #4cd37b;
+      border: 1px solid rgba(76, 211, 123, 0.3);
+    }
+    .badge-deprecated {
+      background: rgba(255, 90, 95, 0.15);
+      color: #ff5a5f;
+      border: 1px solid rgba(255, 90, 95, 0.3);
+    }
+    .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      border: 1.5px solid;
+    }
+    .btn-primary {
+      background: #6aa8ff;
+      color: #fff;
+      border-color: #6aa8ff;
+    }
+    .btn-primary:hover {
+      background: #5a98ef;
+      box-shadow: 0 4px 16px rgba(106, 168, 255, 0.3);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #9ad0ff;
+      border-color: rgba(154, 208, 255, 0.3);
+    }
+    .btn-secondary:hover {
+      background: rgba(154, 208, 255, 0.08);
+      border-color: rgba(154, 208, 255, 0.5);
+    }
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      opacity: 0.65;
+      font-size: 0.9rem;
+    }
+    a { color: #9ad0ff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧪 Prototypes & Dev Previews</h1>
+      <p class="subtitle">Internal development workspace — experiments, widgets-in-progress, and testing harnesses</p>
+    </header>
+
+    <section>
+      <h2 style="margin: 0 0 24px; font-size: 1.5rem;">Active Prototypes</h2>
+      
+      <div class="grid">
+        <!-- Contact Widget -->
+        <div class="card">
+          <span class="badge badge-wip">WIP</span>
+          <h2>Contact Page Widget</h2>
+          <p>Full-page contact form with ARIA validation, spam protection, consent handling, and dynamic provider support (Formspree/EmailJS/Custom API). Container-scoped theming with "Blinding Mode".</p>
+          <div class="links">
+            <a href="/src/site/prototypes/contact-widget.html" class="btn btn-primary">Preview</a>
+            <a href="/src/widgets/site/contact-page/PROVIDERS.md" class="btn btn-secondary" target="_blank">Config Guide</a>
+          </div>
+        </div>
+
+        <!-- Vision API -->
+        <div class="card">
+          <span class="badge badge-stable">Stable</span>
+          <h2>Vision API Demo</h2>
+          <p>Image recognition and analysis prototype using cloud vision APIs. Demonstrates real-time image processing capabilities.</p>
+          <div class="links">
+            <a href="/src/site/prototypes/vision-api/index.html" class="btn btn-primary">Preview</a>
+          </div>
+        </div>
+
+        <!-- Hire to Unlock -->
+        <div class="card">
+          <span class="badge badge-wip">Experimental</span>
+          <h2>Hire to Unlock</h2>
+          <p>Experimental engagement pattern for portfolio access. Testing unique interaction models.</p>
+          <div class="links">
+            <a href="/src/site/prototypes/hire-to-unlock/" class="btn btn-primary">Preview</a>
+          </div>
+        </div>
+
+        <!-- Squarespace Nav/Footer -->
+        <div class="card">
+          <span class="badge badge-stable">Reference</span>
+          <h2>SS Nav & Footer Tests</h2>
+          <p>Squarespace navigation and footer integration tests. Reference implementations for widget patterns.</p>
+          <div class="links">
+            <a href="/src/site/prototypes/ss-nav-footer/" class="btn btn-primary">Preview</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top: 48px;">
+      <h2 style="margin: 0 0 16px; font-size: 1.25rem;">Quick Links</h2>
+      <ul style="line-height: 2;">
+        <li><a href="/">← Back to Main Site</a></li>
+        <li><a href="/src/widgets/">Widget Source Directory</a></li>
+        <li><a href="https://github.com/McCal-Codes/McCals-Website" target="_blank">GitHub Repository</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>🔒 Internal Development Area • Not for Production</p>
+      <p style="margin-top: 8px; opacity: 0.5;">McCal Media Dev Workspace • 2025</p>
+    </footer>
+  </div>
+</body>
+</html>

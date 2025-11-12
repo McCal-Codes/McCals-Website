@@ -1,0 +1,244 @@
+<!-- McCal Contact Page Widget v0.1.0 (WIP/Internal) -->
+<div class="mcc-contact-widget" data-widget-version="0.1.0" data-theme="dark" data-haze="off">
+  <style>
+    .mcc-contact-widget, .mcc-contact-widget * { box-sizing: border-box; }
+    .mcc-contact-widget { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: var(--body-safe); }
+
+    /* Safe tokens */
+    .mcc-contact-widget {
+      --body-safe: #eaeaea;
+      --link-safe: #9ad0ff;
+      --surface-safe: rgba(24,24,27,0.85);
+      --border-safe: rgba(255,255,255,0.16);
+      --accent-safe: #6aa8ff;
+      --error: #ff5a5f; --success: #4cd37b; --warn: #ffcc66;
+    }
+
+    /* Theme variants */
+    .mcc-contact-widget[data-theme="dark"] { --body-safe: #eaeaea; --link-safe: #9ad0ff; --surface-safe: rgba(24,24,27,0.85); --border-safe: rgba(255,255,255,0.16); --accent-safe: #6aa8ff; }
+    .mcc-contact-widget[data-theme="light"] { --body-safe: #0a0a0a; --link-safe: #0058b0; --surface-safe: rgba(255,255,255,0.9); --border-safe: rgba(18,18,18,0.15); --accent-safe: #0a84ff; }
+
+    /* Layout */
+    .mcc-contact { max-width: 860px; margin: 0 auto; padding: clamp(16px, 4vw, 28px); color: var(--body-safe); }
+    .mcc-contact h1, .mcc-contact h2, .mcc-contact h3 { color: var(--body-safe); background: none !important; -webkit-text-fill-color: currentColor; mix-blend-mode: normal; }
+
+    .panel { background: var(--surface-safe); border: 1px solid var(--border-safe); border-radius: 16px; padding: clamp(16px, 3.5vw, 28px); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 720px) { .row { grid-template-columns: 1fr; } }
+
+    .field { display: grid; gap: 6px; margin: 10px 0 14px; }
+    label { font-weight: 600; font-size: 0.95rem; }
+    .hint { font-size: 0.85rem; opacity: 0.8; }
+    input, textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border-safe); background: rgba(0,0,0,0.25); color: var(--body-safe); }
+    textarea { min-height: 140px; resize: vertical; }
+    input:focus-visible, textarea:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--link-safe); }
+    .error { color: var(--error); font-size: 0.85rem; min-height: 1.1em; }
+
+    .controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+    .consent { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; }
+
+    .actions { margin-top: 18px; display: flex; gap: 12px; align-items: center; }
+    .btn { background: var(--accent-safe); color: #fff; border: 0; padding: 12px 18px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .15s ease; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn[disabled] { opacity: .6; cursor: progress; }
+
+    .form-status { margin-top: 12px; min-height: 1.2em; }
+    .alert { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border-safe); }
+    .alert-success { color: #053; background: rgba(50,200,120,0.12); border-color: rgba(50,200,120,0.3); }
+    .alert-error { color: #310; background: rgba(255,90,95,0.10); border-color: rgba(255,90,95,0.35); }
+    .alert-info { color: #024; background: rgba(90,160,255,0.10); border-color: rgba(90,160,255,0.35); }
+
+    /* Haze overlay for light/blinding mode */
+    .mcc-contact-widget[data-haze="soft"] .panel::before,
+    .mcc-contact-widget[data-haze="softer"] .panel::before {
+      content: ""; position: absolute; inset: 0; border-radius: 16px; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06));
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    }
+    .mcc-contact-widget[data-haze="softer"] .panel::before { -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); opacity: 0.9; }
+
+    /* Theme toggle */
+    .theme-toggle { margin-left: auto; background: transparent; color: var(--link-safe); border: 1px solid var(--border-safe); padding: 8px 10px; border-radius: 10px; cursor: pointer; }
+  </style>
+
+  <section class="mcc-contact" aria-labelledby="contact-heading">
+    <header class="controls" style="justify-content: space-between">
+      <h1 id="contact-heading">Contact</h1>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle Blinding Mode">Blinding Mode</button>
+    </header>
+
+    <div class="panel" role="region" aria-label="Contact form">
+      <form id="mcc-contact-form" novalidate>
+        <div id="error-summary" class="alert alert-error" role="alert" hidden></div>
+        <div class="row">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" autocomplete="name" required aria-describedby="name-error name-hint" />
+            <div class="hint" id="name-hint">Please enter your full name.</div>
+            <div class="error" id="name-error" aria-live="polite"></div>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="email-error" />
+            <div class="error" id="email-error" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="subject">Subject <span class="hint">(optional)</span></label>
+          <input id="subject" name="subject" aria-describedby="subject-hint" />
+          <div class="hint" id="subject-hint">Add a short summary if you like.</div>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required aria-describedby="message-error message-hint"></textarea>
+          <div class="hint" id="message-hint">Tell me a bit about your project or request.</div>
+          <div class="error" id="message-error" aria-live="polite"></div>
+        </div>
+
+        <!-- Consent -->
+        <div class="consent">
+          <input id="consent" name="consent" type="checkbox" required aria-describedby="consent-error consent-hint" />
+          <label for="consent">I agree to the processing of my data and accept the Privacy Policy.</label>
+        </div>
+        <div class="hint" id="consent-hint">Required to contact you back (GDPR).</div>
+        <div class="error" id="consent-error" aria-live="polite"></div>
+
+        <!-- Honeypot & timers -->
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+          <label for="_antiTime">Leave this field blank</label>
+          <input id="_antiTime" name="_antiTime" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="actions">
+          <button id="submit" class="btn" type="submit">Send message</button>
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+
+    <footer class="meta" style="margin-top:12px; opacity:.75; font-size:.85rem">
+      <span>Contact Widget v0.1.0</span>
+    </footer>
+  </section>
+
+  <script>
+  (function(){
+    const root = document.currentScript.closest('.mcc-contact-widget');
+    const state = { start: Date.now(), submitting: false, debug: /[?&]debug=/.test(location.search) };
+
+    const q = sel => root.querySelector(sel);
+    const form = q('#mcc-contact-form');
+    const statusEl = q('#form-status');
+    const submitBtn = q('#submit');
+    const errSummary = q('#error-summary');
+
+    // Theme toggle
+    const toggle = q('.theme-toggle');
+    const updateToggleLabel = () => {
+      const theme = root.getAttribute('data-theme') || 'dark';
+      const label = theme === 'dark' ? 'Blinding Mode' : 'Dark Mode';
+      toggle.textContent = label;
+      toggle.setAttribute('aria-label', 'Toggle ' + label);
+    };
+    toggle.addEventListener('click', () => {
+      const theme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      updateToggleLabel();
+    });
+    updateToggleLabel();
+
+    // Providers (mock)
+    const contactProvider = {
+      send: async (payload) => {
+        await new Promise(r => setTimeout(r, 600 + Math.random()*300));
+        if (Math.random() < 0.1) throw { ok:false, message: 'Temporary error. Please try again.' };
+        return { ok: true };
+      }
+    };
+
+    const captchaAdapter = { getToken: async () => null };
+
+    function setFieldError(input, message){
+      const id = input.id;
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      const err = q('#' + id + '-error');
+      if(err){ err.textContent = message || ''; }
+    }
+
+    function validate(){
+      let ok = true; const errors = [];
+      const name = q('#name');
+      const email = q('#email');
+      const message = q('#message');
+      const consent = q('#consent');
+      const hp = q('#_antiTime');
+
+      const emailValid = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+      // reset
+      [name,email,message,consent].forEach(i => setFieldError(i, ''));
+      errSummary.hidden = true; errSummary.textContent='';
+
+      if(!name.value.trim()){ ok=false; setFieldError(name,'Please enter your name.'); errors.push('Name is required.'); }
+      if(!email.value.trim() || !emailValid(email.value.trim())){ ok=false; setFieldError(email,'Please enter a valid email.'); errors.push('Valid email is required.'); }
+      if(!message.value.trim()){ ok=false; setFieldError(message,'Please enter a message.'); errors.push('Message is required.'); }
+      if(!consent.checked){ ok=false; setFieldError(consent,'You must accept the privacy policy.'); errors.push('Consent is required.'); }
+
+      // spam heuristics
+      const elapsed = Date.now() - state.start;
+      if(hp.value){ ok=false; errors.push('Spam detected.'); }
+      if(elapsed < 800){ ok=false; errors.push('Form submitted too quickly.'); }
+
+      if(!ok){
+        errSummary.hidden = false;
+        errSummary.innerHTML = '<strong>Please fix the following:</strong><ul>' + errors.map(e=>'<li>'+e+'</li>').join('') + '</ul>';
+      }
+      return ok;
+    }
+
+    function serialize(){
+      const data = new FormData(form);
+      const obj = Object.fromEntries(data.entries());
+      delete obj._antiTime; // honeypot
+      return obj;
+    }
+
+    async function handleSubmit(e){
+      e.preventDefault();
+      if(state.submitting) return;
+      if(!validate()) return;
+      state.submitting = true; submitBtn.disabled = true;
+      statusEl.innerHTML = '<div class="alert alert-info">Sending…</div>';
+      try {
+        const token = await captchaAdapter.getToken();
+        const payload = serialize();
+        if(token) payload.captcha = token;
+        const res = await contactProvider.send(payload);
+        if(res && res.ok){
+          statusEl.innerHTML = '<div class="alert alert-success">Thanks! Your message was sent successfully.</div>';
+          form.reset();
+        } else {
+          throw res || { message: 'Unknown error' };
+        }
+      } catch(err){
+        const msg = err && err.message ? err.message : 'Sorry, something went wrong.';
+        statusEl.innerHTML = '<div class="alert alert-error">' + msg + '</div>';
+      } finally {
+        state.submitting = false; submitBtn.disabled = false;
+      }
+    }
+
+    form.addEventListener('submit', handleSubmit);
+
+    if(state.debug){
+      console.info('[ContactWidget] Debug mode on');
+      window.mccContactDebug = {
+        validate,
+        serialize,
+        setTheme: t => { root.setAttribute('data-theme', t); updateToggleLabel(); },
+        setHaze: h => root.setAttribute('data-haze', h)
+      };
+    }
+  })();
+  </script>
+</div>
