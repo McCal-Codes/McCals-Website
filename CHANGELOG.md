@@ -41,6 +41,12 @@
 # Changelog
 
 ## 2025-11-19
+### Minor Maintenance & Cleanup (v2.5.3)
+- **Documentation Updates**: Updated 'Last Updated' dates in widget READMEs (about, hire-to-unlock-resume, complete-about-page) to November 19, 2025.
+- **Status File Cleanup**: Removed outdated STATUS.md files for production-ready widgets (concert-portfolio, photojournalism-portfolio, portrait-portfolio). These widgets are now at stable versions (v4.7, v5.2, v1.0 respectively).
+- **Package Updates**: Updated npm dependencies within semver ranges (autoprefixer 10.4.21→10.4.22, open 10.2.0→11.0.0).
+- **Version Bump**: Package version updated to 2.5.3 for minor maintenance release.
+
 ### Testimonials Widget v1.0.0
 - Created production-ready testimonials widget with masonry grid layout (3/2/1 columns responsive).
 - Features: 5-star rating system, 12 sample testimonials with realistic data, monochrome featured badge, Schema.org AggregateRating structured data.

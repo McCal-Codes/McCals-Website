@@ -162,5 +162,5 @@ Change `DEBUG = false` in the script section to disable logging.
 
 ---
 
-**Last Updated**: October 5, 2025  
+**Last Updated**: November 19, 2025  
 **Maintained By**: McCal Media Development Team

@@ -1,6 +1,6 @@
 # Widget Enhancement To-Do (October–November 2025)
 
-*Updated: November 15, 2025*
+*Updated: November 19, 2025*
 
 Reference standards:
 - `docs/standards/preflight-afterflight.md`
@@ -9,81 +9,72 @@ Reference standards:
 - `docs/standards/performance-standards.md`
 - `docs/standards/image-seo-standards.md`
 
-## Status Overview
-- **Portfolio widgets**: Production-ready set — Concert (v4.7 refinements), Photojournalism (v5.x), Event Portfolio (v2.6.0+), Portrait (v1.0)
-- **Podcast widget**: Complete (v1.9.5 with RSS auto-hydration)
-- **Navigation widget**: Complete (v1.6.3/v1.7.0 with improvements)
-- **Footer widget**: Complete (v1.2.0 compliance)
-- **About page widget**: Complete (v1.4.4 with updated bio and contact)
-- **Policies & Legal**: Hotfix applied and validated (v1.0.0)
-- **Manifests & CI**: Manifest generation, watchers, and CI automation implemented and validated
+---
 
-## AI & VS Code: New Features (Nov 15, 2025)
+## 📋 Combined To-Do List
 
-TL;DR: The new update basically turns VS Code into a cockpit for AI-driven development, gives you more control over what agents and tools do on your machine, and smooths out everyday coding tasks like terminal autocomplete and branch comparisons. You can actually use these features right now to streamline your workflow.
+### Website Improvements (from Review)
 
-Plan — Focus areas you can action today:
+#### AI & VS Code: New Features (Nov 15, 2025)
 
+**TL;DR**: The new update basically turns VS Code into a cockpit for AI-driven development, gives you more control over what agents and tools do on your machine, and smooths out everyday coding tasks like terminal autocomplete and branch comparisons. You can actually use these features right now to streamline your workflow.
+
+**Focus areas you can action today:**
 - Agent HQ — observe and control agent sessions without giving up autonomy
 - Security & Trust — lock down tool approvals and local access
 - Coding QoL — terminal IntelliSense, inline terminals, branch/tag comparisons
 
-Steps you can try immediately
+**Steps you can try immediately:**
 
-1. Explore the Agent Sessions dashboard
+1. **Explore the Agent Sessions dashboard**
+   - How to use: View → Agent Sessions. Run a Copilot chat or agent task and watch each session appear. Switch, filter, or pause sessions as needed.
+   - Why it matters: keeps AI work visible and lets you review planned changes before files are edited.
+   - Quick test: Open Copilot Chat → ask "refactor this file" and watch the session appear.
 
-	- How to use: View → Agent Sessions. Run a Copilot chat or agent task and watch each session appear. Switch, filter, or pause sessions as needed.
-	- Why it matters: keeps AI work visible and lets you review planned changes before files are edited.
-	- Quick test: Open Copilot Chat → ask "refactor this file" and watch the session appear.
+2. **Try the Planning Agent**
+   - In Copilot Chat type: `@planner Generate a step-by-step plan for adding error handling to this function.`
+   - Outcome: receives a structured, editable plan you can hand off or reject.
 
-2. Try the Planning Agent
+3. **Experiment with custom agents (`.agents.md`)**
+   - Create a `.agents.md` in the repo and define name, description, allowed tools, and rules.
+   - Example agents: "Press-Release Editor", "Metadata Organizer", "Git Hygiene".
+   - Trade-off: fast wins but requires thinking through permissions and handoffs.
 
-	- In Copilot Chat type: `@planner Generate a step-by-step plan for adding error handling to this function.`
-	- Outcome: receives a structured, editable plan you can hand off or reject.
+4. **Inline terminals in chat**
+   - Run commands from Copilot Chat and see terminal output inline in the chat thread.
+   - Useful for quick installs, one-liners, and git checks while keeping the audit trail in chat.
 
-3. Experiment with custom agents (`.agents.md`)
+5. **Lock down your Tool Approvals (recommended first step)**
+   - Settings → AI Tools → Approvals → Toggle "Ask before running tools".
+   - This gives you editorial veto over any tool runs and local file access.
 
-	- Create a `.agents.md` in the repo and define name, description, allowed tools, and rules.
-	- Example agents: "Press-Release Editor", "Metadata Organizer", "Git Hygiene".
-	- Trade-off: fast wins but requires thinking through permissions and handoffs.
+6. **Test terminal IntelliSense**
+   - Try: `git ch` → completes to `checkout`; `ls --` → shows flags; `npm ru` → suggests scripts.
 
-4. Inline terminals in chat
+7. **Use branch/tag comparisons inside Source Control**
+   - Source Control → … menu → Compare Branches or Compare Tags for instant side-by-side diffs.
 
-	- Run commands from Copilot Chat and see terminal output inline in the chat thread.
-	- Useful for quick installs, one-liners, and git checks while keeping the audit trail in chat.
-
-5. Lock down your Tool Approvals (recommended first step)
-
-	- Settings → AI Tools → Approvals → Toggle "Ask before running tools".
-	- This gives you editorial veto over any tool runs and local file access.
-
-6. Test terminal IntelliSense
-
-	- Try: `git ch` → completes to `checkout`; `ls --` → shows flags; `npm ru` → suggests scripts.
-
-7. Use branch/tag comparisons inside Source Control
-
-	- Source Control → … menu → Compare Branches or Compare Tags for instant side-by-side diffs.
-
-Alternatives & trade-offs
-
+**Alternatives & trade-offs:**
 - Speed-first: use Agent Sessions dashboard, terminal IntelliSense, and branch compare for immediate gains (low setup).
 - Robust: configure Planning Agent, `.agents.md`, and tool approvals for safer, repeatable automation (takes ~1 hour).
 
-Quick fixes / recommended immediate action
+**Quick fixes / recommended immediate action:**
+- [ ] TODO: Turn on tool approvals so you keep control while testing AI features (Settings → AI Tools → Approvals).
+- [x] TODO: Add a sample `.agents.md` template at the repo root to demonstrate a safe Planning Agent and a Git Hygiene agent. (added Nov 15, 2025)
 
-- TODO: Turn on tool approvals so you keep control while testing AI features (Settings → AI Tools → Approvals).
- - [x] TODO: Add a sample `.agents.md` template at the repo root to demonstrate a safe Planning Agent and a Git Hygiene agent. (added Nov 15, 2025)
+**Next:** Once you try a few of these, I can help you set up a custom agent aligned with your workflows (photojournalism automator, metadata preprocessor, writing editor).
 
-Next
+---
 
-Once you try a few of these, I can help you set up a custom agent aligned with your workflows (photojournalism automator, metadata preprocessor, writing editor).
-
-Why this belongs in `updates/todo.md`
-
-- It's an actionable, repository-level change that impacts developer workflows.
-- Adding the TODOs here (tool approvals + sample `.agents.md`) makes them discoverable by the workspace Todo Tree extension.
-
+## Status Overview
+- **Portfolio widgets**: Production-ready set — [Concert](../src/widgets/concert-portfolio/) (v4.7 refinements), [Photojournalism](../src/widgets/photojournalism-portfolio/) (v5.x), [Event Portfolio](../src/widgets/event-portfolio/) (v2.6.0+), [Portrait](../src/widgets/portrait-portfolio/) (v1.0)
+- **Podcast widget**: Complete — [Podcast Feed](../src/widgets/podcast-feed/) (v1.9.5 with RSS auto-hydration)
+- **Navigation widget**: Complete — [Site Navigation](../src/widgets/site-navigation/) (v1.6.3/v1.7.0 with improvements)
+- **Footer widget**: Complete — [Site Footer](../src/widgets/site-footer/) (v1.2.0 compliance)
+- **About page widget**: Complete — [About](../src/widgets/about/) (v1.4.4 with updated bio and contact)
+- **Policies & Legal**: Hotfix applied and validated — [Policies & Legal](../src/widgets/policies-legal/) (v1.0.0)
+- **Accessibility Statement**: Complete — [Accessibility Statement](../src/widgets/accessibility-statement/) (v1.1.x)
+- **Manifests & CI**: Manifest generation, watchers, and CI automation implemented and validated
 
 ## ✅ RECENT COMPLETIONS
 - [x] **Accessibility Statement Widget v1.1.x** — Added theme toggle (System/Light/Dark), readable panel with adaptive backdrop, localStorage persistence, full keyboard accessibility, WCAG AA contrast verified (Nov 11, 2025)
@@ -102,6 +93,7 @@ Why this belongs in `updates/todo.md`
 - Manifest generation, watchers, and CI are in place for automated manifest updates and validation.
 - Scripts and workspace reorganization completed: `scripts/` cleaned, archived helpers moved to `scripts/_archived/`.
 - Local dev/test site (`src/site/`) and widget preview workflow are working; use `npm run dev` to preview.
+- **November 19, 2025**: Minor maintenance release v2.5.3 - Updated documentation dates, cleaned outdated STATUS.md files for production widgets, updated npm dependencies.
 - Next steps: targeted testing in Squarespace, add a small automated test harness for widgets, and finalize remaining TODOs below.
 
 ## Completed Items (Mark as Done)
@@ -195,4 +187,4 @@ Why this belongs in `updates/todo.md`
 	- npm audit: `reports/npm-audit-2025-11-04.json`
 	- Added `.gitattributes`, `CONTRIBUTING.md`, and `CODEOWNERS`
 
-_Last updated: 2025-11-04_
+_Last updated: 2025-11-19_
