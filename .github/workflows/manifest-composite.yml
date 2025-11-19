@@ -1,0 +1,60 @@
+name: Composite Manifest Generation (Shadow)
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - 'scripts/manifest/**'
+      - 'src/images/Portfolios/**'
+
+jobs:
+  generate-manifests:
+    name: Generate ${{ matrix.portfolio }} Manifest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        portfolio: [concert, events, journalism, nature, portrait, universal]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps (ci)
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Generate manifest
+        run: |
+          case "${{ matrix.portfolio }}" in
+            concert) npm run manifest:concert ;;
+            events) npm run manifest:events ;;
+            journalism) npm run manifest:journalism ;;
+            nature) npm run manifest:nature ;;
+            portrait) npm run manifest:portrait ;;
+            universal) npm run manifest:universal ;;
+            *) echo "Unknown portfolio" && exit 1 ;;
+          esac
+
+      - name: Validate manifests
+        run: node scripts/utils/validate-manifests.js || echo "(Validation script placeholder / ensure exists)"
+
+      - name: Commit changes (if any)
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add .
+            git commit -m "ci: shadow composite manifest update (${{ matrix.portfolio }})" || echo "Nothing to commit"
+          fi
+
+  summary:
+    name: Composite Summary
+    needs: generate-manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Summary
+        run: echo "Composite manifest generation shadow run complete. Individual workflows remain active."

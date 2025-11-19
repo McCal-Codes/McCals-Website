@@ -46,6 +46,8 @@
 - **Status File Cleanup**: Removed outdated STATUS.md files for production-ready widgets (concert-portfolio, photojournalism-portfolio, portrait-portfolio). These widgets are now at stable versions (v4.7, v5.2, v1.0 respectively).
 - **Package Updates**: Updated npm dependencies within semver ranges (autoprefixer 10.4.21→10.4.22, open 10.2.0→11.0.0).
 - **Version Bump**: Package version updated to 2.5.3 for minor maintenance release.
+### Docs/Meta — Instructions & Reorganization Phase 1
+- Updated `.github/copilot-instructions.md` with Repository Reorganization Phase 1 details (centralized legacy versions archive, orphan script audit utility, composite shadow manifest workflow, STATUS template standardization, deploy script consolidation). Added validation follow-up checklist (AI Preflight, widget HTML validator, repo health check). Phase 2 TODOs logged for physical legacy file relocation and orphan script archival.
 
 ### Testimonials Widget v1.0.0
 - Created production-ready testimonials widget with masonry grid layout (3/2/1 columns responsive).

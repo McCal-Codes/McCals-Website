@@ -98,5 +98,5 @@
 
 ---
 
-**Last Updated**: October 5, 2025  
-**Next Review**: TBD
+**Last Updated**: 2025-11-19  
+**Next Review**: 2025-12-10

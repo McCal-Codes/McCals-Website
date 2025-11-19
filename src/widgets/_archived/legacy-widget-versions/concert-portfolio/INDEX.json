@@ -1,0 +1,7 @@
+{
+  "widget": "concert-portfolio",
+  "archivedVersions": ["v2.0","v2.1","v2.2-self-contained","v2.2","v3.0-debug-simple","v3.0-universal-captions","v3.1","v3.2","v3.3","v3.4-manifest","v3.5-auto-refresh","v3.6","v4.1","v4.2","v4.3","v4.4","v4.5"],
+  "retainedInVersionsDir": ["v4.6","v4.7"],
+  "policy": "Retain only last two stable performance-optimized versions in active directory.",
+  "lastUpdated": "2025-11-19"
+}

@@ -1,38 +1,45 @@
-# Nature Portfolio Widget - Work in Progress
+# Nature Portfolio Widget — STATUS
 
-**Status**: 🚧 Enhanced & Testing  
-**Last Updated**: October 24, 2025  
+**Status**: 🚧 Enhanced & Testing (WIP)  
+**Phase**: Content expansion & performance validation  
 **Current Version**: v1.7  
+**Last Updated**: 2025-11-19  
+**Next Review**: 2025-12-05  
 **Expected Completion**: TBD  
 
-## Current State
-This widget has been significantly enhanced with v1.7 improvements:
-- ✅ Increased photo display capacity (32 photos by default, up to 3 per collection)
-- ✅ Improved landscape filtering with proper categorization
-- ✅ Dynamic filter tabs that only show categories with content
-- ✅ Better category detection for Wildlife and Landscapes
-- ⚠️ Needs more content (additional wildlife and landscape photos)
-- ⚠️ Testing in Squarespace environment required
+## Snapshot
+Core functionality stable; requires additional Wildlife & Landscapes content and Squarespace embed validation before promotion to production.
 
-## What's Working
-- Photo display and grid layout
-- Filter tabs (All, Wildlife, Landscapes)
-- Lightbox gallery with full image viewing
-- Category detection and smart filtering
-- Responsive design and accessibility features
+## Working ✅
+- Expanded capacity (dynamic cap up to 3 images per collection)
+- Landscape & Wildlife filtering with dynamic tab visibility
+- Responsive masonry grid + lightbox
+- Accessibility baseline (focusable cards, alt propagation)
+- Manifest integration (aggregated nature-manifest.json)
 
-## What Needs Work
-- More nature photos need to be added to populate the portfolio
-- Real-world testing in Squarespace Code Block
-- Performance validation with larger image sets
+## Needs Work ⚠️
+- Additional curated nature photos for variety
+- Performance scaling test (50–100 images scenario)
+- Lighthouse performance & axe accessibility scans
+- Optional structured data (ImageGallery) addition
 
-## Development Notes
-- Nature photography display functionality implemented and enhanced
-- Photo organization and manifest integration working correctly
-- Ready for content expansion and production testing
-- Based on proven journalism widget v5.2 architecture
+## Development Checklist
+- [ ] Add 20+ new wildlife images (multiple species)
+- [ ] Add 10+ landscape/location images
+- [ ] Run performance test with expanded dataset
+- [ ] Implement optional ImageGallery JSON-LD
+- [ ] Accessibility pass (focus outline contrast, lightbox SR cues)
+- [ ] Finalize README with embed & configuration section
 
-## Usage
-**Ready for testing** - Widget is functional and enhanced, but needs more content to fully showcase capabilities.
+## Exit Criteria
+1. Content threshold met (≥40 images total)
+2. Performance metrics within acceptable baseline (FCP/LCP parity with concert v4.6)
+3. Accessibility audit passes with no critical issues
+4. Structured data validated (if implemented)
+5. README updated & STATUS.md removed
 
-For production widgets, see the main widget list in the repository README.
+## Usage Guidance
+Suitable only for testing in local dev harness; do not promote to Squarespace production until exit criteria satisfied.
+
+---
+_STATUS template applied per workspace standards on 2025-11-19_
