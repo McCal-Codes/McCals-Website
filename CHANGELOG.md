@@ -40,6 +40,25 @@
 - Added pinning tip to `updates/welcome.md` for persistent dashboard visibility in VS Code.
 # Changelog
 
+## 2025-11-19
+### Testimonials Widget v1.0.0
+- Created production-ready testimonials widget with masonry grid layout (3/2/1 columns responsive).
+- Features: 5-star rating system, 12 sample testimonials with realistic data, monochrome featured badge, Schema.org AggregateRating structured data.
+- Self-contained HTML with inline CSS/JS, full WCAG 2.1 AA accessibility support.
+- Files: `src/widgets/testimonials/versions/v1.0.0-testimonials.html`, README, CHANGELOG.
+
+### Contact Form Widget v1.0.0
+- Created production-ready contact form with EmailJS integration for email delivery.
+- Features: Dark/light mode toggle with localStorage persistence, privacy consent checkbox, honeypot spam protection, form validation, success/error messaging, loading states.
+- Configuration: EmailJS credentials configured (publicKey: VJRlr0VVGGHH4PCeN, serviceId: service_twg853m, templateId: template_bxi2j5e).
+- Theme System: Full CSS variables theming, default dark mode, sun/moon toggle icon, privacy link visibility in both themes.
+- Template Parameters: name, email, subject, message, consent (Yes/No), timestamp.
+- Files: `src/widgets/contact-form/versions/v1.0.0-contact-form.html`, README, SETUP.md.
+
+### Design Standards
+- Established monochrome design principle for all widgets (black/white/gray color palette).
+- Dark mode set as default theme preference across contact form widget.
+
 ## 2025-11-10
 ### Interactive Thesis Widget v0.4 — Thesis Blog Format (No Live Embed)
 - New version: `src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html`.
