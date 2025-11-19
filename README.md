@@ -38,6 +38,30 @@ Critical repository events, security incidents, and recovery steps are documente
 
 ---
 
+## ✅ Widget Validation & Continuous Integration
+
+All Squarespace widgets are automatically validated for standards compliance on every push and pull request.
+
+- **Validation script:** `scripts/utils/validate-widgets.js` checks all widget HTML files for:
+	- Namespace wrapper and `data-widget-version` attribute
+	- Inline CSS and JavaScript (no external `<link>` or `<script src=...>`)
+	- Basic HTML structure
+	- (Planned) Accessibility and SEO checks
+- **CI workflow:** `.github/workflows/widget-validate.yml` runs the validation script in GitHub Actions.
+	- If any widget fails validation, the workflow fails and must be fixed before merging.
+
+### How to Fix Validation Errors
+
+1. Run the validation script locally:
+	 ```bash
+	 node scripts/utils/validate-widgets.js
+	 ```
+2. Review the error messages for the specific widget file(s).
+3. Update the widget HTML to meet standards (see `docs/standards/widget-standards.md`).
+4. Commit and push your changes. The CI workflow will re-run automatically.
+
+For more details, see the [Widget Standards documentation](docs/standards/widget-standards.md).
+
 ## 🆕 Recent Updates (October 2025)
 
 ✅ **Repository Organization Complete**:

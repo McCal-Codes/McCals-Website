@@ -1,6 +1,6 @@
 # Widget Enhancement To-Do (October–November 2025)
 
-*Updated: November 3, 2025*
+*Updated: November 15, 2025*
 
 Reference standards:
 - `docs/standards/preflight-afterflight.md`
@@ -18,10 +18,78 @@ Reference standards:
 - **Policies & Legal**: Hotfix applied and validated (v1.0.0)
 - **Manifests & CI**: Manifest generation, watchers, and CI automation implemented and validated
 
+## AI & VS Code: New Features (Nov 15, 2025)
+
+TL;DR: The new update basically turns VS Code into a cockpit for AI-driven development, gives you more control over what agents and tools do on your machine, and smooths out everyday coding tasks like terminal autocomplete and branch comparisons. You can actually use these features right now to streamline your workflow.
+
+Plan — Focus areas you can action today:
+
+- Agent HQ — observe and control agent sessions without giving up autonomy
+- Security & Trust — lock down tool approvals and local access
+- Coding QoL — terminal IntelliSense, inline terminals, branch/tag comparisons
+
+Steps you can try immediately
+
+1. Explore the Agent Sessions dashboard
+
+	- How to use: View → Agent Sessions. Run a Copilot chat or agent task and watch each session appear. Switch, filter, or pause sessions as needed.
+	- Why it matters: keeps AI work visible and lets you review planned changes before files are edited.
+	- Quick test: Open Copilot Chat → ask "refactor this file" and watch the session appear.
+
+2. Try the Planning Agent
+
+	- In Copilot Chat type: `@planner Generate a step-by-step plan for adding error handling to this function.`
+	- Outcome: receives a structured, editable plan you can hand off or reject.
+
+3. Experiment with custom agents (`.agents.md`)
+
+	- Create a `.agents.md` in the repo and define name, description, allowed tools, and rules.
+	- Example agents: "Press-Release Editor", "Metadata Organizer", "Git Hygiene".
+	- Trade-off: fast wins but requires thinking through permissions and handoffs.
+
+4. Inline terminals in chat
+
+	- Run commands from Copilot Chat and see terminal output inline in the chat thread.
+	- Useful for quick installs, one-liners, and git checks while keeping the audit trail in chat.
+
+5. Lock down your Tool Approvals (recommended first step)
+
+	- Settings → AI Tools → Approvals → Toggle "Ask before running tools".
+	- This gives you editorial veto over any tool runs and local file access.
+
+6. Test terminal IntelliSense
+
+	- Try: `git ch` → completes to `checkout`; `ls --` → shows flags; `npm ru` → suggests scripts.
+
+7. Use branch/tag comparisons inside Source Control
+
+	- Source Control → … menu → Compare Branches or Compare Tags for instant side-by-side diffs.
+
+Alternatives & trade-offs
+
+- Speed-first: use Agent Sessions dashboard, terminal IntelliSense, and branch compare for immediate gains (low setup).
+- Robust: configure Planning Agent, `.agents.md`, and tool approvals for safer, repeatable automation (takes ~1 hour).
+
+Quick fixes / recommended immediate action
+
+- TODO: Turn on tool approvals so you keep control while testing AI features (Settings → AI Tools → Approvals).
+ - [x] TODO: Add a sample `.agents.md` template at the repo root to demonstrate a safe Planning Agent and a Git Hygiene agent. (added Nov 15, 2025)
+
+Next
+
+Once you try a few of these, I can help you set up a custom agent aligned with your workflows (photojournalism automator, metadata preprocessor, writing editor).
+
+Why this belongs in `updates/todo.md`
+
+- It's an actionable, repository-level change that impacts developer workflows.
+- Adding the TODOs here (tool approvals + sample `.agents.md`) makes them discoverable by the workspace Todo Tree extension.
+
+
 ## ✅ RECENT COMPLETIONS
+- [x] **Accessibility Statement Widget v1.1.x** — Added theme toggle (System/Light/Dark), readable panel with adaptive backdrop, localStorage persistence, full keyboard accessibility, WCAG AA contrast verified (Nov 11, 2025)
+- [x] **Policies & Legal Widget v1.1.0** — Accessibility enhancements: skip link, unified focus-visible, scroll spy with aria-current, mobile drawer improvements, reduced motion support, print stylesheet refinement (Nov 11, 2025)
 - [x] **Portrait Portfolio v1.0** — Portrait photography widget (vertical-focused, 3:4, performance & SEO) — added to Available Widgets and sample manifest (Oct 24, 2025)
 - [x] **Concert Portfolio v4.7 (refinement)** — deduplicated artist list, Spotify support improvements, interaction safety and performance polish (Nov 2, 2025)
-- [x] **Policies & Legal v1.0.0** — hotfix for stray comment closure and validated (Nov 2, 2025)
 - [x] **Manifest & CI Automation** — robust manifest generation scripts, watch processes, CI workflows for concert/events/journalism, retry/validation/rollback logic (Oct 5–Nov 2, 2025)
 - [x] **Preflight & Workspace Validation** — AI preflight checks added and used (`npm run ai:preflight:short`) and related tasks wired (Oct 4–Oct 6, 2025)
 - [x] **Podcast Feed v1.9.5** — RSS auto-hydration, caching, branding updates (Oct 24, 2025)
@@ -56,6 +124,21 @@ Reference standards:
 	- Run axe-core (Playwright/Firefox) against widget pages and save reports to `reports/axe-firefox-results.json` and `reports/axe-firefox-widget-report.html`.
 	- Document findings in `reports/axe-firefox-summary.md` and add CI automation so widget audits run on staging updates.
 	- (Logged: 2025-11-11) A focused axe run was executed locally and results saved at `reports/axe-firefox-results.json` — consider adding as a scheduled CI job.
+
+- TODO: Integrate and document `git-hygiene` agent
+	- [x] Added `scripts/agents/git-hygiene.sh` (runs git status, lint, tests)
+	- [x] Enhanced `.agents.md` with `git-hygiene` `run_command` and notes
+	- [x] Added `docs/agents/git-hygiene.md` with usage and CI hints
+	- [x] Added `lint` and `test` scripts to `package.json` for eslint and playwright (Nov 15, 2025)
+	- [x] Created GitHub Action workflow `.github/workflows/agent-checks.yml` to run on PRs and comment with results (Nov 15, 2025)
+
+- TODO: Integrate and document `reorganizing-agent`
+	- [x] Added `scripts/agents/reorganize-check.sh` (scans for workspace organization violations)
+	- [x] Enhanced `.agents.md` with `reorganizing-agent` entry, run_command, and notes
+	- [x] Added `docs/agents/reorganizing-agent.md` with usage and CI hints
+	- [x] Implemented `--fix` mode with JSON-based approved moves and safety checks (requires jq) (Nov 15, 2025)
+	- [x] Updated documentation with `--fix` mode usage, JSON format, and safety notes (Nov 15, 2025)
+	- [x] Included in GitHub Action workflow to run on PRs (Nov 15, 2025)
 
 ## Performance & SEO Enhancements (Priority)
 - [ ] Implement comprehensive SEO standards across all widgets: structured data, enhanced alt text, meta descriptions (partially implemented in recent updates)
