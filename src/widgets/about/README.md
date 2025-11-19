@@ -120,5 +120,5 @@ Potential additions to this section:
 
 ---
 
-**Last Updated**: January 14, 2025  
+**Last Updated**: November 19, 2025  
 **Maintained By**: McCal Media Development Team

@@ -272,4 +272,4 @@ The widget includes client-side OAuth implementation that works without backend 
 
 **Version**: 1.0.0
 **Compatibility**: Squarespace 7.1+, Modern Browsers
-**Last Updated**: November 3, 2025
+**Last Updated**: November 19, 2025
