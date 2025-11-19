@@ -61,12 +61,12 @@
     "ci:find-duplicates": "node scripts/utils/find-duplicate-scripts.js",
     "ci:archive-duplicates": "node scripts/utils/find-duplicate-scripts.js --archive",
     "ci:smoke-test": "node scripts/utils/smoke-test.js",
-    "test:playwright": "npx playwright test tests/playwright --reporter=list",
-    "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
     "welcome": "node scripts/welcome.js",
+    "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
+    "lint": "npx eslint 'scripts/**/*.js' 'src/site/**/*.js' --max-warnings=50",
+    "test": "npx playwright test tests/playwright --reporter=list",
     "build:thesis": "node scripts/thesis/build-thesis-interactive.js",
-    "dev:thesis": "node scripts/thesis/build-thesis-interactive.js --watch"
-    ,
+    "dev:thesis": "node scripts/thesis/build-thesis-interactive.js --watch",
     "site-widgets:build": "node scripts/utils/build-site-widgets.js",
     "site-widgets:prepare-release": "npm run site-widgets:build && echo 'Built site-widgets artifacts in dist/site-widgets'"
   },

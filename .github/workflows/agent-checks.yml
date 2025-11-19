@@ -1,0 +1,117 @@
+name: Agent Checks (PR Comment)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  agent-checks:
+    name: Run Git Hygiene & Reorganizing Agents
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Run Git Hygiene Agent
+        id: git-hygiene
+        continue-on-error: true
+        run: |
+          echo "## Git Hygiene Report" > git-hygiene-report.txt
+          echo "" >> git-hygiene-report.txt
+          echo '```' >> git-hygiene-report.txt
+          bash scripts/agents/git-hygiene.sh >> git-hygiene-report.txt 2>&1 || echo "Exit code: $?"
+          echo '```' >> git-hygiene-report.txt
+
+      - name: Run Reorganizing Agent
+        id: reorganize
+        continue-on-error: true
+        run: |
+          echo "## Workspace Organization Report" > reorganize-report.txt
+          echo "" >> reorganize-report.txt
+          echo '```' >> reorganize-report.txt
+          bash scripts/agents/reorganize-check.sh >> reorganize-report.txt 2>&1 || echo "Exit code: $?"
+          echo '```' >> reorganize-report.txt
+
+      - name: Prepare PR Comment
+        id: prepare-comment
+        run: |
+          echo "# 🤖 Agent Checks Report" > pr-comment.md
+          echo "" >> pr-comment.md
+          echo "Automated repository health checks for this PR." >> pr-comment.md
+          echo "" >> pr-comment.md
+          cat git-hygiene-report.txt >> pr-comment.md
+          echo "" >> pr-comment.md
+          cat reorganize-report.txt >> pr-comment.md
+          echo "" >> pr-comment.md
+          echo "---" >> pr-comment.md
+          echo "_These checks are informational and do not fail PRs. Review suggestions and address as needed._" >> pr-comment.md
+          echo "" >> pr-comment.md
+          echo "**Agent Documentation:**" >> pr-comment.md
+          echo "- [Git Hygiene Agent](./docs/agents/git-hygiene.md)" >> pr-comment.md
+          echo "- [Reorganizing Agent](./docs/agents/reorganizing-agent.md)" >> pr-comment.md
+
+      - name: Post PR Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const commentBody = fs.readFileSync('pr-comment.md', 'utf8');
+            
+            // Find existing bot comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('🤖 Agent Checks Report')
+            );
+            
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
+
+      - name: Upload Reports as Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-reports
+          path: |
+            git-hygiene-report.txt
+            reorganize-report.txt
+            pr-comment.md
+          retention-days: 30
