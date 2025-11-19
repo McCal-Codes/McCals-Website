@@ -1,4 +1,12 @@
 
+## 2025-11-19 — Docs: Standards Index polish
+- Updated `docs/standards/README.md` for faster navigation and consistency:
+  - Replaced broken workspace icon with 🗂️
+  - Converted plain filenames to clickable relative links (including Quick Start items)
+  - Added sections: SEO Standards, Troubleshooting & Debugging, UI Patterns & Enhancements
+  - Inserted a Table of contents and tidied whitespace
+- Purpose: Improve discoverability of standards and reduce click-path friction.
+
 ## 2025-10-10
 - Nature Manifest Generator v2.0: Now supports all animal types under Wildlife, auto-generates per-species manifest.json files tagged with animal type, and aggregates all collections into nature-manifest.json. Documentation and workflow updated.
 
