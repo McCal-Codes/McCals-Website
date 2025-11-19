@@ -107,6 +107,9 @@ Reference standards:
 
 ## Remaining / In-Progress Items
 - [x] Run `npm run ai:preflight:short` — added and used during the recent sessions
+- [ ] TODO: Phase 2 — Physically relocate legacy widget version files to `src/widgets/_archived/legacy-widget-versions/<widget>/versions/` (concert: v2.*–v4.5; photojournalism: v1.0–v4.8; featured: v1.0–v1.3). Validate each widget README still lists only active versions after move. Add post-move HTML validator run.
+- [ ] TODO: Phase 2 — Review orphan scripts (`scripts/utils/generate-cdn-snippets.js`, `scripts/utils/auto-check-todo.js`, `scripts/utils/date-overrides.js`, `scripts/utils/find-latest-widget-versions.js`, `scripts/utils/shared-date-parsing.js`, `scripts/watchers/auto-manifest-updater.js`) and either archive to `scripts/_archived/` or integrate/document usage. Produce summary in `docs/CHANGELOG.md`.
+- [ ] TODO: Add CI job to enforce active/legacy widget version policy (fail if >2 active versions present in a live widget directory).
 - [ ] Confirm planned changes align with `docs/standards/widget-standards.md` and `widget-development.md` before editing remaining widgets
 - [ ] Add automated widget validation (small unit/integration tests) and wire into CI
 - [ ] Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and docs when making further structural changes

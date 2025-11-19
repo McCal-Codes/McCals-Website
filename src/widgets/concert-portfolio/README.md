@@ -166,12 +166,10 @@ An example (aggregated) manifest excerpt:
 | EXIF Processing | 450ms | 180ms | **60% faster** |
 
 ## Versions
+Active versions retained in `versions/`:
 - **v4.7** (Latest): Artist Support (Spotify) with search links and optional embedded previews
 - **v4.6**: Performance optimizations and structured data refinements
-- **v4.5**: SEO enhancements with structured data and improved accessibility
-- **v4.4**: Performance revolution with shared backend and UX improvements
-- **v4.3**: EXIF date extraction with fallback chain
-- **v4.2**: Natural masonry with GitHub commit dates
-- **v4.1**: Initial grid gallery implementation
 
-See CHANGELOG.md for detailed version history.
+Legacy versions (v4.5 and earlier) have been moved to `src/widgets/_archived/legacy-widget-versions/concert-portfolio/` to reduce clutter. Refer to the archive for historical diff/reference.
+
+See widget CHANGELOG.md and archive INDEX.json for full version history.

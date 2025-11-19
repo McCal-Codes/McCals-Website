@@ -1,0 +1,7 @@
+{
+  "widget": "featured-portfolio",
+  "archivedVersions": ["v1.0","v1.1","v1.2","v1.3","v1.4"],
+  "retainedInVersionsDir": ["v1.5-working"],
+  "policy": "Only keep latest working version; earlier iterations archived for reference.",
+  "lastUpdated": "2025-11-19"
+}

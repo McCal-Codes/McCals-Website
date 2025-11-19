@@ -23,11 +23,16 @@ Filterable masonry gallery for displaying photojournalism work with categories. 
 - **ARIA Attributes**: Proper screen reader compatibility
 - **Focus Management**: Lightbox focus trapping and restoration
 
-## Current Version
+## Current Versions
 
-**Latest**: v4.8 (`versions/v4.8-event-cards.html`)
+Active versions retained in `versions/`:
+- **v5.2** (Latest): Performance optimized iteration
+- **v5.1**: Previous performance pass baseline
+- **v4.9**: Stable event-cards implementation prior to v5 performance work
 
-### Recent Updates (v4.4→v4.8)
+Legacy versions (v4.8 and earlier) have been moved to `src/widgets/_archived/legacy-widget-versions/photojournalism-portfolio/`.
+
+### Legacy Highlights (Archived)
 - **v4.8**: Hidden scrollbars in lightbox for immersive experience
 - **v4.7**: Comprehensive navigation hiding during lightbox viewing  
 - **v4.6**: Enhanced filtering (no gaps) + minimal published indicators
@@ -123,43 +128,9 @@ For images that belong to multiple categories:
 - Safari 12+
 - Edge 79+
 
-## Versions
+## Version History
 
-- **v4.3.4** (Latest) — Cache Bust + Header Isolation
-  - Generated-date–scoped manifest cache key (auto invalidation when regenerated)
-  - Manual Force + Bust control to defeat CDN/edge caching instantly
-  - Global `html.lb-open` pointer-events isolation (prevents site header interaction under lightbox)
-  - Debug panel shows manifest generated date + bust token
-  - Parity with Events / Featured widgets for refresh + overlay behavior
-
-- **v4.2** — Event Cards Gallery
-  - Event-level cards (one thumbnail per journalism event)
-  - Shuffled thumbnails & consolidated lightbox per event
-  - Publication & image count badges
-  - Foundation for generated-date based enhancements in v4.3.x
-
-- **v4.0–v4.1** — Master Manifest & Individual Lightbox Evolution
-  - Consolidated master manifest loading & caching
-  - Iterative lightbox and styling refinements
-  - Publication metadata integration groundwork
-
-- **v2.0**: Dynamic GitHub Integration (Latest)
-  - Automatic image discovery from GitHub repository
-  - EXIF date extraction with commit date fallback
-  - Smart auto-categorization based on filename patterns
-  - Political figure detection (Trump, Biden, Harris, etc.)
-  - Multi-category support (images can be in multiple categories)
-  - Performance optimized with intelligent caching
-  - Debug mode with performance metrics
-  - Hover overlays and lightbox functionality
-
-- **v1.0**: Initial filterable masonry implementation
-  - Manual category filtering (Politics, Events, Portraits)
-  - Hover overlays with metadata
-  - Lightbox with captions
-  - Basic GitHub CDN integration
-
-See CHANGELOG.md for detailed version history.
+Full historical versions (v1.0–v4.8) are archived. See archive `INDEX.json` for the list and consult the widget CHANGELOG for detailed entries. Earlier versions established filtering, manifest loading, and UX patterns that informed the current performance optimized series.
 
 ## Enhancement Patterns
 

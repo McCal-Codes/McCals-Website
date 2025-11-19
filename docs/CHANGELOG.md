@@ -1,5 +1,12 @@
 
-## 2025-11-19 — Docs: Standards Index polish
+## 2025-11-19 — Repository Reorganization Phase 1 & Docs polish
+- **Legacy Widget Archival**: Moved older versions for Concert (v2.x–v4.5), Photojournalism (v1.0–v4.8), and Featured Portfolio (v1.0–v1.4) into `src/widgets/_archived/legacy-widget-versions/` with per-widget `INDEX.json` inventories.
+- **Active Version Policy**: Updated widget READMEs (concert, photojournalism, featured) to document retained versions and archive location/policy.
+- **STATUS Standardization**: Applied unified STATUS template to Blog Feed, Nature Portfolio, and Admin Importer; refreshed dates and added exit criteria.
+- **Scripts Hygiene**: Added `scripts/utils/orphan-audit.js` to emit JSON report of unreferenced scripts; documented duplicate cleanup policy in `scripts/_archived/README.md`.
+- **Deploy Script Consolidation**: Replaced deprecated `deploy:vercel` / `deploy:surge` scripts with single `deploy:placeholder` entry in `package.json` (historic deployment flows archived).
+- **Composite CI (Shadow)**: Added `manifest-composite.yml` workflow (matrix for concert, events, journalism, nature, portrait, universal) — runs alongside existing individual workflows for validation before consolidation.
+- **Standards Index Polish**: Updated `docs/standards/README.md` for faster navigation and consistency (workspace icon fix, linked quick start, added SEO / Troubleshooting / UI sections, TOC cleanup).
 - Updated `docs/standards/README.md` for faster navigation and consistency:
   - Replaced broken workspace icon with 🗂️
   - Converted plain filenames to clickable relative links (including Quick Start items)
