@@ -59,6 +59,12 @@ This directory contains production-ready and work-in-progress widgets for the Mc
 - **Features**: Vertical composition focus, 3:4 aspect ratios, enhanced detail viewing
 - **Use Case**: Portrait photography portfolio
 
+#### 🟢 Video Portfolio (`video-portfolio/`)
+- **Purpose**: Multimedia video gallery
+- **Current Version**: v0.1
+- **Features**: Mixed source support (local MP4, YouTube, Vimeo), accessible playback, category filtering, lazy loading, SEO structured data
+- **Use Case**: Showcase video content (interviews, promos, behind-the-scenes)
+
 ### Content Widgets
 
 #### 🟢 Podcast Feed (`podcast-feed/`)

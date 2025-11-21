@@ -154,6 +154,19 @@ Reference standards:
 - [ ] TODO: Develop Event calendar/scheduling widget with Google Calendar integration
 - [ ] TODO: Build Interactive FAQ accordion widget
 - [ ] TODO: Create Video portfolio/gallery widget for multimedia content
+ - [x] TODO: Create Video portfolio/gallery widget for multimedia content — v0.1 scaffold added (directory, README, CHANGELOG, initial self-contained HTML)
+	 - [x] Scaffold widget directory `src/widgets/video-portfolio/` with `versions/v0.1-video-portfolio.html`
+	 - [x] Inline dataset (Phase 1) with mixed sources (mp4/youtube/vimeo) and accessible posters
+	 - [x] Filtering (auto-generated tags) and lazy thumbnail loading
+	 - [x] Accessible lightbox/player (focus trap, keyboard media controls, Escape close)
+	 - [x] Basic structured data (VideoObject ItemList)
+	 - [ ] TODO: Add transcripts & captions panel (WebVTT ingest + transcript export) — Phase 2
+	 - [ ] TODO: Implement manifest generator `scripts/manifest/generate-video-manifest.js` and aggregated `video-manifest.json`
+	 - [ ] TODO: Add adaptive bitrate streaming (HLS/DASH) with quality selector + fallback to MP4
+	 - [ ] TODO: Add debug panel metrics (`window.videoPortfolioAPI.getMetrics()`) & performance logging
+	 - [ ] TODO: Integrate axe-core accessibility audit into CI for video widget
+	 - [ ] TODO: Add CI rule enforcing ≤2 active versions (archive future legacy versions)
+	 - [ ] TODO: Add structured data validator & Lighthouse automation snapshot for regression prevention
 
 ## Maintenance & Infrastructure
 - [ ] Update `scripts/utils/ai-instructions-preflight.js` to reflect completed enhancements (follow-up)
@@ -177,12 +190,19 @@ Reference standards:
 
 
 ## Documentation & Standards Updates
-- [ ] Update `docs/standards/widget-standards.md` with new patterns and best practices
-- [ ] Create case studies documenting performance improvements and SEO gains
-- [ ] Develop widget development tutorial series for future contributors
-- [ ] Update workspace organization standards to reflect current structure
-- [ ] Create comprehensive changelog system for all widget versions
-- [ ] Document integration patterns for third-party services (RSS, calendars, etc.)
+- [x] Update `docs/standards/widget-standards.md` with new patterns and best practices (Nov 19, 2025) → Added November 2025 Addendum (archival policy, aggregated manifest, accessibility semantics, CI hooks).
+- [x] Create case studies documenting performance improvements and SEO gains → `docs/case-studies/performance-seo-case-studies.md` (Concert v4.5→v4.7, Photojournalism v4.4→v5.x, Accessibility Statement, Policies & Legal).
+- [x] Develop widget development tutorial series for future contributors → `docs/tutorials/widget-development/part1-4` (structure, performance, accessibility, deployment).
+- [x] Update workspace organization standards to reflect current structure → Added archival + composite workflow sections in `docs/standards/workspace-organization.md`.
+- [x] Create comprehensive changelog system for all widget versions → `docs/standards/widget-changelog-standard.md` (format, CI validation plan).
+- [x] Document integration patterns for third-party services (RSS, calendars, etc.) → `docs/integrations/rss-integration.md`, `docs/integrations/calendar-integration.md`.
+
+Follow-up Documentation TODOs:
+- [ ] TODO: Implement CI changelog validator (`scripts/utils/validate-changelogs.js`).
+- [ ] TODO: Add workflow to enforce ≤2 active widget versions (legacy archive policy).
+- [ ] TODO: Add schema diff & performance snapshot automation (Lighthouse + JSON-LD validation).
+- [ ] TODO: Integrate accessibility axe audit into CI (`npm run a11y:widgets`).
+- [ ] TODO: Add widget registry manifest summarizing active versions and paths.
 
 - [x] TODO: Run repository audit and follow-up housekeeping (2025-11-04)
 	- Audit file: `docs/REPO-AUDIT-2025-11-04.md`

@@ -30,6 +30,33 @@ This document establishes standardized patterns for McCal Media widgets based on
 
 ---
 
+## 🔄 November 2025 Addendum
+
+The November 2025 reorganization (Phase 1) introduced forward-looking standards:
+
+### Legacy Version Archival Policy
+Retain only the current stable and the immediately previous stable version inside each live widget directory. Relocate older versions (Phase 2) to:
+`src/widgets/_archived/legacy-widget-versions/<widget>/versions/` with an `INDEX.json` containing `{ version, date, summary }`. Planned CI will fail if more than two active versions remain.
+
+### Aggregated Manifest Consumption
+Portfolio widgets MUST consume the single aggregated manifest per portfolio (e.g. `concert-manifest.json`, `portrait-manifest.json`). Per-folder manifests are deprecated. See `workspace-organization.md` for policy details.
+
+### Accessibility & Theme Semantics
+Light theme = dark text on light surface; Dark theme = light text on dark surface. Avoid inverted semantics. Persist explicit user choice via `localStorage` (`<widget>-theme`) while respecting `prefers-color-scheme` in System mode.
+
+### Performance Reference Update
+Concert Portfolio v4.7 and Photojournalism v5.x join Concert v4.6 as reference implementations (< 2s meaningful paint target; disciplined observers; deferred schema injection). New patterns should be validated against these benchmarks.
+
+### Version Badge Active Flag
+Add `data-active="true"` to the version badge for the two active versions; omit in archived legacy files to enable automated audits.
+
+### Planned CI Enforcement (Preview)
+Upcoming workflow checks will validate: (1) ≤2 active versions, (2) newest CHANGELOG entry presence, (3) aggregated manifest usage, (4) single structured data script, (5) observer discipline (no redundant IntersectionObserver instances).
+
+Document intentional deviations in widget README files so CI can whitelist them.
+
+---
+
 ## 🏗️ Core Architecture Standards
 
 ### 1. **Self-Contained Structure**
@@ -69,10 +96,13 @@ versions/
 ```
 
 #### **Guidelines**:
-- **Never modify existing versions** - always create new files
+- **Never modify existing versions** – always create new files
 - **Descriptive suffixes**: Include widget purpose in filename
 - **Preserve backwards compatibility** when possible
 - **Document changes** in widget-specific CHANGELOG.md
+- **Archive older versions** once two newer stables exist (move to legacy archive path)
+- **Git tags**: Tag releases `<widget-name>@<version>` for CDN pinning (`interactive-thesis@0.4.0`)
+- **Archive INDEX.json**: Maintain concise metadata for historical audit
 
 ---
 
@@ -529,6 +559,10 @@ Consistent version display and changelog access:
 - **Lightbox Gallery**: Full-screen viewing with navigation hiding
 - **Filter Controls**: Category-based filtering with smooth animations
 - **GitHub Integration**: Direct loading from repository assets
+- **Manifest Source**: Consume aggregated `<type>-manifest.json` only (per-folder manifests deprecated)
+- **Structured Data**: Inject a single JSON-LD block (ImageGallery / CollectionPage) after initial image mount to avoid long tasks
+- **External Panels (Concert)**: Case-insensitive deduplication for artist lists; disable support buttons while lightbox open or media playing
+- **Observer Discipline**: Prefer one IntersectionObserver per concern (reveal vs lazy images) to minimize overhead
 
 ### 2. **Navigation Widgets** *(Site Navigation, Site Footer)*
 - **Glassmorphism**: Backdrop blur with transparency
@@ -541,6 +575,9 @@ Consistent version display and changelog access:
 - **Progressive Loading**: Skeleton states and error handling
 - **Rich Media Support**: Audio players, embedded content
 - **Performance Monitoring**: Real-time metrics and debugging
+- **Resilient Fallbacks**: Live RSS → cached snapshot → static embedded list
+- **Transcripts**: Provide transcript toggle (ARIA-expanded, manage focus return)
+- **Accessibility**: Wrap each episode in `article` with descriptive labeling
 
 ### 4. **Hero/Showcase Widgets** *(Hero Slideshow)*
 - **Full-Viewport Design**: Edge-to-edge layouts
@@ -612,6 +649,23 @@ See `src/widgets/podcast-feed/` for:
 - **Compatibility**: Works in Squarespace Code Blocks
 - **Maintainability**: Clear code structure with comments
 - **User Experience**: Intuitive interaction patterns
+- **Archival Hygiene**: ≤2 active versions present; older versions relocated
+- **Observer Discipline**: Avoid multiple observers performing identical work
+- **Structured Data Efficiency**: Single schema injection, no per-image duplication
+- **Manifest Compliance**: No reliance on deprecated per-folder manifests
+
+## 🧪 Upcoming Automation Hooks (Preview)
+
+| Concern | Attribute / Pattern | Planned CI Check |
+|---------|---------------------|------------------|
+| Active versions | `data-active="true"` on version badge | Ensure ≤2 active |
+| Theme system | Root wrapper `data-theme` present | Validate Light/Dark/System semantics |
+| Manifest source | Fetch path ends with `<type>-manifest.json` | Warn if per-folder manifest accessed |
+| Debug mode | Single `.debug-toggle` | Warn if multiple toggles |
+| Structured data | Single script tag id=`structured-data` | Warn if absent/duplicated |
+| Observer discipline | ≤1 per concern | Flag excess observers |
+
+Maintain intentional exceptions in README so CI can whitelist them.
 
 ---
 
