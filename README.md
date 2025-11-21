@@ -95,6 +95,7 @@ For more details, see the [Widget Standards documentation](docs/standards/widget
 - **Featured Portfolio** (`src/widgets/featured-portfolio/`) - Curated portfolio highlights
 - **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) - News and journalism photos
 - **Portrait Portfolio** (`src/widgets/portrait-portfolio/`) - Portrait photography displays with vertical composition focus *(v1.0)*
+- **Video Portfolio** (`src/widgets/video-portfolio/`) - Multimedia video gallery (local MP4, YouTube, Vimeo) with accessible playback *(v0.1)*
 - **About Section Widgets** (`src/widgets/about/`) - Complete about pages and client carousels
   - Complete About Page - Bio, photo, reviews, and integrated client carousel
   - Client Carousel - Standalone client logo showcase
