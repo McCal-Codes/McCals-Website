@@ -1,11 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `de54ab39` — 0 seconds ago
-> docs: include SEO automation work in version standardization documentation
+**Last commit**: `77561215` — 0 seconds ago
+> feat: add McCal Navigation Widget v1.6 and Hero Carousel v1.1
 ## 🔄 Changes in last commit
-- CHANGELOG.md
-- docs/standards/version-standardization-lessons.md
+- docs/archive/integrations/WIDGET-API-CHEATSHEET.md
+- docs/archive/integrations/squarespace/developer-mode-quickstart.md
+- docs/archive/standards/seo-audit-2025-01-27.md
+- docs/archive/todo/widget-enhancement-implementation.md
+- docs/archive/tutorials/widget-development/part1-structure.md
+- docs/archive/tutorials/widget-development/part2-performance.md
+- docs/archive/tutorials/widget-development/part3-accessibility.md
+- docs/archive/tutorials/widget-development/part4-deployment.md
+- docs/archive/updates/2025-11-23-welcome-api-integration.md
+- docs/archive/updates/manifest-migration-2025-11-04.md
 - scripts/.welcome-state.json
-- updates/welcome.md
+- src/widgets/_archived/demo-debug/blog-feed/demo/test-demo.html
+- …and 16 more
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)

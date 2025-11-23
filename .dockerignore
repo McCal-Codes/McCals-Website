@@ -1,0 +1,41 @@
+# Docker ignore file - exclude unnecessary files from image
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Development
+.git/
+.github/
+.vscode/
+*.log
+
+# Build artifacts
+dist/
+build/
+
+# Tests
+tests/
+test-results/
+reports/
+
+# Documentation (not needed in container)
+docs/
+updates/
+*.md
+!README.md
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+temp/
+*.tmp
