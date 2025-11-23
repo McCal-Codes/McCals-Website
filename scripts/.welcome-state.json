@@ -1,4 +1,4 @@
 {
-  "lastHash": "de54ab39",
-  "lastMessage": "docs: include SEO automation work in version standardization documentation\n\n- Updated CHANGELOG.md to include SEO automation and workflow enhancements section\n- Enhanced lessons learned document with 'Additional Work Completed' section\n- Documented SEO script improvements (sitemap +325 lines, structured data +505 lines)\n- Added new documentation files (seo-automation-guide, api-seo-benefits, manifest-cdn)\n- Documented GitHub Actions workflows (seo-auto-update.yml, publish-manifests-cdn.yml)\n- Updated conclusion and key takeaways to reflect full session scope\n- Total new content: ~2,345 lines of documentation, automation, and tooling\n\\n\\nAuthor: mccal"
+  "lastHash": "77561215",
+  "lastMessage": "feat: add McCal Navigation Widget v1.6 and Hero Carousel v1.1\n\n- Introduced a new navigation widget with responsive design and accessibility features.\n- Implemented a hero carousel widget showcasing featured work with smooth transitions.\n- Updated styles for both widgets to enhance visual appeal and user experience.\n- Adjusted JavaScript functionality for navigation toggle and link highlighting.\n\ntest: update last run status to failed due to test case 3cb7b52522c770c9383f-20e80413cd26d2624a89\n\ndocs: update welcome message with latest commit details and changes\n\\n\\nAuthor: mccal"
 }
