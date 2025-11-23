@@ -1,8 +1,7 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `11e777cb` — 0 seconds ago
-> docs: document version standardization lessons learned
+**Last commit**: `de54ab39` — 0 seconds ago
+> docs: include SEO automation work in version standardization documentation
 ## 🔄 Changes in last commit
-- .github/copilot-instructions.md
 - CHANGELOG.md
 - docs/standards/version-standardization-lessons.md
 - scripts/.welcome-state.json
