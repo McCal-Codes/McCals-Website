@@ -36,6 +36,8 @@ Critical repository events, security incidents, and recovery steps are documente
 
 **Latest:** [2025-10-09-secret-removal.md](docs/important-notes/2025-10-09-secret-removal.md) — Google Cloud service account secret removal and repository history rewrite. All collaborators must re-clone the repository.
 
+- CDN-hosted manifests (no API required): see [docs/manifest-cdn.md](docs/manifest-cdn.md) for jsDelivr URLs and the publish workflow.
+
 ---
 
 ## ✅ Widget Validation & Continuous Integration
@@ -113,7 +115,7 @@ For more details, see the [Widget Standards documentation](docs/standards/widget
 ### Using Widgets in Squarespace
 
 1. Navigate to `src/widgets/[widget-name]/versions/`
-2. Copy the latest version HTML file (e.g., `v4.1.html`)
+2. Copy the latest version HTML file (e.g., `v4.1.0.html`)
 3. In Squarespace, add a **Code Block**
 4. Paste the widget HTML code
 5. Adjust `data-panes` or other attributes as needed

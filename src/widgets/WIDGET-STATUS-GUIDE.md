@@ -81,8 +81,8 @@ src/widgets/[widget-name]/
 ├── CHANGELOG.md           # Version history (optional)
 ├── STATUS.md              # WIP status (if applicable)
 ├── versions/              # Versioned widget files
-│   ├── v1.0.html
-│   └── v1.1.html
+│   ├── v1.0.0.html
+│   └── v1.1.0.html
 ├── demo/                  # Demo files (optional)
 └── tests/                 # Test files (optional)
 ```

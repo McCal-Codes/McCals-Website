@@ -380,8 +380,24 @@ console.log('SEO Generation Summary:', {
 
 ---
 
+## 🤖 Automated Workflow
+
+**Good news**: This is now fully automated! See [SEO Automation Guide](./seo-automation-guide.md) for details.
+
+The GitHub Actions workflow automatically:
+- ✅ Regenerates SEO assets when you add photos
+- ✅ Validates all XML and JSON
+- ✅ Commits changes to your repo
+- ✅ Submits sitemap to Google
+- ✅ Provides detailed reports
+
+**Just push photos and forget it!** 🚀
+
+---
+
 ## 📚 Resources
 
+- [SEO Automation Guide](./seo-automation-guide.md) ⭐ **START HERE**
 - [Google Image Sitemap Guide](https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps)
 - [Structured Data Testing Tool](https://search.google.com/structured-data/testing-tool)
 - [Schema.org ImageGallery](https://schema.org/ImageGallery)

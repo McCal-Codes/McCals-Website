@@ -306,7 +306,7 @@ async function generateManifest() {
     allEvents.sort((a, b) => new Date(b.eventDate.iso) - new Date(a.eventDate.iso));
     
     const manifest = {
-      version: '2.0',
+      version: '2.0.0',
       generated: new Date().toISOString(),
       totalEvents: allEvents.length,
       totalImages: allEvents.reduce((sum, event) => sum + event.totalImages, 0),

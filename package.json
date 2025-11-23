@@ -11,6 +11,7 @@
     "api:start": "node src/api/server.js",
     "api:dev": "nodemon src/api/server.js",
     "api:test": "curl http://localhost:3001/api/health",
+    "api:demo-seo": "npm run api:start & sleep 5 && npm run seo:all && echo '\n✅ Demo complete! Check dist/sitemap.xml and dist/structured-data/'",
       "dev": "node dev-server.js",
       "dev:with-api": "concurrently -n \"SITE,API\" -c \"cyan,green\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\"",
       "dev:full": "concurrently -n \"SITE,API,WATCH\" -c \"cyan,green,yellow\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\" \"node scripts/watchers/watch-auto-manifest.js --all\"",
@@ -80,7 +81,11 @@
     "seo:sitemap": "node scripts/seo/generate-sitemap.js",
     "seo:schema": "node scripts/seo/generate-structured-data.js",
     "seo:all": "npm run seo:sitemap && npm run seo:schema",
-    "prebuild": "npm run manifest:generate"
+    "prebuild": "npm run manifest:generate",
+    "versions:standardize": "node scripts/utils/standardize-versions.js",
+    "versions:check": "node scripts/utils/standardize-versions.js --dry-run --verbose",
+    "versions:rename": "node scripts/utils/rename-widget-versions.js",
+    "versions:rename-check": "node scripts/utils/rename-widget-versions.js --dry-run --verbose"
   },
   "keywords": [
     "photography",

@@ -36,7 +36,7 @@
 
 ## Usage
 
-1. **Copy the Widget Code**: Copy the entire contents of `versions/v1.0.html`
+1. **Copy the Widget Code**: Copy the entire contents of `versions/v1.0.0.html`
 2. **Squarespace Integration**: Paste into a Code Block on your Squarespace page
 3. **Manifest Setup**: Ensure `src/images/Portfolios/Portrait/portrait-manifest.json` exists
 4. **Customization**: Modify `data-panes` attribute to control number of displayed portraits. Note: the widget now selects a rotating subset of portraits on each load (default behavior shows 1–4 random panes per session) unless `data-panes` is explicitly set to a fixed number.

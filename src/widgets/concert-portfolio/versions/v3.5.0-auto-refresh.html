@@ -1,16 +1,17 @@
-<!-- Concert Portfolio v3.3 — Simple Subfolder Support
+<!-- Concert Portfolio v3.5 — Auto-Refresh with Cache-Busting
 Author: Caleb McCartney / McCal-Codes
-Version: 3.3
-Purpose: Simple version that looks in subfolders and uses subfolder names as dates
+Version: 3.5.0
+Purpose: Enhanced version with auto-refresh and cache-busting for live updates
 
 Features:
-- Looks in Band Name/Month Year/ subfolders for images
-- Uses subfolder names (e.g., "December 2024") as the concert date display
-- Simple and reliable GitHub API access
-- Debug panel for troubleshooting
+- Single API call using master manifest
+- Cache-busting query parameters to bypass CDN caching
+- Auto-refresh every 5 minutes to detect new images
+- Retry mechanism for failed requests
+- Enhanced debug panel
 
 Usage: Paste this entire block into a Squarespace Code Block
-GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image files]
+Requirements: Master manifest at images/Portfolios/Concert/concert-manifest.json
 -->
 
 <style>
@@ -30,6 +31,28 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image file
     border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px;
   }
   @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Auto-refresh indicator */
+  .auto-refresh-indicator {
+    position: fixed;
+    bottom: 8px;
+    right: 50px;
+    font: 400 10px/1 ui-sans-serif,system-ui;
+    color: rgba(128, 128, 128, 0.6);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Version indicator - minimal bottom right */
+  .version-indicator {
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    font: 400 10px/1 ui-sans-serif,system-ui;
+    color: rgba(128, 128, 128, 0.6);
+    pointer-events: none;
+    z-index: 1;
+  }
 
   /* Debug Toggle Button */
   .debug-toggle {
@@ -54,7 +77,7 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image file
     opacity: 0.9;
   }
 
-  /* Debug info panel - compact style */
+  /* Debug info panel */
   .debug-info {
     position: fixed;
     bottom: 60px;
@@ -62,11 +85,11 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image file
     transform: translateX(-50%);
     background: rgba(0,0,0,0.85);
     color: #fff;
-    padding: 8px 12px;
+    padding: 12px 16px;
     border-radius: 6px;
     font: 600 11px/1.3 ui-monospace,monospace;
     z-index: 999;
-    max-width: 400px;
+    max-width: 500px;
     border: 1px solid var(--line);
     display: none;
     backdrop-filter: blur(10px);
@@ -118,7 +141,7 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image file
     font-size: 24px; opacity: 0.5;
   }
 
-  /* Lightbox (vertical scroll) - Enhanced */
+  /* Lightbox (vertical scroll) */
   .concert-lightbox {
     position:fixed; inset:0; display:none; align-items:center; justify-content:center;
     background:rgba(0,0,0,.9); z-index:2147483647 !important; padding:24px;
@@ -203,7 +226,7 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image file
 </style>
 
 <div class="concert-portfolio" id="concertPf" data-panes="12">
-  <h2 class="concert-heading">Concert Portfolio v3.3</h2>
+  <h2 class="concert-heading">Concert Portfolio</h2>
   
   <div class="concert-loading" id="concertLoading">
     <div class="concert-spinner"></div>
@@ -225,17 +248,24 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image file
   </div>
 </div>
 
+<!-- Version indicator -->
+<div class="version-indicator">v3.5</div>
+<div class="auto-refresh-indicator" id="autoRefreshIndicator">Next refresh: --</div>
+
 <!-- Debug Toggle Button -->
 <button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
 
 <!-- Debug info panel -->
 <div class="debug-info" id="debugInfo">
-  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug v3.3</div>
+  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug v3.5</div>
   <div>Status: <span id="debugStatus">Ready</span></div>
   <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
   <div>Concerts: <span id="debugConcertCount">--</span></div>
   <div>Images: <span id="debugImageCount">--</span></div>
   <div>API Calls: <span id="debugApiCalls">--</span></div>
+  <div>Cache Buster: <span id="debugCacheBuster">--</span></div>
+  <div>Last Refresh: <span id="debugLastRefresh">--</span></div>
+  <div>Auto-Refresh: <span id="debugAutoRefresh">Enabled</span></div>
 </div>
 
 <script>
@@ -245,8 +275,15 @@ let debugMetrics = {
   startTime: performance.now(),
   apiCalls: 0,
   concertCount: 0,
-  imageCount: 0
+  imageCount: 0,
+  cacheBuster: 0,
+  lastRefresh: 'Never'
 };
+
+// Auto-refresh configuration
+const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+let autoRefreshTimer = null;
+let nextRefreshTimer = null;
 
 function toggleDebug() {
   debugActive = !debugActive;
@@ -265,6 +302,28 @@ function updateDebugMetrics() {
   document.getElementById('debugConcertCount').textContent = debugMetrics.concertCount;
   document.getElementById('debugImageCount').textContent = debugMetrics.imageCount;
   document.getElementById('debugApiCalls').textContent = debugMetrics.apiCalls;
+  document.getElementById('debugCacheBuster').textContent = debugMetrics.cacheBuster;
+  document.getElementById('debugLastRefresh').textContent = debugMetrics.lastRefresh;
+}
+
+function updateNextRefreshIndicator() {
+  const indicator = document.getElementById('autoRefreshIndicator');
+  if (!indicator) return;
+  
+  let timeLeft = AUTO_REFRESH_INTERVAL;
+  
+  const updateCountdown = () => {
+    const minutes = Math.floor(timeLeft / 60000);
+    const seconds = Math.floor((timeLeft % 60000) / 1000);
+    indicator.textContent = `Next refresh: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (timeLeft > 0) {
+      timeLeft -= 1000;
+      setTimeout(updateCountdown, 1000);
+    }
+  };
+  
+  updateCountdown();
 }
 
 (function() {
@@ -280,7 +339,7 @@ function updateDebugMetrics() {
   // Debug logging
   function logDebug(message, data = null) {
     if (debugActive) {
-      console.log(`[Concert Debug v3.3] ${message}`, data || '');
+      console.log(`[Concert Debug v3.5] ${message}`, data || '');
       if (debugStatus) {
         debugStatus.textContent = message;
         updateDebugMetrics();
@@ -288,50 +347,57 @@ function updateDebugMetrics() {
     }
   }
 
-  // GitHub API configuration
-  const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main', base:['images','Portfolios','Concert'] };
-  const EXT_RX = /\.(jpe?g|png|webp|gif)$/i;
-  const apiBase = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/`;
+  // GitHub configuration with cache-busting
+  const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main' };
   const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
 
-  function apiUrl(parts) { return apiBase + parts.map(encodeURIComponent).join('/'); }
-  function rawUrl(parts) { return rawBase + parts.map(encodeURIComponent).join('/'); }
-
-  logDebug('API Base URL', apiBase);
-  logDebug('Raw Base URL', rawBase);
-  logDebug('Concert path', GH.base.join('/'));
-
-  // Enhanced HTTP requests
-  async function makeRequest(url, options = {}) {
-    debugMetrics.apiCalls++;
-    logDebug('Making request to', url);
-    
-    try {
-      const response = await fetch(url, { 
-        ...options, 
-        headers: { 'Accept': 'application/vnd.github+json', ...options.headers }
-      });
-      
-      logDebug(`Response status: ${response.status}`, response.statusText);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        logDebug('Error response body', errorText);
-        throw new Error(`HTTP ${response.status}: ${errorText}`);
-      }
-      
-      const result = await response.json();
-      logDebug('Response success', `${result.length || 0} items`);
-      return result;
-    } catch (error) {
-      logDebug('Request failed', error.message);
-      throw error;
-    }
+  function getManifestUrl() {
+    // Cache buster using timestamp + random number for extra freshness
+    debugMetrics.cacheBuster = Date.now() + Math.floor(Math.random() * 1000);
+    return rawBase + `images/Portfolios/Concert/concert-manifest.json?cb=${debugMetrics.cacheBuster}`;
   }
 
-  async function ghList(parts) {
-    const url = apiUrl(parts);
-    return await makeRequest(url);
+  function rawUrl(parts) { 
+    return rawBase + 'images/Portfolios/Concert/' + parts.map(encodeURIComponent).join('/'); 
+  }
+
+  // Load master manifest with cache-busting and retry
+  async function loadMasterManifest(retryCount = 0) {
+    debugMetrics.apiCalls++;
+    const manifestUrl = getManifestUrl();
+    logDebug('Loading master manifest...', manifestUrl);
+    
+    try {
+      const response = await fetch(manifestUrl, {
+        cache: 'no-store', // Disable browser caching
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const manifest = await response.json();
+      logDebug('Master manifest loaded', `${manifest.bands?.length || 0} bands (Generated: ${manifest.generated})`);
+      
+      debugMetrics.lastRefresh = new Date().toLocaleTimeString();
+      return manifest;
+    } catch (error) {
+      logDebug('Master manifest failed', error.message);
+      
+      // Retry up to 3 times with exponential backoff
+      if (retryCount < 3) {
+        const delay = Math.pow(2, retryCount) * 1000; // 1s, 2s, 4s
+        logDebug(`Retrying in ${delay}ms...`, `Attempt ${retryCount + 2}/4`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return loadMasterManifest(retryCount + 1);
+      }
+      
+      throw error;
+    }
   }
 
   function shuffle(arr) {
@@ -343,67 +409,7 @@ function updateDebugMetrics() {
     return a;
   }
 
-  function titleFromFolder(name) {
-    return decodeURIComponent(name).replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
-  }
-
-  // Process band albums - NEW: Look in subfolders and use subfolder names as dates
-  async function processBandAlbum(bandName) {
-    const band = GH.base.concat([bandName]);
-    logDebug(`Processing band: ${bandName}`, band.join('/'));
-    
-    try {
-      // Get subfolders in the band directory
-      const items = await ghList(band);
-      logDebug(`Found ${items.length} items in ${bandName}`);
-      
-      const subfolders = items.filter(it => it.type === 'dir');
-      logDebug(`Found ${subfolders.length} subfolders`, subfolders.map(s => s.name));
-      
-      // Look for images in subfolders
-      for (const subfolder of subfolders) {
-        try {
-          const subParts = band.concat([subfolder.name]);
-          const subItems = await ghList(subParts);
-          const subFiles = subItems.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
-          
-          if (subFiles.length > 0) {
-            logDebug(`Found ${subFiles.length} images in ${bandName}/${subfolder.name}`);
-            
-            // Use subfolder name as the date display (e.g., "December 2024")
-            const dateDisplay = titleFromFolder(subfolder.name);
-            
-            return { 
-              parts: subParts, 
-              list: subFiles,
-              bandName: bandName,
-              dateDisplay: dateDisplay // This will be used instead of "Live • 2025"
-            };
-          }
-        } catch (subError) {
-          logDebug(`Subfolder ${subfolder.name} failed`, subError.message);
-        }
-      }
-      
-      // Fallback: try direct files in band folder (shouldn't happen with new structure)
-      const files = items.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
-      if (files.length) {
-        logDebug(`Found ${files.length} direct image files in ${bandName}`);
-        return { 
-          parts: band, 
-          list: files,
-          bandName: bandName,
-          dateDisplay: `Live • ${new Date().getFullYear()}`
-        };
-      }
-      
-    } catch (error) {
-      logDebug(`Failed to process ${bandName}`, error.message);
-    }
-    return null;
-  }
-
-  // Main build function
+  // Main build function with enhanced error handling
   async function build() {
     const startTime = performance.now();
     
@@ -413,51 +419,42 @@ function updateDebugMetrics() {
 
       logDebug('Starting build process...');
 
-      // Fetch band list
-      logDebug('Fetching band list from GitHub...');
-      const entries = await ghList(GH.base);
-      const bands = entries.filter(it => it.type === 'dir').map(it => it.name);
+      // Load master manifest with cache-busting
+      const manifest = await loadMasterManifest();
       
-      logDebug(`Found ${bands.length} bands`, bands.slice(0, 5));
-      
-      if (!bands.length) {
-        showError('No concert directories found.');
+      if (!manifest || !manifest.bands || manifest.bands.length === 0) {
+        showError('No concert data found in manifest.');
         return;
       }
 
-      // Process bands in batches
-      const shuffledBands = shuffle(bands).slice(0, Math.min(6, bands.length));
-      logDebug(`Processing ${shuffledBands.length} bands`, shuffledBands);
+      logDebug(`Loaded ${manifest.bands.length} bands from manifest (Generated: ${manifest.generated})`);
       
       const pools = [];
       
-      for (const band of shuffledBands) {
-        try {
-          const result = await processBandAlbum(band);
-          if (result && result.list.length > 0) {
-            const images = shuffle(result.list.slice());
-            pools.push({
-              dir: result.parts.join('/'),
-              parts: result.parts,
-              title: titleFromFolder(result.bandName),
-              dateDisplay: result.dateDisplay, // NEW: Store the date display
-              images,
-              allImages: result.list.slice()
-            });
-            logDebug(`Added pool for ${band}`, `${images.length} images, date: ${result.dateDisplay}`);
-          }
-        } catch (error) {
-          logDebug(`Failed to process band ${band}`, error.message);
-        }
+      // Process bands from manifest
+      for (const band of manifest.bands) {
+        const images = shuffle(band.images.slice());
+        pools.push({
+          dir: band.folderPath,
+          parts: band.folderPath.split('/'),
+          title: band.bandName,
+          dateDisplay: band.dateDisplay,
+          images,
+          allImages: band.images.slice()
+        });
+        logDebug(`Added pool for ${band.bandName}`, `${images.length} images, date: ${band.dateDisplay}`);
       }
 
       debugMetrics.concertCount = pools.length;
       logDebug(`Created ${pools.length} image pools`);
 
       if (!pools.length) {
-        showError('No concert images available after processing bands.');
+        showError('No concert images available from manifest.');
         return;
       }
+
+      // Clear existing grid
+      grid.innerHTML = '';
 
       // Create cards with round-robin
       const slots = [];
@@ -472,7 +469,7 @@ function updateDebugMetrics() {
               dir: pool.dir,
               parts: pool.parts,
               title: pool.title,
-              dateDisplay: pool.dateDisplay, // NEW: Pass along the date display
+              dateDisplay: pool.dateDisplay,
               thumb: fname,
               allImages: pool.allImages
             });
@@ -545,7 +542,7 @@ function updateDebugMetrics() {
       });
 
       const loadTime = performance.now() - startTime;
-      logDebug(`Concert portfolio loaded successfully!`, `${Math.round(loadTime)}ms`);
+      logDebug(`Concert portfolio loaded successfully!`, `${Math.round(loadTime)}ms with ${debugMetrics.apiCalls} API call(s)`);
 
     } catch (error) {
       logDebug('Concert gallery failed', error.message);
@@ -601,8 +598,26 @@ function updateDebugMetrics() {
     loading.innerHTML = `
       <div style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">⚠️</div>
       <div>${message}</div>
+      <div style="margin-top: 12px;">
+        <button onclick="window.location.reload()" style="background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+          Retry
+        </button>
+      </div>
     `;
     logDebug('ERROR', message);
+  }
+
+  // Auto-refresh functionality
+  function setupAutoRefresh() {
+    logDebug('Setting up auto-refresh', `Every ${AUTO_REFRESH_INTERVAL / 60000} minutes`);
+    
+    autoRefreshTimer = setInterval(() => {
+      logDebug('Auto-refreshing concert portfolio...');
+      build();
+      updateNextRefreshIndicator();
+    }, AUTO_REFRESH_INTERVAL);
+    
+    updateNextRefreshIndicator();
   }
 
   // Lightbox functionality
@@ -635,7 +650,7 @@ function updateDebugMetrics() {
       lbGallery.appendChild(img);
     }
     
-    lbTitle.textContent = slot?.title || titleFromFolder(parts[parts.length - 1]);
+    lbTitle.textContent = slot?.title || 'Concert Photos';
     lbMeta.textContent = `${slot?.dateDisplay || 'Live'} • ${names.length} photos`;
     
     lb.classList.add('is-open');
@@ -668,9 +683,21 @@ function updateDebugMetrics() {
   });
 
   // Initialize
-  build().catch(error => {
+  build().then(() => {
+    setupAutoRefresh();
+  }).catch(error => {
     console.error('Failed to initialize concert portfolio:', error);
     showError('Failed to load concert portfolio. Please try refreshing the page.');
+  });
+
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    if (autoRefreshTimer) {
+      clearInterval(autoRefreshTimer);
+    }
+    if (nextRefreshTimer) {
+      clearInterval(nextRefreshTimer);
+    }
   });
 
 })();

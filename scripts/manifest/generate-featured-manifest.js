@@ -327,7 +327,7 @@ async function generateFeaturedManifest() {
     
     // Build enhanced featured manifest
     const featuredManifest = {
-      version: '2.0',
+      version: '2.0.0',
       type: 'featured',
       generated: new Date().toISOString(),
       generatedBy: 'enhanced-featured-manifest-generator',

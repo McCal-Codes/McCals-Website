@@ -34,7 +34,7 @@ async function generateManifestForFolder(collectionName, folderPath, tags) {
     tags,
     metadata: {
       generated: new Date().toISOString(),
-      version: '1.0'
+      version: '1.0.0'
     }
   };
   await fs.writeFile(path.join(folderPath, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf8');
@@ -72,7 +72,7 @@ async function scanAndGenerateManifests() {
   }
   // Aggregate nature-manifest.json
   const natureManifest = {
-    version: '1.0',
+    version: '1.0.0',
     generated: new Date().toISOString(),
     totalCollections: collections.length,
     collections: collections.map(({ collectionName, folderPath, totalImages, images, tags }) => ({ collectionName, folderPath, totalImages, images, tags }))
