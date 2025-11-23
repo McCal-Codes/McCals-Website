@@ -115,7 +115,6 @@ function main() {
   let lastHash = '';
   try { lastHash = sh('git rev-parse --short HEAD'); } catch { /* not a git repo */ }
 
-  const commitMsg = lastHash ? safeRead(STATE) ? JSON.parse(safeRead(STATE)).lastMessage || sh('git log -1 --pretty=%B') : sh('git log -1 --pretty=%B') : 'No VCS detected';
   const lastMessage = lastHash ? sh('git log -1 --pretty=%B') : 'No VCS detected';
   const when = lastHash ? sh('git log -1 --date=relative --pretty=%cd') : new Date().toDateString();
   const files = lastHash ? sh('git show --name-only --pretty="" HEAD').split(/\r?\n/).filter(Boolean) : [];

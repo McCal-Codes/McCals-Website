@@ -3,7 +3,7 @@
  */
 const express = require('express');
 const router = express.Router();
-const fs = require('fs').promises;
+const { promises: fs, constants: fsConstants } = require('fs');
 const path = require('path');
 
 router.get('/', (req, res) => {
@@ -32,7 +32,7 @@ router.get('/detailed', async (req, res) => {
   }
   try {
     const logsDir = path.join(process.cwd(), 'logs');
-    await fs.access(logsDir, fs.constants.W_OK);
+    await fs.access(logsDir, fsConstants.W_OK);
     checks.filesystem = 'writable';
   } catch (err) {
     checks.filesystem = 'read-only';

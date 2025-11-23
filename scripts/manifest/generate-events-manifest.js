@@ -4,7 +4,7 @@ const fsp = fs.promises;
 const path = require('path');
 
 // Import shared date parsing utilities
-const { detectDateFromFilename, extractEXIFDate } = require('../utils/shared-date-parsing.js');
+const { detectDateFromFilename } = require('../utils/shared-date-parsing.js');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
 
 // NOTE: Adjusted to include leading 'src/' so default matches repo structure

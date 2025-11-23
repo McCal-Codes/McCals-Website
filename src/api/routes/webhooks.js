@@ -9,6 +9,36 @@ const express = require('express');
 const router = express.Router();
 const cache = require('../cache/redis-client');
 
+const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+
+function requireSecret(req, res, next) {
+  // Allow missing secret in non-production for ease of local testing
+  if (!WEBHOOK_SECRET && process.env.NODE_ENV !== 'production') {
+    console.warn('⚠️  WEBHOOK_SECRET not set; allowing webhook without auth (development only)');
+    return next();
+  }
+
+  if (!WEBHOOK_SECRET) {
+    return res.status(503).json({
+      error: 'Webhook Not Configured',
+      message: 'WEBHOOK_SECRET env var is required to use webhook endpoints',
+    });
+  }
+
+  const provided = req.get('x-webhook-secret') || req.query.secret;
+  if (provided !== WEBHOOK_SECRET) {
+    return res.status(401).json({
+      error: 'Unauthorized',
+      message: 'Invalid webhook secret',
+    });
+  }
+
+  return next();
+}
+
+// Protect all webhook routes
+router.use(requireSecret);
+
 /**
  * Invalidate cache for specific manifest type
  * POST /api/v1/webhooks/invalidate/:type

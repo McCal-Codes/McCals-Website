@@ -4,7 +4,6 @@
 // Handles service account authentication for secure API calls
 
 const express = require('express');
-const { GoogleAuth } = require('google-auth-library');
 const { ImageAnnotatorClient } = require('@google-cloud/vision');
 const cors = require('cors');
 const path = require('path');

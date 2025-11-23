@@ -1,3 +1,4 @@
+/* eslint-env browser */
 // McCal Media Gallery App
 class GalleryApp {
   constructor() {
