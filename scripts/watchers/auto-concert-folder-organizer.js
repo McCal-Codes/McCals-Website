@@ -148,7 +148,7 @@ async function generateManifest(folderPath, bandName, images, concertDate) {
     images: images,
     metadata: {
       generated: new Date().toISOString(),
-      version: "1.0"
+      version: "1.0.0"
     },
     concertDate: concertDate
   };

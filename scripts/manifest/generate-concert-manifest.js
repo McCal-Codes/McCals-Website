@@ -237,7 +237,7 @@ async function generateMasterManifest() {
     processedBands.sort((a, b) => new Date(b.concertDate.iso) - new Date(a.concertDate.iso));
     
     const masterManifest = {
-      version: "1.0",
+      version: "1.0.0",
       generated: new Date().toISOString(),
       totalBands: processedBands.length,
       bands: processedBands

@@ -40,10 +40,10 @@
 ## v1.7 (2025-09-19) â€” Version Archive & Testing Suite ðŸ“‹
 ### Version Management System ðŸ› ï¸
 - **NEW**: Complete version archive system with historical implementations
-  - `versions/v1.4.html` - Performance optimized version with audio fixes
-  - `versions/v1.5.html` - Enhanced styling and mobile responsiveness  
-  - `versions/v1.6.html` - Latest stable with all features integrated
-  - `test-v1.6.html` - Testing environment for v1.6 validation
+  - `versions/v1.4.0.html` - Performance optimized version with audio fixes
+  - `versions/v1.5.0.html` - Enhanced styling and mobile responsiveness  
+  - `versions/v1.6.0.html` - Latest stable with all features integrated
+  - `test-v1.6.0.html` - Testing environment for v1.6 validation
 - **IMPROVED**: Development workflow with version tracking and testing capabilities
 - **IMPROVED**: Deployment options with multiple stable versions available
 

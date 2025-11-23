@@ -95,7 +95,7 @@ async function generateManifestForFolder(collectionName, folderPath) {
     tags,
     metadata: {
       generated: new Date().toISOString(),
-      version: '1.0'
+      version: '1.0.0'
     }
   };
   
@@ -144,7 +144,7 @@ async function scanAndGenerateManifests() {
   
   // Generate aggregated portrait-manifest.json
   const portraitManifest = {
-    version: '1.0',
+    version: '1.0.0',
     generated: new Date().toISOString(),
     totalCollections: collections.length,
     totalImages: collections.reduce((sum, c) => sum + c.totalImages, 0),

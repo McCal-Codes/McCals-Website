@@ -1,6 +1,6 @@
-<!-- Concert Portfolio v4.3 — API-Optimized (src/images path)
+<!-- Concert Portfolio v4.2 — API-Optimized
 Author: Caleb McCartney / McCal-Codes
-Version: 4.3
+Version: 4.2.0
 Purpose: Simplified concert widget with optimized API usage
 
 Features:
@@ -16,7 +16,7 @@ Requirements: Master manifest at src/images/Portfolios/Concert/concert-manifest.
 -->
 
 <style>
-  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ceadee; }
+  :root { --fg:#f5f5f5; --bg:#0a0a0a; --line:#2a2a2a; --accent:#ff4d6d; }
   @media (prefers-color-scheme: light) { :root { --fg:#0a0a0a; --bg:#fff; --line:#e5e5e5; } }
 
   .concert-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
@@ -333,7 +333,7 @@ Requirements: Master manifest at src/images/Portfolios/Concert/concert-manifest.
 </div>
 
 <!-- Version indicator -->
-<div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v4.3</div>
+<div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">v4.2</div>
 <div class="auto-refresh-indicator" id="autoRefreshIndicator">Next refresh: --</div>
 
 <!-- Changelog Modal -->
@@ -344,15 +344,7 @@ Requirements: Master manifest at src/images/Portfolios/Concert/concert-manifest.
       <button class="changelog-close" onclick="hideChangelog()">&times;</button>
     </div>
     <div class="changelog-body">
-      <div class="changelog-version">v4.3 - src/images path (Current)</div>
-      <ul class="changelog-items">
-        <li>Use src/images/ exclusively after repo reorg</li>
-        <li>Cache the selected basePath with the manifest for consistent image URLs</li>
-        <li>Fix: define nextRefreshTimer to avoid unload-time reference errors</li>
-        <li>All v4.2 optimizations retained (caching, 15-min auto-refresh, single API call)</li>
-      </ul>
-      
-      <div class="changelog-version">v4.2 - API Optimized</div>
+      <div class="changelog-version">v4.2 - API Optimized (Current)</div>
       <ul class="changelog-items">
         <li>Smart localStorage caching (10-minute duration)</li>
         <li>Intelligent 15-minute auto-refresh with tab visibility detection</li>
@@ -386,7 +378,7 @@ Requirements: Master manifest at src/images/Portfolios/Concert/concert-manifest.
 
 <!-- Debug info panel -->
 <div class="debug-info" id="debugInfo">
-  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug v4.3</div>
+  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug v4.2</div>
   <div>Status: <span id="debugStatus">Ready</span></div>
   <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
   <div>Concerts: <span id="debugConcertCount">--</span></div>
@@ -508,7 +500,7 @@ function updateNextRefreshIndicator() {
   // Debug logging
   function logDebug(message, data = null) {
     if (debugActive) {
-      console.log(`[Concert Debug v4.3] ${message}`, data || '');
+      console.log(`[Concert Debug v4.2] ${message}`, data || '');
       if (debugStatus) {
         debugStatus.textContent = message;
         updateDebugMetrics();
@@ -552,11 +544,11 @@ function updateNextRefreshIndicator() {
     }
   }
 
-  // GitHub configuration - src/images path only
+  // GitHub configuration - prefer 'images' path with fallback to 'src/images'
   const GH = { owner:'McCal-Codes', repo:'McCals-Website', branch:'main' };
   const rawBase = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
-  const BASE_PATHS = ['src/images/Portfolios/Concert/'];
-  let selectedBasePath = BASE_PATHS[0];
+  const BASE_PATHS = ['images/Portfolios/Concert/', 'src/images/Portfolios/Concert/'];
+  let selectedBasePath = BASE_PATHS[0]; // prefer 'images' by default per request
 
   function buildManifestUrl(basePath) {
     return rawBase + basePath + 'concert-manifest.json';
@@ -581,7 +573,7 @@ function updateNextRefreshIndicator() {
       }
     }
     
-    logDebug('Loading master manifest from API (src/images)...');
+    logDebug('Loading master manifest from API (with path fallback)...');
     
     let lastError = null;
     for (const basePath of BASE_PATHS) {
@@ -716,9 +708,9 @@ function updateNextRefreshIndicator() {
         card.appendChild(info);
         fragment.appendChild(card);
         
-        // Track for progressive image loading
         cards.push({ card, slot, img });
         
+        // Add lightbox click handler
         const openLightbox = () => {
           openLB(card, slot.allImages, slot);
         };

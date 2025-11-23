@@ -218,7 +218,7 @@ element.style.width = element.offsetWidth + 'px'; // Forces reflow
 - [Lighthouse Performance Scoring](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/)
 - [Core Web Vitals](https://web.dev/vitals/)
 - [PageSpeed Insights](https://pagespeed.web.dev/)
-- Concert Portfolio v4.6: `src/widgets/concert-portfolio/versions/v4.6.html`
+- Concert Portfolio v4.6: `src/widgets/concert-portfolio/versions/v4.6.0.html`
 
 ---
 

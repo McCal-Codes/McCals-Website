@@ -10,9 +10,9 @@ src/widgets/
     ├── README.md           # Widget documentation
     ├── CHANGELOG.md        # Version history
     ├── versions/           # Production-ready builds
-    │   ├── v1.0.html
-    │   ├── v1.1.html
-    │   └── v2.0.html
+    │   ├── v1.0.0.html
+    │   ├── v1.1.0.html
+    │   └── v2.0.0.html
     └── demo/               # Experiments and test harnesses
         ├── test-demo.html
         └── debug-version.html
@@ -22,7 +22,7 @@ src/widgets/
 
 ### ✅ Properly Organized Widgets
 - **Concert Portfolio** (`src/widgets/concert-portfolio/`)
-  - Latest: `v4.2.html` (API optimised, master manifest)
+  - Latest: `v4.2.0.html` (API optimised, master manifest)
   - Assets: `src/images/Portfolios/Concert/`
 - **Event Portfolio** (`src/widgets/event-portfolio/`)
   - Latest: `v1.1-manifest.html`
@@ -31,7 +31,7 @@ src/widgets/
   - Latest: `v3.0-published-tags.html`
   - Assets: `src/images/Portfolios/Journalism/`
 - **Podcast Feed** (`src/widgets/podcast-feed/`)
-  - Latest: `v1.8.html`
+  - Latest: `v1.8.0.html`
 - **About Widgets** (`src/widgets/about-widgets/`)
   - Multiple utility widgets for about pages, client carousels, etc.
 

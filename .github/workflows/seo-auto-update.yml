@@ -1,0 +1,206 @@
+name: Auto-Update SEO Assets
+
+on:
+  # Trigger when portfolio images change
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/images/Portfolios/**'
+      - 'src/api/routes/manifests.js'
+      - 'scripts/manifest/**'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force regeneration even if no changes detected'
+        required: false
+        default: 'false'
+
+jobs:
+  update-seo:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      
+      - name: Generate manifests
+        run: npm run manifest:generate
+        continue-on-error: false
+      
+      - name: Start API server
+        run: |
+          npm run api:start &
+          echo $! > api.pid
+          echo "Waiting for API to start..."
+          sleep 10
+          
+          # Verify API is running
+          curl -f http://localhost:3001/api/v1/manifests/concert || exit 1
+          echo "API is ready!"
+      
+      - name: Generate sitemap
+        run: npm run seo:sitemap
+        env:
+          API_BASE: http://localhost:3001
+          SITE_URL: https://mccalmedia.com
+      
+      - name: Generate structured data
+        run: npm run seo:schema
+        env:
+          API_BASE: http://localhost:3001
+          SITE_URL: https://mccalmedia.com
+      
+      - name: Stop API server
+        if: always()
+        run: |
+          if [ -f api.pid ]; then
+            kill $(cat api.pid) || true
+            rm api.pid
+          fi
+      
+      - name: Validate generated files
+        run: |
+          echo "Checking generated files..."
+          
+          # Check sitemap exists and is valid XML
+          if [ ! -f dist/sitemap.xml ]; then
+            echo "❌ Sitemap not generated"
+            exit 1
+          fi
+          
+          # Basic XML validation
+          if ! grep -q '<?xml version="1.0"' dist/sitemap.xml; then
+            echo "❌ Invalid sitemap XML"
+            exit 1
+          fi
+          
+          # Count URLs in sitemap
+          URL_COUNT=$(grep -c '<loc>' dist/sitemap.xml || echo "0")
+          echo "✓ Sitemap contains $URL_COUNT URLs"
+          
+          if [ "$URL_COUNT" -lt 5 ]; then
+            echo "⚠️  Warning: Sitemap has fewer than 5 URLs"
+          fi
+          
+          # Check structured data
+          if [ ! -d dist/structured-data ]; then
+            echo "❌ Structured data directory not created"
+            exit 1
+          fi
+          
+          SCHEMA_COUNT=$(find dist/structured-data -name '*.json' | wc -l)
+          echo "✓ Generated $SCHEMA_COUNT schema files"
+          
+          # Validate JSON
+          for file in dist/structured-data/*.json; do
+            if ! jq empty "$file" 2>/dev/null; then
+              echo "❌ Invalid JSON: $file"
+              exit 1
+            fi
+          done
+          
+          echo "✅ All SEO assets validated successfully"
+      
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet dist/sitemap.xml dist/structured-data/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in SEO assets"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in SEO assets"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.changes.outputs.changed == 'true' || github.event.inputs.force == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          git add dist/sitemap.xml dist/structured-data/
+          
+          # Get summary of changes
+          URL_COUNT=$(grep -c '<loc>' dist/sitemap.xml || echo "0")
+          SCHEMA_COUNT=$(find dist/structured-data -name '*.json' | wc -l)
+          
+          git commit -m "chore: update SEO assets [automated]
+
+          - Sitemap: $URL_COUNT URLs
+          - Structured data: $SCHEMA_COUNT schemas
+          - Generated: $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)
+          - Trigger: ${{ github.event_name }}"
+          
+          git push
+      
+      - name: Submit sitemap to search engines
+        if: steps.changes.outputs.changed == 'true' || github.event.inputs.force == 'true'
+        run: |
+          echo "🌐 Submitting sitemap to search engines..."
+          
+          # Google Search Console
+          curl -X GET "https://www.google.com/ping?sitemap=https://mccalmedia.com/sitemap.xml" \
+            || echo "⚠️  Google submission may have failed (this is normal if not yet verified)"
+          
+          # Note: Bing requires API key - add BING_WEBMASTER_KEY to secrets if needed
+          # curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${{ secrets.BING_WEBMASTER_KEY }}" \
+          #   -d '{"siteUrl":"https://mccalmedia.com","urlList":["https://mccalmedia.com/sitemap.xml"]}'
+          
+          echo "✅ Sitemap submission complete"
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "## SEO Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f dist/sitemap.xml ]; then
+            URL_COUNT=$(grep -c '<loc>' dist/sitemap.xml || echo "0")
+            IMG_COUNT=$(grep -c '<image:loc>' dist/sitemap.xml || echo "0")
+            echo "- ✅ **Sitemap**: $URL_COUNT URLs, $IMG_COUNT images" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ❌ **Sitemap**: Generation failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ -d dist/structured-data ]; then
+            SCHEMA_COUNT=$(find dist/structured-data -name '*.json' | wc -l)
+            echo "- ✅ **Structured Data**: $SCHEMA_COUNT schema files" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ❌ **Structured Data**: Generation failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ steps.changes.outputs.changed }}" == "true" ]; then
+            echo "- 📤 **Status**: Changes committed and pushed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ℹ️  **Status**: No changes detected" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Next Steps:**" >> $GITHUB_STEP_SUMMARY
+          echo "1. Verify sitemap at https://mccalmedia.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
+          echo "2. Test structured data: https://search.google.com/test/rich-results" >> $GITHUB_STEP_SUMMARY
+          echo "3. Monitor indexing in Google Search Console" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-assets-${{ github.sha }}
+          path: |
+            dist/sitemap.xml
+            dist/structured-data/
+          retention-days: 30

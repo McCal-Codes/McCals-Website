@@ -10,7 +10,7 @@
  *   node scripts/enhanced-manifest-generator.js --auto (processes all concert folders)
  * 
  * Author: McCal-Codes
- * Version: 1.0
+ * Version: 1.0.0
  */
 
 const fs = require('fs');
@@ -331,7 +331,7 @@ async function processDirectory(dirPath, options = {}) {
         images: files,
         metadata: {
             generated: new Date().toISOString(),
-            version: "1.0"
+            version: "1.0.0"
         }
     };
     

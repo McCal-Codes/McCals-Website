@@ -17,7 +17,7 @@
  *   node scripts/auto-concert-organizer.js --auto (processes all bands)
  * 
  * Author: McCal-Codes
- * Version: 1.0
+ * Version: 1.0.0
  */
 
 const fs = require('fs');

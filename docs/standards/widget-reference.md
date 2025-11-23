@@ -303,7 +303,7 @@ v2.0.0-redesigned-widget.html    # Major changes
 - **Portfolio**: `photojournalism-portfolio/v4.8-event-cards.html`
 - **Navigation**: `site-navigation/v1.6.3.header-injection.html`
 - **Footer**: `site-footer/v1.2.0.footer-widget.html`
-- **Content**: `podcast-feed/v1.1.html`
+- **Content**: `podcast-feed/v1.1.0.html`
 
 ### Enhancement Patterns
 - **Proven improvements**: `docs/standards/widget-standards.md`

@@ -58,7 +58,7 @@
 ```html
 <!-- Squarespace Code Block -->
 <div id="concertPf" data-panes="12">
-  <!-- Paste v2.2.html content here -->
+  <!-- Paste v2.2.0.html content here -->
 </div>
 ```
 
@@ -77,7 +77,7 @@
     <div id="concertPf"
          data-panes="24"
          data-github-ref="bbeeaf212055eb56cd342e8ff0f01729101d23fc">
-      <!-- Paste v4.7.html here -->
+      <!-- Paste v4.7.0.html here -->
     </div>
     ```
 

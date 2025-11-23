@@ -406,7 +406,7 @@ async function generateUniversalManifest() {
     const categories = [...new Set(allItems.map(item => item.category))].sort();
     
     const universalManifest = {
-      version: "1.0",
+      version: "1.0.0",
       generated: new Date().toISOString(),
       totalPortfolios: validPortfolioTypes.length,
       totalItems: allItems.length,

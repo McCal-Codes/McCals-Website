@@ -17,7 +17,7 @@
  *   npm run manifest:auto-update
  * 
  * Author: McCal-Codes
- * Version: 1.0
+ * Version: 1.0.0
  */
 
 const fs = require('fs');

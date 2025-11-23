@@ -1,43 +1,27 @@
-<!-- Featured Portfolio v1.4 – Diverse Portfolio Highlights
+<!-- Featured Portfolio v1.1 � Fresh Highlights
 Author: Caleb McCartney / McCal-Codes
-Version: 1.4
+Version: 1.1.0
 Purpose: Aggregated featured gallery showing the newest uploads across every portfolio type
 
 Features:
-- Aggregates the latest entries     logDebug('[Featured Debug v1.4]', message, data || '');
-      debugStatus.textContent = message;
-      updateDebugMetrics();
-    }
-    // Always log errors to console even without debug mode
-    if (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) {
-      console.error('[Featured Portfolio v1.4]', message, data || '');ery portfolio manifest
-- Smart diversity selection ensuring representation from all portfolio types
-- Extended date range (3 years default) to include older portfolio content
+- Aggregates the latest entries from every portfolio manifest
 - Smart caching with 15-minute TTL and auto-refresh
 - Optional manifest override via data-manifest attribute
 - Lightbox with progressive loading
-- Enhanced debug panel with portfolio type distribution
-- Improved manifest processing and path resolution
+- Debug panel for quick diagnostics
 
 Usage: Paste this entire block into a Squarespace Code Block
 Requirements: Featured manifest at src/images/Portfolios/featured-manifest.json (or override via data-manifest)
-
-Configuration Options (set on #featuredPf element):
-- data-panes="12" - Number of items to display (default: 12)
-- data-range-days="0" - Days to look back for items (0 = all items, default: 0)
-- data-force-diverse="true" - Ensure representation from all portfolio types (default: true)
-- data-manifest="path" - Override manifest URL (optional)
+Notes: Set data-manifest on #featuredPf to point at a custom manifest when needed
 
 Changelog:
-- 2025-10-03: v1.4 disabled date range filter by default, enhanced diverse selection, added debug logging
-- 2025-10-03: v1.3 added diverse selection algorithm, extended date range, better type distribution
-- 2025-10-03: v1.2 enhanced debug info, improved error handling, better manifest processing
-- 2025-10-03: v1.1 tightened manifest fallbacks, ASCII separators, refreshed cache key + debug labels
-- 2025-10-03: v1.0 initial release pooling all portfolio manifests into a featured feed
+- 2025-10-03: v1.1 tightened manifest fallbacks, ASCII separators, refreshed cache key + debug labels.
+- 2025-10-03: v1.0 initial release pooling all portfolio manifests into a featured feed.
 
 Next Steps:
-- Generated featured-manifest.json now available via generate-featured-manifest.js script
-- Confirm each portfolio manifest lists image paths relative to src/images/Portfolios to match the loader
+- Publish updated manifests (including featured-manifest.json) whenever new images land so cards resolve.
+- Confirm each portfolio manifest lists image paths relative to src/images/Portfolios to match the loader.
+- Consider automation that regenerates featured-manifest.json during deploy to prevent stale data.
 -->
 
 <style>
@@ -147,7 +131,7 @@ Next Steps:
   }
 </style>
 
-<div class="featured-portfolio" id="featuredPf" data-panes="12" data-range-days="0" data-force-diverse="true">
+<div class="featured-portfolio" id="featuredPf" data-panes="12">
   <div class="featured-header">
     <h2 class="featured-heading">Featured Highlights</h2>
     <p class="featured-subhead">Latest additions across every portfolio collection.</p>
@@ -167,12 +151,12 @@ Next Steps:
   <div class="featured-grid" id="featuredGrid" aria-live="polite"></div>
 
   <div class="auto-refresh-indicator" id="autoRefreshIndicator" aria-hidden="true"></div>
-  <div class="version-indicator" id="versionIndicator" title="Featured Portfolio v1.4">Featured v1.4</div>
+  <div class="version-indicator" id="versionIndicator" title="Featured Portfolio v1.1">Featured v1.1</div>
 </div>
 
 <button class="debug-toggle" id="debugToggle" type="button">Toggle Featured Debug</button>
 <div class="debug-info" id="debugInfo">
-  <h4>Featured Debug v1.4</h4>
+  <h4>Featured Debug v1.1</h4>
   <div id="debugStatus">Initializing�</div>
   <dl>
     <dt>Load time</dt><dd><span id="debugLoadTime">--</span> ms</dd>
@@ -221,12 +205,11 @@ Next Steps:
 
   const AUTO_REFRESH_INTERVAL = 15 * 60 * 1000;
   const CACHE_TTL = 15 * 60 * 1000;
-  const CACHE_KEY_PREFIX = 'featured-portfolio-cache:v1.4:';
+  const CACHE_KEY_PREFIX = 'featured-portfolio-cache:v1.1:';
   const MAX_LIGHTBOX_IMAGES = Math.max(1, parseInt(pf.dataset.lightboxLimit || '24', 10));
   const TARGET_PANES = Math.max(1, parseInt(pf.dataset.panes || '12', 10));
-  const rangeDaysRaw = parseInt(pf.dataset.rangeDays || '0', 10); // Default to 0 (no limit) to show all items
-  const RANGE_DAYS = Number.isFinite(rangeDaysRaw) ? rangeDaysRaw : 0;
-  const FORCE_DIVERSE = (pf.dataset.forceDiverse || 'true').toLowerCase() === 'true';
+  const rangeDaysRaw = parseInt(pf.dataset.rangeDays || '365', 10);
+  const RANGE_DAYS = Number.isFinite(rangeDaysRaw) ? rangeDaysRaw : 365;
   const CARDS_STAGGER = 100;
 
   const debugMetrics = {
@@ -263,13 +246,9 @@ Next Steps:
 
   function logDebug(message, data = null) {
     if (debugActive) {
-      console.log('[Featured Debug v1.2]', message, data || '');
+      console.log('[Featured Debug v1.1]', message, data || '');
       debugStatus.textContent = message;
       updateDebugMetrics();
-    }
-    // Always log errors to console even without debug mode
-    if (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) {
-      console.error('[Featured Portfolio v1.2]', message, data || '');
     }
   }
 
@@ -563,101 +542,10 @@ Next Steps:
   }
 
   function applyRangeFilter(items) {
-    if (!Number.isFinite(RANGE_DAYS) || RANGE_DAYS <= 0) {
-      logDebug('Range filter disabled - showing all items');
-      return items;
-    }
-    
+    if (!Number.isFinite(RANGE_DAYS) || RANGE_DAYS <= 0) return items;
     const cutoff = Date.now() - RANGE_DAYS * 24 * 60 * 60 * 1000;
-    const cutoffDate = new Date(cutoff);
-    
-    logDebug(`Date filter: looking back ${RANGE_DAYS} days from ${new Date().toISOString()}`);
-    logDebug(`Cutoff date: ${cutoffDate.toISOString()}`);
-    
-    // Debug: log each item's date
-    items.forEach(item => {
-      const itemDate = new Date(item.dateValue);
-      const isIncluded = item.dateValue >= cutoff;
-      logDebug(`Item "${item.title}" (${item.type}): ${itemDate.toISOString()} - ${isIncluded ? 'INCLUDED' : 'EXCLUDED'}`);
-    });
-    
     const filtered = items.filter(item => item.dateValue >= cutoff);
-    logDebug(`Range filter: ${items.length} items -> ${filtered.length} items after filtering`);
-    
     return filtered.length ? filtered : items;
-  }
-
-  function ensureDiverseSelection(items, targetCount) {
-    if (items.length <= targetCount) return items;
-    
-    // Group items by type
-    const byType = {};
-    items.forEach(item => {
-      const type = canonicalizeType(item.type);
-      if (!byType[type]) byType[type] = [];
-      byType[type].push(item);
-    });
-    
-    const types = Object.keys(byType);
-    logDebug(`Portfolio types available: ${types.join(', ')}`);
-    
-    if (types.length <= 1) {
-      // If only one type, just return the newest items
-      return items.slice(0, targetCount);
-    }
-    
-    const result = [];
-    
-    // Calculate slots per type - ensure each type gets at least 2 items if possible
-    const minPerType = Math.max(1, Math.floor(targetCount / types.length));
-    const maxPerType = Math.min(targetCount - types.length + 1, Math.ceil(targetCount / types.length * 1.5));
-    
-    logDebug(`Diversity algorithm: ${minPerType}-${maxPerType} items per type for ${types.length} types`);
-    
-    // Round-robin selection to ensure diversity
-    let remainingSlots = targetCount;
-    let round = 0;
-    
-    while (remainingSlots > 0 && round < 10) { // Safety limit
-      let addedThisRound = 0;
-      
-      for (const type of types) {
-        if (remainingSlots <= 0) break;
-        
-        const typeItems = byType[type];
-        const alreadySelected = result.filter(item => canonicalizeType(item.type) === type).length;
-        
-        // Don't exceed maxPerType, but ensure minPerType
-        if (alreadySelected < minPerType || (round === 0 && alreadySelected < maxPerType)) {
-          const nextItem = typeItems[alreadySelected];
-          if (nextItem) {
-            result.push(nextItem);
-            remainingSlots--;
-            addedThisRound++;
-          }
-        }
-      }
-      
-      // If we didn't add any items this round, fill remaining with newest overall
-      if (addedThisRound === 0) {
-        const remainingItems = items.filter(item => !result.includes(item));
-        result.push(...remainingItems.slice(0, remainingSlots));
-        break;
-      }
-      
-      round++;
-    }
-    
-    // Log the final distribution
-    const finalDistribution = {};
-    result.forEach(item => {
-      const type = canonicalizeType(item.type);
-      finalDistribution[type] = (finalDistribution[type] || 0) + 1;
-    });
-    logDebug('Final portfolio distribution:', finalDistribution);
-    
-    // Final sort by date (newest first)
-    return result.sort((a, b) => b.dateValue - a.dateValue);
   }
 
   function renderEmpty() {
@@ -688,8 +576,7 @@ Next Steps:
       grid.style.display = 'none';
       grid.classList.remove('loaded');
       grid.innerHTML = '';
-      debugStatus.textContent = 'Fetching manifests…';
-      console.log('[Featured Portfolio v1.4] Starting manifest load, candidates:', manifestSources);
+      debugStatus.textContent = 'Fetching manifests�';
 
       const aggregated = [];
       const manifestDetails = [];
@@ -724,7 +611,6 @@ Next Steps:
           logDebug('Loaded manifest segment', { url, count: normalized.length });
         } catch (error) {
           errors.push({ url, error });
-          logDebug(`Failed to load manifest: ${error.message}`, { url, error: error.message });
         }
       }
 
@@ -741,12 +627,8 @@ Next Steps:
 
       const deduped = dedupeItems(aggregated);
       const sorted = deduped.sort((a, b) => b.dateValue - a.dateValue);
-      
-      // Apply range filter 
       const ranged = applyRangeFilter(sorted);
-      
-      // Use diverse selection if enabled, otherwise just take the newest items
-      const slots = FORCE_DIVERSE ? ensureDiverseSelection(ranged, TARGET_PANES) : ranged.slice(0, TARGET_PANES);
+      const slots = ranged.slice(0, TARGET_PANES);
 
       if (!slots.length) {
         renderEmpty();
@@ -757,14 +639,6 @@ Next Steps:
       debugMetrics.imageCount = slots.reduce((acc, item) => acc + item.images.length, 0);
       debugMetrics.lastRefresh = new Date().toLocaleTimeString();
       debugMetrics.manifest = activeManifestUrl || '--';
-      
-      // Log portfolio type distribution for debugging
-      const typeDistribution = {};
-      slots.forEach(item => {
-        const type = item.type || 'portfolio';
-        typeDistribution[type] = (typeDistribution[type] || 0) + 1;
-      });
-      logDebug('Portfolio type distribution', typeDistribution);
 
       metaCount.textContent = String(slots.length);
       metaUpdated.textContent = manifestSummary || debugMetrics.lastRefresh;
@@ -965,7 +839,7 @@ Next Steps:
   }
 
   versionIndicator.addEventListener('click', () => {
-    alert(`Featured Portfolio v1.4\nActive manifest(s): ${debugMetrics.manifest}`);
+    alert(`Featured Portfolio v1.1\nActive manifest(s): ${debugMetrics.manifest}`);
   });
 
   loadAndRender();

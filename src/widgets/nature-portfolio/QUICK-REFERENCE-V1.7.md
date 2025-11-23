@@ -35,7 +35,7 @@
 ```bash
 # 1. Open test file
 cd src/widgets/nature-portfolio
-# Open test-v1.7.html in browser
+# Open test-v1.7.0.html in browser
 
 # 2. Verify filters work
 ✓ Click "All" - should show all photos

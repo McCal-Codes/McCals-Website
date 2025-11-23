@@ -13,6 +13,11 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '../..');
+const REQUIRED_DOCS = [
+  { key: 'copilot', file: path.join(ROOT, '.github', 'copilot-instructions.md'), title: 'Copilot instructions' },
+  { key: 'codex', file: path.join(ROOT, '.github', 'codex-instructions.md'), title: 'Codex instructions' },
+  { key: 'canvas', file: path.join(ROOT, '.github', 'canvas-instructions.md'), title: 'Canvas instructions' }
+];
 
 // Dynamically discover instruction files in .github to avoid hardcoding and
 // to make the preflight tolerant to new/renamed instruction docs.
@@ -112,18 +117,56 @@ function summarizeDoc(key, title, content) {
     return [];
   };
 
-  sections.purpose = tryHeading(['purpose', 'purpose and scope', 'purpose and scope:'], isShort ? 1 : 3);
-  sections.workflow = tryHeading(['images and manifests pipeline (critical)', 'images and manifests pipeline', 'run/build/deploy workflows', 'local workflow (short)'], isShort ? 1 : 3);
-  sections.ci = tryHeading(['ci automation', 'ci & health', 'ci & health'], isShort ? 1 : 3);
+  const limitShort = isShort ? 1 : 3;
+  sections.purpose = tryHeading(['purpose', 'purpose and scope', 'purpose and scope:'], limitShort);
+  sections.workflow = tryHeading(['images and manifests pipeline (critical)', 'images and manifests pipeline', 'run/build/deploy workflows', 'local workflow (short)'], limitShort);
+  sections.ci = tryHeading(['ci automation', 'ci & health', 'ci & health'], limitShort);
   sections.authoring = tryHeading(['widget authoring conventions', 'golden rules', 'widgets'], isShort ? 1 : 2);
 
-  return { key, title, sections };
+  const norms = [
+    ...tryHeading(['key rules', 'safe-change checklist for agents', 'safe-change checklist'], isShort ? 4 : 6),
+    ...tryHeading(['codex summary', 'agent responsibilities'], isShort ? 2 : 3)
+  ].slice(0, isShort ? 6 : 8);
+
+  const checklist = tryHeading(['pre-call checklist', 'pre-call checklist (30–60 seconds)', 'safe-change checklist for agents', 'new task checklist'], isShort ? 4 : 7);
+
+  return { key, title, sections, norms, checklist };
 }
 
-function formatPretty(results) {
+function dedupe(list) {
+  const seen = new Set();
+  const out = [];
+  for (const item of list) {
+    const trimmed = (item || '').trim();
+    if (!trimmed || seen.has(trimmed.toLowerCase())) continue;
+    seen.add(trimmed.toLowerCase());
+    out.push(trimmed);
+  }
+  return out;
+}
+
+function formatPretty(results, meta) {
   const lines = [];
   lines.push('🔎 AI Instructions Preflight Summary');
   lines.push('');
+  if (meta.missingRequired && meta.missingRequired.length) {
+    lines.push('Required instructions missing:');
+    meta.missingRequired.forEach(m => lines.push(`- ❌ ${m.title} (${m.file})`));
+    lines.push('');
+  }
+
+  if (meta.repoNorms && meta.repoNorms.length) {
+    lines.push('Repo norms (top signals):');
+    meta.repoNorms.forEach(n => lines.push(`- ${n}`));
+    lines.push('');
+  }
+
+  if (meta.checklist && meta.checklist.length) {
+    lines.push('New task checklist:');
+    meta.checklist.forEach(c => lines.push(`- ${c}`));
+    lines.push('');
+  }
+
   for (const r of results) {
     lines.push(`## ${r.title}`);
     if (r.error) {
@@ -141,6 +184,10 @@ function formatPretty(results) {
         bullets.forEach(b => lines.push(`    • ${b}`));
       }
     }
+    if (r.summary && r.summary.norms && r.summary.norms.length && !isShort) {
+      lines.push(`- Norms sample:`);
+      r.summary.norms.forEach(n => lines.push(`  • ${n}`));
+    }
     lines.push('');
   }
   return lines.join('\n');
@@ -151,11 +198,11 @@ function main() {
   for (const doc of DOCS) {
     const info = readFileSafe(doc.file);
     if (!info.ok) {
-      outputs.push({ key: doc.key, title: doc.title, error: info.error });
+      outputs.push({ key: doc.key, title: doc.title, file: doc.file, error: info.error });
       continue;
     }
     const summary = summarizeDoc(doc.key, doc.title, info.content);
-    outputs.push({ key: doc.key, title: doc.title, mtime: info.mtime, size: info.size, summary });
+    outputs.push({ key: doc.key, title: doc.title, file: doc.file, mtime: info.mtime, size: info.size, summary });
   }
 
   // If --changed is provided, only show docs with newer mtimes than cache
@@ -172,10 +219,32 @@ function main() {
     return !prev || new Date(o.mtime) > prev;
   }) : outputs;
 
+  const missingRequired = REQUIRED_DOCS.filter(req => {
+    const matching = outputs.find(o => o.file && path.resolve(o.file) === path.resolve(req.file));
+    if (!fs.existsSync(req.file)) return true;
+    if (matching && matching.error) return true;
+    return false;
+  }).map(r => ({ key: r.key, file: r.file, title: r.title }));
+  const repoNorms = dedupe(outputs.flatMap(o => (o.summary && o.summary.norms) || [])).slice(0, isShort ? 6 : 10);
+  const checklistSeeds = outputs
+    .flatMap(o => (o.summary && o.summary.checklist) || [])
+    .map(item => item.replace(/\s*[:：]\s*$/, ''))
+    .filter(item => item.toLowerCase() !== 'locate the definitive source');
+  const defaultChecklist = [
+    'Read .github/copilot-instructions.md and .github/codex-instructions.md before editing.',
+    'If touching widgets, open the widget README and add a new version file instead of overwriting.',
+    'Do not edit generated dist/** or manifest.json files by hand; rerun manifest generators.',
+    'If images/manifests change: run npm run manifest:generate or the targeted manifest script.',
+    'Plan the minimal validation (lint/tests or widget preview) and mention what you ran.'
+  ];
+  const checklist = dedupe([...defaultChecklist, ...checklistSeeds]).slice(0, isShort ? 6 : 9);
+
+  const meta = { missingRequired, repoNorms, checklist };
+
   if (isJSON) {
-    console.log(JSON.stringify(toReport, null, 2));
+    console.log(JSON.stringify({ docs: toReport, meta }, null, 2));
   } else {
-    console.log(formatPretty(toReport));
+    console.log(formatPretty(toReport, meta));
   }
 
   // update cache mtimes for next run

@@ -1,16 +1,16 @@
-<!-- Concert Portfolio v3.1 — Debug with Fixed Lightbox Close Button
+<!-- Concert Portfolio v3.3 — Simple Subfolder Support
 Author: Caleb McCartney / McCal-Codes
-Version: 3.1
-Purpose: Debug version with proper lightbox close button positioning
+Version: 3.3.0
+Purpose: Simple version that looks in subfolders and uses subfolder names as dates
 
 Features:
-- Debug panel with performance metrics
-- Lightbox with properly positioned close button (on image frame, not viewport)
-- Click/keyboard navigation support
-- Mobile responsive design
+- Looks in Band Name/Month Year/ subfolders for images
+- Uses subfolder names (e.g., "December 2024") as the concert date display
+- Simple and reliable GitHub API access
+- Debug panel for troubleshooting
 
 Usage: Paste this entire block into a Squarespace Code Block
-GitHub Structure: images/Portfolios/Concert/[Band-Name]/[image files]
+GitHub Structure: images/Portfolios/Concert/[Band-Name]/[Month Year]/[image files]
 -->
 
 <style>
@@ -203,7 +203,7 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[image files]
 </style>
 
 <div class="concert-portfolio" id="concertPf" data-panes="12">
-  <h2 class="concert-heading">Concert Portfolio v3.1 (Debug)</h2>
+  <h2 class="concert-heading">Concert Portfolio v3.3</h2>
   
   <div class="concert-loading" id="concertLoading">
     <div class="concert-spinner"></div>
@@ -230,7 +230,7 @@ GitHub Structure: images/Portfolios/Concert/[Band-Name]/[image files]
 
 <!-- Debug info panel -->
 <div class="debug-info" id="debugInfo">
-  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug</div>
+  <div style="margin-bottom: 8px; color: var(--accent); font-weight: 700;">🎸 Concert Debug v3.3</div>
   <div>Status: <span id="debugStatus">Ready</span></div>
   <div>Load Time: <span id="debugLoadTime">--</span>ms</div>
   <div>Concerts: <span id="debugConcertCount">--</span></div>
@@ -268,7 +268,6 @@ function updateDebugMetrics() {
 }
 
 (function() {
-  const YEAR = new Date().getFullYear();
   const pf = document.getElementById('concertPf');
   const grid = document.getElementById('concertGrid');
   const loading = document.getElementById('concertLoading');
@@ -281,7 +280,7 @@ function updateDebugMetrics() {
   // Debug logging
   function logDebug(message, data = null) {
     if (debugActive) {
-      console.log(`[Concert Debug] ${message}`, data || '');
+      console.log(`[Concert Debug v3.3] ${message}`, data || '');
       if (debugStatus) {
         debugStatus.textContent = message;
         updateDebugMetrics();
@@ -348,41 +347,56 @@ function updateDebugMetrics() {
     return decodeURIComponent(name).replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
   }
 
-  // Process band albums
+  // Process band albums - NEW: Look in subfolders and use subfolder names as dates
   async function processBandAlbum(bandName) {
     const band = GH.base.concat([bandName]);
     logDebug(`Processing band: ${bandName}`, band.join('/'));
     
     try {
-      // Try direct files
+      // Get subfolders in the band directory
       const items = await ghList(band);
       logDebug(`Found ${items.length} items in ${bandName}`);
       
-      const files = items.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
-      logDebug(`Found ${files.length} image files`, files.slice(0, 3));
+      const subfolders = items.filter(it => it.type === 'dir');
+      logDebug(`Found ${subfolders.length} subfolders`, subfolders.map(s => s.name));
       
-      if (files.length) {
-        return { parts: band, list: files };
-      }
-
-      // Try subfolders
-      const subs = items.filter(it => it.type === 'dir');
-      logDebug(`Found ${subs.length} subdirectories`, subs.map(s => s.name));
-      
-      for (const sub of subs.slice(0, 3)) { // Limit subfolder checking
+      // Look for images in subfolders
+      for (const subfolder of subfolders) {
         try {
-          const subParts = band.concat([sub.name]);
+          const subParts = band.concat([subfolder.name]);
           const subItems = await ghList(subParts);
           const subFiles = subItems.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
           
           if (subFiles.length > 0) {
-            logDebug(`Found ${subFiles.length} images in subfolder ${sub.name}`);
-            return { parts: subParts, list: subFiles };
+            logDebug(`Found ${subFiles.length} images in ${bandName}/${subfolder.name}`);
+            
+            // Use subfolder name as the date display (e.g., "December 2024")
+            const dateDisplay = titleFromFolder(subfolder.name);
+            
+            return { 
+              parts: subParts, 
+              list: subFiles,
+              bandName: bandName,
+              dateDisplay: dateDisplay // This will be used instead of "Live • 2025"
+            };
           }
         } catch (subError) {
-          logDebug(`Subfolder ${sub.name} failed`, subError.message);
+          logDebug(`Subfolder ${subfolder.name} failed`, subError.message);
         }
       }
+      
+      // Fallback: try direct files in band folder (shouldn't happen with new structure)
+      const files = items.filter(it => it.type === 'file' && EXT_RX.test(it.name)).map(it => it.name);
+      if (files.length) {
+        logDebug(`Found ${files.length} direct image files in ${bandName}`);
+        return { 
+          parts: band, 
+          list: files,
+          bandName: bandName,
+          dateDisplay: `Live • ${new Date().getFullYear()}`
+        };
+      }
+      
     } catch (error) {
       logDebug(`Failed to process ${bandName}`, error.message);
     }
@@ -411,9 +425,9 @@ function updateDebugMetrics() {
         return;
       }
 
-      // Process bands in batches - limit for debugging
+      // Process bands in batches
       const shuffledBands = shuffle(bands).slice(0, Math.min(6, bands.length));
-      logDebug(`Processing ${shuffledBands.length} bands for debugging`, shuffledBands);
+      logDebug(`Processing ${shuffledBands.length} bands`, shuffledBands);
       
       const pools = [];
       
@@ -425,11 +439,12 @@ function updateDebugMetrics() {
             pools.push({
               dir: result.parts.join('/'),
               parts: result.parts,
-              title: titleFromFolder(band),
+              title: titleFromFolder(result.bandName),
+              dateDisplay: result.dateDisplay, // NEW: Store the date display
               images,
               allImages: result.list.slice()
             });
-            logDebug(`Added pool for ${band}`, `${images.length} images`);
+            logDebug(`Added pool for ${band}`, `${images.length} images, date: ${result.dateDisplay}`);
           }
         } catch (error) {
           logDebug(`Failed to process band ${band}`, error.message);
@@ -457,6 +472,7 @@ function updateDebugMetrics() {
               dir: pool.dir,
               parts: pool.parts,
               title: pool.title,
+              dateDisplay: pool.dateDisplay, // NEW: Pass along the date display
               thumb: fname,
               allImages: pool.allImages
             });
@@ -488,7 +504,7 @@ function updateDebugMetrics() {
         info.className = 'concert-info';
         info.innerHTML = `
           <h3 class="concert-title">${slot.title}</h3>
-          <p class="concert-meta">Live • ${YEAR}</p>
+          <p class="concert-meta">${slot.dateDisplay}</p>
         `;
 
         card.appendChild(img);
@@ -499,7 +515,7 @@ function updateDebugMetrics() {
         
         // Add lightbox click handler
         const openLightbox = () => {
-          openLB(card, slot.allImages);
+          openLB(card, slot.allImages, slot);
         };
         
         card.addEventListener('click', openLightbox);
@@ -597,7 +613,7 @@ function updateDebugMetrics() {
   const lbMeta = document.getElementById('clLbMeta');
   const lbClose = lb.querySelector('.cl-close');
 
-  function openLB(card, imageNames) {
+  function openLB(card, imageNames, slot) {
     const parts = card.dataset.dir.split('/').filter(Boolean);
     const names = Array.isArray(imageNames) ? imageNames : [];
     
@@ -609,69 +625,52 @@ function updateDebugMetrics() {
       img.decoding = 'async';
       img.alt = `Concert photo: ${fname}`;
       img.src = rawUrl(parts.concat([fname])) + '?v=' + Date.now();
+      img.className = 'loading';
+      
+      img.addEventListener('load', () => {
+        img.classList.remove('loading');
+        img.classList.add('loaded');
+      });
+      
       lbGallery.appendChild(img);
     }
     
-    lbTitle.textContent = titleFromFolder(parts[parts.length - 1]);
-    lbMeta.textContent = `Live • ${new Date().getFullYear()}`;
+    lbTitle.textContent = slot?.title || titleFromFolder(parts[parts.length - 1]);
+    lbMeta.textContent = `${slot?.dateDisplay || 'Live'} • ${names.length} photos`;
     
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
     document.documentElement.classList.add('lb-open');
-    setTimeout(() => lbDialog.focus(), 0);
+    lbDialog.focus();
     
-    logDebug(`Opened lightbox with ${names.length} images`);
+    // Fade hint after delay
+    const hint = lbGallery.querySelector('.cl-hint');
+    if (hint && names.length > 1) {
+      setTimeout(() => hint.classList.add('fade'), 3000);
+    }
   }
 
   function closeLB() {
     lb.classList.remove('is-open');
     lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
     document.documentElement.classList.remove('lb-open');
-    lbGallery.innerHTML = '';
-    logDebug('Closed lightbox');
   }
 
   // Lightbox event handlers
   lbClose.addEventListener('click', closeLB);
   lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+  
   document.addEventListener('keydown', e => {
-    if (lb.classList.contains('is-open') && e.key === 'Escape') closeLB();
+    if (lb.classList.contains('is-open') && e.key === 'Escape') {
+      e.preventDefault();
+      closeLB();
+    }
   });
 
-  // Lightbox scroll hint + navigation
-  (function setupLightboxControls() {
-    const scroller = lbGallery;
-    
-    const hideHint = () => {
-      const hint = scroller.querySelector('.cl-hint');
-      if (hint) hint.classList.add('fade');
-      scroller.removeEventListener('scroll', hideHint);
-    };
-    
-    scroller.addEventListener('scroll', hideHint, { passive: true });
-    
-    document.addEventListener('keydown', (e) => {
-      if (!lb.classList.contains('is-open')) return;
-      
-      const step = Math.round(window.innerHeight * 0.9);
-      if (e.key === 'ArrowDown' || e.key === 'j') {
-        e.preventDefault();
-        scroller.scrollBy({ top: step, behavior: 'smooth' });
-      }
-      if (e.key === 'ArrowUp' || e.key === 'k') {
-        e.preventDefault();
-        scroller.scrollBy({ top: -step, behavior: 'smooth' });
-      }
-    });
-  })();
-
   // Initialize
-  logDebug('Initializing concert portfolio...');
-  build().catch(err => {
-    console.error('Concert portfolio failed:', err);
-    showError(`Failed to initialize portfolio: ${err.message}`);
+  build().catch(error => {
+    console.error('Failed to initialize concert portfolio:', error);
+    showError('Failed to load concert portfolio. Please try refreshing the page.');
   });
 
 })();

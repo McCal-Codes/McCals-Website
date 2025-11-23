@@ -27,7 +27,7 @@
 - [ ] **Font Optimization**: Use system fonts, avoid loading delays
 - [ ] **Lighthouse Validation**: Score 90+ before release
 
-**Reference Implementation**: `src/widgets/concert-portfolio/versions/v4.6.html`
+**Reference Implementation**: `src/widgets/concert-portfolio/versions/v4.6.0.html`
 
 ---
 

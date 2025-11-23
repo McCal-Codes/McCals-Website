@@ -1,0 +1,103 @@
+name: Publish Manifests to CDN
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_suffix:
+        description: 'Optional tag suffix (default: YYYYMMDDHHMM)'
+        required: false
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/images/Portfolios/**'
+      - 'scripts/manifest/**'
+      - 'scripts/utils/**manifest**'
+      - 'scripts/seo/generate-structured-data.js'
+      - 'scripts/seo/generate-sitemap.js'
+      - '.github/workflows/publish-manifests-cdn.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline
+
+      - name: Generate manifests
+        run: npm run manifest:generate
+
+      - name: Detect manifest changes
+        id: diff
+        run: |
+          if git status --porcelain -- src/images/Portfolios | grep -q .; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create manifest branch
+        if: steps.diff.outputs.has_changes == 'true'
+        run: |
+          git switch -C manifests-cdn
+
+      - name: Commit manifest updates
+        if: steps.diff.outputs.has_changes == 'true'
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          FILES=$(find src/images/Portfolios -name '*.json' -type f -print)
+          if [ -z "$FILES" ]; then
+            echo "has_commit=false" >> $GITHUB_OUTPUT
+            echo "No manifest files found to commit."
+            exit 0
+          fi
+          git add $FILES
+          if git diff --cached --quiet; then
+            echo "has_commit=false" >> $GITHUB_OUTPUT
+            echo "No staged changes after add; skipping commit."
+            exit 0
+          fi
+          git commit -m "chore: publish manifests for CDN"
+          echo "has_commit=true" >> $GITHUB_OUTPUT
+
+      - name: Tag release
+        if: steps.diff.outputs.has_changes == 'true' && steps.commit.outputs.has_commit == 'true'
+        id: tagging
+        run: |
+          TAG_INPUT="${{ github.event.inputs.tag_suffix }}"
+          TS=$(date +%Y%m%d%H%M)
+          TAG="manifests-${TAG_INPUT:-$TS}"
+          echo "tag_name=$TAG" >> $GITHUB_OUTPUT
+          git tag -a "$TAG" -m "Manifest publish $TAG"
+
+      - name: Push branch and tag
+        if: steps.diff.outputs.has_changes == 'true' && steps.commit.outputs.has_commit == 'true'
+        run: |
+          git push --force origin manifests-cdn
+          git push origin ${{ steps.tagging.outputs.tag_name }}
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.diff.outputs.has_changes }}" != "true" ]; then
+            echo "No manifest changes detected; nothing to publish."
+          elif [ "${{ steps.commit.outputs.has_commit }}" != "true" ]; then
+            echo "Changes detected but nothing staged/committed; no publish."
+          else
+            echo "Published branch: manifests-cdn"
+            echo "Tag: ${{ steps.tagging.outputs.tag_name }}"
+            echo "jsDelivr base: https://cdn.jsdelivr.net/gh/${{ github.repository }}@${{ steps.tagging.outputs.tag_name }}/src/images/Portfolios/"
+          fi
