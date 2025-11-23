@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: mccal-api
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - API_PORT=3001
+      - CACHE_TTL_MINUTES=60
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: mccal-redis
+    ports:
+      - "6379:6379"
+    restart: always
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    volumes:
+      - redis-data:/data
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: mccal-redisinsight
+    ports:
+      - "8001:5540"
+    restart: always
+    volumes:
+      - redisinsight-data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  redis-data:
+    driver: local
+  redisinsight-data:
+    driver: local

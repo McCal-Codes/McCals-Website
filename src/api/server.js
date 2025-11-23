@@ -11,6 +11,11 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const compression = require('compression');
+const etag = require('etag');
+
+// Import cache client
+const cache = require('./cache/redis-client');
 
 // Import route modules
 const healthRoutes = require('./routes/health');
@@ -59,6 +64,7 @@ const app = express();
 
 // Middleware
 app.use(cors(corsOptions));
+app.use(compression({ threshold: 1024 })); // Compress responses > 1KB
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -123,36 +129,79 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Cache warming function
+async function warmCache() {
+  const manifestTypes = ['concert', 'events', 'journalism', 'nature', 'portrait', 'featured', 'universal'];
+  console.log('🔥 Warming cache with all manifests... - server.js:125');
+  
+  const fs = require('fs').promises;
+  const manifestPaths = {
+    concert: 'Concert/concert-manifest.json',
+    events: 'Events/events-manifest.json',
+    journalism: 'Journalism/journalism-manifest.json',
+    nature: 'Nature/nature-manifest.json',
+    portrait: 'Portrait/portrait-manifest.json',
+    featured: 'featured-manifest.json',
+    universal: 'portfolio-manifest.json',
+  };
+  
+  let warmedCount = 0;
+  for (const type of manifestTypes) {
+    try {
+      const manifestPath = manifestPaths[type];
+      const fullPath = path.join(process.cwd(), 'src', 'images', 'Portfolios', manifestPath);
+      const data = await fs.readFile(fullPath, 'utf8');
+      const manifest = JSON.parse(data);
+      await cache.set(`manifest:${type}`, manifest);
+      warmedCount++;
+    } catch (err) {
+      console.warn(`⚠️  Failed to warm cache for ${type}: ${err.message}`);
+    }
+  }
+  
+  console.log(`✅ Cache warmed: ${warmedCount}/${manifestTypes.length} manifests loaded - server.js:150`);
+}
+
 // Start server
-const server = app.listen(PORT, () => {
-  console.log('\n╔════════════════════════════════════════════════════════╗ - server.js:123');
-  console.log('║          McCal Media API Server                        ║ - server.js:124');
-  console.log('╚════════════════════════════════════════════════════════╝ - server.js:125');
-  console.log(`\n🚀 Server running in ${NODE_ENV} mode - server.js:126`);
-  console.log(`📡 API listening on: http://localhost:${PORT} - server.js:127`);
-  console.log(`🔗 Root endpoint: http://localhost:${PORT}/ - server.js:128`);
-  console.log(`💚 Health check: http://localhost:${PORT}/api/health\n - server.js:129`);
-  console.log('Available routes: - server.js:130');
-  console.log('GET  /api/health              Health check (alias) - server.js:131');
-  console.log('GET  /api/v1/health           Health check (v1) - server.js:132');
-  console.log('GET  /api/v1/manifests        List all manifests - server.js:133');
-  console.log('GET  /api/v1/manifests/:type  Get specific manifest\n - server.js:134');
-  console.log('Press Ctrl+C to stop\n - server.js:135');
+const server = app.listen(PORT, async () => {
+  console.log('\n╔════════════════════════════════════════════════════════╗ - server.js:154');
+  console.log('║          McCal Media API Server                        ║ - server.js:155');
+  console.log('╚════════════════════════════════════════════════════════╝ - server.js:156');
+  console.log(`\n🚀 Server running in ${NODE_ENV} mode - server.js:157`);
+  
+  // Initialize Redis cache
+  console.log('🔄 Connecting to Redis cache... - server.js:160');
+  await cache.connect();
+  
+  // Warm the cache on startup
+  await warmCache();
+  
+  console.log(`📡 API listening on: http://localhost:${PORT} - server.js:165`);
+  console.log(`🔗 Root endpoint: http://localhost:${PORT}/ - server.js:166`);
+  console.log(`💚 Health check: http://localhost:${PORT}/api/health\n - server.js:167`);
+  console.log('Available routes: - server.js:168');
+  console.log('GET  /api/health              Health check (alias) - server.js:169');
+  console.log('GET  /api/v1/health           Health check (v1) - server.js:170');
+  console.log('GET  /api/v1/manifests        List all manifests - server.js:171');
+  console.log('GET  /api/v1/manifests/:type  Get specific manifest\n - server.js:172');
+  console.log('Press Ctrl+C to stop\n - server.js:173');
 });
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('\n⚠️  SIGTERM signal received: closing HTTP server - server.js:139');
+process.on('SIGTERM', async () => {
+  console.log('\n⚠️  SIGTERM signal received: closing HTTP server - server.js:144');
+  await cache.disconnect();
   server.close(() => {
-    console.log('✅ HTTP server closed - server.js:141');
+    console.log('✅ HTTP server closed - server.js:147');
     process.exit(0);
   });
 });
 
-process.on('SIGINT', () => {
-  console.log('\n⚠️  SIGINT signal received: closing HTTP server - server.js:147');
+process.on('SIGINT', async () => {
+  console.log('\n⚠️  SIGINT signal received: closing HTTP server - server.js:152');
+  await cache.disconnect();
   server.close(() => {
-    console.log('✅ HTTP server closed - server.js:149');
+    console.log('✅ HTTP server closed - server.js:155');
     process.exit(0);
   });
 });

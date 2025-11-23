@@ -11,10 +11,14 @@
     "api:start": "node src/api/server.js",
     "api:dev": "nodemon src/api/server.js",
     "api:test": "curl http://localhost:3001/api/health",
+    "api:refresh": "curl -X POST http://localhost:3001/api/v1/webhooks/invalidate-all",
+    "api:refresh:concert": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/concert",
+    "api:refresh:events": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/events",
+    "api:refresh:journalism": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/journalism",
     "api:demo-seo": "npm run api:start & sleep 5 && npm run seo:all && echo '\n✅ Demo complete! Check dist/sitemap.xml and dist/structured-data/'",
-      "dev": "node dev-server.js",
-      "dev:with-api": "concurrently -n \"SITE,API\" -c \"cyan,green\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\"",
-      "dev:full": "concurrently -n \"SITE,API,WATCH\" -c \"cyan,green,yellow\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\" \"node scripts/watchers/watch-auto-manifest.js --all\"",
+    "dev": "node dev-server.js",
+    "dev:with-api": "concurrently -n \"SITE,API\" -c \"cyan,green\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\"",
+    "dev:full": "concurrently -n \"SITE,API,WATCH\" -c \"cyan,green,yellow\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\" \"node scripts/watchers/watch-auto-manifest.js --all\"",
     "ci:simulate": "node scripts/utils/ci-simulate-changed.js",
     "ci:simulate:sample1": "node scripts/utils/ci-simulate-changed.js --changed 'scripts/utils/build.js docs/README.md'",
     "ci:simulate:sample2": "node scripts/utils/ci-simulate-changed.js --changed '.github/copilot-instructions.md src/site/app.js'",
@@ -113,12 +117,15 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "compression": "^1.8.1",
     "cors": "^2.8.5",
+    "etag": "^1.8.1",
     "exif-parser": "^0.1.12",
     "express": "^5.1.0",
     "lottie-web": "^5.13.0",
     "multer": "^2.0.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "redis": "^5.10.0"
   }
 }
