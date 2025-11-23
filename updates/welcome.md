@@ -1,20 +1,9 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `fed6f4ce` — 1 second ago
-> Refactor code structure and remove redundant code blocks for improved readability and maintainability
+**Last commit**: `449e3003` — 1 second ago
+> feat: Update welcome state and last commit message to reflect recent refactor for improved readability and maintainability
 ## 🔄 Changes in last commit
-- .githooks/README.md
-- .githooks/commit-msg
-- .githooks/post-commit
-- dev-server.js
-- docs/integrations/API-QUICKREF.md
-- docs/integrations/WIDGET-API-CHEATSHEET.md
-- docs/integrations/api-integration-guide.md
-- docs/integrations/api-seo-benefits.md
-- docs/updates/2025-11-23-welcome-api-integration.md
-- package-lock.json
-- package.json
 - scripts/.welcome-state.json
-- …and 20 more
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)
