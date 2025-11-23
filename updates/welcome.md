@@ -1,20 +1,12 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `4752385e` — 1 second ago
-> chore: standardize all versions to x.x.0 semantic format
+**Last commit**: `11e777cb` — 0 seconds ago
+> docs: document version standardization lessons learned
 ## 🔄 Changes in last commit
-- .github/workflows/publish-manifests-cdn.yml
-- .github/workflows/seo-auto-update.yml
-- README.md
-- docs/integrations/api-seo-benefits.md
-- docs/integrations/seo-automation-guide.md
-- docs/manifest-cdn.md
-- docs/standards/performance-standards.md
-- docs/standards/version-standardization-guide.md
-- docs/standards/widget-development.md
-- docs/standards/widget-reference.md
-- package.json
+- .github/copilot-instructions.md
+- CHANGELOG.md
+- docs/standards/version-standardization-lessons.md
 - scripts/.welcome-state.json
-- …and 88 more
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)

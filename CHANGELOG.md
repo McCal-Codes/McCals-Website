@@ -22,6 +22,21 @@
 - **Lessons Learned Documentation**: Created `docs/standards/version-standardization-lessons.md` documenting automation strategies, dry-run patterns, regex techniques, git rename tracking, and reusable patterns for future standardizations.
 - **Benefits**: Fixes dropdown sorting issues (v1.10.0 now properly sorts after v1.9.0), ensures professional Semantic Versioning compliance, provides consistency across repository, and includes automation tools for future maintenance.
 
+### SEO Automation & Workflow Enhancements
+- **Enhanced SEO Scripts**: Major improvements to `scripts/seo/generate-sitemap.js` and `scripts/seo/generate-structured-data.js`:
+  - Added comprehensive widget support (concert, photojournalism, event, nature, portrait, featured portfolios)
+  - Implemented dynamic URL generation based on widget versions
+  - Added Schema.org structured data for ImageGallery, CollectionPage, and portfolio content
+  - Enhanced sitemap with widget-specific lastmod dates from git history
+  - Added debugging modes and validation
+- **SEO Documentation**: Created comprehensive `docs/integrations/seo-automation-guide.md` and `scripts/seo/README.md` with implementation patterns, API integration benefits, and best practices.
+- **GitHub Actions Workflows**:
+  - `.github/workflows/seo-auto-update.yml`: Automated sitemap and structured data generation on portfolio changes
+  - `.github/workflows/publish-manifests-cdn.yml`: CDN publishing automation for portfolio manifests
+- **API Integration Benefits**: Documented in `docs/integrations/api-seo-benefits.md` - explains how API-driven manifests enable dynamic SEO, automated updates, and rich structured data without manual intervention.
+- **Manifest CDN Documentation**: Created `docs/manifest-cdn.md` explaining jsDelivr CDN usage for manifest distribution.
+- **AI Preflight Enhancements**: Updated `scripts/utils/ai-instructions-preflight.js` with improved validation and context checks (87 additional lines).
+
 ### Docs/Meta
 - Updated `.github/copilot-instructions.md` Recent updates section with comprehensive version standardization entry documenting problem, solution, implementation details, key lessons learned, and future maintenance guidance.
 
