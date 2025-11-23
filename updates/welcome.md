@@ -1,12 +1,16 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `09709dd2` — 0 seconds ago
-> feat: implement Docker support and API deployment guide
+**Last commit**: `ace7a5c8` — 1 second ago
+> feat: integrate Redis caching for manifest data and implement webhook routes
 ## 🔄 Changes in last commit
-- .dockerignore
-- Dockerfile.api
-- docs/deployment/API-DEPLOYMENT-GUIDE.md
+- docker-compose.yml
+- package-lock.json
+- package.json
 - scripts/.welcome-state.json
-- updates/api-seo-status-2025-11-23.md
+- src/api/cache/redis-client.js
+- src/api/routes/manifests.js
+- src/api/routes/webhooks.js
+- src/api/server.js
+- src/api/versions/v1/index.js
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**

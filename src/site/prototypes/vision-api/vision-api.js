@@ -1,3 +1,4 @@
+/* eslint-env browser */
 // Vision API Prototype - McCal Media
 // Simple, isolated integration for testing computer vision capabilities
 
@@ -645,11 +646,13 @@ class VisionAPIPrototype {
     }
 
     // Placeholder for Azure Computer Vision
+    // eslint-disable-next-line no-unused-vars
     async azureVisionAnalysis(imageData) {
         throw new Error('Azure Computer Vision API integration not yet implemented. Add your API key and implementation here.');
     }
 
     // Placeholder for OpenAI Vision
+    // eslint-disable-next-line no-unused-vars
     async openAIVisionAnalysis(imageData) {
         throw new Error('OpenAI Vision API integration not yet implemented. Add your API key and implementation here.');
     }

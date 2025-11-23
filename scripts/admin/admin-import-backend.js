@@ -306,7 +306,7 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
         // Check if file already exists
         let finalPath = targetInfo.fullPath;
         let counter = 1;
-        while (true) {
+        while (true) { // eslint-disable-line no-constant-condition
           try {
             await fs.access(finalPath);
             // File exists, try with counter
@@ -625,7 +625,7 @@ app.get('/api/admin/server/info', requireAuth, async (req, res) => {
 });
 
 // Error handling middleware
-app.use((error, req, res, next) => {
+app.use((error, req, res) => {
   if (error instanceof multer.MulterError) {
     if (error.code === 'LIMIT_FILE_SIZE') {
       return res.status(400).json({ error: 'File too large (max 50MB)' });

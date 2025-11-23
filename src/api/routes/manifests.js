@@ -13,6 +13,8 @@ const path = require('path');
 const cache = require('../cache/redis-client');
 const etag = require('etag');
 
+const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+
 /**
  * Manifest configuration - maps portfolio types to their manifest file paths
  */
@@ -156,8 +158,20 @@ router.get('/:type', async (req, res, next) => {
  * POST /api/v1/manifests/cache/clear
  */
 router.post('/cache/clear', async (req, res) => {
+  if (WEBHOOK_SECRET) {
+    const provided = req.get('x-webhook-secret') || req.query.secret;
+    if (provided !== WEBHOOK_SECRET) {
+      return res.status(401).json({
+        error: 'Unauthorized',
+        message: 'Invalid webhook secret',
+      });
+    }
+  }
+
   const keys = await cache.keys('manifest:*');
-  await cache.clear();
+  for (const key of keys) {
+    await cache.del(key);
+  }
   
   res.json({
     message: 'Cache cleared successfully',

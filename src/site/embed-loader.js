@@ -1,3 +1,4 @@
+/* eslint-env browser */
 // McCal Media — Embed loader
 // Supports two modes:
 //  - iframe: inserts an iframe with the provided URL (safe, scripts run in iframe)

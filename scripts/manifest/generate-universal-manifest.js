@@ -14,7 +14,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const { detectDateFromFilename, detectDateFromImages, formatDisplayDate, createFallbackDate, MONTHS } = require('../utils/shared-date-parsing.js');
+const { detectDateFromImages, formatDisplayDate, createFallbackDate, MONTHS } = require('../utils/shared-date-parsing.js');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const MANIFEST_OUTPUT = path.join(PORTFOLIOS_BASE, 'portfolio-manifest.json');
@@ -85,7 +85,7 @@ function cleanTitle(name) {
     .trim();
 }
 
-function inferCategoryFromPath(portfolioType, itemName) {
+function inferCategoryFromPath(portfolioType) {
   // Map portfolio types to categories
   const categoryMap = {
     'Concert': 'Concert Photography',

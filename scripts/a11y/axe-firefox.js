@@ -1,3 +1,4 @@
+/* global axe, document */
 const { firefox } = require('playwright');
 
 (async () => {
@@ -21,7 +22,10 @@ const { firefox } = require('playwright');
     console.log(out);
     // Also write to file in reports/
     const fs = require('fs');
-    try { fs.mkdirSync('reports', { recursive: true }); } catch (e) {}
+    try { fs.mkdirSync('reports', { recursive: true }); }
+    catch (e) {
+      console.warn('Could not create reports directory:', e.message);
+    }
     fs.writeFileSync('reports/axe-firefox-results.json', out);
     console.log('Saved results to reports/axe-firefox-results.json');
   } catch (err) {
