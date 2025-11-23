@@ -2,6 +2,13 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.7.1 — 2025-11-21 (Optional API)
+### API-first with graceful fallback
+- **NEW**: Optional API loading. Set `data-api="on"` to fetch the manifest from `/api/v1/manifests/concert`.
+- **FALLBACK**: If the API is unreachable or returns an unexpected shape, the widget falls back to GitHub Raw `src/images/Portfolios/Concert/concert-manifest.json`.
+- **NO UX CHANGE**: Layout, performance optimizations, and Spotify support from v4.7 remain unchanged.
+- **DOCS**: README updated with usage notes and dev proxy guidance.
+
 ## v4.7 — 2025-11-02 (Artist Support — Spotify)
 ### Audience Support & UX ❤️🎵
 - **NEW**: Non-intrusive floating button to support artists with Spotify integration

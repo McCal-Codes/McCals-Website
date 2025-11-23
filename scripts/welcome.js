@@ -161,6 +161,7 @@ function main() {
     '—',
     '_Tip: mark a line as done by adding `(done)` or `(done in <hash>)` at the end. The next open will auto-check it._',
     '_Tip: To pin this file in VS Code, right-click the tab and select "Pin". It will always be visible when you return!_',
+    '_Tip: Run `npm run welcome:open` to quickly open this dashboard in your editor._',
     ''
   ].join('\n');
 
@@ -181,7 +182,7 @@ function main() {
       return `${lines[0]}\n  ${lines.slice(1, 5).map(l => l.replace(/^- \[.\] /, '').replace(/^\s+/, '')).join('\n  ')}`;
     })
     .join('\n\n');
-  const termFooter = '\n—\n(Tip: See updates/welcome.md for full dashboard)\n';
+  const termFooter = '\n—\n💡 Tip: Run `npm run welcome:open` to view full dashboard in editor\n📌 Tip: Pin updates/welcome.md in VS Code for quick access\n🔧 Tip: Run `npm run setup` to configure git hooks\n';
   console.log([termHeader, termMsg, '', 'Files changed:', termFiles, termFilesMore, '', termChecklist, '', 'Today’s focus:', termAgenda, termFooter].filter(Boolean).join('\n'));
 
   // Save state

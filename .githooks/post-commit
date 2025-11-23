@@ -1,0 +1,11 @@
+#!/bin/sh
+# Auto-run welcome script after each commit to update dashboard
+
+npm run welcome --silent
+
+# If welcome.md exists, show a hint to the user
+if [ -f "updates/welcome.md" ]; then
+  echo ""
+  echo "📋 Dashboard updated! View with: npm run welcome:open"
+  echo ""
+fi
