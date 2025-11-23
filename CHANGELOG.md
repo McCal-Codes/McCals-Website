@@ -1,3 +1,30 @@
+## 2025-11-23
+### Version Standardization (x.x.0 Format)
+- **Complete Repository Standardization**: Converted all version numbers to Semantic Versioning 2.0.0 format (x.x.0) throughout entire repository.
+- **Widget Files Renamed**: Renamed 63 widget version files from `vX.Y.html` to `vX.Y.0.html` format:
+  - Concert Portfolio: 19 versions (v2.0.0 → v4.7.0)
+  - Photojournalism Portfolio: 12 versions (v1.0.0 → v5.2.0)
+  - Podcast Feed: 12 versions (v1.0.0 → v2.0.0)
+  - Featured Portfolio: 6 versions (v1.0.0 → v1.5.0)
+  - Nature, Event, Hero, Portrait, Navigation, Video: 14 versions
+- **Content Updates**: Updated version strings in 33+ widget HTML files (Version: headers) and 10+ script files (@version tags in manifest generators and watchers).
+- **Documentation Updates**: Updated 13 documentation files with corrected version references (READMEs, CHANGELOGs, standards guides).
+- **Automation Tools Created**:
+  - `scripts/utils/standardize-versions.js`: Updates version strings in code content
+  - `scripts/utils/rename-widget-versions.js`: Renames version files to x.x.0 format
+  - Both support `--dry-run` mode for safe previewing
+- **npm Scripts Added**:
+  - `versions:standardize`: Run version content updates
+  - `versions:check`: Preview version content changes (dry-run)
+  - `versions:rename`: Run file renaming
+  - `versions:rename-check`: Preview file renames (dry-run)
+- **Comprehensive Documentation**: Created `docs/standards/version-standardization-guide.md` with format rules, semantic versioning guidelines, widget-specific standards, git tagging conventions, and troubleshooting.
+- **Lessons Learned Documentation**: Created `docs/standards/version-standardization-lessons.md` documenting automation strategies, dry-run patterns, regex techniques, git rename tracking, and reusable patterns for future standardizations.
+- **Benefits**: Fixes dropdown sorting issues (v1.10.0 now properly sorts after v1.9.0), ensures professional Semantic Versioning compliance, provides consistency across repository, and includes automation tools for future maintenance.
+
+### Docs/Meta
+- Updated `.github/copilot-instructions.md` Recent updates section with comprehensive version standardization entry documenting problem, solution, implementation details, key lessons learned, and future maintenance guidance.
+
 ## 2025-11-03
 ### Workflow Validation & Portrait Portfolio Automation
 - **Workflow Validation System**: Fixed corrupted `ci-validate-workflows.js` script with comprehensive validation for script references, npm ci usage, and caching best practices.
@@ -39,6 +66,29 @@
 - Documented the new system in `docs/standards/widget-standards.md` and main `README.md`.
 - Added pinning tip to `updates/welcome.md` for persistent dashboard visibility in VS Code.
 # Changelog
+
+## 2025-11-23
+### Version Standardization (x.x.0 Format)
+- **Complete Repository Standardization**: Converted all version numbers to Semantic Versioning 2.0.0 format (x.x.0) throughout entire repository.
+- **Widget Files Renamed**: Renamed 63 widget version files from `vX.Y.html` to `vX.Y.0.html` format:
+  - Concert Portfolio: 19 versions (v2.0.0 → v4.7.0)
+  - Photojournalism Portfolio: 12 versions (v1.0.0 → v5.2.0)
+  - Podcast Feed: 12 versions (v1.0.0 → v2.0.0)
+  - Featured Portfolio: 6 versions (v1.0.0 → v1.5.0)
+  - Nature, Event, Hero, Portrait, Navigation, Video: 14 versions
+- **Content Updates**: Updated version strings in 33+ widget HTML files (Version: headers) and 10+ script files (@version tags in manifest generators and watchers).
+- **Documentation Updates**: Updated 13 documentation files with corrected version references (READMEs, CHANGELOGs, standards guides).
+- **Automation Tools Created**:
+  - `scripts/utils/standardize-versions.js`: Updates version strings in code content
+  - `scripts/utils/rename-widget-versions.js`: Renames version files to x.x.0 format
+  - Both support `--dry-run` mode for safe previewing
+- **npm Scripts Added**:
+  - `versions:standardize`: Run version content updates
+  - `versions:check`: Preview version content changes (dry-run)
+  - `versions:rename`: Run file renaming
+  - `versions:rename-check`: Preview file renames (dry-run)
+- **Comprehensive Documentation**: Created `docs/standards/version-standardization-guide.md` with format rules, semantic versioning guidelines, widget-specific standards, git tagging conventions, and troubleshooting.
+- **Benefits**: Fixes dropdown sorting issues (v1.10.0 now properly sorts after v1.9.0), ensures professional Semantic Versioning compliance, provides consistency across repository, and includes automation tools for future maintenance.
 
 ## 2025-11-19
 ### Minor Maintenance & Cleanup (v2.5.3)
