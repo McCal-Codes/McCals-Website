@@ -1,6 +1,6 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `449e3003` — 1 second ago
-> feat: Update welcome state and last commit message to reflect recent refactor for improved readability and maintainability
+**Last commit**: `a69f864f` — 0 seconds ago
+> feat: Update welcome state with latest commit details for improved clarity
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
 - updates/welcome.md
