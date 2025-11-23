@@ -1,20 +1,13 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `77561215` — 0 seconds ago
-> feat: add McCal Navigation Widget v1.6 and Hero Carousel v1.1
+**Last commit**: `09709dd2` — 0 seconds ago
+> feat: implement Docker support and API deployment guide
 ## 🔄 Changes in last commit
-- docs/archive/integrations/WIDGET-API-CHEATSHEET.md
-- docs/archive/integrations/squarespace/developer-mode-quickstart.md
-- docs/archive/standards/seo-audit-2025-01-27.md
-- docs/archive/todo/widget-enhancement-implementation.md
-- docs/archive/tutorials/widget-development/part1-structure.md
-- docs/archive/tutorials/widget-development/part2-performance.md
-- docs/archive/tutorials/widget-development/part3-accessibility.md
-- docs/archive/tutorials/widget-development/part4-deployment.md
-- docs/archive/updates/2025-11-23-welcome-api-integration.md
-- docs/archive/updates/manifest-migration-2025-11-04.md
+- .dockerignore
+- Dockerfile.api
+- docs/deployment/API-DEPLOYMENT-GUIDE.md
 - scripts/.welcome-state.json
-- src/widgets/_archived/demo-debug/blog-feed/demo/test-demo.html
-- …and 16 more
+- updates/api-seo-status-2025-11-23.md
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)

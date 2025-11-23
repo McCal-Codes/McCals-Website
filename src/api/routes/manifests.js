@@ -3,16 +3,15 @@
  * 
  * Provides access to portfolio manifest data.
  * Reads from the generated manifest files in src/images/Portfolios/
+ * Uses Redis cache for high-performance data access
  */
 
 const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
-
-// In-memory cache for manifests (cleared on server restart)
-const manifestCache = new Map();
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const cache = require('../cache/redis-client');
+const etag = require('etag');
 
 /**
  * Manifest configuration - maps portfolio types to their manifest file paths
@@ -59,15 +58,19 @@ async function readManifest(type) {
  * Helper: Get manifest from cache or read from disk
  */
 async function getCachedManifest(type) {
-  const cached = manifestCache.get(type);
-  const now = Date.now();
+  const cacheKey = `manifest:${type}`;
   
-  if (cached && now - cached.timestamp < CACHE_TTL) {
-    return { data: cached.data, fromCache: true };
+  // Try to get from Redis cache
+  const cached = await cache.get(cacheKey);
+  if (cached) {
+    return { data: cached, fromCache: true };
   }
   
+  // Cache miss - read from disk
   const data = await readManifest(type);
-  manifestCache.set(type, { data, timestamp: now });
+  
+  // Store in Redis cache
+  await cache.set(cacheKey, data);
   
   return { data, fromCache: false };
 }
@@ -76,19 +79,18 @@ async function getCachedManifest(type) {
  * List all available manifest types
  * GET /api/v1/manifests
  */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const manifests = Object.keys(MANIFEST_CONFIG).map(type => ({
     type,
     endpoint: `/api/v1/manifests/${type}`,
   }));
   
+  const stats = await cache.stats();
+  
   res.json({
     manifests,
     total: manifests.length,
-    cacheStatus: {
-      cached: manifestCache.size,
-      ttl: CACHE_TTL / 1000 / 60 + ' minutes',
-    },
+    cacheStatus: stats,
   });
 });
 
@@ -102,7 +104,24 @@ router.get('/:type', async (req, res, next) => {
   try {
     const { data, fromCache } = await getCachedManifest(type);
     
-    res.set('X-Cache', fromCache ? 'HIT' : 'MISS');
+    // Generate ETag for caching
+    const dataString = JSON.stringify(data);
+    const etagValue = etag(dataString);
+    
+    // Check if client has cached version
+    const clientETag = req.headers['if-none-match'];
+    if (clientETag === etagValue) {
+      return res.status(304).end(); // Not Modified
+    }
+    
+    // Set cache headers
+    res.set({
+      'X-Cache': fromCache ? 'HIT' : 'MISS',
+      'ETag': etagValue,
+      'Cache-Control': 'public, max-age=300, must-revalidate', // 5 minutes browser cache
+      'Vary': 'Accept-Encoding'
+    });
+    
     res.json({
       type,
       data,
@@ -136,13 +155,13 @@ router.get('/:type', async (req, res, next) => {
  * Clear manifest cache (useful for development)
  * POST /api/v1/manifests/cache/clear
  */
-router.post('/cache/clear', (req, res) => {
-  const clearedCount = manifestCache.size;
-  manifestCache.clear();
+router.post('/cache/clear', async (req, res) => {
+  const keys = await cache.keys('manifest:*');
+  await cache.clear();
   
   res.json({
     message: 'Cache cleared successfully',
-    clearedCount,
+    clearedCount: keys.length,
     timestamp: new Date().toISOString(),
   });
 });
@@ -151,17 +170,8 @@ router.post('/cache/clear', (req, res) => {
  * Get cache statistics
  * GET /api/v1/manifests/cache/stats
  */
-router.get('/cache/stats', (req, res) => {
-  const stats = {
-    entries: manifestCache.size,
-    ttl: CACHE_TTL / 1000 / 60 + ' minutes',
-    keys: Array.from(manifestCache.keys()),
-    memory: {
-      used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
-      unit: 'MB',
-    },
-  };
-  
+router.get('/cache/stats', async (req, res) => {
+  const stats = await cache.stats();
   res.json(stats);
 });
 
