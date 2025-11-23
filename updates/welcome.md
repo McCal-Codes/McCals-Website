@@ -1,9 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `c320e9a3` — 0 seconds ago
-> feat: Update welcome state and last commit message for improved clarity
+**Last commit**: `4752385e` — 1 second ago
+> chore: standardize all versions to x.x.0 semantic format
 ## 🔄 Changes in last commit
+- .github/workflows/publish-manifests-cdn.yml
+- .github/workflows/seo-auto-update.yml
+- README.md
+- docs/integrations/api-seo-benefits.md
+- docs/integrations/seo-automation-guide.md
+- docs/manifest-cdn.md
+- docs/standards/performance-standards.md
+- docs/standards/version-standardization-guide.md
+- docs/standards/widget-development.md
+- docs/standards/widget-reference.md
+- package.json
 - scripts/.welcome-state.json
-- updates/welcome.md
+- …and 88 more
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)
