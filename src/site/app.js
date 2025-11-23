@@ -24,6 +24,9 @@ class GalleryApp {
 
   async loadGalleries() {
     try {
+      // Try loading concert galleries from the new API first (with graceful fallback)
+      const apiGalleries = await this.loadFromAPI();
+
       // Load Funky Lamp images from manifest
       const funkyLampBasePath = './images/Portfolios/Concert/Funky Lamp/December 2024';
       const funkyLampManifestResponse = await fetch(`${funkyLampBasePath}/manifest.json`);
@@ -32,7 +35,7 @@ class GalleryApp {
       
       // In a real app, this would fetch from your images API
       // For now, we'll simulate your portfolio structure
-      this.galleries = [
+      const staticGalleries = [
         {
           id: 'funky-lamp',
           title: 'Funky Lamp',
@@ -125,8 +128,56 @@ class GalleryApp {
           ]
         }
       ];
+
+      // Prefer API-provided galleries when available, then add static examples
+      this.galleries = [...apiGalleries, ...staticGalleries];
     } catch (error) {
-      console.error('Error loading galleries:', error);
+      console.error('Error loading galleries: - app.js:135', error);
+    }
+  }
+
+  async loadFromAPI() {
+    const base = '/api/v1';
+    try {
+      // Small timeout to avoid hanging if API is offline
+      const controller = new AbortController();
+      const t = setTimeout(() => controller.abort(), 4000);
+      const res = await fetch(`${base}/manifests/concert`, { signal: controller.signal });
+      clearTimeout(t);
+      if (!res.ok) throw new Error(`API error ${res.status}`);
+      const manifest = await res.json();
+
+      const bands = manifest && manifest.data && Array.isArray(manifest.data.bands)
+        ? manifest.data.bands
+        : [];
+      if (bands.length === 0) return [];
+
+      // Take the first few bands (newest-first) to avoid loading hundreds of images
+      const limitBands = 4;
+      const selected = bands.slice(0, limitBands);
+
+      const toUrl = (folderPath, file) => `./images/Portfolios/Concert/${folderPath}/${file}`;
+      const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+      const apiGalleries = selected.map((band) => {
+        const images = (band.images || []).map((f) => toUrl(band.folderPath, f));
+        const cover = images[0] || '';
+        return {
+          id: `concert-${slug(band.bandName)}-${band.concertDate?.iso || 'na'}`,
+          title: band.bandName,
+          category: 'Concert',
+          description: `${band.bandName} — ${band.dateDisplay}`,
+          date: band.concertDate?.iso || '',
+          coverImage: cover,
+          imageCount: band.totalImages || images.length,
+          images
+        };
+      });
+
+      return apiGalleries;
+    } catch (e) {
+      console.warn('[GalleryApp] API unavailable, using static galleries. Reason: - app.js:179', e.message || e);
+      return [];
     }
   }
 

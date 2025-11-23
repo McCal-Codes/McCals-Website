@@ -4,6 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
+const { proxyToAPI } = require('./src/api/proxy-middleware');
 
 // Base/default port preference
 const BASE_PORT = parseInt(process.env.PORT, 10) || 3000;
@@ -11,6 +12,7 @@ let PORT = BASE_PORT;
 const HOST = process.env.HOST || 'localhost';
 const SITE_DIR = __dirname; // Serve from repo root to access all files
 const IS_PRODUCTION = process.argv.includes('--production');
+const ENABLE_API_PROXY = process.argv.includes('--with-api') || process.env.ENABLE_API_PROXY === 'true';
 
 // MIME types for different file extensions
 const MIME_TYPES = {
@@ -51,6 +53,11 @@ function createServer() {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Proxy API requests if enabled
+  if (ENABLE_API_PROXY && req.url.startsWith('/api/')) {
+    return proxyToAPI(req, res);
+  }
 
   let filePath = path.join(SITE_DIR, req.url === '/' ? 'src/site/index.html' : req.url);
   
@@ -98,6 +105,9 @@ function startServer(attempt = 0) {
     }
     console.log(`📁 Serving files from: ${SITE_DIR}`);
     console.log(`🔄 Mode: ${IS_PRODUCTION ? 'Production' : 'Development'}`);
+        if (ENABLE_API_PROXY) {
+          console.log(`🔗 API Proxy: Enabled (forwarding to localhost:3001)`);
+        }
     console.log('');
     console.log('Available commands:');
     console.log('  npm run dev     - Start development server');

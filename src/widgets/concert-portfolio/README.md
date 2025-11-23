@@ -1,6 +1,6 @@
 # Concert Portfolio Widget
 
-**Current Version: v4.7** — Performance-optimized concert portfolio with a non-intrusive Spotify support button to help visitors discover and preview artists. Retains v4.6 critical rendering improvements, modern JavaScript patterns, and enhanced SEO.
+**Current Version: v4.7.1** — Adds optional API support while retaining the v4.7 Spotify enhancements and all v4.6 performance improvements. Enable API loading by setting `data-api="on"` to use `/api/v1/manifests/concert` in development or production with your backend.
 
 ## Features
 
@@ -95,8 +95,9 @@ Config via data-attributes on the wrapper (defaults shown):
      data-spotify="on"
      data-spotify-button-label="Support the Artists"
      data-spotify-position="bottom-right"
-     data-spotify-map-id="spotifyArtistMap">
-  <!-- Paste v4.7.html here -->
+    data-spotify-map-id="spotifyArtistMap"
+    data-api="off">
+  <!-- Paste v4.7.1-api-optional.html here -->
 </div>
 ```
 
@@ -110,6 +111,11 @@ Provide artist IDs via an inline JSON script (keys are band names as they appear
 </script>
 ```
 If no ID is provided for a band, the widget still shows a “Open on Spotify” search link.
+
+### Optional API loading — v4.7.1
+- Set `data-api="on"` to have the widget request the manifest from a same-origin API at `/api/v1/manifests/concert`.
+- Falls back to GitHub Raw `src/images/Portfolios/Concert/concert-manifest.json` if the API is unavailable or returns an unexpected shape.
+- Works seamlessly with the dev server proxy described in `src/api/README.md` (use `npm run dev:with-api`).
 
 ### Performance Monitoring
 ```javascript
@@ -167,7 +173,8 @@ An example (aggregated) manifest excerpt:
 
 ## Versions
 Active versions retained in `versions/`:
-- **v4.7** (Latest): Artist Support (Spotify) with search links and optional embedded previews
+- **v4.7.1** (Latest): Optional API support (data-api="on") with graceful GitHub fallback; retains Spotify features
+- **v4.7**: Artist Support (Spotify) with search links and optional embedded previews
 - **v4.6**: Performance optimizations and structured data refinements
 
 Legacy versions (v4.5 and earlier) have been moved to `src/widgets/_archived/legacy-widget-versions/concert-portfolio/` to reduce clutter. Refer to the archive for historical diff/reference.
