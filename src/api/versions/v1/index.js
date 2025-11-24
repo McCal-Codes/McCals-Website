@@ -8,6 +8,7 @@ const router = express.Router();
 const v1Health = require('./health');
 const manifestRoutes = require('../../routes/manifests');
 const webhookRoutes = require('../../routes/webhooks');
+const adminRoutes = require('../../routes/admin');
 
 // Debug: log v1 router traffic (development only)
 router.use((req, res, next) => {
@@ -21,6 +22,7 @@ router.use((req, res, next) => {
 router.use('/health', v1Health);
 router.use('/manifests', manifestRoutes);
 router.use('/webhooks', webhookRoutes);
+router.use('/admin', adminRoutes);
 
 // Simple ping for v1 router verification
 router.get('/ping', (req, res) => {

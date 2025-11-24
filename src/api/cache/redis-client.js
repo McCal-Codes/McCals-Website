@@ -140,12 +140,68 @@ class RedisCache {
   async keys(pattern = '*') {
     if (this.connected && this.client) {
       try {
-        return await this.client.keys(pattern);
+        // Use SCAN via scanIterator to avoid blocking Redis for large datasets
+        const found = [];
+        for await (const k of this.client.scanIterator({ MATCH: pattern, COUNT: 100 })) {
+          // Some redis client implementations return batches (arrays) from scanIterator;
+          // normalize to a flat array.
+          if (Array.isArray(k)) {
+            found.push(...k);
+          } else {
+            found.push(k);
+          }
+        }
+        return found;
       } catch (err) {
-        console.warn('Redis KEYS error:', err.message);
+        console.warn('Redis KEYS/SCAN error:', err.message);
       }
     }
     return Array.from(this.fallbackCache.keys());
+  }
+
+  /**
+   * Get TTL (seconds) for a key. Returns null if unknown or not supported.
+   */
+  async ttl(key) {
+    if (this.connected && this.client) {
+      try {
+        const t = await this.client.ttl(key);
+        // TTL returns -2 (key doesn't exist) or -1 (no expiry) per Redis semantics
+        return typeof t === 'number' ? t : null;
+      } catch (err) {
+        console.warn('Redis TTL error:', err.message);
+        return null;
+      }
+    }
+
+    // Fallback: cannot determine TTL for in-memory fallback
+    return null;
+  }
+
+  /**
+   * Get memory usage for a key in bytes using MEMORY USAGE Redis command.
+   * Returns number or null when unsupported.
+   */
+  async memoryUsage(key) {
+    if (this.connected && this.client) {
+      try {
+        // Use the MEMORY USAGE command
+        const result = await this.client.sendCommand(['MEMORY', 'USAGE', key]);
+        const n = Number(result);
+        return Number.isFinite(n) ? n : null;
+      } catch (err) {
+        // Some Redis setups may not allow MEMORY commands - fall back silently
+        console.warn('Redis MEMORY USAGE error:', err.message);
+        return null;
+      }
+    }
+
+    // Fallback to approximate size for in-memory cache if present
+    const cached = this.fallbackCache.get(key);
+    if (cached) {
+      return Buffer.byteLength(JSON.stringify(cached.data), 'utf8');
+    }
+    return null;
   }
 
   /**
