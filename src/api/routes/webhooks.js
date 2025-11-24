@@ -8,6 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const cache = require('../cache/redis-client');
+const { MANIFEST_TYPES, MANIFEST_CONFIG } = require('../config/manifests');
 
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
@@ -45,7 +46,7 @@ router.use(requireSecret);
  */
 router.post('/invalidate/:type', async (req, res) => {
   const { type } = req.params;
-  const validTypes = ['concert', 'events', 'journalism', 'nature', 'portrait', 'featured', 'universal'];
+  const validTypes = MANIFEST_TYPES;
   
   if (!validTypes.includes(type)) {
     return res.status(400).json({
@@ -104,7 +105,7 @@ router.post('/invalidate-all', async (req, res) => {
  */
 router.post('/refresh/:type', async (req, res) => {
   const { type } = req.params;
-  const validTypes = ['concert', 'events', 'journalism', 'nature', 'portrait', 'featured', 'universal'];
+  const validTypes = MANIFEST_TYPES;
   
   if (!validTypes.includes(type)) {
     return res.status(400).json({
@@ -121,17 +122,7 @@ router.post('/refresh/:type', async (req, res) => {
     await cache.del(`manifest:${type}`);
     
     // Load fresh data
-    const manifestPaths = {
-      concert: 'Concert/concert-manifest.json',
-      events: 'Events/events-manifest.json',
-      journalism: 'Journalism/journalism-manifest.json',
-      nature: 'Nature/nature-manifest.json',
-      portrait: 'Portrait/portrait-manifest.json',
-      featured: 'featured-manifest.json',
-      universal: 'portfolio-manifest.json',
-    };
-    
-    const manifestPath = manifestPaths[type];
+    const manifestPath = MANIFEST_CONFIG[type];
     const fullPath = path.join(process.cwd(), 'src', 'images', 'Portfolios', manifestPath);
     const data = await fs.readFile(fullPath, 'utf8');
     const manifest = JSON.parse(data);

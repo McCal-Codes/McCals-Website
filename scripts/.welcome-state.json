@@ -1,4 +1,4 @@
 {
-  "lastHash": "ace7a5c8",
-  "lastMessage": "feat: integrate Redis caching for manifest data and implement webhook routes\n\n- Added Redis caching to improve performance for manifest data retrieval.\n- Implemented webhook routes for cache invalidation and refreshing specific manifest types.\n- Updated API server to connect to Redis and warm cache on startup.\n- Enhanced manifest routes to utilize Redis cache and handle ETag for client-side caching.\n- Updated package dependencies to include Redis client and compression middleware.\n- Added Docker support with a Dockerfile for the API and a docker-compose configuration for Redis and RedisInsight.\n- Updated welcome message and documentation to reflect recent changes and improvements.\n\\n\\nAuthor: mccal"
+  "lastHash": "b03df245",
+  "lastMessage": "feat: add webhook authentication and Redis cache management to API routes\n\\n\\nAuthor: mccal"
 }

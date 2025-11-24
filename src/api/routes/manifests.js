@@ -15,18 +15,7 @@ const etag = require('etag');
 
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
-/**
- * Manifest configuration - maps portfolio types to their manifest file paths
- */
-const MANIFEST_CONFIG = {
-  concert: 'Concert/concert-manifest.json',
-  events: 'Events/events-manifest.json',
-  journalism: 'Journalism/journalism-manifest.json',
-  nature: 'Nature/nature-manifest.json',
-  portrait: 'Portrait/portrait-manifest.json',
-  featured: 'featured-manifest.json',
-  universal: 'portfolio-manifest.json',
-};
+const { MANIFEST_CONFIG, MANIFEST_TYPES } = require('../config/manifests');
 
 /**
  * Helper: Read and parse a manifest file
@@ -86,9 +75,9 @@ router.get('/', async (req, res) => {
     type,
     endpoint: `/api/v1/manifests/${type}`,
   }));
-  
+
   const stats = await cache.stats();
-  
+
   res.json({
     manifests,
     total: manifests.length,

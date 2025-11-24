@@ -131,24 +131,17 @@ app.use((err, req, res, next) => {
 
 // Cache warming function
 async function warmCache() {
-  const manifestTypes = ['concert', 'events', 'journalism', 'nature', 'portrait', 'featured', 'universal'];
+  const { MANIFEST_CONFIG, MANIFEST_TYPES } = require('./config/manifests');
+  const manifestTypes = MANIFEST_TYPES;
   console.log('🔥 Warming cache with all manifests... - server.js:125');
   
   const fs = require('fs').promises;
-  const manifestPaths = {
-    concert: 'Concert/concert-manifest.json',
-    events: 'Events/events-manifest.json',
-    journalism: 'Journalism/journalism-manifest.json',
-    nature: 'Nature/nature-manifest.json',
-    portrait: 'Portrait/portrait-manifest.json',
-    featured: 'featured-manifest.json',
-    universal: 'portfolio-manifest.json',
-  };
+  // MANIFEST_CONFIG is imported above
   
   let warmedCount = 0;
   for (const type of manifestTypes) {
     try {
-      const manifestPath = manifestPaths[type];
+      const manifestPath = MANIFEST_CONFIG[type];
       const fullPath = path.join(process.cwd(), 'src', 'images', 'Portfolios', manifestPath);
       const data = await fs.readFile(fullPath, 'utf8');
       const manifest = JSON.parse(data);
