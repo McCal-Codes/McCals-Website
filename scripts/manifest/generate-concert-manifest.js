@@ -13,6 +13,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { detectDateFromImages } = require('../utils/shared-date-parsing.js');
+const { notify } = require('../utils/manifest-webhook');
 
 const CONCERT_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Concert');
 const MANIFEST_OUTPUT = path.join(CONCERT_BASE, 'concert-manifest.json');
@@ -261,8 +262,20 @@ async function generateMasterManifest() {
         await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
         success(`Generated master manifest: ${MANIFEST_OUTPUT}`);
         success(`Processed ${processedBands.length} bands with ${processedBands.reduce((total, band) => total + band.totalImages, 0)} total images`);
+        try {
+          await notify('concert', { path: MANIFEST_OUTPUT, written: true });
+        } catch (err) {
+          console.warn('Failed to notify manifest webhook (concert):', err && err.message);
+        }
       } else {
         success(`↩️  Master manifest unchanged, skipping write: ${MANIFEST_OUTPUT}`);
+        if (process.env.MANIFEST_WEBHOOK_ALWAYS === 'true') {
+          try {
+            await notify('concert', { path: MANIFEST_OUTPUT, written: false });
+          } catch (err) {
+            console.warn('Failed to notify manifest webhook (concert, no write):', err && err.message);
+          }
+        }
       }
     } catch (err) {
       error(`Failed to write master manifest: ${err.message}`);

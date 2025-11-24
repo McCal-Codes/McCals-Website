@@ -20,6 +20,9 @@
   - `versions:rename-check`: Preview file renames (dry-run)
 - **Comprehensive Documentation**: Created `docs/standards/version-standardization-guide.md` with format rules, semantic versioning guidelines, widget-specific standards, git tagging conventions, and troubleshooting.
 - **Lessons Learned Documentation**: Created `docs/standards/version-standardization-lessons.md` documenting automation strategies, dry-run patterns, regex techniques, git rename tracking, and reusable patterns for future standardizations.
+
+### 2025-11-24
+- **Manifest webhook & CI improvements**: Added a learned note (`docs/learned/manifest-webhook-integration.md`) documenting the manifest webhook integration, composite action `/.github/actions/notify-manifest-webhook`, CI workflow consolidation, secret naming conventions, local testing tips and next steps for CI smoke testing.
 - **Benefits**: Fixes dropdown sorting issues (v1.10.0 now properly sorts after v1.9.0), ensures professional Semantic Versioning compliance, provides consistency across repository, and includes automation tools for future maintenance.
 
 ### SEO Automation & Workflow Enhancements

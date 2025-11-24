@@ -1,0 +1,33 @@
+name: Test: Notify Manifest Webhook Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      webhook_url:
+        description: 'Optional explicit webhook URL to test against (defaults to example.com)'
+        required: false
+        default: 'https://example.com/api/v1/webhooks'
+
+jobs:
+  dry-run-notify:
+    name: Dry-run notify action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test action - no secrets (skip)
+        uses: ./.github/actions/notify-manifest-webhook
+        with:
+          portfolio: test
+          type: refresh
+
+      - name: Test action - explicit webhook_url
+        uses: ./.github/actions/notify-manifest-webhook
+        with:
+          portfolio: test
+          type: refresh
+          webhook_url: ${{ inputs.webhook_url }}
+
+      - name: Done
+        run: echo "✅ notify-manifest-webhook action run (dry-mode). Check logs above for behavior."

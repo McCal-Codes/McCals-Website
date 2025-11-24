@@ -8,6 +8,7 @@
  */
 const fs = require('fs').promises;
 const path = require('path');
+const { notify } = require('../utils/manifest-webhook');
 
 // Configuration
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
@@ -183,8 +184,20 @@ async function scanAndGenerateManifests() {
       console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:177`);
       console.log(`Total Images: ${portraitManifest.totalImages} - generate-portrait-manifest.js:178`);
       console.log(`\n✅ Portrait manifest generated: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:179`);
+      try {
+        await notify('portrait', { path: MANIFEST_OUTPUT, written: true });
+      } catch (err) {
+        console.warn('Failed to notify manifest webhook (portrait):', err && err.message);
+      }
     } else {
       console.log(`\n↩️  Aggregated portrait manifest unchanged, skipping write: ${MANIFEST_OUTPUT} - generate-portrait-manifest.js:181`);
+      if (process.env.MANIFEST_WEBHOOK_ALWAYS === 'true') {
+        try {
+          await notify('portrait', { path: MANIFEST_OUTPUT, written: false });
+        } catch (err) {
+          console.warn('Failed to notify manifest webhook (portrait, no write):', err && err.message);
+        }
+      }
     }
   } catch (err) {
     console.error(`❌ Failed to write portrait manifest: ${err.message} - generate-portrait-manifest.js:184`);

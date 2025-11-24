@@ -34,6 +34,9 @@ Project standards, conventions, and versioning:
 - `date-naming.md` - File and folder naming conventions
 - `versioning.md` - Project versioning guidelines
 
+### 🧠 **learned/** - Short writeups capturing practical lessons and postmortems
+- `manifest-webhook-integration.md` — Lessons learned from automating manifest → API webhook notifications, composite action design, CI secrets guidance and testing tips
+
 ### 🚀 **deployment/** - Deployment & Publishing
 Deployment guides and hosting setup:
 - `DEPLOYMENT.md` - Main deployment documentation

@@ -38,6 +38,15 @@ Critical repository events, security incidents, and recovery steps are documente
 
 - CDN-hosted manifests (no API required): see [docs/manifest-cdn.md](docs/manifest-cdn.md) for jsDelivr URLs and the publish workflow.
 
+### CI webhook notifications for manifests
+
+When manifest generation runs in CI the workflows will notify the API so caches can be warmed automatically.
+
+- All manifest workflows use a centralized composite action: `/.github/actions/notify-manifest-webhook`.
+- Set the repository secrets `MANIFEST_WEBHOOK_URL` (or `MANIFEST_WEBHOOK_BASE`) and `WEBHOOK_SECRET` to enable notifications from CI. If those secrets are not present the workflow will skip the notification step (action is defensive).
+
+This keeps CI workflows simple and avoids duplicating the webhook logic across files.
+
 ---
 
 ## ✅ Widget Validation & Continuous Integration

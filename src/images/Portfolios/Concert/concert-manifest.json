@@ -1,6 +1,6 @@
 {
-  "version": "1.0",
-  "generated": "2025-11-04T19:08:05.579Z",
+  "version": "1.0.0",
+  "generated": "2025-11-24T17:10:04.896Z",
   "totalBands": 22,
   "bands": [
     {
@@ -12,8 +12,7 @@
         "month": 11,
         "monthName": "November",
         "day": 1,
-        "iso": "2025-11-01",
-        "source": "filename_yymmdd"
+        "iso": "2025-11-01"
       },
       "totalImages": 85,
       "images": [
@@ -112,9 +111,8 @@
         "year": 2025,
         "month": 10,
         "monthName": "October",
-        "day": 25,
-        "iso": "2025-10-25",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-10-01"
       },
       "totalImages": 62,
       "images": [
@@ -190,9 +188,8 @@
         "year": 2025,
         "month": 10,
         "monthName": "October",
-        "day": 25,
-        "iso": "2025-10-25",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-10-01"
       },
       "totalImages": 51,
       "images": [
@@ -257,9 +254,8 @@
         "year": 2025,
         "month": 10,
         "monthName": "October",
-        "day": 25,
-        "iso": "2025-10-25",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-10-01"
       },
       "totalImages": 60,
       "images": [
@@ -333,9 +329,8 @@
         "year": 2025,
         "month": 9,
         "monthName": "September",
-        "day": 27,
-        "iso": "2025-09-27",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-09-01"
       },
       "totalImages": 17,
       "images": [
@@ -366,9 +361,8 @@
         "year": 2025,
         "month": 9,
         "monthName": "September",
-        "day": 27,
-        "iso": "2025-09-27",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-09-01"
       },
       "totalImages": 30,
       "images": [
@@ -412,9 +406,8 @@
         "year": 2025,
         "month": 9,
         "monthName": "September",
-        "day": 27,
-        "iso": "2025-09-27",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-09-01"
       },
       "totalImages": 26,
       "images": [
@@ -447,6 +440,80 @@
       ]
     },
     {
+      "bandName": "Big Slime",
+      "folderPath": "Big Slime/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 10,
+      "images": [
+        "250820_Haven Block Party_CAL3068.jpg",
+        "250820_Haven Block Party_CAL3110.jpg",
+        "250820_Haven Block Party_CAL3152.jpg",
+        "250820_Haven Block Party_CAL3200.jpg",
+        "250820_Haven Block Party_CAL3236.jpg",
+        "250820_Haven Block Party_CAL3253.jpg",
+        "250820_Haven Block Party_CAL3269.jpg",
+        "250820_Haven Block Party_CAL3277.jpg",
+        "250820_Haven Block Party_CAL3281.jpg",
+        "250820_Haven Block Party_CAL3286.jpg"
+      ]
+    },
+    {
+      "bandName": "Casino Six",
+      "folderPath": "Casino Six/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 8,
+      "images": [
+        "250820_Haven Block Party_CAL3301.jpg",
+        "250820_Haven Block Party_CAL3304.jpg",
+        "250820_Haven Block Party_CAL3315.jpg",
+        "250820_Haven Block Party_CAL3351.jpg",
+        "250820_Haven Block Party_CAL3364.jpg",
+        "250820_Haven Block Party_CAL3390.jpg",
+        "250820_Haven Block Party_CAL3411.jpg",
+        "250820_Haven Block Party_CAL3443.jpg"
+      ]
+    },
+    {
+      "bandName": "Funky Lamp",
+      "folderPath": "Funky Lamp/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 11,
+      "images": [
+        "250820_Haven Block Party_CAL3497.jpg",
+        "250820_Haven Block Party_CAL3531.jpg",
+        "250820_Haven Block Party_CAL3536.jpg",
+        "250820_Haven Block Party_CAL3545.jpg",
+        "250820_Haven Block Party_CAL3548.jpg",
+        "250820_Haven Block Party_CAL3553.jpg",
+        "250820_Haven Block Party_CAL3557.jpg",
+        "250820_Haven Block Party_CAL3572.jpg",
+        "250820_Haven Block Party_CAL3610.jpg",
+        "250820_Haven Block Party_CAL3619.jpg",
+        "250820_Haven Block Party_CAL3623.jpg"
+      ]
+    },
+    {
       "bandName": "The Book Club",
       "folderPath": "The Book Club/August 2025",
       "dateDisplay": "August 2025",
@@ -454,9 +521,8 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-08-01"
       },
       "totalImages": 23,
       "images": [
@@ -486,6 +552,30 @@
       ]
     },
     {
+      "bandName": "The Head Trips",
+      "folderPath": "The Head Trips/August 2025",
+      "dateDisplay": "August 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 8,
+        "monthName": "August",
+        "day": 1,
+        "iso": "2025-08-01"
+      },
+      "totalImages": 9,
+      "images": [
+        "250820_Haven Block Party_CAL2893.jpg",
+        "250820_Haven Block Party_CAL2906.jpg",
+        "250820_Haven Block Party_CAL2911.jpg",
+        "250820_Haven Block Party_CAL2916.jpg",
+        "250820_Haven Block Party_CAL2918.jpg",
+        "250820_Haven Block Party_CAL2920.jpg",
+        "250820_Haven Block Party_CAL2925.jpg",
+        "250820_Haven Block Party_CAL2937.jpg",
+        "250820_Haven Block Party_CAL2946.jpg"
+      ]
+    },
+    {
       "bandName": "Turtle Park",
       "folderPath": "Turtle Park/August 2025",
       "dateDisplay": "August 2025",
@@ -493,9 +583,8 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-08-01"
       },
       "totalImages": 7,
       "images": [
@@ -516,9 +605,8 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-08-01"
       },
       "totalImages": 5,
       "images": [
@@ -530,108 +618,6 @@
       ]
     },
     {
-      "bandName": "Big Slime",
-      "folderPath": "Big Slime/August 2025",
-      "dateDisplay": "August 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 20,
-        "iso": "2025-08-20",
-        "source": "filename_yymmdd"
-      },
-      "totalImages": 10,
-      "images": [
-        "250820_Haven Block Party_CAL3068.jpg",
-        "250820_Haven Block Party_CAL3110.jpg",
-        "250820_Haven Block Party_CAL3152.jpg",
-        "250820_Haven Block Party_CAL3200.jpg",
-        "250820_Haven Block Party_CAL3236.jpg",
-        "250820_Haven Block Party_CAL3253.jpg",
-        "250820_Haven Block Party_CAL3269.jpg",
-        "250820_Haven Block Party_CAL3277.jpg",
-        "250820_Haven Block Party_CAL3281.jpg",
-        "250820_Haven Block Party_CAL3286.jpg"
-      ]
-    },
-    {
-      "bandName": "Casino Six",
-      "folderPath": "Casino Six/August 2025",
-      "dateDisplay": "August 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 20,
-        "iso": "2025-08-20",
-        "source": "filename_yymmdd"
-      },
-      "totalImages": 8,
-      "images": [
-        "250820_Haven Block Party_CAL3301.jpg",
-        "250820_Haven Block Party_CAL3304.jpg",
-        "250820_Haven Block Party_CAL3315.jpg",
-        "250820_Haven Block Party_CAL3351.jpg",
-        "250820_Haven Block Party_CAL3364.jpg",
-        "250820_Haven Block Party_CAL3390.jpg",
-        "250820_Haven Block Party_CAL3411.jpg",
-        "250820_Haven Block Party_CAL3443.jpg"
-      ]
-    },
-    {
-      "bandName": "Funky Lamp",
-      "folderPath": "Funky Lamp/August 2025",
-      "dateDisplay": "August 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 20,
-        "iso": "2025-08-20",
-        "source": "filename_yymmdd"
-      },
-      "totalImages": 11,
-      "images": [
-        "250820_Haven Block Party_CAL3497.jpg",
-        "250820_Haven Block Party_CAL3531.jpg",
-        "250820_Haven Block Party_CAL3536.jpg",
-        "250820_Haven Block Party_CAL3545.jpg",
-        "250820_Haven Block Party_CAL3548.jpg",
-        "250820_Haven Block Party_CAL3553.jpg",
-        "250820_Haven Block Party_CAL3557.jpg",
-        "250820_Haven Block Party_CAL3572.jpg",
-        "250820_Haven Block Party_CAL3610.jpg",
-        "250820_Haven Block Party_CAL3619.jpg",
-        "250820_Haven Block Party_CAL3623.jpg"
-      ]
-    },
-    {
-      "bandName": "The Head Trips",
-      "folderPath": "The Head Trips/August 2025",
-      "dateDisplay": "August 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 20,
-        "iso": "2025-08-20",
-        "source": "filename_yymmdd"
-      },
-      "totalImages": 9,
-      "images": [
-        "250820_Haven Block Party_CAL2893.jpg",
-        "250820_Haven Block Party_CAL2906.jpg",
-        "250820_Haven Block Party_CAL2911.jpg",
-        "250820_Haven Block Party_CAL2916.jpg",
-        "250820_Haven Block Party_CAL2918.jpg",
-        "250820_Haven Block Party_CAL2920.jpg",
-        "250820_Haven Block Party_CAL2925.jpg",
-        "250820_Haven Block Party_CAL2937.jpg",
-        "250820_Haven Block Party_CAL2946.jpg"
-      ]
-    },
-    {
       "bandName": "Wild Blue Yonder",
       "folderPath": "Wild Blue Yonder/August 2025",
       "dateDisplay": "August 2025",
@@ -639,9 +625,8 @@
         "year": 2025,
         "month": 8,
         "monthName": "August",
-        "day": 20,
-        "iso": "2025-08-20",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-08-01"
       },
       "totalImages": 19,
       "images": [
@@ -674,9 +659,8 @@
         "year": 2025,
         "month": 4,
         "monthName": "April",
-        "day": 4,
-        "iso": "2025-04-04",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-04-01"
       },
       "totalImages": 14,
       "images": [
@@ -704,9 +688,8 @@
         "year": 2025,
         "month": 4,
         "monthName": "April",
-        "day": 4,
-        "iso": "2025-04-04",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2025-04-01"
       },
       "totalImages": 16,
       "images": [
@@ -736,9 +719,8 @@
         "year": 2024,
         "month": 12,
         "monthName": "December",
-        "day": 13,
-        "iso": "2024-12-13",
-        "source": "filename_ddmmyy_special"
+        "day": 1,
+        "iso": "2024-12-01"
       },
       "totalImages": 12,
       "images": [
@@ -764,9 +746,8 @@
         "year": 2024,
         "month": 4,
         "monthName": "April",
-        "day": 20,
-        "iso": "2024-04-20",
-        "source": "exif_original"
+        "day": 1,
+        "iso": "2024-04-01"
       },
       "totalImages": 6,
       "images": [
@@ -786,9 +767,8 @@
         "year": 2024,
         "month": 3,
         "monthName": "March",
-        "day": 15,
-        "iso": "2024-03-15",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2024-03-01"
       },
       "totalImages": 5,
       "images": [
@@ -807,9 +787,8 @@
         "year": 2024,
         "month": 3,
         "monthName": "March",
-        "day": 15,
-        "iso": "2024-03-15",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2024-03-01"
       },
       "totalImages": 19,
       "images": [
@@ -842,9 +821,8 @@
         "year": 2024,
         "month": 3,
         "monthName": "March",
-        "day": 15,
-        "iso": "2024-03-15",
-        "source": "filename_yymmdd"
+        "day": 1,
+        "iso": "2024-03-01"
       },
       "totalImages": 17,
       "images": [

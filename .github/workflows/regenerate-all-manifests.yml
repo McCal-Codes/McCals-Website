@@ -21,6 +21,10 @@ permissions:
 jobs:
   regenerate-manifests:
     runs-on: ubuntu-latest
+    env:
+      MANIFEST_WEBHOOK_URL: ${{ secrets.MANIFEST_WEBHOOK_URL }}
+      MANIFEST_WEBHOOK_BASE: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
+      WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -175,3 +179,9 @@ jobs:
           else
             echo "✅ No changes detected and force flag not set"
           fi
+
+      - name: Notify webhook for regenerated manifests
+        uses: ./.github/actions/notify-manifest-webhook
+        with:
+          portfolio: ${{ steps.parse_manifests.outputs.manifests }}
+          type: refresh
