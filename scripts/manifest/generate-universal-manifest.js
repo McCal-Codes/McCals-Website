@@ -15,6 +15,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 const { detectDateFromImages, formatDisplayDate, createFallbackDate, MONTHS } = require('../utils/shared-date-parsing.js');
+const { notify } = require('../utils/manifest-webhook');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const MANIFEST_OUTPUT = path.join(PORTFOLIOS_BASE, 'portfolio-manifest.json');
@@ -418,6 +419,11 @@ async function generateUniversalManifest() {
     
     // Write the universal manifest
     await fs.writeFile(MANIFEST_OUTPUT, JSON.stringify(universalManifest, null, 2), 'utf8');
+    try {
+      await notify('universal', { path: MANIFEST_OUTPUT, written: true });
+    } catch (err) {
+      console.warn('Failed to notify manifest webhook (universal):', err && err.message);
+    }
     success(`Generated universal manifest: ${MANIFEST_OUTPUT}`);
     success(`Processed ${allItems.length} portfolio items with ${universalManifest.totalImages} total images`);
     

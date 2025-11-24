@@ -22,3 +22,7 @@ Use this flow to serve manifest JSON over CDN without running the API.
 - Action only commits if manifests changed.
 - Branch `manifests-cdn` is force-updated each run; consume tagged URLs for stability.
 - Keep images in repo so manifests stay fetchable on the runner.
+
+## CI webhook integration
+
+When the CDN publish workflow pushes a branch and tag, it will optionally notify your configured API webhook (if `MANIFEST_WEBHOOK_URL` or `MANIFEST_WEBHOOK_BASE` and `WEBHOOK_SECRET` are set in repository secrets). This allows your API to re-warm caches for the newly published manifests automatically.

@@ -23,6 +23,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { detectDateFromImages, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing');
+const { notify } = require('../utils/manifest-webhook');
 
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const OUTPUT_MANIFEST = path.join(PORTFOLIOS_BASE, 'featured-manifest.json');
@@ -352,6 +353,11 @@ async function generateFeaturedManifest() {
     // Write featured manifest
     const content = JSON.stringify(featuredManifest, null, 2) + '\n';
     await fs.writeFile(OUTPUT_MANIFEST, content, 'utf-8');
+    try {
+      await notify('featured', { path: OUTPUT_MANIFEST, written: true });
+    } catch (err) {
+      console.warn('Failed to notify manifest webhook (featured):', err && err.message);
+    }
     
     success(`✨ Generated enhanced featured manifest: ${OUTPUT_MANIFEST}`);
     success(`   Selected ${cleanedItems.length} featured items with ${featuredManifest.totalImages} total images`);

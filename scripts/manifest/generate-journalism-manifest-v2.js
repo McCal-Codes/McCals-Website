@@ -22,6 +22,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const { notify } = require('../utils/manifest-webhook');
 
 // Configuration
 const JOURNALISM_DIR = path.resolve(__dirname, '../../src/images/Portfolios/Journalism');
@@ -318,6 +319,11 @@ async function generateManifest() {
     
     // Write manifest
     await fs.writeFile(MASTER_MANIFEST, JSON.stringify(manifest, null, 2), 'utf-8');
+    try {
+      await notify('journalism', { path: MASTER_MANIFEST, written: true });
+    } catch (err) {
+      console.warn('Failed to notify manifest webhook (journalism):', err && err.message);
+    }
     
     success('Journalism manifest generated successfully!');
     success(`📄 File: ${MASTER_MANIFEST}`);

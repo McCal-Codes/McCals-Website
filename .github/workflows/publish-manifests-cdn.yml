@@ -22,6 +22,10 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      MANIFEST_WEBHOOK_URL: ${{ secrets.MANIFEST_WEBHOOK_URL }}
+      MANIFEST_WEBHOOK_BASE: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
+      WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -89,6 +93,13 @@ jobs:
         run: |
           git push --force origin manifests-cdn
           git push origin ${{ steps.tagging.outputs.tag_name }}
+
+      - name: Notify API webhook for CDN publish
+        if: steps.diff.outputs.has_changes == 'true' && steps.commit.outputs.has_commit == 'true'
+        uses: ./.github/actions/notify-manifest-webhook
+        with:
+          portfolio: publish
+          type: publish
 
       - name: Summary
         run: |

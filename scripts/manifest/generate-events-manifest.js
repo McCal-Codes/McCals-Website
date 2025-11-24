@@ -6,6 +6,7 @@ const path = require('path');
 // Import shared date parsing utilities
 const { detectDateFromFilename } = require('../utils/shared-date-parsing.js');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
+const { notify } = require('../utils/manifest-webhook');
 
 // NOTE: Adjusted to include leading 'src/' so default matches repo structure
 const DEFAULT_ROOT = 'src/images/Portfolios/Events';
@@ -223,6 +224,11 @@ async function main() {
   const outFile = path.join(absRoot, OUTPUT_FILE);
   await fsp.writeFile(outFile, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
   console.log('[OK] Wrote manifest: - generate-events-manifest.js:225', path.relative(process.cwd(), outFile));
+  try {
+    await notify('events', { path: outFile, written: true });
+  } catch (err) {
+    console.warn('Failed to notify manifest webhook (events):', err && err.message);
+  }
 }
 
 main().catch(err => {

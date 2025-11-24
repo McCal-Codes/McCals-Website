@@ -1,4 +1,4 @@
 {
-  "lastHash": "b03df245",
-  "lastMessage": "feat: add webhook authentication and Redis cache management to API routes\n\\n\\nAuthor: mccal"
+  "lastHash": "5d214675",
+  "lastMessage": "feat: implement centralized manifest configuration and add admin routes for cache inspection\n\\n\\nAuthor: mccal"
 }

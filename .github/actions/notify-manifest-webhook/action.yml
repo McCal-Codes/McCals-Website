@@ -1,0 +1,68 @@
+name: Notify Manifest Webhook
+description: "Composite action to notify the API manifest webhook (refresh/publish) in CI. Handles missing secrets gracefully and returns success when nothing configured."
+inputs:
+  portfolio:
+    description: 'The portfolio key, e.g. concert, events, portrait, universal, publish'
+    required: true
+  type:
+    description: 'Action type to send; typically refresh or publish'
+    required: false
+    default: 'refresh'
+  webhook_url:
+    description: 'Optional full webhook URL; if provided this will be used directly'
+    required: false
+  webhook_base:
+    description: 'Optional webhook base to be combined with /refresh/<portfolio>'
+    required: false
+  webhook_secret:
+    description: 'Optional webhook secret header value; falls back to WEBHOOK_SECRET job env var'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Notify manifest webhook
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        PORTFOLIO="${{ inputs.portfolio }}"
+        TYPE="${{ inputs.type }}"
+
+        # Prefer explicit input webhook_url, then job env MANIFEST_WEBHOOK_URL
+        if [ -n "${{ inputs.webhook_url }}" ]; then
+          URL="${{ inputs.webhook_url }}"
+        elif [ -n "${MANIFEST_WEBHOOK_URL:-}" ]; then
+          URL="${MANIFEST_WEBHOOK_URL}"
+        elif [ -n "${{ inputs.webhook_base }}" ]; then
+          URL="${{ inputs.webhook_base }}"
+        elif [ -n "${MANIFEST_WEBHOOK_BASE:-}" ]; then
+          URL="${MANIFEST_WEBHOOK_BASE}"
+        else
+          echo "ℹ️ No webhook configuration detected (inputs or job env); skipping notification"
+          exit 0
+        fi
+
+        # If URL is a base path, append the refresh/publish suffix
+        if [[ "$URL" != */refresh/* && "$URL" != */publish* ]]; then
+          URL="${URL%/}/${TYPE}/${PORTFOLIO}"
+        fi
+
+        # Determine secret (prefer explicit input, fallback to job env WEBHOOK_SECRET)
+        SECRET="${{ inputs.webhook_secret }}"
+        if [ -z "$SECRET" ]; then
+          SECRET="${WEBHOOK_SECRET:-}"
+        fi
+
+        echo "🔔 Notifying manifest webhook for ${PORTFOLIO} -> $URL"
+
+        PAYLOAD=$(printf '{"type":"%s","source":"ci","ref":"%s"}' "${PORTFOLIO}" "${GITHUB_SHA}")
+
+        if [ -n "$SECRET" ]; then
+          curl -sS -X POST -H 'Content-Type: application/json' -H "x-webhook-secret: ${SECRET}" -d "$PAYLOAD" "$URL" || echo "⚠️ Webhook failed"
+        else
+          # Send without secret header if none configured
+          curl -sS -X POST -H 'Content-Type: application/json' -d "$PAYLOAD" "$URL" || echo "⚠️ Webhook failed"
+        fi
+
+        echo "✅ Webhook step completed"

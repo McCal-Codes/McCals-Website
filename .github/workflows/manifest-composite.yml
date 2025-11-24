@@ -14,6 +14,10 @@ jobs:
     strategy:
       matrix:
         portfolio: [concert, events, journalism, nature, portrait, universal]
+    env:
+      MANIFEST_WEBHOOK_URL: ${{ secrets.MANIFEST_WEBHOOK_URL }}
+      MANIFEST_WEBHOOK_BASE: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
+      WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,6 +54,12 @@ jobs:
             git add .
             git commit -m "ci: shadow composite manifest update (${{ matrix.portfolio }})" || echo "Nothing to commit"
           fi
+
+      - name: Notify API webhook (composite)
+        uses: ./.github/actions/notify-manifest-webhook
+        with:
+          portfolio: ${{ matrix.portfolio }}
+          type: refresh
 
   summary:
     name: Composite Summary

@@ -8,6 +8,7 @@
  */
 const fs = require('fs').promises;
 const path = require('path');
+const { notify } = require('../utils/manifest-webhook');
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 const BASE_NATURE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Nature');
 const WILDLIFE_BASE = path.join(BASE_NATURE, 'Wildlife');
@@ -79,5 +80,10 @@ async function scanAndGenerateManifests() {
   };
   await fs.writeFile(MANIFEST_OUTPUT, JSON.stringify(natureManifest, null, 2), 'utf8');
   console.log(`✅ Nature manifest generated: ${MANIFEST_OUTPUT}`);
+  try {
+    await notify('nature', { path: MANIFEST_OUTPUT, written: true });
+  } catch (err) {
+    console.warn('Failed to notify manifest webhook (nature):', err && err.message);
+  }
 }
 scanAndGenerateManifests().catch(err => { console.error('❌ Failed to generate nature manifest:', err); process.exit(1); });
