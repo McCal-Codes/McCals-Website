@@ -1,16 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `5d214675` — 0 seconds ago
-> feat: implement centralized manifest configuration and add admin routes for cache inspection
+**Last commit**: `04319b8c` — 0 seconds ago
+> feat: implement manifest webhook notifications in CI workflows
 ## 🔄 Changes in last commit
-- scripts/.welcome-state.json
-- src/api/cache/redis-client.js
-- src/api/config/manifests.js
-- src/api/routes/admin.js
-- src/api/routes/manifests.js
-- src/api/routes/webhooks.js
-- src/api/server.js
-- src/api/versions/v1/index.js
-- updates/welcome.md
+- .github/actions/notify-manifest-webhook/action.yml
+- .github/workflows/build-manifest.yml
+- .github/workflows/events-manifest.yml
+- .github/workflows/journalism-manifest.yml
+- .github/workflows/manifest-composite.yml
+- .github/workflows/nature-manifest.yml
+- .github/workflows/portrait-manifest.yml
+- .github/workflows/publish-manifests-cdn.yml
+- .github/workflows/regenerate-all-manifests.yml
+- .github/workflows/test-notify-manifest-webhook.yml
+- CHANGELOG.md
+- README.md
+- …and 18 more
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)

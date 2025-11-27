@@ -1,4 +1,4 @@
 {
-  "lastHash": "5d214675",
-  "lastMessage": "feat: implement centralized manifest configuration and add admin routes for cache inspection\n\\n\\nAuthor: mccal"
+  "lastHash": "04319b8c",
+  "lastMessage": "feat: implement manifest webhook notifications in CI workflows\n\n- Added a composite action `/.github/actions/notify-manifest-webhook` to centralize webhook notifications for manifest updates.\n- Integrated webhook notifications into all manifest generation workflows, ensuring API caches are refreshed automatically.\n- Updated CI workflows to use repository secrets for webhook configuration, enhancing security and maintainability.\n- Documented the new webhook integration in `README.md`, `docs/manifest-cdn.md`, and `docs/learned/manifest-webhook-integration.md`.\n- Added tests for the webhook notification action to ensure it behaves correctly with and without secrets.\n\\n\\nAuthor: mccal"
 }
