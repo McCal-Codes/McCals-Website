@@ -1,4 +1,4 @@
-name: Test: Notify Manifest Webhook Action
+name: "Test: Notify Manifest Webhook Action"
 
 on:
   workflow_dispatch:

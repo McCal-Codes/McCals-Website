@@ -28,10 +28,6 @@ concurrency:
 jobs:
   update-concert-manifest:
     runs-on: ubuntu-latest
-    env:
-      MANIFEST_WEBHOOK_URL: ${{ secrets.MANIFEST_WEBHOOK_URL }}
-      MANIFEST_WEBHOOK_BASE: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
-      WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -208,12 +204,21 @@ jobs:
           
           echo "✅ Concert manifest updated and pushed successfully!"
 
+      - name: Export webhook env (optional)
+        if: false  # Removed export step to reduce linter noise; kept for reference if future env indirection needed.
+        run: echo "(disabled)"
+
       - name: Notify API webhook
+        # Only attempt webhook notification when changes occurred (not on PR).
+        # Secrets passed as optional inputs; action exits early if none provided.
         if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
         uses: ./.github/actions/notify-manifest-webhook
         with:
           portfolio: concert
           type: refresh
+          webhook_url: ${{ secrets.MANIFEST_WEBHOOK_URL }}
+          webhook_base: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
+          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
 
       - name: PR Validation Summary
         if: github.event_name == 'pull_request' && steps.check_images.outputs.has_generator == 'true'

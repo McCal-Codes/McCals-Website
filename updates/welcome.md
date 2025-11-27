@@ -1,22 +1,11 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `1302985e` — 0 seconds ago
-> feat: add multiple compressed images for Penn State Fayette Dance Recital and Pittsburgh Social Club events
+**Last commit**: `c0e511a0` — 0 seconds ago
+> merge: resolve README + events-manifest conflicts (consolidated widgets & regenerated manifest)
 ## 🔄 Changes in last commit
-- scripts/.welcome-state.json
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1595.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1604.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1606.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1624.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1629.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1635.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1640.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1643.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1649.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1657.jpg
-- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1659.jpg
-- …and 153 more
+- README.md
+- updates/todo.md
 ## 📋 Your checklist status
-- Open: **53** | Done: **44**
+- Open: **57** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 
