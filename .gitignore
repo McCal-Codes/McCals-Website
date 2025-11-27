@@ -49,14 +49,21 @@ src/site/prototypes/vision-api/google-service-account.json
 site-workspace/temp/
 site-workspace/drafts/
 
-# Log files
+# Log and report files
 logs/
 *.log
+reports/
+test-results/
+coverage/
 
 # Runtime files
 *.pid
 *.seed
 *.pid.lock
+
+# Playwright/Chrome artifacts
+playwright-report/
+playwright/.cache/
 
 # OS generated files
 .DS_Store
@@ -68,4 +75,3 @@ $RECYCLE.BIN/
 *.tmp
 *.temp
 .cache/
-.tmp/
