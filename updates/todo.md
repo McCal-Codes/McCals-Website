@@ -116,6 +116,7 @@ Reference standards:
 - [ ] Update `.github/copilot-instructions.md`, `CHANGELOG.md`, and docs when making further structural changes
 - [ ] Concert Portfolio additional Spotify/embed features (follow-up enhancement)
  - [ ] TODO: Concert manifest workflow secret lint warnings — evaluate if GitHub Actions runtime succeeds despite local YAML linter "Context access might be invalid" notices. If harmless, document acceptance in workflow comment; else create wrapper step exporting secrets to $GITHUB_ENV only when set. (Added 2025-11-27)
+ - [ ] TODO: Reduce remaining secret lint warnings — consolidated by removing env secret blocks from portfolio workflows (Nov 27). Only `build-manifest.yml` still references secrets directly for concert webhook. Evaluate creating reusable `workflow_call` webhook dispatcher to isolate secret usage to one file; optional if warnings remain distracting. (Added 2025-11-27)
  - [ ] TODO: Add site-wide shared CSS at `src/widgets/_shared/site-widgets.css` (README, CDN snippet, and minimal tests). Ensure widgets keep local fallbacks and document opt-out.
  - [ ] TODO: Add accessibility audit notes and automation
 	- Run axe-core (Playwright/Firefox) against widget pages and save reports to `reports/axe-firefox-results.json` and `reports/axe-firefox-widget-report.html`.

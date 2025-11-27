@@ -1,11 +1,17 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `c0e511a0` — 0 seconds ago
-> merge: resolve README + events-manifest conflicts (consolidated widgets & regenerated manifest)
+**Last commit**: `043d1c6c` — 1 second ago
+> chore: clean up environment variable handling in concert manifest workflow and update welcome message
 ## 🔄 Changes in last commit
-- README.md
+- .github/workflows/build-manifest.yml
+- .github/workflows/events-manifest.yml
+- .github/workflows/journalism-manifest.yml
+- .github/workflows/nature-manifest.yml
+- .github/workflows/test-notify-manifest-webhook.yml
+- scripts/.welcome-state.json
 - updates/todo.md
+- updates/welcome.md
 ## 📋 Your checklist status
-- Open: **57** | Done: **44**
+- Open: **58** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 

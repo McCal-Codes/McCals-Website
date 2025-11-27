@@ -21,10 +21,6 @@ permissions:
 jobs:
   regenerate-manifests:
     runs-on: ubuntu-latest
-    env:
-      MANIFEST_WEBHOOK_URL: ${{ secrets.MANIFEST_WEBHOOK_URL }}
-      MANIFEST_WEBHOOK_BASE: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
-      WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

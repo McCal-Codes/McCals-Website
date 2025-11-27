@@ -1,4 +1,4 @@
 {
-  "lastHash": "c0e511a0",
-  "lastMessage": "merge: resolve README + events-manifest conflicts (consolidated widgets & regenerated manifest)\n\\n\\nAuthor: mccal"
+  "lastHash": "043d1c6c",
+  "lastMessage": "chore: clean up environment variable handling in concert manifest workflow and update welcome message\n\\n\\nAuthor: mccal"
 }
