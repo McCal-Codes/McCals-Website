@@ -1,4 +1,4 @@
 {
-  "lastHash": "1302985e",
-  "lastMessage": "feat: add multiple compressed images for Penn State Fayette Dance Recital and Pittsburgh Social Club events\n\n- Added 72 new compressed image files for the Penn State Fayette Dance Recital, enhancing the event portfolio.\n- Included 50 new compressed image files for the Pittsburgh Social Club event, expanding the visual documentation.\n- Updated welcome message to reflect recent changes and commit history.\n\\n\\nAuthor: mccal"
+  "lastHash": "c0e511a0",
+  "lastMessage": "merge: resolve README + events-manifest conflicts (consolidated widgets & regenerated manifest)\n\\n\\nAuthor: mccal"
 }
