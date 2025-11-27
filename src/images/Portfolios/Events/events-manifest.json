@@ -1,8 +1,96 @@
 {
-  "version": "2.5.3",
-  "generated": "2025-11-24",
-  "totalEvents": 15,
+  "version": "2.6.4",
+  "generated": "2025-11-27",
+  "totalEvents": 19,
   "events": [
+    {
+      "eventName": "Pittsburgh Social Club",
+      "category": "Corporate",
+      "dateDisplay": "November 2025",
+      "dateISO": "2025-11-14",
+      "date": {
+        "year": 2025,
+        "month": 11,
+        "day": 14,
+        "monthName": "November",
+        "iso": "2025-11-14",
+        "display": "November 2025"
+      },
+      "dateSource": "filename:251114 PGH Social Club at Avalon_CAL753_webuse.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL753_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL764_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL773_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL777_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL784_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL788_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL798_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL800_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL810_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL817_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL818_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL828_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL834_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL840_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL844_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL856_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL872_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL877_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL881_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL882_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL885_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL888_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL889_webuse.jpg"
+        }
+      ],
+      "totalImages": 23
+    },
     {
       "eventName": "Love's A Game",
       "category": "Performance Art",
@@ -2143,6 +2231,145 @@
       "totalImages": 82
     },
     {
+      "eventName": "Bob Fryer Golf Outing",
+      "category": "Corporate",
+      "dateDisplay": "July 2025",
+      "dateISO": "2025-07-19",
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 19,
+        "monthName": "July",
+        "iso": "2025-07-19",
+        "display": "July 2025"
+      },
+      "dateSource": "filename:250719_Bob Fryer Golf Outing_CAL1595.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1595.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1604.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1606.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1624.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1629.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1635.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1643.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1649.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1657.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1659.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1670.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1680.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1681.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1684.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1686.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1687.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1696.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1700.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1709.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1712.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1713.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1714.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1720.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1722.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1729.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1730.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1734.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1737.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1741.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1743.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1750.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1769.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1771.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1774.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1789.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1793.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1804.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1806.jpg"
+        }
+      ],
+      "totalImages": 40
+    },
+    {
       "eventName": "CMU Business Graduation",
       "category": "Celebration",
       "dateDisplay": "May 2025",
@@ -2724,6 +2951,70 @@
       "totalImages": 170
     },
     {
+      "eventName": "Drag At Carnegie Coffee",
+      "category": "Corporate",
+      "dateDisplay": "March 2025",
+      "dateISO": "2025-03-09",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 9,
+        "monthName": "March",
+        "iso": "2025-03-09",
+        "display": "March 2025"
+      },
+      "dateSource": "filename:250309 Drag at Carnegie Coffee_CAL9040.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9040.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9088.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9135.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9145.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9158.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9241.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9282.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9319.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9346.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9362.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9406.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9460.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9516.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9573.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9579.jpg"
+        }
+      ],
+      "totalImages": 15
+    },
+    {
       "eventName": "Pitt University Graduation Winter 2024",
       "category": "Celebration",
       "dateDisplay": "December 2024",
@@ -2991,6 +3282,280 @@
         }
       ],
       "totalImages": 31
+    },
+    {
+      "eventName": "Penn State Fayette Dance Recital",
+      "category": "Corporate",
+      "dateDisplay": "July 2024",
+      "dateISO": "2024-07-22",
+      "date": {
+        "year": 2024,
+        "month": 7,
+        "day": 22,
+        "monthName": "July",
+        "iso": "2024-07-22",
+        "display": "July 2024"
+      },
+      "dateSource": "filename:240722_Penn State Fayette Dance Recital _1688_CAL_Compressed.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1688_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1689_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1690_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1691_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1692_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1693_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1694_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1695_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1696_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1697_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1698_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1699_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1700_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1701_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1702_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1703_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1704_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1705_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1706_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1707_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1708_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1709_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1710_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1711_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1712_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1713_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1714_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1715_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1716_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1717_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1718_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1719_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1720_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1721_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1722_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1723_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1724_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1725_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1726_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1727_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1728_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1729_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1730_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1731_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1732_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1733_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1734_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1735_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1736_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1737_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1738_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1739_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1740_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1741_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1742_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1743_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1744_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1745_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1746_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1747_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1748_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1749_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1750_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1751_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1752_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1753_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1754_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1755_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1756_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1757_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1758_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1759_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1760_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1761_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1762_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1763_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1764_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1765_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1766_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1767_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1768_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1769_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1770_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1771_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1772_CAL_Compressed.jpg"
+        }
+      ],
+      "totalImages": 85
     },
     {
       "eventName": "Myron Cope Awards 2024",
@@ -3417,6 +3982,93 @@
     }
   ],
   "items": [
+    {
+      "title": "Pittsburgh Social Club",
+      "eventName": "Pittsburgh Social Club",
+      "category": "Corporate",
+      "dateDisplay": "November 2025",
+      "dateISO": "2025-11-14",
+      "date": {
+        "year": 2025,
+        "month": 11,
+        "day": 14,
+        "monthName": "November",
+        "iso": "2025-11-14",
+        "display": "November 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL753_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL764_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL773_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL777_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL784_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL788_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL798_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL800_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL810_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL817_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL818_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL828_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL834_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL840_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL844_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL856_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL872_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL877_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL881_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL882_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL885_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL888_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL889_webuse.jpg"
+        }
+      ],
+      "folderPath": "Events/Pittsburgh Social Club"
+    },
     {
       "title": "Love's A Game",
       "eventName": "Love's A Game",
@@ -5551,6 +6203,144 @@
       "folderPath": "Events/Local Union Officers Conference 2025"
     },
     {
+      "title": "Bob Fryer Golf Outing",
+      "eventName": "Bob Fryer Golf Outing",
+      "category": "Corporate",
+      "dateDisplay": "July 2025",
+      "dateISO": "2025-07-19",
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 19,
+        "monthName": "July",
+        "iso": "2025-07-19",
+        "display": "July 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1595.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1604.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1606.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1624.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1629.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1635.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1640.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1643.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1649.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1657.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1659.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1670.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1680.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1681.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1684.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1686.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1687.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1696.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1700.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1709.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1712.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1713.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1714.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1720.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1722.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1729.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1730.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1734.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1737.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1741.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1743.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1750.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1769.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1771.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1774.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1789.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1793.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1804.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1806.jpg"
+        }
+      ],
+      "folderPath": "Events/Bob Fryer Golf Outing"
+    },
+    {
       "title": "CMU Business Graduation",
       "eventName": "CMU Business Graduation",
       "category": "Celebration",
@@ -6130,6 +6920,69 @@
       "folderPath": "Events/The Rooney Rule"
     },
     {
+      "title": "Drag At Carnegie Coffee",
+      "eventName": "Drag At Carnegie Coffee",
+      "category": "Corporate",
+      "dateDisplay": "March 2025",
+      "dateISO": "2025-03-09",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 9,
+        "monthName": "March",
+        "iso": "2025-03-09",
+        "display": "March 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9040.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9088.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9135.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9145.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9158.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9241.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9282.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9319.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9346.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9362.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9406.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9460.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9516.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9573.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Drag at Carnegie Coffee/250309 Drag at Carnegie Coffee_CAL9579.jpg"
+        }
+      ],
+      "folderPath": "Events/Drag at Carnegie Coffee"
+    },
+    {
       "title": "Pitt University Graduation Winter 2024",
       "eventName": "Pitt University Graduation Winter 2024",
       "category": "Celebration",
@@ -6395,6 +7248,279 @@
         }
       ],
       "folderPath": "Events/Dance for a Cause"
+    },
+    {
+      "title": "Penn State Fayette Dance Recital",
+      "eventName": "Penn State Fayette Dance Recital",
+      "category": "Corporate",
+      "dateDisplay": "July 2024",
+      "dateISO": "2024-07-22",
+      "date": {
+        "year": 2024,
+        "month": 7,
+        "day": 22,
+        "monthName": "July",
+        "iso": "2024-07-22",
+        "display": "July 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1688_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1689_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1690_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1691_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1692_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1693_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1694_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1695_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1696_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1697_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1698_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1699_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1700_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1701_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1702_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1703_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1704_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1705_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1706_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1707_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1708_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1709_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1710_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1711_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1712_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1713_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1714_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1715_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1716_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1717_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1718_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1719_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1720_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1721_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1722_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1723_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1724_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1725_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1726_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1727_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1728_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1729_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1730_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1731_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1732_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1733_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1734_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1735_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1736_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1737_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1738_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1739_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1740_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1741_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1742_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1743_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1744_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1745_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1746_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1747_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1748_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1749_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1750_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1751_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1752_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1753_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1754_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1755_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1756_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1757_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1758_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1759_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1760_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1761_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1762_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1763_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1764_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1765_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1766_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1767_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1768_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1769_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1770_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1771_CAL_Compressed.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Penn State Fayette Dance Recital/240722_Penn State Fayette Dance Recital _1772_CAL_Compressed.jpg"
+        }
+      ],
+      "folderPath": "Events/Penn State Fayette Dance Recital"
     },
     {
       "title": "Myron Cope Awards 2024",

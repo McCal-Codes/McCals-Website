@@ -1,4 +1,4 @@
 {
-  "lastHash": "04319b8c",
-  "lastMessage": "feat: implement manifest webhook notifications in CI workflows\n\n- Added a composite action `/.github/actions/notify-manifest-webhook` to centralize webhook notifications for manifest updates.\n- Integrated webhook notifications into all manifest generation workflows, ensuring API caches are refreshed automatically.\n- Updated CI workflows to use repository secrets for webhook configuration, enhancing security and maintainability.\n- Documented the new webhook integration in `README.md`, `docs/manifest-cdn.md`, and `docs/learned/manifest-webhook-integration.md`.\n- Added tests for the webhook notification action to ensure it behaves correctly with and without secrets.\n\\n\\nAuthor: mccal"
+  "lastHash": "1302985e",
+  "lastMessage": "feat: add multiple compressed images for Penn State Fayette Dance Recital and Pittsburgh Social Club events\n\n- Added 72 new compressed image files for the Penn State Fayette Dance Recital, enhancing the event portfolio.\n- Included 50 new compressed image files for the Pittsburgh Social Club event, expanding the visual documentation.\n- Updated welcome message to reflect recent changes and commit history.\n\\n\\nAuthor: mccal"
 }

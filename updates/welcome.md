@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `04319b8c` — 0 seconds ago
-> feat: implement manifest webhook notifications in CI workflows
+**Last commit**: `1302985e` — 0 seconds ago
+> feat: add multiple compressed images for Penn State Fayette Dance Recital and Pittsburgh Social Club events
 ## 🔄 Changes in last commit
-- .github/actions/notify-manifest-webhook/action.yml
-- .github/workflows/build-manifest.yml
-- .github/workflows/events-manifest.yml
-- .github/workflows/journalism-manifest.yml
-- .github/workflows/manifest-composite.yml
-- .github/workflows/nature-manifest.yml
-- .github/workflows/portrait-manifest.yml
-- .github/workflows/publish-manifests-cdn.yml
-- .github/workflows/regenerate-all-manifests.yml
-- .github/workflows/test-notify-manifest-webhook.yml
-- CHANGELOG.md
-- README.md
-- …and 18 more
+- scripts/.welcome-state.json
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1595.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1604.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1606.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1624.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1629.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1635.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1640.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1643.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1649.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1657.jpg
+- src/images/Portfolios/Events/Bob Fryer Golf Outing/250719_Bob Fryer Golf Outing_CAL1659.jpg
+- …and 153 more
 ## 📋 Your checklist status
 - Open: **53** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)
