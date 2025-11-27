@@ -586,12 +586,20 @@ function manifestUrl() {
 }
 
 function toUrl(p) {
+  // TODO: Encode path segments robustly (handles spaces, apostrophes, unicode) and prefer canonical src/ path
   if (!p) return '';
   if (/^https?:\/\//i.test(p) || /^data:/i.test(p)) return p;
   let s = String(p).replace(/^\.\/+/, '').replace(/^\/+/, '');
-  if (s.indexOf('src/images/Portfolios/Events/') === 0) return RAW + s;
-  if (s.indexOf('images/Portfolios/Events/') === 0) return RAW + 'src/' + s;
-  return RAW + 'src/images/Portfolios/Events/' + s;
+  const encodeSegments = (full, prefix) => {
+    const rest = full.slice(prefix.length).split('/').map(seg => encodeURIComponent(seg)).join('/');
+    return RAW + prefix + rest;
+  };
+  const PREF = 'src/images/Portfolios/Events/';
+  if (s.startsWith(PREF)) return encodeSegments(s, PREF);
+  const ALT = 'images/Portfolios/Events/';
+  if (s.startsWith(ALT)) return encodeSegments('src/' + s, PREF); // normalize to src/ path
+  // Fallback: treat as relative inside Events root
+  return encodeSegments(PREF + s, PREF);
 }
 
 function withTimeout(run, ms) {
@@ -867,7 +875,12 @@ function displayEvents(events, filterCategory = 'all') {
     const eventName = event.eventName || 'Event';
     const category = event.category || '';
     const date = formatDate(event.dateISO || '');
-    const firstImage = (event.images && event.images[0]) || null;
+    let firstImage = (event.images && event.images[0]) || null;
+    // Prefer a webp variant if present for thumbnail efficiency
+    if (event.images && event.images.length) {
+      const webpPreferred = event.images.find(img => /\.webp$/i.test(img.path));
+      if (webpPreferred) firstImage = webpPreferred;
+    }
     const thumbnail = firstImage ? toUrl(firstImage.path) : '';
     
     if (!thumbnail) {
@@ -935,7 +948,30 @@ function setText(sel, text) {
   if (el) el.textContent = text;
 }
 
-function openLB(ev){let lb=$('#lightbox'),gal=$('#lbGallery'); if(!lb||!gal)return; gal.innerHTML=''; (ev.images||[]).forEach((it,i)=>{let im=new Image(); im.loading='lazy'; im.alt=(ev.eventName||'Event')+' - '+(i+1); im.src=toUrl(it.path); gal.appendChild(im)}); setText('#lbTitle',ev.eventName||'Event'); let c=ev.totalImages||(ev.images?ev.images.length:0); setText('#lbMeta',(ev.dateDisplay||'')+' * '+(ev.category||'Event')+' * '+c+' images'); let d=(ev.images&&ev.images[0]&&ev.images[0].description)||''; let desc=$('#lbDesc'); if(desc){if(d){desc.textContent=d; desc.style.display='block'}else{desc.style.display='none'}} lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false'); document.documentElement.classList.add('lb-open'); document.body.style.overflow='hidden'}
+function openLB(ev){
+  let lb=$('#lightbox'),gal=$('#lbGallery'); if(!lb||!gal)return; gal.innerHTML='';
+  // Prefer webp for gallery ordering (show optimized first) then jpg/png
+  const ordered = (ev.images||[]).slice().sort((a,b)=>{
+    const aw = /\.webp$/i.test(a.path) ? 0 : 1;
+    const bw = /\.webp$/i.test(b.path) ? 0 : 1;
+    return aw - bw;
+  });
+  ordered.forEach((it,i)=>{
+    let im=new Image();
+    im.loading='lazy';
+    im.alt=(ev.eventName||'Event')+' - '+(i+1);
+    im.src=toUrl(it.path);
+    im.onerror=()=>{im.style.opacity='0.4'; im.alt+=' (failed to load)';};
+    gal.appendChild(im);
+  });
+  setText('#lbTitle',ev.eventName||'Event');
+  let c=ev.totalImages||(ev.images?ev.images.length:0);
+  setText('#lbMeta',(ev.dateDisplay||'')+' * '+(ev.category||'Event')+' * '+c+' images');
+  let d=(ev.images&&ev.images[0]&&ev.images[0].description)||'';
+  let desc=$('#lbDesc');
+  if(desc){if(d){desc.textContent=d; desc.style.display='block'} else {desc.style.display='none'}}
+  lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false'); document.documentElement.classList.add('lb-open'); document.body.style.overflow='hidden'
+}
 
 function closeLB(){let lb=$('#lightbox'); if(lb){lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true'); document.documentElement.classList.remove('lb-open'); document.body.style.overflow=''}}
 

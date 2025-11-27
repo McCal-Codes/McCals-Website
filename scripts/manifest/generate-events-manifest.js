@@ -12,6 +12,11 @@ const { notify } = require('../utils/manifest-webhook');
 const DEFAULT_ROOT = 'src/images/Portfolios/Events';
 const OUTPUT_FILE = 'events-manifest.json';
 
+// TODO: Dynamic manifest versioning improvement
+// Future enhancement: derive version from highest widget HTML version in
+// src/widgets/event-portfolio/versions/ OR from a central version registry.
+// For now we support an override via --version CLI flag or EVENTS_MANIFEST_VERSION env var.
+
 function titleCase(slug) {
   return slug.replace(/[_-]+/g, ' ').trim().split(/\s+/).map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
 }
@@ -116,6 +121,9 @@ async function exists(target) {
 async function main() {
   const argv = process.argv.slice(2);
   const rootFlag = argv.indexOf('--root');
+  const versionFlag = argv.indexOf('--version');
+  const requestedVersion = (versionFlag >= 0 && argv[versionFlag + 1]) ? String(argv[versionFlag + 1]).trim() : (process.env.EVENTS_MANIFEST_VERSION || '').trim();
+  const manifestVersion = requestedVersion || '2.6.4';
   const rootDir = (rootFlag >= 0 && argv[rootFlag + 1]) ? argv[rootFlag + 1] : DEFAULT_ROOT;
   const absRoot = path.resolve(rootDir);
   const portfoliosBase = path.join(process.cwd(), 'src', 'images', 'Portfolios');
@@ -199,7 +207,7 @@ async function main() {
   });
 
   const manifest = {
-    version: '2.5.3',
+    version: manifestVersion,
     generated: new Date().toISOString().slice(0, 10),
     totalEvents: events.length,
     events,
@@ -223,7 +231,7 @@ async function main() {
 
   const outFile = path.join(absRoot, OUTPUT_FILE);
   await fsp.writeFile(outFile, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
-  console.log('[OK] Wrote manifest: - generate-events-manifest.js:225', path.relative(process.cwd(), outFile));
+  console.log('[OK] Wrote manifest (v' + manifestVersion + '): - generate-events-manifest.js:225', path.relative(process.cwd(), outFile));
   try {
     await notify('events', { path: outFile, written: true });
   } catch (err) {

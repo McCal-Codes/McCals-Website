@@ -180,6 +180,9 @@ Reference standards:
 
 ## Advanced Features & Integrations
 - [ ] TODO: Integrate AI-powered image alt-text generation for accessibility
+ - [ ] TODO: Event Portfolio manifest dynamic versioning: update generator to auto-detect latest widget version (currently manual default 2.6.4 via --version / env). Add script to parse `src/widgets/event-portfolio/versions/` and supply `--version` in workflow.
+ - [ ] TODO: Event Portfolio URL normalization: verify new `toUrl` encoding logic correctly loads files containing spaces & curly apostrophes; extend to fallback 404 diagnostic overlay.
+ - [ ] TODO: Consolidate webp preference: implement manifest-side duplicate pairing (jpg+webp) with single logical image entry containing sources array to reduce array length.
 - [ ] TODO: Add real-time analytics and user interaction tracking
 - [ ] TODO: Implement progressive web app (PWA) features for offline viewing
 - [ ] TODO: Create admin dashboard for content management and widget configuration
