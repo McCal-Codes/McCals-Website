@@ -47,6 +47,7 @@
     "build:concert": "npm run organize:folders && npm run manifest:concert",
     "watch:concert": "node scripts/watchers/watch-concert-folders.js",
     "manifest:universal": "node scripts/manifest/generate-universal-manifest.js",
+    "manifest:fallback": "node scripts/manifest/generate-fallback-manifests.js",
     "build:universal": "npm run organize:folders && npm run manifest:concert && npm run manifest:universal",
     "watch:universal": "node scripts/watchers/watch-universal-portfolios.js",
     "build:optimized": "npm run build:universal",

@@ -362,7 +362,7 @@ Configuration (data-* attributes on #concertPf):
       }
     }
 
-    // GitHub Raw fallback
+    // GitHub Raw fallback (primary), then resilient local fallback file
     for (const basePath of CONFIG.basePaths) {
       try {
         const response = await fetch(buildUrls.manifest(basePath), { cache: 'no-store' });
@@ -376,7 +376,23 @@ Configuration (data-* attributes on #concertPf):
         log(`Failed to load from ${basePath}:`, error.message);
       }
     }
-    throw new Error('Failed to load manifest from all sources');
+    // Try local fallback JSON file
+    try {
+      const localRes = await fetch('src/images/Portfolios/Concert/concert-manifest.fallback.json', { cache: 'no-store' });
+      if (localRes.ok) {
+        const fb = await localRes.json();
+        cache.set({ manifest: fb, basePath: CONFIG.basePaths[0] });
+        log('Loaded local fallback manifest');
+        return fb;
+      }
+    } catch (e) {
+      log('Local fallback fetch failed:', e?.message || e);
+    }
+    // Inline minimal fallback to avoid blank UI
+    const inlineFb = { version: 'fallback-concert', generated: new Date().toISOString().split('T')[0], bands: [] };
+    cache.set({ manifest: inlineFb, basePath: CONFIG.basePaths[0] });
+    log('Using inline fallback manifest');
+    return inlineFb;
   };
 
   // Build portfolio grid
@@ -389,7 +405,19 @@ Configuration (data-* attributes on #concertPf):
       const manifest = await loadManifest();
       state.manifest = manifest;
       log('Manifest loaded:', manifest);
-      if (!manifest?.bands?.length) throw new Error('No concert data available');
+      if (!manifest?.bands?.length) {
+        // Graceful limited preview state
+        loading.innerHTML = '<div style="text-align:center;color:#cfcfcf">Limited preview — manifest unavailable</div>';
+        // Render empty grid with note and exit early
+        grid.innerHTML = '';
+        loading.style.display = 'none';
+        grid.style.display = 'block';
+        grid.classList.add('loaded');
+        // Initialize Spotify support with empty manifest to keep UI consistent
+        initSpotifySupport();
+        addStructuredData(manifest);
+        return;
+      }
 
       // Add structured data for SEO
       addStructuredData(manifest);
