@@ -8,10 +8,10 @@ Translucent navigation bar for Squarespace that replaces the stock header with a
 - Mobile drawer toggle, focus-visible styling, and version badge + changelog modal.
 
 ## Usage
-1. Copy the latest file from `versions/` (start with `v1.7.0-site-navigation.html`).
+1. Copy the latest file from `versions/` (start with `v1.7.1-site-navigation.html`).
 ## Active Versions
-- v1.7.0 (current)
-- v1.6.0 (previous stable)
+- v1.7.1 (current)
+- v1.6.3 (previous stable)
 
 Older versions are archived in `src/widgets/_archived/legacy-widget-versions/site-navigation/`.
 2. Paste into a Code Block or site-wide Code Injection near the top of the page.
