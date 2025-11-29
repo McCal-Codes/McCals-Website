@@ -27,6 +27,17 @@ Manifest workflows notify the API (if secrets set) so caches can be warmed autom
 ## ✅ Widget Validation & Continuous Integration
 
 All Squarespace widgets are automatically validated for standards compliance (namespace wrapper, inline CSS/JS, version attribute).
+### Widget Release
+
+We use tag-based releases for deploying widgets to Squarespace via jsDelivr:
+
+- Tag format: `widget-name@MAJOR.MINOR.PATCH` (e.g., `interactive-thesis@0.4.0`)
+- Pre-publish CI: On tag push, `.github/workflows/prepublish-widget-release.yml` runs preflight, HTML validation, and manifest dry-run, then uploads reports.
+- CDN pattern: `https://cdn.jsdelivr.net/gh/<owner>/<repo>@<tag>/<path-to-versioned-html>`
+- Example: `https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html`
+
+Use the loader snippet documented in `.github/copilot-instructions.md` under “Squarespace + jsDelivr (quick pattern)”.
+
 
 Fixing validation errors:
 1. Run locally: `node scripts/utils/validate-widgets.js`
@@ -68,6 +79,9 @@ Work In Progress:
 - Nature Portfolio gallery
 
 ## Development Standards
+Performance Regression CI:
+- A headless Playwright-based performance scaffold runs basic metrics for widgets and uploads HTML reports. Lighthouse integration will be added in a subsequent iteration.
+
 
 Quick Reference: `docs/standards/widget-reference.md`
 Architecture & Patterns: `docs/standards/widget-standards.md`
@@ -142,6 +156,8 @@ Common scripts:
 - Repository-wide improvement roadmap: [`docs/repo-improvement-plan.md`](docs/repo-improvement-plan.md).
 
 ## Documentation
+Widget Documentation:
+- See `docs/widgets/index.md` for per-widget usage summaries and links.
 
 Full documentation lives in [`docs/README.md`](docs/README.md) and includes:
 - Standards: `docs/standards/`

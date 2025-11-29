@@ -38,6 +38,15 @@ Notes
 - Fast path: pin to exact tag. Robust path: use Releases + CI smoke tests + optional integrity headers.
 - If embed fails: verify path, file is self-contained HTML, and tag was pushed.
 
+Pre-publish integrity CI
+
+- A dedicated workflow runs on widget tags (pattern `widget-name@MAJOR.MINOR.PATCH`):
+	- AI Preflight (short) to surface workspace standards and policies
+	- Widget HTML validation (`npm run validate:widgets`)
+	- Manifest dry-run (`npm run manifest:dry-run`) to confirm generators are healthy
+	- Reports uploaded as artifacts for quick inspection
+	- See `.github/workflows/prepublish-widget-release.yml`
+
 VS Code Agent TODO list
 
 - [ ] TODO: Update this file when release flow or manifest schema changes
@@ -186,6 +195,7 @@ Workflow troubleshooting
 Widget performance and debugging
 
 - **Performance Standards**: All widgets must follow `docs/standards/performance-standards.md` for Lighthouse optimization. Use Concert Portfolio v4.6 as the primary performance reference implementation.
+ - **Performance Regression CI**: A headless Playwright-based performance scaffold runs basic metrics and uploads HTML reports; Lighthouse integration will follow.
 - Debug mode: Add `?debug=true` to any widget URL to enable performance overlays and metrics
 - Console access: Use `window.portfolioAPI.getMetrics()` in browser console for cache hit rates and API performance
 - Lightbox patterns: Widgets use fixed positioning with z-index 2147483647, hidden scrollbars, and pointer-events blocking
@@ -222,6 +232,10 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+- 2025-11-29T00:00:00.000Z — Pre-publish and Validation CI enhancements.
+	- Added prepublish workflow for widget tag releases: runs AI Preflight, widget validation, manifest dry-run, uploads artifacts.
+	- Upgraded widget validation CI to publish reports and allow manual dispatch.
+	- Introduced README audit utility to enforce active-version policy (current + previous, x.x.0 format) and archive linkage.
 
 - 2025-11-23T00:00:00.000Z — Version Standardization Complete (x.x.0 Format)
 	- Problem: Version dropdowns sorting incorrectly (v1.10 appearing before v1.9) due to inconsistent version formats (some x.x, some x.x.0).

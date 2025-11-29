@@ -1,0 +1,41 @@
+name: Prepublish Widget Release Integrity
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*@*.*.*'
+
+jobs:
+  prepublish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Run AI Preflight (short)
+        run: node scripts/utils/ai-instructions-preflight.js --short
+
+      - name: Validate widgets
+        run: npm run validate:widgets
+
+      - name: Validate manifests (dry run)
+        run: npm run manifest:dry-run
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prepublish-reports
+          path: |
+            reports/*
+            test-results/*

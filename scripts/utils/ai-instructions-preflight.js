@@ -22,15 +22,24 @@ const REQUIRED_DOCS = [
 // Dynamically discover instruction files in .github to avoid hardcoding and
 // to make the preflight tolerant to new/renamed instruction docs.
 function discoverDocs() {
-  const dir = path.join(ROOT, '.github');
-  try {
-    const files = fs.readdirSync(dir);
-    return files
-      .filter(f => /instructions?/.test(f) && f.endsWith('.md'))
-      .map(f => ({ file: path.join(dir, f), name: f }));
-  } catch (e) {
-    return [];
+  const sources = [
+    { dir: path.join(ROOT, '.github'), filter: f => /instructions?/.test(f) && f.endsWith('.md') },
+    // Include key standards/docs that drive workspace policies
+    { dir: path.join(ROOT, 'docs', 'standards'), filter: f => f.endsWith('.md') && /workspace-organization|versioning|performance-standards|widget-standards|widget-reference/i.test(f) }
+  ];
+  const out = [];
+  for (const src of sources) {
+    try {
+      const files = fs.readdirSync(src.dir);
+      for (const f of files) {
+        if (!src.filter(f)) continue;
+        out.push({ file: path.join(src.dir, f), name: f });
+      }
+    } catch (e) {
+      // ignore missing dirs
+    }
   }
+  return out;
 }
 
 const DISCOVERED = discoverDocs();
@@ -120,8 +129,20 @@ function summarizeDoc(key, title, content) {
   const limitShort = isShort ? 1 : 3;
   sections.purpose = tryHeading(['purpose', 'purpose and scope', 'purpose and scope:'], limitShort);
   sections.workflow = tryHeading(['images and manifests pipeline (critical)', 'images and manifests pipeline', 'run/build/deploy workflows', 'local workflow (short)'], limitShort);
-  sections.ci = tryHeading(['ci automation', 'ci & health', 'ci & health'], limitShort);
+  sections.ci = tryHeading(['ci automation', 'ci & health', 'ci & health', 'workflow standards', 'github actions workflow standards'], limitShort);
   sections.authoring = tryHeading(['widget authoring conventions', 'golden rules', 'widgets'], isShort ? 1 : 2);
+
+  // Highlight critical 2025-11 policies
+  sections.policies = tryHeading([
+    'single-portfolio manifest policy (2025-11)',
+    'single-portfolio manifest policy',
+    'legacy widget version archival (phase 1 — 2025-11)'
+  ], limitShort);
+  sections.versioning = tryHeading([
+    'versioning',
+    'version standardization',
+    'version standardization complete (x.x.0 format)'
+  ], limitShort);
 
   const norms = [
     ...tryHeading(['key rules', 'safe-change checklist for agents', 'safe-change checklist'], isShort ? 4 : 6),
@@ -183,6 +204,12 @@ function formatPretty(results, meta) {
         lines.push(`  - ${name}:`);
         bullets.forEach(b => lines.push(`    • ${b}`));
       }
+    }
+    // Show policy highlights if present
+    if (r.summary && r.summary.sections && (r.summary.sections.policies?.length || r.summary.sections.versioning?.length)) {
+      lines.push(`  - policy-highlights:`);
+      (r.summary.sections.policies || []).forEach(b => lines.push(`    • ${b}`));
+      (r.summary.sections.versioning || []).forEach(b => lines.push(`    • ${b}`));
     }
     if (r.summary && r.summary.norms && r.summary.norms.length && !isShort) {
       lines.push(`- Norms sample:`);
@@ -247,6 +274,9 @@ function main() {
     console.log(formatPretty(toReport, meta));
   }
 
+  // Non-zero exit if required docs missing to strengthen CI visibility
+  const hasMissing = meta.missingRequired && meta.missingRequired.length > 0;
+
   // update cache mtimes for next run
   try {
     const dir = path.dirname(cacheFile);
@@ -256,6 +286,10 @@ function main() {
     fs.writeFileSync(cacheFile, JSON.stringify(toSave, null, 2), 'utf8');
   } catch (e) {
     // non-fatal
+  }
+
+  if (hasMissing) {
+    process.exitCode = 2;
   }
 }
 

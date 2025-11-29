@@ -23,14 +23,13 @@ Filterable masonry gallery for displaying photojournalism work with categories. 
 - **ARIA Attributes**: Proper screen reader compatibility
 - **Focus Management**: Lightbox focus trapping and restoration
 
-## Current Versions
+## Active Versions
 
-Active versions retained in `versions/`:
-- **v5.2** (Latest): Performance optimized iteration
-- **v5.1**: Previous performance pass baseline
-- **v4.9**: Stable event-cards implementation prior to v5 performance work
+Active versions retained in `versions/` (x.x.0 format):
+- **v5.2.0** (Latest): Performance optimized iteration
+- **v5.1.0**: Previous performance pass baseline
 
-Legacy versions (v4.8 and earlier) have been moved to `src/widgets/_archived/legacy-widget-versions/photojournalism-portfolio/`.
+Legacy versions (v4.x.x and earlier) have been moved to `src/widgets/_archived/legacy-widget-versions/photojournalism-portfolio/`.
 
 ### Legacy Highlights (Archived)
 - **v4.8**: Hidden scrollbars in lightbox for immersive experience

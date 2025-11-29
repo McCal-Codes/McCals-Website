@@ -11,7 +11,7 @@ Drop-in footer embed for Squarespace code blocks with modern glass design aesthe
 - Mobile-optimized design with improved touch targets
 
 ## Usage
-1. Copy the latest file from `versions/` (current: `v1.2.0.footer-widget.html`)
+1. Copy the latest file from `versions/` (current: `v1.3.0.footer-widget.html`)
 2. Paste into a Squarespace Code Block at the bottom of your page
 3. Customize link destinations and Mailchimp action URL as needed
 4. For updates: duplicate version file, increment semantic version, then edit
@@ -20,7 +20,13 @@ Drop-in footer embed for Squarespace code blocks with modern glass design aesthe
 - Links grouped for About, Contact, Portfolio sections
 - Social media icons (Facebook, Instagram) - update URLs as needed
 - Newsletter form connects to Mailchimp (update form action URL)
-- Version indicator shows current widget version (v1.2.0)
+- Version indicator shows current widget version (v1.3.0)
+
+## Active Versions
+- v1.3.0 (current)
+- v1.2.0 (previous stable)
+
+Older versions are archived in `src/widgets/_archived/legacy-widget-versions/site-footer/`.
 
 ## Notes
 - Keep the wrapper `<div class="mcc-footer-widget" data-widget-version="1.2.0">` intact

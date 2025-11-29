@@ -1,6 +1,6 @@
 # Portrait Portfolio Widget
 
-**Current Version: v1.1** — Portrait-optimized photography showcase with vertical composition layouts, rotating selections, and dynamic subject tabs for fresher presentations.
+**Current Version: v1.1.0** — Portrait-optimized photography showcase with vertical composition layouts, rotating selections, and dynamic subject tabs for fresher presentations.
 
 ## Features
 
@@ -36,7 +36,7 @@
 
 ## Usage
 
-1. **Copy the Widget Code**: Copy the entire contents of `versions/v1.0.0.html`
+1. **Copy the Widget Code**: Copy the entire contents of `versions/v1.1.0-portrait-portfolio.html`
 2. **Squarespace Integration**: Paste into a Code Block on your Squarespace page
 3. **Manifest Setup**: Ensure `src/images/Portfolios/Portrait/portrait-manifest.json` exists
 4. **Customization**: Modify `data-panes` attribute to control number of displayed portraits. Note: the widget now selects a rotating subset of portraits on each load (default behavior shows 1–4 random panes per session) unless `data-panes` is explicitly set to a fixed number.
@@ -47,7 +47,12 @@ The widget expects a manifest file at `src/images/Portfolios/Portrait/portrait-m
 
 ```json
 {
-  "version": "1.0",
+  "version": "1.1.0",
+  ## Active Versions
+  - v1.1.0 (current)
+  - v1.0.0 (previous stable)
+
+  Older versions are archived in `src/widgets/_archived/legacy-widget-versions/portrait-portfolio/`.
   "generated": "2025-10-24T16:57:52.183Z",
   "totalCollections": 5,
   "collections": [
