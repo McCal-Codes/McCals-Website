@@ -6,7 +6,7 @@ This directory contains widgets related to the About section of the website, org
 
 ### Client Carousel (`client-carousel/`)
 - **Purpose**: Professional client showcase carousel for Squarespace
-- **Current Version**: v1.1.8
+- **Current Version**: v1.2.0
 - **Features**: 22 clients, enhanced university branding, seamless infinite loop, reliable logo loading
 - **Status**: Production Ready ✅
 
@@ -19,15 +19,21 @@ This directory contains widgets related to the About section of the website, org
 - Text fallback system for failed logo loads
 - Easy Squarespace integration (single Code Block)
 
-#### Files:
-- `client-carousel-squarespace.html` - Main production file
-- `versions/` - Version history and archived releases
+#### Active Versions
+- v1.2.0 (current)
+- v1.1.8 (previous stable)
+
+Older versions are archived in `src/widgets/_archived/legacy-widget-versions/about/client-carousel/`.
+
+#### Files
+- `versions/v1.2.0-client-carousel-squarespace.html` - Main production file
+- `versions/` - Version history
 - `README.md` - Detailed documentation
 - `CHANGELOG.md` - Version change history
 
 ### Complete About Page (`complete-about-page/`)
 - **Purpose**: Comprehensive about section with bio, photo, reviews, and client showcase
-- **Current Version**: v1.4.1
+- **Current Version**: v1.4.4
 - **Features**: Integrated design, debug system, GitHub asset hosting
 - **Status**: Production Ready ✅
 
@@ -39,9 +45,15 @@ This directory contains widgets related to the About section of the website, org
 - Self-contained design for easy Squarespace deployment
 - Multiple variants (complete vs. simplified)
 
-#### Files:
-- `complete-about-squarespace.html` - Full-featured about page
-- `about-section-squarespace.html` - Simplified bio-only version
+#### Active Versions
+- v1.4.4 (current)
+- v1.4.1 (previous stable)
+
+Older versions are archived in `src/widgets/_archived/legacy-widget-versions/about/complete-about-page/`.
+
+#### Files
+- `versions/v1.4.4-complete-about-squarespace.html` - Full-featured about page
+- `versions/v1.4.4-about-section-squarespace.html` - Simplified bio-only version
 - `README.md` - Comprehensive documentation
 - `CHANGELOG.md` - Version history
 

@@ -1,13 +1,14 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `10daf86f` — 0 seconds ago
-> chore: remove environment variable blocks from portfolio workflows to reduce secret lint warnings
+**Last commit**: `a8f9b34d` — 1 second ago
+> feat: add fallback manifest generation and files for events and concert portfolios
 ## 🔄 Changes in last commit
-- .github/workflows/manifest-composite.yml
-- .github/workflows/portrait-manifest.yml
-- .github/workflows/publish-manifests-cdn.yml
-- .github/workflows/regenerate-all-manifests.yml
+- package.json
 - scripts/.welcome-state.json
-- updates/todo.md
+- scripts/manifest/generate-fallback-manifests.js
+- src/images/Portfolios/Concert/concert-manifest.fallback.json
+- src/images/Portfolios/Events/events-manifest.fallback.json
+- src/widgets/concert-portfolio/versions/v4.7.1-api-optional.html
+- src/widgets/event-portfolio/versions/v2.6.4-event-portfolio.html
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **59** | Done: **44**

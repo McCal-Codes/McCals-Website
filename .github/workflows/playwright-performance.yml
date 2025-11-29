@@ -1,0 +1,39 @@
+name: Widget Performance (Playwright Scaffold)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/widgets/**'
+      - 'src/site/**'
+      - 'scripts/utils/perf-widgets.js'
+      - '.github/workflows/playwright-performance.yml'
+
+jobs:
+  perf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run performance scaffold
+        run: node scripts/utils/perf-widgets.js
+
+      - name: Upload performance reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: widget-performance-reports
+          path: test-results/*

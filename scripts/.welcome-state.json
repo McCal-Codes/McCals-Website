@@ -1,4 +1,4 @@
 {
-  "lastHash": "10daf86f",
-  "lastMessage": "chore: remove environment variable blocks from portfolio workflows to reduce secret lint warnings\n\\n\\nAuthor: mccal"
+  "lastHash": "a8f9b34d",
+  "lastMessage": "feat: add fallback manifest generation and files for events and concert portfolios\n\\n\\nAuthor: mccal"
 }

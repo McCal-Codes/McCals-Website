@@ -1,6 +1,6 @@
 # Video Portfolio Widget
 
-**Current Version: v0.1** — Multimedia gallery for showcasing video work (local MP4, YouTube, Vimeo) with accessible playback, lazy thumbnails, filtering, and SEO structured data.
+**Current Version: v0.1.0** — Multimedia gallery for showcasing video work (local MP4, YouTube, Vimeo) with accessible playback, lazy thumbnails, filtering, and SEO structured data.
 
 ## Overview
 A self-contained Squarespace-compatible widget that renders a performant video gallery with lightbox playback. Designed to extend existing photo portfolio patterns (critical CSS, progressive enhancement, accessibility) to video content.
@@ -39,7 +39,7 @@ A self-contained Squarespace-compatible widget that renders a performant video g
 - Add `?debug=true` to page URL to log dataset parsing & structured data output
 
 ## Usage (Squarespace)
-1. Copy entire contents of `versions/v0.1-video-portfolio.html`.
+1. Copy entire contents of `versions/v0.1.0-video-portfolio.html`.
 2. Paste into a Squarespace Code Block.
 3. (Optional) Adjust `data-max-items`, `data-default-filter`, or replace inline dataset `<script id="videoPortfolioData" type="application/json">` with real video metadata.
 4. Replace sample poster thumbnails with your real previews.
@@ -55,7 +55,11 @@ A self-contained Squarespace-compatible widget that renders a performant video g
 The widget reads JSON from a `<script type="application/json" id="videoPortfolioData">` tag:
 ```jsonc
 {
-  "version": "0.1",
+  "version": "0.1.0",
+  ## Active Versions
+  - v0.1.0 (current)
+
+  Older versions will be archived under `src/widgets/_archived/legacy-widget-versions/video-portfolio/` as the widget evolves.
   "generated": "2025-11-19T00:00:00.000Z",
   "videos": [
     {

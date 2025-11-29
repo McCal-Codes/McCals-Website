@@ -1,0 +1,42 @@
+name: Lighthouse Widgets Performance
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/widgets/**'
+      - 'src/site/**'
+      - 'scripts/utils/lighthouse-widgets.js'
+      - '.github/workflows/lighthouse-widgets.yml'
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Start dev server
+        run: node dev-server.js &
+
+      - name: Run Lighthouse per widget
+        run: node scripts/utils/lighthouse-widgets.js
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-widget-reports
+          path: test-results/lighthouse/*
