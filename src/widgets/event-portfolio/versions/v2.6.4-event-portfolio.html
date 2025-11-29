@@ -653,7 +653,9 @@ async function fetchManifest() {
     RAW + 'src/images/Portfolios/Events/events-manifest.json',
     'src/images/Portfolios/Events/events-manifest.json',
     '../../../images/Portfolios/Events/events-manifest.json',
-    '../../images/Portfolios/Events/events-manifest.json'
+    '../../images/Portfolios/Events/events-manifest.json',
+    // Local resilient fallback JSON (minimal shape)
+    'src/images/Portfolios/Events/events-manifest.fallback.json'
   ];
   
   let lastError = null;
@@ -688,8 +690,11 @@ async function fetchManifest() {
     }
   }
   
-  manifestSource = 'Failed';
-  throw lastError || new Error('All manifest sources failed');
+  // If all remote sources failed, return inline minimal fallback to avoid blank UI
+  manifestSource = 'Fallback';
+  const FALLBACK_DATA = norm({ version: 'fallback-events', generated: new Date().toISOString().split('T')[0], events: [] });
+  console.warn('⚠️ Using inline fallback manifest due to failures');
+  return FALLBACK_DATA;
 }
 
 async function loadEvents() {
@@ -724,14 +729,18 @@ async function loadEvents() {
     
   } catch (error) {
     console.error('Error loading events:', error);
-    manifestSource = 'Failed';
+    // Graceful message; UI still renders "Coming Soon" via empty events list
+    manifestSource = 'Fallback';
     document.getElementById('loading').innerHTML = `
       <div style="color: var(--muted); text-align: center; padding: 40px;">
-        <div style="font: 700 16px/1.4 ui-sans-serif,system-ui; margin-bottom: 8px; color: #ef4444;">Unable to load events</div>
-        <div style="margin-bottom: 12px;">Trying GitHub and local sources failed</div>
-        <div style="font: 600 12px ui-monospace; color: var(--muted);">Error: ${error.message}</div>
+        <div style="font: 700 16px/1.4 ui-sans-serif,system-ui; margin-bottom: 8px;">Showing limited preview</div>
+        <div>Primary sources unreachable. Using fallback manifest.</div>
       </div>
     `;
+    // Render empty state from inline fallback
+    eventData = norm({ version: 'fallback-events', generated: new Date().toISOString().split('T')[0], events: [] });
+    createFilters(eventData.events);
+    displayEvents(eventData.events, 'all');
     
     if (debugMode) {
       updateDebugInfo();

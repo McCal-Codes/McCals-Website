@@ -1,4 +1,4 @@
 {
-  "lastHash": "043d1c6c",
-  "lastMessage": "chore: clean up environment variable handling in concert manifest workflow and update welcome message\n\\n\\nAuthor: mccal"
+  "lastHash": "10daf86f",
+  "lastMessage": "chore: remove environment variable blocks from portfolio workflows to reduce secret lint warnings\n\\n\\nAuthor: mccal"
 }
