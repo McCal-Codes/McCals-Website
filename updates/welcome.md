@@ -1,15 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `a8f9b34d` — 1 second ago
-> feat: add fallback manifest generation and files for events and concert portfolios
+**Last commit**: `46b2d51a` — 0 seconds ago
+> feat: enhance widget validation workflow and add artifact uploads
 ## 🔄 Changes in last commit
+- .github/copilot-instructions.md
+- .github/workflows/lighthouse-widgets.yml
+- .github/workflows/playwright-performance.yml
+- .github/workflows/prepublish-widget-release.yml
+- .github/workflows/widget-validate.yml
+- README.md
+- docs/standards/dark-mode-audit.md
+- docs/widgets/index.md
 - package.json
 - scripts/.welcome-state.json
-- scripts/manifest/generate-fallback-manifests.js
-- src/images/Portfolios/Concert/concert-manifest.fallback.json
-- src/images/Portfolios/Events/events-manifest.fallback.json
-- src/widgets/concert-portfolio/versions/v4.7.1-api-optional.html
-- src/widgets/event-portfolio/versions/v2.6.4-event-portfolio.html
-- updates/welcome.md
+- scripts/utils/ai-instructions-preflight.js
+- scripts/utils/audit-dark-mode.js
+- …and 14 more
 ## 📋 Your checklist status
 - Open: **59** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)
