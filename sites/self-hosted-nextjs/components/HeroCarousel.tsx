@@ -79,7 +79,7 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides = defaultSlides }) =
             {slides.map((slide, index) => (
               <figure
                 key={index}
-                className={`${styles.heroSlide} ${index === active ? styles.active : ''}`}
+                className={`${styles.heroSlide} ${index === active ? (styles as Record<string, string>).active || '' : ''}`}
               >
                 <img
                   src={slide.image}

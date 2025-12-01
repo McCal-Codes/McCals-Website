@@ -60,9 +60,9 @@
   pointer-events: none;
   background: linear-gradient(180deg,
     rgba(6,6,10,0.00) 0%,
-    rgba(6,6,10,0.10) 30%,
-    rgba(6,6,10,0.18) 60%,
-    rgba(6,6,10,0.36) 100%
+    rgba(6,6,10,0.08) 20%,
+    rgba(6,6,10,0.04) 40%,
+    rgba(6,6,10,0.00) 100%
   );
   z-index: 3;
 }

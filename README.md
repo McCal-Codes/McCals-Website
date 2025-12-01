@@ -7,6 +7,41 @@ This repository hosts the development workspace for McCal Media's Squarespace wi
 **Requirements:** Node.js 18+ and npm.
 
 1. Install dependencies:
+---
+
+## Quick note: self-hosted Next.js app
+
+This repository includes a self-hosted Next.js app at `sites/self-hosted-nextjs`.
+
+Prerequisites
+
+- Node.js 18+ recommended (the repo requires >=16; Next 15 works best on Node 18+).
+- Network access to the npm registry to install dependencies.
+
+Run it locally
+
+```bash
+cd sites/self-hosted-nextjs
+npm install
+npm run dev      # development server on port 3000 by default
+npm run build    # build for production
+npm run start    # serve the production build
+```
+
+Run the server (recommended)
+
+The canonical self-hosted site is the running Next.js server. To run it locally:
+
+```bash
+cd sites/self-hosted-nextjs
+npm install
+npm run build
+npm run start   # serves the production build (default port 3000)
+# Or for development with HMR:
+npm run dev
+```
+
+If you prefer a static snapshot (only for fully static sites), you can export when your Next config supports it; otherwise running the Next server is the recommended approach. The dev server will redirect `/ ?root=site` requests to the running Next server (configured with `NEXT_SERVER_PORT`, default 3005).
 ## Available Widgets
 
 Critical repository events, security incidents, and recovery steps are documented in [docs/important-notes/](docs/important-notes/).

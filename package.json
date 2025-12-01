@@ -17,6 +17,8 @@
     "api:refresh:journalism": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/journalism",
     "api:demo-seo": "npm run api:start & sleep 5 && npm run seo:all && echo '\n✅ Demo complete! Check dist/sitemap.xml and dist/structured-data/'",
     "dev": "node dev-server.js",
+    "serve:site": "SERVE_TARGET=site node dev-server.js",
+    "site:export": "(cd sites/self-hosted-nextjs && npm install --no-audit --no-fund && npm run build && npm run export)",
     "dev:with-api": "concurrently -n \"SITE,API\" -c \"cyan,green\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\"",
     "dev:full": "concurrently -n \"SITE,API,WATCH\" -c \"cyan,green,yellow\" \"node dev-server.js --with-api\" \"nodemon src/api/server.js\" \"node scripts/watchers/watch-auto-manifest.js --all\"",
     "ci:simulate": "node scripts/utils/ci-simulate-changed.js",
