@@ -1,16 +1,11 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/about": "pages/about.html",
-  "/blog": "pages/blog.html",
-  "/concerts": "pages/concerts.html",
-  "/events": "pages/events.html",
-  "/featured-work": "pages/featured-work.html",
-  "/": "pages/index.html",
-  "/journalism": "pages/journalism.html",
-  "/podcast": "pages/podcast.html",
-  "/portraits": "pages/portraits.html",
-  "/nature": "pages/nature.html",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.html"
+  "/": "pages/index.js",
+  "/featured-work": "pages/featured-work.js",
+  "/concerts": "pages/concerts.js",
+  "/podcast": "pages/podcast.js",
+  "/nature": "pages/nature.js",
+  "/journalism": "pages/journalism.js"
 }

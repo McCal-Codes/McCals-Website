@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `243253cb` — 0 seconds ago
-> feat: Initialize self-hosted Next.js project with essential pages and components
+**Last commit**: `c9ea1503` — 0 seconds ago
+> feat: Implement event, featured, and journalism widgets with manifest loading and gallery display
 ## 🔄 Changes in last commit
-- package-lock.json
-- package.json
 - scripts/.welcome-state.json
 - sites/self-hosted-nextjs/.next/BUILD_ID
 - sites/self-hosted-nextjs/.next/build-manifest.json
-- sites/self-hosted-nextjs/.next/cache/.previewinfo
-- sites/self-hosted-nextjs/.next/cache/.rscinfo
 - sites/self-hosted-nextjs/.next/cache/.tsbuildinfo
-- sites/self-hosted-nextjs/.next/cache/eslint/.cache_26v05r
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/0.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/1.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/2.pack.gz
-- …and 139 more
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/0.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/1.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/2.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/index.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/index.pack.old
+- sites/self-hosted-nextjs/.next/cache/webpack/server-production/0.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/server-production/1.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/server-production/2.pack
+- …and 41 more
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)
