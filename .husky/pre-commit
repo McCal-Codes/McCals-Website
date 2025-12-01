@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run lint-staged (configured in package.json) and then block large files
+npx --no-install lint-staged
+node scripts/utils/staged-size-check.js

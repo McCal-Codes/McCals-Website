@@ -4,6 +4,7 @@
   "description": "McCal Media photo gallery website with development tools",
   "main": "src/site/index.html",
   "scripts": {
+    "prepare": "husky install",
     "ai:preflight": "node scripts/utils/ai-instructions-preflight.js",
     "ai:preflight:short": "node scripts/utils/ai-instructions-preflight.js --short",
     "ai:preflight:json": "node scripts/utils/ai-instructions-preflight.js --json",
@@ -95,7 +96,11 @@
     "versions:check": "node scripts/utils/standardize-versions.js --dry-run --verbose",
     "versions:rename": "node scripts/utils/rename-widget-versions.js",
     "versions:rename-check": "node scripts/utils/rename-widget-versions.js --dry-run --verbose",
-    "scan:widget-versions": "node scripts/utils/scan-widget-versions.js"
+    "scan:widget-versions": "node scripts/utils/scan-widget-versions.js",
+    "generate-lfs-plan": "node scripts/utils/generate-lfs-migration-plan.js",
+    "migrate-to-git-lfs": "bash scripts/utils/migrate-to-git-lfs.sh",
+    "upload:s3": "node scripts/manifest/upload-to-s3.js",
+    "manifest:update-cdn": "node scripts/manifest/update-manifests-cdn.js"
   },
   "keywords": [
     "photography",
@@ -119,8 +124,14 @@
     "open": "^10.1.0",
     "playwright": "^1.39.0",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^3.4.14",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0",
+    "prettier": "^2.8.8",
+    "@aws-sdk/client-s3": "^3.500.0",
+    "minimist": "^1.2.8"
   },
+  
   "engines": {
     "node": ">=16.0.0"
   },
@@ -136,4 +147,19 @@
     "react-dom": "^18.3.1",
     "redis": "^5.10.0"
   }
+
+  ,"lint-staged": {
+    "scripts/**/*.js": [
+      "npx eslint --fix",
+      "git add"
+    ],
+    "src/widgets/**/*.html": [
+      "node scripts/utils/validate-widget-html.js"
+    ],
+    "*.+(js|json|md|html)": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {}
 }

@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2025-12-01T18:59:17.065Z",
+  "thresholdBytes": 5000000,
+  "files": [
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3364.jpg",
+      "size": 23893369
+    },
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3351.jpg",
+      "size": 23156748
+    },
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3443.jpg",
+      "size": 20051647
+    },
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3411.jpg",
+      "size": 19214461
+    },
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3390.jpg",
+      "size": 19153075
+    },
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3304.jpg",
+      "size": 18938901
+    },
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3315.jpg",
+      "size": 18807782
+    },
+    {
+      "path": "src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3301.jpg",
+      "size": 18148035
+    },
+    {
+      "path": "sites/self-hosted-nextjs/.next/cache/webpack/client-development-fallback/0.pack.gz",
+      "size": 16097017
+    },
+    {
+      "path": "src/images/Portfolios/Nature/Wildlife/Birds/Bare-faced Curassow/230727_Aviary_Soot__CAL4536.jpg",
+      "size": 13324460
+    },
+    {
+      "path": "src/images/Portfolios/Nature/Wildlife/Birds/Bare-faced Curassow/230727_Aviary_Soot__CAL4596.jpg",
+      "size": 12583115
+    },
+    {
+      "path": "src/images/Portfolios/Nature/Wildlife/Birds/Steller's Sea Eagle/230204_McCal__CAL3164.jpg",
+      "size": 12242428
+    },
+    {
+      "path": "sites/self-hosted-nextjs/.next/cache/webpack/client-development/4.pack.gz",
+      "size": 11891558
+    },
+    {
+      "path": "src/images/Portfolios/Concert/The Head Trips/August 2025/250820_Haven Block Party_CAL2937.jpg",
+      "size": 9856342
+    },
+    {
+      "path": "src/images/Portfolios/Nature/Landscapes/West Virginia/seneca-rocks-night.jpg",
+      "size": 7175631
+    },
+    {
+      "path": "sites/self-hosted-nextjs/.next/cache/webpack/client-production/0.pack",
+      "size": 6904635
+    },
+    {
+      "path": "src/images/Portfolios/Nature/Landscapes/West Virginia/barn.jpg",
+      "size": 5945351
+    },
+    {
+      "path": "src/images/Portfolios/Nature/Landscapes/West Virginia/tractor.jpg",
+      "size": 5917515
+    },
+    {
+      "path": "sites/self-hosted-nextjs/.next/cache/webpack/server-production/0.pack",
+      "size": 5823714
+    }
+  ]
+}

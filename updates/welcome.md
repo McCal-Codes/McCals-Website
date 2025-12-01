@@ -1,20 +1,13 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `fe28d8d7` — 0 seconds ago
-> Add serve selector HTML page for project navigation and Next.js server status
+**Last commit**: `bdeb0be3` — 1 second ago
+> feat: add serve selector page and dev-only endpoint to start Next.js server
 ## 🔄 Changes in last commit
 - README.md
 - dev-server.js
-- nohup.out
-- package.json
 - scripts/.welcome-state.json
 - serve-select.html
-- sites/self-hosted-nextjs/.next/BUILD_ID
-- sites/self-hosted-nextjs/.next/build-manifest.json
-- sites/self-hosted-nextjs/.next/cache/.tsbuildinfo
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/0.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/1.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/2.pack
-- …and 106 more
+- src/site/serve-select.html
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)
