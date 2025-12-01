@@ -89,23 +89,24 @@ Reference standards:
 - [x] **Site Footer v1.2.0** — accessibility and standards compliance (Oct 5, 2025)
 
 ## 📍 CURRENT STATE (Ready for Next Batch)
-- Production-ready widgets have been added to `Available Widgets` and most have sample manifests.
-- Manifest generation, watchers, and CI are in place for automated manifest updates and validation.
-- Scripts and workspace reorganization completed: `scripts/` cleaned, archived helpers moved to `scripts/_archived/`.
-- Local dev/test site (`src/site/`) and widget preview workflow are working; use `npm run dev` to preview.
-- **November 19, 2025**: Minor maintenance release v2.5.3 - Updated documentation dates, cleaned outdated STATUS.md files for production widgets, updated npm dependencies.
-- Next steps: targeted testing in Squarespace, add a small automated test harness for widgets, and finalize remaining TODOs below.
 
 ## Completed Items (Mark as Done)
-- [x] Podcast Feed v1.9.5: Auto-hydrating RSS episodes, live RSS caching, updated branding (Oct 24, 2025)
-- [x] Site Navigation enhancements: Glassmorphism, hover states, mobile drawer, close button optimization (Oct 9, 2025)
-- [x] Photojournalism Portfolio v5.x: Glass filter buttons, Fisher-Yates shuffle, adjacency minimization, lightbox fixes (Oct 5–Oct 9, 2025)
+- [ ] TODO: Create Next.js self-hosted site structure under sites/self-hosted-nextjs/
+- [ ] TODO: Add Layout, Nav, and Footer components with "Self-Hosted" branding
+- [ ] TODO: Implement ConcertWidget (manifest typing, fetch, gallery, lightbox, CSS module)
+- [ ] TODO: Add stubs for FeaturedWidget, EventWidget, JournalismWidget
+- [ ] TODO: Add manifest loader utility and manifest types
+- [ ] TODO: Add minimal pages for all routes
+- [ ] TODO: Add CSS modules for visual parity
+- [ ] TODO: Document all TODOs in updates/todo.md for traceability
 - [x] About Page v1.4.4: Updated bio, contact dropdown, Calendly integration (Oct 8, 2025)
 - [x] Concert Portfolio v4.6→v4.7: Performance work + v4.7 refinements (Oct 6–Nov 2, 2025)
 - [x] Site Footer v1.2.0: Compliance with standards, accessibility improvements (Oct 5, 2025)
 - [x] Portrait Portfolio v1.0: New portrait photography widget with vertical composition focus, 3:4 aspect ratios, and enhanced detail viewing (Oct 24, 2025)
 
 ## Remaining / In-Progress Items
+**Next.js Migration (Self-Hosted Site)**
+- [ ] TODO: Next.js Footer (v1.3.0 parity) — wire the real newsletter subscription endpoint and adjust JSON-LD logo URL to the app's public assets path. Track status in `sites/self-hosted-nextjs/components/Layout/Footer.tsx`. (Added 2025-12-01)
 **Phase 1 — Legacy Version Archival (Planning & Scaffolding)** ✅ COMPLETE
 - [x] TODO: Define archival policy and shadow workflow validation (completed per workspace standards and Recent Updates).
 - [x] TODO: Document policy in `docs/standards/workspace-organization.md` and `.github/copilot-instructions.md` (completed).
