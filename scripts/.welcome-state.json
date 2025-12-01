@@ -1,4 +1,4 @@
 {
-  "lastHash": "c9f7732c",
-  "lastMessage": "feat: Complete legacy widget archival with comprehensive INDEX.json documentation\n\n- Archive 60+ legacy versions to src/widgets/_archived/Legacy Widgets/\n- Standardize 10 widget READMEs with archive links and ≤2 policy\n- Populate 14 INDEX.json files with schema-validated metadata\n- Add CI workflow enforcing version policy on PRs\n- Create scanner utility for version compliance reporting\n- Enhance HTML validator for snippet widget support\n\nValidation: 78/78 HTML valid, 25/25 widgets policy-compliant, 0 errors\n\\n\\nAuthor: mccal"
+  "lastHash": "243253cb",
+  "lastMessage": "feat: Initialize self-hosted Next.js project with essential pages and components\n\n- Added package.json with dependencies for Next.js, React, and TypeScript.\n- Created global styles and navigation styles for the application.\n- Implemented main application layout in _app.tsx.\n- Developed multiple pages including About, Blog, Concerts, Events, Featured Work, Home, Journalism, Nature, Podcast, and Portraits.\n- Integrated footer and navigation components with respective styles.\n- Added widgets for Concert and Event pages.\n- Established TypeScript configuration and custom type definitions for CSS modules and concert manifest.\n- Implemented a utility function for loading manifests.\n\\n\\nAuthor: mccal"
 }

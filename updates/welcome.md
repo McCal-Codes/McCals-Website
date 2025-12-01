@@ -1,22 +1,22 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `c9f7732c` — 0 seconds ago
-> feat: Complete legacy widget archival with comprehensive INDEX.json documentation
+**Last commit**: `243253cb` — 0 seconds ago
+> feat: Initialize self-hosted Next.js project with essential pages and components
 ## 🔄 Changes in last commit
-- .github/workflows/widget-version-policy.yml
+- package-lock.json
 - package.json
 - scripts/.welcome-state.json
-- scripts/utils/scan-widget-versions.js
-- scripts/utils/validate-widget-html.js
-- src/widgets/_archived/Legacy Widgets/README.md
-- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/INDEX.json
-- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/v1.0.0-accessibility-statement.html
-- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/v1.1.0-accessibility-statement.html
-- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/v1.1.1-accessibility-statement.html
-- src/widgets/_archived/Legacy Widgets/blog-feed/versions/INDEX.json
-- src/widgets/_archived/Legacy Widgets/blog-feed/versions/v1-google-docs.html
-- …and 88 more
+- sites/self-hosted-nextjs/.next/BUILD_ID
+- sites/self-hosted-nextjs/.next/build-manifest.json
+- sites/self-hosted-nextjs/.next/cache/.previewinfo
+- sites/self-hosted-nextjs/.next/cache/.rscinfo
+- sites/self-hosted-nextjs/.next/cache/.tsbuildinfo
+- sites/self-hosted-nextjs/.next/cache/eslint/.cache_26v05r
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/0.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/1.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/2.pack.gz
+- …and 139 more
 ## 📋 Your checklist status
-- Open: **59** | Done: **54**
+- Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 

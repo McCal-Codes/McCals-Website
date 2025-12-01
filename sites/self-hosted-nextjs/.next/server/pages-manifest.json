@@ -1,5 +1,6 @@
 {
   "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
   "/about": "pages/about.html",
   "/blog": "pages/blog.html",
   "/concerts": "pages/concerts.html",
@@ -7,10 +8,9 @@
   "/featured-work": "pages/featured-work.html",
   "/": "pages/index.html",
   "/journalism": "pages/journalism.html",
-  "/nature": "pages/nature.html",
   "/podcast": "pages/podcast.html",
   "/portraits": "pages/portraits.html",
-  "/_error": "pages/_error.js",
+  "/nature": "pages/nature.html",
   "/_document": "pages/_document.js",
   "/404": "pages/404.html"
 }
