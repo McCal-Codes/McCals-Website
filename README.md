@@ -42,6 +42,16 @@ npm run dev
 ```
 
 If you prefer a static snapshot (only for fully static sites), you can export when your Next config supports it; otherwise running the Next server is the recommended approach. The dev server will redirect `/ ?root=site` requests to the running Next server (configured with `NEXT_SERVER_PORT`, default 3005).
+
+Start from the Serve Selector
+
+The serve selector page (`serve-select.html`) includes a "Start & Open" button that can request the repo dev-server to spawn the Next.js production server for you. This is an opt-in feature and is disabled by default for safety. To enable it, start the dev server with:
+
+```bash
+DEV_SERVER_ALLOW_START=true PORT=3033 NEXT_SERVER_PORT=3005 node dev-server.js
+```
+
+When enabled, clicking the "Start & Open" button will POST to a local dev-only endpoint (`/__start_next`) which spawns `npx next start -p <port>` in `sites/self-hosted-nextjs` and then opens the running site when it becomes reachable. Use this only on trusted developer machines.
 ## Available Widgets
 
 Critical repository events, security incidents, and recovery steps are documented in [docs/important-notes/](docs/important-notes/).

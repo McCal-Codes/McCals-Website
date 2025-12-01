@@ -1,11 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `954ecabe` — 0 seconds ago
-> feat: update welcome state and styles for theme handling
+**Last commit**: `fe28d8d7` — 0 seconds ago
+> Add serve selector HTML page for project navigation and Next.js server status
 ## 🔄 Changes in last commit
+- README.md
+- dev-server.js
+- nohup.out
+- package.json
 - scripts/.welcome-state.json
-- sites/self-hosted-nextjs/styles/globals.css
-- sites/self-hosted-nextjs/styles/heroCarousel.module.css
-- updates/welcome.md
+- serve-select.html
+- sites/self-hosted-nextjs/.next/BUILD_ID
+- sites/self-hosted-nextjs/.next/build-manifest.json
+- sites/self-hosted-nextjs/.next/cache/.tsbuildinfo
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/0.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/1.pack
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/2.pack
+- …and 106 more
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)
