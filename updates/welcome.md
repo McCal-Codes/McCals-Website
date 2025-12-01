@@ -1,13 +1,22 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `62bcff6a` — 1 second ago
-> feat: update site navigation widget to version 1.7.1 with enhanced documentation and styling
+**Last commit**: `c9f7732c` — 0 seconds ago
+> feat: Complete legacy widget archival with comprehensive INDEX.json documentation
 ## 🔄 Changes in last commit
+- .github/workflows/widget-version-policy.yml
+- package.json
 - scripts/.welcome-state.json
-- src/widgets/site-navigation/README.md
-- src/widgets/site-navigation/versions/v1.7.1-site-navigation.html
-- updates/welcome.md
+- scripts/utils/scan-widget-versions.js
+- scripts/utils/validate-widget-html.js
+- src/widgets/_archived/Legacy Widgets/README.md
+- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/INDEX.json
+- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/v1.0.0-accessibility-statement.html
+- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/v1.1.0-accessibility-statement.html
+- src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/v1.1.1-accessibility-statement.html
+- src/widgets/_archived/Legacy Widgets/blog-feed/versions/INDEX.json
+- src/widgets/_archived/Legacy Widgets/blog-feed/versions/v1-google-docs.html
+- …and 88 more
 ## 📋 Your checklist status
-- Open: **59** | Done: **44**
+- Open: **59** | Done: **54**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 
