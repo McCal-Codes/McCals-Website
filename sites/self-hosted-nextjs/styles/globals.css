@@ -52,3 +52,8 @@ body[data-theme="light"] { background: #f8f8f8; color: #222; }
   font-size: 0.9rem;
   color: #aaa;
 }
+
+/* When on the homepage keep the nav transparent until the page is scrolled */
+.mcc-nav.is-home:not(.is-scrolled) {
+  background: transparent !important;
+}

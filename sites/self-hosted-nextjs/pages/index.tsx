@@ -5,11 +5,7 @@ import HeroCarousel from '../components/HeroCarousel';
 
 const HomePage = () => {
   useEffect(() => {
-    // Remove body padding for homepage hero
-    document.body.style.paddingTop = '0';
-    return () => {
-      document.body.style.paddingTop = '';
-    };
+    // no-op: keep body padding set by Nav via --mcc-nav-height so the hero aligns correctly under the nav
   }, []);
 
   return (

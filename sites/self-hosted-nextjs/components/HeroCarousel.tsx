@@ -59,6 +59,18 @@ const defaultSlides: HeroSlide[] = [
 ];
 
 const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides = defaultSlides }) => {
+  const [active, setActive] = React.useState(0);
+
+  React.useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return; // do not auto-advance when reduced motion
+    }
+    const id = window.setInterval(() => {
+      setActive((s) => (s + 1) % slides.length);
+    }, 8000);
+    return () => window.clearInterval(id);
+  }, [slides.length]);
+
   return (
     <div className={styles.heroWidget}>
       <div className={styles.heroShell}>
@@ -67,14 +79,12 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides = defaultSlides }) =
             {slides.map((slide, index) => (
               <figure
                 key={index}
-                className={styles.heroSlide}
-                style={{ '--delay': `${index * 8}s` } as React.CSSProperties}
+                className={`${styles.heroSlide} ${index === active ? styles.active : ''}`}
               >
                 <img
                   src={slide.image}
                   alt={slide.alt}
                   loading={index === 0 ? 'eager' : 'lazy'}
-                  fetchPriority={index === 0 ? 'high' : undefined}
                 />
                 <figcaption className={styles.heroCaption}>
                   <h2>{slide.title}</h2>

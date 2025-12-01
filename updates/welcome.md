@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `c9ea1503` — 0 seconds ago
-> feat: Implement event, featured, and journalism widgets with manifest loading and gallery display
+**Last commit**: `8b54af32` — 0 seconds ago
+> feat: add HeroCarousel component with styles and default slides
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
 - sites/self-hosted-nextjs/.next/BUILD_ID
 - sites/self-hosted-nextjs/.next/build-manifest.json
 - sites/self-hosted-nextjs/.next/cache/.tsbuildinfo
+- sites/self-hosted-nextjs/.next/cache/next-devtools-config.json
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/0.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/1.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/index.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/index.pack.gz.old
 - sites/self-hosted-nextjs/.next/cache/webpack/client-production/0.pack
 - sites/self-hosted-nextjs/.next/cache/webpack/client-production/1.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/2.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/index.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/index.pack.old
-- sites/self-hosted-nextjs/.next/cache/webpack/server-production/0.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/server-production/1.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/server-production/2.pack
-- …and 41 more
+- sites/self-hosted-nextjs/.next/cache/webpack/client-production/3.pack
+- …and 135 more
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)
