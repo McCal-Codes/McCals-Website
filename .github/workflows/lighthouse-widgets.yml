@@ -1,4 +1,6 @@
 name: Lighthouse Widgets Performance
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
