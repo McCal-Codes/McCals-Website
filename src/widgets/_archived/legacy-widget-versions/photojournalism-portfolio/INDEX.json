@@ -1,7 +1,0 @@
-{
-  "widget": "photojournalism-portfolio",
-  "archivedVersions": ["v1.0-filterable-masonry","v2.0-dynamic-github","v2.1-with-captions","v3.0-published-tags","v4.0-master-manifest","v4.1-individual-lightbox","v4.2-event-cards","v4.3-event-cards","v4.8-event-cards"],
-  "retainedInVersionsDir": ["v4.9-event-cards","v5.1-performance-optimized","v5.2-performance-optimized"],
-  "policy": "Keep current + previous stable + prior major baseline; archive earlier experimental versions.",
-  "lastUpdated": "2025-11-19"
-}

@@ -17,11 +17,18 @@
 - **Integrated Version Display**: Version indicator in heading with interactive changelog
 - **Enhanced Debug Panel**: Comprehensive metrics with force refresh and cache controls
 
-## Active Versions
-- v2.6.4 (current)
-- v2.6.0 (previous stable)
+## Versions
 
-Older versions are archived in `src/widgets/_archived/legacy-widget-versions/event-portfolio/` (see `INDEX.json`).
+### Active Versions (≤2 Policy)
+The following versions are maintained in `versions/`:
+- **v2.6.4** (Current): Production-optimized with enhanced UX patterns, fixed image stretching, hidden scrollbars
+- **v2.6.2** (Previous Stable): Baseline for v2.6.x series enhancements
+
+### Legacy Versions (Archived)
+Versions v2.6.1 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
+- **Archive Location**: `src/widgets/_archived/Legacy Widgets/event-portfolio/versions/`
+- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/event-portfolio/versions/INDEX.json) for complete version catalog
+- **Archived Versions**: v1.0.0 through v2.6.1 (8 versions)
 
 ## Local generation
 ```bash

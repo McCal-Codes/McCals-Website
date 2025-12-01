@@ -1,0 +1,22 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "photojournalism-portfolio",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "notes": "Keep only current + previous in live directory; archive older versions here."
+  },
+  "versions": [
+    {
+      "version": "v4.8.0",
+      "date": "2025-10-05",
+      "summary": "Lightbox fix and published work filter corrections.",
+      "archived": true
+    },
+    {
+      "version": "v4.4.0",
+      "date": "2025-10-05",
+      "summary": "Optimization pass (v4.4→v4.8 progression).",
+      "archived": true
+    }
+  ]
+}

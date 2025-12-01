@@ -23,6 +23,19 @@ Version v1.8 delivers performance-optimized image loading with instant display f
 - **Accessibility**: Full keyboard navigation and ARIA support in lightbox
 - **Debug Mode**: Add `?debug=true` to URL for performance metrics
 
+## Versions
+
+### Active Versions (≤2 Policy)
+The following versions are maintained in `versions/`:
+- **v1.8.0** (Current): Performance-optimized with instant loading, retry logic, enhanced caching
+- **v1.7.0** (Previous Stable): Enhanced display with 32 photos, 3 per collection
+
+### Legacy Versions (Archived)
+Versions v1.5.0 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
+- **Archive Location**: `src/widgets/_archived/Legacy Widgets/nature-portfolio/versions/`
+- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/nature-portfolio/versions/INDEX.json) for complete version catalog
+- **Archived Versions**: v1.0.0, v1.2.0, v1.5.0 (3 versions)
+
 ## Notes
 
 - Matches the journalism widget v5.2 style: glass-like filter buttons, overlay effects, badge styling, and info panels.

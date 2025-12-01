@@ -1,0 +1,18 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "accessibility-statement",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "currentVersion": "v1.1.3",
+    "previousVersion": "v1.1.2",
+    "description": "Retain current and previous stable versions with theme corrections"
+  },
+  "versions": [
+    {"version": "v1.1.1", "date": "2025-11-11", "summary": "Inverted forced Light/Dark modes (superseded by v1.1.2 corrections)"},
+    {"version": "v1.1.0", "date": "2025-11-11", "summary": "Added dynamic theme toggle (System/Light/Dark), readable panel, localStorage persistence"},
+    {"version": "v1.0.0", "date": "2025-11-10", "summary": "Initial release: skip link, scroll spy, mobile drawer, semantic landmarks, reduced motion"}
+  ],
+  "lastUpdated": "2025-12-01",
+  "archiveLocation": "src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/",
+  "totalArchivedVersions": 3
+}

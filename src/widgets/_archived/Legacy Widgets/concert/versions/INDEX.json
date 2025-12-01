@@ -1,0 +1,22 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "concert-portfolio",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "notes": "Live directories retain current + previous stable. Older versions archived here."
+  },
+  "versions": [
+    {
+      "version": "v4.5.0",
+      "date": "2025-10-06",
+      "summary": "Performance-optimized concert portfolio baseline (pre v4.6).",
+      "archived": true
+    },
+    {
+      "version": "v4.4.0",
+      "date": "2025-10-05",
+      "summary": "Lightbox improvements and accessibility patterns applied.",
+      "archived": true
+    }
+  ]
+}

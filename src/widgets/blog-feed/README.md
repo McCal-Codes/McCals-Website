@@ -84,6 +84,19 @@ Note: Some remote hosts (e.g., certain CDNs or Google-hosted images) may not exp
   - Use proper headings (H1, H2, H3) for post titles
   - Make sure there's content under each heading
 
+## Versions
+
+### Active Versions (≤2 Policy)
+The following versions are maintained in `versions/`:
+- **v2.1.0** (Current): Google Docs blog feed with natural writing format
+- **v1-google-sheets** (Previous Stable): Structured data via Google Sheets
+
+### Legacy Versions (Archived)
+Versions v1-google-docs have been archived to maintain repository organization:
+- **Archive Location**: `src/widgets/_archived/Legacy Widgets/blog-feed/versions/`
+- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/blog-feed/versions/INDEX.json) for complete version catalog
+- **Archived Versions**: v1-google-docs (1 version)
+
 ## Roadmap
 - Google Docs provider (Published-to-web parsing)
 - Self-contained single-code-block version (no external script references)

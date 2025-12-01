@@ -201,6 +201,19 @@ This widget serves as the **canonical accessibility reference** for all McCal Me
 - `docs/standards/widget-reference.md` - Quick reference guide
 - `docs/standards/widget-standards.md` - Comprehensive standards
 
+## Versions
+
+### Active Versions (≤2 Policy)
+The following versions are maintained in `versions/`:
+- **v1.1.3** (Current): Forced Dark mode text set to pure white for maximum clarity
+- **v1.1.2** (Previous Stable): Corrected forced theme semantics
+
+### Legacy Versions (Archived)
+Versions v1.1.1 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
+- **Archive Location**: `src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/`
+- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/accessibility-statement/versions/INDEX.json) for complete version catalog
+- **Archived Versions**: v1.0.0 through v1.1.1 (3 versions)
+
 ## Version History
 
 ### v1.1.3 (2025-11-11)

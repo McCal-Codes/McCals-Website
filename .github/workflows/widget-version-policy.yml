@@ -1,0 +1,61 @@
+name: Enforce Widget Version Policy
+
+on:
+  pull_request:
+    paths:
+      - 'src/widgets/**'
+      - 'scripts/utils/scan-widget-versions.js'
+  workflow_dispatch:
+
+jobs:
+  check-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install (ci)
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Run scanner (dry-run)
+        run: node scripts/utils/scan-widget-versions.js > scan-output.txt
+
+      - name: Enforce ≤2 active versions per widget
+        run: |
+          node -e "
+          const fs=require('fs');
+          const path=require('path');
+          const ROOT=process.cwd();
+          const WIDGETS_DIR=path.join(ROOT,'src','widgets');
+          function listDirs(p){try{return fs.readdirSync(p).filter(n=>fs.statSync(path.join(p,n)).isDirectory());}catch(e){return [];}}
+          function listHtml(p){try{return fs.readdirSync(p).filter(n=>n.endsWith('.html'));}catch(e){return [];}}
+          const offenders=[];
+          for(const w of listDirs(WIDGETS_DIR)){
+            if(w==='_archived') continue;
+            const versionsDir=path.join(WIDGETS_DIR,w,'versions');
+            const active=listHtml(versionsDir);
+            if(active.length>2){offenders.push({widget:w,count:active.length,samples:active.slice(0,5)});}
+          }
+          if(offenders.length){
+            console.error('Widget Version Policy violation: more than 2 active versions found.');
+            for(const o of offenders){
+              console.error(` - ${o.widget}: active=${o.count} (samples: ${o.samples.join(', ')})`);
+            }
+            process.exit(1);
+          } else {
+            console.log('Policy OK: All widgets have ≤2 active versions.');
+          }
+          "
+
+      - name: Upload scan output
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: widget-version-scan
+          path: scan-output.txt

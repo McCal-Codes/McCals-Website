@@ -1,0 +1,23 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "event-portfolio",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "currentVersion": "v2.6.4",
+    "previousVersion": "v2.6.2",
+    "description": "Retain current production version and previous stable version"
+  },
+  "versions": [
+    {"version": "v2.6.1", "date": "2025-10-05", "summary": "Lightbox UX iteration"},
+    {"version": "v2.6.0", "date": "2025-10-05", "summary": "Enhanced UX patterns: fixed stretching, hidden scrollbars, navigation hiding"},
+    {"version": "v2.5.6", "date": "2025-09-23", "summary": "Refinement and optimization pass"},
+    {"version": "v2.5.4", "date": "2025-09-23", "summary": "Feature improvements"},
+    {"version": "v2.5.3", "date": "2025-09-23", "summary": "Bug fixes and enhancements"},
+    {"version": "v2.0.0", "date": "2025-09-16", "summary": "Manifest-based system with GitHub integration"},
+    {"version": "v1.1.0", "date": "2025-09-16", "summary": "Manifest loading improvements"},
+    {"version": "v1.0.0", "date": "2024-12-15", "summary": "Initial release with universal captions system"}
+  ],
+  "lastUpdated": "2025-12-01",
+  "archiveLocation": "src/widgets/_archived/Legacy Widgets/event-portfolio/versions/",
+  "totalArchivedVersions": 8
+}
