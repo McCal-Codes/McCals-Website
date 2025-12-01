@@ -57,3 +57,11 @@ body[data-theme="light"] { background: #f8f8f8; color: #222; }
 .mcc-nav.is-home:not(.is-scrolled) {
   background: transparent !important;
 }
+
+/* Stronger specificity to override theme-injected gradients when on homepage */
+body[data-theme="dark"] .mcc-nav.is-home:not(.is-scrolled),
+body[data-theme="light"] .mcc-nav.is-home:not(.is-scrolled) {
+  background: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
