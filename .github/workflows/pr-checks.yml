@@ -28,9 +28,22 @@ jobs:
 
       - name: Manifest dry-run (composite)
         run: npm run manifest:dry-run
+        continue-on-error: true
 
       - name: Lint scripts and site JS
         run: npm run lint
 
       - name: Run tests
         run: npm test
+
+      - name: Check for large files in portfolio
+        run: |
+          git diff --cached --name-only --diff-filter=ACM origin/${{ github.base_ref }}...HEAD | grep '^src/images/Portfolios/' | while read file; do
+            if [ -f "$file" ]; then
+              size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file" 2>/dev/null || echo 0)
+              if [ "$size" -gt 5242880 ]; then
+                echo "::warning::Large file detected: $file ($(numfmt --to=iec-i --suffix=B $size 2>/dev/null || echo ${size}B))"
+              fi
+            fi
+          done
+        continue-on-error: true

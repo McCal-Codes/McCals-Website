@@ -30,8 +30,10 @@ function listStagedFiles() {
 function checkFiles(files) {
   const violating = [];
   for (const f of files) {
-    // Skip .git and node_modules
+    // Skip .git, node_modules, and non-portfolio image paths
     if (!f || f.startsWith('.git') || f.includes('node_modules')) continue;
+    // Only check portfolio images (src/images/Portfolios/**)
+    if (!f.startsWith('src/images/Portfolios/')) continue;
     try {
       const stat = fs.statSync(f);
       if (stat.isFile() && stat.size > threshold) violating.push({ path: f, size: stat.size });

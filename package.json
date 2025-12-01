@@ -148,15 +148,13 @@
   },
   "lint-staged": {
     "scripts/**/*.js": [
-      "npx eslint --fix",
-      "git add"
+      "npx eslint --fix"
     ],
     "src/widgets/**/*.html": [
       "node scripts/utils/validate-widget-html.js"
     ],
     "*.+(js|json|md|html)": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "husky": {}
