@@ -25,7 +25,8 @@
       <div class="buttons">
         <a class="button" href="/?root=src">Open Dev (src)</a>
         <a class="button ghost" href="/?root=dist">Open Prod (dist)</a>
-        <a id="next-server-btn" class="button ghost" href="http://localhost:3005/" target="_blank">Open Self-hosted (Next.js)</a>
+          <a id="next-server-btn" class="button ghost" href="http://localhost:3005/" target="_blank">Open Self-hosted (Next.js)</a>
+          <button id="start-next-btn" class="button" style="background:#0ea5a4;color:#071724;border-radius:10px;padding:12px 18px;font-weight:600;margin-left:8px;">Start & Open</button>
       </div>
 
       <div class="note">Tip: If you're running the server with <code>--serve=dist</code> or <code>SERVE_TARGET=dist</code>, clicking "Open Prod" will show files from the <code>dist</code> folder. If the build doesn't exist, the request will fall back to the default index.</div>
@@ -62,11 +63,21 @@ PORT=3033 node dev-server.js
       </div>
       <div id="next-status" style="margin-top:8px;color:#9aa6b3;font-size:0.95rem">Next.js server status: <span id="next-state">unknown</span></div>
     </main>
+    <footer aria-hidden="false" style="position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:999;">
+      <div style="display:flex;gap:10px;align-items:center;background:rgba(15,23,32,0.9);padding:8px 12px;border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,0.6);">
+        <a class="button" href="/?root=src" style="padding:8px 12px;font-size:0.9rem;">Open Dev (src)</a>
+        <a class="button ghost" href="/?root=dist" style="padding:8px 12px;font-size:0.9rem;">Open Prod (dist)</a>
+        <a id="next-server-btn-bottom" class="button ghost" href="http://localhost:3005/" target="_blank" style="padding:8px 12px;font-size:0.9rem;">Open Self-hosted (Next.js)</a>
+        <span id="next-state-bottom" style="margin-left:8px;color:#9aa6b3;font-size:0.9rem;">—</span>
+      </div>
+    </footer>
   </body>
   <script>
     (function(){
       const state = document.getElementById('next-state');
+      const stateBottom = document.getElementById('next-state-bottom');
       const btn = document.getElementById('next-server-btn');
+      const btnBottom = document.getElementById('next-server-btn-bottom');
       async function check(){
         try{
           const controller = new AbortController();
@@ -74,16 +85,51 @@ PORT=3033 node dev-server.js
           await fetch('http://localhost:3005/', {method:'GET', mode:'no-cors', signal: controller.signal});
           clearTimeout(id);
           state.textContent = 'online';
+          if (stateBottom) stateBottom.textContent = 'online';
           state.style.color = '#7ee787';
           btn.style.opacity = '1';
+          if (btnBottom) btnBottom.style.opacity = '1';
         }catch(e){
           state.textContent = 'offline';
+          if (stateBottom) stateBottom.textContent = 'offline';
           state.style.color = '#ff7b7b';
           btn.style.opacity = '0.6';
+          if (btnBottom) btnBottom.style.opacity = '0.6';
         }
       }
       check();
       setInterval(check,5000);
+      
+        const startBtn = document.getElementById('start-next-btn');
+        if (startBtn) {
+          startBtn.addEventListener('click', async function(){
+            startBtn.disabled = true;
+            startBtn.textContent = 'Starting...';
+            try{
+              const r = await fetch('/__start_next', { method: 'POST' });
+              const json = await r.json().catch(()=>({}));
+              const start = Date.now();
+              const poll = setInterval(async ()=>{
+                try{
+                  await fetch('http://localhost:3005/', { mode:'no-cors' });
+                  clearInterval(poll);
+                  window.open('http://localhost:3005/', '_blank');
+                  startBtn.textContent = 'Open';
+                  startBtn.disabled = false;
+                }catch(e){
+                  if (Date.now()-start > 30000) { // timeout 30s
+                    clearInterval(poll);
+                    startBtn.textContent = 'Start failed';
+                    startBtn.disabled = false;
+                  }
+                }
+              }, 800);
+            }catch(e){
+              startBtn.textContent = 'Error';
+              startBtn.disabled = false;
+            }
+          });
+        }
     })();
   </script>
 </html>

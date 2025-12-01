@@ -71,6 +71,74 @@ function createServer() {
     return proxyToAPI(req, res);
   }
 
+  // Parse URL early for special endpoints
+  let parsed;
+  try {
+    parsed = new URL(req.url, `http://localhost`);
+  } catch (e) {
+    parsed = { pathname: req.url || '/', searchParams: new URLSearchParams() };
+  }
+
+  // Special dev-only endpoint to start the Next.js server.
+  // To enable this endpoint, set DEV_SERVER_ALLOW_START=true in the environment. This is
+  // intentionally opt-in since spawning processes from an HTTP server is powerful and
+  // should only be enabled in a local development environment.
+  if (parsed.pathname === '/__start_next' && req.method === 'POST') {
+    if (process.env.DEV_SERVER_ALLOW_START !== 'true') {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false, message: 'DEV_SERVER_ALLOW_START is not enabled' }));
+      return;
+    }
+
+    // Read optional JSON body (not required)
+    let body = '';
+    req.on('data', (chunk) => (body += chunk));
+    req.on('end', () => {
+      try {
+        // Determine target port
+        const nextPort = parseInt(process.env.NEXT_SERVER_PORT || '3005', 10);
+        const nextHost = process.env.NEXT_SERVER_HOST || 'localhost';
+
+        // Simple port check: if something is already listening, report started
+        const socket = net.createConnection({ host: nextHost, port: nextPort }, () => {
+          socket.end();
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: true, message: 'Next server already running', started: false, port: nextPort }));
+        });
+        socket.on('error', () => {
+          // Not listening — spawn the Next server
+          try {
+            const nextCwd = path.join(__dirname, 'sites', 'self-hosted-nextjs');
+            console.log(`⚙️  Spawning Next.js server in ${nextCwd} on port ${nextPort}...`);
+
+            // Use npx to invoke next start -p <port> so we avoid relying on package.json script names
+            const child = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['next', 'start', '-p', String(nextPort)], {
+              cwd: nextCwd,
+              detached: true,
+              stdio: 'ignore',
+              env: Object.assign({}, process.env)
+            });
+
+            // Detach so the child continues after this process exits
+            child.unref();
+
+            res.writeHead(202, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ ok: true, message: 'Starting Next server', started: true, port: nextPort }));
+          } catch (err) {
+            console.error('Failed to spawn Next server:', err && err.message);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ ok: false, message: 'Failed to start Next server', error: err && err.message }));
+          }
+        });
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: false, message: 'Internal error', error: err && err.message }));
+      }
+    });
+
+    return;
+  }
+
   // allow per-request override via query param `?root=dist` or `?root=src` or `?root=site`
   // Normalize the incoming pathname to a relative path (no leading slash) before joining with
   // any base folders. This avoids path.join treating the pathname as absolute and bypassing
