@@ -6,7 +6,9 @@
 */
 const fs = require('fs');
 const path = require('path');
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+// AWS SDK is only required when performing real uploads. For dry-runs we avoid importing it so
+// this script can run without installing AWS dependencies.
+let S3Client, PutObjectCommand;
 
 const argv = require('minimist')(process.argv.slice(2));
 const bucket = argv.bucket || argv.b;
@@ -18,7 +20,16 @@ if (!bucket) {
   console.error('Missing --bucket'); process.exit(2);
 }
 
-const s3 = new S3Client({});
+let s3;
+if (!dry) {
+  try {
+    ({ S3Client, PutObjectCommand } = require('@aws-sdk/client-s3'));
+    s3 = new S3Client({});
+  } catch (e) {
+    console.error('Missing AWS SDK. Install @aws-sdk/client-s3 to perform uploads.');
+    process.exit(2);
+  }
+}
 
 function walk(dir) {
   let out = [];
@@ -33,7 +44,8 @@ function walk(dir) {
 
 async function upload(file) {
   const body = fs.createReadStream(file);
-  const key = prefix ? `${prefix}/${file.replace(/^src\\/images\\/|^src\\/|^/,'')}` : file.replace(/^src\//,'');
+  // strip leading src/images/ or src/ or any leading slash when building S3 key
+  const key = prefix ? `${prefix}/${file.replace(/^src\/images\/|^src\/|^\//,'')}` : file.replace(/^src\//,'');
   const params = { Bucket: bucket, Key: key, Body: body, ACL: 'public-read' };
   if (dry) return { file, url: `s3://${bucket}/${key}` };
   await s3.send(new PutObjectCommand(params));

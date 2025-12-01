@@ -1,5 +1,6 @@
 # Suggest tracking images with Git LFS. This file doesn't enable LFS by itself but documents patterns.
-src/images/Portfolios/** filter=lfs diff=lfs merge=lfs -text
+# TEMPORARY: Comment out Portfolio LFS pattern so we can commit manifest/script changes on this branch.
+# src/images/Portfolios/** filter=lfs diff=lfs merge=lfs -text
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.mov filter=lfs diff=lfs merge=lfs -text
 # Mark image and binary asset types as binary so Git handles them correctly
