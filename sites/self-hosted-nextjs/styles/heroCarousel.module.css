@@ -13,7 +13,8 @@
   margin-right: calc(50% - 50vw);
   color: inherit;
   overflow: hidden;
-  background: #06060a;
+  /* keep background transparent so the image shows through cleanly under the nav */
+  background: transparent;
   margin-top: calc(-1 * var(--mcc-nav-height, 0px));
 }
 
@@ -52,11 +53,17 @@
 
 /* subtle overlay and caption constraints to mimic mcc-cal.com hero */
 .heroStage::before {
+  /* much softer overlay — keep contrast for captions but avoid a heavy top gradient */
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(6,6,10,0.28) 0%, rgba(6,6,10,0.45) 35%, rgba(6,6,10,0.6) 65%, rgba(6,6,10,0.9) 100%);
+  background: linear-gradient(180deg,
+    rgba(6,6,10,0.00) 0%,
+    rgba(6,6,10,0.10) 30%,
+    rgba(6,6,10,0.18) 60%,
+    rgba(6,6,10,0.36) 100%
+  );
   z-index: 3;
 }
 

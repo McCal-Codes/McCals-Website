@@ -1,4 +1,4 @@
 {
-  "lastHash": "8b54af32",
-  "lastMessage": "feat: add HeroCarousel component with styles and default slides\n\n- Implemented HeroCarousel component to display featured work with slides.\n- Created default slides with images, titles, and call-to-action links.\n- Added CSS module for styling the HeroCarousel, including animations and responsive design.\n- Generated build and SSG manifests for the new component.\n\\n\\nAuthor: mccal"
+  "lastHash": "44fc361f",
+  "lastMessage": "feat: add ThemeToggle component for dark/light mode switching\n\\n\\nAuthor: mccal"
 }
