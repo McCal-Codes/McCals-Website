@@ -1,0 +1,15 @@
+{
+  "version": "demo",
+  "events": [
+    {
+      "eventName": "Demo Journalism Story",
+      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
+      "dateDisplay": "October 2024",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Journalism/Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg"
+        }
+      ]
+    }
+  ]
+}

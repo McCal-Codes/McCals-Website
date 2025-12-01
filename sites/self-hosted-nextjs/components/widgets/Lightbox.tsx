@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
-// Type declaration for import
-export type { LightboxProps };
 import { ConcertImage } from '../../types/concertManifest';
 import styles from '../../styles/widgets/concertWidget.module.css';
 
-interface LightboxProps {
+export interface LightboxProps {
   images: ConcertImage[];
   index: number;
   onClose: () => void;
