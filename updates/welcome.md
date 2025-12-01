@@ -1,20 +1,11 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `44fc361f` — 0 seconds ago
-> feat: add ThemeToggle component for dark/light mode switching
+**Last commit**: `954ecabe` — 0 seconds ago
+> feat: update welcome state and styles for theme handling
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
-- sites/self-hosted-nextjs/.next/build-manifest.json
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development-fallback/0.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development-fallback/index.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/1.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/10.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/11.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/2.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/3.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/4.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/5.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/6.pack.gz
-- …and 70 more
+- sites/self-hosted-nextjs/styles/globals.css
+- sites/self-hosted-nextjs/styles/heroCarousel.module.css
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)

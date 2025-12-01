@@ -1,6 +1,16 @@
 {
   "/_app": "pages/_app.js",
+  "/about": "pages/about.html",
+  "/blog": "pages/blog.html",
+  "/concerts": "pages/concerts.html",
+  "/events": "pages/events.html",
+  "/featured-work": "pages/featured-work.html",
+  "/": "pages/index.html",
+  "/journalism": "pages/journalism.html",
+  "/nature": "pages/nature.html",
+  "/portraits": "pages/portraits.html",
+  "/podcast": "pages/podcast.html",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/404": "pages/404.html"
 }
