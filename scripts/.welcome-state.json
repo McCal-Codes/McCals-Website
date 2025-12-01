@@ -1,4 +1,4 @@
 {
-  "lastHash": "bdeb0be3",
-  "lastMessage": "feat: add serve selector page and dev-only endpoint to start Next.js server\n\\n\\nAuthor: mccal"
+  "lastHash": "6aca15c4",
+  "lastMessage": "chore: update lockfile to match package.json for CI"
 }

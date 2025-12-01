@@ -111,27 +111,26 @@
   "author": "McCal Media",
   "license": "MIT",
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.940.0",
     "@playwright/test": "^1.39.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.20",
     "chokidar": "^4.0.3",
     "concurrently": "^9.2.1",
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.27.0",
     "eslint": "^8.46.0",
     "http-server": "^14.1.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.2.7",
+    "minimist": "^1.2.8",
     "nodemon": "^3.1.11",
     "open": "^10.1.0",
     "playwright": "^1.39.0",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.0.0",
     "prettier": "^2.8.8",
-    "@aws-sdk/client-s3": "^3.500.0",
-    "minimist": "^1.2.8"
+    "tailwindcss": "^3.4.14"
   },
-  
   "engines": {
     "node": ">=16.0.0"
   },
@@ -146,9 +145,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "redis": "^5.10.0"
-  }
-
-  ,"lint-staged": {
+  },
+  "lint-staged": {
     "scripts/**/*.js": [
       "npx eslint --fix",
       "git add"

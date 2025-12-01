@@ -1,13 +1,8 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `bdeb0be3` — 1 second ago
-> feat: add serve selector page and dev-only endpoint to start Next.js server
+**Last commit**: `6aca15c4` — 45 seconds ago
+> chore: update lockfile to match package.json for CI
 ## 🔄 Changes in last commit
-- README.md
-- dev-server.js
-- scripts/.welcome-state.json
-- serve-select.html
-- src/site/serve-select.html
-- updates/welcome.md
+- package-lock.json
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)
