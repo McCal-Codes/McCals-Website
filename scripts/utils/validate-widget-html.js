@@ -29,8 +29,13 @@ function validateWidgetHTML() {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
 
-      // Check for HTML structure
-      if (content.includes('<!DOCTYPE html>') || content.includes('<html')) {
+      // Check for HTML structure (full page or snippet)
+      // Full page: <!DOCTYPE html> or <html>
+      // Snippet: must have at least a div/section/article with content
+      const hasFullHTML = content.includes('<!DOCTYPE html>') || content.includes('<html');
+      const hasSnippet = /<(div|section|article|nav|header|footer|style|script)[^>]*>/i.test(content) && content.trim().length > 50;
+
+      if (hasFullHTML || hasSnippet) {
         console.log('✅ Valid HTML structure - validate-widget-html.js:34');
         validFiles++;
       } else {
@@ -51,6 +56,10 @@ function validateWidgetHTML() {
       const stat = fs.statSync(fullPath);
 
       if (stat.isDirectory()) {
+        // Skip Legacy Widgets archive and other archived directories
+        if (fullPath.includes('_archived')) {
+          continue;
+        }
         walkDirectory(fullPath);
       } else if (item.endsWith('.html')) {
         validateFile(fullPath);

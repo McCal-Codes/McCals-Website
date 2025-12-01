@@ -172,11 +172,16 @@ An example (aggregated) manifest excerpt:
 | EXIF Processing | 450ms | 180ms | **60% faster** |
 
 ## Versions
-Active versions retained in `versions/`:
-- **v4.7.1** (Latest): Optional API support (data-api="on") with graceful GitHub fallback; retains Spotify features
-- **v4.7**: Artist Support (Spotify) with search links and optional embedded previews
-- **v4.6**: Performance optimizations and structured data refinements
 
-Legacy versions (v4.5 and earlier) have been moved to `src/widgets/_archived/legacy-widget-versions/concert-portfolio/` to reduce clutter. Refer to the archive for historical diff/reference.
+### Active Versions (≤2 Policy)
+The following versions are maintained in `versions/`:
+- **v4.7.1** (Current): Optional API support (data-api="on") with graceful GitHub fallback; retains Spotify features
+- **v4.7.0** (Previous Stable): Artist Support (Spotify) with search links and optional embedded previews
 
-See widget CHANGELOG.md and archive INDEX.json for full version history.
+### Legacy Versions (Archived)
+Versions v4.6.0 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
+- **Archive Location**: `src/widgets/_archived/Legacy Widgets/concert-portfolio/versions/`
+- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/concert-portfolio/versions/INDEX.json) for complete version catalog
+- **Archived Versions**: v2.0.0 through v4.6.0 (17 versions)
+
+See widget CHANGELOG.md for detailed version history and feature progression.

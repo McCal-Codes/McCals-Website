@@ -2,12 +2,18 @@
 
 **Current Version: v1.5.0** — Latest iteration with randomized cover images, masonry spacing refinements, and production-focused lightbox behavior.
 
-## Active Version Policy
-Only the latest two stable versions are retained in `versions/` (current + previous). Earlier iterations (v1.0.0–v1.4.0) have been moved to `src/widgets/_archived/legacy-widget-versions/featured-portfolio/`.
+## Versions
 
-## Active Versions
-- v1.5.0 (current)
-- v1.4.0 (previous stable)
+### Active Versions (≤2 Policy)
+The following versions are maintained in `versions/`:
+- **v1.5.0** (Current): Randomized cover images, masonry spacing refinements, production-focused lightbox
+- **v1.4.0** (Previous Stable): Baseline for v1.5.0 enhancements
+
+### Legacy Versions (Archived)
+Versions v1.3.0 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
+- **Archive Location**: `src/widgets/_archived/Legacy Widgets/featured-portfolio/versions/`
+- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/featured-portfolio/versions/INDEX.json) for complete version catalog
+- **Archived Versions**: v1.0.0 through v1.3.0 (4 versions)
 
 ## Features
 - Randomized cover image selection (Fisher-Yates shuffle)
@@ -19,8 +25,8 @@ Only the latest two stable versions are retained in `versions/` (current + previ
 ## Usage
 Embed the latest HTML file (`versions/v1.5.0-featured-portfolio.html`) directly into a Squarespace Code Block.
 
-## Version History (Archived)
-Earlier versions experimented with layout densities, initial shuffle strategies, and debug panel scaffolding. Consult the archive `INDEX.json` and widget CHANGELOG for details.
+### Version History
+Earlier versions experimented with layout densities, initial shuffle strategies, and debug panel scaffolding. All archived versions remain accessible for historical reference and feature comparison. Consult the archive INDEX.json and widget CHANGELOG.md for detailed progression.
 
 ## Future Enhancements
 - Consider performance instrumentation alignment with v5+ portfolio widgets

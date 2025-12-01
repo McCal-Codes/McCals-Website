@@ -1,0 +1,26 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "photojournalism-portfolio",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "currentVersion": "v5.2.0",
+    "previousVersion": null,
+    "description": "Retain only the current stable performance-optimized version"
+  },
+  "versions": [
+    {"version": "v5.1.0", "date": "2025-10-09", "summary": "Performance optimization preview: critical CSS, async loading, resource hints (WIP)"},
+    {"version": "v4.9.0", "date": "2025-10-05", "summary": "Fixed image aspect ratio preservation in lightbox gallery"},
+    {"version": "v4.8.0", "date": "2025-10-05", "summary": "Hidden lightbox scrollbars for immersive viewing experience"},
+    {"version": "v4.3.4", "date": "2025-10-05", "summary": "Cache bust controls, header isolation, debug panel improvements"},
+    {"version": "v4.2.0", "date": "2025-09-23", "summary": "Event cards iteration"},
+    {"version": "v4.1.0", "date": "2025-09-23", "summary": "Individual lightbox implementation"},
+    {"version": "v4.0.0", "date": "2025-09-23", "summary": "Master manifest system"},
+    {"version": "v3.0.0", "date": "2024-09-23", "summary": "Published work support: green badges, outlet information"},
+    {"version": "v2.1.0", "date": "2024-09-23", "summary": "Enhanced captions support"},
+    {"version": "v2.0.0", "date": "2024-09-23", "summary": "Dynamic GitHub integration"},
+    {"version": "v1.0.0", "date": "2024-09-23", "summary": "Initial release: filterable masonry layout"}
+  ],
+  "lastUpdated": "2025-12-01",
+  "archiveLocation": "src/widgets/_archived/Legacy Widgets/photojournalism-portfolio/INDEX.json",
+  "totalArchivedVersions": 11
+}

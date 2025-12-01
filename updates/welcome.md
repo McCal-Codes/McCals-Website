@@ -1,20 +1,11 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `46b2d51a` — 0 seconds ago
-> feat: enhance widget validation workflow and add artifact uploads
+**Last commit**: `62bcff6a` — 1 second ago
+> feat: update site navigation widget to version 1.7.1 with enhanced documentation and styling
 ## 🔄 Changes in last commit
-- .github/copilot-instructions.md
-- .github/workflows/lighthouse-widgets.yml
-- .github/workflows/playwright-performance.yml
-- .github/workflows/prepublish-widget-release.yml
-- .github/workflows/widget-validate.yml
-- README.md
-- docs/standards/dark-mode-audit.md
-- docs/widgets/index.md
-- package.json
 - scripts/.welcome-state.json
-- scripts/utils/ai-instructions-preflight.js
-- scripts/utils/audit-dark-mode.js
-- …and 14 more
+- src/widgets/site-navigation/README.md
+- src/widgets/site-navigation/versions/v1.7.1-site-navigation.html
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **59** | Done: **44**
 ## 🎯 Today’s focus (from `updates/todo.md`)

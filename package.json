@@ -92,7 +92,8 @@
     "versions:standardize": "node scripts/utils/standardize-versions.js",
     "versions:check": "node scripts/utils/standardize-versions.js --dry-run --verbose",
     "versions:rename": "node scripts/utils/rename-widget-versions.js",
-    "versions:rename-check": "node scripts/utils/rename-widget-versions.js --dry-run --verbose"
+    "versions:rename-check": "node scripts/utils/rename-widget-versions.js --dry-run --verbose",
+    "scan:widget-versions": "node scripts/utils/scan-widget-versions.js"
   },
   "keywords": [
     "photography",

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "featured-portfolio",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "currentVersion": "v1.5.0",
+    "previousVersion": "v1.4.0",
+    "description": "Retain current version with randomized covers and previous stable baseline"
+  },
+  "versions": [
+    {"version": "v1.3.0", "date": "2025-09-23", "summary": "Enhanced masonry spacing and layout refinements"},
+    {"version": "v1.2.0", "date": "2025-09-23", "summary": "Debug panel scaffolding and performance instrumentation"},
+    {"version": "v1.1.0", "date": "2025-09-23", "summary": "Initial shuffle strategy implementation"},
+    {"version": "v1.0.0", "date": "2025-09-16", "summary": "Initial release: featured work showcase with masonry layout"}
+  ],
+  "lastUpdated": "2025-12-01",
+  "archiveLocation": "src/widgets/_archived/Legacy Widgets/featured-portfolio/versions/",
+  "totalArchivedVersions": 4
+}

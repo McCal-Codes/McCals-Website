@@ -106,8 +106,47 @@ Reference standards:
 - [x] Portrait Portfolio v1.0: New portrait photography widget with vertical composition focus, 3:4 aspect ratios, and enhanced detail viewing (Oct 24, 2025)
 
 ## Remaining / In-Progress Items
+**Phase 1 — Legacy Version Archival (Planning & Scaffolding)** ✅ COMPLETE
+- [x] TODO: Define archival policy and shadow workflow validation (completed per workspace standards and Recent Updates).
+- [x] TODO: Document policy in `docs/standards/workspace-organization.md` and `.github/copilot-instructions.md` (completed).
+- [x] TODO: Add archive index scaffolds (INDEX.json templates) for `concert`, `photojournalism`, and `featured` under `src/widgets/_archived/Legacy Widgets/<widget>/versions/` (Phase 1 scaffolding; no file moves yet).
+- [x] TODO: Add CI scan script (dry-run) to report active vs legacy counts per widget without failing builds; prepare for Phase 2 enforcement.
+
+**Phase 2 — Legacy Version Physical Relocation** ✅ COMPLETE
+- [x] TODO: Physically relocated 60+ legacy widget version files to `src/widgets/_archived/Legacy Widgets/<widget>/versions/` (completed Dec 1, 2025).
+	- concert-portfolio: 17 versions archived (v2.0.0–v4.6.0)
+	- photojournalism-portfolio: 11 versions archived (v1.0.0–v5.1.0)
+	- podcast-feed: 11 versions archived (v1.0.0–v1.9.5)
+	- event-portfolio: 8 versions archived (v1.0.0–v2.6.1)
+	- featured-portfolio: 4 versions archived (v1.0.0–v1.3.0)
+	- accessibility-statement: 3 versions archived (v1.0.0–v1.1.1)
+	- nature-portfolio: 3 versions archived (v1.0.0, v1.2.0, v1.5.0)
+	- site-footer: 2 versions archived (v1.0.0, v1.1.0)
+	- site-navigation: 5 versions archived (v1.0.0, v1.6.x)
+	- blog-feed: 1 version archived (v1-google-docs)
+- [x] TODO: Validated all widgets now comply with ≤2 active versions policy (scanner confirmed 100% compliance).
+- [x] TODO: Updated widget READMEs with standardized version sections and archive links (completed Dec 1, 2025).
+	- Standardized 10 widget READMEs with "Active Versions (≤2 Policy)" and "Legacy Versions (Archived)" sections
+	- Added proper archive links to INDEX.json for all widgets with archived versions
+	- Consistent format: current version, previous stable, archive location, version count
+- [x] TODO: HTML validator enhancements — fixed to accept snippet-style widgets (Dec 1, 2025).
+	- Added skip logic for _archived directories
+	- Enhanced validation to recognize HTML snippets (semantic tags + content)
+	- Achieved 100% pass rate (78/78 files valid)
+- [x] TODO: Created CI workflow to enforce ≤2 active versions policy (`.github/workflows/widget-version-policy.yml`).
+
+**Domain Update — mcc-cal.com**
+- [x] TODO: Update schema/links in archive indexes (completed for INDEX.json templates).
+- [ ] TODO: Audit remaining `mccal.media` references and update to `mcc-cal.com` where appropriate:
+	- Found 10 references across widgets and docs (grep search completed Dec 1, 2025):
+		- Instagram social URL: `mccal.media` (keep as social handle)
+		- Email addresses: `contact@mccal.media` (determine if keeping or updating)
+		- Documentation references in archived content
+	- **Note**: Keep brand/social handles (e.g., instagram.com/mccal.media) unchanged
+	- Update only site-root URLs and schema references to mcc-cal.com
+	- Confirm newsletter and social links remain correct per current branding
+
 - [x] Run `npm run ai:preflight:short` — added and used during the recent sessions
-- [ ] TODO: Phase 2 — Physically relocate legacy widget version files to `src/widgets/_archived/legacy-widget-versions/<widget>/versions/` (concert: v2.*–v4.5; photojournalism: v1.0–v4.8; featured: v1.0–v1.3). Validate each widget README still lists only active versions after move. Add post-move HTML validator run.
 - [ ] TODO: Phase 2 — Review orphan scripts (`scripts/utils/generate-cdn-snippets.js`, `scripts/utils/auto-check-todo.js`, `scripts/utils/date-overrides.js`, `scripts/utils/find-latest-widget-versions.js`, `scripts/utils/shared-date-parsing.js`, `scripts/watchers/auto-manifest-updater.js`) and either archive to `scripts/_archived/` or integrate/document usage. Produce summary in `docs/CHANGELOG.md`.
 - [ ] TODO: Add CI job to enforce active/legacy widget version policy (fail if >2 active versions present in a live widget directory).
 - [ ] TODO: Draft a repository-wide improvement plan (README/CONTRIBUTING/code of conduct refresh, semantic HTML/accessibility audit, CSS/JS modernization, performance/resource-hint checklist, CI + templates) so contributors have a clear, best-practice roadmap. **Draft created; quick-win docs/CoC/gitignore updates completed** — see [`docs/repo-improvement-plan.md`](../docs/repo-improvement-plan.md) for phased priorities.

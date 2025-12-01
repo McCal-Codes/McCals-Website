@@ -50,13 +50,22 @@ High-performance RSS feed widget with liquid glass design and performance optimi
 - Show artwork and branding
 
 ## Versions
-- **v2.0.0** (Latest): Performance optimizations with lazy-loading, episode badges, McCal accent variables, enhanced accessibility
-- **v1.9.5**: Auto-hydrating RSS episodes with caching, Ep 9 fallback data, updated show naming
+
+### Active Versions (≤2 Policy)
+The following versions are maintained in `versions/`:
+- **v2.0.0** (Current): Performance optimizations with lazy-loading, episode badges, McCal accent variables, enhanced accessibility
+- **v2.0.0-performance-optimized** (Variant): Alternative build with additional optimization passes
+
+### Legacy Versions (Archived)
+Versions v1.9.5 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
+- **Archive Location**: `src/widgets/_archived/Legacy Widgets/podcast-feed/versions/`
+- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/podcast-feed/versions/INDEX.json) for complete version catalog
+- **Archived Versions**: v1.0.0 through v1.9.5 (11 versions)
+
+### Notable Archived Features
+- **v1.9.5**: Auto-hydrating RSS episodes with caching, Ep 9 fallback data
 - **v1.9**: Calendar invite refresh with data attributes for intro copy
 - **v1.1**: Audio previews, platform links, enhanced dark styling
 - **v1.0**: Initial release with glassmorphism design
-- Performance-optimized RSS parsing with caching
-- Responsive masonry layout with smooth animations
-- Debug mode with performance metrics
 
 See CHANGELOG.md for detailed version history.
