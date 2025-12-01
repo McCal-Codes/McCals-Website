@@ -1,4 +1,4 @@
 {
-  "lastHash": "c9ea1503",
-  "lastMessage": "feat: Implement event, featured, and journalism widgets with manifest loading and gallery display\n\n- Added EventWidget component to load and display events from a manifest.\n- Created FeaturedWidget component for showcasing featured works with manifest support.\n- Developed JournalismWidget for displaying journalism stories with image galleries.\n- Introduced Lightbox component for image viewing in all widgets.\n- Added types for events, featured items, and journalism manifests.\n- Included sample manifest JSON files for events, featured works, and journalism.\n\\n\\nAuthor: mccal"
+  "lastHash": "8b54af32",
+  "lastMessage": "feat: add HeroCarousel component with styles and default slides\n\n- Implemented HeroCarousel component to display featured work with slides.\n- Created default slides with images, titles, and call-to-action links.\n- Added CSS module for styling the HeroCarousel, including animations and responsive design.\n- Generated build and SSG manifests for the new component.\n\\n\\nAuthor: mccal"
 }

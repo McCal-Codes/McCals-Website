@@ -12,7 +12,6 @@ const Nav: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   // Compute aria-current for anchors with data-match
   const isHome = useMemo(() => regexMatch('^/$', pathname), [pathname]);
@@ -46,22 +45,7 @@ const Nav: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    // Initialize theme (default dark)
-    try {
-      const saved = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
-      const initial: 'dark' | 'light' = saved === 'light' || saved === 'dark' ? (saved as any) : 'dark';
-      setTheme(initial);
-      document.body.setAttribute('data-theme', initial);
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    try {
-      document.body.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-    } catch {}
-  }, [theme]);
+  // Theme is handled by a floating ThemeToggle component in Layout; Nav no longer manages theme state.
 
   useEffect(() => {
     // Close menus on route change
@@ -94,7 +78,11 @@ const Nav: React.FC = () => {
 
   return (
     <div className="mcc-nav-shell" role="group" aria-label="Global navigation">
-      <nav ref={navRef} className={`mcc-nav ${isScrolled ? 'is-scrolled' : ''} ${menuOpen ? 'mcc-nav--menu-open' : ''}`} aria-label="Primary navigation">
+      <nav
+        ref={navRef}
+        className={`mcc-nav ${isHome ? 'is-home' : ''} ${isScrolled ? 'is-scrolled' : ''} ${menuOpen ? 'mcc-nav--menu-open' : ''}`}
+        aria-label="Primary navigation"
+      >
         <div className="mcc-nav__inner">
         <div className="mcc-nav__brand"><Link href="/" data-match="^/">Caleb McCartney</Link></div>
 
@@ -114,16 +102,7 @@ const Nav: React.FC = () => {
           </span>
         </button>
 
-        <button
-          className="mcc-nav__theme-toggle"
-          type="button"
-          aria-pressed={theme === 'dark' ? true : false}
-          title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-          onClick={() => setTheme(t => (t === 'dark' ? 'light' : 'dark'))}
-        >
-          <span className="sr-only">Toggle color theme</span>
-          <span aria-hidden="true">{theme === 'dark' ? '🌙' : '☀️'}</span>
-        </button>
+        {/* theme toggle removed from nav — using floating ThemeToggle component in Layout */}
 
         <div className="mcc-nav__menu">
           <ul className="mcc-nav__links" id="mcc-nav-links" role="list">
