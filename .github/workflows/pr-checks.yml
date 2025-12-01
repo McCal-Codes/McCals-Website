@@ -1,0 +1,36 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  pr-validation:
+    name: Validate on PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Validate widget HTML
+        run: npm run validate:widgets
+
+      - name: Manifest dry-run (composite)
+        run: npm run manifest:dry-run
+
+      - name: Lint scripts and site JS
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test

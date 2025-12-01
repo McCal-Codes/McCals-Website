@@ -22,12 +22,14 @@ async function measure(url, name) {
   try {
     await page.goto(url, { waitUntil: 'domcontentloaded' });
     await page.waitForLoadState('networkidle');
+    /* eslint-disable no-undef */
     const dom = await page.evaluate(() => ({
-      title: window?.document?.title || '',
-      images: window?.document ? window.document.querySelectorAll('img').length : 0,
-      scripts: window?.document ? window.document.querySelectorAll('script').length : 0,
-      links: window?.document ? window.document.querySelectorAll('a').length : 0
+      title: document?.title || '',
+      images: document ? document.querySelectorAll('img').length : 0,
+      scripts: document ? document.querySelectorAll('script').length : 0,
+      links: document ? document.querySelectorAll('a').length : 0
     }));
+    /* eslint-enable no-undef */
     metrics = { ...metrics, dom, ms: Date.now() - start };
   } catch (e) {
     metrics.error = e.message;

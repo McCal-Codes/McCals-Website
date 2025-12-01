@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 const { execSync } = require('child_process');
 const fs = require('fs');
-const path = require('path');
 
 // Default threshold: 5 MB
 const DEFAULT_THRESHOLD = 5 * 1024 * 1024;
