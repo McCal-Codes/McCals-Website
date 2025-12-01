@@ -75,3 +75,8 @@ $RECYCLE.BIN/
 *.tmp
 *.temp
 .cache/
+
+# Next.js build artifacts
+.next/
+sites/self-hosted-nextjs/.next/
+*.previewinfo
