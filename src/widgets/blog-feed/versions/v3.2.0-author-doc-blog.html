@@ -581,12 +581,13 @@ Configuration (data-* attributes on #blogWidget):
       class="mcc-blog"
       id="blogWidget"
       data-widget-version="3.2.0"
-      data-authors-source="[]"
+      data-authors-source='["https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/pub?embedded=true"]'
       data-cache-ttl="60"
       data-max-posts="12"
       data-author-filter="true"
       data-category-filter="true"
       data-search="true"
+      data-default-image="/images/blog/flags-default.jpg"
     >
       <div class="mcc-blog__header">
         <h1 class="mcc-blog__heading">
@@ -750,9 +751,8 @@ Configuration (data-* attributes on #blogWidget):
               avatar: "/images/authors/default.jpg",
               bio: "",
             };
-
             const metaRegex = /---\s*([\s\S]*?)\s*---/;
-            const match = html.match(metaRegex);
+            const match = String(html).match(metaRegex);
 
             if (match) {
               const metaBlock = match[1];
@@ -779,7 +779,54 @@ Configuration (data-* attributes on #blogWidget):
               });
 
               // Remove metadata block from content
-              html = html.replace(metaRegex, "");
+              html = String(html).replace(metaRegex, "");
+              return { metadata, content: html };
+            }
+
+            // Fallback: parse top-of-document key: value pairs without --- delimiters
+            // Read up to first 12 lines and stop at the first empty line
+            const lines = String(html).split(/\r?\n/).slice(0, 12);
+            let found = false;
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i].trim();
+              if (!line) break; // stop at first blank line
+              const colonIndex = line.indexOf(":");
+              if (colonIndex === -1) continue;
+              const key = line.substring(0, colonIndex).trim().toUpperCase();
+              const value = line.substring(colonIndex + 1).trim();
+              if (!value) continue;
+              found = true;
+              switch (key) {
+                case "AUTHOR":
+                  metadata.author = value;
+                  break;
+                case "AVATAR":
+                  metadata.avatar = value;
+                  break;
+                case "BIO":
+                  metadata.bio = value;
+                  break;
+              }
+            }
+
+            // If we found top-of-doc metadata, remove those lines from the start of the content
+            if (found) {
+              const contentLines = String(html).split(/\r?\n/);
+              // remove leading metadata lines until an empty line
+              let idx = 0;
+              while (idx < contentLines.length) {
+                if (!contentLines[idx].trim()) {
+                  idx++;
+                  break;
+                }
+                if (contentLines[idx].includes(":")) {
+                  idx++;
+                  continue;
+                }
+                break;
+              }
+              const remaining = contentLines.slice(idx).join("\n");
+              return { metadata, content: remaining };
             }
 
             return { metadata, content: html };
@@ -875,7 +922,7 @@ Configuration (data-* attributes on #blogWidget):
 
               switch (key) {
                 case "date":
-                  metadata.date = value;
+                  metadata.date = this.normalizeDate(value);
                   metadataEndIndex = i + 1;
                   break;
                 case "category":
@@ -904,6 +951,52 @@ Configuration (data-* attributes on #blogWidget):
             }
 
             return { metadata, content };
+          },
+
+          /**
+           * Normalize a variety of date formats into ISO YYYY-MM-DD when possible.
+           */
+          normalizeDate: function (dateStr) {
+            if (!dateStr) return new Date().toISOString().split("T")[0];
+            const s = String(dateStr).trim();
+            // Common ISO-like already
+            if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+            // YYYY/MM/DD or YYYY.MM.DD
+            if (/^\d{4}[\/\.\s]\d{1,2}[\/\.\s]\d{1,2}$/.test(s)) {
+              const parts = s.split(/[^\d]+/);
+              const [y, m, d] = parts.map(Number);
+              return `${String(y).padStart(4, "0")}-${String(m).padStart(
+                2,
+                "0"
+              )}-${String(d).padStart(2, "0")}`;
+            }
+            // MM-DD-YY or DD-MM-YY variants (allow hyphen, slash, en dash)
+            const m3 = s.match(/^(\d{1,2})[-\/–](\d{1,2})[-\/–](\d{2,4})$/);
+            if (m3) {
+              let a = Number(m3[1]);
+              let b = Number(m3[2]);
+              let y = Number(m3[3]);
+              if (y < 100) y += y < 50 ? 2000 : 1900;
+              // decide if first is month (if <=12) else treat as day-month
+              let month, day;
+              if (a >= 1 && a <= 12) {
+                month = a;
+                day = b;
+              } else {
+                month = b;
+                day = a;
+              }
+              return `${String(y).padStart(4, "0")}-${String(month).padStart(
+                2,
+                "0"
+              )}-${String(day).padStart(2, "0")}`;
+            }
+            // Try Date parse fallback
+            const d = new Date(s);
+            if (!isNaN(d.getTime())) {
+              return d.toISOString().split("T")[0];
+            }
+            return new Date().toISOString().split("T")[0];
           },
 
           /**
@@ -978,7 +1071,7 @@ Configuration (data-* attributes on #blogWidget):
                 throw new Error(`HTTP ${response.status}`);
               }
 
-              let html = await response.text();
+              const html = await response.text();
               console.log(
                 `[BlogWidget] Fetched ${html.length} bytes from ${url}`
               );
@@ -990,11 +1083,46 @@ Configuration (data-* attributes on #blogWidget):
                 return [];
               }
 
-              // Parse author metadata
-              const { metadata: authorMeta, content: authorContent } =
-                this.parseAuthorMetadata(html);
+              // quick checks for common Google publish issues
+              const lowered = html.toLowerCase();
+              if (
+                lowered.includes("sign in") ||
+                lowered.includes("you need permission") ||
+                lowered.includes("access denied") ||
+                lowered.includes("<form action=")
+              ) {
+                console.error(
+                  `[BlogWidget] Likely permission/sign-in HTML returned for ${url}`
+                );
+                return [];
+              }
 
-              // Split into individual posts
+              // Parse HTML into a DOM and create a text-only normalized representation
+              const parsed = new DOMParser().parseFromString(html, "text/html");
+
+              // Clone and normalize structural markers for splitting: <hr> -> --- and <br> -> newline
+              const cloned = parsed.cloneNode(true);
+              cloned.querySelectorAll("hr").forEach((hr) => {
+                const marker = parsed.createTextNode("\n---\n");
+                hr.parentNode.replaceChild(marker, hr);
+              });
+              cloned.querySelectorAll("br").forEach((br) => {
+                br.parentNode.replaceChild(parsed.createTextNode("\n"), br);
+              });
+
+              const textOnly =
+                (cloned.body && cloned.body.textContent) ||
+                parsed.body.textContent ||
+                html;
+              const normalizedText = String(textOnly)
+                .replace(/\r\n/g, "\n")
+                .trim();
+
+              // Parse author metadata from the text-only version
+              const { metadata: authorMeta, content: authorContent } =
+                this.parseAuthorMetadata(normalizedText);
+
+              // Split into individual posts using the text-only content
               const postSections = this.splitIntoPosts(authorContent);
               console.log(
                 `[BlogWidget] Found ${postSections.length} post sections in author doc`
@@ -1007,13 +1135,41 @@ Configuration (data-* attributes on #blogWidget):
                 const { metadata: postMeta, content: postContent } =
                   this.parsePostMetadata(section.content);
 
-                // Extract title (use POST: title if available, otherwise extract from content)
-                const { title, content: cleanedContent } = section.title
-                  ? { title: section.title, content: postContent }
-                  : this.extractTitle(postContent);
+                // Determine title: prefer POST: title if present
+                let title = section.title;
+                let postBodyText = postContent || "";
+                if (!title) {
+                  // pick first non-empty line as title
+                  const firstLine =
+                    postBodyText.split("\n").find((l) => l.trim().length > 0) ||
+                    "Untitled Post";
+                  title = truncate(firstLine.trim(), 80);
+                  // remove that line from body
+                  const idx = postBodyText.indexOf(firstLine);
+                  if (idx === 0)
+                    postBodyText = postBodyText.slice(firstLine.length).trim();
+                }
 
-                // Clean HTML
-                const finalContent = this.cleanHTML(cleanedContent);
+                // Convert plain text post body into minimal paragraphs HTML and sanitize
+                const paragraphs = postBodyText
+                  .split(/\n{2,}/)
+                  .map((p) => p.trim())
+                  .filter(Boolean);
+                const escapeHtml = (s) =>
+                  s.replace(
+                    /[&<>"]/g,
+                    (c) =>
+                      ({
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                      }[c])
+                  );
+                const finalContent =
+                  paragraphs.length > 0
+                    ? paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join("")
+                    : `<p>${escapeHtml(postBodyText)}</p>`;
 
                 // Auto-generate excerpt if not provided
                 if (!postMeta.excerpt) {
@@ -1163,7 +1319,9 @@ Configuration (data-* attributes on #blogWidget):
           },
 
           init: async function () {
+            // Load configuration and surface it for debugging
             this.loadConfig();
+            console.log("[BlogWidget] Config after loadConfig:", this.config);
             await this.loadData();
             this.setupFilters();
             this.applyFilters();
@@ -1176,6 +1334,7 @@ Configuration (data-* attributes on #blogWidget):
 
             try {
               const sourceAttr = widget.dataset.authorsSource;
+              console.log("[BlogWidget] Raw data-authors-source:", sourceAttr);
               let parsed;
               if (sourceAttr && sourceAttr.trim().startsWith("[")) {
                 parsed = JSON.parse(sourceAttr);
@@ -1194,7 +1353,31 @@ Configuration (data-* attributes on #blogWidget):
                 : [parsed];
             } catch (e) {
               console.warn("Invalid authors-source, using empty array", e);
+              console.warn(
+                "[BlogWidget] data-authors-source attribute raw value:",
+                widget.getAttribute("data-authors-source")
+              );
               this.config.authorsSource = [];
+            }
+
+            // Fallback for test harnesses: allow a global override
+            try {
+              if (
+                (!this.config.authorsSource ||
+                  this.config.authorsSource.length === 0) &&
+                window.__BLOG_WIDGET_AUTHORS
+              ) {
+                console.warn(
+                  "[BlogWidget] Using global fallback window.__BLOG_WIDGET_AUTHORS for authorsSource"
+                );
+                this.config.authorsSource = Array.isArray(
+                  window.__BLOG_WIDGET_AUTHORS
+                )
+                  ? window.__BLOG_WIDGET_AUTHORS
+                  : [window.__BLOG_WIDGET_AUTHORS];
+              }
+            } catch (e) {
+              // ignore
             }
 
             this.config.cacheTTL = parseInt(widget.dataset.cacheTtl) || 60;
@@ -1259,6 +1442,7 @@ Configuration (data-* attributes on #blogWidget):
             }
 
             const allPosts = [];
+            const diagnostics = [];
 
             // Fetch author docs one at a time (each can have many posts)
             for (const url of urls) {
@@ -1272,9 +1456,29 @@ Configuration (data-* attributes on #blogWidget):
               let posts = CacheManager.get(cacheKey);
 
               if (!posts) {
-                posts = await AuthorDocParser.fetchAuthorDoc(normalizedUrl);
-                if (posts && posts.length > 0) {
-                  CacheManager.set(cacheKey, posts, this.config.cacheTTL);
+                let fetchedPosts = [];
+                try {
+                  fetchedPosts = await AuthorDocParser.fetchAuthorDoc(
+                    normalizedUrl
+                  );
+                  if (fetchedPosts && fetchedPosts.length > 0) {
+                    CacheManager.set(
+                      cacheKey,
+                      fetchedPosts,
+                      this.config.cacheTTL
+                    );
+                    posts = fetchedPosts;
+                  } else {
+                    posts = [];
+                  }
+                  diagnostics.push({
+                    url,
+                    normalizedUrl,
+                    fetched: fetchedPosts.length,
+                  });
+                } catch (err) {
+                  diagnostics.push({ url, normalizedUrl, error: String(err) });
+                  posts = [];
                 }
               }
 
@@ -1294,6 +1498,7 @@ Configuration (data-* attributes on #blogWidget):
                     : u
                 ),
                 rawUrls: urls,
+                diagnostics,
               });
               console.warn("[BlogWidget] Troubleshooting steps:");
               console.warn(
@@ -1307,7 +1512,9 @@ Configuration (data-* attributes on #blogWidget):
               );
               console.warn("  4. Try clearing cache: CacheManager.clear()");
               this.showError(
-                "No articles found. Check console for details. Ensure Google Docs are Published to Web."
+                `No articles found. Check console for details. Diagnostics: ${JSON.stringify(
+                  diagnostics
+                )}`
               );
             } else {
               console.log(
@@ -1531,9 +1738,7 @@ Configuration (data-* attributes on #blogWidget):
               </div>
               <div class="mcc-card__content">
                 <div class="mcc-card__meta">
-                  <img class="mcc-card__avatar" src="${
-                    post.authorAvatar
-                  }" alt="${post.author}" loading="lazy">
+                  <svg class="mcc-card__avatar" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff" aria-hidden="true" focusable="false"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0" fill="#2e3436"></path> </g></svg>
                   <div>
                     <p class="mcc-card__author" itemprop="author">${
                       post.author
@@ -1586,9 +1791,7 @@ Configuration (data-* attributes on #blogWidget):
                   post.title
                 }</h2>
                 <div class="mcc-modal__post-meta">
-                  <img class="mcc-card__avatar" src="${
-                    post.authorAvatar
-                  }" alt="${post.author}">
+                  <svg class="mcc-card__avatar" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff" aria-hidden="true" focusable="false"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0" fill="#2e3436"></path> </g></svg>
                   <span itemprop="author">${post.author}</span>
                   <span>·</span>
                   <time datetime="${

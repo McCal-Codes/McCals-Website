@@ -99,10 +99,12 @@
 
     <script>
       // Intercept console methods for display
+      // Bind methods and include 'info' to avoid missing-method errors
       const originalConsole = {
-        log: console.log,
-        warn: console.warn,
-        error: console.error,
+        log: console.log.bind(console),
+        info: (console.info || console.log).bind(console),
+        warn: console.warn.bind(console),
+        error: console.error.bind(console),
       };
 
       function addLogEntry(type, ...args) {
@@ -116,7 +118,13 @@
           .join(" ")}`;
         consoleEl.appendChild(entry);
         consoleEl.scrollTop = consoleEl.scrollHeight;
-        originalConsole[type](...args);
+        // Prefer calling the same-named originalConsole method (info/log/warn/error)
+        const method = type === "info" ? "info" : type;
+        if (originalConsole && typeof originalConsole[method] === "function") {
+          originalConsole[method](...args);
+        } else if (typeof originalConsole.log === "function") {
+          originalConsole.log(...args);
+        }
       }
 
       console.log = (...args) => addLogEntry("info", ...args);
@@ -186,21 +194,112 @@
             widgetEl.setAttribute(
               "data-authors-source",
               JSON.stringify([
-                "https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/pub",
-                "https://docs.google.com/document/d/e/2PACX-1vSAhLhpW3MMztRzRlhZEjaZgyjUfRjeEj0HAlItPlfuiIXrrU_JcyRxM-fADuueipe_CBANlpr_EroG/pub",
+                "https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/export?format=html",
               ])
             );
             widgetEl.setAttribute("data-cache-ttl", "5");
             console.log("✅ Widget config set:", widgetEl.dataset);
           }
 
+          // Also provide a global fallback variable for the widget (test harness)
+          window.__BLOG_WIDGET_AUTHORS = [
+            "https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/export?format=html",
+          ];
+
           // Execute widget script
           if (script) {
-            const scriptEl = document.createElement("script");
-            scriptEl.textContent = script.textContent;
-            document.body.appendChild(scriptEl);
-            console.log("✅ Widget script loaded");
-            updateStatus("Widget initialized");
+            // Prefer loading the external JS file version to avoid CSP/live preview limitations
+            const externalSrc = "./versions/v3.2.0-author-doc-blog.js";
+            const s = document.createElement("script");
+            s.src = externalSrc;
+            s.onload = () => {
+              console.log("✅ Widget external JS loaded:", externalSrc);
+              updateStatus("Widget initialized");
+              setTimeout(() => {
+                if (window.BlogWidget) {
+                  console.log(
+                    "[TestHarness] Forcing BlogWidget.init() with current config override"
+                  );
+                  try {
+                    window.BlogWidget.init();
+                  } catch (e) {
+                    console.warn(
+                      "[TestHarness] BlogWidget.init() retry failed:",
+                      e
+                    );
+                  }
+                } else {
+                  console.warn(
+                    "[TestHarness] BlogWidget not present after external script load"
+                  );
+                }
+              }, 0);
+            };
+            s.onerror = (e) => {
+              console.warn(
+                "[TestHarness] External script load failed, falling back to inline JS",
+                e
+              );
+              // Fall back to previous Blob URL / eval pipeline
+              const code = script.textContent || "";
+              try {
+                const blob = new Blob([code], { type: "text/javascript" });
+                const blobUrl = URL.createObjectURL(blob);
+                const sb = document.createElement("script");
+                sb.src = blobUrl;
+                sb.onload = () => {
+                  console.log("✅ Widget script loaded via Blob URL");
+                  URL.revokeObjectURL(blobUrl);
+                  finalizeInit();
+                };
+                sb.onerror = () => {
+                  fallbackEval();
+                };
+                document.body.appendChild(sb);
+              } catch (err) {
+                fallbackEval();
+              }
+              function fallbackEval() {
+                try {
+                  new Function(code)();
+                  console.log("✅ Widget script evaluated via Function()");
+                  finalizeInit();
+                } catch (err2) {
+                  try {
+                    const se = document.createElement("script");
+                    se.textContent = code;
+                    document.body.appendChild(se);
+                    console.log("✅ Widget script loaded via DOM script tag");
+                    finalizeInit();
+                  } catch (err3) {
+                    console.error(
+                      "[TestHarness] Failed to inject widget script:",
+                      err3
+                    );
+                  }
+                }
+              }
+              function finalizeInit() {
+                updateStatus("Widget initialized");
+                setTimeout(() => {
+                  if (window.BlogWidget) {
+                    try {
+                      window.BlogWidget.init();
+                    } catch (e4) {
+                      console.warn(
+                        "[TestHarness] BlogWidget.init() retry failed:",
+                        e4
+                      );
+                    }
+                  } else {
+                    console.warn(
+                      "[TestHarness] BlogWidget not present after script evaluation"
+                    );
+                  }
+                }, 0);
+              }
+            };
+            document.body.appendChild(s);
           }
         })
         .catch((err) => {
