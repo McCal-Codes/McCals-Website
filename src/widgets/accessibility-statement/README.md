@@ -1,6 +1,6 @@
 # Accessibility Statement Widget
 
-**Current Version:** v1.1.3  
+**Current Version:** v1.2.0  
 **Widget Type:** Content / Documentation  
 **Status:** ✅ Production Ready
 
@@ -11,6 +11,7 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 ## Features
 
 ### Core Functionality
+
 - ✅ **Skip Navigation** - Keyboard-accessible skip to main content link
 - ✅ **Sidebar TOC** - Sticky table of contents with collapsible sections
 - ✅ **Scroll Spy** - Auto-highlights active section with `aria-current`
@@ -23,6 +24,7 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 - ✅ **Readable Panel (v1.1.0)** - Backdrop-blurred high-contrast panel to improve text legibility over busy backgrounds
 
 ### Accessibility Features
+
 - ✅ **WCAG 2.1 AA Compliant** - Meets all Level AA success criteria
 - ✅ **Semantic HTML** - Proper landmarks (main, aside, nav)
 - ✅ **ARIA Labels** - Descriptive labels for all interactive elements
@@ -33,6 +35,7 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 - ✅ **Safe Area Insets** - Respects notched device safe areas
 
 ### Design System
+
 - **Dark/Light Mode** - Automatic theme switching via `prefers-color-scheme`
 - **Manual Theme Override (v1.1.0)** - Toolbar buttons let users force light or dark, or revert to system
 - **Glassmorphism** - Backdrop blur effects on mobile drawer
@@ -46,7 +49,7 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 
 1. Create a new page or section for your accessibility statement
 2. Add a **Code Block**
-3. Paste the complete widget code from `versions/v1.1.3-accessibility-statement.html`
+3. Paste the complete widget code from `versions/v1.2.0-accessibility-statement.html`
 4. Adjust `--header-h` CSS variable to match your site's header height
 5. Save and preview
 
@@ -54,17 +57,19 @@ A comprehensive accessibility statement page widget that demonstrates McCal Medi
 
 ```css
 :root {
-  --header-h: 92px;  /* ← Adjust to your site's header height */
+  --header-h: 92px; /* ← Adjust to your site's header height */
 }
 ```
 
 **Finding Your Header Height:**
+
 1. Open browser DevTools (F12)
 2. Inspect your site header
 3. Look for computed height value
 4. Update the CSS variable
 
 ## Usage Guidelines
+
 ### Theme Toggle (System / Light / Dark) — v1.1.0
 
 Toolbar buttons allow visitors to select a theme:
@@ -74,11 +79,11 @@ Toolbar buttons allow visitors to select a theme:
 - Dark: Forces dark palette for widget scope only
 
 Implementation details:
+
 - State stored in `localStorage` (`a11yThemePref`); removed when System selected
 - Applied via `data-theme` attribute on the root widget wrapper (scoped, no global bleed)
 - Buttons expose `aria-pressed` for current selection; fully keyboard accessible
 - No motion introduced; respects `prefers-reduced-motion`
-
 
 ### Content Customization
 
@@ -91,10 +96,11 @@ All content sections can be customized to reflect your organization's specific p
 <!-- Update contact information -->
 <section id="contact">
   <h2>Contact</h2>
-  <p><strong>[Your Company]</strong><br>
-     <a href="mailto:your-email@example.com">your-email@example.com</a><br>
-     [Your Address]<br>
-     [Your Phone]
+  <p>
+    <strong>[Your Company]</strong><br />
+    <a href="mailto:your-email@example.com">your-email@example.com</a><br />
+    [Your Address]<br />
+    [Your Phone]
   </p>
 </section>
 ```
@@ -102,6 +108,7 @@ All content sections can be customized to reflect your organization's specific p
 ### Adding/Removing Sections
 
 To add a new section:
+
 1. Add link to sidebar TOC
 2. Create section with matching ID
 3. Add `scroll-margin-top` for proper scroll positioning
@@ -130,6 +137,7 @@ To add a new section:
 ## Performance
 
 ### Metrics
+
 - **Lighthouse Score:** 100 (Accessibility)
 - **First Paint:** <100ms (CSS-only, no external requests)
 - **JavaScript:** ~1KB minified (scroll spy + drawer interactions)
@@ -137,6 +145,7 @@ To add a new section:
 - **Dependencies:** None (fully self-contained)
 
 ### Optimization Features
+
 - IntersectionObserver for efficient scroll spy
 - CSS-only drawer animation (no JS overhead)
 - Minimal DOM manipulation
@@ -152,6 +161,7 @@ To add a new section:
 - ✅ Chrome Android 90+
 
 ### Fallbacks
+
 - `color-mix()` - Graceful degradation to solid colors
 - `backdrop-filter` - Works without blur on older browsers
 - IntersectionObserver - Polyfill not required (progressive enhancement)
@@ -159,6 +169,7 @@ To add a new section:
 ## Testing Checklist
 
 ### Keyboard Navigation
+
 - [ ] Tab through all interactive elements
 - [ ] Skip link appears on first Tab press
 - [ ] Enter/Space activates buttons and links
@@ -166,6 +177,7 @@ To add a new section:
 - [ ] Focus indicators visible on all elements
 
 ### Screen Readers
+
 - [ ] Landmarks announced correctly (main, aside, nav)
 - [ ] Heading hierarchy logical (h1 → h2)
 - [ ] Skip link functional
@@ -173,6 +185,7 @@ To add a new section:
 - [ ] aria-current updates announce to SR
 
 ### Responsive
+
 - [ ] Desktop sidebar sticky and visible
 - [ ] Mobile drawer slides in smoothly
 - [ ] Overlay covers content properly
@@ -180,6 +193,7 @@ To add a new section:
 - [ ] Print preview shows content only
 
 ### Browser Testing
+
 - [ ] Chrome/Edge (latest)
 - [ ] Firefox (latest)
 - [ ] Safari (macOS/iOS)
@@ -204,29 +218,49 @@ This widget serves as the **canonical accessibility reference** for all McCal Me
 ## Versions
 
 ### Active Versions (≤2 Policy)
+
 The following versions are maintained in `versions/`:
-- **v1.1.3** (Current): Forced Dark mode text set to pure white for maximum clarity
-- **v1.1.2** (Previous Stable): Corrected forced theme semantics
+
+- **v1.2.0** (Current): Enhanced semantic HTML, fixed heading hierarchy, improved ARIA landmarks, streamlined navigation
+- **v1.1.3** (Previous Stable): Forced Dark mode text set to pure white for maximum clarity
 
 ### Legacy Versions (Archived)
+
 Versions v1.1.1 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
+
 - **Archive Location**: `src/widgets/_archived/Legacy Widgets/accessibility-statement/versions/`
 - **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/accessibility-statement/versions/INDEX.json) for complete version catalog
 - **Archived Versions**: v1.0.0 through v1.1.1 (3 versions)
 
 ## Version History
 
+### v1.2.0 (2025-12-05)
+
+- Enhanced semantic HTML throughout (removed generic `<div>` wrappers)
+- Fixed heading hierarchy (proper h1 → h2 → h3 progression, no skipped levels)
+- Added explicit section landmarks for better screen reader navigation
+- Improved ARIA labels on all interactive elements
+- Enhanced focus indicators (3px outline, 2px offset) meeting WCAG 2.1 AA standards
+- Streamlined navigation (removed non-accessibility policy sections)
+- Simplified theme toggle (single button vs toolbar)
+- Updated keyboard shortcut documentation with proper `<kbd>` styling
+- All OLED dark mode and light mode functionality maintained
+- Validated with axe-core for WCAG 2.1 AA compliance (0 violations)
+
 ### v1.1.3 (2025-11-11)
+
 - Forced Dark mode text set to pure white (#ffffff) for maximum clarity against dark backgrounds/panel
 - Light and System modes unchanged
 
 ### v1.1.2 (2025-11-11)
+
 - Corrected forced theme semantics per request:
   - Light button now shows dark text on light backing (light panel)
   - Dark button now shows light text on dark backing (dark panel)
 - System mode remains unchanged (follows OS/browser preference)
 
 ### v1.1.1 (2025-11-11)
+
 - Inverted forced Light/Dark modes per request:
   - Light button now shows light text on dark backing
   - Dark button now shows dark text on light backing
@@ -234,6 +268,7 @@ Versions v1.1.1 and earlier have been archived to maintain repository organizati
 - Contrast verified to meet WCAG AA
 
 ### v1.1.0 (2025-11-11)
+
 - Added dynamic theme toggle (System / Light / Dark) toolbar
 - Persistent preference via `localStorage` (`a11yThemePref`)
 - Readable backdrop-blurred content panel (`.a11y-panel`)
@@ -241,6 +276,7 @@ Versions v1.1.1 and earlier have been archived to maintain repository organizati
 - Backward compatible: all existing anchors & IDs preserved
 
 ### v1.0.0 (2025-11-10)
+
 - Initial release: skip link, scroll spy, mobile drawer, semantic landmarks, reduced motion respect, print optimization
 
 See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
@@ -248,12 +284,13 @@ See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
 ## Support
 
 For questions or issues with this widget:
+
 - Email: business@mcc-cal.com
 - Documentation: `docs/standards/accessibility-patterns.md`
 - Widget Standards: `docs/standards/widget-reference.md`
 
 ---
 
-**Last Updated:** November 11, 2025  
+**Last Updated:** December 5, 2025  
 **Maintainer:** McCal Media Development Team  
 **License:** Proprietary - McCal Media

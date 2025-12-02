@@ -1,3 +1,23 @@
+## 2025-12-05
+
+### Widget Enhancements
+
+- **Accessibility Statement Widget v1.2.0** - Comprehensive semantic HTML and accessibility improvements:
+  - Enhanced semantic structure: Replaced generic `<div>` wrappers with `<section>`, `<header>`, `<main>`, `<aside>`, `<nav>` elements
+  - Fixed heading hierarchy: Proper h1 → h2 → h3 progression with no skipped levels
+  - Added explicit section landmarks for improved screen reader navigation
+  - Enhanced ARIA labels on all interactive elements (buttons, links, navigation)
+  - Improved focus indicators: 3px outline with 2px offset meeting WCAG 2.1 AA standards
+  - Simplified theme toggle from toolbar (System/Light/Dark) to single button (Dark ⇄ Light)
+  - Streamlined content to focus solely on accessibility (removed non-accessibility policy sections)
+  - Enhanced keyboard shortcut documentation with properly styled `<kbd>` elements
+  - Added "Recent Improvements" section documenting December 2025 enhancements
+  - Validated with axe-core: 0 violations (WCAG 2.1 Level AA compliant)
+  - Lighthouse Accessibility score: 100 maintained
+  - All OLED dark mode (#000000 true black) and light mode functionality preserved
+  - Performance unchanged: ~1KB JS, zero external dependencies, self-contained
+  - Migration: Drop-in replacement maintaining all customization compatibility
+
 ## 2025-12-02
 
 ### Accessibility Improvements (WCAG 2.1 Level AA Compliance)

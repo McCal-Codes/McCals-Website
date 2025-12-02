@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test: Accessibility Statement Widget v1.2.0</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: #1a1a1a;
+      }
+      .test-header {
+        background: #000;
+        color: #fff;
+        padding: 1rem 2rem;
+        border-bottom: 2px solid #333;
+      }
+      .test-header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .test-header p {
+        margin: 0.5rem 0 0;
+        color: #999;
+        font-size: 0.9rem;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.6rem;
+        background: #2a2a2a;
+        border: 1px solid #444;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        color: #6c6;
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="test-header">
+      <h1>
+        Accessibility Statement Widget
+        <span class="badge">v1.2.0 Test Page</span>
+      </h1>
+      <p>
+        Enhanced semantic HTML, fixed heading hierarchy, improved ARIA landmarks
+      </p>
+    </header>
+
+    <!-- Widget content starts here -->
+    <div id="widget-container"></div>
+
+    <script>
+      // Load widget content
+      fetch(
+        "../../src/widgets/accessibility-statement/versions/v1.2.0-accessibility-statement.html"
+      )
+        .then((response) => response.text())
+        .then((html) => {
+          // Extract content between style and script tags
+          const container = document.getElementById("widget-container");
+          container.innerHTML = html;
+
+          // Execute inline scripts
+          const scripts = container.querySelectorAll("script");
+          scripts.forEach((script) => {
+            const newScript = document.createElement("script");
+            newScript.textContent = script.textContent;
+            document.body.appendChild(newScript);
+          });
+        })
+        .catch((error) => {
+          console.error("Failed to load widget:", error);
+          document.getElementById("widget-container").innerHTML =
+            '<div style="color:red;padding:2rem;text-align:center;">Failed to load widget. Check console for errors.</div>';
+        });
+    </script>
+  </body>
+</html>
