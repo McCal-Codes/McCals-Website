@@ -1,73 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Journalism Portfolio Widget v5.1 Test</title>
     <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            background: #0a0a0a;
-            color: #f5f5f5;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        .test-header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: #111;
-            border-radius: 8px;
-        }
-        .test-info {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        .test-info strong {
-            color: #00d4aa;
-        }
+      body {
+        margin: 0;
+        padding: 20px;
+        background: #0a0a0a;
+        color: #f5f5f5;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+      }
+      .test-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 20px;
+        background: #111;
+        border-radius: 8px;
+      }
+      .test-info {
+        background: #1a1a1a;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+      .test-info strong {
+        color: #00d4aa;
+      }
     </style>
-</head>
-<body>
-        <div class="test-header">
-                <h1>📰 Journalism Portfolio Widget v5.1</h1>
-                <p>Testing the latest journalism portfolio with performance optimizations and CSP compatibility</p>
-        </div>
+  </head>
+  <body>
+    <div class="test-header">
+      <h1>📰 Journalism Portfolio Widget v5.1</h1>
+      <p>
+        Testing the latest journalism portfolio with performance optimizations
+        and CSP compatibility
+      </p>
+    </div>
 
-        <div class="test-info">
-                <strong>Test Features (v5.1):</strong><br>
-                • Performance-optimized hybrid theme<br>
-                • Robust lightbox system (concert widget v4.6 pattern)<br>
-                • SEO enhancements: structured data, alt text, accessibility<br>
-                • Changelog modal restored and improved<br>
-                • Image loading and fallback logic improved
-        </div>
+    <div class="test-info">
+      <strong>Test Features (v5.1):</strong><br />
+      • Performance-optimized hybrid theme<br />
+      • Robust lightbox system (concert widget v4.6 pattern)<br />
+      • SEO enhancements: structured data, alt text, accessibility<br />
+      • Changelog modal restored and improved<br />
+      • Image loading and fallback logic improved
+    </div>
 
-        <!-- Journalism Portfolio Widget v5.1 -->
-        <!-- Include the widget HTML -->
-        <!--#include file="../versions/v5.1-performance-optimized.html" -->
-    
-        <!-- Directly embed the widget HTML for local test -->
-        <div id="widget-mount">
-        <!-- Widget HTML will be injected here -->
-        </div>
-        <script>
-        // Fetch and inject the widget HTML (for local dev/test only), then load the widget JS
-        fetch('../versions/v5.1-performance-optimized.html')
-            .then(r => r.text())
-            .then(html => {
-                document.getElementById('widget-mount').innerHTML = html;
-                // Dynamically load the widget JS after HTML is injected
-                var s = document.createElement('script');
-                s.src = '../versions/journalism-widget-v5.1.js';
-                document.body.appendChild(s);
-            })
-            .catch(e => {
-                document.getElementById('widget-mount').innerHTML = '<div style="color:red">Failed to load widget HTML: ' + e + '</div>';
-            });
-        </script>
-</body>
+    <!-- Journalism Portfolio Widget v5.1 -->
+    <!-- Include the widget HTML -->
+    <!--#include file="../versions/v5.1-performance-optimized.html" -->
+
+    <!-- Directly embed the widget HTML for local test -->
+    <div id="widget-mount">
+      <!-- Widget HTML will be injected here -->
+    </div>
+    <script>
+      // Fetch and inject the widget HTML (for local dev/test only), then load the widget JS
+      fetch("../versions/v5.1-performance-optimized.html")
+        .then((r) => r.text())
+        .then((html) => {
+          document.getElementById("widget-mount").innerHTML = html;
+          // Dynamically load the widget JS after HTML is injected
+          const s = document.createElement("script");
+          s.src = "../versions/journalism-widget-v5.1.js";
+          document.body.appendChild(s);
+        })
+        .catch((e) => {
+          document.getElementById("widget-mount").innerHTML =
+            '<div style="color:red">Failed to load widget HTML: ' +
+            e +
+            "</div>";
+        });
+    </script>
+  </body>
 </html>

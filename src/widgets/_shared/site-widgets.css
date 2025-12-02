@@ -1,100 +1,500 @@
 /*
-  McCal Shared Widgets CSS
-  - Purpose: Provide a light, namespaced, opt-in set of CSS custom properties and tiny utility classes
-    that all widgets can rely on when the site includes this file (recommended via a pinned CDN tag
-    or Squarespace header injection).
-  - Important: Widgets should continue to use local fallbacks (e.g., var(--accent, #ff4d6d)).
-  - Location: src/widgets/_shared/site-widgets.css
+  McCal Media Shared Widgets CSS
+  Version: 2.0.0
+  
+  Purpose:
+  - Provide namespaced, opt-in CSS custom properties and utility classes
+  - All widgets can rely on when the site includes this file (CDN or Squarespace header)
+  - Important: Widgets should use local fallbacks (e.g., var(--mcc-accent, #ff4d6d))
+  
+  Architecture:
+  - CSS Custom Properties for design tokens
+  - BEM-inspired naming: .mcc-block__element--modifier
+  - Utility classes for common patterns
+  - Theme support (light/dark/system)
+  
+  Location: src/widgets/_shared/site-widgets.css
+  Documentation: docs/standards/css-architecture.md
 */
 
+/* ============================================================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================================ */
+
 :root {
-  /* Brand tokens (override in Squarespace site header if needed) */
-  --mcc-accent: #ff4d6d;
-  --mcc-accent-strong: #ff2b50;
+  /* Brand colors */
+  --mcc-brand-primary: #ff4d6d;
+  --mcc-brand-secondary: #4d79ff;
+  --mcc-brand-accent: #00d4aa;
+  
+  /* UI colors - Light theme defaults */
+  --mcc-accent: #4d79ff;
+  --mcc-accent-strong: #3a5fd9;
+  --mcc-accent-hover: #7aa0ff;
   --mcc-bg: #ffffff;
-  --mcc-fg: #111827;
-  --mcc-line: #e5e7eb;
+  --mcc-fg: #0e0f10;
+  --mcc-line: #e7e7e7;
   --mcc-muted: #6b7280;
-
-  /* Backwards-compatible common widget tokens (used across many widgets)
-     Widgets should still use fallbacks like var(--accent, #ff4d6d) but
-     providing these names reduces duplication and simplifies site-level theming. */
-  --bg: var(--mcc-bg);
-  --fg: var(--mcc-fg);
-  --line: var(--mcc-line);
-  --accent: var(--mcc-accent);
-  --muted: var(--mcc-muted);
-  --chip: #1b1b1b; /* darker panel / chip background */
-  --focus: #7dd3fc;
-  --link: var(--accent);
-  --panel-bg: rgba(255,255,255,0.82);
-  --panel-border: rgba(0,0,0,0.08);
-  --panel-blur: 8px;
-
-  /* Spacing scale */
+  
+  /* Panel/surface colors */
+  --mcc-panel-bg: rgba(255, 255, 255, 0.82);
+  --mcc-panel-border: rgba(0, 0, 0, 0.08);
+  --mcc-panel-blur: 8px;
+  --mcc-chip: #fafafa;
+  
+  /* Interactive states */
+  --mcc-hover: rgba(0, 0, 0, 0.05);
+  --mcc-focus: #7dd3fc;
+  --mcc-active: rgba(0, 0, 0, 0.1);
+  --mcc-disabled: rgba(0, 0, 0, 0.3);
+  
+  /* Spacing scale (4px base) */
+  --mcc-space-0: 0;
   --mcc-space-1: 4px;
   --mcc-space-2: 8px;
   --mcc-space-3: 12px;
   --mcc-space-4: 16px;
   --mcc-space-5: 24px;
   --mcc-space-6: 32px;
-
+  --mcc-space-7: 48px;
+  --mcc-space-8: 64px;
+  --mcc-space-9: 96px;
+  
+  /* Typography */
+  --mcc-font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --mcc-font-mono: ui-monospace, 'SF Mono', Monaco, Consolas, monospace;
+  
+  /* Font sizes */
+  --mcc-text-xs: 0.75rem;      /* 12px */
+  --mcc-text-sm: 0.875rem;     /* 14px */
+  --mcc-text-base: 1rem;       /* 16px */
+  --mcc-text-lg: 1.125rem;     /* 18px */
+  --mcc-text-xl: 1.25rem;      /* 20px */
+  --mcc-text-2xl: 1.5rem;      /* 24px */
+  --mcc-text-3xl: 1.875rem;    /* 30px */
+  --mcc-text-4xl: 2.25rem;     /* 36px */
+  
+  /* Font weights */
+  --mcc-weight-light: 300;
+  --mcc-weight-normal: 400;
+  --mcc-weight-medium: 500;
+  --mcc-weight-semibold: 600;
+  --mcc-weight-bold: 700;
+  --mcc-weight-extrabold: 800;
+  
+  /* Border radius */
+  --mcc-radius-sm: 4px;
+  --mcc-radius: 8px;
+  --mcc-radius-md: 10px;
+  --mcc-radius-lg: 12px;
+  --mcc-radius-xl: 16px;
+  --mcc-radius-full: 9999px;
+  
   /* Layout */
-  --mcc-radius: 10px;
   --mcc-control-height: 40px;
+  --mcc-control-height-sm: 32px;
+  --mcc-control-height-lg: 48px;
+  
+  /* Z-index scale */
+  --mcc-z-base: 1;
+  --mcc-z-dropdown: 900;
+  --mcc-z-sticky: 800;
+  --mcc-z-fixed: 700;
+  --mcc-z-modal-backdrop: 2147483646;
+  --mcc-z-modal: 2147483647;
+  --mcc-z-modal-content: 2147483648;
   --mcc-z-top: 2147483647;
+  
+  /* Transitions */
+  --mcc-transition-fast: 150ms;
+  --mcc-transition-base: 250ms;
+  --mcc-transition-slow: 350ms;
+  --mcc-ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --mcc-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --mcc-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Backwards-compatible tokens (legacy support) */
+  --bg: var(--mcc-bg);
+  --fg: var(--mcc-fg);
+  --line: var(--mcc-line);
+  --accent: var(--mcc-accent);
+  --muted: var(--mcc-muted);
+  --chip: var(--mcc-chip);
+  --focus: var(--mcc-focus);
+  --link: var(--mcc-accent);
+  --panel-bg: var(--mcc-panel-bg);
+  --panel-border: var(--mcc-panel-border);
+  --panel-blur: var(--mcc-panel-blur);
 }
 
-/* Forced theme mapping (use on a widget root element like <div class="a11y-root" data-theme="dark">)
-   Semantics:
-   - data-theme="light"  = light mode: dark text on light background
-   - data-theme="dark"   = dark mode: light text on dark background
-   - data-theme="system" = follows the user's OS preference (widgets may implement JS toggles)
-   Widgets that set their own :root variables will override these site defaults. */
-[data-theme="light"] {
-  --fg: #0a0a0a;
-  --bg: #ffffff;
-  --line: #e5e5e5;
-  --panel-bg: rgba(255,255,255,0.82);
-  --panel-border: rgba(0,0,0,0.08);
-  --panel-blur: 8px;
-  --chip: #fafafa;
-  --focus: #0ea5e9;
-  --link: var(--accent);
-}
-[data-theme="dark"] {
-  --fg: #f7f7f7;
-  --bg: #06060a;
-  --line: #2a2a2a;
-  --panel-bg: rgba(20,20,20,0.78);
-  --panel-border: rgba(255,255,255,0.12);
-  --panel-blur: 8px;
-  --chip: #1b1b1b;
-  --focus: #7dd3fc;
-  --link: var(--accent);
+/* ============================================================================
+   THEME VARIANTS
+   ============================================================================ */
+
+/* Dark theme */
+[data-theme="dark"],
+.mcc-theme--dark {
+  --mcc-bg: #0b0c0f;
+  --mcc-fg: #f3f4f6;
+  --mcc-line: #22252a;
+  --mcc-muted: #a3aab7;
+  --mcc-accent: #7aa0ff;
+  --mcc-accent-strong: #5a8aff;
+  --mcc-panel-bg: rgba(20, 20, 20, 0.78);
+  --mcc-panel-border: rgba(255, 255, 255, 0.12);
+  --mcc-chip: #1b1b1b;
+  --mcc-hover: rgba(255, 255, 255, 0.05);
+  --mcc-active: rgba(255, 255, 255, 0.1);
 }
 
-/* Scope to any widget using the standard `mcc-` prefix in a class name. This keeps
-   the rules narrowly targeted to widget markup while still being easy to include site-wide. */
-[class^="mcc-"] , [class*=" mcc-"] {
+/* Light theme (explicit) */
+[data-theme="light"],
+.mcc-theme--light {
+  --mcc-bg: #ffffff;
+  --mcc-fg: #0e0f10;
+  --mcc-line: #e7e7e7;
+  --mcc-muted: #6b7280;
+  --mcc-accent: #4d79ff;
+  --mcc-accent-strong: #3a5fd9;
+  --mcc-panel-bg: rgba(255, 255, 255, 0.82);
+  --mcc-panel-border: rgba(0, 0, 0, 0.08);
+  --mcc-chip: #fafafa;
+  --mcc-hover: rgba(0, 0, 0, 0.05);
+  --mcc-active: rgba(0, 0, 0, 0.1);
+}
+
+/* System preference (respects OS setting) */
+@media (prefers-color-scheme: dark) {
+  [data-theme="system"],
+  .mcc-theme--system {
+    --mcc-bg: #0b0c0f;
+    --mcc-fg: #f3f4f6;
+    --mcc-line: #22252a;
+    --mcc-muted: #a3aab7;
+    --mcc-accent: #7aa0ff;
+    --mcc-panel-bg: rgba(20, 20, 20, 0.78);
+    --mcc-panel-border: rgba(255, 255, 255, 0.12);
+    --mcc-chip: #1b1b1b;
+  }
+}
+
+/* ============================================================================
+   BASE RESETS & NORMALIZATION
+   ============================================================================ */
+
+/* Apply to all widget elements */
+[class^="mcc-"],
+[class*=" mcc-"] {
   box-sizing: border-box;
-  font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  color: var(--fg);
+  font-family: var(--mcc-font-sans);
+  color: var(--mcc-fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Accessible focus ring for interactive elements inside widgets */
-[class^="mcc-"] a:focus-visible,
-[class^="mcc-"] button:focus-visible,
-[class^="mcc-"] [role="button"]:focus-visible,
-[class*=" mcc-"] a:focus-visible,
-[class*=" mcc-"] button:focus-visible,
-[class*=" mcc-"] [role="button"]:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
-  border-radius: 6px;
+/* ============================================================================
+   BEM-STYLE COMPONENT PATTERNS
+   ============================================================================ */
+
+/* Button Components */
+.mcc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mcc-space-2);
+  padding: 0.6rem 1.2rem;
+  height: var(--mcc-control-height);
+  border-radius: var(--mcc-radius-full);
+  background: var(--mcc-accent);
+  color: #fff;
+  font-weight: var(--mcc-weight-semibold);
+  font-size: var(--mcc-text-sm);
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transition: all var(--mcc-transition-base) var(--mcc-ease-out);
 }
 
-/* Utility: visually hidden (screen-reader only) */
+.mcc-btn:hover,
+.mcc-btn:focus-visible {
+  background: var(--mcc-accent-strong);
+  transform: translateY(-1px);
+}
+
+.mcc-btn:active {
+  transform: translateY(0);
+}
+
+.mcc-btn--secondary {
+  background: transparent;
+  color: var(--mcc-fg);
+  border: 1px solid var(--mcc-line);
+}
+
+.mcc-btn--secondary:hover {
+  background: var(--mcc-hover);
+  border-color: var(--mcc-fg);
+}
+
+.mcc-btn--ghost {
+  background: transparent;
+  color: var(--mcc-fg);
+}
+
+.mcc-btn--ghost:hover {
+  background: var(--mcc-hover);
+}
+
+.mcc-btn--small {
+  height: var(--mcc-control-height-sm);
+  padding: 0.4rem 1rem;
+  font-size: var(--mcc-text-xs);
+}
+
+.mcc-btn--large {
+  height: var(--mcc-control-height-lg);
+  padding: 0.8rem 1.6rem;
+  font-size: var(--mcc-text-base);
+}
+
+.mcc-btn:disabled,
+.mcc-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Card Components */
+.mcc-card {
+  background: var(--mcc-bg);
+  border: 1px solid var(--mcc-line);
+  border-radius: var(--mcc-radius-lg);
+  overflow: hidden;
+  transition: all var(--mcc-transition-base) var(--mcc-ease-out);
+}
+
+.mcc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mcc-card__header {
+  padding: var(--mcc-space-4);
+  border-bottom: 1px solid var(--mcc-line);
+}
+
+.mcc-card__body {
+  padding: var(--mcc-space-4);
+}
+
+.mcc-card__footer {
+  padding: var(--mcc-space-4);
+  border-top: 1px solid var(--mcc-line);
+  background: var(--mcc-chip);
+}
+
+.mcc-card--clickable {
+  cursor: pointer;
+}
+
+.mcc-card--flat {
+  border: none;
+  box-shadow: none;
+}
+
+/* Badge/Chip Components */
+.mcc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mcc-space-1);
+  padding: 0.25rem 0.5rem;
+  font-size: var(--mcc-text-xs);
+  font-weight: var(--mcc-weight-semibold);
+  border-radius: var(--mcc-radius-full);
+  background: var(--mcc-chip);
+  color: var(--mcc-fg);
+}
+
+.mcc-badge--accent {
+  background: var(--mcc-accent);
+  color: #fff;
+}
+
+.mcc-badge--success {
+  background: var(--mcc-brand-accent);
+  color: #fff;
+}
+
+.mcc-badge--outline {
+  background: transparent;
+  border: 1px solid var(--mcc-line);
+}
+
+/* Modal/Dialog Components */
+.mcc-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: var(--mcc-z-modal);
+  backdrop-filter: blur(var(--mcc-panel-blur));
+}
+
+.mcc-modal--open {
+  display: flex;
+}
+
+.mcc-modal__dialog {
+  position: relative;
+  background: var(--mcc-bg);
+  border-radius: var(--mcc-radius-xl);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.mcc-modal__close {
+  position: fixed;
+  top: max(24px, env(safe-area-inset-top));
+  right: max(24px, env(safe-area-inset-right));
+  width: 44px;
+  height: 44px;
+  border-radius: var(--mcc-radius-full);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 18px;
+  font-weight: var(--mcc-weight-extrabold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--mcc-transition-base);
+  z-index: var(--mcc-z-modal-content);
+  backdrop-filter: blur(8px);
+}
+
+.mcc-modal__close:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+/* Layout utilities */
+.mcc-row {
+  display: flex;
+  gap: var(--mcc-space-3);
+  align-items: center;
+}
+
+.mcc-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mcc-space-2);
+}
+
+.mcc-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mcc-grid {
+  display: grid;
+  gap: var(--mcc-space-4);
+}
+
+.mcc-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.mcc-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mcc-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+  .mcc-grid--2,
+  .mcc-grid--3,
+  .mcc-grid--4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Spacing utilities */
+.mcc-mt-0 { margin-top: var(--mcc-space-0); }
+.mcc-mt-1 { margin-top: var(--mcc-space-1); }
+.mcc-mt-2 { margin-top: var(--mcc-space-2); }
+.mcc-mt-3 { margin-top: var(--mcc-space-3); }
+.mcc-mt-4 { margin-top: var(--mcc-space-4); }
+.mcc-mt-5 { margin-top: var(--mcc-space-5); }
+.mcc-mt-6 { margin-top: var(--mcc-space-6); }
+
+.mcc-mb-0 { margin-bottom: var(--mcc-space-0); }
+.mcc-mb-1 { margin-bottom: var(--mcc-space-1); }
+.mcc-mb-2 { margin-bottom: var(--mcc-space-2); }
+.mcc-mb-3 { margin-bottom: var(--mcc-space-3); }
+.mcc-mb-4 { margin-bottom: var(--mcc-space-4); }
+.mcc-mb-5 { margin-bottom: var(--mcc-space-5); }
+.mcc-mb-6 { margin-bottom: var(--mcc-space-6); }
+
+.mcc-p-0 { padding: var(--mcc-space-0); }
+.mcc-p-1 { padding: var(--mcc-space-1); }
+.mcc-p-2 { padding: var(--mcc-space-2); }
+.mcc-p-3 { padding: var(--mcc-space-3); }
+.mcc-p-4 { padding: var(--mcc-space-4); }
+.mcc-p-5 { padding: var(--mcc-space-5); }
+.mcc-p-6 { padding: var(--mcc-space-6); }
+
+/* Typography utilities */
+.mcc-text-xs { font-size: var(--mcc-text-xs); }
+.mcc-text-sm { font-size: var(--mcc-text-sm); }
+.mcc-text-base { font-size: var(--mcc-text-base); }
+.mcc-text-lg { font-size: var(--mcc-text-lg); }
+.mcc-text-xl { font-size: var(--mcc-text-xl); }
+.mcc-text-2xl { font-size: var(--mcc-text-2xl); }
+
+.mcc-font-normal { font-weight: var(--mcc-weight-normal); }
+.mcc-font-medium { font-weight: var(--mcc-weight-medium); }
+.mcc-font-semibold { font-weight: var(--mcc-weight-semibold); }
+.mcc-font-bold { font-weight: var(--mcc-weight-bold); }
+
+.mcc-text-center { text-align: center; }
+.mcc-text-left { text-align: left; }
+.mcc-text-right { text-align: right; }
+
+/* Color utilities */
+.mcc-text-muted { color: var(--mcc-muted); }
+.mcc-text-accent { color: var(--mcc-accent); }
+.mcc-bg-accent { background: var(--mcc-accent); }
+.mcc-bg-muted { background: var(--mcc-chip); }
+
+/* Image utilities */
+.mcc-img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mcc-img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Visibility utilities */
 .mcc-sr-only {
   position: absolute !important;
   width: 1px !important;
@@ -107,56 +507,126 @@
   border: 0 !important;
 }
 
-/* Button pattern used by many widgets as a baseline */
-.mcc-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--mcc-space-2);
-  padding: 0.6rem 1.2rem;
-  height: var(--mcc-control-height);
-  border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  border: 0;
-  cursor: pointer;
-  font-weight: 600;
-}
-.mcc-btn:hover,
-.mcc-btn:focus-visible {
-  background: var(--mcc-accent-strong);
-  transform: translateY(-1px);
+.mcc-hidden {
+  display: none !important;
 }
 
-/* Image helpers */
-.mcc-img-cover {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+@media (max-width: 768px) {
+  .mcc-hidden-mobile {
+    display: none !important;
+  }
 }
 
-/* Small utility layout helpers */
-.mcc-row { display:flex; gap: var(--mcc-space-3); align-items: center; }
-.mcc-col { display:flex; flex-direction:column; gap: var(--mcc-space-2); }
-.mcc-center { display:flex; align-items:center; justify-content:center; }
+@media (min-width: 769px) {
+  .mcc-hidden-desktop {
+    display: none !important;
+  }
+}
 
-/* Light, non-invasive reset for widget root containers */
-[class^="mcc-"] { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+/* ============================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================================================ */
 
-/* Respect reduced motion */
+/* Focus visible styles */
+[class^="mcc-"] a:focus-visible,
+[class^="mcc-"] button:focus-visible,
+[class^="mcc-"] [role="button"]:focus-visible,
+[class*=" mcc-"] a:focus-visible,
+[class*=" mcc-"] button:focus-visible,
+[class*=" mcc-"] [role="button"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--mcc-accent) 35%, transparent);
+  border-radius: var(--mcc-radius-sm);
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  [class^="mcc-"] * {
+  [class^="mcc-"] *,
+  [class*=" mcc-"] * {
     animation: none !important;
     transition: none !important;
   }
 }
 
-/* Print-friendly tweaks */
+/* Print styles */
 @media print {
-  [class^="mcc-"] { color: #000 !important; background: transparent !important; }
+  [class^="mcc-"],
+  [class*=" mcc-"] {
+    color: #000 !important;
+    background: transparent !important;
+  }
+  
+  .mcc-modal,
+  .mcc-btn,
+  [class*="hidden"] {
+    display: none !important;
+  }
 }
 
-/* NOTE: Widgets should keep local fallbacks for colors like `var(--accent, #ff4d6d)`.
-   This file only provides sensible defaults and a small set of utilities. */
+/* ============================================================================
+   LOADING STATES
+   ============================================================================ */
+
+.mcc-spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--mcc-line);
+  border-top-color: var(--mcc-accent);
+  animation: mcc-spin 1s linear infinite;
+}
+
+.mcc-spinner--large {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+@keyframes mcc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mcc-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--mcc-chip) 0%,
+    var(--mcc-hover) 50%,
+    var(--mcc-chip) 100%
+  );
+  background-size: 200% 100%;
+  animation: mcc-skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: var(--mcc-radius);
+}
+
+@keyframes mcc-skeleton-pulse {
+  0%, 100% {
+    background-position: 200% 0;
+  }
+  50% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================================================
+   NOTES
+   ============================================================================ */
+
+/*
+  Widget Integration Notes:
+  
+  1. Widgets should continue using local fallbacks:
+     Example: var(--mcc-accent, #4d79ff)
+  
+  2. This file provides sensible defaults and utilities
+  
+  3. For BEM patterns, use:
+     - .mcc-block (component)
+     - .mcc-block__element (sub-component)
+     - .mcc-block--modifier (variant)
+  
+  4. Always namespace with 'mcc-' prefix to avoid conflicts
+  
+  5. See docs/standards/css-architecture.md for detailed guidelines
+*/
