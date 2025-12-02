@@ -5,37 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Multi-author blog feed with interactive filtering and author profiles."
+      content="Multi-author blog feed powered by Google Docs - one doc per author."
     />
     <meta name="author" content="Caleb McCartney, McCal Media" />
-    <title>Blog - McCal Media | Multi-Author Feed</title>
+    <title>Blog - McCal Media | Author Document System</title>
     <link rel="preconnect" href="https://docs.google.com" />
     <link rel="dns-prefetch" href="https://docs.google.com" />
   </head>
   <body>
     <a href="#blogFeed" class="mcc-skip-link">Skip to articles</a>
 
-    <!-- Blog Feed Widget v3.0.0 - Multi-Author with Interactive Filtering
+    <!-- Blog Feed Widget v3.2.0 - One Document Per Author
 Author: Caleb McCartney / McCal-Codes
-Version: 3.0.0
-Purpose: Modern multi-author blog feed with author profiles, filtering, and search.
+Version: 3.2.0
+Purpose: Multi-author blog feed where each author has one Google Doc containing all their posts.
 
 Features:
-- Multiple author support with profiles (name, bio, avatar, social links)
+- One Google Doc per author containing all their blog posts
+- Posts separated by horizontal rules (---) or "POST:" markers
+- Author metadata once at top of doc, applies to all posts
+- Per-post metadata (date, category, tags, image, excerpt)
+- Automatic parsing of multiple posts from single document
+- localStorage caching for performance (configurable TTL)
 - Interactive filtering: by author, category, tags
 - Search functionality across titles and content
 - Sort options (newest, oldest, popular)
 - Responsive card-based layout with CSS columns
-- BEM naming convention (mcc-blog__element--modifier)
 - Modern ES6+ JavaScript (const/let, arrow functions, async/await)
 - CSS custom properties with fallbacks
 - Accessible with ARIA attributes and keyboard navigation
 - Structured data (BlogPosting schema)
 
+Google Docs Setup:
+1. Create one Google Doc per author
+2. At the top, add author metadata:
+   ---
+   AUTHOR: Caleb McCartney
+   AVATAR: https://example.com/avatar.jpg
+   BIO: Photojournalist and political correspondent
+   ---
+
+3. Add posts separated by horizontal rules or "POST:" marker:
+   
+   POST: The Power of Photojournalism
+   date: 2025-11-15
+   category: Politics
+   tags: Photography, Politics
+   image: https://example.com/image1.jpg
+   excerpt: Brief description
+   
+   [Your post content here with headings, images, etc.]
+   
+   ---
+   
+   POST: Behind the Lens
+   date: 2025-10-28
+   category: Photography
+   tags: Documentary
+   image: https://example.com/image2.jpg
+   excerpt: Another description
+   
+   [Your post content here...]
+
+4. File > Share > Publish to web > Publish
+5. Convert URL: /pub → /export?format=html
+6. Add to widget config
+
 Usage: Paste into Squarespace Code Block
-Configuration (data-* attributes on #blogFeed):
-- data-authors: JSON array of author objects or URL to authors.json
-- data-posts: JSON array of post objects or URL to posts.json (Google Docs coming in v3.1)
+Configuration (data-* attributes on #blogWidget):
+- data-authors-source: JSON array of author doc URLs or path to authors-manifest.json
+  Example: data-authors-source='["https://docs.google.com/document/d/DOCID1/export?format=html"]'
+- data-cache-ttl: cache time-to-live in minutes (default 60)
 - data-max-posts: max posts to display (default 12)
 - data-author-filter: enable author filter (default true)
 - data-category-filter: enable category filter (default true)
@@ -77,7 +117,7 @@ Configuration (data-* attributes on #blogFeed):
         --mcc-weight-bold: 700;
         --mcc-weight-extrabold: 800;
       }
-      /* Accessibility: skip link & focus-visible */
+
       .mcc-skip-link {
         position: absolute;
         left: -9999px;
@@ -133,7 +173,6 @@ Configuration (data-* attributes on #blogFeed):
         line-height: 1.6;
       }
 
-      /* BEM: Blog Widget Block */
       .mcc-blog {
         max-width: 1400px;
         margin: var(--mcc-space-8, 60px) auto;
@@ -173,7 +212,6 @@ Configuration (data-* attributes on #blogFeed):
         vertical-align: baseline;
       }
 
-      /* BEM: Toolbar Component */
       .mcc-toolbar {
         display: flex;
         flex-wrap: wrap;
@@ -243,7 +281,6 @@ Configuration (data-* attributes on #blogFeed):
         box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
       }
 
-      /* BEM: Loading Component */
       .mcc-loading {
         display: flex;
         align-items: center;
@@ -270,7 +307,6 @@ Configuration (data-* attributes on #blogFeed):
         }
       }
 
-      /* BEM: Blog Grid */
       .mcc-blog__grid {
         column-count: 3;
         column-gap: var(--mcc-space-6, 30px);
@@ -282,7 +318,6 @@ Configuration (data-* attributes on #blogFeed):
         opacity: 1;
       }
 
-      /* BEM: Blog Card Component */
       .mcc-card {
         display: inline-block;
         width: 100%;
@@ -360,6 +395,7 @@ Configuration (data-* attributes on #blogFeed):
           var(--mcc-font-sans, ui-sans-serif, system-ui);
         color: var(--mcc-fg, #1a1a1a);
       }
+
       .mcc-pagination {
         display: flex;
         justify-content: center;
@@ -367,6 +403,7 @@ Configuration (data-* attributes on #blogFeed):
         gap: var(--mcc-space-3, 12px);
         margin-top: var(--mcc-space-6, 32px);
       }
+
       .mcc-pagination__btn {
         padding: var(--mcc-space-2, 8px) var(--mcc-space-3, 12px);
         font: var(--mcc-weight-semibold, 600) var(--mcc-text-sm, 0.875rem) / 1.2
@@ -377,10 +414,12 @@ Configuration (data-* attributes on #blogFeed):
         border-radius: var(--mcc-radius, 8px);
         cursor: pointer;
       }
+
       .mcc-pagination__btn[aria-disabled="true"] {
         opacity: 0.5;
         cursor: not-allowed;
       }
+
       .mcc-pagination__info {
         font: var(--mcc-weight-medium, 500) var(--mcc-text-sm, 0.875rem) / 1.2
           var(--mcc-font-sans, ui-sans-serif, system-ui);
@@ -416,7 +455,6 @@ Configuration (data-* attributes on #blogFeed):
         color: var(--mcc-accent-hover, #0052a3);
       }
 
-      /* BEM: Modal Component */
       .mcc-modal {
         display: none;
         position: fixed;
@@ -507,7 +545,6 @@ Configuration (data-* attributes on #blogFeed):
         margin: var(--mcc-space-6, 32px) 0;
       }
 
-      /* Responsive */
       @media (max-width: 1024px) {
         .mcc-blog__grid {
           column-count: 2;
@@ -543,7 +580,9 @@ Configuration (data-* attributes on #blogFeed):
     <div
       class="mcc-blog"
       id="blogWidget"
-      data-widget-version="3.0.0"
+      data-widget-version="3.2.0"
+      data-authors-source="[]"
+      data-cache-ttl="60"
       data-max-posts="12"
       data-author-filter="true"
       data-category-filter="true"
@@ -552,15 +591,13 @@ Configuration (data-* attributes on #blogFeed):
       <div class="mcc-blog__header">
         <h1 class="mcc-blog__heading">
           Latest Articles
-          <span class="mcc-badge">v3.0</span>
+          <span class="mcc-badge">v3.2 • Author Docs</span>
         </h1>
         <p class="mcc-blog__description">
-          Explore articles from multiple authors covering politics, photography,
-          and the human condition
+          One document per author • All their posts in one place
         </p>
       </div>
 
-      <!-- Interactive Toolbar -->
       <div class="mcc-toolbar" id="blogToolbar">
         <div class="mcc-toolbar__search">
           <input
@@ -605,13 +642,13 @@ Configuration (data-* attributes on #blogFeed):
         </div>
       </div>
 
-      <!-- Blog Grid -->
       <div id="blogFeed">
         <div class="mcc-loading">
           <div class="mcc-spinner" aria-hidden="true"></div>
-          Loading articles...
+          Loading articles from author documents...
         </div>
       </div>
+
       <div
         class="mcc-pagination"
         id="blogPagination"
@@ -641,7 +678,6 @@ Configuration (data-* attributes on #blogFeed):
       </div>
     </div>
 
-    <!-- Full Post Modal -->
     <div
       class="mcc-modal"
       id="postModal"
@@ -667,12 +703,10 @@ Configuration (data-* attributes on #blogFeed):
       </div>
     </div>
 
-    <!-- Modern ES6+ JavaScript -->
     <script>
       (function () {
         "use strict";
 
-        // Utility functions
         const $ = (selector, ctx = document) => ctx.querySelector(selector);
         const $$ = (selector, ctx = document) =>
           Array.from(ctx.querySelectorAll(selector));
@@ -699,144 +733,362 @@ Configuration (data-* attributes on #blogFeed):
           });
         };
 
-        // Cache Manager (localStorage)
-        const CacheManager = {
-          get(key) {
-            try {
-              const raw = localStorage.getItem(key);
-              if (!raw) return null;
-              const { value, expires } = JSON.parse(raw);
-              if (expires && Date.now() > expires) {
-                localStorage.removeItem(key);
-                return null;
-              }
-              return value;
-            } catch (e) {
-              console.warn("CacheManager.get error", e);
-              return null;
-            }
-          },
-          set(key, value, ttlMinutes = 60) {
-            try {
-              const expires = ttlMinutes
-                ? Date.now() + ttlMinutes * 60 * 1000
-                : null;
-              localStorage.setItem(key, JSON.stringify({ value, expires }));
-            } catch (e) {
-              console.warn("CacheManager.set error", e);
-            }
-          },
-          clear() {
-            // Cautious clear: only keys starting with mcc-blog-
-            Object.keys(localStorage).forEach((k) => {
-              if (k.startsWith("mcc-blog-")) localStorage.removeItem(k);
-            });
-          },
-        };
-
-        // Author Doc Parser (Google Docs export HTML)
+        // Author Document Parser Module
         const AuthorDocParser = {
-          async fetchAuthorDoc(url) {
-            const cacheKey = `mcc-blog-doc-${url}`;
-            const cached = CacheManager.get(cacheKey);
-            if (cached) return cached;
-            const res = await fetch(url, { mode: "cors" });
-            if (!res.ok) throw new Error(`Failed to fetch doc: ${res.status}`);
-            const html = await res.text();
-            CacheManager.set(cacheKey, html, 60);
-            return html;
-          },
+          /**
+           * Parse author metadata from top of document
+           * Format:
+           * ---
+           * AUTHOR: Name
+           * AVATAR: URL
+           * BIO: Description
+           * ---
+           */
+          parseAuthorMetadata: function (html) {
+            const metadata = {
+              author: "Unknown Author",
+              avatar: "/images/authors/default.jpg",
+              bio: "",
+            };
 
-          // Split posts using heuristics: explicit "POST:" markers or horizontal rules
-          splitIntoPosts(html) {
-            // Remove Google inline styles but keep structure
-            const cleaned = html
-              .replace(/<style[\s\S]*?<\/style>/gi, "")
-              .replace(/<!--[\s\S]*?-->/g, "")
-              .replace(/\sclass="[^"]*"/g, "");
+            const metaRegex = /---\s*([\s\S]*?)\s*---/;
+            const match = html.match(metaRegex);
 
-            // Prefer explicit markers
-            let blocks = cleaned.split(/\bPOST:\s*/i).filter(Boolean);
-            if (blocks.length <= 1) {
-              // Fallback: horizontal rule or triple newline separators
-              blocks = cleaned
-                .split(/<hr\b[^>]*>|\n{3,}|\r\n{3,}/i)
-                .filter((b) => b.trim().length > 0);
+            if (match) {
+              const metaBlock = match[1];
+              const lines = metaBlock.split("\n");
+
+              lines.forEach((line) => {
+                const [key, ...valueParts] = line.split(":");
+                if (!key || valueParts.length === 0) return;
+
+                const value = valueParts.join(":").trim();
+                const cleanKey = key.trim().toUpperCase();
+
+                switch (cleanKey) {
+                  case "AUTHOR":
+                    metadata.author = value;
+                    break;
+                  case "AVATAR":
+                    metadata.avatar = value;
+                    break;
+                  case "BIO":
+                    metadata.bio = value;
+                    break;
+                }
+              });
+
+              // Remove metadata block from content
+              html = html.replace(metaRegex, "");
             }
-            return blocks;
+
+            return { metadata, content: html };
           },
 
-          extractTitle(block) {
-            // First h1/h2 or first bold line
-            const h = block.match(/<h[12][^>]*>(.*?)<\/h[12]>/i);
-            if (h) return AuthorDocParser.strip(h[1]);
-            const b = block.match(/<strong[^>]*>(.*?)<\/strong>/i);
-            if (b) return AuthorDocParser.strip(b[1]);
-            // First non-empty text line
-            const text = AuthorDocParser.strip(block)
-              .split(/\n+/)
-              .map((s) => s.trim())
-              .find((s) => s);
-            return text || "Untitled";
+          /**
+           * Split document into individual posts
+           * Posts can be separated by:
+           * 1. "POST:" marker followed by title
+           * 2. Horizontal rule (---)
+           * 3. Multiple blank lines
+           */
+          splitIntoPosts: function (html) {
+            const posts = [];
+
+            // First try splitting by POST: marker
+            const postMarkerRegex = /POST:\s*([^\n]+)/gi;
+            const matches = [];
+            let match;
+
+            while ((match = postMarkerRegex.exec(html)) !== null) {
+              matches.push({
+                index: match.index,
+                title: match[1].trim(),
+                fullMatch: match[0],
+              });
+            }
+
+            if (matches.length > 0) {
+              // Split by POST: markers
+              for (let i = 0; i < matches.length; i++) {
+                const start = matches[i].index;
+                const end =
+                  i < matches.length - 1 ? matches[i + 1].index : html.length;
+                let postContent = html.substring(start, end);
+
+                // Remove the POST: marker from content
+                postContent = postContent.replace(matches[i].fullMatch, "");
+
+                posts.push({
+                  title: matches[i].title,
+                  content: postContent.trim(),
+                });
+              }
+            } else {
+              // Fallback: split by horizontal rules or multiple newlines
+              const sections = html.split(/\n\s*---\s*\n|\n\s*\n\s*\n\s*\n/);
+              sections.forEach((section) => {
+                const trimmed = section.trim();
+                if (trimmed.length > 100) {
+                  // Minimum content length
+                  posts.push({
+                    title: null, // Will extract from content
+                    content: trimmed,
+                  });
+                }
+              });
+            }
+
+            return posts;
           },
 
-          parsePostMetadata(block) {
-            const meta = {
-              date: null,
-              category: "General",
+          /**
+           * Parse post metadata (after POST: title line)
+           * Format (plain key: value pairs):
+           * date: 2025-11-15
+           * category: Politics
+           * tags: Photo, Politics
+           * image: URL
+           * excerpt: Description
+           */
+          parsePostMetadata: function (content) {
+            const metadata = {
+              date: new Date().toISOString().split("T")[0],
+              category: "Uncategorized",
               tags: [],
-              image: null,
+              image: "/images/blog/default.jpg",
               excerpt: "",
             };
-            const plain = AuthorDocParser.strip(block);
-            // Date like 2025-11-15 or Month Day, Year
-            const iso = plain.match(/(\d{4}-\d{2}-\d{2})/);
-            if (iso) meta.date = iso[1];
-            const md = plain.match(/([A-Za-z]+\s\d{1,2},\s\d{4})/);
-            if (!meta.date && md) meta.date = md[1];
 
-            const cat = plain.match(/Category:\s*([^\n]+)/i);
-            if (cat) meta.category = cat[1].trim();
-            const tags = plain.match(/Tags?:\s*([^\n]+)/i);
-            if (tags)
-              meta.tags = tags[1]
-                .split(/[,#]/)
-                .map((t) => t.trim())
-                .filter(Boolean);
-            const img = block.match(/<img\b[^>]*src="([^"]+)"/i);
-            if (img) meta.image = img[1];
-            meta.excerpt = AuthorDocParser.strip(block).slice(0, 240).trim();
-            return meta;
+            const lines = content.split("\n");
+            let metadataEndIndex = 0;
+
+            for (let i = 0; i < Math.min(lines.length, 10); i++) {
+              const line = lines[i].trim();
+              if (!line || line.startsWith("#")) break;
+
+              const colonIndex = line.indexOf(":");
+              if (colonIndex === -1) continue;
+
+              const key = line.substring(0, colonIndex).trim().toLowerCase();
+              const value = line.substring(colonIndex + 1).trim();
+
+              switch (key) {
+                case "date":
+                  metadata.date = value;
+                  metadataEndIndex = i + 1;
+                  break;
+                case "category":
+                  metadata.category = value;
+                  metadataEndIndex = i + 1;
+                  break;
+                case "tags":
+                  metadata.tags = value.split(",").map((t) => t.trim());
+                  metadataEndIndex = i + 1;
+                  break;
+                case "image":
+                  metadata.image = value;
+                  metadataEndIndex = i + 1;
+                  break;
+                case "excerpt":
+                  metadata.excerpt = value;
+                  metadataEndIndex = i + 1;
+                  break;
+              }
+            }
+
+            // Remove metadata lines from content
+            if (metadataEndIndex > 0) {
+              const contentLines = lines.slice(metadataEndIndex);
+              content = contentLines.join("\n").trim();
+            }
+
+            return { metadata, content };
           },
 
-          cleanHTML(block) {
-            // Remove leading metadata lines like AUTHOR:/CATEGORY:/POST:
-            return block
-              .replace(/\b(AUTHOR|CATEGORY|TAGS?|POST|DATE):[^\n]*\n/gi, "")
-              .replace(/ style="[^"]*"/g, "")
-              .trim();
+          /**
+           * Extract title from content (first h1/h2 or first sentence)
+           */
+          extractTitle: function (html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+
+            const heading = doc.querySelector("h1") || doc.querySelector("h2");
+            if (heading) {
+              const title = heading.textContent.trim();
+              heading.remove();
+              return { title, content: doc.body.innerHTML };
+            }
+
+            const firstP = doc.querySelector("p");
+            if (firstP) {
+              return {
+                title: truncate(firstP.textContent.trim(), 80),
+                content: doc.body.innerHTML,
+              };
+            }
+
+            return { title: "Untitled Post", content: html };
           },
 
-          estimateReadTime(block) {
-            const words = AuthorDocParser.strip(block)
-              .split(/\s+/)
-              .filter(Boolean).length;
-            const minutes = Math.max(1, Math.round(words / 200));
+          /**
+           * Clean Google Docs HTML
+           */
+          cleanHTML: function (html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+
+            $$("[class]", doc).forEach((el) => el.removeAttribute("class"));
+            $$("[id]", doc).forEach((el) => el.removeAttribute("id"));
+            $$("[style]", doc).forEach((el) => el.removeAttribute("style"));
+            $$("span:empty, p:empty", doc).forEach((el) => el.remove());
+
+            return doc.body.innerHTML;
+          },
+
+          /**
+           * Estimate read time
+           */
+          estimateReadTime: function (html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const text = doc.body.textContent || "";
+            const words = text.split(/\s+/).length;
+            const minutes = Math.ceil(words / 200);
             return `${minutes} min read`;
           },
 
-          strip(html) {
-            return html
-              .replace(/<\/?(script|style)[^>]*>/gi, "")
-              .replace(/<[^>]+>/g, "")
-              .replace(/\r?\n/g, "\n")
-              .trim();
+          /**
+           * Fetch and parse one author document containing multiple posts
+           */
+          fetchAuthorDoc: async function (url) {
+            try {
+              const response = await fetch(url, { mode: "cors" });
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+              let html = await response.text();
+
+              // Parse author metadata
+              const { metadata: authorMeta, content: authorContent } =
+                this.parseAuthorMetadata(html);
+
+              // Split into individual posts
+              const postSections = this.splitIntoPosts(authorContent);
+
+              // Parse each post
+              const posts = [];
+              for (const section of postSections) {
+                // Parse post metadata
+                const { metadata: postMeta, content: postContent } =
+                  this.parsePostMetadata(section.content);
+
+                // Extract title (use POST: title if available, otherwise extract from content)
+                const { title, content: cleanedContent } = section.title
+                  ? { title: section.title, content: postContent }
+                  : this.extractTitle(postContent);
+
+                // Clean HTML
+                const finalContent = this.cleanHTML(cleanedContent);
+
+                // Auto-generate excerpt if not provided
+                if (!postMeta.excerpt) {
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(finalContent, "text/html");
+                  const firstP = doc.querySelector("p");
+                  postMeta.excerpt = firstP
+                    ? truncate(firstP.textContent.trim(), 150)
+                    : "";
+                }
+
+                // Generate unique ID
+                const postId = `${authorMeta.author
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}-${Date.now()}-${posts.length}`;
+
+                posts.push({
+                  id: postId,
+                  title,
+                  content: finalContent,
+                  author: authorMeta.author,
+                  authorAvatar: authorMeta.avatar,
+                  authorBio: authorMeta.bio,
+                  date: postMeta.date,
+                  category: postMeta.category,
+                  tags: postMeta.tags,
+                  image: postMeta.image,
+                  excerpt: postMeta.excerpt,
+                  readTime: this.estimateReadTime(finalContent),
+                  sourceUrl: url,
+                });
+              }
+
+              return posts;
+            } catch (error) {
+              console.error(`Failed to fetch author doc: ${url}`, error);
+              return [];
+            }
+          },
+        };
+
+        // Cache Module
+        const CacheManager = {
+          prefix: "mcc-blog-cache-",
+
+          set: function (key, data, ttlMinutes) {
+            const expiry = Date.now() + ttlMinutes * 60 * 1000;
+            const cacheData = { data, expiry };
+            try {
+              localStorage.setItem(
+                this.prefix + key,
+                JSON.stringify(cacheData)
+              );
+            } catch (e) {
+              console.warn("Cache write failed:", e);
+            }
+          },
+
+          get: function (key) {
+            try {
+              const cached = localStorage.getItem(this.prefix + key);
+              if (!cached) return null;
+
+              const { data, expiry } = JSON.parse(cached);
+              if (Date.now() > expiry) {
+                this.remove(key);
+                return null;
+              }
+
+              return data;
+            } catch (e) {
+              console.warn("Cache read failed:", e);
+              return null;
+            }
+          },
+
+          remove: function (key) {
+            try {
+              localStorage.removeItem(this.prefix + key);
+            } catch (e) {
+              console.warn("Cache remove failed:", e);
+            }
+          },
+
+          clear: function () {
+            try {
+              Object.keys(localStorage)
+                .filter((k) => k.startsWith(this.prefix))
+                .forEach((k) => localStorage.removeItem(k));
+            } catch (e) {
+              console.warn("Cache clear failed:", e);
+            }
           },
         };
 
         // Blog Widget Module
         const BlogWidget = {
           config: {
+            authorsSource: [],
+            cacheTTL: 60,
             maxPosts: 12,
             authorFilter: true,
             categoryFilter: true,
@@ -845,7 +1097,6 @@ Configuration (data-* attributes on #blogFeed):
           },
 
           state: {
-            authors: [],
             posts: [],
             filteredPosts: [],
             page: 1,
@@ -855,11 +1106,12 @@ Configuration (data-* attributes on #blogFeed):
               search: "",
               sort: "newest",
             },
+            loading: false,
           },
 
-          init: function () {
+          init: async function () {
             this.loadConfig();
-            this.loadData();
+            await this.loadData();
             this.setupFilters();
             this.applyFilters();
             this.render();
@@ -869,8 +1121,32 @@ Configuration (data-* attributes on #blogFeed):
             const widget = $("#blogWidget");
             if (!widget) return;
 
+            try {
+              const sourceAttr = widget.dataset.authorsSource;
+              let parsed;
+              if (sourceAttr && sourceAttr.trim().startsWith("[")) {
+                parsed = JSON.parse(sourceAttr);
+              } else if (sourceAttr && sourceAttr.trim().startsWith("{")) {
+                parsed = [JSON.parse(sourceAttr)];
+              } else if (
+                typeof sourceAttr === "string" &&
+                sourceAttr.trim().length > 0
+              ) {
+                parsed = [sourceAttr.trim()];
+              } else {
+                parsed = [];
+              }
+              this.config.authorsSource = Array.isArray(parsed)
+                ? parsed
+                : [parsed];
+            } catch (e) {
+              console.warn("Invalid authors-source, using empty array", e);
+              this.config.authorsSource = [];
+            }
+
+            this.config.cacheTTL = parseInt(widget.dataset.cacheTtl) || 60;
             this.config.maxPosts = parseInt(widget.dataset.maxPosts) || 12;
-            this.config.pageSize = this.config.maxPosts; // keep behavior consistent
+            this.config.pageSize = this.config.maxPosts;
             this.config.authorFilter = widget.dataset.authorFilter !== "false";
             this.config.categoryFilter =
               widget.dataset.categoryFilter !== "false";
@@ -878,99 +1154,130 @@ Configuration (data-* attributes on #blogFeed):
           },
 
           loadData: async function () {
-            const widget = $("#blogWidget");
-            const ttl = parseInt(widget?.dataset.cacheTtl) || 60;
+            this.state.loading = true;
 
-            // Authors source: inline JSON array or URL to manifest { authors: [...] }
-            let authorsSource =
-              widget?.dataset.authorsSource || widget?.dataset.authors || "";
-            let authors = [];
-            try {
-              if (authorsSource && authorsSource.trim().startsWith("[")) {
-                authors = JSON.parse(authorsSource);
-              } else if (authorsSource) {
-                const cacheKey = `mcc-blog-authors-${authorsSource}`;
-                const cached = CacheManager.get(cacheKey);
-                if (cached) {
-                  authors = cached.authors || cached;
-                } else {
-                  const res = await fetch(authorsSource, { mode: "cors" });
-                  const data = await res.json();
-                  authors = data.authors || data;
-                  CacheManager.set(cacheKey, { authors }, ttl);
-                }
-              }
-            } catch (e) {
-              console.warn("Failed to load authorsSource", e);
+            // Check if authorsSource is a manifest URL
+            if (
+              this.config.authorsSource.length === 1 &&
+              this.config.authorsSource[0].endsWith(".json")
+            ) {
+              await this.loadFromManifest(this.config.authorsSource[0]);
+            } else {
+              await this.loadFromUrls(this.config.authorsSource);
             }
 
-            // Normalize authors: { id, name, docUrl, avatar }
-            this.state.authors = (authors || []).map((a) => ({
-              id:
-                a.id ||
-                (a.name
-                  ? a.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-                  : "author"),
-              name: a.name || a.author || "Author",
-              avatar: a.avatar || "/images/authors/default.jpg",
-              docUrl: a.docUrl || a.url || a.doc || a.source || a,
-            }));
+            this.state.loading = false;
+          },
 
-            // Fetch and parse posts from each author's Google Doc export HTML
+          loadFromManifest: async function (manifestUrl) {
+            const cacheKey = `manifest-${manifestUrl}`;
+            const cached = CacheManager.get(cacheKey);
+
+            if (cached) {
+              this.state.posts = cached;
+              return;
+            }
+
+            try {
+              const response = await fetch(manifestUrl);
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+              const manifest = await response.json();
+              const urls = manifest.authors || manifest.urls || [];
+
+              await this.loadFromUrls(urls);
+              CacheManager.set(
+                cacheKey,
+                this.state.posts,
+                this.config.cacheTTL
+              );
+            } catch (error) {
+              console.error("Failed to load manifest:", error);
+              this.showError("Failed to load author documents manifest");
+            }
+          },
+
+          loadFromUrls: async function (urls) {
+            if (!urls || urls.length === 0) {
+              this.showError(
+                "No author documents configured. Please add Google Docs URLs to data-authors-source."
+              );
+              return;
+            }
+
             const allPosts = [];
-            for (const author of this.state.authors) {
-              if (!author.docUrl || typeof author.docUrl !== "string") continue;
-              try {
-                const html = await AuthorDocParser.fetchAuthorDoc(
-                  author.docUrl
-                );
-                const blocks = AuthorDocParser.splitIntoPosts(html);
-                blocks.forEach((block, idx) => {
-                  const title = AuthorDocParser.extractTitle(block);
-                  const meta = AuthorDocParser.parsePostMetadata(block);
-                  const content = AuthorDocParser.cleanHTML(block);
-                  const readTime = AuthorDocParser.estimateReadTime(block);
-                  allPosts.push({
-                    id: `${author.id}-${idx + 1}`,
-                    title,
-                    excerpt: meta.excerpt,
-                    content,
-                    author: author.id,
-                    category: meta.category,
-                    tags: meta.tags,
-                    date: meta.date || new Date().toISOString().slice(0, 10),
-                    image: meta.image || author.avatar,
-                    readTime,
-                  });
-                });
-              } catch (e) {
-                console.warn(`Failed to parse doc for ${author.name}`, e);
+
+            // Fetch author docs one at a time (each can have many posts)
+            for (const url of urls) {
+              // Normalize Google Docs 'pub' URLs to 'export?format=html'
+              const normalizedUrl =
+                typeof url === "string" && url.includes("/pub")
+                  ? url.replace(/\/pub(?:\?.*)?$/i, "/export?format=html")
+                  : url;
+
+              const cacheKey = `author-${url}`;
+              let posts = CacheManager.get(cacheKey);
+
+              if (!posts) {
+                posts = await AuthorDocParser.fetchAuthorDoc(normalizedUrl);
+                if (posts && posts.length > 0) {
+                  CacheManager.set(cacheKey, posts, this.config.cacheTTL);
+                }
+              }
+
+              if (posts) {
+                allPosts.push(...posts);
               }
             }
 
             this.state.posts = allPosts;
-            this.state.filteredPosts = [...this.state.posts];
+
+            if (!this.state.posts || this.state.posts.length === 0) {
+              console.warn("BlogWidget: No posts parsed.", {
+                authorsSource: this.config.authorsSource,
+                urls,
+              });
+              this.showError(
+                "No articles found. Ensure your Google Docs are Published and use /export?format=html links (not /pub)."
+              );
+            }
+          },
+
+          showError: function (message) {
+            const container = $("#blogFeed");
+            if (!container) return;
+
+            container.innerHTML = `
+              <div class="mcc-loading" style="color: #cc0000;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                ${message}
+              </div>
+            `;
           },
 
           setupFilters: function () {
-            // Populate author filter
             const authorFilter = $("#authorFilter");
             if (authorFilter && this.config.authorFilter) {
-              this.state.authors.forEach((author) => {
+              const authors = [
+                ...new Set(this.state.posts.map((p) => p.author)),
+              ];
+              authors.forEach((author) => {
                 const option = document.createElement("option");
-                option.value = author.id;
-                option.textContent = author.name;
+                option.value = author;
+                option.textContent = author;
                 authorFilter.appendChild(option);
               });
 
               authorFilter.addEventListener("change", (e) => {
                 this.state.currentFilters.author = e.target.value;
+                this.state.page = 1;
                 this.applyFilters();
                 this.render();
               });
             }
 
-            // Populate category filter
             const categoryFilter = $("#categoryFilter");
             if (categoryFilter && this.config.categoryFilter) {
               const categories = [
@@ -985,12 +1292,12 @@ Configuration (data-* attributes on #blogFeed):
 
               categoryFilter.addEventListener("change", (e) => {
                 this.state.currentFilters.category = e.target.value;
+                this.state.page = 1;
                 this.applyFilters();
                 this.render();
               });
             }
 
-            // Setup search
             const searchInput = $("#blogSearch");
             if (searchInput && this.config.search) {
               searchInput.addEventListener(
@@ -998,13 +1305,13 @@ Configuration (data-* attributes on #blogFeed):
                 debounce((e) => {
                   this.state.currentFilters.search =
                     e.target.value.toLowerCase();
+                  this.state.page = 1;
                   this.applyFilters();
                   this.render();
                 }, 300)
               );
             }
 
-            // Setup sort
             const sortFilter = $("#sortFilter");
             if (sortFilter) {
               sortFilter.addEventListener("change", (e) => {
@@ -1015,7 +1322,6 @@ Configuration (data-* attributes on #blogFeed):
               });
             }
 
-            // Pagination controls
             const prev = $("#prevPage");
             const next = $("#nextPage");
             if (prev && next) {
@@ -1023,6 +1329,7 @@ Configuration (data-* attributes on #blogFeed):
                 if (this.state.page > 1) {
                   this.state.page--;
                   this.render();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               });
               next.addEventListener("click", () => {
@@ -1032,9 +1339,13 @@ Configuration (data-* attributes on #blogFeed):
                 if (this.state.page < totalPages) {
                   this.state.page++;
                   this.render();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               });
               document.addEventListener("keydown", (e) => {
+                const modal = $("#postModal");
+                if (modal && modal.classList.contains("mcc-modal--active"))
+                  return;
                 if (e.key === "ArrowRight") next.click();
                 if (e.key === "ArrowLeft") prev.click();
               });
@@ -1044,21 +1355,18 @@ Configuration (data-* attributes on #blogFeed):
           applyFilters: function () {
             let filtered = [...this.state.posts];
 
-            // Filter by author
             if (this.state.currentFilters.author) {
               filtered = filtered.filter(
                 (post) => post.author === this.state.currentFilters.author
               );
             }
 
-            // Filter by category
             if (this.state.currentFilters.category) {
               filtered = filtered.filter(
                 (post) => post.category === this.state.currentFilters.category
               );
             }
 
-            // Filter by search
             if (this.state.currentFilters.search) {
               const query = this.state.currentFilters.search;
               filtered = filtered.filter(
@@ -1069,7 +1377,6 @@ Configuration (data-* attributes on #blogFeed):
               );
             }
 
-            // Apply sort
             const sort = this.state.currentFilters.sort;
             if (sort === "newest") {
               filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -1079,7 +1386,6 @@ Configuration (data-* attributes on #blogFeed):
               filtered.sort((a, b) => a.title.localeCompare(b.title));
             }
 
-            // Keep full filtered list; pagination will slice during render
             this.state.filteredPosts = filtered;
           },
 
@@ -1089,10 +1395,10 @@ Configuration (data-* attributes on #blogFeed):
 
             if (this.state.filteredPosts.length === 0) {
               container.innerHTML = `
-          <div class="mcc-loading">
-            No articles found. Try adjusting your filters.
-          </div>
-        `;
+                <div class="mcc-loading">
+                  No articles found. Try adjusting your filters.
+                </div>
+              `;
               return;
             }
 
@@ -1112,7 +1418,6 @@ Configuration (data-* attributes on #blogFeed):
             container.innerHTML = "";
             container.appendChild(grid);
 
-            // Update pagination
             const totalPages = Math.ceil(
               this.state.filteredPosts.length / this.config.pageSize
             );
@@ -1120,6 +1425,7 @@ Configuration (data-* attributes on #blogFeed):
             const prev = $("#prevPage");
             const next = $("#nextPage");
             const info = $("#pageInfo");
+
             if (totalPages > 1 && pagination && prev && next && info) {
               pagination.hidden = false;
               prev.setAttribute("aria-disabled", String(this.state.page <= 1));
@@ -1132,15 +1438,12 @@ Configuration (data-* attributes on #blogFeed):
               pagination.hidden = true;
             }
 
-            // Trigger reveal animation
             requestAnimationFrame(() => {
               grid.classList.add("mcc-blog__grid--loaded");
             });
           },
 
           createCard: function (post) {
-            const author = this.state.authors.find((a) => a.id === post.author);
-
             const card = document.createElement("article");
             card.className = "mcc-card";
             card.setAttribute("role", "listitem");
@@ -1148,38 +1451,42 @@ Configuration (data-* attributes on #blogFeed):
             card.setAttribute("itemtype", "https://schema.org/BlogPosting");
 
             card.innerHTML = `
-        <div class="mcc-card__image">
-          <img src="${post.image}" alt="${post.title}" itemprop="image">
-        </div>
-        <div class="mcc-card__content">
-          <div class="mcc-card__meta">
-            <img class="mcc-card__avatar" src="${
-              author?.avatar || "/images/authors/default.jpg"
-            }" alt="${author?.name || "Author"}">
-            <div>
-              <p class="mcc-card__author" itemprop="author">${
-                author?.name || "Unknown"
-              }</p>
-              <p class="mcc-card__date">
-                <time datetime="${
-                  post.date
-                }" itemprop="datePublished">${formatDate(post.date)}</time> · ${
-              post.readTime
-            }
-              </p>
-            </div>
-          </div>
-          <h3 class="mcc-card__title" itemprop="headline">${post.title}</h3>
-          <p class="mcc-card__excerpt" itemprop="description">${
-            post.excerpt
-          }</p>
-          <div class="mcc-card__tags">
-            ${post.tags
-              .map((tag) => `<span class="mcc-tag">#${tag}</span>`)
-              .join("")}
-          </div>
-        </div>
-      `;
+              <div class="mcc-card__image">
+                <img src="${post.image}" alt="${
+              post.title
+            }" itemprop="image" loading="lazy">
+              </div>
+              <div class="mcc-card__content">
+                <div class="mcc-card__meta">
+                  <img class="mcc-card__avatar" src="${
+                    post.authorAvatar
+                  }" alt="${post.author}" loading="lazy">
+                  <div>
+                    <p class="mcc-card__author" itemprop="author">${
+                      post.author
+                    }</p>
+                    <p class="mcc-card__date">
+                      <time datetime="${
+                        post.date
+                      }" itemprop="datePublished">${formatDate(
+              post.date
+            )}</time> · ${post.readTime}
+                    </p>
+                  </div>
+                </div>
+                <h3 class="mcc-card__title" itemprop="headline">${
+                  post.title
+                }</h3>
+                <p class="mcc-card__excerpt" itemprop="description">${
+                  post.excerpt
+                }</p>
+                <div class="mcc-card__tags">
+                  ${post.tags
+                    .map((tag) => `<span class="mcc-tag">#${tag}</span>`)
+                    .join("")}
+                </div>
+              </div>
+            `;
 
             card.addEventListener("click", () => this.openModal(post));
             card.addEventListener("keydown", (e) => {
@@ -1200,39 +1507,36 @@ Configuration (data-* attributes on #blogFeed):
 
             if (!modal || !modalPost) return;
 
-            const author = this.state.authors.find((a) => a.id === post.author);
-
             modalPost.innerHTML = `
-        <div class="mcc-modal__post-header">
-          <h2 class="mcc-modal__post-title" id="modalPostTitle" itemprop="headline">${
-            post.title
-          }</h2>
-          <div class="mcc-modal__post-meta">
-            <img class="mcc-card__avatar" src="${
-              author?.avatar || "/images/authors/default.jpg"
-            }" alt="${author?.name || "Author"}">
-            <span itemprop="author">${author?.name || "Unknown"}</span>
-            <span>·</span>
-            <time datetime="${post.date}" itemprop="datePublished">${formatDate(
-              post.date
-            )}</time>
-            <span>·</span>
-            <span>${post.readTime}</span>
-          </div>
-        </div>
-        <div class="mcc-modal__post-content" itemprop="articleBody">
-          ${post.content}
-        </div>
-      `;
+              <div class="mcc-modal__post-header">
+                <h2 class="mcc-modal__post-title" id="modalPostTitle" itemprop="headline">${
+                  post.title
+                }</h2>
+                <div class="mcc-modal__post-meta">
+                  <img class="mcc-card__avatar" src="${
+                    post.authorAvatar
+                  }" alt="${post.author}">
+                  <span itemprop="author">${post.author}</span>
+                  <span>·</span>
+                  <time datetime="${
+                    post.date
+                  }" itemprop="datePublished">${formatDate(post.date)}</time>
+                  <span>·</span>
+                  <span>${post.readTime}</span>
+                </div>
+              </div>
+              <div class="mcc-modal__post-content" itemprop="articleBody">
+                ${post.content}
+              </div>
+            `;
 
             modal.classList.add("mcc-modal--active");
             modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
 
-            // Focus management
             const closeBtn = $(".mcc-modal__close", modal);
             if (closeBtn) closeBtn.focus();
 
-            // Keyboard navigation
             document.addEventListener("keydown", this.handleModalKeydown);
           },
 
@@ -1242,6 +1546,7 @@ Configuration (data-* attributes on #blogFeed):
 
             modal.classList.remove("mcc-modal--active");
             modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
 
             document.removeEventListener("keydown", this.handleModalKeydown);
           },
@@ -1253,10 +1558,9 @@ Configuration (data-* attributes on #blogFeed):
           },
         };
 
-        // Expose for global access
         window.BlogWidget = BlogWidget;
+        window.CacheManager = CacheManager;
 
-        // Auto-init when DOM ready
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", () =>
             BlogWidget.init()

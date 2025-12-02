@@ -1,0 +1,9 @@
+{
+  "version": "3.2.0",
+  "description": "Author documents manifest for Blog Feed v3.2.0 (one doc per author, multiple posts inside)",
+  "cacheTTL": 60,
+  "authors": [
+    "https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/export?format=html",
+    "https://docs.google.com/document/d/e/2PACX-1vSAhLhpW3MMztRzRlhZEjaZgyjUfRjeEj0HAlItPlfuiIXrrU_JcyRxM-fADuueipe_CBANlpr_EroG/export?format=html"
+  ]
+}
