@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Widget Test Page</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: #f5f5f5;
+      }
+      .test-header {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .test-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 24px;
+      }
+      .test-header p {
+        margin: 5px 0;
+        color: #666;
+      }
+      .test-controls {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .test-controls button {
+        padding: 8px 16px;
+        margin-right: 8px;
+        border: none;
+        border-radius: 4px;
+        background: #0066cc;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .test-controls button:hover {
+        background: #0052a3;
+      }
+      .console-log {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-family: "Monaco", "Courier New", monospace;
+        font-size: 12px;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .console-log .log-entry {
+        margin: 2px 0;
+        padding: 2px 0;
+      }
+      .console-log .log-info {
+        color: #4fc3f7;
+      }
+      .console-log .log-warn {
+        color: #ffb74d;
+      }
+      .console-log .log-error {
+        color: #ef5350;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-header">
+      <h1>Blog Widget Test Page</h1>
+      <p>
+        <strong>Purpose:</strong> Test the v3.2.0 author-doc blog widget with
+        real Google Docs URLs
+      </p>
+      <p><strong>Authors:</strong> Caleb McCartney, Divine Eyth</p>
+      <p><strong>Status:</strong> <span id="status">Loading...</span></p>
+    </div>
+
+    <div class="test-controls">
+      <button onclick="clearCacheAndReload()">Clear Cache & Reload</button>
+      <button onclick="logState()">Log Widget State</button>
+      <button onclick="clearConsole()">Clear Console</button>
+    </div>
+
+    <div class="console-log" id="testConsole">
+      <div class="log-entry log-info">Console output will appear here...</div>
+    </div>
+
+    <!-- Widget Container -->
+    <div id="widgetContainer"></div>
+
+    <script>
+      // Intercept console methods for display
+      const originalConsole = {
+        log: console.log,
+        warn: console.warn,
+        error: console.error,
+      };
+
+      function addLogEntry(type, ...args) {
+        const consoleEl = document.getElementById("testConsole");
+        const entry = document.createElement("div");
+        entry.className = `log-entry log-${type}`;
+        entry.textContent = `[${new Date().toLocaleTimeString()}] ${args
+          .map((a) =>
+            typeof a === "object" ? JSON.stringify(a, null, 2) : String(a)
+          )
+          .join(" ")}`;
+        consoleEl.appendChild(entry);
+        consoleEl.scrollTop = consoleEl.scrollHeight;
+        originalConsole[type](...args);
+      }
+
+      console.log = (...args) => addLogEntry("info", ...args);
+      console.warn = (...args) => addLogEntry("warn", ...args);
+      console.error = (...args) => addLogEntry("error", ...args);
+
+      function updateStatus(text) {
+        document.getElementById("status").textContent = text;
+        console.log("Status:", text);
+      }
+
+      function clearCacheAndReload() {
+        if (window.CacheManager) {
+          window.CacheManager.clear();
+          console.log("✅ Cache cleared");
+        }
+        location.reload();
+      }
+
+      function logState() {
+        if (window.BlogWidget) {
+          console.log("Widget State:", {
+            posts: window.BlogWidget.state.posts.length,
+            filteredPosts: window.BlogWidget.state.filteredPosts.length,
+            authors: window.BlogWidget.config.authorsSource,
+            page: window.BlogWidget.state.page,
+          });
+        } else {
+          console.warn("BlogWidget not initialized");
+        }
+      }
+
+      function clearConsole() {
+        document.getElementById("testConsole").innerHTML = "";
+      }
+
+      // Load the widget
+      console.log("Fetching widget HTML...");
+      updateStatus("Fetching widget...");
+
+      fetch("./versions/v3.2.0-author-doc-blog.html")
+        .then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.text();
+        })
+        .then((html) => {
+          console.log("✅ Widget HTML loaded");
+          updateStatus("Widget loaded, initializing...");
+
+          // Extract just the widget content (skip <!DOCTYPE> and outer html/body tags)
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, "text/html");
+          const widget = doc.querySelector("#blogWidget");
+          const modal = doc.querySelector("#postModal");
+          const script = doc.querySelector("script");
+          const style = doc.querySelector("style");
+
+          // Inject into page
+          const container = document.getElementById("widgetContainer");
+          if (style) document.head.appendChild(style.cloneNode(true));
+          if (widget) container.appendChild(widget.cloneNode(true));
+          if (modal) container.appendChild(modal.cloneNode(true));
+
+          // Update widget config with our test URLs
+          const widgetEl = document.getElementById("blogWidget");
+          if (widgetEl) {
+            widgetEl.setAttribute(
+              "data-authors-source",
+              JSON.stringify([
+                "https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/pub",
+                "https://docs.google.com/document/d/e/2PACX-1vSAhLhpW3MMztRzRlhZEjaZgyjUfRjeEj0HAlItPlfuiIXrrU_JcyRxM-fADuueipe_CBANlpr_EroG/pub",
+              ])
+            );
+            widgetEl.setAttribute("data-cache-ttl", "5");
+            console.log("✅ Widget config set:", widgetEl.dataset);
+          }
+
+          // Execute widget script
+          if (script) {
+            const scriptEl = document.createElement("script");
+            scriptEl.textContent = script.textContent;
+            document.body.appendChild(scriptEl);
+            console.log("✅ Widget script loaded");
+            updateStatus("Widget initialized");
+          }
+        })
+        .catch((err) => {
+          console.error("❌ Failed to load widget:", err);
+          updateStatus("Error loading widget");
+        });
+    </script>
+  </body>
+</html>
