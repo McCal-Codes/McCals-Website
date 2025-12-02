@@ -1,343 +1,537 @@
 <!-- Podcast Feed Widget v2.0.0 — Performance Optimized with Enhanced Accessibility -->
 <style>
-:root {
-  --card-bg: rgba(40, 40, 40, 0.95);
-  --card-border: rgba(60, 60, 60, 0.8);
-  --glass-shadow: rgba(0, 0, 0, 0.3);
-  --text-primary: #ffffff;
-  --text-secondary: #b0b0b0;
-  --text-muted: #808080;
-  --accent: #1db954;
-  --accent-apple: #fc3c44;
-  --backdrop-blur: 20px;
-  --border-radius: 24px;
-  --cta-bg: var(--mc-accent-black);
-  --cta-hover: var(--mc-accent-slate);
-  --cta-text: var(--mc-accent-taupe);
-  --cta-border: rgba(86, 92, 105, 0.55);
-  --cta-border-hover: rgba(148, 163, 184, 0.75);
-}
-
-@media (prefers-color-scheme: light) {
   :root {
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(200, 200, 200, 0.8);
-    --glass-shadow: rgba(0, 0, 0, 0.1);
-    --text-primary: #1a1a1a;
-    --text-secondary: #4a4a4a;
-    --text-muted: #6b7280;
+    --card-bg: rgba(40, 40, 40, 0.95);
+    --card-border: rgba(60, 60, 60, 0.8);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #808080;
+    --accent: #1db954;
+    --accent-apple: #fc3c44;
+    --backdrop-blur: 20px;
+    --border-radius: 24px;
     --cta-bg: var(--mc-accent-black);
-    --cta-hover: var(--mc-accent-stone);
+    --cta-hover: var(--mc-accent-slate);
     --cta-text: var(--mc-accent-taupe);
-    --cta-border: rgba(203, 213, 225, 0.65);
+    --cta-border: rgba(86, 92, 105, 0.55);
     --cta-border-hover: rgba(148, 163, 184, 0.75);
   }
-}
 
-.podcast-feed {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: transparent;
-}
+  @media (prefers-color-scheme: light) {
+    :root {
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-border: rgba(200, 200, 200, 0.8);
+      --glass-shadow: rgba(0, 0, 0, 0.1);
+      --text-primary: #1a1a1a;
+      --text-secondary: #4a4a4a;
+      --text-muted: #6b7280;
+      --cta-bg: var(--mc-accent-black);
+      --cta-hover: var(--mc-accent-stone);
+      --cta-text: var(--mc-accent-taupe);
+      --cta-border: rgba(203, 213, 225, 0.65);
+      --cta-border-hover: rgba(148, 163, 184, 0.75);
+    }
+  }
 
-.podcast-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 18px;
-  margin-bottom: 28px;
-}
+  .podcast-feed {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+      sans-serif;
+    background: transparent;
+  }
 
-.podcast-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 8px;
-  letter-spacing: -0.02em;
-}
+  .podcast-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
 
-.episode-badge {
-  display: inline-block;
-  background: var(--mc-accent-slate);
-  color: var(--mc-accent-taupe);
-  padding: 2px 6px;
-  border-radius: 8px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin-left: 8px;
-  vertical-align: middle;
-  letter-spacing: 0.025em;
-}
+  .podcast-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
 
-.episode-badge.new {
-  background: var(--mc-accent-stone);
-  color: var(--mc-accent-black);
-}
+  .episode-badge {
+    display: inline-block;
+    background: var(--mc-accent-slate);
+    color: var(--mc-accent-taupe);
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.025em;
+  }
 
-.episode-badge.featured {
-  background: var(--mc-gradient-accent);
-  color: var(--mc-accent-black);
-}
+  .episode-badge.new {
+    background: var(--mc-accent-stone);
+    color: var(--mc-accent-black);
+  }
 
-.podcast-subtitle {
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  margin: 0;
-  font-weight: 500;
-}
+  .episode-badge.featured {
+    background: var(--mc-gradient-accent);
+    color: var(--mc-accent-black);
+  }
 
-.podcast-intro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  max-width: 760px;
-  text-align: center;
-}
+  .podcast-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+  }
 
-.podcast-description {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin: 0;
-  max-width: 720px;
-  text-align: center;
-}
+  .podcast-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 760px;
+    text-align: center;
+  }
 
-.podcast-description span {
-  display: block;
-}
+  .podcast-description {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 720px;
+    text-align: center;
+  }
 
-.podcast-invite {
-  color: var(--text-primary);
-  font-weight: 600;
-  margin-top: 8px;
-  letter-spacing: 0.01em;
-}
+  .podcast-description span {
+    display: block;
+  }
 
-.podcast-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+  .podcast-invite {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+  }
 
-.join-button span {
-  position: relative;
-  z-index: 1;
-}
+  .podcast-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
-.join-button-label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+  .join-button span {
+    position: relative;
+    z-index: 1;
+  }
 
-.join-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 18px 32px;
-  border-radius: var(--border-radius);
-  background: var(--card-bg);
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 1.05rem;
-  min-width: 220px;
-  text-decoration: none;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 8px 32px var(--glass-shadow);
-  backdrop-filter: blur(var(--backdrop-blur));
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.01em;
-  outline: none;
-}
+  .join-button-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
-.join-button:hover,
-.join-button:focus-visible {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px var(--glass-shadow);
-  border-color: rgba(255, 255, 255, 0.2);
-}
+  .join-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 32px;
+    border-radius: var(--border-radius);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 1.05rem;
+    min-width: 220px;
+    text-decoration: none;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px var(--glass-shadow);
+    backdrop-filter: blur(var(--backdrop-blur));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.01em;
+    outline: none;
+  }
 
-.join-button:focus-visible {
-  outline: 2px solid rgba(99, 102, 241, 0.4);
-  outline-offset: 3px;
-}
+  .join-button:hover,
+  .join-button:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px var(--glass-shadow);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
 
-.join-button svg {
-  position: relative;
-  z-index: 1;
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
+  .join-button:focus-visible {
+    outline: 2px solid rgba(99, 102, 241, 0.4);
+    outline-offset: 3px;
+  }
 
-.join-button:hover svg,
-.join-button:focus-visible svg {
-  transform: scale(1.05);
-}
+  .join-button svg {
+    position: relative;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
 
-.debug-toggle {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  color: var(--text-primary);
-  padding: 8px 16px;
-  border-radius: 16px;
-  cursor: pointer;
-  backdrop-filter: blur(var(--backdrop-blur));
-  font-size: 12px;
-  z-index: 1000;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+  .join-button:hover svg,
+  .join-button:focus-visible svg {
+    transform: scale(1.05);
+  }
 
-.debug-toggle:hover {
-  transform: translateX(-50%);
-  box-shadow: 0 4px 12px var(--glass-shadow);
-  opacity: 0.9;
-}
+  .debug-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    backdrop-filter: blur(var(--backdrop-blur));
+    font-size: 12px;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-.debug-panel {
-  position: fixed;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.85);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(10px);
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #fff;
-  font: 600 11px/1.3 ui-monospace, monospace;
-  z-index: 999;
-  display: none;
-  max-width: 280px;
-}
+  .debug-toggle:hover {
+    transform: translateX(-50%);
+    box-shadow: 0 4px 12px var(--glass-shadow);
+    opacity: 0.9;
+  }
 
-.debug-panel.active { display: block; }
+  .debug-panel {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #fff;
+    font: 600 11px/1.3 ui-monospace, monospace;
+    z-index: 999;
+    display: none;
+    max-width: 280px;
+  }
 
-.episodes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 32px;
-  margin-top: 24px;
-}
+  .debug-panel.active {
+    display: block;
+  }
 
-.episode-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--border-radius);
-  backdrop-filter: blur(var(--backdrop-blur));
-  box-shadow: 0 8px 32px var(--glass-shadow);
-  padding: 32px;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
+  .episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 32px;
+    margin-top: 24px;
+  }
 
-.episode-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px var(--glass-shadow);
-  border-color: rgba(255, 255, 255, 0.2);
-}
+  .episode-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(var(--backdrop-blur));
+    box-shadow: 0 8px 32px var(--glass-shadow);
+    padding: 32px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
 
-.episode-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 0 0 16px;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-}
+  .episode-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px var(--glass-shadow);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
 
-.episode-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
+  .episode-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 16px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
 
-.podcast-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-.episode-info { flex: 1; }
-.podcast-name { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; margin: 0 0 2px; }
-.episode-date { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
+  .episode-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
 
-.rss-icon { width: 20px; height: 20px; fill: var(--text-muted); transition: fill 0.3s ease; }
-.episode-card:hover .rss-icon { fill: var(--accent); }
+  .podcast-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  .episode-info {
+    flex: 1;
+  }
+  .podcast-name {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0 0 2px;
+  }
+  .episode-date {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+  }
 
-.episode-description { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 20px 0; }
+  .rss-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--text-muted);
+    transition: fill 0.3s ease;
+  }
+  .episode-card:hover .rss-icon {
+    fill: var(--accent);
+  }
 
-.audio-player { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px; margin: 16px 0; backdrop-filter: blur(8px); }
-.audio-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.play-button { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s ease; flex-shrink: 0; }
-.play-button.playing { background: #eab308; color: #1a1a1a; }
-.play-button.loading { opacity: 0.7; cursor: wait; }
-.play-button.error { background: #ef4444; }
-.preview-button { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.06); color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease; }
-.preview-button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); color: var(--text-primary); }
-.audio-info { flex: 1; min-width: 0; }
-.audio-title { color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; margin: 0 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.audio-time { color: var(--text-muted); font-size: 0.8rem; margin: 0; }
-.progress-bar { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; overflow: hidden; cursor: pointer; }
-.progress-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0%; }
-.volume-control { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
-.volume-slider { width: 140px; }
+  .episode-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 20px 0;
+  }
 
-.platform-links { display: flex; gap: 12px; margin-top: 12px; }
-.platform-button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 16px; border-radius: 12px; text-decoration: none; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--mc-accent-stone); color: var(--mc-accent-taupe); background: var(--mc-accent-black); backdrop-filter: blur(8px); transition: all 0.3s ease; }
-.platform-button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); color: var(--mc-text); background: var(--mc-accent-slate); }
-.spotify-button { background: rgba(29,185,84,0.1); border-color: rgba(29,185,84,0.3); color: #1db954; }
-.apple-button { background: rgba(252,60,68,0.1); border-color: rgba(252,60,68,0.3); color: #fc3c44; }
-.icon-large { width: 20px; height: 20px; fill: currentColor; }
+  .audio-player {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px 0;
+    backdrop-filter: blur(8px);
+  }
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .play-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+  .play-button.playing {
+    background: #eab308;
+    color: #1a1a1a;
+  }
+  .play-button.loading {
+    opacity: 0.7;
+    cursor: wait;
+  }
+  .play-button.error {
+    background: #ef4444;
+  }
+  .preview-button {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .preview-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
+  }
+  .audio-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .audio-title {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .audio-time {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin: 0;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    width: 0%;
+  }
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .volume-slider {
+    width: 140px;
+  }
 
-@media (max-width: 768px) {
-  .podcast-feed { padding: 24px 16px; }
-  .episodes-grid { grid-template-columns: 1fr; gap: 24px; }
-  .episode-card { padding: 24px; }
-  .podcast-title { font-size: 2rem; }
-  .podcast-description { font-size: 1rem; padding: 0 12px; }
-  .podcast-actions { width: 100%; }
-  .join-button { width: 100%; }
-  .debug-toggle, .debug-panel { display: none; }
-}
+  .platform-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .platform-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--mc-accent-stone);
+    color: var(--mc-accent-taupe);
+    background: var(--mc-accent-black);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+  }
+  .platform-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    color: var(--mc-text);
+    background: var(--mc-accent-slate);
+  }
+  .spotify-button {
+    background: rgba(29, 185, 84, 0.1);
+    border-color: rgba(29, 185, 84, 0.3);
+    color: #1db954;
+  }
+  .apple-button {
+    background: rgba(252, 60, 68, 0.1);
+    border-color: rgba(252, 60, 68, 0.3);
+    color: #fc3c44;
+  }
+  .icon-large {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
 
-.spotify-embed { margin: 16px auto 0; max-width: 640px; }
+  @media (max-width: 768px) {
+    .podcast-feed {
+      padding: 24px 16px;
+    }
+    .episodes-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .episode-card {
+      padding: 24px;
+    }
+    .podcast-title {
+      font-size: 2rem;
+    }
+    .podcast-description {
+      font-size: 1rem;
+      padding: 0 12px;
+    }
+    .podcast-actions {
+      width: 100%;
+    }
+    .join-button {
+      width: 100%;
+    }
+    .debug-toggle,
+    .debug-panel {
+      display: none;
+    }
+  }
+
+  .spotify-embed {
+    margin: 16px auto 0;
+    max-width: 640px;
+  }
 </style>
 
-<div class="podcast-feed" id="podcastFeed"
-     data-max-episodes="6"
-     data-spotify-show-url="https://open.spotify.com/show/1GcE0Tt669WrdAOXz73w0S"
-     data-apple-show-url="https://podcasts.apple.com/us/podcast/caffeinated-connections/id1806715605"
-     data-feed-url="https://media.rss.com/cafeconnectpod/feed.xml"
-     data-spotify-embed="false"
-     data-calendly-url="https://calendly.com/cjmccar-mcc-cal/caffeinated_connections"
-     data-podcast-description="Caffeinated Connections is where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact.">
-  <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">Debug</button>
+<div
+  class="podcast-feed"
+  id="podcastFeed"
+  data-max-episodes="6"
+  data-spotify-show-url="https://open.spotify.com/show/1GcE0Tt669WrdAOXz73w0S"
+  data-apple-show-url="https://podcasts.apple.com/us/podcast/caffeinated-connections/id1806715605"
+  data-feed-url="https://media.rss.com/cafeconnectpod/feed.xml"
+  data-spotify-embed="false"
+  data-calendly-url="https://calendly.com/cjmccar-mcc-cal/caffeinated_connections"
+  data-podcast-description="Caffeinated Connections is where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact."
+>
+  <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">
+    Debug
+  </button>
 
   <div class="podcast-header">
     <div class="podcast-intro">
-      <h1 class="podcast-title">Latest Episodes<span class="version-indicator">v2.0.0</span></h1>
+      <h1 class="podcast-title">
+        Latest Episodes<span class="version-indicator">v2.0.0</span>
+      </h1>
       <p class="podcast-subtitle">Caffeinated Connections Podcast</p>
       <p class="podcast-description">
-        <span id="podcastDescription">Caffeinated Connections is where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact.</span>
-        <span class="podcast-invite" id="podcastInvite">Want to share your story? Use the button below to grab a coffee chat slot.</span>
+        <span id="podcastDescription"
+          >Caffeinated Connections is where Caleb sits down with creators and
+          industry pros over coffee to explore how ideas turn into impact.</span
+        >
+        <span class="podcast-invite" id="podcastInvite"
+          >Want to share your story? Use the button below to grab a coffee chat
+          slot.</span
+        >
       </p>
     </div>
     <div class="podcast-actions">
-      <a class="join-button" id="podcastJoinButton" href="#" target="_blank" rel="noopener noreferrer" aria-label="Book a coffee chat with Caleb">
-        <svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 6H4.5a.5.5 0 0 0-.5.5V10h17V8.5a.5.5 0 0 0-.5-.5Zm.5 4H4v7.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5V12Zm-11 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Z"/></svg>
+      <a
+        class="join-button"
+        id="podcastJoinButton"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Book a coffee chat with Caleb"
+      >
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 6H4.5a.5.5 0 0 0-.5.5V10h17V8.5a.5.5 0 0 0-.5-.5Zm.5 4H4v7.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5V12Zm-11 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Z"
+          />
+        </svg>
         <span class="join-button-label">Let's Grab a Drink!</span>
       </a>
     </div>
@@ -347,121 +541,147 @@
 </div>
 
 <script>
-// Podcast Widget v1.9.5
-window.PodcastWidget = (function() {
-  const startTime = performance.now();
-  let debugActive = false;
-  let episodeData = [];
-  let requestCount = 0;
-  let audioCount = 0;
-  let currentlyPlaying = null;
-  let fallbackUsed = true;
-  let audioStatus = 'disabled';
-  let cacheStatus = 'MISS';
-  const audioByLink = new Map();
-  const CACHE_KEY = 'podcast-feed-episodes-v1.9.5';
-  const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
-  const podcastImage = 'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';
-  let hydrationPromise = null;
+  // Podcast Widget v1.9.5
+  window.PodcastWidget = (function () {
+    const startTime = performance.now();
+    let debugActive = false;
+    let episodeData = [];
+    let requestCount = 0;
+    let audioCount = 0;
+    let currentlyPlaying = null;
+    let fallbackUsed = true;
+    let audioStatus = "disabled";
+    let cacheStatus = "MISS";
+    const audioByLink = new Map();
+    const CACHE_KEY = "podcast-feed-episodes-v1.9.5";
+    const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
+    const podcastImage =
+      "https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png";
+    let hydrationPromise = null;
 
-  function createTimeoutSignal(ms) {
-    if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
-      return AbortSignal.timeout(ms);
+    function createTimeoutSignal(ms) {
+      if (
+        typeof AbortSignal !== "undefined" &&
+        typeof AbortSignal.timeout === "function"
+      ) {
+        return AbortSignal.timeout(ms);
+      }
+      if (typeof AbortController !== "undefined") {
+        const controller = new AbortController();
+        setTimeout(() => controller.abort(), ms);
+        return controller.signal;
+      }
+      return undefined;
     }
-    if (typeof AbortController !== 'undefined') {
-      const controller = new AbortController();
-      setTimeout(() => controller.abort(), ms);
-      return controller.signal;
+
+    const FALLBACK_EPISODES = [
+      {
+        title: "Ep 9: Rundown BMW, but Sold as a Lambo with Austin Carns",
+        description:
+          "A photojournalist and a commentator walk into a podcast and end up unpacking fear, ego, and why we are all just trying to make it through in one piece.",
+        pubDate: "2025-10-24T14:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/2289545",
+        guid: "ep9-austin-carns",
+        audioUrl:
+          "https://content.rss.com/episodes/323976/2289545/cafeconnectpod/2025_10_24_21_22_49_e18fed56-f3ef-4fa6-bb5a-4b17e2ee174e.mp3",
+      },
+      {
+        title: "Ep 8: Don't Read the Shampoo Bottle with Liam Sullivan",
+        description:
+          "From political rallies to chicken thermometers, Caleb and Liam discover how far curiosity can really go and why it matters for creative work.",
+        pubDate: "2025-09-12T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/2205662",
+        guid: "ep8-liam-sullivan",
+        audioUrl:
+          "https://content.rss.com/episodes/323976/2205662/cafeconnectpod/2025_09_08_17_11_04_24f12b7f-1449-4895-ad9a-945e184d82b2.mp3",
+      },
+      {
+        title:
+          "Ep 7: Lessons in Leadership, Branding, and Balance with Mark Palumbo",
+        description:
+          "Caleb sits down with Mark Palumbo to unpack post-grad chaos, creative hustle, and what it takes to build a personal brand without burning out.",
+        pubDate: "2025-05-30T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/2031736",
+        guid: "ep7-mark-palumbo",
+        audioUrl:
+          "https://content.rss.com/episodes/323976/2031736/cafeconnectpod/2025_05_30_13_38_51_d2969ad9-f774-4b5f-9f77-53ccb65872ed.mp3",
+      },
+      {
+        title: "Ep 6: Riding the Chaos Wave with Kyle Archer",
+        description:
+          "Rubber ducks, euphoric poems, and authentic artistry. Caleb and Kyle talk boundaries, storytelling, and balancing chaos with clarity.",
+        pubDate: "2025-05-16T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/2030795",
+        guid: "ep6-kyle-archer",
+        audioUrl:
+          "https://content.rss.com/episodes/323976/2030795/cafeconnectpod/2025_05_16_14_44_51_7ea1e6bd-7b33-4f03-9925-0c0b4a265631.mp3",
+      },
+      {
+        title: "Ep 5: Mic Drops and Monk Juice with Dream the Heavy",
+        description:
+          "TK and Paul of Dream the Heavy dive into Pittsburgh art scenes, vulnerability, and the creative rituals that keep good chaos flowing.",
+        pubDate: "2025-04-25T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/1990167",
+        guid: "ep5-dream-the-heavy",
+      },
+      {
+        title: "Ep 4: Grit, Gear & Going All In with Collin Strachan",
+        description:
+          "Caleb and Collin explore filmmaking in wild places, client honesty, and the balance between technical skill and storytelling heart.",
+        pubDate: "2025-04-18T12:00:00Z",
+        link: "https://rss.com/podcasts/cafeconnectpod/1990129",
+        guid: "ep4-collin-strachan",
+      },
+    ];
+
+    function slugify(input, fallback) {
+      const value = (input || fallback || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+      return (
+        value || fallback || "episode-" + Math.random().toString(36).slice(2, 7)
+      );
     }
-    return undefined;
-  }
 
-  const FALLBACK_EPISODES = [
-    {
-      title: 'Ep 9: Rundown BMW, but Sold as a Lambo with Austin Carns',
-      description: 'A photojournalist and a commentator walk into a podcast and end up unpacking fear, ego, and why we are all just trying to make it through in one piece.',
-      pubDate: '2025-10-24T14:00:00Z',
-      link: 'https://rss.com/podcasts/cafeconnectpod/2289545',
-      guid: 'ep9-austin-carns',
-      audioUrl: 'https://content.rss.com/episodes/323976/2289545/cafeconnectpod/2025_10_24_21_22_49_e18fed56-f3ef-4fa6-bb5a-4b17e2ee174e.mp3'
-    },
-    {
-      title: "Ep 8: Don't Read the Shampoo Bottle with Liam Sullivan",
-      description: 'From political rallies to chicken thermometers, Caleb and Liam discover how far curiosity can really go and why it matters for creative work.',
-      pubDate: '2025-09-12T12:00:00Z',
-      link: 'https://rss.com/podcasts/cafeconnectpod/2205662',
-      guid: 'ep8-liam-sullivan',
-      audioUrl: 'https://content.rss.com/episodes/323976/2205662/cafeconnectpod/2025_09_08_17_11_04_24f12b7f-1449-4895-ad9a-945e184d82b2.mp3'
-    },
-    {
-      title: 'Ep 7: Lessons in Leadership, Branding, and Balance with Mark Palumbo',
-      description: 'Caleb sits down with Mark Palumbo to unpack post-grad chaos, creative hustle, and what it takes to build a personal brand without burning out.',
-      pubDate: '2025-05-30T12:00:00Z',
-      link: 'https://rss.com/podcasts/cafeconnectpod/2031736',
-      guid: 'ep7-mark-palumbo',
-      audioUrl: 'https://content.rss.com/episodes/323976/2031736/cafeconnectpod/2025_05_30_13_38_51_d2969ad9-f774-4b5f-9f77-53ccb65872ed.mp3'
-    },
-    {
-      title: 'Ep 6: Riding the Chaos Wave with Kyle Archer',
-      description: 'Rubber ducks, euphoric poems, and authentic artistry. Caleb and Kyle talk boundaries, storytelling, and balancing chaos with clarity.',
-      pubDate: '2025-05-16T12:00:00Z',
-      link: 'https://rss.com/podcasts/cafeconnectpod/2030795',
-      guid: 'ep6-kyle-archer',
-      audioUrl: 'https://content.rss.com/episodes/323976/2030795/cafeconnectpod/2025_05_16_14_44_51_7ea1e6bd-7b33-4f03-9925-0c0b4a265631.mp3'
-    },
-    {
-      title: 'Ep 5: Mic Drops and Monk Juice with Dream the Heavy',
-      description: 'TK and Paul of Dream the Heavy dive into Pittsburgh art scenes, vulnerability, and the creative rituals that keep good chaos flowing.',
-      pubDate: '2025-04-25T12:00:00Z',
-      link: 'https://rss.com/podcasts/cafeconnectpod/1990167',
-      guid: 'ep5-dream-the-heavy'
-    },
-    {
-      title: 'Ep 4: Grit, Gear & Going All In with Collin Strachan',
-      description: 'Caleb and Collin explore filmmaking in wild places, client honesty, and the balance between technical skill and storytelling heart.',
-      pubDate: '2025-04-18T12:00:00Z',
-      link: 'https://rss.com/podcasts/cafeconnectpod/1990129',
-      guid: 'ep4-collin-strachan'
+    function formatDate(dateStr) {
+      try {
+        const date = new Date(dateStr);
+        if (Number.isNaN(date.getTime())) return "Recent";
+        const now = new Date();
+        const diff = now - date;
+        const dayMs = 1000 * 60 * 60 * 24;
+        if (diff < dayMs) return "Today";
+        if (diff < dayMs * 2) return "Yesterday";
+        if (diff < dayMs * 7) return Math.floor(diff / dayMs) + " days ago";
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+      } catch (e) {
+        return "Recent";
+      }
     }
-  ];
 
-  function slugify(input, fallback) {
-    const value = (input || fallback || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    return value || fallback || 'episode-' + Math.random().toString(36).slice(2, 7);
-  }
-
-  function formatDate(dateStr) {
-    try {
-      const date = new Date(dateStr);
-      if (Number.isNaN(date.getTime())) return 'Recent';
-      const now = new Date();
-      const diff = now - date;
-      const dayMs = 1000 * 60 * 60 * 24;
-      if (diff < dayMs) return 'Today';
-      if (diff < dayMs * 2) return 'Yesterday';
-      if (diff < dayMs * 7) return Math.floor(diff / dayMs) + ' days ago';
-      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-    } catch (e) {
-      return 'Recent';
+    function cleanDescription(html) {
+      if (!html) return "";
+      const div = document.createElement("div");
+      div.innerHTML = html;
+      const text = (div.textContent || div.innerText || "")
+        .replace(/\s+/g, " ")
+        .trim();
+      return text;
     }
-  }
 
-  function cleanDescription(html) {
-    if (!html) return '';
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    const text = (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
-    return text;
-  }
+    function trimDescription(text) {
+      if (!text) return "";
+      return text.length > 220 ? text.slice(0, 217) + "..." : text;
+    }
 
-  function trimDescription(text) {
-    if (!text) return '';
-    return text.length > 220 ? text.slice(0, 217) + '...' : text;
-  }
-
-  function createAudioPlayer(episode, playerId) {
-    audioCount++;
-    return `
+    function createAudioPlayer(episode, playerId) {
+      audioCount++;
+      return `
       <div class="audio-player" id="player-${playerId}" data-episode-link="${episode.link}">
         <div class="audio-controls">
           <button class="play-button" id="playBtn-${playerId}" onclick="PodcastWidget.toggleAudio('${playerId}')" title="Play/Pause">
@@ -486,37 +706,37 @@ window.PodcastWidget = (function() {
                onerror="PodcastWidget.onAudioError('${playerId}')"></audio>
       </div>
     `;
-  }
-
-  function getEpisodeBadge(episode) {
-    const pubDate = new Date(episode.pubDate);
-    const now = new Date();
-    const daysSincePublished = (now - pubDate) / (1000 * 60 * 60 * 24);
-
-    // Show "New" badge for episodes published within last 7 days
-    if (daysSincePublished <= 7) {
-      return '<span class="episode-badge new">New</span>';
     }
 
-    // Show "Featured" badge for the most recent episode (index 0 in the list)
-    // This would be determined by the order from the RSS feed
-    return '';
-  }
+    function getEpisodeBadge(episode) {
+      const pubDate = new Date(episode.pubDate);
+      const now = new Date();
+      const daysSincePublished = (now - pubDate) / (1000 * 60 * 60 * 24);
 
-  function createEpisodeCard(episode, index) {
-    const shortDesc = trimDescription(cleanDescription(episode.description));
-    const feed = document.getElementById('podcastFeed');
-    const spotifyShowUrl = feed?.dataset?.spotifyShowUrl || '#';
-    const appleShowUrl = feed?.dataset?.appleShowUrl || '#';
-    const guid = slugify(episode.guid, episode.title);
-    const cardImage = episode.image || podcastImage;
-    const badge = getEpisodeBadge(episode);
+      // Show "New" badge for episodes published within last 7 days
+      if (daysSincePublished <= 7) {
+        return '<span class="episode-badge new">New</span>';
+      }
 
-    return `
+      // Show "Featured" badge for the most recent episode (index 0 in the list)
+      // This would be determined by the order from the RSS feed
+      return "";
+    }
+
+    function createEpisodeCard(episode, index) {
+      const shortDesc = trimDescription(cleanDescription(episode.description));
+      const feed = document.getElementById("podcastFeed");
+      const spotifyShowUrl = feed?.dataset?.spotifyShowUrl || "#";
+      const appleShowUrl = feed?.dataset?.appleShowUrl || "#";
+      const guid = slugify(episode.guid, episode.title);
+      const cardImage = episode.image || podcastImage;
+      const badge = getEpisodeBadge(episode);
+
+      return `
       <div class="episode-card">
         <h3 class="episode-title">${episode.title}${badge}</h3>
         <div class="episode-meta">
-          <img class="podcast-avatar" src="${cardImage}" alt="Caffeinated Connections" onerror="this.style.display='none'">
+          <img class="podcast-avatar" src="${cardImage}" alt="Caffeinated Connections" onerror="this.style.display='none'" loading="lazy">
           <div class="episode-info">
             <div class="podcast-name">Caffeinated Connections</div>
             <div class="episode-date">${formatDate(episode.pubDate)}</div>
@@ -526,7 +746,9 @@ window.PodcastWidget = (function() {
         <div class="episode-description">${shortDesc}</div>
         ${createAudioPlayer(episode, `episode-${guid}`)}
         <div class="platform-links">
-          <a href="${episode.link}" target="_blank" rel="noopener" class="platform-button">
+          <a href="${
+            episode.link
+          }" target="_blank" rel="noopener" class="platform-button">
             <span>Listen</span>
           </a>
           <a href="${spotifyShowUrl}" target="_blank" rel="noopener" class="platform-button spotify-button">
@@ -540,455 +762,511 @@ window.PodcastWidget = (function() {
         </div>
       </div>
     `;
-  }
-
-  function updateDebugInfo(statusText) {
-    const loadTimeEl = document.getElementById('loadTime');
-    const episodeCountEl = document.getElementById('episodeCount');
-    const cacheStatusEl = document.getElementById('cacheStatus');
-    const requestCountEl = document.getElementById('requestCount');
-    const audioCountEl = document.getElementById('audioCount');
-    const fallbackStatusEl = document.getElementById('fallbackStatus');
-    const debugStatusEl = document.getElementById('debugStatus');
-    const audioStatusEl = document.getElementById('audioStatus');
-
-    if (loadTimeEl) loadTimeEl.textContent = Math.round(performance.now() - startTime).toString();
-    if (episodeCountEl) episodeCountEl.textContent = episodeData.length.toString();
-    if (cacheStatusEl) cacheStatusEl.textContent = cacheStatus;
-    if (requestCountEl) requestCountEl.textContent = requestCount.toString();
-    if (audioCountEl) audioCountEl.textContent = audioCount.toString();
-    if (fallbackStatusEl) fallbackStatusEl.textContent = fallbackUsed ? 'YES' : 'NO';
-    if (debugStatusEl && statusText) debugStatusEl.textContent = statusText;
-    if (audioStatusEl) audioStatusEl.textContent = audioStatus;
-  }
-
-  function renderEpisodes(list) {
-    const feedContainer = document.getElementById('podcastFeed');
-    const grid = document.getElementById('episodesGrid');
-    const maxEpisodes = parseInt(feedContainer?.dataset?.maxEpisodes, 10) || 6;
-    const episodesToRender = list.slice(0, maxEpisodes);
-
-    audioCount = 0;
-    episodeData = episodesToRender;
-    if (grid) {
-      grid.innerHTML = episodesToRender.map((episode, index) => createEpisodeCard(episode, index)).join('');
-      episodesToRender.forEach((episode) => {
-        const playerId = 'episode-' + slugify(episode.guid, episode.title);
-        const audioEl = document.getElementById('audio-' + playerId);
-        if (audioEl) {
-          const urlFromEpisode = episode.audioUrl || audioByLink.get(episode.link);
-          if (urlFromEpisode) {
-            audioEl.src = urlFromEpisode;
-            audioEl.crossOrigin = 'anonymous';
-            audioEl.preload = 'metadata';
-          }
-        }
-      });
     }
 
-    updateDebugInfo('Rendered ' + episodesToRender.length + ' episode cards.');
-    audioStatus = 'idle';
-    const audioStatusEl = document.getElementById('audioStatus');
-    if (audioStatusEl) audioStatusEl.textContent = audioStatus;
-  }
+    function updateDebugInfo(statusText) {
+      const loadTimeEl = document.getElementById("loadTime");
+      const episodeCountEl = document.getElementById("episodeCount");
+      const cacheStatusEl = document.getElementById("cacheStatus");
+      const requestCountEl = document.getElementById("requestCount");
+      const audioCountEl = document.getElementById("audioCount");
+      const fallbackStatusEl = document.getElementById("fallbackStatus");
+      const debugStatusEl = document.getElementById("debugStatus");
+      const audioStatusEl = document.getElementById("audioStatus");
 
-  function getCachedEpisodes() {
-    try {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (!cached) {
-        cacheStatus = 'MISS';
-        return null;
+      if (loadTimeEl)
+        loadTimeEl.textContent = Math.round(
+          performance.now() - startTime
+        ).toString();
+      if (episodeCountEl)
+        episodeCountEl.textContent = episodeData.length.toString();
+      if (cacheStatusEl) cacheStatusEl.textContent = cacheStatus;
+      if (requestCountEl) requestCountEl.textContent = requestCount.toString();
+      if (audioCountEl) audioCountEl.textContent = audioCount.toString();
+      if (fallbackStatusEl)
+        fallbackStatusEl.textContent = fallbackUsed ? "YES" : "NO";
+      if (debugStatusEl && statusText) debugStatusEl.textContent = statusText;
+      if (audioStatusEl) audioStatusEl.textContent = audioStatus;
+    }
+
+    function renderEpisodes(list) {
+      const feedContainer = document.getElementById("podcastFeed");
+      const grid = document.getElementById("episodesGrid");
+      const maxEpisodes =
+        parseInt(feedContainer?.dataset?.maxEpisodes, 10) || 6;
+      const episodesToRender = list.slice(0, maxEpisodes);
+
+      audioCount = 0;
+      episodeData = episodesToRender;
+      if (grid) {
+        grid.innerHTML = episodesToRender
+          .map((episode, index) => createEpisodeCard(episode, index))
+          .join("");
+        episodesToRender.forEach((episode) => {
+          const playerId = "episode-" + slugify(episode.guid, episode.title);
+          const audioEl = document.getElementById("audio-" + playerId);
+          if (audioEl) {
+            const urlFromEpisode =
+              episode.audioUrl || audioByLink.get(episode.link);
+            if (urlFromEpisode) {
+              audioEl.src = urlFromEpisode;
+              audioEl.crossOrigin = "anonymous";
+              audioEl.preload = "metadata";
+            }
+          }
+        });
       }
-      const parsed = JSON.parse(cached);
-      if (!parsed || !Array.isArray(parsed.episodes) || !parsed.timestamp) {
-        cacheStatus = 'MISS';
-        return null;
-      }
-      if (Date.now() - parsed.timestamp > CACHE_TTL) {
-        cacheStatus = 'STALE';
+
+      updateDebugInfo(
+        "Rendered " + episodesToRender.length + " episode cards."
+      );
+      audioStatus = "idle";
+      const audioStatusEl = document.getElementById("audioStatus");
+      if (audioStatusEl) audioStatusEl.textContent = audioStatus;
+    }
+
+    function getCachedEpisodes() {
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (!cached) {
+          cacheStatus = "MISS";
+          return null;
+        }
+        const parsed = JSON.parse(cached);
+        if (!parsed || !Array.isArray(parsed.episodes) || !parsed.timestamp) {
+          cacheStatus = "MISS";
+          return null;
+        }
+        if (Date.now() - parsed.timestamp > CACHE_TTL) {
+          cacheStatus = "STALE";
+          return parsed.episodes;
+        }
+        cacheStatus = "HIT";
         return parsed.episodes;
+      } catch (e) {
+        cacheStatus = "MISS";
+        return null;
       }
-      cacheStatus = 'HIT';
-      return parsed.episodes;
-    } catch (e) {
-      cacheStatus = 'MISS';
-      return null;
     }
-  }
 
-  function saveEpisodesToCache(episodes) {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ episodes, timestamp: Date.now() }));
-    } catch (e) {
-      // ignore cache failure
+    function saveEpisodesToCache(episodes) {
+      try {
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({ episodes, timestamp: Date.now() })
+        );
+      } catch (e) {
+        // ignore cache failure
+      }
     }
-  }
 
-  function updateDescriptionFromFeed(text) {
-    const cleaned = trimDescription(cleanDescription(text));
-    if (!cleaned) return;
-    const descriptionEl = document.getElementById('podcastDescription');
-    if (descriptionEl) descriptionEl.textContent = cleaned;
-  }
-
-  function renderSpotifyEmbed() {
-    try {
-      const feed = document.getElementById('podcastFeed');
-      const url = feed?.dataset?.spotifyShowUrl;
-      const showIdMatch = (url || '').match(/open\.?.spotify\.com\/show\/([A-Za-z0-9]+)/);
-      if (!showIdMatch) return;
-      const mount = document.getElementById('spotifyEmbedMount');
-      if (!mount) return;
-      const iframe = document.createElement('iframe');
-      iframe.style.borderRadius = '12px';
-      iframe.style.border = '0';
-      iframe.width = '100%';
-      iframe.height = '152';
-      iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-      iframe.loading = 'lazy';
-      iframe.src = 'https://open.spotify.com/embed/show/' + showIdMatch[1] + '?utm_source=generator';
-      mount.innerHTML = '';
-      mount.appendChild(iframe);
-    } catch (e) {
-      // ignore embed failure
+    function updateDescriptionFromFeed(text) {
+      const cleaned = trimDescription(cleanDescription(text));
+      if (!cleaned) return;
+      const descriptionEl = document.getElementById("podcastDescription");
+      if (descriptionEl) descriptionEl.textContent = cleaned;
     }
-  }
 
-  async function fetchEpisodesFromFeed() {
-    const feed = document.getElementById('podcastFeed');
-    const feedUrl = feed?.dataset?.feedUrl;
-    if (!feedUrl) return null;
-    requestCount++;
-    updateDebugInfo('Fetching latest episodes from RSS feed...');
-  const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl), { signal: createTimeoutSignal(8000) });
-    if (!response.ok) throw new Error('Feed request failed');
-    const payload = await response.json();
-    const contents = payload?.contents || '';
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(contents, 'text/xml');
+    function renderSpotifyEmbed() {
+      try {
+        const feed = document.getElementById("podcastFeed");
+        const url = feed?.dataset?.spotifyShowUrl;
+        const showIdMatch = (url || "").match(
+          /open\.?.spotify\.com\/show\/([A-Za-z0-9]+)/
+        );
+        if (!showIdMatch) return;
+        const mount = document.getElementById("spotifyEmbedMount");
+        if (!mount) return;
+        const iframe = document.createElement("iframe");
+        iframe.style.borderRadius = "12px";
+        iframe.style.border = "0";
+        iframe.width = "100%";
+        iframe.height = "152";
+        iframe.allow =
+          "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+        iframe.loading = "lazy";
+        iframe.src =
+          "https://open.spotify.com/embed/show/" +
+          showIdMatch[1] +
+          "?utm_source=generator";
+        mount.innerHTML = "";
+        mount.appendChild(iframe);
+      } catch (e) {
+        // ignore embed failure
+      }
+    }
 
-    const channelDescription = xml.querySelector('channel > description')?.textContent?.trim();
-    if (channelDescription) updateDescriptionFromFeed(channelDescription);
+    async function fetchEpisodesFromFeed() {
+      const feed = document.getElementById("podcastFeed");
+      const feedUrl = feed?.dataset?.feedUrl;
+      if (!feedUrl) return null;
+      requestCount++;
+      updateDebugInfo("Fetching latest episodes from RSS feed...");
+      const response = await fetch(
+        "https://api.allorigins.win/get?url=" + encodeURIComponent(feedUrl),
+        { signal: createTimeoutSignal(8000) }
+      );
+      if (!response.ok) throw new Error("Feed request failed");
+      const payload = await response.json();
+      const contents = payload?.contents || "";
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(contents, "text/xml");
 
-    const imageFromFeed = xml.querySelector('channel > image > url')?.textContent?.trim();
-    if (imageFromFeed) {
-      FALLBACK_EPISODES.forEach((episode) => {
-        if (!episode.image) episode.image = imageFromFeed;
+      const channelDescription = xml
+        .querySelector("channel > description")
+        ?.textContent?.trim();
+      if (channelDescription) updateDescriptionFromFeed(channelDescription);
+
+      const imageFromFeed = xml
+        .querySelector("channel > image > url")
+        ?.textContent?.trim();
+      if (imageFromFeed) {
+        FALLBACK_EPISODES.forEach((episode) => {
+          if (!episode.image) episode.image = imageFromFeed;
+        });
+      }
+
+      const items = Array.from(xml.querySelectorAll("item"));
+      if (!items.length) throw new Error("Feed returned no episodes");
+
+      const episodes = items.map((item, index) => {
+        const title =
+          item.querySelector("title")?.textContent?.trim() || "New Episode";
+        const description =
+          item.querySelector("description")?.textContent || "";
+        const pubDate =
+          item.querySelector("pubDate")?.textContent?.trim() || "";
+        const link = item.querySelector("link")?.textContent?.trim() || "";
+        const guidRaw =
+          item.querySelector("guid")?.textContent?.trim() ||
+          link ||
+          "episode-" + index;
+        const enclosure = item.querySelector("enclosure");
+        const audioUrl = enclosure?.getAttribute("url") || "";
+        const itunesImageNode = item.querySelector("itunes\\:image");
+        const genericImageNode = item.querySelector("image");
+        let image = imageFromFeed || podcastImage;
+        if (
+          itunesImageNode &&
+          typeof itunesImageNode.getAttribute === "function"
+        ) {
+          image = itunesImageNode.getAttribute("href") || image;
+        } else if (genericImageNode && genericImageNode.textContent) {
+          image = genericImageNode.textContent.trim() || image;
+        }
+        if (link && audioUrl) audioByLink.set(link, audioUrl);
+        return {
+          title,
+          description,
+          pubDate,
+          link,
+          guid: slugify(guidRaw, title),
+          audioUrl,
+          image,
+        };
       });
+
+      return episodes;
     }
 
-    const items = Array.from(xml.querySelectorAll('item'));
-    if (!items.length) throw new Error('Feed returned no episodes');
-
-    const episodes = items.map((item, index) => {
-      const title = item.querySelector('title')?.textContent?.trim() || 'New Episode';
-      const description = item.querySelector('description')?.textContent || '';
-      const pubDate = item.querySelector('pubDate')?.textContent?.trim() || '';
-      const link = item.querySelector('link')?.textContent?.trim() || '';
-      const guidRaw = item.querySelector('guid')?.textContent?.trim() || link || ('episode-' + index);
-      const enclosure = item.querySelector('enclosure');
-      const audioUrl = enclosure?.getAttribute('url') || '';
-      const itunesImageNode = item.querySelector('itunes\\:image');
-      const genericImageNode = item.querySelector('image');
-      let image = imageFromFeed || podcastImage;
-      if (itunesImageNode && typeof itunesImageNode.getAttribute === 'function') {
-        image = itunesImageNode.getAttribute('href') || image;
-      } else if (genericImageNode && genericImageNode.textContent) {
-        image = genericImageNode.textContent.trim() || image;
-      }
-      if (link && audioUrl) audioByLink.set(link, audioUrl);
-      return {
-        title,
-        description,
-        pubDate,
-        link,
-        guid: slugify(guidRaw, title),
-        audioUrl,
-        image
-      };
-    });
-
-    return episodes;
-  }
-
-  async function hydrateEpisodes() {
-    if (hydrationPromise) return hydrationPromise;
-    hydrationPromise = (async () => {
-      try {
-        const episodes = await fetchEpisodesFromFeed();
-        if (!episodes || !episodes.length) return;
-        fallbackUsed = false;
-        cacheStatus = cacheStatus === 'STALE' ? 'REFRESH' : 'NETWORK';
-        saveEpisodesToCache(episodes);
-        renderEpisodes(episodes);
-        updateDebugInfo('Episodes refreshed from RSS feed.');
-      } catch (error) {
-        console.warn('Podcast feed refresh failed:', error);
-        updateDebugInfo('Using fallback data (RSS unavailable).');
-        fallbackUsed = true;
-        audioStatus = 'disabled';
-        const audioStatusEl = document.getElementById('audioStatus');
-        if (audioStatusEl) audioStatusEl.textContent = audioStatus;
-      } finally {
-        hydrationPromise = null;
-      }
-    })();
-    return hydrationPromise;
-  }
-
-  const previewTimers = new Map();
-  const previewListeners = new Map();
-
-  function clearPreview(playerId) {
-    try {
-      const timer = previewTimers.get(playerId);
-      if (timer) {
-        clearTimeout(timer);
-        previewTimers.delete(playerId);
-      }
-      const listener = previewListeners.get(playerId);
-      if (listener) {
-        const audio = document.getElementById('audio-' + playerId);
-        if (audio) audio.removeEventListener('timeupdate', listener);
-        previewListeners.delete(playerId);
-      }
-    } catch (e) {
-      // ignore cleanup failure
-    }
-  }
-
-  function ensureAudioSource(playerId) {
-    const container = document.getElementById('player-' + playerId);
-    const audioEl = document.getElementById('audio-' + playerId);
-    if (!container || !audioEl) return false;
-    if (audioEl.src) return true;
-    const link = container.dataset.episodeLink;
-    const mappedUrl = audioByLink.get(link);
-    if (mappedUrl) {
-      audioEl.src = mappedUrl;
-      audioEl.crossOrigin = 'anonymous';
-      audioEl.preload = 'metadata';
-      return true;
-    }
-    return false;
-  }
-
-  return {
-    previewAudio: async function(playerId, seconds) {
-      try {
-        const audio = document.getElementById('audio-' + playerId);
-        const btn = document.getElementById('playBtn-' + playerId);
-        const container = document.getElementById('player-' + playerId);
-        if (!audio || !btn || !container) return;
-
-        if (!ensureAudioSource(playerId)) {
-          await hydrateEpisodes();
-          if (!ensureAudioSource(playerId)) {
-            const titleEl = container.querySelector('.audio-title');
-            if (titleEl) titleEl.textContent = 'Audio not yet available';
-            return;
-          }
-        }
-
-        if (currentlyPlaying && currentlyPlaying !== playerId) {
-          this.stopAudio(currentlyPlaying);
-        }
-
-        if (!(isFinite(audio.duration) && audio.readyState >= 1)) {
-          await new Promise((resolve) => {
-            audio.addEventListener('loadedmetadata', resolve, { once: true });
-          });
-        }
-
-        const previewSec = Math.max(1, Number(seconds) || 15);
-        const guard = 1;
-        const duration = isFinite(audio.duration) ? audio.duration : 0;
-        const maxStart = Math.max(0, duration - previewSec - guard);
-        const start = maxStart > 0 ? Math.random() * maxStart : 0;
-
-        clearPreview(playerId);
-        audio.currentTime = start;
-        currentlyPlaying = playerId;
-        audioStatus = 'preview';
-        btn.classList.add('loading');
-        updateDebugInfo('Playing preview from ' + start.toFixed(1) + 's');
+    async function hydrateEpisodes() {
+      if (hydrationPromise) return hydrationPromise;
+      hydrationPromise = (async () => {
         try {
-          await audio.play();
-        } catch (e) {
-          this.onAudioError(playerId);
-          return;
+          const episodes = await fetchEpisodesFromFeed();
+          if (!episodes || !episodes.length) return;
+          fallbackUsed = false;
+          cacheStatus = cacheStatus === "STALE" ? "REFRESH" : "NETWORK";
+          saveEpisodesToCache(episodes);
+          renderEpisodes(episodes);
+          updateDebugInfo("Episodes refreshed from RSS feed.");
+        } catch (error) {
+          console.warn("Podcast feed refresh failed:", error);
+          updateDebugInfo("Using fallback data (RSS unavailable).");
+          fallbackUsed = true;
+          audioStatus = "disabled";
+          const audioStatusEl = document.getElementById("audioStatus");
+          if (audioStatusEl) audioStatusEl.textContent = audioStatus;
         } finally {
-          btn.classList.remove('loading');
+          hydrationPromise = null;
         }
+      })();
+      return hydrationPromise;
+    }
 
-        btn.classList.add('playing');
-        btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+    const previewTimers = new Map();
+    const previewListeners = new Map();
 
-        const stopAt = start + previewSec;
-        const endPreview = () => {
+    function clearPreview(playerId) {
+      try {
+        const timer = previewTimers.get(playerId);
+        if (timer) {
+          clearTimeout(timer);
+          previewTimers.delete(playerId);
+        }
+        const listener = previewListeners.get(playerId);
+        if (listener) {
+          const audio = document.getElementById("audio-" + playerId);
+          if (audio) audio.removeEventListener("timeupdate", listener);
+          previewListeners.delete(playerId);
+        }
+      } catch (e) {
+        // ignore cleanup failure
+      }
+    }
+
+    function ensureAudioSource(playerId) {
+      const container = document.getElementById("player-" + playerId);
+      const audioEl = document.getElementById("audio-" + playerId);
+      if (!container || !audioEl) return false;
+      if (audioEl.src) return true;
+      const link = container.dataset.episodeLink;
+      const mappedUrl = audioByLink.get(link);
+      if (mappedUrl) {
+        audioEl.src = mappedUrl;
+        audioEl.crossOrigin = "anonymous";
+        audioEl.preload = "metadata";
+        return true;
+      }
+      return false;
+    }
+
+    return {
+      previewAudio: async function (playerId, seconds) {
+        try {
+          const audio = document.getElementById("audio-" + playerId);
+          const btn = document.getElementById("playBtn-" + playerId);
+          const container = document.getElementById("player-" + playerId);
+          if (!audio || !btn || !container) return;
+
+          if (!ensureAudioSource(playerId)) {
+            await hydrateEpisodes();
+            if (!ensureAudioSource(playerId)) {
+              const titleEl = container.querySelector(".audio-title");
+              if (titleEl) titleEl.textContent = "Audio not yet available";
+              return;
+            }
+          }
+
+          if (currentlyPlaying && currentlyPlaying !== playerId) {
+            this.stopAudio(currentlyPlaying);
+          }
+
+          if (!(isFinite(audio.duration) && audio.readyState >= 1)) {
+            await new Promise((resolve) => {
+              audio.addEventListener("loadedmetadata", resolve, { once: true });
+            });
+          }
+
+          const previewSec = Math.max(1, Number(seconds) || 15);
+          const guard = 1;
+          const duration = isFinite(audio.duration) ? audio.duration : 0;
+          const maxStart = Math.max(0, duration - previewSec - guard);
+          const start = maxStart > 0 ? Math.random() * maxStart : 0;
+
           clearPreview(playerId);
-          audio.pause();
-          btn.classList.remove('playing', 'loading');
-          btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
-          if (currentlyPlaying === playerId) currentlyPlaying = null;
-          audioStatus = 'idle';
-          updateDebugInfo('Preview ended.');
-        };
+          audio.currentTime = start;
+          currentlyPlaying = playerId;
+          audioStatus = "preview";
+          btn.classList.add("loading");
+          updateDebugInfo("Playing preview from " + start.toFixed(1) + "s");
+          try {
+            await audio.play();
+          } catch (e) {
+            this.onAudioError(playerId);
+            return;
+          } finally {
+            btn.classList.remove("loading");
+          }
 
-        const onTimeUpdate = () => {
-          if (audio.currentTime >= stopAt || audio.ended) endPreview();
-        };
-        audio.addEventListener('timeupdate', onTimeUpdate);
-        previewListeners.set(playerId, onTimeUpdate);
-        const timer = setTimeout(endPreview, (previewSec + 2) * 1000);
-        previewTimers.set(playerId, timer);
-      } catch (error) {
-        console.error('previewAudio error:', error);
-      }
-    },
+          btn.classList.add("playing");
+          btn.innerHTML =
+            '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
 
-    toggleAudio: function(playerId) {
-      const audio = document.getElementById('audio-' + playerId);
-      const btn = document.getElementById('playBtn-' + playerId);
-      if (!audio || !btn) return;
-      if (!ensureAudioSource(playerId)) {
-        hydrateEpisodes();
-        updateDebugInfo('Attempting to fetch audio source...');
-        return;
-      }
-      if (currentlyPlaying && currentlyPlaying !== playerId) this.stopAudio(currentlyPlaying);
-      if (audio.paused) {
-        this.playAudio(playerId);
-      } else {
-        this.pauseAudio(playerId);
-      }
-    },
+          const stopAt = start + previewSec;
+          const endPreview = () => {
+            clearPreview(playerId);
+            audio.pause();
+            btn.classList.remove("playing", "loading");
+            btn.innerHTML =
+              '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+            if (currentlyPlaying === playerId) currentlyPlaying = null;
+            audioStatus = "idle";
+            updateDebugInfo("Preview ended.");
+          };
 
-    playAudio: function(playerId) {
-      const audio = document.getElementById('audio-' + playerId);
-      const btn = document.getElementById('playBtn-' + playerId);
-      if (!audio || !btn) return;
-      clearPreview(playerId);
-      currentlyPlaying = playerId;
-      audioStatus = 'playing';
-      btn.classList.add('loading');
-      audio.volume = 0.8;
-      audio.play().then(() => {
-        btn.classList.remove('loading');
-        btn.classList.add('playing');
-        btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
-        updateDebugInfo('Playing full episode audio.');
-      }).catch((err) => {
-        console.error('Audio play failed:', err);
-        this.onAudioError(playerId);
-      });
-    },
+          const onTimeUpdate = () => {
+            if (audio.currentTime >= stopAt || audio.ended) endPreview();
+          };
+          audio.addEventListener("timeupdate", onTimeUpdate);
+          previewListeners.set(playerId, onTimeUpdate);
+          const timer = setTimeout(endPreview, (previewSec + 2) * 1000);
+          previewTimers.set(playerId, timer);
+        } catch (error) {
+          console.error("previewAudio error:", error);
+        }
+      },
 
-    pauseAudio: function(playerId) {
-      const audio = document.getElementById('audio-' + playerId);
-      const btn = document.getElementById('playBtn-' + playerId);
-      if (!audio || !btn) return;
-      clearPreview(playerId);
-      audio.pause();
-      btn.classList.remove('playing', 'loading');
-      btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
-      audioStatus = 'paused';
-      updateDebugInfo('Audio paused.');
-    },
+      toggleAudio: function (playerId) {
+        const audio = document.getElementById("audio-" + playerId);
+        const btn = document.getElementById("playBtn-" + playerId);
+        if (!audio || !btn) return;
+        if (!ensureAudioSource(playerId)) {
+          hydrateEpisodes();
+          updateDebugInfo("Attempting to fetch audio source...");
+          return;
+        }
+        if (currentlyPlaying && currentlyPlaying !== playerId)
+          this.stopAudio(currentlyPlaying);
+        if (audio.paused) {
+          this.playAudio(playerId);
+        } else {
+          this.pauseAudio(playerId);
+        }
+      },
 
-    stopAudio: function(playerId) {
-      const audio = document.getElementById('audio-' + playerId);
-      const btn = document.getElementById('playBtn-' + playerId);
-      const progress = document.getElementById('progress-' + playerId);
-      const timeDisplay = document.getElementById('currentTime-' + playerId);
-      clearPreview(playerId);
-      if (audio) {
+      playAudio: function (playerId) {
+        const audio = document.getElementById("audio-" + playerId);
+        const btn = document.getElementById("playBtn-" + playerId);
+        if (!audio || !btn) return;
+        clearPreview(playerId);
+        currentlyPlaying = playerId;
+        audioStatus = "playing";
+        btn.classList.add("loading");
+        audio.volume = 0.8;
+        audio
+          .play()
+          .then(() => {
+            btn.classList.remove("loading");
+            btn.classList.add("playing");
+            btn.innerHTML =
+              '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+            updateDebugInfo("Playing full episode audio.");
+          })
+          .catch((err) => {
+            console.error("Audio play failed:", err);
+            this.onAudioError(playerId);
+          });
+      },
+
+      pauseAudio: function (playerId) {
+        const audio = document.getElementById("audio-" + playerId);
+        const btn = document.getElementById("playBtn-" + playerId);
+        if (!audio || !btn) return;
+        clearPreview(playerId);
         audio.pause();
-        audio.currentTime = 0;
-      }
-      if (btn) {
-        btn.classList.remove('playing', 'loading', 'error');
-        btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
-      }
-      if (progress) progress.style.width = '0%';
-      if (timeDisplay) timeDisplay.textContent = '0:00';
-      if (currentlyPlaying === playerId) currentlyPlaying = null;
-      audioStatus = 'idle';
-      updateDebugInfo('Audio stopped.');
-    },
+        btn.classList.remove("playing", "loading");
+        btn.innerHTML =
+          '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+        audioStatus = "paused";
+        updateDebugInfo("Audio paused.");
+      },
 
-    seekAudio: function(playerId, event) {
-      if (currentlyPlaying !== playerId) return;
-      const audio = document.getElementById('audio-' + playerId);
-      if (!audio || !audio.duration) return;
-      const rect = event.currentTarget.getBoundingClientRect();
-      const pct = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
-      audio.currentTime = pct * audio.duration;
-    },
+      stopAudio: function (playerId) {
+        const audio = document.getElementById("audio-" + playerId);
+        const btn = document.getElementById("playBtn-" + playerId);
+        const progress = document.getElementById("progress-" + playerId);
+        const timeDisplay = document.getElementById("currentTime-" + playerId);
+        clearPreview(playerId);
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+        if (btn) {
+          btn.classList.remove("playing", "loading", "error");
+          btn.innerHTML =
+            '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+        }
+        if (progress) progress.style.width = "0%";
+        if (timeDisplay) timeDisplay.textContent = "0:00";
+        if (currentlyPlaying === playerId) currentlyPlaying = null;
+        audioStatus = "idle";
+        updateDebugInfo("Audio stopped.");
+      },
 
-    setVolume: function(playerId, volume) {
-      const audio = document.getElementById('audio-' + playerId);
-      if (audio) audio.volume = (Number(volume) || 0) / 100;
-    },
+      seekAudio: function (playerId, event) {
+        if (currentlyPlaying !== playerId) return;
+        const audio = document.getElementById("audio-" + playerId);
+        if (!audio || !audio.duration) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        const pct = Math.max(
+          0,
+          Math.min(1, (event.clientX - rect.left) / rect.width)
+        );
+        audio.currentTime = pct * audio.duration;
+      },
 
-    onAudioLoaded: function(playerId) {
-      const durationEl = document.getElementById('duration-' + playerId);
-      const audio = document.getElementById('audio-' + playerId);
-      if (durationEl && audio && isFinite(audio.duration)) {
-        const minutes = Math.floor(audio.duration / 60);
-        const seconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
-        durationEl.textContent = minutes + ':' + seconds;
-      }
-    },
+      setVolume: function (playerId, volume) {
+        const audio = document.getElementById("audio-" + playerId);
+        if (audio) audio.volume = (Number(volume) || 0) / 100;
+      },
 
-    onTimeUpdate: function(playerId) {
-      if (currentlyPlaying !== playerId) return;
-      const audio = document.getElementById('audio-' + playerId);
-      const progress = document.getElementById('progress-' + playerId);
-      const timeDisplay = document.getElementById('currentTime-' + playerId);
-      if (audio && progress && timeDisplay && audio.duration) {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        progress.style.width = pct + '%';
-        const minutes = Math.floor(audio.currentTime / 60);
-        const seconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
-        timeDisplay.textContent = minutes + ':' + seconds;
-      }
-    },
+      onAudioLoaded: function (playerId) {
+        const durationEl = document.getElementById("duration-" + playerId);
+        const audio = document.getElementById("audio-" + playerId);
+        if (durationEl && audio && isFinite(audio.duration)) {
+          const minutes = Math.floor(audio.duration / 60);
+          const seconds = Math.floor(audio.duration % 60)
+            .toString()
+            .padStart(2, "0");
+          durationEl.textContent = minutes + ":" + seconds;
+        }
+      },
 
-    onAudioEnded: function(playerId) {
-      this.stopAudio(playerId);
-    },
+      onTimeUpdate: function (playerId) {
+        if (currentlyPlaying !== playerId) return;
+        const audio = document.getElementById("audio-" + playerId);
+        const progress = document.getElementById("progress-" + playerId);
+        const timeDisplay = document.getElementById("currentTime-" + playerId);
+        if (audio && progress && timeDisplay && audio.duration) {
+          const pct = (audio.currentTime / audio.duration) * 100;
+          progress.style.width = pct + "%";
+          const minutes = Math.floor(audio.currentTime / 60);
+          const seconds = Math.floor(audio.currentTime % 60)
+            .toString()
+            .padStart(2, "0");
+          timeDisplay.textContent = minutes + ":" + seconds;
+        }
+      },
 
-    onAudioError: function(playerId) {
-      const btn = document.getElementById('playBtn-' + playerId);
-      const title = document.querySelector('#player-' + playerId + ' .audio-title');
-      if (btn) {
-        btn.classList.remove('loading', 'playing');
-        btn.classList.add('error');
-      }
-      if (title) title.textContent = 'Audio unavailable';
-      audioStatus = 'error';
-      if (currentlyPlaying === playerId) currentlyPlaying = null;
-      updateDebugInfo('Audio error encountered.');
-    },
+      onAudioEnded: function (playerId) {
+        this.stopAudio(playerId);
+      },
 
-    toggleDebug: function() {
-      debugActive = !debugActive;
-      const panel = document.getElementById('debugPanel');
-      if (debugActive && !panel) {
-        // Lazy-load debug panel when first activated
-        this.createDebugPanel();
-      } else if (panel) {
-        panel.classList.toggle('active', debugActive);
-      }
-      updateDebugInfo(debugActive ? 'Debug panel enabled.' : 'Debug panel hidden.');
-    },
+      onAudioError: function (playerId) {
+        const btn = document.getElementById("playBtn-" + playerId);
+        const title = document.querySelector(
+          "#player-" + playerId + " .audio-title"
+        );
+        if (btn) {
+          btn.classList.remove("loading", "playing");
+          btn.classList.add("error");
+        }
+        if (title) title.textContent = "Audio unavailable";
+        audioStatus = "error";
+        if (currentlyPlaying === playerId) currentlyPlaying = null;
+        updateDebugInfo("Audio error encountered.");
+      },
 
-    createDebugPanel: function() {
-      const debugPanel = document.createElement('div');
-      debugPanel.id = 'debugPanel';
-      debugPanel.className = 'debug-panel active';
-      debugPanel.innerHTML = `
+      toggleDebug: function () {
+        debugActive = !debugActive;
+        const panel = document.getElementById("debugPanel");
+        if (debugActive && !panel) {
+          // Lazy-load debug panel when first activated
+          this.createDebugPanel();
+        } else if (panel) {
+          panel.classList.toggle("active", debugActive);
+        }
+        updateDebugInfo(
+          debugActive ? "Debug panel enabled." : "Debug panel hidden."
+        );
+      },
+
+      createDebugPanel: function () {
+        const debugPanel = document.createElement("div");
+        debugPanel.id = "debugPanel";
+        debugPanel.className = "debug-panel active";
+        debugPanel.innerHTML = `
         <h4 style="margin:0 0 8px;font-size:12px;color:var(--accent);font-weight:700;">Podcast Debug</h4>
         <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:6px;">
           <div><strong>Load Time:</strong> <span id="loadTime">--</span>ms</div>
@@ -1005,52 +1283,52 @@ window.PodcastWidget = (function() {
           <button class="dbg-btn" onclick="PodcastWidget.clearCache()">Clear Cache</button>
         </div>
       `;
-      document.getElementById('podcastFeed').appendChild(debugPanel);
-    },
+        document.getElementById("podcastFeed").appendChild(debugPanel);
+      },
 
-    init: function() {
-      const feed = document.getElementById('podcastFeed');
-      const joinButton = document.getElementById('podcastJoinButton');
-      const calendlyUrl = feed?.dataset?.calendlyUrl?.trim();
-      if (joinButton) {
-        if (calendlyUrl) {
-          joinButton.href = calendlyUrl;
-        } else {
-          joinButton.remove();
-        }
-      }
-      const descriptionEl = document.getElementById('podcastDescription');
-      if (descriptionEl && feed?.dataset?.podcastDescription) {
-        descriptionEl.textContent = feed.dataset.podcastDescription;
-      }
-      if (feed?.dataset?.spotifyEmbed === 'true') renderSpotifyEmbed();
-
-      const cached = getCachedEpisodes();
-      if (cached && cached.length) {
-        fallbackUsed = false;
-        renderEpisodes(cached);
-        audioStatus = 'idle';
-        updateDebugInfo('Loaded episodes from cache.');
-      } else {
-        fallbackUsed = true;
-        renderEpisodes(FALLBACK_EPISODES);
-        // Populate audio URLs for fallback episodes
-        FALLBACK_EPISODES.forEach(episode => {
-          if (episode.link && episode.audioUrl) {
-            audioByLink.set(episode.link, episode.audioUrl);
+      init: function () {
+        const feed = document.getElementById("podcastFeed");
+        const joinButton = document.getElementById("podcastJoinButton");
+        const calendlyUrl = feed?.dataset?.calendlyUrl?.trim();
+        if (joinButton) {
+          if (calendlyUrl) {
+            joinButton.href = calendlyUrl;
+          } else {
+            joinButton.remove();
           }
-        });
-        updateDebugInfo('Showing fallback episodes while RSS loads.');
-      }
+        }
+        const descriptionEl = document.getElementById("podcastDescription");
+        if (descriptionEl && feed?.dataset?.podcastDescription) {
+          descriptionEl.textContent = feed.dataset.podcastDescription;
+        }
+        if (feed?.dataset?.spotifyEmbed === "true") renderSpotifyEmbed();
 
-      hydrateEpisodes();
-    }
-  };
-})();
+        const cached = getCachedEpisodes();
+        if (cached && cached.length) {
+          fallbackUsed = false;
+          renderEpisodes(cached);
+          audioStatus = "idle";
+          updateDebugInfo("Loaded episodes from cache.");
+        } else {
+          fallbackUsed = true;
+          renderEpisodes(FALLBACK_EPISODES);
+          // Populate audio URLs for fallback episodes
+          FALLBACK_EPISODES.forEach((episode) => {
+            if (episode.link && episode.audioUrl) {
+              audioByLink.set(episode.link, episode.audioUrl);
+            }
+          });
+          updateDebugInfo("Showing fallback episodes while RSS loads.");
+        }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => PodcastWidget.init());
-} else {
-  PodcastWidget.init();
-}
+        hydrateEpisodes();
+      },
+    };
+  })();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => PodcastWidget.init());
+  } else {
+    PodcastWidget.init();
+  }
 </script>

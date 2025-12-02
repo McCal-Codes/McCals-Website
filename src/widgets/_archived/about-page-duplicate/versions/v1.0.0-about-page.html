@@ -3,7 +3,8 @@
   <style>
     /* About Page Widget Styles */
     .about-page-widget {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        sans-serif;
       max-width: 100%;
       margin: 0 auto;
       line-height: 1.6;
@@ -20,8 +21,8 @@
       --mc-line: #272423;
       --mc-accent: #5fd4f0;
       --mc-accent-black: #272423;
-      --mc-accent-taupe: #B8B0AA;
-      --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #B8B0AA 100%);
+      --mc-accent-taupe: #b8b0aa;
+      --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #b8b0aa 100%);
       --mc-success: #00d4aa;
     }
 
@@ -226,25 +227,61 @@
 
     <div class="about-page-content">
       <div class="about-page-photo">
-        <img src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg" alt="Caleb McCartney - Professional Photographer and Photojournalist">
+        <img
+          src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
+          alt="Caleb McCartney - Professional Photographer and Photojournalist"
+          loading="lazy"
+        />
       </div>
 
       <div class="about-page-text">
         <p>
-          Caleb McCartney is a Pittsburgh-based photojournalist and commercial storyteller, and a proud alumni of Point Park University's BFA in Photography program. As a freelance photographer and photojournalist, he has served as The Globe's photo editor over the last fall, working with more clients into the summer and even collaborating on a project out in Kentucky.
+          Caleb McCartney is a Pittsburgh-based photojournalist and commercial
+          storyteller, and a proud alumni of Point Park University's BFA in
+          Photography program. As a freelance photographer and photojournalist,
+          he has served as The Globe's photo editor over the last fall, working
+          with more clients into the summer and even collaborating on a project
+          out in Kentucky.
         </p>
 
         <p>
-          Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage, corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he broadened his skill set by joining Pittsburgh production company <a href="https://wearecovalent.com/" target="_blank" rel="noopener" aria-label="Covalent website">Covalent</a> as a Creative Production Intern, collaborating on projects that blend stills, motion, and sound.
+          Caleb leads <strong>McCal Media</strong>, the studio he founded to
+          craft event coverage, corporate campaigns, and brand visuals rooted in
+          authentic human connection. In 2025 he broadened his skill set by
+          joining Pittsburgh production company
+          <a
+            href="https://wearecovalent.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Covalent website"
+            >Covalent</a
+          >
+          as a Creative Production Intern, collaborating on projects that blend
+          stills, motion, and sound.
         </p>
 
         <p>
-          He also hosts the weekly podcast <a href="/podcast" aria-label="Caffeinated Connections podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
+          He also hosts the weekly podcast
+          <a href="/podcast" aria-label="Caffeinated Connections podcast"
+            >"Caffeinated Connections,"</a
+          >
+          where he chats over coffee with creators and industry pros about
+          turning ideas into impact.
         </p>
 
         <div class="about-page-buttons">
-          <a href="/" class="about-page-btn about-page-btn-primary" aria-label="View Caleb's photography portfolio">View My Work</a>
-          <a href="/contact" class="about-page-btn about-page-btn-secondary" aria-label="Contact Caleb for photography services">Get In Touch</a>
+          <a
+            href="/"
+            class="about-page-btn about-page-btn-primary"
+            aria-label="View Caleb's photography portfolio"
+            >View My Work</a
+          >
+          <a
+            href="/contact"
+            class="about-page-btn about-page-btn-secondary"
+            aria-label="Contact Caleb for photography services"
+            >Get In Touch</a
+          >
         </div>
       </div>
     </div>
@@ -252,8 +289,8 @@
 
   <script>
     // About Page Widget JavaScript
-    (function() {
-      'use strict';
+    (function () {
+      "use strict";
 
       class AboutPageWidget {
         constructor(widgetElement) {
@@ -269,12 +306,12 @@
 
         setupAnalytics() {
           // Track button clicks for analytics
-          const buttons = this.widget.querySelectorAll('.about-page-btn');
-          buttons.forEach(button => {
-            button.addEventListener('click', (e) => {
-              this.trackEvent('about_button_click', {
+          const buttons = this.widget.querySelectorAll(".about-page-btn");
+          buttons.forEach((button) => {
+            button.addEventListener("click", (e) => {
+              this.trackEvent("about_button_click", {
                 button: e.target.textContent.trim(),
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
               });
             });
           });
@@ -283,16 +320,16 @@
         setupAccessibility() {
           // Ensure proper focus management and ARIA labels
           const links = this.widget.querySelectorAll('a[target="_blank"]');
-          links.forEach(link => {
-            if (!link.hasAttribute('rel')) {
-              link.setAttribute('rel', 'noopener');
+          links.forEach((link) => {
+            if (!link.hasAttribute("rel")) {
+              link.setAttribute("rel", "noopener");
             }
           });
         }
 
         trackEvent(eventType, data) {
           // Placeholder for analytics integration
-          console.log('Event tracked:', eventType, data);
+          console.log("Event tracked:", eventType, data);
 
           // TODO: Implement proper analytics tracking
           // gtag('event', eventType, data);
@@ -301,14 +338,14 @@
 
       // Initialize widget when DOM is ready
       function initWidget() {
-        const widget = document.querySelector('.about-page-widget');
+        const widget = document.querySelector(".about-page-widget");
         if (widget) {
           new AboutPageWidget(widget);
         }
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initWidget);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initWidget);
       } else {
         initWidget();
       }

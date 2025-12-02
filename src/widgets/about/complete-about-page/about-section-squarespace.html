@@ -7,7 +7,8 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+      sans-serif;
     line-height: 1.6;
     color: #e5e5e5;
   }
@@ -26,11 +27,11 @@
 
   .ss-about-bio {
     padding: 60px 0;
-    background: rgba(15,15,15,0.6);
+    background: rgba(15, 15, 15, 0.6);
     backdrop-filter: blur(20px);
     margin: 30px 0;
     border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .ss-about-content {
@@ -51,7 +52,7 @@
     width: 100%;
     max-width: 300px;
     border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     filter: contrast(1.1) brightness(1.05);
   }
 
@@ -69,7 +70,7 @@
   .ss-about-text a {
     color: #ffffff;
     text-decoration: underline;
-    text-decoration-color: rgba(255,255,255,0.4);
+    text-decoration-color: rgba(255, 255, 255, 0.4);
   }
 
   .ss-about-text strong {
@@ -93,26 +94,30 @@
   }
 
   .ss-about-btn-primary {
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
     color: white;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .ss-about-btn-secondary {
     background: transparent;
     color: #e0e0e0;
-    border: 2px solid rgba(255,255,255,0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
   }
 
   /* Reviews Section */
   .ss-reviews-section {
     padding: 50px 0;
-    background: rgba(15,15,15,0.4);
+    background: rgba(15, 15, 15, 0.4);
     backdrop-filter: blur(20px);
     margin: 30px 0;
     border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .ss-reviews-content {
@@ -140,13 +145,17 @@
   }
 
   .ss-review-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
     padding: 25px;
     border-radius: 12px;
     margin: 0;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
   .ss-review-platform {
@@ -164,8 +173,12 @@
     color: white;
   }
 
-  .ss-platform-linkedin { background: #0077b5; }
-  .ss-platform-google { background: #4285f4; }
+  .ss-platform-linkedin {
+    background: #0077b5;
+  }
+  .ss-platform-google {
+    background: #4285f4;
+  }
 
   .ss-review-stars {
     color: #ffd700;
@@ -196,7 +209,7 @@
 
   .ss-reviews-cta {
     padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .ss-reviews-rating {
@@ -210,7 +223,11 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: linear-gradient(135deg, rgba(66,133,244,0.8) 0%, rgba(66,133,244,0.6) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(66, 133, 244, 0.8) 0%,
+      rgba(66, 133, 244, 0.6) 100%
+    );
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -218,7 +235,7 @@
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
   }
 
@@ -255,7 +272,8 @@
       min-width: 120px;
     }
 
-    .ss-about-bio, .ss-reviews-section {
+    .ss-about-bio,
+    .ss-reviews-section {
       padding: 40px 0;
       margin: 20px 0;
     }
@@ -283,7 +301,8 @@
       font-size: 1.3rem;
     }
 
-    .ss-about-bio, .ss-reviews-section {
+    .ss-about-bio,
+    .ss-reviews-section {
       padding: 30px 0;
       margin: 15px 0;
     }
@@ -306,34 +325,74 @@
       <!-- Photo -->
       <div class="ss-about-photo">
         <!-- GitHub raw URL for profile photo -->
-        <img src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg" 
-             alt="Caleb McCartney - Professional Photographer">
+        <img
+          src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
+          alt="Caleb McCartney - Professional Photographer"
+          loading="lazy"
+        />
       </div>
-      
+
       <!-- Bio Text -->
       <div class="ss-about-text">
         <p>
-          Caleb McCartney is a Pittsburgh‑based photojournalist and commercial storyteller who is finishing a BFA in Photography at <a href="https://pointpark.edu" target="_blank" rel="noopener">Point Park University</a>. After serving as Photo Editor of <a href="https://ppuglobe.com" target="_blank" rel="noopener">The Globe</a> for several months, he stepped back in March 2025 to devote full focus to his capstone thesis, <strong>"One Nation Divided,"</strong> a visual study of political polarization during the 2024 election cycle.
+          Caleb McCartney is a Pittsburgh‑based photojournalist and commercial
+          storyteller who is finishing a BFA in Photography at
+          <a href="https://pointpark.edu" target="_blank" rel="noopener"
+            >Point Park University</a
+          >. After serving as Photo Editor of
+          <a href="https://ppuglobe.com" target="_blank" rel="noopener"
+            >The Globe</a
+          >
+          for several months, he stepped back in March 2025 to devote full focus
+          to his capstone thesis, <strong>"One Nation Divided,"</strong> a
+          visual study of political polarization during the 2024 election cycle.
         </p>
-        
+
         <p>
-          Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage, corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he broadened his skill set by joining Pittsburgh production company <a href="https://wearecovalent.com/" target="_blank" rel="noopener">Covalent</a> as a Creative Production Intern, collaborating on projects that blend stills, motion, and sound.
+          Caleb leads <strong>McCal Media</strong>, the studio he founded to
+          craft event coverage, corporate campaigns, and brand visuals rooted in
+          authentic human connection. In 2025 he broadened his skill set by
+          joining Pittsburgh production company
+          <a href="https://wearecovalent.com/" target="_blank" rel="noopener"
+            >Covalent</a
+          >
+          as a Creative Production Intern, collaborating on projects that blend
+          stills, motion, and sound.
         </p>
-        
+
         <p>
-          He also hosts the weekly podcast <a href="/podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
+          He also hosts the weekly podcast
+          <a href="/podcast">"Caffeinated Connections,"</a> where he chats over
+          coffee with creators and industry pros about turning ideas into
+          impact.
         </p>
-        
+
         <div class="ss-about-buttons">
-          <a href="mailto:contact@mcc-cal.com" class="ss-about-btn ss-about-btn-primary">
+          <a
+            href="mailto:contact@mcc-cal.com"
+            class="ss-about-btn ss-about-btn-primary"
+          >
             Get In Touch
           </a>
           <!-- GitHub raw URL for resume download -->
-          <a href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/caleb-mccartney-resume.pdf" download="Caleb-McCartney-Resume-August-2025.pdf" class="ss-about-btn ss-about-btn-secondary">
+          <a
+            href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/caleb-mccartney-resume.pdf"
+            download="Caleb-McCartney-Resume-August-2025.pdf"
+            class="ss-about-btn ss-about-btn-secondary"
+          >
             📄 Resume
           </a>
           <!-- CV temporarily offline -->
-          <a href="#" onclick="alert('CV coming soon! Currently being updated.'); return false;" class="ss-about-btn ss-about-btn-secondary" style="opacity: 0.6; color: #a0a0a0; border-color: rgba(255,255,255,0.2);">
+          <a
+            href="#"
+            onclick="alert('CV coming soon! Currently being updated.'); return false;"
+            class="ss-about-btn ss-about-btn-secondary"
+            style="
+              opacity: 0.6;
+              color: #a0a0a0;
+              border-color: rgba(255, 255, 255, 0.2);
+            "
+          >
             📋 CV (Offline)
           </a>
           <a href="/work" class="ss-about-btn ss-about-btn-secondary">
@@ -348,34 +407,46 @@
   <div class="ss-reviews-section">
     <div class="ss-reviews-content">
       <h2 class="ss-reviews-title">What Clients Say</h2>
-      
+
       <div class="ss-reviews-grid">
         <!-- LinkedIn Review -->
         <blockquote class="ss-review-card">
           <div class="ss-review-platform">
             <div class="ss-platform-badge ss-platform-linkedin">LinkedIn</div>
           </div>
-          <p class="ss-review-text">"Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress."</p>
+          <p class="ss-review-text">
+            "Caleb is great to work with, always prompt and professional. His
+            work speaks for itself. A hard working and talented young man sure
+            to impress."
+          </p>
           <cite class="ss-review-author">— Logan Spiker</cite>
           <div class="ss-review-title">Former Argo AI, Business Owner</div>
         </blockquote>
-        
+
         <!-- Google Review -->
         <blockquote class="ss-review-card">
           <div class="ss-review-platform">
             <div class="ss-platform-badge ss-platform-google">Google</div>
           </div>
           <div class="ss-review-stars">★★★★★</div>
-          <p class="ss-review-text">"Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it."</p>
+          <p class="ss-review-text">
+            "Caleb is an incredibly talented photographer. I'm always blown away
+            by the quality of his work—so is everyone who sees it."
+          </p>
           <cite class="ss-review-author">— Ben Orr</cite>
           <div class="ss-review-title">Concert Photography Client</div>
         </blockquote>
       </div>
-      
+
       <!-- Review CTA -->
       <div class="ss-reviews-cta">
         <p class="ss-reviews-rating">⭐ 5.0 Star Rating on Google</p>
-        <a href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8" target="_blank" rel="noopener" class="ss-reviews-btn">
+        <a
+          href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8"
+          target="_blank"
+          rel="noopener"
+          class="ss-reviews-btn"
+        >
           📍 View All Reviews
         </a>
       </div>
