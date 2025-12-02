@@ -1,0 +1,54 @@
+PREVIEW KEY ROTATION REQUIRED
+================================
+
+The following preview keys were exposed in commit history and must be rotated:
+
+OLD KEYS (COMPROMISED - DO NOT USE):
+- These were in sites/self-hosted-nextjs/.next/cache/.previewinfo
+- Exact values removed from repo but may exist in git history
+
+NEW KEYS (GENERATED 2025-12-01):
+================================
+
+PREVIEW_MODE_SIGNING_KEY=B+ClnsuCbBN9hl3QmMic5rTPSZ9kARbqi1a8hEl1vMo=
+PREVIEW_MODE_ENCRYPTION_KEY=rzR/MiOjZCpc2jBWPv4Ngo52qweHWFwD5RSRdGWdm9Y=
+
+ROTATION STEPS:
+===============
+
+1. Vercel/Netlify/Hosting Dashboard:
+   - Go to your project environment variables
+   - Update or create:
+     * PREVIEW_MODE_SIGNING_KEY
+     * PREVIEW_MODE_ENCRYPTION_KEY
+   - Use the NEW KEYS above
+   - Redeploy the application
+
+2. Local .env (if you have one):
+   - Update your local .env file with new keys
+   - Never commit .env to git
+
+3. Delete this file after rotation:
+   rm SECURITY-ROTATION.txt
+   git add SECURITY-ROTATION.txt
+   git commit -m "chore: remove key rotation file after rotation complete"
+
+4. Verify rotation worked:
+   - Test preview mode on your site
+   - Confirm old preview URLs no longer work
+   - Generate new preview URL and test
+
+SECURITY NOTE:
+==============
+These keys were generated using openssl rand -base64 32
+They are cryptographically secure 256-bit keys.
+Do NOT share these keys in chat, PRs, or public channels.
+Store them only in secure environment variable systems.
+
+History cleanup (optional but recommended):
+===========================================
+To permanently remove exposed keys from git history:
+  git filter-repo --path sites/self-hosted-nextjs/.next --invert-paths
+  git push --force --all
+
+This requires coordination with all collaborators.

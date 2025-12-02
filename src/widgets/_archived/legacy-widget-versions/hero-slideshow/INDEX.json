@@ -1,0 +1,17 @@
+{
+  "widget": "hero-slideshow",
+  "description": "Archived legacy versions of the hero slideshow widget",
+  "versions": [
+    {
+      "version": "1.5",
+      "file": "versions/hero slideshow 1.5",
+      "date": "2024",
+      "summary": "Early hero slideshow implementation, superseded by v1.1.0 with proper versioning and accessibility improvements"
+    }
+  ],
+  "notes": [
+    "Active versions (current + previous stable) are in src/widgets/hero-slideshow/versions/",
+    "Current version as of 2025-12: v1.2.0",
+    "Previous stable: v1.1.0"
+  ]
+}
