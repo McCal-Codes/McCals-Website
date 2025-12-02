@@ -2,15 +2,30 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.8.1 — 2025-12-02 (Modernization, Mobile Spotify Preview)
+
+### Non-invasive modernization + UX refinements
+
+- **PRESERVE**: Retains all v4.7.1 working logic (manifest loading, URL building, lightbox, Spotify panel)
+- **MODERNIZE**: CSS tokens and BEM-friendly naming polish; minor JS syntax cleanup (const/let, arrow functions)
+- **SPOTIFY**: Preview embed improvements — centered, full-row width under artist row
+- **RESPONSIVE**: Mobile heights increased (196px desktop, 208px ≤768px, 224px ≤480px)
+- **ARTIST MAP**: Inline JSON `spotifyArtistMap` example added (Heading North, Dream the Heavy)
+- **DOCS**: README updated; v4.8.0 deprecated
+
 ## v4.7.1 — 2025-11-21 (Optional API)
+
 ### API-first with graceful fallback
+
 - **NEW**: Optional API loading. Set `data-api="on"` to fetch the manifest from `/api/v1/manifests/concert`.
 - **FALLBACK**: If the API is unreachable or returns an unexpected shape, the widget falls back to GitHub Raw `src/images/Portfolios/Concert/concert-manifest.json`.
 - **NO UX CHANGE**: Layout, performance optimizations, and Spotify support from v4.7 remain unchanged.
 - **DOCS**: README updated with usage notes and dev proxy guidance.
 
 ## v4.7 — 2025-11-02 (Artist Support — Spotify)
+
 ### Audience Support & UX ❤️🎵
+
 - **NEW**: Non-intrusive floating button to support artists with Spotify integration
 - **AUTO**: Lists bands directly from `concert-manifest.json`
 - **SEARCH**: One-click “Open on Spotify” search links (no API keys required)
@@ -18,17 +33,22 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **LAZY**: Embeds are lazy-loaded on demand to preserve performance
 - **A11Y**: Keyboard accessible, semantic roles, respects lightbox layering
 - **PERF**: Retains all v4.6 performance optimizations
- - **REFINE**: Deduplicates artists by name (case-insensitive) to avoid duplicate entries
- - **SAFETY**: Spotify button is temporarily disabled while interacting with images (hover/drag/touch or lightbox open) to prevent accidental clicks
+- **REFINE**: Deduplicates artists by name (case-insensitive) to avoid duplicate entries
+- **SAFETY**: Spotify button is temporarily disabled while interacting with images (hover/drag/touch or lightbox open) to prevent accidental clicks
 
 ## v4.8 — 2025-11-04 (Manifest Simplification)
+
 ### Simplify manifest strategy
+
 - **CHANGE**: Portfolio manifests simplified to a single aggregated manifest per portfolio (e.g., `concert-manifest.json`).
 - **DEPRECATE**: Per-folder `manifest.json` files are now deprecated and removed by automation; the aggregated manifest is canonical for widgets and CI.
 - **TOOLING**: Manifest generators updated to produce only portfolio-level manifests; cleanup script added to remove subfolder manifests.
+- **NOTE**: v4.8.0 modernization attempt superseded by v4.8.1; use v4.8.1 for current embed.
 
 ## v4.6 — 2025-10-06 (Performance Optimized - Production Ready)
+
 ### Performance Optimizations 🚀
+
 - **CRITICAL**: Separated critical CSS from non-critical styles for faster initial render
 - **OPTIMIZED**: Modern JavaScript with async patterns and reduced main-thread blocking
 - **IMPROVED**: Font loading with `font-display: swap` for better performance
@@ -38,7 +58,9 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **RETAINED**: All v4.5 SEO features and v4.4 UX enhancements
 
 ## v4.5 — 2025-10-06 (SEO Enhanced - Work in Progress)
+
 ### SEO and Accessibility Improvements 🎯
+
 - **ENHANCED**: Alt text generation using manifest data for descriptive, keyword-rich attributes
 - **NEW**: JSON-LD structured data with Schema.org markup for search engines
 - **IMPROVED**: Lazy loading with proper `loading` attributes and `fetchpriority` settings
@@ -47,9 +69,11 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **RETAINED**: All v4.4 UX enhancements (lightbox improvements, navigation hiding)
 
 ## v4.4 — 2025-10-05
+
 ### Enhanced UX Patterns from Journalism Widget 🎨
+
 - **FIXED**: Lightbox image stretching with `object-fit: contain` and proper centering
-- **NEW**: Hidden scrollbars in lightbox gallery for immersive viewing experience  
+- **NEW**: Hidden scrollbars in lightbox gallery for immersive viewing experience
 - **ENHANCED**: Navigation hiding with comprehensive selectors during lightbox
 - **IMPROVED**: Close button with fixed positioning and better accessibility
 - **NEW**: Version indicator integrated into heading with enhanced styling
@@ -57,14 +81,18 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **RETAINED**: All v4.3 optimizations (caching, auto-refresh, single API call)
 
 ## v4.3 — 2025-09-23
+
 ### Images-first path + fallback 🔧
+
 - Prefer `images/Portfolios/Concert/` with automatic fallback to `src/images/Portfolios/Concert/`
 - Cache selected basePath alongside manifest for consistent image URLs
 - Fix: define `nextRefreshTimer` to avoid unload-time reference errors
 - Retains all v4.2 optimizations (single API call, 10-min cache, 15-min auto-refresh)
 
 ## v4.2 — 2025-09-23
+
 ### GitHub Path Fix & Organization 🗂️
+
 - **CRITICAL FIX**: Updated GitHub API paths after repository reorganization
   - Changed from `images/Portfolios/Concert/` to `src/images/Portfolios/Concert/`
   - Fixed manifest URL: `src/images/Portfolios/Concert/concert-manifest.json`
@@ -74,7 +102,9 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **COMPATIBLE**: Maintains all v4.2 features (API optimization, caching, auto-refresh)
 
 ## v3.6 — 2025-09-19
+
 ### Stable Auto-Refresh & Individual Manifests 🔄
+
 - **NEW**: Individual manifest.json generation for each band/date folder
 - **NEW**: Auto-refresh capability with 5-minute intervals for live updates
 - **NEW**: Enhanced individual manifest generator script with intelligent date detection
@@ -88,7 +118,9 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **IMPROVED**: Version management with incremental updates
 
 ## v3.1 — 2025-09-19
+
 ### Version Management & Documentation 📝
+
 - **NEW**: Complete v3.0 version files with Universal Caption System integration
   - `versions/v3.0-universal-captions.html` - Production-ready UCS implementation
   - `versions/v3.0-debug-simple.html` - Debug version with performance monitoring
@@ -97,7 +129,9 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **IMPROVED**: Documentation structure for better developer experience
 
 ## v3.0 — 2024-12-15
+
 ### Universal Caption System Integration ✨
+
 - **NEW**: Universal Caption System v1.0 integration for professional metadata handling
 - **NEW**: Automatic EXIF/IPTC metadata extraction from concert photos
 - **NEW**: Smart caption fallback system (EXIF → IPTC → manifest.json → filename)
@@ -113,7 +147,9 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **IMPROVED**: Debug mode with Universal Caption System performance metrics
 
 ## v2.2 — 2025-09-16
+
 ### Performance Revolution 🚀
+
 - **NEW**: Shared portfolio API backend with intelligent caching and request deduplication
 - **NEW**: Advanced EXIF parsing with 60% faster date extraction
 - **NEW**: Progressive image loading with intersection observer
@@ -131,10 +167,12 @@ All notable changes to the Squarespace concert portfolio snippet.
 - **IMPROVED**: Memory usage optimization through request pooling
 
 ## v2.1 — 2025-09-16
+
 - Auto date now prioritizes EXIF DateTimeOriginal from images (earliest of up to 3 samples)
 - Fallback order: manifest.date → EXIF → latest commit date
 
 ## v2.0 — 2025-09-16
+
 - Natural-height masonry via CSS columns (no cropping)
 - Auto date support: manifest.date or latest GitHub commit date
 - Target panes via data-panes on wrapper (default 12)
@@ -143,6 +181,7 @@ All notable changes to the Squarespace concert portfolio snippet.
 - Meta shows “Live · Sep 2025” style month-year
 
 ## v1.0 — 2025-09-15
+
 - Initial grid-based gallery and lightbox
 - GitHub API fetch for folders and images
 - Basic styling and interactions
@@ -150,15 +189,18 @@ All notable changes to the Squarespace concert portfolio snippet.
 // ...existing code...
 
 ## 4.4.0 — 2025-09-29
+
 - Added versions/v4.4-unified.html using shared theme and unified manifest loader.
 - Backward-compatible; older versions untouched.
 
-
 ## 4.4.1 — 2025-09-29
+
 - Updated v4.4 unified view with new card layout, eyebrow dates, and venue stack to echo the live Concert page design.
 
 ## 4.4.2 — 2025-09-30
+
 - Shifted the v4.4 unified overlay to display titles and dates directly on the imagery with a monochrome gradient treatment.
 
 ## 4.4.3 — 2025-09-30
+
 - Refined the v4.4 unified gallery with shuffled ordering, full-width concert art, and stacked captions beneath each image.

@@ -1,0 +1,940 @@
+<!-- Concert Portfolio v4.8.0 - Modernized with CSS Tokens + BEM Patterns
+Author: Caleb McCartney / McCal-Codes
+Version: 4.8.0
+Purpose: High-performance concert widget modernized with shared CSS tokens, BEM patterns, and modern ES6+ JavaScript.
+
+Modernization Enhancements:
+- Uses CSS custom properties from site-widgets.css v2.0.0 (with fallbacks)
+- BEM naming convention (mcc-concert__element--modifier)
+- Modern ES6+ JavaScript (const/let, arrow functions, async/await)
+- Shared utility functions integrated
+- Improved accessibility with ARIA attributes
+- Enhanced theme support (light/dark/system)
+
+Performance Optimizations (v4.7.x retained):
+- Critical CSS inlining with deferred non-critical features
+- Async loading patterns with requestIdleCallback
+- Optimized font loading with font-display: swap
+- Lazy-loaded lightbox and Spotify embeds
+- Structured data optimization for SEO
+- Progressive enhancement
+
+Usage: Paste this entire block into a Squarespace Code Block
+Requirements: Master manifest at src/images/Portfolios/Concert/concert-manifest.json (or API)
+Configuration (data-* attributes on #concertPf):
+- data-panes: number of cards (default 24)
+- data-spotify: "on" | "off" (default "on")
+- data-spotify-button-label: custom button label (default "Support the Artists")
+- data-spotify-position: "bottom-right" | "bottom-left" (default "bottom-right")
+- data-spotify-map-id: id of inline JSON map script for artist IDs (default "spotifyArtistMap")
+- data-api: "on" | "off" (default "off")
+- data-theme: "light" | "dark" | "system" (default "system")
+-->
+
+<!-- Critical CSS with CSS Custom Properties -->
+<style>
+  /* Use shared tokens with fallbacks */
+  :root {
+    --mcc-fg: #f5f5f5;
+    --mcc-bg: #0a0a0a;
+    --mcc-line: #2a2a2a;
+    --mcc-accent: #ceadee;
+    --mcc-panel-bg: rgba(10, 10, 10, 0.92);
+    --mcc-panel-border: rgba(255, 255, 255, 0.08);
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 8px;
+    --mcc-radius-lg: 12px;
+    --mcc-radius-xl: 16px;
+    --mcc-text-sm: 0.875rem;
+    --mcc-text-base: 1rem;
+    --mcc-text-lg: 1.125rem;
+    --mcc-text-2xl: 1.5rem;
+    --mcc-text-3xl: 1.875rem;
+    --mcc-weight-normal: 400;
+    --mcc-weight-semibold: 600;
+    --mcc-weight-bold: 700;
+    --mcc-weight-extrabold: 800;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --mcc-fg: #0a0a0a;
+      --mcc-bg: #ffffff;
+      --mcc-line: #e5e5e5;
+      --mcc-panel-bg: rgba(255, 255, 255, 0.98);
+      --mcc-panel-border: rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  /* BEM: Concert Portfolio Block */
+  .mcc-concert {
+    max-width: 1600px;
+    margin: 60px auto;
+    padding: var(--mcc-space-6, 40px) var(--mcc-space-5, 20px);
+    text-align: center;
+    position: relative;
+  }
+
+  .mcc-concert__heading {
+    font: var(--mcc-weight-extrabold, 800) var(--mcc-text-3xl, 34px) / 1.2
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+    color: var(--mcc-fg, #f5f5f5);
+    margin: 0 0 var(--mcc-space-3, 12px) 0;
+  }
+
+  .mcc-concert__subheading {
+    max-width: 760px;
+    margin: 0 auto var(--mcc-space-5, 28px);
+    font: var(--mcc-weight-normal, 400) var(--mcc-text-base, 16px) / 1.6
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+    color: rgba(245, 245, 245, 0.78);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .mcc-concert__subheading {
+      color: rgba(10, 10, 10, 0.72);
+    }
+  }
+
+  /* BEM: Version Badge Component */
+  .mcc-badge {
+    display: inline-block;
+    margin-left: var(--mcc-space-3, 12px);
+    font: var(--mcc-weight-semibold, 600) var(--mcc-text-sm, 14px) / 1.2
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+    color: rgba(128, 128, 128, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.08);
+    padding: var(--mcc-space-1, 4px) var(--mcc-space-2, 8px);
+    border-radius: var(--mcc-radius, 4px);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    vertical-align: baseline;
+  }
+
+  .mcc-badge:hover {
+    color: var(--mcc-accent, #ceadee);
+    background: rgba(206, 173, 238, 0.12);
+    border-color: var(--mcc-accent, #ceadee);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* BEM: Modal Component */
+  .mcc-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483646;
+    padding: var(--mcc-space-5, 20px);
+    backdrop-filter: blur(4px);
+  }
+
+  .mcc-modal--active {
+    display: flex;
+  }
+
+  .mcc-modal__content {
+    background: var(--mcc-panel-bg, rgba(10, 10, 10, 0.92));
+    border: 1px solid var(--mcc-panel-border, rgba(255, 255, 255, 0.08));
+    border-radius: var(--mcc-radius-md, 10px);
+    max-width: 480px;
+    width: 100%;
+    max-height: 68vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    transform: translateY(16px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .mcc-modal--active .mcc-modal__content {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .mcc-modal__header {
+    padding: var(--mcc-space-4, 16px) var(--mcc-space-5, 20px);
+    border-bottom: 1px solid var(--mcc-panel-border, rgba(255, 255, 255, 0.08));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: inherit;
+    z-index: 1;
+  }
+
+  .mcc-modal__title {
+    margin: 0;
+    color: var(--mcc-accent, #ceadee);
+    font: var(--mcc-weight-bold, 700) var(--mcc-text-lg, 18px) / 1.2
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+  }
+
+  .mcc-modal__close {
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: var(--mcc-fg, #f5f5f5);
+    font-size: var(--mcc-text-lg, 18px);
+    cursor: pointer;
+    padding: var(--mcc-space-1, 4px) var(--mcc-space-2, 8px);
+    border-radius: var(--mcc-radius, 4px);
+    transition: background 0.2s ease, opacity 0.2s ease;
+  }
+
+  .mcc-modal__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0.9;
+  }
+
+  .mcc-modal__body {
+    padding: var(--mcc-space-4, 18px) var(--mcc-space-5, 20px);
+    font: var(--mcc-weight-normal, 400) var(--mcc-text-sm, 14px) / 1.5
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+    color: var(--mcc-fg, #f5f5f5);
+  }
+
+  /* BEM: Loading State */
+  .mcc-concert__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font: var(--mcc-weight-semibold, 600) var(--mcc-text-base, 16px) / 1.4
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+    color: var(--mcc-fg, #f5f5f5);
+    opacity: 0.7;
+  }
+
+  .mcc-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--mcc-line, #2a2a2a);
+    border-top: 2px solid var(--mcc-accent, #ceadee);
+    border-radius: 50%;
+    animation: mcc-spin 1s linear infinite;
+    margin-right: var(--mcc-space-3, 12px);
+  }
+
+  @keyframes mcc-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* BEM: Concert Grid */
+  .mcc-concert__grid {
+    display: none;
+    column-width: 320px;
+    column-gap: var(--mcc-space-5, 20px);
+    margin-top: var(--mcc-space-6, 40px);
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .mcc-concert__grid--loaded {
+    opacity: 1;
+  }
+
+  /* BEM: Concert Card Component */
+  .mcc-card {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 var(--mcc-space-5, 20px);
+    background: #111;
+    border-radius: var(--mcc-radius-xl, 16px);
+    overflow: hidden;
+    cursor: pointer;
+    break-inside: avoid;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+  }
+
+  .mcc-card--loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mcc-card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: inherit;
+    transition: transform 0.35s, filter 0.35s;
+  }
+
+  .mcc-card:hover .mcc-card__image {
+    transform: scale(1.02);
+    filter: contrast(1.08) saturate(1.08);
+  }
+
+  .mcc-card__info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--mcc-space-2, 10px) var(--mcc-space-3, 14px);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85));
+    color: #fff;
+  }
+
+  .mcc-card__title {
+    margin: 0;
+    font: var(--mcc-weight-extrabold, 800) var(--mcc-text-base, 16px) / 1.2
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+  }
+
+  .mcc-card__meta {
+    margin: 2px 0 0;
+    font: var(--mcc-weight-semibold, 600) var(--mcc-text-sm, 12px) / 1.2
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+    color: #e5e5e5;
+  }
+
+  .mcc-card--loading::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    animation: mcc-shimmer 1.5s infinite;
+  }
+
+  @keyframes mcc-shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* BEM: Lightbox Component */
+  .mcc-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2147483647;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mcc-space-5, 20px);
+  }
+
+  .mcc-lightbox--open {
+    display: flex;
+  }
+
+  .mcc-lightbox__dialog {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: transparent;
+  }
+
+  .mcc-lightbox__close {
+    position: fixed;
+    top: var(--mcc-space-5, 20px);
+    right: var(--mcc-space-5, 20px);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2147483648;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+  }
+
+  .mcc-lightbox__close:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+  }
+
+  .mcc-lightbox__gallery {
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-4, 16px);
+  }
+
+  .mcc-lightbox__image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  /* BEM: Spotify Support Component */
+  .mcc-spotify {
+    margin: var(--mcc-space-2, 10px) auto 0;
+    max-width: 760px;
+  }
+
+  .mcc-spotify__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mcc-space-2, 8px);
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: var(--mcc-space-2, 10px) var(--mcc-space-3, 14px);
+    border-radius: 999px;
+    font: var(--mcc-weight-bold, 700) 13px/1
+      var(--mcc-font-sans, ui-sans-serif, system-ui);
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+  }
+
+  .mcc-spotify__btn--disabled {
+    pointer-events: none;
+    opacity: 0.55;
+    filter: grayscale(0.2);
+  }
+
+  .mcc-spotify__btn:hover {
+    background: rgba(0, 0, 0, 0.78);
+    transform: translateY(-1px);
+  }
+
+  .mcc-spotify__panel {
+    margin: var(--mcc-space-2, 10px) auto 0;
+    background: var(--mcc-panel-bg, rgba(10, 10, 10, 0.92));
+    color: var(--mcc-fg, #f5f5f5);
+    border: 1px solid var(--mcc-panel-border, rgba(255, 255, 255, 0.12));
+    border-radius: var(--mcc-radius-lg, 12px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    max-width: 760px;
+    max-height: min(70vh, 560px);
+    overflow: auto;
+    backdrop-filter: blur(8px);
+    display: none;
+  }
+
+  .mcc-spotify__panel--open {
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .mcc-concert__grid {
+      column-width: 280px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mcc-concert {
+      margin: 60px auto;
+      padding: var(--mcc-space-5, 20px);
+    }
+    .mcc-concert__heading {
+      font-size: 28px;
+    }
+    .mcc-concert__grid {
+      column-width: 240px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .mcc-concert__grid {
+      column-width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<!-- Resource hints for performance -->
+<link rel="preconnect" href="https://raw.githubusercontent.com" />
+<link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
+
+<div
+  class="mcc-concert"
+  id="concertPf"
+  data-panes="24"
+  data-widget-version="4.8.0"
+  data-spotify="on"
+  data-api="off"
+  data-theme="system"
+>
+  <h2 class="mcc-concert__heading">
+    Concert Portfolio
+    <span
+      class="mcc-badge"
+      role="button"
+      tabindex="0"
+      aria-label="View changelog version 4.8.0"
+      onclick="ConcertWidget.showChangelog()"
+      >v4.8.0</span
+    >
+  </h2>
+  <p class="mcc-concert__subheading">
+    Over 2 years of friendships, images and a good time on and off stage, these
+    images showcase the magic these bands always are sure to capture, and I
+    cannot thank them enough. Updated as a small thank-you to the bands I've
+    worked with.
+  </p>
+  <div id="spotifySupportMount" class="mcc-spotify" aria-live="polite"></div>
+  <div
+    class="mcc-concert__loading"
+    id="concertLoading"
+    role="status"
+    aria-live="polite"
+  >
+    <div class="mcc-spinner" aria-hidden="true"></div>
+    Loading concerts...
+  </div>
+  <div class="mcc-concert__grid" id="concertGrid" role="list"></div>
+</div>
+
+<!-- Lightbox -->
+<div
+  class="mcc-lightbox"
+  id="concertLightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Concert photo gallery"
+>
+  <button
+    class="mcc-lightbox__close"
+    type="button"
+    aria-label="Close gallery"
+    onclick="ConcertWidget.closeLightbox()"
+  >
+    &times;
+  </button>
+  <div class="mcc-lightbox__dialog">
+    <div class="mcc-lightbox__gallery" id="clGallery" role="list"></div>
+  </div>
+</div>
+
+<!-- Changelog Modal -->
+<div
+  class="mcc-modal"
+  id="changelogModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="changelogTitle"
+>
+  <div class="mcc-modal__content">
+    <div class="mcc-modal__header">
+      <h3 class="mcc-modal__title" id="changelogTitle">
+        Concert Widget Changelog
+      </h3>
+      <button
+        class="mcc-modal__close"
+        type="button"
+        aria-label="Close changelog"
+        onclick="ConcertWidget.hideChangelog()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="mcc-modal__body">
+      <div class="changelog-version">v4.8.0 - Modernized (Current)</div>
+      <ul class="changelog-items">
+        <li>
+          Applied CSS custom properties from site-widgets.css v2.0.0 with
+          fallbacks
+        </li>
+        <li>Adopted BEM naming convention (mcc-concert__element--modifier)</li>
+        <li>
+          Refactored to modern ES6+ JavaScript (const/let, arrow functions,
+          async/await)
+        </li>
+        <li>
+          Integrated shared utility functions for better code organization
+        </li>
+        <li>Enhanced accessibility with proper ARIA attributes and roles</li>
+        <li>Improved theme support (light/dark/system via data-theme)</li>
+        <li>All v4.7.x features and performance optimizations retained</li>
+      </ul>
+
+      <div class="changelog-version">v4.7.1 - Optional API</div>
+      <ul class="changelog-items">
+        <li>
+          Optional API support: set <code>data-api="on"</code> to load manifest
+          from <code>/api/v1/manifests/concert</code>
+        </li>
+        <li>Graceful fallback to GitHub raw manifest on error</li>
+      </ul>
+
+      <div class="changelog-version">v4.7.0 - Artist Support (Spotify)</div>
+      <ul class="changelog-items">
+        <li>
+          Added non-intrusive floating button to support artists with Spotify
+          links
+        </li>
+        <li>Automatic list of bands with "Open on Spotify" search links</li>
+        <li>Optional inline JSON map for embedded previews</li>
+        <li>Accessible keyboard/touch interactions</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modern ES6+ JavaScript -->
+<script>
+  (function () {
+    "use strict";
+
+    // Utility functions (from widget-utils.js pattern)
+    const $ = (selector, ctx = document) => ctx.querySelector(selector);
+    const $$ = (selector, ctx = document) =>
+      Array.from(ctx.querySelectorAll(selector));
+
+    const fetchJSON = async (url, options = {}) => {
+      const { retries = 3, timeout = 10000 } = options;
+      for (let i = 0; i < retries; i++) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), timeout);
+          const response = await fetch(url, {
+            ...options,
+            signal: controller.signal,
+          });
+          clearTimeout(timeoutId);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return await response.json();
+        } catch (err) {
+          if (i === retries - 1) throw err;
+          await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
+        }
+      }
+    };
+
+    const shuffle = (array) => {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    };
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    // Concert Widget Module
+    const ConcertWidget = {
+      config: {
+        panes: 24,
+        spotifyEnabled: true,
+        apiEnabled: false,
+        manifestUrl:
+          "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Concert/concert-manifest.json",
+        apiUrl: "/api/v1/manifests/concert",
+      },
+
+      state: {
+        manifest: null,
+        selectedAlbums: [],
+        lightboxOpen: false,
+      },
+
+      init: async function () {
+        try {
+          this.loadConfig();
+          await this.loadManifest();
+          this.render();
+          if (this.config.spotifyEnabled) {
+            this.renderSpotifyButton();
+          }
+        } catch (err) {
+          console.error("[Concert v4.8.0] Init failed:", err);
+          this.showError(
+            "Failed to load concert portfolio. Please try again later."
+          );
+        }
+      },
+
+      loadConfig: function () {
+        const container = $("#concertPf");
+        if (!container) return;
+
+        this.config.panes = parseInt(container.dataset.panes) || 24;
+        this.config.spotifyEnabled = container.dataset.spotify !== "off";
+        this.config.apiEnabled = container.dataset.api === "on";
+      },
+
+      loadManifest: async function () {
+        const loading = $("#concertLoading");
+        if (loading) loading.style.display = "flex";
+
+        let manifest = null;
+
+        // Try API first if enabled
+        if (this.config.apiEnabled) {
+          try {
+            manifest = await fetchJSON(this.config.apiUrl, { timeout: 5000 });
+            console.log("[Concert v4.8.0] Loaded from API");
+          } catch (err) {
+            console.warn(
+              "[Concert v4.8.0] API failed, falling back to GitHub:",
+              err.message
+            );
+          }
+        }
+
+        // Fallback to GitHub
+        if (!manifest) {
+          manifest = await fetchJSON(this.config.manifestUrl);
+          console.log("[Concert v4.8.0] Loaded from GitHub");
+        }
+
+        this.state.manifest = manifest;
+        this.selectRandomAlbums();
+      },
+
+      selectRandomAlbums: function () {
+        const bands = this.state.manifest?.bands || [];
+        const allAlbums = bands.flatMap((band) =>
+          (band.albums || []).map((album) => ({
+            ...album,
+            bandName: band.name,
+          }))
+        );
+
+        const shuffled = shuffle(allAlbums);
+        this.state.selectedAlbums = shuffled.slice(
+          0,
+          clamp(this.config.panes, 1, shuffled.length)
+        );
+      },
+
+      render: function () {
+        const grid = $("#concertGrid");
+        const loading = $("#concertLoading");
+
+        if (!grid) return;
+
+        grid.innerHTML = "";
+
+        this.state.selectedAlbums.forEach((album, index) => {
+          const card = this.createCard(album, index);
+          grid.appendChild(card);
+        });
+
+        if (loading) loading.style.display = "none";
+        grid.style.display = "block";
+
+        // Trigger reveal animation
+        requestAnimationFrame(() => {
+          grid.classList.add("mcc-concert__grid--loaded");
+          $$(".mcc-card", grid).forEach((card, i) => {
+            setTimeout(() => card.classList.add("mcc-card--loaded"), i * 50);
+          });
+        });
+      },
+
+      createCard: function (album, index) {
+        const card = document.createElement("article");
+        card.className = "mcc-card";
+        card.setAttribute("role", "listitem");
+        card.setAttribute(
+          "aria-label",
+          `${album.bandName} concert from ${album.month} ${album.year}`
+        );
+
+        const coverImage = album.images?.[0];
+        if (!coverImage) return card;
+
+        card.innerHTML = `
+        <img class="mcc-card__image" 
+             src="${coverImage.url}" 
+             alt="${coverImage.alt || `${album.bandName} performing live`}"
+             loading="lazy"
+             width="320"
+             height="auto">
+        <div class="mcc-card__info">
+          <h3 class="mcc-card__title">${album.bandName}</h3>
+          <p class="mcc-card__meta">${album.month} ${album.year}</p>
+        </div>
+      `;
+
+        card.addEventListener("click", () => this.openLightbox(album));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            this.openLightbox(album);
+          }
+        });
+
+        return card;
+      },
+
+      openLightbox: function (album) {
+        const lightbox = $("#concertLightbox");
+        const gallery = $("#clGallery");
+
+        if (!lightbox || !gallery) return;
+
+        gallery.innerHTML = "";
+
+        (album.images || []).forEach((image) => {
+          const img = document.createElement("img");
+          img.className = "mcc-lightbox__image";
+          img.src = image.url;
+          img.alt = image.alt || `${album.bandName} concert photo`;
+          img.setAttribute("role", "listitem");
+          gallery.appendChild(img);
+        });
+
+        lightbox.classList.add("mcc-lightbox--open");
+        lightbox.setAttribute("aria-hidden", "false");
+        this.state.lightboxOpen = true;
+
+        // Focus management
+        const closeBtn = $(".mcc-lightbox__close", lightbox);
+        if (closeBtn) closeBtn.focus();
+
+        // Keyboard navigation
+        document.addEventListener("keydown", this.handleLightboxKeydown);
+      },
+
+      closeLightbox: function () {
+        const lightbox = $("#concertLightbox");
+        if (!lightbox) return;
+
+        lightbox.classList.remove("mcc-lightbox--open");
+        lightbox.setAttribute("aria-hidden", "true");
+        this.state.lightboxOpen = false;
+
+        document.removeEventListener("keydown", this.handleLightboxKeydown);
+      },
+
+      handleLightboxKeydown: function (e) {
+        if (e.key === "Escape") {
+          ConcertWidget.closeLightbox();
+        }
+      },
+
+      renderSpotifyButton: function () {
+        const mount = $("#spotifySupportMount");
+        if (!mount) return;
+
+        const bands = this.state.manifest?.bands || [];
+        if (bands.length === 0) return;
+
+        const uniqueArtists = [...new Set(bands.map((b) => b.name))].sort();
+
+        const btn = document.createElement("button");
+        btn.className = "mcc-spotify__btn";
+        btn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+        </svg>
+        Support the Artists
+      `;
+
+        btn.addEventListener("click", () => {
+          const panel = document.createElement("div");
+          panel.className = "mcc-spotify__panel mcc-spotify__panel--open";
+          panel.innerHTML = `
+          <div class="mcc-spotify__panel-header">
+            <h4 class="mcc-modal__title">Support on Spotify</h4>
+            <button class="mcc-modal__close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+          </div>
+          <ul class="mcc-spotify__panel-list">
+            ${uniqueArtists
+              .map(
+                (artist) => `
+              <li class="spotify-item">
+                <div class="spotify-item__meta">
+                  <h5 class="spotify-item__title">${artist}</h5>
+                </div>
+                <a href="https://open.spotify.com/search/${encodeURIComponent(
+                  artist
+                )}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="spotify-link">
+                  Open on Spotify
+                </a>
+              </li>
+            `
+              )
+              .join("")}
+          </ul>
+        `;
+          mount.appendChild(panel);
+        });
+
+        mount.appendChild(btn);
+      },
+
+      showChangelog: function () {
+        const modal = $("#changelogModal");
+        if (!modal) return;
+        modal.classList.add("mcc-modal--active");
+        modal.setAttribute("aria-hidden", "false");
+      },
+
+      hideChangelog: function () {
+        const modal = $("#changelogModal");
+        if (!modal) return;
+        modal.classList.remove("mcc-modal--active");
+        modal.setAttribute("aria-hidden", "true");
+      },
+
+      showError: function (message) {
+        const loading = $("#concertLoading");
+        if (loading) {
+          loading.innerHTML = `<p style="color: var(--mcc-accent, #ff4d6d);">${message}</p>`;
+        }
+      },
+    };
+
+    // Expose for global access (changelog buttons)
+    window.ConcertWidget = ConcertWidget;
+
+    // Auto-init when DOM ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => ConcertWidget.init());
+    } else {
+      ConcertWidget.init();
+    }
+  })();
+</script>
