@@ -120,12 +120,14 @@ Reference standards:
 ## Remaining / In-Progress Items
 
 **Next.js Migration (Self-Hosted Site)**
-**Blog Feed v3.2 — Author Doc Parser & Sources Block**
+**Blog Feed Reset — Minimal Scaffold**
 
-- [ ] TODO: Blog feed sanitation — strip Google Docs export artifacts (e.g., enacteduf/wordt2/\_cl) and remove author-level metadata lines from post bodies. Implemented in `v3.2.0-author-doc-blog.js`; verify against Caleb’s doc. (Added 2025-12-02)
-- [ ] TODO: Add Sources block — detect `Sources:`/`References:`/`Works Cited:`/`Bibliography:` section and render copy-paste block at modal bottom with a Copy button. Implemented; confirm clipboard works across macOS Safari/Chrome. (Added 2025-12-02)
-- [ ] TODO: Visual parity — align modal/card spacing and typography with v2.1 reference; optional subtle blur and tighter leading. (Added 2025-12-02)
-- [ ] TODO: Aggressive sanitizer — remove `<script>`, `<style>`, `link`, `noscript`, `meta`, and known Google Docs boilerplate (Closure Library, WIZ_global_data, DOCS_installLinkReferrerSanitizer) before text extraction to prevent code in modal. Implemented; verify across sources. (Added 2025-12-02)
+- [x] TODO: Remove legacy blog widget implementation and start fresh. Deleted `src/widgets/blog-feed/versions/v3.3.0-author-doc-blog.html`. (2025-12-03)
+- [x] TODO: Create minimal scaffold widget `src/widgets/blog-feed/versions/v0.1.0-blog-minimal.html` with static demo posts and simple modal for design iteration. (2025-12-03)
+- [x] TODO: Remove all other legacy blog versions under `src/widgets/blog-feed/versions/` (v1-google-sheets.html, v2.1.0-google-docs-blog.html, v3.0.0-multi-author-blog.html, v3.1.0-google-docs-blog.html, v3.2.0-author-doc-blog.html, v3.2.0-author-doc-blog.js, v3.3.0-author-doc-blog.html, v3.3.0-author-doc-blog.js). (2025-12-03)
+- [ ] TODO: Wire real content source (phase 2): choose one source (RSS, JSON, or Google Doc) and implement a tiny fetch/parser; keep strict sanitization and neutral styling.
+- [ ] TODO: Add Sources copy (phase 2) and optional images section via simple JSON manifest per post.
+- [ ] TODO: Document new flow in widget README and update main README Available Widgets section.
 
 - [ ] TODO: Next.js Footer (v1.3.0 parity) — wire the real newsletter subscription endpoint and adjust JSON-LD logo URL to the app's public assets path. Track status in `sites/self-hosted-nextjs/components/Layout/Footer.tsx`. (Added 2025-12-01)
       **Phase 1 — Legacy Version Archival (Planning & Scaffolding)** ✅ COMPLETE

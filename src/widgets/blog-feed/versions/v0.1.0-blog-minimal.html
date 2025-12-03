@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog — Minimal v0.1.0</title>
+    <meta
+      name="description"
+      content="Minimal blog feed scaffold with static demo posts and simple modal."
+    />
+    <style>
+      :root {
+        --fg: #111;
+        --fg-light: #666;
+        --bg: #fff;
+        --line: #e5e5e5;
+        --radius: 12px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #f5f5f5;
+          --fg-light: #a0a0a0;
+          --bg: #0a0a0a;
+          --line: #2a2a2a;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+      .blog {
+        max-width: 1100px;
+        margin: 56px auto;
+        padding: 0 20px;
+      }
+      .blog__header {
+        text-align: center;
+        margin: 0 0 24px;
+      }
+      .blog__heading {
+        margin: 0;
+        font-weight: 800;
+        font-size: 28px;
+      }
+      .badge {
+        margin-left: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #b36b00;
+      }
+      .grid {
+        column-count: 3;
+        column-gap: 24px;
+      }
+      @media (max-width: 1024px) {
+        .grid {
+          column-count: 2;
+        }
+      }
+      @media (max-width: 768px) {
+        .grid {
+          column-count: 1;
+        }
+      }
+      .card {
+        display: inline-block;
+        width: 100%;
+        margin: 0 0 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--bg);
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .card__content {
+        padding: 18px;
+      }
+      .card__meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--fg-light);
+        font-size: 12px;
+      }
+      .card__title {
+        margin: 6px 0 8px;
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .card__excerpt {
+        margin: 0;
+        color: var(--fg-light);
+      }
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        background: rgba(0, 0, 0, 0.7);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .modal--active {
+        display: flex;
+      }
+      .modal__content {
+        position: relative;
+        width: 100%;
+        max-width: 860px;
+        max-height: 90vh;
+        background: var(--bg);
+        border-radius: 14px;
+        overflow: auto;
+      }
+      .modal__close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      .modal__post {
+        padding: 42px 28px;
+      }
+      .modal__title {
+        margin: 0 0 6px;
+        font-size: 26px;
+        font-weight: 800;
+      }
+      .modal__meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--fg-light);
+        font-size: 12px;
+      }
+      .modal__body {
+        margin-top: 18px;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blog" id="blog" data-dev="true">
+      <div class="blog__header">
+        <h1 class="blog__heading">
+          Latest Articles
+          <span class="badge" id="devBadge">IN PROGRESS (DEV)</span>
+        </h1>
+        <p style="margin: 8px 0 0; color: var(--fg-light)">
+          Minimal scaffold with static demo posts. Replace with real source
+          later.
+        </p>
+      </div>
+      <div id="feed"></div>
+    </div>
+
+    <div
+      class="modal"
+      id="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="postTitle"
+    >
+      <div class="modal__content">
+        <button class="modal__close" id="closeBtn" aria-label="Close">
+          &times;
+        </button>
+        <article class="modal__post">
+          <h2 class="modal__title" id="postTitle"></h2>
+          <div class="modal__meta" id="postMeta"></div>
+          <div class="modal__body" id="postBody"></div>
+        </article>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+        const $ = (s, c = document) => c.querySelector(s);
+        const el = $("#blog");
+        const isDev = el && el.dataset.dev === "true";
+        if ($("#devBadge"))
+          $("#devBadge").style.display = isDev ? "inline" : "none";
+
+        const demoPosts = [
+          {
+            title: "Welcome to the new blog",
+            author: "McCal",
+            date: new Date().toISOString().split("T")[0],
+            excerpt:
+              "Clean start. This is a minimal demo card to validate layout and modal behavior.",
+            body: [
+              "This is the first demo post body paragraph.",
+              "Use this scaffold to iterate on visuals and UX.",
+            ],
+          },
+          {
+            title: "Design system notes",
+            author: "McCal",
+            date: new Date().toISOString().split("T")[0],
+            excerpt:
+              "Neutral palette, simple masonry, accessible modal with ESC to close.",
+            body: [
+              "Cards show title/author/date/excerpt.",
+              "Modal shows full content with readable line-height.",
+            ],
+          },
+        ];
+
+        const render = (posts) => {
+          const feed = $("#feed");
+          if (!feed) return;
+          const grid = document.createElement("div");
+          grid.className = "grid";
+          posts.forEach((p) => {
+            const card = document.createElement("article");
+            card.className = "card";
+            card.innerHTML = `
+          <div class="card__content">
+            <div class="card__meta"><span>${
+              p.author
+            }</span><span>·</span><time datetime="${p.date}">${new Date(
+              p.date
+            ).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}</time></div>
+            <h3 class="card__title">${p.title}</h3>
+            <p class="card__excerpt">${p.excerpt}</p>
+          </div>`;
+            card.addEventListener("click", () => openModal(p));
+            grid.appendChild(card);
+          });
+          feed.innerHTML = "";
+          feed.appendChild(grid);
+        };
+
+        const openModal = (post) => {
+          const m = $("#modal");
+          if (!m) return;
+          $("#postTitle").textContent = post.title;
+          $("#postMeta").innerHTML = `<span>${
+            post.author
+          }</span><span>·</span><time datetime="${post.date}">${new Date(
+            post.date
+          ).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}</time>`;
+          $("#postBody").innerHTML = post.body
+            .map((p) => `<p>${escapeHtml(p)}</p>`)
+            .join("");
+          m.classList.add("modal--active");
+          document.body.style.overflow = "hidden";
+        };
+        const closeModal = () => {
+          const m = $("#modal");
+          if (!m) return;
+          m.classList.remove("modal--active");
+          document.body.style.overflow = "";
+        };
+        $("#closeBtn").addEventListener("click", closeModal);
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeModal();
+        });
+
+        const escapeHtml = (s) =>
+          String(s).replace(
+            /[&<>\"]/g,
+            (c) =>
+              ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])
+          );
+
+        // Initial render (dev uses demo posts; prod would fetch real source)
+        render(demoPosts);
+      })();
+    </script>
+  </body>
+</html>
