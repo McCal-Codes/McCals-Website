@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <!--
-  Blog Feed Widget v0.1.0
+  Blog Feed Widget v0.2.0 (Authoring Minimal)
   
-  A minimal, self-contained blog feed widget with JSON source support.
-  Features: masonry grid layout, modal post viewer, Sources copy functionality,
-  optional per-post images, localStorage caching, graceful fallback.
+  Adds a simple Author Panel (login + new post form) powered by API v1 blog routes.
+  Read path remains robust: JSON feed with localStorage cache, Sources copy, optional images.
   
-  Usage:
-    1. Include this file in a Squarespace Code Block
-    2. Ensure blog-posts.json is accessible at ../images/blog/blog-posts.json
-    3. Optional: Set data-dev="false" to hide development badge
-  
-  @version 0.1.0
+  @version 0.2.0
   @author McCal Media
   @license MIT
   @repository https://github.com/McCal-Codes/McCals-Website
@@ -20,12 +14,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog — Minimal v0.1.0</title>
+    <title>Blog — Authoring v0.2.0</title>
     <meta
       name="description"
-      content="Minimal blog feed scaffold with static demo posts and simple modal."
+      content="Blog feed with minimal author login and post creation."
     />
-    <!-- Structured Data for SEO -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -47,6 +40,7 @@
         --bg: #fff;
         --line: #e5e5e5;
         --radius: 12px;
+        --accent: #0a7a3e;
       }
       @media (prefers-color-scheme: dark) {
         :root {
@@ -229,8 +223,8 @@
         }
       }
       .sources__copy--copied {
-        color: #0a7a3e;
-        border-color: #0a7a3e;
+        color: var(--accent);
+        border-color: var(--accent);
       }
       .images {
         margin-top: 20px;
@@ -259,6 +253,60 @@
           background: rgba(255, 255, 255, 0.03);
         }
       }
+      /* Author Panel */
+      .author-panel {
+        margin: 16px 0 24px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+        background: var(--bg);
+      }
+      .author-panel__row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      .author-panel__input {
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--fg);
+        min-width: 180px;
+      }
+      .author-panel__btn {
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--fg);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .author-panel__status {
+        font-size: 12px;
+        color: var(--fg-light);
+        margin-top: 8px;
+      }
+      .author-panel__form {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .author-panel__textarea {
+        min-height: 120px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--fg);
+      }
+      .author-panel__small {
+        font-size: 12px;
+        color: var(--fg-light);
+      }
     </style>
   </head>
   <body>
@@ -269,10 +317,63 @@
           <span class="badge" id="devBadge">IN PROGRESS (DEV)</span>
         </h1>
         <p style="margin: 8px 0 0; color: var(--fg-light)">
-          Minimal scaffold with static demo posts. Replace with real source
-          later.
+          Authoring-enabled minimal blog. Login to create posts.
         </p>
       </div>
+
+      <section class="author-panel" aria-labelledby="authorPanelHeading">
+        <h2 id="authorPanelHeading" style="margin: 0 0 8px; font-size: 18px">
+          Author Panel
+        </h2>
+        <div class="author-panel__row" id="authRow">
+          <input
+            class="author-panel__input"
+            id="username"
+            placeholder="Username"
+            autocomplete="username"
+          />
+          <input
+            class="author-panel__input"
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+          />
+          <button class="author-panel__btn" id="loginBtn">Login</button>
+          <button
+            class="author-panel__btn"
+            id="logoutBtn"
+            style="display: none"
+          >
+            Logout
+          </button>
+        </div>
+        <div class="author-panel__status" id="authStatus">Not logged in</div>
+        <div class="author-panel__form" id="postForm" style="display: none">
+          <input
+            class="author-panel__input"
+            id="title"
+            placeholder="Post title"
+          />
+          <input
+            class="author-panel__input"
+            id="excerpt"
+            placeholder="Short excerpt"
+          />
+          <textarea
+            class="author-panel__textarea"
+            id="content"
+            placeholder="Write content... Use blank lines to separate paragraphs. End with \n## Sources\n1. Citation\n2. Citation (optional)"
+          ></textarea>
+          <button class="author-panel__btn" id="publishBtn">
+            Publish Post
+          </button>
+          <div class="author-panel__small">
+            Tip: Images can be added later by editing JSON or future uploader.
+          </div>
+        </div>
+      </section>
+
       <div id="feed"></div>
     </div>
 
@@ -304,35 +405,16 @@
         if ($("#devBadge"))
           $("#devBadge").style.display = isDev ? "inline" : "none";
 
-        // Configuration
+        // Config
         const FEED_URL = "../images/blog/blog-posts.json";
+        // API base: prefer same-origin path; if running on localhost without proxy, fallback to API port
+        const API_BASE =
+          location.hostname === "localhost" || location.hostname === "127.0.0.1"
+            ? "http://localhost:3001/api/v1/blog"
+            : "/api/v1/blog";
         const CACHE_KEY = "blog_posts_cache";
-        const CACHE_TTL = 60 * 60 * 1000; // 1 hour
-
-        const demoPosts = [
-          {
-            title: "Welcome to the new blog",
-            author: "McCal",
-            date: new Date().toISOString().split("T")[0],
-            excerpt:
-              "Clean start. This is a minimal demo card to validate layout and modal behavior.",
-            body: [
-              "This is the first demo post body paragraph.",
-              "Use this scaffold to iterate on visuals and UX.",
-            ],
-          },
-          {
-            title: "Design system notes",
-            author: "McCal",
-            date: new Date().toISOString().split("T")[0],
-            excerpt:
-              "Neutral palette, simple masonry, accessible modal with ESC to close.",
-            body: [
-              "Cards show title/author/date/excerpt.",
-              "Modal shows full content with readable line-height.",
-            ],
-          },
-        ];
+        const CACHE_TTL = 60 * 60 * 1000; // 1h
+        const TOKEN_KEY = "blog_author_token";
 
         // Cache helpers
         const getCache = () => {
@@ -362,7 +444,6 @@
         const fetchPosts = async () => {
           const cached = getCache();
           if (cached) return cached;
-
           try {
             const res = await fetch(FEED_URL);
             if (!res.ok) throw new Error("Fetch failed");
@@ -372,10 +453,19 @@
             return posts;
           } catch (err) {
             console.warn("Failed to load blog posts, using demo data:", err);
-            return demoPosts;
+            return [
+              {
+                title: "Welcome to authoring",
+                author: "McCal",
+                date: new Date().toISOString().split("T")[0],
+                excerpt: "Login above to publish a post.",
+                body: ["Use the Author Panel to create new posts."],
+              },
+            ];
           }
         };
 
+        // Render cards
         const render = (posts) => {
           const feed = $("#feed");
           if (!feed) return;
@@ -384,20 +474,19 @@
           posts.forEach((p) => {
             const card = document.createElement("article");
             card.className = "card";
-            card.innerHTML = `
-          <div class="card__content">
-            <div class="card__meta"><span>${
-              p.author
-            }</span><span>·</span><time datetime="${p.date}">${new Date(
+            card.innerHTML = `<div class="card__content">
+              <div class="card__meta"><span>${escapeHtml(
+                p.author
+              )}</span><span>·</span><time datetime="${p.date}">${new Date(
               p.date
             ).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}</time></div>
-            <h3 class="card__title">${escapeHtml(p.title)}</h3>
-            <p class="card__excerpt">${escapeHtml(p.excerpt)}</p>
-          </div>`;
+              <h3 class="card__title">${escapeHtml(p.title)}</h3>
+              <p class="card__excerpt">${escapeHtml(p.excerpt || "")}</p>
+            </div>`;
             card.addEventListener("click", () => openModal(p));
             grid.appendChild(card);
           });
@@ -410,22 +499,18 @@
           let inSources = false;
           const sources = [];
           const contentLines = [];
-
           lines.forEach((line) => {
-            const trimmed = line.trim();
-            if (trimmed === "## Sources" || trimmed === "Sources:") {
+            const t = line.trim();
+            if (t === "## Sources" || t === "Sources:") {
               inSources = true;
               return;
             }
             if (inSources) {
-              if (trimmed && !trimmed.startsWith("#")) {
-                sources.push(trimmed);
-              }
+              if (t && !t.startsWith("#")) sources.push(t);
             } else {
               contentLines.push(line);
             }
           });
-
           return { content: contentLines, sources };
         };
 
@@ -433,21 +518,19 @@
           const m = $("#modal");
           if (!m) return;
           $("#postTitle").textContent = post.title;
-          $("#postMeta").innerHTML = `<span>${
+          $("#postMeta").innerHTML = `<span>${escapeHtml(
             post.author
-          }</span><span>·</span><time datetime="${post.date}">${new Date(
+          )}</span><span>·</span><time datetime="${post.date}">${new Date(
             post.date
           ).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
           })}</time>`;
-
           const { content, sources } = parseSources(post.body);
           const bodyHtml = content
             .map((p) => `<p>${escapeHtml(p)}</p>`)
             .join("");
-
           let imagesHtml = "";
           if (post.images && post.images.length > 0) {
             const imageItems = post.images
@@ -469,23 +552,14 @@
               .join("");
             imagesHtml = `<div class="images">${imageItems}</div>`;
           }
-
           let sourcesHtml = "";
           if (sources.length > 0) {
             const sourcesList = sources
               .map((s) => `<li>${escapeHtml(s)}</li>`)
               .join("");
-            sourcesHtml = `
-            <div class="sources">
-              <h3 class="sources__heading">Sources</h3>
-              <ol class="sources__list">${sourcesList}</ol>
-              <button class="sources__copy" id="copySourcesBtn">Copy Sources</button>
-            </div>`;
+            sourcesHtml = `<div class="sources"><h3 class="sources__heading">Sources</h3><ol class="sources__list">${sourcesList}</ol><button class="sources__copy" id="copySourcesBtn">Copy Sources</button></div>`;
           }
-
           $("#postBody").innerHTML = bodyHtml + imagesHtml + sourcesHtml;
-
-          // Wire copy button
           const copyBtn = $("#copySourcesBtn");
           if (copyBtn) {
             copyBtn.addEventListener("click", () => {
@@ -500,18 +574,15 @@
               });
             });
           }
-
           m.classList.add("modal--active");
           document.body.style.overflow = "hidden";
         };
-
         const closeModal = () => {
           const m = $("#modal");
           if (!m) return;
           m.classList.remove("modal--active");
           document.body.style.overflow = "";
         };
-
         $("#closeBtn").addEventListener("click", closeModal);
         document.addEventListener("keydown", (e) => {
           if (e.key === "Escape") closeModal();
@@ -523,6 +594,98 @@
             (c) =>
               ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])
           );
+
+        // Authoring: login/logout/publish
+        const token = localStorage.getItem(TOKEN_KEY);
+        function setAuthUI(loggedIn, authorName) {
+          $("#loginBtn").style.display = loggedIn ? "none" : "inline-block";
+          $("#logoutBtn").style.display = loggedIn ? "inline-block" : "none";
+          $("#postForm").style.display = loggedIn ? "grid" : "none";
+          $("#authStatus").textContent = loggedIn
+            ? `Logged in as ${authorName || "author"}`
+            : "Not logged in";
+        }
+        setAuthUI(!!token, localStorage.getItem("blog_author_name"));
+
+        $("#loginBtn").addEventListener("click", async () => {
+          const u = $("#username").value.trim();
+          const p = $("#password").value.trim();
+          if (!u || !p) {
+            $("#authStatus").textContent = "Enter username and password";
+            return;
+          }
+          try {
+            const res = await fetch(`${API_BASE}/auth/login`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username: u, password: p }),
+            });
+            if (!res.ok) {
+              const j = await res
+                .json()
+                .catch(() => ({ message: "Login failed" }));
+              throw new Error(j.message || "Login failed");
+            }
+            const j = await res.json();
+            localStorage.setItem(TOKEN_KEY, j.token);
+            localStorage.setItem(
+              "blog_author_name",
+              j.author?.name || j.author?.username || u
+            );
+            setAuthUI(true, j.author?.name || j.author?.username || u);
+            $("#authStatus").textContent = "Login successful";
+          } catch (err) {
+            $("#authStatus").textContent = `Login error: ${err.message}`;
+          }
+        });
+        $("#logoutBtn").addEventListener("click", () => {
+          localStorage.removeItem(TOKEN_KEY);
+          localStorage.removeItem("blog_author_name");
+          setAuthUI(false);
+        });
+        $("#publishBtn").addEventListener("click", async () => {
+          const t = $("#title").value.trim();
+          const e = $("#excerpt").value.trim();
+          const raw = $("#content").value;
+          const tok = localStorage.getItem(TOKEN_KEY);
+          if (!tok) {
+            $("#authStatus").textContent = "Not logged in";
+            return;
+          }
+          const paragraphs = raw
+            .split(/\n\n+/)
+            .map((s) => s.trim())
+            .filter(Boolean);
+          try {
+            const res = await fetch(`${API_BASE}/posts`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${tok}`,
+              },
+              body: JSON.stringify({
+                title: t,
+                excerpt: e,
+                content: paragraphs,
+              }),
+            });
+            if (!res.ok) {
+              const j = await res
+                .json()
+                .catch(() => ({ message: "Publish failed" }));
+              throw new Error(j.message || "Publish failed");
+            }
+            $("#authStatus").textContent = "Post published! Refreshing feed...";
+            localStorage.removeItem(CACHE_KEY); // bust cache
+            const posts = await fetchPosts();
+            render(posts);
+            $("#title").value = "";
+            $("#excerpt").value = "";
+            $("#content").value = "";
+          } catch (err) {
+            $("#authStatus").textContent = `Publish error: ${err.message}`;
+          }
+        });
 
         // Load and render posts
         fetchPosts().then(render);

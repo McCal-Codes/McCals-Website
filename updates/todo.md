@@ -125,9 +125,19 @@ Reference standards:
 - [x] TODO: Remove legacy blog widget implementation and start fresh. Deleted `src/widgets/blog-feed/versions/v3.3.0-author-doc-blog.html`. (2025-12-03)
 - [x] TODO: Create minimal scaffold widget `src/widgets/blog-feed/versions/v0.1.0-blog-minimal.html` with static demo posts and simple modal for design iteration. (2025-12-03)
 - [x] TODO: Remove all other legacy blog versions under `src/widgets/blog-feed/versions/` (v1-google-sheets.html, v2.1.0-google-docs-blog.html, v3.0.0-multi-author-blog.html, v3.1.0-google-docs-blog.html, v3.2.0-author-doc-blog.html, v3.2.0-author-doc-blog.js, v3.3.0-author-doc-blog.html, v3.3.0-author-doc-blog.js). (2025-12-03)
-- [ ] TODO: Wire real content source (phase 2): choose one source (RSS, JSON, or Google Doc) and implement a tiny fetch/parser; keep strict sanitization and neutral styling.
-- [ ] TODO: Add Sources copy (phase 2) and optional images section via simple JSON manifest per post.
-- [ ] TODO: Document new flow in widget README and update main README Available Widgets section.
+- [x] TODO: Wire real content source (phase 2): Implemented JSON feed support with localStorage caching (1hr TTL), graceful fallback to demo posts, strict sanitization via escapeHtml helper. (2025-12-03)
+- [x] TODO: Add Sources copy (phase 2): Added automatic Sources section detection (## Sources or Sources: markers), copy-to-clipboard button with success feedback, and optional per-post images grid with captions. (2025-12-03)
+- [x] TODO: Apply workspace widget standards: Added version header comment, structured data (Schema.org Blog), proper meta tags, ARIA attributes, semantic HTML5. (2025-12-03)
+- [x] TODO: Document new flow: Created comprehensive README.md with installation, configuration, JSON format, troubleshooting. Created CHANGELOG.md with v0.1.0 entry and migration notes. (2025-12-03)
+- [ ] TODO: Add blog feed widget to main README.md Available Widgets section (mark as Development/Testing status).
+
+- [x] TODO: Add author login + write endpoints to API (JWT dev-only) and wire blog routes under v1. Create development authors config at `src/api/config/blog-authors.json`. Use `.env` with `BLOG_JWT_SECRET`. (Completed 2025-12-03)
+- [ ] TODO: Create new widget version `v0.2.0-authoring-minimal.html` adding a simple Author Panel (login + new post form) using the API. Keep existing read-only rendering path intact and robust. (Planned 2025-12-03)
+- [x] TODO: Create new widget version `v0.2.0-authoring-minimal.html` adding a simple Author Panel (login + new post form) using the API. Keep existing read-only rendering path intact and robust. (Completed 2025-12-03)
+- [ ] TODO: Replace plaintext dev passwords with bcrypt hashes before production; update API to verify `passwordHash` and migrate authors config. (Security hardening)
+- [ ] TODO: Add API route docs to `docs/integrations/blog-api.md` and update `src/widgets/blog-feed/README.md` with authoring notes.
+- [ ] TODO: Switch read path to API (GET /api/v1/blog/posts) with fallback to JSON file; add dev/prod detection.
+- [ ] TODO: Add CI smoke test hitting blog login and publish endpoints with ephemeral changes.
 
 - [ ] TODO: Next.js Footer (v1.3.0 parity) — wire the real newsletter subscription endpoint and adjust JSON-LD logo URL to the app's public assets path. Track status in `sites/self-hosted-nextjs/components/Layout/Footer.tsx`. (Added 2025-12-01)
       **Phase 1 — Legacy Version Archival (Planning & Scaffolding)** ✅ COMPLETE

@@ -1,0 +1,52 @@
+{
+  "posts": [
+    {
+      "title": "Welcome to the new blog",
+      "author": "McCal",
+      "date": "2025-12-03",
+      "excerpt": "Clean start. This is a minimal demo card to validate layout and modal behavior.",
+      "body": [
+        "This is the first demo post body paragraph.",
+        "Use this scaffold to iterate on visuals and UX.",
+        "Phase 2 now includes JSON feed support with fetch caching."
+      ]
+    },
+    {
+      "title": "Design system notes",
+      "author": "McCal",
+      "date": "2025-12-02",
+      "excerpt": "Neutral palette, simple masonry, accessible modal with ESC to close.",
+      "body": [
+        "Cards show title/author/date/excerpt.",
+        "Modal shows full content with readable line-height.",
+        "Now supports dynamic JSON feed with graceful fallback to demo posts."
+      ]
+    },
+    {
+      "title": "Sources and citations guide",
+      "author": "McCal",
+      "date": "2025-12-01",
+      "excerpt": "How to properly cite sources in blog posts with copy-to-clipboard functionality.",
+      "body": [
+        "This post demonstrates the Sources section feature.",
+        "All citations and references can be easily copied.",
+        "## Sources",
+        "1. McCal Media Documentation - https://mcc-cal.com/docs",
+        "2. Widget Standards Guide - https://github.com/McCal-Codes/McCals-Website/blob/main/docs/standards/widget-standards.md",
+        "3. Accessibility Patterns - Internal reference document"
+      ],
+      "images": [
+        {
+          "src": "../images/placeholder-1.jpg",
+          "alt": "Example documentation screenshot",
+          "caption": "Widget standards documentation overview"
+        },
+        {
+          "src": "../images/placeholder-2.jpg",
+          "alt": "Example accessibility audit",
+          "caption": "Accessibility testing results"
+        }
+      ]
+    }
+  ]
+}

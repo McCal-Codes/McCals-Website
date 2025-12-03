@@ -1,4 +1,4 @@
 {
-  "lastHash": "6aca15c4",
-  "lastMessage": "chore: update lockfile to match package.json for CI"
+  "lastHash": "27834be3",
+  "lastMessage": "feat(blog-feed): remove legacy versions and implement minimal scaffold\n\n- Deleted all previous blog feed widget versions (v1 to v3.3.0).\n- Introduced a new minimal scaffold (v0.1.0) with static demo posts and a simple modal for design iteration.\n- Updated TODOs to reflect the new structure and future enhancements.\n- Ensured compliance with workspace policy to maintain a single active version."
 }

@@ -1,218 +1,219 @@
 # Blog Feed Widget
 
-A lightweight blog feed widget you can update live via **Google Sheets** or **Google Docs** — supports images and auto captions. No API keys required.
+A minimal, self-contained blog feed widget with JSON source support, masonry grid layout, and modal post viewer.
 
-## Why Google Sheets or Docs?
+## Features
 
-- **Easy to edit** from anywhere
-- **Live updates** (just refresh the page)
-- **Public read-only access** without auth (when shared properly)
-- **Google Sheets**: Structured data with columns
-- **Google Docs**: Natural writing format with headings and content
+- **JSON Feed Support**: Fetches posts from a simple JSON file with localStorage caching
+- **Masonry Grid Layout**: Responsive 3-column grid (2 on tablet, 1 on mobile) using CSS columns
+- **Modal Post Viewer**: Full-content modal with keyboard navigation (ESC to close)
+- **Sources Copy**: Automatic detection of Sources sections with copy-to-clipboard functionality
+- **Optional Images**: Support for per-post image galleries with captions
+- **Graceful Fallback**: Falls back to demo posts if JSON fetch fails
+- **Dark Mode**: Automatic dark mode support via `prefers-color-scheme`
+- **Performance**: 1-hour localStorage cache, lazy image loading, minimal JS bundle
 
-## Quick Start
+## Active Versions (≤2 Policy)
 
-### Option 1: Google Sheets
+### Current Version: v0.2.0
 
-1. Create a Google Sheet and add a tab named `Blog` (or any name you prefer)
-2. In row 1, add headers (case-insensitive):
-   - Title
-   - Date (YYYY-MM-DD or any parseable date)
-   - Image (URL for hero image)
-   - Body (plain text or simple HTML: p, a, ul, li, strong, em)
-   - Images (optional: additional image URLs separated by commas or new lines)
-3. Share the sheet so Anyone with the link can view (read-only)
-4. Copy the Spreadsheet ID from the URL (between `/d/` and `/edit`)
-5. Use the example snippet: `widgets/blog-feed/v1-google-sheets.html`
+- **File**: `versions/v0.2.0-authoring-minimal.html`
+- **Status**: Development/Testing
+- **Release Date**: 2025-12-03
+- **Features**: Author Panel (login/logout), minimal Publish Post form powered by API v1 blog routes; read path unchanged (JSON feed, caching, Sources copy, optional images)
 
-### Option 2: Google Docs (Recommended for Natural Writing)
+### Previous Stable: v0.1.0
 
-1. Create a Google Doc with your blog content
-2. Use **headings** (H1, H2, or H3) for blog post titles
-3. Write content under each heading (supports formatting, lists, links)
-4. Add images directly in the document
-5. **Publish to web**: File > Share > Publish to web
-6. Copy the Document ID from the URL (between `/d/` and `/edit`)
-7. Use the example snippet: `widgets/blog-feed/v1-google-docs.html`
-
-## Example Embed (local site)
-
-### Google Sheets Version:
-
-```html
-<div
-  id="blogFeed"
-  data-blog-feed
-  data-provider="sheets"
-  data-sheet-id="YOUR_SHEET_ID"
-  data-sheet-name="Blog"
-  data-max-posts="5"
-  data-show-dates="true"
-  data-show-images="true"
-  data-auto-captions="true"
-></div>
-
-<script src="../shared/universal-caption-system.js"></script>
-<script src="./blog-feed.js"></script>
-```
-
-### Google Docs Version:
-
-```html
-<div
-  id="blogFeed"
-  data-blog-feed-docs
-  data-provider="docs"
-  data-doc-id="YOUR_DOC_ID"
-  data-max-posts="5"
-  data-show-dates="true"
-  data-show-images="true"
-  data-auto-captions="true"
-></div>
-
-<script src="../shared/universal-caption-system.js"></script>
-<script src="./blog-feed-docs.js"></script>
-```
-
-Minimal CSS is already in `v1-google-sheets.html`. You can copy those styles or integrate them into your site stylesheet.
-
-## Auto Captions
-
-This widget integrates with `widgets/shared/universal-caption-system.js` to auto-generate captions from EXIF/IPTC when possible:
-
-- If an image has `alt`, that becomes the caption
-- Else, EXIF/IPTC metadata is used when accessible
-- Else, it falls back to a readable filename-based title
-
-Note: Some remote hosts (e.g., certain CDNs or Google-hosted images) may not expose metadata due to CORS or image processing. In those cases, provide an `alt` or include captions in the Body content.
-
-## Troubleshooting
-
-### Google Sheets Issues:
-
-- If you see "Failed to load blog":
-  - Ensure the sheet is shared as Anyone with the link (Viewer)
-  - Confirm `data-sheet-id` and `data-sheet-name` are correct
-  - Make sure your image URLs are publicly accessible (no auth)
-- Date formatting shows "(untitled)" or missing date:
-  - Verify your column headers match the expected names (case-insensitive)
-  - Ensure Date values are valid dates (e.g., 2025-09-19)
-
-### Google Docs Issues:
-
-- If you see "Failed to load blog from Google Docs":
-  - Make sure the document is **Published to web** (not just shared)
-  - Go to File > Share > Publish to web and click "Publish"
-  - Confirm `data-doc-id` matches your document ID
-- No blog posts appear:
-  - Use proper headings (H1, H2, H3) for post titles
-  - Make sure there's content under each heading
-
-## Versions
-
-### Active Versions (≤2 Policy)
-
-The following versions are maintained in `versions/`:
-
-- **v3.0.0** (Current): Multi-author blog feed with interactive filtering, search, and modern architecture
-- **v2.1.0** (Previous Stable): Google Docs blog feed with natural writing format
+- **File**: `versions/v0.1.0-blog-minimal.html`
+- **Release Date**: 2025-12-03
+- **Features**: JSON feed, Sources copy, optional images, caching, graceful fallback
 
 ### Legacy Versions (Archived)
 
-Versions v1-google-sheets and v1-google-docs have been archived to maintain repository organization:
+Older Google Sheets/Docs versions have been archived:
 
-- **Archive Location**: `src/widgets/_archived/Legacy Widgets/blog-feed/versions/`
-- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/blog-feed/versions/INDEX.json) for complete version catalog
-- **Archived Versions**: v1-google-sheets, v1-google-docs (2 versions)
+- **Archive Location**: `src/widgets/_archived/legacy-widget-versions/blog-feed/versions/`
+- **Archived Versions**: v1-google-sheets, v2.1.0-google-docs, v3.0.0-multi-author, v3.1.0-google-docs, v3.2.0-author-doc (8 versions)
+- See archive `INDEX.json` for complete version catalog
 
-## v3.0.0 Multi-Author Features
+## Installation
 
-### Author Object Structure
+### Squarespace Code Block
 
-```javascript
-{
-  id: 'unique-author-id',
-  name: 'Author Name',
-  bio: 'Short bio description',
-  avatar: '/path/to/avatar.jpg',
-  social: {
-    twitter: '@handle',
-    instagram: '@handle',
-    email: 'email@example.com'
-  }
-}
-```
-
-### Post Object Structure
-
-```javascript
-{
-  id: 'unique-post-id',
-  title: 'Article Title',
-  excerpt: 'Brief excerpt (150-200 chars)',
-  content: '<p>Full HTML content...</p>',
-  author: 'author-id', // References author.id
-  category: 'Category Name',
-  tags: ['Tag1', 'Tag2', 'Tag3'],
-  date: '2025-12-02', // ISO date string
-  image: '/path/to/featured-image.jpg',
-  readTime: '8 min read'
-}
-```
-
-### Configuration Options
+1. Add a Code Block to your Squarespace page
+2. Paste the following:
 
 ```html
-<div
-  class="mcc-blog"
-  id="blogWidget"
-  data-widget-version="3.0.0"
-  data-max-posts="12"
-  data-author-filter="true"
-  data-category-filter="true"
-  data-search="true"
-></div>
+<div id="mccal-blog-feed"></div>
+<script>
+  (function () {
+    fetch(
+      "https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@blog-feed@0.2.0/src/widgets/blog-feed/versions/v0.2.0-authoring-minimal.html"
+    )
+      .then((r) => r.text())
+      .then(
+        (html) => (document.getElementById("mccal-blog-feed").innerHTML = html)
+      );
+  })();
+</script>
 ```
 
-**Attributes:**
+### Direct Embed
 
-- `data-max-posts`: Maximum posts to display (default: 12)
-- `data-author-filter`: Enable author filtering (default: true)
-- `data-category-filter`: Enable category filtering (default: true)
-- `data-search`: Enable search functionality (default: true)
-- `data-authors`: URL to authors.json or inline JSON string
-- `data-posts`: URL to posts.json or inline JSON string
+Copy the entire contents of `versions/v0.2.0-authoring-minimal.html` into a Squarespace Code Block.
 
-### Interactive Features
+## Configuration
 
-**Search**: Live search across titles, excerpts, and tags with 300ms debounce
+### Data Attributes
 
-**Filters**:
+```html
+<div class="blog" id="blog" data-dev="false"></div>
+```
 
-- By Author: Dropdown populated from author list
-- By Category: Dropdown auto-generated from post categories
-- Sort: Newest first, oldest first, or alphabetical by title
+- `data-dev`: Set to `"false"` to hide the development badge (default: `"true"`)
 
-**Modal View**: Click any card to open full post in modal with:
+### JSON Feed Format (Read Path)
 
-- Author profile display
-- Full formatted content
-- Close on Escape key or overlay click
-- Focus management for accessibility
+Create a JSON file at `src/images/blog/blog-posts.json`:
 
-### Modernization Benefits
+```json
+{
+  "posts": [
+    {
+      "title": "Post Title",
+      "author": "Author Name",
+      "date": "2025-12-03",
+      "excerpt": "Short excerpt or preview text...",
+      "body": [
+        "First paragraph of content.",
+        "Second paragraph.",
+        "## Sources",
+        "1. Source citation 1",
+        "2. Source citation 2"
+      ],
+      "images": [
+        {
+          "src": "../images/example.jpg",
+          "alt": "Image description",
+          "caption": "Optional caption"
+        }
+      ]
+    }
+  ]
+}
+```
 
-1. **CSS Tokens**: Uses shared design system with fallbacks
-2. **BEM Naming**: Predictable, maintainable class names
-3. **Modern JavaScript**: ES6+ patterns throughout
-4. **Accessibility**: Full ARIA support and keyboard navigation
-5. **Performance**: Debounced search, efficient filtering
-6. **Responsive**: Adapts to mobile, tablet, desktop
-7. **Theme Support**: Light/dark mode via CSS custom properties
+**Note**: The `images` array is optional. Sources detection looks for `## Sources` or `Sources:` markers in the body array.
+
+### Authoring (Write Path)
+
+API v1 Blog routes are used for author login and publishing.
+
+- Login: `POST /api/v1/blog/auth/login` → returns `{ token, author }`
+- List posts: `GET /api/v1/blog/posts` → returns `{ posts: [...] }`
+- Publish post: `POST /api/v1/blog/posts` (Authorization: Bearer `<token>`) → `{ success: true, post }`
+
+Environment variables:
+
+- `BLOG_JWT_SECRET` (required) — JWT signing secret; set in `.env`
+
+Developer authors config:
+
+- `src/api/config/blog-authors.json` with structure `{ "authors": [{ "id":"auth-001", "username":"mccal", "password":"demo123", "name":"McCal Media" }] }`
+
+Security note: Development passwords are plaintext. Replace with bcrypt hashes before production.
+
+## Troubleshooting
+
+### Posts not loading
+
+1. Check browser console for fetch errors
+2. Verify `blog-posts.json` path is correct
+3. Check CORS settings if using external host
+4. Clear localStorage cache: `localStorage.removeItem('blog_posts_cache')`
+
+### Login fails
+
+1. Ensure API server is running locally (`npm run api:start` or dev server with API proxy)
+2. Check `.env` contains `BLOG_JWT_SECRET`
+3. Verify `src/api/config/blog-authors.json` contains your username/password
+4. Confirm CORS allows your origin in `src/api/server.js`
+
+### Sources not detected
+
+- Ensure `## Sources` or `Sources:` marker appears on its own line in the body array
+- Sources must come after main content in the body array
+
+### Images not displaying
+
+- Verify image paths are relative to the widget location
+- Check image file permissions
+- Confirm image URLs are accessible
+
+## Performance
+
+- **Cache Duration**: 1 hour localStorage cache for JSON feed
+- **Image Loading**: Lazy loading with `loading="lazy"` attribute
+- **Bundle Size**: ~15KB minified (inline CSS/JS, no external dependencies)
+- **Render Strategy**: Progressive enhancement with demo fallback
+
+## Accessibility
+
+- Semantic HTML structure (`<article>`, `<time>`, `<figure>`)
+- ARIA attributes on modal (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`)
+- Keyboard navigation (ESC to close modal)
+- Focus management in modal
+- Proper heading hierarchy
+- Alt text support for images
+- Color contrast meets WCAG AA standards
+
+## Browser Support
+
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## Development
+
+### Local Testing
+
+1. Start dev server: `npm run dev`
+2. Navigate to test page with widget
+3. Open browser console for debug output
+
+### Validation
+
+```bash
+# Validate HTML structure
+npm run validate:widgets
+
+# Check all files
+npm run repo:health
+```
 
 ## Roadmap
 
-- Google Docs provider (Published-to-web parsing)
-- Self-contained single-code-block version (no external script references)
-- Tag filtering and pagination
-- Optional lightbox for inline images
+- [ ] RSS feed generation
+- [ ] Post sorting options (date, author, category)
+- [ ] Category/tag filtering
+- [ ] Search functionality
+- [ ] Pagination support
+- [ ] Rich text editor integration
+- [ ] Comment system integration
+- [ ] Image uploader for posts
+
+## Support
+
+For issues or questions:
+
+- GitHub Issues: https://github.com/McCal-Codes/McCals-Website/issues
+- Email: contact@mcc-cal.com
+
+## License
+
+MIT License - see repository for details
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for version history and updates.
