@@ -1,11 +1,11 @@
 # TODO Auto-Checker: Keyword & Diff Heuristics (2025-10-09)
 
-The workspace auto-checker (see `scripts/welcome.js`) now supports:
+The workspace auto-checker (see `scripts/admin/welcome.js`, with a thin wrapper kept at `scripts/welcome.js` for backwards compatibility) now supports:
 
 - **Keyword-based auto-checking**: If a commit message contains a configured keyword (e.g., `Close Button Optimization`), any TODO containing that phrase will be checked off automatically.
 - **File-diff-based auto-checking**: If a changed file matches a configured substring or path (e.g., `src/widgets/site-navigation/`), any TODO mentioning the mapped pattern (e.g., `Navigation Hiding pattern`) will be checked off.
 
-To add a new auto-check rule, update the `AUTO_CHECK_MAP` array in `scripts/welcome.js`:
+To add a new auto-check rule, update the `AUTO_CHECK_MAP` array in `scripts/admin/welcome.js`:
 
 ```js
 // Example:
