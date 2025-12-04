@@ -79,8 +79,8 @@
 
 
 ## 2025-10-09
-- Added npm script `welcome` to run the dashboard (`node scripts/welcome.js`).
-- Enhanced TODO auto-checker: now supports keyword and file-diff based heuristics for marking checklist items as done (see `scripts/welcome.js`).
+- Added npm script `welcome` to run the dashboard (`node scripts/admin/welcome.js`, with a wrapper left at `scripts/welcome.js`).
+- Enhanced TODO auto-checker: now supports keyword and file-diff based heuristics for marking checklist items as done (see `scripts/admin/welcome.js`).
 - Documented the new system in `docs/standards/widget-standards.md` and main `README.md`.
 - Added pinning tip to `updates/welcome.md` for persistent dashboard visibility in VS Code.
 # Changelog

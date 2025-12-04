@@ -129,13 +129,13 @@ npm run dev:with-api
 ### Created:
 - `.githooks/post-commit` - Auto-run welcome after commits
 - `.githooks/README.md` - Git hooks documentation
-- `scripts/setup-repo.js` - Repository setup automation
+- `scripts/admin/setup-repo.js` - Repository setup automation
 - `docs/integrations/api-integration-guide.md` - Full API integration guide
 - `docs/integrations/API-QUICKREF.md` - Quick reference card
 
 ### Modified:
 - `package.json` - Added welcome:open, setup scripts, postinstall hook
-- `scripts/welcome.js` - Better output formatting and tips
+- `scripts/admin/welcome.js` - Better output formatting and tips
 - `src/api/routes/manifests.js` - Fixed featured manifest path
 - `src/api/README.md` - Added widget support list
 
@@ -219,8 +219,9 @@ src/
 │   ├── README.md                  ← API overview (updated)
 │   └── routes/manifests.js        ← Manifest config (fixed)
 scripts/
-├── setup-repo.js                  ← Setup automation
-└── welcome.js                     ← Dashboard generator (improved)
+├── admin/
+│   ├── setup-repo.js              ← Setup automation
+│   └── welcome.js                 ← Dashboard generator (improved)
 .githooks/
 ├── post-commit                    ← Auto-run welcome
 └── README.md                      ← Hooks documentation
@@ -234,7 +235,7 @@ scripts/
 - **Quick Ref**: `docs/integrations/API-QUICKREF.md`
 - **Example Widget**: `src/widgets/concert-portfolio/versions/v4.7.1-api-optional.html`
 - **API Docs**: `src/api/README.md`
-- **Setup Script**: `scripts/setup-repo.js`
+- **Setup Script**: `scripts/admin/setup-repo.js`
 
 ---
 

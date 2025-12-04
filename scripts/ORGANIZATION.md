@@ -7,7 +7,7 @@ Canonical folders (current)
 - `scripts/manifest/` - manifest generators (canonical)
 - `scripts/watchers/` - file watchers (chokidar-based)
 - `scripts/utils/` - small utilities used by CI/local workflows
-- `scripts/admin/` - interactive admin helpers
+- `scripts/admin/` - interactive admin helpers (now home to `setup-repo.js` and `welcome.js`, with thin wrappers left in the root for backward compatibility)
 - `scripts/_archived/` - archived legacy scripts
 
 Suggested new group folders (placeholders only — no files were moved):
