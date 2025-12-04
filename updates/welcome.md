@@ -1,20 +1,16 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `fe28d8d7` — 0 seconds ago
-> Add serve selector HTML page for project navigation and Next.js server status
+**Last commit**: `7d7e98b6` — 0 seconds ago
+> feat: reorganize scripts and enhance welcome dashboard functionality
 ## 🔄 Changes in last commit
-- README.md
-- dev-server.js
-- nohup.out
+- CHANGELOG.md
+- docs/archive/updates/2025-11-23-welcome-api-integration.md
+- docs/standards/widget-standards.md
 - package.json
-- scripts/.welcome-state.json
-- serve-select.html
-- sites/self-hosted-nextjs/.next/BUILD_ID
-- sites/self-hosted-nextjs/.next/build-manifest.json
-- sites/self-hosted-nextjs/.next/cache/.tsbuildinfo
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/0.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/1.pack
-- sites/self-hosted-nextjs/.next/cache/webpack/client-production/2.pack
-- …and 106 more
+- scripts/ORGANIZATION.md
+- scripts/admin/setup-repo.js
+- scripts/admin/welcome.js
+- scripts/setup-repo.js
+- scripts/welcome.js
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)
