@@ -6,6 +6,12 @@ The McCal Media API is designed for deployment to **Cloudflare Workers** at `api
 
 **Current Status**: API repo is a Git submodule at `src/api/`. All routes are functional and ready for deployment.
 
+> **Cloudflare account reference**
+>
+> - **Account ID**: `2ac16bbf295c2dacf6e2d7c135c8ebdb`
+> - **Workers.dev subdomain**: `mccal`
+> - **Default preview URL**: `https://mccal-api.mccal.workers.dev`
+
 ---
 
 ## Quick Start: Deploy to Cloudflare
@@ -24,8 +30,9 @@ Create or update `src/api/wrangler.toml`:
 ```toml
 name = "mccal-api"
 type = "javascript"
-account_id = "your-cloudflare-account-id"
+account_id = "2ac16bbf295c2dacf6e2d7c135c8ebdb"
 workers_dev = true
+subdomain = "mccal"
 route = "api.mcc-cal.com/*"
 zone_id = "your-cloudflare-zone-id"
 
@@ -180,7 +187,7 @@ wrangler publish --env staging
 
 In Cloudflare Dashboard:
 
-- Create CNAME: `api.mcc-cal.com` → `mccal-api-prod.workers.dev` (or your Worker URL)
+- Create CNAME: `api.mcc-cal.com` → `mccal-api.mccal.workers.dev` (or your Worker URL)
 - Ensure SSL/TLS is set to "Flexible" or "Full"
 
 ---
@@ -289,9 +296,7 @@ async function loadConcertData() {
 
 ```javascript
 // Read posts (no auth)
-const posts = await fetch("https://api.mcc-cal.com/api/v1/blog/posts").then(
-  (r) => r.json()
-);
+const posts = await fetch("https://api.mcc-cal.com/api/v1/blog/posts").then((r) => r.json());
 
 // Login (required for publishing)
 const loginRes = await fetch("https://api.mcc-cal.com/api/v1/blog/auth/login", {

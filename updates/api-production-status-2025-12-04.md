@@ -6,6 +6,13 @@
 
 ---
 
+## Cloudflare Account Details
+
+- **Account ID**: `2ac16bbf295c2dacf6e2d7c135c8ebdb`
+- **Workers.dev subdomain**: `mccal` → preview endpoint `https://mccal-api.mccal.workers.dev`
+
+---
+
 ## Health Check Results
 
 ### ✅ Working Endpoints
