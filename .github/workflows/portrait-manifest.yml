@@ -203,6 +203,9 @@ jobs:
         with:
           portfolio: portrait
           type: refresh
+          webhook_url: ${{ secrets.MANIFEST_WEBHOOK_URL }}
+          webhook_base: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
+          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
 
       - name: Push changes
         if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'

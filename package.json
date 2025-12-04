@@ -11,6 +11,8 @@
     "ai:finalize": "node scripts/utils/ai-finalize-session.js --summary",
     "api:start": "node src/api/server.js",
     "api:dev": "nodemon src/api/server.js",
+    "api:setup-dev": "bash scripts/admin/setup-api-dev.sh",
+    "api:health": "node scripts/admin/api-health-check.js",
     "api:test": "curl http://localhost:3001/api/health",
     "api:refresh": "curl -X POST http://localhost:3001/api/v1/webhooks/invalidate-all",
     "api:refresh:concert": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/concert",

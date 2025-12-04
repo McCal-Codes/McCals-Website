@@ -219,6 +219,9 @@ jobs:
         with:
           portfolio: journalism
           type: refresh
+          webhook_url: ${{ secrets.MANIFEST_WEBHOOK_URL }}
+          webhook_base: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
+          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
 
       - name: PR Validation Summary
         if: github.event_name == 'pull_request' && steps.check_images.outputs.has_generator == 'true'
