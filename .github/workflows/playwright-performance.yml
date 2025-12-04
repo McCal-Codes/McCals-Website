@@ -1,5 +1,8 @@
 name: Widget Performance (Playwright Scaffold)
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   push:

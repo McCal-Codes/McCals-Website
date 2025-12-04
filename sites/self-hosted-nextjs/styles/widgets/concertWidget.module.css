@@ -1,8 +1,7 @@
-.gallerySection { padding: 2rem; }
-.title { font-size: 2rem; margin-bottom: 1rem; }
-.galleryGrid {
 .gallerySection { padding: 2.25rem 2rem; }
 .title { font-size: 2.25rem; margin-bottom: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+
+.galleryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;

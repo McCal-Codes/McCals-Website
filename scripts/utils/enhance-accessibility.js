@@ -150,10 +150,10 @@ class AccessibilityEnhancer {
         this.stats.altTextMissing++;
         // Add empty alt for decorative images that are ARIA hidden
         if (/aria-hidden\s*=\s*["']true["']/.test(attrs)) {
-          newTag = newTag.replace(">", ' alt="">');
+          newTag = newTag.replace(/>$/, ' alt="">');
           improvements.push('Added alt="" for aria-hidden image');
         } else {
-          newTag = newTag.replace(">", ' alt="NEEDS_DESCRIPTION">');
+          newTag = newTag.replace(/>$/, ' alt="NEEDS_DESCRIPTION">');
           improvements.push("Added placeholder alt (needs manual review)");
         }
       } else if (
@@ -171,7 +171,7 @@ class AccessibilityEnhancer {
           !/fetchpriority\s*=\s*["']high["']/.test(attrs) &&
           !/loading\s*=\s*["']eager["']/.test(attrs)
         ) {
-          newTag = newTag.replace(">", ' loading="lazy">');
+          newTag = newTag.replace(/>$/, ' loading="lazy">');
           improvements.push('Added loading="lazy"');
           this.stats.lazyLoadAdded++;
         }

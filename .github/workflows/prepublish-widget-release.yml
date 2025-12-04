@@ -1,5 +1,8 @@
 name: Prepublish Widget Release Integrity
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   push:
