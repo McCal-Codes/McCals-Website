@@ -1,0 +1,29 @@
+name: Example - Checkout with Submodules
+
+on:
+  workflow_dispatch:
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout with submodules (PAT)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
+          submodules: true
+          fetch-depth: 0
+
+      - name: Show submodule status
+        run: |
+          git submodule status || true
+          git config --list | cat
+
+      - name: Node setup (if needed)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install (no-audit)
+        run: npm ci --prefer-offline --no-audit --no-fund
