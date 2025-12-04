@@ -1,0 +1,11 @@
+{
+  "watch": ["src/api/**/*.js", "src/images/Portfolios/**/*-manifest.json"],
+  "ignore": ["node_modules", "logs", "dist", "*.test.js"],
+  "ext": "js,json",
+  "env": {
+    "NODE_ENV": "development",
+    "API_PORT": "3001"
+  },
+  "delay": "1000",
+  "verbose": true
+}
