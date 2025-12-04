@@ -97,8 +97,6 @@ Reference standards:
 - [x] **Preflight & Workspace Validation** — AI preflight checks added and used (`npm run ai:preflight:short`) and related tasks wired (Oct 4–Oct 6, 2025)
 - [x] **Podcast Feed v1.9.5** — RSS auto-hydration, caching, branding updates (Oct 24, 2025)
 - [x] **Photojournalism v5.x** — filter buttons, shuffle, adjacency minimization, lightbox fixes (Oct 5–Oct 9, 2025)
-- [x] **About Page v1.4.4** — bio update, contact/Calendly integration (Oct 24, 2025)
-- [x] **Site Footer v1.2.0** — accessibility and standards compliance (Oct 5, 2025)
 
 ## 📍 CURRENT STATE (Ready for Next Batch)
 
@@ -139,17 +137,9 @@ Reference standards:
 - [ ] TODO: Switch read path to API (GET /api/v1/blog/posts) with fallback to JSON file; add dev/prod detection.
 - [ ] TODO: Add CI smoke test hitting blog login and publish endpoints with ephemeral changes.
 
-- [ ] TODO: Next.js Footer (v1.3.0 parity) — wire the real newsletter subscription endpoint and adjust JSON-LD logo URL to the app's public assets path. Track status in `sites/self-hosted-nextjs/components/Layout/Footer.tsx`. (Added 2025-12-01)
-      **Phase 1 — Legacy Version Archival (Planning & Scaffolding)** ✅ COMPLETE
 - [x] TODO: Define archival policy and shadow workflow validation (completed per workspace standards and Recent Updates).
 - [x] TODO: Document policy in `docs/standards/workspace-organization.md` and `.github/copilot-instructions.md` (completed).
 - [x] TODO: Add archive index scaffolds (INDEX.json templates) for `concert`, `photojournalism`, and `featured` under `src/widgets/_archived/Legacy Widgets/<widget>/versions/` (Phase 1 scaffolding; no file moves yet).
-- [x] TODO: Add CI scan script (dry-run) to report active vs legacy counts per widget without failing builds; prepare for Phase 2 enforcement.
-
-**Phase 2 — Legacy Version Physical Relocation** ✅ COMPLETE
-
-- [x] TODO: Physically relocated 60+ legacy widget version files to `src/widgets/_archived/Legacy Widgets/<widget>/versions/` (completed Dec 1, 2025).
-  - concert-portfolio: 17 versions archived (v2.0.0–v4.6.0)
   - photojournalism-portfolio: 11 versions archived (v1.0.0–v5.1.0)
   - podcast-feed: 11 versions archived (v1.0.0–v1.9.5)
   - event-portfolio: 8 versions archived (v1.0.0–v2.6.1)
