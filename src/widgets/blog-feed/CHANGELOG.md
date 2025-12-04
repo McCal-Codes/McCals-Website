@@ -38,6 +38,36 @@ Backend powered by new API v1 Blog routes.
 - Write path uses API and stores posts in `src/images/blog/blog-posts.json`
 - Future iterations may move read path to API as well
 
+# Blog Feed Widget Changelog
+
+## Version 0.3.0 - 2025-12-04
+
+### 🌐 Cloudflare Authoring Flow (API-First Read + Write)
+
+Connects the widget to the deployed Cloudflare Worker API for both reads and writes, introducing configurable data attributes for API/feed overrides.
+
+**Highlights**
+
+- Prefers `https://api.mcc-cal.com/api/v1/blog` for fetching posts; falls back to JSON feed when unavailable.
+- Adds `data-api-base`, `data-feed-url`, and `data-api-read` attributes for Squarespace embeds.
+- Author Panel now displays the active API base and stores tokens per-base (prevents dev/prod collisions).
+- Publish flow busts cache and re-renders using API data, so new posts show instantly.
+- Cloudflare Worker gains KV-backed login + post creation routes (session tokens + posts stored in `MCCAL_KV`).
+- Wrangler config now includes `BLOG_AUTHORS` placeholder for per-author credentials.
+
+**Files**
+
+- `versions/v0.3.0-authoring-cloudflare.html` — updated widget version with configurable API + Cloudflare defaults.
+- `src/api/src/worker.js` — adds KV-backed blog login/publish endpoints and session handling.
+- `src/api/wrangler.toml` — new `BLOG_AUTHORS` env var placeholder.
+- Docs updated with Cloudflare setup + widget configuration guidance.
+
+**Notes**
+
+- KV namespace (`MCCAL_KV`) must be configured in Cloudflare for login/publish to work.
+- `BLOG_AUTHORS` JSON string should be stored as a Worker variable/secret (do not commit real passwords).
+- Express API still supports authoring for local development; Cloudflare Worker handles production authoring.
+
 ---
 
 ## Version 0.1.0 - 2025-12-03

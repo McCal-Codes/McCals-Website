@@ -15,14 +15,20 @@ A minimal, self-contained blog feed widget with JSON source support, masonry gri
 
 ## Active Versions (≤2 Policy)
 
-### Current Version: v0.2.0
+### Current Version: v0.3.0
+
+- **File**: `versions/v0.3.0-authoring-cloudflare.html`
+- **Status**: Development/Testing
+- **Release Date**: 2025-12-04
+- **Features**: Configurable API base + JSON feed overrides, prefers Cloudflare Worker for reads/writes, Author Panel wired to KV-backed login/publish, API status label
+
+### Previous Stable: v0.2.0
 
 - **File**: `versions/v0.2.0-authoring-minimal.html`
-- **Status**: Development/Testing
 - **Release Date**: 2025-12-03
-- **Features**: Author Panel (login/logout), minimal Publish Post form powered by API v1 blog routes; read path unchanged (JSON feed, caching, Sources copy, optional images)
+- **Features**: Author Panel (login/logout) with minimal publish form, JSON feed read path, Sources copy, optional images
 
-### Previous Stable: v0.1.0
+### Legacy Stable: v0.1.0
 
 - **File**: `versions/v0.1.0-blog-minimal.html`
 - **Release Date**: 2025-12-03
@@ -47,13 +53,9 @@ Older Google Sheets/Docs versions have been archived:
 <div id="mccal-blog-feed"></div>
 <script>
   (function () {
-    fetch(
-      "https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@blog-feed@0.2.0/src/widgets/blog-feed/versions/v0.2.0-authoring-minimal.html"
-    )
+    fetch("https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@blog-feed@0.3.0/src/widgets/blog-feed/versions/v0.3.0-authoring-cloudflare.html")
       .then((r) => r.text())
-      .then(
-        (html) => (document.getElementById("mccal-blog-feed").innerHTML = html)
-      );
+      .then((html) => (document.getElementById("mccal-blog-feed").innerHTML = html));
   })();
 </script>
 ```
@@ -67,10 +69,13 @@ Copy the entire contents of `versions/v0.2.0-authoring-minimal.html` into a Squa
 ### Data Attributes
 
 ```html
-<div class="blog" id="blog" data-dev="false"></div>
+<div class="blog" id="blog" data-dev="false" data-api-base="https://api.mcc-cal.com/api/v1/blog" data-feed-url="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main/src/images/blog/blog-posts.json" data-api-read="true"></div>
 ```
 
-- `data-dev`: Set to `"false"` to hide the development badge (default: `"true"`)
+- `data-dev`: Set to `"false"` to hide the development badge (default `"true"`).
+- `data-api-base`: Override the API base URL (defaults to local API in dev, Cloudflare Worker in production). Trailing slashes are trimmed automatically.
+- `data-feed-url`: Override the JSON feed fallback path (defaults to GitHub Pages asset).
+- `data-api-read`: When `"true"` (default) the widget fetches posts from the API first; set to `"false"` to force JSON-only reads.
 
 ### JSON Feed Format (Read Path)
 
@@ -84,13 +89,7 @@ Create a JSON file at `src/images/blog/blog-posts.json`:
       "author": "Author Name",
       "date": "2025-12-03",
       "excerpt": "Short excerpt or preview text...",
-      "body": [
-        "First paragraph of content.",
-        "Second paragraph.",
-        "## Sources",
-        "1. Source citation 1",
-        "2. Source citation 2"
-      ],
+      "body": ["First paragraph of content.", "Second paragraph.", "## Sources", "1. Source citation 1", "2. Source citation 2"],
       "images": [
         {
           "src": "../images/example.jpg",
@@ -107,21 +106,23 @@ Create a JSON file at `src/images/blog/blog-posts.json`:
 
 ### Authoring (Write Path)
 
-API v1 Blog routes are used for author login and publishing.
+API v1 Blog routes are used for both reading and writing posts. v0.3+ prefers the Cloudflare Worker deployment at `https://api.mcc-cal.com/api/v1/blog`, which stores posts/tokens in Cloudflare KV.
 
 - Login: `POST /api/v1/blog/auth/login` → returns `{ token, author }`
 - List posts: `GET /api/v1/blog/posts` → returns `{ posts: [...] }`
 - Publish post: `POST /api/v1/blog/posts` (Authorization: Bearer `<token>`) → `{ success: true, post }`
 
-Environment variables:
+### Cloudflare Worker Configuration
 
-- `BLOG_JWT_SECRET` (required) — JWT signing secret; set in `.env`
+- **KV Namespace**: Bind `MCCAL_KV` to a Cloudflare Workers KV namespace. Tokens (`blog:token:*`) and posts (`blog:posts`) are stored here.
+- **BLOG_AUTHORS env var**: JSON string e.g. `[{"id":"auth-001","username":"mccal","password":"CHANGE_ME","name":"Caleb"}]`.
+- Optional `BLOG_BASE_URL`: Used to seed KV with existing JSON (`blog-posts.json`).
 
-Developer authors config:
+### Local/Express Development
 
-- `src/api/config/blog-authors.json` with structure `{ "authors": [{ "id":"auth-001", "username":"mccal", "password":"demo123", "name":"McCal Media" }] }`
-
-Security note: Development passwords are plaintext. Replace with bcrypt hashes before production.
+- Environment variable `BLOG_JWT_SECRET` (required) — JWT signing secret for Express API.
+- Development authors config: `src/api/config/blog-authors.json` with structure `{ "authors": [{ "id":"auth-001", "username":"mccal", "password":"demo123", "name":"McCal Media" }] }`.
+- Security note: Development passwords are plaintext. Replace with bcrypt hashes before production or when deploying Express to the public internet.
 
 ## Troubleshooting
 

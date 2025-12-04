@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!--
+  Blog Feed Widget v0.3.0 (Authoring + Cloudflare API)
+  - Adds configurable API base + JSON feed overrides via data attributes
+  - Prefers Cloudflare Worker API for reading/writing posts with KV storage
+  - Login + Publish panel remains minimal for Squarespace embeds
+
+  @version 0.3.0
+  @author McCal Media
+  @license MIT
+  @repository https://github.com/McCal-Codes/McCals-Website
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog — Authoring v0.3.0</title>
+    <meta name="description" content="Blog feed with Cloudflare-backed author login and publish panel." />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "McCal Media Blog",
+        "description": "Insights and stories from McCal Media",
+        "url": "https://mcc-cal.com/blog",
+        "author": {
+          "@type": "Person",
+          "name": "McCal",
+          "url": "https://mcc-cal.com"
+        }
+      }
+    </script>
+    <style>
+      :root {
+        --fg: #111;
+        --fg-light: #666;
+        --bg: #fff;
+        --line: #e5e5e5;
+        --radius: 12px;
+        --accent: #0a7a3e;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #f5f5f5;
+          --fg-light: #a0a0a0;
+          --bg: #0a0a0a;
+          --line: #2a2a2a;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      .blog {
+        max-width: 1100px;
+        margin: 56px auto;
+        padding: 0 20px;
+      }
+      .blog__header {
+        text-align: center;
+        margin: 0 0 24px;
+      }
+      .blog__heading {
+        margin: 0;
+        font-weight: 800;
+        font-size: 28px;
+      }
+      .badge {
+        margin-left: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #b36b00;
+      }
+      .grid {
+        column-count: 3;
+        column-gap: 24px;
+      }
+      @media (max-width: 1024px) {
+        .grid {
+          column-count: 2;
+        }
+      }
+      @media (max-width: 768px) {
+        .grid {
+          column-count: 1;
+        }
+      }
+      .card {
+        display: inline-block;
+        width: 100%;
+        margin: 0 0 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--bg);
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .card__content {
+        padding: 18px;
+      }
+      .card__meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--fg-light);
+        font-size: 12px;
+      }
+      .card__title {
+        margin: 6px 0 8px;
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .card__excerpt {
+        margin: 0;
+        color: var(--fg-light);
+      }
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        background: rgba(0, 0, 0, 0.7);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .modal--active {
+        display: flex;
+      }
+      .modal__content {
+        position: relative;
+        width: 100%;
+        max-width: 860px;
+        max-height: 90vh;
+        background: var(--bg);
+        border-radius: 14px;
+        overflow: auto;
+      }
+      .modal__close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      .modal__post {
+        padding: 42px 28px;
+      }
+      .modal__title {
+        margin: 0 0 6px;
+        font-size: 26px;
+        font-weight: 800;
+      }
+      .modal__meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--fg-light);
+        font-size: 12px;
+      }
+      .modal__body {
+        margin-top: 18px;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+      .sources {
+        margin-top: 24px;
+        padding: 18px;
+        border-top: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: 8px;
+      }
+      @media (prefers-color-scheme: dark) {
+        .sources {
+          background: rgba(255, 255, 255, 0.03);
+        }
+      }
+      .sources__heading {
+        margin: 0 0 12px;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .sources__list {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      .sources__copy {
+        margin-top: 12px;
+        padding: 8px 16px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--fg);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .sources__copy:hover {
+        background: rgba(0, 0, 0, 0.04);
+      }
+      @media (prefers-color-scheme: dark) {
+        .sources__copy:hover {
+          background: rgba(255, 255, 255, 0.06);
+        }
+      }
+      .sources__copy--copied {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .images {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .images__item {
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+      }
+      .images__img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .images__caption {
+        padding: 8px 12px;
+        font-size: 13px;
+        color: var(--fg-light);
+        background: rgba(0, 0, 0, 0.02);
+      }
+      @media (prefers-color-scheme: dark) {
+        .images__caption {
+          background: rgba(255, 255, 255, 0.03);
+        }
+      }
+      /* Author Panel */
+      .author-panel {
+        margin: 16px 0 24px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+        background: var(--bg);
+      }
+      .author-panel__row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      .author-panel__input {
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--fg);
+        min-width: 180px;
+      }
+      .author-panel__btn {
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--fg);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .author-panel__status {
+        font-size: 12px;
+        color: var(--fg-light);
+        margin-top: 8px;
+      }
+      .author-panel__form {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .author-panel__textarea {
+        min-height: 120px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--fg);
+      }
+      .author-panel__small {
+        font-size: 12px;
+        color: var(--fg-light);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="blog"
+      id="blog"
+      data-dev="true"
+      data-api-base="https://api.mcc-cal.com/api/v1/blog"
+      data-feed-url="https://McCal-Codes.github.io/McCals-Website/src/images/blog/blog-posts.json"
+    >
+      <div class="blog__header">
+        <h1 class="blog__heading">
+          Latest Articles
+          <span class="badge" id="devBadge">IN PROGRESS (DEV)</span>
+        </h1>
+        <p style="margin: 8px 0 0; color: var(--fg-light)">
+          Authoring-enabled blog. Cloudflare API preferred for reading & writing.
+        </p>
+      </div>
+
+      <section class="author-panel" aria-labelledby="authorPanelHeading">
+        <h2 id="authorPanelHeading" style="margin: 0 0 8px; font-size: 18px">Author Panel</h2>
+        <div class="author-panel__row" id="authRow">
+          <input class="author-panel__input" id="username" placeholder="Username" autocomplete="username" />
+          <input
+            class="author-panel__input"
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+          />
+          <button class="author-panel__btn" id="loginBtn">Login</button>
+          <button class="author-panel__btn" id="logoutBtn" style="display: none">Logout</button>
+        </div>
+        <div class="author-panel__status" id="authStatus">Not logged in</div>
+        <div class="author-panel__form" id="postForm" style="display: none">
+          <input class="author-panel__input" id="title" placeholder="Post title" />
+          <input class="author-panel__input" id="excerpt" placeholder="Short excerpt" />
+          <textarea
+            class="author-panel__textarea"
+            id="content"
+            placeholder="Write content... Use blank lines to separate paragraphs. End with \n## Sources\n1. Citation"
+          ></textarea>
+          <button class="author-panel__btn" id="publishBtn">Publish Post</button>
+          <div class="author-panel__small">API base: <span id="apiBaseLabel">loading...</span></div>
+        </div>
+      </section>
+
+      <div id="feed"></div>
+    </div>
+
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="postTitle">
+      <div class="modal__content">
+        <button class="modal__close" id="closeBtn" aria-label="Close">&times;</button>
+        <article class="modal__post">
+          <h2 class="modal__title" id="postTitle"></h2>
+          <div class="modal__meta" id="postMeta"></div>
+          <div class="modal__body" id="postBody"></div>
+        </article>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+        const $ = (s, c = document) => c.querySelector(s);
+        const el = $("#blog");
+        if (!el) return;
+
+        const isDev = el.dataset.dev === "true";
+        if ($("#devBadge")) $("#devBadge").style.display = isDev ? "inline" : "none";
+
+        const defaultFeedUrl = "https://McCal-Codes.github.io/McCals-Website/src/images/blog/blog-posts.json";
+        const FEED_URL = (el.dataset.feedUrl || defaultFeedUrl).trim();
+        const defaultApiBase =
+          window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+            ? "http://localhost:3001/api/v1/blog"
+            : "https://api.mcc-cal.com/api/v1/blog";
+        const API_BASE = ((el.dataset.apiBase || defaultApiBase).trim() || defaultApiBase).replace(/\/$/, "");
+        const preferApiRead = el.dataset.apiRead !== "false";
+        const cacheKeySuffix = API_BASE.replace(/[^a-z0-9]/gi, "_");
+        const CACHE_KEY = `blog_posts_cache_${preferApiRead ? "api" : "json"}_${cacheKeySuffix}`;
+        const TOKEN_KEY = `blog_author_token_${cacheKeySuffix}`;
+        const NAME_KEY = `${TOKEN_KEY}_name`;
+
+        const API_LOGIN_URL = `${API_BASE}/auth/login`;
+        const API_POSTS_URL = `${API_BASE}/posts`;
+        const apiBaseLabel = $("#apiBaseLabel");
+        if (apiBaseLabel) apiBaseLabel.textContent = API_BASE;
+
+        // Cache helpers
+        const getCache = () => {
+          try {
+            const raw = localStorage.getItem(CACHE_KEY);
+            if (!raw) return null;
+            const { data, timestamp } = JSON.parse(raw);
+            if (Date.now() - timestamp > 60 * 60 * 1000) {
+              localStorage.removeItem(CACHE_KEY);
+              return null;
+            }
+            return data;
+          } catch (err) {
+            console.warn("Cache parse failed", err);
+            return null;
+          }
+        };
+        const setCache = (data) => {
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+          } catch (err) {
+            console.warn("Cache write failed", err);
+          }
+        };
+
+        const demoPosts = () => [
+          {
+            title: "Welcome to authoring",
+            author: "McCal",
+            date: new Date().toISOString().split("T")[0],
+            excerpt: "Login above to publish a post.",
+            body: ["Use the Author Panel to create new posts."],
+          },
+        ];
+
+        const fetchPosts = async (options = {}) => {
+          const skipCache = options.bustCache === true;
+          if (!skipCache) {
+            const cached = getCache();
+            if (cached) return cached;
+          }
+
+          if (preferApiRead) {
+            try {
+              const res = await fetch(API_POSTS_URL, { headers: { Accept: "application/json" } });
+              if (res.ok) {
+                const json = await res.json();
+                const posts = Array.isArray(json.posts) ? json.posts : [];
+                setCache(posts);
+                return posts;
+              }
+            } catch (err) {
+              console.warn("API posts fetch failed, falling back to JSON feed", err);
+            }
+          }
+
+          try {
+            const res = await fetch(FEED_URL);
+            if (!res.ok) throw new Error(`Feed fetch failed (${res.status})`);
+            const json = await res.json();
+            const posts = json.posts || [];
+            setCache(posts);
+            return posts;
+          } catch (err) {
+            console.warn("Failed to load blog posts, using demo data:", err);
+            return demoPosts();
+          }
+        };
+
+        // Render cards
+        const render = (posts) => {
+          const feed = $("#feed");
+          if (!feed) return;
+          const grid = document.createElement("div");
+          grid.className = "grid";
+          posts.forEach((p) => {
+            const card = document.createElement("article");
+            card.className = "card";
+            card.innerHTML = `<div class="card__content">
+              <div class="card__meta"><span>${escapeHtml(p.author)}</span><span>·</span><time datetime="${
+              p.date
+            }">${new Date(p.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}</time></div>
+              <h3 class="card__title">${escapeHtml(p.title)}</h3>
+              <p class="card__excerpt">${escapeHtml(p.excerpt || "")}</p>
+            </div>`;
+            card.addEventListener("click", () => openModal(p));
+            grid.appendChild(card);
+          });
+          feed.innerHTML = "";
+          feed.appendChild(grid);
+        };
+
+        const parseSources = (body) => {
+          const lines = Array.isArray(body) ? body : [body];
+          let inSources = false;
+          const sources = [];
+          const contentLines = [];
+          lines.forEach((line) => {
+            const t = line.trim();
+            if (t === "## Sources" || t === "Sources:") {
+              inSources = true;
+              return;
+            }
+            if (inSources) {
+              if (t && !t.startsWith("#")) sources.push(t);
+            } else {
+              contentLines.push(line);
+            }
+          });
+          return { content: contentLines, sources };
+        };
+
+        const openModal = (post) => {
+          const m = $("#modal");
+          if (!m) return;
+          $("#postTitle").textContent = post.title;
+          $("#postMeta").innerHTML = `<span>${escapeHtml(post.author)}</span><span>·</span><time datetime="${
+            post.date
+          }">${new Date(post.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}</time>`;
+          const { content, sources } = parseSources(post.body);
+          const bodyHtml = content.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+          let imagesHtml = "";
+          if (post.images && post.images.length > 0) {
+            const imageItems = post.images
+              .map(
+                (img) => `
+              <figure class="images__item">
+                <img class="images__img" src="${escapeHtml(img.src)}" alt="${escapeHtml(
+                  img.alt || ""
+                )}" loading="lazy" />
+                ${img.caption ? `<figcaption class="images__caption">${escapeHtml(img.caption)}</figcaption>` : ""}
+              </figure>`
+              )
+              .join("");
+            imagesHtml = `<div class="images">${imageItems}</div>`;
+          }
+          let sourcesHtml = "";
+          if (sources.length > 0) {
+            const sourcesList = sources.map((s) => `<li>${escapeHtml(s)}</li>`).join("");
+            sourcesHtml = `<div class="sources"><h3 class="sources__heading">Sources</h3><ol class="sources__list">${sourcesList}</ol><button class="sources__copy" id="copySourcesBtn">Copy Sources</button></div>`;
+          }
+          $("#postBody").innerHTML = bodyHtml + imagesHtml + sourcesHtml;
+          const copyBtn = $("#copySourcesBtn");
+          if (copyBtn) {
+            copyBtn.addEventListener("click", () => {
+              const text = sources.join("\n");
+              navigator.clipboard.writeText(text).then(() => {
+                copyBtn.textContent = "✓ Copied!";
+                copyBtn.classList.add("sources__copy--copied");
+                setTimeout(() => {
+                  copyBtn.textContent = "Copy Sources";
+                  copyBtn.classList.remove("sources__copy--copied");
+                }, 2000);
+              });
+            });
+          }
+          m.classList.add("modal--active");
+          document.body.style.overflow = "hidden";
+        };
+        const closeModal = () => {
+          const m = $("#modal");
+          if (!m) return;
+          m.classList.remove("modal--active");
+          document.body.style.overflow = "";
+        };
+        $("#closeBtn").addEventListener("click", closeModal);
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeModal();
+        });
+
+        const escapeHtml = (s) =>
+          String(s).replace(/[&<>\"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+        // Authoring: login/logout/publish
+        const initialToken = localStorage.getItem(TOKEN_KEY);
+        function setAuthUI(loggedIn, authorName) {
+          $("#loginBtn").style.display = loggedIn ? "none" : "inline-block";
+          $("#logoutBtn").style.display = loggedIn ? "inline-block" : "none";
+          $("#postForm").style.display = loggedIn ? "grid" : "none";
+          $("#authStatus").textContent = loggedIn ? `Logged in as ${authorName || "author"}` : "Not logged in";
+        }
+        setAuthUI(!!initialToken, localStorage.getItem(NAME_KEY));
+
+        $("#loginBtn").addEventListener("click", async () => {
+          const u = $("#username").value.trim();
+          const p = $("#password").value.trim();
+          if (!u || !p) {
+            $("#authStatus").textContent = "Enter username and password";
+            return;
+          }
+          try {
+            const res = await fetch(API_LOGIN_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username: u, password: p }),
+            });
+            if (!res.ok) {
+              const j = await res.json().catch(() => ({ message: "Login failed" }));
+              throw new Error(j.message || "Login failed");
+            }
+            const j = await res.json();
+            localStorage.setItem(TOKEN_KEY, j.token);
+            const authorName = j.author?.name || j.author?.username || u;
+            localStorage.setItem(NAME_KEY, authorName);
+            setAuthUI(true, authorName);
+            $("#authStatus").textContent = "Login successful";
+          } catch (err) {
+            $("#authStatus").textContent = `Login error: ${err.message}`;
+          }
+        });
+        $("#logoutBtn").addEventListener("click", () => {
+          localStorage.removeItem(TOKEN_KEY);
+          localStorage.removeItem(NAME_KEY);
+          setAuthUI(false);
+        });
+        $("#publishBtn").addEventListener("click", async () => {
+          const t = $("#title").value.trim();
+          const e = $("#excerpt").value.trim();
+          const raw = $("#content").value;
+          const tok = localStorage.getItem(TOKEN_KEY);
+          if (!tok) {
+            $("#authStatus").textContent = "Not logged in";
+            return;
+          }
+          const paragraphs = raw
+            .split(/\n\n+/)
+            .map((s) => s.trim())
+            .filter(Boolean);
+          if (!t || !e || !paragraphs.length) {
+            $("#authStatus").textContent = "Title, excerpt, and content required";
+            return;
+          }
+          try {
+            const res = await fetch(API_POSTS_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${tok}`,
+              },
+              body: JSON.stringify({
+                title: t,
+                excerpt: e,
+                content: paragraphs,
+              }),
+            });
+            if (!res.ok) {
+              const j = await res.json().catch(() => ({ message: "Publish failed" }));
+              throw new Error(j.message || "Publish failed");
+            }
+            $("#authStatus").textContent = "Post published! Refreshing feed...";
+            const posts = await fetchPosts({ bustCache: true });
+            render(posts);
+            $("#title").value = "";
+            $("#excerpt").value = "";
+            $("#content").value = "";
+          } catch (err) {
+            $("#authStatus").textContent = `Publish error: ${err.message}`;
+          }
+        });
+
+        // Load and render posts
+        fetchPosts().then(render);
+      })();
+    </script>
+  </body>
+</html>

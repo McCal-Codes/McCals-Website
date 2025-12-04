@@ -11,6 +11,7 @@ The McCal Media API is designed for deployment to **Cloudflare Workers** at `api
 > - **Account ID**: `2ac16bbf295c2dacf6e2d7c135c8ebdb`
 > - **Workers.dev subdomain**: `mccal`
 > - **Default preview URL**: `https://mccal-api.mccal.workers.dev`
+> - **KV Namespace**: bind `MCCAL_KV` for blog tokens/posts (create via `wrangler kv namespace create MCCAL_KV`)
 
 ---
 
@@ -153,6 +154,7 @@ In Cloudflare Workers Dashboard or via `wrangler`:
 wrangler secret put WEBHOOK_SECRET
 wrangler secret put BLOG_JWT_SECRET
 wrangler secret put NODE_ENV  # Set to "production"
+wrangler secret put BLOG_AUTHORS  # JSON string (see Blog Authoring section)
 ```
 
 Or in `wrangler.toml`:
@@ -162,11 +164,17 @@ Or in `wrangler.toml`:
 NODE_ENV = "production"
 API_BASE = "https://api.mcc-cal.com"
 MANIFEST_BASE = "https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main/src/images/Portfolios"
+BLOG_BASE_URL = "https://McCal-Codes.github.io/McCals-Website/src/images/blog"
+BLOG_AUTHORS = "[{\"id\":\"auth-001\",\"username\":\"mccal\",\"password\":\"CHANGE_ME\",\"name\":\"Caleb\"}]"
 
 [env.production.secrets]
 WEBHOOK_SECRET = "..."
 BLOG_JWT_SECRET = "..."
 REDIS_URL = "..."  # Optional: Redis for caching if available
+
+[[env.production.kv_namespaces]]
+binding = "MCCAL_KV"
+id = "<your-production-kv-id>"
 ```
 
 ### 5. Build and Deploy
@@ -191,6 +199,38 @@ In Cloudflare Dashboard:
 - Ensure SSL/TLS is set to "Flexible" or "Full"
 
 ---
+
+## Blog Authoring via Cloudflare KV
+
+The v0.3+ blog widget expects the Worker to handle `/api/v1/blog/auth/login` and `/api/v1/blog/posts`. These routes rely on Workers KV for both session tokens and stored posts.
+
+### Required Resources
+
+- **KV namespace** bound as `MCCAL_KV` (create via `wrangler kv namespace create MCCAL_KV`).
+- **`BLOG_AUTHORS` variable**: JSON string array or `{ "authors": [] }` object with `{ id, username, password, name }` entries.
+- **Optional `BLOG_BASE_URL`**: Used to seed KV with the existing `blog-posts.json` manifest on first request.
+
+### Example: Setting `BLOG_AUTHORS`
+
+```bash
+wrangler secret put BLOG_AUTHORS
+# Paste JSON, e.g.
+#[
+#  {"id":"auth-001","username":"mccal","password":"your-password","name":"Caleb McCartney"}
+#]
+```
+
+### Widget Configuration
+
+Use the new data attributes in `v0.3.0-authoring-cloudflare.html`:
+
+```html
+<div class="blog" id="blog" data-api-base="https://api.mcc-cal.com/api/v1/blog" data-feed-url="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main/src/images/blog/blog-posts.json" data-api-read="true"></div>
+```
+
+- `data-api-base`: Points login/publish/post fetches to the Cloudflare Worker.
+- `data-feed-url`: JSON fallback for when the API is unavailable.
+- `data-api-read`: `true` (default) attempts API read first; set to `false` to force JSON-only reads.
 
 ## API Routes (Ready for Cloudflare)
 
@@ -225,9 +265,9 @@ GET /api/v1/manifests/:type            Get specific manifest (concert, events, j
 ### Blog (Authoring)
 
 ```
-GET  /api/v1/blog/posts                       Get all posts (no auth, cached)
-POST /api/v1/blog/posts                       Create post (auth required, JWT)
-POST /api/v1/blog/auth/login                  Login with credentials
+GET  /api/v1/blog/posts                       Get all posts (Cloudflare KV with JSON fallback)
+POST /api/v1/blog/posts                       Create post (auth required, KV persistence)
+POST /api/v1/blog/auth/login                  Login with credentials (sessions stored in KV)
 ```
 
 **Login Example**:
@@ -235,11 +275,11 @@ POST /api/v1/blog/auth/login                  Login with credentials
 ```bash
 curl -X POST https://api.mcc-cal.com/api/v1/blog/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"mccal","password":"..."}'
+  -d '{"username":"mccal","password":"your-password"}'
 
 # Response:
 {
-  "token": "eyJhbGc...",
+  "token": "opaque-session-token",
   "author": { "id": "auth-001", "username": "mccal", "name": "Caleb McCartney" }
 }
 ```
@@ -292,7 +332,7 @@ async function loadConcertData() {
 }
 ```
 
-### Blog Feed v0.2+ (Authoring)
+### Blog Feed v0.3+ (Authoring)
 
 ```javascript
 // Read posts (no auth)
