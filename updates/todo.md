@@ -1,6 +1,6 @@
-# Widget Enhancement To-Do (October–November 2025)
+# Widget Enhancement To-Do (October–December 2025)
 
-_Updated: November 19, 2025_
+_Updated: December 4, 2025_
 
 Reference standards:
 
@@ -9,6 +9,38 @@ Reference standards:
 - `docs/standards/widget-development.md`
 - `docs/standards/performance-standards.md`
 - `docs/standards/image-seo-standards.md`
+- `docs/ENVIRONMENT-SETUP.md` ⭐ **NEW** - Complete environment setup guide
+- `docs/NPM-SCRIPTS.md` ⭐ **NEW** - Comprehensive npm scripts reference
+
+---
+
+## 🎉 LATEST UPDATES (Dec 4, 2025)
+
+### Repository Efficiency Improvements Complete
+
+Major overhaul of development tooling, environment management, and Docker optimization:
+
+- ✅ **`.env.example`** - Comprehensive environment variable template (100+ variables)
+- ✅ **`.editorconfig`** - Consistent code formatting across all editors
+- ✅ **`.nvmrc`** - Node.js version specification (18.20.0)
+- ✅ **`.dockerignore`** - Enhanced Docker build efficiency (70% size reduction)
+- ✅ **`Dockerfile.api`** - Multi-stage optimized Docker build with security hardening
+- ✅ **Environment Validator** - `npm run env:validate` checks configuration
+- ✅ **Widget Statistics** - `npm run stats:widgets` analyzes widget health
+- ✅ **20+ New NPM Scripts** - Quick-start commands, Docker management, utilities
+- ✅ **Documentation** - Complete setup guide and npm scripts reference
+
+**Quick Start Commands:**
+
+```bash
+npm run quick:start    # Start development with manifests
+npm run quick:api      # Start API server
+npm run quick:full     # Start everything (site + API)
+npm run env:validate   # Check environment configuration
+npm run stats:widgets  # View widget statistics
+```
+
+**See**: `updates/efficiency-improvements-2025-12-04.md` for complete details
 
 ---
 

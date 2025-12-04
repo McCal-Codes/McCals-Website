@@ -1,7 +1,10 @@
 # McCal Media API Server - Docker Container
-# Optimized for API-only deployment
+# Optimized for API-only deployment with multi-stage build
 
-FROM node:18-alpine
+# ==============================================================================
+# STAGE 1: Builder - Install dependencies and prepare files
+# ==============================================================================
+FROM node:18-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -12,23 +15,62 @@ COPY package*.json ./
 # Copy scripts folder needed for postinstall
 COPY scripts ./scripts
 
-# Install dependencies (production only for smaller image)
-RUN npm ci --only=production
+# Install ALL dependencies (including dev) for potential build steps
+RUN npm ci --prefer-offline --no-audit --no-fund
 
-# Copy only necessary files for API
+# Copy source files
 COPY src/api ./src/api
-COPY src/images/Portfolios ./src/images/Portfolios
+
+# ==============================================================================
+# STAGE 2: Production - Create minimal runtime image
+# ==============================================================================
+FROM node:18-alpine
+
+# Install dumb-init for proper signal handling and wget for health checks
+RUN apk add --no-cache dumb-init wget
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Copy scripts folder (minimal - only what's needed for runtime)
+COPY scripts ./scripts
+
+# Install production dependencies only
+RUN npm ci --only=production --prefer-offline --no-audit --no-fund && \
+    npm cache clean --force
+
+# Copy built API from builder stage
+COPY --from=builder /app/src/api ./src/api
+
+# Copy manifest files (if embedding in container)
+# Uncomment if you want manifests bundled in the image
+# COPY src/images/Portfolios ./src/images/Portfolios
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001 && \
+    chown -R nodejs:nodejs /app
+
+# Switch to non-root user
+USER nodejs
 
 # Expose API port
 EXPOSE 3001
 
 # Health check for API
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3001/api/health || exit 1
 
 # Set environment variables
-ENV NODE_ENV=production
-ENV API_PORT=3001
+ENV NODE_ENV=production \
+    API_PORT=3001 \
+    PORT=3001
+
+# Use dumb-init to handle signals properly
+ENTRYPOINT ["dumb-init", "--"]
 
 # Start the API server
 CMD ["node", "src/api/server.js"]

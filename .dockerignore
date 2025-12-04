@@ -1,41 +1,147 @@
 # Docker ignore file - exclude unnecessary files from image
 
-# Node
+# ==============================================================================
+# DEPENDENCIES
+# ==============================================================================
 node_modules/
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+package-lock.json  # Will be regenerated in container
 
-# Development
+# ==============================================================================
+# VERSION CONTROL
+# ==============================================================================
 .git/
 .github/
-.vscode/
-*.log
+.gitignore
+.gitattributes
+.gitmodules
+.git-rewrite/
 
-# Build artifacts
+# ==============================================================================
+# IDE & EDITOR FILES
+# ==============================================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.editorconfig
+
+# ==============================================================================
+# BUILD ARTIFACTS (not needed in container)
+# ==============================================================================
 dist/
 build/
+out/
+.output/
+.next/
+sites/self-hosted-nextjs/.next/
 
-# Tests
+# ==============================================================================
+# TESTING & REPORTS
+# ==============================================================================
 tests/
 test-results/
 reports/
+coverage/
+playwright-report/
+playwright/.cache/
+*.spec.js
+*.test.js
 
-# Documentation (not needed in container)
+# ==============================================================================
+# DOCUMENTATION (keep README only)
+# ==============================================================================
 docs/
 updates/
 *.md
 !README.md
+!LICENSE
 
-# Local environment
+# ==============================================================================
+# ENVIRONMENT & SECRETS
+# ==============================================================================
 .env
+.env.*
 .env.local
 .env.*.local
+.env.example
+*.key
+*.pem
+*secret*.txt
+*password*.txt
+secrets/
+.secrets/
 
-# OS files
+# ==============================================================================
+# LOGS & RUNTIME FILES
+# ==============================================================================
+logs/
+*.log
+*.pid
+*.seed
+*.pid.lock
+nohup.out
+
+# ==============================================================================
+# OS & SYSTEM FILES
+# ==============================================================================
 .DS_Store
 Thumbs.db
+Desktop.ini
+$RECYCLE_BIN/
+*.swp
+*.swo
+*~
 
-# Temporary
+# ==============================================================================
+# TEMPORARY FILES
+# ==============================================================================
 tmp/
 temp/
+.cache/
 *.tmp
+*.temp
+
+# ==============================================================================
+# DEVELOPMENT TOOLS
+# ==============================================================================
+.husky/
+.githooks/
+.eslintrc.json
+.prettierrc
+playwright.config.js
+tailwind.config.js
+postcss.config.js
+
+# ==============================================================================
+# BACKUP & ARCHIVE FILES
+# ==============================================================================
+*.backup
+*.bak
+*.old
+backup*/
+
+# ==============================================================================
+# SPECIFIC PROJECT FILES (dev only)
+# ==============================================================================
+serve-select.html
+test-blog-authoring.html
+test-blog-widget.html
+docker-compose.yml
+lfs-migration-plan.json
+s3-upload-map.json
+SECURITY-ROTATION.txt
+
+# ==============================================================================
+# EXCLUDE LARGE ASSET DIRECTORIES (if not needed in API container)
+# ==============================================================================
+# Uncomment these if building API-only container
+# src/images/Portfolios/Concert/
+# src/images/Portfolios/Events/
+# src/images/Portfolios/Journalism/
+# src/images/Portfolios/Nature/
+# src/images/Portfolios/Portrait/
+# tools/image-compress/
