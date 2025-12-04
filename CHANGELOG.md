@@ -1,3 +1,48 @@
+## 2025-12-04
+
+### API Integration & Infrastructure
+
+- **Production API Validation** - Validated and documented production API at `https://api.mcc-cal.com`:
+
+  - ✅ API is online and responding correctly
+  - ✅ Core endpoints working: `/`, `/api/v1/health`, `/api/v1/manifests`
+  - ✅ Manifest types available: concert, events, journalism, nature, portrait, portfolio
+  - ⚠️ Manifest endpoints return config error (expected - requires `MANIFEST_BASE_URL` env var)
+  - Created comprehensive status document: `updates/api-production-status-2025-12-04.md`
+
+- **API Health Check Script Updates** - Enhanced `scripts/admin/api-health-check.js`:
+
+  - Now supports both local (`http://localhost:3001`) and production (`https://api.mcc-cal.com`) endpoints
+  - Added HTTPS support via `https` module
+  - Updated endpoint paths to match production API routes (`/api/v1/health`)
+  - Gracefully handles 500 config errors with warning messages instead of failures
+  - Increased timeout to 10 seconds for production API calls
+  - Shows API version and detailed error messages in output
+  - Use `API_URL` environment variable to override default endpoint
+
+- **GitHub Actions Workflow Improvements** - Fixed secret handling in manifest workflows:
+  - Updated 4 workflows: `events-manifest.yml`, `journalism-manifest.yml`, `nature-manifest.yml`, `portrait-manifest.yml`
+  - Added export step to move secrets from `${{ secrets.* }}` to `$GITHUB_ENV` variables
+  - Webhook notification action now references environment variables instead of direct secrets
+  - Eliminates local YAML linter false-positive warnings while maintaining security
+  - Pattern documented in `updates/todo.md` for future workflow updates
+
+### Documentation
+
+- **API Integration Guide** - Created `updates/api-production-status-2025-12-04.md`:
+
+  - Complete health check results and endpoint documentation
+  - Configuration notes for `MANIFEST_BASE_URL` requirement
+  - Repository changes summary (health check script, workflow fixes)
+  - Next steps for widget API integration, blog feed, webhooks, SEO
+  - Testing commands and examples
+
+- **Todo List Updates** - Updated `updates/todo.md`:
+  - Marked secret handling issue as resolved with implementation notes
+  - Added new Production API Integration section with 9 tracked items
+  - Documented completed validation and configuration tasks
+  - Listed upcoming work: widget integration, blog API, webhooks, caching
+
 ## 2025-12-05
 
 ### Widget Enhancements

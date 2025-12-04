@@ -197,15 +197,22 @@ jobs:
             echo "✅ Changes committed"
           fi
 
+      - name: Export manifest webhook secrets to environment
+        if: ${{ secrets.MANIFEST_WEBHOOK_URL != '' }}
+        run: |
+          echo "MANIFEST_WEBHOOK_URL=${{ secrets.MANIFEST_WEBHOOK_URL }}" >> $GITHUB_ENV
+          echo "MANIFEST_WEBHOOK_BASE=${{ secrets.MANIFEST_WEBHOOK_BASE }}" >> $GITHUB_ENV
+          echo "WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }}" >> $GITHUB_ENV
+
       - name: Notify API webhook
         if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
         uses: ./.github/actions/notify-manifest-webhook
         with:
           portfolio: portrait
           type: refresh
-          webhook_url: ${{ secrets.MANIFEST_WEBHOOK_URL }}
-          webhook_base: ${{ secrets.MANIFEST_WEBHOOK_BASE }}
-          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+          webhook_url: ${{ env.MANIFEST_WEBHOOK_URL }}
+          webhook_base: ${{ env.MANIFEST_WEBHOOK_BASE }}
+          webhook_secret: ${{ env.WEBHOOK_SECRET }}
 
       - name: Push changes
         if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
