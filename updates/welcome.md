@@ -1,8 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `47568e74` — 0 seconds ago
-> fix: Handle paths with spaces in publish-manifests-cdn workflow
+**Last commit**: `03f9d862` — 0 seconds ago
+> chore added images to Event Portfolio (Growing up Show)
 ## 🔄 Changes in last commit
-- .github/workflows/publish-manifests-cdn.yml
+- scripts/.welcome-state.json
+- src/images/Portfolios/Events/Growing Up/_CAL5514.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5543.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5676.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5692.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5700.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5723.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5736.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5740.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5742.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5745.jpg
+- src/images/Portfolios/Events/Growing Up/_CAL5755.jpg
+- …and 8 more
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)
