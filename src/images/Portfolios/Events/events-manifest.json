@@ -1,8 +1,81 @@
 {
   "version": "2.6.4",
-  "generated": "2025-11-27",
-  "totalEvents": 19,
+  "generated": "2025-12-05",
+  "totalEvents": 20,
   "events": [
+    {
+      "eventName": "Growing Up",
+      "category": "Corporate",
+      "dateDisplay": "December 2025",
+      "dateISO": "2025-12-05",
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 5,
+        "monthName": "December",
+        "iso": "2025-12-05",
+        "display": "December 2025"
+      },
+      "dateSource": "fallback:current",
+      "dateConfidence": "low",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5543.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5700.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5723.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5736.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5745.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5755.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5759.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5832.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5842.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5859.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5880.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5882.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5922.jpg"
+        }
+      ],
+      "totalImages": 18
+    },
     {
       "eventName": "Pittsburgh Social Club",
       "category": "Corporate",
@@ -3982,6 +4055,78 @@
     }
   ],
   "items": [
+    {
+      "title": "Growing Up",
+      "eventName": "Growing Up",
+      "category": "Corporate",
+      "dateDisplay": "December 2025",
+      "dateISO": "2025-12-05",
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 5,
+        "monthName": "December",
+        "iso": "2025-12-05",
+        "display": "December 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5543.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5700.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5723.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5736.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5745.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5755.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5759.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5832.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5842.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5859.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5880.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5882.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5922.jpg"
+        }
+      ],
+      "folderPath": "Events/Growing Up"
+    },
     {
       "title": "Pittsburgh Social Club",
       "eventName": "Pittsburgh Social Club",
