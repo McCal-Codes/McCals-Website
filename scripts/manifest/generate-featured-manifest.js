@@ -22,7 +22,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const { detectDateFromImages, formatDisplayDate, createFallbackDate } = require('./shared-date-parsing');
+const { detectDateFromImages, formatDisplayDate, createFallbackDate } = require('../utils/shared-date-parsing.js');
 const { notify } = require('../utils/manifest-webhook');
 
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
