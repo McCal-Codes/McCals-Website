@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `03f9d862` — 0 seconds ago
-> chore added images to Event Portfolio (Growing up Show)
+**Last commit**: `0029fd5b` — 1 second ago
+> feat: update welcome state with latest commit details and added images to Event Portfolio and Images to Portrait Portfolio
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
-- src/images/Portfolios/Events/Growing Up/_CAL5514.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5543.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5676.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5692.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5700.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5723.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5736.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5740.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5742.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5745.jpg
-- src/images/Portfolios/Events/Growing Up/_CAL5755.jpg
-- …and 8 more
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2013.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2019.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2026.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2035.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2046.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2051.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2055.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2058.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2061.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2066.jpg
+- src/images/Portfolios/Portrait/Couples/Rynles & Weslie Engagement/241025_Rynles & Weslie Engagement Session_CAL2072.jpg
+- …and 23 more
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)
