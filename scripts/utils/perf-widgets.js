@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-env browser */
 /**
  * Playwright performance scaffold for widgets
  * Measures simple load timings and collects basic metrics per widget route.
@@ -23,11 +22,12 @@ async function measure(url, name) {
   try {
     await page.goto(url, { waitUntil: 'domcontentloaded' });
     await page.waitForLoadState('networkidle');
+    // eslint-disable-next-line no-undef
     const dom = await page.evaluate(() => ({
-      title: window?.document?.title || '',
-      images: window?.document ? window.document.querySelectorAll('img').length : 0,
-      scripts: window?.document ? window.document.querySelectorAll('script').length : 0,
-      links: window?.document ? window.document.querySelectorAll('a').length : 0
+      title: document?.title || '',
+      images: document ? document.querySelectorAll('img').length : 0,
+      scripts: document ? document.querySelectorAll('script').length : 0,
+      links: document ? document.querySelectorAll('a').length : 0
     }));
     metrics = { ...metrics, dom, ms: Date.now() - start };
   } catch (e) {
