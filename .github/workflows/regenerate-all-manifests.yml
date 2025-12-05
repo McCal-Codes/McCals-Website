@@ -1,7 +1,12 @@
 name: Regenerate All Manifests
 
 on:
-  # Manual trigger only - for emergency recovery
+  push:
+    branches: [main]
+    paths:
+      - 'src/images/Portfolios/**'
+      - '.github/workflows/regenerate-all-manifests.yml'
+  # Manual trigger still available for emergency recovery
   workflow_dispatch:
     inputs:
       force:

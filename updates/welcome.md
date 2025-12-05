@@ -1,20 +1,8 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `7e70b660` — 0 seconds ago
-> chore: compress images and fix manifest watcher
+**Last commit**: `2bd95590` — 0 seconds ago
+> fix: include Back To School Bash in events manifest
 ## 🔄 Changes in last commit
-- .github/workflows/build-manifest.yml
-- .github/workflows/events-manifest.yml
-- .github/workflows/featured-manifest.yml
-- .github/workflows/journalism-manifest.yml
-- .github/workflows/manifest-composite.yml
-- .github/workflows/nature-manifest.yml
-- .github/workflows/portrait-manifest.yml
-- .github/workflows/reusable-manifest.yml
-- .github/workflows/universal-manifest.yml
-- CONTRIBUTING.md
-- README.md
-- SECURITY.md
-- …and 228 more
+- src/images/Portfolios/Events/events-manifest.json
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)
