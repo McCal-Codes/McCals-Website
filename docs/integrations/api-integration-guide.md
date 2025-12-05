@@ -29,6 +29,123 @@ All manifest endpoints return:
 }
 ```
 
+### Response Headers
+
+Manifest responses include standardized headers for optimal caching:
+
+| Header | Value | Description |
+|--------|-------|-------------|
+| `Content-Type` | `application/json; charset=utf-8` | JSON content type |
+| `Cache-Control` | `public, max-age=600, stale-while-revalidate=3600` | 10 min TTL, 1 hour stale |
+| `ETag` | `W/"concert-abc123..."` | Weak ETag for conditional requests |
+| `X-Cache` | `HIT` or `MISS` | Edge cache status |
+| `X-RateLimit-Remaining` | `99` | Remaining requests in window |
+
+---
+
+## Cloudflare Integration
+
+### Edge Caching Policy
+
+The API uses Cloudflare Workers for edge caching with the following policy:
+
+| Resource | TTL | Stale-While-Revalidate | Notes |
+|----------|-----|------------------------|-------|
+| Manifests (`/api/v1/manifests/*`) | 10 minutes | 1 hour | ETag revalidation supported |
+| Widget HTML | 5 minutes | 30 minutes | More frequent updates |
+| Blog posts | 1 hour | 2 hours | Less volatile |
+
+### Webhook Endpoints (Cache Management)
+
+The following webhook endpoints are available for cache management. All require `X-Webhook-Secret` header authentication.
+
+#### Purge Cache
+
+```bash
+# Purge specific manifest type
+curl -X POST https://api.mcc-cal.com/api/v1/webhooks/purge/concert \
+  -H "X-Webhook-Secret: YOUR_SECRET"
+
+# Purge all manifest caches
+curl -X POST https://api.mcc-cal.com/api/v1/webhooks/purge \
+  -H "X-Webhook-Secret: YOUR_SECRET"
+```
+
+#### Warm Cache (Pre-populate)
+
+```bash
+# Warm specific manifest type
+curl -X POST https://api.mcc-cal.com/api/v1/webhooks/warm/concert \
+  -H "X-Webhook-Secret: YOUR_SECRET"
+
+# Warm all manifest caches
+curl -X POST https://api.mcc-cal.com/api/v1/webhooks/warm \
+  -H "X-Webhook-Secret: YOUR_SECRET"
+```
+
+#### Refresh (Purge + Warm)
+
+Used by the CI/CD pipeline after manifest publishing:
+
+```bash
+# Combined purge and warm for all manifests
+curl -X POST https://api.mcc-cal.com/api/v1/webhooks/refresh \
+  -H "X-Webhook-Secret: YOUR_SECRET"
+```
+
+### Cache Statistics
+
+Monitor cache health via the stats endpoint:
+
+```bash
+curl https://api.mcc-cal.com/api/v1/cache/stats
+```
+
+Response:
+```json
+{
+  "hits": 1234,
+  "misses": 56,
+  "purges": 3,
+  "warms": 6,
+  "hitRate": "95.7%",
+  "uptimeMs": 3600000,
+  "lastReset": "2025-12-05T10:00:00.000Z"
+}
+```
+
+### Rate Limiting
+
+Manifest endpoints are rate-limited to prevent abuse:
+
+- **Limit**: 100 requests per minute per IP
+- **Headers**: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`
+- **429 Response**: When limit exceeded, includes `Retry-After: 60`
+
+### Manual Cache Refresh
+
+For manual cache refresh (e.g., after emergency fixes):
+
+1. **Via Cloudflare Dashboard**: Purge cache in Cloudflare dashboard
+2. **Via API**: Call `/api/v1/webhooks/refresh` with proper authentication
+3. **Via GitHub Actions**: Trigger the "Publish Manifests to CDN" workflow manually
+
+### Setting Up Secrets
+
+Required GitHub Secrets for automated cache purge:
+
+- `CLOUDFLARE_API_URL`: Your Worker URL (e.g., `https://mccal-api.mccal.workers.dev`)
+- `CLOUDFLARE_WEBHOOK_SECRET`: Secret for webhook authentication
+
+To set the webhook secret in Cloudflare:
+
+```bash
+cd src/api
+npx wrangler secret put WEBHOOK_SECRET
+```
+
+---
+
 ## Widget Integration Pattern
 
 ### Data Attribute Configuration

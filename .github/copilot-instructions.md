@@ -232,6 +232,17 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+- 2025-12-05T00:00:00.000Z — Cloudflare Integration for Edge Caching and Cache Management.
+	- Added webhook endpoints to Cloudflare Worker: `POST /api/v1/webhooks/purge`, `/warm`, `/refresh` with secret authentication.
+	- Implemented edge caching policy: 10 min TTL for manifests, 1 hour stale-while-revalidate, ETag validation support.
+	- Added rate limiting: 100 requests/minute per IP on `/api/v1/manifests/*` endpoints with KV-backed counters.
+	- Added cache stats endpoint: `GET /api/v1/cache/stats` for hit/miss monitoring.
+	- Updated dev proxy (`src/api/proxy-middleware.js`) to force `cache: 'no-store'` so Cloudflare settings only apply in production.
+	- Enhanced `publish-manifests-cdn.yml` workflow to call Cloudflare cache refresh webhook after manifest publish.
+	- Standardized response headers: `Content-Type`, `Cache-Control`, `ETag`, `X-Cache`, `X-RateLimit-*`.
+	- Updated documentation: `docs/integrations/api-integration-guide.md` and `src/api/README.md`.
+	- Requires GitHub Secrets: `CLOUDFLARE_API_URL`, `CLOUDFLARE_WEBHOOK_SECRET` (optional, skipped if not set).
+
 - 2025-11-29T00:00:00.000Z — Pre-publish and Validation CI enhancements.
 	- Added prepublish workflow for widget tag releases: runs AI Preflight, widget validation, manifest dry-run, uploads artifacts.
 	- Upgraded widget validation CI to publish reports and allow manual dispatch.
