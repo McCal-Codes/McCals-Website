@@ -180,8 +180,9 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit and push manifest
+      - name: Commit manifest changes
         if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
+        id: commit
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
@@ -202,12 +203,30 @@ jobs:
           - Generated: $(date -u)
           - Trigger: ${{ github.event_name }}"
           
-          # Pull with rebase before push to avoid race conditions
-          git pull --rebase origin main || true
-          
-          git push
-          
-          echo "✅ Concert manifest updated and pushed successfully!"
+          echo "has_commit=true" >> $GITHUB_OUTPUT
+
+      - name: Push changes
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event_name != 'pull_request'
+        run: |
+          # Use retry logic for push to handle race conditions
+          for attempt in 1 2 3; do
+            echo "Push attempt $attempt of 3..."
+            
+            if git push; then
+              echo "✅ Changes pushed successfully"
+              break
+            else
+              echo "⚠️ Push attempt $attempt failed"
+              if [ $attempt -eq 3 ]; then
+                echo "❌ All push attempts failed"
+                exit 1
+              fi
+              
+              # Pull with rebase before retry
+              git pull --rebase origin main
+              sleep 3
+            fi
+          done
 
       - name: Export webhook env (optional)
         if: false  # Removed export step to reduce linter noise; kept for reference if future env indirection needed.
