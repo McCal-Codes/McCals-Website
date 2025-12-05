@@ -1,4 +1,4 @@
 {
-  "lastHash": "59c8f9b4",
-  "lastMessage": "fix: Merge duplicate with: blocks in workflow checkout steps\n\\n\\nAuthor: mccal"
+  "lastHash": "0e0dc673",
+  "lastMessage": "chore: update welcome state and add new images to portfolios\n\n- Updated last commit hash and message in scripts/.welcome-state.json\n- Added multiple new images to the Events and Portrait portfolios\n- Removed outdated images from the Back To School Bash event\n\\n\\nAuthor: mccal"
 }

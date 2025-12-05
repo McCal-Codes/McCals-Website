@@ -1,0 +1,33 @@
+name: Auto-Generate Featured Manifest
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/images/Portfolios/**'
+      - 'scripts/manifest/**'
+      - '.github/workflows/featured-manifest.yml'
+  
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/images/Portfolios/**'
+      - 'scripts/manifest/**'
+      - '.github/workflows/featured-manifest.yml'
+  
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: featured-manifest-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    uses: ./.github/workflows/reusable-manifest.yml
+    with:
+      portfolio: featured
+      notify-webhook: true
+    secrets: inherit

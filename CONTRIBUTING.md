@@ -30,7 +30,12 @@ Before opening a PR:
 ## Reviews & PRs
 - Link PRs to related TODO items or the [Repository Improvement Plan](docs/repo-improvement-plan.md) when applicable.
 - Include testing results in the PR description.
+- Note any hardening work that follows the [Security & Organization Checklist](docs/standards/security-organization-checklist.md); if you use AI assistance, start from `docs/standards/security-organization-prompt.md`.
 - Be explicit about any follow-up work or known limitations.
+
+## Security
+- Vulnerability reporting and response targets are defined in `SECURITY.md`.
+- Before shipping changes that touch endpoints, dev-server helpers, or config, run a quick pass against the [Security & Organization Checklist](docs/standards/security-organization-checklist.md).
 
 ## Code of Conduct
 By participating, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md). If you witness or experience unacceptable behavior, please contact the maintainers listed in `CODEOWNERS`.

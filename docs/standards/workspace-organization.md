@@ -124,20 +124,14 @@ Planned CI additions:
 2. Validate newest version has a corresponding CHANGELOG entry.
 3. Warn if archived versions still reside in live directories after Phase 2 migration window.
 
-## Composite Manifest Workflow Shadowing (2025-11)
+## Composite Manifest Workflow (retired 2025-12)
 
-To validate consolidation, a composite shadow workflow (`.github/workflows/manifest-composite.yml`) was introduced. It runs a matrix covering: concert, events, journalism, nature, portrait, universal.
+The experimental composite shadow workflow (`.github/workflows/manifest-composite.yml`) was removed after proving redundant. We now rely on:
+- Per-portfolio workflows (concert, events, journalism, nature, portrait)
+- `regenerate-all-manifests.yml` for manual bulk runs
+- `publish-manifests-cdn.yml` for CDN pushes
 
-Goals:
-- Ensure consolidated generation produces identical outputs to individual workflows.
-- Gather reliability data before decommissioning per-portfolio workflows.
-
-Transition Plan:
-1. Shadow workflow runs alongside existing individual workflows for a probation period.
-2. On consistent PASS (no divergence, JSON validation stable) → retire individual workflows.
-3. Update documentation & CI references to point at composite job only.
-
-Agents modifying manifest logic must: (a) update composite workflow matrix if portfolios added/removed, (b) run local validation (`npm run manifest:dry-run`) before committing.
+Agents modifying manifest logic should continue to run local validation (`npm run manifest:dry-run`) and, for bulk checks, use `regenerate-all-manifests.yml` via `workflow_dispatch`.
 
 ---
 

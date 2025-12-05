@@ -2,6 +2,8 @@
 
 This repository hosts the development workspace for McCal Media's Squarespace widgets. It includes the widget source files, a local test site, automation scripts, and standards that keep contributions consistent and production-ready.
 
+Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/standards/security-organization-prompt.md` or the quick `docs/standards/security-organization-checklist.md`.
+
 ## Getting Started
 
 **Requirements:** Node.js 18+ and npm.

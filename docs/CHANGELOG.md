@@ -5,7 +5,7 @@
 - **STATUS Standardization**: Applied unified STATUS template to Blog Feed, Nature Portfolio, and Admin Importer; refreshed dates and added exit criteria.
 - **Scripts Hygiene**: Added `scripts/utils/orphan-audit.js` to emit JSON report of unreferenced scripts; documented duplicate cleanup policy in `scripts/_archived/README.md`.
 - **Deploy Script Consolidation**: Replaced deprecated `deploy:vercel` / `deploy:surge` scripts with single `deploy:placeholder` entry in `package.json` (historic deployment flows archived).
-- **Composite CI (Shadow)**: Added `manifest-composite.yml` workflow (matrix for concert, events, journalism, nature, portrait, universal) — runs alongside existing individual workflows for validation before consolidation.
+- **Composite CI (Shadow)**: Composite workflow removed (Dec 2025) after redundancy validated; rely on per-portfolio + `regenerate-all-manifests.yml`.
 - **Standards Index Polish**: Updated `docs/standards/README.md` for faster navigation and consistency (workspace icon fix, linked quick start, added SEO / Troubleshooting / UI sections, TOC cleanup).
 - Updated `docs/standards/README.md` for faster navigation and consistency:
   - Replaced broken workspace icon with 🗂️
