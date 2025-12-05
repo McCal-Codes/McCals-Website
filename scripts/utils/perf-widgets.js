@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-env browser */
 /**
  * Playwright performance scaffold for widgets
  * Measures simple load timings and collects basic metrics per widget route.
