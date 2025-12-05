@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "generated": "2025-12-05T17:07:31.546Z",
+  "generated": "2025-12-05T17:34:28.447Z",
   "totalPortfolios": 5,
   "totalItems": 44,
-  "totalImages": 1654,
+  "totalImages": 1652,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -18,7 +18,7 @@
     },
     "Events": {
       "count": 22,
-      "totalImages": 1315
+      "totalImages": 1313
     },
     "Journalism": {
       "count": 2,
@@ -2388,6 +2388,49 @@
     {
       "type": "Events",
       "category": "Event Photography",
+      "name": "PicklesBurgh",
+      "folderPath": "Events/PicklesBurgh",
+      "dateDisplay": "July 2023",
+      "date": {
+        "year": 2023,
+        "month": 7,
+        "day": 22,
+        "monthName": "July",
+        "iso": "2023-07-22",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)",
+        "display": "July 2023"
+      },
+      "totalImages": 22,
+      "images": [
+        "230722_Picklesburgh_23_CAL_4313.jpg",
+        "230722_Picklesburgh_23_CAL_4314.jpg",
+        "230722_Picklesburgh_23_CAL_4315.jpg",
+        "230722_Picklesburgh_23_CAL_4317.jpg",
+        "230722_Picklesburgh_23_CAL_4323.jpg",
+        "230722_Picklesburgh_23_CAL_4324.jpg",
+        "230722_Picklesburgh_23__CAL4297.jpg",
+        "230722_Picklesburgh_23__CAL4298.jpg",
+        "230722_Picklesburgh_23__CAL4303.jpg",
+        "230722_Picklesburgh_23__CAL4307.jpg",
+        "230722_Picklesburgh_23__CAL4308.jpg",
+        "230722_Picklesburgh_23__CAL4327.jpg",
+        "230722_Picklesburgh_23__CAL4328.jpg",
+        "230722_Picklesburgh_23__CAL4332.jpg",
+        "230722_Picklesburgh_23__CAL4341.jpg",
+        "230722_Picklesburgh_23__CAL4347.jpg",
+        "230722_Picklesburgh_23__CAL4349.jpg",
+        "230722_Picklesburgh_23__CAL4351.jpg",
+        "230722_Picklesburgh_23__CAL4358.jpg",
+        "230722_Picklesburgh_23__CAL4365.jpg",
+        "230722_Picklesburgh_23__CAL4366.jpg",
+        "230722_Picklesburgh_23__CAL4372.jpg"
+      ],
+      "coverImage": "230722_Picklesburgh_23_CAL_4313.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
       "name": "James Bond Cocktail Party 2023",
       "folderPath": "Events/James Bond Cocktail Party 2023",
       "dateDisplay": "April 2023",
@@ -2501,51 +2544,6 @@
         "IMGP9246.jpg"
       ],
       "coverImage": "221019_Street_2021_IMGP9302.jpg"
-    },
-    {
-      "type": "Events",
-      "category": "Event Photography",
-      "name": "PicklesBurgh",
-      "folderPath": "Events/PicklesBurgh",
-      "dateDisplay": "July 2022",
-      "date": {
-        "day": 23,
-        "month": 7,
-        "year": 2022,
-        "monthName": "July",
-        "iso": "2022-07-23",
-        "source": "ddmmyy_solid",
-        "description": "DDMMYY",
-        "display": "July 2022"
-      },
-      "totalImages": 24,
-      "images": [
-        "._230722_Picklesburgh_23_CAL_4314.jpg",
-        "._230722_Picklesburgh_23__CAL4358.jpg",
-        "230722_Picklesburgh_23_CAL_4313.jpg",
-        "230722_Picklesburgh_23_CAL_4314.jpg",
-        "230722_Picklesburgh_23_CAL_4315.jpg",
-        "230722_Picklesburgh_23_CAL_4317.jpg",
-        "230722_Picklesburgh_23_CAL_4323.jpg",
-        "230722_Picklesburgh_23_CAL_4324.jpg",
-        "230722_Picklesburgh_23__CAL4297.jpg",
-        "230722_Picklesburgh_23__CAL4298.jpg",
-        "230722_Picklesburgh_23__CAL4303.jpg",
-        "230722_Picklesburgh_23__CAL4307.jpg",
-        "230722_Picklesburgh_23__CAL4308.jpg",
-        "230722_Picklesburgh_23__CAL4327.jpg",
-        "230722_Picklesburgh_23__CAL4328.jpg",
-        "230722_Picklesburgh_23__CAL4332.jpg",
-        "230722_Picklesburgh_23__CAL4341.jpg",
-        "230722_Picklesburgh_23__CAL4347.jpg",
-        "230722_Picklesburgh_23__CAL4349.jpg",
-        "230722_Picklesburgh_23__CAL4351.jpg",
-        "230722_Picklesburgh_23__CAL4358.jpg",
-        "230722_Picklesburgh_23__CAL4365.jpg",
-        "230722_Picklesburgh_23__CAL4366.jpg",
-        "230722_Picklesburgh_23__CAL4372.jpg"
-      ],
-      "coverImage": "._230722_Picklesburgh_23_CAL_4314.jpg"
     },
     {
       "type": "Events",
