@@ -1,14 +1,8 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `4ab44cc8` — 1 second ago
-> feat: integrate Cloudflare for edge caching and cache management, update API integration guide, and enhance welcome state
+**Last commit**: `47568e74` — 0 seconds ago
+> fix: Handle paths with spaces in publish-manifests-cdn workflow
 ## 🔄 Changes in last commit
-- .github/copilot-instructions.md
 - .github/workflows/publish-manifests-cdn.yml
-- docs/integrations/api-integration-guide.md
-- scripts/.welcome-state.json
-- src/api
-- updates/todo.md
-- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)
