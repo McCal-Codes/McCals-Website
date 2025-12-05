@@ -1,0 +1,82 @@
+name: Reusable Manifest Generation
+
+on:
+  workflow_call:
+    inputs:
+      portfolio:
+        description: 'Portfolio type to generate manifest for'
+        required: true
+        type: string
+      force:
+        description: 'Force regeneration'
+        required: false
+        default: false
+        type: boolean
+      notify-webhook:
+        description: 'Send webhook notification after generation'
+        required: false
+        default: true
+        type: boolean
+    outputs:
+      success:
+        description: 'Whether the workflow succeeded'
+        value: ${{ jobs.generate.outputs.success }}
+      committed:
+        description: 'Whether changes were committed'
+        value: ${{ jobs.generate.outputs.committed }}
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    name: Generate ${{ inputs.portfolio }} manifest
+    runs-on: ubuntu-latest
+    outputs:
+      success: ${{ steps.generate.outputs.success }}
+      committed: ${{ steps.push.outputs.committed }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+          lfs: true
+          submodules: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Generate manifest
+        id: generate
+        uses: ./.github/actions/generate-manifest
+        with:
+          portfolio: ${{ inputs.portfolio }}
+          force: ${{ inputs.force }}
+
+      - name: Commit and push
+        id: push
+        if: github.event_name != 'pull_request'
+        uses: ./.github/actions/commit-and-push
+        with:
+          files: ${{ steps.generate.outputs.manifest_path }}
+          commit-message: |
+            🔄 Auto-update ${{ inputs.portfolio }} manifest
+
+            - Portfolio: ${{ inputs.portfolio }}
+            - Images: ${{ steps.generate.outputs.image_count }}
+            - Trigger: ${{ github.event_name }}
+
+      - name: Notify webhook
+        if: inputs.notify-webhook && steps.push.outputs.committed == 'true'
+        uses: ./.github/actions/notify-manifest-webhook
+        with:
+          portfolio: ${{ inputs.portfolio }}
+          type: refresh

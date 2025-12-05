@@ -10,17 +10,50 @@ on:
         default: false
         type: boolean
       manifests:
-        description: 'Which manifests to regenerate (comma-separated: concert,events,journalism,universal,featured)'
+        description: 'Which manifests to regenerate (comma-separated: concert,events,journalism,nature,portrait,featured,universal or "all")'
         required: false
-        default: 'concert,events,journalism,universal,featured'
+        default: 'all'
         type: string
 
 permissions:
   contents: write
 
+concurrency:
+  group: regenerate-all-manifests
+  cancel-in-progress: false
+
 jobs:
-  regenerate-manifests:
+  # Parse input to determine which portfolios to process
+  prepare:
+    name: Prepare manifest list
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Set matrix
+        id: set-matrix
+        run: |
+          INPUT="${{ github.event.inputs.manifests || 'all' }}"
+          
+          if [ "$INPUT" = "all" ]; then
+            PORTFOLIOS='["concert","events","journalism","nature","portrait","featured","universal"]'
+          else
+            # Convert comma-separated to JSON array
+            PORTFOLIOS=$(echo "$INPUT" | tr ',' '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed 's/^/"/;s/$/"/' | paste -sd, | sed 's/.*/[&]/')
+          fi
+          
+          echo "matrix={\"portfolio\":$PORTFOLIOS}" >> $GITHUB_OUTPUT
+          echo "📋 Will regenerate: $PORTFOLIOS"
+
+  # Generate manifests in parallel using matrix
+  regenerate:
+    name: Regenerate ${{ matrix.portfolio }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+      fail-fast: false  # Continue even if one fails
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,147 +72,107 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
 
-      - name: Parse manifest selection
-        id: parse_manifests
-        run: |
-          MANIFESTS="${{ github.event.inputs.manifests || 'concert,events,journalism,universal,featured' }}"
-          echo "manifests=$MANIFESTS" >> $GITHUB_OUTPUT
-          
-          # Parse individual flags
-          if [[ "$MANIFESTS" == *"concert"* ]]; then
-            echo "do_concert=true" >> $GITHUB_OUTPUT
-          else
-            echo "do_concert=false" >> $GITHUB_OUTPUT
-          fi
-          
-          if [[ "$MANIFESTS" == *"events"* ]]; then
-            echo "do_events=true" >> $GITHUB_OUTPUT
-          else
-            echo "do_events=false" >> $GITHUB_OUTPUT
-          fi
-          
-          if [[ "$MANIFESTS" == *"journalism"* ]]; then
-            echo "do_journalism=true" >> $GITHUB_OUTPUT
-          else
-            echo "do_journalism=false" >> $GITHUB_OUTPUT
-          fi
-          
-          if [[ "$MANIFESTS" == *"universal"* ]]; then
-            echo "do_universal=true" >> $GITHUB_OUTPUT
-          else
-            echo "do_universal=false" >> $GITHUB_OUTPUT
-          fi
-          
-          if [[ "$MANIFESTS" == *"featured"* ]]; then
-            echo "do_featured=true" >> $GITHUB_OUTPUT
-          else
-            echo "do_featured=false" >> $GITHUB_OUTPUT
-          fi
+      - name: Generate manifest
+        id: generate
+        uses: ./.github/actions/generate-manifest
+        with:
+          portfolio: ${{ matrix.portfolio }}
+          force: ${{ github.event.inputs.force }}
 
-      - name: Regenerate concert manifest
-        if: steps.parse_manifests.outputs.do_concert == 'true'
-        run: |
-          echo "🎸 Regenerating concert manifest..."
-          npm run manifest:concert
-          
-          if [ -f "src/images/Portfolios/Concert/concert-manifest.json" ]; then
-            echo "✅ Concert manifest regenerated successfully"
-          else
-            echo "❌ Concert manifest generation failed"
-            exit 1
-          fi
+      - name: Upload manifest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: manifest-${{ matrix.portfolio }}
+          path: ${{ steps.generate.outputs.manifest_path }}
+          retention-days: 1
 
-      - name: Regenerate events manifest
-        if: steps.parse_manifests.outputs.do_events == 'true'
-        run: |
-          echo "🎞️ Regenerating events manifest..."
-          npm run manifest:events
-          
-          if [ -f "src/images/Portfolios/Events/events-manifest.json" ]; then
-            echo "✅ Events manifest regenerated successfully"
-          else
-            echo "❌ Events manifest generation failed"
-            exit 1
-          fi
+  # Collect all manifests and commit in one batch
+  commit:
+    name: Commit all changes
+    needs: regenerate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Regenerate journalism manifest
-        if: steps.parse_manifests.outputs.do_journalism == 'true'
-        run: |
-          echo "📰 Regenerating journalism manifest..."
-          npm run manifest:journalism -- --force
-          
-          if [ -f "src/images/Portfolios/Journalism/journalism-manifest.json" ]; then
-            echo "✅ Journalism manifest regenerated successfully"
-          else
-            echo "❌ Journalism manifest generation failed"
-            exit 1
-          fi
+      - name: Download all manifest artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: manifests-temp
+          pattern: manifest-*
 
-      - name: Regenerate universal manifest
-        if: steps.parse_manifests.outputs.do_universal == 'true'
+      - name: Copy manifests to correct locations
         run: |
-          echo "🌍 Regenerating universal manifest..."
-          npm run manifest:universal
-          
-          if [ -f "src/images/Portfolios/portfolio-manifest.json" ]; then
-            echo "✅ Universal manifest regenerated successfully"
-          else
-            echo "❌ Universal manifest generation failed"
-            exit 1
-          fi
-
-      - name: Regenerate featured manifest
-        if: steps.parse_manifests.outputs.do_featured == 'true'
-        run: |
-          echo "⭐ Regenerating featured manifest..."
-          npm run manifest:featured
-          
-          if [ -f "src/images/Portfolios/featured-manifest.json" ]; then
-            echo "✅ Featured manifest regenerated successfully"
-          else
-            echo "❌ Featured manifest generation failed"
-            exit 1
-          fi
-
-      - name: Check for changes and commit
-        run: |
-          if [[ -n "$(git status --porcelain)" ]] || [[ "${{ github.event.inputs.force }}" == "true" ]]; then
-            echo "📝 Changes detected or force flag set"
+          # Map artifacts back to their proper locations
+          for dir in manifests-temp/manifest-*; do
+            [ -d "$dir" ] || continue
+            portfolio=$(basename "$dir" | sed 's/manifest-//')
             
-            git config --local user.email "actions@github.com"
-            git config --local user.name "GitHub Actions"
-            
-            # Add all manifest files
-            git add src/images/Portfolios/Concert/concert-manifest.json 2>/dev/null || true
-            git add src/images/Portfolios/Events/events-manifest.json 2>/dev/null || true
-            git add src/images/Portfolios/Journalism/journalism-manifest.json 2>/dev/null || true
-            git add src/images/Portfolios/portfolio-manifest.json 2>/dev/null || true
-            git add src/images/Portfolios/featured-manifest.json 2>/dev/null || true
-            # Note: Per-folder `manifest.json` files are deprecated and should not be added here.
-            # To remove legacy per-folder manifests, run: `node scripts/manifest/remove-subfolder-manifests.js`
-            
-            # Show what's being committed
-            echo "Files to commit:"
-            git status --porcelain
-            
-            # Create commit message
-            MANIFESTS="${{ steps.parse_manifests.outputs.manifests }}"
-            git commit -m "🔄 Manual regeneration of manifests: $MANIFESTS
-            
-            - Manifests: $MANIFESTS
+            case "$portfolio" in
+              concert)
+                cp -f "$dir"/* src/images/Portfolios/Concert/ 2>/dev/null || true
+                ;;
+              events)
+                cp -f "$dir"/* src/images/Portfolios/Events/ 2>/dev/null || true
+                ;;
+              journalism)
+                cp -f "$dir"/* src/images/Portfolios/Journalism/ 2>/dev/null || true
+                ;;
+              nature)
+                cp -f "$dir"/* src/images/Portfolios/Nature/ 2>/dev/null || true
+                ;;
+              portrait)
+                cp -f "$dir"/* src/images/Portfolios/Portrait/ 2>/dev/null || true
+                ;;
+              featured|universal)
+                cp -f "$dir"/* src/images/Portfolios/ 2>/dev/null || true
+                ;;
+            esac
+          done
+          
+          echo "✅ All manifests copied to proper locations"
+
+      - name: Commit and push all changes
+        uses: ./.github/actions/commit-and-push
+        with:
+          files: |
+            src/images/Portfolios/Concert/concert-manifest.json
+            src/images/Portfolios/Events/events-manifest.json
+            src/images/Portfolios/Journalism/journalism-manifest.json
+            src/images/Portfolios/Nature/nature-manifest.json
+            src/images/Portfolios/Portrait/portrait-manifest.json
+            src/images/Portfolios/featured-manifest.json
+            src/images/Portfolios/portfolio-manifest.json
+          commit-message: |
+            🔄 Manual regeneration of manifests
+
+            - Manifests: ${{ github.event.inputs.manifests || 'all' }}
             - Force: ${{ github.event.inputs.force }}
-            - Generated: $(date -u)
-            - Trigger: Manual workflow dispatch"
-            
-            git push
-            
-            echo "✅ All manifests regenerated and pushed successfully!"
-          else
-            echo "✅ No changes detected and force flag not set"
-          fi
+            - Trigger: Manual workflow dispatch
 
-      - name: Notify webhook for regenerated manifests
+      - name: Notify webhook
         uses: ./.github/actions/notify-manifest-webhook
         with:
-          portfolio: ${{ steps.parse_manifests.outputs.manifests }}
+          portfolio: all
           type: refresh
+
+  # Summary job
+  summary:
+    name: Summary
+    needs: [prepare, regenerate, commit]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report status
+        run: |
+          echo "## 🔄 Manifest Regeneration Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Setting | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Manifests | ${{ github.event.inputs.manifests || 'all' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Force | ${{ github.event.inputs.force }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Regenerate Status | ${{ needs.regenerate.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit Status | ${{ needs.commit.result }} |" >> $GITHUB_STEP_SUMMARY

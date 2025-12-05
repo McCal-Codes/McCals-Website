@@ -1,0 +1,148 @@
+name: Generate Portfolio Manifest
+description: "Reusable action for generating portfolio manifests with validation"
+
+inputs:
+  portfolio:
+    description: 'Portfolio type (concert, events, journalism, nature, portrait, featured, universal)'
+    required: true
+  force:
+    description: 'Force regeneration even if no changes'
+    required: false
+    default: 'false'
+
+outputs:
+  success:
+    description: 'Whether manifest generation succeeded'
+    value: ${{ steps.generate.outputs.success }}
+  image_count:
+    description: 'Number of images found'
+    value: ${{ steps.check.outputs.image_count }}
+  manifest_path:
+    description: 'Path to the generated manifest'
+    value: ${{ steps.paths.outputs.manifest_path }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set paths
+      id: paths
+      shell: bash
+      run: |
+        case "${{ inputs.portfolio }}" in
+          concert)
+            echo "dir=src/images/Portfolios/Concert" >> $GITHUB_OUTPUT
+            echo "manifest_path=src/images/Portfolios/Concert/concert-manifest.json" >> $GITHUB_OUTPUT
+            echo "npm_script=manifest:concert" >> $GITHUB_OUTPUT
+            echo "emoji=🎸" >> $GITHUB_OUTPUT
+            ;;
+          events)
+            echo "dir=src/images/Portfolios/Events" >> $GITHUB_OUTPUT
+            echo "manifest_path=src/images/Portfolios/Events/events-manifest.json" >> $GITHUB_OUTPUT
+            echo "npm_script=manifest:events" >> $GITHUB_OUTPUT
+            echo "emoji=🎞️" >> $GITHUB_OUTPUT
+            ;;
+          journalism)
+            echo "dir=src/images/Portfolios/Journalism" >> $GITHUB_OUTPUT
+            echo "manifest_path=src/images/Portfolios/Journalism/journalism-manifest.json" >> $GITHUB_OUTPUT
+            echo "npm_script=manifest:journalism" >> $GITHUB_OUTPUT
+            echo "emoji=📰" >> $GITHUB_OUTPUT
+            ;;
+          nature)
+            echo "dir=src/images/Portfolios/Nature" >> $GITHUB_OUTPUT
+            echo "manifest_path=src/images/Portfolios/Nature/nature-manifest.json" >> $GITHUB_OUTPUT
+            echo "npm_script=manifest:nature" >> $GITHUB_OUTPUT
+            echo "emoji=🌿" >> $GITHUB_OUTPUT
+            ;;
+          portrait)
+            echo "dir=src/images/Portfolios/Portrait" >> $GITHUB_OUTPUT
+            echo "manifest_path=src/images/Portfolios/Portrait/portrait-manifest.json" >> $GITHUB_OUTPUT
+            echo "npm_script=manifest:portrait" >> $GITHUB_OUTPUT
+            echo "emoji=👤" >> $GITHUB_OUTPUT
+            ;;
+          featured)
+            echo "dir=src/images/Portfolios" >> $GITHUB_OUTPUT
+            echo "manifest_path=src/images/Portfolios/featured-manifest.json" >> $GITHUB_OUTPUT
+            echo "npm_script=manifest:featured" >> $GITHUB_OUTPUT
+            echo "emoji=⭐" >> $GITHUB_OUTPUT
+            ;;
+          universal)
+            echo "dir=src/images/Portfolios" >> $GITHUB_OUTPUT
+            echo "manifest_path=src/images/Portfolios/portfolio-manifest.json" >> $GITHUB_OUTPUT
+            echo "npm_script=manifest:universal" >> $GITHUB_OUTPUT
+            echo "emoji=🌍" >> $GITHUB_OUTPUT
+            ;;
+          *)
+            echo "❌ Unknown portfolio type: ${{ inputs.portfolio }}"
+            exit 1
+            ;;
+        esac
+
+    - name: Check for images
+      id: check
+      shell: bash
+      run: |
+        echo "🔍 Checking for images in ${{ steps.paths.outputs.dir }}..."
+        
+        IMAGE_COUNT=$(find "${{ steps.paths.outputs.dir }}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) 2>/dev/null | wc -l | tr -d ' ')
+        echo "📸 Found $IMAGE_COUNT images"
+        echo "image_count=$IMAGE_COUNT" >> $GITHUB_OUTPUT
+
+    - name: Create backup
+      shell: bash
+      run: |
+        if [ -f "${{ steps.paths.outputs.manifest_path }}" ]; then
+          cp "${{ steps.paths.outputs.manifest_path }}" "${{ steps.paths.outputs.manifest_path }}.backup"
+          echo "📋 Created backup of existing manifest"
+        fi
+
+    - name: Generate manifest
+      id: generate
+      shell: bash
+      run: |
+        echo "${{ steps.paths.outputs.emoji }} Generating ${{ inputs.portfolio }} manifest..."
+        
+        # Retry logic
+        for attempt in 1 2 3; do
+          echo "Attempt $attempt of 3..."
+          
+          FORCE_FLAG=""
+          if [ "${{ inputs.force }}" = "true" ]; then
+            FORCE_FLAG="-- --force"
+          fi
+          
+          if npm run ${{ steps.paths.outputs.npm_script }} $FORCE_FLAG; then
+            echo "✅ Manifest generation completed"
+            break
+          else
+            echo "⚠️ Attempt $attempt failed"
+            if [ $attempt -eq 3 ]; then
+              echo "❌ All attempts failed"
+              echo "success=false" >> $GITHUB_OUTPUT
+              exit 1
+            fi
+            sleep 5
+          fi
+        done
+        
+        # Validate output
+        if [ -f "${{ steps.paths.outputs.manifest_path }}" ]; then
+          echo "✅ Manifest file exists"
+          echo "success=true" >> $GITHUB_OUTPUT
+        else
+          echo "❌ Manifest file not found"
+          echo "success=false" >> $GITHUB_OUTPUT
+          
+          # Restore backup
+          if [ -f "${{ steps.paths.outputs.manifest_path }}.backup" ]; then
+            mv "${{ steps.paths.outputs.manifest_path }}.backup" "${{ steps.paths.outputs.manifest_path }}"
+            echo "🔄 Restored backup"
+          fi
+          exit 1
+        fi
+
+    - name: Cleanup backup
+      if: steps.generate.outputs.success == 'true'
+      shell: bash
+      run: |
+        rm -f "${{ steps.paths.outputs.manifest_path }}.backup"
+        echo "🗑️ Cleaned up backup"

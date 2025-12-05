@@ -1,0 +1,93 @@
+name: Commit and Push with Retry
+description: "Reusable action for committing and pushing changes with retry logic for race conditions"
+
+inputs:
+  files:
+    description: 'Files to add (space-separated paths or glob patterns)'
+    required: true
+  commit-message:
+    description: 'Commit message'
+    required: true
+  max-retries:
+    description: 'Maximum push retry attempts'
+    required: false
+    default: '3'
+  retry-delay:
+    description: 'Delay between retries in seconds'
+    required: false
+    default: '3'
+
+outputs:
+  committed:
+    description: 'Whether changes were committed'
+    value: ${{ steps.commit.outputs.committed }}
+  pushed:
+    description: 'Whether changes were pushed'
+    value: ${{ steps.push.outputs.pushed }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Check for changes
+      id: check
+      shell: bash
+      run: |
+        if [[ -n "$(git status --porcelain)" ]]; then
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "✅ No changes to commit"
+        fi
+
+    - name: Commit changes
+      id: commit
+      if: steps.check.outputs.has_changes == 'true'
+      shell: bash
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        
+        # Add specified files (suppress errors for non-existent files)
+        for file in ${{ inputs.files }}; do
+          git add "$file" 2>/dev/null || true
+        done
+        
+        # Only commit if there are staged changes
+        if git diff --cached --quiet; then
+          echo "committed=false" >> $GITHUB_OUTPUT
+          echo "ℹ️ No staged changes to commit"
+        else
+          git commit -m "${{ inputs.commit-message }}"
+          echo "committed=true" >> $GITHUB_OUTPUT
+          echo "✅ Changes committed"
+        fi
+
+    - name: Push with retry
+      id: push
+      if: steps.commit.outputs.committed == 'true'
+      shell: bash
+      run: |
+        MAX_RETRIES=${{ inputs.max-retries }}
+        RETRY_DELAY=${{ inputs.retry-delay }}
+        
+        for attempt in $(seq 1 $MAX_RETRIES); do
+          echo "Push attempt $attempt of $MAX_RETRIES..."
+          
+          if git push; then
+            echo "pushed=true" >> $GITHUB_OUTPUT
+            echo "✅ Changes pushed successfully"
+            exit 0
+          else
+            echo "⚠️ Push attempt $attempt failed"
+            
+            if [ $attempt -eq $MAX_RETRIES ]; then
+              echo "pushed=false" >> $GITHUB_OUTPUT
+              echo "❌ All push attempts failed"
+              exit 1
+            fi
+            
+            # Pull with rebase before retry
+            git pull --rebase origin ${{ github.ref_name }} || git pull --rebase origin main
+            sleep $RETRY_DELAY
+          fi
+        done
