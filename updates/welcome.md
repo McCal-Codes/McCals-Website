@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `0e0dc673` — 0 seconds ago
-> chore: update welcome state and add new images to portfolios
+**Last commit**: `7e70b660` — 0 seconds ago
+> chore: compress images and fix manifest watcher
 ## 🔄 Changes in last commit
-- scripts/.welcome-state.json
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3301.jpg
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3304.jpg
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3315.jpg
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3351.jpg
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3364.jpg
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3390.jpg
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3411.jpg
-- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3443.jpg
-- src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg
-- src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg
-- src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg
-- …and 91 more
+- .github/workflows/build-manifest.yml
+- .github/workflows/events-manifest.yml
+- .github/workflows/featured-manifest.yml
+- .github/workflows/journalism-manifest.yml
+- .github/workflows/manifest-composite.yml
+- .github/workflows/nature-manifest.yml
+- .github/workflows/portrait-manifest.yml
+- .github/workflows/reusable-manifest.yml
+- .github/workflows/universal-manifest.yml
+- CONTRIBUTING.md
+- README.md
+- SECURITY.md
+- …and 228 more
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)
