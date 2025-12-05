@@ -97,6 +97,38 @@ jobs:
           portfolio: publish
           type: publish
 
+      - name: Purge and warm Cloudflare edge cache
+        if: steps.diff.outputs.has_changes == 'true' && steps.commit.outputs.has_commit == 'true'
+        env:
+          CF_API_URL: ${{ secrets.CLOUDFLARE_API_URL }}
+          CF_WEBHOOK_SECRET: ${{ secrets.CLOUDFLARE_WEBHOOK_SECRET }}
+        run: |
+          # Skip if Cloudflare secrets not configured
+          if [ -z "$CF_API_URL" ] || [ -z "$CF_WEBHOOK_SECRET" ]; then
+            echo "ℹ️ Cloudflare cache purge skipped (secrets not configured)"
+            exit 0
+          fi
+          
+          echo "🔄 Triggering Cloudflare edge cache refresh..."
+          
+          # Call the combined refresh endpoint (purge + warm)
+          RESPONSE=$(curl -s -w "\n%{http_code}" \
+            -X POST "${CF_API_URL}/api/v1/webhooks/refresh" \
+            -H "Content-Type: application/json" \
+            -H "X-Webhook-Secret: ${CF_WEBHOOK_SECRET}" \
+            --max-time 30)
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+          
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "✅ Cloudflare cache refreshed successfully"
+            echo "$BODY" | jq '.' 2>/dev/null || echo "$BODY"
+          else
+            echo "⚠️ Cloudflare cache refresh returned HTTP $HTTP_CODE (non-fatal)"
+            echo "$BODY"
+          fi
+
       - name: Summary
         run: |
           if [ "${{ steps.diff.outputs.has_changes }}" != "true" ]; then

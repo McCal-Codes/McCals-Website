@@ -1,6 +1,6 @@
 # Widget Enhancement To-Do (October–November 2025)
 
-*Updated: November 19, 2025*
+*Updated: December 5, 2025*
 
 Reference standards:
 - `docs/standards/preflight-afterflight.md`
@@ -8,6 +8,7 @@ Reference standards:
 - `docs/standards/widget-development.md`
 - `docs/standards/performance-standards.md`
 - `docs/standards/image-seo-standards.md`
+- `docs/integrations/api-integration-guide.md`
 
 ---
 
@@ -77,6 +78,7 @@ Reference standards:
 - **Manifests & CI**: Manifest generation, watchers, and CI automation implemented and validated
 
 ## ✅ RECENT COMPLETIONS
+- [x] **Cloudflare Integration** — Added edge caching, webhook purge/warm endpoints, rate limiting, cache stats, and CI integration for automatic cache refresh after manifest publish (Dec 5, 2025)
 - [x] **Accessibility Statement Widget v1.1.x** — Added theme toggle (System/Light/Dark), readable panel with adaptive backdrop, localStorage persistence, full keyboard accessibility, WCAG AA contrast verified (Nov 11, 2025)
 - [x] **Policies & Legal Widget v1.1.0** — Accessibility enhancements: skip link, unified focus-visible, scroll spy with aria-current, mobile drawer improvements, reduced motion support, print stylesheet refinement (Nov 11, 2025)
 - [x] **Portrait Portfolio v1.0** — Portrait photography widget (vertical-focused, 3:4, performance & SEO) — added to Available Widgets and sample manifest (Oct 24, 2025)
