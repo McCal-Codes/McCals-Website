@@ -1,4 +1,4 @@
 {
-  "lastHash": "b0ea9298",
-  "lastMessage": "feat: update footer component with JSON-LD structured data and configurable newsletter endpoint\n\\n\\nAuthor: mccal"
+  "lastHash": "4ab44cc8",
+  "lastMessage": "feat: integrate Cloudflare for edge caching and cache management, update API integration guide, and enhance welcome state\n\\n\\nAuthor: mccal"
 }
