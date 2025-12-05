@@ -201,6 +201,9 @@ jobs:
           - Generated: $(date -u)
           - Trigger: ${{ github.event_name }}"
           
+          # Pull with rebase before push to avoid race conditions
+          git pull --rebase origin main || true
+          
           git push
           
           echo "✅ Events manifest updated and pushed successfully!"

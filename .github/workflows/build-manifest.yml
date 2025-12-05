@@ -196,11 +196,14 @@ jobs:
           IMAGES=${{ steps.check_images.outputs.image_count }}
           
           git commit -m "🎬 Auto-update concert manifest
-          
+
           - Bands: $BANDS
           - Images: $IMAGES
           - Generated: $(date -u)
           - Trigger: ${{ github.event_name }}"
+          
+          # Pull with rebase before push to avoid race conditions
+          git pull --rebase origin main || true
           
           git push
           
