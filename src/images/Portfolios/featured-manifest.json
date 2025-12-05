@@ -1,7 +1,7 @@
 {
-  "version": "2.0",
+  "version": "2.0.0",
   "type": "featured",
-  "generated": "2025-10-05T23:26:23.002Z",
+  "generated": "2025-12-05T22:41:31.983Z",
   "generatedBy": "enhanced-featured-manifest-generator",
   "sources": [
     "concert-manifest.json",
@@ -9,7 +9,7 @@
     "journalism-manifest.json"
   ],
   "totalItems": 12,
-  "totalImages": 242,
+  "totalImages": 535,
   "categories": [
     "Concert Photography",
     "Events Photography",
@@ -21,8 +21,8 @@
     "Journalism"
   ],
   "dateRange": {
-    "newest": "2025-09-27",
-    "oldest": "2024-10-18"
+    "newest": "2025-12-05",
+    "oldest": "2024-11-04"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
@@ -32,231 +32,854 @@
   },
   "items": [
     {
-      "bandName": "Brahctopus",
-      "folderPath": "Brahctopus/September 2025",
-      "dateDisplay": "September 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 9,
-        "monthName": "September",
-        "day": 27,
-        "iso": "2025-09-27",
-        "source": "filename_yymmdd"
-      },
-      "totalImages": 30,
-      "images": [
-        "250927_Bellueve Music Festival_CAL6311_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6319_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6352_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6365_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6373_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6381_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6383_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6388_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6389_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6409_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6412_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6416_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6421_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6422_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6426_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6426_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6432_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6434_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6436_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6440_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6441_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6447_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6464_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6466_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6469_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6469_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6471_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6472_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6477_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6483_webuse.jpg"
-      ],
-      "name": "Brahctopus",
-      "title": "Brahctopus",
+      "title": "Back To School Bash",
+      "eventName": "Back To School Bash",
+      "category": "Events Photography",
+      "dateDisplay": "December 2025",
+      "dateISO": "2025-12-05",
       "date": {
         "year": 2025,
-        "month": 9,
-        "monthName": "September",
-        "day": 27,
-        "iso": "2025-09-27",
-        "source": "filename_yymmdd"
+        "month": 12,
+        "day": 5,
+        "monthName": "December",
+        "iso": "2025-12-05",
+        "display": "December 2025"
       },
-      "type": "Concert",
-      "category": "Concert Photography",
-      "id": "Brahctopus",
-      "coverImage": "250927_Bellueve Music Festival_CAL6311_webuse.jpg",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6648.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6650.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6651.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6652.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6653.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6654.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6655.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6656.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6657.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6658.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6662.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6663.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6664.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6665.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6666.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6667.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6668.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6672.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6673.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6674.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6677.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6678.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6679.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6681.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6682.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6684.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6685.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6686.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6687.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6688.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6689.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6690.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6691.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6693.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6694.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6695.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6696.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6697.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6699.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6701.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6702.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6704.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6705.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6706.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6707.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6708.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6709.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6710.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6711.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6712.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6713.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6714.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6715.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6718.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6719.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6722.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6725.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6729.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6739.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6744.jpg"
+        }
+      ],
+      "folderPath": "Events/Back To School Bash",
+      "type": "Events",
+      "id": "Back To School Bash",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
+      },
+      "totalImages": 68,
       "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
+        "Event",
+        "Corporate",
+        "Professional"
       ]
     },
     {
-      "bandName": "Big Slime",
-      "folderPath": "Big Slime/September 2025",
-      "dateDisplay": "September 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 9,
-        "monthName": "September",
-        "day": 1,
-        "iso": "2025-09-01"
-      },
-      "totalImages": 17,
-      "images": [
-        "250927_Bellueve Music Festival_CAL6199_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6212_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6213_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6224_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6234_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6249_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6249_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6269_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6274_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6274_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6277_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6277_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6284_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6290_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6296_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6302_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6302_webuse.jpg"
-      ],
-      "name": "Big Slime",
-      "title": "Big Slime",
+      "title": "Growing Up",
+      "eventName": "Growing Up",
+      "category": "Events Photography",
+      "dateDisplay": "December 2025",
+      "dateISO": "2025-12-05",
       "date": {
         "year": 2025,
-        "month": 9,
-        "monthName": "September",
-        "day": 1,
-        "iso": "2025-09-01"
+        "month": 12,
+        "day": 5,
+        "monthName": "December",
+        "iso": "2025-12-05",
+        "display": "December 2025"
       },
-      "type": "Concert",
-      "category": "Concert Photography",
-      "id": "Big Slime",
-      "coverImage": "250927_Bellueve Music Festival_CAL6199_webuse.jpg",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5543.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5700.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5723.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5736.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5745.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5755.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5759.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5832.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5842.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5859.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5880.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5882.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5922.jpg"
+        }
+      ],
+      "folderPath": "Events/Growing Up",
+      "type": "Events",
+      "id": "Growing Up",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
+      },
+      "totalImages": 18,
       "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
+        "Event",
+        "Corporate",
+        "Professional"
       ]
     },
     {
-      "bandName": "Funky Lamp",
-      "folderPath": "Funky Lamp/September 2025",
-      "dateDisplay": "September 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 9,
-        "monthName": "September",
-        "day": 1,
-        "iso": "2025-09-01"
-      },
-      "totalImages": 26,
-      "images": [
-        "250927_Bellueve Music Festival_CAL6043_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6043_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6051_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6051_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6054_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6054_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6057_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6060_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6061_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6061_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6062_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6064_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6064_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6073_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6077_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6108_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6119_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6134_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6141_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6143_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6148_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6148_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6162_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6167_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6169_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6183_webuse.jpg"
-      ],
-      "name": "Funky Lamp",
-      "title": "Funky Lamp",
+      "title": "Pittsburgh Social Club",
+      "eventName": "Pittsburgh Social Club",
+      "category": "Events Photography",
+      "dateDisplay": "November 2025",
+      "dateISO": "2025-11-14",
       "date": {
         "year": 2025,
-        "month": 9,
-        "monthName": "September",
-        "day": 1,
-        "iso": "2025-09-01"
+        "month": 11,
+        "day": 14,
+        "monthName": "November",
+        "iso": "2025-11-14",
+        "display": "November 2025"
       },
-      "type": "Concert",
-      "category": "Concert Photography",
-      "id": "Funky Lamp",
-      "coverImage": "250927_Bellueve Music Festival_CAL6043_webuse 1.jpg",
-      "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
-      ]
-    },
-    {
-      "bandName": "The Book Club",
-      "folderPath": "The Book Club/August 2025",
-      "dateDisplay": "August 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL753_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL764_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL773_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL777_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL784_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL788_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL798_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL800_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL810_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL817_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL818_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL828_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL834_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL840_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL844_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL856_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL872_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL877_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL881_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL882_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL885_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL888_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL889_webuse.jpg"
+        }
+      ],
+      "folderPath": "Events/Pittsburgh Social Club",
+      "type": "Events",
+      "id": "Pittsburgh Social Club",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL753_webuse.jpg"
       },
       "totalImages": 23,
-      "images": [
-        "250829_Haven_CAL4584.jpg",
-        "250829_Haven_CAL4587.jpg",
-        "250829_Haven_CAL4588.jpg",
-        "250829_Haven_CAL4607.jpg",
-        "250829_Haven_CAL4610.jpg",
-        "250829_Haven_CAL4634.jpg",
-        "250829_Haven_CAL4640.jpg",
-        "250829_Haven_CAL4649.jpg",
-        "250829_Haven_CAL4652.jpg",
-        "250829_Haven_CAL4659.jpg",
-        "250829_Haven_CAL4667.jpg",
-        "250829_Haven_CAL4670.jpg",
-        "250829_Haven_CAL4677.jpg",
-        "250829_Haven_CAL4678.jpg",
-        "250829_Haven_CAL4691.jpg",
-        "250829_Haven_CAL4694.jpg",
-        "250829_Haven_CAL4700.jpg",
-        "250829_Haven_CAL4701.jpg",
-        "250829_Haven_CAL4709.jpg",
-        "250829_Haven_CAL4712.jpg",
-        "250829_Haven_CAL4730.jpg",
-        "250829_Haven_CAL4742.jpg",
-        "250829_Haven_CAL4746.jpg"
-      ],
-      "name": "The Book Club",
-      "title": "The Book Club",
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
+    },
+    {
+      "title": "Love's A Game",
+      "eventName": "Love's A Game",
+      "category": "Events Photography",
+      "dateDisplay": "November 2025",
+      "dateISO": "2025-11-06",
       "date": {
         "year": 2025,
-        "month": 8,
-        "monthName": "August",
-        "day": 29,
-        "iso": "2025-08-29",
-        "source": "filename_yymmdd"
+        "month": 11,
+        "day": 6,
+        "monthName": "November",
+        "iso": "2025-11-06",
+        "display": "November 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL163_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL163_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL166_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL166_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL168_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL168_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL171_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL171_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL181_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL181_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL186_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL186_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL199_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL199_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL202_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL202_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL215_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL215_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL224_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL224_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL226_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL226_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL229_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL229_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL248_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL248_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL249_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL249_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL261_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL261_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL267_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL267_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL279_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL279_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL287_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL287_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL301_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL301_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL303_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL303_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL304_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL304_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL309_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL309_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL314_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL314_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL315_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL315_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL320_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL320_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL321_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL321_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL348_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL348_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL350_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL350_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL355_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL355_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL358_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL358_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL361_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL361_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL366_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL366_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL377_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL377_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL390_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL390_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL393_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL393_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL396_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL396_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL409_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL409_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL411_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL411_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL417_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL417_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL422_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL422_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL425_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL425_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL433_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL433_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL435_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL435_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL441_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL441_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL447_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL447_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL463_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL463_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL466_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL466_webuse.webp"
+        }
+      ],
+      "folderPath": "Events/Love's A Game",
+      "type": "Events",
+      "id": "Love's A Game",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.jpg"
+      },
+      "totalImages": 98,
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
+    },
+    {
+      "bandName": "Heading North",
+      "folderPath": "Heading North/November 2025",
+      "dateDisplay": "November 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 11,
+        "monthName": "November",
+        "day": 1,
+        "iso": "2025-11-01"
+      },
+      "totalImages": 85,
+      "images": [
+        "251101 Headed North - Bottle Rocket_CAL11_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL14_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL17_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL21_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL22_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL3_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL7_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9560_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9563_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9569_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9571_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9578_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9580_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9581_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9583_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9589_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9596_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9598_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9608_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9610_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9611_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9616_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9618_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9622_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9626_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9629_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9641_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9650_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9658_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9664_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9669_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9677_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9683_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9689_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9695_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9703_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9710_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9730_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9732_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9734_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9742_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9747_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9752_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9758_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9765_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9768_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9771_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9776_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9782_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9787_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9792_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9798_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9800_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9804_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9808_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9810_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9817_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9820_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9827_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9831_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9832_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9834_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9840_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9851_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9856_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9881_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9888_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9891_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9901_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9905_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9907_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9909_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9910_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9915_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9926_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9936_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9938_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9942_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9961_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9967_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9969_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9972_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9986_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9991_webuse.jpg",
+        "251101 Headed North - Bottle Rocket_CAL9996_webuse.jpg"
+      ],
+      "name": "Heading North",
+      "title": "Heading North",
+      "date": {
+        "year": 2025,
+        "month": 11,
+        "monthName": "November",
+        "day": 1,
+        "iso": "2025-11-01"
       },
       "type": "Concert",
       "category": "Concert Photography",
-      "id": "The Book Club",
-      "coverImage": "250829_Haven_CAL4584.jpg",
+      "id": "Heading North",
+      "coverImage": "251101 Headed North - Bottle Rocket_CAL11_webuse.jpg",
       "tags": [
         "Live Music",
         "Concert",
@@ -264,218 +887,665 @@
       ]
     },
     {
-      "title": "Local Union Officers Conference 2025",
-      "eventName": "Local Union Officers Conference 2025",
-      "category": "Events Photography",
-      "dateDisplay": "July 2025",
-      "dateISO": "2025-07-20",
+      "bandName": "Dream The Heavy",
+      "folderPath": "Dream The Heavy/October 2025",
+      "dateDisplay": "October 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 10,
+        "monthName": "October",
+        "day": 1,
+        "iso": "2025-10-01"
+      },
+      "totalImages": 62,
+      "images": [
+        "251025 When We Were Dead_CAL8473_webuse.jpg",
+        "251025 When We Were Dead_CAL8476_webuse.jpg",
+        "251025 When We Were Dead_CAL8478_webuse.jpg",
+        "251025 When We Were Dead_CAL8481_webuse.jpg",
+        "251025 When We Were Dead_CAL8487_webuse.jpg",
+        "251025 When We Were Dead_CAL8488_webuse.jpg",
+        "251025 When We Were Dead_CAL8495_webuse.jpg",
+        "251025 When We Were Dead_CAL8500_webuse.jpg",
+        "251025 When We Were Dead_CAL8502_webuse.jpg",
+        "251025 When We Were Dead_CAL8505_webuse.jpg",
+        "251025 When We Were Dead_CAL8515_webuse.jpg",
+        "251025 When We Were Dead_CAL8522_webuse.jpg",
+        "251025 When We Were Dead_CAL8525_webuse.jpg",
+        "251025 When We Were Dead_CAL8531_webuse.jpg",
+        "251025 When We Were Dead_CAL8536_webuse.jpg",
+        "251025 When We Were Dead_CAL8542_webuse.jpg",
+        "251025 When We Were Dead_CAL8544_webuse.jpg",
+        "251025 When We Were Dead_CAL8547_webuse.jpg",
+        "251025 When We Were Dead_CAL8553_webuse.jpg",
+        "251025 When We Were Dead_CAL8555_webuse.jpg",
+        "251025 When We Were Dead_CAL8558_webuse.jpg",
+        "251025 When We Were Dead_CAL8567_webuse.jpg",
+        "251025 When We Were Dead_CAL8575_webuse.jpg",
+        "251025 When We Were Dead_CAL8579_webuse.jpg",
+        "251025 When We Were Dead_CAL8588_webuse.jpg",
+        "251025 When We Were Dead_CAL8592_webuse.jpg",
+        "251025 When We Were Dead_CAL8594_webuse.jpg",
+        "251025 When We Were Dead_CAL8598_webuse.jpg",
+        "251025 When We Were Dead_CAL8599_webuse.jpg",
+        "251025 When We Were Dead_CAL8601_webuse.jpg",
+        "251025 When We Were Dead_CAL8605_webuse.jpg",
+        "251025 When We Were Dead_CAL8606_webuse.jpg",
+        "251025 When We Were Dead_CAL8611_webuse.jpg",
+        "251025 When We Were Dead_CAL8612_webuse.jpg",
+        "251025 When We Were Dead_CAL8613_webuse.jpg",
+        "251025 When We Were Dead_CAL8615_webuse.jpg",
+        "251025 When We Were Dead_CAL8623_webuse.jpg",
+        "251025 When We Were Dead_CAL8625_webuse.jpg",
+        "251025 When We Were Dead_CAL8628_webuse.jpg",
+        "251025 When We Were Dead_CAL8632_webuse.jpg",
+        "251025 When We Were Dead_CAL8634_webuse.jpg",
+        "251025 When We Were Dead_CAL8675_webuse.jpg",
+        "251025 When We Were Dead_CAL8685_webuse.jpg",
+        "251025 When We Were Dead_CAL8686_webuse.jpg",
+        "251025 When We Were Dead_CAL8701_webuse.jpg",
+        "251025 When We Were Dead_CAL8704_webuse.jpg",
+        "251025 When We Were Dead_CAL8708_webuse.jpg",
+        "251025 When We Were Dead_CAL8723_webuse.jpg",
+        "251025 When We Were Dead_CAL8726_webuse.jpg",
+        "251025 When We Were Dead_CAL8738_webuse.jpg",
+        "251025 When We Were Dead_CAL8745_webuse.jpg",
+        "251025 When We Were Dead_CAL8753_webuse.jpg",
+        "251025 When We Were Dead_CAL8759_webuse.jpg",
+        "251025 When We Were Dead_CAL8761_webuse.jpg",
+        "251025 When We Were Dead_CAL8764_webuse.jpg",
+        "251025 When We Were Dead_CAL8785_webuse.jpg",
+        "251025 When We Were Dead_CAL8791_webuse.jpg",
+        "251025 When We Were Dead_CAL8792_webuse.jpg",
+        "251025 When We Were Dead_CAL8793_webuse.jpg",
+        "251025 When We Were Dead_CAL8796_webuse.jpg",
+        "251025 When We Were Dead_CAL8804_webuse.jpg",
+        "251025 When We Were Dead_CAL8821_webuse.jpg"
+      ],
+      "name": "Dream The Heavy",
+      "title": "Dream The Heavy",
       "date": {
         "year": 2025,
-        "month": 7,
-        "day": 20,
-        "monthName": "July",
-        "iso": "2025-07-20",
-        "display": "July 2025"
+        "month": 10,
+        "monthName": "October",
+        "day": 1,
+        "iso": "2025-10-01"
       },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1837.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1894.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2068.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2070.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2074.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2083.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2094.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2097.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2099.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2107.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2116.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2129.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2134.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2152.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2158.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2161.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2188.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2197.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2199.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2201.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2205.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2208.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2299.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2323.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2348.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2351.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2375.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2380.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2382.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2385.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2388.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2391.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2392.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2398.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2403.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2410.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2416.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2422.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2424.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2438.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250721_H & F Insulators Local Union_CAL2450.jpg"
-        }
-      ],
-      "folderPath": "Events/Local Union Officers Conference 2025",
-      "type": "Events",
-      "id": "Local Union Officers Conference 2025",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/Local Union Officers Conference 2025/250720_H & F Insulators Local Union_CAL1837.jpg"
-      },
-      "totalImages": 41,
+      "type": "Concert",
+      "category": "Concert Photography",
+      "id": "Dream The Heavy",
+      "coverImage": "251025 When We Were Dead_CAL8473_webuse.jpg",
       "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
+        "Live Music",
+        "Concert",
+        "Performance"
       ]
     },
     {
-      "title": "CMU Business Graduation",
-      "eventName": "CMU Business Graduation",
-      "category": "Events Photography",
-      "dateDisplay": "May 2025",
-      "dateISO": "2025-05-11",
+      "bandName": "Red Coin",
+      "folderPath": "Red Coin/October 2025",
+      "dateDisplay": "October 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 10,
+        "monthName": "October",
+        "day": 1,
+        "iso": "2025-10-01"
+      },
+      "totalImages": 51,
+      "images": [
+        "251025 When We Were Dead_CAL8275_webuse.jpg",
+        "251025 When We Were Dead_CAL8281_webuse.jpg",
+        "251025 When We Were Dead_CAL8284_webuse.jpg",
+        "251025 When We Were Dead_CAL8289_webuse.jpg",
+        "251025 When We Were Dead_CAL8291_webuse.jpg",
+        "251025 When We Were Dead_CAL8295_webuse.jpg",
+        "251025 When We Were Dead_CAL8299_webuse.jpg",
+        "251025 When We Were Dead_CAL8300_webuse.jpg",
+        "251025 When We Were Dead_CAL8304_webuse.jpg",
+        "251025 When We Were Dead_CAL8312_webuse.jpg",
+        "251025 When We Were Dead_CAL8316_webuse.jpg",
+        "251025 When We Were Dead_CAL8317_webuse.jpg",
+        "251025 When We Were Dead_CAL8318_webuse.jpg",
+        "251025 When We Were Dead_CAL8322_webuse.jpg",
+        "251025 When We Were Dead_CAL8325_webuse.jpg",
+        "251025 When We Were Dead_CAL8328_webuse.jpg",
+        "251025 When We Were Dead_CAL8329_webuse.jpg",
+        "251025 When We Were Dead_CAL8335_webuse.jpg",
+        "251025 When We Were Dead_CAL8340_webuse.jpg",
+        "251025 When We Were Dead_CAL8341_webuse.jpg",
+        "251025 When We Were Dead_CAL8345_webuse.jpg",
+        "251025 When We Were Dead_CAL8352_webuse.jpg",
+        "251025 When We Were Dead_CAL8360_webuse.jpg",
+        "251025 When We Were Dead_CAL8363_webuse.jpg",
+        "251025 When We Were Dead_CAL8366_webuse.jpg",
+        "251025 When We Were Dead_CAL8367_webuse.jpg",
+        "251025 When We Were Dead_CAL8379_webuse.jpg",
+        "251025 When We Were Dead_CAL8381_webuse.jpg",
+        "251025 When We Were Dead_CAL8382_webuse.jpg",
+        "251025 When We Were Dead_CAL8386_webuse.jpg",
+        "251025 When We Were Dead_CAL8387_webuse.jpg",
+        "251025 When We Were Dead_CAL8393_webuse.jpg",
+        "251025 When We Were Dead_CAL8394_webuse.jpg",
+        "251025 When We Were Dead_CAL8399_webuse.jpg",
+        "251025 When We Were Dead_CAL8401_webuse.jpg",
+        "251025 When We Were Dead_CAL8402_webuse.jpg",
+        "251025 When We Were Dead_CAL8407_webuse.jpg",
+        "251025 When We Were Dead_CAL8410_webuse.jpg",
+        "251025 When We Were Dead_CAL8413_webuse.jpg",
+        "251025 When We Were Dead_CAL8414_webuse.jpg",
+        "251025 When We Were Dead_CAL8421_webuse.jpg",
+        "251025 When We Were Dead_CAL8426_webuse.jpg",
+        "251025 When We Were Dead_CAL8427_webuse.jpg",
+        "251025 When We Were Dead_CAL8432_webuse.jpg",
+        "251025 When We Were Dead_CAL8438_webuse.jpg",
+        "251025 When We Were Dead_CAL8440_webuse.jpg",
+        "251025 When We Were Dead_CAL8442_webuse.jpg",
+        "251025 When We Were Dead_CAL8444_webuse.jpg",
+        "251025 When We Were Dead_CAL8446_webuse.jpg",
+        "251025 When We Were Dead_CAL8455_webuse.jpg",
+        "251025 When We Were Dead_CAL8467_webuse.jpg"
+      ],
+      "name": "Red Coin",
+      "title": "Red Coin",
       "date": {
         "year": 2025,
-        "month": 5,
-        "day": 11,
-        "monthName": "May",
-        "iso": "2025-05-11",
-        "display": "May 2025"
+        "month": 10,
+        "monthName": "October",
+        "day": 1,
+        "iso": "2025-10-01"
       },
+      "type": "Concert",
+      "category": "Concert Photography",
+      "id": "Red Coin",
+      "coverImage": "251025 When We Were Dead_CAL8275_webuse.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
+      "bandName": "Star Viper",
+      "folderPath": "Star Viper/October 2025",
+      "dateDisplay": "October 2025",
+      "concertDate": {
+        "year": 2025,
+        "month": 10,
+        "monthName": "October",
+        "day": 1,
+        "iso": "2025-10-01"
+      },
+      "totalImages": 60,
+      "images": [
+        "251025 When We Were Dead_CAL8825_webuse.jpg",
+        "251025 When We Were Dead_CAL8838_webuse.jpg",
+        "251025 When We Were Dead_CAL8845_webuse.jpg",
+        "251025 When We Were Dead_CAL8849_webuse.jpg",
+        "251025 When We Were Dead_CAL8854_webuse.jpg",
+        "251025 When We Were Dead_CAL8857_webuse.jpg",
+        "251025 When We Were Dead_CAL8862_webuse.jpg",
+        "251025 When We Were Dead_CAL8871_webuse.jpg",
+        "251025 When We Were Dead_CAL8876_webuse.jpg",
+        "251025 When We Were Dead_CAL8878_webuse.jpg",
+        "251025 When We Were Dead_CAL8883_webuse.jpg",
+        "251025 When We Were Dead_CAL8885_webuse.jpg",
+        "251025 When We Were Dead_CAL8890_webuse.jpg",
+        "251025 When We Were Dead_CAL8901_webuse.jpg",
+        "251025 When We Were Dead_CAL8920_webuse.jpg",
+        "251025 When We Were Dead_CAL8922_webuse.jpg",
+        "251025 When We Were Dead_CAL8931_webuse.jpg",
+        "251025 When We Were Dead_CAL8943_webuse.jpg",
+        "251025 When We Were Dead_CAL8945_webuse.jpg",
+        "251025 When We Were Dead_CAL8949_webuse.jpg",
+        "251025 When We Were Dead_CAL8964_webuse.jpg",
+        "251025 When We Were Dead_CAL8968_webuse.jpg",
+        "251025 When We Were Dead_CAL8972_webuse.jpg",
+        "251025 When We Were Dead_CAL8975_webuse.jpg",
+        "251025 When We Were Dead_CAL8984_webuse.jpg",
+        "251025 When We Were Dead_CAL8988_webuse.jpg",
+        "251025 When We Were Dead_CAL8992_webuse.jpg",
+        "251025 When We Were Dead_CAL8997_webuse.jpg",
+        "251025 When We Were Dead_CAL9018_webuse.jpg",
+        "251025 When We Were Dead_CAL9019_webuse.jpg",
+        "251025 When We Were Dead_CAL9020_webuse.jpg",
+        "251025 When We Were Dead_CAL9028_webuse.jpg",
+        "251025 When We Were Dead_CAL9038_webuse.jpg",
+        "251025 When We Were Dead_CAL9043_webuse.jpg",
+        "251025 When We Were Dead_CAL9055_webuse.jpg",
+        "251025 When We Were Dead_CAL9065_webuse.jpg",
+        "251025 When We Were Dead_CAL9066_webuse.jpg",
+        "251025 When We Were Dead_CAL9070_webuse.jpg",
+        "251025 When We Were Dead_CAL9073_webuse.jpg",
+        "251025 When We Were Dead_CAL9087_webuse.jpg",
+        "251025 When We Were Dead_CAL9090_webuse.jpg",
+        "251025 When We Were Dead_CAL9109_webuse.jpg",
+        "251025 When We Were Dead_CAL9115_webuse.jpg",
+        "251025 When We Were Dead_CAL9123_webuse.jpg",
+        "251025 When We Were Dead_CAL9129_webuse.jpg",
+        "251025 When We Were Dead_CAL9131_webuse.jpg",
+        "251025 When We Were Dead_CAL9135_webuse.jpg",
+        "251025 When We Were Dead_CAL9143_webuse.jpg",
+        "251025 When We Were Dead_CAL9144_webuse.jpg",
+        "251025 When We Were Dead_CAL9145_webuse.jpg",
+        "251025 When We Were Dead_CAL9168_webuse.jpg",
+        "251025 When We Were Dead_CAL9169_webuse.jpg",
+        "251025 When We Were Dead_CAL9173_webuse.jpg",
+        "251025 When We Were Dead_CAL9176_webuse.jpg",
+        "251025 When We Were Dead_CAL9184_webuse.jpg",
+        "251025 When We Were Dead_CAL9198_webuse.jpg",
+        "251025 When We Were Dead_CAL9202_webuse.jpg",
+        "251025 When We Were Dead_CAL9219_webuse.jpg",
+        "251025 When We Were Dead_CAL9245_webuse.jpg",
+        "251025 When We Were Dead_CAL9248_webuse.jpg"
+      ],
+      "name": "Star Viper",
+      "title": "Star Viper",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "monthName": "October",
+        "day": 1,
+        "iso": "2025-10-01"
+      },
+      "type": "Concert",
+      "category": "Concert Photography",
+      "id": "Star Viper",
+      "coverImage": "251025 When We Were Dead_CAL8825_webuse.jpg",
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
+    },
+    {
+      "eventName": "CMU Trump Protest",
+      "category": "Journalism Photography",
+      "tags": [
+        "Politics",
+        "Documentary",
+        "Journalism",
+        "Story"
+      ],
+      "folderPath": "Politics/CMU Trump Protest",
+      "eventDate": {
+        "iso": "2025-07-15",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "undefined undefined",
+      "totalImages": 39,
       "images": [
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6526-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1106-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6532-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1107-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6561-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1123-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6572-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1126-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6622-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1131-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6655-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1141-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6681-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1146-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6691-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1152-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6694-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1156-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         },
         {
-          "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6697-1280.jpg"
+          "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1162-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1168-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1184-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1192-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1196-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1201-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1249-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1278-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1297-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1301-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1303-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1325-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1340-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1353-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1360-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1364-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1429-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1448-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1476-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1489-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1498-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1539-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1564-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1568-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1573-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": [
+            "Politics"
+          ]
         }
       ],
-      "folderPath": "Events/CMU-Business-Graduation",
-      "type": "Events",
-      "id": "CMU Business Graduation",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/CMU-Business-Graduation/250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
+      "published": false,
+      "metadata": {},
+      "name": "CMU Trump Protest",
+      "title": "CMU Trump Protest",
+      "date": {
+        "iso": "2025-07-15",
+        "source": "filename_extraction"
       },
-      "totalImages": 11,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
+      "type": "Journalism",
+      "id": "CMU Trump Protest",
+      "coverImage": {
+        "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
+        "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
+        "description": "CMU Trump Protest photography",
+        "caption": "CMU Trump Protest - Politics",
+        "tags": [
+          "Politics"
+        ]
+      }
     },
     {
       "eventName": "The Rooney Rule",
@@ -496,7 +1566,7 @@
       "images": [
         {
           "filename": "250417 The Rooney Rule_CAL3148.jpg",
-          "path": "Events/The Rooney Rule/250417 The Rooney Rule_CAL3148.jpg",
+          "path": "250417 The Rooney Rule_CAL3148.jpg",
           "description": "The Rooney Rule photography",
           "caption": "The Rooney Rule - Events",
           "tags": [
@@ -516,7 +1586,7 @@
       "id": "The Rooney Rule",
       "coverImage": {
         "filename": "250417 The Rooney Rule_CAL3148.jpg",
-        "path": "Events/The Rooney Rule/250417 The Rooney Rule_CAL3148.jpg",
+        "path": "250417 The Rooney Rule_CAL3148.jpg",
         "description": "The Rooney Rule photography",
         "caption": "The Rooney Rule - Events",
         "tags": [
@@ -543,7 +1613,7 @@
       "images": [
         {
           "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9640-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -552,7 +1622,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9666-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9666-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -561,7 +1631,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9674-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9674-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -570,7 +1640,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9703-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9703-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -579,7 +1649,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9709-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9709-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -588,7 +1658,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9717-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9717-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -597,7 +1667,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9739-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9739-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -606,7 +1676,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9759-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9759-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -615,7 +1685,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9773-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -624,7 +1694,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9825-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9825-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -633,7 +1703,7 @@
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
-          "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9832-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9832-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
           "tags": [
@@ -653,111 +1723,13 @@
       "id": "Butler Protest",
       "coverImage": {
         "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-        "path": "Politics/Butler Protest/250315_Butler Democracy Protest_CAL9640-min.jpg",
+        "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
         "description": "Butler Protest photography",
         "caption": "Butler Protest - Politics",
         "tags": [
           "Politics"
         ]
       }
-    },
-    {
-      "title": "Pitt University Graduation Winter 2024",
-      "eventName": "Pitt University Graduation Winter 2024",
-      "category": "Events Photography",
-      "dateDisplay": "December 2024",
-      "dateISO": "2024-12-18",
-      "date": {
-        "year": 2024,
-        "month": 12,
-        "day": 18,
-        "monthName": "December",
-        "iso": "2024-12-18",
-        "display": "December 2024"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7109.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7114.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7117.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7129.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7132.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7136.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7146.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7154.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7166.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7169.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7174.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7182.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7195.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7200.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7272.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7290.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7317.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7357.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7383.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7452.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7502.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7512.jpg"
-        }
-      ],
-      "folderPath": "Events/Pitt University Graduation Winter 2024",
-      "type": "Events",
-      "id": "Pitt University Graduation Winter 2024",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/Pitt University Graduation Winter 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
-      },
-      "totalImages": 23,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
     },
     {
       "eventName": "Kamala In Pittsburgh Amid Election Eve",
@@ -778,7 +1750,7 @@
       "images": [
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -787,7 +1759,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -796,7 +1768,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -805,7 +1777,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -814,7 +1786,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -823,7 +1795,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -832,7 +1804,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -841,7 +1813,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -850,7 +1822,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -859,7 +1831,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -868,7 +1840,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -877,7 +1849,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -886,7 +1858,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -895,7 +1867,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -904,7 +1876,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -913,7 +1885,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -922,7 +1894,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -931,7 +1903,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -940,7 +1912,7 @@
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
-          "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
           "tags": [
@@ -960,296 +1932,13 @@
       "id": "Kamala In Pittsburgh Amid Election Eve",
       "coverImage": {
         "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-        "path": "Politics/Kamala in Pittsburgh amid Election Eve/241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+        "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
         "description": "Kamala in Pittsburgh amid Election Eve photography",
         "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
         "tags": [
           "Politics"
         ]
       }
-    },
-    {
-      "eventName": "Clinton Speaks At Pitt Greensburgh",
-      "category": "Journalism Photography",
-      "tags": [
-        "Politics",
-        "Published Work",
-        "Presidential Campaign",
-        "Documentary",
-        "Journalism",
-        "Story"
-      ],
-      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
-      "eventDate": {
-        "iso": "2024-10-29",
-        "source": "metadata"
-      },
-      "dateDisplay": "undefined undefined",
-      "totalImages": 9,
-      "images": [
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
-          "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": [
-            "Politics",
-            "Published Work",
-            "Presidential Campaign"
-          ]
-        }
-      ],
-      "published": true,
-      "metadata": {
-        "tags": [
-          "Politics",
-          "Published Work",
-          "Presidential Campaign"
-        ],
-        "published": true,
-        "date": "2024-10-29",
-        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-        "caption": "Clinton campaign event at Pitt Greensburg",
-        "outlet": "New York Post",
-        "outletUrl": "https://nypost.com",
-        "articleUrl": "",
-        "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
-        "publishedDate": "2024-10-29"
-      },
-      "outlet": "New York Post",
-      "outletUrl": "https://nypost.com",
-      "articleUrl": "",
-      "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
-      "publishedDate": "2024-10-29",
-      "name": "Clinton Speaks At Pitt Greensburgh",
-      "title": "Clinton Speaks At Pitt Greensburgh",
-      "date": {
-        "iso": "2024-10-29",
-        "source": "metadata"
-      },
-      "type": "Journalism",
-      "id": "Clinton Speaks At Pitt Greensburgh",
-      "coverImage": {
-        "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-        "path": "Politics/Clinton Speaks at Pitt Greensburgh/241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-        "caption": "Clinton campaign event at Pitt Greensburg",
-        "tags": [
-          "Politics",
-          "Published Work",
-          "Presidential Campaign"
-        ]
-      }
-    },
-    {
-      "title": "Dance For A Cause",
-      "eventName": "Dance For A Cause",
-      "category": "Events Photography",
-      "dateDisplay": "October 2024",
-      "dateISO": "2024-10-18",
-      "date": {
-        "year": 2024,
-        "month": 10,
-        "day": 18,
-        "monthName": "October",
-        "iso": "2024-10-18",
-        "display": "October 2024"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1012-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1038-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1068-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1108-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1145-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1174-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1276-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1282-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL130-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL140-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL168-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL256-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL353-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL38-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL420-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL497-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL512-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL545-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL55-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL626-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL63-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL667-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL693-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL79-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL826-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL832-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL84-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL892-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL91-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL949-min.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL972-min.jpg"
-        }
-      ],
-      "folderPath": "Events/Dance for a Cause",
-      "type": "Events",
-      "id": "Dance For A Cause",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/Dance for a Cause/241018_Dance for a Cause_CAL1012-min.jpg"
-      },
-      "totalImages": 31,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
     }
   ]
 }
