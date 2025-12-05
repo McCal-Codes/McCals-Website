@@ -1,8 +1,10 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `2bd95590` — 0 seconds ago
-> fix: include Back To School Bash in events manifest
+**Last commit**: `04375799` — 0 seconds ago
+> fix: update workflow triggers and last commit message in welcome state
 ## 🔄 Changes in last commit
-- src/images/Portfolios/Events/events-manifest.json
+- .github/workflows/regenerate-all-manifests.yml
+- scripts/.welcome-state.json
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)

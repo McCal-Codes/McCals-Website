@@ -83,18 +83,29 @@ jobs:
           test -f "${{ steps.generate.outputs.manifest_path }}" || (echo "Missing manifest file" && exit 1)
           jq empty "${{ steps.generate.outputs.manifest_path }}"
 
-      - name: Commit and push
+      - name: Commit and push (rebase-safe)
         id: push
         if: github.event_name != 'pull_request'
-        uses: ./.github/actions/commit-and-push
-        with:
-          files: ${{ steps.generate.outputs.manifest_path }}
-          commit-message: |
-            🔄 Auto-update ${{ inputs.portfolio }} manifest
+        env:
+          MANIFEST_FILE: ${{ steps.generate.outputs.manifest_path }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
-            - Portfolio: ${{ inputs.portfolio }}
-            - Images: ${{ steps.generate.outputs.image_count }}
-            - Trigger: ${{ github.event_name }}
+          git add "$MANIFEST_FILE"
+          if git diff --cached --quiet; then
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+            echo "No manifest changes to commit"
+            exit 0
+          fi
+
+          git commit -m "🔄 Auto-update ${BRANCH} ${MANIFEST_FILE##*/}"
+
+          # Rebase with autostash to avoid push races when multiple manifest jobs run
+          git pull --rebase --autostash origin "$BRANCH"
+          git push origin HEAD:"$BRANCH"
+          echo "committed=true" >> "$GITHUB_OUTPUT"
 
       - name: Notify webhook
         if: inputs.notify-webhook && steps.push.outputs.committed == 'true'
