@@ -1,20 +1,243 @@
 {
   "version": "2.6.4",
   "generated": "2025-12-05",
-  "totalEvents": 20,
+  "totalEvents": 22,
   "events": [
     {
-      "eventName": "Growing Up",
-      "category": "Performance Art",
-      "dateDisplay": "March 2022",
-      "dateISO": "2022-03-22",
+      "eventName": "Back To School Bash",
+      "category": "Corporate",
+      "dateDisplay": "December 2025",
+      "dateISO": "2025-12-05",
       "date": {
         "year": 2025,
         "month": 12,
         "day": 5,
-        "monthName": "March",
-        "iso": "2022-03-22",
-        "display": "March 2022"
+        "monthName": "December",
+        "iso": "2025-12-05",
+        "display": "December 2025"
+      },
+      "dateSource": "fallback:current",
+      "dateConfidence": "low",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6648.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6650.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6651.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6652.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6653.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6654.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6655.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6656.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6657.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6658.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6662.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6663.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6664.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6665.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6666.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6667.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6668.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6672.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6673.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6674.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6677.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6678.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6679.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6681.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6682.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6684.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6685.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6686.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6687.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6688.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6689.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6690.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6691.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6693.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6694.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6695.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6696.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6697.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6699.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6701.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6702.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6704.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6705.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6706.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6707.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6708.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6709.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6710.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6711.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6712.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6713.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6714.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6715.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6718.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6719.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6722.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6725.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6729.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6739.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6744.jpg"
+        }
+      ],
+      "totalImages": 68
+    },
+    {
+      "eventName": "Growing Up",
+      "category": "Corporate",
+      "dateDisplay": "December 2025",
+      "dateISO": "2025-12-05",
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 5,
+        "monthName": "December",
+        "iso": "2025-12-05",
+        "display": "December 2025"
       },
       "dateSource": "fallback:current",
       "dateConfidence": "low",
@@ -3850,6 +4073,91 @@
       "totalImages": 14
     },
     {
+      "eventName": "PicklesBurgh",
+      "category": "Corporate",
+      "dateDisplay": "July 2023",
+      "dateISO": "2023-07-22",
+      "date": {
+        "year": 2023,
+        "month": 7,
+        "day": 22,
+        "monthName": "July",
+        "iso": "2023-07-22",
+        "display": "July 2023"
+      },
+      "dateSource": "filename:230722_Picklesburgh_23_CAL_4313.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4313.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4314.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4315.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4317.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4323.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4324.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4297.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4298.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4303.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4307.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4308.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4327.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4328.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4332.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4341.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4347.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4349.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4351.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4358.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4365.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4366.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4372.jpg"
+        }
+      ],
+      "totalImages": 22
+    },
+    {
       "eventName": "James Bond Cocktail Party 2023",
       "category": "Corporate",
       "dateDisplay": "April 2023",
@@ -4055,6 +4363,228 @@
     }
   ],
   "items": [
+    {
+      "title": "Back To School Bash",
+      "eventName": "Back To School Bash",
+      "category": "Corporate",
+      "dateDisplay": "December 2025",
+      "dateISO": "2025-12-05",
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 5,
+        "monthName": "December",
+        "iso": "2025-12-05",
+        "display": "December 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6648.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6650.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6651.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6652.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6653.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6654.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6655.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6656.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6657.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6658.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6662.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6663.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6664.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6665.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6666.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6667.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6668.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6672.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6673.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6674.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6677.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6678.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6679.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6681.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6682.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6684.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6685.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6686.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6687.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6688.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6689.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6690.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6691.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6693.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6694.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6695.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6696.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6697.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6699.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6701.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6702.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6704.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6705.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6706.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6707.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6708.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6709.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6710.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6711.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6712.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6713.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6714.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6715.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6718.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6719.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6722.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6725.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6729.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6739.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6744.jpg"
+        }
+      ],
+      "folderPath": "Events/Back To School Bash"
+    },
     {
       "title": "Growing Up",
       "eventName": "Growing Up",
@@ -7882,6 +8412,90 @@
         }
       ],
       "folderPath": "Events/Franks Script Reading"
+    },
+    {
+      "title": "PicklesBurgh",
+      "eventName": "PicklesBurgh",
+      "category": "Corporate",
+      "dateDisplay": "July 2023",
+      "dateISO": "2023-07-22",
+      "date": {
+        "year": 2023,
+        "month": 7,
+        "day": 22,
+        "monthName": "July",
+        "iso": "2023-07-22",
+        "display": "July 2023"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4313.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4314.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4315.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4317.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4323.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23_CAL_4324.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4297.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4298.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4303.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4307.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4308.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4327.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4328.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4332.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4341.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4347.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4349.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4351.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4358.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4365.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4366.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/PicklesBurgh/230722_Picklesburgh_23__CAL4372.jpg"
+        }
+      ],
+      "folderPath": "Events/PicklesBurgh"
     },
     {
       "title": "James Bond Cocktail Party 2023",
