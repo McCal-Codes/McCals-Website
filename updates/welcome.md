@@ -1,15 +1,16 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `b0ea9298` — 0 seconds ago
-> feat: update footer component with JSON-LD structured data and configurable newsletter endpoint
+**Last commit**: `4ab44cc8` — 1 second ago
+> feat: integrate Cloudflare for edge caching and cache management, update API integration guide, and enhance welcome state
 ## 🔄 Changes in last commit
+- .github/copilot-instructions.md
+- .github/workflows/publish-manifests-cdn.yml
+- docs/integrations/api-integration-guide.md
 - scripts/.welcome-state.json
-- sites/self-hosted-nextjs/components/Layout/Footer.tsx
-- sites/self-hosted-nextjs/public/brand/logo-mark.svg
 - src/api
 - updates/todo.md
 - updates/welcome.md
 ## 📋 Your checklist status
-- Open: **67** | Done: **52**
+- Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 
