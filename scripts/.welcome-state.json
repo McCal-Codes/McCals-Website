@@ -1,4 +1,4 @@
 {
-  "lastHash": "4ab44cc8",
-  "lastMessage": "feat: integrate Cloudflare for edge caching and cache management, update API integration guide, and enhance welcome state\n\\n\\nAuthor: mccal"
+  "lastHash": "47568e74",
+  "lastMessage": "fix: Handle paths with spaces in publish-manifests-cdn workflow\n\\n\\nAuthor: mccal"
 }
