@@ -59,13 +59,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          FILES=$(find src/images/Portfolios -name '*.json' -type f -print)
-          if [ -z "$FILES" ]; then
+          # Use null-delimited find to handle paths with spaces
+          if ! find src/images/Portfolios -name '*.json' -type f -print0 | grep -qz .; then
             echo "has_commit=false" >> $GITHUB_OUTPUT
             echo "No manifest files found to commit."
             exit 0
           fi
-          git add $FILES
+          # Add files using null-delimited input to handle spaces
+          find src/images/Portfolios -name '*.json' -type f -print0 | xargs -0 git add --
           if git diff --cached --quiet; then
             echo "has_commit=false" >> $GITHUB_OUTPUT
             echo "No staged changes after add; skipping commit."
