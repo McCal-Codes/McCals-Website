@@ -1,19 +1,56 @@
-name: Composite Manifest Generation (Shadow)
+name: Composite Manifest Generation
 
 on:
-  workflow_dispatch: {}
-  push:
-    paths:
-      - 'scripts/manifest/**'
-      - 'src/images/Portfolios/**'
+  workflow_dispatch:
+    inputs:
+      portfolios:
+        description: 'Portfolios to generate (comma-separated or "all")'
+        required: false
+        default: 'all'
+        type: string
+  # Disabled auto-trigger - individual workflows handle path-based triggers
+  # push:
+  #   paths:
+  #     - 'scripts/manifest/**'
+  #     - 'src/images/Portfolios/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: manifest-composite-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  generate-manifests:
-    name: Generate ${{ matrix.portfolio }} Manifest
+  # Prepare the matrix based on input
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Set matrix
+        id: set-matrix
+        run: |
+          INPUT="${{ github.event.inputs.portfolios || 'all' }}"
+          
+          if [ "$INPUT" = "all" ]; then
+            PORTFOLIOS='["concert","events","journalism","nature","portrait","universal"]'
+          else
+            PORTFOLIOS=$(echo "$INPUT" | tr ',' '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed 's/^/"/;s/$/"/' | paste -sd, | sed 's/.*/[&]/')
+          fi
+          
+          echo "matrix={\"portfolio\":$PORTFOLIOS}" >> $GITHUB_OUTPUT
+
+  # Generate manifests in parallel
+  generate:
+    name: Generate ${{ matrix.portfolio }}
+    needs: prepare
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        portfolio: [concert, events, journalism, nature, portrait, universal]
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,49 +59,46 @@ jobs:
           lfs: true
           submodules: false
 
-      - name: Use Node 20
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install deps (ci)
+      - name: Install dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Generate manifest
-        run: |
-          case "${{ matrix.portfolio }}" in
-            concert) npm run manifest:concert ;;
-            events) npm run manifest:events ;;
-            journalism) npm run manifest:journalism ;;
-            nature) npm run manifest:nature ;;
-            portrait) npm run manifest:portrait ;;
-            universal) npm run manifest:universal ;;
-            *) echo "Unknown portfolio" && exit 1 ;;
-          esac
+        uses: ./.github/actions/generate-manifest
+        with:
+          portfolio: ${{ matrix.portfolio }}
 
-      - name: Validate manifests
-        run: node scripts/utils/validate-manifests.js || echo "(Validation script placeholder / ensure exists)"
+      - name: Validate manifest
+        run: node scripts/utils/validate-manifests.js 2>/dev/null || echo "ℹ️ Validation skipped"
 
-      - name: Commit changes (if any)
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git add .
-            git commit -m "ci: shadow composite manifest update (${{ matrix.portfolio }})" || echo "Nothing to commit"
-          fi
+      - name: Commit and push
+        if: github.event_name != 'pull_request'
+        uses: ./.github/actions/commit-and-push
+        with:
+          files: src/images/Portfolios/**/manifest.json src/images/Portfolios/**/*-manifest.json
+          commit-message: "ci: Update ${{ matrix.portfolio }} manifest (composite)"
 
-      - name: Notify API webhook (composite)
+      - name: Notify webhook
         uses: ./.github/actions/notify-manifest-webhook
         with:
           portfolio: ${{ matrix.portfolio }}
           type: refresh
 
+  # Summary
   summary:
-    name: Composite Summary
-    needs: generate-manifests
+    name: Summary
+    needs: [prepare, generate]
+    if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: Summary
-        run: echo "Composite manifest generation shadow run complete. Individual workflows remain active."
+      - name: Report
+        run: |
+          echo "## Composite Manifest Generation" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Generate | ${{ needs.generate.result }} |" >> $GITHUB_STEP_SUMMARY

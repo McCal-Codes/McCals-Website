@@ -1,0 +1,37 @@
+name: Setup Node Workspace
+description: "Reusable action for Node.js workspace setup with caching"
+
+inputs:
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '20'
+  fetch-depth:
+    description: 'Git fetch depth (0 for full history)'
+    required: false
+    default: '0'
+  use-lfs:
+    description: 'Enable Git LFS'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: ${{ inputs.fetch-depth }}
+        token: ${{ github.token }}
+        lfs: ${{ inputs.use-lfs }}
+        submodules: false
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci --prefer-offline --no-audit --no-fund
