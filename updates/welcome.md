@@ -1,16 +1,9 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `7d7e98b6` — 0 seconds ago
-> feat: reorganize scripts and enhance welcome dashboard functionality
+**Last commit**: `f4e6df36` — 0 seconds ago
+> feat: update welcome state with latest commit details
 ## 🔄 Changes in last commit
-- CHANGELOG.md
-- docs/archive/updates/2025-11-23-welcome-api-integration.md
-- docs/standards/widget-standards.md
-- package.json
-- scripts/ORGANIZATION.md
-- scripts/admin/setup-repo.js
-- scripts/admin/welcome.js
-- scripts/setup-repo.js
-- scripts/welcome.js
+- scripts/.welcome-state.json
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **68** | Done: **51**
 ## 🎯 Today’s focus (from `updates/todo.md`)

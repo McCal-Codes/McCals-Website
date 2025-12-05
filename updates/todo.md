@@ -106,7 +106,11 @@ Reference standards:
 
 ## Remaining / In-Progress Items
 **Next.js Migration (Self-Hosted Site)**
-- [ ] TODO: Next.js Footer (v1.3.0 parity) — wire the real newsletter subscription endpoint and adjust JSON-LD logo URL to the app's public assets path. Track status in `sites/self-hosted-nextjs/components/Layout/Footer.tsx`. (Added 2025-12-01)
+- [x] TODO: Next.js Footer (v1.3.0 parity) — wire the real newsletter subscription endpoint and adjust JSON-LD logo URL to the app's public assets path. Track status in `sites/self-hosted-nextjs/components/Layout/Footer.tsx`. (Added 2025-12-01; Completed 2025-12-05)
+	- Added Organization JSON-LD structured data injection via Next.js Head
+	- Newsletter form now uses env-configurable NEXT_PUBLIC_NEWSLETTER_ENDPOINT (default: Mailchimp)
+	- Logo URL now uses SITE_URL + /brand/logo-mark.svg from public/ directory
+	- Added logo-mark.svg asset to sites/self-hosted-nextjs/public/brand/
 **Phase 1 — Legacy Version Archival (Planning & Scaffolding)** ✅ COMPLETE
 - [x] TODO: Define archival policy and shadow workflow validation (completed per workspace standards and Recent Updates).
 - [x] TODO: Document policy in `docs/standards/workspace-organization.md` and `.github/copilot-instructions.md` (completed).
@@ -256,4 +260,4 @@ Follow-up Documentation TODOs:
 	- npm audit: `reports/npm-audit-2025-11-04.json`
 	- Added `.gitattributes`, `CONTRIBUTING.md`, and `CODEOWNERS`
 
-_Last updated: 2025-11-19_
+_Last updated: 2025-12-05_

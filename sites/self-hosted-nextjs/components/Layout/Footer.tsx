@@ -1,12 +1,44 @@
+import Head from 'next/head';
 import React, { useMemo } from 'react';
 
 // McCal Footer Widget v1.2.0 — React/Next port (mcc-cal.com parity)
 const WIDGET_VERSION = '1.2.0';
+const NEWSLETTER_ENDPOINT = process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT
+  || 'https://mcc-cal.us14.list-manage.com/subscribe/post?u=da029ed85760894c33e8b119d&id=fb992a38c8&f_id=00cf8ae0f0';
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const LOGO_PATH = '/brand/logo-mark.svg';
 
 const Footer: React.FC = () => {
   const year = useMemo(() => new Date().getFullYear(), []);
+  const organizationSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_URL}#organization`,
+    name: 'Caleb McCartney',
+    url: SITE_URL,
+    logo: `${SITE_URL}${LOGO_PATH}`,
+    sameAs: [
+      'https://www.instagram.com/mcc_cal',
+      'https://www.facebook.com/mccalphotography'
+    ],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'contact@mcc-cal.com',
+        url: `${SITE_URL}/contact-us`
+      }
+    ]
+  }), []);
   return (
-    <div className="mcc-footer-widget" data-widget-version={WIDGET_VERSION}>
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </Head>
+      <div className="mcc-footer-widget" data-widget-version={WIDGET_VERSION}>
       <footer className="mcc-footer" role="contentinfo" aria-label="Site footer">
         <div className="mcc-footer__inner">
           <section className="mcc-footer__section" aria-labelledby="footer-about">
@@ -61,7 +93,7 @@ const Footer: React.FC = () => {
 
             <div className="mcc-footer__newsletter">
               <form
-                action="https://mcc-cal.us14.list-manage.com/subscribe/post?u=da029ed85760894c33e8b119d&amp;id=fb992a38c8&amp;f_id=00cf8ae0f0"
+                action={NEWSLETTER_ENDPOINT}
                 method="post"
                 target="_blank"
                 aria-label="Newsletter signup"
@@ -97,7 +129,8 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };
 
