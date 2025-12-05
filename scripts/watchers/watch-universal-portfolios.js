@@ -13,8 +13,11 @@
 const chokidar = require('chokidar');
 const { spawn } = require('child_process');
 const path = require('path');
+const fs = require('fs');
 
-const PORTFOLIOS_PATH = path.join(process.cwd(), 'images', 'Portfolios');
+// NOTE: Portfolios live under src/images/Portfolios in this repo.
+// The previous path (without "src") caused the watcher to sit idle and never fire.
+const PORTFOLIOS_PATH = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const IMAGE_PATTERNS = ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.webp', '**/*.gif'];
 
 let buildTimeout = null;
@@ -86,6 +89,11 @@ function getPortfolioType(filePath) {
 }
 
 function startWatching() {
+  if (!fs.existsSync(PORTFOLIOS_PATH)) {
+    error(`Portfolio root not found at ${PORTFOLIOS_PATH}. Is the repo structure different?`);
+    process.exit(1);
+  }
+
   log('Starting universal portfolio watcher...');
   log(`Watching: ${PORTFOLIOS_PATH}`);
   log(`Patterns: ${IMAGE_PATTERNS.join(', ')}`);

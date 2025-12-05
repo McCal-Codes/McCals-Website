@@ -1,11 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `59c8f9b4` — 0 seconds ago
-> fix: Merge duplicate with: blocks in workflow checkout steps
+**Last commit**: `0e0dc673` — 0 seconds ago
+> chore: update welcome state and add new images to portfolios
 ## 🔄 Changes in last commit
-- .github/workflows/agent-checks.yml
-- .github/workflows/ai-preflight-daily.yml
-- .github/workflows/ci-scripts-smoke.yml
-- .github/workflows/copilot-instructions-guardian.yml
+- scripts/.welcome-state.json
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3301.jpg
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3304.jpg
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3315.jpg
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3351.jpg
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3364.jpg
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3390.jpg
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3411.jpg
+- src/images/Portfolios/Concert/Casino Six/August 2025/250820_Haven Block Party_CAL3443.jpg
+- src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg
+- src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg
+- src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg
+- …and 91 more
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)

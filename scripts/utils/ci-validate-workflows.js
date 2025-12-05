@@ -71,14 +71,16 @@ for (const wf of wfFiles) {
     npmInstallFound.push(wf);
   }
 
+  const isCompositeOnly = /uses:\s*\.\/\.github\/workflows\//.test(txt);
+
   // Consider cache present if actions/cache is used OR setup-node with cache: npm is present
   const hasActionsCache = /uses:\s*actions\/cache@/m.test(txt);
   const hasSetupNodeCache = /setup-node@[^\n]*[\s\S]*?cache\s*:\s*['"]?npm['"]?/m.test(txt);
-  if (!(hasActionsCache || hasSetupNodeCache)) {
+  if (!(hasActionsCache || hasSetupNodeCache) && !isCompositeOnly) {
     cacheMissing.push(wf);
   }
 
-  if (!/uses:\s*actions\/checkout/.test(txt)) {
+  if (!/uses:\s*actions\/checkout/.test(txt) && !isCompositeOnly) {
     checkoutMissing.push(wf);
   }
 }
