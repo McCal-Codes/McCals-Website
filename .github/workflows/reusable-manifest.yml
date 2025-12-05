@@ -1,5 +1,9 @@
 name: Reusable Manifest Generation
 
+concurrency:
+  group: manifest-push-${{ github.ref }}
+  cancel-in-progress: false
+
 on:
   workflow_call:
     inputs:
