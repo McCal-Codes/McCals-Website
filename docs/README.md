@@ -33,6 +33,7 @@ Project standards, conventions, and versioning:
 - `seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 - `date-naming.md` - File and folder naming conventions
 - `versioning.md` - Project versioning guidelines
+- `security-organization-prompt.md` - Ready-to-use prompt for non-breaking security, organization, and efficiency reviews
 
 ### 🧠 **learned/** - Short writeups capturing practical lessons and postmortems
 - `manifest-webhook-integration.md` — Lessons learned from automating manifest → API webhook notifications, composite action design, CI secrets guidance and testing tips
