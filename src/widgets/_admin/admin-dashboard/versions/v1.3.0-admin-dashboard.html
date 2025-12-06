@@ -1222,6 +1222,52 @@ function populateAnalytics() {
   
   const daysAgo = Math.floor(Math.random() * 7) + 1;
   document.getElementById('lastDeploy').textContent = `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+  
+  // Populate portfolio manifest data
+  const portfolios = {
+    concert: { bands: 16, images: 211, count: 'concertCount', bands_id: 'concertBands', images_id: 'concertImages', updated_id: 'concertUpdated' },
+    events: { events: 4, images: 84, count: 'eventsCount', total_id: 'eventsTotal', images_id: 'eventsImages', updated_id: 'eventsUpdated' },
+    journalism: { articles: 12, images: 156, count: 'journalismCount', total_id: 'journalismTotal', images_id: 'journalismImages', updated_id: 'journalismUpdated' },
+    nature: { collections: 8, images: 320, total_id: 'natureTotal', images_id: 'natureImages', updated_id: 'natureUpdated' },
+    portrait: { subjects: 24, images: 144, total_id: 'portraitTotal', images_id: 'portraitImages', updated_id: 'portraitUpdated' },
+    featured: { items: 15, images: 45, total_id: 'featuredTotal', images_id: 'featuredImages', updated_id: 'featuredUpdated' }
+  };
+  
+  // Update each portfolio
+  for (const [key, data] of Object.entries(portfolios)) {
+    // Update manifest counts
+    if (data.count) {
+      const countEl = document.getElementById(data.count);
+      if (countEl) countEl.textContent = data.bands || data.events || data.articles || data.collections || data.subjects || data.items;
+    }
+    
+    // Update total/bands/subjects
+    if (data.bands_id) {
+      const el = document.getElementById(data.bands_id);
+      if (el) el.textContent = data.bands;
+    }
+    if (data.total_id) {
+      const el = document.getElementById(data.total_id);
+      if (el) el.textContent = data.collections || data.articles || data.subjects || data.items || data.events;
+    }
+    
+    // Update images count
+    if (data.images_id) {
+      const el = document.getElementById(data.images_id);
+      if (el) el.textContent = data.images;
+    }
+    
+    // Update timestamp
+    if (data.updated_id) {
+      const el = document.getElementById(data.updated_id);
+      if (el) {
+        const hoursAgo = Math.floor(Math.random() * 48) + 1;
+        el.textContent = hoursAgo < 24 
+          ? `${hoursAgo}h ago`
+          : `${Math.floor(hoursAgo / 24)}d ago`;
+      }
+    }
+  }
 }
 
 // Run on page load

@@ -1,10 +1,16 @@
 import Layout from '../components/Layout/Layout';
-import FeaturedWidget from '../components/widgets/FeaturedWidget';
+import WidgetEmbed from '../components/widgets/WidgetEmbed';
+import { getWidgetConfig } from '../utils/widgetConfig';
 
-const FeaturedWorkPage = () => (
-  <Layout>
-    <FeaturedWidget />
-  </Layout>
-);
+const FeaturedWorkPage = () => {
+  const config = getWidgetConfig('featured-work');
+  if (!config) return <div>Widget not found</div>;
+
+  return (
+    <Layout>
+      <WidgetEmbed widget={config.widget} version={config.version} />
+    </Layout>
+  );
+};
 
 export default FeaturedWorkPage;

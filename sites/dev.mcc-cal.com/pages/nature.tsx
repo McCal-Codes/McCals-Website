@@ -1,9 +1,16 @@
 import Layout from '../components/Layout/Layout';
+import WidgetEmbed from '../components/widgets/WidgetEmbed';
+import { getWidgetConfig } from '../utils/widgetConfig';
 
-const NaturePage = () => (
-  <Layout>
-    <section><h2>Nature</h2></section>
-  </Layout>
-);
+const NaturePage = () => {
+  const config = getWidgetConfig('nature');
+  if (!config) return <div>Widget not found</div>;
+
+  return (
+    <Layout>
+      <WidgetEmbed widget={config.widget} version={config.version} />
+    </Layout>
+  );
+};
 
 export default NaturePage;

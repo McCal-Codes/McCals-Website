@@ -1,9 +1,16 @@
 import Layout from '../components/Layout/Layout';
+import WidgetEmbed from '../components/widgets/WidgetEmbed';
+import { getWidgetConfig } from '../utils/widgetConfig';
 
-const PodcastPage = () => (
-  <Layout>
-    <section><h2>Podcast</h2></section>
-  </Layout>
-);
+const PodcastPage = () => {
+  const config = getWidgetConfig('podcast');
+  if (!config) return <div>Widget not found</div>;
+
+  return (
+    <Layout>
+      <WidgetEmbed widget={config.widget} version={config.version} />
+    </Layout>
+  );
+};
 
 export default PodcastPage;

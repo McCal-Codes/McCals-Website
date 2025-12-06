@@ -73,9 +73,9 @@ npm run start
 
 ## ✨ Features
 
+- **Production-Perfect Widgets**: Dev pages use the exact same widget code as mcc-cal.com  
 - **Server-Side Rendering (SSR)**: Fast initial page loads with pre-rendered content
 - **API Integration**: Fetches data from api.mcc-cal.com with intelligent caching  
-- **Concert Portfolio**: ✅ Fully implemented with dynamic filtering and lightbox
 - **Image Optimization**: Next.js Image component with automatic WebP conversion
 - **TypeScript**: Full type safety across the application
 - **Responsive Design**: Mobile-first, works on all devices
@@ -216,8 +216,56 @@ npm run dev -- -p 3001
 npm run start -- -p 3001
 \`\`\`
 
+## 🎯 Widget Embed System
+
+As of December 6, 2025, all portfolio pages use the **WidgetEmbed** component, which loads production widget HTML directly from the McCals-Website repository. This ensures perfect parity between dev and production.
+
+### How It Works
+
+1. Each page (journalism, concerts, events, etc.) uses `<WidgetEmbed>`
+2. `WidgetEmbed` fetches the production widget HTML from GitHub raw content
+3. Widget HTML is injected and scripts are re-executed
+4. Result: Dev pages look **identical** to mcc-cal.com
+
+### Widget Changelogs
+
+Each widget includes its own built-in changelog modal! Click the **version indicator** badge (e.g., "v5.2") next to the widget title to view:
+- All changes and improvements for that version
+- Previous version notes
+- Feature highlights
+
+This is the **exact same changelog** shown on the production Squarespace site.
+
+### Current Widget Pages
+
+| Page | Widget | Version | Changelog |
+|------|--------|---------|-----------|
+| `/journalism` | photojournalism-portfolio | v5.2.0 | ✓ Click v5.2 badge |
+| `/concerts` | concert-portfolio | v4.7.1 | ✓ Click v4.7.1 badge |
+| `/events` | event-portfolio | v2.6.4 | ✓ Click v2.6.4 badge |
+| `/featured-work` | featured-portfolio | v1.5.0 | ✓ Click v1.5.0 badge |
+| `/portraits` | portrait-portfolio | v1.1 | ✓ Click v1.1 badge |
+| `/nature` | nature-portfolio | v1.0 | ✓ Click v1.0 badge |
+| `/podcast` | podcast-feed | v1.9.5 | ✓ Click v1.9.5 badge |
+
+### Adding New Widget Pages
+
+See **[WIDGET-EMBED-GUIDE.md](./WIDGET-EMBED-GUIDE.md)** for detailed instructions on:
+- Adding a new widget page
+- Updating widget versions
+- Troubleshooting widget loading issues
+
+### Benefits
+
+✅ **Zero Duplication** - Single source of truth for widget code  
+✅ **Automatic Updates** - Changes to production widgets instantly appear on dev  
+✅ **Built-in Changelogs** - View changelog modal for each widget  
+✅ **Easy Maintenance** - No custom React components to keep in sync  
+✅ **Perfect Parity** - Dev always matches production exactly  
+
 ## 📚 Related Documentation
 
+- [Widget Embed Guide](./WIDGET-EMBED-GUIDE.md) - Adding and updating widgets
 - [API Setup Guide](../../docs/integrations/CLOUDFLARE-SUBDOMAIN-SETUP.md)
 - [GitHub Actions Integration](../../docs/workflows/GITHUB-ACTIONS-CLOUDFLARE-INTEGRATION.md)
 - [Widget Standards](../../docs/standards/widget-standards.md)

@@ -1,10 +1,16 @@
 import Layout from '../components/Layout/Layout';
-import JournalismWidget from '../components/widgets/JournalismWidget';
+import WidgetEmbed from '../components/widgets/WidgetEmbed';
+import { getWidgetConfig } from '../utils/widgetConfig';
 
-const JournalismPage = () => (
-  <Layout>
-    <JournalismWidget />
-  </Layout>
-);
+const JournalismPage = () => {
+  const config = getWidgetConfig('journalism');
+  if (!config) return <div>Widget not found</div>;
+
+  return (
+    <Layout>
+      <WidgetEmbed widget={config.widget} version={config.version} />
+    </Layout>
+  );
+};
 
 export default JournalismPage;
