@@ -11,9 +11,9 @@ Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/
 1. Install dependencies:
 ---
 
-## Quick note: self-hosted Next.js app
+## Quick note: dev.mcc-cal.com Next.js app
 
-This repository includes a self-hosted Next.js app at `sites/self-hosted-nextjs`.
+This repository includes the dev.mcc-cal.com Next.js app at `sites/dev.mcc-cal.com` (development mirror of mcc-cal.com).
 
 Prerequisites
 
@@ -23,7 +23,7 @@ Prerequisites
 Run it locally
 
 ```bash
-cd sites/self-hosted-nextjs
+cd sites/dev.mcc-cal.com
 npm install
 npm run dev      # development server on port 3000 by default
 npm run build    # build for production
@@ -32,10 +32,10 @@ npm run start    # serve the production build
 
 Run the server (recommended)
 
-The canonical self-hosted site is the running Next.js server. To run it locally:
+The canonical dev.mcc-cal.com site is the running Next.js server. To run it locally:
 
 ```bash
-cd sites/self-hosted-nextjs
+cd sites/dev.mcc-cal.com
 npm install
 npm run build
 npm run start   # serves the production build (default port 3000)
@@ -53,7 +53,7 @@ The serve selector page (`serve-select.html`) includes a "Start & Open" button t
 DEV_SERVER_ALLOW_START=true PORT=3033 NEXT_SERVER_PORT=3005 node dev-server.js
 ```
 
-When enabled, clicking the "Start & Open" button will POST to a local dev-only endpoint (`/__start_next`) which spawns `npx next start -p <port>` in `sites/self-hosted-nextjs` and then opens the running site when it becomes reachable. Use this only on trusted developer machines.
+When enabled, clicking the "Start & Open" button will POST to a local dev-only endpoint (`/__start_next`) which spawns `npx next start -p <port>` in `sites/dev.mcc-cal.com` and then opens the running site when it becomes reachable. Use this only on trusted developer machines.
 ## Available Widgets
 
 Critical repository events, security incidents, and recovery steps are documented in [docs/important-notes/](docs/important-notes/).
@@ -165,25 +165,6 @@ Security & recovery events: `docs/important-notes/` (latest: 2025-10-09-secret-r
 - **Enhancement Patterns**: Proven improvement patterns for optimizing existing widgets
 - **SEO Testing Guide**: `docs/standards/seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 - **SEO Starter Guide**: `docs/standards/seo-starter-guide.md` - Practical Squarespace SEO playbook for McCal Media
-=======
-- **Concert Portfolio** (`src/widgets/concert-portfolio/`) — Concert photography galleries
-- **Event Portfolio** (`src/widgets/event-portfolio/`) — Event photography displays
-- **Featured Portfolio** (`src/widgets/featured-portfolio/`) — Curated highlights
-- **Photojournalism Portfolio** (`src/widgets/photojournalism-portfolio/`) — News and journalism photos
-- **Portrait Portfolio** (`src/widgets/portrait-portfolio/`) — Vertical-focused portrait galleries
-- **Video Portfolio** (`src/widgets/video-portfolio/`) — Multimedia gallery with accessible playback (v0.1)
-- **About Section Widgets** (`src/widgets/about/`) — About pages and client carousels
-- **Podcast Feed** (`src/widgets/podcast-feed/`) — Podcast episode displays
-- **Hero Slideshow** (`src/widgets/hero-slideshow/`) — Homepage hero sections
-- **Site Footer** (`src/widgets/site-footer/`) — Accessible footer with social links and newsletter
-- **Hire to Unlock Résumé** (`src/widgets/hire-to-unlock-resume/`) — Interactive résumé experience
-- **Admin Portfolio Importer** (`src/widgets/admin-portfolio-importer/`) — Private admin tool for portfolio imports
-
-### Work in Progress
-- **Photojournalism Portfolio v5.1** — Performance optimization
-- **Blog Feed** — External blog integration
-- **Nature Portfolio** — Nature photography displays
->>>>>>> 4f7e971f5bdf9e25b8dc6ffbf28e46ace3760853
 
 ## Development & Testing
 

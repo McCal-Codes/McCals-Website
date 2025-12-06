@@ -26,7 +26,7 @@
 - [ ] TODO: Monitor Worker analytics and optimize cache TTLs/rate limits based on actual traffic patterns
 
 ### Next.js Self-Hosted Site Migration
-- [ ] TODO: Create Next.js self-hosted site structure under sites/self-hosted-nextjs/
+- [ ] TODO: Create Next.js self-hosted site structure under sites/dev.mcc-cal.com/
 - [ ] TODO: Add Layout, Nav, and Footer components with "Self-Hosted" branding
 - [ ] TODO: Implement ConcertWidget (manifest typing, fetch, gallery, lightbox, CSS module)
 - [ ] TODO: Add stubs for FeaturedWidget, EventWidget, JournalismWidget

@@ -108,7 +108,7 @@ function createServer() {
         socket.on('error', () => {
           // Not listening — spawn the Next server
           try {
-            const nextCwd = path.join(__dirname, 'sites', 'self-hosted-nextjs');
+            const nextCwd = path.join(__dirname, 'sites', 'dev.mcc-cal.com');
             console.log(`⚙️  Spawning Next.js server in ${nextCwd} on port ${nextPort}...`);
 
             // Use npx to invoke next start -p <port> so we avoid relying on package.json script names
