@@ -1,11 +1,9 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `67f0b217` — 1 second ago
-> update: refresh last commit details and update welcome message
+**Last commit**: `6e5dc6a0` — 1 second ago
+> update: refresh last commit details in welcome message
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
-- scripts/watchers/watch-auto-manifest.js
-- src/images/Portfolios/Portrait/portrait-manifest.json
-- src/images/Portfolios/date-overrides.json
+- src/images/Portfolios/Events/events-manifest.json
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
