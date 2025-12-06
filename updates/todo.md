@@ -78,10 +78,12 @@ Reference standards:
 - **Manifests & CI**: Manifest generation, watchers, and CI automation implemented and validated
 
 ## ✅ RECENT COMPLETIONS
+- [x] **Blog Admin Widget v1.0.0** — Complete blog authoring system with login, post editor (dynamic content blocks), post management dashboard, profile settings; production-ready self-contained admin widget (Dec 6, 2025)
+- [x] **Event Manifest Publishing Fix** — Resolved CDN cache issue preventing updated event dates from displaying in widget; confirmed GitHub raw URL serving correct dates (Dec 6, 2025)
 - [x] **Cloudflare Integration** — Added edge caching, webhook purge/warm endpoints, rate limiting, cache stats, and CI integration for automatic cache refresh after manifest publish (Dec 5, 2025)
 - [x] **Cloudflare Manifest Webhook Worker** — Deployed minimal worker with secret verification, origin forwarding, and GitHub fallback; updated .env.example and added docs/integrations/manifest-webhook-worker.md (Dec 5, 2025)
 - [x] **Auto-Manifest Watcher --initial Flag** — Added --initial flag to watch-auto-manifest.js for immediate regeneration on startup; supports per-portfolio and --all modes (Dec 5, 2025)
-- [x] **Event Date Corrections** — Fixed Back To School Bash (January 2022) and Growing Up (December 2021) dates via date-overrides.json; manifests regenerated (Dec 5, 2025)
+- [x] **Event Date Corrections** — Fixed Back To School Bash (January 2022) and Growing Up (December 2021) dates via date-overrides.json; manifests regenerated and pushed to GitHub (Dec 5-6, 2025)
 - [x] **Image Compression** — Compressed 5 largest images (Nature/Concert portfolios) with sips, saving ~32.7 MB total (Dec 5, 2025)
 - [x] **Accessibility Statement Widget v1.1.x** — Added theme toggle (System/Light/Dark), readable panel with adaptive backdrop, localStorage persistence, full keyboard accessibility, WCAG AA contrast verified (Nov 11, 2025)
 - [x] **Policies & Legal Widget v1.1.0** — Accessibility enhancements: skip link, unified focus-visible, scroll spy with aria-current, mobile drawer improvements, reduced motion support, print stylesheet refinement (Nov 11, 2025)

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Admin Widget - Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f3f4f6;
+    }
+    .test-header {
+      background: #1f2937;
+      color: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .test-header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .test-info {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .test-info h2 {
+      margin-top: 0;
+    }
+    .credentials {
+      background: #fef3c7;
+      border: 1px solid #fbbf24;
+      border-radius: 6px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .credentials strong {
+      color: #92400e;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-header">
+    <h1>🔐 Blog Admin Widget - Test Page</h1>
+  </div>
+
+  <div class="test-info">
+    <h2>Test Credentials</h2>
+    <div class="credentials">
+      <p><strong>Username:</strong> mccal</p>
+      <p><strong>Password:</strong> Cm03465!</p>
+      <p style="margin-bottom: 0;"><em>Note: These are from your existing blog-authors.json file</em></p>
+    </div>
+
+    <h3>Features to Test</h3>
+    <ul>
+      <li>✅ Login with above credentials</li>
+      <li>✅ View existing posts (if any)</li>
+      <li>✅ Create new post with content blocks</li>
+      <li>✅ Add/remove content blocks</li>
+      <li>✅ Tab navigation (My Posts, New Post, Profile)</li>
+      <li>✅ Logout functionality</li>
+    </ul>
+
+    <h3>API Configuration</h3>
+    <p>Widget is configured to use: <code>https://mcc-cal.com/api/v1/blog</code></p>
+    <p>To test locally, update the <code>API_BASE</code> constant in the widget to point to your local dev server.</p>
+
+    <h3>Known Limitations (v1.0.0)</h3>
+    <ul>
+      <li>Registration shows "coming soon" (backend needs implementation)</li>
+      <li>Edit/Delete post buttons show placeholder alerts</li>
+      <li>Profile update shows "coming soon" message</li>
+    </ul>
+  </div>
+
+  <!-- Blog Admin Widget Container -->
+  <div id="blog-admin-widget"></div>
+
+  <script>
+    // Load the widget
+    fetch('../src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to load widget');
+        }
+        return response.text();
+      })
+      .then(html => {
+        document.getElementById('blog-admin-widget').innerHTML = html;
+      })
+      .catch(error => {
+        document.getElementById('blog-admin-widget').innerHTML = 
+          '<div style="text-align: center; padding: 3rem; color: #ef4444;">' +
+          '<p>Error loading widget: ' + error.message + '</p>' +
+          '<p style="color: #6b7280;">Make sure you\'re running this from a local server (npm run dev)</p>' +
+          '</div>';
+      });
+  </script>
+</body>
+</html>

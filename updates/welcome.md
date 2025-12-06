@@ -1,8 +1,9 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `3ab545a7` — 0 seconds ago
-> Merge remote changes
+**Last commit**: `8c32d4c3` — 1 second ago
+> Update welcome state
 ## 🔄 Changes in last commit
-- No file changes detected.
+- scripts/.welcome-state.json
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **71** | Done: **59**
 ## 🎯 Today’s focus (from `updates/todo.md`)
