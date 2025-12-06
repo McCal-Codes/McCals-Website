@@ -1,10 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Remove .next/, build/, and out/ directories from staging before lint-staged runs
-# These are build artifacts that should never be linted
-git reset HEAD sites/**/.next 2>/dev/null || true
-git reset HEAD sites/**/build 2>/dev/null || true
-git reset HEAD sites/**/out 2>/dev/null || true
+# Remove build artifacts from staging before linting
+# This prevents ESLint from trying to lint generated .next/, build/, out/ files
+for pattern in '.next' 'build' 'out'; do
+  git diff --cached --name-only --diff-filter=ACMR | grep -E "/$pattern/" | while read -r file; do
+    git reset HEAD -- "$file" 2>/dev/null || true
+  done
+done
 
 npx lint-staged

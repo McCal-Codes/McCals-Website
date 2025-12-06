@@ -144,7 +144,10 @@
     ],
     "*.{json,md,html,css,scss}": [
       "prettier --write"
-    ]
+    ],
+    "!sites/**/.next/**": [],
+    "!sites/**/build/**": [],
+    "!sites/**/out/**": []
   },
   "dependencies": {
     "compression": "^1.8.1",
