@@ -114,7 +114,7 @@ EOF
 npm run dev
 
 # 4. Test
-# Visit: http://localhost:3000/test-blog-admin.html
+# Visit: http://localhost:3001/test-blog-admin.html
 # Login: mccal / test-password
 ```
 
