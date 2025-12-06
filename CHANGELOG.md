@@ -36,6 +36,9 @@
 ### Docs/Meta
 
 - 2025-12-06
+  - Added changelog validator workflow to require CHANGELOG updates on PRs that touch core files (bypass via labels skip-changelog/docs-acknowledged).
+  - Extended widget version policy workflow to run on pushes to main for continuous enforcement.
+  - AI preflight now reports widget README coverage to highlight missing docs quickly.
   - Added GitHub issue templates (bug, feature) and pull request template to standardize submissions.
   - Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/\_archived/; not referenced by npm scripts or code).
   - Updated .gitignore to exclude scripts/.welcome-state.json (prevents local state file from being committed).

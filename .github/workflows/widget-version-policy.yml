@@ -1,11 +1,20 @@
 name: Enforce Widget Version Policy
 
 on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/widgets/**'
+      - 'scripts/utils/scan-widget-versions.js'
+      - '.github/workflows/widget-version-policy.yml'
   pull_request:
     paths:
       - 'src/widgets/**'
       - 'scripts/utils/scan-widget-versions.js'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   check-versions:
