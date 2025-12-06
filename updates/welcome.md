@@ -1,6 +1,6 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `f8bb91d4` — 0 seconds ago
-> chore: update welcome state again
+**Last commit**: `fbc09e5b` — 0 seconds ago
+> chore: welcome state
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
 - updates/welcome.md
