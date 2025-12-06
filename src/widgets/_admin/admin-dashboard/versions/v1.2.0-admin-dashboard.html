@@ -1,10 +1,24 @@
 <!--
-  Admin Dashboard Widget v1.0.0
+  Admin Dashboard Widget v1.2.0
   Comprehensive admin dashboard with API, manifest, widget, and system health monitoring
+  Redesigned with improved organization, styling, visual hierarchy, and modern CSS architecture
   Author: McCal Media
   Created: 2025-12-06
   Updated: 2025-12-06
   License: MIT
+  
+  Changes in v1.2.0:
+  - Complete CSS reorganization with semantic sections and comments
+  - Improved visual hierarchy with gradient backgrounds and better typography
+  - Enhanced header with better control layout
+  - Modernized status badges with gradient backgrounds
+  - Improved metric rows with hover effects and monospace fonts
+  - Better section organization with cleaner expandable sections
+  - Enhanced analytics grid layout and styling
+  - Improved responsive design with mobile-first approach
+  - Better spacing and alignment throughout
+  - Modern animations and transitions
+  - Max-width increased to 1600px for better content display
 -->
 
 <style>
@@ -164,12 +178,17 @@
     font-size: 0.95rem;
   }
 
-  /* Section Organization */
-  .dashboard-section {
+  /* Expandable Sections */
+  .expandable-section {
     margin-bottom: 2.5rem;
   }
 
-  .section-header {
+  .section-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -177,25 +196,15 @@
     background: white;
     border-radius: 12px;
     border: 1px solid #e5e7eb;
-    cursor: pointer;
     transition: all 0.2s;
     margin-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  .section-header:hover {
+  .section-title:hover {
     background: #f9fafb;
     border-color: #d1d5db;
-  }
-
-  .section-title {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #1f2937;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
   }
 
   .toggle-icon {
@@ -204,7 +213,7 @@
     display: inline-flex;
   }
 
-  .section-header.collapsed .toggle-icon {
+  .section-title.collapsed .toggle-icon {
     transform: rotate(-90deg);
   }
 
@@ -553,7 +562,7 @@
       <div class="card-metrics">
         <div class="metric-row">
           <span class="metric-label">Version:</span>
-          <span class="metric-value" id="dashboardVersion">1.1.0</span>
+          <span class="metric-value" id="dashboardVersion">1.2.0</span>
         </div>
         <div class="metric-row">
           <span class="metric-label">Built:</span>
@@ -836,7 +845,7 @@
 
   <div class="expandable-section">
     <div class="section-title" onclick="toggleSection(this)">
-      � Quick Links
+      🔗 Quick Links
       <span class="toggle-icon">▶</span>
     </div>
     <div class="section-content">
@@ -851,6 +860,8 @@
     </div>
   </div>
 </div>
+
+<script>
 // Toggle expandable sections
 function toggleSection(titleEl) {
   const content = titleEl.nextElementSibling;
@@ -1082,49 +1093,6 @@ function populateAnalytics() {
 // Run on page load
 document.addEventListener('DOMContentLoaded', initDashboard);
 
-// Optional: auto-refresh every 5 minutes
+// Optional: auto-refresh every 60 seconds
 setInterval(updateTimestamp, 60000);
-</script>
-      if (data && data.bands && Array.isArray(data.bands)) {
-        manifestStatus.textContent = 'Valid';
-        manifestStatus.className = 'status status-ok';
-        manifestDetail.textContent = 'Bands: ' + data.bands.length + ', Last updated: ' + (data.lastUpdated || 'unknown');
-      } else {
-        manifestStatus.textContent = 'Invalid';
-        manifestStatus.className = 'status status-warn';
-        manifestDetail.textContent = 'Manifest missing bands array.';
-      }
-    })
-    .catch(e => {
-      manifestStatus.textContent = 'Error';
-      manifestStatus.className = 'status status-err';
-      manifestDetail.textContent = e.message || 'Could not load manifest.';
-    });
-
-  // Widget Validation (HTML validation stub)
-  const widgetStatus = document.getElementById('widgetStatus');
-  const widgetDetail = document.getElementById('widgetDetail');
-  fetch('/reports/axe-concert-widget-results.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(data => {
-      if (data.violations && data.violations.length === 0) {
-        widgetStatus.textContent = 'Valid';
-        widgetStatus.className = 'status status-ok';
-        widgetDetail.textContent = 'No accessibility violations.';
-      } else if (data.violations) {
-        widgetStatus.textContent = 'Issues';
-        widgetStatus.className = 'status status-warn';
-        widgetDetail.textContent = data.violations.length + ' accessibility issues.';
-      } else {
-        widgetStatus.textContent = 'Unknown';
-        widgetStatus.className = 'status status-warn';
-        widgetDetail.textContent = 'Validation result missing.';
-      }
-    })
-    .catch(e => {
-      widgetStatus.textContent = 'Error';
-      widgetStatus.className = 'status status-err';
-      widgetDetail.textContent = e.message || 'Could not load validation report.';
-    });
-})();
 </script>

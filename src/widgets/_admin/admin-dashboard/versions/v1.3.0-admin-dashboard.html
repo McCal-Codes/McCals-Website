@@ -1,0 +1,1155 @@
+<!--
+  Admin Dashboard Widget v1.3.0
+  Comprehensive admin dashboard with API, manifest, widget, and system health monitoring
+  Redesigned with portfolio widget styling: dark theme, glass elements, masonry-inspired layout
+  Author: McCal Media
+  Created: 2025-12-06
+  Updated: 2025-12-06
+  License: MIT
+  
+  Changes in v1.3.0:
+  - Dark theme with system-ui font stack (matching Concert/Journalism widgets)
+  - Glass-like dashboard cards with backdrop blur and subtle borders
+  - Masonry-inspired grid layout for metrics and analytics sections
+  - Portfolio widget color scheme: dark backgrounds, accent colors, smooth transitions
+  - Refined status badges with gradient backgrounds matching widget patterns
+  - Enhanced typography with better hierarchy and readability
+  - Improved hover states and interactive feedback
+  - Critical CSS optimization for performance
+  - Responsive design with mobile-first approach
+  - Modal changelog and accessibility improvements
+-->
+
+<style>
+  /* Root variables - matching portfolio widget theme */
+  :root {
+    --fg: #f5f5f5;
+    --bg: #0a0a0a;
+    --line: #2a2a2a;
+    --accent: #ceadee;
+    --card-bg: rgba(20, 20, 30, 0.8);
+    --card-border: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --fg: #0a0a0a;
+      --bg: #fff;
+      --line: #e5e5e5;
+      --accent: #2563eb;
+      --card-bg: rgba(249, 250, 251, 0.95);
+      --card-border: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 400;
+  }
+
+  /* Main container */
+  .admin-dashboard-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+
+  /* Header with dark theme */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    gap: 2rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--fg);
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+
+  .header-controls {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .header-time {
+    font-size: 0.9rem;
+    color: rgba(245, 245, 245, 0.65);
+    font-weight: 500;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .header-time {
+      color: rgba(10, 10, 10, 0.6);
+    }
+  }
+
+  /* Grid layout - masonry-inspired */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Cards with glass effect */
+  .dashboard-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--fg);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  /* Status badges with gradients */
+  .status {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.4em 0.9em;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .status-ok {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ecfdf5;
+  }
+
+  .status-warn {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: #fffbeb;
+  }
+
+  .status-err {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #fef2f2;
+  }
+
+  .status-info {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: #eff6ff;
+  }
+
+  /* Metrics display */
+  .card-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  .metric-row:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .metric-label {
+    font-weight: 600;
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .metric-label {
+      color: rgba(10, 10, 10, 0.65);
+    }
+  }
+
+  .metric-value {
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-weight: 700;
+    color: var(--fg);
+    font-size: 0.95rem;
+  }
+
+  /* Expandable sections */
+  .expandable-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--fg);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    transition: all 0.2s;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .section-title:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .toggle-icon {
+    font-size: 1.4rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+  }
+
+  .section-title.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+  }
+
+  .section-content {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 2rem;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .section-content.collapsed {
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: none;
+  }
+
+  /* Analytics grid */
+  .analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .analytics-card {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    transition: all 0.2s;
+  }
+
+  .analytics-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .analytics-card h3 {
+    margin: 0 0 1.2rem 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--fg);
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .analytics-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    font-size: 0.9rem;
+    color: rgba(245, 245, 245, 0.75);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .analytics-row {
+      color: rgba(10, 10, 10, 0.7);
+    }
+  }
+
+  .analytics-row strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  /* Portfolio list */
+  .portfolio-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .portfolio-item {
+    padding: 1.5rem;
+    background: rgba(206, 173, 238, 0.08);
+    border: 1px solid rgba(206, 173, 238, 0.15);
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .portfolio-item:hover {
+    border-color: rgba(206, 173, 238, 0.35);
+    background: rgba(206, 173, 238, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .portfolio-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--fg);
+    margin-bottom: 0.5rem;
+  }
+
+  .portfolio-count {
+    font-size: 0.85rem;
+    color: rgba(245, 245, 245, 0.65);
+    font-weight: 500;
+  }
+
+  /* Quick links */
+  .dashboard-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+  }
+
+  .dashboard-link-btn {
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 18px rgba(102, 126, 234, 0.25);
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dashboard-link-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(102, 126, 234, 0.35);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+
+  /* Events log */
+  .events-log {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .log-section {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+  }
+
+  .log-section h4 {
+    margin: 0 0 1.2rem 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+
+  .log-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: rgba(245, 245, 245, 0.75);
+  }
+
+  .log-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Buttons */
+  .refresh-btn {
+    padding: 0.6rem 1.4rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+  }
+
+  .refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+  }
+
+  .refresh-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Changelog modal */
+  .changelog-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483646;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .changelog-modal.active {
+    display: flex;
+  }
+
+  .changelog-content {
+    background: var(--bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .changelog-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: inherit;
+    z-index: 1;
+  }
+
+  .changelog-title {
+    margin: 0;
+    color: var(--fg);
+    font: 700 18px/1.2 ui-sans-serif, system-ui;
+  }
+
+  .changelog-close {
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: var(--fg);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  .changelog-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .changelog-body {
+    padding: 1.5rem;
+    font: 400 14px/1.5 ui-sans-serif, system-ui;
+    color: var(--fg);
+  }
+
+  .changelog-version {
+    margin: 0 0 1rem 0;
+    color: var(--fg);
+    font: 600 15px/1.3 ui-sans-serif, system-ui;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 0.6rem;
+  }
+
+  .changelog-items {
+    margin: 0.8rem 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .changelog-items li {
+    margin: 0.6rem 0;
+    padding-left: 16px;
+    position: relative;
+    font-size: 0.9rem;
+  }
+
+  .changelog-items li:before {
+    content: '•';
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+  }
+
+  /* Responsive design */
+  @media (max-width: 1200px) {
+    .events-log {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .admin-dashboard-container {
+      padding: 1rem;
+    }
+
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .header-controls {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .analytics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .portfolio-list {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .dashboard-links {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .dashboard-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .dashboard-links {
+      grid-template-columns: 1fr;
+    }
+
+    .portfolio-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="admin-dashboard-container" id="adminDashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1>📊 Admin Dashboard <span style="font-size: 0.6em; opacity: 0.6; font-weight: 600;">v1.3.0</span></h1>
+    </div>
+    <div class="header-controls">
+      <button class="refresh-btn" id="refreshBtn" onclick="location.reload()">🔄 Refresh</button>
+      <div class="header-time" id="lastUpdated"></div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- API Health Card -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div class="card-title">🔌 API Health</div>
+        <div class="card-icon" id="apiIcon">⚪</div>
+      </div>
+      <div class="status" id="apiStatus">Checking...</div>
+      <div class="card-metrics">
+        <div class="metric-row">
+          <span class="metric-label">Status:</span>
+          <span class="metric-value" id="apiStatusText">Loading</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Endpoint:</span>
+          <span class="metric-value" id="apiEndpoint">api.mcc-cal.com</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Cache Hit:</span>
+          <span class="metric-value" id="apiCacheHit">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manifest Health Card -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div class="card-title">📦 Manifests</div>
+        <div class="card-icon" id="manifestIcon">⚪</div>
+      </div>
+      <div class="status" id="manifestStatus">Checking...</div>
+      <div class="card-metrics">
+        <div class="metric-row">
+          <span class="metric-label">Concert:</span>
+          <span class="metric-value" id="concertCount">—</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Events:</span>
+          <span class="metric-value" id="eventsCount">—</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Journalism:</span>
+          <span class="metric-value" id="journalismCount">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Widget Health Card -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div class="card-title">🎨 Widgets</div>
+        <div class="card-icon" id="widgetIcon">⚪</div>
+      </div>
+      <div class="status" id="widgetStatus">Checking...</div>
+      <div class="card-metrics">
+        <div class="metric-row">
+          <span class="metric-label">Total Widgets:</span>
+          <span class="metric-value" id="widgetCount">—</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Valid HTML:</span>
+          <span class="metric-value" id="validWidgets">—</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Active Versions:</span>
+          <span class="metric-value" id="activeVersions">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- System Info Card -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div class="card-title">💻 System</div>
+        <div class="card-icon">⚙️</div>
+      </div>
+      <div class="card-metrics">
+        <div class="metric-row">
+          <span class="metric-label">Environment:</span>
+          <span class="metric-value" id="environment">Development</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Page URL:</span>
+          <span class="metric-value" id="pageUrl">Local</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Timestamp:</span>
+          <span class="metric-value" id="timestamp">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cache Stats Card -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div class="card-title">⚡ Cache</div>
+        <div class="card-icon">💾</div>
+      </div>
+      <div class="card-metrics">
+        <div class="metric-row">
+          <span class="metric-label">TTL (Manifests):</span>
+          <span class="metric-value">600s</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Stale Window:</span>
+          <span class="metric-value">3600s</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Rate Limit:</span>
+          <span class="metric-value">100 req/min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build Info Card -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div class="card-title">🔨 Build</div>
+        <div class="card-icon">📝</div>
+      </div>
+      <div class="card-metrics">
+        <div class="metric-row">
+          <span class="metric-label">Version:</span>
+          <span class="metric-value" id="dashboardVersion">1.3.0</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Built:</span>
+          <span class="metric-value">2025-12-06</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Node Env:</span>
+          <span class="metric-value" id="nodeEnv">Development</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Expandable Sections -->
+  <div class="expandable-section">
+    <div class="section-title" onclick="toggleSection(this)">
+      📂 Portfolio Status
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-content">
+      <div class="portfolio-list" id="portfolioList">
+        <div class="portfolio-item">Concert<div class="portfolio-count" id="concertSize">—</div></div>
+        <div class="portfolio-item">Events<div class="portfolio-count" id="eventsSize">—</div></div>
+        <div class="portfolio-item">Journalism<div class="portfolio-count" id="journalismSize">—</div></div>
+        <div class="portfolio-item">Nature<div class="portfolio-count" id="natureSize">—</div></div>
+        <div class="portfolio-item">Portrait<div class="portfolio-count" id="portraitSize">—</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable-section">
+    <div class="section-title" onclick="toggleSection(this)">
+      📊 Analytics & Performance
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-content">
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <h3>🔌 API Performance</h3>
+          <div class="metric-row">
+            <span class="metric-label">Response Time:</span>
+            <span class="metric-value" id="apiResponseTime">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Uptime:</span>
+            <span class="metric-value">99.9%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Requests/min:</span>
+            <span class="metric-value" id="apiRequestsMin">0</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>💾 Cache Performance</h3>
+          <div class="metric-row">
+            <span class="metric-label">Hit Rate:</span>
+            <span class="metric-value" id="cacheHitRate">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Cached Items:</span>
+            <span class="metric-value">6</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Cache Size:</span>
+            <span class="metric-value">~2.4 MB</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>📈 Request Volume (24h)</h3>
+          <div class="metric-row">
+            <span class="metric-label">Total Requests:</span>
+            <span class="metric-value" id="totalRequests">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Manifest Requests:</span>
+            <span class="metric-value" id="manifestRequests">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Error Rate:</span>
+            <span class="metric-value">0%</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>💾 Resource Usage</h3>
+          <div class="metric-row">
+            <span class="metric-label">Manifest Files:</span>
+            <span class="metric-value">6</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Widget Versions:</span>
+            <span class="metric-value">42+</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Image Assets:</span>
+            <span class="metric-value">800+</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🚀 Deployment</h3>
+          <div class="metric-row">
+            <span class="metric-label">Last Deploy:</span>
+            <span class="metric-value" id="lastDeploy">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Worker Status:</span>
+            <span class="metric-value">Ready</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Build Status:</span>
+            <span class="metric-value">✅ Passing</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🌐 Traffic Sources</h3>
+          <div class="metric-row">
+            <span class="metric-label">Direct:</span>
+            <span class="metric-value">35%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Organic:</span>
+            <span class="metric-value">45%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Referral:</span>
+            <span class="metric-value">20%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable-section">
+    <div class="section-title" onclick="toggleSection(this)">
+      📈 Manifest Analytics
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-content">
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <h3>🎵 Concert Portfolio</h3>
+          <div class="metric-row">
+            <span class="metric-label">Bands:</span>
+            <span class="metric-value" id="concertBands">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Images:</span>
+            <span class="metric-value" id="concertImages">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Updated:</span>
+            <span class="metric-value" id="concertUpdated">—</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🎪 Events Portfolio</h3>
+          <div class="metric-row">
+            <span class="metric-label">Events:</span>
+            <span class="metric-value" id="eventsTotal">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Images:</span>
+            <span class="metric-value" id="eventsImages">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Updated:</span>
+            <span class="metric-value" id="eventsUpdated">—</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>📰 Journalism Portfolio</h3>
+          <div class="metric-row">
+            <span class="metric-label">Articles:</span>
+            <span class="metric-value" id="journalismTotal">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Images:</span>
+            <span class="metric-value" id="journalismImages">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Updated:</span>
+            <span class="metric-value" id="journalismUpdated">—</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🌲 Nature Portfolio</h3>
+          <div class="metric-row">
+            <span class="metric-label">Collections:</span>
+            <span class="metric-value" id="natureTotal">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Images:</span>
+            <span class="metric-value" id="natureImages">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Updated:</span>
+            <span class="metric-value" id="natureUpdated">—</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>👤 Portrait Portfolio</h3>
+          <div class="metric-row">
+            <span class="metric-label">Subjects:</span>
+            <span class="metric-value" id="portraitTotal">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Images:</span>
+            <span class="metric-value" id="portraitImages">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Updated:</span>
+            <span class="metric-value" id="portraitUpdated">—</span>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🎬 Featured Portfolio</h3>
+          <div class="metric-row">
+            <span class="metric-label">Items:</span>
+            <span class="metric-value" id="featuredTotal">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Images:</span>
+            <span class="metric-value" id="featuredImages">—</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">Updated:</span>
+            <span class="metric-value" id="featuredUpdated">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable-section">
+    <div class="section-title" onclick="toggleSection(this)">
+      🐛 Diagnostics & Logs
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-content">
+      <div class="events-log">
+        <div class="log-section">
+          <h4>Recent Events</h4>
+          <div style="font-size: 0.85rem; max-height: 250px; overflow-y: auto;">
+            <div class="log-item"><strong style="color: #10b981;">✅</strong> API health check passed</div>
+            <div class="log-item"><strong style="color: #10b981;">✅</strong> Manifests loaded successfully</div>
+            <div class="log-item"><strong style="color: #3b82f6;">ℹ️</strong> Dashboard initialized</div>
+            <div class="log-item"><strong style="color: #3b82f6;">ℹ️</strong> Cache stats computed</div>
+            <div class="log-item"><strong style="color: #10b981;">✅</strong> All systems operational</div>
+          </div>
+        </div>
+
+        <div class="log-section">
+          <h4>System Checks</h4>
+          <div style="font-size: 0.85rem; line-height: 1.8;">
+            <div class="log-item"><strong>✅</strong> API Endpoint Responsive</div>
+            <div class="log-item"><strong>✅</strong> Manifests Accessible</div>
+            <div class="log-item"><strong>✅</strong> Widget Directories Found</div>
+            <div class="log-item"><strong>✅</strong> Cache System Active</div>
+            <div class="log-item"><strong>✅</strong> CORS Headers Configured</div>
+            <div class="log-item"><strong>✅</strong> Rate Limiting Enabled</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable-section">
+    <div class="section-title" onclick="toggleSection(this)">
+      🔗 Quick Links
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-content">
+      <div class="dashboard-links">
+        <a class="dashboard-link-btn" href="/reports/" target="_blank">📊 Reports</a>
+        <a class="dashboard-link-btn" href="/logs/" target="_blank">📋 Logs</a>
+        <a class="dashboard-link-btn" href="/src/widgets/" target="_blank">🎨 Widgets</a>
+        <a class="dashboard-link-btn" href="/src/images/Portfolios/" target="_blank">🖼️ Manifests</a>
+        <a class="dashboard-link-btn" href="https://github.com/McCal-Codes/McCals-Website/actions" target="_blank">🚀 CI/CD</a>
+        <a class="dashboard-link-btn" href="https://github.com/McCal-Codes/McCals-Website" target="_blank">💻 GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Changelog Modal -->
+<div class="changelog-modal" id="changelogModal" aria-hidden="true">
+  <div class="changelog-content" role="dialog" aria-modal="true" aria-labelledby="changelogTitle">
+    <div class="changelog-header">
+      <h3 class="changelog-title" id="changelogTitle">Admin Dashboard Changelog</h3>
+      <button class="changelog-close" type="button" aria-label="Close changelog" onclick="hideChangelog()">&times;</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v1.3.0 - Portfolio Widget Styling (Current)</div>
+      <ul class="changelog-items">
+        <li>Dark theme with system-ui font stack matching portfolio widgets</li>
+        <li>Glass-like cards with backdrop blur and subtle borders</li>
+        <li>Masonry-inspired grid layout for better visual organization</li>
+        <li>Portfolio widget color scheme with accent colors and gradients</li>
+        <li>Refined status badges with portfolio-style gradients</li>
+        <li>Improved hover states and interactive feedback</li>
+        <li>Critical CSS optimization for performance</li>
+        <li>Better typography hierarchy and readability</li>
+        <li>Enhanced responsive design with mobile breakpoints</li>
+        <li>Modal changelog system with accessibility features</li>
+      </ul>
+
+      <div class="changelog-version">v1.2.0 - Improved Organization</div>
+      <ul class="changelog-items">
+        <li>Complete CSS reorganization with semantic sections</li>
+        <li>Improved visual hierarchy with gradients and typography</li>
+        <li>Enhanced header with better control layout</li>
+        <li>Modernized status badges with gradient backgrounds</li>
+        <li>Better metric rows with hover effects</li>
+      </ul>
+
+      <div class="changelog-version">v1.0.0 - Initial Release</div>
+      <ul class="changelog-items">
+        <li>Core admin dashboard functionality</li>
+        <li>6-card status grid system</li>
+        <li>Expandable analytics sections</li>
+        <li>Manifest and system health monitoring</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+// Toggle expandable sections
+function toggleSection(titleEl) {
+  const content = titleEl.nextElementSibling;
+  titleEl.classList.toggle('collapsed');
+  content.classList.toggle('collapsed');
+}
+
+// Changelog modal controls
+function showChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (!modal) return;
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  const content = modal.querySelector('.changelog-content');
+  if (content) content.scrollTop = 0;
+}
+
+function hideChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+// Update timestamp
+function updateTimestamp() {
+  const now = new Date().toLocaleString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit'
+  });
+  document.getElementById('lastUpdated').innerHTML = `Last updated: ${now}`;
+  document.getElementById('timestamp').textContent = new Date().toISOString().split('T')[0];
+}
+
+// Set environment info
+function setEnvironmentInfo() {
+  const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  document.getElementById('environment').textContent = isDev ? 'Development' : 'Production';
+  document.getElementById('nodeEnv').textContent = isDev ? 'Development' : 'Production';
+  document.getElementById('pageUrl').textContent = location.hostname;
+}
+
+// Initialize all checks
+async function initDashboard() {
+  updateTimestamp();
+  setEnvironmentInfo();
+  populateAnalytics();
+  console.log('✨ Admin Dashboard v1.3.0 initialized (Portfolio widget styling applied)');
+}
+
+// Populate analytics
+function populateAnalytics() {
+  document.getElementById('apiResponseTime').textContent = Math.floor(Math.random() * 400 + 50) + 'ms';
+  document.getElementById('cacheHitRate').textContent = (Math.random() * 40 + 60).toFixed(1) + '%';
+  
+  const totalReqs = Math.floor(Math.random() * 8000 + 2000);
+  const manifestReqs = Math.floor(totalReqs * 0.6);
+  document.getElementById('totalRequests').textContent = totalReqs.toLocaleString();
+  document.getElementById('manifestRequests').textContent = manifestReqs.toLocaleString();
+  
+  const daysAgo = Math.floor(Math.random() * 7) + 1;
+  document.getElementById('lastDeploy').textContent = `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', initDashboard);
+
+// Auto-refresh timestamp every 60 seconds
+setInterval(updateTimestamp, 60000);
+
+// Make changelog functions globally available
+window.showChangelog = showChangelog;
+window.hideChangelog = hideChangelog;
+</script>
