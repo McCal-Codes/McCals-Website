@@ -1,12 +1,12 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `e1d3d3a8` — 0 seconds ago
+**Last commit**: `9b683e32` — 1 second ago
 > update: refresh last commit details and update welcome message
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
-- tools/cloudflare/manifest-webhook-worker.js
+- updates/todo.md
 - updates/welcome.md
 ## 📋 Your checklist status
-- Open: **67** | Done: **53**
+- Open: **71** | Done: **59**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 
