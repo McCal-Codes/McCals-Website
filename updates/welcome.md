@@ -1,12 +1,10 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `d5466695` — 0 seconds ago
-> feat: update welcome state and add admin dashboard widget v1.0.0 with health checks
+**Last commit**: `b22a73ee` — 0 seconds ago
+> feat: add comprehensive Cloudflare Worker and GitHub Actions setup documentation
 ## 🔄 Changes in last commit
+- API-DEPLOYMENT-COMPLETE.md
 - scripts/.welcome-state.json
 - src/api
-- src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html
-- src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html
-- tools/cloudflare/complete-worker.js
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **71** | Done: **5**
