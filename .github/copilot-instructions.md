@@ -243,8 +243,12 @@ Recent updates
 	- Created wrangler.toml: Worker configuration with KV bindings, CORS origins, manifest base URL.
 	- Created blog-system-integration.md: complete architecture documentation, flow diagrams, API reference, security best practices, troubleshooting guide.
 	- Updated .env.example: added BLOG_AUTHORS environment variable for author credentials (JSON array format).
+	- Created AUTH-SETUP-GUIDE.md: comprehensive guide for generating JWT/webhook secrets, environment variable setup, local development, production deployment, token management, security best practices.
+	- Created AUTH-TOKEN-QUICK-REFERENCE.md: fast copy-paste setup for local development and CI/CD secret generation.
 	- Ready for production deployment: npm install -g wrangler, wrangler kv:namespace create "MCCAL_KV", wrangler deploy complete-worker.js.
 	- Integrates with blog admin widget v1.0.0: authentication, post creation, session management all functional end-to-end.
+	- See `docs/integrations/AUTH-SETUP-GUIDE.md` for complete token setup, environment variable configuration, and production deployment checklist.
+	- See `docs/integrations/AUTH-TOKEN-QUICK-REFERENCE.md` for quick copy-paste local development and secret generation scripts.
 
 - 2025-12-06T00:00:00.000Z — Blog Admin Widget v1.0.0 Release.
 	- Created comprehensive blog authoring system for admin use (src/widgets/_admin/blog-admin/).

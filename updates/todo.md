@@ -11,8 +11,15 @@
 
 ## 🎯 High Priority (Active Work)
 
-### Cloudflare Worker Deployment
-- [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (JWT_SECRET, WEBHOOK_SECRET, BLOG_AUTHORS, MANIFEST_BASE_URL)
+### Authentication & Token Setup ✅ COMPLETE
+- [x] Generated and documented AUTH-SETUP-GUIDE.md with complete environment variable setup (JWT_SECRET, WEBHOOK_SECRET, BLOG_AUTHORS, MANIFEST_BASE_URL, CORS_ORIGINS)
+- [x] Created AUTH-TOKEN-QUICK-REFERENCE.md for fast copy-paste local development setup
+- [x] Documented token generation, rotation, expiry, and security best practices
+- [x] Provided troubleshooting guide for common auth issues
+- [x] Added Cloudflare deployment checklist and test procedures
+
+### Cloudflare Worker Deployment (Next Priority)
+- [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (use AUTH-SETUP-GUIDE.md)
 - [ ] TODO: Create KV namespaces in Cloudflare dashboard (MCCAL_KV for production, MCCAL_KV_PREVIEW for staging)
 - [ ] TODO: Configure local/CI environments to point manifest generators and blog widget at deployed Worker URL
 - [ ] TODO: Test end-to-end flows: manifest webhook, blog auth/posts, rate limiting, cache stats
