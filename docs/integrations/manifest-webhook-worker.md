@@ -58,7 +58,7 @@ export default {
 ## Required environment variables
 Set these in the Cloudflare dashboard or `wrangler.toml`:
 - `WEBHOOK_SECRET` — shared secret expected from manifest generators.
-- `ORIGIN_BASE` — e.g., `https://api.yourdomain.com` (your API that handles `/api/v1/webhooks/refresh/{type}`).
+- `ORIGIN_BASE` — e.g., `https://api.mcc-cal.com.com` (your API that handles `/api/v1/webhooks/refresh/{type}`).
 - `FALLBACK_BASE` — e.g., `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main` (or a jsDelivr CDN URL if preferred).
 
 ## Suggested `wrangler.toml`
