@@ -1,0 +1,73 @@
+name: "Bug report"
+description: "Report a bug in the site, widgets, manifests, or scripts"
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug! Please include as much detail as you can so we can reproduce it quickly.
+
+  - type: input
+    id: area
+    attributes:
+      label: Affected area
+      description: e.g., Concert widget, Admin dashboard, manifest generator, dev server
+      placeholder: "Widget / script / page"
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Exact steps and URLs/commands used
+      placeholder: "1) ... 2) ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      placeholder: "What you thought would happen"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      placeholder: "What actually happened"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Include console output, stack traces, and screenshots if available
+      render: shell
+
+  - type: input
+    id: manifests
+    attributes:
+      label: Manifest(s) involved
+      description: If applicable, list manifest files or widget versions (e.g., concert v4.7 manifest)
+
+  - type: input
+    id: regression
+    attributes:
+      label: Regression?
+      description: If it worked before, when did it last work?
+
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "OS, browser, Node version, commit SHA"
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      placeholder: "Links, related issues, notes"
