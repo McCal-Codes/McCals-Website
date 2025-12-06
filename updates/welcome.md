@@ -1,6 +1,6 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `66f36b99` — 0 seconds ago
-> batch3: nature + manifests + misc
+**Last commit**: `9a99a484` — 0 seconds ago
+> update: change last commit details to batch3: nature + manifests + misc
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
 - updates/welcome.md
