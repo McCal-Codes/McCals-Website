@@ -162,10 +162,16 @@ Reference standards:
 **Cloudflare Worker & Manifest Webhook Integration**
 - [x] TODO: Created Cloudflare manifest webhook worker (`tools/cloudflare/manifest-webhook-worker.js`) with secret verification, origin forwarding, and GitHub fallback (Dec 5, 2025)
 - [x] TODO: Added documentation (`docs/integrations/manifest-webhook-worker.md`) and updated `.env.example` with webhook base/URL placeholders (Dec 5, 2025)
-- [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (WEBHOOK_SECRET, ORIGIN_BASE, FALLBACK_BASE)
-- [ ] TODO: Configure local/CI environments to point manifest generators at deployed Worker URL
-- [ ] TODO: Test end-to-end webhook flow: manifest change → generator POST → Worker → origin API → cache refresh
-- [ ] TODO: Monitor Worker analytics and optimize cache TTLs based on actual traffic patterns
+- [x] TODO: Created complete Cloudflare Worker (`tools/cloudflare/complete-worker.js`) integrating manifests, blog auth, webhooks, rate limiting, and cache management (Dec 6, 2025)
+- [x] TODO: Added comprehensive deployment guide (`tools/cloudflare/DEPLOYMENT-GUIDE.md`) with step-by-step setup, KV namespace creation, and testing procedures (Dec 6, 2025)
+- [x] TODO: Created blog system integration documentation (`docs/integrations/blog-system-integration.md`) with architecture, API reference, and security best practices (Dec 6, 2025)
+- [x] TODO: Configured wrangler.toml with KV bindings, CORS origins, and manifest base URL (Dec 6, 2025)
+- [x] TODO: Updated .env.example with BLOG_AUTHORS environment variable for JWT authentication (Dec 6, 2025)
+- [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (JWT_SECRET, WEBHOOK_SECRET, BLOG_AUTHORS, MANIFEST_BASE_URL)
+- [ ] TODO: Create KV namespaces in Cloudflare dashboard (MCCAL_KV for production, MCCAL_KV_PREVIEW for staging)
+- [ ] TODO: Configure local/CI environments to point manifest generators and blog widget at deployed Worker URL
+- [ ] TODO: Test end-to-end flows: manifest webhook, blog auth/posts, rate limiting, cache stats
+- [ ] TODO: Monitor Worker analytics and optimize cache TTLs/rate limits based on actual traffic patterns
 
 - [x] Run `npm run ai:preflight:short` — added and used during the recent sessions
 - [ ] TODO: Phase 2 — Review orphan scripts (`scripts/utils/generate-cdn-snippets.js`, `scripts/utils/auto-check-todo.js`, `scripts/utils/date-overrides.js`, `scripts/utils/find-latest-widget-versions.js`, `scripts/utils/shared-date-parsing.js`, `scripts/watchers/auto-manifest-updater.js`) and either archive to `scripts/_archived/` or integrate/document usage. Produce summary in `docs/CHANGELOG.md`.
