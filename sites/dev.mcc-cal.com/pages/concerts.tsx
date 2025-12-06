@@ -1,6 +1,6 @@
 import Layout from '../components/Layout/Layout';
-import WidgetEmbed from '../components/widgets/WidgetEmbed';
-import WidgetReloader from '../components/widgets/WidgetReloader';
+import { WidgetEmbed } from '../components/widgets/WidgetEmbed';
+import { WidgetReloader } from '../components/widgets/WidgetReloader';
 import { getWidgetConfig } from '../utils/widgetConfig';
 
 const ConcertsPage = () => {

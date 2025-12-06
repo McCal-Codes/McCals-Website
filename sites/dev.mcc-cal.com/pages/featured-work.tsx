@@ -1,5 +1,5 @@
 import Layout from '../components/Layout/Layout';
-import WidgetEmbed from '../components/widgets/WidgetEmbed';
+import { WidgetEmbed } from '../components/widgets/WidgetEmbed';
 import { getWidgetConfig } from '../utils/widgetConfig';
 
 const FeaturedWorkPage = () => {
