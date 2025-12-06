@@ -1,10 +1,10 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `04375799` — 0 seconds ago
-> fix: update workflow triggers and last commit message in welcome state
+**Last commit**: `f2f169a7` — 0 seconds ago
+> batch1: events images
 ## 🔄 Changes in last commit
-- .github/workflows/regenerate-all-manifests.yml
-- scripts/.welcome-state.json
-- updates/welcome.md
+- src/images/Portfolios/Concert/concert-manifest.json
+- src/images/Portfolios/Nature/nature-manifest.json
+- src/images/Portfolios/Portrait/portrait-manifest.json
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
 ## 🎯 Today’s focus (from `updates/todo.md`)
