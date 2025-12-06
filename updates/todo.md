@@ -40,6 +40,11 @@
 ## 🔧 Infrastructure & Maintenance
 
 ### Domain Updates
+- [ ] TODO: Set up dev.mcc-cal.com subdomain for development environment:
+	- Add DNS CNAME record pointing to development server (or use Cloudflare Tunnel for local dev)
+	- Configure SSL/TLS certificate for dev subdomain
+	- Test CORS and API integration with dev subdomain
+	- Update documentation with dev subdomain usage instructions
 - [ ] TODO: Audit remaining \`mccal.media\` references and update to \`mcc-cal.com\` where appropriate:
 	- Found 10 references across widgets and docs (grep search completed Dec 1, 2025):
 		- Instagram social URL: \`mccal.media\` (keep as social handle)

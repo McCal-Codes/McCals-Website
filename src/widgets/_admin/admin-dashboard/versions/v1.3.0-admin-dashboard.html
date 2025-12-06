@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--
   Admin Dashboard Widget v1.3.0
   Comprehensive admin dashboard with API, manifest, widget, and system health monitoring
@@ -1121,17 +1122,97 @@ function setEnvironmentInfo() {
   document.getElementById('pageUrl').textContent = location.hostname;
 }
 
+// API Configuration - use relative path to leverage dev server proxy
+const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+const isDevSubdomain = location.hostname === 'dev.mcc-cal.com';
+
+const API_BASE_URL = isLocalhost
+  ? '' // Use same origin to avoid CORS issues in dev
+  : isDevSubdomain
+  ? 'https://api.mcc-cal.com' // Dev subdomain uses production API
+  : 'https://api.mcc-cal.com'; // Production
+
+// Check API health
+async function checkAPIHealth() {
+  console.log('🔍 Checking API at:', API_BASE_URL);
+  const startTime = Date.now();
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/health`, {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache'
+    });
+    const responseTime = Date.now() - startTime;
+    console.log('✅ API responded in', responseTime + 'ms', 'Status:', response.status);
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('📊 API data:', data);
+      
+      // Update API status (defensive checks)
+      const statusEl = document.getElementById('apiStatus');
+      const iconEl = document.getElementById('apiIcon');
+      const uptimeEl = document.getElementById('apiUptime');
+      const responseEl = document.getElementById('apiResponseTime');
+      const memoryEl = document.getElementById('apiMemory');
+      
+      if (statusEl) {
+        statusEl.textContent = 'Online';
+        statusEl.className = 'status status-ok';
+      }
+      if (iconEl) iconEl.textContent = '🟢';
+      
+      // Update metrics with real data
+      if (uptimeEl) uptimeEl.textContent = Math.floor(data.uptime / 60) + ' min';
+      if (responseEl) responseEl.textContent = responseTime + 'ms';
+      if (memoryEl) memoryEl.textContent = data.memory.used + ' MB';
+      
+      return true;
+    } else {
+      throw new Error(`HTTP ${response.status}`);
+    }
+  } catch (error) {
+    console.error('❌ API health check failed:', error);
+    console.error('URL attempted:', `${API_BASE_URL}/api/health`);
+    
+    // Update API status to offline (defensive checks)
+    const statusEl = document.getElementById('apiStatus');
+    const iconEl = document.getElementById('apiIcon');
+    const uptimeEl = document.getElementById('apiUptime');
+    const responseEl = document.getElementById('apiResponseTime');
+    const memoryEl = document.getElementById('apiMemory');
+    
+    if (statusEl) {
+      statusEl.textContent = 'Offline';
+      statusEl.className = 'status status-err';
+    }
+    if (iconEl) iconEl.textContent = '🔴';
+    
+    // Set fallback values
+    if (uptimeEl) uptimeEl.textContent = 'N/A';
+    if (responseEl) responseEl.textContent = 'N/A';
+    if (memoryEl) memoryEl.textContent = 'N/A';
+    
+    return false;
+  }
+}
+
 // Initialize all checks
 async function initDashboard() {
   updateTimestamp();
   setEnvironmentInfo();
+  
+  // Check API first
+  const apiOnline = await checkAPIHealth();
+  
+  // Populate analytics (with simulated data for now)
   populateAnalytics();
-  console.log('✨ Admin Dashboard v1.3.0 initialized (Portfolio widget styling applied)');
+  
+  console.log('✨ Admin Dashboard v1.3.0 initialized (API:', apiOnline ? 'online' : 'offline', ')');
 }
 
 // Populate analytics
 function populateAnalytics() {
-  document.getElementById('apiResponseTime').textContent = Math.floor(Math.random() * 400 + 50) + 'ms';
   document.getElementById('cacheHitRate').textContent = (Math.random() * 40 + 60).toFixed(1) + '%';
   
   const totalReqs = Math.floor(Math.random() * 8000 + 2000);
@@ -1146,8 +1227,27 @@ function populateAnalytics() {
 // Run on page load
 document.addEventListener('DOMContentLoaded', initDashboard);
 
+// Add refresh button handler
+const refreshBtn = document.getElementById('refreshBtn');
+if (refreshBtn) {
+  refreshBtn.onclick = async function(e) {
+    e.preventDefault();
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = '🔄 Checking...';
+    
+    await checkAPIHealth();
+    updateTimestamp();
+    
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = '🔄 Refresh';
+  };
+}
+
 // Auto-refresh timestamp every 60 seconds
 setInterval(updateTimestamp, 60000);
+
+// Auto-check API health every 2 minutes
+setInterval(checkAPIHealth, 120000);
 
 // Make changelog functions globally available
 window.showChangelog = showChangelog;

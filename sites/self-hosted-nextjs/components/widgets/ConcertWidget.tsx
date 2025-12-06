@@ -3,13 +3,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import type { FC } from 'react';
 import styles from '../../styles/widgets/concertWidget.module.css';
 import { ConcertManifest } from '../../types/concertManifest';
-import { loadManifest } from '../../utils/manifestLoader';
 import Lightbox from './Lightbox';
 import ImageCard from './ImageCard';
 
-const LOCAL_MANIFEST = '/data/concert-manifest.json';
-const REMOTE_MANIFEST = 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Concert/concert-manifest.json';
-const WIDGET_VERSION = '4.7.0';
+const API_MANIFEST_URL = 'https://api.mcc-cal.com/api/v1/manifests/concert';
+const LOCAL_FALLBACK = '/data/concert-manifest.json';
+const WIDGET_VERSION = '4.8.0';
 
 const ConcertWidget: FC = () => {
   const [manifest, setManifest] = useState<ConcertManifest | null>(null);
@@ -24,15 +23,34 @@ const ConcertWidget: FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // Try remote first, fallback to local
-      const data = await loadManifest<ConcertManifest>(LOCAL_MANIFEST, REMOTE_MANIFEST);
+      // Try API first
+      const response = await fetch(API_MANIFEST_URL, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        cache: 'no-store', // Always get fresh data from API
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API returned ${response.status}`);
+      }
+      
+      const data: ConcertManifest = await response.json();
       setManifest(data);
-    } catch (e) {
+    } catch (apiError) {
+      console.warn('API fetch failed, trying local fallback:', apiError);
       try {
-        const data = await loadManifest<ConcertManifest>(LOCAL_MANIFEST);
+        // Fallback to local manifest
+        const localResponse = await fetch(LOCAL_FALLBACK);
+        if (!localResponse.ok) {
+          throw new Error('Local fallback failed');
+        }
+        const data: ConcertManifest = await localResponse.json();
         setManifest(data);
-      } catch {
-        setError('Could not load concert manifest.');
+      } catch (localError) {
+        console.error('Both API and local fallback failed:', localError);
+        setError('Could not load concert manifest from API or local source.');
       }
     } finally {
       setLoading(false);

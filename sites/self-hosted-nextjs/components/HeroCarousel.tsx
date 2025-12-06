@@ -59,27 +59,44 @@ const defaultSlides: HeroSlide[] = [
 ];
 
 const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides = defaultSlides }) => {
-  const [active, setActive] = React.useState(0);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   React.useEffect(() => {
+    if (isPaused) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return; // do not auto-advance when reduced motion
+      return;
     }
-    const id = window.setInterval(() => {
-      setActive((s) => (s + 1) % slides.length);
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 8000);
-    return () => window.clearInterval(id);
-  }, [slides.length]);
+
+    return () => clearInterval(interval);
+  }, [slides.length, isPaused]);
 
   return (
-    <div className={styles.heroWidget}>
+    <div 
+      className={styles.heroWidget}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className={styles.heroShell}>
         <section className={styles.hero} aria-label="Featured work carousel">
           <div className={styles.heroStage}>
             {slides.map((slide, index) => (
               <figure
                 key={index}
-                className={`${styles.heroSlide} ${index === active ? (styles as Record<string, string>).active || '' : ''}`}
+                className={`${styles.heroSlide} ${index === currentSlide ? styles.active : ''}`}
+                style={{ zIndex: index === currentSlide ? 2 : 1 }}
               >
                 <img
                   src={slide.image}
@@ -93,6 +110,38 @@ const HeroCarousel: React.FC<HeroCarouselProps> = ({ slides = defaultSlides }) =
                   </a>
                 </figcaption>
               </figure>
+            ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            className={`${styles.heroNav} ${styles.heroNavPrev}`}
+            onClick={prevSlide}
+            aria-label="Previous slide"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button
+            className={`${styles.heroNav} ${styles.heroNavNext}`}
+            onClick={nextSlide}
+            aria-label="Next slide"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          {/* Slide Indicators */}
+          <div className={styles.heroIndicators}>
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.heroIndicator} ${index === currentSlide ? styles.active : ''}`}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
           </div>
         </section>

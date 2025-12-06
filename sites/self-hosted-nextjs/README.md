@@ -1,6 +1,6 @@
-# McCal Media - Next.js Self-Hosted Site
+# dev.mcc-cal.com - McCal Media Development Site
 
-Production-grade Next.js website for McCal Media portfolio and blog, powered by Cloudflare Worker API (api.mcc-cal.com).
+Next.js development site mirroring mcc-cal.com production, featuring full widget integration and API connectivity (api.mcc-cal.com).
 
 ## 🚀 Quick Start
 
@@ -22,7 +22,7 @@ cp .env.example .env.local
 
 # Start development server
 npm run dev
-# Open http://localhost:3000
+# Open http://localhost:3000 or https://dev.mcc-cal.com (via Cloudflare Tunnel)
 \`\`\`
 
 ### Build for Production
