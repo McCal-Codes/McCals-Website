@@ -1,4 +1,4 @@
 {
-  "lastHash": "7e2807ec",
-  "lastMessage": "fix: update blog admin widget to use Cloudflare API endpoint (api.mcc-cal.com)"
+  "lastHash": "006b791e",
+  "lastMessage": "docs: add Cloudflare subdomain setup guide and update worker configuration\n\n- Created CLOUDFLARE-SUBDOMAIN-SETUP.md with complete DNS/routing configuration\n- Updated wrangler.toml with improved comments and correct route patterns\n- Added step-by-step deployment guide for api.mcc-cal.com subdomain\n- Documented DNS CNAME setup, environment variable configuration\n- Added testing procedures for all API endpoints\n- Included troubleshooting section for common issues\n- Production checklist for deployment validation"
 }
