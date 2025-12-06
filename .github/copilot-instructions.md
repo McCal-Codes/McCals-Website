@@ -232,6 +232,26 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+- 2025-12-06T16:30:00.000Z — Admin Dashboard v1.1.0 Enhancement Complete.
+	- Upgraded admin dashboard from basic 3-card health status to comprehensive monitoring system.
+	- **Core Metrics Cards (6 cards)**: API Health, Manifests, Widgets, System Info, Cache Stats, Build Info with detailed metric rows and status indicators.
+	- **Analytics & Performance Section**: 6 detailed analytics panels covering API performance (response time, uptime, request rates), cache hit rates, 24h request volume, resource usage (manifest files, widget versions, image assets, disk usage), deployment info (last deploy, worker status, build status), and traffic source estimation.
+	- **Manifest Analytics Section**: 6 portfolio cards with detailed breakdown - Concert (bands, images, last updated, size), Events, Journalism, Nature, Portrait, Featured - all with dynamic data population.
+	- **Diagnostics & Logs Section**: Recent events log with color-coded success/info messages and comprehensive system health checks (API responsive, manifests accessible, widget directories, cache active, CORS configured, rate limiting enabled, worker deployed, actions passing, CDN cache).
+	- **Expandable Sections**: All analytics sections use collapsible toggles for clean UI, expandable to full details on demand. Portfolio status and quick links integrated.
+	- **Dynamic Population**: JavaScript populates all metrics with realistic values (simulated for dev mode, fetches real data in production), updates timestamps, detects environment (dev vs production).
+	- **UI Enhancements**: Modern responsive grid layout, color-coded status badges (green/yellow/red for ok/warn/err), emoji icons for quick visual scanning, metric tables with labels and monospace values, animated toggles.
+	- **API Integration**: Checks multiple manifest types (concert, events, journalism, nature, portrait), counts items and images per portfolio, tracks manifest file sizes, detects deployment status.
+	- **Performance Monitoring**: Displays cache hit rate, request volume, error rates, response times, uptime metrics - all updating dynamically.
+	- **Widget Status**: Scans widget directories, counts active versions, validates HTML, tracks version availability across portfolio.
+	- **System Health**: Timestamp tracking, environment detection (dev/prod), deployment age, build status, worker health, CI/CD status checks.
+	- **Quick Links**: Gradient buttons linking to Reports, Logs, Widgets, Manifests, CI/CD GitHub Actions, GitHub repo.
+	- **Self-contained**: Single HTML file (~850 lines), no external dependencies, inline CSS/JS, responsive mobile-first design.
+	- **Browser Testing**: Works in VS Code Simple Browser at http://127.0.0.1:3000/src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html, shows "Demo" status in dev mode.
+	- **Accessibility**: Semantic HTML, proper contrast ratios, keyboard navigation for expandable sections, aria-live regions ready for enhancement.
+	- **Version**: v1.1.0 (was v1.0.0 basic dashboard), ready for production deployment to Squarespace as admin tool.
+	- **Future Enhancements**: Real-time metrics refresh, WebSocket updates, historical trend charts, alert thresholds, email notifications, performance comparisons.
+
 - 2025-12-06T12:00:00.000Z — Complete Cloudflare Worker Blog Integration.
 	- Created complete-worker.js: comprehensive Cloudflare Worker combining manifests, blog, webhooks, rate limiting, and cache management.
 	- Blog endpoints: POST /api/v1/blog/auth/login (JWT authentication, 24hr tokens), GET /api/v1/blog/posts (list posts, 5min cache), POST /api/v1/blog/posts (create post with JWT auth, KV storage).
