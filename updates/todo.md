@@ -1,8 +1,9 @@
 # Active To-Do List
 
-*Updated: December 6, 2025*
+_Updated: December 6, 2025_
 
 **Quick Reference:**
+
 - See [completed.md](./completed.md) for all finished tasks
 - Reference standards: [docs/standards/](../docs/standards/)
 - Integration guides: [docs/integrations/](../docs/integrations/)
@@ -12,6 +13,7 @@
 ## 🎯 High Priority (Active Work)
 
 ### Authentication & Token Setup ✅ COMPLETE
+
 - [x] Generated and documented AUTH-SETUP-GUIDE.md with complete environment variable setup (JWT_SECRET, WEBHOOK_SECRET, BLOG_AUTHORS, MANIFEST_BASE_URL, CORS_ORIGINS)
 - [x] Created AUTH-TOKEN-QUICK-REFERENCE.md for fast copy-paste local development setup
 - [x] Documented token generation, rotation, expiry, and security best practices
@@ -19,6 +21,7 @@
 - [x] Added Cloudflare deployment checklist and test procedures
 
 ### Cloudflare Worker Deployment (Next Priority)
+
 - [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (use AUTH-SETUP-GUIDE.md)
 - [ ] TODO: Create KV namespaces in Cloudflare dashboard (MCCAL_KV for production, MCCAL_KV_PREVIEW for staging)
 - [ ] TODO: Configure local/CI environments to point manifest generators and blog widget at deployed Worker URL
@@ -26,6 +29,7 @@
 - [ ] TODO: Monitor Worker analytics and optimize cache TTLs/rate limits based on actual traffic patterns
 
 ### Next.js Self-Hosted Site Migration
+
 - [ ] TODO: Create Next.js self-hosted site structure under sites/dev.mcc-cal.com/
 - [ ] TODO: Add Layout, Nav, and Footer components with "Self-Hosted" branding
 - [ ] TODO: Implement ConcertWidget (manifest typing, fetch, gallery, lightbox, CSS module)
@@ -40,36 +44,33 @@
 ## 🔧 Infrastructure & Maintenance
 
 ### Domain Updates
+
 - [ ] TODO: Set up dev.mcc-cal.com subdomain for development environment:
-	- Add DNS CNAME record pointing to development server (or use Cloudflare Tunnel for local dev)
-	- Configure SSL/TLS certificate for dev subdomain
-	- Test CORS and API integration with dev subdomain
-	- Update documentation with dev subdomain usage instructions
+  - Add DNS CNAME record pointing to development server (or use Cloudflare Tunnel for local dev)
+  - Configure SSL/TLS certificate for dev subdomain
+  - Test CORS and API integration with dev subdomain
+  - Update documentation with dev subdomain usage instructions
 - [ ] TODO: Audit remaining \`mccal.media\` references and update to \`mcc-cal.com\` where appropriate:
-	- Found 10 references across widgets and docs (grep search completed Dec 1, 2025):
-		- Instagram social URL: \`mccal.media\` (keep as social handle)
-		- Email addresses: \`contact@mccal.media\` (determine if keeping or updating)
-		- Documentation references in archived content
-	- **Note**: Keep brand/social handles (e.g., instagram.com/mccal.media) unchanged
-	- Update only site-root URLs and schema references to mcc-cal.com
-	- Confirm newsletter and social links remain correct per current branding
+  - Found 10 references across widgets and docs (grep search completed Dec 1, 2025):
+    - Instagram social URL: \`mccal.media\` (keep as social handle)
+    - Email addresses: \`contact@mccal.media\` (determine if keeping or updating)
+    - Documentation references in archived content
+  - **Note**: Keep brand/social handles (e.g., instagram.com/mccal.media) unchanged
+  - Update only site-root URLs and schema references to mcc-cal.com
+  - Confirm newsletter and social links remain correct per current branding
 
 ### Scripts Organization
-- [ ] TODO: Phase 2 — Review orphan scripts and either archive to \`scripts/_archived/\` or integrate/document usage:
-	- \`scripts/utils/generate-cdn-snippets.js\`
-	- \`scripts/utils/auto-check-todo.js\`
-	- \`scripts/utils/date-overrides.js\`
-	- \`scripts/utils/find-latest-widget-versions.js\`
-	- \`scripts/utils/shared-date-parsing.js\`
-	- \`scripts/watchers/auto-manifest-updater.js\`
-	- Produce summary in \`docs/CHANGELOG.md\`
+
+- [x] Phase 2 — Archived orphan scripts to \`scripts/\_archived/\` (2025-12-06): auto-check-todo, date-overrides, find-latest-widget-versions, shared-date-parsing, auto-manifest-updater. CHANGELOG updated.
 
 ### CI/CD Improvements
+
 - [ ] TODO: Add CI job to enforce active/legacy widget version policy (fail if >2 active versions present in a live widget directory)
 - [ ] TODO: Concert manifest workflow secret lint warnings — evaluate if GitHub Actions runtime succeeds despite local YAML linter warnings
 - [ ] TODO: Reduce remaining secret lint warnings — evaluate creating reusable \`workflow_call\` webhook dispatcher
 
 ### Widget Standards
+
 - [ ] TODO: Confirm planned changes align with standards before editing remaining widgets
 - [ ] TODO: Add automated widget validation (small unit/integration tests) and wire into CI
 - [ ] TODO: Update copilot instructions, CHANGELOG.md, and docs when making structural changes
@@ -79,6 +80,7 @@
 ## 🎨 Widget Development
 
 ### Video Portfolio Widget (In Progress)
+
 - [ ] TODO: Add transcripts & captions panel (WebVTT ingest + transcript export) — Phase 2
 - [ ] TODO: Implement manifest generator and aggregated video-manifest.json
 - [ ] TODO: Add adaptive bitrate streaming (HLS/DASH) with quality selector + fallback to MP4
@@ -88,6 +90,7 @@
 - [ ] TODO: Add structured data validator & Lighthouse automation snapshot
 
 ### New Widget Ideas
+
 - [ ] TODO: Develop Testimonials/Reviews widget with star ratings and client quotes
 - [ ] TODO: Create Contact Form widget with validation and spam protection
 - [ ] TODO: Build Newsletter Signup widget with Mailchimp/ConvertKit integration
@@ -98,14 +101,16 @@
 - [ ] TODO: Build Interactive FAQ accordion widget
 
 ### Existing Widget Enhancements
+
 - [ ] TODO: Concert Portfolio additional Spotify/embed features (follow-up enhancement)
-- [ ] TODO: Add site-wide shared CSS at src/widgets/_shared/site-widgets.css
+- [ ] TODO: Add site-wide shared CSS at src/widgets/\_shared/site-widgets.css
 
 ---
 
 ## 🚀 Performance & SEO
 
 ### Performance Optimization
+
 - [ ] TODO: Implement comprehensive SEO standards across all widgets (partially implemented)
 - [ ] TODO: Audit and optimize Lighthouse performance metrics (FCP/LCP/TBT) for all portfolio widgets
 - [ ] TODO: Add responsive image optimization (WebP/AVIF formats, lazy loading) to remaining widgets
@@ -113,6 +118,7 @@
 - [ ] TODO: Add performance monitoring dashboard widget for real-time metrics tracking
 
 ### Accessibility
+
 - [ ] TODO: Add accessibility improvements: ARIA labels, keyboard navigation, screen reader support
 - [ ] TODO: Add accessibility audit automation with axe-core in CI
 
@@ -129,6 +135,7 @@
 ## 📝 Documentation
 
 ### Follow-up Documentation TODOs
+
 - [ ] TODO: Implement CI changelog validator
 - [ ] TODO: Add workflow to enforce ≤2 active widget versions
 - [ ] TODO: Add schema diff & performance snapshot automation (Lighthouse + JSON-LD validation)
@@ -136,6 +143,7 @@
 - [ ] TODO: Add widget registry manifest summarizing active versions and paths
 
 ### Repository Improvements
+
 - [ ] TODO: Continue phased repository improvement plan (see docs/repo-improvement-plan.md)
 
 ---
@@ -156,9 +164,11 @@
 ## �� VS Code AI Features (Action Items)
 
 **Quick wins:**
+
 - [ ] TODO: Turn on tool approvals (Settings → AI Tools → Approvals)
 
 **Optional explorations:**
+
 - Explore Agent Sessions dashboard (View → Agent Sessions)
 - Try Planning Agent (\`@planner\` in Copilot Chat)
 - Test terminal IntelliSense
