@@ -8,7 +8,7 @@ const EventsPage = () => {
 
   return (
     <Layout>
-      <WidgetEmbed widget={config.widget} version={config.version} />
+      <WidgetEmbed widget={config.widget} category={config.category} />
     </Layout>
   );
 };

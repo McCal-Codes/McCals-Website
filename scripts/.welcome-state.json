@@ -1,4 +1,4 @@
 {
-  "lastHash": "3af2448c",
-  "lastMessage": "feat(widget): implement auto-detection of widget versions and utilities for dynamic usage\n\n- Added `widgetVersionDetector.ts` to scan and manage widget versions in the `src/widgets/` directory.\n- Implemented functions to get the latest widget version and all available versions.\n- Included utilities for extracting version numbers and comparing semantic versions.\n- Added error handling and logging for file system operations.\n- Introduced a watch function to monitor changes in widget versions for future updates.\n\\n\\nAuthor: mccal"
+  "lastHash": "82a20670",
+  "lastMessage": "feat: add Phase 2 documentation for auto-version detection and widget organization\n\\n\\nAuthor: mccal"
 }
