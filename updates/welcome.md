@@ -1,11 +1,16 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `8c32d4c3` — 1 second ago
-> Update welcome state
+**Last commit**: `a4ec46c3` — 0 seconds ago
+> feat: add blog admin widget v1.0.0
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
+- src/widgets/_admin/blog-admin/CHANGELOG.md
+- src/widgets/_admin/blog-admin/README.md
+- src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html
+- test-blog-admin.html
+- updates/todo.md
 - updates/welcome.md
 ## 📋 Your checklist status
-- Open: **71** | Done: **59**
+- Open: **71** | Done: **61**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 
