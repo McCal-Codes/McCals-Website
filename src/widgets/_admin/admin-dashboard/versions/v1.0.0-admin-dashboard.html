@@ -102,29 +102,45 @@
 
 <script>
 (function() {
-  // API Health Check
-  const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-    ? 'http://localhost:8787/api/v1/blog'
-    : 'https://api.mcc-cal.com/api/v1/blog';
+  // API Health Check - Demo Mode
+  // For development, show demo status. In production, fetch real health endpoint.
   const apiStatus = document.getElementById('apiStatus');
   const apiDetail = document.getElementById('apiDetail');
-  fetch(API_BASE + '/posts', { method: 'GET' })
-    .then(r => {
-      if (r.ok) {
-        apiStatus.textContent = 'Healthy';
-        apiStatus.className = 'status status-ok';
-        apiDetail.textContent = 'API responded to /posts.';
-      } else {
-        apiStatus.textContent = 'Error';
-        apiStatus.className = 'status status-err';
-        apiDetail.textContent = 'API responded with status ' + r.status;
-      }
+  const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  
+  if (isDev) {
+    // Development mode: show demo status
+    apiStatus.textContent = 'Demo';
+    apiStatus.className = 'status status-ok';
+    apiDetail.innerHTML = 'Running in development mode. <br><small>Deploy worker with: <code>wrangler deploy</code></small>';
+    console.log('📊 Dashboard running in development mode (local/demo)');
+  } else {
+    // Production mode: try to fetch real health
+    fetch('https://api.mcc-cal.com/api/v1/health', { 
+      method: 'GET',
+      cache: 'no-store',
+      mode: 'cors'
     })
-    .catch(e => {
-      apiStatus.textContent = 'Unreachable';
-      apiStatus.className = 'status status-err';
-      apiDetail.textContent = e.message || 'Network error.';
-    });
+      .then(r => {
+        if (r.ok) {
+          return r.json().then(data => {
+            apiStatus.textContent = 'Healthy';
+            apiStatus.className = 'status status-ok';
+            apiDetail.textContent = 'API online, cache hit rate: ' + (data.cache?.hitRate || 'N/A');
+            console.log('✅ API health check passed');
+          });
+        } else {
+          apiStatus.textContent = 'Error';
+          apiStatus.className = 'status status-err';
+          apiDetail.textContent = 'API returned ' + r.status;
+        }
+      })
+      .catch(e => {
+        apiStatus.textContent = 'Unreachable';
+        apiStatus.className = 'status status-err';
+        apiDetail.textContent = 'Error: ' + e.message;
+        console.error('❌ API fetch failed:', e.message);
+      });
 
   // Manifest Health Check (Concert as example)
   const manifestStatus = document.getElementById('manifestStatus');
