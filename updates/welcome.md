@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `5f0e98aa` — 0 seconds ago
-> feat: Add new phase documentation files and update cache files for development
+**Last commit**: `bd365c6a` — 0 seconds ago
+> feat: Implement automatic changelog tracking and widget embedding system
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
-- sites/dev.mcc-cal.com/.next/build-manifest.json
-- sites/dev.mcc-cal.com/.next/server/middleware-build-manifest.js
-- sites/dev.mcc-cal.com/.next/server/pages-manifest.json
-- sites/dev.mcc-cal.com/.next/server/pages/journalism.js
-- sites/dev.mcc-cal.com/.next/static/chunks/pages/journalism.js
-- sites/dev.mcc-cal.com/.next/static/chunks/webpack.js
-- sites/dev.mcc-cal.com/.next/static/development/_buildManifest.js
-- sites/dev.mcc-cal.com/.next/static/webpack/7faa48aa98c2b844.webpack.hot-update.json
-- sites/dev.mcc-cal.com/.next/static/webpack/93e6d9496dd5ad7d.webpack.hot-update.json
-- sites/dev.mcc-cal.com/.next/static/webpack/webpack.7faa48aa98c2b844.hot-update.js
-- sites/dev.mcc-cal.com/.next/static/webpack/webpack.93e6d9496dd5ad7d.hot-update.js
-- …and 2 more
+- sites/dev.mcc-cal.com/.next/cache/.previewinfo
+- sites/dev.mcc-cal.com/.next/cache/.rscinfo
+- sites/dev.mcc-cal.com/.next/cache/.tsbuildinfo
+- sites/dev.mcc-cal.com/.next/cache/eslint/.cache_26v05r
+- sites/dev.mcc-cal.com/.next/cache/next-devtools-config.json
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development-fallback/0.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development-fallback/index.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/0.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/1.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/1.pack.gz_
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/10.pack.gz
+- …and 108 more
 ## 📋 Your checklist status
 - Open: **72** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
