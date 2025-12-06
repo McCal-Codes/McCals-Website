@@ -49,6 +49,9 @@ src/site/prototypes/vision-api/google-service-account.json
 site-workspace/temp/
 site-workspace/drafts/
 
+# Local state files
+scripts/.welcome-state.json
+
 # Log and report files
 logs/
 *.log

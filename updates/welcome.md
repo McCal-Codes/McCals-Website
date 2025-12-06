@@ -1,20 +1,18 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `30134b89` — 0 seconds ago
-> Phase 2A+B: Auto-detect widget versions + reorganize widgets into categories
+**Last commit**: `6e396dba` — 0 seconds ago
+> feat: enhance documentation and onboarding for widget development, including quick links and environment setup
 ## 🔄 Changes in last commit
-- PHASE-2-COMPLETE.md
-- PHASE-2-DEPLOYMENT-CHECKLIST.md
+- .env.example
+- .vscode/extensions.json
+- README.md
+- docs/ONBOARDING.md
+- docs/README.md
+- docs/standards/widget-reference.md
+- docs/standards/widget-standards.md
+- docs/standards/workspace-organization.md
+- docs/widgets/index.md
 - scripts/.welcome-state.json
-- sites/dev.mcc-cal.com/.next/build-manifest.json
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/0.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/1.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/2.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/index.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/index.pack.gz.old
-- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/0.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/1.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/2.pack.gz
-- …and 141 more
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **72** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)

@@ -19,3 +19,7 @@ Retention rules:
 Next maintenance window will remove redundant pairs after orphan-audit confirmation.
 
 Last updated: 2025-11-19
+
+## Recent Archives
+
+- `generate-cdn-snippets.js` (archived 2025-12-06): Not referenced by npm scripts or other code. Moved from scripts/utils/ to _archived/ for historical reference. See docs/standards/workspace-organization.md for archival policy.
