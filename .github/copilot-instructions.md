@@ -232,6 +232,20 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+- 2025-12-06T12:00:00.000Z — Complete Cloudflare Worker Blog Integration.
+	- Created complete-worker.js: comprehensive Cloudflare Worker combining manifests, blog, webhooks, rate limiting, and cache management.
+	- Blog endpoints: POST /api/v1/blog/auth/login (JWT authentication, 24hr tokens), GET /api/v1/blog/posts (list posts, 5min cache), POST /api/v1/blog/posts (create post with JWT auth, KV storage).
+	- Webhook endpoints: POST /api/v1/webhooks/purge, /warm, /refresh (secret authentication for CI/CD cache management).
+	- Manifest serving: GET /api/v1/manifests/:type (edge caching 10min TTL, 1hr stale-while-revalidate, ETag validation).
+	- Security: JWT HS256 signing/verification, rate limiting 100 req/min per IP, CORS wildcard subdomain support, webhook secret validation.
+	- KV storage schema: blog:posts (all posts with metadata), ratelimit:{ip} (per-IP counters with 60s TTL), cache:stats (hit/miss tracking).
+	- Created comprehensive DEPLOYMENT-GUIDE.md: step-by-step setup, environment variables, KV namespace creation, secret management, testing procedures.
+	- Created wrangler.toml: Worker configuration with KV bindings, CORS origins, manifest base URL.
+	- Created blog-system-integration.md: complete architecture documentation, flow diagrams, API reference, security best practices, troubleshooting guide.
+	- Updated .env.example: added BLOG_AUTHORS environment variable for author credentials (JSON array format).
+	- Ready for production deployment: npm install -g wrangler, wrangler kv:namespace create "MCCAL_KV", wrangler deploy complete-worker.js.
+	- Integrates with blog admin widget v1.0.0: authentication, post creation, session management all functional end-to-end.
+
 - 2025-12-06T00:00:00.000Z — Blog Admin Widget v1.0.0 Release.
 	- Created comprehensive blog authoring system for admin use (src/widgets/_admin/blog-admin/).
 	- Features: JWT authentication, login/logout, session persistence via LocalStorage.
