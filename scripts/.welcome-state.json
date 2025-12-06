@@ -1,4 +1,4 @@
 {
-  "lastHash": "106f8834",
-  "lastMessage": "docs: apply workspace standards to blog admin widget\n\n- Updated widget header with comprehensive metadata\n- Added standards compliance information (self-contained, performance, accessibility)\n- Updated copilot instructions with blog admin widget entry\n- Documented features, API endpoints, and admin-only usage\n- Follows workspace widget standards (inline CSS/JS, no external deps)\n- WCAG AA accessibility compliance noted\n- Performance metrics documented (~15KB, lazy loading)\n\nStandards applied:\n- Self-contained architecture\n- Comprehensive header comments\n- Version tracking and changelog references\n- Author and license information\n- Performance and accessibility notes"
+  "lastHash": "00f42aa9",
+  "lastMessage": "docs: update todo with completed Cloudflare Worker integration\n\n- Marked complete-worker.js creation as done\n- Marked deployment guide and blog system docs as done\n- Marked wrangler.toml and .env updates as done\n- Added remaining deployment tasks (KV namespaces, production deploy)\n- Updated environment variable list for production deployment"
 }
