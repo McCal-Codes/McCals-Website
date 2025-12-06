@@ -1,13 +1,10 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `106f8834` — 0 seconds ago
-> docs: apply workspace standards to blog admin widget
+**Last commit**: `00f42aa9` — 0 seconds ago
+> docs: update todo with completed Cloudflare Worker integration
 ## 🔄 Changes in last commit
-- .github/copilot-instructions.md
-- scripts/.welcome-state.json
-- src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html
-- updates/welcome.md
+- updates/todo.md
 ## 📋 Your checklist status
-- Open: **71** | Done: **61**
+- Open: **72** | Done: **66**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 
