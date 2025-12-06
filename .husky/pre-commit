@@ -1,1 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Remove .next/, build/, and out/ directories from staging before lint-staged runs
+# These are build artifacts that should never be linted
+git reset HEAD sites/**/.next 2>/dev/null || true
+git reset HEAD sites/**/build 2>/dev/null || true
+git reset HEAD sites/**/out 2>/dev/null || true
+
 npx lint-staged
