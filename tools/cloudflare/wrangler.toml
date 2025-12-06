@@ -30,7 +30,7 @@ routes = [
 # Environment variables (non-sensitive)
 # These are public and safe to commit
 [vars]
-ALLOWED_ORIGINS = "https://mcc-cal.com,https://*.mcc-cal.com,http://localhost:*"
+ALLOWED_ORIGINS = "https://mcc-cal.com,https://dev.mcc-cal.com,https://*.mcc-cal.com,http://localhost:*"
 MANIFEST_BASE_URL = "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main"
 
 # Secrets (set with: wrangler secret put VARIABLE_NAME)
