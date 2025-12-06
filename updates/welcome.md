@@ -1,14 +1,16 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `18b3e89a` — 0 seconds ago
-> Update welcome message and task completion records; add completed tasks archive and backup of to-do list
+**Last commit**: `74d25a4f` — 1 second ago
+> docs: add authentication setup guides and update task tracking
 ## 🔄 Changes in last commit
+- .github/copilot-instructions.md
+- docs/integrations/AUTH-SETUP-GUIDE.md
+- docs/integrations/AUTH-TOKEN-QUICK-REFERENCE.md
+- docs/integrations/manifest-webhook-worker.md
 - scripts/.welcome-state.json
-- updates/completed.md
-- updates/todo-backup-20251206-090611.md
 - updates/todo.md
 - updates/welcome.md
 ## 📋 Your checklist status
-- Open: **71** | Done: **0**
+- Open: **71** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 
