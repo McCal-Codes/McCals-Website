@@ -1,0 +1,106 @@
+{
+  "generated": "2025-12-06T19:52:14.709Z",
+  "widgets": [
+    {
+      "id": "_admin/admin-dashboard",
+      "versions": [
+        "v1.0.0-admin-dashboard.html",
+        "v1.2.0-admin-dashboard.html",
+        "v1.3.0-admin-dashboard.html"
+      ]
+    },
+    {
+      "id": "_admin/admin-portfolio-importer",
+      "versions": ["v1.0.0-admin-portfolio-importer.html", "v1.1.0-admin-portfolio-importer.html"]
+    },
+    {
+      "id": "_admin/blog-admin",
+      "versions": ["v1.0.0-blog-admin.html"]
+    },
+    {
+      "id": "_content/about/client-carousel",
+      "versions": [
+        "v1.2.0-client-carousel-squarespace.html",
+        "v1.2.1-client-carousel-squarespace.html",
+        "v1.2.2-client-carousel-squarespace.html",
+        "v1.2.3-client-carousel-squarespace.html",
+        "v1.3.0-client-carousel-squarespace.html"
+      ]
+    },
+    {
+      "id": "_content/about/complete-about-page",
+      "versions": ["v1.4.6-complete-about-squarespace.html"]
+    },
+    {
+      "id": "_content/accessibility-statement",
+      "versions": ["v1.1.2-accessibility-statement.html", "v1.1.3-accessibility-statement.html"]
+    },
+    {
+      "id": "_content/blog-feed",
+      "versions": ["v1-google-sheets.html", "v2.1.0-google-docs-blog.html"]
+    },
+    {
+      "id": "_content/contact-form",
+      "versions": ["v1.0.0-contact-form.html"]
+    },
+    {
+      "id": "_content/hero-slideshow",
+      "versions": ["v1.1.0.html", "v1.2.0.html"]
+    },
+    {
+      "id": "_content/hire-to-unlock-resume",
+      "versions": ["v1.0.0-hire-to-unlock-resume.html"]
+    },
+    {
+      "id": "_content/podcast-feed",
+      "versions": ["v2.0.0-performance-optimized.html", "v2.0.0.html"]
+    },
+    {
+      "id": "_content/policies-legal",
+      "versions": [
+        "v1.0.0-policies-legal-squarespace.html",
+        "v1.1.0-policies-legal-squarespace.html"
+      ]
+    },
+    {
+      "id": "_content/testimonials",
+      "versions": ["v1.0.0-testimonials.html"]
+    },
+    {
+      "id": "_navigation/site-footer",
+      "versions": ["v1.2.0.footer-widget.html"]
+    },
+    {
+      "id": "_navigation/site-navigation",
+      "versions": ["v1.7.0-performance-optimized.html", "v1.7.1-site-navigation.html"]
+    },
+    {
+      "id": "portfolios/concert-portfolio",
+      "versions": ["v4.7.0.html", "v4.7.1-api-optional.html"]
+    },
+    {
+      "id": "portfolios/event-portfolio",
+      "versions": ["v2.6.2-event-portfolio.html", "v2.6.4-event-portfolio.html"]
+    },
+    {
+      "id": "portfolios/featured-portfolio",
+      "versions": ["v1.4.0.html", "v1.5.0-working.html"]
+    },
+    {
+      "id": "portfolios/nature-portfolio",
+      "versions": ["v1.7.0-enhanced-display.html", "v1.8.0-performance-optimized.html"]
+    },
+    {
+      "id": "portfolios/photojournalism-portfolio",
+      "versions": ["v5.2.0-performance-optimized.html"]
+    },
+    {
+      "id": "portfolios/portrait-portfolio",
+      "versions": ["v1.0.0.html"]
+    },
+    {
+      "id": "portfolios/video-portfolio",
+      "versions": ["v0.1.0-video-portfolio.html"]
+    }
+  ]
+}

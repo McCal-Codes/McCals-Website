@@ -42,6 +42,7 @@
   - Domain audit: confirmed only intentional `mccal.media` social/email references remain; site-root URLs standardized to `mcc-cal.com`.
   - Archived orphan scripts (auto-check-todo, date-overrides, find-latest-widget-versions, shared-date-parsing, auto-manifest-updater) to `scripts/_archived/`; updated docs to point to canonical watchers.
   - Added GitHub issue templates (bug, feature) and pull request template to standardize submissions.
+  - Added widget version limit workflow, PR axe audit trigger, widget registry manifest, and dev.mcc-cal.com onboarding note; added a11y checklist to widget standards.
   - Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/\_archived/; not referenced by npm scripts or code).
   - Updated .gitignore to exclude scripts/.welcome-state.json (prevents local state file from being committed).
   - Confirmed all scripts/ subfolders have up-to-date README files; no missing documentation in key folders.

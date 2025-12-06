@@ -1,0 +1,38 @@
+name: Widget Version Limit
+
+on:
+  pull_request:
+    paths:
+      - 'src/widgets/**'
+      - 'scripts/utils/scan-widget-versions.js'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  enforce-limit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install (ci)
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Enforce ≤2 active versions per widget
+        run: |
+          node scripts/utils/scan-widget-versions.js --fail-overlimit 2
+
+      - name: Upload scan output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: widget-version-limit
+          path: scan-widget-versions-report.json

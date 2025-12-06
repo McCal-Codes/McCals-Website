@@ -17,7 +17,9 @@ To add a new auto-check rule, update the `AUTO_CHECK_MAP` array in `scripts/admi
 To keep your dashboard visible, right-click the `updates/welcome.md` tab in VS Code and select **Pin**. It will always be there when you return!
 
 _See also: `updates/welcome.md` for the latest pinned tips and checklist status._
+
 # See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
+
 # Widget Standardization Guide
 
 **Quick links:** [Onboarding](../ONBOARDING.md) · [Widget reference](./widget-reference.md) · [Workspace organization](./workspace-organization.md) · [Performance standards](./performance-standards.md) · [Image SEO](./image-seo-standards.md)
@@ -37,22 +39,28 @@ This document establishes standardized patterns for McCal Media widgets based on
 The November 2025 reorganization (Phase 1) introduced forward-looking standards:
 
 ### Legacy Version Archival Policy
+
 Retain only the current stable and the immediately previous stable version inside each live widget directory. Relocate older versions (Phase 2) to:
 `src/widgets/_archived/legacy-widget-versions/<widget>/versions/` with an `INDEX.json` containing `{ version, date, summary }`. Planned CI will fail if more than two active versions remain.
 
 ### Aggregated Manifest Consumption
+
 Portfolio widgets MUST consume the single aggregated manifest per portfolio (e.g. `concert-manifest.json`, `portrait-manifest.json`). Per-folder manifests are deprecated. See `workspace-organization.md` for policy details.
 
 ### Accessibility & Theme Semantics
+
 Light theme = dark text on light surface; Dark theme = light text on dark surface. Avoid inverted semantics. Persist explicit user choice via `localStorage` (`<widget>-theme`) while respecting `prefers-color-scheme` in System mode.
 
 ### Performance Reference Update
+
 Concert Portfolio v4.7 and Photojournalism v5.x join Concert v4.6 as reference implementations (< 2s meaningful paint target; disciplined observers; deferred schema injection). New patterns should be validated against these benchmarks.
 
 ### Version Badge Active Flag
+
 Add `data-active="true"` to the version badge for the two active versions; omit in archived legacy files to enable automated audits.
 
 ### Planned CI Enforcement (Preview)
+
 Upcoming workflow checks will validate: (1) ≤2 active versions, (2) newest CHANGELOG entry presence, (3) aggregated manifest usage, (4) single structured data script, (5) observer discipline (no redundant IntersectionObserver instances).
 
 Document intentional deviations in widget README files so CI can whitelist them.
@@ -61,7 +69,17 @@ Document intentional deviations in widget README files so CI can whitelist them.
 
 ## 🏗️ Core Architecture Standards
 
+## 🧭 Accessibility Checklist
+
+- All interactive elements are keyboard focusable and operable (tab/enter/space/esc)
+- Visible focus states; no keyboard traps or keydown blockers
+- ARIA labels/roles for controls, form fields, icons; associate labels with inputs
+- Meaningful alt text; avoid redundant "image of" phrasing
+- Announce dynamic content updates with aria-live where appropriate
+- Preserve color-contrast minimums per WCAG AA
+
 ### 1. **Self-Contained Structure**
+
 Every widget must be completely self-contained for Squarespace Code Block compatibility:
 
 ```html
@@ -70,9 +88,9 @@ Every widget must be completely self-contained for Squarespace Code Block compat
   <style>
     /* All CSS inline here */
   </style>
-  
+
   <!-- Widget HTML content -->
-  
+
   <script>
     // All JavaScript inline here
   </script>
@@ -80,6 +98,7 @@ Every widget must be completely self-contained for Squarespace Code Block compat
 ```
 
 #### **Requirements**:
+
 - **Namespace wrapper**: Unique class prefix (e.g., `mcc-`, `journalism-`, `podcast-`)
 - **Version attribute**: `data-widget-version` for tracking
 - **Inline styles/scripts**: No external dependencies
@@ -87,6 +106,7 @@ Every widget must be completely self-contained for Squarespace Code Block compat
 - **Self-executing JavaScript**: No global pollution
 
 ### 2. **Versioning Standards**
+
 Following semantic versioning (MAJOR.MINOR.PATCH):
 
 ```
@@ -98,6 +118,7 @@ versions/
 ```
 
 #### **Guidelines**:
+
 - **Never modify existing versions** – always create new files
 - **Descriptive suffixes**: Include widget purpose in filename
 - **Preserve backwards compatibility** when possible
@@ -107,7 +128,6 @@ versions/
 - **Archive INDEX.json**: Maintain concise metadata for historical audit
 
 ---
-
 
 ## 🎨 Visual Design Standards
 
@@ -121,17 +141,18 @@ versions/
 - All widgets must remain dark mode by default. Light/dark toggle is a future enhancement.
 
 ### 1. **CSS Custom Properties (Variables)**
+
 Standardized color palette and design tokens:
 
 ```css
 :root {
   /* Core colors */
-  --fg: #f5f5f5;                    /* Foreground text */
-  --bg: #0a0a0a;                    /* Background */
-  --line: #2a2a2a;                  /* Borders/lines */
-  --accent: #ff4d6d;                /* Accent/interactive */
-  --published: #00d4aa;             /* Success/published indicator */
-  
+  --fg: #f5f5f5; /* Foreground text */
+  --bg: #0a0a0a; /* Background */
+  --line: #2a2a2a; /* Borders/lines */
+  --accent: #ff4d6d; /* Accent/interactive */
+  --published: #00d4aa; /* Success/published indicator */
+
   /* Semantic colors */
   --mcc-hover: rgba(255, 255, 255, 0.9);
   --mcc-focus: rgba(255, 255, 255, 0.6);
@@ -149,9 +170,11 @@ Standardized color palette and design tokens:
 ```
 
 ### 1a. **Accent Highlight Button (Minimal, Randomized)**
+
 For accent highlights (chips, callouts, or special buttons), use a dark base with a subtle accent border or shadow. To add variety, you can randomly select from the accent palette for the border or shadow, but keep the effect minimal and never use a full gradient background for buttons.
 
 **Example CSS:**
+
 ```css
 .accent-highlight-btn {
   background: var(--mc-accent-black);
@@ -162,7 +185,10 @@ For accent highlights (chips, callouts, or special buttons), use a dark base wit
   font-weight: 500;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
   box-shadow: 0 2px 8px 0 rgba(95, 212, 240, 0.08); /* Subtle blue accent shadow */
 }
 .accent-highlight-btn:hover {
@@ -178,28 +204,35 @@ For accent highlights (chips, callouts, or special buttons), use a dark base wit
 > **Never** use the accent gradient as a button background. Use it only for chips, overlays, or accent lines.
 
 ### 2. **Typography Standards**
+
 Consistent font stacks and sizing:
 
 ```css
 /* System font stack (preferred) */
-font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+font-family:
+  ui-sans-serif,
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  sans-serif;
 
 /* Font weights (standardized) */
-font-weight: 400;  /* Body text */
-font-weight: 500;  /* Medium emphasis */
-font-weight: 600;  /* Semi-bold */
-font-weight: 700;  /* Bold headings */
-font-weight: 800;  /* Extra bold titles */
+font-weight: 400; /* Body text */
+font-weight: 500; /* Medium emphasis */
+font-weight: 600; /* Semi-bold */
+font-weight: 700; /* Bold headings */
+font-weight: 800; /* Extra bold titles */
 
 /* Font sizes (rem-based) */
-font-size: 0.875rem;  /* 14px - Small text */
-font-size: 1rem;      /* 16px - Body */
-font-size: 1.125rem;  /* 18px - Large body */
-font-size: 1.5rem;    /* 24px - Headings */
-font-size: 2rem;      /* 32px - Large headings */
+font-size: 0.875rem; /* 14px - Small text */
+font-size: 1rem; /* 16px - Body */
+font-size: 1.125rem; /* 18px - Large body */
+font-size: 1.5rem; /* 24px - Headings */
+font-size: 2rem; /* 32px - Large headings */
 ```
 
 ### 3. **Responsive Design Patterns**
+
 Mobile-first responsive breakpoints:
 
 ```css
@@ -232,20 +265,22 @@ Mobile-first responsive breakpoints:
 ## ⚡ Performance Standards
 
 ### 1. **Image Loading Patterns**
+
 Optimized image handling for portfolios:
 
 ```html
 <!-- Lazy loading with responsive sizing -->
-<img 
-  loading="lazy" 
+<img
+  loading="lazy"
   decoding="async"
   src="image-url.jpg"
   alt="Descriptive alt text"
   style="width: 100%; height: auto; object-fit: cover;"
->
+/>
 ```
 
 ### 2. **Progressive Enhancement**
+
 Loading states and error handling:
 
 ```css
@@ -267,6 +302,7 @@ Loading states and error handling:
 ```
 
 ### 3. **Caching Strategy**
+
 For data-driven widgets:
 
 ```javascript
@@ -294,6 +330,7 @@ function getCachedData() {
 ## 🔧 Interactive Patterns
 
 ### 1. **Modal/Lightbox Standards**
+
 For portfolio and gallery widgets:
 
 ```css
@@ -324,7 +361,9 @@ For portfolio and gallery widgets:
   color: #fff;
   border-radius: 50%;
   cursor: pointer;
-  font: 800 18px ui-sans-serif, system-ui;
+  font:
+    800 18px ui-sans-serif,
+    system-ui;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -339,15 +378,15 @@ For portfolio and gallery widgets:
   width: auto;
   height: auto;
   object-fit: contain; /* Preserves aspect ratio */
-  display: block;      /* Proper block rendering */
-  margin: 0 auto;      /* Centers horizontally */
+  display: block; /* Proper block rendering */
+  margin: 0 auto; /* Centers horizontally */
   border-radius: 10px;
 }
 
 /* Navigation hiding during lightbox */
 html.lb-open header,
 html.lb-open .Header,
-html.lb-open [id*="Header"],
+html.lb-open [id*='Header'],
 html.lb-open .site-header,
 html.lb-open nav,
 html.lb-open .navbar,
@@ -359,27 +398,15 @@ html.lb-open .navigation {
 ```
 
 ### 2. **Filter/Navigation Controls**
+
 For portfolio and content widgets:
 
 ```html
 <div class="filter-controls" role="tablist" aria-label="Content filters">
-  <button 
-    type="button" 
-    class="filter-btn" 
-    data-filter="*" 
-    aria-pressed="true" 
-    role="tab"
-  >
+  <button type="button" class="filter-btn" data-filter="*" aria-pressed="true" role="tab">
     All
   </button>
-  <button 
-    type="button" 
-    class="filter-btn" 
-    data-filter="category" 
-    role="tab"
-  >
-    Category
-  </button>
+  <button type="button" class="filter-btn" data-filter="category" role="tab">Category</button>
 </div>
 ```
 
@@ -391,7 +418,9 @@ For portfolio and content widgets:
   padding: 12px 20px;
   border-radius: 999px;
   cursor: pointer;
-  font: 600 14px/1 ui-sans-serif, system-ui;
+  font:
+    600 14px/1 ui-sans-serif,
+    system-ui;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.6;
 }
@@ -401,7 +430,7 @@ For portfolio and content widgets:
   opacity: 1;
 }
 
-.filter-btn[aria-pressed="true"] {
+.filter-btn[aria-pressed='true'] {
   background: var(--fg);
   color: var(--bg);
   opacity: 1;
@@ -414,6 +443,7 @@ For portfolio and content widgets:
 ## ♿ Accessibility Standards
 
 ### 1. **Keyboard Navigation**
+
 Essential for all interactive widgets:
 
 ```javascript
@@ -421,10 +451,10 @@ Essential for all interactive widgets:
 function openModal(modal) {
   modal.classList.add('is-open');
   modal.setAttribute('aria-hidden', 'false');
-  
+
   // Trap focus within modal
   const focusableElements = modal.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
   if (focusableElements.length > 0) {
     focusableElements[0].focus();
@@ -440,33 +470,23 @@ document.addEventListener('keydown', (e) => {
 ```
 
 ### 2. **ARIA Attributes**
+
 Proper labeling and roles:
 
 ```html
 <!-- For interactive cards -->
-<article 
-  class="portfolio-card" 
-  tabindex="0" 
+<article
+  class="portfolio-card"
+  tabindex="0"
   role="button"
   aria-label="View photo gallery: Event Name"
 >
-  
-<!-- For live regions -->
-<div 
-  class="status-message" 
-  role="status" 
-  aria-live="polite"
->
-  Loading content...
-</div>
+  <!-- For live regions -->
+  <div class="status-message" role="status" aria-live="polite">Loading content...</div>
 
-<!-- For modal dialogs -->
-<div 
-  class="modal" 
-  role="dialog" 
-  aria-modal="true"
-  aria-labelledby="modal-title"
->
+  <!-- For modal dialogs -->
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"></div>
+</article>
 ```
 
 ---
@@ -474,6 +494,7 @@ Proper labeling and roles:
 ## 🐛 Debug & Development Standards
 
 ### 1. **Debug Mode Pattern**
+
 Standardized debug controls for development:
 
 ```html
@@ -504,7 +525,9 @@ Standardized debug controls for development:
   padding: 8px 16px;
   border-radius: 16px;
   cursor: pointer;
-  font: 600 12px/1 ui-sans-serif, system-ui;
+  font:
+    600 12px/1 ui-sans-serif,
+    system-ui;
   z-index: 1000;
 }
 
@@ -516,14 +539,13 @@ Standardized debug controls for development:
 ```
 
 ### 2. **Version Indicator Pattern**
+
 Consistent version display and changelog access:
 
 ```html
 <h2 class="widget-heading">
-  Widget Name 
-  <span class="version-indicator" onclick="showChangelog()" title="View changelog">
-    v1.0.0
-  </span>
+  Widget Name
+  <span class="version-indicator" onclick="showChangelog()" title="View changelog"> v1.0.0 </span>
 </h2>
 ```
 
@@ -531,7 +553,9 @@ Consistent version display and changelog access:
 .version-indicator {
   display: inline-block;
   margin-left: 12px;
-  font: 600 14px/1.2 ui-sans-serif, system-ui;
+  font:
+    600 14px/1.2 ui-sans-serif,
+    system-ui;
   color: rgba(128, 128, 128, 0.7);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -555,7 +579,8 @@ Consistent version display and changelog access:
 
 ## 📱 Widget Categories & Specific Patterns
 
-### 1. **Portfolio Widgets** *(Concert, Event, Photojournalism, Featured)*
+### 1. **Portfolio Widgets** _(Concert, Event, Photojournalism, Featured)_
+
 - **Masonry Layout**: CSS columns with `break-inside: avoid`
 - **Lazy Loading**: Intersection Observer API
 - **Lightbox Gallery**: Full-screen viewing with navigation hiding
@@ -566,13 +591,15 @@ Consistent version display and changelog access:
 - **External Panels (Concert)**: Case-insensitive deduplication for artist lists; disable support buttons while lightbox open or media playing
 - **Observer Discipline**: Prefer one IntersectionObserver per concern (reveal vs lazy images) to minimize overhead
 
-### 2. **Navigation Widgets** *(Site Navigation, Site Footer)*
+### 2. **Navigation Widgets** _(Site Navigation, Site Footer)_
+
 - **Glassmorphism**: Backdrop blur with transparency
 - **Active State Management**: URL-based active link detection
 - **Mobile Responsiveness**: Collapsible/drawer patterns
 - **Focus Management**: Enhanced keyboard navigation
 
-### 3. **Content Widgets** *(Podcast Feed, Blog Feed)*
+### 3. **Content Widgets** _(Podcast Feed, Blog Feed)_
+
 - **RSS/API Integration**: External data loading with caching
 - **Progressive Loading**: Skeleton states and error handling
 - **Rich Media Support**: Audio players, embedded content
@@ -581,7 +608,8 @@ Consistent version display and changelog access:
 - **Transcripts**: Provide transcript toggle (ARIA-expanded, manage focus return)
 - **Accessibility**: Wrap each episode in `article` with descriptive labeling
 
-### 4. **Hero/Showcase Widgets** *(Hero Slideshow)*
+### 4. **Hero/Showcase Widgets** _(Hero Slideshow)_
+
 - **Full-Viewport Design**: Edge-to-edge layouts
 - **Auto-Play Controls**: User-controlled animations
 - **Touch/Swipe Support**: Mobile gesture handling
@@ -592,6 +620,7 @@ Consistent version display and changelog access:
 ## 🚀 Implementation Checklist
 
 ### For New Widgets
+
 - [ ] **Namespace**: Unique CSS class prefix
 - [ ] **Self-Contained**: All CSS/JS inline
 - [ ] **Version Tracking**: `data-widget-version` attribute
@@ -602,6 +631,7 @@ Consistent version display and changelog access:
 - [ ] **Documentation**: README.md with usage instructions
 
 ### For Existing Widget Updates
+
 - [ ] **New Version File**: Don't modify existing versions
 - [ ] **Changelog Entry**: Document all changes
 - [ ] **Pattern Compliance**: Apply standardized patterns from this guide
@@ -614,20 +644,26 @@ Consistent version display and changelog access:
 ## 📚 Reference Implementation
 
 ### Portfolio Widget Template
+
 See `src/widgets/photojournalism-portfolio/versions/v4.8-event-cards.html` for:
+
 - Complete lightbox implementation
 - Filter system with accessibility
 - Debug mode integration
 - Performance optimization patterns
 
-### Navigation Widget Template  
+### Navigation Widget Template
+
 See `src/widgets/site-navigation/versions/v1.6.3.header-injection.html` for:
+
 - Glassmorphism styling
 - Active state management
 - Mobile-responsive patterns
 
 ### Content Feed Template
+
 See `src/widgets/podcast-feed/` for:
+
 - External API integration
 - Caching strategies
 - Progressive loading patterns
@@ -646,6 +682,7 @@ See `src/widgets/podcast-feed/` for:
 6. **Share**: Update this standardization guide with new patterns
 
 ### Quality Standards
+
 - **Performance**: < 2s initial load, smooth 60fps animations
 - **Accessibility**: WCAG 2.1 AA compliance minimum
 - **Compatibility**: Works in Squarespace Code Blocks
@@ -658,17 +695,17 @@ See `src/widgets/podcast-feed/` for:
 
 ## 🧪 Upcoming Automation Hooks (Preview)
 
-| Concern | Attribute / Pattern | Planned CI Check |
-|---------|---------------------|------------------|
-| Active versions | `data-active="true"` on version badge | Ensure ≤2 active |
-| Theme system | Root wrapper `data-theme` present | Validate Light/Dark/System semantics |
-| Manifest source | Fetch path ends with `<type>-manifest.json` | Warn if per-folder manifest accessed |
-| Debug mode | Single `.debug-toggle` | Warn if multiple toggles |
-| Structured data | Single script tag id=`structured-data` | Warn if absent/duplicated |
-| Observer discipline | ≤1 per concern | Flag excess observers |
+| Concern             | Attribute / Pattern                         | Planned CI Check                     |
+| ------------------- | ------------------------------------------- | ------------------------------------ |
+| Active versions     | `data-active="true"` on version badge       | Ensure ≤2 active                     |
+| Theme system        | Root wrapper `data-theme` present           | Validate Light/Dark/System semantics |
+| Manifest source     | Fetch path ends with `<type>-manifest.json` | Warn if per-folder manifest accessed |
+| Debug mode          | Single `.debug-toggle`                      | Warn if multiple toggles             |
+| Structured data     | Single script tag id=`structured-data`      | Warn if absent/duplicated            |
+| Observer discipline | ≤1 per concern                              | Flag excess observers                |
 
 Maintain intentional exceptions in README so CI can whitelist them.
 
 ---
 
-*This document is maintained as part of the McCal Media widget development standards. Update when new patterns are established or existing patterns are refined.*
+_This document is maintained as part of the McCal Media widget development standards. Update when new patterns are established or existing patterns are refined._

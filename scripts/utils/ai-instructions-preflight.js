@@ -29,6 +29,11 @@ const REQUIRED_DOCS = [
     file: path.join(ROOT, '.github', 'canvas-instructions.md'),
     title: 'Canvas instructions',
   },
+  {
+    key: 'widget-registry',
+    file: path.join(ROOT, 'docs', 'widgets', 'registry.json'),
+    title: 'Widget registry',
+  },
 ];
 
 function widgetReadmeStatus() {

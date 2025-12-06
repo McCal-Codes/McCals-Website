@@ -3,6 +3,11 @@ name: Accessibility — axe (Playwright/Firefox)
 on:
   push:
     branches: [ 'staging' ]
+  pull_request:
+    paths:
+      - 'src/widgets/**'
+      - 'src/site/**'
+      - '.github/workflows/a11y-axe-firefox.yml'
   workflow_dispatch:
     inputs:
       target-url:
@@ -34,21 +39,19 @@ jobs:
         env:
           STAGING_URL: ${{ secrets.STAGING_URL }}
         run: |
-          # prefer workflow_dispatch input, fall back to STAGING_URL secret
           if [ -n "${{ github.event.inputs.target-url }}" ]; then
             TARGET_URL='${{ github.event.inputs.target-url }}'
           else
             TARGET_URL="$STAGING_URL"
           fi
           if [ -z "${TARGET_URL}" ]; then
-            echo "ERROR: TARGET_URL not set. Provide 'target-url' on workflow_dispatch or set the STAGING_URL secret for push->staging runs.";
-            exit 1;
+            echo "Skipping axe audit: TARGET_URL/STAGING_URL not set."; echo "skip=true" >> $GITHUB_OUTPUT; exit 0;
           fi
           echo "TARGET_URL=${TARGET_URL}" > target_url.env
 
       - name: Run axe-firefox audit
+        if: steps.ensure_target_url.outputs.skip != 'true'
         run: |
-          # shell out the target URL saved earlier
           . ./target_url.env
           echo "Running axe audit against: ${TARGET_URL}"
           node scripts/a11y/axe-firefox.js "${TARGET_URL}"
