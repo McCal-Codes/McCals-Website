@@ -1,14 +1,8 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `74d25a4f` — 1 second ago
-> docs: add authentication setup guides and update task tracking
+**Last commit**: `7e2807ec` — 0 seconds ago
+> fix: update blog admin widget to use Cloudflare API endpoint (api.mcc-cal.com)
 ## 🔄 Changes in last commit
-- .github/copilot-instructions.md
-- docs/integrations/AUTH-SETUP-GUIDE.md
-- docs/integrations/AUTH-TOKEN-QUICK-REFERENCE.md
-- docs/integrations/manifest-webhook-worker.md
-- scripts/.welcome-state.json
-- updates/todo.md
-- updates/welcome.md
+- src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html
 ## 📋 Your checklist status
 - Open: **71** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
