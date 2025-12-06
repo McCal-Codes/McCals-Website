@@ -16,6 +16,9 @@ yarn-error.log*
 
 # Build directories (generated from source)
 dist/
+.next/
+build/
+out/
 
 # Package files (generated from source)
 *.tgz

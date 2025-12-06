@@ -1,0 +1,24 @@
+# Next.js build output
+.next/
+out/
+build/
+
+# Node modules
+node_modules/
+
+# Build artifacts
+dist/
+
+# Test coverage
+coverage/
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Generated files
+scripts/_archived/
