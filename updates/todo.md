@@ -14,12 +14,6 @@ _Updated: December 6, 2025_
 
 ### Authentication & Token Setup ✅ COMPLETE
 
-- [x] Generated and documented AUTH-SETUP-GUIDE.md with complete environment variable setup (JWT_SECRET, WEBHOOK_SECRET, BLOG_AUTHORS, MANIFEST_BASE_URL, CORS_ORIGINS)
-- [x] Created AUTH-TOKEN-QUICK-REFERENCE.md for fast copy-paste local development setup
-- [x] Documented token generation, rotation, expiry, and security best practices
-- [x] Provided troubleshooting guide for common auth issues
-- [x] Added Cloudflare deployment checklist and test procedures
-
 ### Cloudflare Worker Deployment (Next Priority)
 
 - [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (use AUTH-SETUP-GUIDE.md)
@@ -50,17 +44,13 @@ _Updated: December 6, 2025_
   - Configure SSL/TLS certificate for dev subdomain
   - Test CORS and API integration with dev subdomain
   - Update documentation with dev subdomain usage instructions
-- [x] Domain reference audit (2025-12-06): All site-root URLs now use `mcc-cal.com`. Remaining `mccal.media` references are intentional social handles (Instagram) and contact emails pending brand decision.
 
 ### Scripts Organization
 
-- [x] Phase 2 — Archived orphan scripts to \`scripts/\_archived/\` (2025-12-06): auto-check-todo, date-overrides, find-latest-widget-versions, shared-date-parsing, auto-manifest-updater. CHANGELOG updated.
-
 ### CI/CD Improvements
 
-- [ ] TODO: Add CI job to enforce active/legacy widget version policy (fail if >2 active versions present in a live widget directory)
-- [ ] TODO: Concert manifest workflow secret lint warnings — evaluate if GitHub Actions runtime succeeds despite local YAML linter warnings
-- [ ] TODO: Reduce remaining secret lint warnings — evaluate creating reusable \`workflow_call\` webhook dispatcher
+- [ ] Concert manifest workflow secret lint warnings — evaluate if GitHub Actions runtime succeeds despite local YAML linter warnings
+- [ ] Reduce remaining secret lint warnings — evaluate creating reusable \`workflow_call\` webhook dispatcher
 
 ### Widget Standards
 
@@ -113,7 +103,6 @@ _Updated: December 6, 2025_
 ### Accessibility
 
 - [ ] TODO: Add accessibility improvements: ARIA labels, keyboard navigation, screen reader support
-- [ ] TODO: Add accessibility audit automation with axe-core in CI
 
 ---
 
@@ -129,11 +118,7 @@ _Updated: December 6, 2025_
 
 ### Follow-up Documentation TODOs
 
-- [ ] TODO: Implement CI changelog validator
-- [ ] TODO: Add workflow to enforce ≤2 active widget versions
-- [ ] TODO: Add schema diff & performance snapshot automation (Lighthouse + JSON-LD validation)
-- [ ] TODO: Integrate accessibility axe audit into CI
-- [ ] TODO: Add widget registry manifest summarizing active versions and paths
+- [ ] Add schema diff & performance snapshot automation (Lighthouse + JSON-LD validation)
 
 ### Repository Improvements
 
