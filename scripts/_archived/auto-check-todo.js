@@ -31,9 +31,8 @@ function markTodosByKeywords(todoText, commitMsg) {
   for (const { keyword, todo } of KEYWORD_PATTERNS) {
     if (keyword.test(commitMsg)) {
       // Find the first unchecked TODO matching this pattern and mark it done
-      todoText = todoText.replace(
-        new RegExp(`(- \[ \] TODO:.*${todo.source}.*)`, 'i'),
-        (m) => m.replace('- [ ]', '- [x]')
+      todoText = todoText.replace(new RegExp(`(- \[ \] TODO:.*${todo.source}.*)`, 'i'), (m) =>
+        m.replace('- [ ]', '- [x]'),
       );
       changed = true;
     }
@@ -44,10 +43,9 @@ function markTodosByKeywords(todoText, commitMsg) {
 function markTodosByFiles(todoText, changedFiles) {
   let changed = false;
   for (const { pattern, todo } of FILE_PATTERNS) {
-    if (changedFiles.some(f => pattern.test(f))) {
-      todoText = todoText.replace(
-        new RegExp(`(- \[ \] TODO:.*${todo.source}.*)`, 'i'),
-        (m) => m.replace('- [ ]', '- [x]')
+    if (changedFiles.some((f) => pattern.test(f))) {
+      todoText = todoText.replace(new RegExp(`(- \[ \] TODO:.*${todo.source}.*)`, 'i'), (m) =>
+        m.replace('- [ ]', '- [x]'),
       );
       changed = true;
     }

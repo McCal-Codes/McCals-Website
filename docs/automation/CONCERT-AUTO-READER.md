@@ -5,6 +5,7 @@ An automated system for detecting folder names and extracting year/month metadat
 ## Overview
 
 This system automatically:
+
 - 🎵 **Detects band/folder names** from directory structure
 - 📅 **Extracts concert dates** from image filenames (YYMMDD, YYYYMMDD formats)
 - 🖼️ **Falls back to EXIF date data** when filename dates aren't available
@@ -14,22 +15,26 @@ This system automatically:
 ## Features
 
 ### ✨ Auto Date Detection
+
 - Supports `YYMMDD` format (e.g., `250829` → August 29, 2025)
-- Supports `YYYYMMDD` format (e.g., `20250829` → August 29, 2025)  
+- Supports `YYYYMMDD` format (e.g., `20250829` → August 29, 2025)
 - EXIF metadata extraction as fallback
 - Smart Y2K handling for 2-digit years
 
 ### 🎯 Smart Folder Processing
+
 - Recursive directory scanning
 - Nested folder support (e.g., `Band Name/Album Name/images`)
 - Enhanced folder name formatting (`CamelCase` → `Camel Case`)
 
 ### 📋 Enhanced Manifests
+
 Generated manifests include:
+
 ```json
 {
   "bandName": "The Book Club",
-  "folderName": "The Book Club",  
+  "folderName": "The Book Club",
   "totalImages": 23,
   "images": ["250829_Haven_CAL4584.jpg", "..."],
   "concertDate": {
@@ -56,7 +61,7 @@ Generated manifests include:
 npm run manifest:dry-run
 
 # Generate manifests for all concert directories
-npm run manifest:generate  
+npm run manifest:generate
 
 # Automated update with logging
 npm run manifest:auto-update
@@ -78,6 +83,7 @@ node scripts/enhanced-manifest-generator.js --auto --dry --verbose
 ### 🤖 Automated Updates
 
 The auto-updater script provides:
+
 - Automated manifest generation
 - Timestamped logging
 - Git change detection
@@ -90,19 +96,21 @@ npm run manifest:auto-update
 # View logs
 cat logs/manifest-updates.log
 
-# View last update summary  
+# View last update summary
 cat logs/last-update-summary.json
 ```
 
 ## Concert Widget Integration
 
 ### Version 3.2 Features
-- **Auto Date Display**: Shows proper concert dates (e.g., "August 2025") 
+
+- **Auto Date Display**: Shows proper concert dates (e.g., "August 2025")
 - **Enhanced Band Names**: Uses clean, formatted band names from manifests
 - **Fallback Support**: Works with both enhanced and legacy manifests
 - **Debug Information**: Shows manifest usage statistics
 
 ### Widget Usage
+
 ```html
 <!-- Use the enhanced widget -->
 <script src="widgets/concert-portfolio/versions/v3.2.html"></script>
@@ -119,7 +127,7 @@ images/Portfolios/Concert/
 │       └── manifest.json            ← Generated automatically
 ├── Turtle Park/
 │   ├── 250829_Haven_CAL4388.jpg
-│   ├── 250829_Haven_CAL4401.jpg  
+│   ├── 250829_Haven_CAL4401.jpg
 │   └── manifest.json                ← Generated automatically
 └── processing-summary.json          ← Overall summary report
 ```
@@ -127,6 +135,7 @@ images/Portfolios/Concert/
 ## Scheduling Automation
 
 ### Using Cron (Linux/macOS)
+
 ```bash
 # Edit crontab
 crontab -e
@@ -136,13 +145,14 @@ crontab -e
 ```
 
 ### Using GitHub Actions
+
 ```yaml
 # .github/workflows/update-manifests.yml
 name: Update Concert Manifests
 on:
   schedule:
-    - cron: '0 3 * * *'  # Daily at 3 AM UTC
-  workflow_dispatch:      # Manual trigger
+    - cron: '0 3 * * *' # Daily at 3 AM UTC
+  workflow_dispatch: # Manual trigger
 
 jobs:
   update-manifests:
@@ -163,10 +173,12 @@ jobs:
 ## File Naming Conventions
 
 ### Supported Date Formats
+
 - `YYMMDD_*` → `250829_Haven_CAL4584.jpg`
 - `YYYYMMDD_*` → `20250829_Concert_Photo.jpg`
 
 ### Best Practices
+
 - Use consistent date prefixes in filenames
 - Keep folder names descriptive (`The Book Club` not `tbc`)
 - Organize in logical directory structures
@@ -175,6 +187,7 @@ jobs:
 ## Configuration
 
 ### Manifest Generator Settings
+
 ```javascript
 // In enhanced-manifest-generator.js
 const CONCERT_BASE_DIR = '../images/Portfolios/Concert';
@@ -182,9 +195,10 @@ const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp)$/i;
 ```
 
 ### Widget Settings
+
 ```html
 <!-- Set number of images to display -->
-<div data-panes="12">
+<div data-panes="12"></div>
 ```
 
 ## Troubleshooting
@@ -192,21 +206,25 @@ const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp)$/i;
 ### Common Issues
 
 **No dates detected?**
+
 - Check filename format (`YYMMDD` or `YYYYMMDD` prefix)
 - Verify EXIF date information exists
 - Run with `--verbose` to see detection details
 
 **Missing images?**
+
 - Ensure images have supported extensions (`.jpg`, `.jpeg`, `.png`, `.webp`)
 - Check directory permissions
 - Verify GitHub repository structure matches local
 
 **Widget not loading enhanced data?**
+
 - Confirm manifests exist in expected locations
 - Check browser console for errors
 - Use debug mode in widget (`🔍 Debug` button)
 
 ### Debug Commands
+
 ```bash
 # Test single directory with full logging
 node scripts/enhanced-manifest-generator.js "/path/to/concert/folder" --verbose
@@ -227,7 +245,7 @@ tail -f logs/manifest-updates.log
 ## Related Files
 
 - `scripts/enhanced-manifest-generator.js` - Main manifest generator
-- `scripts/auto-manifest-updater.js` - Automated scheduling wrapper  
+- `npm run watch:auto-manifest` - Automated scheduling wrapper (legacy `scripts/auto-manifest-updater.js` archived 2025-12-06)
 - `widgets/concert-portfolio/versions/v3.2.html` - Enhanced widget
 - `logs/manifest-updates.log` - Operation logs
 - `images/Portfolios/Concert/processing-summary.json` - Summary report
