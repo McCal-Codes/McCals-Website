@@ -1,9 +1,11 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `6e5dc6a0` — 1 second ago
-> update: refresh last commit details in welcome message
+**Last commit**: `d73ac9cf` — 1 second ago
+> update: add manifest webhook proxy and required environment variables
 ## 🔄 Changes in last commit
+- .env.example
+- docs/integrations/manifest-webhook-worker.md
 - scripts/.welcome-state.json
-- src/images/Portfolios/Events/events-manifest.json
+- tools/cloudflare/manifest-webhook-worker.js
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
