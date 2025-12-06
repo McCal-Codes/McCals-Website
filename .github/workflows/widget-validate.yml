@@ -35,6 +35,9 @@ jobs:
         run: npm ci --prefer-offline --no-audit --no-fund
       - name: Run widget validation script
         run: npm run validate:widgets
+
+      - name: Audit widget READMEs
+        run: npm run audit:widget-readmes
       - name: Upload validator artifacts
         if: always()
         uses: actions/upload-artifact@v4

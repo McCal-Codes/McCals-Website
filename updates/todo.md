@@ -50,14 +50,7 @@ _Updated: December 6, 2025_
   - Configure SSL/TLS certificate for dev subdomain
   - Test CORS and API integration with dev subdomain
   - Update documentation with dev subdomain usage instructions
-- [ ] TODO: Audit remaining \`mccal.media\` references and update to \`mcc-cal.com\` where appropriate:
-  - Found 10 references across widgets and docs (grep search completed Dec 1, 2025):
-    - Instagram social URL: \`mccal.media\` (keep as social handle)
-    - Email addresses: \`contact@mccal.media\` (determine if keeping or updating)
-    - Documentation references in archived content
-  - **Note**: Keep brand/social handles (e.g., instagram.com/mccal.media) unchanged
-  - Update only site-root URLs and schema references to mcc-cal.com
-  - Confirm newsletter and social links remain correct per current branding
+- [x] Domain reference audit (2025-12-06): All site-root URLs now use `mcc-cal.com`. Remaining `mccal.media` references are intentional social handles (Instagram) and contact emails pending brand decision.
 
 ### Scripts Organization
 
