@@ -1,10 +1,18 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `b5635c5b` — 0 seconds ago
-> feat: deploy Cloudflare Worker API to production (api.mcc-cal.com)
+**Last commit**: `37032d87` — 0 seconds ago
+> feat: complete full-stack integration suite (Options 1-5)
 ## 🔄 Changes in last commit
+- .github/workflows/publish-manifests-cdn.yml
+- docs/workflows/GITHUB-ACTIONS-CLOUDFLARE-INTEGRATION.md
+- docs/workflows/PERFORMANCE-MONITORING.md
 - scripts/.welcome-state.json
-- tools/cloudflare/worker.js
-- tools/cloudflare/wrangler.toml
+- scripts/utils/cache-analyzer.js
+- scripts/utils/health-check.js
+- sites/self-hosted-nextjs/.env.example
+- sites/self-hosted-nextjs/README.md
+- sites/self-hosted-nextjs/pages/concerts.tsx
+- sites/self-hosted-nextjs/utils/api-client.ts
+- src/widgets/_admin/blog-admin/ENHANCEMENT-PLAN.md
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **71** | Done: **5**
