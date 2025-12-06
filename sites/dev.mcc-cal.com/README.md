@@ -8,6 +8,41 @@ Next.js development site mirroring mcc-cal.com production, featuring full widget
 - Node.js 18+ (Next.js 15 works best on Node 18+)
 - Network access to npm registry
 - Access to api.mcc-cal.com API
+- Cloudflare Tunnel configured (one-time setup complete ✅)
+
+### Three Ways to Start
+
+#### Option 1: Auto-start with VS Code (Easiest)
+When you open this workspace in VS Code, both the Next.js server and Cloudflare tunnel will start automatically!
+
+- **Local:** http://localhost:3000
+- **Public:** https://dev.mcc-cal.com
+
+To disable auto-start, remove the `task.runTask` section from `.vscode/settings.json`.
+
+#### Option 2: Manual with VS Code Tasks
+Press `Cmd+Shift+P` (macOS) or `Ctrl+Shift+P` (Windows/Linux), then:
+1. Type "Tasks: Run Task"
+2. Select "Dev Site: Start All"
+
+Both services will start in dedicated terminal panels.
+
+#### Option 3: Command Line Script
+```bash
+cd sites/dev.mcc-cal.com
+
+# Start both services with one command
+npm run dev:full
+
+# Or start manually in separate terminals:
+# Terminal 1: npm run dev
+# Terminal 2: cloudflared tunnel run mccal-dev
+```
+
+### Stop Services
+- VS Code: Click the trash icon in the terminal panels
+- Script: Press `Ctrl+C` in the terminal running `npm run dev:full`
+- Manual: `Ctrl+C` in each terminal window
 
 ### Install & Run
 

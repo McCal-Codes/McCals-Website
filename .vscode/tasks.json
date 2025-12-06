@@ -409,6 +409,60 @@
       },
       "problemMatcher": []
     },
+    // Dev Site Tasks
+    {
+      "label": "Dev Site: Next.js Server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "options": {
+        "cwd": "${workspaceFolder}/sites/dev.mcc-cal.com"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "devSite"
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*)$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting...",
+          "endsPattern": "Ready in"
+        }
+      }
+    },
+    {
+      "label": "Dev Site: Cloudflare Tunnel",
+      "type": "shell",
+      "command": "cloudflared",
+      "args": ["tunnel", "run", "mccal-dev"],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "devSite"
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*)$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting tunnel",
+          "endsPattern": "Registered tunnel connection"
+        }
+      }
+    },
     {
       "label": "Manifest: Generate Selected",
       "type": "shell",
@@ -467,6 +521,16 @@
       "description": "Type of build to perform",
       "options": ["universal", "concert", "optimized"],
       "default": "universal"
+    }
+  ],
+  "compounds": [
+    {
+      "label": "Dev Site: Start All",
+      "dependsOn": ["Dev Site: Next.js Server", "Dev Site: Cloudflare Tunnel"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
     }
   ]
 }
