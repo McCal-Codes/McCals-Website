@@ -92,4 +92,5 @@ const WidgetReloader: React.FC<WidgetReloaderProps> = ({ widget, version }) => {
   );
 };
 
+export { WidgetReloader };
 export default WidgetReloader;
