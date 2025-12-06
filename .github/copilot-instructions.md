@@ -232,6 +232,10 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+- 2025-12-06T18:00:00.000Z — Repository organization and archival update.
+	- Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/_archived/; not referenced by npm scripts or code).
+	- Updated .gitignore to exclude scripts/.welcome-state.json (prevents local state file from being committed).
+	- Confirmed all scripts/ subfolders have up-to-date README files; no missing documentation in key folders.
 - 2025-12-06T16:30:00.000Z — Admin Dashboard v1.1.0 Enhancement Complete.
 	- Upgraded admin dashboard from basic 3-card health status to comprehensive monitoring system.
 	- **Core Metrics Cards (6 cards)**: API Health, Manifests, Widgets, System Info, Cache Stats, Build Info with detailed metric rows and status indicators.

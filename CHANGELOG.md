@@ -1,29 +1,19 @@
 ## 2025-11-23
 ### Version Standardization (x.x.0 Format)
-- **Complete Repository Standardization**: Converted all version numbers to Semantic Versioning 2.0.0 format (x.x.0) throughout entire repository.
-- **Widget Files Renamed**: Renamed 63 widget version files from `vX.Y.html` to `vX.Y.0.html` format:
   - Concert Portfolio: 19 versions (v2.0.0 → v4.7.0)
   - Photojournalism Portfolio: 12 versions (v1.0.0 → v5.2.0)
   - Podcast Feed: 12 versions (v1.0.0 → v2.0.0)
   - Featured Portfolio: 6 versions (v1.0.0 → v1.5.0)
   - Nature, Event, Hero, Portrait, Navigation, Video: 14 versions
-- **Content Updates**: Updated version strings in 33+ widget HTML files (Version: headers) and 10+ script files (@version tags in manifest generators and watchers).
-- **Documentation Updates**: Updated 13 documentation files with corrected version references (READMEs, CHANGELOGs, standards guides).
-- **Automation Tools Created**:
   - `scripts/utils/standardize-versions.js`: Updates version strings in code content
   - `scripts/utils/rename-widget-versions.js`: Renames version files to x.x.0 format
   - Both support `--dry-run` mode for safe previewing
-- **npm Scripts Added**:
   - `versions:standardize`: Run version content updates
   - `versions:check`: Preview version content changes (dry-run)
   - `versions:rename`: Run file renaming
   - `versions:rename-check`: Preview file renames (dry-run)
-- **Comprehensive Documentation**: Created `docs/standards/version-standardization-guide.md` with format rules, semantic versioning guidelines, widget-specific standards, git tagging conventions, and troubleshooting.
-- **Lessons Learned Documentation**: Created `docs/standards/version-standardization-lessons.md` documenting automation strategies, dry-run patterns, regex techniques, git rename tracking, and reusable patterns for future standardizations.
 
 ### 2025-11-24
-- **Manifest webhook & CI improvements**: Added a learned note (`docs/learned/manifest-webhook-integration.md`) documenting the manifest webhook integration, composite action `/.github/actions/notify-manifest-webhook`, CI workflow consolidation, secret naming conventions, local testing tips and next steps for CI smoke testing.
-- **Benefits**: Fixes dropdown sorting issues (v1.10.0 now properly sorts after v1.9.0), ensures professional Semantic Versioning compliance, provides consistency across repository, and includes automation tools for future maintenance.
 
 ### SEO Automation & Workflow Enhancements
 - **Enhanced SEO Scripts**: Major improvements to `scripts/seo/generate-sitemap.js` and `scripts/seo/generate-structured-data.js`:
@@ -41,6 +31,10 @@
 - **AI Preflight Enhancements**: Updated `scripts/utils/ai-instructions-preflight.js` with improved validation and context checks (87 additional lines).
 
 ### Docs/Meta
+ - 2025-12-06
+   - Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/_archived/; not referenced by npm scripts or code).
+   - Updated .gitignore to exclude scripts/.welcome-state.json (prevents local state file from being committed).
+   - Confirmed all scripts/ subfolders have up-to-date README files; no missing documentation in key folders.
 - Updated `.github/copilot-instructions.md` Recent updates section with comprehensive version standardization entry documenting problem, solution, implementation details, key lessons learned, and future maintenance guidance.
 
 ## 2025-11-03
