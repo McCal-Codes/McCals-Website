@@ -1,0 +1,52 @@
+# McCal API - Cloudflare Worker Configuration
+# 
+# Before deploying:
+# 1. Create KV namespace: wrangler kv:namespace create "MCCAL_KV"
+# 2. Update kv_namespaces.id with your namespace ID
+# 3. Set secrets: wrangler secret put WEBHOOK_SECRET
+# 4. Set secrets: wrangler secret put BLOG_JWT_SECRET
+# 5. Set secrets: wrangler secret put BLOG_AUTHORS
+
+name = "mccal-api"
+main = "complete-worker.js"
+compatibility_date = "2024-01-01"
+
+# KV Namespace for rate limiting and blog storage
+# Replace 'your_kv_namespace_id' with actual ID from: wrangler kv:namespace create "MCCAL_KV"
+kv_namespaces = [
+  { binding = "MCCAL_KV", id = "your_kv_namespace_id" }
+]
+
+# Environment variables (non-sensitive)
+[vars]
+ALLOWED_ORIGINS = "https://mcc-cal.com,https://*.mcc-cal.com,http://localhost:*"
+MANIFEST_BASE_URL = "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main"
+
+# Routes - Configure custom domain mapping
+# Uncomment and update zone_name after verifying domain in Cloudflare
+# routes = [
+#   { pattern = "mcc-cal.com/api/*", zone_name = "mcc-cal.com" }
+# ]
+
+# Secrets (set with wrangler secret put)
+# WEBHOOK_SECRET - Secret for webhook authentication
+# BLOG_JWT_SECRET - Secret for JWT token signing
+# BLOG_AUTHORS - JSON array of author credentials
+
+# [env.production]
+# name = "mccal-api-production"
+# kv_namespaces = [
+#   { binding = "MCCAL_KV", id = "your_production_kv_id" }
+# ]
+# routes = [
+#   { pattern = "mcc-cal.com/api/*", zone_name = "mcc-cal.com" }
+# ]
+
+# [env.staging]
+# name = "mccal-api-staging"
+# kv_namespaces = [
+#   { binding = "MCCAL_KV", id = "your_staging_kv_id", preview_id = "your_preview_kv_id" }
+# ]
+# routes = [
+#   { pattern = "staging.mcc-cal.com/api/*", zone_name = "mcc-cal.com" }
+# ]
