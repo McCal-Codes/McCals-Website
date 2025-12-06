@@ -1,116 +1,179 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { addChangelogEntry } from '../../utils/changelogTracker';
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { reloadWidget } from '@/utils/widgetHotReload';
 
 interface WidgetEmbedProps {
-  /** Widget folder name (e.g., 'photojournalism-portfolio') */
   widget: string;
-  /** Widget version file (e.g., 'v5.2.0-performance-optimized.html') */
-  version: string;
-  /** Additional className for wrapper div */
+  version?: string;
+  category?: string;
+  style?: React.CSSProperties;
   className?: string;
+  onLoad?: () => void;
+  onError?: (error: Error) => void;
 }
 
 /**
- * WidgetEmbed: Loads and renders actual production widget HTML directly
- * - During development: Loads from local API endpoint (watches for file changes)
- * - In production: Loads from GitHub raw content (ensures consistent deployment)
- * Automatically tracks widget views in the changelog
- * Enables changelog modal functionality from the widget's version indicator
+ * WidgetEmbed Component
  * 
- * Usage: <WidgetEmbed widget="photojournalism-portfolio" version="v5.2.0-performance-optimized.html" />
+ * Dynamically loads and embeds widget HTML based on environment:
+ * - Development: Serves from /api/widgets/* (local filesystem, hot reload)
+ * - Production: Serves from GitHub raw content (cached, versioned)
+ * 
+ * Supports:
+ * - Auto-version detection (if version not specified)
+ * - Categorical widget organization (portfolios/, _navigation/, etc.)
+ * - Debug mode with console logs
+ * - Custom styling and error handling
+ * 
+ * Usage:
+ * ```tsx
+ * <WidgetEmbed widget="concert-portfolio" category="portfolios" />
+ * <WidgetEmbed widget="about" category="_content" version="v2.1.0.html" />
+ * <WidgetEmbed widget="site-navigation" category="_navigation" />
+ * ```
  */
-const WidgetEmbed: React.FC<WidgetEmbedProps> = ({ widget, version, className = '' }) => {
+export function WidgetEmbed({
+  widget,
+  version,
+  category,
+  style,
+  className,
+  onLoad,
+  onError,
+}: WidgetEmbedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const loadedRef = useRef<boolean>(false);
-  const [isDev] = useState(() => typeof window !== 'undefined' && window.location.hostname === 'localhost');
+  const isDev = typeof window !== 'undefined' && /localhost|127\.0\.0\.1/.test(window.location.hostname);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Avoid loading the same widget twice
-    if (loadedRef.current) return;
-    loadedRef.current = true;
-
-    // Track widget view in changelog
-    addChangelogEntry(widget, version, 'view');
-
-    // Determine widget URL based on environment
-    // Dev: Load from local API proxy (picks up file changes automatically)
-    // Prod: Load from GitHub (frozen version for consistency)
-    const widgetUrl = isDev
-      ? `/api/widgets/${widget}/${version}`
-      : `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/widgets/${widget}/versions/${version}`;
-
-    // Fetch and inject the widget HTML
     const loadWidget = async () => {
       try {
-        const response = await fetch(widgetUrl, {
-          // Disable caching in dev mode so file updates are picked up immediately
-          ...(isDev && { cache: 'no-store' }),
-        });
-        if (!response.ok) throw new Error(`Failed to load widget: ${response.statusText}`);
-        const html = await response.text();
+        // Build API path
+        let apiPath = '/api/widgets';
+        if (category) {
+          apiPath += `/${category}`;
+        }
+        apiPath += `/${widget}`;
+        if (version) {
+          apiPath += `/${version}`;
+        }
 
-        // Clear container and set HTML
-        containerRef.current!.innerHTML = html;
+        if (isDev) {
+          // Development: Load from API endpoint
+          if (process.env.NODE_ENV !== 'production') {
+            console.log(`[WidgetEmbed] Loading from API: ${apiPath}`);
+          }
 
-        // Re-execute any scripts in the injected HTML (critical for widget functionality)
-        const scripts = containerRef.current!.querySelectorAll('script');
-        scripts.forEach((oldScript) => {
-          const newScript = document.createElement('script');
-          if (oldScript.textContent) {
-            newScript.textContent = oldScript.textContent;
-          } else if (oldScript.src) {
-            newScript.src = oldScript.src;
-            newScript.async = true;
-          }
-          newScript.type = oldScript.type || 'text/javascript';
-          document.body.appendChild(newScript);
-        });
+          const response = await fetch(apiPath, {
+            cache: 'no-store',
+          });
 
-        // Ensure the widget's changelog functions are available globally
-        // This allows the version indicator click handler to work
-        if (typeof window !== 'undefined') {
-          // If the widget defines showChangelog/hideChangelog, they'll be in the script
-          // If not, define fallback functions
-          if (!window.showChangelog) {
-            (window as any).showChangelog = () => {
-              const modal = containerRef.current?.querySelector('.changelog-modal');
-              if (modal) {
-                modal.classList.add('active');
-                modal.setAttribute('aria-hidden', 'false');
-              }
-            };
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: response.statusText }));
+            throw new Error(
+              `Failed to load widget: ${response.status} ${response.statusText}. ${errorData.error || ''}`
+            );
           }
-          if (!window.hideChangelog) {
-            (window as any).hideChangelog = () => {
-              const modal = containerRef.current?.querySelector('.changelog-modal');
-              if (modal) {
-                modal.classList.remove('active');
-                modal.setAttribute('aria-hidden', 'true');
-              }
-            };
+
+          const html = await response.text();
+
+          if (!containerRef.current) return;
+
+          // Inject HTML
+          containerRef.current.innerHTML = html;
+
+          // Re-execute scripts (widget initialization)
+          const scripts = containerRef.current.querySelectorAll('script');
+          scripts.forEach((script) => {
+            const newScript = document.createElement('script');
+
+            // Copy attributes
+            Array.from(script.attributes).forEach((attr) => {
+              newScript.setAttribute(attr.name, attr.value);
+            });
+
+            // Copy content
+            if (script.textContent) {
+              newScript.textContent = script.textContent;
+            }
+
+            // Replace the old script
+            script.parentNode?.replaceChild(newScript, script);
+          });
+
+          if (process.env.NODE_ENV !== 'production') {
+            console.log(`[WidgetEmbed] Widget loaded successfully: ${widget}`);
           }
+
+          onLoad?.();
+        } else {
+          // Production: Load from GitHub
+          const owner = 'McCal-Codes';
+          const repo = 'McCals-Website';
+          const ref = 'main';
+
+          // Build GitHub path
+          let githubPath = `src/widgets`;
+          if (category) {
+            githubPath += `/${category}`;
+          }
+          githubPath += `/${widget}/versions/${version || 'latest'}`;
+
+          const githubUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${githubPath}`;
+
+          if (process.env.NODE_ENV !== 'production') {
+            console.log(`[WidgetEmbed] Loading from GitHub: ${githubUrl}`);
+          }
+
+          const response = await fetch(githubUrl);
+
+          if (!response.ok) {
+            throw new Error(`Failed to load widget from GitHub: ${response.statusText}`);
+          }
+
+          const html = await response.text();
+
+          if (!containerRef.current) return;
+
+          // Inject HTML
+          containerRef.current.innerHTML = html;
+
+          // Re-execute scripts
+          const scripts = containerRef.current.querySelectorAll('script');
+          scripts.forEach((script) => {
+            const newScript = document.createElement('script');
+
+            Array.from(script.attributes).forEach((attr) => {
+              newScript.setAttribute(attr.name, attr.value);
+            });
+
+            if (script.textContent) {
+              newScript.textContent = script.textContent;
+            }
+
+            script.parentNode?.replaceChild(newScript, script);
+          });
+
+          onLoad?.();
         }
       } catch (error) {
-        console.error('Error loading widget:', error);
+        console.error('[WidgetEmbed] Error loading widget:', error);
+        const err = error instanceof Error ? error : new Error(String(error));
+        onError?.(err);
+
         if (containerRef.current) {
-          containerRef.current.innerHTML = `<div style="padding: 20px; color: #999; text-align: center;">Failed to load widget: ${widget}</div>`;
+          containerRef.current.innerHTML = `<div style="color: red; padding: 20px; font-family: monospace; background: #fee; border: 1px solid #fcc; border-radius: 4px;">
+            <strong>Error loading widget:</strong><br />
+            ${err.message}
+          </div>`;
         }
       }
     };
 
     loadWidget();
+  }, [widget, version, category, isDev, onLoad, onError]);
 
-    // Cleanup
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = '';
-      }
-    };
-  }, [widget, version, isDev]);
-
-  return <div ref={containerRef} className={className} />;
-};
-
-export default WidgetEmbed;
+  return <div ref={containerRef} style={style} className={className} />;
+}
