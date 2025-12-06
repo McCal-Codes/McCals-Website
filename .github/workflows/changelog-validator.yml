@@ -1,0 +1,79 @@
+name: Changelog Validator
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths: ["**"]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  require-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect missing CHANGELOG
+        id: detect
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          CHANGED=$(git diff --name-only "$BASE" "$HEAD")
+          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          # Files that do NOT require changelog entries (docs-only/meta tweaks)
+          EXEMPT_REGEX="^(CHANGELOG\.md|docs/CHANGELOG\.md|\.github/ISSUE_TEMPLATE/|\.github/PULL_REQUEST_TEMPLATE\.md|\.github/.*instructions.*\.md|updates/|docs/standards/.*|docs/integrations/.*|docs/widgets/.*|docs/README\.md|README\.md|LICENSE|\.gitignore|\.vscode/|\.github/workflows/validate-workflows\.yml)$"
+          NEEDS_CHANGELOG=false
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            if echo "$file" | grep -Eq "$EXEMPT_REGEX"; then
+              continue
+            fi
+            NEEDS_CHANGELOG=true
+            break
+          done <<< "$CHANGED"
+          echo "needs_changelog=$NEEDS_CHANGELOG" >> $GITHUB_OUTPUT
+
+      - name: Enforce changelog
+        if: steps.detect.outputs.needs_changelog == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changed = `${{ steps.detect.outputs.changed_files }}`.split(/\r?\n/).filter(Boolean);
+            const hasChangelog = changed.some(f => f === 'CHANGELOG.md' || f === 'docs/CHANGELOG.md');
+            if (hasChangelog) {
+              core.info('Changelog present.');
+              return;
+            }
+            const { data: labels } = await github.issues.listLabelsOnIssue({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const bypass = labels.some(l => ['skip-changelog', 'docs-acknowledged'].includes(l.name));
+            if (bypass) {
+              core.info('Bypass label present (skip-changelog/docs-acknowledged).');
+              return;
+            }
+            const note = [
+              'This PR changes files that typically require a CHANGELOG entry, but no changelog file was modified.',
+              '',
+              'Please add a brief entry to `CHANGELOG.md` (Docs/Meta or relevant date section).',
+              'To override intentionally, add label `skip-changelog` or `docs-acknowledged`.'
+            ].join('\n');
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `### 📝 CHANGELOG required\n\n${note}`,
+            });
+            core.setFailed('Changelog missing for this PR.');
