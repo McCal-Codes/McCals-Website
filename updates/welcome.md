@@ -1,20 +1,14 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `bd365c6a` — 0 seconds ago
-> feat: Implement automatic changelog tracking and widget embedding system
+**Last commit**: `f6a0767a` — 0 seconds ago
+> feat: Update welcome state and cache files for changelog tracking and widget embedding
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
-- sites/dev.mcc-cal.com/.next/cache/.previewinfo
-- sites/dev.mcc-cal.com/.next/cache/.rscinfo
-- sites/dev.mcc-cal.com/.next/cache/.tsbuildinfo
-- sites/dev.mcc-cal.com/.next/cache/eslint/.cache_26v05r
-- sites/dev.mcc-cal.com/.next/cache/next-devtools-config.json
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development-fallback/0.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development-fallback/index.pack.gz
 - sites/dev.mcc-cal.com/.next/cache/webpack/client-development/0.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/1.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/1.pack.gz_
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/10.pack.gz
-- …and 108 more
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/index.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/0.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/0.pack.gz_
+- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/index.pack.gz
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **72** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)

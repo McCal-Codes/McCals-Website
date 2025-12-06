@@ -1,4 +1,4 @@
 {
-  "lastHash": "bd365c6a",
-  "lastMessage": "feat: Implement automatic changelog tracking and widget embedding system\n\n- Added `ChangelogViewer` component to display tracked widget views and updates.\n- Introduced `WidgetEmbed` component to load production widget HTML from GitHub.\n- Created `changelogTracker` utility for managing changelog entries in localStorage.\n- Updated widget configuration mapping in `widgetConfig.ts` for easier management.\n- Enhanced styling and functionality for changelog exports (text and JSON).\n- Fixed header-to-content spacing issue in global styles.\n- Documented changes and usage in `CHANGELOG-TRACKING.md` and `WIDGET-EMBED-GUIDE.md`.\n\\n\\nAuthor: mccal"
+  "lastHash": "f6a0767a",
+  "lastMessage": "feat: Update welcome state and cache files for changelog tracking and widget embedding\n\\n\\nAuthor: mccal"
 }

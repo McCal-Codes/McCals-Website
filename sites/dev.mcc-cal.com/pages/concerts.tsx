@@ -1,5 +1,6 @@
 import Layout from '../components/Layout/Layout';
 import WidgetEmbed from '../components/widgets/WidgetEmbed';
+import WidgetReloader from '../components/widgets/WidgetReloader';
 import { getWidgetConfig } from '../utils/widgetConfig';
 
 const ConcertsPage = () => {
@@ -9,6 +10,7 @@ const ConcertsPage = () => {
   return (
     <Layout>
       <WidgetEmbed widget={config.widget} version={config.version} />
+      <WidgetReloader widget={config.widget} version={config.version} />
     </Layout>
   );
 };
