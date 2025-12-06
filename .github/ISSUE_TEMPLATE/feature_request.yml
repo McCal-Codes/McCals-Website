@@ -1,0 +1,52 @@
+name: "Feature request"
+description: "Propose a new feature or enhancement"
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us scope the work quickly by filling out the details below.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: "One or two sentences describing the idea"
+    validations:
+      required: true
+
+  - type: textarea
+    id: value
+    attributes:
+      label: User value / goal
+      description: Who benefits and how?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Suggested scope
+      description: Pages/widgets/scripts to touch; data needed; success criteria
+      placeholder: "Update widget vX.Y, adjust manifest fields, add tests, etc."
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks / constraints
+      placeholder: "Backward compatibility, SEO, performance budgets, release timing"
+
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Readiness
+      options:
+        - label: I can help test
+        - label: A design/mockup exists
+        - label: No breaking changes expected
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: Additional context
+      placeholder: "Links, screenshots, related issues"
