@@ -1,18 +1,12 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `37032d87` — 0 seconds ago
-> feat: complete full-stack integration suite (Options 1-5)
+**Last commit**: `d5466695` — 0 seconds ago
+> feat: update welcome state and add admin dashboard widget v1.0.0 with health checks
 ## 🔄 Changes in last commit
-- .github/workflows/publish-manifests-cdn.yml
-- docs/workflows/GITHUB-ACTIONS-CLOUDFLARE-INTEGRATION.md
-- docs/workflows/PERFORMANCE-MONITORING.md
 - scripts/.welcome-state.json
-- scripts/utils/cache-analyzer.js
-- scripts/utils/health-check.js
-- sites/self-hosted-nextjs/.env.example
-- sites/self-hosted-nextjs/README.md
-- sites/self-hosted-nextjs/pages/concerts.tsx
-- sites/self-hosted-nextjs/utils/api-client.ts
-- src/widgets/_admin/blog-admin/ENHANCEMENT-PLAN.md
+- src/api
+- src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html
+- src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html
+- tools/cloudflare/complete-worker.js
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **71** | Done: **5**
