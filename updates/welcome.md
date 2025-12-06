@@ -1,8 +1,14 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `9a99a484` — 0 seconds ago
-> update: change last commit details to batch3: nature + manifests + misc
+**Last commit**: `b44fd950` — 0 seconds ago
+> update: refresh last commit details and update welcome message
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
+- src/images/Portfolios/Concert/The Head Trips/August 2025/250820_Haven Block Party_CAL2937.jpg
+- src/images/Portfolios/Nature/Landscapes/West Virginia/barn.jpg
+- src/images/Portfolios/Nature/Landscapes/West Virginia/seneca-rocks-night.jpg
+- src/images/Portfolios/Nature/Landscapes/West Virginia/tractor.jpg
+- src/images/Portfolios/Nature/Wildlife/Birds/Steller's Sea Eagle/230204_McCal__CAL3164.jpg
+- src/images/Portfolios/Portrait/portrait-manifest.json
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **67** | Done: **53**
