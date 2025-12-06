@@ -12,14 +12,13 @@
 #    - BLOG_AUTHORS
 
 name = "mccal-api"
-main = "complete-worker.js"
+main = "worker.js"
 compatibility_date = "2024-01-01"
-account_id = "" # Set to your Cloudflare Account ID
 
 # KV Namespace for rate limiting and blog storage
 # Get ID from: wrangler kv:namespace create "MCCAL_KV"
 kv_namespaces = [
-  { binding = "MCCAL_KV", id = "YOUR_KV_NAMESPACE_ID_HERE" }
+  { binding = "MCCAL_KV", id = "a93e7efa3f88410fa42b90fec951daff" }
 ]
 
 # Routes - API requests to api.mcc-cal.com route to this Worker

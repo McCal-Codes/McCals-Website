@@ -1,8 +1,12 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `7e2807ec` — 0 seconds ago
-> fix: update blog admin widget to use Cloudflare API endpoint (api.mcc-cal.com)
+**Last commit**: `006b791e` — 0 seconds ago
+> docs: add Cloudflare subdomain setup guide and update worker configuration
 ## 🔄 Changes in last commit
-- src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html
+- docs/SESSION-SUMMARY-2025-12-06.md
+- docs/integrations/CLOUDFLARE-SUBDOMAIN-SETUP.md
+- scripts/.welcome-state.json
+- tools/cloudflare/wrangler.toml
+- updates/welcome.md
 ## 📋 Your checklist status
 - Open: **71** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
