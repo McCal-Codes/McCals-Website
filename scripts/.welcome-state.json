@@ -1,4 +1,4 @@
 {
-  "lastHash": "80829d72",
-  "lastMessage": "feat: add custom _document.tsx for improved SEO and font integration\n\n- Implemented a custom Document component in _document.tsx to enhance SEO with meta tags for description and author.\n- Included preconnect links for Google Fonts and added Libre Baskerville and Inter font families for branding consistency.\n- Set the default language to English and applied a dark theme to the body.\n- Added new webpack hot-update files to support live reloading during development.\n\\n\\nAuthor: mccal"
+  "lastHash": "7c35cbdb",
+  "lastMessage": "feat: Refactor routing and validation for Next.js self-hosted site\n\n- Updated routes definition to remove specific page routes, setting them to 'never'.\n- Removed validation checks for various pages in the validator file.\n- Deleted unused CSS styles for the concert widget.\n- Updated serve-select.html to reflect changes in the self-hosted site structure and links.\n- Modified todo list to indicate the new site structure under sites/dev.mcc-cal.com.\n- Updated welcome message to reflect the latest commit and changes in the self-hosted site.\n\\n\\nAuthor: mccal"
 }

@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `80829d72` — 0 seconds ago
-> feat: add custom _document.tsx for improved SEO and font integration
+**Last commit**: `7c35cbdb` — 0 seconds ago
+> feat: Refactor routing and validation for Next.js self-hosted site
 ## 🔄 Changes in last commit
+- README.md
+- dev-server.js
+- package.json
 - scripts/.welcome-state.json
-- sites/self-hosted-nextjs/.next/BUILD_ID
-- sites/self-hosted-nextjs/.next/build-manifest.json
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/1.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/10.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/12.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/13.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/14.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/2.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/3.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/4.pack.gz
-- sites/self-hosted-nextjs/.next/cache/webpack/client-development/index.pack.gz
-- …and 140 more
+- serve-select.html
+- sites/dev.mcc-cal.com/.env.example
+- sites/dev.mcc-cal.com/.next/build-manifest.json
+- sites/dev.mcc-cal.com/.next/cache/.previewinfo
+- sites/dev.mcc-cal.com/.next/cache/.rscinfo
+- sites/dev.mcc-cal.com/.next/cache/.tsbuildinfo
+- sites/dev.mcc-cal.com/.next/cache/eslint/.cache_26v05r
+- sites/dev.mcc-cal.com/.next/cache/next-devtools-config.json
+- …and 201 more
 ## 📋 Your checklist status
 - Open: **72** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
