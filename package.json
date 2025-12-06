@@ -139,13 +139,12 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --max-warnings=0",
+      "eslint --fix --max-warnings=0 --ignore-path .gitignore",
       "prettier --write"
     ],
     "*.{json,md,html,css,scss}": [
       "prettier --write"
-    ],
-    "!**/.next/**": []
+    ]
   },
   "dependencies": {
     "compression": "^1.8.1",
