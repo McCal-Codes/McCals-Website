@@ -2,6 +2,8 @@
 
 This repository hosts the development workspace for McCal Media's Squarespace widgets. It includes the widget source files, a local test site, automation scripts, and standards that keep contributions consistent and production-ready.
 
+**Start here:** [docs/ONBOARDING.md](docs/ONBOARDING.md) → [.github/copilot-instructions.md](.github/copilot-instructions.md) → [docs/standards/workspace-organization.md](docs/standards/workspace-organization.md) → [docs/repo-improvement-plan.md](docs/repo-improvement-plan.md)
+
 Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/standards/security-organization-prompt.md` or the quick `docs/standards/security-organization-checklist.md`.
 
 ## Getting Started
@@ -176,6 +178,16 @@ Common scripts:
 - `npm run repo:health` — Repository health checks
 - `npm run lint` — ESLint
 - `npm run test` — Playwright tests
+
+Quick task aliases:
+
+| Script | What it does |
+| --- | --- |
+| `npm run ai:preflight:short` | Fast context/standards preflight (no writes) |
+| `npm run dev` | Serve local demo site at http://localhost:3000 |
+| `npm run validate:widgets` | Validate widget HTML structure (no writes) |
+| `npm run manifest:dry-run` | Dry-run manifest generation (no writes) |
+| `npm run repo:health` | Clean + preflight + large-file scan |
 
 ## Contributing
 

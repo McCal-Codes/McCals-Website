@@ -9,6 +9,8 @@
 - [date-naming.md](./date-naming.md)
 # Workspace Organization, Validation & Scripts — Standardization
 
+**Quick links:** [Onboarding](../ONBOARDING.md) · [Widget reference](./widget-reference.md) · [Widget standards](./widget-standards.md) · [Performance standards](./performance-standards.md) · [Image SEO](./image-seo-standards.md)
+
 ## Purpose
 
 This document combines all standards for scripts folder organization, workspace validation, and preflight/afterflight checklists. It is the single source of truth for maintaining an efficient, organized, and well-documented workspace.
