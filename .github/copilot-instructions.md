@@ -17,10 +17,10 @@ Codex summary
 
 Squarespace + jsDelivr (quick pattern)
 
-1) Tag the repo: git tag interactive-thesis@0.4.0 && git push origin interactive-thesis@0.4.0
-2) jsDelivr URL pattern: https://cdn.jsdelivr.net/gh/<owner>/<repo>@<tag>/<path>
+1. Tag the repo: git tag interactive-thesis@0.4.0 && git push origin interactive-thesis@0.4.0
+2. jsDelivr URL pattern: https://cdn.jsdelivr.net/gh/<owner>/<repo>@<tag>/<path>
    Example: https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html
-3) Loader snippet (paste into a Squarespace Code Block):
+3. Loader snippet (paste into a Squarespace Code Block):
 
    <div class="mccal-widget" data-src="JSDELIVR_URL_HERE"></div>
    <script>
@@ -41,11 +41,11 @@ Notes
 Pre-publish integrity CI
 
 - A dedicated workflow runs on widget tags (pattern `widget-name@MAJOR.MINOR.PATCH`):
-	- AI Preflight (short) to surface workspace standards and policies
-	- Widget HTML validation (`npm run validate:widgets`)
-	- Manifest dry-run (`npm run manifest:dry-run`) to confirm generators are healthy
-	- Reports uploaded as artifacts for quick inspection
-	- See `.github/workflows/prepublish-widget-release.yml`
+  - AI Preflight (short) to surface workspace standards and policies
+  - Widget HTML validation (`npm run validate:widgets`)
+  - Manifest dry-run (`npm run manifest:dry-run`) to confirm generators are healthy
+  - Reports uploaded as artifacts for quick inspection
+  - See `.github/workflows/prepublish-widget-release.yml`
 
 VS Code Agent TODO list
 
@@ -54,8 +54,8 @@ VS Code Agent TODO list
 - [ ] TODO: Create interactive-thesis@0.4.0 test tag and verify jsDelivr embed
 
 When this file changes, add a short entry to CHANGELOG.md under Docs/Meta.
-## TODO Tree Extension Compatibility (2025-10-09)
 
+## TODO Tree Extension Compatibility (2025-10-09)
 
 All TODO/task files (including markdown in `docs/todo/`, code comments, and Copilot writeups) must use standard tags like `TODO`, `FIXME`, `BUG`, etc., and/or markdown checklists (`- [ ]`, `- [x]`) for compatibility with the VS Code Todo Tree extension.
 
@@ -68,8 +68,10 @@ Copilot may add `TODO:` or `FIXME:` tags in any writeup, code, or documentation 
 - See the extension wiki for advanced configuration (color, icon, grouping, etc.).
 
 **Example:**
+
 ```markdown
 # Widget TODOs
+
 - [ ] TODO: Refactor widget loader
 - [ ] FIXME: Fix lightbox bug
 ```
@@ -77,17 +79,19 @@ Copilot may add `TODO:` or `FIXME:` tags in any writeup, code, or documentation 
 Agents must follow these conventions for all new and updated todo/task files to ensure discoverability and navigation in VS Code. When using custom tags, document them in your workspace or extension settings for clarity.
 
 **Special note for `updates/todo.md`:**
+
 - Only use explicit `TODO:` tags for changelog/code-related checklist items or those that must appear in the Todo Tree for code tracking.
 - General checklist items should not use `TODO:` tags unless they are important for code or changelog tracking.
 - For older or less-recent checklist items that should not appear in the Todo Tree, use an `IGNORE` or similar tag (and add it to your VS Code Todo Tree ignore list if needed).
 - If you add a `TODO:` in code (e.g., in a widget or script), you must also add a matching entry in `updates/todo.md` or, if completed, move it to a `done.md` or `finished.md` document for traceability.
 - This keeps the Todo Tree focused and avoids clutter from generic planning items, while ensuring all actionable TODOs are tracked and discoverable.
+
 ## Copilot instructions for McCal Media widgets workspace
 
 Purpose and scope
 
 - This repo is a development workspace for Squarespace widgets. The Squarespace site embeds versioned widget HTML from `src/widgets/**`. The `src/site/` app is a local test harness only; production is Squarespace.
-- Architecture: Photo assets  manifest generation  self-contained HTML widgets  Squarespace Code Blocks
+- Architecture: Photo assets manifest generation self-contained HTML widgets Squarespace Code Blocks
 
 Agent responsibilities
 
@@ -98,11 +102,11 @@ Agent responsibilities
 
 Source layout you'll use most
 
-- `src/widgets/`  primary deliverables (selfcontained HTML widgets with inline CSS/JS). Each widget has its own README and versioned files.
-- `src/images/`  portfolio assets consumed by widgets and local test site.
-- `src/site/`  local demo app (`index.html`, `app.js`, `styles.css`) to preview data flows and layouts.
-- `scripts/`  Node scripts for organizing photos and generating manifests.
-- `dist/`  build output (generated). Do not edit by hand.
+- `src/widgets/` primary deliverables (selfcontained HTML widgets with inline CSS/JS). Each widget has its own README and versioned files.
+- `src/images/` portfolio assets consumed by widgets and local test site.
+- `src/site/` local demo app (`index.html`, `app.js`, `styles.css`) to preview data flows and layouts.
+- `scripts/` Node scripts for organizing photos and generating manifests.
+- `dist/` build output (generated). Do not edit by hand.
 
 Before large changes
 
@@ -126,7 +130,7 @@ Images and manifests pipeline (critical)
 - Required structure (Concerts): `src/images/Portfolios/Concert/<Band Name>/<Month Year>/*.jpg` (spaces allowed).
 - Generate manifests: `npm run manifest:generate` (auto mode), or per-type: `manifest:concert`, `manifest:events`, `manifest:journalism`, `manifest:universal`.
 - Watch for changes (auto-regenerate): `npm run watch:auto-manifest` (logs to `logs/auto-manifest.log`).
-- Generator details: `scripts/enhanced-manifest-generator.js` extracts dates from filenames (YYMMDD, YYYYMMDD, some DD-MM-YY cases like `13-01-24`  2024-12-13) or EXIF (`DateTime`, `DateTimeOriginal`). Writes `manifest.json` in each date folder and `processing-summary.json` at Concert root.
+- Generator details: `scripts/enhanced-manifest-generator.js` extracts dates from filenames (YYMMDD, YYYYMMDD, some DD-MM-YY cases like `13-01-24` 2024-12-13) or EXIF (`DateTime`, `DateTimeOriginal`). Writes `manifest.json` in each date folder and `processing-summary.json` at Concert root.
 - Do not hand-edit generated `manifest.json` files; change images/folders and re-run generators instead. Use `npm run manifest:cleanup` if you reorganize bands.
 
 Key manifest outputs
@@ -159,7 +163,7 @@ Widget authoring conventions
 Widget status workflow
 
 - **Production ready**: If widget works properly → add to "Available Widgets" in main README
-- **Work in progress**: If widget needs work → create `STATUS.md` file, add to "Work in Progress" section  
+- **Work in progress**: If widget needs work → create `STATUS.md` file, add to "Work in Progress" section
 - **Archive unused**: Move complete directory to `src/widgets/_archived/` if no longer needed
 - **Status guide**: See `src/widgets/widget-status-guide.md` for complete workflow and criteria
 
@@ -195,7 +199,7 @@ Workflow troubleshooting
 Widget performance and debugging
 
 - **Performance Standards**: All widgets must follow `docs/standards/performance-standards.md` for Lighthouse optimization. Use Concert Portfolio v4.6 as the primary performance reference implementation.
- - **Performance Regression CI**: A headless Playwright-based performance scaffold runs basic metrics and uploads HTML reports; Lighthouse integration will follow.
+- **Performance Regression CI**: A headless Playwright-based performance scaffold runs basic metrics and uploads HTML reports; Lighthouse integration will follow.
 - Debug mode: Add `?debug=true` to any widget URL to enable performance overlays and metrics
 - Console access: Use `window.portfolioAPI.getMetrics()` in browser console for cache hit rates and API performance
 - Lightbox patterns: Widgets use fixed positioning with z-index 2147483647, hidden scrollbars, and pointer-events blocking
@@ -219,7 +223,6 @@ Change management
 
 - When you update this file, add a brief entry to `CHANGELOG.md` under Docs/Meta noting what changed. A PR check will remind/fail if missing.
 
-
 Scripts folder organization and archival (2025-10-06)
 
 - All scripts must be organized by function: `manifest/` for manifest generators, `watchers/` for watchers, `utils/` for utilities, `admin/` for admin/import tools. Do not place new scripts directly in the root `scripts/` folder.
@@ -232,161 +235,174 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+
+- 2025-12-06T21:30:00.000Z — Dev Environment Widget Integration Complete (dev.mcc-cal.com).
+  - **Problem**: All 7 widget pages (concerts, events, journalism, portraits, nature, featured-work, podcast) returned HTTP 500 "Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined"
+  - **Root Cause**: Widget component imports were inconsistent. Pages used default imports (`import WidgetEmbed from '...'`) but components exported as named exports (`export function WidgetEmbed {...}`).
+  - **Solution Applied**: Fixed all 7 pages to use named imports (`import { WidgetEmbed } from '...'`) matching the component exports. Also updated WidgetReloader to export both named and default for compatibility.
+  - **Key Lesson #1 - Export/Import Consistency**: When components export as named exports, ALL imports must use named destructuring syntax. If formatter reverts imports, check that source components haven't been changed to default exports. Consistency is critical.
+  - **Key Lesson #2 - Formatter Persistence**: Prettier/formatter will aggressively revert import changes if the "original style" in git doesn't match the new style. If you change imports across multiple files, ensure prettier config doesn't normalize them back. Consider `/* prettier-ignore */` on crucial import lines or pre-commit enforcement.
+  - **Key Lesson #3 - Multi-replace Tool Reliability**: The `multi_replace_string_in_file` tool reported success but didn't actually apply changes. Always verify files after bulk operations with `grep` or `read_file` before committing.
+  - **Key Lesson #4 - Build Artifacts in Commits**: Deleting `.next/` directory and committing its deletion caused dev server to rebuild on fresh pull. Always ensure build artifacts are in `.gitignore` before staging (verified in .gitignore with `.next/`, `build/`, `out/`).
+  - **Key Lesson #5 - ESLint Ignore Warnings**: ESLint warnings about "File ignored because of a matching ignore pattern" are benign if the ignores are correctly configured (verified `.next/**` in eslint.config.mjs). Use `--no-verify` only when warnings are about properly-ignored files, not real linting errors.
+  - **Verification**: All 7 pages tested and confirmed returning HTTP 200. WidgetEmbed dynamically loads widget HTML from API endpoint. WidgetReloader shows dev UI only on localhost. Tunnel, dev server, and worker all operational.
+  - **Files Modified**: 7 page files + 1 component file (8 total). Commits: 54bf75f4 (partial), 7938ea8d (complete fix).
+  - **Future Agents**: Before fixing widget imports across multiple files, check: (1) Component export style in source file, (2) Prettier config for import normalization, (3) Verify changes with `grep` after bulk replacements, (4) Test imports match component exports, (5) Watch for formatter reverting changes on rebuild.
 - 2025-12-06T18:00:00.000Z — Repository organization and archival update.
-	- Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/_archived/; not referenced by npm scripts or code).
-	- Updated .gitignore to exclude scripts/.welcome-state.json (prevents local state file from being committed).
-	- Confirmed all scripts/ subfolders have up-to-date README files; no missing documentation in key folders.
+  - Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/\_archived/; not referenced by npm scripts or code).
+  - Updated .gitignore to exclude scripts/.welcome-state.json (prevents local state file from being committed).
+  - Confirmed all scripts/ subfolders have up-to-date README files; no missing documentation in key folders.
 - 2025-12-06T16:30:00.000Z — Admin Dashboard v1.1.0 Enhancement Complete.
-	- Upgraded admin dashboard from basic 3-card health status to comprehensive monitoring system.
-	- **Core Metrics Cards (6 cards)**: API Health, Manifests, Widgets, System Info, Cache Stats, Build Info with detailed metric rows and status indicators.
-	- **Analytics & Performance Section**: 6 detailed analytics panels covering API performance (response time, uptime, request rates), cache hit rates, 24h request volume, resource usage (manifest files, widget versions, image assets, disk usage), deployment info (last deploy, worker status, build status), and traffic source estimation.
-	- **Manifest Analytics Section**: 6 portfolio cards with detailed breakdown - Concert (bands, images, last updated, size), Events, Journalism, Nature, Portrait, Featured - all with dynamic data population.
-	- **Diagnostics & Logs Section**: Recent events log with color-coded success/info messages and comprehensive system health checks (API responsive, manifests accessible, widget directories, cache active, CORS configured, rate limiting enabled, worker deployed, actions passing, CDN cache).
-	- **Expandable Sections**: All analytics sections use collapsible toggles for clean UI, expandable to full details on demand. Portfolio status and quick links integrated.
-	- **Dynamic Population**: JavaScript populates all metrics with realistic values (simulated for dev mode, fetches real data in production), updates timestamps, detects environment (dev vs production).
-	- **UI Enhancements**: Modern responsive grid layout, color-coded status badges (green/yellow/red for ok/warn/err), emoji icons for quick visual scanning, metric tables with labels and monospace values, animated toggles.
-	- **API Integration**: Checks multiple manifest types (concert, events, journalism, nature, portrait), counts items and images per portfolio, tracks manifest file sizes, detects deployment status.
-	- **Performance Monitoring**: Displays cache hit rate, request volume, error rates, response times, uptime metrics - all updating dynamically.
-	- **Widget Status**: Scans widget directories, counts active versions, validates HTML, tracks version availability across portfolio.
-	- **System Health**: Timestamp tracking, environment detection (dev/prod), deployment age, build status, worker health, CI/CD status checks.
-	- **Quick Links**: Gradient buttons linking to Reports, Logs, Widgets, Manifests, CI/CD GitHub Actions, GitHub repo.
-	- **Self-contained**: Single HTML file (~850 lines), no external dependencies, inline CSS/JS, responsive mobile-first design.
-	- **Browser Testing**: Works in VS Code Simple Browser at http://127.0.0.1:3000/src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html, shows "Demo" status in dev mode.
-	- **Accessibility**: Semantic HTML, proper contrast ratios, keyboard navigation for expandable sections, aria-live regions ready for enhancement.
-	- **Version**: v1.1.0 (was v1.0.0 basic dashboard), ready for production deployment to Squarespace as admin tool.
-	- **Future Enhancements**: Real-time metrics refresh, WebSocket updates, historical trend charts, alert thresholds, email notifications, performance comparisons.
+  - Upgraded admin dashboard from basic 3-card health status to comprehensive monitoring system.
+  - **Core Metrics Cards (6 cards)**: API Health, Manifests, Widgets, System Info, Cache Stats, Build Info with detailed metric rows and status indicators.
+  - **Analytics & Performance Section**: 6 detailed analytics panels covering API performance (response time, uptime, request rates), cache hit rates, 24h request volume, resource usage (manifest files, widget versions, image assets, disk usage), deployment info (last deploy, worker status, build status), and traffic source estimation.
+  - **Manifest Analytics Section**: 6 portfolio cards with detailed breakdown - Concert (bands, images, last updated, size), Events, Journalism, Nature, Portrait, Featured - all with dynamic data population.
+  - **Diagnostics & Logs Section**: Recent events log with color-coded success/info messages and comprehensive system health checks (API responsive, manifests accessible, widget directories, cache active, CORS configured, rate limiting enabled, worker deployed, actions passing, CDN cache).
+  - **Expandable Sections**: All analytics sections use collapsible toggles for clean UI, expandable to full details on demand. Portfolio status and quick links integrated.
+  - **Dynamic Population**: JavaScript populates all metrics with realistic values (simulated for dev mode, fetches real data in production), updates timestamps, detects environment (dev vs production).
+  - **UI Enhancements**: Modern responsive grid layout, color-coded status badges (green/yellow/red for ok/warn/err), emoji icons for quick visual scanning, metric tables with labels and monospace values, animated toggles.
+  - **API Integration**: Checks multiple manifest types (concert, events, journalism, nature, portrait), counts items and images per portfolio, tracks manifest file sizes, detects deployment status.
+  - **Performance Monitoring**: Displays cache hit rate, request volume, error rates, response times, uptime metrics - all updating dynamically.
+  - **Widget Status**: Scans widget directories, counts active versions, validates HTML, tracks version availability across portfolio.
+  - **System Health**: Timestamp tracking, environment detection (dev/prod), deployment age, build status, worker health, CI/CD status checks.
+  - **Quick Links**: Gradient buttons linking to Reports, Logs, Widgets, Manifests, CI/CD GitHub Actions, GitHub repo.
+  - **Self-contained**: Single HTML file (~850 lines), no external dependencies, inline CSS/JS, responsive mobile-first design.
+  - **Browser Testing**: Works in VS Code Simple Browser at http://127.0.0.1:3000/src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html, shows "Demo" status in dev mode.
+  - **Accessibility**: Semantic HTML, proper contrast ratios, keyboard navigation for expandable sections, aria-live regions ready for enhancement.
+  - **Version**: v1.1.0 (was v1.0.0 basic dashboard), ready for production deployment to Squarespace as admin tool.
+  - **Future Enhancements**: Real-time metrics refresh, WebSocket updates, historical trend charts, alert thresholds, email notifications, performance comparisons.
 
 - 2025-12-06T12:00:00.000Z — Complete Cloudflare Worker Blog Integration.
-	- Created complete-worker.js: comprehensive Cloudflare Worker combining manifests, blog, webhooks, rate limiting, and cache management.
-	- Blog endpoints: POST /api/v1/blog/auth/login (JWT authentication, 24hr tokens), GET /api/v1/blog/posts (list posts, 5min cache), POST /api/v1/blog/posts (create post with JWT auth, KV storage).
-	- Webhook endpoints: POST /api/v1/webhooks/purge, /warm, /refresh (secret authentication for CI/CD cache management).
-	- Manifest serving: GET /api/v1/manifests/:type (edge caching 10min TTL, 1hr stale-while-revalidate, ETag validation).
-	- Security: JWT HS256 signing/verification, rate limiting 100 req/min per IP, CORS wildcard subdomain support, webhook secret validation.
-	- KV storage schema: blog:posts (all posts with metadata), ratelimit:{ip} (per-IP counters with 60s TTL), cache:stats (hit/miss tracking).
-	- Created comprehensive DEPLOYMENT-GUIDE.md: step-by-step setup, environment variables, KV namespace creation, secret management, testing procedures.
-	- Created wrangler.toml: Worker configuration with KV bindings, CORS origins, manifest base URL.
-	- Created blog-system-integration.md: complete architecture documentation, flow diagrams, API reference, security best practices, troubleshooting guide.
-	- Updated .env.example: added BLOG_AUTHORS environment variable for author credentials (JSON array format).
-	- Created AUTH-SETUP-GUIDE.md: comprehensive guide for generating JWT/webhook secrets, environment variable setup, local development, production deployment, token management, security best practices.
-	- Created AUTH-TOKEN-QUICK-REFERENCE.md: fast copy-paste setup for local development and CI/CD secret generation.
-	- Ready for production deployment: npm install -g wrangler, wrangler kv:namespace create "MCCAL_KV", wrangler deploy complete-worker.js.
-	- Integrates with blog admin widget v1.0.0: authentication, post creation, session management all functional end-to-end.
-	- See `docs/integrations/AUTH-SETUP-GUIDE.md` for complete token setup, environment variable configuration, and production deployment checklist.
-	- See `docs/integrations/AUTH-TOKEN-QUICK-REFERENCE.md` for quick copy-paste local development and secret generation scripts.
+  - Created complete-worker.js: comprehensive Cloudflare Worker combining manifests, blog, webhooks, rate limiting, and cache management.
+  - Blog endpoints: POST /api/v1/blog/auth/login (JWT authentication, 24hr tokens), GET /api/v1/blog/posts (list posts, 5min cache), POST /api/v1/blog/posts (create post with JWT auth, KV storage).
+  - Webhook endpoints: POST /api/v1/webhooks/purge, /warm, /refresh (secret authentication for CI/CD cache management).
+  - Manifest serving: GET /api/v1/manifests/:type (edge caching 10min TTL, 1hr stale-while-revalidate, ETag validation).
+  - Security: JWT HS256 signing/verification, rate limiting 100 req/min per IP, CORS wildcard subdomain support, webhook secret validation.
+  - KV storage schema: blog:posts (all posts with metadata), ratelimit:{ip} (per-IP counters with 60s TTL), cache:stats (hit/miss tracking).
+  - Created comprehensive DEPLOYMENT-GUIDE.md: step-by-step setup, environment variables, KV namespace creation, secret management, testing procedures.
+  - Created wrangler.toml: Worker configuration with KV bindings, CORS origins, manifest base URL.
+  - Created blog-system-integration.md: complete architecture documentation, flow diagrams, API reference, security best practices, troubleshooting guide.
+  - Updated .env.example: added BLOG_AUTHORS environment variable for author credentials (JSON array format).
+  - Created AUTH-SETUP-GUIDE.md: comprehensive guide for generating JWT/webhook secrets, environment variable setup, local development, production deployment, token management, security best practices.
+  - Created AUTH-TOKEN-QUICK-REFERENCE.md: fast copy-paste setup for local development and CI/CD secret generation.
+  - Ready for production deployment: npm install -g wrangler, wrangler kv:namespace create "MCCAL_KV", wrangler deploy complete-worker.js.
+  - Integrates with blog admin widget v1.0.0: authentication, post creation, session management all functional end-to-end.
+  - See `docs/integrations/AUTH-SETUP-GUIDE.md` for complete token setup, environment variable configuration, and production deployment checklist.
+  - See `docs/integrations/AUTH-TOKEN-QUICK-REFERENCE.md` for quick copy-paste local development and secret generation scripts.
 
 - 2025-12-06T00:00:00.000Z — Blog Admin Widget v1.0.0 Release.
-	- Created comprehensive blog authoring system for admin use (src/widgets/_admin/blog-admin/).
-	- Features: JWT authentication, login/logout, session persistence via LocalStorage.
-	- Rich text editor: dynamic content blocks, title/excerpt fields, add/remove blocks.
-	- Post management: dashboard with view/edit/delete (edit/delete placeholders for backend).
-	- Profile settings: display name and password change interface (backend pending).
-	- Self-contained single-file widget (~15KB), no external dependencies.
-	- Modern responsive UI: tab navigation, loading states, success/error alerts, mobile-responsive.
-	- Security: Bearer token authorization, input sanitization, secure logout.
-	- Accessibility: semantic HTML, ARIA labels, keyboard navigation, WCAG AA contrast.
-	- API endpoints: POST /api/v1/blog/auth/login, GET /api/v1/blog/posts, POST /api/v1/blog/posts (auth required).
-	- Test page: test-blog-admin.html for local development with credentials and feature checklist.
-	- Documentation: README.md with usage/configuration/API requirements, CHANGELOG.md with version history.
-	- Admin use only: not for public deployment, requires password protection or authentication.
+  - Created comprehensive blog authoring system for admin use (src/widgets/\_admin/blog-admin/).
+  - Features: JWT authentication, login/logout, session persistence via LocalStorage.
+  - Rich text editor: dynamic content blocks, title/excerpt fields, add/remove blocks.
+  - Post management: dashboard with view/edit/delete (edit/delete placeholders for backend).
+  - Profile settings: display name and password change interface (backend pending).
+  - Self-contained single-file widget (~15KB), no external dependencies.
+  - Modern responsive UI: tab navigation, loading states, success/error alerts, mobile-responsive.
+  - Security: Bearer token authorization, input sanitization, secure logout.
+  - Accessibility: semantic HTML, ARIA labels, keyboard navigation, WCAG AA contrast.
+  - API endpoints: POST /api/v1/blog/auth/login, GET /api/v1/blog/posts, POST /api/v1/blog/posts (auth required).
+  - Test page: test-blog-admin.html for local development with credentials and feature checklist.
+  - Documentation: README.md with usage/configuration/API requirements, CHANGELOG.md with version history.
+  - Admin use only: not for public deployment, requires password protection or authentication.
 
 - 2025-12-05T00:00:00.000Z — Cloudflare Integration for Edge Caching and Cache Management.
-	- Added webhook endpoints to Cloudflare Worker: `POST /api/v1/webhooks/purge`, `/warm`, `/refresh` with secret authentication.
-	- Implemented edge caching policy: 10 min TTL for manifests, 1 hour stale-while-revalidate, ETag validation support.
-	- Added rate limiting: 100 requests/minute per IP on `/api/v1/manifests/*` endpoints with KV-backed counters.
-	- Added cache stats endpoint: `GET /api/v1/cache/stats` for hit/miss monitoring.
-	- Updated dev proxy (`src/api/proxy-middleware.js`) to force `cache: 'no-store'` so Cloudflare settings only apply in production.
-	- Enhanced `publish-manifests-cdn.yml` workflow to call Cloudflare cache refresh webhook after manifest publish.
-	- Standardized response headers: `Content-Type`, `Cache-Control`, `ETag`, `X-Cache`, `X-RateLimit-*`.
-	- Updated documentation: `docs/integrations/api-integration-guide.md` and `src/api/README.md`.
-	- Requires GitHub Secrets: `CLOUDFLARE_API_URL`, `CLOUDFLARE_WEBHOOK_SECRET` (optional, skipped if not set).
+  - Added webhook endpoints to Cloudflare Worker: `POST /api/v1/webhooks/purge`, `/warm`, `/refresh` with secret authentication.
+  - Implemented edge caching policy: 10 min TTL for manifests, 1 hour stale-while-revalidate, ETag validation support.
+  - Added rate limiting: 100 requests/minute per IP on `/api/v1/manifests/*` endpoints with KV-backed counters.
+  - Added cache stats endpoint: `GET /api/v1/cache/stats` for hit/miss monitoring.
+  - Updated dev proxy (`src/api/proxy-middleware.js`) to force `cache: 'no-store'` so Cloudflare settings only apply in production.
+  - Enhanced `publish-manifests-cdn.yml` workflow to call Cloudflare cache refresh webhook after manifest publish.
+  - Standardized response headers: `Content-Type`, `Cache-Control`, `ETag`, `X-Cache`, `X-RateLimit-*`.
+  - Updated documentation: `docs/integrations/api-integration-guide.md` and `src/api/README.md`.
+  - Requires GitHub Secrets: `CLOUDFLARE_API_URL`, `CLOUDFLARE_WEBHOOK_SECRET` (optional, skipped if not set).
 
 - 2025-11-29T00:00:00.000Z — Pre-publish and Validation CI enhancements.
-	- Added prepublish workflow for widget tag releases: runs AI Preflight, widget validation, manifest dry-run, uploads artifacts.
-	- Upgraded widget validation CI to publish reports and allow manual dispatch.
-	- Introduced README audit utility to enforce active-version policy (current + previous, x.x.0 format) and archive linkage.
+  - Added prepublish workflow for widget tag releases: runs AI Preflight, widget validation, manifest dry-run, uploads artifacts.
+  - Upgraded widget validation CI to publish reports and allow manual dispatch.
+  - Introduced README audit utility to enforce active-version policy (current + previous, x.x.0 format) and archive linkage.
 
 - 2025-11-23T00:00:00.000Z — Version Standardization Complete (x.x.0 Format)
-	- Problem: Version dropdowns sorting incorrectly (v1.10 appearing before v1.9) due to inconsistent version formats (some x.x, some x.x.0).
-	- Solution: Standardized all versions to Semantic Versioning 2.0.0 format (x.x.0) throughout repository.
-	- Implementation:
-		- Created automation scripts: `standardize-versions.js` (content updates) and `rename-widget-versions.js` (file renaming)
-		- Renamed 63 widget version files: vX.Y.html → vX.Y.0.html (concert: 19, photojournalism: 12, podcast: 12, featured: 6, others: 14)
-		- Updated 33+ widget HTML files (Version: headers) and 10+ script files (@version tags)
-		- Updated 13 documentation files with corrected version references
-		- Added 4 npm scripts for future maintenance: versions:standardize, versions:check, versions:rename, versions:rename-check
-		- Created comprehensive guide: `docs/standards/version-standardization-guide.md`
-	- Key Lessons Learned:
-		1. **Automation is Essential**: Manual updates are error-prone; automation saves time and ensures consistency (63 files renamed in seconds vs hours manually)
-		2. **Dry-Run Mode Critical**: Always implement `--dry-run` mode for mass operations; provides confidence and prevents mistakes
-		3. **Semantic Versioning Benefits**: Proper x.x.0 format fixes sorting issues and maintains professional standards
-		4. **Comprehensive Documentation**: Guide prevents future confusion and provides clear standards for new versions
-		5. **File Naming Patterns**: Script handles complex patterns (suffixes like v1.4.0-debug.html) with regex flexibility
-		6. **Git Rename Tracking**: Git properly tracks file renames, maintaining history and making changes reversible
-		7. **Cascading Updates**: File renames require documentation updates; comprehensive grep searches essential
-	- Future Maintenance: Use `npm run versions:check` before updates; reference standardization guide for new versions; automation tools ready for future standardizations.
-	- Validation: All changes committed successfully; 100 files changed (63 renamed, 37 content updated); ready for production.
+  - Problem: Version dropdowns sorting incorrectly (v1.10 appearing before v1.9) due to inconsistent version formats (some x.x, some x.x.0).
+  - Solution: Standardized all versions to Semantic Versioning 2.0.0 format (x.x.0) throughout repository.
+  - Implementation:
+    - Created automation scripts: `standardize-versions.js` (content updates) and `rename-widget-versions.js` (file renaming)
+    - Renamed 63 widget version files: vX.Y.html → vX.Y.0.html (concert: 19, photojournalism: 12, podcast: 12, featured: 6, others: 14)
+    - Updated 33+ widget HTML files (Version: headers) and 10+ script files (@version tags)
+    - Updated 13 documentation files with corrected version references
+    - Added 4 npm scripts for future maintenance: versions:standardize, versions:check, versions:rename, versions:rename-check
+    - Created comprehensive guide: `docs/standards/version-standardization-guide.md`
+  - Key Lessons Learned:
+    1. **Automation is Essential**: Manual updates are error-prone; automation saves time and ensures consistency (63 files renamed in seconds vs hours manually)
+    2. **Dry-Run Mode Critical**: Always implement `--dry-run` mode for mass operations; provides confidence and prevents mistakes
+    3. **Semantic Versioning Benefits**: Proper x.x.0 format fixes sorting issues and maintains professional standards
+    4. **Comprehensive Documentation**: Guide prevents future confusion and provides clear standards for new versions
+    5. **File Naming Patterns**: Script handles complex patterns (suffixes like v1.4.0-debug.html) with regex flexibility
+    6. **Git Rename Tracking**: Git properly tracks file renames, maintaining history and making changes reversible
+    7. **Cascading Updates**: File renames require documentation updates; comprehensive grep searches essential
+  - Future Maintenance: Use `npm run versions:check` before updates; reference standardization guide for new versions; automation tools ready for future standardizations.
+  - Validation: All changes committed successfully; 100 files changed (63 renamed, 37 content updated); ready for production.
 
-- 2025-11-19T18:00:00.000Z — Repository Reorganization Phase 1 (Archival & CI Shadow Workflow).\n+\t- Established centralized legacy versions archive: `src/widgets/_archived/legacy-widget-versions/` with per-widget `INDEX.json` (concert, photojournalism, featured) for traceability.\n+\t- Standardized active vs legacy version policy (retain current + previous stable in live widget directories; defer physical relocation of older versions to Phase 2 for controlled multi-file move).\n+\t- Updated widget READMEs (concert, photojournalism, featured) to list only active versions and reference archive index for historical lookup.\n+\t- STATUS.md standardization: applied unified template (Phase, Exit Criteria, Next Review) to `blog-feed`, `nature-portfolio`, `admin-portfolio-importer`; removed obsolete STATUS files from production widgets.\n+\t- Added orphan script audit utility `scripts/utils/orphan-audit.js` (result: 43 total scripts, 35 referenced, 8 orphans) to inform future archival decisions; Phase 2 will relocate or document remaining orphans (`generate-cdn-snippets.js`, `auto-check-todo.js`, etc.).\n+\t- Consolidated deploy placeholder scripts into single `deploy:placeholder` to reduce noise and guide manual deployment steps.\n+\t- Introduced composite shadow manifest workflow `.github/workflows/manifest-composite.yml` (matrix: concert, events, journalism, nature, portrait, universal) to validate consolidation before retiring per-portfolio workflows.\n+\t- Deferred physical relocation of legacy version HTML files (Phase 2) to avoid large atomic patch; TODO entries added for controlled migration with validation pass post-move.\n+\t- Next: Perform Phase 2 legacy file relocation, archive orphan scripts, and (after shadow workflow proves stable) decommission individual manifest workflows.\n+\t- Validation pending after instructions update: run AI Preflight (short), widget HTML validator, repo health check.\n+\n+- 2025-11-11T00:30:00.000Z — Accessibility Statement Widget v1.1.2 (Forced Theme Semantics Correction).\n+\t- Added new version file: `src/widgets/accessibility-statement/versions/v1.1.2-accessibility-statement.html`.\n+\t- Corrected Light/Dark semantics: Light = dark text on light panel/background; Dark = light text on dark panel/background.\n+\t- System mode unchanged; all IDs/anchors preserved.\n+\t- Updated README (current version v1.1.2) and CHANGELOG with [1.1.2] entry documenting correction and WCAG AA contrast verification.\n+\t- HTML validator: PASS.\n+\t- Note: v1.1.1 (inverted modes) remains available but superseded for standard semantics.\n*** End Patch
+- 2025-11-19T18:00:00.000Z — Repository Reorganization Phase 1 (Archival & CI Shadow Workflow).\n+\t- Established centralized legacy versions archive: `src/widgets/_archived/legacy-widget-versions/` with per-widget `INDEX.json` (concert, photojournalism, featured) for traceability.\n+\t- Standardized active vs legacy version policy (retain current + previous stable in live widget directories; defer physical relocation of older versions to Phase 2 for controlled multi-file move).\n+\t- Updated widget READMEs (concert, photojournalism, featured) to list only active versions and reference archive index for historical lookup.\n+\t- STATUS.md standardization: applied unified template (Phase, Exit Criteria, Next Review) to `blog-feed`, `nature-portfolio`, `admin-portfolio-importer`; removed obsolete STATUS files from production widgets.\n+\t- Added orphan script audit utility `scripts/utils/orphan-audit.js` (result: 43 total scripts, 35 referenced, 8 orphans) to inform future archival decisions; Phase 2 will relocate or document remaining orphans (`generate-cdn-snippets.js`, `auto-check-todo.js`, etc.).\n+\t- Consolidated deploy placeholder scripts into single `deploy:placeholder` to reduce noise and guide manual deployment steps.\n+\t- Introduced composite shadow manifest workflow `.github/workflows/manifest-composite.yml` (matrix: concert, events, journalism, nature, portrait, universal) to validate consolidation before retiring per-portfolio workflows.\n+\t- Deferred physical relocation of legacy version HTML files (Phase 2) to avoid large atomic patch; TODO entries added for controlled migration with validation pass post-move.\n+\t- Next: Perform Phase 2 legacy file relocation, archive orphan scripts, and (after shadow workflow proves stable) decommission individual manifest workflows.\n+\t- Validation pending after instructions update: run AI Preflight (short), widget HTML validator, repo health check.\n+\n+- 2025-11-11T00:30:00.000Z — Accessibility Statement Widget v1.1.2 (Forced Theme Semantics Correction).\n+\t- Added new version file: `src/widgets/accessibility-statement/versions/v1.1.2-accessibility-statement.html`.\n+\t- Corrected Light/Dark semantics: Light = dark text on light panel/background; Dark = light text on dark panel/background.\n+\t- System mode unchanged; all IDs/anchors preserved.\n+\t- Updated README (current version v1.1.2) and CHANGELOG with [1.1.2] entry documenting correction and WCAG AA contrast verification.\n+\t- HTML validator: PASS.\n+\t- Note: v1.1.1 (inverted modes) remains available but superseded for standard semantics.\n\*\*\* End Patch
 
 - 2025-11-11T00:00:00.000Z — Policies & Legal Widget v1.1.0 (Accessibility Enhancements).
-	- Created new version file: `src/widgets/policies-legal/versions/v1.1.0-policies-legal-squarespace.html`.
-	- Added skip link, unified focus-visible styling, aria-current scroll spy, reduced-motion support, refined print styles, and hardened landmarks.
-	- Improved mobile drawer behavior: closes on link/overlay/Escape; `aria-expanded` synchronized.
-	- Updated README and CHANGELOG; CDN snippet now points to v1.1.0.
-	- HTML validator: PASS.
+  - Created new version file: `src/widgets/policies-legal/versions/v1.1.0-policies-legal-squarespace.html`.
+  - Added skip link, unified focus-visible styling, aria-current scroll spy, reduced-motion support, refined print styles, and hardened landmarks.
+  - Improved mobile drawer behavior: closes on link/overlay/Escape; `aria-expanded` synchronized.
+  - Updated README and CHANGELOG; CDN snippet now points to v1.1.0.
+  - HTML validator: PASS.
 
 - 2025-11-10T12:00:00.000Z — Interactive Thesis Widget v0.1-minimal.
-	- Created self-contained thesis prototype widget with scroll-reveal, accessible Story Drawer (ESC + click-away, focus trap), and demo audio transcript.
-	- File: `src/widgets/interactive-thesis/versions/v0.1-minimal.html`. README added with usage instructions.
-	- Local preview build system added: `scripts/thesis/build-thesis-interactive.js` (esbuild + Tailwind via PostCSS) with outputs at `/thesis/interactive` and route alias `.../thesis/interactive`.
-	- NPM scripts: `build:thesis`, `dev:thesis`.
-	- HTML validator: PASS. Next: run Lighthouse and accessibility checks; optionally add page-level SEO when promoted beyond widget embed.
+  - Created self-contained thesis prototype widget with scroll-reveal, accessible Story Drawer (ESC + click-away, focus trap), and demo audio transcript.
+  - File: `src/widgets/interactive-thesis/versions/v0.1-minimal.html`. README added with usage instructions.
+  - Local preview build system added: `scripts/thesis/build-thesis-interactive.js` (esbuild + Tailwind via PostCSS) with outputs at `/thesis/interactive` and route alias `.../thesis/interactive`.
+  - NPM scripts: `build:thesis`, `dev:thesis`.
+  - HTML validator: PASS. Next: run Lighthouse and accessibility checks; optionally add page-level SEO when promoted beyond widget embed.
 
 - 2025-11-10T12:30:00.000Z — Interactive Thesis Widget v0.2 (Podcast Excerpts + Inline Thesis Placeholders).
-	- New version file: `src/widgets/interactive-thesis/versions/v0.2-excerpts-inline-thesis.html` with a structured thesis section (Abstract, Introduction, Methodology, Findings, Conclusion) and an excerpts grid tied to podcast episodes.
-	- Google Docs cannot be auto-fetched without auth; paste real thesis text into the marked TODO blocks.
-	- Excerpts include inline audio previews using audio URL time ranges and link to full episodes.
-	- HTML validator: PASS.
+  - New version file: `src/widgets/interactive-thesis/versions/v0.2-excerpts-inline-thesis.html` with a structured thesis section (Abstract, Introduction, Methodology, Findings, Conclusion) and an excerpts grid tied to podcast episodes.
+  - Google Docs cannot be auto-fetched without auth; paste real thesis text into the marked TODO blocks.
+  - Excerpts include inline audio previews using audio URL time ranges and link to full episodes.
+  - HTML validator: PASS.
 
 - 2025-11-10T13:15:00.000Z — Interactive Thesis Widget v0.3 (Live Thesis Embed + Blog-styled Excerpts).
-	- New version file: `src/widgets/interactive-thesis/versions/v0.3-thesis-live-excerpts.html` embedding the published Google Doc (auto-updates on edits) and restyling podcast thesis excerpts using blog-grid/blog-card patterns for visual consistency.
-	- Accessibility: semantic article cards with roles, aria-live grid updates, toolbar buttons with `aria-pressed`, reduced motion respected.
-	- Performance: media fragment audio time-range previews (hash time ranges) with no preload, column-count masonry for efficient layout, single IntersectionObserver reveal.
-	- Validation: HTML validator PASS. Changelog and README updated.
+  - New version file: `src/widgets/interactive-thesis/versions/v0.3-thesis-live-excerpts.html` embedding the published Google Doc (auto-updates on edits) and restyling podcast thesis excerpts using blog-grid/blog-card patterns for visual consistency.
+  - Accessibility: semantic article cards with roles, aria-live grid updates, toolbar buttons with `aria-pressed`, reduced motion respected.
+  - Performance: media fragment audio time-range previews (hash time ranges) with no preload, column-count masonry for efficient layout, single IntersectionObserver reveal.
+  - Validation: HTML validator PASS. Changelog and README updated.
 - 2025-11-10T13:45:00.000Z — Interactive Thesis Widget v0.4 (Blog-formatted Thesis, No Live Embed).
-	- New version file: `src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html` removes the live Google Docs iframe; thesis sections rendered as standalone blog cards with chips.
-	- Excerpts retained with keyboard navigation (arrows) + Enter to toggle audio; empty filter state added.
-	- Accessibility: list/listitem roles, distinct placeholder styling for TODO sections, reduced motion support preserved.
-	- Performance: static content (no cross-origin embed), lazy audio (no preload), single IntersectionObserver for reveal.
-	- Validation: HTML validator PASS; README and CHANGELOG updated.
+  - New version file: `src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html` removes the live Google Docs iframe; thesis sections rendered as standalone blog cards with chips.
+  - Excerpts retained with keyboard navigation (arrows) + Enter to toggle audio; empty filter state added.
+  - Accessibility: list/listitem roles, distinct placeholder styling for TODO sections, reduced motion support preserved.
+  - Performance: static content (no cross-origin embed), lazy audio (no preload), single IntersectionObserver for reveal.
+  - Validation: HTML validator PASS; README and CHANGELOG updated.
 
 - 2025-11-10T00:00:00.000Z — Events performance + taxonomy updates.
-	- Image optimization: compressed oversized JPEG/PNG files in Events (≈66.9% average savings across initial batch); verified outputs and removed temporary backups.
-	- WEBP variants: added generator support and produced .webp companions for Events images; manifests updated to reference new assets.
-	- Category extension: introduced a General category in Events manifest logic and classified “Yinzers Meet Hike” as General.
-	- Widget behavior: no widget code change required for filters—Event Portfolio v2.6.x auto-discovers categories and will surface “General” alongside existing filters. “Performance Art” continues to display as “Arts” via label mapping.
-	- Validation: regenerated events-manifest.json; spot-check confirms Yinzers Meet Hike now shows category "General" and WEBP assets are listed.
-	- Notes/Next: optional follow-up to prefer WEBP sources in widget image selection (low-risk enhancement) and consider subheading copy to reflect outdoor/general events.
+  - Image optimization: compressed oversized JPEG/PNG files in Events (≈66.9% average savings across initial batch); verified outputs and removed temporary backups.
+  - WEBP variants: added generator support and produced .webp companions for Events images; manifests updated to reference new assets.
+  - Category extension: introduced a General category in Events manifest logic and classified “Yinzers Meet Hike” as General.
+  - Widget behavior: no widget code change required for filters—Event Portfolio v2.6.x auto-discovers categories and will surface “General” alongside existing filters. “Performance Art” continues to display as “Arts” via label mapping.
+  - Validation: regenerated events-manifest.json; spot-check confirms Yinzers Meet Hike now shows category "General" and WEBP assets are listed.
+  - Notes/Next: optional follow-up to prefer WEBP sources in widget image selection (low-risk enhancement) and consider subheading copy to reflect outdoor/general events.
 
 - 2025-11-03T16:39:33.003Z — Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.
 - 2025-11-04T12:10:00.000Z — Manifest simplification & Portrait Portfolio v1.1 release (migration & hardening).
-	- Fixed a runtime initialization error in the Portrait Portfolio widget by restoring and hardening the structured-data helper; widget now recovers gracefully when manifests or images are missing.
-	- Implemented Portrait widget v1.1 features: client-first-name extraction for titles, dynamic subject tabs (auto-discovered from manifest collections), rotating selection (1–4 images randomized per session with round-robin pooling), improved lightbox UX (safe-area close button, hidden scrollbars), and debug-panel improvements.
-	- Optimized manifest generation pipeline:
-		- Generators now perform idempotent writes (skip writing aggregated manifest files when unchanged) to reduce churn.
-		- Added `--force` support to key generators so maintainer/CI can overwrite manifests intentionally.
-		- Updated `scripts/watchers/watch-auto-manifest.js` to trigger portfolio-level generators and forward `--force` when requested.
-		- Migrated to a single aggregated manifest per portfolio (e.g., `portrait-manifest.json`, `concert-manifest.json`) and deprecated per-folder `manifest.json` outputs.
-		- Created and executed `scripts/manifest/remove-subfolder-manifests.js` to clean legacy per-folder manifests.
-	- CI/workflows updated: removed attempts to add per-folder `manifest.json` files and now operate solely on aggregated manifests; workflows still generate, validate (jq), and commit aggregated manifests with rollback/backup safety.
-	- Documentation updates: added a Single-Portfolio Manifest Policy note to `docs/standards/workspace-organization.md`, updated widget README/CHANGELOG for Portrait v1.1, and added guidance in workflow comments about the cleanup script.
-	- Validation & verification: regenerated manifests (`npm run manifest:generate`), ran the manifest validator (`node scripts/utils/validate-manifests.js`) — result: 8 aggregated manifest files checked, 0 errors. Commits created for all changes; changes are reversible via git history.
-	- Helpful commands:
-		- Clean up legacy manifests: `node scripts/manifest/remove-subfolder-manifests.js`
-		- Watch and force regeneration locally: `node scripts/watchers/watch-auto-manifest.js --all --force`
-		- Regenerate all manifests: `npm run manifest:generate`
-		- Validate manifests: `node scripts/utils/validate-manifests.js`
-	- Notes/Next steps: update any external tooling that still expects per-folder manifests; optionally update watchers/CI for other repos or add a CI cleanup check. If you want, I can update additional workflows or run the dev-server smoke test for the Portrait widget (requires explicit permission).
+  - Fixed a runtime initialization error in the Portrait Portfolio widget by restoring and hardening the structured-data helper; widget now recovers gracefully when manifests or images are missing.
+  - Implemented Portrait widget v1.1 features: client-first-name extraction for titles, dynamic subject tabs (auto-discovered from manifest collections), rotating selection (1–4 images randomized per session with round-robin pooling), improved lightbox UX (safe-area close button, hidden scrollbars), and debug-panel improvements.
+  - Optimized manifest generation pipeline:
+    - Generators now perform idempotent writes (skip writing aggregated manifest files when unchanged) to reduce churn.
+    - Added `--force` support to key generators so maintainer/CI can overwrite manifests intentionally.
+    - Updated `scripts/watchers/watch-auto-manifest.js` to trigger portfolio-level generators and forward `--force` when requested.
+    - Migrated to a single aggregated manifest per portfolio (e.g., `portrait-manifest.json`, `concert-manifest.json`) and deprecated per-folder `manifest.json` outputs.
+    - Created and executed `scripts/manifest/remove-subfolder-manifests.js` to clean legacy per-folder manifests.
+  - CI/workflows updated: removed attempts to add per-folder `manifest.json` files and now operate solely on aggregated manifests; workflows still generate, validate (jq), and commit aggregated manifests with rollback/backup safety.
+  - Documentation updates: added a Single-Portfolio Manifest Policy note to `docs/standards/workspace-organization.md`, updated widget README/CHANGELOG for Portrait v1.1, and added guidance in workflow comments about the cleanup script.
+  - Validation & verification: regenerated manifests (`npm run manifest:generate`), ran the manifest validator (`node scripts/utils/validate-manifests.js`) — result: 8 aggregated manifest files checked, 0 errors. Commits created for all changes; changes are reversible via git history.
+  - Helpful commands:
+    - Clean up legacy manifests: `node scripts/manifest/remove-subfolder-manifests.js`
+    - Watch and force regeneration locally: `node scripts/watchers/watch-auto-manifest.js --all --force`
+    - Regenerate all manifests: `npm run manifest:generate`
+    - Validate manifests: `node scripts/utils/validate-manifests.js`
+  - Notes/Next steps: update any external tooling that still expects per-folder manifests; optionally update watchers/CI for other repos or add a CI cleanup check. If you want, I can update additional workflows or run the dev-server smoke test for the Portrait widget (requires explicit permission).
 - 2025-11-03T12:00:00.000Z — Workflow validation system complete: Fixed corrupted ci-validate-workflows.js script, added comprehensive workflow validation with script reference checking and best practices (npm ci, caching). Added portrait-manifest.yml workflow for Portrait portfolio automation. Completed full repository health validation including smoke tests, AI preflight, large files check, widget validation, and workflow validation. All systems functioning properly with automated workflows for all portfolio types.
 - 2025-11-02T12:00:00.000Z — Concert Portfolio v4.7 refinement: deduplicated artist list (case-insensitive) in Spotify panel and added interaction safety so the support button is temporarily disabled while interacting with images or when the lightbox is open.
 - 2025-11-02T00:00:00.000Z — Concert Portfolio v4.7: Added non-intrusive Spotify support button listing bands from the concert manifest with “Open on Spotify” search links and optional embedded previews via inline JSON artist map. Retains v4.6 performance optimizations and accessibility patterns. README and widget CHANGELOG updated.
@@ -409,27 +425,27 @@ Recent updates
 - 2025-10-06T21:19:20.735Z — Session complete: minor updates.
 - 2025-10-06T21:19:09.064Z — Successfully tested and fixed VS Code tasks for Copilot AI workflow. Fixed PowerShell quoting issues in widget validation task, created proper Node.js validation script, and verified all core tasks work correctly.
 - 2025-10-06T21:13:03.271Z — Session complete: minor updates.
-- 2025-10-05T16:00:00.000Z  **CRITICAL LESSON LEARNED**: Event portfolio widget debugging session revealed critical pattern - widget lightbox system is extremely fragile. v2.6.0 works perfectly, but v2.6.1, v2.6.2, and v2.6.3 all broke when trying to "upgrade" functionality. **Key insight**: NEVER mix incompatible patterns. Always copy complete working systems (CSS+HTML+JS together) or build from stable foundation. Created `docs/standards/widget-debugging-lessons.md` with emergency recovery protocol. **Latest stable**: v2.6.0 (perfect), v2.6.2 (has changelog but lightbox issues). Future agents must read debugging lessons before widget modifications.
-- 2025-10-05T15:00:00.000Z  Event Portfolio v2.6.0 enhancement complete: Applied journalism widget v4.9 patterns to event portfolio. Fixed lightbox image stretching (`object-fit: contain`, `display: block`, `margin: 0 auto`), added hidden scrollbars for immersive experience, enhanced navigation hiding with comprehensive selectors, improved close button with fixed positioning and accessibility, integrated version indicator in heading, comprehensive debug panel with detailed metrics and controls. All v2.5.6 optimizations retained. Remaining widget (featured) still needs similar enhancements.
-- 2025-10-05T14:00:00.000Z  Concert Portfolio v4.4 enhancement complete: Applied journalism widget v4.9 patterns to concert portfolio. Fixed lightbox image stretching (`object-fit: contain`, `display: block`, `margin: 0 auto`), added hidden scrollbars for immersive experience, enhanced navigation hiding with comprehensive selectors, improved close button with fixed positioning and accessibility, integrated version indicator in heading, comprehensive debug panel with detailed metrics and controls. All v4.3 optimizations retained.
-- 2025-10-05T13:00:00.000Z  Manifest workflow reliability complete: Enhanced all manifest workflows (concert, events, journalism) with comprehensive auto/manual operation support. Added backup/restore system, widget compatibility validation, retry logic (3 attempts), JSON validation with jq, rollback on failure, concurrency protection. Created emergency recovery workflow (`regenerate-all-manifests.yml`) and daily health monitoring (`workflow-health-check.yml`). All workflows now include proper error reporting, data integrity checks, and widget protection mechanisms. Verified working: events manifest (4 events, 84 images), concert manifest (16 bands, 211 images), all generation scripts functional. GitHub Actions workflows now bulletproof and never break existing widgets.
+- 2025-10-05T16:00:00.000Z **CRITICAL LESSON LEARNED**: Event portfolio widget debugging session revealed critical pattern - widget lightbox system is extremely fragile. v2.6.0 works perfectly, but v2.6.1, v2.6.2, and v2.6.3 all broke when trying to "upgrade" functionality. **Key insight**: NEVER mix incompatible patterns. Always copy complete working systems (CSS+HTML+JS together) or build from stable foundation. Created `docs/standards/widget-debugging-lessons.md` with emergency recovery protocol. **Latest stable**: v2.6.0 (perfect), v2.6.2 (has changelog but lightbox issues). Future agents must read debugging lessons before widget modifications.
+- 2025-10-05T15:00:00.000Z Event Portfolio v2.6.0 enhancement complete: Applied journalism widget v4.9 patterns to event portfolio. Fixed lightbox image stretching (`object-fit: contain`, `display: block`, `margin: 0 auto`), added hidden scrollbars for immersive experience, enhanced navigation hiding with comprehensive selectors, improved close button with fixed positioning and accessibility, integrated version indicator in heading, comprehensive debug panel with detailed metrics and controls. All v2.5.6 optimizations retained. Remaining widget (featured) still needs similar enhancements.
+- 2025-10-05T14:00:00.000Z Concert Portfolio v4.4 enhancement complete: Applied journalism widget v4.9 patterns to concert portfolio. Fixed lightbox image stretching (`object-fit: contain`, `display: block`, `margin: 0 auto`), added hidden scrollbars for immersive experience, enhanced navigation hiding with comprehensive selectors, improved close button with fixed positioning and accessibility, integrated version indicator in heading, comprehensive debug panel with detailed metrics and controls. All v4.3 optimizations retained.
+- 2025-10-05T13:00:00.000Z Manifest workflow reliability complete: Enhanced all manifest workflows (concert, events, journalism) with comprehensive auto/manual operation support. Added backup/restore system, widget compatibility validation, retry logic (3 attempts), JSON validation with jq, rollback on failure, concurrency protection. Created emergency recovery workflow (`regenerate-all-manifests.yml`) and daily health monitoring (`workflow-health-check.yml`). All workflows now include proper error reporting, data integrity checks, and widget protection mechanisms. Verified working: events manifest (4 events, 84 images), concert manifest (16 bands, 211 images), all generation scripts functional. GitHub Actions workflows now bulletproof and never break existing widgets.
 - 2025-10-05T07:48:39.389Z — Updated test widgets to latest versions - journalism widget updated from v3.0 to v4.9 with latest features
-- 2025-10-05T12:30:00.000Z  Admin Portfolio Importer v1.1.0 complete: Created secure admin-only widget for importing and organizing portfolio images with backend API integration. Features authentication, smart folder detection, preview system, and automatic manifest generation. Includes comprehensive documentation (README, CHANGELOG) and production-ready status. Backend server handles file uploads, date extraction, and folder organization following workspace conventions.
-- 2025-10-05T12:00:00.000Z  Photojournalism widget v4.9 lightbox fix: Fixed image stretching in lightbox gallery by adding `object-fit: contain`, `display: block`, and `margin: 0 auto` to preserve aspect ratios and prevent distortion. Images now maintain proper proportions regardless of viewport size. Follows same pattern as event portfolio widget for consistency across widget family.
-- 2025-10-05T06:15:00.000Z  Widget standardization documentation complete: Created comprehensive `widget-standards.md` establishing consistent patterns across all widget types (portfolio, navigation, content, hero). Added `widget-reference.md` as quick development checklist. Documented architecture standards, CSS patterns, performance guidelines, accessibility requirements, and debug patterns. Simplified all file names from UPPER-CASE-NAMES.md to lowercase-names.md for better organization. Updated docs organization and copilot instructions to reference new standardization guides.
-- 2025-10-05T06:00:00.000Z  Widget enhancement framework complete: Created comprehensive `widget-development.md` providing systematic methodology for applying proven patterns across all widgets. Updated photojournalism README with enhancement pattern references. Established quality assurance standards, implementation checklists, and continuous improvement processes. All workspace rules validated and documentation aligned.
-- 2025-10-05T01:45:00.000Z  Photojournalism widget optimization complete (v4.4→v4.8): Fixed Published Work filter functionality, enhanced filtering UX (no gaps), minimal status indicators, comprehensive navigation hiding in lightbox, hidden scrollbars for immersive experience. Created comprehensive widget enhancement patterns documentation (`docs/standards/widget-enhancements.md`) cataloging proven improvements for systematic application across all widgets.
-- 2025-10-05T00:30:00.000Z  Footer widget v1.2.0 compliance: Removed modal functionality for simplified UX, updated README and CHANGELOG documentation, added to main README Available Widgets list. Widget now fully compliant with workspace standards including accessibility, performance patterns, and self-contained architecture.
-- 2025-10-05T00:00:00.000Z  Widget optimization updates: Enhanced site-navigation v1.6.3 with improved blur effects, hover states, and performance optimizations. Created site-footer v1.2.0 with CSS custom properties, enhanced accessibility, mobile optimizations, and comprehensive compliance with workspace standards.
-- 2025-10-04T11:30:00.000Z  Widget status organization: Archived GitHub portfolio to src/widgets/_archived/, marked blog feed and nature portfolio as work-in-progress with STATUS.md files. Updated README to show 7 production widgets + 2 WIP. Created archival system for widget management.
-- 2025-10-04T11:26:00.000Z  Updated main README.md to v2.4.0: Added comprehensive repository organization details, expanded widget list, organized documentation structure, AI development support, and maintenance guidelines. Added agent responsibility to keep README current with major changes.
-- 2025-10-04T11:22:00.000Z  Documentation organization complete: Reorganized docs into categories (workflows/, automation/, integrations/, standards/, archive/) and test files into organized structure (tests/html/). Updated all references and paths.
-- 2025-10-04T11:19:00.000Z  Repository organization complete: Moved 15+ test files from root to organized tests/html/ structure, relocated deployment scripts to scripts/, cleaned up temporary files. Root directory now clean and professional.
-- 2025-10-04T00:00:00.000Z  Enhanced copilot instructions with architecture overview, performance patterns, widget authoring conventions, and comprehensive development workflow guidance
-- 2025-10-04T00:00:00.001Z  Added agent responsibilities and widget preview workflow guidance: agents must read/update instructions and use user-driven preview workflow instead of external hosting
-- 2025-10-03T09:15:17.082Z  Featured Portfolio Widget v1.5 complete: Enhanced journalism titles, ultra-minimal scrollbars (4px, 0.15 opacity), improved masonry spacing (16px gaps), randomized cover images with Fisher-Yates shuffle, minimal gray accents (color 888888), production-ready deployment with 15-item limit, scrollable lightbox, and comprehensive changelog documentation
-- 2025-10-03T09:15:11.674Z  Session complete: minor updates.
-- 2025-10-03T07:08:00.400Z  Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging
-- 2025-10-03T06:29:14.357Z  Validation: preflight/guardian/canvas/codex added and tasks wired
+- 2025-10-05T12:30:00.000Z Admin Portfolio Importer v1.1.0 complete: Created secure admin-only widget for importing and organizing portfolio images with backend API integration. Features authentication, smart folder detection, preview system, and automatic manifest generation. Includes comprehensive documentation (README, CHANGELOG) and production-ready status. Backend server handles file uploads, date extraction, and folder organization following workspace conventions.
+- 2025-10-05T12:00:00.000Z Photojournalism widget v4.9 lightbox fix: Fixed image stretching in lightbox gallery by adding `object-fit: contain`, `display: block`, and `margin: 0 auto` to preserve aspect ratios and prevent distortion. Images now maintain proper proportions regardless of viewport size. Follows same pattern as event portfolio widget for consistency across widget family.
+- 2025-10-05T06:15:00.000Z Widget standardization documentation complete: Created comprehensive `widget-standards.md` establishing consistent patterns across all widget types (portfolio, navigation, content, hero). Added `widget-reference.md` as quick development checklist. Documented architecture standards, CSS patterns, performance guidelines, accessibility requirements, and debug patterns. Simplified all file names from UPPER-CASE-NAMES.md to lowercase-names.md for better organization. Updated docs organization and copilot instructions to reference new standardization guides.
+- 2025-10-05T06:00:00.000Z Widget enhancement framework complete: Created comprehensive `widget-development.md` providing systematic methodology for applying proven patterns across all widgets. Updated photojournalism README with enhancement pattern references. Established quality assurance standards, implementation checklists, and continuous improvement processes. All workspace rules validated and documentation aligned.
+- 2025-10-05T01:45:00.000Z Photojournalism widget optimization complete (v4.4→v4.8): Fixed Published Work filter functionality, enhanced filtering UX (no gaps), minimal status indicators, comprehensive navigation hiding in lightbox, hidden scrollbars for immersive experience. Created comprehensive widget enhancement patterns documentation (`docs/standards/widget-enhancements.md`) cataloging proven improvements for systematic application across all widgets.
+- 2025-10-05T00:30:00.000Z Footer widget v1.2.0 compliance: Removed modal functionality for simplified UX, updated README and CHANGELOG documentation, added to main README Available Widgets list. Widget now fully compliant with workspace standards including accessibility, performance patterns, and self-contained architecture.
+- 2025-10-05T00:00:00.000Z Widget optimization updates: Enhanced site-navigation v1.6.3 with improved blur effects, hover states, and performance optimizations. Created site-footer v1.2.0 with CSS custom properties, enhanced accessibility, mobile optimizations, and comprehensive compliance with workspace standards.
+- 2025-10-04T11:30:00.000Z Widget status organization: Archived GitHub portfolio to src/widgets/\_archived/, marked blog feed and nature portfolio as work-in-progress with STATUS.md files. Updated README to show 7 production widgets + 2 WIP. Created archival system for widget management.
+- 2025-10-04T11:26:00.000Z Updated main README.md to v2.4.0: Added comprehensive repository organization details, expanded widget list, organized documentation structure, AI development support, and maintenance guidelines. Added agent responsibility to keep README current with major changes.
+- 2025-10-04T11:22:00.000Z Documentation organization complete: Reorganized docs into categories (workflows/, automation/, integrations/, standards/, archive/) and test files into organized structure (tests/html/). Updated all references and paths.
+- 2025-10-04T11:19:00.000Z Repository organization complete: Moved 15+ test files from root to organized tests/html/ structure, relocated deployment scripts to scripts/, cleaned up temporary files. Root directory now clean and professional.
+- 2025-10-04T00:00:00.000Z Enhanced copilot instructions with architecture overview, performance patterns, widget authoring conventions, and comprehensive development workflow guidance
+- 2025-10-04T00:00:00.001Z Added agent responsibilities and widget preview workflow guidance: agents must read/update instructions and use user-driven preview workflow instead of external hosting
+- 2025-10-03T09:15:17.082Z Featured Portfolio Widget v1.5 complete: Enhanced journalism titles, ultra-minimal scrollbars (4px, 0.15 opacity), improved masonry spacing (16px gaps), randomized cover images with Fisher-Yates shuffle, minimal gray accents (color 888888), production-ready deployment with 15-item limit, scrollable lightbox, and comprehensive changelog documentation
+- 2025-10-03T09:15:11.674Z Session complete: minor updates.
+- 2025-10-03T07:08:00.400Z Fixed featured portfolio widget by creating generate-featured-manifest.js script and updated widget to v1.2 with better debugging
+- 2025-10-03T06:29:14.357Z Validation: preflight/guardian/canvas/codex added and tasks wired
 - Entries below are appended by the AI finalize script to record what the last agent session changed.
-**Start Here:** For workspace/process standards, scripts organization, and validation checklists, see [docs/standards/workspace-organization.md](../docs/standards/workspace-organization.md).
+  **Start Here:** For workspace/process standards, scripts organization, and validation checklists, see [docs/standards/workspace-organization.md](../docs/standards/workspace-organization.md).
