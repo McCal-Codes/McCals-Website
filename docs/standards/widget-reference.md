@@ -1,6 +1,8 @@
 # See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
 # Widget Standards Quick Reference
 
+**Quick links:** [Onboarding](../ONBOARDING.md) · [Widget standards (full)](./widget-standards.md) · [Workspace organization](./workspace-organization.md) · [Performance standards](./performance-standards.md) · [Image SEO](./image-seo-standards.md)
+
 > **Quick access guide for McCal Media widget development standards**  
 > **For complete details**: See `widget-standards.md`
 

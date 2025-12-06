@@ -20,6 +20,8 @@ _See also: `updates/welcome.md` for the latest pinned tips and checklist status.
 # See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
 # Widget Standardization Guide
 
+**Quick links:** [Onboarding](../ONBOARDING.md) · [Widget reference](./widget-reference.md) · [Workspace organization](./workspace-organization.md) · [Performance standards](./performance-standards.md) · [Image SEO](./image-seo-standards.md)
+
 > **Status**: Active Standards Documentation  
 > **Created**: October 5, 2025  
 > **Purpose**: Define consistent patterns and standards across all McCal Media widgets
