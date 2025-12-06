@@ -1,13 +1,10 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `a4ec46c3` — 0 seconds ago
-> feat: add blog admin widget v1.0.0
+**Last commit**: `106f8834` — 0 seconds ago
+> docs: apply workspace standards to blog admin widget
 ## 🔄 Changes in last commit
+- .github/copilot-instructions.md
 - scripts/.welcome-state.json
-- src/widgets/_admin/blog-admin/CHANGELOG.md
-- src/widgets/_admin/blog-admin/README.md
 - src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html
-- test-blog-admin.html
-- updates/todo.md
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **71** | Done: **61**
