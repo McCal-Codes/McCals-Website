@@ -1,8 +1,20 @@
 # 👋 Welcome back, McCal!
 
-**Last commit**: `659b7a98` — 0 seconds ago
+**Recent work (session log)**
 
-> feat: update repository organization and archival practices, including .gitignore adjustments and documentation enhancements
+- Added widget version limit CI workflow (≤2 active versions) and expanded axe audit to PRs.
+- Added accessibility checklist to widget standards.
+- Documented dev.mcc-cal.com setup in onboarding.
+- Generated widget registry manifest and required it in AI preflight.
+- Recorded updates in CHANGELOG.
+
+**Still open (next targets)**
+
+- Cloudflare Worker deploy: env/KV setup, point manifests/blog, E2E + monitoring.
+- Next.js self-hosted scaffold at `sites/dev.mcc-cal.com`: layout/nav/footer, manifest loader/types, ConcertWidget + stubs.
+- Infra: actually provision `dev.mcc-cal.com` DNS/TLS + CORS/API allowlists.
+- CI/CD hygiene: resolve secret lint warnings; add schema diff + perf snapshot workflow.
+- Accessibility fixes: apply ARIA/keyboard/screen-reader updates across widgets.
 
 ## 🔄 Changes in last commit
 
