@@ -1,4 +1,28 @@
 #!/usr/bin/env node
+/**
+ * Auto Manifest Watcher
+ * Watches portfolio folders and regenerates manifests on changes.
+ *
+ * Usage:
+ *   node scripts/watchers/watch-auto-manifest.js [target]
+ *   node scripts/watchers/watch-auto-manifest.js --help
+ *
+ * Exit codes:
+ *   0 - Success
+ *   1 - Error (invalid target, fatal error)
+ */
+// CLI --help flag
+if (process.argv.includes('--help')) {
+  console.log(
+    `\nAuto Manifest Watcher\n\nUsage:\n  node scripts/watchers/watch-auto-manifest.js [target]\n\nTargets:`,
+  );
+  Object.keys(TARGET_CONFIGS).forEach((t) => {
+    const c = TARGET_CONFIGS[t];
+    console.log(`  - ${t}: ${c.label}`);
+  });
+  console.log(`\nExit codes:\n  0 - Success\n  1 - Error (invalid target, fatal error)\n`);
+  process.exit(0);
+}
 
 const chokidar = require('chokidar');
 const { execSync } = require('child_process');
@@ -13,36 +37,36 @@ const TARGET_CONFIGS = {
     watchPath: path.join('src', 'images', 'Portfolios', 'Concert'),
     manifestScript: 'manifest:concert',
     logFile: path.join('logs', 'auto-concert-manifest.log'),
-    emoji: '🎸'
+    emoji: '🎸',
   },
   events: {
     label: 'Events Portfolio',
     watchPath: path.join('src', 'images', 'Portfolios', 'Events'),
     manifestScript: 'manifest:events',
     logFile: path.join('logs', 'auto-events-manifest.log'),
-    emoji: '🎪'
+    emoji: '🎪',
   },
   journalism: {
     label: 'Journalism Portfolio',
     watchPath: path.join('src', 'images', 'Portfolios', 'Journalism'),
     manifestScript: 'manifest:journalism',
     logFile: path.join('logs', 'auto-journalism-manifest.log'),
-    emoji: '📰'
+    emoji: '📰',
   },
   nature: {
     label: 'Nature Portfolio',
     watchPath: path.join('src', 'images', 'Portfolios', 'Nature'),
     manifestScript: 'manifest:nature',
     logFile: path.join('logs', 'auto-nature-manifest.log'),
-    emoji: '🌿'
+    emoji: '🌿',
   },
   portrait: {
     label: 'Portrait Portfolio',
     watchPath: path.join('src', 'images', 'Portfolios', 'Portrait'),
     manifestScript: 'manifest:portrait',
     logFile: path.join('logs', 'auto-portrait-manifest.log'),
-    emoji: '🎭'
-  }
+    emoji: '🎭',
+  },
 };
 
 class AutoManifestWatcher {
@@ -78,7 +102,10 @@ class AutoManifestWatcher {
     try {
       fs.appendFileSync(this.config.logFile, logMessage + '\n');
     } catch (error) {
-      console.error(`[${this.config.label}] Failed to write to log file: - watch-auto-manifest.js:81`, error.message);
+      console.error(
+        `[${this.config.label}] Failed to write to log file: - watch-auto-manifest.js:81`,
+        error.message,
+      );
     }
   }
 
@@ -98,7 +125,7 @@ class AutoManifestWatcher {
       this.log(`Executing: ${cmd}`);
       execSync(cmd, {
         encoding: 'utf8',
-        cwd: process.cwd()
+        cwd: process.cwd(),
       });
       this.log('Manifest regenerated successfully');
       this.changeQueue.clear();
@@ -136,16 +163,10 @@ class AutoManifestWatcher {
     this.log(`Watching directory: ${absoluteWatchPath}`);
 
     const watcher = chokidar.watch(absoluteWatchPath, {
-      ignored: [
-        /node_modules/,
-        /\.git/,
-        /manifest\.json$/,
-        /\.DS_Store$/,
-        /Thumbs\.db$/
-      ],
+      ignored: [/node_modules/, /\.git/, /manifest\.json$/, /\.DS_Store$/, /Thumbs\.db$/],
       ignoreInitial: true,
       persistent: true,
-      depth: 10
+      depth: 10,
     });
 
     watcher.on('add', (filePath) => {
@@ -197,14 +218,17 @@ function parseTargets(argv) {
     return Object.keys(TARGET_CONFIGS);
   }
 
-  const targetFlagIndex = argv.findIndex(arg => arg === '--target' || arg === '-t');
+  const targetFlagIndex = argv.findIndex((arg) => arg === '--target' || arg === '-t');
   if (targetFlagIndex !== -1) {
     const targetArg = argv[targetFlagIndex + 1];
     if (!targetArg || targetArg.startsWith('-')) {
       console.error('Missing value for target option. - watch-auto-manifest.js:200');
       process.exit(1);
     }
-    return targetArg.split(',').map(name => name.trim().toLowerCase()).filter(Boolean);
+    return targetArg
+      .split(',')
+      .map((name) => name.trim().toLowerCase())
+      .filter(Boolean);
   }
 
   return [DEFAULT_TARGET];
@@ -258,50 +282,52 @@ function listTargets() {
 }
 
 async function main() {
-    const args = process.argv.slice(2);
-    if (args.includes('--help') || args.includes('-h')) {
-      showHelp();
-      process.exit(0);
+  const args = process.argv.slice(2);
+  if (args.includes('--help') || args.includes('-h')) {
+    showHelp();
+    process.exit(0);
+  }
+
+  if (args.includes('--list')) {
+    listTargets();
+    process.exit(0);
+  }
+
+  const targetNames = parseTargets(args);
+  const uniqueTargets = [...new Set(targetNames)];
+  const invalidTargets = uniqueTargets.filter((name) => !TARGET_CONFIGS[name]);
+  if (invalidTargets.length > 0) {
+    console.error(`Unknown target(s): ${invalidTargets.join(', ')} - watch-auto-manifest.js:262`);
+    listTargets();
+    process.exit(1);
+  }
+
+  const forceFlag = parseForceFlag(args);
+  const initialFlag = parseInitialFlag(args);
+  const watchers = uniqueTargets.map((name) => {
+    const w = new AutoManifestWatcher(name, TARGET_CONFIGS[name]);
+    w.force = forceFlag;
+    return w;
+  });
+  watchers.forEach((watcher) => watcher.startWatching());
+
+  if (initialFlag) {
+    console.log(
+      'Running initial manifest regeneration for selected targets... - watch-auto-manifest.js:init',
+    );
+    for (const watcher of watchers) {
+      await watcher.regenerateManifest();
     }
+  }
 
-    if (args.includes('--list')) {
-      listTargets();
-      process.exit(0);
-    }
-
-    const targetNames = parseTargets(args);
-    const uniqueTargets = [...new Set(targetNames)];
-    const invalidTargets = uniqueTargets.filter(name => !TARGET_CONFIGS[name]);
-    if (invalidTargets.length > 0) {
-      console.error(`Unknown target(s): ${invalidTargets.join(', ')} - watch-auto-manifest.js:262`);
-      listTargets();
-      process.exit(1);
-    }
-
-    const forceFlag = parseForceFlag(args);
-    const initialFlag = parseInitialFlag(args);
-    const watchers = uniqueTargets.map(name => {
-      const w = new AutoManifestWatcher(name, TARGET_CONFIGS[name]);
-      w.force = forceFlag;
-      return w;
-    });
-    watchers.forEach(watcher => watcher.startWatching());
-
-    if (initialFlag) {
-      console.log('Running initial manifest regeneration for selected targets... - watch-auto-manifest.js:init');
-      for (const watcher of watchers) {
-        await watcher.regenerateManifest();
-      }
-    }
-
-    process.on('SIGINT', async () => {
-      console.log('\nStopping automanifest watchers... - watch-auto-manifest.js:271');
-      await Promise.all(watchers.map(watcher => watcher.stopWatching()));
-      process.exit(0);
-    });
+  process.on('SIGINT', async () => {
+    console.log('\nStopping automanifest watchers... - watch-auto-manifest.js:271');
+    await Promise.all(watchers.map((watcher) => watcher.stopWatching()));
+    process.exit(0);
+  });
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error('Automanifest watcher failed: - watch-auto-manifest.js:278', error.message);
   process.exit(1);
 });

@@ -2,11 +2,13 @@
   "root": true,
   "env": {
     "node": true,
+    "browser": true,
     "es2020": true
   },
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {
-    "ecmaVersion": 2020
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
   "rules": {
     "no-unused-vars": ["warn"],
@@ -14,5 +16,5 @@
     "no-useless-escape": "off",
     "no-constant-condition": ["warn"]
   },
-  "ignorePatterns": ["scripts/_archived/**", "scripts/watchers/**"]
+  "ignorePatterns": ["node_modules/**", "dist/**", "logs/**", "coverage/**", "scripts/_archived/**"]
 }
