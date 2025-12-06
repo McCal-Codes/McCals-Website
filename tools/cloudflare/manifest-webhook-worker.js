@@ -2,7 +2,7 @@
 // Deploy with: npx wrangler deploy tools/cloudflare/manifest-webhook-worker.js
 // Required env vars (set in Dashboard or wrangler.toml):
 // - WEBHOOK_SECRET: shared secret expected from manifest generators
-// - ORIGIN_BASE: e.g., https://api.yourdomain.com
+// - ORIGIN_BASE: e.g., https://api.mcc-cal.com
 // - FALLBACK_BASE: e.g., https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main
 
 export default {
