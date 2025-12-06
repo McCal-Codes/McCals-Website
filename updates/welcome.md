@@ -1,9 +1,8 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `9b683e32` — 1 second ago
-> update: refresh last commit details and update welcome message
+**Last commit**: `c95c6560` — 0 seconds ago
+> chore: update welcome state
 ## 🔄 Changes in last commit
 - scripts/.welcome-state.json
-- updates/todo.md
 - updates/welcome.md
 ## 📋 Your checklist status
 - Open: **71** | Done: **59**
