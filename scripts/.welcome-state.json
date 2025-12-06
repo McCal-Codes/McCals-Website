@@ -1,4 +1,4 @@
 {
-  "lastHash": "18b3e89a",
-  "lastMessage": "Update welcome message and task completion records; add completed tasks archive and backup of to-do list\n\\n\\nAuthor: mccal"
+  "lastHash": "74d25a4f",
+  "lastMessage": "docs: add authentication setup guides and update task tracking\n\n- Created AUTH-SETUP-GUIDE.md with complete environment variable setup, JWT/webhook secret generation, local development and production deployment procedures\n- Created AUTH-TOKEN-QUICK-REFERENCE.md with fast copy-paste setup for local development and CI/CD\n- Updated todo.md to mark auth setup complete and refactor high priority section\n- Updated copilot-instructions.md with references to new auth guides\n- Documented token generation, rotation, expiry, and security best practices\n- Added troubleshooting guide for common auth issues and deployment checklist"
 }
