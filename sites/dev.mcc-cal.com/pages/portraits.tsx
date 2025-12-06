@@ -8,7 +8,7 @@ const PortraitsPage = () => {
 
   return (
     <Layout>
-      <WidgetEmbed widget={config.widget} category={config.category} />
+      <WidgetEmbed widget={config.widget} category={config.category} version={config.version} />
     </Layout>
   );
 };
