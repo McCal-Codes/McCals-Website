@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `7c35cbdb` — 0 seconds ago
-> feat: Refactor routing and validation for Next.js self-hosted site
+**Last commit**: `13eaead2` — 0 seconds ago
+> feat: enhance development setup for dev.mcc-cal.com with auto-start options and deployment guide
 ## 🔄 Changes in last commit
-- README.md
-- dev-server.js
-- package.json
+- .vscode/tasks.json
 - scripts/.welcome-state.json
-- serve-select.html
-- sites/dev.mcc-cal.com/.env.example
-- sites/dev.mcc-cal.com/.next/build-manifest.json
-- sites/dev.mcc-cal.com/.next/cache/.previewinfo
-- sites/dev.mcc-cal.com/.next/cache/.rscinfo
-- sites/dev.mcc-cal.com/.next/cache/.tsbuildinfo
-- sites/dev.mcc-cal.com/.next/cache/eslint/.cache_26v05r
-- sites/dev.mcc-cal.com/.next/cache/next-devtools-config.json
-- …and 201 more
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/1.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/2.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/3.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/4.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/index.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/index.pack.gz.old
+- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/0.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/2.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/3.pack.gz
+- sites/dev.mcc-cal.com/.next/cache/webpack/server-development/index.pack.gz
+- …and 16 more
 ## 📋 Your checklist status
 - Open: **72** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
