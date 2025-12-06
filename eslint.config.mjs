@@ -4,7 +4,7 @@ import globals from "globals";
 // Flat config for ESLint 8.57.x (no "eslint/config" export yet)
 export default [
   {
-    ignores: ["dist/**", "node_modules/**", "logs/**", "coverage/**", "scripts/_archived/**"],
+    ignores: ["dist/**", "node_modules/**", "logs/**", "coverage/**", "scripts/_archived/**", ".next/**", "**/build/**", "**/out/**"],
   },
   {
     ...js.configs.recommended,
