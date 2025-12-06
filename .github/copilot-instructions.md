@@ -232,6 +232,21 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+- 2025-12-06T00:00:00.000Z — Blog Admin Widget v1.0.0 Release.
+	- Created comprehensive blog authoring system for admin use (src/widgets/_admin/blog-admin/).
+	- Features: JWT authentication, login/logout, session persistence via LocalStorage.
+	- Rich text editor: dynamic content blocks, title/excerpt fields, add/remove blocks.
+	- Post management: dashboard with view/edit/delete (edit/delete placeholders for backend).
+	- Profile settings: display name and password change interface (backend pending).
+	- Self-contained single-file widget (~15KB), no external dependencies.
+	- Modern responsive UI: tab navigation, loading states, success/error alerts, mobile-responsive.
+	- Security: Bearer token authorization, input sanitization, secure logout.
+	- Accessibility: semantic HTML, ARIA labels, keyboard navigation, WCAG AA contrast.
+	- API endpoints: POST /api/v1/blog/auth/login, GET /api/v1/blog/posts, POST /api/v1/blog/posts (auth required).
+	- Test page: test-blog-admin.html for local development with credentials and feature checklist.
+	- Documentation: README.md with usage/configuration/API requirements, CHANGELOG.md with version history.
+	- Admin use only: not for public deployment, requires password protection or authentication.
+
 - 2025-12-05T00:00:00.000Z — Cloudflare Integration for Edge Caching and Cache Management.
 	- Added webhook endpoints to Cloudflare Worker: `POST /api/v1/webhooks/purge`, `/warm`, `/refresh` with secret authentication.
 	- Implemented edge caching policy: 10 min TTL for manifests, 1 hour stale-while-revalidate, ETag validation support.
