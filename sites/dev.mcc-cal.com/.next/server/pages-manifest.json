@@ -2,5 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/widgets/[...slug]": "pages/api/widgets/[...slug].js"
+  "/": "pages/index.js",
+  "/journalism": "pages/journalism.js"
 }

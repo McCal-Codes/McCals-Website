@@ -1,4 +1,4 @@
 {
-  "lastHash": "f6a0767a",
-  "lastMessage": "feat: Update welcome state and cache files for changelog tracking and widget embedding\n\\n\\nAuthor: mccal"
+  "lastHash": "32d0aeaa",
+  "lastMessage": "feat: Implement widget hot reload functionality for development\n\n- Added WIDGET-HOT-RELOAD-GUIDE.md to document the hot reload process.\n- Created WidgetReloader component for UI feedback and reload functionality.\n- Developed API endpoint to serve widget HTML files from the local filesystem.\n- Introduced widgetHotReload utility for programmatic widget reloading.\n- Enhanced WidgetEmbed component to support dynamic loading in development mode.\n- Implemented security checks to prevent directory traversal in API.\n- Updated documentation with usage examples and troubleshooting tips.\n\\n\\nAuthor: mccal"
 }
