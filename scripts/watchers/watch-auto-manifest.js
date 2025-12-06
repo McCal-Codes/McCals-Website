@@ -214,6 +214,11 @@ function parseForceFlag(argv) {
   return argv.includes('--force');
 }
 
+function parseInitialFlag(argv) {
+  // When true, run an initial manifest regeneration right after watcher startup
+  return argv.includes('--initial');
+}
+
 function showHelp() {
   const targetsList = Object.entries(TARGET_CONFIGS)
     .map(([key, cfg]) => `  • ${key} – ${cfg.label}`)
@@ -230,6 +235,7 @@ Options:
   --help, -h          Show this help message
   --target <names>    Comma-separated targets to watch (default: ${DEFAULT_TARGET})
   --all               Watch all supported targets simultaneously
+  --initial           Run an initial manifest regeneration on startup for the selected targets
   --list              List available targets
 
 Available targets:
@@ -273,12 +279,20 @@ async function main() {
     }
 
     const forceFlag = parseForceFlag(args);
+    const initialFlag = parseInitialFlag(args);
     const watchers = uniqueTargets.map(name => {
       const w = new AutoManifestWatcher(name, TARGET_CONFIGS[name]);
       w.force = forceFlag;
       return w;
     });
     watchers.forEach(watcher => watcher.startWatching());
+
+    if (initialFlag) {
+      console.log('Running initial manifest regeneration for selected targets... - watch-auto-manifest.js:init');
+      for (const watcher of watchers) {
+        await watcher.regenerateManifest();
+      }
+    }
 
     process.on('SIGINT', async () => {
       console.log('\nStopping automanifest watchers... - watch-auto-manifest.js:271');

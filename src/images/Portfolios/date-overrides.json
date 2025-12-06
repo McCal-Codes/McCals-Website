@@ -5,5 +5,19 @@
     "source": "manual:client-verified",
     "confidence": "high",
     "notes": "Set per client request to reflect spring 2019 convention"
+  },
+  "Events/Back To School Bash": {
+    "dateISO": "2022-01-01",
+    "dateDisplay": "January 2022",
+    "source": "manual:override",
+    "confidence": "high",
+    "notes": "Per user: Back to School Bash occurred January 2022"
+  },
+  "Events/Growing Up": {
+    "dateISO": "2021-12-01",
+    "dateDisplay": "December 2021",
+    "source": "manual:override",
+    "confidence": "high",
+    "notes": "Per user: Growing Up event occurred December 2021"
   }
 }
