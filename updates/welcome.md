@@ -1,10 +1,9 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `006b791e` — 0 seconds ago
-> docs: add Cloudflare subdomain setup guide and update worker configuration
+**Last commit**: `b5635c5b` — 0 seconds ago
+> feat: deploy Cloudflare Worker API to production (api.mcc-cal.com)
 ## 🔄 Changes in last commit
-- docs/SESSION-SUMMARY-2025-12-06.md
-- docs/integrations/CLOUDFLARE-SUBDOMAIN-SETUP.md
 - scripts/.welcome-state.json
+- tools/cloudflare/worker.js
 - tools/cloudflare/wrangler.toml
 - updates/welcome.md
 ## 📋 Your checklist status

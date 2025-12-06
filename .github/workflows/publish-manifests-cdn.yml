@@ -102,20 +102,19 @@ jobs:
       - name: Purge and warm Cloudflare edge cache
         if: steps.diff.outputs.has_changes == 'true' && steps.commit.outputs.has_commit == 'true'
         env:
-          CF_API_URL: ${{ secrets.CLOUDFLARE_API_URL }}
           CF_WEBHOOK_SECRET: ${{ secrets.CLOUDFLARE_WEBHOOK_SECRET }}
         run: |
-          # Skip if Cloudflare secrets not configured
-          if [ -z "$CF_API_URL" ] || [ -z "$CF_WEBHOOK_SECRET" ]; then
-            echo "ℹ️ Cloudflare cache purge skipped (secrets not configured)"
+          # Skip if Cloudflare secret not configured
+          if [ -z "$CF_WEBHOOK_SECRET" ]; then
+            echo "ℹ️ Cloudflare cache purge skipped (CLOUDFLARE_WEBHOOK_SECRET not configured)"
             exit 0
           fi
           
           echo "🔄 Triggering Cloudflare edge cache refresh..."
           
-          # Call the combined refresh endpoint (purge + warm)
+          # Call the combined refresh endpoint (purge + warm) at api.mcc-cal.com
           RESPONSE=$(curl -s -w "\n%{http_code}" \
-            -X POST "${CF_API_URL}/api/v1/webhooks/refresh" \
+            -X POST "https://api.mcc-cal.com/api/v1/webhooks/refresh" \
             -H "Content-Type: application/json" \
             -H "X-Webhook-Secret: ${CF_WEBHOOK_SECRET}" \
             --max-time 30)

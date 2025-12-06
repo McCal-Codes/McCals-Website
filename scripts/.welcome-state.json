@@ -1,4 +1,4 @@
 {
-  "lastHash": "006b791e",
-  "lastMessage": "docs: add Cloudflare subdomain setup guide and update worker configuration\n\n- Created CLOUDFLARE-SUBDOMAIN-SETUP.md with complete DNS/routing configuration\n- Updated wrangler.toml with improved comments and correct route patterns\n- Added step-by-step deployment guide for api.mcc-cal.com subdomain\n- Documented DNS CNAME setup, environment variable configuration\n- Added testing procedures for all API endpoints\n- Included troubleshooting section for common issues\n- Production checklist for deployment validation"
+  "lastHash": "b5635c5b",
+  "lastMessage": "feat: deploy Cloudflare Worker API to production (api.mcc-cal.com)\n\n- Created self-contained worker.js with no external dependencies\n- Updated wrangler.toml with KV namespace ID and correct main file\n- Deployed Worker to Cloudflare with all endpoints live\n- JWT authentication working (24-hour tokens, HS256)\n- Blog posts API working (GET/POST with Bearer token auth)\n- Manifest serving working (concert, events, journalism, etc)\n- Rate limiting configured (100 req/min per IP)\n- CORS configured for *.mcc-cal.com subdomains\n- Cache control headers set (10min manifests, 5min posts)\n- All endpoints tested and verified working live\n- Fixed manifest path handling for case-insensitive lookups"
 }
