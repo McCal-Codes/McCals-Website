@@ -1,4 +1,4 @@
 {
-  "lastHash": "e07879ea",
-  "lastMessage": "feat: update welcome state and admin dashboard widget for improved API health checks\n\\n\\nAuthor: mccal"
+  "lastHash": "6f0ea4b0",
+  "lastMessage": "feat: Add Admin Dashboard v1.3.0 with dark theme, glass elements, and masonry layout\n\n- Introduced a comprehensive admin dashboard with a dark theme and system-ui font stack.\n- Redesigned dashboard cards with glass-like effects and backdrop blur.\n- Implemented a masonry-inspired grid layout for metrics and analytics sections.\n- Enhanced typography and refined status badges with gradient backgrounds.\n- Improved responsiveness and mobile-first design approach.\n- Added a modal changelog for better accessibility and user experience.\n\\n\\nAuthor: mccal"
 }
