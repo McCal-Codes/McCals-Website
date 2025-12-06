@@ -9,7 +9,7 @@ const JournalismPage = () => {
 
   return (
     <Layout>
-      <WidgetEmbed widget={config.widget} category={config.category} />
+      <WidgetEmbed widget={config.widget} category={config.category} version={config.version} />
       <WidgetReloader widget={config.widget} version={config.version} />
     </Layout>
   );
