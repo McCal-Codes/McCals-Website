@@ -80,8 +80,10 @@
     "welcome:open": "code updates/welcome.md || open updates/welcome.md",
     "setup": "node scripts/admin/setup-repo.js",
     "postinstall": "npm run welcome",
-    "lint:scripts": "npx eslint 'scripts/**/*.js' --max-warnings=50",
-    "lint": "npx eslint 'scripts/**/*.js' 'src/site/**/*.js' --max-warnings=50",
+    "lint:scripts": "eslint 'scripts/**/*.js' --max-warnings=50",
+    "lint": "eslint . --max-warnings=50",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
     "test": "npx playwright test tests/playwright --reporter=list",
     "build:thesis": "node scripts/thesis/build-thesis-interactive.js",
     "dev:thesis": "node scripts/thesis/build-thesis-interactive.js --watch",
@@ -95,7 +97,8 @@
     "versions:check": "node scripts/utils/standardize-versions.js --dry-run --verbose",
     "versions:rename": "node scripts/utils/rename-widget-versions.js",
     "versions:rename-check": "node scripts/utils/rename-widget-versions.js --dry-run --verbose",
-    "scan:widget-versions": "node scripts/utils/scan-widget-versions.js"
+    "scan:widget-versions": "node scripts/utils/scan-widget-versions.js",
+    "prepare": "husky"
   },
   "keywords": [
     "photography",
@@ -106,6 +109,7 @@
   "author": "McCal Media",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@playwright/test": "^1.39.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -113,17 +117,34 @@
     "chokidar": "^4.0.3",
     "concurrently": "^9.2.1",
     "esbuild": "^0.23.0",
-    "eslint": "^8.46.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.5.0",
     "http-server": "^14.1.1",
+    "husky": "^9.1.7",
     "lighthouse": "^13.0.1",
+    "lint-staged": "^16.2.7",
     "nodemon": "^3.1.11",
     "open": "^10.1.0",
     "playwright": "^1.39.0",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14"
+    "prettier": "^3.7.4",
+    "tailwindcss": "^3.4.14",
+    "typescript-eslint": "^8.48.1"
   },
   "engines": {
     "node": ">=16.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,html,css,scss}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "compression": "^1.8.1",

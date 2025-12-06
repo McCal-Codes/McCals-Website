@@ -1,6 +1,27 @@
 #!/usr/bin/env node
+/**
+ * Manifest Validator
+ * Validates all manifest.json files in the portfolio directories.
+ *
+ * Usage:
+ *   node scripts/utils/validate-manifests.js
+ *   node scripts/utils/validate-manifests.js --help
+ *
+ * Exit codes:
+ *   0 - All manifests valid
+ *   1 - One or more errors found
+ *   2 - Base manifests folder not found
+ */
+
 const fs = require('fs');
 const path = require('path');
+
+if (process.argv.includes('--help')) {
+  console.log(
+    `\nManifest Validator\n\nUsage:\n  node scripts/utils/validate-manifests.js\n\nExit codes:\n  0 - All manifests valid\n  1 - One or more errors found\n  2 - Base manifests folder not found\n`,
+  );
+  process.exit(0);
+}
 
 const BASE = path.resolve(__dirname, '../../src/images/Portfolios');
 let errors = 0;
@@ -11,7 +32,12 @@ function walk(dir) {
   for (const e of entries) {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) walk(full);
-    else if (e.isFile() && (e.name === 'manifest.json' || e.name.endsWith('-manifest.json') || e.name.endsWith('manifest.json'))) {
+    else if (
+      e.isFile() &&
+      (e.name === 'manifest.json' ||
+        e.name.endsWith('-manifest.json') ||
+        e.name.endsWith('manifest.json'))
+    ) {
       checked++;
       try {
         const raw = fs.readFileSync(full, 'utf8');

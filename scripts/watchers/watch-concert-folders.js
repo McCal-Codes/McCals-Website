@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 
-/**
- * Concert Folder Watcher
- * 
- * Automatically runs the concert build process when new photos are added
- * to any concert band folder or subfolder.
- * 
- * Watches: images/Portfolios/Concert/**/*.{jpg,jpeg,png,webp,gif}
- * Runs: npm run build:concert (organize folders + generate manifest)
- */
+// Concert Folder Watcher
+//
+// Automatically runs the concert build process when new photos are added
+// to any concert band folder or subfolder.
+//
+// Watches (glob): images/Portfolios/Concert/**
+// Files: *.{jpg,jpeg,png,webp,gif}
+// Runs: npm run build:concert (organize folders + generate manifest)
 
 const chokidar = require('chokidar');
 const { spawn } = require('child_process');
@@ -47,12 +46,12 @@ function runBuild() {
   const buildProcess = spawn('npm', ['run', 'build:concert'], {
     cwd: process.cwd(),
     stdio: 'inherit',
-    shell: true
+    shell: true,
   });
 
   buildProcess.on('close', (code) => {
     isBuilding = false;
-    
+
     if (code === 0) {
       success('Concert build completed successfully!');
     } else {
@@ -83,7 +82,7 @@ function startWatching() {
   log(`Watching: ${CONCERT_PATH}`);
   log(`Patterns: ${IMAGE_PATTERNS.join(', ')}`);
 
-  const watchPaths = IMAGE_PATTERNS.map(pattern => path.join(CONCERT_PATH, pattern));
+  const watchPaths = IMAGE_PATTERNS.map((pattern) => path.join(CONCERT_PATH, pattern));
 
   const watcher = chokidar.watch(watchPaths, {
     ignored: [
@@ -91,15 +90,15 @@ function startWatching() {
       '**/Thumbs.db',
       '**/manifest.json',
       '**/concert-manifest.json',
-      '**/processing-summary.json'
+      '**/processing-summary.json',
     ],
     persistent: true,
     ignoreInitial: true, // Don't trigger on startup
     depth: 10, // Watch deeply nested folders
     awaitWriteFinish: {
       stabilityThreshold: 1000,
-      pollInterval: 100
-    }
+      pollInterval: 100,
+    },
   });
 
   watcher
