@@ -1,17 +1,22 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `6f0ea4b0` — 1 second ago
-> feat: Add Admin Dashboard v1.3.0 with dark theme, glass elements, and masonry layout
+**Last commit**: `80829d72` — 0 seconds ago
+> feat: add custom _document.tsx for improved SEO and font integration
 ## 🔄 Changes in last commit
-- .github/copilot-instructions.md
 - scripts/.welcome-state.json
-- src/widgets/_admin/admin-dashboard/CHANGELOG.md
-- src/widgets/_admin/admin-dashboard/README.md
-- src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html
-- src/widgets/_admin/admin-dashboard/versions/v1.2.0-admin-dashboard.html
-- src/widgets/_admin/admin-dashboard/versions/v1.3.0-admin-dashboard.html
-- updates/welcome.md
+- sites/self-hosted-nextjs/.next/BUILD_ID
+- sites/self-hosted-nextjs/.next/build-manifest.json
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/1.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/10.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/12.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/13.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/14.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/2.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/3.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/4.pack.gz
+- sites/self-hosted-nextjs/.next/cache/webpack/client-development/index.pack.gz
+- …and 140 more
 ## 📋 Your checklist status
-- Open: **71** | Done: **5**
+- Open: **72** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
 
 

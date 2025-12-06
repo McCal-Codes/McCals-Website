@@ -25,24 +25,24 @@
       <div class="buttons">
         <a class="button" href="/?root=src">Open Dev (src)</a>
         <a class="button ghost" href="/?root=dist">Open Prod (dist)</a>
-          <a id="next-server-btn" class="button ghost" href="http://localhost:3005/" target="_blank">Open Self-hosted (Next.js)</a>
+          <a id="next-server-btn" class="button ghost" href="http://localhost:3005/" target="_blank">Open dev.mcc-cal.com (Next.js)</a>
           <button id="start-next-btn" class="button" style="background:#0ea5a4;color:#071724;border-radius:10px;padding:12px 18px;font-weight:600;margin-left:8px;">Start & Open</button>
       </div>
 
       <div class="note">Tip: If you're running the server with <code>--serve=dist</code> or <code>SERVE_TARGET=dist</code>, clicking "Open Prod" will show files from the <code>dist</code> folder. If the build doesn't exist, the request will fall back to the default index.</div>
       <div class="note" style="margin-top:10px;">
-        <strong>Quick prerequisites</strong>: Node.js 18+ recommended. Network access to the npm registry is required to install dependencies. The canonical self-hosted site is the running Next.js server — run it from <code>sites/self-hosted-nextjs</code> and then use the button above to open the running app.
+        <strong>Quick prerequisites</strong>: Node.js 18+ recommended. Network access to the npm registry is required to install dependencies. The canonical dev.mcc-cal.com site is the running Next.js server — run it from <code>sites/dev.mcc-cal.com</code> and then use the button above to open the running app.
       </div>
       <div style="margin-top:12px;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;color:#cbd5e1;font-size:0.95rem;">
-        <strong>How to run the self-hosted Next.js app (canonical)</strong>
+        <strong>How to run the dev.mcc-cal.com Next.js app (canonical)</strong>
         <pre style="background:transparent;color:inherit;white-space:pre-wrap;margin-top:8px;font-size:0.9rem;line-height:1.4;">
-cd sites/self-hosted-nextjs
+cd sites/dev.mcc-cal.com
 npm run dev
 # Next dev runs on port 3000 by default (script uses `next dev -p 3000`)
 # Open http://localhost:3000/
 
 # After a successful build
-cd sites/self-hosted-nextjs
+cd sites/dev.mcc-cal.com
 npm run start
 # This runs `next start -p 3000` and serves the optimized production build.
 # Open http://localhost:3000/
@@ -51,11 +51,11 @@ npm run start
 
 # Note: Running the Next.js server is the recommended approach. Static exports are optional and depend on your Next.js configuration.
 
-cd sites/self-hosted-nextjs
+cd sites/dev.mcc-cal.com
 npm run build
 # If your app/config supports it, you may export a static snapshot via `next export`:
 # npx next export -o out
-# This would write HTML/CSS/JS into sites/self-hosted-nextjs/out/ (only when supported)
+# This would write HTML/CSS/JS into sites/dev.mcc-cal.com/out/ (only when supported)
 
 # from repo root
 PORT=3033 node dev-server.js
@@ -67,7 +67,7 @@ PORT=3033 node dev-server.js
       <div style="display:flex;gap:10px;align-items:center;background:rgba(15,23,32,0.9);padding:8px 12px;border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,0.6);">
         <a class="button" href="/?root=src" style="padding:8px 12px;font-size:0.9rem;">Open Dev (src)</a>
         <a class="button ghost" href="/?root=dist" style="padding:8px 12px;font-size:0.9rem;">Open Prod (dist)</a>
-        <a id="next-server-btn-bottom" class="button ghost" href="http://localhost:3005/" target="_blank" style="padding:8px 12px;font-size:0.9rem;">Open Self-hosted (Next.js)</a>
+        <a id="next-server-btn-bottom" class="button ghost" href="http://localhost:3005/" target="_blank" style="padding:8px 12px;font-size:0.9rem;">Open dev.mcc-cal.com (Next.js)</a>
         <span id="next-state-bottom" style="margin-left:8px;color:#9aa6b3;font-size:0.9rem;">—</span>
       </div>
     </footer>
