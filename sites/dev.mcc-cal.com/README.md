@@ -74,6 +74,7 @@ npm run start
 ## ✨ Features
 
 - **Production-Perfect Widgets**: Dev pages use the exact same widget code as mcc-cal.com  
+- **🔄 Dynamic Widget Reloading**: See widget changes instantly during development (no rebuild needed!)
 - **Server-Side Rendering (SSR)**: Fast initial page loads with pre-rendered content
 - **API Integration**: Fetches data from api.mcc-cal.com with intelligent caching  
 - **Image Optimization**: Next.js Image component with automatic WebP conversion
@@ -248,6 +249,23 @@ This is the **exact same changelog** shown on the production Squarespace site.
 | `/nature` | nature-portfolio | v1.0 | ✓ Click v1.0 badge |
 | `/podcast` | podcast-feed | v1.9.5 | ✓ Click v1.9.5 badge |
 
+### Widget Development & Hot Reload
+
+**New Feature**: Widgets now reload dynamically during development!
+
+During development (`localhost:3000`):
+- Widget files are loaded from the **local filesystem**
+- Changes appear **instantly** when you edit a widget HTML file
+- No need to rebuild or commit changes
+- Simply press **Ctrl+Shift+W** (Cmd+Shift+W on macOS) to reload
+
+In production (deployed site):
+- Widgets are loaded from **GitHub** (frozen, consistent versions)
+- Behavior unchanged from previous implementation
+
+**For detailed workflow and troubleshooting, see:**
+[Widget Hot Reload Development Guide](./WIDGET-HOT-RELOAD-GUIDE.md)
+
 ### Adding New Widget Pages
 
 See **[WIDGET-EMBED-GUIDE.md](./WIDGET-EMBED-GUIDE.md)** for detailed instructions on:
@@ -258,6 +276,7 @@ See **[WIDGET-EMBED-GUIDE.md](./WIDGET-EMBED-GUIDE.md)** for detailed instructio
 ### Benefits
 
 ✅ **Zero Duplication** - Single source of truth for widget code  
+✅ **Instant Development Feedback** - See changes as you make them (no rebuild delays)
 ✅ **Automatic Updates** - Changes to production widgets instantly appear on dev  
 ✅ **Built-in Changelogs** - View changelog modal for each widget  
 ✅ **Easy Maintenance** - No custom React components to keep in sync  
@@ -265,6 +284,7 @@ See **[WIDGET-EMBED-GUIDE.md](./WIDGET-EMBED-GUIDE.md)** for detailed instructio
 
 ## 📚 Related Documentation
 
+- [Widget Hot Reload Guide](./WIDGET-HOT-RELOAD-GUIDE.md) - **NEW**: Instant widget development feedback
 - [Widget Embed Guide](./WIDGET-EMBED-GUIDE.md) - Adding and updating widgets
 - [API Setup Guide](../../docs/integrations/CLOUDFLARE-SUBDOMAIN-SETUP.md)
 - [GitHub Actions Integration](../../docs/workflows/GITHUB-ACTIONS-CLOUDFLARE-INTEGRATION.md)
@@ -272,6 +292,6 @@ See **[WIDGET-EMBED-GUIDE.md](./WIDGET-EMBED-GUIDE.md)** for detailed instructio
 
 ---
 
-**Version:** 0.2.0  
+**Version:** 0.3.0 (Added Widget Hot Reload)  
 **API:** api.mcc-cal.com  
 **Last Updated:** December 6, 2025

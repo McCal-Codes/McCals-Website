@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { addChangelogEntry } from '../../utils/changelogTracker';
 
 interface WidgetEmbedProps {
@@ -12,7 +12,8 @@ interface WidgetEmbedProps {
 
 /**
  * WidgetEmbed: Loads and renders actual production widget HTML directly
- * This ensures dev pages look identical to the Squarespace production site
+ * - During development: Loads from local API endpoint (watches for file changes)
+ * - In production: Loads from GitHub raw content (ensures consistent deployment)
  * Automatically tracks widget views in the changelog
  * Enables changelog modal functionality from the widget's version indicator
  * 
@@ -21,6 +22,7 @@ interface WidgetEmbedProps {
 const WidgetEmbed: React.FC<WidgetEmbedProps> = ({ widget, version, className = '' }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const loadedRef = useRef<boolean>(false);
+  const [isDev] = useState(() => typeof window !== 'undefined' && window.location.hostname === 'localhost');
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -32,13 +34,20 @@ const WidgetEmbed: React.FC<WidgetEmbedProps> = ({ widget, version, className = 
     // Track widget view in changelog
     addChangelogEntry(widget, version, 'view');
 
-    // Construct the raw GitHub URL to the widget HTML
-    const widgetUrl = `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/widgets/${widget}/versions/${version}`;
+    // Determine widget URL based on environment
+    // Dev: Load from local API proxy (picks up file changes automatically)
+    // Prod: Load from GitHub (frozen version for consistency)
+    const widgetUrl = isDev
+      ? `/api/widgets/${widget}/${version}`
+      : `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/widgets/${widget}/versions/${version}`;
 
     // Fetch and inject the widget HTML
     const loadWidget = async () => {
       try {
-        const response = await fetch(widgetUrl);
+        const response = await fetch(widgetUrl, {
+          // Disable caching in dev mode so file updates are picked up immediately
+          ...(isDev && { cache: 'no-store' }),
+        });
         if (!response.ok) throw new Error(`Failed to load widget: ${response.statusText}`);
         const html = await response.text();
 
@@ -99,7 +108,7 @@ const WidgetEmbed: React.FC<WidgetEmbedProps> = ({ widget, version, className = 
         containerRef.current.innerHTML = '';
       }
     };
-  }, [widget, version]);
+  }, [widget, version, isDev]);
 
   return <div ref={containerRef} className={className} />;
 };
