@@ -1,20 +1,20 @@
 # 👋 Welcome back, McCal!
-**Last commit**: `3c9cc043` — 1 second ago
-> feat: Implement Widget Hot Reload for instant development feedback
+**Last commit**: `3af2448c` — 0 seconds ago
+> feat(widget): implement auto-detection of widget versions and utilities for dynamic usage
 ## 🔄 Changes in last commit
-- WIDGET-HOT-RELOAD-FEATURE.md
 - scripts/.welcome-state.json
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/0.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/index.pack.gz
-- sites/dev.mcc-cal.com/.next/cache/webpack/client-development/index.pack.gz.old
 - sites/dev.mcc-cal.com/.next/cache/webpack/server-development/0.pack.gz
 - sites/dev.mcc-cal.com/.next/cache/webpack/server-development/index.pack.gz
 - sites/dev.mcc-cal.com/.next/cache/webpack/server-development/index.pack.gz.old
-- sites/dev.mcc-cal.com/.next/server/_error.js
-- sites/dev.mcc-cal.com/.next/server/pages-manifest.json
-- sites/dev.mcc-cal.com/.next/server/vendor-chunks/@swc.js
-- sites/dev.mcc-cal.com/.next/server/vendor-chunks/next.js
-- …and 9 more
+- sites/dev.mcc-cal.com/.next/server/pages/journalism.js
+- sites/dev.mcc-cal.com/.next/static/chunks/pages/journalism.js
+- sites/dev.mcc-cal.com/.next/static/chunks/webpack.js
+- sites/dev.mcc-cal.com/.next/static/webpack/4c02bb128f43853a.webpack.hot-update.json
+- sites/dev.mcc-cal.com/.next/static/webpack/ffc47023e1bac11f.webpack.hot-update.json
+- sites/dev.mcc-cal.com/.next/static/webpack/pages/journalism.4c02bb128f43853a.hot-update.js
+- sites/dev.mcc-cal.com/.next/static/webpack/webpack.4c02bb128f43853a.hot-update.js
+- sites/dev.mcc-cal.com/.next/static/webpack/webpack.ffc47023e1bac11f.hot-update.js
+- …and 5 more
 ## 📋 Your checklist status
 - Open: **72** | Done: **5**
 ## 🎯 Today’s focus (from `updates/todo.md`)
