@@ -79,6 +79,10 @@ Reference standards:
 
 ## ✅ RECENT COMPLETIONS
 - [x] **Cloudflare Integration** — Added edge caching, webhook purge/warm endpoints, rate limiting, cache stats, and CI integration for automatic cache refresh after manifest publish (Dec 5, 2025)
+- [x] **Cloudflare Manifest Webhook Worker** — Deployed minimal worker with secret verification, origin forwarding, and GitHub fallback; updated .env.example and added docs/integrations/manifest-webhook-worker.md (Dec 5, 2025)
+- [x] **Auto-Manifest Watcher --initial Flag** — Added --initial flag to watch-auto-manifest.js for immediate regeneration on startup; supports per-portfolio and --all modes (Dec 5, 2025)
+- [x] **Event Date Corrections** — Fixed Back To School Bash (January 2022) and Growing Up (December 2021) dates via date-overrides.json; manifests regenerated (Dec 5, 2025)
+- [x] **Image Compression** — Compressed 5 largest images (Nature/Concert portfolios) with sips, saving ~32.7 MB total (Dec 5, 2025)
 - [x] **Accessibility Statement Widget v1.1.x** — Added theme toggle (System/Light/Dark), readable panel with adaptive backdrop, localStorage persistence, full keyboard accessibility, WCAG AA contrast verified (Nov 11, 2025)
 - [x] **Policies & Legal Widget v1.1.0** — Accessibility enhancements: skip link, unified focus-visible, scroll spy with aria-current, mobile drawer improvements, reduced motion support, print stylesheet refinement (Nov 11, 2025)
 - [x] **Portrait Portfolio v1.0** — Portrait photography widget (vertical-focused, 3:4, performance & SEO) — added to Available Widgets and sample manifest (Oct 24, 2025)
@@ -152,6 +156,14 @@ Reference standards:
 	- **Note**: Keep brand/social handles (e.g., instagram.com/mccal.media) unchanged
 	- Update only site-root URLs and schema references to mcc-cal.com
 	- Confirm newsletter and social links remain correct per current branding
+
+**Cloudflare Worker & Manifest Webhook Integration**
+- [x] TODO: Created Cloudflare manifest webhook worker (`tools/cloudflare/manifest-webhook-worker.js`) with secret verification, origin forwarding, and GitHub fallback (Dec 5, 2025)
+- [x] TODO: Added documentation (`docs/integrations/manifest-webhook-worker.md`) and updated `.env.example` with webhook base/URL placeholders (Dec 5, 2025)
+- [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (WEBHOOK_SECRET, ORIGIN_BASE, FALLBACK_BASE)
+- [ ] TODO: Configure local/CI environments to point manifest generators at deployed Worker URL
+- [ ] TODO: Test end-to-end webhook flow: manifest change → generator POST → Worker → origin API → cache refresh
+- [ ] TODO: Monitor Worker analytics and optimize cache TTLs based on actual traffic patterns
 
 - [x] Run `npm run ai:preflight:short` — added and used during the recent sessions
 - [ ] TODO: Phase 2 — Review orphan scripts (`scripts/utils/generate-cdn-snippets.js`, `scripts/utils/auto-check-todo.js`, `scripts/utils/date-overrides.js`, `scripts/utils/find-latest-widget-versions.js`, `scripts/utils/shared-date-parsing.js`, `scripts/watchers/auto-manifest-updater.js`) and either archive to `scripts/_archived/` or integrate/document usage. Produce summary in `docs/CHANGELOG.md`.
