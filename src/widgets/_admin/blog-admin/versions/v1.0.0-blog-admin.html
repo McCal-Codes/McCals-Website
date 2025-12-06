@@ -562,7 +562,10 @@
   'use strict';
 
   // Configuration
-  const API_BASE = 'https://api.mcc-cal.com/api/v1/blog';
+  // Use local API if running on localhost, otherwise use production
+  const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:8787/api/v1/blog'
+    : 'https://api.mcc-cal.com/api/v1/blog';
   const TOKEN_KEY = 'blog_auth_token';
   const USER_KEY = 'blog_user_info';
 

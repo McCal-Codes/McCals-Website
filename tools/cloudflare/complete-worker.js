@@ -213,12 +213,27 @@ function parseAuthors(env) {
 
 const router = Router();
 
+
 // Health check
 router.get('/api/v1/health', () => {
   return jsonResponse({
     status: 'ok',
     timestamp: new Date().toISOString(),
     service: 'mccal-api'
+  });
+});
+
+// Blog API root health/info endpoint
+router.get('/api/v1/blog', () => {
+  return jsonResponse({
+    status: 'ok',
+    message: 'Blog API root',
+    time: new Date().toISOString(),
+    endpoints: [
+      '/api/v1/blog/auth/login',
+      '/api/v1/blog/posts',
+      '/api/v1/blog/posts (POST)',
+    ]
   });
 });
 
