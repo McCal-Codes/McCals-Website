@@ -39,6 +39,7 @@
   - Added changelog validator workflow to require CHANGELOG updates on PRs that touch core files (bypass via labels skip-changelog/docs-acknowledged).
   - Extended widget version policy workflow to run on pushes to main for continuous enforcement.
   - AI preflight now reports widget README coverage to highlight missing docs quickly.
+  - Domain audit: confirmed only intentional `mccal.media` social/email references remain; site-root URLs standardized to `mcc-cal.com`.
   - Archived orphan scripts (auto-check-todo, date-overrides, find-latest-widget-versions, shared-date-parsing, auto-manifest-updater) to `scripts/_archived/`; updated docs to point to canonical watchers.
   - Added GitHub issue templates (bug, feature) and pull request template to standardize submissions.
   - Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/\_archived/; not referenced by npm scripts or code).

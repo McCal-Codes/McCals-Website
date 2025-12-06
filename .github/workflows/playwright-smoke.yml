@@ -48,6 +48,15 @@ jobs:
           # Run tests with HTML and list reporters; keep exit code for reporting but do not fail the job
           npx playwright test tests/playwright --reporter=list,html --workers=1 || true
 
+      - name: Run axe-core (Firefox) against staging URL
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+        run: |
+          if [ -z "$STAGING_URL" ]; then
+            echo "Skipping axe audit: STAGING_URL secret not set."; exit 0; fi
+          npx playwright install firefox
+          node scripts/a11y/axe-firefox.js "$STAGING_URL"
+
       - name: Upload Playwright artifacts
         uses: actions/upload-artifact@v4
         with:
