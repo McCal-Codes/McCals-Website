@@ -15,17 +15,17 @@ interface WidgetEmbedProps {
 
 /**
  * WidgetEmbed Component
- * 
+ *
  * Dynamically loads and embeds widget HTML based on environment:
  * - Development: Serves from /api/widgets/* (local filesystem, hot reload)
  * - Production: Serves from GitHub raw content (cached, versioned)
- * 
+ *
  * Supports:
  * - Auto-version detection (if version not specified)
  * - Categorical widget organization (portfolios/, _navigation/, etc.)
  * - Debug mode with console logs
  * - Custom styling and error handling
- * 
+ *
  * Usage:
  * ```tsx
  * <WidgetEmbed widget="concert-portfolio" category="portfolios" />
@@ -43,7 +43,9 @@ export function WidgetEmbed({
   onError,
 }: WidgetEmbedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isDev = typeof window !== 'undefined' && /localhost|127\.0\.0\.1/.test(window.location.hostname);
+  const isDev =
+    typeof window !== 'undefined' &&
+    /localhost|127\.0\.0\.1|dev\.mcc-cal\.com/.test(window.location.hostname);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -73,7 +75,7 @@ export function WidgetEmbed({
           if (!response.ok) {
             const errorData = await response.json().catch(() => ({ error: response.statusText }));
             throw new Error(
-              `Failed to load widget: ${response.status} ${response.statusText}. ${errorData.error || ''}`
+              `Failed to load widget: ${response.status} ${response.statusText}. ${errorData.error || ''}`,
             );
           }
 
