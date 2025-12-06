@@ -13,6 +13,7 @@ body {
 }
 .site-main {
   flex: 1 0 auto;
+  margin-top: clamp(0px, -2vw, -20px);
 }
 .site-container {
   max-width: 1140px;
