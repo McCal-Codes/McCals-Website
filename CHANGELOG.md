@@ -1,3 +1,10 @@
+# 2025-12-08
+
+### Manifest Proxy & Shared Date Parsing Symlink
+
+- **Manifest Proxy in Dev:** WidgetEmbed now rewrites manifest URLs in injected widget HTML in dev mode, so widgets load manifests from the local API endpoint (e.g., `/api/manifests/events`) instead of GitHub. This ensures widgets work locally and in CI/dev environments without manual HTML edits. See WidgetEmbed.tsx for details.
+- **Shared Date Parsing Symlink:** To resolve CI and local import errors, a symlink was created: `scripts/utils/shared-date-parsing.js` → `../../src/api/scripts/utils/shared-date-parsing.js`. All manifest generators now use the canonical shared date parsing utility. If you move or update the canonical file, update the symlink accordingly. Do not edit or restore the archived copy in `scripts/_archived/`.
+
 ## 2025-11-23
 
 ### Version Standardization (x.x.0 Format)
