@@ -2,10 +2,10 @@
 
 /**
  * Concert Master Manifest Generator
- * 
+ *
  * Generates a single master manifest file for the concert widget to use.
  * This reduces API calls from dozens to just ONE for the widget.
- * 
+ *
  * Automatically scans all concert folders and creates:
  * - images/Portfolios/Concert/concert-manifest.json
  */
@@ -13,14 +13,26 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { detectDateFromImages } = require('../utils/shared-date-parsing.js');
+const { resolveDateOverride } = require('../utils/date-overrides.js');
 const { notify } = require('../utils/manifest-webhook');
 
 const CONCERT_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Concert');
 const MANIFEST_OUTPUT = path.join(CONCERT_BASE, 'concert-manifest.json');
+const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 
 const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
@@ -77,60 +89,65 @@ async function readManifest(manifestPath) {
 
 function getDateDisplayFromFolder(folderName) {
   // Try to extract "Month Year" from folder name
-  const monthYearPattern = /^(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})$/i;
+  const monthYearPattern =
+    /^(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})$/i;
   const match = folderName.match(monthYearPattern);
-  
+
   if (match) {
     return folderName; // Use folder name as-is (e.g., "December 2024")
   }
-  
+
   return null;
 }
 
 async function processBand(bandName, bandPath) {
   log(`Processing band: ${bandName}`);
-  
+
   try {
     const items = await fs.readdir(bandPath);
     const subfolders = [];
-    
+
     for (const item of items) {
       const itemPath = path.join(bandPath, item);
       if (await isDirectory(itemPath)) {
         subfolders.push({ name: item, path: itemPath });
       }
     }
-    
+
     if (subfolders.length === 0) {
       warning(`No subfolders found in ${bandName}`);
       return [];
     }
-    
+
     const concertDates = [];
-    
+
     // Process ALL subfolders, not just the first one
     for (const subfolder of subfolders) {
       const folderItems = await fs.readdir(subfolder.path);
-      const imageFiles = folderItems.filter(item => IMAGE_EXTENSIONS.test(item));
-      
+      const imageFiles = folderItems.filter((item) => IMAGE_EXTENSIONS.test(item));
+
       if (imageFiles.length === 0) {
         continue; // Skip folders with no images
       }
-      
+
       log(`Found ${imageFiles.length} images in ${bandName}/${subfolder.name}`);
-      
+
       // Try to get date from existing manifest first
       const manifestPath = path.join(subfolder.path, 'manifest.json');
       let concertDate = null;
-      
+      let dateSource = 'unknown';
+      let dateConfidence = 'low';
+
       if (await exists(manifestPath)) {
         const manifest = await readManifest(manifestPath);
         if (manifest && manifest.concertDate) {
           concertDate = manifest.concertDate;
+          dateSource = manifest.concertDate.source || 'manifest:subfolder';
+          dateConfidence = manifest.concertDate.confidence || 'high';
           log(`Using date from manifest: ${concertDate.iso}`);
         }
       }
-      
+
       // Fallback: try to detect date from folder name or images
       if (!concertDate) {
         // Try folder name first (e.g., "December 2024")
@@ -139,29 +156,37 @@ async function processBand(bandName, bandPath) {
           // Parse the folder name to get proper date info
           const monthYearMatch = subfolder.name.match(/^(\w+)\s+(\d{4})$/);
           if (monthYearMatch) {
-            const monthIndex = MONTHS.findIndex(m => m.toLowerCase() === monthYearMatch[1].toLowerCase());
+            const monthIndex = MONTHS.findIndex(
+              (m) => m.toLowerCase() === monthYearMatch[1].toLowerCase(),
+            );
             if (monthIndex !== -1) {
               concertDate = {
                 year: parseInt(monthYearMatch[2]),
                 month: monthIndex + 1,
                 monthName: MONTHS[monthIndex],
                 day: 1, // Default to 1st of month
-                iso: `${monthYearMatch[2]}-${String(monthIndex + 1).padStart(2, '0')}-01`
+                iso: `${monthYearMatch[2]}-${String(monthIndex + 1).padStart(2, '0')}-01`,
+                source: `folder:${subfolder.name}`,
               };
+              dateSource = `folder:${subfolder.name}`;
+              dateConfidence = 'medium';
               log(`Using date from folder name: ${concertDate.iso}`);
             }
           }
         }
-        
+
         // Still no date? Try to detect from image filenames
         if (!concertDate) {
-          concertDate = detectDateFromImages(imageFiles);
-          if (concertDate) {
+          const detected = detectDateFromImages(imageFiles);
+          if (detected) {
+            concertDate = detected;
+            dateSource = detected.source ? `filename:${detected.source}` : 'filename';
+            dateConfidence = 'medium';
             log(`Detected date from images: ${concertDate.iso}`);
           }
         }
       }
-      
+
       // Default fallback
       if (!concertDate) {
         const currentYear = new Date().getFullYear();
@@ -170,29 +195,57 @@ async function processBand(bandName, bandPath) {
           month: 1,
           monthName: 'January',
           day: 1,
-          iso: `${currentYear}-01-01`
+          iso: `${currentYear}-01-01`,
+          source: 'fallback:current-year',
         };
+        dateSource = 'fallback:current-year';
+        dateConfidence = 'low';
         warning(`Could not detect date for ${bandName}/${subfolder.name}, using default`);
       }
-      
-      const dateDisplay = getDateDisplayFromFolder(subfolder.name) || `${concertDate.monthName} ${concertDate.year}`;
-      
+
+      let dateDisplay =
+        getDateDisplayFromFolder(subfolder.name) || `${concertDate.monthName} ${concertDate.year}`;
+
+      const folderRelative = path.relative(PORTFOLIOS_BASE, subfolder.path).replace(/\\/g, '/');
+      const override = resolveDateOverride([
+        folderRelative,
+        folderRelative ? `src/images/Portfolios/${folderRelative}` : null,
+        `${bandName}/${subfolder.name}`,
+        subfolder.name,
+        bandName,
+      ]);
+
+      let dateNotes;
+      if (override) {
+        concertDate = { ...concertDate, ...override.date };
+        dateDisplay = override.dateDisplay || dateDisplay;
+        dateSource = override.dateSource || dateSource;
+        dateConfidence = override.dateConfidence || dateConfidence;
+        dateNotes = override.notes;
+      }
+      if (!concertDate.display) {
+        concertDate.display = dateDisplay;
+      }
+
       concertDates.push({
         bandName: bandName,
         folderPath: `${bandName}/${subfolder.name}`,
+        relativeFolderPath: folderRelative,
         dateDisplay: dateDisplay,
         concertDate: concertDate,
+        dateSource,
+        dateConfidence,
+        ...(dateNotes ? { dateNotes } : {}),
         totalImages: imageFiles.length,
-        images: imageFiles.sort() // Sort filenames
+        images: imageFiles.sort(), // Sort filenames
       });
     }
-    
+
     if (concertDates.length === 0) {
       warning(`No valid subfolders with images found in ${bandName}`);
     }
-    
+
     return concertDates;
-    
   } catch (err) {
     error(`Failed to process ${bandName}:`, err.message);
     return [];
@@ -201,49 +254,72 @@ async function processBand(bandName, bandPath) {
 
 async function generateMasterManifest() {
   log('Generating master concert manifest...');
-  
+
   try {
-    if (!await exists(CONCERT_BASE)) {
+    if (!(await exists(CONCERT_BASE))) {
       error(`Concert directory not found: ${CONCERT_BASE}`);
       return;
     }
-    
+
     const bands = await fs.readdir(CONCERT_BASE);
     const bandFolders = [];
-    
+
     for (const band of bands) {
       const bandPath = path.join(CONCERT_BASE, band);
-      if (await isDirectory(bandPath) && !band.startsWith('.') && band !== 'concert-manifest.json') {
+      if (
+        (await isDirectory(bandPath)) &&
+        !band.startsWith('.') &&
+        band !== 'concert-manifest.json'
+      ) {
         bandFolders.push({ name: band, path: bandPath });
       }
     }
-    
+
     log(`Found ${bandFolders.length} band folders`);
-    
+
     if (bandFolders.length === 0) {
       warning('No band folders found');
       return;
     }
-    
+
     const processedBands = [];
-    
+
     for (const band of bandFolders) {
       const results = await processBand(band.name, band.path);
       if (results && results.length > 0) {
         processedBands.push(...results); // Spread all concert dates
       }
     }
-    
+
     // Sort bands by date (newest first)
     processedBands.sort((a, b) => new Date(b.concertDate.iso) - new Date(a.concertDate.iso));
-    
+
+    const manifestItems = processedBands.map((band) => ({
+      title: band.bandName,
+      bandName: band.bandName,
+      folderPath: band.folderPath,
+      relativeFolderPath: band.relativeFolderPath,
+      dateDisplay: band.dateDisplay,
+      dateISO: band.concertDate?.iso,
+      date: band.concertDate,
+      dateSource: band.dateSource,
+      dateConfidence: band.dateConfidence,
+      totalImages: band.totalImages,
+      images: band.images.map((filename) => ({
+        filename,
+        path: path.posix.join('src/images/Portfolios/Concert', band.folderPath, filename),
+      })),
+    }));
+
     const masterManifest = {
-      version: "1.0.0",
+      version: '1.1.0',
       generated: new Date().toISOString(),
+      generatedBy: 'generate-concert-manifest.js',
       totalBands: processedBands.length,
-      bands: processedBands
+      bands: processedBands,
+      items: manifestItems,
     };
-    
+
     // Write the master manifest (idempotent)
     try {
       const content = JSON.stringify(masterManifest, null, 2) + '\n';
@@ -261,7 +337,9 @@ async function generateMasterManifest() {
       if (writeIt) {
         await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
         success(`Generated master manifest: ${MANIFEST_OUTPUT}`);
-        success(`Processed ${processedBands.length} bands with ${processedBands.reduce((total, band) => total + band.totalImages, 0)} total images`);
+        success(
+          `Processed ${processedBands.length} bands with ${processedBands.reduce((total, band) => total + band.totalImages, 0)} total images`,
+        );
         try {
           await notify('concert', { path: MANIFEST_OUTPUT, written: true });
         } catch (err) {
@@ -273,20 +351,22 @@ async function generateMasterManifest() {
           try {
             await notify('concert', { path: MANIFEST_OUTPUT, written: false });
           } catch (err) {
-            console.warn('Failed to notify manifest webhook (concert, no write):', err && err.message);
+            console.warn(
+              'Failed to notify manifest webhook (concert, no write):',
+              err && err.message,
+            );
           }
         }
       }
     } catch (err) {
       error(`Failed to write master manifest: ${err.message}`);
     }
-    
+
     // Log summary
     console.log('\n📋 Summary:');
-    processedBands.forEach(band => {
+    processedBands.forEach((band) => {
       console.log(`   • ${band.bandName} (${band.dateDisplay}) - ${band.totalImages} images`);
     });
-    
   } catch (err) {
     error('Failed to generate master manifest:', err.message);
     process.exit(1);
@@ -324,7 +404,7 @@ Examples:
 }
 
 // Generate the manifest
-generateMasterManifest().catch(err => {
+generateMasterManifest().catch((err) => {
   error('Failed to run generator:', err.message);
   process.exit(1);
 });
