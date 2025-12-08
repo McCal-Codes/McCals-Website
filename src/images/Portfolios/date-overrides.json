@@ -7,11 +7,11 @@
     "notes": "Set per client request to reflect spring 2019 convention"
   },
   "Events/Back To School Bash": {
-    "dateISO": "2022-01-01",
+    "dateISO": "2022-01-15",
     "dateDisplay": "January 2022",
-    "source": "manual:override",
+    "dateSource": "manual:user-verified",
     "confidence": "high",
-    "notes": "Per user: Back to School Bash occurred January 2022"
+    "notes": "Per user: Back to School Bash occurred January 15, 2022"
   },
   "Events/Growing Up": {
     "dateISO": "2021-12-01",

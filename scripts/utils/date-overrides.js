@@ -44,38 +44,94 @@ function normalizeIso(raw) {
           month,
           day,
           monthName: MONTHS[month - 1],
-          iso: cleaned,
+          iso: `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
         };
       }
     }
   }
+
+  const year = Number(raw.year);
+  const month = Number(raw.month);
+  const day = raw.day !== undefined ? Number(raw.day) : 1;
+  if (Number.isFinite(year) && Number.isFinite(month) && isValidDate(day, month, year)) {
+    return {
+      year,
+      month,
+      day,
+      monthName: MONTHS[month - 1],
+      iso: `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
+    };
+  }
+
   return null;
+}
+
+function formatOverride(raw) {
+  if (!raw) return null;
+
+  const normalizedDate = normalizeIso(raw);
+  if (!normalizedDate) {
+    return null;
+  }
+
+  const dateDisplay =
+    raw.dateDisplay || raw.display || `${normalizedDate.monthName} ${normalizedDate.year}`;
+  const dateSource = raw.dateSource || raw.source || 'manual:override';
+  const dateConfidence = raw.dateConfidence || raw.confidence || 'high';
+
+  return {
+    date: {
+      ...normalizedDate,
+      display: dateDisplay,
+      source: dateSource,
+      confidence: dateConfidence,
+      description: raw.description || raw.note || raw.notes || undefined,
+    },
+    dateDisplay,
+    dateSource,
+    dateConfidence,
+    notes: raw.notes || raw.note || undefined,
+  };
 }
 
 function resolveDateOverride(possibleKeys) {
   const overrides = loadOverrides();
-  if (!overrides) return null;
-  if (!Array.isArray(possibleKeys)) possibleKeys = [possibleKeys];
-  // Try each key for exact match
+  if (!overrides || typeof overrides !== 'object') {
+    return null;
+  }
+
+  if (!Array.isArray(possibleKeys)) {
+    possibleKeys = [possibleKeys];
+  }
+
   for (const k of possibleKeys) {
-    if (typeof k === 'string' && overrides[k]) {
-      return normalizeIso(overrides[k]);
+    if (!k) continue;
+    const normalizedKey = String(k).replace(/\\+/g, '/');
+    const raw = overrides[normalizedKey] || overrides[k];
+    const formatted = formatOverride(raw);
+    if (formatted) {
+      return formatted;
     }
   }
-  // Try partial match for each key
+
+  // Try suffix matches (folder-only keys)
   const overrideKeys = Object.keys(overrides);
-  for (const k of possibleKeys) {
-    if (typeof k === 'string') {
-      for (const key of overrideKeys) {
-        if (k.endsWith(key)) {
-          return normalizeIso(overrides[key]);
+  for (const keyCandidate of possibleKeys) {
+    if (!keyCandidate) continue;
+    for (const candidate of overrideKeys) {
+      if (String(keyCandidate).endsWith(candidate)) {
+        const formatted = formatOverride(overrides[candidate]);
+        if (formatted) {
+          return formatted;
         }
       }
     }
   }
+
   return null;
 }
 
 module.exports = {
+  loadOverrides,
   resolveDateOverride,
 };
