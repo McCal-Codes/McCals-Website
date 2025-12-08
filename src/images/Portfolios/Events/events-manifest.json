@@ -6,14 +6,14 @@
   "events": [
     {
       "eventName": "Back To School Bash",
-      "category": "Corporate",
-      "dateISO": "2025-12-08",
+      "category": "Performance Art",
+      "dateISO": "2022-01-15",
       "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 8,
-        "monthName": "December",
-        "iso": "2025-12-08"
+        "year": 2022,
+        "month": 1,
+        "day": 15,
+        "monthName": "January",
+        "iso": "2022-01-15"
       },
       "images": [
         {
@@ -282,7 +282,7 @@
     },
     {
       "eventName": "Growing Up",
-      "category": "Corporate",
+      "category": "Performance Art",
       "dateISO": "2025-12-08",
       "date": {
         "year": 2025,
