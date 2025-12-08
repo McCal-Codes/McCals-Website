@@ -1,6 +1,49 @@
 {
-  "processed": 0,
-  "total": 22,
-  "results": [],
-  "generated": "2025-12-04T16:06:08.146Z"
+  "processed": 3,
+  "total": 25,
+  "results": [
+    {
+      "bandName": "Horseburner",
+      "folderName": "December 2025",
+      "imageCount": 28,
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "monthName": "December",
+        "day": 6,
+        "iso": "2025-12-06",
+        "source": "filename_yymmdd"
+      },
+      "directory": "December 2025"
+    },
+    {
+      "bandName": "Star Viper",
+      "folderName": "December 2025",
+      "imageCount": 50,
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "monthName": "December",
+        "day": 6,
+        "iso": "2025-12-06",
+        "source": "filename_yymmdd"
+      },
+      "directory": "December 2025"
+    },
+    {
+      "bandName": "Sundras",
+      "folderName": "December 2025",
+      "imageCount": 11,
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "monthName": "December",
+        "day": 6,
+        "iso": "2025-12-06",
+        "source": "filename_yymmdd"
+      },
+      "directory": "December 2025"
+    }
+  ],
+  "generated": "2025-12-08T17:49:19.874Z"
 }
