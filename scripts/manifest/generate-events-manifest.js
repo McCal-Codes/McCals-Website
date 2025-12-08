@@ -18,7 +18,12 @@ const OUTPUT_FILE = 'events-manifest.json';
 // For now we support an override via --version CLI flag or EVENTS_MANIFEST_VERSION env var.
 
 function titleCase(slug) {
-  return slug.replace(/[_-]+/g, ' ').trim().split(/\s+/).map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
+  return slug
+    .replace(/[_-]+/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(' ');
 }
 
 /**
@@ -38,11 +43,11 @@ function parseEventDate(folderName, imageFiles = []) {
         monthName: dateInfo.monthName,
         display: `${dateInfo.monthName} ${dateInfo.year}`,
         source: `filename:${fileName}`,
-        confidence: 'high'
+        confidence: 'high',
       };
     }
   }
-  
+
   // Try to extract date from folder name
   const folderDateInfo = detectDateFromFilename(folderName);
   if (folderDateInfo) {
@@ -54,15 +59,27 @@ function parseEventDate(folderName, imageFiles = []) {
       monthName: folderDateInfo.monthName,
       display: `${folderDateInfo.monthName} ${folderDateInfo.year}`,
       source: `folder:${folderName}`,
-      confidence: 'medium'
+      confidence: 'medium',
     };
   }
-  
+
   // Fallback to current date
   const now = new Date();
-  const monthName = ['January', 'February', 'March', 'April', 'May', 'June',
-                     'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()];
-  
+  const monthName = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ][now.getMonth()];
+
   return {
     year: now.getFullYear(),
     month: now.getMonth() + 1,
@@ -71,43 +88,53 @@ function parseEventDate(folderName, imageFiles = []) {
     monthName: monthName,
     display: `${monthName} ${now.getFullYear()}`,
     source: 'fallback:current',
-    confidence: 'low'
+    confidence: 'low',
   };
 }
 
 async function readDirSafe(dir) {
-  try { return await fsp.readdir(dir); }
-  catch { return []; }
+  try {
+    return await fsp.readdir(dir);
+  } catch {
+    return [];
+  }
 }
 
 function deriveCategory(dir) {
   const slug = dir.toLowerCase();
-  
+
   // Performance Art - theatrical and performance events
   if (/(love.*s.*a.*game|howl.*at.*the.*moon)/i.test(dir)) return 'Performance Art';
 
   // General - catch-all for community/outdoor activities like hikes
-  if (/(hike|hiking|meet\s*hike|outdoor|trail|walk)/i.test(slug) || /yinzers\s*meet\s*hike/i.test(dir)) return 'General';
-  
+  if (
+    /(hike|hiking|meet\s*hike|outdoor|trail|walk)/i.test(slug) ||
+    /yinzers\s*meet\s*hike/i.test(dir)
+  )
+    return 'General';
+
   // Corporate events (including business parties/receptions)
-  if (/(james.*bond.*cocktail|cocktail.*party|inclusivity|workplace|myron.*cope|franks.*script|dance.*for.*a.*cause|robotics|denver)/i.test(dir)) return 'Corporate';
-  
+  if (
+    /(james.*bond.*cocktail|cocktail.*party|inclusivity|workplace|myron.*cope|franks.*script|dance.*for.*a.*cause|robotics|denver)/i.test(
+      dir,
+    )
+  )
+    return 'Corporate';
+
   // Celebration - personal celebrations and graduations
   if (/(gala|celebration|festival|wedding|graduation)/i.test(slug)) return 'Celebration';
-  
+
   // Conference - professional conferences and summits
   if (/(conference|summit|forum|symposium|local.*union|officers)/i.test(slug)) return 'Conference';
-  
+
   // Published - media and press events
   if (/(published|press|feature|media|pennsylvania.*media|awards)/i.test(slug)) return 'Published';
-  
+
   // On-Location
   if (/(on-location|location|travel|tour)/.test(slug)) return 'On-Location';
-  
+
   return 'Corporate';
 }
-
-
 
 async function exists(target) {
   try {
@@ -122,9 +149,12 @@ async function main() {
   const argv = process.argv.slice(2);
   const rootFlag = argv.indexOf('--root');
   const versionFlag = argv.indexOf('--version');
-  const requestedVersion = (versionFlag >= 0 && argv[versionFlag + 1]) ? String(argv[versionFlag + 1]).trim() : (process.env.EVENTS_MANIFEST_VERSION || '').trim();
+  const requestedVersion =
+    versionFlag >= 0 && argv[versionFlag + 1]
+      ? String(argv[versionFlag + 1]).trim()
+      : (process.env.EVENTS_MANIFEST_VERSION || '').trim();
   const manifestVersion = requestedVersion || '2.6.4';
-  const rootDir = (rootFlag >= 0 && argv[rootFlag + 1]) ? argv[rootFlag + 1] : DEFAULT_ROOT;
+  const rootDir = rootFlag >= 0 && argv[rootFlag + 1] ? argv[rootFlag + 1] : DEFAULT_ROOT;
   const absRoot = path.resolve(rootDir);
   const portfoliosBase = path.join(process.cwd(), 'src', 'images', 'Portfolios');
   const relativeRoot = path.relative(portfoliosBase, absRoot).replace(/\\\\/g, '/');
@@ -135,11 +165,16 @@ async function main() {
   }
 
   const entries = await fsp.readdir(absRoot, { withFileTypes: true });
-  const dirs = entries.filter(d => d.isDirectory()).map(d => d.name).sort();
+  const dirs = entries
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name)
+    .sort();
 
   const events = [];
   for (const dir of dirs) {
-    const files = (await readDirSafe(path.join(absRoot, dir))).filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f));
+    const files = (await readDirSafe(path.join(absRoot, dir))).filter((f) =>
+      /\.(jpe?g|png|webp|gif)$/i.test(f),
+    );
     if (!files.length) continue;
 
     const eventName = titleCase(dir);
@@ -156,12 +191,12 @@ async function main() {
     if (override) {
       dateInfo = {
         ...dateInfo,
-        ...override.date
+        ...override.date,
       };
     }
 
-    const images = files.map(file => ({
-      path: path.posix.join(rootDir.replace(/^.*?src\//, 'src/'), dir, file)
+    const images = files.map((file) => ({
+      path: path.posix.join(rootDir.replace(/^.*?src\//, 'src/'), dir, file),
     }));
 
     const dateDisplay = override ? override.dateDisplay : dateInfo.display;
@@ -179,14 +214,13 @@ async function main() {
         day: dateInfo.day,
         monthName: dateInfo.monthName,
         iso: dateInfo.iso,
-        display: dateDisplay
+        display: dateDisplay,
       },
       dateSource: dateSource,
       dateConfidence: dateConfidence,
       images,
-      totalImages: images.length
+      totalImages: images.length,
     };
-
 
     if (override && override.notes) {
       eventEntry.dateNotes = override.notes;
@@ -206,13 +240,15 @@ async function main() {
     return (b.dateDisplay || '').localeCompare(a.dateDisplay || '');
   });
 
+  const generatedAt = new Date().toISOString();
   const manifest = {
     version: manifestVersion,
-    generated: new Date().toISOString().slice(0, 10),
+    generated: generatedAt,
+    generatedBy: 'events-manifest-generator',
     totalEvents: events.length,
     events,
     // Provide a generic alias so generic-consuming widgets can read .items
-    items: events.map(e => ({
+    items: events.map((e) => ({
       title: e.eventName,
       eventName: e.eventName,
       category: e.category,
@@ -221,25 +257,41 @@ async function main() {
       date: e.date,
       images: e.images,
       // Provide a folderPath derived from first image path if possible
-      folderPath: (e.images && e.images[0] && e.images[0].path)
-        ? e.images[0].path
-            .replace(/^src\/images\/Portfolios\//,'')
-            .split('/').slice(0,-1).join('/')
-        : ''
-    }))
+      folderPath:
+        e.images && e.images[0] && e.images[0].path
+          ? e.images[0].path
+              .replace(/^src\/images\/Portfolios\//, '')
+              .split('/')
+              .slice(0, -1)
+              .join('/')
+          : '',
+    })),
   };
 
   const outFile = path.join(absRoot, OUTPUT_FILE);
-  await fsp.writeFile(outFile, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
-  console.log('[OK] Wrote manifest (v' + manifestVersion + '): - generate-events-manifest.js:225', path.relative(process.cwd(), outFile));
+  const tmpFile = outFile + '.tmp';
+  const content = JSON.stringify(manifest, null, 2) + '\n';
+
+  // Atomic write: write to temp file then rename
+  await fsp.writeFile(tmpFile, content, 'utf8');
+  await fsp.rename(tmpFile, outFile);
+  console.log(
+    '[OK] Wrote manifest (v' + manifestVersion + '): - generate-events-manifest.js:225',
+    path.relative(process.cwd(), outFile),
+  );
   try {
-    await notify('events', { path: outFile, written: true });
+    await notify('events', {
+      path: outFile,
+      written: true,
+      generatedAt,
+      totalEvents: manifest.totalEvents,
+    });
   } catch (err) {
     console.warn('Failed to notify manifest webhook (events):', err && err.message);
   }
 }
 
-main().catch(err => {
-  console.error('[ERR] - generate-events-manifest.js:229', err && err.stack || err);
+main().catch((err) => {
+  console.error('[ERR] - generate-events-manifest.js:229', (err && err.stack) || err);
   process.exit(1);
 });
