@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-12-06T03:26:37.146Z",
+  "generated": "2025-12-08T17:10:56.931Z",
   "totalCollections": 8,
   "totalImages": 43,
   "collections": [
@@ -16,9 +16,7 @@
         "McCartney Couple Portraits/CAL07909.jpg",
         "McCartney Couple Portraits/CAL07910.jpg"
       ],
-      "tags": [
-        "portrait"
-      ]
+      "tags": ["portrait"]
     },
     {
       "collectionName": "Editorial",
@@ -46,52 +44,35 @@
         "Lucha 2022/IMGP8571.jpg",
         "Lucha 2022/IMGP8578.jpg"
       ],
-      "tags": [
-        "portrait",
-        "editorial",
-        "fashion"
-      ]
+      "tags": ["portrait", "editorial", "fashion"]
     },
     {
       "collectionName": "Family",
       "folderPath": "Family",
       "totalImages": 0,
       "images": [],
-      "tags": [
-        "portrait"
-      ]
+      "tags": ["portrait"]
     },
     {
       "collectionName": "Graduation",
       "folderPath": "Graduation",
       "totalImages": 0,
       "images": [],
-      "tags": [
-        "portrait"
-      ]
+      "tags": ["portrait"]
     },
     {
       "collectionName": "Headshots",
       "folderPath": "Headshots",
       "totalImages": 2,
-      "images": [
-        "240328_Kelly Gibson_607.jpg",
-        "240328_Kelly Gibson_608.jpg"
-      ],
-      "tags": [
-        "portrait",
-        "studio",
-        "professional"
-      ]
+      "images": ["240328_Kelly Gibson_607.jpg", "240328_Kelly Gibson_608.jpg"],
+      "tags": ["portrait", "studio", "professional"]
     },
     {
       "collectionName": "Maternity",
       "folderPath": "Maternity",
       "totalImages": 0,
       "images": [],
-      "tags": [
-        "portrait"
-      ]
+      "tags": ["portrait"]
     },
     {
       "collectionName": "Studio",
@@ -114,20 +95,14 @@
         "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3562-min.jpg",
         "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3563-min.jpg"
       ],
-      "tags": [
-        "portrait",
-        "studio",
-        "professional"
-      ]
+      "tags": ["portrait", "studio", "professional"]
     },
     {
       "collectionName": "Wedding",
       "folderPath": "Wedding",
       "totalImages": 0,
       "images": [],
-      "tags": [
-        "portrait"
-      ]
+      "tags": ["portrait"]
     }
   ]
 }
