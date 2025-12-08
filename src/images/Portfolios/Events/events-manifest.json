@@ -1,354 +1,9 @@
 {
   "version": "2.6.4",
-  "generated": "2025-12-08T17:30:21.008Z",
+  "generated": "2025-12-08T17:36:45.264Z",
   "generatedBy": "events-manifest-generator",
   "totalEvents": 23,
   "events": [
-    {
-      "eventName": "Back To School Bash",
-      "category": "Corporate",
-      "dateISO": "2025-12-08",
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 8,
-        "monthName": "December",
-        "iso": "2025-12-08"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6648.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6650.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6651.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6652.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6653.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6654.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6655.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6656.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6657.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6658.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6662.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6663.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6664.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6665.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6666.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6667.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6668.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6672.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6673.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6674.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6676.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6677.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6678.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6679.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6681.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6682.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6684.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6685.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6686.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6687.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6688.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6689.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6690.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6691.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6692.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6693.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6694.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6695.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6696.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6697.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6699.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6701.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6702.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6703.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6704.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6705.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6706.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6707.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6708.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6709.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6710.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6711.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6712.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6713.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6714.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6715.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6718.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6719.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6722.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6725.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6729.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6739.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6740.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6742.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6744.jpg"
-        }
-      ],
-      "totalImages": 68
-    },
-    {
-      "eventName": "Denver Robotics Convention",
-      "category": "Corporate",
-      "dateISO": "2025-12-08",
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 8,
-        "monthName": "December",
-        "iso": "2025-12-08"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.webp"
-        }
-      ],
-      "totalImages": 14
-    },
-    {
-      "eventName": "Growing Up",
-      "category": "Corporate",
-      "dateISO": "2025-12-08",
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 8,
-        "monthName": "December",
-        "iso": "2025-12-08"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5543.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5676.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5692.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5700.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5723.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5736.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5740.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5742.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5745.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5755.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5759.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5832.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5842.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5859.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5880.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5882.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5922.jpg"
-        }
-      ],
-      "totalImages": 18
-    },
     {
       "eventName": "Pittsburgh Social Club",
       "category": "Corporate",
@@ -4865,21 +4520,22 @@
         }
       ],
       "totalImages": 41
-    }
-  ],
-  "items": [
+    },
     {
-      "title": "Back To School Bash",
       "eventName": "Back To School Bash",
-      "category": "Corporate",
-      "dateISO": "2025-12-08",
+      "category": "Performance Art",
+      "dateDisplay": "January 2022",
+      "dateISO": "2022-01-15",
       "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 8,
-        "monthName": "December",
-        "iso": "2025-12-08"
+        "year": 2022,
+        "month": 1,
+        "day": 15,
+        "monthName": "January",
+        "iso": "2022-01-15",
+        "display": "January 2022"
       },
+      "dateSource": "manual:user-verified",
+      "dateConfidence": "high",
       "images": [
         {
           "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
@@ -5086,78 +4742,24 @@
           "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6744.jpg"
         }
       ],
-      "folderPath": "Events/Back To School Bash"
+      "totalImages": 68,
+      "dateNotes": "Per user: Back to School Bash occurred January 15, 2022"
     },
     {
-      "title": "Denver Robotics Convention",
-      "eventName": "Denver Robotics Convention",
-      "category": "Corporate",
-      "dateISO": "2025-12-08",
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 8,
-        "monthName": "December",
-        "iso": "2025-12-08"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.webp"
-        }
-      ],
-      "folderPath": "Events/Denver Robotics Convention"
-    },
-    {
-      "title": "Growing Up",
       "eventName": "Growing Up",
-      "category": "Corporate",
-      "dateISO": "2025-12-08",
+      "category": "Performance Art",
+      "dateDisplay": "December 2021",
+      "dateISO": "2021-12-01",
       "date": {
-        "year": 2025,
+        "year": 2021,
         "month": 12,
-        "day": 8,
+        "day": 1,
         "monthName": "December",
-        "iso": "2025-12-08"
+        "iso": "2021-12-01",
+        "display": "December 2021"
       },
+      "dateSource": "manual:override",
+      "dateConfidence": "high",
       "images": [
         {
           "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
@@ -5214,8 +4816,73 @@
           "path": "src/images/Portfolios/Events/Growing Up/_CAL5922.jpg"
         }
       ],
-      "folderPath": "Events/Growing Up"
+      "totalImages": 18,
+      "dateNotes": "Per user: Growing Up event occurred December 2021"
     },
+    {
+      "eventName": "Denver Robotics Convention",
+      "category": "Corporate",
+      "dateDisplay": "April 2019",
+      "dateISO": "2019-04-15",
+      "date": {
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "display": "April 2019"
+      },
+      "dateSource": "manual:client-verified",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.webp"
+        }
+      ],
+      "totalImages": 14,
+      "dateNotes": "Set per client request to reflect spring 2019 convention"
+    }
+  ],
+  "items": [
     {
       "title": "Pittsburgh Social Club",
       "eventName": "Pittsburgh Social Club",
@@ -9712,6 +9379,360 @@
         }
       ],
       "folderPath": "Events/James Bond Cocktail Party 2023"
+    },
+    {
+      "title": "Back To School Bash",
+      "eventName": "Back To School Bash",
+      "category": "Performance Art",
+      "dateDisplay": "January 2022",
+      "dateISO": "2022-01-15",
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 15,
+        "monthName": "January",
+        "iso": "2022-01-15",
+        "display": "January 2022"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6648.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6650.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6651.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6652.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6653.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6654.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6655.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6656.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6657.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6658.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6662.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6663.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6664.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6665.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6666.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6667.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6668.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6672.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6673.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6674.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6677.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6678.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6679.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6681.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6682.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6684.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6685.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6686.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6687.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6688.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6689.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6690.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6691.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6693.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6694.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6695.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6696.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6697.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6699.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6701.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6702.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6704.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6705.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6706.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6707.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6708.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6709.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6710.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6711.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6712.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6713.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6714.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6715.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6718.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6719.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6722.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6725.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6729.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6739.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6744.jpg"
+        }
+      ],
+      "folderPath": "Events/Back To School Bash"
+    },
+    {
+      "title": "Growing Up",
+      "eventName": "Growing Up",
+      "category": "Performance Art",
+      "dateDisplay": "December 2021",
+      "dateISO": "2021-12-01",
+      "date": {
+        "year": 2021,
+        "month": 12,
+        "day": 1,
+        "monthName": "December",
+        "iso": "2021-12-01",
+        "display": "December 2021"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5543.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5676.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5692.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5700.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5723.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5736.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5740.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5742.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5745.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5755.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5759.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5832.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5842.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5859.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5880.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5882.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Growing Up/_CAL5922.jpg"
+        }
+      ],
+      "folderPath": "Events/Growing Up"
+    },
+    {
+      "title": "Denver Robotics Convention",
+      "eventName": "Denver Robotics Convention",
+      "category": "Corporate",
+      "dateDisplay": "April 2019",
+      "dateISO": "2019-04-15",
+      "date": {
+        "year": 2019,
+        "month": 4,
+        "day": 15,
+        "monthName": "April",
+        "iso": "2019-04-15",
+        "display": "April 2019"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/09CF57AB-D8EC-4D88-BE23-6CA062BCAC11.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/1B564C33-EDAE-4159-8144-A2E0CA27FCF1.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/25EB0397-9A85-4A0C-894F-EB629D29FE52.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/3ED58D3E-FB53-4A07-88EA-0B9A373BEBF0.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/5F909C3E-F9FE-48B6-A8EC-4F385D22E59D.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/6F3B59BF-C31C-4E19-A06C-5F3BDD6A98AF.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.jpeg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Denver Robotics Convention/F7B8587F-369A-4FC3-9189-1306B85F0697.webp"
+        }
+      ],
+      "folderPath": "Events/Denver Robotics Convention"
     }
   ]
 }

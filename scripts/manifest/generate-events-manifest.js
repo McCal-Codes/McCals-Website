@@ -104,7 +104,8 @@ function deriveCategory(dir) {
   const slug = dir.toLowerCase();
 
   // Performance Art - theatrical and performance events
-  if (/(love.*s.*a.*game|howl.*at.*the.*moon)/i.test(dir)) return 'Performance Art';
+  if (/(love.*s.*a.*game|howl.*at.*the.*moon|back\s*to\s*school\s*bash|growing\s*up)/i.test(dir))
+    return 'Performance Art';
 
   // General - catch-all for community/outdoor activities like hikes
   if (
