@@ -99,7 +99,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     // Check if file exists
     if (!fs.existsSync(resolvedPath)) {
-      console.warn(`Manifest not found: ${type} (${resolvedPath}) - [type].ts:100`);
+      console.warn(`Manifest not found: ${type} (${resolvedPath}) - [type].ts:102`);
       res.status(404).json({
         error: `Manifest not found: ${type}`,
         path: resolvedPath,
@@ -117,7 +117,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader('Access-Control-Allow-Origin', '*'); // Allow CORS for dev
     res.status(200).json(manifest);
   } catch (error) {
-    console.error(`Error serving manifest ${type}: - [type].ts:118`, error);
+    console.error(`Error serving manifest ${type}: - [type].ts:120`, error);
 
     if (error instanceof SyntaxError) {
       res.status(500).json({
