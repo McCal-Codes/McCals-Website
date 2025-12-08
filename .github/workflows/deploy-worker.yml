@@ -1,0 +1,28 @@
+name: Deploy Cloudflare Worker (manifest webhook)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-worker:
+    name: Deploy Worker
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish Cloudflare Worker
+        uses: cloudflare/wrangler-action@2.3.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: src/api
+          command: publish
+
+      - name: Success message
+        run: echo "Cloudflare Worker publish triggered"
