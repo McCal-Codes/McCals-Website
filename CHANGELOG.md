@@ -5,6 +5,13 @@
 - **Manifest Proxy in Dev:** WidgetEmbed now rewrites manifest URLs in injected widget HTML in dev mode, so widgets load manifests from the local API endpoint (e.g., `/api/manifests/events`) instead of GitHub. This ensures widgets work locally and in CI/dev environments without manual HTML edits. See WidgetEmbed.tsx for details.
 - **Shared Date Parsing Symlink:** To resolve CI and local import errors, a symlink was created: `scripts/utils/shared-date-parsing.js` → `../../src/api/scripts/utils/shared-date-parsing.js`. All manifest generators now use the canonical shared date parsing utility. If you move or update the canonical file, update the symlink accordingly. Do not edit or restore the archived copy in `scripts/_archived/`.
 
+### Concert Manifest API Reliability & Horseburner Fix
+
+- **Cloudflare Manifest API Mapping:** Added an explicit `MANIFEST_CONFIG` map plus a GitHub Raw fallback inside `tools/cloudflare/complete-worker.js`, guaranteeing `/api/v1/manifests/:type` resolves every portfolio even when `MANIFEST_BASE_URL` is unset. Auto-manifest workflows and Squarespace widgets now receive consistent data again.
+- **Concert Manifest Generator v1.1.0:** `scripts/manifest/generate-concert-manifest.js` now imports `resolveDateOverride`, records `relativeFolderPath`, `dateSource`, `dateConfidence`, and optional notes, and emits a normalized `items[]` collection (with `src/...` paths) for easier widget consumption.
+- **Concert Widget v4.7.1 Parity:** Updated `src/widgets/portfolios/concert-portfolio/versions/v4.7.1-api-optional.html` to normalize manifest entries (absolute URLs, relative paths, filenames) before building image URLs and alt text. Horseburner’s new December 2025 gallery now loads correctly through both API and GitHub fallbacks.
+- **Manifest Regeneration:** Ran `npm run manifest:concert` after the generator changes (601 images / 25 bands). Local webhook notifications still expect the Cloudflare dev server but report warnings only; manifests themselves regenerate cleanly.
+
 ## 2025-11-23
 
 ### Version Standardization (x.x.0 Format)
