@@ -1,19 +1,14 @@
 {
   "version": "1.0.0",
-  "generated": "2025-12-05T22:41:35.439Z",
+  "generated": "2025-12-08T17:12:05.728Z",
   "totalCollections": 5,
   "collections": [
     {
       "collectionName": "Bare-faced Curassow",
       "folderPath": "Wildlife/Birds/Bare-faced Curassow",
       "totalImages": 2,
-      "images": [
-        "230727_Aviary_Soot__CAL4536.jpg",
-        "230727_Aviary_Soot__CAL4596.jpg"
-      ],
-      "tags": [
-        "birds"
-      ]
+      "images": ["230727_Aviary_Soot__CAL4536.jpg", "230727_Aviary_Soot__CAL4596.jpg"],
+      "tags": ["birds"]
     },
     {
       "collectionName": "Blue-bellied roller",
@@ -24,20 +19,14 @@
         "230727_Blue-bellied Roller__CAL4528.jpg",
         "230727_Blue-bellied Roller__CAL4561.jpg"
       ],
-      "tags": [
-        "birds"
-      ]
+      "tags": ["birds"]
     },
     {
       "collectionName": "Steller's Sea Eagle",
       "folderPath": "Wildlife/Birds/Steller's Sea Eagle",
       "totalImages": 1,
-      "images": [
-        "230204_McCal__CAL3164.jpg"
-      ],
-      "tags": [
-        "birds"
-      ]
+      "images": ["230204_McCal__CAL3164.jpg"],
+      "tags": ["birds"]
     },
     {
       "collectionName": "Downtown Pittsburgh",
@@ -79,22 +68,14 @@
         "IMGP9240.jpg",
         "IMGP9246.jpg"
       ],
-      "tags": [
-        "landscape"
-      ]
+      "tags": ["landscape"]
     },
     {
       "collectionName": "West Virginia",
       "folderPath": "Landscapes/West Virginia",
       "totalImages": 3,
-      "images": [
-        "barn.jpg",
-        "seneca-rocks-night.jpg",
-        "tractor.jpg"
-      ],
-      "tags": [
-        "landscape"
-      ]
+      "images": ["barn.jpg", "seneca-rocks-night.jpg", "tractor.jpg"],
+      "tags": ["landscape"]
     }
   ]
 }
