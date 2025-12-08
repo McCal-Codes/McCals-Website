@@ -1,19 +1,19 @@
 {
   "version": "2.6.4",
-  "generated": "2025-12-08T17:08:08.951Z",
+  "generated": "2025-12-08T17:30:21.008Z",
   "generatedBy": "events-manifest-generator",
-  "totalEvents": 22,
+  "totalEvents": 23,
   "events": [
     {
       "eventName": "Back To School Bash",
-      "category": "Performance Art",
-      "dateISO": "2022-01-15",
+      "category": "Corporate",
+      "dateISO": "2025-12-08",
       "date": {
-        "year": 2022,
-        "month": 1,
-        "day": 15,
-        "monthName": "January",
-        "iso": "2022-01-15"
+        "year": 2025,
+        "month": 12,
+        "day": 8,
+        "monthName": "December",
+        "iso": "2025-12-08"
       },
       "images": [
         {
@@ -282,7 +282,7 @@
     },
     {
       "eventName": "Growing Up",
-      "category": "Performance Art",
+      "category": "Corporate",
       "dateISO": "2025-12-08",
       "date": {
         "year": 2025,
@@ -3295,6 +3295,523 @@
         }
       ],
       "totalImages": 170
+    },
+    {
+      "eventName": "The Guy Who Hates Musicals",
+      "category": "Corporate",
+      "dateDisplay": "March 2025",
+      "dateISO": "2025-03-19",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 19,
+        "monthName": "March",
+        "iso": "2025-03-19",
+        "display": "March 2025"
+      },
+      "dateSource": "filename:250319 A Guy Who Hates Musicals - Ghostlight_CAL1006.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1006.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1013.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1017.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1026.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL112.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL118.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL127.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL13.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL136.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL145.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL146.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL153.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL164.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL17.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL175.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL189.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL203.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL220.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL24.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL246.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL249.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL254.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL27.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL273.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL294.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL295.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL300.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL312.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL314.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL339.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL351.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL352.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL356.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL358.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL362.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL367.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL368.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL37.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL373.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL379.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL384.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL392.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL394.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL399.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL4.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL406.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL41.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL424.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL430.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL431.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL433.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL437.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL445.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL448.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL466.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL475.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL477.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL491.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL494.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL495.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL501.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL505.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL506.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL51.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL511.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL512.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL52.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL520.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL525.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL531.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL552.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL558.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL563.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL564.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL57.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL570.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL571.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL574.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL575.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL581.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL584.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL587.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL590.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL600.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL602.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL606.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL608.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL610.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL618.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL619.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL625.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL626.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL633.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL641.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL647.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL649.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL651.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL653.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL663.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL671.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL678.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL683.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL695.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL705.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL708.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL732.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL745.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL754.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL755.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL760.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL765.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL773.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL775.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL781.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL793.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL801.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL802.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL808.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL815.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL82.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL821.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL830.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL837.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL842.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL843.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL85.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL853.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL874.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL875.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL89.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL896.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL899.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL908.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL915.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL919.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL930.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL935.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL939.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL940.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL947.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL952.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL972.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL975.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL983.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL985.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9855.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9875.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9890.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9916.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9927.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9931.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9937.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9946.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9960.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9966.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9970.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9976.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9979.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9982.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9985.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL999.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9999.jpg"
+        }
+      ],
+      "totalImages": 166
     },
     {
       "eventName": "Drag At Carnegie Coffee",
@@ -7635,6 +8152,522 @@
         }
       ],
       "folderPath": "Events/The Rooney Rule"
+    },
+    {
+      "title": "The Guy Who Hates Musicals",
+      "eventName": "The Guy Who Hates Musicals",
+      "category": "Corporate",
+      "dateDisplay": "March 2025",
+      "dateISO": "2025-03-19",
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 19,
+        "monthName": "March",
+        "iso": "2025-03-19",
+        "display": "March 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1006.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1013.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1017.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1026.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL112.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL118.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL127.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL13.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL136.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL145.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL146.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL153.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL164.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL17.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL175.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL189.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL203.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL220.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL24.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL246.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL249.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL254.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL27.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL273.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL294.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL295.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL300.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL312.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL314.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL339.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL351.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL352.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL356.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL358.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL362.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL367.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL368.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL37.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL373.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL379.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL384.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL392.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL394.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL399.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL4.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL406.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL41.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL424.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL430.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL431.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL433.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL437.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL445.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL448.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL466.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL475.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL477.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL491.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL494.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL495.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL501.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL505.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL506.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL51.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL511.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL512.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL52.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL520.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL525.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL531.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL552.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL558.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL563.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL564.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL57.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL570.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL571.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL574.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL575.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL581.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL584.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL587.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL590.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL600.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL602.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL606.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL608.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL610.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL618.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL619.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL625.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL626.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL633.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL641.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL647.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL649.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL651.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL653.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL663.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL671.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL678.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL683.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL695.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL703.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL705.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL708.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL732.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL745.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL754.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL755.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL760.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL765.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL773.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL775.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL781.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL793.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL801.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL802.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL808.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL815.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL82.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL821.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL830.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL837.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL842.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL843.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL85.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL853.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL874.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL875.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL89.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL896.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL899.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL908.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL915.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL919.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL930.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL935.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL939.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL940.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL947.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL952.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL972.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL975.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL983.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL985.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9855.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9875.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9890.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9916.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9927.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9931.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9937.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9946.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9960.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9966.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9970.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9976.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9979.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9982.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9985.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL999.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Guy Who Hates Musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL9999.jpg"
+        }
+      ],
+      "folderPath": "Events/The Guy Who Hates Musicals"
     },
     {
       "title": "Drag At Carnegie Coffee",
