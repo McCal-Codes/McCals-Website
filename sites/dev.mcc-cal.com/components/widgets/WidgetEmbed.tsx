@@ -140,6 +140,48 @@ export function WidgetEmbed({
           if (!containerRef.current) return;
 
           // Inject HTML
+          // --- Manifest Proxy Logic for Dev ---
+          // Determine manifest type from widget/category
+          const manifestTypeMap: Record<string, string> = {
+            'event-portfolio': 'events',
+            'concert-portfolio': 'concert',
+            'journalism-portfolio': 'journalism',
+            'nature-portfolio': 'nature',
+            'portrait-portfolio': 'portrait',
+            'featured-portfolio': 'featured',
+          };
+          // Try to infer manifest type
+          let manifestType = manifestTypeMap[widget] || widget.replace(/-portfolio$/, '');
+          // Patch data-manifest attributes
+          const manifestElements = containerRef.current.querySelectorAll('[data-manifest]');
+          manifestElements.forEach((el) => {
+            const oldUrl = el.getAttribute('data-manifest');
+            const newUrl = `/api/manifests/${manifestType}`;
+            el.setAttribute('data-manifest', newUrl);
+            if (process.env.NODE_ENV !== 'production') {
+              console.log(`[WidgetEmbed] Patched data-manifest: ${oldUrl} → ${newUrl}`);
+            }
+          });
+          // Patch global JS variables if present
+          // e.g., window.MANIFEST_BASE, MANIFEST_BASE, manifestUrl()
+          const scripts = containerRef.current.querySelectorAll('script');
+          scripts.forEach((script) => {
+            if (script.textContent && /MANIFEST_BASE|manifestUrl/.test(script.textContent)) {
+              // Replace manifest URL assignment in script text
+              script.textContent = script.textContent.replace(
+                /MANIFEST_BASE\s*=\s*['"][^'"]+['"]/g,
+                `MANIFEST_BASE='/api/manifests/${manifestType}'`,
+              );
+              script.textContent = script.textContent.replace(
+                /function manifestUrl\(\)\s*{[^}]+}/g,
+                `function manifestUrl(){return '/api/manifests/${manifestType}';}`,
+              );
+              if (process.env.NODE_ENV !== 'production') {
+                console.log(`[WidgetEmbed] Patched manifest JS variable(s) for dev mode.`);
+              }
+            }
+          });
+          // --- End Manifest Proxy Logic ---
           containerRef.current.innerHTML = html;
 
           // Re-execute scripts

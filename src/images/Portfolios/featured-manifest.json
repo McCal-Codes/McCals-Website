@@ -1,352 +1,24 @@
 {
   "version": "2.0.0",
   "type": "featured",
-  "generated": "2025-12-06T03:12:45.920Z",
+  "generated": "2025-12-08T16:46:30.633Z",
   "generatedBy": "enhanced-featured-manifest-generator",
-  "sources": [
-    "concert-manifest.json",
-    "events-manifest.json",
-    "journalism-manifest.json"
-  ],
-  "totalItems": 12,
-  "totalImages": 535,
-  "categories": [
-    "Concert Photography",
-    "Events Photography",
-    "Journalism Photography"
-  ],
-  "portfolioTypes": [
-    "Concert",
-    "Events",
-    "Journalism"
-  ],
+  "sources": ["concert-manifest.json", "events-manifest.json", "journalism-manifest.json"],
+  "totalItems": 9,
+  "totalImages": 466,
+  "categories": ["Concert Photography", "Events Photography", "Journalism Photography"],
+  "portfolioTypes": ["Concert", "Events", "Journalism"],
   "dateRange": {
-    "newest": "2025-12-05",
-    "oldest": "2024-11-04"
+    "newest": "2025-11-14",
+    "oldest": "2025-03-15"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
-    "itemsPerCategory": 4,
-    "totalLimit": 12,
+    "itemsPerCategory": 3,
+    "totalLimit": 9,
     "usesSharedDateParsing": true
   },
   "items": [
-    {
-      "title": "Back To School Bash",
-      "eventName": "Back To School Bash",
-      "category": "Events Photography",
-      "dateDisplay": "December 2025",
-      "dateISO": "2025-12-05",
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 5,
-        "monthName": "December",
-        "iso": "2025-12-05",
-        "display": "December 2025"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6646.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6647.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6648.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6650.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6651.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6652.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6653.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6654.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6655.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6656.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6657.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6658.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6662.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6663.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6664.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6665.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6666.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6667.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6668.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6672.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6673.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6674.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6676.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6677.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6678.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6679.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6681.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6682.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6684.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6685.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6686.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6687.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6688.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6689.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6690.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6691.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6692.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6693.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6694.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6695.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6696.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6697.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6699.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6701.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6702.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6703.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6704.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6705.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6706.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6707.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6708.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6709.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6710.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6711.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6712.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6713.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6714.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6715.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6718.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6719.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6722.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6725.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6729.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6739.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6740.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6742.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6744.jpg"
-        }
-      ],
-      "folderPath": "Events/Back To School Bash",
-      "type": "Events",
-      "id": "Back To School Bash",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/Back To School Bash/_CAL6645.jpg"
-      },
-      "totalImages": 68,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
-    },
-    {
-      "title": "Growing Up",
-      "eventName": "Growing Up",
-      "category": "Events Photography",
-      "dateDisplay": "December 2025",
-      "dateISO": "2025-12-05",
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 5,
-        "monthName": "December",
-        "iso": "2025-12-05",
-        "display": "December 2025"
-      },
-      "images": [
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5543.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5676.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5692.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5700.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5723.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5736.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5740.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5742.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5745.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5755.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5759.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5832.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5842.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5859.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5880.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5882.jpg"
-        },
-        {
-          "path": "src/images/Portfolios/Events/Growing Up/_CAL5922.jpg"
-        }
-      ],
-      "folderPath": "Events/Growing Up",
-      "type": "Events",
-      "id": "Growing Up",
-      "coverImage": {
-        "path": "src/images/Portfolios/Events/Growing Up/_CAL5514.jpg"
-      },
-      "totalImages": 18,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
-    },
     {
       "title": "Pittsburgh Social Club",
       "eventName": "Pittsburgh Social Club",
@@ -439,11 +111,7 @@
         "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL753_webuse.jpg"
       },
       "totalImages": 23,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
+      "tags": ["Event", "Corporate", "Professional"]
     },
     {
       "title": "Love's A Game",
@@ -762,11 +430,7 @@
         "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.jpg"
       },
       "totalImages": 98,
-      "tags": [
-        "Event",
-        "Corporate",
-        "Professional"
-      ]
+      "tags": ["Event", "Corporate", "Professional"]
     },
     {
       "bandName": "Heading North",
@@ -880,11 +544,320 @@
       "category": "Concert Photography",
       "id": "Heading North",
       "coverImage": "251101 Headed North - Bottle Rocket_CAL11_webuse.jpg",
-      "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
-      ]
+      "tags": ["Live Music", "Concert", "Performance"]
+    },
+    {
+      "title": "Inclusivity Event PRSSA",
+      "eventName": "Inclusivity Event PRSSA",
+      "category": "Events Photography",
+      "dateDisplay": "October 2025",
+      "dateISO": "2025-10-25",
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 25,
+        "monthName": "October",
+        "iso": "2025-10-25",
+        "display": "October 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7938_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7938_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7939_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7939_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7942_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7942_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7943_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7943_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7945_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7945_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7950_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7950_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7956_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7956_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7963_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7963_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7964_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7964_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7965_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7965_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7969_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7969_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7970_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7970_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7983_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7983_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7987_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7987_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7990_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7990_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7991_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7991_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7999_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7999_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8002_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8002_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8003_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8003_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8005_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8005_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8009_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8009_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8013_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8013_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8022_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8022_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8024_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8024_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8027_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8027_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8033_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8033_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8050_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8050_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8055_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8055_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8059_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8059_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8062_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8062_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8082_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8082_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8101_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8101_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8107_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8107_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8112_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8112_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8126_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8126_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8129_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8129_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8137_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8137_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8145_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8145_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8166_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8166_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8168_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8168_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8170_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8170_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8179_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8179_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8180_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8180_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8183_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8183_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8186_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8186_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8188_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8188_webuse.webp"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8192_webuse.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL8192_webuse.webp"
+        }
+      ],
+      "folderPath": "Events/Inclusivity Event - PRSSA",
+      "type": "Events",
+      "id": "Inclusivity Event PRSSA",
+      "coverImage": {
+        "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.jpg"
+      },
+      "totalImages": 96,
+      "tags": ["Event", "Corporate", "Professional"]
     },
     {
       "bandName": "Dream The Heavy",
@@ -975,11 +948,7 @@
       "category": "Concert Photography",
       "id": "Dream The Heavy",
       "coverImage": "251025 When We Were Dead_CAL8473_webuse.jpg",
-      "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
-      ]
+      "tags": ["Live Music", "Concert", "Performance"]
     },
     {
       "bandName": "Red Coin",
@@ -1059,114 +1028,12 @@
       "category": "Concert Photography",
       "id": "Red Coin",
       "coverImage": "251025 When We Were Dead_CAL8275_webuse.jpg",
-      "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
-      ]
-    },
-    {
-      "bandName": "Star Viper",
-      "folderPath": "Star Viper/October 2025",
-      "dateDisplay": "October 2025",
-      "concertDate": {
-        "year": 2025,
-        "month": 10,
-        "monthName": "October",
-        "day": 1,
-        "iso": "2025-10-01"
-      },
-      "totalImages": 60,
-      "images": [
-        "251025 When We Were Dead_CAL8825_webuse.jpg",
-        "251025 When We Were Dead_CAL8838_webuse.jpg",
-        "251025 When We Were Dead_CAL8845_webuse.jpg",
-        "251025 When We Were Dead_CAL8849_webuse.jpg",
-        "251025 When We Were Dead_CAL8854_webuse.jpg",
-        "251025 When We Were Dead_CAL8857_webuse.jpg",
-        "251025 When We Were Dead_CAL8862_webuse.jpg",
-        "251025 When We Were Dead_CAL8871_webuse.jpg",
-        "251025 When We Were Dead_CAL8876_webuse.jpg",
-        "251025 When We Were Dead_CAL8878_webuse.jpg",
-        "251025 When We Were Dead_CAL8883_webuse.jpg",
-        "251025 When We Were Dead_CAL8885_webuse.jpg",
-        "251025 When We Were Dead_CAL8890_webuse.jpg",
-        "251025 When We Were Dead_CAL8901_webuse.jpg",
-        "251025 When We Were Dead_CAL8920_webuse.jpg",
-        "251025 When We Were Dead_CAL8922_webuse.jpg",
-        "251025 When We Were Dead_CAL8931_webuse.jpg",
-        "251025 When We Were Dead_CAL8943_webuse.jpg",
-        "251025 When We Were Dead_CAL8945_webuse.jpg",
-        "251025 When We Were Dead_CAL8949_webuse.jpg",
-        "251025 When We Were Dead_CAL8964_webuse.jpg",
-        "251025 When We Were Dead_CAL8968_webuse.jpg",
-        "251025 When We Were Dead_CAL8972_webuse.jpg",
-        "251025 When We Were Dead_CAL8975_webuse.jpg",
-        "251025 When We Were Dead_CAL8984_webuse.jpg",
-        "251025 When We Were Dead_CAL8988_webuse.jpg",
-        "251025 When We Were Dead_CAL8992_webuse.jpg",
-        "251025 When We Were Dead_CAL8997_webuse.jpg",
-        "251025 When We Were Dead_CAL9018_webuse.jpg",
-        "251025 When We Were Dead_CAL9019_webuse.jpg",
-        "251025 When We Were Dead_CAL9020_webuse.jpg",
-        "251025 When We Were Dead_CAL9028_webuse.jpg",
-        "251025 When We Were Dead_CAL9038_webuse.jpg",
-        "251025 When We Were Dead_CAL9043_webuse.jpg",
-        "251025 When We Were Dead_CAL9055_webuse.jpg",
-        "251025 When We Were Dead_CAL9065_webuse.jpg",
-        "251025 When We Were Dead_CAL9066_webuse.jpg",
-        "251025 When We Were Dead_CAL9070_webuse.jpg",
-        "251025 When We Were Dead_CAL9073_webuse.jpg",
-        "251025 When We Were Dead_CAL9087_webuse.jpg",
-        "251025 When We Were Dead_CAL9090_webuse.jpg",
-        "251025 When We Were Dead_CAL9109_webuse.jpg",
-        "251025 When We Were Dead_CAL9115_webuse.jpg",
-        "251025 When We Were Dead_CAL9123_webuse.jpg",
-        "251025 When We Were Dead_CAL9129_webuse.jpg",
-        "251025 When We Were Dead_CAL9131_webuse.jpg",
-        "251025 When We Were Dead_CAL9135_webuse.jpg",
-        "251025 When We Were Dead_CAL9143_webuse.jpg",
-        "251025 When We Were Dead_CAL9144_webuse.jpg",
-        "251025 When We Were Dead_CAL9145_webuse.jpg",
-        "251025 When We Were Dead_CAL9168_webuse.jpg",
-        "251025 When We Were Dead_CAL9169_webuse.jpg",
-        "251025 When We Were Dead_CAL9173_webuse.jpg",
-        "251025 When We Were Dead_CAL9176_webuse.jpg",
-        "251025 When We Were Dead_CAL9184_webuse.jpg",
-        "251025 When We Were Dead_CAL9198_webuse.jpg",
-        "251025 When We Were Dead_CAL9202_webuse.jpg",
-        "251025 When We Were Dead_CAL9219_webuse.jpg",
-        "251025 When We Were Dead_CAL9245_webuse.jpg",
-        "251025 When We Were Dead_CAL9248_webuse.jpg"
-      ],
-      "name": "Star Viper",
-      "title": "Star Viper",
-      "date": {
-        "year": 2025,
-        "month": 10,
-        "monthName": "October",
-        "day": 1,
-        "iso": "2025-10-01"
-      },
-      "type": "Concert",
-      "category": "Concert Photography",
-      "id": "Star Viper",
-      "coverImage": "251025 When We Were Dead_CAL8825_webuse.jpg",
-      "tags": [
-        "Live Music",
-        "Concert",
-        "Performance"
-      ]
+      "tags": ["Live Music", "Concert", "Performance"]
     },
     {
       "eventName": "CMU Trump Protest",
       "category": "Journalism Photography",
-      "tags": [
-        "Politics",
-        "Documentary",
-        "Journalism",
-        "Story"
-      ],
+      "tags": ["Politics", "Documentary", "Journalism", "Story"],
       "folderPath": "Politics/CMU Trump Protest",
       "eventDate": {
         "iso": "2025-07-15",
@@ -1180,351 +1047,273 @@
           "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1106-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1107-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1123-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1126-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1131-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1141-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1146-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1152-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1156-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1162-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1168-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1184-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1192-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1196-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1201-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1249-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1278-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1297-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1301-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1303-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1325-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1340-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1353-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1360-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1364-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1429-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1448-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1476-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1489-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1498-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1539-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1564-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1568-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1573-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         }
       ],
       "published": false,
@@ -1542,20 +1331,13 @@
         "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
         "description": "CMU Trump Protest photography",
         "caption": "CMU Trump Protest - Politics",
-        "tags": [
-          "Politics"
-        ]
+        "tags": ["Politics"]
       }
     },
     {
       "eventName": "The Rooney Rule",
       "category": "Journalism Photography",
-      "tags": [
-        "Events",
-        "Documentary",
-        "Journalism",
-        "Story"
-      ],
+      "tags": ["Events", "Documentary", "Journalism", "Story"],
       "folderPath": "Events/The Rooney Rule",
       "eventDate": {
         "iso": "2025-04-17",
@@ -1569,9 +1351,7 @@
           "path": "250417 The Rooney Rule_CAL3148.jpg",
           "description": "The Rooney Rule photography",
           "caption": "The Rooney Rule - Events",
-          "tags": [
-            "Events"
-          ]
+          "tags": ["Events"]
         }
       ],
       "published": false,
@@ -1589,20 +1369,13 @@
         "path": "250417 The Rooney Rule_CAL3148.jpg",
         "description": "The Rooney Rule photography",
         "caption": "The Rooney Rule - Events",
-        "tags": [
-          "Events"
-        ]
+        "tags": ["Events"]
       }
     },
     {
       "eventName": "Butler Protest",
       "category": "Journalism Photography",
-      "tags": [
-        "Politics",
-        "Documentary",
-        "Journalism",
-        "Story"
-      ],
+      "tags": ["Politics", "Documentary", "Journalism", "Story"],
       "folderPath": "Politics/Butler Protest",
       "eventDate": {
         "iso": "2025-03-15",
@@ -1616,99 +1389,77 @@
           "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9666-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9674-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9703-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9709-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9717-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9739-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9759-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9773-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9825-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9832-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": [
-            "Politics"
-          ]
+          "tags": ["Politics"]
         }
       ],
       "published": false,
@@ -1726,218 +1477,7 @@
         "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
         "description": "Butler Protest photography",
         "caption": "Butler Protest - Politics",
-        "tags": [
-          "Politics"
-        ]
-      }
-    },
-    {
-      "eventName": "Kamala In Pittsburgh Amid Election Eve",
-      "category": "Journalism Photography",
-      "tags": [
-        "Politics",
-        "Documentary",
-        "Journalism",
-        "Story"
-      ],
-      "folderPath": "Politics/Kamala in Pittsburgh amid Election Eve",
-      "eventDate": {
-        "iso": "2024-11-04",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "undefined undefined",
-      "totalImages": 19,
-      "images": [
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {},
-      "name": "Kamala In Pittsburgh Amid Election Eve",
-      "title": "Kamala In Pittsburgh Amid Election Eve",
-      "date": {
-        "iso": "2024-11-04",
-        "source": "filename_extraction"
-      },
-      "type": "Journalism",
-      "id": "Kamala In Pittsburgh Amid Election Eve",
-      "coverImage": {
-        "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-        "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-        "description": "Kamala in Pittsburgh amid Election Eve photography",
-        "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-        "tags": [
-          "Politics"
-        ]
+        "tags": ["Politics"]
       }
     }
   ]

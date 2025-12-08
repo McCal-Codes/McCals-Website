@@ -57,6 +57,11 @@ When this file changes, add a short entry to CHANGELOG.md under Docs/Meta.
 
 ## TODO Tree Extension Compatibility (2025-10-09)
 
+## 2025-12-08 — Manifest Proxy & Shared Date Parsing Symlink
+
+- **Manifest Proxy in Dev:** WidgetEmbed now rewrites manifest URLs in injected widget HTML in dev mode, so widgets load manifests from the local API endpoint (e.g., `/api/manifests/events`) instead of GitHub. This ensures widgets work locally and in CI/dev environments without manual HTML edits. See WidgetEmbed.tsx for details.
+- **Shared Date Parsing Symlink:** To resolve CI and local import errors, a symlink was created: `scripts/utils/shared-date-parsing.js` → `../../src/api/scripts/utils/shared-date-parsing.js`. All manifest generators now use the canonical shared date parsing utility. If you move or update the canonical file, update the symlink accordingly. Do not edit or restore the archived copy in `scripts/_archived/`.
+
 All TODO/task files (including markdown in `docs/todo/`, code comments, and Copilot writeups) must use standard tags like `TODO`, `FIXME`, `BUG`, etc., and/or markdown checklists (`- [ ]`, `- [x]`) for compatibility with the VS Code Todo Tree extension.
 
 Copilot may add `TODO:` or `FIXME:` tags in any writeup, code, or documentation to indicate next steps, unresolved issues, or bugs.
