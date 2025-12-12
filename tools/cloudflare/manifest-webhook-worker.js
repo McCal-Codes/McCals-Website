@@ -14,10 +14,13 @@ export default {
     const type = match[1];
     const secret = request.headers.get('x-webhook-secret');
     if (!secret || secret !== env.WEBHOOK_SECRET) {
-      return new Response(JSON.stringify({ error: 'Unauthorized', message: 'Invalid webhook secret' }), {
-        status: 401,
-        headers: { 'content-type': 'application/json' }
-      });
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized', message: 'Invalid webhook secret' }),
+        {
+          status: 401,
+          headers: { 'content-type': 'application/json' },
+        },
+      );
     }
 
     const body = await request.text();
@@ -27,9 +30,11 @@ export default {
       originResp = await fetch(originUrl, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-webhook-secret': env.WEBHOOK_SECRET },
-        body: body || '{}'
+        body: body || '{}',
       });
-    } catch (_) {}
+    } catch (_) {
+      // ignore: origin may be temporarily unavailable
+    }
 
     if (originResp && originResp.ok) {
       const res = new Response(originResp.body, originResp);
@@ -39,7 +44,11 @@ export default {
 
     const fbUrl = `${env.FALLBACK_BASE.replace(/\/+$/, '')}/src/images/Portfolios/${type}/${type}-manifest.json`;
     let fbResp = null;
-    try { fbResp = await fetch(fbUrl); } catch (_) {}
+    try {
+      fbResp = await fetch(fbUrl);
+    } catch (_) {
+      // ignore: fallback may be temporarily unavailable
+    }
     if (fbResp && fbResp.ok) {
       const res = new Response(fbResp.body, fbResp);
       res.headers.set('x-fallback', 'github');
@@ -47,9 +56,15 @@ export default {
       return res;
     }
 
-    return new Response(JSON.stringify({ error: 'Unavailable', origin: originResp ? originResp.status : 'no-response' }), {
-      status: 503,
-      headers: { 'content-type': 'application/json' }
-    });
-  }
+    return new Response(
+      JSON.stringify({
+        error: 'Unavailable',
+        origin: originResp ? originResp.status : 'no-response',
+      }),
+      {
+        status: 503,
+        headers: { 'content-type': 'application/json' },
+      },
+    );
+  },
 };

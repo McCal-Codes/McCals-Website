@@ -140,6 +140,8 @@ export function WidgetEmbed({
           if (!containerRef.current) return;
 
           // Inject HTML
+          containerRef.current.innerHTML = html;
+
           // --- Manifest Proxy Logic for Dev ---
           // Determine manifest type from widget/category
           const manifestTypeMap: Record<string, string> = {
@@ -164,8 +166,8 @@ export function WidgetEmbed({
           });
           // Patch global JS variables if present
           // e.g., window.MANIFEST_BASE, MANIFEST_BASE, manifestUrl()
-          const scripts = containerRef.current.querySelectorAll('script');
-          scripts.forEach((script) => {
+          const scriptNodes = containerRef.current.querySelectorAll('script');
+          scriptNodes.forEach((script) => {
             if (script.textContent && /MANIFEST_BASE|manifestUrl/.test(script.textContent)) {
               // Replace manifest URL assignment in script text
               script.textContent = script.textContent.replace(
@@ -182,11 +184,10 @@ export function WidgetEmbed({
             }
           });
           // --- End Manifest Proxy Logic ---
-          containerRef.current.innerHTML = html;
 
           // Re-execute scripts
-          const scripts = containerRef.current.querySelectorAll('script');
-          scripts.forEach((script) => {
+          const scriptsToExecute = containerRef.current.querySelectorAll('script');
+          scriptsToExecute.forEach((script) => {
             const newScript = document.createElement('script');
 
             Array.from(script.attributes).forEach((attr) => {

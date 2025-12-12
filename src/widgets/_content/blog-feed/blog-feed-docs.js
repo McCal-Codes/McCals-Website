@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   // --- Google Docs Utilities ---
@@ -10,11 +10,13 @@
   async function fetchGoogleDoc(docId) {
     // Use the published-to-web endpoint for public docs
     const publishUrl = `https://docs.google.com/document/d/${docId}/pub`;
-    
+
     try {
       const response = await fetch(publishUrl, { mode: 'cors' });
       if (!response.ok) {
-        throw new Error(`Google Docs HTTP ${response.status}. Make sure the document is published to web.`);
+        throw new Error(
+          `Google Docs HTTP ${response.status}. Make sure the document is published to web.`,
+        );
       }
       return await response.text();
     } catch (error) {
@@ -28,9 +30,6 @@
     const doc = parser.parseFromString(html, 'text/html');
     const posts = [];
 
-    // Find all headings that could be post titles
-    const headings = doc.querySelectorAll('h1, h2, h3');
-    
     let currentPost = null;
     let contentBuffer = [];
 
@@ -45,17 +44,12 @@
     };
 
     // Walk through the document content
-    const walker = document.createTreeWalker(
-      doc.body,
-      NodeFilter.SHOW_ELEMENT,
-      null,
-      false
-    );
+    const walker = document.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT, null, false);
 
     let node;
-    while (node = walker.nextNode()) {
+    while ((node = walker.nextNode())) {
       const tagName = node.tagName.toLowerCase();
-      
+
       // Check if this is a heading that looks like a blog post title
       if (['h1', 'h2', 'h3'].includes(tagName)) {
         // Finish previous post
@@ -65,7 +59,7 @@
             posts.push(currentPost);
           }
         }
-        
+
         // Start new post
         const title = node.textContent.trim();
         if (title) {
@@ -75,7 +69,7 @@
             hero: null,
             images: [],
             body: '',
-            tags: ''
+            tags: '',
           };
         }
       }
@@ -84,16 +78,18 @@
         if (tagName === 'p') {
           const text = node.textContent.trim();
           const html = node.innerHTML.trim();
-          
+
           // Check if this paragraph contains a date
-          const dateMatch = text.match(/\b(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}|\d{4}[-\/]\d{1,2}[-\/]\d{1,2}|January|February|March|April|May|June|July|August|September|October|November|December)/i);
+          const dateMatch = text.match(
+            /\b(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}|\d{4}[-\/]\d{1,2}[-\/]\d{1,2}|January|February|March|April|May|June|July|August|September|October|November|December)/i,
+          );
           if (dateMatch && !currentPost.date) {
             currentPost.date = text;
           }
-          
+
           // Check for images in this paragraph
           const images = node.querySelectorAll('img');
-          images.forEach(img => {
+          images.forEach((img) => {
             if (img.src) {
               if (!currentPost.hero) {
                 currentPost.hero = img.src;
@@ -102,19 +98,17 @@
               }
             }
           });
-          
+
           // Add text content
           if (text) {
             contentBuffer.push(html);
           }
-        }
-        else if (['ul', 'ol', 'blockquote', 'div'].includes(tagName)) {
+        } else if (['ul', 'ol', 'blockquote', 'div'].includes(tagName)) {
           const html = node.outerHTML;
           if (html.trim()) {
             contentBuffer.push(html);
           }
-        }
-        else if (tagName === 'img') {
+        } else if (tagName === 'img') {
           if (node.src) {
             if (!currentPost.hero) {
               currentPost.hero = node.src;
@@ -140,10 +134,29 @@
   function sanitizeHtml(input) {
     const temp = document.createElement('div');
     temp.innerHTML = String(input || '');
-    temp.querySelectorAll('script, style, iframe, object, embed').forEach(el => el.remove());
+    temp.querySelectorAll('script, style, iframe, object, embed').forEach((el) => el.remove());
 
-    const allowed = new Set(['A','P','BR','STRONG','EM','UL','OL','LI','BLOCKQUOTE','B','I','H2','H3','H4','H5','H6','SPAN','DIV']);
-    temp.querySelectorAll('*').forEach(el => {
+    const allowed = new Set([
+      'A',
+      'P',
+      'BR',
+      'STRONG',
+      'EM',
+      'UL',
+      'OL',
+      'LI',
+      'BLOCKQUOTE',
+      'B',
+      'I',
+      'H2',
+      'H3',
+      'H4',
+      'H5',
+      'H6',
+      'SPAN',
+      'DIV',
+    ]);
+    temp.querySelectorAll('*').forEach((el) => {
       if (!allowed.has(el.tagName)) {
         const parent = el.parentNode;
         if (parent) {
@@ -151,7 +164,7 @@
           parent.removeChild(el);
         }
       } else {
-        [...el.attributes].forEach(attr => {
+        [...el.attributes].forEach((attr) => {
           const name = attr.name.toLowerCase();
           if (el.tagName === 'A' && (name === 'href' || name === 'title')) {
             // keep
@@ -173,25 +186,25 @@
 
   function formatDate(dateString) {
     if (!dateString) return null;
-    
+
     // Try to parse various date formats
     const patterns = [
       /(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})/,
       /(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/,
       /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})/i,
-      /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),?\s+(\d{4})/i
+      /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),?\s+(\d{4})/i,
     ];
-    
+
     for (const pattern of patterns) {
       const match = dateString.match(pattern);
       if (match) {
         try {
           const date = new Date(dateString);
           if (!isNaN(date.getTime())) {
-            return date.toLocaleDateString(undefined, { 
-              year: 'numeric', 
-              month: 'short', 
-              day: 'numeric' 
+            return date.toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
             });
           }
         } catch (e) {
@@ -199,7 +212,7 @@
         }
       }
     }
-    
+
     return null;
   }
 
@@ -272,20 +285,21 @@
 
   async function renderFromGoogleDocs(container, opts) {
     container.innerHTML = '<div class="blog-loading">Loading blog posts...</div>';
-    
+
     try {
       const docId = extractDocId(opts.docId);
       const html = await fetchGoogleDoc(docId);
       const posts = parseGoogleDocHTML(html);
-      
+
       // Filter and limit posts
-      const validPosts = posts.filter(p => p.title && (p.body || p.hero));
-      const limit = Number.isFinite(+opts.maxPosts) && +opts.maxPosts > 0 ? +opts.maxPosts : validPosts.length;
-      
+      const validPosts = posts.filter((p) => p.title && (p.body || p.hero));
+      const limit =
+        Number.isFinite(+opts.maxPosts) && +opts.maxPosts > 0 ? +opts.maxPosts : validPosts.length;
+
       const list = document.createElement('div');
       list.className = 'blog-feed';
 
-      validPosts.slice(0, limit).forEach(post => {
+      validPosts.slice(0, limit).forEach((post) => {
         const article = document.createElement('article');
         article.className = 'blog-card';
 
@@ -301,7 +315,7 @@
         h2.className = 'blog-title';
         h2.textContent = post.title;
         header.appendChild(h2);
-        
+
         if (opts.showDates !== false && post.date) {
           const formattedDate = formatDate(post.date);
           if (formattedDate) {
@@ -323,7 +337,7 @@
 
         // Additional images
         if (opts.showImages !== false && post.images && post.images.length > 0) {
-          post.images.forEach(imgUrl => {
+          post.images.forEach((imgUrl) => {
             article.appendChild(createImageFigure(imgUrl, '', opts.autoCaptions !== false));
           });
         }
@@ -333,7 +347,6 @@
 
       container.innerHTML = '';
       container.appendChild(list);
-      
     } catch (error) {
       console.error('Google Docs blog feed load failed:', error);
       container.innerHTML = `<div class="blog-error">Failed to load blog from Google Docs. ${error.message}</div>`;
@@ -348,11 +361,12 @@
       maxPosts: root.dataset.maxPosts ? parseInt(root.dataset.maxPosts, 10) : undefined,
       showDates: root.dataset.showDates !== 'false',
       showImages: root.dataset.showImages !== 'false',
-      autoCaptions: root.dataset.autoCaptions !== 'false'
+      autoCaptions: root.dataset.autoCaptions !== 'false',
     };
 
     if (opts.provider !== 'docs') {
-      root.innerHTML = '<div class="blog-error">This provider only supports Google Docs. Use data-provider="docs"</div>';
+      root.innerHTML =
+        '<div class="blog-error">This provider only supports Google Docs. Use data-provider="docs"</div>';
       return;
     }
 
@@ -365,7 +379,7 @@
   }
 
   function autoBootstrap() {
-    document.querySelectorAll('[data-blog-feed-docs]').forEach(el => initFromDataAttributes(el));
+    document.querySelectorAll('[data-blog-feed-docs]').forEach((el) => initFromDataAttributes(el));
   }
 
   if (document.readyState === 'loading') {
@@ -379,9 +393,15 @@
     init: (container, opts) => {
       if (typeof container === 'string') container = document.querySelector(container);
       if (!container) throw new Error('Container not found');
-      const config = { provider: 'docs', showDates: true, showImages: true, autoCaptions: true, ...(opts || {}) };
+      const config = {
+        provider: 'docs',
+        showDates: true,
+        showImages: true,
+        autoCaptions: true,
+        ...(opts || {}),
+      };
       if (!config.docId) throw new Error('docId required');
       return renderFromGoogleDocs(container, config);
-    }
+    },
   };
 })();

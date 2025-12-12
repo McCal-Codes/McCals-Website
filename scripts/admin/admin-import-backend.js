@@ -2,7 +2,7 @@
 /**
  * Admin Portfolio Import Backend
  * Handles actual file operations for the admin portfolio importer widget
- * 
+ *
  * Author: McCal-Codes
  * Version: 1.0.0
  */
@@ -28,9 +28,9 @@ const CONFIG = {
   allowedMimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
   portfolioTypes: {
     Concert: 'Concert',
-    Events: 'Events', 
-    Journalism: 'Journalism'
-  }
+    Events: 'Events',
+    Journalism: 'Journalism',
+  },
 };
 
 // Multer configuration for file uploads
@@ -39,7 +39,7 @@ const upload = multer({
   storage: storage,
   limits: {
     fileSize: CONFIG.maxFileSize,
-    files: 100 // Max 100 files per request
+    files: 100, // Max 100 files per request
   },
   fileFilter: (req, file, cb) => {
     if (CONFIG.allowedMimeTypes.includes(file.mimetype)) {
@@ -47,7 +47,7 @@ const upload = multer({
     } else {
       cb(new Error(`Unsupported file type: ${file.mimetype}`), false);
     }
-  }
+  },
 });
 
 // Admin authentication middleware (must be used after multer)
@@ -55,31 +55,31 @@ function requireAuth(req, res, next) {
   const authHeader = req.headers.authorization;
   const formPassword = req.body.adminPassword; // From multipart form data
   const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-  
+
   console.log('Auth check  Header: - admin-import-backend.js:59', authHeader);
   console.log('Auth check  Form password: - admin-import-backend.js:60', formPassword);
   console.log('Auth check  Expected: - admin-import-backend.js:61', adminPassword);
-  
+
   // Check authorization header first
   if (authHeader && authHeader === `Bearer ${adminPassword}`) {
     console.log('Auth success via header - admin-import-backend.js:65');
     return next();
   }
-  
+
   // Check form data password (from multer)
   if (formPassword && formPassword === adminPassword) {
     console.log('Auth success via form data - admin-import-backend.js:71');
     return next();
   }
-  
+
   console.log('Auth failed  no valid credentials found - admin-import-backend.js:75');
-  return res.status(401).json({ 
+  return res.status(401).json({
     error: 'Unauthorized - Invalid admin password',
     debug: {
       hasHeader: !!authHeader,
       hasFormPassword: !!formPassword,
-      expectedPassword: adminPassword
-    }
+      expectedPassword: adminPassword,
+    },
   });
 }
 
@@ -88,22 +88,25 @@ function extractDateFromFilename(filename) {
   const patterns = [
     /^(\d{2})(\d{2})(\d{2})/, // YYMMDD
     /^(\d{4})(\d{2})(\d{2})/, // YYYYMMDD
-    /(\d{2})-(\d{2})-(\d{2})/ // DD-MM-YY
+    /(\d{2})-(\d{2})-(\d{2})/, // DD-MM-YY
   ];
 
   for (const [index, pattern] of patterns.entries()) {
     const match = filename.match(pattern);
     if (match) {
       let year, month, day;
-      if (index === 0) { // YYMMDD
+      if (index === 0) {
+        // YYMMDD
         year = parseInt(match[1]) + (parseInt(match[1]) > 50 ? 1900 : 2000);
         month = parseInt(match[2]);
         day = parseInt(match[3]);
-      } else if (index === 1) { // YYYYMMDD
+      } else if (index === 1) {
+        // YYYYMMDD
         year = parseInt(match[1]);
         month = parseInt(match[2]);
         day = parseInt(match[3]);
-      } else { // DD-MM-YY
+      } else {
+        // DD-MM-YY
         day = parseInt(match[1]);
         month = parseInt(match[2]);
         year = parseInt(match[3]) + 2000;
@@ -115,7 +118,7 @@ function extractDateFromFilename(filename) {
           month,
           day,
           date: new Date(year, month - 1, day),
-          source: 'filename'
+          source: 'filename',
         };
       }
     }
@@ -128,30 +131,40 @@ function extractDateFromExif(buffer) {
   try {
     const parser = ExifParser.create(buffer);
     const result = parser.parse();
-    
+
     if (result.tags && (result.tags.DateTime || result.tags.DateTimeOriginal)) {
       const timestamp = result.tags.DateTimeOriginal || result.tags.DateTime;
       const date = new Date(timestamp * 1000);
-      
+
       return {
         year: date.getFullYear(),
         month: date.getMonth() + 1,
         day: date.getDate(),
         date: date,
-        source: 'exif'
+        source: 'exif',
       };
     }
   } catch (error) {
     // EXIF parsing failed, continue without it
   }
-  
+
   return null;
 }
 
 function formatMonthYear(date) {
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   return `${months[date.getMonth()]} ${date.getFullYear()}`;
 }
@@ -160,13 +173,13 @@ function extractEntityName(filename, folderName = null) {
   if (folderName) {
     return folderName;
   }
-  
+
   // Extract from filename pattern like "250829_BandName_Photo.jpg"
   const parts = filename.split('_');
   if (parts.length >= 2) {
     return parts[1];
   }
-  
+
   return 'Unknown';
 }
 
@@ -198,10 +211,10 @@ async function ensureDirectoryExists(dirPath) {
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ 
+  res.json({
     status: 'healthy',
     version: '1.0.0',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -240,7 +253,7 @@ app.post('/api/admin/import/preview', upload.array('files'), requireAuth, async 
         hasDate: !!dateInfo,
         hasEntityName: entityName !== 'Unknown',
         fileSize: file.size,
-        mimeType: file.mimetype
+        mimeType: file.mimetype,
       };
 
       preview.push({
@@ -251,7 +264,7 @@ app.post('/api/admin/import/preview', upload.array('files'), requireAuth, async 
         entityName: entityName,
         targetPath: path.relative(CONFIG.portfolioBasePath, targetInfo.fullPath),
         validation: validation,
-        status: validation.hasDate && validation.hasEntityName ? 'ready' : 'warning'
+        status: validation.hasDate && validation.hasEntityName ? 'ready' : 'warning',
       });
     }
 
@@ -259,9 +272,8 @@ app.post('/api/admin/import/preview', upload.array('files'), requireAuth, async 
       success: true,
       portfolioType: portfolioType,
       fileCount: files.length,
-      preview: preview
+      preview: preview,
     });
-
   } catch (error) {
     console.error('Preview error: - admin-import-backend.js:266', error);
     res.status(500).json({ error: 'Failed to generate preview' });
@@ -298,7 +310,12 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
         const entityName = extractEntityName(file.originalname, folderName);
 
         // Generate target path
-        const targetInfo = generateTargetPath(portfolioType, file.originalname, dateInfo, entityName);
+        const targetInfo = generateTargetPath(
+          portfolioType,
+          file.originalname,
+          dateInfo,
+          entityName,
+        );
 
         // Ensure target directory exists
         await ensureDirectoryExists(targetInfo.directory);
@@ -306,7 +323,7 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
         // Check if file already exists
         let finalPath = targetInfo.fullPath;
         let counter = 1;
-        while (true) { // eslint-disable-line no-constant-condition
+        for (;;) {
           try {
             await fs.access(finalPath);
             // File exists, try with counter
@@ -329,17 +346,19 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
           targetPath: path.relative(CONFIG.portfolioBasePath, finalPath),
           status: 'success',
           dateInfo: dateInfo,
-          entityName: entityName
+          entityName: entityName,
         });
 
         successCount++;
-
       } catch (error) {
-        console.error(`Error processing file ${file.originalname}: - admin-import-backend.js:338`, error);
+        console.error(
+          `Error processing file ${file.originalname}: - admin-import-backend.js:338`,
+          error,
+        );
         results.push({
           filename: file.originalname,
           status: 'error',
-          error: error.message
+          error: error.message,
         });
         errorCount++;
       }
@@ -349,53 +368,59 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
     if (successCount > 0) {
       try {
         const { spawn } = require('child_process');
-        
+
         if (portfolioType === 'Concert') {
           // First generate individual manifests
           const enhancedScript = path.join(__dirname, 'manifest/enhanced-manifest-generator.js');
-          spawn('node', [enhancedScript, '--auto'], { 
-            detached: true, 
-            stdio: 'ignore' 
+          spawn('node', [enhancedScript, '--auto'], {
+            detached: true,
+            stdio: 'ignore',
           }).unref();
-          
+
           // Then generate the concert rollup manifest (after a small delay)
           setTimeout(() => {
             const concertScript = path.join(__dirname, 'manifest/generate-concert-manifest.js');
-            spawn('node', [concertScript], { 
-              detached: true, 
-              stdio: 'ignore' 
+            spawn('node', [concertScript], {
+              detached: true,
+              stdio: 'ignore',
             }).unref();
           }, 2000); // 2 second delay to let individual manifests complete
         } else if (portfolioType === 'Events') {
           // Generate events manifest
           setTimeout(() => {
             const eventsScript = path.join(__dirname, 'manifest/generate-events-manifest.js');
-            spawn('node', [eventsScript], { 
-              detached: true, 
-              stdio: 'ignore' 
+            spawn('node', [eventsScript], {
+              detached: true,
+              stdio: 'ignore',
             }).unref();
           }, 1000);
         } else if (portfolioType === 'Journalism') {
           // Generate journalism manifest
           setTimeout(() => {
-            const journalismScript = path.join(__dirname, 'manifest/generate-journalism-manifest.js');
-            spawn('node', [journalismScript], { 
-              detached: true, 
-              stdio: 'ignore' 
+            const journalismScript = path.join(
+              __dirname,
+              'manifest/generate-journalism-manifest.js',
+            );
+            spawn('node', [journalismScript], {
+              detached: true,
+              stdio: 'ignore',
             }).unref();
           }, 1000);
         }
-        
+
         // Always regenerate the universal manifest after any portfolio change
         setTimeout(() => {
           const universalScript = path.join(__dirname, 'manifest/generate-universal-manifest.js');
-          spawn('node', [universalScript], { 
-            detached: true, 
-            stdio: 'ignore' 
+          spawn('node', [universalScript], {
+            detached: true,
+            stdio: 'ignore',
           }).unref();
         }, 3000); // Delay to let portfolio-specific manifests complete first
       } catch (manifestError) {
-        console.warn('Failed to trigger manifest regeneration: - admin-import-backend.js:398', manifestError);
+        console.warn(
+          'Failed to trigger manifest regeneration: - admin-import-backend.js:398',
+          manifestError,
+        );
       }
     }
 
@@ -405,9 +430,8 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
       totalFiles: files.length,
       successCount: successCount,
       errorCount: errorCount,
-      results: results
+      results: results,
     });
-
   } catch (error) {
     console.error('Import execution error: - admin-import-backend.js:412', error);
     res.status(500).json({ error: 'Failed to execute import' });
@@ -418,19 +442,19 @@ app.post('/api/admin/import/execute', upload.array('files'), requireAuth, async 
 app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
   try {
     const portfolioType = req.params.type;
-    
+
     if (!CONFIG.portfolioTypes[portfolioType]) {
       return res.status(400).json({ error: 'Invalid portfolio type' });
     }
 
     const portfolioPath = path.join(CONFIG.portfolioBasePath, portfolioType);
-    
+
     try {
       const stats = await fs.stat(portfolioPath);
       const entries = await fs.readdir(portfolioPath, { withFileTypes: true });
-      
-      const folders = entries.filter(entry => entry.isDirectory());
-      const files = entries.filter(entry => entry.isFile());
+
+      const folders = entries.filter((entry) => entry.isDirectory());
+      const files = entries.filter((entry) => entry.isFile());
 
       // Get detailed folder information
       const folderDetails = [];
@@ -439,34 +463,36 @@ app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
         try {
           const folderStats = await fs.stat(folderPath);
           const folderEntries = await fs.readdir(folderPath, { withFileTypes: true });
-          
+
           // Get subfolders (date folders)
           const subfolders = [];
-          for (const subfolder of folderEntries.filter(e => e.isDirectory())) {
+          for (const subfolder of folderEntries.filter((e) => e.isDirectory())) {
             const subfolderPath = path.join(folderPath, subfolder.name);
             const subStats = await fs.stat(subfolderPath);
             const subEntries = await fs.readdir(subfolderPath);
-            const imageCount = subEntries.filter(f => f.toLowerCase().match(/\.(jpg|jpeg|png|gif|bmp|webp)$/)).length;
-            
+            const imageCount = subEntries.filter((f) =>
+              f.toLowerCase().match(/\.(jpg|jpeg|png|gif|bmp|webp)$/),
+            ).length;
+
             subfolders.push({
               name: subfolder.name,
               imageCount: imageCount,
               lastModified: subStats.mtime,
-              hasManifest: subEntries.includes('manifest.json')
+              hasManifest: subEntries.includes('manifest.json'),
             });
           }
-          
+
           folderDetails.push({
             name: folder.name,
             subfolderCount: subfolders.length,
             subfolders: subfolders,
             lastModified: folderStats.mtime,
-            totalImages: subfolders.reduce((sum, sf) => sum + sf.imageCount, 0)
+            totalImages: subfolders.reduce((sum, sf) => sum + sf.imageCount, 0),
           });
         } catch (err) {
           folderDetails.push({
             name: folder.name,
-            error: 'Could not read folder details'
+            error: 'Could not read folder details',
           });
         }
       }
@@ -479,19 +505,17 @@ app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
         folderCount: folders.length,
         fileCount: files.length,
         lastModified: stats.mtime,
-        folders: folderDetails
+        folders: folderDetails,
       });
-
     } catch (error) {
       res.json({
         success: true,
         portfolioType: portfolioType,
         path: portfolioPath,
         exists: false,
-        error: 'Portfolio directory not found'
+        error: 'Portfolio directory not found',
       });
     }
-
   } catch (error) {
     console.error('Portfolio status error: - admin-import-backend.js:496', error);
     res.status(500).json({ error: 'Failed to get portfolio status' });
@@ -499,70 +523,73 @@ app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
 });
 
 // Folder management operations
-app.post('/api/admin/portfolios/:type/folders/:folderName/rename', requireAuth, async (req, res) => {
-  try {
-    const { portfolioType, folderName } = req.params;
-    const { newName } = req.body;
-    
-    if (!CONFIG.portfolioTypes[portfolioType]) {
-      return res.status(400).json({ error: 'Invalid portfolio type' });
-    }
-    
-    if (!newName || newName.trim() === '') {
-      return res.status(400).json({ error: 'New folder name required' });
-    }
-    
-    const portfolioPath = path.join(CONFIG.portfolioBasePath, portfolioType);
-    const oldPath = path.join(portfolioPath, folderName);
-    const newPath = path.join(portfolioPath, newName.trim());
-    
-    // Check if old folder exists
+app.post(
+  '/api/admin/portfolios/:type/folders/:folderName/rename',
+  requireAuth,
+  async (req, res) => {
     try {
-      await fs.access(oldPath);
-    } catch {
-      return res.status(404).json({ error: 'Folder not found' });
+      const { portfolioType, folderName } = req.params;
+      const { newName } = req.body;
+
+      if (!CONFIG.portfolioTypes[portfolioType]) {
+        return res.status(400).json({ error: 'Invalid portfolio type' });
+      }
+
+      if (!newName || newName.trim() === '') {
+        return res.status(400).json({ error: 'New folder name required' });
+      }
+
+      const portfolioPath = path.join(CONFIG.portfolioBasePath, portfolioType);
+      const oldPath = path.join(portfolioPath, folderName);
+      const newPath = path.join(portfolioPath, newName.trim());
+
+      // Check if old folder exists
+      try {
+        await fs.access(oldPath);
+      } catch {
+        return res.status(404).json({ error: 'Folder not found' });
+      }
+
+      // Check if new name already exists
+      try {
+        await fs.access(newPath);
+        return res.status(400).json({ error: 'Folder with new name already exists' });
+      } catch {
+        // Good - new name doesn't exist
+      }
+
+      // Rename folder
+      await fs.rename(oldPath, newPath);
+
+      res.json({
+        success: true,
+        message: `Folder renamed from "${folderName}" to "${newName.trim()}"`,
+        oldName: folderName,
+        newName: newName.trim(),
+      });
+    } catch (error) {
+      console.error('Folder rename error: - admin-import-backend.js:545', error);
+      res.status(500).json({ error: 'Failed to rename folder' });
     }
-    
-    // Check if new name already exists
-    try {
-      await fs.access(newPath);
-      return res.status(400).json({ error: 'Folder with new name already exists' });
-    } catch {
-      // Good - new name doesn't exist
-    }
-    
-    // Rename folder
-    await fs.rename(oldPath, newPath);
-    
-    res.json({ 
-      success: true, 
-      message: `Folder renamed from "${folderName}" to "${newName.trim()}"`,
-      oldName: folderName,
-      newName: newName.trim()
-    });
-    
-  } catch (error) {
-    console.error('Folder rename error: - admin-import-backend.js:545', error);
-    res.status(500).json({ error: 'Failed to rename folder' });
-  }
-});
+  },
+);
 
 app.delete('/api/admin/portfolios/:type/folders/:folderName', requireAuth, async (req, res) => {
   try {
     const { portfolioType, folderName } = req.params;
     const { confirm } = req.body;
-    
+
     if (!CONFIG.portfolioTypes[portfolioType]) {
       return res.status(400).json({ error: 'Invalid portfolio type' });
     }
-    
+
     if (!confirm) {
       return res.status(400).json({ error: 'Confirmation required for deletion' });
     }
-    
+
     const portfolioPath = path.join(CONFIG.portfolioBasePath, portfolioType);
     const folderPath = path.join(portfolioPath, folderName);
-    
+
     // Check if folder exists
     try {
       const stats = await fs.stat(folderPath);
@@ -572,15 +599,14 @@ app.delete('/api/admin/portfolios/:type/folders/:folderName', requireAuth, async
     } catch {
       return res.status(404).json({ error: 'Folder not found' });
     }
-    
+
     // Delete folder recursively
     await fs.rmdir(folderPath, { recursive: true });
-    
-    res.json({ 
-      success: true, 
-      message: `Folder "${folderName}" deleted successfully`
+
+    res.json({
+      success: true,
+      message: `Folder "${folderName}" deleted successfully`,
     });
-    
   } catch (error) {
     console.error('Folder delete error: - admin-import-backend.js:585', error);
     res.status(500).json({ error: 'Failed to delete folder' });
@@ -592,17 +618,17 @@ app.get('/api/admin/server/info', requireAuth, async (req, res) => {
   try {
     const os = require('os');
     const networkInterfaces = os.networkInterfaces();
-    
+
     // Get local IP addresses
     const localIPs = [];
-    Object.keys(networkInterfaces).forEach(interface => {
-      networkInterfaces[interface].forEach(address => {
+    Object.keys(networkInterfaces).forEach((iface) => {
+      networkInterfaces[iface].forEach((address) => {
         if (address.family === 'IPv4' && !address.internal) {
           localIPs.push(address.address);
         }
       });
     });
-    
+
     res.json({
       success: true,
       server: {
@@ -610,14 +636,13 @@ app.get('/api/admin/server/info', requireAuth, async (req, res) => {
         localIPs: localIPs,
         hostname: os.hostname(),
         platform: os.platform(),
-        uptime: process.uptime()
+        uptime: process.uptime(),
       },
       access: {
         local: `http://localhost:${PORT}`,
-        network: localIPs.map(ip => `http://${ip}:${PORT}`)
-      }
+        network: localIPs.map((ip) => `http://${ip}:${PORT}`),
+      },
     });
-    
   } catch (error) {
     console.error('Server info error: - admin-import-backend.js:622', error);
     res.status(500).json({ error: 'Failed to get server info' });
@@ -634,24 +659,34 @@ app.use((error, req, res) => {
       return res.status(400).json({ error: 'Too many files (max 100)' });
     }
   }
-  
+
   console.error('Server error: - admin-import-backend.js:638', error);
   res.status(500).json({ error: 'Internal server error' });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🔧 Admin Portfolio Import Backend running on http://localhost:${PORT} - admin-import-backend.js:644`);
+  console.log(
+    `🔧 Admin Portfolio Import Backend running on http://localhost:${PORT} - admin-import-backend.js:644`,
+  );
   console.log(`📁 Portfolio base path: ${CONFIG.portfolioBasePath} - admin-import-backend.js:645`);
   console.log(`🔐 Admin password required for all operations - admin-import-backend.js:646`);
   console.log(`📝 Available endpoints: - admin-import-backend.js:647`);
   console.log(`GET  /health  Health check - admin-import-backend.js:648`);
   console.log(`POST /api/admin/import/preview  Preview import - admin-import-backend.js:649`);
   console.log(`POST /api/admin/import/execute  Execute import - admin-import-backend.js:650`);
-  console.log(`GET  /api/admin/portfolios/:type/status  Portfolio status with folder details - admin-import-backend.js:651`);
-  console.log(`POST /api/admin/portfolios/:type/folders/:name/rename  Rename folder - admin-import-backend.js:652`);
-  console.log(`DELETE /api/admin/portfolios/:type/folders/:name  Delete folder - admin-import-backend.js:653`);
-  console.log(`GET  /api/admin/server/info  Server info for remote access - admin-import-backend.js:654`);
+  console.log(
+    `GET  /api/admin/portfolios/:type/status  Portfolio status with folder details - admin-import-backend.js:651`,
+  );
+  console.log(
+    `POST /api/admin/portfolios/:type/folders/:name/rename  Rename folder - admin-import-backend.js:652`,
+  );
+  console.log(
+    `DELETE /api/admin/portfolios/:type/folders/:name  Delete folder - admin-import-backend.js:653`,
+  );
+  console.log(
+    `GET  /api/admin/server/info  Server info for remote access - admin-import-backend.js:654`,
+  );
 });
 
 module.exports = app;
