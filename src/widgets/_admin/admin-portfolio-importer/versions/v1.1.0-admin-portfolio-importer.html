@@ -2,879 +2,1071 @@
 <!-- ADMIN ONLY - DO NOT DEPLOY TO PUBLIC SQUARESPACE SITE -->
 <!-- Private administrative tool for importing and organizing portfolio images -->
 
-<div class="admin-portfolio-importer" 
-     data-widget-version="1.1.0"
-     data-admin-password=""
-     data-default-portfolio="Concert"
-     data-auto-manifest="true"
-     data-preview-mode="true">
-
-<style>
-  :root {
-    /* Core colors following standardization */
-    --fg: #f5f5f5;
-    --bg: #0a0a0a;
-    --line: #2a2a2a;
-    --accent: #ff4d6d;
-    --published: #00d4aa;
-    --error: #ff6b6b;
-    --warning: #ffa726;
-    
-    /* Admin-specific colors */
-    --admin-bg: #1a1a1a;
-    --admin-panel: #2a2a2a;
-    --admin-border: #3a3a3a;
-    --admin-success: #4caf50;
-  }
-  
-  @media (prefers-color-scheme: light) {
+<div
+  class="admin-portfolio-importer"
+  data-widget-version="1.1.0"
+  data-admin-password=""
+  data-default-portfolio="Concert"
+  data-auto-manifest="true"
+  data-preview-mode="true"
+>
+  <!-- site-widgets:inline:start -->
+  <style data-site-widgets-inline>
     :root {
+      --mcc-accent: #ff4d6d;
+      --mcc-accent-strong: #ff2b50;
+      --mcc-bg: #ffffff;
+      --mcc-fg: #111827;
+      --mcc-line: #e5e7eb;
+      --mcc-muted: #6b7280;
+      --bg: var(--mcc-bg);
+      --fg: var(--mcc-fg);
+      --line: var(--mcc-line);
+      --accent: var(--mcc-accent);
+      --muted: var(--mcc-muted);
+      --chip: #1b1b1b;
+      --focus: #7dd3fc;
+      --link: var(--accent);
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --panel-blur: 8px;
+      --mcc-space-1: 4px;
+      --mcc-space-2: 8px;
+      --mcc-space-3: 12px;
+      --mcc-space-4: 16px;
+      --mcc-space-5: 24px;
+      --mcc-space-6: 32px;
+      --mcc-radius: 10px;
+      --mcc-control-height: 40px;
+      --mcc-z-top: 2147483647;
+    }
+    [data-theme='light'] {
       --fg: #0a0a0a;
-      --bg: #fff;
+      --bg: #ffffff;
       --line: #e5e5e5;
-      --admin-bg: #f8f9fa;
-      --admin-panel: #ffffff;
-      --admin-border: #e9ecef;
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --panel-blur: 8px;
+      --chip: #fafafa;
+      --focus: #0ea5e9;
+      --link: var(--accent);
     }
-  }
-
-  /* Ultra Minimal Scrollbar Design */
-  .admin-portfolio-importer * {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(136,136,136,0.15) transparent;
-  }
-  
-  .admin-portfolio-importer *::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-  }
-  
-  .admin-portfolio-importer *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  .admin-portfolio-importer *::-webkit-scrollbar-thumb {
-    background: rgba(136,136,136,0.15);
-    border-radius: 2px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .admin-portfolio-importer *::-webkit-scrollbar-thumb:hover {
-    background: rgba(136,136,136,0.25);
-  }
-
-  /* Main Container */
-  .admin-portfolio-importer {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 30px;
-    background: var(--admin-bg);
-    border-radius: 12px;
-    border: 1px solid var(--admin-border);
-    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-    color: var(--fg);
-    min-height: 600px;
-    position: relative;
-  }
-
-  /* Authentication Screen */
-  .admin-auth-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 400px;
-    text-align: center;
-  }
-
-  .admin-auth-screen.hidden { display: none; }
-
-  .admin-auth-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--fg);
-    margin-bottom: 0.5rem;
-  }
-
-  .admin-auth-subtitle {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 2rem;
-  }
-
-  .admin-auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .admin-auth-input {
-    padding: 12px 16px;
-    border: 2px solid var(--admin-border);
-    border-radius: 8px;
-    background: var(--admin-panel);
-    color: var(--fg);
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-
-  .admin-auth-input:focus {
-    border-color: var(--accent);
-  }
-
-  .admin-auth-submit {
-    padding: 12px 24px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-
-  .admin-auth-submit:hover {
-    background: #a13245;
-  }
-
-  .admin-auth-error {
-    color: var(--error);
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-  }
-
-  /* Main Interface */
-  .admin-main-interface {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .admin-main-interface.visible {
-    display: block;
-    opacity: 1;
-  }
-
-  .admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--admin-border);
-  }
-
-  .admin-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--fg);
-  }
-
-  .admin-header-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .backend-status {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 6px 12px;
-    background: var(--admin-panel);
-    border: 1px solid var(--admin-border);
-    border-radius: 6px;
-    font-size: 0.75rem;
-  }
-
-  .status-indicator {
-    font-size: 0.875rem;
-  }
-
-  .status-text {
-    color: var(--fg);
-    font-weight: 500;
-  }
-
-  .status-refresh {
-    background: none;
-    border: none;
-    color: var(--fg);
-    cursor: pointer;
-    padding: 2px;
-    border-radius: 3px;
-    transition: background-color 0.2s ease;
-  }
-
-  .status-refresh:hover {
-    background: var(--admin-border);
-  }
-
-  .admin-logout {
-    padding: 8px 16px;
-    background: transparent;
-    border: 1px solid var(--admin-border);
-    border-radius: 6px;
-    color: var(--fg);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.875rem;
-  }
-
-  .admin-logout:hover {
-    background: var(--admin-border);
-  }
-
-  /* Portfolio Type Selection */
-  .admin-section {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: var(--admin-panel);
-    border-radius: 8px;
-    border: 1px solid var(--admin-border);
-  }
-
-  .admin-section-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--fg);
-    margin-bottom: 1rem;
-  }
-
-  .portfolio-type-selector {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .portfolio-type-btn {
-    padding: 10px 20px;
-    background: transparent;
-    border: 2px solid var(--admin-border);
-    border-radius: 8px;
-    color: var(--fg);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 500;
-  }
-
-  .portfolio-type-btn.active {
-    border-color: var(--accent);
-    background: rgba(255, 77, 109, 0.1);
-    color: var(--accent);
-  }
-
-  .portfolio-type-btn:hover:not(.active) {
-    border-color: rgba(255,255,255,0.3);
-  }
-
-  /* File Upload Area */
-  .admin-upload-area {
-    border: 2px dashed var(--admin-border);
-    border-radius: 12px;
-    padding: 3rem 2rem;
-    text-align: center;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .admin-upload-area.drag-over {
-    border-color: var(--accent);
-    background: rgba(255, 77, 109, 0.05);
-  }
-
-  .admin-upload-icon {
-    font-size: 3rem;
-    color: var(--admin-border);
-    margin-bottom: 1rem;
-  }
-
-  .admin-upload-text {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--fg);
-    margin-bottom: 0.5rem;
-  }
-
-  .admin-upload-subtext {
-    font-size: 0.875rem;
-    color: rgba(255,255,255,0.6);
-  }
-
-  .admin-upload-input {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    pointer-events: none;
-  }
-
-  .admin-upload-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-
-  .admin-upload-btn {
-    padding: 10px 20px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.875rem;
-  }
-
-  .admin-upload-btn:hover {
-    background: #ff3355;
-    transform: translateY(-1px);
-  }
-
-  .admin-folder-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.5);
-    font-family: ui-monospace, monospace;
-    background: rgba(255,255,255,0.05);
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 8px;
-  }
-
-  /* Preview Panel */
-  .admin-preview-panel {
-    margin-top: 2rem;
-    display: none;
-  }
-
-  .admin-preview-panel.visible {
-    display: block;
-  }
-
-  .admin-preview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .admin-preview-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--fg);
-  }
-
-  .admin-preview-count {
-    font-size: 0.875rem;
-    color: rgba(255,255,255,0.7);
-    background: var(--admin-border);
-    padding: 4px 12px;
-    border-radius: 12px;
-  }
-
-  .admin-preview-list {
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid var(--admin-border);
-    border-radius: 8px;
-  }
-
-  .admin-preview-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--admin-border);
-    transition: background-color 0.2s ease;
-  }
-
-  .admin-preview-item:last-child {
-    border-bottom: none;
-  }
-
-  .admin-preview-item:hover {
-    background: rgba(255,255,255,0.02);
-  }
-
-  .admin-preview-thumbnail {
-    width: 48px;
-    height: 48px;
-    border-radius: 6px;
-    object-fit: cover;
-    margin-right: 12px;
-    background: var(--admin-border);
-  }
-
-  .admin-preview-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .admin-preview-filename {
-    font-weight: 500;
-    color: var(--fg);
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .admin-preview-path {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.5);
-    font-family: ui-monospace, monospace;
-  }
-
-  .admin-preview-optimization {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.6);
-    font-family: ui-sans-serif, system-ui;
-    margin-top: 4px;
-  }
-
-  .admin-preview-status {
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 500;
-  }
-
-  .admin-preview-status.success {
-    background: rgba(76, 175, 80, 0.2);
-    color: var(--admin-success);
-  }
-
-  .admin-preview-status.error {
-    background: rgba(255, 107, 107, 0.2);
-    color: var(--error);
-  }
-
-  .admin-preview-status.warning {
-    background: rgba(255, 167, 38, 0.2);
-    color: var(--warning);
-  }
-
-  /* Action Buttons */
-  .admin-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--admin-border);
-  }
-
-  .admin-btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.875rem;
-  }
-
-  .admin-btn.primary {
-    background: var(--accent);
-    color: white;
-  }
-
-  .admin-btn.primary:hover {
-    background: #ff3355;
-  }
-
-  .admin-btn.secondary {
-    background: transparent;
-    border: 2px solid var(--admin-border);
-    color: var(--fg);
-  }
-
-  .admin-btn.secondary:hover {
-    background: var(--admin-border);
-  }
-
-  .admin-btn.success {
-    background: var(--admin-success);
-    color: white;
-  }
-
-  .admin-btn.success:hover {
-    background: #45a049;
-  }
-
-  .admin-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  /* Loading States */
-  .admin-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .admin-spinner {
-    width: 32px;
-    height: 32px;
-    border: 3px solid var(--admin-border);
-    border-top: 3px solid var(--accent);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  .admin-loading-text {
-    color: rgba(255,255,255,0.7);
-    font-size: 0.875rem;
-  }
-
-  /* Progress Bar */
-  .admin-progress {
-    width: 100%;
-    height: 8px;
-    background: var(--admin-border);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 1rem 0;
-  }
-
-  .admin-progress-bar {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 4px;
-    transition: width 0.3s ease;
-    width: 0%;
-  }
-
-  /* Notifications */
-  .admin-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 16px 20px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 500;
-    z-index: 10000;
-    animation: slideInRight 0.3s ease;
-    max-width: 400px;
-  }
-
-  .admin-notification.success {
-    background: var(--admin-success);
-  }
-
-  .admin-notification.error {
-    background: var(--error);
-  }
-
-  .admin-notification.warning {
-    background: var(--warning);
-  }
-
-  @keyframes slideInRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-
-  /* Version Indicator */
-  .admin-version-indicator {
-    position: fixed;
-    bottom: 12px;
-    right: 12px;
-    font: 600 11px/1.2 ui-sans-serif, system-ui;
-    color: rgba(255,255,255,0.6);
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s ease;
-    padding: 6px 10px;
-    background: rgba(0,0,0,0.6);
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .admin-version-indicator:hover {
-    color: var(--accent);
-    background: rgba(0,0,0,0.8);
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
+    [data-theme='dark'] {
+      --fg: #f7f7f7;
+      --bg: #06060a;
+      --line: #2a2a2a;
+      --panel-bg: rgba(20, 20, 20, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --panel-blur: 8px;
+      --chip: #1b1b1b;
+      --focus: #7dd3fc;
+      --link: var(--accent);
+    }
+    [class^='mcc-'],
+    [class*=' mcc-'] {
+      box-sizing: border-box;
+      font-family:
+        Inter,
+        'Segoe UI',
+        system-ui,
+        -apple-system,
+        'Helvetica Neue',
+        Arial,
+        sans-serif;
+      color: var(--fg);
+    }
+    [class^='mcc-'] a:focus-visible,
+    [class^='mcc-'] button:focus-visible,
+    [class^='mcc-'] [role='button']:focus-visible,
+    [class*=' mcc-'] a:focus-visible,
+    [class*=' mcc-'] button:focus-visible,
+    [class*=' mcc-'] [role='button']:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+      border-radius: 6px;
+    }
+    .mcc-sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .mcc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--mcc-space-2);
+      padding: 0.6rem 1.2rem;
+      height: var(--mcc-control-height);
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .mcc-btn:hover,
+    .mcc-btn:focus-visible {
+      background: var(--mcc-accent-strong);
+      transform: translateY(-1px);
+    }
+    .mcc-img-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mcc-row {
+      display: flex;
+      gap: var(--mcc-space-3);
+      align-items: center;
+    }
+    .mcc-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mcc-space-2);
+    }
+    .mcc-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [class^='mcc-'] {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [class^='mcc-'] * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media print {
+      [class^='mcc-'] {
+        color: #000 !important;
+        background: transparent !important;
+      }
+    }
+  </style>
+  <!-- site-widgets:inline:end -->
+
+  <style>
+    :root {
+      /* Core colors following standardization */
+      --fg: #f5f5f5;
+      --bg: #0a0a0a;
+      --line: #2a2a2a;
+      --accent: #ff4d6d;
+      --published: #00d4aa;
+      --error: #ff6b6b;
+      --warning: #ffa726;
+
+      /* Admin-specific colors */
+      --admin-bg: #1a1a1a;
+      --admin-panel: #2a2a2a;
+      --admin-border: #3a3a3a;
+      --admin-success: #4caf50;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --fg: #0a0a0a;
+        --bg: #fff;
+        --line: #e5e5e5;
+        --admin-bg: #f8f9fa;
+        --admin-panel: #ffffff;
+        --admin-border: #e9ecef;
+      }
+    }
+
+    /* Ultra Minimal Scrollbar Design */
+    .admin-portfolio-importer * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(136, 136, 136, 0.15) transparent;
+    }
+
+    .admin-portfolio-importer *::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    .admin-portfolio-importer *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .admin-portfolio-importer *::-webkit-scrollbar-thumb {
+      background: rgba(136, 136, 136, 0.15);
+      border-radius: 2px;
+      transition: background-color 0.2s ease;
+    }
+
+    .admin-portfolio-importer *::-webkit-scrollbar-thumb:hover {
+      background: rgba(136, 136, 136, 0.25);
+    }
+
+    /* Main Container */
     .admin-portfolio-importer {
-      margin: 20px;
-      padding: 20px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 30px;
+      background: var(--admin-bg);
+      border-radius: 12px;
+      border: 1px solid var(--admin-border);
+      font-family:
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        sans-serif;
+      color: var(--fg);
+      min-height: 600px;
+      position: relative;
     }
-    
-    .admin-header {
+
+    /* Authentication Screen */
+    .admin-auth-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      text-align: center;
+    }
+
+    .admin-auth-screen.hidden {
+      display: none;
+    }
+
+    .admin-auth-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-auth-subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 2rem;
+    }
+
+    .admin-auth-form {
+      display: flex;
       flex-direction: column;
       gap: 1rem;
-      align-items: stretch;
+      width: 100%;
+      max-width: 300px;
     }
-    
+
+    .admin-auth-input {
+      padding: 12px 16px;
+      border: 2px solid var(--admin-border);
+      border-radius: 8px;
+      background: var(--admin-panel);
+      color: var(--fg);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .admin-auth-input:focus {
+      border-color: var(--accent);
+    }
+
+    .admin-auth-submit {
+      padding: 12px 24px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .admin-auth-submit:hover {
+      background: #a13245;
+    }
+
+    .admin-auth-error {
+      color: var(--error);
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Main Interface */
+    .admin-main-interface {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .admin-main-interface.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .admin-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .admin-header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .backend-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 6px 12px;
+      background: var(--admin-panel);
+      border: 1px solid var(--admin-border);
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+
+    .status-indicator {
+      font-size: 0.875rem;
+    }
+
+    .status-text {
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    .status-refresh {
+      background: none;
+      border: none;
+      color: var(--fg);
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+    }
+
+    .status-refresh:hover {
+      background: var(--admin-border);
+    }
+
+    .admin-logout {
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--admin-border);
+      border-radius: 6px;
+      color: var(--fg);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.875rem;
+    }
+
+    .admin-logout:hover {
+      background: var(--admin-border);
+    }
+
+    /* Portfolio Type Selection */
+    .admin-section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--admin-panel);
+      border-radius: 8px;
+      border: 1px solid var(--admin-border);
+    }
+
+    .admin-section-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 1rem;
+    }
+
     .portfolio-type-selector {
-      flex-direction: column;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
-    
-    .admin-actions {
-      flex-direction: column;
+
+    .portfolio-type-btn {
+      padding: 10px 20px;
+      background: transparent;
+      border: 2px solid var(--admin-border);
+      border-radius: 8px;
+      color: var(--fg);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
     }
-    
-    .admin-preview-item {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
+
+    .portfolio-type-btn.active {
+      border-color: var(--accent);
+      background: rgba(255, 77, 109, 0.1);
+      color: var(--accent);
     }
-    
-    .admin-preview-thumbnail {
-      margin-right: 0;
+
+    .portfolio-type-btn:hover:not(.active) {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* File Upload Area */
+    .admin-upload-area {
+      border: 2px dashed var(--admin-border);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-upload-area.drag-over {
+      border-color: var(--accent);
+      background: rgba(255, 77, 109, 0.05);
+    }
+
+    .admin-upload-icon {
+      font-size: 3rem;
+      color: var(--admin-border);
+      margin-bottom: 1rem;
+    }
+
+    .admin-upload-text {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-upload-subtext {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .admin-upload-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      pointer-events: none;
     }
 
     .admin-upload-buttons {
-      flex-direction: column;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
     }
-  }
 
-  @media (prefers-color-scheme: light) {
+    .admin-upload-btn {
+      padding: 10px 20px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.875rem;
+    }
+
+    .admin-upload-btn:hover {
+      background: #ff3355;
+      transform: translateY(-1px);
+    }
+
+    .admin-folder-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: ui-monospace, monospace;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    /* Preview Panel */
+    .admin-preview-panel {
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .admin-preview-panel.visible {
+      display: block;
+    }
+
+    .admin-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .admin-preview-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .admin-preview-count {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      background: var(--admin-border);
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+
+    .admin-preview-list {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+    }
+
+    .admin-preview-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--admin-border);
+      transition: background-color 0.2s ease;
+    }
+
+    .admin-preview-item:last-child {
+      border-bottom: none;
+    }
+
+    .admin-preview-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .admin-preview-thumbnail {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      object-fit: cover;
+      margin-right: 12px;
+      background: var(--admin-border);
+    }
+
+    .admin-preview-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .admin-preview-filename {
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .admin-preview-path {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: ui-monospace, monospace;
+    }
+
     .admin-preview-optimization {
-      color: rgba(10,10,10,0.6);
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: ui-sans-serif, system-ui;
+      margin-top: 4px;
     }
-  }
-</style>
 
-<!-- Authentication Screen -->
-<div class="admin-auth-screen" id="authScreen">
-  <h1 class="admin-auth-title">🔐 Admin Access Required</h1>
-  <p class="admin-auth-subtitle">Portfolio Import & Management Tool</p>
-  <form class="admin-auth-form" id="authForm">
-    <input 
-      type="password" 
-      class="admin-auth-input" 
-      id="adminPassword" 
-      placeholder="Enter admin password"
-      autocomplete="current-password"
-    >
-    <button type="submit" class="admin-auth-submit">Access Admin Panel</button>
-    <div class="admin-auth-error" id="authError"></div>
-  </form>
-</div>
-
-<!-- Main Admin Interface -->
-<div class="admin-main-interface" id="mainInterface">
-  <div class="admin-header">
-    <h1 class="admin-title">📁 Portfolio Import Manager</h1>
-    <div class="admin-header-controls">
-      <div class="backend-status" id="backendStatus">
-        <span class="status-indicator" id="statusIndicator">🔴</span>
-        <span class="status-text" id="statusText">Backend Offline</span>
-        <button class="status-refresh" onclick="refreshBackendStatus()" id="statusRefresh">🔄</button>
-      </div>
-      <button class="admin-logout" onclick="adminLogout()">Logout</button>
-    </div>
-  </div>
-
-  <!-- Portfolio Type Selection -->
-  <div class="admin-section">
-    <h2 class="admin-section-title">Portfolio Type</h2>
-    <div class="portfolio-type-selector">
-      <button class="portfolio-type-btn active" data-type="Concert" onclick="selectPortfolioType('Concert')">
-        🎵 Concert Portfolio
-      </button>
-      <button class="portfolio-type-btn" data-type="Events" onclick="selectPortfolioType('Events')">
-        🎉 Event Portfolio
-      </button>
-      <button class="portfolio-type-btn" data-type="Journalism" onclick="selectPortfolioType('Journalism')">
-        📰 Journalism Portfolio
-      </button>
-      <button class="portfolio-type-btn" data-type="Nature" onclick="selectPortfolioType('Nature')">
-        🌿 Nature Portfolio
-      </button>
-    </div>
-  </div>
-
-  <!-- File Upload Area -->
-  <div class="admin-section">
-    <h2 class="admin-section-title">Import Images</h2>
-    <div class="admin-upload-area" id="uploadArea">
-      <div class="admin-upload-icon">�</div>
-      <div class="admin-upload-text">Drop folders or images here</div>
-      <div class="admin-upload-subtext">Supports folders • JPG, PNG, WebP • Automatic date extraction • Batch organization</div>
-      <div class="admin-upload-buttons">
-        <button type="button" class="admin-upload-btn" onclick="selectFolder()">📁 Select Folder</button>
-        <button type="button" class="admin-upload-btn" onclick="selectFiles()">📎 Select Files</button>
-      </div>
-      <input 
-        type="file" 
-        class="admin-upload-input" 
-        id="fileInput" 
-        multiple 
-        webkitdirectory
-        directory
-        accept="image/jpeg,image/jpg,image/png,image/webp"
-      >
-      <input 
-        type="file" 
-        class="admin-upload-input" 
-        id="fileInputSingle" 
-        multiple 
-        accept="image/jpeg,image/jpg,image/png,image/webp"
-        style="display: none;"
-      >
-    </div>
-  </div>
-
-  <!-- Preview Panel -->
-  <div class="admin-preview-panel" id="previewPanel">
-    <div class="admin-preview-header">
-      <div class="admin-preview-title">Import Preview</div>
-      <div class="admin-preview-count" id="previewCount">0 files selected</div>
-    </div>
-    <div class="admin-preview-list" id="previewList"></div>
-    <div class="admin-progress" id="progressContainer" style="display: none;">
-      <div class="admin-progress-bar" id="progressBar"></div>
-    </div>
-  </div>
-
-  <!-- Action Buttons -->
-  <div class="admin-actions" id="actionButtons" style="display: none;">
-    <button class="admin-btn secondary" onclick="clearFiles()">Clear All</button>
-    <button class="admin-btn secondary" onclick="previewImport()" id="previewBtn">🔍 Preview Backend</button>
-    <button class="admin-btn primary" onclick="processFiles()" id="processBtn">📁 Import Files</button>
-  </div>
-</div>
-
-<!-- Version Indicator -->
-<div class="admin-version-indicator" onclick="showAdminInfo()">
-  Admin v1.1.0
-</div>
-
-<script>
-(function() {
-  'use strict';
-
-  // Configuration
-  const CONFIG = {
-    version: '1.1.0',
-    adminPassword: null,
-    currentPortfolio: 'Concert',
-    autoManifest: true,
-    previewMode: true,
-    maxFiles: 100,
-    maxFileSize: 50 * 1024 * 1024, // 50MB
-    allowedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
-    backendUrl: 'http://localhost:3001', // Backend server URL
-    backendAutoStart: true, // Try to auto-start backend
-    portfolioStructure: {
-      Concert: 'src/images/Portfolios/Concert/{band}/{monthYear}/',
-      Events: 'src/images/Portfolios/Events/{event}/{monthYear}/',
-      Journalism: 'src/images/Portfolios/Journalism/{category}/',
-      Nature: 'src/images/Portfolios/Nature/{category}/'
-    },
-    optimization: {
-      enabled: true,
-      maxDimension: 3840, // target longest edge in pixels
-      sizeThreshold: 8 * 1024 * 1024, // optimise files larger than 8MB
-      quality: 0.85,
-      minReductionRatio: 0.08, // require at least 8% size reduction to keep optimized version
-      supportedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+    .admin-preview-status {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
     }
-  };
 
-  // State management
-  const state = {
-    authenticated: false,
-    selectedFiles: [],
-    processing: false,
-    sessionTimeout: null,
-    backendRunning: false,
-    backendChecked: false,
-    optimizationStats: {
-      optimized: 0,
-      totalOriginalBytes: 0,
-      totalOptimizedBytes: 0
+    .admin-preview-status.success {
+      background: rgba(76, 175, 80, 0.2);
+      color: var(--admin-success);
     }
-  };
 
-  // Initialize widget
-  function initializeWidget() {
-    // Get configuration from data attributes
-    const widget = document.querySelector('.admin-portfolio-importer');
-    CONFIG.adminPassword = widget.dataset.adminPassword || 'admin123';
-    CONFIG.currentPortfolio = widget.dataset.defaultPortfolio || 'Concert';
-    CONFIG.autoManifest = widget.dataset.autoManifest !== 'false';
-    CONFIG.previewMode = widget.dataset.previewMode !== 'false';
+    .admin-preview-status.error {
+      background: rgba(255, 107, 107, 0.2);
+      color: var(--error);
+    }
 
-    // Setup event listeners
-    setupEventListeners();
-    
-    // Show authentication screen
-    showAuthScreen();
-  }
+    .admin-preview-status.warning {
+      background: rgba(255, 167, 38, 0.2);
+      color: var(--warning);
+    }
 
-  // Event listeners setup
-  function setupEventListeners() {
-    // Authentication form
-    document.getElementById('authForm').addEventListener('submit', handleAuthentication);
+    /* Action Buttons */
+    .admin-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--admin-border);
+    }
 
-    // File upload
-    const uploadArea = document.getElementById('uploadArea');
-    const fileInput = document.getElementById('fileInput');
+    .admin-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.875rem;
+    }
 
-    // Don't auto-click on upload area anymore - use buttons
-    uploadArea.addEventListener('dragover', handleDragOver);
-    uploadArea.addEventListener('dragleave', handleDragLeave);
-    uploadArea.addEventListener('drop', handleDrop);
-    fileInput.addEventListener('change', handleFileSelect);
-    document.getElementById('fileInputSingle').addEventListener('change', handleFileSelect);
+    .admin-btn.primary {
+      background: var(--accent);
+      color: white;
+    }
 
-    // Prevent default drag behavior on document
-    document.addEventListener('dragover', e => e.preventDefault());
-    document.addEventListener('drop', e => e.preventDefault());
-  }
+    .admin-btn.primary:hover {
+      background: #ff3355;
+    }
 
-  // Backend health checking
-  async function checkBackendHealth() {
-    try {
-      const response = await fetch(`${CONFIG.backendUrl}/health`, {
-        method: 'GET',
-        timeout: 3000
-      });
-      
-      if (response.ok) {
-        state.backendRunning = true;
-        return true;
+    .admin-btn.secondary {
+      background: transparent;
+      border: 2px solid var(--admin-border);
+      color: var(--fg);
+    }
+
+    .admin-btn.secondary:hover {
+      background: var(--admin-border);
+    }
+
+    .admin-btn.success {
+      background: var(--admin-success);
+      color: white;
+    }
+
+    .admin-btn.success:hover {
+      background: #45a049;
+    }
+
+    .admin-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Loading States */
+    .admin-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .admin-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--admin-border);
+      border-top: 3px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
       }
-    } catch (error) {
-      console.log('Backend health check failed:', error.message);
+      100% {
+        transform: rotate(360deg);
+      }
     }
-    
-    state.backendRunning = false;
-    return false;
-  }
 
-  // Auto-start backend (simulation - provides instructions)
-  async function startBackend() {
-    showNotification('Starting backend server...', 'warning');
-    
-    // In a real implementation, this would use a Node.js child process
-    // For now, we provide clear instructions to the user
-    const instructions = `
+    .admin-loading-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+    }
+
+    /* Progress Bar */
+    .admin-progress {
+      width: 100%;
+      height: 8px;
+      background: var(--admin-border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .admin-progress-bar {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* Notifications */
+    .admin-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      z-index: 10000;
+      animation: slideInRight 0.3s ease;
+      max-width: 400px;
+    }
+
+    .admin-notification.success {
+      background: var(--admin-success);
+    }
+
+    .admin-notification.error {
+      background: var(--error);
+    }
+
+    .admin-notification.warning {
+      background: var(--warning);
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Version Indicator */
+    .admin-version-indicator {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      font:
+        600 11px/1.2 ui-sans-serif,
+        system-ui;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.2s ease;
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .admin-version-indicator:hover {
+      color: var(--accent);
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .admin-portfolio-importer {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      .admin-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+      }
+
+      .portfolio-type-selector {
+        flex-direction: column;
+      }
+
+      .admin-actions {
+        flex-direction: column;
+      }
+
+      .admin-preview-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .admin-preview-thumbnail {
+        margin-right: 0;
+      }
+
+      .admin-upload-buttons {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      .admin-preview-optimization {
+        color: rgba(10, 10, 10, 0.6);
+      }
+    }
+  </style>
+
+  <!-- Authentication Screen -->
+  <div class="admin-auth-screen" id="authScreen">
+    <h1 class="admin-auth-title">🔐 Admin Access Required</h1>
+    <p class="admin-auth-subtitle">Portfolio Import & Management Tool</p>
+    <form class="admin-auth-form" id="authForm">
+      <input
+        type="password"
+        class="admin-auth-input"
+        id="adminPassword"
+        placeholder="Enter admin password"
+        autocomplete="current-password"
+      />
+      <button type="submit" class="admin-auth-submit">Access Admin Panel</button>
+      <div class="admin-auth-error" id="authError"></div>
+    </form>
+  </div>
+
+  <!-- Main Admin Interface -->
+  <div class="admin-main-interface" id="mainInterface">
+    <div class="admin-header">
+      <h1 class="admin-title">📁 Portfolio Import Manager</h1>
+      <div class="admin-header-controls">
+        <div class="backend-status" id="backendStatus">
+          <span class="status-indicator" id="statusIndicator">🔴</span>
+          <span class="status-text" id="statusText">Backend Offline</span>
+          <button class="status-refresh" onclick="refreshBackendStatus()" id="statusRefresh">
+            🔄
+          </button>
+        </div>
+        <button class="admin-logout" onclick="adminLogout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Portfolio Type Selection -->
+    <div class="admin-section">
+      <h2 class="admin-section-title">Portfolio Type</h2>
+      <div class="portfolio-type-selector">
+        <button
+          class="portfolio-type-btn active"
+          data-type="Concert"
+          onclick="selectPortfolioType('Concert')"
+        >
+          🎵 Concert Portfolio
+        </button>
+        <button
+          class="portfolio-type-btn"
+          data-type="Events"
+          onclick="selectPortfolioType('Events')"
+        >
+          🎉 Event Portfolio
+        </button>
+        <button
+          class="portfolio-type-btn"
+          data-type="Journalism"
+          onclick="selectPortfolioType('Journalism')"
+        >
+          📰 Journalism Portfolio
+        </button>
+        <button
+          class="portfolio-type-btn"
+          data-type="Nature"
+          onclick="selectPortfolioType('Nature')"
+        >
+          🌿 Nature Portfolio
+        </button>
+      </div>
+    </div>
+
+    <!-- File Upload Area -->
+    <div class="admin-section">
+      <h2 class="admin-section-title">Import Images</h2>
+      <div class="admin-upload-area" id="uploadArea">
+        <div class="admin-upload-icon">�</div>
+        <div class="admin-upload-text">Drop folders or images here</div>
+        <div class="admin-upload-subtext">
+          Supports folders • JPG, PNG, WebP • Automatic date extraction • Batch organization
+        </div>
+        <div class="admin-upload-buttons">
+          <button type="button" class="admin-upload-btn" onclick="selectFolder()">
+            📁 Select Folder
+          </button>
+          <button type="button" class="admin-upload-btn" onclick="selectFiles()">
+            📎 Select Files
+          </button>
+        </div>
+        <input
+          type="file"
+          class="admin-upload-input"
+          id="fileInput"
+          multiple
+          webkitdirectory
+          directory
+          accept="image/jpeg,image/jpg,image/png,image/webp"
+        />
+        <input
+          type="file"
+          class="admin-upload-input"
+          id="fileInputSingle"
+          multiple
+          accept="image/jpeg,image/jpg,image/png,image/webp"
+          style="display: none"
+        />
+      </div>
+    </div>
+
+    <!-- Preview Panel -->
+    <div class="admin-preview-panel" id="previewPanel">
+      <div class="admin-preview-header">
+        <div class="admin-preview-title">Import Preview</div>
+        <div class="admin-preview-count" id="previewCount">0 files selected</div>
+      </div>
+      <div class="admin-preview-list" id="previewList"></div>
+      <div class="admin-progress" id="progressContainer" style="display: none">
+        <div class="admin-progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="admin-actions" id="actionButtons" style="display: none">
+      <button class="admin-btn secondary" onclick="clearFiles()">Clear All</button>
+      <button class="admin-btn secondary" onclick="previewImport()" id="previewBtn">
+        🔍 Preview Backend
+      </button>
+      <button class="admin-btn primary" onclick="processFiles()" id="processBtn">
+        📁 Import Files
+      </button>
+    </div>
+  </div>
+
+  <!-- Version Indicator -->
+  <div class="admin-version-indicator" onclick="showAdminInfo()">Admin v1.1.0</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Configuration
+      const CONFIG = {
+        version: '1.1.0',
+        adminPassword: null,
+        currentPortfolio: 'Concert',
+        autoManifest: true,
+        previewMode: true,
+        maxFiles: 100,
+        maxFileSize: 50 * 1024 * 1024, // 50MB
+        allowedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+        backendUrl: 'http://localhost:3001', // Backend server URL
+        backendAutoStart: true, // Try to auto-start backend
+        portfolioStructure: {
+          Concert: 'src/images/Portfolios/Concert/{band}/{monthYear}/',
+          Events: 'src/images/Portfolios/Events/{event}/{monthYear}/',
+          Journalism: 'src/images/Portfolios/Journalism/{category}/',
+          Nature: 'src/images/Portfolios/Nature/{category}/',
+        },
+        optimization: {
+          enabled: true,
+          maxDimension: 3840, // target longest edge in pixels
+          sizeThreshold: 8 * 1024 * 1024, // optimise files larger than 8MB
+          quality: 0.85,
+          minReductionRatio: 0.08, // require at least 8% size reduction to keep optimized version
+          supportedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+        },
+      };
+
+      // State management
+      const state = {
+        authenticated: false,
+        selectedFiles: [],
+        processing: false,
+        sessionTimeout: null,
+        backendRunning: false,
+        backendChecked: false,
+        optimizationStats: {
+          optimized: 0,
+          totalOriginalBytes: 0,
+          totalOptimizedBytes: 0,
+        },
+      };
+
+      // Initialize widget
+      function initializeWidget() {
+        // Get configuration from data attributes
+        const widget = document.querySelector('.admin-portfolio-importer');
+        CONFIG.adminPassword = widget.dataset.adminPassword || 'admin123';
+        CONFIG.currentPortfolio = widget.dataset.defaultPortfolio || 'Concert';
+        CONFIG.autoManifest = widget.dataset.autoManifest !== 'false';
+        CONFIG.previewMode = widget.dataset.previewMode !== 'false';
+
+        // Setup event listeners
+        setupEventListeners();
+
+        // Show authentication screen
+        showAuthScreen();
+      }
+
+      // Event listeners setup
+      function setupEventListeners() {
+        // Authentication form
+        document.getElementById('authForm').addEventListener('submit', handleAuthentication);
+
+        // File upload
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        // Don't auto-click on upload area anymore - use buttons
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('dragleave', handleDragLeave);
+        uploadArea.addEventListener('drop', handleDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+        document.getElementById('fileInputSingle').addEventListener('change', handleFileSelect);
+
+        // Prevent default drag behavior on document
+        document.addEventListener('dragover', (e) => e.preventDefault());
+        document.addEventListener('drop', (e) => e.preventDefault());
+      }
+
+      // Backend health checking
+      async function checkBackendHealth() {
+        try {
+          const response = await fetch(`${CONFIG.backendUrl}/health`, {
+            method: 'GET',
+            timeout: 3000,
+          });
+
+          if (response.ok) {
+            state.backendRunning = true;
+            return true;
+          }
+        } catch (error) {
+          console.log('Backend health check failed:', error.message);
+        }
+
+        state.backendRunning = false;
+        return false;
+      }
+
+      // Auto-start backend (simulation - provides instructions)
+      async function startBackend() {
+        showNotification('Starting backend server...', 'warning');
+
+        // In a real implementation, this would use a Node.js child process
+        // For now, we provide clear instructions to the user
+        const instructions = `
 Backend server needs to be started manually:
 
 1. Open a new terminal
@@ -884,374 +1076,400 @@ Backend server needs to be started manually:
 
 The backend server is required for file import operations.
     `;
-    
-    setTimeout(() => {
-      alert(instructions);
-      showNotification('Backend startup instructions provided', 'warning');
-    }, 1000);
-  }
 
-  // Authentication handling with backend check
-  async function handleAuthentication(e) {
-    e.preventDefault();
-    const password = document.getElementById('adminPassword').value;
-    const errorElement = document.getElementById('authError');
+        setTimeout(() => {
+          alert(instructions);
+          showNotification('Backend startup instructions provided', 'warning');
+        }, 1000);
+      }
 
-    if (!password) {
-      showAuthError('Please enter a password');
-      return;
-    }
+      // Authentication handling with backend check
+      async function handleAuthentication(e) {
+        e.preventDefault();
+        const password = document.getElementById('adminPassword').value;
+        const errorElement = document.getElementById('authError');
 
-    // Check password
-    if (password !== CONFIG.adminPassword) {
-      showAuthError('Invalid admin password');
-      document.getElementById('adminPassword').value = '';
-      return;
-    }
+        if (!password) {
+          showAuthError('Please enter a password');
+          return;
+        }
 
-    // Password is correct, now check backend
-    showAuthError('Checking backend server...');
-    
-    const backendHealthy = await checkBackendHealth();
-    
-    if (!backendHealthy && CONFIG.backendAutoStart) {
-      showAuthError('Backend server not running. Starting...');
-      await startBackend();
-      
-      // Give user a chance to start backend manually
-      setTimeout(async () => {
-        const retryHealthy = await checkBackendHealth();
-        if (retryHealthy) {
+        // Check password
+        if (password !== CONFIG.adminPassword) {
+          showAuthError('Invalid admin password');
+          document.getElementById('adminPassword').value = '';
+          return;
+        }
+
+        // Password is correct, now check backend
+        showAuthError('Checking backend server...');
+
+        const backendHealthy = await checkBackendHealth();
+
+        if (!backendHealthy && CONFIG.backendAutoStart) {
+          showAuthError('Backend server not running. Starting...');
+          await startBackend();
+
+          // Give user a chance to start backend manually
+          setTimeout(async () => {
+            const retryHealthy = await checkBackendHealth();
+            if (retryHealthy) {
+              completeAuthentication();
+            } else {
+              showAuthError('Backend server still not responding. Please start manually.');
+            }
+          }, 3000);
+        } else if (backendHealthy) {
           completeAuthentication();
         } else {
-          showAuthError('Backend server still not responding. Please start manually.');
+          showAuthError('Backend server required but not running');
         }
-      }, 3000);
-    } else if (backendHealthy) {
-      completeAuthentication();
-    } else {
-      showAuthError('Backend server required but not running');
-    }
-  }
+      }
 
-  function completeAuthentication() {
-    state.authenticated = true;
-    state.backendChecked = true;
-    showMainInterface();
-    startSessionTimeout();
-    updateBackendStatus();
-    showNotification('Admin access granted - Backend ready', 'success');
-  }
+      function completeAuthentication() {
+        state.authenticated = true;
+        state.backendChecked = true;
+        showMainInterface();
+        startSessionTimeout();
+        updateBackendStatus();
+        showNotification('Admin access granted - Backend ready', 'success');
+      }
 
-  // Update backend status UI
-  function updateBackendStatus() {
-    const indicator = document.getElementById('statusIndicator');
-    const text = document.getElementById('statusText');
-    
-    if (state.backendRunning) {
-      indicator.textContent = '🟢';
-      text.textContent = 'Backend Online';
-      text.style.color = 'var(--admin-success)';
-    } else {
-      indicator.textContent = '🔴';
-      text.textContent = 'Backend Offline';
-      text.style.color = 'var(--error)';
-    }
-  }
+      // Update backend status UI
+      function updateBackendStatus() {
+        const indicator = document.getElementById('statusIndicator');
+        const text = document.getElementById('statusText');
 
-  // Refresh backend status
-  window.refreshBackendStatus = async function() {
-    const refreshBtn = document.getElementById('statusRefresh');
-    refreshBtn.style.opacity = '0.5';
-    
-    await checkBackendHealth();
-    updateBackendStatus();
-    
-    refreshBtn.style.opacity = '1';
-    
-    if (state.backendRunning) {
-      showNotification('Backend server is responding', 'success');
-    } else {
-      showNotification('Backend server not responding. Run: node scripts/admin-import-backend.js', 'warning');
-    }
-  };
+        if (state.backendRunning) {
+          indicator.textContent = '🟢';
+          text.textContent = 'Backend Online';
+          text.style.color = 'var(--admin-success)';
+        } else {
+          indicator.textContent = '🔴';
+          text.textContent = 'Backend Offline';
+          text.style.color = 'var(--error)';
+        }
+      }
 
-  function showAuthError(message) {
-    const errorElement = document.getElementById('authError');
-    errorElement.textContent = message;
-    setTimeout(() => errorElement.textContent = '', 3000);
-  }
+      // Refresh backend status
+      window.refreshBackendStatus = async function () {
+        const refreshBtn = document.getElementById('statusRefresh');
+        refreshBtn.style.opacity = '0.5';
 
-  function showAuthScreen() {
-    document.getElementById('authScreen').classList.remove('hidden');
-    document.getElementById('mainInterface').classList.remove('visible');
-  }
+        await checkBackendHealth();
+        updateBackendStatus();
 
-  function showMainInterface() {
-    document.getElementById('authScreen').classList.add('hidden');
-    document.getElementById('mainInterface').classList.add('visible');
-  }
+        refreshBtn.style.opacity = '1';
 
-  // Session management
-  function startSessionTimeout() {
-    clearTimeout(state.sessionTimeout);
-    state.sessionTimeout = setTimeout(() => {
-      adminLogout();
-      showNotification('Session expired - please log in again', 'warning');
-    }, 30 * 60 * 1000); // 30 minutes
-  }
+        if (state.backendRunning) {
+          showNotification('Backend server is responding', 'success');
+        } else {
+          showNotification(
+            'Backend server not responding. Run: node scripts/admin-import-backend.js',
+            'warning',
+          );
+        }
+      };
 
-  window.adminLogout = function() {
-    state.authenticated = false;
-    clearTimeout(state.sessionTimeout);
-    document.getElementById('adminPassword').value = '';
-    showAuthScreen();
-    clearFiles();
-    showNotification('Logged out successfully', 'success');
-  };
+      function showAuthError(message) {
+        const errorElement = document.getElementById('authError');
+        errorElement.textContent = message;
+        setTimeout(() => (errorElement.textContent = ''), 3000);
+      }
 
-  // Folder and file selection functions
-  window.selectFolder = function() {
-    if (!state.authenticated) {
-      showNotification('Authentication required', 'error');
-      return;
-    }
-    document.getElementById('fileInput').click();
-  };
+      function showAuthScreen() {
+        document.getElementById('authScreen').classList.remove('hidden');
+        document.getElementById('mainInterface').classList.remove('visible');
+      }
 
-  window.selectFiles = function() {
-    if (!state.authenticated) {
-      showNotification('Authentication required', 'error');
-      return;
-    }
-    document.getElementById('fileInputSingle').click();
-  };
+      function showMainInterface() {
+        document.getElementById('authScreen').classList.add('hidden');
+        document.getElementById('mainInterface').classList.add('visible');
+      }
 
-  // Portfolio type selection
-  window.selectPortfolioType = function(type) {
-    CONFIG.currentPortfolio = type;
-    
-    // Update UI
-    document.querySelectorAll('.portfolio-type-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    document.querySelector(`[data-type="${type}"]`).classList.add('active');
-    
-    // Update preview if files are selected
-    if (state.selectedFiles.length > 0) {
-      updatePreview();
-    }
-    
-    showNotification(`Switched to ${type} portfolio`, 'success');
-  };
+      // Session management
+      function startSessionTimeout() {
+        clearTimeout(state.sessionTimeout);
+        state.sessionTimeout = setTimeout(
+          () => {
+            adminLogout();
+            showNotification('Session expired - please log in again', 'warning');
+          },
+          30 * 60 * 1000,
+        ); // 30 minutes
+      }
 
-  // File handling
-  function handleDragOver(e) {
-    e.preventDefault();
-    e.currentTarget.classList.add('drag-over');
-  }
+      window.adminLogout = function () {
+        state.authenticated = false;
+        clearTimeout(state.sessionTimeout);
+        document.getElementById('adminPassword').value = '';
+        showAuthScreen();
+        clearFiles();
+        showNotification('Logged out successfully', 'success');
+      };
 
-  function handleDragLeave(e) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('drag-over');
-  }
+      // Folder and file selection functions
+      window.selectFolder = function () {
+        if (!state.authenticated) {
+          showNotification('Authentication required', 'error');
+          return;
+        }
+        document.getElementById('fileInput').click();
+      };
 
-  async function handleDrop(e) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('drag-over');
+      window.selectFiles = function () {
+        if (!state.authenticated) {
+          showNotification('Authentication required', 'error');
+          return;
+        }
+        document.getElementById('fileInputSingle').click();
+      };
 
-    const files = [];
-    const items = e.dataTransfer.items;
+      // Portfolio type selection
+      window.selectPortfolioType = function (type) {
+        CONFIG.currentPortfolio = type;
 
-    if (items) {
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (item.kind !== 'file') continue;
-        const entry = item.webkitGetAsEntry ? item.webkitGetAsEntry() : null;
-        if (entry) {
-          if (entry.isDirectory) {
-            await readDirectoryRecursive(entry, files);
-          } else {
-            const file = item.getAsFile();
-            if (file) files.push(file);
+        // Update UI
+        document.querySelectorAll('.portfolio-type-btn').forEach((btn) => {
+          btn.classList.remove('active');
+        });
+        document.querySelector(`[data-type="${type}"]`).classList.add('active');
+
+        // Update preview if files are selected
+        if (state.selectedFiles.length > 0) {
+          updatePreview();
+        }
+
+        showNotification(`Switched to ${type} portfolio`, 'success');
+      };
+
+      // File handling
+      function handleDragOver(e) {
+        e.preventDefault();
+        e.currentTarget.classList.add('drag-over');
+      }
+
+      function handleDragLeave(e) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('drag-over');
+      }
+
+      async function handleDrop(e) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('drag-over');
+
+        const files = [];
+        const items = e.dataTransfer.items;
+
+        if (items) {
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            if (item.kind !== 'file') continue;
+            const entry = item.webkitGetAsEntry ? item.webkitGetAsEntry() : null;
+            if (entry) {
+              if (entry.isDirectory) {
+                await readDirectoryRecursive(entry, files);
+              } else {
+                const file = item.getAsFile();
+                if (file) files.push(file);
+              }
+            } else {
+              const file = item.getAsFile();
+              if (file) files.push(file);
+            }
           }
         } else {
-          const file = item.getAsFile();
-          if (file) files.push(file);
+          files.push(...Array.from(e.dataTransfer.files));
+        }
+
+        if (files.length > 0) {
+          await processSelectedFiles(files);
         }
       }
-    } else {
-      files.push(...Array.from(e.dataTransfer.files));
-    }
 
-    if (files.length > 0) {
-      await processSelectedFiles(files);
-    }
-  }
+      // Recursive directory reading function
+      async function readDirectoryRecursive(directoryEntry, fileArray) {
+        return new Promise((resolve, reject) => {
+          const dirReader = directoryEntry.createReader();
 
-  // Recursive directory reading function
-  async function readDirectoryRecursive(directoryEntry, fileArray) {
-    return new Promise((resolve, reject) => {
-      const dirReader = directoryEntry.createReader();
-      
-      function readEntries() {
-        dirReader.readEntries(async (entries) => {
-          if (entries.length === 0) {
-            resolve();
-            return;
-          }
-          
-          const promises = entries.map(entry => {
-            if (entry.isDirectory) {
-              return readDirectoryRecursive(entry, fileArray);
-            } else if (entry.isFile) {
-              return new Promise((fileResolve) => {
-                entry.file((file) => {
-                  // Add folder path information to file
-                  file.relativePath = entry.fullPath;
-                  fileArray.push(file);
-                  fileResolve();
-                });
+          function readEntries() {
+            dirReader.readEntries(async (entries) => {
+              if (entries.length === 0) {
+                resolve();
+                return;
+              }
+
+              const promises = entries.map((entry) => {
+                if (entry.isDirectory) {
+                  return readDirectoryRecursive(entry, fileArray);
+                } else if (entry.isFile) {
+                  return new Promise((fileResolve) => {
+                    entry.file((file) => {
+                      // Add folder path information to file
+                      file.relativePath = entry.fullPath;
+                      fileArray.push(file);
+                      fileResolve();
+                    });
+                  });
+                }
               });
-            }
-          });
-          
-          await Promise.all(promises);
-          readEntries(); // Continue reading if there are more entries
+
+              await Promise.all(promises);
+              readEntries(); // Continue reading if there are more entries
+            });
+          }
+
+          readEntries();
         });
       }
-      
-      readEntries();
-    });
-  }
 
-  async function handleFileSelect(e) {
-    const files = Array.from(e.target.files);
+      async function handleFileSelect(e) {
+        const files = Array.from(e.target.files);
 
-    files.forEach(file => {
-      if (file.webkitRelativePath) {
-        file.relativePath = '/' + file.webkitRelativePath;
+        files.forEach((file) => {
+          if (file.webkitRelativePath) {
+            file.relativePath = '/' + file.webkitRelativePath;
+          }
+        });
+
+        if (files.length > 0) {
+          await processSelectedFiles(files);
+        }
       }
-    });
 
-    if (files.length > 0) {
-      await processSelectedFiles(files);
-    }
-  }
+      // File processing
+      async function processSelectedFiles(files) {
+        if (!state.authenticated) {
+          showNotification('Authentication required', 'error');
+          return;
+        }
 
-  // File processing
-  async function processSelectedFiles(files) {
-    if (!state.authenticated) {
-      showNotification('Authentication required', 'error');
-      return;
-    }
+        const validFiles = files.filter((file) => {
+          if (!CONFIG.allowedTypes.includes(file.type)) {
+            showNotification(`Skipped ${file.name}: unsupported file type`, 'warning');
+            return false;
+          }
+          if (file.size > CONFIG.maxFileSize) {
+            showNotification(`Skipped ${file.name}: file too large (max 50MB)`, 'warning');
+            return false;
+          }
+          return true;
+        });
 
-    const validFiles = files.filter(file => {
-      if (!CONFIG.allowedTypes.includes(file.type)) {
-        showNotification(`Skipped ${file.name}: unsupported file type`, 'warning');
-        return false;
+        if (validFiles.length === 0) {
+          showNotification('No valid image files selected', 'error');
+          return;
+        }
+
+        if (validFiles.length > CONFIG.maxFiles) {
+          showNotification(`Too many files selected. Maximum: ${CONFIG.maxFiles}`, 'error');
+          return;
+        }
+
+        const folderSummary = analyzeFolderStructure(validFiles);
+
+        releasePreviewUrls(state.selectedFiles);
+        state.selectedFiles = [];
+        state.optimizationStats = {
+          optimized: 0,
+          totalOriginalBytes: 0,
+          totalOptimizedBytes: 0,
+        };
+
+        const preparedEntries = [];
+        for (const file of validFiles) {
+          const entry = await prepareFileEntry(file);
+          preparedEntries.push(entry);
+          state.optimizationStats.totalOriginalBytes += entry.optimization.originalSize;
+          state.optimizationStats.totalOptimizedBytes += entry.optimization.optimized
+            ? entry.optimization.optimizedSize
+            : entry.optimization.originalSize;
+          if (entry.optimization.optimized) {
+            state.optimizationStats.optimized += 1;
+          }
+        }
+
+        state.selectedFiles = preparedEntries;
+
+        const optimizedMessage =
+          state.optimizationStats.optimized > 0
+            ? ` • Optimized ${state.optimizationStats.optimized} (${bytesToSize(state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes)} saved)`
+            : '';
+
+        if (folderSummary.hasMultipleFolders) {
+          showNotification(
+            `Found ${folderSummary.folderCount} folders with ${validFiles.length} images${optimizedMessage}`,
+            'success',
+          );
+        } else {
+          showNotification(
+            `${validFiles.length} files ready for import${optimizedMessage}`,
+            'success',
+          );
+        }
+
+        updatePreview();
       }
-      if (file.size > CONFIG.maxFileSize) {
-        showNotification(`Skipped ${file.name}: file too large (max 50MB)`, 'warning');
-        return false;
+
+      // Preview update
+      function updatePreview() {
+        const previewPanel = document.getElementById('previewPanel');
+        const previewList = document.getElementById('previewList');
+        const previewCount = document.getElementById('previewCount');
+        const actionButtons = document.getElementById('actionButtons');
+
+        if (state.selectedFiles.length === 0) {
+          previewPanel.classList.remove('visible');
+          actionButtons.style.display = 'none';
+          return;
+        }
+
+        previewPanel.classList.add('visible');
+        actionButtons.style.display = 'flex';
+        const optimizedCount = state.selectedFiles.filter(
+          (entry) => entry.optimization.optimized,
+        ).length;
+        const bytesSaved = Math.max(
+          0,
+          state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes,
+        );
+        let summary = `${state.selectedFiles.length} files selected`;
+        if (optimizedCount > 0 && bytesSaved > 0) {
+          summary += ` • ${optimizedCount} optimized (${bytesToSize(bytesSaved)} saved)`;
+        }
+        previewCount.textContent = summary;
+
+        // Generate preview items
+        previewList.innerHTML = '';
+        state.selectedFiles.forEach((entry) => {
+          const item = createPreviewItem(entry);
+          previewList.appendChild(item);
+        });
       }
-      return true;
-    });
 
-    if (validFiles.length === 0) {
-      showNotification('No valid image files selected', 'error');
-      return;
-    }
+      function createPreviewItem(entry) {
+        const item = document.createElement('div');
+        item.className = 'admin-preview-item';
 
-    if (validFiles.length > CONFIG.maxFiles) {
-      showNotification(`Too many files selected. Maximum: ${CONFIG.maxFiles}`, 'error');
-      return;
-    }
+        // Extract date and generate path - use folder structure if available
+        const targetPath = generateTargetPath(
+          entry.uploadFile.name,
+          entry.dateInfo,
+          entry.folderInfo,
+        );
+        const status = validateImport(entry);
 
-    const folderSummary = analyzeFolderStructure(validFiles);
+        // Show folder indicator if file came from a folder
+        const folderIndicator =
+          entry.folderInfo && entry.folderInfo.sourceFolder
+            ? `<span class="admin-folder-indicator">📁 ${entry.folderInfo.folderPath || entry.folderInfo.sourceFolder}</span>`
+            : '';
 
-    releasePreviewUrls(state.selectedFiles);
-    state.selectedFiles = [];
-    state.optimizationStats = {
-      optimized: 0,
-      totalOriginalBytes: 0,
-      totalOptimizedBytes: 0
-    };
+        const optimizationLine = entry.optimization.optimized
+          ? `<div class="admin-preview-optimization">Optimized ${bytesToSize(entry.optimization.originalSize)} → ${bytesToSize(entry.optimization.optimizedSize)} (${Math.round(entry.optimization.reduction * 100)}% smaller)</div>`
+          : '';
 
-    const preparedEntries = [];
-    for (const file of validFiles) {
-      const entry = await prepareFileEntry(file);
-      preparedEntries.push(entry);
-      state.optimizationStats.totalOriginalBytes += entry.optimization.originalSize;
-      state.optimizationStats.totalOptimizedBytes += entry.optimization.optimized ? entry.optimization.optimizedSize : entry.optimization.originalSize;
-      if (entry.optimization.optimized) {
-        state.optimizationStats.optimized += 1;
-      }
-    }
-
-    state.selectedFiles = preparedEntries;
-
-    const optimizedMessage = state.optimizationStats.optimized > 0
-      ? ` • Optimized ${state.optimizationStats.optimized} (${bytesToSize(state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes)} saved)`
-      : '';
-
-    if (folderSummary.hasMultipleFolders) {
-      showNotification(`Found ${folderSummary.folderCount} folders with ${validFiles.length} images${optimizedMessage}`, 'success');
-    } else {
-      showNotification(`${validFiles.length} files ready for import${optimizedMessage}`, 'success');
-    }
-
-    updatePreview();
-  }
-
-  // Preview update
-  function updatePreview() {
-    const previewPanel = document.getElementById('previewPanel');
-    const previewList = document.getElementById('previewList');
-    const previewCount = document.getElementById('previewCount');
-    const actionButtons = document.getElementById('actionButtons');
-
-    if (state.selectedFiles.length === 0) {
-      previewPanel.classList.remove('visible');
-      actionButtons.style.display = 'none';
-      return;
-    }
-
-    previewPanel.classList.add('visible');
-    actionButtons.style.display = 'flex';
-    const optimizedCount = state.selectedFiles.filter(entry => entry.optimization.optimized).length;
-    const bytesSaved = Math.max(0, state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes);
-    let summary = `${state.selectedFiles.length} files selected`;
-    if (optimizedCount > 0 && bytesSaved > 0) {
-      summary += ` • ${optimizedCount} optimized (${bytesToSize(bytesSaved)} saved)`;
-    }
-    previewCount.textContent = summary;
-
-    // Generate preview items
-    previewList.innerHTML = '';
-    state.selectedFiles.forEach(entry => {
-      const item = createPreviewItem(entry);
-      previewList.appendChild(item);
-    });
-  }
-
-  function createPreviewItem(entry) {
-    const item = document.createElement('div');
-    item.className = 'admin-preview-item';
-
-    // Extract date and generate path - use folder structure if available
-    const targetPath = generateTargetPath(entry.uploadFile.name, entry.dateInfo, entry.folderInfo);
-    const status = validateImport(entry);
-
-    // Show folder indicator if file came from a folder
-    const folderIndicator = entry.folderInfo && entry.folderInfo.sourceFolder ? 
-      `<span class="admin-folder-indicator">📁 ${entry.folderInfo.folderPath || entry.folderInfo.sourceFolder}</span>` : '';
-
-    const optimizationLine = entry.optimization.optimized
-      ? `<div class="admin-preview-optimization">Optimized ${bytesToSize(entry.optimization.originalSize)} → ${bytesToSize(entry.optimization.optimizedSize)} (${Math.round(entry.optimization.reduction * 100)}% smaller)</div>`
-      : '';
-
-    item.innerHTML = `
+        item.innerHTML = `
       <img class="admin-preview-thumbnail" src="${entry.previewUrl}" alt="${entry.uploadFile.name}">
       <div class="admin-preview-info">
         <div class="admin-preview-filename">${entry.uploadFile.name}${folderIndicator}</div>
@@ -1261,602 +1479,649 @@ The backend server is required for file import operations.
       <div class="admin-preview-status ${status.type}">${status.message}</div>
     `;
 
-    return item;
-  }
-
-  // Date extraction (simplified version)
-  function extractDateFromFilename(filename) {
-    // Basic date extraction - in production, use enhanced-manifest-generator logic
-    const patterns = [
-      /^(\d{2})(\d{2})(\d{2})/, // YYMMDD
-      /^(\d{4})(\d{2})(\d{2})/, // YYYYMMDD
-      /(\d{2})-(\d{2})-(\d{2})/ // DD-MM-YY
-    ];
-
-    for (const pattern of patterns) {
-      const match = filename.match(pattern);
-      if (match) {
-        let year, month, day;
-        if (pattern === patterns[0]) { // YYMMDD
-          year = parseInt(match[1]) + (parseInt(match[1]) > 50 ? 1900 : 2000);
-          month = parseInt(match[2]);
-          day = parseInt(match[3]);
-        } else if (pattern === patterns[1]) { // YYYYMMDD
-          year = parseInt(match[1]);
-          month = parseInt(match[2]);
-          day = parseInt(match[3]);
-        } else { // DD-MM-YY
-          day = parseInt(match[1]);
-          month = parseInt(match[2]);
-          year = parseInt(match[3]) + 2000;
-        }
-
-        if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
-          return { year, month, day, date: new Date(year, month - 1, day) };
-        }
+        return item;
       }
-    }
 
-    return null;
-  }
+      // Date extraction (simplified version)
+      function extractDateFromFilename(filename) {
+        // Basic date extraction - in production, use enhanced-manifest-generator logic
+        const patterns = [
+          /^(\d{2})(\d{2})(\d{2})/, // YYMMDD
+          /^(\d{4})(\d{2})(\d{2})/, // YYYYMMDD
+          /(\d{2})-(\d{2})-(\d{2})/, // DD-MM-YY
+        ];
 
-  // Folder structure analysis
-  function analyzeFolderStructure(files) {
-    const folders = new Set();
-    
-    files.forEach(file => {
-      if (file.relativePath) {
-        const pathParts = file.relativePath.split('/');
-        if (pathParts.length > 1) {
-          // Get the first folder name
-          folders.add(pathParts[1]);
-        }
-      }
-    });
+        for (const pattern of patterns) {
+          const match = filename.match(pattern);
+          if (match) {
+            let year, month, day;
+            if (pattern === patterns[0]) {
+              // YYMMDD
+              year = parseInt(match[1]) + (parseInt(match[1]) > 50 ? 1900 : 2000);
+              month = parseInt(match[2]);
+              day = parseInt(match[3]);
+            } else if (pattern === patterns[1]) {
+              // YYYYMMDD
+              year = parseInt(match[1]);
+              month = parseInt(match[2]);
+              day = parseInt(match[3]);
+            } else {
+              // DD-MM-YY
+              day = parseInt(match[1]);
+              month = parseInt(match[2]);
+              year = parseInt(match[3]) + 2000;
+            }
 
-    return {
-      hasMultipleFolders: folders.size > 1,
-      folderCount: folders.size,
-      folders: Array.from(folders)
-    };
-  }
-
-  // Extract folder information from file
-  function extractFolderInfo(file) {
-    if (!file.relativePath) {
-      return { sourceFolder: null, folderPath: null };
-    }
-
-    const pathParts = file.relativePath.split('/');
-    if (pathParts.length > 1) {
-      return {
-        sourceFolder: pathParts[1], // First folder name
-        folderPath: pathParts.slice(1, -1).join('/'), // Full folder path without filename
-        fullPath: file.relativePath
-      };
-    }
-
-    return { sourceFolder: null, folderPath: null };
-  }
-
-  const bytesToSize = (bytes) => {
-    if (!bytes || bytes <= 0) return '0 B';
-    const units = ['B', 'KB', 'MB', 'GB'];
-    const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
-    const value = bytes / Math.pow(1024, exponent);
-    return `${value.toFixed(value >= 10 || exponent === 0 ? 0 : 1)} ${units[exponent]}`;
-  };
-
-  const canvasToBlob = (canvas, mimeType, quality) => new Promise(resolve => {
-    if (!canvas || typeof canvas.toBlob !== 'function') {
-      resolve(null);
-      return;
-    }
-    canvas.toBlob(blob => resolve(blob), mimeType, quality);
-  });
-
-  const loadImageForProcessing = async (file) => {
-    if (!file) throw new Error('No file provided');
-
-    if ('createImageBitmap' in window) {
-      try {
-        const bitmap = await createImageBitmap(file);
-        return {
-          width: bitmap.width,
-          height: bitmap.height,
-          renderTo(canvas, width, height) {
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(bitmap, 0, 0, width, height);
-          },
-          dispose() {
-            bitmap.close();
+            if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+              return { year, month, day, date: new Date(year, month - 1, day) };
+            }
           }
-        };
-      } catch (error) {
-        console.warn('createImageBitmap failed, falling back to Image()', error);
-      }
-    }
+        }
 
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
-      img.onload = () => {
-        resolve({
-          width: img.naturalWidth,
-          height: img.naturalHeight,
-          renderTo(canvas, width, height) {
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-          },
-          dispose() {
-            URL.revokeObjectURL(url);
+        return null;
+      }
+
+      // Folder structure analysis
+      function analyzeFolderStructure(files) {
+        const folders = new Set();
+
+        files.forEach((file) => {
+          if (file.relativePath) {
+            const pathParts = file.relativePath.split('/');
+            if (pathParts.length > 1) {
+              // Get the first folder name
+              folders.add(pathParts[1]);
+            }
           }
         });
+
+        return {
+          hasMultipleFolders: folders.size > 1,
+          folderCount: folders.size,
+          folders: Array.from(folders),
+        };
+      }
+
+      // Extract folder information from file
+      function extractFolderInfo(file) {
+        if (!file.relativePath) {
+          return { sourceFolder: null, folderPath: null };
+        }
+
+        const pathParts = file.relativePath.split('/');
+        if (pathParts.length > 1) {
+          return {
+            sourceFolder: pathParts[1], // First folder name
+            folderPath: pathParts.slice(1, -1).join('/'), // Full folder path without filename
+            fullPath: file.relativePath,
+          };
+        }
+
+        return { sourceFolder: null, folderPath: null };
+      }
+
+      const bytesToSize = (bytes) => {
+        if (!bytes || bytes <= 0) return '0 B';
+        const units = ['B', 'KB', 'MB', 'GB'];
+        const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+        const value = bytes / Math.pow(1024, exponent);
+        return `${value.toFixed(value >= 10 || exponent === 0 ? 0 : 1)} ${units[exponent]}`;
       };
-      img.onerror = (err) => {
-        URL.revokeObjectURL(url);
-        reject(err);
-      };
-      img.src = url;
-    });
-  };
 
-  async function optimizeImageIfNeeded(file) {
-    const result = {
-      optimized: false,
-      file,
-      originalSize: file.size,
-      optimizedSize: file.size,
-      originalDimensions: null,
-      optimizedDimensions: null,
-      reduction: 0,
-      reason: '',
-      error: null
-    };
-
-    if (!CONFIG.optimization.enabled) {
-      return result;
-    }
-
-    if (!CONFIG.optimization.supportedTypes.includes(file.type)) {
-      return result;
-    }
-
-    try {
-      const image = await loadImageForProcessing(file);
-      if (!image.width || !image.height) {
-        image.dispose();
-        return result;
-      }
-
-      result.originalDimensions = { width: image.width, height: image.height };
-
-      const longestEdge = Math.max(image.width, image.height);
-      const shouldResize = longestEdge > CONFIG.optimization.maxDimension;
-      const shouldCompress = file.size > CONFIG.optimization.sizeThreshold;
-
-      if (!shouldResize && !shouldCompress) {
-        image.dispose();
-        return result;
-      }
-
-      const scale = shouldResize ? Math.min(CONFIG.optimization.maxDimension / longestEdge, 1) : 1;
-      const targetWidth = Math.round(image.width * scale);
-      const targetHeight = Math.round(image.height * scale);
-
-      const canvas = document.createElement('canvas');
-      canvas.width = targetWidth || image.width;
-      canvas.height = targetHeight || image.height;
-      image.renderTo(canvas, canvas.width, canvas.height);
-      image.dispose();
-
-      const outputType = file.type === 'image/png'
-        ? 'image/png'
-        : (file.type === 'image/webp' ? 'image/webp' : 'image/jpeg');
-      const quality = outputType === 'image/png' ? undefined : CONFIG.optimization.quality;
-
-      const optimizedBlob = await canvasToBlob(canvas, outputType, quality);
-      if (!optimizedBlob) {
-        return result;
-      }
-
-      result.optimizedSize = optimizedBlob.size;
-      result.optimizedDimensions = { width: canvas.width, height: canvas.height };
-      result.reduction = file.size > 0 ? 1 - (optimizedBlob.size / file.size) : 0;
-
-      if (result.optimizedSize >= file.size || result.reduction < CONFIG.optimization.minReductionRatio) {
-        return result;
-      }
-
-      const optimizedFile = new File([optimizedBlob], file.name, { type: outputType, lastModified: Date.now() });
-      optimizedFile.relativePath = file.relativePath;
-      optimizedFile.webkitRelativePath = file.webkitRelativePath;
-      optimizedFile.__optimizedFrom = file.name;
-      result.optimized = true;
-      result.reason = shouldResize ? 'dimension' : 'size';
-      result.file = optimizedFile;
-      return result;
-    } catch (error) {
-      console.error('Image optimization failed:', error);
-      result.error = error && error.message ? error.message : 'Optimization failed';
-      return result;
-    }
-  }
-
-  async function prepareFileEntry(file) {
-    const folderInfo = extractFolderInfo(file);
-    const dateInfo = extractDateFromFilename(file.name);
-    const optimization = await optimizeImageIfNeeded(file);
-    const uploadFile = optimization.file || file;
-    if (file.relativePath) {
-      uploadFile.relativePath = file.relativePath;
-    }
-    if (file.webkitRelativePath) {
-      uploadFile.webkitRelativePath = file.webkitRelativePath;
-    }
-
-    const previewUrl = URL.createObjectURL(file);
-
-    return {
-      originalFile: file,
-      uploadFile,
-      relativePath: file.relativePath || (file.webkitRelativePath ? '/' + file.webkitRelativePath : ''),
-      folderInfo,
-      dateInfo,
-      optimization,
-      previewUrl
-    };
-  }
-
-  function releasePreviewUrls(entries) {
-    if (!Array.isArray(entries)) return;
-    entries.forEach(entry => {
-      if (entry && entry.previewUrl) {
-        try {
-          URL.revokeObjectURL(entry.previewUrl);
-        } catch (error) {
-          console.warn('Failed to revoke preview URL', error);
-        }
-      }
-    });
-  }
-
-  // Enhanced path generation with folder support
-  function generateTargetPath(filename, dateInfo, folderInfo = null) {
-    const portfolio = CONFIG.currentPortfolio;
-    let basePath = CONFIG.portfolioStructure[portfolio] || '';
-
-    if (!basePath) {
-      return filename;
-    }
-
-    if (portfolio === 'Concert' || portfolio === 'Events') {
-      const entityName = (folderInfo && folderInfo.sourceFolder)
-        ? folderInfo.sourceFolder
-        : (extractEntityName(filename) || 'Unknown');
-      const monthYear = dateInfo ? formatMonthYear(dateInfo.date) : 'Unknown Date';
-
-      basePath = basePath
-        .replace('{band}', entityName)
-        .replace('{event}', entityName)
-        .replace('{monthYear}', monthYear);
-    } else if (portfolio === 'Journalism') {
-      const category = (folderInfo && (folderInfo.folderPath || folderInfo.sourceFolder))
-        ? (folderInfo.folderPath || folderInfo.sourceFolder)
-        : 'General';
-      basePath = basePath.replace('{category}', category);
-    } else if (portfolio === 'Nature') {
-      let categoryPath = (folderInfo && folderInfo.folderPath) || (extractEntityName(filename) || 'General');
-      categoryPath = categoryPath.replace(/^\/+/, '');
-      basePath = basePath.replace('{category}', categoryPath);
-    }
-
-    return basePath + filename;
-  }
-
-  function determineMappingValue(entry) {
-    if (!entry) return null;
-    const relPath = entry.relativePath || '';
-    const parts = relPath.split('/').filter(Boolean);
-
-    if (CONFIG.currentPortfolio === 'Nature') {
-      if (entry.folderInfo && entry.folderInfo.folderPath) {
-        return entry.folderInfo.folderPath;
-      }
-      return extractEntityName(entry.uploadFile.name) || 'General';
-    }
-
-    if (CONFIG.currentPortfolio === 'Journalism') {
-      if (entry.folderInfo && (entry.folderInfo.folderPath || entry.folderInfo.sourceFolder)) {
-        return entry.folderInfo.folderPath || entry.folderInfo.sourceFolder;
-      }
-    }
-
-    const candidate = parts.find(part => part && part !== entry.uploadFile.name);
-    return candidate || extractEntityName(entry.uploadFile.name) || null;
-  }
-
-  function extractEntityName(filename) {
-    // Extract band/event name from filename (basic implementation)
-    const parts = filename.split('_');
-    if (parts.length >= 2) {
-      return parts[1]; // Assuming format like "250829_BandName_Photo.jpg"
-    }
-    return null;
-  }
-
-  function formatMonthYear(date) {
-    const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
-  }
-
-  // Enhanced import validation with folder support
-  function validateImport(entry) {
-    const { dateInfo, folderInfo, optimization } = entry;
-    let type = 'success';
-    let message = 'Ready to import';
-
-    if (!dateInfo) {
-      type = 'warning';
-      message = 'No date found';
-    }
-
-    if (folderInfo && folderInfo.sourceFolder) {
-      message = type === 'success' ? 'Folder organized' : `${message} (folder)`;
-    }
-
-    if (optimization && optimization.error) {
-      type = 'error';
-      message = optimization.error;
-    }
-
-    if (optimization && optimization.optimized) {
-      const reductionPercent = Math.max(1, Math.round(optimization.reduction * 100));
-      message += ` • Saved ${reductionPercent}%`;
-    }
-
-    return { type, message };
-  }
-
-  // Preview import with backend
-  window.previewImport = async function() {
-    if (!state.authenticated || state.selectedFiles.length === 0) {
-      showNotification('No files selected for preview', 'warning');
-      return;
-    }
-
-    const backendHealthy = await checkBackendHealth();
-    if (!backendHealthy) {
-      showNotification('Backend server not running. Please start: node scripts/admin-import-backend.js', 'error');
-      return;
-    }
-
-    const previewBtn = document.getElementById('previewBtn');
-    previewBtn.disabled = true;
-    previewBtn.textContent = '🔄 Previewing...';
-
-    try {
-      const formData = new FormData();
-      formData.append('portfolioType', CONFIG.currentPortfolio);
-      formData.append('adminPassword', CONFIG.adminPassword);
-      formData.append('previewOnly', 'true');
-
-      const folderMapping = {};
-
-      state.selectedFiles.forEach((entry, index) => {
-        formData.append('files', entry.uploadFile, entry.uploadFile.name);
-        const relPath = entry.uploadFile.relativePath || entry.relativePath;
-        if (relPath) {
-          formData.append(`relativePath_${index}`, relPath);
-        }
-        const mappingValue = determineMappingValue(entry);
-        if (mappingValue) {
-          folderMapping[entry.uploadFile.name] = mappingValue;
-        }
-      });
-
-      formData.append('folderMapping', JSON.stringify(folderMapping));
-
-      const response = await fetch(`${CONFIG.backendUrl}/api/admin/import/preview`, {
-        method: 'POST',
-        body: formData
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        showNotification(`Backend preview: ${result.files.length} files analyzed`, 'success');
-        console.log('Backend preview result:', result);
-      } else {
-        if (response.status === 401) {
-          throw new Error('Unauthorized - Check admin password');
-        }
-        throw new Error(result.error || 'Backend preview failed');
-      }
-    } catch (error) {
-      console.error('Preview error:', error);
-      if (error.message && error.message.includes('fetch')) {
-        showNotification('Backend server not responding. Please start: node scripts/admin-import-backend.js', 'error');
-      } else {
-        showNotification(`Preview failed: ${error.message}`, 'error');
-      }
-    } finally {
-      previewBtn.disabled = false;
-      previewBtn.textContent = '🔍 Preview Backend';
-    }
-  };
-
-  // File processing with backend integration
-  window.processFiles = async function() {
-    if (!state.authenticated || state.processing || state.selectedFiles.length === 0) {
-      return;
-    }
-
-    // Check backend health first
-    const backendHealthy = await checkBackendHealth();
-    if (!backendHealthy) {
-      showNotification('Backend server not running. Please start: node scripts/admin-import-backend.js', 'error');
-      return;
-    }
-
-    state.processing = true;
-    const processBtn = document.getElementById('processBtn');
-    processBtn.disabled = true;
-  processBtn.textContent = 'Importing...';
-
-    // Show progress
-    const progressContainer = document.getElementById('progressContainer');
-    const progressBar = document.getElementById('progressBar');
-    progressContainer.style.display = 'block';
-    progressBar.style.width = '10%';
-
-    try {
-      // Create FormData for backend upload
-      const formData = new FormData();
-      formData.append('portfolioType', CONFIG.currentPortfolio);
-      formData.append('adminPassword', CONFIG.adminPassword);
-      
-      // Build folder mapping for band/entity names
-      const folderMapping = {};
-      state.selectedFiles.forEach(entry => {
-        const mappingValue = determineMappingValue(entry);
-        if (mappingValue) {
-          folderMapping[entry.uploadFile.name] = mappingValue;
-        }
-      });
-      formData.append('folderMapping', JSON.stringify(folderMapping));
-
-      // Add files and their metadata
-      state.selectedFiles.forEach((entry, index) => {
-        formData.append('files', entry.uploadFile, entry.uploadFile.name);
-        const relPath = entry.uploadFile.relativePath || entry.relativePath;
-        if (relPath) {
-          formData.append(`relativePath_${index}`, relPath);
-        }
-      });
-
-      progressBar.style.width = '30%';
-
-      // Call backend import API
-      const response = await fetch(`${CONFIG.backendUrl}/api/admin/import/execute`, {
-        method: 'POST',
-        body: formData
-      });
-
-      progressBar.style.width = '70%';
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        if (response.status === 401) {
-          throw new Error('Unauthorized - Check admin password configuration');
-        }
-        throw new Error(errorData.error || 'Import failed');
-      }
-
-      const result = await response.json();
-      
-      // Update progress to completion
-      progressBar.style.width = '100%';
-
-      // Show results
-      setTimeout(() => {
-        state.processing = false;
-        processBtn.disabled = false;
-  processBtn.textContent = '📁 Import Files';
-        progressContainer.style.display = 'none';
-
-        const successCount = result.successCount || 0;
-        const errorCount = result.errorCount || 0;
-
-        if (successCount > 0) {
-          showNotification(`Successfully imported ${successCount} files to ${CONFIG.currentPortfolio} portfolio!`, 'success');
-          
-          // Show detailed results if there were errors
-          if (errorCount > 0) {
-            setTimeout(() => {
-              showNotification(`${errorCount} files failed to import. Check console for details.`, 'warning');
-              console.log('Import results:', result.results);
-            }, 2000);
+      const canvasToBlob = (canvas, mimeType, quality) =>
+        new Promise((resolve) => {
+          if (!canvas || typeof canvas.toBlob !== 'function') {
+            resolve(null);
+            return;
           }
-        } else {
-          showNotification('No files were imported successfully', 'error');
-          console.error('Import failed:', result);
+          canvas.toBlob((blob) => resolve(blob), mimeType, quality);
+        });
+
+      const loadImageForProcessing = async (file) => {
+        if (!file) throw new Error('No file provided');
+
+        if ('createImageBitmap' in window) {
+          try {
+            const bitmap = await createImageBitmap(file);
+            return {
+              width: bitmap.width,
+              height: bitmap.height,
+              renderTo(canvas, width, height) {
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(bitmap, 0, 0, width, height);
+              },
+              dispose() {
+                bitmap.close();
+              },
+            };
+          } catch (error) {
+            console.warn('createImageBitmap failed, falling back to Image()', error);
+          }
         }
 
-        clearFiles();
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          const url = URL.createObjectURL(file);
+          img.onload = () => {
+            resolve({
+              width: img.naturalWidth,
+              height: img.naturalHeight,
+              renderTo(canvas, width, height) {
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+              },
+              dispose() {
+                URL.revokeObjectURL(url);
+              },
+            });
+          };
+          img.onerror = (err) => {
+            URL.revokeObjectURL(url);
+            reject(err);
+          };
+          img.src = url;
+        });
+      };
 
-        // Trigger manifest regeneration notification
-        if (successCount > 0 && CONFIG.autoManifest) {
+      async function optimizeImageIfNeeded(file) {
+        const result = {
+          optimized: false,
+          file,
+          originalSize: file.size,
+          optimizedSize: file.size,
+          originalDimensions: null,
+          optimizedDimensions: null,
+          reduction: 0,
+          reason: '',
+          error: null,
+        };
+
+        if (!CONFIG.optimization.enabled) {
+          return result;
+        }
+
+        if (!CONFIG.optimization.supportedTypes.includes(file.type)) {
+          return result;
+        }
+
+        try {
+          const image = await loadImageForProcessing(file);
+          if (!image.width || !image.height) {
+            image.dispose();
+            return result;
+          }
+
+          result.originalDimensions = { width: image.width, height: image.height };
+
+          const longestEdge = Math.max(image.width, image.height);
+          const shouldResize = longestEdge > CONFIG.optimization.maxDimension;
+          const shouldCompress = file.size > CONFIG.optimization.sizeThreshold;
+
+          if (!shouldResize && !shouldCompress) {
+            image.dispose();
+            return result;
+          }
+
+          const scale = shouldResize
+            ? Math.min(CONFIG.optimization.maxDimension / longestEdge, 1)
+            : 1;
+          const targetWidth = Math.round(image.width * scale);
+          const targetHeight = Math.round(image.height * scale);
+
+          const canvas = document.createElement('canvas');
+          canvas.width = targetWidth || image.width;
+          canvas.height = targetHeight || image.height;
+          image.renderTo(canvas, canvas.width, canvas.height);
+          image.dispose();
+
+          const outputType =
+            file.type === 'image/png'
+              ? 'image/png'
+              : file.type === 'image/webp'
+                ? 'image/webp'
+                : 'image/jpeg';
+          const quality = outputType === 'image/png' ? undefined : CONFIG.optimization.quality;
+
+          const optimizedBlob = await canvasToBlob(canvas, outputType, quality);
+          if (!optimizedBlob) {
+            return result;
+          }
+
+          result.optimizedSize = optimizedBlob.size;
+          result.optimizedDimensions = { width: canvas.width, height: canvas.height };
+          result.reduction = file.size > 0 ? 1 - optimizedBlob.size / file.size : 0;
+
+          if (
+            result.optimizedSize >= file.size ||
+            result.reduction < CONFIG.optimization.minReductionRatio
+          ) {
+            return result;
+          }
+
+          const optimizedFile = new File([optimizedBlob], file.name, {
+            type: outputType,
+            lastModified: Date.now(),
+          });
+          optimizedFile.relativePath = file.relativePath;
+          optimizedFile.webkitRelativePath = file.webkitRelativePath;
+          optimizedFile.__optimizedFrom = file.name;
+          result.optimized = true;
+          result.reason = shouldResize ? 'dimension' : 'size';
+          result.file = optimizedFile;
+          return result;
+        } catch (error) {
+          console.error('Image optimization failed:', error);
+          result.error = error && error.message ? error.message : 'Optimization failed';
+          return result;
+        }
+      }
+
+      async function prepareFileEntry(file) {
+        const folderInfo = extractFolderInfo(file);
+        const dateInfo = extractDateFromFilename(file.name);
+        const optimization = await optimizeImageIfNeeded(file);
+        const uploadFile = optimization.file || file;
+        if (file.relativePath) {
+          uploadFile.relativePath = file.relativePath;
+        }
+        if (file.webkitRelativePath) {
+          uploadFile.webkitRelativePath = file.webkitRelativePath;
+        }
+
+        const previewUrl = URL.createObjectURL(file);
+
+        return {
+          originalFile: file,
+          uploadFile,
+          relativePath:
+            file.relativePath || (file.webkitRelativePath ? '/' + file.webkitRelativePath : ''),
+          folderInfo,
+          dateInfo,
+          optimization,
+          previewUrl,
+        };
+      }
+
+      function releasePreviewUrls(entries) {
+        if (!Array.isArray(entries)) return;
+        entries.forEach((entry) => {
+          if (entry && entry.previewUrl) {
+            try {
+              URL.revokeObjectURL(entry.previewUrl);
+            } catch (error) {
+              console.warn('Failed to revoke preview URL', error);
+            }
+          }
+        });
+      }
+
+      // Enhanced path generation with folder support
+      function generateTargetPath(filename, dateInfo, folderInfo = null) {
+        const portfolio = CONFIG.currentPortfolio;
+        let basePath = CONFIG.portfolioStructure[portfolio] || '';
+
+        if (!basePath) {
+          return filename;
+        }
+
+        if (portfolio === 'Concert' || portfolio === 'Events') {
+          const entityName =
+            folderInfo && folderInfo.sourceFolder
+              ? folderInfo.sourceFolder
+              : extractEntityName(filename) || 'Unknown';
+          const monthYear = dateInfo ? formatMonthYear(dateInfo.date) : 'Unknown Date';
+
+          basePath = basePath
+            .replace('{band}', entityName)
+            .replace('{event}', entityName)
+            .replace('{monthYear}', monthYear);
+        } else if (portfolio === 'Journalism') {
+          const category =
+            folderInfo && (folderInfo.folderPath || folderInfo.sourceFolder)
+              ? folderInfo.folderPath || folderInfo.sourceFolder
+              : 'General';
+          basePath = basePath.replace('{category}', category);
+        } else if (portfolio === 'Nature') {
+          let categoryPath =
+            (folderInfo && folderInfo.folderPath) || extractEntityName(filename) || 'General';
+          categoryPath = categoryPath.replace(/^\/+/, '');
+          basePath = basePath.replace('{category}', categoryPath);
+        }
+
+        return basePath + filename;
+      }
+
+      function determineMappingValue(entry) {
+        if (!entry) return null;
+        const relPath = entry.relativePath || '';
+        const parts = relPath.split('/').filter(Boolean);
+
+        if (CONFIG.currentPortfolio === 'Nature') {
+          if (entry.folderInfo && entry.folderInfo.folderPath) {
+            return entry.folderInfo.folderPath;
+          }
+          return extractEntityName(entry.uploadFile.name) || 'General';
+        }
+
+        if (CONFIG.currentPortfolio === 'Journalism') {
+          if (entry.folderInfo && (entry.folderInfo.folderPath || entry.folderInfo.sourceFolder)) {
+            return entry.folderInfo.folderPath || entry.folderInfo.sourceFolder;
+          }
+        }
+
+        const candidate = parts.find((part) => part && part !== entry.uploadFile.name);
+        return candidate || extractEntityName(entry.uploadFile.name) || null;
+      }
+
+      function extractEntityName(filename) {
+        // Extract band/event name from filename (basic implementation)
+        const parts = filename.split('_');
+        if (parts.length >= 2) {
+          return parts[1]; // Assuming format like "250829_BandName_Photo.jpg"
+        }
+        return null;
+      }
+
+      function formatMonthYear(date) {
+        const months = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+        ];
+        return `${months[date.getMonth()]} ${date.getFullYear()}`;
+      }
+
+      // Enhanced import validation with folder support
+      function validateImport(entry) {
+        const { dateInfo, folderInfo, optimization } = entry;
+        let type = 'success';
+        let message = 'Ready to import';
+
+        if (!dateInfo) {
+          type = 'warning';
+          message = 'No date found';
+        }
+
+        if (folderInfo && folderInfo.sourceFolder) {
+          message = type === 'success' ? 'Folder organized' : `${message} (folder)`;
+        }
+
+        if (optimization && optimization.error) {
+          type = 'error';
+          message = optimization.error;
+        }
+
+        if (optimization && optimization.optimized) {
+          const reductionPercent = Math.max(1, Math.round(optimization.reduction * 100));
+          message += ` • Saved ${reductionPercent}%`;
+        }
+
+        return { type, message };
+      }
+
+      // Preview import with backend
+      window.previewImport = async function () {
+        if (!state.authenticated || state.selectedFiles.length === 0) {
+          showNotification('No files selected for preview', 'warning');
+          return;
+        }
+
+        const backendHealthy = await checkBackendHealth();
+        if (!backendHealthy) {
+          showNotification(
+            'Backend server not running. Please start: node scripts/admin-import-backend.js',
+            'error',
+          );
+          return;
+        }
+
+        const previewBtn = document.getElementById('previewBtn');
+        previewBtn.disabled = true;
+        previewBtn.textContent = '🔄 Previewing...';
+
+        try {
+          const formData = new FormData();
+          formData.append('portfolioType', CONFIG.currentPortfolio);
+          formData.append('adminPassword', CONFIG.adminPassword);
+          formData.append('previewOnly', 'true');
+
+          const folderMapping = {};
+
+          state.selectedFiles.forEach((entry, index) => {
+            formData.append('files', entry.uploadFile, entry.uploadFile.name);
+            const relPath = entry.uploadFile.relativePath || entry.relativePath;
+            if (relPath) {
+              formData.append(`relativePath_${index}`, relPath);
+            }
+            const mappingValue = determineMappingValue(entry);
+            if (mappingValue) {
+              folderMapping[entry.uploadFile.name] = mappingValue;
+            }
+          });
+
+          formData.append('folderMapping', JSON.stringify(folderMapping));
+
+          const response = await fetch(`${CONFIG.backendUrl}/api/admin/import/preview`, {
+            method: 'POST',
+            body: formData,
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showNotification(`Backend preview: ${result.files.length} files analyzed`, 'success');
+            console.log('Backend preview result:', result);
+          } else {
+            if (response.status === 401) {
+              throw new Error('Unauthorized - Check admin password');
+            }
+            throw new Error(result.error || 'Backend preview failed');
+          }
+        } catch (error) {
+          console.error('Preview error:', error);
+          if (error.message && error.message.includes('fetch')) {
+            showNotification(
+              'Backend server not responding. Please start: node scripts/admin-import-backend.js',
+              'error',
+            );
+          } else {
+            showNotification(`Preview failed: ${error.message}`, 'error');
+          }
+        } finally {
+          previewBtn.disabled = false;
+          previewBtn.textContent = '🔍 Preview Backend';
+        }
+      };
+
+      // File processing with backend integration
+      window.processFiles = async function () {
+        if (!state.authenticated || state.processing || state.selectedFiles.length === 0) {
+          return;
+        }
+
+        // Check backend health first
+        const backendHealthy = await checkBackendHealth();
+        if (!backendHealthy) {
+          showNotification(
+            'Backend server not running. Please start: node scripts/admin-import-backend.js',
+            'error',
+          );
+          return;
+        }
+
+        state.processing = true;
+        const processBtn = document.getElementById('processBtn');
+        processBtn.disabled = true;
+        processBtn.textContent = 'Importing...';
+
+        // Show progress
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        progressContainer.style.display = 'block';
+        progressBar.style.width = '10%';
+
+        try {
+          // Create FormData for backend upload
+          const formData = new FormData();
+          formData.append('portfolioType', CONFIG.currentPortfolio);
+          formData.append('adminPassword', CONFIG.adminPassword);
+
+          // Build folder mapping for band/entity names
+          const folderMapping = {};
+          state.selectedFiles.forEach((entry) => {
+            const mappingValue = determineMappingValue(entry);
+            if (mappingValue) {
+              folderMapping[entry.uploadFile.name] = mappingValue;
+            }
+          });
+          formData.append('folderMapping', JSON.stringify(folderMapping));
+
+          // Add files and their metadata
+          state.selectedFiles.forEach((entry, index) => {
+            formData.append('files', entry.uploadFile, entry.uploadFile.name);
+            const relPath = entry.uploadFile.relativePath || entry.relativePath;
+            if (relPath) {
+              formData.append(`relativePath_${index}`, relPath);
+            }
+          });
+
+          progressBar.style.width = '30%';
+
+          // Call backend import API
+          const response = await fetch(`${CONFIG.backendUrl}/api/admin/import/execute`, {
+            method: 'POST',
+            body: formData,
+          });
+
+          progressBar.style.width = '70%';
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            if (response.status === 401) {
+              throw new Error('Unauthorized - Check admin password configuration');
+            }
+            throw new Error(errorData.error || 'Import failed');
+          }
+
+          const result = await response.json();
+
+          // Update progress to completion
+          progressBar.style.width = '100%';
+
+          // Show results
           setTimeout(() => {
-            showNotification('Manifest regeneration triggered automatically', 'success');
-          }, 3000);
+            state.processing = false;
+            processBtn.disabled = false;
+            processBtn.textContent = '📁 Import Files';
+            progressContainer.style.display = 'none';
+
+            const successCount = result.successCount || 0;
+            const errorCount = result.errorCount || 0;
+
+            if (successCount > 0) {
+              showNotification(
+                `Successfully imported ${successCount} files to ${CONFIG.currentPortfolio} portfolio!`,
+                'success',
+              );
+
+              // Show detailed results if there were errors
+              if (errorCount > 0) {
+                setTimeout(() => {
+                  showNotification(
+                    `${errorCount} files failed to import. Check console for details.`,
+                    'warning',
+                  );
+                  console.log('Import results:', result.results);
+                }, 2000);
+              }
+            } else {
+              showNotification('No files were imported successfully', 'error');
+              console.error('Import failed:', result);
+            }
+
+            clearFiles();
+
+            // Trigger manifest regeneration notification
+            if (successCount > 0 && CONFIG.autoManifest) {
+              setTimeout(() => {
+                showNotification('Manifest regeneration triggered automatically', 'success');
+              }, 3000);
+            }
+          }, 1000);
+        } catch (error) {
+          console.error('Import error:', error);
+
+          state.processing = false;
+          processBtn.disabled = false;
+          processBtn.textContent = '📁 Import Files';
+          progressContainer.style.display = 'none';
+
+          showNotification(`Import failed: ${error.message}`, 'error');
         }
-      }, 1000);
+      };
 
-    } catch (error) {
-      console.error('Import error:', error);
-      
-      state.processing = false;
-      processBtn.disabled = false;
-      processBtn.textContent = '📁 Import Files';
-      progressContainer.style.display = 'none';
-      
-      showNotification(`Import failed: ${error.message}`, 'error');
-    }
-  };
+      window.clearFiles = function () {
+        releasePreviewUrls(state.selectedFiles);
+        state.selectedFiles = [];
+        state.optimizationStats = {
+          optimized: 0,
+          totalOriginalBytes: 0,
+          totalOptimizedBytes: 0,
+        };
+        document.getElementById('fileInput').value = '';
+        document.getElementById('fileInputSingle').value = '';
+        document.getElementById('previewPanel').classList.remove('visible');
+        document.getElementById('actionButtons').style.display = 'none';
+      };
 
-  window.clearFiles = function() {
-    releasePreviewUrls(state.selectedFiles);
-    state.selectedFiles = [];
-    state.optimizationStats = {
-      optimized: 0,
-      totalOriginalBytes: 0,
-      totalOptimizedBytes: 0
-    };
-    document.getElementById('fileInput').value = '';
-    document.getElementById('fileInputSingle').value = '';
-    document.getElementById('previewPanel').classList.remove('visible');
-    document.getElementById('actionButtons').style.display = 'none';
-  };
+      // Notifications
+      function showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `admin-notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
 
-  // Notifications
-  function showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = `admin-notification ${type}`;
-    notification.textContent = message;
-    document.body.appendChild(notification);
+        setTimeout(() => {
+          notification.remove();
+        }, 4000);
+      }
 
-    setTimeout(() => {
-      notification.remove();
-    }, 4000);
-  }
+      // Update preview with backend data
+      function updatePreviewFromBackend(backendResult) {
+        const previewList = document.getElementById('previewList');
+        const previewCount = document.getElementById('previewCount');
 
-  // Update preview with backend data
-  function updatePreviewFromBackend(backendResult) {
-    const previewList = document.getElementById('previewList');
-    const previewCount = document.getElementById('previewCount');
+        previewCount.textContent = `${backendResult.fileCount} files (backend validated)`;
+        previewList.innerHTML = '';
 
-    previewCount.textContent = `${backendResult.fileCount} files (backend validated)`;
-    previewList.innerHTML = '';
+        backendResult.preview.forEach((item) => {
+          const previewItem = document.createElement('div');
+          previewItem.className = 'admin-preview-item';
 
-    backendResult.preview.forEach((item) => {
-      const previewItem = document.createElement('div');
-      previewItem.className = 'admin-preview-item';
+          // Find the original file for thumbnail
+          const matchedEntry = state.selectedFiles.find(
+            (entry) => entry.uploadFile.name === item.filename,
+          );
+          const thumbnailSrc = matchedEntry ? matchedEntry.previewUrl : '';
 
-      // Find the original file for thumbnail
-      const matchedEntry = state.selectedFiles.find(entry => entry.uploadFile.name === item.filename);
-      const thumbnailSrc = matchedEntry ? matchedEntry.previewUrl : '';
+          const folderIndicator =
+            item.entityName !== 'Unknown'
+              ? `<span class="admin-folder-indicator">📁 ${item.entityName}</span>`
+              : '';
 
-      const folderIndicator = item.entityName !== 'Unknown' ? 
-        `<span class="admin-folder-indicator">📁 ${item.entityName}</span>` : '';
+          const statusClass = item.status === 'ready' ? 'success' : 'warning';
+          const statusText = item.status === 'ready' ? 'Backend Ready' : 'Needs Review';
 
-      const statusClass = item.status === 'ready' ? 'success' : 'warning';
-      const statusText = item.status === 'ready' ? 'Backend Ready' : 'Needs Review';
-
-      previewItem.innerHTML = `
+          previewItem.innerHTML = `
         <img class="admin-preview-thumbnail" src="${thumbnailSrc}" alt="${item.filename}">
         <div class="admin-preview-info">
           <div class="admin-preview-filename">${item.filename}${folderIndicator}</div>
@@ -1865,13 +2130,13 @@ The backend server is required for file import operations.
         <div class="admin-preview-status ${statusClass}">${statusText}</div>
       `;
 
-      previewList.appendChild(previewItem);
-    });
-  }
+          previewList.appendChild(previewItem);
+        });
+      }
 
-  // Admin info modal
-  window.showAdminInfo = function() {
-    const info = `
+      // Admin info modal
+      window.showAdminInfo = function () {
+        const info = `
 Admin Portfolio Importer v${CONFIG.version}
 
 Backend: ${CONFIG.backendUrl}
@@ -1887,17 +2152,15 @@ Optimized During Selection: ${state.optimizationStats.optimized}
 Estimated Savings: ${bytesToSize(Math.max(0, state.optimizationStats.totalOriginalBytes - state.optimizationStats.totalOptimizedBytes))}
 Authentication: ${state.authenticated ? 'Active' : 'Required'}
     `;
-    alert(info);
-  };
+        alert(info);
+      };
 
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeWidget);
-  } else {
-    initializeWidget();
-  }
-
-})();
-</script>
-
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeWidget);
+      } else {
+        initializeWidget();
+      }
+    })();
+  </script>
 </div>

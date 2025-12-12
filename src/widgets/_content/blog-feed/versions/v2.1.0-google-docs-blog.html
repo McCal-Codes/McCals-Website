@@ -1,113 +1,365 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal blog by photographer Caleb McCartney covering politics, social commentary, and photojournalism insights.">
-  <meta name="author" content="Caleb McCartney">
-  <meta name="robots" content="index, follow">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Blog - Caleb McCartney | McCal Media</title>
-  <link rel="preconnect" href="https://docs.google.com">
-  <link rel="dns-prefetch" href="https://docs.google.com">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Personal blog by photographer Caleb McCartney covering politics, social commentary, and photojournalism insights."
+    />
+    <meta name="author" content="Caleb McCartney" />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Blog - Caleb McCartney | McCal Media</title>
+    <link rel="preconnect" href="https://docs.google.com" />
+    <link rel="dns-prefetch" href="https://docs.google.com" />
+  </head>
+  <body>
+    <!-- Widget Container -->
+    <div class="blog-widget">
+      <div class="blog-header">
+        <div class="blog-title-group">
+          <h1 class="blog-heading">Latest Articles</h1>
+          <div class="blog-subtitle-row">
+            <p class="blog-description">
+              Articles on politics, photography, and the human condition
+            </p>
+            <span class="version-badge" title="Blog Widget v2.1.0">v2.1</span>
+          </div>
+        </div>
+      </div>
 
-<!-- Widget Container -->
-<div class="blog-widget">
-  <div class="blog-header">
-    <div class="blog-title-group">
-      <h1 class="blog-heading">Latest Articles</h1>
-      <div class="blog-subtitle-row">
-        <p class="blog-description">Articles on politics, photography, and the human condition</p>
-        <span class="version-badge" title="Blog Widget v2.1.0">v2.1</span>
+      <!-- Tag Filter Bar -->
+      <div class="blog-filters" id="blogFilters" style="display: none">
+        <span class="filter-label">Filter:</span>
+        <button class="tag-filter active" data-tag="all">All Posts</button>
+      </div>
+
+      <!-- Blog Grid -->
+      <div
+        id="blogFeed"
+        data-blog-feed-docs
+        data-provider="docs"
+        data-doc-id="2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD"
+        data-max-posts="10"
+        data-image-path="/images/blog/"
+      >
+        <div class="blog-loading">
+          <div class="spinner"></div>
+          Loading articles...
+        </div>
       </div>
     </div>
-  </div>
-  
-  <!-- Tag Filter Bar -->
-  <div class="blog-filters" id="blogFilters" style="display: none;">
-    <span class="filter-label">Filter:</span>
-    <button class="tag-filter active" data-tag="all">All Posts</button>
-  </div>
-  
-  <!-- Blog Grid -->
-  <div id="blogFeed" 
-       data-blog-feed-docs 
-       data-provider="docs"
-       data-doc-id="2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD" 
-       data-max-posts="10"
-       data-image-path="/images/blog/">
-    <div class="blog-loading">
-      <div class="spinner"></div>
-      Loading articles...
+
+    <!-- Full Post Modal -->
+    <div
+      class="blog-modal"
+      id="blogModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="postTitle"
+    >
+      <div class="modal-overlay" onclick="BlogFeed.closeModal()"></div>
+      <div class="modal-content">
+        <button class="modal-close" onclick="BlogFeed.closeModal()" aria-label="Close article">
+          &times;
+        </button>
+        <article
+          class="full-post"
+          id="fullPost"
+          itemscope
+          itemtype="https://schema.org/BlogPosting"
+        ></article>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- Full Post Modal -->
-<div class="blog-modal" id="blogModal" role="dialog" aria-modal="true" aria-labelledby="postTitle">
-  <div class="modal-overlay" onclick="BlogFeed.closeModal()"></div>
-  <div class="modal-content">
-    <button class="modal-close" onclick="BlogFeed.closeModal()" aria-label="Close article">&times;</button>
-    <article class="full-post" id="fullPost" itemscope itemtype="https://schema.org/BlogPosting"></article>
-  </div>
-</div>
-
-<!-- Styles and script (trimmed for brevity) -->
-<style>
-/* Inserted styles (same as v2.1.0 example) */
-:root{--fg:#1a1a1a;--fg-light:#666;--bg:#fff;--line:#e5e5e5;--accent:#0066cc}
-body{margin:0;padding-top:80px;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-.blog-widget{max-width:1400px;margin:0 auto;padding:60px 40px}
-.blog-loading{display:flex;align-items:center;justify-content:center;min-height:300px;color:var(--fg-light);gap:12px}
-.spinner{width:20px;height:20px;border:2px solid var(--line);border-top:2px solid var(--accent);border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.blog-grid{column-count:3;column-gap:30px;opacity:0;transition:opacity .5s}
-.blog-grid.loaded{opacity:1}
-.blog-card{display:inline-block;width:100%;margin-bottom:30px;background:rgba(255,255,255,.03);border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);transition:all .3s;cursor:pointer;break-inside:avoid}
-.card-image{width:100%;height:280px;overflow:hidden;background:rgba(255,255,255,.02);position:relative;border-radius:12px 12px 0 0}
-.card-image img{width:100%;height:100%;object-fit:cover}
-.card-content{padding:28px}
-.card-title{margin:0 0 14px 0;font-size:1.375rem;font-weight:700}
-.card-excerpt{margin:0;font-size:.9375rem;color:rgba(0,0,0,.6)}
-.modal-content{position:relative;width:100%;max-width:900px;max-height:90vh;margin:20px;background:rgba(20,20,20,.98);border-radius:20px;overflow-y:auto}
-.blog-modal.active{display:flex;opacity:1}
-</style>
-
-<!-- Load the docs parser and caption system from the blog-feed folder. Use absolute paths so iframe loading is reliable. -->
-<script src="/src/widgets/blog-feed/blog-feed-docs.js" defer></script>
-<script src="/src/widgets/blog-feed/shared/universal-caption-system.js" defer></script>
-<script>
-  // Wait for DOM and for the external script to set up the global BlogFeed object.
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('blogFeed');
-    if (!container) return;
-    // Simple timeout-based wait for BlogFeed to be available (non-blocking, safe)
-    let attempts = 0;
-    function tryInit(){
-      attempts++;
-      if (window.BlogFeed && typeof window.BlogFeed.init === 'function'){
-        try{
-          console.debug('[v2.1] Initializing BlogFeed from v2.1 widget');
-          window.BlogFeed.init();
-        }catch(err){
-          console.error('[v2.1] BlogFeed.init threw', err);
-          container.innerHTML = '<div class="blog-loading">Failed to initialize blog feed (see console).</div>';
+    <!-- Styles and script (trimmed for brevity) -->
+    <!-- site-widgets:inline:start -->
+    <style data-site-widgets-inline>
+      :root {
+        --mcc-accent: #ff4d6d;
+        --mcc-accent-strong: #ff2b50;
+        --mcc-bg: #ffffff;
+        --mcc-fg: #111827;
+        --mcc-line: #e5e7eb;
+        --mcc-muted: #6b7280;
+        --bg: var(--mcc-bg);
+        --fg: var(--mcc-fg);
+        --line: var(--mcc-line);
+        --accent: var(--mcc-accent);
+        --muted: var(--mcc-muted);
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--accent);
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
+        --panel-blur: 8px;
+        --mcc-space-1: 4px;
+        --mcc-space-2: 8px;
+        --mcc-space-3: 12px;
+        --mcc-space-4: 16px;
+        --mcc-space-5: 24px;
+        --mcc-space-6: 32px;
+        --mcc-radius: 10px;
+        --mcc-control-height: 40px;
+        --mcc-z-top: 2147483647;
+      }
+      [data-theme='light'] {
+        --fg: #0a0a0a;
+        --bg: #ffffff;
+        --line: #e5e5e5;
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
+        --panel-blur: 8px;
+        --chip: #fafafa;
+        --focus: #0ea5e9;
+        --link: var(--accent);
+      }
+      [data-theme='dark'] {
+        --fg: #f7f7f7;
+        --bg: #06060a;
+        --line: #2a2a2a;
+        --panel-bg: rgba(20, 20, 20, 0.78);
+        --panel-border: rgba(255, 255, 255, 0.12);
+        --panel-blur: 8px;
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--accent);
+      }
+      [class^='mcc-'],
+      [class*=' mcc-'] {
+        box-sizing: border-box;
+        font-family:
+          Inter,
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        color: var(--fg);
+      }
+      [class^='mcc-'] a:focus-visible,
+      [class^='mcc-'] button:focus-visible,
+      [class^='mcc-'] [role='button']:focus-visible,
+      [class*=' mcc-'] a:focus-visible,
+      [class*=' mcc-'] button:focus-visible,
+      [class*=' mcc-'] [role='button']:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+        border-radius: 6px;
+      }
+      .mcc-sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+      .mcc-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--mcc-space-2);
+        padding: 0.6rem 1.2rem;
+        height: var(--mcc-control-height);
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .mcc-btn:hover,
+      .mcc-btn:focus-visible {
+        background: var(--mcc-accent-strong);
+        transform: translateY(-1px);
+      }
+      .mcc-img-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .mcc-row {
+        display: flex;
+        gap: var(--mcc-space-3);
+        align-items: center;
+      }
+      .mcc-col {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mcc-space-2);
+      }
+      .mcc-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      [class^='mcc-'] {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [class^='mcc-'] * {
+          animation: none !important;
+          transition: none !important;
         }
-        return;
       }
-      if (attempts < 10){
-        // retry after short delay
-        setTimeout(tryInit, 200);
-      } else {
-        console.error('[v2.1] BlogFeed object not found after retries');
-        container.innerHTML = '<div class="blog-loading">Unable to load blog engine. Check console for errors.</div>';
+      @media print {
+        [class^='mcc-'] {
+          color: #000 !important;
+          background: transparent !important;
+        }
       }
-    }
-    tryInit();
-  });
-</script>
+    </style>
+    <!-- site-widgets:inline:end -->
 
-</body>
+    <style>
+      /* Inserted styles (same as v2.1.0 example) */
+      :root {
+        --fg: #1a1a1a;
+        --fg-light: #666;
+        --bg: #fff;
+        --line: #e5e5e5;
+        --accent: #0066cc;
+      }
+      body {
+        margin: 0;
+        padding-top: 80px;
+        background: var(--bg);
+        color: var(--fg);
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+      .blog-widget {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 60px 40px;
+      }
+      .blog-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        color: var(--fg-light);
+        gap: 12px;
+      }
+      .spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--line);
+        border-top: 2px solid var(--accent);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .blog-grid {
+        column-count: 3;
+        column-gap: 30px;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .blog-grid.loaded {
+        opacity: 1;
+      }
+      .blog-card {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 30px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s;
+        cursor: pointer;
+        break-inside: avoid;
+      }
+      .card-image {
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.02);
+        position: relative;
+        border-radius: 12px 12px 0 0;
+      }
+      .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .card-content {
+        padding: 28px;
+      }
+      .card-title {
+        margin: 0 0 14px 0;
+        font-size: 1.375rem;
+        font-weight: 700;
+      }
+      .card-excerpt {
+        margin: 0;
+        font-size: 0.9375rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+      .modal-content {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        max-height: 90vh;
+        margin: 20px;
+        background: rgba(20, 20, 20, 0.98);
+        border-radius: 20px;
+        overflow-y: auto;
+      }
+      .blog-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+    </style>
+
+    <!-- Load the docs parser and caption system from the blog-feed folder. Use absolute paths so iframe loading is reliable. -->
+    <script src="/src/widgets/blog-feed/blog-feed-docs.js" defer></script>
+    <script src="/src/widgets/blog-feed/shared/universal-caption-system.js" defer></script>
+    <script>
+      // Wait for DOM and for the external script to set up the global BlogFeed object.
+      document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('blogFeed');
+        if (!container) return;
+        // Simple timeout-based wait for BlogFeed to be available (non-blocking, safe)
+        let attempts = 0;
+        function tryInit() {
+          attempts++;
+          if (window.BlogFeed && typeof window.BlogFeed.init === 'function') {
+            try {
+              console.debug('[v2.1] Initializing BlogFeed from v2.1 widget');
+              window.BlogFeed.init();
+            } catch (err) {
+              console.error('[v2.1] BlogFeed.init threw', err);
+              container.innerHTML =
+                '<div class="blog-loading">Failed to initialize blog feed (see console).</div>';
+            }
+            return;
+          }
+          if (attempts < 10) {
+            // retry after short delay
+            setTimeout(tryInit, 200);
+          } else {
+            console.error('[v2.1] BlogFeed object not found after retries');
+            container.innerHTML =
+              '<div class="blog-loading">Unable to load blog engine. Check console for errors.</div>';
+          }
+        }
+        tryInit();
+      });
+    </script>
+  </body>
 </html>

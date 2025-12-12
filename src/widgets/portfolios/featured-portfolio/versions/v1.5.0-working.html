@@ -2,233 +2,793 @@
 <!-- Production-ready version for Squarespace Code Blocks -->
 <!-- Shows up to 15 newest portfolio items with enhanced title extraction and ultra-minimal scrollbars -->
 
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
 <style>
   .featured-portfolio {
-    --fg:#f5f5f5;
-    --bg:#0a0a0a;
-    --line:#2a2a2a;
-    --accent:#888888;
+    --fg: #f5f5f5;
+    --bg: #0a0a0a;
+    --line: #2a2a2a;
+    --accent: #888888;
     /* Backing / panel variables (used for cards, panels, overlays) */
-    --card-bg:#111;
-    --panel-bg:#222;
-    --panel-contrast:rgba(0,0,0,0.9);
-    --image-bg:#050505;
-    --overlay-bg:rgba(0,0,0,0.3);
-    --overlay-bg-strong:rgba(0,0,0,0.6);
-    --panel-border:rgba(255,255,255,0.06);
-    --muted:rgba(255,255,255,0.6);
+    --card-bg: #111;
+    --panel-bg: #222;
+    --panel-contrast: rgba(0, 0, 0, 0.9);
+    --image-bg: #050505;
+    --overlay-bg: rgba(0, 0, 0, 0.3);
+    --overlay-bg-strong: rgba(0, 0, 0, 0.6);
+    --panel-border: rgba(255, 255, 255, 0.06);
+    --muted: rgba(255, 255, 255, 0.6);
   }
   @media (prefers-color-scheme: light) {
     .featured-portfolio {
-      --fg:#0a0a0a;
-      --bg:#fff;
-      --line:#e5e5e5;
-      --card-bg:#fff;
-      --panel-bg:#f8f8f8;
-      --panel-contrast:rgba(255,255,255,0.95);
-      --image-bg:#fff;
-      --overlay-bg:rgba(255,255,255,0.6);
-      --overlay-bg-strong:rgba(255,255,255,0.8);
-      --panel-border:rgba(0,0,0,0.06);
-      --muted:rgba(0,0,0,0.6);
+      --fg: #0a0a0a;
+      --bg: #fff;
+      --line: #e5e5e5;
+      --card-bg: #fff;
+      --panel-bg: #f8f8f8;
+      --panel-contrast: rgba(255, 255, 255, 0.95);
+      --image-bg: #fff;
+      --overlay-bg: rgba(255, 255, 255, 0.6);
+      --overlay-bg-strong: rgba(255, 255, 255, 0.8);
+      --panel-border: rgba(0, 0, 0, 0.06);
+      --muted: rgba(0, 0, 0, 0.6);
     }
   }
 
   /* Ultra Minimal Scrollbar Design */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(136,136,136,0.15) transparent;
+    scrollbar-color: rgba(136, 136, 136, 0.15) transparent;
   }
-  
+
   *::-webkit-scrollbar {
     width: 4px;
     height: 4px;
   }
-  
+
   *::-webkit-scrollbar-track {
     background: transparent;
   }
-  
+
   *::-webkit-scrollbar-thumb {
-    background: rgba(136,136,136,0.15);
+    background: rgba(136, 136, 136, 0.15);
     border-radius: 2px;
     transition: background-color 0.2s ease;
   }
-  
+
   *::-webkit-scrollbar-thumb:hover {
-    background: rgba(136,136,136,0.25);
+    background: rgba(136, 136, 136, 0.25);
   }
-  
+
   *::-webkit-scrollbar-corner {
     background: transparent;
   }
-  
+
   /* Slightly more visible for dark backgrounds only when needed */
   .fp-lightbox *::-webkit-scrollbar-thumb,
   .changelog-modal *::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.12);
   }
-  
+
   .fp-lightbox *::-webkit-scrollbar-thumb:hover,
   .changelog-modal *::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
   }
 
-  .featured-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
-  .featured-heading { font:800 34px/1.2 ui-sans-serif,system-ui; color:var(--fg); margin:0 0 12px }
-  .featured-subhead { font:500 16px/1.5 ui-sans-serif,system-ui; color:rgba(255,255,255,.72); margin:0 0 28px }
-  .featured-meta-bar { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; font:600 11px/1.4 ui-sans-serif,system-ui; color:rgba(255,255,255,.55); margin-bottom:30px; letter-spacing:0.18em; text-transform:uppercase; }
-  .featured-meta-bar span { display:inline-flex; align-items:center; gap:6px; }
-  .featured-meta-bar strong { font:700 13px/1 ui-sans-serif,system-ui; color:var(--fg); letter-spacing:0.22em; }
-  .new-content-notification { position:fixed; top:20px; right:20px; background:rgba(34,197,94,0.9); color:#fff; padding:12px 16px; border-radius:8px; font:600 14px/1.3 ui-sans-serif,system-ui; z-index:1000000; animation:slideInRight 0.3s ease; }
-  @keyframes slideInRight { from { transform:translateX(100%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+  .featured-portfolio {
+    max-width: 1600px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+  }
+  .featured-heading {
+    font:
+      800 34px/1.2 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+    margin: 0 0 12px;
+  }
+  .featured-subhead {
+    font:
+      500 16px/1.5 ui-sans-serif,
+      system-ui;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0 0 28px;
+  }
+  .featured-meta-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    font:
+      600 11px/1.4 ui-sans-serif,
+      system-ui;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 30px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .featured-meta-bar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .featured-meta-bar strong {
+    font:
+      700 13px/1 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+    letter-spacing: 0.22em;
+  }
+  .new-content-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(34, 197, 94, 0.9);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font:
+      600 14px/1.3 ui-sans-serif,
+      system-ui;
+    z-index: 1000000;
+    animation: slideInRight 0.3s ease;
+  }
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
   .featured-loading {
-    display:flex; align-items:center; justify-content:center; min-height:200px;
-    font:600 16px/1.4 ui-sans-serif,system-ui; color:var(--fg); opacity:0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font:
+      600 16px/1.4 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+    opacity: 0.7;
   }
   .featured-spinner {
-    width:20px; height:20px; border:2px solid var(--line); border-top:2px solid var(--accent);
-    border-radius:50%; animation:spin 1s linear infinite; margin-right:12px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 12px;
   }
-  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
   .auto-refresh-indicator {
-    position:fixed; bottom:12px; right:100px; font:400 10px/1 ui-sans-serif,system-ui;
-    color:var(--muted,rgba(128,128,128,0.65)); pointer-events:none; z-index:10;
-    padding:4px 8px; background:var(--overlay-bg,rgba(0,0,0,0.3)); border-radius:4px;
+    position: fixed;
+    bottom: 12px;
+    right: 100px;
+    font:
+      400 10px/1 ui-sans-serif,
+      system-ui;
+    color: var(--muted, rgba(128, 128, 128, 0.65));
+    pointer-events: none;
+    z-index: 10;
+    padding: 4px 8px;
+    background: var(--overlay-bg, rgba(0, 0, 0, 0.3));
+    border-radius: 4px;
   }
   .version-indicator {
-    position:fixed; bottom:12px; right:12px; font:600 11px/1.2 ui-sans-serif,system-ui;
-    color:rgba(255,255,255,0.8); cursor:pointer; z-index:10; transition:all .2s ease;
-    padding:6px 10px; background:var(--overlay-bg-strong,rgba(0,0,0,0.6)); border-radius:6px; border:1px solid var(--panel-border,rgba(255,255,255,0.1));
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    font:
+      600 11px/1.2 ui-sans-serif,
+      system-ui;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    padding: 6px 10px;
+    background: var(--overlay-bg-strong, rgba(0, 0, 0, 0.6));
+    border-radius: 6px;
+    border: 1px solid var(--panel-border, rgba(255, 255, 255, 0.1));
   }
-    .version-indicator:hover { color:var(--accent); background:rgba(0,0,0,0.8); transform:scale(1.05); }
-  
+  .version-indicator:hover {
+    color: var(--accent);
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.05);
+  }
+
   .changelog-modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95); z-index: 2000; padding: 2rem; 
-    overflow-y: auto; box-sizing: border-box; display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    padding: 2rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+    display: none;
     font-family: ui-sans-serif, system-ui, sans-serif;
   }
   .changelog-content {
-    max-width: 600px; margin: 0 auto; background: var(--panel-bg,#222);
-    border-radius: 8px; padding: 2rem; color: var(--fg,#e5e5e5);
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--panel-bg, #222);
+    border-radius: 8px;
+    padding: 2rem;
+    color: var(--fg, #e5e5e5);
     position: relative;
   }
   .changelog-close {
-    position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1);
-    border: none; color: #fff; font-size: 20px; width: 32px; height: 32px;
-    border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .changelog-close:hover { background: rgba(255,255,255,0.2); }
-  .changelog h2 { color: var(--accent); margin: 0 0 0.5rem 0; }
-  .changelog h3 { color: #fff; margin: 1.5rem 0 0.5rem 0; font-size: 16px; }
-  .changelog p { color: var(--muted,#ccc); margin: 0 0 1rem 0; font-style: italic; }
-  .changelog ul { margin: 0.5rem 0 1.5rem 0; padding-left: 1.5rem; }
-  .changelog li { margin: 0.25rem 0; color: var(--muted,#ccc); }
-  .changelog-link { 
-    padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); 
-    text-align: center; 
+  .changelog-close:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
-  .changelog-link a { 
-    color: var(--accent); text-decoration: none; font-weight: 600;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.5rem 1rem; border: 1px solid rgba(136,136,136,0.3);
-    border-radius: 6px; transition: all 0.2s ease;
+  .changelog h2 {
+    color: var(--accent);
+    margin: 0 0 0.5rem 0;
   }
-  .changelog-link a:hover { 
-    background: rgba(136,136,136,0.1); border-color: var(--accent);
+  .changelog h3 {
+    color: #fff;
+    margin: 1.5rem 0 0.5rem 0;
+    font-size: 16px;
+  }
+  .changelog p {
+    color: var(--muted, #ccc);
+    margin: 0 0 1rem 0;
+    font-style: italic;
+  }
+  .changelog ul {
+    margin: 0.5rem 0 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+  .changelog li {
+    margin: 0.25rem 0;
+    color: var(--muted, #ccc);
+  }
+  .changelog-link {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+  .changelog-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(136, 136, 136, 0.3);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  .changelog-link a:hover {
+    background: rgba(136, 136, 136, 0.1);
+    border-color: var(--accent);
     transform: translateY(-1px);
   }
 
   .featured-grid {
-    column-width:320px; column-gap:16px; text-align:left; opacity:0; transition:opacity .5s ease;
+    column-width: 320px;
+    column-gap: 16px;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
-  .featured-grid.loaded { opacity:1; }
-  @media (max-width:1024px) { .featured-grid { column-width:280px; column-gap:12px; } }
-  @media (max-width:768px) { .featured-grid { column-width:240px; column-gap:10px; } }
-  @media (max-width:520px) { .featured-grid { column-width:100%; column-gap:8px; } }
+  .featured-grid.loaded {
+    opacity: 1;
+  }
+  @media (max-width: 1024px) {
+    .featured-grid {
+      column-width: 280px;
+      column-gap: 12px;
+    }
+  }
+  @media (max-width: 768px) {
+    .featured-grid {
+      column-width: 240px;
+      column-gap: 10px;
+    }
+  }
+  @media (max-width: 520px) {
+    .featured-grid {
+      column-width: 100%;
+      column-gap: 8px;
+    }
+  }
 
   .featured-card {
-    position:relative; display:inline-block; width:100%; margin:0 0 16px;
-    background:var(--card-bg,#111); border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
-    opacity:0; transform:translateY(20px); transition:all .3s ease;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 16px;
+    background: var(--card-bg, #111);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    break-inside: avoid;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
   }
-  .featured-card.loaded { opacity:1; transform:translateY(0); }
-  .featured-card img { display:block; width:100%; height:auto; object-fit:cover; border-radius:inherit; transition:transform .35s ease, filter .35s ease; }
-  .featured-card:hover img { transform:scale(1.03); filter:contrast(1.08) saturate(1.08); }
+  .featured-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .featured-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: inherit;
+    transition:
+      transform 0.35s ease,
+      filter 0.35s ease;
+  }
+  .featured-card:hover img {
+    transform: scale(1.03);
+    filter: contrast(1.08) saturate(1.08);
+  }
 
   .featured-info {
-    position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
-    padding:12px 16px; background:linear-gradient(180deg,rgba(0,0,0,0),var(--panel-contrast,rgba(0,0,0,0.9))); color:var(--fg,#fff);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 12px 16px;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0),
+      var(--panel-contrast, rgba(0, 0, 0, 0.9))
+    );
+    color: var(--fg, #fff);
   }
-  .featured-title { margin:0; font:800 18px/1.25 ui-sans-serif,system-ui; letter-spacing:0.02em; }
-  .featured-meta { margin:4px 0 0; font:600 12px/1.3 ui-sans-serif,system-ui; color:rgba(255,255,255,.78); }
-  .featured-tags { margin:6px 0 0; display:flex; flex-wrap:wrap; gap:6px; }
-  .featured-tag { background:rgba(255,255,255,0.08); border-radius:999px; padding:4px 10px; font:600 10px/1 ui-sans-serif,system-ui; letter-spacing:0.12em; text-transform:uppercase; }
-  .featured-tag-category { background:rgba(255,77,109,0.2); color:rgba(255,255,255,0.95); }
+  .featured-title {
+    margin: 0;
+    font:
+      800 18px/1.25 ui-sans-serif,
+      system-ui;
+    letter-spacing: 0.02em;
+  }
+  .featured-meta {
+    margin: 4px 0 0;
+    font:
+      600 12px/1.3 ui-sans-serif,
+      system-ui;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .featured-tags {
+    margin: 6px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .featured-tag {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font:
+      600 10px/1 ui-sans-serif,
+      system-ui;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .featured-tag-category {
+    background: rgba(255, 77, 109, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+  }
 
-  .featured-empty { text-align:center; padding:80px 20px; color:var(--muted,rgba(255,255,255,.6)); font:600 16px/1.4 ui-sans-serif,system-ui; }
+  .featured-empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted, rgba(255, 255, 255, 0.6));
+    font:
+      600 16px/1.4 ui-sans-serif,
+      system-ui;
+  }
 
   .featured-error {
-    margin:30px auto; padding:24px; max-width:520px; border-radius:16px; background:rgba(255,77,109,0.08);
-    border:1px solid rgba(255,77,109,0.28); color:var(--fg,#fff); font:600 14px/1.5 ui-sans-serif,system-ui;
+    margin: 30px auto;
+    padding: 24px;
+    max-width: 520px;
+    border-radius: 16px;
+    background: rgba(255, 77, 109, 0.08);
+    border: 1px solid rgba(255, 77, 109, 0.28);
+    color: var(--fg, #fff);
+    font:
+      600 14px/1.5 ui-sans-serif,
+      system-ui;
   }
 
-  .fp-lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.92); display:none; align-items:center; justify-content:center; z-index:2147483800; overflow:hidden; isolation:isolate; }
-  .fp-lightbox.is-open { display:flex; }
-  .fp-dialog { position:relative; max-width:90vw; max-height:85vh; display:flex; flex-direction:column; background:transparent; outline:none; contain:layout style paint; }
-  .fp-close { position:absolute; top:10px; right:10px; width:32px; height:32px; border-radius:50%; border:none; background:rgba(0,0,0,0.7); color:#fff; font-size:18px; cursor:pointer; transition:all .2s ease; z-index:2147483801; backdrop-filter:blur(4px); }
-  .fp-close:hover { background:rgba(0,0,0,0.9); transform:scale(1.1); }
-  .fp-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; flex:1; min-height:0; scroll-behavior:smooth; }
-  .fp-gallery img { display:block; max-height:70vh; width:auto; align-self:center; border-radius:12px; box-shadow:0 20px 40px rgba(0,0,0,0.55); background:var(--image-bg,#050505); scroll-snap-align:start; transform-origin:center; }
-  .fp-gallery img.loading { opacity:0.6; filter:blur(4px); }
-  .fp-gallery img.loaded { opacity:1; filter:none; transition:opacity .35s ease, filter .35s ease; }
-  .fp-gallery img:hover { box-shadow:0 25px 50px rgba(0,0,0,0.65); }
-  .fp-hint { position:sticky; top:6px; align-self:center; background:rgba(0,0,0,0.55); color:#fff; padding:6px 10px; border-radius:999px; font:600 12px/1 ui-sans-serif,system-ui; transition:opacity .4s ease; }
-  .fp-hint.fade { opacity:0; }
-  .fp-caption { text-align:center; color:#fff; margin-top:14px; }
-  .fp-title { margin:0 0 6px; font:700 18px/1.3 ui-sans-serif,system-ui; }
-  .fp-meta { margin:0; color:rgba(255,255,255,0.7); font:500 12px/1.4 ui-sans-serif,system-ui; }
+  .fp-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483800;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .fp-lightbox.is-open {
+    display: flex;
+  }
+  .fp-dialog {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    outline: none;
+    contain: layout style paint;
+  }
+  .fp-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 2147483801;
+    backdrop-filter: blur(4px);
+  }
+  .fp-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+  }
+  .fp-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    flex: 1;
+    min-height: 0;
+    scroll-behavior: smooth;
+  }
+  .fp-gallery img {
+    display: block;
+    max-height: 70vh;
+    width: auto;
+    align-self: center;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+    background: var(--image-bg, #050505);
+    scroll-snap-align: start;
+    transform-origin: center;
+  }
+  .fp-gallery img.loading {
+    opacity: 0.6;
+    filter: blur(4px);
+  }
+  .fp-gallery img.loaded {
+    opacity: 1;
+    filter: none;
+    transition:
+      opacity 0.35s ease,
+      filter 0.35s ease;
+  }
+  .fp-gallery img:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65);
+  }
+  .fp-hint {
+    position: sticky;
+    top: 6px;
+    align-self: center;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font:
+      600 12px/1 ui-sans-serif,
+      system-ui;
+    transition: opacity 0.4s ease;
+  }
+  .fp-hint.fade {
+    opacity: 0;
+  }
+  .fp-caption {
+    text-align: center;
+    color: #fff;
+    margin-top: 14px;
+  }
+  .fp-title {
+    margin: 0 0 6px;
+    font:
+      700 18px/1.3 ui-sans-serif,
+      system-ui;
+  }
+  .fp-meta {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font:
+      500 12px/1.4 ui-sans-serif,
+      system-ui;
+  }
 
-  html.fp-open, body.fp-open { overflow:hidden !important; }
-  .fp-lightbox.is-open { backdrop-filter: blur(8px); }
-  
+  html.fp-open,
+  body.fp-open {
+    overflow: hidden !important;
+  }
+  .fp-lightbox.is-open {
+    backdrop-filter: blur(8px);
+  }
+
   /* Prevent navigation interference when lightbox is open */
   html.fp-open .mcc-nav-widget,
   html.fp-open .mcc-nav,
   html.fp-open .Header,
-  html.fp-open header[role="banner"] { pointer-events: none; }
-  html.fp-open .fp-lightbox { pointer-events: auto; }
-  
-  .header { position:relative; z-index:100; }
-  .status { position:relative; z-index:100; }
-  
-  @media (max-width:720px) {
-    .featured-subhead { margin-bottom:22px; font-size:15px; }
-    .featured-meta-bar { gap:20px; }
-    .fp-close { top:15px; right:15px; width:36px; height:36px; font-size:20px; }
-    .fp-dialog { max-width:95vw; max-height:90vh; }
-    .auto-refresh-indicator { 
-      bottom:8px; right:8px; font-size:9px; 
-      max-width:120px; text-align:center; line-height:1.2;
+  html.fp-open header[role='banner'] {
+    pointer-events: none;
+  }
+  html.fp-open .fp-lightbox {
+    pointer-events: auto;
+  }
+
+  .header {
+    position: relative;
+    z-index: 100;
+  }
+  .status {
+    position: relative;
+    z-index: 100;
+  }
+
+  @media (max-width: 720px) {
+    .featured-subhead {
+      margin-bottom: 22px;
+      font-size: 15px;
     }
-    .version-indicator { 
-      bottom:32px; right:8px; font-size:9px;
+    .featured-meta-bar {
+      gap: 20px;
+    }
+    .fp-close {
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      font-size: 20px;
+    }
+    .fp-dialog {
+      max-width: 95vw;
+      max-height: 90vh;
+    }
+    .auto-refresh-indicator {
+      bottom: 8px;
+      right: 8px;
+      font-size: 9px;
+      max-width: 120px;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .version-indicator {
+      bottom: 32px;
+      right: 8px;
+      font-size: 9px;
     }
   }
 </style>
 
-        <div class="featured-portfolio" id="featuredPf" data-panes="12" data-range-days="0" data-force-diverse="true">
-          <div class="featured-header">
-            <h2 class="featured-heading">Featured Highlights</h2>
-            <p class="featured-subhead">Latest additions across every portfolio collection.</p>
-          </div>  <div class="featured-meta-bar">
+<div
+  class="featured-portfolio"
+  id="featuredPf"
+  data-panes="12"
+  data-range-days="0"
+  data-force-diverse="true"
+>
+  <div class="featured-header">
+    <h2 class="featured-heading">Featured Highlights</h2>
+    <p class="featured-subhead">Latest additions across every portfolio collection.</p>
+  </div>
+  <div class="featured-meta-bar">
     <span><strong id="metaCount">--</strong> items</span>
     <span><strong id="metaUpdated">--</strong> updated</span>
     <span><strong id="metaSource">--</strong> source</span>
-    <span><button id="refreshButton" type="button" style="background:none;border:1px solid rgba(255,255,255,0.3);color:inherit;padding:4px 8px;border-radius:4px;cursor:pointer;font:inherit;transition:all 0.2s ease;" title="Refresh gallery to check for new photos">↻ Refresh</button></span>
+    <span
+      ><button
+        id="refreshButton"
+        type="button"
+        style="
+          background: none;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: inherit;
+          padding: 4px 8px;
+          border-radius: 4px;
+          cursor: pointer;
+          font: inherit;
+          transition: all 0.2s ease;
+        "
+        title="Refresh gallery to check for new photos"
+      >
+        ↻ Refresh
+      </button></span
+    >
   </div>
 
   <div class="featured-loading" id="featuredLoading" role="status">
@@ -239,16 +799,27 @@
   <div class="featured-grid" id="featuredGrid" aria-live="polite"></div>
 
   <div class="auto-refresh-indicator" id="autoRefreshIndicator" aria-hidden="true"></div>
-  <div class="version-indicator" id="versionIndicator" title="Featured Portfolio v1.5" onclick="showChangelog()">Featured v1.5</div>
+  <div
+    class="version-indicator"
+    id="versionIndicator"
+    title="Featured Portfolio v1.5"
+    onclick="showChangelog()"
+  >
+    Featured v1.5
+  </div>
 </div>
 
-<div id="changelog-modal" class="changelog-modal" onclick="event.target === this && hideChangelog()">
+<div
+  id="changelog-modal"
+  class="changelog-modal"
+  onclick="event.target === this && hideChangelog()"
+>
   <div class="changelog-content">
     <button class="changelog-close" onclick="hideChangelog()">&times;</button>
     <div class="changelog">
       <h2>Featured Portfolio v1.5</h2>
       <p>Enhanced journalism titles & improved masonry layout</p>
-      
+
       <h3>✨ What's New</h3>
       <ul>
         <li>Journalism articles show proper titles (e.g., "The Rooney Rule")</li>
@@ -256,9 +827,13 @@
         <li>Randomized cover images for variety on each load</li>
         <li>Improved lightbox with repositioned close button</li>
       </ul>
-      
+
       <div class="changelog-link">
-        <a href="https://github.com/McCal-Codes/McCals-Website/blob/main/src/widgets/featured-portfolio/CHANGELOG.md" target="_blank" rel="noopener">
+        <a
+          href="https://github.com/McCal-Codes/McCals-Website/blob/main/src/widgets/featured-portfolio/CHANGELOG.md"
+          target="_blank"
+          rel="noopener"
+        >
           View Full Changelog on GitHub →
         </a>
       </div>
@@ -280,1345 +855,1475 @@
 </div>
 
 <script>
-(() => {
-  const pf = document.getElementById('featuredPf');
-  if (!pf) return;
+  (() => {
+    const pf = document.getElementById('featuredPf');
+    if (!pf) return;
 
-  const grid = document.getElementById('featuredGrid');
-  const loading = document.getElementById('featuredLoading');
-  const metaCount = document.getElementById('metaCount');
-  const metaUpdated = document.getElementById('metaUpdated');
-  const metaSource = document.getElementById('metaSource');
-  const refreshButton = document.getElementById('refreshButton');
-  const versionIndicator = document.getElementById('versionIndicator');
+    const grid = document.getElementById('featuredGrid');
+    const loading = document.getElementById('featuredLoading');
+    const metaCount = document.getElementById('metaCount');
+    const metaUpdated = document.getElementById('metaUpdated');
+    const metaSource = document.getElementById('metaSource');
+    const refreshButton = document.getElementById('refreshButton');
+    const versionIndicator = document.getElementById('versionIndicator');
 
-  const lb = document.getElementById('featuredLightbox');
-  const lbDialog = lb.querySelector('.fp-dialog');
-  const lbGallery = document.getElementById('fpGallery');
-  const lbTitle = document.getElementById('fpTitle');
-  const lbMeta = document.getElementById('fpMeta');
-  const lbClose = lb.querySelector('.fp-close');
+    const lb = document.getElementById('featuredLightbox');
+    const lbDialog = lb.querySelector('.fp-dialog');
+    const lbGallery = document.getElementById('fpGallery');
+    const lbTitle = document.getElementById('fpTitle');
+    const lbMeta = document.getElementById('fpMeta');
+    const lbClose = lb.querySelector('.fp-close');
 
-  const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000; // Reduced from 15 to 5 minutes for faster updates
-  const CACHE_TTL = 15 * 60 * 1000;
-  const CACHE_KEY_PREFIX = 'featured-portfolio-cache:v1.5:';
-  const MAX_LIGHTBOX_IMAGES = Math.max(1, parseInt(pf.dataset.lightboxLimit || '0', 10)) || Infinity; // No limit by default
-  const TARGET_PANES = Math.max(1, parseInt(pf.dataset.panes || '50', 10)); // Increased from 15 to 50
-  const rangeDaysRaw = parseInt(pf.dataset.rangeDays || '0', 10);
-  const RANGE_DAYS = Number.isFinite(rangeDaysRaw) ? rangeDaysRaw : 0;
-  const FORCE_DIVERSE = (pf.dataset.forceDiverse || 'true').toLowerCase() === 'true';
-  const CARDS_STAGGER = 100;
+    const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000; // Reduced from 15 to 5 minutes for faster updates
+    const CACHE_TTL = 15 * 60 * 1000;
+    const CACHE_KEY_PREFIX = 'featured-portfolio-cache:v1.5:';
+    const MAX_LIGHTBOX_IMAGES =
+      Math.max(1, parseInt(pf.dataset.lightboxLimit || '0', 10)) || Infinity; // No limit by default
+    const TARGET_PANES = Math.max(1, parseInt(pf.dataset.panes || '50', 10)); // Increased from 15 to 50
+    const rangeDaysRaw = parseInt(pf.dataset.rangeDays || '0', 10);
+    const RANGE_DAYS = Number.isFinite(rangeDaysRaw) ? rangeDaysRaw : 0;
+    const FORCE_DIVERSE = (pf.dataset.forceDiverse || 'true').toLowerCase() === 'true';
+    const CARDS_STAGGER = 100;
 
+    let autoRefreshTimer = null;
+    let nextRefreshTimer = null;
+    let debugActive = false;
+    let isTabVisible = true;
+    let activeManifestUrl = '';
 
+    // Focus trapping for lightbox accessibility
+    function trapFocus(element) {
+      const focusableElements = element.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-  let autoRefreshTimer = null;
-  let nextRefreshTimer = null;
-  let debugActive = false;
-  let isTabVisible = true;
-  let activeManifestUrl = '';
-
-  // Focus trapping for lightbox accessibility
-  function trapFocus(element) {
-    const focusableElements = element.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
-
-    element.addEventListener('keydown', (evt) => {
-      if (evt.key === 'Tab') {
-        if (evt.shiftKey && document.activeElement === firstElement) {
-          evt.preventDefault();
-          lastElement.focus();
-        } else if (!evt.shiftKey && document.activeElement === lastElement) {
-          evt.preventDefault();
-          firstElement.focus();
+      element.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Tab') {
+          if (evt.shiftKey && document.activeElement === firstElement) {
+            evt.preventDefault();
+            lastElement.focus();
+          } else if (!evt.shiftKey && document.activeElement === lastElement) {
+            evt.preventDefault();
+            firstElement.focus();
+          }
         }
+      });
+    }
+
+    const GH = { owner: 'McCal-Codes', repo: 'McCals-Website', branch: 'main' };
+    const RAW_ROOT = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
+    const PATH_PREFIX = 'src/images/Portfolios/';
+
+    const providedManifest = (pf.dataset.manifest || '').trim();
+    const manifestCandidates = [];
+    if (providedManifest) manifestCandidates.push(providedManifest);
+
+    // Universal portfolio manifest first (contains all types)
+    manifestCandidates.push('src/images/Portfolios/portfolio-manifest.json');
+
+    // Individual portfolio manifests as fallbacks
+    manifestCandidates.push('src/images/Portfolios/Concert/concert-manifest.json');
+    manifestCandidates.push('src/images/Portfolios/Events/events-manifest.json');
+    manifestCandidates.push('src/images/Portfolios/Journalism/journalism-manifest.json');
+
+    // Featured manifest last (limited subset)
+    manifestCandidates.push('src/images/Portfolios/featured-manifest.json');
+
+    const manifestSources = Array.from(new Set(manifestCandidates.filter(Boolean)));
+
+    function logDebug(message, data = null) {
+      // Production version - minimal logging
+      if (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) {
+        console.error('[Featured Portfolio v1.5]', message, data || '');
       }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      isTabVisible = !document.hidden;
     });
-  }
 
-  const GH = { owner: 'McCal-Codes', repo: 'McCals-Website', branch: 'main' };
-  const RAW_ROOT = `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/`;
-  const PATH_PREFIX = 'src/images/Portfolios/';
-
-          const providedManifest = (pf.dataset.manifest || '').trim();
-          const manifestCandidates = [];
-          if (providedManifest) manifestCandidates.push(providedManifest);
-          
-          // Universal portfolio manifest first (contains all types)
-          manifestCandidates.push('src/images/Portfolios/portfolio-manifest.json');
-          
-          // Individual portfolio manifests as fallbacks
-          manifestCandidates.push('src/images/Portfolios/Concert/concert-manifest.json');
-          manifestCandidates.push('src/images/Portfolios/Events/events-manifest.json'); 
-          manifestCandidates.push('src/images/Portfolios/Journalism/journalism-manifest.json');
-          
-          // Featured manifest last (limited subset)
-          manifestCandidates.push('src/images/Portfolios/featured-manifest.json');
-
-          const manifestSources = Array.from(new Set(manifestCandidates.filter(Boolean)));
-
-          function logDebug(message, data = null) {
-            // Production version - minimal logging
-            if (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) {
-              console.error('[Featured Portfolio v1.5]', message, data || '');
-            }
-          }
-          
-          document.addEventListener('visibilitychange', () => {
-    isTabVisible = !document.hidden;
-  });
-
-  function cacheKey(url) {
-    return `${CACHE_KEY_PREFIX}${url}`;
-  }
-
-  function readCache(url) {
-    try {
-      const payload = localStorage.getItem(cacheKey(url));
-      if (!payload) return null;
-      const parsed = JSON.parse(payload);
-      if (!parsed || typeof parsed !== 'object') return null;
-      const age = Date.now() - parsed.timestamp;
-      if (age > CACHE_TTL) return null;
-      return parsed.manifest;
-    } catch (error) {
-      logDebug('Cache read failed', error.message);
-      return null;
+    function cacheKey(url) {
+      return `${CACHE_KEY_PREFIX}${url}`;
     }
-  }
 
-  function writeCache(url, manifest) {
-    try {
-      const payload = { timestamp: Date.now(), manifest };
-      localStorage.setItem(cacheKey(url), JSON.stringify(payload));
-    } catch (error) {
-      logDebug('Cache write failed', error.message);
-    }
-  }
-
-  function resolveManifestUrl(candidate) {
-    if (/^https?:/i.test(candidate)) return candidate;
-    const cleaned = candidate
-      .replace(/^(\.\.?\/)+/, '')
-      .replace(/^\.\/+/, '')
-      .replace(/^\/+/, '');
-    return RAW_ROOT + cleaned;
-  }
-
-  async function fetchManifest(url, forceRefresh = false) {
-    if (!forceRefresh) {
-      const cacheHit = readCache(url);
-      if (cacheHit) {
-        logDebug('Using cached manifest', url);
-        return cacheHit;
+    function readCache(url) {
+      try {
+        const payload = localStorage.getItem(cacheKey(url));
+        if (!payload) return null;
+        const parsed = JSON.parse(payload);
+        if (!parsed || typeof parsed !== 'object') return null;
+        const age = Date.now() - parsed.timestamp;
+        if (age > CACHE_TTL) return null;
+        return parsed.manifest;
+      } catch (error) {
+        logDebug('Cache read failed', error.message);
+        return null;
       }
     }
 
-    // Add cache-busting timestamp for fresh data
-    const separator = url.includes('?') ? '&' : '?';
-    const cacheBustedUrl = `${url}${separator}_t=${Date.now()}`;
-    const response = await fetch(cacheBustedUrl, { cache: 'no-store' });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    const json = await response.json();
-    
-    // Check if content has changed since last fetch
-    const cached = readCache(url);
-    if (cached && JSON.stringify(cached) !== JSON.stringify(json)) {
-      logDebug('MANIFEST CHANGED - New content detected!', url);
-      
-      // Show notification for new content
-      if (metaSource) {
-        const originalText = metaSource.textContent;
-        metaSource.textContent = '🔄 NEW';
-        metaSource.style.color = '#4ade80';
-        setTimeout(() => {
-          metaSource.textContent = originalText;
-          metaSource.style.color = '';
-        }, 3000);
+    function writeCache(url, manifest) {
+      try {
+        const payload = { timestamp: Date.now(), manifest };
+        localStorage.setItem(cacheKey(url), JSON.stringify(payload));
+      } catch (error) {
+        logDebug('Cache write failed', error.message);
       }
     }
-    
-    writeCache(url, json);
-    return json;
-  }
 
-  function cleanPath(value) {
-    if (!value) return '';
-    return String(value).replace(/\\+/g, '/').trim();
-  }
-
-  function canonicalizeType(value) {
-    if (!value) return 'portfolio';
-    const normalized = String(value).trim().toLowerCase();
-    if (!normalized) return 'portfolio';
-    if (['concert', 'concerts', 'music', 'music photography', 'concert photography'].includes(normalized)) return 'concert';
-    if (['event', 'events', 'event photography', 'corporate', 'events photography'].includes(normalized)) return 'events';
-    if (['journalism', 'photojournalism', 'photo journalism', 'documentary', 'journalism photography', 'politics'].includes(normalized)) return 'journalism';
-    if (['portfolio', 'work', 'projects', 'featured'].includes(normalized)) return 'portfolio';
-    return normalized;
-  }
-
-  function titleCase(value) {
-    if (!value) return '';
-    return String(value)
-      .replace(/[_-]+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim()
-      .replace(/\b\w/g, char => char.toUpperCase());
-  }
-
-  function ensurePrefix(parts, prefix) {
-    if (!Array.isArray(prefix) || !prefix.length) {
-      return parts.slice();
+    function resolveManifestUrl(candidate) {
+      if (/^https?:/i.test(candidate)) return candidate;
+      const cleaned = candidate
+        .replace(/^(\.\.?\/)+/, '')
+        .replace(/^\.\/+/, '')
+        .replace(/^\/+/, '');
+      return RAW_ROOT + cleaned;
     }
-    const prefixLower = prefix.map(seg => seg.toLowerCase());
-    const currentLower = parts.slice(0, prefix.length).map(seg => seg.toLowerCase());
-    if (currentLower.join('/') === prefixLower.join('/')) {
-      return parts.slice();
-    }
-    return prefix.concat(parts);
-  }
 
-          function resolvePathSegments(parts, item, rootSegments) {
-            let resolved = parts.slice();
-            
-            // Handle different portfolio types with their specific path structures
-            const itemType = item.type || item.category || '';
-            
-            if (itemType === 'Journalism' || item.category === 'Journalism Photography') {
-              // For journalism items, ensure proper path structure
-              if (item.folderPath && item.folderPath.includes('\\')) {
-                const cleanedPath = item.folderPath.replace(/\\/g, '/');
-                const pathParts = cleanedPath.split('/').filter(Boolean);
-                
-                if (pathParts.length > 0 && pathParts[0] !== 'Journalism') {
-                  resolved = ['Journalism'].concat(pathParts);
-                } else {
-                  resolved = pathParts;
-                }
-              } else if (item.images && item.images.length > 0) {
-                const firstImage = item.images[0];
-                const imagePath = typeof firstImage === 'object' ? 
-                  (firstImage.folderName || firstImage.path || '') : '';
-                if (imagePath && imagePath.includes('\\')) {
-                  const cleanedPath = imagePath.replace(/\\/g, '/');
-                  const pathParts = cleanedPath.split('/').filter(Boolean);
-                  if (pathParts.length > 1) {
-                    pathParts.pop(); // Remove filename
-                    if (pathParts[0] !== 'Journalism') {
-                      resolved = ['Journalism'].concat(pathParts);
-                    } else {
-                      resolved = pathParts;
-                    }
-                  }
-                }
-              }
-            } else if (itemType === 'Concert' || item.category === 'Concert Photography' || itemType === 'Music') {
-              // For concert items, ensure proper Concert path structure
-              if (item.bandName && item.concertDate) {
-                // Concert structure: Concert/Band Name/Month Year
-                const monthYear = item.concertDate?.monthYear || item.dateDisplay || 'Unknown Date';
-                resolved = ['Concert', item.bandName, monthYear];
-              } else if (item.folderPath) {
-                const cleanedPath = item.folderPath.replace(/\\/g, '/');
-                const pathParts = cleanedPath.split('/').filter(Boolean);
-                if (pathParts.length > 0 && pathParts[0] !== 'Concert') {
-                  resolved = ['Concert'].concat(pathParts);
-                } else {
-                  resolved = pathParts;
-                }
-              }
-            } else if (itemType === 'Events' || item.category === 'Events Photography') {
-              // For events items, ensure proper Events path structure  
-              if (item.folderPath) {
-                const cleanedPath = item.folderPath.replace(/\\/g, '/');
-                const pathParts = cleanedPath.split('/').filter(Boolean);
-                if (pathParts.length > 0 && pathParts[0] !== 'Events') {
-                  resolved = ['Events'].concat(pathParts);
-                } else {
-                  resolved = pathParts;
-                }
-              } else if (item.eventName) {
-                resolved = ['Events', item.eventName];
-              }
-            } else {
-              // For other items, use standard logic but fix path separators
-              if (item.folderPath) {
-                resolved = item.folderPath.replace(/\\/g, '/').split('/').filter(Boolean);
-              } else {
-                resolved = parts.slice();
-              }
-              
-              const itemBase = cleanPath(item.basePath || item.base || item.collectionPath || item.rootPath || item.folderRoot || '');
-              if (itemBase) {
-                const baseParts = itemBase.split('/').filter(Boolean);
-                resolved = ensurePrefix(resolved, baseParts);
-              }
-              if (item.collection && typeof item.collection === 'string') {
-                const collectionParts = cleanPath(item.collection).split('/').filter(Boolean);
-                resolved = ensurePrefix(resolved, collectionParts);
-              }
-            }
-            
-            resolved = ensurePrefix(resolved, rootSegments);
-            return resolved;
-          }  function extractRootSegments(url) {
-    try {
-      const parsed = new URL(url);
-      const segments = parsed.pathname.split('/').filter(Boolean);
-      const marker = segments.lastIndexOf('Portfolios');
-      if (marker === -1) return [];
-      return segments.slice(marker + 1, segments.length - 1);
-    } catch {
-      return [];
-    }
-  }
-
-  function normalizeImageRef(value) {
-    if (!value) return null;
-    const str = String(value).trim();
-    if (!str) return null;
-    return str.replace(/\\+/g, '/');
-  }
-
-          function normalizeImageEntries(images, cover) {
-            const list = [];
-            for (const entry of images) {
-              let ref;
-              if (typeof entry === 'object' && entry) {
-                // For object entries, prefer filename over path for consistency
-                ref = normalizeImageRef(entry.filename || entry.src || entry.file || entry.path || entry.url);
-              } else {
-                ref = normalizeImageRef(entry);
-              }
-              if (ref) list.push(ref);
-            }
-            
-            // Handle cover image
-            let coverRef;
-            if (typeof cover === 'object' && cover) {
-              coverRef = normalizeImageRef(cover.filename || cover.src || cover.file || cover.path || cover.url);
-            } else {
-              coverRef = normalizeImageRef(cover);
-            }
-            
-            if (coverRef && !list.includes(coverRef)) {
-              list.unshift(coverRef);
-            }
-            return list; // Show all images, no limit
-          }  function encodeSegments(path) {
-    return path.split('/').filter(Boolean).map(seg => encodeURIComponent(seg)).join('/');
-  }
-
-  function buildImageUrl(pathSegments, imageRef) {
-    if (!imageRef) return '';
-    if (/^(https?:)?\/\//i.test(imageRef) || imageRef.startsWith('data:')) {
-      return imageRef;
-    }
-    const normalized = normalizeImageRef(imageRef);
-    if (!normalized) return '';
-    if (normalized.startsWith('src/')) {
-      return RAW_ROOT + normalized;
-    }
-    if (normalized.startsWith('images/')) {
-      return RAW_ROOT + normalized;
-    }
-    if (normalized.startsWith('Portfolios/')) {
-      return `${RAW_ROOT}src/images/${encodeSegments(normalized)}`;
-    }
-    if (normalized.startsWith('../')) {
-      const trimmed = normalized.replace(/^\.\.\/+/, '');
-      return `${RAW_ROOT}${encodeSegments(trimmed)}`;
-    }
-    if (normalized.includes('/')) {
-      return `${RAW_ROOT}${PATH_PREFIX}${encodeSegments(normalized)}`;
-    }
-    const basePath = pathSegments.map(seg => encodeURIComponent(seg)).join('/');
-    return `${RAW_ROOT}${PATH_PREFIX}${basePath}/${encodeURIComponent(normalized)}`;
-  }
-
-  function dedupeItems(items) {
-    const seen = new Set();
-    const result = [];
-    for (const item of items) {
-      const key = `${item.id || ''}|${item.folderKey}|${item.cover || ''}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      result.push(item);
-    }
-    return result;
-  }
-
-          function extractDate(entry) {
-            const dateData = entry.date || entry.datetime || entry.metaDate || entry.eventDate || entry.concertDate || null;
-            const displayCandidates = [entry.dateDisplay, entry.displayDate, entry.prettyDate, entry.dateText];
-            const isoCandidates = [];
-            
-            // Look for ISO dates in various fields
-            if (typeof entry.dateISO === 'string') isoCandidates.push(entry.dateISO);
-            if (typeof entry.dateIso === 'string') isoCandidates.push(entry.dateIso);
-            if (typeof entry.date === 'string') isoCandidates.push(entry.date);
-            if (typeof entry.lastUpdated === 'string') isoCandidates.push(entry.lastUpdated);
-            if (typeof entry.generatedAt === 'string') isoCandidates.push(entry.generatedAt);
-            if (typeof entry.generated === 'string') isoCandidates.push(entry.generated);
-
-            // Handle nested date objects (common in manifests)
-            if (dateData && typeof dateData === 'object') {
-              if (typeof dateData.iso === 'string') isoCandidates.push(dateData.iso);
-              if (typeof dateData.utc === 'string') isoCandidates.push(dateData.utc);
-              if (typeof dateData.value === 'string') isoCandidates.push(dateData.value);
-              
-              // Construct ISO date from year/month/day
-              if (dateData.year && dateData.month) {
-                const day = dateData.day || 1;
-                const iso = `${dateData.year}-${String(dateData.month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                isoCandidates.push(iso);
-              }
-              
-              // Add display candidates
-              if (dateData.display) displayCandidates.push(dateData.display);
-              if (dateData.dateDisplay) displayCandidates.push(dateData.dateDisplay);
-              if (dateData.monthName && dateData.year) {
-                displayCandidates.push(`${dateData.monthName} ${dateData.year}`);
-              }
-            }
-            
-            // Handle concert-specific date formats
-            if (entry.concertDate && typeof entry.concertDate === 'object') {
-              if (entry.concertDate.iso) isoCandidates.push(entry.concertDate.iso);
-              if (entry.concertDate.monthYear) displayCandidates.push(entry.concertDate.monthYear);
-            }
-            
-            // Handle event-specific date formats  
-            if (entry.eventDate && typeof entry.eventDate === 'object') {
-              if (entry.eventDate.iso) isoCandidates.push(entry.eventDate.iso);
-            }
-
-            // Find the best ISO date
-            let iso = isoCandidates.find(Boolean) || null;
-            let value = iso ? Date.parse(iso.replace(/\//g, '-')) : NaN;
-            
-            // If no valid date found, try to extract from filename or use current date as fallback
-            if (!Number.isFinite(value)) {
-              // Try to extract date from first image filename (common pattern: YYMMDD or YYYYMMDD)
-              if (entry.images && entry.images.length > 0) {
-                const firstImage = entry.images[0];
-                const filename = typeof firstImage === 'object' ? firstImage.filename : firstImage;
-                if (filename) {
-                  // Look for YYMMDD pattern (e.g., 250417)
-                  const match6 = filename.match(/^(\d{6})/);
-                  if (match6) {
-                    const dateStr = match6[1];
-                    const year = parseInt(dateStr.substring(0, 2)) + 2000; // Assume 2000s
-                    const month = parseInt(dateStr.substring(2, 4));
-                    const day = parseInt(dateStr.substring(4, 6));
-                    if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
-                      iso = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                      value = Date.parse(iso);
-                    }
-                  }
-                  // Look for YYYYMMDD pattern (e.g., 20250417)
-                  if (!Number.isFinite(value)) {
-                    const match8 = filename.match(/^(\d{8})/);
-                    if (match8) {
-                      const dateStr = match8[1];
-                      const year = parseInt(dateStr.substring(0, 4));
-                      const month = parseInt(dateStr.substring(4, 6));
-                      const day = parseInt(dateStr.substring(6, 8));
-                      if (year >= 2000 && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
-                        iso = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                        value = Date.parse(iso);
-                      }
-                    }
-                  }
-                }
-              }
-              
-              // Final fallback: use a very old date so it appears last
-              if (!Number.isFinite(value)) {
-                value = 0;
-                iso = null;
-              }
-            }
-            
-            // Generate display text
-            let display = displayCandidates.find(Boolean) || '';
-            if (!display && iso) {
-              try {
-                display = new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long' });
-              } catch {
-                display = iso;
-              }
-            }
-            
-            return { iso, display, value };
-          }          function normalizeItems(manifest, rootSegments = []) {
-            // Handle different manifest structures
-            let rawItems = [];
-            if (Array.isArray(manifest?.items)) {
-              rawItems = manifest.items;
-            } else if (Array.isArray(manifest?.bands)) {
-              // Concert manifest structure
-              rawItems = manifest.bands;
-            } else if (Array.isArray(manifest?.events)) {
-              // Events/Journalism manifest structure
-              rawItems = manifest.events;
-            }
-            
-            logDebug(`Processing ${rawItems.length} raw items from manifest`);
-            return rawItems
-              .map((item, index) => {
-                // Extract folder path, handling Windows backslashes
-                let folderPath = cleanPath(item.folderPath || item.path || item.source || '');
-                
-                // If no direct folderPath, try to extract from images or other fields
-                if (!folderPath && item.images && item.images.length > 0) {
-                  const firstImage = item.images[0];
-                  if (typeof firstImage === 'object' && firstImage.folderName) {
-                    folderPath = cleanPath(firstImage.folderName);
-                  } else if (typeof firstImage === 'object' && firstImage.path) {
-                    // Extract folder from full image path
-                    const imagePath = cleanPath(firstImage.path);
-                    const pathParts = imagePath.split('/').filter(Boolean);
-                    if (pathParts.length > 1) {
-                      pathParts.pop(); // Remove filename
-                      folderPath = pathParts.join('/');
-                    }
-                  }
-                }
-                
-                // Convert Windows backslashes to forward slashes
-                folderPath = folderPath.replace(/\\/g, '/');
-                const rawParts = folderPath ? folderPath.split('/').filter(Boolean) : [];
-                const parts = rawParts.length ? rawParts : [];
-                
-                // Skip items without valid path
-                if (!parts.length) return null;
-
-                const pathSegments = resolvePathSegments(parts, item, rootSegments);
-                if (!pathSegments.length) return null;
-
-                const rawImages = Array.isArray(item.images) ? item.images : [];
-                const coverCandidate = item.coverImage || item.cover || item.heroImage || item.thumbnail || null;
-                const images = normalizeImageEntries(rawImages, coverCandidate);
-                if (!images.length) return null;        // Shuffle the images array to randomize the cover selection
-        const shuffledImages = [...images];
-        for (let i = shuffledImages.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]];
+    async function fetchManifest(url, forceRefresh = false) {
+      if (!forceRefresh) {
+        const cacheHit = readCache(url);
+        if (cacheHit) {
+          logDebug('Using cached manifest', url);
+          return cacheHit;
         }
+      }
 
-        const { iso, display, value } = extractDate(item);
-        const id = item.id || item.slug || item.uid || `${pathSegments.join('-')}-${index}`;
-        
-        // Detect "fresh albums" - albums likely to have new photos added recently
-        const imageCount = rawImages.length;
-        const lastGenerated = item.lastGenerated || item.generated || item.lastUpdated;
-        let albumFreshnessBoost = 1;
-        
-        // Boost albums that were recently generated/updated (likely have new photos)
-        if (lastGenerated) {
-          const genTime = Date.parse(lastGenerated);
-          if (!isNaN(genTime)) {
-            const daysOld = (Date.now() - genTime) / (1000 * 60 * 60 * 24);
-            if (daysOld < 7) { // Generated in last week
-              albumFreshnessBoost = 3; // Strong boost for recently updated albums
-              logDebug(`FRESH ALBUM: "${item.title || folderPath}" updated ${Math.floor(daysOld)} days ago`);
-            } else if (daysOld < 30) {
-              albumFreshnessBoost = 1.5; // Moderate boost for recently updated albums
-            }
-          }
+      // Add cache-busting timestamp for fresh data
+      const separator = url.includes('?') ? '&' : '?';
+      const cacheBustedUrl = `${url}${separator}_t=${Date.now()}`;
+      const response = await fetch(cacheBustedUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      const json = await response.json();
+
+      // Check if content has changed since last fetch
+      const cached = readCache(url);
+      if (cached && JSON.stringify(cached) !== JSON.stringify(json)) {
+        logDebug('MANIFEST CHANGED - New content detected!', url);
+
+        // Show notification for new content
+        if (metaSource) {
+          const originalText = metaSource.textContent;
+          metaSource.textContent = '🔄 NEW';
+          metaSource.style.color = '#4ade80';
+          setTimeout(() => {
+            metaSource.textContent = originalText;
+            metaSource.style.color = '';
+          }, 3000);
         }
-        
-        // Also boost albums with many images (likely event albums with new photos)
-        if (imageCount > 50) {
-          albumFreshnessBoost *= 1.2; // Slight boost for large albums
-        }
-                // Enhanced type detection from manifest data
-                let type;
-                if (item.type === 'Events' || item.category === 'Events Photography') {
-                  type = 'events';
-                } else if (item.type === 'Journalism' || item.category === 'Journalism Photography') {
-                  type = 'journalism';
-                } else if (item.type === 'Concert' || item.category === 'Concert Photography') {
-                  type = 'concert';
-                } else {
-                  type = canonicalizeType(item.type || item.category || pathSegments[0] || 'portfolio');
-                }
-                const typeLabel = titleCase(type).trim();        // Enhanced title extraction - prioritize specific names by content type
-        let title;
-        
-        // For journalism, extract the actual article title from folder path
-        if (type === 'journalism') {
-          // Path format: "Journalism/Events/The Rooney Rule" or "Journalism/Politics/Butler Protest"
-          // We want the last segment which is the actual article title
-          const folderSegments = folderPath.split('/').filter(Boolean);
-          if (folderSegments.length >= 3) {
-            // Use the last segment as the article title
-            title = folderSegments[folderSegments.length - 1];
-          } else if (folderSegments.length >= 2) {
-            // Fallback to second-to-last segment
-            title = folderSegments[folderSegments.length - 1];
-          }
-          
-          // If we still don't have a good title, try image filename
-          if (!title || title === 'Events' || title === 'Politics') {
-            const firstImage = rawImages[0];
-            if (typeof firstImage === 'string') {
-              // Extract title from filename like "250417 The Rooney Rule_CAL3148.jpg"
-              const match = firstImage.match(/^\d+\s+(.+?)_/);
-              if (match) {
-                title = match[1];
-              }
-            }
-          }
-        }
-        
-        // For other types, use standard fields
-        if (!title) {
-          const titleCandidates = [
-            item.title,
-            item.name,
-            item.eventName,
-            item.bandName,
-            item.articleTitle,
-            item.headline
-          ].filter(Boolean);
-          
-          if (titleCandidates.length > 0) {
-            title = titleCandidates[0];
+      }
+
+      writeCache(url, json);
+      return json;
+    }
+
+    function cleanPath(value) {
+      if (!value) return '';
+      return String(value).replace(/\\+/g, '/').trim();
+    }
+
+    function canonicalizeType(value) {
+      if (!value) return 'portfolio';
+      const normalized = String(value).trim().toLowerCase();
+      if (!normalized) return 'portfolio';
+      if (
+        ['concert', 'concerts', 'music', 'music photography', 'concert photography'].includes(
+          normalized,
+        )
+      )
+        return 'concert';
+      if (
+        ['event', 'events', 'event photography', 'corporate', 'events photography'].includes(
+          normalized,
+        )
+      )
+        return 'events';
+      if (
+        [
+          'journalism',
+          'photojournalism',
+          'photo journalism',
+          'documentary',
+          'journalism photography',
+          'politics',
+        ].includes(normalized)
+      )
+        return 'journalism';
+      if (['portfolio', 'work', 'projects', 'featured'].includes(normalized)) return 'portfolio';
+      return normalized;
+    }
+
+    function titleCase(value) {
+      if (!value) return '';
+      return String(value)
+        .replace(/[_-]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+    }
+
+    function ensurePrefix(parts, prefix) {
+      if (!Array.isArray(prefix) || !prefix.length) {
+        return parts.slice();
+      }
+      const prefixLower = prefix.map((seg) => seg.toLowerCase());
+      const currentLower = parts.slice(0, prefix.length).map((seg) => seg.toLowerCase());
+      if (currentLower.join('/') === prefixLower.join('/')) {
+        return parts.slice();
+      }
+      return prefix.concat(parts);
+    }
+
+    function resolvePathSegments(parts, item, rootSegments) {
+      let resolved = parts.slice();
+
+      // Handle different portfolio types with their specific path structures
+      const itemType = item.type || item.category || '';
+
+      if (itemType === 'Journalism' || item.category === 'Journalism Photography') {
+        // For journalism items, ensure proper path structure
+        if (item.folderPath && item.folderPath.includes('\\')) {
+          const cleanedPath = item.folderPath.replace(/\\/g, '/');
+          const pathParts = cleanedPath.split('/').filter(Boolean);
+
+          if (pathParts.length > 0 && pathParts[0] !== 'Journalism') {
+            resolved = ['Journalism'].concat(pathParts);
           } else {
-            // Fallback to folder name or path segment
-            title = pathSegments[pathSegments.length - 1] || `Item ${index + 1}`;
+            resolved = pathParts;
+          }
+        } else if (item.images && item.images.length > 0) {
+          const firstImage = item.images[0];
+          const imagePath =
+            typeof firstImage === 'object' ? firstImage.folderName || firstImage.path || '' : '';
+          if (imagePath && imagePath.includes('\\')) {
+            const cleanedPath = imagePath.replace(/\\/g, '/');
+            const pathParts = cleanedPath.split('/').filter(Boolean);
+            if (pathParts.length > 1) {
+              pathParts.pop(); // Remove filename
+              if (pathParts[0] !== 'Journalism') {
+                resolved = ['Journalism'].concat(pathParts);
+              } else {
+                resolved = pathParts;
+              }
+            }
           }
         }
-        
-        // Clean the title
-        title = String(title).replace(/\s+/g, ' ').trim();
-        
-        // If title is still generic or matches type, try harder
-        if (title === type || title === typeLabel || 
-            title === 'Events' || title === 'Politics' || title === 'Journalism' ||
-            title === 'Concert' || title === 'Event') {
-          
-          // Try other fields or use folder name
-          title = item.eventName || item.name || item.id || 
-                  pathSegments[pathSegments.length - 1] || 
-                  `${typeLabel} ${index + 1}`;
+      } else if (
+        itemType === 'Concert' ||
+        item.category === 'Concert Photography' ||
+        itemType === 'Music'
+      ) {
+        // For concert items, ensure proper Concert path structure
+        if (item.bandName && item.concertDate) {
+          // Concert structure: Concert/Band Name/Month Year
+          const monthYear = item.concertDate?.monthYear || item.dateDisplay || 'Unknown Date';
+          resolved = ['Concert', item.bandName, monthYear];
+        } else if (item.folderPath) {
+          const cleanedPath = item.folderPath.replace(/\\/g, '/');
+          const pathParts = cleanedPath.split('/').filter(Boolean);
+          if (pathParts.length > 0 && pathParts[0] !== 'Concert') {
+            resolved = ['Concert'].concat(pathParts);
+          } else {
+            resolved = pathParts;
+          }
+        }
+      } else if (itemType === 'Events' || item.category === 'Events Photography') {
+        // For events items, ensure proper Events path structure
+        if (item.folderPath) {
+          const cleanedPath = item.folderPath.replace(/\\/g, '/');
+          const pathParts = cleanedPath.split('/').filter(Boolean);
+          if (pathParts.length > 0 && pathParts[0] !== 'Events') {
+            resolved = ['Events'].concat(pathParts);
+          } else {
+            resolved = pathParts;
+          }
+        } else if (item.eventName) {
+          resolved = ['Events', item.eventName];
+        }
+      } else {
+        // For other items, use standard logic but fix path separators
+        if (item.folderPath) {
+          resolved = item.folderPath.replace(/\\/g, '/').split('/').filter(Boolean);
+        } else {
+          resolved = parts.slice();
         }
 
-        // Get tags and handle journalism vs other types differently
-        let tags = Array.isArray(item.tags) ? item.tags.filter(Boolean) : [];
-        let primaryTag;
-        if (type === 'journalism') {
-          primaryTag = 'Journalism';
+        const itemBase = cleanPath(
+          item.basePath ||
+            item.base ||
+            item.collectionPath ||
+            item.rootPath ||
+            item.folderRoot ||
+            '',
+        );
+        if (itemBase) {
+          const baseParts = itemBase.split('/').filter(Boolean);
+          resolved = ensurePrefix(resolved, baseParts);
+        }
+        if (item.collection && typeof item.collection === 'string') {
+          const collectionParts = cleanPath(item.collection).split('/').filter(Boolean);
+          resolved = ensurePrefix(resolved, collectionParts);
+        }
+      }
+
+      resolved = ensurePrefix(resolved, rootSegments);
+      return resolved;
+    }
+    function extractRootSegments(url) {
+      try {
+        const parsed = new URL(url);
+        const segments = parsed.pathname.split('/').filter(Boolean);
+        const marker = segments.lastIndexOf('Portfolios');
+        if (marker === -1) return [];
+        return segments.slice(marker + 1, segments.length - 1);
+      } catch {
+        return [];
+      }
+    }
+
+    function normalizeImageRef(value) {
+      if (!value) return null;
+      const str = String(value).trim();
+      if (!str) return null;
+      return str.replace(/\\+/g, '/');
+    }
+
+    function normalizeImageEntries(images, cover) {
+      const list = [];
+      for (const entry of images) {
+        let ref;
+        if (typeof entry === 'object' && entry) {
+          // For object entries, prefer filename over path for consistency
+          ref = normalizeImageRef(
+            entry.filename || entry.src || entry.file || entry.path || entry.url,
+          );
         } else {
-          primaryTag = item.category || `${typeLabel} Photography`;
+          ref = normalizeImageRef(entry);
         }
-        
-        if (!tags.includes(primaryTag) && !tags.some(tag => tag.toLowerCase().includes(typeLabel.toLowerCase()))) {
-          tags.unshift(primaryTag);
+        if (ref) list.push(ref);
+      }
+
+      // Handle cover image
+      let coverRef;
+      if (typeof cover === 'object' && cover) {
+        coverRef = normalizeImageRef(
+          cover.filename || cover.src || cover.file || cover.path || cover.url,
+        );
+      } else {
+        coverRef = normalizeImageRef(cover);
+      }
+
+      if (coverRef && !list.includes(coverRef)) {
+        list.unshift(coverRef);
+      }
+      return list; // Show all images, no limit
+    }
+    function encodeSegments(path) {
+      return path
+        .split('/')
+        .filter(Boolean)
+        .map((seg) => encodeURIComponent(seg))
+        .join('/');
+    }
+
+    function buildImageUrl(pathSegments, imageRef) {
+      if (!imageRef) return '';
+      if (/^(https?:)?\/\//i.test(imageRef) || imageRef.startsWith('data:')) {
+        return imageRef;
+      }
+      const normalized = normalizeImageRef(imageRef);
+      if (!normalized) return '';
+      if (normalized.startsWith('src/')) {
+        return RAW_ROOT + normalized;
+      }
+      if (normalized.startsWith('images/')) {
+        return RAW_ROOT + normalized;
+      }
+      if (normalized.startsWith('Portfolios/')) {
+        return `${RAW_ROOT}src/images/${encodeSegments(normalized)}`;
+      }
+      if (normalized.startsWith('../')) {
+        const trimmed = normalized.replace(/^\.\.\/+/, '');
+        return `${RAW_ROOT}${encodeSegments(trimmed)}`;
+      }
+      if (normalized.includes('/')) {
+        return `${RAW_ROOT}${PATH_PREFIX}${encodeSegments(normalized)}`;
+      }
+      const basePath = pathSegments.map((seg) => encodeURIComponent(seg)).join('/');
+      return `${RAW_ROOT}${PATH_PREFIX}${basePath}/${encodeURIComponent(normalized)}`;
+    }
+
+    function dedupeItems(items) {
+      const seen = new Set();
+      const result = [];
+      for (const item of items) {
+        const key = `${item.id || ''}|${item.folderKey}|${item.cover || ''}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        result.push(item);
+      }
+      return result;
+    }
+
+    function extractDate(entry) {
+      const dateData =
+        entry.date ||
+        entry.datetime ||
+        entry.metaDate ||
+        entry.eventDate ||
+        entry.concertDate ||
+        null;
+      const displayCandidates = [
+        entry.dateDisplay,
+        entry.displayDate,
+        entry.prettyDate,
+        entry.dateText,
+      ];
+      const isoCandidates = [];
+
+      // Look for ISO dates in various fields
+      if (typeof entry.dateISO === 'string') isoCandidates.push(entry.dateISO);
+      if (typeof entry.dateIso === 'string') isoCandidates.push(entry.dateIso);
+      if (typeof entry.date === 'string') isoCandidates.push(entry.date);
+      if (typeof entry.lastUpdated === 'string') isoCandidates.push(entry.lastUpdated);
+      if (typeof entry.generatedAt === 'string') isoCandidates.push(entry.generatedAt);
+      if (typeof entry.generated === 'string') isoCandidates.push(entry.generated);
+
+      // Handle nested date objects (common in manifests)
+      if (dateData && typeof dateData === 'object') {
+        if (typeof dateData.iso === 'string') isoCandidates.push(dateData.iso);
+        if (typeof dateData.utc === 'string') isoCandidates.push(dateData.utc);
+        if (typeof dateData.value === 'string') isoCandidates.push(dateData.value);
+
+        // Construct ISO date from year/month/day
+        if (dateData.year && dateData.month) {
+          const day = dateData.day || 1;
+          const iso = `${dateData.year}-${String(dateData.month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          isoCandidates.push(iso);
         }
-        
-        const sourceLabel = titleCase(
-          item.collection || item.collectionName || item.source || pathSegments[0] || typeLabel || 'Portfolio'
+
+        // Add display candidates
+        if (dateData.display) displayCandidates.push(dateData.display);
+        if (dateData.dateDisplay) displayCandidates.push(dateData.dateDisplay);
+        if (dateData.monthName && dateData.year) {
+          displayCandidates.push(`${dateData.monthName} ${dateData.year}`);
+        }
+      }
+
+      // Handle concert-specific date formats
+      if (entry.concertDate && typeof entry.concertDate === 'object') {
+        if (entry.concertDate.iso) isoCandidates.push(entry.concertDate.iso);
+        if (entry.concertDate.monthYear) displayCandidates.push(entry.concertDate.monthYear);
+      }
+
+      // Handle event-specific date formats
+      if (entry.eventDate && typeof entry.eventDate === 'object') {
+        if (entry.eventDate.iso) isoCandidates.push(entry.eventDate.iso);
+      }
+
+      // Find the best ISO date
+      let iso = isoCandidates.find(Boolean) || null;
+      let value = iso ? Date.parse(iso.replace(/\//g, '-')) : NaN;
+
+      // If no valid date found, try to extract from filename or use current date as fallback
+      if (!Number.isFinite(value)) {
+        // Try to extract date from first image filename (common pattern: YYMMDD or YYYYMMDD)
+        if (entry.images && entry.images.length > 0) {
+          const firstImage = entry.images[0];
+          const filename = typeof firstImage === 'object' ? firstImage.filename : firstImage;
+          if (filename) {
+            // Look for YYMMDD pattern (e.g., 250417)
+            const match6 = filename.match(/^(\d{6})/);
+            if (match6) {
+              const dateStr = match6[1];
+              const year = parseInt(dateStr.substring(0, 2)) + 2000; // Assume 2000s
+              const month = parseInt(dateStr.substring(2, 4));
+              const day = parseInt(dateStr.substring(4, 6));
+              if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                iso = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                value = Date.parse(iso);
+              }
+            }
+            // Look for YYYYMMDD pattern (e.g., 20250417)
+            if (!Number.isFinite(value)) {
+              const match8 = filename.match(/^(\d{8})/);
+              if (match8) {
+                const dateStr = match8[1];
+                const year = parseInt(dateStr.substring(0, 4));
+                const month = parseInt(dateStr.substring(4, 6));
+                const day = parseInt(dateStr.substring(6, 8));
+                if (year >= 2000 && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                  iso = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                  value = Date.parse(iso);
+                }
+              }
+            }
+          }
+        }
+
+        // Final fallback: use a very old date so it appears last
+        if (!Number.isFinite(value)) {
+          value = 0;
+          iso = null;
+        }
+      }
+
+      // Generate display text
+      let display = displayCandidates.find(Boolean) || '';
+      if (!display && iso) {
+        try {
+          display = new Date(value).toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+          });
+        } catch {
+          display = iso;
+        }
+      }
+
+      return { iso, display, value };
+    }
+    function normalizeItems(manifest, rootSegments = []) {
+      // Handle different manifest structures
+      let rawItems = [];
+      if (Array.isArray(manifest?.items)) {
+        rawItems = manifest.items;
+      } else if (Array.isArray(manifest?.bands)) {
+        // Concert manifest structure
+        rawItems = manifest.bands;
+      } else if (Array.isArray(manifest?.events)) {
+        // Events/Journalism manifest structure
+        rawItems = manifest.events;
+      }
+
+      logDebug(`Processing ${rawItems.length} raw items from manifest`);
+      return rawItems
+        .map((item, index) => {
+          // Extract folder path, handling Windows backslashes
+          let folderPath = cleanPath(item.folderPath || item.path || item.source || '');
+
+          // If no direct folderPath, try to extract from images or other fields
+          if (!folderPath && item.images && item.images.length > 0) {
+            const firstImage = item.images[0];
+            if (typeof firstImage === 'object' && firstImage.folderName) {
+              folderPath = cleanPath(firstImage.folderName);
+            } else if (typeof firstImage === 'object' && firstImage.path) {
+              // Extract folder from full image path
+              const imagePath = cleanPath(firstImage.path);
+              const pathParts = imagePath.split('/').filter(Boolean);
+              if (pathParts.length > 1) {
+                pathParts.pop(); // Remove filename
+                folderPath = pathParts.join('/');
+              }
+            }
+          }
+
+          // Convert Windows backslashes to forward slashes
+          folderPath = folderPath.replace(/\\/g, '/');
+          const rawParts = folderPath ? folderPath.split('/').filter(Boolean) : [];
+          const parts = rawParts.length ? rawParts : [];
+
+          // Skip items without valid path
+          if (!parts.length) return null;
+
+          const pathSegments = resolvePathSegments(parts, item, rootSegments);
+          if (!pathSegments.length) return null;
+
+          const rawImages = Array.isArray(item.images) ? item.images : [];
+          const coverCandidate =
+            item.coverImage || item.cover || item.heroImage || item.thumbnail || null;
+          const images = normalizeImageEntries(rawImages, coverCandidate);
+          if (!images.length) return null; // Shuffle the images array to randomize the cover selection
+          const shuffledImages = [...images];
+          for (let i = shuffledImages.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]];
+          }
+
+          const { iso, display, value } = extractDate(item);
+          const id = item.id || item.slug || item.uid || `${pathSegments.join('-')}-${index}`;
+
+          // Detect "fresh albums" - albums likely to have new photos added recently
+          const imageCount = rawImages.length;
+          const lastGenerated = item.lastGenerated || item.generated || item.lastUpdated;
+          let albumFreshnessBoost = 1;
+
+          // Boost albums that were recently generated/updated (likely have new photos)
+          if (lastGenerated) {
+            const genTime = Date.parse(lastGenerated);
+            if (!isNaN(genTime)) {
+              const daysOld = (Date.now() - genTime) / (1000 * 60 * 60 * 24);
+              if (daysOld < 7) {
+                // Generated in last week
+                albumFreshnessBoost = 3; // Strong boost for recently updated albums
+                logDebug(
+                  `FRESH ALBUM: "${item.title || folderPath}" updated ${Math.floor(daysOld)} days ago`,
+                );
+              } else if (daysOld < 30) {
+                albumFreshnessBoost = 1.5; // Moderate boost for recently updated albums
+              }
+            }
+          }
+
+          // Also boost albums with many images (likely event albums with new photos)
+          if (imageCount > 50) {
+            albumFreshnessBoost *= 1.2; // Slight boost for large albums
+          }
+          // Enhanced type detection from manifest data
+          let type;
+          if (item.type === 'Events' || item.category === 'Events Photography') {
+            type = 'events';
+          } else if (item.type === 'Journalism' || item.category === 'Journalism Photography') {
+            type = 'journalism';
+          } else if (item.type === 'Concert' || item.category === 'Concert Photography') {
+            type = 'concert';
+          } else {
+            type = canonicalizeType(item.type || item.category || pathSegments[0] || 'portfolio');
+          }
+          const typeLabel = titleCase(type).trim(); // Enhanced title extraction - prioritize specific names by content type
+          let title;
+
+          // For journalism, extract the actual article title from folder path
+          if (type === 'journalism') {
+            // Path format: "Journalism/Events/The Rooney Rule" or "Journalism/Politics/Butler Protest"
+            // We want the last segment which is the actual article title
+            const folderSegments = folderPath.split('/').filter(Boolean);
+            if (folderSegments.length >= 3) {
+              // Use the last segment as the article title
+              title = folderSegments[folderSegments.length - 1];
+            } else if (folderSegments.length >= 2) {
+              // Fallback to second-to-last segment
+              title = folderSegments[folderSegments.length - 1];
+            }
+
+            // If we still don't have a good title, try image filename
+            if (!title || title === 'Events' || title === 'Politics') {
+              const firstImage = rawImages[0];
+              if (typeof firstImage === 'string') {
+                // Extract title from filename like "250417 The Rooney Rule_CAL3148.jpg"
+                const match = firstImage.match(/^\d+\s+(.+?)_/);
+                if (match) {
+                  title = match[1];
+                }
+              }
+            }
+          }
+
+          // For other types, use standard fields
+          if (!title) {
+            const titleCandidates = [
+              item.title,
+              item.name,
+              item.eventName,
+              item.bandName,
+              item.articleTitle,
+              item.headline,
+            ].filter(Boolean);
+
+            if (titleCandidates.length > 0) {
+              title = titleCandidates[0];
+            } else {
+              // Fallback to folder name or path segment
+              title = pathSegments[pathSegments.length - 1] || `Item ${index + 1}`;
+            }
+          }
+
+          // Clean the title
+          title = String(title).replace(/\s+/g, ' ').trim();
+
+          // If title is still generic or matches type, try harder
+          if (
+            title === type ||
+            title === typeLabel ||
+            title === 'Events' ||
+            title === 'Politics' ||
+            title === 'Journalism' ||
+            title === 'Concert' ||
+            title === 'Event'
+          ) {
+            // Try other fields or use folder name
+            title =
+              item.eventName ||
+              item.name ||
+              item.id ||
+              pathSegments[pathSegments.length - 1] ||
+              `${typeLabel} ${index + 1}`;
+          }
+
+          // Get tags and handle journalism vs other types differently
+          let tags = Array.isArray(item.tags) ? item.tags.filter(Boolean) : [];
+          let primaryTag;
+          if (type === 'journalism') {
+            primaryTag = 'Journalism';
+          } else {
+            primaryTag = item.category || `${typeLabel} Photography`;
+          }
+
+          if (
+            !tags.includes(primaryTag) &&
+            !tags.some((tag) => tag.toLowerCase().includes(typeLabel.toLowerCase()))
+          ) {
+            tags.unshift(primaryTag);
+          }
+
+          const sourceLabel = titleCase(
+            item.collection ||
+              item.collectionName ||
+              item.source ||
+              pathSegments[0] ||
+              typeLabel ||
+              'Portfolio',
+          );
+
+          // Clean up date display
+          let cleanDateDisplay = display
+            ? String(display)
+                .replace(/\s+/g, ' ')
+                .replace(/undefined\s*/g, '')
+                .replace(/^\s+|\s+$/g, '')
+            : '';
+          if (!cleanDateDisplay && iso) {
+            try {
+              cleanDateDisplay = new Date(value).toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+              });
+            } catch {
+              cleanDateDisplay = iso;
+            }
+          }
+
+          return {
+            id,
+            title,
+            type,
+            typeLabel,
+            source: sourceLabel,
+            pathSegments,
+            folderKey: pathSegments.join('/'),
+            dateDisplay: cleanDateDisplay,
+            dateValue: value * albumFreshnessBoost, // Apply freshness boost to prioritize new/updated albums
+            isoDate: iso,
+            cover: shuffledImages[0], // Use first image from shuffled array
+            images: shuffledImages, // Use shuffled order for lightbox too
+            tags: tags.slice(0, 4),
+          };
+        })
+        .filter(Boolean);
+    }
+
+    function applyRangeFilter(items) {
+      if (!Number.isFinite(RANGE_DAYS) || RANGE_DAYS <= 0) {
+        logDebug('Range filter disabled - showing all items');
+        return items;
+      }
+
+      const cutoff = Date.now() - RANGE_DAYS * 24 * 60 * 60 * 1000;
+      const filtered = items.filter((item) => item.dateValue >= cutoff);
+      logDebug(`Range filter: ${items.length} items -> ${filtered.length} items after filtering`);
+
+      return filtered.length ? filtered : items;
+    }
+
+    function ensureDiverseSelection(items, targetCount) {
+      if (items.length <= targetCount) {
+        // Even if we have fewer items than target, still sort by most recent
+        return items.sort((a, b) => b.dateValue - a.dateValue);
+      }
+
+      const byType = {};
+      items.forEach((item) => {
+        // Use the original type from manifest, but normalize for grouping
+        let type = canonicalizeType(item.type);
+
+        // Special handling for Events vs Journalism distinction
+        if (item.category === 'Events Photography' || item.type === 'Events') {
+          type = 'events';
+        } else if (item.category === 'Journalism Photography' || item.type === 'Journalism') {
+          type = 'journalism';
+        } else if (
+          item.category === 'Concert Photography' ||
+          item.type === 'Concert' ||
+          item.type === 'Music'
+        ) {
+          type = 'concert';
+        }
+
+        if (!byType[type]) byType[type] = [];
+        byType[type].push(item);
+      });
+
+      const types = Object.keys(byType);
+
+      // Add freshness boost - prioritize very recent content (last 30 days)
+      const now = Date.now();
+      const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+
+      types.forEach((type) => {
+        // Calculate freshness score for each item
+        byType[type].forEach((item) => {
+          item.freshnessScore = item.dateValue;
+
+          // Boost score for very recent content (last 30 days)
+          if (item.dateValue > thirtyDaysAgo) {
+            const daysOld = (now - item.dateValue) / (24 * 60 * 60 * 1000);
+            const boostMultiplier = Math.max(1, 10 - daysOld / 3); // Higher boost for newer content
+            item.freshnessScore = item.dateValue * boostMultiplier;
+            logDebug(
+              `FRESH CONTENT: "${item.title}" (${Math.floor(daysOld)} days old) - boost: ${boostMultiplier.toFixed(1)}x`,
+            );
+          }
+        });
+
+        // Sort by freshness score (which heavily favors recent additions)
+        byType[type].sort((a, b) => b.freshnessScore - a.freshnessScore);
+        logDebug(
+          `Type "${type}": ${byType[type].length} items, most recent: ${byType[type][0]?.title} (${byType[type][0]?.dateDisplay})`,
+        );
+      });
+
+      // Calculate fair distribution - ensure each type gets recent items
+      const basePerType = Math.floor(targetCount / types.length);
+      const remainder = targetCount % types.length;
+
+      logDebug(
+        `Diverse selection: ${types.length} types, ${basePerType} base per type, ${remainder} remainder`,
+      );
+
+      const selected = [];
+
+      // First, give each type their base allocation of most recent items
+      types.forEach((type, index) => {
+        const typeItems = byType[type]; // Already sorted by most recent
+        const allocation = basePerType + (index < remainder ? 1 : 0);
+        const take = Math.min(allocation, typeItems.length);
+
+        selected.push(...typeItems.slice(0, take));
+        logDebug(
+          `Type "${type}": allocated ${take} most recent items (wanted ${allocation}, had ${typeItems.length})`,
+        );
+      });
+
+      // If we still need more items (rare case), take the next most recent from any type
+      const stillNeeded = targetCount - selected.length;
+      if (stillNeeded > 0) {
+        const allRemaining = [];
+        types.forEach((type) => {
+          const typeItems = byType[type];
+          const alreadyTaken = Math.min(
+            basePerType + (types.indexOf(type) < remainder ? 1 : 0),
+            typeItems.length,
+          );
+          allRemaining.push(...typeItems.slice(alreadyTaken));
+        });
+
+        allRemaining.sort((a, b) => b.dateValue - a.dateValue);
+        selected.push(...allRemaining.slice(0, stillNeeded));
+        logDebug(
+          `Added ${Math.min(stillNeeded, allRemaining.length)} additional most recent items`,
+        );
+      }
+
+      // Final sort by most recent across all selected items
+      return selected.sort((a, b) => b.dateValue - a.dateValue);
+    }
+
+    async function loadAndRender(forceRefresh = false) {
+      try {
+        logDebug('Loading featured portfolio...', {
+          forceRefresh,
+          sources: manifestSources.length,
+        });
+
+        let manifest = null;
+        let usedUrl = '';
+
+        // Try the universal portfolio manifest first
+        try {
+          const universalUrl = resolveManifestUrl('src/images/Portfolios/portfolio-manifest.json');
+          logDebug(`Trying universal manifest: ${universalUrl}`);
+          manifest = await fetchManifest(universalUrl, forceRefresh);
+          usedUrl = 'src/images/Portfolios/portfolio-manifest.json';
+          logDebug('Successfully loaded universal portfolio manifest');
+        } catch (error) {
+          logDebug('Universal manifest failed, trying individual manifests...', error.message);
+
+          // If universal fails, combine multiple individual manifests
+          const combinedItems = [];
+          const successfulManifests = [];
+
+          for (const candidate of [
+            'src/images/Portfolios/Concert/concert-manifest.json',
+            'src/images/Portfolios/Events/events-manifest.json',
+            'src/images/Portfolios/Journalism/journalism-manifest.json',
+          ]) {
+            try {
+              const url = resolveManifestUrl(candidate);
+              logDebug(`Loading individual manifest: ${candidate}`);
+              const individualManifest = await fetchManifest(url, forceRefresh);
+
+              // Handle different manifest structures
+              let items = [];
+              if (Array.isArray(individualManifest?.items)) {
+                items = individualManifest.items;
+              } else if (Array.isArray(individualManifest?.bands)) {
+                // Concert manifest structure
+                items = individualManifest.bands || [];
+              } else if (Array.isArray(individualManifest?.events)) {
+                // Events/Journalism manifest structure
+                items = individualManifest.events || [];
+              }
+
+              if (items.length > 0) {
+                combinedItems.push(...items);
+                successfulManifests.push(candidate);
+                logDebug(`Added ${items.length} items from ${candidate}`);
+              }
+            } catch (manifestError) {
+              logDebug(`Individual manifest failed: ${candidate}`, manifestError.message);
+            }
+          }
+
+          if (combinedItems.length > 0) {
+            manifest = { items: combinedItems };
+            usedUrl = `Combined: ${successfulManifests.join(', ')}`;
+            logDebug(
+              `Successfully combined ${combinedItems.length} items from ${successfulManifests.length} manifests`,
+            );
+          }
+        }
+
+        if (!manifest || !manifest.items || manifest.items.length === 0) {
+          throw new Error('No valid manifest found or no items available');
+        }
+
+        activeManifestUrl = usedUrl;
+        logDebug('Manifest loaded successfully', usedUrl);
+
+        const rootSegments = extractRootSegments(
+          resolveManifestUrl('src/images/Portfolios/portfolio-manifest.json'),
+        );
+        const allItems = normalizeItems(manifest, rootSegments);
+
+        logDebug(`Normalized ${allItems.length} items from manifest`);
+
+        const rangeFiltered = applyRangeFilter(allItems);
+        logDebug(`After range filter: ${rangeFiltered.length} items`);
+
+        let selectedItems;
+        if (FORCE_DIVERSE && rangeFiltered.length > TARGET_PANES) {
+          selectedItems = ensureDiverseSelection(rangeFiltered, TARGET_PANES);
+          logDebug(`After diverse selection: ${selectedItems.length} items`);
+        } else {
+          selectedItems = rangeFiltered
+            .sort((a, b) => b.dateValue - a.dateValue)
+            .slice(0, TARGET_PANES);
+          logDebug(`After simple selection: ${selectedItems.length} items`);
+        }
+
+        // Log items by type to debug diversity and recency
+        logDebug(
+          'All items sorted by date:',
+          rangeFiltered.slice(0, 10).map((item) => ({
+            title: item.title,
+            type: item.type,
+            date: item.dateDisplay,
+            dateValue: item.dateValue,
+            iso: item.isoDate,
+          })),
         );
 
-        // Clean up date display
-        let cleanDateDisplay = display ? String(display).replace(/\s+/g, ' ').replace(/undefined\s*/g, '').replace(/^\s+|\s+$/g, '') : '';
-        if (!cleanDateDisplay && iso) {
-          try {
-            cleanDateDisplay = new Date(value).toLocaleDateString(undefined, { year: 'numeric', month: 'long' });
-          } catch {
-            cleanDateDisplay = iso;
+        logDebug(
+          'Selected items by type:',
+          selectedItems.map((item) => ({
+            title: item.title,
+            type: item.type,
+            category: item.typeLabel,
+            date: item.dateDisplay,
+            dateValue: item.dateValue,
+            pathSegments: item.pathSegments,
+          })),
+        );
+        const uniqueItems = dedupeItems(selectedItems);
+        logDebug(`After deduplication: ${uniqueItems.length} items`);
+
+        // Enhanced type distribution logging
+        const typeDistribution = {};
+        const categoryDistribution = {};
+        uniqueItems.forEach((item) => {
+          typeDistribution[item.type] = (typeDistribution[item.type] || 0) + 1;
+          categoryDistribution[item.typeLabel] = (categoryDistribution[item.typeLabel] || 0) + 1;
+        });
+        logDebug('Final type distribution:', typeDistribution);
+        logDebug('Final category distribution:', categoryDistribution);
+        logDebug(
+          'Sample items:',
+          uniqueItems.slice(0, 3).map((item) => ({
+            title: item.title,
+            type: item.type,
+            category: item.typeLabel,
+            originalType: selectedItems.find((si) => si.id === item.id)?.type,
+            pathSegments: item.pathSegments,
+          })),
+        );
+
+        // Shuffle featured items before rendering
+        function shuffle(arr) {
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
           }
+          return arr;
+        }
+        renderGallery(shuffle(uniqueItems));
+      } catch (error) {
+        console.error('Featured portfolio loading failed:', error);
+        showError(`Failed to load featured portfolio: ${error.message}`);
+      }
+    }
+
+    function showError(message) {
+      loading.style.display = 'none';
+      grid.innerHTML = `<div class="featured-error" role="alert">${message}</div>`;
+      metaCount.textContent = '0';
+      metaUpdated.textContent = 'Failed';
+      metaSource.textContent = 'All Portfolios | Error';
+    }
+
+    function renderGallery(slots) {
+      try {
+        loading.style.display = 'none';
+        grid.innerHTML = '';
+        grid.classList.remove('loaded');
+
+        if (!slots.length) {
+          grid.innerHTML = '<div class="featured-empty">No featured items available.</div>';
+          return;
         }
 
-        return {
-          id,
-          title,
-          type,
-          typeLabel,
-          source: sourceLabel,
-          pathSegments,
-          folderKey: pathSegments.join('/'),
-          dateDisplay: cleanDateDisplay,
-          dateValue: value * albumFreshnessBoost, // Apply freshness boost to prioritize new/updated albums
-          isoDate: iso,
-          cover: shuffledImages[0], // Use first image from shuffled array
-          images: shuffledImages,   // Use shuffled order for lightbox too
-          tags: tags.slice(0, 4)
-        };
-      })
-      .filter(Boolean);
-  }
+        metaCount.textContent = slots.length;
+        metaUpdated.textContent = new Date().toLocaleDateString();
+        const today = new Date();
+        const dateStr = today.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        metaSource.textContent = `All Portfolios | ${dateStr}`;
 
-  function applyRangeFilter(items) {
-    if (!Number.isFinite(RANGE_DAYS) || RANGE_DAYS <= 0) {
-      logDebug('Range filter disabled - showing all items');
-      return items;
+        const fragment = document.createDocumentFragment();
+        const cards = [];
+
+        slots.forEach((slot, index) => {
+          const card = document.createElement('article');
+          card.className = 'featured-card loading';
+          card.setAttribute('role', 'button');
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('aria-label', `View ${slot.title} gallery`);
+
+          const img = document.createElement('img');
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.alt = slot.title;
+
+          const info = document.createElement('div');
+          info.className = 'featured-info';
+
+          const title = document.createElement('h3');
+          title.className = 'featured-title';
+          title.textContent = slot.title;
+
+          const meta = document.createElement('div');
+          meta.className = 'featured-meta';
+
+          // For journalism, show just "Journalism", for others show full typeLabel
+          const displayType = slot.type === 'journalism' ? 'Journalism' : slot.typeLabel;
+          const metaParts = [displayType, slot.dateDisplay].filter(Boolean).map((part) =>
+            String(part)
+              .replace(/\s+/g, ' ')
+              .replace(/^\s+|\s+$/g, ''),
+          );
+          meta.textContent = metaParts.join(' | ');
+
+          info.appendChild(title);
+          info.appendChild(meta);
+
+          // Always show tags
+          const tags = document.createElement('div');
+          tags.className = 'featured-tags';
+
+          if (slot.tags && slot.tags.length > 0) {
+            slot.tags.slice(0, 3).forEach((tag, tagIndex) => {
+              const tagEl = document.createElement('span');
+              tagEl.className =
+                tagIndex === 0 ? 'featured-tag featured-tag-category' : 'featured-tag';
+              tagEl.textContent = String(tag)
+                .replace(/\s+/g, ' ')
+                .replace(/^\s+|\s+$/g, '');
+              tags.appendChild(tagEl);
+            });
+          } else {
+            // Fallback tag based on type
+            const fallbackTag = slot.type === 'journalism' ? 'Journalism' : slot.typeLabel;
+            const tagEl = document.createElement('span');
+            tagEl.className = 'featured-tag featured-tag-category';
+            tagEl.textContent = fallbackTag;
+            tags.appendChild(tagEl);
+          }
+
+          info.appendChild(tags);
+
+          card.appendChild(img);
+          card.appendChild(info);
+          fragment.appendChild(card);
+
+          cards.push({ card, slot, img, index });
+
+          const openLightbox = () => openLightboxFor(slot);
+          card.addEventListener('click', openLightbox);
+          card.addEventListener('keydown', (evt) => {
+            if (evt.key === 'Enter' || evt.key === ' ') {
+              evt.preventDefault();
+              openLightbox();
+            }
+          });
+        });
+
+        grid.appendChild(fragment);
+        grid.style.display = 'block';
+
+        cards.forEach(({ card, slot, img, index }) => {
+          setTimeout(() => loadCardImage({ card, slot, img }), index * CARDS_STAGGER);
+        });
+
+        requestAnimationFrame(() => {
+          grid.classList.add('loaded');
+        });
+
+        logDebug('Featured gallery loaded', `${slots.length} items from portfolio`);
+      } catch (error) {
+        console.error('Featured gallery failed:', error);
+        showError(`Error loading featured gallery: ${error.message}`);
+      }
     }
-    
-    const cutoff = Date.now() - RANGE_DAYS * 24 * 60 * 60 * 1000;
-    const filtered = items.filter(item => item.dateValue >= cutoff);
-    logDebug(`Range filter: ${items.length} items -> ${filtered.length} items after filtering`);
-    
-    return filtered.length ? filtered : items;
-  }
 
-          function ensureDiverseSelection(items, targetCount) {
-            if (items.length <= targetCount) {
-              // Even if we have fewer items than target, still sort by most recent
-              return items.sort((a, b) => b.dateValue - a.dateValue);
+    async function loadCardImage({ card, slot, img }) {
+      try {
+        const coverRef = slot.cover || slot.images[0];
+        const src = buildImageUrl(slot.pathSegments, coverRef);
+        await loadImageWithRetry(img, src, 2);
+        card.classList.remove('loading');
+        card.classList.add('loaded');
+      } catch (error) {
+        console.warn(`Failed to load image for ${slot.title}:`, error);
+        card.classList.remove('loading');
+        card.classList.add('error');
+      }
+    }
+
+    function loadImageWithRetry(img, src, maxRetries = 2) {
+      return new Promise((resolve, reject) => {
+        let attempts = 0;
+        const attempt = () => {
+          const probe = new Image();
+          probe.onload = () => {
+            img.src = src;
+            img.classList.add('loaded');
+            resolve();
+          };
+          probe.onerror = () => {
+            attempts += 1;
+            if (attempts > maxRetries) {
+              reject(new Error('Image failed to load'));
+            } else {
+              const backoff = Math.pow(2, attempts) * 1000;
+              setTimeout(attempt, backoff);
             }
-            
-            const byType = {};
-            items.forEach(item => {
-              // Use the original type from manifest, but normalize for grouping
-              let type = canonicalizeType(item.type);
-              
-              // Special handling for Events vs Journalism distinction
-              if (item.category === 'Events Photography' || item.type === 'Events') {
-                type = 'events';
-              } else if (item.category === 'Journalism Photography' || item.type === 'Journalism') {
-                type = 'journalism';
-              } else if (item.category === 'Concert Photography' || item.type === 'Concert' || item.type === 'Music') {
-                type = 'concert';
-              }
-              
-              if (!byType[type]) byType[type] = [];
-              byType[type].push(item);
-            });
-            
-            const types = Object.keys(byType);
-            
-            // Add freshness boost - prioritize very recent content (last 30 days)
-            const now = Date.now();
-            const thirtyDaysAgo = now - (30 * 24 * 60 * 60 * 1000);
-            
-            types.forEach(type => {
-              // Calculate freshness score for each item
-              byType[type].forEach(item => {
-                item.freshnessScore = item.dateValue;
-                
-                // Boost score for very recent content (last 30 days)
-                if (item.dateValue > thirtyDaysAgo) {
-                  const daysOld = (now - item.dateValue) / (24 * 60 * 60 * 1000);
-                  const boostMultiplier = Math.max(1, 10 - (daysOld / 3)); // Higher boost for newer content
-                  item.freshnessScore = item.dateValue * boostMultiplier;
-                  logDebug(`FRESH CONTENT: "${item.title}" (${Math.floor(daysOld)} days old) - boost: ${boostMultiplier.toFixed(1)}x`);
-                }
-              });
-              
-              // Sort by freshness score (which heavily favors recent additions)
-              byType[type].sort((a, b) => b.freshnessScore - a.freshnessScore);
-              logDebug(`Type "${type}": ${byType[type].length} items, most recent: ${byType[type][0]?.title} (${byType[type][0]?.dateDisplay})`);
-            });
-            
-            // Calculate fair distribution - ensure each type gets recent items
-            const basePerType = Math.floor(targetCount / types.length);
-            const remainder = targetCount % types.length;
-            
-            logDebug(`Diverse selection: ${types.length} types, ${basePerType} base per type, ${remainder} remainder`);
-            
-            const selected = [];
-            
-            // First, give each type their base allocation of most recent items
-            types.forEach((type, index) => {
-              const typeItems = byType[type]; // Already sorted by most recent
-              const allocation = basePerType + (index < remainder ? 1 : 0);
-              const take = Math.min(allocation, typeItems.length);
-              
-              selected.push(...typeItems.slice(0, take));
-              logDebug(`Type "${type}": allocated ${take} most recent items (wanted ${allocation}, had ${typeItems.length})`);
-            });
-            
-            // If we still need more items (rare case), take the next most recent from any type
-            const stillNeeded = targetCount - selected.length;
-            if (stillNeeded > 0) {
-              const allRemaining = [];
-              types.forEach(type => {
-                const typeItems = byType[type];
-                const alreadyTaken = Math.min(basePerType + (types.indexOf(type) < remainder ? 1 : 0), typeItems.length);
-                allRemaining.push(...typeItems.slice(alreadyTaken));
-              });
-              
-              allRemaining.sort((a, b) => b.dateValue - a.dateValue);
-              selected.push(...allRemaining.slice(0, stillNeeded));
-              logDebug(`Added ${Math.min(stillNeeded, allRemaining.length)} additional most recent items`);
-            }
-            
-            // Final sort by most recent across all selected items
-            return selected.sort((a, b) => b.dateValue - a.dateValue);
-          }
-          
-          async function loadAndRender(forceRefresh = false) {
-            try {
-              logDebug('Loading featured portfolio...', { forceRefresh, sources: manifestSources.length });
+          };
+          probe.src = src;
+        };
+        attempt();
+      });
+    }
 
-              let manifest = null;
-              let usedUrl = '';
-              
-              // Try the universal portfolio manifest first
-              try {
-                const universalUrl = resolveManifestUrl('src/images/Portfolios/portfolio-manifest.json');
-                logDebug(`Trying universal manifest: ${universalUrl}`);
-                manifest = await fetchManifest(universalUrl, forceRefresh);
-                usedUrl = 'src/images/Portfolios/portfolio-manifest.json';
-                logDebug('Successfully loaded universal portfolio manifest');
-              } catch (error) {
-                logDebug('Universal manifest failed, trying individual manifests...', error.message);
-                
-                // If universal fails, combine multiple individual manifests
-                const combinedItems = [];
-                const successfulManifests = [];
-                
-                for (const candidate of ['src/images/Portfolios/Concert/concert-manifest.json', 
-                                       'src/images/Portfolios/Events/events-manifest.json',
-                                       'src/images/Portfolios/Journalism/journalism-manifest.json']) {
-                  try {
-                    const url = resolveManifestUrl(candidate);
-                    logDebug(`Loading individual manifest: ${candidate}`);
-                    const individualManifest = await fetchManifest(url, forceRefresh);
-                    
-                    // Handle different manifest structures
-                    let items = [];
-                    if (Array.isArray(individualManifest?.items)) {
-                      items = individualManifest.items;
-                    } else if (Array.isArray(individualManifest?.bands)) {
-                      // Concert manifest structure
-                      items = individualManifest.bands || [];
-                    } else if (Array.isArray(individualManifest?.events)) {
-                      // Events/Journalism manifest structure  
-                      items = individualManifest.events || [];
-                    }
-                    
-                    if (items.length > 0) {
-                      combinedItems.push(...items);
-                      successfulManifests.push(candidate);
-                      logDebug(`Added ${items.length} items from ${candidate}`);
-                    }
-                  } catch (manifestError) {
-                    logDebug(`Individual manifest failed: ${candidate}`, manifestError.message);
-                  }
-                }
-                
-                if (combinedItems.length > 0) {
-                  manifest = { items: combinedItems };
-                  usedUrl = `Combined: ${successfulManifests.join(', ')}`;
-                  logDebug(`Successfully combined ${combinedItems.length} items from ${successfulManifests.length} manifests`);
-                }
-              }
+    let currentFocusedElement = null;
 
-              if (!manifest || !manifest.items || manifest.items.length === 0) {
-                throw new Error('No valid manifest found or no items available');
-              }
+    function openLightboxFor(slot) {
+      // Store the currently focused element to restore later
+      currentFocusedElement = document.activeElement;
 
-              activeManifestUrl = usedUrl;
-              logDebug('Manifest loaded successfully', usedUrl);
+      lbGallery.innerHTML = '<div class="fp-hint">Scroll -></div>';
 
-              const rootSegments = extractRootSegments(resolveManifestUrl('src/images/Portfolios/portfolio-manifest.json'));
-              const allItems = normalizeItems(manifest, rootSegments);
-              
-              logDebug(`Normalized ${allItems.length} items from manifest`);
-              
-              const rangeFiltered = applyRangeFilter(allItems);
-              logDebug(`After range filter: ${rangeFiltered.length} items`);
-              
-              let selectedItems;
-              if (FORCE_DIVERSE && rangeFiltered.length > TARGET_PANES) {
-                selectedItems = ensureDiverseSelection(rangeFiltered, TARGET_PANES);
-                logDebug(`After diverse selection: ${selectedItems.length} items`);
-              } else {
-                selectedItems = rangeFiltered
-                  .sort((a, b) => b.dateValue - a.dateValue)
-                  .slice(0, TARGET_PANES);
-                logDebug(`After simple selection: ${selectedItems.length} items`);
-              }
-              
-              // Log items by type to debug diversity and recency
-              logDebug('All items sorted by date:', rangeFiltered.slice(0, 10).map(item => ({
-                title: item.title,
-                type: item.type,
-                date: item.dateDisplay,
-                dateValue: item.dateValue,
-                iso: item.isoDate
-              })));
-              
-              logDebug('Selected items by type:', selectedItems.map(item => ({
-                title: item.title,
-                type: item.type,
-                category: item.typeLabel,
-                date: item.dateDisplay,
-                dateValue: item.dateValue,
-                pathSegments: item.pathSegments
-              })));              const uniqueItems = dedupeItems(selectedItems);
-              logDebug(`After deduplication: ${uniqueItems.length} items`);
-
-              // Enhanced type distribution logging
-              const typeDistribution = {};
-              const categoryDistribution = {};
-              uniqueItems.forEach(item => {
-                typeDistribution[item.type] = (typeDistribution[item.type] || 0) + 1;
-                categoryDistribution[item.typeLabel] = (categoryDistribution[item.typeLabel] || 0) + 1;
-              });
-              logDebug('Final type distribution:', typeDistribution);
-              logDebug('Final category distribution:', categoryDistribution);
-              logDebug('Sample items:', uniqueItems.slice(0, 3).map(item => ({
-                title: item.title,
-                type: item.type,
-                category: item.typeLabel,
-                originalType: selectedItems.find(si => si.id === item.id)?.type,
-                pathSegments: item.pathSegments
-              })));
-
-              // Shuffle featured items before rendering
-              function shuffle(arr) {
-                for (let i = arr.length - 1; i > 0; i--) {
-                  const j = Math.floor(Math.random() * (i + 1));
-                  [arr[i], arr[j]] = [arr[j], arr[i]];
-                }
-                return arr;
-              }
-              renderGallery(shuffle(uniqueItems));
-            } catch (error) {
-              console.error('Featured portfolio loading failed:', error);
-              showError(`Failed to load featured portfolio: ${error.message}`);
-            }
-          }
-
-  function showError(message) {
-    loading.style.display = 'none';
-    grid.innerHTML = `<div class="featured-error" role="alert">${message}</div>`;
-    metaCount.textContent = '0';
-    metaUpdated.textContent = 'Failed';
-  metaSource.textContent = 'All Portfolios | Error';
-  }
-
-          function renderGallery(slots) {
-            try {
-              loading.style.display = 'none';
-              grid.innerHTML = '';
-              grid.classList.remove('loaded');
-
-              if (!slots.length) {
-                grid.innerHTML = '<div class="featured-empty">No featured items available.</div>';
-                return;
-              }
-
-              metaCount.textContent = slots.length;
-      metaUpdated.textContent = new Date().toLocaleDateString();
-  const today = new Date();
-  const dateStr = today.toLocaleDateString(undefined,{ month:'short', day:'numeric'});
-  metaSource.textContent = `All Portfolios | ${dateStr}`;
-
-      const fragment = document.createDocumentFragment();
-      const cards = [];
-
-      slots.forEach((slot, index) => {
-        const card = document.createElement('article');
-        card.className = 'featured-card loading';
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `View ${slot.title} gallery`);
-
+      slot.images.forEach((fileName, index) => {
         const img = document.createElement('img');
         img.loading = 'lazy';
         img.decoding = 'async';
-        img.alt = slot.title;
+        img.alt = `${slot.title} photo ${index + 1} of ${slot.images.length}`;
+        img.className = 'loading';
+        img.src = buildImageUrl(slot.pathSegments, fileName);
+        img.addEventListener('load', () => {
+          img.classList.remove('loading');
+          img.classList.add('loaded');
+        });
 
-        const info = document.createElement('div');
-        info.className = 'featured-info';
-        
-        const title = document.createElement('h3');
-        title.className = 'featured-title';
-        title.textContent = slot.title;
-        
-        const meta = document.createElement('div');
-        meta.className = 'featured-meta';
-        
-        // For journalism, show just "Journalism", for others show full typeLabel
-        const displayType = slot.type === 'journalism' ? 'Journalism' : slot.typeLabel;
-        const metaParts = [displayType, slot.dateDisplay]
-          .filter(Boolean)
-          .map(part => String(part).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''));
-        meta.textContent = metaParts.join(' | ');
-        
-        info.appendChild(title);
-        info.appendChild(meta);
-        
-        // Always show tags
-        const tags = document.createElement('div');
-        tags.className = 'featured-tags';
-        
-        if (slot.tags && slot.tags.length > 0) {
-          slot.tags.slice(0, 3).forEach((tag, tagIndex) => {
-            const tagEl = document.createElement('span');
-            tagEl.className = tagIndex === 0 ? 'featured-tag featured-tag-category' : 'featured-tag';
-            tagEl.textContent = String(tag).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
-            tags.appendChild(tagEl);
-          });
-        } else {
-          // Fallback tag based on type
-          const fallbackTag = slot.type === 'journalism' ? 'Journalism' : slot.typeLabel;
-          const tagEl = document.createElement('span');
-          tagEl.className = 'featured-tag featured-tag-category';
-          tagEl.textContent = fallbackTag;
-          tags.appendChild(tagEl);
-        }
-        
-        info.appendChild(tags);
-
-        card.appendChild(img);
-        card.appendChild(info);
-        fragment.appendChild(card);
-
-        cards.push({ card, slot, img, index });
-
-        const openLightbox = () => openLightboxFor(slot);
-        card.addEventListener('click', openLightbox);
-        card.addEventListener('keydown', evt => {
-          if (evt.key === 'Enter' || evt.key === ' ') {
-            evt.preventDefault();
-            openLightbox();
+        // Add click-to-zoom functionality
+        img.addEventListener('click', () => {
+          if (img.style.transform === 'scale(2)') {
+            img.style.transform = '';
+            img.style.cursor = 'zoom-in';
+          } else {
+            img.style.transform = 'scale(2)';
+            img.style.cursor = 'zoom-out';
           }
         });
+
+        img.style.cursor = 'zoom-in';
+        img.style.transition = 'transform 0.3s ease';
+        lbGallery.appendChild(img);
       });
 
-      grid.appendChild(fragment);
-      grid.style.display = 'block';
+      lbTitle.textContent = slot.title;
+      const metaBits = [
+        slot.typeLabel,
+        slot.dateDisplay,
+        `${slot.images.length} photo${slot.images.length === 1 ? '' : 's'}`,
+      ].filter(Boolean);
+      lbMeta.textContent = metaBits.join(' | ');
 
-      cards.forEach(({ card, slot, img, index }) => {
-        setTimeout(() => loadCardImage({ card, slot, img }), index * CARDS_STAGGER);
-      });
-
+      // Open lightbox with proper isolation
       requestAnimationFrame(() => {
-        grid.classList.add('loaded');
+        lb.classList.add('is-open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('fp-open');
+        document.body.classList.add('fp-open');
+
+        // Focus management and trapping for accessibility
+        trapFocus(lbDialog);
+
+        // Delay focus to ensure DOM updates are complete
+        setTimeout(() => {
+          lbDialog.focus({ preventScroll: true });
+        }, 150);
       });
 
-      logDebug('Featured gallery loaded', `${slots.length} items from portfolio`);
-    } catch (error) {
-      console.error('Featured gallery failed:', error);
-      showError(`Error loading featured gallery: ${error.message}`);
+      const hint = lbGallery.querySelector('.fp-hint');
+      if (hint && slot.images.length > 1) {
+        setTimeout(() => hint.classList.add('fade'), 3000);
+      }
     }
-  }
 
-  async function loadCardImage({ card, slot, img }) {
-    try {
-      const coverRef = slot.cover || slot.images[0];
-      const src = buildImageUrl(slot.pathSegments, coverRef);
-      await loadImageWithRetry(img, src, 2);
-      card.classList.remove('loading');
-      card.classList.add('loaded');
-    } catch (error) {
-      console.warn(`Failed to load image for ${slot.title}:`, error);
-      card.classList.remove('loading');
-      card.classList.add('error');
-    }
-  }
+    function closeLightbox() {
+      // Prevent any pending focus operations
+      clearTimeout(currentFocusedElement?._focusTimeout);
 
-  function loadImageWithRetry(img, src, maxRetries = 2) {
-    return new Promise((resolve, reject) => {
-      let attempts = 0;
-      const attempt = () => {
-        const probe = new Image();
-        probe.onload = () => {
-          img.src = src;
-          img.classList.add('loaded');
-          resolve();
-        };
-        probe.onerror = () => {
-          attempts += 1;
-          if (attempts > maxRetries) {
-            reject(new Error('Image failed to load'));
-          } else {
-            const backoff = Math.pow(2, attempts) * 1000;
-            setTimeout(attempt, backoff);
+      // Reset any zoomed images
+      lbGallery.querySelectorAll('img').forEach((img) => {
+        img.style.transform = '';
+        img.style.cursor = 'zoom-in';
+      });
+
+      // Close lightbox with proper cleanup
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+
+      // Use requestAnimationFrame to ensure smooth DOM updates
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove('fp-open');
+        document.body.classList.remove('fp-open');
+
+        // Restore focus after DOM cleanup, with safety check
+        setTimeout(() => {
+          if (currentFocusedElement && document.contains(currentFocusedElement)) {
+            // Ensure the element is still focusable
+            try {
+              currentFocusedElement.focus({ preventScroll: true });
+            } catch (e) {
+              // Fallback if focus fails
+              document.body.focus();
+            }
           }
-        };
-        probe.src = src;
-      };
-      attempt();
-    });
-  }
-
-  let currentFocusedElement = null;
-
-  function openLightboxFor(slot) {
-    // Store the currently focused element to restore later
-    currentFocusedElement = document.activeElement;
-    
-    lbGallery.innerHTML = '<div class="fp-hint">Scroll -></div>';
-
-    slot.images.forEach((fileName, index) => {
-      const img = document.createElement('img');
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.alt = `${slot.title} photo ${index + 1} of ${slot.images.length}`;
-      img.className = 'loading';
-      img.src = buildImageUrl(slot.pathSegments, fileName);
-      img.addEventListener('load', () => {
-        img.classList.remove('loading');
-        img.classList.add('loaded');
+          currentFocusedElement = null;
+        }, 50);
       });
-      
-      // Add click-to-zoom functionality
-      img.addEventListener('click', () => {
-        if (img.style.transform === 'scale(2)') {
-          img.style.transform = '';
-          img.style.cursor = 'zoom-in';
-        } else {
-          img.style.transform = 'scale(2)';
-          img.style.cursor = 'zoom-out';
-        }
-      });
-      
-      img.style.cursor = 'zoom-in';
-      img.style.transition = 'transform 0.3s ease';
-      lbGallery.appendChild(img);
-    });
-
-    lbTitle.textContent = slot.title;
-    const metaBits = [
-      slot.typeLabel,
-      slot.dateDisplay,
-      `${slot.images.length} photo${slot.images.length === 1 ? '' : 's'}`
-    ].filter(Boolean);
-    lbMeta.textContent = metaBits.join(' | ');
-
-    // Open lightbox with proper isolation
-    requestAnimationFrame(() => {
-      lb.classList.add('is-open');
-      lb.setAttribute('aria-hidden', 'false');
-      document.documentElement.classList.add('fp-open');
-      document.body.classList.add('fp-open');
-      
-      // Focus management and trapping for accessibility
-      trapFocus(lbDialog);
-      
-      // Delay focus to ensure DOM updates are complete
-      setTimeout(() => {
-        lbDialog.focus({ preventScroll: true });
-      }, 150);
-    });
-
-    const hint = lbGallery.querySelector('.fp-hint');
-    if (hint && slot.images.length > 1) {
-      setTimeout(() => hint.classList.add('fade'), 3000);
     }
-  }
 
-  function closeLightbox() {
-    // Prevent any pending focus operations
-    clearTimeout(currentFocusedElement?._focusTimeout);
-    
-    // Reset any zoomed images
-    lbGallery.querySelectorAll('img').forEach(img => {
-      img.style.transform = '';
-      img.style.cursor = 'zoom-in';
-    });
-    
-    // Close lightbox with proper cleanup
-    lb.classList.remove('is-open');
-    lb.setAttribute('aria-hidden', 'true');
-    
-    // Use requestAnimationFrame to ensure smooth DOM updates
-    requestAnimationFrame(() => {
-      document.documentElement.classList.remove('fp-open');
-      document.body.classList.remove('fp-open');
-      
-      // Restore focus after DOM cleanup, with safety check
-      setTimeout(() => {
-        if (currentFocusedElement && document.contains(currentFocusedElement)) {
-          // Ensure the element is still focusable
-          try {
-            currentFocusedElement.focus({ preventScroll: true });
-          } catch (e) {
-            // Fallback if focus fails
-            document.body.focus();
-          }
-        }
-        currentFocusedElement = null;
-      }, 50);
-    });
-  }
-
-  lbClose.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    evt.stopPropagation();
-    closeLightbox();
-  });
-  
-  lb.addEventListener('click', (evt) => {
-    // Only close if clicking the backdrop, not any child elements
-    if (evt.target === lb) {
+    lbClose.addEventListener('click', (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
       closeLightbox();
-    }
-  });
-  
-  document.addEventListener('keydown', (evt) => {
-    if (lb.classList.contains('is-open')) {
-      // Stop all key event bubbling when lightbox is open
-      evt.stopPropagation();
-      
-      switch (evt.key) {
-        case 'Escape':
-          evt.preventDefault();
-          closeLightbox();
-          break;
-        case 'ArrowUp':
-          evt.preventDefault();
-          lbGallery.scrollBy({ top: -200, behavior: 'smooth' });
-          break;
-        case 'ArrowDown':
-          evt.preventDefault();
-          lbGallery.scrollBy({ top: 200, behavior: 'smooth' });
-          break;
-        case 'Home':
-          evt.preventDefault();
-          lbGallery.scrollTo({ top: 0, behavior: 'smooth' });
-          break;
-        case 'End':
-          evt.preventDefault();
-          lbGallery.scrollTo({ top: lbGallery.scrollHeight, behavior: 'smooth' });
-          break;
-        case 'Tab':
-          // Let focus trapping handle Tab, but still prevent bubbling
-          break;
-        default:
-          // Prevent other keys from affecting navigation when lightbox is open
-          if (evt.key.length === 1 || ['Space', 'Enter'].includes(evt.key)) {
-            evt.preventDefault();
+    });
+
+    lb.addEventListener('click', (evt) => {
+      // Only close if clicking the backdrop, not any child elements
+      if (evt.target === lb) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener(
+      'keydown',
+      (evt) => {
+        if (lb.classList.contains('is-open')) {
+          // Stop all key event bubbling when lightbox is open
+          evt.stopPropagation();
+
+          switch (evt.key) {
+            case 'Escape':
+              evt.preventDefault();
+              closeLightbox();
+              break;
+            case 'ArrowUp':
+              evt.preventDefault();
+              lbGallery.scrollBy({ top: -200, behavior: 'smooth' });
+              break;
+            case 'ArrowDown':
+              evt.preventDefault();
+              lbGallery.scrollBy({ top: 200, behavior: 'smooth' });
+              break;
+            case 'Home':
+              evt.preventDefault();
+              lbGallery.scrollTo({ top: 0, behavior: 'smooth' });
+              break;
+            case 'End':
+              evt.preventDefault();
+              lbGallery.scrollTo({ top: lbGallery.scrollHeight, behavior: 'smooth' });
+              break;
+            case 'Tab':
+              // Let focus trapping handle Tab, but still prevent bubbling
+              break;
+            default:
+              // Prevent other keys from affecting navigation when lightbox is open
+              if (evt.key.length === 1 || ['Space', 'Enter'].includes(evt.key)) {
+                evt.preventDefault();
+              }
           }
+        }
+      },
+      true,
+    ); // Use capture phase to intercept before other handlers
+
+    function updateDebugMetrics() {
+      // Debug metrics tracking (UI removed for production)
+    }
+
+    function updateNextRefreshIndicator() {
+      const indicator = document.getElementById('autoRefreshIndicator');
+      if (!indicator) return;
+
+      let timeLeft = AUTO_REFRESH_INTERVAL;
+      function tick() {
+        const minutes = Math.floor(timeLeft / 60000);
+        const seconds = Math.floor((timeLeft % 60000) / 1000);
+        indicator.textContent = `Next refresh: ${minutes}:${String(seconds).padStart(2, '0')}`;
+        if (timeLeft > 0) {
+          timeLeft -= 1000;
+          nextRefreshTimer = setTimeout(tick, 1000);
+        }
+      }
+      tick();
+    }
+
+    function setupAutoRefresh() {
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      autoRefreshTimer = setInterval(() => {
+        if (isTabVisible) {
+          loadAndRender(true);
+          updateNextRefreshIndicator();
+        }
+      }, AUTO_REFRESH_INTERVAL);
+      updateNextRefreshIndicator();
+    }
+
+    // Changelog modal functions
+    function showChangelog() {
+      const modal = document.getElementById('changelog-modal');
+      if (modal) {
+        modal.style.display = 'block';
       }
     }
-  }, true); // Use capture phase to intercept before other handlers
 
-  function updateDebugMetrics() {
-    // Debug metrics tracking (UI removed for production)
-  }
-
-  function updateNextRefreshIndicator() {
-    const indicator = document.getElementById('autoRefreshIndicator');
-    if (!indicator) return;
-
-    let timeLeft = AUTO_REFRESH_INTERVAL;
-    function tick() {
-      const minutes = Math.floor(timeLeft / 60000);
-      const seconds = Math.floor((timeLeft % 60000) / 1000);
-      indicator.textContent = `Next refresh: ${minutes}:${String(seconds).padStart(2, '0')}`;
-      if (timeLeft > 0) {
-        timeLeft -= 1000;
-        nextRefreshTimer = setTimeout(tick, 1000);
+    function hideChangelog() {
+      const modal = document.getElementById('changelog-modal');
+      if (modal) {
+        modal.style.display = 'none';
       }
     }
-    tick();
-  }
 
-  function setupAutoRefresh() {
-    if (autoRefreshTimer) clearInterval(autoRefreshTimer);
-    autoRefreshTimer = setInterval(() => {
-      if (isTabVisible) {
-        loadAndRender(true);
-        updateNextRefreshIndicator();
-      }
-    }, AUTO_REFRESH_INTERVAL);
-    updateNextRefreshIndicator();
-  }
+    function showNewContentNotification(albumName) {
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = 'new-content-notification';
+      notification.textContent = `🆕 New photos added: ${albumName}`;
 
-  // Changelog modal functions
-  function showChangelog() {
-    const modal = document.getElementById('changelog-modal');
-    if (modal) {
-      modal.style.display = 'block';
+      document.body.appendChild(notification);
+
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        if (document.body.contains(notification)) {
+          notification.style.animation = 'slideInRight 0.3s ease reverse';
+          setTimeout(() => document.body.removeChild(notification), 300);
+        }
+      }, 5000);
+
+      // Click to dismiss
+      notification.addEventListener('click', () => {
+        if (document.body.contains(notification)) {
+          document.body.removeChild(notification);
+        }
+      });
     }
-  }
-  
-  function hideChangelog() {
-    const modal = document.getElementById('changelog-modal');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-  }
 
-  function showNewContentNotification(albumName) {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = 'new-content-notification';
-    notification.textContent = `🆕 New photos added: ${albumName}`;
-    
-    document.body.appendChild(notification);
-    
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-      if (document.body.contains(notification)) {
-        notification.style.animation = 'slideInRight 0.3s ease reverse';
-        setTimeout(() => document.body.removeChild(notification), 300);
+    // Make functions global for onclick handlers
+    window.showChangelog = showChangelog;
+    window.hideChangelog = hideChangelog;
+
+    versionIndicator.addEventListener('click', showChangelog);
+
+    // Manual refresh button
+    refreshButton.addEventListener('click', () => {
+      refreshButton.style.opacity = '0.5';
+      refreshButton.disabled = true;
+      refreshButton.textContent = '↻ Refreshing...';
+      // Clear localStorage cache entries for featured widget before forcing reload
+      try {
+        const prefix = CACHE_KEY_PREFIX;
+        const toDelete = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && k.startsWith(prefix)) toDelete.push(k);
+        }
+        toDelete.forEach((k) => localStorage.removeItem(k));
+      } catch (e) {
+        /* ignore cache clear errors */
       }
-    }, 5000);
-    
-    // Click to dismiss
-    notification.addEventListener('click', () => {
-      if (document.body.contains(notification)) {
-        document.body.removeChild(notification);
+
+      loadAndRender(true, { reason: 'manual-refresh', bust: Date.now() }).finally(() => {
+        refreshButton.style.opacity = '1';
+        refreshButton.disabled = false;
+        refreshButton.textContent = '↻ Refresh';
+      });
+    });
+
+    // Hover effect for refresh button
+    refreshButton.addEventListener('mouseenter', () => {
+      if (!refreshButton.disabled) {
+        refreshButton.style.borderColor = 'rgba(255,255,255,0.6)';
+        refreshButton.style.background = 'rgba(255,255,255,0.1)';
       }
     });
-  }
-  
-  // Make functions global for onclick handlers
-  window.showChangelog = showChangelog;
-  window.hideChangelog = hideChangelog;
 
-  versionIndicator.addEventListener('click', showChangelog);
-
-  // Manual refresh button
-  refreshButton.addEventListener('click', () => {
-    refreshButton.style.opacity = '0.5';
-    refreshButton.disabled = true;
-    refreshButton.textContent = '↻ Refreshing...';
-    // Clear localStorage cache entries for featured widget before forcing reload
-    try {
-      const prefix = CACHE_KEY_PREFIX;
-      const toDelete = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k && k.startsWith(prefix)) toDelete.push(k);
-      }
-      toDelete.forEach(k => localStorage.removeItem(k));
-    } catch(e) { /* ignore cache clear errors */ }
-
-    loadAndRender(true, { reason: 'manual-refresh', bust: Date.now() }).finally(() => {
-      refreshButton.style.opacity = '1';
-      refreshButton.disabled = false;
-      refreshButton.textContent = '↻ Refresh';
+    refreshButton.addEventListener('mouseleave', () => {
+      refreshButton.style.borderColor = 'rgba(255,255,255,0.3)';
+      refreshButton.style.background = 'none';
     });
-  });
 
-  // Hover effect for refresh button
-  refreshButton.addEventListener('mouseenter', () => {
-    if (!refreshButton.disabled) {
-      refreshButton.style.borderColor = 'rgba(255,255,255,0.6)';
-      refreshButton.style.background = 'rgba(255,255,255,0.1)';
-    }
-  });
-  
-  refreshButton.addEventListener('mouseleave', () => {
-    refreshButton.style.borderColor = 'rgba(255,255,255,0.3)';
-    refreshButton.style.background = 'none';
-  });
+    loadAndRender();
+    setupAutoRefresh();
 
-  loadAndRender();
-  setupAutoRefresh();
-
-  window.addEventListener('beforeunload', () => {
-    if (autoRefreshTimer) clearInterval(autoRefreshTimer);
-    if (nextRefreshTimer) clearTimeout(nextRefreshTimer);
-  });
-})();
+    window.addEventListener('beforeunload', () => {
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      if (nextRefreshTimer) clearTimeout(nextRefreshTimer);
+    });
+  })();
 </script>

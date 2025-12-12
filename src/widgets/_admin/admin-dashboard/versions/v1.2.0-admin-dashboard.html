@@ -21,11 +21,161 @@
   - Max-width increased to 1600px for better content display
 -->
 
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   .admin-dashboard-container {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     max-width: 1600px;
     margin: 0 auto;
     padding: 1.5rem;
@@ -43,10 +193,10 @@
     padding: 2rem;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border-left: 5px solid #2563eb;
   }
-  
+
   .dashboard-header h1 {
     font-size: 2.2rem;
     font-weight: 800;
@@ -79,7 +229,7 @@
   .dashboard-card {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -89,7 +239,7 @@
 
   .dashboard-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
   }
 
   .card-header {
@@ -121,7 +271,7 @@
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .status-ok {
@@ -227,7 +377,7 @@
     max-height: 2000px;
     overflow: hidden;
     transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
   .section-content.collapsed {
@@ -404,27 +554,48 @@
 
   /* Responsive Design */
   @media (max-width: 1200px) {
-    .events-log { grid-template-columns: 1fr; }
+    .events-log {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 768px) {
-    .admin-dashboard-container { padding: 1rem; }
+    .admin-dashboard-container {
+      padding: 1rem;
+    }
     .dashboard-header {
       flex-direction: column;
       align-items: flex-start;
       gap: 1.5rem;
     }
-    .header-controls { flex-direction: column; width: 100%; }
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .analytics-grid { grid-template-columns: 1fr; }
-    .portfolio-list { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-    .dashboard-links { grid-template-columns: 1fr 1fr; }
+    .header-controls {
+      flex-direction: column;
+      width: 100%;
+    }
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+    .analytics-grid {
+      grid-template-columns: 1fr;
+    }
+    .portfolio-list {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    .dashboard-links {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   @media (max-width: 480px) {
-    .dashboard-header h1 { font-size: 1.6rem; }
-    .dashboard-links { grid-template-columns: 1fr; }
-    .portfolio-list { grid-template-columns: 1fr; }
+    .dashboard-header h1 {
+      font-size: 1.6rem;
+    }
+    .dashboard-links {
+      grid-template-columns: 1fr;
+    }
+    .portfolio-list {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
@@ -438,7 +609,7 @@
       <div class="header-time" id="lastUpdated"></div>
     </div>
   </div>
-  
+
   <div class="dashboard-grid">
     <!-- API Health Card -->
     <div class="dashboard-card">
@@ -584,11 +755,26 @@
     </div>
     <div class="section-content">
       <div class="portfolio-list" id="portfolioList">
-        <div class="portfolio-item">Concert<div class="portfolio-count" id="concertSize">—</div></div>
-        <div class="portfolio-item">Events<div class="portfolio-count" id="eventsSize">—</div></div>
-        <div class="portfolio-item">Journalism<div class="portfolio-count" id="journalismSize">—</div></div>
-        <div class="portfolio-item">Nature<div class="portfolio-count" id="natureSize">—</div></div>
-        <div class="portfolio-item">Portrait<div class="portfolio-count" id="portraitSize">—</div></div>
+        <div class="portfolio-item">
+          Concert
+          <div class="portfolio-count" id="concertSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Events
+          <div class="portfolio-count" id="eventsSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Journalism
+          <div class="portfolio-count" id="journalismSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Nature
+          <div class="portfolio-count" id="natureSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Portrait
+          <div class="portfolio-count" id="portraitSize">—</div>
+        </div>
       </div>
     </div>
   </div>
@@ -599,10 +785,18 @@
       <span class="toggle-icon">▶</span>
     </div>
     <div class="section-content">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+        "
+      >
         <!-- API Performance -->
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600;">API Performance</h3>
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600">API Performance</h3>
           <div class="metric-row">
             <span class="metric-label">Response Time:</span>
             <span class="metric-value" id="apiResponseTime">—</span>
@@ -622,8 +816,12 @@
         </div>
 
         <!-- Cache Performance -->
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600;">Cache Performance</h3>
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600">
+            Cache Performance
+          </h3>
           <div class="metric-row">
             <span class="metric-label">Hit Rate:</span>
             <span class="metric-value" id="cacheHitRate">—</span>
@@ -643,8 +841,12 @@
         </div>
 
         <!-- Request Volume -->
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600;">Request Volume (24h)</h3>
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600">
+            Request Volume (24h)
+          </h3>
           <div class="metric-row">
             <span class="metric-label">Total Requests:</span>
             <span class="metric-value" id="totalRequests">—</span>
@@ -664,8 +866,10 @@
         </div>
 
         <!-- Resource Usage -->
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600;">Resource Usage</h3>
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600">Resource Usage</h3>
           <div class="metric-row">
             <span class="metric-label">Manifest Files:</span>
             <span class="metric-value" id="manifestFiles">6</span>
@@ -685,8 +889,10 @@
         </div>
 
         <!-- Deployment Info -->
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600;">Deployment</h3>
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600">Deployment</h3>
           <div class="metric-row">
             <span class="metric-label">Last Deploy:</span>
             <span class="metric-value" id="lastDeploy">—</span>
@@ -706,8 +912,12 @@
         </div>
 
         <!-- Traffic Sources -->
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600;">Traffic Sources (Est.)</h3>
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h3 style="margin: 0 0 1rem 0; font-size: 0.95rem; font-weight: 600">
+            Traffic Sources (Est.)
+          </h3>
           <div class="metric-row">
             <span class="metric-label">Direct:</span>
             <span class="metric-value">35%</span>
@@ -735,10 +945,18 @@
       <span class="toggle-icon">▶</span>
     </div>
     <div class="section-content">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937;">🎵 Concert Portfolio</h4>
-          <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 1rem;
+        "
+      >
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937">🎵 Concert Portfolio</h4>
+          <div style="font-size: 0.85rem; color: #666; line-height: 1.5">
             <div>Bands: <strong id="concertBands">—</strong></div>
             <div>Total Images: <strong id="concertImages">—</strong></div>
             <div>Last Updated: <strong id="concertUpdated">—</strong></div>
@@ -746,9 +964,11 @@
           </div>
         </div>
 
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937;">🎪 Events Portfolio</h4>
-          <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937">🎪 Events Portfolio</h4>
+          <div style="font-size: 0.85rem; color: #666; line-height: 1.5">
             <div>Events: <strong id="eventsTotal">—</strong></div>
             <div>Total Images: <strong id="eventsImages">—</strong></div>
             <div>Last Updated: <strong id="eventsUpdated">—</strong></div>
@@ -756,9 +976,11 @@
           </div>
         </div>
 
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937;">📰 Journalism Portfolio</h4>
-          <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937">📰 Journalism Portfolio</h4>
+          <div style="font-size: 0.85rem; color: #666; line-height: 1.5">
             <div>Articles: <strong id="journalismTotal">—</strong></div>
             <div>Total Images: <strong id="journalismImages">—</strong></div>
             <div>Last Updated: <strong id="journalismUpdated">—</strong></div>
@@ -766,9 +988,11 @@
           </div>
         </div>
 
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937;">🌲 Nature Portfolio</h4>
-          <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937">🌲 Nature Portfolio</h4>
+          <div style="font-size: 0.85rem; color: #666; line-height: 1.5">
             <div>Collections: <strong id="natureTotal">—</strong></div>
             <div>Total Images: <strong id="natureImages">—</strong></div>
             <div>Last Updated: <strong id="natureUpdated">—</strong></div>
@@ -776,9 +1000,11 @@
           </div>
         </div>
 
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937;">👤 Portrait Portfolio</h4>
-          <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937">👤 Portrait Portfolio</h4>
+          <div style="font-size: 0.85rem; color: #666; line-height: 1.5">
             <div>Subjects: <strong id="portraitTotal">—</strong></div>
             <div>Total Images: <strong id="portraitImages">—</strong></div>
             <div>Last Updated: <strong id="portraitUpdated">—</strong></div>
@@ -786,9 +1012,11 @@
           </div>
         </div>
 
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937;">🎬 Featured Portfolio</h4>
-          <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 0.8rem 0; color: #1f2937">🎬 Featured Portfolio</h4>
+          <div style="font-size: 0.85rem; color: #666; line-height: 1.5">
             <div>Featured Items: <strong id="featuredTotal">—</strong></div>
             <div>Total Images: <strong id="featuredImages">—</strong></div>
             <div>Last Updated: <strong id="featuredUpdated">—</strong></div>
@@ -805,31 +1033,35 @@
       <span class="toggle-icon">▶</span>
     </div>
     <div class="section-content">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 1rem 0;">Recent Events</h4>
-          <div style="font-size: 0.85rem; color: #666; max-height: 250px; overflow-y: auto;">
-            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
-              <strong style="color: #065f46;">✅ Success:</strong> API health check passed
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 1rem 0">Recent Events</h4>
+          <div style="font-size: 0.85rem; color: #666; max-height: 250px; overflow-y: auto">
+            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb">
+              <strong style="color: #065f46">✅ Success:</strong> API health check passed
             </div>
-            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
-              <strong style="color: #065f46;">✅ Success:</strong> Manifests loaded successfully
+            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb">
+              <strong style="color: #065f46">✅ Success:</strong> Manifests loaded successfully
             </div>
-            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
-              <strong style="color: #1e40af;">ℹ️ Info:</strong> Dashboard initialized
+            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb">
+              <strong style="color: #1e40af">ℹ️ Info:</strong> Dashboard initialized
             </div>
-            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
-              <strong style="color: #1e40af;">ℹ️ Info:</strong> Cache stats computed
+            <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb">
+              <strong style="color: #1e40af">ℹ️ Info:</strong> Cache stats computed
             </div>
-            <div style="padding: 0.5rem 0;">
-              <strong style="color: #065f46;">✅ Success:</strong> All systems operational
+            <div style="padding: 0.5rem 0">
+              <strong style="color: #065f46">✅ Success:</strong> All systems operational
             </div>
           </div>
         </div>
 
-        <div style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
-          <h4 style="margin: 0 0 1rem 0;">System Checks</h4>
-          <div style="font-size: 0.85rem; color: #666; line-height: 1.8;">
+        <div
+          style="padding: 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px"
+        >
+          <h4 style="margin: 0 0 1rem 0">System Checks</h4>
+          <div style="font-size: 0.85rem; color: #666; line-height: 1.8">
             <div><strong>✅</strong> API Endpoint Responsive</div>
             <div><strong>✅</strong> Manifests Accessible</div>
             <div><strong>✅</strong> Widget Directories Found</div>
@@ -853,246 +1085,279 @@
         <a class="dashboard-link-btn" href="/reports/" target="_blank">📊 Reports</a>
         <a class="dashboard-link-btn" href="/logs/" target="_blank">📋 Logs</a>
         <a class="dashboard-link-btn" href="/src/widgets/" target="_blank">🎨 Widgets</a>
-        <a class="dashboard-link-btn" href="/src/images/Portfolios/" target="_blank">🖼️ Manifests</a>
-        <a class="dashboard-link-btn" href="https://github.com/McCal-Codes/McCals-Website/actions" target="_blank">🚀 CI/CD</a>
-        <a class="dashboard-link-btn" href="https://github.com/McCal-Codes/McCals-Website" target="_blank">💻 GitHub</a>
+        <a class="dashboard-link-btn" href="/src/images/Portfolios/" target="_blank"
+          >🖼️ Manifests</a
+        >
+        <a
+          class="dashboard-link-btn"
+          href="https://github.com/McCal-Codes/McCals-Website/actions"
+          target="_blank"
+          >🚀 CI/CD</a
+        >
+        <a
+          class="dashboard-link-btn"
+          href="https://github.com/McCal-Codes/McCals-Website"
+          target="_blank"
+          >💻 GitHub</a
+        >
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// Toggle expandable sections
-function toggleSection(titleEl) {
-  const content = titleEl.nextElementSibling;
-  titleEl.classList.toggle('collapsed');
-  content.classList.toggle('collapsed');
-}
-
-// Update timestamp
-function updateTimestamp() {
-  const now = new Date().toLocaleString('en-US', {
-    month: 'short', day: 'numeric', year: 'numeric',
-    hour: '2-digit', minute: '2-digit', second: '2-digit'
-  });
-  document.getElementById('lastUpdated').innerHTML = `Last updated: ${now}`;
-  document.getElementById('timestamp').textContent = new Date().toISOString().split('T')[0];
-}
-
-// Set environment info
-function setEnvironmentInfo() {
-  const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  document.getElementById('environment').textContent = isDev ? 'Development' : 'Production';
-  document.getElementById('nodeEnv').textContent = isDev ? 'Development' : 'Production';
-  document.getElementById('pageUrl').textContent = location.hostname;
-}
-
-// Check API Health
-async function checkAPIHealth() {
-  const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  const apiStatus = document.getElementById('apiStatus');
-  const apiIcon = document.getElementById('apiIcon');
-  
-  if (isDev) {
-    apiStatus.textContent = 'Demo Mode';
-    apiStatus.className = 'status status-info';
-    apiIcon.textContent = '⚙️';
-    document.getElementById('apiStatusText').textContent = 'Development';
-    document.getElementById('apiCacheHit').textContent = 'N/A';
-    console.log('📊 API in demo mode');
-    return;
+  // Toggle expandable sections
+  function toggleSection(titleEl) {
+    const content = titleEl.nextElementSibling;
+    titleEl.classList.toggle('collapsed');
+    content.classList.toggle('collapsed');
   }
 
-  try {
-    const response = await fetch('https://api.mcc-cal.com/api/v1/health', {
-      method: 'GET',
-      cache: 'no-store',
-      mode: 'cors'
+  // Update timestamp
+  function updateTimestamp() {
+    const now = new Date().toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
     });
-
-    if (response.ok) {
-      const data = await response.json();
-      apiStatus.textContent = 'Healthy';
-      apiStatus.className = 'status status-ok';
-      apiIcon.textContent = '✅';
-      document.getElementById('apiStatusText').textContent = 'Online';
-      document.getElementById('apiCacheHit').textContent = data.cache?.hitRate || 'N/A';
-      console.log('✅ API healthy');
-    } else {
-      apiStatus.textContent = 'Error';
-      apiStatus.className = 'status status-err';
-      apiIcon.textContent = '❌';
-      document.getElementById('apiStatusText').textContent = `HTTP ${response.status}`;
-    }
-  } catch (e) {
-    apiStatus.textContent = 'Unreachable';
-    apiStatus.className = 'status status-err';
-    apiIcon.textContent = '❌';
-    document.getElementById('apiStatusText').textContent = e.message;
-    console.error('❌ API error:', e.message);
+    document.getElementById('lastUpdated').innerHTML = `Last updated: ${now}`;
+    document.getElementById('timestamp').textContent = new Date().toISOString().split('T')[0];
   }
-}
 
-// Check Manifest Health
-async function checkManifestHealth() {
-  const manifestStatus = document.getElementById('manifestStatus');
-  const manifestIcon = document.getElementById('manifestIcon');
-  const manifests = {
-    'concert': { path: 'Concert', label: 'Concert', prefix: 'concert' },
-    'events': { path: 'Events', label: 'Events', prefix: 'events' },
-    'journalism': { path: 'Journalism', label: 'Journalism', prefix: 'journalism' },
-    'nature': { path: 'Nature', label: 'Nature', prefix: 'nature' },
-    'portrait': { path: 'Portrait', label: 'Portrait', prefix: 'portrait' }
-  };
-  let successCount = 0;
-  let totalItems = 0;
-  let totalImages = 0;
+  // Set environment info
+  function setEnvironmentInfo() {
+    const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    document.getElementById('environment').textContent = isDev ? 'Development' : 'Production';
+    document.getElementById('nodeEnv').textContent = isDev ? 'Development' : 'Production';
+    document.getElementById('pageUrl').textContent = location.hostname;
+  }
 
-  for (const [key, manifest] of Object.entries(manifests)) {
+  // Check API Health
+  async function checkAPIHealth() {
+    const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    const apiStatus = document.getElementById('apiStatus');
+    const apiIcon = document.getElementById('apiIcon');
+
+    if (isDev) {
+      apiStatus.textContent = 'Demo Mode';
+      apiStatus.className = 'status status-info';
+      apiIcon.textContent = '⚙️';
+      document.getElementById('apiStatusText').textContent = 'Development';
+      document.getElementById('apiCacheHit').textContent = 'N/A';
+      console.log('📊 API in demo mode');
+      return;
+    }
+
     try {
-      const response = await fetch(`/src/images/Portfolios/${manifest.path}/${key}-manifest.json`, {
-        cache: 'no-store'
+      const response = await fetch('https://api.mcc-cal.com/api/v1/health', {
+        method: 'GET',
+        cache: 'no-store',
+        mode: 'cors',
       });
-      
+
       if (response.ok) {
         const data = await response.json();
-        const collections = data.bands || data.events || data.articles || data.collections || [];
-        const count = Array.isArray(collections) ? collections.length : Object.keys(collections || {}).length;
-        
-        // Count total images
-        let imgCount = 0;
-        if (Array.isArray(collections)) {
-          imgCount = collections.reduce((sum, item) => sum + ((item.images || []).length || 0), 0);
-        }
-
-        // Update main cards
-        document.getElementById(`${manifest.prefix}Count`).textContent = count;
-        document.getElementById(`${manifest.prefix}Size`).textContent = `${count} items`;
-
-        // Update analytics section
-        document.getElementById(`${manifest.prefix}Total`).textContent = count;
-        document.getElementById(`${manifest.prefix}Images`).textContent = imgCount;
-        document.getElementById(`${manifest.prefix}Updated`).textContent = new Date().toLocaleDateString();
-        document.getElementById(`${manifest.prefix}Size2`).textContent = `~${(Math.random() * 50 + 10).toFixed(1)} MB`;
-
-        totalItems += count;
-        totalImages += imgCount;
-        successCount++;
+        apiStatus.textContent = 'Healthy';
+        apiStatus.className = 'status status-ok';
+        apiIcon.textContent = '✅';
+        document.getElementById('apiStatusText').textContent = 'Online';
+        document.getElementById('apiCacheHit').textContent = data.cache?.hitRate || 'N/A';
+        console.log('✅ API healthy');
+      } else {
+        apiStatus.textContent = 'Error';
+        apiStatus.className = 'status status-err';
+        apiIcon.textContent = '❌';
+        document.getElementById('apiStatusText').textContent = `HTTP ${response.status}`;
       }
     } catch (e) {
-      document.getElementById(`${manifest.prefix}Count`).textContent = '❌';
-      console.error(`Error loading ${key} manifest:`, e.message);
+      apiStatus.textContent = 'Unreachable';
+      apiStatus.className = 'status status-err';
+      apiIcon.textContent = '❌';
+      document.getElementById('apiStatusText').textContent = e.message;
+      console.error('❌ API error:', e.message);
     }
   }
 
-  // Update summary analytics
-  document.getElementById('manifestFiles').textContent = successCount;
-  
-  if (successCount === Object.keys(manifests).length) {
-    manifestStatus.textContent = 'Healthy';
-    manifestStatus.className = 'status status-ok';
-    manifestIcon.textContent = '✅';
-  } else if (successCount > 0) {
-    manifestStatus.textContent = 'Partial';
-    manifestStatus.className = 'status status-warn';
-    manifestIcon.textContent = '⚠️';
-  } else {
-    manifestStatus.textContent = 'Failed';
-    manifestStatus.className = 'status status-err';
-    manifestIcon.textContent = '❌';
-  }
-}
+  // Check Manifest Health
+  async function checkManifestHealth() {
+    const manifestStatus = document.getElementById('manifestStatus');
+    const manifestIcon = document.getElementById('manifestIcon');
+    const manifests = {
+      concert: { path: 'Concert', label: 'Concert', prefix: 'concert' },
+      events: { path: 'Events', label: 'Events', prefix: 'events' },
+      journalism: { path: 'Journalism', label: 'Journalism', prefix: 'journalism' },
+      nature: { path: 'Nature', label: 'Nature', prefix: 'nature' },
+      portrait: { path: 'Portrait', label: 'Portrait', prefix: 'portrait' },
+    };
+    let successCount = 0;
+    let totalItems = 0;
+    let totalImages = 0;
 
-// Check Widget Health
-async function checkWidgetHealth() {
-  const widgetStatus = document.getElementById('widgetStatus');
-  const widgetIcon = document.getElementById('widgetIcon');
-  
-  try {
-    // Scan widget directories
-    const widgetDirs = ['concert', 'photojournalism', 'featured', 'podcast', 'about', 'accessibility-statement'];
-    let totalVersions = 0;
-    let activeVersions = 0;
-
-    for (const dir of widgetDirs) {
+    for (const [key, manifest] of Object.entries(manifests)) {
       try {
-        const response = await fetch(`/src/widgets/${dir}/versions/`, { cache: 'no-store' });
+        const response = await fetch(
+          `/src/images/Portfolios/${manifest.path}/${key}-manifest.json`,
+          {
+            cache: 'no-store',
+          },
+        );
+
         if (response.ok) {
-          const text = await response.text();
-          // Count HTML files (simple heuristic)
-          const matches = text.match(/\.html/g) || [];
-          totalVersions += matches.length;
-          activeVersions += Math.max(1, Math.floor(matches.length / 3)); // Assume ~1/3 are active
+          const data = await response.json();
+          const collections = data.bands || data.events || data.articles || data.collections || [];
+          const count = Array.isArray(collections)
+            ? collections.length
+            : Object.keys(collections || {}).length;
+
+          // Count total images
+          let imgCount = 0;
+          if (Array.isArray(collections)) {
+            imgCount = collections.reduce(
+              (sum, item) => sum + ((item.images || []).length || 0),
+              0,
+            );
+          }
+
+          // Update main cards
+          document.getElementById(`${manifest.prefix}Count`).textContent = count;
+          document.getElementById(`${manifest.prefix}Size`).textContent = `${count} items`;
+
+          // Update analytics section
+          document.getElementById(`${manifest.prefix}Total`).textContent = count;
+          document.getElementById(`${manifest.prefix}Images`).textContent = imgCount;
+          document.getElementById(`${manifest.prefix}Updated`).textContent =
+            new Date().toLocaleDateString();
+          document.getElementById(`${manifest.prefix}Size2`).textContent =
+            `~${(Math.random() * 50 + 10).toFixed(1)} MB`;
+
+          totalItems += count;
+          totalImages += imgCount;
+          successCount++;
         }
       } catch (e) {
-        // Widget dir not found, skip
+        document.getElementById(`${manifest.prefix}Count`).textContent = '❌';
+        console.error(`Error loading ${key} manifest:`, e.message);
       }
     }
 
-    document.getElementById('widgetCount').textContent = widgetDirs.length;
-    document.getElementById('activeVersions').textContent = Math.max(6, activeVersions);
-    document.getElementById('validWidgets').textContent = Math.min(widgetDirs.length, totalVersions > 0 ? widgetDirs.length : 0);
-    
-    widgetStatus.textContent = 'Operational';
-    widgetStatus.className = 'status status-ok';
-    widgetIcon.textContent = '✅';
-  } catch (e) {
-    widgetStatus.textContent = 'Check Failed';
-    widgetStatus.className = 'status status-warn';
-    widgetIcon.textContent = '⚠️';
-    console.error('Widget check error:', e.message);
+    // Update summary analytics
+    document.getElementById('manifestFiles').textContent = successCount;
+
+    if (successCount === Object.keys(manifests).length) {
+      manifestStatus.textContent = 'Healthy';
+      manifestStatus.className = 'status status-ok';
+      manifestIcon.textContent = '✅';
+    } else if (successCount > 0) {
+      manifestStatus.textContent = 'Partial';
+      manifestStatus.className = 'status status-warn';
+      manifestIcon.textContent = '⚠️';
+    } else {
+      manifestStatus.textContent = 'Failed';
+      manifestStatus.className = 'status status-err';
+      manifestIcon.textContent = '❌';
+    }
   }
-}
 
-// Initialize all checks
-async function initDashboard() {
-  updateTimestamp();
-  setEnvironmentInfo();
-  populateAnalytics();
-  await Promise.all([
-    checkAPIHealth(),
-    checkManifestHealth(),
-    checkWidgetHealth()
-  ]);
-  console.log('🎯 Dashboard initialized');
-}
+  // Check Widget Health
+  async function checkWidgetHealth() {
+    const widgetStatus = document.getElementById('widgetStatus');
+    const widgetIcon = document.getElementById('widgetIcon');
 
-// Populate analytics and metrics
-function populateAnalytics() {
-  // API Performance
-  const apiResponseTime = (Math.random() * 400 + 50).toFixed(0) + 'ms';
-  document.getElementById('apiResponseTime').textContent = apiResponseTime;
-  document.getElementById('apiLastCheck').textContent = new Date().toLocaleTimeString();
-  document.getElementById('apiRequestsMin').textContent = Math.floor(Math.random() * 45 + 5);
+    try {
+      // Scan widget directories
+      const widgetDirs = [
+        'concert',
+        'photojournalism',
+        'featured',
+        'podcast',
+        'about',
+        'accessibility-statement',
+      ];
+      let totalVersions = 0;
+      let activeVersions = 0;
 
-  // Cache Performance
-  const hitRate = (Math.random() * 40 + 60).toFixed(1);
-  document.getElementById('cacheHitRate').textContent = hitRate + '%';
+      for (const dir of widgetDirs) {
+        try {
+          const response = await fetch(`/src/widgets/${dir}/versions/`, { cache: 'no-store' });
+          if (response.ok) {
+            const text = await response.text();
+            // Count HTML files (simple heuristic)
+            const matches = text.match(/\.html/g) || [];
+            totalVersions += matches.length;
+            activeVersions += Math.max(1, Math.floor(matches.length / 3)); // Assume ~1/3 are active
+          }
+        } catch (e) {
+          // Widget dir not found, skip
+        }
+      }
 
-  // Request Volume
-  const totalReqs = Math.floor(Math.random() * 8000 + 2000);
-  const manifestReqs = Math.floor(totalReqs * 0.6);
-  const apiReqs = totalReqs - manifestReqs;
-  document.getElementById('totalRequests').textContent = totalReqs.toLocaleString();
-  document.getElementById('manifestRequests').textContent = manifestReqs.toLocaleString();
-  document.getElementById('apiRequests').textContent = apiReqs.toLocaleString();
+      document.getElementById('widgetCount').textContent = widgetDirs.length;
+      document.getElementById('activeVersions').textContent = Math.max(6, activeVersions);
+      document.getElementById('validWidgets').textContent = Math.min(
+        widgetDirs.length,
+        totalVersions > 0 ? widgetDirs.length : 0,
+      );
 
-  // Deployment info
-  const daysAgo = Math.floor(Math.random() * 7) + 1;
-  document.getElementById('lastDeploy').textContent = `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
-  
-  // Additional checks
-  const checks = [
-    '<div><strong>✅</strong> Cloudflare Worker Deployed</div>',
-    '<div><strong>✅</strong> GitHub Actions Passing</div>',
-    '<div><strong>✅</strong> CDN Cache Active</div>'
-  ];
-  document.getElementById('additionalChecks').innerHTML = checks.join('');
-}
+      widgetStatus.textContent = 'Operational';
+      widgetStatus.className = 'status status-ok';
+      widgetIcon.textContent = '✅';
+    } catch (e) {
+      widgetStatus.textContent = 'Check Failed';
+      widgetStatus.className = 'status status-warn';
+      widgetIcon.textContent = '⚠️';
+      console.error('Widget check error:', e.message);
+    }
+  }
 
-// Run on page load
-document.addEventListener('DOMContentLoaded', initDashboard);
+  // Initialize all checks
+  async function initDashboard() {
+    updateTimestamp();
+    setEnvironmentInfo();
+    populateAnalytics();
+    await Promise.all([checkAPIHealth(), checkManifestHealth(), checkWidgetHealth()]);
+    console.log('🎯 Dashboard initialized');
+  }
 
-// Optional: auto-refresh every 60 seconds
-setInterval(updateTimestamp, 60000);
+  // Populate analytics and metrics
+  function populateAnalytics() {
+    // API Performance
+    const apiResponseTime = (Math.random() * 400 + 50).toFixed(0) + 'ms';
+    document.getElementById('apiResponseTime').textContent = apiResponseTime;
+    document.getElementById('apiLastCheck').textContent = new Date().toLocaleTimeString();
+    document.getElementById('apiRequestsMin').textContent = Math.floor(Math.random() * 45 + 5);
+
+    // Cache Performance
+    const hitRate = (Math.random() * 40 + 60).toFixed(1);
+    document.getElementById('cacheHitRate').textContent = hitRate + '%';
+
+    // Request Volume
+    const totalReqs = Math.floor(Math.random() * 8000 + 2000);
+    const manifestReqs = Math.floor(totalReqs * 0.6);
+    const apiReqs = totalReqs - manifestReqs;
+    document.getElementById('totalRequests').textContent = totalReqs.toLocaleString();
+    document.getElementById('manifestRequests').textContent = manifestReqs.toLocaleString();
+    document.getElementById('apiRequests').textContent = apiReqs.toLocaleString();
+
+    // Deployment info
+    const daysAgo = Math.floor(Math.random() * 7) + 1;
+    document.getElementById('lastDeploy').textContent =
+      `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+
+    // Additional checks
+    const checks = [
+      '<div><strong>✅</strong> Cloudflare Worker Deployed</div>',
+      '<div><strong>✅</strong> GitHub Actions Passing</div>',
+      '<div><strong>✅</strong> CDN Cache Active</div>',
+    ];
+    document.getElementById('additionalChecks').innerHTML = checks.join('');
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initDashboard);
+
+  // Optional: auto-refresh every 60 seconds
+  setInterval(updateTimestamp, 60000);
 </script>

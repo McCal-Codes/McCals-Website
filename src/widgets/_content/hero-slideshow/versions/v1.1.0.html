@@ -1,5 +1,151 @@
 <!-- McCal Hero Carousel v1.1 -->
 <div class="mcc-hero-widget" data-widget-version="1.1-hero" data-mcc-hero-root>
+  <!-- site-widgets:inline:start -->
+  <style data-site-widgets-inline>
+    :root {
+      --mcc-accent: #ff4d6d;
+      --mcc-accent-strong: #ff2b50;
+      --mcc-bg: #ffffff;
+      --mcc-fg: #111827;
+      --mcc-line: #e5e7eb;
+      --mcc-muted: #6b7280;
+      --bg: var(--mcc-bg);
+      --fg: var(--mcc-fg);
+      --line: var(--mcc-line);
+      --accent: var(--mcc-accent);
+      --muted: var(--mcc-muted);
+      --chip: #1b1b1b;
+      --focus: #7dd3fc;
+      --link: var(--accent);
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --panel-blur: 8px;
+      --mcc-space-1: 4px;
+      --mcc-space-2: 8px;
+      --mcc-space-3: 12px;
+      --mcc-space-4: 16px;
+      --mcc-space-5: 24px;
+      --mcc-space-6: 32px;
+      --mcc-radius: 10px;
+      --mcc-control-height: 40px;
+      --mcc-z-top: 2147483647;
+    }
+    [data-theme='light'] {
+      --fg: #0a0a0a;
+      --bg: #ffffff;
+      --line: #e5e5e5;
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --panel-blur: 8px;
+      --chip: #fafafa;
+      --focus: #0ea5e9;
+      --link: var(--accent);
+    }
+    [data-theme='dark'] {
+      --fg: #f7f7f7;
+      --bg: #06060a;
+      --line: #2a2a2a;
+      --panel-bg: rgba(20, 20, 20, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --panel-blur: 8px;
+      --chip: #1b1b1b;
+      --focus: #7dd3fc;
+      --link: var(--accent);
+    }
+    [class^='mcc-'],
+    [class*=' mcc-'] {
+      box-sizing: border-box;
+      font-family:
+        Inter,
+        'Segoe UI',
+        system-ui,
+        -apple-system,
+        'Helvetica Neue',
+        Arial,
+        sans-serif;
+      color: var(--fg);
+    }
+    [class^='mcc-'] a:focus-visible,
+    [class^='mcc-'] button:focus-visible,
+    [class^='mcc-'] [role='button']:focus-visible,
+    [class*=' mcc-'] a:focus-visible,
+    [class*=' mcc-'] button:focus-visible,
+    [class*=' mcc-'] [role='button']:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+      border-radius: 6px;
+    }
+    .mcc-sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .mcc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--mcc-space-2);
+      padding: 0.6rem 1.2rem;
+      height: var(--mcc-control-height);
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .mcc-btn:hover,
+    .mcc-btn:focus-visible {
+      background: var(--mcc-accent-strong);
+      transform: translateY(-1px);
+    }
+    .mcc-img-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mcc-row {
+      display: flex;
+      gap: var(--mcc-space-3);
+      align-items: center;
+    }
+    .mcc-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mcc-space-2);
+    }
+    .mcc-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [class^='mcc-'] {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [class^='mcc-'] * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media print {
+      [class^='mcc-'] {
+        color: #000 !important;
+        background: transparent !important;
+      }
+    }
+  </style>
+  <!-- site-widgets:inline:end -->
+
   <style>
     :root {
       --mcc-nav-height: 0px;
@@ -18,7 +164,7 @@
       display: block;
       width: 100%;
       color: #f5f5f5;
-      font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }
 
     .mcc-hero-shell {
@@ -31,7 +177,7 @@
       background: #06060a;
     }
 
-    :root[data-mcc-nav="active"] .mcc-hero-shell {
+    :root[data-mcc-nav='active'] .mcc-hero-shell {
       margin-top: calc(-1 * var(--mcc-nav-height, 0px));
     }
 
@@ -53,7 +199,9 @@
       inset: 0;
       opacity: 0;
       transform: scale(1.04);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
       animation: mcc-hero-cycle 48s ease-in-out infinite;
       animation-delay: var(--delay, 0s);
       animation-fill-mode: both;
@@ -71,7 +219,12 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(4, 4, 12, 0.6) 70%, rgba(5, 5, 10, 0.92) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(4, 4, 12, 0.6) 70%,
+        rgba(5, 5, 10, 0.92) 100%
+      );
     }
 
     .mcc-hero__caption {
@@ -89,11 +242,11 @@
 
     .mcc-hero__slide h2 {
       margin: 0;
-      font-family: 'Libre Baskerville','Georgia',serif;
+      font-family: 'Libre Baskerville', 'Georgia', serif;
       font-size: clamp(1.55rem, 3.6vw, 2.85rem);
       font-weight: 600;
       color: #ffffff;
-      text-shadow: 0 14px 36px rgba(0,0,0,0.6);
+      text-shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
       letter-spacing: 0.02em;
     }
 
@@ -110,7 +263,10 @@
       letter-spacing: 0.08em;
       text-decoration: none;
       text-transform: uppercase;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
       box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
     }
 
@@ -123,12 +279,24 @@
       outline: none;
     }
 
-    .mcc-hero__slide:nth-child(1) { --delay: 0s; }
-    .mcc-hero__slide:nth-child(2) { --delay: 8s; }
-    .mcc-hero__slide:nth-child(3) { --delay: 16s; }
-    .mcc-hero__slide:nth-child(4) { --delay: 24s; }
-    .mcc-hero__slide:nth-child(5) { --delay: 32s; }
-    .mcc-hero__slide:nth-child(6) { --delay: 40s; }
+    .mcc-hero__slide:nth-child(1) {
+      --delay: 0s;
+    }
+    .mcc-hero__slide:nth-child(2) {
+      --delay: 8s;
+    }
+    .mcc-hero__slide:nth-child(3) {
+      --delay: 16s;
+    }
+    .mcc-hero__slide:nth-child(4) {
+      --delay: 24s;
+    }
+    .mcc-hero__slide:nth-child(5) {
+      --delay: 32s;
+    }
+    .mcc-hero__slide:nth-child(6) {
+      --delay: 40s;
+    }
 
     @keyframes mcc-hero-cycle {
       0% {
@@ -191,42 +359,67 @@
     <section class="mcc-hero" aria-label="Featured work carousel">
       <div class="mcc-hero__stage">
         <figure class="mcc-hero__slide">
-          <img src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg" alt="A woman and a child holding a sparkler at night, with dark trees in the background." loading="eager" fetchpriority="high">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg"
+            alt="A woman and a child holding a sparkler at night, with dark trees in the background."
+            loading="eager"
+            fetchpriority="high"
+          />
           <figcaption class="mcc-hero__caption">
             <h2>Boyd Station</h2>
             <a class="mcc-hero__cta" href="/boyd-station">Explore Project</a>
           </figcaption>
         </figure>
         <figure class="mcc-hero__slide">
-          <img src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg" alt="A couple kissing outdoors at night during fireworks display in the background." loading="lazy">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg"
+            alt="A couple kissing outdoors at night during fireworks display in the background."
+            loading="lazy"
+          />
           <figcaption class="mcc-hero__caption">
             <h2>Photojournalism</h2>
             <a class="mcc-hero__cta" href="/photojournalism">View Gallery</a>
           </figcaption>
         </figure>
         <figure class="mcc-hero__slide">
-          <img src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/1757468682503-YXX6ILQYQ1CMH1OT66WD/141024_Kamala+Speaks+at+Erie_CAL3804+1+%281%29.jpg" alt="Crowd of people at a political event listening while holding signs and a flag." loading="lazy">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/1757468682503-YXX6ILQYQ1CMH1OT66WD/141024_Kamala+Speaks+at+Erie_CAL3804+1+%281%29.jpg"
+            alt="Crowd of people at a political event listening while holding signs and a flag."
+            loading="lazy"
+          />
           <figcaption class="mcc-hero__caption">
             <h2>Politics On Assignment</h2>
             <a class="mcc-hero__cta" href="/photojournalism">See Coverage</a>
           </figcaption>
         </figure>
         <figure class="mcc-hero__slide">
-          <img src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg" alt="Guests networking at a cocktail event while a bartender prepares drinks." loading="lazy">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg"
+            alt="Guests networking at a cocktail event while a bartender prepares drinks."
+            loading="lazy"
+          />
           <figcaption class="mcc-hero__caption">
             <h2>Corporate Events</h2>
             <a class="mcc-hero__cta" href="/event">Book Coverage</a>
           </figcaption>
         </figure>
         <figure class="mcc-hero__slide">
-          <img src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg" alt="Guests watching a lively show with colorful lighting and confetti." loading="lazy">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg"
+            alt="Guests watching a lively show with colorful lighting and confetti."
+            loading="lazy"
+          />
           <figcaption class="mcc-hero__caption">
             <h2>Experiences</h2>
             <a class="mcc-hero__cta" href="/event">Discover Events</a>
           </figcaption>
         </figure>
         <figure class="mcc-hero__slide">
-          <img src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg" alt="A musician playing bass on stage under purple and blue lights." loading="lazy">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg"
+            alt="A musician playing bass on stage under purple and blue lights."
+            loading="lazy"
+          />
           <figcaption class="mcc-hero__caption">
             <h2>Concert Moments</h2>
             <a class="mcc-hero__cta" href="/concert">View Performances</a>

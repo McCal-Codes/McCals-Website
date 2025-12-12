@@ -3,6 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 
+const INLINE_START = '<!-- site-widgets:inline:start -->';
+const INLINE_END = '<!-- site-widgets:inline:end -->';
+const INLINE_SKIP = 'site-widgets:inline:skip';
+
 /**
  * Validates HTML structure in widget files
  * Checks for proper HTML DOCTYPE or html tag
@@ -33,11 +37,25 @@ function validateWidgetHTML() {
       // Full page: <!DOCTYPE html> or <html>
       // Snippet: must have at least a div/section/article with content
       const hasFullHTML = content.includes('<!DOCTYPE html>') || content.includes('<html');
-      const hasSnippet = /<(div|section|article|nav|header|footer|style|script)[^>]*>/i.test(content) && content.trim().length > 50;
+      const hasSnippet =
+        /<(div|section|article|nav|header|footer|style|script)[^>]*>/i.test(content) &&
+        content.trim().length > 50;
 
       if (hasFullHTML || hasSnippet) {
         console.log('✅ Valid HTML structure - validate-widget-html.js:34');
         validFiles++;
+
+        const isVersionFile = filePath.includes(`${path.sep}versions${path.sep}`);
+        const isArchived = filePath.includes('_archived');
+        if (isVersionFile && !isArchived) {
+          const skipInline = content.includes(INLINE_SKIP);
+          const hasInlineBlock = content.includes(INLINE_START) && content.includes(INLINE_END);
+
+          if (!skipInline && !hasInlineBlock) {
+            console.log('❌ Missing site-widgets inline block - validate-widget-html.js:40');
+            invalidFiles.push(`${filePath} (missing shared CSS inline block)`);
+          }
+        }
       } else {
         console.log('❌ Missing HTML structure - validate-widget-html.js:37');
         invalidFiles.push(filePath);
@@ -76,7 +94,7 @@ function validateWidgetHTML() {
 
   if (invalidFiles.length > 0) {
     console.log('\n❌ Invalid files: - validate-widget-html.js:69');
-    invalidFiles.forEach(file => console.log(`${file} - validate-widget-html.js:70`));
+    invalidFiles.forEach((file) => console.log(`${file} - validate-widget-html.js:70`));
     process.exit(1);
   } else {
     console.log('\n✅ All widget HTML files are valid! - validate-widget-html.js:73');

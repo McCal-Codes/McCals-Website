@@ -2,6 +2,152 @@
 <!-- Copy this entire code block into a Squarespace Code Block -->
 <!-- Official university logos: Point Park vertical SVG + CMU official source -->
 
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
 <style>
   /* Client Carousel Squarespace Styles v1.2.1 */
   .ss-client-showcase {
@@ -13,13 +159,23 @@
   }
 
   .ss-client-heading {
-    font: 700 24px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font:
+      700 24px/1.2 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
     color: #f5f5f5;
     margin: 0 0 10px;
   }
 
   .ss-client-subtitle {
-    font: 400 14px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font:
+      400 14px/1.4 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
     color: #888;
     margin: 0 0 30px;
   }
@@ -41,8 +197,12 @@
   }
 
   @keyframes ss-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-200px * 22)); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-200px * 22));
+    }
   }
 
   .ss-client-logo {
@@ -63,7 +223,7 @@
 
   .ss-client-logo:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
     border-color: #444;
     background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
   }
@@ -85,7 +245,12 @@
 
   /* Text-based logo styles for better readability */
   .ss-client-text-logo {
-    font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font:
+      600 14px/1.2 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
     color: #f5f5f5;
     text-align: center;
     padding: 0 10px;
@@ -121,13 +286,23 @@
   }
 
   .ss-stat-number {
-    font: 700 20px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font:
+      700 20px/1 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
     color: #f5f5f5;
     display: block;
   }
 
   .ss-stat-label {
-    font: 600 11px/1.3 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font:
+      600 11px/1.3 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
     color: #888;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -139,7 +314,12 @@
     align-items: center;
     justify-content: center;
     min-height: 200px;
-    font: 600 16px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font:
+      600 16px/1.4 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
     color: #f5f5f5;
     opacity: 0.7;
   }
@@ -155,8 +335,12 @@
   }
 
   @keyframes ss-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   /* Mobile responsive */
@@ -217,252 +401,252 @@
 </div>
 
 <script>
-(function() {
-  'use strict';
+  (function () {
+    'use strict';
 
-  // Enhanced Client data with improved logo URLs and randomized order
-  const clientsData = [
-    { 
-      name: "New York Post", 
-      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F6091530bf9f20800044365a0.png&f=1&nofb=1&ipt=07f44853005cf078f2502ea7312f6d6a8b026a5bae019365b00a35e28395b34d",
-      textFallback: { company: "New York Post", tagline: "Since 1801" },
-      website: "https://nypost.com", 
-      project: "Photojournalist" 
-    },
-    { 
-      name: "Pittsburgh Magazine", 
-      logo: "https://pittsburghmagazine.com/wp-content/themes/pittsburgh-magazine/images/logo.png",
-      textFallback: { company: "Pittsburgh Magazine", tagline: "City Life" },
-      website: "https://pittsburghmagazine.com", 
-      project: "Feature Photography" 
-    },
-    { 
-      name: "The Globe", 
-      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fppuglobe.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fthumbnail_globeheadnew-04.png&f=1&nofb=1&ipt=2b605a69d2d38820829fff50502d65bf0256a213e5b1cc99ad2e39eca215c62c",
-      textFallback: { company: "The Globe", tagline: "Point Park U" },
-      website: "https://ppuglobe.com", 
-      project: "Photo Editor" 
-    },
-    { 
-      name: "Point Park University", 
-      logo: "https://www.pointpark.edu/_files/images/logo-vertical--green.svg",
-      textFallback: { company: "Point Park University", tagline: "Downtown Pittsburgh" },
-      website: "https://pointpark.edu", 
-      project: "BFA Photography Student" 
-    },
-    { 
-      name: "Pittsburgh Union Progress", 
-      logo: "https://i0.wp.com/www.unionprogress.com/wp-content/uploads/2022/12/cropped-pup-logo-retina.png?w=544&ssl=1",
-      textFallback: { company: "Pittsburgh Union Progress", tagline: "Labor News" },
-      website: "https://pittsburghunionprogress.com", 
-      project: "Staff Photographer" 
-    },
-    { 
-      name: "Yinzers Meet", 
-      logo: "https://static.wixstatic.com/media/38b6b6_6c6676af8cac40b987f05fbd8b0da530~mv2.png/v1/fill/w_200,h_80,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/4C6CDBFB-773F-43DA-BFEC-B2A6823FB405_PNG.png",
-      textFallback: { company: "Yinzers Meet", tagline: "Pittsburgh Events" },
-      website: "https://yinzersmeet.com", 
-      project: "Event Photography" 
-    },
-    { 
-      name: "Jagoff Media", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/jagoff-media-logo.svg",
-      textFallback: { company: "Jagoff Media", tagline: "Pittsburgh Proud" },
-      website: "https://jagoffmedia.com", 
-      project: "Content Photography" 
-    },
-    { 
-      name: "Terrible Tailgate", 
-      logo: "https://www.steelernation.com/img/Terrible%20Tailgate/ttyellow-original.jpg",
-      textFallback: { company: "Terrible Tailgate", tagline: "Steelers Nation" },
-      website: "https://terribletailgate.com", 
-      project: "Sports Event Photography" 
-    },
-    { 
-      name: "Next Generation News", 
-      logo: "https://cdn.prod.website-files.com/6632cef89bb9e45895dd550b/68e04082e919c60d5ac3f0f9_PMP%20Logo%202%20200%20x%20200.png",
-      textFallback: { company: "Next Generation News", tagline: "Digital Media" },
-      website: "https://nextgenerationnews.com", 
-      project: "Photojournalist" 
-    },
-    { 
-      name: "Ghostlight Theatre Company", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/ghostlight-theatre-company-logo.svg",
-      textFallback: { company: "Ghostlight Theatre", tagline: "Live Performance" },
-      website: "https://ghostlighttheatre.com", 
-      project: "Theatre Photography" 
-    },
-    { 
-      name: "Center for Media Innovation", 
-      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pointpark.edu%2Facademics%2Fschools%2Fschoolofcommunication%2Fcenterformediainnovation%2Fmedia%2FCMI_MainLogo.png&f=1&nofb=1&ipt=4ed471b95b34cfbcabb369400a62dbf979e3fc55c8924345c664ff8b582f4214",
-      textFallback: { company: "Center for Media Innovation", tagline: "Point Park U" },
-      website: "https://www.pointpark.edu/academics/rowlandhall/cmi", 
-      project: "Media Innovation Photography" 
-    },
-    { 
-      name: "Western PA Press Club", 
-      logo: "https://images.squarespace-cdn.com/content/v1/62a1203c15acec3a449dadbb/419c4b21-ac99-4661-bf7a-7fc341abb19e/logo+long+transparent+.png?format=500w",
-      textFallback: { company: "Western PA Press Club", tagline: "Professional Media" },
-      website: "https://www.westernpapress.org", 
-      project: "Press Club Events" 
-    },
-    { 
-      name: "Carnegie Mellon University", 
-      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.graphicdesigndegreehub.com%2Fwp-content%2Fuploads%2F2019%2F12%2Fcarnegie-mellon-university.png&f=1&nofb=1&ipt=e3a2af9105174efabecc3011ebcbfd19e585cb2c11c31c306d6e7c4117957648",
-      textFallback: { company: "Carnegie Mellon", tagline: "Pittsburgh, PA" },
-      website: "https://www.cmu.edu", 
-      project: "University Photography" 
-    },
-    { 
-      name: "University of Pittsburgh", 
-      logo: "https://logos-world.net/wp-content/uploads/2023/09/University-of-Pittsburgh-Logo-500x281.png",
-      textFallback: { company: "University of Pittsburgh", tagline: "Hail to Pitt" },
-      website: "https://www.pitt.edu", 
-      project: "University Photography" 
-    },
-    { 
-      name: "Butler County Community College", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/bc3-logo.svg",
-      textFallback: { company: "BC3", tagline: "Butler County" },
-      website: "https://www.bc3.edu", 
-      project: "College Photography" 
-    },
-    { 
-      name: "Penn State Fayette", 
-      logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Fthumbs%2F2x%2Fpennsylvania-state-university-logo.png&f=1&nofb=1&ipt=69d959415424e5d345bc761fcffd346a966b2b3e435b0d340615f5ffc252e74e",
-      textFallback: { company: "Penn State Fayette", tagline: "We Are Penn State" },
-      website: "https://fayette.psu.edu", 
-      project: "Campus Photography" 
-    },
-    { 
-      name: "The Watchful Shepherd", 
-      logo: "https://watchful.org/wp-content/uploads/2024/06/Watchful-Shepherd-Logo-2024.png",
-      textFallback: { company: "The Watchful Shepherd", tagline: "Advocacy & Justice" },
-      website: "https://watchfulshepherd.org", 
-      project: "Advocacy Photography" 
-    },
-    { 
-      name: "Voyage Visuals", 
-      logo: "https://cdn.prod.website-files.com/5e90f121241fd84dcd6daccc/5ea37d79c07d78a6bf30d2b1_Voyage_V%20(1).png",
-      textFallback: { company: "Voyage Visuals", tagline: "Creative Production" },
-      website: "https://voyagevisuals.com", 
-      project: "Visual Production" 
-    },
-    { 
-      name: "The Space Upstairs", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/the-space-upstairs-logo.svg",
-      textFallback: { company: "The Space Upstairs", tagline: "Creative Venue" },
-      website: "https://thespaceupstairs.com", 
-      project: "Venue Photography" 
-    },
-    { 
-      name: "Haven Pittsburgh", 
-      logo: "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/haven-pittsburgh-logo.svg",
-      textFallback: { company: "Haven Pittsburgh", tagline: "Community Support" },
-      website: "https://havenpittsburgh.org", 
-      project: "Community Support Photography" 
-    },
-    { 
-      name: "West Hills Gazette", 
-      logo: "https://i0.wp.com/westhillsgazette.com/wp-content/uploads/2024/10/West-Hills-Gazette_20241031_100707_0000.jpeg?w=475&quality=89&ssl=1",
-      textFallback: { company: "West Hills Gazette", tagline: "Local News" },
-      website: "https://westhillsgazette.com", 
-      project: "Photojournalist" 
-    },
-    { 
-      name: "Capo's on Carson", 
-      logo: "https://caposoncarson.com/wp-content/uploads/2025/08/Capos_White_Text_Transparent_250x40.png",
-      textFallback: { company: "Capo's on Carson", tagline: "Italian Cuisine" },
-      website: "https://caposoncarson.com", 
-      project: "Restaurant Photography" 
-    }
-  ];
+    // Enhanced Client data with improved logo URLs and randomized order
+    const clientsData = [
+      {
+        name: 'New York Post',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F6091530bf9f20800044365a0.png&f=1&nofb=1&ipt=07f44853005cf078f2502ea7312f6d6a8b026a5bae019365b00a35e28395b34d',
+        textFallback: { company: 'New York Post', tagline: 'Since 1801' },
+        website: 'https://nypost.com',
+        project: 'Photojournalist',
+      },
+      {
+        name: 'Pittsburgh Magazine',
+        logo: 'https://pittsburghmagazine.com/wp-content/themes/pittsburgh-magazine/images/logo.png',
+        textFallback: { company: 'Pittsburgh Magazine', tagline: 'City Life' },
+        website: 'https://pittsburghmagazine.com',
+        project: 'Feature Photography',
+      },
+      {
+        name: 'The Globe',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fppuglobe.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fthumbnail_globeheadnew-04.png&f=1&nofb=1&ipt=2b605a69d2d38820829fff50502d65bf0256a213e5b1cc99ad2e39eca215c62c',
+        textFallback: { company: 'The Globe', tagline: 'Point Park U' },
+        website: 'https://ppuglobe.com',
+        project: 'Photo Editor',
+      },
+      {
+        name: 'Point Park University',
+        logo: 'https://www.pointpark.edu/_files/images/logo-vertical--green.svg',
+        textFallback: { company: 'Point Park University', tagline: 'Downtown Pittsburgh' },
+        website: 'https://pointpark.edu',
+        project: 'BFA Photography Student',
+      },
+      {
+        name: 'Pittsburgh Union Progress',
+        logo: 'https://i0.wp.com/www.unionprogress.com/wp-content/uploads/2022/12/cropped-pup-logo-retina.png?w=544&ssl=1',
+        textFallback: { company: 'Pittsburgh Union Progress', tagline: 'Labor News' },
+        website: 'https://pittsburghunionprogress.com',
+        project: 'Staff Photographer',
+      },
+      {
+        name: 'Yinzers Meet',
+        logo: 'https://static.wixstatic.com/media/38b6b6_6c6676af8cac40b987f05fbd8b0da530~mv2.png/v1/fill/w_200,h_80,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/4C6CDBFB-773F-43DA-BFEC-B2A6823FB405_PNG.png',
+        textFallback: { company: 'Yinzers Meet', tagline: 'Pittsburgh Events' },
+        website: 'https://yinzersmeet.com',
+        project: 'Event Photography',
+      },
+      {
+        name: 'Jagoff Media',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/jagoff-media-logo.svg',
+        textFallback: { company: 'Jagoff Media', tagline: 'Pittsburgh Proud' },
+        website: 'https://jagoffmedia.com',
+        project: 'Content Photography',
+      },
+      {
+        name: 'Terrible Tailgate',
+        logo: 'https://www.steelernation.com/img/Terrible%20Tailgate/ttyellow-original.jpg',
+        textFallback: { company: 'Terrible Tailgate', tagline: 'Steelers Nation' },
+        website: 'https://terribletailgate.com',
+        project: 'Sports Event Photography',
+      },
+      {
+        name: 'Next Generation News',
+        logo: 'https://cdn.prod.website-files.com/6632cef89bb9e45895dd550b/68e04082e919c60d5ac3f0f9_PMP%20Logo%202%20200%20x%20200.png',
+        textFallback: { company: 'Next Generation News', tagline: 'Digital Media' },
+        website: 'https://nextgenerationnews.com',
+        project: 'Photojournalist',
+      },
+      {
+        name: 'Ghostlight Theatre Company',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/ghostlight-theatre-company-logo.svg',
+        textFallback: { company: 'Ghostlight Theatre', tagline: 'Live Performance' },
+        website: 'https://ghostlighttheatre.com',
+        project: 'Theatre Photography',
+      },
+      {
+        name: 'Center for Media Innovation',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pointpark.edu%2Facademics%2Fschools%2Fschoolofcommunication%2Fcenterformediainnovation%2Fmedia%2FCMI_MainLogo.png&f=1&nofb=1&ipt=4ed471b95b34cfbcabb369400a62dbf979e3fc55c8924345c664ff8b582f4214',
+        textFallback: { company: 'Center for Media Innovation', tagline: 'Point Park U' },
+        website: 'https://www.pointpark.edu/academics/rowlandhall/cmi',
+        project: 'Media Innovation Photography',
+      },
+      {
+        name: 'Western PA Press Club',
+        logo: 'https://images.squarespace-cdn.com/content/v1/62a1203c15acec3a449dadbb/419c4b21-ac99-4661-bf7a-7fc341abb19e/logo+long+transparent+.png?format=500w',
+        textFallback: { company: 'Western PA Press Club', tagline: 'Professional Media' },
+        website: 'https://www.westernpapress.org',
+        project: 'Press Club Events',
+      },
+      {
+        name: 'Carnegie Mellon University',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.graphicdesigndegreehub.com%2Fwp-content%2Fuploads%2F2019%2F12%2Fcarnegie-mellon-university.png&f=1&nofb=1&ipt=e3a2af9105174efabecc3011ebcbfd19e585cb2c11c31c306d6e7c4117957648',
+        textFallback: { company: 'Carnegie Mellon', tagline: 'Pittsburgh, PA' },
+        website: 'https://www.cmu.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'University of Pittsburgh',
+        logo: 'https://logos-world.net/wp-content/uploads/2023/09/University-of-Pittsburgh-Logo-500x281.png',
+        textFallback: { company: 'University of Pittsburgh', tagline: 'Hail to Pitt' },
+        website: 'https://www.pitt.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'Butler County Community College',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/bc3-logo.svg',
+        textFallback: { company: 'BC3', tagline: 'Butler County' },
+        website: 'https://www.bc3.edu',
+        project: 'College Photography',
+      },
+      {
+        name: 'Penn State Fayette',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Fthumbs%2F2x%2Fpennsylvania-state-university-logo.png&f=1&nofb=1&ipt=69d959415424e5d345bc761fcffd346a966b2b3e435b0d340615f5ffc252e74e',
+        textFallback: { company: 'Penn State Fayette', tagline: 'We Are Penn State' },
+        website: 'https://fayette.psu.edu',
+        project: 'Campus Photography',
+      },
+      {
+        name: 'The Watchful Shepherd',
+        logo: 'https://watchful.org/wp-content/uploads/2024/06/Watchful-Shepherd-Logo-2024.png',
+        textFallback: { company: 'The Watchful Shepherd', tagline: 'Advocacy & Justice' },
+        website: 'https://watchfulshepherd.org',
+        project: 'Advocacy Photography',
+      },
+      {
+        name: 'Voyage Visuals',
+        logo: 'https://cdn.prod.website-files.com/5e90f121241fd84dcd6daccc/5ea37d79c07d78a6bf30d2b1_Voyage_V%20(1).png',
+        textFallback: { company: 'Voyage Visuals', tagline: 'Creative Production' },
+        website: 'https://voyagevisuals.com',
+        project: 'Visual Production',
+      },
+      {
+        name: 'The Space Upstairs',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/the-space-upstairs-logo.svg',
+        textFallback: { company: 'The Space Upstairs', tagline: 'Creative Venue' },
+        website: 'https://thespaceupstairs.com',
+        project: 'Venue Photography',
+      },
+      {
+        name: 'Haven Pittsburgh',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/haven-pittsburgh-logo.svg',
+        textFallback: { company: 'Haven Pittsburgh', tagline: 'Community Support' },
+        website: 'https://havenpittsburgh.org',
+        project: 'Community Support Photography',
+      },
+      {
+        name: 'West Hills Gazette',
+        logo: 'https://i0.wp.com/westhillsgazette.com/wp-content/uploads/2024/10/West-Hills-Gazette_20241031_100707_0000.jpeg?w=475&quality=89&ssl=1',
+        textFallback: { company: 'West Hills Gazette', tagline: 'Local News' },
+        website: 'https://westhillsgazette.com',
+        project: 'Photojournalist',
+      },
+      {
+        name: "Capo's on Carson",
+        logo: 'https://caposoncarson.com/wp-content/uploads/2025/08/Capos_White_Text_Transparent_250x40.png',
+        textFallback: { company: "Capo's on Carson", tagline: 'Italian Cuisine' },
+        website: 'https://caposoncarson.com',
+        project: 'Restaurant Photography',
+      },
+    ];
 
-  function createTextLogo(client) {
-    const textLogo = document.createElement('div');
-    textLogo.className = 'ss-client-text-logo';
-    textLogo.innerHTML = `
+    function createTextLogo(client) {
+      const textLogo = document.createElement('div');
+      textLogo.className = 'ss-client-text-logo';
+      textLogo.innerHTML = `
       <span class="company-name">${client.textFallback.company}</span>
       <span class="company-tagline">${client.textFallback.tagline}</span>
     `;
-    return textLogo;
-  }
-
-  function handleLogoError(logoElement, client) {
-    // Replace with text-based logo on error
-    logoElement.innerHTML = '';
-    const textLogo = createTextLogo(client);
-    logoElement.appendChild(textLogo);
-  }
-
-  // Fisher-Yates shuffle algorithm for random client order
-  function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      return textLogo;
     }
-    return shuffled;
-  }
 
-  function createClientCarousel() {
-    const container = document.getElementById('ss-client-container');
-    if (!container) return;
+    function handleLogoError(logoElement, client) {
+      // Replace with text-based logo on error
+      logoElement.innerHTML = '';
+      const textLogo = createTextLogo(client);
+      logoElement.appendChild(textLogo);
+    }
 
-    // Shuffle the clients for random order each time
-    const shuffledClients = shuffleArray(clientsData);
-    
-    // Create three copies for seamless infinite loop
-    const tripleClients = [...shuffledClients, ...shuffledClients, ...shuffledClients];
-    
-    const carousel = document.createElement('div');
-    carousel.className = 'ss-client-carousel';
-    const track = document.createElement('div');
-    track.className = 'ss-client-track';
+    // Fisher-Yates shuffle algorithm for random client order
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
 
-    tripleClients.forEach(client => {
-      const logoElement = document.createElement('div');
-      logoElement.className = 'ss-client-logo';
-      logoElement.setAttribute('title', `${client.name} - ${client.project}`);
+    function createClientCarousel() {
+      const container = document.getElementById('ss-client-container');
+      if (!container) return;
 
-      // Try loading image first
-      const img = document.createElement('img');
-      img.alt = `${client.name} logo`;
-      img.loading = 'lazy';
-      
-      // Set up error handling before setting src
-      img.onerror = () => handleLogoError(logoElement, client);
-      
-      // Add load event to ensure proper display
-      img.onload = () => {
-        // Image loaded successfully, keep as is
-        img.style.opacity = '1';
-      };
-      
-      img.src = client.logo;
-      img.style.opacity = '0.9'; // Slightly transparent initially
-      logoElement.appendChild(img);
+      // Shuffle the clients for random order each time
+      const shuffledClients = shuffleArray(clientsData);
 
-      logoElement.addEventListener('click', () => {
-        if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
+      // Create three copies for seamless infinite loop
+      const tripleClients = [...shuffledClients, ...shuffledClients, ...shuffledClients];
+
+      const carousel = document.createElement('div');
+      carousel.className = 'ss-client-carousel';
+      const track = document.createElement('div');
+      track.className = 'ss-client-track';
+
+      tripleClients.forEach((client) => {
+        const logoElement = document.createElement('div');
+        logoElement.className = 'ss-client-logo';
+        logoElement.setAttribute('title', `${client.name} - ${client.project}`);
+
+        // Try loading image first
+        const img = document.createElement('img');
+        img.alt = `${client.name} logo`;
+        img.loading = 'lazy';
+
+        // Set up error handling before setting src
+        img.onerror = () => handleLogoError(logoElement, client);
+
+        // Add load event to ensure proper display
+        img.onload = () => {
+          // Image loaded successfully, keep as is
+          img.style.opacity = '1';
+        };
+
+        img.src = client.logo;
+        img.style.opacity = '0.9'; // Slightly transparent initially
+        logoElement.appendChild(img);
+
+        logoElement.addEventListener('click', () => {
+          if (client.website) window.open(client.website, '_blank', 'noopener noreferrer');
+        });
+
+        track.appendChild(logoElement);
       });
 
-      track.appendChild(logoElement);
-    });
+      carousel.appendChild(track);
+      container.className = 'ss-client-container';
+      container.innerHTML = '';
+      container.appendChild(carousel);
+    }
 
-    carousel.appendChild(track);
-    container.className = 'ss-client-container';
-    container.innerHTML = '';
-    container.appendChild(carousel);
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', createClientCarousel);
-  } else {
-    createClientCarousel();
-  }
-})();
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', createClientCarousel);
+    } else {
+      createClientCarousel();
+    }
+  })();
 </script>
 
 <!-- End of Squarespace Code Block -->
