@@ -1,5 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
 # Remove build artifacts from staging before linting
 # This prevents ESLint from trying to lint generated .next/, build/, out/ files

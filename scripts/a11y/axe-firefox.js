@@ -1,4 +1,4 @@
-/* global axe, document */
+/* global axe */
 const { firefox } = require('playwright');
 
 (async () => {
@@ -9,21 +9,24 @@ const { firefox } = require('playwright');
   try {
     await page.goto(url, { waitUntil: 'networkidle' });
     // Inject axe-core from CDN
-    await page.addScriptTag({ url: 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.2/axe.min.js' });
+    await page.addScriptTag({
+      url: 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.2/axe.min.js',
+    });
     const results = await page.evaluate(async () => {
       return await axe.run(document, {
         runOnly: {
           type: 'tag',
-          values: ['wcag2aa']
-        }
+          values: ['wcag2aa'],
+        },
       });
     });
     const out = JSON.stringify(results, null, 2);
     console.log(out);
     // Also write to file in reports/
     const fs = require('fs');
-    try { fs.mkdirSync('reports', { recursive: true }); }
-    catch (e) {
+    try {
+      fs.mkdirSync('reports', { recursive: true });
+    } catch (e) {
       console.warn('Could not create reports directory:', e.message);
     }
     fs.writeFileSync('reports/axe-firefox-results.json', out);

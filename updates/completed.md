@@ -14,6 +14,13 @@ This file tracks all completed tasks that have been removed from the active `tod
 - [x] Added shared CSS markers (`<!-- site-widgets:inline:start/end -->`) with opt-out comment `<!-- site-widgets:inline:skip -->`
 - [x] Updated `validate:widgets` script to require the inline block (unless skipped) and documented the workflow in `docs/standards/widget-standards.md` & `src/widgets/_shared/README.md`
 
+### iOS Installable App (PWA baseline) (Dec 12, 2025)
+
+- [x] Added PWA manifest and app icons to `sites/dev.mcc-cal.com/public/` (`manifest.webmanifest`, `icons/*`)
+- [x] Added minimal service worker (`public/sw.js`) + offline fallback page (`public/offline.html`)
+- [x] Wired PWA/iOS meta tags + manifest link in `pages/_document.tsx` and SW registration in `pages/_app.tsx`
+- [x] Documented iOS “Add to Home Screen” install steps in `sites/dev.mcc-cal.com/README.md`
+
 ### Blog System & Cloudflare Integration (Dec 5-6, 2025)
 
 - [x] **Blog Admin Widget v1.0.0** — Complete blog authoring system with login, post editor (dynamic content blocks), post management dashboard, profile settings; production-ready self-contained admin widget

@@ -5,6 +5,7 @@ Next.js development site mirroring mcc-cal.com production, featuring full widget
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ (Next.js 15 works best on Node 18+)
 - Network access to npm registry
 - Access to api.mcc-cal.com API
@@ -13,6 +14,7 @@ Next.js development site mirroring mcc-cal.com production, featuring full widget
 ### Three Ways to Start
 
 #### Option 1: Auto-start with VS Code (Easiest)
+
 When you open this workspace in VS Code, both the Next.js server and Cloudflare tunnel will start automatically!
 
 - **Local:** http://localhost:3000
@@ -21,13 +23,16 @@ When you open this workspace in VS Code, both the Next.js server and Cloudflare 
 To disable auto-start, remove the `task.runTask` section from `.vscode/settings.json`.
 
 #### Option 2: Manual with VS Code Tasks
+
 Press `Cmd+Shift+P` (macOS) or `Ctrl+Shift+P` (Windows/Linux), then:
+
 1. Type "Tasks: Run Task"
 2. Select "Dev Site: Start All"
 
 Both services will start in dedicated terminal panels.
 
 #### Option 3: Command Line Script
+
 ```bash
 cd sites/dev.mcc-cal.com
 
@@ -40,6 +45,7 @@ npm run dev:full
 ```
 
 ### Stop Services
+
 - VS Code: Click the trash icon in the terminal panels
 - Script: Press `Ctrl+C` in the terminal running `npm run dev:full`
 - Manual: `Ctrl+C` in each terminal window
@@ -50,33 +56,56 @@ npm run dev:full
 cd sites/dev.mcc-cal.com
 
 # Install dependencies
+
 npm install
 
 # Create environment file
+
 cp .env.example .env.local
 
 # Start development server
+
 npm run dev
+
 # Open http://localhost:3000 or https://dev.mcc-cal.com (via Cloudflare Tunnel)
+
 \`\`\`
 
 ### Build for Production
 
 \`\`\`bash
+
 # Create optimized build
+
 npm run build
 
 # Start production server
+
 npm run start
+
 # Serves on http://localhost:3000
+
 \`\`\`
+
+## 📱 Install on iOS (App-style)
+
+This site supports an **installable iOS web app** (PWA-style) via Safari.
+
+1. Open the site in **Safari** (not Chrome): https://dev.mcc-cal.com
+2. Tap **Share** → **Add to Home Screen**
+3. Launch **McCal Media** from your Home Screen
+
+Notes:
+
+- When installed, it opens in a standalone app window (no browser UI).
+- A minimal offline page is available if you lose connection.
 
 ## ✨ Features
 
-- **Production-Perfect Widgets**: Dev pages use the exact same widget code as mcc-cal.com  
+- **Production-Perfect Widgets**: Dev pages use the exact same widget code as mcc-cal.com
 - **🔄 Dynamic Widget Reloading**: See widget changes instantly during development (no rebuild needed!)
 - **Server-Side Rendering (SSR)**: Fast initial page loads with pre-rendered content
-- **API Integration**: Fetches data from api.mcc-cal.com with intelligent caching  
+- **API Integration**: Fetches data from api.mcc-cal.com with intelligent caching
 - **Image Optimization**: Next.js Image component with automatic WebP conversion
 - **TypeScript**: Full type safety across the application
 - **Responsive Design**: Mobile-first, works on all devices
@@ -85,17 +114,17 @@ npm run start
 
 \`\`\`
 sites/dev.mcc-cal.com/
-├── pages/              # Page routes
-│   ├── index.tsx       # Homepage
-│   ├── concerts.tsx    # ✅ Concert portfolio (API integrated)
-│   ├── events.tsx      # Event portfolio (coming soon)
-│   ├── journalism.tsx  # Journalism (coming soon)
-│   └── ...
+├── pages/ # Page routes
+│ ├── index.tsx # Homepage
+│ ├── concerts.tsx # ✅ Concert portfolio (API integrated)
+│ ├── events.tsx # Event portfolio (coming soon)
+│ ├── journalism.tsx # Journalism (coming soon)
+│ └── ...
 ├── utils/
-│   └── api-client.ts   # ✅ NEW: API client for api.mcc-cal.com
-├── components/         # React components
-├── types/              # TypeScript types
-└── next.config.js      # Configuration
+│ └── api-client.ts # ✅ NEW: API client for api.mcc-cal.com
+├── components/ # React components
+├── types/ # TypeScript types
+└── next.config.js # Configuration
 \`\`\`
 
 ## 🔌 API Integration
@@ -105,11 +134,15 @@ sites/dev.mcc-cal.com/
 Create \`.env.local\`:
 
 \`\`\`bash
+
 # Production API
+
 NEXT_PUBLIC_API_URL=https://api.mcc-cal.com
 
 # Or for local development
+
 # NEXT_PUBLIC_API_URL=http://localhost:8787
+
 \`\`\`
 
 ### API Client Usage
@@ -142,6 +175,7 @@ const url = getImageUrl(image.path);
 **Status:** Fully implemented with API integration
 
 **Features:**
+
 - Server-side rendering with \`getServerSideProps\`
 - Dynamic band filtering
 - Lightbox gallery with navigation
@@ -150,16 +184,17 @@ const url = getImageUrl(image.path);
 
 **Data Flow:**
 \`\`\`
+
 1. Server fetches from api.mcc-cal.com/api/v1/manifests/concert
 2. Page renders with complete data (SEO-friendly)
 3. Client-side filtering and interactions
 4. Images from jsDelivr CDN with optimization
-\`\`\`
+   \`\`\`
 
 ### Coming Soon
 
 - Events Portfolio (\`/events\`)
-- Journalism (\`/journalism\`)  
+- Journalism (\`/journalism\`)
 - Featured Work (\`/featured-work\`)
 - Portraits & Nature
 - Blog with Cloudflare KV integration
@@ -180,6 +215,7 @@ npm run build
 npm start
 
 # Or with PM2
+
 pm2 start npm --name "mccal-site" -- start
 \`\`\`
 
@@ -195,24 +231,31 @@ docker run -p 3000:3000 -e NEXT_PUBLIC_API_URL=https://api.mcc-cal.com mccal-nex
 ### API Connection Failed
 
 \`\`\`bash
+
 # Check API health
+
 curl https://api.mcc-cal.com/health
 
 # Verify environment variable
+
 echo $NEXT_PUBLIC_API_URL
 \`\`\`
 
 ### Images Not Loading
 
 \`\`\`bash
+
 # Test jsDelivr CDN
+
 curl https://cdn.jsdelivr.net/gh/McCal-Codes/mccal-api@manifests-cdn/src/images/Portfolios/Concert/concert-manifest.json
 \`\`\`
 
 ### Port Already in Use
 
 \`\`\`bash
+
 # Use different port
+
 npm run dev -- -p 3001
 npm run start -- -p 3001
 \`\`\`
@@ -231,6 +274,7 @@ As of December 6, 2025, all portfolio pages use the **WidgetEmbed** component, w
 ### Widget Changelogs
 
 Each widget includes its own built-in changelog modal! Click the **version indicator** badge (e.g., "v5.2") next to the widget title to view:
+
 - All changes and improvements for that version
 - Previous version notes
 - Feature highlights
@@ -239,27 +283,29 @@ This is the **exact same changelog** shown on the production Squarespace site.
 
 ### Current Widget Pages
 
-| Page | Widget | Version | Changelog |
-|------|--------|---------|-----------|
-| `/journalism` | photojournalism-portfolio | v5.2.0 | ✓ Click v5.2 badge |
-| `/concerts` | concert-portfolio | v4.7.1 | ✓ Click v4.7.1 badge |
-| `/events` | event-portfolio | v2.6.4 | ✓ Click v2.6.4 badge |
-| `/featured-work` | featured-portfolio | v1.5.0 | ✓ Click v1.5.0 badge |
-| `/portraits` | portrait-portfolio | v1.1 | ✓ Click v1.1 badge |
-| `/nature` | nature-portfolio | v1.0 | ✓ Click v1.0 badge |
-| `/podcast` | podcast-feed | v1.9.5 | ✓ Click v1.9.5 badge |
+| Page             | Widget                    | Version | Changelog            |
+| ---------------- | ------------------------- | ------- | -------------------- |
+| `/journalism`    | photojournalism-portfolio | v5.2.0  | ✓ Click v5.2 badge   |
+| `/concerts`      | concert-portfolio         | v4.7.1  | ✓ Click v4.7.1 badge |
+| `/events`        | event-portfolio           | v2.6.4  | ✓ Click v2.6.4 badge |
+| `/featured-work` | featured-portfolio        | v1.5.0  | ✓ Click v1.5.0 badge |
+| `/portraits`     | portrait-portfolio        | v1.1    | ✓ Click v1.1 badge   |
+| `/nature`        | nature-portfolio          | v1.0    | ✓ Click v1.0 badge   |
+| `/podcast`       | podcast-feed              | v1.9.5  | ✓ Click v1.9.5 badge |
 
 ### Widget Development & Hot Reload
 
 **New Feature**: Widgets now reload dynamically during development!
 
 During development (`localhost:3000`):
+
 - Widget files are loaded from the **local filesystem**
 - Changes appear **instantly** when you edit a widget HTML file
 - No need to rebuild or commit changes
 - Simply press **Ctrl+Shift+W** (Cmd+Shift+W on macOS) to reload
 
 In production (deployed site):
+
 - Widgets are loaded from **GitHub** (frozen, consistent versions)
 - Behavior unchanged from previous implementation
 
@@ -269,6 +315,7 @@ In production (deployed site):
 ### Adding New Widget Pages
 
 See **[WIDGET-EMBED-GUIDE.md](./WIDGET-EMBED-GUIDE.md)** for detailed instructions on:
+
 - Adding a new widget page
 - Updating widget versions
 - Troubleshooting widget loading issues
@@ -280,7 +327,7 @@ See **[WIDGET-EMBED-GUIDE.md](./WIDGET-EMBED-GUIDE.md)** for detailed instructio
 ✅ **Automatic Updates** - Changes to production widgets instantly appear on dev  
 ✅ **Built-in Changelogs** - View changelog modal for each widget  
 ✅ **Easy Maintenance** - No custom React components to keep in sync  
-✅ **Perfect Parity** - Dev always matches production exactly  
+✅ **Perfect Parity** - Dev always matches production exactly
 
 ## 📚 Related Documentation
 

@@ -4,7 +4,33 @@ import globals from "globals";
 // Flat config for ESLint 8.57.x (no "eslint/config" export yet)
 export default [
   {
-    ignores: ["dist/**", "node_modules/**", "logs/**", "coverage/**", "scripts/_archived/**", ".next/**", "**/build/**", "**/out/**"],
+    ignores: [
+      "dist/**",
+      "logs/**",
+      "coverage/**",
+      "reports/**",
+      "test-results/**",
+      "scripts/_archived/**",
+      "src/api/scripts/_website-scripts-archived/**",
+      "**/build/**",
+      "**/out/**",
+
+      // Bundled/build outputs
+      "thesis/interactive/**",
+
+      // Some widgets ship legacy/versioned JS bundles; keep repo-wide lint focused on maintained source
+      "src/widgets/**/versions/**/*.js",
+
+      // Nested/duplicated source trees (historical packaging artifacts)
+      "src/api/src/**",
+
+      // Never lint dependencies or framework build output (including nested apps)
+      "**/node_modules/**",
+      "**/.next/**",
+
+      // Optional: tool UIs may be vendored / Electron-specific; keep them out of repo-wide lint
+      "tools/image-compress/**",
+    ],
   },
   {
     ...js.configs.recommended,

@@ -1,6 +1,6 @@
 /**
  * Manifest Display Component
- * 
+ *
  * Displays manifest data and portfolio statistics
  * Part of Phase 2: Next.js components implementation
  */
@@ -8,18 +8,13 @@
 import { Manifest } from '../utils/api-client';
 
 interface ManifestDisplayProps {
-  manifest: Manifest;
+  manifest?: Manifest | null;
   type: string;
   loading?: boolean;
   error?: string;
 }
 
-export default function ManifestDisplay({
-  manifest,
-  type,
-  loading,
-  error,
-}: ManifestDisplayProps) {
+export default function ManifestDisplay({ manifest, type, loading, error }: ManifestDisplayProps) {
   if (loading) {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -30,9 +25,24 @@ export default function ManifestDisplay({
 
   if (error) {
     return (
-      <div style={{ padding: '20px', backgroundColor: '#ffebee', borderRadius: '4px', color: '#c62828' }}>
+      <div
+        style={{
+          padding: '20px',
+          backgroundColor: '#ffebee',
+          borderRadius: '4px',
+          color: '#c62828',
+        }}
+      >
         <p>Error loading {type} manifest:</p>
         <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{error}</pre>
+      </div>
+    );
+  }
+
+  if (!manifest) {
+    return (
+      <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+        <p>No {type} manifest loaded yet.</p>
       </div>
     );
   }
@@ -46,9 +56,7 @@ export default function ManifestDisplay({
 
   return (
     <div style={{ padding: '20px', border: '1px solid #ddd', borderRadius: '8px' }}>
-      <h2 style={{ marginTop: 0 }}>
-        {type.charAt(0).toUpperCase() + type.slice(1)} Manifest
-      </h2>
+      <h2 style={{ marginTop: 0 }}>{type.charAt(0).toUpperCase() + type.slice(1)} Manifest</h2>
 
       <div
         style={{
@@ -98,9 +106,7 @@ export default function ManifestDisplay({
       <div style={{ fontSize: '12px', color: '#666' }}>
         <p>
           <strong>Generated:</strong>{' '}
-          {manifest.generatedAt
-            ? new Date(manifest.generatedAt).toLocaleString()
-            : 'Unknown'}
+          {manifest.generatedAt ? new Date(manifest.generatedAt).toLocaleString() : 'Unknown'}
         </p>
       </div>
 

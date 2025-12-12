@@ -1,6 +1,6 @@
 /**
  * Component Showcase Page
- * 
+ *
  * Demonstrates all Phase 2 components and their usage
  * Navigate to /showcase to see examples
  */
@@ -34,7 +34,7 @@ export default function ShowcasePage() {
             <div style={{ marginBottom: '30px' }}>
               <h3>Concert Manifest</h3>
               <ManifestDisplay
-                manifest={concertManifest.data || {}}
+                manifest={concertManifest.data || null}
                 type="concert"
                 loading={concertManifest.loading}
                 error={concertManifest.error || undefined}
@@ -59,12 +59,7 @@ export default function ShowcasePage() {
 
       case 'blog':
         if (selectedPost) {
-          return (
-            <BlogPostDetail
-              post={selectedPost}
-              onBack={() => setSelectedPost(null)}
-            />
-          );
+          return <BlogPostDetail post={selectedPost} onBack={() => setSelectedPost(null)} />;
         }
 
         return (
@@ -133,8 +128,15 @@ export default function ShowcasePage() {
               </ul>
 
               <h3>Manifest Hook Example</h3>
-              <pre style={{ backgroundColor: '#f5f5f5', padding: '10px', borderRadius: '4px', overflow: 'auto' }}>
-{`const { data, loading, error, refetch } = useManifest('concert');
+              <pre
+                style={{
+                  backgroundColor: '#f5f5f5',
+                  padding: '10px',
+                  borderRadius: '4px',
+                  overflow: 'auto',
+                }}
+              >
+                {`const { data, loading, error, refetch } = useManifest('concert');
 
 if (loading) return <p>Loading...</p>;
 if (error) return <p>Error: {error}</p>;
@@ -158,17 +160,23 @@ return (
               >
                 <div style={{ padding: '15px', border: '1px solid #ddd', borderRadius: '4px' }}>
                   <h4 style={{ marginTop: 0 }}>Concert Manifest</h4>
-                  <p style={{ margin: '0 0 5px 0', color: '#666', fontSize: '12px' }}>
-                    Status
-                  </p>
+                  <p style={{ margin: '0 0 5px 0', color: '#666', fontSize: '12px' }}>Status</p>
                   <div
                     style={{
                       fontSize: '18px',
                       fontWeight: 'bold',
-                      color: concertManifest.loading ? '#ff9800' : concertManifest.error ? '#f44336' : '#4caf50',
+                      color: concertManifest.loading
+                        ? '#ff9800'
+                        : concertManifest.error
+                          ? '#f44336'
+                          : '#4caf50',
                     }}
                   >
-                    {concertManifest.loading ? 'Loading' : concertManifest.error ? 'Error' : 'Ready'}
+                    {concertManifest.loading
+                      ? 'Loading'
+                      : concertManifest.error
+                        ? 'Error'
+                        : 'Ready'}
                   </div>
                   {concertManifest.data && (
                     <p style={{ margin: '10px 0 0 0', fontSize: '12px', color: '#666' }}>
@@ -179,14 +187,16 @@ return (
 
                 <div style={{ padding: '15px', border: '1px solid #ddd', borderRadius: '4px' }}>
                   <h4 style={{ marginTop: 0 }}>Blog Posts</h4>
-                  <p style={{ margin: '0 0 5px 0', color: '#666', fontSize: '12px' }}>
-                    Status
-                  </p>
+                  <p style={{ margin: '0 0 5px 0', color: '#666', fontSize: '12px' }}>Status</p>
                   <div
                     style={{
                       fontSize: '18px',
                       fontWeight: 'bold',
-                      color: blogPosts.loading ? '#ff9800' : blogPosts.error ? '#f44336' : '#4caf50',
+                      color: blogPosts.loading
+                        ? '#ff9800'
+                        : blogPosts.error
+                          ? '#f44336'
+                          : '#4caf50',
                     }}
                   >
                     {blogPosts.loading ? 'Loading' : blogPosts.error ? 'Error' : 'Ready'}
@@ -210,7 +220,8 @@ return (
 
       <div style={{ marginBottom: '30px', borderBottom: '1px solid #ddd', paddingBottom: '20px' }}>
         <p style={{ color: '#666' }}>
-          This page demonstrates all Phase 2 components and hooks. Use the tabs below to explore each component.
+          This page demonstrates all Phase 2 components and hooks. Use the tabs below to explore
+          each component.
         </p>
 
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
@@ -239,28 +250,32 @@ return (
 
       <div style={{ minHeight: '400px' }}>{renderContent()}</div>
 
-      <div style={{ marginTop: '50px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+      <div
+        style={{
+          marginTop: '50px',
+          padding: '20px',
+          backgroundColor: '#f5f5f5',
+          borderRadius: '4px',
+        }}
+      >
         <h3 style={{ marginTop: 0 }}>Development Notes</h3>
         <ul>
-          <li>
-            Components are fully responsive and support light/dark themes
-          </li>
-          <li>
-            All components have loading and error states
-          </li>
-          <li>
-            Hooks automatically handle caching and API errors
-          </li>
-          <li>
-            Use the API Test page (/api-test) to verify endpoints
-          </li>
-          <li>
-            Check browser console for detailed error messages
-          </li>
+          <li>Components are fully responsive and support light/dark themes</li>
+          <li>All components have loading and error states</li>
+          <li>Hooks automatically handle caching and API errors</li>
+          <li>Use the API Test page (/api-test) to verify endpoints</li>
+          <li>Check browser console for detailed error messages</li>
         </ul>
       </div>
 
-      <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#e3f2fd', borderRadius: '4px' }}>
+      <div
+        style={{
+          marginTop: '20px',
+          padding: '20px',
+          backgroundColor: '#e3f2fd',
+          borderRadius: '4px',
+        }}
+      >
         <h3 style={{ marginTop: 0 }}>Next Steps</h3>
         <ol>
           <li>Update existing pages to use these components</li>

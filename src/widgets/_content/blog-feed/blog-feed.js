@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   // --- Utilities ---
@@ -20,8 +20,8 @@
     const text = await resp.text();
     const json = parseGVizResponse(text);
 
-    const cols = json.table.cols.map(c => (c.label || c.id || '').toLowerCase().trim());
-    const rows = (json.table.rows || []).map(r => {
+    const cols = json.table.cols.map((c) => (c.label || c.id || '').toLowerCase().trim());
+    const rows = (json.table.rows || []).map((r) => {
       const obj = {};
       (r.c || []).forEach((cell, i) => {
         const key = cols[i] || `col${i}`;
@@ -35,10 +35,29 @@
   function sanitizeHtml(input) {
     const temp = document.createElement('div');
     temp.innerHTML = String(input || '');
-    temp.querySelectorAll('script, style, iframe, object, embed').forEach(el => el.remove());
+    temp.querySelectorAll('script, style, iframe, object, embed').forEach((el) => el.remove());
 
-    const allowed = new Set(['A','P','BR','STRONG','EM','UL','OL','LI','BLOCKQUOTE','B','I','H2','H3','H4','H5','H6','SPAN','DIV']);
-    temp.querySelectorAll('*').forEach(el => {
+    const allowed = new Set([
+      'A',
+      'P',
+      'BR',
+      'STRONG',
+      'EM',
+      'UL',
+      'OL',
+      'LI',
+      'BLOCKQUOTE',
+      'B',
+      'I',
+      'H2',
+      'H3',
+      'H4',
+      'H5',
+      'H6',
+      'SPAN',
+      'DIV',
+    ]);
+    temp.querySelectorAll('*').forEach((el) => {
       if (!allowed.has(el.tagName)) {
         const parent = el.parentNode;
         if (parent) {
@@ -46,7 +65,7 @@
           parent.removeChild(el);
         }
       } else {
-        [...el.attributes].forEach(attr => {
+        [...el.attributes].forEach((attr) => {
           const name = attr.name.toLowerCase();
           if (el.tagName === 'A' && (name === 'href' || name === 'title')) {
             // keep
@@ -145,14 +164,14 @@
 
   function normalizePost(row) {
     const map = {};
-    Object.keys(row).forEach(k => map[k.toLowerCase()] = row[k]);
+    Object.keys(row).forEach((k) => (map[k.toLowerCase()] = row[k]));
     const post = {
       title: map.title || map.name || map.headline || '',
       date: map.date || map.published || map.time || '',
       hero: map.image || map.hero || map.hero_image || map.heroimage || '',
       images: map.images || '',
       body: map.body_html || map.body || map.content || '',
-      tags: map.tags || map.category || ''
+      tags: map.tags || map.category || '',
     };
     return post;
   }
@@ -161,15 +180,16 @@
     container.innerHTML = '<div class="blog-loading">Loading…</div>';
     try {
       const rows = await fetchSheetRows(opts);
-      const posts = rows.map(normalizePost).filter(p => p.title || p.body || p.hero);
+      const posts = rows.map(normalizePost).filter((p) => p.title || p.body || p.hero);
       // Sort by date desc when available
       posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const limit = Number.isFinite(+opts.maxPosts) && +opts.maxPosts > 0 ? +opts.maxPosts : posts.length;
+      const limit =
+        Number.isFinite(+opts.maxPosts) && +opts.maxPosts > 0 ? +opts.maxPosts : posts.length;
       const list = document.createElement('div');
       list.className = 'blog-feed';
 
-      posts.slice(0, limit).forEach(p => {
+      posts.slice(0, limit).forEach((p) => {
         const article = document.createElement('article');
         article.className = 'blog-card';
 
@@ -191,7 +211,11 @@
             const time = document.createElement('time');
             time.className = 'blog-date';
             time.textContent = f;
-            try { time.dateTime = new Date(p.date).toISOString(); } catch(_) {}
+            try {
+              time.dateTime = new Date(p.date).toISOString();
+            } catch (_) {
+              /* ignore */
+            }
             header.appendChild(time);
           }
         }
@@ -207,9 +231,13 @@
 
         // Additional images
         if (opts.showImages !== false && p.images) {
-          String(p.images).split(/[\n,]/).map(s => s.trim()).filter(Boolean).forEach(url => {
-            article.appendChild(createImageFigure(url, '', opts.autoCaptions !== false));
-          });
+          String(p.images)
+            .split(/[\n,]/)
+            .map((s) => s.trim())
+            .filter(Boolean)
+            .forEach((url) => {
+              article.appendChild(createImageFigure(url, '', opts.autoCaptions !== false));
+            });
         }
 
         list.appendChild(article);
@@ -219,7 +247,8 @@
       container.appendChild(list);
     } catch (e) {
       console.error('Blog feed load failed:', e);
-      container.innerHTML = '<div class="blog-error">Failed to load blog. Check Google Sheet sharing settings.</div>';
+      container.innerHTML =
+        '<div class="blog-error">Failed to load blog. Check Google Sheet sharing settings.</div>';
     }
   }
 
@@ -233,7 +262,7 @@
       maxPosts: root.dataset.maxPosts ? parseInt(root.dataset.maxPosts, 10) : undefined,
       showDates: root.dataset.showDates !== 'false',
       showImages: root.dataset.showImages !== 'false',
-      autoCaptions: root.dataset.autoCaptions !== 'false'
+      autoCaptions: root.dataset.autoCaptions !== 'false',
     };
 
     if (opts.provider !== 'sheets') {
@@ -250,7 +279,7 @@
   }
 
   function autoBootstrap() {
-    document.querySelectorAll('[data-blog-feed]').forEach(el => initFromDataAttributes(el));
+    document.querySelectorAll('[data-blog-feed]').forEach((el) => initFromDataAttributes(el));
   }
 
   if (document.readyState === 'loading') {
@@ -264,9 +293,15 @@
     init: (container, opts) => {
       if (typeof container === 'string') container = document.querySelector(container);
       if (!container) throw new Error('Container not found');
-      const config = { provider: 'sheets', showDates: true, showImages: true, autoCaptions: true, ...(opts || {}) };
+      const config = {
+        provider: 'sheets',
+        showDates: true,
+        showImages: true,
+        autoCaptions: true,
+        ...(opts || {}),
+      };
       if (!config.sheetId) throw new Error('sheetId required');
       return renderFromSheets(container, config);
-    }
+    },
   };
 })();

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="512" height="512" role="img" aria-label="McCal Media">
+  <!-- Maskable icon: leave generous safe area -->
+  <rect width="256" height="256" fill="#0b0d10" />
+  <g transform="translate(0 0)">
+    <path fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" d="M40 216 V40 L76 104 L112 40 V216" />
+    <path fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" d="M216 72 A60 60 0 1 0 216 184" />
+    <path fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" d="M186 86 V170" />
+  </g>
+</svg>
