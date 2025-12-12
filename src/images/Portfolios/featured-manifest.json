@@ -1,16 +1,16 @@
 {
   "version": "2.0.0",
   "type": "featured",
-  "generated": "2025-12-12T23:40:16.784Z",
+  "generated": "2025-12-12T23:46:21.799Z",
   "generatedBy": "enhanced-featured-manifest-generator",
   "sources": ["concert-manifest.json", "events-manifest.json", "journalism-manifest.json"],
   "totalItems": 12,
-  "totalImages": 675,
+  "totalImages": 683,
   "categories": ["Concert Photography", "Events Photography", "Journalism Photography"],
   "portfolioTypes": ["Concert", "Events", "Journalism"],
   "dateRange": {
     "newest": "2025-12-01",
-    "oldest": "2024-11-04"
+    "oldest": "2024-10-29"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
@@ -2035,44 +2035,6 @@
       }
     },
     {
-      "eventName": "The Rooney Rule",
-      "category": "Journalism Photography",
-      "tags": ["Events", "Documentary", "Journalism", "Story"],
-      "folderPath": "Events/The Rooney Rule",
-      "eventDate": {
-        "iso": "2025-04-17",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "undefined undefined",
-      "totalImages": 1,
-      "images": [
-        {
-          "filename": "250417 The Rooney Rule_CAL3148.jpg",
-          "path": "250417 The Rooney Rule_CAL3148.jpg",
-          "description": "The Rooney Rule photography",
-          "caption": "The Rooney Rule - Events",
-          "tags": ["Events"]
-        }
-      ],
-      "published": false,
-      "metadata": {},
-      "name": "The Rooney Rule",
-      "title": "The Rooney Rule",
-      "date": {
-        "iso": "2025-04-17",
-        "source": "filename_extraction"
-      },
-      "type": "Journalism",
-      "id": "The Rooney Rule",
-      "coverImage": {
-        "filename": "250417 The Rooney Rule_CAL3148.jpg",
-        "path": "250417 The Rooney Rule_CAL3148.jpg",
-        "description": "The Rooney Rule photography",
-        "caption": "The Rooney Rule - Events",
-        "tags": ["Events"]
-      }
-    },
-    {
       "eventName": "Butler Protest",
       "category": "Journalism Photography",
       "tags": ["Politics", "Documentary", "Journalism", "Story"],
@@ -2342,6 +2304,123 @@
         "description": "Kamala in Pittsburgh amid Election Eve photography",
         "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
         "tags": ["Politics"]
+      }
+    },
+    {
+      "eventName": "Clinton Speaks At Pitt Greensburgh",
+      "category": "Journalism Photography",
+      "tags": [
+        "Politics",
+        "Published Work",
+        "Presidential Campaign",
+        "Documentary",
+        "Journalism",
+        "Story"
+      ],
+      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
+      "eventDate": {
+        "iso": "2024-10-29",
+        "source": "metadata"
+      },
+      "dateDisplay": "undefined undefined",
+      "totalImages": 9,
+      "images": [
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": ["Politics", "Published Work", "Presidential Campaign"],
+        "published": true,
+        "date": "2024-10-29",
+        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+        "caption": "Clinton campaign event at Pitt Greensburg",
+        "outlet": "New York Post",
+        "outletUrl": "https://nypost.com",
+        "articleUrl": "",
+        "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
+        "publishedDate": "2024-10-29"
+      },
+      "outlet": "New York Post",
+      "outletUrl": "https://nypost.com",
+      "articleUrl": "",
+      "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
+      "publishedDate": "2024-10-29",
+      "name": "Clinton Speaks At Pitt Greensburgh",
+      "title": "Clinton Speaks At Pitt Greensburgh",
+      "date": {
+        "iso": "2024-10-29",
+        "source": "metadata"
+      },
+      "type": "Journalism",
+      "id": "Clinton Speaks At Pitt Greensburgh",
+      "coverImage": {
+        "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+        "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+        "caption": "Clinton campaign event at Pitt Greensburg",
+        "tags": ["Politics", "Published Work", "Presidential Campaign"]
       }
     }
   ]
