@@ -1,13 +1,11 @@
 {
-  "version": "1.0",
-  "name": "West Virginia",
+  "collectionName": "West Virginia",
+  "folderPath": "Landscapes/West Virginia",
   "totalImages": 3,
-  "images": [
-    "barn.jpg",
-    "seneca-rocks-night.jpg",
-    "tractor.jpg"
-  ],
-  "tags": [
-    "landscape"
-  ]
+  "images": ["barn.jpg", "seneca-rocks-night.jpg", "tractor.jpg"],
+  "tags": ["landscape"],
+  "metadata": {
+    "generated": "2025-12-12T23:40:10.446Z",
+    "version": "1.0.0"
+  }
 }

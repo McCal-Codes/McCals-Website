@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "generated": "2025-12-12T23:25:53.505Z",
+  "generated": "2025-12-12T23:39:46.093Z",
   "totalCollections": 8,
-  "totalImages": 43,
+  "totalImages": 53,
   "collections": [
     {
       "collectionName": "Couples",
@@ -16,7 +16,23 @@
         "Couple Portraits/CAL07909.jpg",
         "Couple Portraits/CAL07910.jpg"
       ],
-      "tags": ["portrait"]
+      "tags": ["portrait"],
+      "albums": [
+        {
+          "albumName": "Couple Portraits",
+          "folderPath": "Couples/Couple Portraits",
+          "totalImages": 6,
+          "images": [
+            "Couple Portraits/CAL07892.jpg",
+            "Couple Portraits/CAL07901.jpg",
+            "Couple Portraits/CAL07904.jpg",
+            "Couple Portraits/CAL07907.jpg",
+            "Couple Portraits/CAL07909.jpg",
+            "Couple Portraits/CAL07910.jpg"
+          ]
+        }
+      ],
+      "looseImages": []
     },
     {
       "collectionName": "Editorial",
@@ -44,43 +60,117 @@
         "Lucha 2022/IMGP8578.jpg",
         "Michael McCartney/240331_Michael McCartney_614.jpg"
       ],
-      "tags": ["portrait", "editorial", "fashion"]
+      "tags": ["portrait", "editorial", "fashion"],
+      "albums": [
+        {
+          "albumName": "Lucha 2022",
+          "folderPath": "Editorial/Lucha 2022",
+          "totalImages": 19,
+          "images": [
+            "Lucha 2022/IMGP8480.jpg",
+            "Lucha 2022/IMGP8486.jpg",
+            "Lucha 2022/IMGP8487.jpg",
+            "Lucha 2022/IMGP8489.jpg",
+            "Lucha 2022/IMGP8492.jpg",
+            "Lucha 2022/IMGP8495.jpg",
+            "Lucha 2022/IMGP8498.jpg",
+            "Lucha 2022/IMGP8501.jpg",
+            "Lucha 2022/IMGP8503.jpg",
+            "Lucha 2022/IMGP8505.jpg",
+            "Lucha 2022/IMGP8507.jpg",
+            "Lucha 2022/IMGP8516.jpg",
+            "Lucha 2022/IMGP8557.jpg",
+            "Lucha 2022/IMGP8558.jpg",
+            "Lucha 2022/IMGP8564.jpg",
+            "Lucha 2022/IMGP8568.jpg",
+            "Lucha 2022/IMGP8569.jpg",
+            "Lucha 2022/IMGP8571.jpg",
+            "Lucha 2022/IMGP8578.jpg"
+          ]
+        },
+        {
+          "albumName": "Michael McCartney",
+          "folderPath": "Editorial/Michael McCartney",
+          "totalImages": 1,
+          "images": ["Michael McCartney/240331_Michael McCartney_614.jpg"]
+        }
+      ],
+      "looseImages": []
     },
     {
       "collectionName": "Family",
       "folderPath": "Family",
       "totalImages": 0,
       "images": [],
-      "tags": ["portrait"]
+      "tags": ["portrait"],
+      "albums": [],
+      "looseImages": []
     },
     {
       "collectionName": "Graduation",
       "folderPath": "Graduation",
       "totalImages": 0,
       "images": [],
-      "tags": ["portrait"]
+      "tags": ["portrait"],
+      "albums": [],
+      "looseImages": []
     },
     {
       "collectionName": "Headshots",
       "folderPath": "Headshots",
-      "totalImages": 2,
+      "totalImages": 9,
       "images": [
+        "Kayla Jackson/240228_Studio Headshots_433.jpg",
+        "Kayla Jackson/240228_Studio Headshots_435.jpg",
+        "Kayla Jackson/240228_Studio Headshots_436.jpg",
+        "Kayla Jackson/240228_Studio Headshots_437.jpg",
+        "Kayla Jackson/240228_Studio Headshots_443.jpg",
+        "Kayla Jackson/240228_Studio Headshots_445.jpg",
+        "Kayla Jackson/240228_Studio Headshots_448.jpg",
         "Kelly Gibson/240328_Kelly Gibson_607.jpg",
         "Kelly Gibson/240328_Kelly Gibson_608.jpg"
       ],
-      "tags": ["portrait", "studio", "professional"]
+      "tags": ["portrait", "studio", "professional"],
+      "albums": [
+        {
+          "albumName": "Kayla Jackson",
+          "folderPath": "Headshots/Kayla Jackson",
+          "totalImages": 7,
+          "images": [
+            "Kayla Jackson/240228_Studio Headshots_433.jpg",
+            "Kayla Jackson/240228_Studio Headshots_435.jpg",
+            "Kayla Jackson/240228_Studio Headshots_436.jpg",
+            "Kayla Jackson/240228_Studio Headshots_437.jpg",
+            "Kayla Jackson/240228_Studio Headshots_443.jpg",
+            "Kayla Jackson/240228_Studio Headshots_445.jpg",
+            "Kayla Jackson/240228_Studio Headshots_448.jpg"
+          ]
+        },
+        {
+          "albumName": "Kelly Gibson",
+          "folderPath": "Headshots/Kelly Gibson",
+          "totalImages": 2,
+          "images": [
+            "Kelly Gibson/240328_Kelly Gibson_607.jpg",
+            "Kelly Gibson/240328_Kelly Gibson_608.jpg"
+          ]
+        }
+      ],
+      "looseImages": []
     },
     {
       "collectionName": "Maternity",
       "folderPath": "Maternity",
       "totalImages": 0,
       "images": [],
-      "tags": ["portrait"]
+      "tags": ["portrait"],
+      "albums": [],
+      "looseImages": []
     },
     {
       "collectionName": "Studio",
       "folderPath": "Studio",
-      "totalImages": 15,
+      "totalImages": 18,
       "images": [
         "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3507-min.jpg",
         "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3510-min.jpg",
@@ -96,16 +186,56 @@
         "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3556-min.jpg",
         "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3557-min.jpg",
         "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3562-min.jpg",
-        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3563-min.jpg"
+        "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3563-min.jpg",
+        "Logan Spiker/Studio with logan0052.jpg",
+        "Logan Spiker/Studio with logan0060.jpg",
+        "Logan Spiker/Studio with logan0066.jpg"
       ],
-      "tags": ["portrait", "studio", "professional"]
+      "tags": ["portrait", "studio", "professional"],
+      "albums": [
+        {
+          "albumName": "Liam Sulivan",
+          "folderPath": "Studio/Liam Sulivan",
+          "totalImages": 15,
+          "images": [
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3507-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3510-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3520-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3521-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3530-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3538-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3542-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3545-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3549-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3550-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3554-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3556-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3557-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3562-min.jpg",
+            "Liam Sulivan/250425_Excused Chao’s with Liam _CAL3563-min.jpg"
+          ]
+        },
+        {
+          "albumName": "Logan Spiker",
+          "folderPath": "Studio/Logan Spiker",
+          "totalImages": 3,
+          "images": [
+            "Logan Spiker/Studio with logan0052.jpg",
+            "Logan Spiker/Studio with logan0060.jpg",
+            "Logan Spiker/Studio with logan0066.jpg"
+          ]
+        }
+      ],
+      "looseImages": []
     },
     {
       "collectionName": "Wedding",
       "folderPath": "Wedding",
       "totalImages": 0,
       "images": [],
-      "tags": ["portrait"]
+      "tags": ["portrait"],
+      "albums": [],
+      "looseImages": []
     }
   ]
 }

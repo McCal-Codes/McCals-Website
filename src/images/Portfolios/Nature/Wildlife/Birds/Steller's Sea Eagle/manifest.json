@@ -1,11 +1,11 @@
 {
-  "version": "1.0",
-  "name": "Steller's Sea Eagle",
+  "collectionName": "Steller's Sea Eagle",
+  "folderPath": "Wildlife/Birds/Steller's Sea Eagle",
   "totalImages": 1,
-  "images": [
-    "230204_McCal__CAL3164.jpg"
-  ],
-  "tags": [
-    "birds"
-  ]
+  "images": ["230204_McCal__CAL3164.jpg"],
+  "tags": ["birds"],
+  "metadata": {
+    "generated": "2025-12-12T23:40:10.444Z",
+    "version": "1.0.0"
+  }
 }
