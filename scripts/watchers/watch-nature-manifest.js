@@ -10,7 +10,7 @@ const CONFIG = {
   watchPath: 'src/images/Portfolios/Nature',
   manifestScript: 'node scripts/manifest/generate-nature-manifest.js',
   debounceMs: 2000, // Wait 2 seconds after changes before regenerating
-  logFile: 'logs/auto-nature-manifest.log'
+  logFile: 'logs/auto-nature-manifest.log',
 };
 
 class AutoNatureManifestWatcher {
@@ -32,9 +32,13 @@ class AutoNatureManifestWatcher {
   log(message, isError = false) {
     const timestamp = new Date().toISOString();
     const logMessage = `[${timestamp}] ${message}`;
-    console.log(logMessage);
+    if (isError) {
+      console.error(logMessage);
+    } else {
+      console.log(logMessage);
+    }
     try {
-      fs.appendFileSync(CONFIG.logFile, logMessage + '\n');
+      fs.appendFileSync(CONFIG.logFile, (isError ? 'ERROR: ' : '') + logMessage + '\n');
     } catch (error) {
       console.error('Failed to write to log file: - watch-nature-manifest.js:39', error.message);
     }
@@ -50,8 +54,12 @@ class AutoNatureManifestWatcher {
       this.log('🔄 Regenerating nature manifest...');
       const output = execSync(CONFIG.manifestScript, {
         encoding: 'utf8',
-        cwd: process.cwd()
+        cwd: process.cwd(),
       });
+      // Log the output from the generator for debugging and to avoid unused var warnings
+      if (output && output.trim()) {
+        this.log(`Generator output: ${output.trim().slice(0, 100)}`);
+      }
       this.log('✅ Nature manifest regenerated successfully');
       this.changeQueue.clear();
     } catch (error) {
@@ -86,16 +94,10 @@ class AutoNatureManifestWatcher {
   startWatching() {
     this.log(`👀 Watching directory: ${CONFIG.watchPath}`);
     const watcher = chokidar.watch(CONFIG.watchPath, {
-      ignored: [
-        /node_modules/,
-        /\.git/,
-        /manifest\.json$/,
-        /\.DS_Store$/,
-        /Thumbs\.db$/
-      ],
+      ignored: [/node_modules/, /\.git/, /manifest\.json$/, /\.DS_Store$/, /Thumbs\.db$/],
       ignoreInitial: true,
       persistent: true,
-      depth: 10
+      depth: 10,
     });
     watcher.on('add', (filePath) => {
       if (this.isRelevantFile(filePath)) {
