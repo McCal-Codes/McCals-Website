@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2025-12-08T17:41:28.157Z",
+  "generated": "2025-12-12T23:25:53.505Z",
   "totalCollections": 8,
   "totalImages": 43,
   "collections": [
@@ -9,12 +9,12 @@
       "folderPath": "Couples",
       "totalImages": 6,
       "images": [
-        "McCartney Couple Portraits/CAL07892.jpg",
-        "McCartney Couple Portraits/CAL07901.jpg",
-        "McCartney Couple Portraits/CAL07904.jpg",
-        "McCartney Couple Portraits/CAL07907.jpg",
-        "McCartney Couple Portraits/CAL07909.jpg",
-        "McCartney Couple Portraits/CAL07910.jpg"
+        "Couple Portraits/CAL07892.jpg",
+        "Couple Portraits/CAL07901.jpg",
+        "Couple Portraits/CAL07904.jpg",
+        "Couple Portraits/CAL07907.jpg",
+        "Couple Portraits/CAL07909.jpg",
+        "Couple Portraits/CAL07910.jpg"
       ],
       "tags": ["portrait"]
     },
@@ -23,7 +23,6 @@
       "folderPath": "Editorial",
       "totalImages": 20,
       "images": [
-        "240331_Michael McCartney_614.jpg",
         "Lucha 2022/IMGP8480.jpg",
         "Lucha 2022/IMGP8486.jpg",
         "Lucha 2022/IMGP8487.jpg",
@@ -42,7 +41,8 @@
         "Lucha 2022/IMGP8568.jpg",
         "Lucha 2022/IMGP8569.jpg",
         "Lucha 2022/IMGP8571.jpg",
-        "Lucha 2022/IMGP8578.jpg"
+        "Lucha 2022/IMGP8578.jpg",
+        "Michael McCartney/240331_Michael McCartney_614.jpg"
       ],
       "tags": ["portrait", "editorial", "fashion"]
     },
@@ -64,7 +64,10 @@
       "collectionName": "Headshots",
       "folderPath": "Headshots",
       "totalImages": 2,
-      "images": ["240328_Kelly Gibson_607.jpg", "240328_Kelly Gibson_608.jpg"],
+      "images": [
+        "Kelly Gibson/240328_Kelly Gibson_607.jpg",
+        "Kelly Gibson/240328_Kelly Gibson_608.jpg"
+      ],
       "tags": ["portrait", "studio", "professional"]
     },
     {
