@@ -1,5 +1,151 @@
 <!-- McCal Navigation - Code Injection Snippet (v1.7.1-nav)
 Note: This version promotes v1.6.3 header injection to 1.7.1 without functional changes, for tagging consistency. -->
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
 <style>
   :root {
     --mcc-nav-height: 0px;
@@ -15,13 +161,13 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
   body {
     overflow-x: hidden;
   }
-  html[data-mcc-nav="active"] .Header,
-  html[data-mcc-nav="active"] header[role="banner"],
-  html[data-mcc-nav="active"] [data-test="header"] {
+  html[data-mcc-nav='active'] .Header,
+  html[data-mcc-nav='active'] header[role='banner'],
+  html[data-mcc-nav='active'] [data-test='header'] {
     display: none !important;
     visibility: hidden;
   }
-  
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -52,8 +198,14 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     justify-content: space-between;
     gap: clamp(18px, 5vw, 72px);
     color: var(--mcc-nav-text-color);
-    font-family: 'Inter','Segoe UI',system-ui,sans-serif;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.15) 85%, transparent 100%);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.35) 60%,
+      rgba(0, 0, 0, 0.15) 85%,
+      transparent 100%
+    );
   }
   .mcc-nav.is-scrolled {
     background: rgba(10, 10, 16, 0.75);
@@ -63,7 +215,7 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     backdrop-filter: saturate(120%) blur(12px);
   }
   .mcc-nav__brand a {
-    font-family: 'Libre Baskerville','Georgia',serif;
+    font-family: 'Libre Baskerville', 'Georgia', serif;
     font-size: clamp(1.35rem, 2.6vw, 1.9rem);
     font-weight: 600;
     color: var(--mcc-nav-brand-color);
@@ -71,7 +223,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     letter-spacing: 0.015em;
     text-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
     white-space: nowrap;
-    transition: color 0.3s ease, opacity 0.3s ease;
+    transition:
+      color 0.3s ease,
+      opacity 0.3s ease;
   }
   .mcc-nav__brand a:hover,
   .mcc-nav__brand a:focus-visible {
@@ -124,7 +278,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     transform: scaleX(0);
     transform-origin: left;
     opacity: 0;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
   }
   .mcc-nav__link a:hover,
   .mcc-nav__link a:focus-visible {
@@ -137,7 +293,7 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
   }
   .mcc-nav__link a:hover::after,
   .mcc-nav__link a:focus-visible::after,
-  .mcc-nav__link a[aria-current="page"]::after {
+  .mcc-nav__link a[aria-current='page']::after {
     transform: scaleX(1);
     opacity: 1;
   }
@@ -176,7 +332,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     height: 2px;
     border-radius: 999px;
     background: currentColor;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
   }
   .mcc-nav.is-scrolled .mcc-nav__toggle {
     background: rgba(10, 10, 16, 0.78);
@@ -208,7 +366,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
       border-radius: 18px;
       background: rgba(8, 8, 12, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.2);
       -webkit-backdrop-filter: saturate(140%) blur(20px);
       backdrop-filter: saturate(140%) blur(20px);
       z-index: 10001;
@@ -239,17 +399,17 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
       transform: translateY(-50%);
       width: 32px;
       height: 32px;
-      margin: 0;          /* override previous margin-top */
-      align-self: auto;   /* override previous align-self */
-      z-index: 1;         /* ensure clickable above the link */
+      margin: 0; /* override previous margin-top */
+      align-self: auto; /* override previous align-self */
+      z-index: 1; /* ensure clickable above the link */
     }
     .mcc-nav.mcc-nav--menu-open .mcc-nav__menu {
       display: flex;
     }
     .mcc-nav__submenu {
-      margin-top: 6px;       /* subtle spacing from parent row (was 0) */
-      margin-left: 12px;     /* minimal indent to indicate submenu */
-      padding-left: 8px;     /* slight inner offset for items */
+      margin-top: 6px; /* subtle spacing from parent row (was 0) */
+      margin-left: 12px; /* minimal indent to indicate submenu */
+      padding-left: 8px; /* slight inner offset for items */
     }
   }
   @media (max-width: 520px) {
@@ -278,13 +438,17 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     border-radius: 14px;
     background: rgba(8, 8, 12, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.25);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 4px 12px rgba(0, 0, 0, 0.25);
     list-style: none;
     margin: 0;
     display: none;
     opacity: 0;
     transform: translateY(8px) scale(0.98);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
     z-index: 10002;
   }
   .mcc-nav__submenu li {
@@ -299,7 +463,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     text-shadow: none;
     border-radius: 8px;
     font-weight: 500;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
   .mcc-nav__submenu li a:hover,
   .mcc-nav__submenu li a:focus-visible {
@@ -325,7 +491,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     background: transparent;
     color: inherit;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
   }
   .mcc-nav__submenu-toggle:hover,
   .mcc-nav__submenu-toggle:focus-visible {
@@ -343,13 +511,15 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     transform: rotate(45deg);
     transition: transform 0.2s ease;
   }
-  .mcc-nav__submenu-toggle[aria-expanded="true"]::before {
+  .mcc-nav__submenu-toggle[aria-expanded='true']::before {
     transform: rotate(225deg);
   }
 
   /* Desktop: show on hover/focus */
   @media (min-width: 769px) {
-    .mcc-nav__submenu-toggle { display: none; }
+    .mcc-nav__submenu-toggle {
+      display: none;
+    }
     .mcc-nav__link--has-submenu:hover > .mcc-nav__submenu,
     .mcc-nav__link--has-submenu:focus-within > .mcc-nav__submenu {
       display: block;
@@ -382,35 +552,35 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
       grid-template-columns: 1fr auto; /* text left, arrow right */
       align-items: center;
       column-gap: 10px;
-      row-gap: 0;            /* avoid wrapping arrow under text */
-      position: static;      /* override earlier relative */
+      row-gap: 0; /* avoid wrapping arrow under text */
+      position: static; /* override earlier relative */
     }
     .mcc-nav__link--has-submenu > a {
-      grid-column: 1;        /* text column */
+      grid-column: 1; /* text column */
       width: 100%;
       display: block;
-      padding-right: 0;      /* override earlier padding hack */
+      padding-right: 0; /* override earlier padding hack */
     }
     .mcc-nav__submenu-toggle {
-      grid-column: 2;        /* arrow column on the right */
+      grid-column: 2; /* arrow column on the right */
       display: inline-flex;
-      position: static;      /* not absolute; stays inline with text */
+      position: static; /* not absolute; stays inline with text */
       transform: none;
       width: 32px;
       height: 32px;
       margin: 0;
       align-self: center;
-      justify-self: end;     /* anchor to the right edge */
+      justify-self: end; /* anchor to the right edge */
       z-index: 1;
     }
     .mcc-nav__submenu {
-      grid-column: 1 / -1;   /* drop under the row */
+      grid-column: 1 / -1; /* drop under the row */
       grid-row: 2;
       position: static;
       width: 100%;
-      margin-top: 6px;       /* subtle spacing from parent row */
-      margin-left: 12px;     /* minimal indent to indicate submenu */
-      padding-left: 8px;     /* slight inner offset for items */
+      margin-top: 6px; /* subtle spacing from parent row */
+      margin-left: 12px; /* minimal indent to indicate submenu */
+      padding-left: 8px; /* slight inner offset for items */
       padding: 6px 0;
       background: transparent;
       border: 0;
@@ -419,7 +589,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
       opacity: 1;
       transform: none;
     }
-    .mcc-nav__submenu-toggle[aria-expanded="true"] + .mcc-nav__submenu { display: block; }
+    .mcc-nav__submenu-toggle[aria-expanded='true'] + .mcc-nav__submenu {
+      display: block;
+    }
   }
 
   /* 1.6.2: reduced motion support */
@@ -429,7 +601,9 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     .mcc-nav__link a::after {
       transition: none !important;
     }
-    .mcc-nav__submenu { transition: none !important; }
+    .mcc-nav__submenu {
+      transition: none !important;
+    }
   }
 </style>
 
@@ -437,7 +611,13 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
   <div class="mcc-nav-shell">
     <nav class="mcc-nav" aria-label="Primary navigation">
       <div class="mcc-nav__brand"><a href="/" data-match="^/$">Caleb McCartney</a></div>
-      <button class="mcc-nav__toggle" type="button" aria-expanded="false" aria-controls="mcc-nav-links" aria-haspopup="true">
+      <button
+        class="mcc-nav__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mcc-nav-links"
+        aria-haspopup="true"
+      >
         <span class="sr-only">Toggle navigation</span>
         <span class="mcc-nav__toggle-box" aria-hidden="true">
           <span class="mcc-nav__toggle-line"></span>
@@ -450,11 +630,24 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
           <!-- 1.6.2: Work now has a submenu -->
           <li class="mcc-nav__link mcc-nav__link--has-submenu">
             <a href="/" data-match="^/$">Work</a>
-            <button class="mcc-nav__submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-work">
+            <button
+              class="mcc-nav__submenu-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="submenu-work"
+            >
               <span class="sr-only">Toggle Work submenu</span>
             </button>
-            <ul class="mcc-nav__submenu" id="submenu-work" role="menu" aria-label="Work submenu" aria-hidden="true">
-              <li><a href="https://mcc-cal.com/photojournalism" role="menuitem">Photojournalism</a></li>
+            <ul
+              class="mcc-nav__submenu"
+              id="submenu-work"
+              role="menu"
+              aria-label="Work submenu"
+              aria-hidden="true"
+            >
+              <li>
+                <a href="https://mcc-cal.com/photojournalism" role="menuitem">Photojournalism</a>
+              </li>
               <li><a href="https://mcc-cal.com/concert" role="menuitem">Concert</a></li>
               <li><a href="https://mcc-cal.com/event" role="menuitem">Event</a></li>
               <li><a href="https://mcc-cal.com/nature" role="menuitem">Nature</a></li>
@@ -469,13 +662,13 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
 </div>
 
 <script>
-  (function(){
-    const killSelectors = ['.Header','header[role="banner"]','[data-test="header"]'];
-    killSelectors.forEach(sel => {
-      document.querySelectorAll(sel).forEach(node => {
-        node.setAttribute('data-mcc-nav-replaced','true');
+  (function () {
+    const killSelectors = ['.Header', 'header[role="banner"]', '[data-test="header"]'];
+    killSelectors.forEach((sel) => {
+      document.querySelectorAll(sel).forEach((node) => {
+        node.setAttribute('data-mcc-nav-replaced', 'true');
         node.style.display = 'none';
-        node.setAttribute('aria-hidden','true');
+        node.setAttribute('aria-hidden', 'true');
       });
     });
 
@@ -491,24 +684,24 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
     const submenuToggles = nav.querySelectorAll('.mcc-nav__submenu-toggle');
 
     const collapseAllSubmenus = () => {
-      submenuToggles.forEach(btn => {
-        btn.setAttribute('aria-expanded','false');
+      submenuToggles.forEach((btn) => {
+        btn.setAttribute('aria-expanded', 'false');
         const submenu = btn.nextElementSibling;
         if (submenu && submenu.classList.contains('mcc-nav__submenu')) {
-          submenu.setAttribute('aria-hidden','true');
+          submenu.setAttribute('aria-hidden', 'true');
         }
       });
     };
 
     const closeMobile = () => {
       nav.classList.remove('mcc-nav--menu-open');
-      if (toggle) toggle.setAttribute('aria-expanded','false');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
       // 1.6.2: also collapse any open submenus
       collapseAllSubmenus();
     };
 
     if (toggle) {
-      toggle.addEventListener('click', function(e){
+      toggle.addEventListener('click', function (e) {
         e.stopPropagation(); // prevent outside-click handler from firing
         const willOpen = !nav.classList.contains('mcc-nav--menu-open');
         nav.classList.toggle('mcc-nav--menu-open', willOpen);
@@ -516,10 +709,10 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
       });
     }
 
-    links.forEach(anchor => anchor.addEventListener('click', closeMobile));
+    links.forEach((anchor) => anchor.addEventListener('click', closeMobile));
 
     // 1.6.2: mobile submenu toggle
-    submenuToggles.forEach(btn => {
+    submenuToggles.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -535,9 +728,11 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
 
     // 1.6.2: close on outside click (mobile only)
     document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768 &&
-          nav.classList.contains('mcc-nav--menu-open') &&
-          !nav.contains(e.target)) {
+      if (
+        window.innerWidth <= 768 &&
+        nav.classList.contains('mcc-nav--menu-open') &&
+        !nav.contains(e.target)
+      ) {
         closeMobile();
       }
     });
@@ -560,15 +755,15 @@ Note: This version promotes v1.6.3 header injection to 1.7.1 without functional 
       const currentHash = window.location.hash;
 
       // reset all first
-      nav.querySelectorAll('a').forEach(a => a.removeAttribute('aria-current'));
+      nav.querySelectorAll('a').forEach((a) => a.removeAttribute('aria-current'));
 
       // top-level/data-match highlighting (keep)
-      nav.querySelectorAll('[data-match]').forEach(anchor => {
+      nav.querySelectorAll('[data-match]').forEach((anchor) => {
         const pattern = anchor.getAttribute('data-match');
         if (!pattern) return;
         try {
           if (new RegExp(pattern).test(currentPath)) {
-            anchor.setAttribute('aria-current','page');
+            anchor.setAttribute('aria-current', 'page');
           }
         } catch (err) {
           console.warn('[mcc-nav] invalid regex', pattern, err);

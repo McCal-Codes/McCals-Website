@@ -35,6 +35,7 @@ out/
 .idea/
 *.sublime-project
 *.sublime-workspace
+.augment/
 
 # Local development files
 .netlify/

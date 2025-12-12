@@ -86,7 +86,7 @@ _Updated: December 6, 2025_
 ### Existing Widget Enhancements
 
 - [ ] TODO: Concert Portfolio additional Spotify/embed features (follow-up enhancement)
-- [ ] TODO: Add site-wide shared CSS at src/widgets/\_shared/site-widgets.css
+- [x] TODO: Add site-wide shared CSS at src/widgets/\_shared/site-widgets.css — Completed 2025-12-10 (site-widgets pipeline + inline markers via `npm run site-widgets:build`)
 
 ---
 

@@ -21,6 +21,152 @@
   Changelog: See CHANGELOG.md
 -->
 
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
 <style>
   .blog-admin-container {
     --primary: #2563eb;
@@ -34,8 +180,8 @@
     --error: #ef4444;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-    
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
@@ -390,7 +536,9 @@
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   /* Responsive */
@@ -459,7 +607,7 @@
       <button type="submit" class="btn btn-primary" id="authSubmit">Sign In</button>
     </form>
 
-    <p class="text-center" style="margin-top: 1.5rem;">
+    <p class="text-center" style="margin-top: 1.5rem">
       <span id="authToggleText">Don't have an account?</span>
       <a class="text-link" id="authToggleLink">Create one</a>
     </p>
@@ -495,7 +643,7 @@
     <!-- Editor Tab -->
     <div class="tab-content" data-content="editor">
       <div class="editor-container">
-        <h2 style="margin-top: 0;">Create New Post</h2>
+        <h2 style="margin-top: 0">Create New Post</h2>
 
         <div id="editorAlert" class="alert alert-success hidden"></div>
 
@@ -507,7 +655,11 @@
 
           <div class="form-group">
             <label for="postExcerpt">Excerpt *</label>
-            <textarea id="postExcerpt" required placeholder="A brief summary of your post..."></textarea>
+            <textarea
+              id="postExcerpt"
+              required
+              placeholder="A brief summary of your post..."
+            ></textarea>
           </div>
 
           <div class="form-group">
@@ -515,7 +667,9 @@
             <div class="content-blocks" id="contentBlocks">
               <!-- Dynamic content blocks -->
             </div>
-            <button type="button" class="btn btn-add-block" id="addBlockBtn">+ Add Content Block</button>
+            <button type="button" class="btn btn-add-block" id="addBlockBtn">
+              + Add Content Block
+            </button>
           </div>
 
           <div class="editor-actions">
@@ -529,8 +683,10 @@
     <!-- Profile Tab -->
     <div class="tab-content" data-content="profile">
       <div class="editor-container">
-        <h2 style="margin-top: 0;">Profile Settings</h2>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">Update your profile information and password.</p>
+        <h2 style="margin-top: 0">Profile Settings</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem">
+          Update your profile information and password.
+        </p>
 
         <div id="profileAlert" class="alert alert-success hidden"></div>
 
@@ -542,7 +698,11 @@
 
           <div class="form-group">
             <label for="profilePassword">New Password</label>
-            <input type="password" id="profilePassword" placeholder="Leave blank to keep current password" />
+            <input
+              type="password"
+              id="profilePassword"
+              placeholder="Leave blank to keep current password"
+            />
           </div>
 
           <div class="form-group">
@@ -558,207 +718,214 @@
 </div>
 
 <script>
-(function() {
-  'use strict';
+  (function () {
+    'use strict';
 
-  // Configuration
-  // Use local API if running on localhost, otherwise use production
-  const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-    ? 'http://localhost:8787/api/v1/blog'
-    : 'https://api.mcc-cal.com/api/v1/blog';
-  const TOKEN_KEY = 'blog_auth_token';
-  const USER_KEY = 'blog_user_info';
+    // Configuration
+    // Use local API if running on localhost, otherwise use production
+    const API_BASE =
+      location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+        ? 'http://localhost:8787/api/v1/blog'
+        : 'https://api.mcc-cal.com/api/v1/blog';
+    const TOKEN_KEY = 'blog_auth_token';
+    const USER_KEY = 'blog_user_info';
 
-  // State
-  let authToken = localStorage.getItem(TOKEN_KEY);
-  let currentUser = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
-  let isRegisterMode = false;
-  let blockCounter = 0;
+    // State
+    let authToken = localStorage.getItem(TOKEN_KEY);
+    let currentUser = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+    let isRegisterMode = false;
+    let blockCounter = 0;
 
-  // DOM Elements
-  const loadingState = document.getElementById('loadingState');
-  const authScreen = document.getElementById('authScreen');
-  const dashboard = document.getElementById('dashboard');
-  const authForm = document.getElementById('authForm');
-  const authAlert = document.getElementById('authAlert');
-  const authTitle = document.getElementById('authTitle');
-  const authSubtitle = document.getElementById('authSubtitle');
-  const authSubmit = document.getElementById('authSubmit');
-  const authToggleText = document.getElementById('authToggleText');
-  const authToggleLink = document.getElementById('authToggleLink');
-  const nameGroup = document.getElementById('nameGroup');
-  const userName = document.getElementById('userName');
-  const logoutBtn = document.getElementById('logoutBtn');
-  const tabs = document.querySelectorAll('.tab');
-  const tabContents = document.querySelectorAll('.tab-content');
-  const postsContainer = document.getElementById('postsContainer');
-  const editorForm = document.getElementById('editorForm');
-  const editorAlert = document.getElementById('editorAlert');
-  const contentBlocks = document.getElementById('contentBlocks');
-  const addBlockBtn = document.getElementById('addBlockBtn');
-  const clearEditorBtn = document.getElementById('clearEditorBtn');
-  const profileForm = document.getElementById('profileForm');
-  const profileAlert = document.getElementById('profileAlert');
+    // DOM Elements
+    const loadingState = document.getElementById('loadingState');
+    const authScreen = document.getElementById('authScreen');
+    const dashboard = document.getElementById('dashboard');
+    const authForm = document.getElementById('authForm');
+    const authAlert = document.getElementById('authAlert');
+    const authTitle = document.getElementById('authTitle');
+    const authSubtitle = document.getElementById('authSubtitle');
+    const authSubmit = document.getElementById('authSubmit');
+    const authToggleText = document.getElementById('authToggleText');
+    const authToggleLink = document.getElementById('authToggleLink');
+    const nameGroup = document.getElementById('nameGroup');
+    const userName = document.getElementById('userName');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const postsContainer = document.getElementById('postsContainer');
+    const editorForm = document.getElementById('editorForm');
+    const editorAlert = document.getElementById('editorAlert');
+    const contentBlocks = document.getElementById('contentBlocks');
+    const addBlockBtn = document.getElementById('addBlockBtn');
+    const clearEditorBtn = document.getElementById('clearEditorBtn');
+    const profileForm = document.getElementById('profileForm');
+    const profileAlert = document.getElementById('profileAlert');
 
-  // Initialize
-  function init() {
-    if (authToken && currentUser) {
-      showDashboard();
-      loadPosts();
-    } else {
-      showAuth();
-    }
-  }
-
-  function showAuth() {
-    loadingState.classList.add('hidden');
-    authScreen.classList.remove('hidden');
-    dashboard.classList.remove('active');
-  }
-
-  function showDashboard() {
-    loadingState.classList.add('hidden');
-    authScreen.classList.add('hidden');
-    dashboard.classList.add('active');
-    userName.textContent = currentUser?.name || currentUser?.username || 'User';
-  }
-
-  // Auth Toggle
-  authToggleLink.addEventListener('click', () => {
-    isRegisterMode = !isRegisterMode;
-    if (isRegisterMode) {
-      authTitle.textContent = 'Create Account';
-      authSubtitle.textContent = 'Join our community of writers.';
-      authSubmit.textContent = 'Create Account';
-      authToggleText.textContent = 'Already have an account?';
-      authToggleLink.textContent = 'Sign in';
-      nameGroup.classList.remove('hidden');
-    } else {
-      authTitle.textContent = 'Sign In';
-      authSubtitle.textContent = 'Welcome back! Sign in to manage your blog posts.';
-      authSubmit.textContent = 'Sign In';
-      authToggleText.textContent = "Don't have an account?";
-      authToggleLink.textContent = 'Create one';
-      nameGroup.classList.add('hidden');
-    }
-    authAlert.classList.add('hidden');
-  });
-
-  // Auth Form Submit
-  authForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.getElementById('authUsername').value.trim();
-    const password = document.getElementById('authPassword').value;
-    const name = document.getElementById('authName').value.trim();
-
-    if (!username || !password) {
-      showAlert(authAlert, 'Please fill in all required fields', 'error');
-      return;
-    }
-
-    if (isRegisterMode && !name) {
-      showAlert(authAlert, 'Please provide a display name', 'error');
-      return;
-    }
-
-    authSubmit.disabled = true;
-    authSubmit.textContent = 'Please wait...';
-
-    try {
-      if (isRegisterMode) {
-        // Register new author
-        await registerAuthor(username, password, name);
-      } else {
-        // Login
-        await login(username, password);
-      }
-    } catch (error) {
-      showAlert(authAlert, error.message || 'An error occurred', 'error');
-      authSubmit.disabled = false;
-      authSubmit.textContent = isRegisterMode ? 'Create Account' : 'Sign In';
-    }
-  });
-
-  async function login(username, password) {
-    const response = await fetch(`${API_BASE}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Login failed');
-    }
-
-    const data = await response.json();
-    authToken = data.token;
-    currentUser = data.author;
-    
-    localStorage.setItem(TOKEN_KEY, authToken);
-    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
-
-    showDashboard();
-    loadPosts();
-  }
-
-  async function registerAuthor(username, password, name) {
-    // Note: Registration endpoint needs to be implemented in the API
-    // For now, show error message
-    throw new Error('Registration feature coming soon. Please contact admin for account creation.');
-  }
-
-  // Logout
-  logoutBtn.addEventListener('click', () => {
-    authToken = null;
-    currentUser = null;
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
-    authForm.reset();
-    showAuth();
-  });
-
-  // Tabs
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetTab = tab.dataset.tab;
-      
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      
-      tabContents.forEach(content => {
-        if (content.dataset.content === targetTab) {
-          content.classList.add('active');
-        } else {
-          content.classList.remove('active');
-        }
-      });
-
-      if (targetTab === 'posts') {
+    // Initialize
+    function init() {
+      if (authToken && currentUser) {
+        showDashboard();
         loadPosts();
-      } else if (targetTab === 'profile') {
-        loadProfile();
+      } else {
+        showAuth();
       }
+    }
+
+    function showAuth() {
+      loadingState.classList.add('hidden');
+      authScreen.classList.remove('hidden');
+      dashboard.classList.remove('active');
+    }
+
+    function showDashboard() {
+      loadingState.classList.add('hidden');
+      authScreen.classList.add('hidden');
+      dashboard.classList.add('active');
+      userName.textContent = currentUser?.name || currentUser?.username || 'User';
+    }
+
+    // Auth Toggle
+    authToggleLink.addEventListener('click', () => {
+      isRegisterMode = !isRegisterMode;
+      if (isRegisterMode) {
+        authTitle.textContent = 'Create Account';
+        authSubtitle.textContent = 'Join our community of writers.';
+        authSubmit.textContent = 'Create Account';
+        authToggleText.textContent = 'Already have an account?';
+        authToggleLink.textContent = 'Sign in';
+        nameGroup.classList.remove('hidden');
+      } else {
+        authTitle.textContent = 'Sign In';
+        authSubtitle.textContent = 'Welcome back! Sign in to manage your blog posts.';
+        authSubmit.textContent = 'Sign In';
+        authToggleText.textContent = "Don't have an account?";
+        authToggleLink.textContent = 'Create one';
+        nameGroup.classList.add('hidden');
+      }
+      authAlert.classList.add('hidden');
     });
-  });
 
-  // Load Posts
-  async function loadPosts() {
-    postsContainer.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading posts...</p></div>';
+    // Auth Form Submit
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('authUsername').value.trim();
+      const password = document.getElementById('authPassword').value;
+      const name = document.getElementById('authName').value.trim();
 
-    try {
-      const response = await fetch(`${API_BASE}/posts`);
-      if (!response.ok) throw new Error('Failed to load posts');
-      
-      const data = await response.json();
-      const posts = data.posts || [];
-
-      if (posts.length === 0) {
-        postsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 3rem;">No posts yet. Create your first post!</p>';
+      if (!username || !password) {
+        showAlert(authAlert, 'Please fill in all required fields', 'error');
         return;
       }
 
-      const postsHtml = posts.map(post => `
+      if (isRegisterMode && !name) {
+        showAlert(authAlert, 'Please provide a display name', 'error');
+        return;
+      }
+
+      authSubmit.disabled = true;
+      authSubmit.textContent = 'Please wait...';
+
+      try {
+        if (isRegisterMode) {
+          // Register new author
+          await registerAuthor(username, password, name);
+        } else {
+          // Login
+          await login(username, password);
+        }
+      } catch (error) {
+        showAlert(authAlert, error.message || 'An error occurred', 'error');
+        authSubmit.disabled = false;
+        authSubmit.textContent = isRegisterMode ? 'Create Account' : 'Sign In';
+      }
+    });
+
+    async function login(username, password) {
+      const response = await fetch(`${API_BASE}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Login failed');
+      }
+
+      const data = await response.json();
+      authToken = data.token;
+      currentUser = data.author;
+
+      localStorage.setItem(TOKEN_KEY, authToken);
+      localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+
+      showDashboard();
+      loadPosts();
+    }
+
+    async function registerAuthor(username, password, name) {
+      // Note: Registration endpoint needs to be implemented in the API
+      // For now, show error message
+      throw new Error(
+        'Registration feature coming soon. Please contact admin for account creation.',
+      );
+    }
+
+    // Logout
+    logoutBtn.addEventListener('click', () => {
+      authToken = null;
+      currentUser = null;
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
+      authForm.reset();
+      showAuth();
+    });
+
+    // Tabs
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.dataset.tab;
+
+        tabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        tabContents.forEach((content) => {
+          if (content.dataset.content === targetTab) {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
+
+        if (targetTab === 'posts') {
+          loadPosts();
+        } else if (targetTab === 'profile') {
+          loadProfile();
+        }
+      });
+    });
+
+    // Load Posts
+    async function loadPosts() {
+      postsContainer.innerHTML =
+        '<div class="loading"><div class="spinner"></div><p>Loading posts...</p></div>';
+
+      try {
+        const response = await fetch(`${API_BASE}/posts`);
+        if (!response.ok) throw new Error('Failed to load posts');
+
+        const data = await response.json();
+        const posts = data.posts || [];
+
+        if (posts.length === 0) {
+          postsContainer.innerHTML =
+            '<p style="text-align: center; color: var(--text-muted); padding: 3rem;">No posts yet. Create your first post!</p>';
+          return;
+        }
+
+        const postsHtml = posts
+          .map(
+            (post) => `
         <div class="post-card">
           <h3>${escapeHtml(post.title)}</h3>
           <div class="post-meta">
@@ -771,22 +938,24 @@
             <button class="btn btn-remove btn-small" onclick="deletePost('${escapeHtml(post.title)}')">Delete</button>
           </div>
         </div>
-      `).join('');
+      `,
+          )
+          .join('');
 
-      postsContainer.innerHTML = `<div class="posts-list">${postsHtml}</div>`;
-    } catch (error) {
-      postsContainer.innerHTML = `<p style="color: var(--error); text-align: center; padding: 2rem;">Error loading posts: ${error.message}</p>`;
+        postsContainer.innerHTML = `<div class="posts-list">${postsHtml}</div>`;
+      } catch (error) {
+        postsContainer.innerHTML = `<p style="color: var(--error); text-align: center; padding: 2rem;">Error loading posts: ${error.message}</p>`;
+      }
     }
-  }
 
-  // Content Blocks
-  addBlockBtn.addEventListener('click', () => {
-    addContentBlock();
-  });
+    // Content Blocks
+    addBlockBtn.addEventListener('click', () => {
+      addContentBlock();
+    });
 
-  function addContentBlock(value = '') {
-    const blockId = `block-${blockCounter++}`;
-    const blockHtml = `
+    function addContentBlock(value = '') {
+      const blockId = `block-${blockCounter++}`;
+      const blockHtml = `
       <div class="content-block" data-block-id="${blockId}">
         <div class="content-block-header">
           <span class="content-block-type">Paragraph</span>
@@ -795,121 +964,127 @@
         <textarea class="block-content" placeholder="Write your content here..." rows="4">${escapeHtml(value)}</textarea>
       </div>
     `;
-    contentBlocks.insertAdjacentHTML('beforeend', blockHtml);
-  }
-
-  window.removeBlock = function(blockId) {
-    const block = document.querySelector(`[data-block-id="${blockId}"]`);
-    if (block) block.remove();
-  };
-
-  // Editor Form Submit
-  editorForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const title = document.getElementById('postTitle').value.trim();
-    const excerpt = document.getElementById('postExcerpt').value.trim();
-    const blockElements = document.querySelectorAll('.block-content');
-    const content = Array.from(blockElements).map(el => el.value.trim()).filter(Boolean);
-
-    if (!title || !excerpt || content.length === 0) {
-      showAlert(editorAlert, 'Please fill in all required fields and add at least one content block', 'error');
-      return;
+      contentBlocks.insertAdjacentHTML('beforeend', blockHtml);
     }
 
-    const submitBtn = editorForm.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Publishing...';
+    window.removeBlock = function (blockId) {
+      const block = document.querySelector(`[data-block-id="${blockId}"]`);
+      if (block) block.remove();
+    };
 
-    try {
-      const response = await fetch(`${API_BASE}/posts`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`
-        },
-        body: JSON.stringify({ title, excerpt, content })
-      });
+    // Editor Form Submit
+    editorForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to publish post');
+      const title = document.getElementById('postTitle').value.trim();
+      const excerpt = document.getElementById('postExcerpt').value.trim();
+      const blockElements = document.querySelectorAll('.block-content');
+      const content = Array.from(blockElements)
+        .map((el) => el.value.trim())
+        .filter(Boolean);
+
+      if (!title || !excerpt || content.length === 0) {
+        showAlert(
+          editorAlert,
+          'Please fill in all required fields and add at least one content block',
+          'error',
+        );
+        return;
       }
 
-      showAlert(editorAlert, 'Post published successfully!', 'success');
-      editorForm.reset();
-      contentBlocks.innerHTML = '';
-      blockCounter = 0;
+      const submitBtn = editorForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Publishing...';
 
-      // Switch to posts tab
-      setTimeout(() => {
-        tabs[0].click();
-      }, 1500);
-    } catch (error) {
-      showAlert(editorAlert, error.message || 'An error occurred', 'error');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Publish Post';
+      try {
+        const response = await fetch(`${API_BASE}/posts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({ title, excerpt, content }),
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Failed to publish post');
+        }
+
+        showAlert(editorAlert, 'Post published successfully!', 'success');
+        editorForm.reset();
+        contentBlocks.innerHTML = '';
+        blockCounter = 0;
+
+        // Switch to posts tab
+        setTimeout(() => {
+          tabs[0].click();
+        }, 1500);
+      } catch (error) {
+        showAlert(editorAlert, error.message || 'An error occurred', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Publish Post';
+      }
+    });
+
+    clearEditorBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear the editor?')) {
+        editorForm.reset();
+        contentBlocks.innerHTML = '';
+        blockCounter = 0;
+        editorAlert.classList.add('hidden');
+      }
+    });
+
+    // Profile
+    function loadProfile() {
+      document.getElementById('profileName').value = currentUser?.name || '';
     }
-  });
 
-  clearEditorBtn.addEventListener('click', () => {
-    if (confirm('Are you sure you want to clear the editor?')) {
-      editorForm.reset();
-      contentBlocks.innerHTML = '';
-      blockCounter = 0;
-      editorAlert.classList.add('hidden');
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('profileName').value.trim();
+      const password = document.getElementById('profilePassword').value;
+      const passwordConfirm = document.getElementById('profilePasswordConfirm').value;
+
+      if (password && password !== passwordConfirm) {
+        showAlert(profileAlert, 'Passwords do not match', 'error');
+        return;
+      }
+
+      showAlert(profileAlert, 'Profile update feature coming soon', 'success');
+    });
+
+    // Utility Functions
+    function showAlert(element, message, type = 'error') {
+      element.textContent = message;
+      element.className = `alert alert-${type}`;
+      element.classList.remove('hidden');
+
+      if (type === 'success') {
+        setTimeout(() => element.classList.add('hidden'), 5000);
+      }
     }
-  });
 
-  // Profile
-  function loadProfile() {
-    document.getElementById('profileName').value = currentUser?.name || '';
-  }
-
-  profileForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const name = document.getElementById('profileName').value.trim();
-    const password = document.getElementById('profilePassword').value;
-    const passwordConfirm = document.getElementById('profilePasswordConfirm').value;
-
-    if (password && password !== passwordConfirm) {
-      showAlert(profileAlert, 'Passwords do not match', 'error');
-      return;
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
 
-    showAlert(profileAlert, 'Profile update feature coming soon', 'success');
-  });
+    window.editPost = function (title) {
+      alert('Edit feature coming soon');
+    };
 
-  // Utility Functions
-  function showAlert(element, message, type = 'error') {
-    element.textContent = message;
-    element.className = `alert alert-${type}`;
-    element.classList.remove('hidden');
-    
-    if (type === 'success') {
-      setTimeout(() => element.classList.add('hidden'), 5000);
-    }
-  }
+    window.deletePost = function (title) {
+      if (confirm(`Are you sure you want to delete "${title}"?`)) {
+        alert('Delete feature coming soon');
+      }
+    };
 
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  window.editPost = function(title) {
-    alert('Edit feature coming soon');
-  };
-
-  window.deletePost = function(title) {
-    if (confirm(`Are you sure you want to delete "${title}"?`)) {
-      alert('Delete feature coming soon');
-    }
-  };
-
-  // Initialize on load
-  setTimeout(init, 500);
-})();
+    // Initialize on load
+    setTimeout(init, 500);
+  })();
 </script>

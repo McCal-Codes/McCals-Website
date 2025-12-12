@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--
   Admin Dashboard Widget v1.3.0
   Comprehensive admin dashboard with API, manifest, widget, and system health monitoring
@@ -20,6 +20,152 @@
   - Responsive design with mobile-first approach
   - Modal changelog and accessibility improvements
 -->
+
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
 
 <style>
   /* Root variables - matching portfolio widget theme */
@@ -52,7 +198,14 @@
   body {
     background: var(--bg);
     color: var(--fg);
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
     font-weight: 400;
   }
 
@@ -500,7 +653,9 @@
   .changelog-title {
     margin: 0;
     color: var(--fg);
-    font: 700 18px/1.2 ui-sans-serif, system-ui;
+    font:
+      700 18px/1.2 ui-sans-serif,
+      system-ui;
   }
 
   .changelog-close {
@@ -520,14 +675,18 @@
 
   .changelog-body {
     padding: 1.5rem;
-    font: 400 14px/1.5 ui-sans-serif, system-ui;
+    font:
+      400 14px/1.5 ui-sans-serif,
+      system-ui;
     color: var(--fg);
   }
 
   .changelog-version {
     margin: 0 0 1rem 0;
     color: var(--fg);
-    font: 600 15px/1.3 ui-sans-serif, system-ui;
+    font:
+      600 15px/1.3 ui-sans-serif,
+      system-ui;
     border-bottom: 1px solid var(--card-border);
     padding-bottom: 0.6rem;
   }
@@ -610,7 +769,10 @@
 <div class="admin-dashboard-container" id="adminDashboard">
   <div class="dashboard-header">
     <div>
-      <h1>📊 Admin Dashboard <span style="font-size: 0.6em; opacity: 0.6; font-weight: 600;">v1.3.0</span></h1>
+      <h1>
+        📊 Admin Dashboard
+        <span style="font-size: 0.6em; opacity: 0.6; font-weight: 600">v1.3.0</span>
+      </h1>
     </div>
     <div class="header-controls">
       <button class="refresh-btn" id="refreshBtn" onclick="location.reload()">🔄 Refresh</button>
@@ -763,11 +925,26 @@
     </div>
     <div class="section-content">
       <div class="portfolio-list" id="portfolioList">
-        <div class="portfolio-item">Concert<div class="portfolio-count" id="concertSize">—</div></div>
-        <div class="portfolio-item">Events<div class="portfolio-count" id="eventsSize">—</div></div>
-        <div class="portfolio-item">Journalism<div class="portfolio-count" id="journalismSize">—</div></div>
-        <div class="portfolio-item">Nature<div class="portfolio-count" id="natureSize">—</div></div>
-        <div class="portfolio-item">Portrait<div class="portfolio-count" id="portraitSize">—</div></div>
+        <div class="portfolio-item">
+          Concert
+          <div class="portfolio-count" id="concertSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Events
+          <div class="portfolio-count" id="eventsSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Journalism
+          <div class="portfolio-count" id="journalismSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Nature
+          <div class="portfolio-count" id="natureSize">—</div>
+        </div>
+        <div class="portfolio-item">
+          Portrait
+          <div class="portfolio-count" id="portraitSize">—</div>
+        </div>
       </div>
     </div>
   </div>
@@ -993,18 +1170,28 @@
       <div class="events-log">
         <div class="log-section">
           <h4>Recent Events</h4>
-          <div style="font-size: 0.85rem; max-height: 250px; overflow-y: auto;">
-            <div class="log-item"><strong style="color: #10b981;">✅</strong> API health check passed</div>
-            <div class="log-item"><strong style="color: #10b981;">✅</strong> Manifests loaded successfully</div>
-            <div class="log-item"><strong style="color: #3b82f6;">ℹ️</strong> Dashboard initialized</div>
-            <div class="log-item"><strong style="color: #3b82f6;">ℹ️</strong> Cache stats computed</div>
-            <div class="log-item"><strong style="color: #10b981;">✅</strong> All systems operational</div>
+          <div style="font-size: 0.85rem; max-height: 250px; overflow-y: auto">
+            <div class="log-item">
+              <strong style="color: #10b981">✅</strong> API health check passed
+            </div>
+            <div class="log-item">
+              <strong style="color: #10b981">✅</strong> Manifests loaded successfully
+            </div>
+            <div class="log-item">
+              <strong style="color: #3b82f6">ℹ️</strong> Dashboard initialized
+            </div>
+            <div class="log-item">
+              <strong style="color: #3b82f6">ℹ️</strong> Cache stats computed
+            </div>
+            <div class="log-item">
+              <strong style="color: #10b981">✅</strong> All systems operational
+            </div>
           </div>
         </div>
 
         <div class="log-section">
           <h4>System Checks</h4>
-          <div style="font-size: 0.85rem; line-height: 1.8;">
+          <div style="font-size: 0.85rem; line-height: 1.8">
             <div class="log-item"><strong>✅</strong> API Endpoint Responsive</div>
             <div class="log-item"><strong>✅</strong> Manifests Accessible</div>
             <div class="log-item"><strong>✅</strong> Widget Directories Found</div>
@@ -1027,9 +1214,21 @@
         <a class="dashboard-link-btn" href="/reports/" target="_blank">📊 Reports</a>
         <a class="dashboard-link-btn" href="/logs/" target="_blank">📋 Logs</a>
         <a class="dashboard-link-btn" href="/src/widgets/" target="_blank">🎨 Widgets</a>
-        <a class="dashboard-link-btn" href="/src/images/Portfolios/" target="_blank">🖼️ Manifests</a>
-        <a class="dashboard-link-btn" href="https://github.com/McCal-Codes/McCals-Website/actions" target="_blank">🚀 CI/CD</a>
-        <a class="dashboard-link-btn" href="https://github.com/McCal-Codes/McCals-Website" target="_blank">💻 GitHub</a>
+        <a class="dashboard-link-btn" href="/src/images/Portfolios/" target="_blank"
+          >🖼️ Manifests</a
+        >
+        <a
+          class="dashboard-link-btn"
+          href="https://github.com/McCal-Codes/McCals-Website/actions"
+          target="_blank"
+          >🚀 CI/CD</a
+        >
+        <a
+          class="dashboard-link-btn"
+          href="https://github.com/McCal-Codes/McCals-Website"
+          target="_blank"
+          >💻 GitHub</a
+        >
       </div>
     </div>
   </div>
@@ -1040,7 +1239,14 @@
   <div class="changelog-content" role="dialog" aria-modal="true" aria-labelledby="changelogTitle">
     <div class="changelog-header">
       <h3 class="changelog-title" id="changelogTitle">Admin Dashboard Changelog</h3>
-      <button class="changelog-close" type="button" aria-label="Close changelog" onclick="hideChangelog()">&times;</button>
+      <button
+        class="changelog-close"
+        type="button"
+        aria-label="Close changelog"
+        onclick="hideChangelog()"
+      >
+        &times;
+      </button>
     </div>
     <div class="changelog-body">
       <div class="changelog-version">v1.3.0 - Portfolio Widget Styling (Current)</div>
@@ -1078,224 +1284,280 @@
 </div>
 
 <script>
-// Toggle expandable sections
-function toggleSection(titleEl) {
-  const content = titleEl.nextElementSibling;
-  titleEl.classList.toggle('collapsed');
-  content.classList.toggle('collapsed');
-}
+  // Toggle expandable sections
+  function toggleSection(titleEl) {
+    const content = titleEl.nextElementSibling;
+    titleEl.classList.toggle('collapsed');
+    content.classList.toggle('collapsed');
+  }
 
-// Changelog modal controls
-function showChangelog() {
-  const modal = document.getElementById('changelogModal');
-  if (!modal) return;
-  modal.classList.add('active');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  const content = modal.querySelector('.changelog-content');
-  if (content) content.scrollTop = 0;
-}
+  // Changelog modal controls
+  function showChangelog() {
+    const modal = document.getElementById('changelogModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const content = modal.querySelector('.changelog-content');
+    if (content) content.scrollTop = 0;
+  }
 
-function hideChangelog() {
-  const modal = document.getElementById('changelogModal');
-  if (!modal) return;
-  modal.classList.remove('active');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
+  function hideChangelog() {
+    const modal = document.getElementById('changelogModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
 
-// Update timestamp
-function updateTimestamp() {
-  const now = new Date().toLocaleString('en-US', {
-    month: 'short', day: 'numeric', year: 'numeric',
-    hour: '2-digit', minute: '2-digit', second: '2-digit'
-  });
-  document.getElementById('lastUpdated').innerHTML = `Last updated: ${now}`;
-  document.getElementById('timestamp').textContent = new Date().toISOString().split('T')[0];
-}
-
-// Set environment info
-function setEnvironmentInfo() {
-  const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  document.getElementById('environment').textContent = isDev ? 'Development' : 'Production';
-  document.getElementById('nodeEnv').textContent = isDev ? 'Development' : 'Production';
-  document.getElementById('pageUrl').textContent = location.hostname;
-}
-
-// API Configuration - use relative path to leverage dev server proxy
-const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-const isDevSubdomain = location.hostname === 'dev.mcc-cal.com';
-
-const API_BASE_URL = isLocalhost
-  ? '' // Use same origin to avoid CORS issues in dev
-  : isDevSubdomain
-  ? 'https://api.mcc-cal.com' // Dev subdomain uses production API
-  : 'https://api.mcc-cal.com'; // Production
-
-// Check API health
-async function checkAPIHealth() {
-  console.log('🔍 Checking API at:', API_BASE_URL);
-  const startTime = Date.now();
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/health`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache'
+  // Update timestamp
+  function updateTimestamp() {
+    const now = new Date().toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
     });
-    const responseTime = Date.now() - startTime;
-    console.log('✅ API responded in', responseTime + 'ms', 'Status:', response.status);
-    
-    if (response.ok) {
-      const data = await response.json();
-      console.log('📊 API data:', data);
-      
-      // Update API status (defensive checks)
+    document.getElementById('lastUpdated').innerHTML = `Last updated: ${now}`;
+    document.getElementById('timestamp').textContent = new Date().toISOString().split('T')[0];
+  }
+
+  // Set environment info
+  function setEnvironmentInfo() {
+    const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    document.getElementById('environment').textContent = isDev ? 'Development' : 'Production';
+    document.getElementById('nodeEnv').textContent = isDev ? 'Development' : 'Production';
+    document.getElementById('pageUrl').textContent = location.hostname;
+  }
+
+  // API Configuration - use relative path to leverage dev server proxy
+  const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const isDevSubdomain = location.hostname === 'dev.mcc-cal.com';
+
+  const API_BASE_URL = isLocalhost
+    ? '' // Use same origin to avoid CORS issues in dev
+    : isDevSubdomain
+      ? 'https://api.mcc-cal.com' // Dev subdomain uses production API
+      : 'https://api.mcc-cal.com'; // Production
+
+  // Check API health
+  async function checkAPIHealth() {
+    console.log('🔍 Checking API at:', API_BASE_URL);
+    const startTime = Date.now();
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/health`, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+      });
+      const responseTime = Date.now() - startTime;
+      console.log('✅ API responded in', responseTime + 'ms', 'Status:', response.status);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('📊 API data:', data);
+
+        // Update API status (defensive checks)
+        const statusEl = document.getElementById('apiStatus');
+        const iconEl = document.getElementById('apiIcon');
+        const uptimeEl = document.getElementById('apiUptime');
+        const responseEl = document.getElementById('apiResponseTime');
+        const memoryEl = document.getElementById('apiMemory');
+
+        if (statusEl) {
+          statusEl.textContent = 'Online';
+          statusEl.className = 'status status-ok';
+        }
+        if (iconEl) iconEl.textContent = '🟢';
+
+        // Update metrics with real data
+        if (uptimeEl) uptimeEl.textContent = Math.floor(data.uptime / 60) + ' min';
+        if (responseEl) responseEl.textContent = responseTime + 'ms';
+        if (memoryEl) memoryEl.textContent = data.memory.used + ' MB';
+
+        return true;
+      } else {
+        throw new Error(`HTTP ${response.status}`);
+      }
+    } catch (error) {
+      console.error('❌ API health check failed:', error);
+      console.error('URL attempted:', `${API_BASE_URL}/api/health`);
+
+      // Update API status to offline (defensive checks)
       const statusEl = document.getElementById('apiStatus');
       const iconEl = document.getElementById('apiIcon');
       const uptimeEl = document.getElementById('apiUptime');
       const responseEl = document.getElementById('apiResponseTime');
       const memoryEl = document.getElementById('apiMemory');
-      
+
       if (statusEl) {
-        statusEl.textContent = 'Online';
-        statusEl.className = 'status status-ok';
+        statusEl.textContent = 'Offline';
+        statusEl.className = 'status status-err';
       }
-      if (iconEl) iconEl.textContent = '🟢';
-      
-      // Update metrics with real data
-      if (uptimeEl) uptimeEl.textContent = Math.floor(data.uptime / 60) + ' min';
-      if (responseEl) responseEl.textContent = responseTime + 'ms';
-      if (memoryEl) memoryEl.textContent = data.memory.used + ' MB';
-      
-      return true;
-    } else {
-      throw new Error(`HTTP ${response.status}`);
-    }
-  } catch (error) {
-    console.error('❌ API health check failed:', error);
-    console.error('URL attempted:', `${API_BASE_URL}/api/health`);
-    
-    // Update API status to offline (defensive checks)
-    const statusEl = document.getElementById('apiStatus');
-    const iconEl = document.getElementById('apiIcon');
-    const uptimeEl = document.getElementById('apiUptime');
-    const responseEl = document.getElementById('apiResponseTime');
-    const memoryEl = document.getElementById('apiMemory');
-    
-    if (statusEl) {
-      statusEl.textContent = 'Offline';
-      statusEl.className = 'status status-err';
-    }
-    if (iconEl) iconEl.textContent = '🔴';
-    
-    // Set fallback values
-    if (uptimeEl) uptimeEl.textContent = 'N/A';
-    if (responseEl) responseEl.textContent = 'N/A';
-    if (memoryEl) memoryEl.textContent = 'N/A';
-    
-    return false;
-  }
-}
+      if (iconEl) iconEl.textContent = '🔴';
 
-// Initialize all checks
-async function initDashboard() {
-  updateTimestamp();
-  setEnvironmentInfo();
-  
-  // Check API first
-  const apiOnline = await checkAPIHealth();
-  
-  // Populate analytics (with simulated data for now)
-  populateAnalytics();
-  
-  console.log('✨ Admin Dashboard v1.3.0 initialized (API:', apiOnline ? 'online' : 'offline', ')');
-}
+      // Set fallback values
+      if (uptimeEl) uptimeEl.textContent = 'N/A';
+      if (responseEl) responseEl.textContent = 'N/A';
+      if (memoryEl) memoryEl.textContent = 'N/A';
 
-// Populate analytics
-function populateAnalytics() {
-  document.getElementById('cacheHitRate').textContent = (Math.random() * 40 + 60).toFixed(1) + '%';
-  
-  const totalReqs = Math.floor(Math.random() * 8000 + 2000);
-  const manifestReqs = Math.floor(totalReqs * 0.6);
-  document.getElementById('totalRequests').textContent = totalReqs.toLocaleString();
-  document.getElementById('manifestRequests').textContent = manifestReqs.toLocaleString();
-  
-  const daysAgo = Math.floor(Math.random() * 7) + 1;
-  document.getElementById('lastDeploy').textContent = `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
-  
-  // Populate portfolio manifest data
-  const portfolios = {
-    concert: { bands: 16, images: 211, count: 'concertCount', bands_id: 'concertBands', images_id: 'concertImages', updated_id: 'concertUpdated' },
-    events: { events: 4, images: 84, count: 'eventsCount', total_id: 'eventsTotal', images_id: 'eventsImages', updated_id: 'eventsUpdated' },
-    journalism: { articles: 12, images: 156, count: 'journalismCount', total_id: 'journalismTotal', images_id: 'journalismImages', updated_id: 'journalismUpdated' },
-    nature: { collections: 8, images: 320, total_id: 'natureTotal', images_id: 'natureImages', updated_id: 'natureUpdated' },
-    portrait: { subjects: 24, images: 144, total_id: 'portraitTotal', images_id: 'portraitImages', updated_id: 'portraitUpdated' },
-    featured: { items: 15, images: 45, total_id: 'featuredTotal', images_id: 'featuredImages', updated_id: 'featuredUpdated' }
-  };
-  
-  // Update each portfolio
-  for (const [key, data] of Object.entries(portfolios)) {
-    // Update manifest counts
-    if (data.count) {
-      const countEl = document.getElementById(data.count);
-      if (countEl) countEl.textContent = data.bands || data.events || data.articles || data.collections || data.subjects || data.items;
-    }
-    
-    // Update total/bands/subjects
-    if (data.bands_id) {
-      const el = document.getElementById(data.bands_id);
-      if (el) el.textContent = data.bands;
-    }
-    if (data.total_id) {
-      const el = document.getElementById(data.total_id);
-      if (el) el.textContent = data.collections || data.articles || data.subjects || data.items || data.events;
-    }
-    
-    // Update images count
-    if (data.images_id) {
-      const el = document.getElementById(data.images_id);
-      if (el) el.textContent = data.images;
-    }
-    
-    // Update timestamp
-    if (data.updated_id) {
-      const el = document.getElementById(data.updated_id);
-      if (el) {
-        const hoursAgo = Math.floor(Math.random() * 48) + 1;
-        el.textContent = hoursAgo < 24 
-          ? `${hoursAgo}h ago`
-          : `${Math.floor(hoursAgo / 24)}d ago`;
-      }
+      return false;
     }
   }
-}
 
-// Run on page load
-document.addEventListener('DOMContentLoaded', initDashboard);
-
-// Add refresh button handler
-const refreshBtn = document.getElementById('refreshBtn');
-if (refreshBtn) {
-  refreshBtn.onclick = async function(e) {
-    e.preventDefault();
-    refreshBtn.disabled = true;
-    refreshBtn.textContent = '🔄 Checking...';
-    
-    await checkAPIHealth();
+  // Initialize all checks
+  async function initDashboard() {
     updateTimestamp();
-    
-    refreshBtn.disabled = false;
-    refreshBtn.textContent = '🔄 Refresh';
-  };
-}
+    setEnvironmentInfo();
 
-// Auto-refresh timestamp every 60 seconds
-setInterval(updateTimestamp, 60000);
+    // Check API first
+    const apiOnline = await checkAPIHealth();
 
-// Auto-check API health every 2 minutes
-setInterval(checkAPIHealth, 120000);
+    // Populate analytics (with simulated data for now)
+    populateAnalytics();
 
-// Make changelog functions globally available
-window.showChangelog = showChangelog;
-window.hideChangelog = hideChangelog;
+    console.log(
+      '✨ Admin Dashboard v1.3.0 initialized (API:',
+      apiOnline ? 'online' : 'offline',
+      ')',
+    );
+  }
+
+  // Populate analytics
+  function populateAnalytics() {
+    document.getElementById('cacheHitRate').textContent =
+      (Math.random() * 40 + 60).toFixed(1) + '%';
+
+    const totalReqs = Math.floor(Math.random() * 8000 + 2000);
+    const manifestReqs = Math.floor(totalReqs * 0.6);
+    document.getElementById('totalRequests').textContent = totalReqs.toLocaleString();
+    document.getElementById('manifestRequests').textContent = manifestReqs.toLocaleString();
+
+    const daysAgo = Math.floor(Math.random() * 7) + 1;
+    document.getElementById('lastDeploy').textContent =
+      `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+
+    // Populate portfolio manifest data
+    const portfolios = {
+      concert: {
+        bands: 16,
+        images: 211,
+        count: 'concertCount',
+        bands_id: 'concertBands',
+        images_id: 'concertImages',
+        updated_id: 'concertUpdated',
+      },
+      events: {
+        events: 4,
+        images: 84,
+        count: 'eventsCount',
+        total_id: 'eventsTotal',
+        images_id: 'eventsImages',
+        updated_id: 'eventsUpdated',
+      },
+      journalism: {
+        articles: 12,
+        images: 156,
+        count: 'journalismCount',
+        total_id: 'journalismTotal',
+        images_id: 'journalismImages',
+        updated_id: 'journalismUpdated',
+      },
+      nature: {
+        collections: 8,
+        images: 320,
+        total_id: 'natureTotal',
+        images_id: 'natureImages',
+        updated_id: 'natureUpdated',
+      },
+      portrait: {
+        subjects: 24,
+        images: 144,
+        total_id: 'portraitTotal',
+        images_id: 'portraitImages',
+        updated_id: 'portraitUpdated',
+      },
+      featured: {
+        items: 15,
+        images: 45,
+        total_id: 'featuredTotal',
+        images_id: 'featuredImages',
+        updated_id: 'featuredUpdated',
+      },
+    };
+
+    // Update each portfolio
+    for (const [key, data] of Object.entries(portfolios)) {
+      // Update manifest counts
+      if (data.count) {
+        const countEl = document.getElementById(data.count);
+        if (countEl)
+          countEl.textContent =
+            data.bands ||
+            data.events ||
+            data.articles ||
+            data.collections ||
+            data.subjects ||
+            data.items;
+      }
+
+      // Update total/bands/subjects
+      if (data.bands_id) {
+        const el = document.getElementById(data.bands_id);
+        if (el) el.textContent = data.bands;
+      }
+      if (data.total_id) {
+        const el = document.getElementById(data.total_id);
+        if (el)
+          el.textContent =
+            data.collections || data.articles || data.subjects || data.items || data.events;
+      }
+
+      // Update images count
+      if (data.images_id) {
+        const el = document.getElementById(data.images_id);
+        if (el) el.textContent = data.images;
+      }
+
+      // Update timestamp
+      if (data.updated_id) {
+        const el = document.getElementById(data.updated_id);
+        if (el) {
+          const hoursAgo = Math.floor(Math.random() * 48) + 1;
+          el.textContent = hoursAgo < 24 ? `${hoursAgo}h ago` : `${Math.floor(hoursAgo / 24)}d ago`;
+        }
+      }
+    }
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initDashboard);
+
+  // Add refresh button handler
+  const refreshBtn = document.getElementById('refreshBtn');
+  if (refreshBtn) {
+    refreshBtn.onclick = async function (e) {
+      e.preventDefault();
+      refreshBtn.disabled = true;
+      refreshBtn.textContent = '🔄 Checking...';
+
+      await checkAPIHealth();
+      updateTimestamp();
+
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = '🔄 Refresh';
+    };
+  }
+
+  // Auto-refresh timestamp every 60 seconds
+  setInterval(updateTimestamp, 60000);
+
+  // Auto-check API health every 2 minutes
+  setInterval(checkAPIHealth, 120000);
+
+  // Make changelog functions globally available
+  window.showChangelog = showChangelog;
+  window.hideChangelog = hideChangelog;
 </script>
