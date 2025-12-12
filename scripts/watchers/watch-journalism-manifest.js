@@ -2,10 +2,10 @@
 
 /**
  * Journalism Manifest Watcher
- * 
+ *
  * Automatically regenerates the journalism manifest when ANY changes occur
  * in the journalism portfolio directory (not just _import).
- * 
+ *
  * Watches: src/images/Portfolios/Journalism/ (all files)
  * Runs: npm run manifest:journalism --force
  */
@@ -35,10 +35,7 @@ function error(message, ...args) {
   console.error(`❌ [${timestamp}] ${message}`, ...args);
 }
 
-function isImageFile(filePath) {
-  const ext = path.extname(filePath).toLowerCase();
-  return IMAGE_EXTS.has(ext);
-}
+// Keep things simple: we don't need a separate helper yet.
 
 function isRelevantChange(filePath) {
   // Ignore system files, manifests, and temporary files
@@ -46,8 +43,11 @@ function isRelevantChange(filePath) {
   if (fileName.startsWith('.') || fileName === 'README.md') return false;
   if (fileName.includes('manifest.json')) return false;
   if (fileName.includes('.tmp') || fileName.includes('.temp')) return false;
-  
+
   // Include directories and image files
+  const ext = path.extname(filePath).toLowerCase();
+  // If the file has an extension and it's not a recognized image, ignore it
+  if (ext && !IMAGE_EXTS.has(ext)) return false;
   return true;
 }
 
@@ -63,7 +63,7 @@ function regenerateManifest() {
   const proc = spawn('npm', ['run', 'manifest:journalism', '--', '--force'], {
     cwd: process.cwd(),
     stdio: 'inherit',
-    shell: true
+    shell: true,
   });
 
   proc.on('close', (code) => {
@@ -84,7 +84,7 @@ function regenerateManifest() {
 function scheduleRegeneration(filePath, eventType) {
   const relativePath = path.relative(JOURNALISM_DIR, filePath);
   log(`${eventType}: ${relativePath}`);
-  
+
   // Debounce multiple changes
   if (debounceTimer) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
@@ -102,16 +102,16 @@ function startWatching() {
       /\.git/,
       /\.DS_Store$/,
       /Thumbs\.db$/,
-      /journalism-manifest\.json$/,  // Don't watch our own output
-      /manifest\.json$/              // Don't watch individual manifests
+      /journalism-manifest\.json$/, // Don't watch our own output
+      /manifest\.json$/, // Don't watch individual manifests
     ],
     persistent: true,
     ignoreInitial: true,
     awaitWriteFinish: {
       stabilityThreshold: 1000,
-      pollInterval: 100
+      pollInterval: 100,
     },
-    depth: 10 // Watch deeply nested folders
+    depth: 10, // Watch deeply nested folders
   });
 
   watcher
