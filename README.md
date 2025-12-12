@@ -2,7 +2,7 @@
 
 This repository hosts the development workspace for McCal Media's Squarespace widgets. It includes the widget source files, a local test site, automation scripts, and standards that keep contributions consistent and production-ready.
 
-**Start here:** [docs/ONBOARDING.md](docs/ONBOARDING.md) → [.github/copilot-instructions.md](.github/copilot-instructions.md) → [docs/standards/workspace-organization.md](docs/standards/workspace-organization.md) → [docs/repo-improvement-plan.md](docs/repo-improvement-plan.md)
+**Start here:** [docs/ONBOARDING.md](docs/ONBOARDING.md) → [.github/copilot-instructions.md](.github/copilot-instructions.md) → [docs/standards/workspace-organization.md](docs/standards/workspace-organization.md) → [docs/bookmarks.md](docs/bookmarks.md) → [docs/repo-improvement-plan.md](docs/repo-improvement-plan.md)
 
 Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/standards/security-organization-prompt.md` or the quick `docs/standards/security-organization-checklist.md`.
 
@@ -11,6 +11,7 @@ Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/
 **Requirements:** Node.js 18+ and npm.
 
 1. Install dependencies:
+
 ---
 
 ## Quick note: dev.mcc-cal.com Next.js app
@@ -56,6 +57,7 @@ DEV_SERVER_ALLOW_START=true PORT=3033 NEXT_SERVER_PORT=3005 node dev-server.js
 ```
 
 When enabled, clicking the "Start & Open" button will POST to a local dev-only endpoint (`/__start_next`) which spawns `npx next start -p <port>` in `sites/dev.mcc-cal.com` and then opens the running site when it becomes reachable. Use this only on trusted developer machines.
+
 ## Available Widgets
 
 Critical repository events, security incidents, and recovery steps are documented in [docs/important-notes/](docs/important-notes/).
@@ -76,6 +78,7 @@ Manifest workflows notify the API (if secrets set) so caches can be warmed autom
 ## ✅ Widget Validation & Continuous Integration
 
 All Squarespace widgets are automatically validated for standards compliance (namespace wrapper, inline CSS/JS, version attribute).
+
 ### Widget Release
 
 We use tag-based releases for deploying widgets to Squarespace via jsDelivr:
@@ -87,8 +90,8 @@ We use tag-based releases for deploying widgets to Squarespace via jsDelivr:
 
 Use the loader snippet documented in `.github/copilot-instructions.md` under “Squarespace + jsDelivr (quick pattern)”.
 
-
 Fixing validation errors:
+
 1. Run locally: `node scripts/utils/validate-widgets.js`
 2. Read error output for offending files.
 3. Update HTML per `docs/standards/widget-standards.md`.
@@ -109,6 +112,7 @@ Preflight commands: `npm run ai:preflight:short` | `npm run ai:preflight` | `npm
 ## Widget Catalog
 
 Production:
+
 - Concert Portfolio — performance + SEO reference (v4.x line)
 - Event Portfolio — dynamic category & shuffle (v2.6.x)
 - Featured Portfolio — curated highlights
@@ -123,14 +127,16 @@ Production:
 - Admin Portfolio Importer — private image ingestion tool
 
 Work In Progress:
+
 - Photojournalism Portfolio v5.1 optimization
 - Blog Feed integration
 - Nature Portfolio gallery
 
 ## Development Standards
-Performance Regression CI:
-- A headless Playwright-based performance scaffold runs basic metrics for widgets and uploads HTML reports. Lighthouse integration will be added in a subsequent iteration.
 
+Performance Regression CI:
+
+- A headless Playwright-based performance scaffold runs basic metrics for widgets and uploads HTML reports. Lighthouse integration will be added in a subsequent iteration.
 
 Quick Reference: `docs/standards/widget-reference.md`
 Architecture & Patterns: `docs/standards/widget-standards.md`
@@ -140,6 +146,7 @@ SEO Starter: `docs/standards/seo-starter-guide.md`
 Image SEO: `docs/standards/image-seo-standards.md`
 
 ## Using Widgets in Squarespace (Summary)
+
 1. Copy latest version HTML from `src/widgets/<name>/versions/`
 2. Paste into a Squarespace Code Block
 3. Adjust data attributes (see widget README)
@@ -147,10 +154,12 @@ Image SEO: `docs/standards/image-seo-standards.md`
 5. Validate: `npm run validate:widgets`
 
 ## Important Notes
+
 Security & recovery events: `docs/important-notes/` (latest: 2025-10-09-secret-removal.md)
+
 - **Photojournalism Portfolio v5.1** (`src/widgets/photojournalism-portfolio/versions/v5.1-performance-optimized.html`) - Performance optimization pass in development
-- **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration *(in development)*
-- **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays *(in development)*
+- **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration _(in development)_
+- **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays _(in development)_
 
 ### Using Widgets in Squarespace
 
@@ -162,6 +171,7 @@ Security & recovery events: `docs/important-notes/` (latest: 2025-10-09-secret-r
 6. Each widget has its own README with specific instructions
 
 ### Widget Development Standards ⭐ **NEW**
+
 - **Quick Reference**: `docs/standards/widget-reference.md` - Essential checklist for widget development
 - **Complete Guide**: `docs/standards/widget-standards.md` - Comprehensive architecture and design standards
 - **Enhancement Patterns**: Proven improvement patterns for optimizing existing widgets
@@ -171,6 +181,7 @@ Security & recovery events: `docs/important-notes/` (latest: 2025-10-09-secret-r
 ## Development & Testing
 
 Common scripts:
+
 - `npm run dev` — Start the local dev server
 - `npm run build` — Build the test site
 - `npm run serve` — Serve the built site
@@ -181,13 +192,13 @@ Common scripts:
 
 Quick task aliases:
 
-| Script | What it does |
-| --- | --- |
-| `npm run ai:preflight:short` | Fast context/standards preflight (no writes) |
-| `npm run dev` | Serve local demo site at http://localhost:3000 |
-| `npm run validate:widgets` | Validate widget HTML structure (no writes) |
-| `npm run manifest:dry-run` | Dry-run manifest generation (no writes) |
-| `npm run repo:health` | Clean + preflight + large-file scan |
+| Script                       | What it does                                   |
+| ---------------------------- | ---------------------------------------------- |
+| `npm run ai:preflight:short` | Fast context/standards preflight (no writes)   |
+| `npm run dev`                | Serve local demo site at http://localhost:3000 |
+| `npm run validate:widgets`   | Validate widget HTML structure (no writes)     |
+| `npm run manifest:dry-run`   | Dry-run manifest generation (no writes)        |
+| `npm run repo:health`        | Clean + preflight + large-file scan            |
 
 ## Contributing
 
@@ -196,10 +207,13 @@ Quick task aliases:
 - Repository-wide improvement roadmap: [`docs/repo-improvement-plan.md`](docs/repo-improvement-plan.md).
 
 ## Documentation
+
 Widget Documentation:
+
 - See `docs/widgets/index.md` for per-widget usage summaries and links.
 
 Full documentation lives in [`docs/README.md`](docs/README.md) and includes:
+
 - Standards: `docs/standards/`
 - Workflows: `docs/workflows/`
 - Automation: `docs/automation/`
