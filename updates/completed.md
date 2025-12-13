@@ -21,6 +21,22 @@ This file tracks all completed tasks that have been removed from the active `tod
 - [x] Wired PWA/iOS meta tags + manifest link in `pages/_document.tsx` and SW registration in `pages/_app.tsx`
 - [x] Documented iOS “Add to Home Screen” install steps in `sites/dev.mcc-cal.com/README.md`
 
+### Manifest & CI Fixes (Dec 12, 2025)
+
+- [x] Resolved merge conflict in `src/images/Portfolios/Nature/nature-manifest.json` (kept latest generated timestamp)
+- [x] Fixed linter warnings in watcher scripts:
+  - `scripts/watchers/watch-journalism-manifest.js` — removed unused helper and used `IMAGE_EXTS` to filter non-image files
+  - `scripts/watchers/watch-nature-manifest.js` — improved logging and surfaced generator output to avoid unused-variable warnings
+- [x] Made Cloudflare deploy workflow robust to missing secrets:
+  - `src/api/.github/workflows/deploy.yml` now emits a clear warning and skips `wrangler deploy` when `CLOUDFLARE_API_TOKEN` or `CLOUDFLARE_ACCOUNT_ID` are not configured, and prints a `wrangler.toml` summary for debugging
+  - Committed the workflow change in the `src/api` submodule and updated the parent repo's submodule pointer
+- [x] Pushed fixes to `main` (lint fixes and manifest resolution) so CI can re-run cleanly
+
+Notes:
+
+- Follow-up required: add Cloudflare secrets (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, optional `CLOUDFLARE_WEBHOOK_SECRET`) in GitHub repo settings to enable actual Worker deployment.
+- To finish deployment, re-run the Deploy Cloudflare Worker workflow after secrets are added or run `wrangler deploy` locally in `src/api` with the secrets exported.
+
 ### Blog System & Cloudflare Integration (Dec 5-6, 2025)
 
 - [x] **Blog Admin Widget v1.0.0** — Complete blog authoring system with login, post editor (dynamic content blocks), post management dashboard, profile settings; production-ready self-contained admin widget
