@@ -22,6 +22,14 @@ _Updated: December 6, 2025_
 - [ ] TODO: Test end-to-end flows: manifest webhook, blog auth/posts, rate limiting, cache stats
 - [ ] TODO: Monitor Worker analytics and optimize cache TTLs/rate limits based on actual traffic patterns
 
+_Update (Dec 12, 2025):_ Small maintenance performed — merge conflict in `nature-manifest.json` resolved, watcher script lint warnings fixed, and the API submodule's deploy workflow updated to skip deploy when Cloudflare secrets are missing and to print `wrangler.toml` for debugging. The deploy will still require adding the following secrets to the repository before it performs an actual `wrangler deploy`:
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+- (optional) `CLOUDFLARE_WEBHOOK_SECRET` — used by CDN publish workflow to trigger cache refreshes
+
+Next action: add the secrets to GitHub Actions secrets and re-run the "Deploy Cloudflare Worker" workflow or push a fresh commit to retrigger.
+
 ### Next.js Self-Hosted Site Migration
 
 - [ ] TODO: Create Next.js self-hosted site structure under sites/dev.mcc-cal.com/
