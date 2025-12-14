@@ -1,0 +1,1324 @@
+<!-- Nature Portfolio Widget v1.9 - Monochrome Update -->
+<!-- Enhanced with instant loading, retry logic, and better caching for immediate image display -->
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ffffff;
+    --mcc-accent-strong: #e0e0e0;
+    --mcc-bg: #000000;
+    --mcc-fg: #ffffff;
+    --mcc-line: #333333;
+    --mcc-muted: #888888;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1a1a1a;
+    --focus: #ffffff;
+    --link: var(--accent);
+    --panel-bg: rgba(20, 20, 20, 0.85);
+    --panel-border: rgba(255, 255, 255, 0.2);
+    --panel-blur: 12px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 12px;
+    --mcc-control-height: 42px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    --panel-border: rgba(0, 0, 0, 0.1);
+    --panel-blur: 12px;
+    --chip: #f5f5f5;
+    --focus: #000000;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  :root {
+    --fg: #f5f5f5;
+    --bg: #0a0a0a;
+    --line: #2a2a2a;
+    --accent: #ffffff;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --fg: #0a0a0a;
+      --bg: #ffffff;
+      --line: #e5e5e5;
+    }
+  }
+  .nature-portfolio {
+    max-width: 1600px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+  }
+  .nature-heading {
+    font:
+      800 34px/1.2 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+    margin: 0 0 12px;
+  }
+  .nature-subheading {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    font:
+      400 16px/1.6 ui-sans-serif,
+      system-ui;
+    color: rgba(245, 245, 245, 0.78);
+  }
+  @media (prefers-color-scheme: light) {
+    .nature-subheading {
+      color: rgba(10, 10, 10, 0.72);
+    }
+  }
+  .version-indicator {
+    display: inline-block;
+    margin-left: 12px;
+    font:
+      600 14px/1.2 ui-sans-serif,
+      system-ui;
+    color: rgba(128, 128, 128, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    vertical-align: baseline;
+  }
+  .version-indicator:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  .nature-info {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85));
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  /* --- Modal Changelog Styles --- */
+  .changelog-modal {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .changelog-modal.active {
+    display: flex;
+  }
+  .changelog-content {
+    background: var(--bg, #181818);
+    border: 1px solid var(--line, #333);
+    border-radius: 12px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  .changelog-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--line, #333);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .changelog-title {
+    margin: 0;
+    font:
+      700 18px/1.2 ui-sans-serif,
+      system-ui;
+    color: var(--fg, #fff);
+  }
+  .changelog-close {
+    background: none;
+    border: none;
+    color: var(--fg, #fff);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .changelog-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .changelog-body {
+    padding: 20px;
+    font:
+      400 14px/1.5 ui-sans-serif,
+      system-ui;
+    color: var(--fg, #fff);
+  }
+  .changelog-version {
+    margin: 0 0 16px;
+    font:
+      600 16px/1.3 ui-sans-serif,
+      system-ui;
+    border-bottom: 1px solid var(--line, #333);
+    padding-bottom: 8px;
+  }
+  .changelog-items {
+    margin: 12px 0;
+    list-style: none;
+    padding: 0;
+  }
+  .changelog-items li {
+    margin: 6px 0 0 0;
+    padding-left: 14px;
+    position: relative;
+    font:
+      500 13px/1.4 ui-sans-serif,
+      system-ui;
+  }
+  .changelog-items li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+  }
+  /* --- Filters --- */
+  .portfolio-filters {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0 18px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .filter-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid #2a2a2a;
+    color: #e5e5e5;
+    font:
+      600 14px/1.1 ui-sans-serif,
+      system-ui;
+    padding: 12px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition:
+      background 0.18s,
+      border 0.18s,
+      color 0.18s;
+  }
+  .filter-btn.active,
+  .filter-btn:focus {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+    outline: 2px solid #ffffff;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.2);
+    z-index: 2;
+  }
+  .filter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+    color: #ffffff;
+    outline: 1px solid #ffffff;
+  }
+  .tag-chip {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin: 4px 4px 0 0;
+    vertical-align: middle;
+    letter-spacing: 0.1px;
+  }
+  .nature-grid {
+    column-width: 320px;
+    column-gap: 20px;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.5s;
+    background: transparent;
+    margin-bottom: 32px;
+  }
+  .nature-grid.loaded {
+    opacity: 1;
+  }
+  @media (max-width: 1024px) {
+    .nature-grid {
+      column-width: 280px;
+    }
+  }
+  @media (max-width: 768px) {
+    .nature-grid {
+      column-width: 240px;
+      margin-top: 28px;
+    }
+    .portfolio-filters {
+      gap: 8px;
+    }
+    .filter-btn {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+  }
+  @media (max-width: 520px) {
+    .nature-grid {
+      column-width: 100%;
+    }
+  }
+  .nature-card {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 20px;
+    background: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    break-inside: avoid;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+  }
+  .nature-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nature-card.is-hidden {
+    display: none;
+  }
+  .nature-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: inherit;
+    transition:
+      transform 0.35s,
+      filter 0.35s;
+  }
+  .nature-card:hover img {
+    transform: scale(1.02);
+    filter: contrast(1.08) saturate(1.08);
+  }
+  .image-count-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+  .nature-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 14px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85));
+    color: #fff;
+  }
+  .nature-date {
+    margin: 0 0 6px 0;
+    font:
+      600 13px/1.3 ui-sans-serif,
+      system-ui;
+    color: #e5e5e5;
+    opacity: 0.85;
+  }
+  .nature-title {
+    margin: 0 0 10px 0;
+    font:
+      800 16px/1.2 ui-sans-serif,
+      system-ui;
+  }
+  .nature-meta {
+    margin: 2px 0 0;
+    font:
+      600 12px/1.2 ui-sans-serif,
+      system-ui;
+    color: #e5e5e5;
+  }
+  .nature-card.loading::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  .nature-card.error {
+    background: #2a1a1a;
+    border: 1px solid #4a2a2a;
+  }
+  .nature-card.error .retry-btn {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font:
+      600 14px/1.2 ui-sans-serif,
+      system-ui;
+    z-index: 10;
+  }
+  .retry-btn {
+    display: none;
+  }
+  .nature-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2147483647 !important;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+  }
+  .nature-lightbox.is-open {
+    display: flex;
+  }
+  .nl-dialog {
+    position: relative;
+    max-width: 95vw;
+    max-height: 92vh;
+    overflow: auto;
+    background: transparent;
+    outline: none;
+  }
+  .nl-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    padding-right: 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nl-gallery::-webkit-scrollbar {
+    display: none;
+  }
+  .nl-gallery img {
+    max-width: 92vw;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    scroll-snap-align: center;
+    border-radius: 14px;
+    transition: opacity 0.3s;
+    display: block;
+    margin: 0 auto;
+  }
+  .nl-gallery img.loading {
+    opacity: 0.5;
+  }
+  .nl-gallery img.loaded {
+    opacity: 1;
+  }
+  .nl-gallery img.error {
+    opacity: 0.3;
+    border: 2px solid #ffffff;
+  }
+  .nl-meta {
+    margin-top: 8px;
+    font:
+      600 14px/1.4 ui-sans-serif,
+      system-ui;
+    color: #ccc;
+    opacity: 0.85;
+  }
+  .nl-description {
+    margin-top: 8px;
+    font:
+      400 14px/1.5 ui-sans-serif,
+      system-ui;
+    color: #aaa;
+  }
+  .nl-close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    font:
+      600 24px/1 ui-sans-serif,
+      system-ui;
+    z-index: 2147483648;
+    backdrop-filter: blur(4px);
+    pointer-events: all !important;
+  }
+  .nl-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  html.lb-open body {
+    overflow: hidden !important;
+  }
+  html.lb-open header,
+  html.lb-open nav,
+  html.lb-open .header {
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+  .portfolio-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    font:
+      600 16px/1.4 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+  }
+  .loading-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 14px;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div class="nature-portfolio">
+  <h1 class="nature-heading">
+    Nature Photography
+    <span
+      class="version-indicator"
+      onclick="window.natureAPI?.showChangelog()"
+      title="Click for changelog"
+      >v1.9</span
+    >
+  </h1>
+  <p class="nature-subheading">Wildlife & landscapes captured in their natural beauty</p>
+
+  <div id="natureFilters" class="portfolio-filters"></div>
+
+  <div id="natureLoading" class="portfolio-loading">
+    <div class="loading-spinner"></div>
+    <span>Loading nature gallery...</span>
+  </div>
+
+  <div id="natureGrid" class="nature-grid" style="display: none"></div>
+</div>
+
+<aside
+  id="natureLightbox"
+  class="nature-lightbox"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="nl-dialog" role="document" tabindex="-1">
+    <button
+      class="nl-close"
+      onclick="window.natureAPI.closeLightbox()"
+      aria-label="Close lightbox"
+      type="button"
+    >
+      &times;
+    </button>
+    <h3 class="nl-title" style="display: none"></h3>
+    <div class="nl-meta" style="display: none"></div>
+    <div class="nl-description" style="display: none"></div>
+    <div id="nlGallery" class="nl-gallery"></div>
+  </div>
+</aside>
+
+<!-- Changelog Modal -->
+<div id="changelogModal" class="changelog-modal">
+  <div class="changelog-content">
+    <div class="changelog-header">
+      <h3 class="changelog-title">Nature Portfolio Changelog</h3>
+      <button
+        class="changelog-close"
+        onclick="document.getElementById('changelogModal').classList.remove('active')"
+        aria-label="Close"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="changelog-body">
+      <h4 class="changelog-version">v1.8 (2025-10-27)</h4>
+      <ul class="changelog-items">
+        <li>
+          <strong>Instant Loading</strong>: Removed lazy loading for first 8 images for instant
+          display
+        </li>
+        <li>
+          <strong>Retry Logic</strong>: Added exponential backoff retry (3 attempts) with visible
+          retry button
+        </li>
+        <li><strong>Better Caching</strong>: Enhanced image preloading and caching strategy</li>
+        <li><strong>Loading States</strong>: Improved visual feedback during image loading</li>
+        <li>
+          <strong>Performance</strong>: Optimized for faster initial render and progressive
+          enhancement
+        </li>
+      </ul>
+
+      <h4 class="changelog-version">v1.7 (2025-10-09)</h4>
+      <ul class="changelog-items">
+        <li>
+          <strong>Enhanced Display</strong>: Increased from 20 to 32 photos, up to 3 per collection
+        </li>
+        <li>
+          <strong>Smart Filtering</strong>: Dynamic filter tabs show only categories with content
+        </li>
+        <li>
+          <strong>Landscape Support</strong>: Proper landscape categorization with dedicated tab
+        </li>
+        <li>
+          <strong>Category Detection</strong>: Intelligent categorization based on folder paths
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    'use strict';
+
+    const state = {
+      currentCategory: 'all',
+      allSlots: [],
+      cacheKey: 'nature-portfolio-v1',
+      retryAttempts: new Map(), // Track retry attempts per image
+      maxRetries: 3,
+    };
+
+    const log = (...args) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('debug') === 'true') console.log('[Nature Portfolio]', ...args);
+    };
+
+    // === Utility Functions ===
+    const $$ = (sel) => document.querySelector(sel);
+    const setText = (el, v) => {
+      if (el) el.textContent = v;
+    };
+    const encodePath = (path) =>
+      path
+        .split('/')
+        .map((segment) => encodeURIComponent(segment))
+        .join('/');
+    const normalizeFolder = (value) => (value ? value.replace(/^\/+/, '').replace(/\/+$/, '') : '');
+
+    function resolveImagePath(collection, image) {
+      if (!image) return '';
+      const raw = (image.path || image.src || image.url || image.filename || image).trim
+        ? (image.path || image.src || image.url || image.filename || image).trim()
+        : image;
+      if (!raw) return '';
+      if (/^https?:\/\//i.test(raw)) return raw;
+      let relative = raw.replace(/^\.?\//, '');
+      if (relative.startsWith('src/')) {
+        return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/${encodePath(relative)}`;
+      }
+      if (relative.includes('/')) {
+        return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Nature/${encodePath(relative)}`;
+      }
+      const folder = normalizeFolder(image.folderPath || collection.folderPath || '');
+      const composed = folder ? `${folder}/${relative}` : relative;
+      return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Nature/${encodePath(composed)}`;
+    }
+
+    // === Enhanced Cache with better TTL ===
+    const cache = {
+      get: () => {
+        try {
+          const data = JSON.parse(localStorage.getItem(state.cacheKey));
+          return data && Date.now() - data.timestamp < 10 * 60 * 1000 ? data : null;
+        } catch {
+          return null;
+        }
+      },
+      set: (data) => {
+        try {
+          localStorage.setItem(state.cacheKey, JSON.stringify({ ...data, timestamp: Date.now() }));
+        } catch (e) {
+          log('Cache write failed:', e.message);
+        }
+      },
+      clear: () => {
+        try {
+          localStorage.removeItem(state.cacheKey);
+        } catch (e) {}
+      },
+    };
+
+    // === Image Loading with Retry Logic ===
+    const loadImageWithRetry = (img, url, card) => {
+      const retryKey = url;
+      const attempts = state.retryAttempts.get(retryKey) || 0;
+
+      img.onload = () => {
+        card.classList.remove('loading', 'error');
+        card.classList.add('loaded');
+        state.retryAttempts.delete(retryKey);
+        log(`✓ Image loaded: ${url}`);
+      };
+
+      img.onerror = () => {
+        log(`✗ Image failed (attempt ${attempts + 1}): ${url}`);
+
+        if (attempts < state.maxRetries) {
+          state.retryAttempts.set(retryKey, attempts + 1);
+          const backoffDelay = Math.pow(2, attempts) * 1000; // Exponential backoff: 1s, 2s, 4s
+
+          log(`⟳ Retrying in ${backoffDelay}ms...`);
+          setTimeout(() => {
+            img.src = url; // Retry
+          }, backoffDelay);
+        } else {
+          // Max retries reached - show error state with retry button
+          card.classList.remove('loading');
+          card.classList.add('error');
+
+          const retryBtn = document.createElement('button');
+          retryBtn.className = 'retry-btn';
+          retryBtn.textContent = 'Retry Load';
+          retryBtn.onclick = (e) => {
+            e.stopPropagation();
+            state.retryAttempts.delete(retryKey);
+            card.classList.remove('error');
+            card.classList.add('loading');
+            retryBtn.remove();
+            img.src = url;
+          };
+          card.appendChild(retryBtn);
+
+          log(`✗ Max retries reached for: ${url}`);
+        }
+      };
+
+      img.src = url;
+    };
+
+    // === Date Parsing ===
+    const parseDateFromString = (value) => {
+      if (!value) return 0;
+      if (typeof value === 'number') return value;
+      if (value instanceof Date) return value.getTime();
+      const str = String(value).trim();
+      if (!str) return 0;
+      const direct = Date.parse(str);
+      if (!Number.isNaN(direct)) return direct;
+
+      const toTimestamp = (year, month = 1, day = 1) => {
+        if (!year || !month || month < 1 || month > 12) return 0;
+        const safeDay = Math.min(Math.max(day || 1, 1), 31);
+        const d = new Date(year, month - 1, safeDay);
+        return Number.isNaN(d.getTime()) ? 0 : d.getTime();
+      };
+
+      let match = str.match(/(20\d{2}|19\d{2})[-_/](\d{1,2})(?:[-_/](\d{1,2}))?/);
+      if (match)
+        return toTimestamp(
+          parseInt(match[1], 10),
+          parseInt(match[2], 10),
+          match[3] ? parseInt(match[3], 10) : 1,
+        );
+
+      match = str.match(/(?:^|_)(20\d{2})(\d{2})(\d{2})(?:_|$)/);
+      if (match)
+        return toTimestamp(parseInt(match[1], 10), parseInt(match[2], 10), parseInt(match[3], 10));
+
+      match = str.match(/(?:^|_)(\d{2})(\d{2})(\d{2})(?:_|$)/);
+      if (match) {
+        let year = parseInt(match[1], 10);
+        year += year >= 90 ? 1900 : 2000;
+        return toTimestamp(year, parseInt(match[2], 10), parseInt(match[3], 10));
+      }
+
+      match = str.match(/(\d{1,2})[-_](\d{1,2})[-_](\d{2,4})/);
+      if (match) {
+        let year = parseInt(match[3], 10);
+        if (year < 100) year += year >= 90 ? 1900 : 2000;
+        return toTimestamp(year, parseInt(match[2], 10), parseInt(match[1], 10));
+      }
+
+      return 0;
+    };
+
+    const extractTimestampFromImage = (image) => {
+      if (!image) return 0;
+      if (typeof image === 'object') {
+        const metaDates = [
+          image.date,
+          image.capturedAt,
+          image.captured,
+          image.createdAt,
+          image.timestamp,
+          image.updatedAt,
+        ];
+        for (const meta of metaDates) {
+          const parsed = parseDateFromString(meta);
+          if (parsed) return parsed;
+        }
+      }
+
+      const name =
+        typeof image === 'string'
+          ? image
+          : image.filename || image.path || image.url || image.src || '';
+      return parseDateFromString(name);
+    };
+
+    const collectionTimestampCache = new WeakMap();
+
+    const getCollectionTimestamp = (collection) => {
+      if (collectionTimestampCache.has(collection)) {
+        return collectionTimestampCache.get(collection);
+      }
+      let bestTs = 0;
+      if (collection.concertDate && collection.concertDate.iso) {
+        bestTs = parseDateFromString(collection.concertDate.iso);
+      } else if (collection.dateISO) {
+        bestTs = parseDateFromString(collection.dateISO);
+      } else if (collection.date || collection.collectionDate) {
+        bestTs = parseDateFromString(collection.date || collection.collectionDate);
+      }
+      if (!bestTs && collection.images && collection.images.length) {
+        const imageTimes = collection.images
+          .slice(0, 5)
+          .map(extractTimestampFromImage)
+          .filter(Boolean);
+        if (imageTimes.length) {
+          bestTs = Math.max(...imageTimes);
+        }
+      }
+      if (!bestTs) {
+        const folderPath = collection.folderPath || '';
+        bestTs = parseDateFromString(folderPath);
+      }
+      collectionTimestampCache.set(collection, bestTs);
+      return bestTs;
+    };
+
+    // === Alt Text Generation ===
+    const generateAltText = (collection, image) => {
+      const colName = collection.collectionName || collection.name || 'Unknown';
+      const imgName = typeof image === 'string' ? image : image?.filename || image?.path || '';
+      const sanitized = imgName.replace(/\.(jpe?g|png|webp|gif)$/i, '').replace(/[_-]/g, ' ');
+      return `${colName} nature photo${sanitized ? ': ' + sanitized : ''}`;
+    };
+
+    // === Category Detection ===
+    const detectCategory = (col) => {
+      const path = (col.folderPath || '').toLowerCase();
+      const tags = (col.tags || []).map((t) => String(t).toLowerCase());
+
+      if (tags.includes('landscape') || path.includes('landscapes') || path.includes('locations')) {
+        return 'landscapes';
+      }
+      if (tags.includes('birds') || path.includes('birds')) return 'wildlife';
+      if (tags.includes('mammals') || path.includes('mammals')) return 'wildlife';
+      if (tags.length && tags[0] !== 'landscape') return 'wildlife';
+
+      return 'other';
+    };
+
+    // === Fetch Manifest ===
+    const fetchManifest = async () => {
+      const cached = cache.get();
+      if (cached && cached.collections) {
+        log('Using cached manifest');
+        return cached.collections;
+      }
+
+      log('Fetching fresh manifest...');
+      const url =
+        'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Nature/nature-manifest.json';
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Manifest fetch failed: ${response.status}`);
+      const data = await response.json();
+
+      if (!data.collections || !Array.isArray(data.collections)) {
+        throw new Error('Invalid manifest format');
+      }
+
+      cache.set({ collections: data.collections });
+      log(`Manifest loaded: ${data.collections.length} collections`);
+      return data.collections;
+    };
+
+    // === Build Slots (Up to 32 photos, 3 per collection) ===
+    const buildSlots = (collections, maxSlots = 32, maxPerCollection = 3) => {
+      const sorted = collections
+        .map((col) => ({ col, ts: getCollectionTimestamp(col) }))
+        .sort((a, b) => b.ts - a.ts);
+
+      const slots = [];
+      for (const { col } of sorted) {
+        if (slots.length >= maxSlots) break;
+        if (!col.images || !col.images.length) continue;
+
+        const category = detectCategory(col);
+        const limit = Math.min(col.images.length, maxPerCollection);
+
+        for (let i = 0; i < limit; i++) {
+          if (slots.length >= maxSlots) break;
+          slots.push({
+            collection: col,
+            img: col.images[i],
+            title: col.collectionName || col.name || 'Untitled',
+            category,
+            tags: col.tags || [],
+            totalImages: col.images.length,
+          });
+        }
+      }
+
+      return slots;
+    };
+
+    // === Build Filters ===
+    const buildFilters = (slots) => {
+      const filters = $$('#natureFilters');
+      if (!filters) return;
+
+      const categories = new Set(['all']);
+      slots.forEach((slot) => categories.add(slot.category));
+
+      const catNames = {
+        all: 'All',
+        wildlife: 'Wildlife',
+        landscapes: 'Landscapes',
+        other: 'Other',
+      };
+
+      filters.innerHTML = '';
+      categories.forEach((cat) => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (cat === state.currentCategory ? ' active' : '');
+        btn.textContent = catNames[cat] || cat;
+        btn.onclick = () => filterByCategory(cat);
+        filters.appendChild(btn);
+      });
+    };
+
+    // === Filter by Category ===
+    const filterByCategory = (cat) => {
+      state.currentCategory = cat;
+
+      document.querySelectorAll('.filter-btn').forEach((btn) => {
+        btn.classList.toggle(
+          'active',
+          btn.textContent.toLowerCase() === (cat === 'all' ? 'all' : cat),
+        );
+      });
+
+      const cards = document.querySelectorAll('.nature-card');
+      cards.forEach((card) => {
+        const cardCat = card.dataset.category;
+        card.classList.toggle('is-hidden', cat !== 'all' && cardCat !== cat);
+      });
+    };
+
+    // === Build Grid ===
+    const buildGrid = async () => {
+      const grid = $$('#natureGrid');
+      const loading = $$('#natureLoading');
+      if (!grid || !loading) return;
+
+      try {
+        const collections = await fetchManifest();
+        const slots = buildSlots(collections);
+        state.allSlots = slots;
+
+        buildFilters(slots);
+
+        const fragment = document.createDocumentFragment();
+        slots.forEach((slot, index) => {
+          const col = slot.collection;
+          const card = document.createElement('article');
+          card.className = 'nature-card loading';
+          card.tabIndex = 0;
+          card.setAttribute('role', 'button');
+          card.setAttribute('aria-label', `View ${slot.title} nature photos`);
+          card.dataset.category = slot.category;
+          card.dataset.tags = (slot.tags || []).join(',');
+
+          // Image count badge
+          if (slot.totalImages > 1) {
+            const badge = document.createElement('div');
+            badge.className = 'image-count-badge';
+            badge.textContent = slot.totalImages + ' photos';
+            card.appendChild(badge);
+          }
+
+          // Main image - NO LAZY LOADING FOR FIRST 8 IMAGES
+          const img = document.createElement('img');
+          if (index >= 8) {
+            img.loading = 'lazy'; // Only lazy load after first 8
+          }
+          img.decoding = 'async';
+          img.alt = generateAltText(col, slot.img);
+          img.width = 400;
+          img.height = 300;
+
+          const thumbUrl = resolveImagePath(col, slot.img);
+          loadImageWithRetry(img, thumbUrl, card);
+
+          card.appendChild(img);
+
+          // Info overlay
+          const info = document.createElement('div');
+          info.className = 'nature-info';
+          info.innerHTML = `<h3 class="nature-title">${slot.title}</h3>`;
+
+          // Date display
+          let dateStr = '';
+          if (col.concertDate && col.concertDate.year && col.concertDate.month) {
+            dateStr = `${col.concertDate.year}-${String(col.concertDate.month).padStart(2, '0')}`;
+          } else if (col.year && col.month) {
+            dateStr = `${col.year}-${String(col.month).padStart(2, '0')}`;
+          } else if (col.date || col.collectionDate) {
+            const match = (col.date || col.collectionDate).match(/(\d{4})[-/](\d{1,2})/);
+            if (match) {
+              dateStr = `${match[1]}-${match[2].padStart(2, '0')}`;
+            }
+          }
+          if (dateStr) {
+            const dateEl = document.createElement('div');
+            dateEl.className = 'nature-date';
+            dateEl.textContent = dateStr;
+            info.appendChild(dateEl);
+          }
+
+          // Tag chips
+          if (slot.tags && slot.tags.length) {
+            const tagBar = document.createElement('div');
+            tagBar.style.margin = '0 0 4px 0';
+            tagBar.style.display = 'flex';
+            tagBar.style.flexWrap = 'wrap';
+
+            slot.tags.forEach((tag) => {
+              const chip = document.createElement('span');
+              chip.className = 'tag-chip';
+              chip.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+              tagBar.appendChild(chip);
+            });
+
+            info.appendChild(tagBar);
+          }
+
+          card.appendChild(info);
+
+          // Lightbox open
+          card.addEventListener('click', () => openLightbox(col));
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openLightbox(col);
+            }
+          });
+
+          fragment.appendChild(card);
+        });
+
+        grid.innerHTML = '';
+        if (slots.length === 0) {
+          loading.innerHTML = `<div style="text-align: center; color: #ff4d6d;"><p>No nature photos to display.</p></div>`;
+        } else {
+          grid.appendChild(fragment);
+          loading.style.display = 'none';
+          grid.style.display = 'block';
+          grid.classList.add('loaded');
+
+          // Inject ImageGallery JSON-LD structured data (limited to first 20 images)
+          try {
+            if (!document.getElementById('nature-imagegallery-jsonld')) {
+              const images = slots.slice(0, 20).map((slot) => ({
+                '@type': 'ImageObject',
+                contentUrl: resolveImagePath(slot.collection, slot.img),
+                caption: generateAltText(slot.collection, slot.img),
+                author: { '@type': 'Person', name: 'Caleb McCartney' },
+              }));
+              const gallerySchema = {
+                '@context': 'https://schema.org',
+                '@type': 'ImageGallery',
+                name: 'Nature Photography Portfolio by McCal Media',
+                description: 'Wildlife & landscapes captured in their natural beauty',
+                author: { '@type': 'Person', name: 'Caleb McCartney' },
+                publisher: { '@type': 'Organization', name: 'McCal Media' },
+                numberOfImages: slots.length,
+                image: images,
+              };
+              const ld = document.createElement('script');
+              ld.type = 'application/ld+json';
+              ld.id = 'nature-imagegallery-jsonld';
+              ld.textContent = JSON.stringify(gallerySchema);
+              const container = document.querySelector('.nature-portfolio');
+              (container || document.body).appendChild(ld);
+            }
+          } catch (e) {
+            console.warn('Failed to inject ImageGallery JSON-LD:', e);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to build nature portfolio:', error);
+        loading.style.display = 'none';
+        grid.style.display = 'none';
+        const errMsg = `Failed to load nature portfolio: ${error.message}`;
+        loading.innerHTML = `<div style="text-align: center; color: #ff4d6d;"><p>${errMsg}</p><button onclick="location.reload()" style="background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 8px;">Retry</button></div>`;
+        loading.style.display = 'flex';
+      }
+    };
+
+    // === Lightbox ===
+    const lightbox = $$('#natureLightbox');
+    const gallery = $$('#nlGallery');
+    const dialog = lightbox?.querySelector('.nl-dialog');
+    const title = lightbox?.querySelector('.nl-title');
+    const meta = lightbox?.querySelector('.nl-meta');
+    const desc = lightbox?.querySelector('.nl-description');
+
+    const openLightbox = (col) => {
+      if (!gallery) return;
+
+      gallery.innerHTML = '';
+      (col.images || []).forEach((img, i) => {
+        const im = document.createElement('img');
+        if (i < 5) {
+          // No lazy loading for first 5 lightbox images
+          im.loading = 'eager';
+        } else {
+          im.loading = 'lazy';
+        }
+        im.decoding = 'async';
+        im.alt = generateAltText(col, img);
+        im.src = resolveImagePath(col, img);
+        im.className = 'loading';
+        im.onload = () => {
+          im.classList.remove('loading');
+          im.classList.add('loaded');
+        };
+        im.onerror = () => {
+          im.classList.remove('loading');
+          im.classList.add('error');
+          im.alt = 'Image failed';
+        };
+        gallery.appendChild(im);
+      });
+
+      if (title) title.textContent = col.collectionName;
+      if (meta)
+        meta.textContent = `${col.folderPath} • ${col.totalImages || (col.images ? col.images.length : 0)} images`;
+
+      if (col.images && col.images[0] && col.images[0].description && desc) {
+        desc.textContent = col.images[0].description;
+        desc.style.display = 'block';
+      } else if (desc) {
+        desc.style.display = 'none';
+      }
+
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('lb-open');
+      document.body.style.overflow = 'hidden';
+      if (dialog) dialog.focus();
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('lb-open');
+      document.body.style.overflow = '';
+    };
+
+    // === Public API ===
+    window.natureAPI = {
+      closeLightbox,
+      showChangelog: () => {
+        const modal = $$('#changelogModal');
+        if (modal) modal.classList.add('active');
+      },
+      getMetrics: () => ({
+        totalSlots: state.allSlots.length,
+        currentCategory: state.currentCategory,
+        retryAttempts: Array.from(state.retryAttempts.entries()),
+        cacheAge: cache.get() ? Math.round((Date.now() - cache.get().timestamp) / 1000) : null,
+      }),
+    };
+
+    // === Init ===
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', buildGrid);
+    } else {
+      buildGrid();
+    }
+
+    // Close lightbox on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox?.classList.contains('is-open')) {
+        closeLightbox();
+      }
+    });
+
+    // Close lightbox on background click
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  })();
+</script>
