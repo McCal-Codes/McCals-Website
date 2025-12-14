@@ -1,3 +1,4 @@
+
 /*
   McCal Media Widget Theme — Accent & Gradient System (2025-10-09)
   ---------------------------------------------------------------
@@ -15,36 +16,38 @@
 */
 
 :root {
-  --mc-font: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mc-font: "Neue Haas Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mc-bg: #050506;
   --mc-bg-alt: #0b0c10;
   --mc-text: #f3f5f8;
   --mc-muted: #9aa3b3;
-
-  /* Monochrome System */
-  --mc-accent: #ffffff;
-  --mc-accent-rgb: 255, 255, 255;
+  --mc-accent: #5fd4f0;
   --mc-card: rgba(14, 15, 19, 0.94);
-  --mc-border: rgba(255, 255, 255, 0.15);
+  --mc-border: rgba(255, 255, 255, 0.08);
   --mc-gap: 22px;
   --mc-radius: 16px;
   --mc-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
+  --mc-chip-bg: rgba(255, 255, 255, 0.06);
+  --mc-chip-border: rgba(255, 255, 255, 0.12);
 
-  --mc-chip-bg: rgba(255, 255, 255, 0.08);
-  --mc-chip-border: rgba(255, 255, 255, 0.2);
+  /* Business palette accents (for highlights/gradients only) */
+  --mc-accent-black: #272423;
+  --mc-accent-dark: #302C2C;
+  --mc-accent-slate: #363230;
+  --mc-accent-stone: #5B5553;
+  --mc-accent-taupe: #B8B0AA;
 
-  /* Monochrome Gradients */
-  --mc-gradient-accent: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-  --mc-gradient-stone: linear-gradient(135deg, #444444 0%, #1a1a1a 100%);
-  --mc-gradient-slate: linear-gradient(135deg, #222222 0%, #000000 100%);
+  /* Accent gradients (for overlays, chips, lines) */
+  --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #B8B0AA 100%);
+  --mc-gradient-stone: linear-gradient(90deg, #5B5553 0%, #B8B0AA 100%);
+  --mc-gradient-slate: linear-gradient(90deg, #363230 0%, #5B5553 100%);
 }
 
 .mc-portfolio {
   font-family: var(--mc-font);
   color: var(--mc-text);
-  background:
-    radial-gradient(circle at top, rgba(30, 30, 30, 0.4), transparent 50%),
-    linear-gradient(180deg, var(--mc-bg) 0%, var(--mc-bg-alt) 100%);
+  background: radial-gradient(circle at top, rgba(12, 16, 24, 0.7), transparent 50%),
+              linear-gradient(180deg, var(--mc-bg) 0%, var(--mc-bg-alt) 100%);
   min-height: 100vh;
 }
 
@@ -63,9 +66,7 @@
   border: 1px solid var(--mc-border);
   overflow: hidden;
   box-shadow: var(--mc-shadow);
-  transition:
-    transform 260ms ease,
-    box-shadow 260ms ease;
+  transition: transform 260ms ease, box-shadow 260ms ease;
 }
 
 .mc-portfolio .mc-card:hover {
