@@ -5,7 +5,7 @@ This section aggregates usage summaries, active versions, and embedding instruct
 ## Widgets (latest in live directories)
 
 - Concert Portfolio — latest `v4.7.1-api-optional.html`; see `src/widgets/portfolios/concert-portfolio/README.md`
-- Event Portfolio — latest `v2.6.4-event-portfolio.html`; see `src/widgets/portfolios/event-portfolio/README.md`
+- Event Portfolio — latest `v2.6.5-event-portfolio.html`; see `src/widgets/portfolios/event-portfolio/README.md`
 - Featured Portfolio — latest `v1.5.0-working.html`; see `src/widgets/portfolios/featured-portfolio/README.md`
 - Photojournalism Portfolio — latest `v5.2.0-performance-optimized.html`; see `src/widgets/portfolios/photojournalism-portfolio/README.md`
 - Portrait Portfolio — latest `v1.0.0.html`; see `src/widgets/portfolios/portrait-portfolio/README.md`
@@ -21,4 +21,4 @@ This section aggregates usage summaries, active versions, and embedding instruct
 
 - Only active versions (current + previous stable) are listed in each README.
 - All version filenames use the x.x.0 semantic format.
-- Legacy versions live under `src/widgets/_archived/legacy-widget-versions/<widget>/` with `INDEX.json`.
+- Legacy versions live under `src/widgets/_archived/Legacy Widgets/<widget>/` with `INDEX.json`.

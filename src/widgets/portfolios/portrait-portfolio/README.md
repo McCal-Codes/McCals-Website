@@ -5,30 +5,35 @@
 ## Features
 
 ### Portrait-Specific Design 🎨
+
 - **Vertical Composition Focus**: Optimized 3:4 aspect ratio cards for portrait photography
 - **Enhanced Detail Viewing**: Vertical lightbox gallery showcasing portrait intimacy
 - **Intimate Storytelling**: Layout designed for personal narratives and character studies
 - **Responsive Portrait Cards**: Mobile-optimized sizing maintaining vertical emphasis
 
 ### Performance 🚀
+
 - **Portrait Image Optimization**: Efficient loading patterns for vertical compositions
 - **Critical CSS Inlining**: Fast initial render with portrait-specific styles
 - **Lazy Loading**: Progressive image loading with proper aspect ratio handling
 - **SEO Structured Data**: JSON-LD markup optimized for portrait photography collections
 
 ### Visual Excellence ✨
+
 - **Natural Masonry Flow**: CSS columns with intelligent spacing for portrait collections
 - **Smooth Animations**: Staggered loading with refined hover effects for vertical images
 - **Dark/Light Mode**: Automatic theme adaptation with portrait-focused color schemes
 - **Immersive Lightbox**: Vertical scroll gallery with hidden scrollbars for distraction-free viewing
 
 ### Accessibility & UX ♿
+
 - **Enhanced Alt Text**: Intelligent generation from collection metadata and image names
 - **Keyboard Navigation**: Full keyboard support for portrait gallery browsing
 - **ARIA Labels**: Comprehensive accessibility for screen readers
 - **Touch-Friendly**: Mobile-optimized interactions for portrait viewing
 
 ### Developer Experience 🛠️
+
 - **Debug Panel**: Comprehensive metrics with `?debug=true` URL parameter
 - **Performance Monitoring**: Real-time metrics via `window.portraitAPI.getMetrics()`
 - **Cache Management**: Intelligent caching with manual override options
@@ -52,7 +57,7 @@ The widget expects a manifest file at `src/images/Portfolios/Portrait/portrait-m
   - v1.1.0 (current)
   - v1.0.0 (previous stable)
 
-  Older versions are archived in `src/widgets/_archived/legacy-widget-versions/portrait-portfolio/`.
+  Older versions are archived in `src/widgets/_archived/Legacy Widgets/portrait-portfolio/`.
   "generated": "2025-10-24T16:57:52.183Z",
   "totalCollections": 5,
   "collections": [
