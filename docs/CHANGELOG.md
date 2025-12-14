@@ -1,6 +1,6 @@
-
 ## 2025-11-19 — Repository Reorganization Phase 1 & Docs polish
-- **Legacy Widget Archival**: Moved older versions for Concert (v2.x–v4.5), Photojournalism (v1.0–v4.8), and Featured Portfolio (v1.0–v1.4) into `src/widgets/_archived/legacy-widget-versions/` with per-widget `INDEX.json` inventories.
+
+- **Legacy Widget Archival**: Moved older versions for Concert (v2.x–v4.5), Photojournalism (v1.0–v4.8), and Featured Portfolio (v1.0–v1.4) into `src/widgets/_archived/Legacy Widgets/` with per-widget `INDEX.json` inventories.
 - **Active Version Policy**: Updated widget READMEs (concert, photojournalism, featured) to document retained versions and archive location/policy.
 - **STATUS Standardization**: Applied unified STATUS template to Blog Feed, Nature Portfolio, and Admin Importer; refreshed dates and added exit criteria.
 - **Scripts Hygiene**: Added `scripts/utils/orphan-audit.js` to emit JSON report of unreferenced scripts; documented duplicate cleanup policy in `scripts/_archived/README.md`.
@@ -15,17 +15,22 @@
 - Purpose: Improve discoverability of standards and reduce click-path friction.
 
 ## 2025-10-10
+
 - Nature Manifest Generator v2.0: Now supports all animal types under Wildlife, auto-generates per-species manifest.json files tagged with animal type, and aggregates all collections into nature-manifest.json. Documentation and workflow updated.
 
 ## 2025-10-09
+
 - Documented new TODO auto-checker system (keyword/diff heuristics) in `widget-standards.md`.
 - Added pinning tip for `updates/welcome.md`.
+
 # Changelog — McCal Media Repository
 
 This changelog tracks repository-level changes. Individual widgets maintain their own changelogs.
 
 ## 2025-09-23 — Major Reorganization v2.0.0 🗂️
+
 ### Complete Project Restructure
+
 - **MAJOR**: Reorganized entire repository structure for better maintainability
   - Moved all source code to `src/` directory
   - Consolidated documentation in `docs/` with deployment guides
@@ -51,7 +56,9 @@ This changelog tracks repository-level changes. Individual widgets maintain thei
 - **VERSION**: Bumped to v2.0.0 per user versioning preferences (major reorganization)
 
 ## 2025-09-19 — Development Infrastructure Revolution (Major 1.0 Update)
+
 ### Complete Development Ecosystem 🛠️
+
 - **MAJOR**: Added comprehensive build and deployment system
   - `package.json` with Node.js build pipeline
   - `scripts/build.js` for production builds
@@ -81,7 +88,9 @@ This changelog tracks repository-level changes. Individual widgets maintain thei
   - Development utilities and test files
 
 ## 2025-09-16 — Repository Merge & Performance Revolution
+
 ### Repository Merge 🔄
+
 - **MAJOR**: Merged McCals Site development workspace into McCals-Website repository
 - Combined production website and development tools into unified repository
 - Added comprehensive README covering both website and development aspects
@@ -94,13 +103,14 @@ This changelog tracks repository-level changes. Individual widgets maintain thei
 - Established unified versioning policy across repository
 
 ### Performance Revolution 🚀
+
 - **NEW**: Shared portfolio API backend (`widgets/shared/portfolio-api.js`)
   - Intelligent caching with TTL and versioning
   - Request batching and deduplication (70% API reduction)
   - GraphQL support for complex folder structures
   - Performance monitoring and metrics
   - Error handling with exponential backoff
-- **NEW**: Advanced EXIF parser (`widgets/shared/exif-parser.js`) 
+- **NEW**: Advanced EXIF parser (`widgets/shared/exif-parser.js`)
   - Complete JPEG, TIFF, and WebP support
   - 60% faster date extraction with partial file reads
   - Optimized for minimal bandwidth usage
@@ -117,6 +127,7 @@ This changelog tracks repository-level changes. Individual widgets maintain thei
   - Developer-friendly debugging tools
 
 ### Previous Changes (from McCals Site)
+
 - Create widgets/ and sites/ structure
 - Move Concert Portfolio into widgets/concert-portfolio (with per-version files)
 - Move GitHub Portfolio Gallery (v1) into widgets/github-portfolio-gallery

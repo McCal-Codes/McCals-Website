@@ -60,6 +60,8 @@
   - Archived `generate-cdn-snippets.js` (moved from scripts/utils/ to scripts/\_archived/; not referenced by npm scripts or code).
   - Updated .gitignore to exclude scripts/.welcome-state.json (prevents local state file from being committed).
   - Confirmed all scripts/ subfolders have up-to-date README files; no missing documentation in key folders.
+- 2025-12-14
+  - Corrected legacy widget archive path references across docs and Copilot instructions (`src/widgets/_archived/legacy-widget-versions/` → `src/widgets/_archived/Legacy Widgets/`).
 - Updated `.github/copilot-instructions.md` Recent updates section with comprehensive version standardization entry documenting problem, solution, implementation details, key lessons learned, and future maintenance guidance.
 
 ## 2025-11-03

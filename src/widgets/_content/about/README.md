@@ -5,12 +5,14 @@ This directory contains widgets related to the About section of the website, org
 ## Current Widgets
 
 ### Client Carousel (`client-carousel/`)
+
 - **Purpose**: Professional client showcase carousel for Squarespace
 - **Current Version**: v1.2.0
 - **Features**: 22 clients, enhanced university branding, seamless infinite loop, reliable logo loading
 - **Status**: Production Ready ✅
 
 #### Key Features:
+
 - 22 trusted client partners including media, education, and hospitality
 - Fisher-Yates shuffle algorithm for random client display
 - Triple array system for seamless infinite scrolling
@@ -20,24 +22,28 @@ This directory contains widgets related to the About section of the website, org
 - Easy Squarespace integration (single Code Block)
 
 #### Active Versions
+
 - v1.2.0 (current)
 - v1.1.8 (previous stable)
 
-Older versions are archived in `src/widgets/_archived/legacy-widget-versions/about/client-carousel/`.
+Older versions are archived in `src/widgets/_archived/Legacy Widgets/about/client-carousel/`.
 
 #### Files
+
 - `versions/v1.2.0-client-carousel-squarespace.html` - Main production file
 - `versions/` - Version history
 - `README.md` - Detailed documentation
 - `CHANGELOG.md` - Version change history
 
 ### Complete About Page (`complete-about-page/`)
+
 - **Purpose**: Comprehensive about section with bio, photo, reviews, and client showcase
 - **Current Version**: v1.4.4
 - **Features**: Integrated design, debug system, GitHub asset hosting
 - **Status**: Production Ready ✅
 
 #### Key Features:
+
 - Professional bio with GitHub-hosted photo
 - Integrated client carousel (built-in, separate from standalone carousel)
 - LinkedIn and Google reviews section
@@ -46,12 +52,14 @@ Older versions are archived in `src/widgets/_archived/legacy-widget-versions/abo
 - Multiple variants (complete vs. simplified)
 
 #### Active Versions
+
 - v1.4.4 (current)
 - v1.4.1 (previous stable)
 
-Older versions are archived in `src/widgets/_archived/legacy-widget-versions/about/complete-about-page/`.
+Older versions are archived in `src/widgets/_archived/Legacy Widgets/about/complete-about-page/`.
 
 #### Files
+
 - `versions/v1.4.4-complete-about-squarespace.html` - Full-featured about page
 - `versions/v1.4.4-about-section-squarespace.html` - Simplified bio-only version
 - `README.md` - Comprehensive documentation
@@ -86,12 +94,14 @@ src/widgets/about/
 ## Usage Guidelines
 
 ### For Squarespace Deployment:
+
 1. Navigate to the specific widget directory
 2. Copy content from the main HTML file (e.g., `client-carousel-squarespace.html`)
 3. Paste into Squarespace Code Block
 4. Save and publish
 
 ### For Development:
+
 1. Make changes to the main widget file
 2. Create new version file when releasing updates
 3. Update CHANGELOG.md with changes
@@ -110,12 +120,14 @@ src/widgets/about/
 ### Client Carousel vs. Complete About Page
 
 **Client Carousel** (`client-carousel/`):
+
 - **Standalone component**: Just the client logo carousel
 - **Focused purpose**: Display trusted brands and partners
 - **Reusable**: Can be embedded anywhere on the site
 - **Lightweight**: Minimal footprint, single functionality
 
 **Complete About Page** (`complete-about-page/`):
+
 - **Full page solution**: Bio, photo, reviews, AND integrated client showcase
 - **Comprehensive**: Everything needed for an about page
 - **Self-contained**: All-in-one widget for complete about sections
@@ -124,6 +136,7 @@ src/widgets/about/
 ## Future Widgets
 
 Potential additions to this section:
+
 - About Hero Section widget (banner/header only)
 - Team Members carousel
 - Company Statistics widget
