@@ -2,6 +2,16 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.9.1 — 2025-12-15 (SEO Enhancement)
+
+### SEO Improvements
+
+- **ENHANCED**: Structured data now includes `hasPart` array with individual band items
+- **ENHANCED**: Each band has `@id` and `url` set to anchor URL (e.g., `page.html#band-name`)
+- **BENEFIT**: Search engines can now index individual bands within the gallery
+- **BENEFIT**: Improved discoverability for deep-linked content
+- **RETAINED**: All v4.9.0 features (anchored links, load more, animations, view counts)
+
 ## v4.9.0 — 2025-12-14 (Enhanced Portfolio)
 
 ### Portfolio Enhancements 🚀
