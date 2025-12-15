@@ -171,6 +171,11 @@ https://open.spotify.com/embed/artist/{ARTIST_ID}?utm_source=generator&theme=0
 - Rich snippets may show direct links to specific events
 - Improved discoverability for deep-linked content
 
+**Important:**
+
+- Use `https://mcc-cal.com` as the author URL in structured data
+- This is the primary website domain for Caleb McCartney
+
 ---
 
 ## File Naming Convention
@@ -234,8 +239,8 @@ When enhancing a new portfolio widget:
 
 ## Widgets Enhanced
 
-- [x] concert-portfolio → `v4.9.0-concert-enhanced.html`
-- [x] photojournalism-portfolio → `v5.4.0-photojournalism-enhanced.html`
+- [x] concert-portfolio → `v4.9.1-concert-enhanced.html` (with SEO anchors)
+- [x] photojournalism-portfolio → `v5.4.0-photojournalism-enhanced.html` (with SEO anchors)
 - [ ] event-portfolio
 - [ ] nature-portfolio
 - [ ] featured-portfolio
