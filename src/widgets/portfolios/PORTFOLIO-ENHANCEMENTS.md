@@ -1,6 +1,6 @@
 # Portfolio Enhancements Pattern Guide
 
-This document captures the patterns and learnings from enhancing the **concert-portfolio** widget (v4.9.0) so they can be applied consistently to other portfolio widgets.
+This document captures the patterns and learnings from enhancing the **concert-portfolio** and **photojournalism-portfolio** widgets so they can be applied consistently to other portfolio widgets.
 
 ---
 
@@ -138,15 +138,66 @@ https://open.spotify.com/embed/artist/{ARTIST_ID}?utm_source=generator&theme=0
 
 ---
 
+### 7. SEO-Enhanced Anchor Links
+
+**Purpose:** Make anchor links indexable by search engines.
+
+**Implementation:**
+
+- Structured data includes `hasPart` array with each item as `ImageObject`
+- Each item has `@id` and `url` set to the anchor URL (e.g., `page.html#event-name`)
+- Includes `thumbnailUrl`, `name`, `description`, `dateCreated` for each
+- Links parent gallery via `isPartOf`
+
+**JSON-LD Structure (per item):**
+
+```json
+{
+  "@type": "ImageObject",
+  "@id": "https://example.com/portfolio#event-name",
+  "name": "Event Name",
+  "description": "Event Name photojournalism coverage - Oct 2025",
+  "url": "https://example.com/portfolio#event-name",
+  "thumbnailUrl": "https://...",
+  "dateCreated": "2025-10-15",
+  "author": { "@type": "Person", "name": "Caleb McCartney" },
+  "isPartOf": { "@id": "https://example.com/portfolio" }
+}
+```
+
+**Benefits:**
+
+- Search engines can index individual items within the gallery
+- Rich snippets may show direct links to specific events
+- Improved discoverability for deep-linked content
+
+---
+
+## File Naming Convention
+
+Widget version files should include the **widget name** to avoid confusion:
+
+```
+v{X}.{Y}.{Z}-{widget-name}-{feature}.html
+```
+
+**Examples:**
+
+- `v4.9.0-concert-enhanced.html`
+- `v5.4.0-photojournalism-enhanced.html`
+- `v2.1.0-nature-enhanced.html`
+
+---
+
 ## File Structure
 
 ```
 src/widgets/portfolios/{portfolio-name}/
 ├── versions/
-│   ├── v{X}.{Y}.{Z}-{feature}.html   ← Widget versions
+│   ├── v{X}.{Y}.{Z}-{widget-name}-{feature}.html   ← Widget versions
 │   └── ...
-├── CHANGELOG.md                       ← Version history
-└── README.md                          ← Usage docs
+├── CHANGELOG.md                                     ← Version history
+└── README.md                                        ← Usage docs
 ```
 
 ---
@@ -155,10 +206,10 @@ src/widgets/portfolios/{portfolio-name}/
 
 When enhancing a new portfolio widget:
 
-1. **Copy the latest version** (don't overwrite):
+1. **Copy the latest version** (include widget name):
 
    ```bash
-   cp v{current}.html v{new}-enhanced.html
+   cp v{current}.html v{new}-{widget-name}-enhanced.html
    ```
 
 2. **Add CSS for new features** (view badge, load more, anchor, animations)
@@ -171,6 +222,7 @@ When enhancing a new portfolio widget:
    - Add `slugify()`, `formatViews()`, `copyAnchorLink()`
    - Add `updateLoadMoreButton()`, `loadMoreCards()`
    - Add `handleHashNavigation()`
+   - Update `addStructuredData()` to include `hasPart` with anchor URLs
    - Update render loop to include badges, anchors, hidden classes
 
 5. **Update state:**
@@ -180,10 +232,11 @@ When enhancing a new portfolio widget:
 
 ---
 
-## Widgets to Enhance Next
+## Widgets Enhanced
 
+- [x] concert-portfolio → `v4.9.0-concert-enhanced.html`
+- [x] photojournalism-portfolio → `v5.4.0-photojournalism-enhanced.html`
 - [ ] event-portfolio
-- [ ] photojournalism-portfolio
 - [ ] nature-portfolio
 - [ ] featured-portfolio
 - [ ] portrait-portfolio
@@ -203,4 +256,4 @@ When enhancing a new portfolio widget:
 
 ---
 
-_Last updated: 2025-12-14_
+_Last updated: 2025-12-15_
