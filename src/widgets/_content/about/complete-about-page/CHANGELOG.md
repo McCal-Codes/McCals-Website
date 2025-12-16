@@ -1,5 +1,42 @@
 # Complete About Page Widget Changelog
 
+## Version 1.6.0 - Phase 2 Visual Polish (2025-12-15)
+
+### 🎨 Phase 2 Enhancements
+
+- **Gradient Background**: Added sophisticated diagonal gradient to bio section for depth and premium feel
+- **Enhanced Photo Presentation**: Photo now has hover effects with lift animation, glow, and border highlight
+- **Skills/Services Badges**: Added 5 interactive skill badges (Event Photography, Photojournalism, Commercial Work, Brand Storytelling, Content Creation)
+- **Improved Typography**: Increased font sizes, better line-height, and first paragraph emphasis
+- **Navigation Menu Spacing**: Added 80px top margin to prevent overlap with sticky navigation
+- **Simplified Statistics**: Reduced to 3 key metrics (Happy Clients, Projects, Years Experience) with intelligent 4-layer hybrid system
+  - **Layer 1**: Loads from `stats-config.json` for manual control
+  - **Layer 2a**: Counts from portfolio manifests (photojournalism, concert, event) for accurate project counts
+  - **Layer 2b**: Counts from client carousel data as backup
+  - **Layer 3**: Falls back to date-based calculations (years × averages)
+  - Years always calculated from 2019 start date
+  - Never breaks, always shows reasonable numbers
+  - Console logs show which source was used (📋 config, 🎠 carousel, 📊 manifests, 🧮 calculated)
+
+### 🎯 Design Details
+
+- Bio section gradient: Dark to darker diagonal sweep (135deg)
+- Photo hover: Lifts 5px, scales 1.02x, adds white glow effect
+- Photo border: Subtle white border that brightens on hover
+- Skill badges: Glassmorphism style with gradient backgrounds and hover lift
+- Typography: 1.05rem base, 1.1rem for opening paragraph, 1.7 line-height
+- Enhanced shadows: Deeper box-shadows for better depth perception
+- Statistics: Ultra-minimal design (1.8rem numbers, lighter gray #c0c0c0, reduced weight)
+- Overall approach: Clean, uncluttered, letting content breathe
+- All animations use smooth 0.3-0.4s ease transitions
+
+### 📱 Responsive Features
+
+- Skills badges wrap gracefully on smaller screens
+- Photo hover effects work on touch devices
+- Spacing adjusts for mobile viewports
+- All gradient effects optimized for performance
+
 ## Version 1.5.0 - Phase 1 Enhancements (2025-12-15)
 
 ### ✨ Visual Improvements
