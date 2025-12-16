@@ -6,6 +6,7 @@ on:
     paths:
       - 'src/images/Portfolios/Concert/**'
       - 'scripts/manifest/**'
+      - 'scripts/optimize-images.js'
       - '.github/workflows/concert-manifest.yml'
 
   pull_request:
@@ -13,6 +14,7 @@ on:
     paths:
       - 'src/images/Portfolios/Concert/**'
       - 'scripts/manifest/**'
+      - 'scripts/optimize-images.js'
       - '.github/workflows/concert-manifest.yml'
 
   # Also run on manual trigger
@@ -26,7 +28,37 @@ concurrency:
   cancel-in-progress: false # Don't cancel - let it complete to avoid corruption
 
 jobs:
+  optimize:
+    name: Optimize Concert images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Optimize images
+        run: node scripts/optimize-images.js Concert
+
+      - name: Commit optimized images
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '🖼️ Optimize Concert images'
+          file_pattern: 'src/images/Portfolios/Concert/**/*.{jpg,jpeg,png}'
+
   generate:
+    name: Generate manifest
+    needs: optimize
     uses: ./.github/workflows/reusable-manifest.yml
     with:
       portfolio: concert
