@@ -833,7 +833,7 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
     // State management
     const state = {
       basePath: null,
-      cacheKey: 'portrait_portfolio_cache_v2.0',
+      cacheKey: 'portrait_portfolio_cache_v2.1', // Bumped to clear old data
       activeSubject: 'all', // Track active subject filter
       activeAlbum: 'all', // Track active album (folder) within a subject
       allSlots: [], // All available portrait slots
@@ -1264,25 +1264,15 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
           }
         }
 
-        // If a single subject/collection is active, show album chips extracted from image folder names
-        if (filteredCollections.length === 1) {
-          createAlbumTabs(filteredCollections[0]);
-        } else if (albumsEl) {
+        // Album selectors disabled - not working properly
+        if (albumsEl) {
           albumsEl.style.display = 'none';
           albumsEl.innerHTML = '';
           state.activeAlbum = 'all';
         }
 
-        // If an album filter is active, narrow images in each collection to that album's images
+        // Collections for pools - album filtering happens at the pool level
         let collectionsForPools = filteredCollections.map((c) => ({ ...c }));
-        if (state.activeAlbum && state.activeAlbum !== 'all') {
-          collectionsForPools = collectionsForPools.map((c) => ({
-            ...c,
-            images: (c.images || []).filter((img) => img.startsWith(state.activeAlbum + '/')),
-            totalImages: (c.images || []).filter((img) => img.startsWith(state.activeAlbum + '/'))
-              .length,
-          }));
-        }
 
         // Create image pools from filtered collections, treating each album as its own pool
         const pools = [];
@@ -1362,9 +1352,9 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
           for (const pool of pools) {
             if (slots.length >= maxTotalImages) break;
 
-            // For "All" view, only take 1 image per pool
-            // For filtered views, can take up to imagesPerAlbum
-            const poolSlots = slots.filter((s) => s.dir === pool.dir).length;
+            // For "All" view, only take 1 image per pool (album)
+            // For filtered views (specific album selected), can take up to imagesPerAlbum
+            const poolSlots = slots.filter((s) => s.title === pool.title).length;
             if (poolSlots >= imagesPerAlbum) continue;
 
             const image = pool.images.shift();
