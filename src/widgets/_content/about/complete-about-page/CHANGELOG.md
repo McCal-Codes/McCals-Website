@@ -1,5 +1,22 @@
 # Complete About Page Widget Changelog
 
+## Version 1.5.0 - Phase 1 Enhancements (2025-12-15)
+
+### ✨ Visual Improvements
+
+- **Removed Heading**: Removed "About Caleb McCartney" h1 heading for cleaner, more streamlined design
+- **Statistics Section**: Added professional stats grid showcasing 500+ events, 30+ clients, 5.0 rating, and 6+ years experience
+- **Button Icons**: Added camera icon (📸) to "View Portfolio" button for visual interest
+- **Enhanced Hover Effects**: Improved button hover states with subtle glow effect using dual box-shadows
+
+### 🎨 Design Details
+
+- Statistics feature gradient text effects for premium feel
+- Stats section has glassmorphism background with subtle border
+- Button hover now includes white glow effect for better feedback
+- Mobile-responsive statistics with adjusted sizing
+- Cleaner header area with direct focus on content
+
 ## Version 1.4.6 - Portfolio Link Update (2025-12-15)
 
 ### 🔗 Navigation Improvement
