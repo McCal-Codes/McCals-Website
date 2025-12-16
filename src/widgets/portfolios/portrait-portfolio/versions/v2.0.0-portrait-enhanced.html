@@ -1430,11 +1430,6 @@ Requirements: Portrait manifest at src/images/Portfolios/Portrait/portrait-manif
             categoryText = 'Portrait';
           }
 
-          // Normalize "Couples" to "Family" (case-insensitive)
-          if (categoryText.toLowerCase() === 'couples') {
-            categoryText = 'Family';
-          }
-
           const categoryTag = document.createElement('span');
           categoryTag.className = 'category-tag';
           categoryTag.textContent = categoryText;

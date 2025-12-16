@@ -1,39 +1,9 @@
 {
   "version": "1.0.0",
-  "generated": "2025-12-12T23:45:31.669Z",
-  "totalCollections": 8,
-  "totalImages": 53,
+  "generated": "2025-12-16T01:36:27.172Z",
+  "totalCollections": 5,
+  "totalImages": 47,
   "collections": [
-    {
-      "collectionName": "Couples",
-      "folderPath": "Couples",
-      "totalImages": 6,
-      "images": [
-        "Couple Portraits/CAL07892.jpg",
-        "Couple Portraits/CAL07901.jpg",
-        "Couple Portraits/CAL07904.jpg",
-        "Couple Portraits/CAL07907.jpg",
-        "Couple Portraits/CAL07909.jpg",
-        "Couple Portraits/CAL07910.jpg"
-      ],
-      "tags": ["portrait"],
-      "albums": [
-        {
-          "albumName": "Couple Portraits",
-          "folderPath": "Couples/Couple Portraits",
-          "totalImages": 6,
-          "images": [
-            "Couple Portraits/CAL07892.jpg",
-            "Couple Portraits/CAL07901.jpg",
-            "Couple Portraits/CAL07904.jpg",
-            "Couple Portraits/CAL07907.jpg",
-            "Couple Portraits/CAL07909.jpg",
-            "Couple Portraits/CAL07910.jpg"
-          ]
-        }
-      ],
-      "looseImages": []
-    },
     {
       "collectionName": "Editorial",
       "folderPath": "Editorial",
@@ -95,15 +65,6 @@
           "images": ["Michael McCartney/240331_Michael McCartney_614.jpg"]
         }
       ],
-      "looseImages": []
-    },
-    {
-      "collectionName": "Family",
-      "folderPath": "Family",
-      "totalImages": 0,
-      "images": [],
-      "tags": ["portrait"],
-      "albums": [],
       "looseImages": []
     },
     {
@@ -226,15 +187,6 @@
           ]
         }
       ],
-      "looseImages": []
-    },
-    {
-      "collectionName": "Wedding",
-      "folderPath": "Wedding",
-      "totalImages": 0,
-      "images": [],
-      "tags": ["portrait"],
-      "albums": [],
       "looseImages": []
     }
   ]

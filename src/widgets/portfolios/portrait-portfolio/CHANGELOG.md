@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Load More**: Progressive loading with 12 initial cards, +6 per click (configurable via data-batch-size)
 - **Animated Entrance**: Staggered fade-up animation on cards with 80ms delay between each
 - **View Count Badges**: Minimal view count display on each card (top-right overlay)
-- **Category Tags**: Single tag showing album or subject type (Portrait, Editorial, Family, Studio, Misc)
+- **Category Tags**: Single tag showing album or subject type from manifest/folder structure
 - **Copy to Clipboard**: Click anchor icon to copy deep link with toast notification
 - **SEO Enhancement**: Structured data includes hasPart with individual portrait items and anchor URLs
 
