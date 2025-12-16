@@ -1,6 +1,6 @@
-<!-- About Section Widget v1.6.0 — Universal Versioning System
+<!-- About Section Widget v1.5.5 — Universal Versioning System
 Author: Caleb McCartney / McCal-Codes
-Version: 1.6.0
+Version: 1.5.5
 Purpose: Complete about section with bio, photo, reviews, and client carousel for Squarespace
 
 Features:
@@ -49,6 +49,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
 <!-- Canonical & Robots -->
 <link rel="canonical" href="https://mccalmedia.com/about" />
+<link rel="preconnect" href="https://raw.githubusercontent.com" />
 <meta name="robots" content="index, follow" />
 
 <style>
@@ -64,9 +65,18 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     white-space: nowrap;
     border: 0;
   }
+  /* Variables & Global */
   .ss-about-section {
+    --bg-glass: rgba(15, 15, 15, 0.6);
+    --bg-glass-heavy: rgba(12, 12, 12, 0.96);
+    --text-primary: #f0f0f0;
+    --text-secondary: #d0d0d0;
+    --text-muted: #888888;
+    --accent-gold: #ffc107;
+    --border-light: rgba(255, 255, 255, 0.1);
+
     max-width: 900px;
-    margin: 80px auto 0;
+    margin: 0 auto;
     padding: 0 20px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
@@ -76,17 +86,12 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   /* Bio Section */
   .ss-about-bio {
     padding: 60px 0;
-    background: linear-gradient(
-      135deg,
-      rgba(20, 20, 20, 0.7) 0%,
-      rgba(10, 10, 10, 0.8) 50%,
-      rgba(15, 15, 15, 0.7) 100%
-    );
+    padding: 60px 0;
+    background: var(--bg-glass);
     backdrop-filter: blur(20px);
     margin: 30px 0 120px;
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .ss-about-content {
@@ -101,25 +106,14 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     flex: 1;
     min-width: 250px;
     text-align: center;
-    position: relative;
   }
 
   .ss-about-photo img {
     width: 100%;
     max-width: 300px;
     border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     filter: contrast(1.1) brightness(1.05);
-    transition: all 0.4s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .ss-about-photo img:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow:
-      0 25px 50px rgba(0, 0, 0, 0.6),
-      0 0 30px rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
   }
 
   .ss-about-text {
@@ -128,15 +122,10 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   }
 
   .ss-about-text p {
-    font-size: 1.05rem;
-    margin-bottom: 22px;
-    color: #d0d0d0;
+    font-size: 1.15rem;
     line-height: 1.7;
-  }
-
-  .ss-about-text p:first-of-type {
-    font-size: 1.1rem;
-    color: #e0e0e0;
+    margin-bottom: 20px;
+    color: var(--text-primary);
   }
 
   .ss-about-text a {
@@ -146,45 +135,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   }
 
   .ss-about-text strong {
-    color: #f0f0f0;
-  }
-
-  /* Skills/Services Badges */
-  .ss-skills-section {
-    margin: 25px 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .ss-skill-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.04) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #e0e0e0;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .ss-skill-badge:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.08) 100%
-    );
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
+    color: var(--text-primary);
   }
 
   .ss-about-buttons {
@@ -247,44 +198,56 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   .ss-stats-section {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 40px;
     flex-wrap: wrap;
-    margin: 35px 0 25px;
-    padding: 0;
+    margin: 30px 0 40px;
+    padding: 25px 20px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .ss-stat-item {
     text-align: center;
+    min-width: 100px;
   }
 
   .ss-stat-number {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #c0c0c0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
     display: block;
-    margin-bottom: 6px;
-    line-height: 1;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .ss-stat-label {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: #777;
+    color: #b0b0b0;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 1px;
   }
 
   @media (max-width: 640px) {
     .ss-stats-section {
-      gap: 35px;
+      gap: 25px;
+      padding: 20px 15px;
     }
 
     .ss-stat-number {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
     .ss-stat-label {
-      font-size: 0.65rem;
+      font-size: 0.75rem;
     }
   }
 
@@ -472,6 +435,9 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     margin: 30px 0;
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Performance: detailed rendering only when in viewport */
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
   }
 
   .ss-reviews-content {
@@ -693,6 +659,9 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     padding: 30px 20px;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    /* Performance */
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
   }
 
   .ss-client-heading {
@@ -713,7 +682,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       'Segoe UI',
       system-ui,
       sans-serif;
-    color: #888;
+    color: var(--text-muted);
     margin: 0 0 30px;
   }
 
@@ -725,8 +694,10 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
   .ss-client-track {
     display: flex;
-    animation: ss-scroll 55s linear infinite;
-    width: calc(200px * 75); /* 25 clients × 3 copies = 75 */
+    /* Dynamic duration set by JS */
+    animation: ss-scroll var(--carousel-duration, 55s) linear infinite;
+    /* Dynamic width set by JS */
+    width: var(--carousel-width, calc(216px * 75));
     list-style: none;
     margin: 0;
     padding: 0;
@@ -741,7 +712,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-200px * 25));
+      /* Dynamic scroll distance set by JS */
+      transform: translateX(var(--carousel-scroll-end, calc(-216px * 25)));
     }
   }
 
@@ -1306,32 +1278,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           >
           where he chats over coffee with creators and industry pros about turning ideas into
           impact.
-          <!-- Skills/Services Badges -->
         </p>
-
-        <div class="ss-skills-section">
-          <span class="ss-skill-badge">📸 Event Photography</span>
-          <span class="ss-skill-badge">📰 Photojournalism</span>
-          <span class="ss-skill-badge">🎬 Commercial Work</span>
-          <span class="ss-skill-badge">✨ Brand Storytelling</span>
-          <span class="ss-skill-badge">🎙️ Content Creation</span>
-        </div>
-
-        <!-- Statistics Section -->
-        <div class="ss-stats-section">
-          <div class="ss-stat-item">
-            <span class="ss-stat-number">30+</span>
-            <span class="ss-stat-label">Happy Clients</span>
-          </div>
-          <div class="ss-stat-item">
-            <span class="ss-stat-number">500+</span>
-            <span class="ss-stat-label">Projects</span>
-          </div>
-          <div class="ss-stat-item">
-            <span class="ss-stat-number" id="yearsExperience">6+</span>
-            <span class="ss-stat-label">Years Experience</span>
-          </div>
-        </div>
 
         <div class="ss-about-buttons">
           <div class="ss-contact-container">
@@ -1537,13 +1484,42 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 </div>
 
 <!-- Version Indicator -->
-<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.6</div>
+<div class="ss-version-indicator" onclick="toggleChangelog()">v1.5.5</div>
 
 <!-- Changelog Panel -->
 <div class="ss-changelog-panel" id="ss-changelog-panel">
   <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
   <div class="ss-changelog-header">About Widget Changelog</div>
   <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v1.5.5 — Performance & Animations</div>
+    <div class="ss-changelog-feature">
+      • Lazy Loading: Statistics now fetch/calculate only when scrolled into view (saving resources)
+    </div>
+    <div class="ss-changelog-feature">
+      • Animated Counters: Stats counts animate up from 0 for a premium feel
+    </div>
+    <div class="ss-changelog-feature">
+      • Rendering Optimization: Added `content-visibility: auto` to heavy sections for faster
+      initial load
+    </div>
+
+    <div class="ss-changelog-version">v1.5.4 — Major Update: Efficiencies & Readability</div>
+    <div class="ss-changelog-feature">
+      • Fully dynamic Client Carousel: width and speed scale automatically with client count
+    </div>
+    <div class="ss-changelog-feature">
+      • Readability upgrade: Increased bio font size (1.15rem), contrast, and line height (1.7)
+    </div>
+    <div class="ss-changelog-feature">
+      • Dynamic Statistics: Backported real-time stats logic (Manifest/Carousel/Calc layers)
+    </div>
+    <div class="ss-changelog-feature">
+      • Implemented CSS variables and added preconnect hint for github assets
+    </div>
+    <div class="ss-changelog-feature">
+      • Removed redundant top statistics section for cleaner layout
+    </div>
+
     <div class="ss-changelog-version">v1.4.6 — Client Carousel v1.3.0 Integration</div>
     <div class="ss-changelog-feature">
       • Updated to Client Carousel v1.3.0 with 25 clients (up from 22)
@@ -1915,6 +1891,19 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       container.innerHTML = '';
       container.appendChild(carousel);
 
+      // Dynamic CSS Variables for Animation
+      const clientCount = shuffledClients.length;
+      // 200px flex-basis + 16px total margin (8px * 2) = 216px per item
+      const itemWidth = 216;
+      const totalWidthPx = itemWidth * tripleClients.length;
+      const scrollEndPx = -(itemWidth * clientCount);
+      const duration = clientCount * 2.2; // 2.2 seconds per client for pacing
+
+      // Apply to the carousel wrapper (scope)
+      carousel.style.setProperty('--carousel-width', `${totalWidthPx}px`);
+      carousel.style.setProperty('--carousel-scroll-end', `${scrollEndPx}px`);
+      carousel.style.setProperty('--carousel-duration', `${duration}s`);
+
       // Inject Organization JSON-LD structured data for SEO
       try {
         const uniqueClients = Array.from(new Map(clientsData.map((c) => [c.name, c])).values());
@@ -2043,8 +2032,11 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     closeMenuOnOutside(event, '.ss-documents-container', 'documentsMenu');
   });
 
-  // Hybrid Dynamic Statistics System (3-layer fallback)
+  // Hybrid Dynamic Statistics System (Lazy Loaded for Efficiency)
   (function () {
+    const statsContainer = document.querySelector('.ss-client-stats');
+    if (!statsContainer) return;
+
     const statsConfigPath =
       'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/widgets/_content/about/complete-about-page/stats-config.json';
 
@@ -2053,7 +2045,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       const startYear = 2019;
       const currentYear = new Date().getFullYear();
       const yearsInBusiness = currentYear - startYear;
-
       const avgClientsPerYear = 5;
       const avgProjectsPerYear = 80;
 
@@ -2068,15 +2059,13 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     // Layer 2: Count from carousel data AND manifests
     function getCarouselStats() {
       try {
-        // Count unique clients from the carousel
-        const carouselClientCount = clientsData ? clientsData.length : 0;
-
+        const carouselClientCount = typeof clientsData !== 'undefined' ? clientsData.length : 0;
         const startYear = 2019;
         const years = new Date().getFullYear() - startYear;
 
         return {
           clients: carouselClientCount,
-          projects: 500, // Will be updated if manifests load
+          projects: 500, // Placeholder until manifests load
           years: years,
           source: 'carousel',
         };
@@ -2102,15 +2091,12 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           ),
         );
 
-        // Count unique clients and total projects
         const uniqueClients = new Set();
         let totalProjects = 0;
 
         manifests.forEach((manifest) => {
           if (manifest && manifest.events) {
             totalProjects += manifest.events.length;
-
-            // Extract client names from tags or event names
             manifest.events.forEach((event) => {
               if (event.tags && Array.isArray(event.tags)) {
                 event.tags.forEach((tag) => uniqueClients.add(tag));
@@ -2124,9 +2110,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
         const startYear = 2019;
         const years = new Date().getFullYear() - startYear;
-
-        // Use carousel count if manifest count is low
-        const carouselCount = clientsData ? clientsData.length : 0;
+        const carouselCount = typeof clientsData !== 'undefined' ? clientsData.length : 0;
         const clientCount = Math.max(uniqueClients.size, carouselCount);
 
         return {
@@ -2140,60 +2124,82 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       }
     }
 
-    // Update DOM with stats
+    // Update DOM
     function updateStats(stats) {
-      const clientElement = document.querySelector('.ss-stat-item:nth-child(1) .ss-stat-number');
-      const projectElement = document.querySelector('.ss-stat-item:nth-child(2) .ss-stat-number');
-      const yearsElement = document.getElementById('yearsExperience');
+      if (!stats) return;
+      const clientElement = document.getElementById('ss-client-count');
+      const projectElement = document.getElementById('ss-project-count');
+      const yearsElement = document.getElementById('ss-years-experience');
 
-      if (clientElement) clientElement.textContent = stats.clients + '+';
-      if (projectElement) projectElement.textContent = stats.projects + '+';
-      if (yearsElement) yearsElement.textContent = stats.years + '+';
-
-      // Log source for debugging
-      const sourceEmoji = {
-        config: '📋',
-        carousel: '🎠',
-        calculated: '🧮',
+      // Helper to animate numbers (simple count up)
+      const animateValue = (obj, start, end, duration) => {
+        if (!obj) return;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          obj.textContent = Math.floor(progress * (end - start) + start) + '+';
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
       };
-      console.log(`${sourceEmoji[stats.source]} Stats from: ${stats.source}`, stats);
+
+      if (clientElement && stats.clients) animateValue(clientElement, 0, stats.clients, 2000);
+      if (projectElement && stats.projects) animateValue(projectElement, 0, stats.projects, 2000);
+      if (yearsElement && stats.years) yearsElement.innerText = stats.years + '+';
     }
 
-    // Layer 1: Try to load from config file
-    fetch(statsConfigPath)
-      .then((response) => {
-        if (!response.ok) throw new Error('Config not found');
-        return response.json();
-      })
-      .then((config) => {
-        // Use config values
-        const currentYear = new Date().getFullYear();
-        const years = currentYear - config.startYear;
-
-        updateStats({
-          clients: config.clients,
-          projects: config.projects,
-          years: years,
-          source: 'config',
-        });
-      })
-      .catch(async () => {
-        // Try Layer 2b: Manifest count (most accurate for projects)
-        const manifestStats = await getManifestStats();
-        if (manifestStats && manifestStats.projects > 0) {
-          updateStats(manifestStats);
-        } else {
-          // Try Layer 2a: Carousel count
-          const carouselStats = getCarouselStats();
-          if (carouselStats) {
-            updateStats(carouselStats);
+    // Main fetch logic
+    function loadStats() {
+      // Layer 1: Config
+      fetch(statsConfigPath)
+        .then((response) => {
+          if (!response.ok) throw new Error('Config not found');
+          return response.json();
+        })
+        .then((config) => {
+          const years = new Date().getFullYear() - config.startYear;
+          updateStats({
+            clients: config.clients,
+            projects: config.projects,
+            years: years,
+            source: 'config',
+          });
+        })
+        .catch(async () => {
+          // Layer 2b
+          const manifestStats = await getManifestStats();
+          if (manifestStats && manifestStats.projects > 0) {
+            updateStats(manifestStats);
           } else {
-            // Layer 3: Calculated fallback
+            // Layer 2a/3
+            const carouselStats = getCarouselStats();
             const fallbackStats = calculateFallbackStats();
-            updateStats(fallbackStats);
+            updateStats(carouselStats || fallbackStats);
           }
-        }
-      });
+        });
+    }
+
+    // Only load when visible
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              loadStats();
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      observer.observe(statsContainer);
+    } else {
+      // Fallback for very old browsers
+      loadStats();
+    }
   })();
 </script>
 
