@@ -241,10 +241,10 @@ When enhancing a new portfolio widget:
 
 - [x] concert-portfolio → `v4.9.1-concert-enhanced.html` (with SEO anchors)
 - [x] photojournalism-portfolio → `v5.4.0-photojournalism-enhanced.html` (with SEO anchors)
+- [x] portrait-portfolio → `v2.0.0-portrait-enhanced.html` (with SEO anchors + category tags)
 - [ ] event-portfolio
 - [ ] nature-portfolio
 - [ ] featured-portfolio
-- [ ] portrait-portfolio
 - [ ] video-portfolio
 
 ---
