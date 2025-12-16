@@ -5,7 +5,7 @@
 ### 🎨 Phase 2 Enhancements
 
 - **Gradient Background**: Added sophisticated diagonal gradient to bio section for depth and premium feel
-- **Enhanced Photo Presentation**: Photo now has hover effects with lift animation, glow, and border highlight
+- **Enhanced Photo Presentation**: Small circular profile picture (150px) centered at top with hover effects
 - **Skills/Services Badges**: Added 5 interactive skill badges (Event Photography, Photojournalism, Commercial Work, Brand Storytelling, Content Creation)
 - **Improved Typography**: Increased font sizes, better line-height, and first paragraph emphasis
 - **Navigation Menu Spacing**: Added 80px top margin to prevent overlap with sticky navigation
@@ -17,6 +17,9 @@
   - Years always calculated from 2019 start date
   - Never breaks, always shows reasonable numbers
   - Console logs show which source was used (📋 config, 🎠 carousel, 📊 manifests, 🧮 calculated)
+- **Layout Optimization**: Changed to vertical layout with centered content for better desktop experience
+- **Read More Functionality**: Added expandable bio with smooth animation and toggle button
+- **Minimal Header**: Simple "About" header with clean typography
 
 ### 🎯 Design Details
 

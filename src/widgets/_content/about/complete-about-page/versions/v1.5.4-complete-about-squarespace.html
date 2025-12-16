@@ -1,6 +1,6 @@
-<!-- About Section Widget v1.6.0 — Universal Versioning System
+<!-- About Section Widget v1.5.4 — Universal Versioning System
 Author: Caleb McCartney / McCal-Codes
-Version: 1.6.0
+Version: 1.5.4
 Purpose: Complete about section with bio, photo, reviews, and client carousel for Squarespace
 
 Features:
@@ -49,6 +49,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
 <!-- Canonical & Robots -->
 <link rel="canonical" href="https://mccalmedia.com/about" />
+<link rel="preconnect" href="https://raw.githubusercontent.com" />
 <meta name="robots" content="index, follow" />
 
 <style>
@@ -64,154 +65,77 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     white-space: nowrap;
     border: 0;
   }
+  /* Variables & Global */
   .ss-about-section {
+    --bg-glass: rgba(15, 15, 15, 0.6);
+    --bg-glass-heavy: rgba(12, 12, 12, 0.96);
+    --text-primary: #f0f0f0;
+    --text-secondary: #d0d0d0;
+    --text-muted: #888888;
+    --accent-gold: #ffc107;
+    --border-light: rgba(255, 255, 255, 0.1);
+
     max-width: 900px;
-    margin: 80px auto 0;
+    margin: 0 auto;
     padding: 0 20px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
     color: #e5e5e5;
   }
 
-  /* Minimal Header */
-  .ss-about-header {
-    text-align: center;
-    padding: 30px 20px 15px;
-    margin-bottom: 15px;
-  }
-
-  .ss-about-header h1 {
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: #f5f5f5;
-    margin: 0;
-    letter-spacing: 0.5px;
-  }
-
   /* Bio Section */
   .ss-about-bio {
-    padding: 40px 0;
-    background: linear-gradient(
-      135deg,
-      rgba(20, 20, 20, 0.7) 0%,
-      rgba(10, 10, 10, 0.8) 50%,
-      rgba(15, 15, 15, 0.7) 100%
-    );
+    padding: 60px 0;
+    padding: 60px 0;
+    background: var(--bg-glass);
     backdrop-filter: blur(20px);
-    margin: 15px 0 80px;
+    margin: 30px 0 120px;
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .ss-about-content {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 15px;
-    padding: 0 40px;
+    gap: 40px;
+    padding: 0 30px;
   }
 
   .ss-about-photo {
-    flex: 0 0 auto;
-    width: 120px;
+    flex: 1;
+    min-width: 250px;
     text-align: center;
-    position: relative;
   }
 
   .ss-about-photo img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    filter: contrast(1.05) brightness(1.02);
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .ss-about-photo img:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.15);
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    filter: contrast(1.1) brightness(1.05);
   }
 
   .ss-about-text {
-    flex: 1;
-    width: 100%;
-    max-width: 900px;
-    text-align: left;
-  }
-
-  .ss-bio-header {
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: #f5f5f5;
-    margin-bottom: 15px;
-    letter-spacing: 0.5px;
+    flex: 1.5;
+    min-width: 350px;
   }
 
   .ss-about-text p {
     font-size: 1.15rem;
+    line-height: 1.7;
     margin-bottom: 20px;
-    color: #e0e0e0;
-    line-height: 1.8;
-    letter-spacing: 0.3px;
+    color: var(--text-primary);
   }
 
   .ss-about-text a {
     color: #ffffff;
     text-decoration: underline;
-    text-decoration-color: rgba(255, 255, 255, 0.5);
-    transition: text-decoration-color 0.2s ease;
-    font-weight: 500;
-  }
-
-  .ss-about-text a:hover {
-    text-decoration-color: rgba(255, 255, 255, 0.9);
+    text-decoration-color: rgba(255, 255, 255, 0.4);
   }
 
   .ss-about-text strong {
-    color: #f5f5f5;
-    font-weight: 600;
-  }
-
-  /* Skills/Services Badges */
-  .ss-skills-section {
-    margin: 25px 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .ss-skill-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.04) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #e0e0e0;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .ss-skill-badge:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.08) 100%
-    );
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
+    color: var(--text-primary);
   }
 
   .ss-about-buttons {
@@ -270,109 +194,60 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       0 0 20px rgba(255, 255, 255, 0.1);
   }
 
-  /* Read More Button */
-  .ss-read-more-btn {
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 8px 0;
-    margin: 5px 0 15px;
-    text-decoration: underline;
-    text-decoration-color: rgba(255, 255, 255, 0.4);
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .ss-read-more-btn:hover {
-    color: #f0f0f0;
-    text-decoration-color: rgba(255, 255, 255, 0.7);
-    transform: translateX(3px);
-  }
-
-  .ss-read-more-btn::after {
-    content: '→';
-    transition: transform 0.3s ease;
-  }
-
-  .ss-read-more-btn.expanded::after {
-    content: '↑';
-  }
-
-  /* Expandable Bio Content */
-  .ss-bio-expandable {
-    max-height: 0;
-    overflow: hidden;
-    transition:
-      max-height 0.4s ease,
-      opacity 0.4s ease;
-    opacity: 0;
-  }
-
-  .ss-bio-expandable.expanded {
-    max-height: 1000px;
-    opacity: 1;
-  }
-
   /* Statistics Section */
   .ss-stats-section {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 40px;
     flex-wrap: wrap;
-    margin: 35px 0 25px;
-    padding: 0;
+    margin: 30px 0 40px;
+    padding: 25px 20px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .ss-stat-item {
     text-align: center;
+    min-width: 100px;
   }
 
   .ss-stat-number {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #c0c0c0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
     display: block;
-    margin-bottom: 6px;
-    line-height: 1;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .ss-stat-label {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: #777;
+    color: #b0b0b0;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-  }
-
-  /* Mobile Layout Adjustments */
-  @media (max-width: 768px) {
-    .ss-about-content {
-      padding: 0 20px;
-      gap: 20px;
-    }
-
-    .ss-about-text {
-      max-width: 100%;
-      text-align: center;
-    }
+    letter-spacing: 1px;
   }
 
   @media (max-width: 640px) {
     .ss-stats-section {
-      gap: 35px;
+      gap: 25px;
+      padding: 20px 15px;
     }
 
     .ss-stat-number {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
     .ss-stat-label {
-      font-size: 0.65rem;
+      font-size: 0.75rem;
     }
   }
 
@@ -801,7 +676,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       'Segoe UI',
       system-ui,
       sans-serif;
-    color: #888;
+    color: var(--text-muted);
     margin: 0 0 30px;
   }
 
@@ -813,8 +688,10 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
   .ss-client-track {
     display: flex;
-    animation: ss-scroll 55s linear infinite;
-    width: calc(200px * 75); /* 25 clients × 3 copies = 75 */
+    /* Dynamic duration set by JS */
+    animation: ss-scroll var(--carousel-duration, 55s) linear infinite;
+    /* Dynamic width set by JS */
+    width: var(--carousel-width, calc(216px * 75));
     list-style: none;
     margin: 0;
     padding: 0;
@@ -829,7 +706,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-200px * 25));
+      /* Dynamic scroll distance set by JS */
+      transform: translateX(var(--carousel-scroll-end, calc(-216px * 25)));
     }
   }
 
@@ -1354,11 +1232,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     }
   </script>
 
-  <!-- Minimal Header -->
-  <header class="ss-about-header">
-    <h1>About</h1>
-  </header>
-
   <!-- Bio Section -->
   <section class="ss-about-bio" itemscope itemtype="https://schema.org/Person">
     <div class="ss-about-content">
@@ -1375,7 +1248,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
       <!-- Bio Text -->
       <div class="ss-about-text" itemprop="description">
-        <h2 class="ss-bio-header">My Story</h2>
         <p>
           Caleb McCartney is a Pittsburgh‑based photojournalist and commercial storyteller, and a
           proud alumni of Point Park University's BFA in Photography program. With 6+ years of
@@ -1384,36 +1256,23 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           across Kentucky and beyond.
         </p>
 
-        <button class="ss-read-more-btn" id="readMoreBtn" aria-expanded="false">Read More</button>
+        <p>
+          Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage,
+          corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he
+          broadened his skill set by joining Pittsburgh production company
+          <a href="https://wearecovalent.com/" target="_blank" rel="noopener">Covalent</a> as a
+          Creative Production Intern, collaborating on projects that blend stills, motion, and
+          sound.
+        </p>
 
-        <div class="ss-bio-expandable" id="bioExpandable">
-          <p>
-            Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage,
-            corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he
-            broadened his skill set by joining Pittsburgh production company
-            <a href="https://wearecovalent.com/" target="_blank" rel="noopener">Covalent</a> as a
-            Creative Production Intern, collaborating on projects that blend stills, motion, and
-            sound.
-          </p>
-
-          <p>
-            He also hosts the weekly podcast
-            <a href="/podcast" rel="noopener" title="Caffeinated Connections Podcast"
-              >"Caffeinated Connections,"</a
-            >
-            where he chats over coffee with creators and industry pros about turning ideas into
-            impact.
-            <!-- Skills/Services Badges -->
-          </p>
-        </div>
-
-        <div class="ss-skills-section">
-          <span class="ss-skill-badge">📸 Event Photography</span>
-          <span class="ss-skill-badge">📰 Photojournalism</span>
-          <span class="ss-skill-badge">🎬 Commercial Work</span>
-          <span class="ss-skill-badge">✨ Brand Storytelling</span>
-          <span class="ss-skill-badge">🎙️ Content Creation</span>
-        </div>
+        <p>
+          He also hosts the weekly podcast
+          <a href="/podcast" rel="noopener" title="Caffeinated Connections Podcast"
+            >"Caffeinated Connections,"</a
+          >
+          where he chats over coffee with creators and industry pros about turning ideas into
+          impact.
+        </p>
 
         <div class="ss-about-buttons">
           <div class="ss-contact-container">
@@ -1600,33 +1459,49 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       <div class="ss-client-spinner"></div>
       Loading clients...
     </div>
-  </div>
 
-  <!-- Statistics Section -->
-  <section class="ss-stats-section">
-    <div class="ss-stat-item">
-      <span class="ss-stat-number">30+</span>
-      <span class="ss-stat-label">Happy Clients</span>
+    <div class="ss-client-stats">
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-client-count">30+</span>
+        <div class="ss-stat-label">Happy Clients</div>
+      </div>
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-project-count">65+</span>
+        <div class="ss-stat-label">Projects</div>
+      </div>
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-years-experience">6+</span>
+        <div class="ss-stat-label">Years Experience</div>
+      </div>
     </div>
-    <div class="ss-stat-item">
-      <span class="ss-stat-number">500+</span>
-      <span class="ss-stat-label">Projects</span>
-    </div>
-    <div class="ss-stat-item">
-      <span class="ss-stat-number" id="yearsExperience">6+</span>
-      <span class="ss-stat-label">Years Experience</span>
-    </div>
-  </section>
+  </div>
 </div>
 
 <!-- Version Indicator -->
-<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.6</div>
+<div class="ss-version-indicator" onclick="toggleChangelog()">v1.5.4</div>
 
 <!-- Changelog Panel -->
 <div class="ss-changelog-panel" id="ss-changelog-panel">
   <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
   <div class="ss-changelog-header">About Widget Changelog</div>
   <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v1.5.4 — Major Update: Efficiencies & Readability</div>
+    <div class="ss-changelog-feature">
+      • Fully dynamic Client Carousel: width and speed scale automatically with client count
+    </div>
+    <div class="ss-changelog-feature">
+      • Readability upgrade: Increased bio font size (1.15rem), contrast, and line height (1.7)
+    </div>
+    <div class="ss-changelog-feature">
+      • Dynamic Statistics: Backported real-time stats logic (Manifest/Carousel/Calc layers)
+    </div>
+    <div class="ss-changelog-feature">
+      • Implemented CSS variables and added preconnect hint for github assets
+    </div>
+    <div class="ss-changelog-feature">
+      • Removed redundant top statistics section for cleaner layout
+    </div>
+
     <div class="ss-changelog-version">v1.4.6 — Client Carousel v1.3.0 Integration</div>
     <div class="ss-changelog-feature">
       • Updated to Client Carousel v1.3.0 with 25 clients (up from 22)
@@ -1998,6 +1873,19 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       container.innerHTML = '';
       container.appendChild(carousel);
 
+      // Dynamic CSS Variables for Animation
+      const clientCount = shuffledClients.length;
+      // 200px flex-basis + 16px total margin (8px * 2) = 216px per item
+      const itemWidth = 216;
+      const totalWidthPx = itemWidth * tripleClients.length;
+      const scrollEndPx = -(itemWidth * clientCount);
+      const duration = clientCount * 2.2; // 2.2 seconds per client for pacing
+
+      // Apply to the carousel wrapper (scope)
+      carousel.style.setProperty('--carousel-width', `${totalWidthPx}px`);
+      carousel.style.setProperty('--carousel-scroll-end', `${scrollEndPx}px`);
+      carousel.style.setProperty('--carousel-duration', `${duration}s`);
+
       // Inject Organization JSON-LD structured data for SEO
       try {
         const uniqueClients = Array.from(new Map(clientsData.map((c) => [c.name, c])).values());
@@ -2106,30 +1994,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     }
   });
 
-  // Read More / Read Less functionality
-  document.addEventListener('DOMContentLoaded', function () {
-    const readMoreBtn = document.getElementById('readMoreBtn');
-    const bioExpandable = document.getElementById('bioExpandable');
-
-    if (readMoreBtn && bioExpandable) {
-      readMoreBtn.addEventListener('click', function () {
-        const isExpanded = bioExpandable.classList.contains('expanded');
-
-        if (isExpanded) {
-          bioExpandable.classList.remove('expanded');
-          readMoreBtn.classList.remove('expanded');
-          readMoreBtn.textContent = 'Read More';
-          readMoreBtn.setAttribute('aria-expanded', 'false');
-        } else {
-          bioExpandable.classList.add('expanded');
-          readMoreBtn.classList.add('expanded');
-          readMoreBtn.textContent = 'Read Less';
-          readMoreBtn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    }
-  });
-
   // Close menus when clicking/touching outside
   function closeMenuOnOutside(event, containerSelector, menuId) {
     const container = document.querySelector(containerSelector);
@@ -2150,7 +2014,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     closeMenuOnOutside(event, '.ss-documents-container', 'documentsMenu');
   });
 
-  // Hybrid Dynamic Statistics System (3-layer fallback)
+  // Hybrid Dynamic Statistics System (Backported from v1.6.0)
   (function () {
     const statsConfigPath =
       'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/widgets/_content/about/complete-about-page/stats-config.json';
@@ -2247,11 +2111,11 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       }
     }
 
-    // Update DOM with stats
+    // Update DOM with stats (Targeting IDs for v1.5.2)
     function updateStats(stats) {
-      const clientElement = document.querySelector('.ss-stat-item:nth-child(1) .ss-stat-number');
-      const projectElement = document.querySelector('.ss-stat-item:nth-child(2) .ss-stat-number');
-      const yearsElement = document.getElementById('yearsExperience');
+      const clientElement = document.getElementById('ss-client-count');
+      const projectElement = document.getElementById('ss-project-count');
+      const yearsElement = document.getElementById('ss-years-experience');
 
       if (clientElement) clientElement.textContent = stats.clients + '+';
       if (projectElement) projectElement.textContent = stats.projects + '+';
