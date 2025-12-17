@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>Web Development Journey: Teaching Myself to Code | McCals-Website Roadmap</title>
+    <meta
+      name="title"
+      content="Web Development Journey: Teaching Myself to Code | McCals-Website Roadmap"
+    />
+    <meta
+      name="description"
+      content="Follow my 4-month journey teaching myself modern web development from scratch. 498 commits, real struggles, and lessons learned building a complete website ecosystem. Proof that perseverance builds resilience."
+    />
+    <meta
+      name="keywords"
+      content="web development journey, self-taught developer, learning to code, programming challenges, portfolio website, widget development, HTML CSS JavaScript, developer roadmap"
+    />
+    <meta name="author" content="Caleb McCartney" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://mcc-cal.com/roadmap" />
+    <meta property="og:title" content="Web Development Journey: Teaching Myself to Code" />
+    <meta
+      property="og:description"
+      content="4 months, 498 commits, countless lessons learned. My journey from seeing a widget system to building an entire website from scratch."
+    />
+    <meta property="og:site_name" content="McCals-Website" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://mcc-cal.com/roadmap" />
+    <meta property="twitter:title" content="Web Development Journey: Teaching Myself to Code" />
+    <meta
+      property="twitter:description"
+      content="4 months, 498 commits, countless lessons learned. My journey from seeing a widget system to building an entire website from scratch."
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mcc-cal.com/roadmap" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Web Development Journey: Teaching Myself to Code",
+        "description": "A detailed roadmap documenting 4 months of self-teaching modern web development, including real challenges, lessons learned, and 498 git commits of progress.",
+        "author": {
+          "@type": "Person",
+          "name": "Caleb McCartney",
+          "url": "https://mcc-cal.com"
+        },
+        "datePublished": "2025-12-17",
+        "dateModified": "2025-12-17",
+        "publisher": {
+          "@type": "Person",
+          "name": "Caleb McCartney"
+        },
+        "articleBody": "Follow my journey teaching myself modern web development from scratch, working through challenges like package.json mismatches, image stretching bugs, merge conflicts, and race conditions to build a complete website ecosystem.",
+        "keywords": "web development, self-taught developer, learning to code, programming challenges, portfolio website, widget development",
+        "educationalLevel": "Beginner to Intermediate",
+        "learningResourceType": "Development Roadmap",
+        "inLanguage": "en-US"
+      }
+    </script>
+    <style>
+      /* 
+       * McCals-Website Widget: Development Roadmap
+       * Version: v1.2.0
+       * Personal journey of teaching myself web development
+       * Design: Visual timeline with horizontal roadmap on desktop
+       */
+
+      :root {
+        --mcc-bg-primary: #ffffff;
+        --mcc-bg-secondary: #f8f9fa;
+        --mcc-text-primary: #0a0a0a;
+        --mcc-text-secondary: #4a5568;
+        --mcc-text-muted: #718096;
+        --mcc-border: #e2e8f0;
+        --mcc-accent: #000000;
+        --mcc-accent-muted: #666666;
+        --mcc-glass-bg: rgba(255, 255, 255, 0.85);
+        --mcc-glass-border: rgba(0, 0, 0, 0.08);
+        --mcc-glass-blur: 20px;
+        --mcc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+        --mcc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --mcc-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+        --mcc-success: #10b981;
+        --mcc-learning: #6366f1;
+        --mcc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --mcc-font-display: 'Outfit', sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --mcc-bg-primary: #1a1a1a;
+          --mcc-bg-secondary: #0a0a0a;
+          --mcc-text-primary: #f7fafc;
+          --mcc-text-secondary: #cbd5e0;
+          --mcc-text-muted: #a0aec0;
+          --mcc-border: #2d3748;
+          --mcc-accent: #ffffff;
+          --mcc-accent-muted: #999999;
+          --mcc-glass-bg: rgba(26, 26, 26, 0.85);
+          --mcc-glass-border: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+      }
+
+      .mcc-roadmap-widget {
+        font-family: var(--mcc-font-sans);
+        color: var(--mcc-text-primary);
+        line-height: 1.6;
+        width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Header */
+      .mcc-roadmap-header {
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .mcc-roadmap-header h1 {
+        font-family: var(--mcc-font-display);
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 1rem 0;
+        color: var(--mcc-text-primary);
+        background: linear-gradient(135deg, var(--mcc-accent) 0%, var(--mcc-accent-muted) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .mcc-roadmap-header p {
+        color: var(--mcc-text-muted);
+        font-size: 1.125rem;
+        margin: 0 auto 2rem;
+        max-width: 700px;
+      }
+
+      /* Journey Story */
+      .mcc-journey-story {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        margin-bottom: 3rem;
+        box-shadow: var(--mcc-shadow-md);
+      }
+
+      .mcc-journey-story h2 {
+        font-family: var(--mcc-font-display);
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0 0 1.25rem 0;
+        color: var(--mcc-text-primary);
+      }
+
+      .mcc-journey-story p {
+        color: var(--mcc-text-secondary);
+        font-size: 1.0625rem;
+        line-height: 1.8;
+        margin: 0 0 1rem 0;
+      }
+
+      .mcc-journey-story p:last-child {
+        margin-bottom: 0;
+      }
+
+      .mcc-journey-story strong {
+        color: var(--mcc-text-primary);
+        font-weight: 600;
+      }
+
+      /* Progress Summary */
+      .mcc-roadmap-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+      }
+
+      .mcc-stat-card {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        border-radius: 1.25rem;
+        padding: 1.75rem;
+        text-align: center;
+        box-shadow: var(--mcc-shadow-sm);
+        transition: all 0.3s ease;
+      }
+
+      .mcc-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--mcc-shadow-md);
+      }
+
+      .mcc-stat-value {
+        font-family: var(--mcc-font-display);
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: var(--mcc-accent);
+      }
+
+      .mcc-stat-label {
+        font-size: 0.875rem;
+        color: var(--mcc-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+      }
+
+      /* Advanced Stats Toggle */
+      .mcc-advanced-stats-toggle {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .mcc-toggle-button {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        color: var(--mcc-text-primary);
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        font-family: var(--mcc-font-sans);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--mcc-shadow-sm);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .mcc-toggle-button:hover {
+        background: var(--mcc-accent);
+        color: var(--mcc-bg-primary);
+        box-shadow: var(--mcc-shadow-md);
+        transform: translateY(-2px);
+      }
+
+      .mcc-toggle-icon {
+        transition: transform 0.3s ease;
+        display: inline-block;
+      }
+
+      .mcc-toggle-button[aria-expanded='true'] .mcc-toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      /* Advanced Stats Section */
+      .mcc-advanced-stats {
+        margin-bottom: 3rem;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s ease;
+      }
+
+      .mcc-advanced-stats.show {
+        opacity: 1;
+        max-height: 1000px;
+      }
+
+      .mcc-advanced-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .mcc-advanced-card {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        border-radius: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--mcc-shadow-sm);
+        transition: all 0.3s ease;
+      }
+
+      .mcc-advanced-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--mcc-shadow-md);
+        border-color: var(--mcc-accent);
+      }
+
+      .mcc-advanced-value {
+        font-family: var(--mcc-font-display);
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--mcc-accent);
+      }
+
+      .mcc-advanced-label {
+        font-size: 0.8125rem;
+        color: var(--mcc-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .mcc-advanced-detail {
+        font-size: 0.75rem;
+        color: var(--mcc-text-muted);
+        margin-top: 0.5rem;
+        font-style: italic;
+      }
+
+      /* Desktop: Horizontal Roadmap */
+      @media (min-width: 1024px) {
+        .mcc-roadmap-timeline {
+          position: relative;
+          padding: 4rem 0;
+        }
+
+        .mcc-timeline-line {
+          position: absolute;
+          top: 50%;
+          left: 2%;
+          right: 2%;
+          height: 4px;
+          background: linear-gradient(
+            90deg,
+            var(--mcc-success) 0%,
+            var(--mcc-success) 60%,
+            var(--mcc-learning) 70%,
+            var(--mcc-border) 80%,
+            var(--mcc-border) 100%
+          );
+          border-radius: 2px;
+          transform: translateY(-50%);
+          z-index: 0;
+        }
+
+        .mcc-timeline-months {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 1.5rem;
+          position: relative;
+          z-index: 1;
+        }
+
+        .mcc-month-milestone {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.5rem;
+          opacity: 0;
+          animation: mcc-fadeInScale 0.6s ease forwards;
+        }
+
+        .mcc-month-milestone:nth-child(1) {
+          animation-delay: 0.1s;
+        }
+        .mcc-month-milestone:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        .mcc-month-milestone:nth-child(3) {
+          animation-delay: 0.3s;
+        }
+        .mcc-month-milestone:nth-child(4) {
+          animation-delay: 0.4s;
+        }
+        .mcc-month-milestone:nth-child(5) {
+          animation-delay: 0.5s;
+        }
+        .mcc-month-milestone:nth-child(6) {
+          animation-delay: 0.6s;
+        }
+        .mcc-month-milestone:nth-child(7) {
+          animation-delay: 0.7s;
+        }
+
+        @keyframes mcc-fadeInScale {
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .mcc-milestone-marker {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: var(--mcc-success);
+          border: 4px solid var(--mcc-bg-primary);
+          box-shadow: 0 0 0 4px var(--mcc-glass-border);
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .mcc-month-milestone.current .mcc-milestone-marker {
+          background: var(--mcc-learning);
+        }
+
+        .mcc-month-milestone.future .mcc-milestone-marker {
+          background: var(--mcc-border);
+        }
+
+        .mcc-milestone-marker:hover {
+          transform: scale(1.3);
+          box-shadow: 0 0 0 6px var(--mcc-glass-border);
+        }
+
+        .mcc-milestone-content {
+          background: var(--mcc-glass-bg);
+          border: 1px solid var(--mcc-glass-border);
+          backdrop-filter: blur(var(--mcc-glass-blur));
+          -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+          border-radius: 1rem;
+          padding: 1.25rem;
+          box-shadow: var(--mcc-shadow-md);
+          min-height: 280px;
+          width: 100%;
+          transition: all 0.3s ease;
+        }
+
+        .mcc-milestone-content:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--mcc-shadow-lg);
+          border-color: var(--mcc-accent);
+        }
+
+        .mcc-milestone-title {
+          font-family: var(--mcc-font-display);
+          font-size: 1.125rem;
+          font-weight: 700;
+          margin: 0 0 0.75rem 0;
+          color: var(--mcc-text-primary);
+        }
+
+        .mcc-milestone-count {
+          font-size: 0.8125rem;
+          color: var(--mcc-text-muted);
+          margin-bottom: 1rem;
+          font-weight: 600;
+        }
+
+        .mcc-milestone-highlights {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .mcc-milestone-highlights li {
+          font-size: 0.875rem;
+          color: var(--mcc-text-secondary);
+          margin-bottom: 0.625rem;
+          padding-left: 1.25rem;
+          position: relative;
+          line-height: 1.5;
+        }
+
+        .mcc-milestone-highlights li:before {
+          content: '→';
+          position: absolute;
+          left: 0;
+          color: var(--mcc-accent);
+          font-weight: 600;
+        }
+      }
+
+      /* Mobile/Tablet: Vertical Timeline */
+      @media (max-width: 1023px) {
+        .mcc-roadmap-timeline {
+          position: relative;
+          padding-left: 2.5rem;
+        }
+
+        .mcc-timeline-line {
+          position: absolute;
+          left: 0.75rem;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: linear-gradient(
+            180deg,
+            var(--mcc-success) 0%,
+            var(--mcc-success) 60%,
+            var(--mcc-learning) 70%,
+            var(--mcc-border) 90%
+          );
+          border-radius: 2px;
+        }
+
+        .mcc-timeline-months {
+          display: flex;
+          flex-direction: column;
+          gap: 2.5rem;
+        }
+
+        .mcc-month-milestone {
+          position: relative;
+          opacity: 0;
+          animation: mcc-fadeInUp 0.6s ease forwards;
+        }
+
+        .mcc-month-milestone:nth-child(1) {
+          animation-delay: 0.1s;
+        }
+        .mcc-month-milestone:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        .mcc-month-milestone:nth-child(3) {
+          animation-delay: 0.3s;
+        }
+        .mcc-month-milestone:nth-child(4) {
+          animation-delay: 0.4s;
+        }
+        .mcc-month-milestone:nth-child(5) {
+          animation-delay: 0.5s;
+        }
+        .mcc-month-milestone:nth-child(6) {
+          animation-delay: 0.6s;
+        }
+        .mcc-month-milestone:nth-child(7) {
+          animation-delay: 0.7s;
+        }
+
+        @keyframes mcc-fadeInUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .mcc-milestone-marker {
+          position: absolute;
+          left: -2.15rem;
+          top: 0.5rem;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: var(--mcc-success);
+          border: 4px solid var(--mcc-bg-primary);
+          box-shadow: 0 0 0 3px var(--mcc-glass-border);
+        }
+
+        .mcc-month-milestone.current .mcc-milestone-marker {
+          background: var(--mcc-learning);
+        }
+
+        .mcc-month-milestone.future .mcc-milestone-marker {
+          background: var(--mcc-border);
+        }
+
+        .mcc-milestone-content {
+          background: var(--mcc-glass-bg);
+          border: 1px solid var(--mcc-glass-border);
+          backdrop-filter: blur(var(--mcc-glass-blur));
+          -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+          border-radius: 1rem;
+          padding: 1.25rem;
+          box-shadow: var(--mcc-shadow-sm);
+          transition: all 0.3s ease;
+        }
+
+        .mcc-milestone-content:active {
+          transform: scale(0.98);
+          box-shadow: var(--mcc-shadow-md);
+        }
+
+        .mcc-milestone-title {
+          font-family: var(--mcc-font-display);
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin: 0 0 0.625rem 0;
+          color: var(--mcc-text-primary);
+        }
+
+        .mcc-milestone-count {
+          font-size: 0.8125rem;
+          color: var(--mcc-text-muted);
+          margin-bottom: 1rem;
+          font-weight: 600;
+        }
+
+        .mcc-milestone-highlights {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .mcc-milestone-highlights li {
+          font-size: 0.9375rem;
+          color: var(--mcc-text-secondary);
+          margin-bottom: 0.75rem;
+          padding-left: 1.5rem;
+          position: relative;
+          line-height: 1.6;
+        }
+
+        .mcc-milestone-highlights li:before {
+          content: '▸';
+          position: absolute;
+          left: 0;
+          color: var(--mcc-accent);
+          font-weight: 700;
+        }
+      }
+
+      /* Version Indicator */
+      .version-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font:
+          600 10px/1 ui-monospace,
+          monospace;
+        cursor: pointer;
+        z-index: 500;
+        transition: color 0.2s ease;
+        pointer-events: auto;
+        backdrop-filter: blur(4px);
+      }
+
+      .version-indicator:hover {
+        color: #fff;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .mcc-roadmap-widget {
+          padding: 2rem 1rem;
+        }
+
+        .mcc-roadmap-header h1 {
+          font-size: 2.25rem;
+        }
+
+        .mcc-journey-story {
+          padding: 1.75rem;
+        }
+
+        .mcc-roadmap-summary {
+          grid-template-columns: 1fr;
+        }
+
+        .version-indicator {
+          bottom: 15px;
+          right: 15px;
+          font-size: 9px;
+        }
+      }
+
+      /* Support Section */
+      .mcc-support-section {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        margin-top: 4rem;
+        text-align: center;
+        box-shadow: var(--mcc-shadow-md);
+      }
+
+      .mcc-support-section h2 {
+        font-family: var(--mcc-font-display);
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0 0 1rem 0;
+        color: var(--mcc-text-primary);
+      }
+
+      .mcc-support-section p {
+        color: var(--mcc-text-secondary);
+        font-size: 1.0625rem;
+        line-height: 1.7;
+        margin: 0 0 2rem 0;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .mcc-coffee-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, #6f4e37 0%, #3e2723 100%);
+        color: #ffffff;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        font-family: var(--mcc-font-sans);
+        font-size: 1.0625rem;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: var(--mcc-shadow-md);
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .mcc-coffee-button:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--mcc-shadow-lg);
+        background: linear-gradient(135deg, #8b4513 0%, #6f4e37 100%);
+      }
+
+      .mcc-coffee-button:active {
+        transform: translateY(-1px);
+      }
+
+      .mcc-coffee-icon {
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main Article -->
+    <article class="mcc-roadmap-widget" itemscope itemtype="https://schema.org/Article">
+      <!-- Header -->
+      <header class="mcc-roadmap-header">
+        <h1 itemprop="headline">🗺️ The Journey</h1>
+        <p itemprop="description">Teaching myself web development, one project at a time</p>
+      </header>
+
+      <!-- Journey Story -->
+      <section class="mcc-journey-story" itemprop="articleBody">
+        <h2>How It Started</h2>
+        <p>
+          I stumbled across a website using a widget-based system similar to what you see here. My
+          first thought was to hire someone or find a service to build something like that. Then I
+          looked at the cost. Then I looked closer at the code. And I thought:
+          <strong>"This doesn't seem that hard... I could probably figure this out myself."</strong>
+        </p>
+        <p>
+          I'd been in the tech sphere for years - programming robots with MATLAB in high school,
+          modding Minecraft with C++ and Java, jailbreaking phones and messing around in terminal. I
+          knew my way around computers and had coded on and off, but never as a career. Still,
+          <strong>web development</strong>? That was a whole different beast. HTML, CSS, JavaScript,
+          responsive design, APIs, deployment - this was harder than it looked. Way harder. But
+          that's what made it worth it.
+        </p>
+        <p>
+          What started as "I just want a better viewing experience for my photography" in
+          <strong>September 2025</strong> quickly evolved into something bigger. First it was the
+          portfolio. Then I wanted to embed my podcast. Then I needed to learn APIs. Before I knew
+          it, <strong>498 commits</strong> later, I'd built an entire website ecosystem: portfolio
+          galleries, blog system with Google Docs integration, admin tools, automated workflows,
+          Cloudflare Workers, and yes - this very roadmap widget you're reading. What began as
+          making a better photography site turned me into a full-stack developer. Or at least,
+          that's the plan when I eventually move off Squarespace.
+        </p>
+        <p>
+          This roadmap isn't just a project tracker - it's the story of scope creep done right. What
+          started as wanting better photo galleries turned into podcast embedding, then API
+          integration, then becoming a full-stack developer. It's proof that if you put your mind to
+          it and work through the challenges and tribulations, you might get something good out of
+          it. That doesn't mean bad things won't happen - they will. But building something,
+          learning something, pushing through those struggles - it sets you up so they don't hit as
+          hard. When you know you can figure things out, you're ready for whatever comes next.
+        </p>
+      </section>
+
+      <!-- Summary Stats -->
+      <section class="mcc-roadmap-summary" aria-label="Progress Statistics">
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value">498</div>
+          <div class="mcc-stat-label">Git Commits</div>
+        </div>
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value" id="completedCount">0</div>
+          <div class="mcc-stat-label">Tasks Completed</div>
+        </div>
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value">4</div>
+          <div class="mcc-stat-label">Months of Learning</div>
+        </div>
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value" id="widgetCount">0</div>
+          <div class="mcc-stat-label">Widgets Built</div>
+        </div>
+      </section>
+
+      <!-- Advanced Stats (Expandable) -->
+      <div class="mcc-advanced-stats-toggle">
+        <button onclick="toggleAdvancedStats()" class="mcc-toggle-button" aria-expanded="false">
+          <span id="toggleText">Show Advanced Stats</span>
+          <span class="mcc-toggle-icon">▼</span>
+        </button>
+      </div>
+
+      <section
+        class="mcc-advanced-stats"
+        id="advancedStats"
+        aria-label="Advanced Statistics"
+        style="display: none"
+      >
+        <div class="mcc-advanced-grid">
+          <div class="mcc-advanced-card">
+            <div class="mcc-advanced-value" id="linesOfCode">~15,000+</div>
+            <div class="mcc-advanced-label">Lines of Code Written</div>
+          </div>
+          <div class="mcc-advanced-card">
+            <div class="mcc-advanced-value">7</div>
+            <div class="mcc-advanced-label">Technologies Learned</div>
+            <div class="mcc-advanced-detail">HTML, CSS, JS, Git, CI/CD, APIs, Workers</div>
+          </div>
+          <div class="mcc-advanced-card">
+            <div class="mcc-advanced-value" id="strugglesOvercome">12+</div>
+            <div class="mcc-advanced-label">Major Challenges Overcome</div>
+          </div>
+          <div class="mcc-advanced-card">
+            <div class="mcc-advanced-value">3</div>
+            <div class="mcc-advanced-label">Deployments Configured</div>
+            <div class="mcc-advanced-detail">Cloudflare Pages, Workers, dev.mcc-cal.com</div>
+          </div>
+          <div class="mcc-advanced-card">
+            <div class="mcc-advanced-value">10+</div>
+            <div class="mcc-advanced-label">Automated Workflows</div>
+            <div class="mcc-advanced-detail">CI/CD, Manifests, SEO, Validators</div>
+          </div>
+          <div class="mcc-advanced-card">
+            <div class="mcc-advanced-value">∞</div>
+            <div class="mcc-advanced-label">Lessons Learned</div>
+            <div class="mcc-advanced-detail">Still counting...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section class="mcc-roadmap-timeline" aria-label="Development Timeline">
+        <div class="mcc-timeline-line"></div>
+        <div class="mcc-timeline-months" id="roadmapTimeline">
+          <!-- Months will be injected here -->
+        </div>
+      </section>
+
+      <!-- Support Section -->
+      <section class="mcc-support-section" aria-label="Support This Project">
+        <h2>☕ Support This Journey</h2>
+        <p>
+          If this roadmap inspired you or you'd like to support the continued development of this
+          project, consider buying me a coffee. Every donation helps keep this learning journey
+          going and supports the transition to a fully self-hosted platform!
+        </p>
+        <a
+          href="https://buymeacoffee.com/mccal"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mcc-coffee-button"
+          aria-label="Buy me a coffee"
+        >
+          <span class="mcc-coffee-icon">☕</span>
+          <span>Buy Me a Coffee</span>
+        </a>
+      </section>
+    </article>
+
+    <!-- Version indicator -->
+    <div class="version-indicator" title="v1.2.0">v1.2.0</div>
+
+    <script>
+      // Development Journey Data - Based on Real Git Commit History (498 commits)
+      const roadmapData = [
+        {
+          month: 'Sept 2025',
+          status: 'completed',
+          count: 2,
+          highlights: [
+            'Started with tech background (MATLAB robots, Minecraft mods, terminal/jailbreaking)',
+            'Built first blog widget - realized web dev was harder than it looked',
+            'Created unified portfolio demo system',
+            'Struggled with: Package.json version mismatches, CI failures, the learning curve',
+            'Learned: Git workflows, JavaScript fundamentals, responsive CSS - it was worth it',
+          ],
+        },
+        {
+          month: 'Oct 2025',
+          status: 'completed',
+          count: 12,
+          highlights: [
+            'Built 8 major widgets (About, Contact, Portfolios)',
+            'Implemented lightbox galleries with accessibility',
+            'Struggled with: Image stretching in lightboxes, CSP/DOMPurify conflicts',
+            'Learned: External JS for security, Schema.org markup, EmailJS integration',
+            'Milestone: First production-ready widgets deployed',
+          ],
+        },
+        {
+          month: 'Nov 2025',
+          status: 'completed',
+          count: 5,
+          highlights: [
+            'Standardized 63 widget files to proper SemVer format',
+            'Built CI/CD workflows with GitHub Actions',
+            'Struggled with: Merge conflicts in manifests, PowerShell quoting in Windows',
+            'Learned: Git version control deeply, automated testing, RSS integration',
+            'Achievement: Complete repository organization system',
+          ],
+        },
+        {
+          month: 'Dec 1-8',
+          status: 'completed',
+          count: 5,
+          highlights: [
+            'Deployed first Cloudflare Worker API (api.mcc-cal.com)',
+            'Set up dev.mcc-cal.com development environment',
+            'Struggled with: Race conditions in manifest workflows, ESLint build errors',
+            'Learned: Retry logic, proper import/export patterns, environment detection',
+            'Breakthrough: Hot-reload working, widgets auto-detect versions',
+          ],
+        },
+        {
+          month: 'Dec 12-17',
+          status: 'current',
+          count: 5,
+          highlights: [
+            'Rewrote blog system with Google Docs ingestion',
+            'Enhanced About page with 4-layer intelligent stats',
+            'Built personal development roadmap (this widget!)',
+            'Struggled with: Lint errors, shared date parsing symlinks',
+            'Currently learning: Advanced CSS animations, monochrome design theory',
+          ],
+        },
+        {
+          month: '2025 Q1',
+          status: 'future',
+          count: 8,
+          highlights: [
+            'Cloudflare Worker to Production (KV namespaces, webhooks)',
+            'Next.js self-hosted site (dev.mcc-cal.com full migration)',
+            'Video Portfolio Widget v2 (transcripts, HLS/DASH streaming)',
+            'SEO optimization across all widgets (Lighthouse audits)',
+            'Performance optimization (WebP/AVIF, lazy loading, caching)',
+            'TODO: Admin dashboard for content management',
+            'TODO: Repository improvement plan continuation',
+            'Plan to learn: Advanced performance tuning, HLS streaming',
+          ],
+        },
+        {
+          month: '2025 Q2',
+          status: 'future',
+          count: 7,
+          highlights: [
+            'Advanced widget features (Newsletter, Events calendar, FAQ)',
+            'Real-time analytics and user tracking integration',
+            'AI-powered alt-text generation for accessibility',
+            'Dark mode support across all widgets',
+            'A/B testing framework for widget variations',
+            'Internationalization (i18n) multi-language support',
+            'Automated testing suite with CI/CD integration',
+          ],
+        },
+      ];
+
+      // Render Functions
+      function renderMilestone(data) {
+        const statusClass =
+          data.status === 'current' ? 'current' : data.status === 'future' ? 'future' : 'completed';
+        const highlightsHtml = data.highlights.map((h) => `<li>${h}</li>`).join('');
+
+        return `
+          <div class="mcc-month-milestone ${statusClass}">
+            <div class="mcc-milestone-content">
+              <div class="mcc-milestone-title">${data.month}</div>
+              <div class="mcc-milestone-count">${data.count} Major Achievements</div>
+              <ul class="mcc-milestone-highlights">
+                ${highlightsHtml}
+              </ul>
+            </div>
+            <div class="mcc-milestone-marker"></div>
+          </div>
+        `;
+      }
+
+      // Animated Counter
+      function animateCounter(element, target, duration = 2000, suffix = '') {
+        const start = 0;
+        const increment = target / (duration / 16); // 60fps
+        let current = start;
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            element.textContent = target + suffix;
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(current) + suffix;
+          }
+        }, 16);
+      }
+
+      // Toggle Advanced Stats
+      function toggleAdvancedStats() {
+        const advancedStats = document.getElementById('advancedStats');
+        const toggleButton = document.querySelector('.mcc-toggle-button');
+        const toggleText = document.getElementById('toggleText');
+
+        const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+          advancedStats.classList.remove('show');
+          advancedStats.style.display = 'none';
+          toggleButton.setAttribute('aria-expanded', 'false');
+          toggleText.textContent = 'Show Advanced Stats';
+        } else {
+          advancedStats.style.display = 'block';
+          setTimeout(() => advancedStats.classList.add('show'), 10);
+          toggleButton.setAttribute('aria-expanded', 'true');
+          toggleText.textContent = 'Hide Advanced Stats';
+        }
+      }
+
+      // Fetch Dynamic Stats from GitHub API
+      async function fetchGitHubStats() {
+        try {
+          const repo = 'McCal-Codes/McCals-Website';
+
+          // Fetch commits (GitHub API returns up to 100 per page)
+          const commitsResponse = await fetch(
+            `https://api.github.com/repos/${repo}/commits?per_page=1`,
+          );
+          const linkHeader = commitsResponse.headers.get('Link');
+
+          // Parse total commits from Link header
+          let totalCommits = 498; // Fallback
+          if (linkHeader) {
+            const match = linkHeader.match(/page=(\d+)>; rel="last"/);
+            if (match) {
+              totalCommits = parseInt(match[1]);
+            }
+          }
+
+          // Fetch repository info
+          const repoResponse = await fetch(`https://api.github.com/repos/${repo}`);
+          const repoData = await repoResponse.json();
+
+          // Fetch src/widgets directory to count widgets
+          const widgetsResponse = await fetch(
+            `https://api.github.com/repos/${repo}/contents/src/widgets`,
+          );
+          const widgetsData = await widgetsResponse.json();
+
+          // Count widget directories (exclude _shared, _archived, etc.)
+          const widgetCount = widgetsData.filter(
+            (item) => item.type === 'dir' && !item.name.startsWith('_'),
+          ).length;
+
+          return {
+            commits: totalCommits,
+            widgets: widgetCount,
+            stars: repoData.stargazers_count || 0,
+            updated: new Date(repoData.updated_at),
+          };
+        } catch (error) {
+          console.warn('Failed to fetch GitHub stats, using fallback values:', error);
+          return {
+            commits: 498,
+            widgets: 15,
+            stars: 0,
+            updated: new Date(),
+          };
+        }
+      }
+
+      function init() {
+        const timeline = document.getElementById('roadmapTimeline');
+        const milestonesHtml = roadmapData.map(renderMilestone).join('');
+        timeline.innerHTML = milestonesHtml;
+
+        // Calculate completed tasks from roadmap data
+        const completedTasks = roadmapData
+          .filter((m) => m.status === 'completed')
+          .reduce((sum, m) => sum + m.count, 0);
+
+        // Set up Intersection Observer for stats animation
+        const statsSection = document.querySelector('.mcc-roadmap-summary');
+        let hasAnimated = false;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(async (entry) => {
+              if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+
+                // Fetch dynamic GitHub stats
+                const githubStats = await fetchGitHubStats();
+
+                // Update static commits display (not animated since it's already visible)
+                const commitsEl = document.querySelector(
+                  '.mcc-roadmap-summary .mcc-stat-card:nth-child(1) .mcc-stat-value',
+                );
+                commitsEl.textContent = githubStats.commits;
+
+                // Animate counters when section comes into view
+                const completedCountEl = document.getElementById('completedCount');
+                const widgetCountEl = document.getElementById('widgetCount');
+
+                animateCounter(completedCountEl, completedTasks, 2000);
+                animateCounter(widgetCountEl, githubStats.widgets, 1500, '+');
+              }
+            });
+          },
+          {
+            threshold: 0.3, // Trigger when 30% of section is visible
+          },
+        );
+
+        observer.observe(statsSection);
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', init);
+    </script>
+  </body>
+</html>
