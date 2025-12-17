@@ -914,27 +914,72 @@
 
         // --- Data Loading ---
 
+        // Helper to fetch with fallbacks
+        async function fetchWithFallbacks(paths) {
+          for (const path of paths) {
+            try {
+              console.log('Trying path:', path);
+              const res = await fetch(path);
+              if (res.ok) return res;
+              console.warn(`Path failed (${res.status}):`, path);
+            } catch (e) {
+              console.warn('Path error:', path, e);
+            }
+          }
+          throw new Error('All paths failed to load resource');
+        }
+
         async function loadData() {
           try {
-            const [postsRes, authorsRes] = await Promise.all([
-              fetch(CONFIG.manifestUrl),
-              fetch(CONFIG.authorsUrl),
-            ]);
+            // Define possible paths for manifests
+            const manifestPaths = [
+              CONFIG.manifestUrl,
+              '/src/data/blog/blog.manifest.json',
+              '/data/blog/blog.manifest.json',
+              // Fallback for external sites (Squarespace, etc.)
+              'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/data/blog/blog.manifest.json',
+            ];
 
-            if (!postsRes.ok || !authorsRes.ok) {
-              throw new Error('Failed to load blog data');
-            }
+            const authorsPaths = [
+              CONFIG.authorsUrl,
+              '/src/data/blog/authors.json',
+              '/data/blog/authors.json',
+              // Fallback for external sites (Squarespace, etc.)
+              'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/data/blog/authors.json',
+            ];
+
+            const [postsRes, authorsRes] = await Promise.all([
+              fetchWithFallbacks(manifestPaths),
+              fetchWithFallbacks(authorsPaths),
+            ]);
 
             const postsData = await postsRes.json();
             const authorsData = await authorsRes.json();
 
             return {
-              posts: postsData.posts || [],
-              authors: authorsData.authors || [],
+              posts: postsData.posts,
+              authors: authorsData.authors,
             };
-          } catch (error) {
-            console.error('Blog data load error:', error);
-            throw error;
+          } catch (err) {
+            console.error('Data loading error:', err);
+            const container = document.querySelector('.mcc-blog-loading');
+            if (container) {
+              container.innerHTML = `
+                <div style="color:red; text-align:center;">
+                  <p>Failed to load blog data.</p>
+                  <pre style="font-size:0.8em; opacity:0.8;">${err.message}</pre>
+                  <div style="font-size:0.8em; margin-top:1em; text-align:left; display:inline-block;">
+                    Troubleshooting:
+                    <ul style="margin:0.5em 0 0 1.2em;">
+                      <li>Ensure we are serving from Project Root</li>
+                      <li>Check console for attempted paths</li>
+                      <li>Verify data/blog/ folder exists</li>
+                    </ul>
+                  </div>
+                </div>
+              `;
+            }
+            throw err;
           }
         }
 
