@@ -478,10 +478,35 @@
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.85);
-        z-index: 9999;
+        z-index: 2147483646; /* Max safe integer - 1 */
         backdrop-filter: blur(8px);
         padding: 2rem;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
+      }
+
+      @media (max-width: 768px) {
+        .mcc-post-modal {
+          padding: 0;
+          z-index: 2147483647 !important; /* Force top on mobile */
+        }
+
+        .mcc-post-modal-content {
+          margin: 0;
+          min-height: 100%;
+          border-radius: 0;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .mcc-post-body {
+          flex-grow: 1;
+        }
+
+        /* Ensure header doesn't get hidden by notches */
+        .mcc-post-header {
+          padding-top: max(1.5rem, env(safe-area-inset-top));
+        }
       }
 
       .mcc-post-modal.mcc-active {
@@ -505,6 +530,21 @@
 
       .mcc-scroll-progress.mcc-visible {
         opacity: 1;
+      }
+
+      /* Navigation Lockout (Standard Pattern) */
+      html.lb-open header,
+      html.lb-open nav,
+      html.lb-open .site-header,
+      html.lb-open .squarespace-header {
+        pointer-events: none;
+        z-index: 0 !important;
+        transition: opacity 0.3s ease;
+        opacity: 0.5; /* Optional: Visually dim the nav */
+      }
+
+      html.lb-open {
+        overflow: hidden !important;
       }
 
       .mcc-post-modal-content {
@@ -1662,8 +1702,11 @@
           });
 
           modal.classList.add('mcc-active');
-          document.body.style.overflow = 'hidden';
-          history.pushState(null, '', `#${post.slug}`);
+          document.documentElement.classList.add('lb-open'); // Lock navigation
+          document.body.style.overflow = 'hidden'; // Lock text scroll
+
+          // Reset scroll
+          modal.scrollTop = 0;
 
           // Initialize scroll progress
           updateScrollProgress();
@@ -1674,6 +1717,7 @@
           const progress = document.getElementById('mccScrollProgress');
           modal.classList.remove('mcc-active');
           progress.classList.remove('mcc-visible');
+          document.documentElement.classList.remove('lb-open');
           document.body.style.overflow = '';
           history.pushState(null, '', window.location.pathname);
         }
@@ -1723,6 +1767,12 @@
         // --- Init ---
 
         async function init() {
+          // Move modal to body to avoid stacking context issues
+          const modal = document.getElementById('mccPostModal');
+          if (modal && modal.parentElement !== document.body) {
+            document.body.appendChild(modal);
+          }
+
           try {
             const { posts, authors } = await loadData();
             allAuthors = authors; // Store for authors view
