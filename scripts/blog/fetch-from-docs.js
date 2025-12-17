@@ -76,6 +76,7 @@ function parseGoogleDocSimple(html, authorId) {
 
   let currentPost = null;
   let inContent = false;
+  let inSources = false;
 
   for (const p of paragraphs) {
     // Extract text content
@@ -113,6 +114,7 @@ function parseGoogleDocSimple(html, authorId) {
       };
 
       inContent = false;
+      inSources = false;
       continue;
     }
 
@@ -156,11 +158,38 @@ function parseGoogleDocSimple(html, authorId) {
     // Check for Sources section
     if (text.toLowerCase().match(/^sources?\s*$/)) {
       inContent = false;
+      inSources = true; // New flag to track if we are in sources section
+      if (!currentPost.sources) currentPost.sources = [];
       continue;
     }
 
     // Skip empty metadata fields
     if (text.match(/^(date|category|tags|excerpt|image):\s*$/i)) {
+      continue;
+    }
+
+    // Capture Sources
+    if (inSources) {
+      // Try to parse citation: Author (Date). Title. Publisher.
+      // E.g. "Gatto, J. T. (2009). Weapons... . New Society..."
+      const citationMatch = text.match(/^([^/(]+) \(([\d\w/-]+)\)\. (.+?)\. (.*)$/);
+
+      if (citationMatch) {
+        currentPost.sources.push({
+          author: citationMatch[1].trim(),
+          publishedDate: citationMatch[2].trim(),
+          title: citationMatch[3].trim(),
+          publisher: citationMatch[4].trim(),
+          url: '#', // Default url
+        });
+      } else {
+        // Fallback for less structured citations
+        currentPost.sources.push({
+          title: text,
+          url: '#',
+          notes: text,
+        });
+      }
       continue;
     }
 
@@ -174,6 +203,24 @@ function parseGoogleDocSimple(html, authorId) {
 
     // Add to content if we're collecting
     if (inContent) {
+      // Filter out redundant headers from the doc body
+      const cleanText = text.replace(/\s+/g, ' ').trim();
+
+      // Skip if it matches title exactly (case insensitive)
+      if (currentPost.title && cleanText.toLowerCase() === currentPost.title.toLowerCase()) {
+        continue;
+      }
+
+      // Skip "By [Author]" lines which are common in docs
+      if (cleanText.match(/^By\s+/i)) {
+        continue;
+      }
+
+      // Skip date-only lines (e.g. "10 January 2025")
+      if (cleanText.match(/^(\d{1,2}\s+[A-Za-z]+\s+\d{4}|\d{4}-\d{2}-\d{2})$/)) {
+        continue;
+      }
+
       // Clean the HTML
       let cleaned = p
         .replace(/\sclass="[^"]*"/g, '')
