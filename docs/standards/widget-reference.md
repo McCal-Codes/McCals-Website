@@ -1,4 +1,5 @@
 # See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
+
 # Widget Standards Quick Reference
 
 **Quick links:** [Onboarding](../ONBOARDING.md) · [Widget standards (full)](./widget-standards.md) · [Workspace organization](./workspace-organization.md) · [Performance standards](./performance-standards.md) · [Image SEO](./image-seo-standards.md)
@@ -9,12 +10,17 @@
 ## 📋 New Widget Checklist
 
 ### Basic Structure ✅
+
 ```html
 <!-- Widget Name v1.0.0 -->
 <div class="widget-namespace" data-widget-version="1.0.0">
-  <style>/* All CSS here */</style>
+  <style>
+    /* All CSS here */
+  </style>
   <!-- HTML content -->
-  <script>/* All JS here */</script>
+  <script>
+    /* All JS here */
+  </script>
 </div>
 ```
 
@@ -24,6 +30,7 @@
 - [ ] **Scoped CSS** (all selectors prefixed)
 
 ### Required Files ✅
+
 ```
 src/widgets/widget-name/
 ├── README.md                    # Usage instructions
@@ -32,20 +39,21 @@ src/widgets/widget-name/
     └── v1.0.0-widget-name.html # Widget code
 ```
 
-
 ### CSS Variables ✅
+
 ```css
 :root {
   /* See src/widgets/shared/theme.css for full variable list */
-  --mc-bg: #050506;           /* Base background (dark only) */
-  --mc-text: #f3f5f8;         /* Text color */
+  --mc-bg: #050506; /* Base background (dark only) */
+  --mc-text: #f3f5f8; /* Text color */
   --mc-accent-black: #272423; /* Accent (business palette) */
-  --mc-accent-taupe: #B8B0AA; /* Accent (business palette) */
-  --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #B8B0AA 100%); /* Accent gradient */
+  --mc-accent-taupe: #b8b0aa; /* Accent (business palette) */
+  --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #b8b0aa 100%); /* Accent gradient */
 }
 ```
 
 > **Accent/Gradient System:**
+>
 > - Use `--mc-accent-*` and `--mc-gradient-*` for highlights, chips, overlays, and accent lines only.
 > - Never use as base backgrounds. See `theme.css` and `widget-ui-colors-and-buttons.md` for details.
 
@@ -54,6 +62,7 @@ src/widgets/widget-name/
 ## 🎨 Common Patterns
 
 ### Responsive Grid (Portfolio Widgets)
+
 ```css
 .widget-grid {
   column-width: 320px;
@@ -64,11 +73,14 @@ src/widgets/widget-name/
   margin-bottom: 20px;
 }
 @media (max-width: 768px) {
-  .widget-grid { column-width: 240px; }
+  .widget-grid {
+    column-width: 240px;
+  }
 }
 ```
 
 ### Filter Buttons (Category Controls)
+
 ```html
 <button class="filter-btn" data-filter="category" aria-pressed="false" role="tab">
   Category Name
@@ -85,7 +97,7 @@ src/widgets/widget-name/
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.6;
 }
-.filter-btn[aria-pressed="true"] {
+.filter-btn[aria-pressed='true'] {
   background: var(--fg);
   color: var(--bg);
   opacity: 1;
@@ -93,6 +105,7 @@ src/widgets/widget-name/
 ```
 
 ### Lightbox Modal (Gallery Widgets)
+
 ```css
 .lightbox {
   position: fixed;
@@ -102,7 +115,9 @@ src/widgets/widget-name/
   z-index: 2147483647 !important;
   backdrop-filter: blur(8px);
 }
-.lightbox.is-open { display: flex; }
+.lightbox.is-open {
+  display: flex;
+}
 
 /* Navigation hiding during lightbox */
 html.lb-open header,
@@ -115,6 +130,7 @@ html.lb-open .navbar {
 ```
 
 ### Close Button (Modal/Lightbox)
+
 ```css
 .close-button {
   position: fixed;
@@ -136,11 +152,13 @@ html.lb-open .navbar {
 ## ⚡ Performance Patterns
 
 ### Image Loading
+
 ```html
-<img loading="lazy" decoding="async" src="image.jpg" alt="Description">
+<img loading="lazy" decoding="async" src="image.jpg" alt="Description" />
 ```
 
 ### Loading States
+
 ```css
 .widget-card {
   opacity: 0;
@@ -154,6 +172,7 @@ html.lb-open .navbar {
 ```
 
 ### Caching (Data Widgets)
+
 ```javascript
 const CACHE_KEY = 'widget-cache-v1';
 const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
@@ -161,8 +180,10 @@ const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 function getCached() {
   try {
     const data = JSON.parse(localStorage.getItem(CACHE_KEY));
-    return (Date.now() - data.timestamp < CACHE_DURATION) ? data.content : null;
-  } catch (e) { return null; }
+    return Date.now() - data.timestamp < CACHE_DURATION ? data.content : null;
+  } catch (e) {
+    return null;
+  }
 }
 ```
 
@@ -173,18 +194,20 @@ function getCached() {
 > **📖 Complete Guide**: See `accessibility-patterns.md` for comprehensive examples and WCAG compliance patterns
 
 ### Interactive Elements
+
 ```html
 <!-- Cards -->
 <article class="card" tabindex="0" role="button" aria-label="View gallery">
+  <!-- Live regions -->
+  <div role="status" aria-live="polite">Loading...</div>
 
-<!-- Live regions -->
-<div role="status" aria-live="polite">Loading...</div>
-
-<!-- Modal dialogs -->
-<div role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <!-- Modal dialogs -->
+  <div role="dialog" aria-modal="true" aria-labelledby="modal-title"></div>
+</article>
 ```
 
 ### Keyboard Navigation
+
 ```javascript
 // Escape key handling
 document.addEventListener('keydown', (e) => {
@@ -201,6 +224,7 @@ element.addEventListener('keydown', (e) => {
 ```
 
 ### Skip Navigation
+
 ```html
 <a class="skip-link" href="#main-content">Skip to main content</a>
 ```
@@ -224,8 +248,9 @@ element.addEventListener('keydown', (e) => {
 ```
 
 ### Focus Indicators
+
 ```css
-:where(a, button, [role="button"]):focus-visible {
+:where(a, button, [role='button']):focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
   border-radius: 10px;
@@ -237,6 +262,7 @@ element.addEventListener('keydown', (e) => {
 ## 🐛 Debug Mode (Development)
 
 ### Debug Toggle
+
 ```html
 <button class="debug-toggle" onclick="toggleDebug()">🔍 Debug</button>
 <div class="debug-info" id="debugInfo" style="display: none;">
@@ -255,11 +281,14 @@ element.addEventListener('keydown', (e) => {
   z-index: 1000;
 }
 @media (max-width: 768px) {
-  .debug-toggle { display: none; }
+  .debug-toggle {
+    display: none;
+  }
 }
 ```
 
 ### Version Indicator
+
 ```html
 <h2>Widget Name <span class="version-indicator" onclick="showChangelog()">v1.0.0</span></h2>
 ```
@@ -268,24 +297,116 @@ element.addEventListener('keydown', (e) => {
 
 ## 🎯 Widget Type Guidelines
 
-| Widget Type | Key Patterns | Examples |
-|-------------|--------------|----------|
-| **Portfolio** | Masonry grid, lightbox, filters, lazy loading | Concert, Event, Photojournalism |
-| **Navigation** | Glassmorphism, active states, mobile drawer | Site Navigation, Site Footer |
-| **Content Feed** | API integration, caching, progressive loading | Podcast Feed, Blog Feed |
-| **Hero/Showcase** | Full viewport, auto-play, touch gestures | Hero Slideshow |
+| Widget Type       | Key Patterns                                                 | Examples                        |
+| ----------------- | ------------------------------------------------------------ | ------------------------------- |
+| **Portfolio**     | Masonry grid, lightbox, filters, lazy loading                | Concert, Event, Photojournalism |
+| **Navigation**    | Glassmorphism, active states, mobile drawer                  | Site Navigation, Site Footer    |
+| **Content Feed**  | API integration, caching, progressive loading, search/filter | Podcast Feed, Blog Feed         |
+| **Hero/Showcase** | Full viewport, auto-play, touch gestures                     | Hero Slideshow                  |
+| **Blog/Article**  | Reading time, citations, author filter, scroll progress      | Blog Feed v3.5+                 |
+
+---
+
+## 📝 Blog Widget Patterns (New)
+
+### Search & Filter System
+
+```javascript
+// Client-side filtering for instant results
+function matchesFilters(post) {
+  // Search across title, content, tags
+  if (searchQuery) {
+    const query = searchQuery.toLowerCase();
+    return (
+      post.title.toLowerCase().includes(query) ||
+      post.content.toLowerCase().includes(query) ||
+      post.tags?.some((tag) => tag.toLowerCase().includes(query))
+    );
+  }
+
+  // Tag-based filtering
+  if (activeFilters.size > 0) {
+    return post.tags?.some((tag) => activeFilters.has(tag));
+  }
+
+  return true;
+}
+```
+
+### Reading Time Calculation
+
+```javascript
+function calculateReadingTime(content) {
+  const text = content.replace(/<[^>]*>/g, '');
+  const words = text.trim().split(/\s+/).length;
+  const avgWordsPerMinute = 200;
+  return Math.max(1, Math.ceil(words / avgWordsPerMinute));
+}
+```
+
+### Citations Management
+
+```javascript
+// Format all citations for copying
+function formatAllCitations(post, format = 'plain') {
+  let output = `REFERENCES FOR: ${post.title}\n\n`;
+  post.sources.forEach((source, index) => {
+    output += `[${index + 1}] ${source.title}. ${source.publisher} (${source.publishedDate}). ${source.url}\n\n`;
+  });
+  return output;
+}
+```
+
+### Scroll Progress Indicator
+
+```javascript
+function updateScrollProgress() {
+  const modal = document.getElementById('modal');
+  const scrollPercent = (modal.scrollTop / (modal.scrollHeight - modal.clientHeight)) * 100;
+  progressBar.style.width = `${scrollPercent}%`;
+}
+
+modal.addEventListener('scroll', updateScrollProgress);
+```
+
+### Lazy Image Loading
+
+```html
+<img loading="lazy" decoding="async" src="image.jpg" alt="Description" />
+```
+
+```javascript
+// With blur placeholder
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+          placeholder.classList.add('hidden');
+        });
+        observer.unobserve(img);
+      }
+    });
+  },
+  { rootMargin: '50px' },
+);
+```
 
 ---
 
 ## 🚀 Deployment Process
 
 ### Version Management
+
 1. **Never edit existing versions** - create new files
 2. **Semantic versioning**: `v1.0.0` → `v1.1.0` (features) → `v1.1.1` (fixes)
 3. **Update CHANGELOG.md** with detailed changes
 4. **Test in Squarespace** Code Block before marking production-ready
 
 ### File Naming
+
 ```
 v1.0.0-widget-name.html          # Basic version
 v1.1.0-enhanced-widget-name.html # Feature addition
@@ -293,6 +414,7 @@ v2.0.0-redesigned-widget.html    # Major changes
 ```
 
 ### Status Management
+
 - **Production**: Add to main README "Available Widgets"
 - **Work in Progress**: Create `STATUS.md` file in widget directory
 - **Archive**: Move to `src/widgets/_archived/` if no longer needed
@@ -302,16 +424,18 @@ v2.0.0-redesigned-widget.html    # Major changes
 ## 📚 Reference Examples
 
 ### Complete Implementations
+
 - **Portfolio**: `photojournalism-portfolio/v4.8-event-cards.html`
 - **Navigation**: `site-navigation/v1.6.3.header-injection.html`
 - **Footer**: `site-footer/v1.2.0.footer-widget.html`
 - **Content**: `podcast-feed/v1.1.0.html`
 
 ### Enhancement Patterns
+
 - **Proven improvements**: `docs/standards/widget-standards.md`
 - **Systematic application**: `docs/standards/widget-development.md`
 - **Accessibility patterns**: `docs/standards/accessibility-patterns.md` ⭐
 
 ---
 
-*💡 **Pro Tip**: Use VS Code tasks `npm run ai:preflight:short` to validate workspace context before major changes*
+_💡 **Pro Tip**: Use VS Code tasks `npm run ai:preflight:short` to validate workspace context before major changes_

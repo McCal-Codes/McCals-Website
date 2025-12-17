@@ -1,5 +1,101 @@
 # Blog Feed Widget Changelog
 
+## Version 3.5.0 - 2025-12-17
+
+### ✨ Enhanced User Experience & Performance
+
+**New Features**
+
+- **🔍 Search & Filter System**
+  - Real-time search across titles, content, excerpts, and tags
+  - Client-side filtering (zero API calls, instant results)
+  - Tag-based filtering with visual pill buttons
+  - "Clear filters" quick action
+  - Results counter showing filtered/total posts
+  - Smooth fade animations when filtering
+
+- **⏱️ Reading Time Indicator**
+  - Auto-calculated based on word count (200 words/min average)
+  - Displayed on both card previews and modal header
+  - Helps users decide what to read based on time available
+
+- **📊 Scroll Progress Bar**
+  - Gradient progress indicator at top of modal
+  - Only visible when reading a post
+  - Smooth real-time updates as user scrolls
+
+- **🖼️ Lazy-Loaded Images with Blur Placeholder**
+  - Tiny gradient placeholder based on image URL hash
+  - Smooth fade-in transition when image loads
+  - IntersectionObserver for optimal performance
+  - Fallback to gradient if image fails to load
+
+- **📚 Copy All Citations Button**
+  - One-click copy of all post references/sources
+  - Formatted as numbered bibliography (plain text)
+  - Only appears when post has sources
+  - Integrates with existing citation system
+
+- **👤 Clickable Author Filtering**
+  - Click any author name to filter posts by that author
+  - Underlined author names indicate clickability
+  - Clears other filters when selecting an author
+  - Shows "by [Author Name]" in results counter
+  - Auto-scrolls to top when filter applied
+
+- **📚 Authors Directory View**
+  - Integrated via seamless toggle in search bar
+  - Displays all authors in a responsive grid layout
+  - Shows author avatar, name, bio, and post count
+  - Clickable cards filter posts by that author
+  - "Back to Posts" navigation included
+
+- **🧼 Smart Content Cleaning (Google Docs)**
+  - Automatically strips duplicate Title, Author, and Date headers from body
+  - Prevents visual redundancy in post modal and excerpts
+  - "Sources" section parser converts citations to structured data
+
+- **💎 Premium UI Updates**
+  - **Redesigned Search Bar**: Glassmorphic pill design with integrated SVG icons
+  - **Citation Handling**: "Copy All Citations" moved to Sources section for better context
+  - **Unified Navigation**: Toggle between Posts and Authors views without reload
+
+**Enhanced Layout**
+
+- Improved spacing to respect navigation header (`--mcc-nav-height`)
+- Larger, more prominent page header (3rem title)
+- Better card hierarchy with constrained title/excerpt (line-clamp)
+- Increased grid max-width to 1400px for better desktop use
+- Enhanced card hover effects (6px lift vs 4px)
+- Better responsive breakpoints for tablet/mobile
+
+**Visual Improvements**
+
+- Glassmorphic search bar with premium feel
+- Improved meta section layout with reading time
+- Better color contrast and typography hierarchy
+- Smooth animations for filter interactions
+- "No results" state with helpful messaging
+- Enhanced modal backdrop blur
+
+**Technical**
+
+- Client-side filtering for instant UX (no network delays)
+- IntersectionObserver for lazy image loading
+- Scroll event optimization for progress bar
+- Better state management for filters and search
+- All tags extracted and deduplicated from posts
+- Maintained backward compatibility with v3.0.0 data format
+
+**Performance**
+
+- Lazy image loading reduces initial page weight
+- Blur placeholders improve perceived performance
+- Client-side filtering eliminates server round-trips
+- Optimized animations with CSS transforms
+
+---
+
 ## Version 3.0.0 - 2025-12-17
 
 ### 🎉 Major Release - Minimal, Scalable Blog System
