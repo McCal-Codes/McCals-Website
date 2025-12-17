@@ -1,0 +1,51 @@
+{
+  "posts": [
+    {
+      "id": "capitalist-contradiction",
+      "slug": "capitalist-contradiction",
+      "title": "The Capitalist Contradiction",
+      "date": "2025-01-10",
+      "excerpt": "An exploration of the inherent contradictions within modern capitalism and their societal impacts.",
+      "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+      "authorId": "mccal",
+      "tags": ["economics", "capitalism", "society"],
+      "href": "/blog/capitalist-contradiction",
+      "sources": [
+        {
+          "title": "Capital in the Twenty-First Century",
+          "url": "https://en.wikipedia.org/wiki/Capital_in_the_Twenty-First_Century",
+          "publisher": "Harvard University Press",
+          "publishedDate": "2013",
+          "accessedDate": "2025-01-09"
+        },
+        {
+          "title": "The Wealth of Nations",
+          "url": "https://www.gutenberg.org/ebooks/3300",
+          "publisher": "Project Gutenberg",
+          "notes": "Classic economic theory foundation"
+        }
+      ]
+    },
+    {
+      "id": "shadow-of-loss",
+      "slug": "shadow-of-loss",
+      "title": "In the Shadow of Loss",
+      "date": "2024-08-16",
+      "excerpt": "A personal reflection on grief, memory, and the journey through loss.",
+      "authorId": "mccal",
+      "tags": ["personal", "grief", "reflection"],
+      "href": "/blog/shadow-of-loss"
+    },
+    {
+      "id": "building-in-public",
+      "slug": "building-in-public",
+      "title": "Building in Public: Lessons Learned",
+      "date": "2024-12-01",
+      "excerpt": "What I've learned from sharing my work openly and the unexpected benefits of transparency.",
+      "cover": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+      "authorId": "mccal",
+      "tags": ["development", "transparency", "learning"],
+      "href": "/blog/building-in-public"
+    }
+  ]
+}
