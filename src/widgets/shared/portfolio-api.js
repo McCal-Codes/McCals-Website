@@ -43,6 +43,14 @@ class PortfolioAPI {
       ...config,
     };
 
+    // Auto-detect debug mode from script tag data-debug="true"
+    if (this.config.debug === undefined) {
+      const script = document.currentScript || document.querySelector('script[data-api-config]');
+      this.config.debug =
+        script?.dataset?.debug === 'true' ||
+        new URLSearchParams(window.location.search).has('debug');
+    }
+
     this.cache = new Map();
     this.requestQueue = new Map();
     this.batchQueue = new Map();
@@ -52,13 +60,41 @@ class PortfolioAPI {
       cacheMisses: 0,
       errors: 0,
       avgResponseTime: 0,
+      startTime: performance.now(),
     };
+
+    this._log('Initialized', this.config);
 
     // Check for WebP support
     this._checkWebPSupport();
 
     // Setup intersection observer for lazy loading
     this._setupIntersectionObserver();
+  }
+
+  /**
+   * Internal logger with prefix and debug check
+   */
+  _log(message, data = null, type = 'log') {
+    if (!this.config.debug) return;
+    const prefix = '[PortfolioAPI]';
+    const color = type === 'error' ? '#ff4d6d' : '#888888';
+    const accent = type === 'error' ? '#ff4d6d' : '#7dd3fc';
+
+    if (data) {
+      console[type](
+        `%c${prefix} %c${message}`,
+        `color: ${color}; font-weight: bold`,
+        `color: ${accent}`,
+        data,
+      );
+    } else {
+      console[type](
+        `%c${prefix} %c${message}`,
+        `color: ${color}; font-weight: bold`,
+        `color: ${accent}`,
+      );
+    }
   }
 
   /**
@@ -90,18 +126,22 @@ class PortfolioAPI {
     const cached = this._getCached(cacheKey);
     if (cached) {
       this.metrics.cacheHits++;
+      this._log(`Cache Hit: ${basePath}`, { key: cacheKey });
       return cached;
     }
 
     this.metrics.cacheMisses++;
+    this._log(`Cache Miss: ${basePath}`, { key: cacheKey });
 
     // Use GraphQL for faster queries when possible
     const useGraphQL = options.useGraphQL !== false;
     let data;
 
     if (useGraphQL && this._canUseGraphQL(basePath)) {
+      this._log(`Fetching via GraphQL: ${basePath}`);
       data = await this._fetchViaGraphQL(basePath, options);
     } else {
+      this._log(`Fetching via REST: ${basePath}`);
       data = await this._fetchViaREST(basePath, options);
     }
 
@@ -922,5 +962,30 @@ class ImageLoader {
   }
 }
 
+// PortfolioAPIv2 - Adapter layer for enhanced features
+class PortfolioAPIv2 extends PortfolioAPI {
+  constructor(config = {}) {
+    super({ ...config, version: '2.0.0' });
+    this._log('v2 Adapter Active', { version: '2.0.0' });
+  }
+
+  // Override getStats to include more detailed metrics in v2
+  getMetrics() {
+    const uptime = (performance.now() - this.metrics.startTime) / 1000;
+    return {
+      ...this.metrics,
+      uptime: `${uptime.toFixed(2)}s`,
+      cacheHitRate:
+        this.metrics.cacheHits + this.metrics.cacheMisses > 0
+          ? (
+              (this.metrics.cacheHits / (this.metrics.cacheHits + this.metrics.cacheMisses)) *
+              100
+            ).toFixed(1) + '%'
+          : '0%',
+    };
+  }
+}
+
 // Export for use in widgets
 window.PortfolioAPI = PortfolioAPI;
+window.PortfolioAPIv2 = PortfolioAPIv2;

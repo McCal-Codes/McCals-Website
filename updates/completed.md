@@ -1,6 +1,6 @@
 # Completed Tasks Archive
 
-_Archive created: December 6, 2025_
+Archive Created: December 6, 2025
 
 This file tracks all completed tasks that have been removed from the active `todo.md` file for better organization and clarity.
 
@@ -13,6 +13,7 @@ This file tracks all completed tasks that have been removed from the active `tod
 - [x] **Cleaned up duplicate API submodule structure** — Removed confusing nested `src/api/src/api/` directory in the API submodule, consolidating to single `routes/` at submodule root
 - [x] **Created Code Annotations Standard** — New `docs/standards/code-annotations.md` documenting TODO, FIXME, BUG, SECURITY, HACK, NOTE, A11Y, DEBUG, WIP, and other annotation keywords with examples, search commands, and AI agent guidelines
 - [x] **Enhanced security comments** — Improved plaintext password warning in `src/api/routes/blog.js` with actionable migration steps and SECURITY tag
+- [x] **Comprehensive Widget Analysis (Dec 27, 2025)** — Audited all 24+ widgets in `src/widgets/`, documented v1 contracts, and created a phased vNext roadmap for Resilience, Performance, and Observability.
 
 ### Shared Widget Stylesheet Pipeline (Dec 10, 2025)
 

@@ -1,5 +1,23 @@
 # Blog Feed Widget Changelog
 
+## Version 3.5.2-WIP - 2025-12-27
+
+### Theme Toggle Integration 🌙
+
+- **NEW**: Manual Light/Dark theme toggle button with backdrop blur
+- **FIXED**: Standardized theme variables with `data-theme` attributes
+- **FIXED**: Better consistency with other themed widgets (Event Portfolio, Contact Form)
+- **UPDATED**: Version indicator and title branding
+
+## Version 3.5.1-WIP - 2025-12-27
+
+### UX Polish & Resilience 🩹
+
+- **ENHANCED**: Search debouncing (300ms) to improve performance during typing
+- **NEW**: Added "Blog" header with visible version indicator
+- **FIXED**: Modal positioning bug on mobile devices (over Safari chrome)
+- **UPDATED**: Branding throughout the widget
+
 ## Version 3.5.0 - 2025-12-17
 
 ### ✨ Enhanced User Experience & Performance
