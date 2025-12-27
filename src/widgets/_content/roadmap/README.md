@@ -235,5 +235,5 @@ roadmap/
 ---
 
 **Created**: 2025-12-17  
-**Current Version**: v1.2.0  
+**Current Version**: v1.3.0  
 **Status**: ✅ Production Ready
