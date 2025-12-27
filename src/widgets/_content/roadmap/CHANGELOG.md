@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v1.3.0] - 2025-12-27
+
+### Added
+
+- 🚀 **Coming in 2026 Section**: Added a glassmorphic preview area for major 2026 goals (Next.js infrastructure migration, Admin ecosystem v2.0, Content pipeline).
+- 📅 **Summarized December**: Consolidated all December progress into a single cohesive milestone.
+- 🎨 **Restored Glassmorphism**: Reverted back to the highly-refined "Glassmorphism 2.0" aesthetic while integrating new 2026 elements.
+- 🎯 **Jan 2026 Kickoff**: Added January 2026 as the active phase of the roadmap.
+- 🧹 **UI Cleanup**: Removed the fixed version indicator and changelog modal for a cleaner minimalist look.
+
+---
+
 ## [v1.2.0] - 2025-12-17
 
 ### Added
