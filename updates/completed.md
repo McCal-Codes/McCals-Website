@@ -8,6 +8,14 @@ This file tracks all completed tasks that have been removed from the active `tod
 
 ## ✅ December 2025 Completions
 
+### Event Portfolio Bugfix & WIP Deployments (Dec 27, 2025)
+
+- [x] **Fixed Event Portfolio Image Loading** — Resolved regression in `toUrl` in `v2.9.0-WIP` by restoring the stable logic from `v2.7.0`.
+- [x] **Standardized Global API Scoping** — Renamed `window.portfolioAPI` to `window.eventPortfolioAPI` to prevent collision and exposed explicit global handlers.
+- [x] **Deployed WIP Markers across Widget Ecosystem** — Standardized `-WIP` version suffix (e.g., `v2.9.0-WIP`, `v4.9.2-WIP`) across 10 widgets to mark active development phase.
+- [x] **Updated Multi-Widget Changelogs** — Documented initial changes for upcoming resilience and performance updates in all affected widget `CHANGELOG.md` files.
+- [x] **Documented Session Learnings** — Captured technical insights on URL normalization, API namespacing, and operational workflow rules in `docs/development/WIDGET-OPTIMIZATION-LEARNINGS.md`.
+
 ### Technical Debt & Code Annotations (Dec 27, 2025)
 
 - [x] **Cleaned up duplicate API submodule structure** — Removed confusing nested `src/api/src/api/` directory in the API submodule, consolidating to single `routes/` at submodule root

@@ -117,3 +117,37 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.15 },
 );
 ```
+
+---
+
+## 5. Event Branding & Resilience (Dec 27, 2025)
+
+**Context:** Bugfix for `event-portfolio` (v2.9.0-WIP) and cross-widget versioning.
+
+### URL Normalization Regression
+
+We encountered a regression in the `toUrl` function during the monochrome-to-themed transition.
+
+- **The Issue**: The logic for prepending `src/` to image paths became inconsistent, causing images to break when they were already correctly prefixed or when they relied on specific RAW URL structures.
+- **The Fix**: Reverted to the stable `toUrl` implementation from v2.7.0 which uses 3 clear layers:
+  1.  Direct pass-through for absolute/data URLs.
+  2.  Prefix detection for `src/images/Portfolios/Events/` (canonical).
+  3.  Fallback detection for `images/Portfolios/Events/` (Squarespace legacy) which prepends `src/`.
+- **Lesson**: Image path normalization is high-risk. Always test with a "Reference Version" (like v2.7.0) when refactoring data handling.
+
+### Global API Naming & Scoping
+
+To avoid collisions when multiple widgets occupy the same global scope (e.g., inside a complex CMS page), we moved away from generic naming.
+
+- **Change**: `window.portfolioAPI` -> `window.eventPortfolioAPI`.
+- **Mapping**: Exposed explicit global handlers (`window.refreshData = () => window.eventPortfolioAPI.refreshData()`) to satisfy legacy `onclick` attributes in HTML while keeping the internal API safely namespaced.
+- **Lesson**: Always namespace widget APIs specifically (e.g., `eventPortfolioAPI`, `concertPortfolioAPI`) to prevent "The Last Widget Wins" bugs in global scope.
+
+### Workflow Lessons 🛑
+
+- **Operational Rule**: **Work on ONE widget at a time.**
+- **Rationale**: Batching "minor" changes (like WIP version updates) across 10 widgets simultaneously creates massive diffs, complicates debugging, and increases the surface area for errors.
+- **Standard**: Each session should have a distinct focus (e.g., "Fix Event Portfolio", "Enhance Blog CSS"). Avoid "Global Refactors" unless explicitly requested.
+- **Version Markers**: Use `-WIP` (e.g., `v2.9.0-WIP`) during the active development phase to distinguish between "under construction" code and "production stable" releases. This prevents accidental rollouts of half-finished features.
+
+---
