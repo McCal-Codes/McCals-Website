@@ -140,6 +140,7 @@ Performance Regression CI:
 
 Quick Reference: `docs/standards/widget-reference.md`
 Architecture & Patterns: `docs/standards/widget-standards.md`
+Code Annotations: `docs/standards/code-annotations.md` — **TODO, FIXME, BUG, SECURITY, and other annotation keywords**
 Enhancements: `docs/standards/widget-enhancements.md`
 Performance: `docs/standards/performance-standards.md`
 SEO Starter: `docs/standards/seo-starter-guide.md`

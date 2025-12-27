@@ -8,6 +8,12 @@ This file tracks all completed tasks that have been removed from the active `tod
 
 ## ✅ December 2025 Completions
 
+### Technical Debt & Code Annotations (Dec 27, 2025)
+
+- [x] **Cleaned up duplicate API submodule structure** — Removed confusing nested `src/api/src/api/` directory in the API submodule, consolidating to single `routes/` at submodule root
+- [x] **Created Code Annotations Standard** — New `docs/standards/code-annotations.md` documenting TODO, FIXME, BUG, SECURITY, HACK, NOTE, A11Y, DEBUG, WIP, and other annotation keywords with examples, search commands, and AI agent guidelines
+- [x] **Enhanced security comments** — Improved plaintext password warning in `src/api/routes/blog.js` with actionable migration steps and SECURITY tag
+
 ### Shared Widget Stylesheet Pipeline (Dec 10, 2025)
 
 - [x] Created automatic pipeline to inline `site-widgets.css` into every widget version via `npm run site-widgets:build` (dry-run + no-inline flags supported)
