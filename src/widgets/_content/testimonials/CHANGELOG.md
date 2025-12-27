@@ -2,9 +2,18 @@
 
 All notable changes to the Testimonials Widget will be documented in this file.
 
+## [1.1.0-WIP] - 2025-12-27
+
+### Resilience & UI 🧱
+
+- **NEW**: Version indicator integrated into header
+- **ENHANCED**: Improved star rating rendering for partial stars
+- **UPDATED**: Branding and version tags
+
 ## [1.0.0] - 2025-11-19
 
 ### Added
+
 - Initial release of Testimonials Widget
 - Star rating display (1-5 stars)
 - Client testimonial cards with photos
@@ -26,6 +35,7 @@ All notable changes to the Testimonials Widget will be documented in this file.
 - Self-contained architecture (no external dependencies)
 
 ### Features
+
 - 12 sample testimonials included
 - Avatar integration (pravatar.cc)
 - Quote styling with decorative quotation marks
@@ -34,6 +44,7 @@ All notable changes to the Testimonials Widget will be documented in this file.
 - Card elevation on hover
 
 ### Performance
+
 - Inline CSS and JavaScript
 - No external dependencies
 - ~8KB total size
@@ -41,6 +52,7 @@ All notable changes to the Testimonials Widget will be documented in this file.
 - Optimized for Lighthouse 100/100
 
 ### Browser Support
+
 - Chrome/Edge 90+
 - Firefox 88+
 - Safari 14+
@@ -50,6 +62,7 @@ All notable changes to the Testimonials Widget will be documented in this file.
 ## Future Enhancements
 
 ### Planned Features
+
 - [ ] JSON data source support for external testimonial data
 - [ ] Google Reviews API integration
 - [ ] Filter testimonials by project type
@@ -60,6 +73,7 @@ All notable changes to the Testimonials Widget will be documented in this file.
 - [ ] Export/import testimonial data
 
 ### Ideas
+
 - [ ] Testimonial carousel/slider view
 - [ ] Dark mode support
 - [ ] Animated entrance effects

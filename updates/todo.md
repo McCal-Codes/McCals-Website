@@ -1,6 +1,6 @@
 # Active To-Do List
 
-_Updated: December 27, 2025_
+Last Updated: December 27, 2025
 
 **Quick Reference:**
 
@@ -10,168 +10,112 @@ _Updated: December 27, 2025_
 
 ---
 
-## 🎯 High Priority (Active Work)
+## 🚀 Active Sprints (The "Now")
 
-### Authentication & Token Setup ✅ COMPLETE
+### ☁️ Infrastructure & Deployment
 
-### Cloudflare Worker Deployment (Next Priority)
+- [ ] **Cloudflare Worker Production Deploy**
+  - [ ] Deploy Worker to production with proper environment variables (use AUTH-SETUP-GUIDE.md)
+  - [ ] Create KV namespaces (MCCAL_KV, MCCAL_KV_PREVIEW)
+  - [ ] Configure manifests/blog widget to point at production Worker URL
+  - [ ] Test end-to-end flows: manifest webhook, blog auth/posts, rate limiting, cache stats
+- [ ] **Next.js Self-Hosted Site Migration**
+  - [ ] Create structure under `sites/dev.mcc-cal.com/`
+  - [ ] Add Layout, Nav, and Footer components with "Self-Hosted" branding
+  - [ ] Implement ConcertWidget (manifest typing, fetch, gallery, lightbox, CSS module)
+  - [ ] Add stubs for FeaturedWidget, EventWidget, JournalismWidget
+  - [ ] Add manifest loader utility and manifest types
+  - [ ] Add minimal pages for all routes & CSS modules for visual parity
+- [ ] **Domain & DNS Setup**
+  - [ ] Set up dev.mcc-cal.com subdomain (CNAME/Tunnel)
+  - [ ] Configure SSL/TLS and test CORS/API integration
 
-- [ ] TODO: Deploy Cloudflare Worker to production with proper environment variables (use AUTH-SETUP-GUIDE.md)
-- [ ] TODO: Create KV namespaces in Cloudflare dashboard (MCCAL_KV for production, MCCAL_KV_PREVIEW for staging)
-- [ ] TODO: Configure local/CI environments to point manifest generators and blog widget at deployed Worker URL
-- [ ] TODO: Test end-to-end flows: manifest webhook, blog auth/posts, rate limiting, cache stats
-- [ ] TODO: Monitor Worker analytics and optimize cache TTLs/rate limits based on actual traffic patterns
-
-_Update (Dec 12, 2025):_ Small maintenance performed — merge conflict in `nature-manifest.json` resolved, watcher script lint warnings fixed, and the API submodule's deploy workflow updated to skip deploy when Cloudflare secrets are missing and to print `wrangler.toml` for debugging. The deploy will still require adding the following secrets to the repository before it performs an actual `wrangler deploy`:
-
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
-- (optional) `CLOUDFLARE_WEBHOOK_SECRET` — used by CDN publish workflow to trigger cache refreshes
-
-Next action: add the secrets to GitHub Actions secrets and re-run the "Deploy Cloudflare Worker" workflow or push a fresh commit to retrigger.
-
-### Next.js Self-Hosted Site Migration
-
-- [ ] TODO: Create Next.js self-hosted site structure under sites/dev.mcc-cal.com/
-- [ ] TODO: Add Layout, Nav, and Footer components with "Self-Hosted" branding
-- [ ] TODO: Implement ConcertWidget (manifest typing, fetch, gallery, lightbox, CSS module)
-- [ ] TODO: Add stubs for FeaturedWidget, EventWidget, JournalismWidget
-- [ ] TODO: Add manifest loader utility and manifest types
-- [ ] TODO: Add minimal pages for all routes
-- [ ] TODO: Add CSS modules for visual parity
-- [ ] TODO: Document all TODOs in updates/todo.md for traceability
-
----
-
-## 🔧 Infrastructure & Maintenance
-
-### Domain Updates
-
-- [ ] TODO: Set up dev.mcc-cal.com subdomain for development environment:
-  - Add DNS CNAME record pointing to development server (or use Cloudflare Tunnel for local dev)
-  - Configure SSL/TLS certificate for dev subdomain
-  - Test CORS and API integration with dev subdomain
-  - Update documentation with dev subdomain usage instructions
-
-### Scripts Organization
-
-### CI/CD Improvements
-
-- [ ] Concert manifest workflow secret lint warnings — evaluate if GitHub Actions runtime succeeds despite local YAML linter warnings
-- [ ] Reduce remaining secret lint warnings — evaluate creating reusable \`workflow_call\` webhook dispatcher
-
-### Widget Standards
-
-- [ ] TODO: Confirm planned changes align with standards before editing remaining widgets
-- [ ] TODO: Add automated widget validation (small unit/integration tests) and wire into CI
-- [ ] TODO: Update copilot instructions, CHANGELOG.md, and docs when making structural changes
-
----
-
-## 🎨 Widget Development
-
-### Video Portfolio Widget (In Progress)
+### 🎥 Feature Tracks: Video Portfolio (v0.2.x)
 
 - [ ] TODO: Add transcripts & captions panel (WebVTT ingest + transcript export) — Phase 2
 - [ ] TODO: Implement manifest generator and aggregated video-manifest.json
 - [ ] TODO: Add adaptive bitrate streaming (HLS/DASH) with quality selector + fallback to MP4
 - [ ] TODO: Add debug panel metrics and performance logging
-- [ ] TODO: Integrate axe-core accessibility audit into CI for video widget
+
+---
+
+## 🛠️ Widget Enhancement Roadmap (vNext)
+
+Phased improvements for the existing widget ecosystem.
+
+### Phase 1: Foundation & Reliability
+
+- [ ] **Global Debug Mode**: Implement `data-debug` in `portfolio-api.js` v2 adapter
+- [ ] **Navigation Refinement**: Add Passive Scroll Listeners and Safe Area Insets to `site-navigation`
+- [ ] **Empty State Resilience**: Add UI handling in `concert-portfolio` and `photojournalism-portfolio`
+- [ ] **Blog Performance**: Add Search Debouncing (300ms) to `blog-feed`
+- [ ] **Podcast Reliability**: Implement CORS Proxy Fallback Chain for `podcast-feed`
+- [ ] **Admin Observability**: Add GitHub API Rate Limit Detection to `admin-dashboard`
+- [ ] **Event Portfolio Polish**: Auto-detect latest widget version & URL normalization fix
+- [ ] **Content Widget Polish**:
+  - [ ] Add spam honeypot to `contact-form`
+  - [ ] Implement dynamic logo track for `client-carousel`
+  - [ ] Add star-rating schema to `testimonials`
+
+### Phase 2: Performance & Scale
+
+- [ ] **Persistent Cache**: Implement IndexedDB Caching in `portfolio-api.js`
+- [ ] **Image Optimization**: Add Thumbnail Precomputation logic to concert manifest generator
+- [ ] **Video Deferral**: Implement Script Deferral (lazy load YT/Vimeo SDKs)
+- [ ] **Virtual Scrolling**: Add opt-in for `blog-feed` (data-virtual-scroll)
+- [ ] **Live Roadmap**: Integrate real-time GitHub Commit Sync (replacing hardcoded stats)
+- [ ] **WebP Consolidation**: Implement manifest-side duplicate pairing with sources array
+
+### Phase 3: Advanced Configurability
+
+- [ ] **Modular About Page**: Add Component Toggle Flags (data-show-\*) to `complete-about-page`
+- [ ] **Card Templating**: Implement Custom Card Template Slot in `blog-feed`
+- [ ] **Fresh Views**: Add Shuffle on Load capability to all standard portfolios
+- [ ] **Concert Experience**: Additional Spotify artist integrations and interactive embeds
+
+---
+
+## 🔧 Engineering Standards & Quality
+
+### CI/CD & Automation
+
+- [ ] Evaluate GitHub Actions secret lint warnings (reusable `workflow_call` dispatcher)
+- [ ] TODO: Add automated widget validation (small unit/integration tests) and wire into CI
 - [ ] TODO: Add CI rule enforcing ≤2 active versions
 - [ ] TODO: Add structured data validator & Lighthouse automation snapshot
 
-### New Widget Ideas
+### Performance, SEO & A11y
 
-- [ ] TODO: Develop Testimonials/Reviews widget with star ratings and client quotes
-- [ ] TODO: Create Contact Form widget with validation and spam protection
-- [ ] TODO: Build Newsletter Signup widget with Mailchimp/ConvertKit integration
-- [ ] TODO: Design Services/Portfolio showcase widget for different work categories
-- [ ] TODO: Implement Blog Post preview widget with RSS feed integration
-- [ ] TODO: Create Social Media feed aggregator widget
-- [ ] TODO: Develop Event calendar/scheduling widget with Google Calendar integration
-- [ ] TODO: Build Interactive FAQ accordion widget
-
-### Existing Widget Enhancements
-
-- [ ] Concert Portfolio additional Spotify/embed features (follow-up enhancement)
-
----
-
-## 🚀 Performance & SEO
-
-### Performance Optimization
-
-- [ ] TODO: Implement comprehensive SEO standards across all widgets (partially implemented)
-- [ ] TODO: Audit and optimize Lighthouse performance metrics (FCP/LCP/TBT) for all portfolio widgets
-- [ ] TODO: Add responsive image optimization (WebP/AVIF formats, lazy loading) to remaining widgets
+- [ ] TODO: Audit and optimize Lighthouse metrics (FCP/LCP/TBT) for all portfolio widgets
 - [ ] TODO: Implement aggressive caching strategies for widget-delivered assets
-- [ ] TODO: Add performance monitoring dashboard widget for real-time metrics tracking
-
-### Accessibility
-
 - [ ] TODO: Add accessibility improvements: ARIA labels, keyboard navigation, screen reader support
+- [ ] TODO: Integrate axe-core accessibility audit into CI for widgets
 
 ---
 
-## 📊 Event Portfolio Optimizations
+## 📚 Documentation & Maintenance
 
-- [ ] TODO: Event Portfolio manifest dynamic versioning - auto-detect latest widget version
-- [ ] TODO: Event Portfolio URL normalization - verify encoding logic for spaces & special characters
-- [ ] TODO: Consolidate webp preference - implement manifest-side duplicate pairing with sources array
-
----
-
-## 📝 Documentation
-
-### Follow-up Documentation TODOs
-
-- [ ] Add schema diff & performance snapshot automation (Lighthouse + JSON-LD validation)
-
-### Repository Improvements
-
-- [ ] TODO: Continue phased repository improvement plan (see docs/repo-improvement-plan.md)
-
----
-
-## 🔮 Advanced Features & Integrations
-
-- [ ] TODO: Integrate AI-powered image alt-text generation for accessibility
-- [ ] TODO: Add real-time analytics and user interaction tracking
-- [ ] TODO: Create admin dashboard for content management and widget configuration
-- [ ] TODO: Add A/B testing framework for widget variations
-- [ ] TODO: Implement advanced filtering and search capabilities for portfolio widgets
-- [ ] TODO: Create widget customization API for client-specific branding
-- [ ] TODO: Add automated backup and recovery system for widget configurations
-
----
-
-## �� VS Code AI Features (Action Items)
-
-**Quick wins:**
-
-- [ ] TODO: Turn on tool approvals (Settings → AI Tools → Approvals)
-
-**Optional explorations:**
-
-- Explore Agent Sessions dashboard (View → Agent Sessions)
-- Try Planning Agent (\`@planner\` in Copilot Chat)
-- Test terminal IntelliSense
-- Use branch/tag comparisons in Source Control
-
----
-
-## 📚 Additional Maintenance
-
-- [ ] TODO: Update ai-instructions-preflight.js to reflect completed enhancements
+- [ ] TODO: Update copilot instructions, CHANGELOG.md, and docs when making structural changes
 - [ ] TODO: Consolidate and update all widget README files with current versions and features
-- [ ] TODO: Create comprehensive widget testing suite with automated validation and wire to CI
-- [ ] TODO: Implement version control system / release process for widget deployments to Squarespace
-- [ ] TODO: Add automated performance regression testing for all widgets
-- [ ] TODO: Create widget documentation site or comprehensive guide
-- [ ] TODO: Implement dark mode support across all widgets
-- [ ] TODO: Add internationalization (i18n) support for multi-language sites
+- [ ] TODO: Create comprehensive widget testing suite / documentation site
+- [ ] TODO: Continue phased repository improvement plan (docs/repo-improvement-plan.md)
+- [ ] TODO: Add schema diff & performance snapshot automation
 
 ---
 
-_Last updated: 2025-12-27_
-_For completed tasks, see [completed.md](./completed.md)_
+## 🔮 Backlog & Future Ideation
+
+### New Widget Concepts
+
+- [ ] Services/Portfolio showcase (categorized work)
+- [ ] Social Media Feed aggregator
+- [ ] Event Calendar / Scheduling (Google Calendar integration)
+- [ ] Interactive FAQ accordion widget
+
+### Advanced Features
+
+- [ ] AI-powered image alt-text generation
+- [ ] Real-time analytics and user interaction tracking
+- [ ] A/B testing framework for widget variations
+- [ ] Widget customization API for client-specific branding
+- [ ] Dashboards: Centralized performance monitoring widget

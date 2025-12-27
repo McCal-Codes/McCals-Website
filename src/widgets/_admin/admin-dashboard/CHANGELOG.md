@@ -7,11 +7,13 @@ All notable changes to the Admin Dashboard Widget are documented here.
 This widget follows **Semantic Versioning 2.0.0** format: `MAJOR.MINOR.PATCH`
 
 All versions are self-contained HTML files located in `versions/` directory:
+
 - `v1.3.0-admin-dashboard.html` (current)
 - `v1.2.0-admin-dashboard.html` (previous)
 - `v1.0.0-admin-dashboard.html` (original)
 
 **⚠️ IMPORTANT VERSIONING RULES:**
+
 - **Never edit existing version files** (v1.2.0, v1.1.0, etc.)
 - **Always create a new version file** when making changes (v1.4.0, v1.5.0, etc.)
 - **Update README.md** to reflect current version and new features
@@ -20,9 +22,32 @@ All versions are self-contained HTML files located in `versions/` directory:
 
 ---
 
+## [1.5.0-WIP] - 2025-12-27
+
+### Added
+
+- GitHub API Rate Limit Detection (Remaining vs Total)
+- Reset time tracking for GitHub quota monitoring
+- Enhanced changelog viewer integrated into header
+- "WIP" markers for ongoing development versions
+
+### Changed
+
+- Improved manifest loading status with detailed source tracking
+- Consistent branding with other v2.9+ widgets
+
+## [1.4.0] - 2025-12-10
+
+### Added
+
+- Portfolio Widget Styling parity (monochrome/glassmorphism)
+- Detailed image count metrics in status grid
+- Render time tracking for manifest-heavy operations
+
 ## [1.3.0] - 2025-12-06
 
 ### Added
+
 - Dark theme with system-ui font stack matching portfolio widgets (concert, journalism)
 - Glass-like cards with `backdrop-filter: blur(6px)` and subtle borders
 - CSS variables for theme support (dark/light mode with `prefers-color-scheme`)
@@ -32,6 +57,7 @@ All versions are self-contained HTML files located in `versions/` directory:
 - Improved documentation with mandatory changelog/version rules
 
 ### Changed
+
 - Refactored CSS architecture from light theme to dark theme
 - Updated card styling with glassmorphism effects
 - Enhanced hover states with smooth transitions and subtle elevation changes
@@ -42,6 +68,7 @@ All versions are self-contained HTML files located in `versions/` directory:
 - All section transitions now use cubic-bezier timing functions
 
 ### Improved
+
 - Performance: v1.3.0 is **4KB smaller** than v1.2.0 (36KB vs 40KB)
 - CSS is more optimized with better selector specificity
 - Responsive design with mobile-first approach
@@ -49,12 +76,14 @@ All versions are self-contained HTML files located in `versions/` directory:
 - Enhanced interactive feedback patterns
 
 ### Technical
+
 - HTML validation: ✅ PASSED (all 81 widgets valid)
 - JavaScript: 52 functions/declarations, 9+ event handlers
 - CSS: 31 component classes, responsive breakpoints at 1200px, 768px, 480px
 - Accessibility: ARIA labels, semantic HTML, keyboard navigation support
 
 ### Browser Support
+
 - Chrome/Edge 88+
 - Firefox 87+
 - Safari 14+
@@ -65,6 +94,7 @@ All versions are self-contained HTML files located in `versions/` directory:
 ## [1.2.0] - 2025-12-06
 
 ### Added
+
 - Complete CSS reorganization with semantic sections and comprehensive comments
 - Enhanced header layout with better control organization
 - Version indicator badge with changelog modal trigger
@@ -72,6 +102,7 @@ All versions are self-contained HTML files located in `versions/` directory:
 - Cleaner expandable sections with toggle animations
 
 ### Changed
+
 - Improved visual hierarchy with gradient backgrounds
 - Updated status badges with color-coded backgrounds
 - Enhanced card styling with improved shadows
@@ -79,6 +110,7 @@ All versions are self-contained HTML files located in `versions/` directory:
 - Improved responsive design with mobile optimizations
 
 ### Technical
+
 - Total lines: 1098
 - File size: 40KB
 
@@ -87,6 +119,7 @@ All versions are self-contained HTML files located in `versions/` directory:
 ## [1.0.0] - 2025-12-06
 
 ### Added
+
 - Initial release of Admin Dashboard Widget
 - Core 6-card status grid:
   - 🔌 API Health monitoring
@@ -106,6 +139,7 @@ All versions are self-contained HTML files located in `versions/` directory:
 - Basic styling and responsive design
 
 ### Technical
+
 - Total lines: 1130
 - File size: 40KB
 - Self-contained HTML widget (no external dependencies)
@@ -123,7 +157,6 @@ Create a new version in the following cases:
    - Layout or spacing modifications
    - Hover state improvements
    - Typography changes
-   
 2. **Feature Additions** (minor version bump)
    - New dashboard cards or sections
    - New analytics panels
@@ -207,6 +240,7 @@ For each new version, ensure:
 ## Past Releases
 
 ### Notes
+
 - All versions are backward compatible
 - v1.0.0 remains available for legacy integrations
 - v1.2.0 available as intermediate stable version

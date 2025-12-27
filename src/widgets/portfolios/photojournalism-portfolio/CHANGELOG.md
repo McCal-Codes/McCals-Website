@@ -2,6 +2,13 @@
 
 All notable changes to this widget will be documented in this file.
 
+## v5.5.0-WIP (2025-12-27) — Resilience & UI 🧱
+
+- **ADDED**: Improved empty state UI for manifest failures and fetch errors
+- **ENHANCED**: Safe area inset enhancements for mobile notch support
+- **OPTIMIZED**: Passive scroll listener optimization
+- **UPDATED**: Version indicator and branding
+
 ## v5.4.0 (2025-12-15) — Enhanced Portfolio Features 🚀
 
 ### Portfolio Enhancements

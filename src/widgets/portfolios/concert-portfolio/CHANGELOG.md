@@ -2,6 +2,14 @@
 
 All notable changes to the Squarespace concert portfolio snippet.
 
+## v4.9.2-WIP — 2025-12-27
+
+### Resilience & UI 🧱
+
+- **ADDED**: Enhanced empty state UI for manifest failures
+- **ENHANCED**: Safe area insets (notch support) and passive scroll enhancements
+- **UPDATED**: Version indicator and branding
+
 ## v4.9.1 — 2025-12-15 (SEO Enhancement)
 
 ### SEO Improvements

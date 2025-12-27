@@ -1,6 +1,30 @@
 # Changelog - Event Portfolio
 
-## 2.6.5 — 2025-12-14
+## 2.9.0-WIP — 2025-12-27
+
+### Theming & Fixes 🎨
+
+- **NEW**: Manual Light/Dark theme toggle integration
+- **FIXED**: Standardized theme variables with `data-theme` attributes
+- **FIXED**: Improved consistency with contact form theme logic
+- **FIXED**: Regression in image loading logic (restored working v2.7.0 logic)
+
+## 2.8.0 — 2025-12-27
+
+### Resilience & Polish 🧱
+
+- **FIXED**: Improved URL normalization with segment-wise encoding (fixes spaces in filenames)
+- **ADDED**: Manifest version detection and mismatch logging (debug console)
+- **ENHANCED**: Error state UI with detailed logging fallback
+- **UPDATED**: Version indicators and branding throughout the widget
+
+## 2.7.0 — 2025-12-14
+
+### Monochrome Conversion 🏁
+
+- **NEW**: Full monochrome (black/white/grayscale) aesthetic overhaul
+- **CHANGED**: Replaced blue/color accents with sleek gradients and white UI elements
+- **FIXED**: Consistency in "Glassmorphism" styling across all interactive components
 
 ### Safety: Scoped Cache Clearing 🧹
 
