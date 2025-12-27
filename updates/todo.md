@@ -1,6 +1,6 @@
 # Active To-Do List
 
-_Updated: December 6, 2025_
+_Updated: December 27, 2025_
 
 **Quick Reference:**
 
@@ -93,8 +93,7 @@ Next action: add the secrets to GitHub Actions secrets and re-run the "Deploy Cl
 
 ### Existing Widget Enhancements
 
-- [ ] TODO: Concert Portfolio additional Spotify/embed features (follow-up enhancement)
-- [x] TODO: Add site-wide shared CSS at src/widgets/\_shared/site-widgets.css — Completed 2025-12-10 (site-widgets pipeline + inline markers via `npm run site-widgets:build`)
+- [ ] Concert Portfolio additional Spotify/embed features (follow-up enhancement)
 
 ---
 
@@ -174,5 +173,5 @@ Next action: add the secrets to GitHub Actions secrets and re-run the "Deploy Cl
 
 ---
 
-_Last updated: 2025-12-06_
+_Last updated: 2025-12-27_
 _For completed tasks, see [completed.md](./completed.md)_

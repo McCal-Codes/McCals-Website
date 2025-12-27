@@ -222,6 +222,7 @@ Good starting references
 - `docs/standards/widget-development.md` — comprehensive guide for applying enhancement patterns systematically.
 - `docs/standards/performance-standards.md` ⭐ **PERFORMANCE REFERENCE**: Lighthouse optimization standards using Concert Portfolio v4.6 as case study.
 - `docs/standards/accessibility-patterns.md` ⭐ **ACCESSIBILITY REFERENCE**: WCAG 2.1 AA compliance patterns with code examples for skip navigation, focus management, keyboard controls, mobile drawers, scroll spy, ARIA, reduced motion, and color contrast. Reference implementation: Accessibility Statement Widget v1.0.
+- `docs/standards/code-annotations.md` ⭐ **CODE ANNOTATIONS**: Standard keywords for TODO, FIXME, BUG, SECURITY, HACK, NOTE, A11Y, DEBUG, WIP, etc. Use these annotations consistently when writing code.
 - `docs/standards/image-seo-standards.md` — comprehensive guide for optimizing portfolio images for search engines and accessibility.
 
 Change management
