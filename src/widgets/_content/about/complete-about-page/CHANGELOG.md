@@ -1,5 +1,17 @@
 # Complete About Page Widget Changelog
 
+## Version 2.0.0 - 2026 Freelance & Events Revamp (2025-12-30)
+
+### 🚀 Major Strategic Shift
+
+- **Caleb McCartney First**: Pivoted the narrative to focus on Caleb as a premier freelancer, with McCal Media serving as a supporting figurehead.
+- **Niche Focus**: Re-optimized content for **Concert**, **Corporate**, and **Event Photography** while maintaining **Photojournalism** roots.
+- **Refined Branding**: Standardized all URLs to `mcc-cal.com` and modernized contact info to `contact@mcc-cal.com`.
+- **Modernized Bio**: Streamlined biography to remove outdated internship mentions and project Caleb as an established professional in 2026.
+- **Leading Brands Expansion**: Added 7 new prominent clients to the carousel: **OSH360**, **IUP**, **WVU**, **Roxian Theatre**, **Pittsburgh Plays**, **Covalent**, and **OSU**.
+- **Visual Excellence**: Implemented **Bio Photo Depth** with a pulsating ambient aura and upgraded the carousel to **True Glassmorphism 2.0** with elastic micro-interactions.
+- **SEO & Schema.org**: Complete overhaul of JSON-LD data to prioritize freelance keywords and services.
+
 ## Version 1.6.0 - Phase 2 Visual Polish (2025-12-15)
 
 ### 🎨 Phase 2 Enhancements
@@ -179,19 +191,19 @@
 
 ## Migration Notes
 
-### From Legacy Location:
+### From Legacy Location
 
 - Old path: `src/widgets/about-widgets/complete-about-squarespace.html`
 - New path: `src/widgets/about/complete-about-page/complete-about-squarespace.html`
 - Legacy files archived in: `src/widgets/_archived/about-widgets-legacy/`
 
-### Deployment Impact:
+### Deployment Impact
 
 - No changes to widget functionality or Squarespace integration
 - Same HTML content, just organized in cleaner file structure
 - All asset URLs and functionality preserved
 
-### Future Development:
+### Future Development
 
 - Complete about page widget separate from client carousel widget
 - Each widget maintains its own versions and documentation
