@@ -1,4 +1,27 @@
-# 2025-12-08
+# Changelog
+
+## 2025-12-30
+
+### Quote Request Widget v1.0.0
+
+- Created a conversion-focused "Request a Quote" form for McCal Media.
+- **Features**:
+  - Comprehensive service-based fields (Event, Headshots, Brand, editorial).
+  - Conditional logic for event-specific details (times, attendance).
+  - Detailed licensing & usage section for commercial pricing.
+  - Integrated EmailJS handling (consistent with contact-form).
+  - Anti-spam honeypot and monochrome responsive UI.
+  - Built-in versioning and changelog modal.
+- **Files**: `src/widgets/_content/quote-request/`
+
+### About Widget v2.1.0
+
+- Added a floating "Request a Quote" CTA button with a high-contrast monochrome design.
+- Redirects users directly to the new quote request page for better conversion.
+- Updated versioning and internal changelog.
+- **Files**: `src/widgets/_content/about/complete-about-page/versions/v2.1.0-about-quote-cta.html`
+
+## 2025-12-08
 
 ### Manifest Proxy & Shared Date Parsing Symlink
 
