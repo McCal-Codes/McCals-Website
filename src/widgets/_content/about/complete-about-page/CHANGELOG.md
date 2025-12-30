@@ -1,5 +1,13 @@
 # Complete About Page Widget Changelog
 
+## Version 2.1.0 - Conversion Focus (2025-12-30)
+
+### 📈 Conversion Enhancements
+
+- **Floating Quote CTA**: Added a persistent, high-contrast monochrome "Request a Quote" button that follows the user as they scroll.
+- **Improved User Flow**: Direct link to `/request-a-quote` to capture interest immediately after social proof sections.
+- **Glassmorphism Polish**: Styled with a minimal white background and subtle shadows to pop against the dark mode theme.
+
 ## Version 2.0.0 - 2026 Freelance & Events Revamp (2025-12-30)
 
 ### 🚀 Major Strategic Shift
