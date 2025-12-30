@@ -1228,7 +1228,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   .ss-reveal-delay-3 {
     transition-delay: 0.3s;
   }
-  /* Floating Quote Button v2.1.0 — Glassmorphism 2.0 */
+  /* Floating Quote Button v2.2.0 — Enhanced Glassmorphism */
   .mcc-floating-quote-btn {
     position: fixed;
     bottom: 45px;
@@ -1251,8 +1251,47 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     box-shadow:
       0 12px 40px rgba(0, 0, 0, 0.5),
       inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.5s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
     overflow: hidden;
+
+    /* Initially hidden for entrance animation */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  /* Entrance State */
+  .mcc-floating-quote-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Pulse Animation */
+  @keyframes mcc-cta-pulse {
+    0% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 0.1);
+    }
+    70% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 15px rgba(255, 255, 255, 0);
+    }
+    100% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+
+  .mcc-floating-quote-btn.pulse {
+    animation: mcc-cta-pulse 2s infinite;
   }
 
   .mcc-floating-quote-btn::before {
@@ -1268,12 +1307,13 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   }
 
   .mcc-floating-quote-btn:hover {
-    transform: translateY(-6px) scale(1.03);
+    transform: translateY(-6px) scale(1.05) !important;
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow:
       0 15px 45px rgba(0, 0, 0, 0.6),
       0 0 20px rgba(255, 255, 255, 0.1);
+    animation: none; /* Stop pulsing on hover */
   }
 
   .mcc-floating-quote-btn:hover::before {
@@ -1684,13 +1724,26 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 <a href="/request-a-quote" class="mcc-floating-quote-btn"> <span>✨</span> Request a Quote </a>
 
 <!-- Version Indicator -->
-<div class="ss-version-indicator" onclick="toggleChangelog()">v2.1.0</div>
+<div class="ss-version-indicator" onclick="toggleChangelog()">v2.2.0</div>
 
 <!-- Changelog Panel -->
 <div class="ss-changelog-panel" id="ss-changelog-panel">
   <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
   <div class="ss-changelog-header">About Widget Changelog</div>
   <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v2.2.0 — Interactive CTA & Polish</div>
+    <div class="ss-changelog-feature">
+      • Entrance Logic: Floating button now waits for the user to scroll past the hero before
+      revealing itself.
+    </div>
+    <div class="ss-changelog-feature">
+      • Micro-Interactions: Added a subtle pulse animation and smoother 3D entrance.
+    </div>
+    <div class="ss-changelog-feature">
+      • Collision Detection: Button automatically hides when nearing the footer to prevent visual
+      overlap.
+    </div>
+
     <div class="ss-changelog-version">v2.1.0 — Conversion Focus</div>
     <div class="ss-changelog-feature">
       • Conversion CTA: Added high-contrast floating "Request a Quote" button for easier project
@@ -2569,6 +2622,54 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       );
       sections.forEach((sec) => sec.classList.add('active'));
     }
+  })();
+
+  // Floating CTA Interactive Logic
+  (function () {
+    const cta = document.querySelector('.mcc-floating-quote-btn');
+    if (!cta) return;
+
+    let pulseTimer = null;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 1. Entrance Logic: Show after 400px scroll
+      if (scrollY > 400) {
+        cta.classList.add('visible');
+      } else {
+        cta.classList.remove('visible');
+      }
+
+      // 2. Pulse Logic: Start pulsing after being visible for 2 seconds
+      if (cta.classList.contains('visible') && !cta.classList.contains('pulse')) {
+        if (!pulseTimer) {
+          pulseTimer = setTimeout(() => {
+            cta.classList.add('pulse');
+          }, 2000);
+        }
+      } else if (!cta.classList.contains('visible')) {
+        clearTimeout(pulseTimer);
+        pulseTimer = null;
+        cta.classList.remove('pulse');
+      }
+
+      // 3. Collision Logic: Hide if within 200px of footer
+      const buffer = 200;
+      if (scrollY + windowHeight > documentHeight - buffer) {
+        cta.style.opacity = '0';
+        cta.style.pointerEvents = 'none';
+      } else if (cta.classList.contains('visible')) {
+        cta.style.opacity = '1';
+        cta.style.pointerEvents = 'auto';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
   })();
 </script>
 
