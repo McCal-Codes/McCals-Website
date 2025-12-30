@@ -2,6 +2,13 @@
 
 ## 2025-12-30
 
+### Quote Request Widget v1.1.0
+
+- Upgraded to a multi-step slide transition architecture (3 steps: Contact, Details, Budget).
+- Added canvas-confetti celebration upon successful submission.
+- Implemented `localStorage` draft persistence to prevent data loss.
+- **Files**: `src/widgets/_content/quote-request/versions/v1.1.0-quote-multistep.html`
+
 ### Quote Request Widget v1.0.0
 
 - Created a conversion-focused "Request a Quote" form for McCal Media.
@@ -13,6 +20,13 @@
   - Anti-spam honeypot and monochrome responsive UI.
   - Built-in versioning and changelog modal.
 - **Files**: `src/widgets/_content/quote-request/`
+
+### About Widget v2.2.0
+
+- Added scroll-triggered entrance logic (reveals after 400px scroll).
+- Implemented periodic pulse micro-interaction for the CTA button.
+- Added collision detection to hide the CTA when nearing the footer.
+- **Files**: `src/widgets/_content/about/complete-about-page/versions/v2.2.0-about-enhanced-cta.html`
 
 ### About Widget v2.1.0
 
@@ -52,7 +66,7 @@
 - `versions:rename`: Run file renaming
 - `versions:rename-check`: Preview file renames (dry-run)
 
-### 2025-11-24
+## 2025-11-24
 
 ### SEO Automation & Workflow Enhancements
 
@@ -114,7 +128,7 @@
 - Documentation updated in scripts/manifest/README.md to reflect multi-animal support and workflow.
 - Fully tested: Adding new animal types/species auto-populates manifests and tags correctly.
 
-# 2025-10-09
+## 2025-10-09 - Image Compressor
 
 ### Image Compressor App v1.6.0
 
@@ -129,16 +143,14 @@
   - User settings (format, quality, last used folder, etc.) are persisted and reloaded automatically.
 - All changes follow widget and workspace standards for seamless integration and reliability.
 
-## 2025-10-09
+## 2025-10-09 - Admin Dashboard
 
 - Added npm script `welcome` to run the dashboard (`node scripts/admin/welcome.js`, with a wrapper left at `scripts/welcome.js`).
 - Enhanced TODO auto-checker: now supports keyword and file-diff based heuristics for marking checklist items as done (see `scripts/admin/welcome.js`).
 - Documented the new system in `docs/standards/widget-standards.md` and main `README.md`.
 - Added pinning tip to `updates/welcome.md` for persistent dashboard visibility in VS Code.
 
-# Changelog
-
-## 2025-11-23
+## 2025-11-23 - Version Standardization
 
 ### Version Standardization (x.x.0 Format)
 
@@ -231,7 +243,7 @@
 - Documentation: Added widget README with usage and stretch goals (podcast clips, map overlay, journal timeline).
 - Next: Add build automation & page-level SEO meta integration if promoted beyond widget embed.
 
-## 2025-10-09
+## 2025-10-09 - Journalism Portfolio
 
 ### Journalism Portfolio Widget v5.1 (Work in Progress)
 
