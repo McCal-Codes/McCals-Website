@@ -9,6 +9,7 @@
 ### ⚡ Instant Widget Updates
 
 Edit a widget file and **immediately see your changes** on the dev site without:
+
 - ❌ Rebuilding the project
 - ❌ Committing to Git
 - ❌ Pushing to GitHub
@@ -39,6 +40,7 @@ npm run dev
 ## Files Changed
 
 ### New Files Created
+
 - ✅ `sites/dev.mcc-cal.com/pages/api/widgets/[...slug].ts` - API endpoint
 - ✅ `sites/dev.mcc-cal.com/utils/widgetHotReload.ts` - Reload utilities
 - ✅ `sites/dev.mcc-cal.com/components/widgets/WidgetReloader.tsx` - Optional UI
@@ -47,6 +49,7 @@ npm run dev
 - ✅ `sites/dev.mcc-cal.com/WIDGET-HOT-RELOAD-QUICK-START.md` - Quick reference
 
 ### Files Updated
+
 - ✅ `sites/dev.mcc-cal.com/components/widgets/WidgetEmbed.tsx` - Dev/prod routing
 - ✅ `sites/dev.mcc-cal.com/pages/journalism.tsx` - Added WidgetReloader
 - ✅ `sites/dev.mcc-cal.com/pages/concerts.tsx` - Added WidgetReloader
@@ -55,13 +58,17 @@ npm run dev
 ## How It Works
 
 ### Development Mode (localhost)
+
 Widgets load from local filesystem via API:
+
 - Request: `GET /api/widgets/concert-portfolio/v4.7.1-api-optional.html`
 - Response: Live HTML from `src/widgets/concert-portfolio/versions/v4.7.1-api-optional.html`
 - Caching: **Disabled** (picks up changes immediately)
 
 ### Production Mode (deployed)
+
 Widgets load from GitHub (unchanged behavior):
+
 - Request: `GET https://raw.githubusercontent.com/McCal-Codes/.../v4.7.1-api-optional.html`
 - Response: Production-frozen HTML
 - Caching: **Enabled** (stable versions)
@@ -72,7 +79,7 @@ Widgets load from GitHub (unchanged behavior):
 ✅ **Production unaffected** - Behavior completely unchanged  
 ✅ **No new dependencies** - Uses built-in Next.js APIs  
 ✅ **Backward compatible** - Falls back gracefully to GitHub  
-✅ **Optional UI** - WidgetReloader component is optional  
+✅ **Optional UI** - WidgetReloader component is optional
 
 ## Technical Stack
 
@@ -97,11 +104,12 @@ Technical details → **[WIDGET-HOT-RELOAD-IMPLEMENTATION.md](sites/dev.mcc-cal.
 ✅ Security validation passed  
 ✅ Development/production routing confirmed  
 ✅ Keyboard shortcuts functional  
-✅ UI component displays correctly  
+✅ UI component displays correctly
 
 ## Usage Examples
 
 ### Example 1: Edit Concert Widget
+
 ```
 1. Open http://localhost:3000/concerts
 2. Edit: src/widgets/concert-portfolio/versions/v4.7.1-api-optional.html
@@ -110,6 +118,7 @@ Technical details → **[WIDGET-HOT-RELOAD-IMPLEMENTATION.md](sites/dev.mcc-cal.
 ```
 
 ### Example 2: Edit Journalism Widget
+
 ```
 1. Open http://localhost:3000/journalism
 2. Edit: src/widgets/photojournalism-portfolio/versions/v5.2.0-performance-optimized.html
@@ -118,6 +127,7 @@ Technical details → **[WIDGET-HOT-RELOAD-IMPLEMENTATION.md](sites/dev.mcc-cal.
 ```
 
 ### Example 3: Edit Multiple Pages
+
 ```
 1. Open http://localhost:3000/concerts
 2. Edit concert widget, press Ctrl+Shift+W
@@ -129,34 +139,38 @@ Technical details → **[WIDGET-HOT-RELOAD-IMPLEMENTATION.md](sites/dev.mcc-cal.
 ## Benefits Summary
 
 ### For Developers
+
 ⚡ **Faster iteration** - No rebuild delays  
 🎯 **Focused workflow** - Edit → Press shortcut → See results  
 📱 **Multi-monitor friendly** - Keep dev site visible while editing  
-🐛 **Better debugging** - Instant visual feedback  
+🐛 **Better debugging** - Instant visual feedback
 
 ### For Production
+
 ✅ **Zero impact** - No changes to deployed behavior  
 🔒 **Secure** - Path validation prevents attacks  
 📦 **No dependencies** - No new packages or services  
-🚀 **Reliable** - Falls back to GitHub automatically  
+🚀 **Reliable** - Falls back to GitHub automatically
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Changes not appearing | Verify you're on `localhost:3000` |
-| "Widget not found" error | Check file path matches exactly |
-| Keyboard shortcut not working | Try clicking the reload button |
-| Port 3000 in use | Run with different port: `npm run dev -- -p 3001` |
+| Issue                         | Solution                                          |
+| ----------------------------- | ------------------------------------------------- |
+| Changes not appearing         | Verify you're on `localhost:3000`                 |
+| "Widget not found" error      | Check file path matches exactly                   |
+| Keyboard shortcut not working | Try clicking the reload button                    |
+| Port 3000 in use              | Run with different port: `npm run dev -- -p 3001` |
 
 ## Next Steps
 
 ### Now
+
 - ✅ Feature is ready to use
 - ✅ Start dev site: `npm run dev`
 - ✅ Begin editing widgets with instant feedback
 
 ### Optional Future Enhancements
+
 - [ ] File watcher integration for auto-reload
 - [ ] Widget validation before reload
 - [ ] Performance metrics display
@@ -176,9 +190,10 @@ Technical details → **[WIDGET-HOT-RELOAD-IMPLEMENTATION.md](sites/dev.mcc-cal.
 **Implement Date:** December 6, 2025  
 **Status:** Production Ready ✅  
 **Documentation:** Complete  
-**Testing:** Verified  
+**Testing:** Verified
 
 **Quick Access:**
+
 - Quick Start Guide: `sites/dev.mcc-cal.com/WIDGET-HOT-RELOAD-QUICK-START.md`
 - Full Guide: `sites/dev.mcc-cal.com/WIDGET-HOT-RELOAD-GUIDE.md`
 - Technical Details: `sites/dev.mcc-cal.com/WIDGET-HOT-RELOAD-IMPLEMENTATION.md`

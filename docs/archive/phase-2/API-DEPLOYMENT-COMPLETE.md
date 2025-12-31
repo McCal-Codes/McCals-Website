@@ -7,39 +7,45 @@
 ## What's Been Done
 
 ### ✅ 1. API Worker Deployed to Production
+
 - **Live URL:** https://api.mcc-cal.com/api/v1/blog
 - **Backup URL:** https://mccal-api.mccal.workers.dev/
 - **Status:** Tested and responding (HTTP 200)
 
 ### ✅ 2. Blog Admin Widget Updated
+
 - **File:** `src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html`
 - **Fixed:** API URLs now switch automatically between local dev and production
 - **Local (dev):** http://localhost:8787/api/v1/blog
 - **Production:** https://api.mcc-cal.com/api/v1/blog
 
 ### ✅ 3. Admin Dashboard Widget Created
+
 - **File:** `src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html`
-- **Features:** 
+- **Features:**
   - API health check (responds to /api/v1/blog)
   - Manifest validation (checks concert, events, journalism)
   - Widget accessibility audit (checks axe reports)
   - Quick links to Reports, Logs, Widgets, CI/CD
 
 ### ✅ 4. Worker Code Fixed
+
 - **File:** `src/api/src/worker.js`
 - **Fix:** Router initialization order (moved before route additions)
 - **Deployed:** Successfully to Cloudflare production
 
 ### ✅ 5. GitHub Actions Workflow Enhanced
+
 - **File:** `src/api/.github/workflows/deploy.yml`
 - **Features:**
   - Validates Cloudflare credentials exist
   - Builds and deploys worker
   - Tests deployed API with health check
-  - Runs on push to main (src/api/** changes)
+  - Runs on push to main (src/api/\*\* changes)
   - Manual trigger available (workflow_dispatch)
 
 ### ✅ 6. Comprehensive Documentation Created
+
 - **CLOUDFLARE_SETUP.md** - Cloudflare dashboard setup + local deployment
 - **GITHUB-ACTIONS-SETUP.md** - GitHub Actions secrets configuration guide
 
@@ -70,22 +76,23 @@ CLOUDFLARE_ACCOUNT_ID=2ac16bbf295c2dacf6e2d7c135c8ebdb
 
 ## Files Modified/Created This Session
 
-| File | Status | Purpose |
-|------|--------|---------|
-| `src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html` | ✅ Updated | Dynamic API URL switching |
-| `src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html` | ✅ Created | Health monitoring dashboard |
-| `src/api/src/worker.js` | ✅ Fixed | Router initialization error |
-| `src/api/wrangler.toml` | ✅ Configured | Cloudflare routing + KV binding |
-| `src/api/.env.example` | ✅ Updated | Credential templates |
-| `src/api/.github/workflows/deploy.yml` | ✅ Enhanced | Better validation + health checks |
-| `src/api/CLOUDFLARE_SETUP.md` | ✅ Created | Deployment guide |
-| `src/api/GITHUB-ACTIONS-SETUP.md` | ✅ Created | GitHub Actions secrets guide |
+| File                                                                      | Status        | Purpose                           |
+| ------------------------------------------------------------------------- | ------------- | --------------------------------- |
+| `src/widgets/_admin/blog-admin/versions/v1.0.0-blog-admin.html`           | ✅ Updated    | Dynamic API URL switching         |
+| `src/widgets/_admin/admin-dashboard/versions/v1.0.0-admin-dashboard.html` | ✅ Created    | Health monitoring dashboard       |
+| `src/api/src/worker.js`                                                   | ✅ Fixed      | Router initialization error       |
+| `src/api/wrangler.toml`                                                   | ✅ Configured | Cloudflare routing + KV binding   |
+| `src/api/.env.example`                                                    | ✅ Updated    | Credential templates              |
+| `src/api/.github/workflows/deploy.yml`                                    | ✅ Enhanced   | Better validation + health checks |
+| `src/api/CLOUDFLARE_SETUP.md`                                             | ✅ Created    | Deployment guide                  |
+| `src/api/GITHUB-ACTIONS-SETUP.md`                                         | ✅ Created    | GitHub Actions secrets guide      |
 
 ---
 
 ## Testing the Setup
 
 ### Local Development
+
 ```bash
 cd src/api
 npm run dev
@@ -93,6 +100,7 @@ npm run dev
 ```
 
 ### Production (Manual Deploy)
+
 ```bash
 cd src/api
 export CLOUDFLARE_API_TOKEN="bZ9xgH9Qu4FiuMq3tjn4GvtfpPk3D3yqcjMDQRpF"
@@ -101,6 +109,7 @@ npm run deploy
 ```
 
 ### After Adding GitHub Secrets
+
 ```bash
 # Just push to main
 git push origin main
@@ -111,15 +120,15 @@ git push origin main
 
 ## API Endpoints Available
 
-| Endpoint | Method | Purpose | Auth |
-|----------|--------|---------|------|
-| `/api/v1/blog` | GET | Health check + info | ❌ No |
-| `/api/v1/blog/posts` | GET | List blog posts | ❌ No |
-| `/api/v1/blog/posts` | POST | Create blog post | ✅ Bearer token |
-| `/api/v1/blog/auth/login` | POST | Authenticate author | ❌ No |
-| `/api/v1/health` | GET | General health check | ❌ No |
-| `/api/v1/manifests/:type` | GET | Fetch manifest (cached) | ❌ No |
-| `/api/v1/cache/stats` | GET | Cache statistics | ❌ No |
+| Endpoint                  | Method | Purpose                 | Auth            |
+| ------------------------- | ------ | ----------------------- | --------------- |
+| `/api/v1/blog`            | GET    | Health check + info     | ❌ No           |
+| `/api/v1/blog/posts`      | GET    | List blog posts         | ❌ No           |
+| `/api/v1/blog/posts`      | POST   | Create blog post        | ✅ Bearer token |
+| `/api/v1/blog/auth/login` | POST   | Authenticate author     | ❌ No           |
+| `/api/v1/health`          | GET    | General health check    | ❌ No           |
+| `/api/v1/manifests/:type` | GET    | Fetch manifest (cached) | ❌ No           |
+| `/api/v1/cache/stats`     | GET    | Cache statistics        | ❌ No           |
 
 ---
 
