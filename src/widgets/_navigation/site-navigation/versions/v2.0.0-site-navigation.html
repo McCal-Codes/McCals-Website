@@ -370,8 +370,8 @@
       position: absolute;
       top: calc(100% + 16px);
       right: 0;
-      background: var(--panel-bg);
-      border: 0.5px solid var(--panel-border);
+      background: rgba(8, 8, 12, 0.94); /* Dark background to match mobile */
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
       border-radius: 14px;
       padding: 12px;
       min-width: 220px;
@@ -384,6 +384,8 @@
       flex-direction: column;
       z-index: 10;
       box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
+      backdrop-filter: saturate(140%) blur(24px);
+      -webkit-backdrop-filter: saturate(140%) blur(24px);
     }
     .mcc-nav__submenu li {
       width: 100%;
