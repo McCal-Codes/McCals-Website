@@ -2,6 +2,43 @@
 
 ## 2025-12-30
 
+### Navigation Widget v2.0.0 (The Refined Lens)
+
+- **Mimicry of v1.6.3**: Restored the classic full-width desktop bar and right-aligned mobile menu for a sophisticated asymmetrical look.
+- **Focus Flow Effect**: Unique "Neighbor Dimming" interaction on desktop that subtly fades non-hovered items.
+- **Micro-Refinement**: Utilized 0.5px ultra-minimal borders and cinematic ease-out transitions.
+- **Native Efficiency**: Cleaned up the navigation engine for smoother performance across route changes.
+- **Files**: `src/widgets/_navigation/site-navigation/versions/v2.0.0-site-navigation.html`
+
+### Navigation Widget v1.9.7
+
+- **Expanded Mobile Profile**: Widened the mobile menu container to `230px`.
+- **Left-Aligned Flow**: Switched all mobile navigation text and internal components to left-alignment for a cleaner reading line.
+- **Improved Hierarchy**: Restored the toggle arrow to the right of the "Work" label to complement the left-aligned flow.
+- **Files**: `src/widgets/_navigation/site-navigation/versions/v1.9.7-site-navigation.html`
+
+### Navigation Widget v1.9.6
+
+- **Refined Mobile Profile**: Significantly narrowed the mobile menu box to `185px` for a tighter, more vertical aesthetic.
+- **Micro-Scaled Typography**: Reduced mobile link sizes (Primary: `1.25rem`, Submenu: `1.05rem`) to better fit the compact layout.
+- **Uniform Presence**: Implemented a solid `24px` uniform padding on all sides of the mobile navigation overlay.
+- **Files**: `src/widgets/_navigation/site-navigation/versions/v1.9.6-site-navigation.html`
+
+### Navigation Widget v1.9.5
+
+- **Right-Aligned Mobile Experience**: Switched the mobile menu container and internal items back to right-aligned for an asymmetric editorial feel.
+- **Enhanced Typography**: Boosted mobile link sizes to `1.45rem` and submenu items to `1.15rem` for significant visual impact and readability.
+- **Tightened Interaction**: Refined the placement of the "Work" toggle arrow to sit tightly against the text while maintaining flush right alignment.
+- **Files**: `src/widgets/_navigation/site-navigation/versions/v1.9.5-site-navigation.html`
+
+### Navigation Widget v1.9.4 (Consolidated Release)
+
+- **Minimalist Quote CTA**: Ghost-style button with refined editorial typography (Standard weight, uppercase).
+- **Floating Lens Submenus**: Desktop dropdowns with vertical gaps, unified rounding, and scanable left-aligned text.
+- **Centered Mobile UI**: Compact, centered "Lens" overlay (`220px` width) for a symmetrical mobile experience.
+- **Visual Polish**: Advanced glassmorphism (24px blur), soft chip hover states, and tightened layout spacing.
+- **Files**: `src/widgets/_navigation/site-navigation/versions/v1.9.4-site-navigation.html`
+
 ### Quote Request Widget v1.1.0
 
 - Upgraded to a multi-step slide transition architecture (3 steps: Contact, Details, Budget).
