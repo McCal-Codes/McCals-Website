@@ -5,6 +5,72 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-12-30
+
+### Added 💎
+
+- **"The Refined Lens" Architecture**: A high-efficiency evolution of the v1.6.3 layout, restoring the full-width desktop bar and right-aligned mobile menu.
+- **Focus Flow Interaction**: A sophisticated "Neighbor Dimming" effect where non-hovered items subtly fade, creating a unique cinematic focus on the user's active path.
+- **Ultra-Minimalist Tokens**: Implemented 0.5px "Air" borders and refined tracking (0.05em) for a high-end editorial aesthetic.
+- **Cinematic Motion**: Upgraded all transitions to a custom `cubic-bezier(0.16, 1, 0.3, 1)` for silky-smooth, premium interactions.
+- **Asymmetrical Mobile chic**: Restored the right-aligned mobile overlay (mimicking v1.6.3) with localized text alignment for a more sophisticated look.
+
+## [1.9.9] - 2025-12-30
+
+### Changed 📱
+
+- **Centered Mobile UI (Restored)**: Reverted from side-aligned experiments (v1.9.5 - v1.9.8) to a focused, centered navigation overlay.
+- **Uniform Spacing**: Implemented strict uniform padding (`32px`) on all sides of the mobile container for a perfectly balanced visual frame.
+- **Adaptive Width**: Updated the container to `fit-content` (min `240px`) to gracefully accommodate centered text while maintaining a tight footprint.
+- **Micro-Refined Typography**: Standardized on `1.1rem` uppercase links with increased letter-spacing (`0.04em`) for a premium centered aesthetic.
+
+## [1.9.8] - 2025-12-30 (Scrapped)
+
+### Refinement 💎
+
+- **Ultra-Minimal Design Tokens**: Switched to `0.5px` borders and removed heavy text shadows for a cleaner, modern editorial feel.
+- **Editorial Typography**: Implemented airy letter-spacing (`0.06em`) and switched mobile links to uppercase for a high-fashion aesthetic.
+- **Cine-Motion**: Upgraded all transitions to a custom `cubic-bezier(0.16, 1, 0.3, 1)` for buttery smooth, "expensive" feeling movement.
+- **Enhanced Glassmorphism**: Boosted backdrop saturation (`160%`) and blur (`32px`) while softening background opacities.
+
+## [1.9.7] - 2025-12-30
+
+### Changed - Left-Aligned Flow
+
+- **Expanded Mobile Profile**: Widened the mobile menu container to `250px` for a more open feel.
+- **Left-Aligned Flow**: Switched all mobile navigation text and internal components to left-alignment.
+- **Tight Interaction**: Positioned the toggle arrow immediately to the right of the "Work" label (`10px` gap) to maintain a cohesive link group.
+
+## [1.9.6] - 2025-12-30
+
+### Changed - Narrow Profile
+
+- **Narrower Mobile Profile**: Reduced the mobile menu width to `185px` for a more streamlined, focused overlay.
+- **Micro-Scaled Typography**: Scaled down mobile text (Links to `1.25rem`, Submenu to `1.05rem`) for a more proportional and elegant look.
+- **Uniform Padding**: Applied a consistent `24px` padding across all sides of the mobile navigation box.
+
+## [1.9.5] - 2025-12-30
+
+### Changed - Right-Aligned Flow
+
+- **Right-Aligned Mobile Experience**: Switched mobile menu items and the container itself back to right-aligned for a more sophisticated, asymmetric look.
+- **Larger Mobile Typography**: Increased the font size of primary links to `1.45rem` and submenu items to `1.15rem` for better readability and presence.
+- **Internal Alignment**: Updated all mobile containers and submenu blocks to follow the new right-leaning alignment with tight arrow placement.
+
+## [1.9.4] - 2025-12-30
+
+### Added ✨
+
+- **Minimalist Quote CTA**: Integrated a "Ghost" style "Request a Quote" button with refined uppercase typography and hover reveals.
+- **Floating Lens Submenus**: Reimagined desktop submenus with a clear vertical gap, unified rounding, and left-aligned text for better editorial scannability.
+- **Centered Mobile UI**: Redesigned the mobile menu to be a compact, centered "Lens" overlay (`220px` width) with centered items.
+- **Glassmorphism 2.0**: Enhanced blur, shadow depth, and "soft chip" hover interactions across all menu elements.
+
+### Changed 📐
+
+- **Consolidated Release**: Bundled all navigation refinements from the v1.9.x series into a stable v1.9.4 release.
+- **Spacing Optimization**: Reduced global bar padding and tightened link clustering for a more premium, minimal layout.
+
 ## [1.8.5-WIP] - 2025-12-27
 
 ### Resilience & WIP 🧱
@@ -38,7 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.8.0] - 2025-09-29
 
-### Added
+### Added - Submenu logic
 
 - “Work” submenu with: Photojournalism, Concert, Event, Nature, Corporate.
 - Mobile submenu toggle with ARIA; closes on outside-click and Escape.
