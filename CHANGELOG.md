@@ -45,6 +45,28 @@
 
 **All 3 Phases Complete!** Repository is now fully optimized for 2026.
 
+### Widget Monochrome & Navigation Refinements
+
+- **Policies & Legal v1.1.1**:
+  - **Full Content Restoration**: Restored the complete legal sections (License, Privacy, Cookies, Terms) and the comprehensive 7-item FAQ from the original release.
+  - **Advanced Navigation**: Implemented a real-time table of contents search (discovery), reading progress bar, and estimated reading time indicator.
+  - **Download Bar Expansion**: Added direct 'License PDF' and 'Print/Save' buttons alongside the original Terms PDF request.
+  - **UI Refinement**: Resolved contrast issues by enforcing high-contrast white text for all interactive buttons and links.
+  - **Spacing Audit**: Improved vertical rhythm and spacing throughout the document, including section margins and header breathing room for better readability.
+  - **Section Precision**: Added persistent heading anchors (§) for direct linking to specific legal clauses.
+  - **FAQ Accordion**: Implemented a monochrome-styled dropdown for the FAQ section using `<details>`/`<summary>`.
+  - **SEO Restoration**: Restored missing FAQPage, WebPage, and BreadcrumbList structured data for better search indexing.
+  - **Files**: `src/widgets/_content/policies-legal/versions/v1.1.1-policies-legal-monochrome.html`
+
+- **Podcast Widget v2.1.0**:
+  - **Brand Simplification**: Removed "2.0" from the header as requested. The title now cleanly displays "Latest Episodes".
+  - **Internal Metadata**: Maintained technical versioning in the indicator for development tracking.
+  - **Files**: `src/widgets/_content/podcast-feed/versions/v2.1.0-podcast-resilience.html`
+
+- **Photojournalism v5.5.1**:
+  - **Modal Visibility Fix**: Resolved 'all white' modal bug by enforcing a dark glassmorphic background and white text within the lightbox.
+  - **Files**: `src/widgets/portfolios/photojournalism-portfolio/versions/v5.5.1-photojournalism-monochrome.html`
+
 ### Footer Widget v1.3.0
 
 - **Back to Top Button**: Added circular floating button with scroll progress ring indicator that appears after 400px scroll

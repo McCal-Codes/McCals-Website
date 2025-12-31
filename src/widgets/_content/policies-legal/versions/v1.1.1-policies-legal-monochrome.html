@@ -1,0 +1,1691 @@
+<!-- 
+═══════════════════════════════════════════════════════════════════════════════
+  POLICIES & LEGAL WIDGET v1.1.1 - McCal Media
+  Accessibility & Monochrome Enhancement Release
+  - Integrates Accessibility Statement widget patterns
+  - Enforced strict monochrome aesthetic with !important overrides
+  - Restored full Terms & Conditions content (reversing truncation)
+  - Added Skip link, unified focus-visible styling, improved scroll spy with aria-current
+  - Added FAQ Accordion, Reading Progress bar, and Section Anchors (§)
+  - SEO: Full JSON-LD (WebPage, Breadcrumb, FAQPage) + Meta Suggestions
+  - Mobile drawer maintains aria-expanded and closes on overlay/link/Escape
+  - Reduced motion respected; print styles refined
+  - Landmark roles and semantic structure hardened
+  
+  SEO OPTIMIZATION (Add to Page Header Code Injection):
+  <title>Policies & Legal | McCal Media</title>
+  <meta name="description" content="Official policies, terms of service, and frequently asked questions for McCal Media's professional photography services.">
+  <meta property="og:title" content="Policies & Legal | McCal Media">
+  <meta property="og:description" content="View our photography usage license, privacy policy, and service terms.">
+  <link rel="canonical" href="https://mcc-cal.com/policies-legal">
+  
+  VERSION: 1.1.1 (2025-12-31)
+  CHANGELOG: See CHANGELOG.md for detailed enhancements
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+<a class="policy-skip" href="#policy-main">Skip to main content</a>
+
+<div class="mcc-policy-widget">
+  <div
+    class="policy-site"
+    data-widget-version="1.1.1"
+    data-terms-pdf="https://www.mcc-cal.com/s/Terms-of-Conditions-McCal-Media.pdf"
+    role="document"
+    aria-labelledby="policy-title"
+  >
+    <!-- Reading Progress Bar -->
+    <div class="policy-progress" id="policyProgress" aria-hidden="true"></div>
+
+    <!-- Mobile drawer toggle (checkbox pattern replaced with button for consistency) -->
+    <button
+      class="toc-toggle"
+      aria-controls="policy-toc"
+      aria-expanded="false"
+      aria-label="Open policies navigation"
+      type="button"
+      onclick="toggleNav()"
+    >
+      Menu
+    </button>
+    <div class="policy-scrim" aria-hidden="true" onclick="toggleNav(false)"></div>
+
+    <!-- Sidebar / TOC -->
+    <aside
+      id="policy-toc"
+      class="policy-toc"
+      role="navigation"
+      aria-label="Policies & Legal navigation"
+    >
+      <div class="label">Section Discovery</div>
+      <div class="nav-search-wrapper">
+        <input
+          type="search"
+          id="navSearch"
+          placeholder="Search keywords..."
+          aria-label="Filter legal sections"
+        />
+      </div>
+      <div class="label">Policies & Legal</div>
+      <details open>
+        <summary>License</summary>
+        <nav><a href="#license">Overview</a></nav>
+      </details>
+      <details>
+        <summary>Privacy Policy</summary>
+        <nav><a href="#privacy">Overview</a></nav>
+      </details>
+      <details>
+        <summary>Cookie Policy</summary>
+        <nav><a href="#cookies">Overview</a></nav>
+      </details>
+      <details open>
+        <summary>Terms & Conditions</summary>
+        <nav>
+          <a href="#terms-overview">Overview</a>
+          <a href="#consultation">Pre-Project Consultation</a>
+          <a href="#cost">Cost</a>
+          <a href="#fees">Fees</a>
+          <a href="#late">Late Fees</a>
+          <a href="#expenses">Expenses</a>
+          <a href="#account">Account Access</a>
+          <a href="#confidentiality">Confidentiality</a>
+          <a href="#relationships">Relationships</a>
+          <a href="#ip">Intellectual Property</a>
+          <a href="#style">Style Release</a>
+          <a href="#liability">Limit of Liability</a>
+          <a href="#indemnification">Indemnification</a>
+          <a href="#risk">Assumption of Risk</a>
+          <a href="#non-disparagement">Non-Disparagement</a>
+          <a href="#cancellations">Cancellations & Rescheduling</a>
+          <a href="#force">Force Majeure</a>
+          <a href="#no-shows">No-Shows</a>
+          <a href="#law">Governing Law</a>
+          <a href="#notice">Notice</a>
+          <a href="#severability">Severability</a>
+          <a href="#amendments">Amendments</a>
+          <a href="#assignments">Assignments</a>
+        </nav>
+      </details>
+      <details>
+        <summary>FAQ</summary>
+        <nav><a href="#faq">Overview</a></nav>
+      </details>
+      <details>
+        <summary>Contact</summary>
+        <nav><a href="#contact">Overview</a></nav>
+      </details>
+    </aside>
+
+    <main id="policy-main" class="policy-main" role="main">
+      <header>
+        <h1 id="policy-title">
+          Policies & Legal
+          <span
+            class="version-badge"
+            onclick="showChangelog()"
+            role="button"
+            tabindex="0"
+            aria-label="View changelog"
+            title="v1.1.1 - Click to view changelog"
+            >v1.1.1</span
+          >
+        </h1>
+        <span class="badge eff" aria-label="Effective date"
+          >Effective <time id="eff" datetime=""></time
+        ></span>
+        <span class="badge reading-time" id="readingTime">Calculating...</span>
+      </header>
+
+      <div class="download-bar" role="region" aria-label="Downloads">
+        <a
+          id="download-terms"
+          class="download-btn active-btn"
+          href="mailto:business@mcc-cal.com?subject=Request%20for%20Terms%20%26%20Conditions%20PDF"
+          title="Contact us for a copy of the full Terms & Conditions (PDF)"
+          aria-label="Contact us for Terms and Conditions PDF"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          <span>Terms PDF</span>
+        </a>
+        <a
+          id="download-license"
+          class="download-btn active-btn"
+          href="mailto:business@mcc-cal.com?subject=Request%20for%20Usage%20License%20PDF"
+          title="Contact us for a copy of the Usage License (PDF)"
+          aria-label="Contact us for Usage License PDF"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </svg>
+          <span>License PDF</span>
+        </a>
+        <button
+          class="download-btn active-btn"
+          onclick="window.print()"
+          title="Print this page to PDF for your records"
+          aria-label="Print Policies to PDF"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+          </svg>
+          <span>Print/Save</span>
+        </button>
+      </div>
+
+      <!-- CONTENT SECTIONS (unchanged from v1.0.0) -->
+      <section id="license" aria-labelledby="license-heading">
+        <h2 id="license-heading">
+          <a href="#license" class="anchor" aria-hidden="true">§</a>License (Usage Rights)
+        </h2>
+        <p>
+          Unless otherwise agreed in writing, photography delivered by McCal Media is licensed—not
+          sold—for the specific usage described on your invoice or contract. All other rights are
+          reserved.
+        </p>
+        <p>
+          Licensed images may be used only for the purposes stated in your agreement. Unauthorized
+          redistribution, resale, or sublicensing is prohibited. For expanded usage rights or
+          commercial licensing, please contact us.
+        </p>
+      </section>
+      <hr aria-hidden="true" />
+      <section id="privacy" aria-labelledby="privacy-heading">
+        <h2 id="privacy-heading">
+          <a href="#privacy" class="anchor" aria-hidden="true">§</a>Privacy Policy
+        </h2>
+        <p>
+          We collect the minimum personal information necessary to provide services, manage
+          bookings, and share updates you opt into. Your data is never sold or shared with third
+          parties without your explicit consent.
+        </p>
+        <p>
+          <strong>What we collect:</strong> Name, email address, phone number, project details,
+          payment information (processed securely via third-party providers).
+        </p>
+        <p>
+          <strong>How we use it:</strong> Service delivery, invoicing, project communication,
+          optional newsletter (unsubscribe anytime).
+        </p>
+        <p>
+          <strong>Data retention:</strong> We retain client data for the duration of our business
+          relationship plus required legal retention periods. You may request data deletion at any
+          time.
+        </p>
+        <p>
+          <strong>Your rights:</strong> Access, correct, or delete your personal data by contacting
+          us at <a href="mailto:business@mcc-cal.com">business@mcc-cal.com</a>.
+        </p>
+      </section>
+      <hr aria-hidden="true" />
+      <section id="cookies" aria-labelledby="cookies-heading">
+        <h2 id="cookies-heading">
+          <a href="#cookies" class="anchor" aria-hidden="true">§</a>Cookie Policy
+        </h2>
+        <p>
+          We use essential cookies for core site features (session management, secure forms) and may
+          use analytics or embedded services that set their own cookies.
+        </p>
+        <p>
+          <strong>Essential cookies:</strong> Required for website functionality, cannot be
+          disabled.
+        </p>
+        <p>
+          <strong>Analytics cookies:</strong> Help us understand visitor behavior (Google Analytics,
+          anonymized).
+        </p>
+        <p>
+          <strong>Third-party cookies:</strong> Social media embeds or payment processors may set
+          cookies governed by their policies.
+        </p>
+        <p>
+          Most browsers allow cookie management in settings. Disabling non-essential cookies may
+          affect site functionality.
+        </p>
+      </section>
+      <hr aria-hidden="true" />
+      <section id="terms" aria-labelledby="terms-heading">
+        <h2 id="terms-heading">
+          <a href="#terms" class="anchor" aria-hidden="true">§</a>Terms & Conditions
+        </h2>
+        <p id="terms-overview">
+          <strong>Overview:</strong> These Terms & Conditions govern the relationship between McCal
+          Media (the "Contractor") and its Clients. By booking, commissioning, or using services,
+          you agree to these terms and the responsibilities they outline.
+        </p>
+
+        <section id="consultation" aria-labelledby="consultation-heading">
+          <h3 id="consultation-heading">
+            <a href="#consultation" class="anchor" aria-hidden="true">§</a>Pre-Project Consultation
+          </h3>
+          <p>
+            The Contractor shall provide the Client with one thirty to sixty-minute pre-service
+            consultation. The Parties shall agree on an acceptable date and time for conducting the
+            pre-service consultation. Still, the manner by which the consultation shall be conducted
+            shall be at the Contractor's discretion. This consultation is usually conducted via
+            phone, video chat, or in person. This consultation may be scheduled no later than a week
+            or more before the event.
+          </p>
+        </section>
+
+        <section id="cost" aria-labelledby="cost-heading">
+          <h3 id="cost-heading"><a href="#cost" class="anchor" aria-hidden="true">§</a>Cost</h3>
+          <p>
+            The total cost of all Services the Contractor agrees to provide to the Client is on an
+            agreed basis in addition to (the "Total Cost"). The total cost includes contractor's
+            services, setup time, travel and out-of-pocket expenses, software licenses,
+            administrative fees, assistance, subcontractor costs, and additional costs during an
+            ongoing project.
+          </p>
+        </section>
+
+        <section id="fees" aria-labelledby="fees-heading">
+          <h3 id="fees-heading"><a href="#fees" class="anchor" aria-hidden="true">§</a>Fees</h3>
+          <p>
+            The contractor's compensation is determined on a per-project basis, as outlined in the
+            estimate provided to the Client.
+          </p>
+        </section>
+
+        <section id="late" aria-labelledby="late-heading">
+          <h3 id="late-heading">
+            <a href="#late" class="anchor" aria-hidden="true">§</a>Late Fees
+          </h3>
+          <p>
+            If the Contractor does not receive payment from the Client within fourteen calendar days
+            of any payment date, the Client will be charged a late fee of 1.5% of the outstanding
+            amount per day that the Contractor does not receive it.
+          </p>
+          <ul>
+            <li>
+              <strong>For example:</strong> The Client owes the Contractor $1000 due on April 1 and
+              fails to pay by April 14th. On April 15th, the Client owes the Contractor $1015. On
+              April 16th, the Client owes the Contractor $1030.23. On April 17th, the Client owes
+              the Contractor $1045.68, and so on.
+            </li>
+          </ul>
+        </section>
+
+        <section id="expenses" aria-labelledby="expenses-heading">
+          <h3 id="expenses-heading">
+            <a href="#expenses" class="anchor" aria-hidden="true">§</a>Expenses
+          </h3>
+          <p>
+            Any expenses incurred by the Contractor while providing the Client with Services will be
+            invoiced to the Client promptly. The Client is responsible for paying for and delivering
+            any third-party software licenses or products the Contractor wishes to utilize. At the
+            Contractor's discretion, the Contractor will make reasonable efforts to integrate the
+            Client's suggested software or products.
+          </p>
+        </section>
+
+        <section id="account" aria-labelledby="account-heading">
+          <h3 id="account-heading">
+            <a href="#account" class="anchor" aria-hidden="true">§</a>Account Access
+          </h3>
+          <p>
+            The Client shall provide the Contractor access to the accounts no later than 48 hours
+            before the day after the day of service. Via: [Software / Email]
+          </p>
+        </section>
+
+        <section id="confidentiality" aria-labelledby="confidentiality-heading">
+          <h3 id="confidentiality-heading">
+            <a href="#confidentiality" class="anchor" aria-hidden="true">§</a>Confidentiality
+          </h3>
+          <p>
+            Parties will treat and hold all information about this Agreement and the Services
+            provided. The Parties' businesses in strict confidence and will not use any of this
+            information except in connection with fulfilling the terms of this Agreement, and, if
+            this Agreement is terminated for whatever reason, Parties will return all such
+            information, including account access information, and any and all copies to the
+            original Party. They will remain bound to the Confidentiality provision of this
+            Agreement.
+          </p>
+          <p>
+            Confidential information (herein "Confidential Information") means information that is
+            of value to its owner and is treated as proprietary or confidential, including, but not
+            limited to, intellectual property, inventions, trade secrets or information, financial
+            data or information, speculation, knowledge, general Company data or reports, future
+            business plans, strategies, customer lists and information, client acquisition
+            strategies, advertising campaigns, information regarding executives and employees, and
+            the terms and provisions of this Agreement.
+          </p>
+          <p>
+            Further, at all times, neither Party shall use or disclose any Confidential Information
+            relating in any way to the past, present, or future business affairs, conditions,
+            clients, customers, efforts, employees, financial data, operations, practices, products,
+            processes, properties, sales, or services of or relating in any way to the Company in
+            whatever form to any parties outside of this Agreement.
+          </p>
+          <p>
+            This Agreement imposes no obligation upon the Parties concerning any Confidential
+            Information that was possessed before initial business interactions commenced between
+            the Parties; is or becomes a matter of public knowledge through no fault of receiving
+            Party; is rightfully obtained from a third party not owing a duty of confidentiality; is
+            disclosed without a duty of confidentiality to a third party by, or with the
+            authorization of the disclosing Party; or is independently developed by either Party
+            without prior knowledge of privileged or confidential information.
+          </p>
+        </section>
+
+        <section id="relationships" aria-labelledby="relationships-heading">
+          <h3 id="relationships-heading">
+            <a href="#relationships" class="anchor" aria-hidden="true">§</a>Relationships of the
+            Parties
+          </h3>
+          <p>
+            The Contractor and any related sub-contractors are not employees, partners, or members
+            of the Client's company or organization. The Contractor has the sole right to control
+            and direct the means, manner, and method by which the services in this Agreement are
+            performed. The Contractor can hire assistants, subcontractors, or employees to provide
+            the Client with its Services. Parties are individually and separately responsible for
+            their business operation and expenses, including securing or paying licensing fees,
+            insurance, taxes (including FICA), registrations, or permits. The Client is not
+            responsible for paying the Contractor for any benefits, Worker's Compensation,
+            insurance, or unemployment fees.
+          </p>
+        </section>
+
+        <section id="ip" aria-labelledby="ip-heading">
+          <h3 id="ip-heading">
+            <a href="#ip" class="anchor" aria-hidden="true">§</a>Intellectual Property
+          </h3>
+          <p>
+            The Contractor retains its copyright ownership in any and all designs pursuant to
+            federal copyright law (Chapter 17, Section 201-02 of the United States Code.) Any and
+            all work produced in connection with, or in the process of fulfilling this Agreement,
+            are expressly and solely owned by the Contractor. The Contractor grants Client a
+            nontransferable, non-exclusive, royalty-free license of photos produced with and for
+            Client for the specific purpose agreed to in the licensing agreement. Any unauthorized
+            use of the design, such as using the design for purposes other than those specified
+            herein, will result in additional fees and/or royalty payments to the Contractor.
+          </p>
+          <p>
+            Parties own their respective trademarks and intellectual property used in the standard
+            and separate course of their business and agree not to infringe upon or otherwise use
+            each other's respective intellectual property except when providing Client with its
+            Services.
+          </p>
+        </section>
+
+        <section id="style" aria-labelledby="style-heading">
+          <h3 id="style-heading">
+            <a href="#style" class="anchor" aria-hidden="true">§</a>Style Release
+          </h3>
+          <p>
+            The Client has spent satisfactory time reviewing the Contractor's work and reasonably
+            expects that the Contractor's Services will produce a similar outcome and result for the
+            Client. The Contractor will use reasonable efforts to ensure the Client's services are
+            carried out in a style and manner consistent with the Contractor's current portfolio and
+            services. The Contractor will try to incorporate any suggestions the Client makes.
+            However, the Client understands and agrees that:
+          </p>
+          <ul>
+            <li>
+              Every client and final delivery is different, with different tastes, budgets, and
+              needs;
+            </li>
+            <li>
+              Photography is a subjective service, and the Contractor is a provider with a unique
+              vision and an ever-evolving style and technique;
+            </li>
+            <li>
+              Contractor will use his judgment to create favorable results for Client, which may not
+              include strict adherence to Client's suggestions;
+            </li>
+            <li>
+              Dissatisfaction with the Contractor's independent judgment or individual management
+              style is not a valid reason for terminating this Agreement or requesting any monies
+              returned.
+            </li>
+          </ul>
+        </section>
+
+        <section id="liability" aria-labelledby="liability-heading">
+          <h3 id="liability-heading">
+            <a href="#liability" class="anchor" aria-hidden="true">§</a>Limit of Liability
+          </h3>
+          <p>
+            Client agrees that the maximum amount of damages he/she/they are entitled to in any
+            claim of or relating to this Agreement or Services provided herein are not to exceed
+            Contractor's total cost as outlined in this Agreement.
+          </p>
+        </section>
+
+        <section id="indemnification" aria-labelledby="indemnification-heading">
+          <h3 id="indemnification-heading">
+            <a href="#indemnification" class="anchor" aria-hidden="true">§</a>Indemnification
+          </h3>
+          <p>
+            Client agrees to indemnify and hold harmless Contractor and its employees, agents, and
+            independent contractors for any injury, property damage, liability, claim, or other
+            cause of action arising from or related to Services provided herein.
+          </p>
+        </section>
+
+        <section id="risk" aria-labelledby="risk-heading">
+          <h3 id="risk-heading">
+            <a href="#risk" class="anchor" aria-hidden="true">§</a>Assumption of Risk
+          </h3>
+          <p>
+            Client and related parties/participants expressly assume any risk of photography and
+            related activities as described herein.
+          </p>
+        </section>
+
+        <section id="non-disparagement" aria-labelledby="non-disparagement-heading">
+          <h3 id="non-disparagement-heading">
+            <a href="#non-disparagement" class="anchor" aria-hidden="true">§</a>Non-Disparagement
+          </h3>
+          <p>
+            The Parties mutually agree not to make public defamatory statements that would
+            materially harm the reputation or business activities of any Parties to this Agreement.
+          </p>
+        </section>
+
+        <section id="cancellations" aria-labelledby="cancellations-heading">
+          <h3 id="cancellations-heading">
+            <a href="#cancellations" class="anchor" aria-hidden="true">§</a>Cancellations &
+            Rescheduling
+          </h3>
+          <p>
+            If the Client desires to cancel or reschedule Services, the following policies apply:
+          </p>
+          <ul>
+            <li>
+              <strong>More than 30 days before service:</strong> Full refund minus 10%
+              administrative fee
+            </li>
+            <li><strong>15-30 days before service:</strong> 50% refund of deposit</li>
+            <li><strong>Less than 15 days before service:</strong> No refund; deposit forfeited</li>
+            <li>
+              <strong>Rescheduling:</strong> First reschedule free if more than 30 days notice;
+              subsequent reschedules subject to availability and $100 fee
+            </li>
+          </ul>
+          <p>
+            The Contractor reserves the right to cancel services due to equipment failure, illness,
+            or force majeure with full refund and assistance finding alternative providers.
+          </p>
+        </section>
+
+        <section id="force" aria-labelledby="force-heading">
+          <h3 id="force-heading">
+            <a href="#force" class="anchor" aria-hidden="true">§</a>Force Majeure
+          </h3>
+          <p>
+            Either party may choose to be excused from further performance obligations in the event
+            of a disastrous occurrence beyond their control including but not limited to: natural
+            disasters, pandemics, government orders, acts of war, terrorism, extreme weather, venue
+            closures, or transportation failures. In such cases, deposits may be applied to
+            rescheduled dates or refunded at the Contractor's discretion.
+          </p>
+        </section>
+
+        <section id="no-shows" aria-labelledby="no-shows-heading">
+          <h3 id="no-shows-heading">
+            <a href="#no-shows" class="anchor" aria-hidden="true">§</a>No-Shows
+          </h3>
+          <p>
+            Suppose it becomes impossible for the Contractor to render Services due to the fault of
+            the Client or related parties (failure to appear, denial of venue access, inadequate
+            preparation, intoxication, or safety concerns). In that case, the Contractor may elect
+            to leave the service location without rendering Services, and no refund will be issued.
+            The Client remains responsible for full payment as outlined in the contract.
+          </p>
+        </section>
+
+        <section id="law" aria-labelledby="law-heading">
+          <h3 id="law-heading">
+            <a href="#law" class="anchor" aria-hidden="true">§</a>Governing Law
+          </h3>
+          <p>
+            The laws of the United States and the jurisdiction of Pennsylvania govern all matters
+            arising under this Agreement. Any disputes shall be resolved through mediation or
+            binding arbitration in Allegheny County, Pennsylvania, before resorting to litigation.
+            Each party is responsible for their own legal fees unless otherwise awarded by a court
+            or arbitrator.
+          </p>
+        </section>
+
+        <section id="notice" aria-labelledby="notice-heading">
+          <h3 id="notice-heading">
+            <a href="#notice" class="anchor" aria-hidden="true">§</a>Notice
+          </h3>
+          <p>
+            Parties shall provide adequate notice ("Notice") to each other, including any payments,
+            invoices, contract amendments, or formal communications, via email to the addresses
+            specified in the project agreement. Notice is considered delivered when sent via email
+            with read receipt or 3 business days after mailing via certified mail. Emergency
+            communications may be made via phone with follow-up written confirmation.
+          </p>
+        </section>
+
+        <section id="severability" aria-labelledby="severability-heading">
+          <h3 id="severability-heading">
+            <a href="#severability" class="anchor" aria-hidden="true">§</a>Severability
+          </h3>
+          <p>
+            If any portion of this Agreement is deemed illegal, invalid, or unenforceable by a court
+            of competent jurisdiction, the remaining provisions shall remain in full force and
+            effect. The parties agree to replace any invalid provision with a valid provision that
+            most closely approximates the original intent.
+          </p>
+        </section>
+
+        <section id="amendments" aria-labelledby="amendments-heading">
+          <h3 id="amendments-heading">
+            <a href="#amendments" class="anchor" aria-hidden="true">§</a>Amendments
+          </h3>
+          <p>
+            The parties may amend this Agreement only by written agreement signed by both parties
+            with proper Notice. Verbal agreements or email discussions do not constitute amendments
+            unless formalized in writing. Project-specific addendums may be created for individual
+            engagements while maintaining these general terms.
+          </p>
+        </section>
+
+        <section id="assignments" aria-labelledby="assignments-heading">
+          <h3 id="assignments-heading">
+            <a href="#assignments" class="anchor" aria-hidden="true">§</a>Assignments
+          </h3>
+          <p>
+            Unless otherwise provided herein, neither party may assign or subcontract any rights or
+            obligations under this Agreement without proper Notice and written consent from the
+            other party. The Contractor may use assistant photographers or subcontractors as needed
+            to fulfill services, maintaining quality standards and confidentiality. Clients may not
+            transfer service agreements to third parties without Contractor approval.
+          </p>
+        </section>
+      </section>
+
+      <hr aria-hidden="true" />
+
+      <section id="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">
+          <a href="#faq" class="anchor" aria-hidden="true">§</a>Frequently Asked Questions
+        </h2>
+        <div class="faq-accordion">
+          <details>
+            <summary>What's the typical turnaround time?</summary>
+            <div class="faq-content">
+              Preview gallery (sneak peeks): Within 72 hours of service. Final edited gallery: 2-4
+              weeks depending on project scope and season. Rush delivery available for additional
+              fee.
+            </div>
+          </details>
+
+          <details>
+            <summary>Do you backup my photos?</summary>
+            <div class="faq-content">
+              Yes. We maintain redundant backups on multiple drives and cloud storage for 90 days
+              after final delivery. After that period, clients are responsible for maintaining their
+              own backups. We recommend downloading and backing up your gallery immediately upon
+              delivery.
+            </div>
+          </details>
+
+          <details>
+            <summary>What about model releases or property releases?</summary>
+            <div class="faq-content">
+              Required for certain commercial uses—arranged case-by-case. If you plan to use images
+              for advertising, product packaging, or commercial licensing, we'll coordinate proper
+              releases with subjects and property owners. Editorial and personal use typically
+              doesn't require releases.
+            </div>
+          </details>
+
+          <details>
+            <summary>Can I share my photos on social media?</summary>
+            <div class="faq-content">
+              Yes! Personal social media sharing is encouraged. Please credit @mcc_cal or McCal
+              Media when posting. Commercial use (ads, promotions, business marketing) requires
+              proper licensing—see your project agreement.
+            </div>
+          </details>
+
+          <details>
+            <summary>What if it rains on my outdoor shoot?</summary>
+            <div class="faq-content">
+              We monitor weather forecasts closely. For outdoor sessions, we'll discuss backup
+              indoor locations or reschedule options if severe weather is expected. Light rain can
+              create beautiful moody photos if you're game! See our Cancellations & Force Majeure
+              sections for policy details.
+            </div>
+          </details>
+
+          <details>
+            <summary>Do you provide raw/unedited files?</summary>
+            <div class="faq-content">
+              Our standard deliverables are professionally edited high-resolution JPEGs. Raw files
+              are not included unless specifically negotiated and paid for, as they represent our
+              unfinished creative work. Edited files showcase our artistic vision and professional
+              standards.
+            </div>
+          </details>
+
+          <details>
+            <summary>How many photos will I receive?</summary>
+            <div class="faq-content">
+              Varies by project type. Concert coverage: 50-150 edited images. Corporate events:
+              100-300 images. Portrait sessions: 25-75 images. Specific deliverable counts are
+              outlined in your project agreement.
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">
+          <a href="#contact" class="anchor" aria-hidden="true">§</a>Contact
+        </h2>
+        <address>
+          <p>
+            <strong>Email:</strong> <a href="mailto:business@mcc-cal.com">business@mcc-cal.com</a
+            ><br />
+            <strong>Phone:</strong> <a href="tel:+15702991214">570-299-1214</a><br />
+            <strong>Company:</strong> McCal Media<br />
+            Pittsburgh, PA
+          </p>
+        </address>
+        <p class="note">© <span id="y"></span> McCal Media — All rights reserved.</p>
+      </section>
+    </main>
+  </div>
+
+  <div
+    class="changelog-modal"
+    id="changelogModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="changelogTitle"
+  >
+    <div class="changelog-content">
+      <div class="changelog-header">
+        <h3 class="changelog-title" id="changelogTitle">📜 Policies & Legal Widget Changelog</h3>
+        <button class="changelog-close" onclick="hideChangelog()" aria-label="Close changelog">
+          &times;
+        </button>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-version">v1.1.1 - Strict Monochrome Fix (2025-12-31)</div>
+        <ul class="changelog-items">
+          <li>Strict Monochrome Fix: Enforced white/grayscale across all UI elements</li>
+          <li>Fixed persistent colors in badges, toggles, and dropdowns</li>
+          <li>Added scoped wrapper class for better theme safety</li>
+        </ul>
+        <div class="changelog-version">v1.1.0 - Accessibility Enhancement (2025-11-11)</div>
+        <ul class="changelog-items">
+          <li>♿ Added skip link for keyboard users</li>
+          <li>♿ Unified focus-visible outline (3px, offset 2px)</li>
+          <li>♿ Scroll spy now sets <code>aria-current="true"</code> on active link</li>
+          <li>♿ Mobile menu closes on link selection, overlay click, or Escape key</li>
+          <li>♿ Added <code>role="document"</code> and landmark hardening</li>
+          <li>♿ Reduced motion preference respected (disables smooth scroll)</li>
+          <li>🖨️ Refined print styles (content only)</li>
+          <li>🧼 No breaking changes; content untouched</li>
+        </ul>
+        <div class="changelog-version">v1.0.0 - Initial Release (2025-01-27)</div>
+        <ul class="changelog-items">
+          <li>Initial comprehensive legal documentation + SEO + FAQ schema</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- site-widgets:inline:start -->
+  <style data-site-widgets-inline>
+    :root {
+      --mcc-accent: #ffffff;
+      --mcc-accent-strong: #ffffff;
+      --mcc-bg: #000000;
+      --mcc-fg: #ffffff;
+      --mcc-line: #333333;
+      --mcc-muted: #e0e0e0;
+      --bg: var(--mcc-bg);
+      --fg: var(--mcc-fg);
+      --line: var(--mcc-line);
+      --accent: var(--mcc-accent);
+      --muted: var(--mcc-muted);
+      --chip: #121212;
+      --focus: #ffffff;
+      --link: var(--accent);
+      --panel-bg: rgba(0, 0, 0, 0.9);
+      --panel-border: rgba(255, 255, 255, 0.1);
+      --panel-blur: 8px;
+      --mcc-space-1: 4px;
+      --mcc-space-2: 8px;
+      --mcc-space-3: 12px;
+      --mcc-space-4: 16px;
+      --mcc-space-5: 24px;
+      --mcc-space-6: 32px;
+      --mcc-radius: 10px;
+      --mcc-control-height: 40px;
+      --mcc-z-top: 2147483647;
+    }
+    [data-theme='light'] {
+      --fg: #0a0a0a;
+      --bg: #ffffff;
+      --line: #e5e5e5;
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --panel-blur: 8px;
+      --chip: #fafafa;
+      --focus: #ffffff;
+      --link: var(--accent);
+    }
+    [data-theme='dark'] {
+      --fg: #f7f7f7;
+      --bg: #06060a;
+      --line: #2a2a2a;
+      --panel-bg: rgba(20, 20, 20, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --panel-blur: 8px;
+      --chip: #1b1b1b;
+      --focus: #ffffff;
+      --link: var(--accent);
+    }
+    [class^='mcc-'],
+    [class*=' mcc-'] {
+      box-sizing: border-box;
+      font-family:
+        Inter,
+        'Segoe UI',
+        system-ui,
+        -apple-system,
+        'Helvetica Neue',
+        Arial,
+        sans-serif;
+      color: var(--fg);
+    }
+    [class^='mcc-'] a:focus-visible,
+    [class^='mcc-'] button:focus-visible,
+    [class^='mcc-'] [role='button']:focus-visible,
+    [class*=' mcc-'] a:focus-visible,
+    [class*=' mcc-'] button:focus-visible,
+    [class*=' mcc-'] [role='button']:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+      border-radius: 6px;
+    }
+    .mcc-sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .mcc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--mcc-space-2);
+      padding: 0.6rem 1.2rem;
+      height: var(--mcc-control-height);
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .mcc-btn:hover,
+    .mcc-btn:focus-visible {
+      background: var(--mcc-accent-strong);
+      transform: translateY(-1px);
+    }
+    .mcc-img-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mcc-row {
+      display: flex;
+      gap: var(--mcc-space-3);
+      align-items: center;
+    }
+    .mcc-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mcc-space-2);
+    }
+    .mcc-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [class^='mcc-'] {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [class^='mcc-'] * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media print {
+      [class^='mcc-'] {
+        color: #000 !important;
+        background: transparent !important;
+      }
+    }
+
+    /* Force dark theme for strict monochrome consistency */
+    .mcc-policy-widget {
+      --bg: #000000 !important;
+      --fg: #ffffff !important;
+      --muted: #e0e0e0 !important;
+      --line: #333333 !important;
+      --accent: #ffffff !important;
+      --panel-bg: rgba(20, 20, 20, 0.9) !important;
+      --panel-border: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Premium Active Button */
+    .mcc-policy-widget .active-btn {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border: 1px solid rgba(255, 255, 255, 0.4) !important;
+      color: #ffffff !important;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .mcc-policy-widget .active-btn:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+      border-color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+
+    /* Strict Monochrome Enforcement - Refined */
+    .mcc-policy-widget {
+      color: #ffffff !important;
+      background-color: #000000;
+    }
+
+    /* Target links and buttons without breaking their own contrast rules */
+    .mcc-policy-widget a,
+    .mcc-policy-widget button:not(.mcc-btn):not(.toc-toggle) {
+      color: #ffffff !important;
+    }
+
+    /* Download Buttons */
+    .download-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 24px 0 40px;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      color: #ffffff !important;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-sizing: border-box;
+    }
+    .download-btn svg {
+      opacity: 0.8;
+    }
+    .download-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+    .download-btn.active-btn {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* Toc and toggle specific contrast */
+    .mcc-policy-widget .toc-toggle,
+    .mcc-policy-widget .version-badge {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .mcc-policy-widget .policy-toc nav a.active {
+      background: rgba(255, 255, 255, 0.2) !important;
+      color: #ffffff !important;
+    }
+  </style>
+  <!-- site-widgets:inline:end -->
+
+  <style>
+    :root {
+      --header-h: var(--sq-top, 72px);
+      --fg: #ffffff;
+      --muted: #e0e0e0;
+      --line: #242424;
+      --link: #ffffff;
+      --accent: #ffffff;
+      --focus: #ffffff;
+      --chip: #121212;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --fg: #1a1a1a;
+        --muted: #5b5b5b;
+        --line: #e5e5ea;
+        --link: #0f172a;
+        --accent: #ffffff;
+        --chip: #fafafa;
+        --focus: #ffffff;
+      }
+    }
+
+    .policy-skip {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .policy-skip:focus {
+      left: 20px;
+      top: 20px;
+      z-index: 1000;
+      width: auto;
+      height: auto;
+      padding: 0.6rem 0.9rem;
+      background: var(--chip);
+      color: var(--fg);
+      border: 2px solid var(--focus);
+      border-radius: 10px;
+    }
+
+    .policy-site {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: calc(var(--header-h) + 28px) 20px 80px;
+      display: flex;
+      gap: 44px;
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    .policy-toc {
+      position: sticky;
+      top: calc(var(--header-h) + 24px);
+      align-self: flex-start;
+      flex: 0 0 280px;
+    }
+    .policy-toc .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    .policy-toc details {
+      margin: 6px 0;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 6px 6px 10px;
+    }
+    .policy-toc summary {
+      cursor: pointer;
+      list-style: none;
+      outline: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--fg);
+      font-weight: 600;
+    }
+    .policy-toc summary::-webkit-details-marker {
+      display: none;
+    }
+    .policy-toc nav a {
+      display: block;
+      padding: 6px 14px;
+      margin: 2px 0;
+      text-decoration: none;
+      color: var(--link);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .policy-toc nav a:hover {
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--fg);
+    }
+    .policy-toc nav a.active,
+    .policy-toc nav a[aria-current='true'] {
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    .policy-main {
+      flex: 1;
+      max-width: 780px;
+    }
+    .policy-main h1 {
+      margin: 0.2rem 0 1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      font-size: clamp(1.6rem, 1rem+2.2vw, 2.55rem);
+    }
+    .version-badge {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      cursor: pointer;
+    }
+    .version-badge:hover {
+      background: color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+    section {
+      margin: 64px 0;
+      scroll-margin-top: calc(var(--header-h) + 120px);
+    }
+    h2 {
+      font-size: 1.45rem;
+      margin: 0 0 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin: 2.2rem 0 1rem;
+    }
+    p {
+      line-height: 1.7;
+      margin: 1.1rem 0;
+      color: var(--muted);
+    }
+    a {
+      color: var(--accent);
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: var(--chip);
+      letter-spacing: 0.02em;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 32px 0;
+    }
+
+    /* FAQ Accordion Styles */
+    .faq-accordion details {
+      margin-bottom: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      transition: all 0.3s ease;
+    }
+    .faq-accordion details[open] {
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .faq-accordion summary {
+      padding: 16px 20px;
+      cursor: pointer;
+      list-style: none;
+      outline: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-accordion summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-accordion summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--muted);
+      transition: transform 0.3s ease;
+    }
+    .faq-accordion details[open] summary::after {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+    .faq-content {
+      padding: 0 20px 20px;
+      color: #e0e0e0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Focus styles */
+    :where(a, button, [role='button'], summary):focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: 10px;
+    }
+
+    /* Nav Search */
+    .nav-search-wrapper {
+      margin-bottom: 12px;
+    }
+    #navSearch {
+      width: 100%;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--fg);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #navSearch:focus {
+      border-color: var(--focus);
+    }
+
+    /* Reading Time */
+    .reading-time {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--line);
+    }
+
+    /* Reading Progress Bar */
+
+    /* Reading Progress Bar */
+    .policy-progress {
+      position: fixed;
+      top: var(--header-h, 72px);
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #ffffff;
+      z-index: 1100;
+      transform: scaleX(0);
+      transform-origin: 0% 50%;
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Heading Anchors */
+    .anchor {
+      position: absolute;
+      left: -1.4rem;
+      opacity: 0;
+      text-decoration: none;
+      color: var(--muted);
+      transition:
+        opacity 0.2s ease,
+        color 0.2s ease;
+      font-size: 0.9em;
+      font-weight: 400;
+    }
+    h2:hover .anchor,
+    h3:hover .anchor {
+      opacity: 1;
+    }
+    .anchor:hover {
+      color: var(--accent);
+    }
+
+    /* Mobile */
+    .toc-toggle {
+      display: none;
+    }
+    .policy-scrim {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: var(--header-h);
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+      z-index: 998;
+    }
+    @media (max-width: 980px) {
+      .policy-site {
+        flex-direction: column;
+        gap: 24px;
+        padding: calc(var(--header-h) + 16px) 16px 80px;
+      }
+      .policy-toc {
+        position: fixed;
+        left: 0;
+        top: calc(var(--header-h) + env(safe-area-inset-top));
+        bottom: env(safe-area-inset-bottom);
+        width: min(84vw, 360px);
+        background: rgba(0, 0, 0, 0.74);
+        backdrop-filter: saturate(120%) blur(6px);
+        border-right: 1px solid var(--line);
+        padding: 18px;
+        transform: translateX(-110%);
+        transition: transform 0.25s ease;
+        z-index: 999;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .toc-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 1000;
+        padding: 0.7rem 1rem;
+        background: var(--chip);
+        color: var(--fg);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      body.nav-open .policy-toc {
+        transform: none;
+      }
+      body.nav-open .policy-scrim {
+        opacity: 1;
+        visibility: visible;
+      }
+      .policy-main {
+        max-width: unset;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* Print */
+    @media print {
+      .policy-toc,
+      .toc-toggle,
+      .policy-scrim,
+      .changelog-modal {
+        display: none !important;
+      }
+      .policy-site {
+        padding: 0;
+      }
+    }
+
+    /* Changelog modal (minimal reuse from v1.0.0) */
+    .changelog-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .changelog-modal.active {
+      display: flex;
+    }
+    .changelog-content {
+      background: var(--chip);
+      padding: 20px 26px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      width: min(680px, 92vw);
+      max-height: 86vh;
+      overflow: auto;
+    }
+    .changelog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 0 12px;
+    }
+    .changelog-close {
+      background: none;
+      border: 1px solid var(--line);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .changelog-close:hover {
+      background: color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+    .changelog-items {
+      margin: 0 0 1rem;
+      padding: 0;
+      list-style: none;
+    }
+    .changelog-items li {
+      padding: 4px 0;
+      font-size: 0.9rem;
+      color: var(--link);
+    }
+  </style>
+
+  <script>
+    (function () {
+      if (window.__POLICY_V11_INIT__) return;
+      window.__POLICY_V11_INIT__ = true;
+      const now = new Date();
+      const y = document.getElementById('y');
+      if (y) y.textContent = now.getFullYear();
+      const eff = document.getElementById('eff');
+      if (eff) {
+        eff.textContent = now.toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+        });
+        eff.setAttribute('datetime', now.toISOString().split('T')[0]);
+      }
+
+      // Reading Progress
+      const progress = document.getElementById('policyProgress');
+      const updateProgress = () => {
+        const winScroll = window.scrollY;
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = winScroll / height;
+        if (progress) progress.style.transform = `scaleX(${scrolled})`;
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+
+      // Reading Time Calculation
+      const mainText = document.querySelector('main').innerText;
+      const wordsPerMinute = 200;
+      const minutes = Math.ceil(mainText.split(/\s+/).length / wordsPerMinute);
+      const timeDisplay = document.getElementById('readingTime');
+      if (timeDisplay) timeDisplay.textContent = `Est. ${minutes} min read`;
+
+      // Nav Search Filtering
+      const searchInput = document.getElementById('navSearch');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const term = e.target.value.toLowerCase();
+          document.querySelectorAll('.policy-toc nav a').forEach((a) => {
+            const text = a.textContent.toLowerCase();
+            const match = text.includes(term);
+            a.style.display = match ? 'block' : 'none';
+
+            // Auto-open parent details if match found
+            if (match && term.length > 0) {
+              const detail = a.closest('details');
+              if (detail) detail.open = true;
+            }
+          });
+        });
+      }
+
+      // Scroll spy with aria-current
+      const sections = [...document.querySelectorAll('main section[id]')];
+      const links = [...document.querySelectorAll('.policy-toc nav a')];
+      const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const id = e.target.id;
+              links.forEach((a) => {
+                a.classList.remove('active');
+                a.setAttribute('aria-current', 'false');
+              });
+              const link = map.get(id);
+              if (link) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'true');
+
+                // Auto-expand TOC section
+                const detail = link.closest('details');
+                if (detail) detail.open = true;
+              }
+            }
+          });
+        },
+        { rootMargin: '-40% 0px -55% 0px', threshold: [0, 1] },
+      );
+      sections.forEach((s) => obs.observe(s));
+
+      // Mobile nav toggle
+      window.toggleNav = function (force) {
+        const open =
+          typeof force === 'boolean' ? force : !document.body.classList.contains('nav-open');
+        document.body.classList.toggle('nav-open', open);
+        const btn = document.querySelector('.toc-toggle');
+        if (btn) btn.setAttribute('aria-expanded', open);
+      };
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (document.body.classList.contains('nav-open')) toggleNav(false);
+          const modal = document.getElementById('changelogModal');
+          if (modal && modal.classList.contains('active')) hideChangelog();
+        }
+      });
+
+      // Close drawer on link click
+      links.forEach((a) =>
+        a.addEventListener('click', () => {
+          if (document.body.classList.contains('nav-open')) toggleNav(false);
+        }),
+      );
+
+      // Smooth scroll (disabled under reduced motion automatically by browser behavior override)
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, '', href);
+          }
+        });
+      });
+
+      // Changelog modal controls
+      window.showChangelog = function () {
+        const m = document.getElementById('changelogModal');
+        if (m) {
+          m.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      };
+      window.hideChangelog = function () {
+        const m = document.getElementById('changelogModal');
+        if (m) {
+          m.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      };
+      document.addEventListener('click', (e) => {
+        const m = document.getElementById('changelogModal');
+        if (e.target === m) hideChangelog();
+      });
+      const badge = document.querySelector('.version-badge');
+      if (badge) {
+        badge.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            showChangelog();
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Policies & Legal",
+      "description": "McCal Media's terms of service, privacy policy, cookie policy, usage license, and frequently asked questions for professional photography services.",
+      "url": "https://mcc-cal.com/policies-legal",
+      "publisher": {
+        "@type": "Organization",
+        "name": "McCal Media",
+        "url": "https://mcc-cal.com"
+      },
+      "datePublished": "2025-01-27",
+      "dateModified": "2025-12-31",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "McCal Media",
+        "url": "https://mcc-cal.com"
+      }
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://mcc-cal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Policies & Legal",
+          "item": "https://mcc-cal.com/policies-legal"
+        }
+      ]
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What's the typical turnaround time for photography delivery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Preview gallery (sneak peeks) within 72 hours of service. Final edited gallery typically 2-4 weeks depending on project scope and season. Rush delivery available for additional fee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you backup my photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We maintain redundant backups on multiple drives and cloud storage for 90 days after final delivery. After that period, clients are responsible for maintaining their own backups."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about model releases or property releases?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Required for certain commercial uses—arranged case-by-case. We'll coordinate proper releases with subjects and property owners for advertising or product packaging. Editorial and personal use typically doesn't require releases."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I share my photos on social media?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Personal social media sharing is encouraged. Please credit @mcc_cal or McCal Media when posting. Commercial use requires proper licensing per your project agreement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if it rains on my outdoor shoot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We monitor weather forecasts closely and discuss backup indoor locations or reschedule options if severe weather is expected. Light rain can create beautiful moody photos if you're game!"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide raw/unedited files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our standard deliverables are professionally edited high-resolution JPEGs. Raw files are not included unless specifically negotiated and paid for, as they represent our unfinished creative work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many photos will I receive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Varies by project type. Concert coverage: 50-150 edited images. Corporate events: 100-300 images. Portrait sessions: 25-75 images. Specific counts outlined in your project agreement."
+          }
+        }
+      ]
+    }
+  </script>
+</div>
