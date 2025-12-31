@@ -3,6 +3,7 @@
 ## 🚀 What's New?
 
 ### Auto-Detect Latest Version
+
 ```tsx
 // Before: manual version tracking
 <WidgetEmbed widget="concert-portfolio" version="v4.7.1-api-optional.html" />
@@ -16,6 +17,7 @@
 ## 📋 Cheat Sheet
 
 ### Component Usage
+
 ```tsx
 // Basic (auto-detect)
 <WidgetEmbed widget="concert-portfolio" />
@@ -27,14 +29,15 @@
 <WidgetEmbed widget="concert-portfolio" version="v4.7.0.html" />
 
 // All together
-<WidgetEmbed 
-  widget="concert-portfolio" 
+<WidgetEmbed
+  widget="concert-portfolio"
   category="portfolios"
   version="v4.7.0.html"
 />
 ```
 
 ### API Endpoints
+
 ```bash
 # Auto-detect latest
 curl http://localhost:3000/api/widgets/concert-portfolio
@@ -77,6 +80,7 @@ src/widgets/
 ## ⚡ Common Tasks
 
 ### Add a New Widget Version
+
 ```bash
 # Create new version file
 touch src/widgets/concert-portfolio/versions/v4.8.0.html
@@ -86,6 +90,7 @@ touch src/widgets/concert-portfolio/versions/v4.8.0.html
 ```
 
 ### Update Component Reference
+
 ```tsx
 // OLD: explicit version
 <WidgetEmbed widget="about" version="v1.4.0.html" />
@@ -102,12 +107,14 @@ touch src/widgets/concert-portfolio/versions/v4.8.0.html
 ## 🔍 Debug Tips
 
 ### Check What Version Loaded
+
 ```bash
 curl -i http://localhost:3000/api/widgets/concert-portfolio
 # Look for: X-Widget-Version header
 ```
 
 ### See Available Versions
+
 ```bash
 # Get error response with list
 curl http://localhost:3000/api/widgets/fake-widget
@@ -115,6 +122,7 @@ curl http://localhost:3000/api/widgets/fake-widget
 ```
 
 ### Verify Widget Structure
+
 ```bash
 ls src/widgets/concert-portfolio/versions/
 # Should show: v4.7.0.html, v4.7.1-api-optional.html, etc.
@@ -124,22 +132,24 @@ ls src/widgets/concert-portfolio/versions/
 
 ## 📚 Files to Read
 
-| File | When | Time |
-|------|------|------|
-| `PHASE-2-QUICK-START.md` | **Start here** | 5 min |
-| `PHASE-2-WIDGET-REORGANIZATION.md` | Before reorganizing | 10 min |
-| `docs/integrations/API-ENDPOINT-REFERENCE.md` | Understanding API | 15 min |
+| File                                          | When                | Time   |
+| --------------------------------------------- | ------------------- | ------ |
+| `PHASE-2-QUICK-START.md`                      | **Start here**      | 5 min  |
+| `PHASE-2-WIDGET-REORGANIZATION.md`            | Before reorganizing | 10 min |
+| `docs/integrations/API-ENDPOINT-REFERENCE.md` | Understanding API   | 15 min |
 
 ---
 
 ## ✅ Version Naming Rules
 
 **Good**:
+
 - ✅ `v1.0.0.html`
 - ✅ `v1.2.0-feature.html`
 - ✅ `v4.7.1-api-optional.html`
 
 **Avoid**:
+
 - ❌ `v1.html` (ambiguous)
 - ❌ `concert-v1.html` (not detected)
 - ❌ `final.html` (not sortable)
@@ -149,12 +159,15 @@ ls src/widgets/concert-portfolio/versions/
 ## 🎯 Next Steps
 
 ### Today (Optional)
+
 Remove explicit version from a few components → Test
 
 ### Soon (1-2 hours)
+
 Follow `PHASE-2-WIDGET-REORGANIZATION.md` → Reorganize widgets
 
 ### Result
+
 Cleaner code + Better organized widgets + Automatic version detection 🎉
 
 ---

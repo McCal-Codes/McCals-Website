@@ -3,6 +3,8 @@
 */.DS_Store
 **/.DS_Store
 Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 *.swp
 *.swo
 *~
@@ -19,6 +21,7 @@ dist/
 .next/
 build/
 out/
+.turbo/
 
 # Package files (generated from source)
 *.tgz
@@ -67,18 +70,19 @@ coverage/
 *.pid
 *.seed
 *.pid.lock
+nohup.out
 
 # Playwright/Chrome artifacts
 playwright-report/
 playwright/.cache/
 
-# OS generated files
-.DS_Store
-Thumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
 # Temporary files
 *.tmp
 *.temp
 .cache/
+
+# Git history rewrite artifacts
+.git-rewrite/
+
+# Test preview files (tracked in tests/previews/)
+tests/previews/*.html
