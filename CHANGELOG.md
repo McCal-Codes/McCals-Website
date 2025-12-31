@@ -2,6 +2,19 @@
 
 ## 2025-12-31
 
+### Footer Widget v1.3.0
+
+- **Back to Top Button**: Added circular floating button with scroll progress ring indicator that appears after 400px scroll
+- **Smart Positioning**: Button automatically hides when approaching footer to prevent overlap
+- **Enhanced Link Interactions**: Added animated underline effect on hover for all footer links
+- **Social Icon Tooltips**: Platform names now appear on hover with smooth fade-in animation
+- **Newsletter Form States**: Added loading spinner, success message with checkmark animation, and visual validation feedback
+- **Version Interactivity**: Made version badge clickable (prepared for future changelog modal)
+- **Dynamic Copyright**: Year range now displays "2019-2025" format when applicable
+- **Improved Accessibility**: Enhanced focus states, keyboard navigation for Back to Top, and ARIA live regions for form feedback
+- **Performance**: Smooth scroll behavior, optimized animations with reduced-motion support
+- **Files**: `src/widgets/_navigation/site-footer/versions/v1.3.0-footer-back-to-top.html`
+
 ### About Widget v2.4.0
 
 - **Client Carousel Update**: Added PGH Social Club and PRSSA Pittsburgh to the client carousel, bringing the total to 27 premium clients.
