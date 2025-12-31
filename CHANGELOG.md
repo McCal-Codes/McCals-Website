@@ -1,5 +1,19 @@
 # Changelog
 
+## 2025-12-31
+
+### About Widget v2.4.0
+
+- **Client Carousel Update**: Added PGH Social Club and PRSSA Pittsburgh to the client carousel, bringing the total to 27 premium clients.
+- **Logo Consistency**: Updated OSH360 logo to use white filter treatment instead of grayscale for visual consistency with other client logos.
+- **Files**: `src/widgets/_content/about/complete-about-page/versions/v2.4.0-about-pgh-social-club.html`
+
+### About Widget v2.3.0
+
+- **Contact Link Update**: Migrated the "Grab a Coffee" link to the new endpoint: `https://calendly.com/cjmccar-mcc-cal/30min`.
+- **Schema Optimization**: Updated JSON-LD structured data with the new contact URL for improved SEO and consistency.
+- **Files**: `src/widgets/_content/about/complete-about-page/versions/v2.3.0-about-coffee-link.html`
+
 ## 2025-12-30
 
 ### Navigation Widget v2.0.0 (The Refined Lens)
