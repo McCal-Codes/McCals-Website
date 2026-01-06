@@ -3,8 +3,8 @@ name: Widget Version Limit
 on:
   pull_request:
     paths:
-      - 'src/widgets/**'
-      - 'scripts/utils/scan-widget-versions.js'
+      - "src/widgets/**"
+      - "scripts/utils/scan-widget-versions.js"
   workflow_dispatch:
 
 permissions:
@@ -20,15 +20,15 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install (ci)
         run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Enforce ≤2 active versions per widget
         run: |
-          node scripts/utils/scan-widget-versions.js --fail-overlimit 2
+          node scripts/utils/scan-widget-versions.js --fail --limit 2
 
       - name: Upload scan output
         if: always()

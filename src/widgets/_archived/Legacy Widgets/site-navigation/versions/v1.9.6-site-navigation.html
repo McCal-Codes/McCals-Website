@@ -1,44 +1,44 @@
 <!-- McCal Navigation - Code Injection Snippet (v1.9.6-nav)
-Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
+Note: v1.9.6-nav narrows the mobile menu and scales down typography for a tighter look. -->
 <!-- site-widgets:inline:start -->
 <style data-site-widgets-inline>
   :root {
-    --mcc-accent: #ffffff;
-    --mcc-accent-strong: #e0e0e0;
-    --mcc-bg: #000000;
-    --mcc-fg: #ffffff;
-    --mcc-line: #333333;
-    --mcc-muted: #888888;
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
     --bg: var(--mcc-bg);
     --fg: var(--mcc-fg);
     --line: var(--mcc-line);
     --accent: var(--mcc-accent);
     --muted: var(--mcc-muted);
-    --chip: #1a1a1a;
-    --focus: #ffffff;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
     --link: var(--accent);
-    --panel-bg: rgba(20, 20, 20, 0.85);
-    --panel-border: rgba(255, 255, 255, 0.2);
-    --panel-blur: 12px;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
     --mcc-space-1: 4px;
     --mcc-space-2: 8px;
     --mcc-space-3: 12px;
     --mcc-space-4: 16px;
     --mcc-space-5: 24px;
     --mcc-space-6: 32px;
-    --mcc-radius: 12px;
-    --mcc-control-height: 42px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
     --mcc-z-top: 2147483647;
   }
   [data-theme='light'] {
     --fg: #0a0a0a;
     --bg: #ffffff;
     --line: #e5e5e5;
-    --panel-bg: rgba(255, 255, 255, 0.95);
-    --panel-border: rgba(0, 0, 0, 0.1);
-    --panel-blur: 12px;
-    --chip: #f5f5f5;
-    --focus: #000000;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
     --link: var(--accent);
   }
   [data-theme='dark'] {
@@ -348,9 +348,9 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     }
   }
 
-  /* 1.9.1: Minimalist Navigation CTA Button */
+  /* Consolidated: Minimalist Navigation CTA Button */
   .mcc-nav__cta {
-    margin-left: clamp(0.6rem, 2vw, 1.2rem);
+    margin-left: clamp(0.5rem, 1.2vw, 1rem);
   }
 
   .mcc-nav__cta-btn {
@@ -363,8 +363,8 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     color: var(--mcc-nav-text-secondary) !important;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.85rem;
-    letter-spacing: 0.03em;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     white-space: nowrap;
@@ -378,7 +378,94 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     transform: translateY(-1px);
   }
 
+  /* Consolidated: Centered Compact Mobile UI */
   @media (max-width: 768px) {
+    .mcc-nav {
+      padding: clamp(26px, 8vw, 48px) clamp(16px, 4vw, 32px) clamp(12px, 4vw, 24px);
+    }
+    .mcc-nav__toggle {
+      display: inline-flex;
+    }
+    .mcc-nav__menu {
+      position: absolute;
+      top: calc(100% + clamp(12px, 3vw, 20px));
+      right: clamp(16px, 4vw, 32px);
+      left: auto;
+      transform: none;
+      width: min(185px, 65vw);
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      padding: 24px;
+      border-radius: 20px;
+      background: rgba(8, 8, 12, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.5),
+        0 8px 16px rgba(0, 0, 0, 0.3);
+      -webkit-backdrop-filter: saturate(140%) blur(24px);
+      backdrop-filter: saturate(140%) blur(24px);
+      z-index: 10001;
+      text-align: right;
+    }
+    .mcc-nav__links {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 18px;
+      width: 100%;
+    }
+    .mcc-nav__link a {
+      width: max-content;
+      padding: 8px 0;
+      justify-content: flex-end;
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .mcc-nav__link--has-submenu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .mcc-nav__submenu-btn-container {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-start; /* right-anchored */
+      gap: 8px; /* tight gap next to "Work" */
+      width: 100%;
+    }
+    .mcc-nav__submenu-toggle {
+      display: flex !important;
+      position: static !important;
+      width: 24px;
+      height: 24px;
+      transform: none !important;
+      margin: 0 !important;
+    }
+    .mcc-nav.mcc-nav--menu-open .mcc-nav__menu {
+      display: flex;
+    }
+    .mcc-nav__submenu {
+      position: static !important;
+      display: none;
+      width: 100%;
+      margin-top: 8px;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    .mcc-nav__submenu li a {
+      text-align: right !important;
+      padding: 10px 0 !important;
+      font-size: 1.05rem !important;
+      color: rgba(255, 255, 255, 0.65);
+    }
     .mcc-nav__cta {
       margin-left: 0;
       width: 100%;
@@ -390,77 +477,9 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
       width: 100%;
       justify-content: center;
       padding: 14px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
       border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-  }
-  @media (max-width: 768px) {
-    .mcc-nav {
-      padding: clamp(26px, 8vw, 48px) clamp(16px, 4vw, 32px) clamp(12px, 4vw, 24px);
-    }
-    .mcc-nav__toggle {
-      display: inline-flex;
-    }
-    .mcc-nav__menu {
-      position: absolute;
-      top: calc(100% + clamp(12px, 3vw, 20px));
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(220px, 75vw);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      padding: clamp(20px, 5vw, 28px);
-      border-radius: 20px;
-      background: rgba(8, 8, 12, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow:
-        0 32px 64px rgba(0, 0, 0, 0.5),
-        0 8px 16px rgba(0, 0, 0, 0.3);
-      -webkit-backdrop-filter: saturate(140%) blur(24px);
-      backdrop-filter: saturate(140%) blur(24px);
-      z-index: 10001;
-      text-align: center;
-    }
-    .mcc-nav__links {
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-    }
-    .mcc-nav__link a {
-      width: 100%;
-      padding: 6px 0;
-      justify-content: center;
-    }
-    .mcc-nav__link--has-submenu {
-      position: relative; /* ensure absolute-positioned toggle is anchored */
-    }
-    .mcc-nav__link--has-submenu > a {
-      /* keep link on one line with arrow to the right */
-      padding-right: 40px; /* make room for the arrow button */
-    }
-    .mcc-nav__submenu-toggle {
-      /* place arrow next to "Work" on the same line */
-      display: inline-flex;
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      width: 32px;
-      height: 32px;
-      margin: 0; /* override previous margin-top */
-      align-self: auto; /* override previous align-self */
-      z-index: 1; /* ensure clickable above the link */
-    }
-    .mcc-nav.mcc-nav--menu-open .mcc-nav__menu {
-      display: flex;
-    }
-    .mcc-nav__submenu {
-      margin-top: 6px; /* subtle spacing from parent row (was 0) */
-      margin-left: 12px; /* minimal indent to indicate submenu */
-      padding-left: 8px; /* slight inner offset for items */
     }
   }
   @media (max-width: 520px) {
@@ -473,86 +492,14 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     }
   }
 
-  /* 1.6.2: submenu styles */
-  .mcc-nav__link--has-submenu {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  /* Shared base styles */
-  .mcc-nav__submenu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: none;
-    z-index: 10002;
-  }
-
-  .mcc-nav__submenu li {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
-  .mcc-nav__submenu li a {
-    display: block;
-    width: 100%;
-    padding: 8px 16px;
-    color: var(--fg);
-    text-decoration: none;
-    text-shadow: none;
-    border-radius: 8px;
-    font-weight: 500;
-    white-space: nowrap;
-    text-align: left;
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
-  }
-  .mcc-nav__submenu li a:hover,
-  .mcc-nav__submenu li a:focus-visible {
-    background-color: var(--chip);
-    color: var(--fg);
-    outline: none;
-  }
-
-  .mcc-nav__submenu-toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.24);
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .mcc-nav__submenu-toggle:hover,
-  .mcc-nav__submenu-toggle:focus-visible {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.32);
-    outline: none;
-  }
-  .mcc-nav__submenu-toggle::before {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: rotate(45deg);
-    transition: transform 0.2s ease;
-  }
-  .mcc-nav__submenu-toggle[aria-expanded='true']::before {
-    transform: rotate(225deg);
-  }
-
-  /* Desktop: show on hover/focus & popup styling */
+  /* Consolidated: Desktop Floating Lens Submenu */
   @media (min-width: 769px) {
+    .mcc-nav__link--has-submenu {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .mcc-nav__submenu {
       position: absolute;
       top: calc(100% + 12px);
@@ -576,24 +523,38 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
         opacity 0.25s ease,
         transform 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
       pointer-events: none;
+      list-style: none;
+      display: block; /* use opacity/pointer-events instead of display for transitions */
+      z-index: 10002;
     }
     .mcc-nav__submenu li {
       width: 100%;
     }
     .mcc-nav__submenu li a {
-      width: 100%;
-    }
-    .mcc-nav__submenu-toggle {
-      display: none;
-    }
-    .mcc-nav__link--has-submenu:hover > .mcc-nav__submenu,
-    .mcc-nav__link--has-submenu:focus-within > .mcc-nav__submenu {
       display: block;
+      width: 100%;
+      padding: 8px 16px;
+      color: var(--fg);
+      text-decoration: none;
+      text-shadow: none;
+      border-radius: 8px;
+      font-weight: 500;
+      white-space: nowrap;
+      text-align: left;
+      transition: background-color 0.2s ease;
+    }
+    .mcc-nav__submenu li a:hover {
+      background-color: var(--chip);
+      outline: none;
+    }
+    .mcc-nav__link--has-submenu:hover > .mcc-nav__submenu {
       opacity: 1;
       transform: translateY(0) scale(1);
       pointer-events: auto;
     }
-    /* 1.6.2: invisible hover bridge */
+    .mcc-nav__submenu-toggle {
+      display: none;
+    }
     .mcc-nav__link--has-submenu::after {
       content: '';
       position: absolute;
@@ -604,59 +565,38 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     }
   }
 
-  /* Mobile: minimal collapsible */
-  @media (max-width: 768px) {
-    .mcc-nav__link--has-submenu {
-      /* one row: [text | arrow] */
-      display: grid;
-      grid-template-columns: 1fr auto; /* text left, arrow right */
-      align-items: center;
-      column-gap: 10px;
-      row-gap: 0; /* avoid wrapping arrow under text */
-      position: static; /* override earlier relative */
-    }
-    .mcc-nav__link--has-submenu > a {
-      grid-column: 1; /* text column */
-      width: 100%;
-      display: block;
-      padding-right: 0; /* override earlier padding hack */
-    }
-    .mcc-nav__submenu-toggle {
-      grid-column: 2; /* arrow column on the right */
-      display: inline-flex;
-      position: static; /* not absolute; stays inline with text */
-      transform: none;
-      width: 32px;
-      height: 32px;
-      margin: 0;
-      align-self: center;
-      justify-self: end; /* anchor to the right edge */
-      z-index: 1;
-    }
-    .mcc-nav__submenu {
-      grid-column: 1 / -1; /* drop under the row */
-      grid-row: 2;
-      position: static;
-      width: 100%;
-      margin-left: 0;
-      padding-left: 0;
-      padding-right: 0;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-    }
-    .mcc-nav__submenu-toggle[aria-expanded='true'] + .mcc-nav__submenu {
-      display: block;
-    }
+  /* Shared Submenu Toggle Arrow (Mobile) */
+  .mcc-nav__submenu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .mcc-nav__submenu-toggle::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    margin-bottom: 2px;
+  }
+  .mcc-nav__submenu-toggle[aria-expanded='true']::before {
+    transform: rotate(225deg);
+    margin-bottom: -2px;
   }
 
-  /* 1.6.2: reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     .mcc-nav,
-    .mcc-nav__toggle,
-    .mcc-nav__link a::after {
-      transition: none !important;
-    }
     .mcc-nav__submenu {
       transition: none !important;
     }
@@ -683,17 +623,18 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
       </button>
       <div class="mcc-nav__menu">
         <ul class="mcc-nav__links" id="mcc-nav-links" role="list">
-          <!-- 1.6.2: Work now has a submenu -->
           <li class="mcc-nav__link mcc-nav__link--has-submenu">
-            <a href="/" data-match="^/$">Work</a>
-            <button
-              class="mcc-nav__submenu-toggle"
-              type="button"
-              aria-expanded="false"
-              aria-controls="submenu-work"
-            >
-              <span class="sr-only">Toggle Work submenu</span>
-            </button>
+            <div class="mcc-nav__submenu-btn-container">
+              <a href="/" data-match="^/$">Work</a>
+              <button
+                class="mcc-nav__submenu-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="submenu-work"
+              >
+                <span class="sr-only">Toggle Work submenu</span>
+              </button>
+            </div>
             <ul
               class="mcc-nav__submenu"
               id="submenu-work"
@@ -702,9 +643,7 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
               aria-hidden="true"
             >
               <li><a href="https://mcc-cal.com/featured" role="menuitem">Featured</a></li>
-              <li>
-                <a href="https://mcc-cal.com/journalism" role="menuitem">Photojournalism</a>
-              </li>
+              <li><a href="https://mcc-cal.com/journalism" role="menuitem">Photojournalism</a></li>
               <li><a href="https://mcc-cal.com/concert" role="menuitem">Concert</a></li>
               <li><a href="https://mcc-cal.com/event" role="menuitem">Event</a></li>
               <li><a href="https://mcc-cal.com/nature" role="menuitem">Nature</a></li>
@@ -714,7 +653,7 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
           <li class="mcc-nav__link"><a href="/podcast" data-match="^/podcast">Podcast</a></li>
           <li class="mcc-nav__link"><a href="/about" data-match="^/about">About</a></li>
           <li class="mcc-nav__cta">
-            <a href="/request-a-quote" class="mcc-nav__cta-btn"> Request a Quote </a>
+            <a href="/request-a-quote" class="mcc-nav__cta-btn">Request a Quote</a>
           </li>
         </ul>
       </div>
@@ -736,7 +675,6 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     const root = document.querySelector('.mcc-nav-widget');
     if (!root || root.dataset.mounted === 'true') return;
     root.dataset.mounted = 'true';
-
     document.documentElement.dataset.mccNav = 'active';
 
     const nav = root.querySelector('.mcc-nav');
@@ -747,9 +685,10 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     const collapseAllSubmenus = () => {
       submenuToggles.forEach((btn) => {
         btn.setAttribute('aria-expanded', 'false');
-        const submenu = btn.nextElementSibling;
-        if (submenu && submenu.classList.contains('mcc-nav__submenu')) {
+        const submenu = btn.closest('.mcc-nav__link').querySelector('.mcc-nav__submenu');
+        if (submenu) {
           submenu.setAttribute('aria-hidden', 'true');
+          if (window.innerWidth <= 768) submenu.style.display = 'none';
         }
       });
     };
@@ -757,37 +696,48 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
     const closeMobile = () => {
       nav.classList.remove('mcc-nav--menu-open');
       if (toggle) toggle.setAttribute('aria-expanded', 'false');
-      // 1.6.2: also collapse any open submenus
       collapseAllSubmenus();
     };
 
     if (toggle) {
       toggle.addEventListener('click', function (e) {
-        e.stopPropagation(); // prevent outside-click handler from firing
+        e.stopPropagation();
         const willOpen = !nav.classList.contains('mcc-nav--menu-open');
         nav.classList.toggle('mcc-nav--menu-open', willOpen);
         this.setAttribute('aria-expanded', String(willOpen));
       });
     }
 
-    links.forEach((anchor) => anchor.addEventListener('click', closeMobile));
+    links.forEach((anchor) => {
+      if (!anchor.closest('.mcc-nav__submenu')) {
+        anchor.addEventListener('click', closeMobile);
+      }
+    });
 
-    // 1.6.2: mobile submenu toggle
     submenuToggles.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const expanded = btn.getAttribute('aria-expanded') === 'true';
-        // minimal: close others, then toggle current
-        collapseAllSubmenus();
+        const submenu = btn.closest('.mcc-nav__link').querySelector('.mcc-nav__submenu');
+
+        // Close others
+        submenuToggles.forEach((other) => {
+          if (other !== btn) other.setAttribute('aria-expanded', 'false');
+        });
+        document.querySelectorAll('.mcc-nav__submenu').forEach((s) => {
+          if (s !== submenu && window.innerWidth <= 768) s.style.display = 'none';
+        });
+
         btn.setAttribute('aria-expanded', String(!expanded));
-        const submenu = btn.nextElementSibling;
-        if (submenu && submenu.classList.contains('mcc-nav__submenu')) {
+        if (submenu) {
           submenu.setAttribute('aria-hidden', String(expanded));
+          if (window.innerWidth <= 768) {
+            submenu.style.display = expanded ? 'none' : 'block';
+          }
         }
       });
     });
 
-    // 1.6.2: close on outside click (mobile only)
     document.addEventListener('click', (e) => {
       if (
         window.innerWidth <= 768 &&
@@ -798,64 +748,44 @@ Note: v1.9.6-nav centers the mobile menu and makes it more compact. -->
       }
     });
 
-    // 1.6.2: close on Escape (only if open)
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.classList.contains('mcc-nav--menu-open')) {
-        closeMobile();
-      }
+      if (e.key === 'Escape') closeMobile();
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) collapseAllSubmenus();
-      if (window.innerWidth > 768) closeMobile();
-      requestAnimationFrame(updateNavHeight);
+      if (window.innerWidth > 768) {
+        closeMobile();
+        document.querySelectorAll('.mcc-nav__submenu').forEach((s) => (s.style.display = ''));
+      }
     });
 
     const highlight = () => {
-      const currentPath = window.location.pathname.replace(/\/+$/, '');
-      const currentHash = window.location.hash;
-
-      // reset all first
+      const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
       nav.querySelectorAll('a').forEach((a) => a.removeAttribute('aria-current'));
-
-      // top-level/data-match highlighting (keep)
       nav.querySelectorAll('[data-match]').forEach((anchor) => {
         const pattern = anchor.getAttribute('data-match');
-        if (!pattern) return;
-        try {
-          if (new RegExp(pattern).test(currentPath)) {
-            anchor.setAttribute('aria-current', 'page');
-          }
-        } catch (err) {
-          console.warn('[mcc-nav] invalid regex', pattern, err);
+        if (pattern && new RegExp(pattern).test(currentPath)) {
+          anchor.setAttribute('aria-current', 'page');
         }
       });
-
-      // remove submenu "current" highlighting logic (underline only on hover now)
-      // (deleted block that set aria-current on .mcc-nav__submenu a by path+hash)
     };
     highlight();
-
-    const handleRoute = () => {
-      highlight();
-      closeMobile();
-      // 1.6.2: ensure submenus are collapsed after route changes
-      collapseAllSubmenus();
-    };
-    window.addEventListener('SquarespaceRoutingComplete', handleRoute);
+    window.addEventListener('SquarespaceRoutingComplete', highlight);
 
     const updateNavHeight = () => {
-      const height = nav.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--mcc-nav-height', height + 'px');
+      document.documentElement.style.setProperty(
+        '--mcc-nav-height',
+        nav.getBoundingClientRect().height + 'px',
+      );
     };
     requestAnimationFrame(updateNavHeight);
     window.addEventListener('load', updateNavHeight);
+    window.addEventListener('resize', updateNavHeight);
 
     const applyScrollState = () => {
-      const threshold = nav.getBoundingClientRect().height * 0.35;
-      nav.classList.toggle('is-scrolled', window.scrollY > threshold);
+      nav.classList.toggle('is-scrolled', window.scrollY > 50);
     };
-    applyScrollState();
     window.addEventListener('scroll', applyScrollState, { passive: true });
+    applyScrollState();
   })();
 </script>

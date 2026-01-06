@@ -52,25 +52,23 @@ Last Updated: January 6, 2026
 
 ### 🔧 Repository Improvements
 
-- [ ] **Package.json Reorganization**
-  - [ ] Group 105 scripts into logical categories (dev, build, manifest, test, etc.)
-  - [ ] Add comment headers for each category
-  - [ ] Test each category independently
-  - [ ] Update documentation
-  - **Reason:** Deferred from Phase 3 - requires careful testing of 105 scripts
-  - **Priority:** Medium
-  - **Estimated Time:** 2-3 hours
+- [x] **Categorize and Document package.json Scripts**
+  - **Purpose**: Reduce cognitive load and prevent accidental execution of deprecated or incorrect scripts across 105+ entries.
+  - **Scope**: Reorganizes the `scripts` object in `/package.json`. Must NOT change script names or logic.
+  - **Findings**: Categorized into 13 logical groups with header comments.
+  - **Validation**: `npm run` executes without errors; all CI-critical scripts function.
 
-- [ ] **Major Dependency Updates**
-  - [ ] ESLint 8.57.1 → 9.x (breaking changes in config format)
-  - [ ] React/React-DOM 18.3.1 → 19.x (Next.js compatibility check needed)
-  - [ ] Tailwind CSS 3.4.18 → 4.x (major rewrite, extensive changes)
-  - [ ] chokidar 4.0.3 → 5.0.0 (test file watchers)
-  - [ ] esbuild 0.27.2 → latest (test build scripts)
-  - [ ] open 10.2.0 → 11.0.0 (minor API changes)
-  - **Reason:** Breaking changes require thorough testing
-  - **Priority:** High (security & compatibility)
-  - **Estimated Time:** 4-6 hours
+- [x] **Pre-Upgrade Audit for ESLint 9 and React 19**
+  - **Purpose**: Identify breaking changes and required config updates (ESLint config format, Next.js compat) before starting the actual upgrade.
+  - **Findings**: Documented in [docs/2026-DEPENDENCY-AUDIT.md](../docs/2026-DEPENDENCY-AUDIT.md)
+  - **Validation**: Summary of breaking changes documented.
+
+- [ ] **Node.js Upgrade (20.19+ or 22.x LTS)**
+  - **Purpose**: Align with newer package recommendations (≥20.17) and security standards.
+  - **Scope**: Internal development environment and CI/CD runners.
+  - **Dependencies**: none
+  - **Risk level**: low
+  - **Validation**: All npm scripts and build processes pass; CI/CD workflows updated.
 
 - [ ] **Node.js Upgrade**
   - [ ] Upgrade from Node.js 20.15.1 to 20.19+ or 22.x LTS
@@ -96,39 +94,47 @@ Last Updated: January 6, 2026
 
 ### ⚡ Live Site Performance (mcc-cal.com)
 
-Ownership of real-user performance on the production Squarespace site.
+- [x] **Define and Document LCP Elements per Primary Page**
+  - **Purpose**: Establish measurable performance targets for Home, Concerts, Events, Journalism, and Portraits pages.
+  - **Scope**: Touches `updates/todo.md` (Page & Widget Mapping section). Does not touch widget code.
+  - **Findings**: Candidate selectors documented in the mapping section below.
+  - **Validation**: LCP candidates recorded for all 5 primary pages.
 
-- [ ] Define LCP element per primary page (home, concerts, events, journalism, portraits)
-- [ ] Audit above-the-fold images:
-  - [ ] Replace JS-rendered hero/primary images with native <img> where applicable
-  - [ ] Verify srcset/sizes correctness for mobile and tablet
-- [ ] Enforce JS deferral across all widgets (no render-blocking scripts)
-- [ ] Gate widget initialization by presence (no global bootstraps)
-- [ ] Audit DOM weight per widget (remove redundant wrappers and containers)
-- [ ] Capture baseline metrics per page (LCP, TBT, CLS)
-- [ ] Record before/after metrics when shipping widget performance changes
+- [ ] **Audit and Replace JS-rendered Hero Images**
+  - **Purpose**: Shift LCP elements from JS-driven rendering to native `<img>` tags to improve FCP/LCP.
+  - **Scope**: Touches widget HTML versions. Must preserve responsive srcset/sizes logic.
+  - **Dependencies**: LCP candidates must be defined first.
+  - **Risk level**: medium (Visual regression if image loading logic breaks).
+  - **Validation**: Hero images visible with JS disabled;srcset/sizes verified correct on mobile.
+
+- [ ] **Enforce JS Deferral & Widget Gating**
+  - **Purpose**: Remove render-blocking scripts and prevent unnecessary initialization code from running.
+  - **Scope**: All widgets and main site bootstrap.
+  - **Dependencies**: none
+  - **Risk level**: high (Could break widget initialization or event listeners).
+  - **Validation**: No render-blocking scripts reported in DevTools for above-the-fold content.
 
 #### Page & Widget Mapping
 
 - [ ] Home page
   - Primary widgets: site-navigation, featured-work, footer
-  - LCP candidate: hero image / featured image block
+  - LCP candidate: `.featured-item:first-child img` (or Squarespace Hero Image)
 
 - [ ] Concerts
   - Primary widgets: concert-portfolio
-  - LCP candidate: first visible concert image
+  - LCP candidate: `.concert-card:first-child img`
 
 - [ ] Events
   - Primary widgets: event-portfolio
-  - LCP candidate: first event card image
+  - LCP candidate: `.event-card:first-child img`
 
 - [ ] Journalism
   - Primary widgets: photojournalism-portfolio
-  - LCP candidate: lead image / featured album image
+  - LCP candidate: `.journalism-card:first-child img`
 
 - [ ] Portraits
   - Primary widgets: portrait-portfolio
-  - LCP candidate: first portrait image
+  - LCP candidate: `.portrait-card:first-child img`
 
 For each page:
 
@@ -187,7 +193,7 @@ Phased improvements for the existing widget ecosystem.
 - [ ] **Navigation Refinement**: Add Passive Scroll Listeners and Safe Area Insets to `site-navigation`
 - [ ] **Empty State Resilience**: Add UI handling in `concert-portfolio` and `photojournalism-portfolio`
 - [ ] **Blog Performance**: Add Search Debouncing (300ms) to `blog-feed`
-- [ ] **Podcast Reliability**: Implement CORS Proxy Fallback Chain for `podcast-feed`
+- [x] **Podcast Reliability**: _[OUT OF SCOPE - Assigned to Podcast Agent]_ Implement CORS Proxy Fallback Chain for `podcast-feed`
 - [ ] **Admin Observability**: Add GitHub API Rate Limit Detection to `admin-dashboard`
 - [ ] **Event Portfolio Polish**: Auto-detect latest widget version & URL normalization fix
 - [ ] **Content Widget Polish**:
@@ -219,7 +225,12 @@ Phased improvements for the existing widget ecosystem.
 
 - [ ] Evaluate GitHub Actions secret lint warnings (reusable `workflow_call` dispatcher)
 - [ ] TODO: Add automated widget validation (small unit/integration tests) and wire into CI
-- [ ] TODO: Add CI rule enforcing ≤2 active versions
+- [x] **Implement CI Check for Active Widget Versions**
+  - **Purpose**: Enforce the "≤2 active versions" policy to prevent technical debt and maintain repository hygiene.
+  - **Scope**: Github Actions workflows or standalone script in `scripts/`. Must not modify widget files.
+  - **Findings**: 0 violations now. All 11 violating widgets archived. Recursive scanner and CI check implemented.
+  - **Validation**: CI passes; `npm run scan:widget-versions` returns "PASS".
+
 - [ ] TODO: Add structured data validator & Lighthouse automation snapshot
 
 ### Performance, SEO & A11y

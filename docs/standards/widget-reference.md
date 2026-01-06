@@ -43,12 +43,12 @@ src/widgets/widget-name/
 
 ```css
 :root {
-  /* See src/widgets/shared/theme.css for full variable list */
+  /* See src/widgets/shared/theme.css for full monochrome variable list */
   --mc-bg: #050506; /* Base background (dark only) */
   --mc-text: #f3f5f8; /* Text color */
-  --mc-accent-black: #272423; /* Accent (business palette) */
-  --mc-accent-taupe: #b8b0aa; /* Accent (business palette) */
-  --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #b8b0aa 100%); /* Accent gradient */
+  --mc-accent: #ffffff; /* Monochrome accent */
+  --mc-border: rgba(255, 255, 255, 0.15); /* Monochrome border */
+  --mc-gradient-accent: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%); /* Monochrome gradient */
 }
 ```
 

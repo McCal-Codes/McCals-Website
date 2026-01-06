@@ -16,22 +16,30 @@
 
 ### Audio & UI 🎵
 
+- **NEW**: Added "Load More Episodes" button for paginated access to the complete feed catalog.
+- **NEW**: Added "Read More / Read Less" toggle for the podcast description with a smart truncation point after the intro sentence.
+- **NEW**: Implemented a Changelog modal accessible via the clickable version indicator.
 - **ENHANCED**: Explicit audio availability detection during render, providing immediate visual feedback for unavailable tracks.
 - **ENHANCED**: Modernized audio event handling using unified event listeners on the episode grid.
 - **UPDATED**: Fallback episodes updated with explicit audio URLs and unified metadata.
+- **UPDATED**: Play buttons switched to a neutral glassmorphic aesthetic for better site integration.
 
 ### Developer Experience 🛠️
 
 - **ENHANCED**: Lazy-loaded debug panel with real-time system state monitoring and manual cache reset.
 - **ENHANCED**: Full removal of inline `onclick` handlers for better security and maintainability.
 
-## v2.1.0 (2025-12-31) - Resilience Refinement
+## v2.1.0 (2025-12-31) - Resilience Refinement (Synced)
 
 ### Resilience 🧱
 
 - **ENHANCED**: Improved fallback logic for RSS fetching when proxies fail
 - **UPDATED**: Cache key updated to `podcast-feed-episodes-v2.1.0-WIP` to ensure clean data transitions
 - **UPDATED**: Version indicators and branding throughout the widget
+
+### Sync 🔄
+
+- **NEW**: Added Feature Parity with v2.2.0: "Load More", "Read More", and Changelog Modal.
 
 ## v2.0.0 (2025-10-25) - Performance Optimization & Accessibility Enhancement
 

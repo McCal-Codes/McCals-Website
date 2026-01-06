@@ -131,14 +131,18 @@ versions/
 
 ## 🎨 Visual Design Standards
 
-### Accent & Gradient System (2025-10-09)
+### Monochrome Business Palette (2026-01-06 Update)
 
-- All widgets must use the dark base palette for backgrounds and cards (see `src/widgets/shared/theme.css`).
-- The business palette is integrated as accent/gradient variables ONLY—never as base backgrounds.
-- Use `--mc-accent-*` and `--mc-gradient-*` variables for highlights, chips, overlays, and accent lines.
-- Do NOT use these as base backgrounds or for large surfaces.
-- For usage examples, see `docs/standards/widget-ui-colors-and-buttons.md` and the comment block in `theme.css`.
-- All widgets must remain dark mode by default. Light/dark toggle is a future enhancement.
+- All widgets must use the official McCal Media Business Palette for accents on a **pitch-black background**.
+- **Core Colors:**
+  - Background (Dark): `#050506` (Near Pitch Black)
+  - Text (Light): `#CAC2BA` (Business Silver)
+  - Primary Accent: `#B8B0AA` (Business Taupe)
+  - Muted/Border: `#2A2A2A`
+- **Authorized Gradients:**
+  - Business Gradient: `linear-gradient(135deg, #CAC2BA 0%, #B8B0AA 100%)` (for interactive elements)
+  - Subtle Gradient: `linear-gradient(135deg, #5B5553 0%, #363230 100%)`
+- No bright chromatic colors (pinks, reds, blues) are permitted.
 
 ### 1. **CSS Custom Properties (Variables)**
 
@@ -147,16 +151,17 @@ Standardized color palette and design tokens:
 ```css
 :root {
   /* Core colors */
-  --fg: #f5f5f5; /* Foreground text */
-  --bg: #0a0a0a; /* Background */
-  --line: #2a2a2a; /* Borders/lines */
-  --accent: #ff4d6d; /* Accent/interactive */
-  --published: #00d4aa; /* Success/published indicator */
+  /* Core Business Palette (Accents on Black) */
+  --fg: #cac2ba; /* Neutral light text */
+  --bg: #050506; /* Pitch black background */
+  --line: #2a2a2a; /* Subtle borders */
+  --accent: #b8b0aa; /* Business accent */
+  --published: #ffffff; /* Success indicator */
 
   /* Semantic colors */
-  --mcc-hover: rgba(255, 255, 255, 0.9);
-  --mcc-focus: rgba(255, 255, 255, 0.6);
-  --mcc-disabled: rgba(255, 255, 255, 0.4);
+  --mcc-hover: rgba(184, 176, 170, 0.9);
+  --mcc-focus: rgba(184, 176, 170, 0.6);
+  --mcc-disabled: rgba(91, 85, 83, 0.4);
 }
 
 /* Dark mode support */
@@ -206,9 +211,9 @@ For accent highlights (chips, callouts, or special buttons), use a dark base wit
 
 ```css
 .accent-highlight-btn {
-  background: var(--mc-accent-black);
-  color: var(--mc-accent-taupe);
-  border: 2px solid var(--mc-accent-dark); /* Default accent border */
+  background: var(--mc-gradient-business);
+  color: #272423;
+  border: 1px solid #363230;
   border-radius: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-weight: 500;
@@ -218,11 +223,11 @@ For accent highlights (chips, callouts, or special buttons), use a dark base wit
     border-color 0.2s,
     box-shadow 0.2s,
     transform 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(95, 212, 240, 0.08); /* Subtle blue accent shadow */
+  box-shadow: 0 2px 8px 0 rgba(255, 255, 255, 0.05); /* Subtle white shadow */
 }
 .accent-highlight-btn:hover {
-  border-color: var(--mc-accent-slate); /* Or randomly pick: --mc-accent-stone, --mc-accent-taupe */
-  box-shadow: 0 4px 16px 0 rgba(184, 176, 170, 0.12); /* Subtle taupe accent shadow */
+  border-color: #b8b0aa;
+  box-shadow: 0 4px 16px 0 rgba(184, 176, 170, 0.15);
   transform: translateY(-1px);
 }
 /* Optional: Add a JS snippet to randomize accent border/shadow on mount for extra variety */
