@@ -2,12 +2,12 @@
 <!-- site-widgets:inline:start -->
 <style data-site-widgets-inline>
   :root {
-    --mcc-accent: #ff4d6d;
-    --mcc-accent-strong: #ff2b50;
-    --mcc-bg: #ffffff;
-    --mcc-fg: #111827;
-    --mcc-line: #e5e7eb;
-    --mcc-muted: #6b7280;
+    --mcc-accent: #b8b0aa;
+    --mcc-accent-strong: #cac2ba;
+    --mcc-bg: #050506;
+    --mcc-fg: #cac2ba;
+    --mcc-line: #2a2a2a;
+    --mcc-muted: #5b5553;
     --bg: var(--mcc-bg);
     --fg: var(--mcc-fg);
     --line: var(--mcc-line);
@@ -15,10 +15,12 @@
     --muted: var(--mcc-muted);
     --chip: #1b1b1b;
     --focus: #7dd3fc;
-    --link: var(--accent);
-    --panel-bg: rgba(255, 255, 255, 0.82);
-    --panel-border: rgba(0, 0, 0, 0.08);
-    --panel-blur: 8px;
+    --link: var(--mcc-accent-strong);
+    --panel-bg: rgba(48, 44, 44, 0.85);
+    --panel-border: rgba(184, 176, 170, 0.2);
+    --panel-blur: 12px;
+    --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+    --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
     --mcc-space-1: 4px;
     --mcc-space-2: 8px;
     --mcc-space-3: 12px;
@@ -41,15 +43,15 @@
     --link: var(--accent);
   }
   [data-theme='dark'] {
-    --fg: #f7f7f7;
-    --bg: #06060a;
+    --fg: #cac2ba;
+    --bg: #050506;
     --line: #2a2a2a;
-    --panel-bg: rgba(20, 20, 20, 0.78);
-    --panel-border: rgba(255, 255, 255, 0.12);
-    --panel-blur: 8px;
-    --chip: #1b1b1b;
-    --focus: #7dd3fc;
-    --link: var(--accent);
+    --panel-bg: rgba(30, 30, 30, 0.85);
+    --panel-border: rgba(184, 176, 170, 0.15);
+    --panel-blur: 10px;
+    --chip: #1a1a1b;
+    --focus: #b8b0aa;
+    --link: #ffffff;
   }
   [class^='mcc-'],
   [class*=' mcc-'] {
@@ -93,8 +95,8 @@
     padding: 0.6rem 1.2rem;
     height: var(--mcc-control-height);
     border-radius: 999px;
-    background: var(--accent);
-    color: #fff;
+    background: var(--mcc-gradient-business);
+    color: #272423;
     text-decoration: none;
     border: 0;
     cursor: pointer;
@@ -254,7 +256,7 @@
   }
 
   .podcast-description span {
-    display: block;
+    display: inline;
   }
 
   .podcast-invite {
@@ -330,6 +332,26 @@
   .join-button:hover svg,
   .join-button:focus-visible svg {
     transform: scale(1.05);
+  }
+
+  .read-more-link {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: none;
+    margin-left: 6px;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+  }
+  .read-more-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
   }
 
   .debug-toggle {
@@ -476,15 +498,19 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--accent);
-    border: none;
+    background: rgba(175, 167, 167, 0.751);
+    border: 1px solid rgba(124, 107, 107, 0.28);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--text-primary);
     transition: all 0.3s ease;
     flex-shrink: 0;
+  }
+  .play-button:hover {
+    background: rgba(255, 255, 255, 0.446);
+    transform: scale(1.05);
   }
   .play-button.playing {
     background: #eab308;
@@ -581,6 +607,11 @@
     color: var(--mc-text);
     background: var(--mc-accent-slate);
   }
+  .listen-button {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+  }
   .spotify-button {
     background: rgba(29, 185, 84, 0.1);
     border-color: rgba(29, 185, 84, 0.3);
@@ -631,6 +662,161 @@
     margin: 16px auto 0;
     max-width: 640px;
   }
+
+  .version-indicator {
+    display: inline-block;
+    font-size: 0.45em;
+    font-weight: 500;
+    opacity: 0.6;
+    margin-left: 14px;
+    vertical-align: middle;
+    letter-spacing: 0.05em;
+    background: rgba(120, 120, 120, 0.15);
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(120, 120, 120, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .version-indicator:hover {
+    background: rgba(120, 120, 120, 0.3);
+    transform: scale(1.05);
+  }
+
+  /* Changelog Modal Styles */
+  .changelog-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+  }
+
+  .changelog-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .changelog-content {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    width: 90vw;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+    padding: 40px;
+  }
+
+  .changelog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .changelog-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .changelog-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .changelog-close:hover {
+    color: var(--text-primary);
+  }
+
+  .changelog-version {
+    font-weight: 700;
+    color: var(--accent);
+    margin: 24px 0 12px;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .changelog-version:first-of-type {
+    margin-top: 0;
+  }
+
+  .changelog-items {
+    margin: 0;
+    padding-left: 18px;
+    list-style: none;
+  }
+
+  .changelog-items li {
+    margin: 8px 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    position: relative;
+  }
+
+  .changelog-items li::before {
+    content: '→';
+    position: absolute;
+    left: -20px;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  .load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+    gap: 16px;
+  }
+
+  .load-more-btn {
+    padding: 16px 32px;
+    border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(var(--backdrop-blur));
+    box-shadow: 0 4px 12px var(--glass-shadow);
+  }
+
+  .load-more-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 24px var(--glass-shadow);
+  }
+
+  .load-more-btn:active {
+    transform: translateY(0);
+  }
+
+  .load-more-btn.hidden {
+    display: none;
+  }
 </style>
 
 <div
@@ -650,7 +836,12 @@
   <div class="podcast-header">
     <div class="podcast-intro">
       <h1 class="podcast-title">
-        Latest Episodes<span class="version-indicator" data-active="true">v2.1.0</span>
+        Latest Episodes<span
+          class="version-indicator"
+          data-active="true"
+          onclick="PodcastWidget.showChangelog()"
+          >v2.1.0</span
+        >
       </h1>
       <p class="podcast-subtitle">Caffeinated Connections Podcast</p>
       <p class="podcast-description">
@@ -658,6 +849,13 @@
           >Caffeinated Connections is where Caleb sits down with creators and industry pros over
           coffee to explore how ideas turn into impact.</span
         >
+        <button
+          id="headerReadMore"
+          class="read-more-link"
+          onclick="PodcastWidget.toggleHeaderDescription()"
+        >
+          Read More
+        </button>
         <span class="podcast-invite" id="podcastInvite"
           >Want to share your story? Use the button below to grab a coffee chat slot.</span
         >
@@ -683,6 +881,46 @@
   </div>
   <div id="spotifyEmbedMount" class="spotify-embed"></div>
   <div class="episodes-grid" id="episodesGrid"></div>
+  <div class="load-more-container">
+    <button id="loadMoreBtn" class="load-more-btn hidden" onclick="PodcastWidget.loadMore()">
+      Load More Episodes
+    </button>
+  </div>
+
+  <!-- Changelog Modal -->
+  <div
+    id="changelogModal"
+    class="changelog-modal"
+    onclick="if (event.target === this) PodcastWidget.hideChangelog();"
+  >
+    <div class="changelog-content">
+      <div class="changelog-header">
+        <h3 class="changelog-title">Podcast Updates</h3>
+        <button class="changelog-close" onclick="PodcastWidget.hideChangelog()">×</button>
+      </div>
+      <div class="changelog-body">
+        <div class="changelog-version">v2.1.0 — Resilience Refinement (Active)</div>
+        <ul class="changelog-items">
+          <li>Improved fallback logic for RSS fetching when proxies fail</li>
+          <li>Updated cache key for clean data transitions during updates</li>
+          <li>Updated version indicators and brand colors for consistency</li>
+        </ul>
+
+        <div class="changelog-version">v2.0.0 — Performance & Accessibility</div>
+        <ul class="changelog-items">
+          <li>Lazy Loading: Debug panel now loads on-demand to improve speed</li>
+          <li>Episode Badges: Added "New" tags for recent episodes</li>
+          <li>Enhanced Button Styling: CTA buttons now use McCal accent variables</li>
+        </ul>
+
+        <div class="changelog-version">v1.9.5 — Auto-Hydration</div>
+        <ul class="changelog-items">
+          <li>Implemented live RSS hydration with 30-minute caching</li>
+          <li>Refreshed episode list with current show naming</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -690,7 +928,9 @@
   window.PodcastWidget = (function () {
     const startTime = performance.now();
     let debugActive = false;
-    let episodeData = [];
+    let episodeData = []; // Currently displayed
+    let allEpisodes = []; // Full list from RSS/Cache
+    let visibleCount = 6;
     let requestCount = 0;
     let audioCount = 0;
     let currentlyPlaying = null;
@@ -702,6 +942,7 @@
     const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
     const podcastImage =
       'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';
+    let fullHeaderDescription = '';
     let hydrationPromise = null;
 
     function createTimeoutSignal(ms) {
@@ -883,7 +1124,7 @@
         <div class="episode-description">${shortDesc}</div>
         ${createAudioPlayer(episode, `episode-${guid}`)}
         <div class="platform-links">
-          <a href="${episode.link}" target="_blank" rel="noopener" class="platform-button">
+          <a href="${episode.link}" target="_blank" rel="noopener" class="platform-button listen-button">
             <span>Listen</span>
           </a>
           <a href="${spotifyShowUrl}" target="_blank" rel="noopener" class="platform-button spotify-button">
@@ -920,32 +1161,41 @@
     }
 
     function renderEpisodes(list) {
-      const feedContainer = document.getElementById('podcastFeed');
+      if (list) allEpisodes = list;
       const grid = document.getElementById('episodesGrid');
-      const maxEpisodes = parseInt(feedContainer?.dataset?.maxEpisodes, 10) || 6;
-      const episodesToRender = list.slice(0, maxEpisodes);
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+      if (!grid) return;
 
+      const episodesToRender = allEpisodes.slice(0, visibleCount);
       audioCount = 0;
       episodeData = episodesToRender;
-      if (grid) {
-        grid.innerHTML = episodesToRender
-          .map((episode, index) => createEpisodeCard(episode, index))
-          .join('');
-        episodesToRender.forEach((episode) => {
-          const playerId = 'episode-' + slugify(episode.guid, episode.title);
-          const audioEl = document.getElementById('audio-' + playerId);
-          if (audioEl) {
-            const urlFromEpisode = episode.audioUrl || audioByLink.get(episode.link);
-            if (urlFromEpisode) {
-              audioEl.src = urlFromEpisode;
-              audioEl.crossOrigin = 'anonymous';
-              audioEl.preload = 'metadata';
-            }
+
+      grid.innerHTML = episodesToRender.map((ep, i) => createEpisodeCard(ep, i)).join('');
+
+      // Hydrate audio sources
+      episodesToRender.forEach((ep) => {
+        const guid = slugify(ep.guid, ep.title);
+        const playerId = 'episode-' + guid;
+        const audio = document.getElementById('audio-' + playerId);
+        if (audio) {
+          const url = ep.audioUrl || audioByLink.get(ep.link);
+          if (url) {
+            audio.src = url;
+            audio.crossOrigin = 'anonymous';
+            audio.preload = 'metadata';
           }
-        });
+        }
+      });
+
+      if (loadMoreBtn) {
+        if (allEpisodes.length > visibleCount) {
+          loadMoreBtn.classList.remove('hidden');
+        } else {
+          loadMoreBtn.classList.add('hidden');
+        }
       }
 
-      updateDebugInfo('Rendered ' + episodesToRender.length + ' episode cards.');
+      updateDebugInfo('Rendered ' + episodesToRender.length + ' episodes.');
       audioStatus = 'idle';
       const audioStatusEl = document.getElementById('audioStatus');
       if (audioStatusEl) audioStatusEl.textContent = audioStatus;
@@ -984,10 +1234,44 @@
     }
 
     function updateDescriptionFromFeed(text) {
-      const cleaned = trimDescription(cleanDescription(text));
-      if (!cleaned) return;
+      fullHeaderDescription = cleanDescription(text);
+
+      // Attempt to split at the user's requested sentence for a cleaner "Read More" point
+      const splitPhrases = [
+        'That’s what Caffeinated Connections is about.',
+        "That's what Caffeinated Connections is about.",
+        'ideas turn into impact.',
+      ];
+
+      let splitIndex = -1;
+      let matchedPhrase = '';
+
+      for (const phrase of splitPhrases) {
+        const idx = fullHeaderDescription.indexOf(phrase);
+        if (idx !== -1) {
+          splitIndex = idx;
+          matchedPhrase = phrase;
+          break;
+        }
+      }
+
+      let trimmed;
+      if (splitIndex !== -1) {
+        trimmed = fullHeaderDescription.slice(0, splitIndex + matchedPhrase.length);
+      } else {
+        trimmed = trimDescription(fullHeaderDescription);
+      }
+
       const descriptionEl = document.getElementById('podcastDescription');
-      if (descriptionEl) descriptionEl.textContent = cleaned;
+      const readMoreBtn = document.getElementById('headerReadMore');
+
+      if (descriptionEl) {
+        descriptionEl.textContent =
+          trimmed + (fullHeaderDescription.length > trimmed.length ? '... ' : '');
+        if (fullHeaderDescription.length > trimmed.length && readMoreBtn) {
+          readMoreBtn.style.display = 'inline';
+        }
+      }
     }
 
     function renderSpotifyEmbed() {
@@ -1108,7 +1392,7 @@
           fallbackUsed = false;
           cacheStatus = cacheStatus === 'STALE' ? 'REFRESH' : 'NETWORK';
           saveEpisodesToCache(episodes);
-          renderEpisodes(episodes);
+          renderEpisodes(episodes); // Pass all fetched episodes to render
           updateDebugInfo('Episodes refreshed from RSS feed.');
         } catch (error) {
           console.warn('Podcast feed refresh failed:', error);
@@ -1327,6 +1611,20 @@
         if (audio) audio.volume = (Number(volume) || 0) / 100;
       },
 
+      toggleHeaderDescription: function () {
+        const el = document.getElementById('podcastDescription');
+        const btn = document.getElementById('headerReadMore');
+        if (!el || !btn || !fullHeaderDescription) return;
+
+        if (btn.textContent === 'Read More') {
+          el.textContent = fullHeaderDescription;
+          btn.textContent = 'Read Less';
+        } else {
+          el.textContent = trimDescription(fullHeaderDescription);
+          btn.textContent = 'Read More';
+        }
+      },
+
       onAudioLoaded: function (playerId) {
         const durationEl = document.getElementById('duration-' + playerId);
         const audio = document.getElementById('audio-' + playerId);
@@ -1408,16 +1706,30 @@
         document.getElementById('podcastFeed').appendChild(debugPanel);
       },
 
+      showChangelog: function () {
+        const modal = document.getElementById('changelogModal');
+        if (modal) modal.classList.add('active');
+      },
+
+      hideChangelog: function () {
+        const modal = document.getElementById('changelogModal');
+        if (modal) modal.classList.remove('active');
+      },
+
+      loadMore: function () {
+        visibleCount += 6;
+        renderEpisodes();
+      },
+
       init: function () {
         const feed = document.getElementById('podcastFeed');
         const joinButton = document.getElementById('podcastJoinButton');
-        const calendlyUrl = feed?.dataset?.calendlyUrl?.trim();
-        if (joinButton) {
-          if (calendlyUrl) {
-            joinButton.href = calendlyUrl;
-          } else {
-            joinButton.remove();
-          }
+        const calendlyUrl = feed?.dataset?.calendlyUrl;
+
+        visibleCount = parseInt(feed?.dataset?.maxEpisodes, 10) || 6;
+
+        if (joinButton && calendlyUrl) {
+          joinButton.href = calendlyUrl;
         }
         const descriptionEl = document.getElementById('podcastDescription');
         if (descriptionEl && feed?.dataset?.podcastDescription) {

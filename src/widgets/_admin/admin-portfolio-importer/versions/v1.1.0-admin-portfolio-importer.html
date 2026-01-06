@@ -13,12 +13,12 @@
   <!-- site-widgets:inline:start -->
   <style data-site-widgets-inline>
     :root {
-      --mcc-accent: #ff4d6d;
-      --mcc-accent-strong: #ff2b50;
-      --mcc-bg: #ffffff;
-      --mcc-fg: #111827;
-      --mcc-line: #e5e7eb;
-      --mcc-muted: #6b7280;
+      --mcc-accent: #b8b0aa;
+      --mcc-accent-strong: #cac2ba;
+      --mcc-bg: #050506;
+      --mcc-fg: #cac2ba;
+      --mcc-line: #2a2a2a;
+      --mcc-muted: #5b5553;
       --bg: var(--mcc-bg);
       --fg: var(--mcc-fg);
       --line: var(--mcc-line);
@@ -26,10 +26,12 @@
       --muted: var(--mcc-muted);
       --chip: #1b1b1b;
       --focus: #7dd3fc;
-      --link: var(--accent);
-      --panel-bg: rgba(255, 255, 255, 0.82);
-      --panel-border: rgba(0, 0, 0, 0.08);
-      --panel-blur: 8px;
+      --link: var(--mcc-accent-strong);
+      --panel-bg: rgba(48, 44, 44, 0.85);
+      --panel-border: rgba(184, 176, 170, 0.2);
+      --panel-blur: 12px;
+      --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+      --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
       --mcc-space-1: 4px;
       --mcc-space-2: 8px;
       --mcc-space-3: 12px;
@@ -52,15 +54,15 @@
       --link: var(--accent);
     }
     [data-theme='dark'] {
-      --fg: #f7f7f7;
-      --bg: #06060a;
+      --fg: #cac2ba;
+      --bg: #050506;
       --line: #2a2a2a;
-      --panel-bg: rgba(20, 20, 20, 0.78);
-      --panel-border: rgba(255, 255, 255, 0.12);
-      --panel-blur: 8px;
-      --chip: #1b1b1b;
-      --focus: #7dd3fc;
-      --link: var(--accent);
+      --panel-bg: rgba(30, 30, 30, 0.85);
+      --panel-border: rgba(184, 176, 170, 0.15);
+      --panel-blur: 10px;
+      --chip: #1a1a1b;
+      --focus: #b8b0aa;
+      --link: #ffffff;
     }
     [class^='mcc-'],
     [class*=' mcc-'] {
@@ -104,8 +106,8 @@
       padding: 0.6rem 1.2rem;
       height: var(--mcc-control-height);
       border-radius: 999px;
-      background: var(--accent);
-      color: #fff;
+      background: var(--mcc-gradient-business);
+      color: #272423;
       text-decoration: none;
       border: 0;
       cursor: pointer;

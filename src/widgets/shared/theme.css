@@ -17,26 +17,26 @@
 :root {
   --mc-font: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --mc-bg: #050506;
-  --mc-bg-alt: #0b0c10;
-  --mc-text: #f3f5f8;
-  --mc-muted: #9aa3b3;
+  --mc-bg-alt: #0f1014;
+  --mc-text: #cac2ba;
+  --mc-muted: #5b5553;
 
-  /* Monochrome System */
-  --mc-accent: #ffffff;
-  --mc-accent-rgb: 255, 255, 255;
-  --mc-card: rgba(14, 15, 19, 0.94);
-  --mc-border: rgba(255, 255, 255, 0.15);
+  /* Monochrome Business System */
+  --mc-accent: #b8b0aa;
+  --mc-accent-rgb: 184, 176, 170;
+  --mc-card: rgba(26, 26, 27, 0.94); /* #1A1A1B with alpha */
+  --mc-border: rgba(184, 176, 170, 0.12); /* #B8B0AA with alpha */
   --mc-gap: 22px;
   --mc-radius: 16px;
   --mc-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
 
-  --mc-chip-bg: rgba(255, 255, 255, 0.08);
-  --mc-chip-border: rgba(255, 255, 255, 0.2);
+  --mc-chip-bg: rgba(184, 176, 170, 0.08);
+  --mc-chip-border: rgba(184, 176, 170, 0.2);
 
-  /* Monochrome Gradients */
-  --mc-gradient-accent: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-  --mc-gradient-stone: linear-gradient(135deg, #444444 0%, #1a1a1a 100%);
-  --mc-gradient-slate: linear-gradient(135deg, #222222 0%, #000000 100%);
+  /* Business Gradients */
+  --mc-gradient-accent: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+  --mc-gradient-stone: linear-gradient(135deg, #5b5553 0%, #363230 100%);
+  --mc-gradient-slate: linear-gradient(135deg, #363230 0%, #272423 100%);
 }
 
 .mc-portfolio {

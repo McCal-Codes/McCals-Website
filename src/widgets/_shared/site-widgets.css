@@ -3,21 +3,22 @@
   - Purpose: Provide a light, namespaced, opt-in set of CSS custom properties and tiny utility classes
     that all widgets can rely on when the site includes this file (recommended via a pinned CDN tag
     or Squarespace header injection).
-  - Important: Widgets should continue to use local fallbacks (e.g., var(--accent, #ff4d6d)).
+  - Important: Widgets should continue to use local fallbacks (e.g., var(--accent, #ffffff)).
   - Location: src/widgets/_shared/site-widgets.css
 */
 
 :root {
   /* Brand tokens (override in Squarespace site header if needed) */
-  --mcc-accent: #ff4d6d;
-  --mcc-accent-strong: #ff2b50;
-  --mcc-bg: #ffffff;
-  --mcc-fg: #111827;
-  --mcc-line: #e5e7eb;
-  --mcc-muted: #6b7280;
+  /* McCal Media Business Palette (Accents on Black Background) */
+  --mcc-accent: #b8b0aa;
+  --mcc-accent-strong: #cac2ba;
+  --mcc-bg: #050506; /* Reverted to pitch black */
+  --mcc-fg: #cac2ba;
+  --mcc-line: #2a2a2a;
+  --mcc-muted: #5b5553;
 
   /* Backwards-compatible common widget tokens (used across many widgets)
-     Widgets should still use fallbacks like var(--accent, #ff4d6d) but
+     Widgets should still use fallbacks like var(--accent, #ffffff) but
      providing these names reduces duplication and simplifies site-level theming. */
   --bg: var(--mcc-bg);
   --fg: var(--mcc-fg);
@@ -26,10 +27,14 @@
   --muted: var(--mcc-muted);
   --chip: #1b1b1b; /* darker panel / chip background */
   --focus: #7dd3fc;
-  --link: var(--accent);
-  --panel-bg: rgba(255,255,255,0.82);
-  --panel-border: rgba(0,0,0,0.08);
-  --panel-blur: 8px;
+  --link: var(--mcc-accent-strong);
+  --panel-bg: rgba(48, 44, 44, 0.85); /* #302C2C with alpha */
+  --panel-border: rgba(184, 176, 170, 0.2); /* #B8B0AA with alpha */
+  --panel-blur: 12px;
+
+  /* Gradients */
+  --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+  --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
 
   /* Spacing scale */
   --mcc-space-1: 4px;
@@ -51,44 +56,52 @@
    - data-theme="dark"   = dark mode: light text on dark background
    - data-theme="system" = follows the user's OS preference (widgets may implement JS toggles)
    Widgets that set their own :root variables will override these site defaults. */
-[data-theme="light"] {
+[data-theme='light'] {
   --fg: #0a0a0a;
   --bg: #ffffff;
   --line: #e5e5e5;
-  --panel-bg: rgba(255,255,255,0.82);
-  --panel-border: rgba(0,0,0,0.08);
+  --panel-bg: rgba(255, 255, 255, 0.82);
+  --panel-border: rgba(0, 0, 0, 0.08);
   --panel-blur: 8px;
   --chip: #fafafa;
   --focus: #0ea5e9;
   --link: var(--accent);
 }
-[data-theme="dark"] {
-  --fg: #f7f7f7;
-  --bg: #06060a;
+[data-theme='dark'] {
+  --fg: #cac2ba;
+  --bg: #050506;
   --line: #2a2a2a;
-  --panel-bg: rgba(20,20,20,0.78);
-  --panel-border: rgba(255,255,255,0.12);
-  --panel-blur: 8px;
-  --chip: #1b1b1b;
-  --focus: #7dd3fc;
-  --link: var(--accent);
+  --panel-bg: rgba(30, 30, 30, 0.85);
+  --panel-border: rgba(184, 176, 170, 0.15);
+  --panel-blur: 10px;
+  --chip: #1a1a1b;
+  --focus: #b8b0aa;
+  --link: #ffffff;
 }
 
 /* Scope to any widget using the standard `mcc-` prefix in a class name. This keeps
    the rules narrowly targeted to widget markup while still being easy to include site-wide. */
-[class^="mcc-"] , [class*=" mcc-"] {
+[class^='mcc-'],
+[class*=' mcc-'] {
   box-sizing: border-box;
-  font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    Inter,
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   color: var(--fg);
 }
 
 /* Accessible focus ring for interactive elements inside widgets */
-[class^="mcc-"] a:focus-visible,
-[class^="mcc-"] button:focus-visible,
-[class^="mcc-"] [role="button"]:focus-visible,
-[class*=" mcc-"] a:focus-visible,
-[class*=" mcc-"] button:focus-visible,
-[class*=" mcc-"] [role="button"]:focus-visible {
+[class^='mcc-'] a:focus-visible,
+[class^='mcc-'] button:focus-visible,
+[class^='mcc-'] [role='button']:focus-visible,
+[class*=' mcc-'] a:focus-visible,
+[class*=' mcc-'] button:focus-visible,
+[class*=' mcc-'] [role='button']:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
   border-radius: 6px;
@@ -116,8 +129,8 @@
   padding: 0.6rem 1.2rem;
   height: var(--mcc-control-height);
   border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
+  background: var(--mcc-gradient-business);
+  color: #272423;
   text-decoration: none;
   border: 0;
   cursor: pointer;
@@ -138,16 +151,31 @@
 }
 
 /* Small utility layout helpers */
-.mcc-row { display:flex; gap: var(--mcc-space-3); align-items: center; }
-.mcc-col { display:flex; flex-direction:column; gap: var(--mcc-space-2); }
-.mcc-center { display:flex; align-items:center; justify-content:center; }
+.mcc-row {
+  display: flex;
+  gap: var(--mcc-space-3);
+  align-items: center;
+}
+.mcc-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mcc-space-2);
+}
+.mcc-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Light, non-invasive reset for widget root containers */
-[class^="mcc-"] { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+[class^='mcc-'] {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  [class^="mcc-"] * {
+  [class^='mcc-'] * {
     animation: none !important;
     transition: none !important;
   }
@@ -155,8 +183,11 @@
 
 /* Print-friendly tweaks */
 @media print {
-  [class^="mcc-"] { color: #000 !important; background: transparent !important; }
+  [class^='mcc-'] {
+    color: #000 !important;
+    background: transparent !important;
+  }
 }
 
-/* NOTE: Widgets should keep local fallbacks for colors like `var(--accent, #ff4d6d)`.
+/* NOTE: Widgets should keep local fallbacks for colors like `var(--accent, #ffffff)`.
    This file only provides sensible defaults and a small set of utilities. */

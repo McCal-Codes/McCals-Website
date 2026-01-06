@@ -9,11 +9,17 @@
 ### Podcast Feed Widget v2.2.0
 
 - **Core Refactor**: Standardized the widget on a high-performance event delegation architecture.
-- **Architectural Cleanup**: Removed all legacy inline `onclick` handlers, recursive hydration loops, and global mutable state variables.
-- **State Optimization**: Consolidated system state into a single immutable-first object with explicit source tracking (`fallback` | `cache` | `network`).
-- **Audio Availability**: Implemented render-time audio playability detection to provide immediate UI feedback for missing files.
-- **Cache v2**: Migrated to a new internal caching schema (`mcc_podcast_cache_v2`) with standardized 30-minute background refresh.
+- **"Load More" Feature**: Added a "Load More Episodes" button for paginated display of the full RSS catalog.
+- **UI Refinement**: Implemented a "Read More" toggle for the podcast description with smart truncation point.
+- **Aesthetic Alignment**: Neutralized play button colors to match the site's glassmorphic design.
+- **Changelog Modal**: Added a clickable version indicator that triggers a detailed update modal.
 - **Files**: `src/widgets/_content/podcast-feed/versions/v2.2.0-podcast-core.html`
+
+### Podcast Feed Widget v2.1.0
+
+- **Resilience Refinement**: Improved proxy fallback chain for RSS fetching.
+- **Feature Parity**: Added "Read More" toggle, "Load More" button, and Changelog modal to match v2.2.0 functionality.
+- **Files**: `src/widgets/_content/podcast-feed/versions/v2.1.0-podcast-resilience.html`
 
 ## 2025-12-31 (Continued)
 

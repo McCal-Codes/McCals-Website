@@ -1,4 +1,5 @@
 # See [workspace-organization.md](./workspace-organization.md) for workspace/process standards and validation checklists.
+
 # Widget Development Enhancement Guide
 
 > **Status**: Active Development Guidelines  
@@ -10,6 +11,7 @@
 **ALL widget development must prioritize performance optimization from day one.**
 
 ### Performance Standards Reference
+
 - **Primary Guide**: `performance-standards.md` — Lighthouse optimization using Concert Portfolio v4.6 as case study
 - **Target Score**: 90+ Lighthouse performance score
 - **Case Study**: Concert Portfolio v4.6 demonstrates how to achieve 90+ scores through:
@@ -20,6 +22,7 @@
   - Optimized font loading
 
 ### Performance Checklist (Required)
+
 - [ ] **Critical CSS**: Inline essential styles (<14KB)
 - [ ] **JavaScript Optimization**: Async loading, intelligent caching
 - [ ] **Resource Hints**: Preconnect to external domains
@@ -65,16 +68,19 @@ Before applying any enhancements, complete this checklist:
 ## 🎯 Pattern Application Matrix
 
 ### Universal Patterns (Apply to All Widgets)
+
 - **Version Indicator Standardization**: Every widget should use consistent version display
 - **CSS Variable Standards**: Use workspace color palette and typography standards
 - **Mobile Responsiveness**: Ensure proper responsive design patterns
 
 ### Modal/Lightbox Widgets
+
 - **Close Button Optimization**: Essential for all modal functionality
 - **Navigation Hiding**: Critical for immersive experiences
 - **Scrollbar Hiding**: Enhanced visual appeal in galleries
 
-### Filter-Based Widgets  
+### Filter-Based Widgets
+
 - **Enhanced Filter Layout**: Prevent spacing issues with hidden content
 - **Tag Support**: Flexible categorization beyond simple categories
   - For nature imports, if the first category is 'animal', the main tag will be the animal type (the folder name, e.g., 'bird'). This ensures manifest.json output is consistent and discoverable for animal/landscape subcategories.
@@ -100,6 +106,7 @@ Nature/
 ```
 
 Each manifest.json (example for Mist Valley Sunrise):
+
 ```json
 {
   "collectionName": "Mist Valley Sunrise",
@@ -113,7 +120,8 @@ Each manifest.json (example for Mist Valley Sunrise):
   }
 }
 ```
-*Each landscape is placed in its own folder under 'Nature/Landscape'. The manifest uses the location or title as collectionName and folderPath, and tags is always ['landscape'] for landscape category.*
+
+_Each landscape is placed in its own folder under 'Nature/Landscape'. The manifest uses the location or title as collectionName and folderPath, and tags is always ['landscape'] for landscape category._
 When importing multiple animals (e.g., birds, mammals, reptiles), each animal gets its own folder and manifest.json:
 
 ```
@@ -139,6 +147,7 @@ Wildlife/
 ```
 
 Each manifest.json (example for Fox):
+
 ```json
 {
   "collectionName": "Fox",
@@ -152,10 +161,13 @@ Each manifest.json (example for Fox):
   }
 }
 ```
-*Each animal is placed in its own folder under the appropriate group (e.g., 'Wildlife/Birds', 'Wildlife/Mammals'). The manifest uses the animal name as collectionName and folderPath, and tags is always the animal type (e.g., ['bird'], ['mammal']) for animal category.*
+
+_Each animal is placed in its own folder under the appropriate group (e.g., 'Wildlife/Birds', 'Wildlife/Mammals'). The manifest uses the animal name as collectionName and folderPath, and tags is always the animal type (e.g., ['bird'], ['mammal']) for animal category._
+
 - **Status Indicators**: Minimal, consistent badge design
 
 ### Gallery/Portfolio Widgets
+
 - **Performance Optimization**: Lazy loading, intelligent caching
 - **Progressive Enhancement**: Graceful degradation for failed loads
 - **Accessibility**: Keyboard navigation, ARIA attributes
@@ -169,6 +181,7 @@ Each manifest.json (example for Fox):
 When creating a new widget, ensure these patterns are included from the start:
 
 #### **Foundation Requirements**
+
 - [ ] CSS custom properties from workspace standards
 - [ ] Typography using `ui-sans-serif,system-ui` stack
 - [ ] Self-contained architecture (no external dependencies)
@@ -176,12 +189,14 @@ When creating a new widget, ensure these patterns are included from the start:
 - [ ] Version indicator with standardized styling
 
 #### **Interactive Elements**
+
 - [ ] Proper ARIA attributes for accessibility
 - [ ] Keyboard navigation support
 - [ ] Focus management (especially for modals)
 - [ ] Hover states with consistent transitions
 
 #### **Performance Standards**
+
 - [ ] Lazy loading for images
 - [ ] Error handling with graceful degradation
 - [ ] Efficient CSS (avoid expensive selectors)
@@ -192,20 +207,23 @@ When creating a new widget, ensure these patterns are included from the start:
 When upgrading an existing widget:
 
 #### **Assessment Phase**
+
 - [ ] Document current functionality and version
 - [ ] Identify applicable enhancement patterns
 - [ ] Check for existing accessibility issues
 - [ ] Review performance characteristics
 
 #### **Implementation Phase**
+
 - [ ] Apply patterns in priority order (high → medium → low)
 - [ ] Test each enhancement individually
 - [ ] Verify no regressions in existing functionality
 - [ ] Validate cross-browser compatibility
 
 #### **Documentation Phase**
+
 - [ ] Update widget CHANGELOG.md with detailed entries
-- [ ] Refresh README.md with new features/capabilities  
+- [ ] Refresh README.md with new features/capabilities
 - [ ] Update version references in main project documentation
 - [ ] Add enhancement notes for future development
 
@@ -217,16 +235,16 @@ When upgrading an existing widget:
 
 ```css
 /* Always use CSS custom properties for theming */
-:root { 
-  --fg: #f5f5f5; 
-  --bg: #0a0a0a; 
-  --line: #2a2a2a; 
-  --accent: #ff4d6d; 
+:root {
+  --fg: #f5f5f5;
+  --bg: #0a0a0a;
+  --line: #2a2a2a;
+  --accent: #ffffff;
 }
 
 /* Consistent transitions and animations */
 .interactive-element {
-  transition: all .3s cubic-bezier(.4,0,.2,1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Mobile-first responsive design */
@@ -239,8 +257,8 @@ When upgrading an existing widget:
 
 ```javascript
 // Use modern JavaScript patterns
-const sel = s => document.querySelector(s);
-const all = s => Array.from(document.querySelectorAll(s));
+const sel = (s) => document.querySelector(s);
+const all = (s) => Array.from(document.querySelectorAll(s));
 
 // Consistent error handling
 async function enhancedFetch(url) {
@@ -265,13 +283,7 @@ const metrics = {
 
 ```html
 <!-- Proper ARIA attributes -->
-<button 
-  type="button" 
-  class="filter-btn" 
-  data-filter="category" 
-  aria-pressed="false" 
-  role="tab"
->
+<button type="button" class="filter-btn" data-filter="category" aria-pressed="false" role="tab">
   Category Name
 </button>
 
@@ -288,31 +300,36 @@ const metrics = {
 ### Testing Requirements
 
 #### **Functional Testing**
+
 - [ ] All interactive elements work as expected
 - [ ] Filters/categories function correctly
 - [ ] Modal/lightbox behavior is smooth
 - [ ] Loading states provide appropriate feedback
 
 #### **Accessibility Testing**
+
 - [ ] Keyboard navigation through all interactive elements
 - [ ] Screen reader compatibility (test with built-in tools)
 - [ ] Color contrast meets WCAG AA standards
 - [ ] Focus indicators are visible and clear
 
 #### **Performance Testing**
+
 - [ ] Image loading is efficient (lazy loading where appropriate)
 - [ ] JavaScript execution doesn't block rendering
 - [ ] CSS animations are smooth (60fps target)
 - [ ] Memory usage remains stable over time
 
 #### **Cross-Browser Testing**
+
 - [ ] Chrome (latest)
-- [ ] Firefox (latest)  
+- [ ] Firefox (latest)
 - [ ] Safari (latest)
 - [ ] Edge (latest)
 - [ ] Mobile browsers (iOS Safari, Chrome Mobile)
 
 #### **Integration Testing**
+
 - [ ] Works properly in Squarespace Code Blocks
 - [ ] No conflicts with Squarespace's built-in styles
 - [ ] Responsive design functions across Squarespace templates
@@ -327,18 +344,21 @@ const metrics = {
 Document these metrics before and after enhancements:
 
 #### **Performance Metrics**
+
 - Load time (time to first meaningful paint)
 - JavaScript execution time
 - CSS render time
 - Image loading efficiency
 
 #### **User Experience Metrics**
+
 - Click/tap target sizes (minimum 44px for accessibility)
 - Animation smoothness (frame rate)
 - Error rates (failed image loads, etc.)
 - Accessibility compliance score
 
 #### **Code Quality Metrics**
+
 - Lines of code (CSS + JavaScript)
 - Number of external dependencies
 - Code complexity (cyclomatic complexity for JS)
@@ -353,7 +373,7 @@ Document these metrics before and after enhancements:
 Track potential new patterns for future standardization:
 
 - **Progressive Web App Features**: Service workers, offline functionality
-- **Advanced Animations**: CSS-based micro-interactions, scroll-triggered animations  
+- **Advanced Animations**: CSS-based micro-interactions, scroll-triggered animations
 - **Performance Optimizations**: Critical CSS inlining, resource hints
 - **Enhanced Accessibility**: Voice navigation, high contrast mode support
 - **Analytics Integration**: Event tracking, performance monitoring
@@ -370,12 +390,14 @@ Track potential new patterns for future standardization:
 ## 📚 Related Resources
 
 ### Internal Documentation
+
 - **Enhancement Patterns**: `docs/standards/widget-enhancements.md`
-- **Widget Status Guide**: `src/widgets/widget-status-guide.md`  
+- **Widget Status Guide**: `src/widgets/widget-status-guide.md`
 - **Version Standards**: `docs/standards/versioning.md`
 - **Copilot Instructions**: `.github/copilot-instructions.md`
 
 ### External Standards
+
 - **WCAG 2.1 Guidelines**: https://www.w3.org/WAI/WCAG21/quickref/
 - **Web Performance Best Practices**: https://web.dev/fast/
 - **CSS Architecture Guidelines**: https://cssguidelin.es/
