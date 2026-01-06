@@ -779,22 +779,22 @@
   <!-- site-widgets:inline:start -->
   <style data-site-widgets-inline>
     :root {
-      --mcc-accent: #ffffff;
-      --mcc-accent-strong: #ffffff;
-      --mcc-bg: #000000;
-      --mcc-fg: #ffffff;
-      --mcc-line: #333333;
-      --mcc-muted: #e0e0e0;
+      --mcc-accent: #ff4d6d;
+      --mcc-accent-strong: #ff2b50;
+      --mcc-bg: #ffffff;
+      --mcc-fg: #111827;
+      --mcc-line: #e5e7eb;
+      --mcc-muted: #6b7280;
       --bg: var(--mcc-bg);
       --fg: var(--mcc-fg);
       --line: var(--mcc-line);
       --accent: var(--mcc-accent);
       --muted: var(--mcc-muted);
-      --chip: #121212;
-      --focus: #ffffff;
+      --chip: #1b1b1b;
+      --focus: #7dd3fc;
       --link: var(--accent);
-      --panel-bg: rgba(0, 0, 0, 0.9);
-      --panel-border: rgba(255, 255, 255, 0.1);
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
       --panel-blur: 8px;
       --mcc-space-1: 4px;
       --mcc-space-2: 8px;
@@ -814,7 +814,7 @@
       --panel-border: rgba(0, 0, 0, 0.08);
       --panel-blur: 8px;
       --chip: #fafafa;
-      --focus: #ffffff;
+      --focus: #0ea5e9;
       --link: var(--accent);
     }
     [data-theme='dark'] {
@@ -825,7 +825,7 @@
       --panel-border: rgba(255, 255, 255, 0.12);
       --panel-blur: 8px;
       --chip: #1b1b1b;
-      --focus: #ffffff;
+      --focus: #7dd3fc;
       --link: var(--accent);
     }
     [class^='mcc-'],
@@ -918,91 +918,6 @@
         color: #000 !important;
         background: transparent !important;
       }
-    }
-
-    /* Force dark theme for strict monochrome consistency */
-    .mcc-policy-widget {
-      --bg: #000000 !important;
-      --fg: #ffffff !important;
-      --muted: #e0e0e0 !important;
-      --line: #333333 !important;
-      --accent: #ffffff !important;
-      --panel-bg: rgba(20, 20, 20, 0.9) !important;
-      --panel-border: rgba(255, 255, 255, 0.1) !important;
-    }
-
-    /* Premium Active Button */
-    .mcc-policy-widget .active-btn {
-      background: rgba(255, 255, 255, 0.1) !important;
-      border: 1px solid rgba(255, 255, 255, 0.4) !important;
-      color: #ffffff !important;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-    .mcc-policy-widget .active-btn:hover {
-      background: rgba(255, 255, 255, 0.2) !important;
-      border-color: #ffffff !important;
-      transform: translateY(-2px);
-    }
-
-    /* Strict Monochrome Enforcement - Refined */
-    .mcc-policy-widget {
-      color: #ffffff !important;
-      background-color: #000000;
-    }
-
-    /* Target links and buttons without breaking their own contrast rules */
-    .mcc-policy-widget a,
-    .mcc-policy-widget button:not(.mcc-btn):not(.toc-toggle) {
-      color: #ffffff !important;
-    }
-
-    /* Download Buttons */
-    .download-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin: 24px 0 40px;
-    }
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 22px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-      color: #ffffff !important;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      box-sizing: border-box;
-    }
-    .download-btn svg {
-      opacity: 0.8;
-    }
-    .download-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-    }
-    .download-btn.active-btn {
-      background: rgba(255, 255, 255, 0.1) !important;
-      border-color: rgba(255, 255, 255, 0.4) !important;
-    }
-
-    /* Toc and toggle specific contrast */
-    .mcc-policy-widget .toc-toggle,
-    .mcc-policy-widget .version-badge {
-      background: #ffffff !important;
-      color: #000000 !important;
-    }
-
-    .mcc-policy-widget .policy-toc nav a.active {
-      background: rgba(255, 255, 255, 0.2) !important;
-      color: #ffffff !important;
     }
   </style>
   <!-- site-widgets:inline:end -->

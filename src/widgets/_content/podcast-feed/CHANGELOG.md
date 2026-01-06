@@ -1,6 +1,31 @@
-﻿# Changelog â€” Podcast Feed Widget
+﻿# Changelog — Podcast Feed Widget
 
-## v2.1.0-WIP (2025-12-27) - Resilience & WIP Marker
+## v2.2.0 (2026-01-06) - Core Refactor
+
+### Architecture 🏗️
+
+- **ENHANCED**: Implemented event delegation for all episode card actions, improving performance and CSP compatibility.
+- **ENHANCED**: Simplified state management into a single `state` object, reducing global mutable variables.
+- **ENHANCED**: Enforced single-pass rendering of episode cards with pre-determined audio playability status.
+
+### Data Flow 🔄
+
+- **OPTIMIZED**: Streamlined data lifecycle (Attempt Cache → Render Fallback → Background RSS Refresh).
+- **FIXED**: Removed internal "hydration" loops and redundant RSS fetch triggers during playback.
+- **UPDATED**: Cache key updated to `mcc_podcast_cache_v2` with standard 30-minute TTL.
+
+### Audio & UI 🎵
+
+- **ENHANCED**: Explicit audio availability detection during render, providing immediate visual feedback for unavailable tracks.
+- **ENHANCED**: Modernized audio event handling using unified event listeners on the episode grid.
+- **UPDATED**: Fallback episodes updated with explicit audio URLs and unified metadata.
+
+### Developer Experience 🛠️
+
+- **ENHANCED**: Lazy-loaded debug panel with real-time system state monitoring and manual cache reset.
+- **ENHANCED**: Full removal of inline `onclick` handlers for better security and maintainability.
+
+## v2.1.0 (2025-12-31) - Resilience Refinement
 
 ### Resilience 🧱
 

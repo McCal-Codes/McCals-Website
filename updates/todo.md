@@ -1,6 +1,6 @@
 # Active To-Do List
 
-Last Updated: December 31, 2025
+Last Updated: January 6, 2026
 
 **Quick Reference:**
 
@@ -93,6 +93,62 @@ Last Updated: December 31, 2025
 ---
 
 ## 🚀 Active Sprints (The "Now")
+
+### ⚡ Live Site Performance (mcc-cal.com)
+
+Ownership of real-user performance on the production Squarespace site.
+
+- [ ] Define LCP element per primary page (home, concerts, events, journalism, portraits)
+- [ ] Audit above-the-fold images:
+  - [ ] Replace JS-rendered hero/primary images with native <img> where applicable
+  - [ ] Verify srcset/sizes correctness for mobile and tablet
+- [ ] Enforce JS deferral across all widgets (no render-blocking scripts)
+- [ ] Gate widget initialization by presence (no global bootstraps)
+- [ ] Audit DOM weight per widget (remove redundant wrappers and containers)
+- [ ] Capture baseline metrics per page (LCP, TBT, CLS)
+- [ ] Record before/after metrics when shipping widget performance changes
+
+#### Page & Widget Mapping
+
+- [ ] Home page
+  - Primary widgets: site-navigation, featured-work, footer
+  - LCP candidate: hero image / featured image block
+
+- [ ] Concerts
+  - Primary widgets: concert-portfolio
+  - LCP candidate: first visible concert image
+
+- [ ] Events
+  - Primary widgets: event-portfolio
+  - LCP candidate: first event card image
+
+- [ ] Journalism
+  - Primary widgets: photojournalism-portfolio
+  - LCP candidate: lead image / featured album image
+
+- [ ] Portraits
+  - Primary widgets: portrait-portfolio
+  - LCP candidate: first portrait image
+
+For each page:
+
+- [ ] Identify actual LCP element via DevTools
+- [ ] Verify it renders without waiting on JavaScript
+- [ ] Record findings before optimization
+
+#### Definition of Done (Performance)
+
+This section may be considered complete only when:
+
+- [ ] LCP element is explicitly identified per primary page
+- [ ] LCP content is visible without waiting on JS execution
+- [ ] No render-blocking scripts remain for above-the-fold content
+- [ ] Widget initialization is gated by presence
+- [ ] DOM structure for primary widgets is minimal and intentional
+- [ ] Before/after metrics are recorded for each optimized page
+- [ ] Accessibility and semantics are preserved or improved
+
+If a change improves Lighthouse scores but delays visible content, it is not done.
 
 ### ☁️ Infrastructure & Deployment
 

@@ -10,6 +10,68 @@ Goal
 
 - Minimize calls while preserving accuracy. Prefer small, surgical edits and single-pass diffs. Avoid exploratory multi-turns when the repo already encodes the answer.
 
+Website optimization doctrine (authoritative)
+
+- These rules apply to all widgets, manifests, and embedded assets used on the live site (mcc-cal.com), regardless of local test behavior.
+
+**Primary performance targets**
+
+- Optimize for perceived load speed, not Lighthouse vanity metrics.
+- Protect Largest Contentful Paint (LCP) above all.
+- Avoid main-thread blocking during initial render.
+- Favor progressive enhancement over JS-first rendering.
+
+**Images**
+
+- Above-the-fold images must render without waiting on JavaScript.
+- Use native <img> tags wherever possible for primary visuals.
+- Always support responsive loading (srcset, sizes).
+- Lazy-load below-the-fold images only.
+- Do not preload more than 1–2 images per page.
+
+**JavaScript**
+
+- All non-critical scripts must be defer or async.
+- Avoid executing heavy logic on page load.
+- Delay optional behavior using requestIdleCallback or equivalent.
+- Do not initialize widgets that are not present on the page.
+- Avoid DOM-heavy construction during initial render.
+
+**CSS**
+
+- Inline only truly critical CSS needed for first paint.
+- Aggressively namespace widget styles to avoid Squarespace collisions.
+- Avoid global selectors and high specificity.
+- Prefer fewer rules over clever rules.
+
+**Widgets**
+
+- Widgets must be self-contained and minimally invasive.
+- Do not inject unnecessary wrapper elements.
+- Do not mutate global state or styles.
+- Prefer static markup first, enhance with JS second.
+
+**Accessibility**
+
+- All images require meaningful alt text.
+- Interactive elements must be keyboard accessible.
+- Use native semantic elements before ARIA.
+- Accessibility regressions are treated as bugs, not enhancements.
+
+**Forms and interactions**
+
+- Provide clear loading and error states.
+- Avoid generic failure messages.
+- Prefer async submission with visible user feedback.
+
+**Caching**
+
+- Use versioned asset URLs.
+- Treat manifests as mutable, core assets as immutable.
+- Assume aggressive CDN caching.
+
+- If an optimization improves metrics but harms clarity, accessibility, or maintainability, reject it.
+
 When to ask vs. act
 
 - Act directly if the file and pattern are clear (e.g., bump widget minor version, tweak CSS vars).
@@ -59,6 +121,7 @@ PR/Docs discipline
 
 Recent updates
 
+- 2026-01-06T09:15:00.000Z — Added 'Website optimization doctrine (authoritative)' section to codex instructions, defining performance, image, JS, CSS, widget, accessibility, and interaction standards for live site assets.
 - 2025-11-03T16:39:33.008Z — Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.
 - 2025-10-24T23:14:01.899Z — Successfully created Portrait Portfolio v1.0 widget - portrait photography showcase with vertical composition focus, 3:4 aspect ratios, enhanced detail viewing, performance optimizations, and SEO features. Added to available widgets list and created sample manifest.
 - 2025-10-24T22:21:24.274Z — Successfully implemented podcast widget v1.9.5 with auto-hydrating RSS episodes. Added Ep 9 fallback data, live RSS caching, and updated show branding. Created test page that works properly. Widget now auto-populates new episodes without manual updates.

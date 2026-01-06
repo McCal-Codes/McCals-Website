@@ -156,6 +156,34 @@ CI automation
 - All workflows include: retry logic (3 attempts), JSON validation, data integrity checks, proper error reporting.
 - Docs guard: `copilot-instructions-guardian.yml` reminds/fails PRs when core flows change without updating `.github/copilot-instructions.md`, and requires a `CHANGELOG.md` entry when the instructions change (bypass labels: `docs-acknowledged`, `skip-copilot-instructions`).
 
+## Performance intent (authoritative)
+
+All optimizations must prioritize real-user experience on the live Squarespace site (mcc-cal.com), not synthetic scores alone.
+
+Decision order when making tradeoffs:
+
+1. Above-the-fold visibility (LCP)
+2. Main-thread blocking avoidance
+3. Progressive enhancement
+4. Accessibility and semantics
+5. Maintainability and clarity
+6. Lighthouse score improvements
+
+If a change improves Lighthouse but delays initial content visibility, reject it.
+
+Key rules:
+
+- Above-the-fold images must render without waiting on JavaScript.
+- Prefer native <img> markup for primary visuals; enhance after paint.
+- Do not JS-render critical content.
+- Inline only truly critical CSS (first paint only).
+- All non-critical JS must be deferred or delayed.
+- Widgets must not initialize unless present on the page.
+- Avoid DOM-heavy construction during initial render.
+
+Performance regressions are treated as bugs.
+Accessibility regressions are treated as bugs.
+
 Widget authoring conventions
 
 - Widgets are drop-in HTML for Squarespace Code Blocks: inline CSS, minimal JS, no external fonts; prefer self-contained assets. See `src/widgets/**/README.md` for usage.
@@ -241,6 +269,12 @@ Scripts folder organization and archival (2025-10-06)
 - Always keep the scripts folder clean and efficient to avoid confusion and ensure maintainability.
 
 Recent updates
+
+- 2026-01-06T14:20:00.000Z — Added Performance intent (authoritative) section.
+  - Establishes clear hierarchy for performance tradeoffs prioritizing real-user experience (LCP and main-thread) over synthetic scores.
+  - Mandates no-JS above-the-fold image rendering and native `<img>` markup.
+  - Strictly forbids JS-rendering of critical content and DOM-heavy initial construction.
+  - Classes performance and accessibility regressions as bugs.
 
 - 2025-12-06T21:30:00.000Z — Dev Environment Widget Integration Complete (dev.mcc-cal.com).
   - **Problem**: All 7 widget pages (concerts, events, journalism, portraits, nature, featured-work, podcast) returned HTTP 500 "Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined"
