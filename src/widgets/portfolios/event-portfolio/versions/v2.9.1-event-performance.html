@@ -202,12 +202,23 @@
         break-inside: avoid;
         opacity: 1;
         transform: none;
+        transition:
+          transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+          box-shadow 0.4s;
       }
       .card img {
         width: 100%;
         height: auto;
         display: block;
         object-fit: contain;
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+      }
+      .card:hover img {
+        transform: scale(1.04);
       }
       .info {
         position: absolute;
@@ -902,10 +913,7 @@
 
       <h1 class="events-heading">
         Event Photography
-        <span
-          class="version-indicator"
-          onclick="window.eventPortfolioAPI?.showChangelog()"
-          title="Click for changelog"
+        <span class="version-indicator" onclick="window.showChangelog()" title="Click for changelog"
           >v2.9.1</span
         >
       </h1>
@@ -1023,7 +1031,7 @@
       <div class="changelog-content">
         <div class="changelog-header">
           <h3 class="changelog-title">Event Portfolio Changelog</h3>
-          <button class="changelog-close" onclick="hideChangelog()">×</button>
+          <button class="changelog-close" onclick="window.hideChangelog()">×</button>
         </div>
         <div class="changelog-body">
           <div class="changelog-version">v2.9.1 — Performance (Current)</div>
