@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-01-06
+
+### Docs/Meta
+
+- **Performance Intent (Authoritative)**: Added a new section to `.github/copilot-instructions.md` establishing a performance-first development doctrine. This prioritizing real-user experience (LCP, main-thread) on `mcc-cal.com` over synthetic metrics and mandates specific architectural rules for above-the-fold content and JS usage.
+
+### Podcast Feed Widget v2.2.0
+
+- **Core Refactor**: Standardized the widget on a high-performance event delegation architecture.
+- **Architectural Cleanup**: Removed all legacy inline `onclick` handlers, recursive hydration loops, and global mutable state variables.
+- **State Optimization**: Consolidated system state into a single immutable-first object with explicit source tracking (`fallback` | `cache` | `network`).
+- **Audio Availability**: Implemented render-time audio playability detection to provide immediate UI feedback for missing files.
+- **Cache v2**: Migrated to a new internal caching schema (`mcc_podcast_cache_v2`) with standardized 30-minute background refresh.
+- **Files**: `src/widgets/_content/podcast-feed/versions/v2.2.0-podcast-core.html`
+
 ## 2025-12-31 (Continued)
 
 ### Repository Cleanup & 2026 Optimization

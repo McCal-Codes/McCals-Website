@@ -21,22 +21,22 @@
     <!-- site-widgets:inline:start -->
     <style data-site-widgets-inline>
       :root {
-        --mcc-accent: #ffffff;
-        --mcc-accent-strong: #e5e5e5;
-        --mcc-bg: #0a0a0a;
-        --mcc-fg: #f7f7f7;
-        --mcc-line: #2a2a2a;
-        --mcc-muted: #999;
+        --mcc-accent: #ff4d6d;
+        --mcc-accent-strong: #ff2b50;
+        --mcc-bg: #ffffff;
+        --mcc-fg: #111827;
+        --mcc-line: #e5e7eb;
+        --mcc-muted: #6b7280;
         --bg: var(--mcc-bg);
         --fg: var(--mcc-fg);
         --line: var(--mcc-line);
         --accent: var(--mcc-accent);
         --muted: var(--mcc-muted);
         --chip: #1b1b1b;
-        --focus: #ffffff;
+        --focus: #7dd3fc;
         --link: var(--accent);
-        --panel-bg: rgba(20, 20, 20, 0.78);
-        --panel-border: rgba(255, 255, 255, 0.12);
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
         --panel-blur: 8px;
         --mcc-space-1: 4px;
         --mcc-space-2: 8px;
@@ -44,11 +44,10 @@
         --mcc-space-4: 16px;
         --mcc-space-5: 24px;
         --mcc-space-6: 32px;
-        --mcc-radius: 12px;
-        --mcc-control-height: 44px;
+        --mcc-radius: 10px;
+        --mcc-control-height: 40px;
         --mcc-z-top: 2147483647;
       }
-
       [data-theme='light'] {
         --fg: #0a0a0a;
         --bg: #ffffff;
@@ -57,382 +56,110 @@
         --panel-border: rgba(0, 0, 0, 0.08);
         --panel-blur: 8px;
         --chip: #fafafa;
-        --focus: #000000;
-        --muted: #666;
+        --focus: #0ea5e9;
+        --link: var(--accent);
       }
-
-      * {
+      [data-theme='dark'] {
+        --fg: #f7f7f7;
+        --bg: #06060a;
+        --line: #2a2a2a;
+        --panel-bg: rgba(20, 20, 20, 0.78);
+        --panel-border: rgba(255, 255, 255, 0.12);
+        --panel-blur: 8px;
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--accent);
+      }
+      [class^='mcc-'],
+      [class*=' mcc-'] {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
         font-family:
           Inter,
-          -apple-system,
-          BlinkMacSystemFont,
           'Segoe UI',
-          Roboto,
+          system-ui,
+          -apple-system,
+          'Helvetica Neue',
+          Arial,
           sans-serif;
-        line-height: 1.6;
-        color: var(--fg);
-        background: var(--bg);
-        transition: background 0.3s ease;
-        padding: 2rem 1rem;
-      }
-
-      /* === CONTAINER === */
-      .mcc-quote-container {
-        max-width: 800px;
-        margin: 0 auto;
-        background: var(--panel-bg);
-        backdrop-filter: blur(var(--panel-blur));
-        border: 1px solid var(--panel-border);
-        border-radius: 20px;
-        padding: 3rem 2rem;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      }
-
-      @media (max-width: 640px) {
-        .mcc-quote-container {
-          padding: 2rem 1.5rem;
-        }
-      }
-
-      /* === HEADER === */
-      .mcc-quote-header {
-        text-align: center;
-        margin-bottom: 3rem;
-      }
-
-      .mcc-quote-header h1 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        margin-bottom: 1rem;
-      }
-
-      .mcc-quote-header p {
-        color: var(--muted);
-        font-size: 1.1rem;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .mcc-quote-info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
-        text-align: left;
-      }
-
-      .mcc-info-card {
-        background: rgba(255, 255, 255, 0.03);
-        padding: 1rem;
-        border-radius: 12px;
-        border: 1px solid var(--panel-border);
-      }
-
-      .mcc-info-card h4 {
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--muted);
-        margin-bottom: 0.5rem;
-      }
-
-      .mcc-info-card p {
-        font-size: 0.95rem;
         color: var(--fg);
       }
-
-      /* === FORM === */
-      .mcc-form-section {
-        margin-bottom: 3rem;
-      }
-
-      .mcc-form-section h3 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--line);
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .mcc-form-section h3 span {
-        opacity: 0.2;
-        font-size: 0.8em;
-      }
-
-      .mcc-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-      }
-
-      @media (max-width: 640px) {
-        .mcc-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .mcc-form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .mcc-form-group.full-width {
-        grid-column: 1 / -1;
-      }
-
-      label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--fg);
-      }
-
-      label .required {
-        color: #ff4d6d;
-        margin-left: 2px;
-      }
-
-      input,
-      select,
-      textarea {
-        width: 100%;
-        height: var(--mcc-control-height);
-        padding: 0 1rem;
-        font-size: 1rem;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--line);
-        border-radius: var(--mcc-radius);
-        color: var(--fg);
-        font-family: inherit;
-        transition: all 0.2s ease;
-      }
-
-      textarea {
-        height: auto;
-        min-height: 120px;
-        padding: 1rem;
-        resize: vertical;
-      }
-
-      input:focus,
-      select:focus,
-      textarea:focus {
+      [class^='mcc-'] a:focus-visible,
+      [class^='mcc-'] button:focus-visible,
+      [class^='mcc-'] [role='button']:focus-visible,
+      [class*=' mcc-'] a:focus-visible,
+      [class*=' mcc-'] button:focus-visible,
+      [class*=' mcc-'] [role='button']:focus-visible {
         outline: none;
-        border-color: var(--focus);
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+        border-radius: 6px;
       }
-
-      /* Radio & Checkbox */
-      .mcc-radio-group {
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-        padding: 0.5rem 0;
+      .mcc-sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
       }
-
-      .mcc-check-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.95rem;
-        cursor: pointer;
-      }
-
-      .mcc-check-item input[type='checkbox'],
-      .mcc-check-item input[type='radio'] {
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-      }
-
-      .mcc-checkbox-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 1rem;
-      }
-
-      /* Conditional Fields */
-      .mcc-conditional-event {
-        display: none; /* Controlled by JS */
-      }
-
-      /* === FOOTER & SUBMIT === */
-      .mcc-form-footer {
-        margin-top: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-
-      .mcc-submit-btn {
-        width: 100%;
-        height: 56px;
-        background: var(--accent);
-        color: var(--bg);
-        border: none;
-        border-radius: var(--mcc-radius);
-        font-size: 1.1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex;
+      .mcc-btn {
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.75rem;
-      }
-
-      .mcc-submit-btn:hover:not(:disabled) {
-        background: var(--mcc-accent-strong);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-      }
-
-      .mcc-submit-btn:active:not(:disabled) {
-        transform: translateY(0);
-      }
-
-      .mcc-submit-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      /* === MESSAGES === */
-      .mcc-message {
-        padding: 1.25rem;
-        border-radius: var(--mcc-radius);
-        font-size: 1rem;
-        display: none;
-        border: 1px solid transparent;
-        margin-bottom: 2rem;
-      }
-
-      .mcc-message.show {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .mcc-message-success {
-        background: rgba(34, 197, 94, 0.1);
-        border-color: rgba(34, 197, 94, 0.2);
-        color: #4ade80;
-      }
-
-      .mcc-message-error {
-        background: rgba(239, 68, 68, 0.1);
-        border-color: rgba(239, 68, 68, 0.2);
-        color: #f87171;
-      }
-
-      /* === SPAM & UTILS === */
-      .mcc-hp {
-        position: absolute;
-        left: -9999px;
-        visibility: hidden;
-      }
-
-      .mcc-spinner {
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(0, 0, 0, 0.1);
-        border-top-color: currentColor;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Version Indicator */
-      .version-indicator {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(4px);
-        color: rgba(255, 255, 255, 0.5);
-        padding: 4px 10px;
-        border-radius: 6px;
-        font:
-          600 11px ui-monospace,
-          monospace;
-        cursor: pointer;
-        z-index: 500;
-        transition: all 0.2s ease;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .version-indicator:hover {
+        gap: var(--mcc-space-2);
+        padding: 0.6rem 1.2rem;
+        height: var(--mcc-control-height);
+        border-radius: 999px;
+        background: var(--accent);
         color: #fff;
-        background: rgba(0, 0, 0, 0.8);
-        border-color: rgba(255, 255, 255, 0.3);
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
       }
-
-      /* Changelog Modal */
-      .mcc-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
+      .mcc-btn:hover,
+      .mcc-btn:focus-visible {
+        background: var(--mcc-accent-strong);
+        transform: translateY(-1px);
+      }
+      .mcc-img-cover {
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(8px);
-        z-index: 1000;
+        object-fit: cover;
+        display: block;
+      }
+      .mcc-row {
+        display: flex;
+        gap: var(--mcc-space-3);
+        align-items: center;
+      }
+      .mcc-col {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mcc-space-2);
+      }
+      .mcc-center {
+        display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
       }
-      .mcc-modal.show {
-        display: flex;
+      [class^='mcc-'] {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
-      .mcc-modal-content {
-        background: #111;
-        border: 1px solid #333;
-        border-radius: 16px;
-        width: 100%;
-        max-width: 500px;
-        max-height: 80vh;
-        overflow-y: auto;
-        padding: 24px;
-        position: relative;
+      @media (prefers-reduced-motion: reduce) {
+        [class^='mcc-'] * {
+          animation: none !important;
+          transition: none !important;
+        }
       }
-      .mcc-modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-      .mcc-modal-close {
-        background: none;
-        border: none;
-        color: #666;
-        font-size: 24px;
-        cursor: pointer;
-      }
-      .mcc-changelog-ver {
-        font-weight: 700;
-        margin-bottom: 8px;
-        color: #fff;
-      }
-      .mcc-changelog-list {
-        list-style: disc;
-        padding-left: 20px;
-        color: #999;
-        font-size: 0.9rem;
+      @media print {
+        [class^='mcc-'] {
+          color: #000 !important;
+          background: transparent !important;
+        }
       }
     </style>
     <!-- site-widgets:inline:end -->

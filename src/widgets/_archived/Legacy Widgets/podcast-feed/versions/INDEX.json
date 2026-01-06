@@ -3,24 +3,66 @@
   "widget": "podcast-feed",
   "activePolicy": {
     "maxActiveVersions": 2,
-    "currentVersion": "v2.0.0",
-    "previousVersion": "v2.0.0-performance-optimized",
-    "description": "Retain standard and performance-optimized variants"
+    "currentVersion": "v2.2.0",
+    "previousVersion": "v2.1.0",
+    "description": "Retain core refactor and resilience fallback variants"
   },
   "versions": [
-    {"version": "v1.9.5", "date": "2025-10-24", "summary": "Auto-hydrating RSS episodes with caching, Ep 9 fallback data, updated branding"},
-    {"version": "v1.9.0", "date": "2025-09-25", "summary": "Calendar invite refresh with hero description and enlarged CTA"},
-    {"version": "v1.8.0", "date": "2025-09-19", "summary": "Feature enhancements"},
-    {"version": "v1.7.0", "date": "2025-09-19", "summary": "Version archive system with historical implementations and testing suite"},
-    {"version": "v1.6.0", "date": "2025-09-19", "summary": "Latest stable with all features integrated"},
-    {"version": "v1.5.0", "date": "2025-09-19", "summary": "Enhanced styling and mobile responsiveness"},
-    {"version": "v1.4.0", "date": "2025-09-19", "summary": "Performance optimized version with audio fixes"},
-    {"version": "v1.3.0", "date": "2025-09-16", "summary": "Feature iteration"},
-    {"version": "v1.2.0", "date": "2025-09-16", "summary": "Improvements and refinements"},
-    {"version": "v1.1.0", "date": "2025-09-16", "summary": "Audio previews, platform links, enhanced dark styling"},
-    {"version": "v1.0.0", "date": "2025-09-16", "summary": "Initial release: RSS integration, liquid glass design, masonry layout, progressive loading"}
+    {
+      "version": "v2.0.0",
+      "date": "2025-10-25",
+      "summary": "Performance Optimization & Accessibility Enhancement (Lazy-loaded debug, New badges)"
+    },
+    {
+      "version": "v2.0.0-performance-optimized",
+      "date": "2025-10-25",
+      "summary": "Performance-tuned variant of v2.0.0"
+    },
+    {
+      "version": "v1.9.5",
+      "date": "2025-10-24",
+      "summary": "Auto-hydrating RSS episodes with caching, Ep 9 fallback data, updated branding"
+    },
+    {
+      "version": "v1.9.0",
+      "date": "2025-09-25",
+      "summary": "Calendar invite refresh with hero description and enlarged CTA"
+    },
+    { "version": "v1.8.0", "date": "2025-09-19", "summary": "Feature enhancements" },
+    {
+      "version": "v1.7.0",
+      "date": "2025-09-19",
+      "summary": "Version archive system with historical implementations and testing suite"
+    },
+    {
+      "version": "v1.6.0",
+      "date": "2025-09-19",
+      "summary": "Latest stable with all features integrated"
+    },
+    {
+      "version": "v1.5.0",
+      "date": "2025-09-19",
+      "summary": "Enhanced styling and mobile responsiveness"
+    },
+    {
+      "version": "v1.4.0",
+      "date": "2025-09-19",
+      "summary": "Performance optimized version with audio fixes"
+    },
+    { "version": "v1.3.0", "date": "2025-09-16", "summary": "Feature iteration" },
+    { "version": "v1.2.0", "date": "2025-09-16", "summary": "Improvements and refinements" },
+    {
+      "version": "v1.1.0",
+      "date": "2025-09-16",
+      "summary": "Audio previews, platform links, enhanced dark styling"
+    },
+    {
+      "version": "v1.0.0",
+      "date": "2025-09-16",
+      "summary": "Initial release: RSS integration, liquid glass design, masonry layout, progressive loading"
+    }
   ],
-  "lastUpdated": "2025-12-01",
+  "lastUpdated": "2026-01-06",
   "archiveLocation": "src/widgets/_archived/Legacy Widgets/podcast-feed/versions/",
-  "totalArchivedVersions": 11
+  "totalArchivedVersions": 13
 }
