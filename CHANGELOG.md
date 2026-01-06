@@ -6,6 +6,10 @@
 
 - **Performance Intent (Authoritative)**: Added a new section to `.github/copilot-instructions.md` establishing a performance-first development doctrine. This prioritizing real-user experience (LCP, main-thread) on `mcc-cal.com` over synthetic metrics and mandates specific architectural rules for above-the-fold content and JS usage.
 
+### Repository Hygiene
+
+- **Widget Version Enforcement**: Archived excess versions for `photojournalism-portfolio` and `portrait-portfolio`. All widgets now comply with the ≤2 active versions policy (0 violations).
+
 ### Podcast Feed Widget v2.2.1
 
 - **Bug Fix**: Restored missing `previewAudio` function that was accidentally omitted in v2.2.0, making the "Preview 15s" button functional again.

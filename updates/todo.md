@@ -257,7 +257,8 @@ Phased improvements for the existing widget ecosystem.
 - [x] **Implement CI Check for Active Widget Versions**
   - **Purpose**: Enforce the "≤2 active versions" policy to prevent technical debt and maintain repository hygiene.
   - **Scope**: Github Actions workflows or standalone script in `scripts/`. Must not modify widget files.
-  - **Findings**: 0 violations now. All 11 violating widgets archived. Recursive scanner and CI check implemented.
+  - [x] Cleanup existing violations (archive older versions)
+  - **Findings**: 0 violations. All violating widgets archived. Recursive scanner and CI check implemented.
   - **Validation**: CI passes; `npm run scan:widget-versions` returns "PASS".
 
 - [ ] TODO: Add structured data validator & Lighthouse automation snapshot
