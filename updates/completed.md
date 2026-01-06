@@ -6,6 +6,61 @@ This file tracks all completed tasks that have been removed from the active `tod
 
 ---
 
+## ✅ January 2026 Completions
+
+### Portfolio Performance Optimization (Jan 6, 2026)
+
+- [x] **Event Portfolio v2.9.1** — Performance optimization with pre-rendered LCP hero (Pittsburgh Social Club)
+  - Added eager loading and `fetchpriority="high"` for hero image
+  - Inlined critical CSS for above-the-fold content
+  - Added resource hints for GitHub Raw CDN
+  - Restored premium hover effects (card lift + image scale)
+  - Fixed changelog modal function references
+
+- [x] **Photojournalism Portfolio v5.5.2** — Performance optimization with pre-rendered LCP hero (CMU Trump Protest)
+  - Added eager loading and `fetchpriority="high"` for hero image
+  - Inlined critical CSS for above-the-fold content
+  - Added resource hints for GitHub Raw CDN
+  - Restored premium hover effects with brightness/contrast boost
+  - Enhanced changelog modal with complete version history (v5.5.2 → v5.4.0)
+
+- [x] **Portrait Portfolio v2.0.1** — Performance optimization with pre-rendered LCP hero (Editorial)
+  - Added eager loading and `fetchpriority="high"` for hero image
+  - Inlined critical CSS for above-the-fold content
+  - Added resource hints for GitHub Raw CDN
+  - Restored premium hover effects with category tag animation
+  - **Added complete changelog modal** (was missing entirely)
+  - Added changelog modal HTML, CSS (61 lines), and JavaScript functions
+
+- [x] **Concert Portfolio v4.9.3** — Already optimized (Horseburner hero)
+  - Hover effects preserved from previous version
+
+- [x] **About Page v2.4.1** — Already optimized (bio photo eager load)
+  - Performance enhancements from previous session
+
+- [x] **Documentation Updates**
+  - Updated `updates/todo.md` to mark Events, Journalism, and Portraits as completed
+  - Added status notes for each optimized widget with version numbers and LCP candidates
+
+### Technical Details
+
+**Performance Enhancements Applied:**
+
+- Pre-rendered LCP candidates for instant visual feedback
+- Eager loading strategy for critical images
+- High fetch priority to prioritize hero images
+- Inlined critical CSS to eliminate render-blocking
+- DNS prefetch and preconnect for CDN resources
+
+**UI/UX Improvements:**
+
+- Restored smooth hover animations across all widgets
+- Consistent `cubic-bezier(0.165, 0.84, 0.44, 1)` easing
+- Premium micro-interactions (lift, scale, brightness adjustments)
+- Fixed all changelog modal functionality issues
+
+---
+
 ## ✅ December 2025 Completions
 
 ### Event Portfolio Bugfix & WIP Deployments (Dec 27, 2025)

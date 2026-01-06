@@ -10,6 +10,26 @@ Last Updated: January 6, 2026
 
 ---
 
+## ✅ Completed - January 6, 2026
+
+### 🚀 Portfolio Performance Optimization
+
+- [x] **Event Portfolio v2.9.1** — LCP optimization with pre-rendered hero (Pittsburgh Social Club)
+- [x] **Photojournalism Portfolio v5.5.2** — LCP optimization with pre-rendered hero (CMU Trump Protest) + enhanced changelog
+- [x] **Portrait Portfolio v2.0.1** — LCP optimization with pre-rendered hero (Editorial) + added complete changelog modal
+- [x] **Restored Premium Hover Effects** — All portfolio widgets now have smooth lift/scale animations
+- [x] **Fixed Changelog Modals** — Corrected function references and added missing modal to portrait portfolio
+- [x] **Documentation** — Updated todo.md and completed.md with full session details
+
+**Performance Metrics:**
+
+- Pre-rendered LCP candidates for instant visual feedback
+- Eager loading + high fetch priority for hero images
+- Inlined critical CSS to eliminate render-blocking
+- Resource hints (preconnect/dns-prefetch) for CDN
+
+---
+
 ## ✅ Completed - December 31, 2025
 
 ### 🧹 2026 Repository Cleanup (All Phases Complete)
@@ -120,21 +140,30 @@ Last Updated: January 6, 2026
   - Primary widgets: site-navigation, featured-work, footer
   - LCP candidate: `.featured-item:first-child img` (or Squarespace Hero Image)
 
-- [ ] Concerts
+- [x] Concerts
   - Primary widgets: concert-portfolio
   - LCP candidate: `.concert-card:first-child img`
+  - Status: Optimized in v4.9.3 with pre-rendered hero.
 
-- [ ] Events
+- [x] Events
   - Primary widgets: event-portfolio
   - LCP candidate: `.event-card:first-child img`
+  - Status: Optimized in v2.9.1 with pre-rendered hero (Pittsburgh Social Club).
 
-- [ ] Journalism
+- [x] Journalism
   - Primary widgets: photojournalism-portfolio
   - LCP candidate: `.journalism-card:first-child img`
+  - Status: Optimized in v5.5.2 with pre-rendered hero (CMU Trump Protest).
 
-- [ ] Portraits
+- [x] Portraits
   - Primary widgets: portrait-portfolio
   - LCP candidate: `.portrait-card:first-child img`
+  - Status: Optimized in v2.0.1 with pre-rendered hero (Editorial).
+
+- [x] About Page
+  - Primary widgets: complete-about-page
+  - LCP candidate: `.bio-photo img`
+  - Status: Optimized in v2.4.1 (Eager load + High priority).
 
 For each page:
 

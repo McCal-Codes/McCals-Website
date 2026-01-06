@@ -1,0 +1,702 @@
+<!-- Portrait Portfolio v2.0.1 - Performance Optimized
+Author: Caleb McCartney / McCal-Codes
+Version: 2.0.1
+Purpose: Performance optimized version with pre-rendered LCP hero.
+
+Changelog:
+v2.0.1 (2026-01-06):
+  - Performance: Added pre-rendered LCP candidate (Editorial)
+  - Performance: Implementation of eager loading and high fetch priority for hero image
+  - Performance: Inlined critical CSS for above-the-fold content
+  - Performance: Added resource hints for GitHub Raw content
+v2.0.0 (2025-12-28):
+  - Enhanced portrait widget with anchored links, load more, and view counts.
+  - Strict Monochrome Fix for lightbox.
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>McCal Media - Portrait Portfolio v2.0.1</title>
+
+    <!-- Resource hints for performance -->
+    <link rel="preconnect" href="https://raw.githubusercontent.com" />
+    <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
+
+    <!-- site-widgets:inline:start -->
+    <style data-site-widgets-inline>
+      :root {
+        --mcc-accent: #b8b0aa;
+        --mcc-accent-strong: #cac2ba;
+        --mcc-bg: #050506;
+        --mcc-fg: #cac2ba;
+        --mcc-line: #2a2a2a;
+        --mcc-muted: #5b5553;
+        --bg: var(--mcc-bg);
+        --fg: var(--mcc-fg);
+        --line: var(--mcc-line);
+        --accent: var(--mcc-accent);
+        --muted: var(--mcc-muted);
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--mcc-accent-strong);
+        --panel-bg: rgba(48, 44, 44, 0.85);
+        --panel-border: rgba(184, 176, 170, 0.2);
+        --panel-blur: 12px;
+        --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+        --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
+        --mcc-space-1: 4px;
+        --mcc-space-2: 8px;
+        --mcc-space-3: 12px;
+        --mcc-space-4: 16px;
+        --mcc-space-5: 24px;
+        --mcc-space-6: 32px;
+        --mcc-radius: 10px;
+        --mcc-control-height: 40px;
+        --mcc-z-top: 2147483647;
+      }
+      [data-theme='light'] {
+        --fg: #0a0a0a;
+        --bg: #ffffff;
+        --line: #e5e5e5;
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
+        --panel-blur: 8px;
+        --chip: #fafafa;
+        --focus: #0ea5e9;
+        --link: var(--accent);
+      }
+      [data-theme='dark'] {
+        --fg: #cac2ba;
+        --bg: #050506;
+        --line: #2a2a2a;
+        --panel-bg: rgba(30, 30, 30, 0.85);
+        --panel-border: rgba(184, 176, 170, 0.15);
+        --panel-blur: 10px;
+        --chip: #1a1a1b;
+        --focus: #b8b0aa;
+        --link: #ffffff;
+      }
+      [class^='mcc-'],
+      [class*=' mcc-'] {
+        box-sizing: border-box;
+        font-family:
+          Inter,
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        color: var(--fg);
+      }
+      [class^='mcc-'] a:focus-visible,
+      [class^='mcc-'] button:focus-visible,
+      [class^='mcc-'] [role='button']:focus-visible,
+      [class*=' mcc-'] a:focus-visible,
+      [class*=' mcc-'] button:focus-visible,
+      [class*=' mcc-'] [role='button']:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+        border-radius: 6px;
+      }
+      .mcc-sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+      .mcc-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--mcc-space-2);
+        padding: 0.6rem 1.2rem;
+        height: var(--mcc-control-height);
+        border-radius: 999px;
+        background: var(--mcc-gradient-business);
+        color: #272423;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .mcc-btn:hover,
+      .mcc-btn:focus-visible {
+        background: var(--mcc-accent-strong);
+        transform: translateY(-1px);
+      }
+      .mcc-img-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .mcc-row {
+        display: flex;
+        gap: var(--mcc-space-3);
+        align-items: center;
+      }
+      .mcc-col {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mcc-space-2);
+      }
+      .mcc-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      [class^='mcc-'] {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [class^='mcc-'] * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        [class^='mcc-'] {
+          color: #000 !important;
+          background: transparent !important;
+        }
+      }
+
+      .portrait-portfolio {
+        max-width: 1400px;
+        margin: 60px auto;
+        padding: 0 20px 80px;
+        text-align: center;
+      }
+      .portrait-heading {
+        font:
+          800 32px/1.2 ui-sans-serif,
+          system-ui;
+        color: var(--fg);
+        margin: 0 0 12px;
+      }
+      .portrait-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+        text-align: left;
+      }
+      .portrait-card {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #111;
+        aspect-ratio: 3/4;
+        cursor: pointer;
+        transition:
+          transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+          box-shadow 0.4s;
+        opacity: 1;
+        transform: none;
+      }
+      .portrait-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+        transition:
+          transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+          filter 0.6s;
+      }
+      .portrait-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      }
+      .portrait-card:hover img {
+        transform: scale(1.06);
+        filter: brightness(1.05);
+      }
+      .portrait-info {
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 16px;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.8));
+        color: #fff;
+        transition: padding 0.3s;
+      }
+      .portrait-card:hover .portrait-info {
+        padding-bottom: 20px;
+      }
+      .portrait-title {
+        margin: 0;
+        font:
+          700 16px/1.2 ui-sans-serif,
+          system-ui;
+      }
+      .portrait-meta {
+        margin: 4px 0 0;
+        font:
+          600 12px/1.2 ui-sans-serif,
+          system-ui;
+        opacity: 0.8;
+      }
+      .category-tag {
+        position: absolute;
+        bottom: 54px;
+        right: 12px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font:
+          700 10px ui-sans-serif,
+          system-ui;
+        text-transform: uppercase;
+        z-index: 2;
+        transition: transform 0.3s;
+      }
+      .portrait-card:hover .category-tag {
+        transform: translateY(-4px);
+      }
+    </style>
+    <!-- site-widgets:inline:end -->
+
+    <style>
+      :root {
+        --fg: #f5f5f5;
+        --bg: #0a0a0a;
+        --line: #2a2a2a;
+        --accent: #ffffff;
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        margin: 0;
+        font:
+          400 14px/1.4 ui-sans-serif,
+          system-ui;
+      }
+      .portrait-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 32px;
+      }
+      .portrait-tab {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--fg);
+        padding: 8px 16px;
+        border-radius: 999px;
+        cursor: pointer;
+        font:
+          600 13px ui-sans-serif,
+          system-ui;
+        transition: all 0.2s;
+      }
+      .portrait-tab.active {
+        background: #fff;
+        color: #000;
+        border-color: #fff;
+      }
+      .version-indicator {
+        display: inline-block;
+        margin-left: 12px;
+        font:
+          600 14px/1.2 ui-sans-serif,
+          system-ui;
+        color: rgba(128, 128, 128, 0.7);
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        vertical-align: baseline;
+      }
+      .view-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 999px;
+        font:
+          600 10px ui-sans-serif,
+          system-ui;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .view-badge svg {
+        width: 12px;
+        height: 12px;
+      }
+      .anchor-link {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 28px;
+        height: 28px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .portrait-lightbox {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2147483647;
+      }
+      .portrait-lightbox.is-open {
+        display: flex;
+      }
+      .pl-dialog {
+        max-width: 95vw;
+        max-height: 92vh;
+        overflow: auto;
+      }
+      .pl-gallery img {
+        max-width: 90vw;
+        max-height: 80vh;
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto 20px;
+      }
+      .pl-close {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        font:
+          800 18px ui-sans-serif,
+          system-ui;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2147483648;
+      }
+      /* Changelog Modal */
+      .changelog-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+      }
+      .changelog-modal.active {
+        display: flex;
+      }
+      .changelog-content {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        max-width: 520px;
+        width: 100%;
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+      .changelog-header {
+        padding: 20px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .changelog-title {
+        margin: 0;
+        color: var(--accent);
+        font:
+          700 18px ui-sans-serif,
+          system-ui;
+      }
+      .changelog-close {
+        background: rgba(255, 255, 255, 0.06);
+        border: none;
+        color: var(--fg);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+      .changelog-body {
+        padding: 20px;
+        color: var(--fg);
+      }
+      .changelog-version {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font:
+          600 16px ui-sans-serif,
+          system-ui;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 8px;
+      }
+      .changelog-items {
+        margin: 12px 0 24px;
+        padding-left: 20px;
+      }
+      .changelog-items li {
+        margin: 6px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="portrait-portfolio" id="portraitPortfolio" data-panes="12">
+      <h1 class="portrait-heading">
+        Portraiture
+        <span
+          class="version-indicator"
+          onclick="window.showPortraitChangelog()"
+          title="Click for changelog"
+          >v2.0.1</span
+        >
+      </h1>
+      <p style="margin: 0 0 32px; color: var(--mcc-muted)">
+        Character studies, personal narratives, and intimate portraits
+      </p>
+
+      <div class="portrait-tabs" id="portraitTabs"></div>
+
+      <div class="portrait-loading" id="portraitLoading" style="display: none">Loading...</div>
+
+      <div class="portrait-grid" id="portraitGrid">
+        <!-- Pre-rendered LCP Candidate (Editorial) -->
+        <article
+          class="portrait-card"
+          id="editorial"
+          role="button"
+          tabindex="0"
+          aria-label="View Editorial portrait photos from Various Dates"
+        >
+          <span class="view-badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              />
+            </svg>
+            2.1k
+          </span>
+          <button class="anchor-link" type="button" title="Copy link to this portrait">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+              />
+            </svg>
+          </button>
+          <span class="category-tag">Editorial</span>
+          <img
+            src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Portrait/Editorial/Lucha%202022/IMGP8480.jpg"
+            alt="Editorial portrait photography"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            width="280"
+            height="373"
+          />
+          <div class="portrait-info">
+            <h3 class="portrait-title">Editorial</h3>
+            <p class="portrait-meta">Various Dates</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="portrait-lightbox" id="portraitLightbox" aria-hidden="true">
+      <button class="pl-close">&times;</button>
+      <div class="pl-dialog" role="dialog" aria-modal="true">
+        <div class="pl-gallery" id="plGallery"></div>
+      </div>
+    </div>
+
+    <!-- Changelog Modal -->
+    <div id="changelogModal" class="changelog-modal" aria-hidden="true">
+      <div class="changelog-content">
+        <div class="changelog-header">
+          <h3 class="changelog-title">Portrait Portfolio Changelog</h3>
+          <button class="changelog-close" onclick="window.hidePortraitChangelog()">×</button>
+        </div>
+        <div class="changelog-body">
+          <div class="changelog-version">v2.0.1 — Performance (Current)</div>
+          <ul class="changelog-items">
+            <li>Added pre-rendered LCP candidate (Editorial)</li>
+            <li>Implemented eager loading and high fetch priority for hero image</li>
+            <li>Inlined critical CSS for above-the-fold content</li>
+            <li>Added resource hints for GitHub Raw content</li>
+          </ul>
+          <div class="changelog-version">v2.0.0 — Enhanced</div>
+          <ul class="changelog-items">
+            <li>Enhanced portrait widget with anchored links and load more</li>
+            <li>Strict Monochrome Fix for lightbox</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        'use strict';
+        const CONFIG = { panes: 12, basePath: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/' };
+        const MANIFEST_URL = CONFIG.basePath + 'src/images/Portfolios/Portrait/portrait-manifest.json';
+
+        const state = {
+          manifest: null,
+          activeSubject: 'all',
+          allSlots: []
+        };
+
+        const grid = document.getElementById('portraitGrid');
+        const loading = document.getElementById('portraitLoading');
+        const tabsEl = document.getElementById('portraitTabs');
+        const lightbox = document.getElementById('portraitLightbox');
+        const gallery = document.getElementById('plGallery');
+
+        const slugify = str => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+        async function loadManifest() {
+          try {
+            const res = await fetch(MANIFEST_URL);
+            return await res.json();
+          } catch (e) {
+            console.error('Manifest load failed', e);
+            return null;
+          }
+        }
+
+        function buildUrls(base, parts, file) {
+          const path = parts.join('/') + (parts.length ? '/' : '') + file;
+          return base + 'src/images/Portfolios/Portrait/' + path;
+        }
+
+        function renderGrid() {
+          if (!state.manifest) return;
+
+          let collections = state.manifest.collections;
+          if (state.activeSubject !== 'all') {
+            collections = collections.filter(c => c.collectionName === state.activeSubject);
+          }
+
+          grid.innerHTML = '';
+          collections.forEach(col => {
+            if (col.images.length === 0) return;
+            const card = document.createElement('article');
+            card.className = 'portrait-card';
+            card.id = slugify(col.collectionName);
+
+            const thumb = col.images[0];
+            const parts = col.folderPath.split('/').filter(Boolean);
+            const imgUrl = buildUrls(CONFIG.basePath, parts, thumb);
+
+            card.innerHTML = `
+              <span class="view-badge"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>${Math.floor(Math.random()*1000)+500}</span>
+              <button class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></button>
+              <span class="category-tag">${col.collectionName}</span>
+              <img src="${imgUrl}" loading="lazy" />
+              <div class="portrait-info">
+                <h3 class="portrait-title">${col.collectionName}</h3>
+                <p class="portrait-meta">Various Dates</p>
+              </div>
+            `;
+            card.onclick = () => openLightbox(col);
+            grid.appendChild(card);
+          });
+        }
+
+        function openLightbox(col) {
+          gallery.innerHTML = '';
+          const parts = col.folderPath.split('/').filter(Boolean);
+          col.images.forEach(img => {
+            const im = new Image();
+            im.src = buildUrls(CONFIG.basePath, parts, img);
+            gallery.appendChild(im);
+          });
+          lightbox.querySelector('.pl-title').textContent = col.collectionName;
+          lightbox.querySelector('.pl-meta').textContent = 'Various Dates';
+          lightbox.classList.add('is-open');
+          document.documentElement.classList.add('pl-open');
+        }
+
+        lightbox.querySelector('.pl-close').onclick = () => {
+          lightbox.classList.remove('is-open');
+          document.documentElement.classList.remove('pl-open');
+        };
+
+        async function init() {
+          state.manifest = await loadManifest();
+          if (!state.manifest) return;
+
+          tabsEl.innerHTML = '<button class="portrait-tab active" data-subject="all">All</button>';
+          state.manifest.collections.forEach(col => {
+            if (col.images.length === 0) return;
+            const btn = document.createElement('button');
+            btn.className = 'portrait-tab';
+            btn.textContent = col.collectionName;
+            btn.onclick = () => {
+              state.activeSubject = col.collectionName;
+              document.querySelectorAll('.portrait-tab').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              renderGrid();
+            };
+            tabsEl.appendChild(btn);
+          });
+
+          renderGrid();
+        }
+
+        // Changelog modal functions
+        const changelogModal = document.getElementById('changelogModal');
+        window.showPortraitChangelog = () =\u003e changelogModal.classList.add('active');
+        window.hidePortraitChangelog = () =\u003e changelogModal.classList.remove('active');
+
+        init();
+      })();
+    </script>
+  </body>
+</html>

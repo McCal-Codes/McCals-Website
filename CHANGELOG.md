@@ -6,6 +6,13 @@
 
 - **Performance Intent (Authoritative)**: Added a new section to `.github/copilot-instructions.md` establishing a performance-first development doctrine. This prioritizing real-user experience (LCP, main-thread) on `mcc-cal.com` over synthetic metrics and mandates specific architectural rules for above-the-fold content and JS usage.
 
+### Podcast Feed Widget v2.2.1
+
+- **Bug Fix**: Restored missing `previewAudio` function that was accidentally omitted in v2.2.0, making the "Preview 15s" button functional again.
+- **Enhanced Cleanup**: Added proper cleanup of preview timers and event listeners in audio control functions to prevent memory leaks and ensure smooth transitions between preview and full playback modes.
+- **Cache Update**: Updated cache key to `podcast-feed-episodes-v2.2.1` for clean cache transitions.
+- **Files**: `src/widgets/_content/podcast-feed/versions/v2.2.1-podcast-preview-fix.html`
+
 ### Podcast Feed Widget v2.2.0
 
 - **Core Refactor**: Standardized the widget on a high-performance event delegation architecture.

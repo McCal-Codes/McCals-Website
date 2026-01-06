@@ -829,7 +829,7 @@
   data-spotify-embed="false"
   data-calendly-url="https://calendly.com/cjmccar-mcc-cal/caffeinated_connections"
   data-podcast-description="Caffeinated Connections is where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact."
-  data-widget-version="2.2.0"
+  data-widget-version="2.2.1"
   data-active="true"
 >
   <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">Debug</button>
@@ -841,7 +841,7 @@
           class="version-indicator"
           data-active="true"
           onclick="PodcastWidget.showChangelog()"
-          >v2.2.0</span
+          >v2.2.1</span
         >
       </h1>
       <p class="podcast-subtitle">Caffeinated Connections Podcast</p>
@@ -900,7 +900,13 @@
         <button class="changelog-close" onclick="PodcastWidget.hideChangelog()">×</button>
       </div>
       <div class="changelog-body">
-        <div class="changelog-version">v2.2.0 — Legacy Core & Load More (WIP)</div>
+        <div class="changelog-version">v2.2.1 — Preview Button Fix</div>
+        <ul class="changelog-items">
+          <li>Fixed non-functional preview button by restoring previewAudio function</li>
+          <li>Added proper cleanup of preview timers and listeners in audio controls</li>
+        </ul>
+
+        <div class="changelog-version">v2.2.0 — Legacy Core & Load More</div>
         <ul class="changelog-items">
           <li>Reverted to stable v2.1.0 architecture for Squarespace compatibility</li>
           <li>Implemented "Load More" functionality for infinite-scrolling episodes</li>
@@ -925,7 +931,7 @@
 </div>
 
 <script>
-  // Podcast Widget v2.2.0 (Reverting to 2.1-style architecture for stability)
+  // Podcast Widget v2.2.1 (Preview button bugfix)
   window.PodcastWidget = (function () {
     const startTime = performance.now();
     let debugActive = false;
@@ -939,7 +945,7 @@
     let audioStatus = 'disabled';
     let cacheStatus = 'MISS';
     const audioByLink = new Map();
-    const CACHE_KEY = 'podcast-feed-episodes-v2.2.0-core';
+    const CACHE_KEY = 'podcast-feed-episodes-v2.2.1';
     const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
     const podcastImage =
       'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';
@@ -1289,10 +1295,6 @@
       return hydrationPromise;
     }
 
-    function clearPreview(playerId) {
-      /* simplified internal cleanup */
-    }
-
     function ensureAudioSource(playerId) {
       const audio = document.getElementById('audio-' + playerId);
       if (!audio) return false;
@@ -1350,7 +1352,105 @@
       }
     }
 
+    const previewTimers = new Map();
+    const previewListeners = new Map();
+
     return {
+      previewAudio: async function (playerId, seconds) {
+        try {
+          const audio = document.getElementById('audio-' + playerId);
+          const btn = document.getElementById('playBtn-' + playerId);
+          const container = document.getElementById('player-' + playerId);
+          if (!audio || !btn || !container) return;
+
+          if (!ensureAudioSource(playerId)) {
+            await hydrateEpisodes();
+            if (!ensureAudioSource(playerId)) {
+              const titleEl = container.querySelector('.audio-title');
+              if (titleEl) titleEl.textContent = 'Audio not yet available';
+              return;
+            }
+          }
+
+          if (currentlyPlaying && currentlyPlaying !== playerId) {
+            this.stopAudio(currentlyPlaying);
+          }
+
+          if (!(isFinite(audio.duration) && audio.readyState >= 1)) {
+            await new Promise((resolve) => {
+              audio.addEventListener('loadedmetadata', resolve, { once: true });
+            });
+          }
+
+          const previewSec = Math.max(1, Number(seconds) || 15);
+          const guard = 1;
+          const duration = isFinite(audio.duration) ? audio.duration : 0;
+          const maxStart = Math.max(0, duration - previewSec - guard);
+          const start = maxStart > 0 ? Math.random() * maxStart : 0;
+
+          // Clear any existing preview timers/listeners
+          const timer = previewTimers.get(playerId);
+          if (timer) {
+            clearTimeout(timer);
+            previewTimers.delete(playerId);
+          }
+          const listener = previewListeners.get(playerId);
+          if (listener) {
+            audio.removeEventListener('timeupdate', listener);
+            previewListeners.delete(playerId);
+          }
+
+          audio.currentTime = start;
+          currentlyPlaying = playerId;
+          audioStatus = 'preview';
+          btn.classList.add('loading');
+          updateDebugInfo('Playing preview from ' + start.toFixed(1) + 's');
+
+          try {
+            await audio.play();
+          } catch (e) {
+            this.onAudioError(playerId);
+            return;
+          } finally {
+            btn.classList.remove('loading');
+          }
+
+          btn.classList.add('playing');
+          btn.innerHTML =
+            '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+
+          const stopAt = start + previewSec;
+          const endPreview = () => {
+            const timer = previewTimers.get(playerId);
+            if (timer) {
+              clearTimeout(timer);
+              previewTimers.delete(playerId);
+            }
+            const listener = previewListeners.get(playerId);
+            if (listener) {
+              audio.removeEventListener('timeupdate', listener);
+              previewListeners.delete(playerId);
+            }
+            audio.pause();
+            btn.classList.remove('playing', 'loading');
+            btn.innerHTML =
+              '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+            if (currentlyPlaying === playerId) currentlyPlaying = null;
+            audioStatus = 'idle';
+            updateDebugInfo('Preview ended.');
+          };
+
+          const onTimeUpdate = () => {
+            if (audio.currentTime >= stopAt || audio.ended) endPreview();
+          };
+          audio.addEventListener('timeupdate', onTimeUpdate);
+          previewListeners.set(playerId, onTimeUpdate);
+          const newTimer = setTimeout(endPreview, (previewSec + 2) * 1000);
+          previewTimers.set(playerId, newTimer);
+        } catch (error) {
+          console.error('previewAudio error:', error);
+        }
+      },
       showChangelog: function () {
         const modal = document.getElementById('changelogModal');
         if (modal) modal.classList.add('active');
@@ -1407,8 +1507,24 @@
       playAudio: function (id) {
         const audio = document.getElementById('audio-' + id);
         const btn = document.getElementById('playBtn-' + id);
+        if (!audio || !btn) return;
+
+        // Clear any preview timers/listeners
+        const timer = previewTimers.get(id);
+        if (timer) {
+          clearTimeout(timer);
+          previewTimers.delete(id);
+        }
+        const listener = previewListeners.get(id);
+        if (listener) {
+          audio.removeEventListener('timeupdate', listener);
+          previewListeners.delete(id);
+        }
+
         currentlyPlaying = id;
+        audioStatus = 'playing';
         btn.classList.add('loading');
+        audio.volume = 0.8;
         audio
           .play()
           .then(() => {
@@ -1416,24 +1532,66 @@
             btn.classList.add('playing');
             btn.innerHTML =
               '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+            updateDebugInfo('Playing full episode audio.');
           })
           .catch((e) => this.onAudioError(id));
       },
       pauseAudio: function (id) {
         const audio = document.getElementById('audio-' + id);
         const btn = document.getElementById('playBtn-' + id);
+        if (!audio || !btn) return;
+
+        // Clear any preview timers/listeners
+        const timer = previewTimers.get(id);
+        if (timer) {
+          clearTimeout(timer);
+          previewTimers.delete(id);
+        }
+        const listener = previewListeners.get(id);
+        if (listener) {
+          audio.removeEventListener('timeupdate', listener);
+          previewListeners.delete(id);
+        }
+
         audio.pause();
         btn.classList.remove('playing', 'loading');
         btn.innerHTML =
           '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+        audioStatus = 'paused';
+        updateDebugInfo('Audio paused.');
       },
       stopAudio: function (id) {
         const audio = document.getElementById('audio-' + id);
+        const btn = document.getElementById('playBtn-' + id);
+        const progress = document.getElementById('progress-' + id);
+        const timeDisplay = document.getElementById('currentTime-' + id);
+
+        // Clear any preview timers/listeners
+        const timer = previewTimers.get(id);
+        if (timer) {
+          clearTimeout(timer);
+          previewTimers.delete(id);
+        }
+        const listener = previewListeners.get(id);
+        if (listener) {
+          audio.removeEventListener('timeupdate', listener);
+          previewListeners.delete(id);
+        }
+
         if (audio) {
           audio.pause();
           audio.currentTime = 0;
         }
-        this.pauseAudio(id);
+        if (btn) {
+          btn.classList.remove('playing', 'loading', 'error');
+          btn.innerHTML =
+            '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+        }
+        if (progress) progress.style.width = '0%';
+        if (timeDisplay) timeDisplay.textContent = '0:00';
+        if (currentlyPlaying === id) currentlyPlaying = null;
+        audioStatus = 'idle';
+        updateDebugInfo('Audio stopped.');
       },
       seekAudio: function (id, e) {
         const audio = document.getElementById('audio-' + id);

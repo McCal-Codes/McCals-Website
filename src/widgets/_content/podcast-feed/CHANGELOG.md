@@ -1,5 +1,13 @@
 ﻿# Changelog — Podcast Feed Widget
 
+## v2.2.1 (2026-01-06) - Preview Button Fix
+
+### Bug Fixes 🐛
+
+- **FIXED**: Restored missing `previewAudio` function that was accidentally omitted in v2.2.0, making the "Preview 15s" button functional again.
+- **ENHANCED**: Added proper cleanup of preview timers and event listeners in `playAudio`, `pauseAudio`, and `stopAudio` functions to prevent memory leaks and ensure smooth transitions between preview and full playback modes.
+- **UPDATED**: Cache key updated to `podcast-feed-episodes-v2.2.1` for clean cache transitions.
+
 ## v2.2.0 (2026-01-06) - Core Refactor
 
 ### Architecture 🏗️
