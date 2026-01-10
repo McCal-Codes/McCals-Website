@@ -1,0 +1,948 @@
+<!-- McCal Footer Widget v1.4.0 -->
+<div class="mcc-footer-widget" data-widget-version="1.4.0">
+  <!-- site-widgets:inline:start -->
+  <style data-site-widgets-inline>
+    :root {
+      --mcc-accent: #b8b0aa;
+      --mcc-accent-strong: #cac2ba;
+      --mcc-bg: #050506;
+      --mcc-fg: #cac2ba;
+      --mcc-line: #2a2a2a;
+      --mcc-muted: #5b5553;
+      --bg: var(--mcc-bg);
+      --fg: var(--mcc-fg);
+      --line: var(--mcc-line);
+      --accent: var(--mcc-accent);
+      --muted: var(--mcc-muted);
+      --chip: #1b1b1b;
+      --focus: #7dd3fc;
+      --link: var(--mcc-accent-strong);
+      --panel-bg: rgba(48, 44, 44, 0.85);
+      --panel-border: rgba(184, 176, 170, 0.2);
+      --panel-blur: 12px;
+      --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+      --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
+      --mcc-space-1: 4px;
+      --mcc-space-2: 8px;
+      --mcc-space-3: 12px;
+      --mcc-space-4: 16px;
+      --mcc-space-5: 24px;
+      --mcc-space-6: 32px;
+      --mcc-radius: 10px;
+      --mcc-control-height: 40px;
+      --mcc-z-top: 2147483647;
+    }
+    [data-theme='light'] {
+      --fg: #0a0a0a;
+      --bg: #ffffff;
+      --line: #e5e5e5;
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --panel-blur: 8px;
+      --chip: #fafafa;
+      --focus: #0ea5e9;
+      --link: var(--accent);
+    }
+    [data-theme='dark'] {
+      --fg: #cac2ba;
+      --bg: #050506;
+      --line: #2a2a2a;
+      --panel-bg: rgba(30, 30, 30, 0.85);
+      --panel-border: rgba(184, 176, 170, 0.15);
+      --panel-blur: 10px;
+      --chip: #1a1a1b;
+      --focus: #b8b0aa;
+      --link: #ffffff;
+    }
+    [class^='mcc-'],
+    [class*=' mcc-'] {
+      box-sizing: border-box;
+      font-family:
+        Inter,
+        'Segoe UI',
+        system-ui,
+        -apple-system,
+        'Helvetica Neue',
+        Arial,
+        sans-serif;
+      color: var(--fg);
+    }
+    [class^='mcc-'] a:focus-visible,
+    [class^='mcc-'] button:focus-visible,
+    [class^='mcc-'] [role='button']:focus-visible,
+    [class*=' mcc-'] a:focus-visible,
+    [class*=' mcc-'] button:focus-visible,
+    [class*=' mcc-'] [role='button']:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+      border-radius: 6px;
+    }
+    .mcc-sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .mcc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--mcc-space-2);
+      padding: 0.6rem 1.2rem;
+      height: var(--mcc-control-height);
+      border-radius: 999px;
+      background: var(--mcc-gradient-business);
+      color: #272423;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .mcc-btn:hover,
+    .mcc-btn:focus-visible {
+      background: var(--mcc-accent-strong);
+      transform: translateY(-1px);
+    }
+    .mcc-img-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mcc-row {
+      display: flex;
+      gap: var(--mcc-space-3);
+      align-items: center;
+    }
+    .mcc-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mcc-space-2);
+    }
+    .mcc-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [class^='mcc-'] {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [class^='mcc-'] * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media print {
+      [class^='mcc-'] {
+        color: #000 !important;
+        background: transparent !important;
+      }
+    }
+  </style>
+  <!-- site-widgets:inline:end -->
+
+  <style>
+    /* === BASE STYLES === */
+    .mcc-footer-widget,
+    .mcc-footer-widget * {
+      box-sizing: border-box;
+    }
+
+    .mcc-footer-widget {
+      font-family:
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        sans-serif;
+      --mcc-footer-bg: rgba(18, 18, 18, 0.4);
+      --mcc-footer-border: rgba(140, 140, 140, 0.28);
+      --mcc-footer-text-primary: inherit;
+      --mcc-footer-text-secondary: rgba(255, 255, 255, 0.75);
+      --mcc-footer-text-muted: rgba(255, 255, 255, 0.6);
+      --mcc-footer-hover: rgba(255, 255, 255, 0.9);
+      --mcc-footer-button-bg: rgba(0, 0, 0, 0.85);
+      --mcc-footer-button-text: #ffffff;
+      --mcc-footer-social-bg: rgba(255, 255, 255, 0.1);
+      --mcc-footer-social-border: rgba(160, 160, 160, 0.3);
+      --mcc-footer-input-bg: rgba(255, 255, 255, 0.14);
+      --mcc-footer-input-border: rgba(180, 180, 180, 0.4);
+      --mcc-footer-focus: rgba(255, 255, 255, 0.6);
+    }
+
+    /* === DARK MODE OVERRIDES === */
+    @media (prefers-color-scheme: dark) {
+      .mcc-footer-widget {
+        --mcc-footer-bg: rgba(10, 10, 12, 0.7);
+        --mcc-footer-border: rgba(255, 255, 255, 0.18);
+        --mcc-footer-button-bg: rgba(255, 255, 255, 0.9);
+        --mcc-footer-button-text: #000000;
+      }
+    }
+
+    /* === MAIN FOOTER === */
+    .mcc-footer {
+      position: relative;
+      margin-top: 3rem;
+      color: var(--mcc-footer-text-primary);
+      background: var(--mcc-footer-bg);
+      border-top: 1px solid var(--mcc-footer-border);
+      padding: 3.5rem 0 1.5rem;
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+    }
+
+    .mcc-footer__inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 28px);
+      display: grid;
+      gap: clamp(28px, 6vw, 42px);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    /* === SECTION HEADERS === */
+    .mcc-footer__section h4 {
+      margin: 0 0 1.1rem;
+      font-size: 0.96rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 650;
+      color: var(--mcc-footer-text-secondary);
+    }
+
+    /* === LISTS AND LINKS === */
+    .mcc-footer__list,
+    .mcc-footer__links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .mcc-footer__list a,
+    .mcc-footer__links a {
+      color: var(--mcc-footer-text-muted);
+      text-decoration: none;
+      font-size: 0.93rem;
+      font-weight: 500;
+      padding: 2px 0;
+      border-radius: 4px;
+      transition:
+        color 0.25s ease,
+        transform 0.2s ease;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* NEW: Animated underline on hover */
+    .mcc-footer__list a::after,
+    .mcc-footer__links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--mcc-footer-hover);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mcc-footer__list a:hover,
+    .mcc-footer__list a:focus-visible,
+    .mcc-footer__links a:hover,
+    .mcc-footer__links a:focus-visible {
+      color: var(--mcc-footer-hover);
+      transform: translateX(2px);
+      outline: none;
+    }
+
+    .mcc-footer__list a:hover::after,
+    .mcc-footer__links a:hover::after {
+      width: 100%;
+    }
+
+    .mcc-footer__list a:focus-visible,
+    .mcc-footer__links a:focus-visible {
+      box-shadow: 0 0 0 2px var(--mcc-footer-focus);
+      padding: 4px 6px;
+      margin: -2px -4px;
+    }
+
+    /* === SOCIAL MEDIA === */
+    .mcc-footer__social {
+      display: flex;
+      gap: 16px;
+      margin: 1.2rem 0 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .mcc-footer__social a {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--mcc-footer-social-bg);
+      border: 1px solid var(--mcc-footer-social-border);
+      color: var(--mcc-footer-text-secondary);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      position: relative;
+    }
+
+    /* NEW: Tooltip on hover */
+    .mcc-footer__social a::before {
+      content: attr(aria-label);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+    }
+
+    .mcc-footer__social a::after {
+      content: '';
+      position: absolute;
+      bottom: calc(100% + 2px);
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.9);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mcc-footer__social a:hover::before,
+    .mcc-footer__social a:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .mcc-footer__social a:hover,
+    .mcc-footer__social a:focus-visible {
+      color: var(--mcc-footer-hover);
+      transform: translateY(-3px) scale(1.05);
+      background: rgba(255, 255, 255, 0.16);
+      border-color: var(--mcc-footer-focus);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    .mcc-footer__social svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* === NEWSLETTER === */
+    .mcc-footer__newsletter {
+      margin-top: 1.4rem;
+    }
+
+    .mcc-footer__newsletter form {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .mcc-footer__newsletter input[type='email'] {
+      flex: 1;
+      min-width: 240px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--mcc-footer-input-border);
+      background: var(--mcc-footer-input-bg);
+      color: inherit;
+      font-size: 0.96rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .mcc-footer__newsletter input[type='email']::placeholder {
+      color: var(--mcc-footer-text-muted);
+      font-weight: 400;
+    }
+
+    .mcc-footer__newsletter input[type='email']:focus {
+      outline: 2px solid var(--mcc-footer-focus);
+      border-color: var(--mcc-footer-focus);
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* NEW: Input validation states */
+    .mcc-footer__newsletter input[type='email']:invalid:not(:placeholder-shown) {
+      border-color: rgba(239, 68, 68, 0.6);
+    }
+
+    .mcc-footer__newsletter input[type='email']:valid:not(:placeholder-shown) {
+      border-color: rgba(34, 197, 94, 0.6);
+    }
+
+    .mcc-footer__newsletter button {
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: var(--mcc-footer-button-bg);
+      color: var(--mcc-footer-button-text);
+      font-weight: 650;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* NEW: Button loading state */
+    .mcc-footer__newsletter button.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .mcc-footer__newsletter button.loading::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: mcc-spin 0.6s linear infinite;
+    }
+
+    @keyframes mcc-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .mcc-footer__newsletter button:hover,
+    .mcc-footer__newsletter button:focus-visible {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      outline: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .mcc-footer__newsletter button:hover,
+      .mcc-footer__newsletter button:focus-visible {
+        background: rgba(255, 255, 255, 0.96);
+      }
+    }
+
+    /* NEW: Success message */
+    .mcc-footer__newsletter-success {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      border-radius: 8px;
+      color: rgba(34, 197, 94, 1);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 12px;
+      animation: mcc-slide-in 0.3s ease;
+    }
+
+    .mcc-footer__newsletter-success.show {
+      display: flex;
+    }
+
+    @keyframes mcc-slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* === LEGAL FOOTER === */
+    .mcc-footer__legal {
+      max-width: 1140px;
+      margin: 3.2rem auto 0;
+      padding: 20px clamp(20px, 4vw, 28px) 0;
+      border-top: 1px solid rgba(160, 160, 160, 0.24);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 18px;
+      align-items: center;
+      font-size: 0.86rem;
+      color: var(--mcc-footer-text-muted);
+    }
+
+    .mcc-footer__legal .mcc-footer__links {
+      flex-direction: row;
+      gap: 20px;
+      justify-self: end;
+    }
+
+    .mcc-footer__version {
+      justify-self: center;
+      font:
+        600 11px/1.3 ui-monospace,
+        'SF Mono',
+        Monaco,
+        'Cascadia Code',
+        monospace;
+      color: var(--mcc-footer-text-muted);
+      opacity: 0.7;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    /* NEW: Version hover state */
+    .mcc-footer__version:hover {
+      opacity: 1;
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.5);
+      transform: scale(1.05);
+    }
+
+    /* === BACK TO TOP BUTTON === */
+    .mcc-back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--mcc-footer-social-bg);
+      border: 1px solid var(--mcc-footer-social-border);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      color: var(--mcc-footer-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .mcc-back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .mcc-back-to-top:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: var(--mcc-footer-focus);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .mcc-back-to-top:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    /* Progress ring */
+    .mcc-back-to-top svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .mcc-back-to-top__circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 2;
+    }
+
+    .mcc-back-to-top__circle-progress {
+      fill: none;
+      stroke: var(--mcc-footer-hover);
+      stroke-width: 2;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.1s linear;
+    }
+
+    .mcc-back-to-top__icon {
+      position: relative;
+      z-index: 1;
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .mcc-back-to-top:hover .mcc-back-to-top__icon {
+      transform: translateY(-3px);
+    }
+
+    /* === ACCESSIBILITY === */
+    .mcc-footer__sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 600px) {
+      .mcc-footer {
+        padding: 2.8rem 0 1.2rem;
+      }
+
+      .mcc-footer__inner {
+        gap: clamp(24px, 8vw, 32px);
+        grid-template-columns: 1fr;
+      }
+
+      .mcc-footer__newsletter form {
+        flex-direction: column;
+      }
+
+      .mcc-footer__newsletter input[type='email'] {
+        min-width: auto;
+      }
+
+      .mcc-footer__legal {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .mcc-footer__legal .mcc-footer__links {
+        flex-direction: column;
+        gap: 12px;
+        justify-self: center;
+      }
+
+      .mcc-footer__version {
+        justify-self: center;
+      }
+
+      .mcc-back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .mcc-back-to-top__icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    /* === REDUCED MOTION === */
+    @media (prefers-reduced-motion: reduce) {
+      .mcc-footer-widget *,
+      .mcc-back-to-top,
+      .mcc-back-to-top * {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <footer class="mcc-footer" role="contentinfo" aria-label="Site footer">
+    <div class="mcc-footer__inner">
+      <section class="mcc-footer__section" aria-labelledby="footer-about">
+        <h4 id="footer-about">About</h4>
+        <ul class="mcc-footer__list">
+          <li><a href="/policies-legal#faq">FAQs</a></li>
+          <li><a href="/about">About Me</a></li>
+          <li><a href="/roadmap">Roadmap</a></li>
+          <li><a href="/policies-legal">Policies &amp; Legal</a></li>
+        </ul>
+      </section>
+
+      <section class="mcc-footer__section" aria-labelledby="footer-contact">
+        <h4 id="footer-contact">Contact</h4>
+        <ul class="mcc-footer__list">
+          <li><a href="mailto:contact@mcc-cal.com">Email</a></li>
+          <li><a href="/contact-us">Contact Form</a></li>
+        </ul>
+      </section>
+
+      <section class="mcc-footer__section" aria-labelledby="footer-portfolio">
+        <h4 id="footer-portfolio">Portfolio</h4>
+        <ul class="mcc-footer__list">
+          <li><a href="/featured-work">Portfolio</a></li>
+          <li><a href="/blog">Blog</a></li>
+        </ul>
+      </section>
+
+      <section class="mcc-footer__section" aria-labelledby="footer-follow">
+        <h4 id="footer-follow">Follow</h4>
+        <div class="mcc-footer__social">
+          <a
+            href="https://www.facebook.com/mccalphotography"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow us on Facebook"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5.01 3.66 9.16 8.44 9.94v-7.03H7.9V12.1h2.54V9.96c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56v1.81h2.76l-.44 2.87h-2.32V22c4.78-.78 8.44-4.93 8.44-9.94Z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.instagram.com/mcc_cal"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow us on Instagram"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm6.75-2.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <div class="mcc-footer__newsletter">
+          <form
+            id="mcc-newsletter-form"
+            action="https://mcc-cal.us14.list-manage.com/subscribe/post?u=da029ed85760894c33e8b119d&amp;id=fb992a38c8&amp;f_id=00cf8ae0f0"
+            method="post"
+            target="_blank"
+            aria-label="Newsletter signup"
+            novalidate
+          >
+            <label class="mcc-footer__sr-only" for="mcc-footer-email">Email address</label>
+            <input
+              id="mcc-footer-email"
+              name="EMAIL"
+              type="email"
+              placeholder="Your email address"
+              required
+              aria-describedby="newsletter-desc"
+            />
+            <div style="position: absolute; left: -5000px" aria-hidden="true">
+              <input
+                type="text"
+                name="b_da029ed85760894c33e8b119d_fb992a38c8"
+                tabindex="-1"
+                value=""
+              />
+            </div>
+            <button type="submit">Subscribe</button>
+            <div id="newsletter-desc" class="mcc-footer__sr-only">
+              Subscribe to our newsletter for updates
+            </div>
+          </form>
+          <div class="mcc-footer__newsletter-success" role="alert" aria-live="polite">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm-2 15l-5-5 1.41-1.41L8 12.17l7.59-7.59L17 6l-9 9z"
+                fill="currentColor"
+              />
+            </svg>
+            Thanks for subscribing!
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="mcc-footer__legal">
+      <div>&copy; <span id="mcc-footer-year"></span> Caleb McCartney. All rights reserved.</div>
+      <div class="mcc-footer__version" role="button" tabindex="0" aria-label="Widget version 1.4.0">
+        v1.4.0
+      </div>
+      <div class="mcc-footer__links">
+        <a href="/accessibility">Accessibility</a>
+        <a href="/policies-legal#cookies">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="mcc-back-to-top" aria-label="Back to top" title="Back to top" type="button">
+    <svg viewBox="0 0 56 56">
+      <circle class="mcc-back-to-top__circle-bg" cx="28" cy="28" r="26" />
+      <circle
+        class="mcc-back-to-top__circle-progress"
+        cx="28"
+        cy="28"
+        r="26"
+        stroke-dasharray="163.36"
+        stroke-dashoffset="163.36"
+      />
+    </svg>
+    <svg
+      class="mcc-back-to-top__icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Auto-update copyright year
+      const yearElement = document.getElementById('mcc-footer-year');
+      if (yearElement) {
+        const currentYear = new Date().getFullYear();
+        const startYear = 2019;
+        yearElement.textContent =
+          startYear === currentYear ? currentYear : `${startYear}-${currentYear}`;
+      }
+
+      // Newsletter form enhancement
+      const form = document.getElementById('mcc-newsletter-form');
+      const submitBtn = form?.querySelector('button[type="submit"]');
+      const successMsg = document.querySelector('.mcc-footer__newsletter-success');
+
+      if (form && submitBtn) {
+        form.addEventListener('submit', function (e) {
+          const email = form.querySelector('input[type="email"]');
+          if (email && email.validity.valid) {
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = '';
+
+            // Show success message after delay (simulated)
+            setTimeout(() => {
+              submitBtn.classList.remove('loading');
+              submitBtn.textContent = 'Subscribe';
+              if (successMsg) {
+                successMsg.classList.add('show');
+                setTimeout(() => {
+                  successMsg.classList.remove('show');
+                }, 5000);
+              }
+            }, 1500);
+          }
+        });
+      }
+
+      // Back to Top Button Logic
+      const backToTopBtn = document.querySelector('.mcc-back-to-top');
+      const progressCircle = document.querySelector('.mcc-back-to-top__circle-progress');
+      const circumference = 163.36; // 2 * PI * 26
+
+      if (backToTopBtn && progressCircle) {
+        // Update scroll progress
+        function updateScrollProgress() {
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = scrollTop / docHeight;
+          const offset = circumference - scrollPercent * circumference;
+
+          progressCircle.style.strokeDashoffset = offset;
+
+          // Show/hide button based on scroll position
+          if (scrollTop > 400) {
+            backToTopBtn.classList.add('visible');
+          } else {
+            backToTopBtn.classList.remove('visible');
+          }
+
+          // Hide when near footer to prevent overlap
+          const footer = document.querySelector('.mcc-footer');
+          if (footer) {
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const buffer = 100;
+
+            if (footerRect.top < windowHeight - buffer) {
+              backToTopBtn.style.opacity = '0';
+              backToTopBtn.style.pointerEvents = 'none';
+            } else if (backToTopBtn.classList.contains('visible')) {
+              backToTopBtn.style.opacity = '1';
+              backToTopBtn.style.pointerEvents = 'auto';
+            }
+          }
+        }
+
+        // Scroll to top with smooth animation
+        function scrollToTop() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        backToTopBtn.addEventListener('click', scrollToTop);
+
+        // Keyboard support
+        backToTopBtn.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+          }
+        });
+
+        // Initial check
+        updateScrollProgress();
+      }
+
+      // Version click handler (placeholder for future changelog modal)
+      const versionBtn = document.querySelector('.mcc-footer__version');
+      if (versionBtn) {
+        versionBtn.addEventListener('click', function () {
+          console.log('Footer Widget v1.3.0 - Changelog coming soon!');
+          // TODO: Implement changelog modal
+        });
+
+        versionBtn.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+          }
+        });
+      }
+    })();
+  </script>
+</div>
