@@ -16,6 +16,29 @@
 - **User Experience**: Removed the forced loading spinner, allowing the pre-rendered content to represent the initial state.
 - **Files**: `src/widgets/portfolios/featured-portfolio/versions/v1.5.1-featured-optimization.html`
 
+### Roadmap Widget v1.5.0 [Dual Timeline]
+
+- **Dual View Toggle**: Implemented a "Life & Photography" vs "Web Development" toggle to showcase both career paths side-by-side.
+- **Dynamic Content**: Header, description, and timeline milestones update dynamically based on the selected mode.
+- **Life Roadmap**: populated with milestones from university, newspaper editor roles, and freelance expansion.
+- **Files**: `src/widgets/_content/roadmap/versions/v1.5.0-roadmap-dual.html`
+
+### Roadmap Widget v1.4.0 [Dynamic]
+
+- **Live Activity**: Integrated direct GitHub API fetching to display real-time commit activity and the latest update message dynamically.
+- **Visuals**: Added a "Latest Update" highlight that injects the most recent commit message into the timeline.
+- **Files**: `src/widgets/_content/roadmap/versions/v1.4.0-roadmap-live.html`
+
+### Footer Widget v1.4.0
+
+- **Navigation**: Added a direct "Roadmap" link to the About/Connect section for easy access to the development journey.
+- **Files**: `src/widgets/_navigation/site-footer/versions/v1.4.0-footer-roadmap.html`
+
+### About Widget v2.4.2
+
+- **Navigation**: Added "Roadmap" link pointing to the Development Roadmap in the "Documents" dropdown menu.
+- **Files**: `src/widgets/_content/about/complete-about-page/versions/v2.4.2-about-roadmap.html`
+
 ## 2026-01-06
 
 ### Docs/Meta
