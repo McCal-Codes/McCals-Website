@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-01-10
+
+### Podcast Feed Widget v2.2.2 [Optimization]
+
+- **Link Fix**: Updated the "Let's Grab a Drink!" button to point directly to the Caffeinated Connections Calendly page (`https://calendly.com/cjmccar-mcc-cal/caffeinated_connections`).
+- **Performance**: Added `loading="lazy"` to podcast episode avatars to improve initial page load performance.
+- **Files**: `src/widgets/_content/podcast-feed/versions/v2.2.2-podcast-optimization.html`
+
+### Featured Portfolio Widget v1.5.1 [LCP Optimized]
+
+- **LCP Optimization**: Pre-rendered the primary hero card (Horseburner) in HTML to ensure immediate visibility and fix LCP metric.
+- **Layout Stability**: Modified shuffle logic to prioritize and pin the LCP element to the top of the grid to prevent layout shifts (CLS) during hydration.
+- **Performance**: Enforced `loading="eager"` and `fetchpriority="high"` for the hero image.
+- **User Experience**: Removed the forced loading spinner, allowing the pre-rendered content to represent the initial state.
+- **Files**: `src/widgets/portfolios/featured-portfolio/versions/v1.5.1-featured-optimization.html`
+
 ## 2026-01-06
 
 ### Docs/Meta
