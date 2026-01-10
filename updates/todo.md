@@ -137,8 +137,9 @@ Last Updated: January 6, 2026
 #### Page & Widget Mapping
 
 - [ ] Home page
-  - Primary widgets: site-navigation, featured-work, footer
-  - LCP candidate: `.featured-item:first-child img` (or Squarespace Hero Image)
+  - Primary widgets: site-navigation, featured-portfolio, footer
+  - LCP candidate: Squarespace Hero (Template) / `.featured-card:first-child img` (Secondary)
+  - Status: Featured Portfolio optimized in v1.5.1; Main Hero managed via Squarespace template (pending user updates).
 
 - [x] Concerts
   - Primary widgets: concert-portfolio
