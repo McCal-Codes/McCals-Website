@@ -2,6 +2,12 @@
 
 ## 2026-01-10
 
+### Events Portfolio Update
+
+- **New Content**: Added "University of Pittsburgh Winter Graduation 2024" gallery with 69 new images.
+- **Optimization**: Processed 118 event images with optimization script, reducing file size by ~1GB.
+- **Manifest**: Regenerated `events-manifest.json` to include new content.
+
 ### Podcast Feed Widget v2.2.2 [Optimization]
 
 - **Link Fix**: Updated the "Let's Grab a Drink!" button to point directly to the Caffeinated Connections Calendly page (`https://calendly.com/cjmccar-mcc-cal/caffeinated_connections`).
