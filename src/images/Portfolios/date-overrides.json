@@ -19,5 +19,12 @@
     "source": "manual:override",
     "confidence": "high",
     "notes": "Per user: Growing Up event occurred December 2021"
+  },
+  "Events/The Space Upstairs": {
+    "dateISO": "2023-09-01",
+    "dateDisplay": "September 2023",
+    "source": "manual:user-verified",
+    "confidence": "high",
+    "notes": "Per user: The Space Upstairs occurred September 2023"
   }
 }
