@@ -105,12 +105,12 @@
       "folderName": "April 2024",
       "imageCount": 6,
       "date": {
-        "year": 2024,
-        "month": 4,
-        "monthName": "April",
-        "day": 20,
-        "iso": "2024-04-20",
-        "source": "exif_original"
+        "year": 2026,
+        "month": null,
+        "monthName": "Unknown",
+        "day": null,
+        "iso": null,
+        "source": "fallback"
       },
       "directory": "April 2024"
     },
@@ -353,5 +353,5 @@
       "directory": "March 2024"
     }
   ],
-  "generated": "2025-12-16T01:35:45.908Z"
+  "generated": "2026-01-10T17:53:43.598Z"
 }

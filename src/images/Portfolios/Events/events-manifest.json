@@ -1,9 +1,427 @@
 {
   "version": "2.6.4",
-  "generated": "2025-12-12T23:45:41.402Z",
+  "generated": "2026-01-10T17:53:56.394Z",
   "generatedBy": "events-manifest-generator",
-  "totalEvents": 23,
+  "totalEvents": 25,
   "events": [
+    {
+      "eventName": "The Space Upstairs",
+      "category": "Corporate",
+      "dateDisplay": "January 2026",
+      "dateISO": "2026-01-10",
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 10,
+        "monthName": "January",
+        "iso": "2026-01-10",
+        "display": "January 2026"
+      },
+      "dateSource": "fallback:current",
+      "dateConfidence": "low",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-12.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-13.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-17.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-18.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-19.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-21.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-37.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-42.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-46.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-55.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-64.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-7.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-71.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-74.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-91.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-1.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-10.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-100.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-101.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-102.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-103.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-104.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-105.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-106.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-107.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-108.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-109.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-11.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-110.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-111.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-112.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-113.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-115.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-116.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-117.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-118.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-12.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-13.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-14.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-15.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-16.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-17.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-18.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-19.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-2.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-20.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-21.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-22.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-23.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-24.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-25.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-26.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-27.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-28.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-29.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-3.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-30.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-31.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-32.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-33.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-34.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-35.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-36.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-37.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-38.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-39.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-4.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-40.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-41.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-42.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-43.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-44.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-45.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-46.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-47.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-48.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-49.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-5.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-50.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-51.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-52.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-53.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-54.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-55.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-56.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-57.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-58.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-59.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-6.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-60.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-61.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-62.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-63.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-64.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-65.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-66.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-67.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-68.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-69.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-7.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-70.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-71.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-72.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-73.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-74.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-75.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-76.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-77.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-78.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-79.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-8.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-80.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-81.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-82.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-83.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-84.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-85.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-86.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-87.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-88.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-89.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-9.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-90.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-91.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-92.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-93.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-94.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-95.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-96.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-97.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-98.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-99.jpg"
+        }
+      ],
+      "totalImages": 133
+    },
     {
       "eventName": "Pittsburgh Social Club",
       "category": "Corporate",
@@ -3690,6 +4108,232 @@
       "totalImages": 46
     },
     {
+      "eventName": "University Of Pittsburgh Winter Graduation 2024",
+      "category": "Celebration",
+      "dateDisplay": "December 2024",
+      "dateISO": "2024-12-18",
+      "date": {
+        "year": 2024,
+        "month": 12,
+        "day": 18,
+        "monthName": "December",
+        "iso": "2024-12-18",
+        "display": "December 2024"
+      },
+      "dateSource": "filename:241218_Pitt Graduation - Winter Semester_CAL7027.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7027.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7043.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7053.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7065.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7096.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7099.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7108.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7109.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7112.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7116.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7117.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7118.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7119.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7120.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7121.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7128.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7132.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7135.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7136.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7138.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7141.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7146.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7147.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7152.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7154.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7166.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7169.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7173.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7174.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7178.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7180.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7182.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7186.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7192.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7195.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7197.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7200.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7272.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7290.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7291.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7317.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7345.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7348.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7357.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7369.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7377.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7383.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7396.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7401.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7402.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7430.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7434.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7440.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7444.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7445.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7452.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7454.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7455.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7457.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7463.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7498.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7502.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7506.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7508.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7510.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7512.jpg"
+        }
+      ],
+      "totalImages": 69
+    },
+    {
       "eventName": "Dance For A Cause",
       "category": "Corporate",
       "dateDisplay": "October 2024",
@@ -4883,6 +5527,423 @@
     }
   ],
   "items": [
+    {
+      "title": "The Space Upstairs",
+      "eventName": "The Space Upstairs",
+      "category": "Corporate",
+      "dateDisplay": "January 2026",
+      "dateISO": "2026-01-10",
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 10,
+        "monthName": "January",
+        "iso": "2026-01-10",
+        "display": "January 2026"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-12.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-13.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-17.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-18.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-19.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-21.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-37.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-42.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-46.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-55.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-64.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-7.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-71.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-74.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/._Caleb_McCartney_The_Antidote_-91.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-1.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-10.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-100.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-101.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-102.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-103.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-104.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-105.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-106.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-107.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-108.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-109.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-11.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-110.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-111.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-112.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-113.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-115.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-116.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-117.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-118.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-12.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-13.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-14.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-15.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-16.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-17.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-18.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-19.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-2.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-20.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-21.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-22.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-23.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-24.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-25.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-26.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-27.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-28.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-29.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-3.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-30.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-31.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-32.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-33.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-34.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-35.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-36.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-37.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-38.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-39.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-4.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-40.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-41.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-42.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-43.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-44.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-45.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-46.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-47.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-48.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-49.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-5.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-50.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-51.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-52.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-53.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-54.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-55.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-56.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-57.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-58.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-59.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-6.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-60.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-61.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-62.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-63.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-64.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-65.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-66.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-67.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-68.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-69.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-7.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-70.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-71.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-72.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-73.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-74.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-75.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-76.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-77.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-78.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-79.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-8.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-80.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-81.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-82.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-83.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-84.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-85.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-86.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-87.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-88.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-89.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-9.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-90.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-91.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-92.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-93.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-94.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-95.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-96.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-97.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-98.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/The Space Upstairs/Caleb_McCartney_The_Antidote_-99.jpg"
+        }
+      ],
+      "folderPath": "Events/The Space Upstairs"
+    },
     {
       "title": "Pittsburgh Social Club",
       "eventName": "Pittsburgh Social Club",
@@ -8554,6 +9615,231 @@
         }
       ],
       "folderPath": "Events/Pitt University Graduation Winter 2024"
+    },
+    {
+      "title": "University Of Pittsburgh Winter Graduation 2024",
+      "eventName": "University Of Pittsburgh Winter Graduation 2024",
+      "category": "Celebration",
+      "dateDisplay": "December 2024",
+      "dateISO": "2024-12-18",
+      "date": {
+        "year": 2024,
+        "month": 12,
+        "day": 18,
+        "monthName": "December",
+        "iso": "2024-12-18",
+        "display": "December 2024"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7027.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7043.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7045.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7053.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7065.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7096.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7099.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7108.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7109.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7112.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7114.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7116.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7117.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7118.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7119.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7120.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7121.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7128.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7129.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7132.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7135.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7136.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7138.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7141.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7146.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7147.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7152.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7154.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7166.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7169.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7173.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7174.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7178.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7180.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7182.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7186.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7192.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7195.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7197.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7200.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7272.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7290.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7291.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7317.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7345.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7348.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7357.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7369.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7377.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7383.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7396.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7401.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7402.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7430.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7434.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7440.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7444.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7445.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7452.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7454.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7455.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7457.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7463.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7498.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7502.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7506.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7508.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7510.jpg"
+        },
+        {
+          "path": "src/images/Portfolios/Events/University of Pittsburgh Winter Graduation 2024/241218_Pitt Graduation - Winter Semester_CAL7512.jpg"
+        }
+      ],
+      "folderPath": "Events/University of Pittsburgh Winter Graduation 2024"
     },
     {
       "title": "Dance For A Cause",
