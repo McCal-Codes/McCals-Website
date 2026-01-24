@@ -62,10 +62,45 @@ function serveFile(res, filePath) {
 
 function createServer() {
   return http.createServer((req, res) => {
-    // Enable CORS for development
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    // Security Headers
+    if (!IS_PRODUCTION) {
+      // Development CORS - Allow all for local development
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    } else {
+      // Production CORS - More restrictive
+      const allowedOrigins = (process.env.ALLOWED_ORIGINS || '').split(',').map(o => o.trim()).filter(Boolean);
+      const origin = req.headers.origin;
+      if (origin && allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      }
+    }
+    
+    // Security headers for all requests
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    
+    // Content Security Policy - Development mode is more permissive
+    if (IS_PRODUCTION) {
+      res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self'; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; " +
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; " +
+        "font-src 'self' https://fonts.gstatic.com data:; " +
+        "img-src 'self' data: https: blob:; " +
+        "connect-src 'self' https://api.mcc-cal.com; " +
+        "frame-ancestors 'none'"
+      );
+    }
+    
+    // Permissions Policy (formerly Feature Policy)
+    res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
 
     // Proxy API requests if enabled
     if (ENABLE_API_PROXY && req.url.startsWith('/api/')) {
@@ -81,11 +116,15 @@ function createServer() {
     }
 
     // Special dev-only endpoint to start the Next.js server.
+    // SECURITY: This endpoint spawns a process and is DANGEROUS in production.
     // To enable this endpoint, set DEV_SERVER_ALLOW_START=true in the environment. This is
     // intentionally opt-in since spawning processes from an HTTP server is powerful and
     // should only be enabled in a local development environment.
     if (parsed.pathname === '/__start_next' && req.method === 'POST') {
+      console.warn('⚠️ SECURITY: __start_next endpoint accessed from', req.headers['x-forwarded-for'] || req.socket.remoteAddress);
+      
       if (process.env.DEV_SERVER_ALLOW_START !== 'true') {
+        console.warn('🚨 SECURITY: __start_next endpoint blocked - DEV_SERVER_ALLOW_START not enabled');
         res.writeHead(403, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ ok: false, message: 'DEV_SERVER_ALLOW_START is not enabled' }));
         return;
@@ -212,13 +251,23 @@ function createServer() {
     try {
       const resolvedSite = path.resolve(SITE_DIR) + path.sep;
       const resolvedFile = path.resolve(filePath);
-      if (!resolvedFile.startsWith(resolvedSite)) {
-        res.writeHead(403);
+      
+      // Additional security: Check for suspicious path patterns
+      const normalizedPath = filePath.toLowerCase();
+      const suspiciousPatterns = ['..', '%2e%2e', '/./', '/..', '\\..', '%00'];
+      const hasSuspiciousPattern = suspiciousPatterns.some(pattern => 
+        normalizedPath.includes(pattern)
+      );
+      
+      if (!resolvedFile.startsWith(resolvedSite) || hasSuspiciousPattern) {
+        console.warn(`🚨 Security: Blocked suspicious file access attempt: ${filePath}`);
+        res.writeHead(403, { 'Content-Type': 'text/plain' });
         res.end('Forbidden');
         return;
       }
     } catch (e) {
-      res.writeHead(403);
+      console.error(`🚨 Security: Path resolution error: ${e.message}`);
+      res.writeHead(403, { 'Content-Type': 'text/plain' });
       res.end('Forbidden');
       return;
     }

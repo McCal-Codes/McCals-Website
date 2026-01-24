@@ -1,0 +1,257 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run weekly on Mondays at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  dependency-audit:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Run npm audit
+        run: |
+          echo "🔍 Running npm audit..."
+          npm audit --audit-level=moderate --json > audit-results.json || true
+          
+          # Parse and display results
+          if [ -s audit-results.json ]; then
+            echo "📊 Audit Results:"
+            cat audit-results.json | jq '.metadata.vulnerabilities' || cat audit-results.json
+            
+            # Check for high or critical vulnerabilities
+            CRITICAL=$(cat audit-results.json | jq '.metadata.vulnerabilities.critical // 0')
+            HIGH=$(cat audit-results.json | jq '.metadata.vulnerabilities.high // 0')
+            
+            echo "Critical: $CRITICAL"
+            echo "High: $HIGH"
+            
+            if [ "$CRITICAL" -gt 0 ] || [ "$HIGH" -gt 0 ]; then
+              echo "❌ Found critical or high severity vulnerabilities!"
+              echo "Please run 'npm audit fix' locally and commit the changes."
+              exit 1
+            else
+              echo "✅ No critical or high severity vulnerabilities found"
+            fi
+          else
+            echo "✅ No vulnerabilities found"
+          fi
+      
+      - name: Upload audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-results
+          path: audit-results.json
+          retention-days: 30
+
+  secret-scanning:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better detection
+      
+      - name: Scan for secrets in code
+        run: |
+          echo "🔍 Scanning for potential secrets in code..."
+          
+          # Scan for common secret patterns (excluding env.example and this workflow)
+          FINDINGS=$(grep -r -i \
+            -e "password\s*=\s*['\"][^'\"]*['\"]" \
+            -e "api[_-]key\s*=\s*['\"][^'\"]*['\"]" \
+            -e "secret\s*=\s*['\"][^'\"]*['\"]" \
+            -e "token\s*=\s*['\"][^'\"]*['\"]" \
+            --include="*.js" \
+            --include="*.ts" \
+            --include="*.json" \
+            --exclude-dir=node_modules \
+            --exclude-dir=.git \
+            --exclude="*.example*" \
+            --exclude="package-lock.json" \
+            . | grep -v "process.env" | grep -v "//.*password" || true)
+          
+          if [ -n "$FINDINGS" ]; then
+            echo "⚠️ Potential secrets found in code:"
+            echo "$FINDINGS"
+            echo ""
+            echo "Please review these findings. If they are false positives, ignore them."
+            echo "If they are real secrets, remove them and use environment variables instead."
+            # Don't fail the build for potential false positives, just warn
+          else
+            echo "✅ No obvious secrets found in code"
+          fi
+      
+      - name: Check .env files are not committed
+        run: |
+          echo "🔍 Checking for committed .env files..."
+          if git ls-files | grep -E "^\.env$|^\.env\.local$|^\.env\.production$"; then
+            echo "❌ .env files should not be committed!"
+            exit 1
+          else
+            echo "✅ No .env files committed"
+          fi
+      
+      - name: Verify .gitignore coverage
+        run: |
+          echo "🔍 Verifying .gitignore covers sensitive files..."
+          
+          REQUIRED_IGNORES=(
+            ".env"
+            ".env.local"
+            ".env.production.local"
+            "*credentials*.json"
+            "*service-account*.json"
+          )
+          
+          MISSING=()
+          for pattern in "${REQUIRED_IGNORES[@]}"; do
+            if ! grep -q "^$pattern$" .gitignore; then
+              MISSING+=("$pattern")
+            fi
+          done
+          
+          if [ ${#MISSING[@]} -gt 0 ]; then
+            echo "⚠️ Missing patterns in .gitignore:"
+            printf '%s\n' "${MISSING[@]}"
+            echo "These patterns should be added to .gitignore"
+          else
+            echo "✅ .gitignore has good coverage of sensitive file patterns"
+          fi
+
+  security-best-practices:
+    name: Security Best Practices Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check for security documentation
+        run: |
+          echo "🔍 Checking for security documentation..."
+          
+          REQUIRED_FILES=(
+            "SECURITY.md"
+            "docs/SECURITY_CHECKLIST.md"
+          )
+          
+          MISSING=()
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              MISSING+=("$file")
+            fi
+          done
+          
+          if [ ${#MISSING[@]} -gt 0 ]; then
+            echo "⚠️ Missing security documentation:"
+            printf '%s\n' "${MISSING[@]}"
+          else
+            echo "✅ All required security documentation present"
+          fi
+      
+      - name: Check for dangerous patterns
+        run: |
+          echo "🔍 Scanning for dangerous code patterns..."
+          
+          # Check for eval() usage
+          EVAL_USAGE=$(grep -r "eval(" --include="*.js" --exclude-dir=node_modules . || true)
+          if [ -n "$EVAL_USAGE" ]; then
+            echo "⚠️ Found eval() usage (potential security risk):"
+            echo "$EVAL_USAGE"
+          fi
+          
+          # Check for dangerouslySetInnerHTML in React
+          DANGEROUS_HTML=$(grep -r "dangerouslySetInnerHTML" --include="*.jsx" --include="*.tsx" --exclude-dir=node_modules . || true)
+          if [ -n "$DANGEROUS_HTML" ]; then
+            echo "⚠️ Found dangerouslySetInnerHTML usage (XSS risk):"
+            echo "$DANGEROUS_HTML"
+          fi
+          
+          echo "✅ Dangerous pattern scan complete"
+      
+      - name: Check security headers in server code
+        run: |
+          echo "🔍 Checking for security headers in server code..."
+          
+          REQUIRED_HEADERS=(
+            "X-Content-Type-Options"
+            "X-Frame-Options"
+            "X-XSS-Protection"
+            "Content-Security-Policy"
+          )
+          
+          MISSING=()
+          for header in "${REQUIRED_HEADERS[@]}"; do
+            if ! grep -r "$header" --include="*.js" dev-server.js tools/cloudflare/*.js 2>/dev/null | grep -q "setHeader"; then
+              MISSING+=("$header")
+            fi
+          done
+          
+          if [ ${#MISSING[@]} -gt 0 ]; then
+            echo "⚠️ Missing security headers:"
+            printf '%s\n' "${MISSING[@]}"
+          else
+            echo "✅ All recommended security headers present"
+          fi
+
+  summary:
+    name: Security Scan Summary
+    runs-on: ubuntu-latest
+    needs: [dependency-audit, secret-scanning, security-best-practices]
+    if: always()
+    
+    steps:
+      - name: Generate summary
+        run: |
+          echo "# 🔒 Security Scan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Scan Date:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.dependency-audit.result }}" == "success" ]; then
+            echo "✅ Dependency Audit: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Dependency Audit: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.secret-scanning.result }}" == "success" ]; then
+            echo "✅ Secret Scanning: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Secret Scanning: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.security-best-practices.result }}" == "success" ]; then
+            echo "✅ Security Best Practices: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Security Best Practices: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "For detailed security guidelines, see [SECURITY_CHECKLIST.md](../docs/SECURITY_CHECKLIST.md)" >> $GITHUB_STEP_SUMMARY

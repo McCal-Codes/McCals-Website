@@ -2,6 +2,12 @@
 
 We aim for fast, **non-breaking** fixes. Please follow the process below to report vulnerabilities or request hardening work.
 
+## 📋 Security Resources
+
+- **Security Checklist**: [docs/SECURITY_CHECKLIST.md](docs/SECURITY_CHECKLIST.md) - Comprehensive security guidelines and audit procedures
+- **Automated Scanning**: Security scans run weekly via GitHub Actions (see `.github/workflows/security-scan.yml`)
+- **Dependency Monitoring**: Run `npm audit` before each release
+
 ## Reporting a Vulnerability
 - Prefer GitHub’s private **“Report a vulnerability”** / Security Advisory flow for this repo so details stay private until a fix ships.
 - If that is unavailable, open a `security`-labeled draft issue with only minimal impact notes, or contact a maintainer directly via GitHub DM. Do **not** post exploit details publicly.
