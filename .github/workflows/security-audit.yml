@@ -173,10 +173,11 @@ jobs:
             exit 1
           fi
           
-          # Check for weak placeholder values
-          if grep -E "(password|secret|token).*=.*(changeme|change-me|password123|admin)" .env.example 2>/dev/null; then
-            echo "::warning::Found potentially weak placeholder credentials in .env.example"
-            echo "Consider using placeholder syntax like YOUR_SECRET_HERE or generation commands"
+          # Check for weak or missing placeholder values
+          if grep -E "(password|secret|token).*=\s*(changeme|change-me|password123|admin|YOUR_|'')?\s*$" .env.example 2>/dev/null | grep -v "REPLACE_WITH"; then
+            echo "::error::Found weak or empty placeholder credentials in .env.example"
+            echo "All sensitive values should use 'REPLACE_WITH_*' placeholders to force explicit configuration"
+            exit 1
           fi
           
           # Verify .env is in .gitignore
