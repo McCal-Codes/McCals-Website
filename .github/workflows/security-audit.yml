@@ -194,6 +194,8 @@ jobs:
     needs: [dependency-audit, secret-scan, docker-security, code-quality, env-validation]
     runs-on: ubuntu-latest
     if: always()
+    permissions:
+      contents: read
 
     steps:
       - name: Generate Summary
