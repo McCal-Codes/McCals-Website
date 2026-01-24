@@ -1,0 +1,239 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Mondays at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  dependency-audit:
+    name: Dependency Security Audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Run production dependency audit
+        run: |
+          echo "::group::Production Dependencies Audit"
+          npm audit --omit=dev --audit-level=moderate
+          echo "::endgroup::"
+
+      - name: Run full dependency audit (informational)
+        continue-on-error: true
+        run: |
+          echo "::group::Full Dependencies Audit (Informational)"
+          npm audit --audit-level=high || echo "Found vulnerabilities in dev dependencies (non-blocking)"
+          echo "::endgroup::"
+
+      - name: Check for outdated packages
+        continue-on-error: true
+        run: |
+          echo "::group::Outdated Packages"
+          npm outdated || true
+          echo "::endgroup::"
+
+  secret-scan:
+    name: Secret Detection
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better scanning
+
+      - name: Scan for secrets in code
+        run: |
+          echo "::group::Checking for potential secrets"
+          
+          # Check for common secret patterns (excluding .env.example)
+          echo "Scanning for API keys..."
+          ! grep -r "api[_-]key\s*=\s*['\"][^'\"]\{20,\}" --include="*.js" --include="*.json" --exclude-dir=node_modules --exclude="*.example" . || \
+            (echo "::error::Found potential API key in code" && exit 1)
+          
+          echo "Scanning for tokens..."
+          ! grep -r "token\s*=\s*['\"][a-zA-Z0-9]\{30,\}" --include="*.js" --include="*.json" --exclude-dir=node_modules --exclude="*.example" . || \
+            (echo "::error::Found potential token in code" && exit 1)
+          
+          echo "Scanning for AWS keys..."
+          ! grep -r "AKIA[0-9A-Z]\{16\}" --include="*.js" --include="*.json" --include="*.md" --exclude-dir=node_modules . || \
+            (echo "::error::Found potential AWS key" && exit 1)
+          
+          echo "✅ No obvious secrets detected"
+          echo "::endgroup::"
+
+  docker-security:
+    name: Docker Configuration Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check Docker Compose for hardcoded secrets
+        run: |
+          echo "::group::Docker Compose Security Check"
+          
+          if grep -q "SECRET.*=.*change-me" docker-compose.yml 2>/dev/null; then
+            echo "::error::Found hardcoded 'change-me' secret in docker-compose.yml"
+            exit 1
+          fi
+          
+          if grep -q "PASSWORD.*=.*password" docker-compose.yml 2>/dev/null; then
+            echo "::error::Found hardcoded password in docker-compose.yml"
+            exit 1
+          fi
+          
+          echo "✅ Docker Compose security check passed"
+          echo "::endgroup::"
+
+  code-quality:
+    name: Code Quality & Security Patterns
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check for dangerous code patterns
+        run: |
+          echo "::group::Dangerous Code Pattern Detection"
+          
+          # Check for eval usage
+          if grep -r "eval(" --include="*.js" --exclude-dir=node_modules src/ scripts/ 2>/dev/null; then
+            echo "::warning::Found eval() usage - review for security implications"
+          fi
+          
+          # Check for new Function usage
+          if grep -r "new Function(" --include="*.js" --exclude-dir=node_modules src/ scripts/ 2>/dev/null; then
+            echo "::warning::Found new Function() usage - review for security implications"
+          fi
+          
+          # Check for document.write usage
+          if grep -r "document.write(" --include="*.js" --exclude-dir=node_modules src/ 2>/dev/null; then
+            echo "::warning::Found document.write() usage - review for security implications"
+          fi
+          
+          echo "✅ Code pattern check completed"
+          echo "::endgroup::"
+
+  env-validation:
+    name: Environment Configuration Validation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate .env.example
+        run: |
+          echo "::group::Environment Configuration Check"
+          
+          # Check if .env.example exists
+          if [ ! -f ".env.example" ]; then
+            echo "::error::.env.example not found"
+            exit 1
+          fi
+          
+          # Check for weak placeholder values
+          if grep -E "(password|secret|token).*=.*(changeme|change-me|password123|admin)" .env.example 2>/dev/null; then
+            echo "::warning::Found potentially weak placeholder credentials in .env.example"
+            echo "Consider using placeholder syntax like YOUR_SECRET_HERE or generation commands"
+          fi
+          
+          # Verify .env is in .gitignore
+          if ! grep -q "^\.env$" .gitignore; then
+            echo "::error::.env not found in .gitignore"
+            exit 1
+          fi
+          
+          echo "✅ Environment configuration validation passed"
+          echo "::endgroup::"
+
+  security-summary:
+    name: Security Summary
+    needs: [dependency-audit, secret-scan, docker-security, code-quality, env-validation]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Generate Summary
+        run: |
+          echo "# 🔐 Security Audit Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Check Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.dependency-audit.result }}" == "success" ]; then
+            echo "✅ Dependency Audit: **Passed**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Dependency Audit: **Failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.secret-scan.result }}" == "success" ]; then
+            echo "✅ Secret Detection: **Passed**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Secret Detection: **Failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.docker-security.result }}" == "success" ]; then
+            echo "✅ Docker Security: **Passed**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Docker Security: **Failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.code-quality.result }}" == "success" ]; then
+            echo "✅ Code Quality: **Passed**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Code Quality: **Failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ "${{ needs.env-validation.result }}" == "success" ]; then
+            echo "✅ Environment Validation: **Passed**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Environment Validation: **Failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "For detailed security guidelines, see [SECURITY.md](../SECURITY.md)" >> $GITHUB_STEP_SUMMARY

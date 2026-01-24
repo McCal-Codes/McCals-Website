@@ -29,3 +29,9 @@ We’ll coordinate a disclosure timeline and CVE (if applicable) with you once a
 
 ## Hardening Backlog
 Maintainers track non-breaking security and organization improvements using `docs/standards/security-organization-prompt.md`. If your report or suggestion aligns with that checklist (e.g., HTTP security headers, rate limiting, input validation, secret management, dependency audits), please call it out so we can prioritize it quickly.
+
+## Security Resources
+- **Security Review Report:** See [SECURITY-REVIEW-2026.md](docs/standards/SECURITY-REVIEW-2026.md) for comprehensive security audit findings
+- **GitHub Actions Security:** See [GITHUB-ACTIONS-SECURITY-CHECKLIST.md](docs/standards/GITHUB-ACTIONS-SECURITY-CHECKLIST.md) for CI/CD security best practices
+- **Automated Security Scanning:** We run weekly security audits via GitHub Actions (see `.github/workflows/security-audit.yml`)
+- **Dependency Updates:** Automated via Dependabot (see `.github/dependabot.yml`)

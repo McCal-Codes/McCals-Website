@@ -13,7 +13,7 @@ services:
       - API_PORT=3001
       - CACHE_TTL_MINUTES=60
       - REDIS_URL=redis://redis:6379
-      - WEBHOOK_SECRET=change-me
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
     depends_on:
       redis:
         condition: service_healthy

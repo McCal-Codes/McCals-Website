@@ -54,9 +54,11 @@
 ## Your Credentials (For GitHub Secrets)
 
 ```
-CLOUDFLARE_API_TOKEN=bZ9xgH9Qu4FiuMq3tjn4GvtfpPk3D3yqcjMDQRpF
-CLOUDFLARE_ACCOUNT_ID=2ac16bbf295c2dacf6e2d7c135c8ebdb
+CLOUDFLARE_API_TOKEN=[REDACTED - ROTATED FOR SECURITY]
+CLOUDFLARE_ACCOUNT_ID=[REDACTED - ROTATED FOR SECURITY]
 ```
+
+**⚠️ SECURITY NOTE:** Original credentials have been redacted and rotated. Never commit real credentials to version control, even in documentation.
 
 ---
 
@@ -66,9 +68,11 @@ CLOUDFLARE_ACCOUNT_ID=2ac16bbf295c2dacf6e2d7c135c8ebdb
 
 1. Go to: https://github.com/McCal-Codes/McCals-Website/settings/secrets/actions
 2. Click **New repository secret**
-3. Add `CLOUDFLARE_API_TOKEN` = `bZ9xgH9Qu4FiuMq3tjn4GvtfpPk3D3yqcjMDQRpF`
+3. Add `CLOUDFLARE_API_TOKEN` = `<your-cloudflare-api-token>`
 4. Click **New repository secret**
-5. Add `CLOUDFLARE_ACCOUNT_ID` = `2ac16bbf295c2dacf6e2d7c135c8ebdb`
+5. Add `CLOUDFLARE_ACCOUNT_ID` = `<your-cloudflare-account-id>`
+
+**Get your credentials from:** Cloudflare Dashboard → API Tokens
 
 **After that:** Every push to main that touches `src/api/` will auto-deploy! 🚀
 
@@ -103,8 +107,8 @@ npm run dev
 
 ```bash
 cd src/api
-export CLOUDFLARE_API_TOKEN="bZ9xgH9Qu4FiuMq3tjn4GvtfpPk3D3yqcjMDQRpF"
-export CLOUDFLARE_ACCOUNT_ID="2ac16bbf295c2dacf6e2d7c135c8ebdb"
+export CLOUDFLARE_API_TOKEN="<your-cloudflare-api-token>"
+export CLOUDFLARE_ACCOUNT_ID="<your-cloudflare-account-id>"
 npm run deploy
 ```
 
