@@ -75,6 +75,25 @@ Catalog of proven enhancement patterns to apply systematically across widgets.
 Change-oriented enhancements and guidance for improving existing widgets.
 
 ---
+
+## Security Standards
+
+### 🔐 [SECURITY-REVIEW-2026.md](./SECURITY-REVIEW-2026.md) ⭐ COMPREHENSIVE AUDIT
+Detailed security audit report with vulnerability findings, OWASP Top 10 coverage, and remediation steps. 20KB comprehensive analysis completed January 2026.
+
+### 🛡️ [GITHUB-ACTIONS-SECURITY-CHECKLIST.md](./GITHUB-ACTIONS-SECURITY-CHECKLIST.md) ⭐ CI/CD SECURITY
+Complete security checklist for GitHub Actions workflows covering secrets management, permissions, action versioning, and input validation. Essential for workflow development.
+
+### 📊 [SECURITY-IMPLEMENTATION-SUMMARY.md](./SECURITY-IMPLEMENTATION-SUMMARY.md)
+Implementation summary of security improvements including files created/modified, success metrics, and next steps.
+
+### ✅ [security-organization-checklist.md](./security-organization-checklist.md)
+Quick reference checklist for security hardening passes and PR reviews with non-breaking improvements.
+
+### 🤖 [security-organization-prompt.md](./security-organization-prompt.md)
+AI-assisted security review prompt for suggesting security, organization, and efficiency improvements.
+
+---
 ## Quick Start Guide
 
 ### For New Widget Development
@@ -90,6 +109,11 @@ Change-oriented enhancements and guidance for improving existing widgets.
 ### For Asset Organization
 1. Follow: [date-naming.md](./date-naming.md) (photo naming)
 2. Version: Use [versioning.md](./versioning.md) guidelines
+
+### For Security Review
+1. Read: [SECURITY-REVIEW-2026.md](./SECURITY-REVIEW-2026.md) (current security posture)
+2. Reference: [GITHUB-ACTIONS-SECURITY-CHECKLIST.md](./GITHUB-ACTIONS-SECURITY-CHECKLIST.md) (CI/CD security)
+3. Use: [security-organization-checklist.md](./security-organization-checklist.md) (quick checks)
 
 ---
 
