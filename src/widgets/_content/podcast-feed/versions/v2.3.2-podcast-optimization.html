@@ -1,4 +1,4 @@
-<!-- Podcast Feed Widget v2.2.0 — Legacy Architecture Core (2.1-Revert) -->
+<!-- Podcast Feed Widget v2.3.1 — Listening Conversion Boost -->
 <!-- site-widgets:inline:start -->
 <style data-site-widgets-inline>
   :root {
@@ -52,6 +52,18 @@
     --chip: #1a1a1b;
     --focus: #b8b0aa;
     --link: #ffffff;
+  }
+  /* Compatibility bridge for legacy --mc-* tokens */
+  :root {
+    --mc-accent-black: var(--mcc-bg, #0f0f10);
+    --mc-accent-slate: #363230;
+    --mc-accent-stone: #cac2ba;
+    --mc-accent-taupe: var(--mcc-fg, #cac2ba);
+    --mc-gradient-accent: var(
+      --mcc-gradient-business,
+      linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%)
+    );
+    --mc-text: var(--mcc-fg, #cac2ba);
   }
   [class^='mcc-'],
   [class*=' mcc-'] {
@@ -155,7 +167,8 @@
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --text-muted: #808080;
-    --accent: #1db954;
+    --accent: var(--mcc-accent);
+    --accent-spotify: #1db954;
     --accent-apple: #fc3c44;
     --backdrop-blur: 20px;
     --border-radius: 24px;
@@ -315,7 +328,7 @@
   }
 
   .join-button:focus-visible {
-    outline: 2px solid rgba(99, 102, 241, 0.4);
+    outline: 2px solid color-mix(in srgb, var(--focus) 55%, transparent);
     outline-offset: 3px;
   }
 
@@ -407,6 +420,71 @@
     margin-top: 24px;
   }
 
+  .start-here {
+    margin: 12px 0 32px;
+    padding: 18px 20px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--backdrop-blur));
+    box-shadow: 0 8px 24px var(--glass-shadow);
+  }
+
+  .start-here-title {
+    margin: 0 0 12px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .start-here-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .start-card {
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.03);
+    display: grid;
+    gap: 6px;
+  }
+
+  .start-ep-title {
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.35;
+  }
+
+  .start-reason {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .start-meta {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .start-link {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--link);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
   .episode-card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -417,6 +495,8 @@
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    content-visibility: auto;
+    contain-intrinsic-size: 420px;
   }
 
   .episode-card:hover {
@@ -463,6 +543,18 @@
     margin: 0;
   }
 
+  .episode-duration {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-left: 8px;
+  }
+
+  .episode-guest {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 4px 0 0;
+  }
+
   .rss-icon {
     width: 20px;
     height: 20px;
@@ -478,6 +570,10 @@
     font-size: 0.95rem;
     line-height: 1.6;
     margin: 20px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .audio-player {
@@ -638,6 +734,7 @@
     }
     .episode-card {
       padding: 24px;
+      box-shadow: 0 6px 20px var(--glass-shadow);
     }
     .podcast-title {
       font-size: 2rem;
@@ -651,6 +748,7 @@
     }
     .join-button {
       width: 100%;
+      box-shadow: 0 6px 20px var(--glass-shadow);
     }
     .debug-toggle,
     .debug-panel {
@@ -817,6 +915,183 @@
   .load-more-btn.hidden {
     display: none;
   }
+
+  .cta-proof {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.4;
+    margin: 10px 0 0;
+    width: 100%;
+    align-self: center;
+  }
+
+  /* Sticky Now Playing mini-bar */
+  .now-playing {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 12px 36px var(--glass-shadow);
+    backdrop-filter: blur(var(--backdrop-blur));
+    border-radius: 18px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 9999;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
+    animation: fadeInUp 0.25s ease;
+  }
+
+  .now-playing.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(16px);
+  }
+
+  .np-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .np-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .np-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.98rem;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .np-meta {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .np-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .np-play {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .np-play:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .np-open {
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .np-close {
+    background: none;
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+    border-radius: 10px;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .np-close:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .np-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .np-badge.hidden {
+    display: none;
+  }
+
+  .np-progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .np-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+  }
+
+  .episode-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--link);
+    text-decoration: none;
+    margin-top: 6px;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
 
 <div
@@ -829,7 +1104,7 @@
   data-spotify-embed="false"
   data-calendly-url="https://calendly.com/cjmccar-mcc-cal/caffeinated_connections"
   data-podcast-description="Caffeinated Connections is where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact."
-  data-widget-version="2.2.2"
+  data-widget-version="2.3.1"
   data-active="true"
 >
   <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">Debug</button>
@@ -841,7 +1116,7 @@
           class="version-indicator"
           data-active="true"
           onclick="PodcastWidget.showChangelog()"
-          >v2.2.2</span
+          >v2.3.1</span
         >
       </h1>
       <p class="podcast-subtitle">Caffeinated Connections Podcast</p>
@@ -869,23 +1144,59 @@
         href="https://calendly.com/cjmccar-mcc-cal/caffeinated_connections"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Book a coffee chat with Caleb"
+        aria-label="Book a podcast episode with Caleb"
       >
         <svg viewBox="0 0 24 24">
           <path
             d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 6H4.5a.5.5 0 0 0-.5.5V10h17V8.5a.5.5 0 0 0-.5-.5Zm.5 4H4v7.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5V12Zm-11 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Z"
           />
         </svg>
-        <span class="join-button-label">Let's Grab a Drink!</span>
+        <span class="join-button-label">Book a Podcast Episode</span>
       </a>
+      <p class="cta-proof">12+ podcast episodes booked since Oct 2025</p>
     </div>
   </div>
   <div id="spotifyEmbedMount" class="spotify-embed"></div>
+  <div id="startHere" class="start-here" style="display: none">
+    <h3 class="start-here-title">Start Here</h3>
+    <div class="start-here-grid" id="startHereGrid"></div>
+  </div>
   <div class="episodes-grid" id="episodesGrid"></div>
   <div class="load-more-container">
     <button id="loadMoreBtn" class="load-more-btn hidden" onclick="PodcastWidget.loadMore()">
       Load More Episodes
     </button>
+  </div>
+
+  <div id="nowPlaying" class="now-playing hidden" role="status" aria-live="polite">
+    <div class="np-row">
+      <div class="np-left">
+        <button id="npPlay" class="np-play" aria-label="Pause episode" aria-pressed="true">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </button>
+        <div class="np-text">
+          <p class="np-title" id="npTitle">Now playing</p>
+          <p class="np-meta" id="npMeta">0:00 / --:--</p>
+        </div>
+      </div>
+      <div class="np-actions">
+        <span id="npBadge" class="np-badge hidden">Preview</span>
+        <a id="npOpen" class="np-open" href="#" target="_blank" rel="noopener">Open episode page</a>
+        <button id="npClose" class="np-close" aria-label="Hide now playing">×</button>
+      </div>
+    </div>
+    <div
+      class="np-progress"
+      id="npProgress"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
+      <div class="np-progress-fill" id="npProgressFill"></div>
+    </div>
   </div>
 
   <!-- Changelog Modal -->
@@ -900,6 +1211,28 @@
         <button class="changelog-close" onclick="PodcastWidget.hideChangelog()">×</button>
       </div>
       <div class="changelog-body">
+        <div class="changelog-version">v2.3.1 — CTA alignment</div>
+        <ul class="changelog-items">
+          <li>CTA copy now says “Book a Podcast Episode” with updated booking proof (12+)</li>
+          <li>Added “Start Here” curated trio with reasons to listen</li>
+          <li>Auto-loads one extra batch when Load More scrolls into view</li>
+          <li>
+            Fixed preview logging bug, added CSS token bridge, hardened HTML escaping, and modal
+            ESC/focus handling
+          </li>
+          <li>
+            Sanitized Start Here/episode links, kept user volume, and made “hide” truly hide the Now
+            Playing bar
+          </li>
+        </ul>
+
+        <div class="changelog-version">v2.3.0 — Conversion polish</div>
+        <ul class="changelog-items">
+          <li>Sticky Now Playing bar gains hide control, preview badge, and tighter meta</li>
+          <li>Episode cards surface duration, guest, and direct “Open episode page” link</li>
+          <li>CTA clarified with social-proof microcopy; added minor a11y/perf tweaks</li>
+        </ul>
+
         <div class="changelog-version">v2.2.2 — Link Fix & Optimization</div>
         <ul class="changelog-items">
           <li>Fixed "Let's Grab a Drink!" button link to point to Calendly</li>
@@ -937,7 +1270,7 @@
 </div>
 
 <script>
-  // Podcast Widget v2.2.2 (Link fix & optimization)
+  // Podcast Widget v2.3.1 (Conversion polish)
   window.PodcastWidget = (function () {
     const startTime = performance.now();
     let debugActive = false;
@@ -950,12 +1283,27 @@
     let fallbackUsed = true;
     let audioStatus = 'disabled';
     let cacheStatus = 'MISS';
+    let lastFocusedBeforeModal = null;
+    let globalVolume = 0.8;
     const audioByLink = new Map();
-    const CACHE_KEY = 'podcast-feed-episodes-v2.2.2';
+    const episodesById = new Map();
+    const featuredMap = new Map([
+      [
+        'ep9-austin-carns',
+        { reason: 'Relatable founder chaos + tight storytelling; great first impression.' },
+      ],
+      [
+        'ep7-mark-palumbo',
+        { reason: 'Actionable branding talk and pacing; easy on-ramp for new listeners.' },
+      ],
+      ['ep6-kyle-archer', { reason: 'High energy and humor; shows the show’s vibe quickly.' }],
+    ]);
+    const CACHE_KEY = 'podcast-feed-episodes-v2.3.1';
     const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
     const podcastImage =
       'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';
     let fullHeaderDescription = '';
+    let trimmedHeaderDescription = '';
     let hydrationPromise = null;
 
     function createTimeoutSignal(ms) {
@@ -1070,24 +1418,68 @@
       return text.length > 220 ? text.slice(0, 217) + '...' : text;
     }
 
+    function escapeHTML(str = '') {
+      return str.replace(
+        /[&<>\"']/g,
+        (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
+      );
+    }
+
+    function safeLink(url) {
+      try {
+        const u = new URL(url, location.href);
+        if (u.protocol === 'http:' || u.protocol === 'https:') return u.toString();
+      } catch (e) {}
+      return '#';
+    }
+
+    function formatTime(seconds) {
+      if (!isFinite(seconds) || seconds < 0) return '--:--';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60)
+        .toString()
+        .padStart(2, '0');
+      return m + ':' + s;
+    }
+
+    function extractGuestName(title = '') {
+      const patterns = [
+        /with\s+([^|–—:-]+)$/i,
+        /[–—-]\s*with\s+([^|:-]+)$/i,
+        /:\s*([^|–—:-]+)\s+joins/i,
+      ];
+      for (const pat of patterns) {
+        const m = title.match(pat);
+        if (m && m[1]) return m[1].replace(/[\s–—-]+$/, '').trim();
+      }
+      return '';
+    }
+
+    function logEvent(name, payload = {}) {
+      try {
+        console.debug('[PodcastWidget]', name, payload);
+      } catch (_) {}
+    }
+
     function createAudioPlayer(episode, playerId) {
       audioCount++;
       return `
       <div class="audio-player" id="player-${playerId}" data-episode-link="${episode.link}">
         <div class="audio-controls">
-          <button class="play-button" id="playBtn-${playerId}" onclick="PodcastWidget.toggleAudio('${playerId}')" title="Play/Pause">
+          <button class="play-button" id="playBtn-${playerId}" onclick="PodcastWidget.toggleAudio('${playerId}')" title="Play/Pause" aria-pressed="false" aria-label="Play episode">
             <svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>
           </button>
-          <button class="preview-button" id="previewBtn-${playerId}" onclick="PodcastWidget.previewAudio('${playerId}', 15)" title="Play 15s random preview">Preview 15s</button>
+          <button class="preview-button" id="previewBtn-${playerId}" onclick="PodcastWidget.previewAudio('${playerId}', 15)" title="15s random clip" aria-label="Preview this episode (15 second random clip)">Preview</button>
           <div class="audio-info">
             <div class="audio-title">Ready to play</div>
             <div class="audio-time"><span id="currentTime-${playerId}">0:00</span> / <span id="duration-${playerId}">--:--</span></div>
           </div>
         </div>
-        <div class="progress-bar" onclick="PodcastWidget.seekAudio('${playerId}', event)">
+        <div class="progress-bar" id="progressbar-${playerId}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" onclick="PodcastWidget.seekAudio('${playerId}', event)">
           <div class="progress-fill" id="progress-${playerId}"></div>
         </div>
         <div class="volume-control">
+          <label class="mcc-sr-only" for="volume-${playerId}">Volume</label>
           <input type="range" class="volume-slider" id="volume-${playerId}" min="0" max="100" value="80" onchange="PodcastWidget.setVolume('${playerId}', this.value)">
         </div>
         <audio id="audio-${playerId}" preload="metadata"
@@ -1109,28 +1501,35 @@
 
     function createEpisodeCard(episode, index) {
       const shortDesc = trimDescription(cleanDescription(episode.description));
+      const safeTitle = escapeHTML(episode.title);
+      const safeDesc = escapeHTML(shortDesc);
+      const safeEpisodeLink = safeLink(episode.link);
       const feed = document.getElementById('podcastFeed');
       const spotifyShowUrl = feed?.dataset?.spotifyShowUrl || '#';
       const appleShowUrl = feed?.dataset?.appleShowUrl || '#';
       const guid = slugify(episode.guid, episode.title);
       const cardImage = episode.image || podcastImage;
       const badge = getEpisodeBadge(episode);
+      const guest = extractGuestName(episode.title);
+      const playerId = `episode-${guid}`;
 
       return `
       <div class="episode-card">
-        <h3 class="episode-title">${episode.title}${badge}</h3>
+        <h3 class="episode-title">${safeTitle}${badge}</h3>
         <div class="episode-meta">
-          <img class="podcast-avatar" src="${cardImage}" alt="Caffeinated Connections" loading="lazy" onerror="this.style.display='none'">
+          <img class="podcast-avatar" src="${cardImage}" alt="Caffeinated Connections" loading="lazy" fetchpriority="low" decoding="async" onerror="this.style.display='none'">
           <div class="episode-info">
             <div class="podcast-name">Caffeinated Connections</div>
-            <div class="episode-date">${formatDate(episode.pubDate)}</div>
+            <div class="episode-date">${formatDate(episode.pubDate)} <span class="episode-duration" id="card-duration-${playerId}">• --:--</span></div>
+            ${guest ? `<div class="episode-guest">Guest: ${guest}</div>` : ''}
           </div>
           <svg class="rss-icon" viewBox="0 0 24 24"><path d="M5.043 21.524a2.58 2.58 0 0 1-2.581-2.577 2.58 2.58 0 0 1 2.58-2.578 2.578 2.578 0 1 1 0 5.155Zm6.167 0c-.049-4.795-3.946-8.688-8.748-8.736V8.97c6.92.048 12.522 5.642 12.571 12.554H11.21Zm6.477 0a15.167 15.167 0 0 0-4.478-10.755A15.202 15.202 0 0 0 2.462 6.295V2.476c10.512.037 19.024 8.547 19.048 19.048h-3.823Z"/></svg>
         </div>
-        <div class="episode-description">${shortDesc}</div>
-        ${createAudioPlayer(episode, `episode-${guid}`)}
+        <div class="episode-description">${safeDesc}</div>
+        <a class="episode-link" href="${safeEpisodeLink}" target="_blank" rel="noopener">Open episode page</a>
+        ${createAudioPlayer(episode, playerId)}
         <div class="platform-links">
-          <a href="${episode.link}" target="_blank" rel="noopener" class="platform-button listen-button"><span>Listen</span></a>
+          <a href="${safeEpisodeLink}" target="_blank" rel="noopener" class="platform-button listen-button"><span>Listen</span></a>
           <a href="${spotifyShowUrl}" target="_blank" rel="noopener" class="platform-button spotify-button">
             <svg class="icon-large" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/></svg>
             Spotify
@@ -1167,6 +1566,7 @@
 
       const episodesToRender = allEpisodes.slice(0, visibleCount);
       audioCount = 0;
+      episodesById.clear();
       episodeData = episodesToRender;
 
       grid.innerHTML = episodesToRender.map((ep, i) => createEpisodeCard(ep, i)).join('');
@@ -1174,6 +1574,7 @@
       // Hydrate audio sources
       episodesToRender.forEach((ep) => {
         const id = 'episode-' + slugify(ep.guid, ep.title);
+        episodesById.set(id, { ...ep, guest: extractGuestName(ep.title) });
         const audio = document.getElementById('audio-' + id);
         if (audio) {
           const url = ep.audioUrl || audioByLink.get(ep.link);
@@ -1195,6 +1596,7 @@
 
       updateDebugInfo('Rendered ' + episodesToRender.length + ' episodes.');
       audioStatus = 'idle';
+      renderFeatured();
     }
 
     function getCachedEpisodes() {
@@ -1345,13 +1747,14 @@
       } else {
         trimmed = trimDescription(fullHeaderDescription);
       }
+      trimmedHeaderDescription =
+        trimmed + (fullHeaderDescription.length > trimmed.length ? '... ' : '');
 
       const descriptionEl = document.getElementById('podcastDescription');
       const readMoreBtn = document.getElementById('headerReadMore');
 
       if (descriptionEl) {
-        descriptionEl.textContent =
-          trimmed + (fullHeaderDescription.length > trimmed.length ? '... ' : '');
+        descriptionEl.textContent = trimmedHeaderDescription;
         if (fullHeaderDescription.length > trimmed.length && readMoreBtn) {
           readMoreBtn.style.display = 'inline';
         }
@@ -1361,12 +1764,100 @@
     const previewTimers = new Map();
     const previewListeners = new Map();
 
+    function renderFeatured() {
+      const wrap = document.getElementById('startHere');
+      const grid = document.getElementById('startHereGrid');
+      if (!wrap || !grid || !featuredMap.size || !allEpisodes.length) return;
+
+      const picks = [];
+      featuredMap.forEach((meta, key) => {
+        const ep = allEpisodes.find((e) => slugify(e.guid, e.title) === key || e.guid === key);
+        if (ep) picks.push({ ...ep, reason: meta.reason, id: slugify(ep.guid, ep.title) });
+      });
+
+      if (!picks.length) {
+        wrap.style.display = 'none';
+        return;
+      }
+
+      grid.innerHTML = picks
+        .slice(0, 3)
+        .map((ep) => {
+          const safeTitle = escapeHTML(ep.title || 'Episode');
+          const safeReason = escapeHTML(ep.reason || 'Great starter episode');
+          const safeMeta = escapeHTML(
+            `${formatDate(ep.pubDate)} · ${extractGuestName(ep.title) || 'Guest'}`,
+          );
+          const safeHref = safeLink(ep.link);
+          return `
+          <div class="start-card">
+            <p class="start-ep-title">${safeTitle}</p>
+            <p class="start-reason">${safeReason}</p>
+            <p class="start-meta">${safeMeta}</p>
+            <a class="start-link" href="${safeHref}" target="_blank" rel="noopener">Play episode</a>
+          </div>
+        `;
+        })
+        .join('');
+
+      wrap.style.display = 'block';
+    }
+
+    function hideNowPlaying() {
+      const bar = document.getElementById('nowPlaying');
+      if (bar) bar.classList.add('hidden');
+    }
+
+    function updateNowPlaying(id) {
+      const bar = document.getElementById('nowPlaying');
+      const titleEl = document.getElementById('npTitle');
+      const metaEl = document.getElementById('npMeta');
+      const openEl = document.getElementById('npOpen');
+      const playEl = document.getElementById('npPlay');
+      const progFill = document.getElementById('npProgressFill');
+      const progBar = document.getElementById('npProgress');
+      const badge = document.getElementById('npBadge');
+      if (!bar || !titleEl || !metaEl || !openEl || !playEl) return;
+
+      const episode = episodesById.get(id) || {};
+      const audio = document.getElementById('audio-' + id);
+      const isPaused = audio ? audio.paused : true;
+      const duration = audio ? audio.duration : NaN;
+      const current = audio ? audio.currentTime : 0;
+      const guest = episode.guest;
+
+      titleEl.textContent = episode.title || 'Episode';
+      const durationText = formatTime(duration);
+      const currentText = formatTime(current);
+      metaEl.textContent = `${currentText} / ${durationText}${guest ? ' · ' + guest : ''}`;
+      openEl.href = safeLink(episode.link || '#');
+
+      if (progFill && audio && isFinite(duration) && duration > 0) {
+        progFill.style.width = Math.min(100, (current / duration) * 100) + '%';
+        if (progBar) progBar.setAttribute('aria-valuenow', Math.round((current / duration) * 100));
+      }
+
+      playEl.setAttribute('aria-pressed', (!isPaused).toString());
+      playEl.setAttribute('aria-label', isPaused ? 'Play episode' : 'Pause episode');
+      playEl.innerHTML = isPaused
+        ? '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5v14l11-7z"/></svg>'
+        : '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+
+      if (badge) {
+        if (audioStatus === 'preview') badge.classList.remove('hidden');
+        else badge.classList.add('hidden');
+      }
+
+      bar.classList.remove('hidden');
+    }
+
     return {
       previewAudio: async function (playerId, seconds) {
         try {
           const audio = document.getElementById('audio-' + playerId);
           const btn = document.getElementById('playBtn-' + playerId);
           const container = document.getElementById('player-' + playerId);
+          const ep = episodesById.get(playerId) || {};
           if (!audio || !btn || !container) return;
 
           if (!ensureAudioSource(playerId)) {
@@ -1424,6 +1915,10 @@
           btn.classList.add('playing');
           btn.innerHTML =
             '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+          btn.setAttribute('aria-pressed', 'true');
+          btn.setAttribute('aria-label', 'Pause episode');
+          updateNowPlaying(playerId);
+          logEvent('preview_play', { id: playerId, title: ep.title || '' });
 
           const stopAt = start + previewSec;
           const endPreview = () => {
@@ -1441,7 +1936,10 @@
             btn.classList.remove('playing', 'loading');
             btn.innerHTML =
               '<svg class="icon" viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+            btn.setAttribute('aria-pressed', 'false');
+            btn.setAttribute('aria-label', 'Play episode');
             if (currentlyPlaying === playerId) currentlyPlaying = null;
+            hideNowPlaying();
             audioStatus = 'idle';
             updateDebugInfo('Preview ended.');
           };
@@ -1459,11 +1957,19 @@
       },
       showChangelog: function () {
         const modal = document.getElementById('changelogModal');
-        if (modal) modal.classList.add('active');
+        if (modal) {
+          lastFocusedBeforeModal = document.activeElement;
+          modal.classList.add('active');
+          const closeBtn = modal.querySelector('.changelog-close');
+          if (closeBtn) closeBtn.focus();
+        }
       },
       hideChangelog: function () {
         const modal = document.getElementById('changelogModal');
         if (modal) modal.classList.remove('active');
+        if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === 'function') {
+          lastFocusedBeforeModal.focus();
+        }
       },
       toggleHeaderDescription: function () {
         const el = document.getElementById('podcastDescription');
@@ -1474,13 +1980,55 @@
           el.textContent = fullHeaderDescription;
           btn.textContent = 'Read Less';
         } else {
-          el.textContent = trimDescription(fullHeaderDescription);
+          el.textContent = trimmedHeaderDescription || trimDescription(fullHeaderDescription);
           btn.textContent = 'Read More';
         }
       },
       init: function () {
         const feed = document.getElementById('podcastFeed');
         visibleCount = parseInt(feed?.dataset?.maxEpisodes, 10) || 6;
+
+        const npPlay = document.getElementById('npPlay');
+        if (npPlay)
+          npPlay.addEventListener(
+            'click',
+            () => currentlyPlaying && this.toggleAudio(currentlyPlaying),
+          );
+        const npProgress = document.getElementById('npProgress');
+        if (npProgress)
+          npProgress.addEventListener(
+            'click',
+            (e) => currentlyPlaying && this.seekAudio(currentlyPlaying, e),
+          );
+        const npClose = document.getElementById('npClose');
+        if (npClose) npClose.addEventListener('click', () => hideNowPlaying());
+        const joinBtn = document.getElementById('podcastJoinButton');
+        if (joinBtn)
+          joinBtn.addEventListener('click', () => logEvent('cta_click', { target: 'coffee_chat' }));
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if ('IntersectionObserver' in window && loadMoreBtn) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  observer.disconnect();
+                  this.loadMore();
+                }
+              });
+            },
+            { rootMargin: '200px 0px 0px 0px' },
+          );
+          observer.observe(loadMoreBtn);
+        }
+        const modal = document.getElementById('changelogModal');
+        if (modal) {
+          modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              e.stopPropagation();
+              this.hideChangelog();
+            }
+          });
+        }
 
         const cached = getCachedEpisodes();
         if (cached && cached.length) {
@@ -1498,6 +2046,7 @@
       loadMore: function () {
         visibleCount += 6;
         renderEpisodes();
+        logEvent('load_more', { visibleCount });
       },
       toggleAudio: function (id) {
         const audio = document.getElementById('audio-' + id);
@@ -1530,7 +2079,7 @@
         currentlyPlaying = id;
         audioStatus = 'playing';
         btn.classList.add('loading');
-        audio.volume = 0.8;
+        audio.volume = globalVolume;
         audio
           .play()
           .then(() => {
@@ -1538,6 +2087,10 @@
             btn.classList.add('playing');
             btn.innerHTML =
               '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+            btn.setAttribute('aria-pressed', 'true');
+            btn.setAttribute('aria-label', 'Pause episode');
+            updateNowPlaying(id);
+            logEvent('play', { id, title: (episodesById.get(id) || {}).title });
             updateDebugInfo('Playing full episode audio.');
           })
           .catch((e) => this.onAudioError(id));
@@ -1563,13 +2116,17 @@
         btn.classList.remove('playing', 'loading');
         btn.innerHTML =
           '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Play episode');
         audioStatus = 'paused';
+        updateNowPlaying(id);
         updateDebugInfo('Audio paused.');
       },
       stopAudio: function (id) {
         const audio = document.getElementById('audio-' + id);
         const btn = document.getElementById('playBtn-' + id);
         const progress = document.getElementById('progress-' + id);
+        const progressBar = document.getElementById('progressbar-' + id);
         const timeDisplay = document.getElementById('currentTime-' + id);
 
         // Clear any preview timers/listeners
@@ -1592,46 +2149,65 @@
           btn.classList.remove('playing', 'loading', 'error');
           btn.innerHTML =
             '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z"/></svg>';
+          btn.setAttribute('aria-pressed', 'false');
+          btn.setAttribute('aria-label', 'Play episode');
         }
         if (progress) progress.style.width = '0%';
+        if (progressBar) progressBar.setAttribute('aria-valuenow', '0');
         if (timeDisplay) timeDisplay.textContent = '0:00';
         if (currentlyPlaying === id) currentlyPlaying = null;
         audioStatus = 'idle';
+        hideNowPlaying();
         updateDebugInfo('Audio stopped.');
       },
       seekAudio: function (id, e) {
         const audio = document.getElementById('audio-' + id);
         if (!audio || !audio.duration) return;
-        const rect = e.currentTarget.getBoundingClientRect();
-        audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+        const evt = e || window.event;
+        const target = (evt && evt.currentTarget) || document.getElementById('progressbar-' + id);
+        if (!target || typeof target.getBoundingClientRect !== 'function') return;
+        const rect = target.getBoundingClientRect();
+        const clientX =
+          (evt && evt.clientX) || (evt && evt.touches && evt.touches[0] && evt.touches[0].clientX);
+        if (!isFinite(clientX)) return;
+        audio.currentTime = ((clientX - rect.left) / rect.width) * audio.duration;
       },
       setVolume: function (id, v) {
         const audio = document.getElementById('audio-' + id);
-        if (audio) audio.volume = v / 100;
+        globalVolume = Math.min(1, Math.max(0, (Number(v) || 0) / 100));
+        if (audio) audio.volume = globalVolume;
       },
       onAudioLoaded: function (id) {
         const el = document.getElementById('duration-' + id);
         const audio = document.getElementById('audio-' + id);
         if (el && audio && isFinite(audio.duration)) {
-          const m = Math.floor(audio.duration / 60);
-          const s = Math.floor(audio.duration % 60)
-            .toString()
-            .padStart(2, '0');
-          el.textContent = m + ':' + s;
+          el.textContent = formatTime(audio.duration);
         }
+        const cardDur = document.getElementById('card-duration-' + id);
+        if (cardDur && audio && isFinite(audio.duration)) {
+          cardDur.textContent = '• ' + formatTime(audio.duration);
+        }
+        if (currentlyPlaying === id) updateNowPlaying(id);
       },
       onTimeUpdate: function (id) {
         const audio = document.getElementById('audio-' + id);
         const prog = document.getElementById('progress-' + id);
+        const progBar = document.getElementById('progressbar-' + id);
         const curr = document.getElementById('currentTime-' + id);
         if (audio && audio.duration) {
           prog.style.width = (audio.currentTime / audio.duration) * 100 + '%';
+          if (progBar)
+            progBar.setAttribute(
+              'aria-valuenow',
+              Math.round((audio.currentTime / audio.duration) * 100),
+            );
           const m = Math.floor(audio.currentTime / 60);
           const s = Math.floor(audio.currentTime % 60)
             .toString()
             .padStart(2, '0');
           curr.textContent = m + ':' + s;
         }
+        if (currentlyPlaying === id) updateNowPlaying(id);
       },
       onAudioEnded: function (id) {
         this.stopAudio(id);

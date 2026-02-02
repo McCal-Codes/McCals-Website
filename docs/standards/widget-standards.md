@@ -67,6 +67,46 @@ Document intentional deviations in widget README files so CI can whitelist them.
 
 ---
 
+## 🛡️ February 2026 Hardening Addendum (Feeds & Portfolios)
+
+**Scope:** All widgets that ingest external data (RSS, manifests, JSON) or run inside host CMS blocks (Squarespace/Webflow/etc.). Derived from recent podcast + portfolio fixes.
+
+1. **Escape + validate all external strings and URLs**
+   - Use `textContent` or an `escapeHTML()` helper before injecting titles/descriptions.
+   - Wrap links with `safeLink()` that only allows `http/https`; fall back to `#` otherwise. Apply to “Open episode page”, “Start Here” cards, manifests, and Now Playing links.
+
+2. **Stop redefining global tokens**
+   - Do not overwrite shared `--accent`/palette tokens with feature colors (e.g., Spotify green). Add service-specific tokens (`--accent-spotify`, `--accent-apple`) and map them intentionally.
+   - Prefer scoping variables to the widget root (`#widgetId { --fg: ... }`) instead of `:root` to avoid page-level collisions.
+
+3. **Scope all CSS to the widget wrapper**
+   - Prefix selectors with the widget root (`#podcastFeed .episode-card`, `.nature-portfolio .nature-card`, etc.) to avoid bleeding styles in host CMS.
+
+4. **Inline handler avoidance + event safety**
+   - Prefer `addEventListener`; if inline handlers remain, do not assume `event` global—pass the event explicitly and guard against null targets.
+
+5. **Control semantics must match behavior**
+   - “Hide” buttons must not stop playback; stopping audio should be a distinct action. Preserve user-controlled settings (e.g., volume) across play/pause instead of resetting each time.
+
+6. **Accessibility essentials**
+   - Label sliders (e.g., volume) with `<label class="sr-only" for="id">...`.
+   - Progress bars/sliders should support keyboard (tab + left/right); expose `role="progressbar/slider"` with `aria-valuenow/min/max`.
+   - Modals: focus the first control on open, close on `Escape`, and return focus to the trigger; trap focus where feasible.
+
+7. **“Start Here” / curated sections must fail gracefully**
+   - If GUID/title matches fail, hide the section cleanly or fall back to a safe default list. Match by slug, link, or partial title to resist feed drift.
+
+8. **Performance sanity**
+   - `content-visibility: auto` is good; pick a realistic `contain-intrinsic-size` to minimize layout jump.
+   - When adding “auto-load more”, ensure observers disconnect after first trigger to avoid runaway loads.
+
+9. **Consistent version hygiene**
+   - When hardening existing versions, bump PATCH (e.g., 2.3.0 → 2.3.1) and update the in-file changelog entry to mention security/a11y fixes.
+
+> **Action:** Apply these rules to any new widget version starting Feb 2026 and retroactively when touching older versions.
+
+---
+
 ## 🏗️ Core Architecture Standards
 
 ## 🧭 Accessibility Checklist

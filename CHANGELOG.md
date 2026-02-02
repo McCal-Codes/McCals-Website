@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-02-02
+
+### Standards — February 2026 Hardening Addendum
+
+- Documented security/a11y/perf rules for widgets that ingest external data (RSS/manifests) and run in host CMS blocks. Highlights: escape+validate all external strings/links, scope CSS to widget root, avoid global token overrides, align control semantics (hide vs stop), persist user-set volume, keyboard-friendly controls, resilient “Start Here” fallbacks, disciplined observers for auto-load behaviors, and PATCH-level changelog/version hygiene.
+- Files: `docs/standards/widget-standards.md`
+
 ## 2026-01-10
 
 ### Events Portfolio Update

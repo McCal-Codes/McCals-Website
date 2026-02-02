@@ -1,7 +1,7 @@
 /**
  * Widget Configuration Mapping
  * Maps dev pages to their corresponding production widget versions
- * 
+ *
  * All widget views are automatically tracked in the changelog.
  * View the changelog at /changelog
  */
@@ -57,7 +57,7 @@ export const widgetMap: Record<string, WidgetConfig> = {
     version: 'v1.9.5-podcast-feed.html',
     description: 'Podcast episodes feed',
   },
-  
+
   // Navigation and layout
   navigation: {
     widget: 'site-navigation',
@@ -82,6 +82,12 @@ export const widgetMap: Record<string, WidgetConfig> = {
     category: '_content',
     version: 'v1.0-contact-form.html',
     description: 'Contact form widget',
+  },
+  abridged: {
+    widget: 'abridged',
+    category: '_content',
+    version: 'v1.0-abridged.html',
+    description: 'Abridged app overview widget',
   },
 };
 

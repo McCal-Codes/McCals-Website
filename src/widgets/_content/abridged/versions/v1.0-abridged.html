@@ -1,0 +1,386 @@
+<!-- Abridged App Widget v1.0-abridged.html -->
+<style>
+  :root {
+    /* Pulled from abridgd src/theme/colors.ts (tint/dark palette) */
+    --abr-cyan: #00bcd4;
+    --abr-cyan-soft: #0097a7;
+    --abr-bg:
+      radial-gradient(circle at 20% 20%, rgba(0, 188, 212, 0.16), transparent 32%),
+      radial-gradient(circle at 82% 8%, rgba(255, 255, 255, 0.12), transparent 28%),
+      linear-gradient(135deg, #060a12 0%, #0d1321 48%, #090f1a 100%);
+    --abr-card: rgba(255, 255, 255, 0.06);
+    --abr-border: rgba(255, 255, 255, 0.14);
+    --abr-text: #e9f0ff;
+    --abr-muted: #9fb4d6;
+    --abr-accent: var(--abr-cyan);
+    --abr-accent-2: #8fd6ff;
+    --abr-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+    --abr-radius: 18px;
+    color-scheme: dark;
+  }
+
+  .abr-widget {
+    position: relative;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--abr-text);
+    background: var(--abr-bg);
+    padding: clamp(22px, 4vw, 38px);
+    border-radius: 28px;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: var(--abr-shadow);
+  }
+
+  .abr-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    align-items: start;
+  }
+
+  .abr-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .abr-brand img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .abr-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(0, 188, 212, 0.14);
+    color: var(--abr-accent);
+    border: 1px solid rgba(0, 188, 212, 0.36);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .abr-title {
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.05;
+    margin: 10px 0 12px;
+  }
+
+  .abr-lede {
+    color: var(--abr-muted);
+    font-size: 1.05rem;
+    max-width: 620px;
+    margin: 0 0 14px;
+  }
+
+  .abr-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 6px 0 18px;
+  }
+
+  .abr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    border: 1px solid var(--abr-border);
+    background: linear-gradient(120deg, rgba(0, 188, 212, 0.28), rgba(255, 255, 255, 0.08));
+    color: #061019;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 14px 38px rgba(0, 188, 212, 0.3);
+    letter-spacing: 0.01em;
+  }
+
+  .abr-btn--ghost {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--abr-text);
+    box-shadow: none;
+  }
+
+  .abr-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .abr-stat {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--abr-border);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .abr-stat strong {
+    display: block;
+    font-size: 1.35rem;
+  }
+  .abr-stat span {
+    color: var(--abr-muted);
+    font-size: 0.95rem;
+  }
+
+  .abr-section {
+    margin-top: clamp(22px, 4vw, 34px);
+    background: var(--abr-card);
+    border: 1px solid var(--abr-border);
+    border-radius: var(--abr-radius);
+    padding: clamp(16px, 3vw, 24px);
+    box-shadow: var(--abr-shadow);
+  }
+
+  .abr-section h3 {
+    margin: 0 0 10px;
+    letter-spacing: 0.01em;
+  }
+
+  .abr-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+  }
+
+  .abr-card {
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--abr-border);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .abr-card h4 {
+    margin: 0 0 6px;
+  }
+  .abr-muted {
+    color: var(--abr-muted);
+  }
+
+  .abr-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    display: grid;
+    gap: 8px;
+  }
+  .abr-list li {
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--abr-border);
+  }
+
+  .abr-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(0, 188, 212, 0.2);
+    color: var(--abr-accent);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .abr-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    margin: 18px 0;
+  }
+
+  @media (max-width: 640px) {
+    .abr-widget {
+      padding: 18px 14px 80px;
+    }
+    .abr-cta-row {
+      flex-direction: column;
+    }
+    .abr-btn {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>
+
+<section class="abr-widget" role="region" aria-labelledby="abridged-title">
+  <header class="abr-hero">
+    <div>
+      <div class="abr-brand">
+        <img src="/brand/abridged-icon.png" alt="Abridged bridge mark" />
+        <div class="abr-hero__badge">Abridged · Calm Local News</div>
+      </div>
+      <h2 id="abridged-title" class="abr-title">Pittsburgh news, without the feed fatigue.</h2>
+      <p class="abr-lede">
+        Abridged delivers a finite, daily edition of curated stories with two ways to read: Classic
+        for thoughtful deep dives and Abridged Mode for RSVP speed when you only have minutes.
+      </p>
+      <div class="abr-cta-row">
+        <a class="abr-btn" href="#abridged-testflight" aria-label="Join Abridged TestFlight beta"
+          >Join TestFlight beta</a
+        >
+        <a
+          class="abr-btn abr-btn--ghost"
+          href="mailto:contact@mcc-cal.com?subject=Abridged%20Partnership"
+          aria-label="Email team"
+          >Press & Partnerships</a
+        >
+      </div>
+      <div class="abr-stats" aria-label="Product stats">
+        <div class="abr-stat">
+          <strong>iOS</strong><span>Expo · React Native · iOS 26 glass UI</span>
+        </div>
+        <div class="abr-stat">
+          <strong>2 Modes</strong><span>Classic + RSVP Abridged Mode</span>
+        </div>
+        <div class="abr-stat">
+          <strong>Finite</strong><span>Daily edition, no infinite scroll</span>
+        </div>
+        <div class="abr-stat">
+          <strong>Safety</strong><span>Grounding mode & content warnings</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="abr-section" aria-labelledby="abr-features">
+    <h3 id="abr-features">What makes Abridged different</h3>
+    <div class="abr-cards">
+      <div class="abr-card">
+        <h4>Classic Mode</h4>
+        <p class="abr-muted">
+          Typography-first reading with clean spacing, zero ads, and a clear “done for today” state.
+        </p>
+      </div>
+      <div class="abr-card">
+        <h4>Abridged Mode (RSVP)</h4>
+        <p class="abr-muted">
+          Rapid Serial Visual Presentation with adjustable WPM, smart pauses, and haptics for
+          confidence.
+        </p>
+      </div>
+      <div class="abr-card">
+        <h4>Community-first</h4>
+        <p class="abr-muted">
+          Curated Pittsburgh stories, events, and local resources—no engagement gimmicks or
+          algorithmic feeds.
+        </p>
+      </div>
+      <div class="abr-card">
+        <h4>Emotional safety</h4>
+        <p class="abr-muted">
+          Grounding mode, consent walls for sensitive content, and calming alternatives when you
+          need a break.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="abr-section" aria-labelledby="abr-roadmap">
+    <h3 id="abr-roadmap">Roadmap</h3>
+    <ul class="abr-list">
+      <li>
+        <span class="abr-tag">Phase 1 · MVP</span> Navigation, design system, mocked content, saved
+        articles.
+      </li>
+      <li>
+        <span class="abr-tag">Phase 2 · Dynamic</span> RSS ingest, ArticleService, pull-to-refresh,
+        optimized local storage.
+      </li>
+      <li>
+        <span class="abr-tag">Phase 3 · Abridged Mode</span> RSVP player, tokenizer, WPM controls,
+        smart pauses.
+      </li>
+      <li>
+        <span class="abr-tag">Phase 4 · Offline</span> Full caching, dark mode, settings polish,
+        onboarding.
+      </li>
+    </ul>
+    <div class="abr-divider"></div>
+    <p class="abr-muted">
+      Built with Expo + TypeScript, React Navigation, Reanimated, Gesture Handler, and semantic
+      design tokens.
+    </p>
+  </div>
+
+  <div class="abr-section" aria-labelledby="abr-tech">
+    <h3 id="abr-tech">For partners & press</h3>
+    <div class="abr-cards">
+      <div class="abr-card">
+        <h4>Platform</h4>
+        <p class="abr-muted">Expo SDK 54 · React Native · OTA-friendly · iOS 26 glassmorphism.</p>
+      </div>
+      <div class="abr-card">
+        <h4>Integrations</h4>
+        <p class="abr-muted">
+          Future RSS/Atom ingest, local storage sync, structured data for story provenance.
+        </p>
+      </div>
+      <div class="abr-card">
+        <h4>Contact</h4>
+        <p class="abr-muted">Press kit & media inquiries: contact@mcc-cal.com</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REQUIRED: Version indicator -->
+  <div
+    class="version-indicator"
+    role="button"
+    tabindex="0"
+    aria-label="Widget version and changelog"
+  >
+    v1.0-abridged
+  </div>
+  <div
+    class="changelog-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="abr-changelog-title"
+  >
+    <div
+      class="changelog-content"
+      style="--bg: #0d1321; --fg: #dbe7ff; --line: rgba(255, 255, 255, 0.12); --accent: #5de4ff"
+    >
+      <header class="changelog-header">
+        <h4 id="abr-changelog-title" class="changelog-title">Abridged Widget — Changelog</h4>
+        <button class="changelog-close" aria-label="Close changelog">×</button>
+      </header>
+      <div class="changelog-body">
+        <div class="changelog-version">v1.0-abridged — 2026-02-02</div>
+        <ul class="changelog-items">
+          <li>Initial launch with hero, feature highlights, roadmap, and CTA buttons.</li>
+          <li>Dark glass aesthetic with responsive grid layout.</li>
+          <li>Accessibility: semantic headings, aria labels, focusable version trigger.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const indicator = document.querySelector('.version-indicator');
+      const modal = document.querySelector('.changelog-modal');
+      const closeBtn = document.querySelector('.changelog-close');
+      if (!indicator || !modal || !closeBtn) return;
+      const open = () => modal.classList.add('active');
+      const close = () => modal.classList.remove('active');
+      indicator.addEventListener('click', open);
+      indicator.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+      closeBtn.addEventListener('click', close);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
+</section>
