@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import '../styles/nav.css';
 import '../styles/footer.css';
+import '../styles/abridged.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
