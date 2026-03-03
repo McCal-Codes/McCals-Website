@@ -10,12 +10,26 @@ jobs:
   playwright-smoke:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup workspace
-        uses: ./.github/actions/setup-node-workspace
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          fetch-depth: '0'
-          use-lfs: 'false'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
@@ -37,12 +51,11 @@ jobs:
       - name: Run axe-core (Firefox) against staging URL
         env:
           STAGING_URL: ${{ secrets.STAGING_URL }}
-          AXE_FAIL_ON_VIOLATIONS: 'true'
         run: |
           if [ -z "$STAGING_URL" ]; then
             echo "Skipping axe audit: STAGING_URL secret not set."; exit 0; fi
           npx playwright install firefox
-          npm run a11y:axe:firefox -- "$STAGING_URL"
+          node scripts/a11y/axe-firefox.js "$STAGING_URL"
 
       - name: Upload Playwright artifacts
         uses: actions/upload-artifact@v4

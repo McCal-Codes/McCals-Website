@@ -1,12 +1,5 @@
 ﻿# Footer Widget Changelog
 
-## v1.4.1 (2026-03-02)
-
-- ⚡ **Performance**: Reworked back-to-top logic to avoid layout reads on every scroll tick.
-- 🧠 **Runtime Optimization**: Added `requestAnimationFrame` scroll throttling for smoother mobile behavior.
-- 👀 **Footer Proximity Handling**: Switched to `IntersectionObserver` for near-footer visibility instead of repeated `getBoundingClientRect()` calls.
-- 🧹 **JavaScript Cleanup**: Removed simulated submit timers and simplified newsletter submit enhancement to reduce main-thread work.
-
 ## v1.3.0 (2025-12-31)
 
 - 🚀 **Back to Top Button**: Circular floating button with scroll progress ring indicator

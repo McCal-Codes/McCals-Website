@@ -14,18 +14,11 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '../..');
 const API_BASE = process.env.API_BASE || 'http://localhost:3001';
-const SITE_URL = process.env.SITE_URL || 'https://www.mcc-cal.com';
+const SITE_URL = process.env.SITE_URL || 'https://mcc-cal.com';
 const OUTPUT_PATH = path.join(ROOT, 'dist', 'sitemap.xml');
 
 const PORTFOLIOS = ['concert', 'events', 'journalism', 'portrait', 'nature'];
 const PORTFOLIO_BASE = path.join(ROOT, 'src/images/Portfolios');
-const PORTFOLIO_PATHS = {
-  concert: '/concert',
-  events: '/event',
-  journalism: '/journalism',
-  portrait: '/portraits',
-  nature: '/nature'
-};
 const PORTFOLIO_ROOTS = {
   concert: path.join(PORTFOLIO_BASE, 'Concert'),
   events: path.join(PORTFOLIO_BASE, 'Events'),
@@ -216,8 +209,7 @@ async function generateSitemap(options = {}) {
   const addStatic = (loc, priority, changefreq = 'monthly') => urls.push({ loc, priority, changefreq, lastmod: today });
   addStatic(SITE_URL, 1.0, 'daily');
   addStatic(`${SITE_URL}/about`, 0.8);
-  addStatic(`${SITE_URL}/contact-us`, 0.7);
-  addStatic(`${SITE_URL}/request-a-quote`, 0.7);
+  addStatic(`${SITE_URL}/contact`, 0.7);
 
   for (const type of types) {
     const manifest = await loadManifest(type);
@@ -229,22 +221,33 @@ async function generateSitemap(options = {}) {
     const items = selectItemsForType(type, data);
     const generated = data.generated || new Date().toISOString();
 
-    const portfolioPath = PORTFOLIO_PATHS[type] || `/${type}`;
-
-    const pageImages = items
-      .flatMap(item => normalizeImages(type, item, opts.imagesPerItem))
-      .slice(0, Math.max(1, opts.imagesPerItem) * 6);
-
     urls.push({
-      loc: `${SITE_URL}${portfolioPath}`,
+      loc: `${SITE_URL}/${type}`,
       lastmod: generated.split('T')[0],
       changefreq: 'weekly',
-      priority: 0.9,
-      images: pageImages
+      priority: 0.9
     });
 
-    totalImages += pageImages.length;
-    console.log(`✓ ${type}: 1 page, ${pageImages.length} sampled images from ${manifest.source} - generate-sitemap.js:250`);
+    let itemCount = 0;
+    items.forEach(item => {
+      const name = item.bandName || item.eventName || item.collectionName || item.title || item.name;
+      if (!name) return;
+
+      const images = normalizeImages(type, item, opts.imagesPerItem);
+      totalImages += images.length;
+
+      const slug = slugify(name);
+      urls.push({
+        loc: `${SITE_URL}/${type}/${slug}`,
+        lastmod: (itemDate(item, generated) || generated).toString().slice(0, 10),
+        changefreq: 'monthly',
+        priority: 0.7,
+        images
+      });
+      itemCount++;
+    });
+
+    console.log(`✓ ${type}: ${itemCount} items, up to ${opts.imagesPerItem} images per item from ${manifest.source} - generate-sitemap.js:250`);
   }
 
   const xml = generateSitemapXML(urls);

@@ -71,22 +71,22 @@ Update your site footer widget to link to `/policies-legal`:
 ### Deep Linking to Specific Sections
 All sections have IDs for direct linking:
 
-- **License**: `https://mcc-cal.com/policies-legal#license`
-- **Privacy**: `https://mcc-cal.com/policies-legal#privacy`
-- **Cookies**: `https://mcc-cal.com/policies-legal#cookies`
-- **Terms Overview**: `https://mcc-cal.com/policies-legal#terms-overview`
-- **Specific Term**: `https://mcc-cal.com/policies-legal#cancellations`
-- **FAQ**: `https://mcc-cal.com/policies-legal#faq`
-- **Contact**: `https://mcc-cal.com/policies-legal#contact`
+- **License**: `https://mccalmedia.com/policies-legal#license`
+- **Privacy**: `https://mccalmedia.com/policies-legal#privacy`
+- **Cookies**: `https://mccalmedia.com/policies-legal#cookies`
+- **Terms Overview**: `https://mccalmedia.com/policies-legal#terms-overview`
+- **Specific Term**: `https://mccalmedia.com/policies-legal#cancellations`
+- **FAQ**: `https://mccalmedia.com/policies-legal#faq`
+- **Contact**: `https://mccalmedia.com/policies-legal#contact`
 
 ### Embedding in Contracts/Emails
 Reference specific terms in client communications:
 ```
 Please review our cancellation policy: 
-https://mcc-cal.com/policies-legal#cancellations
+https://mccalmedia.com/policies-legal#cancellations
 
 Full terms available at:
-https://mcc-cal.com/policies-legal#terms
+https://mccalmedia.com/policies-legal#terms
 ```
 
 ## Customization

@@ -7,49 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [v1.7.0] - 2026-03-02
-
-### Added
-
-- 🔄 **Live TODO Sync**: Added optional runtime sync from `updates/todo.md` (via configurable source URL) to auto-inject active priorities into the Web Development roadmap.
-- 📌 **Sync Status Indicator**: Added footer status text showing whether live sync succeeded or fell back to embedded content.
-- 📈 **Open TODOs Stat**: Automatically injects an `Open TODOs` stat card when sync data is available.
-
-### Changed
-
-- 🧱 **Versioned Upgrade**: Introduced a new version file (`v1.7.0-roadmap-live-sync.html`) to preserve prior releases while extending functionality.
-- 🛡️ **Fallback Behavior**: If fetch fails or no open TODOs are found, the widget gracefully uses static roadmap data without layout or interaction regressions.
-
-### Technical
-
-- Added checklist/TODO markdown parsing for open roadmap items.
-- Added timeout-protected network fetch with robust error handling.
-- Limited synced item injection to maintain readability and prevent oversized milestone cards.
-
----
-
-## [v1.6.0] - 2026-03-02
-
-### Added
-
-- 📱 **Cross-Device Layout Upgrade**: Rebuilt roadmap layout to work cleanly across mobile, tablet, and desktop using adaptive grid behavior and touch-friendly controls.
-- 🧭 **Dual-Mode Sticky Switcher**: Added a sticky mode toggle for faster switching between "Life & Photography" and "Web Development" views.
-- 🔍 **Milestone Filters**: Added status filtering (All, Completed, Active, Future) to make roadmap scanning easier on any screen.
-- 🧩 **Data-First Content Layer**: Introduced a centralized `ROADMAP_CONTENT` object with track metadata, story text, stats, and milestones for easier monthly updates.
-
-### Changed
-
-- ♻️ **Maintainability**: Separated content from rendering logic so updates to creative endeavors or website milestones do not require UI code rewrites.
-- 📊 **Unified Stats Panel**: Both tracks now render their own stat cards dynamically from the same content model.
-
-### SEO
-
-- 🏷️ **Metadata Expansion**: Improved title/description/keywords, robots directives, canonical URL, Open Graph, Twitter card, and theme color tags.
-- 🧠 **Structured Data Enhancements**: Added `WebPage` schema and runtime `ItemList` JSON-LD generation for active roadmap milestones.
-- 🧱 **Semantic Milestones**: Roadmap milestone cards now use semantic article structure with schema microdata for better crawl clarity.
-
----
-
 ## [v1.3.0] - 2025-12-27
 
 ### Added

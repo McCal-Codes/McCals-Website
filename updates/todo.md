@@ -1,59 +1,12 @@
 # Active To-Do List
 
-Last Updated: March 3, 2026
+Last Updated: January 6, 2026
 
 **Quick Reference:**
 
 - See [completed.md](./completed.md) for all finished tasks
 - Reference standards: [docs/standards/](../docs/standards/)
 - Integration guides: [docs/integrations/](../docs/integrations/)
-
----
-
-## ✅ Completed - March 3, 2026
-
-### 🧰 `.github` Audit & Stale File Cleanup
-
-- [x] Audited `.github` workflows, local composite actions, and script references for active usage.
-- [x] Archived/removed high-confidence stale files:
-  - `.github/workflows/scripts/gen-manifest.js` (unused legacy helper; no workflow references)
-  - `.github/.DS_Store` (system artifact; no source value)
-- [x] Revalidated workflow script references after cleanup.
-  - `node scripts/utils/ci-validate-workflows.js` → pass for script reference integrity.
-- [x] Phase 2 medium-confidence cleanup:
-  - Removed `.github/workflows/wpcom.yml` (legacy placeholder workflow that only uploaded a repository artifact and had no active references in repo standards/docs).
-
-**Notes:**
-
-- Remaining workflow validator output is advisory cache-optimization warnings (non-blocking), not broken references.
-- Follow-up complete (2026-03-03): Added `cache: 'npm'` to Node-heavy workflows (`weekly-duplicates-report.yml`, `publish-manifests-cdn.yml`, `validate-manifests.yml`, `ci-scripts-smoke.yml`, `nightly-smoke-test.yml`) and refined `scripts/utils/ci-validate-workflows.js` to warn about missing cache only when a workflow actually performs Node/npm work.
-- Current validator status: clean pass with no missing-script or cache warnings.
-
----
-
-## ✅ Completed - March 2, 2026
-
-### 🧭 Hero, Navigation, About, and Roadmap Iteration
-
-- [x] **Hero Slideshow (Active) — v1.3.13 + v1.3.14**
-  - Added long-task-aware initialization and progressive dynamic hydration for faster perceived load and smoother runtime behavior.
-  - Added slot override controls for targeted blend of favorite/dynamic content.
-- [x] **Hero Slideshow (Legacy Archive) — v1.3.8 + v1.3.9**
-  - Archived intermediate responsive focal/overlay and SEO/button-polish iterations for traceable version history.
-- [x] **Site Navigation — v2.0.4 + v2.0.5**
-  - Shipped strict monochrome visual pass.
-  - Hardened keyboard/outside-click handling and submenu behavior.
-  - Improved crawl path for Work navigation link structure.
-- [x] **Complete About Page — v2.4.5 SEO Refresh**
-  - Added refreshed metadata and SEO-focused copy updates.
-  - Updated structured data approach and release notes/changelog block for v2.4.5.
-- [x] **Roadmap Widget — v1.6.0 + v1.7.0**
-  - Added dual-track responsive roadmap experience.
-  - Added live sync behavior from `updates/todo.md` with graceful fallback.
-
-**Notes:**
-
-- Widget validation should be re-run after final staging to confirm all newly added versions pass the HTML validator in this batch.
 
 ---
 
@@ -179,8 +132,6 @@ Last Updated: March 3, 2026
   - **Scope**: All widgets and main site bootstrap.
   - **Dependencies**: none
   - **Risk level**: high (Could break widget initialization or event listeners).
-  - **Progress (2026-03-03)**: Added strict root-element init guards to active `event-portfolio` (v2.9.1), `concert-portfolio` (v4.9.3), `photojournalism-portfolio` (v5.5.3), and `portrait-portfolio` (v2.0.2) so scripts exit early when widget markup is absent/incomplete.
-  - **Validation (2026-03-03)**: `npm run validate:widgets` now passes fully after adding required site-widgets inline markers to `src/widgets/_content/abridged/versions/v1.0-landing.html` and `src/widgets/_content/abridged/versions/v1.0-abridged.html`.
   - **Validation**: No render-blocking scripts reported in DevTools for above-the-fold content.
 
 #### Page & Widget Mapping
@@ -188,7 +139,7 @@ Last Updated: March 3, 2026
 - [ ] Home page
   - Primary widgets: site-navigation, featured-portfolio, footer
   - LCP candidate: Squarespace Hero (Template) / `.featured-card:first-child img` (Secondary)
-  - Status: Featured Portfolio optimized in v1.5.1 with native pre-rendered secondary LCP image (static audit complete); Main Hero remains managed via Squarespace template (pending user updates).
+  - Status: Featured Portfolio optimized in v1.5.1; Main Hero managed via Squarespace template (pending user updates).
 
 - [x] Concerts
   - Primary widgets: concert-portfolio
@@ -203,27 +154,17 @@ Last Updated: March 3, 2026
 - [x] Journalism
   - Primary widgets: photojournalism-portfolio
   - LCP candidate: `.journalism-card:first-child img`
-  - Status: Optimized in v5.5.3 with pre-rendered hero (CMU Trump Protest).
+  - Status: Optimized in v5.5.2 with pre-rendered hero (CMU Trump Protest).
 
 - [x] Portraits
   - Primary widgets: portrait-portfolio
   - LCP candidate: `.portrait-card:first-child img`
-  - Status: Optimized in v2.0.2 with pre-rendered hero (Editorial).
+  - Status: Optimized in v2.0.1 with pre-rendered hero (Editorial).
 
 - [x] About Page
   - Primary widgets: complete-about-page
   - LCP candidate: `.bio-photo img`
-  - Status: Optimized in v2.4.5 (Eager load + High priority).
-
-##### Static Source Audit (2026-03-03)
-
-- Home (secondary candidate): `featured-portfolio` v1.5.1 includes a pre-rendered first `.featured-card` image with `loading="eager"` and `fetchpriority="high"` before widget JS execution.
-- Concerts: `concert-portfolio` v4.9.3 includes pre-rendered first `.concert-card` image with eager/high-priority loading in HTML.
-- Events: `event-portfolio` v2.9.1 includes pre-rendered first `.event-card` image with eager/high-priority loading in HTML.
-- Journalism: `photojournalism-portfolio` v5.5.3 includes pre-rendered first `.journalism-card` image with eager/high-priority loading in HTML.
-- Portraits: `portrait-portfolio` v2.0.2 includes pre-rendered first `.portrait-card` image with eager/high-priority loading in HTML.
-- About: `complete-about-page` v2.4.5 includes bio photo `<img>` with `loading="eager"` and `fetchpriority="high"`.
-- Pending runtime proof: DevTools LCP capture on live pages is still required to close the runtime verification checklist below.
+  - Status: Optimized in v2.4.1 (Eager load + High priority).
 
 For each page:
 
@@ -321,21 +262,14 @@ Phased improvements for the existing widget ecosystem.
   - **Findings**: 0 violations. All violating widgets archived. Recursive scanner and CI check implemented.
   - **Validation**: CI passes; `npm run scan:widget-versions` returns "PASS".
 
-- [x] TODO: Add structured data validator
-  - **Completed:** Added `scripts/seo/validate-seo-assets.js` and `npm run seo:validate`
-  - **Validation:** `npm run seo:validate` passes (sitemap + structured data + domain consistency)
-- [ ] TODO: Add Lighthouse automation snapshot
+- [ ] TODO: Add structured data validator & Lighthouse automation snapshot
 
 ### Performance, SEO & A11y
 
 - [ ] TODO: Audit and optimize Lighthouse metrics (FCP/LCP/TBT) for all portfolio widgets
 - [ ] TODO: Implement aggressive caching strategies for widget-delivered assets
 - [ ] TODO: Add accessibility improvements: ARIA labels, keyboard navigation, screen reader support
-- [x] TODO: Integrate axe-core accessibility audit into CI for widgets
-  - **Completed (2026-03-03):** Hardened `.github/workflows/a11y-axe-firefox.yml` by fixing step output wiring (`id: ensure_target_url` + explicit `skip`/`target_url` outputs), standardized workflow execution via npm script (`a11y:axe:firefox`), and enabled strict CI mode (`AXE_FAIL_ON_VIOLATIONS=true`).
-  - **Also updated:** `playwright-smoke.yml` now uses the same npm script path for consistency; `scripts/a11y/axe-firefox.js` now emits JSON + HTML + Markdown reports expected by CI artifacts.
-  - **Audit follow-up (2026-03-03):** Fixed stale script paths in `agent-checks.yml` (`scripts/agents/*` -> `docs/agents/*`) and updated `scripts/utils/ci-validate-workflows.js` to recognize `./.github/actions/setup-node-workspace` as satisfying checkout/cache requirements.
-  - **Artifacts:** `reports/axe-firefox-results.json`, `reports/axe-firefox-widget-report.html`, `reports/axe-firefox-summary.md`
+- [ ] TODO: Integrate axe-core accessibility audit into CI for widgets
 
 ---
 
