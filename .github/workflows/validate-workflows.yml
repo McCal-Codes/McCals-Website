@@ -12,18 +12,12 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: false
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup workspace
+        uses: ./.github/actions/setup-node-workspace
         with:
           node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci --prefer-offline --no-audit --no-fund
+          fetch-depth: '0'
+          use-lfs: 'false'
 
       - name: Run workflow validator
         run: node scripts/utils/ci-validate-workflows.js

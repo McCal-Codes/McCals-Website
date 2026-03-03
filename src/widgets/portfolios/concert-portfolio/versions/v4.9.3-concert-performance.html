@@ -1121,6 +1121,10 @@ lazy loading Configuration (data-* attributes on #concertPf): - data-panes: init
     const loadMoreRemaining = document.getElementById('loadMoreRemaining');
     const copyToast = document.getElementById('copyToast');
 
+    if (!portfolio || !grid || !loading) {
+      return;
+    }
+
     // State management
     let state = {
       manifest: null,

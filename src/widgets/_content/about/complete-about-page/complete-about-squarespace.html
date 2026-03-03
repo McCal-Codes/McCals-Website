@@ -1,6 +1,6 @@
-<!-- About Section Widget v1.6.0 — Universal Versioning System
+<!-- About Section Widget v2.4.2 — Combined Roadmap + Universal Update
 Author: Caleb McCartney / McCal-Codes
-Version: 1.6.0
+Version: 2.4.2
 Purpose: Complete about section with bio, photo, reviews, and client carousel for Squarespace
 
 Features:
@@ -31,7 +31,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   property="og:image"
   content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
 />
-<meta property="og:url" content="https://mccalmedia.com/about" />
+<meta property="og:url" content="https://mcc-cal.com/about" />
 <meta property="og:profile:first_name" content="Caleb" />
 <meta property="og:profile:last_name" content="McCartney" />
 
@@ -48,7 +48,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 />
 
 <!-- Canonical & Robots -->
-<link rel="canonical" href="https://mccalmedia.com/about" />
+<link rel="canonical" href="https://mcc-cal.com/about" />
+<link rel="preconnect" href="https://raw.githubusercontent.com" />
 <meta name="robots" content="index, follow" />
 
 <style>
@@ -66,7 +67,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   }
   .ss-about-section {
     max-width: 900px;
-    margin: 80px auto 0;
+    margin: 0 auto;
     padding: 0 20px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
@@ -174,44 +175,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   .ss-about-text strong {
     color: #f5f5f5;
     font-weight: 600;
-  }
-
-  /* Skills/Services Badges */
-  .ss-skills-section {
-    margin: 25px 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .ss-skill-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.04) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #e0e0e0;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .ss-skill-badge:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.08) 100%
-    );
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
   }
 
   .ss-about-buttons {
@@ -560,6 +523,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
     margin: 30px 0;
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
   }
 
   .ss-reviews-content {
@@ -778,9 +743,11 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   .ss-client-showcase {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 80px 20px;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
   }
 
   .ss-client-heading {
@@ -813,11 +780,13 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
 
   .ss-client-track {
     display: flex;
-    animation: ss-scroll 55s linear infinite;
-    width: calc(200px * 75); /* 25 clients × 3 copies = 75 */
+    animation: ss-scroll var(--carousel-duration, 55s) linear infinite;
+    width: var(--carousel-width, calc(280px * 75));
     list-style: none;
     margin: 0;
     padding: 0;
+    will-change: transform;
+    backface-visibility: hidden;
   }
 
   .ss-client-track:hover {
@@ -829,41 +798,72 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-200px * 25));
+      transform: translateX(var(--carousel-scroll-end, calc(-280px * 25)));
     }
   }
 
   .ss-client-logo {
-    flex: 0 0 200px;
-    height: 130px;
-    margin: 0 8px;
+    flex: 0 0 260px;
+    height: 260px;
+    margin: 0 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    border-radius: 12px;
-    border: 1px solid #333;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     cursor: pointer;
     overflow: hidden;
     position: relative;
+    padding: 45px;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+
+  .ss-client-logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: skewX(-25deg);
+    transition: all 0.5s;
+    pointer-events: none;
+  }
+
+  .ss-client-logo:hover::after {
+    animation: ss-glint 0.8s ease-in-out;
+  }
+
+  @keyframes ss-glint {
+    0% {
+      left: -150%;
+    }
+    100% {
+      left: 150%;
+    }
   }
 
   .ss-client-logo:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-    border-color: #444;
-    background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(40, 40, 40, 0.9) 0%, rgba(30, 30, 30, 1) 100%);
   }
 
   .ss-client-logo img {
-    max-width: 184px;
-    max-height: 112px;
-    width: 96%;
-    height: 92%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    /* NO universal filter - logos show their natural colors */
-    filter: brightness(1.1) contrast(1.1);
+    filter: brightness(1.05) contrast(1.05);
     transition: all 0.3s ease;
     margin: 0 auto;
     display: block;
@@ -884,7 +884,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   .cmi-logo-white,
   .penn-state-logo-white,
   .ghostlight-logo-white,
-  .pitt-logo-white {
+  .pitt-logo-white,
+  .osh360-logo-white {
     filter: brightness(0) invert(1) brightness(1.1) contrast(1.1) !important;
   }
 
@@ -897,7 +898,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   .ss-client-logo:hover .cmi-logo-white,
   .ss-client-logo:hover .penn-state-logo-white,
   .ss-client-logo:hover .ghostlight-logo-white,
-  .ss-client-logo:hover .pitt-logo-white {
+  .ss-client-logo:hover .pitt-logo-white,
+  .ss-client-logo:hover .osh360-logo-white {
     filter: brightness(0) invert(1) brightness(1.3) contrast(1.2) !important;
   }
 
@@ -1004,13 +1006,13 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   /* Mobile responsive */
   @media (max-width: 768px) {
     .ss-client-logo {
-      flex: 0 0 140px;
-      height: 90px;
+      flex: 0 0 180px;
+      height: 80px;
       margin: 0 6px;
     }
     .ss-client-logo img {
-      max-width: 100px;
-      max-height: 60px;
+      width: 90%;
+      height: 90%;
     }
     .ss-client-text-logo .company-name {
       font-size: 14px;
@@ -1199,6 +1201,103 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       padding: 20px 10px;
     }
   }
+
+  .mcc-floating-quote-btn {
+    position: fixed;
+    bottom: 45px;
+    right: 30px;
+    z-index: 999;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 26px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.5s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  .mcc-floating-quote-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  @keyframes mcc-cta-pulse {
+    0% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 0.1);
+    }
+    70% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 15px rgba(255, 255, 255, 0);
+    }
+    100% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+
+  .mcc-floating-quote-btn.pulse {
+    animation: mcc-cta-pulse 2s infinite;
+  }
+
+  .mcc-floating-quote-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    pointer-events: none;
+  }
+
+  .mcc-floating-quote-btn:hover {
+    transform: translateY(-6px) scale(1.05) !important;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow:
+      0 15px 45px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.1);
+    animation: none;
+  }
+
+  .mcc-floating-quote-btn:hover::before {
+    left: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .mcc-floating-quote-btn {
+      bottom: 40px;
+      right: 20px;
+      padding: 12px 22px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(12px);
+    }
+  }
 </style>
 
 <div class="ss-about-section">
@@ -1211,7 +1310,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       "jobTitle": "Photojournalist & Commercial Storyteller",
       "description": "Pittsburgh-based photojournalist and commercial storyteller specializing in event coverage, corporate campaigns, and authentic brand visuals.",
       "image": "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg",
-      "url": "https://mccalmedia.com",
+      "url": "https://mcc-cal.com",
       "sameAs": [
         "https://linkedin.com/company/mccalmedia",
         "https://calendly.com/wolftech029/30min"
@@ -1278,7 +1377,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       "@type": ["Organization", "LocalBusiness", "Photographer"],
       "name": "McCal Media",
       "image": "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg",
-      "url": "https://mccalmedia.com",
+      "url": "https://mcc-cal.com",
       "telephone": "+1-570-299-1214",
       "email": "business@mcc-cal.com",
       "address": {
@@ -1304,12 +1403,12 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mccalmedia.com/" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mcc-cal.com/" },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "About",
-          "item": "https://mccalmedia.com/about"
+          "item": "https://mcc-cal.com/about"
         }
       ]
     }
@@ -1326,7 +1425,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           "provider": {
             "@type": "LocalBusiness",
             "name": "McCal Media",
-            "url": "https://mccalmedia.com"
+            "url": "https://mcc-cal.com"
           },
           "areaServed": "Pittsburgh, PA"
         },
@@ -1336,7 +1435,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           "provider": {
             "@type": "LocalBusiness",
             "name": "McCal Media",
-            "url": "https://mccalmedia.com"
+            "url": "https://mcc-cal.com"
           },
           "areaServed": "Pittsburgh, PA"
         },
@@ -1346,7 +1445,7 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           "provider": {
             "@type": "LocalBusiness",
             "name": "McCal Media",
-            "url": "https://mccalmedia.com"
+            "url": "https://mcc-cal.com"
           },
           "areaServed": "Pittsburgh, PA"
         }
@@ -1368,7 +1467,8 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
           alt="Caleb McCartney - Professional Photojournalist and Commercial Photographer in Pittsburgh"
           itemprop="image"
-          loading="lazy"
+          loading="eager"
+          fetchpriority="high"
         />
         <figcaption class="sr-only">Professional headshot of Caleb McCartney</figcaption>
       </figure>
@@ -1405,14 +1505,6 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
             impact.
             <!-- Skills/Services Badges -->
           </p>
-        </div>
-
-        <div class="ss-skills-section">
-          <span class="ss-skill-badge">📸 Event Photography</span>
-          <span class="ss-skill-badge">📰 Photojournalism</span>
-          <span class="ss-skill-badge">🎬 Commercial Work</span>
-          <span class="ss-skill-badge">✨ Brand Storytelling</span>
-          <span class="ss-skill-badge">🎙️ Content Creation</span>
         </div>
 
         <div class="ss-about-buttons">
@@ -1470,6 +1562,10 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
                 >
                   <span class="ss-contact-icon" aria-hidden="true">📋</span>
                   <span class="ss-contact-text">CV (Coming Soon)</span>
+                </a>
+                <a href="/roadmap" class="ss-contact-item" aria-label="View Development Roadmap">
+                  <span class="ss-contact-icon" aria-hidden="true">🗺️</span>
+                  <span class="ss-contact-text">Roadmap</span>
                 </a>
               </div>
             </div>
@@ -1619,14 +1715,25 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
   </section>
 </div>
 
+<!-- Floating Request a Quote Button -->
+<a href="/request-a-quote" class="mcc-floating-quote-btn"> <span>✨</span> Request a Quote </a>
+
 <!-- Version Indicator -->
-<div class="ss-version-indicator" onclick="toggleChangelog()">v1.4.6</div>
+<div class="ss-version-indicator" onclick="toggleChangelog()">v2.4.2</div>
 
 <!-- Changelog Panel -->
 <div class="ss-changelog-panel" id="ss-changelog-panel">
   <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
   <div class="ss-changelog-header">About Widget Changelog</div>
   <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v2.4.2 — Combined Update (Current)</div>
+    <div class="ss-changelog-feature">
+      • Merged roadmap/document controls and performance enhancements from roadmap variant.
+    </div>
+    <div class="ss-changelog-feature">
+      • Added floating quote CTA, eager LCP image loading, and roadmap quick link.
+    </div>
+
     <div class="ss-changelog-version">v1.4.6 — Client Carousel v1.3.0 Integration</div>
     <div class="ss-changelog-feature">
       • Updated to Client Carousel v1.3.0 with 25 clients (up from 22)
@@ -1920,6 +2027,71 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
         website: '',
         project: 'Festival Photography',
       },
+      // NEW CLIENTS v2.0.0
+      {
+        name: 'OSH360',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/osh360-logo.png',
+        textFallback: { company: 'OSH360', tagline: 'Safety & Health' },
+        website: 'https://osh360.com',
+        project: 'Corporate Photography',
+        logoClass: 'osh360-logo-white',
+      },
+      {
+        name: 'Indiana University of Pennsylvania',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/iup-logo.png',
+        textFallback: { company: 'IUP', tagline: 'Crimson Hawks' },
+        website: 'https://iup.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'West Virginia University',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/wvu-logo.png',
+        textFallback: { company: 'WVU', tagline: 'Mountaineers' },
+        website: 'https://wvu.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'Roxian Theatre',
+        logo: '',
+        textFallback: { company: 'Roxian Theatre', tagline: 'Concert Venue' },
+        website: 'https://www.roxianlive.com',
+        project: 'Concert Photography',
+      },
+      {
+        name: 'Pittsburgh Plays',
+        logo: '',
+        textFallback: { company: 'Pittsburgh Plays', tagline: 'Local Theatre' },
+        website: 'https://pittsburghplays.com',
+        project: 'Theatre Photography',
+      },
+      {
+        name: 'Covalent',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/covalent-logo.png',
+        textFallback: { company: 'Covalent', tagline: 'Creative Production' },
+        website: 'https://wearecovalent.com',
+        project: 'Creative Production',
+      },
+      {
+        name: 'Ohio State University',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/osu-logo.jpg',
+        textFallback: { company: 'OSU', tagline: 'Buckeyes' },
+        website: 'https://osu.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'PGH Social Club',
+        logo: 'https://images.squarespace-cdn.com/content/v1/66c8e7d9c5c1e30f7e8d0f8b/1724525528669-YFQZQVVQYQYQYQYQYQYQ/PGH+Social+Club+Logo.png',
+        textFallback: { company: 'PGH Social Club', tagline: 'Connect & Celebrate' },
+        website: 'https://pghsocialclub.com',
+        project: 'Social Events Photography',
+      },
+      {
+        name: 'PRSSA Pittsburgh',
+        logo: 'http://prsa-pgh.org/wp-content/uploads/2016/10/PRSA-Pittsburgh.png',
+        textFallback: { company: 'PRSSA Pittsburgh', tagline: 'Public Relations' },
+        website: 'https://prsa-pgh.org/',
+        project: 'Professional Organization Photography',
+      },
     ];
 
     // Fisher-Yates shuffle algorithm for random client order
@@ -1964,26 +2136,34 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       track.setAttribute('role', 'list');
       track.setAttribute('aria-label', 'Client logos carousel');
 
-      tripleClients.forEach((client) => {
+      tripleClients.forEach((client, index) => {
         const logoElement = document.createElement('li');
         logoElement.className = 'ss-client-logo';
         logoElement.setAttribute('title', `${client.name} - ${client.project}`);
-        // Try loading image first
-        const img = document.createElement('img');
-        img.alt = `${client.name} logo - ${client.project}`;
-        img.loading = 'lazy';
-        if (client.logoClass) {
-          img.classList.add(client.logoClass);
+
+        if (client.logo && client.logo.trim() !== '') {
+          const img = document.createElement('img');
+          img.alt = `${client.name} logo - ${client.project}`;
+          img.decoding = 'async';
+
+          if (index < shuffledClients.length) {
+            img.loading = 'eager';
+            img.setAttribute('fetchpriority', 'high');
+          } else {
+            img.loading = 'lazy';
+          }
+
+          if (client.logoClass) {
+            img.classList.add(client.logoClass);
+          }
+
+          img.onerror = () => handleLogoError(logoElement, client);
+          img.src = client.logo;
+          logoElement.appendChild(img);
+        } else {
+          handleLogoError(logoElement, client);
         }
-        // Set up error handling before setting src
-        img.onerror = () => handleLogoError(logoElement, client);
-        // Add load event to ensure proper display
-        img.onload = () => {
-          img.style.opacity = '1';
-        };
-        img.src = client.logo;
-        img.style.opacity = '0.9';
-        logoElement.appendChild(img);
+
         if (client.website) {
           logoElement.setAttribute('role', 'button');
           logoElement.setAttribute('aria-label', `Open ${client.name} website`);
@@ -1998,14 +2178,24 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       container.innerHTML = '';
       container.appendChild(carousel);
 
+      const clientCount = shuffledClients.length;
+      const itemWidth = 280;
+      const totalWidthPx = itemWidth * tripleClients.length;
+      const scrollEndPx = -(itemWidth * clientCount);
+      const duration = clientCount * 2.2;
+
+      carousel.style.setProperty('--carousel-width', `${totalWidthPx}px`);
+      carousel.style.setProperty('--carousel-scroll-end', `${scrollEndPx}px`);
+      carousel.style.setProperty('--carousel-duration', `${duration}s`);
+
       // Inject Organization JSON-LD structured data for SEO
       try {
         const uniqueClients = Array.from(new Map(clientsData.map((c) => [c.name, c])).values());
         const orgSchema = {
           '@context': 'https://schema.org',
           '@type': 'Organization',
-          name: 'McCal Media',
-          url: 'https://mccalmedia.com',
+          name: 'Caleb McCartney Photography',
+          url: 'https://mcc-cal.com',
           aggregateRating: {
             '@type': 'AggregateRating',
             ratingValue: '5.0',
@@ -2027,8 +2217,28 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
       }
     }
 
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
+    if ('IntersectionObserver' in window) {
+      const carouselObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              createClientCarousel();
+              carouselObserver.disconnect();
+            }
+          });
+        },
+        { rootMargin: '300px 0px' },
+      );
+
+      const target = document.getElementById('ss-client-container');
+      if (target) {
+        carouselObserver.observe(target);
+      } else if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createClientCarousel);
+      } else {
+        createClientCarousel();
+      }
+    } else if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', createClientCarousel);
     } else {
       createClientCarousel();
@@ -2301,6 +2511,50 @@ SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → 
           }
         }
       });
+  })();
+
+  // Floating CTA Interactive Logic
+  (function () {
+    const cta = document.querySelector('.mcc-floating-quote-btn');
+    if (!cta) return;
+
+    let pulseTimer = null;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollY > 400) {
+        cta.classList.add('visible');
+      } else {
+        cta.classList.remove('visible');
+      }
+
+      if (cta.classList.contains('visible') && !cta.classList.contains('pulse')) {
+        if (!pulseTimer) {
+          pulseTimer = setTimeout(() => {
+            cta.classList.add('pulse');
+          }, 2000);
+        }
+      } else if (!cta.classList.contains('visible')) {
+        clearTimeout(pulseTimer);
+        pulseTimer = null;
+        cta.classList.remove('pulse');
+      }
+
+      const buffer = 200;
+      if (scrollY + windowHeight > documentHeight - buffer) {
+        cta.style.opacity = '0';
+        cta.style.pointerEvents = 'none';
+      } else if (cta.classList.contains('visible')) {
+        cta.style.opacity = '1';
+        cta.style.pointerEvents = 'auto';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
   })();
 </script>
 

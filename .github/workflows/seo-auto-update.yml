@@ -51,13 +51,13 @@ jobs:
         run: npm run seo:sitemap
         env:
           API_BASE: https://api.mcc-cal.com
-          SITE_URL: https://mcc-cal.com
+          SITE_URL: https://www.mcc-cal.com
       
       - name: Generate structured data
         run: npm run seo:schema
         env:
           API_BASE: https://api.mcc-cal.com
-          SITE_URL: https://mcc-cal.com
+          SITE_URL: https://www.mcc-cal.com
       
       - name: Validate generated files
         run: |
@@ -92,13 +92,8 @@ jobs:
           SCHEMA_COUNT=$(find dist/structured-data -name '*.json' | wc -l)
           echo "✓ Generated $SCHEMA_COUNT schema files"
           
-          # Validate JSON
-          for file in dist/structured-data/*.json; do
-            if ! jq empty "$file" 2>/dev/null; then
-              echo "❌ Invalid JSON: $file"
-              exit 1
-            fi
-          done
+          # Validate domain consistency and JSON/schema files
+          npm run seo:validate
           
           echo "✅ All SEO assets validated successfully"
       
@@ -140,12 +135,12 @@ jobs:
           echo "🌐 Submitting sitemap to search engines..."
           
           # Google Search Console
-          curl -X GET "https://www.google.com/ping?sitemap=https://mccalmedia.com/sitemap.xml" \
+          curl -X GET "https://www.google.com/ping?sitemap=https://www.mcc-cal.com/sitemap.xml" \
             || echo "⚠️  Google submission may have failed (this is normal if not yet verified)"
           
           # Note: Bing requires API key - add BING_WEBMASTER_KEY to secrets if needed
           # curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${{ secrets.BING_WEBMASTER_KEY }}" \
-          #   -d '{"siteUrl":"https://mccalmedia.com","urlList":["https://mccalmedia.com/sitemap.xml"]}'
+          #   -d '{"siteUrl":"https://www.mcc-cal.com","urlList":["https://www.mcc-cal.com/sitemap.xml"]}'
           
           echo "✅ Sitemap submission complete"
       
@@ -178,7 +173,7 @@ jobs:
           
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Next Steps:**" >> $GITHUB_STEP_SUMMARY
-          echo "1. Verify sitemap at https://mccalmedia.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
+          echo "1. Verify sitemap at https://www.mcc-cal.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
           echo "2. Test structured data: https://search.google.com/test/rich-results" >> $GITHUB_STEP_SUMMARY
           echo "3. Monitor indexing in Google Search Console" >> $GITHUB_STEP_SUMMARY
       

@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.5] - 2026-03-02
+
+### Changed ♿
+
+- **Mobile Menu Accessibility Hardened**: Added explicit `aria-controls` and synchronized `aria-expanded` states for the main menu toggle and Work submenu toggle.
+- **Keyboard/Focus Reliability**: Escape now consistently closes mobile menu + submenu and returns focus to the toggle in mobile contexts.
+- **Outside-click Dismissal**: Menu and submenu now close when users click outside navigation, reducing stuck-open states.
+
+### Changed 🔎
+
+- **Crawl-friendly Work Link**: Updated the top-level Work link from `/` to `/featured` so primary portfolio discovery has a direct, canonical destination.
+- **Route Transition Cleanup**: Menu state now resets on `SquarespaceRoutingComplete` to avoid stale overlays after AJAX navigation.
+
+### Kept ⚡
+
+- Preserved `v2.0.4` monochrome visuals and runtime optimization patterns (`requestAnimationFrame` scroll throttling + debounced resize updates).
+
+## [2.0.4] - 2026-03-02
+
+### Changed 🎨
+
+- **Strict Monochrome Enforcement**: Added scoped monochrome overrides to neutralize persistent blue link/icon inheritance in Squarespace contexts.
+- **Header Border Removal**: Hardened border/shadow suppression for native Squarespace header wrappers to avoid faint separator lines.
+- **Visual Simplification**: Removed active-link underline pseudo-element to eliminate line artifacts while scrolling.
+- **Version Bump**: Published as `v2.0.4-site-navigation.html` for clean deployment.
+
+### Kept ⚡
+
+- Preserved `v2.0.1` runtime optimizations (`requestAnimationFrame` scroll throttling, delegated menu click handling, and resize debounce).
+
+## [2.0.1] - 2026-03-02
+
+### Changed ⚡
+
+- **Scroll Runtime Optimization**: Added `requestAnimationFrame` throttling for scroll state updates.
+- **Resize Debounce**: Debounced nav-height recalculation on resize to reduce layout churn.
+- **Event Delegation**: Replaced per-link close listeners with delegated click handling on the menu container.
+- **Accessibility-safe Performance**: Preserved reduced-motion behavior while improving runtime efficiency.
+
 ## [2.0.0] - 2025-12-30
 
 ### Added 💎

@@ -925,6 +925,10 @@ Configuration (data-* attributes on #portraitPf):
     const loadMoreRemaining = document.getElementById('loadMoreRemaining');
     const copyToast = document.getElementById('copyToast');
 
+    if (!container || !grid || !loading) {
+      return;
+    }
+
     // Respect data-* overrides
     if (container) {
       if (container.dataset.panes) CONFIG.panes = parseInt(container.dataset.panes, 10) || 12;

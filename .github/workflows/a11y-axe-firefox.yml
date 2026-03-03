@@ -19,23 +19,18 @@ jobs:
     name: Run axe (Playwright/Firefox) and upload results
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Setup workspace
+        uses: ./.github/actions/setup-node-workspace
         with:
-          submodules: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
+          node-version: '20'
+          fetch-depth: '0'
+          use-lfs: 'false'
 
       - name: Install Playwright Firefox runtime
         run: npx playwright install firefox
 
       - name: Ensure TARGET_URL
+        id: ensure_target_url
         env:
           STAGING_URL: ${{ secrets.STAGING_URL }}
         run: |
@@ -45,16 +40,22 @@ jobs:
             TARGET_URL="$STAGING_URL"
           fi
           if [ -z "${TARGET_URL}" ]; then
-            echo "Skipping axe audit: TARGET_URL/STAGING_URL not set."; echo "skip=true" >> $GITHUB_OUTPUT; exit 0;
+            echo "Skipping axe audit: TARGET_URL/STAGING_URL not set.";
+            echo "skip=true" >> "$GITHUB_OUTPUT";
+            exit 0;
           fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "target_url=${TARGET_URL}" >> "$GITHUB_OUTPUT"
           echo "TARGET_URL=${TARGET_URL}" > target_url.env
 
       - name: Run axe-firefox audit
         if: steps.ensure_target_url.outputs.skip != 'true'
+        env:
+          AXE_FAIL_ON_VIOLATIONS: 'true'
         run: |
           . ./target_url.env
           echo "Running axe audit against: ${TARGET_URL}"
-          node scripts/a11y/axe-firefox.js "${TARGET_URL}"
+          npm run a11y:axe:firefox -- "${TARGET_URL}"
 
       - name: Upload reports
         uses: actions/upload-artifact@v4
