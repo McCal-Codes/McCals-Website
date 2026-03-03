@@ -1,5 +1,15 @@
 # Complete About Page Widget Changelog
 
+## Version 2.4.5 - SEO Refresh & Compliance (2026-03-02)
+
+### 🔎 SEO & Release Updates
+
+- **New Version Artifact**: Added `versions/v2.4.5-about-seo-refresh.html` as the new release snapshot.
+- **Version Consistency**: Updated top-of-file metadata and visible widget version indicator to `v2.4.5`.
+- **Structured Data Safety**: Replaced self-serving `AggregateRating` review JSON-LD with neutral testimonial `ItemList` markup to reduce rich-result policy risk on self-hosted about pages.
+- **UI Fix**: Corrected the Roadmap dropdown icon encoding issue.
+- **Scope**: Preserves all prior v2.4.2 layout, carousel, and interaction behavior while improving SEO robustness.
+
 ## Version 2.1.0 - Conversion Focus (2025-12-30)
 
 ### 📈 Conversion Enhancements

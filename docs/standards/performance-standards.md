@@ -4,13 +4,39 @@
 
 This document outlines performance standards and optimization techniques for McCal Media widgets, using the **Concert Portfolio v4.6** as the primary case study for Lighthouse performance scoring best practices.
 
+## Performance Intent (Authoritative)
+
+Performance decisions must prioritize **real-user experience on the live Squarespace site** over synthetic scores.
+
+Decision order for tradeoffs:
+
+1. Above-the-fold visibility (LCP)
+2. Main-thread blocking avoidance
+3. Progressive enhancement
+4. Accessibility and semantics
+5. Maintainability and clarity
+6. Lighthouse score improvements
+
+Non-negotiable rules:
+
+- Above-the-fold images must render without waiting on JavaScript.
+- Prefer native `<img>` markup for primary visuals; enhance after paint.
+- Do not JS-render critical content.
+- Inline only truly critical CSS for first paint.
+- Defer or delay all non-critical JavaScript.
+- Initialize widgets only when present on the page.
+- Avoid DOM-heavy construction during initial render.
+
+Performance regressions are treated as bugs.
+Accessibility regressions are treated as bugs.
+
 ## Lighthouse Performance Metrics
 
 Based on [Chrome Lighthouse Performance Scoring](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/), widgets must achieve:
 
 - **Target Score**: 90+ (Good)
 - **Minimum Acceptable**: 75+ (Needs Improvement)
-- **Critical Metrics**: LCP, FID, CLS, FCP, TBT
+- **Critical Metrics**: LCP, INP, CLS, FCP, TBT
 
 ## Concert Portfolio v4.6 — Performance Case Study
 
@@ -52,7 +78,7 @@ This widget showcases over two years of concert photography work, capturing the 
 })();
 ```
 
-**Impact**: Reduces main-thread blocking, improves TBT and FID scores.
+**Impact**: Reduces main-thread blocking, improves TBT and INP outcomes.
 
 #### 3. **Resource Hints & Preloading** (Addresses Network Latency)
 
@@ -178,7 +204,7 @@ font:
 
 ### Monitoring
 
-- **Core Web Vitals**: LCP, FID, CLS tracking
+- **Core Web Vitals**: LCP, INP, CLS tracking
 - **CrUX Dashboard**: Real user performance data
 - **Performance budgets**: Bundle size limits
 
@@ -233,7 +259,7 @@ element.style.width = element.offsetWidth + 'px'; // Forces reflow
 
 - **Lighthouse Score**: ≥90
 - **LCP**: <2.5s
-- **FID**: <100ms
+- **INP**: <200ms
 - **CLS**: <0.1
 - **Bundle Size**: <100KB gzipped
 - **Time to Interactive**: <3.5s
@@ -247,6 +273,5 @@ element.style.width = element.offsetWidth + 'px'; // Forces reflow
 
 ---
 
-_Last updated: 2025-10-06_
-_Case Study: Concert Portfolio v4.6 performance optimization_</content>
-<parameter name="filePath">c:\Users\wolft\Desktop\McCal's Dev Website\McCals-Website\docs\standards\performance-standards.md
+_Last updated: 2026-03-03_
+_Case Study: Concert Portfolio v4.6 performance optimization_

@@ -126,7 +126,7 @@ This widget follows the McCals-Website design system:
    ```
 
 2. **Update Current Month in Roadmap Data**
-   - Open `versions/v1.2.0-roadmap.html` (or latest version)
+  - Open `versions/v1.7.0-roadmap-live-sync.html` (or latest version)
    - Find the `roadmapData` array in the `<script>` section
    - Update the current month's highlights array with:
      - **What you built**: New features, widgets, tools
@@ -229,11 +229,14 @@ roadmap/
 └── versions/
     ├── v1.0.0-roadmap.html       # Initial version (example data)
     ├── v1.1.0-roadmap.html       # Month-by-month (real data)
-    └── v1.2.0-roadmap.html       # Current version (personal journey + visual timeline)
+    ├── v1.2.0-roadmap.html       # Personal journey + visual timeline
+    ├── v1.5.0-roadmap-dual.html  # Dual-track roadmap (life + webdev)
+    ├── v1.6.0-roadmap-dual-responsive-seo.html # Responsive + SEO enhanced
+    └── v1.7.0-roadmap-live-sync.html # Adds live sync from updates/todo.md
 ```
 
 ---
 
 **Created**: 2025-12-17  
-**Current Version**: v1.3.0  
+**Current Version**: v1.7.0  
 **Status**: ✅ Production Ready

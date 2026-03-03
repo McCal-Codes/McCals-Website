@@ -1,0 +1,933 @@
+<!-- McCal Hero Carousel v1.3.14 (Fast LCP + Progressive Dynamic Hydration) -->
+<div
+  id="mcc-hero"
+  class="mcc-hero-widget"
+  data-widget-version="1.3.14-fast-lcp-progressive-dynamic"
+  data-mcc-hero-root
+  data-source-mode="favorites"
+  data-max-slides="9"
+  data-slide-duration="8"
+  data-height-multiplier="1.12"
+  data-desktop-breakpoint="769"
+  data-overlay-strength="soft"
+  data-seo-site-name="McCal Media"
+  data-seo-page-url="https://mcc-cal.com/"
+  data-show-text="false"
+  data-show-dots="false"
+  data-manifest-url="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/featured-manifest.json"
+  data-slide-plan="politics,journalism,pittsburgh,portraits,corporate,event,concert,theatre,nature"
+  data-slot-overrides="concert:dynamic,journalism:favorite"
+>
+  <!-- site-widgets:inline:start -->
+  <style data-site-widgets-inline>
+    .mcc-hero-widget,
+    .mcc-hero-widget * {
+      box-sizing: border-box;
+    }
+  </style>
+  <!-- site-widgets:inline:end -->
+
+  <style>
+    :root {
+      --mcc-nav-height: 0px;
+    }
+
+    .mcc-hero-widget {
+      --mcc-vh: 100dvh;
+      position: relative;
+      display: block;
+      width: 100vw;
+      max-width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 !important;
+      color: #f5f5f5;
+      font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .mcc-hero-shell {
+      position: relative;
+      width: 100vw;
+      max-width: 100vw;
+      overflow: hidden;
+      background: transparent;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+      min-height: var(--mcc-vh);
+      height: var(--mcc-vh);
+    }
+
+    :root[data-mcc-nav='active'] .mcc-hero-shell {
+      margin-top: calc(-1 * var(--mcc-nav-height, 0px));
+    }
+
+    .mcc-hero {
+      position: relative;
+      width: 100%;
+      min-height: var(--mcc-vh);
+      height: var(--mcc-vh);
+    }
+
+    .mcc-hero__viewport {
+      overflow: hidden;
+      width: 100%;
+      min-height: var(--mcc-vh);
+      height: var(--mcc-vh);
+      cursor: grab;
+    }
+
+    .mcc-hero__viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    .mcc-hero__track {
+      display: flex;
+      width: 100%;
+      min-height: var(--mcc-vh);
+      height: var(--mcc-vh);
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.5s ease;
+      will-change: transform;
+    }
+
+    .mcc-hero__slide {
+      position: relative;
+      flex: 0 0 100%;
+      width: 100%;
+      min-height: var(--mcc-vh);
+      height: var(--mcc-vh);
+      overflow: hidden;
+    }
+
+    .mcc-hero__slide img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .mcc-hero__slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.28) 70%, rgba(0, 0, 0, 0.48) 100%);
+      pointer-events: none;
+    }
+
+    .mcc-hero-widget[data-overlay-strength='default'] .mcc-hero__slide::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.32) 68%, rgba(0, 0, 0, 0.5) 100%);
+    }
+
+    .mcc-hero-widget[data-overlay-strength='soft'] .mcc-hero__slide::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.22) 72%, rgba(0, 0, 0, 0.42) 100%);
+    }
+
+    .mcc-hero-widget[data-overlay-strength='none'] .mcc-hero__slide::after {
+      background: none;
+    }
+
+    .mcc-hero__caption {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(30px, 10vw, 110px);
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: min(100%, 720px);
+      padding: 0 2%;
+      z-index: 2;
+      pointer-events: auto;
+      text-align: center;
+    }
+
+    .mcc-hero__title,
+    .mcc-hero__meta {
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+    }
+
+    .mcc-hero__title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: clamp(1.3rem, 3.4vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .mcc-hero__meta {
+      font-size: clamp(0.75rem, 1.2vw, 0.88rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .mcc-hero-widget[data-show-text='false'] .mcc-hero__title,
+    .mcc-hero-widget[data-show-text='false'] .mcc-hero__meta {
+      display: none;
+    }
+
+    .mcc-hero__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      min-width: 140px;
+      padding: 0.88rem 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(20, 22, 29, 0.84) 0%, rgba(11, 12, 18, 0.7) 100%);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 0.97rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      line-height: 1.1;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .mcc-hero__cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.24) 50%, transparent 80%);
+      transform: translateX(-140%);
+      transition: transform 0.6s ease;
+      pointer-events: none;
+    }
+
+    .mcc-hero__cta:hover,
+    .mcc-hero__cta:focus-visible {
+      background: linear-gradient(135deg, rgba(33, 38, 51, 0.9) 0%, rgba(13, 15, 24, 0.86) 100%);
+      border-color: rgba(255, 255, 255, 0.62);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .mcc-hero__cta:hover::before,
+    .mcc-hero__cta:focus-visible::before {
+      transform: translateX(140%);
+    }
+
+    .mcc-hero__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.9;
+      padding: 0;
+    }
+
+    .mcc-hero__arrow svg {
+      width: 32px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+
+    .mcc-hero__arrow:hover,
+    .mcc-hero__arrow:focus-visible {
+      opacity: 1;
+      outline: none;
+    }
+
+    .mcc-hero__arrow--prev {
+      left: 3vw;
+    }
+
+    .mcc-hero__arrow--next {
+      right: 3vw;
+    }
+
+    .mcc-hero__dots {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mcc-hero-widget[data-show-dots='false'] .mcc-hero__dots {
+      display: none;
+    }
+
+    .mcc-hero__dot {
+      width: 14px;
+      height: 2px;
+      border: 0;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+    }
+
+    .mcc-hero__dot.is-active {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    @media (max-width: 768px) {
+      .mcc-hero__caption {
+        bottom: clamp(24px, 12vw, 78px);
+      }
+      .mcc-hero__arrow--prev {
+        left: 10px;
+      }
+      .mcc-hero__arrow--next {
+        right: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mcc-hero__track {
+        transition: none !important;
+      }
+    }
+  </style>
+
+  <div class="mcc-hero-shell">
+    <section class="mcc-hero" aria-label="Featured work carousel">
+      <div class="mcc-hero__viewport" data-mcc-hero-viewport>
+        <div class="mcc-hero__track" data-mcc-hero-track></div>
+      </div>
+      <button class="mcc-hero__arrow mcc-hero__arrow--prev" data-mcc-hero-prev aria-label="Previous slide">
+        <svg viewBox="0 0 32 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M7 1 L1 7 L7 13" />
+          <path d="M31 7 L2 7" />
+        </svg>
+      </button>
+      <button class="mcc-hero__arrow mcc-hero__arrow--next" data-mcc-hero-next aria-label="Next slide">
+        <svg viewBox="0 0 32 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M25 1 L31 7 L25 13" />
+          <path d="M1 7 L30 7" />
+        </svg>
+      </button>
+      <div class="mcc-hero__dots" data-mcc-hero-dots aria-label="Slide navigation"></div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.querySelector('[data-mcc-hero-root]');
+      if (!root) return;
+
+      const viewport = root.querySelector('[data-mcc-hero-viewport]');
+      const track = root.querySelector('[data-mcc-hero-track]');
+      const dotsWrap = root.querySelector('[data-mcc-hero-dots]');
+      const prevBtn = root.querySelector('[data-mcc-hero-prev]');
+      const nextBtn = root.querySelector('[data-mcc-hero-next]');
+      if (!viewport || !track || !dotsWrap || !prevBtn || !nextBtn) return;
+
+      const sourceMode = (root.getAttribute('data-source-mode') || 'favorites').toLowerCase();
+      const maxSlides = Math.max(1, parseInt(root.getAttribute('data-max-slides') || '9', 10));
+      const slideDuration = Math.max(4, parseInt(root.getAttribute('data-slide-duration') || '8', 10));
+      const seoSiteName = root.getAttribute('data-seo-site-name') || 'McCal Media';
+      const seoPageUrl = root.getAttribute('data-seo-page-url') || window.location.href;
+      const desktopBreakpoint = Math.max(
+        640,
+        parseInt(root.getAttribute('data-desktop-breakpoint') || '769', 10) || 769
+      );
+      const heightMultiplier = Math.min(
+        1.6,
+        Math.max(1, parseFloat(root.getAttribute('data-height-multiplier') || '1.12') || 1.12)
+      );
+      const manifestUrl =
+        root.getAttribute('data-manifest-url') ||
+        'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/featured-manifest.json';
+      const slidePlanRaw =
+        root.getAttribute('data-slide-plan') ||
+        'politics,journalism,pittsburgh,portraits,corporate,event,concert,theatre,nature';
+      const slidePlan = slidePlanRaw
+        .split(',')
+        .map((s) => s.trim().toLowerCase())
+        .filter(Boolean)
+        .slice(0, maxSlides);
+      const slotOverridesRaw = root.getAttribute('data-slot-overrides') || 'concert:dynamic,journalism:favorite';
+
+      const parseSlotOverrides = (raw) => {
+        const out = {};
+        String(raw || '')
+          .split(',')
+          .map((entry) => entry.trim().toLowerCase())
+          .filter(Boolean)
+          .forEach((entry) => {
+            const [slot, mode] = entry.split(':').map((v) => String(v || '').trim().toLowerCase());
+            if (!slot || !mode) return;
+            if (!['favorite', 'favorites', 'dynamic', 'hybrid'].includes(mode)) return;
+            out[slot] = mode === 'favorites' ? 'favorite' : mode;
+          });
+        return out;
+      };
+
+      const slotModeOverrides = parseSlotOverrides(slotOverridesRaw);
+      const needsDynamicByOverride = Object.values(slotModeOverrides).some((mode) => mode === 'dynamic' || mode === 'hybrid');
+
+      const forceFullBleedHost = () => {
+        const section = root.closest('[data-section-id], .page-section');
+        if (section) {
+          section.style.paddingTop = '0px';
+          section.style.paddingBottom = '0px';
+          section.style.minHeight = '0';
+          section.style.marginTop = '-1px';
+        }
+
+        const wrappers = [
+          root.closest('.content-wrapper'),
+          root.closest('.content'),
+          root.closest('.sqs-layout'),
+          root.closest('.sqs-block-content'),
+          root.closest('.code-block')
+        ].filter(Boolean);
+
+        wrappers.forEach((el) => {
+          el.style.maxWidth = 'none';
+          el.style.width = '100%';
+          el.style.padding = '0';
+          el.style.margin = '0';
+        });
+
+        root.style.marginTop = '-1px';
+        root.style.background = 'transparent';
+      };
+
+      const syncViewportHeight = () => {
+        const vh = window.innerHeight || document.documentElement.clientHeight || 800;
+        root.style.setProperty('--mcc-vh', `${Math.round(vh * heightMultiplier)}px`);
+      };
+
+      const SLOT_ALIASES = {
+        politics: ['politics', 'political', 'election', 'campaign'],
+        journalism: ['journalism', 'photojournalism', 'editorial', 'news'],
+        pittsburgh: ['pittsburgh', 'pgh', 'steel city'],
+        portraits: ['portrait', 'portraits', 'headshot', 'people'],
+        corporate: ['corporate', 'business', 'brand'],
+        event: ['event', 'events', 'festival', 'conference'],
+        concert: ['concert', 'music', 'show', 'live'],
+        theatre: ['theatre', 'theater', 'stage', 'performance'],
+        nature: ['nature', 'landscape', 'outdoor', 'wildlife']
+      };
+
+      const SLOT_CONFIG = {
+        politics: { href: '/journalism', cta: 'Politics', meta: 'Politics' },
+        journalism: { href: '/journalism', cta: 'Journalism', meta: 'Journalism' },
+        pittsburgh: { href: '/nature', cta: 'Pittsburgh', meta: 'Pittsburgh' },
+        portraits: { href: '/portraits', cta: 'Portraits', meta: 'Portraits' },
+        corporate: { href: '/event', cta: 'Corporate', meta: 'Corporate' },
+        event: { href: '/events', cta: 'Event', meta: 'Event' },
+        concert: { href: '/concert', cta: 'Concert', meta: 'Concert' },
+        theatre: { href: '/event', cta: 'Theatre', meta: 'Theatre' },
+        nature: { href: '/nature', cta: 'Nature', meta: 'Nature' },
+        featured: { href: '/featured', cta: 'Explore', meta: 'Featured' }
+      };
+
+      const FAVORITES = [
+        { title: 'Politics', meta: 'Politics', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/eedc836b-ce05-4452-b29c-8ab2a64f384e/101024_Obama+Speaks+at+Pittsburgh_CAL3364-min.jpg', href: '/journalism', cta: 'Politics', alt: 'Obama Smiling at the crowd during a Rally In Pittsburgh, PA', categories: ['politics', 'journalism', 'pittsburgh'], focalPointMobile: { x: 0.32421635258168385, y: 0.488 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Journalism', meta: 'Journalism', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg', href: '/journalism', cta: 'Journalism', alt: 'Journalism assignment image from CMU protest.', categories: ['journalism', 'politics'], focalPointMobile: { x: 0.70, y: 0.344 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Pittsburgh', meta: 'Pittsburgh', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/62dcd231-e0e8-402b-abf4-cc34e995ea58/IMGP7209.jpg', href: '/nature', cta: 'Pittsburgh', alt: 'A large, steel truss bridge spans over a body of water at sunset, with trees and buildings visible below and in the background.', categories: ['pittsburgh', 'nature'], focalPointMobile: { x: 0.6175632360483595, y: 0.464 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Portraits', meta: 'Portraits', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg', href: '/portraits', cta: 'Portraits', alt: 'A woman and a child holding a sparkler at night, with dark trees in the background.', categories: ['portraits'], focalPointMobile: { x: 0.3513058767534031, y: 0.48 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Corporate', meta: 'Corporate', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg', href: '/event', cta: 'Corporate', alt: 'Group of people at a professional networking event, talking and laughing, with a woman preparing drinks on a table.', categories: ['corporate', 'event'], focalPointMobile: { x: 0.8141660064306552, y: 0.528 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Event', meta: 'Event', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg', href: '/events', cta: 'Event', alt: 'Event image from Honky Tonk gathering.', categories: ['event'], focalPointMobile: { x: 0.750466239268814, y: 0.656 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Concert', meta: 'Concert', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/9c635526-663e-42ef-ba9c-7dcc8d477190/251025+When+We+Were+Dead_CAL8612_webuse.jpg', href: '/concert', cta: 'Concert', alt: 'A singer on stage on his knees with green and blue lighting.', categories: ['concert'], focalPointMobile: { x: 0.3828257120011642, y: 0.44 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Theatre', meta: 'Theatre', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/77807f5b-9895-4444-804d-1b3363d0f1b3/250319+A+Guy+Who+Hates+Musicals+-+Ghostlight_CAL999.jpg', href: '/event', cta: 'Theatre', alt: 'The cast from A Guy Who Hates Musicals together on stage.', categories: ['theatre', 'event'], focalPointMobile: { x: 0.5, y: 0.5 }, focalPointDesktop: { x: 0.5, y: 0.5 } },
+        { title: 'Nature', meta: 'Nature', image: 'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f96709e7-3a00-4574-af88-795f26ce432e/IMGP6886.jpg', href: '/nature', cta: 'Nature', alt: 'Close-up of a pink coneflower with a bee on the dark center cone, blurred green background.', categories: ['nature'], focalPointMobile: { x: 0.5, y: 0.5 }, focalPointDesktop: { x: 0.5, y: 0.5 } }
+      ];
+
+      const normalizeFocalPoint = (value) => {
+        if (!value || typeof value !== 'object') return null;
+        const x = Number(value.x);
+        const y = Number(value.y);
+        if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+        const clamp01 = (n) => Math.min(1, Math.max(0, n));
+        return { x: clamp01(x), y: clamp01(y) };
+      };
+
+      const focalPointToCss = (focalPoint) => {
+        const fp = normalizeFocalPoint(focalPoint);
+        if (!fp) return '50% 50%';
+        return `${(fp.x * 100).toFixed(6)}% ${(fp.y * 100).toFixed(6)}%`;
+      };
+
+      const escapeHtml = (value) =>
+        String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+
+      const sanitizeText = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
+
+      const buildAltText = (slide) => {
+        const rawAlt = sanitizeText(slide?.alt);
+        if (rawAlt) return rawAlt;
+        const title = sanitizeText(slide?.title || 'Featured image');
+        const meta = sanitizeText(slide?.meta);
+        return meta ? `${title} — ${meta} photography by ${seoSiteName}` : `${title} photography by ${seoSiteName}`;
+      };
+
+      const resolveResponsiveFocalPoint = (slide, isDesktopViewport) => {
+        const mobile = normalizeFocalPoint(slide?.focalPointMobile || slide?.focalPoint);
+        const desktop = normalizeFocalPoint(slide?.focalPointDesktop);
+        return isDesktopViewport ? desktop || mobile || { x: 0.5, y: 0.5 } : mobile || desktop || { x: 0.5, y: 0.5 };
+      };
+
+      const normalizeCategory = (value) => {
+        const key = String(value || '').trim().toLowerCase();
+        if (key === 'events') return 'event';
+        if (key === 'portrait') return 'portraits';
+        if (key === 'theater') return 'theatre';
+        return key;
+      };
+
+      const shuffle = (arr) => {
+        const out = [...arr];
+        for (let i = out.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [out[i], out[j]] = [out[j], out[i]];
+        }
+        return out;
+      };
+
+      const slideKey = (slide) => [String(slide?.title || '').toLowerCase(), String(slide?.href || '').toLowerCase(), String(slide?.image || '')].join('|');
+
+      const uniqueSlides = (slides) => {
+        const seen = new Set();
+        const out = [];
+        (Array.isArray(slides) ? slides : []).forEach((slide) => {
+          if (!slide || !slide.image) return;
+          const key = slideKey(slide);
+          if (seen.has(key)) return;
+          seen.add(key);
+          out.push(slide);
+        });
+        return out;
+      };
+
+      const tokenize = (...values) => values.flat().map((v) => String(v || '').toLowerCase()).join(' ').replace(/[^a-z0-9\s-]/g, ' ').split(/\s+/).filter(Boolean);
+
+      const categoryMatch = (slide, slot) => {
+        const slotKey = normalizeCategory(slot);
+        const aliases = SLOT_ALIASES[slotKey] || [slotKey];
+        const categoryValues = Array.isArray(slide?.categories) ? slide.categories : [];
+        const categoryTokens = tokenize(categoryValues.join(' '));
+        return aliases.some((alias) => categoryTokens.some((token) => token.includes(alias)));
+      };
+
+      const dateValue = (item) => item?.date?.iso || item?.dateISO || item?.concertDate?.iso || item?.generated || '';
+
+      const pickImagePath = (item) => {
+        if (!item) return '';
+        if (typeof item.coverImage === 'string' && item.coverImage) {
+          if (/^https?:\/\//i.test(item.coverImage)) return item.coverImage;
+          if (item.relativeFolderPath) return `src/images/Portfolios/${item.relativeFolderPath}/${item.coverImage}`;
+          if (item.folderPath) return `src/images/Portfolios/${item.folderPath}/${item.coverImage}`;
+          return item.coverImage;
+        }
+        if (item.coverImage && typeof item.coverImage.path === 'string') return item.coverImage.path;
+        const firstImage = Array.isArray(item.images) ? item.images[0] : '';
+        if (typeof firstImage === 'string') {
+          if (/^https?:\/\//i.test(firstImage)) return firstImage;
+          if (item.relativeFolderPath) return `src/images/Portfolios/${item.relativeFolderPath}/${firstImage}`;
+          if (item.folderPath) return `src/images/Portfolios/${item.folderPath}/${firstImage}`;
+          return firstImage;
+        }
+        if (firstImage && typeof firstImage.path === 'string') return firstImage.path;
+        return '';
+      };
+
+      const toAbsoluteImageUrl = (path) => {
+        if (!path) return '';
+        if (/^https?:\/\//i.test(path)) return path;
+        const clean = String(path).replace(/^\/+/, '');
+        return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/${encodeURI(clean)}`;
+      };
+
+      const inferCategories = (item, title, typeKey) => {
+        const baseTokens = tokenize(typeKey, item?.type, item?.category, item?.title, item?.name, item?.eventName, item?.bandName, title, item?.folderPath, item?.relativeFolderPath, Array.isArray(item?.tags) ? item.tags.join(' ') : '');
+        const categories = Object.keys(SLOT_ALIASES).filter((slot) => {
+          const aliases = SLOT_ALIASES[slot] || [];
+          return aliases.some((alias) => baseTokens.some((t) => t.includes(alias)));
+        });
+        const fallback = normalizeCategory(typeKey);
+        if (!categories.length && fallback) categories.push(fallback);
+        return Array.from(new Set(categories.map(normalizeCategory))).filter(Boolean);
+      };
+
+      const toDynamicSlide = (item) => {
+        const typeKey = normalizeCategory(item?.type);
+        const title = item?.title || item?.name || item?.eventName || item?.bandName || 'Featured Work';
+        const categories = inferCategories(item, title, typeKey);
+        const primaryCategory = categories[0] || typeKey || 'featured';
+        const cfg = SLOT_CONFIG[primaryCategory] || SLOT_CONFIG.featured;
+        const image = toAbsoluteImageUrl(pickImagePath(item));
+        const focalPoint = normalizeFocalPoint(item?.mediaFocalPoint || item?.image?.mediaFocalPoint || item?.coverImage?.mediaFocalPoint);
+        if (!image) return null;
+        return {
+          title,
+          meta: cfg.meta,
+          image,
+          href: cfg.href,
+          cta: cfg.cta,
+          alt: `${title} ${cfg.meta} photography`,
+          categories,
+          focalPointMobile: focalPoint,
+          focalPointDesktop: focalPoint
+        };
+      };
+
+      const takeFromPool = (pool, predicate) => {
+        if (!Array.isArray(pool) || !pool.length) return null;
+        const idx = typeof predicate === 'function' ? pool.findIndex(predicate) : 0;
+        if (idx < 0) return null;
+        const [item] = pool.splice(idx, 1);
+        return item || null;
+      };
+
+      const yieldToMain = async () => {
+        if (typeof scheduler !== 'undefined' && scheduler && typeof scheduler.yield === 'function') {
+          await scheduler.yield();
+          return;
+        }
+
+        await new Promise((resolve) => {
+          if (typeof requestAnimationFrame === 'function') {
+            requestAnimationFrame(() => setTimeout(resolve, 0));
+            return;
+          }
+          setTimeout(resolve, 0);
+        });
+      };
+
+      const buildDynamicSlidesChunked = async (items) => {
+        const sorted = (Array.isArray(items) ? items : [])
+          .slice()
+          .sort((a, b) => String(dateValue(b)).localeCompare(String(dateValue(a))));
+
+        const out = [];
+        const chunkSize = 24;
+
+        for (let i = 0; i < sorted.length; i++) {
+          const slide = toDynamicSlide(sorted[i]);
+          if (slide) out.push(slide);
+          if ((i + 1) % chunkSize === 0) await yieldToMain();
+        }
+
+        return out;
+      };
+
+      const buildFromMode = (dynamicSlides) => {
+        const favoritesPool = uniqueSlides(shuffle(FAVORITES));
+        const dynamicPool = uniqueSlides(shuffle(dynamicSlides));
+        const selected = [];
+
+        const pickFavorite = () => takeFromPool(favoritesPool);
+        const pickDynamic = () => takeFromPool(dynamicPool);
+        const pickFavoriteByCategory = (slot) => takeFromPool(favoritesPool, (s) => categoryMatch(s, slot));
+        const pickDynamicByCategory = (slot) => takeFromPool(dynamicPool, (s) => categoryMatch(s, slot));
+
+        const pickForSlot = (slotRaw) => {
+          const slot = normalizeCategory(slotRaw);
+
+          const overrideMode = slotModeOverrides[slot] || null;
+          if (overrideMode === 'favorite') return pickFavoriteByCategory(slot) || pickFavorite() || pickDynamicByCategory(slot) || pickDynamic();
+          if (overrideMode === 'dynamic') return pickDynamicByCategory(slot) || pickDynamic() || pickFavoriteByCategory(slot) || pickFavorite();
+          if (overrideMode === 'hybrid')
+            return pickFavoriteByCategory(slot) || pickDynamicByCategory(slot) || pickDynamic() || pickFavorite();
+
+          if (slot === 'favorite') return pickFavorite() || pickDynamic();
+          if (slot === 'dynamic') return pickDynamic() || pickFavorite();
+          if (sourceMode === 'favorites') return pickFavoriteByCategory(slot) || pickFavorite();
+          if (sourceMode === 'dynamic') return pickDynamicByCategory(slot) || pickDynamic();
+          return pickFavoriteByCategory(slot) || pickDynamicByCategory(slot) || pickDynamic() || pickFavorite();
+        };
+
+        if (slidePlan.length) {
+          slidePlan.forEach((slot) => {
+            if (selected.length >= maxSlides) return;
+            const pick = pickForSlot(slot);
+            if (pick) selected.push(pick);
+          });
+        }
+
+        while (selected.length < maxSlides) {
+          const pick = sourceMode === 'favorites' ? pickFavorite() : sourceMode === 'dynamic' ? pickDynamic() : pickDynamic() || pickFavorite();
+          if (!pick) break;
+          selected.push(pick);
+        }
+
+        return selected.slice(0, maxSlides);
+      };
+
+      const renderSlides = (slides) => {
+        track.innerHTML = slides
+          .map((slide, index) => `
+            <figure class="mcc-hero__slide" data-slide-index="${index}" aria-label="Slide ${index + 1}: ${escapeHtml(sanitizeText(slide.title || slide.meta || 'Featured Work'))}">
+              <img
+                src="${escapeHtml(slide.image)}"
+                alt="${escapeHtml(buildAltText(slide))}"
+                data-focal-mobile="${focalPointToCss(slide.focalPointMobile || slide.focalPoint)}"
+                data-focal-desktop="${focalPointToCss(slide.focalPointDesktop || slide.focalPointMobile || slide.focalPoint)}"
+                style="object-position:${focalPointToCss(resolveResponsiveFocalPoint(slide, window.innerWidth >= desktopBreakpoint))};"
+                loading="${index === 0 ? 'eager' : 'lazy'}"
+                decoding="async"
+                ${index === 0 ? 'fetchpriority="high"' : ''}
+              />
+              <figcaption class="mcc-hero__caption">
+                <h2 class="mcc-hero__title">${escapeHtml(sanitizeText(slide.title))}</h2>
+                <p class="mcc-hero__meta">${escapeHtml(sanitizeText(slide.meta || ''))}</p>
+                <a class="mcc-hero__cta" href="${escapeHtml(slide.href)}" aria-label="View ${escapeHtml(sanitizeText(slide.title || slide.cta || 'featured work'))}">${escapeHtml(sanitizeText(slide.cta || 'Explore'))}</a>
+              </figcaption>
+            </figure>
+          `)
+          .join('');
+
+        dotsWrap.innerHTML = slides
+          .map((_, idx) => `<button class="mcc-hero__dot${idx === 0 ? ' is-active' : ''}" data-mcc-dot="${idx}" aria-label="Go to slide ${idx + 1}"></button>`)
+          .join('');
+      };
+
+      const injectStructuredData = (slides) => {
+        if (!Array.isArray(slides) || !slides.length) return;
+
+        const oldScript = root.querySelector('script[data-mcc-hero-seo="jsonld"]');
+        if (oldScript) oldScript.remove();
+
+        const listItems = slides.map((slide, idx) => {
+          const absoluteHref = (() => {
+            try {
+              return new URL(slide.href || '/', seoPageUrl).toString();
+            } catch {
+              return seoPageUrl;
+            }
+          })();
+
+          return {
+            '@type': 'ListItem',
+            position: idx + 1,
+            item: {
+              '@type': 'ImageObject',
+              name: sanitizeText(slide.title || slide.meta || `Slide ${idx + 1}`),
+              contentUrl: slide.image,
+              url: absoluteHref,
+              caption: buildAltText(slide)
+            }
+          };
+        });
+
+        const data = {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: `${seoSiteName} Hero Slideshow`,
+          itemListElement: listItems
+        };
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.setAttribute('data-mcc-hero-seo', 'jsonld');
+        script.textContent = JSON.stringify(data);
+        root.appendChild(script);
+      };
+
+      const applyResponsiveFocalPoints = () => {
+        const isDesktopViewport = window.innerWidth >= desktopBreakpoint;
+        const images = track.querySelectorAll('.mcc-hero__slide img');
+        images.forEach((img) => {
+          const mobileCss = img.getAttribute('data-focal-mobile') || '50% 50%';
+          const desktopCss = img.getAttribute('data-focal-desktop') || mobileCss;
+          img.style.objectPosition = isDesktopViewport ? desktopCss : mobileCss;
+        });
+      };
+
+      const initSlider = (slides) => {
+        if (!slides.length) return;
+
+        let index = 0;
+        let autoplay = null;
+        let dragging = false;
+        let startX = 0;
+        let deltaX = 0;
+        let viewportWidth = viewport.getBoundingClientRect().width || window.innerWidth;
+
+        const updateDots = () => {
+          const dots = dotsWrap.querySelectorAll('[data-mcc-dot]');
+          dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
+        };
+
+        const setTrackX = (x, withTransition) => {
+          track.style.transition = withTransition ? 'transform 0.5s ease' : 'none';
+          track.style.transform = `translate3d(${x}px,0,0)`;
+        };
+
+        const goTo = (nextIndex, withTransition = true) => {
+          const total = slides.length;
+          index = ((nextIndex % total) + total) % total;
+          const x = -index * viewportWidth;
+          setTrackX(x, withTransition);
+          updateDots();
+        };
+
+        const next = () => goTo(index + 1);
+        const prev = () => goTo(index - 1);
+
+        const stopAutoplay = () => {
+          if (autoplay) {
+            clearInterval(autoplay);
+            autoplay = null;
+          }
+        };
+
+        const startAutoplay = () => {
+          stopAutoplay();
+          autoplay = setInterval(next, slideDuration * 1000);
+        };
+
+        const onPointerDown = (e) => {
+          dragging = true;
+          viewport.classList.add('is-dragging');
+          startX = e.clientX;
+          deltaX = 0;
+          viewportWidth = viewport.getBoundingClientRect().width || window.innerWidth;
+          stopAutoplay();
+          viewport.setPointerCapture?.(e.pointerId);
+        };
+
+        const onPointerMove = (e) => {
+          if (!dragging) return;
+          deltaX = e.clientX - startX;
+        };
+
+        const onPointerUp = (e) => {
+          if (!dragging) return;
+          dragging = false;
+          viewport.classList.remove('is-dragging');
+          viewport.releasePointerCapture?.(e.pointerId);
+
+          const threshold = Math.max(48, viewportWidth * 0.1);
+          if (Math.abs(deltaX) > threshold) {
+            if (deltaX < 0) next();
+            else prev();
+          } else {
+            goTo(index, true);
+          }
+          startAutoplay();
+        };
+
+        prevBtn.addEventListener('click', () => {
+          prev();
+          startAutoplay();
+        });
+
+        nextBtn.addEventListener('click', () => {
+          next();
+          startAutoplay();
+        });
+
+        dotsWrap.addEventListener('click', (e) => {
+          const btn = e.target.closest('[data-mcc-dot]');
+          if (!btn) return;
+          const target = parseInt(btn.getAttribute('data-mcc-dot') || '0', 10);
+          goTo(target);
+          startAutoplay();
+        });
+
+        viewport.addEventListener('pointerdown', onPointerDown);
+        viewport.addEventListener('pointermove', onPointerMove);
+        viewport.addEventListener('pointerup', onPointerUp);
+        viewport.addEventListener('pointercancel', onPointerUp);
+
+        window.addEventListener('resize', () => {
+          syncViewportHeight();
+          viewportWidth = viewport.getBoundingClientRect().width || window.innerWidth;
+          applyResponsiveFocalPoints();
+          goTo(index, false);
+        });
+
+        root.addEventListener('mouseenter', stopAutoplay);
+        root.addEventListener('mouseleave', startAutoplay);
+
+        goTo(0, false);
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) startAutoplay();
+      };
+
+      const reRenderPreserveIndex = (slides, currentIndex) => {
+        const safe = Array.isArray(slides) && slides.length ? slides : uniqueSlides(FAVORITES).slice(0, maxSlides);
+        renderSlides(safe);
+        applyResponsiveFocalPoints();
+
+        const total = safe.length;
+        const nextIndex = total ? ((currentIndex % total) + total) % total : 0;
+        const targetDot = dotsWrap.querySelector(`[data-mcc-dot="${nextIndex}"]`);
+        if (targetDot) targetDot.click();
+      };
+
+      const init = async () => {
+        forceFullBleedHost();
+        syncViewportHeight();
+
+        try {
+          // Fast first paint: render immediately from favorites (with slot fallback behavior).
+          const initialSlides = buildFromMode([]);
+          const safeInitial = initialSlides.length ? initialSlides : uniqueSlides(FAVORITES).slice(0, maxSlides);
+          renderSlides(safeInitial);
+          injectStructuredData(safeInitial);
+          applyResponsiveFocalPoints();
+          initSlider(safeInitial);
+
+          // Progressive enhancement: hydrate with dynamic data after first paint.
+          if (sourceMode !== 'favorites' || needsDynamicByOverride) {
+            await yieldToMain();
+            const res = await fetch(manifestUrl, { mode: 'cors' });
+            if (!res.ok) return;
+
+            const data = await res.json();
+            const items = Array.isArray(data?.items) ? data.items : [];
+            const dynamicSlides = await buildDynamicSlidesChunked(items);
+
+            const hydrated = buildFromMode(dynamicSlides);
+            if (!hydrated.length) return;
+
+            // Preserve approximate user position when swapping in hydrated slides.
+            const activeDot = dotsWrap.querySelector('.mcc-hero__dot.is-active');
+            const currentIndex = activeDot ? parseInt(activeDot.getAttribute('data-mcc-dot') || '0', 10) : 0;
+
+            reRenderPreserveIndex(hydrated, Number.isFinite(currentIndex) ? currentIndex : 0);
+            injectStructuredData(hydrated);
+          }
+        } catch (error) {
+          const fallback = uniqueSlides(FAVORITES).slice(0, maxSlides);
+          renderSlides(fallback);
+          injectStructuredData(fallback);
+          applyResponsiveFocalPoints();
+          initSlider(fallback);
+        }
+      };
+
+      init();
+    })();
+  </script>
+</div>
+<!-- /McCal Hero Carousel -->

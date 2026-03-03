@@ -593,6 +593,7 @@
   (function () {
     const nav = document.getElementById('mcc-main-nav');
     if (!nav) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // 1. Hide default Squarespace elements
     const killHeaders = () => {
@@ -610,12 +611,25 @@
     const handleScroll = () => {
       nav.classList.toggle('is-scrolled', window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    let scrollTicking = false;
+    const onScroll = () => {
+      if (prefersReducedMotion) {
+        handleScroll();
+        return;
+      }
+      if (scrollTicking) return;
+      scrollTicking = true;
+      window.requestAnimationFrame(() => {
+        handleScroll();
+        scrollTicking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
     handleScroll();
 
     // 3. Mobile Navigation & Submenu Engine
     const toggle = nav.querySelector('.mcc-nav__toggle');
-    const links = nav.querySelectorAll('.mcc-nav__links a');
+    const navMenu = nav.querySelector('.mcc-nav__menu');
     const submenuWrappers = nav.querySelectorAll('.mcc-nav__link--has-submenu');
 
     if (toggle) {
@@ -650,12 +664,13 @@
         });
     });
 
-    links.forEach((link) => {
-      link.addEventListener('click', () => {
+    if (navMenu) {
+      navMenu.addEventListener('click', (event) => {
+        if (!event.target.closest('a')) return;
         nav.classList.remove('mcc-nav--menu-open');
         if (toggle) toggle.setAttribute('aria-expanded', 'false');
       });
-    });
+    }
 
     // 4. Path Highlighting
     const highlight = () => {
@@ -678,6 +693,10 @@
       document.documentElement.style.setProperty('--mcc-nav-height', nav.offsetHeight + 'px');
     };
     updateHeight();
-    window.addEventListener('resize', updateHeight);
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(updateHeight, 120);
+    });
   })();
 </script>

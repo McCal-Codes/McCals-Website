@@ -72,36 +72,38 @@ for (const wf of wfFiles) {
   }
 
   const isCompositeOnly = /uses:\s*\.\/\.github\/workflows\//.test(txt);
+  const usesSetupNodeWorkspace = /uses:\s*\.\/\.github\/actions\/setup-node-workspace/m.test(txt);
+  const hasNodeWork = /uses:\s*actions\/setup-node@|\bnpm\s+(ci|install|run)\b|\bnpx\b|\bnode\s+scripts\//m.test(txt);
 
   // Consider cache present if actions/cache is used OR setup-node with cache: npm is present
   const hasActionsCache = /uses:\s*actions\/cache@/m.test(txt);
   const hasSetupNodeCache = /setup-node@[^\n]*[\s\S]*?cache\s*:\s*['"]?npm['"]?/m.test(txt);
-  if (!(hasActionsCache || hasSetupNodeCache) && !isCompositeOnly) {
+  if (hasNodeWork && !(hasActionsCache || hasSetupNodeCache || usesSetupNodeWorkspace) && !isCompositeOnly) {
     cacheMissing.push(wf);
   }
 
-  if (!/uses:\s*actions\/checkout/.test(txt) && !isCompositeOnly) {
+  if (!/uses:\s*actions\/checkout/.test(txt) && !usesSetupNodeWorkspace && !isCompositeOnly) {
     checkoutMissing.push(wf);
   }
 }
 
 if (missingScripts.length === 0) {
-  console.log('✅ All workflow script references point to existing files. - ci-validate-workflows.js:87');
+  console.log('✅ All workflow script references point to existing files. - ci-validate-workflows.js:90');
 } else {
-  console.error('❌ Missing script references found in workflows: - ci-validate-workflows.js:89');
-  missingScripts.forEach(m => console.error(`${m.wf}: ${m.script} - ci-validate-workflows.js:90`));
+  console.error('❌ Missing script references found in workflows: - ci-validate-workflows.js:92');
+  missingScripts.forEach(m => console.error(`${m.wf}: ${m.script} - ci-validate-workflows.js:93`));
 }
 
 if (npmInstallFound.length > 0) {
-  console.warn('⚠️  Workflows using `npm install` found (prefer `npm ci`): - ci-validate-workflows.js:94', npmInstallFound.join(', '));
+  console.warn('⚠️  Workflows using `npm install` found (prefer `npm ci`): - ci-validate-workflows.js:97', npmInstallFound.join(', '));
 }
 
 if (cacheMissing.length > 0) {
-  console.warn('⚠️  Workflows missing caching step (consider caching npm or heavy assets): - ci-validate-workflows.js:98', cacheMissing.join(', '));
+  console.warn('⚠️  Workflows missing caching step (consider caching npm or heavy assets): - ci-validate-workflows.js:101', cacheMissing.join(', '));
 }
 
 if (checkoutMissing.length > 0) {
-  console.warn('⚠️  Workflows missing actions/checkout step: - ci-validate-workflows.js:102', checkoutMissing.join(', '));
+  console.warn('⚠️  Workflows missing actions/checkout step: - ci-validate-workflows.js:105', checkoutMissing.join(', '));
 }
 
 if (missingScripts.length > 0) process.exit(2);

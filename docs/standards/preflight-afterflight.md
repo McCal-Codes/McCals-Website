@@ -4,6 +4,8 @@
 
 To ensure all contributors follow a consistent process for validating, documenting, and maintaining workspace organization and script efficiency before and after making changes.
 
+> Note: `workspace-organization.md` is the canonical source for combined workspace/script standards; this file is a concise quick-reference checklist.
+
 ---
 
 ## Preflight Checklist (Before Making Changes)
@@ -29,4 +31,4 @@ To ensure all contributors follow a consistent process for validating, documenti
 - All standards and organization rules are in `docs/standards/`. Always fall back to these documents for guidance.
 - If in doubt, document your process and decisions for future maintainers.
 
-_Last updated: 2025-10-06_
+_Last updated: 2026-03-03_
