@@ -20,7 +20,7 @@ const exifParser = require('exif-parser');
 
 const ROOT = path.resolve(__dirname, '../..');
 const API_BASE = process.env.API_BASE || 'http://localhost:3001';
-const SITE_URL = process.env.SITE_URL || 'https://www.mcc-cal.com';
+const SITE_URL = process.env.SITE_URL || 'https://mccalmedia.com';
 const OUTPUT_DIR = path.join(ROOT, 'dist/structured-data');
 
 const PORTFOLIOS = ['concert', 'events', 'journalism', 'portrait'];
@@ -50,13 +50,6 @@ const PORTFOLIO_WIDGETS = {
   events: 'event-portfolio',
   journalism: 'photojournalism-portfolio',
   portrait: 'portrait-portfolio'
-};
-
-const PORTFOLIO_PATHS = {
-  concert: '/concert',
-  events: '/event',
-  journalism: '/journalism',
-  portrait: '/portraits'
 };
 
 function parseArgs(argv) {
@@ -307,7 +300,7 @@ async function generateSchema(type, options = {}) {
 
   const { items, totalImages, generated } = normalized;
   const entityLabel = type === 'concert' ? 'bands' : type === 'events' ? 'events' : type === 'journalism' ? 'stories' : 'collections';
-  const pageUrl = `${SITE_URL}${PORTFOLIO_PATHS[type] || `/${type}`}`;
+  const pageUrl = `${SITE_URL}/${type}`;
   const pageId = `${pageUrl}#page`;
   const galleryId = `${pageUrl}#gallery`;
   const breadcrumbId = `${pageUrl}#breadcrumbs`;

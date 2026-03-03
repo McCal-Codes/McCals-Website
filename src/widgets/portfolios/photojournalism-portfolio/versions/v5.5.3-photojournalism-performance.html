@@ -1183,10 +1183,6 @@ Configuration (data-* attributes on #journalismPf):
       const loadMoreRemaining = document.getElementById('loadMoreRemaining');
       const copyToast = document.getElementById('copyToast');
 
-      if (!portfolio || !grid || !loading || !filterBar) {
-        return;
-      }
-
       // Respect data-* overrides
       if (portfolio) {
         if (portfolio.dataset.panes) CONFIG.panes = parseInt(portfolio.dataset.panes, 10) || 12;

@@ -16,12 +16,20 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Setup workspace
-        uses: ./.github/actions/setup-node-workspace
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          fetch-depth: '0'
-          use-lfs: 'false'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Run Git Hygiene Agent
         id: git-hygiene
@@ -30,7 +38,7 @@ jobs:
           echo "## Git Hygiene Report" > git-hygiene-report.txt
           echo "" >> git-hygiene-report.txt
           echo '```' >> git-hygiene-report.txt
-          bash docs/agents/git-hygiene.sh >> git-hygiene-report.txt 2>&1 || echo "Exit code: $?"
+          bash scripts/agents/git-hygiene.sh >> git-hygiene-report.txt 2>&1 || echo "Exit code: $?"
           echo '```' >> git-hygiene-report.txt
 
       - name: Run Reorganizing Agent
@@ -40,7 +48,7 @@ jobs:
           echo "## Workspace Organization Report" > reorganize-report.txt
           echo "" >> reorganize-report.txt
           echo '```' >> reorganize-report.txt
-          bash docs/agents/reorganize-check.sh >> reorganize-report.txt 2>&1 || echo "Exit code: $?"
+          bash scripts/agents/reorganize-check.sh >> reorganize-report.txt 2>&1 || echo "Exit code: $?"
           echo '```' >> reorganize-report.txt
 
       - name: Prepare PR Comment

@@ -7,11 +7,8 @@ Guidelines, conventions, and best practices for the McCal Media workspace.
 - [Widget Development Standards](#widget-development-standards)
 - [Repository Standards](#repository-standards)
 - [SEO Standards](#seo-standards)
-- [Governance & Documentation Standards](#governance--documentation-standards)
-- [Security & Audit Standards](#security--audit-standards)
 - [Troubleshooting & Debugging](#troubleshooting--debugging)
 - [UI Patterns & Enhancements](#ui-patterns--enhancements)
-- [Legacy & Historical References](#legacy--historical-references)
 - [Quick Start Guide](#quick-start-guide)
 - [Development Workflow](#development-workflow)
 
@@ -46,22 +43,6 @@ Semantic versioning guidelines for widgets, manifests, and repository components
 
 ---
 
-## Governance & Documentation Standards
-
-### 🧭 [code-annotations.md](./code-annotations.md)
-Canonical annotation tags (`TODO`, `FIXME`, `BUG`, `A11Y`, etc.) and usage conventions for discoverability and maintenance.
-
-### 📝 [widget-changelog-standard.md](./widget-changelog-standard.md)
-Required structure and quality bar for widget changelog entries.
-
-### 🔢 [version-standardization-guide.md](./version-standardization-guide.md)
-Operational guide for enforcing semantic version naming consistency.
-
-### 📚 [version-standardization-lessons.md](./version-standardization-lessons.md)
-Implementation lessons learned and safeguards for future bulk versioning updates.
-
----
-
 ## SEO Standards
 
 ### 🖼️ [image-seo-standards.md](./image-seo-standards.md)
@@ -72,22 +53,6 @@ Practical starter guide tailored for Squarespace implementation in this workspac
 
 ### 🧪 [seo-testing-guide.md](./seo-testing-guide.md)
 How to validate SEO with checklists, tools, and repeatable workflows.
-
-### 🧮 [squarespace-homepage-performance-matrix.md](./squarespace-homepage-performance-matrix.md)
-Reference matrix for homepage performance tradeoffs and implementation decisions.
-
----
-
-## Security & Audit Standards
-
-### 🔐 [security-organization-checklist.md](./security-organization-checklist.md)
-Checklist for organizing security workstreams, review cadence, and ownership.
-
-### 🛡️ [security-organization-prompt.md](./security-organization-prompt.md)
-Prompting template and guardrails for structured security review sessions.
-
-### 🌙 [dark-mode-audit.md](./dark-mode-audit.md)
-Audit guidance and findings format for dark-mode compliance and contrast quality.
 
 ---
 
@@ -108,13 +73,6 @@ Catalog of proven enhancement patterns to apply systematically across widgets.
 
 ### 🔧 [widget-enhancements.md](./widget-enhancements.md)
 Change-oriented enhancements and guidance for improving existing widgets.
-
----
-
-## Legacy & Historical References
-
-### 🗃️ [archive/widget-enhancements.md](./archive/widget-enhancements.md)
-Archived reference copy of historical widget enhancement guidance.
 
 ---
 ## Quick Start Guide

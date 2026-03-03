@@ -11,8 +11,8 @@ Translucent navigation bar for Squarespace that replaces the stock header with a
 
 ### Active Versions (≤2 Policy)
 The following versions are maintained in `versions/`:
-- **v2.0.5** (Current): v2.0.4 baseline + keyboard/outside-click hardening + crawl-friendly Work link
-- **v2.0.4** (Previous Stable): Strict monochrome + runtime-optimized navigation for Squarespace
+- **v1.7.1** (Current): Site navigation with mobile drawer, focus states, version badge
+- **v1.7.0** (Previous Stable): Performance-optimized baseline
 
 ### Legacy Versions (Archived)
 Versions v1.6.3 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
@@ -21,7 +21,7 @@ Versions v1.6.3 and earlier have been archived to maintain repository organizati
 - **Archived Versions**: v1.0.0 through v1.6.3 (5 versions)
 
 ## Usage
-1. Copy the latest file from `versions/` (current: `v2.0.5-site-navigation.html`).
+1. Copy the latest file from `versions/` (current: `v1.7.1-site-navigation.html`).
 2. Paste into a Code Block or site-wide Code Injection near the top of the page.
 3. Update link text/URLs or add additional `<li>` items as needed. Adjust `data-match` patterns for custom routing.
 4. Before editing for future releases, duplicate the current version file, rename it with the next semantic version, then change the contents.

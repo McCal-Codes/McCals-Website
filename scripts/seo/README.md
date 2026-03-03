@@ -25,26 +25,26 @@ node scripts/seo/generate-sitemap.js
 
 **Environment Variables**:
 - `API_BASE` - API server URL (default: `http://localhost:3001`)
-- `SITE_URL` - Production site URL (default: `https://www.mcc-cal.com`)
+- `SITE_URL` - Production site URL (default: `https://mccalmedia.com`)
 
 **Output**: `dist/sitemap.xml`
 
 **What it does**:
 1. Fetches all portfolio manifests from API
 2. Generates static page entries (home, about, portfolios)
-3. Generates indexable page entries mapped to live Squarespace routes
-4. Includes sampled image entries per portfolio page
+3. Generates individual item entries (bands, events, etc.)
+4. Includes image entries with metadata for each item
 5. Writes XML with proper structure and validation
 
 **Example output**:
 ```xml
 <url>
-  <loc>https://www.mcc-cal.com/concert</loc>
+  <loc>https://mccalmedia.com/concerts/funky-lamp</loc>
   <lastmod>2024-01-15</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
   <image:image>
-    <image:loc>https://www.mcc-cal.com/images/Portfolios/Concert/Funky%20Lamp/January%202024/240115_001.jpg</image:loc>
+    <image:loc>https://mccalmedia.com/images/Portfolios/Concert/Funky%20Lamp/January%202024/240115_001.jpg</image:loc>
     <image:title>Funky Lamp - January 15, 2024</image:title>
     <image:caption>Mr. Smalls Theatre</image:caption>
   </image:image>
@@ -67,7 +67,7 @@ node scripts/seo/generate-structured-data.js
 
 **Environment Variables**:
 - `API_BASE` - API server URL (default: `http://localhost:3001`)
-- `SITE_URL` - Production site URL (default: `https://www.mcc-cal.com`)
+- `SITE_URL` - Production site URL (default: `https://mccalmedia.com`)
 
 **Output**: `dist/structured-data/*.json`
 
@@ -92,7 +92,7 @@ node scripts/seo/generate-structured-data.js
   "@type": "ImageGallery",
   "name": "Concert Photography Portfolio",
   "description": "Professional concert photography by Caleb McCartney...",
-  "url": "https://www.mcc-cal.com/concert",
+  "url": "https://mccalmedia.com/concerts",
   "image": ["https://...", "https://..."],
   "author": {
     "@type": "Person",
@@ -192,13 +192,6 @@ find dist/structured-data -name '*.json' | wc -l
 # Paste contents of dist/structured-data/concert-schema.json
 ```
 
-### Combined SEO Asset Validation
-
-```bash
-# Validates sitemap + structured data files and checks canonical domain consistency
-npm run seo:validate
-```
-
 ---
 
 ## Integration
@@ -208,7 +201,7 @@ npm run seo:validate
 **Google Search Console**:
 ```bash
 # Manual ping
-curl "https://www.google.com/ping?sitemap=https://www.mcc-cal.com/sitemap.xml"
+curl "https://www.google.com/ping?sitemap=https://mccalmedia.com/sitemap.xml"
 ```
 
 **Bing Webmaster Tools**:
@@ -216,21 +209,7 @@ curl "https://www.google.com/ping?sitemap=https://www.mcc-cal.com/sitemap.xml"
 # Requires API key
 curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"siteUrl":"https://www.mcc-cal.com","urlList":["https://www.mcc-cal.com/sitemap.xml"]}'
-
-### Search Console issue triage
-
-Use the live health auditor to quickly map Search Console buckets (404/canonical/noindex):
-
-```bash
-npm run seo:audit
-```
-
-This checks each URL in `https://www.mcc-cal.com/sitemap.xml` and reports:
-- `Not found (404)` candidates
-- `Alternate page with proper canonical` candidates
-- Redirected URLs currently in sitemap
-- `noindex` URLs accidentally present in sitemap
+  -d '{"siteUrl":"https://mccalmedia.com","urlList":["https://mccalmedia.com/sitemap.xml"]}'
 ```
 
 ### Using in Widgets

@@ -139,7 +139,7 @@ Controls which domains can call your Worker endpoints:
 CORS_ORIGINS=http://localhost:3000,http://localhost:3001,http://localhost:5173
 
 # Production (add both Squarespace domain and any other frontends)
-CORS_ORIGINS=https://mcc-cal.com,https://*.mcc-cal.com,http://localhost:3000
+CORS_ORIGINS=https://mccal.com,https://*.mccal.com,http://localhost:3000
 ```
 
 ---
@@ -203,7 +203,7 @@ In your Cloudflare account/CI/CD system, set environment variables:
 | WEBHOOK_SECRET | Strong random hex string (32+ chars) | `openssl rand -hex 32` |
 | BLOG_AUTHORS | JSON array of author objects | See format above |
 | MANIFEST_BASE_URL | Your Worker URL | `https://my-worker.workers.dev` |
-| CORS_ORIGINS | Your domain + dev URLs | `https://mcc-cal.com,http://localhost:3000` |
+| CORS_ORIGINS | Your domain + dev URLs | `https://mccal.com,http://localhost:3000` |
 
 ### Step 2: Deploy Worker
 

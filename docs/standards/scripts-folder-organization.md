@@ -1,8 +1,9 @@
+
 # Scripts Folder Organization and Archival — Standardization
 
-> Note: `workspace-organization.md` is the canonical combined standard; this document remains a focused scripts-only reference.
 
 ## Overview
+
 
 ## Standards Statement
 
@@ -37,7 +38,6 @@ This document describes the required structure, archival policy, and efficiency 
 
 - Always keep the scripts folder clean and efficient to avoid confusion
 - Never leave scripts in the root folder unless absolutely necessary (and document why)
-- Legacy root scripts may remain temporarily if they are actively referenced (for example, via npm scripts); migration should be planned and documented.
 - Validate that all scripts referenced by npm scripts are working after any move or reorganization
 
 ## Documentation
@@ -46,4 +46,4 @@ This document describes the required structure, archival policy, and efficiency 
 
 ---
 
-_Last updated: 2026-03-03_
+_Last updated: 2025-10-06_

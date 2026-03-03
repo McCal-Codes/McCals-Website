@@ -1,4 +1,4 @@
-# Workspace Organization, Validation & Scripts — Standardization
+#
 
 ## See Also
 
@@ -8,6 +8,8 @@
 - [widget-development.md](./widget-development.md)
 - [versioning.md](./versioning.md)
 - [date-naming.md](./date-naming.md)
+
+# Workspace Organization, Validation & Scripts — Standardization
 
 **Quick links:** [Onboarding](../ONBOARDING.md) · [Widget reference](./widget-reference.md) · [Widget standards](./widget-standards.md) · [Performance standards](./performance-standards.md) · [Image SEO](./image-seo-standards.md)
 
@@ -46,7 +48,6 @@ This document combines all standards for scripts folder organization, workspace 
 
 - Always keep the scripts folder clean and efficient to avoid confusion
 - Never leave scripts in the root folder unless absolutely necessary (and document why)
-- Legacy root scripts may remain while migration is in progress if they are actively referenced and documented.
 - Validate that all scripts referenced by npm scripts are working after any move or reorganization
 
 ---
@@ -128,13 +129,11 @@ Reorganization Phase 1 established a standardized approach for handling historic
 - Active versions should expose a version badge with `data-active="true"`; archived files omit the attribute (enables future CI validation).
 - Widget README files list only active versions and link to the archive index for history.
 
-Current CI enforcement (summary):
+Planned CI additions:
 
-1. Active version policy checks via widget version policy workflows.
-2. Widget HTML validation through dedicated widget validation workflow.
-3. Manifest generation/validation coverage across portfolio workflows.
-
-If CI behavior changes, update this document and `.github/copilot-instructions.md` together.
+1. Enforce ≤2 active versions per widget.
+2. Validate newest version has a corresponding CHANGELOG entry.
+3. Warn if archived versions still reside in live directories after Phase 2 migration window.
 
 ## Composite Manifest Workflow (retired 2025-12)
 
@@ -148,4 +147,4 @@ Agents modifying manifest logic should continue to run local validation (`npm ru
 
 ---
 
-_Last updated: 2026-03-03_
+_Last updated: 2025-11-03_

@@ -564,13 +564,6 @@
       transform: translateY(0) scale(1);
     }
 
-    .mcc-back-to-top.is-near-footer {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      visibility: hidden !important;
-      transform: translateY(8px) scale(0.96) !important;
-    }
-
     .mcc-back-to-top:hover {
       background: rgba(255, 255, 255, 0.2);
       border-color: var(--mcc-footer-focus);
@@ -850,12 +843,24 @@
       const successMsg = document.querySelector('.mcc-footer__newsletter-success');
 
       if (form && submitBtn) {
-        form.addEventListener('submit', function () {
+        form.addEventListener('submit', function (e) {
           const email = form.querySelector('input[type="email"]');
           if (email && email.validity.valid) {
+            // Add loading state
             submitBtn.classList.add('loading');
-            submitBtn.setAttribute('aria-busy', 'true');
-            if (successMsg) successMsg.classList.add('show');
+            submitBtn.textContent = '';
+
+            // Show success message after delay (simulated)
+            setTimeout(() => {
+              submitBtn.classList.remove('loading');
+              submitBtn.textContent = 'Subscribe';
+              if (successMsg) {
+                successMsg.classList.add('show');
+                setTimeout(() => {
+                  successMsg.classList.remove('show');
+                }, 5000);
+              }
+            }, 1500);
           }
         });
       }
@@ -864,32 +869,13 @@
       const backToTopBtn = document.querySelector('.mcc-back-to-top');
       const progressCircle = document.querySelector('.mcc-back-to-top__circle-progress');
       const circumference = 163.36; // 2 * PI * 26
-      const footer = document.querySelector('.mcc-footer');
 
       if (backToTopBtn && progressCircle) {
-        let isNearFooter = false;
-        let isTicking = false;
-
-        if ('IntersectionObserver' in window && footer) {
-          const footerObserver = new IntersectionObserver(
-            (entries) => {
-              isNearFooter = entries.some((entry) => entry.isIntersecting);
-              backToTopBtn.classList.toggle('is-near-footer', isNearFooter);
-            },
-            {
-              root: null,
-              rootMargin: '0px 0px -96px 0px',
-              threshold: 0,
-            }
-          );
-          footerObserver.observe(footer);
-        }
-
         // Update scroll progress
         function updateScrollProgress() {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
+          const scrollPercent = scrollTop / docHeight;
           const offset = circumference - scrollPercent * circumference;
 
           progressCircle.style.strokeDashoffset = offset;
@@ -901,18 +887,21 @@
             backToTopBtn.classList.remove('visible');
           }
 
-          if (!isNearFooter) {
-            backToTopBtn.classList.remove('is-near-footer');
-          }
-        }
+          // Hide when near footer to prevent overlap
+          const footer = document.querySelector('.mcc-footer');
+          if (footer) {
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const buffer = 100;
 
-        function onScroll() {
-          if (isTicking) return;
-          isTicking = true;
-          window.requestAnimationFrame(() => {
-            updateScrollProgress();
-            isTicking = false;
-          });
+            if (footerRect.top < windowHeight - buffer) {
+              backToTopBtn.style.opacity = '0';
+              backToTopBtn.style.pointerEvents = 'none';
+            } else if (backToTopBtn.classList.contains('visible')) {
+              backToTopBtn.style.opacity = '1';
+              backToTopBtn.style.pointerEvents = 'auto';
+            }
+          }
         }
 
         // Scroll to top with smooth animation
@@ -924,7 +913,7 @@
         }
 
         // Event listeners
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
         backToTopBtn.addEventListener('click', scrollToTop);
 
         // Keyboard support
@@ -942,10 +931,15 @@
       // Version click handler (placeholder for future changelog modal)
       const versionBtn = document.querySelector('.mcc-footer__version');
       if (versionBtn) {
+        versionBtn.addEventListener('click', function () {
+          console.log('Footer Widget v1.3.0 - Changelog coming soon!');
+          // TODO: Implement changelog modal
+        });
+
         versionBtn.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            this.blur();
+            this.click();
           }
         });
       }
