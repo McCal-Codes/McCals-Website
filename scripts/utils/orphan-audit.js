@@ -38,6 +38,24 @@ function workflowContents(){
     .map(f=>fs.readFileSync(path.join(workflowsDir,f),'utf8'));
 }
 
+function resolveLocalScriptImport(fromFile, relSpecifier) {
+  const base = path.resolve(path.dirname(fromFile), relSpecifier);
+  const candidates = [
+    base,
+    `${base}.js`,
+    path.join(base, 'index.js'),
+  ];
+
+  for (const candidate of candidates) {
+    if (!candidate.startsWith(scriptsDir)) continue;
+    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
+      return candidate;
+    }
+  }
+
+  return null;
+}
+
 const workflows = workflowContents();
 const workflowText = workflows.join('\n');
 
@@ -48,6 +66,29 @@ for(const body of packageScriptBodies){
   scriptFiles.forEach(f=>{ if(body.includes(path.basename(f))) referenced.add(f); });
 }
 scriptFiles.forEach(f=>{ if(workflowText.includes(path.basename(f))) referenced.add(f); });
+
+// Also treat local require/import usage inside scripts/** as a reference.
+const localRequireRe = /require\(\s*['"](\.{1,2}\/[^'"]+)['"]\s*\)/g;
+const localImportRe = /from\s+['"](\.{1,2}\/[^'"]+)['"]/g;
+
+for (const scriptFile of scriptFiles) {
+  let source = '';
+  try {
+    source = fs.readFileSync(scriptFile, 'utf8');
+  } catch {
+    continue;
+  }
+
+  const specs = [];
+  let m;
+  while ((m = localRequireRe.exec(source)) !== null) specs.push(m[1]);
+  while ((m = localImportRe.exec(source)) !== null) specs.push(m[1]);
+
+  for (const spec of specs) {
+    const resolved = resolveLocalScriptImport(scriptFile, spec);
+    if (resolved) referenced.add(resolved);
+  }
+}
 
 const orphans = scriptFiles.filter(f=>!referenced.has(f));
 
