@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-03-05T00:00:00.000Z",
+  "generatedBy": "bootstrap",
+  "source": {
+    "type": "manual-placeholder",
+    "repo": "McCal-Codes/McCals-Website"
+  },
+  "repos": [
+    {
+      "owner": "McCal-Codes",
+      "repo": "abridgd",
+      "private": true,
+      "htmlUrl": "https://github.com/McCal-Codes/abridgd",
+      "homepage": "",
+      "summary": "Private repository metadata placeholder. Run the export script or workflow to refresh with live values.",
+      "language": null,
+      "languages": [],
+      "topics": [],
+      "stats": {
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "watchers": 0,
+        "updatedAt": null,
+        "defaultBranch": "main"
+      }
+    }
+  ]
+}

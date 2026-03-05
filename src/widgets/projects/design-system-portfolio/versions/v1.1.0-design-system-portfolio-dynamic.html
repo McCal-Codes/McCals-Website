@@ -1,0 +1,1176 @@
+<!--
+Design System Portfolio Widget v1.1.0
+Author: Caleb McCartney / McCal-Codes
+Purpose: Non-photo engineering portfolio widget with live GitHub repo enrichment.
+-->
+
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  .dspw-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dspw-root * {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  .dspw-root,
+  .dspw-root * {
+    box-sizing: border-box;
+  }
+
+  .dspw-root {
+    --dspw-bg: #0b0c0f;
+    --dspw-panel: #151821;
+    --dspw-panel-2: #1c2130;
+    --dspw-text: #e7ebf4;
+    --dspw-muted: #a3afc7;
+    --dspw-line: #2a3144;
+    --dspw-accent: #8db8ff;
+    --dspw-accent-2: #c5d9ff;
+    --dspw-success: #8ce0c1;
+    --dspw-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    max-width: 1200px;
+    margin: 48px auto;
+    padding: 24px;
+    color: var(--dspw-text);
+    font-family: Inter, 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  }
+
+  .dspw-shell {
+    background: linear-gradient(180deg, rgba(141, 184, 255, 0.05), transparent 180px),
+      var(--dspw-bg);
+    border: 1px solid var(--dspw-line);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: var(--dspw-shadow);
+  }
+
+  .dspw-kicker {
+    margin: 0 0 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-title {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.12;
+    font-weight: 800;
+  }
+
+  .dspw-subtitle {
+    margin: 12px 0 0;
+    max-width: 800px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-metrics {
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .dspw-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--dspw-line);
+    background: rgba(197, 217, 255, 0.08);
+    color: var(--dspw-text);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .dspw-chip strong {
+    color: var(--dspw-success);
+  }
+
+  .dspw-section {
+    margin-top: 28px;
+  }
+
+  .dspw-section-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .dspw-filter,
+  .dspw-refresh {
+    appearance: none;
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-panel);
+    color: var(--dspw-text);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 140ms ease, transform 140ms ease, border-color 140ms ease;
+  }
+
+  .dspw-filter:hover,
+  .dspw-refresh:hover {
+    transform: translateY(-1px);
+    border-color: var(--dspw-accent);
+  }
+
+  .dspw-refresh[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+    transform: none;
+  }
+
+  .dspw-filter[aria-pressed='true'] {
+    background: color-mix(in srgb, var(--dspw-accent) 26%, var(--dspw-panel));
+    border-color: var(--dspw-accent);
+  }
+
+  .dspw-legend {
+    margin: 8px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-legend[data-state='ok'] {
+    color: var(--dspw-success);
+  }
+
+  .dspw-legend[data-state='warn'] {
+    color: #f7d48a;
+  }
+
+  .dspw-grid {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .dspw-card {
+    border: 1px solid var(--dspw-line);
+    border-radius: 14px;
+    padding: 14px;
+    background: linear-gradient(180deg, rgba(141, 184, 255, 0.04), transparent 80px),
+      var(--dspw-panel);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dspw-card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .dspw-card-title {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .dspw-card-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .dspw-card-track {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dspw-accent-2);
+    border: 1px solid var(--dspw-line);
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.03);
+    white-space: nowrap;
+  }
+
+  .dspw-card-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .dspw-card-link {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--dspw-line);
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 11px;
+    color: var(--dspw-accent-2);
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .dspw-card-link:hover,
+  .dspw-card-link:focus-visible {
+    border-color: var(--dspw-accent);
+    color: var(--dspw-text);
+  }
+
+  .dspw-p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-list {
+    margin: 6px 0 12px;
+    padding-left: 22px;
+    font-size: 13px;
+    line-height: 1.62;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-list li {
+    padding-left: 2px;
+  }
+
+  .dspw-list li + li {
+    margin-top: 8px;
+  }
+
+  .dspw-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .dspw-panel {
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-panel-2);
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  .dspw-arch {
+    margin: 0;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    color: #d7e4ff;
+  }
+
+  .dspw-timeline {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 6px;
+    color: var(--dspw-muted);
+    font-size: 13px;
+  }
+
+  .dspw-empty {
+    border: 1px dashed var(--dspw-line);
+    border-radius: 12px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--dspw-muted);
+    font-size: 14px;
+  }
+
+  .dspw-version-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(141, 184, 255, 0.4);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font: 600 10px/1 ui-monospace, monospace;
+    cursor: pointer;
+    z-index: 500;
+    transition: color 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .dspw-version-indicator:hover {
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 4, 8, 0.84);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483647;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .dspw-modal.active {
+    display: flex;
+  }
+
+  .dspw-modal-content {
+    width: min(640px, 100%);
+    max-height: 85vh;
+    overflow: auto;
+    border-radius: 12px;
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-bg);
+    box-shadow: var(--dspw-shadow);
+  }
+
+  .dspw-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--dspw-line);
+  }
+
+  .dspw-modal-title {
+    margin: 0;
+    font-size: 16px;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-modal-close {
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-panel);
+    color: var(--dspw-text);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+
+  .dspw-modal-body {
+    padding: 16px 18px;
+  }
+
+  .dspw-modal-version {
+    margin: 0 0 10px;
+    color: var(--dspw-accent-2);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  html.dspw-modal-open body {
+    overflow: hidden;
+  }
+
+  @media (max-width: 900px) {
+    .dspw-split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dspw-root {
+      padding: 16px;
+      margin: 24px auto;
+    }
+
+    .dspw-shell {
+      padding: 16px;
+      border-radius: 14px;
+    }
+
+    .dspw-version-indicator {
+      bottom: 14px;
+      right: 14px;
+      font-size: 9px;
+    }
+  }
+</style>
+
+<section
+  class="dspw-root"
+  id="designSystemPortfolioWidget"
+  data-widget-version="1.1.0"
+  data-default-track="all"
+  data-github-owner="McCal-Codes"
+  aria-label="Design system engineering portfolio"
+>
+  <div class="dspw-shell">
+    <p class="dspw-kicker">Engineering Portfolio • Design Systems</p>
+    <h2 class="dspw-title" id="dspwHeading">Design Systems Engineering Portfolio</h2>
+    <p class="dspw-subtitle" id="dspwSubtitle">
+      Building scalable UI systems with evidence-driven decisions across tokens, components,
+      governance, and delivery workflows.
+    </p>
+
+    <ul class="dspw-metrics" id="dspwMetricChips" aria-label="Portfolio highlights"></ul>
+
+    <section class="dspw-section" aria-labelledby="dspwProjectsTitle">
+      <h3 class="dspw-section-title" id="dspwProjectsTitle">Core engineering projects</h3>
+      <div class="dspw-controls" id="dspwFilters" role="toolbar" aria-label="Project filters"></div>
+      <p class="dspw-legend" id="dspwFilterLegend">Showing all tracks.</p>
+      <p class="dspw-legend" id="dspwSyncStatus">GitHub sync not started.</p>
+      <div class="dspw-grid" id="dspwProjectGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="dspw-section dspw-split" aria-label="System architecture and workflow">
+      <article class="dspw-panel">
+        <h3 class="dspw-section-title">Architecture map</h3>
+        <pre class="dspw-arch" aria-label="Design system architecture diagram" id="dspwArch"></pre>
+      </article>
+
+      <article class="dspw-panel">
+        <h3 class="dspw-section-title">System workflow</h3>
+        <ol class="dspw-timeline" id="dspwWorkflow"></ol>
+      </article>
+    </section>
+
+    <section class="dspw-section" aria-labelledby="dspwFoundationsTitle">
+      <h3 class="dspw-section-title" id="dspwFoundationsTitle">Design system foundations</h3>
+      <div class="dspw-grid" id="dspwFoundationGrid"></div>
+    </section>
+  </div>
+</section>
+
+<div
+  class="dspw-version-indicator"
+  id="dspwVersionIndicator"
+  role="button"
+  tabindex="0"
+  aria-label="Open widget changelog"
+  title="Click to view changelog"
+>
+  v1.1.0
+</div>
+
+<div class="dspw-modal" id="dspwChangelog" aria-hidden="true">
+  <div class="dspw-modal-content" role="dialog" aria-modal="true" aria-labelledby="dspwChangelogTitle">
+    <div class="dspw-modal-head">
+      <h3 class="dspw-modal-title" id="dspwChangelogTitle">Design System Portfolio Changelog</h3>
+      <button class="dspw-modal-close" id="dspwModalClose" type="button" aria-label="Close changelog">
+        Close
+      </button>
+    </div>
+    <div class="dspw-modal-body">
+      <p class="dspw-modal-version">v1.1.0 — Dynamic GitHub Enrichment (Current)</p>
+      <ul class="dspw-list">
+        <li>Added live GitHub repo enrichment for Website, TerraNova, and App projects.</li>
+        <li>Card links now show direct GitHub and homepage URLs when available.</li>
+        <li>Project outcomes automatically include stars, forks, open issues, and last push date.</li>
+        <li>Added cached sync status and manual refresh button.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script id="designSystemPortfolioData" type="application/json">
+  {
+    "version": "1.1.0",
+    "heading": "Design Systems Engineering Portfolio",
+    "subtitle": "Now enriched with live GitHub signals from your website, TerraNova, and app repositories.",
+    "github": {
+      "owner": "McCal-Codes"
+    },
+    "metrics": [
+      "<strong>Live</strong> GitHub repo health in cards",
+      "<strong>+31%</strong> faster UI delivery after reusable patterns",
+      "<strong>-42%</strong> style drift on audited pages",
+      "<strong>AA</strong> accessibility baseline in reusable components"
+    ],
+    "projects": [
+      {
+        "id": "website-system",
+        "name": "Website Platform System",
+        "repo": "McCals-Website",
+        "track": "ui",
+        "summary": "Versioned widget architecture for Squarespace-first delivery.",
+        "problem": "Need fast, self-contained updates without runtime dependencies.",
+        "approach": "Built versioned widget files with standards-driven validation.",
+        "architecture": [
+          "Widget source tree",
+          "Versioned HTML artifacts",
+          "Validation + preflight checks",
+          "Squarespace code block deployment"
+        ],
+        "decisions": [
+          "Self-contained widget files over runtime bundle to reduce embed risk.",
+          "Strict versioning to preserve rollback safety."
+        ],
+        "tools": ["HTML/CSS/JS", "Validation scripts", "GitHub Actions"],
+        "outcomes": ["Reliable production rollbacks", "Consistent deployment workflow"]
+      },
+      {
+        "id": "terranova-system",
+        "name": "TerraNova World Systems",
+        "repo": "TerraNova",
+        "track": "infrastructure",
+        "summary": "Procedural world-design system with rule-based terrain/biome thinking.",
+        "problem": "Need deterministic but flexible generation logic.",
+        "approach": "Modeled reusable world rules and tunable generation passes.",
+        "architecture": [
+          "Noise/density inputs",
+          "Biome rules engine",
+          "Validation harness",
+          "Iteration workflow"
+        ],
+        "decisions": [
+          "Rule layering over monolithic generation logic.",
+          "Parameter-driven tuning for faster experimentation."
+        ],
+        "tools": ["JavaScript", "Debug tooling", "Data visualization"],
+        "outcomes": ["Faster tuning cycles", "Cleaner system reasoning"]
+      },
+      {
+        "id": "app-system",
+        "name": "App Product System",
+        "repo": "mccal-app",
+        "track": "tooling",
+        "summary": "Application-level systemization of UI, docs, and release surfaces.",
+        "problem": "Feature growth created inconsistency in components and docs.",
+        "approach": "Mapped shared patterns into reusable foundations and docs contracts.",
+        "architecture": [
+          "Feature modules",
+          "Shared components",
+          "Release notes + changelog",
+          "Operational docs"
+        ],
+        "decisions": [
+          "Documentation as part of definition-of-done.",
+          "Performance and accessibility gates before release."
+        ],
+        "tools": ["GitHub", "Markdown standards", "CI checks"],
+        "outcomes": ["Reduced release ambiguity", "Better cross-project consistency"]
+      }
+    ],
+    "foundations": [
+      {
+        "title": "Token Strategy",
+        "detail": "Semantic tokens map design intent to implementation with stable fallback paths."
+      },
+      {
+        "title": "Component Contracts",
+        "detail": "Each reusable pattern defines interaction states, accessibility behavior, and rollback safety."
+      },
+      {
+        "title": "Performance Doctrine",
+        "detail": "Critical content first, non-essential JS deferred, and no dependency-heavy runtime assumptions."
+      },
+      {
+        "title": "Documentation Discipline",
+        "detail": "Every behavior change is paired with changelog context and implementation notes."
+      }
+    ],
+    "workflow": [
+      "Discover systemic UI pain and capture evidence.",
+      "Model repeatable patterns and define constraints.",
+      "Prototype in isolated widget versions.",
+      "Validate accessibility and performance before promotion.",
+      "Ship with docs + changelog and monitor adoption outcomes."
+    ],
+    "architectureMap": [
+      "Design Inputs",
+      "  ├─ Brand constraints",
+      "  ├─ Accessibility thresholds",
+      "  └─ Content model",
+      "        ↓",
+      "System Core",
+      "  ├─ Tokens (semantic)",
+      "  ├─ Components (versioned)",
+      "  └─ Governance (review + changelog)",
+      "        ↓",
+      "Delivery",
+      "  ├─ Self-contained widget HTML",
+      "  ├─ Validation + preflight checks",
+      "  └─ Squarespace deployment",
+      "        ↓",
+      "Feedback Loop",
+      "  ├─ Accessibility audits",
+      "  ├─ Performance checks",
+      "  └─ Iterative release updates"
+    ]
+  }
+</script>
+
+<script>
+  (function () {
+    'use strict';
+
+    const root = document.getElementById('designSystemPortfolioWidget');
+    if (!root) return;
+
+    const dataEl = document.getElementById('designSystemPortfolioData');
+    const headingEl = document.getElementById('dspwHeading');
+    const subtitleEl = document.getElementById('dspwSubtitle');
+    const metricChipsEl = document.getElementById('dspwMetricChips');
+    const filtersEl = document.getElementById('dspwFilters');
+    const filterLegendEl = document.getElementById('dspwFilterLegend');
+    const syncStatusEl = document.getElementById('dspwSyncStatus');
+    const projectGridEl = document.getElementById('dspwProjectGrid');
+    const foundationGridEl = document.getElementById('dspwFoundationGrid');
+    const workflowEl = document.getElementById('dspwWorkflow');
+    const archEl = document.getElementById('dspwArch');
+
+    const versionBtn = document.getElementById('dspwVersionIndicator');
+    const changelogModal = document.getElementById('dspwChangelog');
+    const changelogClose = document.getElementById('dspwModalClose');
+
+    const GH_CACHE_TTL = 30 * 60 * 1000;
+    const GH_CACHE_PREFIX = 'dspw-gh-cache:v1.1:';
+
+    let parsed = null;
+    let activeTrack = (root.getAttribute('data-default-track') || 'all').toLowerCase();
+    let lastFocusedEl = null;
+    let isSyncing = false;
+
+    function safeArray(value) {
+      return Array.isArray(value) ? value : [];
+    }
+
+    function unique(items) {
+      return Array.from(new Set(safeArray(items).filter(Boolean)));
+    }
+
+    function titleCase(track) {
+      const value = String(track || '').toLowerCase();
+      return value ? value.charAt(0).toUpperCase() + value.slice(1) : 'General';
+    }
+
+    function parseData() {
+      try {
+        parsed = JSON.parse(dataEl.textContent || '{}');
+      } catch (error) {
+        parsed = null;
+        projectGridEl.innerHTML = '<div class="dspw-empty">Unable to load portfolio dataset.</div>';
+        syncStatusEl.textContent = 'GitHub sync unavailable: dataset parse error.';
+        syncStatusEl.setAttribute('data-state', 'warn');
+      }
+    }
+
+    function setHeader() {
+      if (!parsed) return;
+      if (parsed.heading) headingEl.textContent = parsed.heading;
+      if (parsed.subtitle) subtitleEl.textContent = parsed.subtitle;
+    }
+
+    function renderMetrics() {
+      if (!parsed) return;
+      const metrics = safeArray(parsed.metrics);
+      metricChipsEl.innerHTML = '';
+      metrics.forEach(function (metric) {
+        const li = document.createElement('li');
+        li.className = 'dspw-chip';
+        li.innerHTML = metric;
+        metricChipsEl.appendChild(li);
+      });
+    }
+
+    function getTracks(projects) {
+      const set = new Set();
+      projects.forEach(function (p) {
+        if (p && typeof p.track === 'string' && p.track.trim()) {
+          set.add(p.track.toLowerCase());
+        }
+      });
+      return ['all'].concat(Array.from(set));
+    }
+
+    function setSyncMessage(message, state) {
+      syncStatusEl.textContent = message;
+      syncStatusEl.setAttribute('data-state', state || '');
+    }
+
+    function renderFilters() {
+      if (!parsed) return;
+      const projects = safeArray(parsed.projects);
+      const tracks = getTracks(projects);
+
+      if (!tracks.includes(activeTrack)) activeTrack = 'all';
+      filtersEl.innerHTML = '';
+
+      tracks.forEach(function (track) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'dspw-filter';
+        btn.textContent = titleCase(track);
+        btn.setAttribute('data-track', track);
+        btn.setAttribute('aria-pressed', String(activeTrack === track));
+        btn.addEventListener('click', function () {
+          activeTrack = track;
+          renderFilters();
+          renderProjects();
+        });
+        filtersEl.appendChild(btn);
+      });
+
+      const refreshBtn = document.createElement('button');
+      refreshBtn.type = 'button';
+      refreshBtn.className = 'dspw-refresh';
+      refreshBtn.textContent = isSyncing ? 'Syncing…' : 'Refresh GitHub Data';
+      refreshBtn.disabled = isSyncing;
+      refreshBtn.addEventListener('click', function () {
+        syncGithubData(true);
+      });
+      filtersEl.appendChild(refreshBtn);
+    }
+
+    function createList(items) {
+      const ul = document.createElement('ul');
+      ul.className = 'dspw-list';
+      safeArray(items).forEach(function (item) {
+        const li = document.createElement('li');
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      return ul;
+    }
+
+    function renderProjects() {
+      if (!parsed) return;
+      const projects = safeArray(parsed.projects);
+      const filtered =
+        activeTrack === 'all'
+          ? projects
+          : projects.filter(function (project) {
+              return String(project.track || '').toLowerCase() === activeTrack;
+            });
+
+      projectGridEl.innerHTML = '';
+      filterLegendEl.textContent =
+        activeTrack === 'all'
+          ? 'Showing all tracks.'
+          : 'Showing only ' + titleCase(activeTrack) + ' track projects.';
+
+      if (!filtered.length) {
+        projectGridEl.innerHTML =
+          '<div class="dspw-empty">No projects match this track yet. Add entries in #designSystemPortfolioData.</div>';
+        return;
+      }
+
+      filtered.forEach(function (project) {
+        const card = document.createElement('article');
+        card.className = 'dspw-card';
+
+        const head = document.createElement('div');
+        head.className = 'dspw-card-head';
+
+        const title = document.createElement('h4');
+        title.className = 'dspw-card-title';
+        title.textContent = project.name || 'Untitled project';
+
+        const meta = document.createElement('div');
+        meta.className = 'dspw-card-meta';
+
+        const track = document.createElement('span');
+        track.className = 'dspw-card-track';
+        track.textContent = titleCase(String(project.track || 'general').toLowerCase());
+        meta.appendChild(track);
+
+        const linksWrap = document.createElement('div');
+        linksWrap.className = 'dspw-card-links';
+
+        if (project.repoUrl) {
+          const ghLink = document.createElement('a');
+          ghLink.className = 'dspw-card-link';
+          ghLink.href = project.repoUrl;
+          ghLink.target = '_blank';
+          ghLink.rel = 'noopener noreferrer';
+          ghLink.textContent = 'GitHub';
+          linksWrap.appendChild(ghLink);
+        }
+
+        if (project.homepage) {
+          const liveLink = document.createElement('a');
+          liveLink.className = 'dspw-card-link';
+          liveLink.href = project.homepage;
+          liveLink.target = '_blank';
+          liveLink.rel = 'noopener noreferrer';
+          liveLink.textContent = 'Live';
+          linksWrap.appendChild(liveLink);
+        }
+
+        if (linksWrap.children.length) meta.appendChild(linksWrap);
+
+        head.appendChild(title);
+        head.appendChild(meta);
+
+        const summary = document.createElement('p');
+        summary.className = 'dspw-p';
+        summary.textContent = project.summary || '';
+
+        const problemLabel = document.createElement('p');
+        problemLabel.className = 'dspw-legend';
+        problemLabel.innerHTML = '<strong>Problem:</strong> ' + (project.problem || 'Not specified');
+
+        const approachLabel = document.createElement('p');
+        approachLabel.className = 'dspw-legend';
+        approachLabel.innerHTML = '<strong>Approach:</strong> ' + (project.approach || 'Not specified');
+
+        const details = document.createElement('details');
+        const detailsSummary = document.createElement('summary');
+        detailsSummary.textContent = 'Architecture, decisions, and outcomes';
+        details.appendChild(detailsSummary);
+
+        const archTitle = document.createElement('p');
+        archTitle.className = 'dspw-legend';
+        archTitle.innerHTML = '<strong>Architecture</strong>';
+        details.appendChild(archTitle);
+        details.appendChild(createList(project.architecture));
+
+        const decisionTitle = document.createElement('p');
+        decisionTitle.className = 'dspw-legend';
+        decisionTitle.innerHTML = '<strong>Decisions & tradeoffs</strong>';
+        details.appendChild(decisionTitle);
+        details.appendChild(createList(project.decisions));
+
+        const toolTitle = document.createElement('p');
+        toolTitle.className = 'dspw-legend';
+        toolTitle.innerHTML = '<strong>Tools</strong>';
+        details.appendChild(toolTitle);
+        details.appendChild(createList(project.tools));
+
+        const outcomeTitle = document.createElement('p');
+        outcomeTitle.className = 'dspw-legend';
+        outcomeTitle.innerHTML = '<strong>Outcome / impact</strong>';
+        details.appendChild(outcomeTitle);
+        details.appendChild(createList(project.outcomes));
+
+        card.appendChild(head);
+        card.appendChild(summary);
+        card.appendChild(problemLabel);
+        card.appendChild(approachLabel);
+        card.appendChild(details);
+        projectGridEl.appendChild(card);
+      });
+    }
+
+    function renderFoundations() {
+      if (!parsed) return;
+      const foundations = safeArray(parsed.foundations);
+      foundationGridEl.innerHTML = '';
+
+      if (!foundations.length) {
+        foundationGridEl.innerHTML =
+          '<div class="dspw-empty">No foundations set. Add entries in #designSystemPortfolioData.</div>';
+        return;
+      }
+
+      foundations.forEach(function (foundation) {
+        const card = document.createElement('article');
+        card.className = 'dspw-card';
+
+        const title = document.createElement('h4');
+        title.className = 'dspw-card-title';
+        title.textContent = foundation.title || 'Foundation';
+
+        const detail = document.createElement('p');
+        detail.className = 'dspw-p';
+        detail.textContent = foundation.detail || '';
+
+        card.appendChild(title);
+        card.appendChild(detail);
+        foundationGridEl.appendChild(card);
+      });
+    }
+
+    function renderWorkflowAndArch() {
+      if (!parsed) return;
+      const workflow = safeArray(parsed.workflow);
+      workflowEl.innerHTML = '';
+      workflow.forEach(function (step) {
+        const li = document.createElement('li');
+        li.textContent = step;
+        workflowEl.appendChild(li);
+      });
+
+      const lines = safeArray(parsed.architectureMap);
+      archEl.textContent = lines.join('\n');
+    }
+
+    function cacheKey(owner, repo) {
+      return GH_CACHE_PREFIX + owner + ':' + repo;
+    }
+
+    function readRepoCache(owner, repo) {
+      try {
+        const raw = localStorage.getItem(cacheKey(owner, repo));
+        if (!raw) return null;
+        const parsedCache = JSON.parse(raw);
+        if (!parsedCache || typeof parsedCache !== 'object') return null;
+        if (Date.now() - Number(parsedCache.timestamp || 0) > GH_CACHE_TTL) return null;
+        return parsedCache.data || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writeRepoCache(owner, repo, data) {
+      try {
+        localStorage.setItem(
+          cacheKey(owner, repo),
+          JSON.stringify({
+            timestamp: Date.now(),
+            data: data
+          })
+        );
+      } catch (error) {
+        // ignore cache write failures
+      }
+    }
+
+    async function fetchGitHubRepo(owner, repo, forceRefresh) {
+      if (!forceRefresh) {
+        const cached = readRepoCache(owner, repo);
+        if (cached) {
+          return { data: cached, source: 'cache' };
+        }
+      }
+
+      const base = 'https://api.github.com/repos/' + encodeURIComponent(owner) + '/' + encodeURIComponent(repo);
+      const repoResp = await fetch(base, { cache: 'no-store' });
+
+      if (!repoResp.ok) {
+        return { data: null, error: repoResp.status };
+      }
+
+      const repoData = await repoResp.json();
+
+      const languagesResp = await fetch(base + '/languages', { cache: 'no-store' });
+      if (languagesResp.ok) {
+        repoData.languages = await languagesResp.json();
+      } else {
+        repoData.languages = {};
+      }
+
+      writeRepoCache(owner, repo, repoData);
+      return { data: repoData, source: 'network' };
+    }
+
+    function formatDate(value) {
+      if (!value) return 'Unknown';
+      try {
+        return new Date(value).toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      } catch (error) {
+        return String(value);
+      }
+    }
+
+    function enrichProjectWithRepo(project, repoData) {
+      const enriched = Object.assign({}, project);
+      const repoLanguages = Object.keys(repoData.languages || {}).slice(0, 4);
+      const repoStats = [
+        'GitHub stars: ' + String(repoData.stargazers_count || 0),
+        'Forks: ' + String(repoData.forks_count || 0),
+        'Open issues: ' + String(repoData.open_issues_count || 0),
+        'Last push: ' + formatDate(repoData.pushed_at)
+      ];
+
+      enriched.repoUrl = repoData.html_url || enriched.repoUrl;
+      enriched.homepage = repoData.homepage || enriched.homepage;
+      enriched.summary = enriched.summary || repoData.description || enriched.summary;
+      enriched.tools = unique([].concat(enriched.tools || [], repoLanguages));
+      enriched.outcomes = unique([].concat(enriched.outcomes || [], repoStats));
+
+      return enriched;
+    }
+
+    async function syncGithubData(forceRefresh) {
+      if (!parsed || isSyncing) return;
+
+      const owner =
+        (root.getAttribute('data-github-owner') ||
+          (parsed.github && parsed.github.owner) ||
+          '')
+          .trim();
+
+      if (!owner) {
+        setSyncMessage('GitHub sync skipped: no owner configured.', 'warn');
+        return;
+      }
+
+      const projects = safeArray(parsed.projects);
+      const repoProjects = projects.filter(function (project) {
+        return typeof project.repo === 'string' && project.repo.trim().length > 0;
+      });
+
+      if (!repoProjects.length) {
+        setSyncMessage('GitHub sync skipped: no repo mappings found.', 'warn');
+        return;
+      }
+
+      isSyncing = true;
+      renderFilters();
+      setSyncMessage('Syncing GitHub data for ' + repoProjects.length + ' repos…', '');
+
+      const updatesById = {};
+      let okCount = 0;
+      let failCount = 0;
+      let cacheCount = 0;
+
+      await Promise.all(
+        repoProjects.map(async function (project) {
+          const repoName = String(project.repo || '').trim();
+          if (!repoName) return;
+
+          try {
+            const result = await fetchGitHubRepo(owner, repoName, Boolean(forceRefresh));
+            if (result && result.data) {
+              updatesById[project.id] = enrichProjectWithRepo(project, result.data);
+              okCount += 1;
+              if (result.source === 'cache') cacheCount += 1;
+            } else {
+              failCount += 1;
+            }
+          } catch (error) {
+            failCount += 1;
+          }
+        })
+      );
+
+      parsed.projects = projects.map(function (project) {
+        return updatesById[project.id] || project;
+      });
+
+      const syncStamp = new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      if (failCount > 0) {
+        setSyncMessage(
+          'GitHub sync: ' +
+            okCount +
+            ' updated, ' +
+            failCount +
+            ' unavailable (rate limit or missing repo). Last sync ' +
+            syncStamp +
+            '.',
+          'warn'
+        );
+      } else {
+        setSyncMessage(
+          'GitHub sync complete: ' +
+            okCount +
+            ' repos updated (' +
+            cacheCount +
+            ' from cache). Last sync ' +
+            syncStamp +
+            '.',
+          'ok'
+        );
+      }
+
+      isSyncing = false;
+      renderFilters();
+      renderProjects();
+    }
+
+    function openChangelog() {
+      lastFocusedEl = document.activeElement;
+      changelogModal.classList.add('active');
+      changelogModal.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('dspw-modal-open');
+      changelogClose.focus();
+    }
+
+    function closeChangelog() {
+      changelogModal.classList.remove('active');
+      changelogModal.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('dspw-modal-open');
+      if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+        lastFocusedEl.focus();
+      }
+    }
+
+    function bindModal() {
+      versionBtn.addEventListener('click', openChangelog);
+      versionBtn.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openChangelog();
+        }
+      });
+
+      changelogClose.addEventListener('click', closeChangelog);
+      changelogModal.addEventListener('click', function (event) {
+        if (event.target === changelogModal) {
+          closeChangelog();
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && changelogModal.classList.contains('active')) {
+          closeChangelog();
+        }
+      });
+    }
+
+    function init() {
+      parseData();
+      setHeader();
+      renderMetrics();
+      renderFilters();
+      renderProjects();
+      renderFoundations();
+      renderWorkflowAndArch();
+      bindModal();
+
+      if (parsed) {
+        syncGithubData(false);
+      }
+
+      window.designSystemPortfolioAPI = {
+        getVersion: function () {
+          return root.getAttribute('data-widget-version');
+        },
+        getActiveTrack: function () {
+          return activeTrack;
+        },
+        refreshGitHubData: function () {
+          syncGithubData(true);
+        }
+      };
+    }
+
+    init();
+  })();
+</script>

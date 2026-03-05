@@ -30,7 +30,7 @@ This directory contains production-ready and work-in-progress widgets for the Mc
 - **Features**: 22+ client logos, Fisher-Yates shuffle, infinite loop, mobile responsive
 - **Use Case**: Add to any page for brand credibility
 
-### Portfolio Widgets
+### Portfolio Widgets (Photography Work)
 
 #### 🟢 Concert Portfolio (`concert-portfolio/`)
 
@@ -74,6 +74,29 @@ This directory contains production-ready and work-in-progress widgets for the Mc
 - **Features**: Mixed source support (local MP4, YouTube, Vimeo), accessible playback, category filtering, lazy loading, SEO structured data
 - **Use Case**: Showcase video content (interviews, promos, behind-the-scenes)
 
+### Projects Widgets (`projects/`)
+
+#### 🟢 Design System Portfolio (`projects/design-system-portfolio/`)
+
+- **Purpose**: Engineering portfolio showcase centered on design-system work (non-photo)
+- **Current Version**: v1.4.0
+- **Features**: Overview-first spotlight layout, projects-first case studies, in-depth project modal (problem/process/architecture/result/reflection), feature evidence cards, connected-systems mapping, per-case-study project page links, filterable tracks, live GitHub repo enrichment
+- **Use Case**: Present design-system engineering capability to recruiters and collaborators
+
+#### 🟢 Abridged App (`projects/abridged/`)
+
+- **Purpose**: Product/project overview widget for the Abridged app
+- **Current Version**: v1.0
+- **Features**: Hero, feature highlights, roadmap phase framing, and CTA surfaces for app interest/testing
+- **Use Case**: Present app concept, progress, and product direction in project context
+
+#### 🟢 Roadmap (`projects/roadmap/`)
+
+- **Purpose**: Public-facing progress and delivery roadmap widget
+- **Current Version**: v1.5.0
+- **Features**: Timeline-based milestones, status communication, progress storytelling, and transparent planning view
+- **Use Case**: Communicate what is shipped, in progress, and next across project work
+
 ### Content Widgets
 
 #### 🟢 Podcast Feed (`podcast-feed/`)
@@ -95,8 +118,8 @@ This directory contains production-ready and work-in-progress widgets for the Mc
 #### 🟢 Site Navigation (`site-navigation/`)
 
 - **Purpose**: Header navigation with blur effects
-- **Current Version**: v1.8.5
-- **Features**: Mobile responsive, backdrop blur, smooth animations
+- **Current Version**: v2.0.6
+- **Features**: Mobile responsive, backdrop blur, keyboard/outside-click hardened submenu behavior, dedicated Projects IA
 - **Use Case**: Main site navigation
 
 #### 🟢 Site Footer (`site-footer/`)
@@ -138,6 +161,7 @@ This directory contains production-ready and work-in-progress widgets for the Mc
 ### Widget-Specific Setup
 
 - **Portfolio widgets**: Ensure manifest files are generated (see main project README)
+- **Project widgets**: Set links to match your Squarespace slugs (`/projects/*` if you use a Projects folder, otherwise root slugs like `/roadmap`)
 - **Image-dependent widgets**: Update image URLs if using custom assets
 - **Admin widgets**: Require authentication and backend setup
 
@@ -148,12 +172,16 @@ src/widgets/
 ├── about/                          # About section widgets
 │   ├── client-carousel/           # Standalone client carousel
 │   └── complete-about-page/       # Full about page with integrated carousel
-├── portfolios/                     # Portfolio showcase widgets
+├── portfolios/                     # Photography portfolio widgets
 │   ├── concert-portfolio/
 │   ├── event-portfolio/
 │   └── ...
-├── _content/                       # Content display widgets
-├── site/                           # Site infrastructure widgets
+├── projects/                       # Project/case-study widgets (engineering + product + roadmap)
+│   ├── design-system-portfolio/
+│   ├── abridged/
+│   └── roadmap/
+├── _content/                       # Legacy and shared content widgets
+├── _navigation/                    # Site navigation/footer widgets
 ├── _admin/                         # Administrative tools
 ├── _archived/                      # Archived/deprecated widgets
 ├── shared/                         # Common utilities and styles
@@ -177,6 +205,7 @@ src/widgets/
 
 ## Recent Changes
 
+- **2026-03-05**: Added Projects IA alignment (`Work` + `Projects` separation), updated site navigation to v2.0.6, and aligned project widgets under `src/widgets/projects/`.
 - **2025-12-27**: Optimized widget performance (IntersectionObserver), fixed Event Portfolio image loading, and enhanced Admin Dashboard with GitHub API monitoring.
 - **2025-12-14**: Completed Monochrome conversion for all portfolios and navigation.
 - **2025-11-03**: Consolidated duplicate about widgets, archived redundant versions.
@@ -184,5 +213,5 @@ src/widgets/
 
 ---
 
-**Last Updated**: December 27, 2025
-**Total Production Widgets**: 12
+**Last Updated**: March 5, 2026
+**Total Production Widgets**: 16

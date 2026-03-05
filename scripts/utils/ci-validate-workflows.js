@@ -75,8 +75,11 @@ for (const wf of wfFiles) {
 
   // Consider cache present if actions/cache is used OR setup-node with cache: npm is present
   const hasActionsCache = /uses:\s*actions\/cache@/m.test(txt);
+  const hasSetupNode = /uses:\s*actions\/setup-node@/m.test(txt);
   const hasSetupNodeCache = /setup-node@[^\n]*[\s\S]*?cache\s*:\s*['"]?npm['"]?/m.test(txt);
-  if (!(hasActionsCache || hasSetupNodeCache) && !isCompositeOnly) {
+  const hasNpmCommands = /\bnpm\s+(ci|install|run)\b/m.test(txt);
+  const needsNodeCache = hasSetupNode || hasNpmCommands;
+  if (needsNodeCache && !(hasActionsCache || hasSetupNodeCache) && !isCompositeOnly) {
     cacheMissing.push(wf);
   }
 
