@@ -92,7 +92,7 @@ Use the loader snippet documented in `.github/copilot-instructions.md` under “
 
 Fixing validation errors:
 
-1. Run locally: `node scripts/utils/validate-widgets.js`
+1. Run locally: `node scripts/utils/validate-widget-html.js`
 2. Read error output for offending files.
 3. Update HTML per `docs/standards/widget-standards.md`.
 4. Commit & push; CI re-validates.
