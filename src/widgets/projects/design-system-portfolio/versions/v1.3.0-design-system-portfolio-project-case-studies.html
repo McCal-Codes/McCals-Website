@@ -1,0 +1,1988 @@
+<!--
+Design System Portfolio Widget v1.3.0
+Author: Caleb McCartney / McCal-Codes
+Purpose: Projects-first case-study portfolio with deep-dive modals, feature evidence, and screenshot gallery.
+-->
+
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  .dspw-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dspw-root * {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  .dspw-root,
+  .dspw-root * {
+    box-sizing: border-box;
+  }
+
+  .dspw-root,
+  .dspw-version-indicator,
+  .dspw-modal,
+  .dspw-project-modal {
+    --dspw-bg: #0b0c0f;
+    --dspw-panel: #151821;
+    --dspw-panel-2: #1c2130;
+    --dspw-text: #e7ebf4;
+    --dspw-muted: #a3afc7;
+    --dspw-line: #2a3144;
+    --dspw-accent: #8db8ff;
+    --dspw-accent-2: #c5d9ff;
+    --dspw-success: #8ce0c1;
+    --dspw-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .dspw-root {
+    max-width: 1220px;
+    margin: 48px auto;
+    padding: 24px;
+    color: var(--dspw-text);
+    font-family: Inter, 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  }
+
+  .dspw-shell {
+    background: linear-gradient(180deg, rgba(141, 184, 255, 0.05), transparent 190px), var(--dspw-bg);
+    border: 1px solid var(--dspw-line);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: var(--dspw-shadow);
+  }
+
+  .dspw-kicker {
+    margin: 0 0 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-title {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.12;
+    font-weight: 800;
+  }
+
+  .dspw-subtitle {
+    margin: 12px 0 0;
+    max-width: 860px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-metrics {
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .dspw-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--dspw-line);
+    background: rgba(197, 217, 255, 0.08);
+    color: var(--dspw-text);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .dspw-chip strong {
+    color: var(--dspw-success);
+  }
+
+  .dspw-section {
+    margin-top: 28px;
+  }
+
+  .dspw-section-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-controls,
+  .dspw-explorer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .dspw-explorer {
+    margin-top: 10px;
+  }
+
+  .dspw-filter,
+  .dspw-refresh,
+  .dspw-open,
+  .dspw-nav-btn,
+  .dspw-shot-btn {
+    appearance: none;
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-panel);
+    color: var(--dspw-text);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 140ms ease, transform 140ms ease, border-color 140ms ease;
+  }
+
+  .dspw-filter:hover,
+  .dspw-refresh:hover,
+  .dspw-open:hover,
+  .dspw-nav-btn:hover,
+  .dspw-shot-btn:hover {
+    transform: translateY(-1px);
+    border-color: var(--dspw-accent);
+  }
+
+  .dspw-filter[aria-pressed='true'],
+  .dspw-shot-btn[aria-pressed='true'] {
+    background: color-mix(in srgb, var(--dspw-accent) 26%, var(--dspw-panel));
+    border-color: var(--dspw-accent);
+  }
+
+  .dspw-refresh[disabled],
+  .dspw-nav-btn[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .dspw-input,
+  .dspw-select {
+    appearance: none;
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-panel);
+    color: var(--dspw-text);
+    border-radius: 10px;
+    padding: 9px 11px;
+    font-size: 13px;
+    min-height: 38px;
+  }
+
+  .dspw-input {
+    min-width: min(280px, 100%);
+    flex: 1;
+  }
+
+  .dspw-select {
+    min-width: 180px;
+  }
+
+  .dspw-legend {
+    margin: 8px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-legend[data-state='ok'] {
+    color: var(--dspw-success);
+  }
+
+  .dspw-legend[data-state='warn'] {
+    color: #f7d48a;
+  }
+
+  .dspw-grid {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .dspw-card {
+    border: 1px solid var(--dspw-line);
+    border-radius: 14px;
+    padding: 14px;
+    background: linear-gradient(180deg, rgba(141, 184, 255, 0.04), transparent 90px), var(--dspw-panel);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dspw-card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .dspw-card-title {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .dspw-card-track {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dspw-accent-2);
+    border: 1px solid var(--dspw-line);
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.03);
+    white-space: nowrap;
+  }
+
+  .dspw-card-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .dspw-card-link {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--dspw-line);
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 11px;
+    color: var(--dspw-accent-2);
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .dspw-card-link:hover,
+  .dspw-card-link:focus-visible {
+    border-color: var(--dspw-accent);
+    color: var(--dspw-text);
+  }
+
+  .dspw-card-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .dspw-stat {
+    font-size: 11px;
+    border: 1px solid var(--dspw-line);
+    border-radius: 999px;
+    padding: 2px 8px;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-list {
+    margin: 6px 0 12px;
+    padding-left: 22px;
+    font-size: 13px;
+    line-height: 1.62;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-list li {
+    padding-left: 2px;
+  }
+
+  .dspw-list li + li {
+    margin-top: 8px;
+  }
+
+  .dspw-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .dspw-panel {
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-panel-2);
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  .dspw-arch {
+    margin: 0;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    color: #d7e4ff;
+  }
+
+  .dspw-timeline {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 6px;
+    color: var(--dspw-muted);
+    font-size: 13px;
+  }
+
+  .dspw-empty {
+    border: 1px dashed var(--dspw-line);
+    border-radius: 12px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--dspw-muted);
+    font-size: 14px;
+  }
+
+  .dspw-version-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(141, 184, 255, 0.4);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font: 600 10px/1 ui-monospace, monospace;
+    cursor: pointer;
+    z-index: 500;
+    transition: color 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .dspw-version-indicator:hover {
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-modal,
+  .dspw-project-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 4, 8, 0.84);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483647;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .dspw-modal.active,
+  .dspw-project-modal.active {
+    display: flex;
+  }
+
+  .dspw-modal-content {
+    width: min(760px, 100%);
+  }
+
+  .dspw-project-content {
+    width: min(1020px, 100%);
+  }
+
+  .dspw-modal-content,
+  .dspw-project-content {
+    max-height: 90vh;
+    overflow: auto;
+    border-radius: 12px;
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-bg);
+    box-shadow: var(--dspw-shadow);
+  }
+
+  .dspw-modal-head,
+  .dspw-project-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--dspw-line);
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--dspw-bg) 94%, black);
+    z-index: 2;
+  }
+
+  .dspw-modal-title,
+  .dspw-project-title {
+    margin: 0;
+    font-size: 16px;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-modal-close,
+  .dspw-project-close {
+    border: 1px solid var(--dspw-line);
+    background: var(--dspw-panel);
+    color: var(--dspw-text);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+
+  .dspw-modal-body,
+  .dspw-project-body {
+    padding: 16px 18px;
+  }
+
+  .dspw-modal-version {
+    margin: 0 0 10px;
+    color: var(--dspw-accent-2);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .dspw-project-top {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .dspw-project-hero {
+    border: 1px solid var(--dspw-line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #090b10;
+  }
+
+  .dspw-project-hero img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .dspw-project-caption {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--dspw-muted);
+    padding: 8px 10px;
+    border-top: 1px solid var(--dspw-line);
+  }
+
+  .dspw-case-grid {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+
+  .dspw-case-card {
+    border: 1px solid var(--dspw-line);
+    border-radius: 12px;
+    background: var(--dspw-panel);
+    padding: 10px;
+  }
+
+  .dspw-case-card h5 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-case-card p {
+    margin: 0;
+    color: var(--dspw-muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .dspw-case-section {
+    margin-top: 14px;
+  }
+
+  .dspw-case-section h4 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: var(--dspw-accent-2);
+  }
+
+  .dspw-case-section p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--dspw-muted);
+  }
+
+  .dspw-shots {
+    margin-top: 12px;
+  }
+
+  .dspw-shot-buttons {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .dspw-project-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  html.dspw-modal-open body {
+    overflow: hidden;
+  }
+
+  @media (max-width: 900px) {
+    .dspw-split,
+    .dspw-project-top {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dspw-root {
+      padding: 16px;
+      margin: 24px auto;
+    }
+
+    .dspw-shell {
+      padding: 16px;
+      border-radius: 14px;
+    }
+
+    .dspw-version-indicator {
+      bottom: 14px;
+      right: 14px;
+      font-size: 9px;
+    }
+
+    .dspw-input {
+      min-width: 100%;
+    }
+  }
+</style>
+
+<section
+  class="dspw-root"
+  id="designSystemPortfolioWidget"
+  data-widget-version="1.3.0"
+  data-default-track="all"
+  data-github-owner="McCal-Codes"
+  aria-label="Projects-first systems portfolio"
+>
+  <div class="dspw-shell">
+    <p class="dspw-kicker">Projects • Creative Technology • Systems Storytelling</p>
+    <h2 class="dspw-title" id="dspwHeading">Projects Portfolio — Systems-Driven Storytelling</h2>
+    <p class="dspw-subtitle" id="dspwSubtitle">
+      Built for job applications and admissions review: each project opens as a full case study with features,
+      screenshots, architecture decisions, outcomes, and reflection.
+    </p>
+
+    <ul class="dspw-metrics" id="dspwMetricChips" aria-label="Portfolio highlights"></ul>
+
+    <section class="dspw-section" aria-labelledby="dspwProjectsTitle">
+      <h3 class="dspw-section-title" id="dspwProjectsTitle">Project case studies</h3>
+
+      <div class="dspw-controls" id="dspwFilters" role="toolbar" aria-label="Project filters"></div>
+
+      <div class="dspw-explorer" aria-label="Project explorer controls">
+        <label class="dspw-sr-only" for="dspwSearch">Search projects</label>
+        <input
+          id="dspwSearch"
+          class="dspw-input"
+          type="search"
+          placeholder="Search project names, capabilities, features, outcomes..."
+        />
+
+        <label class="dspw-sr-only" for="dspwSort">Sort projects</label>
+        <select id="dspwSort" class="dspw-select">
+          <option value="updated">Sort: Recently updated</option>
+          <option value="stars">Sort: GitHub stars</option>
+          <option value="name">Sort: Name (A-Z)</option>
+        </select>
+      </div>
+
+      <p class="dspw-legend" id="dspwFilterLegend">Showing all tracks.</p>
+      <p class="dspw-legend" id="dspwSyncStatus">GitHub sync not started.</p>
+      <div class="dspw-grid" id="dspwProjectGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="dspw-section dspw-split" aria-label="System architecture and workflow">
+      <article class="dspw-panel">
+        <h3 class="dspw-section-title">Architecture map</h3>
+        <pre class="dspw-arch" aria-label="Portfolio architecture diagram" id="dspwArch"></pre>
+      </article>
+
+      <article class="dspw-panel">
+        <h3 class="dspw-section-title">Project workflow</h3>
+        <ol class="dspw-timeline" id="dspwWorkflow"></ol>
+      </article>
+    </section>
+
+    <section class="dspw-section" aria-labelledby="dspwFoundationsTitle">
+      <h3 class="dspw-section-title" id="dspwFoundationsTitle">What this proves</h3>
+      <div class="dspw-grid" id="dspwFoundationGrid"></div>
+    </section>
+  </div>
+</section>
+
+<div
+  class="dspw-version-indicator"
+  id="dspwVersionIndicator"
+  role="button"
+  tabindex="0"
+  aria-label="Open widget changelog"
+  title="Click to view changelog"
+>
+  v1.3.0
+</div>
+
+<div class="dspw-modal" id="dspwChangelog" aria-hidden="true">
+  <div class="dspw-modal-content" role="dialog" aria-modal="true" aria-labelledby="dspwChangelogTitle">
+    <div class="dspw-modal-head">
+      <h3 class="dspw-modal-title" id="dspwChangelogTitle">Design System Portfolio Changelog</h3>
+      <button class="dspw-modal-close" id="dspwModalClose" type="button" aria-label="Close changelog">Close</button>
+    </div>
+    <div class="dspw-modal-body">
+      <p class="dspw-modal-version">v1.3.0 — Projects-First Case Study Experience (Current)</p>
+      <ul class="dspw-list">
+        <li>Reframed widget around Projects case studies (instead of medium-based presentation).</li>
+        <li>Added deep-dive modal structure: Problem, Process, System Architecture, Result, Reflection.</li>
+        <li>Added screenshot gallery controls per project inside modal.</li>
+        <li>Added in-depth feature evidence cards to better support job/admissions review.</li>
+        <li>Retained live GitHub enrichment with repo links, stars, forks, and update status.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="dspw-project-modal" id="dspwProjectModal" aria-hidden="true">
+  <div class="dspw-project-content" role="dialog" aria-modal="true" aria-labelledby="dspwProjectTitle">
+    <div class="dspw-project-head">
+      <h3 class="dspw-project-title" id="dspwProjectTitle">Project details</h3>
+      <button class="dspw-project-close" id="dspwProjectClose" type="button" aria-label="Close project details">Close</button>
+    </div>
+    <div class="dspw-project-body" id="dspwProjectBody"></div>
+  </div>
+</div>
+
+<script id="designSystemPortfolioData" type="application/json">
+  {
+    "version": "1.3.0",
+    "heading": "Projects Portfolio — Systems-Driven Storytelling",
+    "subtitle": "Photojournalism, generative systems, and creative tools presented as rigorous project case studies with connected systems context.",
+    "github": {
+      "owner": "McCal-Codes"
+    },
+    "metrics": [
+      "<strong>5</strong> flagship case studies",
+      "<strong>Deep-dive</strong> project storytelling",
+      "<strong>Live</strong> GitHub proof points",
+      "<strong>Job-ready</strong> capability evidence"
+    ],
+    "projects": [
+      {
+        "id": "terranova-editor",
+        "name": "TerraNova Editor",
+        "repo": "TerraNova",
+        "track": "tooling",
+        "summary": "A worldbuilding editor that turns procedural complexity into a controllable creative workflow.",
+        "problem": "Procedural tools are often powerful but opaque. The challenge was to make complex generation controls understandable and practical for creative iteration.",
+        "process": "Built iterative control panels, reduced parameter overload, and paired generation changes with immediate visual feedback for rapid experimentation.",
+        "result": "Shorter iteration loops, clearer tuning decisions, and better repeatability across world design sessions.",
+        "reflection": "I learned that editor UX is a systems problem: if controls are not legible, the underlying algorithm effectively becomes unusable.",
+        "capabilities": [
+          "Systems UI design",
+          "Tooling architecture",
+          "Rapid prototyping",
+          "Creative-technical translation"
+        ],
+        "features": [
+          {
+            "title": "Parameter Clusters",
+            "description": "Grouped related controls into meaningful clusters so users can reason about impact without hunting through dozens of fields."
+          },
+          {
+            "title": "Live Iteration Feedback",
+            "description": "Connected control adjustments to immediate viewport updates to speed up experimentation and reduce guesswork."
+          },
+          {
+            "title": "Preset-Driven Workflows",
+            "description": "Defined reusable presets for common biome goals, balancing creative freedom with production consistency."
+          }
+        ],
+        "screenshots": [
+          {
+            "src": "https://opengraph.githubassets.com/terranova-editor-1/McCal-Codes/TerraNova",
+            "alt": "TerraNova repository preview image",
+            "caption": "Repository surface and ongoing implementation context."
+          },
+          {
+            "src": "https://opengraph.githubassets.com/terranova-editor-2/McCal-Codes/TerraNova",
+            "alt": "TerraNova feature snapshot",
+            "caption": "High-level tool architecture and delivery scope."
+          }
+        ],
+        "systemArchitecture": [
+          "Input controls →",
+          "Rule parameters →",
+          "Generation pass orchestration →",
+          "Visual output feedback"
+        ],
+        "tools": ["JavaScript", "UI architecture", "GitHub"],
+        "outcomes": ["Faster worldbuilding iteration", "Higher confidence in parameter tuning"]
+      },
+      {
+        "id": "procedural-biome-system",
+        "name": "Procedural Biome System",
+        "repo": "TerraNova",
+        "track": "systems",
+        "summary": "Layered biome generation pipeline built for readable results at gameplay scale.",
+        "problem": "Terrain systems can produce visual noise without ecological coherence. The challenge was to preserve variety while keeping biome transitions believable.",
+        "process": "Developed layered masks, rule-based biome assignment, and pass-by-pass evaluation to tune density, transitions, and terrain logic.",
+        "result": "More coherent macro patterns and fewer artifacts in transition zones.",
+        "reflection": "The biggest insight was that generation quality depends as much on validation tooling as on generation logic itself.",
+        "capabilities": [
+          "Procedural system design",
+          "Algorithmic thinking",
+          "Validation workflow",
+          "Data-informed iteration"
+        ],
+        "features": [
+          {
+            "title": "Layered Mask Strategy",
+            "description": "Combined noise fields and rule masks to separate broad biome intent from local variation detail."
+          },
+          {
+            "title": "Transition Management",
+            "description": "Introduced blending and threshold logic to avoid abrupt biome seams and visual discontinuities."
+          },
+          {
+            "title": "Tuning + Validation Loop",
+            "description": "Used repeatable test scenarios to compare outputs and make iteration decisions grounded in evidence."
+          }
+        ],
+        "screenshots": [
+          {
+            "src": "https://opengraph.githubassets.com/biome-system-1/McCal-Codes/TerraNova",
+            "alt": "Procedural Biome System repository preview",
+            "caption": "Generation system source and architecture context."
+          }
+        ],
+        "systemArchitecture": [
+          "Biome mask generation →",
+          "Noise layering →",
+          "Curve shaping + thresholds →",
+          "Terrain density output"
+        ],
+        "tools": ["Generative design", "Noise systems", "Testing harnesses"],
+        "outcomes": ["Stronger biome readability", "Reduced artifacting in transitions"]
+      },
+      {
+        "id": "website-architecture",
+        "name": "McCal Website Architecture",
+        "repo": "McCals-Website",
+        "track": "platform",
+        "summary": "Versioned widget architecture for reliable Squarespace deployment with performance and accessibility guardrails.",
+        "problem": "Content and feature growth increased delivery risk; updates needed to be fast, reversible, and standards-compliant.",
+        "process": "Defined widget versioning conventions, validation checks, and documentation discipline so every release was auditable and rollback-safe.",
+        "result": "More stable release cadence, cleaner operational handoffs, and stronger confidence in production updates.",
+        "reflection": "Architecture quality comes from governance: patterns, docs, and validation are as important as implementation speed.",
+        "capabilities": [
+          "Front-end systems architecture",
+          "Release engineering",
+          "Accessibility/performance standards",
+          "Documentation and governance"
+        ],
+        "features": [
+          {
+            "title": "Versioned Widget Delivery",
+            "description": "Every behavior change ships in a new semantic version file, preserving history and rollback control."
+          },
+          {
+            "title": "Validation-First Workflow",
+            "description": "Integrated structure checks and standards alignment before production promotion."
+          },
+          {
+            "title": "Non-Photo Project Layer",
+            "description": "Expanded site identity beyond photography by introducing engineering project case studies."
+          }
+        ],
+        "screenshots": [
+          {
+            "src": "https://opengraph.githubassets.com/website-arch-1/McCal-Codes/McCals-Website",
+            "alt": "McCals-Website repository preview",
+            "caption": "Repository-level architecture for widget and content systems."
+          },
+          {
+            "src": "https://opengraph.githubassets.com/website-arch-2/McCal-Codes/McCals-Website",
+            "alt": "McCals-Website release snapshot",
+            "caption": "Operational context for versioned releases and standards."
+          }
+        ],
+        "systemArchitecture": [
+          "Source widgets →",
+          "Versioned HTML artifacts →",
+          "Validation/preflight →",
+          "Squarespace deployment"
+        ],
+        "related": [
+          {
+            "label": "Abridged App",
+            "url": "/abridged",
+            "note": "Product-facing content layer built on the same systems discipline."
+          },
+          {
+            "label": "Public Roadmap",
+            "url": "/roadmap",
+            "note": "Transparent delivery timeline and progress communication widget."
+          }
+        ],
+        "tools": ["HTML/CSS/JS", "CI checks", "Docs-driven workflows"],
+        "outcomes": ["Lower deployment risk", "Improved maintainability", "Clearer release communication"]
+      },
+      {
+        "id": "public-roadmap-system",
+        "name": "Public Roadmap System",
+        "repo": "McCals-Website",
+        "track": "governance",
+        "summary": "A public roadmap widget that communicates progress, priorities, and delivery transparency.",
+        "problem": "Project progress lived in internal notes and commits, making external communication inconsistent.",
+        "process": "Converted roadmap updates into a structured widget workflow aligned to changelog milestones and monthly checkpoints.",
+        "result": "Stronger stakeholder trust and clearer communication of what is complete, in progress, and next.",
+        "reflection": "Narrative governance matters: teams move faster when roadmap communication is explicit and visible.",
+        "capabilities": [
+          "Roadmap systems design",
+          "Delivery communication",
+          "Documentation governance",
+          "Transparent product operations"
+        ],
+        "features": [
+          {
+            "title": "Milestone Timeline UI",
+            "description": "Presents progress state visually so visitors can quickly understand momentum and direction."
+          },
+          {
+            "title": "Status + Priority Signals",
+            "description": "Clarifies what is done, active, and planned to reduce ambiguity for collaborators and hiring reviewers."
+          },
+          {
+            "title": "Update Discipline",
+            "description": "Ties roadmap updates to monthly review habits and changelog context for consistent communication."
+          }
+        ],
+        "screenshots": [
+          {
+            "src": "https://opengraph.githubassets.com/roadmap-system-1/McCal-Codes/McCals-Website",
+            "alt": "Roadmap system repository preview",
+            "caption": "Roadmap widget implementation and governance context in the website repository."
+          }
+        ],
+        "systemArchitecture": [
+          "Task source (docs/changelog) →",
+          "Roadmap data model →",
+          "Public widget rendering →",
+          "Monthly update loop"
+        ],
+        "related": [
+          {
+            "label": "McCal Website Architecture",
+            "url": "/projects",
+            "note": "The platform system that ships and validates roadmap updates."
+          },
+          {
+            "label": "Abridged App",
+            "url": "/abridged",
+            "note": "Product milestones feed the roadmap communication layer."
+          }
+        ],
+        "tools": ["JavaScript", "Roadmap content modeling", "Changelog workflows"],
+        "outcomes": ["Clearer project visibility", "Stronger accountability", "Better stakeholder communication"]
+      },
+      {
+        "id": "abridged-app",
+        "name": "Abridged App",
+        "repo": "mccal-app",
+        "track": "product",
+        "summary": "A product-facing application focused on making complex ideas accessible through clear interaction and content structure.",
+        "problem": "As product scope expanded, feature consistency and explanation quality became harder to maintain.",
+        "process": "Standardized feature patterns, clarified content hierarchy, and aligned implementation with documentation checkpoints.",
+        "result": "Cleaner feature onboarding, improved consistency, and easier cross-project reuse.",
+        "reflection": "Strong product systems depend on shared language between design, engineering, and documentation.",
+        "capabilities": [
+          "Product systems thinking",
+          "Interaction design",
+          "Cross-discipline documentation",
+          "Feature lifecycle management"
+        ],
+        "features": [
+          {
+            "title": "Reusable Feature Patterns",
+            "description": "Established predictable interaction patterns to reduce cognitive load and implementation drift."
+          },
+          {
+            "title": "Documentation as Product Surface",
+            "description": "Treated docs as part of the feature, improving onboarding and reducing support ambiguity."
+          },
+          {
+            "title": "Release Clarity",
+            "description": "Structured release notes and changelogs around user impact and system-level changes."
+          }
+        ],
+        "screenshots": [
+          {
+            "src": "https://opengraph.githubassets.com/abridged-app-1/McCal-Codes/mccal-app",
+            "alt": "Abridged app repository preview",
+            "caption": "Current implementation surface for application architecture and features."
+          }
+        ],
+        "systemArchitecture": [
+          "Feature modules →",
+          "Shared UI patterns →",
+          "Docs + release context →",
+          "User-facing outcomes"
+        ],
+        "related": [
+          {
+            "label": "McCal Website Architecture",
+            "url": "/projects",
+            "note": "Shared widget, documentation, and release conventions."
+          },
+          {
+            "label": "Public Roadmap",
+            "url": "/roadmap",
+            "note": "Communicates Abridged milestones and delivery trajectory."
+          }
+        ],
+        "tools": ["JavaScript", "Product documentation", "GitHub workflows"],
+        "outcomes": ["Improved consistency", "Clearer feature communication"]
+      }
+    ],
+    "foundations": [
+      {
+        "title": "Process over polish",
+        "detail": "Each project shows reasoning, iteration, and decision-making—not just final output."
+      },
+      {
+        "title": "Systems evidence",
+        "detail": "Architecture choices, feature tradeoffs, and outcomes are explicitly documented per case study."
+      },
+      {
+        "title": "Career positioning",
+        "detail": "Designed to communicate capability for engineering roles, graduate programs, and creative-tech teams."
+      },
+      {
+        "title": "Brand continuity",
+        "detail": "Adds Projects identity without replacing your existing photography Work identity."
+      }
+    ],
+    "workflow": [
+      "Define problem and constraints with explicit outcomes.",
+      "Prototype and test system interactions iteratively.",
+      "Document architecture, feature tradeoffs, and implementation decisions.",
+      "Validate usability, performance, and maintainability.",
+      "Publish case study narrative for review by hiring/admissions audiences."
+    ],
+    "architectureMap": [
+      "Portfolio Identity",
+      "  ├─ Work (Photography)",
+      "  └─ Projects (Systems + Software)",
+      "        ↓",
+      "Case Study Core",
+      "  ├─ Problem",
+      "  ├─ Process",
+      "  ├─ Architecture",
+      "  ├─ Features + Screenshots",
+      "  └─ Result + Reflection",
+      "        ↓",
+      "Proof Layer",
+      "  ├─ GitHub metadata",
+      "  ├─ Capability tags",
+      "  └─ Outcomes"
+    ]
+  }
+</script>
+
+<script>
+  (function () {
+    'use strict';
+
+    const root = document.getElementById('designSystemPortfolioWidget');
+    if (!root) return;
+
+    const dataEl = document.getElementById('designSystemPortfolioData');
+    const headingEl = document.getElementById('dspwHeading');
+    const subtitleEl = document.getElementById('dspwSubtitle');
+    const metricChipsEl = document.getElementById('dspwMetricChips');
+    const filtersEl = document.getElementById('dspwFilters');
+    const searchEl = document.getElementById('dspwSearch');
+    const sortEl = document.getElementById('dspwSort');
+    const filterLegendEl = document.getElementById('dspwFilterLegend');
+    const syncStatusEl = document.getElementById('dspwSyncStatus');
+    const projectGridEl = document.getElementById('dspwProjectGrid');
+    const foundationGridEl = document.getElementById('dspwFoundationGrid');
+    const workflowEl = document.getElementById('dspwWorkflow');
+    const archEl = document.getElementById('dspwArch');
+
+    const versionBtn = document.getElementById('dspwVersionIndicator');
+    const changelogModal = document.getElementById('dspwChangelog');
+    const changelogClose = document.getElementById('dspwModalClose');
+
+    const projectModal = document.getElementById('dspwProjectModal');
+    const projectClose = document.getElementById('dspwProjectClose');
+    const projectTitleEl = document.getElementById('dspwProjectTitle');
+    const projectBody = document.getElementById('dspwProjectBody');
+
+    const GH_CACHE_TTL = 30 * 60 * 1000;
+    const GH_CACHE_PREFIX = 'dspw-gh-cache:v1.3:';
+
+    const state = {
+      parsed: null,
+      activeTrack: (root.getAttribute('data-default-track') || 'all').toLowerCase(),
+      search: '',
+      sort: 'updated',
+      isSyncing: false,
+      filteredProjects: [],
+      activeProjectIndex: -1,
+      activeScreenshotIndex: 0,
+      lastFocus: null
+    };
+
+    function safeArray(value) {
+      return Array.isArray(value) ? value : [];
+    }
+
+    function unique(items) {
+      return Array.from(new Set(safeArray(items).filter(Boolean)));
+    }
+
+    function titleCase(track) {
+      const value = String(track || '').toLowerCase();
+      return value ? value.charAt(0).toUpperCase() + value.slice(1) : 'General';
+    }
+
+    function parseData() {
+      try {
+        state.parsed = JSON.parse(dataEl.textContent || '{}');
+      } catch (error) {
+        state.parsed = null;
+        projectGridEl.innerHTML = '<div class="dspw-empty">Unable to load portfolio dataset.</div>';
+        setSyncMessage('GitHub sync unavailable: dataset parse error.', 'warn');
+      }
+    }
+
+    function setHeader() {
+      if (!state.parsed) return;
+      if (state.parsed.heading) headingEl.textContent = state.parsed.heading;
+      if (state.parsed.subtitle) subtitleEl.textContent = state.parsed.subtitle;
+    }
+
+    function renderMetrics() {
+      if (!state.parsed) return;
+      const metrics = safeArray(state.parsed.metrics);
+      metricChipsEl.innerHTML = '';
+      metrics.forEach(function (metric) {
+        const li = document.createElement('li');
+        li.className = 'dspw-chip';
+        li.innerHTML = metric;
+        metricChipsEl.appendChild(li);
+      });
+    }
+
+    function getTracks(projects) {
+      const set = new Set();
+      projects.forEach(function (project) {
+        if (project && typeof project.track === 'string' && project.track.trim()) {
+          set.add(project.track.toLowerCase());
+        }
+      });
+      return ['all'].concat(Array.from(set));
+    }
+
+    function setSyncMessage(message, stateName) {
+      syncStatusEl.textContent = message;
+      syncStatusEl.setAttribute('data-state', stateName || '');
+    }
+
+    function getProjectStars(project) {
+      return Number(project._ghStars || 0);
+    }
+
+    function getProjectUpdated(project) {
+      return Number(project._ghPushedAtMs || 0);
+    }
+
+    function getFilteredProjects() {
+      const projects = safeArray(state.parsed.projects);
+
+      const byTrack = state.activeTrack === 'all'
+        ? projects
+        : projects.filter(function (project) {
+            return String(project.track || '').toLowerCase() === state.activeTrack;
+          });
+
+      const query = state.search.trim().toLowerCase();
+      const bySearch = !query
+        ? byTrack
+        : byTrack.filter(function (project) {
+            const featureText = safeArray(project.features)
+              .map(function (feature) {
+                return [feature.title, feature.description].join(' ');
+              })
+              .join(' ');
+
+            const haystack = [
+              project.name,
+              project.summary,
+              project.problem,
+              project.process,
+              project.result,
+              project.reflection,
+              safeArray(project.related)
+                .map(function (item) {
+                  return [item && item.label, item && item.note].join(' ');
+                })
+                .join(' '),
+              safeArray(project.capabilities).join(' '),
+              safeArray(project.tools).join(' '),
+              safeArray(project.outcomes).join(' '),
+              featureText
+            ]
+              .join(' ')
+              .toLowerCase();
+
+            return haystack.includes(query);
+          });
+
+      const sorted = bySearch.slice();
+      if (state.sort === 'name') {
+        sorted.sort(function (a, b) {
+          return String(a.name || '').localeCompare(String(b.name || ''));
+        });
+      } else if (state.sort === 'stars') {
+        sorted.sort(function (a, b) {
+          return getProjectStars(b) - getProjectStars(a);
+        });
+      } else {
+        sorted.sort(function (a, b) {
+          return getProjectUpdated(b) - getProjectUpdated(a);
+        });
+      }
+
+      return sorted;
+    }
+
+    function renderFilters() {
+      if (!state.parsed) return;
+      const tracks = getTracks(safeArray(state.parsed.projects));
+      if (!tracks.includes(state.activeTrack)) state.activeTrack = 'all';
+
+      filtersEl.innerHTML = '';
+
+      tracks.forEach(function (track) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'dspw-filter';
+        btn.textContent = titleCase(track);
+        btn.setAttribute('data-track', track);
+        btn.setAttribute('aria-pressed', String(state.activeTrack === track));
+        btn.addEventListener('click', function () {
+          state.activeTrack = track;
+          renderFilters();
+          renderProjects();
+        });
+        filtersEl.appendChild(btn);
+      });
+
+      const refreshBtn = document.createElement('button');
+      refreshBtn.type = 'button';
+      refreshBtn.className = 'dspw-refresh';
+      refreshBtn.textContent = state.isSyncing ? 'Syncing…' : 'Refresh GitHub Data';
+      refreshBtn.disabled = state.isSyncing;
+      refreshBtn.addEventListener('click', function () {
+        syncGithubData(true);
+      });
+      filtersEl.appendChild(refreshBtn);
+    }
+
+    function renderProjects() {
+      if (!state.parsed) return;
+
+      state.filteredProjects = getFilteredProjects();
+      projectGridEl.innerHTML = '';
+
+      filterLegendEl.textContent =
+        'Showing ' +
+        state.filteredProjects.length +
+        ' project' +
+        (state.filteredProjects.length === 1 ? '' : 's') +
+        (state.activeTrack === 'all' ? ' across all tracks.' : ' in ' + titleCase(state.activeTrack) + '.');
+
+      if (!state.filteredProjects.length) {
+        projectGridEl.innerHTML =
+          '<div class="dspw-empty">No projects match this filter/search combination. Try another query.</div>';
+        return;
+      }
+
+      state.filteredProjects.forEach(function (project, index) {
+        const card = document.createElement('article');
+        card.className = 'dspw-card';
+
+        const head = document.createElement('div');
+        head.className = 'dspw-card-head';
+
+        const title = document.createElement('h4');
+        title.className = 'dspw-card-title';
+        title.textContent = project.name || 'Untitled project';
+
+        const track = document.createElement('span');
+        track.className = 'dspw-card-track';
+        track.textContent = titleCase(String(project.track || 'general').toLowerCase());
+
+        head.appendChild(title);
+        head.appendChild(track);
+
+        const summary = document.createElement('p');
+        summary.className = 'dspw-p';
+        summary.textContent = project.summary || '';
+
+        const capabilities = document.createElement('p');
+        capabilities.className = 'dspw-legend';
+        capabilities.innerHTML = '<strong>Capabilities:</strong> ' + safeArray(project.capabilities).slice(0, 3).join(' • ');
+
+        const stats = document.createElement('div');
+        stats.className = 'dspw-card-stats';
+
+        [
+          '★ ' + getProjectStars(project),
+          '⑂ ' + Number(project._ghForks || 0),
+          'Updated ' + (project._ghPushedAtLabel || 'Unknown')
+        ].forEach(function (value) {
+          const badge = document.createElement('span');
+          badge.className = 'dspw-stat';
+          badge.textContent = value;
+          stats.appendChild(badge);
+        });
+
+        const links = document.createElement('div');
+        links.className = 'dspw-card-links';
+        links.style.justifyContent = 'flex-start';
+
+        if (project.repoUrl) {
+          const ghLink = document.createElement('a');
+          ghLink.className = 'dspw-card-link';
+          ghLink.href = project.repoUrl;
+          ghLink.target = '_blank';
+          ghLink.rel = 'noopener noreferrer';
+          ghLink.textContent = 'GitHub';
+          links.appendChild(ghLink);
+        }
+
+        if (project.homepage) {
+          const liveLink = document.createElement('a');
+          liveLink.className = 'dspw-card-link';
+          liveLink.href = project.homepage;
+          liveLink.target = '_blank';
+          liveLink.rel = 'noopener noreferrer';
+          liveLink.textContent = 'Live';
+          links.appendChild(liveLink);
+        }
+
+        const openBtn = document.createElement('button');
+        openBtn.type = 'button';
+        openBtn.className = 'dspw-open';
+        openBtn.textContent = 'View case study';
+        openBtn.addEventListener('click', function () {
+          openProjectModal(index);
+        });
+        links.appendChild(openBtn);
+
+        card.appendChild(head);
+        card.appendChild(summary);
+        card.appendChild(capabilities);
+        card.appendChild(stats);
+        card.appendChild(links);
+
+        projectGridEl.appendChild(card);
+      });
+    }
+
+    function renderFoundations() {
+      if (!state.parsed) return;
+      const foundations = safeArray(state.parsed.foundations);
+      foundationGridEl.innerHTML = '';
+
+      if (!foundations.length) {
+        foundationGridEl.innerHTML = '<div class="dspw-empty">No foundations set.</div>';
+        return;
+      }
+
+      foundations.forEach(function (foundation) {
+        const card = document.createElement('article');
+        card.className = 'dspw-card';
+
+        const title = document.createElement('h4');
+        title.className = 'dspw-card-title';
+        title.textContent = foundation.title || 'Foundation';
+
+        const detail = document.createElement('p');
+        detail.className = 'dspw-p';
+        detail.textContent = foundation.detail || '';
+
+        card.appendChild(title);
+        card.appendChild(detail);
+        foundationGridEl.appendChild(card);
+      });
+    }
+
+    function renderWorkflowAndArch() {
+      if (!state.parsed) return;
+
+      workflowEl.innerHTML = '';
+      safeArray(state.parsed.workflow).forEach(function (step) {
+        const li = document.createElement('li');
+        li.textContent = step;
+        workflowEl.appendChild(li);
+      });
+
+      archEl.textContent = safeArray(state.parsed.architectureMap).join('\n');
+    }
+
+    function cacheKey(owner, repo) {
+      return GH_CACHE_PREFIX + owner + ':' + repo;
+    }
+
+    function readRepoCache(owner, repo) {
+      try {
+        const raw = localStorage.getItem(cacheKey(owner, repo));
+        if (!raw) return null;
+        const parsedCache = JSON.parse(raw);
+        if (!parsedCache || typeof parsedCache !== 'object') return null;
+        if (Date.now() - Number(parsedCache.timestamp || 0) > GH_CACHE_TTL) return null;
+        return parsedCache.data || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writeRepoCache(owner, repo, data) {
+      try {
+        localStorage.setItem(
+          cacheKey(owner, repo),
+          JSON.stringify({
+            timestamp: Date.now(),
+            data: data
+          })
+        );
+      } catch (error) {
+        // ignore cache write failures
+      }
+    }
+
+    async function fetchGitHubRepo(owner, repo, forceRefresh) {
+      if (!forceRefresh) {
+        const cached = readRepoCache(owner, repo);
+        if (cached) return { data: cached, source: 'cache' };
+      }
+
+      const base = 'https://api.github.com/repos/' + encodeURIComponent(owner) + '/' + encodeURIComponent(repo);
+      const repoResp = await fetch(base, { cache: 'no-store' });
+      if (!repoResp.ok) return { data: null, error: repoResp.status };
+
+      const repoData = await repoResp.json();
+      const languagesResp = await fetch(base + '/languages', { cache: 'no-store' });
+      repoData.languages = languagesResp.ok ? await languagesResp.json() : {};
+
+      writeRepoCache(owner, repo, repoData);
+      return { data: repoData, source: 'network' };
+    }
+
+    function formatDate(value) {
+      if (!value) return 'Unknown';
+      try {
+        return new Date(value).toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      } catch (error) {
+        return String(value);
+      }
+    }
+
+    function buildRepoPreviewUrl(owner, repo, seed) {
+      return 'https://opengraph.githubassets.com/' + encodeURIComponent(seed || 'preview') + '/' + owner + '/' + repo;
+    }
+
+    function normalizeScreenshots(project, owner) {
+      const shots = safeArray(project.screenshots).filter(function (shot) {
+        return shot && typeof shot.src === 'string' && shot.src.trim();
+      });
+
+      if (shots.length) return shots;
+
+      if (project.repo) {
+        return [
+          {
+            src: buildRepoPreviewUrl(owner, project.repo, project.id || 'repo-shot'),
+            alt: (project.name || 'Project') + ' repository preview',
+            caption: 'Auto-generated repository preview image from GitHub.'
+          }
+        ];
+      }
+
+      return [];
+    }
+
+    function enrichProjectWithRepo(project, repoData, owner) {
+      const enriched = Object.assign({}, project);
+      const repoLanguages = Object.keys(repoData.languages || {}).slice(0, 4);
+
+      const stars = Number(repoData.stargazers_count || 0);
+      const forks = Number(repoData.forks_count || 0);
+      const issues = Number(repoData.open_issues_count || 0);
+      const pushedLabel = formatDate(repoData.pushed_at);
+
+      enriched._ghStars = stars;
+      enriched._ghForks = forks;
+      enriched._ghIssues = issues;
+      enriched._ghPushedAt = repoData.pushed_at || '';
+      enriched._ghPushedAtMs = Date.parse(repoData.pushed_at || '') || 0;
+      enriched._ghPushedAtLabel = pushedLabel;
+
+      enriched.repoUrl = repoData.html_url || enriched.repoUrl;
+      enriched.homepage = repoData.homepage || enriched.homepage;
+      enriched.summary = enriched.summary || repoData.description || enriched.summary;
+      enriched.tools = unique([].concat(enriched.tools || [], repoLanguages));
+      enriched.outcomes = unique(
+        [].concat(enriched.outcomes || [], [
+          'GitHub stars: ' + stars,
+          'Forks: ' + forks,
+          'Open issues: ' + issues,
+          'Last push: ' + pushedLabel
+        ])
+      );
+      enriched.screenshots = normalizeScreenshots(enriched, owner);
+
+      return enriched;
+    }
+
+    async function syncGithubData(forceRefresh) {
+      if (!state.parsed || state.isSyncing) return;
+
+      const owner =
+        (root.getAttribute('data-github-owner') || (state.parsed.github && state.parsed.github.owner) || '').trim();
+
+      if (!owner) {
+        setSyncMessage('GitHub sync skipped: no owner configured.', 'warn');
+        return;
+      }
+
+      const projects = safeArray(state.parsed.projects);
+      const repoProjects = projects.filter(function (project) {
+        return typeof project.repo === 'string' && project.repo.trim().length > 0;
+      });
+
+      if (!repoProjects.length) {
+        setSyncMessage('GitHub sync skipped: no repo mappings found.', 'warn');
+        return;
+      }
+
+      state.isSyncing = true;
+      renderFilters();
+      setSyncMessage('Syncing GitHub data for ' + repoProjects.length + ' repos…', '');
+
+      const updatesById = {};
+      let okCount = 0;
+      let failCount = 0;
+      let cacheCount = 0;
+
+      await Promise.all(
+        repoProjects.map(async function (project) {
+          const repoName = String(project.repo || '').trim();
+          if (!repoName) return;
+
+          try {
+            const result = await fetchGitHubRepo(owner, repoName, Boolean(forceRefresh));
+            if (result && result.data) {
+              updatesById[project.id] = enrichProjectWithRepo(project, result.data, owner);
+              okCount += 1;
+              if (result.source === 'cache') cacheCount += 1;
+            } else {
+              failCount += 1;
+            }
+          } catch (error) {
+            failCount += 1;
+          }
+        })
+      );
+
+      state.parsed.projects = projects.map(function (project) {
+        const candidate = updatesById[project.id] || project;
+        if (!safeArray(candidate.screenshots).length) {
+          candidate.screenshots = normalizeScreenshots(candidate, owner);
+        }
+        return candidate;
+      });
+
+      const stamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      if (failCount > 0) {
+        setSyncMessage(
+          'GitHub sync: ' + okCount + ' updated, ' + failCount + ' unavailable. Last sync ' + stamp + '.',
+          'warn'
+        );
+      } else {
+        setSyncMessage(
+          'GitHub sync complete: ' + okCount + ' repos updated (' + cacheCount + ' from cache). Last sync ' + stamp + '.',
+          'ok'
+        );
+      }
+
+      state.isSyncing = false;
+      renderFilters();
+      renderProjects();
+      if (projectModal.classList.contains('active') && state.activeProjectIndex >= 0) {
+        renderProjectModal(state.activeProjectIndex, state.activeScreenshotIndex);
+      }
+    }
+
+    function createList(items, fallback) {
+      const list = document.createElement('ul');
+      list.className = 'dspw-list';
+
+      const safeItems = safeArray(items);
+      if (!safeItems.length && fallback) {
+        const li = document.createElement('li');
+        li.textContent = fallback;
+        list.appendChild(li);
+        return list;
+      }
+
+      safeItems.forEach(function (item) {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.appendChild(li);
+      });
+
+      return list;
+    }
+
+    function renderProjectModal(index, screenshotIndex) {
+      const project = state.filteredProjects[index];
+      if (!project) return;
+
+      const owner =
+        (root.getAttribute('data-github-owner') || (state.parsed.github && state.parsed.github.owner) || '').trim();
+      const screenshots = normalizeScreenshots(project, owner);
+      const safeScreenshotIndex = Math.max(0, Math.min(Number(screenshotIndex || 0), screenshots.length - 1));
+      state.activeScreenshotIndex = safeScreenshotIndex;
+
+      projectTitleEl.textContent = project.name || 'Project details';
+
+      const fragment = document.createDocumentFragment();
+
+      const top = document.createElement('section');
+      top.className = 'dspw-project-top';
+
+      const heroWrap = document.createElement('div');
+      heroWrap.className = 'dspw-project-hero';
+
+      if (screenshots.length) {
+        const activeShot = screenshots[safeScreenshotIndex];
+        const img = document.createElement('img');
+        img.src = activeShot.src;
+        img.alt = activeShot.alt || (project.name + ' screenshot');
+        img.loading = 'lazy';
+        heroWrap.appendChild(img);
+
+        const caption = document.createElement('p');
+        caption.className = 'dspw-project-caption';
+        caption.textContent = activeShot.caption || 'Project screenshot';
+        heroWrap.appendChild(caption);
+      } else {
+        const empty = document.createElement('p');
+        empty.className = 'dspw-project-caption';
+        empty.textContent = 'Add screenshots in project.screenshots[] to display visual evidence.';
+        heroWrap.appendChild(empty);
+      }
+
+      top.appendChild(heroWrap);
+
+      const summaryWrap = document.createElement('div');
+      const summary = document.createElement('p');
+      summary.className = 'dspw-p';
+      summary.textContent = project.summary || '';
+      summaryWrap.appendChild(summary);
+
+      const linkRow = document.createElement('div');
+      linkRow.className = 'dspw-card-links';
+      linkRow.style.justifyContent = 'flex-start';
+      linkRow.style.marginTop = '8px';
+
+      if (project.repoUrl) {
+        const ghLink = document.createElement('a');
+        ghLink.className = 'dspw-card-link';
+        ghLink.href = project.repoUrl;
+        ghLink.target = '_blank';
+        ghLink.rel = 'noopener noreferrer';
+        ghLink.textContent = 'GitHub';
+        linkRow.appendChild(ghLink);
+      }
+
+      if (project.homepage) {
+        const liveLink = document.createElement('a');
+        liveLink.className = 'dspw-card-link';
+        liveLink.href = project.homepage;
+        liveLink.target = '_blank';
+        liveLink.rel = 'noopener noreferrer';
+        liveLink.textContent = 'Live';
+        linkRow.appendChild(liveLink);
+      }
+
+      const track = document.createElement('span');
+      track.className = 'dspw-card-track';
+      track.textContent = titleCase(project.track || 'general');
+      linkRow.appendChild(track);
+
+      summaryWrap.appendChild(linkRow);
+
+      const stats = document.createElement('div');
+      stats.className = 'dspw-card-stats';
+      stats.style.marginTop = '10px';
+      ['★ ' + Number(project._ghStars || 0), '⑂ ' + Number(project._ghForks || 0), 'Open issues ' + Number(project._ghIssues || 0), 'Updated ' + (project._ghPushedAtLabel || 'Unknown')].forEach(function (value) {
+        const badge = document.createElement('span');
+        badge.className = 'dspw-stat';
+        badge.textContent = value;
+        stats.appendChild(badge);
+      });
+      summaryWrap.appendChild(stats);
+
+      const capabilitiesTitle = document.createElement('p');
+      capabilitiesTitle.className = 'dspw-legend';
+      capabilitiesTitle.style.marginTop = '12px';
+      capabilitiesTitle.innerHTML = '<strong>Demonstrated capabilities</strong>';
+      summaryWrap.appendChild(capabilitiesTitle);
+      summaryWrap.appendChild(createList(project.capabilities, 'Add capabilities[] to show role fit.'));
+
+      top.appendChild(summaryWrap);
+      fragment.appendChild(top);
+
+      if (screenshots.length > 1) {
+        const shotsSection = document.createElement('section');
+        shotsSection.className = 'dspw-shots';
+
+        const shotsTitle = document.createElement('p');
+        shotsTitle.className = 'dspw-legend';
+        shotsTitle.innerHTML = '<strong>Screenshots</strong> — select a view';
+        shotsSection.appendChild(shotsTitle);
+
+        const shotButtons = document.createElement('div');
+        shotButtons.className = 'dspw-shot-buttons';
+
+        screenshots.forEach(function (shot, shotIndex) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'dspw-shot-btn';
+          btn.textContent = 'Shot ' + (shotIndex + 1);
+          btn.setAttribute('aria-pressed', String(shotIndex === safeScreenshotIndex));
+          btn.addEventListener('click', function () {
+            renderProjectModal(index, shotIndex);
+          });
+          shotButtons.appendChild(btn);
+        });
+
+        shotsSection.appendChild(shotButtons);
+        fragment.appendChild(shotsSection);
+      }
+
+      const relatedItems = safeArray(project.related).filter(function (item) {
+        return item && (item.label || item.url || item.note);
+      });
+      if (relatedItems.length) {
+        const relatedSection = document.createElement('section');
+        relatedSection.className = 'dspw-case-section';
+
+        const relatedTitle = document.createElement('h4');
+        relatedTitle.textContent = 'Connected systems';
+        relatedSection.appendChild(relatedTitle);
+
+        const relatedLinks = document.createElement('div');
+        relatedLinks.className = 'dspw-card-links';
+        relatedLinks.style.justifyContent = 'flex-start';
+        relatedLinks.style.marginTop = '8px';
+
+        relatedItems.forEach(function (item) {
+          if (item.url) {
+            const link = document.createElement('a');
+            link.className = 'dspw-card-link';
+            link.href = item.url;
+            link.textContent = item.label || item.url;
+            relatedLinks.appendChild(link);
+          }
+        });
+
+        if (relatedLinks.children.length) {
+          relatedSection.appendChild(relatedLinks);
+        }
+
+        const relatedList = document.createElement('ul');
+        relatedList.className = 'dspw-list';
+        relatedItems.forEach(function (item) {
+          const li = document.createElement('li');
+          li.textContent = (item.label ? item.label + ': ' : '') + (item.note || item.url || 'Related system');
+          relatedList.appendChild(li);
+        });
+        relatedSection.appendChild(relatedList);
+
+        fragment.appendChild(relatedSection);
+      }
+
+      const features = safeArray(project.features);
+      const featureSection = document.createElement('section');
+      featureSection.className = 'dspw-case-section';
+      const featureTitle = document.createElement('h4');
+      featureTitle.textContent = 'Key features';
+      featureSection.appendChild(featureTitle);
+
+      if (features.length) {
+        const featureGrid = document.createElement('div');
+        featureGrid.className = 'dspw-case-grid';
+        features.forEach(function (feature) {
+          const card = document.createElement('article');
+          card.className = 'dspw-case-card';
+          const h5 = document.createElement('h5');
+          h5.textContent = feature.title || 'Feature';
+          const p = document.createElement('p');
+          p.textContent = feature.description || '';
+          card.appendChild(h5);
+          card.appendChild(p);
+          featureGrid.appendChild(card);
+        });
+        featureSection.appendChild(featureGrid);
+      } else {
+        const empty = document.createElement('p');
+        empty.className = 'dspw-p';
+        empty.textContent = 'Add features[] entries to show deeper implementation evidence.';
+        featureSection.appendChild(empty);
+      }
+      fragment.appendChild(featureSection);
+
+      [
+        { title: 'Problem', value: project.problem },
+        { title: 'Process', value: project.process },
+        { title: 'System architecture', value: safeArray(project.systemArchitecture).join(' ') },
+        { title: 'Result', value: project.result },
+        { title: 'Reflection', value: project.reflection }
+      ].forEach(function (sectionData) {
+        const section = document.createElement('section');
+        section.className = 'dspw-case-section';
+        const h4 = document.createElement('h4');
+        h4.textContent = sectionData.title;
+        const p = document.createElement('p');
+        p.textContent = sectionData.value || 'Not specified.';
+        section.appendChild(h4);
+        section.appendChild(p);
+        fragment.appendChild(section);
+      });
+
+      const evidence = document.createElement('section');
+      evidence.className = 'dspw-case-section';
+      const evidenceTitle = document.createElement('h4');
+      evidenceTitle.textContent = 'Technical evidence';
+      evidence.appendChild(evidenceTitle);
+      evidence.appendChild(createList(project.tools, 'Add tools[] for technical stack evidence.'));
+      evidence.appendChild(createList(project.outcomes, 'Add outcomes[] for measurable impact evidence.'));
+      fragment.appendChild(evidence);
+
+      const nav = document.createElement('div');
+      nav.className = 'dspw-project-nav';
+
+      const prev = document.createElement('button');
+      prev.type = 'button';
+      prev.className = 'dspw-nav-btn';
+      prev.textContent = '← Previous project';
+      prev.disabled = index <= 0;
+      prev.addEventListener('click', function () {
+        openProjectModal(index - 1);
+      });
+
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'dspw-nav-btn';
+      next.textContent = 'Next project →';
+      next.disabled = index >= state.filteredProjects.length - 1;
+      next.addEventListener('click', function () {
+        openProjectModal(index + 1);
+      });
+
+      nav.appendChild(prev);
+      nav.appendChild(next);
+      fragment.appendChild(nav);
+
+      projectBody.innerHTML = '';
+      projectBody.appendChild(fragment);
+    }
+
+    function openProjectModal(index) {
+      if (index < 0 || index >= state.filteredProjects.length) return;
+      state.activeProjectIndex = index;
+      state.activeScreenshotIndex = 0;
+      state.lastFocus = document.activeElement;
+      renderProjectModal(index, state.activeScreenshotIndex);
+      projectModal.classList.add('active');
+      projectModal.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('dspw-modal-open');
+      projectClose.focus();
+    }
+
+    function closeProjectModal() {
+      projectModal.classList.remove('active');
+      projectModal.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('dspw-modal-open');
+      if (state.lastFocus && typeof state.lastFocus.focus === 'function') {
+        state.lastFocus.focus();
+      }
+    }
+
+    function openChangelog() {
+      state.lastFocus = document.activeElement;
+      changelogModal.classList.add('active');
+      changelogModal.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('dspw-modal-open');
+      changelogClose.focus();
+    }
+
+    function closeChangelog() {
+      changelogModal.classList.remove('active');
+      changelogModal.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('dspw-modal-open');
+      if (state.lastFocus && typeof state.lastFocus.focus === 'function') {
+        state.lastFocus.focus();
+      }
+    }
+
+    function bindModals() {
+      versionBtn.addEventListener('click', openChangelog);
+      versionBtn.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openChangelog();
+        }
+      });
+
+      changelogClose.addEventListener('click', closeChangelog);
+      projectClose.addEventListener('click', closeProjectModal);
+
+      changelogModal.addEventListener('click', function (event) {
+        if (event.target === changelogModal) closeChangelog();
+      });
+
+      projectModal.addEventListener('click', function (event) {
+        if (event.target === projectModal) closeProjectModal();
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          if (projectModal.classList.contains('active')) {
+            closeProjectModal();
+            return;
+          }
+          if (changelogModal.classList.contains('active')) {
+            closeChangelog();
+          }
+        }
+
+        if (!projectModal.classList.contains('active')) return;
+        if (event.key === 'ArrowLeft' && state.activeScreenshotIndex > 0) {
+          event.preventDefault();
+          renderProjectModal(state.activeProjectIndex, state.activeScreenshotIndex - 1);
+        }
+        if (event.key === 'ArrowRight') {
+          const project = state.filteredProjects[state.activeProjectIndex];
+          const owner =
+            (root.getAttribute('data-github-owner') || (state.parsed.github && state.parsed.github.owner) || '').trim();
+          const shots = normalizeScreenshots(project || {}, owner);
+          if (state.activeScreenshotIndex < shots.length - 1) {
+            event.preventDefault();
+            renderProjectModal(state.activeProjectIndex, state.activeScreenshotIndex + 1);
+          }
+        }
+      });
+    }
+
+    function bindExplorerControls() {
+      searchEl.addEventListener('input', function () {
+        state.search = searchEl.value || '';
+        renderProjects();
+      });
+
+      sortEl.addEventListener('change', function () {
+        state.sort = sortEl.value || 'updated';
+        renderProjects();
+      });
+    }
+
+    function init() {
+      parseData();
+      if (!state.parsed) return;
+
+      setHeader();
+      renderMetrics();
+      renderFilters();
+      renderProjects();
+      renderFoundations();
+      renderWorkflowAndArch();
+      bindModals();
+      bindExplorerControls();
+
+      syncGithubData(false);
+
+      window.designSystemPortfolioAPI = {
+        getVersion: function () {
+          return root.getAttribute('data-widget-version');
+        },
+        getActiveTrack: function () {
+          return state.activeTrack;
+        },
+        getFilteredProjectNames: function () {
+          return state.filteredProjects.map(function (project) {
+            return project.name;
+          });
+        },
+        refreshGitHubData: function () {
+          syncGithubData(true);
+        },
+        openProjectById: function (id) {
+          const index = state.filteredProjects.findIndex(function (project) {
+            return project.id === id;
+          });
+          if (index >= 0) openProjectModal(index);
+        }
+      };
+    }
+
+    init();
+  })();
+</script>

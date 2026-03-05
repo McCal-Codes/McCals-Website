@@ -5,6 +5,53 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.6] - 2026-03-05
+
+### Added 🧭
+
+- **Dedicated Projects top-level navigation** with its own submenu, separated from photography `Work`.
+- **Projects submenu links** for correlated systems surfaces:
+  - `/projects`
+  - `/projects/design-systems`
+  - `/projects/terranova-editor`
+  - `/abridged`
+  - `/roadmap`
+
+### Changed ✨
+
+- Updated top-level IA sequence to better reflect multidisciplinary identity:
+  - `Work` → `Projects` → `Podcast` → `Blog` → `About`
+
+### Retained ♿
+
+- Mobile/desktop submenu behavior, keyboard escape handling, outside-click close behavior, and crawl-friendly anchor links from v2.0.5.
+
+## [2.0.6] - 2026-03-05
+
+### Added ✨
+
+- **Projects top-level menu**: Added a new `Projects` navigation item with dedicated desktop/mobile submenu behavior.
+- **Projects submenu links**:
+  - TerraNova Editor
+  - Hytale Biome Portfolio
+  - McCal Website System
+  - Abridged App
+
+### Changed
+
+- Preserved existing `Work` submenu and interaction model while extending the nav to support multiple submenu groups.
+
+## [2.0.5] - 2026-03-05
+
+### Fixed 🛠️
+
+- **Desktop Work dropdown reliability**: Prevented desktop submenu from getting stuck hidden after route changes, outside-click handling, or resize events by clearing inline `display` styles on desktop.
+- **Mobile/desktop submenu state separation**: Kept explicit `display` toggling for mobile only while preserving CSS hover-driven desktop behavior.
+
+### Changed ♿
+
+- **A11y/crawl hardening baseline**: Added ARIA relationship attributes for menu controls and kept the primary Work anchor crawlable (`/featured`) while preserving mobile submenu toggle behavior.
+
 ## [2.0.0] - 2025-12-30
 
 ### Added 💎

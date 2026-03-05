@@ -1,0 +1,705 @@
+<!-- McCal Navigation v2.0.6 "Projects IA Alignment + Correlated Systems"
+     Architecture: Mimics v1.6.3 (Full-width, Right-aligned Mobile).
+  Evolution: v2.0.5 baseline + dedicated Projects submenu linking Design System, Abridged, and Roadmap surfaces. -->
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ffffff;
+    --mcc-accent-strong: #e0e0e0;
+    --mcc-bg: #000000;
+    --mcc-fg: #ffffff;
+    --mcc-line: rgba(255, 255, 255, 0.12);
+    --mcc-muted: #888888;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: rgba(255, 255, 255, 0.08);
+    --focus: #ffffff;
+    --link: var(--accent);
+    --panel-bg: rgba(10, 10, 12, 0.72);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 32px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 12px;
+    --mcc-control-height: 42px;
+    --mcc-z-top: 2147483647;
+    --mcc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: rgba(0, 0, 0, 0.08);
+    --panel-bg: rgba(255, 255, 255, 0.92);
+    --panel-border: rgba(0, 0, 0, 0.06);
+    --panel-blur: 24px;
+    --chip: rgba(0, 0, 0, 0.05);
+    --focus: #000000;
+  }
+
+  .mcc-nav-widget [class^='mcc-'],
+  .mcc-nav-widget [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--fg);
+  }
+
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .mcc-nav-widget,
+  .mcc-nav-widget *,
+  .mcc-nav-widget a,
+  .mcc-nav-widget button,
+  .mcc-nav-widget svg,
+  .mcc-nav-widget path {
+    color: inherit !important;
+    border-color: inherit;
+  }
+
+  .mcc-nav-widget {
+    color: #ffffff !important;
+  }
+
+  .mcc-nav-widget .mcc-nav__submenu {
+    color: #ffffff !important;
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  :root {
+    --mcc-nav-height: 0px;
+    --mcc-nav-text-color: #f5f5f5;
+    --mcc-nav-text-secondary: rgba(255, 255, 255, 0.8);
+    --mcc-nav-brand-color: #ffffff;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+  html[data-mcc-nav='active'] .Header,
+  html[data-mcc-nav='active'] header[role='banner'],
+  html[data-mcc-nav='active'] [data-test='header'] {
+    display: none !important;
+    visibility: hidden;
+  }
+
+  .mcc-nav-shell {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  .mcc-nav {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    padding: calc(clamp(32px, 7vw, 72px) + env(safe-area-inset-top, 0px)) clamp(44px, 8vw, 128px)
+      clamp(16px, 3vw, 28px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(18px, 5vw, 72px);
+    color: var(--mcc-nav-text-color);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.3) 60%,
+      transparent 100%
+    );
+    transition: all 0.6s var(--mcc-ease);
+  }
+
+  .mcc-nav.is-scrolled {
+    background: rgba(10, 10, 12, 0.85);
+    -webkit-backdrop-filter: saturate(140%) blur(var(--panel-blur));
+    backdrop-filter: saturate(140%) blur(var(--panel-blur));
+    padding: 20px clamp(44px, 8vw, 128px);
+    color: #f5f5f5;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .Header,
+  header[role='banner'],
+  [data-test='header'],
+  .header-border,
+  .header-announcement-bar-wrapper {
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .mcc-nav__brand a {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    font-weight: 600;
+    color: #ffffff !important;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    text-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.4s var(--mcc-ease);
+  }
+  .mcc-nav__brand a:hover {
+    opacity: 0.75;
+  }
+
+  .mcc-nav__menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 3vw, 2.8rem);
+  }
+
+  .mcc-nav__links {
+    list-style: none;
+    display: flex;
+    gap: inherit;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .mcc-nav__toggle {
+    display: none;
+  }
+
+  @media (min-width: 769px) {
+    .mcc-nav__links:hover .mcc-nav__link a {
+      opacity: 0.4;
+    }
+    .mcc-nav__link:hover a {
+      opacity: 1 !important;
+      transform: translateY(-1px);
+    }
+  }
+
+  .mcc-nav__link a {
+    color: var(--mcc-nav-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding-bottom: 6px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.4s var(--mcc-ease);
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .mcc-nav__link a::after {
+    display: none !important;
+  }
+
+  .mcc-nav__link a[aria-current='page'] {
+    color: #fff;
+    opacity: 1 !important;
+  }
+
+  .mcc-nav__cta-btn {
+    display: inline-flex;
+    padding: 8px 20px;
+    background: transparent;
+    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    color: var(--mcc-nav-text-secondary) !important;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.4s var(--mcc-ease);
+    white-space: nowrap;
+  }
+  .mcc-nav__cta-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .mcc-nav {
+      padding: clamp(26px, 8vw, 48px) clamp(24px, 8vw, 40px) clamp(12px, 4vw, 24px);
+    }
+    .mcc-nav__toggle {
+      display: flex;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      margin: 0;
+      border: 0.5px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #ffffff !important;
+      transition: all 0.4s var(--mcc-ease);
+      backdrop-filter: blur(12px);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .mcc-nav__toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .mcc-nav__menu {
+      position: absolute;
+      top: calc(100% + 16px);
+      right: clamp(16px, 6vw, 32px);
+      width: min(240px, 80vw);
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      padding: 24px;
+      border-radius: 20px;
+      background: rgba(8, 8, 12, 0.94);
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+      backdrop-filter: saturate(140%) blur(24px);
+      -webkit-backdrop-filter: saturate(140%) blur(24px);
+      z-index: 10001;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s var(--mcc-ease);
+    }
+
+    .mcc-nav.mcc-nav--menu-open .mcc-nav__menu {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mcc-nav__links {
+      flex-direction: column;
+      align-items: flex-end;
+      width: 100%;
+      gap: 16px;
+    }
+    .mcc-nav__link a {
+      font-size: 1.15rem;
+      padding: 4px 0;
+      letter-spacing: 0.08em;
+    }
+    .mcc-nav__submenu {
+      display: none;
+      width: 100%;
+      padding: 12px 0;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+      margin-top: 12px;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+      list-style: none;
+    }
+    .mcc-nav__submenu li {
+      width: 100%;
+    }
+    .mcc-nav__submenu li a {
+      display: block;
+      width: 100%;
+      padding: 12px 24px 12px 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: right;
+      transition: color 0.3s var(--mcc-ease);
+    }
+    .mcc-nav__submenu li a:hover {
+      color: #fff;
+    }
+    .mcc-nav__submenu-toggle {
+      background: none;
+      border: none;
+      color: #ffffff;
+      padding: 8px;
+      margin-left: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: transform 0.4s var(--mcc-ease);
+      will-change: transform;
+    }
+    .mcc-nav__submenu-btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+    }
+    .mcc-nav__cta {
+      width: 100%;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      margin-top: 10px;
+    }
+    .mcc-nav__cta-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 14px;
+      border: 0.5px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  @media (min-width: 769px) {
+    .mcc-nav__link--has-submenu {
+      position: relative;
+    }
+    .mcc-nav__submenu {
+      position: absolute;
+      top: calc(100% + 16px);
+      right: 0;
+      background: rgba(8, 8, 12, 0.94);
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 12px;
+      min-width: 220px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px) scale(0.98);
+      transition: all 0.4s var(--mcc-ease);
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
+      backdrop-filter: saturate(140%) blur(24px);
+      -webkit-backdrop-filter: saturate(140%) blur(24px);
+    }
+    .mcc-nav__submenu li {
+      width: 100%;
+    }
+    .mcc-nav__link--has-submenu:hover .mcc-nav__submenu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .mcc-nav__submenu li a {
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 8px;
+      width: 100%;
+      text-align: right;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.3s var(--mcc-ease);
+    }
+    .mcc-nav__submenu li a:hover {
+      background: var(--chip);
+      color: #fff;
+    }
+    .mcc-nav__submenu-toggle {
+      display: none;
+    }
+
+    .mcc-nav__link--has-submenu::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: 20px;
+    }
+  }
+
+  .mcc-nav__burger {
+    position: relative;
+    width: 20px;
+    height: 12px;
+  }
+  .mcc-nav__burger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    transition: all 0.4s var(--mcc-ease);
+  }
+  .mcc-nav__burger span:nth-child(1) {
+    top: 0;
+  }
+  .mcc-nav__burger span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .mcc-nav__burger span:nth-child(3) {
+    bottom: 0;
+  }
+
+  .mcc-nav--menu-open .mcc-nav__burger span:nth-child(1) {
+    transform: translateY(5.5px) rotate(45deg);
+  }
+  .mcc-nav--menu-open .mcc-nav__burger span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .mcc-nav--menu-open .mcc-nav__burger span:nth-child(3) {
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+</style>
+
+<div class="mcc-nav-widget" data-widget-version="2.0.6">
+  <div class="mcc-nav-shell">
+    <nav class="mcc-nav" id="mcc-main-nav" aria-label="Primary site navigation">
+      <div class="mcc-nav__brand">
+        <a href="/">Caleb McCartney</a>
+      </div>
+
+      <button
+        class="mcc-nav__toggle"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mcc-nav-menu"
+      >
+        <div class="mcc-nav__burger"><span></span><span></span><span></span></div>
+      </button>
+
+      <div class="mcc-nav__menu" id="mcc-nav-menu">
+        <ul class="mcc-nav__links">
+          <li class="mcc-nav__link mcc-nav__link--has-submenu">
+            <div class="mcc-nav__submenu-btn-container">
+              <a href="/featured">Work</a>
+              <button
+                class="mcc-nav__submenu-toggle"
+                aria-label="Toggle Work submenu"
+                aria-expanded="false"
+                aria-controls="mcc-nav-submenu-work"
+              >
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                  <path d="M1 1L5 5L9 1" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+              </button>
+            </div>
+            <ul class="mcc-nav__submenu" id="mcc-nav-submenu-work">
+              <li><a href="/featured">Featured</a></li>
+              <li><a href="/journalism">Photojournalism</a></li>
+              <li><a href="/concert">Concert</a></li>
+              <li><a href="/event">Event</a></li>
+              <li><a href="/nature">Nature</a></li>
+              <li><a href="/portraits">Portraits</a></li>
+            </ul>
+          </li>
+          <li class="mcc-nav__link mcc-nav__link--has-submenu">
+            <div class="mcc-nav__submenu-btn-container">
+              <a href="/projects">Projects</a>
+              <button
+                class="mcc-nav__submenu-toggle"
+                aria-label="Toggle Projects submenu"
+                aria-expanded="false"
+                aria-controls="mcc-nav-submenu-projects"
+              >
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                  <path d="M1 1L5 5L9 1" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+              </button>
+            </div>
+            <ul class="mcc-nav__submenu" id="mcc-nav-submenu-projects">
+              <li><a href="/projects">Overview</a></li>
+              <li><a href="/design-systems">Design Systems</a></li>
+              <li><a href="/terranova">TerraNova Editor</a></li>
+              <li><a href="/abridged">Abridged App</a></li>
+              <li><a href="/roadmap">Roadmap</a></li>
+            </ul>
+          </li>
+          <li class="mcc-nav__link"><a href="/podcast">Podcast</a></li>
+          <li class="mcc-nav__link"><a href="/blog">Blog</a></li>
+          <li class="mcc-nav__link"><a href="/about">About</a></li>
+          <li class="mcc-nav__cta">
+            <a href="/request-a-quote" class="mcc-nav__cta-btn">Request a Quote</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const nav = document.getElementById('mcc-main-nav');
+    if (!nav) return;
+
+    const docEl = document.documentElement;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const toggle = nav.querySelector('.mcc-nav__toggle');
+    const navMenu = nav.querySelector('.mcc-nav__menu');
+    const submenuWrappers = nav.querySelectorAll('.mcc-nav__link--has-submenu');
+
+    const killHeaders = () => {
+      ['.Header', 'header[role="banner"]', '[data-test="header"]'].forEach((s) => {
+        document.querySelectorAll(s).forEach((el) => {
+          el.style.display = 'none';
+          el.setAttribute('aria-hidden', 'true');
+        });
+      });
+    };
+
+    killHeaders();
+    docEl.dataset.mccNav = 'active';
+
+    const handleScroll = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 50);
+    };
+
+    let scrollTicking = false;
+    const onScroll = () => {
+      if (prefersReducedMotion) {
+        handleScroll();
+        return;
+      }
+      if (scrollTicking) return;
+      scrollTicking = true;
+      window.requestAnimationFrame(() => {
+        handleScroll();
+        scrollTicking = false;
+      });
+    };
+
+    const setMenuOpen = (open) => {
+      nav.classList.toggle('mcc-nav--menu-open', open);
+      if (toggle) toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    const closeSubmenus = () => {
+      const isMobile = window.innerWidth <= 768;
+      submenuWrappers.forEach((wrapper) => {
+        const btn = wrapper.querySelector('.mcc-nav__submenu-toggle');
+        const sub = wrapper.querySelector('.mcc-nav__submenu');
+        if (!sub) return;
+
+        if (isMobile) {
+          sub.style.display = 'none';
+        } else {
+          sub.style.removeProperty('display');
+        }
+
+        if (btn) {
+          btn.style.transform = '';
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    handleScroll();
+
+    if (toggle) {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = nav.classList.contains('mcc-nav--menu-open');
+        setMenuOpen(!isOpen);
+      });
+    }
+
+    submenuWrappers.forEach((wrapper) => {
+      const btn = wrapper.querySelector('.mcc-nav__submenu-toggle');
+      const sub = wrapper.querySelector('.mcc-nav__submenu');
+      const link = wrapper.querySelector(':scope > div > a');
+
+      const toggleSub = (e) => {
+        if (window.innerWidth <= 768 && sub) {
+          e.preventDefault();
+          e.stopPropagation();
+          const isShown = sub.style.display === 'flex';
+          sub.style.display = isShown ? 'none' : 'flex';
+          if (btn) {
+            btn.style.transform = isShown ? '' : 'rotate(180deg)';
+            btn.setAttribute('aria-expanded', String(!isShown));
+          }
+        }
+      };
+
+      if (btn) btn.addEventListener('click', toggleSub);
+      if (link) {
+        link.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) toggleSub(e);
+        });
+      }
+    });
+
+    if (navMenu) {
+      navMenu.addEventListener('click', (event) => {
+        if (!event.target.closest('a')) return;
+        setMenuOpen(false);
+        closeSubmenus();
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      if (!nav.contains(event.target)) {
+        setMenuOpen(false);
+        closeSubmenus();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      closeSubmenus();
+      setMenuOpen(false);
+      if (toggle && window.innerWidth <= 768) toggle.focus();
+    });
+
+    const highlight = () => {
+      const path = window.location.pathname.replace(/\/+$/, '') || '/';
+      nav.querySelectorAll('a').forEach((a) => {
+        const h = a.getAttribute('href');
+        if (!h) return;
+        if (h === path || (h !== '/' && path.startsWith(h))) {
+          a.setAttribute('aria-current', 'page');
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    highlight();
+    window.addEventListener('SquarespaceRoutingComplete', () => {
+      setMenuOpen(false);
+      closeSubmenus();
+      highlight();
+    });
+
+    const updateHeight = () => {
+      docEl.style.setProperty('--mcc-nav-height', nav.offsetHeight + 'px');
+    };
+
+    updateHeight();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        if (window.innerWidth > 768) {
+          setMenuOpen(false);
+          closeSubmenus();
+        }
+        updateHeight();
+      }, 120);
+    });
+  })();
+</script>

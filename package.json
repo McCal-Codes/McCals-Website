@@ -21,6 +21,8 @@
     "api:refresh:concert": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/concert",
     "api:refresh:events": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/events",
     "api:refresh:journalism": "curl -X POST http://localhost:3001/api/v1/webhooks/refresh/journalism",
+    "private-meta:export": "node scripts/utils/export-private-repo-metadata.js --repos McCal-Codes/abridgd --out src/data/private-repo-metadata.json",
+    "private-meta:export:dry": "node scripts/utils/export-private-repo-metadata.js --repos McCal-Codes/abridgd --out src/data/private-repo-metadata.json --dry-run",
     "api:demo-seo": "npm run api:start & sleep 5 && npm run seo:all && echo '\\n✅ Demo complete! Check dist/sitemap.xml and dist/structured-data/'",
     "serve:site": "SERVE_TARGET=site node dev-server.js",
     "// BUILD": "--- Build & Site Export ---",

@@ -163,11 +163,11 @@ This widget follows the McCals-Website design system:
 7. **Test & Commit**
 
    ```bash
-   # Open preview to verify
-   open src/widgets/_content/roadmap/preview.html
+  # Open preview to verify
+  open src/widgets/projects/roadmap/preview.html
 
    # Commit changes
-   git add src/widgets/_content/roadmap/
+  git add src/widgets/projects/roadmap/
    git commit -m "chore: update roadmap for [Month Year] - [brief summary]"
    git push
    ```

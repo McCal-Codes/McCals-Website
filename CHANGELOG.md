@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-03-05
+
+### Docs/Meta
+
+- Rewrote `.github/copilot-instructions.md` into a concise, repo-specific operational guide.
+- Consolidated core guardrails from standards/README sources (architecture scope, manifest policy, widget conventions, performance/a11y doctrine, script organization, and security baseline).
+- Reduced historical verbosity in instructions and clarified that deep change history belongs in `CHANGELOG.md` and `docs/**`.
+
 ## 2026-02-02
 
 ### Standards — February 2026 Hardening Addendum

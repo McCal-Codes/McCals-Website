@@ -1,0 +1,57 @@
+name: Sync Private Repo Metadata
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '15 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-private-metadata:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Export private repo metadata
+        env:
+          GITHUB_PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_METADATA_TOKEN }}
+        run: |
+          node scripts/utils/export-private-repo-metadata.js \
+            --repos McCal-Codes/abridgd \
+            --out src/data/private-repo-metadata.json
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git status --porcelain -- src/data/private-repo-metadata.json | grep -q .; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit metadata update
+        if: steps.diff.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/private-repo-metadata.json
+          git commit -m "chore: refresh private repo metadata"
+          git push
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.diff.outputs.has_changes }}" = "true" ]; then
+            echo "✅ Private metadata file updated and pushed."
+          else
+            echo "ℹ️ No private metadata changes detected."
+          fi
