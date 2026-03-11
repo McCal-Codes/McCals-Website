@@ -3,7 +3,9 @@
   Version: v1.1.0-WIP
   Changelog:
   v1.1.0: 
-    - Obscured honeypot field name for better spam protection
+    - Fixed success and error message auto-hide behavior
+    - Added a minimum submit-time trap alongside the honeypot
+    - Sanitized provider error details before rendering them
     - Added version indicator to UI
     - Improved theme transition stability
   v1.0.0: Initial release with EmailJS integration and dark mode
@@ -426,6 +428,16 @@
         overflow: hidden;
       }
 
+      .honeypot-group {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        pointer-events: none;
+        opacity: 0;
+      }
+
       /* === CONFIG NOTICE === */
       .config-notice {
         background: #fff3cd;
@@ -495,7 +507,12 @@
       </div>
 
       <!-- Messages -->
-      <div class="message message-success" id="successMessage">
+      <div
+        class="message message-success"
+        id="successMessage"
+        role="status"
+        aria-live="polite"
+      >
         <span>✓</span>
         <div>
           <strong>Message sent successfully!</strong><br />
@@ -503,7 +520,12 @@
         </div>
       </div>
 
-      <div class="message message-error" id="errorMessage">
+      <div
+        class="message message-error"
+        id="errorMessage"
+        role="alert"
+        aria-live="assertive"
+      >
         <span>✕</span>
         <div>
           <strong>Failed to send message.</strong><br />
@@ -515,13 +537,19 @@
       <!-- Contact Form -->
       <form class="contact-form" id="contactForm">
         <!-- Honeypot for spam prevention (hidden from users) -->
-        <input
-          type="text"
-          name="cf_website_url"
-          class="honeypot"
-          tabindex="-1"
-          autocomplete="off"
-        />
+        <div class="honeypot-group" aria-hidden="true">
+          <label for="cf_website_url">Company website</label>
+          <input
+            type="text"
+            id="cf_website_url"
+            name="cf_website_url"
+            class="honeypot"
+            tabindex="-1"
+            autocomplete="off"
+            inputmode="url"
+          />
+        </div>
+        <input type="hidden" id="contactLoadedAt" name="contact_loaded_at" value="" />
 
         <div class="form-row">
           <div class="form-group">
@@ -659,11 +687,46 @@
       const submitButton = document.getElementById('submitButton');
       const successMessage = document.getElementById('successMessage');
       const errorMessage = document.getElementById('errorMessage');
+      const contactLoadedAt = document.getElementById('contactLoadedAt');
+      const MESSAGE_TIMEOUT_MS = 10000;
+      const MIN_SUBMIT_DELAY_MS = 2500;
+      let messageTimer = null;
+
+      contactLoadedAt.value = String(Date.now());
 
       // Hide messages
       function hideMessages() {
+        if (messageTimer) {
+          clearTimeout(messageTimer);
+          messageTimer = null;
+        }
         successMessage.classList.remove('show');
         errorMessage.classList.remove('show');
+      }
+
+      function queueMessageAutoHide() {
+        if (messageTimer) {
+          clearTimeout(messageTimer);
+        }
+
+        messageTimer = setTimeout(() => {
+          successMessage.classList.remove('show');
+          errorMessage.classList.remove('show');
+          messageTimer = null;
+        }, MESSAGE_TIMEOUT_MS);
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>\"']/g, (char) => {
+          const entityMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+          };
+          return entityMap[char] || char;
+        });
       }
 
       // Show success
@@ -671,22 +734,26 @@
         hideMessages();
         successMessage.classList.add('show');
         successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        queueMessageAutoHide();
       }
 
       // Show error
-      function showError(message) {
+      function showError(details) {
         hideMessages();
-        if (message) {
+        if (details) {
           errorMessage.innerHTML = `
           <span>✕</span>
           <div>
             <strong>Failed to send message.</strong><br>
-            ${message}
+            ${escapeHtml(details)}<br>
+            Please try again or email us directly at
+            <a href="mailto:contact@mccal.media">contact@mccal.media</a>
           </div>
         `;
         }
         errorMessage.classList.add('show');
         errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        queueMessageAutoHide();
       }
 
       // Form submission
@@ -696,6 +763,13 @@
         // Check honeypot
         if (form.cf_website_url.value) {
           console.log('Spam detected via honeypot');
+          return;
+        }
+
+        const timeSinceLoad = Date.now() - Number(contactLoadedAt.value || Date.now());
+        if (timeSinceLoad < MIN_SUBMIT_DELAY_MS) {
+          console.warn('Potential bot submission blocked: form submitted too quickly');
+          showError('Please wait a moment before submitting the form again.');
           return;
         }
 
@@ -713,10 +787,10 @@
         try {
           // Prepare template parameters
           const templateParams = {
-            name: form.name.value,
-            email: form.email.value,
+            name: form.name.value.trim(),
+            email: form.email.value.trim(),
             subject: form.subject.value,
-            message: form.message.value,
+            message: form.message.value.trim(),
             consent: form.consent.checked
               ? 'Yes - User consented to privacy policy and data storage'
               : 'No',
@@ -737,17 +811,14 @@
 
           // Reset form
           form.reset();
+          contactLoadedAt.value = String(Date.now());
         } catch (error) {
           console.error('EmailJS Error:', error);
-
-          let errorMsg =
-            'Please try again or email us directly at <a href="mailto:contact@mccal.media">contact@mccal.media</a>';
-
-          if (error.text) {
-            errorMsg = `Error: ${error.text}. ${errorMsg}`;
-          }
-
-          showError(errorMsg);
+          const errorDetails =
+            error && typeof error.text === 'string' && error.text.trim()
+              ? error.text.trim()
+              : '';
+          showError(errorDetails);
         } finally {
           // Re-enable button
           submitButton.disabled = false;
@@ -755,17 +826,6 @@
         }
       });
 
-      // Auto-hide messages after 10 seconds
-      function autoHideMessages() {
-        setTimeout(() => {
-          successMessage.classList.remove('show');
-          errorMessage.classList.remove('show');
-        }, 10000);
-      }
-
-      // Add auto-hide to success/error
-      successMessage.addEventListener('transitionend', autoHideMessages);
-      errorMessage.addEventListener('transitionend', autoHideMessages);
     </script>
   </body>
 </html>
