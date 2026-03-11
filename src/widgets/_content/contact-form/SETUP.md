@@ -1,164 +1,111 @@
-# Contact Form Widget - Formspree Setup
+# Contact Form Widget - EmailJS Setup
 
-## Quick Setup (2 minutes)
+This widget currently ships with EmailJS integration. The Formspree instructions that used to live
+here no longer matched the actual widget code.
 
-### Step 1: Create Formspree Account
-1. Go to [Formspree.io](https://formspree.io/)
-2. Sign up for free (50 submissions/month)
-3. Verify your email
+## Setup flow
 
-### Step 2: Create a Form
-1. Click **+ New Form**
-2. Give it a name: "McCal Media Contact Form"
-3. Click **Create Form**
-4. **Copy your Form ID** (e.g., `mbjqnelr`)
-   - It's in the URL: `https://formspree.io/forms/mbjqnelr/integration`
-   - Or shown as "Form Endpoint"
+### 1. Create an EmailJS account
 
-### Step 3: Configure Widget
+1. Go to `https://www.emailjs.com/`
+2. Sign in or create an account
+3. Verify the inbox you want to use for contact submissions
 
-Open `v1.0.0-contact-form.html` and find this line at the bottom:
+### 2. Add an email service
 
-```javascript
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'; // ← REPLACE YOUR_FORM_ID
+1. Open the EmailJS dashboard
+2. Go to `Email Services`
+3. Add the provider you want to send through
+4. Copy the resulting `Service ID`
+
+### 3. Create a template
+
+1. Go to `Email Templates`
+2. Create a template for contact submissions
+3. Include these variables in the template body or subject:
+
+```text
+{{name}}
+{{email}}
+{{subject}}
+{{message}}
+{{consent}}
+{{timestamp}}
 ```
 
-Replace `YOUR_FORM_ID` with your actual Form ID:
+4. Copy the resulting `Template ID`
+
+### 4. Copy your public key
+
+1. Open `Account`
+2. Copy your `Public Key`
+
+### 5. Update the widget
+
+Open `src/widgets/_content/contact-form/versions/v1.1.0-contact-enhanced.html` and replace the
+values in `EMAILJS_CONFIG`:
 
 ```javascript
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbjqnelr';
+const EMAILJS_CONFIG = {
+  publicKey: 'YOUR_PUBLIC_KEY',
+  serviceId: 'YOUR_SERVICE_ID',
+  templateId: 'YOUR_TEMPLATE_ID',
+};
 ```
 
-### Step 4: Test
+### 6. Test locally
 
-1. Save the file
-2. Open the widget in a browser
-3. Fill out the form
-4. Click "Send Message"
-5. Check your email inbox - Formspree forwards submissions to your registered email!
+1. Open the widget HTML file in a browser
+2. Fill out every required field
+3. Wait a couple of seconds before submitting
+4. Confirm the success state appears
+5. Verify the message arrives in the configured inbox
 
-## How It Works
+## Recommended template example
 
-1. User submits form
-2. Form data sent to Formspree
-3. Formspree forwards email to you
-4. You receive notification
-5. View submissions in Formspree dashboard
+```text
+New contact form submission
 
-## Formspree Dashboard
+Name: {{name}}
+Email: {{email}}
+Subject: {{subject}}
+Consent: {{consent}}
+Submitted: {{timestamp}}
 
-View all submissions at: https://formspree.io/forms/YOUR_FORM_ID/submissions
-
-Features:
-- See all form submissions
-- Export to CSV
-- Spam filtering (Akismet)
-- Email notifications
-- Custom reply-to addresses
-
-## Free Tier Limits
-
-Formspree free plan:
-- ✅ 50 submissions per month
-- ✅ Unlimited forms
-- ✅ Email notifications
-- ✅ Spam filtering
-- ✅ Basic support
-
-For higher volume: $10/month for 1,000 submissions
+Message:
+{{message}}
+```
 
 ## Troubleshooting
 
-### "Formspree Not Configured" message appears
-- Make sure you replaced `YOUR_FORM_ID` in the endpoint
-- Check that there are no typos
-- Refresh the page after saving changes
+### "EmailJS Not Configured" appears
 
-### Form submits but no email received
-- Check your Formspree dashboard submissions
-- Verify your email address in Formspree account settings
-- Check spam folder
-- Make sure you confirmed your email address with Formspree
+- One or more `EMAILJS_CONFIG` values are still placeholders
+- Refresh the page after editing the widget file
 
-### "Failed to send message" error
-- Open browser console (F12) to see detailed error
-- Verify your Form ID is correct
-- Check you haven't exceeded 50 submissions/month limit
-- Try creating a new form in Formspree dashboard
+### Submission fails immediately
 
-### First submission shows confirmation page
-- This is normal! Formspree requires one confirmation
-- Click "Confirm your email" in the message
-- All future submissions will work normally
+- Check the browser console for the EmailJS error
+- Confirm the public key, service ID, and template ID all belong to the same EmailJS account
+- Confirm the email service is active in EmailJS
 
-## Advanced Configuration
+### No email arrives
 
-### Custom Email Notifications
+- Check the EmailJS dashboard activity log
+- Verify the destination inbox on the connected email service
+- Check spam/junk folders
+- Confirm the template still references the expected variables
 
-In Formspree dashboard:
-1. Go to your form settings
-2. Under **Notifications** → Add custom email addresses
-3. Customize notification templates
+### A fast test submission is blocked
 
-### Reply-To Address
+- The widget now rejects submissions made too quickly after page load
+- Wait a moment and submit again
 
-Formspree automatically uses the submitter's email as the reply-to address, so you can reply directly to submissions.
+## Security notes
 
-### Spam Protection
-
-Formspree includes Akismet spam filtering automatically. You can also:
-- Enable reCAPTCHA in form settings
-- Use the honeypot field (already included)
-- Set submission rate limits
-
-### Export Data
-
-From the dashboard:
-1. Go to Submissions
-2. Click **Export**
-3. Download as CSV
-
-## Alternative: EmailJS
-
-If you prefer EmailJS (100 emails/month free), see the alternative setup below:
-
-<details>
-<summary>EmailJS Setup Instructions</summary>
-
-### Step 1: Create EmailJS Account
-1. Go to [EmailJS.com](https://www.emailjs.com/)
-2. Sign up for free (100 emails/month)
-
-### Step 2: Add Email Service
-1. Go to Email Services
-2. Add Gmail/Outlook/Custom SMTP
-3. Copy Service ID
-
-### Step 3: Create Template
-1. Go to Email Templates  
-2. Create new template with these variables:
-   - `{{name}}`, `{{email}}`, `{{subject}}`, `{{message}}`
-3. Copy Template ID
-
-### Step 4: Get Public Key
-1. Go to Account Settings
-2. Copy Public Key
-
-### Step 5: Update Widget
-You'll need to replace the Formspree code with EmailJS code. See the original EmailJS version for reference.
-
-</details>
-
-## Security Notes
-
-- ✅ Form ID is safe to expose (it's public)
-- ✅ Honeypot field prevents basic spam
-- ✅ Formspree Akismet filtering
-- ✅ Rate limiting included
-- ⚠️ For high-traffic sites, enable reCAPTCHA in Formspree settings
-
-## Support
-
-- Formspree Docs: https://help.formspree.io/
-- Formspree Dashboard: https://formspree.io/forms
-- McCal Media: contact@mccal.media
+- The widget uses a hidden honeypot field and a minimum submit-time check to reduce obvious bot
+  traffic.
+- EmailJS public keys are client-side by design, but you should still avoid reusing the same
+  service/template pair across unrelated forms.
+- For higher-trust lead handling, replace this widget with the native app route and owned backend
+  flow planned in `updates/todo.md`.
