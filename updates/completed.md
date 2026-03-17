@@ -6,6 +6,27 @@ This file tracks all completed tasks that have been removed from the active `tod
 
 ---
 
+## March 2026 Completions
+
+### Contact Form Hardening + Portfolio Bridge Cleanup (Mar 11, 2026)
+
+- [x] **Contact Form v1.1.0 hardening** - Added a timed anti-bot trap in addition to the honeypot, fixed success/error auto-hide behavior, trimmed submitted values, escaped provider error text before rendering, and improved `aria-live`/status messaging.
+- [x] **Contact Form docs corrected** - Rewrote `src/widgets/_content/contact-form/README.md` and `SETUP.md` so setup guidance matches the actual EmailJS implementation.
+- [x] **Portfolio bridge version sync** - Updated `sites/dev.mcc-cal.com/utils/widgetConfig.ts` so the dev app points at current versions for journalism, concerts, events, featured work, portraits, nature, and video.
+- [x] **Added missing video route** - Created `sites/dev.mcc-cal.com/pages/video.tsx` so the video portfolio has a proper dev bridge route.
+- [x] **Fixed grouped widget version detection** - Updated `sites/dev.mcc-cal.com/utils/widgetVersionDetector.ts` to resolve version directories inside grouped widget folders such as `portfolios/`, `_content/`, `_navigation/`, `_admin/`, and `projects/`.
+- [x] **Portfolio documentation cleanup** - Refreshed the READMEs for concert, event, featured, photojournalism, portrait, nature, and video portfolios to match active versions and current status.
+- [x] **Validation completed**
+  - `npx tsc --noEmit` passed in `sites/dev.mcc-cal.com`
+  - `npm run validate:widgets` passed for all widget HTML files
+
+**Open follow-up identified during the session:**
+
+- `nature-portfolio` still needs broader content coverage plus final accessibility/performance review.
+- `video-portfolio` still needs the manifest generator, external data flow, and a clearer production scope.
+
+---
+
 ## ✅ January 2026 Completions
 
 ### Portfolio Performance Optimization (Jan 6, 2026)

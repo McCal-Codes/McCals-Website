@@ -1,0 +1,437 @@
+/**
+ * API Integration Test Page
+ * 
+ * Tests the Cloudflare Worker API endpoints and verifies CORS is working
+ * with dev.mcc-cal.com domain.
+ * 
+ * Accessible at: http://localhost:3000/api-test
+ */
+
+import { useState, useEffect } from 'react';
+
+interface TestResult {
+  name: string;
+  status: 'pending' | 'success' | 'error' | 'warning';
+  message: string;
+  duration?: number;
+  details?: any;
+}
+
+interface APIHealth {
+  apiUrl: string;
+  domain: string;
+  timestamp: string;
+  tests: TestResult[];
+  summary: {
+    total: number;
+    passed: number;
+    failed: number;
+    warnings: number;
+  };
+}
+
+export default function APITestPage() {
+  const [results, setResults] = useState<APIHealth | null>(null);
+  const [running, setRunning] = useState(false);
+
+  const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
+
+  async function runTests() {
+    setRunning(true);
+    const testResults: TestResult[] = [];
+    const startTime = Date.now();
+
+    // Test 1: CORS Preflight
+    try {
+      const startTest = Date.now();
+      const response = await fetch(`${API_BASE}/api/v1/manifests/concert`, {
+        method: 'OPTIONS',
+        headers: {
+          'Origin': window.location.origin,
+          'Access-Control-Request-Method': 'GET',
+          'Access-Control-Request-Headers': 'Content-Type',
+        },
+      });
+      const duration = Date.now() - startTest;
+
+      if (
+        response.headers.get('Access-Control-Allow-Origin') === window.location.origin ||
+        response.headers.get('Access-Control-Allow-Origin') === '*'
+      ) {
+        testResults.push({
+          name: 'CORS Preflight',
+          status: 'success',
+          message: `CORS headers present from ${window.location.origin}`,
+          duration,
+        });
+      } else {
+        testResults.push({
+          name: 'CORS Preflight',
+          status: 'warning',
+          message: `CORS Allow-Origin: ${response.headers.get('Access-Control-Allow-Origin')}`,
+          duration,
+        });
+      }
+    } catch (error) {
+      testResults.push({
+        name: 'CORS Preflight',
+        status: 'error',
+        message: `CORS preflight failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        details: error,
+      });
+    }
+
+    // Test 2: Concert Manifest
+    try {
+      const startTest = Date.now();
+      const response = await fetch(`${API_BASE}/api/v1/manifests/concert`);
+      const duration = Date.now() - startTest;
+
+      if (response.ok) {
+        const data = await response.json();
+        testResults.push({
+          name: 'Concert Manifest',
+          status: 'success',
+          message: `Successfully fetched concert manifest (${Object.keys(data).length} properties)`,
+          duration,
+          details: { totalImages: data.totalImages, bandCount: data.bands?.length },
+        });
+      } else {
+        testResults.push({
+          name: 'Concert Manifest',
+          status: 'error',
+          message: `HTTP ${response.status}: ${response.statusText}`,
+          duration,
+        });
+      }
+    } catch (error) {
+      testResults.push({
+        name: 'Concert Manifest',
+        status: 'error',
+        message: `Failed to fetch concert manifest: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        details: error,
+      });
+    }
+
+    // Test 3: Events Manifest
+    try {
+      const startTest = Date.now();
+      const response = await fetch(`${API_BASE}/api/v1/manifests/events`);
+      const duration = Date.now() - startTest;
+
+      if (response.ok) {
+        const data = await response.json();
+        testResults.push({
+          name: 'Events Manifest',
+          status: 'success',
+          message: `Successfully fetched events manifest (${Object.keys(data).length} properties)`,
+          duration,
+          details: { totalImages: data.totalImages, eventCount: data.events?.length },
+        });
+      } else {
+        testResults.push({
+          name: 'Events Manifest',
+          status: 'error',
+          message: `HTTP ${response.status}: ${response.statusText}`,
+          duration,
+        });
+      }
+    } catch (error) {
+      testResults.push({
+        name: 'Events Manifest',
+        status: 'error',
+        message: `Failed to fetch events manifest: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        details: error,
+      });
+    }
+
+    // Test 4: Journalism Manifest
+    try {
+      const startTest = Date.now();
+      const response = await fetch(`${API_BASE}/api/v1/manifests/journalism`);
+      const duration = Date.now() - startTest;
+
+      if (response.ok) {
+        const data = await response.json();
+        testResults.push({
+          name: 'Journalism Manifest',
+          status: 'success',
+          message: `Successfully fetched journalism manifest`,
+          duration,
+          details: { totalImages: data.totalImages },
+        });
+      } else {
+        testResults.push({
+          name: 'Journalism Manifest',
+          status: 'error',
+          message: `HTTP ${response.status}: ${response.statusText}`,
+          duration,
+        });
+      }
+    } catch (error) {
+      testResults.push({
+        name: 'Journalism Manifest',
+        status: 'error',
+        message: `Failed to fetch journalism manifest: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        details: error,
+      });
+    }
+
+    // Test 5: Blog Posts
+    try {
+      const startTest = Date.now();
+      const response = await fetch(`${API_BASE}/api/v1/blog/posts`);
+      const duration = Date.now() - startTest;
+
+      if (response.ok) {
+        const data = await response.json();
+        testResults.push({
+          name: 'Blog Posts',
+          status: 'success',
+          message: `Successfully fetched blog posts`,
+          duration,
+          details: { postCount: data.posts?.length || 0 },
+        });
+      } else if (response.status === 503) {
+        testResults.push({
+          name: 'Blog Posts',
+          status: 'warning',
+          message: 'Blog service unavailable (expected if not deployed)',
+          duration,
+        });
+      } else {
+        testResults.push({
+          name: 'Blog Posts',
+          status: 'error',
+          message: `HTTP ${response.status}: ${response.statusText}`,
+          duration,
+        });
+      }
+    } catch (error) {
+      testResults.push({
+        name: 'Blog Posts',
+        status: 'warning',
+        message: `Blog API connection: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        details: error,
+      });
+    }
+
+    // Test 6: Rate Limiting Headers
+    try {
+      const response = await fetch(`${API_BASE}/api/v1/manifests/portrait`);
+      const rateLimit = response.headers.get('X-RateLimit-Remaining');
+      const rateLimitLimit = response.headers.get('X-RateLimit-Limit');
+
+      if (rateLimit !== null && rateLimitLimit !== null) {
+        testResults.push({
+          name: 'Rate Limiting',
+          status: 'success',
+          message: `Rate limiting active (${rateLimit}/${rateLimitLimit} remaining)`,
+          details: { remaining: rateLimit, limit: rateLimitLimit },
+        });
+      } else {
+        testResults.push({
+          name: 'Rate Limiting',
+          status: 'warning',
+          message: 'Rate limiting headers not present',
+        });
+      }
+    } catch (error) {
+      testResults.push({
+        name: 'Rate Limiting',
+        status: 'warning',
+        message: `Could not verify rate limiting: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      });
+    }
+
+    // Test 7: Cache Headers
+    try {
+      const response = await fetch(`${API_BASE}/api/v1/manifests/featured`);
+      const cacheControl = response.headers.get('Cache-Control');
+      const etag = response.headers.get('ETag');
+
+      if (cacheControl || etag) {
+        testResults.push({
+          name: 'Cache Headers',
+          status: 'success',
+          message: `Cache configured (Cache-Control: ${cacheControl}, ETag: ${etag ? 'present' : 'absent'})`,
+          details: { cacheControl, etag },
+        });
+      } else {
+        testResults.push({
+          name: 'Cache Headers',
+          status: 'warning',
+          message: 'Cache headers not configured',
+        });
+      }
+    } catch (error) {
+      testResults.push({
+        name: 'Cache Headers',
+        status: 'warning',
+        message: `Could not verify cache headers: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      });
+    }
+
+    void (Date.now() - startTime);
+    const summary = {
+      total: testResults.length,
+      passed: testResults.filter((t) => t.status === 'success').length,
+      failed: testResults.filter((t) => t.status === 'error').length,
+      warnings: testResults.filter((t) => t.status === 'warning').length,
+    };
+
+    setResults({
+      apiUrl: API_BASE,
+      domain: window.location.origin,
+      timestamp: new Date().toISOString(),
+      tests: testResults,
+      summary,
+    });
+
+    setRunning(false);
+  }
+
+  useEffect(() => {
+    // Auto-run tests on page load
+    runTests();
+  }, []);
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'success':
+        return 'text-green-600';
+      case 'error':
+        return 'text-red-600';
+      case 'warning':
+        return 'text-yellow-600';
+      default:
+        return 'text-gray-600';
+    }
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'success':
+        return '✓';
+      case 'error':
+        return '✗';
+      case 'warning':
+        return '⚠';
+      default:
+        return '○';
+    }
+  };
+
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', padding: '20px' }}>
+      <h1>API Integration Test</h1>
+
+      <div style={{ marginBottom: '20px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+        <p>
+          <strong>API Base:</strong> {results?.apiUrl || 'Loading...'}
+        </p>
+        <p>
+          <strong>Domain:</strong> {results?.domain || 'Loading...'}
+        </p>
+        <p>
+          <strong>Test Time:</strong> {results?.timestamp || 'Running...'}
+        </p>
+      </div>
+
+      {results && (
+        <div style={{ marginBottom: '20px' }}>
+          <h2>Summary</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
+            <div style={{ padding: '10px', backgroundColor: '#e8f5e9', borderRadius: '4px' }}>
+              <strong>Total:</strong> {results.summary.total}
+            </div>
+            <div style={{ padding: '10px', backgroundColor: '#e8f5e9', borderRadius: '4px' }}>
+              <strong>Passed:</strong> {results.summary.passed}
+            </div>
+            <div style={{ padding: '10px', backgroundColor: '#ffebee', borderRadius: '4px' }}>
+              <strong>Failed:</strong> {results.summary.failed}
+            </div>
+            <div style={{ padding: '10px', backgroundColor: '#fff3e0', borderRadius: '4px' }}>
+              <strong>Warnings:</strong> {results.summary.warnings}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <h2>Test Results</h2>
+      {running && <p>Running tests...</p>}
+      {results && (
+        <div>
+          {results.tests.map((test, idx) => (
+            <div
+              key={idx}
+              style={{
+                marginBottom: '10px',
+                padding: '12px',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                borderLeft: `4px solid ${
+                  test.status === 'success'
+                    ? '#4caf50'
+                    : test.status === 'error'
+                    ? '#f44336'
+                    : '#ff9800'
+                }`,
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <h3 style={{ margin: '0 0 5px 0' }}>
+                    <span style={{ marginRight: '8px', fontSize: '16px' }}>{getStatusIcon(test.status)}</span>
+                    {test.name}
+                  </h3>
+                  <p style={{ margin: '0 0 5px 0', color: '#666' }}>{test.message}</p>
+                  {test.details && (
+                    <pre style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#999', backgroundColor: '#fafafa', padding: '5px', borderRadius: '2px', overflow: 'auto' }}>
+                      {JSON.stringify(test.details, null, 2)}
+                    </pre>
+                  )}
+                </div>
+                <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                  <span className={getStatusColor(test.status)} style={{ fontWeight: 'bold' }}>
+                    {test.status}
+                  </span>
+                  {test.duration && <p style={{ margin: '5px 0 0 0', color: '#999', fontSize: '12px' }}>{test.duration}ms</p>}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div style={{ marginTop: '20px' }}>
+        <button
+          onClick={runTests}
+          disabled={running}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#2196f3',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: running ? 'not-allowed' : 'pointer',
+            opacity: running ? 0.5 : 1,
+          }}
+        >
+          {running ? 'Running...' : 'Run Tests'}
+        </button>
+      </div>
+
+      <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f5f5f5', borderRadius: '4px', fontSize: '12px' }}>
+        <h3>Notes</h3>
+        <ul>
+          <li>This page tests the Cloudflare Worker API endpoints</li>
+          <li>CORS is configured to allow dev.mcc-cal.com</li>
+          <li>Blog API may show as unavailable if the worker is not deployed yet</li>
+          <li>Rate limiting is set to 100 requests per minute</li>
+          <li>All manifest requests are cached for 10 minutes (stale-while-revalidate for 1 hour)</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
