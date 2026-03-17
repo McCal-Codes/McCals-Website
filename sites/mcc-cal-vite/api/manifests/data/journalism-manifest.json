@@ -1,0 +1,942 @@
+{
+  "version": "2.0.0",
+  "generated": "2025-12-12T23:45:54.805Z",
+  "totalEvents": 7,
+  "totalImages": 112,
+  "categories": ["Events", "Politics"],
+  "tags": ["Politics", "Presidential Campaign", "Published Work"],
+  "categoryStats": {
+    "Events": 0,
+    "Politics": 7
+  },
+  "events": [
+    {
+      "eventName": "CMU Trump Protest",
+      "category": "Politics",
+      "tags": ["Politics"],
+      "folderPath": "Politics/CMU Trump Protest",
+      "eventDate": {
+        "iso": "2025-07-15",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "July 14, 2025",
+      "totalImages": 39,
+      "images": [
+        {
+          "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1106-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1107-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1123-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1126-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1131-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1141-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1146-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1152-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1156-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1162-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1168-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1184-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1192-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1196-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1201-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1249-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1278-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1297-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1301-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1303-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1325-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1340-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1353-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1360-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1364-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1429-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1448-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1476-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1489-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1498-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1539-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1564-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1568-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
+          "path": "250715_CMU Trump Protest_CAL1573-min.jpg",
+          "description": "CMU Trump Protest photography",
+          "caption": "CMU Trump Protest - Politics",
+          "tags": ["Politics"]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "Butler Protest",
+      "category": "Politics",
+      "tags": ["Politics"],
+      "folderPath": "Politics/Butler Protest",
+      "eventDate": {
+        "iso": "2025-03-15",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "March 14, 2025",
+      "totalImages": 11,
+      "images": [
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9666-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9674-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9703-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9709-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9717-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9739-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9759-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9825-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9832-min.jpg",
+          "description": "Butler Protest photography",
+          "caption": "Butler Protest - Politics",
+          "tags": ["Politics"]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "Kamala In Pittsburgh Amid Election Eve",
+      "category": "Politics",
+      "tags": ["Politics"],
+      "folderPath": "Politics/Kamala in Pittsburgh amid Election Eve",
+      "eventDate": {
+        "iso": "2024-11-04",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "November 3, 2024",
+      "totalImages": 19,
+      "images": [
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
+          "description": "Kamala in Pittsburgh amid Election Eve photography",
+          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
+          "tags": ["Politics"]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "Clinton Speaks At Pitt Greensburgh",
+      "category": "Politics",
+      "tags": ["Politics", "Published Work", "Presidential Campaign"],
+      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
+      "eventDate": {
+        "iso": "2024-10-29",
+        "source": "metadata"
+      },
+      "dateDisplay": "October 28, 2024",
+      "totalImages": 9,
+      "images": [
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Clinton campaign event at Pitt Greensburg",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": ["Politics", "Published Work", "Presidential Campaign"],
+        "published": true,
+        "date": "2024-10-29",
+        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
+        "caption": "Clinton campaign event at Pitt Greensburg",
+        "outlet": "New York Post",
+        "outletUrl": "https://nypost.com",
+        "articleUrl": "",
+        "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
+        "publishedDate": "2024-10-29"
+      },
+      "outlet": "New York Post",
+      "outletUrl": "https://nypost.com",
+      "articleUrl": "",
+      "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
+      "publishedDate": "2024-10-29"
+    },
+    {
+      "eventName": "Kamala Speaks At Erie",
+      "category": "Politics",
+      "tags": ["Politics"],
+      "folderPath": "Politics/Kamala Speaks at Erie",
+      "eventDate": {
+        "iso": "2024-10-14",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 13, 2024",
+      "totalImages": 8,
+      "images": [
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3741.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3741.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3757.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3757.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3766.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3766.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3804.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3804.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3851.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3851.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL4115.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL4115.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL4248.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL4248.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL6948.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL6948.jpg",
+          "description": "Kamala Speaks at Erie photography",
+          "caption": "Kamala Speaks at Erie - Politics",
+          "tags": ["Politics"]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "JD Vance In Johnstown",
+      "category": "Politics",
+      "tags": ["Politics"],
+      "folderPath": "Politics/JD Vance in Johnstown",
+      "eventDate": {
+        "iso": "2024-10-12",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 11, 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3507.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3507.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3516.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3516.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3518.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3518.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3636.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3636.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3648.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3648.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": ["Politics"]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6576.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6576.jpg",
+          "description": "JD Vance in Johnstown photography",
+          "caption": "JD Vance in Johnstown - Politics",
+          "tags": ["Politics"]
+        }
+      ],
+      "published": false,
+      "metadata": {}
+    },
+    {
+      "eventName": "Obama Speaks At Pitt",
+      "category": "Politics",
+      "tags": ["Politics", "Published Work", "Presidential Campaign"],
+      "folderPath": "Politics/Obama Speaks at Pitt",
+      "eventDate": {
+        "iso": "2024-10-10",
+        "source": "metadata"
+      },
+      "dateDisplay": "October 9, 2024",
+      "totalImages": 20,
+      "images": [
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Obama campaign event at Pittsburgh",
+          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": ["Politics", "Published Work", "Presidential Campaign"],
+        "published": true,
+        "date": "2024-10-10",
+        "description": "Barack Obama speaks at University of Pittsburgh rally",
+        "caption": "Obama campaign event at Pittsburgh",
+        "outlet": "New York Post",
+        "outletUrl": "https://nypost.com",
+        "articleUrl": "",
+        "articleTitle": "Barack Obama Rallies Pittsburgh Voters",
+        "publishedDate": "2024-10-10"
+      },
+      "outlet": "New York Post",
+      "outletUrl": "https://nypost.com",
+      "articleUrl": "",
+      "articleTitle": "Barack Obama Rallies Pittsburgh Voters",
+      "publishedDate": "2024-10-10"
+    }
+  ]
+}
