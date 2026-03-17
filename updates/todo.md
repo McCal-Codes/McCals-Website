@@ -1,12 +1,30 @@
 # Active To-Do List
 
-Last Updated: January 6, 2026
+Last Updated: March 11, 2026
 
 **Quick Reference:**
 
 - See [completed.md](./completed.md) for all finished tasks
 - Reference standards: [docs/standards/](../docs/standards/)
 - Integration guides: [docs/integrations/](../docs/integrations/)
+
+---
+
+## Completed - March 11, 2026
+
+### Contact Form Hardening + Portfolio Bridge Cleanup
+
+- [x] **Contact Form v1.1.0** - Added a timed anti-bot trap on top of the honeypot, fixed status auto-hide behavior, trimmed submitted values, escaped provider error output, and improved live-region semantics.
+- [x] **Contact Form Documentation** - Updated `README.md` and `SETUP.md` to reflect the actual EmailJS-based setup instead of the older Formspree flow.
+- [x] **Portfolio Bridge Version Sync** - Updated the dev app widget config to point at the real current portfolio builds and added the missing `/video` bridge route.
+- [x] **Category-Aware Version Detection** - Fixed widget version lookup so grouped widget directories such as `portfolios/` resolve correctly.
+- [x] **Portfolio README Cleanup** - Refreshed the portfolio READMEs to match active versions and document the remaining weak spots: `nature` still needs content/performance signoff and `video` still needs a manifest pipeline.
+- [x] **Validation** - `npx tsc --noEmit` passed in `sites/dev.mcc-cal.com`; `npm run validate:widgets` passed for all widget HTML files.
+
+**Follow-up still open:**
+
+- `nature-portfolio`: broaden collection coverage and finish a11y/performance signoff.
+- `video-portfolio`: build the manifest generator/data flow and decide whether it stays experimental or becomes a full surface.
 
 ---
 
@@ -154,12 +172,12 @@ Last Updated: January 6, 2026
 - [x] Journalism
   - Primary widgets: photojournalism-portfolio
   - LCP candidate: `.journalism-card:first-child img`
-  - Status: Optimized in v5.5.2 with pre-rendered hero (CMU Trump Protest).
+  - Status: Optimized in v5.5.3 with pre-rendered hero (CMU Trump Protest).
 
 - [x] Portraits
   - Primary widgets: portrait-portfolio
   - LCP candidate: `.portrait-card:first-child img`
-  - Status: Optimized in v2.0.1 with pre-rendered hero (Editorial).
+  - Status: Optimized in v2.0.2 with pre-rendered hero (Editorial).
 
 - [x] About Page
   - Primary widgets: complete-about-page
@@ -227,7 +245,7 @@ Phased improvements for the existing widget ecosystem.
 - [ ] **Admin Observability**: Add GitHub API Rate Limit Detection to `admin-dashboard`
 - [ ] **Event Portfolio Polish**: Auto-detect latest widget version & URL normalization fix
 - [ ] **Content Widget Polish**:
-  - [ ] Add spam honeypot to `contact-form`
+  - [x] Add spam honeypot to `contact-form`
   - [ ] Implement dynamic logo track for `client-carousel`
   - [ ] Add star-rating schema to `testimonials`
 
