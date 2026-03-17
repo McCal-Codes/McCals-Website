@@ -8,7 +8,7 @@
       "excludeFiles": "../../src/widgets/_archived/**,../../src/widgets/_content/**,../../src/widgets/_cdn/**,../../src/widgets/_admin/**,../../src/widgets/_navigation/**"
     },
     "api/manifests/[type].js": {
-      "includeFiles": "../../src/images/Portfolios/Concert/concert-manifest.json,../../src/images/Portfolios/Events/events-manifest.json,../../src/images/Portfolios/Journalism/journalism-manifest.json,../../src/images/Portfolios/Nature/nature-manifest.json,../../src/images/Portfolios/Portrait/portrait-manifest.json,../../src/images/Portfolios/portfolio-manifest.json"
+      "includeFiles": "../../src/images/Portfolios/*/*-manifest.json,../../src/images/Portfolios/portfolio-manifest.json"
     }
   },
   "rewrites": [
