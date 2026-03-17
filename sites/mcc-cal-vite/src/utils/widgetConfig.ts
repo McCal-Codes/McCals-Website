@@ -8,7 +8,7 @@
 
 export interface WidgetConfig {
   widget: string;
-  version: string;
+  version?: string;
   category?: string;
   description?: string;
 }
@@ -68,8 +68,8 @@ export const widgetMap: Record<string, WidgetConfig> = {
     description: 'Site footer',
   },
   about: {
-    widget: 'about',
-    category: '_content',
+    widget: 'complete-about-page',
+    category: '_content/about',
     description: 'About page content',
   },
   contact: {

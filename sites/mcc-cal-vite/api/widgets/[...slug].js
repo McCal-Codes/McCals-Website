@@ -18,7 +18,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 function findWidgetPath(widget) {
   // Resolve from this file's location up to repo root → src/widgets
   const baseDir = path.resolve(__dirname, '..', '..', '..', '..', 'src', 'widgets');
-  const categories = ['_admin', '_navigation', '_content', 'portfolios', 'projects'];
+  const categories = ['_admin', '_navigation', '_content', '_content/about', 'portfolios', 'projects'];
   for (const category of categories) {
     const p = path.join(baseDir, category, widget);
     if (fs.existsSync(p) && fs.statSync(p).isDirectory()) return p;
@@ -67,7 +67,7 @@ export default function handler(req, res) {
     }
   }
 
-  const categories = ['_admin', '_navigation', '_content', 'portfolios', 'projects'];
+  const categories = ['_admin', '_navigation', '_content', '_content/about', 'portfolios', 'projects'];
   let widget, version;
 
   if (slug.length === 1) {
