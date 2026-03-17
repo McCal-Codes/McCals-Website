@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/index';
 import AboutPage from './pages/about';
 import BlogPage from './pages/blog';
-import ChangelogPage from './pages/changelog';
 import ConcertsPage from './pages/concerts';
 import EventsPage from './pages/events';
 import FeaturedWorkPage from './pages/featured-work';
@@ -12,6 +11,9 @@ import PortraitsPage from './pages/portraits';
 import PodcastPage from './pages/podcast';
 import VideoPage from './pages/video';
 import AbridgedPage from './pages/abridged';
+import ProjectsPage from './pages/projects';
+import RoadmapPage from './pages/roadmap';
+import DesignSystemsPage from './pages/design-systems';
 import ShowcasePage from './pages/showcase';
 import ApiTestPage from './pages/api-test';
 
@@ -22,7 +24,6 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/blog" element={<BlogPage />} />
-        <Route path="/changelog" element={<ChangelogPage />} />
         <Route path="/concerts" element={<ConcertsPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/featured-work" element={<FeaturedWorkPage />} />
@@ -32,6 +33,9 @@ export default function App() {
         <Route path="/podcast" element={<PodcastPage />} />
         <Route path="/video" element={<VideoPage />} />
         <Route path="/abridged" element={<AbridgedPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/roadmap" element={<RoadmapPage />} />
+        <Route path="/design-systems" element={<DesignSystemsPage />} />
         <Route path="/showcase" element={<ShowcasePage />} />
         <Route path="/api-test" element={<ApiTestPage />} />
       </Routes>

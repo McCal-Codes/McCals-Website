@@ -2,8 +2,8 @@ import Layout from '@/components/Layout/Layout';
 import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
 import { getWidgetConfig } from '@/utils/widgetConfig';
 
-const AbridgedPage = () => {
-  const config = getWidgetConfig('abridged');
+const RoadmapPage = () => {
+  const config = getWidgetConfig('roadmap');
   if (!config) return <div>Widget not found</div>;
 
   return (
@@ -13,4 +13,4 @@ const AbridgedPage = () => {
   );
 };
 
-export default AbridgedPage;
+export default RoadmapPage;
