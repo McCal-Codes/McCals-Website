@@ -1,53 +1,43 @@
 # Event Portfolio Widget
 
-**Current Version: v2.6.5** — Production-optimized Squarespace widget with GitHub-first manifest loading. Enhanced UX patterns, bulletproof reliability, comprehensive fallbacks.
+Current version: `v2.9.1-event-performance.html`  
+Previous stable: `v2.9.0-event-themed.html`
+
+## Overview
+
+The event portfolio is a production-ready manifest-driven gallery for conferences, corporate work,
+performances, and other live assignments. The current build includes:
+
+- pre-rendered hero treatment for performance
+- themed light and dark presentation
+- category, featured, and published filtering
+- resilient manifest loading and fallback behavior
+- immersive lightbox behavior with navigation isolation
 
 ## Use in Squarespace
 
-1. Open `src/widgets/portfolios/event-portfolio/versions/v2.6.5-event-portfolio.html`
-2. Copy **all** HTML and paste into a Squarespace **Code Block**.
-3. The widget fetches the manifest from:
-   `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Events/events-manifest.json`
-   (override by editing `data-manifest` on `<main id="eventsPf">`)
+1. Open `src/widgets/portfolios/event-portfolio/versions/v2.9.1-event-performance.html`.
+2. Copy the full file into a Squarespace Code Block.
+3. Keep `src/images/Portfolios/Events/events-manifest.json` current.
 
-## New v2.6.5 Features
+## Data source
 
-- **Safe Cache Clearing**: Debug "Clear Cache" no longer calls `localStorage.clear()`; it only removes Event Portfolio cache keys
+- Primary manifest: `src/images/Portfolios/Events/events-manifest.json`
+- The widget also supports fallback manifest resolution for local and GitHub-based embeds
 
-## v2.6.4 Features (Retained)
+## Current status
 
-- **Fixed Image Stretching**: Proper aspect ratio preservation in lightbox gallery
-- **Hidden Scrollbars**: Immersive fullscreen experience without visual clutter
-- **Enhanced Close Button**: Fixed positioning with better accessibility and safe areas
-- **Navigation Isolation**: Comprehensive hiding of site navigation during lightbox
-- **Integrated Version Display**: Version indicator in heading with interactive changelog
-- **Enhanced Debug Panel**: Comprehensive metrics with force refresh and cache controls
+- Production-ready bridge widget
+- Technically solid; the main repo issue was stale version references, not widget maturity
 
-## Versions
+## Active versions
 
-### Active Versions (≤2 Policy)
+- `v2.9.1-event-performance.html`: current performance build
+- `v2.9.0-event-themed.html`: previous stable themed build
 
-The following versions are maintained in `versions/`:
+Older versions are archived in `src/widgets/_archived/Legacy Widgets/event-portfolio/`.
 
-- **v2.6.5** (Current): v2.6.4 + safe scoped cache clearing in debug tools
-- **v2.6.4** (Previous Stable): Production-optimized with enhanced UX patterns, fixed image stretching, hidden scrollbars
+## Notes
 
-### Legacy Versions (Archived)
-
-Versions v2.6.2 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
-
-- **Archive Location**: `src/widgets/_archived/Legacy Widgets/event-portfolio/versions/`
-- **Archive Index**: See [`INDEX.json`](../../_archived/Legacy%20Widgets/event-portfolio/versions/INDEX.json) for complete version catalog
-- **Archived Versions**: v1.0.0 through v2.6.2 (9 versions)
-
-## Local generation
-
-```bash
-node scripts/generate-events-manifest.js --root src/images/Portfolios/Events --force
-```
-
-## Live watch
-
-```bash
-npm run watch:events-manifest
-```
+- The dev app route should target `v2.9.1`.
+- See `CHANGELOG.md` for the history of cache scoping, URL normalization, theming, and UX upgrades.

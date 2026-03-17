@@ -1,36 +1,40 @@
 # Featured Portfolio Widget
 
-**Current Version: v1.5.0** — Latest iteration with randomized cover images, masonry spacing refinements, and production-focused lightbox behavior.
+Current version: `v1.5.1-featured-optimization.html`  
+Previous stable: `v1.5.0-working.html`
 
-## Versions
+## Overview
 
-### Active Versions (≤2 Policy)
-The following versions are maintained in `versions/`:
-- **v1.5.0** (Current): Randomized cover images, masonry spacing refinements, production-focused lightbox
-- **v1.4.0** (Previous Stable): Baseline for v1.5.0 enhancements
+The featured portfolio is an aggregate showcase that pulls highlights from the broader portfolio
+manifests. It is intended to surface a curated cross-section of the work rather than function as a
+single-category gallery.
 
-### Legacy Versions (Archived)
-Versions v1.3.0 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
-- **Archive Location**: `src/widgets/_archived/Legacy Widgets/featured-portfolio/versions/`
-- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/featured-portfolio/versions/INDEX.json) for complete version catalog
-- **Archived Versions**: v1.0.0 through v1.3.0 (4 versions)
+## Current behavior
 
-## Features
-- Randomized cover image selection (Fisher-Yates shuffle)
-- Masonry layout with optimized column gaps
-- Scrollable lightbox modal with immersive viewing
-- Minimal gray accent styling for neutral presentation
-- Debug metrics panel (optional via `?debug=true`)
+- loads from `src/images/Portfolios/featured-manifest.json`
+- mixes items across portfolio types
+- uses a masonry-style presentation with lightbox support
+- keeps the lead item stable for better LCP behavior in `v1.5.1`
 
-## Usage
-Embed the latest HTML file (`versions/v1.5.0-featured-portfolio.html`) directly into a Squarespace Code Block.
+## Use in Squarespace
 
-### Version History
-Earlier versions experimented with layout densities, initial shuffle strategies, and debug panel scaffolding. All archived versions remain accessible for historical reference and feature comparison. Consult the archive INDEX.json and widget CHANGELOG.md for detailed progression.
+1. Open `src/widgets/portfolios/featured-portfolio/versions/v1.5.1-featured-optimization.html`.
+2. Copy the full file into a Squarespace Code Block.
+3. Regenerate `src/images/Portfolios/featured-manifest.json` when featured selections change.
 
-## Future Enhancements
-- Consider performance instrumentation alignment with v5+ portfolio widgets
-- Optional integrated filter taxonomy for mixed-media showcases
-- Accessibility refinements (focus outline theming, lightbox escape semantics parity)
+## Current status
 
-_Last updated: 2025-11-19_
+- Production-ready bridge widget
+- Better than it looked during the audit; most of the gap was doc drift, not missing functionality
+
+## Active versions
+
+- `v1.5.1-featured-optimization.html`: current LCP-optimized build
+- `v1.5.0-working.html`: previous stable build
+
+Older versions are archived in `src/widgets/_archived/Legacy Widgets/featured-portfolio/`.
+
+## Notes
+
+- The dev app route should target `v1.5.1`.
+- See `CHANGELOG.md` for manifest generation notes and follow-up tasks around source quality.
