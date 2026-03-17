@@ -10,17 +10,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  */
 
 const TYPE_MAP = {
-  concert: { dir: 'Concert', file: 'concert-manifest.json' },
-  concerts: { dir: 'Concert', file: 'concert-manifest.json' },
-  events: { dir: 'Events', file: 'events-manifest.json' },
-  event: { dir: 'Events', file: 'events-manifest.json' },
-  journalism: { dir: 'Journalism', file: 'journalism-manifest.json' },
-  photojournalism: { dir: 'Journalism', file: 'journalism-manifest.json' },
-  nature: { dir: 'Nature', file: 'nature-manifest.json' },
-  portrait: { dir: 'Portrait', file: 'portrait-manifest.json' },
-  portraits: { dir: 'Portrait', file: 'portrait-manifest.json' },
-  featured: { dir: 'Featured', file: 'featured-manifest.json' },
-  universal: { dir: 'Portfolios', file: 'portfolio-manifest.json' },
+  concert: 'concert-manifest.json',
+  concerts: 'concert-manifest.json',
+  events: 'events-manifest.json',
+  event: 'events-manifest.json',
+  journalism: 'journalism-manifest.json',
+  photojournalism: 'journalism-manifest.json',
+  nature: 'nature-manifest.json',
+  portrait: 'portrait-manifest.json',
+  portraits: 'portrait-manifest.json',
+  featured: 'featured-manifest.json',
+  universal: 'portfolio-manifest.json',
 };
 
 export default function handler(req, res) {
@@ -46,8 +46,8 @@ export default function handler(req, res) {
     return;
   }
 
-  const baseDir = path.resolve(__dirname, '..', '..', '..', '..', 'src', 'images', 'Portfolios');
-  const manifestPath = path.resolve(path.join(baseDir, mapping.dir, mapping.file));
+  const baseDir = path.resolve(__dirname, 'data');
+  const manifestPath = path.resolve(baseDir, mapping);
 
   if (!manifestPath.startsWith(baseDir)) {
     res.status(403).json({ error: 'Access denied' });
