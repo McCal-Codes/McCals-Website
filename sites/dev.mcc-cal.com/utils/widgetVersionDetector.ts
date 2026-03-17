@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
+const WIDGET_CATEGORIES = ['_admin', '_content', '_navigation', 'portfolios', 'projects'] as const;
+
 /**
  * Auto-detect Widget Versions
  * 
@@ -11,13 +13,13 @@ import path from 'path';
  * Usage:
  * ```typescript
  * import { getLatestWidgetVersion, getAllWidgetVersions } from '@/utils/widgetVersionDetector';
- * 
+ *
  * // Get the latest version of a widget
- * const version = getLatestWidgetVersion('concert-portfolio');
+ * const version = getLatestWidgetVersion('concert-portfolio', 'portfolios');
  * // Returns: 'v4.7.1-api-optional.html'
- * 
+ *
  * // Get all versions of a widget
- * const versions = getAllWidgetVersions('concert-portfolio');
+ * const versions = getAllWidgetVersions('concert-portfolio', 'portfolios');
  * // Returns: ['v4.7.0.html', 'v4.7.1-api-optional.html']
  * ```
  */
@@ -31,21 +33,35 @@ interface WidgetVersionInfo {
 }
 
 /**
- * Get all HTML files in a widget's versions directory
+ * Resolve a widget versions directory from the categorized widget tree.
  */
-export function getAllWidgetVersions(widget: string): string[] {
-  try {
-    const widgetPath = path.join(
-      process.cwd(),
-      '..',
-      '..',
-      'src',
-      'widgets',
-      widget,
-      'versions'
-    );
+function resolveWidgetVersionsDir(widget: string, category?: string): string | null {
+  const widgetsRoot = path.join(process.cwd(), '..', '..', 'src', 'widgets');
+  const candidateCategories = category ? [category] : WIDGET_CATEGORIES;
 
-    if (!fs.existsSync(widgetPath)) {
+  for (const candidateCategory of candidateCategories) {
+    const candidatePath = path.join(widgetsRoot, candidateCategory, widget, 'versions');
+    if (fs.existsSync(candidatePath)) {
+      return candidatePath;
+    }
+  }
+
+  const legacyPath = path.join(widgetsRoot, widget, 'versions');
+  if (fs.existsSync(legacyPath)) {
+    return legacyPath;
+  }
+
+  return null;
+}
+
+/**
+ * Get all HTML files in a widget's versions directory.
+ */
+export function getAllWidgetVersions(widget: string, category?: string): string[] {
+  try {
+    const widgetPath = resolveWidgetVersionsDir(widget, category);
+
+    if (!widgetPath) {
       console.warn(`Widget versions directory not found: ${widget}`);
       return [];
     }
@@ -68,8 +84,8 @@ export function getAllWidgetVersions(widget: string): string[] {
  * Assumes newer versions are named with higher version numbers
  * e.g., v1.0.0 < v1.1.0 < v2.0.0
  */
-export function getLatestWidgetVersion(widget: string): string | null {
-  const versions = getAllWidgetVersions(widget);
+export function getLatestWidgetVersion(widget: string, category?: string): string | null {
+  const versions = getAllWidgetVersions(widget, category);
   if (versions.length === 0) {
     return null;
   }
@@ -126,16 +142,12 @@ function compareVersions(a: string, b: string): number {
  */
 export function getWidgetVersionInfo(widget: string, version: string): WidgetVersionInfo | null {
   try {
-    const widgetPath = path.join(
-      process.cwd(),
-      '..',
-      '..',
-      'src',
-      'widgets',
-      widget,
-      'versions',
-      version
-    );
+    const versionsDir = resolveWidgetVersionsDir(widget);
+    if (!versionsDir) {
+      return null;
+    }
+
+    const widgetPath = path.join(versionsDir, version);
 
     if (!fs.existsSync(widgetPath)) {
       return null;
@@ -162,27 +174,20 @@ export function getWidgetVersionInfo(widget: string, version: string): WidgetVer
  */
 export function watchWidgetVersions(
   widget: string,
-  callback: (versions: string[]) => void
+  callback: (versions: string[]) => void,
+  category?: string
 ): (() => void) | null {
   try {
-    const widgetPath = path.join(
-      process.cwd(),
-      '..',
-      '..',
-      'src',
-      'widgets',
-      widget,
-      'versions'
-    );
+    const widgetPath = resolveWidgetVersionsDir(widget, category);
 
-    if (!fs.existsSync(widgetPath)) {
+    if (!widgetPath) {
       return null;
     }
 
     // Server-side watching (if running in Node.js)
     if (typeof window === 'undefined') {
       const watcher = fs.watch(widgetPath, () => {
-        const versions = getAllWidgetVersions(widget);
+        const versions = getAllWidgetVersions(widget, category);
         callback(versions);
       });
 
@@ -211,19 +216,25 @@ export function getAllWidgetsWithLatestVersions(): Record<string, string> {
       return {};
     }
 
-    const directories = fs.readdirSync(widgetsPath);
     const result: Record<string, string> = {};
 
-    directories.forEach((dir) => {
-      // Skip special directories and files
-      if (dir.startsWith('.') || dir.startsWith('_') || !dir.includes('-')) {
+    WIDGET_CATEGORIES.forEach((category) => {
+      const categoryPath = path.join(widgetsPath, category);
+      if (!fs.existsSync(categoryPath)) {
         return;
       }
 
-      const latestVersion = getLatestWidgetVersion(dir);
-      if (latestVersion) {
-        result[dir] = latestVersion;
-      }
+      const directories = fs
+        .readdirSync(categoryPath, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => entry.name);
+
+      directories.forEach((dir) => {
+        const latestVersion = getLatestWidgetVersion(dir, category);
+        if (latestVersion) {
+          result[dir] = latestVersion;
+        }
+      });
     });
 
     return result;

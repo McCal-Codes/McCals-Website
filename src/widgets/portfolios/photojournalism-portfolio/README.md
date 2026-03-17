@@ -1,149 +1,48 @@
 # Photojournalism Portfolio Widget
 
-Filterable masonry gallery for displaying photojournalism work with categories. Features responsive design, hover overlays, and click-to-open lightbox functionality.
+Current version: `v5.5.3-photojournalism-performance.html`  
+Previous stable: `v5.5.2-photojournalism-performance.html`
 
-## Features
+## Overview
 
-### Visual 🎨
-- **Filterable Categories**: Politics, Events, Portraits with "All" option
-- **Natural Masonry**: CSS columns with responsive breakpoints (4→3→2→1)
-- **Hover Overlays**: Title, date, publication info with gradient background
-- **Lightbox Gallery**: Click to view full-size images with captions
-- **Multi-category Support**: Images can belong to multiple categories
-- **Dark/Light Mode**: Automatic theme detection and adaptation
+The photojournalism portfolio is a mature editorial gallery with:
 
-### Performance 🚀
-- **GitHub CDN Integration**: Direct loading from GitHub repository
-- **Lazy Loading**: Progressive image loading for better performance
-- **Error Handling**: Graceful degradation for failed image loads
-- **Responsive Design**: Mobile-optimized layout and interactions
+- manifest-driven image loading
+- constrained shuffle and one-image-per-album freshness rules
+- published-work filtering
+- deep-link support and load-more behavior in the newer enhancement line
+- immersive lightbox isolation and structured data
 
-### Accessibility ♿
-- **Keyboard Navigation**: Full keyboard support with focus management
-- **ARIA Attributes**: Proper screen reader compatibility
-- **Focus Management**: Lightbox focus trapping and restoration
+## Content scope
 
-## Versions
+The current content set is strong technically but narrower editorially than the other major
+portfolios. The changelog already notes that the public collection is currently political work only,
+with more journalism to be added over time.
 
-### Active Versions (≤2 Policy)
-The following version is maintained in `versions/`:
-- **v5.2.0** (Current): Performance optimized iteration with all v4.x enhancements
+## Use in Squarespace
 
-### Legacy Versions (Archived)
-Versions v5.1.0 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
-- **Archive Location**: `src/widgets/_archived/Legacy Widgets/photojournalism-portfolio/versions/`
-- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/photojournalism-portfolio/versions/INDEX.json) for complete version catalog
-- **Archived Versions**: v1.0.0 through v5.1.0 (11 versions)
+1. Open `src/widgets/portfolios/photojournalism-portfolio/versions/v5.5.3-photojournalism-performance.html`.
+2. Copy the full file into a Squarespace Code Block.
+3. Keep `src/images/Portfolios/Journalism/journalism-manifest.json` current.
 
-### Notable Archived Features
-- **v4.8**: Hidden scrollbars in lightbox for immersive experience
-- **v4.7**: Comprehensive navigation hiding during lightbox viewing  
-- **v4.6**: Enhanced filtering (no gaps) + minimal published indicators
-- **v4.5**: Fixed "Published Work" filter functionality with tag support
-- **v4.4**: Optimized close button positioning and accessibility
+## Data source
 
-## Usage
+- Primary manifest: `src/images/Portfolios/Journalism/journalism-manifest.json`
+- Legacy per-folder manifests are still tolerated, but the aggregate manifest is the canonical source
 
-### Basic Implementation
-```html
-<!-- Squarespace Code Block -->
-<div id="photojournalism-portfolio">
-  <!-- Paste v1.0-filterable-masonry.html content here -->
-</div>
-```
+## Current status
 
-### GitHub Repository Structure
-```
-images/Portfolios/Journalism/
-├── journalism-manifest.json        # Aggregated, canonical manifest for the portfolio
-├── 250315_Butler Democracy Protest_CAL9773.jpg
-├── 250417 The Rooney Rule_CAL3148.jpg
-└── [your journalism photos]
-```
+- Production-ready bridge widget
+- Main improvement area is content breadth, not widget reliability
 
-Note: Prefer a single aggregated manifest (`journalism-manifest.json`) at the portfolio root. Per-folder or per-directory `manifest.json` files are supported as legacy/optional caption sources but are no longer required.
+## Active versions
 
-### Caption Sources (Priority Order)
-1. **journalism-manifest.json** (aggregated) - Preferred canonical source for custom captions and metadata
-2. **Per-folder `manifest.json`** - Legacy/optional (supported when present for custom captions)
-3. **EXIF/IPTC data** - Embedded photo captions (journalism standard)
-4. **Auto-generated** - Fallback based on filename
+- `v5.5.3-photojournalism-performance.html`: current performance build
+- `v5.5.2-photojournalism-performance.html`: previous stable performance build
 
-### Configuration
-Update the GitHub repository in the script section:
-```javascript
-const GH = { owner:'YOUR-USERNAME', repo:'YOUR-REPO', branch:'main', base:['images','Portfolios','Journalism'] };
-```
+Older versions are archived in `src/widgets/_archived/Legacy Widgets/photojournalism-portfolio/`.
 
-### Custom Captions with manifest.json
-Create a `journalism-manifest.json` (or a `manifest.json` mapping in legacy setups) in your Journalism directory. Example aggregated entry:
-```json
-{
-  "your-photo.jpg": {
-    "caption": "Detailed caption for lightbox display",
-    "description": "Brief description",
-    "date": "2025-03-15",
-    "categories": ["politics", "events"],
-    "publication": "Your Publication Name",
-    "location": "City, State"
-  }
-}
-```
+## Notes
 
-### Adding New Images
-1. Upload image to appropriate category folder in your GitHub repo
-2. Add a new `<article class="portfolio-card">` block:
-
-```html
-<article class="portfolio-card" data-cats="Politics" tabindex="0">
-  <img data-file="politics/your-image.jpg" alt="Description">
-  <div class="portfolio-info">
-    <h3 class="portfolio-title">Your Title</h3>
-    <div class="portfolio-meta">
-      <span>Date</span>
-      <span>Published with Publication</span>
-      <span>Politics</span>
-    </div>
-    <p class="portfolio-desc">Full caption for lightbox...</p>
-  </div>
-</article>
-```
-
-### Multi-category Support
-For images that belong to multiple categories:
-```html
-<article class="portfolio-card" data-cats="Politics, Events" tabindex="0">
-  <!-- Image will appear in both Politics and Events filters -->
-</article>
-```
-
-## Responsive Breakpoints
-
-- **Desktop**: 4 columns (>1200px)
-- **Tablet**: 3 columns (861px-1200px)  
-- **Small Tablet**: 2 columns (521px-860px)
-- **Mobile**: 1 column (≤520px)
-
-## Browser Support
-
-- Chrome 60+
-- Firefox 60+
-- Safari 12+
-- Edge 79+
-
-## Version History
-
-Full historical versions (v1.0–v4.8) are archived. See archive `INDEX.json` for the list and consult the widget CHANGELOG for detailed entries. Earlier versions established filtering, manifest loading, and UX patterns that informed the current performance optimized series.
-
-## Enhancement Patterns
-
-This widget (v4.4-v4.8) served as the foundation for establishing systematic UX improvement patterns documented in `docs/standards/widget-enhancements.md`. These patterns include:
-
-- **Close Button Optimization**: Fixed positioning to avoid header overlap
-- **Enhanced Filter Layout**: No gaps when filtering content  
-- **Minimal Status Indicators**: Clean, unobtrusive publication badges
-- **Comprehensive Navigation Hiding**: Full isolation during lightbox viewing
-- **Hidden Scrollbars**: Immersive gallery experience
-- **Version Indicator Standards**: Consistent placement and styling
-
-These patterns can be systematically applied to enhance all other widgets in the McCal Media ecosystem.
+- The dev app route should target `v5.5.3`.
+- See `CHANGELOG.md` for the current content note and the full enhancement history.

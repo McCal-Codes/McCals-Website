@@ -1,47 +1,50 @@
-﻿# Nature Portfolio Widget (v1.8)
+# Nature Portfolio Widget
 
-Version v1.8 delivers performance-optimized image loading with instant display for first 8 images, retry logic with exponential backoff, and enhanced caching. Removes lazy loading delays for immediate visual feedback. v1.7 enhanced photo display (32 photos, 3 per collection) and filtering. Based on the journalism widget v5.2 architecture for performance and style consistency. v1.2 added unified lightbox header isolation (html.lb-open) so Squarespace navigation or announcement bars never intercept clicks above the fullscreen gallery.
+Current testing build: `v1.9.0-performance-optimized.html`  
+Previous stable testing build: `v1.8.0-performance-optimized.html`  
+Status: WIP
 
-## Usage
+## Overview
 
-1. Populate `src/images/Portfolios/Nature/Wildlife/<AnimalType>/<Species>` and `src/images/Portfolios/Nature/Landscapes/<Location>` with folders for each collection.
-2. Maintain `src/images/Portfolios/Nature/nature-manifest.json` so each collection lists `collectionName`, `folderPath`, `tags`, and image filenames. Tags should include animal type (e.g., 'Birds', 'Mammals') or 'landscape' for filtering.
-3. Drop `src/widgets/nature-portfolio/versions/v1.8-performance-optimized.html` into a Squarespace code block or run locally in the browser.
-4. After adding or updating collections, run `npm run manifest:nature` to update the manifest for all animal types and landscapes.
-5. Use the filter bar to view 'All', 'Wildlife', 'Landscapes', or any specific collection. Only tabs with actual content are displayed.
-6. Instant loading: First 8 images load immediately without lazy loading for better UX.
+The nature portfolio is still in the bridge-phase validation bucket. The widget itself is functional,
+but it remains content-light and has not met the full exit criteria documented in `STATUS.md`.
 
-## Key Features
+## Current behavior
 
-- **Instant Loading**: First 8 images load immediately without lazy loading for instant display
-- **Retry Logic**: Automatic retry with exponential backoff (3 attempts) and manual retry button on failure
-- **Enhanced Display**: Shows up to 32 photos by default (configurable), with up to 3 photos per collection
-- **Smart Filtering**: Dynamic filter tabs that only show categories with actual photos
-- **Landscape Support**: Proper landscape categorization with dedicated tab
-- **Category Detection**: Intelligent categorization based on folder paths and tags
-- **Performance**: Optimized caching, preloading strategy, and progressive enhancement
-- **Accessibility**: Full keyboard navigation and ARIA support in lightbox
-- **Debug Mode**: Add `?debug=true` to URL for performance metrics
+- manifest-driven wildlife and landscape filtering
+- retry logic for failed image loads
+- progressive lightbox loading
+- structured data injection in the current testing builds
+- debug mode via `?debug=true`
 
-## Versions
+## Use in Squarespace
 
-### Active Versions (≤2 Policy)
-The following versions are maintained in `versions/`:
-- **v1.8.0** (Current): Performance-optimized with instant loading, retry logic, enhanced caching
-- **v1.7.0** (Previous Stable): Enhanced display with 32 photos, 3 per collection
+1. Open `src/widgets/portfolios/nature-portfolio/versions/v1.9.0-performance-optimized.html`.
+2. Copy the full file into a Squarespace Code Block only for testing or controlled bridge use.
+3. Keep `src/images/Portfolios/Nature/nature-manifest.json` current.
+4. Run `npm run manifest:nature` after adding or reorganizing source images.
 
-### Legacy Versions (Archived)
-Versions v1.5.0 and earlier have been archived to maintain repository organization. These versions remain accessible for historical reference:
-- **Archive Location**: `src/widgets/_archived/Legacy Widgets/nature-portfolio/versions/`
-- **Archive Index**: See [`INDEX.json`](../_archived/Legacy%20Widgets/nature-portfolio/versions/INDEX.json) for complete version catalog
-- **Archived Versions**: v1.0.0, v1.2.0, v1.5.0 (3 versions)
+## Data source
+
+- Primary manifest: `src/images/Portfolios/Nature/nature-manifest.json`
+- Expected folders:
+  - `src/images/Portfolios/Nature/Wildlife/...`
+  - `src/images/Portfolios/Nature/Landscapes/...`
+
+## Current status
+
+- Still WIP
+- Needs more varied wildlife and landscape content
+- Needs final performance and accessibility signoff before promotion
+
+## Active versions
+
+- `v1.9.0-performance-optimized.html`: current testing build
+- `v1.8.0-performance-optimized.html`: previous stable testing build
+
+Older versions are archived in `src/widgets/_archived/Legacy Widgets/nature-portfolio/`.
 
 ## Notes
 
-- Matches the journalism widget v5.2 style: glass-like filter buttons, overlay effects, badge styling, and info panels.
-- Caches the master manifest for 10 minutes with a 15-minute smart auto-refresh cycle.
-- Filter bar dynamically shows only categories with content ('All' always visible).
-- Lightbox loads full collections with progressive image loading and retry logic.
-- While lightbox is open the global `html.lb-open` class disables header pointer-events for safe interaction.
-- Manifest generator script (`generate-nature-manifest.js`) automatically tags and aggregates all animal types and locations for robust filtering.
-- Widget supports Wildlife (birds, mammals, etc.), Landscapes (West Virginia, forests, etc.), and Other categories.
+- The dev app bridge route should target `v1.9.0`, but the widget should still be treated as WIP.
+- See `STATUS.md` for the remaining content and validation exit criteria.
