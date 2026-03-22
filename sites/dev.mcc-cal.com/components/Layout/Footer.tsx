@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         '@type': 'ContactPoint',
         contactType: 'customer support',
         email: 'contact@mcc-cal.com',
-        url: `${SITE_URL}/contact-us`
+        url: `mailto:contact@mcc-cal.com`
       }
     ]
   }), []);
