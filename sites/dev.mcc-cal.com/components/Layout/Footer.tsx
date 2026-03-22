@@ -44,9 +44,7 @@ const Footer: React.FC = () => {
           <section className="mcc-footer__section" aria-labelledby="footer-about">
             <h4 id="footer-about">About</h4>
             <ul className="mcc-footer__list">
-              <li><a href="/policies-legal#faq">FAQs</a></li>
               <li><a href="/about">About Me</a></li>
-              <li><a href="/policies-legal">Policies &amp; Legal</a></li>
             </ul>
           </section>
 
@@ -54,7 +52,6 @@ const Footer: React.FC = () => {
             <h4 id="footer-contact">Contact</h4>
             <ul className="mcc-footer__list">
               <li><a href="mailto:contact@mcc-cal.com">Email</a></li>
-              <li><a href="/contact-us">Contact Form</a></li>
             </ul>
           </section>
 
@@ -124,8 +121,7 @@ const Footer: React.FC = () => {
           <div>&copy; <span>{year}</span> Caleb McCartney. All rights reserved.</div>
           <div className="mcc-footer__version">v{WIDGET_VERSION}</div>
           <div className="mcc-footer__links">
-            <a href="/accessibility">Accessibility</a>
-            <a href="/policies-legal#cookies">Cookies</a>
+            <a href="mailto:contact@mcc-cal.com">Contact</a>
           </div>
         </div>
       </footer>
