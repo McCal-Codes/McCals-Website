@@ -10,6 +10,20 @@ const LOGO_PATH = '/brand/logo-mark.svg';
 
 const Footer: React.FC = () => {
   const year = useMemo(() => new Date().getFullYear(), []);
+
+  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget;
+    const emailInput = form.elements.namedItem('EMAIL') as HTMLInputElement;
+    const email = emailInput?.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      e.preventDefault();
+      emailInput?.focus();
+      emailInput?.setCustomValidity('Please enter a valid email address.');
+      emailInput?.reportValidity();
+      return;
+    }
+    emailInput?.setCustomValidity('');
+  };
   const organizationSchema = useMemo(() => ({
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -95,6 +109,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 aria-label="Newsletter signup"
                 noValidate
+                onSubmit={handleNewsletterSubmit}
               >
                 <label className="mcc-footer__sr-only" htmlFor="mcc-footer-email">Email address</label>
                 <input
