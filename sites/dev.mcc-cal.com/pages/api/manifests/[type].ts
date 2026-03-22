@@ -102,7 +102,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       console.warn(`Manifest not found: ${type} (${resolvedPath}) - [type].ts:102`);
       res.status(404).json({
         error: `Manifest not found: ${type}`,
-        path: resolvedPath,
       });
       return;
     }
