@@ -12,8 +12,14 @@ const HomePage = () => {
   return (
     <div className="site-layout" style={{ paddingTop: 0 }}>
       <Head>
-        <title>McCal Media | Photography & Photojournalism</title>
+        <title>McCal Media | Photography &amp; Photojournalism</title>
         <meta name="description" content="McCal Media — professional photography, photojournalism, concert, event, and nature portfolios by Caleb McCartney." />
+        <link rel="canonical" href="https://mcc-cal.com/" />
+        <meta property="og:title" content="McCal Media | Photography & Photojournalism" />
+        <meta property="og:description" content="McCal Media — professional photography, photojournalism, concert, event, and nature portfolios by Caleb McCartney." />
+        <meta property="og:url" content="https://mcc-cal.com/" />
+        <meta name="twitter:title" content="McCal Media | Photography & Photojournalism" />
+        <meta name="twitter:description" content="McCal Media — professional photography, photojournalism, concert, event, and nature portfolios by Caleb McCartney." />
       </Head>
       <Nav />
       <main className="site-main" style={{ marginTop: 0 }}>
