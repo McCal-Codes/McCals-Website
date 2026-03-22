@@ -15,6 +15,7 @@ Purpose: fast, safe, and consistent edits for the `McCals-Website` workspace.
 - Create new widget versions; do not overwrite older version files.
 - Do not edit `dist/**` manually.
 - Do not commit secrets, tokens, private keys, or plaintext credentials.
+- Do not include AI tool names or attribution in commit messages, co-author lines, or code comments.
 - Use standard code annotations: `TODO`, `FIXME`, `BUG`, `SECURITY`, `NOTE`, `A11Y`, etc.
 - If adding a code `TODO:`, also track it in `updates/todo.md` (or move to completed tracking when finished).
 

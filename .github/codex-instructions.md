@@ -114,6 +114,7 @@ Avoids
 
 - Broad repo rewrites, large refactors without clear need, or speculative test generation.
 - Multi-round clarifications for choices that repo conventions already decide.
+- AI tool names or attribution in commit messages, co-author lines, or code comments.
 
 PR/Docs discipline
 
