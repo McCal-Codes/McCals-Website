@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Layout from '../components/Layout/Layout';
 import { WidgetEmbed } from '../components/widgets/WidgetEmbed';
 import { getWidgetConfig } from '../utils/widgetConfig';
@@ -8,6 +9,10 @@ const PodcastPage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Podcast | McCal Media</title>
+        <meta name="description" content="The McCal Media podcast — conversations about photography, journalism, and visual storytelling." />
+      </Head>
       <WidgetEmbed widget={config.widget} category={config.category} version={config.version} />
     </Layout>
   );
