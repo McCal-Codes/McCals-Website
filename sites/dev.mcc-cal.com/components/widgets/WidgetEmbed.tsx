@@ -116,12 +116,17 @@ export function WidgetEmbed({
           const repo = 'McCals-Website';
           const ref = 'main';
 
+          // version is required for GitHub raw content — 'latest' is not a valid ref
+          if (!version) {
+            throw new Error(`[WidgetEmbed] Widget "${widget}" has no version specified. A version is required in production.`);
+          }
+
           // Build GitHub path
           let githubPath = `src/widgets`;
           if (category) {
             githubPath += `/${category}`;
           }
-          githubPath += `/${widget}/versions/${version || 'latest'}`;
+          githubPath += `/${widget}/versions/${version}`;
 
           const githubUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${githubPath}`;
 
@@ -220,5 +225,5 @@ export function WidgetEmbed({
     loadWidget();
   }, [widget, version, category, isDev, onLoad, onError]);
 
-  return <div ref={containerRef} style={style} className={className} />;
+  return <div ref={containerRef} data-widget-container={widget} style={style} className={className} />;
 }

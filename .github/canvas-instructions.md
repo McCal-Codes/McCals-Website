@@ -3,6 +3,7 @@
 - Don't modify `dist/**` (build output) or generated `manifest.json` files.
 - When changing manifest fields, update: generator(s), CI (if needed), docs, and any consumers (e.g., `src/site/app.js`, relevant widgets).
 - For meaningful widget changes, add a new `versions/vN.M.html` file rather than rewriting older versions used in Squarespace.
+- Do not include AI tool names or attribution in commit messages, co-author lines, or code comments.
 - **Widget preview workflow**: When testing widgets, let the user preview them in VS Code's built-in browser or locally first, then have the user describe what they see or what issues they encounter rather than automatically hosting on external servers.s workspace
 
 Agent responsibilities
