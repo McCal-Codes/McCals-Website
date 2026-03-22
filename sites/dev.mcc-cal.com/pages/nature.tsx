@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Layout from '../components/Layout/Layout';
 import { WidgetEmbed } from '../components/widgets/WidgetEmbed';
 import { getWidgetConfig } from '../utils/widgetConfig';
@@ -8,6 +9,10 @@ const NaturePage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Nature Photography | McCal Media</title>
+        <meta name="description" content="Nature and wildlife photography portfolio by Caleb McCartney — landscapes, flora, and fauna." />
+      </Head>
       <WidgetEmbed widget={config.widget} category={config.category} version={config.version} />
     </Layout>
   );

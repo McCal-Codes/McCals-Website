@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Head from 'next/head';
 import Nav from '../components/Layout/Nav';
 import Footer from '../components/Layout/Footer';
 import HeroCarousel from '../components/HeroCarousel';
@@ -10,6 +11,10 @@ const HomePage = () => {
 
   return (
     <div className="site-layout" style={{ paddingTop: 0 }}>
+      <Head>
+        <title>McCal Media | Photography & Photojournalism</title>
+        <meta name="description" content="McCal Media — professional photography, photojournalism, concert, event, and nature portfolios by Caleb McCartney." />
+      </Head>
       <Nav />
       <main className="site-main" style={{ marginTop: 0 }}>
         <HeroCarousel />
