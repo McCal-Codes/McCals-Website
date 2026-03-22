@@ -225,5 +225,5 @@ export function WidgetEmbed({
     loadWidget();
   }, [widget, version, category, isDev, onLoad, onError]);
 
-  return <div ref={containerRef} style={style} className={className} />;
+  return <div ref={containerRef} data-widget-container={widget} style={style} className={className} />;
 }
