@@ -13,6 +13,12 @@ const JournalismPage = () => {
       <Head>
         <title>Photojournalism | McCal Media</title>
         <meta name="description" content="Photojournalism portfolio by Caleb McCartney — documentary and editorial photography." />
+        <link rel="canonical" href="https://mcc-cal.com/journalism" />
+        <meta property="og:title" content="Photojournalism | McCal Media" />
+        <meta property="og:description" content="Photojournalism portfolio by Caleb McCartney — documentary and editorial photography." />
+        <meta property="og:url" content="https://mcc-cal.com/journalism" />
+        <meta name="twitter:title" content="Photojournalism | McCal Media" />
+        <meta name="twitter:description" content="Photojournalism portfolio by Caleb McCartney — documentary and editorial photography." />
       </Head>
       <WidgetEmbed widget={config.widget} category={config.category} version={config.version} />
       <WidgetReloader widget={config.widget} version={config.version} />
