@@ -83,12 +83,6 @@ export const widgetMap: Record<string, WidgetConfig> = {
     category: '_content/about',
     description: 'About page content',
   },
-  contact: {
-    widget: 'contact-form',
-    version: 'v1.1.0-contact-enhanced.html',
-    category: '_content',
-    description: 'Contact form widget',
-  },
   'contact-us': {
     widget: 'contact-form',
     version: 'v1.1.0-contact-enhanced.html',
