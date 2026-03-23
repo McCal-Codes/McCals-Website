@@ -183,10 +183,9 @@ const Nav: React.FC = () => {
                   aria-label="Projects submenu"
                   style={isMobile() ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
                 >
-                  <li><Link to="/projects" role="menuitem">Overview</Link></li>
                   <li><Link to="/design-systems" role="menuitem">Design Systems</Link></li>
-                  <li><Link to="/abridged" role="menuitem">Abridged App</Link></li>
-                  <li><Link to="/roadmap" role="menuitem">Roadmap</Link></li>
+                  <li><Link to="/terranova" role="menuitem">TerraNova</Link></li>
+                  <li><Link to="/abridged" role="menuitem">Abridged</Link></li>
                 </ul>
               </li>
 
@@ -206,9 +205,9 @@ const Nav: React.FC = () => {
                 </Link>
               </li>
               <li className="mcc-nav__cta">
-                <a href="mailto:contact@mcc-cal.com" className="mcc-nav__cta-btn">
+                <Link to="/request-a-quote" className="mcc-nav__cta-btn">
                   Request a Quote
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
