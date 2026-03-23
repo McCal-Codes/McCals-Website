@@ -5,7 +5,7 @@
   "functions": {
     "api/widgets/[...slug].js": {
       "includeFiles": "../../src/widgets/**",
-      "excludeFiles": "../../src/widgets/_archived/**,../../src/widgets/_content/**,../../src/widgets/_cdn/**,../../src/widgets/_admin/**,../../src/widgets/_navigation/**"
+      "excludeFiles": "../../src/widgets/_archived/**,../../src/widgets/_cdn/**,../../src/widgets/_admin/**,../../src/widgets/_navigation/**"
     },
     "api/manifests/[type].js": {
       "includeFiles": "api/manifests/data/*.json"
