@@ -14,6 +14,7 @@ import AbridgedPage from './pages/abridged';
 import ProjectsPage from './pages/projects';
 import RoadmapPage from './pages/roadmap';
 import DesignSystemsPage from './pages/design-systems';
+import ChangelogPage from './pages/changelog';
 import ShowcasePage from './pages/showcase';
 import ApiTestPage from './pages/api-test';
 import ContactUsPage from './pages/contact-us';
@@ -41,8 +42,13 @@ export default function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/roadmap" element={<RoadmapPage />} />
         <Route path="/design-systems" element={<DesignSystemsPage />} />
-        <Route path="/showcase" element={<ShowcasePage />} />
-        <Route path="/api-test" element={<ApiTestPage />} />
+        {import.meta.env.DEV && (
+          <>
+            <Route path="/showcase" element={<ShowcasePage />} />
+            <Route path="/api-test" element={<ApiTestPage />} />
+            <Route path="/changelog" element={<ChangelogPage />} />
+          </>
+        )}
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/request-a-quote" element={<RequestAQuotePage />} />
         <Route path="/policies-legal" element={<PoliciesLegalPage />} />
