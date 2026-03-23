@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/index';
 import AboutPage from './pages/about';
 import BlogPage from './pages/blog';
@@ -16,6 +16,10 @@ import RoadmapPage from './pages/roadmap';
 import DesignSystemsPage from './pages/design-systems';
 import ShowcasePage from './pages/showcase';
 import ApiTestPage from './pages/api-test';
+import ContactUsPage from './pages/contact-us';
+import RequestAQuotePage from './pages/request-a-quote';
+import PoliciesLegalPage from './pages/policies-legal';
+import TerranovaPage from './pages/terranova';
 import NotFoundPage from './pages/not-found';
 
 export default function App() {
@@ -39,6 +43,11 @@ export default function App() {
         <Route path="/design-systems" element={<DesignSystemsPage />} />
         <Route path="/showcase" element={<ShowcasePage />} />
         <Route path="/api-test" element={<ApiTestPage />} />
+        <Route path="/contact-us" element={<ContactUsPage />} />
+        <Route path="/request-a-quote" element={<RequestAQuotePage />} />
+        <Route path="/policies-legal" element={<PoliciesLegalPage />} />
+        <Route path="/terranova" element={<TerranovaPage />} />
+        <Route path="/accessibility" element={<Navigate to="/policies-legal#accessibility" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
