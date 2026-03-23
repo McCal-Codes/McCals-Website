@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>McCal Media</title>
+    <title>Caleb McCartney | McCal Media — Photography &amp; Creative Projects</title>
+    <meta name="description" content="Caleb McCartney is a photographer and creative based in the US, specialising in concert, event, journalism, nature, and portrait photography." />
+    <meta name="author" content="Caleb McCartney" />
+    <link rel="canonical" href="https://mcc-cal.com/" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="McCal Media" />
+    <meta property="og:title" content="Caleb McCartney | McCal Media" />
+    <meta property="og:description" content="Photography and creative projects by Caleb McCartney." />
+    <meta property="og:url" content="https://mcc-cal.com/" />
+    <meta property="og:image" content="https://mcc-cal.com/brand/og-image.jpg" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@mcc_cal" />
+    <meta name="twitter:title" content="Caleb McCartney | McCal Media" />
+    <meta name="twitter:description" content="Photography and creative projects by Caleb McCartney." />
+    <meta name="twitter:image" content="https://mcc-cal.com/brand/og-image.jpg" />
     <link rel="icon" type="image/svg+xml" href="/brand/logo-mark.svg" />
     <script>
       // Apply saved theme before first paint to avoid flash
@@ -11,7 +27,8 @@
         try {
           var t = localStorage.getItem('mcc-theme');
           if (t === 'light' || t === 'dark') {
-            document.documentElement.setAttribute('data-theme-init', t);
+            document.documentElement.setAttribute('data-theme', t);
+            document.body && document.body.setAttribute('data-theme', t);
           }
         } catch (e) {}
       })();

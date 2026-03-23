@@ -16,6 +16,7 @@ import RoadmapPage from './pages/roadmap';
 import DesignSystemsPage from './pages/design-systems';
 import ShowcasePage from './pages/showcase';
 import ApiTestPage from './pages/api-test';
+import NotFoundPage from './pages/not-found';
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/design-systems" element={<DesignSystemsPage />} />
         <Route path="/showcase" element={<ShowcasePage />} />
         <Route path="/api-test" element={<ApiTestPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

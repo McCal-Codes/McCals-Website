@@ -185,7 +185,6 @@ const Nav: React.FC = () => {
                 >
                   <li><Link to="/projects" role="menuitem">Overview</Link></li>
                   <li><Link to="/design-systems" role="menuitem">Design Systems</Link></li>
-                  <li><Link to="/terranova" role="menuitem">TerraNova Editor</Link></li>
                   <li><Link to="/abridged" role="menuitem">Abridged App</Link></li>
                   <li><Link to="/roadmap" role="menuitem">Roadmap</Link></li>
                 </ul>
@@ -207,9 +206,9 @@ const Nav: React.FC = () => {
                 </Link>
               </li>
               <li className="mcc-nav__cta">
-                <Link to="/request-a-quote" className="mcc-nav__cta-btn">
+                <a href="mailto:contact@mcc-cal.com" className="mcc-nav__cta-btn">
                   Request a Quote
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
