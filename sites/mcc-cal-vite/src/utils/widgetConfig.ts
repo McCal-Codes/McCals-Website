@@ -91,13 +91,13 @@ export const widgetMap: Record<string, WidgetConfig> = {
   },
   'contact-us': {
     widget: 'contact-form',
-    version: 'v1.2.0-native-api.html',
+    version: 'v1.1.0-contact-enhanced.html',
     category: '_content',
     description: 'Contact page',
   },
   'request-a-quote': {
     widget: 'quote-request',
-    version: 'v1.2.0-native-api.html',
+    version: 'v1.1.0-quote-multistep.html',
     category: '_content',
     description: 'Quote request multi-step form',
   },
