@@ -1,17 +1,16 @@
 import Layout from '@/components/Layout/Layout';
+import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
+import { getWidgetConfig } from '@/utils/widgetConfig';
 
-const ContactUsPage = () => (
-  <Layout>
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '80px 24px 40px' }}>
-      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 600, marginBottom: '0.5em' }}>
-        Contact
-      </h1>
-      <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', marginBottom: '2rem' }}>
-        Coming soon. In the meantime, reach out directly at{' '}
-        <a href="mailto:contact@mcc-cal.com" style={{ color: 'inherit' }}>contact@mcc-cal.com</a>.
-      </p>
-    </div>
-  </Layout>
-);
+const ContactUsPage = () => {
+  const config = getWidgetConfig('contact-us');
+  if (!config) return <div>Widget not found</div>;
+
+  return (
+    <Layout>
+      <WidgetEmbed widget={config.widget} version={config.version} category={config.category} />
+    </Layout>
+  );
+};
 
 export default ContactUsPage;
