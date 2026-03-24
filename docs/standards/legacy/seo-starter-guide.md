@@ -1,3 +1,43 @@
+# LEGACY: This document is widget/Squarespace-centric and has been moved to legacy. For Vite site standards, see the main standards directory.
+# McCal Media — SEO Starter Guide (Tailored Playbook)
+
+**Goal:** Turn Google's SEO Starter Guide into a practical, McCal‑specific playbook you can actually ship. This focuses on your photography portfolio, editorial/political coverage, and service pages on Squarespace.
+
+---
+
+## 0) Quick‑start checklist (print this)
+
+* [ ] Verify site in **Google Search Console**; submit `sitemap.xml`.
+* [ ] Set preferred domain: [https://www.mcc-cal.com](https://www.mcc-cal.com)
+* [ ] Fix crawl blockers (robots.txt, passworded pages, blocked assets).
+* [ ] Add unique **title + meta description** to every indexable page.
+* [ ] Add **H1** that matches search intent on each page.
+* [ ] Compress and rename images (`shoot-name-location-YYYY.jpg`), add **alt**.
+* [ ] Add **internal links** from blog/case studies → service pages.
+* [ ] Implement **JSON‑LD schema** (Organization, LocalBusiness/Photographer, ImageObject, Article, CreativeWork).
+* [ ] Create 3–5 cornerstone pages (Event Photography, Commercial/Studio, Headshots, Political Photojournalism, About).
+* [ ] Push a new post/case study weekly for 8 weeks and interlink.
+
+---
+
+## 1) Site structure & URL strategy
+
+Keep it human‑legible. Group by intent and topic.
+
+```
+/
+/work/                    # portfolio hub
+  /work/event-photography/
+/work/commercial/
+/work/headshots/
+/work/political/
+/services/
+/services/event-photography-pittsburgh/
+/services/commercial-photography-studio/
+/services/corporate-headshots/
+/about/
+/contact/
+/journal/                 # blog/editorial
   /journal/market-square-business-impact/
 /journal/drag-in-pittsburgh-history/
 ```

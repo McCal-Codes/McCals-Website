@@ -1,3 +1,43 @@
+# LEGACY: This document is widget/Squarespace-centric and has been moved to legacy. For Vite site standards, see the main standards directory.
+# Image SEO Standards for Portfolio Widgets
+
+## Overview
+This document outlines best practices for optimizing images in portfolio widgets (concert, event, journalism, etc.) for search engine optimization (SEO). Proper image SEO improves discoverability, accessibility, and user experience while helping search engines understand and index your visual content.
+
+## Core SEO Principles for Images
+
+### 1. Alt Text (Alternative Text)
+- **Purpose**: Provides text descriptions for screen readers and search engines when images can't be displayed
+- **Implementation**: Add descriptive, keyword-rich alt attributes to all `<img>` tags
+- **Best Practices**:
+  - Be descriptive but concise (under 125 characters)
+  - Include relevant keywords naturally
+  - Describe the image content, not just filename
+  - Use empty alt (`alt=""`) for decorative images only
+- **Example**: `<img src="concert-20231015-001.jpg" alt="Funky Lamp performing live at The Fillmore, October 2023">`
+
+### 2. Image File Naming
+- **Purpose**: Helps search engines understand image content through filenames
+- **Implementation**: Use descriptive, keyword-rich filenames before upload
+- **Best Practices**:
+  - Use hyphens to separate words (not underscores or spaces)
+  - Include relevant keywords, dates, and context
+  - Keep filenames under 50 characters when possible
+  - Avoid generic names like "IMG_001.jpg"
+- **Example**: `funky-lamp-fillmore-concert-october-2023-001.jpg` instead of `IMG_1234.jpg`
+
+### 3. Image Optimization
+- **Purpose**: Faster loading speeds improve user experience and SEO rankings
+- **Implementation**: Compress images without quality loss
+- **Best Practices**:
+  - Use WebP format when supported, fallback to JPEG/PNG
+  - Compress to 80-90% quality for JPEGs
+  - Resize images appropriately (max width 1920px for portfolios)
+  - Use responsive images with `srcset` for different screen sizes
+- **Tools**: ImageOptim, TinyPNG, or automated compression in build process
+
+### 4. Structured Data (Schema.org)
+- **Purpose**: Helps search engines understand image context and display rich snippets
 - **Implementation**: Add JSON-LD structured data to widget HTML
 - **Best Practices**:
   - Use `ImageObject` schema for individual images
