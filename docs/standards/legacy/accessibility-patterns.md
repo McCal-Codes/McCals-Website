@@ -1,3 +1,43 @@
+# LEGACY: This document is widget/Squarespace-centric and has been moved to legacy. For Vite site standards, see the main standards directory.
+# Accessibility Pattern Library
+
+## Purpose
+
+This document provides reusable accessibility patterns extracted from production widgets, demonstrating WCAG 2.1 AA compliance techniques for McCal Media widgets.
+
+**Reference Implementation:** Accessibility Statement Widget (v1.0)
+
+---
+
+## Table of Contents
+
+1. [Skip to Main Content](#skip-to-main-content)
+2. [Focus Management](#focus-management)
+3. [Keyboard Navigation](#keyboard-navigation)
+4. [Mobile Drawer Pattern](#mobile-drawer-pattern)
+5. [Scroll Spy with ARIA](#scroll-spy-with-aria)
+6. [Semantic HTML & Landmarks](#semantic-html--landmarks)
+7. [ARIA Attributes](#aria-attributes)
+8. [Reduced Motion](#reduced-motion)
+9. [Color & Contrast](#color--contrast)
+10. [Keyboard Shortcut Display](#keyboard-shortcut-display)
+11. [Print Styles](#print-styles)
+12. [Sticky Navigation](#sticky-navigation)
+
+---
+
+## 1. Skip to Main Content
+
+**Purpose:** Allow keyboard and screen reader users to bypass repeated navigation and jump directly to main content.
+
+### Implementation
+
+```html
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<main id="main-content">
+  <!-- main content here -->
+</main>
 ```
 
 ```css

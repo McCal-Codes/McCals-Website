@@ -1,3 +1,42 @@
+# LEGACY: This document is widget/Squarespace-centric and has been moved to legacy. For Vite site standards, see the main standards directory.
+
+# ⚡️ Site Architecture Clarification (2026)
+
+**Production Site:** The Vite site is the official production website. The following performance standards were developed for legacy widget deployments and are retained for reference/maintenance only. For new work, follow Vite and modern web best practices.
+
+# Performance Standards & Lighthouse Optimization
+
+## Overview
+
+This document outlines performance standards and optimization techniques for McCal Media widgets, using the **Concert Portfolio v4.6** as the primary case study for Lighthouse performance scoring best practices.
+
+## Lighthouse Performance Metrics
+
+Based on [Chrome Lighthouse Performance Scoring](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/), widgets must achieve:
+
+- **Target Score**: 90+ (Good)
+- **Minimum Acceptable**: 75+ (Needs Improvement)
+- **Critical Metrics**: LCP, FID, CLS, FCP, TBT
+
+## Concert Portfolio v4.6 — Performance Case Study
+
+This widget showcases over two years of concert photography work, capturing the vibrant energy of live music scenes at Haven and other local venues. From intimate acoustic sets to high-energy performances, these images document the raw emotion and artistic expression that defines the local music community.
+
+### Performance Optimizations Implemented
+
+#### 1. **Critical CSS Inlining** (Addresses Render-Blocking Resources)
+
+```css
+<!-- Critical CSS - Only essential styles for initial render -->
+<style>
+:root{--fg:#f5f5f5;--bg:#0a0a0a;--line:#2a2a2a;--accent:#ffffff}
+.concert-portfolio{max-width:1600px;margin:60px auto;padding:40px 20px;text-align:center;position:relative}
+.concert-heading{font:800 34px/1.2 ui-sans-serif,system-ui;color:var(--fg);margin:0 0 18px}
+/* ... minimal critical styles only ... */
+</style>
+```
+
+**Impact**: Eliminates render-blocking CSS, improves FCP and LCP scores.
 
 #### 2. **Modern JavaScript Patterns** (Addresses Long Tasks)
 

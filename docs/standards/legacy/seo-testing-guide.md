@@ -1,3 +1,43 @@
+# LEGACY: This document is widget/Squarespace-centric and has been moved to legacy. For Vite site standards, see the main standards directory.
+# SEO Testing Guide — Comprehensive Checklist
+
+## Overview
+
+This guide provides a systematic approach to testing SEO (Search Engine Optimization) for web pages and widgets. It focuses on Google's official tools and best practices for verifying SEO implementation.
+
+## Prerequisites
+
+- **Live Website**: Most Google tools require your site to be publicly accessible
+- **Google Account**: Required for Search Console and Analytics
+- **Indexed Site**: Your pages should be indexed by Google (check with `site:yourdomain.com`)
+- **Basic HTML Knowledge**: Understanding of meta tags, structured data, and accessibility
+
+---
+
+## 1. Structured Data Testing
+
+### Google's Rich Results Test
+**Purpose**: Validates JSON-LD structured data markup
+**URL**: https://search.google.com/test/rich-results
+**What it tests**:
+- Schema.org markup validity
+- Rich snippet eligibility
+- Structured data errors and warnings
+
+**Testing Steps**:
+1. Go to the Rich Results Test tool
+2. Enter your live page URL
+3. Or paste your HTML code directly
+4. Review detected structured data
+5. Fix any validation errors
+
+**For Your Concert Portfolio Widget**:
+```javascript
+// Check if structured data is present
+console.log(document.querySelector('script[type="application/ld+json"]'));
+
+// View the structured data
+const structuredData = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent);
 console.log(structuredData);
 ```
 

@@ -11,17 +11,31 @@
 ## See Also
 
 
+
 # Workspace Organization, Validation & Scripts — Standardization
 
-**Quick links:** [Onboarding](../ONBOARDING.md) · [Widget reference](./widget-reference.md) · [Widget standards](./widget-standards.md) · [Performance standards](./performance-standards.md) · [Image SEO](./image-seo-standards.md)
+**Quick links:** [Onboarding](../ONBOARDING.md) · [UI Patterns](./ui-patterns.md) · [Enhancements](./enhancements.md) · [Debugging](./debugging.md) · [Changelog Standard](./changelog-standard.md)
 
 ## Purpose
+
 
 This document combines all standards for scripts folder organization, workspace validation, and preflight/afterflight checklists. It is the single source of truth for maintaining an efficient, organized, and well-documented workspace.
 
 ---
 
-## 1. Folder Structure & Archival Policy
+## Vite & Modern Web Tooling
+
+- **Vite-first:** All new scripts, build tools, and workflows should assume a Vite-based site as the canonical production target.
+- **ESM by default:** Use ES modules for all new scripts and utilities. Prefer `import`/`export` over `require`/`module.exports`.
+- **Modern npm scripts:** Use `vite`, `vite build`, `vite preview`, and `vite lint` as the baseline for validation and local development.
+- **TypeScript:** Prefer TypeScript for new scripts/utilities. Use `ts-node` or Vite's built-in support for dev scripts.
+- **Static assets:** Place all public/static assets in the Vite `public/` directory or as recommended by Vite. Use hashed filenames for cache-busting.
+- **CDN best practices:** For production, serve static assets via a CDN. Reference assets using Vite's asset handling (`import img from './logo.png'`).
+
+---
+
+
+## 1. Folder Structure & Archival Policy (Vite/Next.js Hybrid)
 
 - **manifest/**: Manifest generators and related scripts
 - **watchers/**: Watcher scripts for auto-updating manifests or related data
@@ -29,6 +43,13 @@ This document combines all standards for scripts folder organization, workspace 
 - **admin/**: Admin-only tools, importers, and backend helpers
 - **\_archived/**: Scripts not actively used by widgets, npm scripts, or automation pipelines
 - Do **not** place new scripts directly in the root `scripts/` folder
+
+
+### Static Assets & CDN
+- Place all static assets (images, fonts, etc.) in `sites/mcc-cal-vite/public/` for Vite, or the equivalent public folder for Next.js.
+- Use hashed filenames for cache-busting in production.
+- Reference assets using Vite's asset import syntax or Next.js static imports.
+- For CDN, ensure correct cache headers and versioning.
 
 ### Archival Policy
 
@@ -38,7 +59,8 @@ This document combines all standards for scripts folder organization, workspace 
 
 ---
 
-## 2. Adding or Modifying Scripts
+
+## 2. Adding or Modifying Scripts (Vite/Modern)
 
 - Before adding new scripts, check for existing patterns and update the relevant README in each subfolder
 - After any reorganization, validate all npm scripts and workflows to ensure nothing is broken
@@ -46,7 +68,8 @@ This document combines all standards for scripts folder organization, workspace 
 
 ---
 
-## 3. Efficiency and Maintenance
+
+## 3. Efficiency and Maintenance (Vite/Modern)
 
 - Always keep the scripts folder clean and efficient to avoid confusion
 - Never leave scripts in the root folder unless absolutely necessary (and document why)
@@ -54,7 +77,8 @@ This document combines all standards for scripts folder organization, workspace 
 
 ---
 
-## 4. GitHub Actions Workflow Standards
+
+## 4. GitHub Actions Workflow Standards (Vite/Modern)
 
 ### Workflow Organization
 
@@ -70,7 +94,11 @@ This document combines all standards for scripts folder organization, workspace 
 - **CI Validation**: Include `validate-workflows.yml` job that checks script references and best practices
 - **Cross-Platform Compatibility**: Ensure scripts work on Windows/macOS/Linux; avoid PowerShell-only commands in shared scripts
 
-### Portfolio Automation
+
+### Vite-Specific Validation
+- Always run `npm run lint`, `npm run type-check`, and `npm run build` before committing changes.
+- Use `vite preview` to validate production builds locally.
+- For CI, ensure workflows run `vite build` and `vite preview` smoke tests.
 
 - **Manifest Workflows**: Every portfolio type should have automated manifest generation (e.g., `portrait-manifest.yml`, `nature-manifest.yml`)
 - **Trigger Conditions**: Watch for changes in respective portfolio directories (e.g., `src/images/Portfolios/Portrait/**`)
@@ -78,9 +106,12 @@ This document combines all standards for scripts folder organization, workspace 
 
 ---
 
-## 5. Preflight & Afterflight Checklists
+
+## 5. Preflight & Afterflight Checklists (Vite/Modern)
+
 
 ### Preflight (Before Making Changes)
+1. **Run Vite Preflight:** Use `npm run ai:preflight:short` and `vite build` to check for errors before starting work.
 
 1. **Read Standards**: Review all relevant standards in `docs/standards/` (this document).
 2. **Run Preflight Validation**: Use `npm run ai:preflight:short` or the VS Code "AI: Preflight (short)" task to check context awareness and workspace health.
@@ -88,7 +119,9 @@ This document combines all standards for scripts folder organization, workspace 
 4. **Plan Organization**: Confirm new scripts, folders, or changes will follow the documented structure and archival policy.
 5. **Validate Workflows**: If modifying workflows, run `node scripts/utils/ci-validate-workflows.js` to check references and best practices.
 
+
 ### Afterflight (After Making Changes)
+1. **Run Vite Validation:** After changes, run `vite build`, `vite preview`, and all lint/type-check scripts to ensure no regressions.
 
 1. **Validate Scripts**: Run all npm scripts and workflows to ensure nothing is broken after changes.
 2. **Check Efficiency**: Confirm no scripts are left in the root `scripts/` folder unless absolutely necessary (and documented).
@@ -99,13 +132,23 @@ This document combines all standards for scripts folder organization, workspace 
 
 ---
 
-## 6. Documentation & Reference
+
+## 6. Documentation & Reference (Vite/Modern)
 
 - All standards and organization rules are in `docs/standards/`. Always fall back to these documents for guidance.
 - If in doubt, document your process and decisions for future maintainers.
 - Workflow standards are detailed in `.github/WORKFLOWS.md`.
 
-## Single-Portfolio Manifest Policy (2025-11)
+
+---
+
+## Troubleshooting & FAQ (Vite/Modern)
+
+- **Vite build fails with ESM errors:** Ensure all scripts use `import`/`export` and update dependencies to ESM-compatible versions.
+- **Static assets not loading:** Check asset paths and use Vite's asset import syntax. For CDN, verify cache headers and asset URLs.
+- **TypeScript errors:** Run `npm run type-check` and ensure all types are up to date. Use Vite's built-in TS support.
+- **Hot reload not working:** Restart the dev server and check for conflicting plugins or misconfigured paths.
+- **Legacy widget issues:** Only update legacy widget scripts for critical fixes or migration. All new work should follow Vite standards.
 
 - We now produce a single aggregated manifest per portfolio type (for example `portrait-manifest.json`, `concert-manifest.json`, `nature-manifest.json`) located at `src/images/Portfolios/<Type>/`.
 - Per-folder `manifest.json` files are deprecated and should not be created or committed. This simplifies widget consumption and CI logic.

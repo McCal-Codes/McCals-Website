@@ -27,13 +27,13 @@ This document contains the current standards, conventions, and best practices fo
 - [versioning.md](./versioning.md): Versioning guidelines for site and assets.
 
 ## Performance & Accessibility
-- [performance-standards.md](./performance-standards.md): Vite and web performance best practices.
-- [accessibility-patterns.md](./accessibility-patterns.md): Accessibility patterns for modern web apps.
+- [ui-patterns.md](./ui-patterns.md): UI and accessibility patterns for the Vite site.
+- [enhancements.md](./enhancements.md): Modern enhancement patterns for Vite.
 
 ## SEO Standards
-- [image-seo-standards.md](./image-seo-standards.md): Image alt text, filenames, lazy loading, and accessibility.
-- [seo-starter-guide.md](./seo-starter-guide.md): SEO starter guide for Vite site.
-- [seo-testing-guide.md](./seo-testing-guide.md): SEO validation and workflows.
+- [image-seo-standards.md](./image-seo-standards.md): Image SEO for Vite (to be expanded).
+- [seo-starter-guide.md](./seo-starter-guide.md): SEO starter guide for Vite (to be expanded).
+- [seo-testing-guide.md](./seo-testing-guide.md): SEO validation for Vite (to be expanded).
 
 ## Deployment & Build
 - [deployment/DEPLOYMENT.md](../deployment/DEPLOYMENT.md): Main deployment documentation.
@@ -54,7 +54,11 @@ This document contains the current standards, conventions, and best practices fo
 - [Debugging](./debugging.md)
 - [Changelog Standard](./changelog-standard.md)
 
-See legacy widget docs in [../legacy/README.md](../legacy/README.md) for Squarespace/migration support.
+---
+
+## Legacy Widget/Squarespace Docs
+
+For all legacy widget and Squarespace documentation, see [legacy/README.md](./legacy/README.md). These are retained for migration/reference only. All new work should follow the Vite standards above.
 
 ---
 ## Quick Start Guide
