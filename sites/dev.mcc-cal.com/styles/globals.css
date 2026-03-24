@@ -101,4 +101,90 @@ body[data-theme="light"] .mcc-nav.is-home:not(.is-scrolled) {
   --mcc-z-top: 2147483647;
 }
 
+/* === Legacy Widget Utility Classes (consolidated) === */
+[class^='mcc-'], [class*=' mcc-'] {
+  box-sizing: border-box;
+  font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--fg);
+}
+[class^='mcc-'] a:focus-visible,
+[class^='mcc-'] button:focus-visible,
+[class^='mcc-'] [role='button']:focus-visible,
+[class*=' mcc-'] a:focus-visible,
+[class*=' mcc-'] button:focus-visible,
+[class*=' mcc-'] [role='button']:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 6px;
+}
+.mcc-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.mcc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mcc-space-2);
+  padding: 0.6rem 1.2rem;
+  height: var(--mcc-control-height);
+  border-radius: 999px;
+  background: var(--mcc-gradient-business);
+  color: #272423;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+.mcc-btn:hover,
+.mcc-btn:focus-visible {
+  background: var(--mcc-accent-strong);
+  transform: translateY(-1px);
+}
+.mcc-img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.mcc-row {
+  display: flex;
+  gap: var(--mcc-space-3);
+  align-items: center;
+}
+.mcc-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mcc-space-2);
+}
+.mcc-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+[class^='mcc-'] {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@media (prefers-reduced-motion: reduce) {
+  [class^='mcc-'] * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  [class^='mcc-'] {
+    color: #000 !important;
+    background: transparent !important;
+  }
+}
+
 /* (Paste additional About widget styles here as needed) */
