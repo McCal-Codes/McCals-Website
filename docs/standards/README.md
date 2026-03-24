@@ -1,78 +1,60 @@
-# Standards Documentation
 
-Guidelines, conventions, and best practices for the McCal Media workspace.
+# McCal Media Site Standards (Vite-Focused)
 
-## Table of contents
+This document contains the current standards, conventions, and best practices for the Vite-based production site.
 
-- [Widget Development Standards](#widget-development-standards)
-- [Repository Standards](#repository-standards)
-- [SEO Standards](#seo-standards)
-- [Troubleshooting & Debugging](#troubleshooting--debugging)
-- [UI Patterns & Enhancements](#ui-patterns--enhancements)
-- [Quick Start Guide](#quick-start-guide)
-- [Development Workflow](#development-workflow)
+## Table of Contents
 
-## Widget Development Standards
-
-### 📋 [widget-reference.md](./widget-reference.md) ⭐ START HERE
-Quick reference checklist and common patterns for widget development. Essential for daily development.
-
-### ⚡ [performance-standards.md](./performance-standards.md) ⭐ PERFORMANCE FIRST
-Lighthouse optimization guide using Concert Portfolio v4.6 as case study. Required reading for all widget development.
-
-### ♿ [accessibility-patterns.md](./accessibility-patterns.md) ⭐ WCAG COMPLIANCE
-Comprehensive accessibility pattern library with code examples for skip navigation, focus management, keyboard controls, mobile drawers, scroll spy, ARIA, reduced motion, color contrast, and more. Reference implementation: Accessibility Statement Widget v1.0.
-
-### 📖 [widget-standards.md](./widget-standards.md)
-Comprehensive widget standards documentation covering architecture, design patterns, performance, and accessibility requirements.
-
-### 🔄 [widget-development.md](./widget-development.md)
-Systematic methodology for applying enhancement patterns across widgets with implementation checklists and quality standards.
-
-## Repository Standards
-
-### 🗂️ [workspace-organization.md](./workspace-organization.md)
-Single source of truth for scripts folder structure, archival, workspace validation, and preflight/afterflight checklists.
-All contributors must follow this document for any changes to scripts or workspace organization.
-
-### 📅 [date-naming.md](./date-naming.md)
-Naming conventions for photo organization and date parsing in manifest generation.
-
-### 🏷️ [versioning.md](./versioning.md)
-Semantic versioning guidelines for widgets, manifests, and repository components.
+- [McCal Media Site Standards (Vite-Focused)](#mccal-media-site-standards-vite-focused)
+  - [Table of Contents](#table-of-contents)
+  - [Workspace \& Repository Standards](#workspace--repository-standards)
+  - [Performance \& Accessibility](#performance--accessibility)
+  - [SEO Standards](#seo-standards)
+  - [Deployment \& Build](#deployment--build)
+  - [Vite Site Standards (2026+)](#vite-site-standards-2026)
+  - [New Vite Site Standards](#new-vite-site-standards)
+  - [Quick Start Guide](#quick-start-guide)
+    - [For New Widget Development](#for-new-widget-development)
+    - [For Widget Enhancement](#for-widget-enhancement)
+    - [For Asset Organization](#for-asset-organization)
+  - [Development Workflow](#development-workflow)
 
 ---
+
+## Workspace & Repository Standards
+- [workspace-organization.md](./workspace-organization.md): Folder structure, archival, validation, and preflight/afterflight checklists.
+- [date-naming.md](./date-naming.md): Naming conventions for images and manifests.
+- [versioning.md](./versioning.md): Versioning guidelines for site and assets.
+
+## Performance & Accessibility
+- [performance-standards.md](./performance-standards.md): Vite and web performance best practices.
+- [accessibility-patterns.md](./accessibility-patterns.md): Accessibility patterns for modern web apps.
 
 ## SEO Standards
+- [image-seo-standards.md](./image-seo-standards.md): Image alt text, filenames, lazy loading, and accessibility.
+- [seo-starter-guide.md](./seo-starter-guide.md): SEO starter guide for Vite site.
+- [seo-testing-guide.md](./seo-testing-guide.md): SEO validation and workflows.
 
-### 🖼️ [image-seo-standards.md](./image-seo-standards.md)
-Comprehensive practices for image alt text, filenames, lazy loading, structured data, and accessibility.
-
-### 🔎 [seo-starter-guide.md](./seo-starter-guide.md)
-Practical starter guide tailored for Squarespace implementation in this workspace.
-
-### 🧪 [seo-testing-guide.md](./seo-testing-guide.md)
-How to validate SEO with checklists, tools, and repeatable workflows.
-
----
-
-## Troubleshooting & Debugging
-
-### 🧯 [widget-debugging-lessons.md](./widget-debugging-lessons.md)
-Critical lessons and emergency recovery protocols for widget issues (lightbox, performance, regressions).
+## Deployment & Build
+- [deployment/DEPLOYMENT.md](../deployment/DEPLOYMENT.md): Main deployment documentation.
+- [deployment/DEPLOY-CHEATSHEET.md](../deployment/DEPLOY-CHEATSHEET.md): Quick deployment reference.
+- [deployment/PACKAGE-DEPLOYMENT.md](../deployment/PACKAGE-DEPLOYMENT.md): Package-based deployment.
+- [deployment/SETUP-GITHUB-HOSTING.md](../deployment/SETUP-GITHUB-HOSTING.md): GitHub Pages hosting setup.
 
 ---
 
-## UI Patterns & Enhancements
 
-### 🎨 [widget-ui-colors-and-buttons.md](./widget-ui-colors-and-buttons.md)
-Shared UI patterns for colors, buttons, and minimal, consistent styling.
+## Vite Site Standards (2026+)
 
-### ✨ [widget-enhancement-patterns.md](./widget-enhancement-patterns.md)
-Catalog of proven enhancement patterns to apply systematically across widgets.
 
-### 🔧 [widget-enhancements.md](./widget-enhancements.md)
-Change-oriented enhancements and guidance for improving existing widgets.
+## New Vite Site Standards
+
+- [UI Patterns](./ui-patterns.md)
+- [Enhancements](./enhancements.md)
+- [Debugging](./debugging.md)
+- [Changelog Standard](./changelog-standard.md)
+
+See legacy widget docs in [../legacy/README.md](../legacy/README.md) for Squarespace/migration support.
 
 ---
 ## Quick Start Guide
