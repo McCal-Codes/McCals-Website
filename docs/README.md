@@ -5,8 +5,9 @@ Welcome to the comprehensive documentation for McCal's Website project. This doc
 ## Quick links
 - Onboarding: [docs/ONBOARDING.md](../docs/ONBOARDING.md)
 - Workspace standards: [standards/workspace-organization.md](standards/workspace-organization.md)
-- Widget quick checklist: [standards/widget-reference.md](standards/widget-reference.md)
-- Full widget standards: [standards/widget-standards.md](standards/widget-standards.md)
+
+// Widget quick checklist: [legacy/widget-reference.md](legacy/widget-reference.md)
+// Full widget standards: [legacy/widget-standards.md](legacy/widget-standards.md)
 - Performance reference: [standards/performance-standards.md](standards/performance-standards.md)
 - Image SEO: [standards/image-seo-standards.md](standards/image-seo-standards.md)
 

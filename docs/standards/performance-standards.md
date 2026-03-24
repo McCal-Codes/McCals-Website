@@ -1,3 +1,8 @@
+
+# ⚡️ Site Architecture Clarification (2026)
+
+**Production Site:** The Vite site is the official production website. The following performance standards were developed for legacy widget deployments and are retained for reference/maintenance only. For new work, follow Vite and modern web best practices.
+
 # Performance Standards & Lighthouse Optimization
 
 ## Overview

@@ -1,13 +1,15 @@
 #
 
+# ⚡️ Site Architecture Clarification (2026)
+
+**Production Site:** The official production website is built with Vite and lives in `sites/mcc-cal-vite/` (or equivalent). All standards, deployment, and validation workflows should prioritize the Vite site as the canonical source for production.
+
+**Development/Preview Site:** The `dev.mcc-cal.com` site (Next.js, in `sites/dev.mcc-cal.com/`) is for development, preview, and integration testing only. It is not the production runtime and should not be referenced as the main site in standards or documentation.
+
+**Legacy Widgets:** Widget-centric workflows and standards are now considered legacy. Only update widget docs or workflows if maintaining backward compatibility or for archival purposes. All new work should focus on the Vite site.
+
 ## See Also
 
-- [widget-standards.md](./widget-standards.md)
-- [widget-reference.md](./widget-reference.md)
-- [widget-enhancements.md](./widget-enhancements.md)
-- [widget-development.md](./widget-development.md)
-- [versioning.md](./versioning.md)
-- [date-naming.md](./date-naming.md)
 
 # Workspace Organization, Validation & Scripts — Standardization
 
