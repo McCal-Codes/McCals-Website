@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(find i:/Programing/Projects/McCals-Website/src/widgets -maxdepth 3 -name *terra* -o -name *nova*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

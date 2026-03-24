@@ -2,7 +2,7 @@
 
 # Widget Development Enhancement Guide
 
-> **Status**: Active Development Guidelines  
+<!-- ARCHIVED: This document is legacy and has been moved to docs/_archived/widget-development.md -->
 > **Created**: October 5, 2025  
 > **Purpose**: Systematic approach to applying proven enhancement patterns across all McCal Media widgets
 

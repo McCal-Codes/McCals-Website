@@ -1,3 +1,7 @@
+# AI-related scripts and Copilot instructions (local only)
+scripts/utils/ai-*.js
+src/api/scripts/utils/ai-*.js
+.github/copilot-instructions.md
 # System files
 .DS_Store
 */.DS_Store

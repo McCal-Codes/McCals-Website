@@ -2,7 +2,7 @@
 
 This repository hosts the development workspace for McCal Media's Squarespace widgets. It includes the widget source files, a local test site, automation scripts, and standards that keep contributions consistent and production-ready.
 
-**Start here:** [docs/ONBOARDING.md](docs/ONBOARDING.md) → [.github/copilot-instructions.md](.github/copilot-instructions.md) → [docs/standards/workspace-organization.md](docs/standards/workspace-organization.md) → [docs/bookmarks.md](docs/bookmarks.md) → [docs/repo-improvement-plan.md](docs/repo-improvement-plan.md)
+**Start here:** [docs/ONBOARDING.md](docs/ONBOARDING.md) → [docs/standards/workspace-organization.md](docs/standards/workspace-organization.md) → [docs/bookmarks.md](docs/bookmarks.md) → [docs/repo-improvement-plan.md](docs/repo-improvement-plan.md)
 
 Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/standards/security-organization-prompt.md` or the quick `docs/standards/security-organization-checklist.md`.
 
@@ -10,60 +10,59 @@ Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/
 
 **Requirements:** Node.js 18+ and npm.
 
-1. Install dependencies:
 
----
+# McCal Media Website
 
-## Quick note: dev.mcc-cal.com Next.js app
+This repository contains the source code and documentation for the McCal Media website. The main site is built with Vite and serves as the public-facing portfolio and project hub. Legacy widget code is archived and no longer the focus of development.
 
-This repository includes the dev.mcc-cal.com Next.js app at `sites/dev.mcc-cal.com` (development mirror of mcc-cal.com).
+## Project Structure
 
-Prerequisites
+- `mcc-cal-vite/` — **Production site** (Vite-based, main public site)
+- `sites/dev.mcc-cal.com/` — **Dev/Preview site** (Next.js, for local development and previews)
+- `src/` — Shared source code (images, data, API, widgets [archived])
+- `docs/` — Documentation, standards, and migration notes
+- `scripts/` — Build, manifest, and utility scripts
 
-- Node.js 18+ recommended (the repo requires >=16; Next 15 works best on Node 18+).
-- Network access to the npm registry to install dependencies.
+## Quick Start
 
-Run it locally
+1. Install dependencies: `npm install`
+2. Start the dev server for the production site: `cd mcc-cal-vite && npm run dev`
+3. Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-```bash
-cd sites/dev.mcc-cal.com
-npm install
-npm run dev      # development server on port 3000 by default
-npm run build    # build for production
-npm run start    # serve the production build
-```
+## Sites
 
-Run the server (recommended)
+- **Production Site (`mcc-cal-vite`)**: The main site, built with Vite. All new content and features are developed here.
+- **Dev/Preview Site (`dev.mcc-cal.com`)**: Next.js-based preview and development harness. Use for local development, previews, and testing before production deployment.
 
-The canonical dev.mcc-cal.com site is the running Next.js server. To run it locally:
+## Legacy Widgets (Archived)
 
-```bash
-cd sites/dev.mcc-cal.com
-npm install
-npm run build
-npm run start   # serves the production build (default port 3000)
-# Or for development with HMR:
-npm run dev
-```
+Legacy widget code and documentation are archived. Widgets remain available for Squarespace/CDN embedding, but all new development is focused on the Vite site. See `src/widgets/` and `docs/standards/widget-reference.md` for legacy details.
 
-If you prefer a static snapshot (only for fully static sites), you can export when your Next config supports it; otherwise running the Next server is the recommended approach. The dev server will redirect `/ ?root=site` requests to the running Next server (configured with `NEXT_SERVER_PORT`, default 3005).
+## Documentation
 
-Start from the Serve Selector
+- `docs/` — All documentation, standards, and migration notes
+- `docs/standards/` — Coding, performance, and accessibility standards
+- `docs/2026-COMPLETE.md`, `docs/2026-READY.md` — Project status and migration notes
 
-The serve selector page (`serve-select.html`) includes a "Start & Open" button that can request the repo dev-server to spawn the Next.js production server for you. This is an opt-in feature and is disabled by default for safety. To enable it, start the dev server with:
+## Development Workflow
 
-```bash
-DEV_SERVER_ALLOW_START=true PORT=3033 NEXT_SERVER_PORT=3005 node dev-server.js
-```
+- Run `npm install` and `npm run dev` in `mcc-cal-vite/` for the main site
+- Use `sites/dev.mcc-cal.com/` for preview/testing as needed
+- Legacy widget validation: `npm run validate:widgets` (rarely needed)
+- Run manifest/image scripts as needed for portfolio updates
 
-When enabled, clicking the "Start & Open" button will POST to a local dev-only endpoint (`/__start_next`) which spawns `npx next start -p <port>` in `sites/dev.mcc-cal.com` and then opens the running site when it becomes reachable. Use this only on trusted developer machines.
+## Deployment
 
-## Available Widgets
+- Production site (`mcc-cal-vite`) is deployed via Vercel or static hosting
+- Legacy widgets are published via jsDelivr CDN for Squarespace embedding (archived)
 
-Critical repository events, security incidents, and recovery steps are documented in [docs/important-notes/](docs/important-notes/).
+## Contributing
 
-**Latest:** [2025-10-09-secret-removal.md](docs/important-notes/2025-10-09-secret-removal.md) — Google Cloud service account secret removal and repository history rewrite. All collaborators must re-clone the repository.
+This is a personal project. No outside contributors are accepted at this time.
 
+## License
+
+See [LICENSE](LICENSE) for details.
 - CDN-hosted manifests (no API required): see [docs/manifest-cdn.md](docs/manifest-cdn.md) for jsDelivr URLs and the publish workflow.
 
 ### CI webhook notifications for manifests
@@ -88,7 +87,7 @@ We use tag-based releases for deploying widgets to Squarespace via jsDelivr:
 - CDN pattern: `https://cdn.jsdelivr.net/gh/<owner>/<repo>@<tag>/<path-to-versioned-html>`
 - Example: `https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html`
 
-Use the loader snippet documented in `.github/copilot-instructions.md` under “Squarespace + jsDelivr (quick pattern)”.
+
 
 Fixing validation errors:
 
@@ -104,10 +103,7 @@ Fixing validation errors:
 - Widget status clarity (archives, WIP markers)
 - Root directory cleaned (legacy test artifacts removed)
 
-## AI Assistant Quick Start
 
-Read: `docs/standards/workspace-organization.md` then `.github/copilot-instructions.md`.
-Preflight commands: `npm run ai:preflight:short` | `npm run ai:preflight` | `npm run ai:preflight:json`.
 
 ## Widget Catalog
 

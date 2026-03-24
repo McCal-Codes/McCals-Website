@@ -75,9 +75,7 @@ Future workflow will:
 
 ## 8. Archival Coordination
 When archiving older versions:
-- Ensure their entries remain in the per-widget CHANGELOG (do not delete history).
-- Add summary entry to root CHANGELOG if archival represented major consolidation.
-- CI will ignore archived HTML files (no `data-active="true"` badge) but still parse CHANGELOG history.
+<!-- ARCHIVED: This document is legacy and has been moved to docs/_archived/widget-changelog-standard.md -->
 
 ## 9. Performance Metrics Embedding
 Embed metrics succinctly:
