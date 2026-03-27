@@ -183,9 +183,8 @@ const Nav: React.FC = () => {
                   aria-label="Projects submenu"
                   style={isMobile() ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
                 >
-                  <li><Link to="/design-systems" role="menuitem">Design Systems</Link></li>
-                  <li><Link to="/terranova" role="menuitem">TerraNova</Link></li>
-                  <li><Link to="/abridged" role="menuitem">Abridged</Link></li>
+                  <li><Link to="/projects" role="menuitem">Overview</Link></li>
+                  <li><Link to="/roadmap" role="menuitem">Roadmap</Link></li>
                 </ul>
               </li>
 
