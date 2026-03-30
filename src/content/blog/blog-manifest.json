@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-03-30T17:06:16.696Z",
+  "generated": "2026-03-30T17:30:15.956Z",
   "total": 1,
   "posts": [
     {
@@ -14,6 +14,7 @@
       "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., beneath a glowing red neon sign, June 12, 2025.",
       "leadImageCaption": "Musicians perform at the Aeolian Music Hall, Boyd Station, Ky., June 12, 2025.",
       "published": true,
+      "tags": [],
       "authorName": "Caleb McCartney",
       "readingTime": 2
     }
