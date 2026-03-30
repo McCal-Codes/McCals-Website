@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import HomePage from './pages/index';
 import AboutPage from './pages/about';
 import BlogPage from './pages/blog';
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="/accessibility" element={<Navigate to="/policies-legal#accessibility" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <SpeedInsights />
     </BrowserRouter>
   );
 }
