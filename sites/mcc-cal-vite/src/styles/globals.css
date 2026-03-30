@@ -1,4 +1,6 @@
 /* Global styles for Self-Hosted Photography site */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 body {
   margin: 0;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -66,9 +68,6 @@ body[data-theme="light"] .mcc-nav.is-home:not(.is-scrolled) {
   border-bottom: none !important;
   box-shadow: none !important;
 }
-
-/* === About Page v2.4.2 Styles (from widget, now global) === */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root {
   --mcc-accent: #b8b0aa;
