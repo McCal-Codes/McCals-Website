@@ -167,6 +167,33 @@
       "problemMatcher": []
     },
     {
+      "label": "Vercel: Dev Server (mcc-cal-vite)",
+      "type": "shell",
+      "command": "npx",
+      "args": ["--yes", "vercel", "dev", "--listen", "3000"],
+      "options": {
+        "cwd": "${workspaceFolder}/sites/mcc-cal-vite"
+      },
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "vercel"
+      },
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": ".+"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".+",
+          "endsPattern": "Available at http://localhost:3000/?"
+        }
+      }
+    },
+    {
       "label": "Build: Universal Portfolio",
       "type": "shell",
       "command": "npm",
