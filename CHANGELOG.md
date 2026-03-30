@@ -8,6 +8,7 @@
 - Rewired the Vite site blog utilities, showcase components, and static test flow away from the legacy `/api/v1/blog` and `src/data/blog` assumptions.
 - Updated blog feed generation and Google Docs ingestion scripts to read/write the canonical content tree instead of the retired `src/site/blog` and `src/data/blog` locations.
 - Added `post.md` as the preferred authored blog format, with compile and migration scripts that generate runtime `post.json` files for the site.
+- Updated `seo:sitemap` to include `/blog` and canonical blog post URLs from `src/content/blog/blog-manifest.json`, including lead-image sitemap entries.
 
 ## 2026-03-05
 

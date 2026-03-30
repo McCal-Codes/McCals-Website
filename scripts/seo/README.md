@@ -2,7 +2,7 @@
 
 ## Overview
 
-Scripts for generating SEO assets from portfolio API data:
+Scripts for generating SEO assets from portfolio manifests and the canonical blog manifest:
 - XML sitemaps with image entries
 - Schema.org structured data (JSON-LD)
 - Automated search engine submissions
@@ -13,7 +13,7 @@ Scripts for generating SEO assets from portfolio API data:
 
 ### `generate-sitemap.js`
 
-**Purpose**: Generate XML sitemap from portfolio manifests
+**Purpose**: Generate XML sitemap from portfolio manifests and blog content
 
 **Usage**:
 ```bash
@@ -30,11 +30,12 @@ node scripts/seo/generate-sitemap.js
 **Output**: `dist/sitemap.xml`
 
 **What it does**:
-1. Fetches all portfolio manifests from API
-2. Generates static page entries (home, about, portfolios)
-3. Generates individual item entries (bands, events, etc.)
-4. Includes image entries with metadata for each item
-5. Writes XML with proper structure and validation
+1. Fetches portfolio manifests from API or local fallbacks
+2. Reads blog URLs from `src/content/blog/blog-manifest.json`
+3. Generates static page entries (home, about, contact, blog)
+4. Generates individual item entries (bands, events, blog posts, etc.)
+5. Includes image entries with metadata for each item where available
+6. Writes XML with proper structure and validation
 
 **Example output**:
 ```xml
