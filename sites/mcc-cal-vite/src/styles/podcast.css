@@ -1,5 +1,24 @@
 /* Podcast Page — native Vite styles */
 
+/* ── Dev indicator — toggled by [data-dev] on .pod-page (never ships in prod) ── */
+.pod-page[data-dev]::before {
+  content: '⚡ DEV — ' attr(data-feed-status);
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 99999;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(234, 197, 71, 0.12);
+  border: 0.5px solid rgba(234, 197, 71, 0.4);
+  color: #e8c547;
+  pointer-events: none;
+  font-family: ui-monospace, monospace;
+}
+
 .pod-page {
   padding: clamp(80px, 12vw, 140px) 0 80px;
 }
@@ -642,4 +661,139 @@
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* ── Light theme ─────────────────────────────────────────── */
+body[data-theme='light'] .pod-kicker       { color: #7a7370; }
+body[data-theme='light'] .pod-title        { color: #111; }
+body[data-theme='light'] .pod-desc         { color: rgba(0,0,0,.48); }
+body[data-theme='light'] .pod-proof        { color: rgba(0,0,0,.32); }
+body[data-theme='light'] .pod-loading      { color: rgba(0,0,0,.35); }
+
+body[data-theme='light'] .pod-book-btn {
+  background: rgba(0,0,0,.04);
+  border-color: rgba(0,0,0,.12);
+  color: #111;
+}
+body[data-theme='light'] .pod-book-btn:hover {
+  background: rgba(0,0,0,.07);
+  border-color: rgba(0,0,0,.22);
+}
+
+/* Start Here */
+body[data-theme='light'] .pod-start {
+  background: #f7f6f4;
+  border-color: rgba(0,0,0,.07);
+}
+body[data-theme='light'] .pod-start-title       { color: #7a7370; }
+body[data-theme='light'] .pod-start-card        { background: #fff; border-color: rgba(0,0,0,.07); }
+body[data-theme='light'] .pod-start-card:hover  { background: #f9f8f6; border-color: rgba(0,0,0,.14); }
+body[data-theme='light'] .pod-start-card-title  { color: #111; }
+body[data-theme='light'] .pod-start-card-reason { color: rgba(0,0,0,.48); }
+body[data-theme='light'] .pod-start-card-meta   { color: rgba(0,0,0,.3); }
+
+/* Episode card */
+body[data-theme='light'] .pod-card {
+  background: #fff;
+  border-color: rgba(0,0,0,.08);
+  border-left-color: rgba(122,115,112,.35);
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+}
+body[data-theme='light'] .pod-card:hover {
+  background: #fafaf9;
+  border-color: rgba(0,0,0,.13);
+  border-left-color: #7a7370;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+body[data-theme='light'] .pod-card-show  { color: rgba(0,0,0,.33); }
+body[data-theme='light'] .pod-card-date  { color: rgba(0,0,0,.36); }
+body[data-theme='light'] .pod-card-badge {
+  background: rgba(122,115,112,.08);
+  color: #5c5856;
+  border-color: rgba(122,115,112,.22);
+}
+body[data-theme='light'] .pod-card-title { color: #111; }
+body[data-theme='light'] .pod-card-guest { color: rgba(0,0,0,.4); }
+body[data-theme='light'] .pod-card-desc  { color: rgba(0,0,0,.48); }
+
+/* Audio player */
+body[data-theme='light'] .pod-player-inner {
+  background: #f4f3f1;
+  border-color: rgba(0,0,0,.07);
+}
+body[data-theme='light'] .pod-play-btn {
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.05);
+  color: #111;
+}
+body[data-theme='light'] .pod-play-btn:hover   { background: rgba(0,0,0,.1); }
+body[data-theme='light'] .pod-play-btn.playing { background: #e8c547; border-color: #e8c547; color: #111; }
+body[data-theme='light'] .pod-time-label       { color: rgba(0,0,0,.38); }
+body[data-theme='light'] .pod-progress         { background: rgba(0,0,0,.1); }
+
+/* Card footer links */
+body[data-theme='light'] .pod-link-btn {
+  border-color: rgba(0,0,0,.09);
+  background: rgba(0,0,0,.03);
+  color: rgba(0,0,0,.52);
+}
+body[data-theme='light'] .pod-link-btn:hover {
+  background: rgba(0,0,0,.06);
+  border-color: rgba(0,0,0,.18);
+  color: #111;
+}
+
+/* Share popover */
+body[data-theme='light'] .pod-share-popover {
+  background: #fff;
+  border-color: rgba(0,0,0,.09);
+  box-shadow: 0 8px 24px rgba(0,0,0,.1);
+}
+body[data-theme='light'] .pod-share-option       { color: rgba(0,0,0,.58); }
+body[data-theme='light'] .pod-share-option:hover { background: rgba(0,0,0,.04); color: #111; }
+
+/* Load more */
+body[data-theme='light'] .pod-load-more-btn {
+  border-color: rgba(0,0,0,.1);
+  background: rgba(0,0,0,.03);
+  color: rgba(0,0,0,.58);
+}
+body[data-theme='light'] .pod-load-more-btn:hover {
+  background: rgba(0,0,0,.06);
+  border-color: rgba(0,0,0,.18);
+  color: #111;
+}
+
+/* Now Playing bar */
+body[data-theme='light'] .pod-now-playing {
+  background: #fff;
+  border-color: rgba(0,0,0,.1);
+  box-shadow: 0 8px 28px rgba(0,0,0,.1);
+}
+body[data-theme='light'] .pod-np-play {
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.04);
+  color: #111;
+}
+body[data-theme='light'] .pod-np-play:hover  { background: rgba(0,0,0,.08); }
+body[data-theme='light'] .pod-np-title       { color: #111; }
+body[data-theme='light'] .pod-np-meta        { color: rgba(0,0,0,.38); }
+body[data-theme='light'] .pod-np-close       { border-color: rgba(0,0,0,.1); color: rgba(0,0,0,.38); }
+body[data-theme='light'] .pod-np-close:hover { color: #111; background: rgba(0,0,0,.05); }
+body[data-theme='light'] .pod-np-progress    { background: rgba(0,0,0,.08); }
+
+/* Toast */
+body[data-theme='light'] .pod-toast {
+  background: #fff;
+  border-color: rgba(0,0,0,.1);
+  color: #111;
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+
+/* Dev badge */
+body[data-theme='light'] .pod-page[data-dev]::before {
+  background: rgba(161,128,0,.07);
+  border-color: rgba(161,128,0,.28);
+  color: #8a6f00;
 }

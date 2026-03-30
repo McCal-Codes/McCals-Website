@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npm run:*)",
       "Bash(find i:/Programing/Projects/McCals-Website/src/widgets -maxdepth 3 -name *terra* -o -name *nova*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npx eslint:*)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill //F //IM node.exe)",
+      "mcp__plugin_playwright_playwright__browser_navigate"
     ]
   }
 }
