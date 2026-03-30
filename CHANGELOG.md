@@ -26,6 +26,11 @@
 - Updated `seo:sitemap` to include `/blog` and canonical blog post URLs from `src/content/blog/blog-manifest.json`.
 - Added lead-image sitemap entries for blog posts where available.
 
+#### 14:10 EDT - Working Tree: blog validation + Speed Insights
+
+- Added `blog:validate` to the canonical blog pipeline and wired it into `manifest:blog`, Google Docs sync, and the Vite static sync step so broken blog metadata or local assets fail before publish.
+- Added Vercel Speed Insights to the Vite app entrypoint and app package for production performance telemetry using the official package integration.
+
 ## 2026-03-05
 
 ### Docs/Meta

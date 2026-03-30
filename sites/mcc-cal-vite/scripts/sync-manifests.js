@@ -10,6 +10,15 @@ const DEST = path.resolve(__dirname, '..', 'api', 'manifests', 'data');
 const BLOG_SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'content', 'blog');
 const BLOG_DEST = path.resolve(__dirname, '..', 'public', 'content', 'blog');
 const BLOG_COMPILE_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'compile-post-sources.js');
+const BLOG_VALIDATE_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'blog',
+  'validate-blog-content.js',
+);
 const BLOG_MANIFEST_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'manifest', 'generate-blog-manifest.js');
 const BLOG_FEED_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'generate-blog-feed.js');
 
@@ -44,6 +53,7 @@ if (!fs.existsSync(BLOG_SRC)) {
   console.warn(`Warning: blog content not found: ${BLOG_SRC}`);
 } else {
   runNodeScript(BLOG_COMPILE_SCRIPT);
+  runNodeScript(BLOG_VALIDATE_SCRIPT);
   runNodeScript(BLOG_MANIFEST_SCRIPT, ['--skip-notify']);
   runNodeScript(BLOG_FEED_SCRIPT);
 
