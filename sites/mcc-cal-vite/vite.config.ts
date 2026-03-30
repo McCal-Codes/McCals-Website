@@ -9,4 +9,13 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/dev-rss-proxy': {
+        target: 'https://media.rss.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/dev-rss-proxy/, ''),
+      },
+    },
+  },
 });

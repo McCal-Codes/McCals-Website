@@ -57,17 +57,10 @@ export const widgetMap: Record<string, WidgetConfig> = {
     category: 'portfolios',
     description: 'Video portfolio with inline playback and filtering',
   },
-  podcast: {
-    widget: 'podcast-feed',
-    version: 'v2.3.2-podcast-optimization.html',
-    category: '_content',
-    description: 'Podcast episodes feed',
-  },
-
   // Navigation and layout
   navigation: {
     widget: 'site-navigation',
-    version: 'v2.0.6-site-navigation.html',
+    version: 'v2.0.7-site-navigation.html',
     category: '_navigation',
     description: 'Main site navigation',
   },

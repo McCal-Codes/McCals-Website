@@ -170,6 +170,7 @@
     "!sites/**/out/**": []
   },
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "compression": "^1.8.1",
     "cors": "^2.8.5",
     "etag": "^1.8.1",
