@@ -1,6 +1,6 @@
-import type { Author, BlogPost, ResolvedPost } from '@/types/blog';
-import blogManifest from '@/data/blog/blog.manifest.json';
-import authorsData from '@/data/blog/authors.json';
+import type { Author, BlogAuthorsFile, BlogManifest, BlogPost, ResolvedPost } from '@/types/blog';
+import blogManifest from '@/content/blog/blog-manifest.json';
+import authorsData from '@/content/blog/authors.json';
 
 /**
  * Blog Data Loader
@@ -20,7 +20,7 @@ const FALLBACK_AUTHOR: Author = {
  * Get all authors
  */
 export function getAuthors(): Author[] {
-  return authorsData.authors as Author[];
+  return (authorsData as BlogAuthorsFile).authors;
 }
 
 /**
@@ -36,7 +36,7 @@ export function getAuthor(authorId: string): Author {
  * Get all posts (unresolved)
  */
 export function getPosts(): BlogPost[] {
-  return blogManifest.posts as BlogPost[];
+  return (blogManifest as BlogManifest).posts;
 }
 
 /**

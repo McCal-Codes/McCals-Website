@@ -1,20 +1,51 @@
 /**
  * Canonical Blog Data Types
  * These types define the single source of truth for blog content.
- * All data sources (JSON, Google Docs, API) must normalize to these shapes.
+ * All blog tooling should normalize to src/content/blog.
  */
 
 export interface BlogPost {
-  id: string;
   slug: string;
   title: string;
-  date: string; // YYYY-MM-DD
-  excerpt?: string;
-  content?: string; // Full post content (HTML or markdown)
-  cover?: string;
   authorId: string;
+  authorName?: string | null;
+  date: string; // YYYY-MM-DD
+  category?: string;
+  excerpt?: string;
+  leadImage?: string | null;
+  leadImageAlt?: string;
+  leadImageCaption?: string;
+  published?: boolean;
+  readingTime?: number;
   tags?: string[];
-  href: string;
+}
+
+export interface TextBlock {
+  type: 'text';
+  content: string;
+}
+
+export interface QuoteBlock {
+  type: 'quote';
+  content: string;
+}
+
+export interface CodeBlock {
+  type: 'code';
+  content: string;
+}
+
+export interface ImageBlock {
+  type: 'image';
+  src: string;
+  alt?: string;
+  caption?: string;
+}
+
+export type BlogBodyBlock = TextBlock | QuoteBlock | CodeBlock | ImageBlock;
+
+export interface BlogPostDocument extends BlogPost {
+  body: BlogBodyBlock[];
   sources?: Source[];
 }
 
@@ -37,10 +68,25 @@ export interface Source {
   notes?: string;
 }
 
+export interface BlogManifest {
+  version: string;
+  generated: string;
+  total: number;
+  posts: BlogPost[];
+}
+
+export interface BlogAuthorsFile {
+  authors: Author[];
+}
+
 /**
- * Resolved post includes author data for rendering
+ * Resolved summary post includes author data for rendering
  */
 export interface ResolvedPost extends BlogPost {
+  author: Author;
+}
+
+export interface ResolvedPostDocument extends BlogPostDocument {
   author: Author;
 }
 

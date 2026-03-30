@@ -35,6 +35,7 @@ export default function APITestPage() {
   const [running, setRunning] = useState(false);
 
   const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
+  const BLOG_BASE = `${window.location.origin}/content/blog`;
 
   async function runTests() {
     setRunning(true);
@@ -177,31 +178,27 @@ export default function APITestPage() {
       });
     }
 
-    // Test 5: Blog Posts
+    // Test 5: Blog Content
     try {
       const startTest = Date.now();
-      const response = await fetch(`${API_BASE}/api/v1/blog/posts`);
+      const response = await fetch(`${BLOG_BASE}/blog-manifest.json`, {
+        cache: 'no-store',
+      });
       const duration = Date.now() - startTest;
 
       if (response.ok) {
         const data = await response.json();
+        const firstPost = data.posts?.[0];
         testResults.push({
-          name: 'Blog Posts',
+          name: 'Blog Content',
           status: 'success',
-          message: `Successfully fetched blog posts`,
+          message: `Successfully fetched static blog content`,
           duration,
-          details: { postCount: data.posts?.length || 0 },
-        });
-      } else if (response.status === 503) {
-        testResults.push({
-          name: 'Blog Posts',
-          status: 'warning',
-          message: 'Blog service unavailable (expected if not deployed)',
-          duration,
+          details: { postCount: data.posts?.length || 0, firstSlug: firstPost?.slug || null },
         });
       } else {
         testResults.push({
-          name: 'Blog Posts',
+          name: 'Blog Content',
           status: 'error',
           message: `HTTP ${response.status}: ${response.statusText}`,
           duration,
@@ -209,9 +206,9 @@ export default function APITestPage() {
       }
     } catch (error) {
       testResults.push({
-        name: 'Blog Posts',
+        name: 'Blog Content',
         status: 'warning',
-        message: `Blog API connection: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        message: `Static blog content: ${error instanceof Error ? error.message : 'Unknown error'}`,
         details: error,
       });
     }
@@ -427,7 +424,7 @@ export default function APITestPage() {
         <ul>
           <li>This page tests the Cloudflare Worker API endpoints</li>
           <li>CORS is configured to allow dev.mcc-cal.com</li>
-          <li>Blog API may show as unavailable if the worker is not deployed yet</li>
+          <li>Blog content is served statically from <code>/content/blog</code></li>
           <li>Rate limiting is set to 100 requests per minute</li>
           <li>All manifest requests are cached for 10 minutes (stale-while-revalidate for 1 hour)</li>
         </ul>

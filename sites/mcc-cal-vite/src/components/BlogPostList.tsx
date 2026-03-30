@@ -1,17 +1,16 @@
 /**
  * Blog Post List Component
- * 
- * Displays a list of blog posts from the API
- * Part of Phase 2: Next.js components implementation
+ *
+ * Displays a list of blog posts from the canonical /content/blog manifest.
  */
 
-import { BlogPost } from '../utils/api-client';
+import { BlogPostSummary, formatDate } from '../utils/api-client';
 
 interface BlogPostListProps {
-  posts: BlogPost[];
+  posts: BlogPostSummary[];
   loading?: boolean;
   error?: string;
-  onPostClick?: (post: BlogPost) => void;
+  onPostClick?: (post: BlogPostSummary) => void;
 }
 
 export default function BlogPostList({
@@ -58,7 +57,7 @@ export default function BlogPostList({
       >
         {posts.map((post) => (
           <article
-            key={post.id}
+            key={post.slug}
             style={{
               padding: '20px',
               border: '1px solid #ddd',
@@ -87,16 +86,29 @@ export default function BlogPostList({
               <p style={{ margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
                 by <strong>{post.author.name}</strong>
               </p>
+              <p
+                style={{
+                  margin: 0,
+                  color: '#999',
+                  fontSize: '12px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                }}
+              >
+                {[post.category, post.readingTime ? `${post.readingTime} min read` : null]
+                  .filter(Boolean)
+                  .join(' • ')}
+              </p>
             </div>
 
             <p style={{ margin: '0 0 15px 0', color: '#555', fontSize: '14px', lineHeight: '1.5' }}>
-              {post.excerpt}
+              {post.excerpt || 'No excerpt available.'}
             </p>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ fontSize: '12px', color: '#999' }}>
-                <time dateTime={post.createdAt}>
-                  {new Date(post.createdAt).toLocaleDateString()}
+                <time dateTime={post.date}>
+                  {formatDate(post.date)}
                 </time>
               </div>
 
