@@ -1,19 +1,432 @@
 {
   "version": "2.0.0",
-  "generated": "2025-12-12T23:45:54.805Z",
-  "totalEvents": 7,
-  "totalImages": 112,
-  "categories": ["Events", "Politics"],
-  "tags": ["Politics", "Presidential Campaign", "Published Work"],
+  "generated": "2026-03-30T16:20:36.693Z",
+  "totalEvents": 11,
+  "totalImages": 220,
+  "categories": [
+    "Events",
+    "Politics"
+  ],
+  "tags": [
+    "Events",
+    "Politics",
+    "Presidential Campaign",
+    "Published Work",
+    "Sports"
+  ],
   "categoryStats": {
-    "Events": 0,
-    "Politics": 7
+    "Politics": 7,
+    "Events": 4
   },
   "events": [
     {
+      "eventName": "Brentwood Vs Springdale",
+      "category": "Events",
+      "tags": [
+        "Events",
+        "Sports"
+      ],
+      "folderPath": "Events/Brentwood vs Springdale",
+      "eventDate": {
+        "iso": "2025-09-12",
+        "source": "metadata"
+      },
+      "dateDisplay": "September 11, 2025",
+      "totalImages": 15,
+      "images": [
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
+          "description": "Brentwood's quarterback in navy drops back to pass as two Springdale defenders in orange rush the pocket, with a Brentwood lineman blocking and a referee tracking the play in the background during a daytime high school football game.",
+          "caption": "Brentwood quarterback No. 15 drops back to pass as Springdale defenders close in during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5175-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5175-min.jpg",
+          "description": "A Brentwood player in navy and gold tucks the ball and cuts upfield on the blue-surfaced home field, with grandstands and spectators visible in the background during a daytime contest.",
+          "caption": "A Brentwood ball carrier turns upfield during a home game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5182-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5182-min.jpg",
+          "description": "Brentwood linemen in navy engage Springdale defenders in orange at the line of scrimmage, with a referee positioned between the teams and the blue home field and grandstands visible behind the play.",
+          "caption": "Brentwood and Springdale players battle at the line of scrimmage during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5189-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5189-min.jpg",
+          "description": "Brentwood's No. 12 quarterback in navy and gold sets his feet and loads for a pass, photographed in isolation against a blurred dark background during twilight play.",
+          "caption": "Brentwood quarterback No. 12 prepares to throw during a home game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5190-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5190-min.jpg",
+          "description": "Brentwood No. 13 chest-bumps a teammate in navy uniforms near the end zone, with the blue home field and a dark hillside backdrop visible behind them.",
+          "caption": "Brentwood players celebrate after a play against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5223-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5223-min.jpg",
+          "description": "Brentwood's No. 2 running back in navy sprints down the sideline while quarterback No. 13 trails the play and a Springdale defender in orange pursues, with stadium lights, an advertising board, and a referee visible in the background of the night game.",
+          "caption": "Brentwood No. 2 races downfield past a Springdale defender during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5228-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5228-min.jpg",
+          "description": "Brentwood's No. 2 ball carrier extends a stiff-arm to push off a pursuing Springdale defender in orange along the sideline, with fans and a metal fence barrier visible in the background during a daytime game.",
+          "caption": "Brentwood No. 2 stiff-arms a Springdale defender on a carry during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5239-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5239-min.jpg",
+          "description": "A Brentwood player in navy is surrounded by multiple Springdale defenders in orange and white during a night game, with Brentwood's No. 18 visible in the background and stadium lights illuminating the field.",
+          "caption": "Springdale players converge on a Brentwood receiver in the night game, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5243-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5243-min.jpg",
+          "description": "A Brentwood player in navy leans forward at full extension with the ball while a Springdale defender in orange and white runs alongside and No. 2 of Brentwood leads the block during a night game on the lit field.",
+          "caption": "A Brentwood ball carrier stretches for yards as a Springdale defender pursues during a night game, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5252-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5252-min.jpg",
+          "description": "Brentwood's No. 13 quarterback rolls out under pressure from Springdale's No. 53 rushing off the edge during a night game, with stadium lighting casting sharp shadows across the blue-and-white field surface.",
+          "caption": "Brentwood quarterback No. 13 scrambles from a Springdale rusher during a night game, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5256-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5256-min.jpg",
+          "description": "Extreme close-up of a student's hands pressing the valves of a polished trumpet during the Brentwood High School marching band's halftime performance, with bokeh stadium lights glowing in the dark background.",
+          "caption": "A member of the Brentwood High School marching band plays trumpet during a halftime performance, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5260-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5260-min.jpg",
+          "description": "A crowd of spectators queues under a blue-roofed concession building marked with a large yellow 'B' at night, with the lit interior revealing workers, menu boards, and a Pepsi cooler.",
+          "caption": "Fans line up at the Brentwood High School concession stand during the game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5266-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5266-min.jpg",
+          "description": "Several members of the Brentwood High School marching band in navy and white uniforms play flutes in formation on the field at night, with a student drummer visible in the background.",
+          "caption": "Brentwood High School marching band flutists perform during halftime against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5272-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5272-min.jpg",
+          "description": "A color guard performer in a tan and gold top waves a large navy and gold flag while the Brentwood marching band in blue and white uniforms plays behind her, with tubas, trombones, and a stadium light visible in the background of the night performance.",
+          "caption": "A Brentwood High School color guard member waves a flag during halftime against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5275-min.jpg",
+          "path": "250912_Brentwood vs Springdale_CAL5275-min.jpg",
+          "description": "A color guard member in a blue and white uniform extends a gold flag overhead with both arms during the Brentwood marching band's halftime show, with band members playing brass and woodwind instruments and a stadium floodlight blazing behind the formation.",
+          "caption": "A Brentwood High School color guard member raises a flag during a halftime performance against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "tags": [
+            "Events",
+            "Sports"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Sports"
+        ],
+        "published": false,
+        "date": "2025-09-12",
+        "description": "Brentwood vs. Springdale home game — high school sports photography at Brentwood, PA",
+        "caption": "Brentwood vs. Springdale — September 2025"
+      }
+    },
+    {
+      "eventName": "Historic Society Yard Sale August 2025",
+      "category": "Events",
+      "tags": [
+        "Events"
+      ],
+      "folderPath": "Events/Historic Society Yard Sale August 2025",
+      "eventDate": {
+        "iso": "2025-08-02",
+        "source": "metadata"
+      },
+      "dateDisplay": "August 1, 2025",
+      "totalImages": 22,
+      "images": [
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
+          "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
+          "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
+          "description": "Two female vendors stand behind a table at their booth at the Brentwood Area Historical Society yard sale, with clothing and purple fabric merchandise displayed in the foreground and event signage behind them.",
+          "caption": "Vendors staff their table at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2646-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2646-min.jpg",
+          "description": "A vendor in a red jacket leans over items on their table at the Brentwood Area Historical Society yard sale, with other shoppers and a large tree trunk visible in the background.",
+          "caption": "A vendor examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2647-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2647-min.jpg",
+          "description": "Close-up of merchandise on a vendor table at the Brentwood Area Historical Society yard sale, featuring wicker baskets, white handbags, and textiles, with other booths and shoppers visible in the background.",
+          "caption": "Wicker baskets and handbags are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2649-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2649-min.jpg",
+          "description": "A vendor organizes items including wicker baskets and textiles on a table under a blue tent at the Brentwood Area Historical Society yard sale, with other shoppers, buildings, and trees visible around them.",
+          "caption": "A vendor arranges merchandise under a tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2650-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2650-min.jpg",
+          "description": "Close-up detail of multi-colored beaded necklaces on display at a vendor table at the Brentwood Area Historical Society yard sale.",
+          "caption": "Beaded jewelry is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2651-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2651-min.jpg",
+          "description": "A female vendor stands at her table in front of the historic brick Brentwood Area Historical Society building, with its green-trimmed windows and patriotic decoration visible above the entrance, at the annual yard sale.",
+          "caption": "A vendor stands at her table in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2654-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2654-min.jpg",
+          "description": "Rows of rings in various styles arranged on a dark display surface at a vendor table at the Brentwood Area Historical Society yard sale.",
+          "caption": "Rings are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2657-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2657-min.jpg",
+          "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
+          "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2660-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2660-min.jpg",
+          "description": "Two female shoppers examine decorative glass items under the shade of an old tree at the Brentwood Area Historical Society yard sale, with other vendors and shoppers visible in the background.",
+          "caption": "Shoppers browse glassware under a tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2666-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2666-min.jpg",
+          "description": "A person in a green vest leans over items at a vendor table at the Brentwood Area Historical Society yard sale, organizing goods with other booths and shoppers visible behind them.",
+          "caption": "A vendor sorts merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2670-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2670-min.jpg",
+          "description": "A vendor in a mint-colored shirt stands at her booth at the Brentwood Area Historical Society yard sale, holding an item alongside a prominent decorative wooden spoon or paddle on display, with trees and other vendors behind her.",
+          "caption": "A vendor displays antique kitchenware at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2674-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2674-min.jpg",
+          "description": "White ceramic pitchers and mugs with metal handles are displayed on a vendor table at the Brentwood Area Historical Society yard sale, alongside a small decorative house figurine with a red roof.",
+          "caption": "Vintage ceramics are on sale at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2678-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2678-min.jpg",
+          "description": "Two women interact at a vendor table under tree shade at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed between them and other booths visible in the background.",
+          "caption": "A shopper examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2681-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2681-min.jpg",
+          "description": "Wide view of the Brentwood Area Historical Society yard sale showing multiple white-clothed vendor tables on the lawn, shoppers browsing, and the large red-brick historical society building visible behind the event grounds.",
+          "caption": "Shoppers browse vendor tables in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2682-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2682-min.jpg",
+          "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
+          "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2683-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2683-min.jpg",
+          "description": "Vendor items including clothing and decorative objects are on display at the Brentwood Area Historical Society yard sale, with the historical society's brick building forming the backdrop and shoppers browsing nearby.",
+          "caption": "Shoppers look through merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2685-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2685-min.jpg",
+          "description": "A female shopper in a black graphic t-shirt and crossbody bag walks through the Brentwood Area Historical Society yard sale, with a borough ordinance sign and parked vehicles visible behind the vendor booths.",
+          "caption": "A shopper moves through the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2687-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2687-min.jpg",
+          "description": "Multiple vendors and shoppers gather under a large green canopy tent at the Brentwood Area Historical Society yard sale, with merchandise on tables and vehicles and buildings visible in the background.",
+          "caption": "Shoppers crowd a vendor tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2690-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2690-min.jpg",
+          "description": "Wide view of the well-attended Brentwood Area Historical Society yard sale showing white-clothed tables, shoppers, vendor tents, and the brick historical society building with patriotic bunting, vehicles, and large trees.",
+          "caption": "Shoppers fill the lawn at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2691-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2691-min.jpg",
+          "description": "Multiple female shoppers browse merchandise on white-clothed tables in front of the historic brick Brentwood Area Historical Society building, with patriotic bunting visible on the facade and various decorative goods displayed across the vendor spaces.",
+          "caption": "Shoppers browse antiques and collectibles in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2693-min.jpg",
+          "path": "250802_Brentwood Yard Sale _CAL2693-min.jpg",
+          "description": "Decorative glassware and vases are displayed on a vendor table under a shade tent at the Brentwood Area Historical Society yard sale, with shoppers browsing nearby booths and the brick historical society building visible behind.",
+          "caption": "Decorative glassware is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "tags": [
+            "Events"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events"
+        ],
+        "published": false,
+        "date": "2025-08-02",
+        "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
+        "caption": "Historic Society Yard Sale — August 2025"
+      }
+    },
+    {
       "eventName": "CMU Trump Protest",
       "category": "Politics",
-      "tags": ["Politics"],
+      "tags": [
+        "Politics"
+      ],
       "folderPath": "Politics/CMU Trump Protest",
       "eventDate": {
         "iso": "2025-07-15",
@@ -27,282 +440,1053 @@
           "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1106-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1107-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1123-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1126-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1131-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1141-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1146-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1152-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1156-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1162-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1168-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1184-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1192-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1196-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1201-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1249-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1278-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1297-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1301-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1303-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1325-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1340-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1353-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1360-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1364-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1429-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1448-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1476-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1489-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1498-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1539-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1564-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1568-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1573-min.jpg",
           "description": "CMU Trump Protest photography",
           "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         }
       ],
       "published": false,
       "metadata": {}
     },
     {
+      "eventName": "Brentwood 4th Of July 2025",
+      "category": "Events",
+      "tags": [
+        "Events"
+      ],
+      "folderPath": "Events/Brentwood 4th of July 2025",
+      "eventDate": {
+        "iso": "2025-07-04",
+        "source": "metadata"
+      },
+      "dateDisplay": "July 3, 2025",
+      "totalImages": 28,
+      "images": [
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9762-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9762-min.jpg",
+          "description": "Two young people wearing leis stand at the Brentwood Fourth of July community event. The person on the left wears a white t-shirt and blue lei; the person on the right wears a dark Nike shirt and cap.",
+          "caption": "Attendees wear patriotic accessories at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9763-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9763-min.jpg",
+          "description": "View through a chain-link fence at a community pool facility during the Brentwood Fourth of July event, with trees and sky visible beyond.",
+          "caption": "A chain-link fence borders the community pool at Brentwood's Fourth of July celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9766-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9766-min.jpg",
+          "description": "A large group stands together under yellow umbrellas on a paved area at the Brentwood Fourth of July event, with picnic tables and shade structures visible nearby.",
+          "caption": "Residents gather under yellow umbrellas at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9768-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9768-min.jpg",
+          "description": "A middle-aged man in a blue Under Armour shirt stands with arms crossed in front of green foliage at the Brentwood Fourth of July event.",
+          "caption": "A man stands at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9781-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9781-min.jpg",
+          "description": "A young child wearing star-patterned patriotic shorts sits with an adult on a bench at sunset, pointing upward excitedly as the evening program begins at the Brentwood Fourth of July celebration.",
+          "caption": "A child points skyward as fireworks begin during the Brentwood Fourth of July celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9790-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9790-min.jpg",
+          "description": "Two young women sit on a blue platform bench at golden hour during the Brentwood Fourth of July event, with trees and utility poles in the background.",
+          "caption": "Attendees sit on a bench at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9806-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9806-min.jpg",
+          "description": "Two young men with curly reddish hair smile in front of a chain-link tennis court fence at the Brentwood Fourth of July event, with a blue court surface visible behind them.",
+          "caption": "Players pose near the basketball courts at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9810-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9810-min.jpg",
+          "description": "A young man in a graphic t-shirt and red shorts sits on a blue bench at the Brentwood Fourth of July event.",
+          "caption": "A participant rests courtside at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9815-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9815-min.jpg",
+          "description": "A young person in a dark hoodie is photographed in portrait style against blurred green foliage at the Brentwood Fourth of July event.",
+          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9816-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9816-min.jpg",
+          "description": "A young person in a white tank top is photographed in portrait style against a blurred green background at the Brentwood Fourth of July event.",
+          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9818-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9818-min.jpg",
+          "description": "Four young people stand near a basketball court with a blue safety barrier behind them at the Brentwood Fourth of July event, with one player's arm raised.",
+          "caption": "Residents play pickup basketball during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9819-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9819-min.jpg",
+          "description": "Two young people reach upward toward a basketball on an outdoor court, both arms extended, during the Brentwood Fourth of July pickup game.",
+          "caption": "Players compete for possession during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9820-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9820-min.jpg",
+          "description": "Two players leap toward a basketball on an outdoor court during the Brentwood Fourth of July event, with a blue barrier fence and trees in the background.",
+          "caption": "Players jump for a basketball during a pickup game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9827-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9827-min.jpg",
+          "description": "A basketball is captured mid-flight above the court during a pickup game at the Brentwood Fourth of July event, with spectators visible in the background.",
+          "caption": "A player shoots during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9833-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9833-min.jpg",
+          "description": "A shirtless young man dribbles the ball on a blue outdoor court during the Brentwood Fourth of July pickup basketball game, with other players and a brick building visible behind him.",
+          "caption": "A player dribbles during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9837-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9837-min.jpg",
+          "description": "A young man in a white t-shirt stands with hands at his sides against a blurred tree background at the Brentwood Fourth of July event.",
+          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9838-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9838-min.jpg",
+          "description": "A shirtless young player dribbles against a defender near a red hoop structure during the pickup basketball game at the Brentwood Fourth of July event, with a brick building in the background.",
+          "caption": "Players compete near the basket during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9840-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9840-min.jpg",
+          "description": "Multiple players move across a blue-and-white outdoor court during the Brentwood Fourth of July pickup basketball game, with spectators along the edges and green foliage framing the scene.",
+          "caption": "Residents compete in a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9843-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9843-min.jpg",
+          "description": "A young person in a red cap and white shirt raises both hands in a celebratory gesture at the Brentwood Fourth of July community event, with trees and a building behind them.",
+          "caption": "A resident reacts during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9849-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9849-min.jpg",
+          "description": "A group of young people stand courtside watching the pickup basketball game at the Brentwood Fourth of July event, with trees, fencing, and buildings visible in the background.",
+          "caption": "Spectators watch the pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9851-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9851-min.jpg",
+          "description": "A player raises a water bottle to drink between possessions during the Brentwood Fourth of July pickup basketball game, photographed against a blurred green fence.",
+          "caption": "A player takes a water break during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9862-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9862-min.jpg",
+          "description": "A young man in a black graphic t-shirt looks to the side in a candid shot against a blurred green background at the Brentwood Fourth of July event.",
+          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9866-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9866-min.jpg",
+          "description": "A group of approximately a dozen young people pose together for a photo at the Brentwood Fourth of July event, several wearing patriotic face paint and colorful casual clothing.",
+          "caption": "Residents gather for a group photo at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9867-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9867-min.jpg",
+          "description": "Residents gather at the Brentwood Fourth of July community event.",
+          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9874-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9874-min.jpg",
+          "description": "Residents gather at the Brentwood Fourth of July community event.",
+          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9882-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9882-min.jpg",
+          "description": "Residents gather at the Brentwood Fourth of July community event.",
+          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9886-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9886-min.jpg",
+          "description": "Residents gather at the Brentwood Fourth of July community event.",
+          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "250704_Brentwood 4th of July_CAL9895-min.jpg",
+          "path": "250704_Brentwood 4th of July_CAL9895-min.jpg",
+          "description": "Residents gather at the Brentwood Fourth of July community event.",
+          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
+          "tags": [
+            "Events"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events"
+        ],
+        "published": false,
+        "date": "2025-07-04",
+        "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
+        "caption": "Brentwood 4th of July 2025"
+      }
+    },
+    {
+      "eventName": "Boyd Station",
+      "category": "Events",
+      "tags": [
+        "Events"
+      ],
+      "folderPath": "Events/Boyd Station",
+      "eventDate": {
+        "iso": "2025-06-09",
+        "source": "metadata"
+      },
+      "dateDisplay": "June 8, 2025",
+      "totalImages": 43,
+      "images": [
+        {
+          "filename": "6-10-25_Caleb McCartney_210-min.jpg",
+          "path": "6-10-25_Caleb McCartney_210-min.jpg",
+          "description": "Close-up of a detailed hand-carved wooden bust of a figure wearing an ornate traditional headdress, set against a blurred colorful abstract painting in the background of an antique and curiosity shop.",
+          "caption": "A carved wooden figurine is displayed in an antique shop at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_213-min.jpg",
+          "path": "6-10-25_Caleb McCartney_213-min.jpg",
+          "description": "A woman with arms crossed smiles from behind a glass display case inside a densely decorated antique shop, surrounded by framed paintings, ornate lamps, jewelry, and decorative plates, as another person browses in the foreground.",
+          "caption": "A shopkeeper stands among antiques and artwork inside a shop at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_222-min.jpg",
+          "path": "6-10-25_Caleb McCartney_222-min.jpg",
+          "description": "Rows of artisan soap bars wrapped in black damask-patterned paper and tied with twine are arranged on a wooden shelf inside a gift shop, with one unwrapped green bar labeled 'Tea Tree Peppermint' resting on top.",
+          "caption": "Handmade soap bars are displayed for sale in a shop at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_244-min.jpg",
+          "path": "6-10-25_Caleb McCartney_244-min.jpg",
+          "description": "Two men, one bald in a light blue button-down and one with longer hair in a dark shirt, stand conversing among antique furniture, gilded lamps, framed portraits, and decorative objects inside an antique shop.",
+          "caption": "Two men browse antiques in a shop at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_258-min.jpg",
+          "path": "6-10-25_Caleb McCartney_258-min.jpg",
+          "description": "The words 'A BEAUTIFUL PLACE TO BE' are painted in large white block letters across a brick-framed shop window, with the reflections of two children sitting outside and passing trees visible in the glass.",
+          "caption": "A storefront window reads 'A Beautiful Place to Be' in a small community at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_273 1-min.jpg",
+          "path": "6-10-25_Caleb McCartney_273 1-min.jpg",
+          "description": "Alternate frame of a man beneath the steering column of a turquoise vintage truck working on the dash, with a woman watching from the passenger side and a Little Trees air freshener hanging from the mirror.",
+          "caption": "A man works on a vintage truck interior at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_273-min.jpg",
+          "path": "6-10-25_Caleb McCartney_273-min.jpg",
+          "description": "A man in a blue t-shirt and sunglasses lies under the steering column of a turquoise vintage truck, working on the dashboard, while a woman with long blond hair and glasses sits in the passenger seat observing.",
+          "caption": "A man works on the dashboard of a vintage truck at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_281-min.jpg",
+          "path": "6-10-25_Caleb McCartney_281-min.jpg",
+          "description": "A person in jeans and work boots leans deep into the open engine bay of a dark green vintage truck on a residential street, with a Victorian-style brick house visible in the background.",
+          "caption": "A mechanic leans under the hood of a vintage truck at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_286-min.jpg",
+          "path": "6-10-25_Caleb McCartney_286-min.jpg",
+          "description": "A bearded man in a blue t-shirt and cap leans in through the driver's window while a woman with wavy blond hair and glasses sits inside the turquoise vintage truck, both peering at the dash, with a historic brick building visible through the cracked windshield.",
+          "caption": "Two people inspect the interior of a vintage truck at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_300-min.jpg",
+          "path": "6-10-25_Caleb McCartney_300-min.jpg",
+          "description": "Shot through the side window of a turquoise vintage truck, a woman with wavy blond hair and aviator-style glasses holds the steering wheel and looks ahead pensively, with a reflected street scene and a newspaper visible in the dash.",
+          "caption": "A woman sits behind the wheel of a vintage truck at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_314-min.jpg",
+          "path": "6-10-25_Caleb McCartney_314-min.jpg",
+          "description": "A dramatic shaft of late-day sunlight illuminates the textured surface of weathered wooden planks, with peeling turquoise paint visible along the left edge, creating a high-contrast abstract composition.",
+          "caption": "Sunlight cuts across weathered wood siding at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_318-min.jpg",
+          "path": "6-10-25_Caleb McCartney_318-min.jpg",
+          "description": "Close-up of small leafy vegetable seedlings sprouting from rough, rocky soil in a garden bed, with green foliage and hills visible softly in the background.",
+          "caption": "Young vegetable seedlings grow in a garden plot at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_320-min.jpg",
+          "path": "6-10-25_Caleb McCartney_320-min.jpg",
+          "description": "A man in a gray button-down shirt, jeans, and white cap bends over to tend to young vegetable seedlings in a freshly tilled garden row, with rolling green pastures, fencing, and trees visible in the soft evening light behind him.",
+          "caption": "A farmer tends seedlings in a garden at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_321-min.jpg",
+          "path": "6-10-25_Caleb McCartney_321-min.jpg",
+          "description": "Alternate frame of a man in jeans and a gray shirt crouching to inspect vegetable seedlings in a tilled garden, with a pastoral landscape of green hills and scattered trees glowing in the warm dusk light behind him.",
+          "caption": "A farmer examines seedlings in an evening garden at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-10-25_Caleb McCartney_325-min.jpg",
+          "path": "6-10-25_Caleb McCartney_325-min.jpg",
+          "description": "A man and a woman, both wearing white cowboy hats, stand with their backs to the camera looking out over a green pasture where several black cattle graze, with a white barn and tree line visible in the background at dusk.",
+          "caption": "Two ranchers observe a herd of cattle in a pasture at Boyd Station, Ky., June 10, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-11-25_Caleb McCartney_350-min.jpg",
+          "path": "6-11-25_Caleb McCartney_350-min.jpg",
+          "description": "A middle-aged man in a blue short-sleeve shirt and glasses sits at a booth looking at his phone, with a bowl of soup, a plate of rice, and a red Coca-Cola cup on the table before him, a school bus and overcast sky visible through the window behind him.",
+          "caption": "A man dines at a restaurant at Boyd Station, Ky., June 11, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-11-25_Caleb McCartney_354-min.jpg",
+          "path": "6-11-25_Caleb McCartney_354-min.jpg",
+          "description": "Close portrait of a middle-aged man in a blue shirt and glasses looking directly into the camera with a neutral expression, seated against a gray wood-paneled wall.",
+          "caption": "A man is photographed in portrait at a restaurant at Boyd Station, Ky., June 11, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-11-25_Caleb McCartney_372-min.jpg",
+          "path": "6-11-25_Caleb McCartney_372-min.jpg",
+          "description": "A young man in a black t-shirt and navy cap leans sideways against the corner of a building at dusk, his reflection visible in the window glass beside him, with a parking lot and commercial buildings in the background.",
+          "caption": "A young man leans against a building exterior at dusk at Boyd Station, Ky., June 11, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-11-25_Caleb McCartney_384-min.jpg",
+          "path": "6-11-25_Caleb McCartney_384-min.jpg",
+          "description": "Two young women and a young man walk side by side on a narrow road flanked by dense green trees and brush at dusk, one holding a phone that glows in the dim light, a road sign visible in the distance.",
+          "caption": "Three young people walk a rural road at dusk at Boyd Station, Ky., June 11, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-11-25_Caleb McCartney_390-min.jpg",
+          "path": "6-11-25_Caleb McCartney_390-min.jpg",
+          "description": "Three people — an older woman with gray hair in a pink top, a younger woman in a brown tank top with tattoos, and a young man in a multicolored striped shirt — lean toward each other in conversation at a wooden bar, with bottles and shelves of liquor filling the background.",
+          "caption": "Patrons converse at a bar at Boyd Station, Ky., June 11, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-11-25_Caleb McCartney_395-min.jpg",
+          "path": "6-11-25_Caleb McCartney_395-min.jpg",
+          "description": "Four people — a young man in a striped shirt, a man in black, a woman with dark hair gesturing in conversation, and a woman in pink — stand around a wooden bar top in a warmly lit bar with artwork and shelving visible in the background.",
+          "caption": "Patrons gather at a bar at Boyd Station, Ky., June 11, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_398-min.jpg",
+          "path": "6-12-25_Caleb McCartney_398-min.jpg",
+          "description": "A person pours syrup from a mason jar over a plate of golden waffles topped with raspberries and blueberries on a kitchen table, with a crystal fruit bowl, coffee mug, and additional waffle plates visible in a yellow-walled kitchen.",
+          "caption": "Waffles and fresh fruit are prepared for breakfast at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_406-min.jpg",
+          "path": "6-12-25_Caleb McCartney_406-min.jpg",
+          "description": "A man in a red cap and blue t-shirt kneels on the roadside using a lug wrench to change a tire on a gray minivan, while a woman in a red bandana stands watching in the background, with green summer foliage and a road caution sign visible.",
+          "caption": "A man changes a flat tire on a rural road at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_411-min.jpg",
+          "path": "6-12-25_Caleb McCartney_411-min.jpg",
+          "description": "A man in a blue t-shirt and jeans walks across a two-lane rural road balancing a large zebra-print item on his shoulders, nearly obscuring his face, as green summer trees line both sides of the winding road and a pickup truck is parked nearby.",
+          "caption": "A man carries a large item across a rural road at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_412-min.jpg",
+          "path": "6-12-25_Caleb McCartney_412-min.jpg",
+          "description": "Alternate frame of the same man crossing the road with a large zebra-print item balanced overhead, with open sky, green vegetation, and a white pickup truck visible in the background.",
+          "caption": "A man carries a large item across a rural road at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_415-min.jpg",
+          "path": "6-12-25_Caleb McCartney_415-min.jpg",
+          "description": "A stylist in a pink shirt and purple gloves works on a seated client's blond hair inside a teal-walled salon, photographed through a mirror reflecting the salon's shelves, floral decor, and a colorful cake display in the background.",
+          "caption": "A stylist applies color to a client's hair at a salon at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_423-min.jpg",
+          "path": "6-12-25_Caleb McCartney_423-min.jpg",
+          "description": "A stylist in a pink top and purple gloves applies product to a blond client's hair, both visible in the salon mirror, with a teal wall, tropical leaf wallpaper, and salon products on the counter surrounding them.",
+          "caption": "A stylist works on a client's hair in a salon at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_431-min.jpg",
+          "path": "6-12-25_Caleb McCartney_431-min.jpg",
+          "description": "A male stylist in a white t-shirt and gray apron lifts a client's dark wet hair with one hand while directing a pink blow-dryer with the other, the client seated in a salon chair against a teal-painted wall.",
+          "caption": "A stylist blow-dries a client's hair in a salon at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_459-min.jpg",
+          "path": "6-12-25_Caleb McCartney_459-min.jpg",
+          "description": "A stylist in a pink sweater and purple gloves smiles while separating a client's blond hair for coloring, inside a salon with yellow walls, floral overhead decorations, and a colorful circus-themed display visible through the open back door.",
+          "caption": "A stylist applies highlights to a client's hair in a salon at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_470-min.jpg",
+          "path": "6-12-25_Caleb McCartney_470-min.jpg",
+          "description": "Close-up of a dark mixing bowl filled with blue-tinted hair color and two combs resting across it in the foreground, with a blurred stylist in pink working on a client in the background against teal salon walls.",
+          "caption": "Hair color is mixed in a bowl at a salon at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_502-min.jpg",
+          "path": "6-12-25_Caleb McCartney_502-min.jpg",
+          "description": "A musician with curly red hair strums an acoustic guitar and sings into a microphone on stage at the Aeolian Music Hall, with a metal star decoration on a brick wall behind them and a second guitarist partially visible to the right.",
+          "caption": "A guitarist performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_520-min.jpg",
+          "path": "6-12-25_Caleb McCartney_520-min.jpg",
+          "description": "Three musicians perform on a small stage at the Aeolian Music Hall — a woman in a floral dress and tan cowboy hat stands left, a man in a white shirt and red cowboy hat plays guitar at center, and a third guitarist sits to the right — with the glowing red neon 'Aeolian Music Hall' sign behind them.",
+          "caption": "A trio performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_531-min.jpg",
+          "path": "6-12-25_Caleb McCartney_531-min.jpg",
+          "description": "Wide-angle view of three performers on the Aeolian Music Hall stage — a woman in a floral dress and hat standing left, a man in a red cowboy hat playing guitar at center, and a bearded guitarist seated right — with the red neon sign glowing behind them and bar lights reflected in the foreground surface.",
+          "caption": "Musicians perform at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_544-min.jpg",
+          "path": "6-12-25_Caleb McCartney_544-min.jpg",
+          "description": "A woman wearing a wide-brimmed tan hat sings into a microphone while playing acoustic guitar at the Aeolian Music Hall, with the red neon sign partially visible behind her and a second musician in a red cowboy hat visible to the right.",
+          "caption": "A vocalist plays guitar at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_557-min.jpg",
+          "path": "6-12-25_Caleb McCartney_557-min.jpg",
+          "description": "A tattooed guitarist in a white shirt and red cowboy hat sings passionately into a microphone while strumming an acoustic guitar, with a star wall decoration, string lights, and foliage visible on the brick stage backdrop.",
+          "caption": "A guitarist performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_578-min.jpg",
+          "path": "6-12-25_Caleb McCartney_578-min.jpg",
+          "description": "A bearded guitarist in a black t-shirt and cap plays an acoustic guitar while seated on stage at the Aeolian Music Hall, a gold metal star decoration on the brick wall behind him and a microphone stand in front.",
+          "caption": "A guitarist performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-12-25_Caleb McCartney_579-min.jpg",
+          "path": "6-12-25_Caleb McCartney_579-min.jpg",
+          "description": "Viewed from behind the silhouetted audience, two performers — a woman in a hat and floral dress and a man in a red cowboy hat — play guitars on a small stage with the red neon 'Aeolian Music Hall' sign glowing between them.",
+          "caption": "Musicians perform for a crowd at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_014-min.jpg",
+          "path": "6-9-25_Caleb McCartney_014-min.jpg",
+          "description": "Low-angle view across a wildflower meadow at golden hour, with white and pink blossoms filling the foreground and rolling green hills, trees, and a pale blue sky stretching toward the horizon.",
+          "caption": "Wildflowers bloom across a hillside meadow at Boyd Station, Ky., June 9, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_021-min.jpg",
+          "path": "6-9-25_Caleb McCartney_021-min.jpg",
+          "description": "An older man in a gray long-sleeve shirt and tan cap ties a fishing rig while a younger man in an orange sweater and Pittsburgh Pirates cap watches closely, both standing on a grassy hillside at dusk.",
+          "caption": "Two men prepare a fishing line at dusk at Boyd Station, Ky., June 9, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_120-min.jpg",
+          "path": "6-9-25_Caleb McCartney_120-min.jpg",
+          "description": "A boy in a blue t-shirt and cap swings a lit sparkler, producing a bright flare and swirl of smoke in the foreground, with a faint moon visible above dark tree silhouettes and a lit outbuilding in the background.",
+          "caption": "A boy swings a sparkler in the night sky at Boyd Station, Ky., June 9, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_134 1-min.jpg",
+          "path": "6-9-25_Caleb McCartney_134 1-min.jpg",
+          "description": "Close alternate frame of an adult and boy holding a sparkler together in the near-dark; the warm glow of the sparkler lights their hands and faces against a blue dusk sky.",
+          "caption": "A boy watches a sparkler burn at Boyd Station, Ky., June 9, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_134-min.jpg",
+          "path": "6-9-25_Caleb McCartney_134-min.jpg",
+          "description": "An adult in a brown hoodie stands beside a boy in a blue t-shirt and flag-patch cap as the boy holds a glowing sparkler in his cupped hands, illuminating both their faces against a deep blue twilight sky and tree silhouettes.",
+          "caption": "A boy holds a sparkler with an adult at Boyd Station, Ky., June 9, 2025.",
+          "tags": [
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_152-min.jpg",
+          "path": "6-9-25_Caleb McCartney_152-min.jpg",
+          "description": "A young person in a blue t-shirt and tan cap holds a sparkler at arm's length, tracing a glowing arc through the dark night air, with trails of sparks and smoke visible against a black background.",
+          "caption": "A youth waves a sparkler in an arc at Boyd Station, Ky., June 9, 2025.",
+          "tags": [
+            "Events"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events"
+        ],
+        "published": false,
+        "date": "2025-06-09",
+        "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
+        "caption": "Boyd Station — June 2025"
+      }
+    },
+    {
       "eventName": "Butler Protest",
       "category": "Politics",
-      "tags": ["Politics"],
+      "tags": [
+        "Politics"
+      ],
       "folderPath": "Politics/Butler Protest",
       "eventDate": {
         "iso": "2025-03-15",
@@ -316,77 +1500,99 @@
           "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9666-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9674-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9703-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9709-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9717-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9739-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9759-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9773-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9825-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
           "path": "250315_Butler Democracy Protest_CAL9832-min.jpg",
           "description": "Butler Protest photography",
           "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         }
       ],
       "published": false,
@@ -395,7 +1601,9 @@
     {
       "eventName": "Kamala In Pittsburgh Amid Election Eve",
       "category": "Politics",
-      "tags": ["Politics"],
+      "tags": [
+        "Politics"
+      ],
       "folderPath": "Politics/Kamala in Pittsburgh amid Election Eve",
       "eventDate": {
         "iso": "2024-11-04",
@@ -409,133 +1617,171 @@
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
           "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
           "description": "Kamala in Pittsburgh amid Election Eve photography",
           "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         }
       ],
       "published": false,
@@ -544,7 +1790,11 @@
     {
       "eventName": "Clinton Speaks At Pitt Greensburgh",
       "category": "Politics",
-      "tags": ["Politics", "Published Work", "Presidential Campaign"],
+      "tags": [
+        "Politics",
+        "Published Work",
+        "Presidential Campaign"
+      ],
       "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
       "eventDate": {
         "iso": "2024-10-29",
@@ -558,68 +1808,108 @@
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
           "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
           "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
           "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         }
       ],
       "published": true,
       "metadata": {
-        "tags": ["Politics", "Published Work", "Presidential Campaign"],
+        "tags": [
+          "Politics",
+          "Published Work",
+          "Presidential Campaign"
+        ],
         "published": true,
         "date": "2024-10-29",
         "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
@@ -639,7 +1929,9 @@
     {
       "eventName": "Kamala Speaks At Erie",
       "category": "Politics",
-      "tags": ["Politics"],
+      "tags": [
+        "Politics"
+      ],
       "folderPath": "Politics/Kamala Speaks at Erie",
       "eventDate": {
         "iso": "2024-10-14",
@@ -653,56 +1945,72 @@
           "path": "241014_Kamala Speaks at Erie_CAL3741.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL3757.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL3757.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL3766.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL3766.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL3804.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL3804.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL3851.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL3851.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL4115.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL4115.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL4248.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL4248.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL6948.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL6948.jpg",
           "description": "Kamala Speaks at Erie photography",
           "caption": "Kamala Speaks at Erie - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         }
       ],
       "published": false,
@@ -711,7 +2019,9 @@
     {
       "eventName": "JD Vance In Johnstown",
       "category": "Politics",
-      "tags": ["Politics"],
+      "tags": [
+        "Politics"
+      ],
       "folderPath": "Politics/JD Vance in Johnstown",
       "eventDate": {
         "iso": "2024-10-12",
@@ -725,42 +2035,54 @@
           "path": "241012_JD Vance in Johnstown_CAL3507.jpg",
           "description": "JD Vance in Johnstown photography",
           "caption": "JD Vance in Johnstown - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241012_JD Vance in Johnstown_CAL3516.jpg",
           "path": "241012_JD Vance in Johnstown_CAL3516.jpg",
           "description": "JD Vance in Johnstown photography",
           "caption": "JD Vance in Johnstown - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241012_JD Vance in Johnstown_CAL3518.jpg",
           "path": "241012_JD Vance in Johnstown_CAL3518.jpg",
           "description": "JD Vance in Johnstown photography",
           "caption": "JD Vance in Johnstown - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241012_JD Vance in Johnstown_CAL3636.jpg",
           "path": "241012_JD Vance in Johnstown_CAL3636.jpg",
           "description": "JD Vance in Johnstown photography",
           "caption": "JD Vance in Johnstown - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241012_JD Vance in Johnstown_CAL3648.jpg",
           "path": "241012_JD Vance in Johnstown_CAL3648.jpg",
           "description": "JD Vance in Johnstown photography",
           "caption": "JD Vance in Johnstown - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         },
         {
           "filename": "241012_JD Vance in Johnstown_CAL6576.jpg",
           "path": "241012_JD Vance in Johnstown_CAL6576.jpg",
           "description": "JD Vance in Johnstown photography",
           "caption": "JD Vance in Johnstown - Politics",
-          "tags": ["Politics"]
+          "tags": [
+            "Politics"
+          ]
         }
       ],
       "published": false,
@@ -769,7 +2091,11 @@
     {
       "eventName": "Obama Speaks At Pitt",
       "category": "Politics",
-      "tags": ["Politics", "Published Work", "Presidential Campaign"],
+      "tags": [
+        "Politics",
+        "Published Work",
+        "Presidential Campaign"
+      ],
       "folderPath": "Politics/Obama Speaks at Pitt",
       "eventDate": {
         "iso": "2024-10-10",
@@ -783,145 +2109,229 @@
           "path": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3059.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3063.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3081.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3106.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3138.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3149.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3157.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3184.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3249.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3341.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3349.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3364.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3384.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3399.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL3455.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL5948.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL5978.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         },
         {
           "filename": "101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
           "path": "101024_Obama Speaks at Pittsburgh_CAL5993.jpg",
           "description": "Barack Obama speaks at University of Pittsburgh rally",
           "caption": "Obama campaign event at Pittsburgh",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "tags": [
+            "Politics",
+            "Published Work",
+            "Presidential Campaign"
+          ]
         }
       ],
       "published": true,
       "metadata": {
-        "tags": ["Politics", "Published Work", "Presidential Campaign"],
+        "tags": [
+          "Politics",
+          "Published Work",
+          "Presidential Campaign"
+        ],
         "published": true,
         "date": "2024-10-10",
         "description": "Barack Obama speaks at University of Pittsburgh rally",
