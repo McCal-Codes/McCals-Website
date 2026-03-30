@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-03-30T17:06:16.696Z",
+  "total": 1,
+  "posts": [
+    {
+      "slug": "boyd-station-community-feature",
+      "title": "Three Days in Boyd Station",
+      "authorId": "mccal",
+      "date": "2025-06-12",
+      "category": "Feature",
+      "excerpt": "A small Kentucky community reveals itself through wildflower meadows, a vintage truck restoration, and a late-night set at the Aeolian Music Hall.",
+      "leadImage": "posts/boyd-station-community-feature/images/lead.jpg",
+      "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., beneath a glowing red neon sign, June 12, 2025.",
+      "leadImageCaption": "Musicians perform at the Aeolian Music Hall, Boyd Station, Ky., June 12, 2025.",
+      "published": true,
+      "authorName": "Caleb McCartney",
+      "readingTime": 2
+    }
+  ]
+}

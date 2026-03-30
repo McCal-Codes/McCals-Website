@@ -51,6 +51,8 @@ function setJsonLd(id: string, data: object) {
 }
 
 export function usePageMeta(meta: PageMeta) {
+  const jsonLd = meta.jsonLd ? JSON.stringify(meta.jsonLd) : '';
+
   useEffect(() => {
     const prevTitle = document.title;
 
@@ -82,5 +84,18 @@ export function usePageMeta(meta: PageMeta) {
       const el = document.getElementById('page-json-ld');
       if (el) el.remove();
     };
-  }, [meta.canonical]);
+  }, [
+    meta.title,
+    meta.description,
+    meta.canonical,
+    meta.og?.type,
+    meta.og?.title,
+    meta.og?.description,
+    meta.og?.image,
+    meta.twitter?.card,
+    meta.twitter?.title,
+    meta.twitter?.description,
+    meta.twitter?.image,
+    jsonLd,
+  ]);
 }

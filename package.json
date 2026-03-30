@@ -39,6 +39,7 @@
     "manifest:concert": "node scripts/manifest/generate-concert-manifest.js",
     "manifest:events": "node scripts/manifest/generate-events-manifest.js --root src/images/Portfolios/Events --force",
     "manifest:journalism": "node scripts/manifest/generate-journalism-manifest-v2.js",
+    "manifest:blog": "node scripts/manifest/generate-blog-manifest.js",
     "manifest:nature": "node scripts/manifest/generate-nature-manifest.js",
     "manifest:portrait": "node scripts/manifest/generate-portrait-manifest.js",
     "manifest:featured": "node scripts/manifest/generate-featured-manifest.js",
