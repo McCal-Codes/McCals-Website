@@ -82,6 +82,7 @@ Pre-call checklist (30–60 seconds)
 - Locate the definitive source:
   - Widgets: `src/widgets/<widget>/versions/`
   - Manifests/scripts: `scripts/*.js` (enhanced generator, watchers)
+  - Blog content: `src/content/blog/` (`authors.json`, `posts/<slug>/post.md` preferred, `post.json` generated, `blog-manifest.json`)
   - CI: `.github/workflows/*.yml`
   - Test harness: `src/site/app.js`
 - Confirm generated vs. authored files. Never edit `dist/**` or generated `manifest.json`.
@@ -121,6 +122,10 @@ PR/Docs discipline
 - If core flows change or instructions are impacted, update `.github/copilot-instructions.md` and `.github/canvas-instructions.md` and add a brief `CHANGELOG.md` entry (Docs/Meta). The PR guard will remind you.
 
 Recent updates
+
+- 2026-03-30T18:10:00.000Z - Added a Markdown-first blog workflow. `post.md` is now the preferred authored source, `post.json` is generated for runtime compatibility, and Google Docs import now lands in Markdown for gradual migration off Docs.
+
+- 2026-03-30T17:25:00.000Z â€” Consolidated the active blog system around `src/content/blog/`. Canonical sources are now `authors.json` plus `posts/<slug>/post.json`; Vite blog utilities, feed generation, and Google Docs ingestion were rewired away from legacy `src/data/blog` and `src/site/blog` paths.
 
 - 2026-01-06T09:15:00.000Z — Added 'Website optimization doctrine (authoritative)' section to codex instructions, defining performance, image, JS, CSS, widget, accessibility, and interaction standards for live site assets.
 - 2025-11-03T16:39:33.008Z — Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.

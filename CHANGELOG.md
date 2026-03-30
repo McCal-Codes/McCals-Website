@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-03-30
+
+### Blog System Consolidation
+
+- Canonicalized blog content under `src/content/blog/` with `authors.json`, `posts/<slug>/post.json`, generated `blog-manifest.json`, and feed outputs.
+- Rewired the Vite site blog utilities, showcase components, and static test flow away from the legacy `/api/v1/blog` and `src/data/blog` assumptions.
+- Updated blog feed generation and Google Docs ingestion scripts to read/write the canonical content tree instead of the retired `src/site/blog` and `src/data/blog` locations.
+- Added `post.md` as the preferred authored blog format, with compile and migration scripts that generate runtime `post.json` files for the site.
+
 ## 2026-03-05
 
 ### Docs/Meta

@@ -21,6 +21,8 @@ Purpose: fast, safe, and consistent edits for the `McCals-Website` workspace.
 
 ## 3) Source map (high signal)
 
+- `src/content/blog/` -> canonical blog content (`authors.json`, `posts/<slug>/post.md` preferred, generated `post.json`, `blog-manifest.json`)
+
 - `src/widgets/` → deliverable widgets (`_content`, `_navigation`, `portfolios`, `_admin`, `_archived`)
 - `src/images/Portfolios/` → portfolio images + generated manifests
 - `scripts/manifest/` → canonical manifest generators
@@ -104,5 +106,7 @@ Guardrails:
 - `docs/standards/code-annotations.md`
 
 ## Recent updates
+
+- 2026-03-30: Added a Markdown-first blog workflow under `src/content/blog/`. `post.md` is now the preferred authored source, `post.json` is generated for runtime compatibility, and Google Docs import now writes Markdown to support gradual migration off Docs.
 
 - 2026-03-05: Consolidated this file into a concise operations guide sourced from current standards and READMEs; moved long-form historical detail responsibility to `CHANGELOG.md` and `docs/**`.
