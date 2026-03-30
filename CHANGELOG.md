@@ -2,13 +2,29 @@
 
 ## 2026-03-30
 
-### Blog System Consolidation
+### Session Timeline
 
-- Canonicalized blog content under `src/content/blog/` with `authors.json`, `posts/<slug>/post.json`, generated `blog-manifest.json`, and feed outputs.
-- Rewired the Vite site blog utilities, showcase components, and static test flow away from the legacy `/api/v1/blog` and `src/data/blog` assumptions.
-- Updated blog feed generation and Google Docs ingestion scripts to read/write the canonical content tree instead of the retired `src/site/blog` and `src/data/blog` locations.
-- Added `post.md` as the preferred authored blog format, with compile and migration scripts that generate runtime `post.json` files for the site.
-- Updated `seo:sitemap` to include `/blog` and canonical blog post URLs from `src/content/blog/blog-manifest.json`, including lead-image sitemap entries.
+#### 13:32 EDT - `6ebf89ff` `refactor(blog): consolidate canonical content pipeline`
+
+- Canonicalized the active blog system under `src/content/blog/` with `authors.json`, `posts/<slug>/post.json`, and generated `blog-manifest.json`.
+- Rewired shared blog types/loaders plus the Vite blog utilities, showcase components, and static test flow away from the legacy `/api/v1/blog`, `src/data/blog`, and `src/site/blog` assumptions.
+- Updated blog feed generation to use the canonical content tree.
+
+#### 13:33 EDT - `cfc21331` `feat(blog): add markdown-first authoring workflow`
+
+- Added `post.md` as the preferred authored blog source, with compile and migration scripts that generate runtime `post.json` files for the site.
+- Updated Google Docs ingestion to write Markdown first, then compile posts, rebuild the manifest, and regenerate feeds.
+- Synced the Vite prebuild flow so blog Markdown is compiled before local preview/build output is copied.
+
+#### 13:33 EDT - `9a8f3ab8` `docs(blog): document canonical markdown workflow`
+
+- Updated repo docs and agent instructions to reflect the canonical `src/content/blog` workflow and Markdown-first authoring model.
+- Added the root README blog workflow section so the authoring commands and content paths are discoverable in one place.
+
+#### 13:35 EDT - `4418bc13` `feat(seo): include blog URLs in sitemap`
+
+- Updated `seo:sitemap` to include `/blog` and canonical blog post URLs from `src/content/blog/blog-manifest.json`.
+- Added lead-image sitemap entries for blog posts where available.
 
 ## 2026-03-05
 
