@@ -20,9 +20,15 @@
       "source": "/(.*)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        { "type": "host", "value": "mcc-cal\\.com" }
       ],
-      "missing": [
-        { "type": "env", "key": "VERCEL_ENV", "value": "production" }
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "index, follow" }
       ]
     }
   ]
