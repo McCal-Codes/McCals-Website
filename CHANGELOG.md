@@ -31,6 +31,11 @@
 - Added `blog:validate` to the canonical blog pipeline and wired it into `manifest:blog`, Google Docs sync, and the Vite static sync step so broken blog metadata or local assets fail before publish.
 - Added Vercel Speed Insights to the Vite app entrypoint and app package for production performance telemetry using the official package integration.
 
+#### 14:25 EDT - Working Tree: homepage hero + nav alignment
+
+- Fixed the React nav so the homepage now applies the existing `is-home` transparent-nav treatment instead of rendering the scrolled variant immediately.
+- Replaced the autoplay homepage carousel with a static editorial hero grid that sits under the nav more like the live site, while prioritizing the lead image and reducing client-side hero logic in line with production-readiness guidance.
+
 ## 2026-03-05
 
 ### Docs/Meta
