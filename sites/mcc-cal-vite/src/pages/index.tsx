@@ -3,47 +3,16 @@ import { Link } from 'react-router-dom';
 import Footer from '@/components/Layout/Footer';
 import Nav from '@/components/Layout/Nav';
 import HeroCarousel from '@/components/HeroCarousel';
+import {
+  type HomeFeaturedItem,
+  LIVE_SITE_HOME_FEATURED_ITEMS,
+  LIVE_SITE_PODCAST,
+  mergeHomeFeaturedItems,
+} from '@/content/liveSiteFallbacks';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import styles from '@/styles/homepage.module.css';
 import { fetchFeaturedItems, formatDate } from '@/utils/api-client';
-import type { HomeFeaturedItem } from '@/utils/api-client';
 import { useBlogPosts } from '@/utils/useAPI';
-
-const PODCAST_IMAGE =
-  'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';
-const PODCAST_SPOTIFY = 'https://open.spotify.com/show/1GcE0Tt669WrdAOXz73w0S';
-const PODCAST_APPLE = 'https://podcasts.apple.com/us/podcast/caffeinated-connections/id1806715605';
-const PODCAST_CALENDLY = 'https://calendly.com/cjmccar-mcc-cal/caffeinated_connections';
-
-const FALLBACK_FEATURED_ITEMS: HomeFeaturedItem[] = [
-  {
-    id: 'journalism-fallback',
-    title: 'Photojournalism',
-    eyebrow: 'Journalism',
-    href: '/journalism',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg',
-    meta: 'Field features / Politics / Regional reporting',
-  },
-  {
-    id: 'events-fallback',
-    title: 'Events',
-    eyebrow: 'Events',
-    href: '/events',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg',
-    meta: 'Corporate coverage / Experiences / Client work',
-  },
-  {
-    id: 'concerts-fallback',
-    title: 'Concerts',
-    eyebrow: 'Concert',
-    href: '/concerts',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg',
-    meta: 'Live performance / Touring artists / Venue work',
-  },
-];
 
 const HomePage = () => {
   usePageMeta({
@@ -56,18 +25,18 @@ const HomePage = () => {
       title: 'Caleb McCartney',
       description:
         'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney.',
-      image: FALLBACK_FEATURED_ITEMS[0].imageUrl,
+      image: LIVE_SITE_HOME_FEATURED_ITEMS[0]?.imageUrl,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Caleb McCartney',
       description:
         'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney.',
-      image: FALLBACK_FEATURED_ITEMS[0].imageUrl,
+      image: LIVE_SITE_HOME_FEATURED_ITEMS[0]?.imageUrl,
     },
   });
 
-  const [featuredItems, setFeaturedItems] = useState<HomeFeaturedItem[]>(FALLBACK_FEATURED_ITEMS);
+  const [featuredItems, setFeaturedItems] = useState<HomeFeaturedItem[]>(LIVE_SITE_HOME_FEATURED_ITEMS);
   const { posts, loading: blogLoading, error: blogError } = useBlogPosts();
 
   useEffect(() => {
@@ -75,13 +44,13 @@ const HomePage = () => {
 
     fetchFeaturedItems()
       .then((items) => {
-        if (active && items.length > 0) {
-          setFeaturedItems(items.slice(0, 3));
+        if (active) {
+          setFeaturedItems(mergeHomeFeaturedItems(items));
         }
       })
       .catch(() => {
         if (active) {
-          setFeaturedItems(FALLBACK_FEATURED_ITEMS);
+          setFeaturedItems(LIVE_SITE_HOME_FEATURED_ITEMS);
         }
       });
 
@@ -211,7 +180,7 @@ const HomePage = () => {
               <div className={styles.podcastArtWrap}>
                 <img
                   className={styles.podcastArt}
-                  src={PODCAST_IMAGE}
+                  src={LIVE_SITE_PODCAST.image}
                   alt="Caffeinated Connections podcast artwork"
                   loading="lazy"
                 />
@@ -232,7 +201,7 @@ const HomePage = () => {
                   </Link>
                   <a
                     className={styles.buttonGhost}
-                    href={PODCAST_SPOTIFY}
+                    href={LIVE_SITE_PODCAST.spotify}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -240,7 +209,7 @@ const HomePage = () => {
                   </a>
                   <a
                     className={styles.buttonGhost}
-                    href={PODCAST_APPLE}
+                    href={LIVE_SITE_PODCAST.apple}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -248,7 +217,7 @@ const HomePage = () => {
                   </a>
                   <a
                     className={styles.buttonGhost}
-                    href={PODCAST_CALENDLY}
+                    href={LIVE_SITE_PODCAST.calendly}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

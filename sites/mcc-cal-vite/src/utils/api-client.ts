@@ -3,6 +3,9 @@
  * Portfolio manifests come from the API; blog content comes from /content/blog.
  */
 
+import { getLiveSiteFeaturedFallback } from '@/content/liveSiteFallbacks';
+import type { HomeFeaturedItem } from '@/content/liveSiteFallbacks';
+
 const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
 const BLOG_BASE = '/content/blog';
 const DEFAULT_AUTHOR_ID = 'mccal';
@@ -135,15 +138,6 @@ export interface FeaturedManifestItem {
 export interface FeaturedManifest {
   totalItems: number;
   items: FeaturedManifestItem[];
-}
-
-export interface HomeFeaturedItem {
-  id: string;
-  title: string;
-  eyebrow: string;
-  href: string;
-  imageUrl?: string;
-  meta: string;
 }
 
 const FALLBACK_AUTHOR: BlogAuthor = {
@@ -319,7 +313,8 @@ export async function fetchFeaturedItems(): Promise<HomeFeaturedItem[]> {
   const data = await fetchJson<FeaturedManifest>(`${API_BASE}/api/v1/manifests/featured`);
 
   return (data.items || []).map((item, index) => {
-    const title = item.title || item.name || item.id || `Featured story ${index + 1}`;
+    const fallback = getLiveSiteFeaturedFallback(item.type);
+    const title = item.title || item.name || item.id || fallback?.title || `Featured story ${index + 1}`;
     const coverPath = resolveFeaturedCoverPath(item);
     const meta = [item.category || item.type, item.dateDisplay || item.date?.display]
       .filter(Boolean)
@@ -328,10 +323,10 @@ export async function fetchFeaturedItems(): Promise<HomeFeaturedItem[]> {
     return {
       id: item.id || title,
       title,
-      eyebrow: item.type || 'Featured',
-      href: getFeaturedHref(item.type),
-      imageUrl: coverPath ? getImageUrl(coverPath) : undefined,
-      meta: meta || 'Curated highlight',
+      eyebrow: item.type || fallback?.eyebrow || 'Featured',
+      href: fallback?.href || getFeaturedHref(item.type),
+      imageUrl: coverPath ? getImageUrl(coverPath) : fallback?.imageUrl,
+      meta: meta || fallback?.meta || 'Curated highlight',
     };
   });
 }

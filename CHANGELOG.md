@@ -41,6 +41,11 @@
 - Added below-the-fold homepage sections for selected work, latest blog posts, podcast spotlighting, and clearer call-to-action paths so the landing page continues past the hero.
 - Moved the Google Fonts `@import` to the top of `globals.css` so the Vite/PostCSS build no longer warns about import order.
 
+#### 15:44 EDT - Working Tree: temporary live-site fallback layer
+
+- Centralized temporary `mcc-cal.com` and Squarespace CDN homepage dependencies into a single Vite fallback module so the bridge to the legacy site is explicit and easier to remove later.
+- Updated the hero, homepage featured cards, and podcast spotlight to reuse that fallback layer, while allowing generated featured-manifest data to fill in when local media is available.
+
 ## 2026-03-05
 
 ### Docs/Meta
