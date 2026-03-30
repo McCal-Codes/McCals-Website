@@ -6,6 +6,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'images', 'Portfolios');
 const DEST = path.resolve(__dirname, '..', 'api', 'manifests', 'data');
+const BLOG_SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'content', 'blog');
+const BLOG_DEST = path.resolve(__dirname, '..', 'public', 'content', 'blog');
 
 const FILES = [
   ['Concert/concert-manifest.json', 'concert-manifest.json'],
@@ -28,4 +30,13 @@ for (const [src, dest] of FILES) {
   }
   fs.copyFileSync(srcPath, destPath);
   console.log(`Synced: ${dest}`);
+}
+
+if (!fs.existsSync(BLOG_SRC)) {
+  console.warn(`Warning: blog content not found: ${BLOG_SRC}`);
+} else {
+  fs.rmSync(BLOG_DEST, { recursive: true, force: true });
+  fs.mkdirSync(path.dirname(BLOG_DEST), { recursive: true });
+  fs.cpSync(BLOG_SRC, BLOG_DEST, { recursive: true });
+  console.log('Synced: content/blog');
 }
