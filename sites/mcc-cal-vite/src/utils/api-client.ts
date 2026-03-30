@@ -109,6 +109,43 @@ export interface BlogPost extends BlogPostSummary {
   sources?: unknown[];
 }
 
+export interface FeaturedManifestItemDate {
+  display?: string;
+}
+
+export interface FeaturedManifestItemImage {
+  path?: string;
+}
+
+export interface FeaturedManifestItem {
+  id?: string;
+  name?: string;
+  title?: string;
+  type?: string;
+  category?: string;
+  tags?: string[];
+  totalImages?: number;
+  dateDisplay?: string;
+  date?: FeaturedManifestItemDate;
+  relativeFolderPath?: string;
+  folderPath?: string;
+  coverImage?: string | FeaturedManifestItemImage;
+}
+
+export interface FeaturedManifest {
+  totalItems: number;
+  items: FeaturedManifestItem[];
+}
+
+export interface HomeFeaturedItem {
+  id: string;
+  title: string;
+  eyebrow: string;
+  href: string;
+  imageUrl?: string;
+  meta: string;
+}
+
 const FALLBACK_AUTHOR: BlogAuthor = {
   id: DEFAULT_AUTHOR_ID,
   name: 'Caleb McCartney',
@@ -179,6 +216,27 @@ function normalizeBlogSummary(post: BlogManifestPost, authors: BlogAuthor[], blo
     leadImage: resolveBlogAssetUrl(blogBase, post.slug, post.leadImage) || post.leadImage,
     author: resolveBlogAuthor(post, authors),
   };
+}
+
+function resolveFeaturedCoverPath(item: FeaturedManifestItem): string | undefined {
+  if (!item.coverImage) return undefined;
+
+  if (typeof item.coverImage === 'object' && item.coverImage.path) {
+    return item.coverImage.path;
+  }
+
+  if (typeof item.coverImage === 'string' && item.relativeFolderPath) {
+    return `src/images/Portfolios/${item.relativeFolderPath}/${item.coverImage}`;
+  }
+
+  return undefined;
+}
+
+function getFeaturedHref(type?: string): string {
+  if (type === 'Concert') return '/concerts';
+  if (type === 'Events') return '/events';
+  if (type === 'Journalism') return '/journalism';
+  return '/featured-work';
 }
 
 /**
@@ -252,6 +310,30 @@ export async function fetchBlogPost(slug: string, blogBase: string = BLOG_BASE):
     body: (merged.body || []).map((block) => normalizeBlogBlock(blogBase, slug, block)),
     author: resolveBlogAuthor(merged, authors),
   };
+}
+
+/**
+ * Fetch homepage-friendly featured work cards from the curated featured manifest
+ */
+export async function fetchFeaturedItems(): Promise<HomeFeaturedItem[]> {
+  const data = await fetchJson<FeaturedManifest>(`${API_BASE}/api/v1/manifests/featured`);
+
+  return (data.items || []).map((item, index) => {
+    const title = item.title || item.name || item.id || `Featured story ${index + 1}`;
+    const coverPath = resolveFeaturedCoverPath(item);
+    const meta = [item.category || item.type, item.dateDisplay || item.date?.display]
+      .filter(Boolean)
+      .join(' / ');
+
+    return {
+      id: item.id || title,
+      title,
+      eyebrow: item.type || 'Featured',
+      href: getFeaturedHref(item.type),
+      imageUrl: coverPath ? getImageUrl(coverPath) : undefined,
+      meta: meta || 'Curated highlight',
+    };
+  });
 }
 
 /**

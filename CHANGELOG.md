@@ -36,6 +36,11 @@
 - Fixed the React nav so the homepage now applies the existing `is-home` transparent-nav treatment instead of rendering the scrolled variant immediately.
 - Replaced the autoplay homepage carousel with a static editorial hero grid that sits under the nav more like the live site, while prioritizing the lead image and reducing client-side hero logic in line with production-readiness guidance.
 
+#### 15:05 EDT - Working Tree: homepage sections + CSS cleanup
+
+- Added below-the-fold homepage sections for selected work, latest blog posts, podcast spotlighting, and clearer call-to-action paths so the landing page continues past the hero.
+- Moved the Google Fonts `@import` to the top of `globals.css` so the Vite/PostCSS build no longer warns about import order.
+
 ## 2026-03-05
 
 ### Docs/Meta

@@ -1,0 +1,428 @@
+.homeStory {
+  position: relative;
+  background:
+    radial-gradient(circle at top left, rgba(195, 171, 147, 0.08), transparent 28%),
+    linear-gradient(180deg, #08080b 0%, #0b0b10 32%, #060608 100%);
+}
+
+.homeInner {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: clamp(44px, 6vw, 84px) clamp(18px, 3vw, 36px) clamp(72px, 9vw, 120px);
+  display: grid;
+  gap: clamp(44px, 7vw, 84px);
+}
+
+.section {
+  display: grid;
+  gap: 22px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sectionLabel {
+  margin: 0 0 0.55rem;
+  color: rgba(244, 239, 232, 0.68);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: #f6f1ea;
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: clamp(1.75rem, 3vw, 2.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.sectionText {
+  margin: 0;
+  max-width: 42rem;
+  color: rgba(244, 239, 232, 0.76);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.sectionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(244, 239, 232, 0.92);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.sectionLink:hover,
+.sectionLink:focus-visible {
+  color: #ffffff;
+  outline: none;
+}
+
+.sectionLink::after {
+  content: '->';
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.featureCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #0d0d11;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.featureCardLink {
+  display: grid;
+  min-height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.featureCardMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.featureCardMedia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 6, 8, 0.08) 0%, rgba(6, 6, 8, 0.58) 100%);
+}
+
+.featureCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.01);
+  transition: transform 0.45s ease;
+}
+
+.featureCardBody {
+  display: grid;
+  gap: 10px;
+  padding: 20px 20px 22px;
+}
+
+.featureEyebrow {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.38rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(246, 241, 234, 0.08);
+  border: 1px solid rgba(246, 241, 234, 0.14);
+  color: rgba(250, 246, 240, 0.84);
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.featureTitle {
+  margin: 0;
+  color: #f8f4ee;
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+.featureMeta {
+  margin: 0;
+  color: rgba(244, 239, 232, 0.66);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.featureCardLink:hover .featureCardImage,
+.featureCardLink:focus-visible .featureCardImage {
+  transform: scale(1.05);
+}
+
+.featureCardLink:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px rgba(246, 241, 234, 0.28);
+}
+
+.featureFallback {
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(244, 239, 232, 0.78);
+}
+
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.blogCard {
+  display: grid;
+  min-height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    #0d0d11;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.26),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.blogCardLink {
+  display: grid;
+  min-height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.blogCardMedia {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(193, 169, 144, 0.22), rgba(67, 60, 53, 0.55));
+}
+
+.blogCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blogCardBody {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+}
+
+.blogMeta {
+  margin: 0;
+  color: rgba(244, 239, 232, 0.62);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.blogTitle {
+  margin: 0;
+  color: #f8f4ee;
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.blogExcerpt {
+  margin: 0;
+  color: rgba(244, 239, 232, 0.76);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.blogCardLink:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px rgba(246, 241, 234, 0.28);
+}
+
+.podcastSection {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(20px, 2.4vw, 30px);
+  align-items: stretch;
+  padding: clamp(22px, 3.4vw, 36px);
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(190, 166, 143, 0.1), transparent 35%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03)),
+    #0d0d11;
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.podcastArtWrap {
+  position: relative;
+  min-height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.podcastArt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.podcastBody {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+}
+
+.podcastLabel {
+  margin: 0;
+  color: rgba(244, 239, 232, 0.64);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.podcastTitle {
+  margin: 0;
+  color: #f8f4ee;
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.podcastText {
+  margin: 0;
+  max-width: 38rem;
+  color: rgba(244, 239, 232, 0.78);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.podcastActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.buttonPrimary,
+.buttonGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.82rem 1.3rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.buttonPrimary {
+  background: #f1e7db;
+  color: #111116;
+}
+
+.buttonGhost {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(244, 239, 232, 0.92);
+}
+
+.buttonPrimary:hover,
+.buttonPrimary:focus-visible,
+.buttonGhost:hover,
+.buttonGhost:focus-visible {
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.buttonGhost:hover,
+.buttonGhost:focus-visible {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+.ctaPanel {
+  display: grid;
+  gap: 18px;
+  padding: clamp(24px, 3.4vw, 40px);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at right top, rgba(194, 169, 145, 0.18), transparent 28%),
+    linear-gradient(135deg, #141418 0%, #0a0a0e 100%);
+  box-shadow:
+    0 24px 54px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.ctaTitle {
+  margin: 0;
+  max-width: 16ch;
+  color: #f8f4ee;
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.ctaText {
+  margin: 0;
+  max-width: 40rem;
+  color: rgba(244, 239, 232, 0.76);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 980px) {
+  .featuredGrid,
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .podcastSection {
+    grid-template-columns: 1fr;
+  }
+
+  .podcastArtWrap {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 720px) {
+  .homeInner {
+    padding: 34px 16px 80px;
+  }
+
+  .sectionHeader {
+    align-items: start;
+  }
+
+  .ctaPanel,
+  .podcastSection {
+    border-radius: 26px;
+  }
+}
+
