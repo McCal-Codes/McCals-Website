@@ -87,6 +87,7 @@ Pre-call checklist (30–60 seconds)
   - Test harness: `src/site/app.js`
 - Confirm generated vs. authored files. Never edit `dist/**` or generated `manifest.json`.
 - Scan `package.json` scripts for the exact command to wire into edits.
+- If you touch the canonical blog flow, keep `blog:compile`, `blog:validate`, `manifest:blog`, and any site sync scripts aligned so authored Markdown, generated JSON, and local preview/build stay in sync.
 
 Single-pass edit strategy
 
@@ -123,6 +124,8 @@ PR/Docs discipline
 
 Recent updates
 
+- 2026-03-30T18:10:39.000Z - Added `blog:validate` as the content gate for the canonical blog workflow. Validate `authors.json`, `post.md`, generated `post.json`, and referenced local assets before manifest/feed generation or Vite sync.
+- 2026-03-30T18:10:45.000Z - Added Vercel Speed Insights to the Vite app entrypoint using the React package so production performance telemetry can be enabled without custom instrumentation.
 - 2026-03-30T18:10:00.000Z - Added a Markdown-first blog workflow. `post.md` is now the preferred authored source, `post.json` is generated for runtime compatibility, and Google Docs import now lands in Markdown for gradual migration off Docs.
 
 - 2026-03-30T17:25:00.000Z â€” Consolidated the active blog system around `src/content/blog/`. Canonical sources are now `authors.json` plus `posts/<slug>/post.json`; Vite blog utilities, feed generation, and Google Docs ingestion were rewired away from legacy `src/data/blog` and `src/site/blog` paths.

@@ -19,6 +19,7 @@ Scope and intent
 Where to work
 
 - Blog content: `src/content/blog/` (`authors.json`, `posts/<slug>/post.md` preferred, generated `post.json`, `blog-manifest.json`, `feed.json`, `feed.xml`)
+- Blog validation: run `npm run blog:validate` after authoring changes; local preview/build flows should fail before publish if canonical blog metadata or local assets are broken.
 - Widgets: `src/widgets/<widget>/versions/vN.M.html` (self-contained HTML with inline CSS/JS)
 - Manifests and scripts: `scripts/*.js` (Node 16+; cross-platform)
 - Test harness: `src/site/` (preview only; don't couple widgets to it)
@@ -62,6 +63,8 @@ Windows tip
 
 Recent updates
 
+- 2026-03-30T18:10:39.000Z - Added `blog:validate` to the canonical blog workflow. `authors.json`, source Markdown, generated `post.json`, and referenced local assets should validate before manifest/feed generation or site sync.
+- 2026-03-30T18:10:45.000Z - Added Vercel Speed Insights to the Vite app entrypoint so production performance telemetry can be enabled without custom client instrumentation.
 - 2026-03-30T17:25:00.000Z - Consolidated the active blog workflow around `src/content/blog/`. Vite blog consumers, feed generation, and Google Docs ingestion should use `authors.json` plus `posts/<slug>/post.json`, not legacy `src/data/blog` or `src/site/blog` paths.
 - 2026-03-30T18:10:00.000Z - Added a Markdown-first blog workflow. `post.md` is now the preferred authored source, `post.json` is generated for runtime compatibility, and Google Docs import now lands in Markdown for gradual migration off Docs.
 - 2025-11-03T16:39:33.007Z - Completed workflow validation system and portrait portfolio automation. Added comprehensive health checks and updated standards documentation.

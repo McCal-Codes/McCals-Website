@@ -16,6 +16,7 @@ const { serializeMarkdownPost } = require('./post-source-utils');
 const AUTHORS_PATH = path.join(__dirname, '../../src/content/blog/authors.json');
 const POSTS_ROOT = path.join(__dirname, '../../src/content/blog/posts');
 const COMPILE_SCRIPT = path.join(__dirname, './compile-post-sources.js');
+const VALIDATE_SCRIPT = path.join(__dirname, './validate-blog-content.js');
 const MANIFEST_SCRIPT = path.join(__dirname, '../manifest/generate-blog-manifest.js');
 const FEED_SCRIPT = path.join(__dirname, './generate-blog-feed.js');
 
@@ -241,6 +242,9 @@ async function main() {
 
   console.log('\nCompiling Markdown posts...');
   execFileSync(process.execPath, [COMPILE_SCRIPT], { stdio: 'inherit' });
+
+  console.log('\nValidating blog content...');
+  execFileSync(process.execPath, [VALIDATE_SCRIPT], { stdio: 'inherit' });
 
   console.log('\nRegenerating blog manifest...');
   execFileSync(process.execPath, [MANIFEST_SCRIPT], { stdio: 'inherit' });
