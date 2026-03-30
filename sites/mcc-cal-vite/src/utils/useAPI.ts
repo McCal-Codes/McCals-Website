@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { Manifest, BlogPost } from './api-client';
+import { Manifest, BlogPost, BlogPostSummary, fetchBlogPost, fetchBlogPosts } from './api-client';
 import { loadManifestFromAPI } from './manifestLoader';
 
 export interface UseManifestState {
@@ -17,7 +17,7 @@ export interface UseManifestState {
 }
 
 export interface UseBlogPostsState {
-  posts: BlogPost[];
+  posts: BlogPostSummary[];
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
@@ -61,8 +61,8 @@ export function useManifest(type: string, apiUrl?: string): UseManifestState {
 /**
  * Hook to fetch blog posts
  */
-export function useBlogPosts(apiUrl?: string): UseBlogPostsState {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+export function useBlogPosts(blogBase?: string): UseBlogPostsState {
+  const [posts, setPosts] = useState<BlogPostSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,25 +70,14 @@ export function useBlogPosts(apiUrl?: string): UseBlogPostsState {
     setLoading(true);
     setError(null);
     try {
-      const baseUrl = apiUrl || import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
-      const response = await fetch(`${baseUrl}/api/v1/blog/posts`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setPosts(data.posts || []);
+      const data = await fetchBlogPosts(blogBase);
+      setPosts(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
     }
-  }, [apiUrl]);
+  }, [blogBase]);
 
   useEffect(() => {
     fetchPosts();
@@ -105,36 +94,30 @@ export function useBlogPosts(apiUrl?: string): UseBlogPostsState {
 /**
  * Hook to fetch a single blog post
  */
-export function useBlogPost(id: string, apiUrl?: string) {
+export function useBlogPost(slug?: string, blogBase?: string) {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchPost = useCallback(async () => {
-    if (!id) return;
+    if (!slug) {
+      setPost(null);
+      setError(null);
+      setLoading(false);
+      return;
+    }
 
     setLoading(true);
     setError(null);
     try {
-      const baseUrl = apiUrl || import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
-      const response = await fetch(`${baseUrl}/api/v1/blog/posts/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.json();
+      const data = await fetchBlogPost(slug, blogBase);
       setPost(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setLoading(false);
     }
-  }, [id, apiUrl]);
+  }, [slug, blogBase]);
 
   useEffect(() => {
     fetchPost();

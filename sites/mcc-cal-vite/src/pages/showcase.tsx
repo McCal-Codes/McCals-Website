@@ -10,18 +10,18 @@ import ManifestDisplay from '@/components/ManifestDisplay';
 import BlogPostList from '@/components/BlogPostList';
 import BlogPostDetail from '@/components/BlogPostDetail';
 import AdminDashboard from '@/components/AdminDashboard';
-import { useManifest, useBlogPosts } from '@/utils/useAPI';
-import type { BlogPost } from '@/utils/api-client';
+import { useManifest, useBlogPost, useBlogPosts } from '@/utils/useAPI';
 
 type ShowcaseView = 'manifest' | 'blog' | 'admin' | 'hooks';
 
 export default function ShowcasePage() {
   const [activeView, setActiveView] = useState<ShowcaseView>('manifest');
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
 
   // Demonstrate manifest hook
   const concertManifest = useManifest('concert');
   const blogPosts = useBlogPosts();
+  const selectedPost = useBlogPost(selectedSlug || undefined);
 
   const renderContent = () => {
     switch (activeView) {
@@ -58,8 +58,15 @@ export default function ShowcasePage() {
         );
 
       case 'blog':
-        if (selectedPost) {
-          return <BlogPostDetail post={selectedPost} onBack={() => setSelectedPost(null)} />;
+        if (selectedSlug) {
+          return (
+            <BlogPostDetail
+              post={selectedPost.post}
+              loading={selectedPost.loading}
+              error={selectedPost.error || undefined}
+              onBack={() => setSelectedSlug(null)}
+            />
+          );
         }
 
         return (
@@ -71,7 +78,7 @@ export default function ShowcasePage() {
               posts={blogPosts.posts}
               loading={blogPosts.loading}
               error={blogPosts.error || undefined}
-              onPostClick={setSelectedPost}
+              onPostClick={(post) => setSelectedSlug(post.slug)}
             />
 
             <button
@@ -114,10 +121,10 @@ export default function ShowcasePage() {
                   <code>useManifest(type, apiUrl)</code> - Fetch single manifest
                 </li>
                 <li>
-                  <code>useBlogPosts(apiUrl)</code> - Fetch all blog posts
+                  <code>useBlogPosts(blogBase)</code> - Fetch all blog posts from static content
                 </li>
                 <li>
-                  <code>useBlogPost(id, apiUrl)</code> - Fetch single blog post
+                  <code>useBlogPost(slug, blogBase)</code> - Fetch single blog post
                 </li>
                 <li>
                   <code>useManifests(types, apiUrl)</code> - Fetch multiple manifests
@@ -230,7 +237,7 @@ return (
               key={view}
               onClick={() => {
                 setActiveView(view);
-                setSelectedPost(null);
+                setSelectedSlug(null);
               }}
               style={{
                 padding: '10px 20px',
