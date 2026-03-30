@@ -14,5 +14,16 @@
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/:path*", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ],
+      "missing": [
+        { "type": "env", "key": "VERCEL_ENV", "value": "production" }
+      ]
+    }
   ]
 }

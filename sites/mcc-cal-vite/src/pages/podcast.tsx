@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Layout from '@/components/Layout/Layout';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import '@/styles/podcast.css';
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -411,6 +412,47 @@ function EpisodeCard({ episode, currentlyPlayingGuid, onPlay, audioRef, playerSt
 // ── Main Page ────────────────────────────────────────────────────────────────
 
 export default function PodcastPage() {
+  usePageMeta({
+    title: 'Caffeinated Connections Podcast | Caleb McCartney',
+    description:
+      'Caffeinated Connections is where Caleb McCartney sits down with creators and industry pros over coffee to explore how ideas turn into impact. Listen to the latest episodes.',
+    canonical: 'https://mcc-cal.com/podcast',
+    og: {
+      type: 'website',
+      title: 'Caffeinated Connections Podcast',
+      description:
+        'Caleb McCartney sits down with creators and industry pros over coffee to explore how ideas turn into impact.',
+      image: PODCAST_IMAGE,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Caffeinated Connections Podcast',
+      description:
+        'Caleb McCartney sits down with creators and industry pros over coffee to explore how ideas turn into impact.',
+      image: PODCAST_IMAGE,
+    },
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'PodcastSeries',
+      name: 'Caffeinated Connections',
+      description:
+        'Where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact.',
+      url: 'https://mcc-cal.com/podcast',
+      image: PODCAST_IMAGE,
+      author: {
+        '@type': 'Person',
+        name: 'Caleb McCartney',
+        url: 'https://mcc-cal.com/about',
+      },
+      webFeed: 'https://media.rss.com/cafeconnectpod/feed.xml',
+      inLanguage: 'en',
+      availableOnDevice: [
+        { '@type': 'ListItem', name: 'Spotify', url: SPOTIFY_SHOW },
+        { '@type': 'ListItem', name: 'Apple Podcasts', url: APPLE_SHOW },
+      ],
+    },
+  });
+
   const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [toast, setToast] = useState<string | null>(null);
