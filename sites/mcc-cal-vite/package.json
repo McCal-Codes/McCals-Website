@@ -9,7 +9,7 @@
     "prebuild": "node scripts/sync-manifests.js",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint . --ignore-pattern dist"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
