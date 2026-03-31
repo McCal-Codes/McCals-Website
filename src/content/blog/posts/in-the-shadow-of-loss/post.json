@@ -4,12 +4,17 @@
   "authorId": "mccal",
   "date": "2024-08-16",
   "category": "Personal",
-  "excerpt": "Experiencing one death is hard enough. Enduring multiple losses in a brief period diminishes one's ability to cope with the turmoil that comes from losing these relationships.",
-  "leadImage": null,
-  "leadImageAlt": "",
-  "leadImageCaption": "",
+  "excerpt": "After several deaths in quick succession, grief stopped arriving as a single event and became the atmosphere around everything else.",
+  "leadImage": "images/lead.jpg",
+  "leadImageFallback": "https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg",
+  "leadImageAlt": "A red-roof barn sits beyond a fence line in a quiet hillside landscape.",
+  "leadImageCaption": "A quiet hillside and weathered barn hold the frame in soft evening light.",
   "published": true,
-  "tags": ["Death", "Emotional", "Loss"],
+  "tags": [
+    "Death",
+    "Emotional",
+    "Loss"
+  ],
   "body": [
     {
       "type": "text",
@@ -17,7 +22,7 @@
     },
     {
       "type": "text",
-      "content": "This exploration of death and grief through my art led to moments of profound connection, like when I found myself in the photo studio, speaking with my significant other's father — who, as you might have noticed, is represented by the golden prayer hands in the image. It's fascinating to see how we imbue inanimate objects with human qualities and how deeply they resonate with us when they become tied to memories of those we've lost."
+      "content": "This exploration of death and grief through my art led to moments of profound connection, like when I found myself in the photo studio speaking with my significant other's father, who is represented by the golden prayer hands in the image. It is strange how quickly we give objects human weight once they become tied to the people we miss."
     },
     {
       "type": "text",
@@ -25,11 +30,11 @@
     },
     {
       "type": "text",
-      "content": "It was a day like any other. I woke up with plans to meet a friend for coffee, where we'd talk about his involvement in this project. There's something strange about death — it catches you off guard, even when you're not expecting it, and leaves you with an unsettling sense of powerlessness. Mid-conversation at the coffee shop, I got a call. \"Hell—\" I barely began to say before I was interrupted: \"Great Grandma passed in her sleep last night.\" When I heard those words, it was as if a looming shadow appeared behind me, placing a heavy weight in my hands. Without hesitation, I took it, quietly sitting with the burden while the shadow seemed to linger, waiting for my reaction — whether I'd break down or set it aside, as I had with the other losses in my life."
+      "content": "It was a day like any other. I woke up with plans to meet a friend for coffee, where we would talk about his involvement in this project. There is something strange about death: it catches you off guard even when you are not expecting it and leaves you with an unsettling sense of powerlessness. Mid-conversation at the coffee shop, I got a call. \"Hell-\" I barely began to say before I was interrupted: \"Great Grandma passed in her sleep last night.\" When I heard those words, it was as if a looming shadow appeared behind me, placing a heavy weight in my hands. Without hesitation, I took it and sat quietly with the burden while the shadow lingered, waiting for my reaction, whether I would break down or set it aside as I had with the other losses in my life."
     },
     {
       "type": "quote",
-      "content": "Death catches you off guard, even when you're not expecting it, and leaves you with an unsettling sense of powerlessness."
+      "content": "Death catches you off guard, even when you are not expecting it, and leaves you with an unsettling sense of powerlessness."
     },
     {
       "type": "text",
@@ -37,15 +42,15 @@
     },
     {
       "type": "text",
-      "content": "Acceptance is perhaps the most daunting challenge when facing death — coming to terms with the stark reality that it is beyond our control. As I entered the funeral home, a profound sense of melancholy enveloped me. I found myself seated before the coffin, hesitating to look inside. When I finally did, I saw her lying there, devoid of life. The vibrant humor, the lively spark that once animated her, was now absent, replaced by an overwhelming weight that seemed to pin me in place, immobilizing me with its heaviness."
+      "content": "Acceptance is perhaps the hardest challenge in grief: coming to terms with the reality that death is beyond our control. As I entered the funeral home, a profound sense of melancholy settled over me. I found myself seated before the coffin, hesitating to look inside. When I finally did, I saw her lying there, devoid of life. The vibrant humor and energy that once animated her were gone, replaced by a weight that seemed to pin me in place."
     },
     {
       "type": "text",
-      "content": "Amid this suffocating grief, I felt an urgent need to break away, to find a way to process the torrent of emotions coursing through me. Instinctively, I reached for my camera and began to walk. There was no specific direction, no clear subject in mind — just a compulsion to capture something that might help me contain and make sense of my emotions. It was as if I was trying to distill the chaos within me into the frame of a photograph, using the lens to record and preserve the rawness of what I was feeling and seeing."
+      "content": "Amid that suffocating grief, I felt an urgent need to move, to find some way to process the torrent of emotion rushing through me. Instinctively, I reached for my camera and began to walk. There was no plan and no clear subject in mind, only the compulsion to capture something that might contain what I was feeling. It was as if I were trying to distill the chaos into a frame."
     },
     {
       "type": "text",
-      "content": "My wandering led me across the street from the funeral home, where I stood before a church. I started to take pictures drawn to the symbolism of the setting. Nearby, street signs caught my attention, each marked \"One Way,\" pointing in contradictory directions. The irony was striking — death is the ultimate one-way journey, a path from which no return exists. The juxtaposition of these signs with the solemnity of the moment resonated deeply with me, reflecting the inescapable finality of the loss I was grappling with."
+      "content": "My wandering led me across the street from the funeral home, where I stood before a church. I started taking pictures, drawn to the symbolism of the setting. Nearby, street signs caught my attention, each marked \"One Way\" while pointing in contradictory directions. The irony was striking. Death is the ultimate one-way journey, a path from which no return exists. The signs and the moment seemed to collapse into the same truth: some losses do not ask whether you are ready."
     }
   ]
 }

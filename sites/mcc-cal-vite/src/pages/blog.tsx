@@ -13,6 +13,12 @@ interface BlogAuthor {
   name: string;
   avatar?: string;
   bio?: string;
+  headline?: string;
+  location?: string;
+  links?: {
+    label: string;
+    href: string;
+  }[];
 }
 
 interface BlogAuthorsFile {
@@ -33,6 +39,7 @@ interface BlogManifestPost {
   category?: string;
   excerpt?: string;
   leadImage?: string | null;
+  leadImageFallback?: string | null;
   leadImageAlt?: string;
   leadImageCaption?: string;
   published?: boolean;
@@ -126,7 +133,7 @@ function buildIndexJsonLd(posts: BlogManifestPost[], getAuthor: (post: BlogManif
       description: post.excerpt,
       datePublished: post.date,
       url: `${SITE_URL}/blog/${post.slug}`,
-      image: toAbsoluteUrl(toAssetUrl(post.leadImage)),
+      image: toAbsoluteUrl(toAssetUrl(post.leadImage || post.leadImageFallback)),
       author: {
         '@type': 'Person',
         name: getAuthor(post).name,
@@ -160,12 +167,63 @@ function buildPostJsonLd(post: BlogPostDocument, authorName: string, image?: str
   };
 }
 
+function SmartImage({
+  src,
+  fallbackSrc,
+  alt,
+  className,
+  loading,
+  fetchPriority,
+  placeholderClassName,
+}: {
+  src?: string | null;
+  fallbackSrc?: string | null;
+  alt: string;
+  className?: string;
+  loading?: 'eager' | 'lazy';
+  fetchPriority?: 'high' | 'low' | 'auto';
+  placeholderClassName?: string;
+}) {
+  const [currentSrc, setCurrentSrc] = useState<string | null>(src || null);
+  const [usedFallback, setUsedFallback] = useState(false);
+
+  useEffect(() => {
+    setCurrentSrc(src || null);
+    setUsedFallback(false);
+  }, [src, fallbackSrc]);
+
+  if (!currentSrc) {
+    return placeholderClassName ? <div className={placeholderClassName} /> : null;
+  }
+
+  return (
+    <img
+      src={currentSrc}
+      alt={alt}
+      className={className}
+      loading={loading}
+      fetchPriority={fetchPriority}
+      onError={() => {
+        if (!usedFallback && fallbackSrc && fallbackSrc !== currentSrc) {
+          setCurrentSrc(fallbackSrc);
+          setUsedFallback(true);
+          return;
+        }
+
+        setCurrentSrc(null);
+      }}
+    />
+  );
+}
+
 function StoryMeta({ post, author }: { post: BlogManifestPost; author: BlogAuthor }) {
   const readTime = readingTimeLabel(post.readingTime);
 
   return (
     <div className="blog-meta" aria-label="Story metadata">
-      <span>{author.name}</span>
+      <Link to={`/authors/${author.id}`} className="blog-meta__author">
+        {author.name}
+      </Link>
       <time dateTime={post.date}>{formatDate(post.date)}</time>
       {readTime && <span>{readTime}</span>}
       {post.category && <span>{post.category}</span>}
@@ -183,18 +241,22 @@ function StoryCard({
   variant?: 'lead' | 'sidebar';
 }) {
   const imageUrl = toAssetUrl(post.leadImage);
+  const fallbackImageUrl = toAssetUrl(post.leadImageFallback);
+  const resolvedImageUrl = imageUrl || fallbackImageUrl;
 
   if (variant === 'lead') {
     return (
       <article className="blog-lead">
         <Link to={`/blog/${post.slug}`} className="blog-lead__image-wrap" aria-label={`Read ${post.title}`}>
-          {imageUrl ? (
-            <img
-              src={imageUrl}
+          {resolvedImageUrl ? (
+            <SmartImage
+              src={resolvedImageUrl}
+              fallbackSrc={fallbackImageUrl}
               alt={post.leadImageAlt || post.title}
               className="blog-lead__img"
               loading="eager"
               fetchPriority="high"
+              placeholderClassName="blog-card__placeholder"
             />
           ) : (
             <div className="blog-card__placeholder" />
@@ -214,12 +276,14 @@ function StoryCard({
     return (
       <article className="blog-sidebar__item">
         <Link to={`/blog/${post.slug}`} aria-label={`Read ${post.title}`}>
-          {imageUrl ? (
-            <img
-              src={imageUrl}
+          {resolvedImageUrl ? (
+            <SmartImage
+              src={resolvedImageUrl}
+              fallbackSrc={fallbackImageUrl}
               alt={post.leadImageAlt || post.title}
               className="blog-sidebar__thumb"
               loading="lazy"
+              placeholderClassName="blog-sidebar__thumb blog-sidebar__thumb--placeholder"
             />
           ) : (
             <div className="blog-sidebar__thumb blog-sidebar__thumb--placeholder" />
@@ -240,8 +304,15 @@ function StoryCard({
   return (
     <article className="blog-card">
       <Link to={`/blog/${post.slug}`} className="blog-card__media" aria-label={`Read ${post.title}`}>
-        {imageUrl ? (
-          <img src={imageUrl} alt={post.leadImageAlt || post.title} className="blog-card__image" loading="lazy" />
+        {resolvedImageUrl ? (
+          <SmartImage
+            src={resolvedImageUrl}
+            fallbackSrc={fallbackImageUrl}
+            alt={post.leadImageAlt || post.title}
+            className="blog-card__image"
+            loading="lazy"
+            placeholderClassName="blog-card__placeholder"
+          />
         ) : (
           <div className="blog-card__placeholder" />
         )}
@@ -406,7 +477,10 @@ export default function BlogPage() {
 
   const resolvedAuthor = getAuthor(resolvedPost);
   const leadImage = resolvedPost ? toPostAssetUrl(resolvedPost.slug, resolvedPost.leadImage) : undefined;
-  const absoluteLeadImage = toAbsoluteUrl(leadImage);
+  const leadImageFallback = resolvedPost
+    ? toPostAssetUrl(resolvedPost.slug, resolvedPost.leadImageFallback)
+    : undefined;
+  const absoluteLeadImage = toAbsoluteUrl(leadImage || leadImageFallback);
   const relatedPosts = resolvedPost ? posts.filter((entry) => entry.slug !== resolvedPost.slug).slice(0, 3) : [];
   const authorName = resolvedAuthor.name;
 
@@ -461,13 +535,13 @@ export default function BlogPage() {
           type: 'website',
           title: 'McCal Media Blog',
           description: 'Field notes, visual essays, and reporting from McCal Media.',
-          image: toAbsoluteUrl(toAssetUrl(leadPost?.leadImage)),
+          image: toAbsoluteUrl(toAssetUrl(leadPost?.leadImage || leadPost?.leadImageFallback)),
         },
         twitter: {
           card: 'summary_large_image',
           title: 'McCal Media Blog',
           description: 'Field notes, visual essays, and reporting from McCal Media.',
-          image: toAbsoluteUrl(toAssetUrl(leadPost?.leadImage)),
+          image: toAbsoluteUrl(toAssetUrl(leadPost?.leadImage || leadPost?.leadImageFallback)),
         },
         jsonLd: buildIndexJsonLd(posts, getAuthor),
       };
@@ -549,14 +623,16 @@ export default function BlogPage() {
                   <StoryMeta post={resolvedPost} author={resolvedAuthor} />
                 </header>
 
-                {leadImage && (
+                {(leadImage || leadImageFallback) && (
                   <figure className="story__lead">
-                    <img
-                      src={leadImage}
+                    <SmartImage
+                      src={leadImage || leadImageFallback}
+                      fallbackSrc={leadImageFallback}
                       alt={resolvedPost.leadImageAlt || resolvedPost.title}
                       className="story__lead-image"
                       loading="eager"
                       fetchPriority="high"
+                      placeholderClassName="blog-card__placeholder"
                     />
                     {resolvedPost.leadImageCaption && (
                       <figcaption className="story__caption">{resolvedPost.leadImageCaption}</figcaption>
@@ -579,9 +655,19 @@ export default function BlogPage() {
                     <div className="story__author-copy">
                       <p className="blog-kicker">Written By</p>
                       <h2 id="story-author-heading" className="story__author-name">
-                        {resolvedAuthor.name}
+                        <Link to={`/authors/${resolvedAuthor.id}`} className="story__author-name-link">
+                          {resolvedAuthor.name}
+                        </Link>
                       </h2>
+                      {resolvedAuthor.headline && (
+                        <p className="story__author-headline">{resolvedAuthor.headline}</p>
+                      )}
                       {resolvedAuthor.bio && <p className="story__author-bio">{resolvedAuthor.bio}</p>}
+                      <div className="story__author-actions">
+                        <Link to={`/authors/${resolvedAuthor.id}`} className="story__author-link">
+                          View author page
+                        </Link>
+                      </div>
                     </div>
                   </section>
                 )}

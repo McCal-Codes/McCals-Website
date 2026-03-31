@@ -97,6 +97,9 @@ function normalizePost(post) {
     ...(normalizeText(post?.category) ? { category: post.category.trim() } : {}),
     ...(normalizeText(post?.excerpt) ? { excerpt: post.excerpt.trim() } : {}),
     ...(normalizeText(post?.leadImage) ? { leadImage: post.leadImage.trim() } : {}),
+    ...(normalizeText(post?.leadImageFallback)
+      ? { leadImageFallback: post.leadImageFallback.trim() }
+      : {}),
     ...(normalizeText(post?.leadImageAlt) ? { leadImageAlt: post.leadImageAlt.trim() } : {}),
     ...(normalizeText(post?.leadImageCaption) ? { leadImageCaption: post.leadImageCaption.trim() } : {}),
     published: post?.published === undefined ? true : post.published,
@@ -404,6 +407,18 @@ function validatePostDirectory(postDir, authorMap) {
     }
   } else {
     validateLocalAssetPath(post.leadImage, 'leadImage', postDir, post.slug || folderName, errors, warnings, strict);
+  }
+
+  if (isNonEmptyString(post.leadImageFallback)) {
+    validateLocalAssetPath(
+      post.leadImageFallback,
+      'leadImageFallback',
+      postDir,
+      post.slug || folderName,
+      errors,
+      warnings,
+      strict,
+    );
   }
 
   if (!isNonEmptyString(post.leadImageAlt)) {

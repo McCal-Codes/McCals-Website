@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&display=swap');
+
+.authors-page {
+  display: grid;
+  gap: clamp(28px, 4vw, 44px);
+  padding: clamp(48px, 7vw, 84px) 0 clamp(72px, 8vw, 112px);
+}
+
+.authors-hero,
+.author-card,
+.author-profile,
+.author-stories {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(202, 194, 186, 0.14);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(202, 194, 186, 0.12), transparent 28%),
+    linear-gradient(145deg, rgba(17, 17, 19, 0.96), rgba(10, 10, 12, 0.98));
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+}
+
+.authors-hero {
+  padding: clamp(28px, 5vw, 56px);
+}
+
+.authors-hero__kicker,
+.author-card__eyebrow,
+.author-profile__eyebrow,
+.author-story-card__category {
+  margin: 0 0 12px;
+  color: rgba(202, 194, 186, 0.72);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.authors-hero__title,
+.author-card__name,
+.author-profile__name,
+.author-stories__heading h2,
+.author-story-card__title {
+  font-family: 'Fraunces', Georgia, serif;
+  letter-spacing: -0.03em;
+}
+
+.authors-hero__title {
+  margin: 0;
+  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  line-height: 0.95;
+}
+
+.authors-hero__lede {
+  margin: 18px 0 0;
+  max-width: 58ch;
+  font-size: clamp(1.02rem, 1.8vw, 1.18rem);
+  line-height: 1.8;
+  color: rgba(232, 232, 232, 0.76);
+}
+
+.authors-grid,
+.author-stories__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.author-card {
+  display: grid;
+  gap: 22px;
+  padding: 24px;
+}
+
+.author-card__header {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.author-card__avatar,
+.author-profile__avatar {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+.author-card__name,
+.author-profile__name {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  line-height: 1.05;
+}
+
+.author-card__name a,
+.author-story-card__title a,
+.author-card__stories a,
+.author-card__cta,
+.author-profile__link,
+.authors-back {
+  color: inherit;
+  text-decoration: none;
+}
+
+.author-card__name a:hover,
+.author-story-card__title a:hover,
+.author-card__cta:hover,
+.author-profile__link:hover,
+.authors-back:hover {
+  color: rgba(202, 194, 186, 0.9);
+}
+
+.author-card__headline,
+.author-profile__headline {
+  margin: 8px 0 0;
+  color: rgba(202, 194, 186, 0.72);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.author-card__bio,
+.author-profile__bio,
+.author-stories__heading p,
+.author-story-card__excerpt,
+.authors-state {
+  margin: 0;
+  color: rgba(232, 232, 232, 0.76);
+  line-height: 1.8;
+}
+
+.author-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: rgba(202, 194, 186, 0.68);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.author-card__stories {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.author-card__stories li {
+  display: grid;
+  gap: 4px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(202, 194, 186, 0.12);
+}
+
+.author-card__stories time,
+.author-story-card__body time {
+  color: rgba(202, 194, 186, 0.64);
+  font-size: 0.82rem;
+}
+
+.author-card__cta,
+.authors-back,
+.author-profile__link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(202, 194, 186, 0.42);
+  padding-bottom: 4px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.authors-state {
+  padding: 10px 0;
+}
+
+.authors-state--error {
+  color: #f2b7b7;
+}
+
+.author-detail {
+  display: grid;
+  gap: 24px;
+}
+
+.author-profile {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  padding: clamp(24px, 4vw, 40px);
+  align-items: start;
+}
+
+.author-profile__avatar {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+}
+
+.author-profile__copy {
+  display: grid;
+  gap: 18px;
+}
+
+.author-profile__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.author-profile__stats div {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(202, 194, 186, 0.12);
+}
+
+.author-profile__stats strong {
+  font-size: 1.5rem;
+}
+
+.author-profile__stats span {
+  color: rgba(232, 232, 232, 0.72);
+  font-size: 0.88rem;
+}
+
+.author-profile__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+}
+
+.author-stories {
+  display: grid;
+  gap: 24px;
+  padding: clamp(24px, 4vw, 36px);
+}
+
+.author-stories__heading {
+  display: grid;
+  gap: 10px;
+}
+
+.author-stories__heading h2,
+.author-story-card__title {
+  margin: 0;
+}
+
+.author-story-card {
+  display: grid;
+  gap: 16px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(202, 194, 186, 0.12);
+}
+
+.author-story-card__image-wrap {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.author-story-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.author-story-card__body {
+  display: grid;
+  gap: 10px;
+  padding: 0 18px 18px;
+}
+
+body[data-theme='light'] .authors-hero,
+body[data-theme='light'] .author-card,
+body[data-theme='light'] .author-profile,
+body[data-theme='light'] .author-stories {
+  border-color: rgba(90, 67, 47, 0.12);
+  background:
+    radial-gradient(circle at top right, rgba(90, 67, 47, 0.08), transparent 28%),
+    linear-gradient(145deg, rgba(255, 251, 247, 0.96), rgba(248, 244, 239, 0.98));
+  box-shadow: 0 18px 40px rgba(74, 52, 34, 0.08);
+}
+
+body[data-theme='light'] .authors-hero__kicker,
+body[data-theme='light'] .author-card__eyebrow,
+body[data-theme='light'] .author-profile__eyebrow,
+body[data-theme='light'] .author-story-card__category,
+body[data-theme='light'] .author-card__meta,
+body[data-theme='light'] .author-card__stories time,
+body[data-theme='light'] .author-story-card__body time {
+  color: rgba(90, 67, 47, 0.64);
+}
+
+body[data-theme='light'] .authors-hero__lede,
+body[data-theme='light'] .author-card__bio,
+body[data-theme='light'] .author-profile__bio,
+body[data-theme='light'] .author-stories__heading p,
+body[data-theme='light'] .author-story-card__excerpt,
+body[data-theme='light'] .authors-state,
+body[data-theme='light'] .author-profile__stats span {
+  color: rgba(34, 34, 34, 0.72);
+}
+
+body[data-theme='light'] .author-card__headline,
+body[data-theme='light'] .author-profile__headline {
+  color: rgba(90, 67, 47, 0.7);
+}
+
+body[data-theme='light'] .author-profile__stats div,
+body[data-theme='light'] .author-story-card,
+body[data-theme='light'] .author-card__stories li {
+  border-color: rgba(90, 67, 47, 0.12);
+}
+
+body[data-theme='light'] .author-story-card,
+body[data-theme='light'] .author-profile__stats div {
+  background: rgba(90, 67, 47, 0.03);
+}
+
+body[data-theme='light'] .author-card__cta,
+body[data-theme='light'] .authors-back,
+body[data-theme='light'] .author-profile__link {
+  border-bottom-color: rgba(90, 67, 47, 0.28);
+}
+
+@media (max-width: 900px) {
+  .authors-grid,
+  .author-stories__grid,
+  .author-profile {
+    grid-template-columns: 1fr;
+  }
+
+  .author-profile__avatar {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .authors-page {
+    padding-top: 32px;
+  }
+
+  .author-card__header {
+    grid-template-columns: 1fr;
+  }
+
+  .author-card__avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .author-profile__stats {
+    grid-template-columns: 1fr;
+  }
+}

@@ -29,6 +29,51 @@ Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and d
 <!-- site-widgets:inline:end -->
 
 <style>
+  /* Accessibility: High-contrast focus ring for all interactive elements */
+  .dspw-root :is(a, button, [tabindex], input, select, textarea):focus-visible {
+    outline: 2.5px solid var(--focus, #7dd3fc);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.18);
+    z-index: 3;
+    border-color: var(--focus, #7dd3fc) !important;
+  }
+
+  /* Ensure contrast for muted text */
+  .dspw-muted, .dspw-profile-text, .dspw-stat-label, .dspw-card p, .dspw-legend, .dspw-tag, .dspw-chip {
+    color: var(--dspw-muted, #5b5553);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.12);
+  }
+<!--
+Design System Portfolio Widget v1.4.0
+Author: Caleb McCartney / McCal-Codes
+Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and deep-dive modal.
+-->
+
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  .dspw-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dspw-root * {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
   .dspw-root,
   .dspw-root * {
     box-sizing: border-box;
@@ -38,16 +83,16 @@ Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and d
   .dspw-version-indicator,
   .dspw-modal,
   .dspw-project-modal {
-    --dspw-bg: #0a0c11;
-    --dspw-panel: #141923;
-    --dspw-panel-2: #1b2230;
-    --dspw-text: #e9edf8;
-    --dspw-muted: #aab6d0;
-    --dspw-line: #2a3349;
-    --dspw-accent: #9cc2ff;
-    --dspw-accent-2: #d2e1ff;
+    --dspw-bg: var(--mcc-bg, #050506);
+    --dspw-panel: var(--panel-bg, rgba(48,44,44,0.85));
+    --dspw-panel-2: #181716;
+    --dspw-text: var(--mcc-fg, #cac2ba);
+    --dspw-muted: var(--mcc-muted, #5b5553);
+    --dspw-line: var(--mcc-line, #2a2a2a);
+    --dspw-accent: var(--mcc-accent, #b8b0aa);
+    --dspw-accent-2: var(--mcc-accent-strong, #cac2ba);
     --dspw-success: #8ee4c4;
-    --dspw-shadow: 0 20px 48px rgba(0, 0, 0, 0.38);
+    --dspw-shadow: 0 20px 48px rgba(0,0,0,0.38);
   }
 
   .dspw-root {
@@ -59,11 +104,16 @@ Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and d
   }
 
   .dspw-shell {
-    background: radial-gradient(circle at top left, rgba(156, 194, 255, 0.08), transparent 36%), var(--dspw-bg);
+    background:
+      linear-gradient(135deg, rgba(202, 194, 186, 0.13) 0%, rgba(184, 176, 170, 0.10) 100%),
+      var(--mcc-gradient-business),
+      radial-gradient(circle at top left, rgba(156, 194, 255, 0.08), transparent 36%),
+      var(--dspw-bg);
     border: 1px solid var(--dspw-line);
     border-radius: 22px;
     padding: 30px;
     box-shadow: var(--dspw-shadow);
+    background-blend-mode: lighten, normal, normal, normal;
   }
 
   .dspw-kicker {
@@ -80,6 +130,18 @@ Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and d
     font-size: clamp(30px, 4vw, 48px);
     line-height: 1.1;
     letter-spacing: -0.02em;
+    position: relative;
+  }
+
+  .dspw-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin-top: 10px;
+    border-radius: 2px;
+    background: var(--dspw-accent);
+    opacity: 0.85;
   }
 
   .dspw-subtitle {
@@ -222,16 +284,30 @@ Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and d
   }
 
   .dspw-panel {
-    border: 1px solid var(--dspw-line);
+    border: 1.5px solid var(--dspw-line);
     border-radius: 16px;
     background: var(--dspw-panel);
     padding: 16px;
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.22), 0 1.5px 0 0 var(--dspw-accent-2, #cac2ba);
+    transition: box-shadow 0.18s cubic-bezier(.4,1.2,.6,1);
   }
 
   .dspw-panel h3 {
-    margin: 0;
+    margin: 0 0 8px 0;
     font-size: 16px;
     color: var(--dspw-accent-2);
+    position: relative;
+  }
+
+  .dspw-panel h3::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 3px;
+    margin-top: 6px;
+    border-radius: 2px;
+    background: var(--dspw-accent);
+    opacity: 0.7;
   }
 
   .dspw-controls {
@@ -262,9 +338,17 @@ Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and d
   .dspw-btn:hover,
   .dspw-open:hover,
   .dspw-close:hover,
-  .dspw-refresh:hover {
-    transform: translateY(-1px);
+  .dspw-refresh:hover,
+  .dspw-filter:focus-visible,
+  .dspw-btn:focus-visible,
+  .dspw-open:focus-visible,
+  .dspw-close:focus-visible,
+  .dspw-refresh:focus-visible {
+    transform: translateY(-2px) scale(1.03);
     border-color: var(--dspw-accent);
+    box-shadow: 0 0 0 2px var(--dspw-accent-2, #cac2ba), 0 2px 12px 0 rgba(184,176,170,0.10);
+    outline: none;
+    z-index: 2;
   }
 
   .dspw-filter[aria-pressed='true'],
@@ -368,6 +452,9 @@ Purpose: Breathable, overview-first dynamic portfolio with spotlight panel and d
   .dspw-card-link:focus-visible {
     border-color: var(--dspw-accent);
     color: var(--dspw-text);
+    box-shadow: 0 0 0 2px var(--dspw-accent-2, #cac2ba), 0 2px 12px 0 rgba(184,176,170,0.10);
+    outline: none;
+    z-index: 2;
   }
 
   .dspw-spotlight {
