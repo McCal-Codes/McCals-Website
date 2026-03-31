@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import type { UseManifestResult } from './types';
 
 const GITHUB_RAW = 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main';
+const PORTFOLIOS_BASE = 'src/images/Portfolios';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes, matching widget behaviour
 
 interface CacheEntry<T> {
@@ -11,14 +12,49 @@ interface CacheEntry<T> {
 
 const memoryCache = new Map<string, CacheEntry<unknown>>();
 
-export function getImageUrl(relativePath: string): string {
-  const clean = relativePath.startsWith('src/') ? relativePath : `src/images/Portfolios/${relativePath}`;
-  return `${GITHUB_RAW}/${encodeURIPath(clean)}`;
-}
-
 function encodeURIPath(path: string): string {
   return path.split('/').map(encodeURIComponent).join('/');
 }
+
+function toGithubUrl(repoRelativePath: string): string {
+  return `${GITHUB_RAW}/${encodeURIPath(repoRelativePath)}`;
+}
+
+/**
+ * Image URL builders — one per manifest type.
+ * Each matches the exact path pattern its manifest uses.
+ */
+export const imageUrl = {
+  /** journalism: image.path is filename only; folderPath is relative to Portfolios/Journalism/ */
+  journalism(folderPath: string, filename: string): string {
+    return toGithubUrl(`${PORTFOLIOS_BASE}/Journalism/${folderPath}/${filename}`);
+  },
+
+  /** concerts: image is filename only; relativeFolderPath already includes "Concert/Band/Month" */
+  concert(relativeFolderPath: string, filename: string): string {
+    return toGithubUrl(`${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`);
+  },
+
+  /** events: image.path is already a full repo-relative path starting with "src/images/..." */
+  event(fullPath: string): string {
+    return toGithubUrl(fullPath);
+  },
+
+  /** portraits: image is filename (may include album subfolder); folderPath is relative to Portfolios/Portrait/ */
+  portrait(folderPath: string, imageFilename: string): string {
+    return toGithubUrl(`${PORTFOLIOS_BASE}/Portrait/${folderPath}/${imageFilename}`);
+  },
+
+  /** nature: image is filename only; folderPath is relative to Portfolios/Nature/ */
+  nature(folderPath: string, filename: string): string {
+    return toGithubUrl(`${PORTFOLIOS_BASE}/Nature/${folderPath}/${filename}`);
+  },
+
+  /** featured: mixed types — same as concert, uses relativeFolderPath */
+  featured(relativeFolderPath: string, filename: string): string {
+    return toGithubUrl(`${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`);
+  },
+};
 
 export function useManifest<T>(type: string): UseManifestResult<T> {
   const [status, setStatus] = useState<UseManifestResult<T>['status']>('idle');

@@ -1,4 +1,4 @@
-import { useState, useCallback, type FC } from 'react';
+import { useState, useCallback, useRef, type FC } from 'react';
 import type { PortfolioGroup } from './types';
 import PortfolioCard from './PortfolioCard';
 import PortfolioLightbox from './PortfolioLightbox';
@@ -10,8 +10,6 @@ interface PortfolioGridProps {
   batchSize?: number;
 }
 
-let toastTimer: ReturnType<typeof setTimeout> | undefined;
-
 const PortfolioGrid: FC<PortfolioGridProps> = ({
   groups,
   initialCount = 12,
@@ -20,6 +18,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   const [visible, setVisible] = useState(initialCount);
   const [activeGroup, setActiveGroup] = useState<PortfolioGroup | null>(null);
   const [toastVisible, setToastVisible] = useState(false);
+  const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const shown = groups.slice(0, visible);
   const remaining = Math.max(0, groups.length - visible);
@@ -29,9 +28,9 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   const handleCopyLink = useCallback((id: string) => {
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
     navigator.clipboard?.writeText(url).catch(() => {});
-    clearTimeout(toastTimer);
+    clearTimeout(toastTimer.current);
     setToastVisible(true);
-    toastTimer = setTimeout(() => setToastVisible(false), 2200);
+    toastTimer.current = setTimeout(() => setToastVisible(false), 2200);
   }, []);
 
   return (

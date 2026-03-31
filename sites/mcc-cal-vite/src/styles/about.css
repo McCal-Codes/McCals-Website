@@ -18,7 +18,7 @@
 
 .about-shell {
   display: grid;
-  gap: 30px;
+  gap: 20px;
   max-width: 980px;
   margin: 0 auto;
 }
@@ -40,7 +40,7 @@
 .about-bio,
 .about-reviews,
 .about-clients {
-  padding: clamp(24px, 4vw, 38px);
+  padding: clamp(20px, 3vw, 30px);
 }
 
 .about-bio__grid {
@@ -86,7 +86,7 @@
 
 .about-bio__content {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .about-eyebrow {
@@ -102,9 +102,9 @@
 .about-section-heading h2 {
   margin: 0;
   color: var(--about-text-primary);
-  font-size: clamp(2.1rem, 4.8vw, 3.4rem);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.45rem, 2.8vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 .about-bio__content p,
@@ -265,7 +265,7 @@
 }
 
 .about-section-heading h2 {
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
 }
 
 .about-section-heading--center {
@@ -346,8 +346,8 @@
   position: relative;
   overflow: hidden;
   padding: 24px 0;
-  margin-left: calc(-1 * clamp(24px, 4vw, 38px));
-  margin-right: calc(-1 * clamp(24px, 4vw, 38px));
+  margin-left: calc(-1 * clamp(20px, 3vw, 30px));
+  margin-right: calc(-1 * clamp(20px, 3vw, 30px));
 }
 
 .about-client-carousel::before,
@@ -381,7 +381,7 @@
   padding: 0 6px;
   /* Isolate to its own GPU layer so scroll is compositor-only */
   transform: translateZ(0);
-  animation: about-scroll 35s linear infinite;
+  animation: about-scroll 18s linear infinite;
 }
 
 .about-client-track:hover {
@@ -417,7 +417,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(1.05) contrast(1.05) opacity(0.85);
+  filter: brightness(0) invert(1) opacity(0.75);
   transition:
     transform 0.28s ease,
     filter 0.28s ease;
@@ -429,7 +429,7 @@
 }
 
 .about-client-card:hover img {
-  filter: brightness(1.15) contrast(1.05) opacity(1);
+  filter: brightness(0) invert(1) opacity(1);
   transform: scale(1.04);
 }
 
@@ -498,23 +498,21 @@ body[data-theme='light'] .about-action:focus-visible {
 }
 
 body[data-theme='light'] .about-client-card {
-  border-color: rgba(90, 67, 47, 0.1);
-  background: linear-gradient(135deg, rgba(90, 67, 47, 0.04) 0%, rgba(90, 67, 47, 0.02) 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 4px 16px rgba(74, 52, 34, 0.08);
+  border-color: rgba(90, 67, 47, 0.12);
+  background: rgba(90, 67, 47, 0.03);
+  box-shadow: 0 2px 12px rgba(74, 52, 34, 0.07);
 }
 
 body[data-theme='light'] .about-client-card:hover {
-  border-color: rgba(90, 67, 47, 0.2);
-  background: linear-gradient(135deg, rgba(90, 67, 47, 0.08) 0%, rgba(90, 67, 47, 0.04) 100%);
+  border-color: rgba(90, 67, 47, 0.22);
+  box-shadow: 0 10px 24px rgba(74, 52, 34, 0.13);
 }
 
-body[data-theme='light'] .about-client-card img.about-logo--white {
-  filter: brightness(0) opacity(0.75);
+body[data-theme='light'] .about-client-card img {
+  filter: brightness(0) opacity(0.65);
 }
 
-body[data-theme='light'] .about-client-card:hover img.about-logo--white {
+body[data-theme='light'] .about-client-card:hover img {
   filter: brightness(0) opacity(1);
 }
 
@@ -568,10 +566,9 @@ body[data-theme='light'] .about-client-carousel::after {
   }
 
   .about-client-card {
-    flex: 0 0 140px;
-    height: 90px;
-    margin: 0 6px;
-    padding: 14px;
+    flex: 0 0 150px;
+    height: 96px;
+    padding: 14px 16px;
   }
 }
 
@@ -592,11 +589,10 @@ body[data-theme='light'] .about-client-carousel::after {
 
 @keyframes about-scroll {
   from {
-    transform: translateX(0);
+    transform: translateZ(0) translateX(0);
   }
-
   to {
-    /* 8 logos × 216px per item = 1728px — scroll exactly one set then loop */
-    transform: translateX(-1728px);
+    /* 8 logos × (200px + 12px gap) = 1696px — scroll exactly one full set */
+    transform: translateZ(0) translateX(-1696px);
   }
 }
