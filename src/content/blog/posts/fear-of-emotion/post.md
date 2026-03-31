@@ -6,8 +6,8 @@ date: "2024-10-30"
 category: "Thesis"
 excerpt: "A reflection on emotional suppression, childhood conditioning, and learning to accept difficult feelings."
 leadImage: "images/lead.jpg"
-leadImageAlt: "A stylist and client appear together in a salon mirror while hair color is applied."
-leadImageCaption: "A stylist and client appear together in a salon mirror at Boyd Station, Ky., June 12, 2025."
+leadImageAlt: "Studio portrait from a session with Helen Wise."
+leadImageCaption: "Studio portrait from a session with Helen Wise, May 28, 2024."
 published: true
 tags:
   - Thesis

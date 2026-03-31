@@ -6,8 +6,8 @@ date: "2024-09-03"
 category: "Thesis"
 excerpt: "A short thesis fragment about fear, ego, and the noise that remains after being broken down."
 leadImage: "images/lead.jpg"
-leadImageAlt: "A shaft of sunlight cuts across weathered wood siding with peeling turquoise paint."
-leadImageCaption: "Sunlight cuts across weathered wood siding at Boyd Station, Ky., June 10, 2025."
+leadImageAlt: "Night landscape of Seneca Rocks under a dark sky in West Virginia."
+leadImageCaption: "Night landscape of Seneca Rocks in West Virginia."
 published: true
 tags:
   - Thesis

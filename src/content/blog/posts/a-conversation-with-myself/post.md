@@ -6,8 +6,8 @@ date: "2024-11-30"
 category: "Thesis"
 excerpt: "A dream record about self-judgment, subconscious warning, and the strange intimacy of talking to yourself."
 leadImage: "images/lead.jpg"
-leadImageAlt: "A young man leans beside a reflective storefront window at dusk."
-leadImageCaption: "A young man leans beside a reflective storefront window at Boyd Station, Ky., June 11, 2025."
+leadImageAlt: "Editorial portrait from an Ignite Studios session with Jay Thompson."
+leadImageCaption: "Editorial portrait from an Ignite Studios session with Jay Thompson, Nov. 18, 2023."
 published: true
 tags:
   - Thesis
