@@ -32,25 +32,36 @@ const testimonials = [
 ];
 
 const clientLogos = [
-  { src: '/about/clients/new-york-post-logo.png', alt: 'New York Post' },
-  {
-    src: '/about/clients/pittsburgh-magazine-real-logo.png',
-    alt: 'Pittsburgh Magazine',
-    logoClass: 'about-logo--white',
-  },
+  { src: '/about/clients/new-york-post-logo.svg', alt: 'New York Post' },
+  { src: '/about/clients/pittsburgh-magazine-logo.svg', alt: 'Pittsburgh Magazine' },
   { src: '/about/clients/point-park-university-real-logo.jpg', alt: 'Point Park University' },
-  { src: '/about/clients/the-globe-real-logo.jpg', alt: 'The Globe' },
-  {
-    src: '/about/clients/bc3-logo-new.png',
-    alt: 'Butler County Community College',
-    logoClass: 'about-logo--white',
-  },
-  {
-    src: '/about/clients/nppa-real-logo.png',
-    alt: 'National Press Photographers Association',
-  },
-  { src: '/about/clients/osh360-logo.png', alt: 'OSH360', logoClass: 'about-logo--white' },
+  { src: '/about/clients/the-globe-logo.svg', alt: 'The Globe' },
+  { src: '/about/clients/bc3-logo.svg', alt: 'Butler County Community College' },
+  { src: '/about/clients/nppa-logo.svg', alt: 'National Press Photographers Association' },
+  { src: '/about/clients/osh360-logo.png', alt: 'OSH360' },
   { src: '/about/clients/covalent-logo.png', alt: 'Covalent' },
+  { src: '/about/clients/associated-press-logo.svg', alt: 'Associated Press' },
+  { src: '/about/clients/reuters-logo.svg', alt: 'Reuters' },
+  { src: '/about/clients/carnegie-mellon-university-logo.svg', alt: 'Carnegie Mellon University' },
+  { src: '/about/clients/university-of-pittsburgh-logo.svg', alt: 'University of Pittsburgh' },
+  { src: '/about/clients/penn-state-fayette-logo.svg', alt: 'Penn State Fayette' },
+  { src: '/about/clients/iup-logo.png', alt: 'Indiana University of Pennsylvania' },
+  { src: '/about/clients/wvu-logo.png', alt: 'West Virginia University' },
+  { src: '/about/clients/osu-logo.jpg', alt: 'Ohio State University' },
+  { src: '/about/clients/pennsylvania-news-media-logo.svg', alt: 'Pennsylvania News Media Association' },
+  { src: '/about/clients/next-generation-news-logo.svg', alt: 'Next Generation News' },
+  { src: '/about/clients/pittsburgh-union-progress-logo.svg', alt: 'Pittsburgh Union Progress' },
+  { src: '/about/clients/center-for-media-innovation-logo.svg', alt: 'Center for Media Innovation' },
+  { src: '/about/clients/western-pa-press-club-logo.svg', alt: 'Western PA Press Club' },
+  { src: '/about/clients/jagoff-media-logo.svg', alt: 'Jagoff Media' },
+  { src: '/about/clients/haven-pittsburgh-logo.svg', alt: 'Haven Pittsburgh' },
+  { src: '/about/clients/ghostlight-theatre-company-logo.svg', alt: 'Ghostlight Theatre Company' },
+  { src: '/about/clients/the-space-upstairs-logo.svg', alt: 'The Space Upstairs' },
+  { src: '/about/clients/the-watchful-shepherd-logo.svg', alt: 'The Watchful Shepherd' },
+  { src: '/about/clients/terrible-tailgate-logo.svg', alt: 'Terrible Tailgate' },
+  { src: '/about/clients/upward-consulting-logo.svg', alt: 'Upward Consulting' },
+  { src: '/about/clients/voyage-visuals-logo.svg', alt: 'Voyage Visuals' },
+  { src: '/about/clients/yinzers-meet-logo.svg', alt: 'Yinzers Meet' },
 ];
 
 const carouselLogos = [...clientLogos, ...clientLogos, ...clientLogos];
@@ -321,7 +332,7 @@ export default function AboutPage() {
                       <img
                         src={logo.src}
                         alt={isDuplicate ? '' : logo.alt}
-                        className={logo.logoClass}
+                        className={undefined}
                         loading="lazy"
                         decoding="async"
                       />

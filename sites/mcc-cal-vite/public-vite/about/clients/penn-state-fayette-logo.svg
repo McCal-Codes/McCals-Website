@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="background: transparent;">
+  <defs>
+    <!-- Penn State colors gradient -->
+    <linearGradient id="pennStateGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#041E42;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E5F8B;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Text gradient -->
+    <linearGradient id="pennStateTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#041E42;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E3A5F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield/keystone background -->
+  <path d="M15 20 Q30 15 45 20 L45 50 Q30 55 15 50 Z" fill="url(#pennStateGradient)" stroke="#041E42" stroke-width="1"/>
+  
+  <!-- Keystone state symbol -->
+  <g transform="translate(22, 25)">
+    <!-- Keystone shape -->
+    <path d="M8 5 L14 0 L16 10 L8 15 L0 10 L2 0 Z" fill="#ffffff" opacity="0.9"/>
+    <!-- Penn State letters -->
+    <text x="8" y="10" font-family="Times, serif" font-size="6" font-weight="bold" 
+          fill="url(#pennStateGradient)" text-anchor="middle">PS</text>
+  </g>
+  
+  <!-- University name -->
+  <text x="55" y="22" font-family="Times, serif" font-size="12" font-weight="bold" 
+        fill="url(#pennStateTextGradient)" letter-spacing="0.3px">PENN STATE</text>
+  <text x="55" y="38" font-family="Times, serif" font-size="12" font-weight="bold" 
+        fill="url(#pennStateTextGradient)" letter-spacing="0.3px">FAYETTE</text>
+  
+  <!-- Campus designation -->
+  <text x="55" y="52" font-family="Arial, sans-serif" font-size="9" font-weight="600" 
+        fill="#666666" letter-spacing="0.2px">THE EBERLY CAMPUS</text>
+  
+  <!-- Tagline -->
+  <text x="55" y="64" font-family="Arial, sans-serif" font-size="8" font-weight="400" 
+        fill="#666666" letter-spacing="0.2px">WE ARE PENN STATE</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="180" cy="20" r="2" fill="url(#pennStateGradient)" opacity="0.4"/>
+  <circle cx="185" cy="60" r="1.5" fill="url(#pennStateGradient)" opacity="0.3"/>
+</svg>

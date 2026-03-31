@@ -1,0 +1,78 @@
+import { useMemo } from 'react';
+import { useManifest, imageUrl } from '../portfolio/useManifest';
+import type { PortfolioGroup } from '../portfolio/types';
+import PortfolioGrid from '../portfolio/PortfolioGrid';
+import '../portfolio/portfolio.css';
+
+// ── Manifest shape ────────────────────────────────────────────────────────────
+
+interface ConcertBand {
+  bandName: string;
+  relativeFolderPath: string;
+  dateDisplay?: string;
+  concertDate?: { iso: string };
+  images: string[];
+}
+
+interface ConcertManifest {
+  bands: ConcertBand[];
+}
+
+// ── Normaliser ────────────────────────────────────────────────────────────────
+
+function normalise(bands: ConcertBand[]): PortfolioGroup[] {
+  return bands.map((band) => {
+    const images = band.images.map((filename) => ({
+      url: imageUrl.concert(band.relativeFolderPath, filename),
+      filename,
+      alt: `${band.bandName} — ${filename}`,
+    }));
+
+    return {
+      id: band.bandName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      title: band.bandName,
+      dateDisplay: band.dateDisplay,
+      dateISO: band.concertDate?.iso,
+      images,
+      coverImage: images[0],
+    };
+  });
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
+export default function ConcertPortfolio() {
+  const { data, status, error } = useManifest<ConcertManifest>('concert');
+
+  const groups = useMemo(() => {
+    if (!data?.bands) return [];
+    return normalise(data.bands);
+  }, [data]);
+
+  return (
+    <div className="pf-root">
+      <h2 className="pf-heading">Concert Photography</h2>
+      <p className="pf-subheading">
+        Live music from Pittsburgh and beyond.
+      </p>
+
+      {status === 'loading' && (
+        <div className="pf-loading">
+          <span className="pf-spinner" />
+          Loading concert portfolio…
+        </div>
+      )}
+
+      {status === 'error' && (
+        <div className="pf-error">
+          <span>Failed to load portfolio.</span>
+          <span style={{ fontSize: '0.82rem', opacity: 0.7 }}>{error}</span>
+        </div>
+      )}
+
+      {status === 'success' && (
+        <PortfolioGrid groups={groups} initialCount={12} batchSize={6} />
+      )}
+    </div>
+  );
+}

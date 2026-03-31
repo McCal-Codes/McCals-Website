@@ -65,10 +65,9 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
 
   // Reset scroll when group changes
   useEffect(() => {
-    if (isOpen) {
-      galleryRef.current?.scrollTo({ top: 0 });
-      hintRef.current?.classList.remove('pf-lightbox__hint--hidden');
-    }
+    if (!isOpen) return;
+    galleryRef.current?.scrollTo({ top: 0 });
+    hintRef.current?.classList.remove('pf-lightbox__hint--hidden');
   }, [group, isOpen]);
 
   if (!group) return null;
