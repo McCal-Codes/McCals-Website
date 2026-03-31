@@ -91,3 +91,5 @@ playwright/.cache/
 
 # Test preview files (tracked in tests/previews/)
 tests/previews/*.html
+
+.vercel
