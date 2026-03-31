@@ -2,7 +2,7 @@ import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PortfolioFilters from '@/components/portfolio/PortfolioFilters';
 import PortfolioGrid from '@/components/portfolio/PortfolioGrid';
-import { useManifest, getImageUrl } from '@/components/portfolio/useManifest';
+import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import '@/components/portfolio/portfolio.css';
 
@@ -25,9 +25,9 @@ interface ConcertManifest {
 function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
   return manifest.items.map((item) => {
     const images = item.images.map((img) => ({
-      url: getImageUrl(img.path),
+      url: imageUrl.concert(item.folderPath ?? item.title, img.filename),
       filename: img.filename,
-      alt: `${item.title} — concert photo`,
+      alt: `${item.title}  concert photo`,
     }));
     return {
       id: item.folderPath
@@ -108,7 +108,7 @@ export default function ConcertsPage() {
 
         {status === 'success' && (
           <>
-            <PortfolioFilters filters={filters} active={activeFilter} onChange={setActiveFilter} />
+            <PortfolioFilters filters={filters.filter((f): f is string => typeof f === 'string')} active={activeFilter} onChange={setActiveFilter} />
             <PortfolioGrid groups={filtered} />
           </>
         )}
