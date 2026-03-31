@@ -2,7 +2,7 @@ import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PortfolioFilters from '@/components/portfolio/PortfolioFilters';
 import PortfolioGrid from '@/components/portfolio/PortfolioGrid';
-import { useManifest, getImageUrl } from '@/components/portfolio/useManifest';
+import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { useMemo, useState } from 'react';
 import '@/components/portfolio/portfolio.css';
@@ -23,11 +23,12 @@ interface EventsManifest {
   items: EventItem[];
 }
 
+
 function adaptEvents(manifest: EventsManifest): PortfolioGroup[] {
   return manifest.items.map((item) => {
     const name = item.title ?? item.eventName;
     const images = item.images.map((img, i) => ({
-      url: getImageUrl(img.path),
+      url: imageUrl.event(img.path),
       filename: img.path.split('/').pop() ?? `image-${i}`,
       alt: `${name} — event photo`,
     }));
