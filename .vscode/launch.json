@@ -15,7 +15,7 @@
             "name": "Vercel: Open Site in Edge",
             "type": "msedge",
             "request": "launch",
-            "url": "http://localhost:3000",
+            "url": "http://[::1]:3000",
             "webRoot": "${workspaceFolder}/sites/mcc-cal-vite/src",
             "preLaunchTask": "Vercel: Dev Server (mcc-cal-vite)"
         }
