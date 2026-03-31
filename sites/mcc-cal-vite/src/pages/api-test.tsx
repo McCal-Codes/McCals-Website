@@ -35,7 +35,7 @@ export default function APITestPage() {
   const [running, setRunning] = useState(false);
 
   const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
-  const BLOG_BASE = `${window.location.origin}/content/blog`;
+  const BLOG_BASE = `${window.location.origin}/content/blog-static`;
 
   async function runTests() {
     setRunning(true);
@@ -424,7 +424,7 @@ export default function APITestPage() {
         <ul>
           <li>This page tests the Cloudflare Worker API endpoints</li>
           <li>CORS is configured to allow dev.mcc-cal.com</li>
-          <li>Blog content is served statically from <code>/content/blog</code></li>
+          <li>Blog content is served statically from <code>/content/blog-static</code></li>
           <li>Rate limiting is set to 100 requests per minute</li>
           <li>All manifest requests are cached for 10 minutes (stale-while-revalidate for 1 hour)</li>
         </ul>

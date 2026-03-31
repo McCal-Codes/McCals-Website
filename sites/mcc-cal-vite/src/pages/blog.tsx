@@ -4,7 +4,7 @@ import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import '@/styles/blog.css';
 
-const BLOG_BASE = '/content/blog';
+const BLOG_BASE = '/content/blog-static';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const DEFAULT_AUTHOR_ID = 'mccal';
 

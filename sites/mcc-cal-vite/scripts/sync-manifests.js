@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'images', 'Portfolios');
 const DEST = path.resolve(__dirname, '..', 'api', 'manifests', 'data');
 const BLOG_SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'content', 'blog');
-const BLOG_DEST = path.resolve(__dirname, '..', 'public', 'content', 'blog');
+const BLOG_DEST = path.resolve(__dirname, '..', 'public-vite', 'content', 'blog-static');
 const BLOG_COMPILE_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'compile-post-sources.js');
 const BLOG_VALIDATE_SCRIPT = path.resolve(
   __dirname,
@@ -57,8 +57,8 @@ if (!fs.existsSync(BLOG_SRC)) {
   runNodeScript(BLOG_MANIFEST_SCRIPT, ['--skip-notify']);
   runNodeScript(BLOG_FEED_SCRIPT);
 
-  fs.rmSync(BLOG_DEST, { recursive: true, force: true });
   fs.mkdirSync(path.dirname(BLOG_DEST), { recursive: true });
-  fs.cpSync(BLOG_SRC, BLOG_DEST, { recursive: true });
-  console.log('Synced: content/blog');
+  fs.mkdirSync(BLOG_DEST, { recursive: true });
+  fs.cpSync(BLOG_SRC, BLOG_DEST, { recursive: true, force: true });
+  console.log('Synced: content/blog-static');
 }

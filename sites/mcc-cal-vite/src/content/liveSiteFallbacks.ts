@@ -156,6 +156,16 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaText: 'View Portraits',
     ctaLink: '/portraits',
   },
+  {
+    image:
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg',
+    alt: 'A quiet natural landscape photographed in soft light.',
+    eyebrow: 'Nature',
+    title: 'Nature',
+    summary: 'Landscapes, wildlife, and quiet studies from the field.',
+    ctaText: 'View Nature',
+    ctaLink: '/nature',
+  },
 ];
 
 function normalizeFeaturedKey(value?: string): string {

@@ -1,13 +1,13 @@
 /**
  * Shared data client for the Vite site.
- * Portfolio manifests come from the API; blog content comes from /content/blog.
+ * Portfolio manifests come from the API; blog content comes from /content/blog-static.
  */
 
 import { getLiveSiteFeaturedFallback } from '@/content/liveSiteFallbacks';
 import type { HomeFeaturedItem } from '@/content/liveSiteFallbacks';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
-const BLOG_BASE = '/content/blog';
+const BLOG_BASE = '/content/blog-static';
 const DEFAULT_AUTHOR_ID = 'mccal';
 
 export interface Manifest {
