@@ -6,8 +6,8 @@ date: "2024-08-21"
 category: "Thesis"
 excerpt: "A poem about trauma, myth, and the way the body carries what language struggles to name."
 leadImage: "images/lead.jpg"
-leadImageAlt: "Seen through the side window of a turquoise vintage truck, a woman sits behind the steering wheel and looks ahead pensively."
-leadImageCaption: "Seen through the side window of a turquoise vintage truck, a woman sits behind the wheel and looks ahead pensively at Boyd Station, Ky., June 10, 2025."
+leadImageAlt: "Studio portrait from a commercial mock shoot with Danny Herz."
+leadImageCaption: "Studio portrait from a commercial mock shoot with Danny Herz, Aug. 28, 2024."
 published: true
 tags:
   - Thesis
