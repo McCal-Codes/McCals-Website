@@ -118,8 +118,14 @@ export default function handler(req, res) {
   }
 
   const html = fs.readFileSync(filePath, 'utf-8');
+  const hasExplicitVersion = typeof version === 'string' && version.length > 0;
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+  res.setHeader(
+    'Cache-Control',
+    hasExplicitVersion
+      ? 'public, max-age=31536000, immutable'
+      : 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400'
+  );
   res.setHeader('X-Widget-Name', widget);
   res.setHeader('X-Widget-Version', resolvedVersion);
   res.status(200).send(html);

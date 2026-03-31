@@ -63,7 +63,7 @@ export default function handler(req, res) {
     const content = fs.readFileSync(manifestPath, 'utf-8');
     const manifest = JSON.parse(content);
     res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.status(200).json(manifest);
   } catch (error) {
