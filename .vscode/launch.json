@@ -18,6 +18,21 @@
             "url": "http://[::1]:3000",
             "webRoot": "${workspaceFolder}/sites/mcc-cal-vite/src",
             "preLaunchTask": "Vercel: Dev Server (mcc-cal-vite)"
+        },
+        {
+            "name": "Vite: Dev Server (mcc-cal-vite)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run dev -- --host 127.0.0.1 --port 5173",
+            "cwd": "${workspaceFolder}/sites/mcc-cal-vite"
+        },
+        {
+            "name": "Vite: Open Site in Edge",
+            "type": "msedge",
+            "request": "launch",
+            "url": "http://127.0.0.1:5173",
+            "webRoot": "${workspaceFolder}/sites/mcc-cal-vite/src",
+            "preLaunchTask": "Vite: Dev Server (mcc-cal-vite)"
         }
     ]
 }
