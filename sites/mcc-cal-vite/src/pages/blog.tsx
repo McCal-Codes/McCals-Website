@@ -176,41 +176,63 @@ function StoryMeta({ post, author }: { post: BlogManifestPost; author: BlogAutho
 function StoryCard({
   post,
   author,
-  featured = false,
+  variant,
 }: {
   post: BlogManifestPost;
   author: BlogAuthor;
-  featured?: boolean;
+  variant?: 'lead' | 'sidebar';
 }) {
   const imageUrl = toAssetUrl(post.leadImage);
 
-  if (featured) {
+  if (variant === 'lead') {
     return (
-      <article className="blog-feature">
-        <div className="blog-feature__copy">
-          <p className="blog-kicker">Latest Feature</p>
-          <h2 className="blog-feature__title">
-            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
-          </h2>
-          {post.excerpt && <p className="blog-feature__excerpt">{post.excerpt}</p>}
-          <StoryMeta post={post} author={author} />
-          <Link to={`/blog/${post.slug}`} className="blog-cta">
-            Read the story
-          </Link>
-        </div>
-        <Link to={`/blog/${post.slug}`} className="blog-feature__media" aria-label={`Read ${post.title}`}>
+      <article className="blog-lead">
+        <Link to={`/blog/${post.slug}`} className="blog-lead__image-wrap" aria-label={`Read ${post.title}`}>
           {imageUrl ? (
             <img
               src={imageUrl}
               alt={post.leadImageAlt || post.title}
-              className="blog-feature__image"
+              className="blog-lead__img"
               loading="eager"
               fetchPriority="high"
             />
           ) : (
-            <div className="blog-feature__placeholder" />
+            <div className="blog-card__placeholder" />
           )}
         </Link>
+        {post.category && <p className="blog-kicker">{post.category}</p>}
+        <h2 className="blog-lead__title">
+          <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+        </h2>
+        {post.excerpt && <p className="blog-lead__excerpt">{post.excerpt}</p>}
+        <StoryMeta post={post} author={author} />
+      </article>
+    );
+  }
+
+  if (variant === 'sidebar') {
+    return (
+      <article className="blog-sidebar__item">
+        <Link to={`/blog/${post.slug}`} aria-label={`Read ${post.title}`}>
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={post.leadImageAlt || post.title}
+              className="blog-sidebar__thumb"
+              loading="lazy"
+            />
+          ) : (
+            <div className="blog-sidebar__thumb blog-sidebar__thumb--placeholder" />
+          )}
+        </Link>
+        <div className="blog-sidebar__copy">
+          <h3 className="blog-sidebar__title">
+            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+          </h3>
+          <time className="blog-sidebar__date" dateTime={post.date}>
+            {formatDate(post.date)}
+          </time>
+        </div>
       </article>
     );
   }
@@ -229,8 +251,9 @@ function StoryCard({
         <h3 className="blog-card__title">
           <Link to={`/blog/${post.slug}`}>{post.title}</Link>
         </h3>
-        {post.excerpt && <p className="blog-card__excerpt">{post.excerpt}</p>}
-        <StoryMeta post={post} author={author} />
+        <time className="blog-meta" dateTime={post.date}>
+          {formatDate(post.date)}
+        </time>
       </div>
     </article>
   );
@@ -357,7 +380,8 @@ export default function BlogPage() {
 
   const posts = manifest?.posts ?? [];
   const leadPost = posts[0];
-  const gridPosts = posts.slice(1);
+  const sidebarPosts = posts.slice(1, 4);
+  const gridPosts = posts.slice(4);
   const manifestPost = slug ? posts.find((entry) => entry.slug === slug) ?? null : null;
   const resolvedPost = post
     ? {
@@ -453,17 +477,6 @@ export default function BlogPage() {
   return (
     <Layout>
       <div className="blog-page">
-        {!slug && (
-          <section className="blog-intro">
-            <p className="blog-kicker">Journal</p>
-            <h1 className="blog-intro__title">Field notes, essays, and photo stories from the work.</h1>
-            <p className="blog-intro__summary">
-              A running archive of reporting, visual narratives, and behind-the-scenes observations from assignments
-              and personal projects.
-            </p>
-          </section>
-        )}
-
         {manifestLoading && <div className="blog-status">Loading stories...</div>}
         {!manifestLoading && manifestError && (
           <div className="blog-message blog-message--error">Failed to load the blog manifest: {manifestError}</div>
@@ -472,20 +485,40 @@ export default function BlogPage() {
         {!manifestLoading && !manifestError && !slug && (
           posts.length > 0 ? (
             <div className="blog-shell">
-              {leadPost && <StoryCard post={leadPost} author={getAuthor(leadPost)} featured />}
+              {/* Masthead */}
+              <header className="blog-masthead">
+                <p className="blog-masthead__kicker">McCal Media &mdash; Photography &amp; Field Reporting</p>
+                <h1 className="blog-masthead__title">Field Notes</h1>
+                <hr className="blog-masthead__rule" />
+              </header>
 
-              {gridPosts.length > 0 && (
-                <section className="blog-grid-section" aria-labelledby="blog-latest-heading">
-                  <div className="blog-grid-section__header">
-                    <h2 id="blog-latest-heading">More Stories</h2>
-                    <p>The latest reporting, essays, and updates from the archive.</p>
-                  </div>
-                    <div className="blog-grid">
-                      {gridPosts.map((entry) => (
-                        <StoryCard key={entry.slug} post={entry} author={getAuthor(entry)} />
+              {/* Lead row */}
+              {leadPost && (
+                <div className="blog-lead-row">
+                  <StoryCard post={leadPost} author={getAuthor(leadPost)} variant="lead" />
+                  {sidebarPosts.length > 0 && (
+                    <aside className="blog-sidebar">
+                      {sidebarPosts.map((entry) => (
+                        <StoryCard key={entry.slug} post={entry} author={getAuthor(entry)} variant="sidebar" />
                       ))}
-                    </div>
-                  </section>
+                    </aside>
+                  )}
+                </div>
+              )}
+
+              {/* More stories grid */}
+              {gridPosts.length > 0 && (
+                <section className="blog-grid-section" aria-labelledby="blog-more-heading">
+                  <div className="blog-grid-section__header">
+                    <h2 id="blog-more-heading">More Stories</h2>
+                    <hr />
+                  </div>
+                  <div className="blog-grid">
+                    {gridPosts.map((entry) => (
+                      <StoryCard key={entry.slug} post={entry} author={getAuthor(entry)} />
+                    ))}
+                  </div>
+                </section>
               )}
             </div>
           ) : (
