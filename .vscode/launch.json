@@ -12,11 +12,11 @@
             "cwd": "${workspaceFolder}"
         },
         {
-            "name": "Vercel: Open Site in Edge",
-            "type": "msedge",
+            "name": "Vercel: Open Site",
+            "type": "node-terminal",
             "request": "launch",
-            "url": "http://[::1]:3000",
-            "webRoot": "${workspaceFolder}/sites/mcc-cal-vite/src",
+            "command": "powershell -NoProfile -Command \"Start-Process 'http://[::1]:3000'\"",
+            "cwd": "${workspaceFolder}",
             "preLaunchTask": "Vercel: Dev Server (mcc-cal-vite)"
         },
         {
@@ -27,11 +27,11 @@
             "cwd": "${workspaceFolder}/sites/mcc-cal-vite"
         },
         {
-            "name": "Vite: Open Site in Edge",
-            "type": "msedge",
+            "name": "Vite: Open Site",
+            "type": "node-terminal",
             "request": "launch",
-            "url": "http://127.0.0.1:5173",
-            "webRoot": "${workspaceFolder}/sites/mcc-cal-vite/src",
+            "command": "powershell -NoProfile -Command \"Start-Process 'http://127.0.0.1:5173'\"",
+            "cwd": "${workspaceFolder}",
             "preLaunchTask": "Vite: Dev Server (mcc-cal-vite)"
         }
     ]
