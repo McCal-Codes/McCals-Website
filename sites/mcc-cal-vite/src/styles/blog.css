@@ -472,7 +472,8 @@
 
 .story__paragraph,
 .story__caption,
-.story__quote p {
+.story__quote p,
+.story__code {
   max-width: 68ch;
 }
 
@@ -519,6 +520,26 @@
   color: rgba(248, 248, 248, 0.92);
 }
 
+.story__code {
+  margin: 4px auto;
+  padding: 20px 24px;
+  border-radius: 22px;
+  border: 1px solid rgba(202, 194, 186, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02)),
+    rgba(12, 12, 12, 0.75);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: clamp(1rem, 1.9vw, 1.08rem);
+  line-height: 1.85;
+  color: rgba(244, 240, 236, 0.94);
+}
+
+.story__code code {
+  font-family: inherit;
+}
+
 .story__related {
   display: grid;
   gap: 24px;
@@ -528,6 +549,98 @@
 
 .story__related .blog-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.story__citations {
+  border: 1px solid rgba(202, 194, 186, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.story__citations-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(202, 194, 186, 0.86);
+}
+
+.story__citations-summary::-webkit-details-marker {
+  display: none;
+}
+
+.story__citations-panel {
+  display: grid;
+  gap: 18px;
+  padding: 0 20px 20px;
+  border-top: 1px solid rgba(202, 194, 186, 0.12);
+}
+
+.story__citations-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding-top: 18px;
+}
+
+.story__citations-intro {
+  margin: 0;
+  color: rgba(232, 232, 232, 0.72);
+  line-height: 1.7;
+}
+
+.story__citations-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(202, 194, 186, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.story__citations-copy:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.story__citations-status {
+  color: rgba(202, 194, 186, 0.74);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.story__citations-status--error {
+  color: #f2b7b7;
+}
+
+.story__citations-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+.story__citations-item p {
+  margin: 0;
+  color: rgba(238, 238, 238, 0.88);
+  line-height: 1.8;
 }
 
 .story__author-card {
@@ -672,8 +785,40 @@ body[data-theme='light'] .story__quote p {
   color: rgba(38, 28, 18, 0.9);
 }
 
+body[data-theme='light'] .story__code {
+  border-color: rgba(90, 67, 47, 0.14);
+  background:
+    linear-gradient(180deg, rgba(90, 67, 47, 0.04), rgba(90, 67, 47, 0.025)),
+    rgba(255, 252, 248, 0.95);
+  color: rgba(38, 28, 18, 0.88);
+}
+
 body[data-theme='light'] .story__related {
   border-top-color: rgba(90, 67, 47, 0.14);
+}
+
+body[data-theme='light'] .story__citations {
+  border-color: rgba(90, 67, 47, 0.14);
+  background: rgba(90, 67, 47, 0.03);
+}
+
+body[data-theme='light'] .story__citations-panel {
+  border-top-color: rgba(90, 67, 47, 0.12);
+}
+
+body[data-theme='light'] .story__citations-summary,
+body[data-theme='light'] .story__citations-status {
+  color: rgba(90, 67, 47, 0.78);
+}
+
+body[data-theme='light'] .story__citations-intro,
+body[data-theme='light'] .story__citations-item p {
+  color: rgba(34, 34, 34, 0.75);
+}
+
+body[data-theme='light'] .story__citations-copy {
+  border-color: rgba(90, 67, 47, 0.14);
+  background: rgba(90, 67, 47, 0.04);
 }
 
 body[data-theme='light'] .story__author-card {

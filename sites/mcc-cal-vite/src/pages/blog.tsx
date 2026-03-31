@@ -54,7 +54,7 @@ interface BlogManifest {
 }
 
 interface BlogTextBlock {
-  type: 'text' | 'quote';
+  type: 'text' | 'quote' | 'code';
   content: string;
 }
 
@@ -69,7 +69,18 @@ type BlogBodyBlock = BlogTextBlock | BlogImageBlock;
 
 interface BlogPostDocument extends BlogManifestPost {
   body: BlogBodyBlock[];
+  sources?: BlogSource[];
   tags?: string[];
+}
+
+interface BlogSource {
+  citation?: string;
+  title?: string;
+  url?: string;
+  publisher?: string;
+  publishedDate?: string;
+  accessedDate?: string;
+  notes?: string;
 }
 
 function formatDate(value: string): string {
@@ -165,6 +176,39 @@ function buildPostJsonLd(post: BlogPostDocument, authorName: string, image?: str
       url: SITE_URL,
     },
   };
+}
+
+function formatCitation(source: BlogSource): string {
+  if (source.citation) return source.citation.trim();
+
+  return [
+    source.title,
+    source.publisher,
+    source.publishedDate ? `Published ${source.publishedDate}` : null,
+    source.accessedDate ? `Accessed ${source.accessedDate}` : null,
+    source.notes,
+    source.url,
+  ]
+    .filter(Boolean)
+    .join('. ');
+}
+
+function copyTextWithFallback(value: string): boolean {
+  const textarea = document.createElement('textarea');
+  textarea.value = value;
+  textarea.setAttribute('readonly', 'true');
+  textarea.style.position = 'fixed';
+  textarea.style.top = '-9999px';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
+
+  try {
+    return document.execCommand('copy');
+  } finally {
+    document.body.removeChild(textarea);
+  }
 }
 
 function SmartImage({
@@ -361,9 +405,90 @@ function StoryBody({ slug, post }: { slug: string; post: BlogPostDocument }) {
           );
         }
 
+        if (block.type === 'code') {
+          return (
+            <pre key={`${block.type}-${index}`} className="story__code">
+              <code>{block.content}</code>
+            </pre>
+          );
+        }
+
         return null;
       })}
     </div>
+  );
+}
+
+function StoryCitations({ sources }: { sources?: BlogSource[] }) {
+  const citations = (sources || []).map(formatCitation).filter(Boolean);
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
+
+  useEffect(() => {
+    if (copyState === 'idle') return;
+
+    const timer = window.setTimeout(() => setCopyState('idle'), 2200);
+    return () => window.clearTimeout(timer);
+  }, [copyState]);
+
+  if (citations.length === 0) return null;
+
+  async function copyCitations() {
+    const citationText = citations.map((citation, index) => `${index + 1}. ${citation}`).join('\n\n');
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(citationText);
+      } else if (!copyTextWithFallback(citationText)) {
+        throw new Error('Clipboard API unavailable');
+      }
+
+      setCopyState('copied');
+    } catch {
+      try {
+        if (!copyTextWithFallback(citationText)) {
+          throw new Error('Copy fallback failed');
+        }
+
+        setCopyState('copied');
+      } catch {
+        setCopyState('error');
+      }
+    }
+  }
+
+  return (
+    <details className="story__citations">
+      <summary className="story__citations-summary">
+        <span>Citations</span>
+        <span>{citations.length}</span>
+      </summary>
+      <div className="story__citations-panel">
+        <div className="story__citations-actions">
+          <p className="story__citations-intro">Expand, copy, or cite directly from the list below.</p>
+          <button type="button" className="story__citations-copy" onClick={copyCitations}>
+            Copy citations
+          </button>
+          {copyState === 'copied' && (
+            <span className="story__citations-status" role="status" aria-live="polite">
+              Copied
+            </span>
+          )}
+          {copyState === 'error' && (
+            <span className="story__citations-status story__citations-status--error" role="status" aria-live="polite">
+              Copy failed
+            </span>
+          )}
+        </div>
+
+        <ol className="story__citations-list">
+          {citations.map((citation, index) => (
+            <li key={`${citation}-${index}`} className="story__citations-item">
+              <p>{citation}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </details>
   );
 }
 
@@ -641,6 +766,7 @@ export default function BlogPage() {
                 )}
 
                 <StoryBody slug={resolvedPost.slug} post={resolvedPost} />
+                <StoryCitations sources={resolvedPost.sources} />
 
                 {(resolvedAuthor.avatar || resolvedAuthor.bio) && (
                   <section className="story__author-card" aria-labelledby="story-author-heading">

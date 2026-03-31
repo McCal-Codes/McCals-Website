@@ -13,6 +13,10 @@ published: true
 tags:
   - Politics
   - Capitalism
+sources:
+  - citation: "Gatto, J. T. (2009). Weapons of mass instruction: A schoolteacher's journey through the dark world of compulsory schooling. New Society Publishers."
+  - citation: "Jameson, F. (1991). Postmodernism, or, the cultural logic of late capitalism. Duke University Press."
+  - citation: "Marx, K. (1844/1978). Economic and philosophic manuscripts of 1844. In R. C. Tucker (Ed.), The Marx-Engels reader (2nd ed., pp. 66-125). W. W. Norton."
 ---
 
 Modernist styles then become stamped with bureaucratic connotation, so that to break with it radically produces some feeling of "relief," even though what replaces it is neither Utopia nor democracy, but simply the private-corporate constructions of the post-welfare-state postmodern (Jameson, 1991, p. 270). I watch that bait-and-switch play out every day: we swap yesterday's concrete welfare-state blocks for glass atria, neon lounges, and gamified dashboards, sigh with relief, and never notice the same old command grid still humming. Walls funnel us, cameras track us; the paint job changed, not the power. Jameson calls this sleight of hand "overdetermination in ambivalence," where the very same form scans as plebeian and bureaucratic at once, leaving us too dizzy to decide whether to cheer or revolt (p. 270).
@@ -24,5 +28,3 @@ That same market logic can also undermine historical trauma and political strugg
 School is where the contradiction first burrows under our skin. The bell-and-row routine, marketed as equal access to knowledge, taught us to shelve curiosity, change tasks on cue, and accept discomfort as usual. Now, the chalkboard is a 3D-printer lab, and the hall pass is a QR code, but the reflex endures: hear the ping, pivot; hit the rubric, crank out the deliverable. By graduation, we brand ourselves "innovators" while fine-tuning the machinery that confines us, mistaking compliance for creativity. Unless we call out this ambivalence, from locker bell to key-card ping, from protest tee to premium streetwear, we will continue to applaud stylish upgrades as a form of freedom. The hierarchy remains firmly in place beneath the surface.
 
 > A society that chants 'be an individual' while engineering ever-finer templates for us to buy, wear, and shred on command.
-
-Citations: Gatto, J. T. (2009). Weapons of mass instruction: A schoolteacher's journey through the dark world of compulsory schooling. New Society Publishers. Jameson, F. (1991). Postmodernism, or, the cultural logic of late capitalism. Duke University Press. Marx, K. (1844/1978). Economic and philosophic manuscripts of 1844. In R. C. Tucker (Ed.), The Marx-Engels reader (2nd ed., pp. 66-125). W. W. Norton.

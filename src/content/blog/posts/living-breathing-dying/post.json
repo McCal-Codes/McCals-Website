@@ -1,0 +1,36 @@
+{
+  "slug": "living-breathing-dying",
+  "title": "Living, Breathing, Dying",
+  "authorId": "mccal",
+  "date": "2024-10-22",
+  "category": "Thesis",
+  "excerpt": "A wilted rose, a closed closet, and the emotional logic of dissociation.",
+  "leadImage": "images/lead.jpg",
+  "leadImageAlt": "A storefront window reads 'A Beautiful Place to Be' with reflections moving across the glass.",
+  "leadImageCaption": "A storefront window reads 'A Beautiful Place to Be' at Boyd Station, Ky., June 10, 2025.",
+  "published": true,
+  "tags": [
+    "Thesis",
+    "Dissociation",
+    "Isolation",
+    "Decay"
+  ],
+  "body": [
+    {
+      "type": "text",
+      "content": "In my thesis, the rose symbolizes how something living can bloom and become vibrant when it is properly cared for. But the rose in these images is wilted and rough. It does not resemble the version of a rose that usually comes to mind. I wanted to use a living thing to stand in for that same emotional destruction, the feeling of forgetting myself and questioning myself until I am practically dead. It can be read from inside that experience."
+    },
+    {
+      "type": "text",
+      "content": "The wilted flower on my carpet is starving for water and potential, yet never granted the benefit of life. It sits in harsh light, expected to go nowhere, and nowhere will it go."
+    },
+    {
+      "type": "text",
+      "content": "In isolation, one can feel invisible, worse than nobody, as if even the possibility of existence has been hollowed out. That absence is what the empty shirt and pants point toward: the hollowness I was left with when I no longer had myself inside that pit of dissociation. There is darkness, always, and a closed sense of hope. I had less reason to push myself even though there was no movement regardless, worse than a treadmill, and I was far less forgiving."
+    },
+    {
+      "type": "text",
+      "content": "The light and the closet share a sense of permanence and exclusion. A person can be controlled by modifying the source; that closed door obscures the light, and fear becomes its own form of control. The truth always felt like it was only a cracked door away, yet still shrouded in looming darkness."
+    }
+  ]
+}

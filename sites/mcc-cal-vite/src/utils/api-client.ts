@@ -109,14 +109,24 @@ export interface BlogPostSummary extends BlogManifestPost {
   author: BlogAuthor;
 }
 
+export interface BlogSource {
+  citation?: string;
+  title?: string;
+  url?: string;
+  publisher?: string;
+  publishedDate?: string;
+  accessedDate?: string;
+  notes?: string;
+}
+
 export interface BlogPostDocument extends BlogManifestPost {
   body: ContentBlock[];
-  sources?: unknown[];
+  sources?: BlogSource[];
 }
 
 export interface BlogPost extends BlogPostSummary {
   body: ContentBlock[];
-  sources?: unknown[];
+  sources?: BlogSource[];
 }
 
 export interface FeaturedManifestItemDate {
