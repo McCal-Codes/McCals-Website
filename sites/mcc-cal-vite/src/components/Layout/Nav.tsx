@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const Nav: React.FC = () => {
   const { pathname } = useLocation();
   const navRef = useRef<HTMLElement>(null);
-  const isHome = pathname === '/';
   const [menuOpen, setMenuOpen] = useState(false);
   const [workSubmenuOpen, setWorkSubmenuOpen] = useState(false);
   const [projectsSubmenuOpen, setProjectsSubmenuOpen] = useState(false);
@@ -78,10 +77,9 @@ const Nav: React.FC = () => {
     <div className="mcc-nav-shell" role="group" aria-label="Global navigation">
       <nav
         ref={navRef}
-        className={`mcc-nav ${isHome ? 'is-home' : ''} ${isScrolled ? 'is-scrolled' : ''} ${menuOpen ? 'mcc-nav--menu-open' : ''}`}
+        className={`mcc-nav ${isScrolled ? 'is-scrolled' : ''} ${menuOpen ? 'mcc-nav--menu-open' : ''}`}
         aria-label="Primary navigation"
       >
-        <div className="mcc-nav__inner">
           <div className="mcc-nav__brand">
             <Link to="/">Caleb McCartney</Link>
           </div>
@@ -211,7 +209,6 @@ const Nav: React.FC = () => {
               </li>
             </ul>
           </div>
-        </div>
       </nav>
     </div>
   );
