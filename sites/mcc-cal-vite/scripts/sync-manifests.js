@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'images', 'Portfolios');
 const DEST = path.resolve(__dirname, '..', 'api', 'manifests', 'data');
+const PUBLIC_DEST = path.resolve(__dirname, '..', 'public-vite', 'manifests');
 const BLOG_SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'content', 'blog');
 const BLOG_DEST = path.resolve(__dirname, '..', 'public-vite', 'content', 'blog-static');
 const BLOG_COMPILE_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'compile-post-sources.js');
@@ -34,6 +35,7 @@ const FILES = [
 ];
 
 fs.mkdirSync(DEST, { recursive: true });
+fs.mkdirSync(PUBLIC_DEST, { recursive: true });
 
 function runNodeScript(scriptPath, args = []) {
   execFileSync(process.execPath, [scriptPath, ...args], { stdio: 'inherit' });
@@ -41,12 +43,16 @@ function runNodeScript(scriptPath, args = []) {
 
 for (const [src, dest] of FILES) {
   const srcPath = path.join(SRC, src);
-  const destPath = path.join(DEST, dest);
   if (!fs.existsSync(srcPath)) {
     console.warn(`Warning: manifest not found: ${srcPath}`);
     continue;
   }
-  fs.copyFileSync(srcPath, destPath);
+
+  for (const targetDir of [DEST, PUBLIC_DEST]) {
+    const destPath = path.join(targetDir, dest);
+    fs.copyFileSync(srcPath, destPath);
+  }
+
   console.log(`Synced: ${dest}`);
 }
 
