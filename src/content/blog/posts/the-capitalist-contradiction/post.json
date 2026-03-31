@@ -14,6 +14,17 @@
     "Politics",
     "Capitalism"
   ],
+  "sources": [
+    {
+      "citation": "Gatto, J. T. (2009). Weapons of mass instruction: A schoolteacher's journey through the dark world of compulsory schooling. New Society Publishers."
+    },
+    {
+      "citation": "Jameson, F. (1991). Postmodernism, or, the cultural logic of late capitalism. Duke University Press."
+    },
+    {
+      "citation": "Marx, K. (1844/1978). Economic and philosophic manuscripts of 1844. In R. C. Tucker (Ed.), The Marx-Engels reader (2nd ed., pp. 66-125). W. W. Norton."
+    }
+  ],
   "body": [
     {
       "type": "text",
@@ -34,10 +45,6 @@
     {
       "type": "quote",
       "content": "A society that chants 'be an individual' while engineering ever-finer templates for us to buy, wear, and shred on command."
-    },
-    {
-      "type": "text",
-      "content": "Citations: Gatto, J. T. (2009). Weapons of mass instruction: A schoolteacher's journey through the dark world of compulsory schooling. New Society Publishers. Jameson, F. (1991). Postmodernism, or, the cultural logic of late capitalism. Duke University Press. Marx, K. (1844/1978). Economic and philosophic manuscripts of 1844. In R. C. Tucker (Ed.), The Marx-Engels reader (2nd ed., pp. 66-125). W. W. Norton."
     }
   ]
 }

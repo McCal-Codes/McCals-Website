@@ -79,6 +79,7 @@ function normalizeBlock(block) {
 
 function normalizeSource(source) {
   return {
+    ...(normalizeText(source?.citation) ? { citation: source.citation.trim() } : {}),
     ...(normalizeText(source?.title) ? { title: source.title.trim() } : {}),
     ...(normalizeText(source?.url) ? { url: source.url.trim() } : {}),
     ...(normalizeText(source?.publisher) ? { publisher: source.publisher.trim() } : {}),
@@ -157,8 +158,11 @@ function validateSources(post, errors, warnings, strict) {
 
   post.sources.forEach((source, index) => {
     const prefix = `sources[${index}]`;
+    const hasCitation = isNonEmptyString(source?.citation);
+    const hasTitle = isNonEmptyString(source?.title);
+    const hasUrl = isNonEmptyString(source?.url);
 
-    if (!isNonEmptyString(source?.title)) {
+    if (!hasCitation && !hasTitle) {
       const message = `${prefix}.title is required`;
       if (strict) {
         errors.push(message);
@@ -167,7 +171,7 @@ function validateSources(post, errors, warnings, strict) {
       }
     }
 
-    if (!isNonEmptyString(source?.url)) {
+    if (!hasCitation && !hasUrl) {
       const message = `${prefix}.url is required`;
       if (strict) {
         errors.push(message);
