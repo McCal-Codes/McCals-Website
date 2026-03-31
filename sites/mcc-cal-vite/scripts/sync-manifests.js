@@ -21,6 +21,7 @@ const BLOG_VALIDATE_SCRIPT = path.resolve(
 );
 const BLOG_MANIFEST_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'manifest', 'generate-blog-manifest.js');
 const BLOG_FEED_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'generate-blog-feed.js');
+const SITEMAP_SCRIPT = path.resolve(__dirname, 'generate-sitemap.js');
 
 const FILES = [
   ['Concert/concert-manifest.json', 'concert-manifest.json'],
@@ -56,6 +57,7 @@ if (!fs.existsSync(BLOG_SRC)) {
   runNodeScript(BLOG_VALIDATE_SCRIPT);
   runNodeScript(BLOG_MANIFEST_SCRIPT, ['--skip-notify']);
   runNodeScript(BLOG_FEED_SCRIPT);
+  runNodeScript(SITEMAP_SCRIPT);
 
   fs.mkdirSync(path.dirname(BLOG_DEST), { recursive: true });
   fs.mkdirSync(BLOG_DEST, { recursive: true });
