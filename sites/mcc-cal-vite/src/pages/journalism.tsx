@@ -1,16 +1,30 @@
 import Layout from '@/components/Layout/Layout';
-import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
-import { getWidgetConfig } from '@/utils/widgetConfig';
+import JournalismPortfolio from '@/components/portfolios/JournalismPortfolio';
+import { usePageMeta } from '@/hooks/usePageMeta';
 
-const JournalismPage = () => {
-  const config = getWidgetConfig('journalism');
-  if (!config) return <div>Widget not found</div>;
+const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+
+export default function JournalismPage() {
+  usePageMeta({
+    title: 'Photojournalism | Caleb McCartney',
+    description:
+      'Photojournalism and editorial photography by Pittsburgh-based photographer Caleb McCartney. Published work in news, sports, and community coverage.',
+    canonical: `${SITE_URL}/journalism`,
+    og: {
+      type: 'website',
+      title: 'Photojournalism | Caleb McCartney',
+      description: 'Editorial and news photography by Pittsburgh photojournalist Caleb McCartney.',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Photojournalism | Caleb McCartney',
+      description: 'Editorial and news photography by Pittsburgh photojournalist Caleb McCartney.',
+    },
+  });
 
   return (
     <Layout>
-      <WidgetEmbed widget={config.widget} category={config.category} />
+      <JournalismPortfolio />
     </Layout>
   );
-};
-
-export default JournalismPage;
+}

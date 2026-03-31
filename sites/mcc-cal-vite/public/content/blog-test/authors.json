@@ -1,0 +1,17 @@
+{
+  "authors": [
+    {
+      "id": "mccal",
+      "name": "Caleb McCartney",
+      "avatar": "https://github.com/mccal.png",
+      "bio": "Photographer, visual storyteller, and writer documenting culture, community, and the people shaping them.",
+      "sourceDoc": {
+        "publishedUrl": "https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/pub"
+      }
+    },
+    {
+      "id": "ladybrain",
+      "name": "Divine Eyth"
+    }
+  ]
+}

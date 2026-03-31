@@ -1,212 +1,821 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Layout from '@/components/Layout/Layout';
+import { usePageMeta } from '@/hooks/usePageMeta';
+import '@/styles/blog.css';
 
-interface BlogPostImage {
+const BLOG_BASE = '/content/blog-static';
+const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const DEFAULT_AUTHOR_ID = 'mccal';
+
+interface BlogAuthor {
+  id: string;
+  name: string;
+  avatar?: string;
+  bio?: string;
+  headline?: string;
+  location?: string;
+  links?: {
+    label: string;
+    href: string;
+  }[];
+}
+
+interface BlogAuthorsFile {
+  authors: BlogAuthor[];
+}
+
+const FALLBACK_AUTHOR: BlogAuthor = {
+  id: DEFAULT_AUTHOR_ID,
+  name: 'Caleb McCartney',
+};
+
+interface BlogManifestPost {
+  slug: string;
+  title: string;
+  authorId?: string;
+  authorName?: string | null;
+  date: string;
+  category?: string;
+  excerpt?: string;
+  leadImage?: string | null;
+  leadImageFallback?: string | null;
+  leadImageAlt?: string;
+  leadImageCaption?: string;
+  published?: boolean;
+  readingTime?: number;
+}
+
+interface BlogManifest {
+  version: string;
+  generated: string;
+  total: number;
+  posts: BlogManifestPost[];
+}
+
+interface BlogTextBlock {
+  type: 'text' | 'quote' | 'code';
+  content: string;
+}
+
+interface BlogImageBlock {
+  type: 'image';
   src: string;
-  alt: string;
+  alt?: string;
   caption?: string;
 }
 
-interface BlogPost {
-  title: string;
-  author: string;
-  date: string;
-  excerpt: string;
-  body: string[];
-  images?: BlogPostImage[];
+type BlogBodyBlock = BlogTextBlock | BlogImageBlock;
+
+interface BlogPostDocument extends BlogManifestPost {
+  body: BlogBodyBlock[];
+  sources?: BlogSource[];
+  tags?: string[];
 }
 
-const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
-
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr;
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+interface BlogSource {
+  citation?: string;
+  title?: string;
+  url?: string;
+  publisher?: string;
+  publishedDate?: string;
+  accessedDate?: string;
+  notes?: string;
 }
 
-function PostCard({ post, onClick }: { post: BlogPost; onClick: () => void }) {
-  return (
-    <article className="blog-card" onClick={onClick}>
-      {post.images && post.images.length > 0 && (
-        <div className="blog-card__image-wrap">
-          <img src={post.images[0].src} alt={post.images[0].alt} className="blog-card__image" loading="lazy" />
-        </div>
-      )}
-      <div className="blog-card__body">
-        <h2 className="blog-card__title">{post.title}</h2>
-        <div className="blog-card__meta">
-          <span className="blog-card__author">{post.author}</span>
-          <time className="blog-card__date" dateTime={post.date}>{formatDate(post.date)}</time>
-        </div>
-        <p className="blog-card__excerpt">{post.excerpt}</p>
-        <span className="blog-card__read-more">Read more &rarr;</span>
-      </div>
-    </article>
-  );
+function formatDate(value: string): string {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return value;
+
+  return parsed.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 }
 
-function PostDetail({ post, onBack }: { post: BlogPost; onBack: () => void }) {
-  return (
-    <article className="blog-post">
-      <button className="blog-post__back" onClick={onBack}>&larr; All Posts</button>
-      <header className="blog-post__header">
-        <h1 className="blog-post__title">{post.title}</h1>
-        <div className="blog-post__meta">
-          <span className="blog-post__author">{post.author}</span>
-          <time className="blog-post__date" dateTime={post.date}>{formatDate(post.date)}</time>
-        </div>
-      </header>
-      {post.excerpt && <p className="blog-post__excerpt">{post.excerpt}</p>}
-      <div className="blog-post__content">
-        {post.body.map((paragraph, i) => (
-          <p key={i} className="blog-post__paragraph">{paragraph}</p>
-        ))}
-      </div>
-      {post.images && post.images.length > 1 && (
-        <div className="blog-post__gallery">
-          {post.images.map((img, i) => (
-            <figure key={i} className="blog-post__figure">
-              <img src={img.src} alt={img.alt} className="blog-post__figure-img" loading="lazy" />
-              {img.caption && <figcaption className="blog-post__caption">{img.caption}</figcaption>}
-            </figure>
-          ))}
-        </div>
-      )}
-      <button className="blog-post__back blog-post__back--bottom" onClick={onBack}>&larr; All Posts</button>
-    </article>
-  );
+function readingTimeLabel(minutes?: number): string | null {
+  if (!minutes || minutes <= 0) return null;
+  return `${minutes} min read`;
 }
 
-const BlogPage = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selected, setSelected] = useState<BlogPost | null>(null);
+function toAssetUrl(assetPath?: string | null): string | null {
+  if (!assetPath) return null;
+  if (/^https?:\/\//i.test(assetPath) || assetPath.startsWith('/')) return assetPath;
+  return `${BLOG_BASE}/${assetPath.replace(/^\.?\//, '')}`;
+}
+
+function toPostAssetUrl(slug: string, assetPath?: string | null): string | null {
+  if (!assetPath) return null;
+  if (/^https?:\/\//i.test(assetPath) || assetPath.startsWith('/')) return assetPath;
+  if (assetPath.startsWith(`posts/${slug}/`)) return `${BLOG_BASE}/${assetPath}`;
+  return `${BLOG_BASE}/posts/${slug}/${assetPath.replace(/^\.?\//, '')}`;
+}
+
+function toAbsoluteUrl(assetPath?: string | null): string | undefined {
+  if (!assetPath) return undefined;
+  if (/^https?:\/\//i.test(assetPath)) return assetPath;
+  return `${SITE_URL}${assetPath.startsWith('/') ? assetPath : `/${assetPath}`}`;
+}
+
+async function fetchJson<T>(url: string): Promise<T> {
+  const response = await fetch(url, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+  return response.json() as Promise<T>;
+}
+
+function buildIndexJsonLd(posts: BlogManifestPost[], getAuthor: (post: BlogManifestPost) => BlogAuthor) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'McCal Media Blog',
+    description: 'Field notes, visual essays, and reporting from McCal Media.',
+    url: `${SITE_URL}/blog`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'McCal Media',
+      url: SITE_URL,
+    },
+    blogPost: posts.slice(0, 8).map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      url: `${SITE_URL}/blog/${post.slug}`,
+      image: toAbsoluteUrl(toAssetUrl(post.leadImage || post.leadImageFallback)),
+      author: {
+        '@type': 'Person',
+        name: getAuthor(post).name,
+      },
+    })),
+  };
+}
+
+function buildPostJsonLd(post: BlogPostDocument, authorName: string, image?: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    articleSection: post.category,
+    keywords: post.tags?.join(', '),
+    url: `${SITE_URL}/blog/${post.slug}`,
+    image,
+    author: {
+      '@type': 'Person',
+      name: authorName,
+      url: `${SITE_URL}/about`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'McCal Media',
+      url: SITE_URL,
+    },
+  };
+}
+
+function formatCitation(source: BlogSource): string {
+  if (source.citation) return source.citation.trim();
+
+  return [
+    source.title,
+    source.publisher,
+    source.publishedDate ? `Published ${source.publishedDate}` : null,
+    source.accessedDate ? `Accessed ${source.accessedDate}` : null,
+    source.notes,
+    source.url,
+  ]
+    .filter(Boolean)
+    .join('. ');
+}
+
+function copyTextWithFallback(value: string): boolean {
+  const textarea = document.createElement('textarea');
+  textarea.value = value;
+  textarea.setAttribute('readonly', 'true');
+  textarea.style.position = 'fixed';
+  textarea.style.top = '-9999px';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
+
+  try {
+    return document.execCommand('copy');
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+
+function SmartImage({
+  src,
+  fallbackSrc,
+  alt,
+  className,
+  loading,
+  fetchPriority,
+  placeholderClassName,
+}: {
+  src?: string | null;
+  fallbackSrc?: string | null;
+  alt: string;
+  className?: string;
+  loading?: 'eager' | 'lazy';
+  fetchPriority?: 'high' | 'low' | 'auto';
+  placeholderClassName?: string;
+}) {
+  const [currentSrc, setCurrentSrc] = useState<string | null>(src || null);
+  const [usedFallback, setUsedFallback] = useState(false);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/v1/blog/posts`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-        return res.json();
+    setCurrentSrc(src || null);
+    setUsedFallback(false);
+  }, [src, fallbackSrc]);
+
+  if (!currentSrc) {
+    return placeholderClassName ? <div className={placeholderClassName} /> : null;
+  }
+
+  return (
+    <img
+      src={currentSrc}
+      alt={alt}
+      className={className}
+      loading={loading}
+      fetchPriority={fetchPriority}
+      onError={() => {
+        if (!usedFallback && fallbackSrc && fallbackSrc !== currentSrc) {
+          setCurrentSrc(fallbackSrc);
+          setUsedFallback(true);
+          return;
+        }
+
+        setCurrentSrc(null);
+      }}
+    />
+  );
+}
+
+function StoryMeta({ post, author }: { post: BlogManifestPost; author: BlogAuthor }) {
+  const readTime = readingTimeLabel(post.readingTime);
+
+  return (
+    <div className="blog-meta" aria-label="Story metadata">
+      <Link to={`/authors/${author.id}`} className="blog-meta__author">
+        {author.name}
+      </Link>
+      <time dateTime={post.date}>{formatDate(post.date)}</time>
+      {readTime && <span>{readTime}</span>}
+      {post.category && <span>{post.category}</span>}
+    </div>
+  );
+}
+
+function StoryCard({
+  post,
+  author,
+  variant,
+}: {
+  post: BlogManifestPost;
+  author: BlogAuthor;
+  variant?: 'lead' | 'sidebar';
+}) {
+  const imageUrl = toAssetUrl(post.leadImage);
+  const fallbackImageUrl = toAssetUrl(post.leadImageFallback);
+  const resolvedImageUrl = imageUrl || fallbackImageUrl;
+
+  if (variant === 'lead') {
+    return (
+      <article className="blog-lead">
+        <Link to={`/blog/${post.slug}`} className="blog-lead__image-wrap" aria-label={`Read ${post.title}`}>
+          {resolvedImageUrl ? (
+            <SmartImage
+              src={resolvedImageUrl}
+              fallbackSrc={fallbackImageUrl}
+              alt={post.leadImageAlt || post.title}
+              className="blog-lead__img"
+              loading="eager"
+              fetchPriority="high"
+              placeholderClassName="blog-card__placeholder"
+            />
+          ) : (
+            <div className="blog-card__placeholder" />
+          )}
+        </Link>
+        {post.category && <p className="blog-kicker">{post.category}</p>}
+        <h2 className="blog-lead__title">
+          <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+        </h2>
+        {post.excerpt && <p className="blog-lead__excerpt">{post.excerpt}</p>}
+        <StoryMeta post={post} author={author} />
+      </article>
+    );
+  }
+
+  if (variant === 'sidebar') {
+    return (
+      <article className="blog-sidebar__item">
+        <Link to={`/blog/${post.slug}`} aria-label={`Read ${post.title}`}>
+          {resolvedImageUrl ? (
+            <SmartImage
+              src={resolvedImageUrl}
+              fallbackSrc={fallbackImageUrl}
+              alt={post.leadImageAlt || post.title}
+              className="blog-sidebar__thumb"
+              loading="lazy"
+              placeholderClassName="blog-sidebar__thumb blog-sidebar__thumb--placeholder"
+            />
+          ) : (
+            <div className="blog-sidebar__thumb blog-sidebar__thumb--placeholder" />
+          )}
+        </Link>
+        <div className="blog-sidebar__copy">
+          <h3 className="blog-sidebar__title">
+            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+          </h3>
+          <time className="blog-sidebar__date" dateTime={post.date}>
+            {formatDate(post.date)}
+          </time>
+        </div>
+      </article>
+    );
+  }
+
+  return (
+    <article className="blog-card">
+      <Link to={`/blog/${post.slug}`} className="blog-card__media" aria-label={`Read ${post.title}`}>
+        {resolvedImageUrl ? (
+          <SmartImage
+            src={resolvedImageUrl}
+            fallbackSrc={fallbackImageUrl}
+            alt={post.leadImageAlt || post.title}
+            className="blog-card__image"
+            loading="lazy"
+            placeholderClassName="blog-card__placeholder"
+          />
+        ) : (
+          <div className="blog-card__placeholder" />
+        )}
+      </Link>
+      <div className="blog-card__body">
+        {post.category && <p className="blog-card__eyebrow">{post.category}</p>}
+        <h3 className="blog-card__title">
+          <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+        </h3>
+        <time className="blog-meta" dateTime={post.date}>
+          {formatDate(post.date)}
+        </time>
+      </div>
+    </article>
+  );
+}
+
+function StoryBody({ slug, post }: { slug: string; post: BlogPostDocument }) {
+  return (
+    <div className="story__body">
+      {post.body.map((block, index) => {
+        if (block.type === 'text') {
+          return (
+            <p key={`${block.type}-${index}`} className="story__paragraph">
+              {block.content}
+            </p>
+          );
+        }
+
+        if (block.type === 'quote') {
+          return (
+            <blockquote key={`${block.type}-${index}`} className="story__quote">
+              <p>{block.content}</p>
+            </blockquote>
+          );
+        }
+
+        if (block.type === 'image') {
+          const imageUrl = toPostAssetUrl(slug, block.src);
+
+          return (
+            <figure key={`${block.type}-${index}`} className="story__media">
+              {imageUrl && <img src={imageUrl} alt={block.alt || ''} loading="lazy" className="story__media-image" />}
+              {block.caption && <figcaption className="story__caption">{block.caption}</figcaption>}
+            </figure>
+          );
+        }
+
+        if (block.type === 'code') {
+          return (
+            <pre key={`${block.type}-${index}`} className="story__code">
+              <code>{block.content}</code>
+            </pre>
+          );
+        }
+
+        return null;
+      })}
+    </div>
+  );
+}
+
+function StoryCitations({ sources }: { sources?: BlogSource[] }) {
+  const citations = (sources || []).map(formatCitation).filter(Boolean);
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
+
+  useEffect(() => {
+    if (copyState === 'idle') return;
+
+    const timer = window.setTimeout(() => setCopyState('idle'), 2200);
+    return () => window.clearTimeout(timer);
+  }, [copyState]);
+
+  if (citations.length === 0) return null;
+
+  async function copyCitations() {
+    const citationText = citations.map((citation, index) => `${index + 1}. ${citation}`).join('\n\n');
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(citationText);
+      } else if (!copyTextWithFallback(citationText)) {
+        throw new Error('Clipboard API unavailable');
+      }
+
+      setCopyState('copied');
+    } catch {
+      try {
+        if (!copyTextWithFallback(citationText)) {
+          throw new Error('Copy fallback failed');
+        }
+
+        setCopyState('copied');
+      } catch {
+        setCopyState('error');
+      }
+    }
+  }
+
+  return (
+    <details className="story__citations">
+      <summary className="story__citations-summary">
+        <span>Citations</span>
+        <span>{citations.length}</span>
+      </summary>
+      <div className="story__citations-panel">
+        <div className="story__citations-actions">
+          <p className="story__citations-intro">Expand, copy, or cite directly from the list below.</p>
+          <button type="button" className="story__citations-copy" onClick={copyCitations}>
+            Copy citations
+          </button>
+          {copyState === 'copied' && (
+            <span className="story__citations-status" role="status" aria-live="polite">
+              Copied
+            </span>
+          )}
+          {copyState === 'error' && (
+            <span className="story__citations-status story__citations-status--error" role="status" aria-live="polite">
+              Copy failed
+            </span>
+          )}
+        </div>
+
+        <ol className="story__citations-list">
+          {citations.map((citation, index) => (
+            <li key={`${citation}-${index}`} className="story__citations-item">
+              <p>{citation}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </details>
+  );
+}
+
+export default function BlogPage() {
+  const { slug } = useParams<{ slug?: string }>();
+  const [manifest, setManifest] = useState<BlogManifest | null>(null);
+  const [authors, setAuthors] = useState<BlogAuthor[]>([]);
+  const [manifestError, setManifestError] = useState<string | null>(null);
+  const [manifestLoading, setManifestLoading] = useState(true);
+  const [post, setPost] = useState<BlogPostDocument | null>(null);
+  const [postError, setPostError] = useState<string | null>(null);
+  const [postLoading, setPostLoading] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [slug]);
+
+  useEffect(() => {
+    let active = true;
+
+    setManifestLoading(true);
+    setManifestError(null);
+
+    fetchJson<BlogManifest>(`${BLOG_BASE}/blog-manifest.json`)
+      .then((data) => {
+        if (!active) return;
+        setManifest(data);
       })
-      .then((data) => setPosts(data.posts || []))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
+      .catch((error: Error) => {
+        if (!active) return;
+        setManifestError(error.message);
+      })
+      .finally(() => {
+        if (!active) return;
+        setManifestLoading(false);
+      });
+
+    fetchJson<BlogAuthorsFile>(`${BLOG_BASE}/authors.json`)
+      .then((data) => {
+        if (!active) return;
+        setAuthors(Array.isArray(data.authors) ? data.authors : []);
+      })
+      .catch(() => {
+        if (!active) return;
+        setAuthors([]);
+      });
+
+    return () => {
+      active = false;
+    };
   }, []);
+
+  useEffect(() => {
+    if (!slug) {
+      setPost(null);
+      setPostError(null);
+      setPostLoading(false);
+      return;
+    }
+
+    let active = true;
+
+    setPostLoading(true);
+    setPostError(null);
+
+    fetchJson<BlogPostDocument>(`${BLOG_BASE}/posts/${slug}/post.json`)
+      .then((data) => {
+        if (!active) return;
+        setPost(data);
+      })
+      .catch((error: Error) => {
+        if (!active) return;
+        setPost(null);
+        setPostError(error.message);
+      })
+      .finally(() => {
+        if (!active) return;
+        setPostLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [slug]);
+
+  const posts = manifest?.posts ?? [];
+  const leadPost = posts[0];
+  const sidebarPosts = posts.slice(1, 4);
+  const gridPosts = posts.slice(4);
+  const manifestPost = slug ? posts.find((entry) => entry.slug === slug) ?? null : null;
+  const resolvedPost = post
+    ? {
+        ...(manifestPost ?? {}),
+        ...post,
+      }
+    : null;
+  const getAuthor = (postLike?: Pick<BlogManifestPost, 'authorId' | 'authorName'> | null): BlogAuthor => {
+    if (!postLike) return FALLBACK_AUTHOR;
+    const id = postLike.authorId || DEFAULT_AUTHOR_ID;
+    const author = authors.find((entry) => entry.id === id);
+    if (author) return author;
+    if (postLike.authorName) {
+      return {
+        ...FALLBACK_AUTHOR,
+        id,
+        name: postLike.authorName,
+      };
+    }
+    return FALLBACK_AUTHOR;
+  };
+
+  const resolvedAuthor = getAuthor(resolvedPost);
+  const leadImage = resolvedPost ? toPostAssetUrl(resolvedPost.slug, resolvedPost.leadImage) : undefined;
+  const leadImageFallback = resolvedPost
+    ? toPostAssetUrl(resolvedPost.slug, resolvedPost.leadImageFallback)
+    : undefined;
+  const absoluteLeadImage = toAbsoluteUrl(leadImage || leadImageFallback);
+  const relatedPosts = resolvedPost ? posts.filter((entry) => entry.slug !== resolvedPost.slug).slice(0, 3) : [];
+  const authorName = resolvedAuthor.name;
+
+  const pageMeta = slug
+    ? resolvedPost
+      ? {
+          title: `${resolvedPost.title} | McCal Media`,
+          description:
+            resolvedPost.excerpt ||
+            'Photojournalism and field reporting from McCal Media.',
+          canonical: `${SITE_URL}/blog/${resolvedPost.slug}`,
+          og: {
+            type: 'article',
+            title: resolvedPost.title,
+            description:
+              resolvedPost.excerpt ||
+              'Photojournalism and field reporting from McCal Media.',
+            image: absoluteLeadImage,
+          },
+          twitter: {
+            card: 'summary_large_image',
+            title: resolvedPost.title,
+            description:
+              resolvedPost.excerpt ||
+              'Photojournalism and field reporting from McCal Media.',
+            image: absoluteLeadImage,
+          },
+          jsonLd: buildPostJsonLd(resolvedPost, authorName, absoluteLeadImage),
+        }
+      : {
+          title: postLoading ? 'Loading Story | McCal Media' : 'Story Not Found | McCal Media',
+          description: 'The requested story could not be loaded.',
+          canonical: `${SITE_URL}/blog/${slug}`,
+          og: {
+            type: 'article',
+            title: 'Story Not Found',
+            description: 'The requested story could not be loaded.',
+            image: toAbsoluteUrl('/brand/abridged-icon.png'),
+          },
+          twitter: {
+            card: 'summary',
+            title: 'Story Not Found',
+            description: 'The requested story could not be loaded.',
+            image: toAbsoluteUrl('/brand/abridged-icon.png'),
+          },
+        }
+    : {
+        title: 'Blog | McCal Media',
+        description: 'Field notes, visual essays, and reporting from McCal Media.',
+        canonical: `${SITE_URL}/blog`,
+        og: {
+          type: 'website',
+          title: 'McCal Media Blog',
+          description: 'Field notes, visual essays, and reporting from McCal Media.',
+          image: toAbsoluteUrl(toAssetUrl(leadPost?.leadImage || leadPost?.leadImageFallback)),
+        },
+        twitter: {
+          card: 'summary_large_image',
+          title: 'McCal Media Blog',
+          description: 'Field notes, visual essays, and reporting from McCal Media.',
+          image: toAbsoluteUrl(toAssetUrl(leadPost?.leadImage || leadPost?.leadImageFallback)),
+        },
+        jsonLd: buildIndexJsonLd(posts, getAuthor),
+      };
+
+  usePageMeta(pageMeta);
 
   return (
     <Layout>
-      <style>{`
-        .blog-page { padding: clamp(40px, 6vw, 80px) 0; }
-        .blog-page__heading {
-          font-size: clamp(1.8rem, 4vw, 2.8rem);
-          font-weight: 700;
-          margin: 0 0 0.4em 0;
-          letter-spacing: -0.02em;
-        }
-        .blog-page__subheading {
-          font-size: 1.05rem;
-          opacity: 0.6;
-          margin: 0 0 3rem 0;
-        }
-        .blog-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-          gap: 2rem;
-        }
-        .blog-card {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.09);
-          border-radius: 12px;
-          overflow: hidden;
-          cursor: pointer;
-          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-        body[data-theme="light"] .blog-card {
-          background: #fff;
-          border-color: rgba(0,0,0,0.08);
-        }
-        .blog-card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-          border-color: rgba(255,255,255,0.18);
-        }
-        body[data-theme="light"] .blog-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.15); }
-        .blog-card__image-wrap { aspect-ratio: 16/9; overflow: hidden; }
-        .blog-card__image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .blog-card:hover .blog-card__image { transform: scale(1.03); }
-        .blog-card__body { padding: 1.4rem 1.5rem 1.6rem; }
-        .blog-card__title { font-size: 1.15rem; font-weight: 600; margin: 0 0 0.5rem 0; line-height: 1.35; }
-        .blog-card__meta { display: flex; gap: 1rem; font-size: 0.8rem; opacity: 0.55; margin-bottom: 0.75rem; flex-wrap: wrap; }
-        .blog-card__excerpt { font-size: 0.9rem; line-height: 1.6; opacity: 0.75; margin: 0 0 1rem 0; }
-        .blog-card__read-more { font-size: 0.85rem; font-weight: 600; opacity: 0.8; letter-spacing: 0.01em; }
-
-        .blog-post { max-width: 720px; padding: clamp(40px, 6vw, 80px) 0; }
-        .blog-post__back {
-          background: none;
-          border: 1px solid rgba(255,255,255,0.15);
-          border-radius: 6px;
-          color: inherit;
-          cursor: pointer;
-          font-size: 0.85rem;
-          padding: 0.45rem 1rem;
-          opacity: 0.7;
-          transition: opacity 0.15s;
-          margin-bottom: 2rem;
-          display: inline-block;
-        }
-        body[data-theme="light"] .blog-post__back { border-color: rgba(0,0,0,0.15); }
-        .blog-post__back:hover { opacity: 1; }
-        .blog-post__back--bottom { margin-top: 3rem; margin-bottom: 0; }
-        .blog-post__header { margin-bottom: 1.5rem; }
-        .blog-post__title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; margin: 0 0 0.6rem 0; line-height: 1.2; letter-spacing: -0.02em; }
-        .blog-post__meta { display: flex; gap: 1rem; font-size: 0.85rem; opacity: 0.55; flex-wrap: wrap; }
-        .blog-post__excerpt {
-          font-size: 1.1rem;
-          font-style: italic;
-          opacity: 0.65;
-          margin: 0 0 2rem 0;
-          padding: 1rem 1.2rem;
-          border-left: 3px solid rgba(255,255,255,0.2);
-        }
-        body[data-theme="light"] .blog-post__excerpt { border-left-color: rgba(0,0,0,0.15); }
-        .blog-post__paragraph { font-size: 1rem; line-height: 1.8; margin: 0 0 1.2rem 0; opacity: 0.85; }
-        .blog-post__gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
-        .blog-post__figure { margin: 0; }
-        .blog-post__figure-img { width: 100%; border-radius: 8px; display: block; }
-        .blog-post__caption { font-size: 0.8rem; opacity: 0.5; margin-top: 0.4rem; text-align: center; }
-
-        .blog-status { padding: 4rem 0; text-align: center; opacity: 0.55; font-size: 0.95rem; }
-        .blog-error { padding: 2rem; background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); border-radius: 8px; color: #f87171; font-size: 0.9rem; }
-      `}</style>
-
       <div className="blog-page">
-        {!selected && (
-          <>
-            <h1 className="blog-page__heading">Blog</h1>
-            <p className="blog-page__subheading">Stories, updates, and field notes.</p>
-          </>
+        {manifestLoading && <div className="blog-status">Loading stories...</div>}
+        {!manifestLoading && manifestError && (
+          <div className="blog-message blog-message--error">Failed to load the blog manifest: {manifestError}</div>
         )}
 
-        {loading && <div className="blog-status">Loading posts&hellip;</div>}
-        {error && <div className="blog-error">Failed to load posts: {error}</div>}
+        {!manifestLoading && !manifestError && !slug && (
+          posts.length > 0 ? (
+            <div className="blog-shell">
+              {/* Masthead */}
+              <header className="blog-masthead">
+                <p className="blog-masthead__kicker">McCal Media &mdash; Photography &amp; Field Reporting</p>
+                <h1 className="blog-masthead__title">Field Notes</h1>
+                <hr className="blog-masthead__rule" />
+              </header>
 
-        {!loading && !error && !selected && (
-          posts.length === 0
-            ? <div className="blog-status">No posts yet — check back soon.</div>
-            : <div className="blog-grid">
-                {posts.map((post, i) => (
-                  <PostCard key={i} post={post} onClick={() => setSelected(post)} />
-                ))}
+              {/* Lead row */}
+              {leadPost && (
+                <div className="blog-lead-row">
+                  <StoryCard post={leadPost} author={getAuthor(leadPost)} variant="lead" />
+                  {sidebarPosts.length > 0 && (
+                    <aside className="blog-sidebar">
+                      {sidebarPosts.map((entry) => (
+                        <StoryCard key={entry.slug} post={entry} author={getAuthor(entry)} variant="sidebar" />
+                      ))}
+                    </aside>
+                  )}
+                </div>
+              )}
+
+              {/* More stories grid */}
+              {gridPosts.length > 0 && (
+                <section className="blog-grid-section" aria-labelledby="blog-more-heading">
+                  <div className="blog-grid-section__header">
+                    <h2 id="blog-more-heading">More Stories</h2>
+                    <hr />
+                  </div>
+                  <div className="blog-grid">
+                    {gridPosts.map((entry) => (
+                      <StoryCard key={entry.slug} post={entry} author={getAuthor(entry)} />
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+          ) : (
+            <div className="blog-message">No stories are published yet.</div>
+          )
+        )}
+
+        {!manifestLoading && !manifestError && slug && (
+          <article className="story">
+            <Link to="/blog" className="story__back">
+              All stories
+            </Link>
+
+            {postLoading && <div className="blog-status">Loading story...</div>}
+
+            {!postLoading && (postError || (!resolvedPost && !postLoading)) && (
+              <div className="blog-message blog-message--error">
+                {postError ? `Failed to load this story: ${postError}` : 'This story could not be found.'}
               </div>
-        )}
+            )}
 
-        {selected && (
-          <PostDetail post={selected} onBack={() => setSelected(null)} />
+            {!postLoading && resolvedPost && (
+              <>
+                <header className="story__header">
+                  {resolvedPost.category && <p className="blog-kicker">{resolvedPost.category}</p>}
+                  <h1 className="story__title">{resolvedPost.title}</h1>
+                  {resolvedPost.excerpt && <p className="story__excerpt">{resolvedPost.excerpt}</p>}
+                  <StoryMeta post={resolvedPost} author={resolvedAuthor} />
+                </header>
+
+                {(leadImage || leadImageFallback) && (
+                  <figure className="story__lead">
+                    <SmartImage
+                      src={leadImage || leadImageFallback}
+                      fallbackSrc={leadImageFallback}
+                      alt={resolvedPost.leadImageAlt || resolvedPost.title}
+                      className="story__lead-image"
+                      loading="eager"
+                      fetchPriority="high"
+                      placeholderClassName="blog-card__placeholder"
+                    />
+                    {resolvedPost.leadImageCaption && (
+                      <figcaption className="story__caption">{resolvedPost.leadImageCaption}</figcaption>
+                    )}
+                  </figure>
+                )}
+
+                <StoryBody slug={resolvedPost.slug} post={resolvedPost} />
+                <StoryCitations sources={resolvedPost.sources} />
+
+                {(resolvedAuthor.avatar || resolvedAuthor.bio) && (
+                  <section className="story__author-card" aria-labelledby="story-author-heading">
+                    {resolvedAuthor.avatar && (
+                      <img
+                        src={resolvedAuthor.avatar}
+                        alt={resolvedAuthor.name}
+                        className="story__author-avatar"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="story__author-copy">
+                      <p className="blog-kicker">Written By</p>
+                      <h2 id="story-author-heading" className="story__author-name">
+                        <Link to={`/authors/${resolvedAuthor.id}`} className="story__author-name-link">
+                          {resolvedAuthor.name}
+                        </Link>
+                      </h2>
+                      {resolvedAuthor.headline && (
+                        <p className="story__author-headline">{resolvedAuthor.headline}</p>
+                      )}
+                      {resolvedAuthor.bio && <p className="story__author-bio">{resolvedAuthor.bio}</p>}
+                      <div className="story__author-actions">
+                        <Link to={`/authors/${resolvedAuthor.id}`} className="story__author-link">
+                          View author page
+                        </Link>
+                      </div>
+                    </div>
+                  </section>
+                )}
+
+                {relatedPosts.length > 0 && (
+                  <section className="story__related" aria-labelledby="related-stories-heading">
+                    <div className="blog-grid-section__header">
+                      <h2 id="related-stories-heading">Continue Reading</h2>
+                      <p>More reporting from the archive.</p>
+                    </div>
+                    <div className="blog-grid">
+                      {relatedPosts.map((entry) => (
+                        <StoryCard key={entry.slug} post={entry} author={getAuthor(entry)} />
+                      ))}
+                    </div>
+                  </section>
+                )}
+              </>
+            )}
+          </article>
         )}
       </div>
     </Layout>
   );
-};
-
-export default BlogPage;
+}

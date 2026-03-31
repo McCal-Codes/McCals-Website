@@ -4,3 +4,9 @@ dist
 .env.local
 .vercel
 api/manifests/data/
+public/content/blog/
+public/content/blog-static/
+public-vite/content/blog-static/
+
+.vercel
+.env*.local

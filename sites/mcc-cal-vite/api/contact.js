@@ -1,14 +1,28 @@
 import { Resend } from 'resend';
+import { applyRateLimit } from './_lib/rate-limit.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'contact@mcc-cal.com';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'noreply@mcc-cal.com';
 const MIN_SUBMIT_DELAY_MS = 2500;
+const CONTACT_RATE_LIMIT = {
+  route: 'contact',
+  limit: 5,
+  windowMs: 15 * 60 * 1000,
+};
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 'no-store, max-age=0');
+
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  const rateLimit = applyRateLimit(req, res, CONTACT_RATE_LIMIT);
+  if (!rateLimit.allowed) {
+    res.status(429).json({ error: 'Too many contact requests. Please try again later.' });
     return;
   }
 

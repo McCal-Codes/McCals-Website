@@ -1,109 +1,367 @@
 import Layout from '@/components/Layout/Layout';
-import '@/styles/about-widget.css';
+import { usePageMeta } from '@/hooks/usePageMeta';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import '@/styles/about.css';
 
-const AboutPage = () => (
-  <Layout>
-    <div className="ss-about-section">
-      {/* Header */}
-      <div className="ss-about-header">
-        <h1>About</h1>
-      </div>
+const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const ABOUT_IMAGE = '/about/caleb-mccartney-photo.jpg';
 
-      {/* Bio Section */}
-      <div className="ss-about-bio">
-        <div className="ss-about-content">
-          {/* Photo */}
-          <div className="ss-about-photo">
-            <img
-              src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
-              alt="Caleb McCartney - Professional Photographer"
-            />
-          </div>
-          {/* Bio Text */}
-          <div className="ss-about-text">
-            <p>
-              Caleb McCartney is a Pittsburgh‑based photojournalist and commercial storyteller who is finishing a BFA in Photography at{' '}
-              <a href="https://pointpark.edu" target="_blank" rel="noopener">Point Park University</a>. After serving as Photo Editor of{' '}
-              <a href="https://ppuglobe.com" target="_blank" rel="noopener">The Globe</a> for several months, he stepped back in March 2025 to devote full focus to his capstone thesis, <strong>"One Nation Divided,"</strong> a visual study of political polarization during the 2024 election cycle.
-            </p>
-            <p>
-              Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage, corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he broadened his skill set by joining Pittsburgh production company{' '}
-              <a href="https://wearecovalent.com/" target="_blank" rel="noopener">Covalent</a> as a Creative Production Intern, collaborating on projects that blend stills, motion, and sound.
-            </p>
-            <p>
-              He also hosts the weekly podcast <a href="/podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
-            </p>
-            <div className="ss-about-buttons">
-              <a href="mailto:contact@mcc-cal.com" className="ss-about-btn ss-about-btn-primary">
-                Get In Touch
-              </a>
+const stats = [
+  { value: '30+', label: 'Happy clients' },
+  { value: '65+', label: 'Projects' },
+  { value: '6+', label: 'Years experience' },
+];
+
+const testimonials = [
+  {
+    source: 'LinkedIn',
+    quote:
+      'Caleb is great to work with, always prompt and professional. His work speaks for itself.',
+    name: 'Logan Spiker',
+    role: 'Former Argo AI, business owner',
+  },
+  {
+    source: 'Google',
+    quote:
+      "Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work.",
+    name: 'Ben Orr',
+    role: 'Concert photography client',
+    rating: '5-star feedback',
+  },
+];
+
+const clientLogos = [
+  { src: '/about/clients/new-york-post-logo.svg', alt: 'New York Post' },
+  { src: '/about/clients/pittsburgh-magazine-logo.svg', alt: 'Pittsburgh Magazine' },
+  { src: '/about/clients/point-park-university-real-logo.jpg', alt: 'Point Park University' },
+  { src: '/about/clients/the-globe-logo.svg', alt: 'The Globe' },
+  { src: '/about/clients/bc3-logo.svg', alt: 'Butler County Community College' },
+  { src: '/about/clients/nppa-logo.svg', alt: 'National Press Photographers Association' },
+  { src: '/about/clients/osh360-logo.png', alt: 'OSH360' },
+  { src: '/about/clients/covalent-logo.png', alt: 'Covalent' },
+  { src: '/about/clients/associated-press-logo.svg', alt: 'Associated Press' },
+  { src: '/about/clients/reuters-logo.svg', alt: 'Reuters' },
+  { src: '/about/clients/carnegie-mellon-university-logo.svg', alt: 'Carnegie Mellon University' },
+  { src: '/about/clients/university-of-pittsburgh-logo.svg', alt: 'University of Pittsburgh' },
+  { src: '/about/clients/penn-state-fayette-logo.svg', alt: 'Penn State Fayette' },
+  { src: '/about/clients/iup-logo.png', alt: 'Indiana University of Pennsylvania' },
+  { src: '/about/clients/wvu-logo.png', alt: 'West Virginia University' },
+  { src: '/about/clients/osu-logo.jpg', alt: 'Ohio State University' },
+  { src: '/about/clients/pennsylvania-news-media-logo.svg', alt: 'Pennsylvania News Media Association' },
+  { src: '/about/clients/next-generation-news-logo.svg', alt: 'Next Generation News' },
+  { src: '/about/clients/pittsburgh-union-progress-logo.svg', alt: 'Pittsburgh Union Progress' },
+  { src: '/about/clients/center-for-media-innovation-logo.svg', alt: 'Center for Media Innovation' },
+  { src: '/about/clients/western-pa-press-club-logo.svg', alt: 'Western PA Press Club' },
+  { src: '/about/clients/jagoff-media-logo.svg', alt: 'Jagoff Media' },
+  { src: '/about/clients/haven-pittsburgh-logo.svg', alt: 'Haven Pittsburgh' },
+  { src: '/about/clients/ghostlight-theatre-company-logo.svg', alt: 'Ghostlight Theatre Company' },
+  { src: '/about/clients/the-space-upstairs-logo.svg', alt: 'The Space Upstairs' },
+  { src: '/about/clients/the-watchful-shepherd-logo.svg', alt: 'The Watchful Shepherd' },
+  { src: '/about/clients/terrible-tailgate-logo.svg', alt: 'Terrible Tailgate' },
+  { src: '/about/clients/upward-consulting-logo.svg', alt: 'Upward Consulting' },
+  { src: '/about/clients/voyage-visuals-logo.svg', alt: 'Voyage Visuals' },
+  { src: '/about/clients/yinzers-meet-logo.svg', alt: 'Yinzers Meet' },
+];
+
+const carouselLogos = [...clientLogos, ...clientLogos, ...clientLogos];
+
+export default function AboutPage() {
+  const [contactMenuOpen, setContactMenuOpen] = useState(false);
+  const [documentsMenuOpen, setDocumentsMenuOpen] = useState(false);
+  const contactMenuRef = useRef<HTMLDivElement>(null);
+  const documentsMenuRef = useRef<HTMLDivElement>(null);
+
+  usePageMeta({
+    title: 'Caleb McCartney | Pittsburgh Photojournalist and Event Photographer',
+    description:
+      'Caleb McCartney is a Pittsburgh-based photojournalist and photographer specializing in concert, corporate, event, and brand storytelling.',
+    canonical: `${SITE_URL}/about`,
+    og: {
+      type: 'profile',
+      title: 'Caleb McCartney | Pittsburgh Photojournalist and Event Photographer',
+      description:
+        'Pittsburgh-based photojournalist and photographer specializing in concerts, events, and brand storytelling.',
+      image: `${SITE_URL}${ABOUT_IMAGE}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Caleb McCartney | Pittsburgh Photojournalist and Event Photographer',
+      description:
+        'Pittsburgh-based photojournalist and photographer specializing in concerts, events, and brand storytelling.',
+      image: `${SITE_URL}${ABOUT_IMAGE}`,
+    },
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Person',
+          name: 'Caleb McCartney',
+          image: `${SITE_URL}${ABOUT_IMAGE}`,
+          url: `${SITE_URL}/about`,
+          description:
+            'Pittsburgh-based photojournalist and photographer specializing in concert, corporate, event, and brand storytelling.',
+          jobTitle: 'Photojournalist and Event Photographer',
+          homeLocation: {
+            '@type': 'Place',
+            name: 'Pittsburgh, Pennsylvania',
+          },
+          knowsAbout: [
+            'Photojournalism',
+            'Concert Photography',
+            'Event Photography',
+            'Corporate Photography',
+            'Brand Storytelling',
+          ],
+          worksFor: {
+            '@type': 'Organization',
+            name: 'McCal Media',
+            url: SITE_URL,
+          },
+          sameAs: [
+            'https://www.instagram.com/mcc_cal',
+            'https://www.linkedin.com/in/calebmccartney',
+          ],
+        },
+        {
+          '@type': 'Organization',
+          name: 'McCal Media',
+          url: SITE_URL,
+          description:
+            'Photojournalism, event coverage, and visual storytelling led by Caleb McCartney.',
+          logo: `${SITE_URL}/brand/logo-mark.svg`,
+        },
+      ],
+    },
+  });
+
+  useEffect(() => {
+    const closeMenus = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (contactMenuRef.current && !contactMenuRef.current.contains(target)) {
+        setContactMenuOpen(false);
+      }
+
+      if (documentsMenuRef.current && !documentsMenuRef.current.contains(target)) {
+        setDocumentsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', closeMenus);
+
+    return () => {
+      document.removeEventListener('mousedown', closeMenus);
+    };
+  }, []);
+
+  return (
+    <Layout>
+      <div className="about-page">
+        <div className="about-shell">
+          <section className="about-panel about-bio" aria-labelledby="about-heading">
+            <div className="about-bio__grid">
+              <figure className="about-bio__photo">
+                <img
+                  src={ABOUT_IMAGE}
+                  alt="Black-and-white portrait of Caleb McCartney."
+                  loading="eager"
+                  fetchPriority="high"
+                />
+                <figcaption className="about-sr-only">Portrait of Caleb McCartney.</figcaption>
+              </figure>
+
+              <div className="about-bio__content">
+                <p className="about-eyebrow">About Caleb McCartney</p>
+                <h1 id="about-heading">
+                  Photojournalism instincts, polished delivery, and event coverage that still feels
+                  human.
+                </h1>
+
+                <p>
+                  Caleb McCartney is a Pittsburgh-based <strong>photojournalist</strong> and
+                  freelance storyteller specializing in news-driven narratives, high-energy concert
+                  coverage, and authentic brand visuals.
+                </p>
+                <p>
+                  His approach is rooted in the decisive moment: stay close to the people in front
+                  of you, pay attention to the room, and make images that still hold onto their
+                  atmosphere after the assignment is over. That mindset carries from editorial work
+                  into live events, commercial commissions, and client storytelling.
+                </p>
+                <p>
+                  Alongside client work, Caleb writes field notes and hosts the{' '}
+                  <Link to="/podcast">Caffeinated Connections</Link> podcast, where creative work,
+                  labor, and public life all collide.
+                </p>
+
+                <div className="about-actions">
+                  <div className="about-menu" ref={contactMenuRef}>
+                    <button
+                      type="button"
+                      className="about-action about-action--secondary"
+                      aria-expanded={contactMenuOpen}
+                      onClick={() => {
+                        setContactMenuOpen((open) => !open);
+                        setDocumentsMenuOpen(false);
+                      }}
+                    >
+                      Get in touch
+                    </button>
+                    <div className={`about-menu__panel${contactMenuOpen ? ' is-open' : ''}`}>
+                      <Link to="/contact-us" className="about-menu__item">
+                        Contact page
+                      </Link>
+                      <a
+                        href="https://calendly.com/cjmccar-mcc-cal/30min"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="about-menu__item"
+                      >
+                        Grab a coffee
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="about-menu" ref={documentsMenuRef}>
+                    <button
+                      type="button"
+                      className="about-action about-action--secondary"
+                      aria-expanded={documentsMenuOpen}
+                      onClick={() => {
+                        setDocumentsMenuOpen((open) => !open);
+                        setContactMenuOpen(false);
+                      }}
+                    >
+                      Documents
+                    </button>
+                    <div className={`about-menu__panel${documentsMenuOpen ? ' is-open' : ''}`}>
+                      <a
+                        href="/downloads/caleb-mccartney-resume.pdf"
+                        download
+                        className="about-menu__item"
+                      >
+                        Resume
+                      </a>
+                      <Link to="/roadmap" className="about-menu__item">
+                        Roadmap
+                      </Link>
+                    </div>
+                  </div>
+
+                  <Link to="/featured-work" className="about-action about-action--secondary">
+                    View portfolio
+                  </Link>
+                  <Link to="/request-a-quote" className="about-action about-action--primary">
+                    Request a quote
+                  </Link>
+                </div>
+
+                <div className="about-stats" aria-label="Career highlights">
+                  {stats.map((item) => (
+                    <div key={item.label} className="about-stat">
+                      <strong>{item.value}</strong>
+                      <span>{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="about-panel about-reviews" aria-labelledby="about-reviews-heading">
+            <div className="about-section-heading">
+              <p className="about-eyebrow">Client testimonials</p>
+              <h2 id="about-reviews-heading">Trusted when the assignment matters.</h2>
+            </div>
+
+            <div className="about-reviews__grid">
+              {testimonials.map((item) => (
+                <blockquote key={item.name} className="about-review-card">
+                  <div
+                    className={`about-review-card__badge about-review-card__badge--${item.source.toLowerCase()}`}
+                  >
+                    {item.source}
+                  </div>
+                  {item.rating ? (
+                    <p className="about-review-card__stars" aria-label="5 star rating">
+                      ★★★★★
+                    </p>
+                  ) : null}
+                  <p className="about-review-card__quote">&quot;{item.quote}&quot;</p>
+                  <footer className="about-review-card__footer">
+                    <strong>{item.name}</strong>
+                    <span>{item.role}</span>
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
+
+            <div className="about-reviews__footer">
+              <p>5-star client feedback across editorial, concert, and event work.</p>
               <a
-                href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/caleb-mccartney-resume.pdf"
-                download="Caleb-McCartney-Resume-August-2025.pdf"
-                className="ss-about-btn ss-about-btn-secondary"
+                href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-action about-action--secondary"
               >
-                📄 Resume
-              </a>
-              <a
-                href="#"
-                onClick={e => { e.preventDefault(); alert('CV coming soon! Currently being updated.'); }}
-                className="ss-about-btn ss-about-btn-secondary"
-                style={{ opacity: 0.6, color: '#a0a0a0', borderColor: 'rgba(255,255,255,0.2)' }}
-              >
-                📋 CV (Offline)
-              </a>
-              <a href="/work" className="ss-about-btn ss-about-btn-secondary">
-                View Work
+                View all reviews
               </a>
             </div>
-          </div>
+          </section>
+
+          <section className="about-panel about-clients" aria-labelledby="about-clients-heading">
+            <div className="about-section-heading about-section-heading--center">
+              <p className="about-eyebrow">Trusted by leading brands</p>
+              <h2 id="about-clients-heading">Editorial, academic, nonprofit, and brand partners.</h2>
+              <p className="about-clients__subtitle">Collaborating with these clients.</p>
+            </div>
+
+            <div className="about-client-carousel" aria-label="Selected client logos">
+              <ul className="about-client-track">
+                {carouselLogos.map((logo, index) => {
+                  const isDuplicate = index >= clientLogos.length;
+
+                  return (
+                    <li
+                      key={`${logo.alt}-${index}`}
+                      className="about-client-card"
+                      aria-hidden={isDuplicate || undefined}
+                      title={logo.alt}
+                    >
+                      <img
+                        src={logo.src}
+                        alt={isDuplicate ? '' : logo.alt}
+                        className={undefined}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <div className="about-stats about-stats--clients" aria-label="Business stats">
+              {stats.map((item) => (
+                <div key={item.label} className="about-stat">
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="about-clients__footer">
+              <Link to="/request-a-quote" className="about-action about-action--primary">
+                Start a project
+              </Link>
+              <Link to="/featured-work" className="about-action about-action--secondary">
+                Explore featured work
+              </Link>
+            </div>
+          </section>
         </div>
       </div>
-
-      {/* Reviews Section */}
-      <div className="ss-reviews-section">
-        <div className="ss-reviews-content">
-          <h2 className="ss-reviews-title">What Clients Say</h2>
-          <div className="ss-reviews-grid">
-            {/* LinkedIn Review */}
-            <blockquote className="ss-review-card">
-              <div className="ss-review-platform">
-                <div className="ss-platform-badge ss-platform-linkedin">LinkedIn</div>
-              </div>
-              <p className="ss-review-text">
-                "Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress."
-              </p>
-              <cite className="ss-review-author">— Logan Spiker</cite>
-              <div className="ss-review-title">Former Argo AI, Business Owner</div>
-            </blockquote>
-            {/* Google Review */}
-            <blockquote className="ss-review-card">
-              <div className="ss-review-platform">
-                <div className="ss-platform-badge ss-platform-google">Google</div>
-              </div>
-              <div className="ss-review-stars">★★★★★</div>
-              <p className="ss-review-text">
-                "Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it."
-              </p>
-              <cite className="ss-review-author">— Ben Orr</cite>
-              <div className="ss-review-title">Concert Photography Client</div>
-            </blockquote>
-          </div>
-          <div className="ss-reviews-cta">
-            <p className="ss-reviews-rating">⭐ 5.0 Star Rating on Google</p>
-            <a
-              href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8"
-              target="_blank"
-              rel="noopener"
-              className="ss-reviews-btn"
-            >
-              📍 View All Reviews
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Layout>
-);
-
-export default AboutPage;
+    </Layout>
+  );
+}

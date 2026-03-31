@@ -80,7 +80,6 @@ const Nav: React.FC = () => {
         className={`mcc-nav ${isScrolled ? 'is-scrolled' : ''} ${menuOpen ? 'mcc-nav--menu-open' : ''}`}
         aria-label="Primary navigation"
       >
-        <div className="mcc-nav__inner">
           <div className="mcc-nav__brand">
             <Link to="/">Caleb McCartney</Link>
           </div>
@@ -210,7 +209,6 @@ const Nav: React.FC = () => {
               </li>
             </ul>
           </div>
-        </div>
       </nav>
     </div>
   );

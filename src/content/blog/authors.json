@@ -1,0 +1,34 @@
+{
+  "authors": [
+    {
+      "id": "mccal",
+      "name": "Caleb McCartney",
+      "avatar": "/about/caleb-mccartney-photo.jpg",
+      "headline": "Photojournalist, commercial photographer, and writer",
+      "location": "Pittsburgh, Pennsylvania",
+      "bio": "Caleb McCartney is a Pittsburgh-based photojournalist, commercial photographer, and writer whose work moves between campaign nights, community features, live performance, and brand storytelling.",
+      "links": [
+        {
+          "label": "About",
+          "href": "/about"
+        },
+        {
+          "label": "Portfolio",
+          "href": "/featured-work"
+        },
+        {
+          "label": "Podcast",
+          "href": "/podcast"
+        }
+      ],
+      "sourceDoc": {
+        "publishedUrl": "https://docs.google.com/document/d/e/2PACX-1vRYF2JnbIfiNkCq8zLMxnvedTHPjzXPYQsmVTqX75ossMlyCuxSNOARhdUXSeE9FrPXnZJUzf_dV6WD/pub"
+      }
+    },
+    {
+      "id": "ladybrain",
+      "name": "Divine Eyth",
+      "bio": "Contributor to the McCal Media archive."
+    }
+  ]
+}

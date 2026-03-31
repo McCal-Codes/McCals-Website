@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mcc-cal.com/sitemap.xml

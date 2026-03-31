@@ -167,6 +167,60 @@
       "problemMatcher": []
     },
     {
+      "label": "Vercel: Dev Server (mcc-cal-vite)",
+      "type": "shell",
+      "command": "npx",
+      "args": ["--yes", "vercel", "dev", "--listen", "3000", "--yes"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "vercel"
+      },
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": ".+"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".+",
+          "endsPattern": "Available at http://localhost:3000/?"
+        }
+      }
+    },
+    {
+      "label": "Vite: Dev Server (mcc-cal-vite)",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev", "--", "--host", "127.0.0.1", "--port", "5173"],
+      "options": {
+        "cwd": "${workspaceFolder}/sites/mcc-cal-vite"
+      },
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "vite"
+      },
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": ".+"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".+",
+          "endsPattern": "http://127.0.0.1:5173/?"
+        }
+      }
+    },
+    {
       "label": "Build: Universal Portfolio",
       "type": "shell",
       "command": "npm",

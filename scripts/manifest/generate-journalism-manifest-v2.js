@@ -111,7 +111,7 @@ function extractDateFromFilename(filename) {
 
 async function loadEventMetadata(eventDir) {
   const metadataPath = path.join(eventDir, 'tags.json');
-  
+
   if (await exists(metadataPath)) {
     try {
       const content = await fs.readFile(metadataPath, 'utf-8');
@@ -122,7 +122,21 @@ async function loadEventMetadata(eventDir) {
       warning(`Invalid tags.json in ${path.basename(eventDir)}: ${error.message}`);
     }
   }
-  
+
+  return null;
+}
+
+async function loadCaptions(eventDir) {
+  const captionsPath = path.join(eventDir, 'captions.json');
+  if (await exists(captionsPath)) {
+    try {
+      const content = await fs.readFile(captionsPath, 'utf-8');
+      log(`Loaded captions for ${path.basename(eventDir)}`);
+      return JSON.parse(content);
+    } catch (error) {
+      warning(`Invalid captions.json in ${path.basename(eventDir)}: ${error.message}`);
+    }
+  }
   return null;
 }
 
@@ -138,9 +152,10 @@ async function processEvent(categoryName, eventName, eventDir) {
       return null;
     }
     
-    // Load event metadata
+    // Load event metadata and per-image captions
     const metadata = await loadEventMetadata(eventDir);
-    
+    const captions = await loadCaptions(eventDir);
+
     // Extract date from first image or use metadata
     let eventDate = metadata?.date;
     if (!eventDate) {
@@ -173,14 +188,17 @@ async function processEvent(categoryName, eventName, eventDir) {
       tags.push('Published Work');
     }
     
-    // Create processed images
-    const images = imageFiles.map(filename => ({
-      filename,
-      path: filename, // Use just filename, not full path
-      description: metadata?.description || `${eventName} photography`,
-      caption: metadata?.caption || `${eventName} - ${categoryName}`,
-      tags: tags
-    }));
+    // Create processed images, applying per-image captions where available
+    const images = imageFiles.map(filename => {
+      const perImage = captions?.[filename];
+      return {
+        filename,
+        path: filename,
+        description: perImage?.description || metadata?.description || `${eventName} photography`,
+        caption: perImage?.caption || metadata?.caption || `${eventName} - ${categoryName}`,
+        tags,
+      };
+    });
     
     const eventObj = {
       eventName: cleanTitle(eventName),

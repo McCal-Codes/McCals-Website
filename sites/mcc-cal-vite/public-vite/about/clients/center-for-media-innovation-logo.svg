@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" style="background: transparent;">
+  <!-- Center for Media Innovation logo based on provided design -->
+  <defs>
+    <linearGradient id="triangleGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8FBC8F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B8E6B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="triangleGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4682B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2F4F4F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main triangle outline -->
+  <path d="M 100 30 L 170 150 L 30 150 Z" fill="none" stroke="#6B8E6B" stroke-width="3"/>
+  
+  <!-- Geometric pattern inside triangle -->
+  <!-- Top triangle sections -->
+  <path d="M 100 30 L 85 60 L 115 60 Z" fill="url(#triangleGrad1)"/>
+  <path d="M 85 60 L 70 90 L 100 90 Z" fill="url(#triangleGrad2)"/>
+  <path d="M 115 60 L 100 90 L 130 90 Z" fill="url(#triangleGrad1)"/>
+  
+  <!-- Middle sections -->
+  <path d="M 70 90 L 55 120 L 85 120 Z" fill="url(#triangleGrad1)"/>
+  <path d="M 100 90 L 85 120 L 115 120 Z" fill="url(#triangleGrad2)"/>
+  <path d="M 130 90 L 115 120 L 145 120 Z" fill="url(#triangleGrad1)"/>
+  
+  <!-- Bottom sections -->
+  <path d="M 55 120 L 40 150 L 70 150 Z" fill="url(#triangleGrad2)"/>
+  <path d="M 85 120 L 70 150 L 100 150 Z" fill="url(#triangleGrad1)"/>
+  <path d="M 115 120 L 100 150 L 130 150 Z" fill="url(#triangleGrad2)"/>
+  <path d="M 145 120 L 130 150 L 160 150 Z" fill="url(#triangleGrad1)"/>
+  
+  <!-- White connecting lines for geometric pattern -->
+  <path d="M 100 30 L 100 150" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+  <path d="M 85 60 L 115 120" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <path d="M 115 60 L 85 120" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <path d="M 70 90 L 130 90" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <path d="M 55 120 L 145 120" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Main title text -->
+  <text x="220" y="50" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="bold" fill="#6B8E6B">CENTER FOR</text>
+  <text x="220" y="100" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="bold" fill="#6B8E6B">MEDIA INNOVATION</text>
+  
+  <!-- Subtitle -->
+  <text x="220" y="150" font-family="Georgia, serif" font-size="28" font-weight="normal" fill="#4682B4" font-style="italic">Point Park University</text>
+</svg>

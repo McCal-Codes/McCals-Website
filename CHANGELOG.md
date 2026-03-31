@@ -1,5 +1,51 @@
 # Changelog
 
+## 2026-03-30
+
+### Session Timeline
+
+#### 13:32 EDT - `6ebf89ff` `refactor(blog): consolidate canonical content pipeline`
+
+- Canonicalized the active blog system under `src/content/blog/` with `authors.json`, `posts/<slug>/post.json`, and generated `blog-manifest.json`.
+- Rewired shared blog types/loaders plus the Vite blog utilities, showcase components, and static test flow away from the legacy `/api/v1/blog`, `src/data/blog`, and `src/site/blog` assumptions.
+- Updated blog feed generation to use the canonical content tree.
+
+#### 13:33 EDT - `cfc21331` `feat(blog): add markdown-first authoring workflow`
+
+- Added `post.md` as the preferred authored blog source, with compile and migration scripts that generate runtime `post.json` files for the site.
+- Updated Google Docs ingestion to write Markdown first, then compile posts, rebuild the manifest, and regenerate feeds.
+- Synced the Vite prebuild flow so blog Markdown is compiled before local preview/build output is copied.
+
+#### 13:33 EDT - `9a8f3ab8` `docs(blog): document canonical markdown workflow`
+
+- Updated repo docs and agent instructions to reflect the canonical `src/content/blog` workflow and Markdown-first authoring model.
+- Added the root README blog workflow section so the authoring commands and content paths are discoverable in one place.
+
+#### 13:35 EDT - `4418bc13` `feat(seo): include blog URLs in sitemap`
+
+- Updated `seo:sitemap` to include `/blog` and canonical blog post URLs from `src/content/blog/blog-manifest.json`.
+- Added lead-image sitemap entries for blog posts where available.
+
+#### 14:10 EDT - Working Tree: blog validation + Speed Insights
+
+- Added `blog:validate` to the canonical blog pipeline and wired it into `manifest:blog`, Google Docs sync, and the Vite static sync step so broken blog metadata or local assets fail before publish.
+- Added Vercel Speed Insights to the Vite app entrypoint and app package for production performance telemetry using the official package integration.
+
+#### 14:25 EDT - Working Tree: homepage hero + nav alignment
+
+- Fixed the React nav so the homepage now applies the existing `is-home` transparent-nav treatment instead of rendering the scrolled variant immediately.
+- Replaced the autoplay homepage carousel with a static editorial hero grid that sits under the nav more like the live site, while prioritizing the lead image and reducing client-side hero logic in line with production-readiness guidance.
+
+#### 15:05 EDT - Working Tree: homepage sections + CSS cleanup
+
+- Added below-the-fold homepage sections for selected work, latest blog posts, podcast spotlighting, and clearer call-to-action paths so the landing page continues past the hero.
+- Moved the Google Fonts `@import` to the top of `globals.css` so the Vite/PostCSS build no longer warns about import order.
+
+#### 15:44 EDT - Working Tree: temporary live-site fallback layer
+
+- Centralized temporary `mcc-cal.com` and Squarespace CDN homepage dependencies into a single Vite fallback module so the bridge to the legacy site is explicit and easier to remove later.
+- Updated the hero, homepage featured cards, and podcast spotlight to reuse that fallback layer, while allowing generated featured-manifest data to fill in when local media is available.
+
 ## 2026-03-05
 
 ### Docs/Meta

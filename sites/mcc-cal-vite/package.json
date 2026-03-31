@@ -4,11 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/sync-manifests.js",
     "dev": "vite",
     "prebuild": "node scripts/sync-manifests.js",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint . --ignore-pattern dist"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

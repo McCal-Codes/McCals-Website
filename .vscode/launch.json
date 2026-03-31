@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Vercel: Dev Server (mcc-cal-vite)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npx --yes vercel dev --listen 3000 --yes",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Vercel: Open Site",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "powershell -NoProfile -Command \"Start-Process 'http://[::1]:3000'\"",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Vercel: Dev Server (mcc-cal-vite)"
+        },
+        {
+            "name": "Vite: Dev Server (mcc-cal-vite)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run dev -- --host 127.0.0.1 --port 5173",
+            "cwd": "${workspaceFolder}/sites/mcc-cal-vite"
+        },
+        {
+            "name": "Vite: Open Site",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "powershell -NoProfile -Command \"Start-Process 'http://127.0.0.1:5173'\"",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Vite: Dev Server (mcc-cal-vite)"
+        }
+    ]
+}

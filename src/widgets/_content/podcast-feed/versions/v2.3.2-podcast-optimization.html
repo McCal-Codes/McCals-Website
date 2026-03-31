@@ -1,4 +1,4 @@
-<!-- Podcast Feed Widget v2.3.1 — Listening Conversion Boost -->
+<!-- Podcast Feed Widget v2.3.2 — Cache Key Sync -->
 <!-- site-widgets:inline:start -->
 <style data-site-widgets-inline>
   :root {
@@ -1104,7 +1104,7 @@
   data-spotify-embed="false"
   data-calendly-url="https://calendly.com/cjmccar-mcc-cal/caffeinated_connections"
   data-podcast-description="Caffeinated Connections is where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact."
-  data-widget-version="2.3.1"
+  data-widget-version="2.3.2"
   data-active="true"
 >
   <button class="debug-toggle" onclick="PodcastWidget.toggleDebug()">Debug</button>
@@ -1116,7 +1116,7 @@
           class="version-indicator"
           data-active="true"
           onclick="PodcastWidget.showChangelog()"
-          >v2.3.1</span
+          >v2.3.2</span
         >
       </h1>
       <p class="podcast-subtitle">Caffeinated Connections Podcast</p>
@@ -1211,6 +1211,11 @@
         <button class="changelog-close" onclick="PodcastWidget.hideChangelog()">×</button>
       </div>
       <div class="changelog-body">
+        <div class="changelog-version">v2.3.2 — Cache key sync</div>
+        <ul class="changelog-items">
+          <li>Updated CACHE_KEY to 'podcast-feed-v2.4' to match the Vite React page</li>
+        </ul>
+
         <div class="changelog-version">v2.3.1 — CTA alignment</div>
         <ul class="changelog-items">
           <li>CTA copy now says “Book a Podcast Episode” with updated booking proof (12+)</li>
@@ -1270,7 +1275,7 @@
 </div>
 
 <script>
-  // Podcast Widget v2.3.1 (Conversion polish)
+  // Podcast Widget v2.3.2 (Cache key sync)
   window.PodcastWidget = (function () {
     const startTime = performance.now();
     let debugActive = false;
@@ -1298,7 +1303,7 @@
       ],
       ['ep6-kyle-archer', { reason: 'High energy and humor; shows the show’s vibe quickly.' }],
     ]);
-    const CACHE_KEY = 'podcast-feed-episodes-v2.3.1';
+    const CACHE_KEY = 'podcast-feed-v2.4';
     const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
     const podcastImage =
       'https://media.rss.com/cafeconnectpod/20250404_090408_d8a1a6cce833630a24064aedcd52e348.png';

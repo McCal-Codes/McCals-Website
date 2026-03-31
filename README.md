@@ -51,6 +51,20 @@ Legacy widget code and documentation are archived. Widgets remain available for 
 - Legacy widget validation: `npm run validate:widgets` (rarely needed)
 - Run manifest/image scripts as needed for portfolio updates
 
+### Blog Workflow
+
+- Canonical blog source: `src/content/blog/`
+- Authors: `src/content/blog/authors.json`
+- Preferred authored post source: `src/content/blog/posts/<slug>/post.md`
+- Generated runtime post document: `src/content/blog/posts/<slug>/post.json`
+- Compile Markdown posts and rebuild the blog manifest: `npm run manifest:blog`
+- Compile Markdown posts only: `npm run blog:compile`
+- Validate blog authors, post metadata, and referenced local assets: `npm run blog:validate`
+- Generate JSON/RSS feeds: `npm run blog:feed`
+- Run the full blog publish prep (compile, validate, manifest, feeds): `npm run blog:generate`
+- Migrate existing JSON posts to Markdown: `npm run blog:migrate-markdown`
+- Import Google Docs into canonical blog posts: `npm run blog:sync-docs`
+
 ## Deployment
 
 - Production site (`mcc-cal-vite`) is deployed via Vercel or static hosting

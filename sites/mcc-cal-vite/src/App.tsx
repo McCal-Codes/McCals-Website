@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import PreviewBanner from './components/PreviewBanner';
 import HomePage from './pages/index';
 import AboutPage from './pages/about';
+import AuthorsPage from './pages/authors';
 import BlogPage from './pages/blog';
 import ConcertsPage from './pages/concerts';
 import EventsPage from './pages/events';
@@ -27,10 +28,14 @@ import NotFoundPage from './pages/not-found';
 export default function App() {
   return (
     <BrowserRouter>
+      <PreviewBanner />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/authors" element={<AuthorsPage />} />
+        <Route path="/authors/:authorId" element={<AuthorsPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPage />} />
         <Route path="/concerts" element={<ConcertsPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/featured-work" element={<FeaturedWorkPage />} />
