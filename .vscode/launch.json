@@ -8,8 +8,8 @@
             "name": "Vercel: Dev Server (mcc-cal-vite)",
             "type": "node-terminal",
             "request": "launch",
-            "command": "npx --yes vercel dev --listen 3000",
-            "cwd": "${workspaceFolder}/sites/mcc-cal-vite"
+            "command": "npx --yes vercel dev --listen 3000 --yes",
+            "cwd": "${workspaceFolder}"
         },
         {
             "name": "Vercel: Open Site in Edge",

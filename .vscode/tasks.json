@@ -170,9 +170,9 @@
       "label": "Vercel: Dev Server (mcc-cal-vite)",
       "type": "shell",
       "command": "npx",
-      "args": ["--yes", "vercel", "dev", "--listen", "3000"],
+      "args": ["--yes", "vercel", "dev", "--listen", "3000", "--yes"],
       "options": {
-        "cwd": "${workspaceFolder}/sites/mcc-cal-vite"
+        "cwd": "${workspaceFolder}"
       },
       "group": "build",
       "isBackground": true,
