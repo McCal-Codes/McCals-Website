@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '@/styles/about.css';
 
@@ -53,15 +53,7 @@ const clientLogos = [
   { src: '/about/clients/covalent-logo.png', alt: 'Covalent' },
 ];
 
-// Item width accounts for flex-basis (260px) + left/right margin (10px each)
-const carouselItemWidth = 280;
 const carouselLogos = [...clientLogos, ...clientLogos, ...clientLogos];
-const clientCarouselStyle = {
-  '--about-carousel-width': `${carouselItemWidth * carouselLogos.length}px`,
-  '--about-carousel-scroll-end': `${-(carouselItemWidth * clientLogos.length)}px`,
-  // Widget uses ~2.2s/item; clamp to a minimum 40s so short lists don't feel rushed
-  '--about-carousel-duration': `${Math.max(40, clientLogos.length * 2.2)}s`,
-} as CSSProperties;
 
 export default function AboutPage() {
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
@@ -315,7 +307,7 @@ export default function AboutPage() {
             </div>
 
             <div className="about-client-carousel" aria-label="Selected client logos">
-              <ul className="about-client-track" style={clientCarouselStyle}>
+              <ul className="about-client-track">
                 {carouselLogos.map((logo, index) => {
                   const isDuplicate = index >= clientLogos.length;
 
