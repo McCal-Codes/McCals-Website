@@ -64,6 +64,7 @@ const Footer: React.FC = () => {
               <ul className="mcc-footer__list">
                 <li><a href="/featured-work">Portfolio</a></li>
                 <li><a href="/blog">Blog</a></li>
+                <li><a href="/authors">Authors</a></li>
               </ul>
             </section>
             <section className="mcc-footer__section" aria-labelledby="footer-follow">

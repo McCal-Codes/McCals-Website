@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import HomePage from './pages/index';
 import AboutPage from './pages/about';
+import AuthorsPage from './pages/authors';
 import BlogPage from './pages/blog';
 import ConcertsPage from './pages/concerts';
 import EventsPage from './pages/events';
@@ -31,6 +32,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/authors" element={<AuthorsPage />} />
+        <Route path="/authors/:authorId" element={<AuthorsPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPage />} />
         <Route path="/concerts" element={<ConcertsPage />} />

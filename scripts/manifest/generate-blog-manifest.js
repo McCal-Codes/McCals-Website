@@ -143,6 +143,7 @@ async function processPost(postDir, authors) {
     authorId,
     authorName: author?.name || null,
     leadImage: resolveManifestImage(post.slug, post.leadImage),
+    leadImageFallback: resolveManifestImage(post.slug, post.leadImageFallback),
     readingTime: estimateReadingTime(post.body || []),
   };
 }

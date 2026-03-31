@@ -371,6 +371,7 @@ function serializeMarkdownPost(post) {
     'category',
     'excerpt',
     'leadImage',
+    'leadImageFallback',
     'leadImageAlt',
     'leadImageCaption',
     'published',

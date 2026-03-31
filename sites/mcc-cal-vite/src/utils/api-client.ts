@@ -55,6 +55,12 @@ export interface BlogAuthor {
   name: string;
   avatar?: string;
   bio?: string;
+  headline?: string;
+  location?: string;
+  links?: {
+    label: string;
+    href: string;
+  }[];
 }
 
 export interface BlogAuthorsFile {
@@ -70,6 +76,7 @@ export interface BlogManifestPost {
   category?: string;
   excerpt?: string;
   leadImage?: string | null;
+  leadImageFallback?: string | null;
   leadImageAlt?: string;
   leadImageCaption?: string;
   published?: boolean;
@@ -208,6 +215,8 @@ function normalizeBlogSummary(post: BlogManifestPost, authors: BlogAuthor[], blo
   return {
     ...post,
     leadImage: resolveBlogAssetUrl(blogBase, post.slug, post.leadImage) || post.leadImage,
+    leadImageFallback:
+      resolveBlogAssetUrl(blogBase, post.slug, post.leadImageFallback) || post.leadImageFallback,
     author: resolveBlogAuthor(post, authors),
   };
 }
@@ -301,6 +310,8 @@ export async function fetchBlogPost(slug: string, blogBase: string = BLOG_BASE):
   return {
     ...merged,
     leadImage: resolveBlogAssetUrl(blogBase, slug, merged.leadImage) || merged.leadImage,
+    leadImageFallback:
+      resolveBlogAssetUrl(blogBase, slug, merged.leadImageFallback) || merged.leadImageFallback,
     body: (merged.body || []).map((block) => normalizeBlogBlock(blogBase, slug, block)),
     author: resolveBlogAuthor(merged, authors),
   };
