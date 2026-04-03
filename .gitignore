@@ -2,6 +2,7 @@
 scripts/utils/ai-*.js
 src/api/scripts/utils/ai-*.js
 .github/copilot-instructions.md
+.windsurf/
 # System files
 .DS_Store
 */.DS_Store
