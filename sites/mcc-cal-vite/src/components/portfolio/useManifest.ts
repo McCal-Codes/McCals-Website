@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { UseManifestResult } from './types';
 
-const GITHUB_RAW = 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main';
+const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
 const PORTFOLIOS_BASE = 'src/images/Portfolios';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes, matching widget behaviour
 const MANIFEST_FILE_MAP: Record<string, string> = {
@@ -30,7 +30,7 @@ function encodeURIPath(path: string): string {
 }
 
 function toGithubUrl(repoRelativePath: string): string {
-  return `${GITHUB_RAW}/${encodeURIPath(repoRelativePath)}`;
+  return `${REPO_CDN_BASE}/${encodeURIPath(repoRelativePath)}`;
 }
 
 function getManifestFile(type: string): string | undefined {
