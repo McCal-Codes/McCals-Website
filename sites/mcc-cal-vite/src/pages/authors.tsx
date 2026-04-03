@@ -3,20 +3,10 @@ import { Link, useParams } from 'react-router-dom';
 import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { fetchBlogAuthors, fetchBlogPosts, type BlogAuthor, type BlogPostSummary } from '@/utils/api-client';
+import { formatDateLong } from '@/utils/formatters';
 import '@/styles/authors.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
-
-function formatDate(value: string): string {
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return value;
-
-  return parsed.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 function authorStoryCountLabel(count: number): string {
   return `${count} stor${count === 1 ? 'y' : 'ies'}`;
@@ -189,7 +179,7 @@ export default function AuthorsPage() {
                       {authorPosts.slice(0, 3).map((post) => (
                         <li key={post.slug}>
                           <Link to={`/blog/${post.slug}`}>{post.title}</Link>
-                          <time dateTime={post.date}>{formatDate(post.date)}</time>
+                          <time dateTime={post.date}>{formatDateLong(post.date)}</time>
                         </li>
                       ))}
                     </ul>
@@ -279,7 +269,7 @@ export default function AuthorsPage() {
                           <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                         </h3>
                         {post.excerpt && <p className="author-story-card__excerpt">{post.excerpt}</p>}
-                        <time dateTime={post.date}>{formatDate(post.date)}</time>
+                        <time dateTime={post.date}>{formatDateLong(post.date)}</time>
                       </div>
                     </article>
                   ))}

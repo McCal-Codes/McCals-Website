@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { formatDateRelative, slugify, formatTime } from '@/utils/formatters';
 import '@/styles/podcast.css';
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -89,30 +90,6 @@ const FALLBACK: Episode[] = [
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
-
-function slugify(str: string): string {
-  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'ep';
-}
-
-function formatDate(dateStr: string): string {
-  try {
-    const d = new Date(dateStr);
-    if (isNaN(d.getTime())) return 'Recent';
-    const diff = Date.now() - d.getTime();
-    const day = 86400000;
-    if (diff < day) return 'Today';
-    if (diff < day * 2) return 'Yesterday';
-    if (diff < day * 7) return `${Math.floor(diff / day)} days ago`;
-    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  } catch {
-    return 'Recent';
-  }
-}
-
-function formatTime(s: number): string {
-  if (!isFinite(s) || s < 0) return '--:--';
-  return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-}
 
 function extractGuest(title: string): string {
   const m = title.match(/with\s+([^|–—:-]+)$/i) || title.match(/[–—-]\s*with\s+([^|:-]+)$/i);
@@ -375,7 +352,7 @@ function EpisodeCard({ episode, currentlyPlayingGuid, onPlay, audioRef, playerSt
           <div className="pod-card-meta">
             <p className="pod-card-show">Caffeinated Connections</p>
             <p className="pod-card-date">
-              {formatDate(episode.pubDate)}
+              {formatDateRelative(episode.pubDate)}
               {newEp && <span className="pod-card-badge">New</span>}
             </p>
           </div>
@@ -584,7 +561,7 @@ export default function PodcastPage() {
                   <p className="pod-start-card-title">{ep.title}</p>
                   <p className="pod-start-card-reason">{meta.reason}</p>
                   <p className="pod-start-card-meta">
-                    {formatDate(ep.pubDate)}{extractGuest(ep.title) ? ` · ${extractGuest(ep.title)}` : ''}
+                    {formatDateRelative(ep.pubDate)}{extractGuest(ep.title) ? ` · ${extractGuest(ep.title)}` : ''}
                   </p>
                 </a>
               ))}

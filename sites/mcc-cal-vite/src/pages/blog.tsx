@@ -2,102 +2,25 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import {
+  type BlogAuthor,
+  type BlogAuthorsFile,
+  type BlogManifestPost,
+  type BlogManifest,
+  type BlogPostDocument,
+  type BlogSource,
+} from '@/types/blog';
+import { formatDateLong, readingTimeLabel } from '@/utils/formatters';
 import '@/styles/blog.css';
 
 const BLOG_BASE = '/content/blog-static';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const DEFAULT_AUTHOR_ID = 'mccal';
 
-interface BlogAuthor {
-  id: string;
-  name: string;
-  avatar?: string;
-  bio?: string;
-  headline?: string;
-  location?: string;
-  links?: {
-    label: string;
-    href: string;
-  }[];
-}
-
-interface BlogAuthorsFile {
-  authors: BlogAuthor[];
-}
-
 const FALLBACK_AUTHOR: BlogAuthor = {
   id: DEFAULT_AUTHOR_ID,
   name: 'Caleb McCartney',
 };
-
-interface BlogManifestPost {
-  slug: string;
-  title: string;
-  authorId?: string;
-  authorName?: string | null;
-  date: string;
-  category?: string;
-  excerpt?: string;
-  leadImage?: string | null;
-  leadImageFallback?: string | null;
-  leadImageAlt?: string;
-  leadImageCaption?: string;
-  published?: boolean;
-  readingTime?: number;
-}
-
-interface BlogManifest {
-  version: string;
-  generated: string;
-  total: number;
-  posts: BlogManifestPost[];
-}
-
-interface BlogTextBlock {
-  type: 'text' | 'quote' | 'code';
-  content: string;
-}
-
-interface BlogImageBlock {
-  type: 'image';
-  src: string;
-  alt?: string;
-  caption?: string;
-}
-
-type BlogBodyBlock = BlogTextBlock | BlogImageBlock;
-
-interface BlogPostDocument extends BlogManifestPost {
-  body: BlogBodyBlock[];
-  sources?: BlogSource[];
-  tags?: string[];
-}
-
-interface BlogSource {
-  citation?: string;
-  title?: string;
-  url?: string;
-  publisher?: string;
-  publishedDate?: string;
-  accessedDate?: string;
-  notes?: string;
-}
-
-function formatDate(value: string): string {
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return value;
-
-  return parsed.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
-
-function readingTimeLabel(minutes?: number): string | null {
-  if (!minutes || minutes <= 0) return null;
-  return `${minutes} min read`;
-}
 
 function toAssetUrl(assetPath?: string | null): string | null {
   if (!assetPath) return null;
@@ -268,7 +191,7 @@ function StoryMeta({ post, author }: { post: BlogManifestPost; author: BlogAutho
       <Link to={`/authors/${author.id}`} className="blog-meta__author">
         {author.name}
       </Link>
-      <time dateTime={post.date}>{formatDate(post.date)}</time>
+      <time dateTime={post.date}>{formatDateLong(post.date)}</time>
       {readTime && <span>{readTime}</span>}
       {post.category && <span>{post.category}</span>}
     </div>
@@ -338,7 +261,7 @@ function StoryCard({
             <Link to={`/blog/${post.slug}`}>{post.title}</Link>
           </h3>
           <time className="blog-sidebar__date" dateTime={post.date}>
-            {formatDate(post.date)}
+            {formatDateLong(post.date)}
           </time>
         </div>
       </article>
@@ -367,7 +290,7 @@ function StoryCard({
           <Link to={`/blog/${post.slug}`}>{post.title}</Link>
         </h3>
         <time className="blog-meta" dateTime={post.date}>
-          {formatDate(post.date)}
+          {formatDateLong(post.date)}
         </time>
       </div>
     </article>
