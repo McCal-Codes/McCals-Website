@@ -1,8 +1,25 @@
 # Completed Tasks Archive
 
-Archive Created: December 6, 2025
+Archive Created: December 6, 2025  
+Last Updated: April 3, 2026
 
 This file tracks all completed tasks that have been removed from the active `todo.md` file for better organization and clarity.
+
+---
+
+## April 2026 Completions
+
+### Vite Site Code Quality & Performance (Apr 3, 2026)
+
+- [x] **Extract Duplicate Utilities** - Created `sites/mcc-cal-vite/src/utils/formatters.ts` with `formatDateLong`, `formatDateRelative`, `slugify`, `formatTime`, `readingTimeLabel`
+- [x] **Centralize Blog Types** - Moved blog type definitions to `sites/mcc-cal-vite/src/types/blog.ts` for shared use across components
+- [x] **Update Components to Use Shared Utilities** - Refactored `blog.tsx`, `podcast.tsx`, `authors.tsx` to import from shared modules
+- [x] **Add Barrel Exports** - Created `sites/mcc-cal-vite/src/components/index.ts` for cleaner imports
+- [x] **Implement Code Splitting** - Added `React.lazy()` for all 24 routes in `App.tsx` with `Suspense` fallback
+- [x] **Add Error Boundaries** - Created `ErrorBoundary.tsx` component and wrapped routes for graceful error handling
+- [x] **Validation** - `npx tsc --noEmit` passed in `sites/mcc-cal-vite`
+
+**Next up:** Component decomposition (break up `blog.tsx` and `podcast.tsx` into smaller pieces)
 
 ---
 

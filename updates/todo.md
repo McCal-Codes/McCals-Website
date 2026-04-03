@@ -1,319 +1,137 @@
 # Active To-Do List
 
-Last Updated: March 11, 2026
+Last Updated: April 3, 2026
 
 **Quick Reference:**
 
-- See [completed.md](./completed.md) for all finished tasks
+- See [completed.md](./completed.md) for all finished tasks  
+- See [welcome.md](./welcome.md) for today's dashboard  
 - Reference standards: [docs/standards/](../docs/standards/)
 - Integration guides: [docs/integrations/](../docs/integrations/)
 
 ---
 
-## Completed - March 11, 2026
+## 🚀 Active Now (April 2026)
 
-### Contact Form Hardening + Portfolio Bridge Cleanup
+### Vite Site Refactoring (`sites/mcc-cal-vite/`)
 
-- [x] **Contact Form v1.1.0** - Added a timed anti-bot trap on top of the honeypot, fixed status auto-hide behavior, trimmed submitted values, escaped provider error output, and improved live-region semantics.
-- [x] **Contact Form Documentation** - Updated `README.md` and `SETUP.md` to reflect the actual EmailJS-based setup instead of the older Formspree flow.
-- [x] **Portfolio Bridge Version Sync** - Updated the dev app widget config to point at the real current portfolio builds and added the missing `/video` bridge route.
-- [x] **Category-Aware Version Detection** - Fixed widget version lookup so grouped widget directories such as `portfolios/` resolve correctly.
-- [x] **Portfolio README Cleanup** - Refreshed the portfolio READMEs to match active versions and document the remaining weak spots: `nature` still needs content/performance signoff and `video` still needs a manifest pipeline.
-- [x] **Validation** - `npx tsc --noEmit` passed in `sites/dev.mcc-cal.com`; `npm run validate:widgets` passed for all widget HTML files.
+The Vite site is the primary web surface. Current focus: code quality and performance.
 
-**Follow-up still open:**
+**Just Completed:**
+- ✅ Extracted duplicate utilities (`formatDate`, `slugify`) to `utils/formatters.ts`
+- ✅ Centralized blog types to `types/blog.ts`
+- ✅ Added barrel exports (`components/index.ts`)
+- ✅ Implemented `React.lazy()` code splitting for all 24 routes
+- ✅ Added `ErrorBoundary` component for error handling
 
-- `nature-portfolio`: broaden collection coverage and finish a11y/performance signoff.
-- `video-portfolio`: build the manifest generator/data flow and decide whether it stays experimental or becomes a full surface.
+**Current Sprint:**
+- [ ] **Component Decomposition** - Break up large components:
+  - `blog.tsx` (~650 lines) → `BlogList.tsx`, `BlogPost.tsx`, `BlogCard.tsx`, `useBlogData.ts`
+  - `podcast.tsx` (~550 lines) → `EpisodeList.tsx`, `AudioPlayer.tsx`, `usePodcastFeed.ts`
+- [ ] **Migrate to Barrel Imports** - Update imports to use `@/components` pattern
+- [ ] **Add React Query/TanStack Query** - Replace manual `useEffect` data fetching
 
----
-
-## ✅ Completed - January 6, 2026
-
-### 🚀 Portfolio Performance Optimization
-
-- [x] **Event Portfolio v2.9.1** — LCP optimization with pre-rendered hero (Pittsburgh Social Club)
-- [x] **Photojournalism Portfolio v5.5.2** — LCP optimization with pre-rendered hero (CMU Trump Protest) + enhanced changelog
-- [x] **Portrait Portfolio v2.0.1** — LCP optimization with pre-rendered hero (Editorial) + added complete changelog modal
-- [x] **Restored Premium Hover Effects** — All portfolio widgets now have smooth lift/scale animations
-- [x] **Fixed Changelog Modals** — Corrected function references and added missing modal to portrait portfolio
-- [x] **Documentation** — Updated todo.md and completed.md with full session details
-
-**Performance Metrics:**
-
-- Pre-rendered LCP candidates for instant visual feedback
-- Eager loading + high fetch priority for hero images
-- Inlined critical CSS to eliminate render-blocking
-- Resource hints (preconnect/dns-prefetch) for CDN
+**Next Up:**
+- [ ] **CSS-by-Feature** - Move styles adjacent to components (co-location)
+- [ ] **Bundle Analysis** - Run `vite-bundle-visualizer` to identify optimization targets
+- [ ] **Add E2E Tests** - Playwright coverage for critical user flows
 
 ---
 
-## ✅ Completed - December 31, 2025
+## � Widget Ecosystem (`src/widgets/`)
 
-### 🧹 2026 Repository Cleanup (All Phases Complete)
+Portfolio and content widgets. Currently stable; enhancements in backlog.
 
-- [x] **Phase 1: Safe Cleanup**
-  - [x] Archived 9 Phase-2 completion documents to `docs/archive/phase-2/`
-  - [x] Consolidated test files to `tests/previews/`
-  - [x] Removed system artifacts (.DS_Store, nohup.out)
-  - [x] Optimized .gitignore
-  - [x] Reduced root directory from 39 to 29 files (-26%)
-- [x] **Phase 2: Dependency Updates**
-  - [x] Updated 7 packages to latest safe versions
-  - [x] All widgets pass validation
-  - [x] Fixed security vulnerabilities (0 now)
-  - [x] Deferred major updates to Q1 2026
-- [x] **Phase 3: Structural Improvements**
-  - [x] Fixed esbuild security vulnerability (GHSA-67mh-4wv8-2f99)
-  - [x] Consolidated documentation structure
-  - [x] Scanned widget versions (all compliant)
-  - [x] Analyzed package.json (109 scripts)
-- [x] **Audit & Final Cleanup**
-  - [x] Removed 4 deprecated npm scripts (docker, deploy)
-  - [x] Deleted obsolete build artifacts (~4 MB)
-  - [x] Archived backups to `docs/archive/backups/`
-  - [x] Final count: 105 scripts, 29 root files
+### Maintenance Mode
 
-**Documentation Created:**
+- [x] **Widget Version Policy** - CI enforces ≤2 active versions (100% compliance)
+- [x] **Legacy Archival** - 60+ versions archived to `src/widgets/_archived/`
+- [x] **Shared Styles** - `site-widgets.css` auto-inlined via build pipeline
 
-- `docs/2026-REPO-CLEANUP-PLAN.md`
-- `docs/2026-CLEANUP-SUMMARY.md`
-- `docs/2026-PHASE-2-SUMMARY.md`
-- `docs/2026-PHASE-3-SUMMARY.md`
-- `docs/2026-AUDIT-REPORT.md`
-- `docs/2026-COMPLETE.md`
-- `docs/PRE-2026-CHECKLIST.md`
+### Pending Enhancements (Backlog)
+
+- [ ] **Concert Portfolio** - Empty state resilience when no shows
+- [ ] **Photojournalism Portfolio** - Empty state resilience
+- [ ] **Blog Feed** - Search debouncing (300ms)
+- [ ] **Client Carousel** - Dynamic logo track (currently static)
+- [ ] **Testimonials** - Star rating schema markup
 
 ---
 
-## 🚀 Q1 2026 Priorities (Deferred from 2025 Cleanup)
+## ☁️ Cloudflare Worker (`tools/cloudflare/`)
 
-### 🔧 Repository Improvements
+Edge infrastructure for manifests, blog auth, and caching.
 
-- [x] **Categorize and Document package.json Scripts**
-  - **Purpose**: Reduce cognitive load and prevent accidental execution of deprecated or incorrect scripts across 105+ entries.
-  - **Scope**: Reorganizes the `scripts` object in `/package.json`. Must NOT change script names or logic.
-  - **Findings**: Categorized into 13 logical groups with header comments.
-  - **Validation**: `npm run` executes without errors; all CI-critical scripts function.
+**Status:** Development complete, deployment pending.
 
-- [x] **Pre-Upgrade Audit for ESLint 9 and React 19**
-  - **Purpose**: Identify breaking changes and required config updates (ESLint config format, Next.js compat) before starting the actual upgrade.
-  - **Findings**: Documented in [docs/2026-DEPENDENCY-AUDIT.md](../docs/2026-DEPENDENCY-AUDIT.md)
-  - **Validation**: Summary of breaking changes documented.
-
-- [ ] **Node.js Upgrade (20.19+ or 22.x LTS)**
-  - **Purpose**: Align with newer package recommendations (≥20.17) and security standards.
-  - **Scope**: Internal development environment and CI/CD runners.
-  - **Dependencies**: none
-  - **Risk level**: low
-  - **Validation**: All npm scripts and build processes pass; CI/CD workflows updated.
-
-- [ ] **Node.js Upgrade**
-  - [ ] Upgrade from Node.js 20.15.1 to 20.19+ or 22.x LTS
-  - [ ] Test all npm scripts and build processes
-  - [ ] Update CI/CD workflows if needed
-  - [ ] Update documentation with new Node version
-  - **Reason:** Current version works but newer packages recommend ≥20.17
-  - **Priority:** Medium
-  - **Estimated Time:** 1-2 hours
-
-- [ ] **Cloudflare Worker Production Deployment**
-  - [ ] Deploy Worker to production with proper environment variables
-  - [ ] Create KV namespaces (MCCAL_KV, MCCAL_KV_PREVIEW)
-  - [ ] Configure manifests/blog widget to point at production Worker URL
-  - [ ] Test end-to-end flows: manifest webhook, blog auth/posts, rate limiting
-  - **Reason:** Active project, not urgent - can be completed in Q1
-  - **Priority:** Medium
-  - **Estimated Time:** 3-4 hours
+- [ ] **Production Deploy**
+  - [ ] Add secrets to GitHub (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`)
+  - [ ] Create KV namespaces (`MCCAL_KV`, `MCCAL_KV_PREVIEW`)
+  - [ ] Deploy Worker and verify endpoints
+  - [ ] Test: webhook purge, blog auth, rate limiting, cache stats
+- [ ] **Integration**
+  - [ ] Point Vite site to production Worker URL
+  - [ ] Configure blog widget to use production endpoints
+  - [ ] Monitor cache hit rates and error logs
 
 ---
 
-## 🚀 Active Sprints (The "Now")
+## 🎥 Video Portfolio (`src/widgets/video-portfolio/`)
 
-### ⚡ Live Site Performance (mcc-cal.com)
+Experimental video showcase widget. Currently v0.1 scaffold.
 
-- [x] **Define and Document LCP Elements per Primary Page**
-  - **Purpose**: Establish measurable performance targets for Home, Concerts, Events, Journalism, and Portraits pages.
-  - **Scope**: Touches `updates/todo.md` (Page & Widget Mapping section). Does not touch widget code.
-  - **Findings**: Candidate selectors documented in the mapping section below.
-  - **Validation**: LCP candidates recorded for all 5 primary pages.
-
-- [ ] **Audit and Replace JS-rendered Hero Images**
-  - **Purpose**: Shift LCP elements from JS-driven rendering to native `<img>` tags to improve FCP/LCP.
-  - **Scope**: Touches widget HTML versions. Must preserve responsive srcset/sizes logic.
-  - **Dependencies**: LCP candidates must be defined first.
-  - **Risk level**: medium (Visual regression if image loading logic breaks).
-  - **Validation**: Hero images visible with JS disabled;srcset/sizes verified correct on mobile.
-
-- [ ] **Enforce JS Deferral & Widget Gating**
-  - **Purpose**: Remove render-blocking scripts and prevent unnecessary initialization code from running.
-  - **Scope**: All widgets and main site bootstrap.
-  - **Dependencies**: none
-  - **Risk level**: high (Could break widget initialization or event listeners).
-  - **Validation**: No render-blocking scripts reported in DevTools for above-the-fold content.
-
-#### Page & Widget Mapping
-
-- [ ] Home page
-  - Primary widgets: site-navigation, featured-portfolio, footer
-  - LCP candidate: Squarespace Hero (Template) / `.featured-card:first-child img` (Secondary)
-  - Status: Featured Portfolio optimized in v1.5.1; Main Hero managed via Squarespace template (pending user updates).
-
-- [x] Concerts
-  - Primary widgets: concert-portfolio
-  - LCP candidate: `.concert-card:first-child img`
-  - Status: Optimized in v4.9.3 with pre-rendered hero.
-
-- [x] Events
-  - Primary widgets: event-portfolio
-  - LCP candidate: `.event-card:first-child img`
-  - Status: Optimized in v2.9.1 with pre-rendered hero (Pittsburgh Social Club).
-
-- [x] Journalism
-  - Primary widgets: photojournalism-portfolio
-  - LCP candidate: `.journalism-card:first-child img`
-  - Status: Optimized in v5.5.3 with pre-rendered hero (CMU Trump Protest).
-
-- [x] Portraits
-  - Primary widgets: portrait-portfolio
-  - LCP candidate: `.portrait-card:first-child img`
-  - Status: Optimized in v2.0.2 with pre-rendered hero (Editorial).
-
-- [x] About Page
-  - Primary widgets: complete-about-page
-  - LCP candidate: `.bio-photo img`
-  - Status: Optimized in v2.4.1 (Eager load + High priority).
-
-For each page:
-
-- [ ] Identify actual LCP element via DevTools
-- [ ] Verify it renders without waiting on JavaScript
-- [ ] Record findings before optimization
-
-#### Definition of Done (Performance)
-
-This section may be considered complete only when:
-
-- [ ] LCP element is explicitly identified per primary page
-- [ ] LCP content is visible without waiting on JS execution
-- [ ] No render-blocking scripts remain for above-the-fold content
-- [ ] Widget initialization is gated by presence
-- [ ] DOM structure for primary widgets is minimal and intentional
-- [ ] Before/after metrics are recorded for each optimized page
-- [ ] Accessibility and semantics are preserved or improved
-
-If a change improves Lighthouse scores but delays visible content, it is not done.
-
-### ☁️ Infrastructure & Deployment
-
-- [ ] **Cloudflare Worker Production Deploy**
-  - [ ] Deploy Worker to production with proper environment variables (use AUTH-SETUP-GUIDE.md)
-  - [ ] Create KV namespaces (MCCAL_KV, MCCAL_KV_PREVIEW)
-  - [ ] Configure manifests/blog widget to point at production Worker URL
-  - [ ] Test end-to-end flows: manifest webhook, blog auth/posts, rate limiting, cache stats
-- [ ] **Next.js Self-Hosted Site Migration**
-  - [ ] Create structure under `sites/dev.mcc-cal.com/`
-  - [ ] Add Layout, Nav, and Footer components with "Self-Hosted" branding
-  - [ ] Implement ConcertWidget (manifest typing, fetch, gallery, lightbox, CSS module)
-  - [ ] Add stubs for FeaturedWidget, EventWidget, JournalismWidget
-  - [ ] Add manifest loader utility and manifest types
-  - [ ] Add minimal pages for all routes & CSS modules for visual parity
-- [ ] **Domain & DNS Setup**
-  - [ ] Set up dev.mcc-cal.com subdomain (CNAME/Tunnel)
-  - [ ] Configure SSL/TLS and test CORS/API integration
-
-### 🎥 Feature Tracks: Video Portfolio (v0.2.x)
-
-- [ ] TODO: Add transcripts & captions panel (WebVTT ingest + transcript export) — Phase 2
-- [ ] TODO: Implement manifest generator and aggregated video-manifest.json
-- [ ] TODO: Add adaptive bitrate streaming (HLS/DASH) with quality selector + fallback to MP4
-- [ ] TODO: Add debug panel metrics and performance logging
+- [ ] **Manifest Generator** - Build pipeline for `video-manifest.json`
+- [ ] **Data Flow** - Connect to external sources (YouTube, Vimeo, MP4)
+- [ ] **Phase 2 Features** - WebVTT transcripts, adaptive bitrate (HLS/DASH)
+- [ ] **Production Scope** - Decide if this becomes a full surface or stays experimental
 
 ---
 
-## 🛠️ Widget Enhancement Roadmap (vNext)
+## 🧹 Repository Maintenance
 
-Phased improvements for the existing widget ecosystem.
+Ongoing housekeeping and modernizations.
 
-### Phase 1: Foundation & Reliability
+### Q2 2026
 
-- [ ] **Global Debug Mode**: Implement `data-debug` in `portfolio-api.js` v2 adapter
-- [ ] **Navigation Refinement**: Add Passive Scroll Listeners and Safe Area Insets to `site-navigation`
-- [ ] **Empty State Resilience**: Add UI handling in `concert-portfolio` and `photojournalism-portfolio`
-- [ ] **Blog Performance**: Add Search Debouncing (300ms) to `blog-feed`
-- [x] **Podcast Reliability**: _[OUT OF SCOPE - Assigned to Podcast Agent]_ Implement CORS Proxy Fallback Chain for `podcast-feed`
-- [ ] **Admin Observability**: Add GitHub API Rate Limit Detection to `admin-dashboard`
-- [ ] **Event Portfolio Polish**: Auto-detect latest widget version & URL normalization fix
-- [ ] **Content Widget Polish**:
-  - [x] Add spam honeypot to `contact-form`
-  - [ ] Implement dynamic logo track for `client-carousel`
-  - [ ] Add star-rating schema to `testimonials`
+- [ ] **Node.js Upgrade** - 20.15.1 → 20.19+ LTS (or 22.x LTS)
+- [ ] **ESLint 9 Migration** - Flat config format (audit done, implementation pending)
+- [ ] **Dependency Refresh** - Run `npm audit fix` and update dev dependencies
 
-### Phase 2: Performance & Scale
+### Standards & Documentation
 
-- [ ] **Persistent Cache**: Implement IndexedDB Caching in `portfolio-api.js`
-- [ ] **Image Optimization**: Add Thumbnail Precomputation logic to concert manifest generator
-- [ ] **Video Deferral**: Implement Script Deferral (lazy load YT/Vimeo SDKs)
-- [ ] **Virtual Scrolling**: Add opt-in for `blog-feed` (data-virtual-scroll)
-- [ ] **Live Roadmap**: Integrate real-time GitHub Commit Sync (replacing hardcoded stats)
-- [ ] **WebP Consolidation**: Implement manifest-side duplicate pairing with sources array
-
-### Phase 3: Advanced Configurability
-
-- [ ] **Modular About Page**: Add Component Toggle Flags (data-show-\*) to `complete-about-page`
-- [ ] **Card Templating**: Implement Custom Card Template Slot in `blog-feed`
-- [ ] **Fresh Views**: Add Shuffle on Load capability to all standard portfolios
-- [ ] **Concert Experience**: Additional Spotify artist integrations and interactive embeds
+- [ ] **Widget README Refresh** - Update all widget READMEs with current versions
+- [ ] **CHANGELOG.md Sync** - Ensure all recent changes documented
+- [ ] **Copilot Instructions** - Update `.github/copilot-instructions.md` with latest patterns
 
 ---
 
-## 🔧 Engineering Standards & Quality
+## � Future Tracks (Unscheduled)
 
-### CI/CD & Automation
+Ideas and longer-term initiatives. Not prioritized.
 
-- [ ] Evaluate GitHub Actions secret lint warnings (reusable `workflow_call` dispatcher)
-- [ ] TODO: Add automated widget validation (small unit/integration tests) and wire into CI
-- [x] **Implement CI Check for Active Widget Versions**
-  - **Purpose**: Enforce the "≤2 active versions" policy to prevent technical debt and maintain repository hygiene.
-  - **Scope**: Github Actions workflows or standalone script in `scripts/`. Must not modify widget files.
-  - [x] Cleanup existing violations (archive older versions)
-  - **Findings**: 0 violations. All violating widgets archived. Recursive scanner and CI check implemented.
-  - **Validation**: CI passes; `npm run scan:widget-versions` returns "PASS".
+### Possible New Widgets
 
-- [ ] TODO: Add structured data validator & Lighthouse automation snapshot
+- [ ] Services showcase (categorized work overview)
+- [ ] Event calendar (Google Calendar integration)
+- [ ] FAQ accordion
 
-### Performance, SEO & A11y
-
-- [ ] TODO: Audit and optimize Lighthouse metrics (FCP/LCP/TBT) for all portfolio widgets
-- [ ] TODO: Implement aggressive caching strategies for widget-delivered assets
-- [ ] TODO: Add accessibility improvements: ARIA labels, keyboard navigation, screen reader support
-- [ ] TODO: Integrate axe-core accessibility audit into CI for widgets
-
----
-
-## 📚 Documentation & Maintenance
-
-- [ ] TODO: Update copilot instructions, CHANGELOG.md, and docs when making structural changes
-- [ ] TODO: Consolidate and update all widget README files with current versions and features
-- [ ] TODO: Create comprehensive widget testing suite / documentation site
-- [ ] TODO: Continue phased repository improvement plan (docs/repo-improvement-plan.md)
-- [ ] TODO: Add schema diff & performance snapshot automation
-
----
-
-## 🔮 Backlog & Future Ideation
-
-### New Widget Concepts
-
-- [ ] Services/Portfolio showcase (categorized work)
-- [ ] Social Media Feed aggregator
-- [ ] Event Calendar / Scheduling (Google Calendar integration)
-- [ ] Interactive FAQ accordion widget
-
-### Advanced Features
+### Platform Ideas
 
 - [ ] AI-powered image alt-text generation
-- [ ] Real-time analytics and user interaction tracking
+- [ ] Real-time analytics dashboard
 - [ ] A/B testing framework for widget variations
-- [ ] Widget customization API for client-specific branding
-- [ ] Dashboards: Centralized performance monitoring widget
+
+---
+
+## 📊 Quick Stats
+
+| Area | Status | Count |
+|------|--------|-------|
+| Vite Site | Active dev | React 18, Vite 6, TypeScript 5.6 |
+| Widgets | Maintained | 24 widgets, 2 active versions each |
+| API | Deploy pending | Cloudflare Worker, KV storage |
+| Docs | Current | 109 docs in `docs/` |
+
+---
+
+*This file is maintained manually. Move completed items to `completed.md`.*
