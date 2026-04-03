@@ -1,41 +1,45 @@
+import { useMemo, useState } from 'react';
 import Layout from '@/components/Layout/Layout';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import ConcertArtistSupport from '@/components/portfolio/ConcertArtistSupport';
 import PortfolioFilters from '@/components/portfolio/PortfolioFilters';
 import PortfolioGrid from '@/components/portfolio/PortfolioGrid';
 import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import '@/components/portfolio/portfolio.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const ALL = 'All';
 
-interface ConcertItem {
-  title: string;
-  bandName?: string;
-  folderPath?: string;
+interface ConcertBand {
+  bandName: string;
+  relativeFolderPath: string;
   dateDisplay?: string;
-  dateISO?: string;
+  concertDate?: { iso?: string };
   totalImages: number;
-  images: { filename: string; path: string }[];
+  images: string[];
 }
 
 interface ConcertManifest {
-  items: ConcertItem[];
+  bands: ConcertBand[];
 }
 
 function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
-  return manifest.items.map((item) => {
-    const images = item.images.map((img) => ({
-      url: imageUrl.concert(item.folderPath ?? item.title, img.filename),
-      filename: img.filename,
-      alt: `${item.title}  concert photo`,
+  return manifest.bands.map((band) => {
+    const images = band.images.map((filename) => ({
+      url: imageUrl.concert(band.relativeFolderPath, filename),
+      filename,
+      alt: `${band.bandName} concert photo`,
     }));
+
     return {
-      id: item.folderPath
-        ? item.folderPath.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-        : item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-      title: item.title,
-      dateDisplay: item.dateDisplay,
-      dateISO: item.dateISO,
+      id: `${band.relativeFolderPath}-${band.bandName}`
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, ''),
+      title: band.bandName,
+      dateDisplay: band.dateDisplay,
+      dateISO: band.concertDate?.iso,
       category: 'Concert',
       images,
       coverImage: images[0],
@@ -43,28 +47,26 @@ function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
   });
 }
 
-import { useMemo, useState } from 'react';
-
-const ALL = 'All';
-
 export default function ConcertsPage() {
   const { data, status, error } = useManifest<ConcertManifest>('concerts');
   const [activeFilter, setActiveFilter] = useState(ALL);
 
   const groups = useMemo(() => (data ? adaptConcerts(data) : []), [data]);
 
-  // Filter by year derived from dateISO
   const filters = useMemo(() => {
-    const years = [...new Set(groups.map((g) => g.dateISO?.slice(0, 4)).filter(Boolean))].sort(
-      (a, b) => Number(b) - Number(a)
+    const years = [...new Set(groups.map((group) => group.dateISO?.slice(0, 4)).filter(Boolean))].sort(
+      (left, right) => Number(right) - Number(left),
     );
+
     return years.length > 1 ? [ALL, ...years] : [];
   }, [groups]);
 
   const filtered = useMemo(
     () =>
-      activeFilter === ALL ? groups : groups.filter((g) => g.dateISO?.startsWith(activeFilter)),
-    [groups, activeFilter]
+      activeFilter === ALL
+        ? groups
+        : groups.filter((group) => group.dateISO?.startsWith(activeFilter)),
+    [groups, activeFilter],
   );
 
   usePageMeta({
@@ -95,7 +97,7 @@ export default function ConcertsPage() {
         {status === 'loading' && (
           <div className="pf-loading">
             <span className="pf-spinner" aria-hidden="true" />
-            Loading…
+            Loading...
           </div>
         )}
 
@@ -108,7 +110,12 @@ export default function ConcertsPage() {
 
         {status === 'success' && (
           <>
-            <PortfolioFilters filters={filters.filter((f): f is string => typeof f === 'string')} active={activeFilter} onChange={setActiveFilter} />
+            <ConcertArtistSupport bands={data?.bands ?? []} />
+            <PortfolioFilters
+              filters={filters.filter((filter): filter is string => typeof filter === 'string')}
+              active={activeFilter}
+              onChange={setActiveFilter}
+            />
             <PortfolioGrid groups={filtered} />
           </>
         )}
