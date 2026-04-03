@@ -38,10 +38,6 @@ export function WidgetEmbed({
         apiPath += `/${widget}`;
         if (version) apiPath += `/${version}`;
 
-        if (import.meta.env.DEV) {
-          console.log(`[WidgetEmbed] Loading from API: ${apiPath}`);
-        }
-
         const response = await fetch(apiPath, { cache: 'no-store' });
 
         if (!response.ok) {
@@ -57,10 +53,12 @@ export function WidgetEmbed({
         // Note: widget HTML content is served from our own controlled repository
         // (local filesystem in dev, GitHub raw in production via serverless function)
         // This is equivalent to the original Next.js site's approach.
-        containerRef.current.innerHTML = html; // nosec
+        if (containerRef.current) {
+          containerRef.current.innerHTML = html; // nosec
+        }
 
-        const scripts = containerRef.current.querySelectorAll('script');
-        scripts.forEach((script) => {
+        const scripts = containerRef.current?.querySelectorAll('script');
+        scripts?.forEach((script) => {
           const newScript = document.createElement('script');
           Array.from(script.attributes).forEach((attr) => {
             newScript.setAttribute(attr.name, attr.value);
@@ -68,10 +66,6 @@ export function WidgetEmbed({
           if (script.textContent) newScript.textContent = script.textContent;
           script.parentNode?.replaceChild(newScript, script);
         });
-
-        if (import.meta.env.DEV) {
-          console.log(`[WidgetEmbed] Widget loaded successfully: ${widget}`);
-        }
 
         onLoad?.();
       } catch (error) {
