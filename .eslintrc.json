@@ -16,5 +16,5 @@
     "no-useless-escape": "off",
     "no-constant-condition": ["warn"]
   },
-  "ignorePatterns": ["node_modules/**", "dist/**", "logs/**", "coverage/**", "scripts/_archived/**"]
+  "ignorePatterns": ["node_modules/**", "dist/**", "sites/**/dist/**", "logs/**", "coverage/**", "scripts/_archived/**"]
 }
