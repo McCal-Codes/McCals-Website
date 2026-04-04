@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Editor | McCal Media</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background: #1a1a2e;
+      color: white;
+      padding: 20px;
+      margin: -20px -20px 20px;
+    }
+    header h1 { font-size: 24px; margin-bottom: 5px; }
+    header p { color: #aaa; font-size: 14px; }
+    .nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .nav button {
+      padding: 10px 20px;
+      border: none;
+      background: #ddd;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .nav button.active {
+      background: #1a1a2e;
+      color: white;
+    }
+    .panel {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .panel.active { display: block; }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    input[type="text"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    textarea {
+      min-height: 400px;
+      resize: vertical;
+      font-family: 'Monaco', 'Menlo', monospace;
+    }
+    .excerpt textarea { min-height: 80px; }
+    .tags textarea { min-height: 60px; }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-primary {
+      background: #1a1a2e;
+      color: white;
+    }
+    .btn-secondary {
+      background: #eee;
+      color: #333;
+    }
+    .btn-danger {
+      background: #e74c3c;
+      color: white;
+    }
+    .post-list {
+      list-style: none;
+    }
+    .post-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .post-item:hover { background: #f9f9f9; }
+    .post-item:last-child { border-bottom: none; }
+    .post-meta {
+      font-size: 12px;
+      color: #666;
+    }
+    .post-actions button {
+      padding: 6px 12px;
+      margin-left: 5px;
+      font-size: 12px;
+    }
+    .status {
+      padding: 10px 15px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .draft-badge {
+      background: #ffc107;
+      color: #333;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      margin-left: 10px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* Block Editor Styles */
+    .blocks-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .block-item {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      padding: 12px;
+      position: relative;
+    }
+    .block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .block-controls {
+      display: flex;
+      gap: 5px;
+    }
+    .block-controls button {
+      padding: 4px 8px;
+      font-size: 12px;
+      background: #e9ecef;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .block-controls button:hover {
+      background: #dee2e6;
+    }
+    .block-content textarea {
+      min-height: 80px;
+      font-family: inherit;
+    }
+    .block-content textarea.code-block {
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      background: #f4f4f4;
+    }
+    .block-content input[type="text"] {
+      margin-bottom: 8px;
+    }
+    .block-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-add-block {
+      padding: 8px 16px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .btn-add-block:hover {
+      background: #218838;
+    }
+    .image-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .image-selector select {
+      font-size: 13px;
+      padding: 8px;
+    }
+    .image-preview {
+      margin: 10px 0;
+      min-height: 50px;
+    }
+    .image-preview img {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    /* Image Block Editor Styles */
+    .image-block-editor {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-pick-image {
+      padding: 30px;
+      background: #f8f9fa;
+      border: 2px dashed #dee2e6;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #666;
+      transition: all 0.2s;
+    }
+    .btn-pick-image:hover {
+      background: #e9ecef;
+      border-color: #adb5bd;
+    }
+    .selected-image {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .btn-change-image {
+      padding: 8px 16px;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .image-picker {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .picker-header {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid #dee2e6;
+      background: white;
+      border-radius: 8px 8px 0 0;
+    }
+    .picker-header input {
+      flex: 1;
+    }
+    .picker-header button {
+      padding: 8px 12px;
+      background: #e9ecef;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .image-gallery {
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 12px;
+    }
+    .gallery-folder {
+      margin-bottom: 15px;
+    }
+    .gallery-folder h4 {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
+    }
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+      background: #e9ecef;
+    }
+    .gallery-item:hover {
+      border-color: #28a745;
+    }
+    .gallery-item.selected {
+      border-color: #28a745;
+      box-shadow: 0 0 0 2px #28a745;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .picker-footer {
+      padding: 12px;
+      border-top: 1px solid #dee2e6;
+      background: white;
+      border-radius: 0 0 8px 8px;
+    }
+    .picker-footer input {
+      width: 100%;
+    }
+
+    /* Two-column edit layout */
+    .edit-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    @media (max-width: 1024px) {
+      .edit-layout {
+        grid-template-columns: 1fr;
+      }
+      .preview-column {
+        display: none;
+      }
+      .preview-column.visible {
+        display: block;
+      }
+    }
+    .editor-column {
+      min-width: 0;
+    }
+    .preview-column {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      overflow: hidden;
+      max-height: calc(100vh - 200px);
+      position: sticky;
+      top: 20px;
+    }
+    .preview-header {
+      background: #1a1a2e;
+      color: white;
+      padding: 12px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-toggle-preview {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .preview-content {
+      padding: 20px;
+      overflow-y: auto;
+      max-height: calc(100vh - 280px);
+      background: white;
+    }
+    .preview-content h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #1a1a2e;
+    }
+    .preview-content .meta {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .preview-content .excerpt {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-left: 3px solid #1a1a2e;
+    }
+    .preview-content p {
+      margin-bottom: 15px;
+      line-height: 1.7;
+    }
+    .preview-content blockquote {
+      border-left: 3px solid #28a745;
+      padding-left: 15px;
+      margin: 15px 0;
+      font-style: italic;
+      color: #555;
+    }
+    .preview-content pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 14px;
+    }
+    .preview-content figure {
+      margin: 20px 0;
+    }
+    .preview-content img {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+    .preview-content figcaption {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✍️ Blog Editor</h1>
+      <p>Write and manage blog posts</p>
+    </header>
+
+    <nav class="nav">
+      <button class="active" onclick="showPanel('list')">Posts</button>
+      <button onclick="showPanel('new')">New Post</button>
+      <button onclick="showPanel('edit')">Edit Post</button>
+    </nav>
+
+    <div id="status"></div>
+
+    <!-- Post List Panel -->
+    <div id="panel-list" class="panel active">
+      <h2>All Posts</h2>
+      <ul id="post-list" class="post-list">
+        <li class="post-item">Loading posts...</li>
+      </ul>
+    </div>
+
+    <!-- New Post Panel -->
+    <div id="panel-new" class="panel">
+      <h2>Create New Post</h2>
+      <form id="new-post-form">
+        <div class="two-col">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="new-title" placeholder="My Awesome Post" required>
+          </div>
+          <div class="form-group">
+            <label>Slug (URL)</label>
+            <input type="text" id="new-slug" placeholder="my-awesome-post" required>
+          </div>
+        </div>
+
+        <div class="form-group excerpt">
+          <label>Excerpt</label>
+          <textarea id="new-excerpt" placeholder="Brief summary of the post..."></textarea>
+        </div>
+
+        <div class="two-col">
+          <div class="form-group">
+            <label>Category</label>
+            <select id="new-category">
+              <option value="essay">Essay</option>
+              <option value="photo">Photo</option>
+              <option value="tech">Tech</option>
+              <option value="workflow">Workflow</option>
+            </select>
+          </div>
+          <div class="form-group tags">
+            <label>Tags (comma separated)</label>
+            <input type="text" id="new-tags" placeholder="photography, sxsw, austin">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Content (Markdown)</label>
+          <textarea id="new-body" placeholder="# My Post Title&#10;&#10;Start writing here...&#10;&#10;## Section&#10;&#10;More content..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="new-draft" checked>
+            Save as draft (don't publish yet)
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary">Create Post</button>
+          <button type="button" class="btn-secondary" onclick="clearForm('new')">Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Edit Post Panel -->
+    <div id="panel-edit" class="panel">
+      <h2>Edit Post</h2>
+      <div class="form-group">
+        <label>Select Post</label>
+        <select id="edit-select">
+          <option value="">Choose a post...</option>
+        </select>
+      </div>
+
+      <form id="edit-post-form" style="display:none;">
+        <div class="edit-layout">
+          <!-- Left: Editor -->
+          <div class="editor-column">
+            <input type="hidden" id="edit-slug">
+
+            <div class="two-col">
+              <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="edit-title" required oninput="updatePreview()">
+              </div>
+              <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="edit-date">
+              </div>
+            </div>
+
+            <div class="form-group excerpt">
+              <label>Excerpt</label>
+              <textarea id="edit-excerpt" oninput="updatePreview()"></textarea>
+            </div>
+
+            <div class="two-col">
+              <div class="form-group">
+                <label>Category</label>
+                <select id="edit-category" onchange="updatePreview()">
+                  <option value="essay">Essay</option>
+                  <option value="photo">Photo</option>
+                  <option value="tech">Tech</option>
+                  <option value="workflow">Workflow</option>
+                </select>
+              </div>
+              <div class="form-group tags">
+                <label>Tags (comma separated)</label>
+                <input type="text" id="edit-tags">
+              </div>
+            </div>
+
+            <!-- Block-based Content Editor -->
+            <div class="form-group">
+              <label>Content Blocks <span style="font-weight: normal; color: #666;">(edits update preview live)</span></label>
+              <div id="edit-blocks-container" class="blocks-container">
+                <!-- Blocks will be dynamically added here -->
+              </div>
+              <div class="block-actions">
+                <button type="button" class="btn-add-block" onclick="addBlock('text')">+ Text</button>
+                <button type="button" class="btn-add-block" onclick="addBlock('quote')">+ Quote</button>
+                <button type="button" class="btn-add-block" onclick="addBlock('image')">+ Image</button>
+                <button type="button" class="btn-add-block" onclick="addBlock('code')">+ Code</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="edit-draft">
+                Draft (not published)
+              </label>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn-primary">Save Changes</button>
+              <button type="button" class="btn-secondary" onclick="openPreviewTab()">Open in New Tab</button>
+              <button type="button" class="btn-danger" onclick="deletePost()">Delete</button>
+            </div>
+          </div>
+
+          <!-- Right: Live Preview -->
+          <div class="preview-column">
+            <div class="preview-header">
+              <span>📄 Live Preview</span>
+              <button type="button" class="btn-toggle-preview" onclick="togglePreview()">Hide</button>
+            </div>
+            <div id="post-preview" class="preview-content">
+              <p style="color: #999; text-align: center; padding: 40px;">Select a post to see preview</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Simple blog CMS client
+    const API_BASE = '/admin/api';
+
+    // Show panel
+    function showPanel(name) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById('panel-' + name).classList.add('active');
+      document.querySelector(`button[onclick="showPanel('${name}')"]`).classList.add('active');
+
+      if (name === 'list' || name === 'edit') loadPosts();
+    }
+
+    // Live preview functions
+    function updatePreview() {
+      const title = document.getElementById('edit-title')?.value || '';
+      const date = document.getElementById('edit-date')?.value || '';
+      const excerpt = document.getElementById('edit-excerpt')?.value || '';
+      const category = document.getElementById('edit-category')?.value || '';
+      const blocks = getBlocksFromContainer();
+
+      const previewEl = document.getElementById('post-preview');
+      if (!previewEl) return;
+
+      // Format date nicely
+      const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }) : '';
+
+      // Build preview HTML
+      let html = '';
+      
+      if (title) {
+        html += `<h1>${escapeHtml(title)}</h1>`;
+      }
+      
+      if (formattedDate || category) {
+        html += `<div class="meta">${formattedDate}${formattedDate && category ? ' · ' : ''}${escapeHtml(category)}</div>`;
+      }
+      
+      if (excerpt) {
+        html += `<div class="excerpt">${escapeHtml(excerpt)}</div>`;
+      }
+
+      // Render blocks
+      blocks.forEach(block => {
+        if (block.type === 'text' && block.content) {
+          // Convert newlines to paragraphs
+          const paragraphs = block.content.split('\n\n').filter(p => p.trim());
+          paragraphs.forEach(p => {
+            html += `<p>${escapeHtml(p)}</p>`;
+          });
+        } else if (block.type === 'quote' && block.content) {
+          html += `<blockquote>${escapeHtml(block.content)}</blockquote>`;
+        } else if (block.type === 'code' && block.content) {
+          html += `<pre><code>${escapeHtml(block.content)}</code></pre>`;
+        } else if (block.type === 'image' && block.content) {
+          html += `<figure>`;
+          html += `<img src="${escapeHtml(block.content)}" alt="${escapeHtml(block.alt || '')}" onerror="this.style.display='none'">`;
+          if (block.caption) {
+            html += `<figcaption>${escapeHtml(block.caption)}</figcaption>`;
+          }
+          html += `</figure>`;
+        }
+      });
+
+      if (!html) {
+        html = '<p style="color: #999; text-align: center; padding: 40px;">Start editing to see preview</p>';
+      }
+
+      previewEl.innerHTML = html;
+    }
+
+    function togglePreview() {
+      const previewCol = document.querySelector('.preview-column');
+      const btn = document.querySelector('.btn-toggle-preview');
+      if (previewCol.classList.contains('hidden')) {
+        previewCol.classList.remove('hidden');
+        previewCol.style.display = 'block';
+        btn.textContent = 'Hide';
+      } else {
+        previewCol.classList.add('hidden');
+        previewCol.style.display = 'none';
+        btn.textContent = 'Show';
+      }
+    }
+
+    function openPreviewTab() {
+      const slug = document.getElementById('edit-slug')?.value;
+      if (slug) {
+        window.open(`/blog/${slug}`, '_blank');
+      } else {
+        showStatus('Save the post first to preview in new tab', 'error');
+      }
+    }
+
+    // Block editor functions
+    let currentBlocks = [];
+
+    function addBlock(type, content = '', alt = '', caption = '') {
+      const block = { type, content, alt, caption };
+      currentBlocks.push(block);
+      renderBlocks();
+      updatePreview(); // Update preview when adding blocks
+    }
+
+    function removeBlock(index) {
+      currentBlocks.splice(index, 1);
+      renderBlocks();
+      updatePreview(); // Update preview when removing blocks
+    }
+
+    function moveBlock(index, direction) {
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= currentBlocks.length) return;
+      
+      const temp = currentBlocks[index];
+      currentBlocks[index] = currentBlocks[newIndex];
+      currentBlocks[newIndex] = temp;
+      renderBlocks();
+      updatePreview(); // Update preview when reordering blocks
+    }
+
+    function updateBlock(index, field, value) {
+      currentBlocks[index][field] = value;
+      updatePreview(); // Live update on every keystroke
+    }
+
+    function renderBlocks() {
+      const container = document.getElementById('edit-blocks-container');
+      if (!container) return;
+
+      container.innerHTML = currentBlocks.map((block, index) => {
+        const isFirst = index === 0;
+        const isLast = index === currentBlocks.length - 1;
+        
+        let contentHtml = '';
+        
+        if (block.type === 'text') {
+          contentHtml = `<textarea class="block-textarea" placeholder="Write your text here..." oninput="updateBlock(${index}, 'content', this.value)">${escapeHtml(block.content)}</textarea>`;
+        } else if (block.type === 'quote') {
+          contentHtml = `<textarea class="block-textarea" placeholder="Enter quote text..." oninput="updateBlock(${index}, 'content', this.value)">${escapeHtml(block.content)}</textarea>`;
+        } else if (block.type === 'code') {
+          contentHtml = `<textarea class="block-textarea code-block" placeholder="Paste your code here..." oninput="updateBlock(${index}, 'content', this.value)">${escapeHtml(block.content)}</textarea>`;
+        } else if (block.type === 'image') {
+          contentHtml = `
+            <div class="image-block-editor">
+              ${block.content ? `
+                <div class="selected-image">
+                  <img src="${block.content}" alt="Selected" onerror="this.style.display='none'" style="max-width: 100%; max-height: 200px; border-radius: 4px;">
+                  <button type="button" class="btn-change-image" onclick="showImagePicker(${index})">Change Image</button>
+                </div>
+              ` : `
+                <button type="button" class="btn-pick-image" onclick="showImagePicker(${index})">📷 Choose Image</button>
+              `}
+              <div class="image-picker" id="image-picker-${index}" style="display:none;">
+                <div class="picker-header">
+                  <input type="text" placeholder="Search images..." oninput="filterImages(${index}, this.value)" class="image-search">
+                  <button type="button" onclick="hideImagePicker(${index})">×</button>
+                </div>
+                <div class="image-gallery" id="image-gallery-${index}">
+                  <!-- Gallery populated by JS -->
+                </div>
+                <div class="picker-footer">
+                  <input type="text" placeholder="Or enter custom URL/path" value="${escapeHtml(block.content)}" oninput="updateBlock(${index}, 'content', this.value); updateImageBlock(${index})">
+                </div>
+              </div>
+              <input type="text" placeholder="Alt text (accessibility)" value="${escapeHtml(block.alt)}" oninput="updateBlock(${index}, 'alt', this.value)" style="margin-top: 10px;">
+              <input type="text" placeholder="Caption (optional)" value="${escapeHtml(block.caption)}" oninput="updateBlock(${index}, 'caption', this.value)">
+            </div>
+          `;
+        }
+
+        return `
+          <div class="block-item" data-index="${index}">
+            <div class="block-header">
+              <span>${block.type}</span>
+              <div class="block-controls">
+                <button type="button" onclick="moveBlock(${index}, -1)" ${isFirst ? 'disabled' : ''}>↑</button>
+                <button type="button" onclick="moveBlock(${index}, 1)" ${isLast ? 'disabled' : ''}>↓</button>
+                <button type="button" onclick="removeBlock(${index})">×</button>
+              </div>
+            </div>
+            <div class="block-content">
+              ${contentHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getBlocksFromContainer() {
+      return currentBlocks.map(block => ({
+        type: block.type,
+        content: block.content,
+        ...(block.alt && { alt: block.alt }),
+        ...(block.caption && { caption: block.caption })
+      }));
+    }
+
+    // Image helper functions
+    let availableImages = [];
+    let groupedImages = {};
+
+    async function loadAvailableImages() {
+      try {
+        const res = await fetch(`${API_BASE}/images`);
+        const data = await res.json();
+        if (data.images) {
+          availableImages = data.images;
+          groupedImages = data.grouped || {};
+          window.availableImages = availableImages;
+        }
+      } catch (err) {
+        console.error('Failed to load images:', err);
+      }
+    }
+
+    function showImagePicker(blockIndex) {
+      const picker = document.getElementById(`image-picker-${blockIndex}`);
+      const gallery = document.getElementById(`image-gallery-${blockIndex}`);
+      if (!picker || !gallery) return;
+      
+      // Build gallery HTML
+      let html = '';
+      Object.entries(groupedImages).forEach(([folder, images]) => {
+        if (images.length === 0) return;
+        html += `
+          <div class="gallery-folder">
+            <h4>${folder}</h4>
+            <div class="gallery-grid">
+              ${images.map(img => `
+                <div class="gallery-item" onclick="selectImageFromGallery(${blockIndex}, '${img.path}')" data-path="${img.path}">
+                  <img src="${img.path}" alt="${img.filename}" loading="lazy" onerror="this.style.display='none'">
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      });
+      
+      gallery.innerHTML = html || '<p style="color: #999; text-align: center;">No images found</p>';
+      picker.style.display = 'block';
+    }
+
+    function hideImagePicker(blockIndex) {
+      const picker = document.getElementById(`image-picker-${blockIndex}`);
+      if (picker) picker.style.display = 'none';
+    }
+
+    function filterImages(blockIndex, query) {
+      const gallery = document.getElementById(`image-gallery-${blockIndex}`);
+      if (!gallery) return;
+      
+      const lowerQuery = query.toLowerCase();
+      const items = gallery.querySelectorAll('.gallery-item');
+      
+      items.forEach(item => {
+        const path = item.dataset.path.toLowerCase();
+        item.style.display = path.includes(lowerQuery) ? 'block' : 'none';
+      });
+      
+      // Hide empty folders
+      gallery.querySelectorAll('.gallery-folder').forEach(folder => {
+        const visibleItems = folder.querySelectorAll('.gallery-item[style!="display: none;"]');
+        folder.style.display = visibleItems.length > 0 ? 'block' : 'none';
+      });
+    }
+
+    function selectImageFromGallery(blockIndex, path) {
+      updateBlock(blockIndex, 'content', path);
+      hideImagePicker(blockIndex);
+      updateImageBlock(blockIndex);
+      updatePreview();
+    }
+
+    function updateImageBlock(blockIndex) {
+      // Re-render just this block to show the selected image
+      renderBlocks();
+      updatePreview();
+    }
+
+    function selectImage(index, path) {
+      if (!path) return;
+      updateBlock(index, 'content', path);
+      updateImagePreview(index, path);
+      // Update the text input to match
+      const blockEl = document.querySelector(`[data-index="${index}"]`);
+      if (blockEl) {
+        const input = blockEl.querySelector('input[type="text"]');
+        if (input) input.value = path;
+      }
+    }
+
+    function updateImagePreview(index, path) {
+      const previewEl = document.getElementById(`img-preview-${index}`);
+      if (previewEl) {
+        if (path) {
+          previewEl.innerHTML = `<img src="${path}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\\'color: #999; font-size: 12px;\\'>Preview not available</span>'" style="max-width: 200px; max-height: 150px; border-radius: 4px; object-fit: cover;">`;
+        } else {
+          previewEl.innerHTML = '';
+        }
+      }
+    }
+
+    // Load posts
+    async function loadPosts() {
+      try {
+        const res = await fetch(`${API_BASE}/posts`);
+        const data = await res.json();
+
+        // Handle error response
+        if (!res.ok || !data || !Array.isArray(data.posts)) {
+          console.error('API error:', data);
+          document.getElementById('post-list').innerHTML = 
+            '<li class="post-item">Error loading posts. Check console for details.</li>';
+          return;
+        }
+
+        // Update list
+        const listEl = document.getElementById('post-list');
+        if (data.posts.length === 0) {
+          listEl.innerHTML = '<li class="post-item">No posts yet. Create your first one!</li>';
+        } else {
+          listEl.innerHTML = data.posts.map(post => `
+            <li class="post-item">
+              <div>
+                <strong>${escapeHtml(post.title)}</strong>
+                ${post.draft ? '<span class="draft-badge">Draft</span>' : ''}
+                <div class="post-meta">${post.date} · ${post.category}</div>
+              </div>
+              <div class="post-actions">
+                <button onclick="editPost('${post.slug}')">Edit</button>
+              </div>
+            </li>
+          `).join('');
+        }
+
+        // Update edit dropdown
+        const selectEl = document.getElementById('edit-select');
+        selectEl.innerHTML = '<option value="">Choose a post...</option>' +
+          data.posts.map(post => `<option value="${post.slug}">${escapeHtml(post.title)}</option>`).join('');
+      } catch (err) {
+        console.error('Error loading posts:', err);
+        showStatus('Error loading posts: ' + err.message, 'error');
+        document.getElementById('post-list').innerHTML = 
+          '<li class="post-item">Failed to load posts. Is the server running?</li>';
+      }
+    }
+
+    // Escape HTML
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text || '';
+      return div.innerHTML;
+    }
+
+    // Show status
+    function showStatus(msg, type) {
+      const el = document.getElementById('status');
+      el.innerHTML = `<div class="status ${type}">${escapeHtml(msg)}</div>`;
+      setTimeout(() => el.innerHTML = '', 5000);
+    }
+
+    // Clear form
+    function clearForm(prefix) {
+      document.getElementById(`${prefix}-post-form`).reset();
+      if (prefix === 'edit') {
+        document.getElementById('edit-post-form').style.display = 'none';
+        currentBlocks = [];
+        renderBlocks();
+      }
+    }
+
+    // Create new post
+    document.getElementById('new-post-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const post = {
+        title: document.getElementById('new-title').value,
+        slug: document.getElementById('new-slug').value,
+        excerpt: document.getElementById('new-excerpt').value,
+        category: document.getElementById('new-category').value,
+        tags: document.getElementById('new-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+        body: document.getElementById('new-body').value,
+        draft: document.getElementById('new-draft').checked,
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/posts`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          showStatus('Post created successfully!', 'success');
+          clearForm('new');
+          showPanel('list');
+        } else {
+          showStatus(data.error || 'Failed to create post', 'error');
+        }
+      } catch (err) {
+        showStatus('Error: ' + err.message, 'error');
+      }
+    });
+
+    // Edit post selection
+    document.getElementById('edit-select').addEventListener('change', async (e) => {
+      const slug = e.target.value;
+      if (!slug) {
+        document.getElementById('edit-post-form').style.display = 'none';
+        currentBlocks = [];
+        renderBlocks();
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/posts/${slug}`);
+        const post = await res.json();
+
+        document.getElementById('edit-slug').value = post.slug;
+        document.getElementById('edit-title').value = post.title;
+        document.getElementById('edit-date').value = post.date;
+        document.getElementById('edit-excerpt').value = post.excerpt || '';
+        document.getElementById('edit-category').value = post.category;
+        document.getElementById('edit-tags').value = (post.tags || []).join(', ');
+        document.getElementById('edit-draft').checked = post.draft;
+
+        // Load blocks from post body
+        currentBlocks = (post.body || []).map(block => ({
+          type: block.type || 'text',
+          content: block.content || '',
+          alt: block.alt || '',
+          caption: block.caption || ''
+        }));
+        
+        // If no blocks, add a default text block
+        if (currentBlocks.length === 0) {
+          currentBlocks.push({ type: 'text', content: '', alt: '', caption: '' });
+        }
+        
+        renderBlocks();
+        updatePreview(); // Initial preview render
+        document.getElementById('edit-post-form').style.display = 'block';
+      } catch (err) {
+        showStatus('Error loading post: ' + err.message, 'error');
+      }
+    });
+
+    // Save edited post
+    document.getElementById('edit-post-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const slug = document.getElementById('edit-slug').value;
+      const post = {
+        title: document.getElementById('edit-title').value,
+        date: document.getElementById('edit-date').value,
+        excerpt: document.getElementById('edit-excerpt').value,
+        category: document.getElementById('edit-category').value,
+        tags: document.getElementById('edit-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+        body: getBlocksFromContainer(),
+        draft: document.getElementById('edit-draft').checked,
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/posts/${slug}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          showStatus('Post saved!', 'success');
+          loadPosts();
+        } else {
+          showStatus(data.error || 'Failed to save post', 'error');
+        }
+      } catch (err) {
+        showStatus('Error: ' + err.message, 'error');
+      }
+    });
+
+    // Edit post shortcut
+    function editPost(slug) {
+      showPanel('edit');
+      document.getElementById('edit-select').value = slug;
+      document.getElementById('edit-select').dispatchEvent(new Event('change'));
+    }
+
+    // Delete post
+    async function deletePost() {
+      const slug = document.getElementById('edit-slug').value;
+      if (!slug) return;
+
+      if (!confirm('Delete this post? This cannot be undone.')) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/posts/${slug}`, { method: 'DELETE' });
+        if (res.ok) {
+          showStatus('Post deleted', 'success');
+          clearForm('edit');
+          loadPosts();
+        } else {
+          showStatus('Failed to delete post', 'error');
+        }
+      } catch (err) {
+        showStatus('Error: ' + err.message, 'error');
+      }
+    }
+
+    // Auto-generate slug from title
+    document.getElementById('new-title').addEventListener('input', (e) => {
+      const slugEl = document.getElementById('new-slug');
+      if (!slugEl.value || slugEl.dataset.auto === 'true') {
+        slugEl.value = e.target.value
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+        slugEl.dataset.auto = 'true';
+      }
+    });
+
+    document.getElementById('new-slug').addEventListener('input', (e) => {
+      e.target.dataset.auto = e.target.value ? 'false' : 'true';
+    });
+
+    // Load posts on start
+    loadPosts();
+    loadAvailableImages();
+  </script>
+</body>
+</html>
