@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '@/styles/heroCarousel.module.css';
 
@@ -7,6 +7,11 @@ interface HeroSlide {
   meta: string;
   image: string;
   href: string;
+  // Optional: multiple links for randomization
+  links?: {
+    url: string;
+    label?: string;
+  }[];
   cta: string;
   alt: string;
   focalPointMobile?: { x: number; y: number };
@@ -43,6 +48,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/eedc836b-ce05-4452-b29c-8ab2a64f384e/101024_Obama+Speaks+at+Pittsburgh_CAL3364-min.jpg',
     href: '/journalism',
+    links: [
+      { url: '/journalism', label: 'Journalism' },
+      { url: '/showcase?filter=politics', label: 'Politics Gallery' },
+    ],
     cta: 'Politics',
     alt: 'Obama Smiling at the crowd during a Rally In Pittsburgh, PA',
     focalPointMobile: { x: 0.32421635258168385, y: 0.488 },
@@ -54,6 +63,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg',
     href: '/journalism',
+    links: [
+      { url: '/journalism', label: 'Journalism' },
+      { url: '/showcase?filter=protest', label: 'Protest Coverage' },
+    ],
     cta: 'Journalism',
     alt: 'Journalism assignment image from CMU protest.',
     focalPointMobile: { x: 0.7, y: 0.344 },
@@ -65,6 +78,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/62dcd231-e0e8-402b-abf4-cc34e995ea58/IMGP7209.jpg',
     href: '/nature',
+    links: [
+      { url: '/nature', label: 'Nature' },
+      { url: '/featured-work', label: 'Featured Work' },
+    ],
     cta: 'Pittsburgh',
     alt: 'A large, steel truss bridge spans over a body of water at sunset, with trees and buildings visible below and in the background.',
     focalPointMobile: { x: 0.6175632360483595, y: 0.464 },
@@ -76,6 +93,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg',
     href: '/portraits',
+    links: [
+      { url: '/portraits', label: 'Portraits' },
+      { url: '/showcase?filter=portraits', label: 'Portrait Gallery' },
+    ],
     cta: 'Portraits',
     alt: 'A woman and a child holding a sparkler at night, with dark trees in the background.',
     focalPointMobile: { x: 0.3513058767534031, y: 0.48 },
@@ -87,6 +108,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg',
     href: '/events',
+    links: [
+      { url: '/events', label: 'Events' },
+      { url: '/showcase?filter=corporate', label: 'Corporate Work' },
+    ],
     cta: 'Corporate',
     alt: 'Group of people at a professional networking event, talking and laughing, with a woman preparing drinks on a table.',
     focalPointMobile: { x: 0.8141660064306552, y: 0.528 },
@@ -98,6 +123,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg',
     href: '/events',
+    links: [
+      { url: '/events', label: 'Events' },
+      { url: '/showcase?filter=event', label: 'Event Gallery' },
+    ],
     cta: 'Event',
     alt: 'Event image from Honky Tonk gathering.',
     focalPointMobile: { x: 0.750466239268814, y: 0.656 },
@@ -109,6 +138,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/9c635526-663e-42ef-ba9c-7dcc8d477190/251025+When+We+Were+Dead_CAL8612_webuse.jpg',
     href: '/concerts',
+    links: [
+      { url: '/concerts', label: 'Concerts' },
+      { url: '/showcase?filter=concert', label: 'Concert Gallery' },
+    ],
     cta: 'Concert',
     alt: 'A singer on stage on his knees with green and blue lighting.',
     focalPointMobile: { x: 0.3828257120011642, y: 0.44 },
@@ -120,6 +153,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/77807f5b-9895-4444-804d-1b3363d0f1b3/250319+A+Guy+Who+Hates+Musicals+-+Ghostlight_CAL999.jpg',
     href: '/events',
+    links: [
+      { url: '/events', label: 'Events' },
+      { url: '/showcase?filter=theatre', label: 'Theatre Gallery' },
+    ],
     cta: 'Theatre',
     alt: 'The cast from A Guy Who Hates Musicals together on stage.',
     focalPointMobile: { x: 0.5, y: 0.5 },
@@ -131,6 +168,10 @@ const FAVORITES: HeroSlide[] = [
     image:
       'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f96709e7-3a00-4574-af88-795f26ce432e/IMGP6886.jpg',
     href: '/nature',
+    links: [
+      { url: '/nature', label: 'Nature' },
+      { url: '/showcase?filter=nature', label: 'Nature Gallery' },
+    ],
     cta: 'Nature',
     alt: 'Close-up of a pink coneflower with a bee on the dark center cone, blurred green background.',
     focalPointMobile: { x: 0.5, y: 0.5 },
@@ -162,6 +203,38 @@ const HeroCarousel: React.FC = () => {
   );
 
   const slides = FAVORITES;
+
+  // State for randomized links - stores the currently selected link for each slide
+  const [randomizedLinks, setRandomizedLinks] = useState<Record<number, string>>(() => {
+    // Initialize with random selections
+    const initial: Record<number, string> = {};
+    slides.forEach((slide, index) => {
+      initial[index] = getRandomLink(slide);
+    });
+    return initial;
+  });
+
+  // Function to get a random link from a slide's links array
+  function getRandomLink(slide: HeroSlide): string {
+    if (slide.links && slide.links.length > 1) {
+      const randomIndex = Math.floor(Math.random() * slide.links.length);
+      return slide.links[randomIndex].url;
+    }
+    // Fallback to primary href
+    return slide.href;
+  }
+
+  // Function to randomize link for a specific slide
+  const randomizeLink = useCallback((slideIndex: number) => {
+    const slide = slides[slideIndex];
+    if (slide.links && slide.links.length > 1) {
+      const newUrl = getRandomLink(slide);
+      setRandomizedLinks((prev) => ({
+        ...prev,
+        [slideIndex]: newUrl,
+      }));
+    }
+  }, [slides]);
 
   const syncHeight = useCallback(() => {
     const widget = widgetRef.current;
@@ -195,8 +268,10 @@ const HeroCarousel: React.FC = () => {
       indexRef.current = safe;
       const w = viewportWidthRef.current || window.innerWidth;
       setTrack(-safe * w, withTransition);
+      // Randomize link for the newly active slide
+      randomizeLink(safe);
     },
-    [slides.length, setTrack]
+    [slides.length, setTrack, randomizeLink]
   );
 
   const stopAutoplay = useCallback(() => {
@@ -265,7 +340,7 @@ const HeroCarousel: React.FC = () => {
     viewport.addEventListener('pointermove', onPointerMove);
     viewport.addEventListener('pointerup', onPointerUp);
     viewport.addEventListener('pointercancel', onPointerUp);
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
 
     const widget = widgetRef.current;
     widget?.addEventListener('mouseenter', stopAutoplay);
@@ -316,9 +391,10 @@ const HeroCarousel: React.FC = () => {
                     />
                     <figcaption className={styles.heroCaption}>
                       <Link
-                        to={slide.href}
+                        to={randomizedLinks[i] || slide.href}
                         className={styles.heroCta}
                         aria-label={`View ${slide.cta}`}
+                        title={slide.links && slide.links.length > 1 ? 'Randomly selected from available galleries' : undefined}
                       >
                         {slide.cta}
                       </Link>
