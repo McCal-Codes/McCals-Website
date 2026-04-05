@@ -14,11 +14,13 @@ export default function JournalismPage() {
       type: 'website',
       title: 'Photojournalism | Caleb McCartney',
       description: 'Editorial and news photography by Pittsburgh photojournalist Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Photojournalism | Caleb McCartney',
       description: 'Editorial and news photography by Pittsburgh photojournalist Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
   });
 

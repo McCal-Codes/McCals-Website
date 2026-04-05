@@ -1,7 +1,41 @@
 import Layout from '@/components/Layout/Layout';
 import { Link } from 'react-router-dom';
+import { usePageMeta } from '@/hooks/usePageMeta';
 
-const ProjectsPage = () => (
+const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+
+const ProjectsPage = () => {
+  usePageMeta({
+    title: 'Projects | Caleb McCartney',
+    description: 'Apps, tools, and creative projects by Caleb McCartney. Design systems, Abridged app, and development roadmap.',
+    canonical: `${SITE_URL}/projects`,
+    og: {
+      type: 'website',
+      title: 'Projects | Caleb McCartney',
+      description: 'Apps, tools, and creative projects by Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+    },
+    twitter: {
+      card: 'summary',
+      title: 'Projects | Caleb McCartney',
+      description: 'Apps, tools, and creative projects by Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+    },
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Projects',
+      description: 'Apps, tools, and creative projects by Caleb McCartney.',
+      url: `${SITE_URL}/projects`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'McCal Media',
+        url: SITE_URL,
+      },
+    },
+  });
+
+  return (
   <Layout>
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '80px 24px 40px' }}>
       <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 600, marginBottom: '0.5em' }}>
@@ -27,6 +61,6 @@ const ProjectsPage = () => (
       </div>
     </div>
   </Layout>
-);
+};
 
 export default ProjectsPage;

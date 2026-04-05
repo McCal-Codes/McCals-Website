@@ -78,11 +78,13 @@ export default function ConcertsPage() {
       type: 'website',
       title: 'Concert Photography | Caleb McCartney',
       description: 'Live concert photography by Pittsburgh photojournalist Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Concert Photography | Caleb McCartney',
       description: 'Live concert photography by Pittsburgh photojournalist Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
   });
 

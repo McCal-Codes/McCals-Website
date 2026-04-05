@@ -74,11 +74,13 @@ export default function EventsPage() {
       type: 'website',
       title: 'Event Photography | Caleb McCartney',
       description: 'Corporate and event photography by Pittsburgh photographer Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Event Photography | Caleb McCartney',
       description: 'Corporate and event photography by Pittsburgh photographer Caleb McCartney.',
+      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
   });
 
