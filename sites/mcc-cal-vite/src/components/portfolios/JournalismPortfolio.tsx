@@ -73,7 +73,13 @@ export default function JournalismPortfolio() {
 
   const groups = useMemo(() => {
     if (!data?.events) return [];
-    return normalise(data.events);
+    const events = normalise(data.events);
+    // Sort by date (newest first)
+    return events.sort((a, b) => {
+      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : 0;
+      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : 0;
+      return dateB - dateA;
+    });
   }, [data]);
 
   const filters = useMemo(() => {

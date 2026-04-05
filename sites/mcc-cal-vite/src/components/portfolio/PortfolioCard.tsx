@@ -103,6 +103,9 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
             {[group.dateDisplay, group.category].filter(Boolean).join(' • ')}
           </p>
         )}
+        {group.coverImage.caption && (
+          <p className="pf-card__caption">{group.coverImage.caption}</p>
+        )}
       </div>
     </article>
   );

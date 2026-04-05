@@ -25,12 +25,22 @@ interface CacheEntry<T> {
 
 const memoryCache = new Map<string, CacheEntry<unknown>>();
 
+// Use local images in development, CDN in production
+const IS_DEV = import.meta.env.DEV;
+
 function encodeURIPath(path: string): string {
   return path.split('/').map(encodeURIComponent).join('/');
 }
 
 function toGithubUrl(repoRelativePath: string): string {
   return `${REPO_CDN_BASE}/${encodeURIPath(repoRelativePath)}`;
+}
+
+function toLocalUrl(repoRelativePath: string): string {
+  // Use raw path - Vite plugin will handle decoding
+  const url = `/${repoRelativePath}`;
+  console.log('[DEBUG] Image URL:', url);
+  return url;
 }
 
 function getManifestFile(type: string): string | undefined {
@@ -100,32 +110,37 @@ async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<
 export const imageUrl = {
   /** journalism: image.path is filename only; folderPath is relative to Portfolios/Journalism/ */
   journalism(folderPath: string, filename: string): string {
-    return toGithubUrl(`${PORTFOLIOS_BASE}/Journalism/${folderPath}/${filename}`);
+    const path = `${PORTFOLIOS_BASE}/Journalism/${folderPath}/${filename}`;
+    return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
 
   /** concerts: image is filename only; relativeFolderPath already includes "Concert/Band/Month" */
   concert(relativeFolderPath: string, filename: string): string {
-    return toGithubUrl(`${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`);
+    const path = `${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`;
+    return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
 
   /** events: image.path is already a full repo-relative path starting with "src/images/..." */
   event(fullPath: string): string {
-    return toGithubUrl(fullPath);
+    return IS_DEV ? toLocalUrl(fullPath) : toGithubUrl(fullPath);
   },
 
   /** portraits: image is filename (may include album subfolder); folderPath is relative to Portfolios/Portrait/ */
   portrait(folderPath: string, imageFilename: string): string {
-    return toGithubUrl(`${PORTFOLIOS_BASE}/Portrait/${folderPath}/${imageFilename}`);
+    const path = `${PORTFOLIOS_BASE}/Portrait/${folderPath}/${imageFilename}`;
+    return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
 
   /** nature: image is filename only; folderPath is relative to Portfolios/Nature/ */
   nature(folderPath: string, filename: string): string {
-    return toGithubUrl(`${PORTFOLIOS_BASE}/Nature/${folderPath}/${filename}`);
+    const path = `${PORTFOLIOS_BASE}/Nature/${folderPath}/${filename}`;
+    return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
 
   /** featured: mixed types — same as concert, uses relativeFolderPath */
   featured(relativeFolderPath: string, filename: string): string {
-    return toGithubUrl(`${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`);
+    const path = `${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`;
+    return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
 };
 
