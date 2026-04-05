@@ -24,6 +24,43 @@ const HomePage = () => {
         'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney.',
       image: LIVE_SITE_HOME_FEATURED_ITEMS[0]?.imageUrl,
     },
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          name: 'McCal Media',
+          url: 'https://mcc-cal.com/',
+          description: 'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney.',
+          publisher: {
+            '@type': 'Organization',
+            name: 'McCal Media',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://mcc-cal.com/brand/logo-mark.svg',
+            },
+          },
+          potentialAction: {
+            '@type': 'SearchAction',
+            target: {
+              '@type': 'EntryPoint',
+              urlTemplate: 'https://mcc-cal.com/blog?q={search_term_string}',
+            },
+            'query-input': 'required name=search_term_string',
+          },
+        },
+        {
+          '@type': 'Organization',
+          name: 'McCal Media',
+          url: 'https://mcc-cal.com/',
+          logo: 'https://mcc-cal.com/brand/logo-mark.svg',
+          sameAs: [
+            'https://www.instagram.com/mcc_cal',
+            'https://www.linkedin.com/in/calebmccartney',
+          ],
+        },
+      ],
+    },
   });
 
   return (
