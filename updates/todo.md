@@ -23,6 +23,11 @@ The Vite site is the primary web surface. Current focus: code quality and perfor
 - ✅ Added barrel exports (`components/index.ts`)
 - ✅ Implemented `React.lazy()` code splitting for all 24 routes
 - ✅ Added `ErrorBoundary` component for error handling
+- ✅ **SEO Optimization** - All pages now have comprehensive meta tags
+  - Fixed missing og-image.jpg on homepage
+  - Added usePageMeta to 12 pages (contact-us, request-quote, portfolios, etc.)
+  - Added WebSite + Organization structured data to homepage
+  - Added preconnect hints and advanced meta tags (theme-color, referrer, locale)
 
 **Current Sprint:**
 - [ ] **Component Decomposition** - Break up large components:
@@ -35,6 +40,12 @@ The Vite site is the primary web surface. Current focus: code quality and perfor
 - [ ] **CSS-by-Feature** - Move styles adjacent to components (co-location)
 - [ ] **Bundle Analysis** - Run `vite-bundle-visualizer` to identify optimization targets
 - [ ] **Add E2E Tests** - Playwright coverage for critical user flows
+- [ ] **SEO Enhancements** - Advanced optimizations for search visibility
+  - [ ] Add JSON-LD structured data to portfolio pages (portraits, nature, video, etc.)
+  - [ ] Add BreadcrumbList schema to blog posts
+  - [ ] Add FAQ schema to contact/request-quote pages
+  - [ ] Add Service schema to commercial pages
+  - [ ] Run Lighthouse audit for Core Web Vitals
 
 ---
 
@@ -97,15 +108,135 @@ Ongoing housekeeping and modernizations.
 - [ ] **ESLint 9 Migration** - Flat config format (audit done, implementation pending)
 - [ ] **Dependency Refresh** - Run `npm audit fix` and update dev dependencies
 
-### Standards & Documentation
+### Repository Audit - April 2026
 
-- [ ] **Widget README Refresh** - Update all widget READMEs with current versions
-- [ ] **CHANGELOG.md Sync** - Ensure all recent changes documented
-- [ ] **Copilot Instructions** - Update `.github/copilot-instructions.md` with latest patterns
+Comprehensive audit completed 2026-04-05. Full report at `AUDIT-REPORT-2026-04-05.md`.
+
+### 🔴 HIGH Priority (Do First)
+
+#### Part 1: Script Reorganization (Biggest Pain Point)
+- [ ] **Reorganize 109 npm scripts** → ~35 grouped scripts
+  - [ ] Create new meta-scripts: `dev`, `dev:api`, `manifest`, `optimize`, `quality:check`
+  - [ ] Consolidate manifest scripts: `manifest:concert`, `manifest:events`, etc. → `manifest:TYPE` pattern
+  - [ ] Consolidate optimize scripts: `optimize:concert`, `optimize:portrait`, etc. → `optimize:TYPE` pattern
+  - [ ] Add deprecation warnings to old scripts (Option C - hybrid approach)
+  - [ ] Update README scripts reference section
+  - [ ] Update `docs/standards/README-STANDARDS.md` with new script patterns
+
+#### Part 2: Dependency Updates
+- [ ] **Node.js 18 → 20** (or 22 LTS)
+  - [ ] Update `package.json` engines field
+  - [ ] Update `.github/workflows/` Node version matrix
+  - [ ] Test Docker builds with new Node version
+  - [ ] Update `Dockerfile.api` base image
+- [ ] **React 18 → 19** (deferred from 2025 cleanup)
+  - [ ] Update `sites/mcc-cal-vite/package.json`
+  - [ ] Test all components for breaking changes
+  - [ ] Update TypeScript types
+- [ ] **Vite 6 → 7** when stable
+  - [ ] Check breaking changes in migration guide
+  - [ ] Test build pipeline
+
+#### Part 3: Code Quality
+- [ ] **Fix 11 ESLint warnings**
+  - [ ] Run `npm run lint` to see specific issues
+  - [ ] Likely unused variables in `scripts/utils/`
+  - [ ] Add `_` prefix to intentionally unused params
+
+#### Part 4: Security Hardening
+- [ ] **Add `npm audit` to CI**
+  - [ ] Update `.github/workflows/nightly-smoke-test.yml`
+  - [ ] Add step: `npm audit --audit-level=moderate`
+  - [ ] Set to not fail build (informational only)
+- [ ] **Add CodeQL security analysis**
+  - [ ] Create `.github/workflows/codeql-analysis.yml`
+  - [ ] Enable in repo settings → Security → Code scanning
+- [ ] **Verify .env not committed to root**
+  - [ ] Run: `git ls-files | grep -E '^\.env' || echo "OK"`
+  - [ ] Add to `.gitignore` if missing
+- [ ] **Verify pre-commit hooks active**
+  - [ ] Run: `cat .git/hooks/pre-commit | head -5`
+  - [ ] Should see husky/lint-staged reference
+
+### 🟡 MEDIUM Priority (This Month)
+
+#### Part 5: Documentation
+- [ ] **Add 5 missing README sections**
+  - [ ] Security Policy reference (template in `docs/README-MISSING-SECTIONS-TEMPLATES.md`)
+  - [ ] Changelog link with recent highlights
+  - [ ] Architecture diagram (Mermaid)
+  - [ ] Performance benchmarks table
+  - [ ] Browser support matrix
+- [ ] **Create widget catalog index**
+  - [ ] Central index of all 24 active widgets
+  - [ ] Link to individual widget READMEs
+  - [ ] Add to `docs/widgets/WIDGET-CATALOG.md`
+
+#### Part 6: CI/CD Improvements
+- [ ] **Add dependency update bot**
+  - [ ] Enable Dependabot in repo settings
+  - [ ] Or add Renovate config
+  - [ ] Set to weekly updates, auto-merge patch versions
+- [ ] **Add test coverage reporting**
+  - [ ] Configure Playwright for coverage
+  - [ ] Upload to Codecov or similar
+
+#### Part 7: Performance
+- [ ] **Add bundle analyzer**
+  - [ ] Install `rollup-plugin-visualizer`
+  - [ ] Add script: `npm run analyze`
+  - [ ] Run and identify bloat
+- [ ] **Configure code splitting**
+  - [ ] Add `@vitejs/plugin-legacy` for old browsers
+  - [ ] Configure dynamic imports for heavy components
+  - [ ] Verify React.lazy() working for all routes
+- [ ] **Add preloading for critical assets**
+  - [ ] Preload main CSS
+  - [ ] Preload hero image
+  - [ ] Add `rel="preload"` hints
+
+### 🟢 LOW Priority (Backlog)
+
+#### Part 8: Architecture Cleanup
+- [ ] **Review 290 archived widgets**
+  - [ ] Check `src/widgets/_archived/` for permanent deletion candidates
+  - [ ] Anything >2 years old likely safe to delete
+  - [ ] Keep git history, just remove from working tree
+- [ ] **Clean up empty directories**
+  - [ ] `src/site/` - verify empty, then remove
+  - [ ] `src/pages/` - verify empty, then remove
+  - [ ] Check others with: `find src -type d -empty`
+- [ ] **Document widget deprecation process**
+  - [ ] Add to `docs/standards/WIDGET-STANDARDS.md`
+  - [ ] Define lifecycle: active → deprecated → archived → deleted
+
+#### Documentation Maintenance
+- [ ] **Add "Last Updated" dates to key docs**
+  - [ ] Top of each standards doc
+  - [ ] Auto-update via script or manual
+- [ ] **Consolidate integration docs**
+  - [ ] `docs/integrations/` has 14 files - review for duplicates
+  - [ ] Merge related guides (e.g., all Squarespace docs)
+
+### 📊 Audit Summary
+
+| Part | Grade | Status | Key Action |
+|------|-------|--------|------------|
+| 1. Structure | B+ | 🔴 Needs work | Script reorganization |
+| 2. Dependencies | B | 🟡 Watch | Node 20 upgrade |
+| 3. Code Quality | B+ | 🟢 Good | 11 ESLint fixes |
+| 4. Security | A- | 🟢 Good | Add npm audit to CI |
+| 5. Documentation | A | 🟢 Good | 5 README sections |
+| 6. CI/CD | A | 🟢 Good | Add dependency bot |
+| 7. Performance | B | 🟡 Watch | Bundle analyzer |
+| 8. Architecture | B+ | 🟡 Watch | Clean archived widgets |
+| **Overall** | **A-** | **🟢 Production Ready** | Minor improvements only |
+
+### Standards & Documentation
 
 ---
 
-## � Future Tracks (Unscheduled)
+## Future Tracks (Unscheduled)
 
 Ideas and longer-term initiatives. Not prioritized.
 
