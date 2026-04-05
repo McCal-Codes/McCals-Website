@@ -16,7 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 let sharp;
-try { sharp = require('sharp'); } catch (e) {
+try { sharp = require('sharp'); } catch {
   console.error('sharp dependency missing. Install with: npm install sharp - auto-optimize-events-images.js:20');
   process.exit(1);
 }
@@ -81,7 +81,7 @@ async function processAll(){
         if (meta.width && meta.width > 2800) {
           pipeline = img.resize({ width: 2800 });
         }
-      } catch (e) { /* metadata not available, skip resize */ }
+      } catch { /* metadata not available, skip resize */ }
       outBuffer = await pipeline[toJpeg ? 'jpeg' : 'png']({ quality, progressive: true }).toBuffer();
     } catch (e) {
       console.warn('Failed to recompress - auto-optimize-events-images.js:85', c.file, e.message);

@@ -144,7 +144,7 @@ function extractDateFromExif(buffer) {
         source: 'exif',
       };
     }
-  } catch (error) {
+  } catch {
     // EXIF parsing failed, continue without it
   }
 
@@ -202,7 +202,7 @@ function generateTargetPath(portfolioType, filename, dateInfo, entityName) {
 async function ensureDirectoryExists(dirPath) {
   try {
     await fs.access(dirPath);
-  } catch (error) {
+  } catch {
     await fs.mkdir(dirPath, { recursive: true });
   }
 }
@@ -489,7 +489,7 @@ app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
             lastModified: folderStats.mtime,
             totalImages: subfolders.reduce((sum, sf) => sum + sf.imageCount, 0),
           });
-        } catch (err) {
+        } catch {
           folderDetails.push({
             name: folder.name,
             error: 'Could not read folder details',
@@ -507,7 +507,7 @@ app.get('/api/admin/portfolios/:type/status', requireAuth, async (req, res) => {
         lastModified: stats.mtime,
         folders: folderDetails,
       });
-    } catch (error) {
+    } catch {
       res.json({
         success: true,
         portfolioType: portfolioType,

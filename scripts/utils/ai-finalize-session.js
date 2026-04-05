@@ -22,7 +22,7 @@ function discoverInstructions() {
     return fs.readdirSync(dir)
       .filter(f => /instructions?/.test(f) && f.endsWith('.md'))
       .map(f => path.join(dir, f));
-  } catch (e) {
+  } catch {
     return [];
   }
 }

@@ -42,7 +42,7 @@ function widgetReadmeStatus() {
   let entries = [];
   try {
     entries = fs.readdirSync(widgetsDir, { withFileTypes: true });
-  } catch (e) {
+  } catch {
     return status;
   }
   for (const entry of entries) {
@@ -86,7 +86,7 @@ function discoverDocs() {
         if (!src.filter(f)) continue;
         out.push({ file: path.join(src.dir, f), name: f });
       }
-    } catch (e) {
+    } catch {
       // ignore missing dirs
     }
   }
@@ -114,8 +114,8 @@ function readFileSafe(file) {
     const content = fs.readFileSync(file, 'utf8');
     const stat = fs.statSync(file);
     return { ok: true, content, mtime: stat.mtime, size: stat.size };
-  } catch (e) {
-    return { ok: false, error: e.message };
+  } catch {
+    return { ok: false, error: 'Failed to read file' };
   }
 }
 
@@ -350,7 +350,7 @@ function main() {
   let cache = {};
   try {
     if (fs.existsSync(cacheFile)) cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8')) || {};
-  } catch (e) {
+  } catch {
     cache = {};
   }
 
@@ -403,7 +403,7 @@ function main() {
     const toSave = {};
     for (const o of outputs) if (!o.error) toSave[o.key] = o.mtime;
     fs.writeFileSync(cacheFile, JSON.stringify(toSave, null, 2), 'utf8');
-  } catch (e) {
+  } catch {
     // non-fatal
   }
 

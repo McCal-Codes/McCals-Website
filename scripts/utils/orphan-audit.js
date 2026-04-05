@@ -12,7 +12,7 @@ const pkgPath = path.join(root, 'package.json');
 const workflowsDir = path.join(root, '.github', 'workflows');
 const scriptsDir = path.join(root, 'scripts');
 
-function readJSON(p){try{return JSON.parse(fs.readFileSync(p,'utf8'));}catch(e){return null;}}
+function readJSON(p){try{return JSON.parse(fs.readFileSync(p,'utf8'));}catch{return null;}}
 const pkg = readJSON(pkgPath) || {scripts:{}};
 const packageScriptBodies = Object.values(pkg.scripts||{});
 

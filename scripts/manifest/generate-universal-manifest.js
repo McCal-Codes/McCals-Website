@@ -59,7 +59,7 @@ async function readManifest(manifestPath) {
   try {
     const content = await fs.readFile(manifestPath, 'utf8');
     return JSON.parse(content);
-  } catch (error) {
+  } catch {
     return null;
   }
 }

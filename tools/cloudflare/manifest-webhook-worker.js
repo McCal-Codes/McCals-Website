@@ -32,7 +32,7 @@ export default {
         headers: { 'content-type': 'application/json', 'x-webhook-secret': env.WEBHOOK_SECRET },
         body: body || '{}',
       });
-    } catch (_) {
+    } catch {
       // ignore: origin may be temporarily unavailable
     }
 
@@ -46,7 +46,7 @@ export default {
     let fbResp = null;
     try {
       fbResp = await fetch(fbUrl);
-    } catch (_) {
+    } catch {
       // ignore: fallback may be temporarily unavailable
     }
     if (fbResp && fbResp.ok) {

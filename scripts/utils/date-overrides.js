@@ -20,7 +20,7 @@ function loadOverrides() {
   try {
     const raw = fs.readFileSync(OVERRIDES_FILE, 'utf8');
     overridesCache = JSON.parse(raw);
-  } catch (error) {
+  } catch {
     overridesCache = {};
   }
 

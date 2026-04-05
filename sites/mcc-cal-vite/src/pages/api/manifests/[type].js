@@ -66,7 +66,7 @@ export default function handler(req, res) {
     res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.status(200).json(manifest);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Error reading manifest' });
   }
 }

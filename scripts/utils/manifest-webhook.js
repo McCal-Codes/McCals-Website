@@ -68,7 +68,7 @@ async function notify(type, details = {}) {
       const crypto = require('crypto');
       const hmac = crypto.createHmac('sha256', String(secret)).update(bodyStr).digest('hex');
       headers['x-signature'] = `sha256=${hmac}`;
-    } catch (err) {
+    } catch {
       // If crypto isn't available for some reason, fall back to legacy header
       headers['x-webhook-secret'] = secret;
     }

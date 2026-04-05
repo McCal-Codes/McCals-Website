@@ -45,7 +45,7 @@ async function getImageSize(filePath) {
   try {
     const stat = await fs.stat(filePath);
     return stat.size;
-  } catch (err) {
+  } catch {
     return 0;
   }
 }
