@@ -61,6 +61,7 @@ const ProjectsPage = () => {
       </div>
     </div>
   </Layout>
+  );
 };
 
 export default ProjectsPage;
