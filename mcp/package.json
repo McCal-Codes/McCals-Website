@@ -1,0 +1,17 @@
+{
+  "name": "@mccal/mcp-server",
+  "version": "1.0.0",
+  "description": "McCal Media MCP Server - Local tools for AI assistants",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js --debug"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

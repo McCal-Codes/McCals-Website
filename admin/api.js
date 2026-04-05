@@ -4,6 +4,7 @@
  */
 
 const express = require('express');
+const multer = require('multer');
 const fs = require('fs').promises;
 const path = require('path');
 const router = express.Router();
@@ -12,10 +13,70 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(REPO_ROOT, 'src', 'content', 'blog', 'posts');
 const IMAGES_DIR = path.join(REPO_ROOT, 'src', 'images', 'Portfolios');
 
+// Multer storage configuration for uploads
+const upload = multer({ 
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 20 * 1024 * 1024 } // 20MB limit
+});
+
+// Upload image to portfolio
+router.post('/upload', upload.single('image'), async (req, res) => {
+  try {
+    const { portfolio, folder } = req.body;
+    
+    if (!portfolio || !req.file) {
+      return res.status(400).json({ error: 'Portfolio and image file required' });
+    }
+    
+    // Sanitize folder name
+    const targetFolder = folder?.replace(/[^a-zA-Z0-9-_\s]/g, '').trim() || 'Uncategorized';
+    const uploadDir = path.join(IMAGES_DIR, portfolio, targetFolder);
+    
+    // Create directory if needed
+    await fs.mkdir(uploadDir, { recursive: true });
+    
+    // Generate safe filename
+    const timestamp = Date.now();
+    const safeName = req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const filename = `${timestamp}_${safeName}`;
+    const filepath = path.join(uploadDir, filename);
+    
+    // Save file
+    await fs.writeFile(filepath, req.file.buffer);
+    
+    const relativePath = `/images/Portfolios/${portfolio}/${targetFolder}/${filename}`.replace(/\\/g, '/');
+    
+    res.json({ 
+      success: true, 
+      path: relativePath,
+      filename: safeName,
+      size: req.file.size 
+    });
+  } catch (error) {
+    console.error('Upload error: - api.js:56', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // List available portfolio images
 router.get('/images', async (req, res) => {
   try {
     const images = [];
+    const tree = {};
+    
+    // Helper to build tree structure
+    function addToTree(pathParts, image, currentLevel) {
+      if (pathParts.length === 0) {
+        // Leaf node - add image
+        if (!currentLevel._images) currentLevel._images = [];
+        currentLevel._images.push(image);
+        return;
+      }
+      
+      const part = pathParts[0];
+      if (!currentLevel[part]) currentLevel[part] = {};
+      addToTree(pathParts.slice(1), image, currentLevel[part]);
+    }
     
     // Helper to scan directory recursively
     async function scanDir(dir, basePath = '') {
@@ -29,11 +90,19 @@ router.get('/images', async (req, res) => {
           if (entry.isDirectory()) {
             await scanDir(fullPath, relativePath);
           } else if (/\.(jpg|jpeg|png|gif|webp|avif)$/i.test(entry.name)) {
-            images.push({
-              path: `/images/Portfolios/${relativePath.replace(/\\/g, '/')}`,
-              folder: basePath.split('/')[0] || 'root',
-              filename: entry.name
-            });
+            const imgPath = `/images/Portfolios/${relativePath.replace(/\\/g, '/')}`;
+            const pathParts = relativePath.replace(/\\/g, '/').split('/');
+            const folder = pathParts[0];
+            
+            const image = {
+              path: imgPath,
+              folder: folder,
+              filename: entry.name,
+              relativePath: relativePath.replace(/\\/g, '/')
+            };
+            
+            images.push(image);
+            addToTree(pathParts.slice(0, -1), image, tree);
           }
         }
       } catch {
@@ -43,14 +112,14 @@ router.get('/images', async (req, res) => {
     
     await scanDir(IMAGES_DIR);
     
-    // Group by folder
+    // Group by top-level folder (backward compat)
     const grouped = images.reduce((acc, img) => {
       if (!acc[img.folder]) acc[img.folder] = [];
       acc[img.folder].push(img);
       return acc;
     }, {});
     
-    res.json({ images, grouped });
+    res.json({ images, grouped, tree });
   } catch (error) {
     res.status(500).json({ error: error.message, images: [] });
   }
@@ -86,7 +155,7 @@ router.get('/posts', async (req, res) => {
     posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     res.json({ posts });
   } catch (err) {
-    console.error('Error listing posts:', err);
+    console.error('Error listing posts: - api.js:158', err);
     res.status(500).json({ error: err.message, posts: [] });
   }
 });

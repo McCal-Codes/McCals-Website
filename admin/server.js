@@ -27,6 +27,9 @@ app.use((req, res, next) => {
 // Admin API routes
 app.use('/admin/api', adminApi);
 
+// Serve portfolio images for the gallery
+app.use('/images', express.static(path.join(__dirname, '..', 'src', 'images')));
+
 // Serve admin UI
 app.use('/admin', express.static(path.join(__dirname)));
 
