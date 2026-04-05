@@ -137,15 +137,18 @@ body { padding-top: var(--mcc-nav-height); }
 .mcc-nav__link--has-submenu { position: relative; }
 
 .mcc-nav__submenu {
-  display: none; /* mobile default; desktop overrides to flex via media query */
+  display: none;
   position: absolute;
   top: calc(100% + 12px);
-  right: 0;
-  background: rgba(8, 8, 12, 0.88);
-  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  left: 0;
+  right: auto;
+  background: rgba(26, 26, 31, 0.95);
+  background-clip: padding-box;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 14px;
   padding: 8px;
-  min-width: 200px;
+  min-width: 220px;
+  max-width: 280px;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -155,9 +158,10 @@ body { padding-top: var(--mcc-nav-height); }
   margin: 0;
   flex-direction: column;
   z-index: 10002;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-  -webkit-backdrop-filter: saturate(140%) blur(20px);
-  backdrop-filter: saturate(140%) blur(20px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
 }
 
 .mcc-nav__submenu li { width: 100%; margin: 0; padding: 0; }
@@ -171,15 +175,18 @@ body { padding-top: var(--mcc-nav-height); }
   letter-spacing: 0.05em;
   border-radius: 8px;
   width: 100%;
-  text-align: right;
-  color: rgba(255, 255, 255, 0.6);
+  text-align: left;
+  color: rgba(255, 255, 255, 0.7);
   transition: background 0.2s var(--mcc-ease), color 0.2s var(--mcc-ease);
   text-shadow: none;
   opacity: 1 !important;
   transform: none !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .mcc-nav__submenu li a:hover, .mcc-nav__submenu li a:focus-visible {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
   outline: none;
 }
@@ -334,7 +341,6 @@ body { padding-top: var(--mcc-nav-height); }
     backdrop-filter: none;
     border-radius: 0;
     padding: 8px 0 0;
-    display: none;
     flex-direction: column;
     align-items: flex-end;
     gap: 4px;
@@ -342,6 +348,17 @@ body { padding-top: var(--mcc-nav-height); }
     border-top: 0.5px solid rgba(255, 255, 255, 0.1);
     min-width: 0;
     transition: none;
+    display: none;
+  }
+
+  .mcc-nav__submenu[style*="flex"] {
+    display: flex !important;
+    visibility: visible;
+  }
+
+  .mcc-nav__submenu li {
+    display: block;
+    width: 100%;
   }
 
   .mcc-nav__submenu li a {

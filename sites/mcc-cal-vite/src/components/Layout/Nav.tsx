@@ -8,6 +8,7 @@ const Nav: React.FC = () => {
   const [workSubmenuOpen, setWorkSubmenuOpen] = useState(false);
   const [projectsSubmenuOpen, setProjectsSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -17,13 +18,19 @@ const Nav: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     const updateHeight = () => {
       const h = navRef.current?.getBoundingClientRect().height || 0;
       document.documentElement.style.setProperty('--mcc-nav-height', `${h}px`);
     };
     updateHeight();
-    window.addEventListener('load', updateHeight);
-    window.addEventListener('resize', updateHeight);
+    window.addEventListener('load', updateHeight, { passive: true });
+    window.addEventListener('resize', updateHeight, { passive: true });
     return () => {
       window.removeEventListener('load', updateHeight);
       window.removeEventListener('resize', updateHeight);
@@ -67,11 +74,9 @@ const Nav: React.FC = () => {
         setProjectsSubmenuOpen(false);
       }
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
     return () => window.removeEventListener('resize', onResize);
   }, []);
-
-  const isMobile = () => window.innerWidth <= 768;
 
   return (
     <div className="mcc-nav-shell" role="group" aria-label="Global navigation">
@@ -111,7 +116,7 @@ const Nav: React.FC = () => {
                   <Link
                     to="/featured-work"
                     aria-current={pathname === '/featured-work' ? 'page' : undefined}
-                    onClick={(e) => { if (isMobile()) { e.preventDefault(); setWorkSubmenuOpen((v) => !v); } }}
+                    onClick={(e) => { if (isMobile) { e.preventDefault(); setWorkSubmenuOpen((v) => !v); } }}
                   >
                     Work
                   </Link>
@@ -137,7 +142,7 @@ const Nav: React.FC = () => {
                   id="mcc-nav-submenu-work"
                   role="menu"
                   aria-label="Work submenu"
-                  style={isMobile() ? { display: workSubmenuOpen ? 'flex' : 'none' } : undefined}
+                  style={isMobile ? { display: workSubmenuOpen ? 'flex' : 'none' } : undefined}
                 >
                   <li><Link to="/featured-work" role="menuitem">Featured</Link></li>
                   <li><Link to="/journalism" role="menuitem">Photojournalism</Link></li>
@@ -154,7 +159,7 @@ const Nav: React.FC = () => {
                   <Link
                     to="/projects"
                     aria-current={pathname.startsWith('/projects') ? 'page' : undefined}
-                    onClick={(e) => { if (isMobile()) { e.preventDefault(); setProjectsSubmenuOpen((v) => !v); } }}
+                    onClick={(e) => { if (isMobile) { e.preventDefault(); setProjectsSubmenuOpen((v) => !v); } }}
                   >
                     Projects
                   </Link>
@@ -180,7 +185,7 @@ const Nav: React.FC = () => {
                   id="mcc-nav-submenu-projects"
                   role="menu"
                   aria-label="Projects submenu"
-                  style={isMobile() ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
+                  style={isMobile ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
                 >
                   <li><Link to="/projects" role="menuitem">Overview</Link></li>
                   <li><Link to="/roadmap" role="menuitem">Roadmap</Link></li>
