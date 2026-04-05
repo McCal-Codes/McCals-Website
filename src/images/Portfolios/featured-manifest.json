@@ -1,16 +1,28 @@
 {
   "version": "2.0.0",
   "type": "featured",
-  "generated": "2025-12-12T23:46:21.799Z",
+  "generated": "2026-04-05T22:45:57.937Z",
   "generatedBy": "enhanced-featured-manifest-generator",
-  "sources": ["concert-manifest.json", "events-manifest.json", "journalism-manifest.json"],
+  "sources": [
+    "concert-manifest.json",
+    "events-manifest.json",
+    "journalism-manifest.json"
+  ],
   "totalItems": 12,
-  "totalImages": 683,
-  "categories": ["Concert Photography", "Events Photography", "Journalism Photography"],
-  "portfolioTypes": ["Concert", "Events", "Journalism"],
+  "totalImages": 687,
+  "categories": [
+    "Concert Photography",
+    "Events Photography",
+    "Journalism Photography"
+  ],
+  "portfolioTypes": [
+    "Concert",
+    "Events",
+    "Journalism"
+  ],
   "dateRange": {
     "newest": "2025-12-01",
-    "oldest": "2024-10-29"
+    "oldest": "2024-11-03"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
@@ -81,7 +93,11 @@
       "category": "Concert Photography",
       "id": "Horseburner",
       "coverImage": "251206 Riffmas 3_CAL2526_webuse.jpg",
-      "tags": ["Live Music", "Concert", "Performance"]
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
     },
     {
       "bandName": "Star Viper",
@@ -167,7 +183,11 @@
       "category": "Concert Photography",
       "id": "Star Viper",
       "coverImage": "251206 Riffmas 3_CAL2839_webuse.jpg",
-      "tags": ["Live Music", "Concert", "Performance"]
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
     },
     {
       "bandName": "Sundras",
@@ -214,7 +234,11 @@
       "category": "Concert Photography",
       "id": "Sundras",
       "coverImage": "251206 Riffmas 3_CAL2361_webuse.jpg",
-      "tags": ["Live Music", "Concert", "Performance"]
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
     },
     {
       "title": "Pittsburgh Social Club",
@@ -308,7 +332,11 @@
         "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL753_webuse.jpg"
       },
       "totalImages": 23,
-      "tags": ["Event", "Corporate", "Professional"]
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
     },
     {
       "title": "Love's A Game",
@@ -627,7 +655,11 @@
         "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.jpg"
       },
       "totalImages": 98,
-      "tags": ["Event", "Corporate", "Professional"]
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
     },
     {
       "bandName": "Heading North",
@@ -748,7 +780,11 @@
       "category": "Concert Photography",
       "id": "Heading North",
       "coverImage": "251101 Headed North - Bottle Rocket_CAL11_webuse.jpg",
-      "tags": ["Live Music", "Concert", "Performance"]
+      "tags": [
+        "Live Music",
+        "Concert",
+        "Performance"
+      ]
     },
     {
       "title": "Inclusivity Event PRSSA",
@@ -1061,7 +1097,11 @@
         "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.jpg"
       },
       "totalImages": 96,
-      "tags": ["Event", "Corporate", "Professional"]
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
     },
     {
       "title": "Howl At The Moon",
@@ -1728,12 +1768,338 @@
         "path": "src/images/Portfolios/Events/Howl at the Moon/251024 Howl at the Moon _CAL7439_webuse.jpg"
       },
       "totalImages": 214,
-      "tags": ["Event", "Corporate", "Professional"]
+      "tags": [
+        "Event",
+        "Corporate",
+        "Professional"
+      ]
+    },
+    {
+      "eventName": "Brentwood Vs Springdale",
+      "category": "Journalism Photography",
+      "tags": [
+        "Events",
+        "Sports",
+        "Documentary",
+        "Journalism",
+        "Story"
+      ],
+      "folderPath": "Events/Brentwood vs Springdale",
+      "eventDate": {
+        "iso": "2025-09-12",
+        "source": "metadata"
+      },
+      "dateDisplay": "undefined undefined",
+      "totalImages": 15,
+      "images": [
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
+          "caption": "Brentwood quarterback No. 15 drops back to pass as Springdale defenders close in during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Brentwood's quarterback in navy drops back to pass as two Springdale defenders in orange rush the pocket, with a Brentwood lineman blocking and a referee tracking the play in the background during a daytime high school football game.",
+          "path": "250912_Brentwood vs Springdale_CAL5167-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5175-min.jpg",
+          "caption": "A Brentwood ball carrier turns upfield during a home game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "A Brentwood player in navy and gold tucks the ball and cuts upfield on the blue-surfaced home field, with grandstands and spectators visible in the background during a daytime contest.",
+          "path": "250912_Brentwood vs Springdale_CAL5175-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5182-min.jpg",
+          "caption": "Brentwood and Springdale players battle at the line of scrimmage during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Brentwood linemen in navy engage Springdale defenders in orange at the line of scrimmage, with a referee positioned between the teams and the blue home field and grandstands visible behind the play.",
+          "path": "250912_Brentwood vs Springdale_CAL5182-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5189-min.jpg",
+          "caption": "Brentwood quarterback No. 12 prepares to throw during a home game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Brentwood's No. 12 quarterback in navy and gold sets his feet and loads for a pass, photographed in isolation against a blurred dark background during twilight play.",
+          "path": "250912_Brentwood vs Springdale_CAL5189-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5190-min.jpg",
+          "caption": "Brentwood players celebrate after a play against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Brentwood No. 13 chest-bumps a teammate in navy uniforms near the end zone, with the blue home field and a dark hillside backdrop visible behind them.",
+          "path": "250912_Brentwood vs Springdale_CAL5190-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5223-min.jpg",
+          "caption": "Brentwood No. 2 races downfield past a Springdale defender during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Brentwood's No. 2 running back in navy sprints down the sideline while quarterback No. 13 trails the play and a Springdale defender in orange pursues, with stadium lights, an advertising board, and a referee visible in the background of the night game.",
+          "path": "250912_Brentwood vs Springdale_CAL5223-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5228-min.jpg",
+          "caption": "Brentwood No. 2 stiff-arms a Springdale defender on a carry during a home game, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Brentwood's No. 2 ball carrier extends a stiff-arm to push off a pursuing Springdale defender in orange along the sideline, with fans and a metal fence barrier visible in the background during a daytime game.",
+          "path": "250912_Brentwood vs Springdale_CAL5228-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5239-min.jpg",
+          "caption": "Springdale players converge on a Brentwood receiver in the night game, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "A Brentwood player in navy is surrounded by multiple Springdale defenders in orange and white during a night game, with Brentwood's No. 18 visible in the background and stadium lights illuminating the field.",
+          "path": "250912_Brentwood vs Springdale_CAL5239-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5243-min.jpg",
+          "caption": "A Brentwood ball carrier stretches for yards as a Springdale defender pursues during a night game, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "A Brentwood player in navy leans forward at full extension with the ball while a Springdale defender in orange and white runs alongside and No. 2 of Brentwood leads the block during a night game on the lit field.",
+          "path": "250912_Brentwood vs Springdale_CAL5243-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5252-min.jpg",
+          "caption": "Brentwood quarterback No. 13 scrambles from a Springdale rusher during a night game, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Brentwood's No. 13 quarterback rolls out under pressure from Springdale's No. 53 rushing off the edge during a night game, with stadium lighting casting sharp shadows across the blue-and-white field surface.",
+          "path": "250912_Brentwood vs Springdale_CAL5252-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5256-min.jpg",
+          "caption": "A member of the Brentwood High School marching band plays trumpet during a halftime performance, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Extreme close-up of a student's hands pressing the valves of a polished trumpet during the Brentwood High School marching band's halftime performance, with bokeh stadium lights glowing in the dark background.",
+          "path": "250912_Brentwood vs Springdale_CAL5256-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5260-min.jpg",
+          "caption": "Fans line up at the Brentwood High School concession stand during the game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "A crowd of spectators queues under a blue-roofed concession building marked with a large yellow 'B' at night, with the lit interior revealing workers, menu boards, and a Pepsi cooler.",
+          "path": "250912_Brentwood vs Springdale_CAL5260-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5266-min.jpg",
+          "caption": "Brentwood High School marching band flutists perform during halftime against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "Several members of the Brentwood High School marching band in navy and white uniforms play flutes in formation on the field at night, with a student drummer visible in the background.",
+          "path": "250912_Brentwood vs Springdale_CAL5266-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5272-min.jpg",
+          "caption": "A Brentwood High School color guard member waves a flag during halftime against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "A color guard performer in a tan and gold top waves a large navy and gold flag while the Brentwood marching band in blue and white uniforms plays behind her, with tubas, trombones, and a stadium light visible in the background of the night performance.",
+          "path": "250912_Brentwood vs Springdale_CAL5272-min.jpg"
+        },
+        {
+          "filename": "250912_Brentwood vs Springdale_CAL5275-min.jpg",
+          "caption": "A Brentwood High School color guard member raises a flag during a halftime performance against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+          "description": "A color guard member in a blue and white uniform extends a gold flag overhead with both arms during the Brentwood marching band's halftime show, with band members playing brass and woodwind instruments and a stadium floodlight blazing behind the formation.",
+          "path": "250912_Brentwood vs Springdale_CAL5275-min.jpg"
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Sports"
+        ],
+        "published": false,
+        "date": "2025-09-12",
+        "description": "Brentwood vs. Springdale home game — high school sports photography at Brentwood, PA",
+        "caption": "Brentwood vs. Springdale — September 2025"
+      },
+      "name": "Brentwood Vs Springdale",
+      "title": "Brentwood Vs Springdale",
+      "date": {
+        "iso": "2025-09-12",
+        "source": "metadata"
+      },
+      "type": "Journalism",
+      "id": "Brentwood Vs Springdale",
+      "coverImage": {
+        "filename": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
+        "path": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
+        "description": "Brentwood's quarterback in navy drops back to pass as two Springdale defenders in orange rush the pocket, with a Brentwood lineman blocking and a referee tracking the play in the background during a daytime high school football game.",
+        "caption": "Brentwood quarterback No. 15 drops back to pass as Springdale defenders close in during a home game, Brentwood, Pa., Sept. 12, 2025.",
+        "tags": [
+          "Events",
+          "Sports"
+        ]
+      }
+    },
+    {
+      "eventName": "Historic Society Yard Sale August 2025",
+      "category": "Journalism Photography",
+      "tags": [
+        "Events",
+        "Documentary",
+        "Journalism",
+        "Story"
+      ],
+      "folderPath": "Events/Historic Society Yard Sale August 2025",
+      "eventDate": {
+        "iso": "2025-08-02",
+        "source": "metadata"
+      },
+      "dateDisplay": "undefined undefined",
+      "totalImages": 22,
+      "images": [
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
+          "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
+          "path": "250802_Brentwood Yard Sale _CAL2643-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
+          "caption": "Vendors staff their table at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Two female vendors stand behind a table at their booth at the Brentwood Area Historical Society yard sale, with clothing and purple fabric merchandise displayed in the foreground and event signage behind them.",
+          "path": "250802_Brentwood Yard Sale _CAL2644-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2646-min.jpg",
+          "caption": "A vendor examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "A vendor in a red jacket leans over items on their table at the Brentwood Area Historical Society yard sale, with other shoppers and a large tree trunk visible in the background.",
+          "path": "250802_Brentwood Yard Sale _CAL2646-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2647-min.jpg",
+          "caption": "Wicker baskets and handbags are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Close-up of merchandise on a vendor table at the Brentwood Area Historical Society yard sale, featuring wicker baskets, white handbags, and textiles, with other booths and shoppers visible in the background.",
+          "path": "250802_Brentwood Yard Sale _CAL2647-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2649-min.jpg",
+          "caption": "A vendor arranges merchandise under a tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "A vendor organizes items including wicker baskets and textiles on a table under a blue tent at the Brentwood Area Historical Society yard sale, with other shoppers, buildings, and trees visible around them.",
+          "path": "250802_Brentwood Yard Sale _CAL2649-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2650-min.jpg",
+          "caption": "Beaded jewelry is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Close-up detail of multi-colored beaded necklaces on display at a vendor table at the Brentwood Area Historical Society yard sale.",
+          "path": "250802_Brentwood Yard Sale _CAL2650-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2651-min.jpg",
+          "caption": "A vendor stands at her table in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "A female vendor stands at her table in front of the historic brick Brentwood Area Historical Society building, with its green-trimmed windows and patriotic decoration visible above the entrance, at the annual yard sale.",
+          "path": "250802_Brentwood Yard Sale _CAL2651-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2654-min.jpg",
+          "caption": "Rings are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Rows of rings in various styles arranged on a dark display surface at a vendor table at the Brentwood Area Historical Society yard sale.",
+          "path": "250802_Brentwood Yard Sale _CAL2654-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2657-min.jpg",
+          "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
+          "path": "250802_Brentwood Yard Sale _CAL2657-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2660-min.jpg",
+          "caption": "Shoppers browse glassware under a tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Two female shoppers examine decorative glass items under the shade of an old tree at the Brentwood Area Historical Society yard sale, with other vendors and shoppers visible in the background.",
+          "path": "250802_Brentwood Yard Sale _CAL2660-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2666-min.jpg",
+          "caption": "A vendor sorts merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "A person in a green vest leans over items at a vendor table at the Brentwood Area Historical Society yard sale, organizing goods with other booths and shoppers visible behind them.",
+          "path": "250802_Brentwood Yard Sale _CAL2666-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2670-min.jpg",
+          "caption": "A vendor displays antique kitchenware at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "A vendor in a mint-colored shirt stands at her booth at the Brentwood Area Historical Society yard sale, holding an item alongside a prominent decorative wooden spoon or paddle on display, with trees and other vendors behind her.",
+          "path": "250802_Brentwood Yard Sale _CAL2670-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2674-min.jpg",
+          "caption": "Vintage ceramics are on sale at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "White ceramic pitchers and mugs with metal handles are displayed on a vendor table at the Brentwood Area Historical Society yard sale, alongside a small decorative house figurine with a red roof.",
+          "path": "250802_Brentwood Yard Sale _CAL2674-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2678-min.jpg",
+          "caption": "A shopper examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Two women interact at a vendor table under tree shade at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed between them and other booths visible in the background.",
+          "path": "250802_Brentwood Yard Sale _CAL2678-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2681-min.jpg",
+          "caption": "Shoppers browse vendor tables in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Wide view of the Brentwood Area Historical Society yard sale showing multiple white-clothed vendor tables on the lawn, shoppers browsing, and the large red-brick historical society building visible behind the event grounds.",
+          "path": "250802_Brentwood Yard Sale _CAL2681-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2682-min.jpg",
+          "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
+          "path": "250802_Brentwood Yard Sale _CAL2682-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2683-min.jpg",
+          "caption": "Shoppers look through merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Vendor items including clothing and decorative objects are on display at the Brentwood Area Historical Society yard sale, with the historical society's brick building forming the backdrop and shoppers browsing nearby.",
+          "path": "250802_Brentwood Yard Sale _CAL2683-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2685-min.jpg",
+          "caption": "A shopper moves through the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "A female shopper in a black graphic t-shirt and crossbody bag walks through the Brentwood Area Historical Society yard sale, with a borough ordinance sign and parked vehicles visible behind the vendor booths.",
+          "path": "250802_Brentwood Yard Sale _CAL2685-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2687-min.jpg",
+          "caption": "Shoppers crowd a vendor tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Multiple vendors and shoppers gather under a large green canopy tent at the Brentwood Area Historical Society yard sale, with merchandise on tables and vehicles and buildings visible in the background.",
+          "path": "250802_Brentwood Yard Sale _CAL2687-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2690-min.jpg",
+          "caption": "Shoppers fill the lawn at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Wide view of the well-attended Brentwood Area Historical Society yard sale showing white-clothed tables, shoppers, vendor tents, and the brick historical society building with patriotic bunting, vehicles, and large trees.",
+          "path": "250802_Brentwood Yard Sale _CAL2690-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2691-min.jpg",
+          "caption": "Shoppers browse antiques and collectibles in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Multiple female shoppers browse merchandise on white-clothed tables in front of the historic brick Brentwood Area Historical Society building, with patriotic bunting visible on the facade and various decorative goods displayed across the vendor spaces.",
+          "path": "250802_Brentwood Yard Sale _CAL2691-min.jpg"
+        },
+        {
+          "filename": "250802_Brentwood Yard Sale _CAL2693-min.jpg",
+          "caption": "Decorative glassware is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+          "description": "Decorative glassware and vases are displayed on a vendor table under a shade tent at the Brentwood Area Historical Society yard sale, with shoppers browsing nearby booths and the brick historical society building visible behind.",
+          "path": "250802_Brentwood Yard Sale _CAL2693-min.jpg"
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events"
+        ],
+        "published": false,
+        "date": "2025-08-02",
+        "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
+        "caption": "Historic Society Yard Sale — August 2025"
+      },
+      "name": "Historic Society Yard Sale August 2025",
+      "title": "Historic Society Yard Sale August 2025",
+      "date": {
+        "iso": "2025-08-02",
+        "source": "metadata"
+      },
+      "type": "Journalism",
+      "id": "Historic Society Yard Sale August 2025",
+      "coverImage": {
+        "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
+        "path": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
+        "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
+        "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
+        "tags": [
+          "Events"
+        ]
+      }
     },
     {
       "eventName": "CMU Trump Protest",
       "category": "Journalism Photography",
-      "tags": ["Politics", "Documentary", "Journalism", "Story"],
+      "tags": [
+        "Politics",
+        "Documentary",
+        "Journalism",
+        "Story"
+      ],
       "folderPath": "Politics/CMU Trump Protest",
       "eventDate": {
         "iso": "2025-07-15",
@@ -1744,276 +2110,237 @@
       "images": [
         {
           "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1091-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1106-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1106-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1107-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1107-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1123-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1123-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1126-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1126-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1131-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1131-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1141-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1141-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1146-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1146-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1152-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1152-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1156-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1156-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1162-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1162-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1168-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1168-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1173-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1184-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1184-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1186-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1192-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1192-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1196-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1196-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1201-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1201-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1206-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1249-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1249-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1278-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1278-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1297-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1297-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1301-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1301-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1303-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1303-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1325-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1325-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1340-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1340-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1353-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1353-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1360-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1360-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1364-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1364-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1429-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1429-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1435-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1448-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1448-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1476-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1476-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1489-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1489-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1498-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1498-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1539-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1539-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1564-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1564-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1568-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1568-min.jpg"
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
-          "path": "250715_CMU Trump Protest_CAL1573-min.jpg",
+          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
           "description": "CMU Trump Protest photography",
-          "caption": "CMU Trump Protest - Politics",
-          "tags": ["Politics"]
+          "path": "250715_CMU Trump Protest_CAL1573-min.jpg"
         }
       ],
       "published": false,
@@ -2030,397 +2357,100 @@
         "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
         "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
         "description": "CMU Trump Protest photography",
-        "caption": "CMU Trump Protest - Politics",
-        "tags": ["Politics"]
+        "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
+        "tags": [
+          "Politics"
+        ]
       }
     },
     {
-      "eventName": "Butler Protest",
-      "category": "Journalism Photography",
-      "tags": ["Politics", "Documentary", "Journalism", "Story"],
-      "folderPath": "Politics/Butler Protest",
-      "eventDate": {
-        "iso": "2025-03-15",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "undefined undefined",
-      "totalImages": 11,
-      "images": [
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9666-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9674-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9703-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9709-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9717-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9739-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9759-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9773-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9825-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
-          "path": "250315_Butler Democracy Protest_CAL9832-min.jpg",
-          "description": "Butler Protest photography",
-          "caption": "Butler Protest - Politics",
-          "tags": ["Politics"]
-        }
-      ],
-      "published": false,
-      "metadata": {},
-      "name": "Butler Protest",
-      "title": "Butler Protest",
-      "date": {
-        "iso": "2025-03-15",
-        "source": "filename_extraction"
-      },
-      "type": "Journalism",
-      "id": "Butler Protest",
-      "coverImage": {
-        "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-        "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-        "description": "Butler Protest photography",
-        "caption": "Butler Protest - Politics",
-        "tags": ["Politics"]
-      }
-    },
-    {
-      "eventName": "Kamala In Pittsburgh Amid Election Eve",
-      "category": "Journalism Photography",
-      "tags": ["Politics", "Documentary", "Journalism", "Story"],
-      "folderPath": "Politics/Kamala in Pittsburgh amid Election Eve",
-      "eventDate": {
-        "iso": "2024-11-04",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "undefined undefined",
-      "totalImages": 19,
-      "images": [
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        },
-        {
-          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
-          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
-          "description": "Kamala in Pittsburgh amid Election Eve photography",
-          "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-          "tags": ["Politics"]
-        }
-      ],
-      "published": false,
-      "metadata": {},
-      "name": "Kamala In Pittsburgh Amid Election Eve",
-      "title": "Kamala In Pittsburgh Amid Election Eve",
-      "date": {
-        "iso": "2024-11-04",
-        "source": "filename_extraction"
-      },
-      "type": "Journalism",
-      "id": "Kamala In Pittsburgh Amid Election Eve",
-      "coverImage": {
-        "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-        "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
-        "description": "Kamala in Pittsburgh amid Election Eve photography",
-        "caption": "Kamala in Pittsburgh amid Election Eve - Politics",
-        "tags": ["Politics"]
-      }
-    },
-    {
-      "eventName": "Clinton Speaks At Pitt Greensburgh",
+      "eventName": "Scarlett Johansson GOTV Canvas Launch",
       "category": "Journalism Photography",
       "tags": [
         "Politics",
-        "Published Work",
         "Presidential Campaign",
+        "Celebrity",
+        "The Globe",
+        "Photojournalism",
         "Documentary",
         "Journalism",
         "Story"
       ],
-      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
+      "folderPath": "Politics/Scarlett Johansson Canvas Launch",
       "eventDate": {
-        "iso": "2024-10-29",
-        "source": "metadata"
+        "iso": "2024-11-03",
+        "source": "filename_extraction"
       },
       "dateDisplay": "undefined undefined",
-      "totalImages": 9,
+      "totalImages": 6,
       "images": [
         {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg",
+          "caption": "Actress Scarlett Johansson addresses volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "description": "Scarlett Johansson speaks to volunteers at Harris campaign canvass launch",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg"
         },
         {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3204.jpg",
+          "caption": "Actress Scarlett Johansson greets campaign volunteers before a canvass launch event for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "description": "Scarlett Johansson greets campaign volunteers",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3204.jpg"
         },
         {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3205.jpg",
+          "caption": "Actress Scarlett Johansson rallies supporters at a get-out-the-vote event for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "description": "Scarlett Johansson speaks to Harris campaign supporters",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3205.jpg"
         },
         {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3208.jpg",
+          "caption": "Actress Scarlett Johansson visits a campaign office to launch a get-out-the-vote canvassing effort for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "description": "Scarlett Johansson at Harris campaign office",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3208.jpg"
         },
         {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3226.jpg",
+          "caption": "Actress Scarlett Johansson encourages volunteers before they canvas for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "description": "Scarlett Johansson encourages campaign volunteers",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3226.jpg"
         },
         {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
-        },
-        {
-          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
-          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
-          "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-          "caption": "Clinton campaign event at Pitt Greensburg",
-          "tags": ["Politics", "Published Work", "Presidential Campaign"]
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3234.jpg",
+          "caption": "Actress Scarlett Johansson poses with campaign volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "description": "Scarlett Johansson with Harris campaign volunteers",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3234.jpg"
         }
       ],
       "published": true,
       "metadata": {
-        "tags": ["Politics", "Published Work", "Presidential Campaign"],
+        "tags": [
+          "Politics",
+          "Presidential Campaign",
+          "Celebrity"
+        ],
         "published": true,
-        "date": "2024-10-29",
-        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-        "caption": "Clinton campaign event at Pitt Greensburg",
-        "outlet": "New York Post",
-        "outletUrl": "https://nypost.com",
-        "articleUrl": "",
-        "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
-        "publishedDate": "2024-10-29"
+        "date": "2024-11-03",
+        "description": "Scarlett Johansson canvasses for Harris — The Globe",
+        "caption": "Actress Scarlett Johansson launches get-out-the-vote effort for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024."
       },
-      "outlet": "New York Post",
-      "outletUrl": "https://nypost.com",
-      "articleUrl": "",
-      "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
-      "publishedDate": "2024-10-29",
-      "name": "Clinton Speaks At Pitt Greensburgh",
-      "title": "Clinton Speaks At Pitt Greensburgh",
+      "name": "Scarlett Johansson GOTV Canvas Launch",
+      "title": "Scarlett Johansson GOTV Canvas Launch",
       "date": {
-        "iso": "2024-10-29",
-        "source": "metadata"
+        "iso": "2024-11-03",
+        "source": "filename_extraction"
       },
       "type": "Journalism",
-      "id": "Clinton Speaks At Pitt Greensburgh",
+      "id": "Scarlett Johansson GOTV Canvas Launch",
       "coverImage": {
-        "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-        "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
-        "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-        "caption": "Clinton campaign event at Pitt Greensburg",
-        "tags": ["Politics", "Published Work", "Presidential Campaign"]
+        "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg",
+        "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg",
+        "description": "Scarlett Johansson speaks to volunteers at Harris campaign canvass launch",
+        "caption": "Actress Scarlett Johansson addresses volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+        "tags": [
+          "Politics",
+          "Celebrity",
+          "Campaign"
+        ]
       }
     }
   ]
