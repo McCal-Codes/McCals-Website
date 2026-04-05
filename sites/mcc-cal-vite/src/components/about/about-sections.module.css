@@ -1,0 +1,1267 @@
+/* ============================================
+   About Page Sections - CSS Module
+   ============================================ */
+
+/* CSS Custom Properties */
+.bio,
+.reviews,
+.clients {
+  --about-bg-glass: rgba(20, 20, 20, 0.7);
+  --about-bg-glass-heavy: rgba(12, 12, 12, 0.88);
+  --about-panel-border: rgba(255, 255, 255, 0.08);
+  --about-panel-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 24px 48px rgba(0, 0, 0, 0.28);
+  --about-text-primary: #f2efeb;
+  --about-text-secondary: #d7d0c9;
+  --about-text-muted: #9d948d;
+  --about-accent: #cac2ba;
+  --about-accent-strong: #e2d9cf;
+  --about-line: rgba(255, 255, 255, 0.12);
+  --about-surface: rgba(255, 255, 255, 0.04);
+}
+
+/* ============================================
+   Shared Styles (Eyebrow, Section Headings)
+   ============================================ */
+
+.eyebrow {
+  margin: 0;
+  color: var(--about-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  color: var(--about-text-primary);
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.sectionHeading p {
+  margin: 0;
+  color: var(--about-text-secondary);
+  line-height: 1.72;
+}
+
+.centered {
+  justify-items: center;
+  text-align: center;
+}
+
+/* ============================================
+   Bio Section
+   ============================================ */
+
+.bio {
+  padding: 24px;
+}
+
+.bioGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bioPhoto {
+  position: relative;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+.bioPhoto::before {
+  content: '';
+  position: absolute;
+  width: 82%;
+  height: 82%;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 70%);
+  filter: blur(36px);
+}
+
+.photoWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photoWrapper.loaded img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.photoWrapper:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.photoWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.photoFallback {
+  width: min(100%, 200px);
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--about-text-muted);
+}
+
+.bioContent {
+  display: grid;
+  gap: 10px;
+}
+
+.bioContent h1 {
+  margin: 0;
+  color: var(--about-text-primary);
+  font-size: 1.25rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.bioText {
+  display: grid;
+  gap: 12px;
+}
+
+.bioText p {
+  margin: 0;
+  color: var(--about-text-secondary);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.bioText strong {
+  color: var(--about-text-primary);
+}
+
+.bioText a {
+  color: var(--about-accent-strong);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+  transition: color 0.2s ease;
+}
+
+.bioText a:hover {
+  color: var(--about-text-primary);
+}
+
+/* ============================================
+   Action Buttons & Menus
+   ============================================ */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--about-text-primary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.actionButton:hover,
+.actionButton:focus-visible {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+  outline: none;
+}
+
+.actionPrimary {
+  color: #272423;
+  background: linear-gradient(135deg, #e2d9cf 0%, #b8b0aa 100%);
+  border-color: transparent;
+}
+
+.actionPrimary:hover,
+.actionPrimary:focus-visible {
+  background: linear-gradient(135deg, #efe7de 0%, #c8bfb8 100%);
+}
+
+.menuWrapper {
+  position: relative;
+}
+
+.chevron {
+  width: 12px;
+  height: 8px;
+  transition: transform 0.2s ease;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.menuPanel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  display: grid;
+  min-width: 190px;
+  padding: 8px;
+  border-radius: 14px;
+  border: 1px solid var(--about-line);
+  background: var(--about-bg-glass-heavy);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0.18s ease;
+  z-index: 20;
+}
+
+.menuPanel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  color: var(--about-text-primary);
+  text-decoration: none;
+  font-size: 0.92rem;
+  transition: background 0.18s ease;
+}
+
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+.menuIcon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  opacity: 0.7;
+}
+
+/* ============================================
+   Stats
+   ============================================ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.stat {
+  display: grid;
+  gap: 4px;
+  padding: 12px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.stat strong {
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--about-text-primary);
+}
+
+.stat span {
+  color: var(--about-text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statsClients {
+  margin-top: 26px;
+}
+
+/* ============================================
+   Testimonials Section
+   ============================================ */
+
+.reviews {
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.reviewCard {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.reviewCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.testimonials {
+  padding: 24px;
+}
+
+.testimonialsHeader {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.testimonialsHeader h2 {
+  margin: 0;
+  color: var(--about-text-primary);
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.testimonialsSubtitle {
+  margin: 0;
+  color: var(--about-text-muted);
+  font-size: 0.9rem;
+  max-width: 50ch;
+  justify-self: center;
+}
+
+.testimonialsGrid {
+  display: none; /* Replaced by carousel */
+}
+
+/* Testimonials Carousel */
+.testimonialsCarousel {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  padding: 0 12px;
+}
+
+.testimonialsTrack {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonialSlide {
+  flex: 0 0 50%;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .testimonialSlide {
+    flex: 0 0 50%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+  
+  .testimonialCard {
+    padding: 24px;
+    gap: 16px;
+  }
+}
+
+/* Mobile stacked layout */
+.testimonialsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 8px;
+}
+
+.testimonialsStack .testimonialCard {
+  flex-shrink: 0;
+}
+
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.carouselDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.activeDot {
+  background: var(--about-accent);
+  width: 16px;
+  border-radius: 3px;
+}
+
+.testimonialCard {
+  display: block;
+  gap: 14px;
+  padding: 24px;
+  margin: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.testimonialCard:hover,
+.testimonialCard.hovered {
+  transform: translateY(-4px);
+}
+
+.testimonialCard::before {
+  display: none;
+}
+
+.testimonialHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.testimonialAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--about-accent) 0%, var(--about-accent-strong) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.avatarInitials {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.05em;
+}
+
+.testimonialMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.testimonialName {
+  color: var(--about-text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.testimonialRole {
+  color: var(--about-text-muted);
+  font-size: 0.7rem;
+}
+
+.testimonialSource {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.sourceIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.testimonialCard:hover .testimonialSource {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.testimonialStars {
+  color: #ffd700;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  margin: -8px 0 12px;
+}
+
+.testimonialQuote {
+  margin: 0 0 12px;
+  color: var(--about-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  font-style: italic;
+  position: relative;
+  padding-left: 12px;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.testimonialFooter {
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sourceBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--about-text-muted);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.testimonialCard:hover .sourceBadge {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--about-text-secondary);
+}
+
+.testimonialsFooter {
+  display: none;
+}
+
+.actionSecondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--about-text-secondary);
+}
+
+.actionSecondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Legacy styles - kept for compatibility */
+.reviews,
+.reviewsGrid,
+.reviewCard,
+.reviewBadge,
+.reviewStars,
+.reviewQuote,
+.reviewFooter,
+.reviewsFooter {
+  display: none;
+}
+
+/* ============================================
+   Clients Section
+   ============================================ */
+
+.clients {
+  padding: 24px;
+}
+
+.clientsSubtitle {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--about-text-muted);
+  font-size: 0.8rem;
+}
+
+/* Modern Client Carousel */
+.clientCarousel {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 12px;
+}
+
+/* Gradient fade edges - wider and softer */
+.clientCarousel::before,
+.clientCarousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.clientCarousel::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--about-bg-glass) 0%, transparent 100%);
+}
+
+.clientCarousel::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--about-bg-glass) 0%, transparent 100%);
+}
+
+.clientTrack {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  transform: translateZ(0);
+  animation: scroll 5s linear infinite;
+}
+
+.clientTrack:hover {
+  animation-play-state: paused;
+}
+
+/* Enhanced Client Cards */
+.clientCard {
+  flex: 0 0 160px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 251, 247, 0.02) 100%
+  );
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.photoWrapper {
+  position: relative;
+  width: min(100%, 240px);
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photoFallback {
+  width: min(100%, 240px);
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+}
+
+/* Shimmer effect on hover */
+.clientCard::before {
+  display: none;
+}
+
+.clientCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.clientCard.clickable {
+  cursor: pointer;
+}
+
+/* External link indicator - always visible on linked cards */
+.clientCard.clickable::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--about-accent);
+  opacity: 0.6;
+}
+
+.clientLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+}
+
+.clientImageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.clientImageWrapper.loaded {
+  opacity: 1;
+}
+
+.clientCard:hover .clientImageWrapper {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.clientImageWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  mix-blend-mode: multiply;
+}
+
+/* Specific logo background removal - BC3 and NPPA */
+.clientImageWrapper img[src*='bc3-logo-new.png'],
+.clientImageWrapper img[src*='nppa-real-logo.png'] {
+  mix-blend-mode: screen;
+  filter: brightness(1.2);
+}
+
+.clientCard:hover .clientImageWrapper img[src*='bc3-logo-new.png'],
+.clientCard:hover .clientImageWrapper img[src*='nppa-real-logo.png'] {
+  mix-blend-mode: normal;
+  filter: brightness(1);
+}
+
+.clientFallback {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--about-text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Remove old external indicator styles */
+.externalIndicator,
+.externalIndicator svg {
+  display: none;
+}
+
+.clientsFooter {
+  display: none;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes scroll {
+  from {
+    transform: translateZ(0) translateX(0);
+  }
+  to {
+    transform: translateZ(0) translateX(-1696px);
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+.srOnly {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ============================================
+   Light Theme Overrides
+   ============================================ */
+
+:global(body[data-theme='light']) .bio,
+:global(body[data-theme='light']) .reviews,
+:global(body[data-theme='light']) .clients {
+  --about-bg-glass: rgba(255, 251, 247, 0.9);
+  --about-bg-glass-heavy: rgba(255, 255, 255, 0.96);
+  --about-panel-border: rgba(90, 67, 47, 0.1);
+  --about-panel-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 18px 34px rgba(74, 52, 34, 0.08);
+  --about-text-primary: #1e1a16;
+  --about-text-secondary: #4f4236;
+  --about-text-muted: #7f6d5d;
+  --about-accent: #7b6450;
+  --about-accent-strong: #574032;
+  --about-line: rgba(90, 67, 47, 0.12);
+  --about-surface: rgba(90, 67, 47, 0.04);
+}
+
+:global(body[data-theme='light']) .actionButton,
+:global(body[data-theme='light']) .menuPanel,
+:global(body[data-theme='light']) .stat,
+:global(body[data-theme='light']) .reviewCard {
+  border-color: rgba(90, 67, 47, 0.1);
+}
+
+:global(body[data-theme='light']) .actionButton {
+  background: rgba(90, 67, 47, 0.04);
+}
+
+:global(body[data-theme='light']) .actionPrimary {
+  color: #fff8f2;
+  background: linear-gradient(135deg, #7b6450 0%, #5f4a38 100%);
+}
+
+:global(body[data-theme='light']) .menuItem:hover,
+:global(body[data-theme='light']) .menuItem:focus-visible,
+:global(body[data-theme='light']) .actionButton:hover,
+:global(body[data-theme='light']) .actionButton:focus-visible {
+  background: rgba(90, 67, 47, 0.08);
+}
+
+:global(body[data-theme='light']) .clientCard {
+  border-color: rgba(90, 67, 47, 0.1);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 251, 247, 0.8) 100%
+  );
+  box-shadow: 0 4px 20px rgba(74, 52, 34, 0.1);
+}
+
+:global(body[data-theme='light']) .clientCard:hover {
+  border-color: rgba(90, 67, 47, 0.2);
+  box-shadow: 0 20px 40px rgba(74, 52, 34, 0.15);
+}
+
+:global(body[data-theme='light']) .clientCard.clickable::after {
+  background: var(--about-accent);
+}
+
+:global(body[data-theme='light']) .clientImageWrapper img {
+  transition: all 0.3s ease;
+}
+
+:global(body[data-theme='light']) .clientCard:hover .clientImageWrapper img {
+  transform: scale(1.02);
+}
+
+:global(body[data-theme='light']) .clientCarousel::before {
+  background: linear-gradient(90deg, rgba(255, 251, 247, 0.98) 0%, transparent 100%);
+}
+
+:global(body[data-theme='light']) .clientCarousel::after {
+  background: linear-gradient(270deg, rgba(255, 251, 247, 0.98) 0%, transparent 100%);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 767px) {
+  .testimonialSlide {
+    flex: 0 0 100%;
+    padding: 0 16px;
+  }
+  
+  .testimonialsCarousel {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+  
+  .testimonials {
+    padding: 20px 16px;
+  }
+  
+  .testimonialsHeader {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .testimonialsHeader h2 {
+    font-size: 1.5rem;
+  }
+  
+  .testimonialsSubtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .bioGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .bioPhoto {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .actions,
+  .clientsFooter,
+  .reviewsFooter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .menuWrapper,
+  .actionButton {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+
+  .menuPanel {
+    position: static;
+    min-width: 0;
+    margin-top: 8px;
+    transform: none;
+    display: none;
+    box-shadow: none;
+  }
+
+  .menuPanel.open {
+    display: grid;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 16px 12px;
+    min-height: 44px;
+  }
+
+  .stat strong {
+    font-size: 1.5rem;
+  }
+
+  .clientCard {
+    flex: 0 0 140px;
+    height: 90px;
+    padding: 12px 14px;
+  }
+
+  .clientTrack {
+    animation-duration: 12s;
+    gap: 14px;
+  }
+  
+  /* Testimonials carousel mobile */
+  .testimonialSlide {
+    flex: 0 0 100%;
+    padding: 0 16px;
+  }
+  
+  .carouselArrow {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+  
+  .carouselArrow svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .carouselArrowPrev {
+    left: 4px;
+  }
+  
+  .carouselArrowNext {
+    right: 4px;
+  }
+  
+  .testimonialCard {
+    padding: 20px;
+    gap: 16px;
+    border-radius: 16px;
+  }
+  
+  .testimonialHeader {
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .testimonialAvatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .avatarInitials {
+    font-size: 1rem;
+  }
+
+  .testimonialName {
+    font-size: 1.1rem;
+  }
+
+  .testimonialRole {
+    font-size: 0.9rem;
+  }
+  
+  .testimonialQuote {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .testimonialsHeader h2 {
+    font-size: 1.5rem;
+  }
+  
+  .testimonialsSubtitle {
+    font-size: 1rem;
+  }
+  
+  .testimonials {
+    padding: 20px 16px;
+  }
+  
+  .clients {
+    padding: 20px 16px;
+  }
+  
+  .bio {
+    padding: 20px 16px;
+  }
+  
+  .bioGrid {
+    gap: 24px;
+  }
+  
+  .bioPhoto {
+    order: -1;
+    margin-bottom: 8px;
+  }
+  
+  .photoWrapper {
+    width: 180px;
+    height: 225px;
+    margin: 0 auto;
+    aspect-ratio: 4 / 5;
+  }
+  
+  .photoWrapper img {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .bioContent {
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .bioContent h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  .bioText p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .stat {
+    padding: 16px 8px;
+    min-height: 44px;
+  }
+
+  .stat strong {
+    font-size: 1.5rem;
+  }
+
+  .stat span {
+    font-size: 0.7rem;
+  }
+}
+
+/* Mobile stacked layout */
+.testimonialsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: none;
+  overflow-y: visible;
+  padding-right: 0;
+}
+
+.testimonialsStack .testimonialCard {
+  margin-bottom: 0;
+}
+
+/* Expand button for mobile */
+.expandButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--about-text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.expandButton:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.expandIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.expandIcon.expanded {
+  transform: rotate(180deg);
+}
+
+/* Mobile client grid */
+.clientsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clientsGrid .clientCard {
+  flex: none;
+  width: 100%;
+  height: 80px;
+  padding: 12px;
+}
+
+@media (max-width: 640px) {
+  .clientsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .clientsGrid .clientCard {
+    height: 80px;
+    padding: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoWrapper,
+  .actionButton,
+  .reviewCard,
+  .clientCard {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .clientTrack {
+    animation-duration: 120s !important;
+  }
+}

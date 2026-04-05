@@ -12,42 +12,72 @@
   --about-accent-strong: #e2d9cf;
   --about-line: rgba(255, 255, 255, 0.12);
   --about-surface: rgba(255, 255, 255, 0.04);
-  padding: clamp(32px, 6vw, 72px) 0 clamp(64px, 8vw, 110px);
+  padding: clamp(40px, 8vw, 100px) 0 clamp(80px, 12vw, 140px);
   color: var(--about-text-primary);
 }
 
 .about-shell {
   display: grid;
-  gap: 20px;
-  max-width: 980px;
+  gap: 48px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 clamp(16px, 5vw, 60px);
+}
+
+@media (min-width: 1280px) {
+  .about-shell {
+    grid-template-columns: minmax(360px, 30%) 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-shell {
+    gap: 40px;
+    align-items: start;
+  }
 }
 
 .about-panel {
   position: relative;
-  overflow: hidden;
-  border-radius: 22px;
+  overflow: visible;
+  border-radius: 20px;
   border: 1px solid var(--about-panel-border);
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 100%, rgba(255, 255, 255, 0.02), transparent 40%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
     var(--about-bg-glass);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--about-panel-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.about-panel:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 32px 64px rgba(0, 0, 0, 0.35);
 }
 
 .about-bio,
 .about-reviews,
 .about-clients {
-  padding: clamp(20px, 3vw, 30px);
+  padding: 32px;
 }
 
 .about-bio__grid {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.25fr);
-  gap: clamp(24px, 4vw, 40px);
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .about-bio__photo {
@@ -68,16 +98,13 @@
 }
 
 .about-bio__photo img {
-  position: relative;
-  display: block;
-  width: min(100%, 320px);
+  width: min(100%, clamp(160px, 20vw, 240px));
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 22px;
+  border-radius: clamp(12px, 1.5vw, 16px);
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.48),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    0 clamp(8px, 1.5vw, 16px) clamp(16px, 2vw, 32px) rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .about-bio__photo:hover img {
@@ -86,36 +113,31 @@
 
 .about-bio__content {
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .about-eyebrow {
   margin: 0;
   color: var(--about-accent);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.about-bio__content h1,
-.about-section-heading h2 {
+.about-bio__content h1 {
   margin: 0;
   color: var(--about-text-primary);
-  font-size: clamp(1.45rem, 2.8vw, 2rem);
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
-.about-bio__content p,
-.about-section-heading p,
-.about-review-card__quote,
-.about-review-card__footer span,
-.about-reviews__footer p,
-.about-clients__subtitle {
+.about-bio__content p {
   margin: 0;
   color: var(--about-text-secondary);
-  line-height: 1.72;
+  line-height: 1.65;
+  font-size: 0.95rem;
 }
 
 .about-bio__content strong,
@@ -129,27 +151,26 @@
   text-underline-offset: 0.16em;
 }
 
-.about-actions,
-.about-clients__footer,
-.about-reviews__footer {
+.about-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   align-items: center;
+  margin-top: 8px;
 }
 
 .about-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
+  min-height: 40px;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.06);
   color: var(--about-text-primary);
   text-decoration: none;
-  font-size: 0.94rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -230,32 +251,32 @@
 
 .about-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 .about-stat {
   display: grid;
-  gap: 6px;
-  padding: 18px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  gap: 4px;
+  padding: 12px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
 }
 
 .about-stat strong {
-  font-size: clamp(1.65rem, 3vw, 2rem);
+  font-size: 1.3rem;
   line-height: 1;
   color: var(--about-text-primary);
 }
 
 .about-stat span {
   color: var(--about-text-muted);
-  font-size: 0.82rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
 }
 
 .about-section-heading {
@@ -524,28 +545,106 @@ body[data-theme='light'] .about-client-carousel::after {
   background: linear-gradient(270deg, rgba(255, 251, 247, 0.98), transparent);
 }
 
-@media (max-width: 920px) {
-  .about-bio__grid,
-  .about-reviews__grid {
-    grid-template-columns: 1fr;
+@media (min-width: 1024px) {
+  .about-shell {
+    grid-template-columns: 420px 1fr;
+    gap: 32px;
+    align-items: start;
   }
+  
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+}
 
+@media (max-width: 1023px) {
+  .about-shell {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+  
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .about-panel {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 920px) {
+  .about-bio__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
   .about-bio__photo {
     justify-self: center;
+  }
+  
+  .about-bio__photo img {
+    width: min(100%, 200px);
+  }
+  
+  .about-bio__content h1 {
+    text-align: center;
+  }
+  
+  .about-actions {
+    justify-content: center;
+  }
+  
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 640px) {
-  .about-actions,
-  .about-clients__footer,
-  .about-reviews__footer {
+  .about-bio,
+  .about-reviews,
+  .about-clients {
+    padding: 20px 16px;
+  }
+  
+  .about-bio__grid {
+    gap: 20px;
+  }
+  
+  .about-bio__photo img {
+    width: 140px;
+    height: 175px;
+  }
+  
+  .about-bio__content h1 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    text-align: center;
+  }
+  
+  .about-bio__content p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .about-actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
   }
 
   .about-menu,
   .about-action {
     width: 100%;
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 1rem;
   }
 
   .about-menu__panel {
@@ -562,13 +661,31 @@ body[data-theme='light'] .about-client-carousel::after {
   }
 
   .about-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .about-stat {
+    padding: 16px 12px;
+    min-height: 44px;
+  }
+
+  .about-stat strong {
+    font-size: 1.5rem;
+  }
+
+  .about-stat span {
+    font-size: 0.75rem;
   }
 
   .about-client-card {
-    flex: 0 0 150px;
-    height: 96px;
-    padding: 14px 16px;
+    flex: 0 0 140px;
+    height: 90px;
+    padding: 12px 14px;
+  }
+  
+  .about-content {
+    gap: 16px;
   }
 }
 
