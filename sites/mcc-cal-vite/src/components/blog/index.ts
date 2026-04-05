@@ -10,3 +10,11 @@ export { default as StoryCitations } from './StoryCitations';
 export { useBlogData } from './useBlogData';
 export type { UseBlogDataReturn } from './useBlogData';
 export * from './utils';
+export {
+  useBlogManifest,
+  useBlogAuthors,
+  useBlogPost,
+  useBlogPageData,
+  blogKeys,
+  type UseBlogPageDataReturn,
+} from './queries';
