@@ -51,7 +51,16 @@ export default function ConcertsPage() {
   const { data, status, error } = useManifest<ConcertManifest>('concerts');
   const [activeFilter, setActiveFilter] = useState(ALL);
 
-  const groups = useMemo(() => (data ? adaptConcerts(data) : []), [data]);
+  const groups = useMemo(() => {
+    if (!data) return [];
+    const concerts = adaptConcerts(data);
+    // Sort by date (newest first)
+    return concerts.sort((a, b) => {
+      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : 0;
+      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : 0;
+      return dateB - dateA;
+    });
+  }, [data]);
 
   const filters = useMemo(() => {
     const years = [...new Set(groups.map((group) => group.dateISO?.slice(0, 4)).filter(Boolean))].sort(
