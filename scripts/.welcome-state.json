@@ -1,4 +1,4 @@
 {
-  "lastHash": "231b055d",
-  "lastMessage": "Add portrait manifest JSON file with collections and images"
+  "lastHash": "8ff0a6ea",
+  "lastMessage": "refactor: fix ESLint unused variable errors across codebase\n\n- Fix 67 unused variable warnings in active code (70 → 3 remaining)\n- Migrate catch block error handling to empty catch syntax where unused\n- Update eslint.config.mjs ignore patterns for dist/ and broken symlinks\n- Fix eslint-env comments for ESLint 9 flat config compatibility\n- Remove deprecated .eslintignore patterns (migrated to flat config)\n\nAffected areas:\n- dev-server.js, admin/api.js\n- scripts/admin/, scripts/utils/, scripts/manifest/\n- sites/mcc-cal-vite/api/\n- src/widgets/_content/blog-feed/, src/widgets/cdn/, src/widgets/shared/"
 }
