@@ -307,18 +307,168 @@
       padding: 12px;
     }
     .gallery-folder {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      overflow: hidden;
     }
-    .gallery-folder h4 {
+    .folder-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: #f8f9fa;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .folder-header:hover {
+      background: #e9ecef;
+    }
+    .folder-toggle {
+      font-size: 12px;
+      color: #666;
+      width: 12px;
+    }
+    .folder-name {
+      font-weight: 600;
+      font-size: 13px;
+      color: #333;
+      text-transform: uppercase;
+      flex: 1;
+    }
+    .folder-count {
+      font-size: 12px;
+      color: #999;
+    }
+    .upload-dropzone {
+      border: 2px dashed #dee2e6;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      background: #f8f9fa;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .upload-dropzone:hover {
+      border-color: #adb5bd;
+      background: #e9ecef;
+    }
+    .upload-dropzone.drag-over {
+      border-color: #28a745;
+      background: #d4edda;
+    }
+    .upload-content {
+      pointer-events: none;
+    }
+    .upload-icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .upload-hint {
       font-size: 13px;
       color: #666;
-      margin-bottom: 8px;
-      text-transform: uppercase;
+      margin-top: 8px;
+    }
+    .btn-link {
+      background: none;
+      border: none;
+      color: #007bff;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+      font-size: inherit;
+    }
+    .upload-preview {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 6px;
+    }
+    .upload-preview h4 {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .upload-files-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .upload-file-item {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+    .upload-file-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .upload-file-item .remove-file {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: rgba(255,0,0,0.8);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       gap: 8px;
+    }
+
+    /* Tree folder styles for hierarchical navigation */
+    .tree-folder {
+      margin-bottom: 8px;
+    }
+    .tree-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .tree-header:hover {
+      background: #e9ecef;
+    }
+    .tree-toggle {
+      font-size: 12px;
+      color: #666;
+      width: 12px;
+    }
+    .tree-icon {
+      font-size: 14px;
+    }
+    .tree-name {
+      font-weight: 500;
+      font-size: 14px;
+      color: #333;
+      flex: 1;
+    }
+    .tree-count {
+      font-size: 12px;
+      color: #999;
+    }
+    .tree-content {
+      padding: 8px 0 8px 12px;
     }
     .gallery-item {
       aspect-ratio: 1;
@@ -470,6 +620,7 @@
       <button class="active" onclick="showPanel('list')">Posts</button>
       <button onclick="showPanel('new')">New Post</button>
       <button onclick="showPanel('edit')">Edit Post</button>
+      <button onclick="showPanel('import')">Import Images</button>
     </nav>
 
     <div id="status"></div>
@@ -599,6 +750,12 @@
               </div>
             </div>
 
+            <!-- Word Count & Reading Time -->
+            <div class="stats-bar" id="editor-stats">
+              <span id="word-count">0 words</span>
+              <span id="reading-time">~0 min read</span>
+            </div>
+
             <div class="form-group">
               <label>
                 <input type="checkbox" id="edit-draft">
@@ -626,6 +783,51 @@
         </div>
       </form>
     </div>
+
+    <!-- Image Import Panel -->
+    <div id="panel-import" class="panel">
+      <h2>Import Images to Portfolios</h2>
+      
+      <div class="form-group">
+        <label>Select Portfolio Destination</label>
+        <select id="import-portfolio" onchange="updateImportFolders()">
+          <option value="">Choose a portfolio...</option>
+        </select>
+      </div>
+      
+      <div class="form-group" id="import-folder-group" style="display:none;">
+        <label>Select Folder (or create new)</label>
+        <select id="import-folder">
+          <option value="">Create new folder...</option>
+        </select>
+        <input type="text" id="import-new-folder" placeholder="New folder name (optional)" style="margin-top: 8px;">
+      </div>
+      
+      <div class="form-group">
+        <label>Upload Images</label>
+        <div id="upload-dropzone" class="upload-dropzone" ondragover="handleDragOverUpload(event)" ondrop="handleDropUpload(event)" ondragleave="handleDragLeaveUpload(event)">
+          <div class="upload-content">
+            <span class="upload-icon">📁</span>
+            <p>Drag & drop images here, or <button type="button" class="btn-link" onclick="document.getElementById('upload-input').click()">browse</button></p>
+            <p class="upload-hint">Supports: JPG, PNG, WebP, AVIF</p>
+          </div>
+          <input type="file" id="upload-input" multiple accept="image/*" style="display:none;" onchange="handleFileSelect(event)">
+        </div>
+      </div>
+      
+      <div id="upload-preview" class="upload-preview" style="display:none;">
+        <h4>Selected Files</h4>
+        <div id="upload-files-list" class="upload-files-list"></div>
+      </div>
+      
+      <div class="actions">
+        <button type="button" class="btn-primary" onclick="uploadImages()" id="upload-btn" disabled>Upload Images</button>
+        <button type="button" class="btn-secondary" onclick="clearUpload()">Clear</button>
+      </div>
+      
+      <div id="upload-status"></div>
+    </div>
+
   </div>
 
   <script>
@@ -805,8 +1007,9 @@
         }
 
         return `
-          <div class="block-item" data-index="${index}">
+          <div class="block-item" data-index="${index}" draggable="true" ondragstart="handleDragStart(event, ${index})" ondragover="handleDragOver(event, ${index})" ondrop="handleDrop(event, ${index})" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)">
             <div class="block-header">
+              <span class="drag-handle">⋮⋮</span>
               <span>${block.type}</span>
               <div class="block-controls">
                 <button type="button" onclick="moveBlock(${index}, -1)" ${isFirst ? 'disabled' : ''}>↑</button>
@@ -834,6 +1037,7 @@
     // Image helper functions
     let availableImages = [];
     let groupedImages = {};
+    let imageTree = {};
 
     async function loadAvailableImages() {
       try {
@@ -842,6 +1046,7 @@
         if (data.images) {
           availableImages = data.images;
           groupedImages = data.grouped || {};
+          imageTree = data.tree || {};
           window.availableImages = availableImages;
         }
       } catch (err) {
@@ -854,26 +1059,88 @@
       const gallery = document.getElementById(`image-gallery-${blockIndex}`);
       if (!picker || !gallery) return;
       
-      // Build gallery HTML
+      picker.style.display = 'block';
+      
+      // Check if images are loaded
+      if (!imageTree || Object.keys(imageTree).length === 0) {
+        gallery.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No images found. Make sure portfolio images exist in src/images/Portfolios/</p>';
+        return;
+      }
+      
+      // Build hierarchical tree HTML
+      const html = buildTreeHtml(imageTree, blockIndex, 0);
+      gallery.innerHTML = html || '<p style="color: #999; text-align: center; padding: 20px;">No images found</p>';
+    }
+
+    function buildTreeHtml(node, blockIndex, depth) {
+      if (!node || typeof node !== 'object') return '';
+      
       let html = '';
-      Object.entries(groupedImages).forEach(([folder, images]) => {
-        if (images.length === 0) return;
+      const indent = depth * 20;
+      
+      Object.entries(node).forEach(([name, content]) => {
+        if (name === '_images') return; // Skip image array keys
+        
+        const uniqueId = `tree-${blockIndex}-${name}-${depth}`;
+        const hasImages = content._images && content._images.length > 0;
+        const hasSubfolders = Object.keys(content).some(k => k !== '_images');
+        const totalImages = countImages(content);
+        
         html += `
-          <div class="gallery-folder">
-            <h4>${folder}</h4>
-            <div class="gallery-grid">
-              ${images.map(img => `
-                <div class="gallery-item" onclick="selectImageFromGallery(${blockIndex}, '${img.path}')" data-path="${img.path}">
-                  <img src="${img.path}" alt="${img.filename}" loading="lazy" onerror="this.style.display='none'">
-                </div>
-              `).join('')}
+          <div class="tree-folder" style="margin-left: ${indent}px;">
+            <div class="tree-header" onclick="toggleTreeFolder('${uniqueId}')">
+              <span class="tree-toggle">▶</span>
+              <span class="tree-icon">📁</span>
+              <span class="tree-name">${name}</span>
+              <span class="tree-count">(${totalImages})</span>
+            </div>
+            <div class="tree-content" id="${uniqueId}" style="display: none;">
+              ${hasImages ? buildImageGrid(content._images, blockIndex) : ''}
+              ${hasSubfolders ? buildTreeHtml(content, blockIndex, depth + 1) : ''}
             </div>
           </div>
         `;
       });
       
-      gallery.innerHTML = html || '<p style="color: #999; text-align: center;">No images found</p>';
-      picker.style.display = 'block';
+      return html;
+    }
+
+    function countImages(node) {
+      let count = 0;
+      if (node._images) count += node._images.length;
+      Object.entries(node).forEach(([key, val]) => {
+        if (key !== '_images' && typeof val === 'object') {
+          count += countImages(val);
+        }
+      });
+      return count;
+    }
+
+    function buildImageGrid(images, blockIndex) {
+      if (!images || images.length === 0) return '';
+      return `
+        <div class="gallery-grid">
+          ${images.map(img => `
+            <div class="gallery-item" onclick="selectImageFromGallery(${blockIndex}, '${img.path}')" data-path="${img.path}" title="${img.filename}">
+              <img src="${img.path}" alt="${img.filename}" loading="lazy" onerror="this.parentElement.style.display='none'">
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function toggleTreeFolder(folderId) {
+      const content = document.getElementById(folderId);
+      const folder = content.closest('.tree-folder');
+      const toggle = folder.querySelector('.tree-toggle');
+      
+      if (content.style.display === 'none') {
+        content.style.display = 'block';
+        toggle.textContent = '▼';
+      } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+      }
     }
 
     function hideImagePicker(blockIndex) {
@@ -934,6 +1201,181 @@
           previewEl.innerHTML = '';
         }
       }
+    }
+
+    // Autosave functionality
+    let autosaveInterval = null;
+    let lastSavedContent = '';
+
+    function startAutosave() {
+      if (autosaveInterval) return;
+      autosaveInterval = setInterval(async () => {
+        const currentContent = JSON.stringify(currentBlocks);
+        if (currentContent !== lastSavedContent && currentBlocks.length > 0) {
+          const slug = document.getElementById('edit-slug')?.value;
+          if (slug) {
+            await autoSaveDraft(slug);
+            lastSavedContent = currentContent;
+          }
+        }
+      }, 30000); // Autosave every 30 seconds
+    }
+
+    function stopAutosave() {
+      if (autosaveInterval) {
+        clearInterval(autosaveInterval);
+        autosaveInterval = null;
+      }
+    }
+
+    async function autoSaveDraft(slug) {
+      try {
+        const post = {
+          title: document.getElementById('edit-title').value,
+          date: document.getElementById('edit-date').value,
+          excerpt: document.getElementById('edit-excerpt').value,
+          category: document.getElementById('edit-category').value,
+          tags: document.getElementById('edit-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+          body: getBlocksFromContainer(),
+          draft: true,
+        };
+
+        const res = await fetch(`${API_BASE}/posts/${slug}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post),
+        });
+
+        if (res.ok) {
+          showStatus('Draft autosaved', 'success');
+        }
+      } catch (err) {
+        console.error('Autosave failed:', err);
+      }
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+S to save
+      if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        const saveButton = document.querySelector('#edit-post-form button[type="submit"]');
+        if (saveButton && !saveButton.disabled) {
+          saveButton.click();
+        }
+      }
+      
+      // Ctrl+Enter to add new text block
+      if (e.ctrlKey && e.key === 'Enter') {
+        e.preventDefault();
+        addBlock('text');
+      }
+    });
+
+    // Drag and drop handlers
+    let dragSrcIndex = null;
+
+    function handleDragStart(e, index) {
+      dragSrcIndex = index;
+      e.target.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+
+    function handleDragOver(e, index) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    }
+
+    function handleDragEnter(e) {
+      e.target.closest('.block-item')?.classList.add('drag-over');
+    }
+
+    function handleDragLeave(e) {
+      e.target.closest('.block-item')?.classList.remove('drag-over');
+    }
+
+    function handleDrop(e, dropIndex) {
+      e.stopPropagation();
+      e.preventDefault();
+      
+      const blockEl = e.target.closest('.block-item');
+      blockEl?.classList.remove('drag-over');
+      document.querySelectorAll('.block-item').forEach(el => el.classList.remove('dragging'));
+      
+      if (dragSrcIndex !== null && dragSrcIndex !== dropIndex) {
+        // Reorder blocks
+        const item = currentBlocks[dragSrcIndex];
+        currentBlocks.splice(dragSrcIndex, 1);
+        currentBlocks.splice(dropIndex, 0, item);
+        renderBlocks();
+        updatePreview();
+      }
+      dragSrcIndex = null;
+    }
+
+    function updateWordCount() {
+      // Count words from all text blocks
+      let totalWords = 0;
+      currentBlocks.forEach(block => {
+        if (block.content && typeof block.content === 'string') {
+          totalWords += block.content.trim().split(/\s+/).filter(w => w.length > 0).length;
+        }
+      });
+      
+      // Average reading speed: 200 words per minute
+      const readingTime = Math.ceil(totalWords / 200);
+      
+      document.getElementById('word-count').textContent = `${totalWords} word${totalWords !== 1 ? 's' : ''}`;
+      document.getElementById('reading-time').textContent = `~${readingTime} min read`;
+    }
+
+    // Real-time slug validation for new posts
+    let existingSlugs = [];
+
+    async function loadExistingSlugs() {
+      try {
+        const res = await fetch(`${API_BASE}/posts`);
+        const data = await res.json();
+        if (data.posts) {
+          existingSlugs = data.posts.map(p => p.slug);
+        }
+      } catch (err) {
+        console.error('Failed to load slugs:', err);
+      }
+    }
+
+    function validateSlug(slug) {
+      const slugInput = document.getElementById('new-slug');
+      const warning = document.getElementById('slug-warning') || createSlugWarning();
+      
+      if (!slug) {
+        warning.style.display = 'none';
+        return;
+      }
+      
+      if (existingSlugs.includes(slug)) {
+        warning.textContent = '⚠️ This slug already exists';
+        warning.style.color = '#e74c3c';
+        warning.style.display = 'block';
+      } else if (!/^[a-z0-9-]+$/.test(slug)) {
+        warning.textContent = '⚠️ Use only lowercase letters, numbers, and hyphens';
+        warning.style.color = '#f39c12';
+        warning.style.display = 'block';
+      } else {
+        warning.textContent = '✓ Slug available';
+        warning.style.color = '#27ae60';
+        warning.style.display = 'block';
+      }
+    }
+
+    function createSlugWarning() {
+      const warning = document.createElement('span');
+      warning.id = 'slug-warning';
+      warning.style.fontSize = '12px';
+      warning.style.marginTop = '5px';
+      warning.style.display = 'none';
+      document.getElementById('new-slug').parentNode.appendChild(warning);
+      return warning;
     }
 
     // Load posts
@@ -1159,6 +1601,188 @@
     document.getElementById('new-slug').addEventListener('input', (e) => {
       e.target.dataset.auto = e.target.value ? 'false' : 'true';
     });
+
+    // Update word count whenever blocks change
+    const originalRenderBlocks = renderBlocks;
+    renderBlocks = function() {
+      originalRenderBlocks();
+      updateWordCount();
+    };
+
+    // Load existing slugs on startup
+    loadExistingSlugs();
+
+    // Slug validation on new post form
+    document.getElementById('new-slug')?.addEventListener('input', (e) => {
+      validateSlug(e.target.value);
+    });
+
+    // Image upload variables
+    let uploadQueue = [];
+    let portfolioFolders = {};
+
+    // Populate portfolio dropdown when showing import panel
+    function populatePortfolioDropdown() {
+      const select = document.getElementById('import-portfolio');
+      select.innerHTML = '<option value="">Choose a portfolio...</option>';
+      
+      Object.keys(imageTree).forEach(portfolio => {
+        const option = document.createElement('option');
+        option.value = portfolio;
+        option.textContent = portfolio;
+        select.appendChild(option);
+      });
+    }
+
+    // Update folder dropdown based on selected portfolio
+    function updateImportFolders() {
+      const portfolio = document.getElementById('import-portfolio').value;
+      const folderGroup = document.getElementById('import-folder-group');
+      const folderSelect = document.getElementById('import-folder');
+      
+      if (!portfolio) {
+        folderGroup.style.display = 'none';
+        return;
+      }
+      
+      folderGroup.style.display = 'block';
+      folderSelect.innerHTML = '<option value="">Create new folder...</option>';
+      
+      // Get subfolders from tree
+      const portfolioData = imageTree[portfolio] || {};
+      Object.keys(portfolioData).forEach(folder => {
+        if (folder !== '_images') {
+          const option = document.createElement('option');
+          option.value = folder;
+          option.textContent = folder;
+          folderSelect.appendChild(option);
+        }
+      });
+    }
+
+    // Drag and drop handlers for upload
+    function handleDragOverUpload(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    }
+
+    function handleDragLeaveUpload(e) {
+      e.currentTarget.classList.remove('drag-over');
+    }
+
+    function handleDropUpload(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      
+      const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+      addFilesToQueue(files);
+    }
+
+    function handleFileSelect(e) {
+      const files = Array.from(e.target.files);
+      addFilesToQueue(files);
+    }
+
+    function addFilesToQueue(files) {
+      uploadQueue = [...uploadQueue, ...files];
+      updateUploadPreview();
+      updateUploadButton();
+    }
+
+    function updateUploadPreview() {
+      const preview = document.getElementById('upload-preview');
+      const list = document.getElementById('upload-files-list');
+      
+      if (uploadQueue.length === 0) {
+        preview.style.display = 'none';
+        return;
+      }
+      
+      preview.style.display = 'block';
+      list.innerHTML = uploadQueue.map((file, index) => `
+        <div class="upload-file-item">
+          <img src="${URL.createObjectURL(file)}" alt="${file.name}">
+          <button type="button" class="remove-file" onclick="removeFileFromQueue(${index})">×</button>
+        </div>
+      `).join('');
+    }
+
+    function removeFileFromQueue(index) {
+      uploadQueue.splice(index, 1);
+      updateUploadPreview();
+      updateUploadButton();
+    }
+
+    function updateUploadButton() {
+      const btn = document.getElementById('upload-btn');
+      const portfolio = document.getElementById('import-portfolio').value;
+      btn.disabled = uploadQueue.length === 0 || !portfolio;
+    }
+
+    function clearUpload() {
+      uploadQueue = [];
+      document.getElementById('import-portfolio').value = '';
+      document.getElementById('import-folder').value = '';
+      document.getElementById('import-new-folder').value = '';
+      document.getElementById('import-folder-group').style.display = 'none';
+      updateUploadPreview();
+      updateUploadButton();
+      document.getElementById('upload-status').innerHTML = '';
+    }
+
+    async function uploadImages() {
+      const portfolio = document.getElementById('import-portfolio').value;
+      const folder = document.getElementById('import-folder').value;
+      const newFolder = document.getElementById('import-new-folder').value.trim();
+      
+      if (!portfolio || uploadQueue.length === 0) return;
+      
+      const targetFolder = newFolder || folder || 'Uncategorized';
+      const statusEl = document.getElementById('upload-status');
+      statusEl.innerHTML = '<p>Uploading...</p>';
+      
+      const results = [];
+      for (const file of uploadQueue) {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('portfolio', portfolio);
+        formData.append('folder', targetFolder);
+        
+        try {
+          const res = await fetch(`${API_BASE}/upload`, {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (res.ok) {
+            results.push({ name: file.name, success: true });
+          } else {
+            results.push({ name: file.name, success: false });
+          }
+        } catch (err) {
+          results.push({ name: file.name, success: false, error: err.message });
+        }
+      }
+      
+      const successCount = results.filter(r => r.success).length;
+      statusEl.innerHTML = `<p class="status success">Uploaded ${successCount} of ${results.length} images</p>`;
+      
+      // Clear queue and refresh images
+      uploadQueue = [];
+      updateUploadPreview();
+      updateUploadButton();
+      await loadAvailableImages();
+      populatePortfolioDropdown();
+    }
+
+    // Update showPanel to populate portfolio dropdown
+    const originalShowPanel = showPanel;
+    showPanel = function(name) {
+      originalShowPanel(name);
+      if (name === 'import') {
+        populatePortfolioDropdown();
+      }
+    };
 
     // Load posts on start
     loadPosts();

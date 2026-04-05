@@ -14,3 +14,6 @@ export { default as BlogPostDetail } from './BlogPostDetail';
 export { default as ChangelogViewer } from './ChangelogViewer';
 export { default as ManifestDisplay } from './ManifestDisplay';
 export { default as ErrorBoundary } from './ErrorBoundary';
+
+// Blog components
+export * from './blog';
