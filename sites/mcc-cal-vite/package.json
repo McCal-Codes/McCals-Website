@@ -12,6 +12,7 @@
     "lint": "eslint . --ignore-pattern dist"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.96.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "autoprefixer": "^10.4.27",
