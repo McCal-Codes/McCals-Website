@@ -136,7 +136,7 @@ async function processPost(postDir, authors) {
     author = authors.get(authorId);
   }
 
-  const { body: _body, ...meta } = post;
+  const { body, ...meta } = post;
 
   return {
     ...meta,
@@ -144,7 +144,7 @@ async function processPost(postDir, authors) {
     authorName: author?.name || null,
     leadImage: resolveManifestImage(post.slug, post.leadImage),
     leadImageFallback: resolveManifestImage(post.slug, post.leadImageFallback),
-    readingTime: estimateReadingTime(post.body || []),
+    readingTime: estimateReadingTime(body || []),
   };
 }
 

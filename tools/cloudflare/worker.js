@@ -231,7 +231,7 @@ async function handleManifest(type, env) {
           },
         });
       }
-    } catch (e) {
+    } catch {
       // Try next URL
     }
   }

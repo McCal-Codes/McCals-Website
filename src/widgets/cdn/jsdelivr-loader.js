@@ -39,7 +39,7 @@
     var qs = '';
     try {
       qs = window.location && window.location.search ? window.location.search : '';
-    } catch (e) {
+    } catch {
       qs = '';
     }
     if (!qs) return null;
@@ -54,7 +54,7 @@
       try {
         k = decodeURIComponent((kv[0] || '').replace(/\+/g, ' '));
         v = decodeURIComponent((kv[1] || '').replace(/\+/g, ' '));
-      } catch (e) {
+      } catch {
         k = kv[0] || '';
         v = kv[1] || '';
       }
@@ -82,7 +82,7 @@
       if (h === 'localhost' || h === '127.0.0.1') return true;
       if (h.indexOf('.local') !== -1) return true;
       return false;
-    } catch (e) {
+    } catch {
       return false;
     }
   }
@@ -148,7 +148,7 @@
         init.mode = 'same-origin';
         init.credentials = 'same-origin';
       }
-    } catch (e) {
+    } catch {
       // Keep defaults.
     }
     return init;
@@ -166,7 +166,7 @@
     try {
       var u = new URL(url);
       return u.origin + u.pathname.replace(/\/[^/]*$/, '/');
-    } catch (e) {
+    } catch {
       return null;
     }
   }
@@ -201,7 +201,7 @@
         if (v && shouldRewriteUrl(v)) {
           try {
             el.setAttribute(attr, new URL(v, baseUrl).toString());
-          } catch (e) {
+          } catch {
             /* ignore */
           }
         }
@@ -228,7 +228,7 @@
         if (baseUrl && src && shouldRewriteUrl(src)) {
           try {
             newScript.src = new URL(src, baseUrl).toString();
-          } catch (e) {
+          } catch {
             newScript.src = s.src;
           }
         } else {
@@ -280,7 +280,7 @@
       timer = setTimeout(function () {
         try {
           controller.abort();
-        } catch (e) {
+        } catch {
           /* ignore */
         }
       }, timeoutMs);
@@ -427,7 +427,7 @@
               timeoutMs: timeoutMs,
               error: err,
             });
-          } catch (e) {
+          } catch {
             console.warn('McCalJsDelivrWidgetLoader: failed to load widget', err);
           }
         }

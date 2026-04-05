@@ -32,7 +32,7 @@ function findVersionsDirs(dir, found = []) {
         }
       }
     }
-  } catch (e) {
+  } catch {
     // Ignore errors during recursive directory scan
   }
   return found;
@@ -41,7 +41,7 @@ function findVersionsDirs(dir, found = []) {
 function listHtml(p) {
   try {
     return fs.readdirSync(p).filter((name) => name.endsWith('.html'));
-  } catch (e) {
+  } catch {
     return [];
   }
 }

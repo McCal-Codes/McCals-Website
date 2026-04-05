@@ -96,7 +96,7 @@
     try {
       const u = new URL(url);
       return (u.pathname.split('/').pop() || 'image').split('?')[0];
-    } catch (e) {
+    } catch {
       // fallback for non-URL strings
       return String(url).split('/').pop() || 'image';
     }
@@ -126,7 +126,7 @@
         cap.textContent = meta.caption;
         fig.appendChild(cap);
       }
-    } catch (e) {
+    } catch {
       // ignore caption failure
     }
   }
@@ -213,7 +213,7 @@
             time.textContent = f;
             try {
               time.dateTime = new Date(p.date).toISOString();
-            } catch (_) {
+            } catch {
               /* ignore */
             }
             header.appendChild(time);
@@ -245,8 +245,8 @@
 
       container.innerHTML = '';
       container.appendChild(list);
-    } catch (e) {
-      console.error('Blog feed load failed:', e);
+    } catch {
+      console.error('Blog feed load failed');
       container.innerHTML =
         '<div class="blog-error">Failed to load blog. Check Google Sheet sharing settings.</div>';
     }

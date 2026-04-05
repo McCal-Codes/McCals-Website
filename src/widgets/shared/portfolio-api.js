@@ -515,7 +515,7 @@ class PortfolioAPI {
       }
 
       return null;
-    } catch (error) {
+    } catch {
       return null;
     }
   }

@@ -88,7 +88,7 @@ async function fetchJson(url, headers) {
   let body = null;
   try {
     body = bodyText ? JSON.parse(bodyText) : null;
-  } catch (_err) {
+  } catch {
     body = null;
   }
 
@@ -162,9 +162,7 @@ async function main() {
   const repos = [];
 
   for (const target of targets) {
-    // eslint-disable-next-line no-console
     console.log(`Fetching metadata: ${target.owner}/${target.repo} - export-private-repo-metadata.js:166`);
-    // eslint-disable-next-line no-await-in-loop
     const metadata = await fetchRepoMetadata(target, token);
     repos.push(metadata);
   }
@@ -180,18 +178,15 @@ async function main() {
   };
 
   if (args.dryRun) {
-    // eslint-disable-next-line no-console
     console.log(JSON.stringify(payload, null, 2));
     return;
   }
 
   await writeOutput(args.out, payload);
-  // eslint-disable-next-line no-console
   console.log(`Wrote private metadata JSON: ${args.out} - export-private-repo-metadata.js:190`);
 }
 
 main().catch((error) => {
-  // eslint-disable-next-line no-console
   console.error(error.message || error);
   process.exitCode = 1;
 });

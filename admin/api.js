@@ -186,7 +186,7 @@ router.get('/posts/:slug', async (req, res) => {
     }
 
     res.json({ ...post, markdown });
-  } catch (error) {
+  } catch {
     res.status(404).json({ error: 'Post not found' });
   }
 });

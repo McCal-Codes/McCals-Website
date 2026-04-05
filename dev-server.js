@@ -76,7 +76,7 @@ function createServer() {
     let parsed;
     try {
       parsed = new URL(req.url, `http://localhost`);
-    } catch (e) {
+    } catch {
       parsed = { pathname: req.url || '/', searchParams: new URLSearchParams() };
     }
 
@@ -203,7 +203,7 @@ function createServer() {
           filePath = path.join(SITE_DIR, 'src', 'site', relPath);
         }
       }
-    } catch (e) {
+    } catch {
       // On parse errors, fall back to the default index in the site source
       filePath = path.join(SITE_DIR, 'src', 'site', 'index.html');
     }
@@ -217,7 +217,7 @@ function createServer() {
         res.end('Forbidden');
         return;
       }
-    } catch (e) {
+    } catch {
       res.writeHead(403);
       res.end('Forbidden');
       return;
@@ -279,17 +279,17 @@ function startServer(attempt = 0) {
         console.error('Upgrade proxy error:', err && err.message);
         try {
           socket.end();
-        } catch (e) {
+        } catch {
           /* ignore */
         }
       });
 
       // End the client proxy request (this triggers the upgrade handshake to the API)
       proxyReq.end();
-    } catch (e) {
+    } catch {
       try {
         socket.end();
-      } catch (err) {
+      } catch {
         /* ignore */
       }
     }
@@ -338,7 +338,7 @@ function startServer(attempt = 0) {
       const open = () => {
         try {
           require('open')(`http://${HOST}:${PORT}`);
-        } catch (e) {
+        } catch {
           console.log('📱 Open your browser and navigate to the URL above');
         }
       };

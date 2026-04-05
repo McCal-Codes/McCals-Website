@@ -14,6 +14,9 @@ export default [
       "src/api/scripts/_website-scripts-archived/**",
       "**/build/**",
       "**/out/**",
+      "**/dist/**",
+      "sites/**/dist/**",
+      "scripts/utils/shared-date-parsing.js",
 
       // Bundled/build outputs
       "thesis/interactive/**",

@@ -27,7 +27,7 @@ function discoverInstructions() {
     return fs.readdirSync(dir)
       .filter(f => /instructions?/.test(f) && f.endsWith('.md'))
       .map(f => `.github/${f}`);
-  } catch (e) {
+  } catch {
     return ['.github/copilot-instructions.md', '.github/canvas-instructions.md', '.github/codex-instructions.md'];
   }
 }
