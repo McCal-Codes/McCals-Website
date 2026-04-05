@@ -50,7 +50,16 @@ export default function EventsPage() {
   const { data, status, error } = useManifest<EventsManifest>('events');
   const [activeFilter, setActiveFilter] = useState(ALL);
 
-  const groups = useMemo(() => (data ? adaptEvents(data) : []), [data]);
+  const groups = useMemo(() => {
+    if (!data) return [];
+    const events = adaptEvents(data);
+    // Sort by date (newest first)
+    return events.sort((a, b) => {
+      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : 0;
+      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : 0;
+      return dateB - dateA;
+    });
+  }, [data]);
 
   const filters = useMemo(() => {
     const cats = [...new Set(groups.map((g) => g.category).filter(Boolean))] as string[];
