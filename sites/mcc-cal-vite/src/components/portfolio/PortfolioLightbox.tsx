@@ -100,15 +100,20 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
           )}
 
           {group.images.map((img, i) => (
-            <div key={img.filename}>
+            <figure key={img.filename} className="pf-lightbox__figure">
               <img
                 src={img.url}
                 alt={img.alt ?? `${group.title} — photo ${i + 1}`}
                 className="pf-lightbox__img"
                 loading={i < 2 ? 'eager' : 'lazy'}
-                decoding="async"
+                decoding={i < 2 ? 'sync' : 'async'}
               />
-            </div>
+              {img.caption && (
+                <figcaption className="pf-lightbox__img-caption">
+                  {img.caption}
+                </figcaption>
+              )}
+            </figure>
           ))}
         </div>
 

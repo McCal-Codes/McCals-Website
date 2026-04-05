@@ -7,6 +7,13 @@ import '../portfolio/portfolio.css';
 
 // ── Manifest shape ────────────────────────────────────────────────────────────
 
+interface FeaturedImage {
+  filename: string;
+  caption?: string;
+  description?: string;
+  path?: string;
+}
+
 interface FeaturedItem {
   bandName?: string;
   eventName?: string;
@@ -15,7 +22,7 @@ interface FeaturedItem {
   dateDisplay?: string;
   concertDate?: { iso: string };
   date?: { iso: string };
-  images: string[]; // filenames only
+  images: (string | FeaturedImage)[]; // filenames or objects with captions
 }
 
 interface FeaturedManifest {
@@ -42,11 +49,21 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
     const title = item.bandName ?? item.eventName ?? item.relativeFolderPath.split('/').pop() ?? 'Untitled';
     const dateISO = (item.concertDate ?? item.date)?.iso;
 
-    const images = item.images.map((filename) => ({
-      url: buildImageUrl(item, filename),
-      filename,
-      alt: `${title} — ${filename}`,
-    }));
+    const images = item.images.map((img) => {
+      // Handle both string filenames and image objects
+      const isObject = typeof img === 'object';
+      const filename = isObject ? (img as FeaturedImage).filename : (img as string);
+      const caption = isObject ? (img as FeaturedImage).caption : undefined;
+      const description = isObject ? (img as FeaturedImage).description : undefined;
+      
+      return {
+        url: buildImageUrl(item, filename),
+        filename,
+        caption,
+        description,
+        alt: caption ?? `${title} — ${filename}`,
+      };
+    });
 
     return {
       id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
@@ -75,7 +92,13 @@ export default function FeaturedPortfolio() {
 
   const groups = useMemo(() => {
     if (!data?.items) return [];
-    return normalise(data.items);
+    const items = normalise(data.items);
+    // Sort by date (newest first)
+    return items.sort((a, b) => {
+      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : 0;
+      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : 0;
+      return dateB - dateA;
+    });
   }, [data]);
 
   const filters = useMemo(() => {
