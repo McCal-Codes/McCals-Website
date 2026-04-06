@@ -10,7 +10,7 @@ const portfolioImages = [
     '@type': 'ImageObject',
     name: 'Scarlett Johansson GOTV Canvas Launch',
     description: 'Actress Scarlett Johansson addresses volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.',
-    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/Scarlett%20Johansson%20Canvas%20Launch/241103_Scarlett%20Johansson%20GOTV%20Canvass%20Launch_CAL3197.jpg`,
+    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/scarlett-canvas/241103_Scarlett%20Johansson%20GOTV%20Canvass%20Launch_CAL3197.jpg`,
     creator: {
       '@type': 'Person',
       name: 'Caleb McCartney',
@@ -24,7 +24,7 @@ const portfolioImages = [
     '@type': 'ImageObject',
     name: 'Trump Returns to Butler',
     description: 'Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.',
-    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/Trump%20Returns%20to%20Butler/051024%20Caleb%20McCartney_Trump%20Returns%20to%20Butler%20PA_CAL2418.jpg`,
+    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/trump-returns-butler/051024%20Caleb%20McCartney_Trump%20Returns%20to%20Butler%20PA_CAL2418.jpg`,
     creator: {
       '@type': 'Person',
       name: 'Caleb McCartney',
@@ -38,7 +38,7 @@ const portfolioImages = [
     '@type': 'ImageObject',
     name: 'Kamala Harris Campaigns in Erie',
     description: 'Vice President Kamala Harris addresses supporters at a presidential campaign rally in Erie, Pa., Oct. 14, 2024.',
-    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/Kamala%20Harris%20Erie/141024_Kamala%20Speaks%20at%20Erie_CAL3741.jpg`,
+    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/kamala-erie/141024_Kamala%20Speaks%20at%20Erie_CAL3741.jpg`,
     creator: {
       '@type': 'Person',
       name: 'Caleb McCartney',

@@ -13,13 +13,13 @@ const FeaturedWorkPage = () => {
       type: 'website',
       title: 'Featured Photography Portfolio | Caleb McCartney',
       description: 'Curated photography portfolio featuring concerts, events, and political campaign coverage by Pittsburgh photographer Caleb McCartney.',
-      image: `${SITE_URL}/images/Portfolios/Journalism/Politics/Scarlett%20Johansson%20Canvas%20Launch/241103_Scarlett%20Johansson%20GOTV%20Canvass%20Launch_CAL3197.jpg`,
+      image: `${SITE_URL}/images/Portfolios/Journalism/Politics/scarlett-canvas/241103_Scarlett%20Johansson%20GOTV%20Canvass%20Launch_CAL3197.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Featured Photography Portfolio | Caleb McCartney',
       description: 'Curated photography portfolio featuring concerts, events, and political campaign coverage.',
-      image: `${SITE_URL}/images/Portfolios/Journalism/Politics/Scarlett%20Johansson%20Canvas%20Launch/241103_Scarlett%20Johansson%20GOTV%20Canvass%20Launch_CAL3197.jpg`,
+      image: `${SITE_URL}/images/Portfolios/Journalism/Politics/scarlett-canvas/241103_Scarlett%20Johansson%20GOTV%20Canvass%20Launch_CAL3197.jpg`,
     },
     jsonLd: {
       '@context': 'https://schema.org',
