@@ -1,11 +1,11 @@
 {
-  "version": "2.0.0",
-  "generated": "2026-03-30T16:20:36.693Z",
+  "version": "2.2.0",
+  "generated": "2026-04-06T15:20:38.100Z",
   "totalEvents": 33,
   "totalImages": 401,
   "categories": [
-    "Events",
     "Politics",
+    "Sports",
     "Documentary"
   ],
   "tags": [
@@ -27,13 +27,13 @@
   ],
   "categoryStats": {
     "Politics": 25,
-    "Events": 5,
-    "Documentary": 5
+    "Sports": 1,
+    "Documentary": 7
   },
   "events": [
     {
       "eventName": "Brentwood Vs Springdale",
-      "category": "Events",
+      "category": "Sports",
       "tags": [
         "Events",
         "Sports"
@@ -211,7 +211,7 @@
     },
     {
       "eventName": "Historic Society Yard Sale August 2025",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
         "Events"
       ],
@@ -436,7 +436,12 @@
     {
       "eventName": "CMU Trump Protest",
       "category": "Politics",
-      "tags": ["Politics", "Protest", "The Globe", "Photojournalism"],
+      "tags": [
+        "Politics",
+        "Protest",
+        "The Globe",
+        "Photojournalism"
+      ],
       "folderPath": "Politics/CMU Trump Protest",
       "eventDate": {
         "iso": "2025-07-15",
@@ -450,611 +455,2062 @@
           "path": "250715_CMU Trump Protest_CAL1091-min.jpg",
           "description": "Protesters demonstrate against Trump policies at Carnegie Mellon",
           "caption": "Demonstrators protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1106-min.jpg",
           "description": "Students hold signs at CMU Trump protest",
           "caption": "Carnegie Mellon University students hold signs during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1107-min.jpg",
           "description": "Protesters gather at CMU to demonstrate",
           "caption": "Demonstrators gather at Carnegie Mellon University to protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1123-min.jpg",
           "description": "Students protest Trump at Carnegie Mellon campus",
           "caption": "Carnegie Mellon University students demonstrate against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1126-min.jpg",
           "description": "Protesters march at CMU Trump demonstration",
           "caption": "Demonstrators march during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1131-min.jpg",
           "description": "CMU students protest Trump policies",
           "caption": "Carnegie Mellon University students protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1141-min.jpg",
           "description": "Demonstrators hold signs at CMU protest",
           "caption": "Demonstrators hold signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1146-min.jpg",
           "description": "Protesters chant at CMU Trump demonstration",
           "caption": "Demonstrators chant during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1152-min.jpg",
           "description": "Students speak at CMU Trump protest",
           "caption": "A Carnegie Mellon University student addresses the crowd during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1156-min.jpg",
           "description": "Crowd gathers for CMU Trump protest",
           "caption": "Demonstrators gather for a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1162-min.jpg",
           "description": "Protesters wave flags at CMU demonstration",
           "caption": "Demonstrators wave flags during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1168-min.jpg",
           "description": "Students participate in CMU Trump protest",
           "caption": "Carnegie Mellon University students participate in a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
           "description": "Protesters listen to speakers at CMU demonstration",
           "caption": "Demonstrators listen to speakers during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1184-min.jpg",
           "description": "Demonstrators carry signs at CMU protest",
           "caption": "Demonstrators carry signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
           "description": "Crowd at CMU Trump protest",
           "caption": "Demonstrators gather during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1192-min.jpg",
           "description": "Protesters march through CMU campus",
           "caption": "Demonstrators march through Carnegie Mellon University's campus during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1196-min.jpg",
           "description": "Students chant at CMU Trump demonstration",
           "caption": "Carnegie Mellon University students chant during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1201-min.jpg",
           "description": "Demonstrators hold banners at CMU protest",
           "caption": "Demonstrators hold banners during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
           "description": "Protesters gather at CMU campus entrance",
           "caption": "Demonstrators gather at the entrance to Carnegie Mellon University's campus during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1249-min.jpg",
           "description": "Students demonstrate at CMU Trump protest",
           "caption": "Carnegie Mellon University students demonstrate against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1278-min.jpg",
           "description": "Protesters sit during CMU demonstration",
           "caption": "Demonstrators sit during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1297-min.jpg",
           "description": "Demonstrators stand together at CMU protest",
           "caption": "Demonstrators stand together during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1301-min.jpg",
           "description": "Students wave signs at CMU Trump protest",
           "caption": "Carnegie Mellon University students wave signs during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1303-min.jpg",
           "description": "Protesters listen at CMU demonstration",
           "caption": "Demonstrators listen to speakers during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1325-min.jpg",
           "description": "Crowd listens to speakers at CMU protest",
           "caption": "Demonstrators listen to speakers during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1340-min.jpg",
           "description": "Students gather for CMU Trump protest",
           "caption": "Carnegie Mellon University students gather for a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1353-min.jpg",
           "description": "Demonstrators protest at CMU campus",
           "caption": "Demonstrators protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1360-min.jpg",
           "description": "Protesters with signs at CMU demonstration",
           "caption": "Demonstrators hold signs protesting former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1364-min.jpg",
           "description": "Students chant slogans at CMU protest",
           "caption": "Carnegie Mellon University students chant slogans during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1429-min.jpg",
           "description": "Students gather at CMU Trump protest",
           "caption": "Carnegie Mellon University students gather for a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "description": "Crowd gathers for CMU Trump protest",
           "caption": "Demonstrators gather for a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1448-min.jpg",
           "description": "Protesters wave signs at CMU demonstration",
           "caption": "Demonstrators wave signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1476-min.jpg",
           "description": "Students protest at CMU campus",
           "caption": "Carnegie Mellon University students protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1489-min.jpg",
           "description": "Students wave signs at CMU protest",
           "caption": "Carnegie Mellon University students wave signs during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1498-min.jpg",
           "description": "Crowd at CMU demonstration",
           "caption": "Demonstrators gather during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1539-min.jpg",
           "description": "Protesters hold signs at CMU",
           "caption": "Demonstrators hold signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1564-min.jpg",
           "description": "Students chant at CMU protest",
           "caption": "Carnegie Mellon University students chant during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1568-min.jpg",
           "description": "Protesters gather at CMU campus",
           "caption": "Demonstrators gather during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1573-min.jpg",
           "description": "Students demonstrate at CMU protest",
           "caption": "Carnegie Mellon University students demonstrate against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
-          "tags": ["Politics", "Protest"]
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
         }
       ],
       "published": false,
       "metadata": {}
     },
     {
-      "eventName": "The Globe - Homeless Tent Coverage",
-      "category": "Documentary",
-      "tags": ["Documentary", "Social Issues", "Local", "The Globe", "Photojournalism"],
-      "folderPath": "Documentary",
-      "eventDate": { "iso": "2023-11-07", "source": "filename_extraction" },
-      "dateDisplay": "November 7, 2023",
-      "totalImages": 2,
-      "images": [
-        { "filename": "231107_The Globe - Homeless Tent Coverage_CAL6463.jpg", "path": "231107_The Globe - Homeless Tent Coverage_CAL6463.jpg", "description": "Social documentary coverage of homeless encampment", "caption": "Social documentary coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)", "tags": ["Documentary", "Social Issues", "Local"] },
-        { "filename": "231107_The Globe - Homeless Tent Coverage_CAL6468.jpg", "path": "231107_The Globe - Homeless Tent Coverage_CAL6468.jpg", "description": "Social documentary coverage of homeless encampment", "caption": "Social documentary coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)", "tags": ["Documentary", "Social Issues", "Local"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Documentary", "Social Issues", "Local"], "published": true, "date": "2023-11-07", "description": "Social documentary coverage for The Globe", "caption": "Student newspaper photojournalism — Caleb McCartney, Photo Editor (ppuglobe.com/staff_name/caleb-mccartney/)" }
-    },
-    {
-      "eventName": "The Globe - Pizza with President",
-      "category": "Documentary",
-      "tags": ["Campus Life", "Events", "The Globe", "Point Park"],
-      "folderPath": "Events/Pizza With President",
-      "eventDate": { "iso": "2023-10-05", "source": "filename_extraction" },
-      "dateDisplay": "October 5, 2023",
-      "totalImages": 2,
-      "images": [
-        { "filename": "231005_Pizza With the President_CAL4715.jpg", "path": "231005_Pizza With the President_CAL4715.jpg", "description": "Student engagement event with university president", "caption": "Campus life coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)", "tags": ["Campus Life", "Events"] },
-        { "filename": "231005_Pizza With the President_CAL4763.jpg", "path": "231005_Pizza With the President_CAL4763.jpg", "description": "Student engagement event with university president", "caption": "Campus life coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)", "tags": ["Campus Life", "Events"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Campus Life", "Events", "The Globe"], "published": true, "date": "2023-10-05", "description": "Student engagement event coverage", "caption": "The Globe student newspaper — Photo by Caleb McCartney, Photo Editor (ppuglobe.com/staff_name/caleb-mccartney/)" }
-    },
-    {
-      "eventName": "The Globe - Journalist Panel",
-      "category": "Documentary",
-      "tags": ["Local", "Events", "Journalism", "The Globe"],
-      "folderPath": "Events/Journalist Panel",
-      "eventDate": { "iso": "2024-01-31", "source": "filename_extraction" },
-      "dateDisplay": "January 31, 2024",
-      "totalImages": 2,
-      "images": [
-        { "filename": "240131_News & Ops Panel__CAL9010.jpg", "path": "240131_News & Ops Panel__CAL9010.jpg", "description": "Professional journalist panel discussion", "caption": "Professional journalist panel coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)", "tags": ["Local", "Events", "Journalism"] },
-        { "filename": "240131_News & Ops Panel__CAL9017.jpg", "path": "240131_News & Ops Panel__CAL9017.jpg", "description": "Professional journalist panel discussion", "caption": "Professional journalist panel coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)", "tags": ["Local", "Events", "Journalism"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Local", "Events", "Journalism"], "published": true, "date": "2024-01-31", "description": "Journalist panel coverage for The Globe", "caption": "Professional development event — Photo by Caleb McCartney, Photo Editor (ppuglobe.com/staff_name/caleb-mccartney/)" }
-    },
-    {
-      "eventName": "The Globe - Political Coverage",
-      "category": "Documentary",
-      "tags": ["Politics", "Local", "The Globe", "Photojournalism"],
-      "folderPath": "Politics",
-      "eventDate": { "iso": "2023-11-07", "source": "filename_extraction" },
-      "dateDisplay": "November 7, 2023",
-      "totalImages": 2,
-      "images": [
-        { "filename": "231107_The Globe - Political Coverage_CAL_6424.jpg", "path": "231107_The Globe - Political Coverage_CAL_6424.jpg", "description": "Point Park University student government election coverage", "caption": "Point Park University students participate in a student government election event on campus in Pittsburgh, Pa., Nov. 7, 2023.", "tags": ["Politics", "Local"] },
-        { "filename": "231107_The Globe - Political Coverage_CAL_6429.jpg", "path": "231107_The Globe - Political Coverage_CAL_6429.jpg", "description": "Point Park University student voting on election day", "caption": "A Point Park University student casts a ballot at a campus polling location in Pittsburgh, Pa., Nov. 7, 2023.", "tags": ["Politics", "Local"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Local"], "published": true, "date": "2023-11-07", "description": "Political event coverage for The Globe", "caption": "Point Park University student government elections — The Globe" }
-    },
-    {
-      "eventName": "Scarlett Johansson GOTV Canvas Launch",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Celebrity", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Scarlett Johansson Canvas Launch",
-      "eventDate": { "iso": "2024-11-03", "source": "filename_extraction" },
-      "dateDisplay": "November 3, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3205.jpg", "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3205.jpg", "description": "Scarlett Johansson speaks to Harris campaign supporters", "caption": "Actress Scarlett Johansson rallies supporters at a get-out-the-vote event for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.", "tags": ["Politics", "Celebrity", "Campaign"] },
-        { "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg", "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg", "description": "Scarlett Johansson speaks to volunteers at Harris campaign canvass launch", "caption": "Actress Scarlett Johansson addresses volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.", "tags": ["Politics", "Celebrity", "Campaign"] },
-        { "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3204.jpg", "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3204.jpg", "description": "Scarlett Johansson greets campaign volunteers", "caption": "Actress Scarlett Johansson greets campaign volunteers before a canvass launch event for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.", "tags": ["Politics", "Celebrity", "Campaign"] },
-        { "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3208.jpg", "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3208.jpg", "description": "Scarlett Johansson at Harris campaign office", "caption": "Actress Scarlett Johansson visits a campaign office to launch a get-out-the-vote canvassing effort for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.", "tags": ["Politics", "Celebrity", "Campaign"] },
-        { "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3226.jpg", "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3226.jpg", "description": "Scarlett Johansson encourages campaign volunteers", "caption": "Actress Scarlett Johansson encourages volunteers before they canvas for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.", "tags": ["Politics", "Celebrity", "Campaign"] },
-        { "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3234.jpg", "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3234.jpg", "description": "Scarlett Johansson with Harris campaign volunteers", "caption": "Actress Scarlett Johansson poses with campaign volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.", "tags": ["Politics", "Celebrity", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign", "Celebrity"], "published": true, "date": "2024-11-03", "description": "Scarlett Johansson canvasses for Harris — The Globe", "caption": "Actress Scarlett Johansson launches get-out-the-vote effort for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024." }
-    },
-    {
-      "eventName": "JD Vance Rallies in Johnstown",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "JD Vance", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/JD Vance Johnstown",
-      "eventDate": { "iso": "2024-10-12", "source": "filename_extraction" },
-      "dateDisplay": "October 12, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "241012_JD Vance in Johnstown_CAL3495.jpg", "path": "241012_JD Vance in Johnstown_CAL3495.jpg", "description": "JD Vance speaks at campaign rally in Johnstown", "caption": "Sen. JD Vance, R-Ohio, speaks at a presidential campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3497.jpg", "path": "241012_JD Vance in Johnstown_CAL3497.jpg", "description": "JD Vance addresses Johnstown supporters", "caption": "Sen. JD Vance, R-Ohio, addresses supporters at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3502.jpg", "path": "241012_JD Vance in Johnstown_CAL3502.jpg", "description": "JD Vance greets crowd in Johnstown", "caption": "Sen. JD Vance, R-Ohio, greets supporters at a presidential campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3507.jpg", "path": "241012_JD Vance in Johnstown_CAL3507.jpg", "description": "JD Vance waves to Johnstown crowd", "caption": "Sen. JD Vance, R-Ohio, waves to supporters during a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3511.jpg", "path": "241012_JD Vance in Johnstown_CAL3511.jpg", "description": "Crowd listens to JD Vance in Johnstown", "caption": "Supporters listen as Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3514.jpg", "path": "241012_JD Vance in Johnstown_CAL3514.jpg", "description": "JD Vance exits stage in Johnstown", "caption": "Sen. JD Vance, R-Ohio, leaves the stage after speaking at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-12", "description": "JD Vance rallies in Johnstown — The Globe", "caption": "Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024." }
-    },
-    {
-      "eventName": "Tim Waltz Campaign Rally in Erie",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Tim Waltz", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Tim Waltz Erie",
-      "eventDate": { "iso": "2024-10-01", "source": "filename_extraction" },
-      "dateDisplay": "October 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_033.jpg", "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_033.jpg", "description": "Minnesota Gov. Tim Waltz speaks at Erie rally", "caption": "Minnesota Gov. Tim Walz speaks at a presidential campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_045.jpg", "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_045.jpg", "description": "Tim Waltz addresses Erie supporters", "caption": "Minnesota Gov. Tim Walz addresses supporters at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_057.jpg", "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_057.jpg", "description": "Tim Waltz greets Erie crowd", "caption": "Minnesota Gov. Tim Walz greets supporters at a presidential campaign rally in Erie, Pa., Oct. 1, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_110.jpg", "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_110.jpg", "description": "Tim Waltz waves to Erie supporters", "caption": "Minnesota Gov. Tim Walz waves to the crowd at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_139.jpg", "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_139.jpg", "description": "Tim Waltz speaks to Erie crowd", "caption": "Minnesota Gov. Tim Walz speaks to supporters gathered for a campaign rally in Erie, Pa., Oct. 1, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_199.jpg", "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_199.jpg", "description": "Crowd cheers for Tim Waltz in Erie", "caption": "Supporters cheer as Minnesota Gov. Tim Walz speaks at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10", "description": "Tim Walz campaign rally in Erie — The Globe", "caption": "Minnesota Gov. Tim Walz speaks at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024." }
-    },
-    {
-      "eventName": "Kamala Harris Arrives in Johnstown",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Kamala Harris", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Kamala Arrives Johnstown",
-      "eventDate": { "iso": "2024-09-15", "source": "filename_extraction" },
-      "dateDisplay": "September 15, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "240915_Kamala Arrival in Johnstown_1972_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1972_CAL_HighResolution.jpg", "description": "Kamala Harris arrives at Johnstown airport", "caption": "Vice President Kamala Harris arrives at Johnstown-Cambria County Airport for a campaign stop in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1973_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1973_CAL_HighResolution.jpg", "description": "Kamala Harris greets supporters in Johnstown", "caption": "Vice President Kamala Harris greets supporters upon arrival at Johnstown-Cambria County Airport in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1974_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1974_CAL_HighResolution.jpg", "description": "Kamala Harris waves to Johnstown crowd", "caption": "Vice President Kamala Harris waves to supporters after arriving at Johnstown-Cambria County Airport in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1975_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1975_CAL_HighResolution.jpg", "description": "Kamala Harris walks through Johnstown crowd", "caption": "Vice President Kamala Harris walks through a crowd of supporters at Johnstown-Cambria County Airport in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1976_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1976_CAL_HighResolution.jpg", "description": "Kamala Harris speaks with Johnstown supporters", "caption": "Vice President Kamala Harris speaks with supporters at Johnstown-Cambria County Airport during a campaign visit to Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1977_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1977_CAL_HighResolution.jpg", "description": "Kamala Harris departs Johnstown airport", "caption": "Vice President Kamala Harris prepares to depart Johnstown-Cambria County Airport after a campaign stop in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-09-15", "description": "Kamala Harris arrives in Johnstown — The Globe", "caption": "Vice President Kamala Harris arrives at Johnstown-Cambria County Airport for a campaign stop in Johnstown, Pa., Sept. 15, 2024." }
-    },
-    {
-      "eventName": "Trump Returns to Butler",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Donald Trump", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Trump Returns to Butler",
-      "eventDate": { "iso": "2024-10-05", "source": "filename_extraction" },
-      "dateDisplay": "October 5, 2024",
-      "totalImages": 10,
-      "images": [
-        { "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.jpg", "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.jpg", "description": "Donald Trump speaks at Butler rally podium", "caption": "Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.jpg", "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.jpg", "description": "Trump addresses supporters at Butler rally", "caption": "Former President Donald Trump addresses supporters at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.jpg", "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.jpg", "description": "Trump speaks to crowd at Butler rally", "caption": "Former President Donald Trump speaks to supporters at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.jpg", "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.jpg", "description": "Trump gestures at Butler rally", "caption": "Former President Donald Trump gestures while speaking at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.jpg", "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.jpg", "description": "Trump waves to Butler crowd", "caption": "Former President Donald Trump waves to supporters at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.jpg", "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.jpg", "description": "Trump at podium in Butler", "caption": "Former President Donald Trump speaks from behind bulletproof glass at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.jpg", "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.jpg", "description": "Trump addresses Butler supporters", "caption": "Former President Donald Trump addresses a large crowd at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "trump_butler_cal9640.jpg", "path": "trump_butler_cal9640.jpg", "description": "Trump supporter wearing red MAGA hat", "caption": "A supporter wearing a red Trump hat waits for former President Donald Trump to speak at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "trump_butler_cal9666.jpg", "path": "trump_butler_cal9666.jpg", "description": "Trump supporters in parking lot with American flag", "caption": "Supporters gather in the parking lot before former President Donald Trump's campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "trump_butler_cal9674.jpg", "path": "trump_butler_cal9674.jpg", "description": "Trump Rambo flag and Confederate flag on truck", "caption": "A flag depicting former President Donald Trump as an action hero flies alongside an American flag and a Confederate flag at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "trump_butler_cal9703.jpg", "path": "trump_butler_cal9703.jpg", "description": "Man holding Trump flag by decorated truck", "caption": "A supporter holds a flag depicting former President Donald Trump next to a decorated pickup truck at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "trump_butler_cal9709.jpg", "path": "trump_butler_cal9709.jpg", "description": "Decorated pickup truck with Trump flags", "caption": "A pickup truck decorated with American flags, Trump flags and campaign decals sits in the parking lot at a campaign rally for former President Donald Trump at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-05", "description": "Trump returns to Butler, PA — The Globe", "caption": "Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024." }
-    },
-    {
-      "eventName": "Obama Speaks at Pittsburgh",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Barack Obama", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Obama in Pittsburgh",
-      "eventDate": { "iso": "2024-10-10", "source": "filename_extraction" },
-      "dateDisplay": "October 10, 2024",
-      "totalImages": 5,
-      "images": [
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg", "description": "Barack Obama speaks at University of Pittsburgh rally", "caption": "Former President Barack Obama speaks at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg", "description": "Barack Obama addresses Pittsburgh crowd", "caption": "Former President Barack Obama addresses supporters at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg", "description": "Barack Obama gestures at Pittsburgh rally", "caption": "Former President Barack Obama gestures while speaking at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg", "description": "Barack Obama waves to Pittsburgh supporters", "caption": "Former President Barack Obama waves to supporters at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg", "description": "Crowd listens to Barack Obama in Pittsburgh", "caption": "Supporters listen as former President Barack Obama speaks at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-10", "description": "Obama rallies for Harris in Pittsburgh — The Globe", "caption": "Former President Barack Obama speaks at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024." }
-    },
-    {
-      "eventName": "Trump Rally in Erie",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Donald Trump", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Trump Rally Erie",
-      "eventDate": { "iso": "2024-09-29", "source": "filename_extraction" },
-      "dateDisplay": "September 29, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "240929_Trump Rally in Erie__CAL2137.jpg", "path": "240929_Trump Rally in Erie__CAL2137.jpg", "description": "Donald Trump speaks at Erie rally podium", "caption": "Former President Donald Trump speaks at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2139.jpg", "path": "240929_Trump Rally in Erie__CAL2139.jpg", "description": "Trump addresses Erie supporters at rally", "caption": "Former President Donald Trump addresses supporters at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2148.jpg", "path": "240929_Trump Rally in Erie__CAL2148.jpg", "description": "Trump gestures at Erie rally", "caption": "Former President Donald Trump gestures while speaking at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2149.jpg", "path": "240929_Trump Rally in Erie__CAL2149.jpg", "description": "Trump waves to Erie crowd", "caption": "Former President Donald Trump waves to supporters at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2157.jpg", "path": "240929_Trump Rally in Erie__CAL2157.jpg", "description": "Trump speaks to Erie arena crowd", "caption": "Former President Donald Trump speaks to a large crowd at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2163.jpg", "path": "240929_Trump Rally in Erie__CAL2163.jpg", "description": "Crowd at Trump Erie rally", "caption": "Supporters gather to hear former President Donald Trump speak at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-09-29", "description": "Trump rally in Erie — The Globe", "caption": "Former President Donald Trump speaks at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024." }
-    },
-    {
-      "eventName": "VP Debate Watch Party",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Debate", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/VP Debate Watch Party",
-      "eventDate": { "iso": "2024-10-01", "source": "filename_extraction" },
-      "dateDisplay": "October 2024",
-      "totalImages": 5,
-      "images": [
-        { "filename": "IMG_0002.jpg", "path": "IMG_0002.jpg", "description": "Point Park students watch VP debate on screen", "caption": "Point Park University students watch the vice presidential debate between Gov. Tim Walz and Sen. JD Vance on a large screen in Pittsburgh, Pa., Oct. 1, 2024.", "tags": ["Politics", "Debate"] },
-        { "filename": "IMG_0003.jpg", "path": "IMG_0003.jpg", "description": "Students react during VP debate watch party", "caption": "Point Park University students react while watching the vice presidential debate in Pittsburgh, Pa., Oct. 1, 2024.", "tags": ["Politics", "Debate"] },
-        { "filename": "IMG_2676.jpg", "path": "IMG_2676.jpg", "description": "Crowd watches VP debate at Point Park", "caption": "A crowd of Point Park University students gathers to watch the vice presidential debate in Pittsburgh, Pa., Oct. 1, 2024.", "tags": ["Politics", "Debate"] },
-        { "filename": "IMG_2682.jpg", "path": "IMG_2682.jpg", "description": "Students engaged in VP debate watch party", "caption": "Point Park University students engage with the vice presidential debate during a campus watch party in Pittsburgh, Pa., Oct. 1, 2024.", "tags": ["Politics", "Debate"] },
-        { "filename": "IMG_2686.jpg", "path": "IMG_2686.jpg", "description": "Point Park audience watches VP debate", "caption": "An audience of Point Park University students watches the vice presidential debate in Pittsburgh, Pa., Oct. 1, 2024.", "tags": ["Politics", "Debate"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-01", "description": "VP Debate watch party — The Globe", "caption": "Point Park University students watch the vice presidential debate between Gov. Tim Walz and Sen. JD Vance in Pittsburgh, Pa., Oct. 1, 2024." }
-    },
-    {
-      "eventName": "Pitt Palestine Protest",
-      "category": "Politics",
-      "tags": ["Politics", "Protest", "International", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Pitt Palestine Protest",
-      "eventDate": { "iso": "2024-09-24", "source": "filename_extraction" },
-      "dateDisplay": "September 24, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "250924_Pitt - Palestine Protest__DSC1450.jpg", "path": "250924_Pitt - Palestine Protest__DSC1450.jpg", "description": "Students hold signs at Palestine protest", "caption": "University of Pittsburgh students hold signs during a demonstration in support of Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.", "tags": ["Politics", "Protest"] },
-        { "filename": "250924_Pitt - Palestine Protest__DSC1453.jpg", "path": "250924_Pitt - Palestine Protest__DSC1453.jpg", "description": "Protesters march at Pitt Palestine demonstration", "caption": "University of Pittsburgh students march during a protest advocating for Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.", "tags": ["Politics", "Protest"] },
-        { "filename": "250924_Pitt - Palestine Protest__DSC1458.jpg", "path": "250924_Pitt - Palestine Protest__DSC1458.jpg", "description": "Students gather for Palestine protest at Pitt", "caption": "University of Pittsburgh students gather for a demonstration supporting Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.", "tags": ["Politics", "Protest"] },
-        { "filename": "250924_Pitt - Palestine Protest__DSC1462.jpg", "path": "250924_Pitt - Palestine Protest__DSC1462.jpg", "description": "Protesters hold Palestinian flags at Pitt", "caption": "University of Pittsburgh students wave Palestinian flags during a demonstration on campus in Pittsburgh, Pa., Sept. 24, 2024.", "tags": ["Politics", "Protest"] },
-        { "filename": "250924_Pitt - Palestine Protest__DSC1469.jpg", "path": "250924_Pitt - Palestine Protest__DSC1469.jpg", "description": "Students speak at Palestine protest", "caption": "A University of Pittsburgh student addresses the crowd during a demonstration in support of Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.", "tags": ["Politics", "Protest"] },
-        { "filename": "250924_Pitt - Palestine Protest__DSC1472.jpg", "path": "250924_Pitt - Palestine Protest__DSC1472.jpg", "description": "Crowd at Pitt Palestine protest", "caption": "University of Pittsburgh students participate in a demonstration advocating for Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.", "tags": ["Politics", "Protest"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Protest", "International"], "published": true, "date": "2024-09-24", "description": "Palestine protest at University of Pittsburgh — The Globe", "caption": "University of Pittsburgh students demonstrate in support of Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024." }
-    },
-    {
       "eventName": "Butler Democracy Protest",
       "category": "Politics",
-      "tags": ["Politics", "Protest", "The Globe", "Photojournalism"],
+      "tags": [
+        "Politics",
+        "Protest",
+        "The Globe",
+        "Photojournalism"
+      ],
       "folderPath": "Politics/Butler Protest",
-      "eventDate": { "iso": "2025-03-15", "source": "filename_extraction" },
+      "eventDate": {
+        "iso": "2025-03-15",
+        "source": "filename_extraction"
+      },
       "dateDisplay": "March 15, 2025",
       "totalImages": 11,
       "images": [
-        { "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg", "path": "250315_Butler Democracy Protest_CAL9640-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg", "path": "250315_Butler Democracy Protest_CAL9666-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg", "path": "250315_Butler Democracy Protest_CAL9674-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg", "path": "250315_Butler Democracy Protest_CAL9703-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg", "path": "250315_Butler Democracy Protest_CAL9709-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg", "path": "250315_Butler Democracy Protest_CAL9717-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg", "path": "250315_Butler Democracy Protest_CAL9739-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg", "path": "250315_Butler Democracy Protest_CAL9759-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg", "path": "250315_Butler Democracy Protest_CAL9773-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg", "path": "250315_Butler Democracy Protest_CAL9825-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg", "path": "250315_Butler Democracy Protest_CAL9832-min.jpg", "description": "Protesters demonstrate for democracy at Butler", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.", "tags": ["Politics", "Protest"] }
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9666-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9674-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9703-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9709-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9717-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9739-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9759-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9773-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9825-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
+          "path": "250315_Butler Democracy Protest_CAL9832-min.jpg",
+          "description": "Protesters demonstrate for democracy at Butler",
+          "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        }
       ],
       "published": true,
-      "metadata": { "tags": ["Politics", "Protest"], "published": true, "date": "2025-03-15", "description": "Butler democracy protest — The Globe", "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025." }
-    },
-    {
-      "eventName": "Bill Clinton Speaks at Pitt Greensburg",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Bill Clinton", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
-      "eventDate": { "iso": "2024-10-29", "source": "filename_extraction" },
-      "dateDisplay": "October 29, 2024",
-      "totalImages": 9,
-      "images": [
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg", "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg", "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally", "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-29", "description": "Hillary Clinton campaigns at Pitt Greensburg — The Globe", "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024." }
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Protest"
+        ],
+        "published": true,
+        "date": "2025-03-15",
+        "description": "Butler democracy protest — The Globe",
+        "caption": "Demonstrators protest in support of democratic institutions in Butler, Pa., March 15, 2025."
+      }
     },
     {
       "eventName": "Kamala Harris in Pittsburgh on Election Eve",
       "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Kamala Harris", "The Globe", "Photojournalism"],
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Kamala Harris",
+        "The Globe",
+        "Photojournalism"
+      ],
       "folderPath": "Politics/Kamala in Pittsburgh amid Election Eve",
-      "eventDate": { "iso": "2024-11-04", "source": "filename_extraction" },
+      "eventDate": {
+        "iso": "2024-11-04",
+        "source": "filename_extraction"
+      },
       "dateDisplay": "November 4, 2024",
       "totalImages": 19,
       "images": [
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg", "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg", "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.", "tags": ["Politics", "Campaign"] }
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4655.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4697.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4800.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4818.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
+          "path": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4837.jpg",
+          "description": "Vice President Kamala Harris speaks in Pittsburgh on election eve",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
       ],
       "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-11-04", "description": "Kamala Harris campaigns in Pittsburgh on election eve — The Globe", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024." }
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-11-04",
+        "description": "Kamala Harris campaigns in Pittsburgh on election eve — The Globe",
+        "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Pittsburgh, Pa., Nov. 4, 2024."
+      }
+    },
+    {
+      "eventName": "Scarlett Johansson GOTV Canvas Launch",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Celebrity",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Scarlett Johansson Canvas Launch",
+      "eventDate": {
+        "iso": "2024-11-03",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "November 3, 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3205.jpg",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3205.jpg",
+          "description": "Scarlett Johansson speaks to Harris campaign supporters",
+          "caption": "Actress Scarlett Johansson rallies supporters at a get-out-the-vote event for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "tags": [
+            "Politics",
+            "Celebrity",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3197.jpg",
+          "description": "Scarlett Johansson speaks to volunteers at Harris campaign canvass launch",
+          "caption": "Actress Scarlett Johansson addresses volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "tags": [
+            "Politics",
+            "Celebrity",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3204.jpg",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3204.jpg",
+          "description": "Scarlett Johansson greets campaign volunteers",
+          "caption": "Actress Scarlett Johansson greets campaign volunteers before a canvass launch event for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "tags": [
+            "Politics",
+            "Celebrity",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3208.jpg",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3208.jpg",
+          "description": "Scarlett Johansson at Harris campaign office",
+          "caption": "Actress Scarlett Johansson visits a campaign office to launch a get-out-the-vote canvassing effort for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "tags": [
+            "Politics",
+            "Celebrity",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3226.jpg",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3226.jpg",
+          "description": "Scarlett Johansson encourages campaign volunteers",
+          "caption": "Actress Scarlett Johansson encourages volunteers before they canvas for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "tags": [
+            "Politics",
+            "Celebrity",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3234.jpg",
+          "path": "241103_Scarlett Johansson GOTV Canvass Launch_CAL3234.jpg",
+          "description": "Scarlett Johansson with Harris campaign volunteers",
+          "caption": "Actress Scarlett Johansson poses with campaign volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.",
+          "tags": [
+            "Politics",
+            "Celebrity",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign",
+          "Celebrity"
+        ],
+        "published": true,
+        "date": "2024-11-03",
+        "description": "Scarlett Johansson canvasses for Harris — The Globe",
+        "caption": "Actress Scarlett Johansson launches get-out-the-vote effort for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024."
+      }
+    },
+    {
+      "eventName": "Bill Clinton Speaks at Pitt Greensburg",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Bill Clinton",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Clinton Speaks at Pitt Greensburgh",
+      "eventDate": {
+        "iso": "2024-10-29",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 29, 2024",
+      "totalImages": 9,
+      "images": [
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2861.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2943.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2977.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2980.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL2986.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3000.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3053.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3055.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton addresses supporters at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "path": "241029_Clinton Speaks at Pitt Greensburgh_CAL3063.jpg",
+          "description": "Former President Bill Clinton speaks at University of Pittsburgh Greensburg rally",
+          "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-29",
+        "description": "Hillary Clinton campaigns at Pitt Greensburg — The Globe",
+        "caption": "Former President Bill Clinton speaks at a campaign rally at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024."
+      }
     },
     {
       "eventName": "Kamala Harris Speaks at Erie",
       "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Kamala Harris", "The Globe", "Photojournalism"],
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Kamala Harris",
+        "The Globe",
+        "Photojournalism"
+      ],
       "folderPath": "Politics/Kamala Speaks at Erie",
-      "eventDate": { "iso": "2024-10-14", "source": "filename_extraction" },
+      "eventDate": {
+        "iso": "2024-10-14",
+        "source": "filename_extraction"
+      },
       "dateDisplay": "October 14, 2024",
       "totalImages": 8,
       "images": [
-        { "filename": "241014_Kamala Speaks at Erie_CAL3741.jpg", "path": "241014_Kamala Speaks at Erie_CAL3741.jpg", "description": "Vice President Kamala Harris speaks at campaign rally in Erie", "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241014_Kamala Speaks at Erie_CAL3757.jpg", "path": "241014_Kamala Speaks at Erie_CAL3757.jpg", "description": "Vice President Kamala Harris addresses supporters in Erie", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241014_Kamala Speaks at Erie_CAL3766.jpg", "path": "241014_Kamala Speaks at Erie_CAL3766.jpg", "description": "Vice President Kamala Harris speaks at campaign event in Erie", "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241014_Kamala Speaks at Erie_CAL3804.jpg", "path": "241014_Kamala Speaks at Erie_CAL3804.jpg", "description": "Vice President Kamala Harris campaigns in Erie", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241014_Kamala Speaks at Erie_CAL3851.jpg", "path": "241014_Kamala Speaks at Erie_CAL3851.jpg", "description": "Vice President Kamala Harris speaks to crowd in Erie", "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241014_Kamala Speaks at Erie_CAL4115.jpg", "path": "241014_Kamala Speaks at Erie_CAL4115.jpg", "description": "Vice President Kamala Harris at campaign rally in Erie", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241014_Kamala Speaks at Erie_CAL4248.jpg", "path": "241014_Kamala Speaks at Erie_CAL4248.jpg", "description": "Vice President Kamala Harris campaigns in Erie", "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241014_Kamala Speaks at Erie_CAL6948.jpg", "path": "241014_Kamala Speaks at Erie_CAL6948.jpg", "description": "Vice President Kamala Harris at Erie campaign event", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] }
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3741.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3741.jpg",
+          "description": "Vice President Kamala Harris speaks at campaign rally in Erie",
+          "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3757.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3757.jpg",
+          "description": "Vice President Kamala Harris addresses supporters in Erie",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3766.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3766.jpg",
+          "description": "Vice President Kamala Harris speaks at campaign event in Erie",
+          "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3804.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3804.jpg",
+          "description": "Vice President Kamala Harris campaigns in Erie",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3851.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL3851.jpg",
+          "description": "Vice President Kamala Harris speaks to crowd in Erie",
+          "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL4115.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL4115.jpg",
+          "description": "Vice President Kamala Harris at campaign rally in Erie",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL4248.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL4248.jpg",
+          "description": "Vice President Kamala Harris campaigns in Erie",
+          "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL6948.jpg",
+          "path": "241014_Kamala Speaks at Erie_CAL6948.jpg",
+          "description": "Vice President Kamala Harris at Erie campaign event",
+          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
       ],
       "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-14", "description": "Kamala Harris campaigns in Erie — The Globe", "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024." }
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-14",
+        "description": "Kamala Harris campaigns in Erie — The Globe",
+        "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024."
+      }
+    },
+    {
+      "eventName": "JD Vance Rallies in Johnstown",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "JD Vance",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/JD Vance Johnstown",
+      "eventDate": {
+        "iso": "2024-10-12",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 12, 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3495.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3495.jpg",
+          "description": "JD Vance speaks at campaign rally in Johnstown",
+          "caption": "Sen. JD Vance, R-Ohio, speaks at a presidential campaign rally in Johnstown, Pa., Oct. 12, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3497.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3497.jpg",
+          "description": "JD Vance addresses Johnstown supporters",
+          "caption": "Sen. JD Vance, R-Ohio, addresses supporters at a campaign rally in Johnstown, Pa., Oct. 12, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3502.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3502.jpg",
+          "description": "JD Vance greets crowd in Johnstown",
+          "caption": "Sen. JD Vance, R-Ohio, greets supporters at a presidential campaign rally in Johnstown, Pa., Oct. 12, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3507.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3507.jpg",
+          "description": "JD Vance waves to Johnstown crowd",
+          "caption": "Sen. JD Vance, R-Ohio, waves to supporters during a campaign rally in Johnstown, Pa., Oct. 12, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3511.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3511.jpg",
+          "description": "Crowd listens to JD Vance in Johnstown",
+          "caption": "Supporters listen as Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3514.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3514.jpg",
+          "description": "JD Vance exits stage in Johnstown",
+          "caption": "Sen. JD Vance, R-Ohio, leaves the stage after speaking at a campaign rally in Johnstown, Pa., Oct. 12, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-12",
+        "description": "JD Vance rallies in Johnstown — The Globe",
+        "caption": "Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024."
+      }
+    },
+    {
+      "eventName": "Obama Speaks at Pittsburgh",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Barack Obama",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Obama in Pittsburgh",
+      "eventDate": {
+        "iso": "2024-10-10",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 10, 2024",
+      "totalImages": 5,
+      "images": [
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg",
+          "description": "Barack Obama speaks at University of Pittsburgh rally",
+          "caption": "Former President Barack Obama speaks at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
+          "description": "Barack Obama addresses Pittsburgh crowd",
+          "caption": "Former President Barack Obama addresses supporters at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg",
+          "description": "Barack Obama gestures at Pittsburgh rally",
+          "caption": "Former President Barack Obama gestures while speaking at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
+          "description": "Barack Obama waves to Pittsburgh supporters",
+          "caption": "Former President Barack Obama waves to supporters at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg",
+          "path": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg",
+          "description": "Crowd listens to Barack Obama in Pittsburgh",
+          "caption": "Supporters listen as former President Barack Obama speaks at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-10",
+        "description": "Obama rallies for Harris in Pittsburgh — The Globe",
+        "caption": "Former President Barack Obama speaks at a campaign rally for Vice President Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024."
+      }
+    },
+    {
+      "eventName": "Trump Returns to Butler",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Donald Trump",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Trump Returns to Butler",
+      "eventDate": {
+        "iso": "2024-10-05",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 5, 2024",
+      "totalImages": 10,
+      "images": [
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.jpg",
+          "description": "Donald Trump speaks at Butler rally podium",
+          "caption": "Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.jpg",
+          "description": "Trump addresses supporters at Butler rally",
+          "caption": "Former President Donald Trump addresses supporters at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.jpg",
+          "description": "Trump speaks to crowd at Butler rally",
+          "caption": "Former President Donald Trump speaks to supporters at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.jpg",
+          "description": "Trump gestures at Butler rally",
+          "caption": "Former President Donald Trump gestures while speaking at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.jpg",
+          "description": "Trump waves to Butler crowd",
+          "caption": "Former President Donald Trump waves to supporters at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.jpg",
+          "description": "Trump at podium in Butler",
+          "caption": "Former President Donald Trump speaks from behind bulletproof glass at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.jpg",
+          "description": "Trump addresses Butler supporters",
+          "caption": "Former President Donald Trump addresses a large crowd at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "trump_butler_cal9640.jpg",
+          "path": "trump_butler_cal9640.jpg",
+          "description": "Trump supporter wearing red MAGA hat",
+          "caption": "A supporter wearing a red Trump hat waits for former President Donald Trump to speak at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "trump_butler_cal9666.jpg",
+          "path": "trump_butler_cal9666.jpg",
+          "description": "Trump supporters in parking lot with American flag",
+          "caption": "Supporters gather in the parking lot before former President Donald Trump's campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "trump_butler_cal9674.jpg",
+          "path": "trump_butler_cal9674.jpg",
+          "description": "Trump Rambo flag and Confederate flag on truck",
+          "caption": "A flag depicting former President Donald Trump as an action hero flies alongside an American flag and a Confederate flag at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "trump_butler_cal9703.jpg",
+          "path": "trump_butler_cal9703.jpg",
+          "description": "Man holding Trump flag by decorated truck",
+          "caption": "A supporter holds a flag depicting former President Donald Trump next to a decorated pickup truck at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "trump_butler_cal9709.jpg",
+          "path": "trump_butler_cal9709.jpg",
+          "description": "Decorated pickup truck with Trump flags",
+          "caption": "A pickup truck decorated with American flags, Trump flags and campaign decals sits in the parking lot at a campaign rally for former President Donald Trump at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-05",
+        "description": "Trump returns to Butler, PA — The Globe",
+        "caption": "Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024."
+      }
+    },
+    {
+      "eventName": "Tim Waltz Campaign Rally in Erie",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Tim Waltz",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Tim Waltz Erie",
+      "eventDate": {
+        "iso": "2024-10-01",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_033.jpg",
+          "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_033.jpg",
+          "description": "Minnesota Gov. Tim Waltz speaks at Erie rally",
+          "caption": "Minnesota Gov. Tim Walz speaks at a presidential campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_045.jpg",
+          "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_045.jpg",
+          "description": "Tim Waltz addresses Erie supporters",
+          "caption": "Minnesota Gov. Tim Walz addresses supporters at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_057.jpg",
+          "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_057.jpg",
+          "description": "Tim Waltz greets Erie crowd",
+          "caption": "Minnesota Gov. Tim Walz greets supporters at a presidential campaign rally in Erie, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_110.jpg",
+          "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_110.jpg",
+          "description": "Tim Waltz waves to Erie supporters",
+          "caption": "Minnesota Gov. Tim Walz waves to the crowd at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_139.jpg",
+          "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_139.jpg",
+          "description": "Tim Waltz speaks to Erie crowd",
+          "caption": "Minnesota Gov. Tim Walz speaks to supporters gathered for a campaign rally in Erie, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "Tim Waltz Campign Rally in Erie__The Globe_Published_199.jpg",
+          "path": "Tim Waltz Campign Rally in Erie__The Globe_Published_199.jpg",
+          "description": "Crowd cheers for Tim Waltz in Erie",
+          "caption": "Supporters cheer as Minnesota Gov. Tim Walz speaks at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10",
+        "description": "Tim Walz campaign rally in Erie — The Globe",
+        "caption": "Minnesota Gov. Tim Walz speaks at a campaign rally for Vice President Kamala Harris in Erie, Pa., Oct. 1, 2024."
+      }
+    },
+    {
+      "eventName": "VP Debate Watch Party",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Debate",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/VP Debate Watch Party",
+      "eventDate": {
+        "iso": "2024-10-01",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 2024",
+      "totalImages": 5,
+      "images": [
+        {
+          "filename": "IMG_0002.jpg",
+          "path": "IMG_0002.jpg",
+          "description": "Point Park students watch VP debate on screen",
+          "caption": "Point Park University students watch the vice presidential debate between Gov. Tim Walz and Sen. JD Vance on a large screen in Pittsburgh, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Debate"
+          ]
+        },
+        {
+          "filename": "IMG_0003.jpg",
+          "path": "IMG_0003.jpg",
+          "description": "Students react during VP debate watch party",
+          "caption": "Point Park University students react while watching the vice presidential debate in Pittsburgh, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Debate"
+          ]
+        },
+        {
+          "filename": "IMG_2676.jpg",
+          "path": "IMG_2676.jpg",
+          "description": "Crowd watches VP debate at Point Park",
+          "caption": "A crowd of Point Park University students gathers to watch the vice presidential debate in Pittsburgh, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Debate"
+          ]
+        },
+        {
+          "filename": "IMG_2682.jpg",
+          "path": "IMG_2682.jpg",
+          "description": "Students engaged in VP debate watch party",
+          "caption": "Point Park University students engage with the vice presidential debate during a campus watch party in Pittsburgh, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Debate"
+          ]
+        },
+        {
+          "filename": "IMG_2686.jpg",
+          "path": "IMG_2686.jpg",
+          "description": "Point Park audience watches VP debate",
+          "caption": "An audience of Point Park University students watches the vice presidential debate in Pittsburgh, Pa., Oct. 1, 2024.",
+          "tags": [
+            "Politics",
+            "Debate"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-10-01",
+        "description": "VP Debate watch party — The Globe",
+        "caption": "Point Park University students watch the vice presidential debate between Gov. Tim Walz and Sen. JD Vance in Pittsburgh, Pa., Oct. 1, 2024."
+      }
+    },
+    {
+      "eventName": "Trump Rally in Erie",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Donald Trump",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Trump Rally Erie",
+      "eventDate": {
+        "iso": "2024-09-29",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "September 29, 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "240929_Trump Rally in Erie__CAL2137.jpg",
+          "path": "240929_Trump Rally in Erie__CAL2137.jpg",
+          "description": "Donald Trump speaks at Erie rally podium",
+          "caption": "Former President Donald Trump speaks at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240929_Trump Rally in Erie__CAL2139.jpg",
+          "path": "240929_Trump Rally in Erie__CAL2139.jpg",
+          "description": "Trump addresses Erie supporters at rally",
+          "caption": "Former President Donald Trump addresses supporters at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240929_Trump Rally in Erie__CAL2148.jpg",
+          "path": "240929_Trump Rally in Erie__CAL2148.jpg",
+          "description": "Trump gestures at Erie rally",
+          "caption": "Former President Donald Trump gestures while speaking at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240929_Trump Rally in Erie__CAL2149.jpg",
+          "path": "240929_Trump Rally in Erie__CAL2149.jpg",
+          "description": "Trump waves to Erie crowd",
+          "caption": "Former President Donald Trump waves to supporters at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240929_Trump Rally in Erie__CAL2157.jpg",
+          "path": "240929_Trump Rally in Erie__CAL2157.jpg",
+          "description": "Trump speaks to Erie arena crowd",
+          "caption": "Former President Donald Trump speaks to a large crowd at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240929_Trump Rally in Erie__CAL2163.jpg",
+          "path": "240929_Trump Rally in Erie__CAL2163.jpg",
+          "description": "Crowd at Trump Erie rally",
+          "caption": "Supporters gather to hear former President Donald Trump speak at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-09-29",
+        "description": "Trump rally in Erie — The Globe",
+        "caption": "Former President Donald Trump speaks at a campaign rally at Erie Insurance Arena in Erie, Pa., Sept. 29, 2024."
+      }
+    },
+    {
+      "eventName": "Pitt Palestine Protest",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Protest",
+        "International",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Pitt Palestine Protest",
+      "eventDate": {
+        "iso": "2024-09-24",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "September 24, 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "250924_Pitt - Palestine Protest__DSC1450.jpg",
+          "path": "250924_Pitt - Palestine Protest__DSC1450.jpg",
+          "description": "Students hold signs at Palestine protest",
+          "caption": "University of Pittsburgh students hold signs during a demonstration in support of Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250924_Pitt - Palestine Protest__DSC1453.jpg",
+          "path": "250924_Pitt - Palestine Protest__DSC1453.jpg",
+          "description": "Protesters march at Pitt Palestine demonstration",
+          "caption": "University of Pittsburgh students march during a protest advocating for Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250924_Pitt - Palestine Protest__DSC1458.jpg",
+          "path": "250924_Pitt - Palestine Protest__DSC1458.jpg",
+          "description": "Students gather for Palestine protest at Pitt",
+          "caption": "University of Pittsburgh students gather for a demonstration supporting Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250924_Pitt - Palestine Protest__DSC1462.jpg",
+          "path": "250924_Pitt - Palestine Protest__DSC1462.jpg",
+          "description": "Protesters hold Palestinian flags at Pitt",
+          "caption": "University of Pittsburgh students wave Palestinian flags during a demonstration on campus in Pittsburgh, Pa., Sept. 24, 2024.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250924_Pitt - Palestine Protest__DSC1469.jpg",
+          "path": "250924_Pitt - Palestine Protest__DSC1469.jpg",
+          "description": "Students speak at Palestine protest",
+          "caption": "A University of Pittsburgh student addresses the crowd during a demonstration in support of Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        },
+        {
+          "filename": "250924_Pitt - Palestine Protest__DSC1472.jpg",
+          "path": "250924_Pitt - Palestine Protest__DSC1472.jpg",
+          "description": "Crowd at Pitt Palestine protest",
+          "caption": "University of Pittsburgh students participate in a demonstration advocating for Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024.",
+          "tags": [
+            "Politics",
+            "Protest"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Protest",
+          "International"
+        ],
+        "published": true,
+        "date": "2024-09-24",
+        "description": "Palestine protest at University of Pittsburgh — The Globe",
+        "caption": "University of Pittsburgh students demonstrate in support of Palestinian rights on campus in Pittsburgh, Pa., Sept. 24, 2024."
+      }
+    },
+    {
+      "eventName": "Kamala Harris Arrives in Johnstown",
+      "category": "Politics",
+      "tags": [
+        "Politics",
+        "Presidential Campaign",
+        "Kamala Harris",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics/Kamala Arrives Johnstown",
+      "eventDate": {
+        "iso": "2024-09-15",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "September 15, 2024",
+      "totalImages": 6,
+      "images": [
+        {
+          "filename": "240915_Kamala Arrival in Johnstown_1972_CAL_HighResolution.jpg",
+          "path": "240915_Kamala Arrival in Johnstown_1972_CAL_HighResolution.jpg",
+          "description": "Kamala Harris arrives at Johnstown airport",
+          "caption": "Vice President Kamala Harris arrives at Johnstown-Cambria County Airport for a campaign stop in Johnstown, Pa., Sept. 15, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240915_Kamala Arrival in Johnstown_1973_CAL_HighResolution.jpg",
+          "path": "240915_Kamala Arrival in Johnstown_1973_CAL_HighResolution.jpg",
+          "description": "Kamala Harris greets supporters in Johnstown",
+          "caption": "Vice President Kamala Harris greets supporters upon arrival at Johnstown-Cambria County Airport in Johnstown, Pa., Sept. 15, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240915_Kamala Arrival in Johnstown_1974_CAL_HighResolution.jpg",
+          "path": "240915_Kamala Arrival in Johnstown_1974_CAL_HighResolution.jpg",
+          "description": "Kamala Harris waves to Johnstown crowd",
+          "caption": "Vice President Kamala Harris waves to supporters after arriving at Johnstown-Cambria County Airport in Johnstown, Pa., Sept. 15, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240915_Kamala Arrival in Johnstown_1975_CAL_HighResolution.jpg",
+          "path": "240915_Kamala Arrival in Johnstown_1975_CAL_HighResolution.jpg",
+          "description": "Kamala Harris walks through Johnstown crowd",
+          "caption": "Vice President Kamala Harris walks through a crowd of supporters at Johnstown-Cambria County Airport in Johnstown, Pa., Sept. 15, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240915_Kamala Arrival in Johnstown_1976_CAL_HighResolution.jpg",
+          "path": "240915_Kamala Arrival in Johnstown_1976_CAL_HighResolution.jpg",
+          "description": "Kamala Harris speaks with Johnstown supporters",
+          "caption": "Vice President Kamala Harris speaks with supporters at Johnstown-Cambria County Airport during a campaign visit to Johnstown, Pa., Sept. 15, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        },
+        {
+          "filename": "240915_Kamala Arrival in Johnstown_1977_CAL_HighResolution.jpg",
+          "path": "240915_Kamala Arrival in Johnstown_1977_CAL_HighResolution.jpg",
+          "description": "Kamala Harris departs Johnstown airport",
+          "caption": "Vice President Kamala Harris prepares to depart Johnstown-Cambria County Airport after a campaign stop in Johnstown, Pa., Sept. 15, 2024.",
+          "tags": [
+            "Politics",
+            "Campaign"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Presidential Campaign"
+        ],
+        "published": true,
+        "date": "2024-09-15",
+        "description": "Kamala Harris arrives in Johnstown — The Globe",
+        "caption": "Vice President Kamala Harris arrives at Johnstown-Cambria County Airport for a campaign stop in Johnstown, Pa., Sept. 15, 2024."
+      }
+    },
+    {
+      "eventName": "The Globe - Journalist Panel",
+      "category": "Documentary",
+      "tags": [
+        "Local",
+        "Events",
+        "Journalism",
+        "The Globe"
+      ],
+      "folderPath": "Events/Journalist Panel",
+      "eventDate": {
+        "iso": "2024-01-31",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "January 31, 2024",
+      "totalImages": 2,
+      "images": [
+        {
+          "filename": "240131_News & Ops Panel__CAL9010.jpg",
+          "path": "240131_News & Ops Panel__CAL9010.jpg",
+          "description": "Professional journalist panel discussion",
+          "caption": "Professional journalist panel coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)",
+          "tags": [
+            "Local",
+            "Events",
+            "Journalism"
+          ]
+        },
+        {
+          "filename": "240131_News & Ops Panel__CAL9017.jpg",
+          "path": "240131_News & Ops Panel__CAL9017.jpg",
+          "description": "Professional journalist panel discussion",
+          "caption": "Professional journalist panel coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)",
+          "tags": [
+            "Local",
+            "Events",
+            "Journalism"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Local",
+          "Events",
+          "Journalism"
+        ],
+        "published": true,
+        "date": "2024-01-31",
+        "description": "Journalist panel coverage for The Globe",
+        "caption": "Professional development event — Photo by Caleb McCartney, Photo Editor (ppuglobe.com/staff_name/caleb-mccartney/)"
+      }
+    },
+    {
+      "eventName": "The Globe - Homeless Tent Coverage",
+      "category": "Documentary",
+      "tags": [
+        "Documentary",
+        "Social Issues",
+        "Local",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Documentary",
+      "eventDate": {
+        "iso": "2023-11-07",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "November 7, 2023",
+      "totalImages": 2,
+      "images": [
+        {
+          "filename": "231107_The Globe - Homeless Tent Coverage_CAL6463.jpg",
+          "path": "231107_The Globe - Homeless Tent Coverage_CAL6463.jpg",
+          "description": "Social documentary coverage of homeless encampment",
+          "caption": "Social documentary coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)",
+          "tags": [
+            "Documentary",
+            "Social Issues",
+            "Local"
+          ]
+        },
+        {
+          "filename": "231107_The Globe - Homeless Tent Coverage_CAL6468.jpg",
+          "path": "231107_The Globe - Homeless Tent Coverage_CAL6468.jpg",
+          "description": "Social documentary coverage of homeless encampment",
+          "caption": "Social documentary coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)",
+          "tags": [
+            "Documentary",
+            "Social Issues",
+            "Local"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Documentary",
+          "Social Issues",
+          "Local"
+        ],
+        "published": true,
+        "date": "2023-11-07",
+        "description": "Social documentary coverage for The Globe",
+        "caption": "Student newspaper photojournalism — Caleb McCartney, Photo Editor (ppuglobe.com/staff_name/caleb-mccartney/)"
+      }
+    },
+    {
+      "eventName": "The Globe - Political Coverage",
+      "category": "Documentary",
+      "tags": [
+        "Politics",
+        "Local",
+        "The Globe",
+        "Photojournalism"
+      ],
+      "folderPath": "Politics",
+      "eventDate": {
+        "iso": "2023-11-07",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "November 7, 2023",
+      "totalImages": 2,
+      "images": [
+        {
+          "filename": "231107_The Globe - Political Coverage_CAL_6424.jpg",
+          "path": "231107_The Globe - Political Coverage_CAL_6424.jpg",
+          "description": "Point Park University student government election coverage",
+          "caption": "Point Park University students participate in a student government election event on campus in Pittsburgh, Pa., Nov. 7, 2023.",
+          "tags": [
+            "Politics",
+            "Local"
+          ]
+        },
+        {
+          "filename": "231107_The Globe - Political Coverage_CAL_6429.jpg",
+          "path": "231107_The Globe - Political Coverage_CAL_6429.jpg",
+          "description": "Point Park University student voting on election day",
+          "caption": "A Point Park University student casts a ballot at a campus polling location in Pittsburgh, Pa., Nov. 7, 2023.",
+          "tags": [
+            "Politics",
+            "Local"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Politics",
+          "Local"
+        ],
+        "published": true,
+        "date": "2023-11-07",
+        "description": "Political event coverage for The Globe",
+        "caption": "Point Park University student government elections — The Globe"
+      }
+    },
+    {
+      "eventName": "The Globe - Pizza with President",
+      "category": "Documentary",
+      "tags": [
+        "Campus Life",
+        "Events",
+        "The Globe",
+        "Point Park"
+      ],
+      "folderPath": "Events/Pizza With President",
+      "eventDate": {
+        "iso": "2023-10-05",
+        "source": "filename_extraction"
+      },
+      "dateDisplay": "October 5, 2023",
+      "totalImages": 2,
+      "images": [
+        {
+          "filename": "231005_Pizza With the President_CAL4715.jpg",
+          "path": "231005_Pizza With the President_CAL4715.jpg",
+          "description": "Student engagement event with university president",
+          "caption": "Campus life coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)",
+          "tags": [
+            "Campus Life",
+            "Events"
+          ]
+        },
+        {
+          "filename": "231005_Pizza With the President_CAL4763.jpg",
+          "path": "231005_Pizza With the President_CAL4763.jpg",
+          "description": "Student engagement event with university president",
+          "caption": "Campus life coverage by Caleb McCartney, Photo Editor — The Globe (ppuglobe.com/staff_name/caleb-mccartney/)",
+          "tags": [
+            "Campus Life",
+            "Events"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Campus Life",
+          "Events",
+          "The Globe"
+        ],
+        "published": true,
+        "date": "2023-10-05",
+        "description": "Student engagement event coverage",
+        "caption": "The Globe student newspaper — Photo by Caleb McCartney, Photo Editor (ppuglobe.com/staff_name/caleb-mccartney/)"
+      }
     }
   ]
 }
