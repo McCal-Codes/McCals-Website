@@ -181,6 +181,18 @@ function parseDate(item) {
 function normalizePortfolioItem(item, category) {
   const { dateValue, parsedDate } = parseDate(item);
   
+  // For Journalism items, preserve full image objects with captions
+  let images = item.images || [];
+  if (category === 'Journalism' && images.length > 0 && typeof images[0] === 'object') {
+    // Journalism manifest already has objects with captions - keep them
+    images = images.map(img => ({
+      filename: img.filename || img.path,
+      caption: img.caption,
+      description: img.description,
+      path: img.path
+    }));
+  }
+  
   return {
     ...item,
     type: category,
@@ -194,7 +206,7 @@ function normalizePortfolioItem(item, category) {
     folderPath: item.folderPath || item.path || '',
     coverImage: item.coverImage || item.cover || (item.images && item.images[0]) || null,
     totalImages: item.totalImages || (item.images && item.images.length) || 0,
-    images: item.images || []
+    images: images
   };
 }
 

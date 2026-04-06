@@ -27,11 +27,17 @@ interface EventsManifest {
 function adaptEvents(manifest: EventsManifest): PortfolioGroup[] {
   return manifest.items.map((item) => {
     const name = item.title ?? item.eventName;
-    const images = item.images.map((img, i) => ({
-      url: imageUrl.event(img.path),
-      filename: img.path.split('/').pop() ?? `image-${i}`,
-      alt: `${name} — event photo`,
-    }));
+    const images = item.images.map((img, i) => {
+      const filename = img.path.split('/').pop() ?? `image-${i}`;
+      // Extract photo number from filename (e.g., CAL753 from PGH Social Club at Avalon_CAL753_webuse.jpg)
+      const photoMatch = filename.match(/CAL(\d+)/);
+      const photoNum = photoMatch ? ` #${photoMatch[1]}` : '';
+      return {
+        url: imageUrl.event(img.path),
+        filename,
+        alt: `${name}${photoNum}`,
+      };
+    });
     return {
       id: (item.folderPath ?? name).toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       title: name,
