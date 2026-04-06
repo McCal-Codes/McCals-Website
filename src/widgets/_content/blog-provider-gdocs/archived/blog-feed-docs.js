@@ -209,7 +209,7 @@
               day: 'numeric',
             });
           }
-        } catch (e) {
+        } catch {
           // continue to next pattern
         }
       }
@@ -222,7 +222,7 @@
     try {
       const u = new URL(url);
       return (u.pathname.split('/').pop() || 'image').split('?')[0];
-    } catch (e) {
+    } catch {
       return String(url).split('/').pop() || 'image';
     }
   }
@@ -250,7 +250,7 @@
         cap.textContent = meta.caption;
         fig.appendChild(cap);
       }
-    } catch (e) {
+    } catch {
       // ignore caption failure
     }
   }
