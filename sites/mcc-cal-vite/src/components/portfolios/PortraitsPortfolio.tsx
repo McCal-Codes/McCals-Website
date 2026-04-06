@@ -19,6 +19,8 @@ interface PortraitsManifest {
   collections: PortraitCollection[];
 }
 
+import { generateId } from '@/utils/portfolio-ids';
+
 // ── Normaliser ────────────────────────────────────────────────────────────────
 
 function normalise(collections: PortraitCollection[]): PortfolioGroup[] {
@@ -30,11 +32,11 @@ function normalise(collections: PortraitCollection[]): PortfolioGroup[] {
         // imageUrl.portrait handles this transparently since it joins folderPath + filename
         url: imageUrl.portrait(collection.folderPath, filename),
         filename: filename.split('/').pop() ?? filename,
-        alt: `${collection.collectionName} portrait`,
+        alt: `${collection.collectionName} — ${filename.split('/').pop() ?? filename}`,
       }));
 
       return {
-        id: collection.collectionName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        id: generateId(collection.collectionName),
         title: collection.collectionName,
         tags: collection.tags,
         images,

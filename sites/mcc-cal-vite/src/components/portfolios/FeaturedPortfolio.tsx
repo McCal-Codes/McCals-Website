@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
+import { generateId } from '@/utils/portfolio-ids';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
@@ -8,7 +9,7 @@ import '../portfolio/portfolio.css';
 // ── Manifest shape ────────────────────────────────────────────────────────────
 
 interface FeaturedImage {
-  filename: string;
+  filename?: string;
   caption?: string;
   description?: string;
   path?: string;
@@ -52,7 +53,9 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
     const images = item.images.map((img) => {
       // Handle both string filenames and image objects
       const isObject = typeof img === 'object';
-      const filename = isObject ? (img as FeaturedImage).filename : (img as string);
+      const filename = isObject 
+        ? (img as FeaturedImage).filename ?? (img as FeaturedImage).path?.split('/').pop() ?? ''
+        : (img as string);
       const caption = isObject ? (img as FeaturedImage).caption : undefined;
       const description = isObject ? (img as FeaturedImage).description : undefined;
       
@@ -66,7 +69,7 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
     });
 
     return {
-      id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      id: generateId(title, dateISO),
       title,
       dateDisplay: item.dateDisplay,
       dateISO,

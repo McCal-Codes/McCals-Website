@@ -13,27 +13,30 @@ const servePortfolioImages = () => ({
   configureServer(server: any) {
     server.middlewares.use('/src/images/Portfolios', (req: any, res: any, next: any) => {
       try {
+        // Skip if URL has query parameters (Vite internal requests)
+        if (req.url?.includes('?')) {
+          return next();
+        }
+        
         // Decode URL-encoded path (e.g., %20 -> space)
         const decodedUrl = decodeURIComponent(req.url || '');
         // Build absolute path to the image - go up 2 levels to reach project root
         const baseDir = path.resolve(__dirname, '..', '..', 'src', 'images', 'Portfolios');
         const filePath = path.join(baseDir, decodedUrl);
         
-        console.log('[VITE] __dirname:', __dirname);
-        console.log('[VITE] baseDir:', baseDir);
-        console.log('[VITE] decodedUrl:', decodedUrl);
-        console.log('[VITE] filePath:', filePath);
-        console.log('[VITE] exists:', fs.existsSync(filePath));
-        
         // Security: ensure path is within Portfolios directory
         if (!filePath.startsWith(baseDir)) {
-          console.log('[VITE] Security check failed');
+          return next();
+        }
+        
+        // Only handle image files
+        const ext = path.extname(filePath).toLowerCase();
+        if (!['.jpg', '.jpeg', '.png', '.webp', '.gif'].includes(ext)) {
           return next();
         }
         
         if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-          console.log('[VITE] Serving file:', filePath);
-          const ext = path.extname(filePath).toLowerCase().slice(1);
+          const extClean = ext.slice(1);
           const mimeTypes: Record<string, string> = {
             jpg: 'image/jpeg', 
             jpeg: 'image/jpeg', 
@@ -41,15 +44,13 @@ const servePortfolioImages = () => ({
             webp: 'image/webp',
             gif: 'image/gif'
           };
-          res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
+          res.setHeader('Content-Type', mimeTypes[extClean] || 'application/octet-stream');
           res.setHeader('Cache-Control', 'public, max-age=3600');
           fs.createReadStream(filePath).pipe(res);
         } else {
-          console.log('[VITE] File not found, passing to next');
           next();
         }
       } catch (err) {
-        console.log('[VITE] Error:', err);
         next();
       }
     });
@@ -59,6 +60,11 @@ const servePortfolioImages = () => ({
 export default defineConfig({
   plugins: [react(), servePortfolioImages()],
   publicDir: resolve(__dirname, './public-vite'),
+  esbuild: {
+    // Don't try to transform HTML files as JavaScript
+    include: [/\.tsx?$/, /\.jsx?$/],
+    exclude: [/\.html$/],
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
