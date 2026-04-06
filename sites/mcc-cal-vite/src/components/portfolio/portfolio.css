@@ -341,31 +341,39 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   }
 }
 
-/* --- Masonry grid --- */
+/* --- Portfolio grid --- */
 .pf-grid {
-  column-width: 320px;
-  column-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  align-items: start;
   text-align: left;
   margin-bottom: 32px;
-  /* Performance: contain layout to prevent reflows */
+  grid-auto-flow: row;
   contain: layout;
 }
 
-/* Responsive column sizing for better performance */
-@media (max-width: 1200px) { .pf-grid { column-width: 300px; } }
-@media (max-width: 900px) { .pf-grid { column-width: 280px; } }
-@media (max-width: 600px) { .pf-grid { column-width: 100%; column-count: 1; } }
+@media (max-width: 900px) {
+  .pf-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .pf-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* --- Card --- */
 .pf-card {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
-  margin: 0 0 20px;
+  margin: 0;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  break-inside: avoid;
   opacity: 0;
   transform: translateY(24px);
   transition:

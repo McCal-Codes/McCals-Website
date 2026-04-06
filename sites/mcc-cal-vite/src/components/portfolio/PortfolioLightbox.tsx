@@ -73,6 +73,11 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   if (!group) return null;
 
   const hasMultiple = group.images.length > 1;
+  const summaryText =
+    group.coverImage.description ??
+    group.images[0]?.description ??
+    group.coverImage.caption ??
+    group.images[0]?.caption;
 
   return (
     <div
@@ -126,8 +131,8 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
             </p>
           )}
 
-          {group.images[0]?.caption && (
-            <p className="pf-lightbox__description">{group.images[0].caption}</p>
+          {summaryText && (
+            <p className="pf-lightbox__description">{summaryText}</p>
           )}
 
           {group.published && group.outletName && (
