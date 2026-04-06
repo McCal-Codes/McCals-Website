@@ -2,6 +2,7 @@ import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PortfolioFilters from '@/components/portfolio/PortfolioFilters';
 import PortfolioGrid from '@/components/portfolio/PortfolioGrid';
+import { sortPortfolioGroups } from '@/components/portfolio/sortGroups';
 import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { useMemo, useState } from 'react';
@@ -58,13 +59,7 @@ export default function EventsPage() {
 
   const groups = useMemo(() => {
     if (!data) return [];
-    const events = adaptEvents(data);
-    // Sort by date (newest first)
-    return events.sort((a, b) => {
-      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : 0;
-      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : 0;
-      return dateB - dateA;
-    });
+    return sortPortfolioGroups(adaptEvents(data));
   }, [data]);
 
   const filters = useMemo(() => {
