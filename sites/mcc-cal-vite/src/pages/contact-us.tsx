@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
 import { getWidgetConfig } from '@/utils/widgetConfig';
 import { usePageMeta } from '@/hooks/usePageMeta';

@@ -1,5 +1,5 @@
-import Layout from '@/components/Layout/Layout';
-import ChangelogViewer from '@/components/ChangelogViewer';
+import { Layout, ChangelogViewer } from '@/components';
+import { usePageMeta } from '@/hooks/usePageMeta';
 
 const ChangelogPage = () => (
   <Layout>

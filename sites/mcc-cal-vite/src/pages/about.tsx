@@ -1,7 +1,7 @@
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { BioSection, TestimonialsSection, ClientsSection } from '@/components/about';
-import '@/styles/about.css';
+import styles from './about.module.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const ABOUT_IMAGE = '/about/caleb-mccartney-photo.jpg';
@@ -72,12 +72,12 @@ export default function AboutPage() {
 
   return (
     <Layout>
-      <div className="about-page">
-        <div className="about-shell">
-          <BioSection className="about-panel" />
-          <div className="about-content">
-            <TestimonialsSection className="about-panel" />
-            <ClientsSection className="about-panel" duplicates={3} />
+      <div className={styles.aboutPage}>
+        <div className={styles.aboutShell}>
+          <BioSection className={styles.aboutPanel} />
+          <div className={styles.aboutContent}>
+            <TestimonialsSection className={styles.aboutPanel} />
+            <ClientsSection className={styles.aboutPanel} duplicates={3} />
           </div>
         </div>
       </div>

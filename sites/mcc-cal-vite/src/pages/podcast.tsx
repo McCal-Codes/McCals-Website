@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import {
   EpisodeCard,
