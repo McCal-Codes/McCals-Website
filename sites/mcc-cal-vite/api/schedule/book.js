@@ -1,8 +1,8 @@
 import { kv } from '@vercel/kv';
-import { getEventTypeById } from '../../../src/components/scheduling/config/eventTypes';
-import { AVAILABILITY_RULES } from '../../../src/components/scheduling/config/availability';
-import { isMaxBookingsReached } from '../../../src/components/scheduling/utils/availability';
-import { isDateAvailable, isWithinRange } from '../../../src/components/scheduling/utils/availability';
+import { getEventTypeById } from '../../src/components/scheduling/config/eventTypes';
+import { AVAILABILITY_RULES } from '../../src/components/scheduling/config/availability';
+import { isMaxBookingsReached } from '../../src/components/scheduling/utils/availability';
+import { isDateAvailable, isWithinRange } from '../../src/components/scheduling/utils/availability';
 import { applyRateLimit } from '../_lib/rate-limit.js';
 
 /**
