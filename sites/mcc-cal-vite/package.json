@@ -6,7 +6,8 @@
   "scripts": {
     "predev": "node scripts/sync-manifests.js",
     "dev": "vite",
-    "prebuild": "node scripts/sync-manifests.js",
+    "validate:manifests": "node ../../scripts/validate-manifest-ids.js",
+    "prebuild": "npm run validate:manifests && node scripts/sync-manifests.js",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist"
