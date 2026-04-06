@@ -45,10 +45,12 @@ If you want to test KV locally, you need to pull env vars:
 vercel env pull .env.local
 ```
 
-Then run dev server:
+Then run the local Vercel environment so `/api/schedule/*` functions execute:
 ```bash
-npm run dev
+npm run dev:vercel
 ```
+
+Use plain `npm run dev` only for frontend-only work that does not depend on local API routes.
 
 ### 5. Deploy
 

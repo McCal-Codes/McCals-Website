@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Layout } from '@/components';
-import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, useManifest, imageUrl } from '@/components/portfolio';
+import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import '@/components/portfolio/portfolio.css';
@@ -50,13 +50,7 @@ export default function ConcertsPage() {
 
   const groups = useMemo(() => {
     if (!data) return [];
-    const concerts = adaptConcerts(data);
-    // Sort by date (newest first)
-    return concerts.sort((a, b) => {
-      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : 0;
-      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : 0;
-      return dateB - dateA;
-    });
+    return sortPortfolioGroups(adaptConcerts(data));
   }, [data]);
 
   const filters = useMemo(() => {
