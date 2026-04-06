@@ -10,11 +10,13 @@
     "prebuild": "npm run validate:manifests && node scripts/sync-manifests.js",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ignore-pattern dist"
+    "lint": "eslint . --ignore-pattern dist",
+    "analyze": "set ANALYZE=true&& npm run build"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.96.2",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/kv": "^3.0.0",
     "@vercel/speed-insights": "^2.0.0",
     "autoprefixer": "^10.4.27",
     "react": "^18.3.1",
@@ -27,6 +29,7 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "rollup-plugin-visualizer": "^7.0.1",
     "typescript": "^5.6.3",
     "vite": "^6.0.5"
   }
