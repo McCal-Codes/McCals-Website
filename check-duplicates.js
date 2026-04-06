@@ -9,7 +9,7 @@ data.events.forEach((e, index) => {
   locations[e.eventName].push(index);
 });
 
-const dups = Object.entries(counts).filter(([k, v]) => v > 1);
+const dups = Object.entries(counts).filter(([_k, v]) => v > 1);
 if (dups.length === 0) {
   console.log('✓ No duplicate eventNames found in journalism-manifest.json');
 } else {
