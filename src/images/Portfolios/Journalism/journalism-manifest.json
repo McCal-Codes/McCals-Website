@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "generated": "2026-03-30T16:20:36.693Z",
-  "totalEvents": 36,
+  "totalEvents": 33,
   "totalImages": 401,
   "categories": [
     "Events",
@@ -651,92 +651,72 @@
         {
           "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1429-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Students gather at CMU Trump protest",
+          "caption": "Carnegie Mellon University students gather for a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Crowd gathers for CMU Trump protest",
+          "caption": "Demonstrators gather for a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1448-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Protesters wave signs at CMU demonstration",
+          "caption": "Demonstrators wave signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1476-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Students protest at CMU campus",
+          "caption": "Carnegie Mellon University students protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1489-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Students wave signs at CMU protest",
+          "caption": "Carnegie Mellon University students wave signs during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1498-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Crowd at CMU demonstration",
+          "caption": "Demonstrators gather during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1539-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Protesters hold signs at CMU",
+          "caption": "Demonstrators hold signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1564-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Students chant at CMU protest",
+          "caption": "Carnegie Mellon University students chant during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1568-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Protesters gather at CMU campus",
+          "caption": "Demonstrators gather during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         },
         {
           "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1573-min.jpg",
-          "description": "CMU Trump Protest photography",
-          "caption": "Protesters demonstrate against former President Donald Trump at Carnegie Mellon University, Pittsburgh, Pa., July 15, 2025.",
-          "tags": [
-            "Politics"
-          ]
+          "description": "Students demonstrate at CMU protest",
+          "caption": "Carnegie Mellon University students demonstrate against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.",
+          "tags": ["Politics", "Protest"]
         }
       ],
       "published": false,
@@ -820,25 +800,6 @@
       ],
       "published": true,
       "metadata": { "tags": ["Politics", "Presidential Campaign", "Celebrity"], "published": true, "date": "2024-11-03", "description": "Scarlett Johansson canvasses for Harris — The Globe", "caption": "Actress Scarlett Johansson launches get-out-the-vote effort for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024." }
-    },
-    {
-      "eventName": "Kamala Harris Campaigns in Erie",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Kamala Harris", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Kamala Harris Erie",
-      "eventDate": { "iso": "2024-10-14", "source": "filename_extraction" },
-      "dateDisplay": "October 14, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "141024_Kamala Speaks at Erie_CAL3741.jpg", "path": "141024_Kamala Speaks at Erie_CAL3741.jpg", "description": "Vice President Kamala Harris speaks at campaign rally in Erie", "caption": "Vice President Kamala Harris addresses supporters at a presidential campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "141024_Kamala Speaks at Erie_CAL3757.jpg", "path": "141024_Kamala Speaks at Erie_CAL3757.jpg", "description": "Kamala Harris greets supporters in Erie", "caption": "Vice President Kamala Harris greets supporters after speaking at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "141024_Kamala Speaks at Erie_CAL3766.jpg", "path": "141024_Kamala Speaks at Erie_CAL3766.jpg", "description": "Kamala Harris speaks to Erie crowd", "caption": "Vice President Kamala Harris speaks to supporters gathered for a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "141024_Kamala Speaks at Erie_CAL3804.jpg", "path": "141024_Kamala Speaks at Erie_CAL3804.jpg", "description": "Kamala Harris waves to Erie supporters", "caption": "Vice President Kamala Harris waves to the crowd after addressing supporters at a campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "141024_Kamala Speaks at Erie_CAL3851.jpg", "path": "141024_Kamala Speaks at Erie_CAL3851.jpg", "description": "Kamala Harris at Erie campaign rally", "caption": "Vice President Kamala Harris speaks about her presidential campaign to supporters in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "141024_Kamala Speaks at Erie_CAL4115.jpg", "path": "141024_Kamala Speaks at Erie_CAL4115.jpg", "description": "Crowd cheers for Kamala Harris in Erie", "caption": "Supporters cheer as Vice President Kamala Harris speaks at a presidential campaign rally in Erie, Pa., Oct. 14, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-14", "description": "Kamala Harris campaigns in Erie — The Globe", "caption": "Vice President Kamala Harris addresses supporters at a campaign rally in Erie, Pa., Oct. 14, 2024." }
     },
     {
       "eventName": "JD Vance Rallies in Johnstown",
@@ -1094,122 +1055,6 @@
       ],
       "published": true,
       "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-14", "description": "Kamala Harris campaigns in Erie — The Globe", "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024." }
-    },
-    {
-      "eventName": "Kamala Harris Arrives in Johnstown",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Kamala Harris", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Kamala Arrives Johnstown",
-      "eventDate": { "iso": "2024-09-15", "source": "filename_extraction" },
-      "dateDisplay": "September 15, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "240915_Kamala Arrival in Johnstown_1972_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1972_CAL_HighResolution.jpg", "description": "Vice President Kamala Harris arrives in Johnstown", "caption": "Vice President Kamala Harris arrives for a campaign event in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1973_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1973_CAL_HighResolution.jpg", "description": "Vice President Kamala Harris greets supporters in Johnstown", "caption": "Vice President Kamala Harris greets supporters upon arrival in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1974_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1974_CAL_HighResolution.jpg", "description": "Vice President Kamala Harris at Johnstown arrival", "caption": "Vice President Kamala Harris arrives for a campaign event in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1975_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1975_CAL_HighResolution.jpg", "description": "Vice President Kamala Harris campaigns in Johnstown", "caption": "Vice President Kamala Harris greets supporters upon arrival in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1976_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1976_CAL_HighResolution.jpg", "description": "Vice President Kamala Harris at Johnstown campaign stop", "caption": "Vice President Kamala Harris arrives for a campaign event in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240915_Kamala Arrival in Johnstown_1977_CAL_HighResolution.jpg", "path": "240915_Kamala Arrival in Johnstown_1977_CAL_HighResolution.jpg", "description": "Vice President Kamala Harris at Johnstown arrival", "caption": "Vice President Kamala Harris greets supporters upon arrival in Johnstown, Pa., Sept. 15, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-09-15", "description": "Kamala Harris arrives in Johnstown — The Globe", "caption": "Vice President Kamala Harris arrives for a campaign event in Johnstown, Pa., Sept. 15, 2024." }
-    },
-    {
-      "eventName": "JD Vance Campaigns in Johnstown",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "JD Vance", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/JD Vance Johnstown",
-      "eventDate": { "iso": "2024-10-12", "source": "filename_extraction" },
-      "dateDisplay": "October 12, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "241012_JD Vance in Johnstown_CAL3495.jpg", "path": "241012_JD Vance in Johnstown_CAL3495.jpg", "description": "Sen. JD Vance speaks at campaign rally in Johnstown", "caption": "Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3497.jpg", "path": "241012_JD Vance in Johnstown_CAL3497.jpg", "description": "Sen. JD Vance addresses supporters in Johnstown", "caption": "Sen. JD Vance, R-Ohio, addresses supporters at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3502.jpg", "path": "241012_JD Vance in Johnstown_CAL3502.jpg", "description": "Sen. JD Vance campaigns in Johnstown", "caption": "Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3507.jpg", "path": "241012_JD Vance in Johnstown_CAL3507.jpg", "description": "Sen. JD Vance at campaign event in Johnstown", "caption": "Sen. JD Vance, R-Ohio, addresses supporters at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3511.jpg", "path": "241012_JD Vance in Johnstown_CAL3511.jpg", "description": "Sen. JD Vance speaks to crowd in Johnstown", "caption": "Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "241012_JD Vance in Johnstown_CAL3514.jpg", "path": "241012_JD Vance in Johnstown_CAL3514.jpg", "description": "Sen. JD Vance at Johnstown rally", "caption": "Sen. JD Vance, R-Ohio, addresses supporters at a campaign rally in Johnstown, Pa., Oct. 12, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-12", "description": "JD Vance campaigns in Johnstown — The Globe", "caption": "Sen. JD Vance, R-Ohio, speaks at a campaign rally in Johnstown, Pa., Oct. 12, 2024." }
-    },
-    {
-      "eventName": "Obama Speaks at Pittsburgh",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Barack Obama", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Obama in Pittsburgh",
-      "eventDate": { "iso": "2024-10-10", "source": "filename_extraction" },
-      "dateDisplay": "October 10, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg", "description": "Former President Obama speaks at campaign event in Pittsburgh", "caption": "Former President Barack Obama speaks at a campaign rally in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg", "description": "Former President Obama addresses supporters in Pittsburgh", "caption": "Former President Barack Obama addresses supporters at a campaign rally in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg", "description": "Former President Obama campaigns in Pittsburgh", "caption": "Former President Barack Obama speaks at a campaign rally in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg", "description": "Former President Obama at campaign rally in Pittsburgh", "caption": "Former President Barack Obama addresses supporters at a campaign rally in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg", "description": "Former President Obama speaks to crowd in Pittsburgh", "caption": "Former President Barack Obama speaks at a campaign rally in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "101024_Obama Speaks at Pittsburgh_CAL3041.jpg", "path": "101024_Obama Speaks at Pittsburgh_CAL3041.jpg", "description": "Former President Obama at Pittsburgh campaign event", "caption": "Former President Barack Obama addresses supporters at a campaign rally in Pittsburgh, Pa., Oct. 10, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-10-10", "description": "Barack Obama campaigns in Pittsburgh — The Globe", "caption": "Former President Barack Obama speaks at a campaign rally in Pittsburgh, Pa., Oct. 10, 2024." }
-    },
-    {
-      "eventName": "Trump Rally in Erie",
-      "category": "Politics",
-      "tags": ["Politics", "Presidential Campaign", "Donald Trump", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/Trump Rally Erie",
-      "eventDate": { "iso": "2024-09-29", "source": "filename_extraction" },
-      "dateDisplay": "September 29, 2024",
-      "totalImages": 6,
-      "images": [
-        { "filename": "240929_Trump Rally in Erie__CAL2137.jpg", "path": "240929_Trump Rally in Erie__CAL2137.jpg", "description": "Former President Trump speaks at campaign rally in Erie", "caption": "Former President Donald Trump speaks at a campaign rally in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2139.jpg", "path": "240929_Trump Rally in Erie__CAL2139.jpg", "description": "Trump addresses supporters at Erie rally", "caption": "Former President Donald Trump addresses supporters at a campaign rally in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2148.jpg", "path": "240929_Trump Rally in Erie__CAL2148.jpg", "description": "Trump speaks to crowd in Erie", "caption": "Former President Donald Trump speaks to supporters at a campaign rally in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2149.jpg", "path": "240929_Trump Rally in Erie__CAL2149.jpg", "description": "Trump at campaign event in Erie", "caption": "Former President Donald Trump addresses supporters at a campaign rally in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2157.jpg", "path": "240929_Trump Rally in Erie__CAL2157.jpg", "description": "Trump campaigns in Erie", "caption": "Former President Donald Trump speaks at a campaign rally in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] },
-        { "filename": "240929_Trump Rally in Erie__CAL2163.jpg", "path": "240929_Trump Rally in Erie__CAL2163.jpg", "description": "Trump rally in Erie", "caption": "Former President Donald Trump addresses supporters at a campaign rally in Erie, Pa., Sept. 29, 2024.", "tags": ["Politics", "Campaign"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Presidential Campaign"], "published": true, "date": "2024-09-29", "description": "Trump campaigns in Erie — The Globe", "caption": "Former President Donald Trump speaks at a campaign rally in Erie, Pa., Sept. 29, 2024." }
-    },
-    {
-      "eventName": "CMU Trump Protest",
-      "category": "Politics",
-      "tags": ["Politics", "Protest", "The Globe", "Photojournalism"],
-      "folderPath": "Politics/CMU Trump Protest",
-      "eventDate": { "iso": "2025-07-15", "source": "filename_extraction" },
-      "dateDisplay": "July 15, 2025",
-      "totalImages": 27,
-      "images": [
-        { "filename": "250715_CMU Trump Protest_CAL1091-min.jpg", "path": "250715_CMU Trump Protest_CAL1091-min.jpg", "description": "Protesters demonstrate against Trump policies at Carnegie Mellon", "caption": "Demonstrators protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1106-min.jpg", "path": "250715_CMU Trump Protest_CAL1106-min.jpg", "description": "Students hold signs at CMU Trump protest", "caption": "Carnegie Mellon University students hold signs during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1107-min.jpg", "path": "250715_CMU Trump Protest_CAL1107-min.jpg", "description": "Protesters gather at CMU to demonstrate", "caption": "Demonstrators gather at Carnegie Mellon University to protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1123-min.jpg", "path": "250715_CMU Trump Protest_CAL1123-min.jpg", "description": "Students protest Trump at Carnegie Mellon campus", "caption": "Carnegie Mellon University students demonstrate against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1126-min.jpg", "path": "250715_CMU Trump Protest_CAL1126-min.jpg", "description": "Protesters march at CMU Trump demonstration", "caption": "Demonstrators march during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1131-min.jpg", "path": "250715_CMU Trump Protest_CAL1131-min.jpg", "description": "CMU students protest Trump policies", "caption": "Carnegie Mellon University students protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1141-min.jpg", "path": "250715_CMU Trump Protest_CAL1141-min.jpg", "description": "Demonstrators hold signs at CMU protest", "caption": "Demonstrators hold signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1146-min.jpg", "path": "250715_CMU Trump Protest_CAL1146-min.jpg", "description": "Protesters chant at CMU Trump demonstration", "caption": "Demonstrators chant during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1152-min.jpg", "path": "250715_CMU Trump Protest_CAL1152-min.jpg", "description": "Students speak at CMU Trump protest", "caption": "A Carnegie Mellon University student addresses the crowd during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1156-min.jpg", "path": "250715_CMU Trump Protest_CAL1156-min.jpg", "description": "Crowd gathers for CMU Trump protest", "caption": "Demonstrators gather for a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1162-min.jpg", "path": "250715_CMU Trump Protest_CAL1162-min.jpg", "description": "Protesters wave flags at CMU demonstration", "caption": "Demonstrators wave flags during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1168-min.jpg", "path": "250715_CMU Trump Protest_CAL1168-min.jpg", "description": "Students participate in CMU Trump protest", "caption": "Carnegie Mellon University students participate in a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1173-min.jpg", "path": "250715_CMU Trump Protest_CAL1173-min.jpg", "description": "Protesters listen to speakers at CMU demonstration", "caption": "Demonstrators listen to speakers during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1184-min.jpg", "path": "250715_CMU Trump Protest_CAL1184-min.jpg", "description": "Demonstrators carry signs at CMU protest", "caption": "Demonstrators carry signs during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1186-min.jpg", "path": "250715_CMU Trump Protest_CAL1186-min.jpg", "description": "Crowd at CMU Trump protest", "caption": "Demonstrators gather during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1192-min.jpg", "path": "250715_CMU Trump Protest_CAL1192-min.jpg", "description": "Protesters march through CMU campus", "caption": "Demonstrators march through Carnegie Mellon University's campus during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1196-min.jpg", "path": "250715_CMU Trump Protest_CAL1196-min.jpg", "description": "Students chant at CMU Trump demonstration", "caption": "Carnegie Mellon University students chant during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1201-min.jpg", "path": "250715_CMU Trump Protest_CAL1201-min.jpg", "description": "Demonstrators hold banners at CMU protest", "caption": "Demonstrators hold banners during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1206-min.jpg", "path": "250715_CMU Trump Protest_CAL1206-min.jpg", "description": "Protesters gather at CMU campus entrance", "caption": "Demonstrators gather at the entrance to Carnegie Mellon University's campus during a protest against former President Donald Trump's policies in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1249-min.jpg", "path": "250715_CMU Trump Protest_CAL1249-min.jpg", "description": "Students demonstrate at CMU Trump protest", "caption": "Carnegie Mellon University students demonstrate against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1278-min.jpg", "path": "250715_CMU Trump Protest_CAL1278-min.jpg", "description": "Protesters sit during CMU demonstration", "caption": "Demonstrators sit during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1297-min.jpg", "path": "250715_CMU Trump Protest_CAL1297-min.jpg", "description": "Demonstrators stand together at CMU protest", "caption": "Demonstrators stand together during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1301-min.jpg", "path": "250715_CMU Trump Protest_CAL1301-min.jpg", "description": "Students wave signs at CMU Trump protest", "caption": "Carnegie Mellon University students wave signs during a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1303-min.jpg", "path": "250715_CMU Trump Protest_CAL1303-min.jpg", "description": "Protesters listen at CMU demonstration", "caption": "Demonstrators listen to speakers during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1325-min.jpg", "path": "250715_CMU Trump Protest_CAL1325-min.jpg", "description": "Crowd listens to speakers at CMU protest", "caption": "Demonstrators listen to speakers during a protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1340-min.jpg", "path": "250715_CMU Trump Protest_CAL1340-min.jpg", "description": "Students gather for CMU Trump protest", "caption": "Carnegie Mellon University students gather for a protest against former President Donald Trump's policies on campus in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] },
-        { "filename": "250715_CMU Trump Protest_CAL1353-min.jpg", "path": "250715_CMU Trump Protest_CAL1353-min.jpg", "description": "Demonstrators protest at CMU campus", "caption": "Demonstrators protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025.", "tags": ["Politics", "Protest"] }
-      ],
-      "published": true,
-      "metadata": { "tags": ["Politics", "Protest"], "published": true, "date": "2025-07-15", "description": "Trump protest at Carnegie Mellon University — The Globe", "caption": "Demonstrators protest against former President Donald Trump's policies at Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025." }
     }
   ]
 }
