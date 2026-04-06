@@ -93,4 +93,11 @@ playwright/.cache/
 # Test preview files (tracked in tests/previews/)
 tests/previews/*.html
 
+# Large audit/temporary output files
+updates/duplicate-*.json
+updates/exports-audit-*.json
+updates/*-report-*.json
+updates/*-plan.json
+updates/*-albums.json
+
 .vercel
