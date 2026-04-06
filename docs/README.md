@@ -54,6 +54,11 @@ Deployment guides and hosting setup:
 - `PACKAGE-DEPLOYMENT.md` - Package-based deployment
 - `SETUP-GITHUB-HOSTING.md` - GitHub Pages hosting setup
 
+### 🛠 **runbooks/** - Operational Playbooks
+Runbooks for live launches, incident response, and platform troubleshooting:
+- `runbooks/vercel-production-launch.md` - Production cutover and rollback workflow
+- `runbooks/vercel-deployment-troubleshooting.md` - April 6, 2026 incident lessons, prevention checks, and Vercel CLI fallback flow
+
 ### 🗄️ **archive/** - Completed & Historical Documents
 Archived documentation and completed project records:
 - `widget-unification-todo.md` - Completed widget unification tasks
@@ -121,5 +126,4 @@ For technical details, see the main project README and individual widget documen
 - **Minor** (vN.M): Small tweaks → increment by 0.1
 - Each widget maintains its own CHANGELOG.md
 - Repository-level changes tracked in root CHANGELOG.md
-
 

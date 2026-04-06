@@ -2,6 +2,8 @@
 
 This runbook covers the repository-side and dashboard-side work needed to launch `sites/mcc-cal-vite` on Vercel with a controlled cutover.
 
+For the incident-driven troubleshooting checklist created after the April 6, 2026 launch failures, see [vercel-deployment-troubleshooting.md](vercel-deployment-troubleshooting.md).
+
 ## Deployment Flow
 
 1. Push to the branch connected to the Vercel project.
