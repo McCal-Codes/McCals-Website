@@ -1,0 +1,711 @@
+{
+  "timestamp": "2026-04-06T15:18:38.116Z",
+  "summary": {
+    "totalImages": 189,
+    "withGoodCaptions": 23,
+    "withShortCaptions": 0,
+    "missingCaptions": 166
+  },
+  "needsWork": [
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5175-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5182-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5189-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5190-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5223-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5239-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5243-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5252-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5256-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5260-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5266-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5272-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Brentwood Vs Springdale",
+      "filename": "250912_Brentwood vs Springdale_CAL5275-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-09-12"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2646-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2647-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2649-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2650-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2651-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2654-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2657-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2660-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2666-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2670-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2674-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2678-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2681-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2682-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2683-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2685-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2687-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2690-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2691-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "Historic Society Yard Sale August 2025",
+      "filename": "250802_Brentwood Yard Sale _CAL2693-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-08-02"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "CMU Trump Protest",
+      "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-07-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9640-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9666-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9674-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9703-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9709-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9717-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9739-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9759-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9773-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9825-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Butler Democracy Protest",
+      "filename": "250315_Butler Democracy Protest_CAL9832-min.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2025-03-15"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3538.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3563.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3588.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3618.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3648.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3686.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3716.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3737.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL3746.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4102.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4106.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4115.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4391.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    },
+    {
+      "event": "Kamala Harris in Pittsburgh on Election Eve",
+      "filename": "241104_Kamla Speaks in Pittsburgh on Election Eve_CAL4421.jpg",
+      "issue": "missing caption",
+      "current": "",
+      "date": "2024-11-04"
+    }
+  ]
+}
