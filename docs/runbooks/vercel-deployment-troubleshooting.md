@@ -16,6 +16,15 @@ This runbook captures the deployment failures we hit on April 6, 2026 while laun
 
 If step 2 fails locally, fix the repo before looking for a Vercel-side explanation.
 
+## Local Development Rule
+
+For `sites/mcc-cal-vite`, use the right dev entry point for the job:
+
+- `cd sites/mcc-cal-vite && cmd /c npm run dev` for frontend-only work.
+- `cd sites/mcc-cal-vite && cmd /c npm run dev:vercel` when testing routes that hit `/api/*`, especially scheduling and booking flows.
+
+This matters because the Vite dev server does not execute the Vercel Functions under `sites/mcc-cal-vite/api/`, while `vercel dev` does.
+
 ## Failure Class 1: Vercel Fails Before the Build Starts
 
 ### Symptom

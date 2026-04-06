@@ -1,4 +1,3 @@
-
 # McCal Media Site Standards (Vite-Focused)
 
 This document contains the current standards, conventions, and best practices for the Vite-based production site.
@@ -7,15 +6,14 @@ This document contains the current standards, conventions, and best practices fo
 
 - [McCal Media Site Standards (Vite-Focused)](#mccal-media-site-standards-vite-focused)
   - [Table of Contents](#table-of-contents)
-  - [Workspace \& Repository Standards](#workspace--repository-standards)
-  - [Performance \& Accessibility](#performance--accessibility)
+  - [Workspace & Repository Standards](#workspace--repository-standards)
+  - [Performance & Accessibility](#performance--accessibility)
   - [SEO Standards](#seo-standards)
-  - [Deployment \& Build](#deployment--build)
-  - [Vite Site Standards (2026+)](#vite-site-standards-2026)
-  - [New Vite Site Standards](#new-vite-site-standards)
+  - [Migration & Reference](#migration--reference)
+  - [Deployment & Build](#deployment--build)
   - [Quick Start Guide](#quick-start-guide)
-    - [For New Widget Development](#for-new-widget-development)
-    - [For Widget Enhancement](#for-widget-enhancement)
+    - [For New Component Development](#for-new-component-development)
+    - [For Component Enhancement](#for-component-enhancement)
     - [For Asset Organization](#for-asset-organization)
   - [Development Workflow](#development-workflow)
 
@@ -24,16 +22,21 @@ This document contains the current standards, conventions, and best practices fo
 ## Workspace & Repository Standards
 - [workspace-organization.md](./workspace-organization.md): Folder structure, archival, validation, and preflight/afterflight checklists.
 - [date-naming.md](./date-naming.md): Naming conventions for images and manifests.
-- [versioning.md](./versioning.md): Versioning guidelines for site and assets.
+- [scripts-folder-organization.md](./scripts-folder-organization.md): Scripts directory structure.
 
 ## Performance & Accessibility
 - [ui-patterns.md](./ui-patterns.md): UI and accessibility patterns for the Vite site.
-- [enhancements.md](./enhancements.md): Modern enhancement patterns for Vite.
+- [accessibility-patterns.md](./accessibility-patterns.md): Detailed accessibility guidelines.
+- [performance-standards.md](./performance-standards.md): Performance optimization guidelines.
 
 ## SEO Standards
-- [image-seo-standards.md](./image-seo-standards.md): Image SEO for Vite (to be expanded).
-- [seo-starter-guide.md](./seo-starter-guide.md): SEO starter guide for Vite (to be expanded).
-- [seo-testing-guide.md](./seo-testing-guide.md): SEO validation for Vite (to be expanded).
+- [image-seo-standards.md](./image-seo-standards.md): Image SEO for Vite.
+- [seo-starter-guide.md](./seo-starter-guide.md): SEO starter guide for Vite.
+- [seo-testing-guide.md](./seo-testing-guide.md): SEO validation for Vite.
+
+## Migration & Reference
+- [widget-to-vite.md](./widget-to-vite.md): Migration guide from legacy widgets to Vite.
+- **Legacy Standards**: Archived in `archive/legacy-standards/` for reference only.
 
 ## Deployment & Build
 - [deployment/DEPLOYMENT.md](../deployment/DEPLOYMENT.md): Main deployment documentation.
@@ -43,39 +46,21 @@ This document contains the current standards, conventions, and best practices fo
 
 ---
 
-
-## Vite Site Standards (2026+)
-
-
-## New Vite Site Standards
-
-- [UI Patterns](./ui-patterns.md)
-- [Enhancements](./enhancements.md)
-- [Debugging](./debugging.md)
-- [Changelog Standard](./changelog-standard.md)
-
----
-
-## Legacy Widget/Squarespace Docs
-
-For all legacy widget and Squarespace documentation, see [legacy/README.md](./legacy/README.md). These are retained for migration/reference only. All new work should follow the Vite standards above.
-
----
 ## Quick Start Guide
 
-### For New Widget Development
-1. Read: [widget-reference.md](./widget-reference.md) (quick checklist)
-2. Reference: [widget-standards.md](./widget-standards.md) (detailed patterns)
-3. Follow: Repository versioning from [versioning.md](./versioning.md)
+### For New Component Development
+1. Reference: [ui-patterns.md](./ui-patterns.md) for UI guidelines
+2. Follow: [workspace-organization.md](./workspace-organization.md) for structure
+3. Test: Validate with [performance-standards.md](./performance-standards.md)
 
-### For Widget Enhancement  
-1. Review: [widget-standards.md](./widget-standards.md) (proven improvements)
-2. Apply: [widget-development.md](./widget-development.md) (systematic process)
+### For Component Enhancement
+1. Review: [accessibility-patterns.md](./accessibility-patterns.md) for improvements
+2. Apply: Systematic process following existing patterns
 3. Test: Validate with existing standards
 
 ### For Asset Organization
 1. Follow: [date-naming.md](./date-naming.md) (photo naming)
-2. Version: Use [versioning.md](./versioning.md) guidelines
+2. Review: [image-seo-standards.md](./image-seo-standards.md) for optimization
 
 ---
 
@@ -83,12 +68,12 @@ For all legacy widget and Squarespace documentation, see [legacy/README.md](./le
 
 ```mermaid
 graph TD
-    A[New Widget] --> B[Standards Reference]
+    A[New Component] --> B[Standards Reference]
     B --> C[Implement Patterns]
     C --> D[Test & Validate]
-    D --> E[Document & Version]
+    D --> E[Document & Commit]
     
-    F[Enhance Existing] --> G[Enhancement Patterns]
+    F[Enhance Existing] --> G[Accessibility/Performance Review]
     G --> H[Apply Systematically]
     H --> D
     

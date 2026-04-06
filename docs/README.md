@@ -3,13 +3,11 @@
 Welcome to the comprehensive documentation for McCal's Website project. This documentation is organized by category for easy navigation.
 
 ## Quick links
-- Onboarding: [docs/ONBOARDING.md](../docs/ONBOARDING.md)
-- Workspace standards: [standards/workspace-organization.md](standards/workspace-organization.md)
-
-// Widget quick checklist: [legacy/widget-reference.md](legacy/widget-reference.md)
-// Full widget standards: [legacy/widget-standards.md](legacy/widget-standards.md)
-- Performance reference: [standards/performance-standards.md](standards/performance-standards.md)
-- Image SEO: [standards/image-seo-standards.md](standards/image-seo-standards.md)
+- **Onboarding**: [ONBOARDING.md](./ONBOARDING.md)
+- **Workspace Standards**: [standards/workspace-organization.md](./standards/workspace-organization.md)
+- **UI Patterns**: [standards/ui-patterns.md](./standards/ui-patterns.md)
+- **Performance**: [standards/performance-standards.md](./standards/performance-standards.md)
+- **Image SEO**: [standards/image-seo-standards.md](./standards/image-seo-standards.md)
 
 ## 📁 Directory Structure
 
@@ -19,12 +17,10 @@ Step-by-step guides for content creation and management:
 - `journalism-import-workflow.md` - Process for importing journalism content
 - `event-portfolio-ingest.md` - Event portfolio content ingestion
 
-### 🤖 **automation/** - Automated Processes
-Documentation for automated systems and scripts:
-- `CONCERT-AUTO-READER.md` - Concert photo organization automation
 
 ### 🔌 **integrations/** - External Services & Platforms
 Integration guides and external resource documentation:
+- `mcp-memory-server.md` - **MCP Knowledge Graph Memory Server for persistent AI memory**
 - `google-reviews-extraction.md` - Google Reviews data extraction
 - `google-reviews-integration-options.md` - Integration options for reviews
 - `logo-sources.md` - External logo and branding resources
@@ -34,14 +30,14 @@ Integration guides and external resource documentation:
 
 
 ### 📏 **standards/** - Coding, Organization & Validation Standards ⭐ **EXPANDED**
-Project standards, conventions, and versioning:
+Project standards, conventions, and best practices:
 - `workspace-organization.md` - **Single source of truth for scripts folder structure, archival, workspace validation, and preflight/afterflight checklists**
-- `widget-reference.md` - Quick reference for widget development
-- `widget-standards.md` - Comprehensive widget standards guide
-- `widget-development.md` - Systematic enhancement methodology
+- `ui-patterns.md` - UI component patterns and accessibility guidelines
+- `accessibility-patterns.md` - Detailed accessibility implementation guide
+- `performance-standards.md` - Performance optimization and monitoring
 - `seo-testing-guide.md` - Comprehensive SEO testing and validation methods
 - `date-naming.md` - File and folder naming conventions
-- `versioning.md` - Project versioning guidelines
+- `widget-to-vite.md` - Migration guide from legacy widgets to Vite
 - `security-organization-prompt.md` - Ready-to-use prompt for non-breaking security, organization, and efficiency reviews
 
 ### 🧠 **learned/** - Short writeups capturing practical lessons and postmortems
@@ -56,6 +52,7 @@ Deployment guides and hosting setup:
 
 ### 🛠 **runbooks/** - Operational Playbooks
 Runbooks for live launches, incident response, and platform troubleshooting:
+- `runbooks/vercel-admin-console.md` - Internal admin app architecture, rollout plan, and guardrails
 - `runbooks/vercel-production-launch.md` - Production cutover and rollback workflow
 - `runbooks/vercel-deployment-troubleshooting.md` - April 6, 2026 incident lessons, prevention checks, and Vercel CLI fallback flow
 
@@ -70,18 +67,22 @@ Archived documentation and completed project records:
 
 ## 🔍 Quick Find
 
+### AI & Memory
+- **MCP Memory Server**: `integrations/mcp-memory-server.md` - Persistent knowledge graph for Claude
+
 ### Common Tasks
 - **Adding new photos**: `workflows/portfolio-image-import.md`
+- **Planning the internal admin app**: `runbooks/vercel-admin-console.md`
 - **Deploying changes**: `deployment/DEPLOY-CHEATSHEET.md`
 - **File naming**: `standards/date-naming.md`
-- **Version updates**: `standards/versioning.md`
-- **Widget development**: `standards/widget-reference.md` ⭐
-- **Widget enhancement**: `standards/widget-standards.md` and `standards/widget-development.md`
+- **UI development**: `standards/ui-patterns.md`
+- **Performance**: `standards/performance-standards.md`
+- **Accessibility**: `standards/accessibility-patterns.md`
 
 ### Development
-- **Automation scripts**: `automation/`
 - **External integrations**: `integrations/`
 - **Deployment setup**: `deployment/`
+- **Standards & patterns**: `standards/`
 
 ### Reference
 - **Project standards**: `standards/`
@@ -94,10 +95,10 @@ When adding new documentation:
 
 1. **Choose the right category**:
    - `workflows/` - Step-by-step processes
-   - `automation/` - Script and automation docs
    - `integrations/` - External service docs
    - `standards/` - Rules and conventions
    - `deployment/` - Deployment and hosting
+   - `runbooks/` - Operational procedures
    - `archive/` - Completed or outdated docs
 
 2. **Use descriptive filenames** following the date-naming standards
@@ -106,24 +107,21 @@ When adding new documentation:
 
 ## 🏗️ Project Architecture
 
-This is a Squarespace widget development workspace where:
-- **Production**: Squarespace site embeds versioned widget HTML from `src/widgets/`
-- **Development**: Local test harness in `src/site/` 
-- **Pipeline**: Photo assets → manifest generation → self-contained HTML widgets
+This is a **Vite-based static site** with the following structure:
 
-For technical details, see the main project README and individual widget documentation.
-2. Add images and optional `manifest.json`:
-   ```json
-   {
-     "date": "2025-09-16",
-     "images": ["photo1.jpg", "photo2.jpg"]
-   }
-   ```
-3. Push to main branch
+- **Production**: Static site deployed to GitHub Pages (or Vercel)
+- **Development**: Local Vite dev server (`npm run dev`)
+- **Components**: React components in `src/components/`
+- **Assets**: Images and manifests in `src/images/Portfolios/`
+- **Build**: Vite bundles to `dist/` for deployment
+
+For technical details, see the main project README and [ONBOARDING.md](./ONBOARDING.md).
 
 ## Versioning Policy
-- **Major** (vN.0): Significant features/visual changes → new major version file
-- **Minor** (vN.M): Small tweaks → increment by 0.1
-- Each widget maintains its own CHANGELOG.md
-- Repository-level changes tracked in root CHANGELOG.md
 
+- **Git-based versioning**: All changes tracked via Git commits and tags
+- **Component versioning**: Major component updates documented in CHANGELOG.md
+- **Site releases**: Tagged releases for major site milestones (v2026.1.0, etc.)
+- **Manifest versioning**: Photo manifests use date-based versioning
+
+See [standards/date-naming.md](./standards/date-naming.md) for file naming conventions.

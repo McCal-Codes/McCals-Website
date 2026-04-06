@@ -140,4 +140,4 @@ This document defines the core UI patterns for the Vite-based production site. A
 
 ---
 
-> For legacy widget UI patterns, see `../legacy/widget-ui-colors-and-buttons.md`.
+*These patterns ensure consistent, accessible UI across the Vite site.*
