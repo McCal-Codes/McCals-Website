@@ -34,6 +34,9 @@ export default function BlogPage() {
     relatedPosts,
     getAuthor,
   } = useBlogPageData(slug);
+  const resolvedDocumentPost = resolvedPost?.body
+    ? { ...resolvedPost, body: resolvedPost.body }
+    : null;
 
   // Scroll to top when slug changes
   useEffect(() => {
@@ -172,19 +175,23 @@ export default function BlogPage() {
 
             {postLoading && <div className="blog-status">Loading story...</div>}
 
-            {!postLoading && (postError || !resolvedPost) && (
+            {!postLoading && (postError || !resolvedDocumentPost) && (
               <div className="blog-message blog-message--error">
                 {postError ? `Failed to load this story: ${postError.message}` : 'This story could not be found.'}
               </div>
             )}
 
-            {!postLoading && resolvedPost && (
+            {!postLoading && resolvedDocumentPost && (
               <>
                 <header className="story__header">
-                  {resolvedPost.category && <p className="blog-kicker">{resolvedPost.category}</p>}
-                  <h1 className="story__title">{resolvedPost.title}</h1>
-                  {resolvedPost.excerpt && <p className="story__excerpt">{resolvedPost.excerpt}</p>}
-                  <StoryMeta post={resolvedPost} author={resolvedAuthor} />
+                  {resolvedDocumentPost.category && (
+                    <p className="blog-kicker">{resolvedDocumentPost.category}</p>
+                  )}
+                  <h1 className="story__title">{resolvedDocumentPost.title}</h1>
+                  {resolvedDocumentPost.excerpt && (
+                    <p className="story__excerpt">{resolvedDocumentPost.excerpt}</p>
+                  )}
+                  <StoryMeta post={resolvedDocumentPost} author={resolvedAuthor} />
                 </header>
 
                 {(leadImage || leadImageFallback) && (
@@ -192,20 +199,22 @@ export default function BlogPage() {
                     <SmartImage
                       src={leadImage || leadImageFallback}
                       fallbackSrc={leadImageFallback}
-                      alt={resolvedPost.leadImageAlt || resolvedPost.title}
+                      alt={resolvedDocumentPost.leadImageAlt || resolvedDocumentPost.title}
                       className="story__lead-image"
                       loading="eager"
                       fetchPriority="high"
                       placeholderClassName="blog-card__placeholder"
                     />
-                    {resolvedPost.leadImageCaption && (
-                      <figcaption className="story__caption">{resolvedPost.leadImageCaption}</figcaption>
+                    {resolvedDocumentPost.leadImageCaption && (
+                      <figcaption className="story__caption">
+                        {resolvedDocumentPost.leadImageCaption}
+                      </figcaption>
                     )}
                   </figure>
                 )}
 
-                <StoryBody slug={resolvedPost.slug} post={resolvedPost} />
-                <StoryCitations sources={resolvedPost.sources} />
+                <StoryBody slug={resolvedDocumentPost.slug} post={resolvedDocumentPost} />
+                <StoryCitations sources={resolvedDocumentPost.sources} />
 
                 {(resolvedAuthor.avatar || resolvedAuthor.bio) && (
                   <section className="story__author-card" aria-labelledby="story-author-heading">
