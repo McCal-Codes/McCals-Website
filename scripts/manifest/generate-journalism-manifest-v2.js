@@ -140,7 +140,7 @@ async function loadCaptions(eventDir) {
   return null;
 }
 
-async function processEvent(categoryName, eventName, eventDir) {
+async function processEvent(categoryName, eventName, eventDir, folderPathOverride) {
   log(`Processing event: ${categoryName}/${eventName}`);
   
   try {
@@ -204,7 +204,7 @@ async function processEvent(categoryName, eventName, eventDir) {
       eventName: cleanTitle(eventName),
       category: categoryName,
       tags: tags,
-      folderPath: `${categoryName}/${eventName}`,
+      folderPath: folderPathOverride || `${categoryName}/${eventName}`,
       eventDate: {
         iso: eventDate,
         source: metadata?.date ? 'metadata' : 'filename_extraction'
@@ -253,7 +253,12 @@ async function processCategory(categoryName, categoryDir) {
       log(`Found ${directImages.length} direct images in ${categoryName}`);
       
       // Create a virtual event for loose files
-      const looseEvent = await processEvent(categoryName, `${categoryName} Portfolio`, categoryDir);
+      const looseEvent = await processEvent(
+        categoryName,
+        `${categoryName} Portfolio`,
+        categoryDir,
+        categoryName,
+      );
       if (looseEvent) {
         events.push(looseEvent);
       }
