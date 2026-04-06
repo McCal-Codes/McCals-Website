@@ -109,7 +109,7 @@ export function buildIndexJsonLd(
 }
 
 export function buildPostJsonLd(
-  post: BlogPostDocument,
+  post: BlogManifestPost & Partial<BlogPostDocument>,
   authorName: string,
   image?: string
 ) {

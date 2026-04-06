@@ -4,7 +4,6 @@ import type {
   BookingStep,
   DayAvailability,
   RequesterInfo,
-  Booking,
 } from '../types/booking';
 import { getBookingTypeById } from '../config/bookingTypes';
 import { getRequesterTimezone } from '../utils/timezone';
