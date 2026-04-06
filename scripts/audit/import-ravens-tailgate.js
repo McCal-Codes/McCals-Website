@@ -71,7 +71,7 @@ async function importRavens() {
     type: 'Events',
     category: 'Event Photography',
     name: 'Ravens at Pittsburgh Tailgate',
-    folderPath: 'Events/Ravens at Pittsburgh Tailgate',
+    folderPath: 'Events/ravens-tailgate',
     dateDisplay: ravens.dateDisplay,
     date: ravens.date,
     client: 'Terrible Tailgate',

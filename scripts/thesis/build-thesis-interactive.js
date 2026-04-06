@@ -64,7 +64,7 @@ function writeHTML() {
   <meta name="description" content="Interactive thesis prototype with scroll-reveal imagery and an accessible story drawer with audio transcript." />
   <meta property="og:title" content="Interactive Thesis — Preview" />
   <meta property="og:description" content="Scroll-reveal imagery and an accessible story drawer with audio transcript." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Journalism/Politics/Obama%20Speaks%20at%20Pitt/101024_Obama%20Speaks%20at%20Pittsburgh_CAL3038.jpg" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Journalism/Politics/obama-speaks-pitt/101024_Obama%20Speaks%20at%20Pittsburgh_CAL3038.jpg" />
   <link rel="preload" href="app.js" as="script" />
   <link rel="stylesheet" href="styles.css" />
   <style>body{margin:0}</style>

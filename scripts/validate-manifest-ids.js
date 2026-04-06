@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_DIR = path.join(process.cwd(), 'src', 'images', 'Portfolios');
+const BASE_DIR = path.resolve(__dirname, '..', 'src', 'images', 'Portfolios');
 
 function generateId(title, suffix) {
   const base = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
