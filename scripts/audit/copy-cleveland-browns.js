@@ -11,7 +11,6 @@ import { copyFile } from 'fs/promises';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const SOURCE_BASE = 'H:\\My Drive\\03 - Multimedia\\01 - Photo\\01 - Active Projects\\Exports\\2025\\Sports\\Terrible Tailgate';
 const TARGET_DIR = 'i:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Cleveland Browns at Pittsburgh Tailgate';
 
 async function copyPhotos() {

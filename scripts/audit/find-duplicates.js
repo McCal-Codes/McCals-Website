@@ -5,11 +5,7 @@
  */
 
 import { promises as fs } from 'fs';
-import { join, dirname, extname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { join, extname } from 'path';
 
 const EXPORTS_PATH = 'H:\\My Drive\\03 - Multimedia\\01 - Photo\\01 - Active Projects\\Exports';
 
@@ -43,7 +39,9 @@ async function findDuplicates() {
                 size: stats.size,
                 ext
               });
-            } catch {}
+            } catch {
+              // Skip files we can't stat
+            }
           }
         }
       }
@@ -51,6 +49,7 @@ async function findDuplicates() {
       // Ignore errors for directories we can't read
     }
   }
+  await collectFiles(EXPORTS_PATH);
   console.log(`📁 Collected ${files.length.toLocaleString()} image files\n`);
 
   // Find duplicates by exact filename
