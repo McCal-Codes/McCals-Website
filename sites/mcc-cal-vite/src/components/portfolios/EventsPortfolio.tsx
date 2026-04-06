@@ -23,6 +23,8 @@ interface EventsManifest {
   events: EventItem[];
 }
 
+import { generateId } from '@/utils/portfolio-ids';
+
 // ── Normaliser ────────────────────────────────────────────────────────────────
 
 function normalise(events: EventItem[]): PortfolioGroup[] {
@@ -34,7 +36,7 @@ function normalise(events: EventItem[]): PortfolioGroup[] {
     }));
 
     return {
-      id: event.eventName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      id: generateId(event.eventName, event.dateISO),
       title: event.eventName,
       dateDisplay: event.dateDisplay,
       dateISO: event.dateISO,

@@ -34,6 +34,8 @@ interface JournalismManifest {
   categories?: string[];
 }
 
+import { generateId } from '@/utils/portfolio-ids';
+
 // ── Normaliser ────────────────────────────────────────────────────────────────
 
 function normalise(events: JournalismEvent[]): PortfolioGroup[] {
@@ -47,7 +49,7 @@ function normalise(events: JournalismEvent[]): PortfolioGroup[] {
     }));
 
     return {
-      id: event.eventName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      id: generateId(event.eventName, event.eventDate?.iso),
       title: event.eventName,
       dateDisplay: event.dateDisplay,
       dateISO: event.eventDate?.iso,

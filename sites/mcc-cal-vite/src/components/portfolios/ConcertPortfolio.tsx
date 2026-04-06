@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
+import { generateId } from '@/utils/portfolio-ids';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import '../portfolio/portfolio.css';
@@ -29,7 +30,7 @@ function normalise(bands: ConcertBand[]): PortfolioGroup[] {
     }));
 
     return {
-      id: band.bandName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      id: generateId(band.bandName, band.concertDate?.iso),
       title: band.bandName,
       dateDisplay: band.dateDisplay,
       dateISO: band.concertDate?.iso,

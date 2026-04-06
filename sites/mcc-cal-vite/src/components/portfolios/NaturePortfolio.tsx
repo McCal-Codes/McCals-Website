@@ -18,6 +18,8 @@ interface NatureManifest {
   collections: NatureCollection[];
 }
 
+import { generateId } from '@/utils/portfolio-ids';
+
 // ── Normaliser ────────────────────────────────────────────────────────────────
 
 function normalise(collections: NatureCollection[]): PortfolioGroup[] {
@@ -31,7 +33,7 @@ function normalise(collections: NatureCollection[]): PortfolioGroup[] {
       }));
 
       return {
-        id: collection.collectionName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        id: generateId(collection.collectionName),
         title: collection.collectionName,
         tags: collection.tags,
         images,
