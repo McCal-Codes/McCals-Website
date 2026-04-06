@@ -4,6 +4,7 @@ import { resolve } from 'path';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -58,13 +59,17 @@ const servePortfolioImages = () => ({
 });
 
 export default defineConfig({
-  plugins: [react(), servePortfolioImages()],
+  plugins: [
+    react(),
+    servePortfolioImages(),
+    process.env.ANALYZE === 'true' && visualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+      filename: 'dist/stats.html',
+    }),
+  ],
   publicDir: resolve(__dirname, './public-vite'),
-  esbuild: {
-    // Don't try to transform HTML files as JavaScript
-    include: [/\.tsx?$/, /\.jsx?$/],
-    exclude: [/\.html$/],
-  },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),

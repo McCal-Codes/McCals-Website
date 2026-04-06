@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import {
   SmartImage,

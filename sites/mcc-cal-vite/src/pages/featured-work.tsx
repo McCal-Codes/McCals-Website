@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 import FeaturedPortfolio from '@/components/portfolios/FeaturedPortfolio';
 import { usePageMeta } from '@/hooks/usePageMeta';
 

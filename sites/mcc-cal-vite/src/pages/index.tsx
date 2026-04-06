@@ -1,6 +1,4 @@
-import Footer from '@/components/Layout/Footer';
-import Nav from '@/components/Layout/Nav';
-import HeroCarousel from '@/components/HeroCarousel';
+import { Nav, Footer, HeroCarousel } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { LIVE_SITE_HOME_FEATURED_ITEMS } from '@/content/liveSiteFallbacks';
 

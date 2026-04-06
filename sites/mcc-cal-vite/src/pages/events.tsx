@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PortfolioFilters from '@/components/portfolio/PortfolioFilters';
 import PortfolioGrid from '@/components/portfolio/PortfolioGrid';

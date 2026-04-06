@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout/Layout';
+import { Layout } from '@/components';
 import JournalismPortfolio from '@/components/portfolios/JournalismPortfolio';
 import { usePageMeta } from '@/hooks/usePageMeta';
 

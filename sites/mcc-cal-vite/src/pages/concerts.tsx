@@ -1,9 +1,6 @@
 import { useMemo, useState } from 'react';
-import Layout from '@/components/Layout/Layout';
-import ConcertArtistSupport from '@/components/portfolio/ConcertArtistSupport';
-import PortfolioFilters from '@/components/portfolio/PortfolioFilters';
-import PortfolioGrid from '@/components/portfolio/PortfolioGrid';
-import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
+import { Layout } from '@/components';
+import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, useManifest, imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import '@/components/portfolio/portfolio.css';
