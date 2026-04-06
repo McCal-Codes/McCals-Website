@@ -1,74 +1,69 @@
-# Onboarding — McCal Media Workspace
+# Onboarding — McCal Media Website
 
-Welcome! This is a quick, zero-surprise setup guide for developing Squarespace widgets and the local demo site.
+Welcome! This is a quick, zero-surprise setup guide for developing the Vite-based McCal Media website.
 
 ## Prerequisites
 
-- Node.js 18+ (repo minimum is 16; 18 is recommended for Next.js and tooling)
+- Node.js 18+ (required for Vite and modern tooling)
 - npm with network access to the public registry
-- macOS/Linux/WSL (scripts are cross-platform; avoid PowerShell-only shells for shared scripts)
+- macOS/Linux/WSL (Windows PowerShell also supported)
 
 ## First-time setup (5–7 minutes)
 
-1. Install deps
+1. Install dependencies
 
 ```bash
 npm install
 ```
 
-2. Run a fast health check
+2. Start the development server
 
 ```bash
-npm run ai:preflight:short
+npm run dev
 ```
 
-3. Validate widgets (structure check only, no writes)
+3. Open http://localhost:5173 (or the port shown in terminal)
 
-```bash
-npm run validate:widgets
-```
+The dev server supports hot module replacement (HMR) for instant updates.
 
 ## Everyday commands (safe defaults)
 
-- Start local demo server: `npm run dev`
-- Validate widgets: `npm run validate:widgets`
-- Generate manifests (dry, no writes): `npm run manifest:dry-run`
-- Repo health sweep (clean + preflight + large-file scan): `npm run repo:health`
+- Start dev server: `npm run dev`
+- Build for production: `npm run build`
+- Preview production build: `npm run preview`
+- Run linting: `npm run lint`
+- Type check: `npm run type-check` (if configured)
+- Repo health sweep: `npm run repo:health`
 
-## Previewing widgets locally
+## Development workflow
 
-- Run `npm run dev` then open http://localhost:3000 (serves `src/site/`).
-- Widget HTML lives in `src/widgets/**/versions/` — copy/paste into a Squarespace Code Block for production.
-
-## Manifests (safe usage)
-
-- Use `npm run manifest:dry-run` before any write to confirm inputs.
-- Full generation: `npm run manifest:generate` (writes manifests; follow git diff before committing).
-- Watcher: `npm run watch:auto-manifest` (dev convenience; avoid committing stray manifest churn).
+1. Start the dev server: `npm run dev`
+2. Edit components in `src/components/`
+3. Add images to `src/images/Portfolios/`
+4. Test locally at http://localhost:5173
+5. Build for production: `npm run build`
+6. Deploy from `dist/` folder
 
 ## What lives where
 
-- Widgets: `src/widgets/` (self-contained HTML + per-widget README)
-- Images/manifests: `src/images/Portfolios/**`
-- Docs: `docs/` (standards, workflows, integrations)
-- Scripts: `scripts/` (organized by manifest/watchers/utils/admin, with `_archived/` for unused)
-- Local demo site: `src/site/`
+- **Components**: `src/components/` — React components
+- **Pages**: `src/pages/` — Page-level components
+- **Assets**: `src/images/Portfolios/**` — Photo assets and manifests
+- **Styles**: `src/styles/` — Global CSS and Tailwind config
+- **Public**: `public/` — Static files copied to build
+- **Docs**: `docs/` — All documentation
+- **Scripts**: `scripts/` — Build and utility scripts
+- **Build output**: `dist/` — Generated static site (don't edit directly)
 
-## Secrets & env
+## Secrets & environment variables
 
-- Copy `.env.example` to `.env` and fill required fields when using the API/worker flows.
-- Optional values are marked; you can leave them blank for local widget-only work.
+- Copy `.env.example` to `.env` and fill required fields when using API features
+- Optional values are marked; you can leave them blank for local development
 
 ## If something looks off
 
-- Run `npm run validate:widgets` for HTML shape issues.
-- Run `npm run repo:health` for a quick sweep.
-- Check `.github/copilot-instructions.md` and `docs/standards/workspace-organization.md` for guardrails.
+- Run `npm run build` to check for build errors
+- Run `npm run repo:health` for a quick sweep
+- Check `docs/standards/workspace-organization.md` for guardrails
 
-Happy building! 🚀
-
-## Dev subdomain (dev.mcc-cal.com)
-
-- Point `dev.mcc-cal.com` CNAME to your dev host or Cloudflare Tunnel endpoint.
-- Enable TLS (Cloudflare proxy OK) and add the subdomain to CORS/API allowlists in `.env`/`AUTH-SETUP-GUIDE.md`.
-- Use this hostname for PR/staging previews and Playwright/axe targets when available.
+Happy building!

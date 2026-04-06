@@ -1,6 +1,6 @@
 # Event Portfolio Ingest Guide
 
-This workflow ingests a new event into the Event Portfolio widget whenever you receive a folder or ZIP of images. Follow every step so the manifest stays current and Squarespace embeds pick up the new assets.
+This workflow ingests a new event into the Event Portfolio whenever you receive a folder or ZIP of images. Follow every step so the manifest stays current and the site picks up the new assets.
 
 ## Required Inputs
 

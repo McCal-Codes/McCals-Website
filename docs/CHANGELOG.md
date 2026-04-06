@@ -1,3 +1,22 @@
+## 2026-04-06 — Vite Site Migration
+
+- **Major Architecture Shift**: Migrated from Squarespace widget-based architecture to Vite-based static site
+  - Replaced self-contained HTML widgets with React components
+  - Migrated from `src/widgets/` to `src/components/` structure
+  - Build system: Vite with HMR for development, static export for deployment
+- **Documentation Overhaul**: Updated all docs to reflect Vite workflow
+  - Rewrote `docs/README.md` — removed Squarespace references, updated quick links
+  - Rewrote `docs/ONBOARDING.md` — Vite dev server instructions, component structure
+  - Created `docs/standards/widget-to-vite.md` — migration guide for legacy patterns
+  - Cleaned `docs/standards/` — archived legacy widget docs to `archive/legacy-standards/`
+- **Standards Modernization**: Removed widget-specific standards, added Vite-focused patterns
+  - Updated `ui-patterns.md` with React/Vite patterns
+  - Removed broken links to non-existent widget docs
+  - Consolidated performance, accessibility, and SEO standards
+- **Deployment**: GitHub Pages (and/or Vercel) replaces Squarespace widget embedding
+
+---
+
 ## 2025-11-19 — Repository Reorganization Phase 1 & Docs polish
 
 - **Legacy Widget Archival**: Moved older versions for Concert (v2.x–v4.5), Photojournalism (v1.0–v4.8), and Featured Portfolio (v1.0–v1.4) into `src/widgets/_archived/Legacy Widgets/` with per-widget `INDEX.json` inventories.

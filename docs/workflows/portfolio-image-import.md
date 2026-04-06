@@ -1,6 +1,6 @@
 ﻿# Portfolio Image Import Guide
 
-This guide walks through the process of adding new photo sets so they appear in the legacy widgets, the unified widgets, and the universal manifest.
+This guide walks through the process of adding new photo sets so they appear in the portfolio manifests and on the website.
 
 ## 1. Organize the source files
 
@@ -50,11 +50,11 @@ For nature and wildlife collections, update `src/images/Portfolios/Nature/nature
 }
 ```
 
-Keep the folder path in sync with your image directories so the widget resolves the files.
+Keep the folder path in sync with your image directories so the site resolves the files.
 
 ## 3. Refresh the universal manifest
 
-After saving the per-portfolio manifest, regenerate `portfolio-manifest.json` so the unified widgets discover the new entry.
+After saving the per-portfolio manifest, regenerate `portfolio-manifest.json` so the site discovers the new entry.
 
 ```bash
 node scripts/generate-universal-manifest.js --root "./src/images/Portfolios" --out "./src/images/Portfolios/portfolio-manifest.json"
@@ -66,15 +66,13 @@ On Windows you can use the helper PowerShell script instead:
 pwsh ./scripts/win-generate-universal-manifest.ps1
 ```
 
-The script scans every per-portfolio manifest under `src/images/Portfolios/**` and writes a single combined manifest that the unified widgets read.
+The script scans every per-portfolio manifest under `src/images/Portfolios/**` and writes a single combined manifest that the site reads.
 
 ## 4. Verify in the browser
 
-1. Run the dev server (`npm run dev`) or open the HTML file directly in Live Server.
-2. Open one of the unified pages, for example `src/widgets/event-portfolio/versions/v2.6-unified.html`.
-3. Confirm the new entry appears with the correct title, date, and image preview.
-4. Optionally open `tests/html/widgets/unified-portfolio-demo.html?type=event` to make sure the universal view sees the update.
-5. Open `src/widgets/nature-portfolio/versions/v1.0.html` in your browser or Squarespace code block to confirm the dedicated nature widget picks up the new collections.
+1. Run the dev server: `npm run dev`
+2. Open the portfolio page in your browser (e.g., http://localhost:5173/portfolio)
+3. Confirm the new entry appears with the correct title, date, and image preview
 
 ## 5. Commit the assets
 
@@ -84,7 +82,7 @@ When you are ready to push, commit:
 - The per-portfolio manifest change (e.g., `events-manifest.json`)
 - The regenerated `portfolio-manifest.json`
 
-Keeping these three pieces in sync ensures both the legacy and unified widgets can load your photos without additional configuration.
+Keeping these pieces in sync ensures the site can load your photos without additional configuration.
 
 
 
