@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
+import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
@@ -55,7 +56,7 @@ export default function PortraitsPortfolio() {
 
   const groups = useMemo(() => {
     if (!data?.collections) return [];
-    return normalise(data.collections);
+    return sortPortfolioGroups(normalise(data.collections));
   }, [data]);
 
   const filters = useMemo(() => {

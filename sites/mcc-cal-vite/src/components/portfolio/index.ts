@@ -9,4 +9,5 @@ export { default as PortfolioLightbox } from './PortfolioLightbox';
 export { default as PortfolioLoadMore } from './PortfolioLoadMore';
 export { default as ConcertArtistSupport } from './ConcertArtistSupport';
 export { useManifest, imageUrl } from './useManifest';
+export { sortPortfolioGroups, comparePortfolioGroupsByDateDesc } from './sortGroups';
 export type { PortfolioGroup, PortfolioImage } from './types';
