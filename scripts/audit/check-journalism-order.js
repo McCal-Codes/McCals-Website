@@ -4,11 +4,6 @@
  */
 
 import { promises as fs } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 async function checkJournalismOrder() {
   const manifestPath = 'i:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Journalism\\journalism-manifest.json';

@@ -9,8 +9,6 @@ import { promises as fs } from 'fs';
 // Caption templates by event type
 const CAPTION_TEMPLATES = {
   'Brentwood Vs Springdale': (filename, date) => {
-    const match = filename.match(/CAL(\d+)/);
-    const photoNum = match ? match[1] : '0000';
     return `Brentwood High School football action during the game against Springdale, Brentwood, Pa., ${formatDate(date)}.`;
   },
   

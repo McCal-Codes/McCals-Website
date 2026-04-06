@@ -69,7 +69,7 @@ async function convertToWebP() {
           
           converted++;
           process.stdout.write('.');
-        } catch (err) {
+        } catch {
           failed++;
           process.stdout.write('x');
         }

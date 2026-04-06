@@ -5,14 +5,13 @@
  */
 
 import { promises as fs } from 'fs';
-import { join, dirname, basename, extname, relative } from 'path';
+import { join, dirname, extname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const EXPORTS_PATH = 'H:\\My Drive\\03 - Multimedia\\01 - Photo\\01 - Active Projects\\Exports';
-const PORTFOLIO_BASE = 'i:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios';
 
 // Category mapping from source folders to portfolio types
 const CATEGORY_MAP = {

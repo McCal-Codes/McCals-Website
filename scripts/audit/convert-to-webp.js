@@ -65,7 +65,7 @@ async function convertToWebP() {
           
           converted++;
           process.stdout.write('.');
-        } catch (err) {
+        } catch {
           failed++;
           process.stdout.write('x');
         }
@@ -106,7 +106,7 @@ async function convertWithImageMagick(jpgPath, webpPath) {
   await execAsync(command);
 }
 
-async function updateManifest(albumDir, albumName) {
+async function updateManifest(albumDir, _albumName) {
   const manifestPath = join(albumDir, 'album-manifest.json');
   
   try {

@@ -42,10 +42,6 @@ async function prepareTerribleTailgate() {
 
   // Create manifest entries
   const manifestEntries = Object.values(games).map(game => {
-    const dateStr = game.date ? 
-      `${game.date.year}${String(game.date.month).padStart(2, '0')}${String(game.date.day).padStart(2, '0')}` :
-      '2024';
-    
     const id = `terrible-tailgate-${game.opponent.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${game.year}`;
     
     // Sort photos by filename (CAL number) for consistent ordering
