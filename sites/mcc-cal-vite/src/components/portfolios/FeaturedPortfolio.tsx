@@ -36,7 +36,7 @@ interface FeaturedManifest {
 function buildImageUrl(item: FeaturedItem, filename: string): string {
   const rp = item.relativeFolderPath;
   if (item.category === 'Journalism Photography') {
-    // Journalism items have relativeFolderPath like "Politics/CMU Trump Protest"
+    // Journalism items have relativeFolderPath like "Politics/cmu-trump-protest"
     // which is relative to Portfolios/Journalism/
     return imageUrl.journalism(rp, filename);
   }

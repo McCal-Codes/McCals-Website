@@ -23,7 +23,7 @@ async function updateManifest() {
     type: 'Events',
     category: 'Event Photography',
     name: 'Cleveland Browns at Pittsburgh Tailgate',
-    folderPath: 'Events/Cleveland Browns at Pittsburgh Tailgate',
+    folderPath: 'Events/browns-tailgate',
     dateDisplay: album.dateDisplay,
     date: album.date,
     totalImages: album.totalImages,

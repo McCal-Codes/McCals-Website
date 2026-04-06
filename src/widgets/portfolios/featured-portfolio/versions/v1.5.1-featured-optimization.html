@@ -1529,7 +1529,7 @@
 
           // For journalism, extract the actual article title from folder path
           if (type === 'journalism') {
-            // Path format: "Journalism/Events/The Rooney Rule" or "Journalism/Politics/Butler Protest"
+            // Path format: "Journalism/Events/The Rooney Rule" or "Journalism/Politics/butler-protest"
             // We want the last segment which is the actual article title
             const folderSegments = folderPath.split('/').filter(Boolean);
             if (folderSegments.length >= 3) {
