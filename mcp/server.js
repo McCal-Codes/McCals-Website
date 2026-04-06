@@ -18,6 +18,26 @@ import {
   handleContentListPosts,
   handleContentEditPost,
 } from './tools/blog-content.js';
+import {
+  createEntitiesTool,
+  createRelationsTool,
+  addObservationsTool,
+  deleteEntitiesTool,
+  deleteObservationsTool,
+  deleteRelationsTool,
+  readGraphTool,
+  searchNodesTool,
+  openNodesTool,
+  handleCreateEntities,
+  handleCreateRelations,
+  handleAddObservations,
+  handleDeleteEntities,
+  handleDeleteObservations,
+  handleDeleteRelations,
+  handleReadGraph,
+  handleSearchNodes,
+  handleOpenNodes,
+} from './tools/memory.js';
 
 const server = new Server(
   {
@@ -39,6 +59,15 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       contentCreatePostTool,
       contentListPostsTool,
       contentEditPostTool,
+      createEntitiesTool,
+      createRelationsTool,
+      addObservationsTool,
+      deleteEntitiesTool,
+      deleteObservationsTool,
+      deleteRelationsTool,
+      readGraphTool,
+      searchNodesTool,
+      openNodesTool,
     ],
   };
 });
@@ -57,6 +86,24 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return await handleContentListPosts(args);
       case 'content_edit_post':
         return await handleContentEditPost(args);
+      case 'memory_create_entities':
+        return await handleCreateEntities(args);
+      case 'memory_create_relations':
+        return await handleCreateRelations(args);
+      case 'memory_add_observations':
+        return await handleAddObservations(args);
+      case 'memory_delete_entities':
+        return await handleDeleteEntities(args);
+      case 'memory_delete_observations':
+        return await handleDeleteObservations(args);
+      case 'memory_delete_relations':
+        return await handleDeleteRelations(args);
+      case 'memory_read_graph':
+        return await handleReadGraph(args);
+      case 'memory_search_nodes':
+        return await handleSearchNodes(args);
+      case 'memory_open_nodes':
+        return await handleOpenNodes(args);
       default:
         throw new McpError(
           ErrorCode.MethodNotFound,
