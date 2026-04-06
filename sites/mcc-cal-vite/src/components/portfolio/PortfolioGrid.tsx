@@ -1,8 +1,10 @@
-import { useState, useCallback, useRef, type FC } from 'react';
+import { useState, useCallback, useRef, lazy, Suspense, type FC } from 'react';
 import type { PortfolioGroup } from './types';
 import PortfolioCard from './PortfolioCard';
-import PortfolioLightbox from './PortfolioLightbox';
 import PortfolioLoadMore from './PortfolioLoadMore';
+
+// Lazy load lightbox - only loaded when user clicks an image
+const PortfolioLightbox = lazy(() => import('./PortfolioLightbox'));
 
 interface PortfolioGridProps {
   groups: PortfolioGroup[];
@@ -48,10 +50,14 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
 
       <PortfolioLoadMore remaining={remaining} onLoadMore={handleLoadMore} />
 
-      <PortfolioLightbox
-        group={activeGroup}
-        onClose={() => setActiveGroup(null)}
-      />
+      {activeGroup && (
+        <Suspense fallback={null}>
+          <PortfolioLightbox
+            group={activeGroup}
+            onClose={() => setActiveGroup(null)}
+          />
+        </Suspense>
+      )}
 
       <div
         className={`pf-toast${toastVisible ? ' pf-toast--show' : ''}`}

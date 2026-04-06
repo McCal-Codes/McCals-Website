@@ -25,6 +25,9 @@ const ShowcasePage = lazy(() => import('./pages/showcase'));
 const ApiTestPage = lazy(() => import('./pages/api-test'));
 const ContactUsPage = lazy(() => import('./pages/contact-us'));
 const RequestAQuotePage = lazy(() => import('./pages/request-a-quote'));
+const SchedulePage = lazy(() => import('./pages/schedule')); // Legacy route
+const GrabCoffeePage = lazy(() => import('./pages/grab-a-coffee')); // NEW
+const BookPodcastPage = lazy(() => import('./pages/book-a-podcast')); // NEW
 const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
 const TerranovaPage = lazy(() => import('./pages/terranova'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
@@ -77,6 +80,9 @@ export default function App() {
           )}
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/request-a-quote" element={<RequestAQuotePage />} />
+          <Route path="/grab-coffee" element={<SchedulePage />} />
+          <Route path="/grab-a-coffee" element={<GrabCoffeePage />} />
+          <Route path="/book-a-podcast" element={<BookPodcastPage />} />
           <Route path="/policies-legal" element={<PoliciesLegalPage />} />
           <Route path="/terranova" element={<TerranovaPage />} />
           <Route path="/accessibility" element={<Navigate to="/policies-legal#accessibility" replace />} />
