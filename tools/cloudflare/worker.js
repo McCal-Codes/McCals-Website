@@ -39,12 +39,12 @@ function corsHeaders(request, env) {
   };
 }
 
-async function getRateLimitKey(request) {
+async function _getRateLimitKey(request) {
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   return `ratelimit:${ip}`;
 }
 
-async function checkRateLimit(kv, key, maxRequests = 100, windowMs = 60000) {
+async function _checkRateLimit(kv, key, maxRequests = 100, windowMs = 60000) {
   const count = parseInt((await kv.get(key)) || '0', 10);
   if (count >= maxRequests) {
     return false;
@@ -95,7 +95,7 @@ async function verifyJWT(token, secret) {
   }
 }
 
-async function hmacSha256(message, secret) {
+async function _hmacSha256(message, secret) {
   const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
   const signature = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(message));
   return base64UrlEncode(String.fromCharCode(...new Uint8Array(signature)));
@@ -147,7 +147,7 @@ async function handleLogin(request, env) {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: 'Invalid request' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
@@ -201,7 +201,7 @@ async function handleCreatePost(request, env) {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: 'Invalid request' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
@@ -252,8 +252,6 @@ async function handleWebhook(action, request, env) {
   }
   
   try {
-    const body = await request.json();
-    
     if (action === 'purge') {
       await env.MCCAL_KV.delete('blog:posts');
       return new Response(JSON.stringify({ success: true, message: 'Cache purged' }), {
@@ -280,7 +278,7 @@ async function handleWebhook(action, request, env) {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: 'Invalid webhook' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
@@ -379,7 +377,7 @@ export default {
         status: 404,
         headers: { 'Content-Type': 'application/json', ...cors },
       });
-    } catch (error) {
+    } catch {
       return new Response(JSON.stringify({ error: 'Internal server error' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json', ...cors },
