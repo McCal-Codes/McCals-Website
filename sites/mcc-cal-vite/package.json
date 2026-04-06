@@ -6,6 +6,8 @@
   "scripts": {
     "predev": "node scripts/sync-manifests.js",
     "dev": "vite",
+    "predev:vercel": "node scripts/sync-manifests.js",
+    "dev:vercel": "vercel dev",
     "validate:manifests": "node ../../scripts/validate-manifest-ids.js",
     "prebuild": "npm run validate:manifests && node scripts/sync-manifests.js",
     "build": "tsc -b && vite build",
