@@ -28,13 +28,22 @@ The Vite site is the primary web surface. Current focus: code quality and perfor
   - Added usePageMeta to 12 pages (contact-us, request-quote, portfolios, etc.)
   - Added WebSite + Organization structured data to homepage
   - Added preconnect hints and advanced meta tags (theme-color, referrer, locale)
+- ✅ **Component Decomposition** - Verified decomposition complete
+  - `blog.tsx` uses barrel imports: `StoryCard`, `StoryMeta`, `StoryBody`, `StoryCitations`, `useBlogPageData`
+  - `podcast.tsx` uses barrel imports: `EpisodeCard`, `usePodcastFeed`
+  - All components under 300 lines, TypeScript validation passed
+- ✅ **Barrel Import Migration** - Migrated 20+ page files to use `@/components` pattern
+  - All Layout imports now use `import { Layout } from '@/components'`
+  - Homepage uses `import { Nav, Footer, HeroCarousel } from '@/components'`
+  - No more direct path imports like `@/components/Layout/Layout`
+- ✅ **React Query Implementation** - Already complete
+  - Blog data uses `useBlogManifest`, `useBlogAuthors`, `useBlogPost`, `useBlogPageData`
+  - Podcast feed uses `usePodcastFeed` with caching and initial data
+  - QueryClient configured with 5min staleTime, 30min gcTime
 
 **Current Sprint:**
-- [ ] **Component Decomposition** - Break up large components:
-  - `blog.tsx` (~650 lines) → `BlogList.tsx`, `BlogPost.tsx`, `BlogCard.tsx`, `useBlogData.ts`
-  - `podcast.tsx` (~550 lines) → `EpisodeList.tsx`, `AudioPlayer.tsx`, `usePodcastFeed.ts`
-- [ ] **Migrate to Barrel Imports** - Update imports to use `@/components` pattern
-- [ ] **Add React Query/TanStack Query** - Replace manual `useEffect` data fetching
+- [ ] **Add E2E Tests** - Playwright coverage for critical user flows (homepage, blog, podcast, contact)
+- [ ] **Bundle Analysis** - Run `vite-bundle-visualizer` to identify optimization targets
 
 **Next Up:**
 - [ ] **CSS-by-Feature** - Move styles adjacent to components (co-location)
