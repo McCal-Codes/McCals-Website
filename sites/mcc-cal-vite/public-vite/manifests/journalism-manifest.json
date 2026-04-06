@@ -1,34 +1,41 @@
 {
   "version": "2.2.0",
-  "generated": "2026-04-06T15:20:38.100Z",
-  "totalEvents": 33,
-  "totalImages": 401,
+  "generated": "2026-04-06T18:39:19.975Z",
+  "totalEvents": 20,
+  "totalImages": 187,
   "categories": [
-    "Politics",
     "Sports",
-    "Documentary"
+    "Documentary",
+    "Politics"
   ],
   "tags": [
     "Events",
-    "Politics",
-    "Documentary",
-    "Presidential Campaign",
-    "Published Work",
     "Sports",
-    "Street Life",
-    "Community",
-    "Campus Life",
-    "Local",
-    "Social Issues",
-    "Journalism",
+    "Politics",
+    "Protest",
     "The Globe",
-    "Point Park",
-    "Protest"
+    "Photojournalism",
+    "Presidential Campaign",
+    "Kamala Harris",
+    "Celebrity",
+    "Bill Clinton",
+    "JD Vance",
+    "Barack Obama",
+    "Donald Trump",
+    "Tim Waltz",
+    "Debate",
+    "International",
+    "Local",
+    "Journalism",
+    "Documentary",
+    "Social Issues",
+    "Campus Life",
+    "Point Park"
   ],
   "categoryStats": {
-    "Politics": 25,
     "Sports": 1,
-    "Documentary": 7
+    "Documentary": 5,
+    "Politics": 14
   },
   "events": [
     {
@@ -215,7 +222,7 @@
       "tags": [
         "Events"
       ],
-      "folderPath": "Events/Historic Society Yard Sale August 2025",
+      "folderPath": "Events/historic-yard-sale-0825",
       "eventDate": {
         "iso": "2025-08-02",
         "source": "metadata"
@@ -1796,50 +1803,30 @@
           ]
         },
         {
-          "filename": "trump_butler_cal9640.jpg",
-          "path": "trump_butler_cal9640.jpg",
-          "description": "Trump supporter wearing red MAGA hat",
-          "caption": "A supporter wearing a red Trump hat waits for former President Donald Trump to speak at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "filename": "051024_trump-butler_CAL2458.jpg",
+          "path": "051024_trump-butler_CAL2458.jpg",
+          "description": "Trump returns to Butler, PA — The Globe",
+          "caption": "Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
           "tags": [
             "Politics",
             "Campaign"
           ]
         },
         {
-          "filename": "trump_butler_cal9666.jpg",
-          "path": "trump_butler_cal9666.jpg",
-          "description": "Trump supporters in parking lot with American flag",
-          "caption": "Supporters gather in the parking lot before former President Donald Trump's campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "filename": "051024_trump-butler_CAL2465.jpg",
+          "path": "051024_trump-butler_CAL2465.jpg",
+          "description": "Trump returns to Butler, PA — The Globe",
+          "caption": "Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
           "tags": [
             "Politics",
             "Campaign"
           ]
         },
         {
-          "filename": "trump_butler_cal9674.jpg",
-          "path": "trump_butler_cal9674.jpg",
-          "description": "Trump Rambo flag and Confederate flag on truck",
-          "caption": "A flag depicting former President Donald Trump as an action hero flies alongside an American flag and a Confederate flag at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
-          "tags": [
-            "Politics",
-            "Campaign"
-          ]
-        },
-        {
-          "filename": "trump_butler_cal9703.jpg",
-          "path": "trump_butler_cal9703.jpg",
-          "description": "Man holding Trump flag by decorated truck",
-          "caption": "A supporter holds a flag depicting former President Donald Trump next to a decorated pickup truck at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
-          "tags": [
-            "Politics",
-            "Campaign"
-          ]
-        },
-        {
-          "filename": "trump_butler_cal9709.jpg",
-          "path": "trump_butler_cal9709.jpg",
-          "description": "Decorated pickup truck with Trump flags",
-          "caption": "A pickup truck decorated with American flags, Trump flags and campaign decals sits in the parking lot at a campaign rally for former President Donald Trump at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
+          "filename": "051024_trump-butler_CAL2478.jpg",
+          "path": "051024_trump-butler_CAL2478.jpg",
+          "description": "Trump returns to Butler, PA — The Globe",
+          "caption": "Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.",
           "tags": [
             "Politics",
             "Campaign"
@@ -2429,8 +2416,8 @@
       "totalImages": 2,
       "images": [
         {
-          "filename": "231107_globe-politics_CAL_6424.jpg",
-          "path": "231107_globe-politics_CAL_6424.jpg",
+          "filename": "231107_The Globe - Political Coverage_CAL_6424.jpg",
+          "path": "231107_The Globe - Political Coverage_CAL_6424.jpg",
           "description": "Point Park University student government election coverage",
           "caption": "Point Park University students participate in a student government election event on campus in Pittsburgh, Pa., Nov. 7, 2023.",
           "tags": [
@@ -2439,8 +2426,8 @@
           ]
         },
         {
-          "filename": "231107_globe-politics_CAL_6429.jpg",
-          "path": "231107_globe-politics_CAL_6429.jpg",
+          "filename": "231107_The Globe - Political Coverage_CAL_6429.jpg",
+          "path": "231107_The Globe - Political Coverage_CAL_6429.jpg",
           "description": "Point Park University student voting on election day",
           "caption": "A Point Park University student casts a ballot at a campus polling location in Pittsburgh, Pa., Nov. 7, 2023.",
           "tags": [
