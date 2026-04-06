@@ -1,11 +1,11 @@
 import { kv } from '@vercel/kv';
-import { getEventTypeById } from '../../../src/components/scheduling/config/eventTypes';
-import { AVAILABILITY_RULES } from '../../../src/components/scheduling/config/availability';
+import { getEventTypeById } from '../../src/components/scheduling/config/eventTypes';
+import { AVAILABILITY_RULES } from '../../src/components/scheduling/config/availability';
 import { 
   getAvailabilityForRange,
   isMaxBookingsReached,
-} from '../../../src/components/scheduling/utils/availability';
-import { parseDateString, formatDateForInput } from '../../../src/components/scheduling/utils/dateHelpers';
+} from '../../src/components/scheduling/utils/availability';
+import { parseDateString, formatDateForInput } from '../../src/components/scheduling/utils/dateHelpers';
 
 /**
  * GET /api/schedule/availability
