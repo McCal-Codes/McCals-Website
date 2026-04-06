@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
+import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
@@ -57,7 +58,7 @@ export default function EventsPortfolio() {
 
   const groups = useMemo(() => {
     if (!data?.events) return [];
-    return normalise(data.events);
+    return sortPortfolioGroups(normalise(data.events));
   }, [data]);
 
   const filters = useMemo(() => {

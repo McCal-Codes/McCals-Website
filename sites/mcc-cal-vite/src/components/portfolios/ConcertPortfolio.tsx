@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
+import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import { generateId } from '@/utils/portfolio-ids';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
@@ -47,7 +48,7 @@ export default function ConcertPortfolio() {
 
   const groups = useMemo(() => {
     if (!data?.bands) return [];
-    return normalise(data.bands);
+    return sortPortfolioGroups(normalise(data.bands));
   }, [data]);
 
   return (

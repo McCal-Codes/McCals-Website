@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
+import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
@@ -75,13 +76,7 @@ export default function JournalismPortfolio() {
 
   const groups = useMemo(() => {
     if (!data?.events) return [];
-    const events = normalise(data.events);
-    // Sort by date (newest first)
-    return events.sort((a, b) => {
-      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : 0;
-      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : 0;
-      return dateB - dateA;
-    });
+    return sortPortfolioGroups(normalise(data.events));
   }, [data]);
 
   const filters = useMemo(() => {
