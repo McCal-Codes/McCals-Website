@@ -12,8 +12,8 @@ console.log('🔎 Running minimal smoke tests...');
 
 // 1) Run manifest dry-run (should succeed)
 console.log('\n1) Running manifest dry-run (smoke)');
-if (!run('npm', ['run', 'manifest:dry-run'])) {
-  console.error('❌ manifest:dry-run failed');
+if (!run('npm', ['run', 'manifest:dry'])) {
+  console.error('❌ manifest:dry failed');
   process.exit(2);
 }
 

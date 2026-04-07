@@ -39,20 +39,6 @@ function corsHeaders(request, env) {
   };
 }
 
-async function _getRateLimitKey(request) {
-  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-  return `ratelimit:${ip}`;
-}
-
-async function _checkRateLimit(kv, key, maxRequests = 100, windowMs = 60000) {
-  const count = parseInt((await kv.get(key)) || '0', 10);
-  if (count >= maxRequests) {
-    return false;
-  }
-  await kv.put(key, String(count + 1), { expirationTtl: Math.ceil(windowMs / 1000) });
-  return true;
-}
-
 function getJWTHeader() {
   return { alg: 'HS256', typ: 'JWT' };
 }
@@ -93,12 +79,6 @@ async function verifyJWT(token, secret) {
   } catch {
     return null;
   }
-}
-
-async function _hmacSha256(message, secret) {
-  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-  const signature = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(message));
-  return base64UrlEncode(String.fromCharCode(...new Uint8Array(signature)));
 }
 
 // === ROUTE HANDLERS ===
