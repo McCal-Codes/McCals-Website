@@ -3,6 +3,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "functions": {
+    "api/schedule/*.js": {
+      "maxDuration": 10
+    },
     "api/widgets/[...slug].js": {
       "includeFiles": "../../src/widgets/**",
       "excludeFiles": "../../src/widgets/_archived/**,../../src/widgets/_cdn/**,../../src/widgets/_admin/**,../../src/widgets/_navigation/**"
