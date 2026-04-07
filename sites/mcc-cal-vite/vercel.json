@@ -3,19 +3,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "functions": {
-    "api/schedule/*.js": {
-      "maxDuration": 10,
-      "runtime": "nodejs18.x"
-    },
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    },
-    "api/widgets/[...slug].js": {
-      "includeFiles": "../../src/widgets/**",
-      "excludeFiles": "../../src/widgets/_archived/**,../../src/widgets/_cdn/**,../../src/widgets/_admin/**,../../src/widgets/_navigation/**"
-    },
-    "api/manifests/[type].js": {
-      "includeFiles": "api/manifests/data/*.json"
+    "api/**/*.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 10
     }
   },
   "rewrites": [
