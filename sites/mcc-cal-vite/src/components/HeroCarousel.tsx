@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '@/styles/heroCarousel.module.css';
 
@@ -46,7 +46,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Politics',
     meta: 'Politics',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/eedc836b-ce05-4452-b29c-8ab2a64f384e/101024_Obama+Speaks+at+Pittsburgh_CAL3364-min.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/eedc836b-ce05-4452-b29c-8ab2a64f384e/101024_Obama+Speaks+at+Pittsburgh_CAL3364-min.jpg?format=webp&width=1920',
     href: '/journalism',
     links: [
       { url: '/journalism', label: 'Journalism' },
@@ -61,7 +61,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Journalism',
     meta: 'Journalism',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg?format=webp&width=1920',
     href: '/journalism',
     links: [
       { url: '/journalism', label: 'Journalism' },
@@ -76,7 +76,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Pittsburgh',
     meta: 'Pittsburgh',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/62dcd231-e0e8-402b-abf4-cc34e995ea58/IMGP7209.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/62dcd231-e0e8-402b-abf4-cc34e995ea58/IMGP7209.jpg?format=webp&width=1920',
     href: '/nature',
     links: [
       { url: '/nature', label: 'Nature' },
@@ -91,7 +91,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Portraits',
     meta: 'Portraits',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg?format=webp&width=1920',
     href: '/portraits',
     links: [
       { url: '/portraits', label: 'Portraits' },
@@ -106,7 +106,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Corporate',
     meta: 'Corporate',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg?format=webp&width=1920',
     href: '/events',
     links: [
       { url: '/events', label: 'Events' },
@@ -121,7 +121,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Event',
     meta: 'Event',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg?format=webp&width=1920',
     href: '/events',
     links: [
       { url: '/events', label: 'Events' },
@@ -136,7 +136,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Concert',
     meta: 'Concert',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/9c635526-663e-42ef-ba9c-7dcc8d477190/251025+When+We+Were+Dead_CAL8612_webuse.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/9c635526-663e-42ef-ba9c-7dcc8d477190/251025+When+We+Were+Dead_CAL8612_webuse.jpg?format=webp&width=1920',
     href: '/concerts',
     links: [
       { url: '/concerts', label: 'Concerts' },
@@ -151,7 +151,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Theatre',
     meta: 'Theatre',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/77807f5b-9895-4444-804d-1b3363d0f1b3/250319+A+Guy+Who+Hates+Musicals+-+Ghostlight_CAL999.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/77807f5b-9895-4444-804d-1b3363d0f1b3/250319+A+Guy+Who+Hates+Musicals+-+Ghostlight_CAL999.jpg?format=webp&width=1920',
     href: '/events',
     links: [
       { url: '/events', label: 'Events' },
@@ -166,7 +166,7 @@ const FAVORITES: HeroSlide[] = [
     title: 'Nature',
     meta: 'Nature',
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f96709e7-3a00-4574-af88-795f26ce432e/IMGP6886.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f96709e7-3a00-4574-af88-795f26ce432e/IMGP6886.jpg?format=webp&width=1920',
     href: '/nature',
     links: [
       { url: '/nature', label: 'Nature' },
@@ -180,6 +180,11 @@ const FAVORITES: HeroSlide[] = [
 ];
 
 const HeroCarousel: React.FC = () => {
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return window.innerWidth >= DESKTOP_BREAKPOINT;
+  });
+
   // Suppress body padding-top so the hero fills behind the fixed nav
   useEffect(() => {
     const prev = document.body.style.paddingTop;
@@ -187,6 +192,15 @@ const HeroCarousel: React.FC = () => {
     return () => {
       document.body.style.paddingTop = prev;
     };
+  }, []);
+
+  // Handle responsive breakpoint changes
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= DESKTOP_BREAKPOINT);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const widgetRef = useRef<HTMLDivElement>(null);
@@ -202,13 +216,13 @@ const HeroCarousel: React.FC = () => {
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
 
-  const slides = FAVORITES;
+  const slides = useMemo(() => FAVORITES, []);
 
   // State for randomized links - stores the currently selected link for each slide
   const [randomizedLinks, setRandomizedLinks] = useState<Record<number, string>>(() => {
     // Initialize with random selections
     const initial: Record<number, string> = {};
-    slides.forEach((slide, index) => {
+    FAVORITES.forEach((slide, index) => {
       initial[index] = getRandomLink(slide);
     });
     return initial;
@@ -374,34 +388,31 @@ const HeroCarousel: React.FC = () => {
         <section className={styles.hero} aria-label="Featured work carousel">
           <div ref={viewportRef} className={styles.heroViewport}>
             <div ref={trackRef} className={styles.heroTrack}>
-              {slides.map((slide, i) => {
-                const isDesktop = typeof window !== 'undefined' && window.innerWidth >= DESKTOP_BREAKPOINT;
-                return (
-                  <figure key={i} className={styles.heroSlide} aria-label={`Slide ${i + 1}: ${slide.title}`}>
-                    <img
-                      src={slide.image}
-                      alt={slide.alt}
-                      className="mcc-hero-slide-img"
-                      data-focal-mobile={fpToCss(slide.focalPointMobile)}
-                      data-focal-desktop={fpToCss(slide.focalPointDesktop)}
-                      style={{ objectPosition: resolveObjectPosition(slide, isDesktop) }}
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                      decoding="async"
-                      {...(i === 0 ? { fetchPriority: 'high' as const } : {})}
-                    />
-                    <figcaption className={styles.heroCaption}>
-                      <Link
-                        to={randomizedLinks[i] || slide.href}
-                        className={styles.heroCta}
-                        aria-label={`View ${slide.cta}`}
-                        title={slide.links && slide.links.length > 1 ? 'Randomly selected from available galleries' : undefined}
-                      >
-                        {slide.cta}
-                      </Link>
-                    </figcaption>
-                  </figure>
-                );
-              })}
+              {slides.map((slide: HeroSlide, i: number) => (
+                <figure key={i} className={styles.heroSlide} aria-label={`Slide ${i + 1}: ${slide.title}`}>
+                  <img
+                    src={slide.image}
+                    alt={slide.alt}
+                    className="mcc-hero-slide-img"
+                    data-focal-mobile={fpToCss(slide.focalPointMobile)}
+                    data-focal-desktop={fpToCss(slide.focalPointDesktop)}
+                    style={{ objectPosition: resolveObjectPosition(slide, isDesktop) }}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    {...(i === 0 ? { fetchPriority: 'high' as const } : {})}
+                  />
+                  <figcaption className={styles.heroCaption}>
+                    <Link
+                      to={randomizedLinks[i] || slide.href}
+                      className={styles.heroCta}
+                      aria-label={`View ${slide.cta}`}
+                      title={slide.links && slide.links.length > 1 ? 'Randomly selected from available galleries' : undefined}
+                    >
+                      {slide.cta}
+                    </Link>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
           </div>
 

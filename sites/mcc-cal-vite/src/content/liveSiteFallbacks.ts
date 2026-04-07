@@ -34,7 +34,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     eyebrow: 'Journalism',
     href: '/journalism',
     imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg?format=webp&width=1200',
     meta: 'Field features / Politics / Regional reporting',
   },
   events: {
@@ -43,7 +43,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     eyebrow: 'Events',
     href: '/events',
     imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg?format=webp&width=1200',
     meta: 'Corporate coverage / Experiences / Client work',
   },
   concert: {
@@ -52,7 +52,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     eyebrow: 'Concert',
     href: '/concerts',
     imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg?format=webp&width=1200',
     meta: 'Live performance / Touring artists / Venue work',
   },
   portraits: {
@@ -61,7 +61,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     eyebrow: 'Portraits',
     href: '/portraits',
     imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/8b6c6a68-c922-4e0f-9555-d1eafcf4f47b/250518_Senior+Portraits_CAL0318.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/8b6c6a68-c922-4e0f-9555-d1eafcf4f47b/250518_Senior+Portraits_CAL0318.jpg?format=webp&width=1200',
     meta: 'Editorial sessions / Graduates / Personal work',
   },
   nature: {
@@ -70,7 +70,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     eyebrow: 'Nature',
     href: '/nature',
     imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg?format=webp&width=1200',
     meta: 'Landscapes / Quiet studies / Field notes',
   },
 };
@@ -84,7 +84,7 @@ export const LIVE_SITE_HOME_FEATURED_ITEMS: HomeFeaturedItem[] = [
 export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg?format=webp&width=1920',
     alt: 'A woman and a child holding a sparkler at night, with dark trees in the background.',
     eyebrow: 'Journalism',
     title: 'Field stories with room to breathe.',
@@ -95,7 +95,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   },
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg?format=webp&width=1920',
     alt: 'Demonstrators gather during a protest in Pittsburgh.',
     eyebrow: 'Politics',
     title: 'Politics',
@@ -106,7 +106,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   },
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/1757468682503-YXX6ILQYQ1CMH1OT66WD/141024_Kamala+Speaks+at+Erie_CAL3804+1+%281%29.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/1757468682503-YXX6ILQYQ1CMH1OT66WD/141024_Kamala+Speaks+at+Erie_CAL3804+1+%281%29.jpg?format=webp&width=1920',
     alt: 'Supporters listen during a campaign event in Erie, Pennsylvania.',
     eyebrow: 'Pittsburgh',
     title: 'City Stories',
@@ -117,7 +117,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   },
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg?format=webp&width=1920',
     alt: 'Guests networking at a cocktail event while a bartender prepares drinks.',
     eyebrow: 'Corporate',
     title: 'Corporate',
@@ -128,7 +128,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   },
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg?format=webp&width=1920',
     alt: 'Guests watching a lively show with colorful lighting and confetti.',
     eyebrow: 'Events',
     title: 'Events',
@@ -138,7 +138,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   },
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg?format=webp&width=1920',
     alt: 'A musician playing bass on stage under purple and blue lights.',
     eyebrow: 'Concert',
     title: 'Concert',
@@ -148,7 +148,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   },
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/8b6c6a68-c922-4e0f-9555-d1eafcf4f47b/250518_Senior+Portraits_CAL0318.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/8b6c6a68-c922-4e0f-9555-d1eafcf4f47b/250518_Senior+Portraits_CAL0318.jpg?format=webp&width=1920',
     alt: 'A portrait subject standing in evening light outdoors.',
     eyebrow: 'Portraits',
     title: 'Portraits',
@@ -158,7 +158,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   },
   {
     image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg',
+      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg?format=webp&width=1920',
     alt: 'A quiet natural landscape photographed in soft light.',
     eyebrow: 'Nature',
     title: 'Nature',
@@ -172,11 +172,11 @@ function normalizeFeaturedKey(value?: string): string {
   const normalized = (value || '').trim().toLowerCase();
 
   if (!normalized) return '';
-  if (normalized.includes('journal')) return 'journalism';
-  if (normalized.includes('concert')) return 'concert';
-  if (normalized.includes('event')) return 'events';
-  if (normalized.includes('portrait')) return 'portraits';
-  if (normalized.includes('nature')) return 'nature';
+  if (normalized === 'journalism' || normalized.startsWith('journalism')) return 'journalism';
+  if (normalized === 'concert' || normalized.startsWith('concert')) return 'concert';
+  if (normalized === 'events' || normalized === 'event' || normalized.startsWith('event')) return 'events';
+  if (normalized === 'portraits' || normalized === 'portrait' || normalized.startsWith('portrait')) return 'portraits';
+  if (normalized === 'nature' || normalized.startsWith('nature')) return 'nature';
 
   return normalized;
 }

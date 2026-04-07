@@ -1,10 +1,18 @@
+import { useMemo } from 'react';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { BioSection, TestimonialsSection, ClientsSection } from '@/components/about';
+import { staticGoogleReviews, staticLinkedInReviews } from '@/hooks/useGoogleReviews';
 import styles from './about.module.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const ABOUT_IMAGE = '/about/caleb-mccartney-photo.jpg';
+
+const allReviews = [...staticGoogleReviews, ...staticLinkedInReviews];
+const averageRating = useMemo(() => 
+  allReviews.reduce((sum, r) => sum + ('rating' in r ? r.rating : 5), 0) / allReviews.length,
+  []
+);
 
 export default function AboutPage() {
   usePageMeta({
@@ -65,6 +73,25 @@ export default function AboutPage() {
           description:
             'Photojournalism, event coverage, and visual storytelling led by Caleb McCartney.',
           logo: `${SITE_URL}/brand/logo-mark.svg`,
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: parseFloat(averageRating.toFixed(1)),
+            bestRating: 5,
+            reviewCount: allReviews.length,
+          },
+          review: allReviews.slice(0, 5).map((review) => ({
+            '@type': 'Review',
+            author: {
+              '@type': 'Person',
+              name: review.author_name,
+            },
+            reviewBody: review.text,
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: 'rating' in review ? review.rating : 5,
+              bestRating: 5,
+            },
+          })),
         },
       ],
     },
