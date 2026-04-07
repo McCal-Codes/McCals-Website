@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import {
@@ -7,7 +8,6 @@ import {
   PODCAST_IMAGE,
   SPOTIFY_SHOW,
   APPLE_SHOW,
-  CALENDLY,
   FEATURED,
   PAGE_SIZE,
   type PlayerState,
@@ -152,12 +152,12 @@ export default function PodcastPage() {
             Where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact.
           </p>
           <div className="pod-cta-row">
-            <a className="pod-book-btn" href={CALENDLY} target="_blank" rel="noopener noreferrer">
+            <Link className="pod-book-btn" to="/book-a-podcast">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                 <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 6H4.5a.5.5 0 0 0-.5.5V10h17V8.5a.5.5 0 0 0-.5-.5Zm.5 4H4v7.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5V12Zm-11 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Z" />
               </svg>
               Book a Podcast Episode
-            </a>
+            </Link>
             <p className="pod-proof">12+ episodes booked since Oct 2025</p>
           </div>
         </header>
