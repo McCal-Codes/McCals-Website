@@ -22,6 +22,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const readline = require('readline');
 const { notify } = require('../utils/manifest-webhook');
 
 // Configuration
@@ -34,19 +35,65 @@ const args = process.argv.slice(2);
 const FORCE_OVERWRITE = args.includes('--force');
 
 async function log(message, ...args) {
-  console.log(`📰 ${message} - generate-journalism-manifest-v2.js:36`, ...args);
+  console.log(`📰 ${message} - generate-journalism-manifest-v2.js:38`, ...args);
 }
 
 async function success(message, ...args) {
-  console.log(`✅ ${message} - generate-journalism-manifest-v2.js:40`, ...args);
+  console.log(`✅ ${message} - generate-journalism-manifest-v2.js:42`, ...args);
 }
 
 async function warning(message, ...args) {
-  console.log(`⚠️  ${message} - generate-journalism-manifest-v2.js:44`, ...args);
+  console.log(`⚠️  ${message} - generate-journalism-manifest-v2.js:46`, ...args);
 }
 
 async function error(message, ...args) {
-  console.error(`❌ ${message} - generate-journalism-manifest-v2.js:48`, ...args);
+  console.error(`❌ ${message} - generate-journalism-manifest-v2.js:50`, ...args);
+}
+
+// Interactive prompt helper
+function createPrompt() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  return (question) => new Promise((resolve) => rl.question(question, (answer) => {
+    rl.close();
+    resolve(answer.trim());
+  }));
+}
+
+async function askForDate(eventName, sampleImage) {
+  const prompt = createPrompt();
+  console.log(`\\n📅 Date needed for: ${eventName} - generate-journalism-manifest-v2.js:67`);
+  if (sampleImage) {
+    console.log(`Sample image: ${sampleImage} - generate-journalism-manifest-v2.js:69`);
+  }
+  const answer = await prompt('   Enter date (YYYY-MM-DD or MM/DD/YYYY): ');
+  
+  // Parse the date
+  let parsed;
+  if (/^\\d{4}-\\d{2}-\\d{2}$/.test(answer)) {
+    parsed = answer;
+  } else if (/^\\d{1,2}\/\\d{1,2}\/\\d{4}$/.test(answer)) {
+    const [m, d, y] = answer.split('/');
+    parsed = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+  } else if (/^\\d{6}$/.test(answer)) {
+    // YYMMDD format
+    const year = 2000 + parseInt(answer.substring(0, 2));
+    const month = answer.substring(2, 4);
+    const day = answer.substring(4, 6);
+    parsed = `${year}-${month}-${day}`;
+  }
+  
+  if (parsed) {
+    const date = new Date(parsed);
+    if (!isNaN(date.getTime())) {
+      return parsed;
+    }
+  }
+  
+  console.log('⚠️  Invalid date format, using today as fallback - generate-journalism-manifest-v2.js:95');
+  return new Date().toISOString().split('T')[0];
 }
 
 async function exists(filePath) {
@@ -158,20 +205,23 @@ async function processEvent(categoryName, eventName, eventDir, folderPathOverrid
 
     // Extract date from first image or use metadata
     let eventDate = metadata?.date;
+    let dateSource = metadata?.date ? 'metadata' : null;
+    
     if (!eventDate) {
       for (const imageFile of imageFiles) {
         const dateFromFile = extractDateFromFilename(imageFile);
         if (dateFromFile) {
           eventDate = dateFromFile;
+          dateSource = 'filename_extraction';
           break;
         }
       }
     }
     
-    // Fallback to current date
+    // Prompt user if no date found
     if (!eventDate) {
-      eventDate = new Date().toISOString().split('T')[0];
-      warning(`No date found for ${categoryName}/${eventName}, using current date`);
+      eventDate = await askForDate(`${categoryName}/${eventName}`, imageFiles[0]);
+      dateSource = 'user_input';
     }
     
     // Determine tags
@@ -207,7 +257,7 @@ async function processEvent(categoryName, eventName, eventDir, folderPathOverrid
       folderPath: folderPathOverride || `${categoryName}/${eventName}`,
       eventDate: {
         iso: eventDate,
-        source: metadata?.date ? 'metadata' : 'filename_extraction'
+        source: dateSource
       },
       dateDisplay: new Date(eventDate).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -345,7 +395,7 @@ async function generateManifest() {
     try {
       await notify('journalism', { path: MASTER_MANIFEST, written: true });
     } catch (err) {
-      console.warn('Failed to notify manifest webhook (journalism):', err && err.message);
+      console.warn('Failed to notify manifest webhook (journalism): - generate-journalism-manifest-v2.js:398', err && err.message);
     }
     
     success('Journalism manifest generated successfully!');
@@ -353,20 +403,20 @@ async function generateManifest() {
     success(`📊 Events: ${manifest.totalEvents}, Images: ${manifest.totalImages}`);
     
     // Show breakdown
-    console.log('\n📋 Category Breakdown: - generate-journalism-manifest-v2.js:325');
+    console.log('\n📋 Category Breakdown: - generate-journalism-manifest-v2.js:406');
     Object.entries(categoryStats).forEach(([category, count]) => {
-      console.log(`📂 ${category}: ${count} events - generate-journalism-manifest-v2.js:327`);
+      console.log(`📂 ${category}: ${count} events - generate-journalism-manifest-v2.js:408`);
     });
     
-    console.log('\n🏷️  Available Tags: - generate-journalism-manifest-v2.js:330');
+    console.log('\n🏷️  Available Tags: - generate-journalism-manifest-v2.js:411');
     Array.from(allTags).forEach(tag => {
       const taggedEvents = allEvents.filter(event => event.tags.includes(tag));
-      console.log(`• ${tag}: ${taggedEvents.length} events - generate-journalism-manifest-v2.js:333`);
+      console.log(`• ${tag}: ${taggedEvents.length} events - generate-journalism-manifest-v2.js:414`);
     });
     
     const publishedEvents = allEvents.filter(event => event.published);
     if (publishedEvents.length > 0) {
-      console.log(`\n📰 Published Work: ${publishedEvents.length} events - generate-journalism-manifest-v2.js:338`);
+      console.log(`\n📰 Published Work: ${publishedEvents.length} events - generate-journalism-manifest-v2.js:419`);
     }
     
   } catch (err) {
@@ -417,9 +467,14 @@ Features:
   • Direct folder organization (no import folder)
   • Multi-tagging support through tags.json
   • "Published Work" tag for published photos
-  • Auto date extraction from filenames
+  • Auto date extraction from filenames (YYMMDD_ prefix)
+  • Interactive date prompt when no date found in filenames
   • Publication metadata support
   • Event-based organization like concert widget
+
+Date Extraction:
+  Filenames with date prefix: 250912_EventName_IMG_001.jpg → Sep 12, 2025
+  If no date prefix found, you will be prompted to enter the date.
 
 Options:
   --force    Overwrite existing manifest
