@@ -29,28 +29,23 @@ const REQUIRED_DOCS = [
     file: path.join(ROOT, '.github', 'canvas-instructions.md'),
     title: 'Canvas instructions',
   },
-  {
-    key: 'widget-registry',
-    file: path.join(ROOT, 'docs', 'widgets', 'registry.json'),
-    title: 'Widget registry',
-  },
 ];
 
-function widgetReadmeStatus() {
-  const widgetsDir = path.join(ROOT, 'src', 'widgets');
+function componentReadmeStatus() {
+  const componentsDir = path.join(ROOT, 'sites', 'mcc-cal-vite', 'src', 'components');
   const status = { total: 0, withReadme: 0, missing: [] };
   let entries = [];
   try {
-    entries = fs.readdirSync(widgetsDir, { withFileTypes: true });
+    entries = fs.readdirSync(componentsDir, { withFileTypes: true });
   } catch {
     return status;
   }
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
     const name = entry.name;
-    if (name.startsWith('_')) continue; // skip _archived or shared dirs
+    if (name.startsWith('_')) continue;
     status.total += 1;
-    const readmePath = path.join(widgetsDir, name, 'README.md');
+    const readmePath = path.join(componentsDir, name, 'README.md');
     if (fs.existsSync(readmePath)) {
       status.withReadme += 1;
     } else {
@@ -73,7 +68,7 @@ function discoverDocs() {
       dir: path.join(ROOT, 'docs', 'standards'),
       filter: (f) =>
         f.endsWith('.md') &&
-        /workspace-organization|versioning|performance-standards|widget-standards|widget-reference/i.test(
+        /workspace-organization|versioning|performance-standards/i.test(
           f,
         ),
     },
@@ -205,7 +200,7 @@ function summarizeDoc(key, title, content) {
     limitShort,
   );
   sections.authoring = tryHeading(
-    ['widget authoring conventions', 'golden rules', 'widgets'],
+    ['component patterns', 'golden rules', 'components'],
     isShort ? 1 : 2,
   );
 
@@ -214,7 +209,7 @@ function summarizeDoc(key, title, content) {
     [
       'single-portfolio manifest policy (2025-11)',
       'single-portfolio manifest policy',
-      'legacy widget version archival (phase 1 — 2025-11)',
+      'component organization policy',
     ],
     limitShort,
   );
@@ -272,9 +267,9 @@ function formatPretty(results, meta) {
     lines.push('');
   }
 
-  if (meta.widgetReadmes) {
-    const { total, withReadme, missing } = meta.widgetReadmes;
-    lines.push(`Widget READMEs: ${withReadme}/${total} present`);
+  if (meta.componentReadmes) {
+    const { total, withReadme, missing } = meta.componentReadmes;
+    lines.push(`Component READMEs: ${withReadme}/${total} present`);
     if (missing.length && !isShort) {
       lines.push(
         `Missing README: ${missing.slice(0, 8).join(', ')}${missing.length > 8 ? '…' : ''}`,
@@ -378,14 +373,14 @@ function main() {
     .filter((item) => item.toLowerCase() !== 'locate the definitive source');
   const defaultChecklist = [
     'Read .github/copilot-instructions.md and .github/codex-instructions.md before editing.',
-    'If touching widgets, open the widget README and add a new version file instead of overwriting.',
+    'Components: src/components/ directory for React components.',
     'Do not edit generated dist/** or manifest.json files by hand; rerun manifest generators.',
-    'If images/manifests change: run npm run manifest:generate or the targeted manifest script.',
-    'Plan the minimal validation (lint/tests or widget preview) and mention what you ran.',
+    'If images/manifests change: run npm run manifest or the targeted manifest script.',
+    'Plan the minimal validation (lint/tests) and mention what you ran.',
   ];
   const checklist = dedupe([...defaultChecklist, ...checklistSeeds]).slice(0, isShort ? 6 : 9);
 
-  const meta = { missingRequired, repoNorms, checklist, widgetReadmes: widgetReadmeStatus() };
+  const meta = { missingRequired, repoNorms, checklist, componentReadmes: componentReadmeStatus() };
 
   if (isJSON) {
     console.log(JSON.stringify({ docs: toReport, meta }, null, 2));

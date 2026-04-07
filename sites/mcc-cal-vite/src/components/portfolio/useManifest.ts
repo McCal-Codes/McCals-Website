@@ -39,7 +39,9 @@ function toGithubUrl(repoRelativePath: string): string {
 function toLocalUrl(repoRelativePath: string): string {
   // Use raw path - Vite plugin will handle decoding
   const url = `/${repoRelativePath}`;
-  console.log('[DEBUG] Image URL:', url);
+  if (IS_DEV) {
+    console.log('[DEBUG] Image URL:', url);
+  }
   return url;
 }
 

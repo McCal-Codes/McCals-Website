@@ -100,8 +100,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/dev-rss-proxy/, ''),
       },
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
     },
-    // Allow serving files from parent directories
     fs: {
       allow: ['..'],
     },
