@@ -1,6 +1,6 @@
 # Active To-Do List
 
-Last Updated: April 3, 2026
+Last Updated: April 6, 2026
 
 **Quick Reference:**
 
@@ -18,6 +18,16 @@ Last Updated: April 3, 2026
 The Vite site is the primary web surface. Current focus: code quality and performance.
 
 **Just Completed:**
+- ✅ **Policies & Legal Page Refactoring** (April 6)
+  - Removed version badge and changelog modal
+  - Applied React best practices (useMemo, useCallback, TypeScript types)
+  - Extracted FAQ to standalone `/faq` page
+  - Added FAQ link section in policy page
+  - Unified design with site color tokens
+- ✅ **Created FAQ Page** (`/faq` route)
+  - Standalone FAQ page with SEO metadata and JSON-LD structured data
+  - Cross-links to/from Policies & Legal page
+  - Clean accordion UI matching site design system
 - ✅ Extracted duplicate utilities (`formatDate`, `slugify`) to `utils/formatters.ts`
 - ✅ Centralized blog types to `types/blog.ts`
 - ✅ Added barrel exports (`components/index.ts`)
@@ -253,7 +263,7 @@ Ideas and longer-term initiatives. Not prioritized.
 
 - [ ] Services showcase (categorized work overview)
 - [ ] Event calendar (Google Calendar integration)
-- [ ] FAQ accordion
+- [x] ~~FAQ accordion~~ (Completed - now standalone `/faq` page)
 
 ### Platform Ideas
 
