@@ -13,3 +13,4 @@ public-vite/content/blog-static/
 src/pages/api/dist/
 
 .env*.local
+.vercel
