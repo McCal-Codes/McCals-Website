@@ -4,7 +4,11 @@
   "outputDirectory": "dist",
   "functions": {
     "api/schedule/*.js": {
-      "maxDuration": 10
+      "maxDuration": 10,
+      "runtime": "nodejs18.x"
+    },
+    "api/*.js": {
+      "runtime": "nodejs18.x"
     },
     "api/widgets/[...slug].js": {
       "includeFiles": "../../src/widgets/**",
