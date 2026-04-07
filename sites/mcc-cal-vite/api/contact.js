@@ -64,7 +64,7 @@ export default async function handler(req, res) {
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,
-      subject: `[Contact] ${subject} — from ${name}`,
+      subject: `[Contact] ${subject}  from ${name}`,
       text: [
         `Name: ${name}`,
         `Email: ${email}`,
