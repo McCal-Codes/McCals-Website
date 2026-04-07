@@ -24,6 +24,7 @@ const prefersReducedMotion = () => {
 };
 
 const PoliciesLegalPage = () => {
+  const currentYear: number = new Date().getFullYear();
   usePageMeta({
     title: 'Policies & Legal | McCal Media',
     description:
