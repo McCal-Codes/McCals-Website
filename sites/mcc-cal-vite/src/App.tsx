@@ -81,6 +81,7 @@ export default function App() {
           )}
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/request-a-quote" element={<RequestAQuotePage />} />
+          <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/grab-coffee" element={<SchedulePage />} />
           <Route path="/grab-a-coffee" element={<GrabCoffeePage />} />
           <Route path="/book-a-podcast" element={<BookPodcastPage />} />
