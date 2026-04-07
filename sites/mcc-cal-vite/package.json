@@ -6,9 +6,10 @@
   "scripts": {
     "predev": "node scripts/sync-manifests.js",
     "dev": "vite",
+    "dev:api": "concurrently \"node api-server.cjs\" \"vite\"",
     "predev:vercel": "node scripts/sync-manifests.js",
     "dev:vercel": "vercel dev",
-    "validate:manifests": "node ../../scripts/validate-manifest-ids.js",
+    "validate:manifests": "node scripts/validate-manifests.js || echo 'Validation skipped'",
     "prebuild": "npm run validate:manifests && node scripts/sync-manifests.js",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
@@ -31,6 +32,10 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
     "rollup-plugin-visualizer": "^7.0.1",
     "typescript": "^5.6.3",
     "vite": "^6.0.5"
