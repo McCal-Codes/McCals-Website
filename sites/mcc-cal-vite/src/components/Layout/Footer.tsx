@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             <section className="mcc-footer__section" aria-labelledby="footer-about">
               <h4 id="footer-about">About</h4>
               <ul className="mcc-footer__list">
-                <li><a href="/policies-legal#faq">FAQs</a></li>
+                <li><a href="/faq">FAQs</a></li>
                 <li><a href="/about">About Me</a></li>
                 <li><a href="/policies-legal">Policies &amp; Legal</a></li>
               </ul>
