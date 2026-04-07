@@ -1,13 +1,23 @@
 {
   "framework": "vite",
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build:fast",
   "outputDirectory": "dist",
+  "installCommand": "npm ci --prefer-offline --no-audit",
   "functions": {
     "api/**/*.js": {
-      "runtime": "nodejs18.x",
-      "maxDuration": 10
+      "runtime": "nodejs18.x"
     }
   },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build:fast",
+        "distDir": "dist"
+      }
+    }
+  ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/@:path*", "destination": "/@:path*" },
