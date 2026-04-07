@@ -62,7 +62,7 @@ export default async function handler(req, res) {
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,
-      subject: `[Quote Request] ${service_type} — from ${name}`,
+      subject: `[Quote Request] ${service_type}  from ${name}`,
       text: [
         `=== CONTACT ===`,
         `Name: ${name}`,
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
         `=== PROJECT ===`,
         `Service: ${service_type}`,
         `Date: ${project_date}`,
-        `Time: ${body.start_time || '--'} – ${body.end_time || '--'}`,
+        `Time: ${body.start_time || '--'}  ${body.end_time || '--'}`,
         `Location: ${body.location || 'N/A'}`,
         `Setting: ${body.setting || 'N/A'}`,
         `Attendees: ${body.attendees || 'N/A'}`,

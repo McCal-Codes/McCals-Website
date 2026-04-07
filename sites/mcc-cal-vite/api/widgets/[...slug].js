@@ -9,14 +9,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * Serves widget HTML files from the repository filesystem.
  *
  * Supports:
- *   /api/widgets/concert-portfolio                           → auto-detect latest
- *   /api/widgets/concert-portfolio/v4.9.3-concert.html      → specific version
- *   /api/widgets/portfolios/concert-portfolio               → categorical, auto-detect
- *   /api/widgets/portfolios/concert-portfolio/v4.9.3.html   → categorical + specific version
+ *   /api/widgets/concert-portfolio                            auto-detect latest
+ *   /api/widgets/concert-portfolio/v4.9.3-concert.html       specific version
+ *   /api/widgets/portfolios/concert-portfolio                categorical, auto-detect
+ *   /api/widgets/portfolios/concert-portfolio/v4.9.3.html    categorical + specific version
  */
 
 function findWidgetPath(widget) {
-  // Resolve from this file's location up to repo root → src/widgets
+  // Resolve from this file's location up to repo root  src/widgets
   const baseDir = path.resolve(__dirname, '..', '..', '..', '..', 'src', 'widgets');
   const categories = ['_admin', '_navigation', '_content', '_content/about', '_content/contact-form', '_content/quote-request', '_content/policies-legal', '_content/accessibility-statement', 'portfolios', 'projects'];
   for (const category of categories) {
