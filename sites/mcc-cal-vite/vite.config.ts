@@ -75,6 +75,19 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
+  build: {
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'router-vendor': ['react-router-dom'],
+          'query-vendor': ['@tanstack/react-query'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 500,
+  },
   define: {
     'import.meta.env.VITE_VERCEL_ENV': JSON.stringify(
       process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development'
