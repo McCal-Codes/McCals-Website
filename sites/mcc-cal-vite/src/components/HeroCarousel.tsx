@@ -50,7 +50,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/journalism',
     links: [
       { url: '/journalism', label: 'Journalism' },
-      { url: '/showcase?filter=politics', label: 'Politics Gallery' },
+      { url: '/featured-work', label: 'Featured Work' },
     ],
     cta: 'Politics',
     alt: 'Obama Smiling at the crowd during a Rally In Pittsburgh, PA',
@@ -65,7 +65,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/journalism',
     links: [
       { url: '/journalism', label: 'Journalism' },
-      { url: '/showcase?filter=protest', label: 'Protest Coverage' },
+      { url: '/events', label: 'Event Coverage' },
     ],
     cta: 'Journalism',
     alt: 'Journalism assignment image from CMU protest.',
@@ -95,7 +95,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/portraits',
     links: [
       { url: '/portraits', label: 'Portraits' },
-      { url: '/showcase?filter=portraits', label: 'Portrait Gallery' },
+      { url: '/portraits', label: 'Portrait Gallery' },
     ],
     cta: 'Portraits',
     alt: 'A woman and a child holding a sparkler at night, with dark trees in the background.',
@@ -110,7 +110,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/events',
     links: [
       { url: '/events', label: 'Events' },
-      { url: '/showcase?filter=corporate', label: 'Corporate Work' },
+      { url: '/events', label: 'Corporate Work' },
     ],
     cta: 'Corporate',
     alt: 'Group of people at a professional networking event, talking and laughing, with a woman preparing drinks on a table.',
@@ -125,7 +125,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/events',
     links: [
       { url: '/events', label: 'Events' },
-      { url: '/showcase?filter=event', label: 'Event Gallery' },
+      { url: '/events', label: 'Event Gallery' },
     ],
     cta: 'Event',
     alt: 'Event image from Honky Tonk gathering.',
@@ -140,7 +140,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/concerts',
     links: [
       { url: '/concerts', label: 'Concerts' },
-      { url: '/showcase?filter=concert', label: 'Concert Gallery' },
+      { url: '/concerts', label: 'Concert Gallery' },
     ],
     cta: 'Concert',
     alt: 'A singer on stage on his knees with green and blue lighting.',
@@ -155,7 +155,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/events',
     links: [
       { url: '/events', label: 'Events' },
-      { url: '/showcase?filter=theatre', label: 'Theatre Gallery' },
+      { url: '/events', label: 'Theatre Gallery' },
     ],
     cta: 'Theatre',
     alt: 'The cast from A Guy Who Hates Musicals together on stage.',
@@ -170,7 +170,7 @@ const FAVORITES: HeroSlide[] = [
     href: '/nature',
     links: [
       { url: '/nature', label: 'Nature' },
-      { url: '/showcase?filter=nature', label: 'Nature Gallery' },
+      { url: '/nature', label: 'Nature Gallery' },
     ],
     cta: 'Nature',
     alt: 'Close-up of a pink coneflower with a bee on the dark center cone, blurred green background.',

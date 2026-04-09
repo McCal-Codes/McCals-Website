@@ -23,7 +23,7 @@ function getClientIp(req) {
     return realIp.trim();
   }
 
-  return req.socket?.remoteAddress || req.connection?.remoteAddress || 'unknown';
+  return (req.socket && req.socket.remoteAddress) || (req.connection && req.connection.remoteAddress) || 'unknown';
 }
 
 function setRateLimitHeaders(res, { limit, remaining, resetAt }) {
