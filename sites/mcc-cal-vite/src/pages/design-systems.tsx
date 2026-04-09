@@ -1,16 +1,5 @@
-import { Layout } from '@/components';
-import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
-import { getWidgetConfig } from '@/utils/widgetConfig';
+import { ComingSoon } from '@/components';
 
-const DesignSystemsPage = () => {
-  const config = getWidgetConfig('design-systems');
-  if (!config) return <div>Widget not found</div>;
-
-  return (
-    <Layout>
-      <WidgetEmbed widget={config.widget} category={config.category} />
-    </Layout>
-  );
-};
+const DesignSystemsPage = () => <ComingSoon title="Design Systems" />;
 
 export default DesignSystemsPage;

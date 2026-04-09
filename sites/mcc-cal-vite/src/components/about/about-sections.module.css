@@ -173,51 +173,100 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 .actionButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-height: 38px;
-  padding: 0.55rem 0.9rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
+  gap: 8px;
+  min-height: 44px;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--about-text-primary);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
+  letter-spacing: 0.01em;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
   transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.actionButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
 .actionButton:hover,
 .actionButton:focus-visible {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+  transform: translateY(-3px) scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(255, 255, 255, 0.05);
   outline: none;
 }
 
+.actionButton:hover::before,
+.actionButton:focus-visible::before {
+  opacity: 1;
+}
+
 .actionPrimary {
-  color: #272423;
-  background: linear-gradient(135deg, #e2d9cf 0%, #b8b0aa 100%);
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #f5f0eb 0%, #e8e2dc 50%, #ddd6cf 100%);
   border-color: transparent;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.actionPrimary::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
 }
 
 .actionPrimary:hover,
 .actionPrimary:focus-visible {
-  background: linear-gradient(135deg, #efe7de 0%, #c8bfb8 100%);
+  background: linear-gradient(135deg, #fffdfa 0%, #f0eae4 50%, #e5ded6 100%);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* Button icon styling */
+.actionButton svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.actionButton:hover svg {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.actionPrimary svg {
+  opacity: 0.9;
 }
 
 .menuWrapper {
@@ -698,15 +747,15 @@
   justify-content: center;
   padding: 20px 24px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 251, 247, 0.02) 100%
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
   );
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   box-sizing: border-box;
@@ -792,20 +841,16 @@
   max-height: 100%;
   object-fit: contain;
   transition: all 0.3s ease;
-  mix-blend-mode: multiply;
+  /* Filters for dark background visibility */
+  filter: brightness(1.15) contrast(1.05);
 }
 
-/* Specific logo background removal - BC3 and NPPA */
-.clientImageWrapper img[src*='bc3-logo-new.png'],
-.clientImageWrapper img[src*='nppa-real-logo.png'] {
-  mix-blend-mode: screen;
-  filter: brightness(1.2);
-}
-
-.clientCard:hover .clientImageWrapper img[src*='bc3-logo-new.png'],
-.clientCard:hover .clientImageWrapper img[src*='nppa-real-logo.png'] {
-  mix-blend-mode: normal;
-  filter: brightness(1);
+/* Dark logos need extra brightness on dark backgrounds */
+.clientImageWrapper img[src*='newyorkpost'],
+.clientImageWrapper img[src*='pittsburgh-magazine'],
+.clientImageWrapper img[src*='pointpark'],
+.clientImageWrapper img[src*='globe'] {
+  filter: brightness(1.3) contrast(1.1);
 }
 
 .clientFallback {
@@ -970,11 +1015,41 @@
 @media (max-width: 1023px) {
   .bioGrid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
   }
-  
+
   .bioPhoto {
     justify-self: center;
+    max-width: 280px;
+  }
+
+  /* Tablet: Two-column button layout */
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .actionButton {
+    min-height: 46px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+  }
+
+  /* Full-width for primary action */
+  .actionPrimary {
+    grid-column: span 2;
+  }
+
+  /* Menu wrappers stay full width when open */
+  .menuWrapper {
+    grid-column: span 1;
+  }
+
+  .menuPanel {
+    left: 0;
+    right: 0;
+    min-width: 100%;
   }
 }
 
@@ -982,44 +1057,94 @@
   .actions,
   .clientsFooter,
   .reviewsFooter {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 14px;
   }
 
   .menuWrapper,
   .actionButton {
     width: 100%;
-    min-height: 44px;
-    padding: 12px 16px;
+    min-height: 48px;
+    padding: 14px 20px;
     font-size: 1rem;
+    border-radius: 14px;
+    grid-column: auto;
+    /* Touch feedback - immediate response */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Active state for touch devices */
+  .actionButton:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .actionPrimary:active {
+    background: linear-gradient(135deg, #e5ded6 0%, #d8d0c8 50%, #ccc5bd 100%);
+  }
+
+  /* Larger icons on mobile */
+  .actionButton svg {
+    width: 20px;
+    height: 20px;
   }
 
   .menuPanel {
     position: static;
     min-width: 0;
-    margin-top: 8px;
+    margin-top: 10px;
     transform: none;
     display: none;
     box-shadow: none;
+    border-radius: 12px;
   }
 
   .menuPanel.open {
     display: grid;
   }
 
+  .menuItem {
+    min-height: 48px;
+    padding: 14px 16px;
+    font-size: 1rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .menuItem:active {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
+
   .stats {
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 10px;
+    margin-top: 20px;
   }
 
   .stat {
-    padding: 16px 12px;
-    min-height: 44px;
+    padding: 14px 10px;
+    min-height: 48px;
+    border-radius: 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .stat:active {
+    transform: scale(0.96);
+    transition: transform 0.1s ease;
   }
 
   .stat strong {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  .stat span {
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
   }
 
   .clientCard {

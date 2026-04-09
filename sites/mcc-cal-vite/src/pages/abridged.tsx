@@ -1,16 +1,5 @@
-import { Layout } from '@/components';
-import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
-import { getWidgetConfig } from '@/utils/widgetConfig';
+import { ComingSoon } from '@/components';
 
-const AbridgedPage = () => {
-  const config = getWidgetConfig('abridged');
-  if (!config) return <div>Widget not found</div>;
-
-  return (
-    <Layout>
-      <WidgetEmbed widget={config.widget} category={config.category} />
-    </Layout>
-  );
-};
+const AbridgedPage = () => <ComingSoon title="Abridged Portfolio" />;
 
 export default AbridgedPage;

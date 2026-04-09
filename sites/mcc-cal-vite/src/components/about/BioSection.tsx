@@ -187,12 +187,20 @@ export function BioSection({ className = '' }: BioSectionProps) {
             </div>
 
             <Link to="/featured-work" className={styles.actionButton}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2l-5.5 9h11z"/>
+                <path d="M2 22h20v-2H2z"/>
+                <path d="M17.5 2L12 11h11z"/>
+              </svg>
               View portfolio
             </Link>
             <Link
               to="/request-a-quote"
               className={`${styles.actionButton} ${styles.actionPrimary}`}
             >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-2 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm4-6H8V8h8v4z"/>
+              </svg>
               Request a quote
             </Link>
           </div>

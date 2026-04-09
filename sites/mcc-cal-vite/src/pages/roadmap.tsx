@@ -1,16 +1,5 @@
-import { Layout } from '@/components';
-import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
-import { getWidgetConfig } from '@/utils/widgetConfig';
+import { ComingSoon } from '@/components';
 
-const RoadmapPage = () => {
-  const config = getWidgetConfig('roadmap');
-  if (!config) return <div>Widget not found</div>;
-
-  return (
-    <Layout>
-      <WidgetEmbed widget={config.widget} category={config.category} />
-    </Layout>
-  );
-};
+const RoadmapPage = () => <ComingSoon title="Roadmap" />;
 
 export default RoadmapPage;

@@ -169,6 +169,28 @@ export default function GrabCoffeePage() {
     }
   };
 
+  // API unavailable fallback
+  if (availabilityError && availabilityError.includes('Failed to load')) {
+    return (
+      <Layout>
+        <div className="scheduling-page">
+          <div className="scheduling-container">
+            <header className={`scheduling-header ${BOOKING_TYPE.headerClass}`}>
+              <h1 className="scheduling-title">{BOOKING_TYPE.name}</h1>
+              <p className="scheduling-subtitle">{BOOKING_TYPE.description}</p>
+            </header>
+            <div className="scheduling-error" role="alert" style={{ marginTop: '2rem' }}>
+              <p>Scheduling is temporarily unavailable.</p>
+              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '0.5rem' }}>
+                Please email me directly at <a href="mailto:hello@mcc-cal.com">hello@mcc-cal.com</a> to grab a coffee.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <div className="scheduling-page">
