@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
             <div>&copy; <span>{year}</span> Caleb McCartney. All rights reserved.</div>
             <div className="mcc-footer__version">v{WIDGET_VERSION}</div>
             <div className="mcc-footer__links">
-              <a href="/accessibility">Accessibility</a>
+              <a href="/policies-legal#accessibility">Accessibility</a>
               <a href="/policies-legal#cookies">Cookies</a>
             </div>
           </div>

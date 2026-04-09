@@ -1,63 +1,610 @@
 {
   "version": "2.0",
   "name": "Kamala Speaks At Erie",
-  "totalImages": 8,
+  "totalImages": 67,
   "images": [
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3741.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3741.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3752.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3752.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3754.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3754.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3757 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3757 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3757.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3757.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3763.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3763.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3766 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3766 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3766.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3766.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3781.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3781.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3797.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3797.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3804 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3804 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3804.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3804.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3814.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3814.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3831.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3831.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3847.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3847.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3849.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3849.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3851 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3851 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3851.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3851.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3852.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3852.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3859.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3859.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3860.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3860.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3864.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3864.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3867.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3867.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3891.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3891.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3895.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3895.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3937.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3937.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3947.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3947.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3952.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3952.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3963.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3963.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3973.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3973.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL3979.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL3979.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4004.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4004.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4037.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4037.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4056.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4056.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4059.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4059.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4115 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4115 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4115.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4115.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4175.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4175.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4185.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4185.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4190.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4190.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4220.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4220.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4246.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4246.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4248 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4248 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4248.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4248.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL4255.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL4255.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL6929.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL6929.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL6938.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL6938.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL6948 1.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL6948 1.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL6948.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL6948.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL6964.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL6964.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL6966.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL6966.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL6991.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL6991.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL7090.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL7090.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL7119.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL7119.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL7212.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL7212.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL7230.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL7230.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL7291.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL7291.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
+    {
+      "filename": "141024_Kamala Speaks at Erie_CAL7312.jpg",
+      "path": "141024_Kamala Speaks at Erie_CAL7312.jpg",
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
+    },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL3741.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL3741.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL3757.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL3757.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL3766.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL3766.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL3804.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL3804.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL3851.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL3851.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL4115.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL4115.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL4248.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL4248.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     },
     {
       "filename": "241014_Kamala Speaks at Erie_CAL6948.jpg",
       "path": "241014_Kamala Speaks at Erie_CAL6948.jpg",
-      "description": "Kamala Speaks at Erie photography",
-      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa., Oct. 14, 2024.",
-      "tags": ["Politics", "Campaign"]
+      "description": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "caption": "Vice President Kamala Harris speaks at a campaign rally in Erie, Pa.",
+      "tags": [
+        "Politics"
+      ]
     }
   ],
   "tags": [

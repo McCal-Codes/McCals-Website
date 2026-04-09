@@ -24,8 +24,58 @@ body {
 }
 
 /* Light/Dark theme root backgrounds */
-body[data-theme="dark"] { background: #0b0b0d; color: #e8e8e8; }
-body[data-theme="light"] { background: #f8f8f8; color: #222; }
+/* Dark theme (default) */
+body[data-theme="dark"] { 
+  background: var(--mcc-bg-elevated); 
+  color: var(--mcc-fg);
+}
+
+/* Light theme - refined for photography portfolio */
+body[data-theme="light"] { 
+  /* Light mode background depth layers */
+  --mcc-bg: #faf9f7;              /* Warm off-white - page background */
+  --mcc-bg-elevated: #ffffff;     /* Pure white - cards/popovers */
+  --mcc-bg-card: #f5f4f2;         /* Slightly darker - input backgrounds */
+  --mcc-bg-hover: #eae8e6;        /* Hover states */
+  --mcc-bg-active: #e0dedc;       /* Active/selected states */
+  --mcc-fg: #2a2522;
+  --mcc-fg-muted: #5a5550;
+  --mcc-fg-subtle: #8a8580;
+  --mcc-accent: #9a8b7a;
+  --mcc-accent-strong: #6a5b4a;
+  /* Light mode border/line hierarchy */
+  --mcc-line: #e0dedc;            /* Subtle dividers */
+  --mcc-line-medium: #d5d3d1;     /* Moderate borders */
+  --mcc-line-strong: #d0cecc;     /* Prominent borders */
+  --mcc-line-focus: #9a8b7a;      /* Focus ring - uses accent */
+  --mcc-muted: #b0aba6;
+  --mcc-chip: #f0eeec;
+  
+  /* Light mode semantic colors - photo-appropriate */
+  --mcc-success: #5a6a4a;           /* Deep sage - earthy, subtle */
+  --mcc-success-bg: rgba(90, 106, 74, 0.08);
+  --mcc-warning: #8a7a4a;           /* Olive gold - warm, understated */
+  --mcc-warning-bg: rgba(138, 122, 74, 0.08);
+  --mcc-error: #8a5a5a;             /* Muted brick - less alarming */
+  --mcc-error-bg: rgba(138, 90, 90, 0.08);
+  --mcc-info: #4a6a7a;              /* Slate gray - neutral */
+  --mcc-info-bg: rgba(74, 106, 122, 0.08);
+  
+  /* Light mode event colors */
+  --mcc-event-coffee: #a88a5a;
+  --mcc-event-coffee-bg: rgba(168, 138, 90, 0.06);
+  --mcc-event-consultation: #5a9ab0;
+  --mcc-event-consultation-bg: rgba(90, 154, 176, 0.06);
+  
+  /* Light mode CTA - slightly darker gold for visibility on white */
+  --mcc-cta: #C4A030;
+  --mcc-cta-hover: #D5B140;
+  --mcc-cta-text: #1a1816;
+  --mcc-cta-gradient: linear-gradient(135deg, #D5B140 0%, #C4A030 100%);
+  
+  background: var(--mcc-bg);
+  color: var(--mcc-fg);
+}
 .site-title {
   font-size: 2.5rem;
   font-weight: 700;
@@ -70,23 +120,62 @@ body[data-theme="light"] .mcc-nav.is-home:not(.is-scrolled) {
 }
 
 :root {
-  --mcc-accent: #b8b0aa;
-  --mcc-accent-strong: #cac2ba;
-  --mcc-bg: #050506;
+  /* Base neutrals - harmonized taupe palette */
+  /* Background depth layers - subtle hierarchy */
+  --mcc-bg: #050506;              /* Deepest - page background */
+  --mcc-bg-elevated: #0b0b0d;     /* Slightly lighter - nav/footer */
+  --mcc-bg-card: #18171a;         /* Card/panel surfaces */
+  --mcc-bg-hover: #232124;        /* Hover states */
+  --mcc-bg-active: #2a2826;       /* Active/selected states */
   --mcc-fg: #cac2ba;
-  --mcc-line: #2a2a2a;
+  --mcc-fg-muted: #9a928a;
+  --mcc-fg-subtle: #6a625a;
+  --mcc-accent: #b8b0aa;
+  --mcc-accent-strong: #dcd4cc;
+  /* Border/line hierarchy */
+  --mcc-line: #2a2a2a;            /* Subtle dividers */
+  --mcc-line-medium: #323230;     /* Moderate borders */
+  --mcc-line-strong: #3a3a3a;     /* Prominent borders */
+  --mcc-line-focus: #4a4a48;      /* Focus ring borders */
   --mcc-muted: #5b5553;
+  
+  /* Semantic colors - photo-appropriate muted tones */
+  /* Using desaturated earth tones that complement photography */
+  --mcc-success: #7a8a6a;           /* Muted sage - complements nature/skin tones */
+  --mcc-success-bg: rgba(122, 138, 106, 0.12);
+  --mcc-warning: #b89a6a;           /* Warm sand - harmonizes with taupe */
+  --mcc-warning-bg: rgba(184, 154, 106, 0.12);
+  --mcc-error: #9a6a6a;             /* Dusty rose - softens harsh red */
+  --mcc-error-bg: rgba(154, 106, 106, 0.12);
+  --mcc-info: #6a8a9a;              /* Muted slate - neutral, professional */
+  --mcc-info-bg: rgba(106, 138, 154, 0.12);
+  
+  /* Event type colors - unified with taupe theme */
+  --mcc-event-coffee: #c9a86c;
+  --mcc-event-coffee-bg: rgba(201, 168, 108, 0.08);
+  --mcc-event-consultation: #7fb5c9;
+  --mcc-event-consultation-bg: rgba(127, 181, 201, 0.08);
+  
+  /* CTA color - rich gold for primary actions */
+  --mcc-cta: #D4AF37;
+  --mcc-cta-hover: #E5C04A;
+  --mcc-cta-text: #1a1816;
+  --mcc-cta-gradient: linear-gradient(135deg, #E5C04A 0%, #D4AF37 100%);
+  
+  /* Legacy aliases for compatibility */
   --bg: var(--mcc-bg);
   --fg: var(--mcc-fg);
   --line: var(--mcc-line);
   --accent: var(--mcc-accent);
   --muted: var(--mcc-muted);
-  --chip: #1b1b1b;
-  --focus: #7dd3fc;
+  --chip: var(--mcc-bg-card);
+  --focus: var(--mcc-info);
   --link: var(--mcc-accent-strong);
   --panel-bg: rgba(48, 44, 44, 0.85);
   --panel-border: rgba(184, 176, 170, 0.2);
   --panel-blur: 12px;
+  
+  /* Gradients */
   --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
   --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
   --mcc-space-1: 4px;
@@ -447,3 +536,43 @@ body[data-theme="light"] .mcc-nav.is-home:not(.is-scrolled) {
     backdrop-filter: blur(12px);
   }
 }
+
+/* =============================================
+   COLOR SYSTEM REFERENCE (v2.0 - Photo-Appropriate)
+   =============================================
+
+   Background Hierarchy (darkest → lightest):
+   --mcc-bg              #050506  Page background
+   --mcc-bg-elevated     #0b0b0d  Nav/footer
+   --mcc-bg-card         #18171a  Cards/panels
+   --mcc-bg-hover        #232124  Hover states
+   --mcc-bg-active       #2a2826  Active/selected
+
+   Foreground Hierarchy:
+   --mcc-fg              #cac2ba  Primary text
+   --mcc-fg-muted        #9a928a  Secondary text
+   --mcc-fg-subtle       #6a625a  Tertiary text
+
+   Border/Line Hierarchy:
+   --mcc-line            #2a2a2a  Subtle dividers
+   --mcc-line-medium     #323230  Moderate borders
+   --mcc-line-strong     #3a3a3a  Prominent borders
+   --mcc-line-focus      #4a4a48  Focus rings
+
+   Accent & CTA:
+   --mcc-accent          #b8b0aa  Primary accent (taupe)
+   --mcc-accent-strong   #dcd4cc  Emphasis text
+   --mcc-cta             #D4AF37  Rich gold for CTAs
+
+   Event Colors:
+   --mcc-event-coffee        #c9a86c  Warm gold
+   --mcc-event-consultation  #7fb5c9  Muted teal
+
+   Semantic (Photo-Friendly):
+   --mcc-success   #7a8a6a  Muted sage
+   --mcc-warning   #b89a6a  Warm sand
+   --mcc-error     #9a6a6a  Dusty rose
+   --mcc-info      #6a8a9a  Muted slate
+
+   Light Mode: All colors adapt in [data-theme="light"] block
+   ============================================= */

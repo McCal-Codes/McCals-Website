@@ -1,108 +1,577 @@
 {
   "summary": {
-    "timestamp": "2025-11-10T18:53:23.069Z",
-    "threshold": 1000000,
-    "quality": 80,
+    "timestamp": "2026-04-07T21:17:20.119Z",
+    "threshold": 1250000,
+    "quality": 78,
     "force": false,
     "backup": false,
     "dry": false,
-    "candidates": 9,
-    "optimized": 0,
-    "skipped": 2,
-    "totalBefore": 23365813,
-    "totalAfter": 0,
-    "savings": 23365813,
-    "percent": "100.00"
+    "candidates": 93,
+    "optimized": 93,
+    "skipped": 0,
+    "totalBefore": 1378213477,
+    "totalAfter": 47783608,
+    "savings": 1330429869,
+    "percent": "96.53"
   },
   "items": [
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.jpg",
-      "before": 3692194,
-      "after": 3692194,
-      "status": "webp-only",
-      "webp": {
-        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7368-min.webp",
-        "size": 3062722,
-        "status": "generated"
-      }
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3802.jpg",
+      "before": 16248138,
+      "after": 550425,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7377-min.jpg",
-      "before": 2731365,
-      "after": 2731365,
-      "status": "webp-only",
-      "webp": {
-        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7377-min.webp",
-        "size": 2726844,
-        "status": "generated"
-      }
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3810.jpg",
+      "before": 18058785,
+      "after": 488474,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7391-min.jpg",
-      "before": 3190454,
-      "after": 3190454,
-      "status": "webp-only",
-      "webp": {
-        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7391-min.webp",
-        "size": 2493000,
-        "status": "generated"
-      }
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3814.jpg",
+      "before": 14085224,
+      "after": 487363,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7394-min.jpg",
-      "before": 2856896,
-      "after": 2856896,
-      "status": "webp-only",
-      "webp": {
-        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7394-min.webp",
-        "size": 2806436,
-        "status": "generated"
-      }
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3815.jpg",
+      "before": 13693551,
+      "after": 497044,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7423-min.jpg",
-      "before": 2518423,
-      "after": 2518423,
-      "status": "webp-only",
-      "webp": {
-        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7423-min.webp",
-        "size": 2545492,
-        "status": "generated"
-      }
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3821.jpg",
+      "before": 15822856,
+      "after": 670312,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7461-min.jpg",
-      "before": 2823384,
-      "after": 2823384,
-      "status": "webp-only",
-      "webp": {
-        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7461-min.webp",
-        "size": 2639428,
-        "status": "generated"
-      }
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3825.jpg",
+      "before": 19326031,
+      "after": 612131,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7462-min.jpg",
-      "before": 3300244,
-      "after": 3300244,
-      "status": "webp-only",
-      "webp": {
-        "path": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Franks Script Reading/231110_Franks Script Reading_CAL7462-min.webp",
-        "size": 2531944,
-        "status": "generated"
-      }
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3827.jpg",
+      "before": 14399280,
+      "after": 413877,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4924_webuse.jpg",
-      "before": 1026303,
-      "after": 1026303,
-      "status": "skip-small-gain"
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3830.jpg",
+      "before": 13809615,
+      "after": 439162,
+      "status": "optimized"
     },
     {
-      "file": "/Users/mccal/Coding Shenanigans/McCals-Website/src/images/Portfolios/Events/Yinzers Meet Hike/250906_Yinzers Meet Hike_CAL4946_webuse.jpg",
-      "before": 1226550,
-      "after": 1226550,
-      "status": "skip-small-gain"
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3832.jpg",
+      "before": 13163243,
+      "after": 475693,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3833.jpg",
+      "before": 13745442,
+      "after": 413505,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3837.jpg",
+      "before": 15689570,
+      "after": 561096,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3840.jpg",
+      "before": 11515686,
+      "after": 402017,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3845.jpg",
+      "before": 16174817,
+      "after": 488371,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3849.jpg",
+      "before": 13504995,
+      "after": 595205,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3857.jpg",
+      "before": 12554994,
+      "after": 480027,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3859.jpg",
+      "before": 12664476,
+      "after": 457355,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3862.jpg",
+      "before": 11569782,
+      "after": 324906,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3864.jpg",
+      "before": 11544317,
+      "after": 197933,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3868.jpg",
+      "before": 14569587,
+      "after": 323357,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3869.jpg",
+      "before": 14072344,
+      "after": 350666,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3891.jpg",
+      "before": 18522293,
+      "after": 541585,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3892.jpg",
+      "before": 18698175,
+      "after": 546355,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3901.jpg",
+      "before": 14686336,
+      "after": 489732,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3907.jpg",
+      "before": 19377169,
+      "after": 518474,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3911.jpg",
+      "before": 16345029,
+      "after": 494048,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3914.jpg",
+      "before": 23340673,
+      "after": 1461342,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3916.jpg",
+      "before": 19452717,
+      "after": 1056722,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3928.jpg",
+      "before": 13311608,
+      "after": 512604,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3932.jpg",
+      "before": 11813249,
+      "after": 410654,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3935.jpg",
+      "before": 15034000,
+      "after": 478776,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3955.jpg",
+      "before": 13892616,
+      "after": 533347,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3957.jpg",
+      "before": 12587785,
+      "after": 434023,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3983.jpg",
+      "before": 15060522,
+      "after": 482550,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3988.jpg",
+      "before": 16554664,
+      "after": 647875,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3989.jpg",
+      "before": 10306017,
+      "after": 455104,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3991.jpg",
+      "before": 17671886,
+      "after": 457031,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3995.jpg",
+      "before": 17344669,
+      "after": 512903,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4003.jpg",
+      "before": 12794238,
+      "after": 426051,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4008.jpg",
+      "before": 12956239,
+      "after": 874833,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4011.jpg",
+      "before": 14598697,
+      "after": 619266,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4025.jpg",
+      "before": 16124665,
+      "after": 365917,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4030.jpg",
+      "before": 15637914,
+      "after": 387041,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4041.jpg",
+      "before": 15505463,
+      "after": 451912,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4050.jpg",
+      "before": 16694787,
+      "after": 449958,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4057.jpg",
+      "before": 16074392,
+      "after": 507948,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4063.jpg",
+      "before": 15864526,
+      "after": 506081,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4076.jpg",
+      "before": 14970615,
+      "after": 371550,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4080.jpg",
+      "before": 13453945,
+      "after": 594017,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4084.jpg",
+      "before": 16997125,
+      "after": 1303918,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4089.jpg",
+      "before": 13181604,
+      "after": 297201,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4093.jpg",
+      "before": 11323269,
+      "after": 204989,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4096.jpg",
+      "before": 15385130,
+      "after": 274485,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4104.jpg",
+      "before": 13410623,
+      "after": 705574,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4107.jpg",
+      "before": 13081048,
+      "after": 713728,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4111.jpg",
+      "before": 17660481,
+      "after": 606900,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4112.jpg",
+      "before": 15459210,
+      "after": 342225,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4139.jpg",
+      "before": 9403671,
+      "after": 795533,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4149.jpg",
+      "before": 13030650,
+      "after": 507927,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4150.jpg",
+      "before": 13879015,
+      "after": 510208,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4192.jpg",
+      "before": 20740714,
+      "after": 472462,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4200.jpg",
+      "before": 16250978,
+      "after": 429516,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4206.jpg",
+      "before": 22108679,
+      "after": 574038,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4221.jpg",
+      "before": 11404447,
+      "after": 249675,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4224.jpg",
+      "before": 10409522,
+      "after": 363167,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4231.jpg",
+      "before": 16567042,
+      "after": 614527,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4243.jpg",
+      "before": 8949650,
+      "after": 655978,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4244.jpg",
+      "before": 9128815,
+      "after": 724273,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4260.jpg",
+      "before": 20944444,
+      "after": 343412,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4263.jpg",
+      "before": 21631274,
+      "after": 424836,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4264.jpg",
+      "before": 7477109,
+      "after": 376486,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4268.jpg",
+      "before": 11159831,
+      "after": 293689,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4270.jpg",
+      "before": 9427009,
+      "after": 156324,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4271.jpg",
+      "before": 13467433,
+      "after": 764206,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4274.jpg",
+      "before": 16583819,
+      "after": 810986,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4280.jpg",
+      "before": 4859670,
+      "after": 801063,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4284.jpg",
+      "before": 19102107,
+      "after": 313124,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4285.jpg",
+      "before": 16636438,
+      "after": 185382,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4291.jpg",
+      "before": 5646591,
+      "after": 500219,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4294.jpg",
+      "before": 11591814,
+      "after": 350727,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4295.jpg",
+      "before": 19113120,
+      "after": 279231,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4297.jpg",
+      "before": 14297245,
+      "after": 247206,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4299.jpg",
+      "before": 10515364,
+      "after": 1028163,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4301.jpg",
+      "before": 21975712,
+      "after": 404484,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4309.jpg",
+      "before": 12118742,
+      "after": 228362,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4328.jpg",
+      "before": 18605402,
+      "after": 474383,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4329.jpg",
+      "before": 20173560,
+      "after": 428828,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4332.jpg",
+      "before": 19627238,
+      "after": 1152901,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4335.jpg",
+      "before": 13597428,
+      "after": 488882,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4336.jpg",
+      "before": 17575624,
+      "after": 474222,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4341.jpg",
+      "before": 11173592,
+      "after": 614103,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL4345.jpg",
+      "before": 13155709,
+      "after": 714249,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3781.jpg",
+      "before": 17239382,
+      "after": 361258,
+      "status": "optimized"
+    },
+    {
+      "file": "I:\\Programing\\Projects\\McCals-Website\\src\\images\\Portfolios\\Events\\Pittsburgh Honky Tonk\\250823_Honky Tonk_CAL3789.jpg",
+      "before": 17258525,
+      "after": 403940,
+      "status": "optimized"
     }
   ]
 }

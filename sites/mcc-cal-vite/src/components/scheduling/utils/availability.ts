@@ -1,6 +1,6 @@
-import type { AvailabilityRules, TimeSlot, DayAvailability, Booking } from '../types/booking';
-import { AVAILABILITY_RULES } from '../config/availability';
-import { formatDateForInput, parseDateString, addDays } from './dateHelpers';
+import type { AvailabilityRules, TimeSlot, DayAvailability, Booking } from '../types/booking.js';
+import { AVAILABILITY_RULES } from '../config/availability.js';
+import { formatDateForInput, parseDateString, addDays } from './dateHelpers.js';
 
 /**
  * Availability calculation utilities

@@ -21,12 +21,50 @@ const JPEG_QUALITY = 80;
 const MAX_WIDTH = 3840; // 4K max
 const MAX_HEIGHT = 2160;
 
-// Track statistics
+const CACHE_FILE = path.join(__dirname, '../.cache/image-optimization-cache.json');
+
+// In-memory cache
+let optimizationCache = {};
+
+// Load cache from disk
+async function loadCache() {
+  try {
+    const data = await fs.readFile(CACHE_FILE, 'utf8');
+    optimizationCache = JSON.parse(data);
+    log(`Loaded cache with ${Object.keys(optimizationCache).length} entries`);
+  } catch {
+    optimizationCache = {};
+    log('No cache found, starting fresh');
+  }
+}
+
+// Save cache to disk
+async function saveCache() {
+  try {
+    await fs.mkdir(path.dirname(CACHE_FILE), { recursive: true });
+    await fs.writeFile(CACHE_FILE, JSON.stringify(optimizationCache, null, 2));
+  } catch (err) {
+    error('Failed to save cache:', err.message);
+  }
+}
+
+// Get file hash for cache key
+async function getFileHash(filePath) {
+  try {
+    const stat = await fs.stat(filePath);
+    return `${stat.mtime.getTime()}-${stat.size}`;
+  } catch {
+    return null;
+  }
+}
+
+// Track stats with cache
 const stats = {
   processed: 0,
   skipped: 0,
   errors: 0,
   savedBytes: 0,
+  fromCache: 0,
 };
 
 function log(message, ...args) {
@@ -53,7 +91,6 @@ async function getImageSize(filePath) {
 async function optimizeImage(filePath) {
   const ext = path.extname(filePath).toLowerCase();
 
-  // Only process JPEG and PNG
   if (!['.jpg', '.jpeg', '.png'].includes(ext)) {
     stats.skipped++;
     return;
@@ -61,22 +98,29 @@ async function optimizeImage(filePath) {
 
   try {
     const originalSize = await getImageSize(filePath);
+    const fileHash = await getFileHash(filePath);
+    const fileName = path.basename(filePath);
 
-    // Read image metadata
-    const image = sharp(filePath);
-    const metadata = await image.metadata();
-
-    // Skip if already optimized (check if size is reasonable)
-    if (originalSize < 500000 && metadata.width <= MAX_WIDTH) {
-      log(`Skipping ${path.basename(filePath)} (already optimized)`);
-      stats.skipped++;
+    // Check cache first
+    if (optimizationCache[filePath] && optimizationCache[filePath].hash === fileHash) {
+      log(`Skipping ${fileName} (cached: ${optimizationCache[filePath].savedMB}MB saved)`);
+      stats.fromCache++;
+      stats.savedBytes += optimizationCache[filePath].savedBytes;
       return;
     }
 
-    // Create optimized version
+    const image = sharp(filePath);
+    const metadata = await image.metadata();
+
+    if (originalSize < 500000 && metadata.width <= MAX_WIDTH) {
+      log(`Skipping ${fileName} (already optimized)`);
+      stats.skipped++;
+      optimizationCache[filePath] = { hash: fileHash, optimized: true, savedBytes: 0, savedMB: 0 };
+      return;
+    }
+
     let pipeline = sharp(filePath, { failOnError: false });
 
-    // Resize if too large
     if (metadata.width > MAX_WIDTH || metadata.height > MAX_HEIGHT) {
       pipeline = pipeline.resize(MAX_WIDTH, MAX_HEIGHT, {
         fit: 'inside',
@@ -84,16 +128,13 @@ async function optimizeImage(filePath) {
       });
     }
 
-    // Optimize based on format
     if (ext === '.png') {
-      // PNG: compress with pngquant-like settings
       pipeline = pipeline.png({
         quality: JPEG_QUALITY,
         compressionLevel: 9,
         adaptiveFiltering: true,
       });
     } else {
-      // JPEG: optimize quality and strip unnecessary metadata
       pipeline = pipeline.jpeg({
         quality: JPEG_QUALITY,
         mozjpeg: true,
@@ -101,7 +142,6 @@ async function optimizeImage(filePath) {
       });
     }
 
-    // Write to temporary file first
     const tempPath = `${filePath}.tmp`;
     await pipeline.toFile(tempPath);
 
@@ -109,19 +149,26 @@ async function optimizeImage(filePath) {
     const savedBytes = originalSize - optimizedSize;
     const savedPercent = ((savedBytes / originalSize) * 100).toFixed(1);
 
-    // Only replace if we saved significant space (>5%)
     if (savedBytes > originalSize * 0.05) {
       await fs.rename(tempPath, filePath);
       stats.savedBytes += savedBytes;
       stats.processed++;
-      log(
-        `Optimized ${path.basename(filePath)}: ${(originalSize / 1024).toFixed(0)}KB → ${(optimizedSize / 1024).toFixed(0)}KB (saved ${savedPercent}%)`,
-      );
+      
+      const savedMB = (savedBytes / 1024 / 1024).toFixed(2);
+      optimizationCache[filePath] = { 
+        hash: await getFileHash(filePath),
+        optimized: true, 
+        savedBytes: savedBytes,
+        savedMB: savedMB,
+        date: new Date().toISOString()
+      };
+      
+      log(`Optimized ${fileName}: ${(originalSize / 1024).toFixed(0)}KB → ${(optimizedSize / 1024).toFixed(0)}KB (saved ${savedPercent}%)`);
     } else {
-      // Not worth it, keep original
       await fs.unlink(tempPath);
       stats.skipped++;
-      log(`Skipping ${path.basename(filePath)} (minimal savings)`);
+      log(`Skipping ${fileName} (minimal savings)`);
+      optimizationCache[filePath] = { hash: fileHash, optimized: false, savedBytes: 0, savedMB: 0 };
     }
   } catch (err) {
     error(`Failed to optimize ${path.basename(filePath)}:`, err.message);
@@ -174,22 +221,36 @@ async function main() {
 
   if (args.includes('--help') || args.includes('-h')) {
     console.log(`
-📸 Image Optimization Script
+📸 Image Optimization Script v2.0 (with Cache)
 
 Usage:
-  node scripts/optimize-images.js [portfolio]
+  node scripts/optimize-images.js [portfolio] [--clear-cache]
 
 Arguments:
   portfolio    Portfolio to optimize (Concert, Portrait, Nature, etc.)
                If omitted, optimizes all portfolios
+  --clear-cache   Clear the optimization cache and re-process all
 
 Examples:
   node scripts/optimize-images.js Concert
   node scripts/optimize-images.js Portrait
+  node scripts/optimize-images.js --clear-cache
   node scripts/optimize-images.js
 `);
     process.exit(0);
   }
+
+  // Handle --clear-cache
+  if (args.includes('--clear-cache')) {
+    optimizationCache = {};
+    await saveCache();
+    log('Cache cleared');
+    const idx = args.indexOf('--clear-cache');
+    args.splice(idx, 1);
+  }
+
+  // Load cache at start
+  await loadCache();
 
   const portfolio = args[0];
 
@@ -199,7 +260,6 @@ Examples:
   if (portfolio) {
     await optimizePortfolio(portfolio);
   } else {
-    // Optimize all portfolios
     const portfolios = await fs.readdir(PORTFOLIOS_BASE);
     for (const p of portfolios) {
       const pPath = path.join(PORTFOLIOS_BASE, p);
@@ -210,15 +270,20 @@ Examples:
     }
   }
 
+  // Save cache at end
+  await saveCache();
+
   const duration = ((Date.now() - startTime) / 1000).toFixed(1);
   const savedMB = (stats.savedBytes / 1024 / 1024).toFixed(2);
 
   console.log('\n📊 Optimization Summary:');
   console.log(`   • Processed: ${stats.processed} images`);
+  console.log(`   • From cache: ${stats.fromCache} images`);
   console.log(`   • Skipped: ${stats.skipped} images`);
   console.log(`   • Errors: ${stats.errors} images`);
   console.log(`   • Space saved: ${savedMB} MB`);
   console.log(`   • Duration: ${duration}s`);
+  console.log(`   • Cache entries: ${Object.keys(optimizationCache).length}`);
 
   if (stats.errors > 0) {
     process.exit(1);

@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { applyRateLimit } from './_lib/rate-limit.js';
+import { contactSchema, safeParseBody } from './_lib/validation.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -26,30 +27,25 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { name, email, subject, message, consent, contact_loaded_at, cf_website_url } = req.body || {};
-
-  // Honeypot check
-  if (cf_website_url) {
+  // Honeypot check - must run before validation to silently discard spam bots
+  const rawBody = req.body || {};
+  if (rawBody.cf_website_url) {
     res.status(200).json({ ok: true }); // silently discard
     return;
   }
 
+  const parsed = safeParseBody(contactSchema, req.body);
+  if (!parsed.ok) {
+    res.status(400).json({ error: parsed.error.message, issues: parsed.error.issues });
+    return;
+  }
+
+  const { name, email, subject, message, consent, contact_loaded_at } = parsed.data;
+
   // Timing check
-  const loadedAt = Number(contact_loaded_at);
-  if (loadedAt && Date.now() - loadedAt < MIN_SUBMIT_DELAY_MS) {
+  const loadedAt = contact_loaded_at ? Number(contact_loaded_at) : undefined;
+  if (loadedAt && Number.isFinite(loadedAt) && Date.now() - loadedAt < MIN_SUBMIT_DELAY_MS) {
     res.status(429).json({ error: 'Please wait a moment before submitting.' });
-    return;
-  }
-
-  // Validation
-  if (!name || !email || !subject || !message || !consent) {
-    res.status(400).json({ error: 'All required fields must be filled in.' });
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    res.status(400).json({ error: 'Invalid email address.' });
     return;
   }
 

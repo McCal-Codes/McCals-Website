@@ -145,7 +145,7 @@ function showReloadNotification(message: string, type: 'success' | 'error' = 'su
     bottom: 20px;
     right: 20px;
     padding: 12px 16px;
-    background-color: ${type === 'success' ? '#10b981' : '#ef4444'};
+    background-color: ${type === 'success' ? '#4a5a3a' : '#7a4a4a'}; /* Muted sage / dusty rose - photo-friendly */
     color: white;
     border-radius: 6px;
     font-family: system-ui, -apple-system, sans-serif;

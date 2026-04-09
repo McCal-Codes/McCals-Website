@@ -24,9 +24,19 @@
     <meta name="twitter:creator" content="@mcc_cal" />
     <meta name="theme-color" content="#0a0a0a" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" type="image/svg+xml" href="/brand/logo-mark.svg" />
+    <!-- Favicons -->
+    <!-- SVG favicon that adapts to color scheme via CSS -->
+    <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/brand/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <!-- Fallback PNG favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-light-32x32.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-dark-32x32.png" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon-light-16x16.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon-dark-16x16.png" media="(prefers-color-scheme: dark)" />
+    <!-- Default favicon (no media query - used if browser doesn't support media queries) -->
+    <link rel="icon" type="image/png" sizes="96x96" href="/brand/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <script>
       // Apply saved theme before first paint to avoid flash
       (function () {

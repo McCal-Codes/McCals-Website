@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -25,9 +25,8 @@ const ShowcasePage = lazy(() => import('./pages/showcase'));
 const ApiTestPage = lazy(() => import('./pages/api-test'));
 const ContactUsPage = lazy(() => import('./pages/contact-us'));
 const RequestAQuotePage = lazy(() => import('./pages/request-a-quote'));
-const SchedulePage = lazy(() => import('./pages/schedule')); // Legacy route
-const GrabCoffeePage = lazy(() => import('./pages/grab-a-coffee')); // NEW
-const BookPodcastPage = lazy(() => import('./pages/book-a-podcast')); // NEW
+const GrabCoffeePage = lazy(() => import('./pages/grab-a-coffee'));
+const BookPodcastPage = lazy(() => import('./pages/book-a-podcast'));
 const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
 const FAQPage = lazy(() => import('./pages/faq'));
 const TerranovaPage = lazy(() => import('./pages/terranova'));
@@ -81,14 +80,11 @@ export default function App() {
           )}
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/request-a-quote" element={<RequestAQuotePage />} />
-          <Route path="/schedule" element={<SchedulePage />} />
-          <Route path="/grab-coffee" element={<SchedulePage />} />
           <Route path="/grab-a-coffee" element={<GrabCoffeePage />} />
           <Route path="/book-a-podcast" element={<BookPodcastPage />} />
           <Route path="/policies-legal" element={<PoliciesLegalPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/terranova" element={<TerranovaPage />} />
-          <Route path="/accessibility" element={<Navigate to="/policies-legal#accessibility" replace />} />
           <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

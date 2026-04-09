@@ -270,6 +270,89 @@ export function generatePageGraph(
 }
 
 /**
+ * Generate ProfilePage schema for author/creator pages
+ * Wraps Person in ProfilePage context per Google guidelines
+ */
+export function generateProfilePageSchema(
+  person: object,
+  url: string,
+  dateCreated?: string,
+  dateModified?: string,
+  recentActivity?: object[]
+): object {
+  const profilePage: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    url,
+    mainEntity: person,
+  };
+
+  if (dateCreated) {
+    profilePage.dateCreated = dateCreated;
+  }
+  if (dateModified) {
+    profilePage.dateModified = dateModified;
+  }
+  if (recentActivity && recentActivity.length > 0) {
+    profilePage.hasPart = recentActivity;
+  }
+
+  return profilePage;
+}
+
+/**
+ * Generate Review schema for individual testimonials
+ */
+export function generateReviewSchema(
+  reviewText: string,
+  authorName: string,
+  rating: number,
+  datePublished?: string,
+  publisherName?: string,
+  itemReviewed?: object
+): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: rating,
+      bestRating: 5,
+    },
+    author: {
+      '@type': 'Person',
+      name: authorName,
+    },
+    reviewBody: reviewText,
+    ...(datePublished && { datePublished }),
+    ...(publisherName && {
+      publisher: {
+        '@type': 'Organization',
+        name: publisherName,
+      },
+    }),
+    ...(itemReviewed && { itemReviewed }),
+  };
+}
+
+/**
+ * Generate AggregateRating schema for combined ratings
+ */
+export function generateAggregateRatingSchema(
+  ratingValue: number,
+  reviewCount: number,
+  itemReviewed?: object
+): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AggregateRating',
+    ratingValue,
+    bestRating: 5,
+    reviewCount,
+    ...(itemReviewed && { itemReviewed }),
+  };
+}
+/**
  * Generate portfolio page complete schema
  */
 export function generatePortfolioPageSchema(

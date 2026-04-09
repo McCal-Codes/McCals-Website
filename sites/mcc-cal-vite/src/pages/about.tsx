@@ -9,12 +9,12 @@ const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replac
 const ABOUT_IMAGE = '/about/caleb-mccartney-photo.jpg';
 
 const allReviews = [...staticGoogleReviews, ...staticLinkedInReviews];
-const averageRating = useMemo(() => 
-  allReviews.reduce((sum, r) => sum + ('rating' in r ? r.rating : 5), 0) / allReviews.length,
-  []
-);
 
 export default function AboutPage() {
+  const averageRating = useMemo(() => 
+    allReviews.reduce((sum, r) => sum + ('rating' in r ? r.rating : 5), 0) / allReviews.length,
+    []
+  );
   usePageMeta({
     title: 'Caleb McCartney | Pittsburgh Photojournalist and Event Photographer',
     description:

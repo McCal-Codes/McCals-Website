@@ -1,0 +1,42 @@
+{
+  "name": "McCal Media - Caleb McCartney Photography",
+  "short_name": "McCal Media",
+  "description": "Professional photography and creative projects by Caleb McCartney",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/brand/logo-mark.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["photography", "portfolio", "creative"],
+  "screenshots": [
+    {
+      "src": "/about/caleb-mccartney-photo.jpg",
+      "sizes": "1200x800",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Caleb McCartney Photography"
+    }
+  ]
+}

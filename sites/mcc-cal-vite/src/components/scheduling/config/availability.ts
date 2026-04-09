@@ -1,4 +1,4 @@
-import type { AvailabilityRules } from '../types/booking';
+import type { AvailabilityRules } from '../types/booking.js';
 
 /**
  * Availability configuration

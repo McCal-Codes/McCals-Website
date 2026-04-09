@@ -47,7 +47,7 @@
 }
 
 .pf-error {
-  color: #f2b7b7;
+  color: var(--mcc-error, #c9a9a9);
   opacity: 1;
   flex-direction: column;
   gap: 8px;
@@ -402,7 +402,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   filter: contrast(1.06) saturate(1.06);
 }
 
-/* Card overlay */
+/* Card overlay - Enhanced for text readability on varied backgrounds */
 .pf-card__overlay {
   position: absolute;
   inset: 0;
@@ -412,36 +412,61 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 10px 14px;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.82));
+  padding: 14px 16px;
+  /* Stronger gradient for better text contrast on light/bright photos */
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.4) 50%,
+    rgba(0,0,0,0.85) 85%,
+    rgba(0,0,0,0.95) 100%
+  );
   color: #fff;
   border-radius: inherit;
   pointer-events: none;
+  /* Additional backdrop blur for busy backgrounds */
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.3s ease;
+}
+
+/* Apply subtle blur on hover to help text stand out */
+.pf-card:hover .pf-card__overlay {
+  backdrop-filter: blur(1px);
 }
 
 .pf-card__title {
   margin: 0 0 4px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.25;
   color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.8);
+  /* Multi-layer text shadow for maximum contrast on varied backgrounds */
+  text-shadow:
+    0 0 20px rgba(0,0,0,0.8),
+    0 2px 4px rgba(0,0,0,0.9),
+    0 1px 2px rgba(0,0,0,0.8);
+  letter-spacing: -0.01em;
 }
 
 .pf-card__meta {
   margin: 2px 0 0;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #e5e5e5;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .pf-card__caption {
   margin: 8px 0 0;
   font-size: 0.85rem;
   font-weight: 400;
-  color: #fff;
+  color: rgba(255,255,255,0.95);
   line-height: 1.4;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  text-shadow:
+    0 0 15px rgba(0,0,0,0.7),
+    0 1px 3px rgba(0,0,0,0.8);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;

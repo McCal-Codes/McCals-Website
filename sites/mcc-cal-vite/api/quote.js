@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { applyRateLimit } from './_lib/rate-limit.js';
+import { quoteSchema, safeParseBody } from './_lib/validation.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -25,27 +26,23 @@ export default async function handler(req, res) {
     return;
   }
 
-  const body = req.body || {};
-
-  // Honeypot check
-  if (body.mcc_valid_field) {
+  // Honeypot check - must run before validation to silently discard spam bots
+  const rawBody = req.body || {};
+  if (rawBody.mcc_valid_field) {
     res.status(200).json({ ok: true }); // silently discard
     return;
   }
 
-  // Required fields
-  const { name, email, service_type, project_date, intended_use, duration, geographic, budget } = body;
-
-  if (!name || !email || !service_type || !project_date || !intended_use || !duration || !geographic || !budget) {
-    res.status(400).json({ error: 'Required fields are missing.' });
+  const parsed = safeParseBody(quoteSchema, req.body);
+  if (!parsed.ok) {
+    res.status(400).json({ error: parsed.error.message, issues: parsed.error.issues });
     return;
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    res.status(400).json({ error: 'Invalid email address.' });
-    return;
-  }
+  const body = parsed.data;
+
+  const { name, email, service_type, project_date, intended_use, duration, geographic, budget } =
+    body;
 
   if (!process.env.RESEND_API_KEY) {
     console.error('[quote] RESEND_API_KEY not set');

@@ -5,13 +5,18 @@
 
 import { Resend } from 'resend';
 import { applyRateLimit } from '../_lib/rate-limit.js';
+import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'contact@mcc-cal.com';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'noreply@mcc-cal.com';
+const ALLOWED_ORIGINS = (process.env.BOOKING_ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 const BOOKING_RATE_LIMIT = {
   route: 'booking',
@@ -232,8 +237,12 @@ async function sendConfirmationEmail(booking, config) {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -245,7 +254,20 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { eventTypeId, date, time, durationMinutes, requester } = req.body || {};
+  // Honeypot check - must run before validation to silently discard spam bots
+  const rawBody = req.body || {};
+  if (rawBody.hp_field) {
+    res.status(200).json({ ok: true }); // silently discard
+    return;
+  }
+
+  const parsed = safeParseBody(bookingSchema, req.body);
+  if (!parsed.ok) {
+    res.status(400).json({ error: parsed.error.message, issues: parsed.error.issues });
+    return;
+  }
+
+  const { eventTypeId, date, time, durationMinutes, requester } = parsed.data;
 
   // Validation
   if (!eventTypeId || !date || !time || !durationMinutes || !requester?.name || !requester?.email) {
@@ -264,12 +286,6 @@ export default async function handler(req, res) {
     res.status(400).json({ 
       error: `Duration must be between ${config.durationMinutes} and ${config.maxDurationMinutes} minutes` 
     });
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(requester.email)) {
-    res.status(400).json({ error: 'Invalid email address' });
     return;
   }
 

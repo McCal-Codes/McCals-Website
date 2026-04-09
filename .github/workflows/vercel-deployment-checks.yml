@@ -103,7 +103,7 @@ jobs:
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
 
       - name: Run CI Check
-        run: cd sites/mcc-cal-vite && npm run ci:check
+        run: npm run ci:check
 
       - name: Notify Vercel - CI Check
         if: always()
@@ -136,7 +136,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund || true
+        run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
 
       - name: Validate Manifests
         run: cd sites/mcc-cal-vite && node scripts/validate-manifests.js

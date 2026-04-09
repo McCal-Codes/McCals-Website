@@ -1,11 +1,10 @@
 {
   "version": "2.0.0",
-  "generated": "2026-04-07T00:04:02.887Z",
-  "totalEvents": 29,
-  "totalImages": 337,
+  "generated": "2026-04-07T21:22:20.199Z",
+  "totalEvents": 17,
+  "totalImages": 529,
   "categories": [
     "Documentary",
-    "Events",
     "Politics"
   ],
   "tags": [
@@ -17,77 +16,58 @@
     "Sports"
   ],
   "categoryStats": {
-    "Politics": 19,
-    "Events": 7,
-    "Documentary": 3
+    "Politics": 8,
+    "Documentary": 9
   },
   "events": [
     {
-      "eventName": "Pitt Palestine Protest",
-      "category": "Politics",
+      "eventName": "Radio Skate Shop",
+      "category": "Documentary",
       "tags": [
-        "Politics"
+        "Documentary"
       ],
-      "folderPath": "Politics/pitt-palestine-protest",
+      "folderPath": "Documentary/Radio Skate Shop",
       "eventDate": {
-        "iso": "2025-09-24",
-        "source": "filename_extraction"
+        "iso": "2026-04-07",
+        "source": "user_input"
       },
-      "dateDisplay": "September 23, 2025",
-      "totalImages": 6,
+      "dateDisplay": "April 6, 2026",
+      "totalImages": 4,
       "images": [
         {
-          "filename": "250924_Pitt - Palestine Protest__DSC1450.jpg",
-          "path": "250924_Pitt - Palestine Protest__DSC1450.jpg",
-          "description": "pitt-palestine-protest photography",
-          "caption": "pitt-palestine-protest - Politics",
+          "filename": "_CAL0901.jpg",
+          "path": "_CAL0901.jpg",
+          "description": "Radio Skate Shop photography",
+          "caption": "Radio Skate Shop - Documentary",
           "tags": [
-            "Politics"
+            "Documentary"
           ]
         },
         {
-          "filename": "250924_Pitt - Palestine Protest__DSC1453.jpg",
-          "path": "250924_Pitt - Palestine Protest__DSC1453.jpg",
-          "description": "pitt-palestine-protest photography",
-          "caption": "pitt-palestine-protest - Politics",
+          "filename": "_CAL0993.jpg",
+          "path": "_CAL0993.jpg",
+          "description": "Radio Skate Shop photography",
+          "caption": "Radio Skate Shop - Documentary",
           "tags": [
-            "Politics"
+            "Documentary"
           ]
         },
         {
-          "filename": "250924_Pitt - Palestine Protest__DSC1458.jpg",
-          "path": "250924_Pitt - Palestine Protest__DSC1458.jpg",
-          "description": "pitt-palestine-protest photography",
-          "caption": "pitt-palestine-protest - Politics",
+          "filename": "_CAL1085.jpg",
+          "path": "_CAL1085.jpg",
+          "description": "Radio Skate Shop photography",
+          "caption": "Radio Skate Shop - Documentary",
           "tags": [
-            "Politics"
+            "Documentary"
           ]
         },
         {
-          "filename": "250924_Pitt - Palestine Protest__DSC1462.jpg",
-          "path": "250924_Pitt - Palestine Protest__DSC1462.jpg",
-          "description": "pitt-palestine-protest photography",
-          "caption": "pitt-palestine-protest - Politics",
+          "filename": "_CAL1086.jpg",
+          "path": "_CAL1086.jpg",
+          "description": "Radio Skate Shop photography",
+          "caption": "Radio Skate Shop - Documentary",
           "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "250924_Pitt - Palestine Protest__DSC1469.jpg",
-          "path": "250924_Pitt - Palestine Protest__DSC1469.jpg",
-          "description": "pitt-palestine-protest photography",
-          "caption": "pitt-palestine-protest - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "250924_Pitt - Palestine Protest__DSC1472.jpg",
-          "path": "250924_Pitt - Palestine Protest__DSC1472.jpg",
-          "description": "pitt-palestine-protest photography",
-          "caption": "pitt-palestine-protest - Politics",
-          "tags": [
-            "Politics"
+            "Documentary"
           ]
         }
       ],
@@ -96,12 +76,13 @@
     },
     {
       "eventName": "Brentwood Vs Springdale",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
+        "Documentary",
         "Events",
         "Sports"
       ],
-      "folderPath": "Events/Brentwood vs Springdale",
+      "folderPath": "Documentary/Brentwood vs Springdale",
       "eventDate": {
         "iso": "2025-09-12",
         "source": "metadata"
@@ -115,6 +96,7 @@
           "description": "Brentwood's quarterback in navy drops back to pass as two Springdale defenders in orange rush the pocket, with a Brentwood lineman blocking and a referee tracking the play in the background during a daytime high school football game.",
           "caption": "Brentwood quarterback No. 15 drops back to pass as Springdale defenders close in during a home game, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -125,6 +107,7 @@
           "description": "A Brentwood player in navy and gold tucks the ball and cuts upfield on the blue-surfaced home field, with grandstands and spectators visible in the background during a daytime contest.",
           "caption": "A Brentwood ball carrier turns upfield during a home game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -135,6 +118,7 @@
           "description": "Brentwood linemen in navy engage Springdale defenders in orange at the line of scrimmage, with a referee positioned between the teams and the blue home field and grandstands visible behind the play.",
           "caption": "Brentwood and Springdale players battle at the line of scrimmage during a home game, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -145,6 +129,7 @@
           "description": "Brentwood's No. 12 quarterback in navy and gold sets his feet and loads for a pass, photographed in isolation against a blurred dark background during twilight play.",
           "caption": "Brentwood quarterback No. 12 prepares to throw during a home game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -155,6 +140,7 @@
           "description": "Brentwood No. 13 chest-bumps a teammate in navy uniforms near the end zone, with the blue home field and a dark hillside backdrop visible behind them.",
           "caption": "Brentwood players celebrate after a play against Springdale, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -165,6 +151,7 @@
           "description": "Brentwood's No. 2 running back in navy sprints down the sideline while quarterback No. 13 trails the play and a Springdale defender in orange pursues, with stadium lights, an advertising board, and a referee visible in the background of the night game.",
           "caption": "Brentwood No. 2 races downfield past a Springdale defender during a home game, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -175,6 +162,7 @@
           "description": "Brentwood's No. 2 ball carrier extends a stiff-arm to push off a pursuing Springdale defender in orange along the sideline, with fans and a metal fence barrier visible in the background during a daytime game.",
           "caption": "Brentwood No. 2 stiff-arms a Springdale defender on a carry during a home game, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -185,6 +173,7 @@
           "description": "A Brentwood player in navy is surrounded by multiple Springdale defenders in orange and white during a night game, with Brentwood's No. 18 visible in the background and stadium lights illuminating the field.",
           "caption": "Springdale players converge on a Brentwood receiver in the night game, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -195,6 +184,7 @@
           "description": "A Brentwood player in navy leans forward at full extension with the ball while a Springdale defender in orange and white runs alongside and No. 2 of Brentwood leads the block during a night game on the lit field.",
           "caption": "A Brentwood ball carrier stretches for yards as a Springdale defender pursues during a night game, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -205,6 +195,7 @@
           "description": "Brentwood's No. 13 quarterback rolls out under pressure from Springdale's No. 53 rushing off the edge during a night game, with stadium lighting casting sharp shadows across the blue-and-white field surface.",
           "caption": "Brentwood quarterback No. 13 scrambles from a Springdale rusher during a night game, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -215,6 +206,7 @@
           "description": "Extreme close-up of a student's hands pressing the valves of a polished trumpet during the Brentwood High School marching band's halftime performance, with bokeh stadium lights glowing in the dark background.",
           "caption": "A member of the Brentwood High School marching band plays trumpet during a halftime performance, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -225,6 +217,7 @@
           "description": "A crowd of spectators queues under a blue-roofed concession building marked with a large yellow 'B' at night, with the lit interior revealing workers, menu boards, and a Pepsi cooler.",
           "caption": "Fans line up at the Brentwood High School concession stand during the game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -235,6 +228,7 @@
           "description": "Several members of the Brentwood High School marching band in navy and white uniforms play flutes in formation on the field at night, with a student drummer visible in the background.",
           "caption": "Brentwood High School marching band flutists perform during halftime against Springdale, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -245,6 +239,7 @@
           "description": "A color guard performer in a tan and gold top waves a large navy and gold flag while the Brentwood marching band in blue and white uniforms plays behind her, with tubas, trombones, and a stadium light visible in the background of the night performance.",
           "caption": "A Brentwood High School color guard member waves a flag during halftime against Springdale, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -255,6 +250,7 @@
           "description": "A color guard member in a blue and white uniform extends a gold flag overhead with both arms during the Brentwood marching band's halftime show, with band members playing brass and woodwind instruments and a stadium floodlight blazing behind the formation.",
           "caption": "A Brentwood High School color guard member raises a flag during a halftime performance against Springdale, Brentwood, Pa., Sept. 12, 2025.",
           "tags": [
+            "Documentary",
             "Events",
             "Sports"
           ]
@@ -274,11 +270,12 @@
     },
     {
       "eventName": "Historic Yard Sale 0825",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
+        "Documentary",
         "Events"
       ],
-      "folderPath": "Events/historic-yard-sale-0825",
+      "folderPath": "Documentary/historic-yard-sale-0825",
       "eventDate": {
         "iso": "2025-08-02",
         "source": "metadata"
@@ -292,6 +289,7 @@
           "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
           "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -301,6 +299,7 @@
           "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
           "caption": "Historic Society Yard Sale — August 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -310,6 +309,7 @@
           "description": "Two female vendors stand behind a table at their booth at the Brentwood Area Historical Society yard sale, with clothing and purple fabric merchandise displayed in the foreground and event signage behind them.",
           "caption": "Vendors staff their table at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -319,6 +319,7 @@
           "description": "A vendor in a red jacket leans over items on their table at the Brentwood Area Historical Society yard sale, with other shoppers and a large tree trunk visible in the background.",
           "caption": "A vendor examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -328,6 +329,7 @@
           "description": "Close-up of merchandise on a vendor table at the Brentwood Area Historical Society yard sale, featuring wicker baskets, white handbags, and textiles, with other booths and shoppers visible in the background.",
           "caption": "Wicker baskets and handbags are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -337,6 +339,7 @@
           "description": "A vendor organizes items including wicker baskets and textiles on a table under a blue tent at the Brentwood Area Historical Society yard sale, with other shoppers, buildings, and trees visible around them.",
           "caption": "A vendor arranges merchandise under a tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -346,6 +349,7 @@
           "description": "Close-up detail of multi-colored beaded necklaces on display at a vendor table at the Brentwood Area Historical Society yard sale.",
           "caption": "Beaded jewelry is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -355,6 +359,7 @@
           "description": "A female vendor stands at her table in front of the historic brick Brentwood Area Historical Society building, with its green-trimmed windows and patriotic decoration visible above the entrance, at the annual yard sale.",
           "caption": "A vendor stands at her table in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -364,6 +369,7 @@
           "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
           "caption": "Historic Society Yard Sale — August 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -373,6 +379,7 @@
           "description": "Rows of rings in various styles arranged on a dark display surface at a vendor table at the Brentwood Area Historical Society yard sale.",
           "caption": "Rings are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -382,6 +389,7 @@
           "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
           "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -391,6 +399,7 @@
           "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
           "caption": "Historic Society Yard Sale — August 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -400,6 +409,7 @@
           "description": "Two female shoppers examine decorative glass items under the shade of an old tree at the Brentwood Area Historical Society yard sale, with other vendors and shoppers visible in the background.",
           "caption": "Shoppers browse glassware under a tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -409,6 +419,7 @@
           "description": "A person in a green vest leans over items at a vendor table at the Brentwood Area Historical Society yard sale, organizing goods with other booths and shoppers visible behind them.",
           "caption": "A vendor sorts merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -418,6 +429,7 @@
           "description": "A vendor in a mint-colored shirt stands at her booth at the Brentwood Area Historical Society yard sale, holding an item alongside a prominent decorative wooden spoon or paddle on display, with trees and other vendors behind her.",
           "caption": "A vendor displays antique kitchenware at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -427,6 +439,7 @@
           "description": "White ceramic pitchers and mugs with metal handles are displayed on a vendor table at the Brentwood Area Historical Society yard sale, alongside a small decorative house figurine with a red roof.",
           "caption": "Vintage ceramics are on sale at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -436,6 +449,7 @@
           "description": "Two women interact at a vendor table under tree shade at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed between them and other booths visible in the background.",
           "caption": "A shopper examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -445,6 +459,7 @@
           "description": "Wide view of the Brentwood Area Historical Society yard sale showing multiple white-clothed vendor tables on the lawn, shoppers browsing, and the large red-brick historical society building visible behind the event grounds.",
           "caption": "Shoppers browse vendor tables in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -454,6 +469,7 @@
           "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
           "caption": "Historic Society Yard Sale — August 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -463,6 +479,7 @@
           "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
           "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -472,6 +489,7 @@
           "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
           "caption": "Historic Society Yard Sale — August 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -481,6 +499,7 @@
           "description": "Vendor items including clothing and decorative objects are on display at the Brentwood Area Historical Society yard sale, with the historical society's brick building forming the backdrop and shoppers browsing nearby.",
           "caption": "Shoppers look through merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -490,6 +509,7 @@
           "description": "A female shopper in a black graphic t-shirt and crossbody bag walks through the Brentwood Area Historical Society yard sale, with a borough ordinance sign and parked vehicles visible behind the vendor booths.",
           "caption": "A shopper moves through the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -499,6 +519,7 @@
           "description": "Multiple vendors and shoppers gather under a large green canopy tent at the Brentwood Area Historical Society yard sale, with merchandise on tables and vehicles and buildings visible in the background.",
           "caption": "Shoppers crowd a vendor tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -508,6 +529,7 @@
           "description": "Wide view of the well-attended Brentwood Area Historical Society yard sale showing white-clothed tables, shoppers, vendor tents, and the brick historical society building with patriotic bunting, vehicles, and large trees.",
           "caption": "Shoppers fill the lawn at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -517,6 +539,7 @@
           "description": "Multiple female shoppers browse merchandise on white-clothed tables in front of the historic brick Brentwood Area Historical Society building, with patriotic bunting visible on the facade and various decorative goods displayed across the vendor spaces.",
           "caption": "Shoppers browse antiques and collectibles in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -526,6 +549,7 @@
           "description": "Decorative glassware and vases are displayed on a vendor table under a shade tent at the Brentwood Area Historical Society yard sale, with shoppers browsing nearby booths and the brick historical society building visible behind.",
           "caption": "Decorative glassware is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -535,6 +559,7 @@
           "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
           "caption": "Historic Society Yard Sale — August 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         }
@@ -562,7 +587,7 @@
         "source": "filename_extraction"
       },
       "dateDisplay": "July 14, 2025",
-      "totalImages": 45,
+      "totalImages": 39,
       "images": [
         {
           "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
@@ -673,26 +698,8 @@
           ]
         },
         {
-          "filename": "250715_CMU Trump Protest_CAL1168-min.webp",
-          "path": "250715_CMU Trump Protest_CAL1168-min.webp",
-          "description": "cmu-trump-protest photography",
-          "caption": "cmu-trump-protest - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1173-min.jpg",
-          "description": "cmu-trump-protest photography",
-          "caption": "cmu-trump-protest - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1173-min.webp",
-          "path": "250715_CMU Trump Protest_CAL1173-min.webp",
           "description": "cmu-trump-protest photography",
           "caption": "cmu-trump-protest - Politics",
           "tags": [
@@ -711,15 +718,6 @@
         {
           "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1186-min.jpg",
-          "description": "cmu-trump-protest photography",
-          "caption": "cmu-trump-protest - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1186-min.webp",
-          "path": "250715_CMU Trump Protest_CAL1186-min.webp",
           "description": "cmu-trump-protest photography",
           "caption": "cmu-trump-protest - Politics",
           "tags": [
@@ -756,15 +754,6 @@
         {
           "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1206-min.jpg",
-          "description": "cmu-trump-protest photography",
-          "caption": "cmu-trump-protest - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1206-min.webp",
-          "path": "250715_CMU Trump Protest_CAL1206-min.webp",
           "description": "cmu-trump-protest photography",
           "caption": "cmu-trump-protest - Politics",
           "tags": [
@@ -871,26 +860,8 @@
           ]
         },
         {
-          "filename": "250715_CMU Trump Protest_CAL1429-min.webp",
-          "path": "250715_CMU Trump Protest_CAL1429-min.webp",
-          "description": "cmu-trump-protest photography",
-          "caption": "cmu-trump-protest - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
           "path": "250715_CMU Trump Protest_CAL1435-min.jpg",
-          "description": "cmu-trump-protest photography",
-          "caption": "cmu-trump-protest - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1435-min.webp",
-          "path": "250715_CMU Trump Protest_CAL1435-min.webp",
           "description": "cmu-trump-protest photography",
           "caption": "cmu-trump-protest - Politics",
           "tags": [
@@ -975,11 +946,12 @@
     },
     {
       "eventName": "Brentwood 4th 2025",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
+        "Documentary",
         "Events"
       ],
-      "folderPath": "Events/brentwood-4th-2025",
+      "folderPath": "Documentary/brentwood-4th-2025",
       "eventDate": {
         "iso": "2025-07-04",
         "source": "metadata"
@@ -993,6 +965,7 @@
           "description": "Two young people wearing leis stand at the Brentwood Fourth of July community event. The person on the left wears a white t-shirt and blue lei; the person on the right wears a dark Nike shirt and cap.",
           "caption": "Attendees wear patriotic accessories at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1002,6 +975,7 @@
           "description": "View through a chain-link fence at a community pool facility during the Brentwood Fourth of July event, with trees and sky visible beyond.",
           "caption": "A chain-link fence borders the community pool at Brentwood's Fourth of July celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1011,6 +985,7 @@
           "description": "A large group stands together under yellow umbrellas on a paved area at the Brentwood Fourth of July event, with picnic tables and shade structures visible nearby.",
           "caption": "Residents gather under yellow umbrellas at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1020,6 +995,7 @@
           "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
           "caption": "Brentwood 4th of July 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1029,6 +1005,7 @@
           "description": "A middle-aged man in a blue Under Armour shirt stands with arms crossed in front of green foliage at the Brentwood Fourth of July event.",
           "caption": "A man stands at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1038,6 +1015,7 @@
           "description": "A young child wearing star-patterned patriotic shorts sits with an adult on a bench at sunset, pointing upward excitedly as the evening program begins at the Brentwood Fourth of July celebration.",
           "caption": "A child points skyward as fireworks begin during the Brentwood Fourth of July celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1047,6 +1025,7 @@
           "description": "Two young women sit on a blue platform bench at golden hour during the Brentwood Fourth of July event, with trees and utility poles in the background.",
           "caption": "Attendees sit on a bench at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1056,6 +1035,7 @@
           "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
           "caption": "Brentwood 4th of July 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1065,6 +1045,7 @@
           "description": "Two young men with curly reddish hair smile in front of a chain-link tennis court fence at the Brentwood Fourth of July event, with a blue court surface visible behind them.",
           "caption": "Players pose near the basketball courts at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1074,6 +1055,7 @@
           "description": "A young man in a graphic t-shirt and red shorts sits on a blue bench at the Brentwood Fourth of July event.",
           "caption": "A participant rests courtside at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1083,6 +1065,7 @@
           "description": "A young person in a dark hoodie is photographed in portrait style against blurred green foliage at the Brentwood Fourth of July event.",
           "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1092,6 +1075,7 @@
           "description": "A young person in a white tank top is photographed in portrait style against a blurred green background at the Brentwood Fourth of July event.",
           "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1101,6 +1085,7 @@
           "description": "Four young people stand near a basketball court with a blue safety barrier behind them at the Brentwood Fourth of July event, with one player's arm raised.",
           "caption": "Residents play pickup basketball during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1110,6 +1095,7 @@
           "description": "Two young people reach upward toward a basketball on an outdoor court, both arms extended, during the Brentwood Fourth of July pickup game.",
           "caption": "Players compete for possession during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1119,6 +1105,7 @@
           "description": "Two players leap toward a basketball on an outdoor court during the Brentwood Fourth of July event, with a blue barrier fence and trees in the background.",
           "caption": "Players jump for a basketball during a pickup game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1128,6 +1115,7 @@
           "description": "A basketball is captured mid-flight above the court during a pickup game at the Brentwood Fourth of July event, with spectators visible in the background.",
           "caption": "A player shoots during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1137,6 +1125,7 @@
           "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
           "caption": "Brentwood 4th of July 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1146,6 +1135,7 @@
           "description": "A shirtless young man dribbles the ball on a blue outdoor court during the Brentwood Fourth of July pickup basketball game, with other players and a brick building visible behind him.",
           "caption": "A player dribbles during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1155,6 +1145,7 @@
           "description": "A young man in a white t-shirt stands with hands at his sides against a blurred tree background at the Brentwood Fourth of July event.",
           "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1164,6 +1155,7 @@
           "description": "A shirtless young player dribbles against a defender near a red hoop structure during the pickup basketball game at the Brentwood Fourth of July event, with a brick building in the background.",
           "caption": "Players compete near the basket during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1173,6 +1165,7 @@
           "description": "Multiple players move across a blue-and-white outdoor court during the Brentwood Fourth of July pickup basketball game, with spectators along the edges and green foliage framing the scene.",
           "caption": "Residents compete in a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1182,6 +1175,7 @@
           "description": "A young person in a red cap and white shirt raises both hands in a celebratory gesture at the Brentwood Fourth of July community event, with trees and a building behind them.",
           "caption": "A resident reacts during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1191,6 +1185,7 @@
           "description": "A group of young people stand courtside watching the pickup basketball game at the Brentwood Fourth of July event, with trees, fencing, and buildings visible in the background.",
           "caption": "Spectators watch the pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1200,6 +1195,7 @@
           "description": "A player raises a water bottle to drink between possessions during the Brentwood Fourth of July pickup basketball game, photographed against a blurred green fence.",
           "caption": "A player takes a water break during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1209,6 +1205,7 @@
           "description": "A young man in a black graphic t-shirt looks to the side in a candid shot against a blurred green background at the Brentwood Fourth of July event.",
           "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1218,6 +1215,7 @@
           "description": "A group of approximately a dozen young people pose together for a photo at the Brentwood Fourth of July event, several wearing patriotic face paint and colorful casual clothing.",
           "caption": "Residents gather for a group photo at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1227,6 +1225,7 @@
           "description": "Residents gather at the Brentwood Fourth of July community event.",
           "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1236,6 +1235,7 @@
           "description": "Residents gather at the Brentwood Fourth of July community event.",
           "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1245,6 +1245,7 @@
           "description": "Residents gather at the Brentwood Fourth of July community event.",
           "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1254,6 +1255,7 @@
           "description": "Residents gather at the Brentwood Fourth of July community event.",
           "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1263,6 +1265,7 @@
           "description": "Residents gather at the Brentwood Fourth of July community event.",
           "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1272,6 +1275,7 @@
           "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
           "caption": "Brentwood 4th of July 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         }
@@ -1289,11 +1293,12 @@
     },
     {
       "eventName": "Boyd Station",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
+        "Documentary",
         "Events"
       ],
-      "folderPath": "Events/Boyd Station",
+      "folderPath": "Documentary/Boyd Station",
       "eventDate": {
         "iso": "2025-06-09",
         "source": "metadata"
@@ -1307,6 +1312,7 @@
           "description": "Close-up of a detailed hand-carved wooden bust of a figure wearing an ornate traditional headdress, set against a blurred colorful abstract painting in the background of an antique and curiosity shop.",
           "caption": "A carved wooden figurine is displayed in an antique shop at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1316,6 +1322,7 @@
           "description": "A woman with arms crossed smiles from behind a glass display case inside a densely decorated antique shop, surrounded by framed paintings, ornate lamps, jewelry, and decorative plates, as another person browses in the foreground.",
           "caption": "A shopkeeper stands among antiques and artwork inside a shop at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1325,6 +1332,7 @@
           "description": "Rows of artisan soap bars wrapped in black damask-patterned paper and tied with twine are arranged on a wooden shelf inside a gift shop, with one unwrapped green bar labeled 'Tea Tree Peppermint' resting on top.",
           "caption": "Handmade soap bars are displayed for sale in a shop at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1334,6 +1342,7 @@
           "description": "Two men, one bald in a light blue button-down and one with longer hair in a dark shirt, stand conversing among antique furniture, gilded lamps, framed portraits, and decorative objects inside an antique shop.",
           "caption": "Two men browse antiques in a shop at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1343,6 +1352,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1352,6 +1362,7 @@
           "description": "The words 'A BEAUTIFUL PLACE TO BE' are painted in large white block letters across a brick-framed shop window, with the reflections of two children sitting outside and passing trees visible in the glass.",
           "caption": "A storefront window reads 'A Beautiful Place to Be' in a small community at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1361,6 +1372,7 @@
           "description": "Alternate frame of a man beneath the steering column of a turquoise vintage truck working on the dash, with a woman watching from the passenger side and a Little Trees air freshener hanging from the mirror.",
           "caption": "A man works on a vintage truck interior at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1370,6 +1382,7 @@
           "description": "A man in a blue t-shirt and sunglasses lies under the steering column of a turquoise vintage truck, working on the dashboard, while a woman with long blond hair and glasses sits in the passenger seat observing.",
           "caption": "A man works on the dashboard of a vintage truck at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1379,6 +1392,7 @@
           "description": "A person in jeans and work boots leans deep into the open engine bay of a dark green vintage truck on a residential street, with a Victorian-style brick house visible in the background.",
           "caption": "A mechanic leans under the hood of a vintage truck at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1388,6 +1402,7 @@
           "description": "A bearded man in a blue t-shirt and cap leans in through the driver's window while a woman with wavy blond hair and glasses sits inside the turquoise vintage truck, both peering at the dash, with a historic brick building visible through the cracked windshield.",
           "caption": "Two people inspect the interior of a vintage truck at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1397,6 +1412,7 @@
           "description": "Shot through the side window of a turquoise vintage truck, a woman with wavy blond hair and aviator-style glasses holds the steering wheel and looks ahead pensively, with a reflected street scene and a newspaper visible in the dash.",
           "caption": "A woman sits behind the wheel of a vintage truck at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1406,6 +1422,7 @@
           "description": "A dramatic shaft of late-day sunlight illuminates the textured surface of weathered wooden planks, with peeling turquoise paint visible along the left edge, creating a high-contrast abstract composition.",
           "caption": "Sunlight cuts across weathered wood siding at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1415,6 +1432,7 @@
           "description": "Close-up of small leafy vegetable seedlings sprouting from rough, rocky soil in a garden bed, with green foliage and hills visible softly in the background.",
           "caption": "Young vegetable seedlings grow in a garden plot at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1424,6 +1442,7 @@
           "description": "A man in a gray button-down shirt, jeans, and white cap bends over to tend to young vegetable seedlings in a freshly tilled garden row, with rolling green pastures, fencing, and trees visible in the soft evening light behind him.",
           "caption": "A farmer tends seedlings in a garden at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1433,6 +1452,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1442,6 +1462,7 @@
           "description": "Alternate frame of a man in jeans and a gray shirt crouching to inspect vegetable seedlings in a tilled garden, with a pastoral landscape of green hills and scattered trees glowing in the warm dusk light behind him.",
           "caption": "A farmer examines seedlings in an evening garden at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1451,6 +1472,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1460,6 +1482,7 @@
           "description": "A man and a woman, both wearing white cowboy hats, stand with their backs to the camera looking out over a green pasture where several black cattle graze, with a white barn and tree line visible in the background at dusk.",
           "caption": "Two ranchers observe a herd of cattle in a pasture at Boyd Station, Ky., June 10, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1469,6 +1492,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1478,6 +1502,7 @@
           "description": "A middle-aged man in a blue short-sleeve shirt and glasses sits at a booth looking at his phone, with a bowl of soup, a plate of rice, and a red Coca-Cola cup on the table before him, a school bus and overcast sky visible through the window behind him.",
           "caption": "A man dines at a restaurant at Boyd Station, Ky., June 11, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1487,6 +1512,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1496,6 +1522,7 @@
           "description": "Close portrait of a middle-aged man in a blue shirt and glasses looking directly into the camera with a neutral expression, seated against a gray wood-paneled wall.",
           "caption": "A man is photographed in portrait at a restaurant at Boyd Station, Ky., June 11, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1505,6 +1532,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1514,6 +1542,7 @@
           "description": "A young man in a black t-shirt and navy cap leans sideways against the corner of a building at dusk, his reflection visible in the window glass beside him, with a parking lot and commercial buildings in the background.",
           "caption": "A young man leans against a building exterior at dusk at Boyd Station, Ky., June 11, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1523,6 +1552,7 @@
           "description": "Two young women and a young man walk side by side on a narrow road flanked by dense green trees and brush at dusk, one holding a phone that glows in the dim light, a road sign visible in the distance.",
           "caption": "Three young people walk a rural road at dusk at Boyd Station, Ky., June 11, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1532,6 +1562,7 @@
           "description": "Three people — an older woman with gray hair in a pink top, a younger woman in a brown tank top with tattoos, and a young man in a multicolored striped shirt — lean toward each other in conversation at a wooden bar, with bottles and shelves of liquor filling the background.",
           "caption": "Patrons converse at a bar at Boyd Station, Ky., June 11, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1541,6 +1572,7 @@
           "description": "Four people — a young man in a striped shirt, a man in black, a woman with dark hair gesturing in conversation, and a woman in pink — stand around a wooden bar top in a warmly lit bar with artwork and shelving visible in the background.",
           "caption": "Patrons gather at a bar at Boyd Station, Ky., June 11, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1550,6 +1582,7 @@
           "description": "A person pours syrup from a mason jar over a plate of golden waffles topped with raspberries and blueberries on a kitchen table, with a crystal fruit bowl, coffee mug, and additional waffle plates visible in a yellow-walled kitchen.",
           "caption": "Waffles and fresh fruit are prepared for breakfast at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1559,6 +1592,7 @@
           "description": "A man in a red cap and blue t-shirt kneels on the roadside using a lug wrench to change a tire on a gray minivan, while a woman in a red bandana stands watching in the background, with green summer foliage and a road caution sign visible.",
           "caption": "A man changes a flat tire on a rural road at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1568,6 +1602,7 @@
           "description": "A man in a blue t-shirt and jeans walks across a two-lane rural road balancing a large zebra-print item on his shoulders, nearly obscuring his face, as green summer trees line both sides of the winding road and a pickup truck is parked nearby.",
           "caption": "A man carries a large item across a rural road at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1577,6 +1612,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1586,6 +1622,7 @@
           "description": "Alternate frame of the same man crossing the road with a large zebra-print item balanced overhead, with open sky, green vegetation, and a white pickup truck visible in the background.",
           "caption": "A man carries a large item across a rural road at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1595,6 +1632,7 @@
           "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
           "caption": "Boyd Station — June 2025",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1604,6 +1642,7 @@
           "description": "A stylist in a pink shirt and purple gloves works on a seated client's blond hair inside a teal-walled salon, photographed through a mirror reflecting the salon's shelves, floral decor, and a colorful cake display in the background.",
           "caption": "A stylist applies color to a client's hair at a salon at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1613,6 +1652,7 @@
           "description": "A stylist in a pink top and purple gloves applies product to a blond client's hair, both visible in the salon mirror, with a teal wall, tropical leaf wallpaper, and salon products on the counter surrounding them.",
           "caption": "A stylist works on a client's hair in a salon at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1622,6 +1662,7 @@
           "description": "A male stylist in a white t-shirt and gray apron lifts a client's dark wet hair with one hand while directing a pink blow-dryer with the other, the client seated in a salon chair against a teal-painted wall.",
           "caption": "A stylist blow-dries a client's hair in a salon at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1631,6 +1672,7 @@
           "description": "A stylist in a pink sweater and purple gloves smiles while separating a client's blond hair for coloring, inside a salon with yellow walls, floral overhead decorations, and a colorful circus-themed display visible through the open back door.",
           "caption": "A stylist applies highlights to a client's hair in a salon at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1640,6 +1682,7 @@
           "description": "Close-up of a dark mixing bowl filled with blue-tinted hair color and two combs resting across it in the foreground, with a blurred stylist in pink working on a client in the background against teal salon walls.",
           "caption": "Hair color is mixed in a bowl at a salon at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1649,6 +1692,7 @@
           "description": "A musician with curly red hair strums an acoustic guitar and sings into a microphone on stage at the Aeolian Music Hall, with a metal star decoration on a brick wall behind them and a second guitarist partially visible to the right.",
           "caption": "A guitarist performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1658,6 +1702,7 @@
           "description": "Three musicians perform on a small stage at the Aeolian Music Hall — a woman in a floral dress and tan cowboy hat stands left, a man in a white shirt and red cowboy hat plays guitar at center, and a third guitarist sits to the right — with the glowing red neon 'Aeolian Music Hall' sign behind them.",
           "caption": "A trio performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1667,6 +1712,7 @@
           "description": "Wide-angle view of three performers on the Aeolian Music Hall stage — a woman in a floral dress and hat standing left, a man in a red cowboy hat playing guitar at center, and a bearded guitarist seated right — with the red neon sign glowing behind them and bar lights reflected in the foreground surface.",
           "caption": "Musicians perform at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1676,6 +1722,7 @@
           "description": "A woman wearing a wide-brimmed tan hat sings into a microphone while playing acoustic guitar at the Aeolian Music Hall, with the red neon sign partially visible behind her and a second musician in a red cowboy hat visible to the right.",
           "caption": "A vocalist plays guitar at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1685,6 +1732,7 @@
           "description": "A tattooed guitarist in a white shirt and red cowboy hat sings passionately into a microphone while strumming an acoustic guitar, with a star wall decoration, string lights, and foliage visible on the brick stage backdrop.",
           "caption": "A guitarist performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1694,6 +1742,7 @@
           "description": "A bearded guitarist in a black t-shirt and cap plays an acoustic guitar while seated on stage at the Aeolian Music Hall, a gold metal star decoration on the brick wall behind him and a microphone stand in front.",
           "caption": "A guitarist performs at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1703,6 +1752,7 @@
           "description": "Viewed from behind the silhouetted audience, two performers — a woman in a hat and floral dress and a man in a red cowboy hat — play guitars on a small stage with the red neon 'Aeolian Music Hall' sign glowing between them.",
           "caption": "Musicians perform for a crowd at the Aeolian Music Hall at Boyd Station, Ky., June 12, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1712,6 +1762,7 @@
           "description": "Low-angle view across a wildflower meadow at golden hour, with white and pink blossoms filling the foreground and rolling green hills, trees, and a pale blue sky stretching toward the horizon.",
           "caption": "Wildflowers bloom across a hillside meadow at Boyd Station, Ky., June 9, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1721,6 +1772,7 @@
           "description": "An older man in a gray long-sleeve shirt and tan cap ties a fishing rig while a younger man in an orange sweater and Pittsburgh Pirates cap watches closely, both standing on a grassy hillside at dusk.",
           "caption": "Two men prepare a fishing line at dusk at Boyd Station, Ky., June 9, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1730,6 +1782,7 @@
           "description": "A boy in a blue t-shirt and cap swings a lit sparkler, producing a bright flare and swirl of smoke in the foreground, with a faint moon visible above dark tree silhouettes and a lit outbuilding in the background.",
           "caption": "A boy swings a sparkler in the night sky at Boyd Station, Ky., June 9, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1739,6 +1792,7 @@
           "description": "Close alternate frame of an adult and boy holding a sparkler together in the near-dark; the warm glow of the sparkler lights their hands and faces against a blue dusk sky.",
           "caption": "A boy watches a sparkler burn at Boyd Station, Ky., June 9, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1748,6 +1802,7 @@
           "description": "An adult in a brown hoodie stands beside a boy in a blue t-shirt and flag-patch cap as the boy holds a glowing sparkler in his cupped hands, illuminating both their faces against a deep blue twilight sky and tree silhouettes.",
           "caption": "A boy holds a sparkler with an adult at Boyd Station, Ky., June 9, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         },
@@ -1757,6 +1812,7 @@
           "description": "A young person in a blue t-shirt and tan cap holds a sparkler at arm's length, tracing a glowing arc through the dark night air, with trails of sparks and smoke visible against a black background.",
           "caption": "A youth waves a sparkler in an arc at Boyd Station, Ky., June 9, 2025.",
           "tags": [
+            "Documentary",
             "Events"
           ]
         }
@@ -2133,78 +2189,6 @@
       "metadata": {}
     },
     {
-      "eventName": "Scarlett Canvas",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/scarlett-canvas",
-      "eventDate": {
-        "iso": "2024-11-03",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "November 2, 2024",
-      "totalImages": 6,
-      "images": [
-        {
-          "filename": "241103_scarlett-canvas_CAL3197.jpg",
-          "path": "241103_scarlett-canvas_CAL3197.jpg",
-          "description": "scarlett-canvas photography",
-          "caption": "scarlett-canvas - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241103_scarlett-canvas_CAL3204.jpg",
-          "path": "241103_scarlett-canvas_CAL3204.jpg",
-          "description": "scarlett-canvas photography",
-          "caption": "scarlett-canvas - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241103_scarlett-canvas_CAL3205.jpg",
-          "path": "241103_scarlett-canvas_CAL3205.jpg",
-          "description": "scarlett-canvas photography",
-          "caption": "scarlett-canvas - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241103_scarlett-canvas_CAL3208.jpg",
-          "path": "241103_scarlett-canvas_CAL3208.jpg",
-          "description": "scarlett-canvas photography",
-          "caption": "scarlett-canvas - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241103_scarlett-canvas_CAL3226.jpg",
-          "path": "241103_scarlett-canvas_CAL3226.jpg",
-          "description": "scarlett-canvas photography",
-          "caption": "scarlett-canvas - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241103_scarlett-canvas_CAL3234.jpg",
-          "path": "241103_scarlett-canvas_CAL3234.jpg",
-          "description": "scarlett-canvas photography",
-          "caption": "scarlett-canvas - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
       "eventName": "Clinton Pitt Greensburgh",
       "category": "Politics",
       "tags": [
@@ -2355,11 +2339,1082 @@
         "source": "filename_extraction"
       },
       "dateDisplay": "October 13, 2024",
-      "totalImages": 8,
+      "totalImages": 134,
       "images": [
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3741 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3741 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3741.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3741.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3741.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3741.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3752.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3752.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3752.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3752.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3754.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3754.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3754.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3754.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3757 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3757 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3757 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3757 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3757.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3757.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3757.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3757.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3763.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3763.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3763.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3763.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3766 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3766 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3766 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3766 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3766.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3766.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3766.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3766.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3781.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3781.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3781.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3781.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3797.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3797.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3797.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3797.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3804 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3804 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3804 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3804 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3804.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3804.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3804.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3804.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3814.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3814.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3814.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3814.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3831.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3831.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3831.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3831.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3847.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3847.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3847.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3847.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3849.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3849.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3849.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3849.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3851 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3851 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3851 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3851 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3851.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3851.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3851.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3851.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3852.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3852.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3852.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3852.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3859.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3859.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3859.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3859.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3860.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3860.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3860.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3860.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3864.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3864.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3864.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3864.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3867.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3867.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3867.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3867.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3891.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3891.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3891.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3891.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3895.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3895.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3895.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3895.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3937.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3937.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3937.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3937.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3947.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3947.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3947.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3947.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3952.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3952.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3952.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3952.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3963.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3963.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3963.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3963.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3973.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3973.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3973.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3973.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3979.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL3979.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL3979.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL3979.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4004.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4004.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4004.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4004.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4037.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4037.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4037.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4037.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4056.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4056.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4056.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4056.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4059.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4059.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4059.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4059.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4115 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4115 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4115 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4115 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4115.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4115.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4115.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4115.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4175.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4175.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4175.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4175.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4185.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4185.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4185.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4185.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4190.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4190.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4190.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4190.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4220.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4220.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4220.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4220.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4246.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4246.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4246.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4246.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4248 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4248 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4248 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4248 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4248.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4248.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4248.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4248.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4255.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL4255.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL4255.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL4255.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6929.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL6929.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6929.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL6929.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6938.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL6938.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6938.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL6938.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6948 1.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL6948 1.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6948 1.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL6948 1.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6948.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL6948.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6948.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL6948.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6964.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL6964.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6964.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL6964.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6966.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL6966.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6966.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL6966.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6991.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL6991.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL6991.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL6991.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7090.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL7090.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7090.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL7090.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7119.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL7119.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7119.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL7119.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7212.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL7212.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7212.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL7212.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7230.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL7230.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7230.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL7230.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7291.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL7291.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7291.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL7291.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7312.jpg",
+          "path": "141024_Kamala Speaks at Erie_CAL7312.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "141024_Kamala Speaks at Erie_CAL7312.webp",
+          "path": "141024_Kamala Speaks at Erie_CAL7312.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
         {
           "filename": "241014_Kamala Speaks at Erie_CAL3741.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL3741.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3741.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL3741.webp",
           "description": "kamala-speaks-erie photography",
           "caption": "kamala-speaks-erie - Politics",
           "tags": [
@@ -2376,8 +3431,26 @@
           ]
         },
         {
+          "filename": "241014_Kamala Speaks at Erie_CAL3757.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL3757.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
           "filename": "241014_Kamala Speaks at Erie_CAL3766.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL3766.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3766.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL3766.webp",
           "description": "kamala-speaks-erie photography",
           "caption": "kamala-speaks-erie - Politics",
           "tags": [
@@ -2394,8 +3467,26 @@
           ]
         },
         {
+          "filename": "241014_Kamala Speaks at Erie_CAL3804.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL3804.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
           "filename": "241014_Kamala Speaks at Erie_CAL3851.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL3851.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL3851.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL3851.webp",
           "description": "kamala-speaks-erie photography",
           "caption": "kamala-speaks-erie - Politics",
           "tags": [
@@ -2412,6 +3503,15 @@
           ]
         },
         {
+          "filename": "241014_Kamala Speaks at Erie_CAL4115.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL4115.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
           "filename": "241014_Kamala Speaks at Erie_CAL4248.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL4248.jpg",
           "description": "kamala-speaks-erie photography",
@@ -2421,8 +3521,26 @@
           ]
         },
         {
+          "filename": "241014_Kamala Speaks at Erie_CAL4248.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL4248.webp",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
           "filename": "241014_Kamala Speaks at Erie_CAL6948.jpg",
           "path": "241014_Kamala Speaks at Erie_CAL6948.jpg",
+          "description": "kamala-speaks-erie photography",
+          "caption": "kamala-speaks-erie - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241014_Kamala Speaks at Erie_CAL6948.webp",
+          "path": "241014_Kamala Speaks at Erie_CAL6948.webp",
           "description": "kamala-speaks-erie photography",
           "caption": "kamala-speaks-erie - Politics",
           "tags": [
@@ -2445,11 +3563,128 @@
         "source": "filename_extraction"
       },
       "dateDisplay": "October 11, 2024",
-      "totalImages": 6,
+      "totalImages": 70,
       "images": [
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3495.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3495.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3495.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3495.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3497.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3497.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3497.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3497.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3502.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3502.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3502.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3502.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
         {
           "filename": "241012_JD Vance in Johnstown_CAL3507.jpg",
           "path": "241012_JD Vance in Johnstown_CAL3507.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3507.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3507.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3511.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3511.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3511.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3511.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3514.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3514.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3514.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3514.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3515.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3515.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3515.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3515.webp",
           "description": "jdvance-johnstown photography",
           "caption": "jdvance-johnstown - Politics",
           "tags": [
@@ -2466,8 +3701,278 @@
           ]
         },
         {
+          "filename": "241012_JD Vance in Johnstown_CAL3516.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3516.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
           "filename": "241012_JD Vance in Johnstown_CAL3518.jpg",
           "path": "241012_JD Vance in Johnstown_CAL3518.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3518.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3518.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3538.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3538.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3538.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3538.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3545.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3545.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3545.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3545.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3552.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3552.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3552.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3552.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3554.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3554.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3554.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3554.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3578.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3578.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3578.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3578.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3582.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3582.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3582.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3582.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3584.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3584.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3584.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3584.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3588.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3588.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3588.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3588.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3599.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3599.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3599.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3599.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3600.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3600.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3600.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3600.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3604.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3604.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3604.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3604.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3619.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3619.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3619.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3619.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3621.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3621.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3621.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3621.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3630.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3630.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3630.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3630.webp",
           "description": "jdvance-johnstown photography",
           "caption": "jdvance-johnstown - Politics",
           "tags": [
@@ -2484,8 +3989,62 @@
           ]
         },
         {
+          "filename": "241012_JD Vance in Johnstown_CAL3636.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3636.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3638.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL3638.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3638.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3638.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
           "filename": "241012_JD Vance in Johnstown_CAL3648.jpg",
           "path": "241012_JD Vance in Johnstown_CAL3648.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL3648.webp",
+          "path": "241012_JD Vance in Johnstown_CAL3648.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6574.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6574.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6574.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6574.webp",
           "description": "jdvance-johnstown photography",
           "caption": "jdvance-johnstown - Politics",
           "tags": [
@@ -2500,75 +4059,138 @@
           "tags": [
             "Politics"
           ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Jdvance Johnstown 2",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/jdvance-johnstown-2",
-      "eventDate": {
-        "iso": "2024-10-12",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "October 11, 2024",
-      "totalImages": 6,
-      "images": [
+        },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3495.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3495.jpg",
-          "description": "jdvance-johnstown-2 photography",
-          "caption": "jdvance-johnstown-2 - Politics",
+          "filename": "241012_JD Vance in Johnstown_CAL6576.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6576.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
           "tags": [
             "Politics"
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3497.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3497.jpg",
-          "description": "jdvance-johnstown-2 photography",
-          "caption": "jdvance-johnstown-2 - Politics",
+          "filename": "241012_JD Vance in Johnstown_CAL6590.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6590.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
           "tags": [
             "Politics"
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3502.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3502.jpg",
-          "description": "jdvance-johnstown-2 photography",
-          "caption": "jdvance-johnstown-2 - Politics",
+          "filename": "241012_JD Vance in Johnstown_CAL6590.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6590.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
           "tags": [
             "Politics"
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3507.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3507.jpg",
-          "description": "jdvance-johnstown-2 photography",
-          "caption": "jdvance-johnstown-2 - Politics",
+          "filename": "241012_JD Vance in Johnstown_CAL6600.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6600.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
           "tags": [
             "Politics"
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3511.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3511.jpg",
-          "description": "jdvance-johnstown-2 photography",
-          "caption": "jdvance-johnstown-2 - Politics",
+          "filename": "241012_JD Vance in Johnstown_CAL6600.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6600.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
           "tags": [
             "Politics"
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3514.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3514.jpg",
-          "description": "jdvance-johnstown-2 photography",
-          "caption": "jdvance-johnstown-2 - Politics",
+          "filename": "241012_JD Vance in Johnstown_CAL6613.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6613.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6613.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6613.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6614.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6614.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6614.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6614.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6629.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6629.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6629.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6629.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6632.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6632.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6632.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6632.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6652.jpg",
+          "path": "241012_JD Vance in Johnstown_CAL6652.jpg",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "241012_JD Vance in Johnstown_CAL6652.webp",
+          "path": "241012_JD Vance in Johnstown_CAL6652.webp",
+          "description": "jdvance-johnstown photography",
+          "caption": "jdvance-johnstown - Politics",
           "tags": [
             "Politics"
           ]
@@ -2838,363 +4460,12 @@
       "publishedDate": "2024-10-10"
     },
     {
-      "eventName": "Trump Rally Erie",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/trump-rally-erie",
-      "eventDate": {
-        "iso": "2024-09-29",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "September 28, 2024",
-      "totalImages": 6,
-      "images": [
-        {
-          "filename": "240929_Trump Rally in Erie__CAL2137.jpg",
-          "path": "240929_Trump Rally in Erie__CAL2137.jpg",
-          "description": "trump-rally-erie photography",
-          "caption": "trump-rally-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240929_Trump Rally in Erie__CAL2139.jpg",
-          "path": "240929_Trump Rally in Erie__CAL2139.jpg",
-          "description": "trump-rally-erie photography",
-          "caption": "trump-rally-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240929_Trump Rally in Erie__CAL2148.jpg",
-          "path": "240929_Trump Rally in Erie__CAL2148.jpg",
-          "description": "trump-rally-erie photography",
-          "caption": "trump-rally-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240929_Trump Rally in Erie__CAL2149.jpg",
-          "path": "240929_Trump Rally in Erie__CAL2149.jpg",
-          "description": "trump-rally-erie photography",
-          "caption": "trump-rally-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240929_Trump Rally in Erie__CAL2157.jpg",
-          "path": "240929_Trump Rally in Erie__CAL2157.jpg",
-          "description": "trump-rally-erie photography",
-          "caption": "trump-rally-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240929_Trump Rally in Erie__CAL2163.jpg",
-          "path": "240929_Trump Rally in Erie__CAL2163.jpg",
-          "description": "trump-rally-erie photography",
-          "caption": "trump-rally-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Kamala Arrives Johnstown",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/kamala-arrives-johnstown",
-      "eventDate": {
-        "iso": "2024-09-15",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "September 14, 2024",
-      "totalImages": 6,
-      "images": [
-        {
-          "filename": "240915_kamala-jtown_1972_CAL_hr.jpg",
-          "path": "240915_kamala-jtown_1972_CAL_hr.jpg",
-          "description": "kamala-arrives-johnstown photography",
-          "caption": "kamala-arrives-johnstown - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240915_kamala-jtown_1973_CAL_hr.jpg",
-          "path": "240915_kamala-jtown_1973_CAL_hr.jpg",
-          "description": "kamala-arrives-johnstown photography",
-          "caption": "kamala-arrives-johnstown - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240915_kamala-jtown_1974_CAL_hr.jpg",
-          "path": "240915_kamala-jtown_1974_CAL_hr.jpg",
-          "description": "kamala-arrives-johnstown photography",
-          "caption": "kamala-arrives-johnstown - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240915_kamala-jtown_1975_CAL_hr.jpg",
-          "path": "240915_kamala-jtown_1975_CAL_hr.jpg",
-          "description": "kamala-arrives-johnstown photography",
-          "caption": "kamala-arrives-johnstown - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240915_kamala-jtown_1976_CAL_hr.jpg",
-          "path": "240915_kamala-jtown_1976_CAL_hr.jpg",
-          "description": "kamala-arrives-johnstown photography",
-          "caption": "kamala-arrives-johnstown - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "240915_kamala-jtown_1977_CAL_hr.jpg",
-          "path": "240915_kamala-jtown_1977_CAL_hr.jpg",
-          "description": "kamala-arrives-johnstown photography",
-          "caption": "kamala-arrives-johnstown - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Vp Debate Party",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/vp-debate-party",
-      "eventDate": {
-        "iso": "2024-09-10",
-        "source": "user_input"
-      },
-      "dateDisplay": "September 9, 2024",
-      "totalImages": 7,
-      "images": [
-        {
-          "filename": "IMG_0002.jpg",
-          "path": "IMG_0002.jpg",
-          "description": "vp-debate-party photography",
-          "caption": "vp-debate-party - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "IMG_0003.jpg",
-          "path": "IMG_0003.jpg",
-          "description": "vp-debate-party photography",
-          "caption": "vp-debate-party - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "IMG_0004.jpg",
-          "path": "IMG_0004.jpg",
-          "description": "vp-debate-party photography",
-          "caption": "vp-debate-party - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "IMG_0005.jpg",
-          "path": "IMG_0005.jpg",
-          "description": "vp-debate-party photography",
-          "caption": "vp-debate-party - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "IMG_2676.jpg",
-          "path": "IMG_2676.jpg",
-          "description": "vp-debate-party photography",
-          "caption": "vp-debate-party - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "IMG_2682.jpg",
-          "path": "IMG_2682.jpg",
-          "description": "vp-debate-party photography",
-          "caption": "vp-debate-party - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "IMG_2686.jpg",
-          "path": "IMG_2686.jpg",
-          "description": "vp-debate-party photography",
-          "caption": "vp-debate-party - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Timwaltz Erie",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/timwaltz-erie",
-      "eventDate": {
-        "iso": "2024-09-05",
-        "source": "user_input"
-      },
-      "dateDisplay": "September 4, 2024",
-      "totalImages": 12,
-      "images": [
-        {
-          "filename": "timwaltz-erie_033.jpg",
-          "path": "timwaltz-erie_033.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_045.jpg",
-          "path": "timwaltz-erie_045.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_057.jpg",
-          "path": "timwaltz-erie_057.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_110.jpg",
-          "path": "timwaltz-erie_110.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_139.jpg",
-          "path": "timwaltz-erie_139.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_199.jpg",
-          "path": "timwaltz-erie_199.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_373.jpg",
-          "path": "timwaltz-erie_373.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_374.jpg",
-          "path": "timwaltz-erie_374.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_400.jpg",
-          "path": "timwaltz-erie_400.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_402.jpg",
-          "path": "timwaltz-erie_402.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_410.jpg",
-          "path": "timwaltz-erie_410.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "timwaltz-erie_418.jpg",
-          "path": "timwaltz-erie_418.jpg",
-          "description": "timwaltz-erie photography",
-          "caption": "timwaltz-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
       "eventName": "Journalist Panel",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
-        "Events"
+        "Documentary"
       ],
-      "folderPath": "Events/Journalist Panel",
+      "folderPath": "Documentary/Journalist Panel",
       "eventDate": {
         "iso": "2024-01-31",
         "source": "filename_extraction"
@@ -3206,178 +4477,16 @@
           "filename": "240131_News & Ops Panel__CAL9010.jpg",
           "path": "240131_News & Ops Panel__CAL9010.jpg",
           "description": "Journalist Panel photography",
-          "caption": "Journalist Panel - Events",
+          "caption": "Journalist Panel - Documentary",
           "tags": [
-            "Events"
+            "Documentary"
           ]
         },
         {
           "filename": "240131_News & Ops Panel__CAL9017.jpg",
           "path": "240131_News & Ops Panel__CAL9017.jpg",
           "description": "Journalist Panel photography",
-          "caption": "Journalist Panel - Events",
-          "tags": [
-            "Events"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Radio Skate Shop",
-      "category": "Documentary",
-      "tags": [
-        "Documentary"
-      ],
-      "folderPath": "Documentary/Radio Skate Shop",
-      "eventDate": {
-        "iso": "2024-01-01",
-        "source": "user_input"
-      },
-      "dateDisplay": "December 31, 2023",
-      "totalImages": 4,
-      "images": [
-        {
-          "filename": "_CAL0901.jpg",
-          "path": "_CAL0901.jpg",
-          "description": "Radio Skate Shop photography",
-          "caption": "Radio Skate Shop - Documentary",
-          "tags": [
-            "Documentary"
-          ]
-        },
-        {
-          "filename": "_CAL0993.jpg",
-          "path": "_CAL0993.jpg",
-          "description": "Radio Skate Shop photography",
-          "caption": "Radio Skate Shop - Documentary",
-          "tags": [
-            "Documentary"
-          ]
-        },
-        {
-          "filename": "_CAL1085.jpg",
-          "path": "_CAL1085.jpg",
-          "description": "Radio Skate Shop photography",
-          "caption": "Radio Skate Shop - Documentary",
-          "tags": [
-            "Documentary"
-          ]
-        },
-        {
-          "filename": "_CAL1086.jpg",
-          "path": "_CAL1086.jpg",
-          "description": "Radio Skate Shop photography",
-          "caption": "Radio Skate Shop - Documentary",
-          "tags": [
-            "Documentary"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Politics Portfolio",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics",
-      "eventDate": {
-        "iso": "2023-11-07",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "November 6, 2023",
-      "totalImages": 2,
-      "images": [
-        {
-          "filename": "231107_The Globe - Political Coverage_CAL_6424.jpg",
-          "path": "231107_The Globe - Political Coverage_CAL_6424.jpg",
-          "description": "Politics Portfolio photography",
-          "caption": "Politics Portfolio - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "231107_The Globe - Political Coverage_CAL_6429.jpg",
-          "path": "231107_The Globe - Political Coverage_CAL_6429.jpg",
-          "description": "Politics Portfolio photography",
-          "caption": "Politics Portfolio - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Globe Political Coverage",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/globe-political-coverage",
-      "eventDate": {
-        "iso": "2023-11-07",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "November 6, 2023",
-      "totalImages": 2,
-      "images": [
-        {
-          "filename": "231107_globe-politics_CAL_6424.jpg",
-          "path": "231107_globe-politics_CAL_6424.jpg",
-          "description": "globe-political-coverage photography",
-          "caption": "globe-political-coverage - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "231107_globe-politics_CAL_6429.jpg",
-          "path": "231107_globe-politics_CAL_6429.jpg",
-          "description": "globe-political-coverage photography",
-          "caption": "globe-political-coverage - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Documentary Portfolio",
-      "category": "Documentary",
-      "tags": [
-        "Documentary"
-      ],
-      "folderPath": "Documentary",
-      "eventDate": {
-        "iso": "2023-11-07",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "November 6, 2023",
-      "totalImages": 2,
-      "images": [
-        {
-          "filename": "231107_The Globe - Homeless Tent Coverage_CAL6463.jpg",
-          "path": "231107_The Globe - Homeless Tent Coverage_CAL6463.jpg",
-          "description": "Documentary Portfolio photography",
-          "caption": "Documentary Portfolio - Documentary",
-          "tags": [
-            "Documentary"
-          ]
-        },
-        {
-          "filename": "231107_The Globe - Homeless Tent Coverage_CAL6468.jpg",
-          "path": "231107_The Globe - Homeless Tent Coverage_CAL6468.jpg",
-          "description": "Documentary Portfolio photography",
-          "caption": "Documentary Portfolio - Documentary",
+          "caption": "Journalist Panel - Documentary",
           "tags": [
             "Documentary"
           ]
@@ -3388,11 +4497,11 @@
     },
     {
       "eventName": "Ghost Tour",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
-        "Events"
+        "Documentary"
       ],
-      "folderPath": "Events/Ghost Tour",
+      "folderPath": "Documentary/Ghost Tour",
       "eventDate": {
         "iso": "2023-11-02",
         "source": "filename_extraction"
@@ -3404,36 +4513,36 @@
           "filename": "231102_Ghost Tour- November__CAL6014.jpg",
           "path": "231102_Ghost Tour- November__CAL6014.jpg",
           "description": "Ghost Tour photography",
-          "caption": "Ghost Tour - Events",
+          "caption": "Ghost Tour - Documentary",
           "tags": [
-            "Events"
+            "Documentary"
           ]
         },
         {
           "filename": "231102_Ghost Tour- November__CAL6020.jpg",
           "path": "231102_Ghost Tour- November__CAL6020.jpg",
           "description": "Ghost Tour photography",
-          "caption": "Ghost Tour - Events",
+          "caption": "Ghost Tour - Documentary",
           "tags": [
-            "Events"
+            "Documentary"
           ]
         },
         {
           "filename": "231102_Ghost Tour- November__CAL6036.jpg",
           "path": "231102_Ghost Tour- November__CAL6036.jpg",
           "description": "Ghost Tour photography",
-          "caption": "Ghost Tour - Events",
+          "caption": "Ghost Tour - Documentary",
           "tags": [
-            "Events"
+            "Documentary"
           ]
         },
         {
           "filename": "231102_Ghost Tour- November__CAL6042.jpg",
           "path": "231102_Ghost Tour- November__CAL6042.jpg",
           "description": "Ghost Tour photography",
-          "caption": "Ghost Tour - Events",
+          "caption": "Ghost Tour - Documentary",
           "tags": [
-            "Events"
+            "Documentary"
           ]
         }
       ],
@@ -3442,178 +4551,25 @@
     },
     {
       "eventName": "Pizza With President",
-      "category": "Events",
+      "category": "Documentary",
       "tags": [
-        "Events"
+        "Documentary"
       ],
-      "folderPath": "Events/Pizza With President",
+      "folderPath": "Documentary/Pizza With President",
       "eventDate": {
         "iso": "2023-10-05",
         "source": "filename_extraction"
       },
       "dateDisplay": "October 4, 2023",
-      "totalImages": 2,
+      "totalImages": 1,
       "images": [
         {
           "filename": "231005_Pizza With the President_CAL4715.jpg",
           "path": "231005_Pizza With the President_CAL4715.jpg",
           "description": "Pizza With President photography",
-          "caption": "Pizza With President - Events",
+          "caption": "Pizza With President - Documentary",
           "tags": [
-            "Events"
-          ]
-        },
-        {
-          "filename": "231005_Pizza With the President_CAL4763.jpg",
-          "path": "231005_Pizza With the President_CAL4763.jpg",
-          "description": "Pizza With President photography",
-          "caption": "Pizza With President - Events",
-          "tags": [
-            "Events"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Kamala Erie",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/kamala-erie",
-      "eventDate": {
-        "iso": "2014-10-24",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "October 23, 2014",
-      "totalImages": 6,
-      "images": [
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3741.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3741.jpg",
-          "description": "kamala-erie photography",
-          "caption": "kamala-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3757.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3757.jpg",
-          "description": "kamala-erie photography",
-          "caption": "kamala-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3766.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3766.jpg",
-          "description": "kamala-erie photography",
-          "caption": "kamala-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3804.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3804.jpg",
-          "description": "kamala-erie photography",
-          "caption": "kamala-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3851.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3851.jpg",
-          "description": "kamala-erie photography",
-          "caption": "kamala-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL4115.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL4115.jpg",
-          "description": "kamala-erie photography",
-          "caption": "kamala-erie - Politics",
-          "tags": [
-            "Politics"
-          ]
-        }
-      ],
-      "published": false,
-      "metadata": {}
-    },
-    {
-      "eventName": "Obama Pittsburgh",
-      "category": "Politics",
-      "tags": [
-        "Politics"
-      ],
-      "folderPath": "Politics/obama-pittsburgh",
-      "eventDate": {
-        "iso": "2010-10-24",
-        "source": "filename_extraction"
-      },
-      "dateDisplay": "October 23, 2010",
-      "totalImages": 6,
-      "images": [
-        {
-          "filename": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg",
-          "path": "101024_Obama Speaks at Pittsburgh_CAL3005.jpg",
-          "description": "obama-pittsburgh photography",
-          "caption": "obama-pittsburgh - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
-          "path": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
-          "description": "obama-pittsburgh photography",
-          "caption": "obama-pittsburgh - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg",
-          "path": "101024_Obama Speaks at Pittsburgh_CAL3032.jpg",
-          "description": "obama-pittsburgh photography",
-          "caption": "obama-pittsburgh - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
-          "path": "101024_Obama Speaks at Pittsburgh_CAL3038.jpg",
-          "description": "obama-pittsburgh photography",
-          "caption": "obama-pittsburgh - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg",
-          "path": "101024_Obama Speaks at Pittsburgh_CAL3040.jpg",
-          "description": "obama-pittsburgh photography",
-          "caption": "obama-pittsburgh - Politics",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "101024_Obama Speaks at Pittsburgh_CAL3041.jpg",
-          "path": "101024_Obama Speaks at Pittsburgh_CAL3041.jpg",
-          "description": "obama-pittsburgh photography",
-          "caption": "obama-pittsburgh - Politics",
-          "tags": [
-            "Politics"
+            "Documentary"
           ]
         }
       ],
@@ -3632,11 +4588,11 @@
         "source": "filename_extraction"
       },
       "dateDisplay": "October 23, 2005",
-      "totalImages": 10,
+      "totalImages": 86,
       "images": [
         {
-          "filename": "051024_trump-butler_CAL2418.jpg",
-          "path": "051024_trump-butler_CAL2418.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.jpg",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3644,8 +4600,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2419.jpg",
-          "path": "051024_trump-butler_CAL2419.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.webp",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3653,8 +4609,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2420.jpg",
-          "path": "051024_trump-butler_CAL2420.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.jpg",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3662,8 +4618,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2425.jpg",
-          "path": "051024_trump-butler_CAL2425.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2419.webp",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3671,8 +4627,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2430.jpg",
-          "path": "051024_trump-butler_CAL2430.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.jpg",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3680,8 +4636,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2439.jpg",
-          "path": "051024_trump-butler_CAL2439.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2420.webp",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3689,8 +4645,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2445.jpg",
-          "path": "051024_trump-butler_CAL2445.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.jpg",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3698,8 +4654,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2458.jpg",
-          "path": "051024_trump-butler_CAL2458.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2425.webp",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3707,8 +4663,8 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2465.jpg",
-          "path": "051024_trump-butler_CAL2465.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.jpg",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [
@@ -3716,8 +4672,692 @@
           ]
         },
         {
-          "filename": "051024_trump-butler_CAL2478.jpg",
-          "path": "051024_trump-butler_CAL2478.jpg",
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2430.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2439.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2445.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2458.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2458.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2458.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2458.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2465.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2465.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2465.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2465.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2478.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2478.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2478.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2478.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2490.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2490.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2490.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2490.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2491.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2491.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2491.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2491.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2494.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2494.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2494.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2494.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2499.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2499.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2499.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2499.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2507.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2507.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2507.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2507.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2512.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2512.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2512.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2512.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2513.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2513.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2513.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2513.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2520.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2520.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2520.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2520.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2526.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2526.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2526.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2526.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2528.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2528.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2528.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2528.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2533.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2533.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2533.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2533.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2534.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2534.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2534.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2534.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2535.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2535.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2535.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2535.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2540.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2540.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2540.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2540.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2544.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2544.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2544.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2544.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2555.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2555.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2555.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2555.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2559.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2559.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2559.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2559.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2560.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2560.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2560.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2560.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2565.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2565.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2565.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2565.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2573.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2573.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2573.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2573.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2579.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2579.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2579.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2579.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2593.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2593.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2593.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2593.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2605.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2605.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2605.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2605.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2606.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2606.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2606.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2606.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2615.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2615.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2615.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2615.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2620.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2620.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2620.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2620.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2624.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2624.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2624.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2624.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2630.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2630.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2630.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2630.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2646.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2646.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2646.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2646.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2649.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2649.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2649.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2649.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2661.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2661.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2661.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2661.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2668.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2668.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2668.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2668.webp",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2672.jpg",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2672.jpg",
+          "description": "trump-returns-butler photography",
+          "caption": "trump-returns-butler - Politics",
+          "tags": [
+            "Politics"
+          ]
+        },
+        {
+          "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2672.webp",
+          "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2672.webp",
           "description": "trump-returns-butler photography",
           "caption": "trump-returns-butler - Politics",
           "tags": [

@@ -98,13 +98,35 @@ export default function AuthorsPage() {
     jsonLd: selectedAuthor
       ? {
           '@context': 'https://schema.org',
-          '@type': 'Person',
-          name: selectedAuthor.name,
-          description: pageDescription,
-          image: ogImage,
+          '@type': 'ProfilePage',
           url: canonical,
-          jobTitle: selectedAuthor.headline,
-          homeLocation: selectedAuthor.location,
+          mainEntity: {
+            '@type': 'Person',
+            name: selectedAuthor.name,
+            description: pageDescription,
+            image: ogImage,
+            url: canonical,
+            jobTitle: selectedAuthor.headline,
+            homeLocation: selectedAuthor.location
+              ? {
+                  '@type': 'Place',
+                  name: selectedAuthor.location,
+                }
+              : undefined,
+            identifier: selectedAuthor.id,
+            agentInteractionStatistic: {
+              '@type': 'InteractionCounter',
+              interactionType: 'https://schema.org/WriteAction',
+              userInteractionCount: selectedPosts.length,
+            },
+          },
+          hasPart: selectedPosts.slice(0, 5).map((post) => ({
+            '@type': 'Article',
+            headline: post.title,
+            url: `${SITE_URL}/blog/${post.slug}`,
+            datePublished: post.date,
+            author: { '@id': `#${selectedAuthor.id}` },
+          })),
         }
       : {
           '@context': 'https://schema.org',

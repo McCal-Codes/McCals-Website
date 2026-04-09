@@ -1,4 +1,4 @@
 {
-  "lastHash": "8ff0a6ea",
-  "lastMessage": "refactor: fix ESLint unused variable errors across codebase\n\n- Fix 67 unused variable warnings in active code (70 → 3 remaining)\n- Migrate catch block error handling to empty catch syntax where unused\n- Update eslint.config.mjs ignore patterns for dist/ and broken symlinks\n- Fix eslint-env comments for ESLint 9 flat config compatibility\n- Remove deprecated .eslintignore patterns (migrated to flat config)\n\nAffected areas:\n- dev-server.js, admin/api.js\n- scripts/admin/, scripts/utils/, scripts/manifest/\n- sites/mcc-cal-vite/api/\n- src/widgets/_content/blog-feed/, src/widgets/cdn/, src/widgets/shared/"
+  "lastHash": "ed50e1e4",
+  "lastMessage": "fix(api): reorder honeypot checks before validation\n\nMove honeypot detection before safeParseBody to silently discard\nspam bots without revealing validation schema. Also fix optional\nchaining syntax for Vercel compatibility and add missing zod dep.\n\n- contact.js: cf_website_url check before validation\n- quote.js: mcc_valid_field check before validation\n- book.js: hp_field check + replace ?. with &&\n- Add zod ^3.25.76 to dependencies\n- Remove accidentally committed deploy-output.txt"
 }
