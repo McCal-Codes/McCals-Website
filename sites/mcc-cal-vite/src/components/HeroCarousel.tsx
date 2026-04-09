@@ -315,6 +315,11 @@ const HeroCarousel: React.FC = () => {
     startAutoplay();
 
     const onPointerDown = (e: PointerEvent) => {
+      // Skip drag initiation if clicking on caption/pill area
+      const target = e.target as HTMLElement;
+      if (target.closest('figcaption') || target.closest('a') || target.closest(`.${styles.heroCta}`)) {
+        return;
+      }
       draggingRef.current = true;
       viewport.classList.add(styles.isDragging);
       startXRef.current = e.clientX;
@@ -403,10 +408,9 @@ const HeroCarousel: React.FC = () => {
                   />
                   <figcaption className={styles.heroCaption}>
                     <Link
-                      to={randomizedLinks[i] || slide.href}
+                      to={slide.href}
                       className={styles.heroCta}
                       aria-label={`View ${slide.cta}`}
-                      title={slide.links && slide.links.length > 1 ? 'Randomly selected from available galleries' : undefined}
                     >
                       {slide.cta}
                     </Link>

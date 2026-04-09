@@ -107,7 +107,7 @@
   justify-content: flex-end;
   width: min(100%, 720px);
   padding: 0 2%;
-  z-index: 2;
+  z-index: 5;
   pointer-events: auto;
   text-align: center;
 }
@@ -151,6 +151,9 @@
   text-transform: uppercase;
   text-decoration: none;
   line-height: 1;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
   transition: background 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.3s cubic-bezier(0.16,1,0.3,1);
 }
 
