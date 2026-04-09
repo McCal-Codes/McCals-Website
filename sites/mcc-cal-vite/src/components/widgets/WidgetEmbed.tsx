@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import DOMPurify from 'dompurify';
 
 interface WidgetEmbedProps {
   widget: string;
@@ -33,19 +34,17 @@ export function WidgetEmbed({ widget, category, version }: WidgetEmbedProps) {
       })
       .then((html) => {
         if (containerRef.current) {
-          containerRef.current.innerHTML = html;
-          
-          // Execute any scripts in the injected HTML
-          const scripts = containerRef.current.querySelectorAll('script');
-          scripts.forEach((script) => {
-            const newScript = document.createElement('script');
-            if (script.src) {
-              newScript.src = script.src;
-            } else {
-              newScript.textContent = script.textContent;
-            }
-            script.parentNode?.replaceChild(newScript, script);
+          // Sanitize HTML before injection to prevent XSS attacks
+          const clean = DOMPurify.sanitize(html, {
+            ALLOWED_TAGS: ['div', 'span', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+                          'ul', 'ol', 'li', 'a', 'img', 'button', 'form', 'input',
+                          'textarea', 'label', 'select', 'option', 'br', 'hr',
+                          'strong', 'em', 'table', 'thead', 'tbody', 'tr', 'td', 'th'],
+            ALLOWED_ATTR: ['class', 'id', 'href', 'src', 'alt', 'title', 'type', 'name',
+                          'value', 'placeholder', 'for', 'style', 'width', 'height',
+                          'target', 'rel', 'checked', 'selected', 'disabled', 'rows', 'cols']
           });
+          containerRef.current.innerHTML = clean;
         }
       })
       .catch((err) => {

@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 
-// McCal Footer Widget v1.2.0 — React/Vite port (mcc-cal.com parity)
-const WIDGET_VERSION = '1.2.0';
 const NEWSLETTER_ENDPOINT =
   import.meta.env.VITE_NEWSLETTER_ENDPOINT ||
   'https://mcc-cal.us14.list-manage.com/subscribe/post?u=da029ed85760894c33e8b119d&id=fb992a38c8&f_id=00cf8ae0f0';
@@ -41,7 +39,7 @@ const Footer: React.FC = () => {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <div className="mcc-footer-widget" data-widget-version={WIDGET_VERSION}>
+      <div className="mcc-footer-widget">
         <footer className="mcc-footer" role="contentinfo" aria-label="Site footer">
           <div className="mcc-footer__inner">
             <section className="mcc-footer__section" aria-labelledby="footer-about">
@@ -76,6 +74,9 @@ const Footer: React.FC = () => {
                 <a href="https://www.instagram.com/mcc_cal" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm6.75-2.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>
                 </a>
+                <a href="https://www.linkedin.com/in/caleb-mccartney/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
               </div>
               <div className="mcc-footer__newsletter">
                 <form action={NEWSLETTER_ENDPOINT} method="post" target="_blank" aria-label="Newsletter signup" noValidate>
@@ -92,10 +93,8 @@ const Footer: React.FC = () => {
           </div>
           <div className="mcc-footer__legal">
             <div>&copy; <span>{year}</span> Caleb McCartney. All rights reserved.</div>
-            <div className="mcc-footer__version">v{WIDGET_VERSION}</div>
             <div className="mcc-footer__links">
-              <a href="/policies-legal#accessibility">Accessibility</a>
-              <a href="/policies-legal#cookies">Cookies</a>
+              <a href="/accessibility">Accessibility & Cookies</a>
             </div>
           </div>
         </footer>

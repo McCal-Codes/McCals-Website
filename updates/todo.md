@@ -1,6 +1,6 @@
 # Active To-Do List
 
-Last Updated: April 6, 2026
+Last Updated: April 9, 2026
 
 **Quick Reference:**
 
@@ -13,11 +13,38 @@ Last Updated: April 6, 2026
 
 ## 🚀 Active Now (April 2026)
 
+### 🚨 April 9 Audit Findings (COMPLETED - Remediation Planned)
+
+**Status:** Comprehensive audit completed 2026-04-09. Full report: `COMPREHENSIVE-AUDIT-REPORT-2026-04-09.md`
+
+**Overall Grade:** B+ (Production-ready with fixes)
+
+**Critical Issues (2):**
+- [ ] **TypeScript Build Error** - `HeroCarousel.tsx:254,256` - undefined reference (BLOCKER)
+- [ ] **XSS Vulnerability** - `WidgetEmbed.tsx:36` - innerHTML without sanitization (HIGH)
+
+**Remediation Plan:** `REMEDIATION-PLAN-2026-04-09.md` (Phases 1-5, ~4-6 hours)
+
+**⚠️ HOLD:** No Vercel deployments until Phase 1 fixes complete (user instruction)
+
+---
+
 ### Vite Site Refactoring (`sites/mcc-cal-vite/`)
 
 The Vite site is the primary web surface. Current focus: code quality and performance.
 
 **Just Completed:**
+- ✅ **Bug Fixes & Code Review Workflow** (April 8) - See `updates/2026-04-08-session-summary.md`
+  - Fixed missing `zod` dependency (BLOCKER for CI/Vercel)
+  - Fixed honeypot order in API endpoints (contact.js, quote.js, book.js)
+  - Removed optional chaining from book.js (Vercel bundler compatibility)
+  - Deleted committed deployment log (`deploy-output.txt`)
+  - Created comprehensive code review workflow (`.windsurf/workflows/codereview.md`)
+- ✅ **UI Cleanup** (April 9)
+  - Removed version badges from footer, accessibility page, and policies page
+  - Simplified footer layout (copyright left, accessibility link right)
+  - Added LinkedIn icon to footer social links
+  - Added cross-links to Accessibility & Cookie Policy from Privacy and Cookie sections
 - ✅ **Policies & Legal Page Refactoring** (April 6)
   - Removed version badge and changelog modal
   - Applied React best practices (useMemo, useCallback, TypeScript types)
@@ -51,7 +78,9 @@ The Vite site is the primary web surface. Current focus: code quality and perfor
   - Podcast feed uses `usePodcastFeed` with caching and initial data
   - QueryClient configured with 5min staleTime, 30min gcTime
 
-**Current Sprint:**
+**Current Sprint (Phase 1 - Critical Fixes):**
+- [ ] **Fix TypeScript Build Error** - `HeroCarousel.tsx:254,256` undefined reference (BLOCKER)
+- [ ] **Add XSS Protection** - Install DOMPurify, sanitize WidgetEmbed.tsx innerHTML (HIGH)
 - [ ] **Add E2E Tests** - Playwright coverage for critical user flows (homepage, blog, podcast, contact)
 - [ ] **Bundle Analysis** - Run `vite-bundle-visualizer` to identify optimization targets
 
@@ -84,7 +113,6 @@ Portfolio and content widgets. Currently stable; enhancements in backlog.
 - [ ] **Photojournalism Portfolio** - Empty state resilience
 - [ ] **Blog Feed** - Search debouncing (300ms)
 - [ ] **Client Carousel** - Dynamic logo track (currently static)
-- [ ] **Testimonials** - Star rating schema markup
 
 ---
 

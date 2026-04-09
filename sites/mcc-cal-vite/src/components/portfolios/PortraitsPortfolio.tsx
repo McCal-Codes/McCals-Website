@@ -26,7 +26,7 @@ import { generateId } from '@/utils/portfolio-ids';
 
 function normalise(collections: PortraitCollection[]): PortfolioGroup[] {
   return collections
-    .filter((c) => c.images?.length > 0)
+    .filter((c) => Array.isArray(c.images) && c.images.length > 0)
     .map((collection) => {
       const images = collection.images.map((filename) => ({
         // filename may include an album subfolder, e.g. "Lucha 2022/IMGP8480.jpg"

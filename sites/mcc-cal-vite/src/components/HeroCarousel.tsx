@@ -218,38 +218,6 @@ const HeroCarousel: React.FC = () => {
 
   const slides = useMemo(() => FAVORITES, []);
 
-  // State for randomized links - stores the currently selected link for each slide
-  const [randomizedLinks, setRandomizedLinks] = useState<Record<number, string>>(() => {
-    // Initialize with random selections
-    const initial: Record<number, string> = {};
-    FAVORITES.forEach((slide, index) => {
-      initial[index] = getRandomLink(slide);
-    });
-    return initial;
-  });
-
-  // Function to get a random link from a slide's links array
-  function getRandomLink(slide: HeroSlide): string {
-    if (slide.links && slide.links.length > 1) {
-      const randomIndex = Math.floor(Math.random() * slide.links.length);
-      return slide.links[randomIndex].url;
-    }
-    // Fallback to primary href
-    return slide.href;
-  }
-
-  // Function to randomize link for a specific slide
-  const randomizeLink = useCallback((slideIndex: number) => {
-    const slide = slides[slideIndex];
-    if (slide.links && slide.links.length > 1) {
-      const newUrl = getRandomLink(slide);
-      setRandomizedLinks((prev) => ({
-        ...prev,
-        [slideIndex]: newUrl,
-      }));
-    }
-  }, [slides]);
-
   const syncHeight = useCallback(() => {
     const widget = widgetRef.current;
     if (!widget) return;
@@ -282,10 +250,8 @@ const HeroCarousel: React.FC = () => {
       indexRef.current = safe;
       const w = viewportWidthRef.current || window.innerWidth;
       setTrack(-safe * w, withTransition);
-      // Randomize link for the newly active slide
-      randomizeLink(safe);
     },
-    [slides.length, setTrack, randomizeLink]
+    [slides.length, setTrack]
   );
 
   const stopAutoplay = useCallback(() => {

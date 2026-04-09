@@ -108,9 +108,11 @@ export function BioSection({ className = '' }: BioSectionProps) {
             <div className={styles.menuWrapper} ref={contactMenuRef}>
               <button
                 type="button"
+                id="contact-menu-button"
                 className={styles.actionButton}
                 aria-expanded={contactMenuOpen}
-                aria-haspopup="true"
+                aria-haspopup="menu"
+                aria-controls="contact-menu"
                 onClick={handleContactClick}
               >
                 Get in touch
@@ -123,8 +125,11 @@ export function BioSection({ className = '' }: BioSectionProps) {
                 </svg>
               </button>
               <div
+                id="contact-menu"
                 className={`${styles.menuPanel} ${contactMenuOpen ? styles.open : ''}`}
                 role="menu"
+                aria-labelledby="contact-menu-button"
+                hidden={!contactMenuOpen}
               >
                 <Link to="/contact-us" className={styles.menuItem} role="menuitem">
                   <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
@@ -148,9 +153,11 @@ export function BioSection({ className = '' }: BioSectionProps) {
             <div className={styles.menuWrapper} ref={documentsMenuRef}>
               <button
                 type="button"
+                id="documents-menu-button"
                 className={styles.actionButton}
                 aria-expanded={documentsMenuOpen}
-                aria-haspopup="true"
+                aria-haspopup="menu"
+                aria-controls="documents-menu"
                 onClick={handleDocumentsClick}
               >
                 Documents
@@ -163,8 +170,11 @@ export function BioSection({ className = '' }: BioSectionProps) {
                 </svg>
               </button>
               <div
+                id="documents-menu"
                 className={`${styles.menuPanel} ${documentsMenuOpen ? styles.open : ''}`}
                 role="menu"
+                aria-labelledby="documents-menu-button"
+                hidden={!documentsMenuOpen}
               >
                 <a
                   href="/downloads/caleb-mccartney-resume.pdf"
@@ -186,24 +196,20 @@ export function BioSection({ className = '' }: BioSectionProps) {
               </div>
             </div>
 
-            <Link to="/featured-work" className={styles.actionButton}>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2l-5.5 9h11z"/>
-                <path d="M2 22h20v-2H2z"/>
-                <path d="M17.5 2L12 11h11z"/>
-              </svg>
-              View portfolio
-            </Link>
             <Link
-              to="/request-a-quote"
+              to="/featured-work"
               className={`${styles.actionButton} ${styles.actionPrimary}`}
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-2 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm4-6H8V8h8v4z"/>
-              </svg>
-              Request a quote
+              View portfolio
             </Link>
           </div>
+
+          <p className={styles.ctaReassurance}>
+            <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.reassuranceIcon}>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            Response within 24 hours • No obligation consultation
+          </p>
 
           <div className={styles.stats} aria-label="Career highlights">
             {stats.map((item) => (

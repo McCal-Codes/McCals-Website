@@ -231,7 +231,7 @@ const PoliciesLegalPage = () => {
             Skip to main content
           </a>
 
-          <div className="policy-site" data-widget-version="1.1.2" role="document" aria-labelledby="policy-title">
+          <div className="policy-site" role="document" aria-labelledby="policy-title">
         {/* Reading Progress Bar */}
         <div
           className="policy-progress"
@@ -442,6 +442,10 @@ const PoliciesLegalPage = () => {
               <strong>Your rights:</strong> Access, correct, or delete your personal data by contacting
               us at <a href="mailto:business@mcc-cal.com">business@mcc-cal.com</a>.
             </p>
+            <p className="policy-cross-link">
+              For accessibility accommodations or to exercise your data rights, please visit our{' '}
+              <a href="/accessibility">Accessibility & Cookie Policy</a> page.
+            </p>
           </section>
 
           <hr aria-hidden="true" />
@@ -473,6 +477,10 @@ const PoliciesLegalPage = () => {
             <p>
               Most browsers allow cookie management in settings. Disabling non-essential cookies may
               affect site functionality.
+            </p>
+            <p className="policy-cross-link">
+              <a href="/accessibility">View full Accessibility & Cookie Policy</a> for detailed
+              cookie inventory, preference management, and accessibility information.
             </p>
           </section>
 

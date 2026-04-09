@@ -110,13 +110,16 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
   );
 }
 
-export function ClientsSection({ 
-  className = '', 
+export function ClientsSection({
+  className = '',
   duplicates = 3,
   clientList,
-  shuffle = false 
+  shuffle = false
 }: ClientsSectionProps) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
   const [isExpanded, setIsExpanded] = useState(false);
   
   useEffect(() => {

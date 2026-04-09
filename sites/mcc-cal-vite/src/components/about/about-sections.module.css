@@ -2,6 +2,19 @@
    About Page Sections - CSS Module
    ============================================ */
 
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* CSS Custom Properties */
 .bio,
 .reviews,
@@ -170,94 +183,102 @@
    Action Buttons & Menus
    ============================================ */
 
+/* Button container - grouped together like nav */
 .actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
   margin-top: 16px;
+  border-radius: 12px;
 }
 
+/* Ensure menu panels aren't clipped */
+.actions > * {
+  position: relative;
+}
+
+/* Base button sizing */
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Base button style - grouped nav style */
 .actionButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
-  padding: 0.7rem 1.2rem;
-  border-radius: 12px;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 0;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
+  border-right: none;
+  background: rgba(255, 255, 255, 0.06);
   color: var(--about-text-primary);
   text-decoration: none;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex: 1;
 }
 
-.actionButton::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
+/* First button - rounded left corners on desktop */
+.actionButton:first-child,
+.menuWrapper:first-of-type .actionButton {
+  border-radius: 12px 0 0 12px;
 }
 
+/* Last button - rounded right corners on desktop */
+.actionButton:last-child,
+.menuWrapper:last-of-type .actionButton {
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0 12px 12px 0;
+}
+
+/* Clean hover effect - subtle and grouped */
 .actionButton:hover,
 .actionButton:focus-visible {
-  transform: translateY(-3px) scale(1.02);
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.25),
-    0 2px 8px rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.12);
   outline: none;
+  z-index: 1;
 }
 
-.actionButton:hover::before,
-.actionButton:focus-visible::before {
-  opacity: 1;
-}
-
+/* Primary action - solid light style, distinct from dropdowns */
 .actionPrimary {
   color: #1a1a1a;
-  background: linear-gradient(135deg, #f5f0eb 0%, #e8e2dc 50%, #ddd6cf 100%);
+  background: linear-gradient(135deg, #f5f0eb 0%, #e8e2dc 100%);
   border-color: transparent;
-  box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-.actionPrimary::before {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .actionPrimary:hover,
 .actionPrimary:focus-visible {
-  background: linear-gradient(135deg, #fffdfa 0%, #f0eae4 50%, #e5ded6 100%);
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.2),
-    0 2px 8px rgba(255, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  transform: translateY(-3px) scale(1.03);
+  background: linear-gradient(135deg, #faf6f2 0%, #f0eae4 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  z-index: 1;
 }
 
 /* Button icon styling */
+/* Icon buttons - ensure consistent gap handling */
+.actionWithIcon {
+  gap: 10px;
+}
+
+/* Button icon styling - consistent sizing */
 .actionButton svg {
   width: 18px;
   height: 18px;
   fill: currentColor;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: transform 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
 }
 
 .actionButton:hover svg {
@@ -269,17 +290,73 @@
   opacity: 0.9;
 }
 
-.menuWrapper {
-  position: relative;
+/* Dropdown buttons have chevron, slightly different spacing */
+.actionButton:has(.chevron) {
+  gap: 6px;
+  padding-right: 1rem;
 }
 
+/* CTA Reassurance Microcopy - centered */
+.ctaReassurance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 8px;
+  font-size: 0.875rem;
+  color: var(--about-text-muted);
+  font-weight: 500;
+  text-align: center;
+}
+
+.reassuranceIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: var(--about-accent);
+}
+
+@media (max-width: 640px) {
+  .ctaReassurance {
+    font-size: 0.8rem;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Menu wrapper - no extra spacing, but allow overflow for dropdown */
+.menuWrapper {
+  position: relative;
+  display: flex;
+  flex: 1;
+  overflow: visible;
+}
+
+/* Menu wrapper button fills container */
+.menuWrapper .actionButton {
+  width: 100%;
+  flex: 1;
+}
+
+/* Fix hidden attribute - menu panel should respect hidden */
+.menuPanel[hidden] {
+  display: none !important;
+}
+
+.menuPanel:not([hidden]) {
+  display: grid;
+}
+
+/* Chevron for dropdown buttons - sized to match other icons */
 .chevron {
-  width: 12px;
-  height: 8px;
+  width: 14px;
+  height: 14px;
   transition: transform 0.2s ease;
   stroke: currentColor;
   stroke-width: 2;
   fill: none;
+  flex-shrink: 0;
+  margin-left: 4px;
 }
 
 .chevron.open {
@@ -654,7 +731,75 @@
 }
 
 .testimonialsFooter {
-  display: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* Trust Badges - Third Party Validation */
+.trustBadges {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 24px 0;
+  padding: 16px;
+  border-top: 1px solid var(--about-line);
+  border-bottom: 1px solid var(--about-line);
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.trustBadgeIcon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.9;
+}
+
+.trustBadgeText {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: var(--about-text-primary);
+}
+
+.trustBadgeText strong {
+  font-weight: 600;
+  color: var(--about-accent-strong);
+}
+
+.trustBadgeSubtext {
+  font-size: 0.75rem;
+  color: var(--about-text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .trustBadges {
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .trustBadge {
+    padding: 6px 12px;
+  }
+
+  .trustBadgeText {
+    font-size: 0.8rem;
+  }
+
+  .trustBadgeSubtext {
+    font-size: 0.7rem;
+  }
 }
 
 .actionSecondary {
@@ -1023,95 +1168,117 @@
     max-width: 280px;
   }
 
-  /* Tablet: Two-column button layout */
+  /* Tablet: grouped together */
   .actions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
   }
 
+  /* All buttons same size on tablet */
   .actionButton {
-    min-height: 46px;
+    min-height: 48px;
     padding: 12px 16px;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
+    flex: 1;
   }
 
-  /* Full-width for primary action */
-  .actionPrimary {
-    grid-column: span 2;
-  }
-
-  /* Menu wrappers stay full width when open */
   .menuWrapper {
-    grid-column: span 1;
+    flex: 1;
+  }
+
+  /* Override span - all buttons equal */
+  .actionPrimary {
+    grid-column: auto;
   }
 
   .menuPanel {
+    position: absolute;
+    top: calc(100% + 8px);
     left: 0;
-    right: 0;
-    min-width: 100%;
+    right: auto;
+    min-width: 180px;
+    z-index: 100;
   }
 }
 
 @media (max-width: 640px) {
-  .actions,
-  .clientsFooter,
-  .reviewsFooter {
+  /* Mobile: vertical stacked buttons, menus push content down */
+  .actions {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
+    gap: 10px;
   }
 
-  .menuWrapper,
+  .menuWrapper {
+    width: 100%;
+    position: relative;
+  }
+
   .actionButton {
     width: 100%;
     min-height: 48px;
     padding: 14px 20px;
-    font-size: 1rem;
-    border-radius: 14px;
-    grid-column: auto;
-    /* Touch feedback - immediate response */
+    font-size: 0.9rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
 
-  /* Active state for touch devices */
+  /* Clean active state */
   .actionButton:active {
-    transform: translateY(-1px) scale(0.98);
-    transition: transform 0.1s ease;
+    background: rgba(255, 255, 255, 0.15);
   }
 
   .actionPrimary:active {
-    background: linear-gradient(135deg, #e5ded6 0%, #d8d0c8 50%, #ccc5bd 100%);
+    background: #e8e2dc;
   }
 
-  /* Larger icons on mobile */
+  /* Mobile icons */
   .actionButton svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .chevron {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Mobile menu - full width below button */
+  .menuWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menuWrapper .actionButton {
+    order: 1;
   }
 
   .menuPanel {
     position: static;
+    width: 100%;
     min-width: 0;
-    margin-top: 10px;
+    margin: 8px 0 0;
     transform: none;
-    display: none;
-    box-shadow: none;
+    order: 2;
     border-radius: 12px;
   }
 
-  .menuPanel.open {
+  .menuPanel[hidden] {
+    display: none !important;
+  }
+
+  .menuPanel:not([hidden]) {
     display: grid;
   }
 
   .menuItem {
-    min-height: 48px;
-    padding: 14px 16px;
-    font-size: 1rem;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    min-height: 44px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
   }
 
   .menuItem:active {
@@ -1237,12 +1404,16 @@
   }
   
   .bioGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 24px;
   }
   
   .bioPhoto {
     order: -1;
-    margin-bottom: 8px;
+    margin: 0 auto 8px;
+    justify-self: center;
   }
   
   .photoWrapper {

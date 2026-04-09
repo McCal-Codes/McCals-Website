@@ -29,6 +29,7 @@ const GrabCoffeePage = lazy(() => import('./pages/grab-a-coffee'));
 const BookPodcastPage = lazy(() => import('./pages/book-a-podcast'));
 const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
 const FAQPage = lazy(() => import('./pages/faq'));
+const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const TerranovaPage = lazy(() => import('./pages/terranova'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
 
@@ -84,6 +85,7 @@ export default function App() {
           <Route path="/book-a-podcast" element={<BookPodcastPage />} />
           <Route path="/policies-legal" element={<PoliciesLegalPage />} />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/accessibility" element={<AccessibilityPage />} />
           <Route path="/terranova" element={<TerranovaPage />} />
           <Route path="*" element={<NotFoundPage />} />
           </Routes>

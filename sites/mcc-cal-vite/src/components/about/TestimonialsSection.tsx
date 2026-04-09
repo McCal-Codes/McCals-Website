@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { staticGoogleReviews, staticLinkedInReviews, type GoogleReview, type LinkedInReview } from '@/hooks/useGoogleReviews';
+import { useGoogleReviews, staticLinkedInReviews, type GoogleReview, type LinkedInReview } from '@/hooks/useGoogleReviews';
 import { useState, useEffect, useCallback, memo, useMemo } from 'react';
 import styles from './about-sections.module.css';
 
@@ -28,11 +28,16 @@ interface UnifiedTestimonial {
 
 // Convert Google review to unified format
 function formatGoogleReview(review: GoogleReview): UnifiedTestimonial {
+  // Customize role based on reviewer
+  const customRoles: Record<string, string> = {
+    'Ben Orr': 'Musician',
+  };
+  
   return {
     source: 'Google',
     quote: review.text,
     name: review.author_name,
-    role: 'Verified Client',
+    role: customRoles[review.author_name] || 'Verified Client',
     rating: review.rating.toString(),
   };
 }
@@ -97,19 +102,35 @@ const TestimonialCard = memo(function TestimonialCard({
 const AUTO_ADVANCE_INTERVAL = 6000; // 6 seconds
 
 export function TestimonialsSection({ className = '' }: TestimonialsSectionProps) {
+  // Fetch live Google reviews (with fallback to static data)
+  const { reviews: googleReviewsData, usingFallback } = useGoogleReviews({ maxResults: 5 });
+  
   // Combine Google and LinkedIn reviews - memoized to prevent re-calculation
-  const googleReviews = useMemo(() => staticGoogleReviews.map(formatGoogleReview), []);
+  const googleReviews = useMemo(() => 
+    googleReviewsData.map(formatGoogleReview), 
+    [googleReviewsData]
+  );
   const linkedInReviews = useMemo(() => staticLinkedInReviews.map(formatLinkedInReview), []);
   const allTestimonials = useMemo(() => [...googleReviews, ...linkedInReviews], [googleReviews, linkedInReviews]);
   
-  // Shuffle for variety - only once on mount
+  // Shuffle for variety - deterministic based on date to avoid hydration mismatch
   const shuffledTestimonials = useMemo(() => {
-    return [...allTestimonials].sort(() => Math.random() - 0.5);
+    // Use a deterministic seed based on day of month to avoid hydration mismatch
+    // while still giving variety across days
+    const seed = new Date().getDate();
+    return [...allTestimonials].sort((a, b) => {
+      const hashA = a.name.charCodeAt(0) + seed;
+      const hashB = b.name.charCodeAt(0) + seed;
+      return hashA - hashB;
+    });
   }, [allTestimonials]);
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Handle resize for mobile detection with passive listener
@@ -135,12 +156,54 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
     setCurrentIndex(index);
   }, []);
 
-  // Auto-advance (only on desktop)
+  // Keyboard navigation for carousel
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (isMobile) return;
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        prevSlide();
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        nextSlide();
+        break;
+      case 'Home':
+        e.preventDefault();
+        goToSlide(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        goToSlide(totalSlides - 1);
+        break;
+    }
+  }, [isMobile, prevSlide, nextSlide, goToSlide, totalSlides]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
+
+  // Auto-advance (only on desktop and when tab is visible)
   useEffect(() => {
     if (isPaused || isMobile) return;
-    
+
+    // Pause when tab is not visible to save resources
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setIsPaused(true);
+      } else {
+        setIsPaused(false);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     const timer = setInterval(nextSlide, AUTO_ADVANCE_INTERVAL);
-    return () => clearInterval(timer);
+
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, [isPaused, isMobile, nextSlide]);
 
   // Show limited testimonials on mobile when collapsed
@@ -160,7 +223,15 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
         <h2 id="testimonials-heading">What clients say about working with me</h2>
         <p className={styles.testimonialsSubtitle}>
           Real reviews from Google Business Profile & LinkedIn
+          {!usingFallback && (
+            <span className={styles.liveBadge} aria-label="Live reviews from Google"> ● Live</span>
+          )}
         </p>
+      </div>
+
+      {/* Screen reader announcements for slide changes */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {`Showing testimonial ${currentIndex + 1} of ${totalSlides}`}
       </div>
 
       {/* Mobile: Expandable stacked layout */}
@@ -192,7 +263,13 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
         </>
       ) : (
         /* Desktop: Carousel */
-        <div className={styles.testimonialsCarousel}>
+        <div
+          className={styles.testimonialsCarousel}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Client testimonials"
+          tabIndex={0}
+        >
           <div 
             className={styles.testimonialsTrack}
             style={{ transform: `translateX(-${currentIndex * 50}%)` }}
@@ -238,6 +315,34 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
           </div>
         </div>
       )}
+
+      {/* Trust Badges - Third Party Validation */}
+      <div className={styles.trustBadges}>
+        <div className={styles.trustBadge}>
+          <img
+            src="/icons/google.svg"
+            alt="Google"
+            className={styles.trustBadgeIcon}
+            loading="lazy"
+          />
+          <span className={styles.trustBadgeText}>
+            <strong>5.0</strong> ★★★★★
+            <span className={styles.trustBadgeSubtext}>Google Reviews</span>
+          </span>
+        </div>
+        <div className={styles.trustBadge}>
+          <img
+            src="/icons/linkedin.svg"
+            alt="LinkedIn"
+            className={styles.trustBadgeIcon}
+            loading="lazy"
+          />
+          <span className={styles.trustBadgeText}>
+            <strong>LinkedIn</strong>
+            <span className={styles.trustBadgeSubtext}>Recommendations</span>
+          </span>
+        </div>
+      </div>
 
       <div className={styles.testimonialsFooter}>
         <a
