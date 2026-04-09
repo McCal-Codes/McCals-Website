@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Widget Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-info { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Direct Widget Test</h1>
+    <div class="test-info">
+        <p><strong>Current URL:</strong> <span id="currentUrl"></span></p>
+        <p><strong>Expected manifest path:</strong> <code>../../../../src/images/Portfolios/featured-manifest.json</code></p>
+    </div>
+    
+    <div id="widget-container">
+        <iframe src="../versions/v1.5.html" width="100%" height="800" style="border: 1px solid #ccc;"></iframe>
+    </div>
+
+    <script>
+        document.getElementById('currentUrl').textContent = window.location.href;
+    </script>
+</body>
+</html>

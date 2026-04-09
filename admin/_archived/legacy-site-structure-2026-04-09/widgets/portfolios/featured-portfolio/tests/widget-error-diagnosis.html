@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Widget Error Check</title>
+    <style>
+        body { font-family: monospace; margin: 20px; background: #1a1a1a; color: #f0f0f0; }
+        .log { background: #2a2a2a; padding: 10px; margin: 5px 0; border-radius: 3px; font-size: 12px; }
+        .error { background: #4a2a2a; border-left: 4px solid #ff6b6b; }
+        .success { background: #2a4a2a; border-left: 4px solid #51cf66; }
+        .info { background: #2a3a4a; border-left: 4px solid #74c0fc; }
+        .console-log { background: #1a1a2e; padding: 15px; margin: 10px 0; border: 1px solid #333; max-height: 400px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>Widget Error Diagnosis</h1>
+    
+    <div id="test-log"></div>
+    
+    <h3>Console Output</h3>
+    <div id="console-output" class="console-log"></div>
+
+    <script>
+        const testLog = document.getElementById('test-log');
+        const consoleOutput = document.getElementById('console-output');
+        
+        function addLog(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.innerHTML = `<strong>[${new Date().toLocaleTimeString()}]</strong> ${message}`;
+            testLog.appendChild(div);
+        }
+        
+        // Capture console messages
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        function logToDiv(level, args) {
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            
+            const div = document.createElement('div');
+            div.innerHTML = `<span style="color: #888;">[${level.toUpperCase()}]</span> ${message}`;
+            consoleOutput.appendChild(div);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        console.log = (...args) => { originalLog(...args); logToDiv('log', args); };
+        console.error = (...args) => { originalError(...args); logToDiv('error', args); };
+        console.warn = (...args) => { originalWarn(...args); logToDiv('warn', args); };
+        
+        async function testWidgetLogic() {
+            addLog('🔍 Testing widget logic manually...', 'info');
+            
+            try {
+                // Test the loadFromAllPortfolios logic manually
+                const portfolioTypes = [
+                    { type: 'Concert', path: '../../../../src/images/Portfolios/Concert/concert-manifest.json', itemsPerType: 5 },
+                    { type: 'Events', path: '../../../../src/images/Portfolios/Events/events-manifest.json', itemsPerType: 3 },
+                    { type: 'Journalism', path: '../../../../src/images/Portfolios/Journalism/journalism-manifest.json', itemsPerType: 3 }
+                ];
+                
+                const allItems = [];
+                const seenItems = new Set();
+                let loadedTypes = 0;
+                
+                for (const portfolio of portfolioTypes) {
+                    try {
+                        addLog(`Loading ${portfolio.type}...`, 'info');
+                        const response = await fetch(portfolio.path);
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+                        
+                        const manifest = await response.json();
+                        addLog(`✅ Loaded ${portfolio.type} manifest`, 'success');
+                        
+                        // Handle different manifest formats
+                        let rawItems = [];
+                        if (portfolio.type === 'Events' && manifest.events) {
+                            rawItems = manifest.events.map(event => ({
+                                ...event,
+                                folderPath: event.folderPath,
+                                images: event.images?.map(img => img.path?.split('/').pop() || img) || [],
+                                type: portfolio.type
+                            }));
+                        } else if (manifest.items) {
+                            rawItems = manifest.items;
+                        }
+                        
+                        addLog(`Found ${rawItems.length} raw items in ${portfolio.type}`, 'info');
+                        
+                        if (rawItems.length > 0) {
+                            // Add items while avoiding duplicates
+                            let addedCount = 0;
+                            for (const item of rawItems) {
+                                if (addedCount >= portfolio.itemsPerType) break;
+                                
+                                const itemKey = `${item.folderPath || ''}|${item.eventName || item.title || ''}`;
+                                if (!seenItems.has(itemKey)) {
+                                    seenItems.add(itemKey);
+                                    allItems.push({
+                                        ...item,
+                                        type: portfolio.type,
+                                        portfolioSource: portfolio.type
+                                    });
+                                    addedCount++;
+                                }
+                            }
+                            
+                            if (addedCount > 0) {
+                                loadedTypes++;
+                                addLog(`✅ Added ${addedCount} unique items from ${portfolio.type}`, 'success');
+                            }
+                        }
+                        
+                    } catch (error) {
+                        addLog(`❌ Failed to load ${portfolio.type}: ${error.message}`, 'error');
+                    }
+                }
+                
+                addLog(`🎯 Final result: ${allItems.length} total items from ${loadedTypes} portfolio types`, allItems.length > 0 ? 'success' : 'error');
+                
+                if (allItems.length > 0) {
+                    addLog(`Sample items: ${allItems.slice(0, 3).map(item => item.folderPath || 'no-path').join(', ')}`, 'info');
+                } else {
+                    addLog('❌ No items loaded - this is the problem!', 'error');
+                }
+                
+            } catch (error) {
+                addLog(`❌ Test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Run the test
+        testWidgetLogic();
+        
+        addLog('🚀 Error diagnosis started...', 'info');
+    </script>
+</body>
+</html>

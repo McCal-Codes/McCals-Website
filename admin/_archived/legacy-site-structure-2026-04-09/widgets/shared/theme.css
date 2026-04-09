@@ -1,0 +1,182 @@
+/*
+  McCal Media Widget Theme — Accent & Gradient System (2025-10-09)
+  ---------------------------------------------------------------
+  This theme uses a dark base palette for backgrounds and cards.
+  The business palette is integrated as accent/gradient variables ONLY —
+  never as base backgrounds. For standards, see:
+    docs/standards/widget-ui-colors-and-buttons.md
+
+  Usage:
+    - Use --mc-accent-* variables for highlights, buttons, chips, borders, and gradients.
+    - Do NOT use these as base backgrounds or for large surfaces.
+    - Gradients: Use --mc-gradient-* for overlays, chips, or accent lines.
+    - All widgets must remain dark mode by default.
+    - For accessibility, ensure contrast with --mc-text or --mc-muted.
+*/
+
+:root {
+  --mc-font: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mc-bg: #050506;
+  --mc-bg-alt: #0f1014;
+  --mc-text: #cac2ba;
+  --mc-muted: #5b5553;
+
+  /* Monochrome Business System */
+  --mc-accent: #b8b0aa;
+  --mc-accent-rgb: 184, 176, 170;
+  --mc-card: rgba(26, 26, 27, 0.94); /* #1A1A1B with alpha */
+  --mc-border: rgba(184, 176, 170, 0.12); /* #B8B0AA with alpha */
+  --mc-gap: 22px;
+  --mc-radius: 16px;
+  --mc-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
+
+  --mc-chip-bg: rgba(184, 176, 170, 0.08);
+  --mc-chip-border: rgba(184, 176, 170, 0.2);
+
+  /* Business Gradients */
+  --mc-gradient-accent: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+  --mc-gradient-stone: linear-gradient(135deg, #5b5553 0%, #363230 100%);
+  --mc-gradient-slate: linear-gradient(135deg, #363230 0%, #272423 100%);
+}
+
+.mc-portfolio {
+  font-family: var(--mc-font);
+  color: var(--mc-text);
+  background:
+    radial-gradient(circle at top, rgba(30, 30, 30, 0.4), transparent 50%),
+    linear-gradient(180deg, var(--mc-bg) 0%, var(--mc-bg-alt) 100%);
+  min-height: 100vh;
+}
+
+.mc-portfolio .mc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--mc-gap);
+  padding-bottom: 48px;
+}
+
+.mc-portfolio .mc-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--mc-card);
+  border-radius: var(--mc-radius);
+  border: 1px solid var(--mc-border);
+  overflow: hidden;
+  box-shadow: var(--mc-shadow);
+  transition:
+    transform 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.mc-portfolio .mc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 48px rgba(0, 0, 0, 0.55);
+}
+
+.mc-portfolio .mc-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0f1118;
+}
+
+.mc-portfolio .mc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px 22px;
+}
+
+.mc-portfolio .mc-title {
+  margin: 0;
+  font: 600 1.05rem/1.25 var(--mc-font);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mc-portfolio .mc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font: 500 0.78rem/1.4 var(--mc-font);
+  color: var(--mc-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.mc-portfolio .mc-meta-text {
+  font: 500 0.82rem/1.5 var(--mc-font);
+  color: var(--mc-muted);
+  margin: 0;
+}
+
+.mc-portfolio .mc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--mc-chip-bg);
+  border: 1px solid var(--mc-chip-border);
+  color: var(--mc-text);
+  font: 600 0.68rem/1.2 var(--mc-font);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.mc-portfolio .mc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mc-portfolio .mc-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font: 600 0.65rem/1.1 var(--mc-font);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mc-muted);
+}
+
+.mc-portfolio .mc-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 0.68rem/1.2 var(--mc-font);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mc-portfolio .mc-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  background: linear-gradient(135deg, rgba(18, 20, 28, 0.9), rgba(8, 9, 12, 0.9));
+  color: var(--mc-muted);
+  font: 600 0.9rem/1.3 var(--mc-font);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.mc-portfolio .mc-caption {
+  font-size: 0.92rem;
+  color: var(--mc-muted);
+  padding: 18px;
+  text-align: center;
+}
+
+.mc-portfolio a {
+  color: var(--mc-accent);
+  text-decoration: none;
+}
+
+.mc-portfolio a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,317 @@
+<!-- About Page Widget v1.0.0 -->
+<div class="about-page-widget" data-widget-version="1.0.0">
+  <style>
+    /* About Page Widget Styles */
+    .about-page-widget {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 100%;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .about-page-widget * {
+      box-sizing: border-box;
+    }
+
+    /* CSS Custom Properties (Theme Variables) */
+    .about-page-widget {
+      --mc-bg: #050506;
+      --mc-text: #f3f5f8;
+      --mc-line: #272423;
+      --mc-accent: #5fd4f0;
+      --mc-accent-black: #272423;
+      --mc-accent-taupe: #B8B0AA;
+      --mc-gradient-accent: linear-gradient(90deg, #5fd4f0 0%, #B8B0AA 100%);
+      --mc-success: #00d4aa;
+    }
+
+    /* About Section */
+    .about-page-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      color: var(--mc-text);
+    }
+
+    /* Header */
+    .about-page-header {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .about-page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--mc-text);
+    }
+
+    /* Content Layout */
+    .about-page-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+      background: rgba(15, 15, 15, 0.6);
+      backdrop-filter: blur(20px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Photo Section */
+    .about-page-photo {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+    }
+
+    .about-page-photo img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .about-page-photo img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Text Section */
+    .about-page-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-page-text p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .about-page-text strong {
+      color: var(--mc-accent);
+      font-weight: 600;
+    }
+
+    .about-page-text a {
+      color: var(--mc-accent);
+      text-decoration: underline;
+      transition: opacity 0.2s ease;
+    }
+
+    .about-page-text a:hover {
+      opacity: 0.8;
+    }
+
+    /* Buttons */
+    .about-page-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .about-page-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 140px;
+    }
+
+    .about-page-btn-primary {
+      background: var(--mc-accent);
+      color: var(--mc-bg);
+    }
+
+    .about-page-btn-primary:hover {
+      background: var(--mc-accent);
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(95, 212, 240, 0.3);
+    }
+
+    .about-page-btn-secondary {
+      background: var(--mc-line);
+      color: var(--mc-text);
+      border: 1px solid var(--mc-accent-taupe);
+    }
+
+    .about-page-btn-secondary:hover {
+      background: var(--mc-accent-black);
+      border-color: var(--mc-accent);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .about-page-header h1 {
+        font-size: 2rem;
+      }
+
+      .about-page-content {
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+      }
+
+      .about-page-photo img {
+        max-width: 250px;
+      }
+
+      .about-page-text {
+        text-align: center;
+      }
+
+      .about-page-buttons {
+        justify-content: center;
+      }
+
+      .about-page-btn {
+        flex: 1;
+        min-width: 120px;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .about-page-photo img,
+      .about-page-btn {
+        transition: none;
+      }
+
+      .about-page-photo img:hover {
+        transform: none;
+      }
+
+      .about-page-btn:hover {
+        transform: none;
+      }
+    }
+
+    /* Focus states for keyboard navigation */
+    .about-page-btn:focus {
+      outline: 2px solid var(--mc-accent);
+      outline-offset: 2px;
+    }
+
+    /* Screen reader only content */
+    .about-page-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
+  <section class="about-page-section">
+    <div class="about-page-header">
+      <h1>About Me</h1>
+    </div>
+
+    <div class="about-page-content">
+      <div class="about-page-photo">
+        <img src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg" alt="Caleb McCartney - Professional Photographer and Photojournalist">
+      </div>
+
+      <div class="about-page-text">
+        <p>
+          Caleb McCartney is a Pittsburgh-based photojournalist and commercial storyteller, and a proud alumni of Point Park University's BFA in Photography program. As a freelance photographer and photojournalist, he has served as The Globe's photo editor over the last fall, working with more clients into the summer and even collaborating on a project out in Kentucky.
+        </p>
+
+        <p>
+          Caleb leads <strong>McCal Media</strong>, the studio he founded to craft event coverage, corporate campaigns, and brand visuals rooted in authentic human connection. In 2025 he broadened his skill set by joining Pittsburgh production company <a href="https://wearecovalent.com/" target="_blank" rel="noopener" aria-label="Covalent website">Covalent</a> as a Creative Production Intern, collaborating on projects that blend stills, motion, and sound.
+        </p>
+
+        <p>
+          He also hosts the weekly podcast <a href="/podcast" aria-label="Caffeinated Connections podcast">"Caffeinated Connections,"</a> where he chats over coffee with creators and industry pros about turning ideas into impact.
+        </p>
+
+        <div class="about-page-buttons">
+          <a href="/" class="about-page-btn about-page-btn-primary" aria-label="View Caleb's photography portfolio">View My Work</a>
+          <a href="/contact" class="about-page-btn about-page-btn-secondary" aria-label="Contact Caleb for photography services">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // About Page Widget JavaScript
+    (function() {
+      'use strict';
+
+      class AboutPageWidget {
+        constructor(widgetElement) {
+          this.widget = widgetElement;
+          this.init();
+        }
+
+        init() {
+          // Add any interactive functionality here
+          this.setupAnalytics();
+          this.setupAccessibility();
+        }
+
+        setupAnalytics() {
+          // Track button clicks for analytics
+          const buttons = this.widget.querySelectorAll('.about-page-btn');
+          buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+              this.trackEvent('about_button_click', {
+                button: e.target.textContent.trim(),
+                timestamp: new Date().toISOString()
+              });
+            });
+          });
+        }
+
+        setupAccessibility() {
+          // Ensure proper focus management and ARIA labels
+          const links = this.widget.querySelectorAll('a[target="_blank"]');
+          links.forEach(link => {
+            if (!link.hasAttribute('rel')) {
+              link.setAttribute('rel', 'noopener');
+            }
+          });
+        }
+
+        trackEvent(eventType, data) {
+          // Placeholder for analytics integration
+          console.log('Event tracked:', eventType, data);
+
+          // TODO: Implement proper analytics tracking
+          // gtag('event', eventType, data);
+        }
+      }
+
+      // Initialize widget when DOM is ready
+      function initWidget() {
+        const widget = document.querySelector('.about-page-widget');
+        if (widget) {
+          new AboutPageWidget(widget);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWidget);
+      } else {
+        initWidget();
+      }
+    })();
+  </script>
+</div>

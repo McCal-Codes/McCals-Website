@@ -1,0 +1,814 @@
+<!-- Accessibility Statement Widget v1.1.2 — McCal Media (Squarespace Code Block)
+  Change: Correct forced Light/Dark theme semantics
+  - Light: light background with dark text (and light panel backing)
+  - Dark: dark background with light text (and dark panel backing)
+  - System mode unchanged (follows prefers-color-scheme)
+  - All IDs and structure preserved; self-contained
+-->
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #b8b0aa;
+    --mcc-accent-strong: #cac2ba;
+    --mcc-bg: #050506;
+    --mcc-fg: #cac2ba;
+    --mcc-line: #2a2a2a;
+    --mcc-muted: #5b5553;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--mcc-accent-strong);
+    --panel-bg: rgba(48, 44, 44, 0.85);
+    --panel-border: rgba(184, 176, 170, 0.2);
+    --panel-blur: 12px;
+    --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+    --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #cac2ba;
+    --bg: #050506;
+    --line: #2a2a2a;
+    --panel-bg: rgba(30, 30, 30, 0.85);
+    --panel-border: rgba(184, 176, 170, 0.15);
+    --panel-blur: 10px;
+    --chip: #1a1a1b;
+    --focus: #b8b0aa;
+    --link: #ffffff;
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--mcc-gradient-business);
+    color: #272423;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  :root {
+    --header-h: 92px;
+    --bg: transparent;
+    --fg: #f7f7f7;
+    --muted: #a6a6a6;
+    --line: #2a2a2a;
+    --link: #d1d5db;
+    --accent: #9bd7ff;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --panel-bg: rgba(20, 20, 20, 0.72);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --panel-blur: 8px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --fg: #1b1b1b;
+      --muted: #5b5b5b;
+      --line: #e5e5ea;
+      --link: #0f172a;
+      --accent: #0ea5e9;
+      --chip: #fafafa;
+      --panel-bg: rgba(255, 255, 255, 0.78);
+      --panel-border: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  /* Corrected forced themes */
+  [data-theme='light'] {
+    /* light-style (dark text on light backing) */
+    --fg: #1b1b1b;
+    --muted: #5b5b5b;
+    --line: #e5e5ea;
+    --link: #0f172a;
+    --accent: #0ea5e9;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+  }
+  [data-theme='dark'] {
+    /* dark-style (light text on dark backing) */
+    --fg: #f7f7f7;
+    --muted: #a6a6a6;
+    --line: #2a2a2a;
+    --link: #d1d5db;
+    --accent: #9bd7ff;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.1);
+  }
+
+  .a11y-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: calc(var(--header-h) + 28px) 20px 80px;
+    display: flex;
+    gap: 40px;
+  }
+  .a11y-skip {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .a11y-skip:focus {
+    left: 20px;
+    top: 20px;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+    padding: 0.6rem 0.9rem;
+    background: var(--chip);
+    color: var(--fg);
+    border: 2px solid var(--focus);
+    border-radius: 10px;
+  }
+
+  .a11y-toc {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+    align-self: flex-start;
+    flex: 0 0 280px;
+  }
+  .a11y-toc .label {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .a11y-toc details {
+    margin: 6px 0;
+    background: var(--chip);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px;
+  }
+  .a11y-toc summary {
+    cursor: pointer;
+    list-style: none;
+    outline: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--fg);
+  }
+  .a11y-toc summary::-webkit-details-marker {
+    display: none;
+  }
+  .a11y-toc nav a {
+    display: block;
+    padding: 6px 14px;
+    margin: 2px 0;
+    text-decoration: none;
+    color: var(--link);
+    border-radius: 8px;
+  }
+  .a11y-toc nav a:hover {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--fg);
+  }
+  .a11y-toc nav a.active,
+  .a11y-toc nav a[aria-current='true'] {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .a11y-main {
+    flex: 1;
+    max-width: 780px;
+  }
+  .a11y-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(var(--panel-blur));
+    -webkit-backdrop-filter: blur(var(--panel-blur));
+    border: 1px solid var(--panel-border);
+    border-radius: 22px;
+    padding: 34px 42px 52px;
+    box-shadow: 0 8px 28px -6px rgba(0, 0, 0, 0.35);
+  }
+  .a11y-main h1 {
+    margin: 0.2rem 0 1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.6rem, 1rem+2.2vw, 2.6rem);
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--chip);
+  }
+  section {
+    margin: 44px 0;
+    scroll-margin-top: calc(var(--header-h) + 120px);
+  }
+  h2 {
+    font-size: 1.25rem;
+    margin: 0.7rem 0 0.4rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--line);
+  }
+  h3 {
+    font-size: 1.05rem;
+    margin: 1rem 0 0.3rem;
+  }
+  p {
+    margin: 0.55rem 0;
+  }
+  ul {
+    margin: 0.4rem 0 0.6rem 1.15rem;
+  }
+  a {
+    color: var(--link);
+  }
+  a:hover {
+    color: var(--accent);
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 28px 0;
+  }
+  .kbd {
+    font:
+      600 0.85rem/1.6 ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+    padding: 0.05rem 0.45rem;
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    background: var(--chip);
+  }
+
+  :where(a, button, [role='button'], summary):focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  .a11y-m-toggle {
+    display: none;
+  }
+  .a11y-m-btn {
+    display: none;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 999;
+    padding: 0.7rem 1rem;
+    background: var(--chip);
+    color: var(--fg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+  .a11y-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-h);
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    z-index: 998;
+  }
+
+  .theme-toolbar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 0 0 24px;
+  }
+  .theme-btn {
+    background: var(--chip);
+    color: var(--fg);
+    border: 1px solid var(--line);
+    padding: 0.5rem 0.85rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    border-radius: 9px;
+    cursor: pointer;
+  }
+  .theme-btn[aria-pressed='true'] {
+    background: color-mix(in srgb, var(--accent) 24%, transparent);
+    border-color: var(--accent);
+    color: var(--fg);
+  }
+  .theme-btn:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 980px) {
+    .a11y-wrap {
+      gap: 20px;
+      padding: calc(var(--header-h) + 16px) 16px 80px;
+    }
+    .a11y-toc {
+      position: fixed;
+      left: 0;
+      top: calc(var(--header-h) + env(safe-area-inset-top));
+      bottom: env(safe-area-inset-bottom);
+      width: min(84vw, 360px);
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: saturate(120%) blur(6px);
+      border-right: 1px solid var(--line);
+      padding: 18px;
+      transform: translateX(-110%);
+      transition: transform 0.25s ease;
+      z-index: 999;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .a11y-m-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .a11y-m-toggle:checked ~ .a11y-toc {
+      transform: none;
+    }
+    .a11y-m-toggle:checked ~ .a11y-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+    .a11y-main {
+      max-width: unset;
+    }
+    .a11y-panel {
+      padding: 30px 32px 46px;
+    }
+  }
+
+  @media print {
+    .a11y-toc,
+    .a11y-m-btn,
+    .a11y-overlay,
+    .theme-toolbar {
+      display: none !important;
+    }
+    .a11y-wrap {
+      padding: 0;
+    }
+    .a11y-panel {
+      background: none;
+      backdrop-filter: none;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+    }
+  }
+</style>
+
+<a class="a11y-skip" href="#a11y-content">Skip to main content</a>
+
+<div class="a11y-root" data-theme="system">
+  <div class="a11y-wrap" role="document" aria-labelledby="a11y-title">
+    <input class="a11y-m-toggle" id="a11y-menu" type="checkbox" aria-hidden="true" />
+    <label class="a11y-m-btn" for="a11y-menu" aria-label="Open accessibility navigation"
+      >Menu</label
+    >
+    <aside class="a11y-toc" aria-label="Accessibility page navigation">
+      <div class="label">Accessibility</div>
+      <details open>
+        <summary>Overview</summary>
+        <nav>
+          <a href="#statement">Statement</a>
+          <a href="#standards">Standards</a>
+          <a href="#scope">Scope & Coverage</a>
+          <a href="#feedback">Feedback</a>
+        </nav>
+      </details>
+      <details>
+        <summary>Using the site</summary>
+        <nav>
+          <a href="#keyboard">Keyboard navigation</a>
+          <a href="#headings">Headings & structure</a>
+          <a href="#links">Links</a>
+          <a href="#forms">Forms & errors</a>
+        </nav>
+      </details>
+      <details>
+        <summary>Content</summary>
+        <nav>
+          <a href="#text-alt">Text alternatives</a>
+          <a href="#contrast">Color & contrast</a>
+          <a href="#media">Audio/Video</a>
+          <a href="#motion">Motion & animation</a>
+          <a href="#language">Language</a>
+        </nav>
+      </details>
+      <details>
+        <summary>Ongoing work</summary>
+        <nav>
+          <a href="#compatibility">Browser & AT support</a>
+          <a href="#third">Third-party content</a>
+          <a href="#improve">Continuous improvement</a>
+          <a href="#legal">Legal & date</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </details>
+    </aside>
+    <div class="a11y-overlay" aria-hidden="true"></div>
+    <main class="a11y-main" id="a11y-content" role="main">
+      <div class="a11y-panel">
+        <header>
+          <h1 id="a11y-title">Accessibility at McCal Media</h1>
+          <span class="badge">Last updated <span id="a11y-date"></span></span>
+        </header>
+        <div class="theme-toolbar" role="toolbar" aria-label="Theme selection">
+          <button
+            class="theme-btn"
+            type="button"
+            data-theme="system"
+            aria-pressed="true"
+            aria-label="Use system theme"
+          >
+            System
+          </button>
+          <button
+            class="theme-btn"
+            type="button"
+            data-theme="light"
+            aria-pressed="false"
+            aria-label="Use light theme"
+          >
+            Light
+          </button>
+          <button
+            class="theme-btn"
+            type="button"
+            data-theme="dark"
+            aria-pressed="false"
+            aria-label="Use dark theme"
+          >
+            Dark
+          </button>
+        </div>
+        <section id="statement">
+          <h2>Accessibility Statement</h2>
+          <p>
+            McCal Media is committed to ensuring digital accessibility for people with disabilities.
+            We continually improve the user experience for everyone and apply relevant accessibility
+            standards.
+          </p>
+        </section>
+        <section id="standards">
+          <h2>Standards we follow</h2>
+          <p>
+            Our aim is conformance with
+            <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 at level AA. We also
+            monitor evolving guidance for WCAG 2.2.
+          </p>
+          <ul>
+            <li>Perceivable, Operable, Understandable, and Robust principles</li>
+            <li>Semantic HTML and ARIA where appropriate</li>
+            <li>Color-contrast targets of at least 4.5:1 for body text</li>
+          </ul>
+        </section>
+        <section id="scope">
+          <h2>Scope & Coverage</h2>
+          <p>
+            This statement applies to our primary website and any sub-pages we control directly.
+            Some embedded third-party tools may have their own accessibility constraints (see
+            "Third-party content").
+          </p>
+        </section>
+        <section id="feedback">
+          <h2>Feedback & Support</h2>
+          <p>
+            If you encounter a barrier, please contact us. We typically respond within 2 business
+            days.
+          </p>
+          <ul>
+            <li>Email: <a href="mailto:business@mcc-cal.com">business@mcc-cal.com</a></li>
+            <li>Phone: <a href="tel:+15702991214">570-299-1214</a></li>
+            <li>Mail: 320 Pointview Rd, Apt 2, Pittsburgh, PA, 15227</li>
+          </ul>
+        </section>
+        <hr />
+        <section id="keyboard">
+          <h2>Keyboard Navigation</h2>
+          <p>All interactive controls are reachable and operable with a keyboard. Try:</p>
+          <ul>
+            <li>
+              <span class="kbd">Tab</span> / <span class="kbd">Shift</span> +
+              <span class="kbd">Tab</span> to move focus
+            </li>
+            <li>
+              <span class="kbd">Enter</span> / <span class="kbd">Space</span> to activate controls
+            </li>
+            <li>
+              <span class="kbd">Esc</span> to close menus and dialogs (including the mobile menu)
+            </li>
+          </ul>
+          <p>A "Skip to main content" link appears when focused to bypass repeated navigation.</p>
+        </section>
+        <section id="headings">
+          <h2>Headings & Structure</h2>
+          <p>
+            Pages use a logical heading hierarchy and landmark roles (like <code>header</code>,
+            <code>main</code>, <code>nav</code>, <code>footer</code>) for efficient navigation by
+            assistive technologies.
+          </p>
+        </section>
+        <section id="links">
+          <h2>Links</h2>
+          <p>
+            Links are descriptive out of context. Where a link opens in a new window, we indicate
+            this in text or with an accessible label.
+          </p>
+        </section>
+        <section id="forms">
+          <h2>Forms & Errors</h2>
+          <p>
+            Form inputs include associated labels, clear instructions, and accessible error
+            messages. Errors don't clear user input.
+          </p>
+        </section>
+        <section id="text-alt">
+          <h2>Text Alternatives</h2>
+          <p>
+            Non-decorative images include meaningful <code>alt</code> text. Purely decorative images
+            are marked appropriately so they're skipped by screen readers.
+          </p>
+        </section>
+        <section id="contrast">
+          <h2>Color & Contrast</h2>
+          <p>
+            We target a minimum 4.5:1 contrast ratio for text. Information never relies on color
+            alone; there's always a secondary cue (text, icon, pattern, or state).
+          </p>
+        </section>
+        <section id="media">
+          <h2>Audio & Video</h2>
+          <p>
+            Where we publish media, we provide captions and, when feasible, transcripts or audio
+            descriptions.
+          </p>
+        </section>
+        <section id="motion">
+          <h2>Motion & Animation</h2>
+          <p>
+            We respect the user's <em>Reduce Motion</em> preference and minimize non-essential
+            animation for those who opt in.
+          </p>
+        </section>
+        <section id="language">
+          <h2>Language</h2>
+          <p>
+            The page language is identified in markup to help assistive technologies apply correct
+            pronunciation rules.
+          </p>
+        </section>
+        <hr />
+        <section id="compatibility">
+          <h2>Browser & Assistive Technology Support</h2>
+          <p>
+            We test with modern browsers and common screen readers on desktop and mobile. If
+            something doesn't work in your setup, please let us know.
+          </p>
+        </section>
+        <section id="third">
+          <h2>Third-party Content</h2>
+          <p>
+            Some features (e.g., embeds, payment, or newsletter forms) are provided by third
+            parties. We choose vendors with strong accessibility postures and raise issues when we
+            find gaps.
+          </p>
+        </section>
+        <section id="improve">
+          <h2>Continuous Improvement</h2>
+          <p>
+            Accessibility is an ongoing effort. We conduct periodic reviews, triage issues, and
+            track fixes. Major changes are reflected in this statement.
+          </p>
+        </section>
+        <section id="legal">
+          <h2>Legal & Effective Date</h2>
+          <p>
+            This statement is intended to describe our current practices and goals and does not
+            constitute a contract or warranty.
+          </p>
+          <p class="badge">Effective <span id="eff-date"></span></p>
+        </section>
+        <section id="contact">
+          <h2>Contact</h2>
+          <p>
+            <strong>McCal Media</strong><br /><a href="mailto:business@mcc-cal.com"
+              >business@mcc-cal.com</a
+            ><br />320 Pointview Rd, Apt 2, Pittsburgh, PA, 15227<br />570-299-1214
+          </p>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  const __now = new Date();
+  document.getElementById('a11y-date').textContent = __now.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  });
+  document.getElementById('eff-date').textContent = __now.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  });
+
+  (function mobileDrawer() {
+    const toggle = document.getElementById('a11y-menu');
+    const overlay = document.querySelector('.a11y-overlay');
+    const links = document.querySelectorAll('.a11y-toc a');
+    overlay?.addEventListener('click', () => {
+      toggle.checked = false;
+    });
+    links.forEach((a) =>
+      a.addEventListener('click', () => {
+        toggle.checked = false;
+      }),
+    );
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') toggle.checked = false;
+    });
+  })();
+
+  (function scrollSpy() {
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const links = [...document.querySelectorAll('.a11y-toc nav a')];
+    const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const id = e.target.id;
+            links.forEach((a) => {
+              a.classList.remove('active');
+              a.setAttribute('aria-current', 'false');
+            });
+            const link = map.get(id);
+            if (link) {
+              link.classList.add('active');
+              link.setAttribute('aria-current', 'true');
+            }
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: [0, 1] },
+    );
+    sections.forEach((s) => obs.observe(s));
+  })();
+
+  (function themeToggle() {
+    const root = document.querySelector('.a11y-root');
+    const buttons = [...document.querySelectorAll('.theme-btn')];
+    const STORAGE_KEY = 'a11yThemePref';
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && ['light', 'dark', 'system'].includes(saved)) {
+      setTheme(saved);
+    }
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        setTheme(btn.dataset.theme);
+      }),
+    );
+    function setTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.theme === mode)));
+      if (mode === 'system') {
+        localStorage.removeItem(STORAGE_KEY);
+      } else {
+        localStorage.setItem(STORAGE_KEY, mode);
+      }
+    }
+  })();
+</script>

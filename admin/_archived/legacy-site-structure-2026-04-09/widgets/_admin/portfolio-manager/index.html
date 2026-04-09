@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📂 Portfolio Manager | McCal Media</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        .container { max-width: 800px; margin: 0 auto; text-align: center; }
+        .header { margin-bottom: 40px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .portfolio-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .portfolio-icon { font-size: 3rem; margin-bottom: 10px; }
+        .portfolio-title { font-size: 1.3rem; margin-bottom: 10px; }
+        .portfolio-path {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        .btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover { background: rgba(255,255,255,0.3); }
+        .instructions {
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📂 Portfolio Manager</h1>
+            <p>Simple portfolio access for McCal Media</p>
+        </div>
+        
+        <div class="instructions">
+            <strong>💡 How to open folders:</strong><br>
+            1. Copy the folder path below<br>
+            2. Press Windows key + R<br>
+            3. Paste the path and press Enter<br>
+            <em>Or use Windows File Explorer address bar</em>
+        </div>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div class="portfolio-icon">🎸</div>
+                <div class="portfolio-title">Concert Portfolio</div>
+                <div class="portfolio-path" id="concert-path">C:\Users\wolft\Desktop\McCal's Dev Website\McCals-Website\src\images\Portfolios\Concert</div>
+                <button class="btn" onclick="copyPath('concert-path')">📋 Copy Path</button>
+                <a href="/src/images/Portfolios/Concert/concert-manifest.json" class="btn" target="_blank">📄 Manifest</a>
+            </div>
+            
+            <div class="portfolio-card">
+                <div class="portfolio-icon">🎉</div>
+                <div class="portfolio-title">Events Portfolio</div>
+                <div class="portfolio-path" id="events-path">C:\Users\wolft\Desktop\McCal's Dev Website\McCals-Website\src\images\Portfolios\Events</div>
+                <button class="btn" onclick="copyPath('events-path')">📋 Copy Path</button>
+                <a href="/src/images/Portfolios/Events/events-manifest.json" class="btn" target="_blank">📄 Manifest</a>
+            </div>
+            
+            <div class="portfolio-card">
+                <div class="portfolio-icon">📰</div>
+                <div class="portfolio-title">Journalism Portfolio</div>
+                <div class="portfolio-path" id="journalism-path">C:\Users\wolft\Desktop\McCal's Dev Website\McCals-Website\src\images\Portfolios\Journalism</div>
+                <button class="btn" onclick="copyPath('journalism-path')">📋 Copy Path</button>
+                <a href="/src/images/Portfolios/Journalism/journalism-manifest.json" class="btn" target="_blank">📄 Manifest</a>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px;">
+            <h3>🚀 Quick Actions</h3>
+            <a href="../../concert-portfolio/demo/test-concert-widget-local.html" class="btn">🎸 Test Concert Widget</a>
+            <a href="../../photojournalism-portfolio/demo/test-journalism-widget.html" class="btn">📰 Test Journalism Widget</a>
+            <a href="../admin-portfolio-importer/admin-portfolio-manager.html" class="btn">📊 Upload Manager</a>
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 0.8rem; opacity: 0.7;">
+            <p>✅ Auto-manifest watcher running</p>
+            <p>✅ Dev server on port 3000</p>
+            <p>🎯 Brahctopus: 30 images ready</p>
+        </div>
+    </div>
+    
+    <script>
+        function copyPath(elementId) {
+            const element = document.getElementById(elementId);
+            const path = element.textContent;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(path).then(() => {
+                    alert('📋 Folder path copied!\n\nPress Windows + R, paste, and press Enter');
+                });
+            } else {
+                // Fallback
+                const textArea = document.createElement('textarea');
+                textArea.value = path;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('📋 Folder path copied!\n\nPress Windows + R, paste, and press Enter');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifest Debug Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            margin: 20px;
+            background: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .result {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid #333;
+        }
+        .success { border-left-color: #4f4; }
+        .error { border-left-color: #f44; }
+        .info { border-left-color: #44f; }
+    </style>
+</head>
+<body>
+    <h1>Featured Portfolio Manifest Debug</h1>
+    <div id="results"></div>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        async function testManifest(url, label) {
+            addResult(`Testing ${label}: ${url}`, 'info');
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    addResult(`❌ ${label} failed: HTTP ${response.status} - ${response.statusText}`, 'error');
+                    return null;
+                }
+                
+                const data = await response.json();
+                addResult(`✅ ${label} loaded: ${data.totalItems || data.totalEvents || 'unknown'} items`, 'success');
+                
+                // Show structure info
+                if (data.items && Array.isArray(data.items)) {
+                    addResult(`📊 Structure: ${data.items.length} items array`, 'info');
+                    if (data.items.length > 0) {
+                        const first = data.items[0];
+                        addResult(`🔍 First item: ${JSON.stringify({
+                            type: first.type,
+                            folderPath: first.folderPath,
+                            images: first.images ? first.images.length : 0
+                        }, null, 2)}`, 'info');
+                    }
+                } else {
+                    addResult(`⚠️ No items array found in manifest`, 'error');
+                }
+                
+                return data;
+            } catch (error) {
+                addResult(`❌ ${label} error: ${error.message}`, 'error');
+                return null;
+            }
+        }
+
+        async function runTests() {
+            addResult('Starting manifest tests...', 'info');
+            
+            // Test the manifests in order that the widget tries them
+            const manifests = [
+                ['src/images/Portfolios/featured-manifest.json', 'Featured Manifest'],
+                ['src/images/Portfolios/portfolio-manifest.json', 'Portfolio Manifest'],
+                ['src/images/Portfolios/Concert/concert-manifest.json', 'Concert Manifest'],
+                ['src/images/Portfolios/Events/events-manifest.json', 'Events Manifest'],
+                ['src/images/Portfolios/Journalism/journalism-manifest.json', 'Journalism Manifest']
+            ];
+            
+            let workingManifest = null;
+            
+            for (const [url, label] of manifests) {
+                const result = await testManifest(url, label);
+                if (result && !workingManifest) {
+                    workingManifest = result;
+                }
+            }
+            
+            if (workingManifest) {
+                addResult(`🎯 Widget should use: ${workingManifest.version || 'unknown version'} manifest`, 'success');
+            } else {
+                addResult(`💥 No working manifests found! Widget will fail.`, 'error');
+            }
+            
+            // Test path construction logic
+            if (workingManifest && workingManifest.items && workingManifest.items.length > 0) {
+                addResult('Testing path construction...', 'info');
+                const testItem = workingManifest.items[0];
+                
+                // Simulate the widget's path construction logic
+                const folderPath = testItem.folderPath || '';
+                const rawParts = folderPath ? folderPath.split('/').filter(Boolean) : [];
+                const itemType = testItem.type || testItem.category || 'portfolio';
+                
+                let parts = rawParts.slice();
+                if (parts.length > 0 && itemType !== 'portfolio') {
+                    const typePrefix = itemType.charAt(0).toUpperCase() + itemType.slice(1);
+                    if (!parts[0] || parts[0].toLowerCase() !== itemType.toLowerCase()) {
+                        parts = [typePrefix, ...parts];
+                    }
+                }
+                
+                const firstImage = testItem.images && testItem.images.length > 0 ? testItem.images[0] : 'no-image';
+                const basePath = parts.map(seg => encodeURIComponent(seg)).join('/');
+                const testUrl = `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/${basePath}/${encodeURIComponent(firstImage)}`;
+                
+                addResult(`🔗 Generated URL: ${testUrl}`, 'info');
+                
+                // Test the URL
+                const img = new Image();
+                img.onload = () => addResult(`✅ Test image loaded successfully`, 'success');
+                img.onerror = () => addResult(`❌ Test image failed to load`, 'error');
+                img.src = testUrl;
+            }
+        }
+
+        runTests();
+    </script>
+</body>
+</html>

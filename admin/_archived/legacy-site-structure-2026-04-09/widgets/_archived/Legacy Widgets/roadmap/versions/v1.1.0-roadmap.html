@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Roadmap - McCals-Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- site-widgets:inline:start -->
+    <style data-site-widgets-inline>
+      :root {
+        --mcc-accent: #ff4d6d;
+        --mcc-accent-strong: #ff2b50;
+        --mcc-bg: #ffffff;
+        --mcc-fg: #111827;
+        --mcc-line: #e5e7eb;
+        --mcc-muted: #6b7280;
+        --bg: var(--mcc-bg);
+        --fg: var(--mcc-fg);
+        --line: var(--mcc-line);
+        --accent: var(--mcc-accent);
+        --muted: var(--mcc-muted);
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--accent);
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
+        --panel-blur: 8px;
+        --mcc-space-1: 4px;
+        --mcc-space-2: 8px;
+        --mcc-space-3: 12px;
+        --mcc-space-4: 16px;
+        --mcc-space-5: 24px;
+        --mcc-space-6: 32px;
+        --mcc-radius: 10px;
+        --mcc-control-height: 40px;
+        --mcc-z-top: 2147483647;
+      }
+      [data-theme='light'] {
+        --fg: #0a0a0a;
+        --bg: #ffffff;
+        --line: #e5e5e5;
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
+        --panel-blur: 8px;
+        --chip: #fafafa;
+        --focus: #0ea5e9;
+        --link: var(--accent);
+      }
+      [data-theme='dark'] {
+        --fg: #f7f7f7;
+        --bg: #06060a;
+        --line: #2a2a2a;
+        --panel-bg: rgba(20, 20, 20, 0.78);
+        --panel-border: rgba(255, 255, 255, 0.12);
+        --panel-blur: 8px;
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--accent);
+      }
+      [class^='mcc-'],
+      [class*=' mcc-'] {
+        box-sizing: border-box;
+        font-family:
+          Inter,
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        color: var(--fg);
+      }
+      [class^='mcc-'] a:focus-visible,
+      [class^='mcc-'] button:focus-visible,
+      [class^='mcc-'] [role='button']:focus-visible,
+      [class*=' mcc-'] a:focus-visible,
+      [class*=' mcc-'] button:focus-visible,
+      [class*=' mcc-'] [role='button']:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+        border-radius: 6px;
+      }
+      .mcc-sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+      .mcc-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--mcc-space-2);
+        padding: 0.6rem 1.2rem;
+        height: var(--mcc-control-height);
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .mcc-btn:hover,
+      .mcc-btn:focus-visible {
+        background: var(--mcc-accent-strong);
+        transform: translateY(-1px);
+      }
+      .mcc-img-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .mcc-row {
+        display: flex;
+        gap: var(--mcc-space-3);
+        align-items: center;
+      }
+      .mcc-col {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mcc-space-2);
+      }
+      .mcc-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      [class^='mcc-'] {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [class^='mcc-'] * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        [class^='mcc-'] {
+          color: #000 !important;
+          background: transparent !important;
+        }
+      }
+    </style>
+    <!-- site-widgets:inline:end -->
+
+    <style>
+      /* 
+       * McCals-Website Widget: Roadmap
+       * Version: v1.1.0
+       * Public todo list showing actual website development progress by month
+       * Design: Monochrome / Glassmorphism 2.0
+       */
+
+      :root {
+        --mcc-bg-primary: #ffffff;
+        --mcc-bg-secondary: #f8f9fa;
+        --mcc-text-primary: #0a0a0a;
+        --mcc-text-secondary: #4a5568;
+        --mcc-text-muted: #718096;
+        --mcc-border: #e2e8f0;
+        --mcc-accent: #000000;
+        --mcc-accent-muted: #666666;
+        --mcc-glass-bg: rgba(255, 255, 255, 0.85);
+        --mcc-glass-border: rgba(0, 0, 0, 0.08);
+        --mcc-glass-blur: 20px;
+        --mcc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+        --mcc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --mcc-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+        --mcc-success: #10b981;
+        --mcc-future: #6366f1;
+        --mcc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --mcc-font-display: 'Outfit', sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --mcc-bg-primary: #1a1a1a;
+          --mcc-bg-secondary: #0a0a0a;
+          --mcc-text-primary: #f7fafc;
+          --mcc-text-secondary: #cbd5e0;
+          --mcc-text-muted: #a0aec0;
+          --mcc-border: #2d3748;
+          --mcc-accent: #ffffff;
+          --mcc-accent-muted: #999999;
+          --mcc-glass-bg: rgba(26, 26, 26, 0.85);
+          --mcc-glass-border: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+      }
+
+      .mcc-roadmap-widget {
+        font-family: var(--mcc-font-sans);
+        color: var(--mcc-text-primary);
+        line-height: 1.6;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Header */
+      .mcc-roadmap-header {
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .mcc-roadmap-header h1 {
+        font-family: var(--mcc-font-display);
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 0.75rem 0;
+        color: var(--mcc-text-primary);
+        background: linear-gradient(135deg, var(--mcc-accent) 0%, var(--mcc-accent-muted) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .mcc-roadmap-header p {
+        color: var(--mcc-text-muted);
+        font-size: 1.125rem;
+        margin: 0;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* Progress Summary */
+      .mcc-roadmap-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .mcc-stat-card {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        border-radius: 1.25rem;
+        padding: 1.75rem;
+        text-align: center;
+        box-shadow: var(--mcc-shadow-sm);
+        transition: all 0.3s ease;
+      }
+
+      .mcc-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--mcc-shadow-md);
+      }
+
+      .mcc-stat-value {
+        font-family: var(--mcc-font-display);
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: var(--mcc-accent);
+      }
+
+      .mcc-stat-label {
+        font-size: 0.875rem;
+        color: var(--mcc-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+      }
+
+      /* Timeline View */
+      .mcc-roadmap-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .mcc-month-section {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: mcc-fadeInUp 0.6s ease forwards;
+      }
+
+      .mcc-month-section:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .mcc-month-section:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .mcc-month-section:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .mcc-month-section:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .mcc-month-section:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .mcc-month-section:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes mcc-fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mcc-month-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .mcc-month-title {
+        font-family: var(--mcc-font-display);
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--mcc-text-primary);
+      }
+
+      .mcc-month-badge {
+        margin-left: auto;
+        padding: 0.375rem 0.875rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .mcc-month-badge.completed {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--mcc-success);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+
+      .mcc-month-badge.current {
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--mcc-future);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+      }
+
+      .mcc-month-badge.future {
+        background: var(--mcc-bg-secondary);
+        color: var(--mcc-text-muted);
+        border: 1px solid var(--mcc-border);
+      }
+
+      /* Tasks Grid */
+      .mcc-tasks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .mcc-task-card {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: var(--mcc-shadow-sm);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mcc-task-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--mcc-accent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .mcc-task-card.completed::before {
+        opacity: 1;
+        background: var(--mcc-success);
+      }
+
+      .mcc-task-card.in-progress::before {
+        opacity: 1;
+        background: var(--mcc-future);
+      }
+
+      .mcc-task-card:hover {
+        transform: translateX(4px);
+        box-shadow: var(--mcc-shadow-md);
+        border-color: var(--mcc-accent);
+      }
+
+      .mcc-task-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .mcc-task-checkbox {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--mcc-border);
+        border-radius: 0.375rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.125rem;
+        transition: all 0.2s ease;
+      }
+
+      .mcc-task-card.completed .mcc-task-checkbox {
+        background: var(--mcc-success);
+        border-color: var(--mcc-success);
+      }
+
+      .mcc-task-card.completed .mcc-task-checkbox::after {
+        content: '✓';
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .mcc-task-card.in-progress .mcc-task-checkbox {
+        background: var(--mcc-future);
+        border-color: var(--mcc-future);
+      }
+
+      .mcc-task-card.in-progress .mcc-task-checkbox::after {
+        content: '⋯';
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 700;
+      }
+
+      .mcc-task-title {
+        font-weight: 600;
+        font-size: 1.0625rem;
+        color: var(--mcc-text-primary);
+        margin: 0;
+        flex-grow: 1;
+      }
+
+      .mcc-task-card.completed .mcc-task-title {
+        opacity: 0.7;
+      }
+
+      .mcc-task-description {
+        color: var(--mcc-text-secondary);
+        font-size: 0.9375rem;
+        margin: 0.75rem 0 0 0;
+        line-height: 1.6;
+      }
+
+      .mcc-task-category {
+        display: inline-block;
+        margin-top: 0.75rem;
+        padding: 0.25rem 0.625rem;
+        background: var(--mcc-bg-secondary);
+        border: 1px solid var(--mcc-border);
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        color: var(--mcc-text-muted);
+        font-weight: 600;
+      }
+
+      /* Version Indicator & Changelog Modal */
+      .version-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font:
+          600 10px/1 ui-monospace,
+          monospace;
+        cursor: pointer;
+        z-index: 500;
+        transition: color 0.2s ease;
+        pointer-events: auto;
+        backdrop-filter: blur(4px);
+      }
+
+      .version-indicator:hover {
+        color: var(--mcc-accent);
+      }
+
+      .changelog-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2147483647 !important;
+        backdrop-filter: blur(8px);
+        padding: 20px;
+      }
+
+      .changelog-modal.active {
+        display: flex;
+      }
+
+      .changelog-content {
+        background: var(--mcc-bg-primary);
+        border-radius: 12px;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--mcc-border);
+      }
+
+      .changelog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid var(--mcc-border);
+      }
+
+      .changelog-title {
+        margin: 0;
+        color: var(--mcc-accent);
+        font: 700 18px/1.2 var(--mcc-font-display);
+      }
+
+      .changelog-close {
+        background: none;
+        border: none;
+        color: var(--mcc-text-primary);
+        font-size: 20px;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background 0.2s ease;
+      }
+
+      .changelog-close:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .changelog-body {
+        padding: 20px;
+        font: 400 14px/1.5 var(--mcc-font-sans);
+        color: var(--mcc-text-primary);
+      }
+
+      .changelog-version {
+        margin: 0 0 16px 0;
+        color: var(--mcc-accent);
+        font: 600 16px/1.3 var(--mcc-font-display);
+        border-bottom: 1px solid var(--mcc-border);
+        padding-bottom: 8px;
+      }
+
+      .changelog-items {
+        margin: 12px 0;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .changelog-items li {
+        margin: 8px 0;
+        padding-left: 16px;
+        position: relative;
+      }
+
+      .changelog-items li:before {
+        content: '•';
+        color: var(--mcc-accent);
+        position: absolute;
+        left: 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .mcc-roadmap-widget {
+          padding: 2rem 1rem;
+        }
+
+        .mcc-roadmap-header h1 {
+          font-size: 2.25rem;
+        }
+
+        .mcc-roadmap-summary {
+          grid-template-columns: 1fr;
+        }
+
+        .mcc-tasks-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mcc-month-header {
+          flex-wrap: wrap;
+        }
+
+        .mcc-month-badge {
+          margin-left: 0;
+        }
+
+        .version-indicator {
+          bottom: 15px;
+          right: 15px;
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mcc-roadmap-widget">
+      <!-- Header -->
+      <div class="mcc-roadmap-header">
+        <h1>🗺️ Website Development Roadmap</h1>
+        <p>Real progress tracking by month - what's been built and what's coming next</p>
+      </div>
+
+      <!-- Summary Stats -->
+      <div class="mcc-roadmap-summary">
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value" id="completedCount">0</div>
+          <div class="mcc-stat-label">Completed</div>
+        </div>
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value" id="inProgressCount">0</div>
+          <div class="mcc-stat-label">In Progress</div>
+        </div>
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value" id="plannedCount">0</div>
+          <div class="mcc-stat-label">Planned</div>
+        </div>
+        <div class="mcc-stat-card">
+          <div class="mcc-stat-value" id="totalCount">0</div>
+          <div class="mcc-stat-label">Total Tasks</div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="mcc-roadmap-timeline" id="roadmapTimeline">
+        <!-- Months will be injected here -->
+      </div>
+    </div>
+
+    <!-- Version indicator -->
+    <div class="version-indicator" onclick="showChangelog()" title="Click to view changelog">
+      v1.1.0
+    </div>
+
+    <!-- Changelog Modal -->
+    <div class="changelog-modal" id="changelogModal">
+      <div class="changelog-content">
+        <div class="changelog-header">
+          <h3 class="changelog-title">🗺️ Roadmap Widget Changelog</h3>
+          <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+        </div>
+        <div class="changelog-body">
+          <div class="changelog-version">v1.1.0 - Real Data Integration (Current)</div>
+          <ul class="changelog-items">
+            <li>Updated with actual development history from CHANGELOG</li>
+            <li>Month-by-month timeline view showing real accomplishments</li>
+            <li>Task categories (Widget, Infrastructure, Documentation, etc.)</li>
+            <li>Based on actual completed work from Sept-Dec 2025</li>
+          </ul>
+
+          <div class="changelog-version">v1.0.0 - Initial Release</div>
+          <ul class="changelog-items">
+            <li>Initial roadmap widget implementation</li>
+            <li>Phase-based organization with status tracking</li>
+            <li>Summary statistics showing progress</li>
+            <li>Monochrome glassmorphism design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Changelog modal functions
+      function showChangelog() {
+        const modal = document.getElementById('changelogModal');
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function hideChangelog() {
+        const modal = document.getElementById('changelogModal');
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('changelogModal');
+        if (modal) {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) hideChangelog();
+          });
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('changelogModal');
+          if (modal && modal.classList.contains('active')) {
+            hideChangelog();
+          }
+        }
+      });
+
+      // Real Development Roadmap Data - Based on Actual CHANGELOG
+      const roadmapData = [
+        {
+          month: 'September 2025',
+          status: 'completed',
+          tasks: [
+            {
+              title: 'Initial Blog System (v1.0)',
+              description: 'Google Sheets integration, auto-caption from EXIF, responsive cards',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Unified Portfolio Demo',
+              description:
+                'Master demo with URL parameters for Concert, Event, and Photojournalism',
+              status: 'completed',
+              category: 'Widget',
+            },
+          ],
+        },
+        {
+          month: 'October 2025',
+          status: 'completed',
+          tasks: [
+            {
+              title: 'About Page Widget (v1.0-1.4)',
+              description: 'Bio, photo, client carousel, LinkedIn/Google reviews integration',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Contact Form Widget (v1.0)',
+              description: 'EmailJS integration, dark/light mode, privacy consent, spam protection',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Testimonials Widget (v1.0)',
+              description: 'Masonry grid, 5-star ratings, Schema.org AggregateRating',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Nature Manifest Generator (v2.0)',
+              description: 'Multi-animal support, per-species manifests with auto-tagging',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Image Compressor App (v1.6)',
+              description: 'Parallel compression, progress tracking, manifest validation',
+              status: 'completed',
+              category: 'Tool',
+            },
+            {
+              title: 'Photojournalism Widget (v5.1-5.2)',
+              description: 'Fisher-Yates shuffle, external JS for CSP, glass filter buttons',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Concert Portfolio (v4.5-4.6)',
+              description: 'SEO optimization, structured data, performance enhancements',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Portrait Portfolio (v1.0)',
+              description: 'Vertical composition focus, 3:4 aspect ratios, enhanced detail viewing',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Podcast Widget (v1.9.5)',
+              description: 'Auto-hydrating RSS episodes, fallback data, live caching',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Interactive Thesis Widget (v0.1-0.4)',
+              description: 'Scroll reveal, podcast excerpts, blog-style formatting',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Welcome Dashboard',
+              description: 'Admin TODO checker with keyword/file-diff heuristics',
+              status: 'completed',
+              category: 'Tool',
+            },
+            {
+              title: 'SEO Documentation',
+              description: 'Starter guide, image SEO standards, Squarespace playbook',
+              status: 'completed',
+              category: 'Documentation',
+            },
+          ],
+        },
+        {
+          month: 'November 2025',
+          status: 'completed',
+          tasks: [
+            {
+              title: 'Version Standardization',
+              description: 'Converted 63 widget files to SemVer format (x.x.0), automation tools',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Workflow Validation System',
+              description: 'CI validation for scripts, portrait portfolio automation',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'SEO Automation',
+              description: 'Sitemap generation, Schema.org structured data, GitHub Actions',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Widget Standards Documentation',
+              description: 'Complete architecture, CSS patterns, performance guidelines',
+              status: 'completed',
+              category: 'Documentation',
+            },
+            {
+              title: 'Package Maintenance',
+              description: 'NPM dependency updates, status file cleanup',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+          ],
+        },
+        {
+          month: 'December 2025 (Early)',
+          status: 'completed',
+          tasks: [
+            {
+              title: 'Manifest Proxy System',
+              description: 'Dev mode manifest rewriting, local API endpoints for widgets',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Concert Manifest API (v1.1)',
+              description: 'Date resolution, better metadata, Horseburner December 2025 gallery',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Changelog Validator Workflow',
+              description: 'Require CHANGELOG updates on PRs, bypass via labels',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Widget Registry Manifest',
+              description: 'Centralized widget tracking, version limits, accessibility checklist',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Script Archival & Cleanup',
+              description: 'Orphan script audit, centralized date parsing, documentation updates',
+              status: 'completed',
+              category: 'Infrastructure',
+            },
+          ],
+        },
+        {
+          month: 'December 2025 (Mid)',
+          status: 'current',
+          tasks: [
+            {
+              title: 'About Page Enhancement (v1.5-1.6)',
+              description:
+                'Gradient backgrounds, skills badges, intelligent stats system with 4-layer hybrid',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Blog System Rewrite (v3.0)',
+              description: 'Manifest-based architecture, Google Docs ingestion, sources panel',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Roadmap Widget (v1.0-1.1)',
+              description: 'Public todo list with real development history tracking',
+              status: 'completed',
+              category: 'Widget',
+            },
+            {
+              title: 'Monochrome Widget Conversion',
+              description: 'Unified white/black gradient aesthetic across all widgets',
+              status: 'in-progress',
+              category: 'Design',
+            },
+            {
+              title: 'Navigation Widget Refinement',
+              description: 'Submenu layouts, proper padding, item ordering improvements',
+              status: 'in-progress',
+              category: 'Widget',
+            },
+          ],
+        },
+        {
+          month: '2025 Q1 (Planned)',
+          status: 'future',
+          tasks: [
+            {
+              title: 'Complete Monochrome Conversion',
+              description: 'Finish applying monochrome theme to all remaining widgets',
+              status: 'future',
+              category: 'Design',
+            },
+            {
+              title: 'Multi-Author Blog System',
+              description: 'Google Doc templates for guest writers, authors page widget',
+              status: 'future',
+              category: 'Widget',
+            },
+            {
+              title: 'Performance Optimization Sprint',
+              description: 'Image optimization automation, lazy loading improvements, caching',
+              status: 'future',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Resume/CV Widget',
+              description: 'Interactive resume display with download option',
+              status: 'future',
+              category: 'Widget',
+            },
+            {
+              title: 'Analytics Integration',
+              description: 'Privacy-friendly analytics and visitor tracking',
+              status: 'future',
+              category: 'Infrastructure',
+            },
+          ],
+        },
+        {
+          month: '2025 Q2 (Planned)',
+          status: 'future',
+          tasks: [
+            {
+              title: 'Accessibility Audit',
+              description: 'WCAG 2.1 AA compliance, screen reader optimization',
+              status: 'future',
+              category: 'Infrastructure',
+            },
+            {
+              title: 'Search Functionality',
+              description: 'Client-side search across blog posts and portfolios',
+              status: 'future',
+              category: 'Feature',
+            },
+            {
+              title: 'Blog Content Enhancements',
+              description: 'Image galleries, embedded videos, code syntax highlighting',
+              status: 'future',
+              category: 'Feature',
+            },
+            {
+              title: 'RSS Feed Generation',
+              description: 'Generate RSS/Atom feeds from blog manifest',
+              status: 'future',
+              category: 'Infrastructure',
+            },
+          ],
+        },
+      ];
+
+      // Render Functions
+      function renderTask(task) {
+        const categoryHtml = task.category
+          ? `<div class="mcc-task-category">${task.category}</div>`
+          : '';
+
+        return `
+          <div class="mcc-task-card ${task.status}">
+            <div class="mcc-task-header">
+              <div class="mcc-task-checkbox"></div>
+              <h3 class="mcc-task-title">${task.title}</h3>
+            </div>
+            <p class="mcc-task-description">${task.description}</p>
+            ${categoryHtml}
+          </div>
+        `;
+      }
+
+      function renderMonth(monthData) {
+        const tasksHtml = monthData.tasks.map(renderTask).join('');
+
+        return `
+          <div class="mcc-month-section">
+            <div class="mcc-month-header">
+              <h2 class="mcc-month-title">${monthData.month}</h2>
+              <div class="mcc-month-badge ${monthData.status}">
+                ${monthData.status === 'current' ? 'Current' : monthData.status}
+              </div>
+            </div>
+            <div class="mcc-tasks-grid">
+              ${tasksHtml}
+            </div>
+          </div>
+        `;
+      }
+
+      function calculateStats() {
+        const allTasks = roadmapData.flatMap((month) => month.tasks);
+
+        return {
+          completed: allTasks.filter((t) => t.status === 'completed').length,
+          inProgress: allTasks.filter((t) => t.status === 'in-progress').length,
+          planned: allTasks.filter((t) => t.status === 'future').length,
+          total: allTasks.length,
+        };
+      }
+
+      function updateStats() {
+        const stats = calculateStats();
+
+        document.getElementById('completedCount').textContent = stats.completed;
+        document.getElementById('inProgressCount').textContent = stats.inProgress;
+        document.getElementById('plannedCount').textContent = stats.planned;
+        document.getElementById('totalCount').textContent = stats.total;
+      }
+
+      function init() {
+        const timelineContainer = document.getElementById('roadmapTimeline');
+        const monthsHtml = roadmapData.map(renderMonth).join('');
+
+        timelineContainer.innerHTML = monthsHtml;
+        updateStats();
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', init);
+    </script>
+  </body>
+</html>

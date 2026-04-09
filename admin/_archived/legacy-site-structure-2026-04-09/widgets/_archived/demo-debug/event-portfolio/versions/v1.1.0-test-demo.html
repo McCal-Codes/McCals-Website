@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Portfolio v1.1 - Test Demo</title>
+  <style>
+    body { margin: 0; padding: 20px; background: #0a0a0a; color: #f5f5f5; font-family: ui-sans-serif, system-ui; }
+    .demo-header { text-align: center; margin-bottom: 40px; }
+    .demo-note { 
+      background: rgba(79, 70, 229, 0.1); 
+      border: 1px solid rgba(79, 70, 229, 0.3); 
+      padding: 16px; 
+      border-radius: 12px; 
+      margin: 20px 0; 
+      font-size: 14px; 
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-header">
+    <h1>Event Portfolio v1.1 Demo</h1>
+    <p>Single Manifest API Call Approach - Testing with Mock Data</p>
+  </div>
+  
+  <div class="demo-note">
+    <strong>🧪 Test Demo</strong><br>
+    This demonstrates the v1.1 manifest approach with simulated event data. 
+    In production, this would load from <code>events-manifest.json</code> with only 1 API call!
+  </div>
+
+  <!-- Event Portfolio Widget v1.1 -->
+  <div class="event-portfolio" id="eventPf" data-panes="8">
+    <h2 class="event-heading">Event Portfolio</h2>
+    <p class="event-subtitle">Corporate Events • Conferences • Celebrations • Special Occasions</p>
+    
+    <div class="event-loading" id="eventLoading">
+      <div class="event-spinner"></div>
+      Loading events...
+    </div>
+    <div class="event-grid" id="eventGrid"></div>
+    
+    <!-- Debug Toggle -->
+    <div class="event-debug-toggle">
+      <button class="event-debug-btn" onclick="toggleEventDebug()">🔧 Debug Mode</button>
+    </div>
+    
+    <!-- Performance metrics -->
+    <div class="event-metrics" id="eventMetrics">
+      <div>🎯 Event Portfolio Debug v1.1</div>
+      <div>Load Time: <span id="eventLoadTime">--</span>ms</div>
+      <div>Events: <span id="eventCount">--</span></div>
+      <div>Images: <span id="eventImages">--</span></div>
+      <div>API Calls: <span id="eventApiCalls">--</span></div>
+      <div>Mode: <span id="eventMode">Mock Data</span></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="event-lightbox" id="eventLightbox" onclick="closeEventLightbox()">
+    <div class="el-dialog" onclick="event.stopPropagation()">
+      <button class="el-close" onclick="closeEventLightbox()">&times;</button>
+      <div class="el-gallery" id="elGallery"></div>
+    </div>
+  </div>
+
+  <script>
+    // Mock manifest data for testing
+    const mockEventManifest = {
+      "version": "1.0",
+      "generated": new Date().toISOString(),
+      "totalEvents": 3,
+      "events": [
+        {
+          "eventName": "Tech Conference 2025",
+          "folderPath": "Tech-Conference-2025", 
+          "dateDisplay": "March 2025",
+          "totalImages": 4,
+          "images": [
+            "https://picsum.photos/400/600?random=1",
+            "https://picsum.photos/400/500?random=2", 
+            "https://picsum.photos/400/700?random=3",
+            "https://picsum.photos/400/550?random=4"
+          ]
+        },
+        {
+          "eventName": "Corporate Summit",
+          "folderPath": "Corporate-Summit",
+          "dateDisplay": "February 2025", 
+          "totalImages": 3,
+          "images": [
+            "https://picsum.photos/400/650?random=5",
+            "https://picsum.photos/400/480?random=6",
+            "https://picsum.photos/400/620?random=7"
+          ]
+        },
+        {
+          "eventName": "Wedding Reception",
+          "folderPath": "Wedding-Reception",
+          "dateDisplay": "January 2025",
+          "totalImages": 5,
+          "images": [
+            "https://picsum.photos/400/580?random=8",
+            "https://picsum.photos/400/720?random=9",
+            "https://picsum.photos/400/520?random=10",
+            "https://picsum.photos/400/640?random=11",
+            "https://picsum.photos/400/600?random=12"
+          ]
+        }
+      ]
+    };
+  </script>
+
+  <!-- Copy the full v1.1 widget CSS and JS here, but modify to use mockEventManifest -->
+  <style>
+    :root { 
+      --fg:#f5f5f5; 
+      --bg:#0a0a0a; 
+      --line:#2a2a2a; 
+      --accent:#4d79ff;
+      --event-primary:#6366f1;
+      --event-secondary:#8b5cf6;
+    }
+
+    .event-portfolio { max-width:1600px; margin:60px auto; padding:40px 20px; text-align:center; position:relative; }
+    .event-heading { 
+      font:800 34px/1.2 ui-sans-serif,system-ui; 
+      color:var(--fg); 
+      margin:0 0 8px;
+      background: linear-gradient(135deg, var(--event-primary), var(--event-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .event-subtitle {
+      font:400 16px/1.4 ui-sans-serif,system-ui; 
+      color:var(--fg); 
+      opacity: 0.7;
+      margin:0 0 32px;
+    }
+
+    .event-loading {
+      display: flex; align-items: center; justify-content: center; min-height: 200px;
+      font: 600 16px/1.4 ui-sans-serif,system-ui; color: var(--fg); opacity: 0.7;
+    }
+    .event-spinner {
+      width: 20px; height: 20px; border: 2px solid var(--line); border-top: 2px solid var(--event-primary);
+      border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .event-debug-toggle {
+      margin: 20px auto 0; text-align: center;
+    }
+    
+    .event-debug-btn {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(124, 58, 237, 0.15));
+      backdrop-filter: blur(12px); 
+      border: 1px solid rgba(79, 70, 229, 0.3); 
+      color: var(--event-primary); 
+      padding: 8px 16px;
+      border-radius: 12px; 
+      font: 600 12px/1 ui-sans-serif,system-ui; 
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      opacity: 0.8;
+    }
+    
+    .event-debug-btn:hover { 
+      opacity: 1; 
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(124, 58, 237, 0.25));
+      transform: translateY(-1px);
+    }
+    
+    .event-debug-btn.active { 
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.35), rgba(124, 58, 237, 0.35));
+      opacity: 1;
+    }
+
+    .event-metrics {
+      position: absolute; top: 60px; right: 20px; background: rgba(0,0,0,0.85); color: #fff;
+      padding: 8px 12px; border-radius: 6px; font: 600 11px/1.3 ui-monospace,monospace;
+      z-index: 100; opacity: 0; visibility: hidden; transition: all 0.3s ease; max-width: 200px;
+      border: 1px solid var(--event-primary); display: none;
+    }
+    .event-metrics.visible { opacity: 1; visibility: visible; display: block; }
+
+    .event-grid { 
+      column-width:320px; column-gap:20px; text-align:left; opacity:0; transition:opacity 0.5s ease;
+    }
+    .event-grid.loaded { opacity: 1; }
+    @media (max-width:1024px) { .event-grid { column-width:280px } }
+    @media (max-width:768px) { .event-grid { column-width:240px } }
+    @media (max-width:520px) { .event-grid { column-width:100% } }
+
+    .event-card {
+      position:relative; display:inline-block; width:100%; margin:0 0 20px;
+      background:linear-gradient(145deg, #1a1a2e, #16213e); 
+      border-radius:16px; overflow:hidden; cursor:pointer; break-inside:avoid;
+      opacity:0; transform:translateY(20px); transition:all 0.3s ease;
+      border: 1px solid rgba(79, 70, 229, 0.2);
+    }
+    .event-card.loaded { opacity: 1; transform: translateY(0); }
+    .event-card:hover {
+      border-color: rgba(79, 70, 229, 0.4);
+      box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15);
+    }
+    .event-card img {
+      display:block; width:100%; height:auto; object-fit:cover; border-radius:inherit;
+      transition:transform .35s ease, filter .35s ease;
+    }
+    .event-card:hover img { transform:scale(1.02); filter:contrast(1.05) saturate(1.1) brightness(1.05) }
+
+    .event-info {
+      position:absolute; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:flex-end;
+      padding:12px 16px; 
+      background:linear-gradient(180deg,rgba(79, 70, 229, 0),rgba(79, 70, 229, 0.1) 30%, rgba(16, 33, 62, .9)); 
+      color:#fff
+    }
+    .event-title { margin:0; font:800 16px/1.2 ui-sans-serif,system-ui; color: #e0e7ff; }
+    .event-meta { margin:2px 0 0; font:600 12px/1.2 ui-sans-serif,system-ui; color:#c7d2fe; }
+
+    .event-card.loading::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.1), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+    .event-lightbox {
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background:rgba(16, 33, 62, 0.9); z-index:2147483647 !important; padding:24px; 
+      backdrop-filter: blur(12px);
+    }
+    .event-lightbox.is-open { display:flex }
+    .el-dialog { position:relative; max-width:95vw; max-height:92vh; overflow:auto; background:transparent; outline:none }
+    .el-gallery { display:flex; flex-direction:column; gap:20px; overflow-y:auto; scroll-snap-type:y mandatory; padding-right:12px }
+    .el-gallery img {
+      max-width:92vw; max-height:75vh; width:auto; height:auto; scroll-snap-align:center; 
+      border-radius:14px; margin:0 auto; transition:opacity 0.3s ease;
+      box-shadow: 0 8px 32px rgba(79, 70, 229, 0.3);
+    }
+
+    .el-caption { text-align:center; color:#fff; margin-top:16px; padding:0 20px; }
+    .el-title { margin:0 0 8px; font:800 20px/1.25 ui-sans-serif,system-ui; color: #e0e7ff; }
+    .el-meta { margin:0 0 12px; color:#c7d2fe; font:600 13px/1.3 ui-sans-serif,system-ui }
+    .el-description { margin:0; color:#f1f5f9; font:400 15px/1.5 ui-sans-serif,system-ui }
+    .el-source { margin:8px 0 0; color:#94a3b8; font:500 11px/1.2 ui-sans-serif,system-ui; opacity:0.7; }
+    
+    .el-close { 
+      position: absolute; 
+      top: 20px; 
+      right: 20px; 
+      border: 1px solid rgba(79, 70, 229, 0.3); 
+      background: rgba(16, 33, 62, 0.6); 
+      backdrop-filter: blur(16px);
+      color: rgba(224, 231, 255, 0.9); 
+      border-radius: 50%; 
+      width: 36px;
+      height: 36px;
+      cursor: pointer; 
+      font-weight: 600;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .el-close:hover { 
+      background: rgba(79, 70, 229, 0.4); 
+      color: rgba(255, 255, 255, 1); 
+      transform: scale(1.05);
+    }
+    
+    .el-hint { 
+      position: sticky; 
+      top: 6px; 
+      margin: 0 0 10px; 
+      text-align: center; 
+      font: 500 12px/1.2 ui-sans-serif,system-ui; 
+      color: #94a3b8; 
+      opacity: 0.6; 
+    }
+  </style>
+
+  <script>
+    (function() {
+      const YEAR = new Date().getFullYear();
+      const pf = document.getElementById('eventPf');
+      const grid = document.getElementById('eventGrid');
+      const loading = document.getElementById('eventLoading');
+      const metrics = document.getElementById('eventMetrics');
+      const lightbox = document.getElementById('eventLightbox');
+      
+      if (!grid) return;
+
+      const TARGET_PANES = Math.max(1, parseInt(pf?.dataset?.panes || '12', 10) || 12);
+      let debugMode = false;
+      let startTime = performance.now();
+      let eventCount = 0;
+      let imageCount = 0;
+      let apiCalls = 0;
+      
+      window.toggleEventDebug = function() {
+        debugMode = !debugMode;
+        const btn = document.querySelector('.event-debug-btn');
+        if (btn) btn.classList.toggle('active', debugMode);
+        metrics.classList.toggle('visible', debugMode);
+        updateMetrics();
+      };
+      
+      function updateMetrics() {
+        if (!debugMode) return;
+        document.getElementById('eventLoadTime').textContent = Math.round(performance.now() - startTime);
+        document.getElementById('eventCount').textContent = eventCount;
+        document.getElementById('eventImages').textContent = imageCount;
+        document.getElementById('eventApiCalls').textContent = apiCalls;
+      }
+
+      function shuffle(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function createEventCard(imageSrc, title, meta, index, allImages, eventData) {
+        const card = document.createElement('div');
+        card.className = 'event-card loading';
+        card.innerHTML = `
+          <img data-src="${imageSrc}" alt="${title}" loading="lazy">
+          <div class="event-info">
+            <div class="event-title">${title}</div>
+            <div class="event-meta">${meta}</div>
+          </div>
+        `;
+        
+        const img = card.querySelector('img');
+        img.onload = () => {
+          card.classList.remove('loading');
+          card.classList.add('loaded');
+          imageCount++;
+          updateMetrics();
+        };
+        
+        setTimeout(() => { img.src = img.dataset.src; }, index * 50);
+        
+        card.onclick = () => openEventLightbox(allImages, eventData);
+        
+        return card;
+      }
+
+      function openEventLightbox(images, eventData) {
+        const gallery = document.getElementById('elGallery');
+        gallery.innerHTML = `<div class="el-hint">📸 Event Photography</div>`;
+        
+        for (const imageSrc of images) {
+          const img = document.createElement('img');
+          img.loading = 'lazy';
+          img.alt = `Event photo`;
+          img.src = imageSrc;
+          gallery.appendChild(img);
+        }
+        
+        const caption = document.createElement('div');
+        caption.className = 'el-caption';
+        caption.innerHTML = `
+          <h3 class="el-title">${eventData.eventName}</h3>
+          <div class="el-meta">${eventData.dateDisplay} • ${images.length} photos</div>
+          <div class="el-description">Professional event photography capturing the essence and energy of special occasions.</div>
+          <div class="el-source">Single Manifest API Call Demo • McCal Media</div>
+        `;
+        gallery.appendChild(caption);
+        
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      window.closeEventLightbox = function() {
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+      };
+
+      // Main build function - MOCK VERSION
+      async function build() {
+        try {
+          startTime = performance.now();
+          
+          // Simulate loading manifest (but use mock data)
+          await new Promise(resolve => setTimeout(resolve, 500));
+          apiCalls = 1; // Simulate single API call
+          
+          const manifest = mockEventManifest;
+          eventCount = manifest.events.length;
+          const pools = [];
+          
+          // Process events from manifest
+          for (const event of manifest.events) {
+            const images = shuffle([...event.images]);
+            pools.push({
+              title: event.eventName,
+              dateDisplay: event.dateDisplay,
+              images,
+              allImages: [...event.images],
+              eventData: event
+            });
+          }
+
+          // Create cards with round-robin
+          const slots = [];
+          let progress = true;
+          while (slots.length < TARGET_PANES && progress) {
+            progress = false;
+            for (const pool of pools) {
+              if (slots.length >= TARGET_PANES) break;
+              const imageSrc = pool.images.shift();
+              if (imageSrc) {
+                slots.push({
+                  title: pool.title,
+                  dateDisplay: pool.dateDisplay,
+                  thumb: imageSrc,
+                  allImages: pool.allImages,
+                  eventData: pool.eventData
+                });
+                progress = true;
+              }
+            }
+          }
+
+          // Render cards
+          loading.style.display = 'none';
+          grid.style.opacity = '0';
+          
+          slots.forEach((slot, index) => {
+            const meta = `${slot.dateDisplay} • ${YEAR}`;
+            const card = createEventCard(slot.thumb, slot.title, meta, index, slot.allImages, slot.eventData);
+            grid.appendChild(card);
+          });
+          
+          setTimeout(() => {
+            grid.classList.add('loaded');
+          }, 100);
+          
+          updateMetrics();
+          console.log(`🎯 Event portfolio demo: ${eventCount} events, ${apiCalls} API call (MOCK)`);
+          
+        } catch (error) {
+          console.error('Event portfolio demo failed:', error);
+          loading.innerHTML = `<span style="color: var(--accent);">⚠️ Demo failed: ${error.message}</span>`;
+        }
+      }
+
+      build();
+    })();
+  </script>
+</body>
+</html>

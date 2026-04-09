@@ -1,0 +1,74 @@
+﻿<!-- Photojournalism Portfolio v5.1 - Performance Optimized -->
+<!-- Critical CSS - Only essential styles for initial render -->
+<style>
+/* ...existing CSS from previous working version... */
+</style>
+
+<!-- Widget Container -->
+<div class="journalism-portfolio" id="journalismPf" data-panes="24" data-widget-version="5.1">
+  <h2 class="journalism-heading">Photojournalism Portfolio <span class="version-indicator" onclick="showChangelog()" title="View changelog">v5.1</span><span class="journalism-status" data-status="wip" title="v5.1 is still being finalized">Work in Progress</span></h2>
+  <div class="portfolio-filters" id="portfolioFilters">
+    <button class="filter-btn" data-filter="*" aria-pressed="true">All Work</button>
+    <button class="filter-btn" data-filter="Published">Published Work</button>
+  </div>
+  <div class="journalism-loading" id="journalismLoading">
+    <div class="journalism-spinner"></div>
+    Loading photojournalism portfolio...
+  </div>
+  <div class="journalism-grid" id="journalismGrid"></div>
+</div>
+
+<!-- Lightbox Modal (concert widget v4.6 pattern) -->
+<div class="journalism-lightbox" id="journalismLightbox" aria-hidden="true">
+  <div class="jl-dialog" role="dialog" aria-modal="true" aria-labelledby="jlLbTitle" tabindex="-1">
+    <button class="jl-close" type="button" aria-label="Close">&times;</button>
+    <div class="jl-gallery" id="jlGallery">
+      <div class="jl-hint">Scroll Up/Down</div>
+    </div>
+    <div class="jl-caption">
+      <h3 class="jl-title" id="jlLbTitle"></h3>
+      <p class="jl-meta" id="jlLbMeta"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Changelog Modal -->
+<div class="changelog-modal" id="changelogModal">
+  <div class="changelog-content">
+    <div class="changelog-header">
+      <h3 class="changelog-title">📰 Journalism Widget Changelog</h3>
+      <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v5.1 (2025-10-09)</div>
+      <ul class="changelog-items">
+        <li>Performance-optimized hybrid theme (Sleek Black + Warmbusiness)</li>
+        <li>Robust lightbox system (concert widget v4.6 pattern)</li>
+        <li>SEO enhancements: structured data, alt text, accessibility</li>
+        <li>Changelog modal restored and improved</li>
+        <li>Image loading and fallback logic improved</li>
+      </ul>
+      <div class="changelog-version">v4.9 (2025-10-05)</div>
+      <ul class="changelog-items">
+        <li>Fixed image stretching in lightbox</li>
+        <li>Enhanced navigation hiding and close button</li>
+        <li>Debug panel and version indicator</li>
+      </ul>
+      <div class="changelog-version">Earlier</div>
+      <ul class="changelog-items">
+        <li>Initial release, filterable grid, published badge, lightbox</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Widget JavaScript: moved to external file for CSP/DOMPurify compatibility -->
+<!-- Replace the src URL below with the actual public URL of your JS file (e.g., GitHub raw, CDN, or your own server) -->
+<script src="https://yourdomain.com/path/to/journalism-widget-v5.1.js"></script>
+<parameter name="filePath">c:\Users\wolf\Desktop\McCal's Dev Website\McCals-Website\src\widgets\photojournalism-portfolio\versions\v5.1-performance-optimized.html
+
+
+
+
+
+

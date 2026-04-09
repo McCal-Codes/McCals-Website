@@ -1,0 +1,75 @@
+<!--
+  Example: Standard jsDelivr-powered widget embed
+
+  Place this snippet where you'd normally drop the widget's HTML in Squarespace Code Block.
+  - The loader will fetch the widget HTML from jsDelivr (GitHub) and inject it into the container.
+  - If the CDN fetch fails, the loader can fall back to a local copy (useful for testing or previewing).
+
+  Replace the attributes below for your widget:
+    data-src: full jsDelivr URL (recommended; pin to an exact tag for production)
+    data-dev-src: optional dev override URL (used automatically on localhost, or with ?mccalWidgetDev=1)
+    data-fallback: optional URL/path to fall back to if primary fetch fails
+    data-mode: inline|iframe (inline is default)
+    data-replace: true|false (recommended true to replace the placeholder)
+    data-debug: true|false (or use ?mccalWidgetDebug=1)
+
+  Loader script can be hosted locally (in repo) or loaded from jsDelivr once this repo is published.
+-->
+
+<div
+  class="mccal-widget"
+  data-src="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main/src/widgets/example-widget/versions/v1.0.0-example-widget.html"
+  data-dev-src="/src/widgets/example-widget/versions/v1.0.0-example-widget.html"
+  data-fallback="/src/widgets/example-widget/versions/v1.0.0-example-widget.html"
+  data-mode="inline"
+  data-replace="true"
+  data-debug="false"
+>
+  <!-- fallback/preview content: keep a small static placeholder so the page is usable before loader runs -->
+  <style>
+    .mccal-widget-placeholder {
+      padding: 12px;
+      background: #f6f6f6;
+      border: 1px solid #eee;
+      color: #333;
+      font-family:
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        Roboto,
+        'Helvetica Neue',
+        Arial;
+    }
+  </style>
+  <div class="mccal-widget-placeholder">Loading widget… (will be replaced by jsDelivr content)</div>
+</div>
+
+<!-- Include the loader ONCE per page. This guard prevents double-loading if multiple code blocks include it. -->
+<script>
+  (function () {
+    if (window.McCalJsDelivrWidgetLoader) return;
+    if (window.__mccalJsDelivrWidgetLoaderLoading) return;
+    window.__mccalJsDelivrWidgetLoaderLoading = true;
+    var s = document.createElement('script');
+    s.async = true;
+    // Production: pin this loader too (tag/commit) when you publish.
+    s.src =
+      'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main/src/widgets/cdn/jsdelivr-loader.js';
+    document.head.appendChild(s);
+  })();
+</script>
+
+<!-- Optional: Programmatic load (if you prefer to call it manually)
+<script>
+  // Example: programmatic load
+  // McCalJsDelivrWidgetLoader.loadInto('.mccal-widget', {
+  //   // If you prefer repo/path config instead of data-src:
+  //   repo: 'McCal-Codes/McCals-Website',
+  //   path: 'src/widgets/example-widget/versions/v1.0.0-example-widget.html',
+  //   version: 'main',
+  //   fallback: '/src/widgets/example-widget/versions/v1.0.0-example-widget.html',
+  //   replace: true,
+  //   debug: true
+  // });
+</script>
+-->

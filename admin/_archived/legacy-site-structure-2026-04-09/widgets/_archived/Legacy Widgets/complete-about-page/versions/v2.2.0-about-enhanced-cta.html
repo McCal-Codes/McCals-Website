@@ -1,0 +1,2822 @@
+<!-- About Section Widget v2.0.0 — 2026 Freelance & Events Revamp
+Author: Caleb McCartney / McCal-Codes
+Version: 2.0.0
+Purpose: Complete about section with bio, photo, reviews, and client carousel (2026 Update)
+
+Features:
+- Professional freelance focus on Concert, Corporate, and Event photography
+- Client logo carousel with 25+ premium brands
+- LinkedIn and Google reviews integration
+- SEO optimized for 2026 Pittsburgh freelance market
+
+SEO OPTIMIZATION — Copy these into Squarespace Page Settings → Advanced → Page Header:
+
+<!-- Page Title and Meta Description -->
+<title>Caleb McCartney | Event, Concert & Photojournalist | Pittsburgh Freelancer</title>
+<meta
+  name="description"
+  content="Caleb McCartney is a Pittsburgh-based photojournalist and freelance photographer specializing in high-end concert photography, corporate event coverage, and brand storytelling."
+/>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="Caleb McCartney | Event, Concert & Photojournalist" />
+<meta
+  property="og:description"
+  content="Photojournalist and freelance photographer for concerts, corporate events, and commercial campaigns. Capturing authentic human connection."
+/>
+<meta
+  property="og:image"
+  content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
+/>
+<meta property="og:url" content="https://mcc-cal.com/about" />
+<meta property="og:profile:first_name" content="Caleb" />
+<meta property="og:profile:last_name" content="McCartney" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Caleb McCartney | Event, Concert & Photojournalist" />
+<meta
+  name="twitter:description"
+  content="Pittsburgh-based photojournalist and freelance photographer specializing in high-end concert photography, corporate event coverage, and brand storytelling."
+/>
+<meta
+  name="twitter:image"
+  content="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
+/>
+
+<!-- Canonical & Robots -->
+<link rel="canonical" href="https://mcc-cal.com/about" />
+<link rel="preconnect" href="https://raw.githubusercontent.com" />
+<meta name="robots" content="index, follow" />
+
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* Variables & Global */
+  .ss-about-section {
+    --bg-glass: rgba(20, 20, 20, 0.65);
+    --bg-glass-heavy: rgba(12, 12, 12, 0.85);
+    --border-glass: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    --shadow-glass: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+    --text-primary: #f0f0f0;
+    --text-secondary: #d0d0d0;
+    --text-muted: #888888;
+    --accent-gold: #ffc107;
+    --border-light: rgba(255, 255, 255, 0.1);
+
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    color: #e5e5e5;
+  }
+
+  /* Bio Section */
+  .ss-about-bio {
+    padding: 60px 0;
+    padding: 60px 0;
+    background: var(--bg-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    margin: 30px 0 120px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      var(--shadow-glass),
+      0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .ss-about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    padding: 0 30px;
+  }
+
+  .ss-about-photo {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Bio Photo Ambient Depth Glow */
+  .ss-about-photo::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 40%,
+      transparent 70%
+    );
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
+    animation: ss-aura-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes ss-aura-pulse {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  .ss-about-photo img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 20px;
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    filter: contrast(1.05) brightness(1.02);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .ss-about-photo:hover img {
+    transform: translateY(-8px) scale(1.02);
+  }
+
+  .ss-about-text {
+    flex: 1.5;
+    min-width: 350px;
+  }
+
+  .ss-about-text p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+  }
+
+  .ss-about-text a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .ss-about-text strong {
+    color: var(--text-primary);
+  }
+
+  .ss-about-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+
+  .ss-about-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+    min-width: 120px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: #f5f5f5;
+  }
+
+  .ss-about-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  }
+
+  .ss-about-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  }
+
+  .ss-about-btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    color: #f4f4f4;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .ss-about-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.32);
+    box-shadow:
+      0 12px 28px rgba(255, 255, 255, 0.08),
+      0 0 20px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Statistics Section */
+  .ss-stats-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 30px 0 40px;
+    padding: 25px 20px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ss-stat-item {
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .ss-stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ss-stat-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #b0b0b0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 640px) {
+    .ss-stats-section {
+      gap: 25px;
+      padding: 20px 15px;
+    }
+
+    .ss-stat-number {
+      font-size: 1.6rem;
+    }
+
+    .ss-stat-label {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Contact Options Menu */
+  .ss-contact-container {
+    position: relative;
+    display: inline-block;
+    z-index: 30;
+  }
+
+  .ss-contact-options {
+    position: relative;
+  }
+
+  .ss-contact-main-btn {
+    position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+  }
+
+  .ss-contact-menu,
+  .ss-documents-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    background: rgba(12, 12, 12, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    margin-top: 4px;
+    z-index: 20000;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+    min-width: 180px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(18px);
+  }
+
+  .ss-contact-menu.show,
+  .ss-documents-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .ss-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    color: #e6e6e6;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition:
+      background 0.18s ease,
+      color 0.18s ease;
+    border-radius: 6px;
+    margin: 4px 12px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .ss-contact-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+  }
+
+  .ss-contact-item:last-child {
+    border-bottom: none;
+  }
+
+  .ss-contact-icon {
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ss-contact-text {
+    display: inline;
+    font-weight: 500;
+  }
+
+  .ss-contact-coming-soon {
+    opacity: 0.65;
+    cursor: not-allowed;
+    color: #9f9f9f;
+  }
+
+  .ss-contact-coming-soon:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #9f9f9f;
+    transform: none;
+  }
+
+  .ss-coming-soon-badge {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+  }
+
+  /* Documents Dropdown Menu */
+  .ss-documents-container {
+    position: relative;
+    display: inline-block;
+    z-index: 30;
+  }
+
+  .ss-documents-options {
+    position: relative;
+  }
+
+  .ss-documents-main-btn {
+    position: relative;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 640px) {
+    .ss-about-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .ss-about-buttons > * {
+      width: 100%;
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    .ss-about-buttons .ss-about-btn,
+    .ss-contact-main-btn,
+    .ss-documents-main-btn {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .ss-contact-container,
+    .ss-documents-container,
+    .ss-contact-options,
+    .ss-documents-options {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .ss-contact-menu,
+    .ss-documents-menu {
+      position: static;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      min-width: 0;
+      margin-top: 8px;
+      box-shadow: none;
+      display: none;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .ss-contact-menu.show,
+    .ss-documents-menu.show {
+      transform: none;
+      display: block;
+    }
+  }
+
+  /* Reviews Section */
+  .ss-reviews-section {
+    padding: 50px 0;
+    padding: 50px 0;
+    background: var(--bg-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    margin: 30px 0;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      var(--shadow-glass),
+      0 20px 40px rgba(0, 0, 0, 0.3);
+    /* Performance: detailed rendering only when in viewport */
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+  }
+
+  .ss-reviews-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 30px;
+    text-align: center;
+  }
+
+  .ss-reviews-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ss-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  .ss-review-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+    padding: 25px;
+    border-radius: 12px;
+    margin: 0;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+      0 8px 32px rgba(0, 0, 0, 0.2);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .ss-review-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 12px 40px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  }
+
+  .ss-review-platform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .ss-platform-badge {
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .ss-platform-linkedin {
+    background: #0077b5;
+  }
+  .ss-platform-google {
+    background: #4285f4;
+  }
+
+  .ss-review-stars {
+    color: #ffd700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .ss-review-text {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 0 0 15px;
+    line-height: 1.5;
+    color: #d0d0d0;
+  }
+
+  .ss-review-author {
+    font-weight: 600;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+  }
+
+  .ss-review-title {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 3px;
+    color: #b0b0b0;
+  }
+
+  .ss-reviews-cta {
+    padding-top: 20px;
+  }
+
+  /* Version indicator - bottom right */
+  .ss-version-indicator {
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    font:
+      400 10px/1 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: rgba(128, 128, 128, 0.6);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+
+  .ss-version-indicator:hover {
+    color: rgba(128, 128, 128, 1);
+    transform: scale(1.1);
+  }
+
+  /* Changelog panel */
+  .ss-changelog-panel {
+    position: fixed;
+    bottom: 40px;
+    right: 12px;
+    width: 400px;
+    max-height: 500px;
+    background: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+    display: none;
+    overflow-y: auto;
+  }
+
+  .ss-changelog-panel.active {
+    display: block;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ss-changelog-header {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ff4d6d;
+  }
+
+  .ss-changelog-version {
+    font-weight: 600;
+    margin: 15px 0 8px 0;
+    color: #fff;
+  }
+
+  .ss-changelog-feature {
+    margin: 4px 0;
+    padding-left: 12px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .ss-changelog-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    transition: color 0.3s ease;
+  }
+
+  .ss-changelog-close:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  /* Mobile responsive changelog */
+  @media (max-width: 768px) {
+    .ss-changelog-panel {
+      width: calc(100vw - 24px);
+      right: 12px;
+      left: 12px;
+      max-height: 60vh;
+    }
+
+    .ss-version-indicator {
+      bottom: 12px;
+      right: 16px;
+      font-size: 11px;
+    }
+  }
+
+  .ss-reviews-rating {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin: 0 0 15px;
+    color: #d0d0d0;
+  }
+
+  /* Client Carousel Squarespace Styles v1.2.3 */
+  .ss-client-showcase {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    /* Performance */
+    content-visibility: auto;
+    contain-intrinsic-size: 500px;
+  }
+
+  .ss-client-heading {
+    font:
+      700 24px/1.2 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #f5f5f5;
+    margin: 0 0 10px;
+  }
+
+  .ss-client-subtitle {
+    font:
+      400 14px/1.4 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: var(--text-muted);
+    margin: 0 0 30px;
+  }
+
+  .ss-client-carousel {
+    position: relative;
+    overflow: hidden;
+    padding: 15px 0;
+  }
+
+  .ss-client-track {
+    display: flex;
+    /* Dynamic duration set by JS */
+    animation: ss-scroll var(--carousel-duration, 55s) linear infinite;
+    /* Dynamic width set by JS */
+    width: var(--carousel-width, calc(280px * 75));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .ss-client-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ss-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      /* Dynamic scroll distance set by JS */
+      transform: translateX(var(--carousel-scroll-end, calc(-280px * 25)));
+    }
+  }
+
+  .ss-client-logo {
+    flex: 0 0 260px;
+    height: 260px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      var(--shadow-glass),
+      0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    padding: 45px;
+    box-sizing: border-box; /* Ensures image fits inside the padding */
+    z-index: 1;
+  }
+
+  /* Glint Effect */
+  .ss-client-logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: skewX(-25deg);
+    transition: all 0.5s;
+    pointer-events: none;
+  }
+
+  .ss-client-logo:hover::after {
+    animation: ss-glint 0.8s ease-in-out;
+  }
+
+  @keyframes ss-glint {
+    0% {
+      left: -150%;
+    }
+    100% {
+      left: 150%;
+    }
+  }
+
+  .ss-client-logo:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(40, 40, 40, 0.9) 0%, rgba(30, 30, 30, 1) 100%);
+  }
+
+  .ss-client-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* NO universal filter - logos show their natural colors */
+    filter: brightness(1.05) contrast(1.05);
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .ss-client-logo:hover img {
+    filter: brightness(1.3) contrast(1.2);
+    transform: scale(1.05);
+  }
+
+  /* Specific logos that need white treatment */
+  .haven-logo-white,
+  .pup-logo-white,
+  .pittsburgh-magazine-logo,
+  .press-club-logo-white,
+  .bc3-logo-white,
+  .watchful-shepherd-logo-white,
+  .cmi-logo-white,
+  .penn-state-logo-white,
+  .ghostlight-logo-white,
+  .pitt-logo-white {
+    filter: brightness(0) invert(1) brightness(1.1) contrast(1.1) !important;
+  }
+
+  .osh360-logo-bw {
+    filter: grayscale(1) brightness(0.8) contrast(1.2) !important;
+  }
+
+  .ss-client-logo:hover .osh360-logo-bw {
+    filter: grayscale(1) brightness(1) contrast(1.3) !important;
+  }
+
+  .ss-client-logo:hover .haven-logo-white,
+  .ss-client-logo:hover .pup-logo-white,
+  .ss-client-logo:hover .pittsburgh-magazine-logo,
+  .ss-client-logo:hover .press-club-logo-white,
+  .ss-client-logo:hover .bc3-logo-white,
+  .ss-client-logo:hover .watchful-shepherd-logo-white,
+  .ss-client-logo:hover .cmi-logo-white,
+  .ss-client-logo:hover .penn-state-logo-white,
+  .ss-client-logo:hover .ghostlight-logo-white,
+  .ss-client-logo:hover .pitt-logo-white {
+    filter: brightness(0) invert(1) brightness(1.3) contrast(1.2) !important;
+  }
+
+  /* Text-based logo styles for better readability */
+  .ss-client-text-logo {
+    font:
+      600 14px/1.2 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #f5f5f5;
+    text-align: center;
+    padding: 0 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .ss-client-text-logo .company-name {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .ss-client-text-logo .company-tagline {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ss-client-stats {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .ss-stat-item {
+    text-align: center;
+  }
+
+  .ss-stat-number {
+    font:
+      700 20px/1 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #f5f5f5;
+    display: block;
+  }
+
+  .ss-stat-label {
+    font:
+      600 11px/1.3 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .ss-client-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font:
+      600 16px/1.4 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #f5f5f5;
+    opacity: 0.7;
+  }
+
+  .ss-client-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2a2a2a;
+    border-top: 2px solid #ff4d6d;
+    border-radius: 50%;
+    animation: ss-spin 1s linear infinite;
+    margin-right: 12px;
+  }
+
+  @keyframes ss-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .ss-client-logo {
+      flex: 0 0 180px;
+      height: 80px;
+      margin: 0 6px;
+    }
+    .ss-client-logo img {
+      width: 90%;
+      height: 90%;
+    }
+    .ss-client-text-logo .company-name {
+      font-size: 14px;
+    }
+    .ss-client-text-logo .company-tagline {
+      font-size: 10px;
+    }
+    .ss-client-stats {
+      gap: 20px;
+    }
+    .ss-stat-number {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ss-client-showcase {
+      padding: 20px 10px;
+    }
+  }
+
+  .ss-client-stats {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .ss-stat-item {
+    text-align: center;
+  }
+
+  .ss-stat-number {
+    font:
+      700 20px/1 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #f5f5f5;
+    display: block;
+  }
+
+  .ss-stat-label {
+    font:
+      600 11px/1.3 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .ss-client-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font:
+      600 16px/1.4 -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    color: #f5f5f5;
+    opacity: 0.7;
+  }
+
+  .ss-client-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2a2a2a;
+    border-top: 2px solid #ff4d6d;
+    border-radius: 50%;
+    animation: ss-spin 1s linear infinite;
+    margin-right: 12px;
+  }
+
+  @keyframes ss-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .ss-about-header h1 {
+      font-size: 1.5rem;
+    }
+
+    .ss-about-header {
+      padding: 20px 15px;
+    }
+
+    .ss-about-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 30px;
+    }
+
+    .ss-about-text {
+      min-width: auto;
+    }
+
+    .ss-about-photo img {
+      max-width: 250px;
+      margin-bottom: 20px;
+    }
+
+    .ss-about-buttons {
+      justify-content: center;
+    }
+
+    .ss-about-btn {
+      min-width: 140px;
+    }
+
+    .ss-about-bio,
+    .ss-reviews-section,
+    .ss-client-showcase {
+      padding: 40px 0;
+      margin: 20px 0;
+    }
+
+    .ss-about-text p {
+      font-size: 0.9rem;
+    }
+
+    .ss-reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ss-review-card {
+      padding: 20px;
+    }
+
+    .ss-client-logo {
+      flex: 0 0 180px;
+      height: 80px;
+      margin: 0 6px;
+      padding: 0;
+    }
+
+    .ss-client-logo img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .ss-client-stats {
+      gap: 20px;
+    }
+
+    .ss-stat-number {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ss-about-header {
+      padding: 15px 10px;
+    }
+
+    .ss-about-header h1 {
+      font-size: 1.3rem;
+    }
+
+    .ss-about-bio,
+    .ss-reviews-section,
+    .ss-client-showcase {
+      padding: 30px 0;
+      margin: 15px 0;
+    }
+
+    .ss-about-photo img {
+      max-width: 200px;
+    }
+
+    .ss-client-showcase {
+      padding: 20px 10px;
+    }
+  }
+
+  /* Scroll Entrance Animation Classes */
+  .ss-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+  }
+
+  .ss-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ss-reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+  .ss-reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+  .ss-reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+  /* Floating Quote Button v2.2.0 — Enhanced Glassmorphism */
+  .mcc-floating-quote-btn {
+    position: fixed;
+    bottom: 45px;
+    right: 30px;
+    z-index: 999;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 26px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.5s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+    overflow: hidden;
+
+    /* Initially hidden for entrance animation */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  /* Entrance State */
+  .mcc-floating-quote-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Pulse Animation */
+  @keyframes mcc-cta-pulse {
+    0% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 0.1);
+    }
+    70% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 15px rgba(255, 255, 255, 0);
+    }
+    100% {
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+
+  .mcc-floating-quote-btn.pulse {
+    animation: mcc-cta-pulse 2s infinite;
+  }
+
+  .mcc-floating-quote-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    pointer-events: none;
+  }
+
+  .mcc-floating-quote-btn:hover {
+    transform: translateY(-6px) scale(1.05) !important;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow:
+      0 15px 45px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.1);
+    animation: none; /* Stop pulsing on hover */
+  }
+
+  .mcc-floating-quote-btn:hover::before {
+    left: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .mcc-floating-quote-btn {
+      bottom: 40px;
+      right: 20px;
+      padding: 12px 22px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(12px);
+    }
+  }
+</style>
+
+<div class="ss-about-section">
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Caleb McCartney",
+      "jobTitle": "Photojournalist & Event Photographer",
+      "description": "Caleb McCartney is a Pittsburgh-based photojournalist and freelance photographer specializing in concert, corporate, and event photography.",
+      "image": "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg",
+      "url": "https://mcc-cal.com",
+      "sameAs": [
+        "https://linkedin.com/company/mccalmedia",
+        "https://calendly.com/wolftech029/30min"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pittsburgh",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Point Park University",
+        "degree": "BFA in Photography"
+      },
+      "worksFor": [
+        {
+          "@type": "Person",
+          "name": "Caleb McCartney Photography",
+          "description": "Freelance photography specializing in concert and event coverage"
+        }
+      ],
+      "hasOccupation": [
+        {
+          "@type": "Occupation",
+          "name": "Photojournalist",
+          "occupationLocation": {
+            "@type": "City",
+            "name": "Pittsburgh",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": "Occupation",
+          "name": "Concert Photographer",
+          "occupationLocation": {
+            "@type": "City",
+            "name": "Pittsburgh",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": "Occupation",
+          "name": "Event Photographer",
+          "occupationLocation": {
+            "@type": "City",
+            "name": "Pittsburgh",
+            "addressCountry": "US"
+          }
+        }
+      ],
+      "knowsAbout": [
+        "Photojournalism",
+        "Concert Photography",
+        "Event Photography",
+        "Corporate Photography",
+        "Freelance Photography"
+      ]
+    }
+  </script>
+
+  <!-- LocalBusiness JSON-LD for Caleb McCartney Photography -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["Organization", "LocalBusiness", "Photographer"],
+      "name": "Caleb McCartney Photography",
+      "alternateName": "McCal Media",
+      "image": "https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg",
+      "url": "https://mcc-cal.com",
+      "telephone": "+1-570-299-1214",
+      "email": "contact@mcc-cal.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "320 Pointview Rd, Apt 2",
+        "addressLocality": "Pittsburgh",
+        "addressRegion": "PA",
+        "postalCode": "15227",
+        "addressCountry": "US"
+      },
+      "areaServed": ["Pittsburgh", "Erie", "Western Pennsylvania"],
+      "priceRange": "$$",
+      "sameAs": [
+        "https://www.instagram.com/mccal.media",
+        "https://www.linkedin.com/in/calebmccartney"
+      ]
+    }
+  </script>
+
+  <!-- Key Services JSON-LD (Photojournalism, Concert, Event) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "serviceType": "Photojournalism",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Caleb McCartney Photography",
+            "url": "https://mcc-cal.com"
+          },
+          "areaServed": "Pittsburgh, PA"
+        },
+        {
+          "@type": "Service",
+          "serviceType": "Concert Photography",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Caleb McCartney Photography",
+            "url": "https://mcc-cal.com"
+          },
+          "areaServed": "Pittsburgh, PA"
+        },
+        {
+          "@type": "Service",
+          "serviceType": "Event Photography",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Caleb McCartney Photography",
+            "url": "https://mcc-cal.com"
+          },
+          "areaServed": "Pittsburgh, PA"
+        }
+      ]
+    }
+  </script>
+
+  <!-- Bio Section -->
+  <section class="ss-about-bio" itemscope itemtype="https://schema.org/Person">
+    <div class="ss-about-content">
+      <!-- Photo -->
+      <figure class="ss-about-photo">
+        <img
+          src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/caleb-mccartney-photo.jpg"
+          alt="Caleb McCartney - Professional Photojournalist and Commercial Photographer in Pittsburgh"
+          itemprop="image"
+          loading="lazy"
+        />
+        <figcaption class="sr-only">Professional headshot of Caleb McCartney</figcaption>
+      </figure>
+
+      <!-- Bio Text -->
+      <div class="ss-about-text" itemprop="description">
+        <p>
+          Caleb McCartney is a Pittsburgh‑based <strong>photojournalist</strong> and freelance
+          storyteller, specializing in news-driven narratives, high-energy concert coverage, and
+          authentic brand visuals. A proud alumnus of Point Park University's BFA program, Caleb has
+          spent the last 6+ years documenting the pulse of the city—bridging the gap between
+          <strong>professional photojournalism</strong> and commercial excellence.
+        </p>
+
+        <p>
+          His approach is rooted in the "decisive moment," a philosophy carried from his roots in
+          news photography into the world of corporate events and live performance. Whether he is on
+          the front lines of a breaking story or the front row of a sold-out arena, Caleb’s work is
+          driven by a commitment to authentic connection and unscripted truth.
+        </p>
+
+        <p>
+          In 2026, he continues to lead as a premier choice for <strong>Photojournalism</strong>,
+          <strong>Concert</strong>, and <strong>Event photography</strong> in Pittsburgh and beyond,
+          collaborating with names like the New York Post and Pittsburgh Magazine to tell the
+          stories that define our era.
+        </p>
+
+        <p>
+          When he’s not behind the lens, Caleb hosts the
+          <a href="/podcast" rel="noopener" title="Caffeinated Connections Podcast"
+            >"Caffeinated Connections"</a
+          >
+          podcast, where he talks with industry professionals about the intersection of creativity
+          and impact.
+        </p>
+
+        <div class="ss-about-buttons">
+          <div class="ss-contact-container">
+            <div class="ss-contact-options">
+              <button class="ss-about-btn ss-about-btn-secondary ss-contact-main-btn">
+                Get In Touch
+              </button>
+              <div class="ss-contact-menu" id="contactMenu">
+                <a
+                  href="/contact-us"
+                  class="ss-contact-item"
+                  aria-label="Visit the Contact Us page"
+                >
+                  <span class="ss-contact-icon" aria-hidden="true">📱</span>
+                  <span class="ss-contact-text">Contact Page</span>
+                </a>
+                <a
+                  href="https://calendly.com/wolftech029/30min"
+                  target="_blank"
+                  rel="noopener"
+                  class="ss-contact-item"
+                  aria-label="Schedule a coffee chat with Caleb"
+                >
+                  <span class="ss-contact-icon" aria-hidden="true">☕</span>
+                  <span class="ss-contact-text">Grab a Coffee</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Documents Dropdown -->
+          <div class="ss-documents-container">
+            <div class="ss-documents-options">
+              <button class="ss-about-btn ss-about-btn-secondary ss-documents-main-btn">
+                📄 Documents
+              </button>
+              <div class="ss-documents-menu" id="documentsMenu">
+                <a
+                  href="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/downloads/caleb-mccartney-resume.pdf"
+                  download="Caleb-McCartney-Resume-August-2025.pdf"
+                  class="ss-contact-item"
+                  aria-label="Download Caleb McCartney's Resume"
+                >
+                  <span class="ss-contact-icon" aria-hidden="true">📄</span>
+                  <span class="ss-contact-text">Resume</span>
+                </a>
+                <a
+                  href="#"
+                  onclick="
+                    alert('CV coming soon! Currently being updated.');
+                    return false;
+                  "
+                  class="ss-contact-item ss-contact-coming-soon"
+                  aria-label="CV currently unavailable"
+                >
+                  <span class="ss-contact-icon" aria-hidden="true">📋</span>
+                  <span class="ss-contact-text">CV (Coming Soon)</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a href="/featured" class="ss-about-btn ss-about-btn-secondary">📸 View Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="ss-reviews-section">
+    <!-- JSON-LD Structured Data for Reviews -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Caleb McCartney Photography",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "50",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Logan Spiker"
+            },
+            "reviewBody": "Caleb is great to work with, always prompt and professional. His work speaks for itself. A hard working and talented young man sure to impress.",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Ben Orr"
+            },
+            "reviewBody": "Caleb is an incredibly talented photographer. I'm always blown away by the quality of his work—so is everyone who sees it.",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <div class="ss-reviews-content">
+      <h2 class="ss-reviews-title">Client Testimonials</h2>
+
+      <div class="ss-reviews-grid">
+        <!-- LinkedIn Review -->
+        <blockquote class="ss-review-card" itemscope itemtype="https://schema.org/Review">
+          <div class="ss-review-platform">
+            <div class="ss-platform-badge ss-platform-linkedin">LinkedIn</div>
+          </div>
+          <p class="ss-review-text" itemprop="reviewBody">
+            "Caleb is great to work with, always prompt and professional. His work speaks for
+            itself. A hard working and talented young man sure to impress."
+          </p>
+          <footer>
+            <cite
+              class="ss-review-author"
+              itemprop="author"
+              itemscope
+              itemtype="https://schema.org/Person"
+            >
+              <span itemprop="name">Logan Spiker</span>
+            </cite>
+            <div class="ss-review-title">Former Argo AI, Business Owner</div>
+          </footer>
+        </blockquote>
+
+        <!-- Google Review -->
+        <blockquote class="ss-review-card" itemscope itemtype="https://schema.org/Review">
+          <div class="ss-review-platform">
+            <div class="ss-platform-badge ss-platform-google">Google</div>
+          </div>
+          <div class="ss-review-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="ss-review-text" itemprop="reviewBody">
+            "Caleb is an incredibly talented photographer. I'm always blown away by the quality of
+            his work—so is everyone who sees it."
+          </p>
+          <footer>
+            <cite
+              class="ss-review-author"
+              itemprop="author"
+              itemscope
+              itemtype="https://schema.org/Person"
+            >
+              <span itemprop="name">Ben Orr</span>
+            </cite>
+            <div class="ss-review-title">Concert Photography Client</div>
+          </footer>
+        </blockquote>
+      </div>
+
+      <!-- Review CTA -->
+      <div class="ss-reviews-cta">
+        <p class="ss-reviews-rating">⭐ 5.0 Star Rating on Google</p>
+        <a
+          href="https://maps.app.goo.gl/CKztLDxynn6mwSwS8"
+          target="_blank"
+          rel="noopener"
+          class="ss-about-btn ss-about-btn-secondary"
+        >
+          📍 View All Reviews
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Carousel Section -->
+  <div class="ss-client-showcase">
+    <h2 class="ss-client-heading">Trusted by Leading Brands</h2>
+    <h2 class="ss-client-subtitle">Collaborating with these amazing clients</h2>
+
+    <div id="ss-client-container" class="ss-client-loading">
+      <div class="ss-client-spinner"></div>
+      Loading clients...
+    </div>
+
+    <div class="ss-client-stats">
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-client-count">30+</span>
+        <div class="ss-stat-label">Happy Clients</div>
+      </div>
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-project-count">65+</span>
+        <div class="ss-stat-label">Projects</div>
+      </div>
+      <div class="ss-stat-item">
+        <span class="ss-stat-number" id="ss-years-experience">6+</span>
+        <div class="ss-stat-label">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Request a Quote Button -->
+<a href="/request-a-quote" class="mcc-floating-quote-btn"> <span>✨</span> Request a Quote </a>
+
+<!-- Version Indicator -->
+<div class="ss-version-indicator" onclick="toggleChangelog()">v2.2.0</div>
+
+<!-- Changelog Panel -->
+<div class="ss-changelog-panel" id="ss-changelog-panel">
+  <button class="ss-changelog-close" onclick="toggleChangelog()">×</button>
+  <div class="ss-changelog-header">About Widget Changelog</div>
+  <div class="ss-changelog-content">
+    <div class="ss-changelog-version">v2.2.0 — Interactive CTA & Polish</div>
+    <div class="ss-changelog-feature">
+      • Entrance Logic: Floating button now waits for the user to scroll past the hero before
+      revealing itself.
+    </div>
+    <div class="ss-changelog-feature">
+      • Micro-Interactions: Added a subtle pulse animation and smoother 3D entrance.
+    </div>
+    <div class="ss-changelog-feature">
+      • Collision Detection: Button automatically hides when nearing the footer to prevent visual
+      overlap.
+    </div>
+
+    <div class="ss-changelog-version">v2.1.0 — Conversion Focus</div>
+    <div class="ss-changelog-feature">
+      • Conversion CTA: Added high-contrast floating "Request a Quote" button for easier project
+      inquiries.
+    </div>
+
+    <div class="ss-changelog-version">v2.0.0 — 2026 Freelance & Events Revamp</div>
+    <div class="ss-changelog-feature">
+      • Brand Shift: Centered the narrative on Caleb McCartney as a premier freelancer rather than
+      an agency.
+    </div>
+    <div class="ss-changelog-feature">
+      • Niche focus: Re-optimized bio and SEO for Concert, Corporate, and Event photography.
+    </div>
+    <div class="ss-changelog-feature">
+      • Modernized Content: Removed specific dates (2025) and outdated internship mentions to
+      reflect current professional standing.
+    </div>
+    <div class="ss-changelog-feature">
+      • SEO update: Refined Schema.org data to target freelance photography keywords and services.
+    </div>
+    <div class="ss-changelog-feature">
+      • Navigation enhancement: Added direct 'Contact Page' link to the 'Get In Touch' menu.
+    </div>
+    <div class="ss-changelog-feature">
+      • True Glassmorphism: Enhanced panels with inner shadows and border gradients for premium
+      depth
+    </div>
+    <div class="ss-changelog-feature">
+      • Scroll Reveal: Sections now gracefully slide up and fade in when scrolling
+    </div>
+    <div class="ss-changelog-feature">
+      • Micro-interactions: Added metallic "glint" animation to client logos on hover and card lift
+      effects
+    </div>
+
+    <div class="ss-changelog-version">v1.5.5 — Performance & Animations</div>
+    <div class="ss-changelog-feature">
+      • Lazy Loading: Statistics now fetch/calculate only when scrolled into view (saving resources)
+    </div>
+    <div class="ss-changelog-feature">
+      • Animated Counters: Stats counts animate up from 0 for a premium feel
+    </div>
+    <div class="ss-changelog-feature">
+      • Rendering Optimization: Added `content-visibility: auto` to heavy sections for faster
+      initial load
+    </div>
+
+    <div class="ss-changelog-version">v1.5.4 — Major Update: Efficiencies & Readability</div>
+    <div class="ss-changelog-feature">
+      • Fully dynamic Client Carousel: width and speed scale automatically with client count
+    </div>
+    <div class="ss-changelog-feature">
+      • Readability upgrade: Increased bio font size (1.15rem), contrast, and line height (1.7)
+    </div>
+    <div class="ss-changelog-feature">
+      • Dynamic Statistics: Backported real-time stats logic (Manifest/Carousel/Calc layers)
+    </div>
+    <div class="ss-changelog-feature">
+      • Implemented CSS variables and added preconnect hint for github assets
+    </div>
+    <div class="ss-changelog-feature">
+      • Removed redundant top statistics section for cleaner layout
+    </div>
+
+    <div class="ss-changelog-version">v1.4.6 — Client Carousel v1.3.0 Integration</div>
+    <div class="ss-changelog-feature">
+      • Updated to Client Carousel v1.3.0 with 25 clients (up from 22)
+    </div>
+    <div class="ss-changelog-feature">
+      • Added 3 new clients: Howl at the Moon, Dream the Heavy, When We Were Dead
+    </div>
+    <div class="ss-changelog-feature">
+      • Universal white CSS filter applied to ALL client logos for brand consistency
+    </div>
+    <div class="ss-changelog-feature">
+      • Removed obsolete logo-specific classes (haven-logo-white, pup-logo-white,
+      pittsburgh-magazine-logo)
+    </div>
+    <div class="ss-changelog-feature">
+      • Updated animation timing to 55s for smoother carousel experience
+    </div>
+    <div class="ss-changelog-feature">
+      • Synchronized logo URLs with standalone carousel for consistency across site
+    </div>
+
+    <div class="ss-changelog-version">v1.4.5 — Buttons & Dropdown Refinements</div>
+    <div class="ss-changelog-feature">
+      • Rebuilt Get In Touch/Documents controls with unified glass buttons and consistent typography
+    </div>
+    <div class="ss-changelog-feature">
+      • Simplified button sizing for a minimal footprint while preserving balanced spacing
+    </div>
+    <div class="ss-changelog-feature">
+      • Aligned contact/document dropdown styling, added mutual exclusivity, and improved disabled
+      states
+    </div>
+    <div class="ss-changelog-feature">
+      • Mobile dropdowns now stack in-flow to avoid overlapping the Client Testimonials section
+    </div>
+    <div class="ss-changelog-feature">
+      • Added shared outside-click handling and extra bio spacing for reliable menu behavior
+    </div>
+
+    <div class="ss-changelog-version">v1.4.4 — Client Carousel v1.2.3 Integration</div>
+    <div class="ss-changelog-feature">
+      • Replaced client carousel logic with v1.2.3 widget code (triple-array infinite loop,
+      Fisher-Yates shuffle, error handling)
+    </div>
+    <div class="ss-changelog-feature">
+      • Pittsburgh Union Progress logo always white (branding fix)
+    </div>
+    <div class="ss-changelog-feature">
+      • Pittsburgh Magazine logo filter for visibility on dark backgrounds
+    </div>
+    <div class="ss-changelog-feature">
+      • All carousel branding and performance enhancements applied
+    </div>
+    <div class="ss-changelog-feature">
+      • Follows workspace standards for widget integration and versioning
+    </div>
+
+    <div class="ss-changelog-version">v1.4.3 — CV Download Button Added</div>
+    <div class="ss-changelog-feature">• Added CV download button next to Resume button</div>
+    <div class="ss-changelog-feature">• Points to detailed CV file when uploaded</div>
+    <div class="ss-changelog-feature">• Uses GitHub raw URL for reliable hosting</div>
+
+    <div class="ss-changelog-version">v1.4.2 — Resume Download Fix</div>
+    <div class="ss-changelog-feature">• Fixed broken resume download link</div>
+    <div class="ss-changelog-feature">• Replaced Squarespace placeholders with GitHub raw URL</div>
+    <div class="ss-changelog-feature">• Resume now downloads correctly from GitHub repository</div>
+
+    <div class="ss-changelog-version">v1.4.0 — Advanced Debugging System</div>
+    <div class="ss-changelog-feature">• Interactive debug button with real-time logo testing</div>
+    <div class="ss-changelog-feature">• System information display (URL, browser, viewport)</div>
+    <div class="ss-changelog-feature">• Debug message logging with timestamps</div>
+    <div class="ss-changelog-feature">• Professional debugging interface</div>
+
+    <div class="ss-changelog-version">v1.3.0 — GitHub Asset Integration</div>
+    <div class="ss-changelog-feature">• All client logos load directly from GitHub repository</div>
+    <div class="ss-changelog-feature">
+      • Profile photo loads from GitHub (no Squarespace upload needed)
+    </div>
+    <div class="ss-changelog-feature">• Simplified deployment process</div>
+    <div class="ss-changelog-feature">• Auto-updates when logos change in repository</div>
+
+    <div class="ss-changelog-version">v1.2.0 — Complete About Section</div>
+    <div class="ss-changelog-feature">• Combined bio, photo, reviews, and client carousel</div>
+    <div class="ss-changelog-feature">• LinkedIn and Google testimonials section</div>
+    <div class="ss-changelog-feature">• Enhanced mobile responsive design</div>
+    <div class="ss-changelog-feature">• Dark liquid glass professional aesthetic</div>
+
+    <div class="ss-changelog-version">v1.1.0 — Client Carousel Integration</div>
+    <div class="ss-changelog-feature">• Infinite scrolling showcase of 20+ client logos</div>
+    <div class="ss-changelog-feature">• Interactive hover effects and clickable logos</div>
+    <div class="ss-changelog-feature">• Statistics display (clients, projects, experience)</div>
+    <div class="ss-changelog-feature">• Smooth 25-second animation loop</div>
+
+    <div class="ss-changelog-version">v1.0.0 — Initial About Section</div>
+    <div class="ss-changelog-feature">• Professional bio with current status</div>
+    <div class="ss-changelog-feature">• Photo integration and call-to-action buttons</div>
+    <div class="ss-changelog-feature">• Squarespace Code Block optimized</div>
+    <div class="ss-changelog-feature">• Self-contained CSS with unique class names</div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    'use strict';
+
+    // Enhanced Client data v1.3.0 - 25 clients with selective white logo treatment
+    const clientsData = [
+      {
+        name: 'New York Post',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/new-york-post-logo.svg',
+        textFallback: { company: 'New York Post', tagline: 'Since 1801' },
+        website: 'https://nypost.com',
+        project: 'Photojournalist',
+      },
+      {
+        name: 'Pittsburgh Magazine',
+        logo: 'https://pittsburghmagazine.com/wp-content/themes/pittsburgh-magazine/images/logo.png',
+        textFallback: { company: 'Pittsburgh Magazine', tagline: 'City Life' },
+        website: 'https://pittsburghmagazine.com',
+        project: 'Feature Photography',
+        logoClass: 'pittsburgh-magazine-logo',
+      },
+      {
+        name: 'The Globe',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fppuglobe.com%2Fwp-content%2Fuploads%2F2024%2F11%2Fthumbnail_globeheadnew-04.png&f=1&nofb=1&ipt=2b605a69d2d38820829fff50502d65bf0256a213e5b1cc99ad2e39eca215c62c',
+        textFallback: { company: 'The Globe', tagline: 'Point Park U' },
+        website: 'https://ppuglobe.com',
+        project: 'Photo Editor',
+      },
+      {
+        name: 'Point Park University',
+        logo: 'https://www.pointpark.edu/_files/images/logo-vertical--green.svg',
+        textFallback: { company: 'Point Park University', tagline: 'Downtown Pittsburgh' },
+        website: 'https://pointpark.edu',
+        project: 'BFA Photography Student',
+      },
+      {
+        name: 'Pittsburgh Union Progress',
+        logo: 'https://i0.wp.com/www.unionprogress.com/wp-content/uploads/2022/12/cropped-pup-logo-retina.png?w=544&ssl=1',
+        textFallback: { company: 'Pittsburgh Union Progress', tagline: 'Labor News' },
+        website: 'https://pittsburghunionprogress.com',
+        project: 'Staff Photographer',
+        logoClass: 'pup-logo-white',
+      },
+      {
+        name: 'Yinzers Meet',
+        logo: 'https://static.wixstatic.com/media/38b6b6_6c6676af8cac40b987f05fbd8b0da530~mv2.png/v1/fill/w_200,h_80,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/4C6CDBFB-773F-43DA-BFEC-B2A6823FB405_PNG.png',
+        textFallback: { company: 'Yinzers Meet', tagline: 'Pittsburgh Events' },
+        website: 'https://yinzersmeet.com',
+        project: 'Event Photography',
+      },
+      {
+        name: 'Jagoff Media',
+        logo: 'https://media.licdn.com/dms/image/v2/D4E0BAQEVnuPvxTTbPg/company-logo_200_200/company-logo_200_200/0/1719252683883/jagoff_media_logo?e=2147483647&v=beta&t=Hq4_wjQFLm6eQf2tnf4pjJOxNUpFmzFO2-k1Gd7NP4Y',
+        textFallback: { company: 'Jagoff Media', tagline: 'Pittsburgh Proud' },
+        website: 'https://jagoffmedia.com',
+        project: 'Content Photography',
+      },
+      {
+        name: 'Terrible Tailgate',
+        logo: 'https://www.steelernation.com/img/Terrible%20Tailgate/ttyellow-original.jpg',
+        textFallback: { company: 'Terrible Tailgate', tagline: 'Steelers Nation' },
+        website: 'https://terribletailgate.com',
+        project: 'Sports Event Photography',
+      },
+      {
+        name: 'Next Generation News',
+        logo: 'https://cdn.prod.website-files.com/6632cef89bb9e45895dd550b/68e04082e919c60d5ac3f0f9_PMP%20Logo%202%20200%20x%20200.png',
+        textFallback: { company: 'Next Generation News', tagline: 'Digital Media' },
+        website: 'https://nextgenerationnews.com',
+        project: 'Photojournalist',
+      },
+      {
+        name: 'Ghostlight Theatre Company',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/ghostlight-theatre-company-logo.svg',
+        textFallback: { company: 'Ghostlight Theatre', tagline: 'Live Performance' },
+        website: 'https://ghostlighttheatre.com',
+        project: 'Theatre Photography',
+        logoClass: 'ghostlight-logo-white',
+      },
+      {
+        name: 'Center for Media Innovation',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pointpark.edu%2Facademics%2Fschools%2Fschoolofcommunication%2Fcenterformediainnovation%2Fmedia%2FCMI_MainLogo.png&f=1&nofb=1&ipt=4ed471b95b34cfbcabb369400a62dbf979e3fc55c8924345c664ff8b582f4214',
+        textFallback: { company: 'Center for Media Innovation', tagline: 'Point Park U' },
+        website: 'https://www.pointpark.edu/academics/rowlandhall/cmi',
+        project: 'Media Innovation Photography',
+        logoClass: 'cmi-logo-white',
+      },
+      {
+        name: 'Western PA Press Club',
+        logo: 'https://images.squarespace-cdn.com/content/v1/62a1203c15acec3a449dadbb/419c4b21-ac99-4661-bf7a-7fc341abb19e/logo+long+transparent+.png?format=500w',
+        textFallback: { company: 'Western PA Press Club', tagline: 'Professional Media' },
+        website: 'https://www.westernpapress.org',
+        project: 'Press Club Events',
+        logoClass: 'press-club-logo-white',
+      },
+      {
+        name: 'Carnegie Mellon University',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/carnegie-mellon-university-logo.svg',
+        textFallback: { company: 'Carnegie Mellon', tagline: 'Pittsburgh, PA' },
+        website: 'https://www.cmu.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'University of Pittsburgh',
+        logo: 'https://logos-world.net/wp-content/uploads/2023/09/University-of-Pittsburgh-Logo-500x281.png',
+        textFallback: { company: 'University of Pittsburgh', tagline: 'Hail to Pitt' },
+        website: 'https://www.pitt.edu',
+        project: 'University Photography',
+        logoClass: 'pitt-logo-white',
+      },
+      {
+        name: 'Butler County Community College',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/bc3-logo.svg',
+        textFallback: { company: 'BC3', tagline: 'Butler County' },
+        website: 'https://www.bc3.edu',
+        project: 'College Photography',
+        logoClass: 'bc3-logo-white',
+      },
+      {
+        name: 'Penn State Fayette',
+        logo: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Fthumbs%2F2x%2Fpennsylvania-state-university-logo.png&f=1&nofb=1&ipt=69d959415424e5d345bc761fcffd346a966b2b3e435b0d340615f5ffc252e74e',
+        textFallback: { company: 'Penn State Fayette', tagline: 'We Are Penn State' },
+        website: 'https://fayette.psu.edu',
+        project: 'Campus Photography',
+        logoClass: 'penn-state-logo-white',
+      },
+      {
+        name: 'The Watchful Shepherd',
+        logo: 'https://watchful.org/wp-content/uploads/2024/06/Watchful-Shepherd-Logo-2024.png',
+        textFallback: { company: 'The Watchful Shepherd', tagline: 'Advocacy & Justice' },
+        website: 'https://watchfulshepherd.org',
+        project: 'Advocacy Photography',
+        logoClass: 'watchful-shepherd-logo-white',
+      },
+      {
+        name: 'Voyage Visuals',
+        logo: 'https://cdn.prod.website-files.com/5e90f121241fd84dcd6daccc/5ea37d79c07d78a6bf30d2b1_Voyage_V%20(1).png',
+        textFallback: { company: 'Voyage Visuals', tagline: 'Creative Production' },
+        website: 'https://voyagevisuals.com',
+        project: 'Visual Production',
+      },
+      {
+        name: 'The Space Upstairs',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/the-space-upstairs-logo.svg',
+        textFallback: { company: 'The Space Upstairs', tagline: 'Creative Venue' },
+        website: 'https://thespaceupstairs.com',
+        project: 'Venue Photography',
+      },
+      {
+        name: 'Haven Pittsburgh',
+        logo: 'https://www.havenvenue.com/media/havenpngvirile2.png',
+        textFallback: { company: 'Haven Pittsburgh', tagline: 'Community Support' },
+        website: 'https://havenpittsburgh.org',
+        project: 'Community Support Photography',
+        logoClass: 'haven-logo-white',
+      },
+      {
+        name: 'West Hills Gazette',
+        logo: 'https://westhillsgazette.com/wp-content/uploads/2024/10/cropped-West-Hills-Gazette_20241031_100707_0000.jpeg',
+        textFallback: { company: 'West Hills Gazette', tagline: 'Local News' },
+        website: 'https://westhillsgazette.com',
+        project: 'Photojournalist',
+      },
+      {
+        name: "Capo's on Carson",
+        logo: 'https://caposoncarson.com/wp-content/uploads/2025/08/Capos_White_Text_Transparent_250x40.png',
+        textFallback: { company: "Capo's on Carson", tagline: 'Italian Cuisine' },
+        website: 'https://caposoncarson.com',
+        project: 'Restaurant Photography',
+      },
+      // NEW CLIENTS v1.3.0
+      {
+        name: 'Howl at the Moon',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/howl-at-the-moon-logo.png',
+        textFallback: { company: 'Howl at the Moon', tagline: 'Live Music & Entertainment' },
+        website: 'https://www.howlatthemoon.com',
+        project: 'Entertainment Photography',
+      },
+      {
+        name: 'Dream the Heavy',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/dream-the-heavy-logo.webp',
+        textFallback: { company: 'Dream the Heavy', tagline: 'Rock Band' },
+        website: 'https://dreamtheheavy.com',
+        project: 'Band Photography',
+      },
+      {
+        name: 'When We Were Dead Halloween Festival',
+        logo: '', // Text-only for now
+        textFallback: { company: 'When We Were Dead', tagline: 'Halloween Festival' },
+        website: '',
+        project: 'Festival Photography',
+      },
+      // NEW CLIENTS v2.0.0
+      {
+        name: 'OSH360',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/osh360-logo.png',
+        textFallback: { company: 'OSH360', tagline: 'Safety & Health' },
+        website: 'https://osh360.com',
+        project: 'Corporate Photography',
+        logoClass: 'osh360-logo-bw',
+      },
+      {
+        name: 'Indiana University of Pennsylvania',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/iup-logo.png',
+        textFallback: { company: 'IUP', tagline: 'Crimson Hawks' },
+        website: 'https://iup.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'West Virginia University',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/wvu-logo.png',
+        textFallback: { company: 'WVU', tagline: 'Mountaineers' },
+        website: 'https://wvu.edu',
+        project: 'University Photography',
+      },
+      {
+        name: 'Roxian Theatre',
+        logo: '', // Text-only
+        textFallback: { company: 'Roxian Theatre', tagline: 'Concert Venue' },
+        website: 'https://www.roxianlive.com',
+        project: 'Concert Photography',
+      },
+      {
+        name: 'Pittsburgh Plays',
+        logo: '', // Text-only
+        textFallback: { company: 'Pittsburgh Plays', tagline: 'Local Theatre' },
+        website: 'https://pittsburghplays.com',
+        project: 'Theatre Photography',
+      },
+      {
+        name: 'Covalent',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/covalent-logo.png',
+        textFallback: { company: 'Covalent', tagline: 'Creative Production' },
+        website: 'https://wearecovalent.com',
+        project: 'Creative Production',
+      },
+      {
+        name: 'Ohio State University',
+        logo: 'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/assets/images/logos/osu-logo.jpg',
+        textFallback: { company: 'OSU', tagline: 'Buckeyes' },
+        website: 'https://osu.edu',
+        project: 'University Photography',
+      },
+    ];
+
+    // Fisher-Yates shuffle algorithm for random client order
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    function createTextLogo(client) {
+      const textLogo = document.createElement('div');
+      textLogo.className = 'ss-client-text-logo';
+      textLogo.innerHTML = `
+      <span class="company-name">${client.textFallback.company}</span>
+      <span class="company-tagline">${client.textFallback.tagline}</span>
+    `;
+      return textLogo;
+    }
+
+    function handleLogoError(logoElement, client) {
+      // Replace with text-based logo on error
+      logoElement.innerHTML = '';
+      const textLogo = createTextLogo(client);
+      logoElement.appendChild(textLogo);
+    }
+
+    function createClientCarousel() {
+      const container = document.getElementById('ss-client-container');
+      if (!container) return;
+
+      // Shuffle the clients for random order each time
+      const shuffledClients = shuffleArray(clientsData);
+      // Create three copies for seamless infinite loop
+      const tripleClients = [...shuffledClients, ...shuffledClients, ...shuffledClients];
+      const carousel = document.createElement('div');
+      carousel.className = 'ss-client-carousel';
+      const track = document.createElement('ul');
+      track.className = 'ss-client-track';
+      track.setAttribute('role', 'list');
+      track.setAttribute('aria-label', 'Client logos carousel');
+
+      tripleClients.forEach((client, index) => {
+        const logoElement = document.createElement('li');
+        logoElement.className = 'ss-client-logo';
+        logoElement.setAttribute('title', `${client.name} - ${client.project}`);
+
+        if (client.logo && client.logo.trim() !== '') {
+          // Try loading image
+          const img = document.createElement('img');
+          img.alt = `${client.name} logo - ${client.project}`;
+          img.decoding = 'async';
+
+          // Optimize: Loading strategy
+          if (index < shuffledClients.length) {
+            img.loading = 'eager';
+            img.setAttribute('fetchpriority', 'high');
+          } else {
+            img.loading = 'lazy';
+          }
+
+          if (client.logoClass) {
+            img.classList.add(client.logoClass);
+          }
+
+          // Set up error handling
+          img.onerror = () => handleLogoError(logoElement, client);
+
+          // Set src and append
+          img.src = client.logo;
+          logoElement.appendChild(img);
+        } else {
+          // No logo provided, use text fallback immediately
+          handleLogoError(logoElement, client);
+        }
+
+        if (client.website) {
+          logoElement.setAttribute('role', 'button');
+          logoElement.setAttribute('aria-label', `Open ${client.name} website`);
+          logoElement.addEventListener('click', () => {
+            window.open(client.website, '_blank', 'noopener noreferrer');
+          });
+        }
+        track.appendChild(logoElement);
+      });
+      carousel.appendChild(track);
+      container.className = 'ss-client-container';
+      container.innerHTML = '';
+      container.appendChild(carousel);
+
+      // Dynamic CSS Variables for Animation
+      const clientCount = shuffledClients.length;
+      // 260px flex-basis + 20px total margin (10px * 2) = 280px per item
+      const itemWidth = 280;
+      const totalWidthPx = itemWidth * tripleClients.length;
+      const scrollEndPx = -(itemWidth * clientCount);
+      const duration = clientCount * 2.2; // 2.2 seconds per client for pacing
+
+      // Apply to the carousel wrapper (scope)
+      carousel.style.setProperty('--carousel-width', `${totalWidthPx}px`);
+      carousel.style.setProperty('--carousel-scroll-end', `${scrollEndPx}px`);
+      carousel.style.setProperty('--carousel-duration', `${duration}s`);
+
+      // Inject Organization JSON-LD structured data for SEO
+      try {
+        const uniqueClients = Array.from(new Map(clientsData.map((c) => [c.name, c])).values());
+        const orgSchema = {
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'Caleb McCartney Photography',
+          url: 'https://mcc-cal.com',
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '5.0',
+            reviewCount: '50',
+            bestRating: '5',
+          },
+          partner: uniqueClients.map((c) => ({
+            '@type': 'Organization',
+            name: c.name,
+            ...(c.website ? { url: c.website } : {}),
+          })),
+        };
+        const ld = document.createElement('script');
+        ld.type = 'application/ld+json';
+        ld.textContent = JSON.stringify(orgSchema);
+        container.parentElement.appendChild(ld);
+      } catch (e) {
+        console.warn('JSON-LD injection failed:', e);
+      }
+    }
+
+    // Optimized Initialization: Only build the carousel when it's near the viewport
+    if ('IntersectionObserver' in window) {
+      const carouselObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              createClientCarousel();
+              carouselObserver.disconnect();
+            }
+          });
+        },
+        { rootMargin: '300px 0px' },
+      ); // Load when 300px from viewport
+
+      const target = document.getElementById('ss-client-container');
+      if (target) {
+        carouselObserver.observe(target);
+      } else {
+        // Fallback if target missing
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', createClientCarousel);
+        } else {
+          createClientCarousel();
+        }
+      }
+    } else {
+      // Direct load for older browsers
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createClientCarousel);
+      } else {
+        createClientCarousel();
+      }
+    }
+  })();
+
+  // Contact menu toggle function
+  function toggleContactMenu(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    const menu = document.getElementById('contactMenu');
+    const otherMenu = document.getElementById('documentsMenu');
+
+    if (!menu) return;
+
+    const isVisible = menu.classList.contains('show');
+
+    if (isVisible) {
+      menu.classList.remove('show');
+    } else {
+      if (otherMenu && otherMenu.classList.contains('show')) {
+        otherMenu.classList.remove('show');
+      }
+      menu.classList.add('show');
+    }
+  }
+
+  // Documents menu toggle function
+  function toggleDocumentsMenu(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    const menu = document.getElementById('documentsMenu');
+    const otherMenu = document.getElementById('contactMenu');
+
+    if (!menu) return;
+
+    const isVisible = menu.classList.contains('show');
+
+    if (isVisible) {
+      menu.classList.remove('show');
+    } else {
+      if (otherMenu && otherMenu.classList.contains('show')) {
+        otherMenu.classList.remove('show');
+      }
+      menu.classList.add('show');
+    }
+  }
+
+  // Initialize touch events for mobile
+  document.addEventListener('DOMContentLoaded', function () {
+    const contactBtn = document.querySelector('.ss-contact-main-btn');
+    if (contactBtn) {
+      // Handle both click and touch events
+      contactBtn.addEventListener('click', toggleContactMenu);
+      contactBtn.addEventListener('touchend', function (event) {
+        event.preventDefault();
+        toggleContactMenu(event);
+      });
+    }
+
+    const documentsBtn = document.querySelector('.ss-documents-main-btn');
+    if (documentsBtn) {
+      // Handle both click and touch events
+      documentsBtn.addEventListener('click', toggleDocumentsMenu);
+      documentsBtn.addEventListener('touchend', function (event) {
+        event.preventDefault();
+        toggleDocumentsMenu(event);
+      });
+    }
+  });
+
+  // Close menus when clicking/touching outside
+  function closeMenuOnOutside(event, containerSelector, menuId) {
+    const container = document.querySelector(containerSelector);
+    const menu = document.getElementById(menuId);
+
+    if (container && menu && !container.contains(event.target) && menu.classList.contains('show')) {
+      menu.classList.remove('show');
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    closeMenuOnOutside(event, '.ss-contact-container', 'contactMenu');
+    closeMenuOnOutside(event, '.ss-documents-container', 'documentsMenu');
+  });
+
+  document.addEventListener('touchend', function (event) {
+    closeMenuOnOutside(event, '.ss-contact-container', 'contactMenu');
+    closeMenuOnOutside(event, '.ss-documents-container', 'documentsMenu');
+  });
+
+  // Hybrid Dynamic Statistics System (Lazy Loaded for Efficiency)
+  (function () {
+    const statsContainer = document.querySelector('.ss-client-stats');
+    if (!statsContainer) return;
+
+    const statsConfigPath =
+      'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/widgets/_content/about/complete-about-page/stats-config.json';
+
+    // Layer 3: Date-based calculation fallback
+    function calculateFallbackStats() {
+      const startYear = 2019;
+      const currentYear = new Date().getFullYear();
+      const yearsInBusiness = currentYear - startYear;
+      const avgClientsPerYear = 5;
+      const avgProjectsPerYear = 80;
+
+      return {
+        clients: Math.max(30, yearsInBusiness * avgClientsPerYear),
+        projects: Math.max(500, yearsInBusiness * avgProjectsPerYear),
+        years: yearsInBusiness,
+        source: 'calculated',
+      };
+    }
+
+    // Layer 2: Count from carousel data AND manifests
+    function getCarouselStats() {
+      try {
+        const carouselClientCount = typeof clientsData !== 'undefined' ? clientsData.length : 0;
+        const startYear = 2019;
+        const years = new Date().getFullYear() - startYear;
+
+        return {
+          clients: carouselClientCount,
+          projects: 500, // Placeholder until manifests load
+          years: years,
+          source: 'carousel',
+        };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Layer 2b: Count from portfolio manifests (async)
+    async function getManifestStats() {
+      try {
+        const manifestUrls = [
+          'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/photojournalism-manifest.json',
+          'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/concert-manifest.json',
+          'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/event-manifest.json',
+        ];
+
+        const manifests = await Promise.all(
+          manifestUrls.map((url) =>
+            fetch(url)
+              .then((r) => (r.ok ? r.json() : null))
+              .catch(() => null),
+          ),
+        );
+
+        const uniqueClients = new Set();
+        let totalProjects = 0;
+
+        manifests.forEach((manifest) => {
+          if (manifest && manifest.events) {
+            totalProjects += manifest.events.length;
+            manifest.events.forEach((event) => {
+              if (event.tags && Array.isArray(event.tags)) {
+                event.tags.forEach((tag) => uniqueClients.add(tag));
+              }
+              if (event.client) {
+                uniqueClients.add(event.client);
+              }
+            });
+          }
+        });
+
+        const startYear = 2019;
+        const years = new Date().getFullYear() - startYear;
+        const carouselCount = typeof clientsData !== 'undefined' ? clientsData.length : 0;
+        const clientCount = Math.max(uniqueClients.size, carouselCount);
+
+        return {
+          clients: clientCount,
+          projects: totalProjects,
+          years: years,
+          source: 'manifests',
+        };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Update DOM
+    function updateStats(stats) {
+      if (!stats) return;
+      const clientElement = document.getElementById('ss-client-count');
+      const projectElement = document.getElementById('ss-project-count');
+      const yearsElement = document.getElementById('ss-years-experience');
+
+      // Helper to animate numbers (simple count up)
+      const animateValue = (obj, start, end, duration) => {
+        if (!obj) return;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          obj.textContent = Math.floor(progress * (end - start) + start) + '+';
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      };
+
+      if (clientElement && stats.clients) animateValue(clientElement, 0, stats.clients, 2000);
+      if (projectElement && stats.projects) animateValue(projectElement, 0, stats.projects, 2000);
+      if (yearsElement && stats.years) yearsElement.innerText = stats.years + '+';
+    }
+
+    // Main fetch logic
+    function loadStats() {
+      // Layer 1: Config
+      fetch(statsConfigPath)
+        .then((response) => {
+          if (!response.ok) throw new Error('Config not found');
+          return response.json();
+        })
+        .then((config) => {
+          const years = new Date().getFullYear() - config.startYear;
+          updateStats({
+            clients: config.clients,
+            projects: config.projects,
+            years: years,
+            source: 'config',
+          });
+        })
+        .catch(async () => {
+          // Layer 2b
+          const manifestStats = await getManifestStats();
+          if (manifestStats && manifestStats.projects > 0) {
+            updateStats(manifestStats);
+          } else {
+            // Layer 2a/3
+            const carouselStats = getCarouselStats();
+            const fallbackStats = calculateFallbackStats();
+            updateStats(carouselStats || fallbackStats);
+          }
+        });
+    }
+
+    // Only load when visible
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              loadStats();
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      observer.observe(statsContainer);
+    } else {
+      // Fallback for very old browsers
+      loadStats();
+    }
+  })();
+
+  // Scroll Reveal Observer
+  (function () {
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              revealObserver.unobserve(entry.target); // Trigger once
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -50px 0px' },
+      );
+
+      // Observe major sections
+      const sections = document.querySelectorAll(
+        '.ss-about-bio, .ss-reviews-section, .ss-client-showcase',
+      );
+      sections.forEach((sec) => {
+        sec.classList.add('ss-reveal');
+        revealObserver.observe(sec);
+      });
+
+      // Observe individual cards if needed (optional)
+      const reviews = document.querySelectorAll('.ss-review-card');
+      reviews.forEach((card, index) => {
+        card.classList.add('ss-reveal');
+        // Stagger delay based on index
+        if (index % 2 === 1) card.classList.add('ss-reveal-delay-1');
+        revealObserver.observe(card);
+      });
+    } else {
+      // Fallback for no observer support
+      const sections = document.querySelectorAll(
+        '.ss-about-bio, .ss-reviews-section, .ss-client-showcase',
+      );
+      sections.forEach((sec) => sec.classList.add('active'));
+    }
+  })();
+
+  // Floating CTA Interactive Logic
+  (function () {
+    const cta = document.querySelector('.mcc-floating-quote-btn');
+    if (!cta) return;
+
+    let pulseTimer = null;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 1. Entrance Logic: Show after 400px scroll
+      if (scrollY > 400) {
+        cta.classList.add('visible');
+      } else {
+        cta.classList.remove('visible');
+      }
+
+      // 2. Pulse Logic: Start pulsing after being visible for 2 seconds
+      if (cta.classList.contains('visible') && !cta.classList.contains('pulse')) {
+        if (!pulseTimer) {
+          pulseTimer = setTimeout(() => {
+            cta.classList.add('pulse');
+          }, 2000);
+        }
+      } else if (!cta.classList.contains('visible')) {
+        clearTimeout(pulseTimer);
+        pulseTimer = null;
+        cta.classList.remove('pulse');
+      }
+
+      // 3. Collision Logic: Hide if within 200px of footer
+      const buffer = 200;
+      if (scrollY + windowHeight > documentHeight - buffer) {
+        cta.style.opacity = '0';
+        cta.style.pointerEvents = 'none';
+      } else if (cta.classList.contains('visible')) {
+        cta.style.opacity = '1';
+        cta.style.pointerEvents = 'auto';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
+  })();
+</script>
+
+<!-- End of Squarespace Code Block -->

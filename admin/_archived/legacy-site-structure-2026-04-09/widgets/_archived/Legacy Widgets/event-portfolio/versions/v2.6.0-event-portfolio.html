@@ -1,0 +1,490 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>McCal Media - Event Portfolio v2.6.0</title>
+<style>:root{--fg:#0e0f10;--bg:#fff;--line:#e7e7e7;--muted:#6b7280;--accent:#4d79ff;--demo:#00d4aa}
+@media (prefers-color-scheme:dark){:root{--fg:#f3f4f6;--bg:#0b0c0f;--line:#22252a;--muted:#a3aab7;--accent:#7aa0ff}}
+body{background:var(--bg);color:var(--fg);margin:0;font:400 14px/1.4 ui-sans-serif,system-ui}
+.events-portfolio{max-width:1200px;margin:48px auto;padding:0 16px 96px;text-align:center}
+.events-heading{font:800 28px/1.2 ui-sans-serif,system-ui;margin:0 0 8px}
+.events-sub{margin:0 0 18px;color:var(--muted);font:400 15px/1.45 ui-sans-serif,system-ui}
+
+/* Enhanced version indicator integrated in heading */
+.version-indicator {
+  display: inline-block;
+  margin-left: 12px;
+  font: 600 14px/1.2 ui-sans-serif,system-ui;
+  color: rgba(128,128,128,.7);
+  cursor: pointer;
+  transition: all .3s ease;
+  background: rgba(0,0,0,.08);
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(128,128,128,.2);
+  vertical-align: baseline;
+}
+.version-indicator:hover {
+  color: var(--accent);
+  background: rgba(77,121,255,.12);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px}
+.filter-btn{border:1px solid var(--line);background:transparent;color:var(--fg);padding:8px 12px;border-radius:999px;font:600 12px ui-sans-serif,system-ui;cursor:pointer;opacity:.85;transition:background .2s,border-color .2s,opacity .2s}
+.filter-btn[aria-pressed="true"],.filter-btn:hover{opacity:1;border-color:var(--fg)}
+.loading{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 0;color:var(--muted)}
+.spinner{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.grid{column-width:300px;column-gap:16px;text-align:left;opacity:0;transition:opacity .3s;margin-bottom:32px}
+.grid.loaded{opacity:1}
+@media (max-width:960px){.grid{column-width:260px}}
+@media (max-width:680px){.grid{column-width:100%}}
+.card{position:relative;display:inline-block;width:100%;margin:0 0 16px;background:#0b0c0f;border:none;border-radius:12px;overflow:hidden;cursor:pointer;break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;box-sizing:border-box;opacity:0;transform:translateY(12px);transition:all .25s}
+.card.loaded{opacity:1;transform:translateY(0)}
+.card img{width:100%;height:auto;display:block;object-fit:contain}
+.card.demo-fallback{background:linear-gradient(135deg,rgba(10,10,10,0.95),rgba(200,200,200,0.6));color:#fff;display:flex;align-items:center;justify-content:center;font:700 14px/1.4 ui-sans-serif,system-ui;padding:40px;text-align:center;min-height:clamp(180px,30vw,280px)}
+.info{position:absolute;inset:auto 0 0 0;padding:10px 12px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.7));color:#fff}
+.title{margin:0;font:800 14px/1.2 ui-sans-serif,system-ui}
+.meta{margin:4px 0 0;font:600 11px/1.2 ui-sans-serif,system-ui;opacity:.9}
+.badge{position:absolute;top:8px;left:8px;font:700 10px ui-sans-serif,system-ui;color:#fff;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);padding:3px 6px;border-radius:10px}
+
+/* Enhanced Lightbox with fixed image stretching and hidden scrollbars */
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.9);z-index:2147483647 !important;padding:max(20px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
+.lightbox.is-open{display:flex}
+.lb-dialog{position:relative;max-width:94vw;max-height:92vh;overflow:auto;margin:12px;overscroll-behavior:contain}
+
+/* Hidden scrollbars for immersive experience */
+.lb-dialog{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.lb-dialog::-webkit-scrollbar{
+  display: none;
+}
+
+.lb-gallery{
+  display:flex;flex-direction:column;gap:16px;overflow:auto;
+  -ms-overflow-style: none;              /* IE/Edge */
+  scrollbar-width: none;                 /* Firefox */
+}
+.lb-gallery::-webkit-scrollbar{
+  display: none;                         /* Chrome/Safari */
+}
+
+/* Fixed image stretching with proper aspect ratio preservation */
+.lb-gallery img{
+  max-width:92vw;max-height:80vh;margin:0 auto;
+  object-fit: contain;                   /* Prevent stretching */
+  display: block;                        /* Proper centering */
+  border-radius:10px;
+}
+
+.lb-title{font:800 18px/1.25 ui-sans-serif,system-ui;margin:0 0 6px}
+.lb-meta{font:600 12px/1.2 ui-sans-serif,system-ui;opacity:.9;margin:0 0 8px}
+.lb-desc{font:400 13px/1.4 ui-sans-serif,system-ui;opacity:.95;margin:0}
+
+/* Enhanced close button with fixed positioning */
+.lb-close{
+  position:fixed;
+  top:max(24px,env(safe-area-inset-top));
+  right:max(24px,env(safe-area-inset-right));
+  width:44px;height:44px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.4);
+  background:rgba(0,0,0,.7);color:#fff;
+  font:800 18px ui-sans-serif,system-ui;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease;z-index:2147483648;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.lb-close:hover{
+  background:rgba(0,0,0,.85);
+  border-color:rgba(255,255,255,.6);
+  transform:scale(1.05);
+}
+
+/* Enhanced navigation hiding for immersive experience */
+html.lb-open .events-portfolio,
+html.lb-open .version,
+html.lb-open .refresh,
+html.lb-open .dbg-toggle,
+html.lb-open .dbg,
+html.lb-open #cl{
+  pointer-events:none;
+}
+html.lb-open .lightbox,
+html.lb-open .lightbox *{
+  pointer-events:auto;
+}
+
+/* Comprehensive navigation hiding */
+html.lb-open header,
+html.lb-open .Header,
+html.lb-open [id*="Header"],
+html.lb-open .site-header,
+html.lb-open .sqs-announcement-bar,
+html.lb-open nav,
+html.lb-open .nav,
+html.lb-open .navbar,
+html.lb-open .navigation,
+html.lb-open .site-nav,
+html.lb-open .main-nav,
+html.lb-open .top-nav,
+html.lb-open [class*="nav"],
+html.lb-open [id*="nav"],
+html.lb-open [class*="menu"],
+html.lb-open [id*="menu"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.version{position:fixed;bottom:max(8px,env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right));font:600 10px ui-sans-serif,system-ui;color:var(--muted);cursor:pointer}
+.refresh{position:fixed;bottom:max(8px,env(safe-area-inset-bottom));right:calc(max(60px,env(safe-area-inset-right))+0px);font:600 10px ui-sans-serif,system-ui;color:var(--muted)}
+
+/* Enhanced Debug Toggle */
+.dbg-toggle{
+  position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:50%;
+  transform:translateX(-50%);font:700 11px ui-sans-serif,system-ui;
+  color:var(--fg);border:1px solid var(--line);background:var(--bg);
+  border-radius:999px;padding:8px 12px;cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+  transition: all 0.3s ease;
+}
+.dbg-toggle:hover{
+  background: rgba(0,0,0,0.95);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  opacity: 0.9;
+}
+
+/* Enhanced debug panel */
+.dbg{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:10000;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.dbg.is-open{display:flex}
+.dbg-panel{position:relative;width:min(680px,92vw);background:var(--bg);color:var(--fg);border:none;border-radius:12px;padding:16px 16px 20px;margin:8px;box-shadow:0 12px 40px rgba(0,0,0,.28)}
+.dbg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dbg-row{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px}
+
+/* Enhanced debug actions */
+.dbg-actions{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(90px, 1fr));
+  gap:12px;margin-top:12px;
+}
+.dbg-btn{
+  border:1px solid var(--line);background:transparent;color:var(--fg);
+  border-radius:8px;padding:8px;font:700 11px ui-sans-serif,system-ui;
+  cursor:pointer;transition: background 0.2s ease;
+}
+.dbg-btn:hover{
+  background: rgba(0,0,0,0.05);
+}
+
+.dbg-src{margin-top:8px;font:600 10px/1.35 ui-sans-serif,system-ui;color:var(--muted);white-space:pre-wrap;word-break:break-word;border:1px solid var(--line);border-radius:8px;padding:8px;max-height:200px;overflow:auto}
+.dbg-close{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-weight:800;cursor:pointer}
+
+/* Changelog Modal Styles */
+.changelog-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+.changelog-modal.active {
+  display: flex;
+}
+.changelog-content {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 70vh;
+  overflow-y: auto;
+  position: relative;
+}
+.changelog-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.changelog-title {
+  margin: 0;
+  color: var(--accent);
+  font: 700 18px/1.2 ui-sans-serif, system-ui;
+}
+.changelog-close {
+  background: none;
+  border: none;
+  color: var(--fg);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.changelog-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.changelog-body {
+  padding: 20px;
+  font: 400 14px/1.5 ui-sans-serif, system-ui;
+  color: var(--fg);
+}
+.changelog-version {
+  margin: 0 0 16px 0;
+  color: var(--accent);
+  font: 600 16px/1.3 ui-sans-serif, system-ui;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+.changelog-items {
+  margin: 12px 0;
+  padding-left: 0;
+  list-style: none;
+}
+.changelog-items li {
+  margin: 8px 0;
+  padding-left: 16px;
+  position: relative;
+}
+.changelog-items li:before {
+  content: '•';
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}
+
+/* Hide debug elements on mobile */
+@media (max-width: 768px) {
+  .dbg-toggle,
+  .dbg {
+    display: none;
+  }
+}
+
+/* Global scrollbar hiding for immersive experience */
+html,body,.events-portfolio,.grid{-ms-overflow-style:none;scrollbar-width:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar,.events-portfolio::-webkit-scrollbar,.grid::-webkit-scrollbar{width:0;height:0}
+</style></head>
+<body>
+<main class="events-portfolio" id="eventsPf" data-events="all" data-manifest="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Events/events-manifest.json">
+  <h2 class="events-heading">Event Portfolio <span class="version-indicator" onclick="showChangelog()" title="View changelog">v2.6.0</span></h2>
+  <div class="filters" role="tablist" aria-label="Event categories">
+    <button type="button" class="filter-btn" data-filter="*" aria-pressed="true" role="tab">All</button>
+    <button type="button" class="filter-btn" data-filter="Corporate" role="tab">Corporate</button>
+    <button type="button" class="filter-btn" data-filter="Celebration" role="tab">Celebration</button>
+    <button type="button" class="filter-btn" data-filter="Featured" role="tab">Featured</button>
+  </div>
+  <div class="loading" id="loading"><div class="spinner" aria-hidden="true"></div><div id="loadingMsg">Loading events...</div><div id="loadingErr" style="display:none"></div></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="lightbox" id="lightbox" aria-hidden="true"><div class="lb-dialog" role="dialog" aria-modal="true" aria-labelledby="lbTitle" tabindex="-1"><button class="lb-close" type="button" aria-label="Close">&times;</button><div class="lb-gallery" id="lbGallery"></div><div class="lb-caption"><h3 class="lb-title" id="lbTitle"></h3><p class="lb-meta" id="lbMeta"></p><p class="lb-desc" id="lbDesc"></p></div></div></div>
+
+<div class="refresh" id="refresh">Next refresh: --</div>
+<button class="dbg-toggle" id="dbgToggle" type="button" title="Open debug">🔍 Debug</button>
+
+<!-- Enhanced debug panel -->
+<div class="dbg" id="dbg" aria-hidden="true"><div class="dbg-panel" role="dialog" aria-modal="true" aria-labelledby="dbgTitle"><button class="dbg-close" type="button" aria-label="Close">&times;</button><h4 id="dbgTitle">📅 Event Debug v2.6.0</h4><div class="dbg-grid"><div class="dbg-row"><div>Status</div><div id="dbgStatus">Ready</div></div><div class="dbg-row"><div>Load Time</div><div><span id="dbgLoad">--</span> ms</div></div><div class="dbg-row"><div>Events</div><div id="dbgEvents">--</div></div><div class="dbg-row"><div>Images</div><div id="dbgImages">--</div></div><div class="dbg-row"><div>API Calls</div><div id="dbgApiCalls">--</div></div><div class="dbg-row"><div>Last Refresh</div><div id="dbgLastRefresh">--</div></div><div class="dbg-row"><div>Generated</div><div id="dbgGenerated">--</div></div><div class="dbg-row"><div>Cache Bust</div><div id="dbgBust">--</div></div></div><div class="dbg-actions"><button class="dbg-btn" id="dbgForce">Force</button><button class="dbg-btn" id="dbgBust">Force + Bust</button><button class="dbg-btn" id="dbgClear">Clear Cache</button><button class="dbg-btn" id="dbgLogs">Logs: <span id="dbgLogsState">Off</span></button><button class="dbg-btn" id="dbgTests">Run Tests</button></div><div class="dbg-src" id="dbgSrc"></div></div></div>
+
+<!-- Changelog Modal -->
+<div class="changelog-modal" id="changelogModal">
+  <div class="changelog-content">
+    <div class="changelog-header">
+      <h3 class="changelog-title">📅 Event Widget Changelog</h3>
+      <button class="changelog-close" onclick="hideChangelog()">&times;</button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v2.6.0 - Enhanced UX Patterns (Current)</div>
+      <ul class="changelog-items">
+        <li>Fixed lightbox image stretching with object-fit: contain and proper centering</li>
+        <li>Hidden scrollbars in lightbox gallery for immersive viewing experience</li>
+        <li>Enhanced navigation hiding with comprehensive selectors during lightbox</li>
+        <li>Improved close button with fixed positioning and better accessibility</li>
+        <li>Version indicator integrated into heading with enhanced styling</li>
+        <li>Comprehensive debug panel with detailed metrics and controls</li>
+        <li>All v2.5.6 optimizations retained (caching, auto-refresh, filters)</li>
+      </ul>
+      
+      <div class="changelog-version">v2.5.6 - Streamlined Navigation</div>
+      <ul class="changelog-items">
+        <li>Removed "On-Location", "Published", and "Conference" filter tabs for streamlined navigation</li>
+        <li>Moved "Dance For A Cause" from Corporate to Celebration category</li>
+        <li>Enhanced filter organization and user experience</li>
+      </ul>
+      
+      <div class="changelog-version">v2.5.5 - Enhanced Close Button</div>
+      <ul class="changelog-items">
+        <li>Optimized lightbox close button positioning (fixed to viewport, above headers)</li>
+        <li>Removed card borders for cleaner appearance</li>
+        <li>Enhanced close button with backdrop blur effects</li>
+      </ul>
+      
+      <div class="changelog-version">v2.5.4 - Cache Optimization</div>
+      <ul class="changelog-items">
+        <li>Added explicit bust parameter for force refresh</li>
+        <li>Improved cache invalidation with generated date awareness</li>
+        <li>Debug panel Force + Bust button for comprehensive cache control</li>
+      </ul>
+      
+      <div class="changelog-version">v2.5 - Major Enhancements</div>
+      <ul class="changelog-items">
+        <li>Featured-first ordering with smart shuffle algorithm</li>
+        <li>Enhanced gradient fallback for missing images</li>
+        <li>Hidden scrollbars for immersive viewing experience</li>
+        <li>Resilient manifest loader with timeout and cache management</li>
+      </ul>
+      
+      <div class="changelog-version">v2.0 - Smart Sync System</div>
+      <ul class="changelog-items">
+        <li>Smart Sync (10m cache, 15m auto-refresh) implementation</li>
+        <li>Event Ops Console for comprehensive debugging</li>
+        <li>Performance monitoring and error tracking</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>/* Event Portfolio v2.6.0 - Enhanced UX */
+window.__EP_VERSION='2.6.0';window.__EP_BUST=0;const LOG_PREFIX='[Events v2.6.0]';window.DEBUG=false;var BASE_CACHE_KEY='events-manifest-cache-v2_6_0';var CACHE_KEY=BASE_CACHE_KEY;var CACHE_MS=6e5,REFRESH_MS=9e5;var manifestGenerated='';
+
+// Enhanced logging system
+function LOG(){if(!window.DEBUG)return;try{console.log.apply(console,[LOG_PREFIX].concat([].slice.call(arguments)))}catch(e){}}
+function WARN(){if(!window.DEBUG)return;try{console.warn.apply(console,[LOG_PREFIX,'[!]'].concat([].slice.call(arguments)))}catch(e){}}
+function ERR(){try{if(window.DEBUG){console.error.apply(console,[LOG_PREFIX,'[x]'].concat([].slice.call(arguments)))}else{console.warn.apply(console,[LOG_PREFIX,'non-fatal'].concat([].slice.call(arguments)))}}catch(e){}}
+
+window.addEventListener('unhandledrejection',e=>{ERR('unhandledrejection',e&&e.reason);e.preventDefault()});
+window.addEventListener('error',e=>{if(String(e&&e.message).trim()==='[x]'){e.preventDefault()}},true);
+
+const $=s=>document.querySelector(s), $$=s=>Array.prototype.slice.call(document.querySelectorAll(s));
+function setText(el,v){var n=typeof el==='string'?$(el):el;if(n) n.textContent=v}
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function ts(s){if(!s)return 0;let d=new Date(s);if(!isNaN(d))return d.getTime();let t=new Date(String(s)+' 1');return isNaN(t)?0:t.getTime()}
+function order(events){let list=events.slice();list.forEach(ev=>{ev._ts=ts(ev.dateDisplay);if(Array.isArray(ev.images))shuffle(ev.images)});let sorted=list.slice().sort((a,b)=>(b._ts||0)-(a._ts||0));let top=Math.min(12,sorted.length);sorted.slice(0,top).forEach(ev=>ev.featured=true);let others=sorted.slice(top);shuffle(others);return sorted.slice(0,top).concat(others)}
+
+var RAW='https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/', PF=document.getElementById('eventsPf');
+var MANIFEST_BASE=(PF&&PF.dataset.manifest&&PF.dataset.manifest.trim())||(RAW+'src/images/Portfolios/Events/events-manifest.json');
+
+function manifestUrl(){return MANIFEST_BASE+(window.__EP_BUST?((MANIFEST_BASE.indexOf('?')>-1?'&':'?')+'b='+window.__EP_BUST):'')}
+function toUrl(p){if(!p)return''; if(/^https?:\/\//i.test(p)||/^data:/i.test(p))return p; let s=String(p).replace(/^\.\/+/,'').replace(/^\/+/,''); if(s.indexOf('src/images/Portfolios/Events/')===0)return RAW+s;if(s.indexOf('images/Portfolios/Events/')===0)return RAW+'src/'+s; return RAW+'src/images/Portfolios/Events/'+s}
+
+// Enhanced cache management with generation-based keys
+function cacheKey() {
+  return CACHE_KEY + (manifestGenerated ? ('::' + manifestGenerated) : '');
+}
+
+function getCache(){try{let s=localStorage.getItem(cacheKey()); if(!s)return null; let d=JSON.parse(s),age=Date.now()-d.t; if(age<CACHE_MS)return d.m}catch(e){} return null}
+function setCache(m){try{localStorage.setItem(cacheKey(),JSON.stringify({m:m,t:Date.now()}))}catch(e){} }
+function clearCache(){try{Object.keys(localStorage).filter(k => k.startsWith(CACHE_KEY)).forEach(k => localStorage.removeItem(k))}catch(e){} }
+
+function withTimeout(run,ms){let ctrl=(typeof AbortController!=='undefined')?new AbortController():null; let t=setTimeout(()=>{if(ctrl)ctrl.abort()},ms); return Promise.race([run(ctrl?ctrl.signal:undefined),new Promise((_,rej)=>setTimeout(()=>rej(new Error('Request timed out after '+ms+'ms')),ms+10))]).finally(()=>clearTimeout(t))}
+
+function norm(j){let ev=[]; if(Array.isArray(j))ev=j; else if(j&&Array.isArray(j.events))ev=j.events; else if(j&&j.events&&typeof j.events==='object')ev=Object.values(j.events); ev=(ev||[]).filter(Boolean).map(e=>{let imgs=Array.isArray(e.images)?e.images.slice():[]; imgs=imgs.map(im=>{if(typeof im==='string')return{path:im}; if(im&&(im.path||im.url))return{path:im.path||im.url,srcset:im.srcset,sizes:im.sizes}; return null}).filter(Boolean); return {eventName:e.eventName||e.name||'Event',category:e.category||'Event',dateDisplay:e.dateDisplay||e.date||'',images:imgs,totalImages:e.totalImages||imgs.length}}); return {version:(j&&j.version)||window.__EP_VERSION,generated:(j&&j.generated)||'',events:ev}}
+
+function readEmb(){try{let el=document.getElementById('manifest-embedded'); if(!el)return null; let txt=el.textContent||el.innerText||''; if(!txt.trim())return null; return norm(JSON.parse(txt))}catch(e){return null}}
+
+async function fetchManifest(){let c=[manifestUrl(),'src/images/Portfolios/Events/events-manifest.json'],last=null; for(let i=0;i<c.length;i++){try{let url=c[i];let data=await withTimeout(sig=>fetch(url,{cache:'no-store',signal:sig}),8000).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status+': '+(r.statusText||''));return r.text()}).then(t=>{try{return norm(JSON.parse(t))}catch(e){throw new Error('Parse error: '+e.message)}}); return data}catch(err){last=err}} let emb=readEmb(); if(emb) return emb; throw last||new Error('Manifest fetch failed')}
+
+// Enhanced metrics tracking
+var metrics={start:performance.now(),api:0,events:0,images:0,last:'Never'};
+
+function upd(){
+  setText('#dbgLoad',Math.round(performance.now()-metrics.start));
+  setText('#dbgEvents',metrics.events);
+  setText('#dbgImages',metrics.images);
+  setText('#dbgApiCalls',metrics.api);
+  setText('#dbgLastRefresh',metrics.last);
+  setText('#dbgGenerated',manifestGenerated||'--');
+  setText('#dbgBust',window.__EP_BUST||'--');
+}
+
+// Changelog modal functions
+function showChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function hideChangelog() {
+  const modal = document.getElementById('changelogModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+window.showChangelog = showChangelog;
+window.hideChangelog = hideChangelog;
+
+// Close changelog on background click
+document.addEventListener('click', e => {
+  if (e.target && e.target.id === 'changelogModal') {
+    hideChangelog();
+  }
+});
+
+// Close changelog on Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('changelogModal');
+    if (modal && modal.classList.contains('active')) {
+      hideChangelog();
+    }
+    // Also handle lightbox and debug close
+    if (document.documentElement.classList.contains('lb-open')) {
+      closeLB();
+    }
+    toggleDbg(false);
+  }
+});
+
+function buildCard(ev){let a=document.createElement('article'); a.className='card'; a.tabIndex=0; a.setAttribute('data-category',ev.category||'Event'); a.setAttribute('data-featured',ev.featured?'true':'false'); if(ev.demoFallback){a.classList.add('demo-fallback'); a.textContent='Coming Soon'; return a} let img=document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=(ev.eventName||'Event')+' photo'; let info=document.createElement('div'); info.className='info'; info.innerHTML='<h3 class="title">'+(ev.eventName||'Event')+'</h3><p class="meta">'+(ev.dateDisplay||'')+' * '+(ev.category||'Event')+'</p>'; let cnt=ev.totalImages||(ev.images?ev.images.length:0); if(cnt>1){let b=document.createElement('div'); b.className='badge'; b.textContent=cnt+' photos'; a.appendChild(b)} a.appendChild(img); a.appendChild(info); let open=()=>openLB(ev); a.addEventListener('click',open); a.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();open()}}); let first=(ev.images&&ev.images[0])||null; if(first&&(first.path||first.srcset)){ let url=first.path?toUrl(first.path):''; if(first.srcset){let s=''; if(typeof first.srcset==='string') s=first.srcset; else if(Array.isArray(first.srcset)){ s=first.srcset.map(c=>{if(!c)return''; let cp=c.path?toUrl(c.path):(c.url||''); let d=c.d||c.descriptor||(c.w?(c.w+'w'):(c.x?(c.x+'x'):'')); return (cp&&d)?(cp+' '+d):''}).filter(Boolean).join(', ')} if(s) img.setAttribute('srcset',s); img.setAttribute('sizes',first.sizes||'(max-width: 680px) 100vw, 300px')} img.onload=()=>a.classList.add('loaded'); img.onerror=()=>{try{img.remove(); let inf=a.querySelector('.info'); if(inf) inf.remove(); a.classList.add('demo-fallback'); a.textContent='Coming Soon'}catch(e){} a.classList.add('loaded')}; if(url) img.src=url;} else{try{img.remove(); let inf2=a.querySelector('.info'); if(inf2) inf2.remove(); a.classList.add('demo-fallback'); a.textContent='Coming Soon'}catch(e){} a.classList.add('loaded')} return a}
+
+function openLB(ev){let lb=$('#lightbox'),gal=$('#lbGallery'); if(!lb||!gal)return; gal.innerHTML=''; (ev.images||[]).forEach((it,i)=>{let im=new Image(); im.loading='lazy'; im.alt=(ev.eventName||'Event')+' - '+(i+1); im.src=toUrl(it.path); gal.appendChild(im)}); setText('#lbTitle',ev.eventName||'Event'); let c=ev.totalImages||(ev.images?ev.images.length:0); setText('#lbMeta',(ev.dateDisplay||'')+' * '+(ev.category||'Event')+' * '+c+' images'); let d=(ev.images&&ev.images[0]&&ev.images[0].description)||''; let desc=$('#lbDesc'); if(d){desc.style.display='block';desc.textContent=d}else{desc.style.display='none'} lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false'); document.documentElement.classList.add('lb-open'); document.body.style.overflow='hidden'}
+
+function closeLB(){let lb=$('#lightbox'); if(lb){lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true'); document.documentElement.classList.remove('lb-open'); document.body.style.overflow=''}}
+
+window.closeLB = closeLB;
+
+document.addEventListener('click',e=>{if(e.target&&(e.target.classList&&e.target.classList.contains('lb-close')||e.target.id==='lightbox'))closeLB()});
+
+function applyFilter(val){$$('.card').forEach(c=>{let show=(val==='*')||(val==='Featured'?c.getAttribute('data-featured')==='true':c.getAttribute('data-category')===val); c.style.display=show?'inline-block':'none'})}
+
+async function build(force){let load=$('#loading'),grid=$('#grid'); load.style.display='flex'; grid.style.display='none'; setText('#loadingErr',''); $('#loadingErr').style.display='none'; metrics.start=performance.now(); try{if(force)window.__EP_BUST=Date.now(); let cached=!force&&getCache(); let data=cached||(metrics.api++,await fetchManifest()); if(data){ if(data.generated){manifestGenerated = data.generated; CACHE_KEY=BASE_CACHE_KEY+'::'+data.generated; if(!cached){ /* re-evaluate cache with generated-scoped key */ setCache(data)} }
+ else setCache(data);} let events=(data&&Array.isArray(data.events))?data.events:[]; if(!events.length) throw new Error('No events in manifest'); let ordered=order(events); metrics.events=ordered.length; metrics.images=ordered.reduce((s,e)=>s+(e.totalImages||(e.images?e.images.length:0)),0); metrics.last=new Date().toLocaleTimeString(); grid.innerHTML=''; let frag=document.createDocumentFragment(); ordered.forEach(ev=>frag.appendChild(buildCard(ev))); grid.appendChild(frag); setTimeout(()=>{load.style.display='none'; grid.style.display='block'; grid.classList.add('loaded'); upd(); setText('#dbgStatus','OK ('+(data.generated||'')+')')},150)}catch(err){setText('#loadingErr',String(err.message||err)); $('#loadingErr').style.display='block'; let fb={events:[{eventName:'Coming Soon',category:'Corporate',demoFallback:true,images:[]}]}; grid.innerHTML=''; grid.appendChild(buildCard(fb.events[0])); load.style.display='none'; grid.style.display='block'; grid.classList.add('loaded'); upd(); setText('#dbgStatus','Error')}}
+
+function startCountdown(){let el=$('#refresh'),left=REFRESH_MS;(function tick(){let m=Math.floor(left/6e4),s=Math.floor((left%6e4)/1e3); if(el) el.textContent='Next refresh: '+m+':'+String(s).padStart(2,'0'); left-=1e3; if(left>=0) setTimeout(tick,1e3)})()}
+
+function schedule(){setTimeout(()=>{build(true); startCountdown(); schedule()},REFRESH_MS)}
+
+function toggleDbg(force){let w=$('#dbg'); if(!w)return; let open=typeof force==='boolean'?force:!w.classList.contains('is-open'); if(open) hideChangelog(); w.classList.toggle('is-open',open); w.setAttribute('aria-hidden',String(!open)); document.body.style.overflow=open?'hidden':''}
+
+$('#dbgToggle')&&$('#dbgToggle').addEventListener('click',()=>toggleDbg());
+
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&(e.key==='d'||e.key==='D')){e.preventDefault();toggleDbg()}});
+
+// Enhanced debug controls
+$('#dbgClear')&&$('#dbgClear').addEventListener('click',()=>{clearCache();build(true)});
+$('#dbgForce')&&$('#dbgForce').addEventListener('click',()=>build(true));
+$('#dbgBust')&&$('#dbgBust').addEventListener('click',()=>{clearCache();window.__EP_BUST=Date.now();build(true)});
+$('#dbgLogs')&&$('#dbgLogs').addEventListener('click',()=>{window.DEBUG=!window.DEBUG; setText('#dbgLogsState',window.DEBUG?'On':'Off')});
+$('#dbgTests')&&$('#dbgTests').addEventListener('click',()=>RUN_TESTS&&RUN_TESTS());
+
+document.addEventListener('click',e=>{if(e.target&&(e.target.id==='dbg'||(e.target.classList&&e.target.classList.contains('dbg-close'))))toggleDbg(false)});
+
+async function RUN_TESTS(){let pass=0,fail=0;const t=(n,c)=>{c?pass++:fail++}; let node=buildCard({eventName:'Test',category:'Corporate',dateDisplay:'Jan 1',images:[{path:"data:image/gif;base64,R0lGODlhAQABAAAAACw="}]}); t('card el',node&&node.nodeType===1); let g=$('#grid'); g.appendChild(buildCard({eventName:'NoImg',category:'Corporate',images:[]})); t('no image -> fallback',g.lastChild.classList.contains('demo-fallback')); applyFilter('Corporate'); t('filter applied',true); LOG('tests',{pass,fail}); setText('#dbgSrc',(document.getElementById('dbgSrc').textContent||'')+'\nTests: '+pass+' pass / '+fail+' fail'); return {pass,fail}}
+
+(async function(){setText('#dbgSrc','Manifest: '+manifestUrl()); await build(false); startCountdown(); schedule(); let btns=$$('.filter-btn'); btns.forEach(btn=>btn.addEventListener('click',()=>{btns.forEach(b=>b.setAttribute('aria-pressed','false')); btn.setAttribute('aria-pressed','true'); applyFilter(btn.getAttribute('data-filter')||'*')})); let featuredBtn=document.querySelector('.filter-btn[data-filter="Featured"]'); if(featuredBtn){btns.forEach(b=>b.setAttribute('aria-pressed','false')); featuredBtn.setAttribute('aria-pressed','true'); applyFilter('Featured')}})();
+</script>
+<noscript><style>.events-portfolio{max-width:760px}.grid{opacity:1}.loading{display:none}</style>JavaScript is disabled. The event portfolio requires JavaScript to load the manifest.</noscript>
+</body></html>

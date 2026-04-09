@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Quote Request - Admin Notification</title>
+    <style>
+      body,
+      p,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      table {
+        border-collapse: collapse !important;
+        width: 100%;
+      }
+      body {
+        background-color: #050506;
+        font-family:
+          'Inter',
+          -apple-system,
+          sans-serif;
+      }
+      .email-container {
+        max-width: 650px;
+        margin: 20px auto;
+        background-color: #0c0c0d;
+        border: 1px solid #333;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .content {
+        padding: 40px;
+      }
+      .header {
+        border-bottom: 1px solid #222;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+      }
+      h1 {
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0;
+      }
+      .section-title {
+        color: #888;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin: 30px 0 15px 0;
+        border-bottom: 1px solid #222;
+        padding-bottom: 8px;
+      }
+      .data-row {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+      }
+      .label {
+        color: #666;
+        font-size: 13px;
+        min-width: 140px;
+        font-weight: 500;
+      }
+      .value {
+        color: #eee;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .notes-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid #222;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 10px;
+        color: #ccc;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .timestamp {
+        font-size: 11px;
+        color: #444;
+        margin-top: 40px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-container">
+      <div class="content">
+        <div class="header">
+          <img
+            src="https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/_logos/mc-logo-light.png"
+            alt="Logo"
+            class="logo"
+          />
+          <h1>New Project Inquiry</h1>
+        </div>
+
+        <div class="section-title">Client Information</div>
+        <div class="data-row">
+          <div class="label">Name:</div>
+          <div class="value">{{name}}</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Email:</div>
+          <div class="value">
+            <a href="mailto:{{email}}" style="color: #fff; text-decoration: none">{{email}}</a>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="label">Phone:</div>
+          <div class="value">{{phone}}</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Organization:</div>
+          <div class="value">{{organization}}</div>
+        </div>
+
+        <div class="section-title">Project Details</div>
+        <div class="data-row">
+          <div class="label">Service:</div>
+          <div class="value"><strong>{{service_type}}</strong></div>
+        </div>
+        <div class="data-row">
+          <div class="label">Date:</div>
+          <div class="value">{{project_date}}</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Time:</div>
+          <div class="value">{{start_time}} – {{end_time}}</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Location:</div>
+          <div class="value">{{location}} ({{setting}})</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Attendees:</div>
+          <div class="value">{{attendees}}</div>
+        </div>
+
+        <div class="section-title">Commercial & Usage</div>
+        <div class="data-row">
+          <div class="label">Intended Use:</div>
+          <div class="value">{{intended_use}}</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Duration:</div>
+          <div class="value">{{duration}}</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Geography:</div>
+          <div class="value">{{geographic_usage}}</div>
+        </div>
+
+        <div class="section-title">Expectations</div>
+        <div class="data-row">
+          <div class="label">Budget:</div>
+          <div class="value"><strong>{{budget}}</strong></div>
+        </div>
+        <div class="data-row">
+          <div class="label">Timeline:</div>
+          <div class="value">{{timeline}}</div>
+        </div>
+        <div class="data-row">
+          <div class="label">Deliverables:</div>
+          <div class="value">{{deliverables}}</div>
+        </div>
+
+        <div class="section-title">Additional Context</div>
+        <div class="notes-box">{{notes}}</div>
+
+        <div class="timestamp">Submitted on {{timestamp}} via Quote Widget</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Widget v3.0.0 (Minimal, Scalable)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- site-widgets:inline:start -->
+    <style data-site-widgets-inline>
+      :root {
+        --mcc-accent: #ff4d6d;
+        --mcc-accent-strong: #ff2b50;
+        --mcc-bg: #ffffff;
+        --mcc-fg: #111827;
+        --mcc-line: #e5e7eb;
+        --mcc-muted: #6b7280;
+        --bg: var(--mcc-bg);
+        --fg: var(--mcc-fg);
+        --line: var(--mcc-line);
+        --accent: var(--mcc-accent);
+        --muted: var(--mcc-muted);
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--accent);
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
+        --panel-blur: 8px;
+        --mcc-space-1: 4px;
+        --mcc-space-2: 8px;
+        --mcc-space-3: 12px;
+        --mcc-space-4: 16px;
+        --mcc-space-5: 24px;
+        --mcc-space-6: 32px;
+        --mcc-radius: 10px;
+        --mcc-control-height: 40px;
+        --mcc-z-top: 2147483647;
+      }
+      [data-theme='light'] {
+        --fg: #0a0a0a;
+        --bg: #ffffff;
+        --line: #e5e5e5;
+        --panel-bg: rgba(255, 255, 255, 0.82);
+        --panel-border: rgba(0, 0, 0, 0.08);
+        --panel-blur: 8px;
+        --chip: #fafafa;
+        --focus: #0ea5e9;
+        --link: var(--accent);
+      }
+      [data-theme='dark'] {
+        --fg: #f7f7f7;
+        --bg: #06060a;
+        --line: #2a2a2a;
+        --panel-bg: rgba(20, 20, 20, 0.78);
+        --panel-border: rgba(255, 255, 255, 0.12);
+        --panel-blur: 8px;
+        --chip: #1b1b1b;
+        --focus: #7dd3fc;
+        --link: var(--accent);
+      }
+      [class^='mcc-'],
+      [class*=' mcc-'] {
+        box-sizing: border-box;
+        font-family:
+          Inter,
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        color: var(--fg);
+      }
+      [class^='mcc-'] a:focus-visible,
+      [class^='mcc-'] button:focus-visible,
+      [class^='mcc-'] [role='button']:focus-visible,
+      [class*=' mcc-'] a:focus-visible,
+      [class*=' mcc-'] button:focus-visible,
+      [class*=' mcc-'] [role='button']:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+        border-radius: 6px;
+      }
+      .mcc-sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+      .mcc-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--mcc-space-2);
+        padding: 0.6rem 1.2rem;
+        height: var(--mcc-control-height);
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .mcc-btn:hover,
+      .mcc-btn:focus-visible {
+        background: var(--mcc-accent-strong);
+        transform: translateY(-1px);
+      }
+      .mcc-img-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .mcc-row {
+        display: flex;
+        gap: var(--mcc-space-3);
+        align-items: center;
+      }
+      .mcc-col {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mcc-space-2);
+      }
+      .mcc-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      [class^='mcc-'] {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [class^='mcc-'] * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        [class^='mcc-'] {
+          color: #000 !important;
+          background: transparent !important;
+        }
+      }
+    </style>
+    <!-- site-widgets:inline:end -->
+
+    <style>
+      /* 
+       * McCals-Website Widget: Blog Feed
+       * Version: v3.0.0
+       * Minimal, author-driven, scalable blog system
+       * Design: Monochrome / Glassmorphism 2.0
+       */
+
+      :root {
+        --mcc-bg-primary: #ffffff;
+        --mcc-bg-secondary: #f8f9fa;
+        --mcc-text-primary: #0a0a0a;
+        --mcc-text-secondary: #4a5568;
+        --mcc-text-muted: #718096;
+        --mcc-border: #e2e8f0;
+        --mcc-accent: #000000;
+        --mcc-glass-bg: rgba(255, 255, 255, 0.85);
+        --mcc-glass-border: rgba(0, 0, 0, 0.08);
+        --mcc-glass-blur: 20px;
+        --mcc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+        --mcc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --mcc-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+        --mcc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --mcc-font-display: 'Outfit', sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --mcc-bg-primary: #1a1a1a;
+          --mcc-bg-secondary: #0a0a0a;
+          --mcc-text-primary: #f7fafc;
+          --mcc-text-secondary: #cbd5e0;
+          --mcc-text-muted: #a0aec0;
+          --mcc-border: #2d3748;
+          --mcc-accent: #ffffff;
+          --mcc-glass-bg: rgba(26, 26, 26, 0.85);
+          --mcc-glass-border: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+      }
+
+      .mcc-blog-widget {
+        font-family: var(--mcc-font-sans);
+        color: var(--mcc-text-primary);
+        line-height: 1.6;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Widget Header */
+      .mcc-blog-header {
+        margin-bottom: 3rem;
+      }
+
+      .mcc-blog-header h1 {
+        font-family: var(--mcc-font-display);
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0 0 0.5rem 0;
+        color: var(--mcc-text-primary);
+      }
+
+      .mcc-blog-header p {
+        color: var(--mcc-text-muted);
+        font-size: 1.125rem;
+        margin: 0;
+      }
+
+      /* Loading State */
+      .mcc-blog-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5rem 2rem;
+        color: var(--mcc-text-muted);
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        border-radius: 2rem;
+        backdrop-filter: blur(var(--mcc-glass-blur));
+      }
+
+      .mcc-blog-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid var(--mcc-border);
+        border-top-color: var(--mcc-accent);
+        border-radius: 50%;
+        animation: mcc-spin 1s linear infinite;
+        margin-bottom: 1.5rem;
+      }
+
+      @keyframes mcc-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Blog Grid */
+      .mcc-blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .mcc-blog-grid.mcc-loaded {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Blog Card */
+      .mcc-blog-card {
+        background: var(--mcc-glass-bg);
+        border: 1px solid var(--mcc-glass-border);
+        backdrop-filter: blur(var(--mcc-glass-blur));
+        -webkit-backdrop-filter: blur(var(--mcc-glass-blur));
+        border-radius: 1.5rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+        box-shadow: var(--mcc-shadow-sm);
+        cursor: pointer;
+      }
+
+      .mcc-blog-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--mcc-shadow-lg);
+        border-color: var(--mcc-accent);
+      }
+
+      /* Cover Image */
+      .mcc-blog-cover {
+        width: 100%;
+        height: 220px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .mcc-blog-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .mcc-blog-card:hover .mcc-blog-cover img {
+        transform: scale(1.05);
+      }
+
+      /* Card Content */
+      .mcc-blog-card-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Meta */
+      .mcc-blog-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.875rem;
+        color: var(--mcc-text-muted);
+        margin-bottom: 1rem;
+      }
+
+      .mcc-blog-date {
+        font-weight: 500;
+      }
+
+      .mcc-blog-author {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .mcc-blog-author-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      /* Title */
+      .mcc-blog-title {
+        font-family: var(--mcc-font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 0.75rem 0;
+        line-height: 1.3;
+        color: var(--mcc-text-primary);
+      }
+
+      /* Excerpt */
+      .mcc-blog-excerpt {
+        color: var(--mcc-text-secondary);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+
+      /* Tags */
+      .mcc-blog-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: auto;
+      }
+
+      .mcc-blog-tag {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.625rem;
+        background: var(--mcc-bg-secondary);
+        border: 1px solid var(--mcc-border);
+        border-radius: 0.375rem;
+        color: var(--mcc-text-muted);
+        font-weight: 500;
+      }
+
+      /* Error State */
+      .mcc-blog-error {
+        text-align: center;
+        padding: 3rem 2rem;
+        color: #dc2626;
+        background: rgba(220, 38, 38, 0.05);
+        border-radius: 1.5rem;
+        border: 1px solid rgba(220, 38, 38, 0.2);
+      }
+
+      /* Post Modal */
+      .mcc-post-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 9999;
+        backdrop-filter: blur(8px);
+        padding: 2rem;
+        overflow-y: auto;
+      }
+
+      .mcc-post-modal.mcc-active {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .mcc-post-modal-content {
+        background: var(--mcc-bg-primary);
+        border-radius: 1.5rem;
+        max-width: 800px;
+        width: 100%;
+        position: relative;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        margin: 2rem auto;
+      }
+
+      .mcc-post-header {
+        position: sticky;
+        top: 0;
+        background: var(--mcc-bg-primary);
+        border-bottom: 1px solid var(--mcc-border);
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 1.5rem 1.5rem 0 0;
+        z-index: 10;
+      }
+
+      .mcc-post-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .mcc-post-btn {
+        background: transparent;
+        border: 2px solid var(--mcc-border);
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        color: var(--mcc-text-secondary);
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+
+      .mcc-post-btn:hover {
+        border-color: var(--mcc-accent);
+        color: var(--mcc-accent);
+      }
+
+      .mcc-post-close {
+        background: var(--mcc-accent);
+        color: var(--mcc-bg-primary);
+        border: none;
+        font-size: 1.25rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      .mcc-post-body {
+        padding: 3rem;
+        color: var(--mcc-text-primary);
+      }
+
+      .mcc-post-body h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0 0 1rem 0;
+        line-height: 1.2;
+        color: var(--mcc-text-primary);
+      }
+
+      .mcc-post-body .mcc-post-meta {
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--mcc-border);
+      }
+
+      .mcc-post-body p {
+        margin: 1.25rem 0;
+        line-height: 1.8;
+        color: var(--mcc-text-secondary);
+        font-size: 1.0625rem;
+      }
+
+      .mcc-post-body h2,
+      .mcc-post-body h3,
+      .mcc-post-body h4 {
+        color: var(--mcc-text-primary);
+        margin: 2rem 0 1rem;
+        font-weight: 700;
+      }
+
+      .mcc-post-body h2 {
+        font-size: 1.75rem;
+      }
+
+      .mcc-post-body h3 {
+        font-size: 1.375rem;
+      }
+
+      .mcc-post-body a {
+        color: var(--mcc-accent);
+        text-decoration: underline;
+      }
+
+      .mcc-post-body ul,
+      .mcc-post-body ol {
+        color: var(--mcc-text-secondary);
+        margin: 1.25rem 0;
+        padding-left: 1.75rem;
+      }
+
+      .mcc-post-body li {
+        margin: 0.5rem 0;
+      }
+
+      .mcc-post-content {
+        color: var(--mcc-text-secondary);
+      }
+
+      /* Sources Section */
+      .mcc-sources {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 2px solid var(--mcc-border);
+      }
+
+      .mcc-sources h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0 0 1.5rem 0;
+      }
+
+      .mcc-source-item {
+        background: var(--mcc-bg-secondary);
+        border: 1px solid var(--mcc-border);
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .mcc-source-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .mcc-source-title a {
+        color: var(--mcc-accent);
+        text-decoration: none;
+      }
+
+      .mcc-source-meta {
+        font-size: 0.875rem;
+        color: var(--mcc-text-muted);
+        margin-bottom: 0.75rem;
+      }
+
+      .mcc-source-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .mcc-source-copy {
+        font-size: 0.8125rem;
+        padding: 0.375rem 0.75rem;
+        background: var(--mcc-bg-primary);
+        border: 1px solid var(--mcc-border);
+        border-radius: 0.375rem;
+        cursor: pointer;
+        color: var(--mcc-text-secondary);
+        transition: all 0.2s;
+      }
+
+      .mcc-source-copy:hover {
+        border-color: var(--mcc-accent);
+        color: var(--mcc-accent);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .mcc-blog-widget {
+          padding: 2rem 1rem;
+        }
+
+        .mcc-blog-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mcc-post-modal {
+          padding: 0;
+        }
+
+        .mcc-post-modal-content {
+          border-radius: 0;
+          margin: 0;
+          min-height: 100vh;
+        }
+
+        .mcc-post-body {
+          padding: 2rem 1.5rem;
+        }
+
+        .mcc-post-body h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mcc-blog-widget" id="mccBlogWidget" data-limit="12" data-show-covers="true">
+      <div class="mcc-blog-loading">
+        <div class="mcc-blog-spinner"></div>
+        <span>Loading posts...</span>
+      </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div id="mccPostModal" class="mcc-post-modal">
+      <div class="mcc-post-modal-content">
+        <div class="mcc-post-header">
+          <div class="mcc-post-actions">
+            <button class="mcc-post-btn" id="mccCopyLink">🔗 Copy Link</button>
+          </div>
+          <button class="mcc-post-btn mcc-post-close" id="mccCloseModal">✕</button>
+        </div>
+        <div class="mcc-post-body" id="mccPostBody">
+          <!-- Post content inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        'use strict';
+
+        const CONFIG = {
+          manifestUrl: '../../../../data/blog/blog.manifest.json',
+          authorsUrl: '../../../../data/blog/authors.json',
+          limit: parseInt(document.getElementById('mccBlogWidget').dataset.limit) || 12,
+          showCovers: document.getElementById('mccBlogWidget').dataset.showCovers !== 'false',
+        };
+
+        const FALLBACK_AUTHOR = {
+          id: 'unknown',
+          name: 'Unknown Author',
+        };
+
+        // --- Data Loading ---
+
+        async function loadData() {
+          try {
+            const [postsRes, authorsRes] = await Promise.all([
+              fetch(CONFIG.manifestUrl),
+              fetch(CONFIG.authorsUrl),
+            ]);
+
+            if (!postsRes.ok || !authorsRes.ok) {
+              throw new Error('Failed to load blog data');
+            }
+
+            const postsData = await postsRes.json();
+            const authorsData = await authorsRes.json();
+
+            return {
+              posts: postsData.posts || [],
+              authors: authorsData.authors || [],
+            };
+          } catch (error) {
+            console.error('Blog data load error:', error);
+            throw error;
+          }
+        }
+
+        // --- Data Resolution ---
+
+        function resolveAuthor(authorId, authors) {
+          const author = authors.find((a) => a.id === authorId);
+          return author || FALLBACK_AUTHOR;
+        }
+
+        function resolvePosts(posts, authors) {
+          return posts
+            .map((post) => ({
+              ...post,
+              author: resolveAuthor(post.authorId, authors),
+            }))
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+
+        // --- Formatting ---
+
+        function formatDate(dateStr) {
+          try {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            });
+          } catch {
+            return dateStr;
+          }
+        }
+
+        function generateExcerpt(content, maxLength = 160) {
+          if (!content) return '';
+          const text = content.replace(/<[^>]*>/g, '').trim();
+          return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        }
+
+        // --- Sources Formatting ---
+
+        function formatSourcePlainText(source) {
+          let text = source.title;
+          if (source.publisher) text += `. ${source.publisher}`;
+          if (source.publishedDate) text += ` (${source.publishedDate})`;
+          text += `. ${source.url}`;
+          if (source.accessedDate) text += ` [Accessed ${source.accessedDate}]`;
+          if (source.notes) text += `. ${source.notes}`;
+          return text;
+        }
+
+        function formatSourceMarkdown(source) {
+          let md = `[${source.title}](${source.url})`;
+          if (source.publisher) md += ` - ${source.publisher}`;
+          if (source.publishedDate) md += ` (${source.publishedDate})`;
+          if (source.accessedDate) md += `. Accessed ${source.accessedDate}`;
+          if (source.notes) md += `\n\n> ${source.notes}`;
+          return md;
+        }
+
+        async function copyToClipboard(text, button) {
+          try {
+            await navigator.clipboard.writeText(text);
+            const original = button.textContent;
+            button.textContent = '✓ Copied!';
+            setTimeout(() => {
+              button.textContent = original;
+            }, 2000);
+          } catch (err) {
+            console.error('Copy failed:', err);
+          }
+        }
+
+        // --- Rendering ---
+
+        function renderPostCard(post) {
+          const card = document.createElement('article');
+          card.className = 'mcc-blog-card';
+          card.dataset.slug = post.slug;
+
+          const coverHtml =
+            CONFIG.showCovers && post.cover
+              ? `<div class="mcc-blog-cover">
+                  <img src="${post.cover}" alt="${post.title}" loading="lazy" />
+                </div>`
+              : '';
+
+          const avatarHtml = post.author.avatar
+            ? `<img src="${post.author.avatar}" alt="${post.author.name}" class="mcc-blog-author-avatar" />`
+            : '';
+
+          const tagsHtml = post.tags
+            ? `<div class="mcc-blog-tags">
+                ${post.tags.map((tag) => `<span class="mcc-blog-tag">${tag}</span>`).join('')}
+              </div>`
+            : '';
+
+          const excerpt = post.excerpt || generateExcerpt(post.content);
+
+          card.innerHTML = `
+            ${coverHtml}
+            <div class="mcc-blog-card-content">
+              <div class="mcc-blog-meta">
+                <span class="mcc-blog-date">${formatDate(post.date)}</span>
+                <span>•</span>
+                <div class="mcc-blog-author">
+                  ${avatarHtml}
+                  <span>${post.author.name}</span>
+                </div>
+              </div>
+              <h2 class="mcc-blog-title">${post.title}</h2>
+              <p class="mcc-blog-excerpt">${excerpt}</p>
+              ${tagsHtml}
+            </div>
+          `;
+
+          card.addEventListener('click', () => openPost(post));
+
+          return card;
+        }
+
+        function renderSourceItem(source) {
+          const item = document.createElement('div');
+          item.className = 'mcc-source-item';
+
+          const metaParts = [];
+          if (source.publisher) metaParts.push(source.publisher);
+          if (source.publishedDate) metaParts.push(`Published: ${source.publishedDate}`);
+          if (source.accessedDate) metaParts.push(`Accessed: ${source.accessedDate}`);
+
+          const metaHtml = metaParts.length
+            ? `<div class="mcc-source-meta">${metaParts.join(' • ')}</div>`
+            : '';
+
+          const notesHtml = source.notes
+            ? `<p style="margin: 0.5rem 0 0; font-size: 0.9rem;">${source.notes}</p>`
+            : '';
+
+          item.innerHTML = `
+            <div class="mcc-source-title">
+              <a href="${source.url}" target="_blank" rel="noopener">${source.title}</a>
+            </div>
+            ${metaHtml}
+            ${notesHtml}
+            <div class="mcc-source-actions">
+              <button class="mcc-source-copy" data-format="plain">Copy as Text</button>
+              <button class="mcc-source-copy" data-format="markdown">Copy as Markdown</button>
+            </div>
+          `;
+
+          item.querySelectorAll('.mcc-source-copy').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              const format = btn.dataset.format;
+              const text =
+                format === 'markdown'
+                  ? formatSourceMarkdown(source)
+                  : formatSourcePlainText(source);
+              copyToClipboard(text, btn);
+            });
+          });
+
+          return item;
+        }
+
+        function renderPosts(posts) {
+          const container = document.getElementById('mccBlogWidget');
+
+          if (posts.length === 0) {
+            container.innerHTML = `<div class="mcc-blog-error">
+              <h3>No posts found</h3>
+              <p>Check your blog manifest.</p>
+            </div>`;
+            return;
+          }
+
+          const grid = document.createElement('div');
+          grid.className = 'mcc-blog-grid';
+
+          posts.slice(0, CONFIG.limit).forEach((post) => {
+            grid.appendChild(renderPostCard(post));
+          });
+
+          container.innerHTML = '';
+          container.appendChild(grid);
+
+          requestAnimationFrame(() => grid.classList.add('mcc-loaded'));
+        }
+
+        // --- Post Modal ---
+
+        function openPost(post) {
+          const modal = document.getElementById('mccPostModal');
+          const body = document.getElementById('mccPostBody');
+
+          const avatarHtml = post.author.avatar
+            ? `<img src="${post.author.avatar}" alt="${post.author.name}" class="mcc-blog-author-avatar" />`
+            : '';
+
+          const sourcesHtml =
+            post.sources && post.sources.length > 0
+              ? `<div class="mcc-sources">
+                  <h3>Sources & References</h3>
+                  ${post.sources.map((s) => renderSourceItem(s).outerHTML).join('')}
+                </div>`
+              : '';
+
+          body.innerHTML = `
+            <h1>${post.title}</h1>
+            <div class="mcc-post-meta">
+              <div class="mcc-blog-meta">
+                <span class="mcc-blog-date">${formatDate(post.date)}</span>
+                <span>•</span>
+                <div class="mcc-blog-author">
+                  ${avatarHtml}
+                  <span>${post.author.name}</span>
+                </div>
+              </div>
+            </div>
+            <div class="mcc-post-content">
+              ${post.content || post.excerpt || '<p>No content available.</p>'}
+            </div>
+            ${sourcesHtml}
+          `;
+
+          // Re-attach source copy handlers
+          body.querySelectorAll('.mcc-source-copy').forEach((btn) => {
+            const sourceItem = btn.closest('.mcc-source-item');
+            const sourceIndex = Array.from(body.querySelectorAll('.mcc-source-item')).indexOf(
+              sourceItem,
+            );
+            const source = post.sources[sourceIndex];
+
+            btn.addEventListener('click', () => {
+              const format = btn.dataset.format;
+              const text =
+                format === 'markdown'
+                  ? formatSourceMarkdown(source)
+                  : formatSourcePlainText(source);
+              copyToClipboard(text, btn);
+            });
+          });
+
+          modal.classList.add('mcc-active');
+          document.body.style.overflow = 'hidden';
+
+          history.pushState(null, '', `#${post.slug}`);
+        }
+
+        function closePost() {
+          const modal = document.getElementById('mccPostModal');
+          modal.classList.remove('mcc-active');
+          document.body.style.overflow = '';
+          history.pushState(null, '', window.location.pathname);
+        }
+
+        function copyCurrentLink() {
+          const url = window.location.href;
+          const btn = document.getElementById('mccCopyLink');
+          copyToClipboard(url, btn);
+        }
+
+        // --- Event Listeners ---
+
+        document.getElementById('mccCloseModal').addEventListener('click', closePost);
+        document.getElementById('mccCopyLink').addEventListener('click', copyCurrentLink);
+
+        document.getElementById('mccPostModal').addEventListener('click', (e) => {
+          if (e.target.id === 'mccPostModal') {
+            closePost();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closePost();
+          }
+        });
+
+        // --- Init ---
+
+        async function init() {
+          try {
+            const { posts, authors } = await loadData();
+            const resolvedPosts = resolvePosts(posts, authors);
+            renderPosts(resolvedPosts);
+
+            // Check for hash
+            if (window.location.hash) {
+              const slug = window.location.hash.substring(1);
+              const post = resolvedPosts.find((p) => p.slug === slug);
+              if (post) {
+                setTimeout(() => openPost(post), 500);
+              }
+            }
+          } catch (err) {
+            console.error(err);
+            const container = document.getElementById('mccBlogWidget');
+            container.innerHTML = `<div class="mcc-blog-error">
+              <h3>Unable to load blog</h3>
+              <p>${err.message}</p>
+            </div>`;
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>

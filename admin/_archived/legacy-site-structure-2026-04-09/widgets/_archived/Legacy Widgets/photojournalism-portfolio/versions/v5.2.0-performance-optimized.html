@@ -1,0 +1,1529 @@
+<!-- Journalism Portfolio v5.2 - Performance Optimized (Concert v4.6 Architecture)
+Author: Caleb McCartney / McCal-Codes
+Version: 5.2
+Purpose: High-performance journalism widget with critical rendering optimizations, manifest-driven event cards, filtering, lightbox, changelog, and debug panel.
+
+Performance Optimizations:
+- Critical CSS inlining with deferred non-critical styles
+- Modern JavaScript with async loading patterns
+- Reduced main-thread blocking with requestIdleCallback
+- Optimized font loading with font-display: swap
+- Lazy-loaded debug features and advanced functionality
+- Structured data optimization for SEO
+- Progressive enhancement for better performance
+
+Usage: Paste this entire block into a Squarespace Code Block
+Requirements: Master manifest at src/images/Portfolios/Journalism/journalism-manifest.json
+-->
+
+<!-- Styles copied from v4.9-event-cards.html for visual consistency -->
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  :root {
+    --fg: #f5f5f5;
+    --bg: #0a0a0a;
+    --line: #2a2a2a;
+    --accent: #e97373;
+    --accent-strong: #ff2f56;
+    --published: #5fb189;
+    --published-strong: #3f8f6d;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --fg: #0a0a0a;
+      --bg: #fff;
+      --line: #e5e5e5;
+    }
+  }
+  .journalism-portfolio {
+    max-width: 1600px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    background: transparent;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+  }
+  .journalism-heading {
+    font:
+      800 34px/1.2 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+    margin: 0 0 18px;
+    letter-spacing: -0.5px;
+  }
+  .journalism-subheading {
+    color: #fff;
+    margin-bottom: 18px;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .journalism-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font:
+      600 16px/1.4 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+    opacity: 0.7;
+  }
+  .journalism-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 12px;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .portfolio-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+  /* Glass-like minimal filter buttons */
+  .filter-btn {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--fg);
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font:
+      600 14px/1 ui-sans-serif,
+      system-ui;
+    transition:
+      transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.22s,
+      background 0.22s,
+      border-color 0.22s,
+      color 0.22s;
+    opacity: 0.95;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    outline: 1px solid rgba(255, 255, 255, 0.03);
+    outline-offset: 1px;
+  }
+  .filter-btn:hover {
+    transform: translateY(-3px);
+    opacity: 1;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+  .filter-btn[aria-pressed='true'] {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+    color: var(--bg);
+    opacity: 1;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+  /* Published filter should follow the widget accent color for brand consistency */
+  .filter-btn[data-filter='Published'] {
+    border-color: var(--published);
+    color: var(--published);
+  }
+  .filter-btn[data-filter='Published']:hover {
+    background: linear-gradient(180deg, rgba(95, 177, 137, 0.06), rgba(95, 177, 137, 0.06));
+    border-color: var(--published-strong);
+    color: var(--published-strong);
+  }
+  .filter-btn[data-filter='Published'][aria-pressed='true'] {
+    background: linear-gradient(180deg, var(--published-strong), #3a7e60);
+    color: var(--bg);
+    box-shadow: 0 8px 22px rgba(63, 143, 109, 0.14);
+    border-color: rgba(63, 143, 109, 0.95);
+  }
+  .version-indicator {
+    display: inline-block;
+    margin-left: 12px;
+    font:
+      600 14px/1.2 ui-sans-serif,
+      system-ui;
+    color: rgba(128, 128, 128, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.08);
+    padding: 4px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    vertical-align: baseline;
+  }
+  .version-indicator:hover {
+    color: var(--accent);
+    background: rgba(77, 121, 255, 0.12);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  .debug-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    font:
+      600 12px/1 ui-sans-serif,
+      system-ui;
+    z-index: 1000;
+    transition: all 0.3s;
+  }
+  .debug-toggle:hover {
+    background: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0.9;
+  }
+  .debug-info {
+    position: fixed;
+    bottom: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font:
+      600 11px/1.3 ui-monospace,
+      monospace;
+    z-index: 999;
+    max-width: 520px;
+    border: 1px solid var(--line);
+    display: none;
+    backdrop-filter: blur(10px);
+  }
+  .debug-info.active {
+    display: block;
+  }
+  .debug-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .dbg-btn {
+    background: #111;
+    border: 1px solid var(--line);
+    color: var(--fg);
+    font:
+      600 10px/1 ui-sans-serif,
+      system-ui;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+  .dbg-btn:hover {
+    background: #181818;
+  }
+  .changelog-modal {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .changelog-modal.active {
+    display: flex;
+  }
+  .changelog-content {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  .changelog-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .changelog-title {
+    margin: 0;
+    font:
+      700 18px/1.2 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+  }
+  .changelog-close {
+    background: none;
+    border: none;
+    color: var(--fg);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .changelog-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .changelog-body {
+    padding: 20px;
+    font:
+      400 14px/1.5 ui-sans-serif,
+      system-ui;
+    color: var(--fg);
+  }
+  .changelog-version {
+    margin: 0 0 16px;
+    font:
+      600 16px/1.3 ui-sans-serif,
+      system-ui;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+  }
+  .changelog-items {
+    margin: 12px 0;
+    list-style: none;
+    padding: 0;
+  }
+  .changelog-items li {
+    margin: 6px 0 0 0;
+    padding-left: 14px;
+    position: relative;
+    font:
+      500 13px/1.4 ui-sans-serif,
+      system-ui;
+  }
+  .changelog-items li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+  }
+  .journalism-grid {
+    column-width: 320px;
+    column-gap: 20px;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.5s;
+    background: transparent;
+    margin-bottom: 32px;
+  }
+  .journalism-grid.loaded {
+    opacity: 1;
+  }
+  @media (max-width: 1024px) {
+    .journalism-grid {
+      column-width: 280px;
+    }
+  }
+  @media (max-width: 768px) {
+    .journalism-grid {
+      column-width: 240px;
+      margin-top: 28px;
+    }
+    .portfolio-filters {
+      gap: 8px;
+    }
+    .filter-btn {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+  }
+  @media (max-width: 520px) {
+    .journalism-grid {
+      column-width: 100%;
+    }
+  }
+  .journalism-card {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 20px;
+    background: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    break-inside: avoid;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+  }
+  .journalism-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .journalism-card.is-hidden {
+    display: none;
+  }
+  .journalism-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: inherit;
+    transition:
+      transform 0.35s,
+      filter 0.35s;
+  }
+  .journalism-card:hover img {
+    transform: scale(1.02);
+    filter: contrast(1.08) saturate(1.08);
+  }
+  .published-badge,
+  .image-count-badge {
+    position: absolute;
+    top: 8px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font:
+      600 10px/1 ui-sans-serif,
+      system-ui;
+    z-index: 2;
+  }
+  /* Minimal published pill: small colored dot + label */
+  .published-badge {
+    left: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--fg);
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .published-badge .pb-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--published);
+    display: inline-block;
+    flex: 0 0 auto;
+    box-shadow: 0 0 0 4px rgba(95, 177, 137, 0.06);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      background 0.18s ease;
+  }
+  .published-badge:hover .pb-dot {
+    transform: scale(1.08);
+    background: var(--published-strong);
+    box-shadow: 0 0 0 6px rgba(63, 143, 109, 0.08);
+  }
+  .published-badge .pb-label {
+    font-size: 11px;
+    color: var(--fg);
+    line-height: 1;
+  }
+  .image-count-badge {
+    right: 8px;
+    left: auto;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--fg);
+    backdrop-filter: blur(4px);
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 999px;
+  }
+  .journalism-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 14px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85));
+    color: #fff;
+  }
+  .journalism-title {
+    margin: 0;
+    font:
+      800 16px/1.2 ui-sans-serif,
+      system-ui;
+  }
+  .journalism-meta {
+    margin: 2px 0 0;
+    font:
+      600 12px/1.2 ui-sans-serif,
+      system-ui;
+    color: #e5e5e5;
+  }
+  .journalism-card.loading::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  .journalism-card.error {
+    background: #2a1a1a;
+    border: 1px solid #4a2a2a;
+  }
+  .journalism-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2147483647 !important;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+  }
+  .journalism-lightbox.is-open {
+    display: flex;
+  }
+  .jl-dialog {
+    position: relative;
+    max-width: 95vw;
+    max-height: 92vh;
+    overflow: auto;
+    background: transparent;
+    outline: none;
+  }
+  .jl-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    padding-right: 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .jl-gallery::-webkit-scrollbar {
+    display: none;
+  }
+  .jl-gallery img {
+    max-width: 92vw;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    scroll-snap-align: center;
+    border-radius: 14px;
+    transition: opacity 0.3s;
+    display: block;
+    margin: 0 auto;
+  }
+  .jl-gallery img.loading {
+    opacity: 0.65;
+  }
+  .jl-gallery img.loaded {
+    opacity: 1;
+  }
+  .jl-caption {
+    text-align: center;
+    color: #fff;
+    margin-top: 14px;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+  .jl-title {
+    margin: 0 0 6px;
+    font:
+      800 20px/1.25 ui-sans-serif,
+      system-ui;
+  }
+  .jl-meta {
+    margin: 0 0 10px;
+    color: #cfcfcf;
+    font:
+      600 12px/1.3 ui-sans-serif,
+      system-ui;
+  }
+  .jl-description {
+    margin: 0 0 10px;
+    color: #e5e5e5;
+    font:
+      400 14px/1.4 ui-sans-serif,
+      system-ui;
+  }
+  .jl-publication {
+    margin: 10px 0 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(0, 212, 170, 0.1);
+  }
+  .jl-publication a {
+    color: var(--published);
+    text-decoration: none;
+    font:
+      600 13px/1.3 ui-sans-serif,
+      system-ui;
+  }
+  .jl-publication a:hover {
+    text-decoration: underline;
+  }
+  .jl-close {
+    position: fixed;
+    top: max(24px, env(safe-area-inset-top));
+    right: max(24px, env(safe-area-inset-right));
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    font:
+      800 18px ui-sans-serif,
+      system-ui;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483648;
+    transition: all 0.2s ease;
+    margin: 0;
+    padding: 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .jl-close:hover {
+    background: rgba(0, 0, 0, 0.85);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+  }
+  .jl-hint {
+    position: sticky;
+    top: 6px;
+    align-self: center;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font:
+      600 12px/1 ui-sans-serif,
+      system-ui;
+    transition: opacity 0.4s;
+  }
+  .jl-hint.fade {
+    opacity: 0;
+  }
+  html.lb-open .journalism-portfolio,
+  html.lb-open .version-indicator,
+  html.lb-open .debug-toggle,
+  html.lb-open .debug-info,
+  html.lb-open .auto-refresh-indicator {
+    pointer-events: none;
+  }
+  html.lb-open .journalism-lightbox,
+  html.lb-open .journalism-lightbox * {
+    pointer-events: auto;
+  }
+  html.lb-open header,
+  html.lb-open .Header,
+  html.lb-open [id*='Header'],
+  html.lb-open .site-header,
+  html.lb-open .sqs-announcement-bar,
+  html.lb-open nav,
+  html.lb-open .nav,
+  html.lb-open .navbar,
+  html.lb-open .navigation,
+  html.lb-open .site-nav,
+  html.lb-open .main-nav,
+  html.lb-open .top-nav,
+  html.lb-open [class*='nav'],
+  html.lb-open [id*='nav'],
+  html.lb-open [class*='menu'],
+  html.lb-open [id*='menu'] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+</style>
+
+<!-- Resource hints for performance -->
+<link rel="preconnect" href="https://raw.githubusercontent.com" />
+<link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
+
+<div class="journalism-portfolio" id="journalismPf" data-panes="24" data-widget-version="5.2">
+  <h2 class="journalism-heading">
+    Photojournalism Portfolio
+    <span class="version-indicator" title="View changelog" onclick="showChangelog()">v5.2</span>
+  </h2>
+  <p class="journalism-subheading">
+    Currently this portfolio contains political work only; more journalism and other projects will
+    be added over time. Use the filters to view published items.
+  </p>
+  <div
+    class="portfolio-filters"
+    role="tablist"
+    aria-label="Portfolio categories"
+    id="filterBar"
+  ></div>
+  <div class="journalism-loading" id="journalismLoading">
+    <span class="journalism-spinner"></span> Loading journalism events...
+  </div>
+  <div class="journalism-grid" id="journalismGrid"></div>
+</div>
+
+<!-- Lightbox (lazy-loaded) -->
+<div class="journalism-lightbox" id="journalismLightbox" aria-hidden="true">
+  <div class="jl-dialog" role="dialog" aria-modal="true" aria-labelledby="jlLbTitle" tabindex="-1">
+    <button class="jl-close" type="button" aria-label="Close">&times;</button>
+    <div class="jl-gallery" id="jlGallery">
+      <div class="jl-hint">Scroll Up/Down</div>
+    </div>
+    <div class="jl-caption">
+      <h3 class="jl-title" id="jlLbTitle"></h3>
+      <p class="jl-meta" id="jlLbMeta"></p>
+      <div class="jl-description" id="jlLbDescription" style="display: none"></div>
+      <div class="jl-publication" id="jlLbPublication" style="display: none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Changelog Modal -->
+<div class="changelog-modal" id="changelogModal" aria-hidden="true">
+  <div class="changelog-content" role="dialog" aria-modal="true" aria-labelledby="changelogTitle">
+    <div class="changelog-header">
+      <h3 class="changelog-title" id="changelogTitle">Journalism Widget Changelog</h3>
+      <button
+        class="changelog-close"
+        type="button"
+        aria-label="Close changelog"
+        onclick="hideChangelog()"
+      >
+        &times;
+      </button>
+    </div>
+    <div class="changelog-body">
+      <div class="changelog-version">v5.2 - Glass Buttons & One Image Per Album ✨</div>
+      <ul class="changelog-items">
+        <li>
+          UI: Glass-like filter buttons with subtle outline and backdrop blur for better separation
+          from page backgrounds
+        </li>
+        <li>
+          Behavior: Randomized selection using Fisher-Yates; widget now displays one main shuffled
+          image per album (no duplicates) and reshuffles on each load
+        </li>
+        <li>
+          Data & organization: Events that live in an `Events` folder (and items matching "rooney")
+          are excluded from this Photojournalism feed
+        </li>
+        <li>
+          Filters: Removed per-category filters — the widget now exposes only "All" and "Published"
+          filters to simplify navigation
+        </li>
+        <li>Theming: Published accent switched to a muted green with stronger hover variant</li>
+        <li>
+          Content: Subheading updated to note the portfolio currently contains political work only;
+          more journalism will be added over time
+        </li>
+      </ul>
+      <div class="changelog-version">v4.9 - Stable Event Cards</div>
+      <ul class="changelog-items">
+        <li>Event-based manifest, category/published filtering, debug panel</li>
+        <li>Lightbox and changelog modal with accessibility</li>
+        <li>Performance and UX improvements</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Core JavaScript - Performance Optimized -->
+<script>
+  // Journalism Portfolio v5.2 - Concert v4.4 Architecture, with journalism-specific UI
+  try {
+    (function () {
+      'use strict';
+      // Debug mode
+      let DEBUG = false;
+      let BUST = 0;
+      let manifestGenerated = '';
+      let autoRefreshTimer = null;
+      let isTabVisible = true;
+      let lastVisibilityChange = Date.now();
+      // DOM references
+      const grid = document.getElementById('journalismGrid');
+      const loading = document.getElementById('journalismLoading');
+      const portfolio = document.getElementById('journalismPf');
+      const changelogModal = document.getElementById('changelogModal');
+      const filterBar = document.getElementById('filterBar');
+      // State management
+      let state = {
+        manifest: null,
+        cacheKey: 'journalism-manifest-v5.2',
+        isVisible: true,
+        filter: '*',
+        manifestGenerated: '',
+      };
+      // Utility functions
+      const log = () => {};
+      // Fisher-Yates shuffle (stable, unbiased) - returns a new array
+      const shuffle = (arr) => {
+        const a = Array.isArray(arr) ? arr.slice() : [];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const tmp = a[i];
+          a[i] = a[j];
+          a[j] = tmp;
+        }
+        return a;
+      };
+      const setText = (el, v) => {
+        if (el) el.textContent = v;
+      };
+      // Determine published status from explicit event names (user preference) or manifest tags
+      const isEventPublished = (ev) => {
+        if (!ev) return false;
+        const name = (ev.eventName || '').toString().toLowerCase();
+        const dateStr = (ev.dateDisplay || ev.date || '').toString();
+        // Only mark the following as published by name: Obama, Clinton, Kamala (Kamala only if in November)
+        if (name.includes('obama')) return true;
+        if (name.includes('clinton')) return true;
+        if (name.includes('kamala') && /nov|november/i.test(dateStr)) return true;
+        // Fallback to existing manifest tag check if present
+        return (ev.tags || []).some((t) => /published/i.test(t));
+      };
+      // Robust image path resolver
+      const encodePath = (path) =>
+        path
+          .split('/')
+          .map((segment) => encodeURIComponent(segment))
+          .join('/');
+      const normalizeFolder = (value) =>
+        value ? value.replace(/^\/+/, '').replace(/\/+$/, '') : '';
+      function resolveImagePath(event, image) {
+        if (!image) return '';
+        const raw = (image.path || image.src || image.url || image.filename || image).trim
+          ? (image.path || image.src || image.url || image.filename || image).trim()
+          : image;
+        if (!raw) return '';
+        if (/^https?:\/\//i.test(raw)) return raw;
+        let relative = raw.replace(/^\.?\//, '');
+        if (relative.startsWith('src/')) {
+          return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/${encodePath(relative)}`;
+        }
+        if (relative.includes('/')) {
+          return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Journalism/${encodePath(relative)}`;
+        }
+        const folder = normalizeFolder(image.folderPath || event.folderPath || '');
+        const composed = folder ? `${folder}/${relative}` : relative;
+        return `https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Journalism/${encodePath(composed)}`;
+      }
+      // Cache management
+      const cache = {
+        get: () => {
+          try {
+            const data = JSON.parse(localStorage.getItem(state.cacheKey));
+            return data && Date.now() - data.timestamp < 10 * 60 * 1000 ? data : null;
+          } catch {
+            return null;
+          }
+        },
+        set: (data) => {
+          try {
+            localStorage.setItem(
+              state.cacheKey,
+              JSON.stringify({ ...data, timestamp: Date.now() }),
+            );
+          } catch (e) {
+            log('Cache write failed:', e.message);
+          }
+        },
+        clear: () => {
+          try {
+            localStorage.removeItem(state.cacheKey);
+          } catch (e) {}
+        },
+      };
+      // Changelog modal controls
+      const showChangelog = () => {
+        if (!changelogModal) return;
+        changelogModal.classList.add('active');
+        changelogModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        const content = changelogModal.querySelector('.changelog-content');
+        if (content) content.scrollTop = 0;
+      };
+      const hideChangelog = () => {
+        if (!changelogModal) return;
+        changelogModal.classList.remove('active');
+        changelogModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+      window.showChangelog = showChangelog;
+      window.hideChangelog = hideChangelog;
+      // Enhanced alt text generation
+      const generateAltText = (ev, imageName = '') => {
+        const base = `${ev.eventName} journalism photos`;
+        let nameStr = '';
+        if (typeof imageName === 'string') {
+          nameStr = imageName;
+        } else if (imageName && typeof imageName === 'object') {
+          nameStr = imageName.filename || imageName.path || imageName.url || imageName.src || '';
+        }
+        if (nameStr && typeof nameStr === 'string') {
+          return `${base} - ${nameStr.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ')}`;
+        }
+        return `${base}, ${ev.dateDisplay}`;
+      };
+      // SEO structured data
+      const addStructuredData = (manifest) => {
+        const totalImages =
+          manifest.events?.reduce(
+            (sum, ev) => sum + (ev.totalImages || ev.images?.length || 0),
+            0,
+          ) || 0;
+        const sampleImages =
+          manifest.events
+            ?.slice(0, 3)
+            .flatMap(
+              (ev) => (ev.images || []).slice(0, 2).map((img) => resolveImagePath(ev, img)) || [],
+            )
+            .slice(0, 5) || [];
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'ImageGallery',
+          name: 'Photojournalism Portfolio',
+          description: 'Professional photojournalism portfolio featuring published and event work',
+          url: window.location.href,
+          image: sampleImages,
+          author: {
+            '@type': 'Person',
+            name: 'Caleb McCartney',
+            jobTitle: 'Photojournalist',
+            url: 'https://mccalmedia.com',
+          },
+          datePublished: manifest.generated
+            ? new Date(manifest.generated).toISOString().split('T')[0]
+            : new Date().toISOString().split('T')[0],
+          numberOfItems: totalImages,
+          genre: 'Photojournalism',
+        });
+        document.head.appendChild(script);
+        log('Structured data added for', totalImages, 'images');
+      };
+      // Manifest loading with fallback
+      const loadManifest = async (force = false) => {
+        const manifestUrl =
+          'https://raw.githubusercontent.com/McCal-Codes/McCals-Website/main/src/images/Portfolios/Journalism/journalism-manifest.json';
+        if (!force) {
+          const cached = cache.get();
+          if (cached) {
+            state.manifestGenerated = cached.manifest.generated || '';
+            // showDebugLog(`[Manifest Fetch] Using cached manifest. Generated: ${state.manifestGenerated}`);
+            return cached.manifest;
+          }
+        }
+        try {
+          const response = await fetch(manifestUrl, { cache: 'no-store' });
+          if (!response.ok) throw new Error('Manifest fetch failed: ' + response.status);
+          const manifest = await response.json();
+          state.manifestGenerated = manifest.generated || '';
+          cache.set({ manifest });
+          log('Manifest loaded');
+          return manifest;
+        } catch (error) {
+          log('Failed to load manifest:', error.message);
+          throw error;
+        }
+      };
+      // Build filter bar
+      // Only show 'All' and 'Published' filters for photojournalism (category filters removed)
+      const buildFilterBar = () => {
+        const filters = ['*', 'Published'];
+        filterBar.innerHTML = '';
+        filters.forEach((f) => {
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.textContent = f === '*' ? 'All' : f;
+          btn.dataset.filter = f;
+          btn.setAttribute('aria-pressed', state.filter === f ? 'true' : 'false');
+          if (state.filter === f) btn.classList.add('active');
+          btn.addEventListener('click', () => {
+            state.filter = f;
+            // reset grid filter behavior
+            Array.from(filterBar.children).forEach((b) => b.setAttribute('aria-pressed', 'false'));
+            btn.setAttribute('aria-pressed', 'true');
+            btn.classList.add('active');
+            buildGrid();
+          });
+          filterBar.appendChild(btn);
+        });
+      };
+      // Build event grid with round-robin/shuffle logic (concert v4.4 pattern)
+      const buildGrid = async () => {
+        try {
+          loading.style.display = 'flex';
+          grid.style.display = 'none';
+          portfolio.style.background = '';
+          grid.style.background = '';
+          const manifest = state.manifest || (await loadManifest());
+          state.manifest = manifest;
+          if (!manifest?.events?.length) throw new Error('No journalism events available');
+          addStructuredData(manifest);
+          buildFilterBar();
+          // Filter events
+          let events = manifest.events.slice();
+          if (state.filter && state.filter !== '*') {
+            if (state.filter === 'Published') {
+              events = events.filter((ev) => (ev.tags || []).includes('Published Work'));
+            } else {
+              events = events.filter((ev) => ev.category === state.filter);
+            }
+          }
+          // If filter results in zero events, reset to All and show message (prevent infinite recursion)
+          if (events.length === 0 && state.filter !== '*' && !state._filterReset) {
+            state._filterReset = true;
+            state.filter = '*';
+            buildGrid();
+            return;
+          }
+          // Clear filter reset flag after successful build
+          state._filterReset = false;
+          // Remove events that belong in the Events portfolio (not Photojournalism)
+          events = events.filter((ev) => {
+            const fp = (ev.folderPath || '').toString().toLowerCase();
+            const name = (ev.eventName || '').toString().toLowerCase();
+            // Exclude if folder path mentions 'events' or the event appears to be the Rooney Rule
+            if (fp.includes('/events/') || fp.startsWith('events') || name.includes('rooney'))
+              return false;
+            return true;
+          });
+
+          // Shuffle events for variety
+          events = shuffle(events);
+          // Build pools for round-robin (each event is a pool of images)
+          const pools = events.map((ev) => ({
+            event: ev,
+            images: shuffle((ev.images || []).slice()),
+            allImages: (ev.images || []).slice(),
+            title: ev.eventName,
+            dateDisplay: ev.dateDisplay,
+            category: ev.category,
+            totalImages: ev.totalImages || (ev.images ? ev.images.length : 0),
+            // Use explicit name-based published overrides for correctness requested by the user
+            isPublished: isEventPublished(ev),
+            folderPath: ev.folderPath,
+          }));
+          // Determine how many panes to display. Default to 8, but allow the embedding to override
+          // via data-panes attribute on the root element. Clamp between 4 and 48 to avoid overload.
+          const requested = parseInt(
+            (portfolio && portfolio.dataset && portfolio.dataset.panes) || '',
+            10,
+          );
+          const TARGET_PANES = Math.min(Math.max(isNaN(requested) ? 8 : requested, 4), 48);
+          let slots = [];
+          const usedImages = new Set();
+          // Prefer showing at most 1 image per folder (one main shuffled image per album)
+          const MAX_PER_FOLDER = 1;
+          const perFolderCount = new Map();
+
+          // Helper to try adding one image from a specific pool if possible
+          const tryAddFromPool = (pool) => {
+            while (pool.images.length) {
+              const img = pool.images.shift();
+              const imgUrl = resolveImagePath(pool.event, img);
+              if (!imgUrl) continue; // skip unresolved
+              if (usedImages.has(imgUrl)) continue; // skip duplicates
+              usedImages.add(imgUrl);
+              const count = perFolderCount.get(pool.folderPath) || 0;
+              perFolderCount.set(pool.folderPath, count + 1);
+              slots.push({
+                event: pool.event,
+                img,
+                allImages: pool.allImages,
+                title: pool.title,
+                dateDisplay: pool.dateDisplay,
+                category: pool.category,
+                totalImages: pool.totalImages,
+                isPublished: pool.isPublished,
+                folderPath: pool.folderPath,
+              });
+              return true;
+            }
+            return false;
+          };
+
+          // Round-robin pass limiting to 1 per folder first
+          let progress = true;
+          while (slots.length < TARGET_PANES && progress) {
+            progress = false;
+            for (const pool of pools) {
+              if (slots.length >= TARGET_PANES) break;
+              const currentCount = perFolderCount.get(pool.folderPath) || 0;
+              if (currentCount >= 1) continue; // skip if we already added one from this folder
+              const added = tryAddFromPool(pool);
+              if (added) progress = true;
+            }
+            // If nothing added in this sweep, break to avoid infinite loop
+            if (!progress) break;
+          }
+
+          // We intentionally do NOT add a second image per folder — the widget should
+          // display one main shuffled image per album. If there are fewer unique albums
+          // than TARGET_PANES, we'll show as many unique albums as available.
+          // Minimize same-folder adjacency so images from the same folder rarely sit next to one another
+          const minimizeSameFolderAdjacency = (arr) => {
+            for (let i = 0; i < arr.length - 1; i++) {
+              const curr = arr[i] && arr[i].folderPath ? arr[i].folderPath : null;
+              if (!curr) continue;
+              if (arr[i + 1] && arr[i + 1].folderPath === curr) {
+                // find a later slot with a different folder and swap into position i+1
+                let j = i + 2;
+                while (j < arr.length && arr[j] && arr[j].folderPath === curr) j++;
+                if (j < arr.length) {
+                  const tmp = arr[i + 1];
+                  arr[i + 1] = arr[j];
+                  arr[j] = tmp;
+                }
+              }
+            }
+            return arr;
+          };
+
+          minimizeSameFolderAdjacency(slots);
+
+          // Final constrained shuffle: try several random permutations and pick the one
+          // with the fewest same-folder adjacencies (keeps variety but avoids clusters)
+          const adjacencyScore = (arr) => {
+            let s = 0;
+            for (let i = 0; i < arr.length - 1; i++) {
+              if (
+                arr[i] &&
+                arr[i + 1] &&
+                arr[i].folderPath &&
+                arr[i + 1].folderPath &&
+                arr[i].folderPath === arr[i + 1].folderPath
+              )
+                s++;
+            }
+            return s;
+          };
+          const constrainedShuffle = (arr, tries = 8) => {
+            if (!Array.isArray(arr) || arr.length <= 1) return arr;
+            let best = arr.slice();
+            let bestScore = adjacencyScore(best);
+            for (let t = 0; t < tries; t++) {
+              const candidate = shuffle(arr);
+              const score = adjacencyScore(candidate);
+              if (score < bestScore) {
+                best = candidate.slice();
+                bestScore = score;
+                if (bestScore === 0) break;
+              }
+            }
+            return best;
+          };
+
+          slots = constrainedShuffle(slots, 8);
+
+          // Render cards
+          const fragment = document.createDocumentFragment();
+          let totalImages = 0;
+          slots.forEach((slot) => {
+            const ev = slot.event;
+            const card = document.createElement('article');
+            card.className = 'journalism-card loading';
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.setAttribute(
+              'aria-label',
+              `View ${slot.title} journalism photos from ${slot.dateDisplay}`,
+            );
+            card.dataset.category = slot.category || 'Other';
+            card.dataset.published = slot.isPublished ? 'true' : 'false';
+            // Published badge
+            if (slot.isPublished) {
+              const badge = document.createElement('div');
+              badge.className = 'published-badge';
+              badge.innerHTML =
+                '<span class="pb-dot" aria-hidden="true"></span><span class="pb-label">Published</span>';
+              card.appendChild(badge);
+            }
+            // Image count badge
+            if (slot.totalImages > 1) {
+              const c = document.createElement('div');
+              c.className = 'image-count-badge';
+              c.textContent = slot.totalImages + ' photos';
+              card.appendChild(c);
+            }
+            // Main image
+            const img = document.createElement('img');
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.alt = generateAltText(ev, slot.img);
+            img.width = 400;
+            img.height = 300;
+            const thumbUrl = resolveImagePath(ev, slot.img);
+            img.src = thumbUrl;
+            img.onload = () => {
+              card.classList.remove('loading');
+              card.classList.add('loaded');
+            };
+            img.onerror = () => {
+              card.classList.remove('loading');
+              card.classList.add('error');
+            };
+            card.appendChild(img);
+            // Info
+            const info = document.createElement('div');
+            info.className = 'journalism-info';
+            info.innerHTML = `<h3 class=\"journalism-title\">${slot.title}</h3><p class=\"journalism-meta\">${slot.dateDisplay} • ${slot.category}</p>`;
+            card.appendChild(info);
+            // Lightbox open
+            card.addEventListener('click', () => openLightbox(ev));
+            card.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLightbox(ev);
+              }
+            });
+            fragment.appendChild(card);
+            totalImages += slot.totalImages;
+          });
+          grid.innerHTML = '';
+          if (slots.length === 0) {
+            loading.innerHTML = `<div style=\"text-align: center; color: #ff4d6d;\"><p>No journalism cards to display (events: ${events.length}, pools: ${pools.length}).</p></div>`;
+          } else {
+            grid.appendChild(fragment);
+            loading.style.display = 'none';
+            grid.style.display = 'block';
+            grid.classList.add('loaded');
+          }
+        } catch (error) {
+          console.error('Failed to build journalism portfolio:', error);
+          loading.style.display = 'none';
+          grid.style.display = 'none';
+          portfolio.style.background = '';
+          grid.style.background = '';
+          const errMsg = `Failed to load journalism portfolio: ${error.message}`;
+          loading.innerHTML = `<div style=\"text-align: center; color: #ff4d6d;\"><p>${errMsg}</p><button onclick=\"location.reload()\" style=\"background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 8px;\">Retry</button></div>`;
+          loading.style.display = 'flex';
+        }
+      };
+      // Lightbox functionality (unchanged)
+      const lightbox = document.getElementById('journalismLightbox');
+      const gallery = document.getElementById('jlGallery');
+      const dialog = lightbox.querySelector('.jl-dialog');
+      const title = lightbox.querySelector('.jl-title');
+      const meta = lightbox.querySelector('.jl-meta');
+      const desc = lightbox.querySelector('.jl-description');
+      const pub = lightbox.querySelector('.jl-publication');
+      const openLightbox = (ev) => {
+        gallery.innerHTML = '<div class="jl-hint">Scroll Up/Down</div>';
+        (ev.images || []).forEach((img, i) => {
+          const im = document.createElement('img');
+          im.loading = 'lazy';
+          im.decoding = 'async';
+          im.alt = generateAltText(ev, img);
+          im.src = resolveImagePath(ev, img);
+          im.className = 'loading';
+          im.onload = () => {
+            im.classList.remove('loading');
+            im.classList.add('loaded');
+          };
+          im.onerror = () => {
+            im.classList.remove('loading');
+            im.classList.add('error');
+            im.alt = 'Image failed';
+          };
+          gallery.appendChild(im);
+        });
+        title.textContent = ev.eventName;
+        meta.textContent = `${ev.dateDisplay} • ${ev.category} • ${ev.totalImages || (ev.images ? ev.images.length : 0)} images`;
+        if (ev.images && ev.images[0] && ev.images[0].description) {
+          desc.textContent = ev.images[0].description;
+          desc.style.display = 'block';
+        } else {
+          desc.style.display = 'none';
+        }
+        if (ev.images && ev.images[0] && ev.images[0].published && ev.images[0].outlet) {
+          pub.innerHTML = `<strong>Published in:</strong> <a href=\"${ev.images[0].outletUrl || '#'}\" target=\"_blank\">${ev.images[0].outlet}</a>`;
+          pub.style.display = 'block';
+        } else {
+          pub.style.display = 'none';
+        }
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('lb-open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          const h = gallery.querySelector('.jl-hint');
+          if (h) h.classList.add('fade');
+        }, 3000);
+        if (dialog) dialog.focus();
+      };
+      const closeLightbox = () => {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('lb-open');
+        document.body.style.overflow = '';
+        const h = gallery.querySelector('.jl-hint');
+        if (h) h.classList.remove('fade');
+      };
+      lightbox.querySelector('.jl-close').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          let handled = false;
+          if (lightbox.classList.contains('is-open')) {
+            closeLightbox();
+            handled = true;
+          }
+          if (changelogModal && changelogModal.classList.contains('active')) {
+            hideChangelog();
+            handled = true;
+          }
+          if (handled) e.preventDefault();
+        }
+      });
+      // Debug panel logic removed for production
+      // Auto-refresh functionality (concert v4.4 pattern)
+      function setupAutoRefresh() {
+        log('Setting up intelligent auto-refresh', 'Every 15 minutes');
+        document.addEventListener('visibilitychange', () => {
+          const wasVisible = isTabVisible;
+          isTabVisible = !document.hidden;
+          lastVisibilityChange = Date.now();
+          if (wasVisible && !isTabVisible) {
+            log('Tab became hidden, pausing refresh checks');
+          } else if (!wasVisible && isTabVisible) {
+            log('Tab became visible, resuming refresh checks');
+            const hiddenTime = Date.now() - lastVisibilityChange;
+            if (hiddenTime > 15 * 60 * 1000) {
+              log('Tab was hidden for a while, refreshing now');
+              buildGrid();
+            }
+          }
+        });
+        autoRefreshTimer = setInterval(
+          () => {
+            if (isTabVisible) {
+              log('Auto-refreshing journalism portfolio...');
+              buildGrid();
+            } else {
+              log('Skipping refresh - tab not visible');
+            }
+          },
+          15 * 60 * 1000,
+        );
+      }
+      // Load non-critical features
+      const loadDeferredFeatures = () => {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(() => {
+            if (window.location.search.includes('debug')) {
+              toggleDebug();
+            }
+          });
+        }
+      };
+      // Initialize
+      const init = async () => {
+        try {
+          await buildGrid();
+          setupAutoRefresh();
+          loadDeferredFeatures();
+        } catch (error) {
+          console.error('Failed to initialize journalism portfolio:', error);
+        }
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+      window.addEventListener('beforeunload', () => {
+        if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      });
+    })();
+  } catch (fatalError) {
+    // Top-level catch for any script error
+    var pf = document.getElementById('journalismPf');
+    var errDiv = document.createElement('div');
+    errDiv.style.cssText =
+      'background:#ff4d6d;color:#fff;padding:16px 24px;margin:12px 0;border-radius:8px;font:700 16px/1.4 ui-sans-serif,system-ui;text-align:center;z-index:9999;';
+    errDiv.textContent =
+      'Critical error: ' + (fatalError && fatalError.message ? fatalError.message : fatalError);
+    if (pf && pf.parentNode) pf.parentNode.insertBefore(errDiv, pf);
+    console.error('Critical error in journalism widget:', fatalError);
+  }
+</script>

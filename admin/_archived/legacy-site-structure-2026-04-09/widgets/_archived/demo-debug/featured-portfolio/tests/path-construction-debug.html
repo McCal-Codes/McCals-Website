@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Path Debug Test</title>
+    <style>
+        body { font-family: monospace; margin: 20px; background: #1a1a1a; color: #f0f0f0; }
+        .debug { background: #2a2a2a; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #4a2a2a; border-left: 4px solid #ff6b6b; }
+        .success { background: #2a4a2a; border-left: 4px solid #51cf66; }
+        .info { background: #2a3a4a; border-left: 4px solid #74c0fc; }
+    </style>
+</head>
+<body>
+    <h1>Path Construction Debug</h1>
+    
+    <div id="results"></div>
+
+    <script>
+        async function testPathConstruction() {
+            const results = document.getElementById('results');
+            
+            try {
+                // Load ONLY individual portfolio manifests to avoid redundancy
+                // Note: Skipping portfolio-manifest.json and featured-manifest.json as they are aggregated
+                const portfolioTypes = [
+                    { name: 'concert', folder: 'Concert', manifestName: 'concert-manifest.json', maxItems: 5 },
+                    { name: 'events', folder: 'Events', manifestName: 'events-manifest.json', maxItems: 3 }, 
+                    { name: 'journalism', folder: 'Journalism', manifestName: 'journalism-manifest.json', maxItems: 3 }
+                ];
+                const allItems = [];
+                const seenItems = new Set(); // Track items to avoid duplicates
+                
+                for (const type of portfolioTypes) {
+                    try {
+                        const manifestUrl = `../../../../src/images/Portfolios/${type.folder}/${type.manifestName}`;
+                        results.innerHTML += `<div class="debug info">Trying to load: ${manifestUrl}</div>`;
+                        
+                        const response = await fetch(manifestUrl);
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+                        const manifest = await response.json();
+                        
+                        // Handle different manifest formats
+                        let items = [];
+                        if (type.name === 'concert' && manifest.bands) {
+                            items = manifest.bands.map(band => ({
+                                ...band,
+                                folderPath: band.folderPath,
+                                images: Array.isArray(band.images) ? band.images : [],
+                                type: 'Concert',
+                                title: band.bandName,
+                                concertDate: band.concertDate
+                            }));
+                        } else if (type.name === 'events' && manifest.items) {
+                            items = manifest.items.map(event => ({
+                                ...event,
+                                folderPath: event.folderPath,
+                                images: event.images?.map(img => img.path?.split('/').pop() || img) || [],
+                                type: 'Events',
+                                title: event.eventName || event.title
+                            }));
+                        } else if (type.name === 'journalism' && manifest.events) {
+                            items = manifest.events.map(event => ({
+                                ...event,
+                                folderPath: event.folderPath,
+                                images: Array.isArray(event.images) ? event.images : [],
+                                type: 'Journalism',
+                                title: event.title || event.eventName
+                            }));
+                        } else if (manifest.items) {
+                            items = manifest.items;
+                        }
+                        
+                        results.innerHTML += `<div class="debug info">Found ${items.length} items in ${type.name} manifest</div>`;
+                        
+                        if (items && items.length > 0) {
+                            // Get the most recent items from this portfolio type
+                            const sortedItems = items
+                                .sort((a, b) => {
+                                    // Sort by date if available, otherwise by folder name
+                                    const aDate = a.concertDate?.iso || a.date?.iso || a.dateISO || a.folderPath;
+                                    const bDate = b.concertDate?.iso || b.date?.iso || b.dateISO || b.folderPath;
+                                    return bDate > aDate ? 1 : -1;
+                                });
+                            
+                            // Add items while avoiding duplicates
+                            let addedCount = 0;
+                            for (const item of sortedItems) {
+                                if (addedCount >= type.maxItems) break;
+                                
+                                // Create unique key to identify duplicates
+                                const itemKey = `${item.folderPath || ''}|${item.eventName || item.title || ''}`;
+                                if (!seenItems.has(itemKey)) {
+                                    seenItems.add(itemKey);
+                                    allItems.push({
+                                        ...item,
+                                        type: type.folder, // Ensure proper type casing
+                                        portfolioSource: type.name
+                                    });
+                                    addedCount++;
+                                }
+                            }
+                            results.innerHTML += `<div class="debug success">✅ Added ${addedCount} unique items from ${type.name} (${items.length} total available)</div>`;
+                        }
+                    } catch (error) {
+                        results.innerHTML += `<div class="debug error">❌ Failed to load ${type.name}: ${error.message}</div>`;
+                    }
+                }
+                
+                // Shuffle the combined results to mix portfolio types
+                for (let i = allItems.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [allItems[i], allItems[j]] = [allItems[j], allItems[i]];
+                }
+                
+                results.innerHTML += `<div class="debug success">✅ Total combined items: ${allItems.length}</div>`;
+                
+                // Test the first few items
+                const testItems = allItems.slice(0, 3) || [];
+                
+                for (let i = 0; i < testItems.length; i++) {
+                    const item = testItems[i];
+                    results.innerHTML += `<div class="debug info">
+                        <h3>Item ${i + 1}</h3>
+                        <strong>Raw Data:</strong><br>
+                        - type: "${item.type}"<br>
+                        - folderPath: "${item.folderPath}"<br>
+                        - images count: ${item.images?.length || 0}<br>
+                        <br>
+                        <strong>Processing Steps:</strong><br>
+                    `;
+                    
+                    // Step 1: Clean folder path
+                    const folderPath = (item.folderPath || '').replace(/['"]/g, '');
+                    const rawParts = folderPath ? folderPath.split('/').filter(Boolean) : [];
+                    results.innerHTML += `- Clean folderPath: "${folderPath}"<br>`;
+                    results.innerHTML += `- Raw parts: [${rawParts.join(', ')}]<br>`;
+                    
+                    // Step 2: Canonicalize type
+                    function canonicalizeType(value) {
+                        if (!value) return 'portfolio';
+                        const normalized = String(value).trim().toLowerCase();
+                        if (['concert', 'concerts', 'music', 'music photography', 'concert photography'].includes(normalized)) return 'concert';
+                        if (['event', 'events', 'event photography', 'corporate', 'events photography'].includes(normalized)) return 'events';
+                        if (['journalism', 'photojournalism', 'photo journalism', 'documentary', 'journalism photography', 'politics'].includes(normalized)) return 'journalism';
+                        return normalized;
+                    }
+                    
+                    const itemType = canonicalizeType(item.type || item.category || 'portfolio');
+                    results.innerHTML += `- Canonical type: "${itemType}"<br>`;
+                    
+                    // Step 3: Build final parts
+                    let parts = rawParts.slice();
+                    if (parts.length > 0 && itemType !== 'portfolio') {
+                        const typePrefix = itemType.charAt(0).toUpperCase() + itemType.slice(1);
+                        if (!parts[0] || parts[0].toLowerCase() !== itemType.toLowerCase()) {
+                            parts = [typePrefix, ...parts];
+                        }
+                    }
+                    results.innerHTML += `- Final parts: [${parts.join(', ')}]<br>`;
+                    
+                    // Step 4: Build expected image URL
+                    const rawImage = item.images?.[0];
+                    let testImage;
+                    
+                    // Handle different image formats
+                    if (typeof rawImage === 'string') {
+                        testImage = rawImage;
+                    } else if (rawImage && typeof rawImage === 'object') {
+                        testImage = rawImage.src || rawImage.filename || rawImage.name || rawImage.url || 'unknown';
+                        results.innerHTML += `- Image object: ${JSON.stringify(rawImage)}<br>`;
+                    } else {
+                        testImage = 'no-image';
+                    }
+                    
+                    if (testImage && testImage !== 'no-image') {
+                        const pathSegments = parts.map(p => encodeURIComponent(p)).join('/');
+                        const imageUrl = `../../../../src/images/Portfolios/${pathSegments}/${encodeURIComponent(testImage)}`;
+                        results.innerHTML += `- Test image: "${testImage}"<br>`;
+                        results.innerHTML += `- Expected URL: <br>&nbsp;&nbsp;${imageUrl}<br>`;
+                        
+                        // Test URL accessibility (HEAD request to avoid loading full image)
+                        try {
+                            const response = await fetch(imageUrl, { method: 'HEAD' });
+                            if (response.ok) {
+                                results.innerHTML += `<span style="color: #51cf66;">✅ Image URL is accessible (HTTP ${response.status})</span><br>`;
+                            } else {
+                                results.innerHTML += `<span style="color: #ff9800;">⚠️ Image URL returns HTTP ${response.status}</span><br>`;
+                            }
+                        } catch (fetchError) {
+                            results.innerHTML += `<span style="color: #ff6b6b;">❌ Image URL not accessible: ${fetchError.message}</span><br>`;
+                        }
+                    }
+                    
+                    results.innerHTML += `</div>`;
+                }
+                
+            } catch (error) {
+                results.innerHTML += `<div class="debug error">❌ Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Run test on page load
+        window.addEventListener('load', testPathConstruction);
+    </script>
+</body>
+</html>

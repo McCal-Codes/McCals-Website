@@ -1,0 +1,820 @@
+<!-- Abridgd Landing Widget v1.0-landing.html
+  Self-contained landing page widget inspired by https://sumee.online/
+  Replace placeholder screenshots at /assets/images/abridgd-screenshot-1.jpg etc. with your actual images.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Abridgd — App Landing</title>
+    <!-- site-widgets:inline:start -->
+    <style data-site-widgets-inline>
+      :where(.abridgd-embed) {
+        /* Token handshake: inherit site tokens if present, fall back to About-page dark palette */
+        --bg: var(--mcc-bg, #050506);
+        --card: var(
+          --mcc-card,
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))
+        );
+        --card-strong: var(
+          --mcc-card-strong,
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04))
+        );
+        --border: var(--mcc-border, rgba(202, 194, 186, 0.32));
+        --muted: var(--mcc-muted, #a69d96);
+        --accent: var(--mcc-accent, #b8b0aa);
+        --accent-2: var(--mcc-accent-2, #f5e9dc);
+        --text: var(--mcc-text, #f2eae1);
+        --radius: var(--mcc-radius, 20px);
+        --gap: var(--mcc-gap, 18px);
+        --shadow: var(--mcc-shadow, 0 16px 38px rgba(0, 0, 0, 0.35));
+        color-scheme: dark;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          'Helvetica Neue',
+          Arial;
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        position: relative;
+        display: block;
+        background: var(--bg);
+      }
+      :where(.abridgd-embed *) {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #050506;
+        color: #f2eae1;
+      }
+      .abridgd-embed {
+        isolation: isolate;
+        min-height: 100vh;
+      }
+      .abridgd-embed .abr-container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 36px 28px;
+        position: relative;
+        z-index: 1;
+      }
+      .abridgd-embed .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      /* Header / hero */
+      .abridgd-embed .hero {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 28px;
+        align-items: center;
+      }
+      .abridgd-embed .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .abridgd-embed .brand img {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        display: block;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+      .abridgd-embed h1 {
+        font-size: clamp(28px, 4vw, 44px);
+        margin: 8px 0 6px;
+        line-height: 1.02;
+      }
+      .abridgd-embed p.lead {
+        color: var(--muted);
+        font-size: 1.05rem;
+        margin: 0 0 16px;
+        max-width: 56ch;
+      }
+
+      .abridgd-embed .cta-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .abridgd-embed .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        font-weight: 700;
+        text-decoration: none;
+        backdrop-filter: blur(4px);
+        transition:
+          transform 140ms ease,
+          box-shadow 140ms ease,
+          background 140ms ease,
+          border-color 140ms ease;
+      }
+      .abridgd-embed .btn-primary {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: #1a1612;
+        box-shadow: 0 12px 36px color-mix(in srgb, #000 40%, rgba(0, 0, 0, 0));
+      }
+      .abridgd-embed .btn-ghost {
+        background: rgba(255, 255, 255, 0.12);
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .abridgd-embed .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 42px rgba(0, 0, 0, 0.35);
+      }
+      .abridgd-embed .btn:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
+      }
+
+      /* Skip link */
+      .abridgd-embed .skip {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.75);
+        color: var(--text);
+        border: 1px solid var(--border);
+        transform: translateY(-140%);
+        transition: transform 160ms ease;
+        z-index: 50;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .abridgd-embed .skip:focus {
+        transform: translateY(0);
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      /* right column: screenshot card */
+      .abridgd-embed .screenshot-card {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--card-strong);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .abridgd-embed .phone {
+        width: 100%;
+        height: 640px;
+        display: block;
+        background: #02060a;
+        position: relative;
+      }
+      .abridgd-embed .phone img {
+        position: absolute;
+        inset: 14px;
+        border-radius: 12px;
+        width: calc(100% - 28px);
+        height: calc(100% - 28px);
+        object-fit: cover;
+      }
+
+      /* features grid */
+      .abridgd-embed .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+      .abridgd-embed .feature {
+        background: rgba(255, 255, 255, 0.06);
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+      }
+      .abridgd-embed .feature h4 {
+        margin: 0 0 6px;
+      }
+      .abridgd-embed .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      /* screenshots gallery */
+      .abridgd-embed .screenshots {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 22px;
+      }
+      .abridgd-embed .shot {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.04));
+        border-radius: 12px;
+        padding: 10px;
+        border: 1px solid var(--border);
+      }
+      .abridgd-embed .shot img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      /* centered CTA section */
+      .abridgd-embed .cta-hero {
+        display: flex;
+        justify-content: center;
+        margin-top: 22px;
+      }
+
+      /* footer / small print */
+      .abridgd-embed .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        gap: 12px;
+      }
+
+      /* medium screens */
+      @media (max-width: 1080px) {
+        .abridgd-embed .abr-container {
+          padding: 24px 20px;
+        }
+        .abridgd-embed .hero {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+        .abridgd-embed .phone {
+          height: 480px;
+        }
+      }
+
+      /* small screens / mobile */
+      @media (max-width: 740px) {
+        .abridgd-embed .abr-container {
+          padding: 18px 14px;
+          margin: 22px auto;
+        }
+        .abridgd-embed .card {
+          padding: 18px;
+        }
+        .abridgd-embed h1 {
+          font-size: clamp(26px, 7vw, 34px);
+        }
+        .abridgd-embed .hero {
+          grid-template-columns: 1fr;
+        }
+        .abridgd-embed .phone {
+          height: 380px;
+        }
+        .abridgd-embed .cta-row {
+          flex-direction: column;
+        }
+        .abridgd-embed .btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .abridgd-embed .screenshots {
+          grid-template-columns: 1fr;
+        }
+        .abridgd-embed .shot img {
+          height: 200px;
+        }
+        .abridgd-embed .meta {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .abridgd-embed .btn {
+          transition: none;
+        }
+      }
+
+      /* version indicator and modal */
+      .abridgd-embed .version-indicator {
+        margin-top: 18px;
+        display: inline-block;
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .abridgd-embed .changelog {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 6, 10, 0.6);
+        align-items: center;
+        justify-content: center;
+        padding: 28px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 9999;
+      }
+      .abridgd-embed .changelog .box {
+        max-width: 720px;
+        background: var(--card);
+        padding: 20px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .abridgd-embed .changelog.open {
+        display: flex;
+      }
+    </style>
+    <!-- site-widgets:inline:end -->
+  </head>
+  <body>
+    <section class="abridgd-embed" aria-label="Abridgd landing widget">
+      <a class="skip" href="#abridgd-main">Skip widget content</a>
+      <div class="abr-container">
+        <main class="card" role="main" aria-labelledby="abr-title" id="abridgd-main">
+          <section class="hero">
+            <div>
+              <div class="brand">
+                <img
+                  src="/assets/images/Abridgd%20App/Abridgd_app_icon.png"
+                  alt="Abridgd brand mark"
+                />
+                <div>
+                  <div
+                    style="
+                      font-size: 12px;
+                      color: var(--muted);
+                      font-weight: 700;
+                      letter-spacing: 0.08em;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Abridgd · Expo · React Native
+                  </div>
+                  <h1 id="abr-title">Finish the news without doomscrolling.</h1>
+                </div>
+              </div>
+
+              <p class="lead">A finite Pittsburgh feed with RSVP pacing and optional grounding.</p>
+
+              <div class="cta-row">
+                <a class="btn btn-primary" href="#abr-download">Request TestFlight invite</a>
+                <a class="btn btn-ghost" href="#abr-screenshots">See screenshots</a>
+              </div>
+              <div class="cta-row" style="margin-top: 10px">
+                <a class="btn btn-ghost" href="#abr-features">Features</a>
+                <a class="btn btn-ghost" href="#abr-download">Join beta</a>
+                <a class="btn btn-ghost" href="#abr-trust">Privacy</a>
+              </div>
+
+              <div style="margin-top: 10px; color: var(--muted); font-size: 0.92rem">
+                No account required. No trackers by default.
+              </div>
+
+              <ul
+                style="
+                  list-style: none;
+                  padding: 0;
+                  margin: 14px 0 0;
+                  display: grid;
+                  gap: 8px;
+                  color: var(--muted);
+                  font-size: 0.95rem;
+                "
+              >
+                <li>• RSVP reading that feels calmer</li>
+                <li>• Local-first feed (Pittsburgh ready)</li>
+                <li>• Grounding mode for heavy stories</li>
+              </ul>
+
+              <div class="features" id="abr-features">
+                <div class="feature">
+                  <h4>Read calmer</h4>
+                  <p>RSVP pacing with clean typography; no clutter.</p>
+                </div>
+                <div class="feature">
+                  <h4>Stay local</h4>
+                  <p>Curated, finite Pittsburgh feed so you know you’re done.</p>
+                </div>
+                <div class="feature">
+                  <h4>Save & return</h4>
+                  <p>Local saves; pick up later, offline-friendly.</p>
+                </div>
+                <div class="feature">
+                  <h4>Ground gently</h4>
+                  <p>Optional breath cues for tough stories; opt-in anytime.</p>
+                </div>
+                <div class="feature">
+                  <h4>Own your data</h4>
+                  <p>No trackers by default; minimal diagnostics only if enabled.</p>
+                </div>
+              </div>
+
+              <div class="meta">
+                <div>Designed for calm, built for clarity.</div>
+                <div style="text-align: right">
+                  <button
+                    type="button"
+                    class="version-indicator"
+                    id="abr-open-changelog"
+                    aria-controls="abr-changelog"
+                    aria-haspopup="dialog"
+                  >
+                    v1.0-landing
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <aside class="screenshot-card" aria-hidden="false">
+              <div class="phone">
+                <!-- Primary hero screenshot: replace with your actual screenshot -->
+                <img
+                  src="/assets/images/Abridgd%20App/Abridgd%20Screenshot_1.jpeg"
+                  alt="Abridgd hero screenshot"
+                />
+              </div>
+
+              <div
+                style="
+                  padding: 12px;
+                  display: flex;
+                  gap: 8px;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div style="font-weight: 700">Preview</div>
+                <div style="color: var(--muted); font-size: 0.95rem">iOS / Android</div>
+              </div>
+            </aside>
+          </section>
+
+          <section class="card" style="margin-top: 18px" id="abr-how">
+            <h3 style="margin: 0 0 10px">How it works</h3>
+            <div class="features" style="margin-top: 8px">
+              <div class="feature">
+                <h4>Finite edition</h4>
+                <p>Daily set of stories, no infinite scroll.</p>
+              </div>
+              <div class="feature">
+                <h4>RSVP pacing</h4>
+                <p>Word-by-word tempo to keep focus steady.</p>
+              </div>
+              <div class="feature">
+                <h4>Resume later</h4>
+                <p>Saves stay on-device; pick up where you left off.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 18px" id="abr-screenshots">
+            <h3 style="margin: 0 0 10px">Screenshots</h3>
+            <div class="screenshots" style="margin-top: 14px">
+              <div class="shot">
+                <img
+                  src="/assets/images/Abridgd%20App/Abridgd%20Screenshot_1.jpeg"
+                  alt="Choose a story"
+                  loading="lazy"
+                />
+                <div style="padding-top: 8px; color: var(--muted); font-size: 0.9rem">
+                  Choose · Finite local feed
+                </div>
+              </div>
+              <div class="shot">
+                <img
+                  src="/assets/images/Abridgd%20App/Abridgd%20Screenshot_2.jpeg"
+                  alt="Read calmly"
+                  loading="lazy"
+                />
+                <div style="padding-top: 8px; color: var(--muted); font-size: 0.9rem">
+                  Read · Calm typography, no clutter
+                </div>
+              </div>
+              <div class="shot">
+                <img
+                  src="/assets/images/Abridgd%20App/Abridgd%20Screenshot_3.jpeg"
+                  alt="Save and return"
+                  loading="lazy"
+                />
+                <div style="padding-top: 8px; color: var(--muted); font-size: 0.9rem">
+                  Save · Pick up later, offline-friendly
+                </div>
+              </div>
+              <div class="shot">
+                <img
+                  src="/assets/images/Abridgd%20App/Abridgd%20Screenshot_4.jpeg"
+                  alt="Grounding mode"
+                  loading="lazy"
+                />
+                <div style="padding-top: 8px; color: var(--muted); font-size: 0.9rem">
+                  Ground · Optional breathing cue
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 18px" id="abr-download">
+            <h3 style="margin: 0 0 10px">Join TestFlight</h3>
+            <p style="margin: 0; color: var(--muted)">
+              Request iOS TestFlight access; Android waitlist available.
+            </p>
+            <div class="cta-row" style="margin-top: 12px">
+              <a
+                class="btn btn-primary"
+                href="mailto:contact@mcc-cal.com?subject=Abridgd%20TestFlight"
+                >Request TestFlight invite</a
+              >
+              <a
+                class="btn btn-ghost"
+                href="mailto:contact@mcc-cal.com?subject=Abridgd%20Android%20Beta"
+                >Join Android waitlist</a
+              >
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 18px" id="abr-roadmap">
+            <h3 style="margin: 0 0 10px">What’s next</h3>
+            <div class="features" style="margin-top: 8px">
+              <div class="feature">
+                <h4>Now</h4>
+                <p>Calm reading, local feed, saves, optional grounding.</p>
+              </div>
+              <div class="feature">
+                <h4>Next</h4>
+                <p>Better offline polish, faster RSVP, richer local sources.</p>
+              </div>
+              <div class="feature">
+                <h4>Later</h4>
+                <p>Personalization, sync, and store releases.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 18px" id="abr-trust">
+            <h3 style="margin: 0 0 10px">Privacy & trust</h3>
+            <div style="display: grid; gap: 10px; color: var(--muted)">
+              <div>
+                <strong style="color: var(--text)">We do</strong>
+                <ul style="margin: 6px 0 0; padding-left: 18px">
+                  <li>Store saved articles and settings locally on-device.</li>
+                  <li>Offer optional diagnostics only if you enable it.</li>
+                </ul>
+              </div>
+              <div>
+                <strong style="color: var(--text)">We don’t</strong>
+                <ul style="margin: 6px 0 0; padding-left: 18px">
+                  <li>Track you across apps or sell data.</li>
+                  <li>Require an account to read.</li>
+                </ul>
+              </div>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap">
+                <button
+                  class="btn btn-ghost"
+                  id="abr-open-privacy"
+                  type="button"
+                  aria-controls="abr-privacy-modal"
+                  aria-haspopup="dialog"
+                >
+                  Privacy policy
+                </button>
+                <button
+                  class="btn btn-ghost"
+                  id="abr-open-terms"
+                  type="button"
+                  aria-controls="abr-terms-modal"
+                  aria-haspopup="dialog"
+                >
+                  Terms
+                </button>
+                <a class="btn btn-ghost" href="/privacy/">View on site</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 18px" id="final-cta">
+            <h3 style="margin: 0 0 8px">One way to join</h3>
+            <p style="margin: 0; color: var(--muted)">
+              We keep it simple: the TestFlight request above is the only signup path.
+            </p>
+          </section>
+        </main>
+
+        <div
+          class="changelog"
+          id="abr-changelog"
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="abr-changelog-title"
+          tabindex="-1"
+        >
+          <div class="box">
+            <h3 id="abr-changelog-title">Changelog — v1.0-landing</h3>
+            <ul>
+              <li>v1.0 — Landing preview: hero, features, screenshots, CTAs.</li>
+            </ul>
+            <div style="display: flex; justify-content: flex-end; margin-top: 12px">
+              <button id="abr-closeChangelog" class="btn btn-ghost" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="changelog"
+          id="abr-privacy-modal"
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="privacy-title"
+          tabindex="-1"
+        >
+          <div class="box">
+            <h3 id="privacy-title">Privacy Policy</h3>
+            <ul
+              style="
+                margin: 0 0 12px;
+                padding-left: 18px;
+                color: var(--muted);
+                display: grid;
+                gap: 6px;
+                font-size: 0.95rem;
+              "
+            >
+              <li>No trackers by default; optional diagnostics only if you enable it.</li>
+              <li>Saved articles and settings stay on-device.</li>
+              <li>You can toggle grounding and diagnostics anytime.</li>
+              <li>
+                Contact us at
+                <a href="mailto:contact@mcc-cal.com" style="color: var(--accent)"
+                  >contact@mcc-cal.com</a
+                >
+                for data requests.
+              </li>
+            </ul>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end">
+              <a class="btn btn-ghost" href="/privacy/">View full policy</a>
+              <button id="abr-closePrivacy" class="btn btn-primary" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="changelog"
+          id="abr-terms-modal"
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="terms-title"
+          tabindex="-1"
+        >
+          <div class="box">
+            <h3 id="terms-title">Terms</h3>
+            <ul
+              style="
+                margin: 0 0 12px;
+                padding-left: 18px;
+                color: var(--muted);
+                display: grid;
+                gap: 6px;
+                font-size: 0.95rem;
+              "
+            >
+              <li>Abridgd is provided as-is during testing; features may change.</li>
+              <li>Do not share TestFlight builds publicly without permission.</li>
+              <li>Respect local news sources; links remain with their publishers.</li>
+              <li>
+                Contact
+                <a href="mailto:contact@mcc-cal.com" style="color: var(--accent)"
+                  >contact@mcc-cal.com</a
+                >
+                with questions.
+              </li>
+            </ul>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end">
+              <a class="btn btn-ghost" href="/terms/">View full terms</a>
+              <button id="abr-closeTerms" class="btn btn-primary" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+
+        <footer
+          style="
+            margin: 18px auto 0;
+            max-width: 1180px;
+            padding: 0 28px 24px;
+            color: var(--muted);
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.92rem;
+          "
+        >
+          <a href="/privacy/" style="color: var(--muted); text-decoration: none">Privacy</a>
+          <a href="/terms/" style="color: var(--muted); text-decoration: none">Terms</a>
+          <a href="mailto:contact@mcc-cal.com" style="color: var(--muted); text-decoration: none"
+            >Contact</a
+          >
+          <span style="flex: 1"></span>
+          <span>© Abridgd</span>
+        </footer>
+      </div>
+    </section>
+
+    <script>
+      // changelog open/close with focus management
+      const focusableSelector =
+        'button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])';
+
+      function bindModal(triggerId, modalId, closeSelector) {
+        const trigger = document.getElementById(triggerId);
+        const modal = document.getElementById(modalId);
+        if (!trigger || !modal) return;
+        const closes = closeSelector ? modal.querySelectorAll(closeSelector) : [];
+        let lastFocus = null;
+
+        function isOpen() {
+          return modal.classList.contains('open');
+        }
+
+        function trapTab(e) {
+          if (e.key !== 'Tab') return;
+          const focusables = Array.from(modal.querySelectorAll(focusableSelector)).filter(
+            (el) => !el.hasAttribute('disabled'),
+          );
+          if (!focusables.length) {
+            e.preventDefault();
+            modal.focus();
+            return;
+          }
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+
+        function onKeydown(e) {
+          if (!isOpen()) return;
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            closeModal();
+            return;
+          }
+          trapTab(e);
+        }
+
+        function openModal() {
+          lastFocus = document.activeElement;
+          document.body.style.overflow = 'hidden';
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden', 'false');
+          const focusables = modal.querySelectorAll(focusableSelector);
+          (focusables[0] || modal).focus();
+          document.addEventListener('keydown', onKeydown);
+        }
+
+        function closeModal() {
+          modal.classList.remove('open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.removeEventListener('keydown', onKeydown);
+          document.body.style.overflow = '';
+          if (lastFocus) {
+            lastFocus.focus();
+          }
+        }
+
+        trigger.addEventListener('click', openModal);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+        closes.forEach((btn) => btn.addEventListener('click', closeModal));
+      }
+
+      bindModal('abr-open-changelog', 'abr-changelog', '#abr-closeChangelog');
+      bindModal('abr-open-privacy', 'abr-privacy-modal', '#abr-closePrivacy');
+      bindModal('abr-open-terms', 'abr-terms-modal', '#abr-closeTerms');
+    </script>
+  </body>
+</html>

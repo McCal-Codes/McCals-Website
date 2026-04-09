@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Widget v1.6 Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+        .test-info {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(60, 60, 60, 0.6);
+        }
+        .test-info h2 {
+            margin-top: 0;
+            color: #1db954;
+        }
+        .performance-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .metric {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1db954;
+        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h2>🧪 Podcast Widget v1.6 Performance Test</h2>
+        <p>Testing load time, functionality, and user experience improvements.</p>
+        
+        <div class="performance-test" id="performanceTest">
+            <div class="metric">
+                <div class="metric-value" id="loadTimeTest">--</div>
+                <div class="metric-label">Load Time (ms)</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="episodeCountTest">--</div>
+                <div class="metric-label">Episodes Loaded</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="audioStatusTest">--</div>
+                <div class="metric-label">Audio Status</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="requestsTest">--</div>
+                <div class="metric-label">Network Requests</div>
+            </div>
+        </div>
+        
+        <div id="testResults" style="margin-top: 20px; padding: 12px; background: rgba(29, 185, 84, 0.1); border-radius: 8px; display: none;">
+            <strong>✅ Test Results:</strong> <span id="testMessage"></span>
+        </div>
+    </div>
+
+    <!-- Load the widget -->
+    <div id="widget-host" style="position: relative;">
+        <!-- Widget will be injected here -->
+    </div>
+
+    <script>
+        // Performance monitoring
+        const testStartTime = performance.now();
+        let testResults = {
+            loadTime: 0,
+            episodes: 0,
+            audioStatus: 'unknown',
+            requests: 0,
+            success: false
+        };
+
+        // Monitor network requests
+        const originalFetch = window.fetch;
+        let requestCount = 0;
+        window.fetch = function(...args) {
+            requestCount++;
+            return originalFetch.apply(this, args);
+        };
+
+        // Load the widget content
+        fetch('./versions/v1.6.html')
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const host = document.getElementById('widget-host');
+                if (!host) {
+                    throw new Error('widget-host container not found');
+                }
+                // Clear any previous content
+                host.innerHTML = '';
+                
+                // Append nodes in order and execute scripts so the widget initializes
+                Array.from(doc.body.childNodes).forEach(node => {
+                    // Element nodes only
+                    if (node.nodeType === 1 && node.tagName === 'STYLE') {
+                        // Ensure styles apply globally
+                        document.head.appendChild(node.cloneNode(true));
+                    } else if (node.nodeType === 1 && node.tagName === 'SCRIPT') {
+                        const s = document.createElement('script');
+                        if (node.type) s.type = node.type;
+                        if (node.src) s.src = node.src;
+                        s.textContent = node.textContent;
+                        host.appendChild(s); // Executes when appended
+                    } else {
+                        host.appendChild(node.cloneNode(true));
+                    }
+                });
+                
+                // Allow time for PodcastWidget.init() to run
+                setTimeout(() => {
+                    runTests();
+                }, 500);
+            })
+            .catch(error => {
+                console.error('Failed to load widget:', error);
+                const host = document.getElementById('widget-host');
+                if (host) host.innerHTML = '<p style="text-align: center; color: #ff6b35;">Failed to load widget for testing</p>';
+            });
+
+        function runTests() {
+            testResults.loadTime = Math.round(performance.now() - testStartTime);
+            testResults.requests = requestCount;
+
+            // Check if episodes loaded
+            const episodeCards = document.querySelectorAll('.episode-card');
+            testResults.episodes = episodeCards.length;
+
+            // Check audio status
+            const audioTitle = document.querySelector('.audio-title');
+            if (audioTitle && audioTitle.textContent.includes('temporarily unavailable')) {
+                testResults.audioStatus = 'graceful';
+            } else if (audioTitle && audioTitle.textContent.includes('unavailable')) {
+                testResults.audioStatus = 'error';
+            } else {
+                testResults.audioStatus = 'working';
+            }
+
+            // Determine success
+            testResults.success = (
+                testResults.loadTime < 1000 && 
+                testResults.episodes === 6 && 
+                testResults.audioStatus === 'graceful'
+            );
+
+            updateTestDisplay();
+        }
+
+        function updateTestDisplay() {
+            document.getElementById('loadTimeTest').textContent = testResults.loadTime;
+            document.getElementById('episodeCountTest').textContent = testResults.episodes;
+            document.getElementById('audioStatusTest').textContent = testResults.audioStatus;
+            document.getElementById('requestsTest').textContent = testResults.requests;
+
+            // Show results
+            const resultsDiv = document.getElementById('testResults');
+            const messageSpan = document.getElementById('testMessage');
+            
+            if (testResults.success) {
+                messageSpan.textContent = `Widget loaded successfully in ${testResults.loadTime}ms with ${testResults.episodes} episodes and graceful audio handling.`;
+                resultsDiv.style.background = 'rgba(29, 185, 84, 0.1)';
+                resultsDiv.innerHTML = '<strong>✅ Test Results:</strong> ' + messageSpan.textContent;
+            } else {
+                let issues = [];
+                if (testResults.loadTime >= 1000) issues.push(`slow loading (${testResults.loadTime}ms)`);
+                if (testResults.episodes !== 6) issues.push(`incorrect episode count (${testResults.episodes})`);
+                if (testResults.audioStatus === 'error') issues.push('audio errors');
+                
+                messageSpan.textContent = `Issues detected: ${issues.join(', ')}`;
+                resultsDiv.style.background = 'rgba(255, 107, 53, 0.1)';
+                resultsDiv.innerHTML = '<strong>⚠️ Test Results:</strong> ' + messageSpan.textContent;
+            }
+            
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

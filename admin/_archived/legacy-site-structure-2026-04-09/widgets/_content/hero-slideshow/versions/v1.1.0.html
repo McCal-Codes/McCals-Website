@@ -1,0 +1,434 @@
+<!-- McCal Hero Carousel v1.1 -->
+<div class="mcc-hero-widget" data-widget-version="1.1-hero" data-mcc-hero-root>
+  <!-- site-widgets:inline:start -->
+  <style data-site-widgets-inline>
+    :root {
+      --mcc-accent: #b8b0aa;
+      --mcc-accent-strong: #cac2ba;
+      --mcc-bg: #050506;
+      --mcc-fg: #cac2ba;
+      --mcc-line: #2a2a2a;
+      --mcc-muted: #5b5553;
+      --bg: var(--mcc-bg);
+      --fg: var(--mcc-fg);
+      --line: var(--mcc-line);
+      --accent: var(--mcc-accent);
+      --muted: var(--mcc-muted);
+      --chip: #1b1b1b;
+      --focus: #7dd3fc;
+      --link: var(--mcc-accent-strong);
+      --panel-bg: rgba(48, 44, 44, 0.85);
+      --panel-border: rgba(184, 176, 170, 0.2);
+      --panel-blur: 12px;
+      --mcc-gradient-business: linear-gradient(135deg, #cac2ba 0%, #b8b0aa 100%);
+      --mcc-gradient-dark: linear-gradient(135deg, #363230 0%, #272423 100%);
+      --mcc-space-1: 4px;
+      --mcc-space-2: 8px;
+      --mcc-space-3: 12px;
+      --mcc-space-4: 16px;
+      --mcc-space-5: 24px;
+      --mcc-space-6: 32px;
+      --mcc-radius: 10px;
+      --mcc-control-height: 40px;
+      --mcc-z-top: 2147483647;
+    }
+    [data-theme='light'] {
+      --fg: #0a0a0a;
+      --bg: #ffffff;
+      --line: #e5e5e5;
+      --panel-bg: rgba(255, 255, 255, 0.82);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --panel-blur: 8px;
+      --chip: #fafafa;
+      --focus: #0ea5e9;
+      --link: var(--accent);
+    }
+    [data-theme='dark'] {
+      --fg: #cac2ba;
+      --bg: #050506;
+      --line: #2a2a2a;
+      --panel-bg: rgba(30, 30, 30, 0.85);
+      --panel-border: rgba(184, 176, 170, 0.15);
+      --panel-blur: 10px;
+      --chip: #1a1a1b;
+      --focus: #b8b0aa;
+      --link: #ffffff;
+    }
+    [class^='mcc-'],
+    [class*=' mcc-'] {
+      box-sizing: border-box;
+      font-family:
+        Inter,
+        'Segoe UI',
+        system-ui,
+        -apple-system,
+        'Helvetica Neue',
+        Arial,
+        sans-serif;
+      color: var(--fg);
+    }
+    [class^='mcc-'] a:focus-visible,
+    [class^='mcc-'] button:focus-visible,
+    [class^='mcc-'] [role='button']:focus-visible,
+    [class*=' mcc-'] a:focus-visible,
+    [class*=' mcc-'] button:focus-visible,
+    [class*=' mcc-'] [role='button']:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+      border-radius: 6px;
+    }
+    .mcc-sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .mcc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--mcc-space-2);
+      padding: 0.6rem 1.2rem;
+      height: var(--mcc-control-height);
+      border-radius: 999px;
+      background: var(--mcc-gradient-business);
+      color: #272423;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .mcc-btn:hover,
+    .mcc-btn:focus-visible {
+      background: var(--mcc-accent-strong);
+      transform: translateY(-1px);
+    }
+    .mcc-img-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mcc-row {
+      display: flex;
+      gap: var(--mcc-space-3);
+      align-items: center;
+    }
+    .mcc-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mcc-space-2);
+    }
+    .mcc-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [class^='mcc-'] {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [class^='mcc-'] * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media print {
+      [class^='mcc-'] {
+        color: #000 !important;
+        background: transparent !important;
+      }
+    }
+  </style>
+  <!-- site-widgets:inline:end -->
+
+  <style>
+    :root {
+      --mcc-nav-height: 0px;
+    }
+
+    .mcc-hero-widget,
+    .mcc-hero-widget * {
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .mcc-hero-widget {
+      display: block;
+      width: 100%;
+      color: #f5f5f5;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
+
+    .mcc-hero-shell {
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      color: inherit;
+      overflow: hidden;
+      background: #06060a;
+    }
+
+    :root[data-mcc-nav='active'] .mcc-hero-shell {
+      margin-top: calc(-1 * var(--mcc-nav-height, 0px));
+    }
+
+    .mcc-hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .mcc-hero__stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+    }
+
+    .mcc-hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: scale(1.04);
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+      animation: mcc-hero-cycle 48s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      animation-fill-mode: both;
+    }
+
+    .mcc-hero__slide img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mcc-hero__slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(4, 4, 12, 0.6) 70%,
+        rgba(5, 5, 10, 0.92) 100%
+      );
+    }
+
+    .mcc-hero__caption {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(42px, 9vw, 128px);
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .mcc-hero__slide h2 {
+      margin: 0;
+      font-family: 'Libre Baskerville', 'Georgia', serif;
+      font-size: clamp(1.55rem, 3.6vw, 2.85rem);
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
+      letter-spacing: 0.02em;
+    }
+
+    .mcc-hero__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2.6rem;
+      border-radius: 999px;
+      background: rgba(10, 10, 14, 0.88);
+      color: #f8f8f8;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    .mcc-hero__cta:hover,
+    .mcc-hero__cta:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.95);
+      color: #0a0a0f;
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.4);
+      outline: none;
+    }
+
+    .mcc-hero__slide:nth-child(1) {
+      --delay: 0s;
+    }
+    .mcc-hero__slide:nth-child(2) {
+      --delay: 8s;
+    }
+    .mcc-hero__slide:nth-child(3) {
+      --delay: 16s;
+    }
+    .mcc-hero__slide:nth-child(4) {
+      --delay: 24s;
+    }
+    .mcc-hero__slide:nth-child(5) {
+      --delay: 32s;
+    }
+    .mcc-hero__slide:nth-child(6) {
+      --delay: 40s;
+    }
+
+    @keyframes mcc-hero-cycle {
+      0% {
+        opacity: 0;
+        transform: scale(1.04);
+      }
+      4% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      16% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      20% {
+        opacity: 0;
+        transform: scale(1.02);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.02);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mcc-hero__caption {
+        bottom: clamp(32px, 12vw, 88px);
+        gap: 14px;
+      }
+
+      .mcc-hero__slide h2 {
+        font-size: clamp(1.4rem, 6vw, 2.4rem);
+      }
+
+      .mcc-hero__cta {
+        padding: 0.75rem 2.1rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .mcc-hero__caption {
+        bottom: clamp(28px, 14vw, 72px);
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mcc-hero__slide {
+        animation: none;
+        opacity: 0;
+        transform: none;
+      }
+      .mcc-hero__slide:first-child {
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <div class="mcc-hero-shell">
+    <section class="mcc-hero" aria-label="Featured work carousel">
+      <div class="mcc-hero__stage">
+        <figure class="mcc-hero__slide">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg"
+            alt="A woman and a child holding a sparkler at night, with dark trees in the background."
+            loading="eager"
+            fetchpriority="high"
+          />
+          <figcaption class="mcc-hero__caption">
+            <h2>Boyd Station</h2>
+            <a class="mcc-hero__cta" href="/boyd-station">Explore Project</a>
+          </figcaption>
+        </figure>
+        <figure class="mcc-hero__slide">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg"
+            alt="A couple kissing outdoors at night during fireworks display in the background."
+            loading="lazy"
+          />
+          <figcaption class="mcc-hero__caption">
+            <h2>Photojournalism</h2>
+            <a class="mcc-hero__cta" href="/photojournalism">View Gallery</a>
+          </figcaption>
+        </figure>
+        <figure class="mcc-hero__slide">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/1757468682503-YXX6ILQYQ1CMH1OT66WD/141024_Kamala+Speaks+at+Erie_CAL3804+1+%281%29.jpg"
+            alt="Crowd of people at a political event listening while holding signs and a flag."
+            loading="lazy"
+          />
+          <figcaption class="mcc-hero__caption">
+            <h2>Politics On Assignment</h2>
+            <a class="mcc-hero__cta" href="/photojournalism">See Coverage</a>
+          </figcaption>
+        </figure>
+        <figure class="mcc-hero__slide">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg"
+            alt="Guests networking at a cocktail event while a bartender prepares drinks."
+            loading="lazy"
+          />
+          <figcaption class="mcc-hero__caption">
+            <h2>Corporate Events</h2>
+            <a class="mcc-hero__cta" href="/event">Book Coverage</a>
+          </figcaption>
+        </figure>
+        <figure class="mcc-hero__slide">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg"
+            alt="Guests watching a lively show with colorful lighting and confetti."
+            loading="lazy"
+          />
+          <figcaption class="mcc-hero__caption">
+            <h2>Experiences</h2>
+            <a class="mcc-hero__cta" href="/event">Discover Events</a>
+          </figcaption>
+        </figure>
+        <figure class="mcc-hero__slide">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg"
+            alt="A musician playing bass on stage under purple and blue lights."
+            loading="lazy"
+          />
+          <figcaption class="mcc-hero__caption">
+            <h2>Concert Moments</h2>
+            <a class="mcc-hero__cta" href="/concert">View Performances</a>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+</div>
+<!-- /McCal Hero Carousel -->

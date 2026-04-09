@@ -1,0 +1,16 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "blog-feed",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "currentVersion": "v2.1.0",
+    "previousVersion": "v1-google-sheets",
+    "description": "Retain Google Docs current version and Google Sheets previous version"
+  },
+  "versions": [
+    {"version": "v1-google-docs", "date": "2025-09-23", "summary": "Google Docs integration with natural writing format and headings"}
+  ],
+  "lastUpdated": "2025-12-01",
+  "archiveLocation": "src/widgets/_archived/Legacy Widgets/blog-feed/versions/",
+  "totalArchivedVersions": 1
+}

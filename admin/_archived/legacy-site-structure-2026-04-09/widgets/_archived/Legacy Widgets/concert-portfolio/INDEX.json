@@ -1,0 +1,32 @@
+{
+  "$schema": "https://mcc-cal.com/schemas/widget-archive-index.schema.json",
+  "widget": "concert-portfolio",
+  "activePolicy": {
+    "maxActiveVersions": 2,
+    "currentVersion": "v4.7.1",
+    "previousVersion": "v4.7.0",
+    "description": "Retain only the current stable version and previous stable version in active directory"
+  },
+  "versions": [
+    {"version": "v4.6.0", "date": "2025-10-06", "summary": "Performance optimizations: critical CSS, async patterns, lazy-loading, resource hints"},
+    {"version": "v4.5.0", "date": "2025-10-06", "summary": "SEO enhancements: structured data, enhanced alt text, lazy loading improvements"},
+    {"version": "v4.4.0", "date": "2025-10-05", "summary": "Enhanced UX: fixed lightbox stretching, hidden scrollbars, navigation hiding, version indicator"},
+    {"version": "v4.3.0", "date": "2025-09-23", "summary": "Images-first path with automatic fallback to src/images/Portfolios/Concert/"},
+    {"version": "v4.2.0", "date": "2025-09-23", "summary": "GitHub path fix after repository reorganization"},
+    {"version": "v4.1.0", "date": "2025-09-23", "summary": "Performance iteration with optimization passes"},
+    {"version": "v3.6.0", "date": "2025-09-19", "summary": "Stable auto-refresh with individual manifests and 5-minute intervals"},
+    {"version": "v3.5.0-auto-refresh", "date": "2025-09-19", "summary": "Initial auto-refresh implementation"},
+    {"version": "v3.4.0-manifest", "date": "2025-09-19", "summary": "Manifest generation improvements"},
+    {"version": "v3.3.0", "date": "2025-09-19", "summary": "Feature enhancements"},
+    {"version": "v3.2.0", "date": "2025-09-19", "summary": "Incremental improvements"},
+    {"version": "v3.1.0", "date": "2025-09-19", "summary": "Version management and documentation system"},
+    {"version": "v3.0.0-universal-captions", "date": "2024-12-15", "summary": "Universal Caption System integration with EXIF/IPTC metadata extraction"},
+    {"version": "v2.2.0", "date": "2025-09-16", "summary": "Performance revolution: shared API backend, caching, 70% API call reduction"},
+    {"version": "v2.2.0-self-contained", "date": "2025-09-16", "summary": "Self-contained variant of v2.2"},
+    {"version": "v2.1.0", "date": "2025-09-16", "summary": "Auto date prioritizes EXIF DateTimeOriginal from images"},
+    {"version": "v2.0.0", "date": "2025-09-16", "summary": "Natural masonry layout, auto date support, randomized selection, lightbox fixes"}
+  ],
+  "lastUpdated": "2025-12-01",
+  "archiveLocation": "src/widgets/_archived/Legacy Widgets/concert-portfolio/versions/",
+  "totalArchivedVersions": 17
+}

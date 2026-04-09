@@ -1367,12 +1367,24 @@
 @media (max-width: 640px) {
   .clientsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
-  
+
   .clientsGrid .clientCard {
-    height: 80px;
-    padding: 12px;
+    height: 70px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .clientsGrid .clientImageWrapper img {
+    max-height: 85%;
+    filter: brightness(1.2) contrast(1.05);
   }
 }
 

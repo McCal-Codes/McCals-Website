@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preview: Request a Quote Widget</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .preview-header {
+        width: 100%;
+        padding: 20px;
+        background: #111;
+        color: #fff;
+        text-align: center;
+        font-family: sans-serif;
+        border-bottom: 1px solid #333;
+        margin-bottom: 40px;
+      }
+      .widget-container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-header">
+      <h1>Quote Request Widget Preview</h1>
+      <p>Version: v1.0.0 | Environment: Demo Harness</p>
+    </div>
+
+    <div class="widget-container">
+      <!-- The widget is designed as a standalone page-fragment -->
+      <iframe
+        src="../versions/v1.0.0-quote-request.html"
+        width="100%"
+        height="2000px"
+        frameborder="0"
+        id="widgetFrame"
+      ></iframe>
+    </div>
+
+    <script>
+      // Auto-resize iframe (optional)
+      const frame = document.getElementById('widgetFrame');
+      window.addEventListener('message', (e) => {
+        if (e.data.type === 'resize') {
+          frame.style.height = e.data.height + 'px';
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,791 @@
+<!-- McCal Navigation - Code Injection Snippet (v1.9.5-nav)
+Note: v1.9.5-nav right-aligns mobile menu items and increases font size. -->
+<!-- site-widgets:inline:start -->
+<style data-site-widgets-inline>
+  :root {
+    --mcc-accent: #ff4d6d;
+    --mcc-accent-strong: #ff2b50;
+    --mcc-bg: #ffffff;
+    --mcc-fg: #111827;
+    --mcc-line: #e5e7eb;
+    --mcc-muted: #6b7280;
+    --bg: var(--mcc-bg);
+    --fg: var(--mcc-fg);
+    --line: var(--mcc-line);
+    --accent: var(--mcc-accent);
+    --muted: var(--mcc-muted);
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --mcc-space-1: 4px;
+    --mcc-space-2: 8px;
+    --mcc-space-3: 12px;
+    --mcc-space-4: 16px;
+    --mcc-space-5: 24px;
+    --mcc-space-6: 32px;
+    --mcc-radius: 10px;
+    --mcc-control-height: 40px;
+    --mcc-z-top: 2147483647;
+  }
+  [data-theme='light'] {
+    --fg: #0a0a0a;
+    --bg: #ffffff;
+    --line: #e5e5e5;
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --panel-blur: 8px;
+    --chip: #fafafa;
+    --focus: #0ea5e9;
+    --link: var(--accent);
+  }
+  [data-theme='dark'] {
+    --fg: #f7f7f7;
+    --bg: #06060a;
+    --line: #2a2a2a;
+    --panel-bg: rgba(20, 20, 20, 0.78);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-blur: 8px;
+    --chip: #1b1b1b;
+    --focus: #7dd3fc;
+    --link: var(--accent);
+  }
+  [class^='mcc-'],
+  [class*=' mcc-'] {
+    box-sizing: border-box;
+    font-family:
+      Inter,
+      'Segoe UI',
+      system-ui,
+      -apple-system,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    color: var(--fg);
+  }
+  [class^='mcc-'] a:focus-visible,
+  [class^='mcc-'] button:focus-visible,
+  [class^='mcc-'] [role='button']:focus-visible,
+  [class*=' mcc-'] a:focus-visible,
+  [class*=' mcc-'] button:focus-visible,
+  [class*=' mcc-'] [role='button']:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 6px;
+  }
+  .mcc-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  .mcc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcc-space-2);
+    padding: 0.6rem 1.2rem;
+    height: var(--mcc-control-height);
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .mcc-btn:hover,
+  .mcc-btn:focus-visible {
+    background: var(--mcc-accent-strong);
+    transform: translateY(-1px);
+  }
+  .mcc-img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mcc-row {
+    display: flex;
+    gap: var(--mcc-space-3);
+    align-items: center;
+  }
+  .mcc-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mcc-space-2);
+  }
+  .mcc-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [class^='mcc-'] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='mcc-'] * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  @media print {
+    [class^='mcc-'] {
+      color: #000 !important;
+      background: transparent !important;
+    }
+  }
+</style>
+<!-- site-widgets:inline:end -->
+
+<style>
+  :root {
+    --mcc-nav-height: 0px;
+    --mcc-nav-text-color: #f5f5f5;
+    --mcc-nav-text-secondary: rgba(255, 255, 255, 0.86);
+    --mcc-nav-brand-color: #f5f5f5;
+  }
+
+  .mcc-nav-widget,
+  .mcc-nav-widget * {
+    box-sizing: border-box;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  html[data-mcc-nav='active'] .Header,
+  html[data-mcc-nav='active'] header[role='banner'],
+  html[data-mcc-nav='active'] [data-test='header'] {
+    display: none !important;
+    visibility: hidden;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .mcc-nav-shell {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+  .mcc-nav {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: none;
+    padding: calc(clamp(32px, 7vw, 72px) + env(safe-area-inset-top, 0px)) clamp(44px, 8vw, 128px)
+      clamp(12px, 3vw, 28px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(18px, 5vw, 72px);
+    color: var(--mcc-nav-text-color);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.35) 60%,
+      rgba(0, 0, 0, 0.15) 85%,
+      transparent 100%
+    );
+  }
+  .mcc-nav.is-scrolled {
+    background: rgba(10, 10, 16, 0.75);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f5f5f5;
+    -webkit-backdrop-filter: saturate(120%) blur(12px);
+    backdrop-filter: saturate(120%) blur(12px);
+  }
+  .mcc-nav__brand a {
+    font-family: 'Libre Baskerville', 'Georgia', serif;
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    font-weight: 600;
+    color: var(--mcc-nav-brand-color);
+    text-decoration: none;
+    letter-spacing: 0.015em;
+    text-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    transition:
+      color 0.3s ease,
+      opacity 0.3s ease;
+  }
+  .mcc-nav__brand a:hover,
+  .mcc-nav__brand a:focus-visible {
+    opacity: 0.85;
+    outline: none;
+  }
+  .mcc-nav.is-scrolled .mcc-nav__brand a {
+    color: #f5f5f5;
+  }
+  .mcc-nav__menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 3vw, 2.8rem);
+  }
+  .mcc-nav__links {
+    list-style: none;
+    display: flex;
+    gap: inherit;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+  .mcc-nav__link {
+    position: relative;
+  }
+  .mcc-nav__link a {
+    color: var(--mcc-nav-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding-bottom: 6px;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  }
+  .mcc-nav.is-scrolled .mcc-nav__link a {
+    color: rgba(255, 255, 255, 0.86);
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  }
+  .mcc-nav__link a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    border-radius: 999px;
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  .mcc-nav__link a:hover,
+  .mcc-nav__link a:focus-visible {
+    color: var(--mcc-nav-text-color);
+    outline: none;
+  }
+  .mcc-nav.is-scrolled .mcc-nav__link a:hover,
+  .mcc-nav.is-scrolled .mcc-nav__link a:focus-visible {
+    color: #ffffff;
+  }
+  .mcc-nav__link a:hover::after,
+  .mcc-nav__link a:focus-visible::after,
+  .mcc-nav__link a[aria-current='page']::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  .mcc-nav__toggle {
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(10, 10, 18, 0.6);
+    color: rgba(255, 255, 255, 0.92);
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .mcc-nav__toggle:hover,
+  .mcc-nav__toggle:focus-visible {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    transform: scale(1.05);
+    outline: none;
+  }
+  .mcc-nav__toggle-box {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 14px;
+  }
+  .mcc-nav__toggle-line {
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+  .mcc-nav.is-scrolled .mcc-nav__toggle {
+    background: rgba(10, 10, 16, 0.78);
+    border-color: rgba(255, 255, 255, 0.26);
+    color: rgba(255, 255, 255, 0.92);
+  }
+  @media (max-width: 1024px) {
+    .mcc-nav {
+      gap: clamp(16px, 6vw, 48px);
+    }
+  }
+
+  /* Consolidated: Minimalist Navigation CTA Button */
+  .mcc-nav__cta {
+    margin-left: clamp(0.5rem, 1.2vw, 1rem);
+  }
+
+  .mcc-nav__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    color: var(--mcc-nav-text-secondary) !important;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    white-space: nowrap;
+    text-shadow: none;
+  }
+
+  .mcc-nav__cta-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Consolidated: Centered Compact Mobile UI */
+  @media (max-width: 768px) {
+    .mcc-nav {
+      padding: clamp(26px, 8vw, 48px) clamp(16px, 4vw, 32px) clamp(12px, 4vw, 24px);
+    }
+    .mcc-nav__toggle {
+      display: inline-flex;
+    }
+    .mcc-nav__menu {
+      position: absolute;
+      top: calc(100% + clamp(12px, 3vw, 20px));
+      right: clamp(16px, 4vw, 32px);
+      left: auto;
+      transform: none;
+      width: min(220px, 75vw);
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+      padding: clamp(20px, 5vw, 28px);
+      border-radius: 20px;
+      background: rgba(8, 8, 12, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.5),
+        0 8px 16px rgba(0, 0, 0, 0.3);
+      -webkit-backdrop-filter: saturate(140%) blur(24px);
+      backdrop-filter: saturate(140%) blur(24px);
+      z-index: 10001;
+      text-align: right;
+    }
+    .mcc-nav__links {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 18px;
+      width: 100%;
+    }
+    .mcc-nav__link a {
+      width: max-content;
+      padding: 10px 0;
+      justify-content: flex-end;
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .mcc-nav__link--has-submenu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .mcc-nav__submenu-btn-container {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-start; /* right-anchored */
+      gap: 8px; /* tight gap next to "Work" */
+      width: 100%;
+    }
+    .mcc-nav__submenu-toggle {
+      display: flex !important;
+      position: static !important;
+      width: 24px;
+      height: 24px;
+      transform: none !important;
+      margin: 0 !important;
+    }
+    .mcc-nav.mcc-nav--menu-open .mcc-nav__menu {
+      display: flex;
+    }
+    .mcc-nav__submenu {
+      position: static !important;
+      display: none;
+      width: 100%;
+      margin-top: 8px;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    .mcc-nav__submenu li a {
+      text-align: right !important;
+      padding: 12px 0 !important;
+      font-size: 1.15rem !important;
+      color: rgba(255, 255, 255, 0.65);
+    }
+    .mcc-nav__cta {
+      margin-left: 0;
+      width: 100%;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .mcc-nav__cta-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 16px;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+  @media (max-width: 520px) {
+    .mcc-nav__brand a {
+      font-size: clamp(1.2rem, 5.8vw, 1.6rem);
+    }
+    .mcc-nav {
+      padding-left: clamp(16px, 5.8vw, 32px);
+      padding-right: clamp(16px, 5.8vw, 32px);
+    }
+  }
+
+  /* Consolidated: Desktop Floating Lens Submenu */
+  @media (min-width: 769px) {
+    .mcc-nav__link--has-submenu {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mcc-nav__submenu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      left: auto;
+      transform: translateY(10px) scale(0.98);
+      min-width: 200px;
+      width: max-content;
+      padding: 6px;
+      margin: 0;
+      border-radius: 14px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(var(--panel-blur));
+      -webkit-backdrop-filter: blur(var(--panel-blur));
+      box-shadow:
+        0 20px 48px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+      pointer-events: none;
+      list-style: none;
+      display: block; /* use opacity/pointer-events instead of display for transitions */
+      z-index: 10002;
+    }
+    .mcc-nav__submenu li {
+      width: 100%;
+    }
+    .mcc-nav__submenu li a {
+      display: block;
+      width: 100%;
+      padding: 8px 16px;
+      color: var(--fg);
+      text-decoration: none;
+      text-shadow: none;
+      border-radius: 8px;
+      font-weight: 500;
+      white-space: nowrap;
+      text-align: left;
+      transition: background-color 0.2s ease;
+    }
+    .mcc-nav__submenu li a:hover {
+      background-color: var(--chip);
+      outline: none;
+    }
+    .mcc-nav__link--has-submenu:hover > .mcc-nav__submenu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .mcc-nav__submenu-toggle {
+      display: none;
+    }
+    .mcc-nav__link--has-submenu::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: 20px;
+    }
+  }
+
+  /* Shared Submenu Toggle Arrow (Mobile) */
+  .mcc-nav__submenu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .mcc-nav__submenu-toggle::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    margin-bottom: 2px;
+  }
+  .mcc-nav__submenu-toggle[aria-expanded='true']::before {
+    transform: rotate(225deg);
+    margin-bottom: -2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mcc-nav,
+    .mcc-nav__submenu {
+      transition: none !important;
+    }
+  }
+</style>
+
+<div class="mcc-nav-widget" data-widget-version="1.9.5-nav">
+  <div class="mcc-nav-shell">
+    <nav class="mcc-nav" aria-label="Primary navigation">
+      <div class="mcc-nav__brand"><a href="/" data-match="^/$">Caleb McCartney</a></div>
+      <button
+        class="mcc-nav__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mcc-nav-links"
+        aria-haspopup="true"
+      >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="mcc-nav__toggle-box" aria-hidden="true">
+          <span class="mcc-nav__toggle-line"></span>
+          <span class="mcc-nav__toggle-line"></span>
+          <span class="mcc-nav__toggle-line"></span>
+        </span>
+      </button>
+      <div class="mcc-nav__menu">
+        <ul class="mcc-nav__links" id="mcc-nav-links" role="list">
+          <li class="mcc-nav__link mcc-nav__link--has-submenu">
+            <div class="mcc-nav__submenu-btn-container">
+              <a href="/" data-match="^/$">Work</a>
+              <button
+                class="mcc-nav__submenu-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="submenu-work"
+              >
+                <span class="sr-only">Toggle Work submenu</span>
+              </button>
+            </div>
+            <ul
+              class="mcc-nav__submenu"
+              id="submenu-work"
+              role="menu"
+              aria-label="Work submenu"
+              aria-hidden="true"
+            >
+              <li><a href="https://mcc-cal.com/featured" role="menuitem">Featured</a></li>
+              <li><a href="https://mcc-cal.com/journalism" role="menuitem">Photojournalism</a></li>
+              <li><a href="https://mcc-cal.com/concert" role="menuitem">Concert</a></li>
+              <li><a href="https://mcc-cal.com/event" role="menuitem">Event</a></li>
+              <li><a href="https://mcc-cal.com/nature" role="menuitem">Nature</a></li>
+              <li><a href="https://mcc-cal.com/portraits" role="menuitem">Portraits</a></li>
+            </ul>
+          </li>
+          <li class="mcc-nav__link"><a href="/podcast" data-match="^/podcast">Podcast</a></li>
+          <li class="mcc-nav__link"><a href="/about" data-match="^/about">About</a></li>
+          <li class="mcc-nav__cta">
+            <a href="/request-a-quote" class="mcc-nav__cta-btn">Request a Quote</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const killSelectors = ['.Header', 'header[role="banner"]', '[data-test="header"]'];
+    killSelectors.forEach((sel) => {
+      document.querySelectorAll(sel).forEach((node) => {
+        node.setAttribute('data-mcc-nav-replaced', 'true');
+        node.style.display = 'none';
+        node.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    const root = document.querySelector('.mcc-nav-widget');
+    if (!root || root.dataset.mounted === 'true') return;
+    root.dataset.mounted = 'true';
+    document.documentElement.dataset.mccNav = 'active';
+
+    const nav = root.querySelector('.mcc-nav');
+    const toggle = nav.querySelector('.mcc-nav__toggle');
+    const links = nav.querySelectorAll('.mcc-nav__links a');
+    const submenuToggles = nav.querySelectorAll('.mcc-nav__submenu-toggle');
+
+    const collapseAllSubmenus = () => {
+      submenuToggles.forEach((btn) => {
+        btn.setAttribute('aria-expanded', 'false');
+        const submenu = btn.closest('.mcc-nav__link').querySelector('.mcc-nav__submenu');
+        if (submenu) {
+          submenu.setAttribute('aria-hidden', 'true');
+          if (window.innerWidth <= 768) submenu.style.display = 'none';
+        }
+      });
+    };
+
+    const closeMobile = () => {
+      nav.classList.remove('mcc-nav--menu-open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      collapseAllSubmenus();
+    };
+
+    if (toggle) {
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const willOpen = !nav.classList.contains('mcc-nav--menu-open');
+        nav.classList.toggle('mcc-nav--menu-open', willOpen);
+        this.setAttribute('aria-expanded', String(willOpen));
+      });
+    }
+
+    links.forEach((anchor) => {
+      if (!anchor.closest('.mcc-nav__submenu')) {
+        anchor.addEventListener('click', closeMobile);
+      }
+    });
+
+    submenuToggles.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const submenu = btn.closest('.mcc-nav__link').querySelector('.mcc-nav__submenu');
+
+        // Close others
+        submenuToggles.forEach((other) => {
+          if (other !== btn) other.setAttribute('aria-expanded', 'false');
+        });
+        document.querySelectorAll('.mcc-nav__submenu').forEach((s) => {
+          if (s !== submenu && window.innerWidth <= 768) s.style.display = 'none';
+        });
+
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (submenu) {
+          submenu.setAttribute('aria-hidden', String(expanded));
+          if (window.innerWidth <= 768) {
+            submenu.style.display = expanded ? 'none' : 'block';
+          }
+        }
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (
+        window.innerWidth <= 768 &&
+        nav.classList.contains('mcc-nav--menu-open') &&
+        !nav.contains(e.target)
+      ) {
+        closeMobile();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobile();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        closeMobile();
+        document.querySelectorAll('.mcc-nav__submenu').forEach((s) => (s.style.display = ''));
+      }
+    });
+
+    const highlight = () => {
+      const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+      nav.querySelectorAll('a').forEach((a) => a.removeAttribute('aria-current'));
+      nav.querySelectorAll('[data-match]').forEach((anchor) => {
+        const pattern = anchor.getAttribute('data-match');
+        if (pattern && new RegExp(pattern).test(currentPath)) {
+          anchor.setAttribute('aria-current', 'page');
+        }
+      });
+    };
+    highlight();
+    window.addEventListener('SquarespaceRoutingComplete', highlight);
+
+    const updateNavHeight = () => {
+      document.documentElement.style.setProperty(
+        '--mcc-nav-height',
+        nav.getBoundingClientRect().height + 'px',
+      );
+    };
+    requestAnimationFrame(updateNavHeight);
+    window.addEventListener('load', updateNavHeight);
+    window.addEventListener('resize', updateNavHeight);
+
+    const applyScrollState = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 50);
+    };
+    window.addEventListener('scroll', applyScrollState, { passive: true });
+    applyScrollState();
+  })();
+</script>
