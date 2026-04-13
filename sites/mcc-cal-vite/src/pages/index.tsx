@@ -1,64 +1,81 @@
 import { Nav, Footer, HeroCarousel } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { LIVE_SITE_HOME_FEATURED_ITEMS } from '@/content/liveSiteFallbacks';
+import {
+  generatePageGraph,
+  generatePersonSchema,
+  generatePhotographyProviderSchema,
+  generatePhotographyServiceSchema,
+  generateWebSiteSchema,
+} from '@/utils/jsonLd';
 
 const HomePage = () => {
   usePageMeta({
-    title: 'Caleb McCartney | Photojournalism, Events, Concerts, and Portraiture',
+    title: 'Pittsburgh Photographer | Caleb McCartney | McCal Media',
     description:
-      'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney, with writing, podcast conversations, and clear paths into the work.',
+      'Pittsburgh photographer Caleb McCartney creates event photography, concert photography, headshots, and commercial brand imagery for artists, teams, and organizations.',
     canonical: 'https://mcc-cal.com/',
     og: {
       type: 'website',
-      title: 'Caleb McCartney',
+      title: 'Pittsburgh Photographer | Caleb McCartney',
       description:
-        'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney.',
+        'Event photography, concert photography, headshots, and commercial imagery by Pittsburgh photographer Caleb McCartney.',
       image: LIVE_SITE_HOME_FEATURED_ITEMS[0]?.imageUrl,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Caleb McCartney',
+      title: 'Pittsburgh Photographer | Caleb McCartney',
       description:
-        'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney.',
+        'Event photography, concert photography, headshots, and commercial imagery by Pittsburgh photographer Caleb McCartney.',
       image: LIVE_SITE_HOME_FEATURED_ITEMS[0]?.imageUrl,
     },
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@graph': [
+    jsonLd: generatePageGraph([
+      generateWebSiteSchema(),
+      generatePhotographyProviderSchema(
+        'Pittsburgh photography business led by Caleb McCartney for events, concerts, headshots, and commercial storytelling.',
+      ),
+      generatePersonSchema(),
+      generatePhotographyServiceSchema(
+        'Event Photography',
+        'Pittsburgh event photography for corporate events, conferences, nonprofit gatherings, and branded activations.',
+        'https://mcc-cal.com/events',
         {
-          '@type': 'WebSite',
-          name: 'McCal Media',
-          url: 'https://mcc-cal.com/',
-          description: 'Photojournalism, events, concerts, portraits, and creative projects by Caleb McCartney.',
-          publisher: {
-            '@type': 'Organization',
-            name: 'McCal Media',
-            logo: {
-              '@type': 'ImageObject',
-              url: 'https://mcc-cal.com/brand/logo-mark.svg',
-            },
-          },
-          potentialAction: {
-            '@type': 'SearchAction',
-            target: {
-              '@type': 'EntryPoint',
-              urlTemplate: 'https://mcc-cal.com/blog?q={search_term_string}',
-            },
-            'query-input': 'required name=search_term_string',
-          },
+          alternateName: ['Pittsburgh Event Photographer', 'Corporate Event Photography'],
+          category: 'Event photographer',
+          keywords: ['event photographer pittsburgh', 'corporate event photographer', 'conference photographer'],
         },
+      ),
+      generatePhotographyServiceSchema(
+        'Concert Photography',
+        'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
+        'https://mcc-cal.com/concerts',
         {
-          '@type': 'Organization',
-          name: 'McCal Media',
-          url: 'https://mcc-cal.com/',
-          logo: 'https://mcc-cal.com/brand/logo-mark.svg',
-          sameAs: [
-            'https://www.instagram.com/mcc_cal',
-            'https://www.linkedin.com/in/calebmccartney',
-          ],
+          alternateName: ['Pittsburgh Concert Photographer', 'Live Music Photography'],
+          category: 'Concert photographer',
+          keywords: ['concert photographer pittsburgh', 'music photographer', 'live music photography'],
         },
-      ],
-    },
+      ),
+      generatePhotographyServiceSchema(
+        'Headshot Photography',
+        'On-location headshots and portraits for executives, creatives, teams, and editorial assignments in Pittsburgh.',
+        'https://mcc-cal.com/portraits',
+        {
+          alternateName: ['Pittsburgh Headshot Photographer', 'Professional Headshots'],
+          category: 'Headshot photographer',
+          keywords: ['headshot photographer pittsburgh', 'professional headshots pittsburgh', 'portrait photographer'],
+        },
+      ),
+      generatePhotographyServiceSchema(
+        'Commercial Photography',
+        'Commercial photography for brands, organizations, publications, and campaigns that need polished visual storytelling.',
+        'https://mcc-cal.com/request-a-quote',
+        {
+          alternateName: ['Pittsburgh Commercial Photographer', 'Brand Photography'],
+          category: 'Commercial photographer',
+          keywords: ['commercial photographer pittsburgh', 'brand photographer', 'advertising photographer'],
+        },
+      ),
+    ]),
   });
 
   return (

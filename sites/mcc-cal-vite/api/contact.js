@@ -42,9 +42,13 @@ export default async function handler(req, res) {
 
   const { name, email, subject, message, consent, contact_loaded_at } = parsed.data;
 
-  // Timing check
-  const loadedAt = contact_loaded_at ? Number(contact_loaded_at) : undefined;
-  if (loadedAt && Number.isFinite(loadedAt) && Date.now() - loadedAt < MIN_SUBMIT_DELAY_MS) {
+  // Timing check (required client timestamp — blocks drive-by scripted posts)
+  const loadedAt = Number(contact_loaded_at);
+  if (!Number.isFinite(loadedAt)) {
+    res.status(400).json({ error: 'Invalid request.' });
+    return;
+  }
+  if (Date.now() - loadedAt < MIN_SUBMIT_DELAY_MS) {
     res.status(429).json({ error: 'Please wait a moment before submitting.' });
     return;
   }
@@ -60,7 +64,7 @@ export default async function handler(req, res) {
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,
-      subject: `[Contact] ${subject}  from ${name}`,
+      subject: `[Contact] ${subject} — from ${name}`,
       text: [
         `Name: ${name}`,
         `Email: ${email}`,

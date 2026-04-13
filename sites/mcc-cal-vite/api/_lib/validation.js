@@ -6,7 +6,7 @@ export const contactSchema = z.object({
   subject: z.string().min(1),
   message: z.string().min(1),
   consent: z.literal(true),
-  contact_loaded_at: z.union([z.string(), z.number()]).optional(),
+  contact_loaded_at: z.union([z.string(), z.number()]),
   cf_website_url: z.string().optional(),
 });
 

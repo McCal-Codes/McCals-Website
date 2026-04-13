@@ -3,6 +3,7 @@ import { Layout } from '@/components';
 import { PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
 import '@/components/portfolio/portfolio.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
@@ -64,50 +65,60 @@ export default function PortraitsPage() {
   );
 
   usePageMeta({
-    title: 'Portrait Photography | Caleb McCartney',
-    description: 'Professional portrait photography by Caleb McCartney. Headshots, environmental portraits, and creative character studies.',
+    title: 'Pittsburgh Headshot Photographer | Caleb McCartney',
+    description:
+      'Pittsburgh headshot photographer for professional headshots, portrait sessions, editorial portraits, and brand-forward personal imagery.',
     canonical: `${SITE_URL}/portraits`,
     og: {
       type: 'website',
-      title: 'Portrait Photography | Caleb McCartney',
-      description: 'Professional portrait photography by Caleb McCartney.',
+      title: 'Pittsburgh Headshot Photographer | Caleb McCartney',
+      description: 'Professional headshots, portraits, and editorial sessions by Caleb McCartney in Pittsburgh.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Portrait Photography | Caleb McCartney',
-      description: 'Professional portrait photography by Caleb McCartney.',
+      title: 'Pittsburgh Headshot Photographer | Caleb McCartney',
+      description: 'Professional headshots, portraits, and editorial sessions by Caleb McCartney in Pittsburgh.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: 'Portrait Photography',
-      provider: {
-        '@type': 'Person',
-        name: 'Caleb McCartney',
-        url: `${SITE_URL}/about`,
-      },
-      description: 'Professional portrait photography including headshots, environmental portraits, and creative character studies.',
-      areaServed: {
-        '@type': 'City',
-        name: 'Pittsburgh',
-        containedInPlace: {
-          '@type': 'State',
-          name: 'Pennsylvania',
+    jsonLd: generatePageGraph([
+      generatePhotographyProviderSchema(
+        'Pittsburgh photography business led by Caleb McCartney for event coverage, concerts, headshots, and commercial storytelling.',
+      ),
+      generatePhotographyServiceSchema(
+        'Headshot Photography',
+        'On-location headshots and professional portraits for executives, creatives, teams, and editorial assignments in Pittsburgh.',
+        `${SITE_URL}/portraits`,
+        {
+          alternateName: ['Pittsburgh Headshot Photographer', 'Professional Headshots'],
+          category: 'Headshot photographer',
+          keywords: ['headshot photographer pittsburgh', 'professional headshots pittsburgh', 'business headshots'],
         },
-      },
-      serviceType: 'Photography',
-    },
+      ),
+      generatePhotographyServiceSchema(
+        'Portrait Photography',
+        'Portrait photography including environmental portraits, editorial sessions, and brand-forward personal imagery.',
+        `${SITE_URL}/portraits`,
+        {
+          alternateName: ['Pittsburgh Portrait Photographer'],
+          category: 'Portrait photographer',
+          keywords: ['portrait photographer pittsburgh', 'editorial portraits', 'personal branding photography'],
+        },
+      ),
+    ]),
   });
 
   return (
     <Layout>
       <div className="pf-root">
         <p className="pf-subheading" style={{ textAlign: 'center', marginBottom: 0 }}>
-          Portrait Photography
+          Pittsburgh Headshot Photographer
         </p>
         <h1 className="pf-heading">Portraits & Headshots</h1>
+        <p className="pf-intro">
+          On-location headshot and portrait photography for executives, creatives, teams, and
+          editorial stories, with clean professional portraits that still feel like you.
+        </p>
 
         {status === 'loading' && (
           <div className="pf-loading">

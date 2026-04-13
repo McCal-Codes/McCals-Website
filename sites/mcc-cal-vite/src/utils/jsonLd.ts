@@ -7,6 +7,30 @@
 
 import type { PortfolioGroup, PortfolioImage } from '../components/portfolio/types';
 
+const SITE_ROOT = 'https://mcc-cal.com';
+const PITTSBURGH_AREA_SERVED = {
+  '@type': 'City',
+  name: 'Pittsburgh',
+  containedInPlace: {
+    '@type': 'State',
+    name: 'Pennsylvania',
+  },
+};
+
+const MC_CAL_PERSON = {
+  '@type': 'Person',
+  '@id': `${SITE_ROOT}/about#caleb-mccartney`,
+  name: 'Caleb McCartney',
+  url: `${SITE_ROOT}/about`,
+};
+
+const MC_CAL_ORGANIZATION = {
+  '@type': 'Organization',
+  '@id': `${SITE_ROOT}#organization`,
+  name: 'McCal Media',
+  url: SITE_ROOT,
+};
+
 // ============================================================================
 // Core Schemas
 // ============================================================================
@@ -19,10 +43,10 @@ export function generateWebSiteSchema(): object {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'McCal Media',
-    url: 'https://mcc-cal.com',
+    url: SITE_ROOT,
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://mcc-cal.com/blog?q={search_term_string}',
+      target: `${SITE_ROOT}/blog?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   };
@@ -36,25 +60,69 @@ export function generatePersonSchema(): object {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Caleb McCartney',
-    jobTitle: 'Photojournalist and Event Photographer',
-    description: 'Pittsburgh-based photographer specializing in concerts, corporate events, and brand storytelling',
-    url: 'https://mcc-cal.com/about',
+    '@id': `${SITE_ROOT}/about#caleb-mccartney`,
+    jobTitle: 'Pittsburgh Photographer and Photojournalist',
+    description:
+      'Pittsburgh photographer specializing in event, concert, headshot, and commercial imagery',
+    url: `${SITE_ROOT}/about`,
     sameAs: [
       'https://instagram.com/mccal_media',
       'https://linkedin.com/in/calebmccartney',
     ],
-    worksFor: {
-      '@type': 'Organization',
-      name: 'McCal Media',
-      url: 'https://mcc-cal.com',
-    },
+    worksFor: MC_CAL_ORGANIZATION,
     knowsAbout: [
       'Photography',
       'Photojournalism',
       'Concert Photography',
       'Event Photography',
+      'Headshot Photography',
+      'Commercial Photography',
       'Brand Photography',
     ],
+  };
+}
+
+export function generatePhotographyProviderSchema(description?: string): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_ROOT}#organization`,
+    name: 'McCal Media',
+    url: SITE_ROOT,
+    description:
+      description ||
+      'Pittsburgh photography business led by Caleb McCartney for events, concerts, headshots, and commercial storytelling.',
+    areaServed: PITTSBURGH_AREA_SERVED,
+    founder: MC_CAL_PERSON,
+    sameAs: [
+      'https://www.instagram.com/mcc_cal',
+      'https://www.linkedin.com/in/calebmccartney',
+    ],
+  };
+}
+
+export function generatePhotographyServiceSchema(
+  serviceName: string,
+  description: string,
+  url: string,
+  options?: {
+    alternateName?: string[];
+    category?: string;
+    keywords?: string[];
+  }
+): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: serviceName,
+    ...(options?.alternateName?.length ? { alternateName: options.alternateName } : {}),
+    ...(options?.category ? { category: options.category } : {}),
+    ...(options?.keywords?.length ? { keywords: options.keywords.join(', ') } : {}),
+    description,
+    url,
+    serviceType: serviceName,
+    areaServed: PITTSBURGH_AREA_SERVED,
+    provider: MC_CAL_ORGANIZATION,
   };
 }
 
@@ -236,20 +304,9 @@ export function generateServiceSchema(
     name: serviceName,
     description,
     url,
-    provider: {
-      '@type': 'Person',
-      name: 'Caleb McCartney',
-      url: 'https://mcc-cal.com/about',
-    },
+    provider: MC_CAL_ORGANIZATION,
     serviceType: 'Photography',
-    areaServed: {
-      '@type': 'City',
-      name: 'Pittsburgh',
-      containedInPlace: {
-        '@type': 'State',
-        name: 'Pennsylvania',
-      },
-    },
+    areaServed: PITTSBURGH_AREA_SERVED,
   };
 }
 

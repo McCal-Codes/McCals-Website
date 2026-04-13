@@ -80,6 +80,7 @@ const TestimonialCard = memo(function TestimonialCard({
             src={sourceIcons[testimonial.source]} 
             alt={testimonial.source}
             className={styles.sourceIcon}
+            loading="lazy"
           />
         </div>
       </div>

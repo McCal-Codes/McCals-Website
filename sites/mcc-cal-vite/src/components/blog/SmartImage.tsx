@@ -12,6 +12,8 @@ interface SmartImageProps {
   loading?: 'eager' | 'lazy';
   fetchPriority?: 'high' | 'low' | 'auto';
   placeholderClassName?: string;
+  width?: number;
+  height?: number;
 }
 
 export default function SmartImage({
@@ -22,6 +24,8 @@ export default function SmartImage({
   loading,
   fetchPriority,
   placeholderClassName,
+  width,
+  height,
 }: SmartImageProps) {
   const [currentSrc, setCurrentSrc] = useState<string | null>(src || null);
   const [usedFallback, setUsedFallback] = useState(false);
@@ -42,6 +46,8 @@ export default function SmartImage({
       className={className}
       loading={loading}
       fetchPriority={fetchPriority}
+      width={width}
+      height={height}
       onError={() => {
         if (!usedFallback && fallbackSrc && fallbackSrc !== currentSrc) {
           setCurrentSrc(fallbackSrc);

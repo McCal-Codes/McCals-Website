@@ -6,6 +6,7 @@ import { sortPortfolioGroups } from '@/components/portfolio/sortGroups';
 import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { useMemo, useState } from 'react';
+import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
 import '@/components/portfolio/portfolio.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
@@ -76,31 +77,50 @@ export default function EventsPage() {
   );
 
   usePageMeta({
-    title: 'Event Photography | Caleb McCartney',
+    title: 'Pittsburgh Event Photographer | Caleb McCartney',
     description:
-      'Corporate, conference, and event photography by Pittsburgh photographer Caleb McCartney. Professional coverage for brands, nonprofits, and organizations.',
+      'Pittsburgh event photographer for corporate events, conferences, nonprofit gatherings, campus programs, and branded activations.',
     canonical: `${SITE_URL}/events`,
     og: {
       type: 'website',
-      title: 'Event Photography | Caleb McCartney',
-      description: 'Corporate and event photography by Pittsburgh photographer Caleb McCartney.',
+      title: 'Pittsburgh Event Photographer | Caleb McCartney',
+      description: 'Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Event Photography | Caleb McCartney',
-      description: 'Corporate and event photography by Pittsburgh photographer Caleb McCartney.',
+      title: 'Pittsburgh Event Photographer | Caleb McCartney',
+      description: 'Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
+    jsonLd: generatePageGraph([
+      generatePhotographyProviderSchema(
+        'Pittsburgh photography business led by Caleb McCartney for event coverage, concerts, headshots, and commercial storytelling.',
+      ),
+      generatePhotographyServiceSchema(
+        'Event Photography',
+        'Pittsburgh event photography for corporate events, conferences, nonprofit gatherings, campus programs, and branded activations.',
+        `${SITE_URL}/events`,
+        {
+          alternateName: ['Pittsburgh Event Photographer', 'Corporate Event Photography'],
+          category: 'Event photographer',
+          keywords: ['event photographer pittsburgh', 'corporate event photographer', 'conference photographer'],
+        },
+      ),
+    ]),
   });
 
   return (
     <Layout>
       <div className="pf-root">
         <p className="pf-subheading" style={{ textAlign: 'center', marginBottom: 0 }}>
-          Event Photography
+          Pittsburgh Event Photographer
         </p>
-        <h1 className="pf-heading">Events</h1>
+        <h1 className="pf-heading">Corporate Events, Conferences & Community Coverage</h1>
+        <p className="pf-intro">
+          On-location event photography for conferences, nonprofit fundraisers, campus programs,
+          launches, and brand activations across Pittsburgh and Western Pennsylvania.
+        </p>
 
         {status === 'loading' && (
           <div className="pf-loading">

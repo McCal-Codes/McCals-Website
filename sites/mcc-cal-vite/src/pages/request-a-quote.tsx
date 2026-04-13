@@ -1,54 +1,47 @@
 import { Layout } from '@/components';
-import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
-import { getWidgetConfig } from '@/utils/widgetConfig';
+import { QuoteRequestForm } from '@/components/forms';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
 const RequestAQuotePage = () => {
   usePageMeta({
-    title: 'Request a Quote | McCal Media',
-    description: 'Request a photography quote for events, concerts, portraits, or commercial projects with Caleb McCartney.',
+    title: 'Request a Quote | Pittsburgh Photographer | McCal Media',
+    description:
+      'Request a photography quote for events, concerts, headshots, portraits, or commercial projects with Pittsburgh photographer Caleb McCartney.',
     canonical: `${SITE_URL}/request-a-quote`,
     og: {
       type: 'website',
-      title: 'Request a Quote | McCal Media',
-      description: 'Request a photography quote for events, concerts, portraits, or commercial projects.',
+      title: 'Request a Quote | Pittsburgh Photographer | McCal Media',
+      description: 'Request a photography quote for events, concerts, headshots, portraits, or commercial projects.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary',
-      title: 'Request a Quote | McCal Media',
-      description: 'Request a photography quote for events, concerts, portraits, or commercial projects.',
+      title: 'Request a Quote | Pittsburgh Photographer | McCal Media',
+      description: 'Request a photography quote for events, concerts, headshots, portraits, or commercial projects.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: 'Photography Services',
-      provider: {
-        '@type': 'Person',
-        name: 'Caleb McCartney',
-        url: `${SITE_URL}/about`,
-      },
-      description: 'Professional photography services including events, concerts, portraits, and commercial projects.',
-      areaServed: {
-        '@type': 'City',
-        name: 'Pittsburgh',
-        containedInPlace: {
-          '@type': 'State',
-          name: 'Pennsylvania',
+    jsonLd: generatePageGraph([
+      generatePhotographyProviderSchema(
+        'Pittsburgh photography business led by Caleb McCartney for events, concerts, headshots, portraits, and commercial storytelling.',
+      ),
+      generatePhotographyServiceSchema(
+        'Photography Services',
+        'Professional photography services including events, concerts, headshots, portraits, and commercial projects in Pittsburgh.',
+        `${SITE_URL}/request-a-quote`,
+        {
+          alternateName: ['Pittsburgh Photography Services', 'McCal Media Photography'],
+          category: 'Photography services',
+          keywords: ['pittsburgh photographer', 'event photographer pittsburgh', 'concert photographer pittsburgh', 'headshot photographer pittsburgh', 'commercial photographer pittsburgh'],
         },
-      },
-      serviceType: 'Photography',
-    },
+      ),
+    ]),
   });
-  const config = getWidgetConfig('request-a-quote');
-  if (!config) return <div>Widget not found</div>;
-
   return (
     <Layout>
-      <WidgetEmbed widget={config.widget} version={config.version} category={config.category} />
+      <QuoteRequestForm />
     </Layout>
   );
 };

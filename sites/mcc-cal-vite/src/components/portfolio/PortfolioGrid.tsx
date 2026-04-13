@@ -35,6 +35,14 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
     toastTimer.current = setTimeout(() => setToastVisible(false), 2200);
   }, []);
 
+  if (groups.length === 0) {
+    return (
+      <div className="pf-grid-empty" role="status" aria-live="polite">
+        <p>No portfolio items found.</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="pf-grid">

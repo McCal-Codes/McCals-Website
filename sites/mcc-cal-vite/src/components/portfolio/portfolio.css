@@ -32,6 +32,15 @@
   margin-inline: auto;
 }
 
+.pf-intro {
+  max-width: 760px;
+  margin: 0 auto 32px;
+  color: var(--fg);
+  opacity: 0.78;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
 /* --- Status states --- */
 .pf-loading,
 .pf-error {

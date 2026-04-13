@@ -1,6 +1,5 @@
 import { Layout } from '@/components';
-import { WidgetEmbed } from '@/components/widgets/WidgetEmbed';
-import { getWidgetConfig } from '@/utils/widgetConfig';
+import { ContactForm } from '@/components/forms';
 import { usePageMeta } from '@/hooks/usePageMeta';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
@@ -40,12 +39,10 @@ const ContactUsPage = () => {
       },
     },
   });
-  const config = getWidgetConfig('contact-us');
-  if (!config) return <div>Widget not found</div>;
 
   return (
     <Layout>
-      <WidgetEmbed widget={config.widget} version={config.version} category={config.category} />
+      <ContactForm />
     </Layout>
   );
 };

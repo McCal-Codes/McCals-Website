@@ -3,6 +3,7 @@ import { Layout } from '@/components';
 import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
 import '@/components/portfolio/portfolio.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
@@ -70,31 +71,50 @@ export default function ConcertsPage() {
   );
 
   usePageMeta({
-    title: 'Concert Photography | Caleb McCartney',
+    title: 'Pittsburgh Concert Photographer | Caleb McCartney',
     description:
-      'Live concert and music photography by Pittsburgh photojournalist Caleb McCartney. Editorial-quality images from touring and local shows.',
+      'Pittsburgh concert photographer covering live music, touring acts, local venues, and editorial assignments with photojournalistic speed.',
     canonical: `${SITE_URL}/concerts`,
     og: {
       type: 'website',
-      title: 'Concert Photography | Caleb McCartney',
-      description: 'Live concert photography by Pittsburgh photojournalist Caleb McCartney.',
+      title: 'Pittsburgh Concert Photographer | Caleb McCartney',
+      description: 'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Concert Photography | Caleb McCartney',
-      description: 'Live concert photography by Pittsburgh photojournalist Caleb McCartney.',
+      title: 'Pittsburgh Concert Photographer | Caleb McCartney',
+      description: 'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
+    jsonLd: generatePageGraph([
+      generatePhotographyProviderSchema(
+        'Pittsburgh photography business led by Caleb McCartney for event coverage, concerts, headshots, and commercial storytelling.',
+      ),
+      generatePhotographyServiceSchema(
+        'Concert Photography',
+        'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
+        `${SITE_URL}/concerts`,
+        {
+          alternateName: ['Pittsburgh Concert Photographer', 'Live Music Photography'],
+          category: 'Concert photographer',
+          keywords: ['concert photographer pittsburgh', 'music photographer', 'live music photography'],
+        },
+      ),
+    ]),
   });
 
   return (
     <Layout>
       <div className="pf-root">
         <p className="pf-subheading" style={{ textAlign: 'center', marginBottom: 0 }}>
-          Concert Photography
+          Pittsburgh Concert Photographer
         </p>
-        <h1 className="pf-heading">Live Music</h1>
+        <h1 className="pf-heading">Live Music & Venue Coverage</h1>
+        <p className="pf-intro">
+          Photojournalistic concert photography for artists, venues, promoters, and editorial teams
+          that need fast, usable images from live shows in Pittsburgh and beyond.
+        </p>
 
         {status === 'loading' && (
           <div className="pf-loading">

@@ -64,6 +64,62 @@
 
 ---
 
+## Local SEO Memory
+
+### GBP Category Audit - April 9, 2026
+
+**Deliverables created:**
+- `reports/seo/gbp-category-audit-2026-04-09.xlsx`
+- `reports/seo/gbp-category-audit-2026-04-09.md`
+- `reports/seo/gbp-category-audit-2026-04-09.raw.json`
+
+**Highest-signal finding:**
+- McCal Media did **not** appear in the top 10 Google Maps results captured on April 9, 2026 for:
+  - `event photographer pittsburgh`
+  - `concert photographer pittsburgh`
+  - `headshot photographer pittsburgh`
+
+**Current live GBP category stack observed:**
+- Primary: `Media house`
+- Additional categories seen: `Service establishment`, `Photo agency`, `Photographer`
+
+**Likely category mismatch:**
+- Google Maps appears to weight photography-first categories more strongly than `Media house` for high-intent local searches.
+
+**Most relevant competitor categories to evaluate for GBP:**
+- `Commercial photographer`
+- `Portrait studio`
+- `Photography studio` only if factually accurate
+- `Video production service` only if actively offered
+- Do **not** add categories that are not true offers just because competitors use them
+
+### Site-side SEO changes completed
+
+**Status:** Implemented and build-verified on April 9, 2026
+
+**Pages updated with stronger local/service intent:**
+- `sites/mcc-cal-vite/src/pages/index.tsx`
+- `sites/mcc-cal-vite/src/pages/about.tsx`
+- `sites/mcc-cal-vite/src/pages/events.tsx`
+- `sites/mcc-cal-vite/src/pages/concerts.tsx`
+- `sites/mcc-cal-vite/src/pages/portraits.tsx`
+- `sites/mcc-cal-vite/src/pages/request-a-quote.tsx`
+
+**Structured data helpers expanded:**
+- `sites/mcc-cal-vite/src/utils/jsonLd.ts`
+
+**Signals added to site:**
+- `Pittsburgh event photographer`
+- `Pittsburgh concert photographer`
+- `Pittsburgh headshot photographer`
+- `Pittsburgh commercial photographer`
+
+**Constraint to preserve:**
+- The website can reinforce category relevance, but it does **not** change the GBP directly.
+- Avoid adding `wedding photographer` or `portrait studio` language unless the business genuinely offers those services.
+
+---
+
 ## Verification Status
 
 | Check | Status |
