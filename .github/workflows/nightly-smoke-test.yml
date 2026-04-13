@@ -31,7 +31,7 @@ jobs:
           echo "Smoke test finished, report in reports/"
 
       - name: Upload smoke report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: smoke-test-report
           path: reports/
