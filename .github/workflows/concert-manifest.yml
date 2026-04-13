@@ -51,7 +51,7 @@ jobs:
         run: node scripts/optimize-images.js Concert
 
       - name: Commit optimized images
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: '🖼️ Optimize Concert images'
           file_pattern: 'src/images/Portfolios/Concert/**/*.{jpg,jpeg,png}'
