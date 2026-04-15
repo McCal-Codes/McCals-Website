@@ -57,6 +57,7 @@ const staticRouteComponents = {
   designSystems: DesignSystemsPage,
   projects: ProjectsPage,
   terranova: TerranovaPage,
+  accessibility: AccessibilityPage,
   policiesLegal: PoliciesLegalPage,
 } as const;
 
@@ -96,7 +97,6 @@ export default function App() {
                 <Route path="/changelog" element={<ChangelogPage />} />
               </>
             )}
-            <Route path="/accessibility" element={<AccessibilityPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

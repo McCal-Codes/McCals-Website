@@ -25,6 +25,7 @@ export const STATIC_PAGE_ROUTES = [
   { path: '/design-systems', routeKey: 'designSystems', changefreq: 'monthly', priority: '0.5' },
   { path: '/projects', routeKey: 'projects', changefreq: 'monthly', priority: '0.6' },
   { path: '/terranova', routeKey: 'terranova', changefreq: 'monthly', priority: '0.5' },
+  { path: '/accessibility', routeKey: 'accessibility', changefreq: 'yearly', priority: '0.3' },
   { path: '/policies-legal', routeKey: 'policiesLegal', changefreq: 'yearly', priority: '0.3' },
 ];
 

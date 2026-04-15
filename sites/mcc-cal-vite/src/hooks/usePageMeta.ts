@@ -4,6 +4,7 @@ interface PageMeta {
   title: string;
   description: string;
   canonical: string;
+  robots?: string;
   og?: {
     title?: string;
     description?: string;
@@ -27,6 +28,21 @@ function setMeta(name: string, content: string, attr: 'name' | 'property' = 'nam
     document.head.appendChild(el);
   }
   el.setAttribute('content', content);
+}
+
+function removeMeta(name: string, attr: 'name' | 'property' = 'name') {
+  const el = document.querySelector(`meta[${attr}="${name}"]`);
+  if (el) {
+    el.remove();
+  }
+}
+
+function setOptionalMeta(name: string, content?: string, attr: 'name' | 'property' = 'name') {
+  if (content) {
+    setMeta(name, content, attr);
+    return;
+  }
+  removeMeta(name, attr);
 }
 
 function setLink(rel: string, href: string) {
@@ -59,21 +75,18 @@ export function usePageMeta(meta: PageMeta) {
     document.title = meta.title;
     setMeta('description', meta.description);
     setLink('canonical', meta.canonical);
+    setOptionalMeta('robots', meta.robots);
 
-    if (meta.og) {
-      if (meta.og.type)        setMeta('og:type',        meta.og.type,        'property');
-      if (meta.og.title)       setMeta('og:title',       meta.og.title,       'property');
-      if (meta.og.description) setMeta('og:description', meta.og.description, 'property');
-      if (meta.og.image)       setMeta('og:image',       meta.og.image,       'property');
-      setMeta('og:url', meta.canonical, 'property');
-    }
+    setOptionalMeta('og:type', meta.og?.type, 'property');
+    setOptionalMeta('og:title', meta.og?.title, 'property');
+    setOptionalMeta('og:description', meta.og?.description, 'property');
+    setOptionalMeta('og:image', meta.og?.image, 'property');
+    setOptionalMeta('og:url', meta.og ? meta.canonical : undefined, 'property');
 
-    if (meta.twitter) {
-      if (meta.twitter.card)        setMeta('twitter:card',        meta.twitter.card);
-      if (meta.twitter.title)       setMeta('twitter:title',       meta.twitter.title);
-      if (meta.twitter.description) setMeta('twitter:description', meta.twitter.description);
-      if (meta.twitter.image)       setMeta('twitter:image',       meta.twitter.image);
-    }
+    setOptionalMeta('twitter:card', meta.twitter?.card);
+    setOptionalMeta('twitter:title', meta.twitter?.title);
+    setOptionalMeta('twitter:description', meta.twitter?.description);
+    setOptionalMeta('twitter:image', meta.twitter?.image);
 
     if (meta.jsonLd) {
       setJsonLd('page-json-ld', meta.jsonLd);
@@ -88,6 +101,7 @@ export function usePageMeta(meta: PageMeta) {
     meta.title,
     meta.description,
     meta.canonical,
+    meta.robots,
     meta.og?.type,
     meta.og?.title,
     meta.og?.description,

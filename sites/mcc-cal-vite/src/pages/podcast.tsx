@@ -16,12 +16,14 @@ import {
 import { formatTime, formatDateRelative, slugify } from '@/utils/formatters';
 import '@/styles/podcast.css';
 
+const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+
 export default function PodcastPage() {
   usePageMeta({
     title: 'Caffeinated Connections Podcast | Caleb McCartney',
     description:
       'Caffeinated Connections is where Caleb McCartney sits down with creators and industry pros over coffee to explore how ideas turn into impact. Listen to the latest episodes.',
-    canonical: 'https://mcc-cal.com/podcast',
+    canonical: `${SITE_URL}/podcast`,
     og: {
       type: 'website',
       title: 'Caffeinated Connections Podcast',

@@ -134,6 +134,12 @@
   </url>
 
   <url>
+    <loc>https://mcc-cal.com/accessibility</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
     <loc>https://mcc-cal.com/policies-legal</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

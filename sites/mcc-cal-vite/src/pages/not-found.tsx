@@ -9,6 +9,7 @@ const NotFoundPage = () => {
     title: 'Page Not Found | McCal Media',
     description: 'The page you are looking for does not exist. Explore McCal Media for photography, podcast, and creative content.',
     canonical: `${SITE_URL}/404`,
+    robots: 'noindex, nofollow',
     og: {
       type: 'website',
       title: 'Page Not Found | McCal Media',

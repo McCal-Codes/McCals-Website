@@ -9,12 +9,14 @@ import {
   generateWebSiteSchema,
 } from '@/utils/jsonLd';
 
+const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+
 const HomePage = () => {
   usePageMeta({
     title: 'Pittsburgh Photographer | Caleb McCartney | McCal Media',
     description:
       'Pittsburgh photographer Caleb McCartney creates event photography, concert photography, headshots, and commercial brand imagery for artists, teams, and organizations.',
-    canonical: 'https://mcc-cal.com/',
+    canonical: `${SITE_URL}/`,
     og: {
       type: 'website',
       title: 'Pittsburgh Photographer | Caleb McCartney',
