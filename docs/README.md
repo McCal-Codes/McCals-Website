@@ -3,6 +3,7 @@
 Welcome to the comprehensive documentation for McCal's Website project. This documentation is organized by category for easy navigation.
 
 ## Quick links
+- **Active docs index**: [ACTIVE_DOCS_INDEX.md](./ACTIVE_DOCS_INDEX.md)
 - **Onboarding**: [ONBOARDING.md](./ONBOARDING.md)
 - **Workspace Standards**: [standards/workspace-organization.md](./standards/workspace-organization.md)
 - **UI Patterns**: [standards/ui-patterns.md](./standards/ui-patterns.md)
