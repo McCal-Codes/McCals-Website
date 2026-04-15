@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import fs from 'fs';
@@ -7,6 +8,55 @@ import { fileURLToPath } from 'url';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const PUBLIC_DIR = resolve(__dirname, './public-vite');
+const SKIP_DIR_NAME = 'letting-me-go';
+
+/**
+ * Production build only: copy `public-vite` into `dist` but never enter a folder named `letting-me-go`
+ * (can be stuck with EPERM on some Windows / exFAT drives). Dev keeps normal `publicDir` behavior.
+ */
+function copyPublicSkipDeadFolder(): Plugin {
+  let outDirAbs = '';
+
+  const walk = (fromRoot: string, toRoot: string, rel: string) => {
+    const dir = rel ? path.join(fromRoot, rel) : fromRoot;
+    let entries: fs.Dirent[];
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch (e) {
+      console.warn(`[vite] public copy: skip unreadable ${dir}`, e);
+      return;
+    }
+    for (const ent of entries) {
+      if (ent.name === SKIP_DIR_NAME) {
+        console.warn(`[vite] public copy: skipping locked folder ${path.join(dir, ent.name)}`);
+        continue;
+      }
+      const relNext = rel ? path.join(rel, ent.name) : ent.name;
+      const srcPath = path.join(fromRoot, relNext);
+      const destPath = path.join(toRoot, relNext);
+      if (ent.isDirectory()) {
+        fs.mkdirSync(destPath, { recursive: true });
+        walk(fromRoot, toRoot, relNext);
+      } else {
+        fs.mkdirSync(path.dirname(destPath), { recursive: true });
+        fs.copyFileSync(srcPath, destPath);
+      }
+    }
+  };
+
+  return {
+    name: 'copy-public-skip-letting-me-go',
+    apply: 'build',
+    configResolved(config) {
+      outDirAbs = path.resolve(config.root, config.build.outDir);
+    },
+    closeBundle() {
+      walk(PUBLIC_DIR, outDirAbs, '');
+    },
+  };
+}
 
 // Plugin to serve portfolio images from src/images during dev
 const servePortfolioImages = () => ({
@@ -58,7 +108,7 @@ const servePortfolioImages = () => ({
   },
 });
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     react(),
     servePortfolioImages(),
@@ -68,8 +118,10 @@ export default defineConfig({
       brotliSize: true,
       filename: 'dist/stats.html',
     }),
-  ],
-  publicDir: resolve(__dirname, './public-vite'),
+    command === 'build' && copyPublicSkipDeadFolder(),
+  ].filter(Boolean) as Plugin[],
+  /** `vite build` uses a manual public copy so a locked `letting-me-go` tree cannot abort the build. */
+  publicDir: command === 'build' ? false : PUBLIC_DIR,
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
@@ -109,4 +161,4 @@ export default defineConfig({
       allow: ['..'],
     },
   },
-});
+}));

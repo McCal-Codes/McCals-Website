@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { PortfolioCard } from './PortfolioCard';
+import PortfolioCard from './PortfolioCard';
 import type { PortfolioGroup } from './types';
 
 const mockGroup: PortfolioGroup = {
@@ -38,7 +38,9 @@ describe('PortfolioCard', () => {
       />
     );
 
-    expect(screen.getByText('January 2025')).toBeInTheDocument();
+    expect(
+      screen.getByText(/January 2025/, { hidden: true })
+    ).toBeInTheDocument();
   });
 
   it('has accessible role and keyboard support', () => {
@@ -50,8 +52,10 @@ describe('PortfolioCard', () => {
       />
     );
 
-    const article = screen.getByRole('button');
-    expect(article).toHaveAttribute('tabIndex', '0');
+    const card = screen.getByRole('button', {
+      name: /View Test Concert photos/i,
+    });
+    expect(card).toHaveAttribute('tabIndex', '0');
   });
 
   it('displays image count correctly', () => {

@@ -31,6 +31,7 @@ const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
 const FAQPage = lazy(() => import('./pages/faq'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const TerranovaPage = lazy(() => import('./pages/terranova'));
+const LettingMeGoPage = lazy(() => import('./pages/letting-me-go'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
 
 // Simple fallback for page loading state
@@ -87,6 +88,7 @@ export default function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/accessibility" element={<AccessibilityPage />} />
           <Route path="/terranova" element={<TerranovaPage />} />
+          <Route path="/letting-me-go" element={<LettingMeGoPage />} />
           <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

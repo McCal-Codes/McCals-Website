@@ -7,25 +7,25 @@ const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replac
 const ProjectsPage = () => {
   usePageMeta({
     title: 'Projects | Caleb McCartney',
-    description: 'Apps, tools, and creative projects by Caleb McCartney. Design systems, Abridged app, and development roadmap.',
+    description: 'Artwork, apps, tools, and design work by Caleb McCartney. Letting Me Go thesis, design systems, Abridged app, and roadmap.',
     canonical: `${SITE_URL}/projects`,
     og: {
       type: 'website',
       title: 'Projects | Caleb McCartney',
-      description: 'Apps, tools, and creative projects by Caleb McCartney.',
+      description: 'Artwork, apps, tools, and design work by Caleb McCartney.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary',
       title: 'Projects | Caleb McCartney',
-      description: 'Apps, tools, and creative projects by Caleb McCartney.',
+      description: 'Artwork, apps, tools, and design work by Caleb McCartney.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: 'Projects',
-      description: 'Apps, tools, and creative projects by Caleb McCartney.',
+      description: 'Artwork, apps, tools, and design work by Caleb McCartney.',
       url: `${SITE_URL}/projects`,
       isPartOf: {
         '@type': 'WebSite',
@@ -42,10 +42,11 @@ const ProjectsPage = () => {
         Projects
       </h1>
       <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', marginBottom: '3rem' }}>
-        A collection of apps, tools, and design work.
+        Artwork, apps, tools, and design work.
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
         {[
+          { to: '/letting-me-go', title: 'Letting Me Go', desc: 'BFA thesis, AIR show, and campaign-trail photography: noise, shadow, the road' },
           { to: '/design-systems', title: 'Design Systems', desc: 'Component libraries and visual language' },
           { to: '/abridged', title: 'Abridged App', desc: 'A smarter way to read long-form content' },
           { to: '/roadmap', title: 'Roadmap', desc: 'What\'s being built and what\'s next' },

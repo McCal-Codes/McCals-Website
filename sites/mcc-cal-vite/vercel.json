@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "buildCommand": "npm run build:fast",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm ci --prefer-offline --no-audit",
   "redirects": [

@@ -15,6 +15,7 @@ const STATIC_ROUTES = [
   ['/contact-us',      'monthly', '0.8'],
   ['/request-a-quote', 'monthly', '0.8'],
   ['/featured-work',   'weekly',  '0.9'],
+  ['/letting-me-go',   'monthly', '0.75'],
   ['/journalism',      'weekly',  '0.8'],
   ['/portraits',       'monthly', '0.8'],
   ['/nature',          'monthly', '0.7'],

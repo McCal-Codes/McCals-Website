@@ -1,6 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 
+/** Routes grouped under Projects in primary nav (artwork + dev work) */
+function isProjectsNavPath(pathname: string): boolean {
+  return (
+    pathname === '/projects' ||
+    pathname === '/letting-me-go' ||
+    pathname === '/roadmap' ||
+    pathname === '/design-systems' ||
+    pathname === '/abridged' ||
+    pathname.startsWith('/projects/')
+  );
+}
+
 const Nav: React.FC = () => {
   const { pathname } = useLocation();
   const navRef = useRef<HTMLElement>(null);
@@ -158,7 +170,7 @@ const Nav: React.FC = () => {
                 <div className="mcc-nav__submenu-btn-container">
                   <Link
                     to="/projects"
-                    aria-current={pathname.startsWith('/projects') ? 'page' : undefined}
+                    aria-current={isProjectsNavPath(pathname) ? 'page' : undefined}
                     onClick={(e) => { if (isMobile) { e.preventDefault(); setProjectsSubmenuOpen((v) => !v); } }}
                   >
                     Projects
@@ -187,8 +199,17 @@ const Nav: React.FC = () => {
                   aria-label="Projects submenu"
                   style={isMobile ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
                 >
-                  <li><Link to="/projects" role="menuitem">Overview</Link></li>
-                  <li><Link to="/roadmap" role="menuitem">Roadmap</Link></li>
+                  <li><Link to="/projects" role="menuitem" aria-current={pathname === '/projects' ? 'page' : undefined}>Overview</Link></li>
+                  <li>
+                    <Link
+                      to="/letting-me-go"
+                      role="menuitem"
+                      aria-current={pathname === '/letting-me-go' ? 'page' : undefined}
+                    >
+                      Letting Me Go
+                    </Link>
+                  </li>
+                  <li><Link to="/roadmap" role="menuitem" aria-current={pathname === '/roadmap' ? 'page' : undefined}>Roadmap</Link></li>
                 </ul>
               </li>
 

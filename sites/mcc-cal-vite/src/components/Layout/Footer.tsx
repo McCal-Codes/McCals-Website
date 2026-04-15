@@ -57,6 +57,14 @@ const Footer: React.FC = () => {
                 <li><a href="/contact-us">Contact Form</a></li>
               </ul>
             </section>
+            <section className="mcc-footer__section" aria-labelledby="footer-projects">
+              <h4 id="footer-projects">Projects</h4>
+              <ul className="mcc-footer__list">
+                <li><a href="/projects">Overview</a></li>
+                <li><a href="/letting-me-go">Letting Me Go</a></li>
+                <li><a href="/roadmap">Roadmap</a></li>
+              </ul>
+            </section>
             <section className="mcc-footer__section" aria-labelledby="footer-portfolio">
               <h4 id="footer-portfolio">Portfolio</h4>
               <ul className="mcc-footer__list">

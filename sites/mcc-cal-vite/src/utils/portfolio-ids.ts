@@ -3,7 +3,10 @@
  * Optionally append a suffix (like a date) to ensure uniqueness.
  */
 export function generateId(title: string, suffix?: string): string {
-  const base = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const base = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
   if (!suffix) return base;
   
   const suffixPart = String(suffix)
