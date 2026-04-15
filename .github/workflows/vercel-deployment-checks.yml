@@ -31,7 +31,7 @@ jobs:
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
 
       - name: Run Build
-        run: cd sites/mcc-cal-vite && npm run build:fast
+        run: cd sites/mcc-cal-vite && npm run build
 
       - name: Notify Vercel - Build
         if: always()
@@ -139,7 +139,7 @@ jobs:
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
 
       - name: Validate Manifests
-        run: cd sites/mcc-cal-vite && node scripts/validate-manifests.js
+        run: cd sites/mcc-cal-vite && npm run validate:manifests
 
       - name: Notify Vercel - Manifest Check
         if: always()
@@ -155,10 +155,45 @@ jobs:
               description: '${{ job.status }}' === 'success' ? 'Manifest check passed' : 'Manifest check failed'
             })
 
+  unit-tests:
+    name: Unit tests (Vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Run Vitest
+        run: cd sites/mcc-cal-vite && npm run test:run
+
+      - name: Notify Vercel - Unit tests
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: '${{ job.status }}' === 'success' ? 'success' : 'failure',
+              context: 'Vercel - mc-cals-website: Unit tests',
+              description: '${{ job.status }}' === 'success' ? 'Vitest passed' : 'Vitest failed'
+            })
+
   # Aggregate Status Check (optional - marks overall status)
   all-checks-complete:
     name: All Checks Complete
-    needs: [build, lint, ci-check, manifest-check]
+    needs: [build, lint, ci-check, manifest-check, unit-tests]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -167,7 +202,8 @@ jobs:
           if [[ "${{ needs.build.result }}" == "failure" ]] || \
              [[ "${{ needs.lint.result }}" == "failure" ]] || \
              [[ "${{ needs.ci-check.result }}" == "failure" ]] || \
-             [[ "${{ needs.manifest-check.result }}" == "failure" ]]; then
+             [[ "${{ needs.manifest-check.result }}" == "failure" ]] || \
+             [[ "${{ needs.unit-tests.result }}" == "failure" ]]; then
             echo "One or more checks failed"
             exit 1
           else
