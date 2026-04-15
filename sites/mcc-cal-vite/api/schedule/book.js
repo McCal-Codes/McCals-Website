@@ -6,6 +6,7 @@
 import { Resend } from 'resend';
 import { applyRateLimit } from '../_lib/rate-limit.js';
 import { bookingSchema, safeParseBody } from '../_lib/validation.js';
+import { applyCors } from '../_lib/cors.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
@@ -13,11 +14,6 @@ const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'contact@mcc-cal.com';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'noreply@mcc-cal.com';
-const ALLOWED_ORIGINS = (process.env.BOOKING_ALLOWED_ORIGINS || '')
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-
 const BOOKING_RATE_LIMIT = {
   route: 'booking',
   limit: 5,
@@ -237,15 +233,7 @@ async function sendConfirmationEmail(booking, config) {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
-  const origin = req.headers.origin;
-  if (origin && ALLOWED_ORIGINS.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
+  if (applyCors(req, res, { methods: 'POST, OPTIONS' })) {
     return;
   }
 

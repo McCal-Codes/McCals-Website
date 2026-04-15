@@ -2,6 +2,7 @@
  * Google Calendar Availability API
  * Returns available time slots for booking
  */
+import { applyCors } from '../_lib/cors.js';
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -144,11 +145,7 @@ const conflicts = busyTimes.some((busy) => {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
+  if (applyCors(req, res, { methods: 'GET, OPTIONS' })) {
     return;
   }
 

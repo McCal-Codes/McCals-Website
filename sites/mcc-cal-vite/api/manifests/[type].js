@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { applyCors } from '../_lib/cors.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,6 +25,10 @@ const TYPE_MAP = {
 };
 
 export default function handler(req, res) {
+  if (applyCors(req, res, { methods: 'GET, OPTIONS' })) {
+    return;
+  }
+
   if (req.method !== 'GET') {
     res.status(405).json({ error: 'Method not allowed' });
     return;
@@ -64,7 +69,6 @@ export default function handler(req, res) {
     const manifest = JSON.parse(content);
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.status(200).json(manifest);
   } catch {
     res.status(500).json({ error: 'Error reading manifest' });

@@ -1,4 +1,5 @@
 import { applyRateLimit } from './_lib/rate-limit.js';
+import { applyCors } from './_lib/cors.js';
 
 const REVIEWS_RATE_LIMIT = {
   route: 'google-reviews',
@@ -8,11 +9,7 @@ const REVIEWS_RATE_LIMIT = {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
+  if (applyCors(req, res, { methods: 'GET, OPTIONS' })) {
     return;
   }
 
