@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
+import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
 
 // Lazy load pages for code splitting
 const HomePage = lazy(() => import('./pages/index'));
@@ -34,6 +35,31 @@ const TerranovaPage = lazy(() => import('./pages/terranova'));
 const LettingMeGoPage = lazy(() => import('./pages/letting-me-go'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
 
+const staticRouteComponents = {
+  home: HomePage,
+  about: AboutPage,
+  contactUs: ContactUsPage,
+  requestAQuote: RequestAQuotePage,
+  featuredWork: FeaturedWorkPage,
+  lettingMeGo: LettingMeGoPage,
+  journalism: JournalismPage,
+  portraits: PortraitsPage,
+  nature: NaturePage,
+  video: VideoPage,
+  events: EventsPage,
+  concerts: ConcertsPage,
+  blog: BlogPage,
+  authors: AuthorsPage,
+  podcast: PodcastPage,
+  bookPodcast: BookPodcastPage,
+  grabCoffee: GrabCoffeePage,
+  faq: FAQPage,
+  designSystems: DesignSystemsPage,
+  projects: ProjectsPage,
+  terranova: TerranovaPage,
+  policiesLegal: PoliciesLegalPage,
+} as const;
+
 // Simple fallback for page loading state
 function PageLoader() {
   return (
@@ -55,41 +81,23 @@ export default function App() {
       <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
           <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/authors" element={<AuthorsPage />} />
-          <Route path="/authors/:authorId" element={<AuthorsPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogPage />} />
-          <Route path="/concerts" element={<ConcertsPage />} />
-          <Route path="/events" element={<EventsPage />} />
-          <Route path="/featured-work" element={<FeaturedWorkPage />} />
-          <Route path="/journalism" element={<JournalismPage />} />
-          <Route path="/nature" element={<NaturePage />} />
-          <Route path="/portraits" element={<PortraitsPage />} />
-          <Route path="/podcast" element={<PodcastPage />} />
-          <Route path="/video" element={<VideoPage />} />
-          <Route path="/abridged" element={<AbridgedPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/roadmap" element={<RoadmapPage />} />
-          <Route path="/design-systems" element={<DesignSystemsPage />} />
-          {import.meta.env.DEV && (
-            <>
-              <Route path="/showcase" element={<ShowcasePage />} />
-              <Route path="/api-test" element={<ApiTestPage />} />
-              <Route path="/changelog" element={<ChangelogPage />} />
-            </>
-          )}
-          <Route path="/contact-us" element={<ContactUsPage />} />
-          <Route path="/request-a-quote" element={<RequestAQuotePage />} />
-          <Route path="/grab-a-coffee" element={<GrabCoffeePage />} />
-          <Route path="/book-a-podcast" element={<BookPodcastPage />} />
-          <Route path="/policies-legal" element={<PoliciesLegalPage />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/accessibility" element={<AccessibilityPage />} />
-          <Route path="/terranova" element={<TerranovaPage />} />
-          <Route path="/letting-me-go" element={<LettingMeGoPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+            {STATIC_PAGE_ROUTES.map((route) => {
+              const RouteComponent = staticRouteComponents[route.routeKey];
+              return <Route key={route.path} path={route.path} element={<RouteComponent />} />;
+            })}
+            <Route path="/authors/:authorId" element={<AuthorsPage />} />
+            <Route path="/blog/:slug" element={<BlogPage />} />
+            <Route path="/abridged" element={<AbridgedPage />} />
+            <Route path="/roadmap" element={<RoadmapPage />} />
+            {import.meta.env.DEV && (
+              <>
+                <Route path="/showcase" element={<ShowcasePage />} />
+                <Route path="/api-test" element={<ApiTestPage />} />
+                <Route path="/changelog" element={<ChangelogPage />} />
+              </>
+            )}
+            <Route path="/accessibility" element={<AccessibilityPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>

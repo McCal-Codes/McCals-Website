@@ -1,39 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { STATIC_PAGE_ROUTES } from '../src/config/public-routes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const SITE_URL = 'https://mcc-cal.com';
 const MANIFEST = path.resolve(__dirname, '..', 'public-vite', 'content', 'blog-static', 'blog-manifest.json');
 const OUT = path.resolve(__dirname, '..', 'public-vite', 'sitemap.xml');
-
-// Static routes: [path, changefreq, priority]
-const STATIC_ROUTES = [
-  ['/',                 'weekly',  '1.0'],
-  ['/about',           'monthly', '0.9'],
-  ['/contact-us',      'monthly', '0.8'],
-  ['/request-a-quote', 'monthly', '0.8'],
-  ['/featured-work',   'weekly',  '0.9'],
-  ['/letting-me-go',   'monthly', '0.75'],
-  ['/journalism',      'weekly',  '0.8'],
-  ['/portraits',       'monthly', '0.8'],
-  ['/nature',          'monthly', '0.7'],
-  ['/video',           'monthly', '0.7'],
-  ['/events',          'weekly',  '0.8'],
-  ['/concerts',        'weekly',  '0.7'],
-  ['/blog',            'weekly',  '0.8'],
-  ['/authors',         'monthly', '0.6'],
-  ['/authors/mccal',   'monthly', '0.6'],
-  ['/podcast',         'weekly',  '0.7'],
-  ['/book-a-podcast',  'monthly', '0.7'],
-  ['/grab-a-coffee',   'monthly', '0.7'],
-  ['/faq',             'monthly', '0.6'],
-  ['/design-systems',  'monthly', '0.5'],
-  ['/projects',        'monthly', '0.6'],
-  ['/terranova',       'monthly', '0.5'],
-  ['/policies-legal',  'yearly',  '0.3'],
-];
 
 function urlEntry({ loc, lastmod, changefreq, priority }) {
   const lines = [`  <url>`, `    <loc>${loc}</loc>`];
@@ -46,8 +20,14 @@ function urlEntry({ loc, lastmod, changefreq, priority }) {
 
 const entries = [];
 
-for (const [route, changefreq, priority] of STATIC_ROUTES) {
-  entries.push(urlEntry({ loc: `${SITE_URL}${route}`, changefreq, priority }));
+for (const route of STATIC_PAGE_ROUTES) {
+  entries.push(
+    urlEntry({
+      loc: `${SITE_URL}${route.path}`,
+      changefreq: route.changefreq,
+      priority: route.priority,
+    })
+  );
 }
 
 if (fs.existsSync(MANIFEST)) {

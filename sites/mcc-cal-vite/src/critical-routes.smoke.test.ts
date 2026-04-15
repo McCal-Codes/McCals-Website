@@ -2,48 +2,26 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { SITEMAP_STATIC_PATHS } from './config/public-routes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-/**
- * First column of STATIC_ROUTES in `scripts/generate-sitemap.js`.
- * Keeps sitemap-discoverable URLs wired in `App.tsx` (dynamic /authors/* uses :authorId).
- */
-const SITEMAP_STATIC_PATHS: readonly string[] = [
-  '/',
-  '/about',
-  '/contact-us',
-  '/request-a-quote',
-  '/featured-work',
-  '/letting-me-go',
-  '/journalism',
-  '/portraits',
-  '/nature',
-  '/video',
-  '/events',
-  '/concerts',
-  '/blog',
-  '/authors',
-  '/authors/mccal',
-  '/podcast',
-  '/book-a-podcast',
-  '/grab-a-coffee',
-  '/faq',
-  '/design-systems',
-  '/projects',
-  '/terranova',
-  '/policies-legal',
-];
 
 function assertSitemapPathHasAppRoute(appSource: string, path: string): void {
   if (path.startsWith('/authors/') && path !== '/authors') {
     expect(appSource).toContain('path="/authors/:authorId"');
     return;
   }
-  expect(appSource).toContain(`path="${path}"`);
+  expect(appSource).toContain('STATIC_PAGE_ROUTES.map');
 }
 
 describe('critical public routes', () => {
+  it('renders static routes from shared source in App.tsx', () => {
+    const appPath = resolve(__dirname, 'App.tsx');
+    const appSource = readFileSync(appPath, 'utf8');
+    expect(appSource).toContain("from './config/public-routes.js'");
+    expect(appSource).toContain('STATIC_PAGE_ROUTES.map');
+  });
+
   it('registers every sitemap static path in App.tsx', () => {
     const appPath = resolve(__dirname, 'App.tsx');
     const appSource = readFileSync(appPath, 'utf8');
