@@ -1,5 +1,9 @@
 name: Agent Checks (PR Comment)
 
+concurrency:
+  group: agent-checks-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]

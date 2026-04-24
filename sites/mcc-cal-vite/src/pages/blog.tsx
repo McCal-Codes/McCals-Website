@@ -13,8 +13,9 @@ import {
   toAbsoluteUrl,
   buildIndexJsonLd,
   buildPostJsonLd,
+  buildBreadcrumbJsonLd,
 } from '@/components/blog';
-import '@/styles/blog.css';
+import './blog.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
@@ -75,7 +76,13 @@ export default function BlogPage() {
               'Photojournalism and field reporting from McCal Media.',
             image: absoluteLeadImage,
           },
-          jsonLd: buildPostJsonLd(resolvedPost, resolvedAuthor.name, absoluteLeadImage),
+          jsonLd: {
+            '@context': 'https://schema.org',
+            '@graph': [
+              buildPostJsonLd(resolvedPost, resolvedAuthor.name, absoluteLeadImage),
+              buildBreadcrumbJsonLd(resolvedPost.slug, resolvedPost.title),
+            ],
+          },
         }
       : {
           title: postLoading ? 'Loading Story | McCal Media' : 'Story Not Found | McCal Media',

@@ -40,7 +40,7 @@ function toLocalUrl(repoRelativePath: string): string {
   // Use raw path - Vite plugin will handle decoding
   const url = `/${repoRelativePath}`;
   if (IS_DEV) {
-    console.log('[DEBUG] Image URL:', url);
+    // Debug logging in development only
   }
   return url;
 }

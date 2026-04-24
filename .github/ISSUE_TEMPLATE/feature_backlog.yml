@@ -1,0 +1,63 @@
+name: "Feature backlog item"
+description: "Add a feature to the website improvement backlog"
+labels: [enhancement, backlog]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to add features to the website improvement backlog.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Brief description of the feature
+      placeholder: "Add dark mode toggle with CSS variables and localStorage persistence"
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation steps
+      description: High-level steps to implement this feature
+      placeholder: |
+        - Define CSS color variables for light/dark themes
+        - Add toggle button in navigation
+        - Persist preference in localStorage
+        - Respect system preference on first visit
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature?
+      options:
+        - High - Critical for UX/SEO/Production
+        - Medium - Nice to have improvement
+        - Low - Long-term or optional
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which area does this feature belong to?
+      options:
+        - Performance & UX
+        - Content Features
+        - SEO & Discovery
+        - Developer Experience
+        - Content Management
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Any dependencies, related issues, or considerations
+      placeholder: "Depends on Issue #X, requires package Y, etc."

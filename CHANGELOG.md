@@ -1,5 +1,39 @@
 # Changelog
 
+## 2026-04-24
+
+### SEO Enhancements & Open Graph Images
+
+- Added portfolio-specific Open Graph images (`portraits-og.jpg`, `nature-og.jpg`, `events-og.jpg`, `concerts-og.jpg`) to `public-vite/images/`.
+- Updated portfolio pages (portraits, nature, events, concerts) to use specific OG images instead of generic headshot.
+- Added event schema generators (`generateEventSchema`, `generateMusicEventSchema`) to `jsonLd.ts` for future event structured data implementation.
+- Created debug workflow documentation (`.windsurf/workflows/debug.md`) with systematic 12-step debugging process.
+
+### CSS Reorganization
+
+- Moved CSS files from centralized `styles/` directory to component/page co-location pattern:
+  - `ComingSoon.module.css` → `components/ComingSoon.module.css`
+  - `heroCarousel.module.css` → `components/heroCarousel.module.css`
+  - `authors.css` → `pages/authors.css`
+  - `blog.css` → `pages/blog.css`
+  - `podcast.css` → `pages/podcast.css`
+- Updated all component and page imports to reflect new CSS locations.
+- Added Tailwind configuration file (`tailwind.config.js`).
+
+### GitHub Actions Improvements
+
+- Added consistent caching strategy across all workflows (npm + node modules).
+- Added timeout settings to prevent hanging jobs (10-30 minutes based on job type).
+- Added concurrency groups to prevent redundant workflow runs.
+- Added npm audit job to security scanning workflow.
+- Moved hardcoded URLs to secrets with fallbacks in `seo-auto-update.yml`.
+- Improved `reusable-manifest.yml` with caching and timeout configuration.
+
+### Code Quality
+
+- Fixed ESLint warnings in `generate-favicons.js` (removed unused `icoBuffers` variable).
+- Fixed ESLint warning in `validate-manifests.js` (removed unused error parameter).
+
 ## 2026-03-30
 
 ### Session Timeline

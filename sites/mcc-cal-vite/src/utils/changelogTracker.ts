@@ -29,7 +29,9 @@ export function getChangelog(): ChangelogEntry[] {
     const stored = localStorage.getItem(CHANGELOG_STORAGE_KEY);
     return stored ? JSON.parse(stored) : [];
   } catch {
-    console.warn('Failed to read changelog from localStorage');
+    if (import.meta.env.DEV) {
+      console.warn('Failed to read changelog from localStorage');
+    }
     return [];
   }
 }
@@ -67,7 +69,9 @@ export function addChangelogEntry(
       const trimmed = changelog.slice(0, MAX_ENTRIES);
       localStorage.setItem(CHANGELOG_STORAGE_KEY, JSON.stringify(trimmed));
     } catch {
-      console.warn('Failed to write changelog to localStorage');
+      if (import.meta.env.DEV) {
+        console.warn('Failed to write changelog to localStorage');
+      }
     }
   }
 
@@ -82,7 +86,9 @@ export function clearChangelog(): void {
     try {
       localStorage.removeItem(CHANGELOG_STORAGE_KEY);
     } catch {
-      console.warn('Failed to clear changelog');
+      if (import.meta.env.DEV) {
+        console.warn('Failed to clear changelog');
+      }
     }
   }
 }

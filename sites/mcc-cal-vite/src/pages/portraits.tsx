@@ -73,13 +73,13 @@ export default function PortraitsPage() {
       type: 'website',
       title: 'Pittsburgh Headshot Photographer | Caleb McCartney',
       description: 'Professional headshots, portraits, and editorial sessions by Caleb McCartney in Pittsburgh.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/portraits-og.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Pittsburgh Headshot Photographer | Caleb McCartney',
       description: 'Professional headshots, portraits, and editorial sessions by Caleb McCartney in Pittsburgh.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/portraits-og.jpg`,
     },
     jsonLd: generatePageGraph([
       generatePhotographyProviderSchema(
@@ -111,7 +111,7 @@ export default function PortraitsPage() {
   return (
     <Layout>
       <div className="pf-root">
-        <p className="pf-subheading" style={{ textAlign: 'center', marginBottom: 0 }}>
+        <p className="pf-subheading text-center mb-0">
           Pittsburgh Headshot Photographer
         </p>
         <h1 className="pf-heading">Portraits & Headshots</h1>
@@ -130,7 +130,7 @@ export default function PortraitsPage() {
         {status === 'error' && (
           <div className="pf-error">
             <span>Failed to load portraits portfolio.</span>
-            <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>{error}</span>
+            <span className="text-xs opacity-70">{error}</span>
           </div>
         )}
 

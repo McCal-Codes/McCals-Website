@@ -1,7 +1,7 @@
 import js from "@eslint/js";
 import globals from "globals";
 
-// Flat config for ESLint 8.57.x (no "eslint/config" export yet)
+// Flat config for ESLint 9.x
 export default [
   {
     ignores: [
@@ -33,6 +33,9 @@ export default [
 
       // Optional: tool UIs may be vendored / Electron-specific; keep them out of repo-wide lint
       "tools/image-compress/**",
+
+      // Archived admin code
+      "admin/_archived/**",
     ],
   },
   {
@@ -57,6 +60,9 @@ export default [
       "no-console": "off",
       "no-useless-escape": "off",
       "no-constant-condition": ["warn"],
+      "no-empty": "warn",
+      "no-useless-assignment": "warn",
+      "preserve-caught-error": "off",
     },
   },
 ];

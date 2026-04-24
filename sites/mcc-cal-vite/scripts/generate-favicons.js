@@ -85,33 +85,6 @@ async function generateFavicons() {
 
   // Generate favicon.ico (multi-size ICO file)
   console.log('\n🎯 Generating favicon.ico...');
-  const icoSizes = [16, 32, 48];
-  const icoBuffers = await Promise.all(
-    icoSizes.map(async (size) => {
-      return sharp({
-        create: {
-          width: size,
-          height: size,
-          channels: 4,
-          background: BG_COLOR,
-        },
-      })
-        .composite([
-          {
-            input: await sharp(SOURCE_LOGO)
-              .resize(size - 4, size - 4, {
-                fit: 'contain',
-                background: { r: 0, g: 0, b: 0, alpha: 0 },
-              })
-              .toBuffer(),
-            gravity: 'center',
-          },
-        ])
-        .png()
-        .toBuffer();
-    })
-  );
-
   // Note: For actual ICO generation, you'd need an ICO library
   // For now, we'll just copy the 32x32 PNG as favicon.ico
   fs.copyFileSync(

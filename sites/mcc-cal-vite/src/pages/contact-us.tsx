@@ -7,18 +7,18 @@ const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replac
 const ContactUsPage = () => {
   usePageMeta({
     title: 'Contact Us | McCal Media',
-    description: 'Get in touch with Caleb McCartney for photography inquiries, project collaborations, or media requests.',
+    description: 'Contact Pittsburgh photographer Caleb McCartney for event coverage, concert photography, headshots, and commercial projects. Get a response within 24 hours.',
     canonical: `${SITE_URL}/contact-us`,
     og: {
       type: 'website',
       title: 'Contact Us | McCal Media',
-      description: 'Get in touch with Caleb McCartney for photography inquiries and collaborations.',
+      description: 'Contact Pittsburgh photographer Caleb McCartney for event coverage, concert photography, headshots, and commercial projects. Get a response within 24 hours.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary',
       title: 'Contact Us | McCal Media',
-      description: 'Get in touch with Caleb McCartney for photography inquiries and collaborations.',
+      description: 'Contact Pittsburgh photographer Caleb McCartney for event coverage, concert photography, headshots, and commercial projects. Get a response within 24 hours.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     jsonLd: {

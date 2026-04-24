@@ -179,9 +179,9 @@ export default function GrabCoffeePage() {
               <h1 className="scheduling-title">{BOOKING_TYPE.name}</h1>
               <p className="scheduling-subtitle">{BOOKING_TYPE.description}</p>
             </header>
-            <div className="scheduling-error" role="alert" style={{ marginTop: '2rem' }}>
+            <div className="scheduling-error mt-8" role="alert">
               <p>Scheduling is temporarily unavailable.</p>
-              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '0.5rem' }}>
+              <p className="text-sm opacity-80 mt-2">
                 Please email me directly at <a href="mailto:hello@mcc-cal.com">hello@mcc-cal.com</a> to grab a coffee.
               </p>
             </div>

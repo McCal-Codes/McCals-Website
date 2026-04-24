@@ -320,10 +320,10 @@ export default function APITestPage() {
   };
 
   return (
-    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', padding: '20px' }}>
+    <div className="font-sans p-5">
       <h1>API Integration Test</h1>
 
-      <div style={{ marginBottom: '20px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+      <div className="mb-5 p-2.5 bg-gray-200 rounded">
         <p>
           <strong>API Base:</strong> {results?.apiUrl || 'Loading...'}
         </p>
@@ -336,19 +336,19 @@ export default function APITestPage() {
       </div>
 
       {results && (
-        <div style={{ marginBottom: '20px' }}>
+        <div className="mb-5">
           <h2>Summary</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
-            <div style={{ padding: '10px', backgroundColor: '#e8f5e9', borderRadius: '4px' }}>
+          <div className="grid grid-cols-4 gap-2.5">
+            <div className="p-2.5 bg-green-100 rounded">
               <strong>Total:</strong> {results.summary.total}
             </div>
-            <div style={{ padding: '10px', backgroundColor: '#e8f5e9', borderRadius: '4px' }}>
+            <div className="p-2.5 bg-green-100 rounded">
               <strong>Passed:</strong> {results.summary.passed}
             </div>
-            <div style={{ padding: '10px', backgroundColor: '#ffebee', borderRadius: '4px' }}>
+            <div className="p-2.5 bg-red-100 rounded">
               <strong>Failed:</strong> {results.summary.failed}
             </div>
-            <div style={{ padding: '10px', backgroundColor: '#fff3e0', borderRadius: '4px' }}>
+            <div className="p-2.5 bg-orange-100 rounded">
               <strong>Warnings:</strong> {results.summary.warnings}
             </div>
           </div>
@@ -362,38 +362,32 @@ export default function APITestPage() {
           {results.tests.map((test, idx) => (
             <div
               key={idx}
-              style={{
-                marginBottom: '10px',
-                padding: '12px',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                borderLeft: `4px solid ${
-                  test.status === 'success'
-                    ? '#4caf50'
-                    : test.status === 'error'
-                    ? '#f44336'
-                    : '#ff9800'
-                }`,
-              }}
+              className={`mb-2.5 p-3 border border-gray-300 rounded-l ${
+                test.status === 'success'
+                  ? 'border-l-4 border-l-green-500'
+                  : test.status === 'error'
+                    ? 'border-l-4 border-l-red-500'
+                    : 'border-l-4 border-l-orange-500'
+              }`}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="flex justify-between items-center">
                 <div>
-                  <h3 style={{ margin: '0 0 5px 0' }}>
-                    <span style={{ marginRight: '8px', fontSize: '16px' }}>{getStatusIcon(test.status)}</span>
+                  <h3 className="m-0 mb-1.25">
+                    <span className="mr-2 text-base">{getStatusIcon(test.status)}</span>
                     {test.name}
                   </h3>
-                  <p style={{ margin: '0 0 5px 0', color: '#666' }}>{test.message}</p>
+                  <p className="m-0 mb-1.25 text-gray-600">{test.message}</p>
                   {test.details && (
-                    <pre style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#999', backgroundColor: '#fafafa', padding: '5px', borderRadius: '2px', overflow: 'auto' }}>
+                    <pre className="mt-1.25 text-xs text-gray-500 bg-gray-50 p-1.25 rounded overflow-auto">
                       {JSON.stringify(test.details, null, 2)}
                     </pre>
                   )}
                 </div>
-                <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                  <span className={getStatusColor(test.status)} style={{ fontWeight: 'bold' }}>
+                <div className="text-right whitespace-nowrap">
+                  <span className={`${getStatusColor(test.status)} font-bold`}>
                     {test.status}
                   </span>
-                  {test.duration && <p style={{ margin: '5px 0 0 0', color: '#999', fontSize: '12px' }}>{test.duration}ms</p>}
+                  {test.duration && <p className="mt-1.25 text-gray-500 text-xs">{test.duration}ms</p>}
                 </div>
               </div>
             </div>
@@ -401,25 +395,19 @@ export default function APITestPage() {
         </div>
       )}
 
-      <div style={{ marginTop: '20px' }}>
+      <div className="mt-5">
         <button
           onClick={runTests}
           disabled={running}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#2196f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: running ? 'not-allowed' : 'pointer',
-            opacity: running ? 0.5 : 1,
-          }}
+          className={`px-5 py-2.5 bg-blue-500 text-white border-0 rounded ${
+            running ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-blue-600'
+          } transition-colors`}
         >
           {running ? 'Running...' : 'Run Tests'}
         </button>
       </div>
 
-      <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f5f5f5', borderRadius: '4px', fontSize: '12px' }}>
+      <div className="mt-5 p-2.5 bg-gray-100 rounded text-xs">
         <h3>Notes</h3>
         <ul>
           <li>This page tests the Cloudflare Worker API endpoints</li>

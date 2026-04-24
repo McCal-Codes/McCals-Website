@@ -4,7 +4,7 @@ import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { fetchBlogAuthors, fetchBlogPosts, type BlogAuthor, type BlogPostSummary } from '@/utils/api-client';
 import { formatDateLong } from '@/utils/formatters';
-import '@/styles/authors.css';
+import './authors.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 

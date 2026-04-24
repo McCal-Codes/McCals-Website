@@ -79,13 +79,13 @@ export default function ConcertsPage() {
       type: 'website',
       title: 'Pittsburgh Concert Photographer | Caleb McCartney',
       description: 'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/concerts-og.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Pittsburgh Concert Photographer | Caleb McCartney',
       description: 'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/concerts-og.jpg`,
     },
     jsonLd: generatePageGraph([
       generatePhotographyProviderSchema(
@@ -107,7 +107,7 @@ export default function ConcertsPage() {
   return (
     <Layout>
       <div className="pf-root">
-        <p className="pf-subheading" style={{ textAlign: 'center', marginBottom: 0 }}>
+        <p className="pf-subheading text-center mb-0">
           Pittsburgh Concert Photographer
         </p>
         <h1 className="pf-heading">Live Music & Venue Coverage</h1>
@@ -126,7 +126,7 @@ export default function ConcertsPage() {
         {status === 'error' && (
           <div className="pf-error">
             <span>Failed to load concerts.</span>
-            <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>{error}</span>
+            <span className="text-xs opacity-70">{error}</span>
           </div>
         )}
 

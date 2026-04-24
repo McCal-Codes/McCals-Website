@@ -1,5 +1,9 @@
 name: Vercel Deployment Checks
 
+concurrency:
+  group: vercel-deployment-checks-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches: [main, staging, dev]
@@ -15,6 +19,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,6 +31,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Install dependencies
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
@@ -51,6 +64,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -63,11 +77,19 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
       - name: Install dependencies
-        run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Run ESLint
-        run: cd sites/mcc-cal-vite && npm run lint
+        run: npm run lint
 
       - name: Notify Vercel - Lint
         if: always()
@@ -87,6 +109,7 @@ jobs:
   ci-check:
     name: CI Validation
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -98,6 +121,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Install dependencies
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
@@ -123,6 +154,7 @@ jobs:
   manifest-check:
     name: Manifest Validation
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -134,6 +166,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Install dependencies
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
@@ -158,6 +198,7 @@ jobs:
   unit-tests:
     name: Unit tests (Vitest)
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -169,6 +210,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Install dependencies
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
