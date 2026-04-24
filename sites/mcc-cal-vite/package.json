@@ -24,7 +24,6 @@
   "dependencies": {
     "@tanstack/react-query": "^5.96.2",
     "@vercel/analytics": "^2.0.1",
-    "@vercel/kv": "^3.0.0",
     "@vercel/speed-insights": "^2.0.0",
     "autoprefixer": "^10.4.27",
     "react": "^18.3.1",
