@@ -153,7 +153,9 @@ export function useManifests(types: string[], apiUrl?: string) {
           });
           results[type] = manifest;
         } catch (err) {
-          console.error(`Failed to load ${type} manifest:`, err);
+          if (import.meta.env.DEV) {
+            console.error(`Failed to load ${type} manifest:`, err);
+          }
         }
       });
 
