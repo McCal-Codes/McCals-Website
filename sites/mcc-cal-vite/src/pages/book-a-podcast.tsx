@@ -183,7 +183,7 @@ export default function BookPodcastPage() {
             <div className="scheduling-error mt-8" role="alert">
               <p>Scheduling is temporarily unavailable.</p>
               <p className="text-sm opacity-80 mt-2">
-                Please email me directly at <a href="mailto:hello@mcc-cal.com">hello@mcc-cal.com</a> to book a podcast recording.
+                Please email me directly at <a href="mailto:contact@mcc-cal.com">contact@mcc-cal.com</a> to book a podcast recording.
               </p>
             </div>
           </div>
