@@ -55,9 +55,9 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
         const startDate = formatDateForInput(today);
         const endDate = formatDateForInput(addDays(today, 60));
 
-        // Use enhanced availability endpoint with Redis caching
+        // Use availability endpoint
         const response = await fetch(
-          `/api/schedule/availability-enhanced?eventType=${state.selectedEventType!.id}&start=${startDate}&end=${endDate}`,
+          `/api/schedule/availability?eventType=${state.selectedEventType!.id}&start=${startDate}&end=${endDate}`,
           { headers: { Accept: 'application/json' } }
         );
 
@@ -102,7 +102,7 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
     try {
       const requesterTimezone = getRequesterTimezone();
       
-      const response = await fetch('/api/schedule/book-enhanced', {
+      const response = await fetch('/api/schedule/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
