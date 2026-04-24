@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import styles from './not-found.module.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
@@ -24,10 +25,14 @@ const NotFoundPage = () => {
 
   return (
     <Layout>
-      <section className="text-center py-16 px-4">
-        <h1>404 — Page Not Found</h1>
-        <p>The page you're looking for doesn't exist.</p>
-        <Link to="/">Return home</Link>
+      <section className={styles.container}>
+        <h1 className={styles.title}>404 — Page Not Found</h1>
+        <p className={styles.description}>
+          The page you're looking for doesn't exist. Explore McCal Media for photography, podcast, and creative content.
+        </p>
+        <Link to="/" className={styles.homeLink}>
+          Return home
+        </Link>
       </section>
     </Layout>
   );

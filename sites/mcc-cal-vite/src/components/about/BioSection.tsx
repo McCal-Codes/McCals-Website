@@ -138,7 +138,7 @@ export function BioSection({ className = '' }: BioSectionProps) {
                   Contact page
                 </Link>
                 <Link
-                  to="/grab-coffee"
+                  to="/grab-a-coffee"
                   className={styles.menuItem}
                   role="menuitem"
                 >
