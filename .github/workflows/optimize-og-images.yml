@@ -1,0 +1,91 @@
+name: Optimize Open Graph Images
+
+concurrency:
+  group: optimize-og-images-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites/mcc-cal-vite/public-vite/images/*-og.jpg'
+      - 'scripts/optimize-og-images.js'
+      - '.github/workflows/optimize-og-images.yml'
+
+  pull_request:
+    branches: [main]
+    paths:
+      - 'sites/mcc-cal-vite/public-vite/images/*-og.jpg'
+      - 'scripts/optimize-og-images.js'
+      - '.github/workflows/optimize-og-images.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    name: Optimize OG Images
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Optimize Open Graph images
+        run: node scripts/optimize-og-images.js
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet sites/mcc-cal-vite/public-vite/images/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No image optimizations needed"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Images were optimized"
+          fi
+
+      - name: Commit optimized images
+        if: steps.changes.outputs.changed == 'true' && github.event_name != 'pull_request'
+        env:
+          CHANGED: ${{ steps.changes.outputs.changed }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add sites/mcc-cal-vite/public-vite/images/*-og.jpg
+          git commit -m "perf: optimize Open Graph images [automated]"
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Open Graph Image Optimization" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.changes.outputs.changed }}" == "true" ]; then
+            echo "✅ Images optimized and committed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No optimization needed" >> $GITHUB_STEP_SUMMARY
+          fi

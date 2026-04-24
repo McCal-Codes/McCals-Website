@@ -16,7 +16,7 @@ if (existsSync(parentScript)) {
   console.log('🔍 Validating portfolio manifests...');
   try {
     execSync(`node "${parentScript}"`, { stdio: 'inherit' });
-  } catch (e) {
+  } catch {
     process.exit(1);
   }
 } else {
