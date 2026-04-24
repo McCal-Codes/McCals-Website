@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PortfolioFilters from '@/components/portfolio/PortfolioFilters';
@@ -5,7 +6,6 @@ import PortfolioGrid from '@/components/portfolio/PortfolioGrid';
 import { sortPortfolioGroups } from '@/components/portfolio/sortGroups';
 import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
-import { useMemo, useState } from 'react';
 import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
 import '@/components/portfolio/portfolio.css';
 
@@ -85,13 +85,13 @@ export default function EventsPage() {
       type: 'website',
       title: 'Pittsburgh Event Photographer | Caleb McCartney',
       description: 'Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/events-og.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Pittsburgh Event Photographer | Caleb McCartney',
       description: 'Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/events-og.jpg`,
     },
     jsonLd: generatePageGraph([
       generatePhotographyProviderSchema(
@@ -113,7 +113,7 @@ export default function EventsPage() {
   return (
     <Layout>
       <div className="pf-root">
-        <p className="pf-subheading" style={{ textAlign: 'center', marginBottom: 0 }}>
+        <p className="pf-subheading text-center mb-0">
           Pittsburgh Event Photographer
         </p>
         <h1 className="pf-heading">Corporate Events, Conferences & Community Coverage</h1>
@@ -132,7 +132,7 @@ export default function EventsPage() {
         {status === 'error' && (
           <div className="pf-error">
             <span>Failed to load events.</span>
-            <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>{error}</span>
+            <span className="text-xs opacity-70">{error}</span>
           </div>
         )}
 

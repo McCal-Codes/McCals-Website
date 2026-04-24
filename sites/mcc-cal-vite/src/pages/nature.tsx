@@ -68,13 +68,13 @@ export default function NaturePage() {
       type: 'website',
       title: 'Nature Photography | Caleb McCartney',
       description: 'Nature and landscape photography by Caleb McCartney.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/nature-og.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Nature Photography | Caleb McCartney',
       description: 'Nature and landscape photography by Caleb McCartney.',
-      image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
+      image: `${SITE_URL}/images/nature-og.jpg`,
     },
     jsonLd: {
       '@context': 'https://schema.org',
@@ -93,7 +93,7 @@ export default function NaturePage() {
   return (
     <Layout>
       <div className="pf-root">
-        <p className="pf-subheading" style={{ textAlign: 'center', marginBottom: 0 }}>
+        <p className="pf-subheading text-center mb-0">
           Nature Photography
         </p>
         <h1 className="pf-heading">Wildlife & Landscapes</h1>
@@ -108,7 +108,7 @@ export default function NaturePage() {
         {status === 'error' && (
           <div className="pf-error">
             <span>Failed to load nature portfolio.</span>
-            <span style={{ fontSize: '0.8rem', opacity: 0.7 }}>{error}</span>
+            <span className="text-xs opacity-70">{error}</span>
           </div>
         )}
 
