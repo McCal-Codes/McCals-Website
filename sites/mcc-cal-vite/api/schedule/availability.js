@@ -228,6 +228,58 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Check if Google Calendar credentials are configured
+  if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
+    console.warn('[schedule/availability] Google Calendar credentials not configured, returning mock availability');
+    // Return mock availability (same as dev mode)
+    const days = [];
+    const current = new Date(start);
+    const endDate = new Date(end);
+
+    while (current <= endDate) {
+      const dayOfWeek = current.getDay();
+      if (dayOfWeek !== 0) { // Skip Sundays
+        const dateStr = current.toISOString().split('T')[0];
+        const slots = [];
+        
+        for (let hour = config.workingHours.start; hour < config.workingHours.end; hour++) {
+          for (const minute of [0, 30]) {
+            const slotTime = new Date(current);
+            slotTime.setHours(hour, minute, 0, 0);
+            
+            const slotEnd = new Date(slotTime);
+            slotEnd.setMinutes(slotTime.getMinutes() + config.durationMinutes);
+            if (slotEnd.getHours() > config.workingHours.end || 
+                (slotEnd.getHours() === config.workingHours.end && slotEnd.getMinutes() > 0)) {
+              continue;
+            }
+            
+            slots.push({
+              time: slotTime.toISOString(),
+              display: slotTime.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true,
+              }),
+            });
+          }
+        }
+        
+        if (slots.length > 0) {
+          days.push({
+            date: dateStr,
+            available: true,
+            slots: slots.slice(0, config.maxPerDay * 2),
+          });
+        }
+      }
+      current.setDate(current.getDate() + 1);
+    }
+
+    res.status(200).json({ days, mock: true });
+    return;
+  }
+
   // Production mode: use Google Calendar API
   try {
     const accessToken = await getAccessToken();

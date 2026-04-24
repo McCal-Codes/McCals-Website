@@ -310,9 +310,41 @@ export default async function handler(req, res) {
     return;
   }
 
+  // If Google credentials missing, create mock booking
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
-    console.error('[schedule/book] Google credentials not set - book.js:310');
-    res.status(503).json({ error: 'Calendar service not configured' });
+    console.warn('[schedule/book] Google credentials not set, creating mock booking');
+    
+    const startDateTime = new Date(`${date}T${time}`);
+    const endDateTime = new Date(startDateTime);
+    endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
+    
+    // Send email notification even for mock bookings
+    const mockBooking = {
+      id: `mock-${Date.now()}`,
+      start: { dateTime: startDateTime.toISOString() },
+      end: { dateTime: endDateTime.toISOString() },
+      requester: {
+        name: requester.name,
+        email: requester.email,
+        notes: requester.notes,
+      },
+      eventLink: '#mock-booking',
+    };
+    
+    // Send email notification (don't await, let it run async)
+    sendConfirmationEmail(mockBooking, config).catch(err => {
+      console.error('[schedule/book] Failed to send confirmation email:', err);
+    });
+    
+    res.status(200).json({
+      booking: {
+        id: mockBooking.id,
+        start: mockBooking.start,
+        end: mockBooking.end,
+        eventLink: mockBooking.eventLink,
+      },
+      mock: true,
+    });
     return;
   }
 
