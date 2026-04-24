@@ -233,24 +233,31 @@ export default async function handler(req, res) {
     console.warn('[schedule/availability] Google Calendar credentials not configured, returning mock availability');
     // Return mock availability (same as dev mode)
     const days = [];
-    const current = new Date(start);
-    const endDate = new Date(end);
+    
+    // Parse dates in UTC to avoid timezone issues
+    const parseDateUTC = (dateStr) => {
+      const [year, month, day] = dateStr.split('-').map(Number);
+      return new Date(Date.UTC(year, month - 1, day));
+    };
+    
+    const current = parseDateUTC(start);
+    const endDate = parseDateUTC(end);
 
     while (current <= endDate) {
-      const dayOfWeek = current.getDay();
-      if (dayOfWeek !== 0) { // Skip Sundays
+      const dayOfWeek = current.getUTCDay();
+      if (dayOfWeek !== 0) { // Skip Sundays (0 = Sunday in UTC)
         const dateStr = current.toISOString().split('T')[0];
         const slots = [];
         
         for (let hour = config.workingHours.start; hour < config.workingHours.end; hour++) {
           for (const minute of [0, 30]) {
             const slotTime = new Date(current);
-            slotTime.setHours(hour, minute, 0, 0);
+            slotTime.setUTCHours(hour, minute, 0, 0);
             
             const slotEnd = new Date(slotTime);
-            slotEnd.setMinutes(slotTime.getMinutes() + config.durationMinutes);
-            if (slotEnd.getHours() > config.workingHours.end || 
-                (slotEnd.getHours() === config.workingHours.end && slotEnd.getMinutes() > 0)) {
+            slotEnd.setUTCMinutes(slotTime.getUTCMinutes() + config.durationMinutes);
+            if (slotEnd.getUTCHours() > config.workingHours.end || 
+                (slotEnd.getUTCHours() === config.workingHours.end && slotEnd.getUTCMinutes() > 0)) {
               continue;
             }
             
@@ -260,6 +267,7 @@ export default async function handler(req, res) {
                 hour: 'numeric',
                 minute: '2-digit',
                 hour12: true,
+                timeZone: 'UTC',
               }),
             });
           }
@@ -273,7 +281,7 @@ export default async function handler(req, res) {
           });
         }
       }
-      current.setDate(current.getDate() + 1);
+      current.setUTCDate(current.getUTCDate() + 1);
     }
 
     res.status(200).json({ days, mock: true });

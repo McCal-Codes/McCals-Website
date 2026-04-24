@@ -8,7 +8,18 @@ import { applyRateLimit } from '../_lib/rate-limit.js';
 import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 import { applyCors } from '../_lib/cors.js';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy-initialize Resend client to handle missing API key gracefully
+let resendClient = null;
+function getResendClient() {
+  if (!resendClient && process.env.RESEND_API_KEY) {
+    try {
+      resendClient = new Resend(process.env.RESEND_API_KEY);
+    } catch (err) {
+      console.error('Failed to initialize Resend client: - book.js:18', err.message);
+    }
+  }
+  return resendClient;
+}
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
@@ -19,6 +30,9 @@ const BOOKING_RATE_LIMIT = {
   limit: 5,
   windowMs: 60 * 60 * 1000, // 1 hour
 };
+
+// Track mock bookings to prevent double-booking when Google credentials are missing
+const mockBookings = new Set();
 
 // Booking type configurations
 const BOOKING_CONFIGS = {
@@ -168,6 +182,12 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
 }
 
 async function sendConfirmationEmail(booking, config) {
+  const resend = getResendClient();
+  if (!resend) {
+    console.warn('[sendConfirmationEmail] Resend not configured, skipping email - book.js:187');
+    return;
+  }
+
   const startDate = new Date(booking.start.dateTime);
   const dateDisplay = startDate.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -182,53 +202,58 @@ async function sendConfirmationEmail(booking, config) {
     timeZoneName: 'short',
   });
 
-  // Send to user
-  await resend.emails.send({
-    from: FROM_EMAIL,
-    to: booking.requester.email,
-    subject: config.confirmationTitle,
-    html: `
-      <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #1a1a1a;">${config.confirmationTitle}</h1>
-        <p>Hi ${booking.requester.name},</p>
-        <p>Your ${config.name.toLowerCase()} is confirmed for:</p>
-        <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <p style="margin: 0;"><strong>Date:</strong> ${dateDisplay}</p>
-          <p style="margin: 8px 0 0;"><strong>Time:</strong> ${timeDisplay}</p>
-          <p style="margin: 8px 0 0;"><strong>Location:</strong> ${config.location}</p>
+  try {
+    // Send to user
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to: booking.requester.email,
+      subject: config.confirmationTitle,
+      html: `
+        <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #1a1a1a;">${config.confirmationTitle}</h1>
+          <p>Hi ${booking.requester.name},</p>
+          <p>Your ${config.name.toLowerCase()} is confirmed for:</p>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 0;"><strong>Date:</strong> ${dateDisplay}</p>
+            <p style="margin: 8px 0 0;"><strong>Time:</strong> ${timeDisplay}</p>
+            <p style="margin: 8px 0 0;"><strong>Location:</strong> ${config.location}</p>
+          </div>
+          <p>${config.confirmationMessage}</p>
+          <p style="margin-top: 30px; color: #666; font-size: 14px;">
+            Need to reschedule? Reply to this email or contact me at ${TO_EMAIL}
+          </p>
         </div>
-        <p>${config.confirmationMessage}</p>
-        <p style="margin-top: 30px; color: #666; font-size: 14px;">
-          Need to reschedule? Reply to this email or contact me at ${TO_EMAIL}
-        </p>
-      </div>
-    `,
-  });
+      `,
+    });
 
-  // Send notification to admin
-  await resend.emails.send({
-    from: FROM_EMAIL,
-    to: TO_EMAIL,
-    subject: `[Booking] ${config.name} - ${booking.requester.name}`,
-    text: [
-      `New booking received!`,
-      ``,
-      `=== BOOKING DETAILS ===`,
-      `Type: ${config.name}`,
-      `Date: ${dateDisplay}`,
-      `Time: ${timeDisplay}`,
-      ``,
-      `=== CONTACT ===`,
-      `Name: ${booking.requester.name}`,
-      `Email: ${booking.requester.email}`,
-      ``,
-      `=== NOTES ===`,
-      booking.requester.notes || 'No notes provided',
-      ``,
-      `Google Calendar Event: ${booking.eventLink || 'Created'}`,
-      `Submitted: ${new Date().toISOString()}`,
-    ].join('\n'),
-  });
+    // Send notification to admin
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to: TO_EMAIL,
+      subject: `[Booking] ${config.name} - ${booking.requester.name}`,
+      text: [
+        `New booking received!`,
+        ``,
+        `=== BOOKING DETAILS ===`,
+        `Type: ${config.name}`,
+        `Date: ${dateDisplay}`,
+        `Time: ${timeDisplay}`,
+        ``,
+        `=== CONTACT ===`,
+        `Name: ${booking.requester.name}`,
+        `Email: ${booking.requester.email}`,
+        ``,
+        `=== NOTES ===`,
+        booking.requester.notes || 'No notes provided',
+        ``,
+        `Google Calendar Event: ${booking.eventLink || 'Created'}`,
+        `Submitted: ${new Date().toISOString()}`,
+      ].join('\n'),
+    });
+  } catch (err) {
+    console.error('[sendConfirmationEmail] Failed to send email: - book.js:254', err.message);
+    // Don't throw - booking should succeed even if email fails
+  }
 }
 
 export default async function handler(req, res) {
@@ -280,7 +305,7 @@ export default async function handler(req, res) {
   // Development mode: return mock booking without external services
   const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
   if (isDev) {
-    console.log('[schedule/book] DEV MODE: Mock booking created - book.js:279', { eventTypeId, date, time, requester: requester.name });
+    console.log('[schedule/book] DEV MODE: Mock booking created - book.js:308', { eventTypeId, date, time, requester: requester.name });
     
     const startDateTime = new Date(`${date}T${time}`);
     const endDateTime = new Date(startDateTime);
@@ -305,18 +330,28 @@ export default async function handler(req, res) {
   }
 
   if (!process.env.RESEND_API_KEY) {
-    console.error('[schedule/book] RESEND_API_KEY not set - book.js:304');
+    console.error('[schedule/book] RESEND_API_KEY not set - book.js:333');
     res.status(503).json({ error: 'Email service not configured' });
     return;
   }
 
   // If Google credentials missing, create mock booking
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
-    console.warn('[schedule/book] Google credentials not set, creating mock booking');
+    console.warn('[schedule/book] Google credentials not set, creating mock booking - book.js:343');
+    
+    const slotKey = `${date}:${time}`;
+    
+    if (mockBookings.has(slotKey)) {
+      res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
+      return;
+    }
     
     const startDateTime = new Date(`${date}T${time}`);
     const endDateTime = new Date(startDateTime);
     endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
+    
+    // Mark slot as booked
+    mockBookings.add(slotKey);
     
     // Send email notification even for mock bookings
     const mockBooking = {
@@ -333,7 +368,7 @@ export default async function handler(req, res) {
     
     // Send email notification (don't await, let it run async)
     sendConfirmationEmail(mockBooking, config).catch(err => {
-      console.error('[schedule/book] Failed to send confirmation email:', err);
+      console.error('[schedule/book] Failed to send confirmation email: - book.js:375', err);
     });
     
     res.status(200).json({
@@ -384,7 +419,7 @@ export default async function handler(req, res) {
       },
     });
   } catch (err) {
-    console.error('[schedule/book] Error: - book.js:351', err);
+    console.error('[schedule/book] Error: - book.js:426', err);
     res.status(500).json({ error: 'Failed to create booking. Please try again.' });
   }
 }

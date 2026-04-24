@@ -5,6 +5,9 @@
 import { checkRedisRateLimit } from './redis.js';
 
 const ROUTE_STORES = new Map();
+let lastCleanupTime = 0;
+const CLEANUP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+const MAX_STORE_SIZE = 1000; // Limit entries per route
 
 function shouldBypassRateLimit() {
   return process.env.NODE_ENV !== 'production' && !process.env.VERCEL;
@@ -15,6 +18,34 @@ function getRouteStore(route) {
     ROUTE_STORES.set(route, new Map());
   }
   return ROUTE_STORES.get(route);
+}
+
+function cleanupAllStores() {
+  const now = Date.now();
+  if (now - lastCleanupTime < CLEANUP_INTERVAL_MS) {
+    return; // Skip if cleanup ran recently
+  }
+  
+  for (const [route, store] of ROUTE_STORES.entries()) {
+    sweepExpiredEntries(store, now);
+    
+    // If store still too large, remove oldest entries
+    if (store.size > MAX_STORE_SIZE) {
+      const entries = Array.from(store.entries());
+      entries.sort((a, b) => a[1].resetAt - b[1].resetAt);
+      const toRemove = entries.slice(0, entries.length - MAX_STORE_SIZE);
+      for (const [key] of toRemove) {
+        store.delete(key);
+      }
+    }
+    
+    // Delete empty route stores
+    if (store.size === 0) {
+      ROUTE_STORES.delete(route);
+    }
+  }
+  
+  lastCleanupTime = now;
 }
 
 function getClientIp(req) {
@@ -49,6 +80,7 @@ function sweepExpiredEntries(store, now) {
 
 function applyMemoryRateLimit(req, res, { route, limit, windowMs }) {
   const now = Date.now();
+  cleanupAllStores(); // Periodic cleanup to prevent memory leak
   const store = getRouteStore(route);
   sweepExpiredEntries(store, now);
 

@@ -123,10 +123,22 @@ export async function acquireBookingLock(date, time, ttlSeconds = 60) {
         lockKey, 
         lockValue,
         release: async () => {
-          // Only release if we own the lock
-          const current = await redis.get(lockKey);
-          if (current === lockValue) {
-            await redis.del(lockKey);
+          try {
+            // Only release if we own the lock
+            const current = await redis.get(lockKey);
+            if (current === lockValue) {
+              await redis.del(lockKey);
+              return { success: true };
+            } else if (current === null) {
+              console.warn(`[acquireBookingLock] Lock ${lockKey} already expired before release`);
+              return { success: false, reason: 'expired' };
+            } else {
+              console.error(`[acquireBookingLock] Lock ${lockKey} value mismatch - possible race condition`);
+              return { success: false, reason: 'ownership_mismatch' };
+            }
+          } catch (err) {
+            console.error(`[acquireBookingLock] Failed to release lock ${lockKey}:`, err.message);
+            return { success: false, reason: 'error', error: err.message };
           }
         }
       };
