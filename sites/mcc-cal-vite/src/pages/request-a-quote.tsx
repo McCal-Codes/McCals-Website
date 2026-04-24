@@ -9,18 +9,18 @@ const RequestAQuotePage = () => {
   usePageMeta({
     title: 'Request a Quote | Pittsburgh Photographer | McCal Media',
     description:
-      'Request a photography quote for events, concerts, headshots, portraits, or commercial projects with Pittsburgh photographer Caleb McCartney.',
+      'Get a custom photography quote from Pittsburgh photographer Caleb McCartney. Events, concerts, headshots, portraits, and commercial projects. Fast turnaround, competitive rates.',
     canonical: `${SITE_URL}/request-a-quote`,
     og: {
       type: 'website',
       title: 'Request a Quote | Pittsburgh Photographer | McCal Media',
-      description: 'Request a photography quote for events, concerts, headshots, portraits, or commercial projects.',
+      description: 'Get a custom photography quote from Pittsburgh photographer Caleb McCartney. Events, concerts, headshots, portraits, and commercial projects. Fast turnaround, competitive rates.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary',
       title: 'Request a Quote | Pittsburgh Photographer | McCal Media',
-      description: 'Request a photography quote for events, concerts, headshots, portraits, or commercial projects.',
+      description: 'Get a custom photography quote from Pittsburgh photographer Caleb McCartney. Events, concerts, headshots, portraits, and commercial projects. Fast turnaround, competitive rates.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     jsonLd: generatePageGraph([
