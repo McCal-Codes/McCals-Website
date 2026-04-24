@@ -1,5 +1,9 @@
 name: Auto-Update SEO Assets
 
+concurrency:
+  group: seo-auto-update-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   # Trigger when portfolio images change
   push:
@@ -45,19 +49,19 @@ jobs:
       - name: Verify API is accessible
         run: |
           echo "Using production API for SEO generation..."
-          curl -sf https://api.mcc-cal.com/api/v1/health || echo "Warning: API health check failed, continuing anyway"
+          curl -sf ${{ secrets.API_BASE_URL || 'https://api.mcc-cal.com' }}/api/v1/health || echo "Warning: API health check failed, continuing anyway"
       
       - name: Generate sitemap
         run: npm run seo:sitemap
         env:
-          API_BASE: https://api.mcc-cal.com
-          SITE_URL: https://mcc-cal.com
+          API_BASE: ${{ secrets.API_BASE_URL || 'https://api.mcc-cal.com' }}
+          SITE_URL: ${{ secrets.SITE_URL || 'https://mcc-cal.com' }}
       
       - name: Generate structured data
         run: npm run seo:schema
         env:
-          API_BASE: https://api.mcc-cal.com
-          SITE_URL: https://mcc-cal.com
+          API_BASE: ${{ secrets.API_BASE_URL || 'https://api.mcc-cal.com' }}
+          SITE_URL: ${{ secrets.SITE_URL || 'https://mcc-cal.com' }}
       
       - name: Validate generated files
         run: |
