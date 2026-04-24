@@ -18,7 +18,9 @@ export async function getRedisClient() {
     return getRedisClient();
   }
 
-  if (!process.env.REDIS_URL) {
+  // Support both standard Redis and Vercel KV
+  const redisUrl = process.env.REDIS_URL || process.env.KV_URL;
+  if (!redisUrl) {
     return null;
   }
 
@@ -26,7 +28,7 @@ export async function getRedisClient() {
     isConnecting = true;
     
     client = createClient({
-      url: process.env.REDIS_URL,
+      url: redisUrl,
       socket: {
         connectTimeout: 5000,
         reconnectStrategy: (retries) => {
