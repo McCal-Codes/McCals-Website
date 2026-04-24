@@ -64,10 +64,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Run ESLint
-        run: cd sites/mcc-cal-vite && npm run lint
+        run: npm run lint
 
       - name: Notify Vercel - Lint
         if: always()
