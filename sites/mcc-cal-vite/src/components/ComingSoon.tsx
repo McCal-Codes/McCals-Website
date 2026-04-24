@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import styles from '@/styles/comingSoon.module.css';
+import styles from './ComingSoon.module.css';
 import { useLocation } from 'react-router-dom';
 
 interface ComingSoonProps {

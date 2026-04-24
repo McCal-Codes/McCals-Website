@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { clients, getClientLink, type Client } from './aboutData';
 import styles from './about-sections.module.css';
@@ -11,6 +11,8 @@ interface ClientsSectionProps {
   clientList?: Client[];
   // Optional: shuffle order on each render
   shuffle?: boolean;
+  // Optional: scroll duration in seconds (desktop)
+  scrollDuration?: number;
 }
 
 interface ClientCardProps {
@@ -114,13 +116,16 @@ export function ClientsSection({
   className = '',
   duplicates = 3,
   clientList,
-  shuffle = false
+  shuffle = false,
+  scrollDuration = 30
 }: ClientsSectionProps) {
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === 'undefined') return false;
     return window.innerWidth < 768;
   });
   const [isExpanded, setIsExpanded] = useState(false);
+  const trackRef = useRef<HTMLUListElement>(null);
+  const [scrollDistance, setScrollDistance] = useState(0);
   
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -151,6 +156,44 @@ export function ClientsSection({
     }
     return items;
   }, [displayClients, duplicates, isMobile]);
+
+  // Calculate scroll distance dynamically based on track content
+  useEffect(() => {
+    if (isMobile || !trackRef.current) return;
+
+    const calculateScrollDistance = () => {
+      const track = trackRef.current;
+      if (!track) return;
+
+      // Get the width of a single set of clients (one full cycle)
+      const firstSetWidth = (track.children[0] as HTMLElement)?.offsetWidth || 0;
+      const gap = 18; // Match CSS gap
+      const clientCount = displayClients.length;
+      
+      // Calculate total width of one complete cycle
+      const singleCycleWidth = (firstSetWidth + gap) * clientCount;
+      
+      setScrollDistance(singleCycleWidth);
+    };
+
+    calculateScrollDistance();
+
+    // Recalculate on resize
+    const resizeObserver = new ResizeObserver(calculateScrollDistance);
+    if (trackRef.current) {
+      resizeObserver.observe(trackRef.current);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, [displayClients.length, isMobile]);
+
+  // Update CSS custom properties
+  useEffect(() => {
+    if (trackRef.current) {
+      trackRef.current.style.setProperty('--scroll-distance', scrollDistance > 0 ? `-${scrollDistance}px` : '-1696px');
+      trackRef.current.style.setProperty('--scroll-duration', `${scrollDuration}s`);
+    }
+  }, [scrollDistance, scrollDuration]);
 
   // Show limited items on mobile when collapsed
   const visibleClients = isMobile && !isExpanded 
@@ -202,7 +245,10 @@ export function ClientsSection({
       ) : (
         /* Desktop: Carousel */
         <div className={styles.clientCarousel} aria-label="Client logo carousel">
-          <ul className={styles.clientTrack}>
+          <ul 
+            ref={trackRef}
+            className={styles.clientTrack}
+          >
             {carouselItems.map(({ client, index, isDuplicate }) => (
               <ClientCard
                 key={`${client.id}-${index}`}

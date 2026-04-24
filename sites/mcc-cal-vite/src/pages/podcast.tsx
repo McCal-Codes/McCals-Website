@@ -14,7 +14,7 @@ import {
   extractGuest,
 } from '@/components/podcast';
 import { formatTime, formatDateRelative, slugify } from '@/utils/formatters';
-import '@/styles/podcast.css';
+import './podcast.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 

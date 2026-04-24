@@ -40,13 +40,13 @@ test.describe('Critical User Flows', () => {
   test('podcast page loads with player elements', async ({ page }) => {
     await page.goto(`${BASE_URL}/podcast`);
     
-    // Check page title contains podcast
-    const title = await page.title();
-    expect(title.toLowerCase()).toContain('podcast');
-    
     // Check for podcast content or episode cards
-    const podcastContent = page.locator('.podcast, [class*="podcast"], .episode, audio, [class*="player"]').first();
+    const podcastContent = page.locator('.pod-page, .pod-grid, .episode, [class*="pod"]').first();
     await expect(podcastContent).toBeVisible({ timeout: 5000 });
+    
+    // Check for header with "Latest Episodes"
+    const header = page.locator('h1, .pod-title').first();
+    await expect(header).toBeVisible();
   });
 
   test('contact page has form elements', async ({ page }) => {

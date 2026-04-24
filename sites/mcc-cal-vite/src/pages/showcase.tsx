@@ -31,7 +31,7 @@ export default function ShowcasePage() {
             <h2>Manifest Display Component</h2>
             <p>This component displays portfolio statistics and metadata</p>
 
-            <div style={{ marginBottom: '30px' }}>
+            <div className="mb-8">
               <h3>Concert Manifest</h3>
               <ManifestDisplay
                 manifest={concertManifest.data || null}
@@ -43,14 +43,7 @@ export default function ShowcasePage() {
 
             <button
               onClick={() => concertManifest.refetch()}
-              style={{
-                padding: '8px 16px',
-                backgroundColor: '#2196f3',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-              }}
+              className="px-4 py-2 bg-blue-500 text-white border-0 rounded cursor-pointer hover:bg-blue-600 transition-colors"
             >
               Refresh Manifest
             </button>
@@ -83,15 +76,7 @@ export default function ShowcasePage() {
 
             <button
               onClick={() => blogPosts.refetch()}
-              style={{
-                marginTop: '20px',
-                padding: '8px 16px',
-                backgroundColor: '#2196f3',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-              }}
+              className="mt-5 px-4 py-2 bg-blue-500 text-white border-0 rounded cursor-pointer hover:bg-blue-600 transition-colors"
             >
               Refresh Posts
             </button>
@@ -114,7 +99,7 @@ export default function ShowcasePage() {
             <h2>React Hooks</h2>
             <p>Custom hooks for API integration</p>
 
-            <div style={{ marginTop: '20px' }}>
+            <div className="mt-5">
               <h3>Available Hooks</h3>
               <ul>
                 <li>
@@ -135,14 +120,7 @@ export default function ShowcasePage() {
               </ul>
 
               <h3>Manifest Hook Example</h3>
-              <pre
-                style={{
-                  backgroundColor: '#f5f5f5',
-                  padding: '10px',
-                  borderRadius: '4px',
-                  overflow: 'auto',
-                }}
-              >
+              <pre className="bg-gray-100 p-3 rounded overflow-auto">
                 {`const { data, loading, error, refetch } = useManifest('concert');
 
 if (loading) return <p>Loading...</p>;
@@ -152,32 +130,23 @@ return (
   <ManifestDisplay 
     manifest={data} 
     type="concert" 
-  />
+  );
 );`}
               </pre>
 
               <h3>Current Hook States</h3>
-              <div
-                style={{
-                  marginTop: '20px',
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                  gap: '15px',
-                }}
-              >
-                <div style={{ padding: '15px', border: '1px solid #ddd', borderRadius: '4px' }}>
-                  <h4 style={{ marginTop: 0 }}>Concert Manifest</h4>
-                  <p style={{ margin: '0 0 5px 0', color: '#666', fontSize: '12px' }}>Status</p>
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="p-4 border border-gray-300 rounded">
+                  <h4 className="mt-0">Concert Manifest</h4>
+                  <p className="m-0 mb-1 text-gray-600 text-xs">Status</p>
                   <div
-                    style={{
-                      fontSize: '18px',
-                      fontWeight: 'bold',
-                      color: concertManifest.loading
-                        ? '#ff9800'
+                    className={`text-lg font-bold ${
+                      concertManifest.loading
+                        ? 'text-orange-500'
                         : concertManifest.error
-                          ? '#f44336'
-                          : '#4caf50',
-                    }}
+                          ? 'text-red-500'
+                          : 'text-green-500'
+                    }`}
                   >
                     {concertManifest.loading
                       ? 'Loading'
@@ -186,30 +155,28 @@ return (
                         : 'Ready'}
                   </div>
                   {concertManifest.data && (
-                    <p style={{ margin: '10px 0 0 0', fontSize: '12px', color: '#666' }}>
+                    <p className="mt-2 text-xs text-gray-600">
                       {concertManifest.data.totalImages || 0} images
                     </p>
                   )}
                 </div>
 
-                <div style={{ padding: '15px', border: '1px solid #ddd', borderRadius: '4px' }}>
-                  <h4 style={{ marginTop: 0 }}>Blog Posts</h4>
-                  <p style={{ margin: '0 0 5px 0', color: '#666', fontSize: '12px' }}>Status</p>
+                <div className="p-4 border border-gray-300 rounded">
+                  <h4 className="mt-0">Blog Posts</h4>
+                  <p className="m-0 mb-1 text-gray-600 text-xs">Status</p>
                   <div
-                    style={{
-                      fontSize: '18px',
-                      fontWeight: 'bold',
-                      color: blogPosts.loading
-                        ? '#ff9800'
+                    className={`text-lg font-bold ${
+                      blogPosts.loading
+                        ? 'text-orange-500'
                         : blogPosts.error
-                          ? '#f44336'
-                          : '#4caf50',
-                    }}
+                          ? 'text-red-500'
+                          : 'text-green-500'
+                    }`}
                   >
                     {blogPosts.loading ? 'Loading' : blogPosts.error ? 'Error' : 'Ready'}
                   </div>
                   {blogPosts.posts && (
-                    <p style={{ margin: '10px 0 0 0', fontSize: '12px', color: '#666' }}>
+                    <p className="mt-2 text-xs text-gray-600">
                       {blogPosts.posts.length} posts
                     </p>
                   )}
@@ -222,16 +189,16 @@ return (
   };
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+    <div className="max-w-5xl mx-auto px-5">
       <h1>Phase 2 Components Showcase</h1>
 
-      <div style={{ marginBottom: '30px', borderBottom: '1px solid #ddd', paddingBottom: '20px' }}>
-        <p style={{ color: '#666' }}>
+      <div className="mb-8 border-b border-gray-300 pb-5">
+        <p className="text-gray-600">
           This page demonstrates all Phase 2 components and hooks. Use the tabs below to explore
           each component.
         </p>
 
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+        <div className="flex gap-2 flex-wrap">
           {(['manifest', 'blog', 'admin', 'hooks'] as ShowcaseView[]).map((view) => (
             <button
               key={view}
@@ -239,15 +206,11 @@ return (
                 setActiveView(view);
                 setSelectedSlug(null);
               }}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: activeView === view ? '#2196f3' : '#f5f5f5',
-                color: activeView === view ? 'white' : '#333',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontWeight: activeView === view ? 'bold' : 'normal',
-              }}
+              className={`px-5 py-2 border-0 rounded cursor-pointer transition-colors ${
+                activeView === view
+                  ? 'bg-blue-500 text-white font-bold'
+                  : 'bg-gray-100 text-gray-800 font-normal hover:bg-gray-200'
+              }`}
             >
               {view.charAt(0).toUpperCase() + view.slice(1)}
             </button>
@@ -255,17 +218,10 @@ return (
         </div>
       </div>
 
-      <div style={{ minHeight: '400px' }}>{renderContent()}</div>
+      <div className="min-h-96">{renderContent()}</div>
 
-      <div
-        style={{
-          marginTop: '50px',
-          padding: '20px',
-          backgroundColor: '#f5f5f5',
-          borderRadius: '4px',
-        }}
-      >
-        <h3 style={{ marginTop: 0 }}>Development Notes</h3>
+      <div className="mt-12 p-5 bg-gray-100 rounded">
+        <h3 className="mt-0">Development Notes</h3>
         <ul>
           <li>Components are fully responsive and support light/dark themes</li>
           <li>All components have loading and error states</li>
@@ -275,15 +231,8 @@ return (
         </ul>
       </div>
 
-      <div
-        style={{
-          marginTop: '20px',
-          padding: '20px',
-          backgroundColor: '#e3f2fd',
-          borderRadius: '4px',
-        }}
-      >
-        <h3 style={{ marginTop: 0 }}>Next Steps</h3>
+      <div className="mt-5 p-5 bg-blue-50 rounded">
+        <h3 className="mt-0">Next Steps</h3>
         <ol>
           <li>Update existing pages to use these components</li>
           <li>Integrate with your site's layout and styling</li>

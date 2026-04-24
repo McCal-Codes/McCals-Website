@@ -124,15 +124,19 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
       />
 
       <div className="pf-card__overlay" aria-hidden="true">
-        <h3 className="pf-card__title">{group.title}</h3>
-        {(group.dateDisplay || group.category) && (
-          <p className="pf-card__meta">
-            {[group.dateDisplay, group.category].filter(Boolean).join(' • ')}
-          </p>
-        )}
-        {group.coverImage.caption && (
-          <p className="pf-card__caption">{group.coverImage.caption}</p>
-        )}
+        <div className="pf-caption-rail">
+          <h3 className="pf-caption-rail__title">{group.title}</h3>
+          {(group.dateDisplay || group.category) && (
+            <p className="pf-caption-rail__meta">
+              {group.dateDisplay && <span>{group.dateDisplay}</span>}
+              {group.dateDisplay && group.category && <span className="pf-caption-rail__meta-separator">•</span>}
+              {group.category && <span>{group.category}</span>}
+            </p>
+          )}
+          {group.coverImage.caption && (
+            <p className="pf-caption-rail__description">{group.coverImage.caption}</p>
+          )}
+        </div>
       </div>
     </article>
   );

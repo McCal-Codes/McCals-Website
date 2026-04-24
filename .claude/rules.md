@@ -2,6 +2,21 @@
 
 This file contains repository-specific rules and guidelines for Claude Code to follow when working in this codebase.
 
+## Workflow Integration
+
+This repository uses Windsurf workflows for consistent development practices. Workflows are located in `.windsurf/workflows/`:
+
+- **`/commit-message`** - Write intent-first commit messages with proper prefixes
+- **`/pre-commit`** - Verify build, lint, tests, and Git hygiene before committing
+- **`/pre-deployment`** - Production readiness checklist before Vercel deployment
+- **`/image-optimization`** - Optimize images before committing new assets
+
+**Workflow sequence:**
+1. Run `/pre-commit` to verify code quality
+2. Use `/commit-message` to write commit messages
+3. Run `/image-optimization` when adding images
+4. Run `/pre-deployment` before deploying to production
+
 ## User Preferences
 
 - **npm upgrades**: Do not upgrade global npm (`npm install -g npm@…`) unless there is a concrete need; ad hoc major bumps are a poor default.
@@ -28,11 +43,44 @@ This file contains repository-specific rules and guidelines for Claude Code to f
 
 ## Development Workflow
 
-1. **Before making changes**: Run `npm run build` in `sites/mcc-cal-vite` to verify the build passes.
-2. **Type safety**: The project uses TypeScript with strict mode enabled. Always run `tsc -b` before committing.
-3. **Testing**: Run `npm run test:run` in `sites/mcc-cal-vite` to execute the test suite.
-4. **Linting**: Run `npm run lint` at the repo root to check code quality.
-5. **Manifest sync**: After changing portfolio images or blog content, run `node scripts/sync-manifests.js` in `sites/mcc-cal-vite`.
+### Pre-commit Verification
+
+Before committing changes, run the pre-commit verification workflow (`/pre-commit`):
+
+1. **Build check**: Run `npm run build` in `sites/mcc-cal-vite` to verify the build passes
+2. **Type safety**: The project uses TypeScript with strict mode enabled. Always run `tsc -b` before committing
+3. **Testing**: Run `npm run test:run` in `sites/mcc-cal-vite` to execute the test suite
+4. **Linting**: Run `npm run lint` at the repo root to check code quality
+5. **Manifest sync**: After changing portfolio images or blog content, run `node scripts/sync-manifests.js` in `sites/mcc-cal-vite`
+6. **Git hygiene**: Review staged changes with `git diff --cached` to ensure changes are scoped and atomic
+
+### Commit Process
+
+Use the commit message workflow (`/commit-message`) for consistent commit messages:
+
+1. Review active changes with `git status --short` and `git diff --cached`
+2. Stage changes with `git add <files>`
+3. Write commit message with intent-first prefix (e.g., `feat:`, `fix:`, `chore:`)
+4. Commit - the `.githooks/commit-msg` hook automatically appends "Author: mccal"
+
+### Pre-deployment Checklist
+
+Before deploying to production, run the pre-deployment workflow (`/pre-deployment`):
+
+- Build verification, code quality, testing
+- Content and asset verification
+- Environment configuration check
+- SEO and performance validation
+- Git state verification
+
+### Image Optimization
+
+When adding or updating images, use the image optimization workflow (`/image-optimization`):
+
+- Optimize images before committing
+- Follow size targets (hero <500KB, thumbnails <100KB)
+- Use WebP format where possible
+- Sync manifests after portfolio image changes
 
 ## Code Style
 
@@ -49,6 +97,9 @@ This file contains repository-specific rules and guidelines for Claude Code to f
 - Use environment variables for sensitive configuration
 - Review CSP headers in `vercel.json` before adding external domains
 - Be cautious with `dangerouslySetInnerHTML` - only use for trusted content
+- Validate user inputs before processing
+- Use Content Security Policy headers to mitigate XSS
+- Keep dependencies updated (review Dependabot PRs regularly)
 
 ## Performance
 
@@ -57,6 +108,9 @@ This file contains repository-specific rules and guidelines for Claude Code to f
 - Use `loading="eager"` and `fetchpriority="high"` for above-fold critical images
 - Leverage code splitting for large components
 - Review bundle size after adding new dependencies
+- Use React.lazy() and Suspense for route-level code splitting
+- Optimize third-party scripts (load asynchronously when possible)
+- Monitor Core Web Vitals (LCP, FID, CLS)
 
 ## File Organization
 
@@ -64,3 +118,37 @@ This file contains repository-specific rules and guidelines for Claude Code to f
 - Place utility functions in appropriate `utils/` directories
 - Group related components in subdirectories
 - Use descriptive file names that reflect purpose
+
+## Testing
+
+- Write tests for critical user flows (contact forms, portfolio navigation)
+- Use Playwright for E2E testing in `tests/playwright/`
+- Keep tests focused and maintainable
+- Test error states and edge cases, not just happy paths
+- Run tests before committing (use `/pre-commit` workflow)
+
+## Documentation
+
+- Update README.md when adding major features
+- Document component APIs in JSDoc comments
+- Keep CHANGELOG.md updated for significant changes
+- Use inline comments for complex logic
+- Update docs/ directory for architectural decisions (ADRs)
+
+## Troubleshooting
+
+**Build failures:**
+- Check TypeScript errors with `tsc --noEmit`
+- Verify all dependencies are installed
+- Check environment variables are set correctly
+
+**Linting errors:**
+- Run `npm run lint -- --fix` for auto-fixable issues
+- Review ESLint configuration in `eslint.config.mjs`
+- Check for unused imports or variables
+
+**Deployment issues:**
+- Review Vercel build logs in dashboard
+- Check environment variables in Vercel project settings
+- Verify build command matches `vercel.json` configuration
+- Run `/pre-deployment` workflow before deploying

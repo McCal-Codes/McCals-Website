@@ -440,6 +440,96 @@ export function generatePortfolioPageSchema(
 }
 
 // ============================================================================
+// Event Schemas
+// ============================================================================
+
+/**
+ * Generate Event schema for concerts and events
+ */
+export function generateEventSchema(
+  eventName: string,
+  eventDate: string,
+  eventLocation?: string,
+  eventDescription?: string,
+  eventImage?: string,
+  eventUrl?: string
+): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: eventName,
+    startDate: eventDate,
+    ...(eventLocation && {
+      location: {
+        '@type': 'Place',
+        name: eventLocation,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Pittsburgh',
+          addressRegion: 'PA',
+          addressCountry: 'US',
+        },
+      },
+    }),
+    ...(eventDescription && { description: eventDescription }),
+    ...(eventImage && { image: eventImage }),
+    ...(eventUrl && { url: eventUrl }),
+    organizer: MC_CAL_ORGANIZATION,
+    performer: {
+      '@type': 'Person',
+      name: 'Caleb McCartney',
+      jobTitle: 'Event Photographer',
+    },
+    attendee: {
+      '@type': 'Person',
+      name: 'Event Attendees',
+    },
+  };
+}
+
+/**
+ * Generate MusicEvent schema for concerts
+ */
+export function generateMusicEventSchema(
+  bandName: string,
+  concertDate: string,
+  venue?: string,
+  concertImage?: string,
+  concertUrl?: string
+): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MusicEvent',
+    name: bandName,
+    startDate: concertDate,
+    ...(venue && {
+      location: {
+        '@type': 'MusicVenue',
+        name: venue,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Pittsburgh',
+          addressRegion: 'PA',
+          addressCountry: 'US',
+        },
+      },
+    }),
+    description: `Live concert photography of ${bandName}`,
+    ...(concertImage && { image: concertImage }),
+    ...(concertUrl && { url: concertUrl }),
+    organizer: MC_CAL_ORGANIZATION,
+    performer: {
+      '@type': 'MusicGroup',
+      name: bandName,
+    },
+    attendee: {
+      '@type': 'Person',
+      name: 'Concert Attendees',
+    },
+  };
+}
+
+// ============================================================================
 // Type Exports
 // ============================================================================
 

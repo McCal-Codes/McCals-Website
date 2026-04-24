@@ -123,29 +123,33 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
         </div>
 
         <div className="pf-lightbox__caption">
-          <h3 className="pf-lightbox__title">{group.title}</h3>
+          <div className="pf-caption-rail">
+            <h3 className="pf-caption-rail__title">{group.title}</h3>
 
-          {(group.dateDisplay || group.category) && (
-            <p className="pf-lightbox__meta">
-              {[group.dateDisplay, group.category].filter(Boolean).join(' • ')}
-            </p>
-          )}
+            {(group.dateDisplay || group.category) && (
+              <p className="pf-caption-rail__meta">
+                {group.dateDisplay && <span>{group.dateDisplay}</span>}
+                {group.dateDisplay && group.category && <span className="pf-caption-rail__meta-separator">•</span>}
+                {group.category && <span>{group.category}</span>}
+              </p>
+            )}
 
-          {summaryText && (
-            <p className="pf-lightbox__description">{summaryText}</p>
-          )}
+            {summaryText && (
+              <p className="pf-caption-rail__description">{summaryText}</p>
+            )}
 
-          {group.published && group.outletName && (
-            <div className="pf-lightbox__outlet">
-              {group.articleUrl ? (
-                <a href={group.articleUrl} target="_blank" rel="noopener noreferrer">
-                  Published in {group.outletName} →
-                </a>
-              ) : (
-                <span>Published in {group.outletName}</span>
-              )}
-            </div>
-          )}
+            {group.published && group.outletName && (
+              <div className="pf-lightbox__outlet">
+                {group.articleUrl ? (
+                  <a href={group.articleUrl} target="_blank" rel="noopener noreferrer">
+                    Published in {group.outletName} →
+                  </a>
+                ) : (
+                  <span>Published in {group.outletName}</span>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

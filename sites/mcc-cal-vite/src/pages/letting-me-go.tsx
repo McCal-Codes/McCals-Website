@@ -313,7 +313,7 @@ const LettingMeGoPage = () => {
           </blockquote>
         </div>
 
-        <div className={styles.epigraphWrap} style={{ paddingTop: 0 }}>
+        <div className={`${styles.epigraphWrap} pt-0`}>
           <div className={styles.abstractBox}>
             <p className={styles.abstractLabel}>Abstract</p>
             <p className={styles.abstractText}>
@@ -330,7 +330,7 @@ const LettingMeGoPage = () => {
           </div>
         </div>
 
-        <div className={styles.epigraphWrap} style={{ paddingTop: 0 }}>
+        <div className={`${styles.epigraphWrap} pt-0`}>
           <aside className={styles.questionsBlock} aria-labelledby="reader-questions-heading">
             <p className={styles.questionsLabel}>For you</p>
             <h2 id="reader-questions-heading" className={styles.questionsTitle}>
@@ -680,7 +680,7 @@ const LettingMeGoPage = () => {
             <h2 id="writing-project" className={styles.sectionTitle}>
               Writing
             </h2>
-            <p className={styles.body} style={{ marginBottom: '1.25rem' }}>
+            <p className={`${styles.body} mb-5`}>
               The written thesis (<em>Understanding the Noise Of Today’s Political Climate</em>) will be linked in{' '}
               <a href="#publication" className={styles.link}>
                 Publication

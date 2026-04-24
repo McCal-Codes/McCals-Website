@@ -876,7 +876,7 @@
   margin: 0;
   padding: 10px 0;
   transform: translateZ(0);
-  animation: scroll 5s linear infinite;
+  animation: scroll var(--scroll-duration, 30s) linear infinite;
 }
 
 .clientTrack:hover {
@@ -1024,7 +1024,7 @@
     transform: translateZ(0) translateX(0);
   }
   to {
-    transform: translateZ(0) translateX(-1696px);
+    transform: translateZ(0) translateX(var(--scroll-distance, -1696px));
   }
 }
 

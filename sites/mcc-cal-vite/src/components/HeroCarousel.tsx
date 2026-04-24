@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from '@/styles/heroCarousel.module.css';
+import styles from './heroCarousel.module.css';
 
 interface HeroSlide {
   title: string;

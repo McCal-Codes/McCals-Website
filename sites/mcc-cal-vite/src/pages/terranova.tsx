@@ -49,7 +49,7 @@ const TerranovaPage = () => {
           gridTemplateColumns: '1fr 1fr',
           gap: '4rem',
           alignItems: 'center',
-          marginBottom: '4rem'
+          marginBottom: '5rem'
         }}>
           {/* Left: Content */}
           <div style={{ textAlign: 'left' }}>
@@ -408,7 +408,7 @@ const TerranovaPage = () => {
         <div style={{ 
           height: '1px', 
           background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
-          marginBottom: '4rem'
+          marginBottom: '5rem'
         }}/>
 
         {/* Stats Section */}
@@ -417,7 +417,7 @@ const TerranovaPage = () => {
           backgroundColor: 'rgba(38,35,32,0.3)',
           borderTop: '1px solid rgba(74,68,56,0.3)',
           borderBottom: '1px solid rgba(74,68,56,0.3)',
-          marginBottom: '4rem'
+          marginBottom: '5rem'
         }}>
           <div style={{ 
             display: 'grid', 
@@ -551,7 +551,7 @@ const TerranovaPage = () => {
         </div>
 
         {/* Features Section */}
-        <div style={{ marginBottom: '4rem' }}>
+        <div style={{ marginBottom: '5rem' }}>
           <h2 style={{ 
             fontFamily: "'Libre Baskerville', serif", 
             fontSize: '2rem', 
@@ -1338,7 +1338,7 @@ const TerranovaPage = () => {
         </div>
 
         {/* Community Section */}
-        <div style={{ marginBottom: '4rem' }}>
+        <div style={{ marginBottom: '5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <p style={{ 
               fontFamily: 'monospace',

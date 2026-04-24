@@ -81,9 +81,9 @@ const HomePage = () => {
   });
 
   return (
-    <div className="site-layout" style={{ paddingTop: 0 }}>
+    <div className="site-layout pt-0">
       <Nav />
-      <main className="site-main" style={{ marginTop: 0 }}>
+      <main className="site-main mt-0">
         <HeroCarousel />
       </main>
       <Footer />

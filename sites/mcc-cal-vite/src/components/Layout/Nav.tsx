@@ -9,6 +9,7 @@ function isProjectsNavPath(pathname: string): boolean {
     pathname === '/roadmap' ||
     pathname === '/design-systems' ||
     pathname === '/abridged' ||
+    pathname === '/terranova' ||
     pathname.startsWith('/projects/')
   );
 }
@@ -209,6 +210,7 @@ const Nav: React.FC = () => {
                       Letting Me Go
                     </Link>
                   </li>
+                  <li><Link to="/terranova" role="menuitem" aria-current={pathname === '/terranova' ? 'page' : undefined}>TerraNova</Link></li>
                   <li><Link to="/roadmap" role="menuitem" aria-current={pathname === '/roadmap' ? 'page' : undefined}>Roadmap</Link></li>
                 </ul>
               </li>
