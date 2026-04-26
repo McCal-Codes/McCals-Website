@@ -48,7 +48,7 @@ jobs:
 
       - name: Notify Vercel - Build
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.repos.createCommitStatus({
@@ -93,7 +93,7 @@ jobs:
 
       - name: Notify Vercel - Lint
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.repos.createCommitStatus({
@@ -138,7 +138,7 @@ jobs:
 
       - name: Notify Vercel - CI Check
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.repos.createCommitStatus({
@@ -183,7 +183,7 @@ jobs:
 
       - name: Notify Vercel - Manifest Check
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.repos.createCommitStatus({
@@ -227,7 +227,7 @@ jobs:
 
       - name: Notify Vercel - Unit tests
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.repos.createCommitStatus({
@@ -261,7 +261,7 @@ jobs:
 
       - name: Notify Vercel - All Checks
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.repos.createCommitStatus({

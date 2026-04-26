@@ -74,7 +74,7 @@ jobs:
           echo "- [Reorganizing Agent](./docs/agents/reorganizing-agent.md)" >> pr-comment.md
 
       - name: Post PR Comment
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
