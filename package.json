@@ -84,7 +84,7 @@
     "nodemon": "^3.1.14",
     "open": "^11.0.0",
     "playwright": "^1.59.1",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.12",
     "prettier": "^3.8.3",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.2.4",
