@@ -45,7 +45,7 @@ jobs:
 
       - name: Enforce changelog
         if: steps.detect.outputs.needs_changelog == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const changed = `${{ steps.detect.outputs.changed_files }}`.split(/\r?\n/).filter(Boolean);
