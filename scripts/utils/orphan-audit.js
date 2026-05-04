@@ -72,7 +72,7 @@ const localRequireRe = /require\(\s*['"](\.{1,2}\/[^'"]+)['"]\s*\)/g;
 const localImportRe = /from\s+['"](\.{1,2}\/[^'"]+)['"]/g;
 
 for (const scriptFile of scriptFiles) {
-  let source = '';
+  let source;
   try {
     source = fs.readFileSync(scriptFile, 'utf8');
   } catch {

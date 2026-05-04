@@ -85,7 +85,7 @@ async function fetchJson(url, headers) {
   const response = await fetch(url, { headers, cache: 'no-store' });
   const bodyText = await response.text();
 
-  let body = null;
+  let body;
   try {
     body = bodyText ? JSON.parse(bodyText) : null;
   } catch {

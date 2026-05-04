@@ -34,7 +34,7 @@ const REQUIRED_DOCS = [
 function componentReadmeStatus() {
   const componentsDir = path.join(ROOT, 'sites', 'mcc-cal-vite', 'src', 'components');
   const status = { total: 0, withReadme: 0, missing: [] };
-  let entries = [];
+  let entries;
   try {
     entries = fs.readdirSync(componentsDir, { withFileTypes: true });
   } catch {

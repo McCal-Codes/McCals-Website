@@ -8,8 +8,8 @@ This runbook captures the deployment failures we hit on April 6, 2026 while laun
    - `cmd /c vercel whoami`
    - `cmd /c vercel ls mc-cals-website`
 2. Reproduce the production build locally from the Vite app.
-   - `cd sites/mcc-cal-vite`
-   - `cmd /c npm run build`
+   - `npm run build` (from repo root)
+   - Or: `cd sites/mcc-cal-vite && cmd /c npm run build`
 3. Inspect the current production deployment.
    - `cmd /c vercel inspect <deployment-url>`
    - `cmd /c vercel logs <deployment-id> --no-follow --json`
