@@ -1,7 +1,9 @@
 {
   "framework": "vite",
-  "buildCommand": "(cd sites/mcc-cal-vite && npm ci && npm run build)",
-  "outputDirectory": "sites/mcc-cal-vite/dist",
+  "rootDirectory": "sites/mcc-cal-vite",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "redirects": [
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/schedule", "destination": "/grab-a-coffee", "permanent": true },
