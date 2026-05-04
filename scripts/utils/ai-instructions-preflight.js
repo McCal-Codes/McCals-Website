@@ -55,8 +55,7 @@ function componentReadmeStatus() {
   return status;
 }
 
-// Dynamically discover instruction files in .github to avoid hardcoding and
-// to make the preflight tolerant to new/renamed instruction docs.
+// Dynamically discover instruction docs.
 function discoverDocs() {
   const sources = [
     {
@@ -305,11 +304,13 @@ function formatPretty(results, meta) {
     if (
       r.summary &&
       r.summary.sections &&
-      (r.summary.sections.policies?.length || r.summary.sections.versioning?.length)
+      r.summary.sections.policies &&
+      r.summary.sections.versioning &&
+      !isShort
     ) {
-      lines.push(`  - policy-highlights:`);
-      (r.summary.sections.policies || []).forEach((b) => lines.push(`    • ${b}`));
-      (r.summary.sections.versioning || []).forEach((b) => lines.push(`    • ${b}`));
+      lines.push(`- policy-highlights:`);
+      r.summary.sections.policies.forEach((b) => lines.push(`    • ${b}`));
+      r.summary.sections.versioning.forEach((b) => lines.push(`    • ${b}`));
     }
     if (r.summary && r.summary.norms && r.summary.norms.length && !isShort) {
       lines.push(`- Norms sample:`);
