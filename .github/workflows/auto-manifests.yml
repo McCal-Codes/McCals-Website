@@ -1,0 +1,295 @@
+name: Auto-Generate Manifests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/images/Portfolios/**'
+      - 'scripts/manifest/**'
+      - 'scripts/optimize-images.js'
+      - '.github/workflows/auto-manifests.yml'
+
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/images/Portfolios/**'
+      - 'scripts/manifest/**'
+      - 'scripts/optimize-images.js'
+      - '.github/workflows/auto-manifests.yml'
+
+  workflow_dispatch:
+    inputs:
+      portfolios:
+        description: 'Portfolios to process (comma-separated or "all")'
+        required: false
+        default: 'all'
+        type: string
+      optimize:
+        description: 'Optimize images before generating manifests'
+        required: false
+        default: true
+        type: boolean
+      force:
+        description: 'Force regeneration even if no changes detected'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-manifests-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # Prepare matrix based on changed paths or inputs
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      should_optimize: ${{ steps.check-optimize.outputs.optimize }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+          submodules: false
+
+      - name: Determine portfolios to process
+        id: set-matrix
+        run: |
+          # Manual trigger - use input
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            INPUT="${{ github.event.inputs.portfolios }}"
+            if [[ "$INPUT" == "all" ]] || [[ -z "$INPUT" ]]; then
+              PORTFOLIOS='["concert","events","journalism","nature","portrait","featured","universal"]'
+            else
+              # Convert comma-separated to JSON array
+              PORTFOLIOS=$(echo "$INPUT" | tr ',' '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed 's/^/"/;s/$/"/' | paste -sd, | sed 's/.*/[&]/')
+            fi
+          else
+            # Auto-detect changed portfolios from paths
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD || echo "")
+            
+            PORTFOLIOS="[]"
+            
+            if echo "$CHANGED_FILES" | grep -q "src/images/Portfolios/Concert/"; then
+              PORTFOLIOS=$(echo "$PORTFOLIOS" | jq '. + ["concert"]')
+            fi
+            if echo "$CHANGED_FILES" | grep -q "src/images/Portfolios/Events/"; then
+              PORTFOLIOS=$(echo "$PORTFOLIOS" | jq '. + ["events"]')
+            fi
+            if echo "$CHANGED_FILES" | grep -q "src/images/Portfolios/Journalism/"; then
+              PORTFOLIOS=$(echo "$PORTFOLIOS" | jq '. + ["journalism"]')
+            fi
+            if echo "$CHANGED_FILES" | grep -q "src/images/Portfolios/Nature/"; then
+              PORTFOLIOS=$(echo "$PORTFOLIOS" | jq '. + ["nature"]')
+            fi
+            if echo "$CHANGED_FILES" | grep -q "src/images/Portfolios/Portrait/"; then
+              PORTFOLIOS=$(echo "$PORTFOLIOS" | jq '. + ["portrait"]')
+            fi
+            if echo "$CHANGED_FILES" | grep -q "src/images/Portfolios/featured\|src/images/Portfolios/universal"; then
+              PORTFOLIOS=$(echo "$PORTFOLIOS" | jq '. + ["featured","universal"]')
+            fi
+            
+            # If script changes or no specific portfolio detected, run all
+            if echo "$CHANGED_FILES" | grep -q "scripts/manifest/\|scripts/optimize-images.js\|.github/workflows/auto-manifests.yml" || [[ "$PORTFOLIOS" == "[]" ]]; then
+              PORTFOLIOS='["concert","events","journalism","nature","portrait","featured","universal"]'
+            fi
+          fi
+          
+          echo "matrix={\"portfolio\":$PORTFOLIOS}" >> $GITHUB_OUTPUT
+          echo "📋 Will process portfolios: $PORTFOLIOS"
+
+      - name: Check if optimization needed
+        id: check-optimize
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "optimize=${{ github.event.inputs.optimize }}" >> $GITHUB_OUTPUT
+          else
+            # Check if image files were changed
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD || echo "")
+            if echo "$CHANGED_FILES" | grep -qE '\.(jpg|jpeg|png|webp)$'; then
+              echo "optimize=true" >> $GITHUB_OUTPUT
+              echo "🖼️ Image files changed - will optimize"
+            else
+              echo "optimize=false" >> $GITHUB_OUTPUT
+              echo "📄 No image changes - skipping optimization"
+            fi
+          fi
+
+  # Optimize images for portfolios that need it
+  optimize:
+    name: Optimize ${{ matrix.portfolio }} images
+    needs: prepare
+    if: needs.prepare.outputs.should_optimize == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Optimize images
+        run: node scripts/optimize-images.js ${{ matrix.portfolio }}
+
+      - name: Commit optimized images
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: '🖼️ Optimize ${{ matrix.portfolio }} images'
+          file_pattern: 'src/images/Portfolios/${{ matrix.portfolio }}/**/*.{jpg,jpeg,png,webp}'
+
+  # Generate manifests for all portfolios
+  generate:
+    name: Generate ${{ matrix.portfolio }} manifest
+    needs: [prepare, optimize]
+    if: always() && (needs.optimize.result == 'success' || needs.optimize.result == 'skipped')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          lfs: true
+          submodules: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Generate manifest
+        id: generate
+        uses: ./.github/actions/generate-manifest
+        with:
+          portfolio: ${{ matrix.portfolio }}
+          force: ${{ github.event.inputs.force || false }}
+
+      - name: Validate manifest JSON
+        run: |
+          test -f "${{ steps.generate.outputs.manifest_path }}" || (echo "Missing manifest file" && exit 1)
+          jq empty "${{ steps.generate.outputs.manifest_path }}"
+
+      - name: Upload manifest artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: manifest-${{ matrix.portfolio }}
+          path: ${{ steps.generate.outputs.manifest_path }}
+          retention-days: 1
+
+  # Commit all manifest changes in a single batch
+  commit:
+    name: Commit manifests
+    needs: [prepare, generate]
+    if: github.event_name != 'pull_request' && always() && needs.generate.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download all manifest artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: manifests-temp
+          pattern: manifest-*
+
+      - name: Copy manifests to correct locations
+        run: |
+          for dir in manifests-temp/manifest-*; do
+            [ -d "$dir" ] || continue
+            portfolio=$(basename "$dir" | sed 's/manifest-//')
+            
+            case "$portfolio" in
+              concert)
+                cp -f "$dir"/* src/images/Portfolios/Concert/ 2>/dev/null || true
+                ;;
+              events)
+                cp -f "$dir"/* src/images/Portfolios/Events/ 2>/dev/null || true
+                ;;
+              journalism)
+                cp -f "$dir"/* src/images/Portfolios/Journalism/ 2>/dev/null || true
+                ;;
+              nature)
+                cp -f "$dir"/* src/images/Portfolios/Nature/ 2>/dev/null || true
+                ;;
+              portrait)
+                cp -f "$dir"/* src/images/Portfolios/Portrait/ 2>/dev/null || true
+                ;;
+              featured|universal)
+                cp -f "$dir"/* src/images/Portfolios/ 2>/dev/null || true
+                ;;
+            esac
+          done
+          echo "✅ All manifests copied"
+
+      - name: Commit and push
+        uses: ./.github/actions/commit-and-push
+        with:
+          files: |
+            src/images/Portfolios/**/concert-manifest.json
+            src/images/Portfolios/**/events-manifest.json
+            src/images/Portfolios/**/journalism-manifest.json
+            src/images/Portfolios/**/nature-manifest.json
+            src/images/Portfolios/**/portrait-manifest.json
+            src/images/Portfolios/featured-manifest.json
+            src/images/Portfolios/portfolio-manifest.json
+          commit-message: |
+            🔄 Auto-update portfolio manifests
+
+      - name: Notify webhook
+        uses: ./.github/actions/notify-manifest-webhook
+        with:
+          portfolio: all
+          type: refresh
+
+  # Summary job
+  summary:
+    name: Summary
+    needs: [prepare, optimize, generate, commit]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report status
+        run: |
+          echo "## 🔄 Manifest Generation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Prepare | ${{ needs.prepare.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Optimize | ${{ needs.optimize.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Generate | ${{ needs.generate.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | ${{ needs.commit.result }} |" >> $GITHUB_STEP_SUMMARY
