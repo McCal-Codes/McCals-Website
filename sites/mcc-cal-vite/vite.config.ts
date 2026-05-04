@@ -128,7 +128,9 @@ export default defineConfig(({ command }) => ({
     },
   },
   build: {
-    sourcemap: true,
+    // 'hidden' generates sourcemaps for error tracking (e.g. Sentry)
+    // without exposing them publicly in the browser DevTools
+    sourcemap: 'hidden',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -138,7 +140,6 @@ export default defineConfig(({ command }) => ({
         },
       },
     },
-    chunkSizeWarningLimit: 500,
   },
   define: {
     'import.meta.env.VITE_VERCEL_ENV': JSON.stringify(
