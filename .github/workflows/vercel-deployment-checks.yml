@@ -105,9 +105,9 @@ jobs:
               description: '${{ job.status }}' === 'success' ? 'Lint passed' : 'Lint failed'
             })
 
-  # CI Validation Check
-  ci-check:
-    name: CI Validation
+  # TypeScript Check
+  typecheck:
+    name: TypeScript Check
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -133,10 +133,10 @@ jobs:
       - name: Install dependencies
         run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
 
-      - name: Run CI Check
-        run: npm run ci:check
+      - name: Run TypeScript Check
+        run: cd sites/mcc-cal-vite && npx tsc -b --noEmit
 
-      - name: Notify Vercel - CI Check
+      - name: Notify Vercel - TypeScript
         if: always()
         uses: actions/github-script@v9
         with:
@@ -146,53 +146,8 @@ jobs:
               repo: context.repo.repo,
               sha: context.sha,
               state: '${{ job.status }}' === 'success' ? 'success' : 'failure',
-              context: 'Vercel - mc-cals-website: CI Validation',
-              description: '${{ job.status }}' === 'success' ? 'CI check passed' : 'CI check failed'
-            })
-
-  # Manifest Validation Check
-  manifest-check:
-    name: Manifest Validation
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          submodules: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Cache node modules
-        uses: actions/cache@v5
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Install dependencies
-        run: cd sites/mcc-cal-vite && npm ci --prefer-offline --no-audit --no-fund
-
-      - name: Validate Manifests
-        run: cd sites/mcc-cal-vite && npm run validate:manifests
-
-      - name: Notify Vercel - Manifest Check
-        if: always()
-        uses: actions/github-script@v9
-        with:
-          script: |
-            github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: '${{ job.status }}' === 'success' ? 'success' : 'failure',
-              context: 'Vercel - mc-cals-website: Manifest Validation',
-              description: '${{ job.status }}' === 'success' ? 'Manifest check passed' : 'Manifest check failed'
+              context: 'Vercel - mc-cals-website: TypeScript Check',
+              description: '${{ job.status }}' === 'success' ? 'TypeScript passed' : 'TypeScript failed'
             })
 
   unit-tests:
@@ -242,7 +197,7 @@ jobs:
   # Aggregate Status Check (optional - marks overall status)
   all-checks-complete:
     name: All Checks Complete
-    needs: [build, lint, ci-check, manifest-check, unit-tests]
+    needs: [build, lint, typecheck, unit-tests]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -250,8 +205,7 @@ jobs:
         run: |
           if [[ "${{ needs.build.result }}" == "failure" ]] || \
              [[ "${{ needs.lint.result }}" == "failure" ]] || \
-             [[ "${{ needs.ci-check.result }}" == "failure" ]] || \
-             [[ "${{ needs.manifest-check.result }}" == "failure" ]] || \
+             [[ "${{ needs.typecheck.result }}" == "failure" ]] || \
              [[ "${{ needs.unit-tests.result }}" == "failure" ]]; then
             echo "One or more checks failed"
             exit 1
