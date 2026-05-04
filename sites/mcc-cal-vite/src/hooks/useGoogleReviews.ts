@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 export interface GoogleReview {
   author_name: string;
@@ -16,18 +17,44 @@ export interface LinkedInReview {
   time: number;
 }
 
+export interface Testimonial {
+  id: string;
+  author: string;
+  role: string | null;
+  rating: number | null;
+  text: string;
+  source: 'google' | 'linkedin' | 'direct';
+  featured: boolean;
+  date: string;
+}
+
+// Database row type for Supabase testimonials table
+interface TestimonialRow {
+  id: string;
+  author_name: string;
+  author_title: string | null;
+  rating: number | null;
+  content: string;
+  source: 'google' | 'linkedin' | 'direct';
+  is_featured: boolean;
+  created_at: string;
+}
+
 interface UseGoogleReviewsOptions {
   placeId?: string;
   apiKey?: string;
   maxResults?: number;
+  featuredOnly?: boolean;
 }
 
 export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
-  const { maxResults = 8 } = options;
+  const { maxResults = 8, featuredOnly = false } = options;
   const [reviews, setReviews] = useState<GoogleReview[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [usingFallback, setUsingFallback] = useState(false);
+  const [source, setSource] = useState<'supabase' | 'google-api' | 'fallback'>('fallback');
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -36,44 +63,81 @@ export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
       setUsingFallback(false);
 
       try {
-        // Call our backend proxy (API key is kept secure on server)
-        const response = await fetch('/api/google-reviews');
+        // Try Supabase first if configured
+        if (isSupabaseConfigured()) {
+          let query = supabase
+            .from('testimonials')
+            .select('*')
+            .eq('is_approved', true)
+            .order('is_featured', { ascending: false })
+            .order('created_at', { ascending: false })
+            .limit(maxResults);
 
-        if (!response.ok) {
-          if (response.status === 503) {
-            // Service not configured - use fallback data
-            setReviews(staticGoogleReviews.slice(0, maxResults));
-            setUsingFallback(true);
+          if (featuredOnly) {
+            query = query.eq('is_featured', true);
+          }
+
+          const { data: dbTestimonials, error: dbError } = await query;
+
+          if (!dbError && dbTestimonials && dbTestimonials.length > 0) {
+            const formatted: Testimonial[] = (dbTestimonials as TestimonialRow[]).map((t: TestimonialRow) => ({
+              id: t.id,
+              author: t.author_name,
+              role: t.author_title,
+              rating: t.rating,
+              text: t.content,
+              source: t.source,
+              featured: t.is_featured,
+              date: t.created_at,
+            }));
+
+            setTestimonials(formatted);
+            setSource('supabase');
             setLoading(false);
             return;
           }
-          throw new Error('Failed to fetch reviews');
         }
 
-        const data = await response.json();
-        const fetchedReviews = data.result?.reviews?.slice(0, maxResults) || [];
-        
-        if (fetchedReviews.length === 0) {
-          // No reviews from API - use fallback
-          setReviews(staticGoogleReviews.slice(0, maxResults));
-          setUsingFallback(true);
-        } else {
-          setReviews(fetchedReviews);
+        // Fallback to API testimonials endpoint
+        const response = await fetch(`/api/testimonials?limit=${maxResults}${featuredOnly ? '&featured=true' : ''}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.testimonials?.length > 0) {
+            setTestimonials(data.testimonials);
+            setSource('google-api');
+            setLoading(false);
+            return;
+          }
         }
+
+        // Final fallback: static data
+        setReviews(staticGoogleReviews.slice(0, maxResults));
+        setUsingFallback(true);
+        setSource('fallback');
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
         // Use fallback on error
         setReviews(staticGoogleReviews.slice(0, maxResults));
         setUsingFallback(true);
+        setSource('fallback');
       } finally {
         setLoading(false);
       }
     };
 
     fetchReviews();
-  }, [maxResults]);
+  }, [maxResults, featuredOnly]);
 
-  return { reviews, loading, error, usingFallback };
+  return { 
+    reviews, 
+    testimonials,
+    loading, 
+    error, 
+    usingFallback,
+    source,
+    hasData: testimonials.length > 0 || reviews.length > 0,
+  };
 }
 
 // Fallback: Static Google reviews data (real testimonials from clients)

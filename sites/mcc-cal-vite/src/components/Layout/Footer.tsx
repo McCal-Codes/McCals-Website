@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
               <h4 id="footer-projects">Projects</h4>
               <ul className="mcc-footer__list">
                 <li><a href="/projects">Overview</a></li>
-                <li><a href="/letting-me-go">Letting Me Go</a></li>
+                <li><a href="/letting-me-go">One Nation Divided</a></li>
                 <li><a href="/roadmap">Roadmap</a></li>
               </ul>
             </section>

@@ -3,6 +3,7 @@
  * Returns available time slots for booking
  */
 import { applyCors } from '../_lib/cors.js';
+import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -94,6 +95,36 @@ async function getBusyTimes(accessToken, startDate, endDate) {
   }));
 }
 
+async function getSupabaseBookedSlots(startDate, endDate) {
+  if (!isSupabaseConfigured()) {
+    return [];
+  }
+
+  const supabase = getServiceClient();
+  const { data: bookings, error } = await supabase
+    .from('bookings')
+    .select('booking_date, booking_time, duration_minutes')
+    .gte('booking_date', startDate)
+    .lte('booking_date', endDate)
+    .neq('status', 'cancelled');
+
+  if (error) {
+    console.error('[availability] Error fetching Supabase bookings: - availability.js:112', error);
+    return [];
+  }
+
+  return (bookings || []).map(booking => {
+    // Parse as UTC to ensure consistency with Google Calendar API timestamps
+    const start = new Date(`${booking.booking_date}T${booking.booking_time || '00:00:00'}Z`);
+    const end = new Date(start);
+    end.setUTCMinutes(start.getUTCMinutes() + (booking.duration_minutes || 60));
+    return {
+      start: start.toISOString(),
+      end: end.toISOString(),
+    };
+  });
+}
+
 function generateTimeSlots(date, config, busyTimes) {
   const slots = [];
   const { durationMinutes, workingHours, bufferMinutes } = config;
@@ -116,16 +147,18 @@ function generateTimeSlots(date, config, busyTimes) {
       }
 
       // Check for conflicts against all busy times with proper buffer handling
-const conflicts = busyTimes.some((busy) => {
-  const busyStart = new Date(busy.start);
-  const busyEnd = new Date(busy.end);
-  // Use the longer of the two booking type buffers to ensure no conflicts
-  // Coffee: 15 min, Podcast: 30 min
-  const effectiveBuffer = Math.max(bufferMinutes, 30); // Ensure podcast buffer respected
-  busyStart.setMinutes(busyStart.getMinutes() - effectiveBuffer);
-  busyEnd.setMinutes(busyEnd.getMinutes() + effectiveBuffer);
-  return slotStart < busyEnd && slotEnd > busyStart;
-});
+      const conflicts = busyTimes.some((busy) => {
+        const busyStart = new Date(busy.start);
+        const busyEnd = new Date(busy.end);
+        // Use the longer of the two booking type buffers to ensure no conflicts
+        // Coffee: 15 min, Podcast: 30 min. When checking availability, we enforce
+        // the stricter 30min buffer for all bookings to prevent back-to-back
+        // scheduling issues and allow adequate prep time between sessions.
+        const effectiveBuffer = Math.max(bufferMinutes, 30);
+        busyStart.setMinutes(busyStart.getMinutes() - effectiveBuffer);
+        busyEnd.setMinutes(busyEnd.getMinutes() + effectiveBuffer);
+        return slotStart < busyEnd && slotEnd > busyStart;
+      });
 
       if (!conflicts) {
         slots.push({
@@ -288,10 +321,14 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Production mode: use Google Calendar API
+  // Production mode: use Google Calendar API + Supabase bookings
   try {
     const accessToken = await getAccessToken();
-    const busyTimes = await getBusyTimes(accessToken, start, end);
+    const calendarBusyTimes = await getBusyTimes(accessToken, start, end);
+    const supabaseBookedSlots = await getSupabaseBookedSlots(start, end);
+    
+    // Merge both sources of busy times
+    const busyTimes = [...calendarBusyTimes, ...supabaseBookedSlots];
 
     const config = BOOKING_CONFIGS[eventType];
     const days = [];
@@ -317,7 +354,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ days });
   } catch (err) {
-    console.error('[schedule/availability] Error: - availability.js:260', err);
+    console.error('[schedule/availability] Error loading availability:', err);
     res.status(500).json({ error: 'Failed to load availability. Please try again.' });
   }
 }

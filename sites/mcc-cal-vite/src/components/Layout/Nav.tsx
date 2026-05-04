@@ -6,6 +6,7 @@ function isProjectsNavPath(pathname: string): boolean {
   return (
     pathname === '/projects' ||
     pathname === '/letting-me-go' ||
+    pathname === '/one-nation-divided' ||
     pathname === '/roadmap' ||
     pathname === '/design-systems' ||
     pathname === '/abridged' ||
@@ -205,9 +206,9 @@ const Nav: React.FC = () => {
                     <Link
                       to="/letting-me-go"
                       role="menuitem"
-                      aria-current={pathname === '/letting-me-go' ? 'page' : undefined}
+                      aria-current={pathname === '/letting-me-go' || pathname === '/one-nation-divided' ? 'page' : undefined}
                     >
-                      Letting Me Go
+                      One Nation Divided
                     </Link>
                   </li>
                   <li><Link to="/terranova" role="menuitem" aria-current={pathname === '/terranova' ? 'page' : undefined}>TerraNova</Link></li>

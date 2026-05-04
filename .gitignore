@@ -104,3 +104,5 @@ updates/exports-audit-*.json
 updates/*-report-*.json
 updates/*-plan.json
 updates/*-albums.json
+.vercel
+.env*.local

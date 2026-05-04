@@ -1,0 +1,214 @@
+.pdfViewerContainer {
+  width: 100%;
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: color-mix(in srgb, var(--lmgo-fg, #faf6f1) 5%, transparent);
+  border: 1px solid var(--lmgo-line, rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+}
+
+.pdfHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.pdfTitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--lmgo-fg, #faf6f1);
+  margin: 0 0 0.5rem 0;
+}
+
+.pdfDescription {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  color: var(--lmgo-fg, rgba(255, 255, 255, 0.7));
+  opacity: 0.72;
+  margin: 0 0 1.5rem 0;
+}
+
+.copyrightNotice {
+  background: color-mix(in srgb, var(--lmgo-accent, #c75a4a) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--lmgo-accent, #c75a4a) 35%, transparent);
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.copyrightNotice p {
+  margin: 0.5rem 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--lmgo-fg, rgba(255, 255, 255, 0.8));
+  opacity: 0.82;
+  line-height: 1.4;
+}
+
+.copyrightNotice strong {
+  color: var(--lmgo-accent, #c75a4a);
+}
+
+.pdfWrapper {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  min-height: 600px;
+  background: #0a080c;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--lmgo-line, rgba(255, 255, 255, 0.1));
+}
+
+.pdfLoading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--lmgo-fg, rgba(255, 255, 255, 0.6));
+  opacity: 0.64;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.pdfFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 6px;
+}
+
+.pdfFallback {
+  display: grid;
+  min-height: 100%;
+  place-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  color: var(--lmgo-fg, #faf6f1);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.pdfFallback p {
+  max-width: 32rem;
+  margin: 0 auto;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.pdfFooter {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.downloadInfo {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--lmgo-fg, rgba(255, 255, 255, 0.6));
+  opacity: 0.64;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.openButton,
+.downloadButton,
+.inlinePdfLink {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(199, 90, 74, 0.3);
+  touch-action: manipulation;
+}
+
+.openButton,
+.inlinePdfLink {
+  background: transparent;
+  color: var(--lmgo-accent, #c75a4a);
+  border-color: color-mix(in srgb, var(--lmgo-accent, #c75a4a) 45%, transparent);
+}
+
+.downloadButton {
+  margin-left: 0.75rem;
+  background: linear-gradient(135deg, #c75a4a, #a0483a);
+  color: #faf6f1;
+}
+
+.openButton:hover,
+.openButton:focus-visible,
+.inlinePdfLink:hover,
+.inlinePdfLink:focus-visible {
+  background: color-mix(in srgb, var(--lmgo-accent, #c75a4a) 12%, transparent);
+  box-shadow: 0 4px 12px rgba(199, 90, 74, 0.18);
+}
+
+.downloadButton:hover,
+.downloadButton:focus-visible {
+  background: linear-gradient(135deg, #d46a5a, #b05345);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(199, 90, 74, 0.3);
+}
+
+.openButton:focus-visible,
+.downloadButton:focus-visible,
+.inlinePdfLink:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--lmgo-bg, #0a080c), 0 0 0 4px #d46a5a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .openButton,
+  .downloadButton,
+  .inlinePdfLink {
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .openButton:hover,
+  .openButton:focus-visible,
+  .downloadButton:hover,
+  .downloadButton:focus-visible,
+  .inlinePdfLink:hover,
+  .inlinePdfLink:focus-visible {
+    transform: none;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .pdfViewerContainer {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+  
+  .pdfWrapper {
+    height: 60vh;
+    min-height: 500px;
+  }
+  
+  .pdfTitle {
+    font-size: 1.25rem;
+  }
+  
+  .copyrightNotice {
+    padding: 0.75rem;
+  }
+  
+  .copyrightNotice p {
+    font-size: 0.8rem;
+  }
+
+  .openButton,
+  .downloadButton {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .downloadButton {
+    margin-top: 0.75rem;
+  }
+}

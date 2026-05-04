@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
@@ -32,7 +32,7 @@ const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
 const FAQPage = lazy(() => import('./pages/faq'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const TerranovaPage = lazy(() => import('./pages/terranova'));
-const LettingMeGoPage = lazy(() => import('./pages/letting-me-go'));
+const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
 
 const staticRouteComponents = {
@@ -41,7 +41,7 @@ const staticRouteComponents = {
   contactUs: ContactUsPage,
   requestAQuote: RequestAQuotePage,
   featuredWork: FeaturedWorkPage,
-  lettingMeGo: LettingMeGoPage,
+  lettingMeGo: OneNationDividedPage,
   journalism: JournalismPage,
   portraits: PortraitsPage,
   nature: NaturePage,
@@ -86,6 +86,7 @@ export default function App() {
               const RouteComponent = staticRouteComponents[route.routeKey];
               return <Route key={route.path} path={route.path} element={<RouteComponent />} />;
             })}
+            <Route path="/one-nation-divided" element={<Navigate to="/letting-me-go" replace />} />
             <Route path="/authors/:authorId" element={<AuthorsPage />} />
             <Route path="/blog/:slug" element={<BlogPage />} />
             <Route path="/abridged" element={<AbridgedPage />} />

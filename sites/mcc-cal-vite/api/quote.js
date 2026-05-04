@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 import { applyRateLimit } from './_lib/rate-limit.js';
 import { quoteSchema, safeParseBody } from './_lib/validation.js';
+import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -44,59 +45,116 @@ export default async function handler(req, res) {
   const { name, email, service_type, project_date, intended_use, duration, geographic, budget } =
     body;
 
-  if (!process.env.RESEND_API_KEY) {
-    console.error('[quote] RESEND_API_KEY not set');
-    res.status(503).json({ error: 'Email service not configured.' });
-    return;
-  }
-
   const deliverables = Array.isArray(body.deliverable)
     ? body.deliverable.join(', ')
     : body.deliverable || 'N/A';
 
-  try {
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: TO_EMAIL,
-      replyTo: email,
-      subject: `[Quote Request] ${service_type} — from ${name}`,
-      text: [
-        `=== CONTACT ===`,
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Phone: ${body.phone || 'N/A'}`,
-        `Organization: ${body.organization || 'N/A'}`,
-        ``,
-        `=== PROJECT ===`,
-        `Service: ${service_type}`,
-        `Date: ${project_date}`,
-        `Time: ${body.start_time || '--'} to ${body.end_time || '--'}`,
-        `Location: ${body.location || 'N/A'}`,
-        `Setting: ${body.setting || 'N/A'}`,
-        `Attendees: ${body.attendees || 'N/A'}`,
-        ``,
-        `=== DELIVERABLES ===`,
-        `${deliverables}${body.other_deliverables ? `, ${body.other_deliverables}` : ''}`,
-        ``,
-        `=== LICENSING ===`,
-        `Intended Use: ${intended_use}`,
-        `Duration: ${duration}`,
-        `Geographic Scope: ${geographic}`,
-        ``,
-        `=== BUDGET ===`,
-        `Budget: ${budget}`,
-        `Timeline: ${body.timeline || 'N/A'}`,
-        ``,
-        `=== NOTES ===`,
-        body.notes || 'No additional notes',
-        ``,
-        `Submitted: ${new Date().toISOString()}`,
-      ].join('\n'),
-    });
+  // Save to Supabase
+  let quoteId = null;
+  if (isSupabaseConfigured()) {
+    const supabase = getServiceClient();
+    const { data: quote, error: dbError } = await supabase
+      .from('quote_requests')
+      .insert({
+        name,
+        email,
+        phone: body.phone || null,
+        event_type: service_type,
+        event_date: project_date || null,
+        location: body.location || null,
+        budget_range: budget,
+        details: [
+          `=== PROJECT ===`,
+          `Service: ${service_type}`,
+          `Date: ${project_date || 'Not specified'}`,
+          `Time: ${body.start_time || '--'} to ${body.end_time || '--'}`,
+          `Location: ${body.location || 'N/A'}`,
+          `Setting: ${body.setting || 'N/A'}`,
+          `Attendees: ${body.attendees || 'N/A'}`,
+          ``,
+          `=== DELIVERABLES ===`,
+          `${deliverables}${body.other_deliverables ? `, ${body.other_deliverables}` : ''}`,
+          ``,
+          `=== LICENSING ===`,
+          `Intended Use: ${intended_use}`,
+          `Duration: ${duration}`,
+          `Geographic Scope: ${geographic}`,
+          ``,
+          `=== BUDGET ===`,
+          `Budget: ${budget}`,
+          `Timeline: ${body.timeline || 'N/A'}`,
+          ``,
+          `=== NOTES ===`,
+          body.notes || 'No additional notes',
+        ].join('\n'),
+        status: 'pending',
+      })
+      .select('id')
+      .single();
 
-    res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('[quote] Resend error:', err);
-    res.status(500).json({ error: 'Failed to send quote request. Please try again.' });
+    if (dbError) {
+      console.error('[quote] Database error:', dbError);
+    } else {
+      quoteId = quote?.id;
+    }
   }
+
+  // Send email notification
+  if (process.env.RESEND_API_KEY) {
+    try {
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: TO_EMAIL,
+        replyTo: email,
+        subject: `[Quote Request] ${service_type} — from ${name}`,
+        text: [
+          `=== CONTACT ===`,
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Phone: ${body.phone || 'N/A'}`,
+          `Organization: ${body.organization || 'N/A'}`,
+          ``,
+          `=== PROJECT ===`,
+          `Service: ${service_type}`,
+          `Date: ${project_date}`,
+          `Time: ${body.start_time || '--'} to ${body.end_time || '--'}`,
+          `Location: ${body.location || 'N/A'}`,
+          `Setting: ${body.setting || 'N/A'}`,
+          `Attendees: ${body.attendees || 'N/A'}`,
+          ``,
+          `=== DELIVERABLES ===`,
+          `${deliverables}${body.other_deliverables ? `, ${body.other_deliverables}` : ''}`,
+          ``,
+          `=== LICENSING ===`,
+          `Intended Use: ${intended_use}`,
+          `Duration: ${duration}`,
+          `Geographic Scope: ${geographic}`,
+          ``,
+          `=== BUDGET ===`,
+          `Budget: ${budget}`,
+          `Timeline: ${body.timeline || 'N/A'}`,
+          ``,
+          `=== NOTES ===`,
+          body.notes || 'No additional notes',
+          quoteId ? `Quote ID: ${quoteId}` : '',
+          ``,
+          `Submitted: ${new Date().toISOString()}`,
+        ].join('\n'),
+      });
+    } catch (err) {
+      console.error('[quote] Email error:', err);
+      if (quoteId) {
+        res.status(200).json({ ok: true, id: quoteId, emailError: true });
+        return;
+      }
+    }
+  } else {
+    console.warn('[quote] RESEND_API_KEY not set, skipping email');
+  }
+
+  res.status(200).json({ 
+    ok: true, 
+    id: quoteId,
+    message: 'Quote request received. We will respond within 24-48 hours.'
+  });
 }

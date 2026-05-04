@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 import { applyRateLimit } from './_lib/rate-limit.js';
 import { contactSchema, safeParseBody } from './_lib/validation.js';
+import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -53,34 +54,66 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    console.error('[contact] RESEND_API_KEY not set');
-    res.status(503).json({ error: 'Email service not configured.' });
-    return;
-  }
-
-  try {
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: TO_EMAIL,
-      replyTo: email,
-      subject: `[Contact] ${subject} — from ${name}`,
-      text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Subject: ${subject}`,
-        ``,
-        `Message:`,
+  // Save to Supabase (even if email fails, we have the record)
+  let submissionId = null;
+  if (isSupabaseConfigured()) {
+    const supabase = getServiceClient();
+    const { data: submission, error: dbError } = await supabase
+      .from('contact_submissions')
+      .insert({
+        name,
+        email,
+        subject,
         message,
-        ``,
-        `Consent: ${consent ? 'Yes' : 'No'}`,
-        `Submitted: ${new Date().toISOString()}`,
-      ].join('\n'),
-    });
+        status: 'new',
+      })
+      .select('id')
+      .single();
 
-    res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('[contact] Resend error:', err);
-    res.status(500).json({ error: 'Failed to send message. Please try again.' });
+    if (dbError) {
+      console.error('[contact] Database error: - contact.js:74', dbError);
+      // Continue to try sending email even if DB save fails
+    } else {
+      submissionId = submission?.id;
+    }
   }
+
+  // Send email notification
+  if (process.env.RESEND_API_KEY) {
+    try {
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: TO_EMAIL,
+        replyTo: email,
+        subject: `[Contact] ${subject} — from ${name}`,
+        text: [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Subject: ${subject}`,
+          ``,
+          `Message:`,
+          message,
+          ``,
+          `Consent: ${consent ? 'Yes' : 'No'}`,
+          submissionId ? `Submission ID: ${submissionId}` : '',
+          `Submitted: ${new Date().toISOString()}`,
+        ].join('\n'),
+      });
+    } catch (err) {
+      console.error('[contact] Email error: - contact.js:103', err);
+      // Don't fail the request if email fails but DB succeeded
+      if (submissionId) {
+        res.status(200).json({ ok: true, id: submissionId, emailError: true });
+        return;
+      }
+    }
+  } else {
+    console.warn('[contact] RESEND_API_KEY not set, skipping email notification - contact.js:111');
+  }
+
+  res.status(200).json({ 
+    ok: true, 
+    id: submissionId,
+    message: 'Message received. Thank you for contacting us!'
+  });
 }

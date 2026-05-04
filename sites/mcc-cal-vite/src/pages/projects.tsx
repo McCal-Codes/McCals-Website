@@ -46,7 +46,7 @@ const ProjectsPage = () => {
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
         {[
-          { to: '/letting-me-go', title: 'Letting Me Go', desc: 'BFA thesis, AIR show, and campaign-trail photography: noise, shadow, the road' },
+          { to: '/letting-me-go', title: 'One Nation Divided', desc: 'BFA thesis exhibition and campaign-trail photography: political anxiety, shadow, and polarization' },
           { to: '/design-systems', title: 'Design Systems', desc: 'Component libraries and visual language' },
           { to: '/abridged', title: 'Abridged App', desc: 'A smarter way to read long-form content' },
           { to: '/roadmap', title: 'Roadmap', desc: 'What\'s being built and what\'s next' },

@@ -10,10 +10,10 @@ import { visualizer } from 'rollup-plugin-visualizer';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PUBLIC_DIR = resolve(__dirname, './public-vite');
-const SKIP_DIR_NAME = 'letting-me-go';
+const SKIP_DIR_NAME = 'one-nation-divided';
 
 /**
- * Production build only: copy `public-vite` into `dist` but never enter a folder named `letting-me-go`
+ * Production build only: copy `public-vite` into `dist` but never enter a folder named `one-nation-divided`
  * (can be stuck with EPERM on some Windows / exFAT drives). Dev keeps normal `publicDir` behavior.
  */
 function copyPublicSkipDeadFolder(): Plugin {
@@ -47,7 +47,7 @@ function copyPublicSkipDeadFolder(): Plugin {
   };
 
   return {
-    name: 'copy-public-skip-letting-me-go',
+    name: 'copy-public-skip-one-nation-divided',
     apply: 'build',
     configResolved(config) {
       outDirAbs = path.resolve(config.root, config.build.outDir);
@@ -120,7 +120,7 @@ export default defineConfig(({ command }) => ({
     }),
     command === 'build' && copyPublicSkipDeadFolder(),
   ].filter(Boolean) as Plugin[],
-  /** `vite build` uses a manual public copy so a locked `letting-me-go` tree cannot abort the build. */
+  /** `vite build` uses a manual public copy so a locked `one-nation-divided` tree cannot abort the build. */
   publicDir: command === 'build' ? false : PUBLIC_DIR,
   resolve: {
     alias: {

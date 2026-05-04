@@ -7,6 +7,7 @@ import { Resend } from 'resend';
 import { applyRateLimit } from '../_lib/rate-limit.js';
 import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 import { applyCors } from '../_lib/cors.js';
+import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
 
 // Lazy-initialize Resend client to handle missing API key gracefully
 let resendClient = null;
@@ -15,7 +16,7 @@ function getResendClient() {
     try {
       resendClient = new Resend(process.env.RESEND_API_KEY);
     } catch (err) {
-      console.error('Failed to initialize Resend client: - book.js:18', err.message);
+      console.error('Failed to initialize Resend client: - book.js:19', err.message);
     }
   }
   return resendClient;
@@ -184,7 +185,7 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
 async function sendConfirmationEmail(booking, config) {
   const resend = getResendClient();
   if (!resend) {
-    console.warn('[sendConfirmationEmail] Resend not configured, skipping email - book.js:187');
+    console.warn('[sendConfirmationEmail] Resend not configured, skipping email - book.js:188');
     return;
   }
 
@@ -251,7 +252,7 @@ async function sendConfirmationEmail(booking, config) {
       ].join('\n'),
     });
   } catch (err) {
-    console.error('[sendConfirmationEmail] Failed to send email: - book.js:254', err.message);
+    console.error('[sendConfirmationEmail] Failed to send email: - book.js:255', err instanceof Error ? err.message : err);
     // Don't throw - booking should succeed even if email fails
   }
 }
@@ -305,7 +306,7 @@ export default async function handler(req, res) {
   // Development mode: return mock booking without external services
   const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
   if (isDev) {
-    console.log('[schedule/book] DEV MODE: Mock booking created - book.js:308', { eventTypeId, date, time, requester: requester.name });
+    console.log('[schedule/book] DEV MODE: Mock booking created - book.js:309', { eventTypeId, date, time, requester: requester.name });
     
     const startDateTime = new Date(`${date}T${time}`);
     const endDateTime = new Date(startDateTime);
@@ -330,14 +331,14 @@ export default async function handler(req, res) {
   }
 
   if (!process.env.RESEND_API_KEY) {
-    console.error('[schedule/book] RESEND_API_KEY not set - book.js:333');
+    console.error('[schedule/book] RESEND_API_KEY not set - book.js:334');
     res.status(503).json({ error: 'Email service not configured' });
     return;
   }
 
   // If Google credentials missing, create mock booking
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
-    console.warn('[schedule/book] Google credentials not set, creating mock booking - book.js:343');
+    console.warn('[schedule/book] Google credentials not set, creating mock booking - book.js:341');
     
     const slotKey = `${date}:${time}`;
     
@@ -352,6 +353,34 @@ export default async function handler(req, res) {
     
     // Mark slot as booked
     mockBookings.add(slotKey);
+    
+    // Save to Supabase even for mock bookings (for testing)
+    let bookingId = null;
+    if (isSupabaseConfigured()) {
+      const supabase = getServiceClient();
+      const { data: bookingRecord, error: dbError } = await supabase
+        .from('bookings')
+        .insert({
+          client_name: requester.name,
+          client_email: requester.email,
+          service_type: config.name,
+          booking_date: date,
+          booking_time: time,
+          duration_minutes: durationMinutes,
+          notes: requester.notes || null,
+          status: 'confirmed',
+          deposit_paid: false,
+          total_amount: null,
+        })
+        .select('id')
+        .single();
+      
+      if (dbError) {
+        console.error('[schedule/book] Mock booking DB error: - book.js:379', dbError);
+      } else {
+        bookingId = bookingRecord?.id;
+      }
+    }
     
     // Send email notification even for mock bookings
     const mockBooking = {
@@ -368,12 +397,12 @@ export default async function handler(req, res) {
     
     // Send email notification (don't await, let it run async)
     sendConfirmationEmail(mockBooking, config).catch(err => {
-      console.error('[schedule/book] Failed to send confirmation email: - book.js:375', err);
+      console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
     });
     
     res.status(200).json({
       booking: {
-        id: mockBooking.id,
+        id: bookingId || mockBooking.id,
         start: mockBooking.start,
         end: mockBooking.end,
         eventLink: mockBooking.eventLink,
@@ -408,18 +437,65 @@ export default async function handler(req, res) {
       eventLink: calendarEvent.htmlLink,
     };
 
+    // Save to Supabase
+    let bookingId = null;
+    if (isSupabaseConfigured()) {
+      const supabase = getServiceClient();
+      
+      // Insert booking record
+      const { data: bookingRecord, error: dbError } = await supabase
+        .from('bookings')
+        .insert({
+          client_name: requester.name,
+          client_email: requester.email,
+          service_type: config.name,
+          booking_date: date,
+          booking_time: time,
+          duration_minutes: durationMinutes,
+          notes: requester.notes || null,
+          status: 'confirmed',
+          deposit_paid: false,
+          total_amount: null,
+        })
+        .select('id')
+        .single();
+      
+      if (dbError) {
+        console.error('[schedule/book] Database error saving booking: - book.js:464', dbError);
+      } else {
+        bookingId = bookingRecord?.id;
+
+        // Mark slot as unavailable in availability_slots with error handling
+        const { error: slotError } = await supabase
+          .from('availability_slots')
+          .update({
+            is_available: false,
+            booking_id: bookingId,
+          })
+          .eq('slot_date', date)
+          .eq('slot_time', time);
+
+        if (slotError) {
+          console.error('[schedule/book] Failed to mark slot unavailable: - book.js:479', slotError);
+          // Log for monitoring but don't fail the booking - calendar event is already created
+          // Consider: add to monitoring/alerting system for manual cleanup
+        }
+      }
+    }
+
     await sendConfirmationEmail(booking, config);
 
     res.status(200).json({
       booking: {
-        id: booking.id,
+        id: bookingId || booking.id,
+        calendarId: booking.id,
         start: booking.start,
         end: booking.end,
         eventLink: booking.eventLink,
       },
     });
   } catch (err) {
-    console.error('[schedule/book] Error: - book.js:426', err);
+    console.error('[schedule/book] Booking creation failed: - book.js:498', err);
     res.status(500).json({ error: 'Failed to create booking. Please try again.' });
   }
 }
