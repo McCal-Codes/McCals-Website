@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "buildCommand": "npm --prefix sites/mcc-cal-vite ci && npm --prefix sites/mcc-cal-vite run build",
+  "buildCommand": "(cd sites/mcc-cal-vite && npm ci && npm run build)",
   "outputDirectory": "sites/mcc-cal-vite/dist",
   "redirects": [
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
