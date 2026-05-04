@@ -2,7 +2,6 @@
   "framework": "vite",
   "buildCommand": "cd sites/mcc-cal-vite && npm ci && npm run build",
   "outputDirectory": "sites/mcc-cal-vite/dist",
-  "installCommand": "npm ci --prefer-offline --no-audit",
   "redirects": [
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/schedule", "destination": "/grab-a-coffee", "permanent": true },
