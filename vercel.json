@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "buildCommand": "npm run build",
+  "buildCommand": "cd sites/mcc-cal-vite && npm ci && npm run build",
   "outputDirectory": "sites/mcc-cal-vite/dist",
   "installCommand": "npm ci --prefer-offline --no-audit",
   "redirects": [
