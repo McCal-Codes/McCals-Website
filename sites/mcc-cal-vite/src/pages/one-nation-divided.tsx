@@ -55,7 +55,7 @@ const HERO_IMAGE = {
 const EXHIBITION_IMAGES: DisplayImage[] = [
   {
     id: 'show-01',
-    src: `${EXHIBITION_IMAGE_BASE}/2026-04-07_Letting it Go Exibition Thesis Show_CAL2622.webp`,
+    src: `${EXHIBITION_IMAGE_BASE}/one-nation-divided-show-01.webp`,
     width: 3000,
     height: 2000,
     alt: 'Caleb McCartney stands with his grandparents next to political artwork installations during the One Nation Divided exhibition opening at Artists Image Resource.',
@@ -72,7 +72,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
   },
   {
     id: 'show-02',
-    src: `${EXHIBITION_IMAGE_BASE}/2026-04-07_Letting it Go Exibition Thesis Show_CAL2677.webp`,
+    src: `${EXHIBITION_IMAGE_BASE}/one-nation-divided-show-02.webp`,
     width: 3000,
     height: 2000,
     alt: 'Large 30" by 30" political artwork mounted on white gallery wall with bold text and imagery, part of the One Nation Divided exhibition.',
@@ -106,7 +106,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
   },
   {
     id: 'show-04',
-    src: `${EXHIBITION_IMAGE_BASE}/2026-04-07_Letting it Go Exibition Thesis Show_CAL2715.webp`,
+    src: `${EXHIBITION_IMAGE_BASE}/one-nation-divided-show-04.webp`,
     width: 3000,
     height: 2000,
     alt: 'Series of smaller framed political portraits showing individual candidates, displayed as part of the One Nation Divided exhibition.',
@@ -1059,3 +1059,4 @@ const OneNationDividedPage = () => {
 };
 
 export default OneNationDividedPage;
+
