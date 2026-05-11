@@ -1,5 +1,6 @@
 import { useEffect, useRef, type FC } from 'react';
 import type { PortfolioGroup } from './types';
+import { portfolioStyles } from './index';
 
 /**
  * Props for the PortfolioCard component
@@ -57,7 +58,7 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('pf-card--visible');
+          el.classList.add(portfolioStyles.pfCardVisible);
           observer.disconnect();
         }
       },
@@ -82,7 +83,7 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
   return (
     <article
       ref={cardRef}
-      className={`pf-card${group.published ? ' pf-card--published' : ''}`}
+      className={`${portfolioStyles.pfCard}${group.published ? ` ${portfolioStyles.pfCardPublishedState}` : ''}`}
       id={group.id}
       role="button"
       tabIndex={0}
@@ -91,21 +92,21 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
       onKeyDown={handleKeyDown}
     >
       {/* Photo count badge */}
-      <div className="pf-card__count" aria-label={`${group.images.length} photos`}>
+      <div className={portfolioStyles.pfCardCount} aria-label={`${group.images.length} photos`}>
         <PhotosIcon />
         <span>{group.images.length}</span>
       </div>
 
       {/* Published badge (shown instead of anchor when published) */}
       {group.published ? (
-        <div className="pf-card__published" aria-label="Published work">
-          <span className="pf-card__published-dot" />
-          <span className="pf-card__published-label">Published</span>
+        <div className={portfolioStyles.pfCardPublished} aria-label="Published work">
+          <span className={portfolioStyles.pfCardPublishedDot} />
+          <span className={portfolioStyles.pfCardPublishedLabel}>Published</span>
         </div>
       ) : (
         <button
           type="button"
-          className="pf-card__anchor"
+          className={portfolioStyles.pfCardAnchor}
           title="Copy link to this item"
           aria-label="Copy link"
           onClick={handleAnchorClick}
@@ -123,18 +124,18 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
         height={300}
       />
 
-      <div className="pf-card__overlay" aria-hidden="true">
-        <div className="pf-caption-rail">
-          <h3 className="pf-caption-rail__title">{group.title}</h3>
+      <div className={portfolioStyles.pfCardOverlay} aria-hidden="true">
+        <div className={portfolioStyles.pfCaptionRail}>
+          <h3 className={portfolioStyles.pfCaptionRailTitle}>{group.title}</h3>
           {(group.dateDisplay || group.category) && (
-            <p className="pf-caption-rail__meta">
+            <p className={portfolioStyles.pfCaptionRailMeta}>
               {group.dateDisplay && <span>{group.dateDisplay}</span>}
-              {group.dateDisplay && group.category && <span className="pf-caption-rail__meta-separator">•</span>}
+              {group.dateDisplay && group.category && <span className={portfolioStyles.pfCaptionRailMetaSeparator}>•</span>}
               {group.category && <span>{group.category}</span>}
             </p>
           )}
           {group.coverImage.caption && (
-            <p className="pf-caption-rail__description">{group.coverImage.caption}</p>
+            <p className={portfolioStyles.pfCaptionRailDescription}>{group.coverImage.caption}</p>
           )}
         </div>
       </div>

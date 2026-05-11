@@ -4,7 +4,7 @@ import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
-import '../portfolio/portfolio.css';
+import { portfolioStyles } from '../portfolio';
 
 // ── Manifest shape ────────────────────────────────────────────────────────────
 
@@ -73,21 +73,21 @@ export default function PortraitsPortfolio() {
   }, [groups, activeFilter]);
 
   return (
-    <div className="pf-root">
-      <h2 className="pf-heading">Portraits</h2>
-      <p className="pf-subheading">
+    <div className={portfolioStyles.pfRoot}>
+      <h2 className={portfolioStyles.pfHeading}>Portraits</h2>
+      <p className={portfolioStyles.pfSubheading}>
         Editorial, studio, graduation, and headshot sessions.
       </p>
 
       {status === 'loading' && (
-        <div className="pf-loading">
-          <span className="pf-spinner" />
+        <div className={portfolioStyles.pfLoading}>
+          <span className={portfolioStyles.pfSpinner} />
           Loading portraits portfolio…
         </div>
       )}
 
       {status === 'error' && (
-        <div className="pf-error">
+        <div className={portfolioStyles.pfError}>
           <span>Failed to load portfolio.</span>
           <span style={{ fontSize: '0.82rem', opacity: 0.7 }}>{error}</span>
         </div>

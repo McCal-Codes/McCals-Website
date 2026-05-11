@@ -1,11 +1,10 @@
 /* ============================================================
-   Shared Portfolio Styles
-   Mirrors the design system used in the widget HTML files.
-   All components in src/components/portfolio/ use these classes.
+   Shared Portfolio Styles (CSS Modules)
+   Converted from portfolio.css for scoped, tree-shakeable styles
    ============================================================ */
 
 /* --- Layout --- */
-.pf-root {
+.pfRoot {
   max-width: 1600px;
   margin: 60px auto;
   padding: 40px 20px;
@@ -13,7 +12,7 @@
   position: relative;
 }
 
-.pf-heading {
+.pfHeading {
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-weight: 800;
   color: var(--fg);
@@ -22,7 +21,7 @@
   line-height: 1.2;
 }
 
-.pf-subheading {
+.pfSubheading {
   color: var(--fg);
   opacity: 0.7;
   font-size: 1rem;
@@ -32,7 +31,7 @@
   margin-inline: auto;
 }
 
-.pf-intro {
+.pfIntro {
   max-width: 760px;
   margin: 0 auto 32px;
   color: var(--fg);
@@ -42,8 +41,8 @@
 }
 
 /* --- Status states --- */
-.pf-loading,
-.pf-error {
+.pfLoading,
+.pfError {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,14 +54,14 @@
   gap: 12px;
 }
 
-.pf-error {
+.pfError {
   color: var(--mcc-error, #c9a9a9);
   opacity: 1;
   flex-direction: column;
   gap: 8px;
 }
 
-.pf-spinner {
+.pfSpinner {
   width: 20px;
   height: 20px;
   border: 2px solid var(--line);
@@ -77,7 +76,7 @@
 }
 
 /* --- Filters --- */
-.pf-filters {
+.pfFilters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -85,7 +84,7 @@
   margin-bottom: 36px;
 }
 
-.pf-filter-btn {
+.pfFilterBtn {
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.12);
   color: var(--fg);
@@ -100,45 +99,28 @@
   box-shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
 
-.pf-filter-btn:hover {
+.pfFilterBtn:hover {
   transform: translateY(-2px);
   border-color: rgba(255,255,255,0.25);
   background: rgba(255,255,255,0.06);
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
 }
 
-.pf-filter-btn[aria-pressed='true'],
-.pf-filter-btn.active {
+.pfFilterBtn[aria-pressed='true'],
+.pfFilterBtnActive {
   background: rgba(255,255,255,0.95);
   color: #0a0a0a;
   border-color: rgba(255,255,255,0.95);
   box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
 
-body[data-theme='light'] .pf-filter-btn {
-  border-color: rgba(0,0,0,0.12);
-  background: rgba(0,0,0,0.03);
-}
-
-body[data-theme='light'] .pf-filter-btn:hover {
-  background: rgba(0,0,0,0.06);
-  border-color: rgba(0,0,0,0.2);
-}
-
-body[data-theme='light'] .pf-filter-btn[aria-pressed='true'],
-body[data-theme='light'] .pf-filter-btn.active {
-  background: #0a0a0a;
-  color: #fff;
-  border-color: #0a0a0a;
-}
-
 /* --- Concert Artist Support --- */
-.pf-artist-support {
+.pfArtistSupport {
   margin: 0 auto 28px;
   max-width: 1120px;
 }
 
-.pf-artist-support__toggle {
+.pfArtistSupportToggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -156,13 +138,13 @@ body[data-theme='light'] .pf-filter-btn.active {
   transition: transform 0.2s, background 0.2s, border-color 0.2s;
 }
 
-.pf-artist-support__toggle:hover {
+.pfArtistSupportToggle:hover {
   transform: translateY(-2px);
   background: rgba(255,255,255,0.08);
   border-color: rgba(255,255,255,0.3);
 }
 
-.pf-artist-support__panel {
+.pfArtistSupportPanel {
   margin-top: 16px;
   padding: 22px;
   border-radius: 24px;
@@ -176,7 +158,7 @@ body[data-theme='light'] .pf-filter-btn.active {
   box-shadow: 0 18px 48px rgba(0,0,0,0.16);
 }
 
-.pf-artist-support__panel-header {
+.pfArtistSupportPanelHeader {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -184,14 +166,14 @@ body[data-theme='light'] .pf-filter-btn.active {
   margin-bottom: 18px;
 }
 
-.pf-artist-support__title {
+.pfArtistSupportTitle {
   margin: 0 0 6px;
   color: var(--fg);
   font-size: 1.1rem;
   font-weight: 800;
 }
 
-.pf-artist-support__intro {
+.pfArtistSupportIntro {
   margin: 0;
   color: var(--fg);
   opacity: 0.72;
@@ -200,7 +182,7 @@ body[data-theme='light'] .pf-filter-btn.active {
   line-height: 1.5;
 }
 
-.pf-artist-support__close {
+.pfArtistSupportClose {
   min-height: 38px;
   padding: 8px 14px;
   border-radius: 999px;
@@ -212,12 +194,12 @@ body[data-theme='light'] .pf-filter-btn.active {
   transition: background 0.2s, border-color 0.2s;
 }
 
-.pf-artist-support__close:hover {
+.pfArtistSupportClose:hover {
   background: rgba(255,255,255,0.08);
   border-color: rgba(255,255,255,0.28);
 }
 
-.pf-artist-support__list {
+.pfArtistSupportList {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -225,14 +207,14 @@ body[data-theme='light'] .pf-filter-btn.active {
   gap: 16px;
 }
 
-.pf-artist-support__item {
+.pfArtistSupportItem {
   padding: 18px;
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.08);
   background: rgba(255,255,255,0.03);
 }
 
-.pf-artist-support__item-header {
+.pfArtistSupportItemHeader {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -240,18 +222,18 @@ body[data-theme='light'] .pf-filter-btn.active {
   margin-bottom: 14px;
 }
 
-.pf-artist-support__meta {
+.pfArtistSupportMeta {
   min-width: 0;
 }
 
-.pf-artist-support__name {
+.pfArtistSupportName {
   margin: 0 0 4px;
   color: var(--fg);
   font-size: 1rem;
   font-weight: 750;
 }
 
-.pf-artist-support__date {
+.pfArtistSupportDate {
   margin: 0;
   color: var(--fg);
   opacity: 0.65;
@@ -259,7 +241,7 @@ body[data-theme='light'] .pf-filter-btn.active {
   font-weight: 600;
 }
 
-.pf-artist-support__link {
+.pfArtistSupportLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -274,12 +256,12 @@ body[data-theme='light'] .pf-filter-btn.active {
   white-space: nowrap;
 }
 
-.pf-artist-support__link:hover {
+.pfArtistSupportLink:hover {
   text-decoration: none;
   filter: brightness(0.96);
 }
 
-.pf-artist-support__embed {
+.pfArtistSupportEmbed {
   width: 100%;
   min-height: 152px;
   border: 0;
@@ -287,7 +269,7 @@ body[data-theme='light'] .pf-filter-btn.active {
   background: rgba(0,0,0,0.28);
 }
 
-.pf-artist-support__placeholder {
+.pfArtistSupportPlaceholder {
   padding: 18px;
   border-radius: 14px;
   border: 1px dashed rgba(255,255,255,0.14);
@@ -298,60 +280,25 @@ body[data-theme='light'] .pf-filter-btn.active {
   text-align: center;
 }
 
-body[data-theme='light'] .pf-artist-support__toggle {
-  border-color: rgba(0,0,0,0.12);
-  background: rgba(0,0,0,0.03);
-}
-
-body[data-theme='light'] .pf-artist-support__toggle:hover {
-  background: rgba(0,0,0,0.06);
-  border-color: rgba(0,0,0,0.18);
-}
-
-body[data-theme='light'] .pf-artist-support__panel {
-  border-color: rgba(0,0,0,0.08);
-  background:
-    linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)),
-    rgba(255,255,255,0.82);
-}
-
-body[data-theme='light'] .pf-artist-support__item {
-  border-color: rgba(0,0,0,0.08);
-  background: rgba(0,0,0,0.02);
-}
-
-body[data-theme='light'] .pf-artist-support__close {
-  border-color: rgba(0,0,0,0.12);
-}
-
-body[data-theme='light'] .pf-artist-support__close:hover {
-  background: rgba(0,0,0,0.06);
-  border-color: rgba(0,0,0,0.18);
-}
-
-body[data-theme='light'] .pf-artist-support__placeholder {
-  border-color: rgba(0,0,0,0.12);
-}
-
 @media (max-width: 720px) {
-  .pf-artist-support__panel {
+  .pfArtistSupportPanel {
     padding: 18px;
   }
 
-  .pf-artist-support__panel-header,
-  .pf-artist-support__item-header {
+  .pfArtistSupportPanelHeader,
+  .pfArtistSupportItemHeader {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .pf-artist-support__link,
-  .pf-artist-support__close {
+  .pfArtistSupportLink,
+  .pfArtistSupportClose {
     width: 100%;
   }
 }
 
 /* --- Portfolio grid --- */
-.pf-grid {
+.pfGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
@@ -363,19 +310,19 @@ body[data-theme='light'] .pf-artist-support__placeholder {
 }
 
 @media (max-width: 900px) {
-  .pf-grid {
+  .pfGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 600px) {
-  .pf-grid {
+  .pfGrid {
     grid-template-columns: 1fr;
   }
 }
 
 /* --- Card --- */
-.pf-card {
+.pfCard {
   position: relative;
   display: block;
   width: 100%;
@@ -391,12 +338,12 @@ body[data-theme='light'] .pf-artist-support__placeholder {
     box-shadow 0.26s ease;
 }
 
-.pf-card.pf-card--visible {
+.pfCardVisible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.pf-card img {
+.pfCard img {
   display: block;
   width: 100%;
   height: auto;
@@ -406,13 +353,13 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   transition: transform 0.35s, filter 0.35s;
 }
 
-.pf-card:hover img {
+.pfCard:hover img {
   transform: scale(1.02);
   filter: contrast(1.06) saturate(1.06);
 }
 
 /* --- Caption Rail Typography System (Museum-grade) --- */
-.pf-caption-rail {
+.pfCaptionRail {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -420,7 +367,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   margin: 0;
 }
 
-.pf-caption-rail__title {
+.pfCaptionRailTitle {
   margin: 0;
   font-size: 1.05rem;
   font-weight: 700;
@@ -429,7 +376,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   color: inherit;
 }
 
-.pf-caption-rail__meta {
+.pfCaptionRailMeta {
   margin: 0;
   font-size: 0.72rem;
   font-weight: 600;
@@ -442,11 +389,11 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   gap: 8px;
 }
 
-.pf-caption-rail__meta-separator {
+.pfCaptionRailMetaSeparator {
   opacity: 0.5;
 }
 
-.pf-caption-rail__description {
+.pfCaptionRailDescription {
   margin: 6px 0 0;
   font-size: 0.85rem;
   font-weight: 400;
@@ -460,7 +407,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   overflow: hidden;
 }
 
-.pf-caption-rail__location {
+.pfCaptionRailLocation {
   margin: 4px 0 0;
   font-size: 0.7rem;
   font-weight: 500;
@@ -470,24 +417,8 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   letter-spacing: 0.02em;
 }
 
-/* Lightbox-specific caption rail enhancements */
-.pf-lightbox .pf-caption-rail {
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-.pf-lightbox .pf-caption-rail__title {
-  font-size: 1.25rem;
-  font-weight: 800;
-}
-
-.pf-lightbox .pf-caption-rail__description {
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
-}
-
 /* Card overlay - Enhanced for text readability on varied backgrounds */
-.pf-card__overlay {
+.pfCardOverlay {
   position: absolute;
   inset: 0;
   bottom: 0;
@@ -514,11 +445,11 @@ body[data-theme='light'] .pf-artist-support__placeholder {
 }
 
 /* Apply subtle blur on hover to help text stand out */
-.pf-card:hover .pf-card__overlay {
+.pfCard:hover .pfCardOverlay {
   backdrop-filter: blur(1px);
 }
 
-.pf-card__title {
+.pfCardTitle {
   margin: 0 0 4px;
   font-size: 1.05rem;
   font-weight: 700;
@@ -532,7 +463,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   letter-spacing: -0.01em;
 }
 
-.pf-card__meta {
+.pfCardMeta {
   margin: 2px 0 0;
   font-size: 0.72rem;
   font-weight: 600;
@@ -545,11 +476,11 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   gap: 8px;
 }
 
-.pf-card__meta-separator {
+.pfCardMetaSeparator {
   opacity: 0.5;
 }
 
-.pf-card__caption {
+.pfCardCaption {
   margin: 8px 0 0;
   font-size: 0.85rem;
   font-weight: 400;
@@ -566,7 +497,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
 }
 
 /* Card badges */
-.pf-card__anchor {
+.pfCardAnchor {
   position: absolute;
   top: 8px;
   left: 8px;
@@ -588,23 +519,23 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   pointer-events: auto;
 }
 
-.pf-card:hover .pf-card__anchor,
-.pf-card:focus-within .pf-card__anchor {
+.pfCard:hover .pfCardAnchor,
+.pfCard:focus-within .pfCardAnchor {
   opacity: 1;
   transform: scale(1);
 }
 
-.pf-card__anchor:hover {
+.pfCardAnchor:hover {
   background: rgba(255,255,255,0.15);
   border-color: #fff;
 }
 
-.pf-card__anchor svg {
+.pfCardAnchor svg {
   width: 14px;
   height: 14px;
 }
 
-.pf-card__count {
+.pfCardCount {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -623,29 +554,32 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   z-index: 2;
 }
 
-.pf-card__count svg {
+.pfCardCount svg {
   width: 12px;
   height: 12px;
   opacity: 0.7;
   flex-shrink: 0;
 }
 
-.pf-card__published {
+/* Published badge element */
+.pfCardPublished {
   position: absolute;
   top: 8px;
   left: 8px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(4px);
-  padding: 4px 10px 4px 6px;
+  padding: 6px 10px;
   border-radius: 999px;
-  pointer-events: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0,0,0,0.75);
+  border: 1px solid rgba(255,255,255,0.15);
   z-index: 3;
 }
 
-.pf-card__published-dot {
+.pfCardPublishedDot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -653,7 +587,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   flex-shrink: 0;
 }
 
-.pf-card__published-label {
+.pfCardPublishedLabel {
   font-size: 0.68rem;
   font-weight: 600;
   color: #fff;
@@ -661,19 +595,20 @@ body[data-theme='light'] .pf-artist-support__placeholder {
 }
 
 /* When published badge is present, push anchor to right of it */
-.pf-card--published .pf-card__anchor {
+.pfCardPublishedState .pfCardPublished ~ .pfCardAnchor,
+.pfCardPublishedState .pfCardAnchor {
   left: auto;
   right: 8px;
 }
 
 /* --- Load More --- */
-.pf-load-more {
+.pfLoadMore {
   display: flex;
   justify-content: center;
   margin: 24px auto 0;
 }
 
-.pf-load-more__btn {
+.pfLoadMoreBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -691,13 +626,13 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   transition: background 0.24s, border-color 0.24s, transform 0.24s;
 }
 
-.pf-load-more__btn:hover {
+.pfLoadMoreBtn:hover {
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.3);
   transform: translateY(-2px);
 }
 
-.pf-load-more__remaining {
+.pfLoadMoreRemaining {
   background: rgba(255,255,255,0.1);
   padding: 3px 8px;
   border-radius: 999px;
@@ -705,7 +640,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
 }
 
 /* --- Lightbox --- */
-.pf-lightbox {
+.pfLightbox {
   position: fixed;
   inset: 0;
   display: none;
@@ -718,11 +653,11 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.pf-lightbox.pf-lightbox--open {
+.pfLightboxOpen {
   display: flex;
 }
 
-.pf-lightbox__dialog {
+.pfLightboxDialog {
   position: relative;
   max-width: 95vw;
   max-height: 92vh;
@@ -730,7 +665,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   outline: none;
 }
 
-.pf-lightbox__gallery {
+.pfLightboxGallery {
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -741,9 +676,9 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   padding: 20px 4px;
 }
 
-.pf-lightbox__gallery::-webkit-scrollbar { display: none; }
+.pfLightboxGallery::-webkit-scrollbar { display: none; }
 
-.pf-lightbox__img {
+.pfLightboxImg {
   max-width: 90vw;
   max-height: 70vh;
   width: auto;
@@ -756,17 +691,17 @@ body[data-theme='light'] .pf-artist-support__placeholder {
 }
 
 /* Lightbox figure and image caption */
-.pf-lightbox__figure {
+.pfLightboxFigure {
   margin: 0 0 24px;
   padding: 0;
   text-align: center;
 }
 
-.pf-lightbox__figure:last-child {
+.pfLightboxFigure:last-child {
   margin-bottom: 0;
 }
 
-.pf-lightbox__img-caption {
+.pfLightboxImgCaption {
   margin-top: 16px;
   padding: 12px 20px;
   font-size: 0.9rem;
@@ -781,7 +716,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   backdrop-filter: blur(4px);
 }
 
-.pf-lightbox__hint {
+.pfLightboxHint {
   text-align: center;
   color: rgba(255,255,255,0.55);
   font-size: 0.75rem;
@@ -796,12 +731,12 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   align-self: center;
 }
 
-.pf-lightbox__hint.pf-lightbox__hint--hidden {
+.pfLightboxHintHidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.pf-lightbox__caption {
+.pfLightboxCaption {
   text-align: center;
   color: #fff;
   margin-top: 16px;
@@ -810,7 +745,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   padding: 0 8px;
 }
 
-.pf-lightbox__title {
+.pfLightboxTitle {
   margin: 0 0 6px;
   font-size: 1.25rem;
   font-weight: 800;
@@ -818,7 +753,7 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   letter-spacing: -0.01em;
 }
 
-.pf-lightbox__meta {
+.pfLightboxMeta {
   margin: 0 0 8px;
   color: #cfcfcf;
   font-size: 0.72rem;
@@ -831,18 +766,18 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   gap: 8px;
 }
 
-.pf-lightbox__meta-separator {
+.pfLightboxMetaSeparator {
   opacity: 0.5;
 }
 
-.pf-lightbox__description {
+.pfLightboxDescription {
   margin: 0 0 8px;
   color: #e5e5e5;
   font-size: 0.88rem;
   line-height: 1.5;
 }
 
-.pf-lightbox__outlet {
+.pfLightboxOutlet {
   margin: 10px 0 0;
   padding: 10px 14px;
   border-radius: 8px;
@@ -850,16 +785,16 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   border: 1px solid rgba(95, 177, 137, 0.2);
 }
 
-.pf-lightbox__outlet a {
+.pfLightboxOutlet a {
   color: #5fb189;
   text-decoration: none;
   font-size: 0.82rem;
   font-weight: 600;
 }
 
-.pf-lightbox__outlet a:hover { text-decoration: underline; }
+.pfLightboxOutlet a:hover { text-decoration: underline; }
 
-.pf-lightbox__close {
+.pfLightboxClose {
   position: fixed;
   top: max(20px, env(safe-area-inset-top));
   right: max(20px, env(safe-area-inset-right));
@@ -879,23 +814,14 @@ body[data-theme='light'] .pf-artist-support__placeholder {
   transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
 
-.pf-lightbox__close:hover {
+.pfLightboxClose:hover {
   background: rgba(0,0,0,0.88);
   border-color: rgba(255,255,255,0.65);
   transform: scale(1.06);
 }
 
-/* Hide nav/header when lightbox is open */
-html.pf-lb-open nav,
-html.pf-lb-open .mcc-nav,
-html.pf-lb-open header {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
 /* --- Copy toast --- */
-.pf-toast {
+.pfToast {
   position: fixed;
   bottom: 32px;
   left: 50%;
@@ -914,7 +840,7 @@ html.pf-lb-open header {
   transition: opacity 0.3s, transform 0.3s;
 }
 
-.pf-toast.pf-toast--show {
+.pfToastShow {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }

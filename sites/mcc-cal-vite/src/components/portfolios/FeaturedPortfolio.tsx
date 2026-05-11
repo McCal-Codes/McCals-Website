@@ -5,7 +5,7 @@ import { generateId } from '@/utils/portfolio-ids';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
-import '../portfolio/portfolio.css';
+import { portfolioStyles } from '../portfolio';
 
 interface FeaturedImage {
   filename?: string;
@@ -194,21 +194,21 @@ export default function FeaturedPortfolio() {
   }, [groups, activeFilter]);
 
   return (
-    <div className="pf-root">
-      <h2 className="pf-heading">Featured Work</h2>
-      <p className="pf-subheading">
+    <div className={portfolioStyles.pfRoot}>
+      <h2 className={portfolioStyles.pfHeading}>Featured Work</h2>
+      <p className={portfolioStyles.pfSubheading}>
         A curated selection of recent work across concerts, events, and journalism.
       </p>
 
       {status === 'loading' && (
-        <div className="pf-loading">
-          <span className="pf-spinner" />
+        <div className={portfolioStyles.pfLoading}>
+          <span className={portfolioStyles.pfSpinner} />
           Loading featured work…
         </div>
       )}
 
       {status === 'error' && (
-        <div className="pf-error">
+        <div className={portfolioStyles.pfError}>
           <span>Failed to load portfolio.</span>
           <span style={{ fontSize: '0.82rem', opacity: 0.7 }}>{error}</span>
         </div>

@@ -4,7 +4,7 @@ import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
-import '../portfolio/portfolio.css';
+import { portfolioStyles } from '../portfolio';
 
 // ── Manifest shape ────────────────────────────────────────────────────────────
 
@@ -91,21 +91,21 @@ export default function JournalismPortfolio() {
   }, [groups, activeFilter]);
 
   return (
-    <div className="pf-root">
-      <h2 className="pf-heading">Photojournalism</h2>
-      <p className="pf-subheading">
+    <div className={portfolioStyles.pfRoot}>
+      <h2 className={portfolioStyles.pfHeading}>Photojournalism</h2>
+      <p className={portfolioStyles.pfSubheading}>
         Political events, sports, and community coverage. Use the filters to browse by category or view published work.
       </p>
 
       {status === 'loading' && (
-        <div className="pf-loading">
-          <span className="pf-spinner" />
+        <div className={portfolioStyles.pfLoading}>
+          <span className={portfolioStyles.pfSpinner} />
           Loading journalism portfolio…
         </div>
       )}
 
       {status === 'error' && (
-        <div className="pf-error">
+        <div className={portfolioStyles.pfError}>
           <span>Failed to load portfolio.</span>
           <span style={{ fontSize: '0.82rem', opacity: 0.7 }}>{error}</span>
         </div>

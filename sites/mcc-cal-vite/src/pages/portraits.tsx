@@ -1,10 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Layout } from '@/components';
-import { PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl } from '@/components/portfolio';
+import { PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl, portfolioStyles } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
-import '@/components/portfolio/portfolio.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const ALL = 'All';
@@ -110,25 +109,25 @@ export default function PortraitsPage() {
 
   return (
     <Layout>
-      <div className="pf-root">
-        <p className="pf-subheading text-center mb-0">
+      <div className={portfolioStyles.pfRoot}>
+        <p className={`${portfolioStyles.pfSubheading} text-center mb-0`}>
           Pittsburgh Headshot Photographer
         </p>
-        <h1 className="pf-heading">Portraits & Headshots</h1>
-        <p className="pf-intro">
+        <h1 className={portfolioStyles.pfHeading}>Portraits & Headshots</h1>
+        <p className={portfolioStyles.pfIntro}>
           On-location headshot and portrait photography for executives, creatives, teams, and
           editorial stories, with clean professional portraits that still feel like you.
         </p>
 
         {status === 'loading' && (
-          <div className="pf-loading">
-            <span className="pf-spinner" aria-hidden="true" />
+          <div className={portfolioStyles.pfLoading}>
+            <span className={portfolioStyles.pfSpinner} aria-hidden="true" />
             Loading...
           </div>
         )}
 
         {status === 'error' && (
-          <div className="pf-error">
+          <div className={portfolioStyles.pfError}>
             <span>Failed to load portraits portfolio.</span>
             <span className="text-xs opacity-70">{error}</span>
           </div>

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { portfolioStyles } from './index';
 
 interface PortfolioLoadMoreProps {
   remaining: number;
@@ -9,10 +10,10 @@ const PortfolioLoadMore: FC<PortfolioLoadMoreProps> = ({ remaining, onLoadMore }
   if (remaining <= 0) return null;
 
   return (
-    <div className="pf-load-more">
-      <button type="button" className="pf-load-more__btn" onClick={onLoadMore}>
+    <div className={portfolioStyles.pfLoadMore}>
+      <button type="button" className={portfolioStyles.pfLoadMoreBtn} onClick={onLoadMore}>
         <span>Load More</span>
-        <span className="pf-load-more__remaining">+{remaining}</span>
+        <span className={portfolioStyles.pfLoadMoreRemaining}>+{remaining}</span>
       </button>
     </div>
   );

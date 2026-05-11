@@ -2,6 +2,7 @@ import './styles/globals.css';
 import './styles/nav.css';
 import './styles/footer.css';
 import './styles/abridged.css';
+import '@/components/portfolio/portfolio-global.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

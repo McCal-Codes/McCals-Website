@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback, type FC } from 'react';
 import type { PortfolioGroup } from './types';
+import { portfolioStyles } from './index';
 
 interface PortfolioLightboxProps {
   group: PortfolioGroup | null;
@@ -56,7 +57,7 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     const gallery = galleryRef.current;
     if (!gallery) return;
     const hideHint = () => {
-      hintRef.current?.classList.add('pf-lightbox__hint--hidden');
+      hintRef.current?.classList.add(portfolioStyles.pfLightboxHintHidden);
       gallery.removeEventListener('scroll', hideHint);
     };
     gallery.addEventListener('scroll', hideHint, { passive: true });
@@ -67,7 +68,7 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   useEffect(() => {
     if (!isOpen) return;
     galleryRef.current?.scrollTo({ top: 0 });
-    hintRef.current?.classList.remove('pf-lightbox__hint--hidden');
+    hintRef.current?.classList.remove(portfolioStyles.pfLightboxHintHidden);
   }, [group, isOpen]);
 
   if (!group) return null;
@@ -81,7 +82,7 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
 
   return (
     <div
-      className={`pf-lightbox${isOpen ? ' pf-lightbox--open' : ''}`}
+      className={`${portfolioStyles.pfLightbox}${isOpen ? ` ${portfolioStyles.pfLightboxOpen}` : ''}`}
       aria-modal="true"
       role="dialog"
       aria-label={group.title}
@@ -89,32 +90,32 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     >
       <button
         type="button"
-        className="pf-lightbox__close"
+        className={portfolioStyles.pfLightboxClose}
         aria-label="Close lightbox"
         onClick={onClose}
       >
         ×
       </button>
 
-      <div ref={dialogRef} className="pf-lightbox__dialog" tabIndex={-1}>
-        <div ref={galleryRef} className="pf-lightbox__gallery">
+      <div ref={dialogRef} className={portfolioStyles.pfLightboxDialog} tabIndex={-1}>
+        <div ref={galleryRef} className={portfolioStyles.pfLightboxGallery}>
           {hasMultiple && (
-            <div ref={hintRef} className="pf-lightbox__hint" aria-hidden="true">
+            <div ref={hintRef} className={portfolioStyles.pfLightboxHint} aria-hidden="true">
               Scroll Up / Down
             </div>
           )}
 
           {group.images.map((img, i) => (
-            <figure key={img.filename} className="pf-lightbox__figure">
+            <figure key={img.filename} className={portfolioStyles.pfLightboxFigure}>
               <img
                 src={img.url}
                 alt={img.alt ?? `${group.title} — photo ${i + 1}`}
-                className="pf-lightbox__img"
+                className={portfolioStyles.pfLightboxImg}
                 loading={i < 2 ? 'eager' : 'lazy'}
                 decoding={i < 2 ? 'sync' : 'async'}
               />
               {img.caption && (
-                <figcaption className="pf-lightbox__img-caption">
+                <figcaption className={portfolioStyles.pfLightboxImgCaption}>
                   {img.caption}
                 </figcaption>
               )}
@@ -122,24 +123,24 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
           ))}
         </div>
 
-        <div className="pf-lightbox__caption">
-          <div className="pf-caption-rail">
-            <h3 className="pf-caption-rail__title">{group.title}</h3>
+        <div className={portfolioStyles.pfLightboxCaption}>
+          <div className={portfolioStyles.pfCaptionRail}>
+            <h3 className={portfolioStyles.pfCaptionRailTitle}>{group.title}</h3>
 
             {(group.dateDisplay || group.category) && (
-              <p className="pf-caption-rail__meta">
+              <p className={portfolioStyles.pfCaptionRailMeta}>
                 {group.dateDisplay && <span>{group.dateDisplay}</span>}
-                {group.dateDisplay && group.category && <span className="pf-caption-rail__meta-separator">•</span>}
+                {group.dateDisplay && group.category && <span className={portfolioStyles.pfCaptionRailMetaSeparator}>•</span>}
                 {group.category && <span>{group.category}</span>}
               </p>
             )}
 
             {summaryText && (
-              <p className="pf-caption-rail__description">{summaryText}</p>
+              <p className={portfolioStyles.pfCaptionRailDescription}>{summaryText}</p>
             )}
 
             {group.published && group.outletName && (
-              <div className="pf-lightbox__outlet">
+              <div className={portfolioStyles.pfLightboxOutlet}>
                 {group.articleUrl ? (
                   <a href={group.articleUrl} target="_blank" rel="noopener noreferrer">
                     Published in {group.outletName} →

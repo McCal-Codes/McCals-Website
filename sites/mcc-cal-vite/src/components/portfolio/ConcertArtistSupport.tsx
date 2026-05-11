@@ -1,4 +1,5 @@
 import { useMemo, useState, type FC } from 'react';
+import { portfolioStyles } from './index';
 
 interface ConcertBandSummary {
   bandName: string;
@@ -65,10 +66,10 @@ const ConcertArtistSupport: FC<ConcertArtistSupportProps> = ({ bands }) => {
   if (artists.length === 0) return null;
 
   return (
-    <section className={`pf-artist-support${open ? ' pf-artist-support--open' : ''}`}>
+    <section className={`${portfolioStyles.pfArtistSupport}${open ? ` ${portfolioStyles.pfArtistSupportOpen}` : ''}`}>
       <button
         type="button"
-        className="pf-artist-support__toggle"
+        className={portfolioStyles.pfArtistSupportToggle}
         aria-expanded={open}
         aria-controls="concert-artist-support-panel"
         onClick={() => setOpen((current) => !current)}
@@ -79,14 +80,14 @@ const ConcertArtistSupport: FC<ConcertArtistSupportProps> = ({ bands }) => {
       {open && (
         <div
           id="concert-artist-support-panel"
-          className="pf-artist-support__panel"
+          className={portfolioStyles.pfArtistSupportPanel}
           role="region"
           aria-label="Support the artists"
         >
-          <div className="pf-artist-support__panel-header">
+          <div className={portfolioStyles.pfArtistSupportPanelHeader}>
             <div>
-              <h2 className="pf-artist-support__title">Support the Artists</h2>
-              <p className="pf-artist-support__intro">
+              <h2 className={portfolioStyles.pfArtistSupportTitle}>Support the Artists</h2>
+              <p className={portfolioStyles.pfArtistSupportIntro}>
                 Open each artist on Spotify. Embedded previews appear when a Spotify artist ID is
                 already mapped from the original widget.
               </p>
@@ -94,7 +95,7 @@ const ConcertArtistSupport: FC<ConcertArtistSupportProps> = ({ bands }) => {
 
             <button
               type="button"
-              className="pf-artist-support__close"
+              className={portfolioStyles.pfArtistSupportClose}
               aria-label="Close artist support panel"
               onClick={() => setOpen(false)}
             >
@@ -102,22 +103,22 @@ const ConcertArtistSupport: FC<ConcertArtistSupportProps> = ({ bands }) => {
             </button>
           </div>
 
-          <ul className="pf-artist-support__list">
+          <ul className={portfolioStyles.pfArtistSupportList}>
             {artists.map((artist) => {
               const searchUrl = `https://open.spotify.com/search/${encodeURIComponent(artist.displayName)}`;
 
               return (
-                <li key={artist.displayName} className="pf-artist-support__item">
-                  <div className="pf-artist-support__item-header">
-                    <div className="pf-artist-support__meta">
-                      <h3 className="pf-artist-support__name">{artist.displayName}</h3>
+                <li key={artist.displayName} className={portfolioStyles.pfArtistSupportItem}>
+                  <div className={portfolioStyles.pfArtistSupportItemHeader}>
+                    <div className={portfolioStyles.pfArtistSupportMeta}>
+                      <h3 className={portfolioStyles.pfArtistSupportName}>{artist.displayName}</h3>
                       {artist.dateDisplay && (
-                        <p className="pf-artist-support__date">{artist.dateDisplay}</p>
+                        <p className={portfolioStyles.pfArtistSupportDate}>{artist.dateDisplay}</p>
                       )}
                     </div>
 
                     <a
-                      className="pf-artist-support__link"
+                      className={portfolioStyles.pfArtistSupportLink}
                       href={searchUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -128,14 +129,14 @@ const ConcertArtistSupport: FC<ConcertArtistSupportProps> = ({ bands }) => {
 
                   {artist.spotifyArtistId ? (
                     <iframe
-                      className="pf-artist-support__embed"
+                      className={portfolioStyles.pfArtistSupportEmbed}
                       src={`https://open.spotify.com/embed/artist/${encodeURIComponent(artist.spotifyArtistId)}?utm_source=generator&theme=0`}
                       title={`Spotify player for ${artist.displayName}`}
                       loading="lazy"
                       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     />
                   ) : (
-                    <div className="pf-artist-support__placeholder">
+                    <div className={portfolioStyles.pfArtistSupportPlaceholder}>
                       No embedded Spotify preview is mapped yet. Use Open to search the artist.
                     </div>
                   )}

@@ -1,0 +1,85 @@
+/* ============================================================
+   Portfolio Global Styles (Theme-specific and HTML-level)
+   These styles must remain global because they target:
+   - body[data-theme] for light/dark mode
+   - html.pf-lb-open for lightbox state
+   ============================================================ */
+
+/* --- Light theme overrides for filters --- */
+body[data-theme='light'] .pfFilterBtn {
+  border-color: rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.03);
+}
+
+body[data-theme='light'] .pfFilterBtn:hover {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.2);
+}
+
+body[data-theme='light'] .pfFilterBtn[aria-pressed='true'],
+body[data-theme='light'] .pfFilterBtnActive {
+  background: #0a0a0a;
+  color: #fff;
+  border-color: #0a0a0a;
+}
+
+/* --- Light theme overrides for artist support --- */
+body[data-theme='light'] .pfArtistSupportToggle {
+  border-color: rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.03);
+}
+
+body[data-theme='light'] .pfArtistSupportToggle:hover {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.18);
+}
+
+body[data-theme='light'] .pfArtistSupportPanel {
+  border-color: rgba(0,0,0,0.08);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)),
+    rgba(255,255,255,0.82);
+}
+
+body[data-theme='light'] .pfArtistSupportItem {
+  border-color: rgba(0,0,0,0.08);
+  background: rgba(0,0,0,0.02);
+}
+
+body[data-theme='light'] .pfArtistSupportClose {
+  border-color: rgba(0,0,0,0.12);
+}
+
+body[data-theme='light'] .pfArtistSupportClose:hover {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.18);
+}
+
+body[data-theme='light'] .pfArtistSupportPlaceholder {
+  border-color: rgba(0,0,0,0.12);
+}
+
+/* --- Lightbox open state (applied to HTML element) --- */
+html.pf-lb-open nav,
+html.pf-lb-open .mcc-nav,
+html.pf-lb-open header {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* --- Lightbox caption rail enhancements --- */
+.pfLightbox .pfCaptionRail {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.pfLightbox .pfCaptionRailTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.pfLightbox .pfCaptionRailDescription {
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}

@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, lazy, Suspense, type FC } from 'react';
 import type { PortfolioGroup } from './types';
 import PortfolioCard from './PortfolioCard';
 import PortfolioLoadMore from './PortfolioLoadMore';
+import { portfolioStyles } from './index';
 
 // Lazy load lightbox - only loaded when user clicks an image
 const PortfolioLightbox = lazy(() => import('./PortfolioLightbox'));
@@ -37,7 +38,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
 
   if (groups.length === 0) {
     return (
-      <div className="pf-grid-empty" role="status" aria-live="polite">
+      <div className={portfolioStyles.pfGrid} role="status" aria-live="polite">
         <p>No portfolio items found.</p>
       </div>
     );
@@ -45,7 +46,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
 
   return (
     <>
-      <div className="pf-grid">
+      <div className={portfolioStyles.pfGrid}>
         {shown.map((group) => (
           <PortfolioCard
             key={group.id}
@@ -68,7 +69,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
       )}
 
       <div
-        className={`pf-toast${toastVisible ? ' pf-toast--show' : ''}`}
+        className={`${portfolioStyles.pfToast}${toastVisible ? ` ${portfolioStyles.pfToastShow}` : ''}`}
         aria-live="polite"
         aria-atomic="true"
       >

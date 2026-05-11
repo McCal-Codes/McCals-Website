@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { portfolioStyles } from './index';
 
 interface PortfolioFiltersProps {
   filters: string[];
@@ -10,13 +11,13 @@ const PortfolioFilters: FC<PortfolioFiltersProps> = ({ filters, active, onChange
   if (filters.length === 0) return null;
 
   return (
-    <div className="pf-filters" role="tablist" aria-label="Portfolio filters">
+    <div className={portfolioStyles.pfFilters} role="tablist" aria-label="Portfolio filters">
       {filters.map((f) => (
         <button
           key={f}
           role="tab"
           type="button"
-          className="pf-filter-btn"
+          className={portfolioStyles.pfFilterBtn}
           aria-pressed={active === f}
           onClick={() => onChange(f)}
         >

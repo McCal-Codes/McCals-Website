@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Layout } from '@/components';
-import { PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl } from '@/components/portfolio';
+import { PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl, portfolioStyles } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import '@/components/portfolio/portfolio.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const ALL = 'All';
@@ -92,21 +91,21 @@ export default function NaturePage() {
 
   return (
     <Layout>
-      <div className="pf-root">
-        <p className="pf-subheading text-center mb-0">
+      <div className={portfolioStyles.pfRoot}>
+        <p className={`${portfolioStyles.pfSubheading} text-center mb-0`}>
           Nature Photography
         </p>
-        <h1 className="pf-heading">Wildlife & Landscapes</h1>
+        <h1 className={portfolioStyles.pfHeading}>Wildlife & Landscapes</h1>
 
         {status === 'loading' && (
-          <div className="pf-loading">
-            <span className="pf-spinner" aria-hidden="true" />
+          <div className={portfolioStyles.pfLoading}>
+            <span className={portfolioStyles.pfSpinner} aria-hidden="true" />
             Loading...
           </div>
         )}
 
         {status === 'error' && (
-          <div className="pf-error">
+          <div className={portfolioStyles.pfError}>
             <span>Failed to load nature portfolio.</span>
             <span className="text-xs opacity-70">{error}</span>
           </div>
