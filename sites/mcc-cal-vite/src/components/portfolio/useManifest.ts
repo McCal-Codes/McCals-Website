@@ -41,6 +41,7 @@ function toLocalUrl(repoRelativePath: string): string {
   const url = `/${repoRelativePath}`;
   if (IS_DEV) {
     // Debug logging in development only
+    // console.log(`Local URL: ${url}`);
   }
   return url;
 }
