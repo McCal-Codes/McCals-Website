@@ -1,0 +1,78 @@
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  min-height: 300px;
+}
+
+.emptyStateIcon {
+  width: 48px;
+  height: 48px;
+  color: #9ca3af;
+  margin-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
+.emptyStateTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+.emptyStateDescription {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.emptyStateAction {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  background-color: #1f2937;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.emptyStateAction:hover {
+  background-color: #111827;
+  transform: translateY(-1px);
+}
+
+.emptyStateAction:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .emptyState {
+    padding: 3rem 1.5rem;
+    min-height: 250px;
+  }
+  
+  .emptyStateIcon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+  }
+  
+  .emptyStateTitle {
+    font-size: 1.125rem;
+  }
+  
+  .emptyStateDescription {
+    font-size: 0.9375rem;
+  }
+}

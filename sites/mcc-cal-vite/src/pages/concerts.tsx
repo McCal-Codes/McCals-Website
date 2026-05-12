@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Layout } from '@/components';
 import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl, portfolioStyles } from '@/components/portfolio';
+import EmptyState from '@/components/portfolio/EmptyState';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
@@ -131,13 +132,30 @@ export default function ConcertsPage() {
 
         {status === 'success' && (
           <>
-            <ConcertArtistSupport bands={data?.bands ?? []} />
-            <PortfolioFilters
-              filters={filters.filter((filter): filter is string => typeof filter === 'string')}
-              active={activeFilter}
-              onChange={setActiveFilter}
-            />
-            <PortfolioGrid groups={filtered} />
+            {filtered.length === 0 ? (
+              <EmptyState 
+                type="concerts"
+                title="No Concerts Found"
+                description={activeFilter === ALL 
+                  ? "No concerts are currently available. Check back soon for new live music photography from Pittsburgh venues and touring acts."
+                  : `No concerts found for ${activeFilter}. Try selecting a different year or view all concerts.`
+                }
+                action={{
+                  text: activeFilter === ALL ? "View Other Work" : "View All Concerts",
+                  href: activeFilter === ALL ? "/journalism" : "/concerts"
+                }}
+              />
+            ) : (
+              <>
+                <ConcertArtistSupport bands={data?.bands ?? []} />
+                <PortfolioFilters
+                  filters={filters.filter((filter): filter is string => typeof filter === 'string')}
+                  active={activeFilter}
+                  onChange={setActiveFilter}
+                />
+                <PortfolioGrid groups={filtered} />
+              </>
+            )}
           </>
         )}
       </div>

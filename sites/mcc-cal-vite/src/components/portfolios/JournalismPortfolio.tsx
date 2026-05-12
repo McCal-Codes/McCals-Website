@@ -5,6 +5,7 @@ import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
 import { portfolioStyles } from '../portfolio';
+import EmptyState from '../portfolio/EmptyState';
 
 // ── Manifest shape ────────────────────────────────────────────────────────────
 
@@ -113,12 +114,29 @@ export default function JournalismPortfolio() {
 
       {status === 'success' && (
         <>
-          <PortfolioFilters
-            filters={filters}
-            active={activeFilter}
-            onChange={setActiveFilter}
-          />
-          <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
+          {filtered.length === 0 ? (
+            <EmptyState 
+              type="journalism"
+              title="No Journalism Found"
+              description={activeFilter === ALL 
+                ? "No published journalism work is currently available. Check back for political events, sports coverage, and community stories from Pittsburgh and beyond."
+                : `No journalism found in ${activeFilter}. Try selecting a different category or view all published work.`
+              }
+              action={{
+                text: activeFilter === ALL ? "View Concert Photography" : "View All Journalism",
+                href: activeFilter === ALL ? "/concerts" : "/journalism"
+              }}
+            />
+          ) : (
+            <>
+              <PortfolioFilters
+                filters={filters}
+                active={activeFilter}
+                onChange={setActiveFilter}
+              />
+              <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
+            </>
+          )}
         </>
       )}
     </div>

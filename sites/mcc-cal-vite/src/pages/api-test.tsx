@@ -14,7 +14,7 @@ interface TestResult {
   status: 'pending' | 'success' | 'error' | 'warning';
   message: string;
   duration?: number;
-  details?: Record<string, unknown>;
+  details?: unknown;
 }
 
 interface APIHealth {
@@ -377,7 +377,7 @@ export default function APITestPage() {
                     {test.name}
                   </h3>
                   <p className="m-0 mb-1.25 text-gray-600">{test.message}</p>
-                  {test.details && (
+                  {typeof test.details === 'object' && test.details !== null && (
                     <pre className="mt-1.25 text-xs text-gray-500 bg-gray-50 p-1.25 rounded overflow-auto">
                       {JSON.stringify(test.details, null, 2)}
                     </pre>
