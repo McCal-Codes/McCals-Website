@@ -1,11 +1,10 @@
-import { defineConfig } from 'vite';
-import type { Plugin } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { resolve } from 'path';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { visualizer } from 'rollup-plugin-visualizer';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,13 +23,13 @@ function copyPublicSkipDeadFolder(): Plugin {
     let entries: fs.Dirent[];
     try {
       entries = fs.readdirSync(dir, { withFileTypes: true });
-    } catch (e) {
-      console.warn(`[vite] public copy: skip unreadable ${dir}`, e);
+    } catch {
+      // Skip unreadable directories silently
       return;
     }
     for (const ent of entries) {
       if (ent.name === SKIP_DIR_NAME) {
-        console.warn(`[vite] public copy: skipping locked folder ${path.join(dir, ent.name)}`);
+        // Skip locked folder silently
         continue;
       }
       const relNext = rel ? path.join(rel, ent.name) : ent.name;
@@ -101,7 +100,7 @@ const servePortfolioImages = () => ({
         } else {
           next();
         }
-      } catch (err) {
+      } catch {
         next();
       }
     });
