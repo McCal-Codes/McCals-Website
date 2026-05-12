@@ -1,4 +1,7 @@
-import { Nav, Footer, HeroCarousel } from '@/components';
+import { Nav, Footer } from '@/components';
+import { lazy, Suspense } from 'react';
+
+const HeroCarousel = lazy(() => import('@/components/HeroCarousel.lazy'));
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { LIVE_SITE_HOME_FEATURED_ITEMS } from '@/content/liveSiteFallbacks';
 import {
@@ -84,7 +87,9 @@ const HomePage = () => {
     <div className="site-layout pt-0">
       <Nav />
       <main className="site-main mt-0">
-        <HeroCarousel />
+        <Suspense fallback={<div className="hero-carousel-skeleton" style={{ height: '70vh', background: 'linear-gradient(135deg, #1f2937 0%, #374151 100%)' }} />}>
+          <HeroCarousel />
+        </Suspense>
       </main>
       <Footer />
     </div>

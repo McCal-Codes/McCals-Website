@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Layout } from '@/components';
 import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl, portfolioStyles } from '@/components/portfolio';
 import EmptyState from '@/components/portfolio/EmptyState';
+import PortfolioSkeleton from '@/components/LoadingStates/PortfolioSkeleton';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
@@ -117,10 +118,7 @@ export default function ConcertsPage() {
         </p>
 
         {status === 'loading' && (
-          <div className={portfolioStyles.pfLoading}>
-            <span className={portfolioStyles.pfSpinner} aria-hidden="true" />
-            Loading...
-          </div>
+          <PortfolioSkeleton showFilters={true} count={6} />
         )}
 
         {status === 'error' && (

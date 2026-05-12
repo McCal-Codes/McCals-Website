@@ -6,6 +6,7 @@ import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
 import { portfolioStyles } from '../portfolio';
 import EmptyState from '../portfolio/EmptyState';
+import PortfolioSkeleton from '../LoadingStates/PortfolioSkeleton';
 
 // ── Manifest shape ────────────────────────────────────────────────────────────
 
@@ -99,10 +100,7 @@ export default function JournalismPortfolio() {
       </p>
 
       {status === 'loading' && (
-        <div className={portfolioStyles.pfLoading}>
-          <span className={portfolioStyles.pfSpinner} />
-          Loading journalism portfolio…
-        </div>
+        <PortfolioSkeleton showFilters={true} count={8} />
       )}
 
       {status === 'error' && (
