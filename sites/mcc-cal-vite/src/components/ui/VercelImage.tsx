@@ -1,4 +1,5 @@
 import { forwardRef, useState, type ImgHTMLAttributes } from 'react';
+import ImageSpinner from './ImageSpinner';
 
 interface VercelImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -95,24 +96,45 @@ const VercelImage = forwardRef<HTMLImageElement, VercelImageProps>(
     const finalSrc = imageError && fallbackSrc ? fallbackSrc : optimizedSrc;
 
     return (
-      <img
-        ref={ref}
-        src={finalSrc}
-        alt={alt}
-        className={className}
-        loading={loadingStrategy}
-        decoding={decodingStrategy}
-        onError={handleError}
-        onLoad={handleLoad}
+      <div 
+        className="relative inline-block"
         style={{
           ...style,
           // Ensure proper aspect ratio if dimensions are provided
           ...(width && height ? { aspectRatio: `${width}/${height}` } : {}),
-          // Add loading state styling
-          ...(imageLoaded ? {} : { opacity: 0, transition: 'opacity 0.3s ease-in-out' }),
         }}
-        {...props}
-      />
+      >
+        {/* Loading spinner */}
+        {!imageLoaded && (
+          <div 
+            className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800"
+            style={{ zIndex: 1 }}
+          >
+            <ImageSpinner size={width && width < 200 ? 'small' : 'medium'} />
+          </div>
+        )}
+        
+        {/* Image */}
+        <img
+          ref={ref}
+          src={finalSrc}
+          alt={alt}
+          className={className}
+          loading={loadingStrategy}
+          decoding={decodingStrategy}
+          onError={handleError}
+          onLoad={handleLoad}
+          style={{
+            // Add loading state styling
+            ...(imageLoaded ? {} : { opacity: 0 }),
+            transition: 'opacity 0.3s ease-in-out',
+            display: 'block',
+            width: '100%',
+            height: '100%',
+          }}
+          {...props}
+        />
+      </div>
     );
   }
 );

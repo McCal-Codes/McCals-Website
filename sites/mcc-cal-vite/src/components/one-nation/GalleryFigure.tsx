@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { GalleryPlacement } from '@/types/one-nation';
 import { ImageWithErrorBoundary } from './ImageWithErrorBoundary';
 import styles from '@/pages/one-nation-divided.module.css';
@@ -18,7 +19,7 @@ type GalleryFigureProps = {
   credit?: string;
 };
 
-export function GalleryFigure({
+const GalleryFigure = memo(function GalleryFigure({
   id,
   src,
   width,
@@ -67,4 +68,6 @@ export function GalleryFigure({
       </figcaption>
     </figure>
   );
-}
+});
+
+export default GalleryFigure;
