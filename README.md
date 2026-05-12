@@ -1,38 +1,48 @@
-# McCal Media – Squarespace Widget Development Workspace
-
-This repository hosts the development workspace for McCal Media's Squarespace widgets. It includes the widget source files, a local test site, automation scripts, and standards that keep contributions consistent and production-ready.
-
-**Start here:** [docs/ONBOARDING.md](docs/ONBOARDING.md) → [docs/standards/workspace-organization.md](docs/standards/workspace-organization.md) → [docs/bookmarks.md](docs/bookmarks.md) → [docs/repo-improvement-plan.md](docs/repo-improvement-plan.md)
-
-Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/standards/security-organization-prompt.md` or the quick `docs/standards/security-organization-checklist.md`.
-
-## Getting Started
-
-**Requirements:** Node.js 20.19+ and npm.
-
-
 # McCal Media Website
 
 This repository contains the source code and documentation for the McCal Media website. The main site is built with Vite and serves as the public-facing portfolio and project hub. Legacy widget code is archived and no longer the focus of development.
 
+## Quick Start
+
+**Requirements:** Node.js 20.19+ and npm.
+
+1. Install dependencies: `npm install`
+2. Start the dev server for the production site: `cd sites/mcc-cal-vite && npm run dev`
+3. Open [http://localhost:5173](http://localhost:5173) to view the site.
+
 ## Project Structure
 
-- `mcc-cal-vite/` — **Production site** (Vite-based, main public site)
+- `sites/mcc-cal-vite/` — **Production site** (Vite-based, main public site)
 - `sites/dev.mcc-cal.com/` — **Dev/Preview site** (Next.js, for local development and previews)
 - `src/` — Shared source code (images, data, API, widgets [archived])
 - `docs/` — Documentation, standards, and migration notes
 - `scripts/` — Build, manifest, and utility scripts
 
-## Quick Start
+## Development
 
-1. Install dependencies: `npm install`
-2. Start the dev server for the production site: `cd mcc-cal-vite && npm run dev`
-3. Open [http://localhost:3000](http://localhost:3000) to view the site.
+**Available Scripts:**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm run test:e2e` - Run end-to-end tests
+
+**Code Quality:**
+- TypeScript for type safety
+- ESLint for code standards
+- Prettier for formatting
+- Component-based architecture with React
+
+**Performance Features:**
+- Lazy loading for large components
+- Image optimization and CDN delivery
+- Skeleton loaders for portfolio grids
+- Code splitting for better bundle sizes
 
 ## Sites
 
-- **Production Site (`mcc-cal-vite`)**: The main site, built with Vite. All new content and features are developed here.
-- **Dev/Preview Site (`dev.mcc-cal.com`)**: Next.js-based preview and development harness. Use for local development, previews, and testing before production deployment.
+- **Production Site (`sites/mcc-cal-vite`)**: The main site, built with Vite. All new content and features are developed here.
+- **Dev/Preview Site (`sites/dev.mcc-cal.com`)**: Next.js-based preview and development harness. Use for local development, previews, and testing before production deployment.
 
 ## Legacy Widgets (Archived)
 
