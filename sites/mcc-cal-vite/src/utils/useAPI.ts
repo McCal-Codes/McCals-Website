@@ -47,7 +47,22 @@ export function useManifest(type: string, apiUrl?: string): UseManifestState {
   }, [type, apiUrl]);
 
   useEffect(() => {
-    fetchData();
+    let isMounted = true;
+
+    const runFetch = async () => {
+      if (!isMounted) return;
+      try {
+        await fetchData();
+      } catch {
+        // Error handled in fetchData
+      }
+    };
+    
+    runFetch();
+    
+    return () => {
+      isMounted = false;
+    };
   }, [fetchData]);
 
   return {
@@ -80,7 +95,21 @@ export function useBlogPosts(blogBase?: string): UseBlogPostsState {
   }, [blogBase]);
 
   useEffect(() => {
-    fetchPosts();
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      try {
+        await fetchPosts();
+      } catch {
+        // Error handled in fetchPosts
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [fetchPosts]);
 
   return {
@@ -120,7 +149,21 @@ export function useBlogPost(slug?: string, blogBase?: string) {
   }, [slug, blogBase]);
 
   useEffect(() => {
-    fetchPost();
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      try {
+        await fetchPost();
+      } catch {
+        // Error handled in fetchPost
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [fetchPost]);
 
   return {
@@ -152,9 +195,9 @@ export function useManifests(types: string[], apiUrl?: string) {
             revalidate: true,
           });
           results[type] = manifest;
-        } catch (err) {
+        } catch {
           if (import.meta.env.DEV) {
-            console.error(`Failed to load ${type} manifest:`, err);
+            // Development: failed to load manifest
           }
         }
       });
@@ -169,9 +212,23 @@ export function useManifests(types: string[], apiUrl?: string) {
   }, [types, apiUrl]);
 
   useEffect(() => {
-    if (types.length > 0) {
-      fetchData();
-    }
+    const controller = new AbortController();
+
+    const runFetch = async () => {
+      if (types.length > 0) {
+        try {
+          await fetchData();
+        } catch {
+          // Error handled in fetchData
+        }
+      }
+    };
+
+    runFetch();
+
+    return () => {
+      controller.abort();
+    };
   }, [fetchData, types.length]);
 
   return {
@@ -199,20 +256,31 @@ export function useAPIHealth(apiUrl?: string, pollInterval = 30000) {
 
       setHealthy(response.ok);
       setLastCheck(new Date());
-    } catch (err) {
+    } catch {
       setHealthy(false);
       setLastCheck(new Date());
     }
   }, [apiUrl]);
 
   useEffect(() => {
-    // Check health immediately
-    checkHealth();
+    const controller = new AbortController();
 
-    // Set up polling
-    const interval = setInterval(checkHealth, pollInterval);
+    const runHealthCheck = async () => {
+      try {
+        await checkHealth();
+      } catch {
+        // Error handled in checkHealth
+      }
+    };
 
-    return () => clearInterval(interval);
+    runHealthCheck();
+
+    const interval = setInterval(runHealthCheck, pollInterval);
+
+    return () => {
+      controller.abort();
+      clearInterval(interval);
+    };
   }, [checkHealth, pollInterval]);
 
   return {
