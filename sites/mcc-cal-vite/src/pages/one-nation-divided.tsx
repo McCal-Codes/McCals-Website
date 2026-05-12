@@ -1,14 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense, useRef } from 'react';
 import { Layout } from '@/components';
 import { imageUrl } from '@/components/portfolio';
 import { Link } from 'react-router-dom';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { PDFViewer } from '@/components/PDFViewer';
+import { useReadingProgress } from '@/hooks/useReadingProgress';
+import { injectCriticalCSS } from '@/utils/criticalCSS';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { GalleryFigure } from '@/components/one-nation/GalleryFigure';
+
+// Dynamic import for PDFViewer to reduce initial bundle size
+const PDFViewer = lazy(() => import('@/components/PDFViewer').then(module => ({ default: module.PDFViewer })));
+import GalleryFigure from '@/components/one-nation/GalleryFigure';
 import { FieldNoteCard } from '@/components/one-nation/FieldNoteCard';
 import { ProseSection } from '@/components/one-nation/ProseSection';
 import { ThemedLink } from '@/components/one-nation/ThemedLink';
+import { TableOfContents } from '@/components/one-nation/TableOfContents';
 import type { DisplayImage, TrailImage, ProseInlinePhotoProps } from '@/types/one-nation';
 import styles from './one-nation-divided.module.css';
 
@@ -481,6 +486,9 @@ const SOURCES_CONTEXT: { label: string; href: string; detail: string }[] = [
 ];
 
 const OneNationDividedPage = () => {
+  const mainRef = useRef<HTMLDivElement>(null);
+  const readingProgress = useReadingProgress();
+  
   usePageMeta({
     title: 'One Nation Divided (Letting Me Go) | Thesis & Exhibition | Caleb McCartney',
     description:
@@ -529,15 +537,69 @@ const OneNationDividedPage = () => {
 
   // Add body class for nav styling on this page only
   useEffect(() => {
+    if (typeof document === 'undefined') return;
+    
     document.body.classList.add('lmgo-active');
+    injectCriticalCSS();
+    
+    // Add print stylesheet
+    const printLink = document.createElement('link');
+    printLink.rel = 'stylesheet';
+    printLink.type = 'text/css';
+    printLink.media = 'print';
+    printLink.href = '/src/pages/one-nation-divided.print.css';
+    document.head.appendChild(printLink);
+    
     return () => {
       document.body.classList.remove('lmgo-active');
+      if (printLink?.parentNode) {
+        document.head.removeChild(printLink);
+      }
     };
   }, []);
 
   return (
     <Layout>
       <div className={styles.lmgoRoot}>
+        {/* Reading progress indicator */}
+        <div 
+          className={styles.readingProgress}
+          style={{ width: `${readingProgress}%` }}
+          role="progressbar"
+          aria-label="Reading progress"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(readingProgress)}
+        />
+        {/* Skip links for keyboard navigation */}
+        <a 
+          href="#main-content" 
+          className={styles.skipLink}
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.getElementById('main-content');
+            if (target) {
+              target.focus();
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+        >
+          Skip to main content
+        </a>
+        <a 
+          href="#exhibition-gallery-heading" 
+          className={styles.skipLink}
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.getElementById('exhibition-gallery-heading');
+            if (target) {
+              target.focus();
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+        >
+          Skip to exhibition gallery
+        </a>
         <header className={styles.hero}>
           <img
             className={styles.heroBackdrop}
@@ -562,6 +624,10 @@ const OneNationDividedPage = () => {
             </p>
           </div>
         </header>
+
+        <div className={styles.prose}>
+          <TableOfContents />
+        </div>
 
         <div className={styles.epigraphWrap}>
           <blockquote className={styles.epigraph} cite={`${SITE_URL}/letting-me-go`}>
@@ -615,7 +681,7 @@ const OneNationDividedPage = () => {
           </aside>
         </div>
 
-        <div className={styles.prose}>
+        <div id="main-content" className={styles.prose} ref={mainRef}>
           <ProseSection label="I" title="What this was" headingId="what-this-was">
             <p className={styles.body}>
               This capstone paired a written thesis with a mounted show at AIR under one question: what does it feel like
@@ -826,12 +892,35 @@ const OneNationDividedPage = () => {
               </div>
             }
           >
-            <PDFViewer
-              pdfUrl="/thesis.pdf"
-              title="Understanding the Noise of Today's Political Climate"
-              author="Caleb McCartney"
-              year={EXHIBITION_YEAR}
-            />
+            <Suspense fallback={
+              <div style={{ 
+                padding: '2rem', 
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '1rem'
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  border: '3px solid var(--lmgo-accent)',
+                  borderTop: 'transparent',
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite'
+                }}></div>
+                <p style={{ color: 'var(--lmgo-fg)', opacity: 0.7 }}>
+                  Loading thesis PDF...
+                </p>
+              </div>
+            }>
+              <PDFViewer
+                pdfUrl="/thesis.pdf"
+                title="Understanding the Noise of Today's Political Climate"
+                author="Caleb McCartney"
+                year={EXHIBITION_YEAR}
+              />
+            </Suspense>
           </ErrorBoundary>
         </section>
 

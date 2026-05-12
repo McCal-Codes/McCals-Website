@@ -5,7 +5,7 @@ inputs:
   node-version:
     description: 'Node.js version to use'
     required: false
-    default: '20'
+    default: '20.19'
   fetch-depth:
     description: 'Git fetch depth (0 for full history)'
     required: false

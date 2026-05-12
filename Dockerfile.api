@@ -1,7 +1,7 @@
 # McCal Media API Server - Docker Container
 # Optimized for API-only deployment
 
-FROM node:18-alpine
+FROM node:20.19-alpine
 
 # Set working directory
 WORKDIR /app
