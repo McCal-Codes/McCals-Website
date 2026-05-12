@@ -8,9 +8,8 @@
     { "source": "/accessibility", "destination": "/policies-legal#accessibility", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/@:path*", "destination": "/@:path*" },
-    { "source": "/:path*", "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
