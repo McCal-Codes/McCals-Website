@@ -22,23 +22,27 @@ export default function AuthorsPage() {
   useEffect(() => {
     let active = true;
 
-    setLoading(true);
-    setError(null);
+    const loadData = async () => {
+      setLoading(true);
+      setError(null);
 
-    Promise.all([fetchBlogAuthors(), fetchBlogPosts()])
-      .then(([loadedAuthors, loadedPosts]) => {
+      try {
+        const [loadedAuthors, loadedPosts] = await Promise.all([fetchBlogAuthors(), fetchBlogPosts()]);
+        if (active) {
+          setAuthors(loadedAuthors);
+          setPosts(loadedPosts);
+        }
+      } catch (loadError) {
         if (!active) return;
-        setAuthors(loadedAuthors);
-        setPosts(loadedPosts);
-      })
-      .catch((loadError: Error) => {
-        if (!active) return;
-        setError(loadError.message);
-      })
-      .finally(() => {
-        if (!active) return;
-        setLoading(false);
-      });
+        setError(loadError instanceof Error ? loadError.message : 'Unknown error');
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadData();
 
     return () => {
       active = false;
