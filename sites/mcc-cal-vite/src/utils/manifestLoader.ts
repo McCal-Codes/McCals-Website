@@ -5,7 +5,7 @@
  * Part of Phase 2: Next.js components implementation
  */
 
-const MANIFEST_CACHE = new Map<string, { data: any; timestamp: number }>();
+const MANIFEST_CACHE = new Map<string, { data: unknown; timestamp: number }>();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 export interface ManifestLoaderOptions {

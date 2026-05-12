@@ -14,7 +14,7 @@ interface TestResult {
   status: 'pending' | 'success' | 'error' | 'warning';
   message: string;
   duration?: number;
-  details?: any;
+  details?: Record<string, unknown>;
 }
 
 interface APIHealth {

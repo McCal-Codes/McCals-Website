@@ -49,7 +49,7 @@ export function isSupabaseConfigured(): boolean {
 
 // Realtime subscription helper for availability changes
 export function subscribeToAvailability(
-  callback: (payload: { new: any; old: any; eventType: string }) => void
+  callback: (payload: { new: Record<string, unknown>; old: Record<string, unknown>; eventType: string }) => void
 ) {
   if (!isSupabaseConfigured()) {
     console.warn('Supabase not configured, realtime subscriptions disabled - supabase.ts:55');

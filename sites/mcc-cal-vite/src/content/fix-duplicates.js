@@ -11,14 +11,14 @@ function fixWindowsPath(path) {
 
 const contentDir = fixWindowsPath('c:\\Users\\wolft\\Desktop\\Projects\\McCals-Website\\sites\\mcc-cal-vite\\src\\content');
 
-console.log('Scanning content directory:', contentDir);
+// console.log('Scanning content directory:', contentDir);
 
 // Read all markdown files in content directory
 const files = fs.readdirSync(contentDir)
   .filter(file => file.endsWith('.md'))
   .filter(file => !file.startsWith('.') && !file.startsWith('_'));
 
-console.log('Found markdown files:', files);
+// console.log('Found markdown files:', files);
 
 // Scan for duplicates and trail notes
 const allContent = {};
@@ -49,9 +49,9 @@ files.forEach(file => {
 });
 
 // Remove duplicates
-console.log('Found duplicates:', duplicates);
+// console.log('Found duplicates:', duplicates);
 duplicates.forEach(dup => {
-  console.log(`Removing duplicate content from ${dup.file2} (keeping ${dup.file1})`);
+  // console.log(`Removing duplicate content from ${dup.file2} (keeping ${dup.file1})`);
   
   try {
     fs.unlinkSync(path.join(contentDir, dup.file2));
@@ -69,4 +69,4 @@ function calculateSimilarity(content1, content2) {
   return intersection.size / Math.max(words1.size, words2.size);
 }
 
-console.log('Duplicate removal completed');
+// console.log('Duplicate removal completed');

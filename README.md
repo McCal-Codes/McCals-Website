@@ -8,7 +8,7 @@ Security policy: see `SECURITY.md`. For non-breaking hardening ideas, use `docs/
 
 ## Getting Started
 
-**Requirements:** Node.js 18+ and npm.
+**Requirements:** Node.js 20.19+ and npm.
 
 
 # McCal Media Website
