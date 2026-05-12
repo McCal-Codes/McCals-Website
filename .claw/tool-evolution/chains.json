@@ -1,0 +1,16 @@
+[
+  {
+    "id": "chain_1778606770803_pbssdq39y",
+    "sequence": [
+      "list_files",
+      "run_shell"
+    ],
+    "context": "Tool execution failed",
+    "successCount": 0,
+    "failureCount": 1,
+    "totalExecutions": 1,
+    "averageDuration": 1778606770803,
+    "lastExecuted": 1778606770803,
+    "successRate": 0
+  }
+]

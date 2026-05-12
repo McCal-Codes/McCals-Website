@@ -19,7 +19,7 @@ type GalleryFigureProps = {
   credit?: string;
 };
 
-const GalleryFigure = memo(function GalleryFigure({
+export const GalleryFigure = memo(function GalleryFigure({
   id,
   src,
   width,

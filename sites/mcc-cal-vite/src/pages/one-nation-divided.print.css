@@ -1,0 +1,189 @@
+/* Print stylesheet for Nation Divided thesis page */
+
+@media print {
+  /* Reset for print */
+  * {
+    background: transparent !important;
+    color: black !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide non-printable elements */
+  .skipLink,
+  .readingProgress,
+  .mcc-nav,
+  .theme-toggle,
+  footer,
+  button,
+  .pdf-viewer-fallback,
+  .download-link {
+    display: none !important;
+  }
+
+  /* Page layout */
+  .lmgoRoot {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Typography for print */
+  .hero {
+    min-height: auto !important;
+    page-break-after: avoid;
+    margin-bottom: 2rem;
+  }
+
+  .heroBackdrop {
+    display: none !important;
+  }
+
+  .heroContent {
+    position: static !important;
+    text-align: left !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .title {
+    font-size: 24pt !important;
+    line-height: 1.2 !important;
+    color: black !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .subtitle {
+    font-size: 12pt !important;
+    color: black !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .kicker {
+    font-size: 10pt !important;
+    color: black !important;
+  }
+
+  /* Content sections */
+  .prose,
+  .exhibitionGallery,
+  .fieldNotesSection {
+    margin-bottom: 2rem;
+    page-break-inside: avoid;
+  }
+
+  .body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    color: black !important;
+    margin-bottom: 1rem !important;
+    text-align: justify !important;
+  }
+
+  /* Headings */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  .sectionLabel,
+  .fieldNotesTitle,
+  .galleryTitle {
+    font-size: 14pt !important;
+    color: black !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Gallery figures */
+  .galleryFigure {
+    page-break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+
+  .galleryImgWrap img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .galleryFigcaption {
+    font-size: 9pt !important;
+    color: black !important;
+    margin-top: 0.5rem !important;
+  }
+
+  /* Field notes */
+  .fieldNoteCard {
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc !important;
+    padding: 1rem !important;
+  }
+
+  /* Questions section */
+  .questions {
+    page-break-inside: avoid;
+  }
+
+  .questions li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Links */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+
+  .proseInlineFigure {
+    page-break-inside: avoid;
+    margin: 1rem 0;
+  }
+
+  /* Table of contents */
+  .tableOfContents {
+    display: none !important;
+  }
+
+  /* Print-specific header/footer */
+  @page {
+    margin: 1cm;
+    size: A4;
+  }
+
+  @page :first {
+    margin-top: 2cm;
+  }
+
+  /* Citation information */
+  .citation-info {
+    display: block;
+    font-size: 9pt;
+    color: #666;
+    margin-top: 3rem;
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+  }
+
+  /* Ensure no content is cut off */
+  * {
+    overflow: visible !important;
+  }
+}
