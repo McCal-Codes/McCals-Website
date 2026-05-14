@@ -10,7 +10,7 @@ import { existsSync } from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const parentScript = join(__dirname, '..', '..', 'scripts', 'validate-manifest-ids.js');
+const parentScript = join(__dirname, '..', '..', '..', 'scripts', 'validate-manifest-ids.js');
 
 if (existsSync(parentScript)) {
   console.log('🔍 Validating portfolio manifests...');
