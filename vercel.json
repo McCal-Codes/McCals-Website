@@ -2,6 +2,22 @@
   "framework": "vite",
   "buildCommand": "cd sites/mcc-cal-vite && npm ci && npm run build",
   "outputDirectory": "sites/mcc-cal-vite/dist",
+  "images": {
+    "sizes": [256, 384, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    "localPatterns": [
+      { "pathname": "^/assets/.*$", "search": "" },
+      { "pathname": "^/images/.*$", "search": "" }
+    ],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "images.squarespace-cdn.com",
+        "port": "",
+        "pathname": "^/.*$"
+      }
+    ],
+    "formats": ["image/avif", "image/webp"]
+  },
   "redirects": [
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/schedule", "destination": "/grab-a-coffee", "permanent": true },
@@ -9,7 +25,6 @@
   ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/@:path*", "destination": "/@:path*" },
     { "source": "/:path*", "destination": "/index.html" }
   ],
   "headers": [
