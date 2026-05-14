@@ -1,4 +1,14 @@
-import { useEffect, useRef, useCallback, type FC } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type FC,
+} from 'react';
+import { ChevronLeft, ChevronRight, RotateCcw, X, ZoomIn, ZoomOut } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 import type { PortfolioGroup } from './types';
 import { portfolioStyles } from './index';
 
@@ -7,13 +17,26 @@ interface PortfolioLightboxProps {
   onClose: () => void;
 }
 
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 2.5;
+const ZOOM_STEP = 0.5;
+
 const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const hintRef = useRef<HTMLDivElement>(null);
+  const titleId = useId();
+  const descriptionId = useId();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [zoom, setZoom] = useState(MIN_ZOOM);
   const isOpen = group !== null;
+  const imageCount = group?.images.length ?? 0;
+  const hasMultiple = imageCount > 1;
 
-  // Lock scroll and hide nav while open
+  const activeImage = useMemo(() => {
+    if (!group) return null;
+    return group.images[activeIndex] ?? group.coverImage;
+  }, [activeIndex, group]);
+
+  // Lock scroll and hide nav while open.
   useEffect(() => {
     if (isOpen) {
       document.documentElement.classList.add('pf-lb-open');
@@ -23,27 +46,75 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
       document.documentElement.classList.remove('pf-lb-open');
       document.body.style.overflow = '';
     }
+
     return () => {
       document.documentElement.classList.remove('pf-lb-open');
       document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  // Keyboard: Escape to close, arrows to scroll
+  const selectImage = useCallback(
+    (nextIndex: number) => {
+      if (!group?.images.length) return;
+
+      const clampedIndex = (nextIndex + group.images.length) % group.images.length;
+      setActiveIndex(clampedIndex);
+      setZoom(MIN_ZOOM);
+    },
+    [group],
+  );
+
+  const showPrevious = useCallback(() => {
+    selectImage(activeIndex - 1);
+  }, [activeIndex, selectImage]);
+
+  const showNext = useCallback(() => {
+    selectImage(activeIndex + 1);
+  }, [activeIndex, selectImage]);
+
+  const zoomIn = useCallback(() => {
+    setZoom((currentZoom) => Math.min(MAX_ZOOM, Number((currentZoom + ZOOM_STEP).toFixed(1))));
+  }, []);
+
+  const zoomOut = useCallback(() => {
+    setZoom((currentZoom) => Math.max(MIN_ZOOM, Number((currentZoom - ZOOM_STEP).toFixed(1))));
+  }, []);
+
+  const resetZoom = useCallback(() => {
+    setZoom(MIN_ZOOM);
+  }, []);
+
+  // Keyboard: Escape, arrows, Home/End, and +/- zoom.
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
+    (event: KeyboardEvent) => {
       if (!isOpen) return;
-      if (e.key === 'Escape') {
+
+      if (event.key === 'Escape') {
         onClose();
-      } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-        e.preventDefault();
-        galleryRef.current?.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' });
-      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        galleryRef.current?.scrollBy({ top: -window.innerHeight * 0.85, behavior: 'smooth' });
+      } else if (event.key === 'ArrowRight' || event.key === 'PageDown') {
+        event.preventDefault();
+        showNext();
+      } else if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+        event.preventDefault();
+        showPrevious();
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        selectImage(0);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        selectImage(imageCount - 1);
+      } else if (event.key === '+' || event.key === '=') {
+        event.preventDefault();
+        zoomIn();
+      } else if (event.key === '-') {
+        event.preventDefault();
+        zoomOut();
+      } else if (event.key === '0') {
+        event.preventDefault();
+        resetZoom();
       }
     },
-    [isOpen, onClose]
+    [imageCount, isOpen, onClose, resetZoom, selectImage, showNext, showPrevious, zoomIn, zoomOut],
   );
 
   useEffect(() => {
@@ -51,81 +122,169 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Fade hint after first scroll
   useEffect(() => {
-    if (!isOpen) return;
-    const gallery = galleryRef.current;
-    if (!gallery) return;
-    const hideHint = () => {
-      hintRef.current?.classList.add(portfolioStyles.pfLightboxHintHidden);
-      gallery.removeEventListener('scroll', hideHint);
-    };
-    gallery.addEventListener('scroll', hideHint, { passive: true });
-    return () => gallery.removeEventListener('scroll', hideHint);
-  }, [isOpen, group]);
+    if (!group || !activeImage || imageCount < 2) return;
 
-  // Reset scroll when group changes
-  useEffect(() => {
-    if (!isOpen) return;
-    galleryRef.current?.scrollTo({ top: 0 });
-    hintRef.current?.classList.remove(portfolioStyles.pfLightboxHintHidden);
-  }, [group, isOpen]);
+    const neighborImages = [
+      group.images[(activeIndex + 1) % imageCount],
+      group.images[(activeIndex - 1 + imageCount) % imageCount],
+    ].filter(Boolean);
 
-  if (!group) return null;
+    neighborImages.forEach((image) => {
+      const preload = new Image();
+      preload.src = image.url;
+    });
+  }, [activeImage, activeIndex, group, imageCount]);
 
-  const hasMultiple = group.images.length > 1;
+  if (!group || !activeImage) return null;
+
   const summaryText =
     group.coverImage.description ??
     group.images[0]?.description ??
     group.coverImage.caption ??
     group.images[0]?.caption;
+  const activeCaption = activeImage.caption ?? activeImage.description;
+  const zoomPercent = Math.round(zoom * 100);
 
   return (
     <div
       className={`${portfolioStyles.pfLightbox}${isOpen ? ` ${portfolioStyles.pfLightboxOpen}` : ''}`}
       aria-modal="true"
       role="dialog"
-      aria-label={group.title}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      aria-labelledby={titleId}
+      aria-describedby={summaryText ? descriptionId : undefined}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
     >
-      <button
-        type="button"
-        className={portfolioStyles.pfLightboxClose}
-        aria-label="Close lightbox"
-        onClick={onClose}
-      >
-        ×
-      </button>
-
       <div ref={dialogRef} className={portfolioStyles.pfLightboxDialog} tabIndex={-1}>
-        <div ref={galleryRef} className={portfolioStyles.pfLightboxGallery}>
+        <div className={portfolioStyles.pfLightboxToolbar}>
+          <div className={portfolioStyles.pfLightboxCounter} aria-live="polite">
+            <span>{activeIndex + 1}</span>
+            <span aria-hidden="true">/</span>
+            <span>{imageCount}</span>
+          </div>
+
+          <div className={portfolioStyles.pfLightboxControls}>
+            <button
+              type="button"
+              className={portfolioStyles.pfLightboxIconBtn}
+              aria-label="Zoom out"
+              onClick={zoomOut}
+              disabled={zoom <= MIN_ZOOM}
+            >
+              <ZoomOut aria-hidden="true" size={18} />
+            </button>
+            <span className={portfolioStyles.pfLightboxZoomValue} aria-live="polite">
+              {zoomPercent}%
+            </span>
+            <button
+              type="button"
+              className={portfolioStyles.pfLightboxIconBtn}
+              aria-label="Zoom in"
+              onClick={zoomIn}
+              disabled={zoom >= MAX_ZOOM}
+            >
+              <ZoomIn aria-hidden="true" size={18} />
+            </button>
+            <button
+              type="button"
+              className={portfolioStyles.pfLightboxIconBtn}
+              aria-label="Reset zoom"
+              onClick={resetZoom}
+              disabled={zoom === MIN_ZOOM}
+            >
+              <RotateCcw aria-hidden="true" size={17} />
+            </button>
+            <button
+              type="button"
+              className={`${portfolioStyles.pfLightboxIconBtn} ${portfolioStyles.pfLightboxClose}`}
+              aria-label="Close lightbox"
+              onClick={onClose}
+            >
+              <X aria-hidden="true" size={19} />
+            </button>
+          </div>
+        </div>
+
+        <div className={portfolioStyles.pfLightboxStage}>
           {hasMultiple && (
-            <div ref={hintRef} className={portfolioStyles.pfLightboxHint} aria-hidden="true">
-              Scroll Up / Down
-            </div>
+            <button
+              type="button"
+              className={`${portfolioStyles.pfLightboxNavBtn} ${portfolioStyles.pfLightboxPrevBtn}`}
+              aria-label="Previous photo"
+              onClick={showPrevious}
+            >
+              <ChevronLeft aria-hidden="true" size={28} />
+            </button>
           )}
 
-          {group.images.map((img, i) => (
-            <figure key={img.filename} className={portfolioStyles.pfLightboxFigure}>
-              <img
-                src={img.url}
-                alt={img.alt ?? `${group.title} — photo ${i + 1}`}
-                className={portfolioStyles.pfLightboxImg}
-                loading={i < 2 ? 'eager' : 'lazy'}
-                decoding={i < 2 ? 'sync' : 'async'}
-              />
-              {img.caption && (
-                <figcaption className={portfolioStyles.pfLightboxImgCaption}>
-                  {img.caption}
-                </figcaption>
-              )}
-            </figure>
-          ))}
+          <div className={portfolioStyles.pfLightboxImageScroller} data-zoomed={zoom > MIN_ZOOM ? 'true' : 'false'}>
+            <OptimizedImage
+              key={activeImage.filename}
+              src={activeImage.url}
+              alt={activeImage.alt ?? `${group.title}, photo ${activeIndex + 1}`}
+              frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfLightboxImageFrame}`}
+              imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfLightboxImg}`}
+              loading="eager"
+              decoding="async"
+              optimizedWidth={1920}
+              srcSetWidths={[640, 1080, 1440, 1920]}
+              sizes="100vw"
+              style={
+                zoom > MIN_ZOOM
+                  ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
+                  : undefined
+              }
+              onDoubleClick={() => {
+                setZoom((currentZoom) => (currentZoom === MIN_ZOOM ? 2 : MIN_ZOOM));
+              }}
+              draggable={false}
+            />
+          </div>
+
+          {hasMultiple && (
+            <button
+              type="button"
+              className={`${portfolioStyles.pfLightboxNavBtn} ${portfolioStyles.pfLightboxNextBtn}`}
+              aria-label="Next photo"
+              onClick={showNext}
+            >
+              <ChevronRight aria-hidden="true" size={28} />
+            </button>
+          )}
         </div>
+
+        {hasMultiple && (
+          <div className={portfolioStyles.pfLightboxThumbs} aria-label="Choose photo">
+            {group.images.map((img, index) => (
+              <button
+                key={img.filename}
+                type="button"
+                className={portfolioStyles.pfLightboxThumb}
+                aria-label={`Show photo ${index + 1}`}
+                aria-current={index === activeIndex ? 'true' : undefined}
+                onClick={() => selectImage(index)}
+              >
+                <OptimizedImage
+                  src={img.url}
+                  alt=""
+                  frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfLightboxThumbFrame}`}
+                  imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfLightboxThumbImg}`}
+                  loading="lazy"
+                  decoding="async"
+                  optimizedWidth={160}
+                  width={96}
+                  height={64}
+                />
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className={portfolioStyles.pfLightboxCaption}>
           <div className={portfolioStyles.pfCaptionRail}>
-            <h3 className={portfolioStyles.pfCaptionRailTitle}>{group.title}</h3>
+            <h3 id={titleId} className={portfolioStyles.pfCaptionRailTitle}>{group.title}</h3>
 
             {(group.dateDisplay || group.category) && (
               <p className={portfolioStyles.pfCaptionRailMeta}>
@@ -135,8 +294,12 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
               </p>
             )}
 
-            {summaryText && (
-              <p className={portfolioStyles.pfCaptionRailDescription}>{summaryText}</p>
+            {activeCaption && (
+              <p className={portfolioStyles.pfLightboxDescription}>{activeCaption}</p>
+            )}
+
+            {summaryText && summaryText !== activeCaption && (
+              <p id={descriptionId} className={portfolioStyles.pfCaptionRailDescription}>{summaryText}</p>
             )}
 
             {group.published && group.outletName && (

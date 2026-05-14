@@ -1,5 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
+
+const Link = React.forwardRef<HTMLAnchorElement, React.ComponentProps<typeof RouterLink>>(
+  (props, ref) => <RouterLink ref={ref} viewTransition {...props} />,
+);
+Link.displayName = 'ViewTransitionLink';
 
 /** Routes grouped under Projects in primary nav (artwork + dev work) */
 function isProjectsNavPath(pathname: string): boolean {
@@ -52,9 +57,13 @@ const Nav: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setMenuOpen(false);
-    setWorkSubmenuOpen(false);
-    setProjectsSubmenuOpen(false);
+    const closeTimer = window.setTimeout(() => {
+      setMenuOpen(false);
+      setWorkSubmenuOpen(false);
+      setProjectsSubmenuOpen(false);
+    }, 0);
+
+    return () => window.clearTimeout(closeTimer);
   }, [pathname]);
 
   useEffect(() => {

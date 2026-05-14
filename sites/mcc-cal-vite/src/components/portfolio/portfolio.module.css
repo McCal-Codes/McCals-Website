@@ -343,6 +343,62 @@
   transform: translateY(0);
 }
 
+.pfBlurImageFrame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background-image: var(--mcc-image-placeholder);
+  background-position: center;
+  background-size: cover;
+  isolation: isolate;
+}
+
+.pfBlurImageFrame::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  z-index: 0;
+  background: inherit;
+  filter: blur(16px);
+  opacity: 1;
+  transform: scale(1.08);
+  transition: opacity 0.28s ease;
+}
+
+.pfBlurImageFrame[data-loaded='true']::before {
+  opacity: 0;
+}
+
+.pfBlurImage {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  filter: blur(8px);
+  transition:
+    opacity 0.28s ease,
+    filter 0.28s ease,
+    transform 0.35s;
+}
+
+.pfBlurImageFrame[data-loaded='true'] .pfBlurImage {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.pfCardImageFrame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: inherit;
+}
+
+.pfCardImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
 .pfCard img {
   display: block;
   width: 100%;
@@ -351,6 +407,10 @@
   object-fit: cover;
   border-radius: inherit;
   transition: transform 0.35s, filter 0.35s;
+}
+
+.pfCard .pfCardImage {
+  height: 100%;
 }
 
 .pfCard:hover img {
@@ -659,88 +719,202 @@
 
 .pfLightboxDialog {
   position: relative;
-  max-width: 95vw;
-  max-height: 92vh;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(1220px, 96vw);
+  max-height: 94vh;
   outline: none;
 }
 
-.pfLightboxGallery {
+.pfLightboxToolbar {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
-  max-height: 85vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 20px 4px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 44px;
+  color: #fff;
 }
 
-.pfLightboxGallery::-webkit-scrollbar { display: none; }
+.pfLightboxCounter,
+.pfLightboxControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pfLightboxCounter {
+  min-width: 64px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.42);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  justify-content: center;
+}
+
+.pfLightboxIconBtn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.48);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, opacity 0.2s;
+}
+
+.pfLightboxIconBtn:hover:not(:disabled),
+.pfLightboxIconBtn:focus-visible {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.34);
+  transform: translateY(-1px);
+}
+
+.pfLightboxIconBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.pfLightboxZoomValue {
+  min-width: 54px;
+  padding: 0 4px;
+  color: rgba(255,255,255,0.84);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.pfLightboxStage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 12px;
+  min-height: min(68vh, 760px);
+}
+
+.pfLightboxImageScroller {
+  min-width: 0;
+  min-height: min(62vh, 720px);
+  max-height: 72vh;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 14px;
+  scrollbar-gutter: stable;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'] {
+  place-items: start center;
+  cursor: move;
+}
+
+.pfLightboxImageFrame {
+  width: min(100%, 1100px);
+  min-height: min(62vh, 720px);
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  border-radius: 14px;
+  background-color: rgba(255,255,255,0.04);
+}
 
 .pfLightboxImg {
-  max-width: 90vw;
-  max-height: 70vh;
+  max-width: 100%;
+  max-height: 68vh;
   width: auto;
   height: auto;
   object-fit: contain;
   border-radius: 14px;
   display: block;
-  margin: 0 auto;
-  transition: opacity 0.3s;
+  margin: auto;
+  transform-origin: center;
 }
 
-/* Lightbox figure and image caption */
-.pfLightboxFigure {
-  margin: 0 0 24px;
-  padding: 0;
-  text-align: center;
-}
-
-.pfLightboxFigure:last-child {
-  margin-bottom: 0;
-}
-
-.pfLightboxImgCaption {
-  margin-top: 16px;
-  padding: 12px 20px;
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #fff;
-  line-height: 1.5;
-  max-width: 800px;
-  margin-inline: auto;
-  text-align: center;
-  background: rgba(0,0,0,0.5);
-  border-radius: 8px;
-  backdrop-filter: blur(4px);
-}
-
-.pfLightboxHint {
-  text-align: center;
-  color: rgba(255,255,255,0.55);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  padding: 6px 12px;
+.pfLightboxNavBtn {
+  width: 48px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.16);
   border-radius: 999px;
-  background: rgba(0,0,0,0.4);
-  display: inline-block;
-  margin: 0 auto;
-  transition: opacity 0.5s;
-  align-self: center;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
 
-.pfLightboxHintHidden {
-  opacity: 0;
-  pointer-events: none;
+.pfLightboxNavBtn:hover,
+.pfLightboxNavBtn:focus-visible {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.34);
+  transform: translateY(-1px);
+}
+
+.pfLightboxThumbs {
+  display: flex;
+  gap: 8px;
+  max-width: min(100%, 940px);
+  margin: 0 auto;
+  padding: 2px 2px 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.pfLightboxThumb {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 50px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.58;
+  overflow: hidden;
+  transition: opacity 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.pfLightboxThumb:hover,
+.pfLightboxThumb:focus-visible,
+.pfLightboxThumb[aria-current='true'] {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.72);
+}
+
+.pfLightboxThumb[aria-current='true'] {
+  transform: translateY(-1px);
+}
+
+.pfLightboxThumbFrame,
+.pfLightboxThumbImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+}
+
+.pfLightboxThumbImg {
+  display: block;
+  object-fit: cover;
 }
 
 .pfLightboxCaption {
   text-align: center;
   color: #fff;
-  margin-top: 16px;
-  max-width: 680px;
+  max-width: 760px;
   margin-inline: auto;
   padding: 0 8px;
 }
@@ -795,29 +969,76 @@
 .pfLightboxOutlet a:hover { text-decoration: underline; }
 
 .pfLightboxClose {
-  position: fixed;
-  top: max(20px, env(safe-area-inset-top));
-  right: max(20px, env(safe-area-inset-right));
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.7);
-  border: 2px solid rgba(255,255,255,0.4);
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.1rem;
-  cursor: pointer;
-  z-index: calc(var(--mcc-z-top) + 1);
-  backdrop-filter: blur(8px);
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  border-color: rgba(255,255,255,0.28);
 }
 
-.pfLightboxClose:hover {
+.pfLightboxClose:hover:not(:disabled),
+.pfLightboxClose:focus-visible {
   background: rgba(0,0,0,0.88);
   border-color: rgba(255,255,255,0.65);
-  transform: scale(1.06);
+}
+
+@media (max-width: 720px) {
+  .pfLightbox {
+    padding: 14px;
+  }
+
+  .pfLightboxDialog {
+    width: 100%;
+    max-height: 96vh;
+  }
+
+  .pfLightboxToolbar {
+    align-items: flex-start;
+  }
+
+  .pfLightboxControls {
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .pfLightboxIconBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pfLightboxStage {
+    grid-template-columns: 1fr;
+    min-height: 54vh;
+  }
+
+  .pfLightboxImageScroller,
+  .pfLightboxImageFrame {
+    min-height: 54vh;
+  }
+
+  .pfLightboxNavBtn {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 42px;
+    height: 54px;
+    transform: translateY(-50%);
+  }
+
+  .pfLightboxPrevBtn {
+    left: 8px;
+  }
+
+  .pfLightboxNextBtn {
+    right: 8px;
+  }
+
+  .pfLightboxNavBtn:hover,
+  .pfLightboxNavBtn:focus-visible {
+    transform: translateY(-50%);
+  }
+
+  .pfLightboxThumb {
+    width: 60px;
+    height: 42px;
+  }
 }
 
 /* --- Copy toast --- */

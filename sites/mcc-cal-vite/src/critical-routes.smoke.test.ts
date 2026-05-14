@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function assertSitemapPathHasAppRoute(appSource: string, path: string): void {
   if (path.startsWith('/authors/') && path !== '/authors') {
-    expect(appSource).toContain('path="/authors/:authorId"');
+    expect(appSource).toMatch(/path[:=]\s*['"{]\/authors\/:authorId/);
     return;
   }
   expect(appSource).toContain('STATIC_PAGE_ROUTES.map');

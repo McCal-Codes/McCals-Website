@@ -62,6 +62,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
       {activeGroup && (
         <Suspense fallback={null}>
           <PortfolioLightbox
+            key={activeGroup.id}
             group={activeGroup}
             onClose={() => setActiveGroup(null)}
           />

@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
+import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
@@ -75,33 +75,53 @@ function PageLoader() {
   );
 }
 
-export default function App() {
+function AppShell() {
   return (
-    <BrowserRouter>
+    <>
       <PreviewBanner />
       <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
-          <Routes>
-            {STATIC_PAGE_ROUTES.map((route) => {
-              const RouteComponent = staticRouteComponents[route.routeKey];
-              return <Route key={route.path} path={route.path} element={<RouteComponent />} />;
-            })}
-            <Route path="/one-nation-divided" element={<Navigate to="/letting-me-go" replace />} />
-            <Route path="/authors/:authorId" element={<AuthorsPage />} />
-            <Route path="/blog/:slug" element={<BlogPage />} />
-            <Route path="/abridged" element={<AbridgedPage />} />
-            <Route path="/roadmap" element={<RoadmapPage />} />
-            {import.meta.env.DEV && (
-              <>
-                <Route path="/showcase" element={<ShowcasePage />} />
-                <Route path="/api-test" element={<ApiTestPage />} />
-                <Route path="/changelog" element={<ChangelogPage />} />
-              </>
-            )}
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <Outlet />
         </Suspense>
       </ErrorBoundary>
-    </BrowserRouter>
+    </>
+  );
+}
+
+const router = createBrowserRouter([
+  {
+    element: <AppShell />,
+    children: [
+      ...STATIC_PAGE_ROUTES.map((route) => {
+        const RouteComponent = staticRouteComponents[route.routeKey];
+        return {
+          path: route.path,
+          element: <RouteComponent />,
+        };
+      }),
+      { path: '/one-nation-divided', element: <Navigate to="/letting-me-go" replace /> },
+      { path: '/authors/:authorId', element: <AuthorsPage /> },
+      { path: '/blog/:slug', element: <BlogPage /> },
+      { path: '/abridged', element: <AbridgedPage /> },
+      { path: '/roadmap', element: <RoadmapPage /> },
+      ...(import.meta.env.DEV
+        ? [
+            { path: '/showcase', element: <ShowcasePage /> },
+            { path: '/api-test', element: <ApiTestPage /> },
+            { path: '/changelog', element: <ChangelogPage /> },
+          ]
+        : []),
+      { path: '*', element: <NotFoundPage /> },
+    ],
+  },
+]);
+
+export default function App() {
+  return (
+    <RouterProvider
+      router={router}
+      fallbackElement={<PageLoader />}
+      future={{ v7_startTransition: true }}
+    />
   );
 }

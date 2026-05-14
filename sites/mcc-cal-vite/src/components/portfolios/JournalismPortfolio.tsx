@@ -96,7 +96,7 @@ export default function JournalismPortfolio() {
     <div className={portfolioStyles.pfRoot}>
       <h2 className={portfolioStyles.pfHeading}>Photojournalism</h2>
       <p className={portfolioStyles.pfSubheading}>
-        Political events, sports, and community coverage. Use the filters to browse by category or view published work.
+        Documentary, community, sports, and assignment coverage. Use the filters to browse by category or view published work.
       </p>
 
       {status === 'loading' && (

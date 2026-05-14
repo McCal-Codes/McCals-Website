@@ -1,4 +1,5 @@
 import { useEffect, useRef, type FC } from 'react';
+import OptimizedImage from '@/components/OptimizedImage';
 import type { PortfolioGroup } from './types';
 import { portfolioStyles } from './index';
 
@@ -115,11 +116,15 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
         </button>
       )}
 
-      <img
+      <OptimizedImage
         src={group.coverImage.url}
         alt={group.coverImage.alt ?? group.title}
+        frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfCardImageFrame}`}
+        imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfCardImage}`}
         loading="lazy"
         decoding="async"
+        optimizedWidth={640}
+        sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) 50vw, 33vw"
         width={400}
         height={300}
       />
