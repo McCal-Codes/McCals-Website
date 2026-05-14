@@ -437,19 +437,31 @@ const getInitialSlides = () => {
   return FAVORITES.map(resolveSlideVariant);
 };
 
+interface ImageStatus {
+  src: string;
+  loaded: boolean;
+  error: boolean;
+}
+
 const HeroCarousel: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
+  const [imageStatus, setImageStatus] = useState<ImageStatus>({
+    src: '',
+    loaded: false,
+    error: false,
+  });
   const heroRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   const slides = useMemo(() => getInitialSlides(), []);
 
   const currentSlide = slides[currentSlideIndex];
+  const imageLoaded = imageStatus.src === currentSlide?.image && imageStatus.loaded;
+  const imageError = imageStatus.src === currentSlide?.image && imageStatus.error;
 
   // Match the original homepage carousel: the hero should start behind the fixed nav.
   useEffect(() => {
@@ -531,11 +543,20 @@ const HeroCarousel: React.FC = () => {
     };
   }, []);
 
-  // Reset image states when slide changes
+  // A cached image can complete before React receives onLoad after a slide change.
+  // Keep the visible state keyed to the current URL so stale load/reset events cannot blank the slide.
   useEffect(() => {
-    setImageLoaded(false);
-    setImageError(false);
-  }, [currentSlideIndex]);
+    if (!currentSlide) return;
+
+    const image = imageRef.current;
+    if (!image?.complete) return;
+
+    setImageStatus({
+      src: currentSlide.image,
+      loaded: image.naturalWidth > 0,
+      error: image.naturalWidth === 0,
+    });
+  }, [currentSlide]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -556,11 +577,19 @@ const HeroCarousel: React.FC = () => {
   }, [currentSlide, isDesktop]);
 
   const handleImageLoad = () => {
-    setImageLoaded(true);
+    setImageStatus({
+      src: currentSlide.image,
+      loaded: true,
+      error: false,
+    });
   };
 
   const handleImageError = () => {
-    setImageError(true);
+    setImageStatus({
+      src: currentSlide.image,
+      loaded: false,
+      error: true,
+    });
   };
 
   if (!currentSlide) {
@@ -598,6 +627,8 @@ const HeroCarousel: React.FC = () => {
           </div>
         ) : (
           <img
+            ref={imageRef}
+            key={currentSlide.image}
             src={currentSlide.image}
             alt={currentSlide.alt}
             className={`${styles.heroImage} ${imageLoaded ? styles.loaded : ''}`}
