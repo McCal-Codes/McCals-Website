@@ -1,10 +1,11 @@
 import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import styles from './roadmap.module.css';
+import { Link } from 'react-router-dom';
 import { MapPin, Calendar, Rocket, CheckCircle, Circle, ArrowRight, Clock, Target, Zap, Camera, Video, Users, Code } from 'lucide-react';
 
 const RoadmapPage = () => {
-  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mccalmedia.com').replace(/\/$/, '');
+  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
   usePageMeta({
     title: 'Roadmap | McCal Media',
@@ -167,28 +168,15 @@ const RoadmapPage = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return '#10b981';
-      case 'in-progress':
-        return '#3b82f6';
-      case 'planned':
-        return '#6b7280';
-      default:
-        return '#6b7280';
-    }
-  };
-
   return (
     <Layout>
       <div className={styles.container}>
         <section className={styles.hero}>
           <div className={styles.heroContent}>
+            <p className={styles.eyebrow}>Studio roadmap</p>
             <h1 className={styles.title}>Roadmap</h1>
             <p className={styles.subtitle}>
-              Our vision for the future of creative media services. 
-              See what we're building and what's coming next for McCal Media.
+              A working view of the services, tooling, and portfolio systems being built around the McCal Media practice.
             </p>
             <div className={styles.heroStats}>
               <div className={styles.stat}>
@@ -218,11 +206,9 @@ const RoadmapPage = () => {
               <div key={index} className={styles.phaseItem}>
                 <div className={styles.phaseHeader}>
                   <div className={styles.phaseDate}>{phase.phase}</div>
-                  <div className={styles.phaseStatus}>
+                  <div className={styles.phaseStatus} data-status={phase.status}>
                     {getStatusIcon(phase.status)}
-                    <span style={{ color: getStatusColor(phase.status) }}>
-                      {phase.status.replace('-', ' ')}
-                    </span>
+                    <span>{phase.status.replace('-', ' ')}</span>
                   </div>
                 </div>
                 <div className={styles.phaseContent}>
@@ -334,8 +320,8 @@ const RoadmapPage = () => {
             <h2>Join Our Journey</h2>
             <p>Be part of our evolution and help shape the future of creative media.</p>
             <div className={styles.ctaButtons}>
-              <button className={styles.primaryButton}>Get Early Access</button>
-              <button className={styles.secondaryButton}>Provide Feedback</button>
+              <Link to="/request-a-quote" className={styles.primaryButton}>Request a Quote</Link>
+              <Link to="/contact-us" className={styles.secondaryButton}>Share Feedback</Link>
             </div>
           </div>
         </section>
