@@ -15,6 +15,7 @@ const path = require('path');
 const { detectDateFromImages } = require('../utils/shared-date-parsing.js');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
 const { notify } = require('../utils/manifest-webhook');
+const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 
 const CONCERT_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Concert');
 const MANIFEST_OUTPUT = path.join(CONCERT_BASE, 'concert-manifest.json');
@@ -34,8 +35,6 @@ const MONTHS = [
   'November',
   'December',
 ];
-
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 
 // Date parsing functions moved to shared-date-parsing.js module
 
@@ -124,7 +123,9 @@ async function processBand(bandName, bandPath) {
     // Process ALL subfolders, not just the first one
     for (const subfolder of subfolders) {
       const folderItems = await fs.readdir(subfolder.path);
-      const imageFiles = folderItems.filter((item) => IMAGE_EXTENSIONS.test(item));
+      const imageFiles = dedupeImageEntries(
+        folderItems.filter((item) => IMAGE_EXTENSION_RE.test(item)),
+      );
 
       if (imageFiles.length === 0) {
         continue; // Skip folders with no images

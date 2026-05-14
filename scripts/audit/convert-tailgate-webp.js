@@ -5,6 +5,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const { baseImageKey, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 
 const ALBUMS = [
   'Cleveland Browns at Pittsburgh Tailgate',
@@ -111,9 +112,13 @@ async function updateManifest(albumDir) {
     // Merge JPG and WebP
     const allImages = [...manifest.images, ...webpImages];
     
-    // Remove duplicates
-    manifest.images = [...new Set(allImages)];
+    manifest.images = dedupeImageEntries(allImages);
     manifest.totalImages = manifest.images.length;
+    const coverKey = baseImageKey(manifest.coverImage || '');
+    manifest.coverImage =
+      manifest.images.find((image) => baseImageKey(image) === coverKey) ||
+      manifest.images[0] ||
+      manifest.coverImage;
     manifest.hasWebP = true;
     
     await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));

@@ -16,10 +16,10 @@
 const fs = require('fs');
 const path = require('path');
 const ExifParser = require('exif-parser');
+const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 
 // Configuration
 const CONCERT_BASE_DIR = path.resolve(__dirname, '../../src/images/Portfolios/Concert');
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp)$/i;
 
 /**
  * Extract date from filename patterns like "250829_Haven_CAL4584.jpg"
@@ -277,9 +277,9 @@ async function processDirectory(dirPath, options = {}) {
     }
     
     // Get all image files
-    const files = fs.readdirSync(dirPath)
-        .filter(file => IMAGE_EXTENSIONS.test(file))
-        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+    const files = dedupeImageEntries(
+        fs.readdirSync(dirPath).filter(file => IMAGE_EXTENSION_RE.test(file))
+    );
     
     if (files.length === 0) {
         console.warn(`⚠️  No images found in ${dirPath} - enhanced-manifest-generator.js:284`);
@@ -391,7 +391,7 @@ function findImageDirectories(basePath, maxDepth = 2) {
         
         try {
             const entries = fs.readdirSync(currentPath);
-            const hasImages = entries.some(entry => IMAGE_EXTENSIONS.test(entry));
+            const hasImages = entries.some(entry => IMAGE_EXTENSION_RE.test(entry));
             
             if (hasImages) {
                 directories.push(currentPath);

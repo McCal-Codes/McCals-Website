@@ -10,9 +10,9 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { notify } = require('../utils/manifest-webhook');
+const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 
 // Configuration
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 const BASE_PORTRAIT = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Portrait');
 const MANIFEST_OUTPUT = path.join(BASE_PORTRAIT, 'portrait-manifest.json');
 
@@ -50,12 +50,12 @@ async function getImageFiles(folderPath) {
         imageFiles = imageFiles.concat(
           subImages.map((img) => path.relative(folderPath, path.join(itemPath, img))),
         );
-      } else if (stats.isFile() && IMAGE_EXTENSIONS.test(item)) {
+      } else if (stats.isFile() && IMAGE_EXTENSION_RE.test(item)) {
         imageFiles.push(item);
       }
     }
 
-    return imageFiles.sort();
+    return dedupeImageEntries(imageFiles);
   } catch (error) {
     console.warn(
       `⚠️  Could not read folder: ${folderPath} - generate-portrait-manifest.js:58`,
@@ -93,7 +93,7 @@ async function getAlbumsForCollection(collectionPath) {
       });
 
       flattenedImages = flattenedImages.concat(albumImages);
-    } else if (stats.isFile() && IMAGE_EXTENSIONS.test(entry)) {
+    } else if (stats.isFile() && IMAGE_EXTENSION_RE.test(entry)) {
       looseImages.push(entry);
     }
   }
@@ -102,9 +102,10 @@ async function getAlbumsForCollection(collectionPath) {
   albums.sort((a, b) => a.albumName.localeCompare(b.albumName, undefined, { sensitivity: 'base' }));
 
   // Add any loose images that live directly in the collection folder
-  flattenedImages = flattenedImages.concat(looseImages.sort());
+  const dedupedLooseImages = dedupeImageEntries(looseImages);
+  flattenedImages = dedupeImageEntries(flattenedImages.concat(dedupedLooseImages));
 
-  return { albums, flattenedImages, looseImages };
+  return { albums, flattenedImages, looseImages: dedupedLooseImages };
 }
 
 /**

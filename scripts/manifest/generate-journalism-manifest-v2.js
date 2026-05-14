@@ -24,6 +24,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const readline = require('readline');
 const { notify } = require('../utils/manifest-webhook');
+const { dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 
 // Configuration
 const JOURNALISM_DIR = path.resolve(__dirname, '../../src/images/Portfolios/Journalism');
@@ -156,6 +157,25 @@ function extractDateFromFilename(filename) {
   return null;
 }
 
+function formatDateDisplay(dateIso) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateIso);
+  if (!match) {
+    return new Date(dateIso).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  const [, year, month, day] = match;
+  const date = new Date(Number(year), Number(month) - 1, Number(day));
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
 async function loadEventMetadata(eventDir) {
   const metadataPath = path.join(eventDir, 'tags.json');
 
@@ -187,12 +207,29 @@ async function loadCaptions(eventDir) {
   return null;
 }
 
+function getCaptionForImage(captions, filename) {
+  if (!captions) return null;
+  if (captions[filename]) return captions[filename];
+
+  const ext = path.extname(filename);
+  const base = filename.slice(0, -ext.length);
+  const alternateExtensions =
+    ext.toLowerCase() === '.webp' ? ['.jpg', '.jpeg', '.png'] : ['.webp'];
+
+  for (const alternateExt of alternateExtensions) {
+    const alternate = `${base}${alternateExt}`;
+    if (captions[alternate]) return captions[alternate];
+  }
+
+  return null;
+}
+
 async function processEvent(categoryName, eventName, eventDir, folderPathOverride) {
   log(`Processing event: ${categoryName}/${eventName}`);
   
   try {
     const items = await fs.readdir(eventDir);
-    const imageFiles = items.filter(isImageFile);
+    const imageFiles = dedupeImageEntries(items.filter(isImageFile));
     
     if (imageFiles.length === 0) {
       warning(`No images found in ${categoryName}/${eventName}`);
@@ -240,7 +277,7 @@ async function processEvent(categoryName, eventName, eventDir, folderPathOverrid
     
     // Create processed images, applying per-image captions where available
     const images = imageFiles.map(filename => {
-      const perImage = captions?.[filename];
+      const perImage = getCaptionForImage(captions, filename);
       return {
         filename,
         path: filename,
@@ -259,11 +296,7 @@ async function processEvent(categoryName, eventName, eventDir, folderPathOverrid
         iso: eventDate,
         source: dateSource
       },
-      dateDisplay: new Date(eventDate).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      }),
+      dateDisplay: formatDateDisplay(eventDate),
       totalImages: imageFiles.length,
       images: images.sort((a, b) => a.filename.localeCompare(b.filename)),
       published: isPublished,

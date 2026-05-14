@@ -2,8 +2,8 @@
 /**
  * Auto optimize Events portfolio images.
  * Strategy:
- *  - Scan src/images/Portfolios/Events for JPG/JPEG/PNG > threshold (default 1.2MB)
- *  - For each candidate: recompress using sharp to progressive JPEG at target quality (default 78) unless size gain <5%
+ *  - Scan src/images/Portfolios/Events for JPG/JPEG/PNG/WEBP > threshold (default 1.2MB)
+ *  - For each candidate: recompress using sharp at target quality (default 78) unless size gain <5%
  *  - Skip files already containing '-webuse' or '-min' suffix (assumed optimized)
  *  - Keep original temporarily with .orig extension only if --backup provided
  *  - Optionally convert to WebP (flag --webp). WebP saved alongside; manifest generator already supports .webp.
@@ -42,9 +42,9 @@ function walk(dir){
     const p = path.join(dir, entry);
     const st = fs.statSync(p);
     if(st.isDirectory()) { walk(p); continue; }
-  if(!/\.(jpe?g|png)$/i.test(p)) continue;
-  // Skip already optimized naming for base optimization, but include for WEBP-only generation
-  if(!webpOnly && /(-webuse|-min)\.(jpe?g|png)$/i.test(p)) continue;
+  if(!/\.(jpe?g|png|webp)$/i.test(p)) continue;
+  // Skip already optimized JPG/PNG names for base optimization, but still check oversized WebP derivatives.
+  if(!webpOnly && /\.(jpe?g|png)$/i.test(p) && /(-webuse|-min)\.(jpe?g|png)$/i.test(p)) continue;
     if(st.size < threshold) continue;
     candidates.push({file:p,size:st.size});
   }
@@ -71,7 +71,7 @@ async function processAll(){
       skipped++; continue;
     }
   const img = sharp(buf, { failOn:'none' });
-  const toJpeg = !/\.png$/i.test(c.file);
+  const ext = path.extname(c.file).toLowerCase();
     let outBuffer;
     try {
       // Resize if extremely large width for additional savings
@@ -82,7 +82,13 @@ async function processAll(){
           pipeline = img.resize({ width: 2800 });
         }
       } catch { /* metadata not available, skip resize */ }
-      outBuffer = await pipeline[toJpeg ? 'jpeg' : 'png']({ quality, progressive: true }).toBuffer();
+      if (ext === '.webp') {
+        outBuffer = await pipeline.webp({ quality: Math.min(quality, 82) }).toBuffer();
+      } else if (ext === '.png') {
+        outBuffer = await pipeline.png({ quality, progressive: true }).toBuffer();
+      } else {
+        outBuffer = await pipeline.jpeg({ quality, progressive: true }).toBuffer();
+      }
     } catch (e) {
       console.warn('Failed to recompress - auto-optimize-events-images.js:85', c.file, e.message);
       report.push({file:c.file,before:c.size,after:c.size,status:'error',error:e.message});
@@ -92,6 +98,7 @@ async function processAll(){
       report.push({file:c.file,before:c.size,after:c.size,status:'error',error:'No buffer'}); skipped++; continue;
     }
     if(!force && outBuffer.length >= c.size*0.95){
+      totalAfter += c.size;
       report.push({file:c.file,before:c.size,after:c.size,status:'skip-small-gain'}); skipped++; continue;
     }
     // If WEBP-only mode is enabled, skip writing optimized original
@@ -100,6 +107,7 @@ async function processAll(){
       rec = {file:c.file,before:c.size,after:c.size,status: dry ? 'dry-run-webp-only' : 'webp-only'};
     } else {
       if(dry){
+        totalAfter += outBuffer.length;
         report.push({file:c.file,before:c.size,after:outBuffer.length,status:'dry-run'}); continue;
       }
       if(backup){
@@ -112,7 +120,7 @@ async function processAll(){
       totalAfter += outBuffer.length;
       rec = {file:c.file,before:c.size,after:outBuffer.length,status:'optimized'};
     }
-    if(doWebp){
+    if(doWebp && ext !== '.webp'){
       try {
         const webpPath = c.file.replace(/\.(jpe?g|png)$/i, '.webp');
         if(!force && fs.existsSync(webpPath)) {

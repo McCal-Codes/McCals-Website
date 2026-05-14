@@ -17,9 +17,9 @@ const path = require('path');
 const { detectDateFromImages, formatDisplayDate, createFallbackDate, MONTHS } = require('../utils/shared-date-parsing.js');
 const { notify } = require('../utils/manifest-webhook');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
+const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const MANIFEST_OUTPUT = path.join(PORTFOLIOS_BASE, 'portfolio-manifest.json');
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
 
 async function log(message, ...args) {
   console.log(`📸 ${message} - generate-universal-manifest.js:23`, ...args);
@@ -66,6 +66,11 @@ async function readManifest(manifestPath) {
 
 // Date parsing functions now handled by shared-date-parsing module
 
+function shouldSkipFolder(name) {
+  const normalized = name.toLowerCase();
+  return normalized.startsWith('.') || normalized.endsWith('.json') || normalized === 'thumbs';
+}
+
 function getDateDisplayFromFolder(folderName) {
   // Try to extract "Month Year" from folder name
   const monthYearPattern = /^(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})$/i;
@@ -105,13 +110,62 @@ function inferCategoryFromPath(portfolioType) {
   return categoryMap[portfolioType] || `${cleanTitle(portfolioType)} Photography`;
 }
 
+function dateObjectFromIso(iso, display) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+  if (!match) {
+    return createFallbackDate();
+  }
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  return {
+    year,
+    month,
+    monthName: MONTHS[month - 1] || '',
+    day,
+    iso,
+    display
+  };
+}
+
+async function processJournalismFromManifest(portfolioPath) {
+  const manifestPath = path.join(portfolioPath, 'journalism-manifest.json');
+  const manifest = await readManifest(manifestPath);
+  if (!manifest?.events?.length) {
+    return null;
+  }
+
+  log(`Using Journalism manifest: ${manifest.events.length} events`);
+
+  return manifest.events.map((event) => {
+    const images = dedupeImageEntries(
+      (event.images || []).map((image) => image.path || image.filename).filter(Boolean)
+    );
+    const iso = event.eventDate?.iso || '';
+    return {
+      type: 'Journalism',
+      category: inferCategoryFromPath('Journalism'),
+      name: event.eventName,
+      folderPath: `Journalism/${event.folderPath}`,
+      dateDisplay: event.dateDisplay,
+      date: dateObjectFromIso(iso, event.dateDisplay),
+      totalImages: images.length,
+      images: images.sort(),
+      coverImage: images[0],
+      tags: event.tags || [],
+      published: event.published === true
+    };
+  });
+}
+
 async function processPortfolioItem(portfolioType, itemName, itemPath) {
   log(`Processing ${portfolioType}/${itemName}`);
   
   try {
     const items = await fs.readdir(itemPath);
     const subfolders = [];
-    const imageFiles = items.filter(item => IMAGE_EXTENSIONS.test(item));
+    const imageFiles = dedupeImageEntries(items.filter(item => IMAGE_EXTENSION_RE.test(item)));
     
     // Check for direct images first
     if (imageFiles.length > 0) {
@@ -179,7 +233,7 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
     // Look for subfolders
     for (const item of items) {
       const subPath = path.join(itemPath, item);
-      if (await isDirectory(subPath)) {
+      if (await isDirectory(subPath) && !shouldSkipFolder(item)) {
         subfolders.push({ name: item, path: subPath });
       }
     }
@@ -192,7 +246,7 @@ async function processPortfolioItem(portfolioType, itemName, itemPath) {
     // Process subfolders (like Concert/Band/Month Year structure)
     for (const subfolder of subfolders) {
       const folderItems = await fs.readdir(subfolder.path);
-      const folderImages = folderItems.filter(item => IMAGE_EXTENSIONS.test(item));
+      const folderImages = dedupeImageEntries(folderItems.filter(item => IMAGE_EXTENSION_RE.test(item)));
       
       if (folderImages.length === 0) {
         continue; // Skip folders with no images
@@ -299,9 +353,16 @@ async function processPortfolioType(portfolioType, portfolioPath) {
   log(`Processing portfolio type: ${portfolioType}`);
   
   try {
+    if (portfolioType === 'Journalism') {
+      const journalismItems = await processJournalismFromManifest(portfolioPath);
+      if (journalismItems) {
+        return journalismItems;
+      }
+    }
+
     const items = await fs.readdir(portfolioPath);
     const itemFolders = [];
-    const directImages = items.filter(item => IMAGE_EXTENSIONS.test(item));
+    const directImages = dedupeImageEntries(items.filter(item => IMAGE_EXTENSION_RE.test(item)));
     
     // Check for direct images in the portfolio type folder (like Journalism)
     if (directImages.length > 0) {
@@ -337,7 +398,7 @@ async function processPortfolioType(portfolioType, portfolioPath) {
     // Otherwise, look for subfolders
     for (const item of items) {
       const itemPath = path.join(portfolioPath, item);
-      if (await isDirectory(itemPath) && !item.startsWith('.') && !item.endsWith('.json')) {
+      if (await isDirectory(itemPath) && !shouldSkipFolder(item)) {
         itemFolders.push({ name: item, path: itemPath });
       }
     }
@@ -375,7 +436,7 @@ async function generateUniversalManifest() {
     
     for (const type of portfolioTypes) {
       const typePath = path.join(PORTFOLIOS_BASE, type);
-      if (await isDirectory(typePath) && !type.startsWith('.') && !type.endsWith('.json')) {
+      if (await isDirectory(typePath) && !shouldSkipFolder(type)) {
         validPortfolioTypes.push({ name: type, path: typePath });
       }
     }

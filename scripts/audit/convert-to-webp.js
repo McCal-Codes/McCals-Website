@@ -6,9 +6,12 @@
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { exec } from 'child_process';
+import { createRequire } from 'module';
 import { promisify } from 'util';
 
 const execAsync = promisify(exec);
+const require = createRequire(import.meta.url);
+const { baseImageKey, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 
 const ALBUMS = [
   'Cleveland Browns at Pittsburgh Tailgate',
@@ -118,14 +121,19 @@ async function updateManifest(albumDir, _albumName) {
       return webpName;
     });
     
-    // Merge JPG and WebP (keep both)
+    // Merge JPG and WebP, then keep only the preferred display entry per pair.
     const allImages = [...manifest.images, ...webpImages];
-    manifest.images = allImages;
-    manifest.totalImages = allImages.length;
+    manifest.images = dedupeImageEntries(allImages);
+    manifest.totalImages = manifest.images.length;
+    const coverKey = baseImageKey(manifest.coverImage || '');
+    manifest.coverImage =
+      manifest.images.find((image) => baseImageKey(image) === coverKey) ||
+      manifest.images[0] ||
+      manifest.coverImage;
     manifest.hasWebP = true;
     
     await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
-    console.log(`   💾 Updated manifest (${allImages.length} total files)`);
+    console.log(`   💾 Updated manifest (${manifest.images.length} display files)`);
   } catch (err) {
     console.log(`   ⚠️  Failed to update manifest: ${err.message}`);
   }

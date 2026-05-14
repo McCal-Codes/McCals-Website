@@ -7,6 +7,7 @@ const path = require('path');
 const { detectDateFromFilename } = require('../utils/shared-date-parsing.js');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
 const { notify } = require('../utils/manifest-webhook');
+const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 
 // NOTE: Adjusted to include leading 'src/' so default matches repo structure
 const DEFAULT_ROOT = 'src/images/Portfolios/Events';
@@ -103,9 +104,22 @@ async function readDirSafe(dir) {
 function deriveCategory(dir) {
   const slug = dir.toLowerCase();
 
-  // Performance Art - theatrical and performance events
-  if (/(love.*s.*a.*game|howl.*at.*the.*moon|back\s*to\s*school\s*bash|growing\s*up)/i.test(dir))
-    return 'Performance Art';
+  // Theatre - staged productions and theatre-tagged coverage
+  if (
+    /(love.*s.*a.*game|guy.*hates.*musicals|ghostlight|theatre|theater|musical|growing\s*up)/i.test(
+      dir,
+    )
+  )
+    return 'Theatre';
+
+  // Journalism - documentary/event coverage that should surface as journalism
+  if (/(drag.*carnegie|drag\s+at\s+carnegie)/i.test(dir)) return 'Journalism';
+
+  // Events - broad social/community event coverage
+  if (/back\s*to\s*school\s*bash/i.test(dir)) return 'Event';
+
+  // Performance Art - non-theatre performance events
+  if (/howl.*at.*the.*moon/i.test(dir)) return 'Performance Art';
 
   // General - catch-all for community/outdoor activities like hikes
   if (
@@ -116,14 +130,21 @@ function deriveCategory(dir) {
 
   // Corporate events (including business parties/receptions)
   if (
-    /(james.*bond.*cocktail|cocktail.*party|inclusivity|workplace|myron.*cope|franks.*script|dance.*for.*a.*cause|robotics|denver)/i.test(
+    /(james.*bond.*cocktail|cocktail.*party|inclusivity|workplace|myron.*cope|franks.*script|dance.*for.*a.*cause|pennsylvania.*media.*awards|robotics|denver)/i.test(
       dir,
     )
   )
     return 'Corporate';
 
-  // Celebration - personal celebrations and graduations
-  if (/(gala|celebration|festival|wedding|graduation)/i.test(slug)) return 'Celebration';
+  // Dance - dance-specific venues and recitals
+  if (/(the\s*space\s*upstairs|dance\s*recital|fayette.*dance|psf.*dance)/i.test(dir))
+    return 'Dance';
+
+  // Graduation - commencement and graduation coverage
+  if (/(graduation|commencement|grad)/i.test(slug)) return 'Graduation';
+
+  // Celebration - personal celebrations
+  if (/(gala|celebration|festival|wedding)/i.test(slug)) return 'Celebration';
 
   // Conference - professional conferences and summits
   if (/(conference|summit|forum|symposium|local.*union|officers)/i.test(slug)) return 'Conference';
@@ -173,8 +194,8 @@ async function main() {
 
   const events = [];
   for (const dir of dirs) {
-    const files = (await readDirSafe(path.join(absRoot, dir))).filter((f) =>
-      /\.(jpe?g|png|webp|gif)$/i.test(f),
+    const files = dedupeImageEntries(
+      (await readDirSafe(path.join(absRoot, dir))).filter((f) => IMAGE_EXTENSION_RE.test(f)),
     );
     if (!files.length) continue;
 

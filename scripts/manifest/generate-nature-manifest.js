@@ -9,7 +9,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { notify } = require('../utils/manifest-webhook');
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i;
+const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
 const BASE_NATURE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Nature');
 const WILDLIFE_BASE = path.join(BASE_NATURE, 'Wildlife');
 const LANDSCAPES_BASE = path.join(BASE_NATURE, 'Landscapes');
@@ -23,7 +23,7 @@ async function isDirectory(dirPath) {
 }
 async function getImageFiles(folderPath) {
   const items = await fs.readdir(folderPath);
-  return items.filter(item => IMAGE_EXTENSIONS.test(item));
+  return dedupeImageEntries(items.filter(item => IMAGE_EXTENSION_RE.test(item)));
 }
 async function generateManifestForFolder(collectionName, folderPath, tags) {
   const imageFiles = await getImageFiles(folderPath);

@@ -24,6 +24,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { detectDateFromImages, formatDisplayDate, createFallbackDate } = require('../utils/shared-date-parsing.js');
 const { notify } = require('../utils/manifest-webhook');
+const { dedupeImageEntries, imageEntryName } = require('../utils/image-manifest-dedupe.js');
 
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const OUTPUT_MANIFEST = path.join(PORTFOLIOS_BASE, 'featured-manifest.json');
@@ -192,6 +193,10 @@ function normalizePortfolioItem(item, category) {
       path: img.path
     }));
   }
+  images = dedupeImageEntries(images);
+  const requestedCover = item.coverImage || item.cover || (item.images && item.images[0]) || null;
+  const coverName = imageEntryName(requestedCover);
+  const coverImage = images.find(img => imageEntryName(img) === coverName) || images[0] || requestedCover;
   
   return {
     ...item,
@@ -204,8 +209,8 @@ function normalizePortfolioItem(item, category) {
     id: item.id || item.name || item.title || `${category.toLowerCase()}-${Date.now()}`,
     title: item.title || item.name || item.id || 'Untitled',
     folderPath: item.folderPath || item.path || '',
-    coverImage: item.coverImage || item.cover || (item.images && item.images[0]) || null,
-    totalImages: item.totalImages || (item.images && item.images.length) || 0,
+    coverImage,
+    totalImages: images.length,
     images: images
   };
 }
