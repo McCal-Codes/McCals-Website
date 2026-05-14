@@ -1,3 +1,5 @@
+import { imageUrl } from '../components/portfolio/useManifest';
+
 export const LIVE_SITE_BASE = import.meta.env.VITE_LIVE_SITE_BASE || 'https://www.mcc-cal.com';
 
 export interface HomeFeaturedItem {
@@ -33,8 +35,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     title: 'Photojournalism',
     eyebrow: 'Journalism',
     href: '/journalism',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg?format=webp&width=1200',
+    imageUrl: imageUrl.journalism('Documentary/Boyd Station', '6-9-25_Caleb McCartney_134-min.jpg'),
     meta: 'Field features / Politics / Regional reporting',
   },
   events: {
@@ -42,8 +43,9 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     title: 'Events',
     eyebrow: 'Events',
     href: '/events',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg?format=webp&width=1200',
+    imageUrl: imageUrl.event(
+      'src/images/Portfolios/Events/bond-party-2023/230411_Cock Tail Hour - James Bond Event_876_Published.webp',
+    ),
     meta: 'Corporate coverage / Experiences / Client work',
   },
   concert: {
@@ -51,8 +53,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     title: 'Concerts',
     eyebrow: 'Concert',
     href: '/concerts',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg?format=webp&width=1200',
+    imageUrl: imageUrl.concert('Concert/Turtle Park/August 2025', '250829_Haven_CAL4401.jpg'),
     meta: 'Live performance / Touring artists / Venue work',
   },
   portraits: {
@@ -60,8 +61,10 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     title: 'Portraits',
     eyebrow: 'Portraits',
     href: '/portraits',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/8b6c6a68-c922-4e0f-9555-d1eafcf4f47b/250518_Senior+Portraits_CAL0318.jpg?format=webp&width=1200',
+    imageUrl: imageUrl.portrait(
+      'Editorial/Lucha 2024',
+      "240517_Lucha's Graduation Shoot_1607_CAL_Compressed.jpg",
+    ),
     meta: 'Editorial sessions / Graduates / Personal work',
   },
   nature: {
@@ -69,8 +72,7 @@ const LIVE_SITE_FEATURED_BY_TYPE: Record<string, HomeFeaturedItem> = {
     title: 'Nature',
     eyebrow: 'Nature',
     href: '/nature',
-    imageUrl:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg?format=webp&width=1200',
+    imageUrl: imageUrl.nature('Landscapes/West Virginia', 'barn.jpg'),
     meta: 'Landscapes / Quiet studies / Field notes',
   },
 };
@@ -83,8 +85,7 @@ export const LIVE_SITE_HOME_FEATURED_ITEMS: HomeFeaturedItem[] = [
 
 export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg?format=webp&width=1920',
+    image: imageUrl.journalism('Documentary/Boyd Station', '6-9-25_Caleb McCartney_134-min.jpg'),
     alt: 'A woman and a child holding a sparkler at night, with dark trees in the background.',
     eyebrow: 'Journalism',
     title: 'Field stories with room to breathe.',
@@ -94,8 +95,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaLink: '/journalism',
   },
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/3a804513-dde2-4a01-b38c-d67528d655f4/250715_CMU+Trump+Protest_CAL1573.jpg?format=webp&width=1920',
+    image: imageUrl.journalism('Politics/cmu-trump-protest', '250715_CMU Trump Protest_CAL1573-min.jpg'),
     alt: 'Demonstrators gather during a protest in Pittsburgh.',
     eyebrow: 'Politics',
     title: 'Politics',
@@ -105,8 +105,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaLink: '/journalism',
   },
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/1757468682503-YXX6ILQYQ1CMH1OT66WD/141024_Kamala+Speaks+at+Erie_CAL3804+1+%281%29.jpg?format=webp&width=1920',
+    image: imageUrl.journalism('Politics/kamala-speaks-erie', '141024_Kamala Speaks at Erie_CAL3804.jpg'),
     alt: 'Supporters listen during a campaign event in Erie, Pennsylvania.',
     eyebrow: 'Pittsburgh',
     title: 'City Stories',
@@ -116,8 +115,9 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaLink: '/journalism',
   },
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/abf749ae-bd3d-45a0-9d6a-690a8cf0055d/230411_Cock+Tail+Hour+-+James+Bond+Event_876_Published.jpg?format=webp&width=1920',
+    image: imageUrl.event(
+      'src/images/Portfolios/Events/bond-party-2023/230411_Cock Tail Hour - James Bond Event_876_Published.webp',
+    ),
     alt: 'Guests networking at a cocktail event while a bartender prepares drinks.',
     eyebrow: 'Corporate',
     title: 'Corporate',
@@ -127,8 +127,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaLink: '/events',
   },
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/a2b77c48-9cf4-4e5f-b15a-1c373e5fc5c1/250823_Honky+Tonk_CAL4149.jpg?format=webp&width=1920',
+    image: imageUrl.event('src/images/Portfolios/Events/Pittsburgh Honky Tonk/250823_Honky Tonk_CAL4149.jpg'),
     alt: 'Guests watching a lively show with colorful lighting and confetti.',
     eyebrow: 'Events',
     title: 'Events',
@@ -137,8 +136,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaLink: '/events',
   },
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/2aa375a0-a9b1-4965-9ae2-23e9660f7c3e/250829_Haven_CAL4401.jpg?format=webp&width=1920',
+    image: imageUrl.concert('Concert/Turtle Park/August 2025', '250829_Haven_CAL4401.jpg'),
     alt: 'A musician playing bass on stage under purple and blue lights.',
     eyebrow: 'Concert',
     title: 'Concert',
@@ -147,8 +145,10 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaLink: '/concerts',
   },
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/8b6c6a68-c922-4e0f-9555-d1eafcf4f47b/250518_Senior+Portraits_CAL0318.jpg?format=webp&width=1920',
+    image: imageUrl.portrait(
+      'Editorial/Lucha 2024',
+      "240517_Lucha's Graduation Shoot_1607_CAL_Compressed.jpg",
+    ),
     alt: 'A portrait subject standing in evening light outdoors.',
     eyebrow: 'Portraits',
     title: 'Portraits',
@@ -157,8 +157,7 @@ export const LIVE_SITE_HERO_SLIDES: HeroSlide[] = [
     ctaLink: '/portraits',
   },
   {
-    image:
-      'https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg?format=webp&width=1920',
+    image: imageUrl.nature('Landscapes/West Virginia', 'barn.jpg'),
     alt: 'A quiet natural landscape photographed in soft light.',
     eyebrow: 'Nature',
     title: 'Nature',

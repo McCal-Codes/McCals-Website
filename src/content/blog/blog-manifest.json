@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-12T18:14:20.310Z",
+  "generated": "2026-05-14T11:59:28.637Z",
   "total": 9,
   "posts": [
     {
@@ -32,7 +32,7 @@
       "category": "Politics",
       "excerpt": "A look at how late capitalism repackages control as freedom, style, and self-invention.",
       "leadImage": "posts/the-capitalist-contradiction/images/lead.jpg",
-      "leadImageFallback": "https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/eedc836b-ce05-4452-b29c-8ab2a64f384e/101024_Obama+Speaks+at+Pittsburgh_CAL3364-min.jpg",
+      "leadImageFallback": "posts/the-capitalist-contradiction/images/lead.jpg",
       "leadImageAlt": "Former President Barack Obama speaks to a crowd during a campaign rally in Pittsburgh.",
       "leadImageCaption": "Former President Barack Obama speaks during a campaign rally in Pittsburgh on Oct. 10, 2024.",
       "published": true,
@@ -170,7 +170,7 @@
       "category": "Personal",
       "excerpt": "A memory of being handed a controller becomes an essay about pressure, control, and the simple moments that still cut through the noise.",
       "leadImage": "posts/player-one/images/lead.jpg",
-      "leadImageFallback": "https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/f75a0ba5-795a-4b29-a86e-eb890ef944a3/6-9-25_Caleb+McCartney_134.jpg",
+      "leadImageFallback": "posts/player-one/images/lead.jpg",
       "leadImageAlt": "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Kentucky.",
       "leadImageCaption": "A boy holds a sparkler with an adult beside him in Boyd Station, Ky., June 9, 2025.",
       "published": true,
@@ -191,7 +191,7 @@
       "category": "Personal",
       "excerpt": "After several deaths in quick succession, grief stopped arriving as a single event and became the atmosphere around everything else.",
       "leadImage": "posts/in-the-shadow-of-loss/images/lead.jpg",
-      "leadImageFallback": "https://images.squarespace-cdn.com/content/v1/68c0d80717db343b721449f3/0d0b4430-2b38-4518-bb1d-19a8992a6264/20240706-_CAL6872.jpg",
+      "leadImageFallback": "posts/in-the-shadow-of-loss/images/lead.jpg",
       "leadImageAlt": "A red-roof barn sits beyond a fence line in a quiet hillside landscape.",
       "leadImageCaption": "A quiet hillside and weathered barn hold the frame in soft evening light.",
       "published": true,
