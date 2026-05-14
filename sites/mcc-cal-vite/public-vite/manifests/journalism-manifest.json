@@ -1,23 +1,28 @@
 {
   "version": "2.0.0",
-  "generated": "2026-04-14T22:49:52.501Z",
-  "totalEvents": 13,
-  "totalImages": 445,
+  "generated": "2026-05-13T21:09:20.489Z",
+  "totalEvents": 15,
+  "totalImages": 402,
   "categories": [
     "Documentary",
+    "Events",
     "Politics"
   ],
   "tags": [
     "Documentary",
     "Events",
+    "Featured",
+    "Journalism",
     "Politics",
     "Presidential Campaign",
+    "Protest",
     "Published Work",
     "Sports"
   ],
   "categoryStats": {
-    "Politics": 9,
-    "Documentary": 4
+    "Documentary": 4,
+    "Events": 2,
+    "Politics": 9
   },
   "events": [
     {
@@ -227,7 +232,7 @@
         "source": "metadata"
       },
       "dateDisplay": "August 2, 2025",
-      "totalImages": 49,
+      "totalImages": 43,
       "images": [
         {
           "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
@@ -440,20 +445,10 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2643-min.jpg",
-          "path": "250802_yardsale_CAL2643-min.jpg",
-          "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
-          "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2643-min.webp",
           "path": "250802_yardsale_CAL2643-min.webp",
-          "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
-          "caption": "Historic Society Yard Sale — August 2025",
+          "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
+          "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -510,20 +505,10 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2651-min.jpg",
-          "path": "250802_yardsale_CAL2651-min.jpg",
-          "description": "A female vendor stands at her table in front of the historic brick Brentwood Area Historical Society building, with its green-trimmed windows and patriotic decoration visible above the entrance, at the annual yard sale.",
-          "caption": "A vendor stands at her table in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2651-min.webp",
           "path": "250802_yardsale_CAL2651-min.webp",
-          "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
-          "caption": "Historic Society Yard Sale — August 2025",
+          "description": "A female vendor stands at her table in front of the historic brick Brentwood Area Historical Society building, with its green-trimmed windows and patriotic decoration visible above the entrance, at the annual yard sale.",
+          "caption": "A vendor stands at her table in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -540,20 +525,10 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2657-min.jpg",
-          "path": "250802_yardsale_CAL2657-min.jpg",
-          "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
-          "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2657-min.webp",
           "path": "250802_yardsale_CAL2657-min.webp",
-          "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
-          "caption": "Historic Society Yard Sale — August 2025",
+          "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
+          "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -610,8 +585,8 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2681-min.jpg",
-          "path": "250802_yardsale_CAL2681-min.jpg",
+          "filename": "250802_yardsale_CAL2681-min.webp",
+          "path": "250802_yardsale_CAL2681-min.webp",
           "description": "Wide view of the Brentwood Area Historical Society yard sale showing multiple white-clothed vendor tables on the lawn, shoppers browsing, and the large red-brick historical society building visible behind the event grounds.",
           "caption": "Shoppers browse vendor tables in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
@@ -620,30 +595,10 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2681-min.webp",
-          "path": "250802_yardsale_CAL2681-min.webp",
-          "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
-          "caption": "Historic Society Yard Sale — August 2025",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2682-min.jpg",
-          "path": "250802_yardsale_CAL2682-min.jpg",
-          "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
-          "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2682-min.webp",
           "path": "250802_yardsale_CAL2682-min.webp",
-          "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
-          "caption": "Historic Society Yard Sale — August 2025",
+          "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
+          "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -700,20 +655,10 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2693-min.jpg",
-          "path": "250802_yardsale_CAL2693-min.jpg",
-          "description": "Decorative glassware and vases are displayed on a vendor table under a shade tent at the Brentwood Area Historical Society yard sale, with shoppers browsing nearby booths and the brick historical society building visible behind.",
-          "caption": "Decorative glassware is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2693-min.webp",
           "path": "250802_yardsale_CAL2693-min.webp",
-          "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
-          "caption": "Historic Society Yard Sale — August 2025",
+          "description": "Decorative glassware and vases are displayed on a vendor table under a shade tent at the Brentwood Area Historical Society yard sale, with shoppers browsing nearby booths and the brick historical society building visible behind.",
+          "caption": "Decorative glassware is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -1113,7 +1058,7 @@
         "source": "metadata"
       },
       "dateDisplay": "July 4, 2025",
-      "totalImages": 55,
+      "totalImages": 51,
       "images": [
         {
           "filename": "250704_Brentwood 4th of July_CAL9762-min.jpg",
@@ -1366,20 +1311,10 @@
           ]
         },
         {
-          "filename": "250704_brentwood4th_CAL9766-min.jpg",
-          "path": "250704_brentwood4th_CAL9766-min.jpg",
-          "description": "A large group stands together under yellow umbrellas on a paved area at the Brentwood Fourth of July event, with picnic tables and shade structures visible nearby.",
-          "caption": "Residents gather under yellow umbrellas at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9766-min.webp",
           "path": "250704_brentwood4th_CAL9766-min.webp",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "caption": "Brentwood 4th of July 2025",
+          "description": "A large group stands together under yellow umbrellas on a paved area at the Brentwood Fourth of July event, with picnic tables and shade structures visible nearby.",
+          "caption": "Residents gather under yellow umbrellas at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -1406,20 +1341,10 @@
           ]
         },
         {
-          "filename": "250704_brentwood4th_CAL9790-min.jpg",
-          "path": "250704_brentwood4th_CAL9790-min.jpg",
-          "description": "Two young women sit on a blue platform bench at golden hour during the Brentwood Fourth of July event, with trees and utility poles in the background.",
-          "caption": "Attendees sit on a bench at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9790-min.webp",
           "path": "250704_brentwood4th_CAL9790-min.webp",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "caption": "Brentwood 4th of July 2025",
+          "description": "Two young women sit on a blue platform bench at golden hour during the Brentwood Fourth of July event, with trees and utility poles in the background.",
+          "caption": "Attendees sit on a bench at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -1496,20 +1421,10 @@
           ]
         },
         {
-          "filename": "250704_brentwood4th_CAL9827-min.jpg",
-          "path": "250704_brentwood4th_CAL9827-min.jpg",
-          "description": "A basketball is captured mid-flight above the court during a pickup game at the Brentwood Fourth of July event, with spectators visible in the background.",
-          "caption": "A player shoots during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9827-min.webp",
           "path": "250704_brentwood4th_CAL9827-min.webp",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "caption": "Brentwood 4th of July 2025",
+          "description": "A basketball is captured mid-flight above the court during a pickup game at the Brentwood Fourth of July event, with spectators visible in the background.",
+          "caption": "A player shoots during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -1646,20 +1561,10 @@
           ]
         },
         {
-          "filename": "250704_brentwood4th_CAL9895-min.jpg",
-          "path": "250704_brentwood4th_CAL9895-min.jpg",
-          "description": "Residents gather at the Brentwood Fourth of July community event.",
-          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9895-min.webp",
           "path": "250704_brentwood4th_CAL9895-min.webp",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "caption": "Brentwood 4th of July 2025",
+          "description": "Residents gather at the Brentwood Fourth of July community event.",
+          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -1690,7 +1595,7 @@
         "source": "metadata"
       },
       "dateDisplay": "June 9, 2025",
-      "totalImages": 51,
+      "totalImages": 43,
       "images": [
         {
           "filename": "6-10-25_Caleb McCartney_210-min.jpg",
@@ -1723,20 +1628,10 @@
           ]
         },
         {
-          "filename": "6-10-25_Caleb McCartney_244-min.jpg",
-          "path": "6-10-25_Caleb McCartney_244-min.jpg",
-          "description": "Two men, one bald in a light blue button-down and one with longer hair in a dark shirt, stand conversing among antique furniture, gilded lamps, framed portraits, and decorative objects inside an antique shop.",
-          "caption": "Two men browse antiques in a shop at Boyd Station, Ky., June 10, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "6-10-25_Caleb McCartney_244-min.webp",
           "path": "6-10-25_Caleb McCartney_244-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
+          "description": "Two men, one bald in a light blue button-down and one with longer hair in a dark shirt, stand conversing among antique furniture, gilded lamps, framed portraits, and decorative objects inside an antique shop.",
+          "caption": "Two men browse antiques in a shop at Boyd Station, Ky., June 10, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -1823,8 +1718,8 @@
           ]
         },
         {
-          "filename": "6-10-25_Caleb McCartney_320-min.jpg",
-          "path": "6-10-25_Caleb McCartney_320-min.jpg",
+          "filename": "6-10-25_Caleb McCartney_320-min.webp",
+          "path": "6-10-25_Caleb McCartney_320-min.webp",
           "description": "A man in a gray button-down shirt, jeans, and white cap bends over to tend to young vegetable seedlings in a freshly tilled garden row, with rolling green pastures, fencing, and trees visible in the soft evening light behind him.",
           "caption": "A farmer tends seedlings in a garden at Boyd Station, Ky., June 10, 2025.",
           "tags": [
@@ -1833,18 +1728,8 @@
           ]
         },
         {
-          "filename": "6-10-25_Caleb McCartney_320-min.webp",
-          "path": "6-10-25_Caleb McCartney_320-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-10-25_Caleb McCartney_321-min.jpg",
-          "path": "6-10-25_Caleb McCartney_321-min.jpg",
+          "filename": "6-10-25_Caleb McCartney_321-min.webp",
+          "path": "6-10-25_Caleb McCartney_321-min.webp",
           "description": "Alternate frame of a man in jeans and a gray shirt crouching to inspect vegetable seedlings in a tilled garden, with a pastoral landscape of green hills and scattered trees glowing in the warm dusk light behind him.",
           "caption": "A farmer examines seedlings in an evening garden at Boyd Station, Ky., June 10, 2025.",
           "tags": [
@@ -1853,18 +1738,8 @@
           ]
         },
         {
-          "filename": "6-10-25_Caleb McCartney_321-min.webp",
-          "path": "6-10-25_Caleb McCartney_321-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-10-25_Caleb McCartney_325-min.jpg",
-          "path": "6-10-25_Caleb McCartney_325-min.jpg",
+          "filename": "6-10-25_Caleb McCartney_325-min.webp",
+          "path": "6-10-25_Caleb McCartney_325-min.webp",
           "description": "A man and a woman, both wearing white cowboy hats, stand with their backs to the camera looking out over a green pasture where several black cattle graze, with a white barn and tree line visible in the background at dusk.",
           "caption": "Two ranchers observe a herd of cattle in a pasture at Boyd Station, Ky., June 10, 2025.",
           "tags": [
@@ -1873,18 +1748,8 @@
           ]
         },
         {
-          "filename": "6-10-25_Caleb McCartney_325-min.webp",
-          "path": "6-10-25_Caleb McCartney_325-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-11-25_Caleb McCartney_350-min.jpg",
-          "path": "6-11-25_Caleb McCartney_350-min.jpg",
+          "filename": "6-11-25_Caleb McCartney_350-min.webp",
+          "path": "6-11-25_Caleb McCartney_350-min.webp",
           "description": "A middle-aged man in a blue short-sleeve shirt and glasses sits at a booth looking at his phone, with a bowl of soup, a plate of rice, and a red Coca-Cola cup on the table before him, a school bus and overcast sky visible through the window behind him.",
           "caption": "A man dines at a restaurant at Boyd Station, Ky., June 11, 2025.",
           "tags": [
@@ -1893,30 +1758,10 @@
           ]
         },
         {
-          "filename": "6-11-25_Caleb McCartney_350-min.webp",
-          "path": "6-11-25_Caleb McCartney_350-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-11-25_Caleb McCartney_354-min.jpg",
-          "path": "6-11-25_Caleb McCartney_354-min.jpg",
-          "description": "Close portrait of a middle-aged man in a blue shirt and glasses looking directly into the camera with a neutral expression, seated against a gray wood-paneled wall.",
-          "caption": "A man is photographed in portrait at a restaurant at Boyd Station, Ky., June 11, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "6-11-25_Caleb McCartney_354-min.webp",
           "path": "6-11-25_Caleb McCartney_354-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
+          "description": "Close portrait of a middle-aged man in a blue shirt and glasses looking directly into the camera with a neutral expression, seated against a gray wood-paneled wall.",
+          "caption": "A man is photographed in portrait at a restaurant at Boyd Station, Ky., June 11, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -1983,29 +1828,9 @@
           ]
         },
         {
-          "filename": "6-12-25_Caleb McCartney_411-min.jpg",
-          "path": "6-12-25_Caleb McCartney_411-min.jpg",
-          "description": "A man in a blue t-shirt and jeans walks across a two-lane rural road balancing a large zebra-print item on his shoulders, nearly obscuring his face, as green summer trees line both sides of the winding road and a pickup truck is parked nearby.",
-          "caption": "A man carries a large item across a rural road at Boyd Station, Ky., June 12, 2025.",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "6-12-25_Caleb McCartney_411-min.webp",
           "path": "6-12-25_Caleb McCartney_411-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-12-25_Caleb McCartney_412-min.jpg",
-          "path": "6-12-25_Caleb McCartney_412-min.jpg",
-          "description": "Alternate frame of the same man crossing the road with a large zebra-print item balanced overhead, with open sky, green vegetation, and a white pickup truck visible in the background.",
+          "description": "A man in a blue t-shirt and jeans walks across a two-lane rural road balancing a large zebra-print item on his shoulders, nearly obscuring his face, as green summer trees line both sides of the winding road and a pickup truck is parked nearby.",
           "caption": "A man carries a large item across a rural road at Boyd Station, Ky., June 12, 2025.",
           "tags": [
             "Documentary",
@@ -2015,8 +1840,8 @@
         {
           "filename": "6-12-25_Caleb McCartney_412-min.webp",
           "path": "6-12-25_Caleb McCartney_412-min.webp",
-          "description": "Boyd Station community feature — multi-day photojournalism assignment documenting rural life, local businesses, farming, and live music at Aeolian Music Hall in Boyd Station, Ky., June 2025",
-          "caption": "Boyd Station — June 2025",
+          "description": "Alternate frame of the same man crossing the road with a large zebra-print item balanced overhead, with open sky, green vegetation, and a white pickup truck visible in the background.",
+          "caption": "A man carries a large item across a rural road at Boyd Station, Ky., June 12, 2025.",
           "tags": [
             "Documentary",
             "Events"
@@ -2330,6 +2155,201 @@
       ],
       "published": false,
       "metadata": {}
+    },
+    {
+      "eventName": "Drag At Carnegie Coffee",
+      "category": "Events",
+      "tags": [
+        "Events",
+        "Journalism",
+        "Featured"
+      ],
+      "folderPath": "Events/Drag at Carnegie Coffee",
+      "eventDate": {
+        "iso": "2025-03-09",
+        "source": "metadata"
+      },
+      "dateDisplay": "March 9, 2025",
+      "totalImages": 15,
+      "images": [
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9040.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9040.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9088.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9088.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9135.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9135.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9145.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9145.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9158.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9158.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9241.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9241.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9282.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9282.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9319.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9319.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9346.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9346.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9362.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9362.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9406.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9406.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9460.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9460.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9516.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9516.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9573.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9573.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "250309 Drag at Carnegie Coffee_CAL9579.jpg",
+          "path": "250309 Drag at Carnegie Coffee_CAL9579.jpg",
+          "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+          "caption": "Drag at Carnegie Coffee, March 2025",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Featured"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Journalism",
+          "Featured"
+        ],
+        "published": false,
+        "date": "2025-03-09",
+        "description": "Photojournalism coverage of a drag show at Carnegie Coffee in Carnegie, Pa., March 9, 2025.",
+        "caption": "Drag at Carnegie Coffee, March 2025"
+      }
     },
     {
       "eventName": "Kamala Pittsburgh",
@@ -2671,7 +2691,7 @@
         "source": "metadata"
       },
       "dateDisplay": "October 14, 2024",
-      "totalImages": 61,
+      "totalImages": 52,
       "images": [
         {
           "filename": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
@@ -2696,15 +2716,6 @@
           "path": "141024_Kamala Speaks at Erie_CAL3752.jpg",
           "description": "Vice President Kamala Harris waves to attendees at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "caption": "Vice President Kamala Harris waves to attendees at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3754.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3754.jpg",
-          "description": "Supporters cheer during a campaign rally with Vice President Kamala Harris Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Supporters cheer during a campaign rally with Vice President Kamala Harris Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -3079,28 +3090,10 @@
           ]
         },
         {
-          "filename": "241014_Kamala Speaks at Erie_CAL3741.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL3741.jpg",
-          "description": "Vice President Kamala Harris, the Democratic presidential nominee, speaks during a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris, the Democratic presidential nominee, speaks during a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241014_Kamala Speaks at Erie_CAL3741.webp",
           "path": "241014_Kamala Speaks at Erie_CAL3741.webp",
           "description": "Vice President Kamala Harris addresses supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "caption": "Vice President Kamala Harris addresses supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241014_Kamala Speaks at Erie_CAL3757.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL3757.jpg",
-          "description": "Vice President Kamala Harris waves to attendees at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris waves to attendees at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -3115,28 +3108,10 @@
           ]
         },
         {
-          "filename": "241014_Kamala Speaks at Erie_CAL3766.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL3766.jpg",
-          "description": "Vice President Kamala Harris greets supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris greets supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241014_Kamala Speaks at Erie_CAL3766.webp",
           "path": "241014_Kamala Speaks at Erie_CAL3766.webp",
           "description": "Vice President Kamala Harris, the Democratic presidential nominee, speaks during a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "caption": "Vice President Kamala Harris, the Democratic presidential nominee, speaks during a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241014_Kamala Speaks at Erie_CAL3804.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL3804.jpg",
-          "description": "Vice President Kamala Harris addresses supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris addresses supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -3151,28 +3126,10 @@
           ]
         },
         {
-          "filename": "241014_Kamala Speaks at Erie_CAL3851.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL3851.jpg",
-          "description": "Supporters cheer during a campaign rally with Vice President Kamala Harris Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Supporters cheer during a campaign rally with Vice President Kamala Harris Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241014_Kamala Speaks at Erie_CAL3851.webp",
           "path": "241014_Kamala Speaks at Erie_CAL3851.webp",
           "description": "Vice President Kamala Harris greets supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "caption": "Vice President Kamala Harris greets supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241014_Kamala Speaks at Erie_CAL4115.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL4115.jpg",
-          "description": "Vice President Kamala Harris, the Democratic presidential nominee, speaks during a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris, the Democratic presidential nominee, speaks during a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -3187,28 +3144,10 @@
           ]
         },
         {
-          "filename": "241014_Kamala Speaks at Erie_CAL4248.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL4248.jpg",
-          "description": "Vice President Kamala Harris waves to attendees at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris waves to attendees at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241014_Kamala Speaks at Erie_CAL4248.webp",
           "path": "241014_Kamala Speaks at Erie_CAL4248.webp",
           "description": "Supporters cheer during a campaign rally with Vice President Kamala Harris Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "caption": "Supporters cheer during a campaign rally with Vice President Kamala Harris Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241014_Kamala Speaks at Erie_CAL6948.jpg",
-          "path": "241014_Kamala Speaks at Erie_CAL6948.jpg",
-          "description": "Vice President Kamala Harris greets supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris greets supporters at a campaign rally Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -3246,29 +3185,11 @@
         "source": "metadata"
       },
       "dateDisplay": "October 12, 2024",
-      "totalImages": 70,
+      "totalImages": 35,
       "images": [
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3495.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3495.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
         {
           "filename": "241012_JD Vance in Johnstown_CAL3495.webp",
           "path": "241012_JD Vance in Johnstown_CAL3495.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3497.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3497.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3285,26 +3206,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3502.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3502.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3502.webp",
           "path": "241012_JD Vance in Johnstown_CAL3502.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3507.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3507.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3321,26 +3224,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3511.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3511.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3511.webp",
           "path": "241012_JD Vance in Johnstown_CAL3511.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3514.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3514.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3357,26 +3242,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3515.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3515.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3515.webp",
           "path": "241012_JD Vance in Johnstown_CAL3515.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3516.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3516.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3393,26 +3260,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3518.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3518.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3518.webp",
           "path": "241012_JD Vance in Johnstown_CAL3518.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3538.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3538.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3429,26 +3278,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3545.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3545.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3545.webp",
           "path": "241012_JD Vance in Johnstown_CAL3545.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3552.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3552.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3465,26 +3296,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3554.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3554.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3554.webp",
           "path": "241012_JD Vance in Johnstown_CAL3554.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3578.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3578.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3501,26 +3314,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3582.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3582.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3582.webp",
           "path": "241012_JD Vance in Johnstown_CAL3582.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3584.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3584.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3537,26 +3332,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3588.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3588.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3588.webp",
           "path": "241012_JD Vance in Johnstown_CAL3588.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3599.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3599.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3573,26 +3350,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3600.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3600.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3600.webp",
           "path": "241012_JD Vance in Johnstown_CAL3600.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3604.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3604.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3609,26 +3368,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3619.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3619.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3619.webp",
           "path": "241012_JD Vance in Johnstown_CAL3619.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3621.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3621.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3645,26 +3386,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3630.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3630.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3630.webp",
           "path": "241012_JD Vance in Johnstown_CAL3630.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3636.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3636.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3681,26 +3404,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL3638.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3638.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL3638.webp",
           "path": "241012_JD Vance in Johnstown_CAL3638.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL3648.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL3648.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3717,26 +3422,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL6574.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6574.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL6574.webp",
           "path": "241012_JD Vance in Johnstown_CAL6574.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL6576.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6576.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3753,26 +3440,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL6590.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6590.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL6590.webp",
           "path": "241012_JD Vance in Johnstown_CAL6590.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL6600.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6600.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3789,26 +3458,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL6613.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6613.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL6613.webp",
           "path": "241012_JD Vance in Johnstown_CAL6613.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL6614.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6614.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -3825,15 +3476,6 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL6629.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6629.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL6629.webp",
           "path": "241012_JD Vance in Johnstown_CAL6629.webp",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
@@ -3843,26 +3485,8 @@
           ]
         },
         {
-          "filename": "241012_JD Vance in Johnstown_CAL6632.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6632.jpg",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
           "filename": "241012_JD Vance in Johnstown_CAL6632.webp",
           "path": "241012_JD Vance in Johnstown_CAL6632.webp",
-          "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
-          "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics"
-          ]
-        },
-        {
-          "filename": "241012_JD Vance in Johnstown_CAL6652.jpg",
-          "path": "241012_JD Vance in Johnstown_CAL6652.jpg",
           "description": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa.",
           "caption": "Republican vice presidential nominee J.D. Vance campaigns Oct. 12, 2024, at JWF Industries in Johnstown, Pa. (Photo by Caleb McCartney)",
           "tags": [
@@ -4518,8 +4142,8 @@
         {
           "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2649.webp",
           "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2649.webp",
-          "description": "Republican presidential nominee Donald Trump stands on stage at a campaign rally Oct. 5, 2024, in Butler, Pa. (Photo by Caleb McCartney)",
-          "caption": "Republican presidential nominee Donald Trump stands on stage at a campaign rally Oct. 5, 2024, in Butler, Pa. (Photo by Caleb McCartney)",
+          "description": "Republican presidential nominee Donald Trump appears at a campaign rally Oct. 5, 2024, in Butler, Pa., with supporters and security gathered near the stage area. (Photo by Caleb McCartney)",
+          "caption": "Republican presidential nominee Donald Trump appears at a campaign rally Oct. 5, 2024, in Butler, Pa., with supporters and security gathered near the stage area. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -4545,8 +4169,8 @@
         {
           "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2672.webp",
           "path": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2672.webp",
-          "description": "Republican presidential nominee Donald Trump waves to the crowd at a campaign rally Oct. 5, 2024, in Butler, Pa. (Photo by Caleb McCartney)",
-          "caption": "Republican presidential nominee Donald Trump waves to the crowd at a campaign rally Oct. 5, 2024, in Butler, Pa. (Photo by Caleb McCartney)",
+          "description": "Republican presidential nominee Donald Trump waves to the crowd during a campaign rally Oct. 5, 2024, in Butler, Pa., with a white bandage on his ear. (Photo by Caleb McCartney)",
+          "caption": "Republican presidential nominee Donald Trump waves to the crowd during a campaign rally Oct. 5, 2024, in Butler, Pa., with a white bandage on his ear. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -4563,8 +4187,8 @@
         {
           "filename": "051024_Trump_Returns_Butler_PA_CAL2649.webp",
           "path": "051024_Trump_Returns_Butler_PA_CAL2649.webp",
-          "description": "Republican presidential nominee Donald Trump greets supporters at a campaign rally Oct. 5, 2024, in Butler, Pa. (Photo by Caleb McCartney)",
-          "caption": "Republican presidential nominee Donald Trump greets supporters at a campaign rally Oct. 5, 2024, in Butler, Pa. (Photo by Caleb McCartney)",
+          "description": "Republican presidential nominee Donald Trump appears at a campaign rally Oct. 5, 2024, in Butler, Pa., with supporters and security gathered near the stage area. (Photo by Caleb McCartney)",
+          "caption": "Republican presidential nominee Donald Trump appears at a campaign rally Oct. 5, 2024, in Butler, Pa., with supporters and security gathered near the stage area. (Photo by Caleb McCartney)",
           "tags": [
             "Politics"
           ]
@@ -4614,6 +4238,86 @@
           "Politics"
         ],
         "published": false
+      }
+    },
+    {
+      "eventName": "Pro Palestine Protest At Pitt",
+      "category": "Events",
+      "tags": [
+        "Events",
+        "Journalism",
+        "Protest",
+        "Featured"
+      ],
+      "folderPath": "Events/Pro Palestine Protest at Pitt",
+      "eventDate": {
+        "iso": "2024-04-30",
+        "source": "metadata"
+      },
+      "dateDisplay": "April 30, 2024",
+      "totalImages": 4,
+      "images": [
+        {
+          "filename": "240430_Pro Palestine Protest at Pitt_CAL1489_webuse.jpg",
+          "path": "240430_Pro Palestine Protest at Pitt_CAL1489_webuse.jpg",
+          "description": "Photojournalism coverage of a pro-Palestine protest at the University of Pittsburgh in Pittsburgh, Pa., April 30, 2024.",
+          "caption": "Pro-Palestine protest at Pitt, April 30, 2024",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Protest",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "240430_Pro Palestine Protest at Pitt_CAL1501_webuse.jpg",
+          "path": "240430_Pro Palestine Protest at Pitt_CAL1501_webuse.jpg",
+          "description": "Photojournalism coverage of a pro-Palestine protest at the University of Pittsburgh in Pittsburgh, Pa., April 30, 2024.",
+          "caption": "Pro-Palestine protest at Pitt, April 30, 2024",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Protest",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "240430_Pro Palestine Protest at Pitt_CAL1506_webuse.jpg",
+          "path": "240430_Pro Palestine Protest at Pitt_CAL1506_webuse.jpg",
+          "description": "Photojournalism coverage of a pro-Palestine protest at the University of Pittsburgh in Pittsburgh, Pa., April 30, 2024.",
+          "caption": "Pro-Palestine protest at Pitt, April 30, 2024",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Protest",
+            "Featured"
+          ]
+        },
+        {
+          "filename": "240430_Pro Palestine Protest at Pitt_CAL1512_webuse.jpg",
+          "path": "240430_Pro Palestine Protest at Pitt_CAL1512_webuse.jpg",
+          "description": "Photojournalism coverage of a pro-Palestine protest at the University of Pittsburgh in Pittsburgh, Pa., April 30, 2024.",
+          "caption": "Pro-Palestine protest at Pitt, April 30, 2024",
+          "tags": [
+            "Events",
+            "Journalism",
+            "Protest",
+            "Featured"
+          ]
+        }
+      ],
+      "published": false,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Journalism",
+          "Protest",
+          "Featured"
+        ],
+        "published": false,
+        "date": "2024-04-30",
+        "description": "Photojournalism coverage of a pro-Palestine protest at the University of Pittsburgh in Pittsburgh, Pa., April 30, 2024.",
+        "caption": "Pro-Palestine protest at Pitt, April 30, 2024"
       }
     }
   ]

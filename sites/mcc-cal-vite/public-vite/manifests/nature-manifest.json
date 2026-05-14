@@ -1,14 +1,19 @@
 {
   "version": "1.0.0",
-  "generated": "2026-02-02T23:27:42.316Z",
+  "generated": "2026-05-13T21:09:33.489Z",
   "totalCollections": 5,
   "collections": [
     {
       "collectionName": "Bare-faced Curassow",
       "folderPath": "Wildlife/Birds/Bare-faced Curassow",
       "totalImages": 2,
-      "images": ["230727_Aviary_Soot__CAL4536.jpg", "230727_Aviary_Soot__CAL4596.jpg"],
-      "tags": ["birds"]
+      "images": [
+        "230727_Aviary_Soot__CAL4536.jpg",
+        "230727_Aviary_Soot__CAL4596.jpg"
+      ],
+      "tags": [
+        "birds"
+      ]
     },
     {
       "collectionName": "Blue-bellied roller",
@@ -19,14 +24,20 @@
         "230727_Blue-bellied Roller__CAL4528.jpg",
         "230727_Blue-bellied Roller__CAL4561.jpg"
       ],
-      "tags": ["birds"]
+      "tags": [
+        "birds"
+      ]
     },
     {
       "collectionName": "Steller's Sea Eagle",
       "folderPath": "Wildlife/Birds/Steller's Sea Eagle",
       "totalImages": 1,
-      "images": ["230204_McCal__CAL3164.jpg"],
-      "tags": ["birds"]
+      "images": [
+        "230204_McCal__CAL3164.jpg"
+      ],
+      "tags": [
+        "birds"
+      ]
     },
     {
       "collectionName": "Downtown Pittsburgh",
@@ -48,12 +59,6 @@
         "231004_Point_Park_Sunrise_CAL4704.jpg",
         "231004_Point_Park_Sunrise_CAL4708.jpg",
         "240827_PPU Ad_1849_CAL_Compressed.jpg",
-        "CAL00530.jpg",
-        "CAL00605.jpg",
-        "CAL00609-Enhanced-NR.jpg",
-        "CAL00661.jpg",
-        "CAL01777-2.jpg",
-        "CAL01842.jpg",
         "CAL_9190.jpg",
         "CAL_9211.jpg",
         "CAL_9262.jpg",
@@ -62,20 +67,34 @@
         "CAL_9619.jpg",
         "CAL_9721.jpg",
         "CAL_9734.jpg",
+        "CAL00530.jpg",
+        "CAL00605.jpg",
+        "CAL00609-Enhanced-NR.jpg",
+        "CAL00661.jpg",
+        "CAL01777-2.jpg",
+        "CAL01842.jpg",
         "IMGP1517.jpg",
         "IMGP7209.jpg",
         "IMGP9168.jpg",
         "IMGP9240.jpg",
         "IMGP9246.jpg"
       ],
-      "tags": ["landscape"]
+      "tags": [
+        "landscape"
+      ]
     },
     {
       "collectionName": "West Virginia",
       "folderPath": "Landscapes/West Virginia",
       "totalImages": 3,
-      "images": ["barn.jpg", "seneca-rocks-night.jpg", "tractor.jpg"],
-      "tags": ["landscape"]
+      "images": [
+        "barn.jpg",
+        "seneca-rocks-night.jpg",
+        "tractor.jpg"
+      ],
+      "tags": [
+        "landscape"
+      ]
     }
   ]
 }

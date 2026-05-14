@@ -1,14 +1,40 @@
 {
   "version": "1.0.0",
-  "generated": "2025-12-16T02:06:26.282Z",
+  "generated": "2026-05-13T21:09:45.676Z",
   "totalCollections": 5,
-  "totalImages": 78,
+  "totalImages": 104,
   "collections": [
     {
       "collectionName": "Editorial",
       "folderPath": "Editorial",
-      "totalImages": 35,
+      "totalImages": 61,
       "images": [
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8204.jpg",
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8340 1.jpg",
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8346.jpg",
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8347 1.jpg",
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8363.jpg",
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8367 1.jpg",
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8376.jpg",
+        "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8393 2.jpg",
+        "Clark 2023/IMGP0073.jpg",
+        "Clark 2023/IMGP0075.jpg",
+        "Clark 2023/IMGP0077.jpg",
+        "Clark 2023/IMGP0078.jpg",
+        "Clark 2023/IMGP0082.jpg",
+        "Clark 2023/IMGP0093.jpg",
+        "Clark 2023/IMGP0101.jpg",
+        "Clark 2023/IMGP0110.jpg",
+        "Clark 2023/IMGP0117.jpg",
+        "Clark 2023/IMGP0141.webp",
+        "Clark 2023/IMGP0142.webp",
+        "Clark 2023/IMGP0143.jpg",
+        "Clark 2023/IMGP0145.webp",
+        "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6662.jpg",
+        "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6673 1.jpg",
+        "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6713.jpg",
+        "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6820.jpg",
+        "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6855 1.jpg",
         "Lucha 2022/IMGP8480.jpg",
         "Lucha 2022/IMGP8486.jpg",
         "Lucha 2022/IMGP8487.jpg",
@@ -45,8 +71,59 @@
         "Lucha 2024/240517_Lucha's Graduation Shoot_1607_CAL_Compressed.jpg",
         "Michael McCartney/240331_Michael McCartney_614.jpg"
       ],
-      "tags": ["portrait", "editorial", "fashion"],
+      "tags": [
+        "portrait",
+        "editorial",
+        "fashion"
+      ],
       "albums": [
+        {
+          "albumName": "Annie Victoria",
+          "folderPath": "Editorial/Annie Victoria",
+          "totalImages": 8,
+          "images": [
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8204.jpg",
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8340 1.jpg",
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8346.jpg",
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8347 1.jpg",
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8363.jpg",
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8367 1.jpg",
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8376.jpg",
+            "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8393 2.jpg"
+          ]
+        },
+        {
+          "albumName": "Clark 2023",
+          "folderPath": "Editorial/Clark 2023",
+          "totalImages": 13,
+          "images": [
+            "Clark 2023/IMGP0073.jpg",
+            "Clark 2023/IMGP0075.jpg",
+            "Clark 2023/IMGP0077.jpg",
+            "Clark 2023/IMGP0078.jpg",
+            "Clark 2023/IMGP0082.jpg",
+            "Clark 2023/IMGP0093.jpg",
+            "Clark 2023/IMGP0101.jpg",
+            "Clark 2023/IMGP0110.jpg",
+            "Clark 2023/IMGP0117.jpg",
+            "Clark 2023/IMGP0141.webp",
+            "Clark 2023/IMGP0142.webp",
+            "Clark 2023/IMGP0143.jpg",
+            "Clark 2023/IMGP0145.webp"
+          ]
+        },
+        {
+          "albumName": "Jay Thompson",
+          "folderPath": "Editorial/Jay Thompson",
+          "totalImages": 5,
+          "images": [
+            "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6662.jpg",
+            "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6673 1.jpg",
+            "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6713.jpg",
+            "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6820.jpg",
+            "Jay Thompson/231118_Super Shoot @ Ignite Studios__CAL6855 1.jpg"
+          ]
+        },
         {
           "albumName": "Lucha 2022",
           "folderPath": "Editorial/Lucha 2022",
@@ -99,7 +176,9 @@
           "albumName": "Michael McCartney",
           "folderPath": "Editorial/Michael McCartney",
           "totalImages": 1,
-          "images": ["Michael McCartney/240331_Michael McCartney_614.jpg"]
+          "images": [
+            "Michael McCartney/240331_Michael McCartney_614.jpg"
+          ]
         }
       ],
       "looseImages": []
@@ -109,7 +188,9 @@
       "folderPath": "Graduation",
       "totalImages": 0,
       "images": [],
-      "tags": ["portrait"],
+      "tags": [
+        "portrait"
+      ],
       "albums": [],
       "looseImages": []
     },
@@ -128,7 +209,11 @@
         "Kelly Gibson/240328_Kelly Gibson_607.jpg",
         "Kelly Gibson/240328_Kelly Gibson_608.jpg"
       ],
-      "tags": ["portrait", "studio", "professional"],
+      "tags": [
+        "portrait",
+        "studio",
+        "professional"
+      ],
       "albums": [
         {
           "albumName": "Kayla Jackson",
@@ -161,7 +246,9 @@
       "folderPath": "Maternity",
       "totalImages": 0,
       "images": [],
-      "tags": ["portrait"],
+      "tags": [
+        "portrait"
+      ],
       "albums": [],
       "looseImages": []
     },
@@ -205,7 +292,11 @@
         "Logan Spiker/Studio with logan0060.jpg",
         "Logan Spiker/Studio with logan0066.jpg"
       ],
-      "tags": ["portrait", "studio", "professional"],
+      "tags": [
+        "portrait",
+        "studio",
+        "professional"
+      ],
       "albums": [
         {
           "albumName": "Danny Herz",

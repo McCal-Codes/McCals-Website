@@ -2,10 +2,15 @@
   "collectionName": "Bare-faced Curassow",
   "folderPath": "Wildlife/Birds/Bare-faced Curassow",
   "totalImages": 2,
-  "images": ["230727_Aviary_Soot__CAL4536.jpg", "230727_Aviary_Soot__CAL4596.jpg"],
-  "tags": ["birds"],
+  "images": [
+    "230727_Aviary_Soot__CAL4536.jpg",
+    "230727_Aviary_Soot__CAL4596.jpg"
+  ],
+  "tags": [
+    "birds"
+  ],
   "metadata": {
-    "generated": "2025-12-12T23:45:22.483Z",
+    "generated": "2026-05-13T21:09:33.476Z",
     "version": "1.0.0"
   }
 }
