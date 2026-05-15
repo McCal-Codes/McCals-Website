@@ -21,8 +21,8 @@ jobs:
         uses: cloudflare/wrangler-action@v3.15.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: src/api
-          command: publish
+          workingDirectory: tools/cloudflare
+          command: deploy
 
       - name: Success message
-        run: echo "Cloudflare Worker publish triggered"
+        run: echo "Cloudflare Worker deploy triggered"
