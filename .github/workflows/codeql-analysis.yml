@@ -1,12 +1,9 @@
 name: CodeQL
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '25 5 * * 1'
+  # GitHub CodeQL default setup is enabled for automatic scans.
+  # Keep this advanced setup available only for manual re-enablement.
+  workflow_dispatch:
 
 permissions:
   actions: read
