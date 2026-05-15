@@ -101,6 +101,7 @@ const TestimonialCard = memo(function TestimonialCard({
 });
 
 const AUTO_ADVANCE_INTERVAL = 6000; // 6 seconds
+const MOBILE_COLLAPSED_TESTIMONIAL_COUNT = 2;
 
 export function TestimonialsSection({ className = '' }: TestimonialsSectionProps) {
   // Fetch live Google reviews (with fallback to static data)
@@ -209,7 +210,7 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
 
   // Show limited testimonials on mobile when collapsed
   const visibleTestimonials = isMobile && !isExpanded 
-    ? shuffledTestimonials.slice(0, 3) 
+    ? shuffledTestimonials.slice(0, MOBILE_COLLAPSED_TESTIMONIAL_COUNT) 
     : shuffledTestimonials;
 
   return (
@@ -243,13 +244,15 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
               <TestimonialCard key={`${item.name}-${index}`} testimonial={item} />
             ))}
           </div>
-          {shuffledTestimonials.length > 3 && (
+          {shuffledTestimonials.length > MOBILE_COLLAPSED_TESTIMONIAL_COUNT && (
             <button 
               className={styles.expandButton}
               onClick={() => setIsExpanded(!isExpanded)}
               aria-expanded={isExpanded}
             >
-              {isExpanded ? 'Show less' : `Show all ${shuffledTestimonials.length} testimonials`}
+              {isExpanded
+                ? 'Show less'
+                : `Show ${shuffledTestimonials.length - MOBILE_COLLAPSED_TESTIMONIAL_COUNT} more testimonials`}
               <svg 
                 className={`${styles.expandIcon} ${isExpanded ? styles.expanded : ''}`} 
                 viewBox="0 0 24 24" 

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { BioSection, TestimonialsSection, ClientsSection } from '@/components/about';
+import { BioSection, TestimonialsSection, ClientsSection, GearSection } from '@/components/about';
 import { staticGoogleReviews, staticLinkedInReviews } from '@/hooks/useGoogleReviews';
 import {
   generatePageGraph,
@@ -150,6 +150,7 @@ export default function AboutPage() {
           <BioSection className={styles.aboutPanel} />
           <div className={styles.aboutContent}>
             <TestimonialsSection className={styles.aboutPanel} />
+            <GearSection className={styles.aboutPanel} />
             <ClientsSection className={styles.aboutPanel} duplicates={3} />
           </div>
         </div>

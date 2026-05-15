@@ -18,7 +18,8 @@
 /* CSS Custom Properties */
 .bio,
 .reviews,
-.clients {
+.clients,
+.fieldKit {
   --about-bg-glass: rgba(20, 20, 20, 0.7);
   --about-bg-glass-heavy: rgba(12, 12, 12, 0.88);
   --about-panel-border: rgba(255, 255, 255, 0.08);
@@ -183,13 +184,12 @@
    Action Buttons & Menus
    ============================================ */
 
-/* Button container - grouped together like nav */
 .actions {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: min(100%, 560px);
   margin-top: 16px;
-  border-radius: 12px;
 }
 
 /* Ensure menu panels aren't clipped */
@@ -205,7 +205,6 @@
   box-sizing: border-box;
 }
 
-/* Base button style - grouped nav style */
 .actionButton {
   display: inline-flex;
   align-items: center;
@@ -213,9 +212,8 @@
   gap: 8px;
   min-height: 48px;
   padding: 12px 20px;
-  border-radius: 0;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-right: none;
   background: rgba(255, 255, 255, 0.06);
   color: var(--about-text-primary);
   text-decoration: none;
@@ -225,19 +223,6 @@
   transition: all 0.2s ease;
   white-space: nowrap;
   flex: 1;
-}
-
-/* First button - rounded left corners on desktop */
-.actionButton:first-child,
-.menuWrapper:first-of-type .actionButton {
-  border-radius: 12px 0 0 12px;
-}
-
-/* Last button - rounded right corners on desktop */
-.actionButton:last-child,
-.menuWrapper:last-of-type .actionButton {
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 0 12px 12px 0;
 }
 
 /* Clean hover effect - subtle and grouped */
@@ -250,6 +235,7 @@
 
 /* Primary action - solid light style, distinct from dropdowns */
 .actionPrimary {
+  grid-column: 1 / -1;
   color: #1a1a1a;
   background: linear-gradient(135deg, #f5f0eb 0%, #e8e2dc 100%);
   border-color: transparent;
@@ -329,6 +315,7 @@
   position: relative;
   display: flex;
   flex: 1;
+  min-width: 0;
   overflow: visible;
 }
 
@@ -1194,7 +1181,6 @@
   max-height: 88px;
 }
 
-
 /* Remove old external indicator styles */
 .externalIndicator,
 .externalIndicator svg {
@@ -1208,6 +1194,98 @@
 /* ============================================
    Animations
    ============================================ */
+
+/* ============================================
+   Field Kit Section
+   ============================================ */
+
+.fieldKit {
+  padding: 24px;
+}
+
+.fieldKitHeader {
+  display: grid;
+  gap: 10px;
+  max-width: 62ch;
+  margin-bottom: 22px;
+}
+
+.fieldKitHeader h2 {
+  margin: 0;
+  color: var(--about-text-primary);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.fieldKitHeader p:not(.eyebrow) {
+  margin: 0;
+  color: var(--about-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.fieldKitGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fieldKitCard {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.fieldKitCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.fieldKitCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.fieldKitIcon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: var(--about-accent);
+  opacity: 0.82;
+}
+
+.fieldKitCard h3 {
+  margin: 0;
+  color: var(--about-accent);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.fieldKitCard ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fieldKitCard li {
+  color: var(--about-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
 
 @keyframes scroll {
   from {
@@ -1240,7 +1318,8 @@
 
 :global(body[data-theme='light']) .bio,
 :global(body[data-theme='light']) .reviews,
-:global(body[data-theme='light']) .clients {
+:global(body[data-theme='light']) .clients,
+:global(body[data-theme='light']) .fieldKit {
   --about-bg-glass: rgba(255, 251, 247, 0.9);
   --about-bg-glass-heavy: rgba(255, 255, 255, 0.96);
   --about-panel-border: rgba(90, 67, 47, 0.1);
@@ -1259,8 +1338,18 @@
 :global(body[data-theme='light']) .actionButton,
 :global(body[data-theme='light']) .menuPanel,
 :global(body[data-theme='light']) .stat,
-:global(body[data-theme='light']) .reviewCard {
+:global(body[data-theme='light']) .reviewCard,
+:global(body[data-theme='light']) .fieldKitCard {
   border-color: rgba(90, 67, 47, 0.1);
+}
+
+:global(body[data-theme='light']) .fieldKitCard {
+  background: rgba(90, 67, 47, 0.035);
+}
+
+:global(body[data-theme='light']) .fieldKitCard:hover {
+  border-color: rgba(90, 67, 47, 0.18);
+  background: rgba(90, 67, 47, 0.055);
 }
 
 :global(body[data-theme='light']) .actionButton {
@@ -1433,7 +1522,6 @@
     linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(242, 247, 235, 0.94));
 }
 
-
 :global(body[data-theme='light']) .clientCard.clickable::after {
   background: var(--about-accent);
 }
@@ -1499,14 +1587,11 @@
     max-width: 280px;
   }
 
-  /* Tablet: grouped together */
   .actions {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
-  /* All buttons same size on tablet */
   .actionButton {
     min-height: 48px;
     padding: 12px 16px;
@@ -1518,9 +1603,8 @@
     flex: 1;
   }
 
-  /* Override span - all buttons equal */
   .actionPrimary {
-    grid-column: auto;
+    grid-column: 1 / -1;
   }
 
   .menuPanel {
@@ -1728,6 +1812,19 @@
   
   .clients {
     padding: 20px 16px;
+  }
+
+  .fieldKit {
+    padding: 20px 16px;
+  }
+
+  .fieldKitHeader {
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .fieldKitGrid {
+    grid-template-columns: 1fr;
   }
   
   .bio {
@@ -1939,7 +2036,6 @@
       linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(242, 247, 235, 0.94));
   }
 
-
   .clientsGrid .clientImageWrapper img {
     max-height: 54px;
     filter: none;
@@ -1954,7 +2050,8 @@
   .photoWrapper,
   .actionButton,
   .reviewCard,
-  .clientCard {
+  .clientCard,
+  .fieldKitCard {
     animation: none !important;
     transition: none !important;
     transform: none !important;

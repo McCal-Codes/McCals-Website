@@ -1,5 +1,6 @@
 export { BioSection } from './BioSection';
 export { TestimonialsSection } from './TestimonialsSection';
+export { GearSection } from './GearSection';
 export { 
   ClientsSection, 
   EditorialClients, 
@@ -10,10 +11,12 @@ export {
 export { 
   clients, 
   testimonials, 
+  fieldKit,
   stats, 
   getClientLink, 
   shuffleClients,
   type Client,
+  type FieldKitCategory,
   type Testimonial,
   type Stat 
 } from './aboutData';

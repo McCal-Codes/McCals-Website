@@ -105,6 +105,13 @@ export function BioSection({ className = '' }: BioSectionProps) {
           </div>
 
           <div className={styles.actions}>
+            <Link
+              to="/featured-work"
+              className={`${styles.actionButton} ${styles.actionPrimary}`}
+            >
+              View portfolio
+            </Link>
+
             <div className={styles.menuWrapper} ref={contactMenuRef}>
               <button
                 type="button"
@@ -195,13 +202,6 @@ export function BioSection({ className = '' }: BioSectionProps) {
                 </Link>
               </div>
             </div>
-
-            <Link
-              to="/featured-work"
-              className={`${styles.actionButton} ${styles.actionPrimary}`}
-            >
-              View portfolio
-            </Link>
           </div>
 
           <p className={styles.ctaReassurance}>

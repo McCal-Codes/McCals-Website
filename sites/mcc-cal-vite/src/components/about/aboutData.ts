@@ -31,10 +31,48 @@ export interface Stat {
   label: string;
 }
 
+export interface FieldKitCategory {
+  category: string;
+  icon: 'camera' | 'aperture' | 'flash' | 'audio' | 'editing';
+  items: string[];
+}
+
 export const stats: Stat[] = [
   { value: '30+', label: 'Happy clients' },
   { value: '65+', label: 'Projects' },
   { value: '6+', label: 'Years experience' },
+];
+
+export const fieldKit: FieldKitCategory[] = [
+  {
+    category: 'Cameras',
+    icon: 'camera',
+    items: ['Nikon Z 6II'],
+  },
+  {
+    category: 'Lenses',
+    icon: 'aperture',
+    items: [
+      'NIKKOR Z 24-70mm f/2.8 S',
+      'NIKKOR Z 70-200mm f/2.8 VR S',
+      'NIKKOR Z 180-600mm f/5.6-6.3 VR',
+    ],
+  },
+  {
+    category: 'Lighting',
+    icon: 'flash',
+    items: ['Godox V1Pro N Flash for Nikon'],
+  },
+  {
+    category: 'Audio',
+    icon: 'audio',
+    items: ['Audio kit available by project'],
+  },
+  {
+    category: 'Editing Tools',
+    icon: 'editing',
+    items: ['Capture One', 'Photo Mechanic', 'Photoshop as needed'],
+  },
 ];
 
 export const testimonials: Testimonial[] = [
