@@ -51,15 +51,21 @@ export default function handler(req, res) {
     return;
   }
 
-  const baseDir = path.resolve(__dirname, 'data');
-  const manifestPath = path.resolve(baseDir, mapping);
+  const candidateDirs = [
+    path.resolve(__dirname, 'data'),
+    path.resolve(__dirname, '..', '..', 'public-vite', 'manifests'),
+  ];
+  const manifestPath = candidateDirs
+    .map((baseDir) => ({
+      baseDir,
+      manifestPath: path.resolve(baseDir, mapping),
+    }))
+    .find((candidate) => (
+      candidate.manifestPath.startsWith(candidate.baseDir) &&
+      fs.existsSync(candidate.manifestPath)
+    ))?.manifestPath;
 
-  if (!manifestPath.startsWith(baseDir)) {
-    res.status(403).json({ error: 'Access denied' });
-    return;
-  }
-
-  if (!fs.existsSync(manifestPath)) {
+  if (!manifestPath) {
     res.status(404).json({ error: `Manifest not found: ${type}` });
     return;
   }
