@@ -129,19 +129,16 @@ export const FAVORITE_HERO_SLIDES: HeroSlide[] = [
   {
     title: 'Concert',
     meta: 'Concert',
-    image: imageUrl.concert(
-      'Concert/Heading North/November 2025',
-      '251101 Headed North - Bottle Rocket_CAL11_webuse.jpg',
-    ),
+    image: '/images/homepage/concert/heading-north-bottle-rocket-cal11.webp',
     href: '/concerts',
     links: [
       { url: '/concerts', label: 'Concerts' },
       { url: '/concerts', label: 'Concert Gallery' },
     ],
     cta: 'Concert',
-    alt: 'Heading North performs under red and blue club lighting at Bottle Rocket.',
-    focalPointMobile: { x: 0.45, y: 0.4 },
-    focalPointDesktop: { x: 0.44, y: 0.4 },
+    alt: 'A Heading North vocalist sings into a microphone under red and blue lights at Bottle Rocket.',
+    focalPointMobile: { x: 0.52, y: 0.36 },
+    focalPointDesktop: { x: 0.48, y: 0.38 },
   },
   {
     title: 'Theatre',
@@ -228,13 +225,28 @@ export const HERO_IMAGE_VARIANTS: Record<string, HeroSlideVariant[]> = {
       focalPointDesktop: { x: 0.46, y: 0.5 },
     },
     {
-      image: imageUrl.journalism(
-        'Politics/cmu-trump-protest',
-        '250715_CMU Trump Protest_CAL1091-min.jpg',
-      ),
-      alt: 'A student speaks into a megaphone during the CMU Trump protest.',
-      focalPointMobile: { x: 0.54, y: 0.44 },
-      focalPointDesktop: { x: 0.72, y: 0.46 },
+      image: '/images/homepage/journalism/cmu-trump-protest-cal1489.webp',
+      alt: 'Pittsburgh police officers stand near demonstrators and an Indivisible Pittsburgh banner during a CMU Trump protest.',
+      focalPointMobile: { x: 0.7, y: 0.46 },
+      focalPointDesktop: { x: 0.66, y: 0.48 },
+    },
+    {
+      image: '/images/homepage/journalism/cmu-trump-protest-cal1573.webp',
+      alt: 'A masked demonstrator stands in front of Pittsburgh police officers in riot helmets during a CMU Trump protest.',
+      focalPointMobile: { x: 0.72, y: 0.42 },
+      focalPointDesktop: { x: 0.7, y: 0.44 },
+    },
+    {
+      image: '/images/homepage/journalism/cmu-trump-protest-cal1448.webp',
+      alt: 'A demonstrator stands in the street as Pittsburgh police officers move toward protesters during a CMU Trump protest.',
+      focalPointMobile: { x: 0.4, y: 0.5 },
+      focalPointDesktop: { x: 0.48, y: 0.5 },
+    },
+    {
+      image: '/images/homepage/journalism/cmu-trump-protest-cal1498.webp',
+      alt: 'A Pittsburgh police officer in riot gear holds a baton under a bright sky during a CMU Trump protest.',
+      focalPointMobile: { x: 0.47, y: 0.36 },
+      focalPointDesktop: { x: 0.48, y: 0.42 },
     },
     {
       image: imageUrl.journalism(
@@ -256,6 +268,12 @@ export const HERO_IMAGE_VARIANTS: Record<string, HeroSlideVariant[]> = {
     },
   ],
   Pittsburgh: [
+    {
+      image: '/images/homepage/pittsburgh/downtown-sunset-imgp8595.webp',
+      alt: 'Downtown Pittsburgh buildings frame an orange sunset over Wood Street.',
+      focalPointMobile: { x: 0.5, y: 0.5 },
+      focalPointDesktop: { x: 0.5, y: 0.36 },
+    },
     {
       image: imageUrl.nature('Landscapes/Downtown Pittsburgh', '230509_untitled__CAL4122.jpg'),
       alt: 'A downtown Pittsburgh cityscape at dusk.',
@@ -334,6 +352,24 @@ export const HERO_IMAGE_VARIANTS: Record<string, HeroSlideVariant[]> = {
     },
   ],
   Concert: [
+    {
+      image: '/images/homepage/concert/haven-block-party-cal3301.webp',
+      alt: 'A Casino Six vocalist wearing sunglasses stands at a microphone under warm lights during Haven Block Party.',
+      focalPointMobile: { x: 0.52, y: 0.34 },
+      focalPointDesktop: { x: 0.52, y: 0.36 },
+    },
+    {
+      image: '/images/homepage/concert/bellevue-music-festival-cal6319.webp',
+      alt: 'Brahctopus performs on an outdoor stage for a crowd at Bellevue Music Festival.',
+      focalPointMobile: { x: 0.52, y: 0.5 },
+      focalPointDesktop: { x: 0.54, y: 0.5 },
+    },
+    {
+      image: '/images/homepage/concert/when-we-were-dead-cal8515.webp',
+      alt: 'A Dream The Heavy guitarist plays through pink stage smoke during When We Were Dead.',
+      focalPointMobile: { x: 0.48, y: 0.36 },
+      focalPointDesktop: { x: 0.5, y: 0.38 },
+    },
     {
       image: imageUrl.concert(
         'Concert/Heading North/November 2025',
