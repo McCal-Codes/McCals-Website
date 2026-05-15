@@ -12,17 +12,23 @@ export function TableOfContents() {
   const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     // Extract headings from the page
     const headings = document.querySelectorAll('h2[id], h3[id]');
     const items: TOCItem[] = Array.from(headings).map(heading => ({
       id: heading.id,
       title: heading.textContent || '',
-      level: parseInt(heading.tagName.charAt(1)),
+      level: parseInt(heading.tagName.charAt(1), 10),
     }));
-    setTocItems(items);
+    const timer = window.setTimeout(() => {
+      setTocItems(items);
+    }, 0);
 
     // Guard against SSR and ensure headings exist
-    if (typeof window === 'undefined' || headings.length === 0) return;
+    if (headings.length === 0) {
+      return () => window.clearTimeout(timer);
+    }
 
     // Set up intersection observer for active section tracking
     const observer = new IntersectionObserver(
@@ -42,6 +48,7 @@ export function TableOfContents() {
     headings.forEach(heading => observer.observe(heading));
 
     return () => {
+      window.clearTimeout(timer);
       headings.forEach(heading => observer.unobserve(heading));
     };
   }, []);

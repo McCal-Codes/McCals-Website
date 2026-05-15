@@ -2,7 +2,7 @@
  * SmartImage component with fallback handling
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface SmartImageProps {
   src?: string | null;
@@ -27,13 +27,12 @@ export default function SmartImage({
   width,
   height,
 }: SmartImageProps) {
-  const [currentSrc, setCurrentSrc] = useState<string | null>(src || null);
-  const [usedFallback, setUsedFallback] = useState(false);
-
-  useEffect(() => {
-    setCurrentSrc(src || null);
-    setUsedFallback(false);
-  }, [src, fallbackSrc]);
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const currentSrc = src && failedSrc !== src
+    ? src
+    : fallbackSrc && failedSrc !== fallbackSrc
+      ? fallbackSrc
+      : null;
 
   if (!currentSrc) {
     return placeholderClassName ? <div className={placeholderClassName} /> : null;
@@ -49,13 +48,7 @@ export default function SmartImage({
       width={width}
       height={height}
       onError={() => {
-        if (!usedFallback && fallbackSrc && fallbackSrc !== currentSrc) {
-          setCurrentSrc(fallbackSrc);
-          setUsedFallback(true);
-          return;
-        }
-
-        setCurrentSrc(null);
+        setFailedSrc(currentSrc);
       }}
     />
   );

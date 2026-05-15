@@ -7,7 +7,9 @@ function getInitialTheme(): 'dark' | 'light' {
     const stored = typeof window !== 'undefined' && window.localStorage.getItem(THEME_KEY);
     if (stored === 'light' || stored === 'dark') return stored;
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
-  } catch (e) {}
+  } catch {
+    // Theme storage can be unavailable in restricted browser contexts.
+  }
   return 'dark';
 }
 
@@ -20,7 +22,9 @@ export default function ThemeToggle() {
     try {
       document.body.setAttribute('data-theme', theme);
       window.localStorage.setItem(THEME_KEY, theme);
-    } catch (e) {}
+    } catch {
+      // Theme storage can be unavailable in restricted browser contexts.
+    }
   }, [theme]);
 
   const toggle = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));

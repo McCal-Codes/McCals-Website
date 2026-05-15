@@ -33,7 +33,11 @@ export function getCached(): Episode[] | null {
 }
 
 export function setCache(episodes: Episode[]) {
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ episodes, ts: Date.now() })); } catch {}
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ episodes, ts: Date.now() }));
+  } catch {
+    // Podcast cache is opportunistic.
+  }
 }
 
 export async function fetchFeed(): Promise<Episode[]> {

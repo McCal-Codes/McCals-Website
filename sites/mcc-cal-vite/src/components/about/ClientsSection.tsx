@@ -21,6 +21,12 @@ interface ClientCardProps {
   index: number;
 }
 
+function getStableShuffleScore(client: Client): number {
+  return [...client.id].reduce((score, character) => (
+    (score * 31 + character.charCodeAt(0)) % 100000
+  ), 7);
+}
+
 function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -136,7 +142,7 @@ export function ClientsSection({
   const displayClients = useMemo(() => {
     const list = clientList || clients;
     if (shuffle) {
-      return [...list].sort(() => Math.random() - 0.5);
+      return [...list].sort((a, b) => getStableShuffleScore(a) - getStableShuffleScore(b));
     }
     return list;
   }, [clientList, shuffle]);

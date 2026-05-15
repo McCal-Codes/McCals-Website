@@ -30,7 +30,9 @@ try {
   if (t === 'light' || t === 'dark') {
     document.body.setAttribute('data-theme', t);
   }
-} catch (_) {}
+} catch {
+  // localStorage can be unavailable in restricted browser contexts.
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

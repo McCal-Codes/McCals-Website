@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface UsePageDataOptions {
   simulateLoading?: boolean;
@@ -17,12 +17,16 @@ export function usePageData<T>(
   options: UsePageDataOptions = {}
 ): UsePageDataResult<T> {
   const { simulateLoading = false, loadingDelay = 500 } = options;
+  const requestIdRef = useRef(0);
   
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+
     try {
       setLoading(true);
       setError(null);
@@ -33,17 +37,30 @@ export function usePageData<T>(
       }
       
       const result = await dataFetcher();
+      if (requestId !== requestIdRef.current) return;
+
       setData(result);
     } catch (err) {
+      if (requestId !== requestIdRef.current) return;
+
       setError(err instanceof Error ? err.message : 'An error occurred while loading data');
     } finally {
-      setLoading(false);
+      if (requestId === requestIdRef.current) {
+        setLoading(false);
+      }
     }
-  };
+  }, [dataFetcher, loadingDelay, simulateLoading]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const timer = window.setTimeout(() => {
+      fetchData().catch(() => undefined);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timer);
+      requestIdRef.current += 1;
+    };
+  }, [fetchData]);
 
   return {
     data,

@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getChangelog, clearChangelog, exportChangelogAsText, exportChangelogAsJSON } from '../utils/changelogTracker';
 import type { ChangelogEntry } from '../utils/changelogTracker';
 
 const ChangelogViewer: React.FC = () => {
-  const [entries, setEntries] = useState<ChangelogEntry[]>([]);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    setEntries(getChangelog());
-  }, []);
-
-  if (!mounted) return <div>Loading changelog...</div>;
+  const [entries, setEntries] = useState<ChangelogEntry[]>(() => getChangelog());
+  const [confirmClear, setConfirmClear] = useState(false);
 
   const handleClear = () => {
-    if (window.confirm('Clear all changelog entries? This cannot be undone.')) {
-      clearChangelog();
-      setEntries([]);
+    if (!confirmClear) {
+      setConfirmClear(true);
+      return;
     }
+
+    clearChangelog();
+    setEntries([]);
+    setConfirmClear(false);
   };
 
   const handleExportText = () => {
@@ -108,7 +105,7 @@ const ChangelogViewer: React.FC = () => {
           onClick={handleClear}
           style={{
             padding: '10px 20px',
-            background: '#f44336',
+            background: confirmClear ? '#b71c1c' : '#f44336',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
@@ -116,7 +113,7 @@ const ChangelogViewer: React.FC = () => {
             fontSize: '14px',
           }}
         >
-          Clear All
+          {confirmClear ? 'Confirm Clear' : 'Clear All'}
         </button>
       </div>
 

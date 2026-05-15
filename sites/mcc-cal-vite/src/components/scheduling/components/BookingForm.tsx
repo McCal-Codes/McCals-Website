@@ -53,11 +53,12 @@ export function BookingForm({
         if (!value.trim()) return 'Name is required';
         if (value.trim().length < 2) return 'Name must be at least 2 characters';
         return undefined;
-      case 'email':
+      case 'email': {
         if (!value.trim()) return 'Email is required';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(value)) return 'Please enter a valid email';
         return undefined;
+      }
       default:
         return undefined;
     }

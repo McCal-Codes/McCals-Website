@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist",
     "test": "vitest run",
+    "test:run": "vitest run",
     "test:ui": "vitest --ui",
     "storybook": "storybook dev -p 6006 -c .storybook",
     "build-storybook": "storybook build -c .storybook"

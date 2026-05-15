@@ -122,5 +122,20 @@ export default tseslint.config(
       'no-console': 'off',
       '@typescript-eslint/no-var-requires': 'off',
     },
+  },
+  {
+    files: [
+      'api/**/*.{js,ts}',
+      'scripts/**/*.{js,ts}',
+      'src/content/**/*.js',
+    ],
+    languageOptions: {
+      ecmaVersion: 2024,
+      globals: globals.node,
+    },
+    rules: {
+      'no-console': 'off',
+      'no-unmodified-loop-condition': 'off',
+    },
   }
 );

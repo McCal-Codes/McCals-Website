@@ -64,9 +64,35 @@ async function parseJsonResponse<T>(response: Response, source: string): Promise
   }
 }
 
+async function fetchStaticManifestJson<T>(
+  staticFile: string,
+  signal: AbortSignal,
+  apiError?: unknown,
+): Promise<T> {
+  const staticUrl = `/manifests/${staticFile}`;
+  const response = await fetch(staticUrl, {
+    signal,
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const apiMessage = apiError instanceof Error ? `; API error: ${apiError.message}` : '';
+    throw new Error(`Manifest fallback failed: ${response.status}${apiMessage}`);
+  }
+
+  return parseJsonResponse<T>(response, staticUrl);
+}
+
 async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<T> {
   const apiUrl = `/api/manifests/${type}`;
   const staticFile = getManifestFile(type);
+
+  if (IS_DEV && staticFile) {
+    return fetchStaticManifestJson<T>(staticFile, signal);
+  }
+
   let apiError: unknown;
 
   try {
@@ -90,20 +116,7 @@ async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<
     throw apiError instanceof Error ? apiError : new Error('Unknown manifest error');
   }
 
-  const staticUrl = `/manifests/${staticFile}`;
-  const response = await fetch(staticUrl, {
-    signal,
-    headers: {
-      Accept: 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    const apiMessage = apiError instanceof Error ? `; API error: ${apiError.message}` : '';
-    throw new Error(`Manifest fallback failed: ${response.status}${apiMessage}`);
-  }
-
-  return parseJsonResponse<T>(response, staticUrl);
+  return fetchStaticManifestJson<T>(staticFile, signal, apiError);
 }
 
 /**
@@ -163,33 +176,39 @@ export function useManifest<T>(type: string): UseManifestResult<T> {
   useEffect(() => {
     if (!type) return;
 
-    const cached = memoryCache.get(type) as CacheEntry<T> | undefined;
-    if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
-      setData(cached.data);
-      setStatus('success');
-      return;
-    }
-
-    abortRef.current?.abort();
-    const controller = new AbortController();
-    abortRef.current = controller;
-
-    setStatus('loading');
-    setError(null);
-
-    fetchManifestJson<T>(type, controller.signal)
-      .then((json) => {
-        memoryCache.set(type, { data: json, fetchedAt: Date.now() });
-        setData(json);
+    let controller: AbortController | null = null;
+    const timer = window.setTimeout(() => {
+      const cached = memoryCache.get(type) as CacheEntry<T> | undefined;
+      if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
+        setData(cached.data);
         setStatus('success');
-      })
-      .catch((err) => {
-        if (err.name === 'AbortError') return;
-        setError(err.message ?? 'Unknown error');
-        setStatus('error');
-      });
+        return;
+      }
 
-    return () => controller.abort();
+      abortRef.current?.abort();
+      controller = new AbortController();
+      abortRef.current = controller;
+
+      setStatus('loading');
+      setError(null);
+
+      fetchManifestJson<T>(type, controller.signal)
+        .then((json) => {
+          memoryCache.set(type, { data: json, fetchedAt: Date.now() });
+          setData(json);
+          setStatus('success');
+        })
+        .catch((err) => {
+          if (err.name === 'AbortError') return;
+          setError(err.message ?? 'Unknown error');
+          setStatus('error');
+        });
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timer);
+      controller?.abort();
+    };
   }, [type]);
 
   return { data, status, error };

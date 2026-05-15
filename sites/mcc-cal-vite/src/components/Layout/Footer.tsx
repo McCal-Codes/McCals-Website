@@ -36,7 +36,6 @@ const Footer: React.FC = () => {
     <>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <div className="mcc-footer-widget">

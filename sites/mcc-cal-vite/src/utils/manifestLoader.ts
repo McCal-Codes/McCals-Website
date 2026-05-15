@@ -8,6 +8,12 @@
 const MANIFEST_CACHE = new Map<string, { data: unknown; timestamp: number }>();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
+function createErrorWithCause(message: string, cause: unknown): Error {
+  const error = new Error(message) as Error & { cause?: unknown };
+  error.cause = cause;
+  return error;
+}
+
 export interface ManifestLoaderOptions {
   cacheTtl?: number;
   revalidate?: boolean;
@@ -62,10 +68,10 @@ export async function loadManifest<T>(
     return data;
   } catch (error) {
     if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-      throw new Error(`Failed to fetch manifest from ${url}: Network error`);
+      throw createErrorWithCause(`Failed to fetch manifest from ${url}: Network error`, error);
     }
     if (error instanceof Error && error.name === 'AbortError') {
-      throw new Error(`Manifest fetch timeout after ${timeout}ms`);
+      throw createErrorWithCause(`Manifest fetch timeout after ${timeout}ms`, error);
     }
     throw error;
   }

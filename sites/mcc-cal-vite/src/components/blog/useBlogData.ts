@@ -58,70 +58,74 @@ export function useBlogData(slug?: string): UseBlogDataReturn {
   // Fetch manifest and authors on mount
   useEffect(() => {
     let active = true;
+    const timer = window.setTimeout(() => {
+      setManifestLoading(true);
+      setManifestError(null);
 
-    setManifestLoading(true);
-    setManifestError(null);
+      fetchJson<BlogManifest>(`${BLOG_BASE}/blog-manifest.json`)
+        .then((data) => {
+          if (!active) return;
+          setManifest(data);
+        })
+        .catch((error: Error) => {
+          if (!active) return;
+          setManifestError(error.message);
+        })
+        .finally(() => {
+          if (!active) return;
+          setManifestLoading(false);
+        });
 
-    fetchJson<BlogManifest>(`${BLOG_BASE}/blog-manifest.json`)
-      .then((data) => {
-        if (!active) return;
-        setManifest(data);
-      })
-      .catch((error: Error) => {
-        if (!active) return;
-        setManifestError(error.message);
-      })
-      .finally(() => {
-        if (!active) return;
-        setManifestLoading(false);
-      });
-
-    fetchJson<BlogAuthorsFile>(`${BLOG_BASE}/authors.json`)
-      .then((data) => {
-        if (!active) return;
-        setAuthors(Array.isArray(data.authors) ? data.authors : []);
-      })
-      .catch(() => {
-        if (!active) return;
-        setAuthors([]);
-      });
+      fetchJson<BlogAuthorsFile>(`${BLOG_BASE}/authors.json`)
+        .then((data) => {
+          if (!active) return;
+          setAuthors(Array.isArray(data.authors) ? data.authors : []);
+        })
+        .catch(() => {
+          if (!active) return;
+          setAuthors([]);
+        });
+    }, 0);
 
     return () => {
       active = false;
+      window.clearTimeout(timer);
     };
   }, []);
 
   // Fetch post when slug changes
   useEffect(() => {
-    if (!slug) {
-      setPost(null);
-      setPostError(null);
-      setPostLoading(false);
-      return;
-    }
-
     let active = true;
-
-    setPostLoading(true);
-    setPostError(null);
-
-    fetchJson<BlogPostDocument>(`${BLOG_BASE}/posts/${slug}/post.json`)
-      .then((data) => {
-        if (!active) return;
-        setPost(data);
-      })
-      .catch((error: Error) => {
-        if (!active) return;
+    const timer = window.setTimeout(() => {
+      if (!slug) {
         setPost(null);
-        setPostError(error.message);
-      })
-      .finally(() => {
-        if (!active) return;
+        setPostError(null);
         setPostLoading(false);
-      });
+        return;
+      }
+
+      setPostLoading(true);
+      setPostError(null);
+
+      fetchJson<BlogPostDocument>(`${BLOG_BASE}/posts/${slug}/post.json`)
+        .then((data) => {
+          if (!active) return;
+          setPost(data);
+        })
+        .catch((error: Error) => {
+          if (!active) return;
+          setPost(null);
+          setPostError(error.message);
+        })
+        .finally(() => {
+          if (!active) return;
+          setPostLoading(false);
+        });
+    }, 0);
 
     return () => {
       active = false;
+      window.clearTimeout(timer);
     };
   }, [slug]);
 

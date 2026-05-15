@@ -58,7 +58,7 @@ export default function AdminDashboard({
           uptime: 0,
         });
       }
-    } catch (error) {
+    } catch {
       setStatus({
         apiHealth: 'down',
         cacheStatus: 'inactive',

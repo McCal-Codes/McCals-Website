@@ -3,8 +3,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 
-/* global process */
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(appRoot, '..', '..');

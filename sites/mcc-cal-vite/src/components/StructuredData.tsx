@@ -54,7 +54,7 @@ export function PortfolioItemSchema({
         if (existingScript && existingScript.parentNode === document.head) {
           document.head.removeChild(existingScript);
         }
-      } catch (e) {
+      } catch {
         // Ignore cleanup errors
       }
     };
@@ -123,7 +123,7 @@ export function BlogPostSchema({
         if (existingScript && existingScript.parentNode === document.head) {
           document.head.removeChild(existingScript);
         }
-      } catch (e) {
+      } catch {
         // Ignore cleanup errors
       }
     };

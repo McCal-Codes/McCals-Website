@@ -87,7 +87,7 @@ const TestimonialCard = memo(function TestimonialCard({
 
       {testimonial.rating && testimonial.source === 'Google' && (
         <div className={styles.testimonialStars}>
-          {'★'.repeat(parseInt(testimonial.rating))}
+          {'★'.repeat(parseInt(testimonial.rating, 10))}
         </div>
       )}
 

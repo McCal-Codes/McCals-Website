@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useState } from 'react';
+import { useCallback, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './forms.module.css';
 
@@ -15,10 +15,6 @@ export function ContactForm() {
   const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [banner, setBanner] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-
-  useEffect(() => {
-    setBanner(null);
-  }, [name, email, subject, message, consent]);
 
   const reset = useCallback(() => {
     setName('');
@@ -134,7 +130,10 @@ export function ContactForm() {
                 required
                 autoComplete="name"
                 value={name}
-                onChange={(ev) => setName(ev.target.value)}
+                onChange={(ev) => {
+                  setName(ev.target.value);
+                  setBanner(null);
+                }}
                 placeholder="Your name"
               />
             </div>
@@ -150,7 +149,10 @@ export function ContactForm() {
                 required
                 autoComplete="email"
                 value={email}
-                onChange={(ev) => setEmail(ev.target.value)}
+                onChange={(ev) => {
+                  setEmail(ev.target.value);
+                  setBanner(null);
+                }}
                 placeholder="you@example.com"
               />
             </div>
@@ -166,7 +168,10 @@ export function ContactForm() {
               name="subject"
               required
               value={subject}
-              onChange={(ev) => setSubject(ev.target.value)}
+              onChange={(ev) => {
+                setSubject(ev.target.value);
+                setBanner(null);
+              }}
             >
               <option value="">Select a topic…</option>
               <option value="General inquiry">General inquiry</option>
@@ -187,7 +192,10 @@ export function ContactForm() {
               name="message"
               required
               value={message}
-              onChange={(ev) => setMessage(ev.target.value)}
+              onChange={(ev) => {
+                setMessage(ev.target.value);
+                setBanner(null);
+              }}
               placeholder="Tell us about your project or question…"
             />
           </div>
@@ -198,7 +206,10 @@ export function ContactForm() {
               name="consent"
               required
               checked={consent}
-              onChange={(ev) => setConsent(ev.target.checked)}
+              onChange={(ev) => {
+                setConsent(ev.target.checked);
+                setBanner(null);
+              }}
             />
             <span>
               I agree to the{' '}

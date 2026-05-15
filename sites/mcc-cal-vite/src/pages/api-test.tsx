@@ -7,7 +7,7 @@
  * Accessible at: http://localhost:3000/api-test
  */
 
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface TestResult {
   name: string;
@@ -37,10 +37,9 @@ export default function APITestPage() {
   const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
   const BLOG_BASE = `${window.location.origin}/content/blog-static`;
 
-  async function runTests() {
+  const runTests = useCallback(async () => {
     setRunning(true);
     const testResults: TestResult[] = [];
-    const startTime = Date.now();
 
     // Test 1: CORS Preflight
     try {
@@ -269,7 +268,6 @@ export default function APITestPage() {
       });
     }
 
-    void (Date.now() - startTime);
     const summary = {
       total: testResults.length,
       passed: testResults.filter((t) => t.status === 'success').length,
@@ -286,12 +284,15 @@ export default function APITestPage() {
     });
 
     setRunning(false);
-  }
+  }, [API_BASE, BLOG_BASE]);
 
   useEffect(() => {
-    // Auto-run tests on page load
-    runTests();
-  }, []);
+    const timer = window.setTimeout(() => {
+      runTests().catch(() => undefined);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [runTests]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
