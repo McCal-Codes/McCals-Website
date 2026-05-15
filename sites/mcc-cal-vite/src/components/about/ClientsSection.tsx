@@ -30,6 +30,7 @@ function getStableShuffleScore(client: Client): number {
 function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const renderTextLogo = client.logoMode === 'text' || !client.src || imageError;
   
   // Get link - randomizes if multiple publications exist
   const linkUrl = useMemo(() => getClientLink(client), [client]);
@@ -39,9 +40,15 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
   const isExternal = hasLink && !linkUrl.startsWith('/');
   
   const cardContent = (
-    <>
-      <div className={`${styles.clientImageWrapper} ${imageLoaded ? styles.loaded : ''}`}>
-        {!imageError ? (
+    <div
+      className={`${styles.clientImageWrapper} ${imageLoaded || renderTextLogo ? styles.loaded : ''}`}
+    >
+      {renderTextLogo ? (
+        <span className={styles.clientWordmark} aria-hidden={!isDuplicate ? undefined : true}>
+          {client.name}
+        </span>
+      ) : (
+        client.src && (
           <img
             src={client.src}
             alt={isDuplicate ? '' : client.alt}
@@ -50,15 +57,18 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
           />
-        ) : (
-          <span className={styles.clientFallback}>{client.name.charAt(0)}</span>
-        )}
-      </div>
-    </>
+        )
+      )}
+    </div>
   );
 
   // Wrapper with appropriate link behavior
-  const cardClasses = `${styles.clientCard} ${hasLink ? styles.clickable : ''}`;
+  const cardClasses = [
+    styles.clientCard,
+    hasLink ? styles.clickable : '',
+    renderTextLogo ? styles.textLogo : '',
+    client.logoSurface === 'dark' ? styles.darkLogo : '',
+  ].filter(Boolean).join(' ');
   
   if (!hasLink) {
     return (

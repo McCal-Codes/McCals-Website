@@ -1,36 +1,32 @@
-# Logo Assets Directory
+# About Client Logo Assets
 
-This folder contains logo images for the client showcase widget.
+This folder contains client showcase assets for the About page. Prefer official brand downloads, press kits, or files served from the organization's own site. If a suitable official file is not available, use `logoMode: 'text'` in `aboutData.ts` rather than creating a hand-built approximation.
 
-## Logo Specifications:
-- **Format**: PNG with transparent background preferred
-- **Dimensions**: Optimized for 200x80px display (can be higher resolution)
-- **File Size**: Keep under 100KB each for fast loading
-- **Naming**: Use lowercase with hyphens (e.g., `new-york-post-logo.png`)
+## Display Guidelines
 
-## Current Logos Needed:
-- `new-york-post-logo.png` - New York Post official logo
-- `pittsburgh-magazine-logo.png` - Pittsburgh Magazine logo  
-- `point-park-university-logo.png` - Point Park University logo
-- `the-globe-logo.png` - The Globe student newspaper logo
-- `nppa-logo.png` - National Press Photographers Association logo
-- `pennsylvania-news-media-logo.png` - PA News Media Association logo
-- `next-generation-news-logo.png` - Next Generation News Service logo
-- `upward-consulting-logo.png` - Upward Consulting logo
-- `covalent-logo.png` - Covalent company logo
+- Use lowercase, hyphenated filenames.
+- Prefer SVG or transparent PNG assets that read clearly at small sizes.
+- Do not recolor or redraw official marks.
+- Keep text-card fallbacks intentional, accessible, and linked to the same client website or publication URL.
+- Use `logoSurface: 'dark'` for official assets with white marks or white lettering so they remain legible in both site themes.
 
-## GitHub Usage:
-Once pushed to GitHub, logos can be referenced as:
-`https://raw.githubusercontent.com/[username]/McCals-Website/main/assets/images/logos/[filename]`
+## Institution Sources
 
-## Logo Sources:
-1. **Official websites** - Right-click and save from organization headers
-2. **Wikipedia Commons** - For major publications/organizations  
-3. **Press kits** - Contact organizations directly
-4. **Brand asset pages** - Many companies have downloadable logo packages
+- `geneva-college-logo.svg`: Geneva College site graphic, downloaded from `https://www.geneva.edu/_files/sitegraphics/geneva-spade-stacked.svg`. This mark includes white lettering, so it uses a dark logo tile in the About data.
+- `duquesne-university-logo.svg`: Duquesne University site logo, downloaded from `https://www.duq.edu/_resources/assets/img/logos/duquesne.svg`.
+- `university-of-pittsburgh-official-logo.png`: University of Pittsburgh Institutional Marks ZIP, horizontal digital color mark from `https://www.brand.pitt.edu/sites/default/files/Institutional_Marks.zip`.
+- `wvu-flying-wv-logo.svg`: WVU official Flying WV source, downloaded from `https://static.wvu.edu/global/images/logos/wvu/flying-wv-r-small--1.0.0.svg`.
+- `ohio-state-university-logo.png`: Ohio State web logo asset, downloaded from `https://www.osu.edu/assets/web/logo-web/1.0/osu-web-header-horiz.png`.
+- `iup-logo-official.png`: IUP visual guide logo asset, downloaded from `https://www.iup.edu/marcom/images/visual-guide/logos/iup-logo-737.png`.
 
-## Legal Notes:
-- Editorial use typically falls under fair use
-- Don't modify official logos significantly
-- Consider asking permission for commercial use
-- Attribute if required by organization
+## Text Cards
+
+- Carnegie Mellon University uses a text card because a directly downloadable official web mark was not confidently available during implementation.
+- Penn State Fayette uses a text card because the verified public asset was a general Penn State mark, not a Fayette-specific official mark.
+- TribLIVE uses a text card because no official downloadable logo file was provided or confidently retrievable during implementation.
+
+## Legal Notes
+
+- Client logos remain the property of their respective organizations.
+- Use marks only in the context of identifying clients or published work.
+- Follow each organization's brand guidance when replacing or adding assets.

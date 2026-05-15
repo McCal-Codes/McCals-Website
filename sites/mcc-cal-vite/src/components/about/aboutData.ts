@@ -1,8 +1,10 @@
 export interface Client {
   id: string;
   name: string;
-  src: string;
+  src?: string;
   alt: string;
+  logoMode?: 'image' | 'text';
+  logoSurface?: 'light' | 'dark';
   // URLs to published work - supports multiple for randomization
   publications?: {
     url: string;
@@ -124,8 +126,8 @@ export const clients: Client[] = [
   {
     id: 'carnegie-mellon',
     name: 'Carnegie Mellon University',
-    src: '/about/clients/carnegie-mellon-university-logo.svg',
     alt: 'Carnegie Mellon University',
+    logoMode: 'text',
     category: 'academic',
     website: 'https://cmu.edu',
     publications: [
@@ -136,7 +138,7 @@ export const clients: Client[] = [
   {
     id: 'university-of-pittsburgh',
     name: 'University of Pittsburgh',
-    src: '/about/clients/university-of-pittsburgh-logo.svg',
+    src: '/about/clients/university-of-pittsburgh-official-logo.png',
     alt: 'University of Pittsburgh',
     category: 'academic',
     website: 'https://pitt.edu',
@@ -144,15 +146,15 @@ export const clients: Client[] = [
   {
     id: 'penn-state-fayette',
     name: 'Penn State Fayette',
-    src: '/about/clients/penn-state-fayette-logo.svg',
     alt: 'Penn State Fayette',
+    logoMode: 'text',
     category: 'academic',
     website: 'https://fayette.psu.edu',
   },
   {
     id: 'iup',
     name: 'Indiana University of Pennsylvania',
-    src: '/about/clients/iup-logo.png',
+    src: '/about/clients/iup-logo-official.png',
     alt: 'Indiana University of Pennsylvania',
     category: 'academic',
     website: 'https://iup.edu',
@@ -160,7 +162,7 @@ export const clients: Client[] = [
   {
     id: 'wvu',
     name: 'West Virginia University',
-    src: '/about/clients/wvu-logo.png',
+    src: '/about/clients/wvu-flying-wv-logo.svg',
     alt: 'West Virginia University',
     category: 'academic',
     website: 'https://wvu.edu',
@@ -168,10 +170,27 @@ export const clients: Client[] = [
   {
     id: 'osu',
     name: 'Ohio State University',
-    src: '/about/clients/osu-logo.jpg',
+    src: '/about/clients/ohio-state-university-logo.png',
     alt: 'Ohio State University',
     category: 'academic',
     website: 'https://osu.edu',
+  },
+  {
+    id: 'geneva-college',
+    name: 'Geneva College',
+    src: '/about/clients/geneva-college-logo.svg',
+    alt: 'Geneva College',
+    logoSurface: 'dark',
+    category: 'academic',
+    website: 'https://www.geneva.edu/',
+  },
+  {
+    id: 'duquesne-university',
+    name: 'Duquesne University',
+    src: '/about/clients/duquesne-university-logo.svg',
+    alt: 'Duquesne University',
+    category: 'academic',
+    website: 'https://www.duq.edu/',
   },
   {
     id: 'pennsylvania-news-media',
@@ -196,6 +215,14 @@ export const clients: Client[] = [
     alt: 'Pittsburgh Union Progress',
     category: 'editorial',
     website: 'https://unionprogress.com',
+  },
+  {
+    id: 'triblive',
+    name: 'TribLIVE',
+    alt: 'TribLIVE',
+    logoMode: 'text',
+    category: 'editorial',
+    website: 'https://triblive.com/',
   },
   {
     id: 'center-for-media-innovation',
