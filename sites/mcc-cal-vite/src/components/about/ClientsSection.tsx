@@ -75,6 +75,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
       <li
         key={`${client.id}-${index}`}
         className={cardClasses}
+        data-logo-id={client.id}
         aria-hidden={isDuplicate || undefined}
         title={client.name}
       >
@@ -88,6 +89,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
       <li
         key={`${client.id}-${index}`}
         className={cardClasses}
+        data-logo-id={client.id}
         aria-hidden={isDuplicate || undefined}
       >
         <a
@@ -114,6 +116,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
     <li
       key={`${client.id}-${index}`}
       className={cardClasses}
+      data-logo-id={client.id}
       aria-hidden={isDuplicate || undefined}
     >
       <Link
