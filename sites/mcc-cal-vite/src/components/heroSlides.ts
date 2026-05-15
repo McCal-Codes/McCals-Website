@@ -269,6 +269,24 @@ export const HERO_IMAGE_VARIANTS: Record<string, HeroSlideVariant[]> = {
   ],
   Pittsburgh: [
     {
+      image: imageUrl.nature('Landscapes/Downtown Pittsburgh', '211028_Pittsburgh_Sunset_IMGP7702.jpg'),
+      alt: 'Clouds gather over Pittsburgh\'s riverfront at sunset.',
+      focalPointMobile: { x: 0.5, y: 0.58 },
+      focalPointDesktop: { x: 0.5, y: 0.62 },
+    },
+    {
+      image: imageUrl.nature('Landscapes/Downtown Pittsburgh', '211028_Downtown_Fire_Escape_IMGP7594.jpg'),
+      alt: 'A fire escape climbs a weathered brick building in Downtown Pittsburgh.',
+      focalPointMobile: { x: 0.54, y: 0.58 },
+      focalPointDesktop: { x: 0.58, y: 0.56 },
+    },
+    {
+      image: imageUrl.nature('Landscapes/Downtown Pittsburgh', '200805_Riverfront_Golden_Hour_DSC02724_1.jpg'),
+      alt: 'Backlit grass glows in evening light in Pittsburgh.',
+      focalPointMobile: { x: 0.6, y: 0.48 },
+      focalPointDesktop: { x: 0.56, y: 0.44 },
+    },
+    {
       image: '/images/homepage/pittsburgh/downtown-sunset-imgp8595.webp',
       alt: 'Downtown Pittsburgh buildings frame an orange sunset over Wood Street.',
       focalPointMobile: { x: 0.5, y: 0.5 },

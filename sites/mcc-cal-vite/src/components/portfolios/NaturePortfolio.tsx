@@ -12,12 +12,22 @@ interface NatureCollection {
   collectionName: string;
   folderPath: string; // relative to Portfolios/Nature/
   tags?: string[];
-  images: string[]; // filenames only
+  images: NatureImageEntry[];
 }
 
 interface NatureManifest {
   collections: NatureCollection[];
 }
+
+interface NatureImageMetadata {
+  filename: string;
+  path?: string;
+  caption?: string;
+  description?: string;
+  alt?: string;
+}
+
+type NatureImageEntry = string | NatureImageMetadata;
 
 import { generateId } from '@/utils/portfolio-ids';
 
@@ -27,11 +37,23 @@ function normalise(collections: NatureCollection[]): PortfolioGroup[] {
   return collections
     .filter((c) => c.images?.length > 0)
     .map((collection) => {
-      const images = collection.images.map((filename) => ({
-        url: imageUrl.nature(collection.folderPath, filename),
-        filename,
-        alt: `${collection.collectionName} — ${filename}`,
-      }));
+      const images = collection.images.map((entry, index) => {
+        const image = typeof entry === 'string'
+          ? { filename: entry }
+          : { ...entry, filename: entry.filename || entry.path || '' };
+
+        return {
+          url: imageUrl.nature(collection.folderPath, image.filename),
+          filename: image.filename,
+          caption: image.caption,
+          description: image.description,
+          alt:
+            image.alt ??
+            image.caption ??
+            image.description ??
+            `${collection.collectionName} — photo ${index + 1}`,
+        };
+      });
 
       return {
         id: generateId(collection.collectionName),

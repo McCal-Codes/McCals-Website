@@ -13,7 +13,12 @@ describe('adaptNature', () => {
           folderPath: 'Landscapes/Downtown Pittsburgh',
           totalImages: 10,
           images: [
-            '230704_Pitt_Fireworks__CAL2048.jpg',
+            {
+              filename: '230704_Pitt_Fireworks__CAL2048.jpg',
+              caption: 'Fireworks burst over Pittsburgh on Independence Day.',
+              description: 'Fireworks bloom above the city skyline at night.',
+              alt: 'Fireworks bloom over Pittsburgh at night.',
+            },
             '230704_Pitt_Fireworks__CAL2085.jpg',
             '230704_Pitt_Fireworks__CAL2091.jpg',
             '231004_Point_Park_Sunrise_CAL4701.jpg',
@@ -43,6 +48,11 @@ describe('adaptNature', () => {
     expect(groups[0]?.images[0]?.url).toContain(
       '/Nature/Landscapes/Downtown Pittsburgh/230704_Pitt_Fireworks__CAL2048.jpg',
     );
+    expect(groups[0]?.images[0]).toMatchObject({
+      caption: 'Fireworks burst over Pittsburgh on Independence Day.',
+      description: 'Fireworks bloom above the city skyline at night.',
+      alt: 'Fireworks bloom over Pittsburgh at night.',
+    });
     expect(groups[1]).toMatchObject({
       title: 'Downtown Pittsburgh — Sunrise',
       category: 'Landscapes',

@@ -1,8 +1,8 @@
 {
   "version": "2.0.0",
-  "generated": "2026-05-13T21:09:20.489Z",
-  "totalEvents": 15,
-  "totalImages": 402,
+  "generated": "2026-05-15T20:35:03.437Z",
+  "totalEvents": 17,
+  "totalImages": 419,
   "categories": [
     "Documentary",
     "Events",
@@ -20,11 +20,276 @@
     "Sports"
   ],
   "categoryStats": {
-    "Documentary": 4,
+    "Documentary": 6,
     "Events": 2,
     "Politics": 9
   },
   "events": [
+    {
+      "eventName": "Fern Hollow Nature Center Groundbreaking",
+      "category": "Documentary",
+      "tags": [
+        "Documentary",
+        "Events",
+        "Published Work"
+      ],
+      "folderPath": "Documentary/Fern Hollow Nature Center Groundbreaking",
+      "eventDate": {
+        "iso": "2026-05-05",
+        "source": "metadata"
+      },
+      "dateDisplay": "May 5, 2026",
+      "totalImages": 7,
+      "images": [
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
+          "description": "Lauren Massy and Kim Eckman, Fern Hollow Nature Center volunteers, help at the refreshment table before a groundbreaking ceremony for the center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "caption": "Lauren Massy and Kim Eckman, Fern Hollow Nature Center volunteers, help at the refreshment table before a groundbreaking ceremony for the center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow008_webuse.webp",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow008_webuse.webp",
+          "description": "An architectural rendering is displayed during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "caption": "An architectural rendering is displayed during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow011_webuse.webp",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow011_webuse.webp",
+          "description": "Ceremonial hard hats are lined up during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "caption": "Ceremonial hard hats are lined up during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow014_webuse.webp",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow014_webuse.webp",
+          "description": "Guests listen during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "caption": "Guests listen during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow019_webuse.webp",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow019_webuse.webp",
+          "description": "Guests applaud during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "caption": "Guests applaud during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow023_webuse.webp",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow023_webuse.webp",
+          "description": "From left, Barbera Carrier, Ron Kinser, David Genter, Annie Batyko, Lee Bollinger, Jennifer Nastasi, Francye Kinney, Lindsey Smith, Ann Shelton, Lauren Massy and Jodi Hilliard break ground on Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "caption": "From left, Barbera Carrier, Ron Kinser, David Genter, Annie Batyko, Lee Bollinger, Jennifer Nastasi, Francye Kinney, Lindsey Smith, Ann Shelton, Lauren Massy and Jodi Hilliard break ground on Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow026_webuse.webp",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow026_webuse.webp",
+          "description": "Guests attend a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "caption": "Guests attend a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Published Work"
+        ],
+        "published": true,
+        "date": "2026-05-05",
+        "description": "Groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa.",
+        "caption": "Fern Hollow Nature Center groundbreaking in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+        "outlet": "TribLive",
+        "outletUrl": "https://triblive.com",
+        "articleUrl": "",
+        "articleTitle": "Fern Hollow Nature Center groundbreaking",
+        "publishedDate": "2026-05-05"
+      },
+      "outlet": "TribLive",
+      "outletUrl": "https://triblive.com",
+      "articleUrl": "",
+      "articleTitle": "Fern Hollow Nature Center groundbreaking",
+      "publishedDate": "2026-05-05"
+    },
+    {
+      "eventName": "Sewickley ICE Prayer Service",
+      "category": "Documentary",
+      "tags": [
+        "Documentary",
+        "Events",
+        "Published Work"
+      ],
+      "folderPath": "Documentary/Sewickley ICE Prayer Service",
+      "eventDate": {
+        "iso": "2026-03-27",
+        "source": "metadata"
+      },
+      "dateDisplay": "March 27, 2026",
+      "totalImages": 10,
+      "images": [
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp",
+          "description": "Members of the Sewickley community attend a healing service for Maria Paula de Araujo Guedes, 6, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "Members of the Sewickley community attend a healing service for Maria Paula de Araujo Guedes, 6, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers05_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers05_webuse.webp",
+          "description": "The community of Sewickley attends a healing service for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "The community of Sewickley attends a healing service for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers08_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers08_webuse.webp",
+          "description": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers09_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers09_webuse.webp",
+          "description": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers12_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers12_webuse.webp",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers14_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers14_webuse.webp",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers17_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers17_webuse.webp",
+          "description": "Maria Paula de Araujo Guedes, 6, hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "Maria Paula de Araujo Guedes, 6, hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers29_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers29_webuse.webp",
+          "description": "The Rev. Hannah Loughman embraces Ana Paula de Araujo Pinto, Maria Paula de Araujo Guedes' mother, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "The Rev. Hannah Loughman embraces Ana Paula de Araujo Pinto, Maria Paula de Araujo Guedes' mother, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers32_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers32_webuse.webp",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers33_webuse.webp",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers33_webuse.webp",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events",
+            "Published Work"
+          ]
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Published Work"
+        ],
+        "published": true,
+        "date": "2026-03-27",
+        "description": "Healing prayer service for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa.",
+        "caption": "Community members gather in prayer for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+        "outlet": "TribLive",
+        "outletUrl": "https://triblive.com",
+        "articleUrl": "https://triblive.com/local/sewickley/sewickley-community-joins-together-in-prayer-for-young-girl-battling-cancer-dad-detained-by-ice/",
+        "articleTitle": "Sewickley community joins together in prayer for young girl battling cancer, dad detained by ICE",
+        "publishedDate": "2026-04-09"
+      },
+      "outlet": "TribLive",
+      "outletUrl": "https://triblive.com",
+      "articleUrl": "https://triblive.com/local/sewickley/sewickley-community-joins-together-in-prayer-for-young-girl-battling-cancer-dad-detained-by-ice/",
+      "articleTitle": "Sewickley community joins together in prayer for young girl battling cancer, dad detained by ICE",
+      "publishedDate": "2026-04-09"
+    },
     {
       "eventName": "Brentwood Vs Springdale",
       "category": "Documentary",

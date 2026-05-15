@@ -138,12 +138,13 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
 
   if (!group || !activeImage) return null;
 
+  const activeCaption = activeImage.caption ?? activeImage.description;
   const summaryText =
+    activeImage.description ??
     group.coverImage.description ??
     group.images[0]?.description ??
     group.coverImage.caption ??
     group.images[0]?.caption;
-  const activeCaption = activeImage.caption ?? activeImage.description;
   const zoomPercent = Math.round(zoom * 100);
 
   return (

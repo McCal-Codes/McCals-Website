@@ -1,8 +1,38 @@
 {
   "collectionName": "Downtown Pittsburgh",
   "folderPath": "Landscapes/Downtown Pittsburgh",
-  "totalImages": 34,
+  "totalImages": 37,
   "images": [
+    {
+      "filename": "200805_Riverfront_Golden_Hour_DSC02724_1.jpg",
+      "path": "200805_Riverfront_Golden_Hour_DSC02724_1.jpg",
+      "caption": "Backlit grass catches evening light in Pittsburgh, Pa., Aug. 5, 2020.",
+      "description": "Tall blades of grass glow orange against a dark, soft-focus background as late sunlight filters through the frame.",
+      "alt": "Backlit grass catches evening light in Pittsburgh.",
+      "tags": [
+        "landscape"
+      ]
+    },
+    {
+      "filename": "211028_Downtown_Fire_Escape_IMGP7594.jpg",
+      "path": "211028_Downtown_Fire_Escape_IMGP7594.jpg",
+      "caption": "A fire escape cuts across a brick facade in Downtown Pittsburgh, Pa., Oct. 28, 2021.",
+      "description": "A black metal fire escape zigzags up a weathered brick building, framed against windowed office towers in the background.",
+      "alt": "A fire escape climbs a weathered brick building in Downtown Pittsburgh.",
+      "tags": [
+        "landscape"
+      ]
+    },
+    {
+      "filename": "211028_Pittsburgh_Sunset_IMGP7702.jpg",
+      "path": "211028_Pittsburgh_Sunset_IMGP7702.jpg",
+      "caption": "Clouds gather over Pittsburgh's riverfront at sunset, Pittsburgh, Pa., Oct. 28, 2021.",
+      "description": "Purple and blue clouds spread above the river as city lights begin to glow along the shoreline at dusk.",
+      "alt": "Clouds gather over Pittsburgh's riverfront at sunset.",
+      "tags": [
+        "landscape"
+      ]
+    },
     "221019_Street_2021_IMGP9302.jpg",
     "230505_untitled__CAL4020-Edit.jpg",
     "230509_untitled__CAL4122.jpg",
@@ -42,7 +72,7 @@
     "landscape"
   ],
   "metadata": {
-    "generated": "2026-05-13T21:09:33.488Z",
+    "generated": "2026-05-15T20:37:40.424Z",
     "version": "1.0.0"
   }
 }

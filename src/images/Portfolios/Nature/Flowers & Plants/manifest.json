@@ -1,0 +1,24 @@
+{
+  "collectionName": "Flowers & Plants",
+  "folderPath": "Flowers & Plants",
+  "totalImages": 10,
+  "images": [
+    "CAL_4406.jpg",
+    "CAL_4420.jpg",
+    "CAL_4466.jpg",
+    "IMGP2605.jpg",
+    "IMGP2654.jpg",
+    "IMGP6841.jpg",
+    "IMGP6886.jpg",
+    "IMGP8504.jpg",
+    "IMGP9549.jpg",
+    "IMGP9551.jpg"
+  ],
+  "tags": [
+    "flowers & plants"
+  ],
+  "metadata": {
+    "generated": "2026-05-15T20:40:38.935Z",
+    "version": "1.0.0"
+  }
+}

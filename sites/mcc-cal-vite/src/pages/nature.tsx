@@ -14,7 +14,7 @@ interface NatureItem {
   collectionName: string;
   folderPath: string;
   totalImages: number;
-  images: string[];
+  images: NatureImageEntry[];
   tags: string[];
 }
 
@@ -23,6 +23,32 @@ interface NatureManifest {
   generated: string;
   totalCollections: number;
   collections: NatureItem[];
+}
+
+interface NatureImageMetadata {
+  filename: string;
+  path?: string;
+  caption?: string;
+  description?: string;
+  alt?: string;
+  tags?: string[];
+}
+
+type NatureImageEntry = string | NatureImageMetadata;
+
+function normalizeNatureImage(image: NatureImageEntry): NatureImageMetadata {
+  if (typeof image === 'string') {
+    return { filename: image };
+  }
+
+  return {
+    filename: image.filename || image.path || '',
+    path: image.path,
+    caption: image.caption,
+    description: image.description,
+    alt: image.alt,
+    tags: image.tags,
+  };
 }
 
 function inferDateFromFilename(filename: string): Date | null {
@@ -41,9 +67,9 @@ function inferDateFromFilename(filename: string): Date | null {
   return null;
 }
 
-function summarizeCollectionDate(images: string[]): Pick<PortfolioGroup, 'dateDisplay' | 'dateISO'> {
+function summarizeCollectionDate(images: NatureImageEntry[]): Pick<PortfolioGroup, 'dateDisplay' | 'dateISO'> {
   const parsedDates = images
-    .map((filename) => inferDateFromFilename(filename))
+    .map((image) => inferDateFromFilename(normalizeNatureImage(image).filename))
     .filter((date): date is Date => date instanceof Date);
 
   if (parsedDates.length === 0) {
@@ -91,7 +117,7 @@ function formatNatureCategory(item: NatureItem): string {
 interface NatureGroupSource {
   title: string;
   folderPath: string;
-  images: string[];
+  images: NatureImageEntry[];
   category: string;
   tags: string[];
 }
@@ -125,13 +151,14 @@ function splitLandscapeCollection(item: NatureItem): NatureGroupSource[] {
     },
   ];
 
-  const buckets = new Map<string, string[]>(
+  const buckets = new Map<string, NatureImageEntry[]>(
     bucketDefinitions.map((definition) => [definition.key, []]),
   );
-  const selects: string[] = [];
+  const selects: NatureImageEntry[] = [];
 
   for (const image of item.images) {
-    const matchedDefinition = bucketDefinitions.find((definition) => definition.matcher.test(image));
+    const filename = normalizeNatureImage(image).filename;
+    const matchedDefinition = bucketDefinitions.find((definition) => definition.matcher.test(filename));
 
     if (matchedDefinition) {
       buckets.get(matchedDefinition.key)?.push(image);
@@ -189,13 +216,23 @@ export function adaptNature(manifest: NatureManifest): PortfolioGroup[] {
     .filter((item) => item.images.length > 0)
     .flatMap((item) =>
       expandNatureCollection(item).map((groupSource) => {
-        const images = groupSource.images.map((filename, index) => ({
-          url: imageUrl.nature(groupSource.folderPath, filename),
-          filename,
-          alt: `${groupSource.title}, nature image ${index + 1}`,
-        }));
+        const images = groupSource.images.map((entry, index) => {
+          const image = normalizeNatureImage(entry);
 
-        const coverFilename = groupSource.images[0];
+          return {
+            url: imageUrl.nature(groupSource.folderPath, image.filename),
+            filename: image.filename,
+            caption: image.caption,
+            description: image.description,
+            alt:
+              image.alt ??
+              image.caption ??
+              image.description ??
+              `${groupSource.title}, nature image ${index + 1}`,
+          };
+        });
+
+        const coverFilename = normalizeNatureImage(groupSource.images[0]).filename;
         const coverImage = {
           ...images[0],
           url: imageUrl.natureThumb(groupSource.folderPath, coverFilename),

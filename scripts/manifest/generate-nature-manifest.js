@@ -14,6 +14,7 @@ const BASE_NATURE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Nat
 const WILDLIFE_BASE = path.join(BASE_NATURE, 'Wildlife');
 const LANDSCAPES_BASE = path.join(BASE_NATURE, 'Landscapes');
 const MANIFEST_OUTPUT = path.join(BASE_NATURE, 'nature-manifest.json');
+const DIRECT_COLLECTION_EXCLUDES = new Set(['Wildlife', 'Landscapes', 'thumbs']);
 
 async function exists(filePath) {
   try { await fs.access(filePath); return true; } catch { return false; }
@@ -25,24 +26,128 @@ async function getImageFiles(folderPath) {
   const items = await fs.readdir(folderPath);
   return dedupeImageEntries(items.filter(item => IMAGE_EXTENSION_RE.test(item)));
 }
+
+async function loadCaptions(folderPath) {
+  const captionsPath = path.join(folderPath, 'captions.json');
+  if (!(await exists(captionsPath))) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(await fs.readFile(captionsPath, 'utf8'));
+  } catch (error) {
+    console.warn(`⚠️  Invalid captions.json in ${path.basename(folderPath)}: ${error.message}`);
+    return null;
+  }
+}
+
+function getCaptionForImage(captions, filename) {
+  if (!captions) return null;
+  if (captions[filename]) return captions[filename];
+
+  const ext = path.extname(filename);
+  const base = filename.slice(0, -ext.length);
+  const alternateExtensions =
+    ext.toLowerCase() === '.webp' ? ['.jpg', '.jpeg', '.png'] : ['.webp'];
+
+  for (const alternateExt of alternateExtensions) {
+    const alternate = `${base}${alternateExt}`;
+    if (captions[alternate]) return captions[alternate];
+  }
+
+  return null;
+}
+
+function buildImageEntries(imageFiles, captions, tags) {
+  return imageFiles.map((filename) => {
+    const perImage = getCaptionForImage(captions, filename);
+    if (!perImage) {
+      return filename;
+    }
+
+    return {
+      filename,
+      path: filename,
+      caption: perImage.caption,
+      description: perImage.description,
+      alt: perImage.alt,
+      tags: perImage.tags || tags,
+    };
+  });
+}
+
+async function loadExistingManifest(manifestPath) {
+  if (!(await exists(manifestPath))) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(await fs.readFile(manifestPath, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
+function withoutGenerated(manifest) {
+  return {
+    ...manifest,
+    metadata: {
+      ...manifest.metadata,
+      generated: null,
+    },
+  };
+}
+
 async function generateManifestForFolder(collectionName, folderPath, tags) {
   const imageFiles = await getImageFiles(folderPath);
+  if (imageFiles.length === 0) {
+    return null;
+  }
+
+  const captions = await loadCaptions(folderPath);
+  const images = buildImageEntries(imageFiles, captions, tags);
+  const manifestPath = path.join(folderPath, 'manifest.json');
+  const existingManifest = await loadExistingManifest(manifestPath);
   const manifest = {
     collectionName,
     folderPath: path.relative(BASE_NATURE, folderPath).replace(/\\/g, '/'),
     totalImages: imageFiles.length,
-    images: imageFiles,
+    images,
     tags,
     metadata: {
       generated: new Date().toISOString(),
       version: '1.0.0'
     }
   };
-  await fs.writeFile(path.join(folderPath, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf8');
+
+  if (
+    existingManifest?.metadata?.generated &&
+    JSON.stringify(withoutGenerated(existingManifest)) === JSON.stringify(withoutGenerated(manifest))
+  ) {
+    manifest.metadata.generated = existingManifest.metadata.generated;
+  }
+
+  await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
   return manifest;
 }
 async function scanAndGenerateManifests() {
   const collections = [];
+  // Direct top-level collections, such as Flowers & Plants
+  const natureItems = await fs.readdir(BASE_NATURE);
+  for (const item of natureItems) {
+    if (item.startsWith('.') || item.endsWith('.json') || DIRECT_COLLECTION_EXCLUDES.has(item)) {
+      continue;
+    }
+
+    const itemPath = path.join(BASE_NATURE, item);
+    if (await isDirectory(itemPath)) {
+      const manifest = await generateManifestForFolder(item, itemPath, [item.toLowerCase()]);
+      if (manifest) {
+        collections.push(manifest);
+      }
+    }
+  }
+
   // Wildlife (all animal types)
   if (await exists(WILDLIFE_BASE)) {
     const animalTypes = await fs.readdir(WILDLIFE_BASE);
@@ -54,7 +159,9 @@ async function scanAndGenerateManifests() {
           const speciesPath = path.join(animalTypePath, species);
           if (await isDirectory(speciesPath)) {
             const manifest = await generateManifestForFolder(species, speciesPath, [animalType.toLowerCase()]);
-            collections.push(manifest);
+            if (manifest) {
+              collections.push(manifest);
+            }
           }
         }
       }
@@ -67,7 +174,9 @@ async function scanAndGenerateManifests() {
       const locPath = path.join(LANDSCAPES_BASE, loc);
       if (await isDirectory(locPath)) {
         const manifest = await generateManifestForFolder(loc, locPath, ['landscape']);
-        collections.push(manifest);
+        if (manifest) {
+          collections.push(manifest);
+        }
       }
     }
   }
