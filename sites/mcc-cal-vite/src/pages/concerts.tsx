@@ -5,10 +5,12 @@ import EmptyState from '@/components/portfolio/EmptyState';
 import PortfolioSkeleton from '@/components/LoadingStates/PortfolioSkeleton';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { generateSeoImageSchema, getPageSeo } from '@/content/pageSeo';
 import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const ALL = 'All';
+const PAGE_SEO = getPageSeo('concerts', SITE_URL);
 
 interface ConcertBand {
   bandName: string;
@@ -23,7 +25,7 @@ interface ConcertManifest {
   bands: ConcertBand[];
 }
 
-function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
+export function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
   return manifest.bands.map((band) => {
     const images = band.images.map((filename) => ({
       url: imageUrl.concert(band.relativeFolderPath, filename),
@@ -72,21 +74,22 @@ export default function ConcertsPage() {
   );
 
   usePageMeta({
-    title: 'Pittsburgh Concert Photographer | Caleb McCartney',
-    description:
-      'Pittsburgh concert photographer covering live music, touring acts, local venues, and editorial assignments with photojournalistic speed.',
-    canonical: `${SITE_URL}/concerts`,
+    title: PAGE_SEO.title,
+    description: PAGE_SEO.description,
+    canonical: PAGE_SEO.url,
     og: {
       type: 'website',
-      title: 'Pittsburgh Concert Photographer | Caleb McCartney',
-      description: 'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
-      image: `${SITE_URL}/images/concerts-og.jpg`,
+      title: PAGE_SEO.ogTitle,
+      description: PAGE_SEO.ogDescription,
+      image: PAGE_SEO.image,
+      imageAlt: PAGE_SEO.imageAlt,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Pittsburgh Concert Photographer | Caleb McCartney',
-      description: 'Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.',
-      image: `${SITE_URL}/images/concerts-og.jpg`,
+      title: PAGE_SEO.ogTitle,
+      description: PAGE_SEO.ogDescription,
+      image: PAGE_SEO.image,
+      imageAlt: PAGE_SEO.imageAlt,
     },
     jsonLd: generatePageGraph([
       generatePhotographyProviderSchema(
@@ -102,6 +105,7 @@ export default function ConcertsPage() {
           keywords: ['concert photographer pittsburgh', 'music photographer', 'live music photography'],
         },
       ),
+      generateSeoImageSchema(PAGE_SEO),
     ]),
   });
 
@@ -151,7 +155,13 @@ export default function ConcertsPage() {
                   active={activeFilter}
                   onChange={setActiveFilter}
                 />
-                <PortfolioGrid groups={filtered} />
+                <PortfolioGrid
+                  groups={filtered}
+                  initialCount={16}
+                  batchSize={8}
+                  gridClassName={portfolioStyles.pfConcertGrid}
+                  cardImageSizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1000px) 50vw, (max-width: 1400px) 33vw, 25vw"
+                />
               </>
             )}
           </>

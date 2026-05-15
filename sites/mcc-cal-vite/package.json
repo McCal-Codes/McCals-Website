@@ -9,7 +9,7 @@
     "dev:api": "concurrently \"node api-server.cjs\" \"vite\"",
     "dev:vercel": "vercel dev",
     "prebuild": "node scripts/sync-manifests.js || echo 'Sync skipped'",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && node scripts/generate-social-images.js && vite build && node scripts/generate-route-meta.js",
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist",
     "test": "vitest run",
@@ -32,6 +32,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",

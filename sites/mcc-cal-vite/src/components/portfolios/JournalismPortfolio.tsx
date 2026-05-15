@@ -72,6 +72,11 @@ function normalise(events: JournalismEvent[]): PortfolioGroup[] {
 
 const ALL = 'All';
 
+function isPoliticianCoverage(title: string): boolean {
+  if (/protest/i.test(title)) return false;
+  return /(obama|kamala|harris|trump|clinton|walz|vance|jdvance)/i.test(title);
+}
+
 export default function JournalismPortfolio() {
   const { data, status, error } = useManifest<JournalismManifest>('journalism');
   const [activeFilter, setActiveFilter] = useState(ALL);
@@ -89,6 +94,9 @@ export default function JournalismPortfolio() {
 
   const filtered = useMemo(() => {
     if (activeFilter === ALL) return groups;
+    if (activeFilter === 'Politics') {
+      return groups.filter((g) => g.category === 'Politics' && isPoliticianCoverage(g.title));
+    }
     return groups.filter((g) => g.category === activeFilter);
   }, [groups, activeFilter]);
 

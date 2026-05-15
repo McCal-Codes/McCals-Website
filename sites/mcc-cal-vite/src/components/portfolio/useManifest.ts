@@ -140,6 +140,13 @@ export const imageUrl = {
     return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
 
+  /** nature thumbs: prebuilt webp thumbnails mirrored under Portfolios/Nature/thumbs/ */
+  natureThumb(folderPath: string, filename: string): string {
+    const thumbFilename = filename.replace(/\.[^.]+$/, '.webp');
+    const path = `${PORTFOLIOS_BASE}/Nature/thumbs/${folderPath}/${thumbFilename}`;
+    return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
+  },
+
   /** featured: mixed types — same as concert, uses relativeFolderPath */
   featured(relativeFolderPath: string, filename: string): string {
     const path = `${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`;

@@ -1,16 +1,19 @@
 import { Layout } from '@/components';
 import JournalismPortfolio from '@/components/portfolios/JournalismPortfolio';
+import { generateSeoImageSchema, getPageSeo } from '@/content/pageSeo';
 import { usePageMeta } from '@/hooks/usePageMeta';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const PAGE_SEO = getPageSeo('journalism', SITE_URL);
 
 // Image structured data for key political coverage
 const portfolioImages = [
+  generateSeoImageSchema(PAGE_SEO),
   {
     '@type': 'ImageObject',
-    name: 'Scarlett Johansson GOTV Canvas Launch',
-    description: 'Actress Scarlett Johansson addresses volunteers at a get-out-the-vote canvass launch for Vice President Kamala Harris in Pittsburgh, Pa., Nov. 3, 2024.',
-    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/scarlett-canvas/241103_scarlett-canvas_CAL3197.jpg`,
+    name: 'Bill Clinton Campaigns in Greensburg',
+    description: 'Former President Bill Clinton greets supporters during a campaign event in Greensburg, Pa.',
+    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/clinton-pitt-greensburgh/241029_clinton-pitt_CAL3063.jpg`,
     creator: {
       '@type': 'Person',
       name: 'Caleb McCartney',
@@ -22,9 +25,9 @@ const portfolioImages = [
   },
   {
     '@type': 'ImageObject',
-    name: 'Trump Returns to Butler',
-    description: 'Former President Donald Trump speaks at a campaign rally at Butler Farm Show Inc. in Butler, Pa., Oct. 5, 2024.',
-    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/trump-returns-butler/051024_trump-butler_CAL2418.jpg`,
+    name: 'JD Vance Campaigns in Johnstown',
+    description: 'Supporters raise their hands as JD Vance speaks at a campaign event in Johnstown, Pa.',
+    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/jdvance-johnstown/241012_JD%20Vance%20in%20Johnstown_CAL3636.webp`,
     creator: {
       '@type': 'Person',
       name: 'Caleb McCartney',
@@ -37,8 +40,8 @@ const portfolioImages = [
   {
     '@type': 'ImageObject',
     name: 'Kamala Harris Campaigns in Erie',
-    description: 'Vice President Kamala Harris addresses supporters at a presidential campaign rally in Erie, Pa., Oct. 14, 2024.',
-    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/kamala-erie/141024_Kamala%20Speaks%20at%20Erie_CAL3741.jpg`,
+    description: 'Vice President Kamala Harris addresses supporters at a presidential campaign rally in Erie, Pa.',
+    contentUrl: `${SITE_URL}/images/Portfolios/Journalism/Politics/kamala-speaks-erie/141024_Kamala%20Speaks%20at%20Erie_CAL4115.jpg`,
     creator: {
       '@type': 'Person',
       name: 'Caleb McCartney',
@@ -52,28 +55,29 @@ const portfolioImages = [
 
 export default function JournalismPage() {
   usePageMeta({
-    title: 'Photojournalism Portfolio | Caleb McCartney - Pittsburgh Political Photography',
-    description:
-      'Award-winning photojournalism by Caleb McCartney. Political campaign coverage including Trump, Harris, Obama, celebrity events with Scarlett Johansson, and published work for The Globe. Pittsburgh-based editorial photographer specializing in political rallies and breaking news.',
-    canonical: `${SITE_URL}/journalism`,
+    title: PAGE_SEO.title,
+    description: PAGE_SEO.description,
+    canonical: PAGE_SEO.url,
     og: {
       type: 'website',
-      title: 'Photojournalism Portfolio | Caleb McCartney',
-      description: 'Political campaign photography and editorial work by Pittsburgh photojournalist Caleb McCartney. Published coverage of Trump, Harris, Obama rallies and celebrity events.',
-      image: `${SITE_URL}/images/Portfolios/Journalism/Politics/scarlett-canvas/241103_scarlett-canvas_CAL3197.jpg`,
+      title: PAGE_SEO.ogTitle,
+      description: PAGE_SEO.ogDescription,
+      image: PAGE_SEO.image,
+      imageAlt: PAGE_SEO.imageAlt,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Photojournalism Portfolio | Caleb McCartney',
-      description: 'Political campaign photography and editorial work by Pittsburgh photojournalist Caleb McCartney.',
-      image: `${SITE_URL}/images/Portfolios/Journalism/Politics/scarlett-canvas/241103_scarlett-canvas_CAL3197.jpg`,
+      title: PAGE_SEO.ogTitle,
+      description: PAGE_SEO.ogDescription,
+      image: PAGE_SEO.image,
+      imageAlt: PAGE_SEO.imageAlt,
     },
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: 'Photojournalism Portfolio',
-      description: 'Political campaign photography and editorial work by Pittsburgh photojournalist Caleb McCartney.',
-      url: `${SITE_URL}/journalism`,
+      description: PAGE_SEO.description,
+      url: PAGE_SEO.url,
       isPartOf: {
         '@type': 'WebSite',
         name: 'McCal Media',

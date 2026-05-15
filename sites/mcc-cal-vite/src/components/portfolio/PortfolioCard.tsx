@@ -14,6 +14,8 @@ interface PortfolioCardProps {
   onOpen: (group: PortfolioGroup) => void;
   /** Callback when anchor link is clicked to copy URL */
   onCopyLink: (id: string) => void;
+  /** Responsive sizes attribute for the card image */
+  imageSizes?: string;
 }
 
 /** Photos icon (stack of images) - decorative, aria-hidden */
@@ -49,7 +51,7 @@ const LinkIcon = () => (
  * />
  * ```
  */
-const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) => {
+const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink, imageSizes }) => {
   const cardRef = useRef<HTMLElement>(null);
 
   // Staggered entrance via IntersectionObserver
@@ -124,7 +126,8 @@ const PortfolioCard: FC<PortfolioCardProps> = ({ group, onOpen, onCopyLink }) =>
         loading="lazy"
         decoding="async"
         optimizedWidth={640}
-        sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) 50vw, 33vw"
+        srcSetWidths={[320, 480, 640, 960]}
+        sizes={imageSizes ?? '(max-width: 600px) calc(100vw - 40px), (max-width: 900px) 50vw, 33vw'}
         width={400}
         height={300}
       />

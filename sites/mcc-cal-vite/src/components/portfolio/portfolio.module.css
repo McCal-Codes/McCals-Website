@@ -40,6 +40,45 @@
   line-height: 1.65;
 }
 
+.pfPortraitSummary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 900px;
+  margin: 0 auto 36px;
+}
+
+.pfPortraitMetric {
+  padding: 18px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+    rgba(0,0,0,0.18);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pfPortraitMetricValue {
+  display: block;
+  margin-bottom: 4px;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+}
+
+.pfPortraitMetricLabel {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  opacity: 0.68;
+}
+
 /* --- Status states --- */
 .pfLoading,
 .pfError {
@@ -317,6 +356,80 @@
 
 @media (max-width: 600px) {
   .pfGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pfPortraitGrid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+.pfConcertGrid {
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 18px;
+}
+
+.pfConcertGrid .pfCardImageFrame,
+.pfConcertGrid .pfCard img {
+  aspect-ratio: 5 / 4;
+}
+
+.pfConcertGrid .pfCardOverlay {
+  padding: 12px 14px;
+}
+
+.pfConcertGrid .pfCaptionRailTitle {
+  font-size: 0.98rem;
+}
+
+.pfConcertGrid .pfCaptionRailMeta {
+  font-size: 0.68rem;
+}
+
+.pfPortraitGrid .pfCardImageFrame,
+.pfPortraitGrid .pfCard img {
+  aspect-ratio: 3 / 4;
+}
+
+.pfNatureGrid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.pfNatureGrid .pfCardImageFrame,
+.pfNatureGrid .pfCard img {
+  aspect-ratio: 4 / 5;
+}
+
+@media (max-width: 900px) {
+  .pfPortraitSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .pfConcertGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pfPortraitGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pfNatureGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .pfConcertGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pfPortraitGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pfNatureGrid {
     grid-template-columns: 1fr;
   }
 }

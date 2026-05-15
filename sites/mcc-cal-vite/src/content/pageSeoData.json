@@ -1,0 +1,68 @@
+{
+  "home": {
+    "route": "/",
+    "title": "Pittsburgh Photographer | Caleb McCartney | McCal Media",
+    "description": "Pittsburgh political photojournalist and photographer Caleb McCartney creates photojournalism, event coverage, concert photography, and documentary imagery for artists, teams, and organizations.",
+    "ogTitle": "Pittsburgh Photographer | Caleb McCartney",
+    "ogDescription": "Photojournalism, event coverage, concert photography, and documentary imagery by Pittsburgh political photojournalist Caleb McCartney.",
+    "imagePath": "/images/social/homepage-og.jpg",
+    "imageAlt": "A farmer works in a garden during a Boyd Station documentary photojournalism assignment.",
+    "imageName": "Boyd Station documentary photography by Caleb McCartney",
+    "keywords": ["Pittsburgh photographer", "Pittsburgh photojournalist", "political photojournalist", "event coverage"]
+  },
+  "concerts": {
+    "route": "/concerts",
+    "title": "Pittsburgh Concert Photographer | Caleb McCartney",
+    "description": "Pittsburgh concert photographer covering live music, touring acts, local venues, and editorial assignments with photojournalistic speed.",
+    "ogTitle": "Pittsburgh Concert Photographer | Caleb McCartney",
+    "ogDescription": "Live music photography for artists, venues, promoters, and editorial teams in Pittsburgh and beyond.",
+    "imagePath": "/images/social/concerts-og.jpg",
+    "imageAlt": "Heading North performs under red and blue club lighting at Bottle Rocket.",
+    "imageName": "Heading North live music photography",
+    "keywords": ["concert photographer Pittsburgh", "live music photography", "venue photography"]
+  },
+  "events": {
+    "route": "/events",
+    "title": "Pittsburgh Event Photographer | Caleb McCartney",
+    "description": "Pittsburgh event photographer for corporate events, conferences, nonprofit gatherings, campus programs, and branded activations.",
+    "ogTitle": "Pittsburgh Event Photographer | Caleb McCartney",
+    "ogDescription": "Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.",
+    "imagePath": "/images/social/events-og.jpg",
+    "imageAlt": "Guests sing along under bright club lights during a Howl at the Moon event.",
+    "imageName": "Howl at the Moon event photography",
+    "keywords": ["event photographer Pittsburgh", "corporate event photography", "conference photographer"]
+  },
+  "journalism": {
+    "route": "/journalism",
+    "title": "Photojournalism Portfolio | Caleb McCartney",
+    "description": "Photojournalism by Caleb McCartney, including political campaign coverage, documentary stories, protests, and published editorial work in Pittsburgh and beyond.",
+    "ogTitle": "Photojournalism Portfolio | Caleb McCartney",
+    "ogDescription": "Political campaign photography, documentary stories, protests, and editorial work by Pittsburgh photojournalist Caleb McCartney.",
+    "imagePath": "/images/social/journalism-og.jpg",
+    "imageAlt": "Former President Barack Obama speaks to supporters at a campaign rally in Pittsburgh.",
+    "imageName": "Barack Obama campaign rally photography",
+    "keywords": ["photojournalism", "political photography", "Pittsburgh photojournalist"]
+  },
+  "nature": {
+    "route": "/nature",
+    "title": "Nature Photography | Caleb McCartney",
+    "description": "Nature and landscape photography by Caleb McCartney, including wildlife, city horizons, Appalachian quiet, and close botanical studies.",
+    "ogTitle": "Nature Photography | Caleb McCartney",
+    "ogDescription": "Wildlife, landscape, and nature photography by Caleb McCartney, from Pittsburgh city horizons to Appalachian field studies.",
+    "imagePath": "/images/social/nature-og.jpg",
+    "imageAlt": "A steel truss bridge spans a Pittsburgh river at sunset.",
+    "imageName": "Pittsburgh bridge landscape photography",
+    "keywords": ["nature photography", "landscape photography", "Pittsburgh landscape photography"]
+  },
+  "portraits": {
+    "route": "/portraits",
+    "title": "Pittsburgh Headshot Photographer | Caleb McCartney",
+    "description": "Pittsburgh headshot photographer for professional headshots, portrait sessions, editorial portraits, and brand-forward personal imagery.",
+    "ogTitle": "Pittsburgh Headshot Photographer | Caleb McCartney",
+    "ogDescription": "Professional headshots, portraits, and editorial sessions by Caleb McCartney in Pittsburgh.",
+    "imagePath": "/images/social/portraits-og.jpg",
+    "imageAlt": "Studio portrait of Logan Spiker by Caleb McCartney.",
+    "imageName": "Studio portrait photography",
+    "keywords": ["headshot photographer Pittsburgh", "portrait photographer Pittsburgh", "professional headshots"]
+  }
+}

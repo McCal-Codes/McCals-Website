@@ -7,9 +7,11 @@ import { sortPortfolioGroups } from '@/components/portfolio/sortGroups';
 import { useManifest, imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { portfolioStyles } from '@/components/portfolio';
+import { generateSeoImageSchema, getPageSeo } from '@/content/pageSeo';
 import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const PAGE_SEO = getPageSeo('events', SITE_URL);
 
 interface EventItem {
   title?: string;
@@ -77,21 +79,22 @@ export default function EventsPage() {
   );
 
   usePageMeta({
-    title: 'Pittsburgh Event Photographer | Caleb McCartney',
-    description:
-      'Pittsburgh event photographer for corporate events, conferences, nonprofit gatherings, campus programs, and branded activations.',
-    canonical: `${SITE_URL}/events`,
+    title: PAGE_SEO.title,
+    description: PAGE_SEO.description,
+    canonical: PAGE_SEO.url,
     og: {
       type: 'website',
-      title: 'Pittsburgh Event Photographer | Caleb McCartney',
-      description: 'Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.',
-      image: `${SITE_URL}/images/events-og.jpg`,
+      title: PAGE_SEO.ogTitle,
+      description: PAGE_SEO.ogDescription,
+      image: PAGE_SEO.image,
+      imageAlt: PAGE_SEO.imageAlt,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Pittsburgh Event Photographer | Caleb McCartney',
-      description: 'Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.',
-      image: `${SITE_URL}/images/events-og.jpg`,
+      title: PAGE_SEO.ogTitle,
+      description: PAGE_SEO.ogDescription,
+      image: PAGE_SEO.image,
+      imageAlt: PAGE_SEO.imageAlt,
     },
     jsonLd: generatePageGraph([
       generatePhotographyProviderSchema(
@@ -107,6 +110,7 @@ export default function EventsPage() {
           keywords: ['event photographer pittsburgh', 'corporate event photographer', 'conference photographer'],
         },
       ),
+      generateSeoImageSchema(PAGE_SEO),
     ]),
   });
 

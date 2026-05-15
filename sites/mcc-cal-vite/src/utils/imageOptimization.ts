@@ -1,8 +1,18 @@
 const SQUARESPACE_IMAGE_HOST = 'images.squarespace-cdn.com';
+const JSDELIVR_IMAGE_HOST = 'cdn.jsdelivr.net';
 const ABSOLUTE_URL_RE = /^(?:[a-z][a-z0-9+.-]*:)?\/\//i;
+const OPTIMIZABLE_REMOTE_HOSTS = new Set([SQUARESPACE_IMAGE_HOST, JSDELIVR_IMAGE_HOST]);
+const OPTIMIZABLE_LOCAL_PATHS = [/^\/images\/.+/i, /^\/assets\/.+/i];
+const VERCEL_IMAGE_PATH = '/_vercel/image';
+const DEFAULT_QUALITY = 80;
+
+const IS_VERCEL_IMAGE_RUNTIME = ['preview', 'production'].includes(
+  import.meta.env.VITE_VERCEL_ENV ?? '',
+);
 
 type ImageOptimizationOptions = {
   width?: number;
+  quality?: number;
 };
 
 function getUrlBase(): string {
@@ -40,24 +50,57 @@ export function getOptimizedImageUrl(
 
   const { url, isRelative } = parsed;
 
-  if (url.hostname === SQUARESPACE_IMAGE_HOST) {
-    url.searchParams.set('format', 'webp');
+  if (!IS_VERCEL_IMAGE_RUNTIME) {
+    if (url.hostname === SQUARESPACE_IMAGE_HOST) {
+      url.searchParams.set('format', 'webp');
 
-    if (options.width) {
-      url.searchParams.set('width', String(options.width));
+      if (options.width) {
+        url.searchParams.set('width', String(options.width));
+      }
+
+      return serializeImageUrl(url, isRelative);
     }
 
-    return serializeImageUrl(url, isRelative);
+    return src;
   }
 
-  return src;
+  const isOptimizableRemote = OPTIMIZABLE_REMOTE_HOSTS.has(url.hostname);
+  const isOptimizableLocal = isRelative && OPTIMIZABLE_LOCAL_PATHS.some((pattern) => pattern.test(url.pathname));
+
+  if (!isOptimizableRemote && !isOptimizableLocal) {
+    return src;
+  }
+
+  const sourceUrl = isOptimizableRemote ? url.toString() : serializeImageUrl(url, true);
+  const params = new URLSearchParams({
+    url: sourceUrl,
+    q: String(options.quality ?? DEFAULT_QUALITY),
+  });
+
+  if (options.width) {
+    params.set('w', String(options.width));
+  }
+
+  return `${VERCEL_IMAGE_PATH}?${params.toString()}`;
 }
 
 export function getResponsiveImageSrcSet(src: string, widths: number[] = []): string | undefined {
   if (widths.length === 0) return undefined;
 
   const parsed = parseImageUrl(src);
-  if (!parsed || parsed.url.hostname !== SQUARESPACE_IMAGE_HOST) {
+  if (!parsed) {
+    return undefined;
+  }
+
+  const isOptimizableRemote = OPTIMIZABLE_REMOTE_HOSTS.has(parsed.url.hostname);
+  const isOptimizableLocal =
+    parsed.isRelative && OPTIMIZABLE_LOCAL_PATHS.some((pattern) => pattern.test(parsed.url.pathname));
+
+  if (!isOptimizableRemote && !isOptimizableLocal) {
+    return undefined;
+  }
+
+  if (!IS_VERCEL_IMAGE_RUNTIME && parsed.url.hostname !== SQUARESPACE_IMAGE_HOST) {
     return undefined;
   }
 

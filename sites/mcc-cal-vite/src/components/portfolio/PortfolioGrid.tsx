@@ -11,12 +11,16 @@ interface PortfolioGridProps {
   groups: PortfolioGroup[];
   initialCount?: number;
   batchSize?: number;
+  gridClassName?: string;
+  cardImageSizes?: string;
 }
 
 const PortfolioGrid: FC<PortfolioGridProps> = ({
   groups,
   initialCount = 12,
   batchSize = 6,
+  gridClassName,
+  cardImageSizes,
 }) => {
   const [visible, setVisible] = useState(initialCount);
   const [activeGroup, setActiveGroup] = useState<PortfolioGroup | null>(null);
@@ -38,7 +42,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
 
   if (groups.length === 0) {
     return (
-      <div className={portfolioStyles.pfGrid} role="status" aria-live="polite">
+      <div className={`${portfolioStyles.pfGrid}${gridClassName ? ` ${gridClassName}` : ''}`} role="status" aria-live="polite">
         <p>No portfolio items found.</p>
       </div>
     );
@@ -46,13 +50,14 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
 
   return (
     <>
-      <div className={portfolioStyles.pfGrid}>
+      <div className={`${portfolioStyles.pfGrid}${gridClassName ? ` ${gridClassName}` : ''}`}>
         {shown.map((group) => (
           <PortfolioCard
             key={group.id}
             group={group}
             onOpen={setActiveGroup}
             onCopyLink={handleCopyLink}
+            imageSizes={cardImageSizes}
           />
         ))}
       </div>
