@@ -1,6 +1,6 @@
 # Active To-Do List
 
-Last Updated: April 24, 2026
+Last Updated: May 15, 2026
 
 **Quick Reference:**
 
@@ -11,20 +11,20 @@ Last Updated: April 24, 2026
 
 ---
 
-## 🚀 Active Tasks (April 2026)
+## 🚀 Active Tasks (May 2026)
 
 ### High Priority
 
 - [x] **Script Reorganization** - Reduced 64 npm scripts to 47 (COMPLETED April 24, 2026)
   - Root package.json: 43 → 33 scripts (removed duplicates and rarely used commands)
-  - Vite package.json: 16 → 10 scripts (removed predev:vercel, validate:manifests, build:fast, analyze, test:coverage, test:run)
+  - Vite package.json: 16 → 11 scripts (removed stale commands; restored `test:run` for Vercel/Vitest CI parity on May 15, 2026)
   - Admin package.json: 5 → 4 scripts (removed dev:vercel)
   - Removed: api, api:refresh, manifest:dry, manifest:blog:build, manifest:all:build, blog:generate, watch:all, organize:preview, lint:scripts, test:e2e:ci, repo:analyze
-- [ ] **Node.js Upgrade** - 20.15.1 → 20.19+ LTS (or 22.x LTS)
-  - Update `package.json` engines field
-  - Update GitHub Actions Node version matrix
-  - Test Docker builds with new Node version
-  - Update `Dockerfile.api` base image
+- [x] **Node.js Runtime Baseline** - Active app and Vercel checks aligned to Node 20.19
+  - Root `package.json` engines field requires `node >=20.19.0`
+  - Vercel deployment checks use Node 20.19
+  - `Dockerfile.api` uses `node:20.19-alpine`
+  - Follow-up: audit legacy `config/Dockerfile`, which still uses `node:18-alpine`
 
 ### Medium Priority
 
@@ -40,10 +40,10 @@ Last Updated: April 24, 2026
   - Deploy Worker and verify endpoints
   - Test: webhook purge, blog auth, rate limiting, cache stats
   - Point Vite site to production Worker URL
-- [ ] **React 18 → 19 Upgrade**
-  - Update `sites/mcc-cal-vite/package.json`
-  - Test all components for breaking changes
-  - Update TypeScript types
+- [x] **React 19 Upgrade for Active Vite Site**
+  - `sites/mcc-cal-vite/package.json` uses React 19 and React DOM 19
+  - Active Vite TypeScript types are on React 19
+  - Follow-up: root package still carries React 18 tooling dependencies for non-active/legacy workflows
 - [ ] **Widget Empty State Resilience**
   - Concert Portfolio - Empty state when no shows
   - Photojournalism Portfolio - Empty state
@@ -62,7 +62,7 @@ Last Updated: April 24, 2026
   - Clean up TODO/FIXME comments in scripts (generate-events-manifest.js, archived scripts)
 - [ ] **ESLint 9 Migration** - Flat config format
 - [ ] **Dependency Refresh** - Run `npm audit fix` and update dev dependencies
-- [ ] **Fix 11 ESLint warnings** - Run `npm run lint` to see specific issues
+- [ ] **Fix remaining ESLint baseline** - Continue reducing current lint errors and warnings in scoped batches
 - [ ] **Add `npm audit` to CI** - Informational security scanning
 - [ ] **Add CodeQL security analysis** - GitHub Actions workflow
 - [ ] **Add dependency update bot** - Dependabot or Renovate
@@ -81,7 +81,7 @@ Last Updated: April 24, 2026
 
 | Area | Status | Count |
 |------|--------|-------|
-| Vite Site | Production | React 18, Vite 6, TypeScript 5.6 |
+| Vite Site | Production | React 19, Vite 6, TypeScript 5.6 |
 | Widgets | Maintained | 24 widgets, 2 active versions each |
 | API | Deploy pending | Cloudflare Worker, KV storage |
 | Docs | Current | 109 docs in `docs/` |

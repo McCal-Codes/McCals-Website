@@ -1,8 +1,16 @@
 import Layout from '@/components/Layout/Layout';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { milestones, roadmapPhases, upcomingFeatures, visionGoals } from '@/data/roadmap-data';
 import styles from './roadmap.module.css';
 import { Link } from 'react-router-dom';
-import { MapPin, Calendar, Rocket, CheckCircle, Circle, ArrowRight, Clock, Target, Zap, Camera, Video, Users, Code } from 'lucide-react';
+import { MapPin, Calendar, Rocket, CheckCircle, Circle, ArrowRight, Clock, Target, Zap, Camera, Video, Users, Code, type LucideIcon } from 'lucide-react';
+
+const featureIcons: Record<string, LucideIcon> = {
+  Camera,
+  Video,
+  Users,
+  Code,
+};
 
 const RoadmapPage = () => {
   const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
@@ -23,137 +31,6 @@ const RoadmapPage = () => {
       description: 'Upcoming features and projects for McCal Media.',
     },
   });
-
-  const roadmapPhases = [
-    {
-      phase: 'Q2 2026',
-      status: 'completed',
-      title: 'Foundation Complete',
-      description: 'Core website infrastructure and portfolio migration complete.',
-      items: [
-        'Vite + React migration',
-        'Portfolio manifest system',
-        'Responsive design implementation',
-        'SEO optimization',
-        'Performance improvements',
-      ],
-    },
-    {
-      phase: 'Q3 2026',
-      status: 'in-progress',
-      title: 'Service Expansion',
-      description: 'Expanding service offerings and improving client experience.',
-      items: [
-        'Video production services launch',
-        'Design system consulting',
-        'Enhanced booking system',
-        'Client portal development',
-        'Mobile app planning',
-      ],
-    },
-    {
-      phase: 'Q4 2026',
-      status: 'planned',
-      title: 'Advanced Features',
-      description: 'Sophisticated features and automation for better service delivery.',
-      items: [
-        'AI-powered photo editing',
-        'Automated gallery generation',
-        'Real-time collaboration tools',
-        'Advanced analytics dashboard',
-        'Integration with creative tools',
-      ],
-    },
-    {
-      phase: 'Q1 2027',
-      status: 'planned',
-      title: 'Platform Evolution',
-      description: 'Transforming into a comprehensive creative platform.',
-      items: [
-        'Multi-creator portfolio platform',
-        'Community features',
-        'Educational content launch',
-        'Marketplace integration',
-        'Global expansion planning',
-      ],
-    },
-  ];
-
-  const upcomingFeatures = [
-    {
-      category: 'Photography',
-      icon: <Camera className={styles.featureIcon} />,
-      features: [
-        'Advanced photo editing suite',
-        'AI-assisted culling tools',
-        'Automated backup systems',
-        'Client proofing galleries',
-      ],
-    },
-    {
-      category: 'Videography',
-      icon: <Video className={styles.featureIcon} />,
-      features: [
-        'Video editing services',
-        'Drone photography integration',
-        'Live streaming capabilities',
-        'Motion graphics templates',
-      ],
-    },
-    {
-      category: 'Client Experience',
-      icon: <Users className={styles.featureIcon} />,
-      features: [
-        'Self-service booking portal',
-        'Real-time project tracking',
-        'Automated delivery systems',
-        'Feedback collection tools',
-      ],
-    },
-    {
-      category: 'Technology',
-      icon: <Code className={styles.featureIcon} />,
-      features: [
-        'API for third-party integrations',
-        'Mobile companion app',
-        'Cloud storage solutions',
-        'AI-powered search',
-      ],
-    },
-  ];
-
-  const milestones = [
-    {
-      date: 'April 2026',
-      title: 'Website Migration Complete',
-      description: 'Successfully migrated from legacy platform to modern Vite + React architecture.',
-      achieved: true,
-    },
-    {
-      date: 'May 2026',
-      title: 'New Service Pages Launch',
-      description: 'Comprehensive service pages for video production and design systems.',
-      achieved: true,
-    },
-    {
-      date: 'June 2026',
-      title: 'Client Portal Beta',
-      description: 'Beta testing of new client portal for project management and delivery.',
-      achieved: false,
-    },
-    {
-      date: 'July 2026',
-      title: 'Mobile App Release',
-      description: 'First version of mobile companion app for on-the-go portfolio access.',
-      achieved: false,
-    },
-    {
-      date: 'September 2026',
-      title: 'AI Tools Integration',
-      description: 'Launch of AI-powered photo editing and culling tools.',
-      achieved: false,
-    },
-  ];
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -202,8 +79,8 @@ const RoadmapPage = () => {
             <p>Our strategic plan for growth and innovation</p>
           </div>
           <div className={styles.phasesTimeline}>
-            {roadmapPhases.map((phase, index) => (
-              <div key={index} className={styles.phaseItem}>
+            {roadmapPhases.map((phase) => (
+              <div key={phase.phase} className={styles.phaseItem}>
                 <div className={styles.phaseHeader}>
                   <div className={styles.phaseDate}>{phase.phase}</div>
                   <div className={styles.phaseStatus} data-status={phase.status}>
@@ -232,22 +109,26 @@ const RoadmapPage = () => {
             <p>Exciting new capabilities across all our service areas</p>
           </div>
           <div className={styles.featuresGrid}>
-            {upcomingFeatures.map((category, index) => (
-              <div key={index} className={styles.featureCategory}>
-                <div className={styles.categoryHeader}>
-                  {category.icon}
-                  <h3>{category.category}</h3>
+            {upcomingFeatures.map((category) => {
+              const Icon = featureIcons[category.icon] ?? Code;
+
+              return (
+                <div key={category.category} className={styles.featureCategory}>
+                  <div className={styles.categoryHeader}>
+                    <Icon className={styles.featureIcon} />
+                    <h3>{category.category}</h3>
+                  </div>
+                  <ul className={styles.featureList}>
+                    {category.features.map((feature, featureIndex) => (
+                      <li key={featureIndex}>
+                        <ArrowRight className={styles.featureArrow} />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className={styles.featureList}>
-                  {category.features.map((feature, featureIndex) => (
-                    <li key={featureIndex}>
-                      <ArrowRight className={styles.featureArrow} />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -258,8 +139,8 @@ const RoadmapPage = () => {
             <p>Important dates and achievements in our journey</p>
           </div>
           <div className={styles.milestonesList}>
-            {milestones.map((milestone, index) => (
-              <div key={index} className={`${styles.milestoneItem} ${milestone.achieved ? styles.achieved : ''}`}>
+            {milestones.map((milestone) => (
+              <div key={milestone.title} className={`${styles.milestoneItem} ${milestone.achieved ? styles.achieved : ''}`}>
                 <div className={styles.milestoneDate}>
                   <Calendar className={styles.calendarIcon} />
                   <span>{milestone.date}</span>
@@ -288,7 +169,7 @@ const RoadmapPage = () => {
             <div className={styles.visionText}>
               <h3>Beyond Photography</h3>
               <p>
-                We're building more than a photography service - we're creating a comprehensive 
+                We're building more than a photography service, we're creating a comprehensive
                 creative platform that empowers visual storytellers, streamlines client collaboration, 
                 and sets new standards for digital media production.
               </p>
@@ -299,18 +180,12 @@ const RoadmapPage = () => {
               </p>
             </div>
             <div className={styles.visionGoals}>
-              <div className={styles.goal}>
-                <h4>Innovation</h4>
-                <p>Leverage AI and automation to enhance creative workflows</p>
-              </div>
-              <div className={styles.goal}>
-                <h4>Community</h4>
-                <p>Build a platform that connects creators with opportunities</p>
-              </div>
-              <div className={styles.goal}>
-                <h4>Excellence</h4>
-                <p>Maintain the highest quality standards across all services</p>
-              </div>
+              {visionGoals.map((goal) => (
+                <div key={goal.title} className={styles.goal}>
+                  <h4>{goal.title}</h4>
+                  <p>{goal.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
