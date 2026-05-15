@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useRef } from 'react';
+import { useMemo, useState, useEffect, useRef, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { clients, getClientLink, type Client } from './aboutData';
 import styles from './about-sections.module.css';
@@ -21,6 +21,32 @@ interface ClientCardProps {
   index: number;
 }
 
+type ClientCardStyle = CSSProperties & {
+  '--client-accent': string;
+  '--client-accent-secondary': string;
+  '--client-logo-max-height': string;
+  '--client-logo-radius': string;
+};
+
+const CATEGORY_LOGO_THEMES: Record<Client['category'], { accent: string; accentSecondary: string }> = {
+  academic: { accent: '30 64 124', accentSecondary: '203 151 0' },
+  brand: { accent: '190 83 45', accentSecondary: '123 100 80' },
+  editorial: { accent: '216 33 46', accentSecondary: '25 25 25' },
+  media: { accent: '31 97 141', accentSecondary: '109 141 35' },
+  nonprofit: { accent: '95 122 166', accentSecondary: '203 151 0' },
+};
+
+function getClientCardStyle(client: Client): ClientCardStyle {
+  const fallbackTheme = CATEGORY_LOGO_THEMES[client.category];
+
+  return {
+    '--client-accent': client.logoTheme?.accent ?? fallbackTheme.accent,
+    '--client-accent-secondary': client.logoTheme?.accentSecondary ?? fallbackTheme.accentSecondary,
+    '--client-logo-max-height': `${client.logoTheme?.maxHeight ?? 72}px`,
+    '--client-logo-radius': `${client.logoTheme?.radius ?? 0}px`,
+  };
+}
+
 function getStableShuffleScore(client: Client): number {
   return [...client.id].reduce((score, character) => (
     (score * 31 + character.charCodeAt(0)) % 100000
@@ -31,6 +57,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const renderTextLogo = client.logoMode === 'text' || !client.src || imageError;
+  const clientStyle = useMemo(() => getClientCardStyle(client), [client]);
   
   // Get link - randomizes if multiple publications exist
   const linkUrl = useMemo(() => getClientLink(client), [client]);
@@ -76,6 +103,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
         key={`${client.id}-${index}`}
         className={cardClasses}
         data-logo-id={client.id}
+        style={clientStyle}
         aria-hidden={isDuplicate || undefined}
         title={client.name}
       >
@@ -90,6 +118,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
         key={`${client.id}-${index}`}
         className={cardClasses}
         data-logo-id={client.id}
+        style={clientStyle}
         aria-hidden={isDuplicate || undefined}
       >
         <a
@@ -117,6 +146,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
       key={`${client.id}-${index}`}
       className={cardClasses}
       data-logo-id={client.id}
+      style={clientStyle}
       aria-hidden={isDuplicate || undefined}
     >
       <Link
