@@ -9,12 +9,14 @@ interface PageMeta {
     title?: string;
     description?: string;
     image?: string;
+    imageAlt?: string;
     type?: string;
   };
   twitter?: {
     title?: string;
     description?: string;
     image?: string;
+    imageAlt?: string;
     card?: string;
   };
   jsonLd?: object;
@@ -81,12 +83,14 @@ export function usePageMeta(meta: PageMeta) {
     setOptionalMeta('og:title', meta.og?.title, 'property');
     setOptionalMeta('og:description', meta.og?.description, 'property');
     setOptionalMeta('og:image', meta.og?.image, 'property');
+    setOptionalMeta('og:image:alt', meta.og?.imageAlt, 'property');
     setOptionalMeta('og:url', meta.og ? meta.canonical : undefined, 'property');
 
     setOptionalMeta('twitter:card', meta.twitter?.card);
     setOptionalMeta('twitter:title', meta.twitter?.title);
     setOptionalMeta('twitter:description', meta.twitter?.description);
     setOptionalMeta('twitter:image', meta.twitter?.image);
+    setOptionalMeta('twitter:image:alt', meta.twitter?.imageAlt);
 
     if (meta.jsonLd) {
       setJsonLd('page-json-ld', meta.jsonLd);
@@ -106,10 +110,12 @@ export function usePageMeta(meta: PageMeta) {
     meta.og?.title,
     meta.og?.description,
     meta.og?.image,
+    meta.og?.imageAlt,
     meta.twitter?.card,
     meta.twitter?.title,
     meta.twitter?.description,
     meta.twitter?.image,
+    meta.twitter?.imageAlt,
     jsonLd,
   ]);
 }

@@ -2,8 +2,11 @@ import { Nav, Footer } from '@/components';
 import { lazy, Suspense } from 'react';
 
 const HeroCarousel = lazy(() => import('@/components/HeroCarousel.lazy'));
+import {
+  HOMEPAGE_HERO_IMAGE_SEO_ENTRIES,
+  HOMEPAGE_HERO_SOCIAL_IMAGE,
+} from '@/components/heroSlides';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { LIVE_SITE_HOME_FEATURED_ITEMS } from '@/content/liveSiteFallbacks';
 import {
   generatePageGraph,
   generatePersonSchema,
@@ -13,28 +16,82 @@ import {
 } from '@/utils/jsonLd';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const HOME_URL = `${SITE_URL}/`;
+const HOME_DESCRIPTION =
+  'Pittsburgh photographer Caleb McCartney creates event photography, concert photography, headshots, and commercial brand imagery for artists, teams, and organizations.';
+const HOME_SOCIAL_IMAGE = HOMEPAGE_HERO_SOCIAL_IMAGE.image;
+const HOME_SOCIAL_IMAGE_ALT = HOMEPAGE_HERO_SOCIAL_IMAGE.alt;
+
+const HOMEPAGE_HERO_IMAGE_SCHEMAS = HOMEPAGE_HERO_IMAGE_SEO_ENTRIES.map((slide, index) => ({
+  '@type': 'ImageObject',
+  '@id': `${HOME_URL}#hero-image-${index + 1}`,
+  contentUrl: slide.image,
+  url: slide.image,
+  name: `${slide.title} photography by Caleb McCartney`,
+  description: slide.alt,
+  caption: slide.alt,
+  keywords: `${slide.title.toLowerCase()} photography, Pittsburgh photographer, McCal Media`,
+  creator: {
+    '@type': 'Person',
+    name: 'Caleb McCartney',
+    url: `${SITE_URL}/about`,
+  },
+  creditText: 'Photo by Caleb McCartney / McCal Media',
+  copyrightNotice: 'Copyright Caleb McCartney / McCal Media',
+  representativeOfPage: slide.image === HOME_SOCIAL_IMAGE || undefined,
+  acquireLicensePage: `${SITE_URL}/request-a-quote`,
+}));
+
+const HOMEPAGE_SCHEMA = {
+  '@type': 'WebPage',
+  '@id': `${HOME_URL}#webpage`,
+  url: HOME_URL,
+  name: 'Pittsburgh Photographer | Caleb McCartney | McCal Media',
+  description: HOME_DESCRIPTION,
+  primaryImageOfPage: {
+    '@id': HOMEPAGE_HERO_IMAGE_SCHEMAS.find((image) => image.contentUrl === HOME_SOCIAL_IMAGE)?.['@id'],
+  },
+  image: HOMEPAGE_HERO_IMAGE_SCHEMAS.map((image) => ({
+    '@id': image['@id'],
+  })),
+  creator: {
+    '@id': `${SITE_URL}/about#caleb-mccartney`,
+  },
+  publisher: {
+    '@id': `${SITE_URL}#organization`,
+  },
+  about: [
+    'Event photography',
+    'Concert photography',
+    'Headshot photography',
+    'Commercial photography',
+    'Photojournalism',
+  ],
+};
 
 const HomePage = () => {
   usePageMeta({
     title: 'Pittsburgh Photographer | Caleb McCartney | McCal Media',
-    description:
-      'Pittsburgh photographer Caleb McCartney creates event photography, concert photography, headshots, and commercial brand imagery for artists, teams, and organizations.',
-    canonical: `${SITE_URL}/`,
+    description: HOME_DESCRIPTION,
+    canonical: HOME_URL,
     og: {
       type: 'website',
       title: 'Pittsburgh Photographer | Caleb McCartney',
       description:
         'Event photography, concert photography, headshots, and commercial imagery by Pittsburgh photographer Caleb McCartney.',
-      image: LIVE_SITE_HOME_FEATURED_ITEMS[0]?.imageUrl,
+      image: HOME_SOCIAL_IMAGE,
+      imageAlt: HOME_SOCIAL_IMAGE_ALT,
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Pittsburgh Photographer | Caleb McCartney',
       description:
         'Event photography, concert photography, headshots, and commercial imagery by Pittsburgh photographer Caleb McCartney.',
-      image: LIVE_SITE_HOME_FEATURED_ITEMS[0]?.imageUrl,
+      image: HOME_SOCIAL_IMAGE,
+      imageAlt: HOME_SOCIAL_IMAGE_ALT,
     },
     jsonLd: generatePageGraph([
+      HOMEPAGE_SCHEMA,
       generateWebSiteSchema(),
       generatePhotographyProviderSchema(
         'Pittsburgh photography business led by Caleb McCartney for events, concerts, headshots, and commercial storytelling.',
@@ -80,6 +137,7 @@ const HomePage = () => {
           keywords: ['commercial photographer pittsburgh', 'brand photographer', 'advertising photographer'],
         },
       ),
+      ...HOMEPAGE_HERO_IMAGE_SCHEMAS,
     ]),
   });
 
