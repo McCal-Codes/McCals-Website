@@ -48,7 +48,9 @@ const resolveSlideVariant = (slide: HeroSlide): HeroSlide => {
 };
 
 const getInitialSlides = () => {
-  return FAVORITE_HERO_SLIDES.map(resolveSlideVariant);
+  return FAVORITE_HERO_SLIDES.map((slide, index) => (
+    index === 0 ? slide : resolveSlideVariant(slide)
+  ));
 };
 
 interface ImageStatus {
