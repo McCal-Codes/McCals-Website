@@ -13,6 +13,7 @@ interface PortfolioGridProps {
   batchSize?: number;
   gridClassName?: string;
   cardImageSizes?: string;
+  eagerCount?: number;
 }
 
 const PortfolioGrid: FC<PortfolioGridProps> = ({
@@ -21,6 +22,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   batchSize = 6,
   gridClassName,
   cardImageSizes,
+  eagerCount = 0,
 }) => {
   const [visible, setVisible] = useState(initialCount);
   const [activeGroup, setActiveGroup] = useState<PortfolioGroup | null>(null);
@@ -51,13 +53,14 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   return (
     <>
       <div className={`${portfolioStyles.pfGrid}${gridClassName ? ` ${gridClassName}` : ''}`}>
-        {shown.map((group) => (
+        {shown.map((group, index) => (
           <PortfolioCard
             key={group.id}
             group={group}
             onOpen={setActiveGroup}
             onCopyLink={handleCopyLink}
             imageSizes={cardImageSizes}
+            imageLoading={index < eagerCount ? 'eager' : 'lazy'}
           />
         ))}
       </div>

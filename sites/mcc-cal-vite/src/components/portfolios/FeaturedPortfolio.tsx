@@ -1,11 +1,14 @@
-import { useState, useMemo } from 'react';
+import { lazy, Suspense, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import OptimizedImage from '@/components/OptimizedImage';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
-import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import { generateId } from '@/utils/portfolio-ids';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
 import { portfolioStyles } from '../portfolio';
+
+const PortfolioLightbox = lazy(() => import('../portfolio/PortfolioLightbox'));
 
 interface FeaturedImage {
   filename?: string;
@@ -41,6 +44,10 @@ interface FeaturedItem {
   date?: FeaturedDate;
   metadata?: FeaturedMetadata;
   coverImage?: string | FeaturedImage;
+  featuredRank?: number;
+  featuredDescription?: string;
+  featuredCover?: string;
+  sourcePath?: string;
   published?: boolean;
   tags?: string[];
   images: (string | FeaturedImage)[];
@@ -139,7 +146,7 @@ function normaliseImage(
     filename,
     caption,
     description,
-    alt: caption ?? description ?? `${title} — ${filename}`,
+    alt: caption ?? description ?? `${title} - ${filename}`,
   };
 }
 
@@ -160,6 +167,10 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
       dateISO,
       category: item.category,
       tags: item.tags,
+      featuredRank: item.featuredRank,
+      featuredDescription: item.featuredDescription,
+      featuredCover: item.featuredCover,
+      sourcePath: item.sourcePath ?? item.relativeFolderPath ?? item.folderPath,
       published: item.published ?? false,
       images,
       coverImage,
@@ -168,24 +179,186 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
 }
 
 const ALL = 'All';
+const FILTER_ORDER = ['Concert', 'Events', 'Journalism'];
 
 function shortCategory(cat: string) {
   return cat.replace(' Photography', '');
 }
 
+function compareFeaturedGroups(a: PortfolioGroup, b: PortfolioGroup) {
+  const dateDelta = getFeaturedTimestamp(b) - getFeaturedTimestamp(a);
+  if (dateDelta !== 0) {
+    return dateDelta;
+  }
+
+  const aRank = a.featuredRank ?? Number.POSITIVE_INFINITY;
+  const bRank = b.featuredRank ?? Number.POSITIVE_INFINITY;
+
+  if (aRank !== bRank) {
+    return aRank - bRank;
+  }
+
+  return a.title.localeCompare(b.title);
+}
+
+function getFeaturedTimestamp(group: PortfolioGroup): number {
+  const timestamp = Date.parse(group.dateISO ?? '');
+  if (!Number.isNaN(timestamp)) {
+    return timestamp;
+  }
+
+  return 0;
+}
+
+function getFeaturedStories(groups: PortfolioGroup[], activeFilter: string): PortfolioGroup[] {
+  if (activeFilter !== ALL) {
+    return groups.slice(0, 3);
+  }
+
+  const [lead] = groups;
+  if (!lead) {
+    return [];
+  }
+
+  const selected = [lead];
+  const selectedIds = new Set([lead.id]);
+  const leadCategory = shortCategory(lead.category ?? '');
+
+  for (const category of FILTER_ORDER) {
+    if (category === leadCategory) continue;
+
+    const story = groups.find(
+      (group) => !selectedIds.has(group.id) && shortCategory(group.category ?? '') === category,
+    );
+
+    if (story) {
+      selected.push(story);
+      selectedIds.add(story.id);
+    }
+
+    if (selected.length === 3) {
+      return selected;
+    }
+  }
+
+  for (const group of groups) {
+    if (!selectedIds.has(group.id)) {
+      selected.push(group);
+      selectedIds.add(group.id);
+    }
+
+    if (selected.length === 3) {
+      break;
+    }
+  }
+
+  return selected;
+}
+
+function categoryRoute(category?: string) {
+  const short = shortCategory(category ?? '');
+
+  if (short === 'Concert') return '/concerts';
+  if (short === 'Events') return '/events';
+  if (short === 'Journalism') return '/journalism';
+
+  return '/featured-work';
+}
+
+function categoryLabel(category?: string) {
+  const label = shortCategory(category ?? 'Portfolio');
+  return label === 'Journalism' ? 'Photojournalism' : label;
+}
+
+function filterDisplayLabel(filter: string) {
+  return filter === 'Journalism' ? 'photojournalism' : filter.toLowerCase();
+}
+
+interface FeaturedStoryCardProps {
+  group: PortfolioGroup;
+  variant: 'lead' | 'support';
+  onOpen: (group: PortfolioGroup) => void;
+  loading?: 'eager' | 'lazy';
+}
+
+function FeaturedStoryCard({
+  group,
+  variant,
+  onOpen,
+  loading = 'lazy',
+}: FeaturedStoryCardProps) {
+  const label = categoryLabel(group.category);
+  const description = group.featuredDescription ?? group.coverImage.caption;
+
+  return (
+    <article className={`${portfolioStyles.pfFeaturedStory} ${variant === 'lead' ? portfolioStyles.pfFeaturedStoryLead : portfolioStyles.pfFeaturedStorySupport}`}>
+      <button
+        type="button"
+        className={portfolioStyles.pfFeaturedStoryImageButton}
+        aria-label={`Open ${group.title} gallery`}
+        onClick={() => onOpen(group)}
+      >
+        <OptimizedImage
+          src={group.coverImage.url}
+          alt={group.coverImage.alt ?? group.title}
+          frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
+          imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
+          loading={loading}
+          decoding="async"
+          optimizedWidth={variant === 'lead' ? 1280 : 720}
+          srcSetWidths={variant === 'lead' ? [640, 960, 1280, 1600] : [360, 540, 720, 960]}
+          sizes={variant === 'lead' ? '(max-width: 980px) calc(100vw - 40px), 58vw' : '(max-width: 980px) calc(100vw - 40px), 28vw'}
+          width={variant === 'lead' ? 980 : 460}
+          height={variant === 'lead' ? 620 : 310}
+        />
+      </button>
+
+      <div className={portfolioStyles.pfFeaturedStoryCopy}>
+        <p className={portfolioStyles.pfFeaturedStoryMeta}>
+          <span>{label}</span>
+          {group.dateDisplay && <span>{group.dateDisplay}</span>}
+          <span>{group.images.length} photos</span>
+        </p>
+        <h3 className={portfolioStyles.pfFeaturedStoryTitle}>{group.title}</h3>
+        {description && (
+          <p className={portfolioStyles.pfFeaturedStoryDescription}>{description}</p>
+        )}
+        <div className={portfolioStyles.pfFeaturedStoryActions}>
+          <button
+            type="button"
+            className={portfolioStyles.pfFeaturedStoryButton}
+            onClick={() => onOpen(group)}
+          >
+            Open Gallery
+          </button>
+          <Link className={portfolioStyles.pfFeaturedStoryLink} to={categoryRoute(group.category)}>
+            View {label}
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function FeaturedPortfolio() {
   const { data, status, error } = useManifest<FeaturedManifest>('featured');
   const [activeFilter, setActiveFilter] = useState(ALL);
+  const [activeGroup, setActiveGroup] = useState<PortfolioGroup | null>(null);
 
   const groups = useMemo(() => {
     if (!data?.items) return [];
-    return sortPortfolioGroups(normalise(data.items));
+    return normalise(data.items).sort(compareFeaturedGroups);
   }, [data]);
 
   const filters = useMemo(() => {
     if (!groups.length) return [];
-    const cats = Array.from(new Set(groups.map((g) => g.category).filter(Boolean))) as string[];
-    return [ALL, ...cats.map(shortCategory)];
+    const cats = new Set(groups.map((g) => shortCategory(g.category ?? '')).filter(Boolean));
+    const ordered = FILTER_ORDER.filter((category) => cats.has(category));
+    const remaining = Array.from(cats)
+      .filter((category) => !FILTER_ORDER.includes(category))
+      .sort();
+
+    return [ALL, ...ordered, ...remaining];
   }, [groups]);
 
   const filtered = useMemo(() => {
@@ -193,12 +366,49 @@ export default function FeaturedPortfolio() {
     return groups.filter((g) => shortCategory(g.category ?? '') === activeFilter);
   }, [groups, activeFilter]);
 
+  const featuredStories = getFeaturedStories(filtered, activeFilter);
+  const featuredStoryIds = new Set(featuredStories.map((group) => group.id));
+  const gridGroups = filtered.filter((group) => !featuredStoryIds.has(group.id));
+
+  const categorySummaries = useMemo(() => {
+    const categories = ['Concert', 'Events', 'Journalism'];
+
+    return categories.map((category) => {
+      const categoryGroups = groups.filter((group) => shortCategory(group.category ?? '') === category);
+      const photoCount = categoryGroups.reduce((sum, group) => sum + group.images.length, 0);
+
+      return {
+        category,
+        groups: categoryGroups.length,
+        photos: photoCount,
+        href: categoryRoute(`${category} Photography`),
+      };
+    });
+  }, [groups]);
+
   return (
-    <div className={portfolioStyles.pfRoot}>
-      <h2 className={portfolioStyles.pfHeading}>Featured Work</h2>
-      <p className={portfolioStyles.pfSubheading}>
-        A curated selection of recent work across concerts, events, and journalism.
-      </p>
+    <div className={`${portfolioStyles.pfRoot} ${portfolioStyles.pfFeaturedRoot}`}>
+      <header className={portfolioStyles.pfFeaturedHeader}>
+        <div className={portfolioStyles.pfFeaturedHeaderCopy}>
+          <p className={portfolioStyles.pfFeaturedDeck}>Latest Curated Edit</p>
+          <h2 className={portfolioStyles.pfHeading}>Featured Work</h2>
+          <p className={portfolioStyles.pfSubheading}>
+            Recent concert, event, and photojournalism work, edited for range, pace, and the moments that hold up.
+          </p>
+        </div>
+
+        {groups.length > 0 && (
+          <div className={portfolioStyles.pfFeaturedStats} aria-label="Featured portfolio summary">
+            {categorySummaries.map((summary) => (
+              <Link key={summary.category} className={portfolioStyles.pfFeaturedStat} to={summary.href}>
+                <span className={portfolioStyles.pfFeaturedStatValue}>{summary.groups}</span>
+                <span className={portfolioStyles.pfFeaturedStatLabel}>{summary.category}</span>
+                <span className={portfolioStyles.pfFeaturedStatMeta}>{summary.photos} photos</span>
+              </Link>
+            ))}
+          </div>
+        )}
+      </header>
 
       {status === 'loading' && (
         <div className={portfolioStyles.pfLoading}>
@@ -216,13 +426,65 @@ export default function FeaturedPortfolio() {
 
       {status === 'success' && (
         <>
+          {featuredStories.length > 0 && (
+            <section className={portfolioStyles.pfFeaturedEditorial} aria-label="Featured portfolio highlights">
+              <FeaturedStoryCard
+                group={featuredStories[0]}
+                variant="lead"
+                loading="eager"
+                onOpen={setActiveGroup}
+              />
+              {featuredStories.length > 1 && (
+                <div className={portfolioStyles.pfFeaturedSupportStack}>
+                  {featuredStories.slice(1).map((group) => (
+                    <FeaturedStoryCard
+                      key={group.id}
+                      group={group}
+                      variant="support"
+                      loading="eager"
+                      onOpen={setActiveGroup}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+          )}
+
           <PortfolioFilters
             filters={filters}
             active={activeFilter}
             onChange={setActiveFilter}
           />
-          <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
+          {gridGroups.length > 0 && (
+            <PortfolioGrid
+              groups={gridGroups}
+              initialCount={9}
+              batchSize={6}
+              gridClassName={portfolioStyles.pfFeaturedGrid}
+              cardImageSizes="(max-width: 600px) calc(100vw - 40px), (max-width: 980px) 50vw, 31vw"
+              eagerCount={3}
+            />
+          )}
+
+          {activeFilter !== ALL && gridGroups.length === 0 && (
+            <div className={portfolioStyles.pfFeaturedCategoryNote}>
+              <p>That is the full curated {filterDisplayLabel(activeFilter)} edit.</p>
+              <Link to={categoryRoute(`${activeFilter} Photography`)}>
+                View the full {filterDisplayLabel(activeFilter)} portfolio
+              </Link>
+            </div>
+          )}
         </>
+      )}
+
+      {activeGroup && (
+        <Suspense fallback={null}>
+          <PortfolioLightbox
+            key={activeGroup.id}
+            group={activeGroup}
+            onClose={() => setActiveGroup(null)}
+          />
+        </Suspense>
       )}
     </div>
   );

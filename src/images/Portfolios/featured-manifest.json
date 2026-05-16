@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "type": "featured",
-  "generated": "2026-05-14T00:18:21.634Z",
+  "generated": "2026-05-16T18:11:07.396Z",
   "generatedBy": "enhanced-featured-manifest-generator",
   "sources": [
     "concert-manifest.json",
@@ -9,7 +9,7 @@
     "journalism-manifest.json"
   ],
   "totalItems": 12,
-  "totalImages": 549,
+  "totalImages": 476,
   "categories": [
     "Concert Photography",
     "Events Photography",
@@ -21,16 +21,230 @@
     "Journalism"
   ],
   "dateRange": {
-    "newest": "2025-12-01",
-    "oldest": "2025-07-04"
+    "newest": "2026-05-05",
+    "oldest": "2025-08-02"
   },
   "description": "Enhanced curated selection aggregating newest portfolio highlights from all widgets using shared date parsing",
   "config": {
     "itemsPerCategory": 4,
     "totalLimit": 12,
-    "usesSharedDateParsing": true
+    "usesSharedDateParsing": true,
+    "curationConfig": "scripts/manifest/featured-curation.json",
+    "curatedItems": 8
   },
   "items": [
+    {
+      "eventName": "Fern Hollow Nature Center Groundbreaking",
+      "category": "Journalism Photography",
+      "tags": [
+        "Documentary",
+        "Events",
+        "Published Work",
+        "Journalism",
+        "Story"
+      ],
+      "folderPath": "Documentary/Fern Hollow Nature Center Groundbreaking",
+      "eventDate": {
+        "iso": "2026-05-05",
+        "source": "metadata"
+      },
+      "dateDisplay": "undefined undefined",
+      "totalImages": 7,
+      "images": [
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
+          "caption": "Lauren Massy and Kim Eckman, Fern Hollow Nature Center volunteers, help at the refreshment table before a groundbreaking ceremony for the center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "description": "Lauren Massy and Kim Eckman, Fern Hollow Nature Center volunteers, help at the refreshment table before a groundbreaking ceremony for the center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp"
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow008_webuse.webp",
+          "caption": "An architectural rendering is displayed during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "description": "An architectural rendering is displayed during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow008_webuse.webp"
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow011_webuse.webp",
+          "caption": "Ceremonial hard hats are lined up during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "description": "Ceremonial hard hats are lined up during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow011_webuse.webp"
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow014_webuse.webp",
+          "caption": "Guests listen during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "description": "Guests listen during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow014_webuse.webp"
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow019_webuse.webp",
+          "caption": "Guests applaud during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "description": "Guests applaud during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow019_webuse.webp"
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow023_webuse.webp",
+          "caption": "From left, Barbera Carrier, Ron Kinser, David Genter, Annie Batyko, Lee Bollinger, Jennifer Nastasi, Francye Kinney, Lindsey Smith, Ann Shelton, Lauren Massy and Jodi Hilliard break ground on Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "description": "From left, Barbera Carrier, Ron Kinser, David Genter, Annie Batyko, Lee Bollinger, Jennifer Nastasi, Francye Kinney, Lindsey Smith, Ann Shelton, Lauren Massy and Jodi Hilliard break ground on Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow023_webuse.webp"
+        },
+        {
+          "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow026_webuse.webp",
+          "caption": "Guests attend a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+          "description": "Guests attend a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+          "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow026_webuse.webp"
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Published Work"
+        ],
+        "published": true,
+        "date": "2026-05-05",
+        "description": "Groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project in Sewickley, Pa.",
+        "caption": "Fern Hollow Nature Center groundbreaking in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+        "outlet": "TribLive",
+        "outletUrl": "https://triblive.com",
+        "articleUrl": "",
+        "articleTitle": "Fern Hollow Nature Center groundbreaking",
+        "publishedDate": "2026-05-05"
+      },
+      "outlet": "TribLive",
+      "outletUrl": "https://triblive.com",
+      "articleUrl": "",
+      "articleTitle": "Fern Hollow Nature Center groundbreaking",
+      "publishedDate": "2026-05-05",
+      "name": "Fern Hollow Nature Center Groundbreaking",
+      "title": "Fern Hollow Nature Center Groundbreaking",
+      "date": {
+        "iso": "2026-05-05",
+        "source": "metadata"
+      },
+      "type": "Journalism",
+      "id": "Fern Hollow Nature Center Groundbreaking",
+      "coverImage": {
+        "filename": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
+        "caption": "Lauren Massy and Kim Eckman, Fern Hollow Nature Center volunteers, help at the refreshment table before a groundbreaking ceremony for the center's major renovation and expansion project in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+        "description": "Lauren Massy and Kim Eckman, Fern Hollow Nature Center volunteers, help at the refreshment table before a groundbreaking ceremony for the center's major renovation and expansion project in Sewickley, Pa., May 5, 2026.",
+        "path": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp"
+      }
+    },
+    {
+      "eventName": "Sewickley ICE Prayer Service",
+      "category": "Journalism Photography",
+      "tags": [
+        "Documentary",
+        "Events",
+        "Published Work",
+        "Journalism",
+        "Story"
+      ],
+      "folderPath": "Documentary/Sewickley ICE Prayer Service",
+      "eventDate": {
+        "iso": "2026-03-27",
+        "source": "metadata"
+      },
+      "dateDisplay": "undefined undefined",
+      "totalImages": 10,
+      "images": [
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp",
+          "caption": "Members of the Sewickley community attend a healing service for Maria Paula de Araujo Guedes, 6, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "Members of the Sewickley community attend a healing service for Maria Paula de Araujo Guedes, 6, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers05_webuse.webp",
+          "caption": "The community of Sewickley attends a healing service for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "The community of Sewickley attends a healing service for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers05_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers08_webuse.webp",
+          "caption": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers08_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers09_webuse.webp",
+          "caption": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "The Rev. Hannah Loughman talks to Maria Paula de Araujo Guedes, 6, as she hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers09_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers12_webuse.webp",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers12_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers14_webuse.webp",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, shares a poem about courage in front of the congregation at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers14_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers17_webuse.webp",
+          "caption": "Maria Paula de Araujo Guedes, 6, hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "Maria Paula de Araujo Guedes, 6, hugs a Stitch plushie alongside her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers17_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers29_webuse.webp",
+          "caption": "The Rev. Hannah Loughman embraces Ana Paula de Araujo Pinto, Maria Paula de Araujo Guedes' mother, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "The Rev. Hannah Loughman embraces Ana Paula de Araujo Pinto, Maria Paula de Araujo Guedes' mother, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers29_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers32_webuse.webp",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers32_webuse.webp"
+        },
+        {
+          "filename": "260327 ICE Prayer Service_SEW-ICE-prayers33_webuse.webp",
+          "caption": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+          "description": "Leah Lindenfelser, Osborne Elementary guidance counselor, reassures Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+          "path": "260327 ICE Prayer Service_SEW-ICE-prayers33_webuse.webp"
+        }
+      ],
+      "published": true,
+      "metadata": {
+        "tags": [
+          "Events",
+          "Published Work"
+        ],
+        "published": true,
+        "date": "2026-03-27",
+        "description": "Healing prayer service for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa.",
+        "caption": "Community members gather in prayer for Maria Paula de Araujo Guedes at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+        "outlet": "TribLive",
+        "outletUrl": "https://triblive.com",
+        "articleUrl": "https://triblive.com/local/sewickley/sewickley-community-joins-together-in-prayer-for-young-girl-battling-cancer-dad-detained-by-ice/",
+        "articleTitle": "Sewickley community joins together in prayer for young girl battling cancer, dad detained by ICE",
+        "publishedDate": "2026-04-09"
+      },
+      "outlet": "TribLive",
+      "outletUrl": "https://triblive.com",
+      "articleUrl": "https://triblive.com/local/sewickley/sewickley-community-joins-together-in-prayer-for-young-girl-battling-cancer-dad-detained-by-ice/",
+      "articleTitle": "Sewickley community joins together in prayer for young girl battling cancer, dad detained by ICE",
+      "publishedDate": "2026-04-09",
+      "name": "Sewickley ICE Prayer Service",
+      "title": "Sewickley ICE Prayer Service",
+      "date": {
+        "iso": "2026-03-27",
+        "source": "metadata"
+      },
+      "type": "Journalism",
+      "id": "Sewickley ICE Prayer Service",
+      "coverImage": {
+        "filename": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp",
+        "caption": "Members of the Sewickley community attend a healing service for Maria Paula de Araujo Guedes, 6, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+        "description": "Members of the Sewickley community attend a healing service for Maria Paula de Araujo Guedes, 6, at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026.",
+        "path": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp"
+      }
+    },
     {
       "bandName": "Horseburner",
       "folderPath": "Horseburner/December 2025",
@@ -92,7 +306,11 @@
       "type": "Concert",
       "category": "Concert Photography",
       "id": "Horseburner",
-      "coverImage": "251206 Riffmas 3_CAL2526_webuse.jpg",
+      "coverImage": "251206 Riffmas 3_CAL2540_webuse.jpg",
+      "featuredRank": 1,
+      "featuredDescription": "A high-impact live set led by color, motion, and close stage presence.",
+      "featuredCover": "251206 Riffmas 3_CAL2540_webuse.jpg",
+      "sourcePath": "Concert/Horseburner/December 2025",
       "tags": [
         "Live Music",
         "Concert",
@@ -182,7 +400,11 @@
       "type": "Concert",
       "category": "Concert Photography",
       "id": "Star Viper",
-      "coverImage": "251206 Riffmas 3_CAL2839_webuse.jpg",
+      "coverImage": "251206 Riffmas 3_CAL2872_webuse.jpg",
+      "featuredRank": 8,
+      "featuredDescription": "Dense concert coverage with strong silhouettes, red light, and direct performance moments.",
+      "featuredCover": "251206 Riffmas 3_CAL2872_webuse.jpg",
+      "sourcePath": "Concert/Star Viper/December 2025",
       "tags": [
         "Live Music",
         "Concert",
@@ -329,9 +551,13 @@
       "type": "Events",
       "id": "Pittsburgh Social Club",
       "coverImage": {
-        "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251114 PGH Social Club at Avalon_CAL753_webuse.jpg"
+        "path": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL881_webuse.jpg"
       },
       "totalImages": 23,
+      "featuredRank": 3,
+      "featuredDescription": "Warm, social event coverage built around faces, movement, and the room’s energy.",
+      "featuredCover": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL881_webuse.jpg",
+      "sourcePath": "Events/Pittsburgh Social Club",
       "tags": [
         "Event",
         "Corporate",
@@ -505,9 +731,13 @@
       "type": "Events",
       "id": "Love's A Game",
       "coverImage": {
-        "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL160_webuse.webp"
+        "path": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.webp"
       },
       "totalImages": 49,
+      "featuredRank": 5,
+      "featuredDescription": "Theatrical coverage with intimate blocking, expressive light, and clean narrative beats.",
+      "featuredCover": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.webp",
+      "sourcePath": "Events/Love's A Game",
       "tags": [
         "Event",
         "Corporate",
@@ -632,7 +862,11 @@
       "type": "Concert",
       "category": "Concert Photography",
       "id": "Heading North",
-      "coverImage": "251101 Headed North - Bottle Rocket_CAL11_webuse.jpg",
+      "coverImage": "251101 Headed North - Bottle Rocket_CAL3_webuse.jpg",
+      "featuredRank": 6,
+      "featuredDescription": "A close, saturated live set with sweat, reach, and crowd-facing performance rhythm.",
+      "featuredCover": "251101 Headed North - Bottle Rocket_CAL3_webuse.jpg",
+      "sourcePath": "Concert/Heading North/November 2025",
       "tags": [
         "Live Music",
         "Concert",
@@ -806,6 +1040,10 @@
         "path": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.webp"
       },
       "totalImages": 48,
+      "featuredRank": 7,
+      "featuredDescription": "Professional programming coverage with speakers, panels, attendees, and usable recap frames.",
+      "featuredCover": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.webp",
+      "sourcePath": "Events/Inclusivity Event - PRSSA",
       "tags": [
         "Event",
         "Corporate",
@@ -1291,11 +1529,15 @@
       "type": "Journalism",
       "id": "Brentwood Vs Springdale",
       "coverImage": {
-        "filename": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
-        "caption": "Brentwood quarterback No. 15 drops back to pass as Springdale defenders close in during a home game, Brentwood, Pa., Sept. 12, 2025.",
-        "description": "Brentwood's quarterback in navy drops back to pass as two Springdale defenders in orange rush the pocket, with a Brentwood lineman blocking and a referee tracking the play in the background during a daytime high school football game.",
-        "path": "250912_Brentwood vs Springdale_CAL5167-min.jpg"
-      }
+        "filename": "250912_Brentwood vs Springdale_CAL5175-min.jpg",
+        "caption": "A Brentwood ball carrier turns upfield during a home game against Springdale, Brentwood, Pa., Sept. 12, 2025.",
+        "description": "A Brentwood player in navy and gold tucks the ball and cuts upfield on the blue-surfaced home field, with grandstands and spectators visible in the background during a daytime contest.",
+        "path": "250912_Brentwood vs Springdale_CAL5175-min.jpg"
+      },
+      "featuredRank": 2,
+      "featuredDescription": "Friday-night assignment coverage with action, atmosphere, and community texture.",
+      "featuredCover": "250912_Brentwood vs Springdale_CAL5175-min.jpg",
+      "sourcePath": "Documentary/Brentwood vs Springdale"
     },
     {
       "eventName": "Historic Yard Sale 0825",
@@ -1596,625 +1838,11 @@
         "caption": "Historic Society Yard Sale — August 2025",
         "description": "Brentwood Historical Society yard sale — community fundraiser and local history event photographed in Brentwood, PA",
         "path": "250802_Brentwood Yard Sale _CAL2643-min.jpg"
-      }
-    },
-    {
-      "eventName": "Cmu Trump Protest",
-      "category": "Journalism Photography",
-      "tags": [
-        "Politics",
-        "Documentary",
-        "Journalism",
-        "Story"
-      ],
-      "folderPath": "Politics/cmu-trump-protest",
-      "eventDate": {
-        "iso": "2025-07-15",
-        "source": "filename_extraction"
       },
-      "dateDisplay": "undefined undefined",
-      "totalImages": 39,
-      "images": [
-        {
-          "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1091-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1106-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1106-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1107-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1107-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1123-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1123-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1126-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1126-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1131-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1131-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1141-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1141-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1146-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1146-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1152-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1152-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1156-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1156-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1162-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1162-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1168-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1168-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1173-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1173-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1184-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1184-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1186-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1186-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1192-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1192-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1196-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1196-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1201-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1201-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1206-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1206-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1249-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1249-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1278-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1278-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1297-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1297-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1301-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1301-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1303-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1303-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1325-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1325-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1340-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1340-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1353-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1353-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1360-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1360-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1364-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1364-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1429-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1429-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1435-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1435-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1448-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1448-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1476-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1476-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1489-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1489-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1498-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1498-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1539-min.jpg",
-          "caption": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators march during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1539-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1564-min.jpg",
-          "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1564-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1568-min.jpg",
-          "caption": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Protesters hold signs during a demonstration in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1568-min.jpg"
-        },
-        {
-          "filename": "250715_CMU Trump Protest_CAL1573-min.jpg",
-          "caption": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "description": "Attendees demonstrate during a protest in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-          "path": "250715_CMU Trump Protest_CAL1573-min.jpg"
-        }
-      ],
-      "published": false,
-      "metadata": {},
-      "name": "Cmu Trump Protest",
-      "title": "Cmu Trump Protest",
-      "date": {
-        "iso": "2025-07-15",
-        "source": "filename_extraction"
-      },
-      "type": "Journalism",
-      "id": "Cmu Trump Protest",
-      "coverImage": {
-        "filename": "250715_CMU Trump Protest_CAL1091-min.jpg",
-        "caption": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-        "description": "Demonstrators gather during a protest near Carnegie Mellon University in Pittsburgh, Pa., July 15, 2025. (Photo by Caleb McCartney)",
-        "path": "250715_CMU Trump Protest_CAL1091-min.jpg"
-      }
-    },
-    {
-      "eventName": "Brentwood 4th 2025",
-      "category": "Journalism Photography",
-      "tags": [
-        "Documentary",
-        "Events",
-        "Journalism",
-        "Story"
-      ],
-      "folderPath": "Documentary/brentwood-4th-2025",
-      "eventDate": {
-        "iso": "2025-07-04",
-        "source": "metadata"
-      },
-      "dateDisplay": "undefined undefined",
-      "totalImages": 51,
-      "images": [
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9762-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9762-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9763-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9763-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9766-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9766-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9768-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9768-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9781-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9781-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9790-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9790-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9806-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9806-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9810-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9810-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9815-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9815-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9820-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9820-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9827-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9827-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9833-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9833-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9837-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9837-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9840-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9840-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9843-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9843-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9849-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9849-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9851-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9851-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9866-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9866-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9867-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9867-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9874-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9874-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9882-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9882-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9886-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9886-min.jpg"
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9895-min.jpg",
-          "caption": "Brentwood 4th of July 2025",
-          "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-          "path": "250704_Brentwood 4th of July_CAL9895-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9762-min.jpg",
-          "caption": "Attendees wear patriotic accessories at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Two young people wearing leis stand at the Brentwood Fourth of July community event. The person on the left wears a white t-shirt and blue lei; the person on the right wears a dark Nike shirt and cap.",
-          "path": "250704_brentwood4th_CAL9762-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9763-min.jpg",
-          "caption": "A chain-link fence borders the community pool at Brentwood's Fourth of July celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "View through a chain-link fence at a community pool facility during the Brentwood Fourth of July event, with trees and sky visible beyond.",
-          "path": "250704_brentwood4th_CAL9763-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9766-min.webp",
-          "caption": "Residents gather under yellow umbrellas at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A large group stands together under yellow umbrellas on a paved area at the Brentwood Fourth of July event, with picnic tables and shade structures visible nearby.",
-          "path": "250704_brentwood4th_CAL9766-min.webp"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9768-min.jpg",
-          "caption": "A man stands at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A middle-aged man in a blue Under Armour shirt stands with arms crossed in front of green foliage at the Brentwood Fourth of July event.",
-          "path": "250704_brentwood4th_CAL9768-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9781-min.jpg",
-          "caption": "A child points skyward as fireworks begin during the Brentwood Fourth of July celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A young child wearing star-patterned patriotic shorts sits with an adult on a bench at sunset, pointing upward excitedly as the evening program begins at the Brentwood Fourth of July celebration.",
-          "path": "250704_brentwood4th_CAL9781-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9790-min.webp",
-          "caption": "Attendees sit on a bench at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Two young women sit on a blue platform bench at golden hour during the Brentwood Fourth of July event, with trees and utility poles in the background.",
-          "path": "250704_brentwood4th_CAL9790-min.webp"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9806-min.jpg",
-          "caption": "Players pose near the basketball courts at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Two young men with curly reddish hair smile in front of a chain-link tennis court fence at the Brentwood Fourth of July event, with a blue court surface visible behind them.",
-          "path": "250704_brentwood4th_CAL9806-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9810-min.jpg",
-          "caption": "A participant rests courtside at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A young man in a graphic t-shirt and red shorts sits on a blue bench at the Brentwood Fourth of July event.",
-          "path": "250704_brentwood4th_CAL9810-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9815-min.jpg",
-          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A young person in a dark hoodie is photographed in portrait style against blurred green foliage at the Brentwood Fourth of July event.",
-          "path": "250704_brentwood4th_CAL9815-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9816-min.jpg",
-          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A young person in a white tank top is photographed in portrait style against a blurred green background at the Brentwood Fourth of July event.",
-          "path": "250704_brentwood4th_CAL9816-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9818-min.jpg",
-          "caption": "Residents play pickup basketball during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Four young people stand near a basketball court with a blue safety barrier behind them at the Brentwood Fourth of July event, with one player's arm raised.",
-          "path": "250704_brentwood4th_CAL9818-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9819-min.jpg",
-          "caption": "Players compete for possession during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Two young people reach upward toward a basketball on an outdoor court, both arms extended, during the Brentwood Fourth of July pickup game.",
-          "path": "250704_brentwood4th_CAL9819-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9820-min.jpg",
-          "caption": "Players jump for a basketball during a pickup game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Two players leap toward a basketball on an outdoor court during the Brentwood Fourth of July event, with a blue barrier fence and trees in the background.",
-          "path": "250704_brentwood4th_CAL9820-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9827-min.webp",
-          "caption": "A player shoots during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A basketball is captured mid-flight above the court during a pickup game at the Brentwood Fourth of July event, with spectators visible in the background.",
-          "path": "250704_brentwood4th_CAL9827-min.webp"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9833-min.jpg",
-          "caption": "A player dribbles during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A shirtless young man dribbles the ball on a blue outdoor court during the Brentwood Fourth of July pickup basketball game, with other players and a brick building visible behind him.",
-          "path": "250704_brentwood4th_CAL9833-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9837-min.jpg",
-          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A young man in a white t-shirt stands with hands at his sides against a blurred tree background at the Brentwood Fourth of July event.",
-          "path": "250704_brentwood4th_CAL9837-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9838-min.jpg",
-          "caption": "Players compete near the basket during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A shirtless young player dribbles against a defender near a red hoop structure during the pickup basketball game at the Brentwood Fourth of July event, with a brick building in the background.",
-          "path": "250704_brentwood4th_CAL9838-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9840-min.jpg",
-          "caption": "Residents compete in a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Multiple players move across a blue-and-white outdoor court during the Brentwood Fourth of July pickup basketball game, with spectators along the edges and green foliage framing the scene.",
-          "path": "250704_brentwood4th_CAL9840-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9843-min.jpg",
-          "caption": "A resident reacts during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A young person in a red cap and white shirt raises both hands in a celebratory gesture at the Brentwood Fourth of July community event, with trees and a building behind them.",
-          "path": "250704_brentwood4th_CAL9843-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9849-min.jpg",
-          "caption": "Spectators watch the pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A group of young people stand courtside watching the pickup basketball game at the Brentwood Fourth of July event, with trees, fencing, and buildings visible in the background.",
-          "path": "250704_brentwood4th_CAL9849-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9851-min.jpg",
-          "caption": "A player takes a water break during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A player raises a water bottle to drink between possessions during the Brentwood Fourth of July pickup basketball game, photographed against a blurred green fence.",
-          "path": "250704_brentwood4th_CAL9851-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9862-min.jpg",
-          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A young man in a black graphic t-shirt looks to the side in a candid shot against a blurred green background at the Brentwood Fourth of July event.",
-          "path": "250704_brentwood4th_CAL9862-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9866-min.jpg",
-          "caption": "Residents gather for a group photo at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "A group of approximately a dozen young people pose together for a photo at the Brentwood Fourth of July event, several wearing patriotic face paint and colorful casual clothing.",
-          "path": "250704_brentwood4th_CAL9866-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9867-min.jpg",
-          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Residents gather at the Brentwood Fourth of July community event.",
-          "path": "250704_brentwood4th_CAL9867-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9874-min.jpg",
-          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Residents gather at the Brentwood Fourth of July community event.",
-          "path": "250704_brentwood4th_CAL9874-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9882-min.jpg",
-          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Residents gather at the Brentwood Fourth of July community event.",
-          "path": "250704_brentwood4th_CAL9882-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9886-min.jpg",
-          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Residents gather at the Brentwood Fourth of July community event.",
-          "path": "250704_brentwood4th_CAL9886-min.jpg"
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9895-min.webp",
-          "caption": "Residents celebrate at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025.",
-          "description": "Residents gather at the Brentwood Fourth of July community event.",
-          "path": "250704_brentwood4th_CAL9895-min.webp"
-        }
-      ],
-      "published": false,
-      "metadata": {
-        "tags": [
-          "Events"
-        ],
-        "published": false,
-        "date": "2025-07-04",
-        "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-        "caption": "Brentwood 4th of July 2025"
-      },
-      "name": "Brentwood 4th 2025",
-      "title": "Brentwood 4th 2025",
-      "date": {
-        "iso": "2025-07-04",
-        "source": "metadata"
-      },
-      "type": "Journalism",
-      "id": "Brentwood 4th 2025",
-      "coverImage": {
-        "filename": "250704_Brentwood 4th of July_CAL9762-min.jpg",
-        "caption": "Brentwood 4th of July 2025",
-        "description": "Brentwood 4th of July celebrations — community Independence Day festivities photographed in Brentwood, PA",
-        "path": "250704_Brentwood 4th of July_CAL9762-min.jpg"
-      }
+      "featuredRank": 9,
+      "featuredDescription": "Community documentary work grounded in small details, local color, and everyday exchange.",
+      "featuredCover": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
+      "sourcePath": "Documentary/historic-yard-sale-0825"
     }
   ]
 }

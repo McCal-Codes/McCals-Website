@@ -1,0 +1,77 @@
+{
+  "description": "Hand-tuned ordering and cover choices for the featured portfolio. The generator falls back to automatic newest-per-category selection for anything not listed here.",
+  "items": [
+    {
+      "type": "Concert",
+      "title": "Horseburner",
+      "sourcePath": "Concert/Horseburner/December 2025",
+      "rank": 1,
+      "description": "A high-impact live set led by color, motion, and close stage presence.",
+      "coverImage": "251206 Riffmas 3_CAL2540_webuse.jpg"
+    },
+    {
+      "type": "Journalism",
+      "title": "Brentwood Vs Springdale",
+      "sourcePath": "Documentary/Brentwood vs Springdale",
+      "rank": 2,
+      "description": "Friday-night assignment coverage with action, atmosphere, and community texture.",
+      "coverImage": "250912_Brentwood vs Springdale_CAL5175-min.jpg"
+    },
+    {
+      "type": "Events",
+      "title": "Pittsburgh Social Club",
+      "sourcePath": "Events/Pittsburgh Social Club",
+      "rank": 3,
+      "description": "Warm, social event coverage built around faces, movement, and the room’s energy.",
+      "coverImage": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL881_webuse.jpg"
+    },
+    {
+      "type": "Journalism",
+      "title": "Cmu Trump Protest",
+      "sourcePath": "Politics/cmu-trump-protest",
+      "rank": 4,
+      "description": "Political documentary work that keeps the setting, gestures, and public response in frame.",
+      "coverImage": "250715_CMU Trump Protest_CAL1091-min.jpg"
+    },
+    {
+      "type": "Events",
+      "title": "Love's A Game",
+      "sourcePath": "Events/Love's A Game",
+      "rank": 5,
+      "description": "Theatrical coverage with intimate blocking, expressive light, and clean narrative beats.",
+      "coverImage": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.webp"
+    },
+    {
+      "type": "Concert",
+      "title": "Heading North",
+      "sourcePath": "Concert/Heading North/November 2025",
+      "rank": 6,
+      "description": "A close, saturated live set with sweat, reach, and crowd-facing performance rhythm.",
+      "coverImage": "251101 Headed North - Bottle Rocket_CAL3_webuse.jpg"
+    },
+    {
+      "type": "Events",
+      "title": "Inclusivity Event PRSSA",
+      "sourcePath": "Events/Inclusivity Event - PRSSA",
+      "rank": 7,
+      "description": "Professional programming coverage with speakers, panels, attendees, and usable recap frames.",
+      "coverImage": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.webp"
+    },
+    {
+      "type": "Concert",
+      "title": "Star Viper",
+      "sourcePath": "Concert/Star Viper/December 2025",
+      "rank": 8,
+      "description": "Dense concert coverage with strong silhouettes, red light, and direct performance moments.",
+      "coverImage": "251206 Riffmas 3_CAL2872_webuse.jpg"
+    },
+    {
+      "type": "Journalism",
+      "title": "Historic Yard Sale 0825",
+      "sourcePath": "Documentary/historic-yard-sale-0825",
+      "rank": 9,
+      "description": "Community documentary work grounded in small details, local color, and everyday exchange.",
+      "coverImage": "250802_Brentwood Yard Sale _CAL2643-min.jpg"
+    }
+  ]
+}
