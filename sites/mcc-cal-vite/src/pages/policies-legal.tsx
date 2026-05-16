@@ -83,7 +83,7 @@ const PoliciesLegalPage = () => {
   // Reading time calculation
   useEffect(() => {
     if (mainRef.current) {
-      const text = mainRef.current.innerText;
+      const text = mainRef.current.innerText ?? mainRef.current.textContent ?? '';
       const wordsPerMinute = 200;
       const minutes = Math.ceil(text.split(/\s+/).length / wordsPerMinute);
       setReadingTime(`Est. ${minutes} min read`);
@@ -199,6 +199,8 @@ const PoliciesLegalPage = () => {
           { label: 'Confidentiality', href: '#confidentiality' },
           { label: 'Relationships', href: '#relationships' },
           { label: 'Intellectual Property', href: '#ip' },
+          { label: 'School & University Graduation Event Use', href: '#graduation-event-use' },
+          { label: 'Client Logos & Third-Party Marks', href: '#client-logos' },
           { label: 'Style Release', href: '#style' },
           { label: 'Limit of Liability', href: '#liability' },
           { label: 'Indemnification', href: '#indemnification' },
@@ -682,6 +684,56 @@ const PoliciesLegalPage = () => {
                 and separate course of their business and agree not to infringe upon or otherwise use
                 each other&apos;s respective intellectual property except when providing Client with its
                 Services.
+              </p>
+            </section>
+
+            <section id="graduation-event-use" aria-labelledby="graduation-event-use-heading">
+              <h3 id="graduation-event-use-heading">
+                <a href="#graduation-event-use" className="anchor" aria-hidden="true">
+                  §
+                </a>
+                School &amp; University Graduation Event Use
+              </h3>
+              <p>
+                Some school and university graduation event photographs displayed on this site were
+                created by Caleb McCartney while working on assignment with GradImages or related
+                commencement photography coverage. Those images are displayed with permission and
+                are included only to show Caleb&apos;s photographic work, event coverage experience,
+                and portfolio history.
+              </p>
+              <p>
+                McCal Media does not claim ownership of third-party graduation photography rights,
+                does not sell or license these images, does not provide prints or downloads, and does
+                not represent that it is any school&apos;s official graduation photography vendor unless
+                separately stated in writing. Copyrights, trademarks, school names, graduate likenesses,
+                and related rights remain with their respective owners, clients, vendors, schools, or
+                subjects as applicable.
+              </p>
+              <p>
+                If you are a graduate, family member, school representative, vendor, or rights holder
+                with a question about a displayed graduation image, contact{' '}
+                <a href="mailto:business@mcc-cal.com">business@mcc-cal.com</a> so the image can be
+                reviewed promptly.
+              </p>
+            </section>
+
+            <section id="client-logos" aria-labelledby="client-logos-heading">
+              <h3 id="client-logos-heading">
+                <a href="#client-logos" className="anchor" aria-hidden="true">
+                  §
+                </a>
+                Client Logos &amp; Third-Party Marks
+              </h3>
+              <p>
+                Client, publication, school, university, nonprofit, venue, and brand logos shown on
+                this site are used to identify organizations Caleb McCartney or McCal Media has
+                worked with, contributed to, photographed for, collaborated with, or been published by.
+                All logos, names, trademarks, and service marks remain the property of their respective
+                owners.
+              </p>
+              <p>
+                Displaying a logo does not imply sponsorship, endorsement, exclusive partnership, or
+                official vendor status unless that relationship is separately stated in writing.
               </p>
             </section>
 
