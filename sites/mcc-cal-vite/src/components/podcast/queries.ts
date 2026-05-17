@@ -24,8 +24,8 @@ export function usePodcastFeed() {
     staleTime: 1000 * 60 * 30, // 30 minutes
     gcTime: 1000 * 60 * 60, // 1 hour
     retry: 2,
-    initialData: () => {
-      // Try to use cached data as initial data
+    placeholderData: () => {
+      // Render cached or fallback episodes while the live feed request hydrates.
       return getCached() || FALLBACK;
     },
   });
