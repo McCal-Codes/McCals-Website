@@ -95,7 +95,7 @@ const PoliciesLegalPage = () => {
     const handleScroll = () => {
       const winScroll = window.scrollY;
       const height = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = height > 0 ? winScroll / height : 0;
+      const scrolled = height > 0 ? Math.min(1, Math.max(0, winScroll / height)) : 0;
       setProgress(scrolled);
     };
 
@@ -225,6 +225,14 @@ const PoliciesLegalPage = () => {
     [filteredNavItems]
   );
 
+  const atAGlanceItems = [
+    { label: 'License', href: '#license', description: 'Usage rights' },
+    { label: 'Privacy', href: '#privacy', description: 'Data handling' },
+    { label: 'Cookies', href: '#cookies', description: 'Cookie basics' },
+    { label: 'Terms', href: '#terms', description: 'Service terms' },
+    { label: 'Contact', href: '#contact', description: 'Policy questions' },
+  ];
+
   return (
     <Layout>
       <div className="policy-page-wrapper">
@@ -243,14 +251,14 @@ const PoliciesLegalPage = () => {
 
         {/* Mobile drawer toggle */}
         <button
-          className="toc-toggle"
+          className={`toc-toggle ${navOpen ? 'is-open' : ''}`}
           aria-controls="policy-toc"
           aria-expanded={navOpen}
-          aria-label="Open policies navigation"
+          aria-label={navOpen ? 'Close policies navigation' : 'Open policies navigation'}
           type="button"
           onClick={() => setNavOpen(!navOpen)}
         >
-          Menu
+            {navOpen ? 'Close' : 'Sections'}
         </button>
 
         {/* Overlay */}
@@ -301,96 +309,110 @@ const PoliciesLegalPage = () => {
 
         {/* Main Content */}
         <main id="policy-main" className="policy-main" ref={mainRef} role="main">
-          <header>
-            <h1 id="policy-title">Policies & Legal</h1>
-            <div className="header-meta">
-              <span className="badge eff" aria-label="Effective date">
-                Effective <time dateTime={new Date().toISOString().split('T')[0]}>{effectiveDate}</time>
-              </span>
-              <span className="badge reading-time" id="readingTime">
-                {readingTime}
-              </span>
+          <header className="policy-hero">
+            <div className="policy-hero__content">
+              <h1 id="policy-title">Policies & Legal</h1>
+              <p className="policy-hero__intro">
+                Service terms, privacy practices, cookie information, and usage rights for
+                McCal Media photography and creative services.
+              </p>
+              <div className="header-meta" aria-label="Policy document details">
+                <span className="badge eff" aria-label="Effective date">
+                  Effective <time dateTime={new Date().toISOString().split('T')[0]}>{effectiveDate}</time>
+                </span>
+                <span className="badge reading-time" id="readingTime">
+                  {readingTime}
+                </span>
+              </div>
+            </div>
+
+            <div className="download-bar" role="region" aria-label="Policy actions">
+              <a
+                id="download-terms"
+                className="download-btn active-btn"
+                href="mailto:business@mcc-cal.com?subject=Request%20for%20Terms%20%26%20Conditions%20PDF"
+                title="Contact us for a copy of the full Terms & Conditions (PDF)"
+                aria-label="Contact us for Terms and Conditions PDF"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <span>Terms PDF</span>
+              </a>
+              <a
+                id="download-license"
+                className="download-btn active-btn"
+                href="mailto:business@mcc-cal.com?subject=Request%20for%20Usage%20License%20PDF"
+                title="Contact us for a copy of the Usage License (PDF)"
+                aria-label="Contact us for Usage License PDF"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+                <span>License PDF</span>
+              </a>
+              <button
+                className="download-btn active-btn"
+                onClick={() => window.print()}
+                title="Print this page to PDF for your records"
+                aria-label="Print Policies to PDF"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 6 2 18 2 18 9" />
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                  <rect x="6" y="14" width="12" height="8" />
+                </svg>
+                <span>Print/Save</span>
+              </button>
             </div>
           </header>
 
-          {/* Download Bar */}
-          <div className="download-bar" role="region" aria-label="Downloads">
-            <a
-              id="download-terms"
-              className="download-btn active-btn"
-              href="mailto:business@mcc-cal.com?subject=Request%20for%20Terms%20%26%20Conditions%20PDF"
-              title="Contact us for a copy of the full Terms & Conditions (PDF)"
-              aria-label="Contact us for Terms and Conditions PDF"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-              <span>Terms PDF</span>
-            </a>
-            <a
-              id="download-license"
-              className="download-btn active-btn"
-              href="mailto:business@mcc-cal.com?subject=Request%20for%20Usage%20License%20PDF"
-              title="Contact us for a copy of the Usage License (PDF)"
-              aria-label="Contact us for Usage License PDF"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-                <polyline points="10 9 9 9 8 9" />
-              </svg>
-              <span>License PDF</span>
-            </a>
-            <button
-              className="download-btn active-btn"
-              onClick={() => window.print()}
-              title="Print this page to PDF for your records"
-              aria-label="Print Policies to PDF"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="6 9 6 2 18 2 18 9" />
-                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-                <rect x="6" y="14" width="12" height="8" />
-              </svg>
-              <span>Print/Save</span>
-            </button>
-          </div>
+          <nav className="policy-at-a-glance" aria-label="Policies at a glance">
+            {atAGlanceItems.map((item) => (
+              <a key={item.href} href={item.href}>
+                <span>{item.label}</span>
+                <small>{item.description}</small>
+              </a>
+            ))}
+          </nav>
 
           {/* License Section */}
           <section id="license" aria-labelledby="license-heading">
@@ -444,10 +466,14 @@ const PoliciesLegalPage = () => {
               <strong>Your rights:</strong> Access, correct, or delete your personal data by contacting
               us at <a href="mailto:business@mcc-cal.com">business@mcc-cal.com</a>.
             </p>
-            <p className="policy-cross-link">
-              For accessibility accommodations or to exercise your data rights, please visit our{' '}
-              <a href="/accessibility">Accessibility & Cookie Policy</a> page.
-            </p>
+            <aside className="policy-cross-link" aria-label="Accessibility and data rights">
+              <span className="policy-cross-link__eyebrow">Related policy</span>
+              <p>
+                For accessibility accommodations or to exercise your data rights, visit the dedicated
+                accessibility and cookie policy page.
+              </p>
+              <a href="/accessibility">Accessibility & Cookie Policy</a>
+            </aside>
           </section>
 
           <hr aria-hidden="true" />
@@ -480,10 +506,14 @@ const PoliciesLegalPage = () => {
               Most browsers allow cookie management in settings. Disabling non-essential cookies may
               affect site functionality.
             </p>
-            <p className="policy-cross-link">
-              <a href="/accessibility">View full Accessibility & Cookie Policy</a> for detailed
-              cookie inventory, preference management, and accessibility information.
-            </p>
+            <aside className="policy-cross-link" aria-label="Cookie preferences and accessibility">
+              <span className="policy-cross-link__eyebrow">Preferences and access</span>
+              <p>
+                Detailed cookie inventory, preference management, and accessibility information live
+                on the dedicated accessibility page.
+              </p>
+              <a href="/accessibility">View Accessibility & Cookie Policy</a>
+            </aside>
           </section>
 
           <hr aria-hidden="true" />
@@ -1006,7 +1036,7 @@ const PoliciesLegalPage = () => {
               </p>
             </address>
             <p className="note">
-              © {currentYear} McCal Media — All rights reserved.
+              © {currentYear} McCal Media. All rights reserved.
             </p>
           </section>
         </main>

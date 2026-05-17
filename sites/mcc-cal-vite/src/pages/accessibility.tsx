@@ -208,7 +208,7 @@ const AccessibilityPage = () => {
     const handleScroll = () => {
       const winScroll = window.scrollY;
       const height = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = height > 0 ? winScroll / height : 0;
+      const scrolled = height > 0 ? Math.min(1, Math.max(0, winScroll / height)) : 0;
       setProgress(scrolled);
     };
 
@@ -384,14 +384,14 @@ const AccessibilityPage = () => {
 
             {/* Mobile drawer toggle */}
             <button
-              className="toc-toggle"
+              className={`toc-toggle ${navOpen ? 'is-open' : ''}`}
               aria-controls="accessibility-toc"
               aria-expanded={navOpen}
-              aria-label="Open accessibility navigation"
+              aria-label={navOpen ? 'Close accessibility navigation' : 'Open accessibility navigation'}
               type="button"
               onClick={() => setNavOpen(!navOpen)}
             >
-              Menu
+              {navOpen ? 'Close' : 'Sections'}
             </button>
 
             {/* Overlay */}
@@ -444,6 +444,10 @@ const AccessibilityPage = () => {
             <main id="accessibility-main" className="accessibility-main" ref={mainRef} role="main">
               <header>
                 <h1 id="page-title">Accessibility & Cookie Policy</h1>
+                <p className="accessibility-hero__intro">
+                  A plain-language statement of our accessibility goals, current conformance status,
+                  feedback path, cookie inventory, and preference controls.
+                </p>
                 <div className="header-meta">
                   <span className="badge eff" aria-label="Effective date">
                     Effective <time dateTime={new Date().toISOString().split('T')[0]}>{effectiveDate}</time>
@@ -452,35 +456,35 @@ const AccessibilityPage = () => {
                     {readingTime}
                   </span>
                 </div>
-              </header>
 
-              {/* Download Bar */}
-              <div className="download-bar" role="region" aria-label="Downloads">
-                <button
-                  className="download-btn active-btn"
-                  onClick={() => window.print()}
-                  title="Print this page to PDF for your records"
-                  aria-label="Print Accessibility Policy to PDF"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
+                {/* Download Bar */}
+                <div className="download-bar" role="region" aria-label="Downloads">
+                  <button
+                    className="download-btn active-btn"
+                    onClick={() => window.print()}
+                    title="Print this page to PDF for your records"
+                    aria-label="Print Accessibility Policy to PDF"
                   >
-                    <polyline points="6 9 6 2 18 2 18 9" />
-                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-                    <rect x="6" y="14" width="12" height="8" />
-                  </svg>
-                  <span>Print/Save</span>
-                </button>
-              </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="6 9 6 2 18 2 18 9" />
+                      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                      <rect x="6" y="14" width="12" height="8" />
+                    </svg>
+                    <span>Print/Save</span>
+                  </button>
+                </div>
+              </header>
 
               {/* Accessibility Statement Section */}
               <section id="accessibility-overview" aria-labelledby="accessibility-overview-heading">

@@ -1,31 +1,66 @@
 import { Layout } from '@/components';
 import { Link } from 'react-router-dom';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { ArrowRight } from 'lucide-react';
+import styles from './projects.module.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+
+const PROJECTS = [
+  {
+    to: '/letting-me-go',
+    label: 'Exhibition',
+    title: 'Letting Me Go',
+    desc: 'BFA thesis work on campaign-trail photography, political anxiety, shadow, and polarization.',
+  },
+  {
+    to: '/terranova',
+    label: 'Tooling',
+    title: 'TerraNova',
+    desc: 'A terrain generation studio for Hytale, focused on procedural systems and creator tooling.',
+  },
+  {
+    to: '/design-systems',
+    label: 'Systems',
+    title: 'Design Systems',
+    desc: 'Component libraries, visual language, interface patterns, and reusable product foundations.',
+  },
+  {
+    to: '/abridged',
+    label: 'Product',
+    title: 'Abridged',
+    desc: 'A compact reading and portfolio experiment built around simpler long-form discovery.',
+  },
+  {
+    to: '/roadmap',
+    label: 'Notes',
+    title: 'Roadmap',
+    desc: 'A public view of what is being built, refined, and considered next for the site and studio.',
+  },
+];
 
 const ProjectsPage = () => {
   usePageMeta({
     title: 'Projects | Caleb McCartney',
-    description: 'Artwork, apps, tools, and design work by Caleb McCartney. Letting Me Go thesis, design systems, Abridged app, and roadmap.',
+    description: 'Artwork, tools, apps, and design work by Caleb McCartney, including Letting Me Go, TerraNova, design systems, Abridged, and the site roadmap.',
     canonical: `${SITE_URL}/projects`,
     og: {
       type: 'website',
       title: 'Projects | Caleb McCartney',
-      description: 'Artwork, apps, tools, and design work by Caleb McCartney.',
+      description: 'Artwork, tools, apps, and design work by Caleb McCartney.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     twitter: {
       card: 'summary',
       title: 'Projects | Caleb McCartney',
-      description: 'Artwork, apps, tools, and design work by Caleb McCartney.',
+      description: 'Artwork, tools, apps, and design work by Caleb McCartney.',
       image: `${SITE_URL}/about/caleb-mccartney-photo.jpg`,
     },
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: 'Projects',
-      description: 'Artwork, apps, tools, and design work by Caleb McCartney.',
+      description: 'Artwork, tools, apps, and design work by Caleb McCartney.',
       url: `${SITE_URL}/projects`,
       isPartOf: {
         '@type': 'WebSite',
@@ -36,32 +71,44 @@ const ProjectsPage = () => {
   });
 
   return (
-  <Layout>
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '80px 24px 40px' }}>
-      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 600, marginBottom: '0.5em' }}>
-        Projects
-      </h1>
-      <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', marginBottom: '3rem' }}>
-        Artwork, apps, tools, and design work.
-      </p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
-        {[
-          { to: '/letting-me-go', title: 'One Nation Divided', desc: 'BFA thesis exhibition and campaign-trail photography: political anxiety, shadow, and polarization' },
-          { to: '/design-systems', title: 'Design Systems', desc: 'Component libraries and visual language' },
-          { to: '/abridged', title: 'Abridged App', desc: 'A smarter way to read long-form content' },
-          { to: '/roadmap', title: 'Roadmap', desc: 'What\'s being built and what\'s next' },
-        ].map(({ to, title, desc }) => (
-          <Link key={to} to={to} style={{ textDecoration: 'none', display: 'block', padding: '24px', border: '0.5px solid rgba(255,255,255,0.12)', borderRadius: 16, background: 'rgba(255,255,255,0.04)', transition: 'border-color 0.3s, background 0.3s' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.07)'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.12)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}
-          >
-            <div style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: 8 }}>{title}</div>
-            <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)' }}>{desc}</div>
-          </Link>
-        ))}
+    <Layout>
+      <div className={styles.page}>
+        <header className={styles.hero}>
+          <p className={styles.eyebrow}>Projects</p>
+          <h1>Artwork, tools, and experiments.</h1>
+          <p>
+            A small index of public work outside the main photography galleries, including thesis
+            projects, product experiments, design systems, and notes on what is being built next.
+          </p>
+        </header>
+
+        <section className={styles.projectList} aria-label="Project index">
+          {PROJECTS.map((project) => (
+            <Link className={styles.projectLink} key={project.to} to={project.to}>
+              <span className={styles.projectLabel}>{project.label}</span>
+              <span className={styles.projectText}>
+                <span className={styles.projectTitle}>{project.title}</span>
+                <span className={styles.projectDescription}>{project.desc}</span>
+              </span>
+              <span className={styles.projectArrow} aria-hidden="true">
+                <ArrowRight size={18} strokeWidth={1.8} />
+              </span>
+            </Link>
+          ))}
+        </section>
+
+        <aside className={styles.note}>
+          <p>
+            Looking for photography work instead? Start with the curated portfolio or request a
+            quote for a specific assignment.
+          </p>
+          <div className={styles.noteLinks}>
+            <Link to="/featured-work">Featured work</Link>
+            <Link to="/request-a-quote">Request a quote</Link>
+          </div>
+        </aside>
       </div>
-    </div>
-  </Layout>
+    </Layout>
   );
 };
 

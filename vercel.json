@@ -3,7 +3,7 @@
   "buildCommand": "cd sites/mcc-cal-vite && npm ci && npm run build",
   "outputDirectory": "sites/mcc-cal-vite/dist",
   "images": {
-    "sizes": [256, 384, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    "sizes": [160, 256, 320, 360, 384, 480, 540, 640, 720, 750, 828, 960, 1080, 1200, 1280, 1440, 1600, 1920, 2048, 3840],
     "localPatterns": [
       { "pathname": "^/assets/.*$", "search": "" },
       { "pathname": "^/images/.*$", "search": "" }
@@ -14,6 +14,12 @@
         "hostname": "images.squarespace-cdn.com",
         "port": "",
         "pathname": "^/.*$"
+      },
+      {
+        "protocol": "https",
+        "hostname": "cdn.jsdelivr.net",
+        "port": "",
+        "pathname": "^/gh/McCal-Codes/McCals-Website@main/src/images/Portfolios/.*$"
       }
     ],
     "formats": ["image/avif", "image/webp"]

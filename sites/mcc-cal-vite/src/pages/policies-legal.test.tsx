@@ -40,5 +40,18 @@ describe('PoliciesLegalPage', () => {
         name: 'Client Logos & Third-Party Marks',
       }),
     ).toHaveAttribute('href', '#client-logos');
+
+    expect(
+      screen
+        .getAllByRole('link', {
+          name: 'Accessibility & Cookie Policy',
+        })
+        .some((link) => link.getAttribute('href') === '/accessibility'),
+    ).toBe(true);
+    expect(
+      screen.getByRole('link', {
+        name: 'View Accessibility & Cookie Policy',
+      }),
+    ).toHaveAttribute('href', '/accessibility');
   });
 });
