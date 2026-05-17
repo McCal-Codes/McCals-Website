@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -12,6 +12,7 @@ import {
   PAGE_SIZE,
   type PlayerState,
   extractGuest,
+  stripHtml,
 } from '@/components/podcast';
 import { formatTime, formatDateRelative, slugify } from '@/utils/formatters';
 import './podcast.css';
@@ -19,47 +20,6 @@ import './podcast.css';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
 export default function PodcastPage() {
-  usePageMeta({
-    title: 'Caffeinated Connections Podcast | Caleb McCartney',
-    description:
-      'Caffeinated Connections is where Caleb McCartney sits down with creators and industry pros over coffee to explore how ideas turn into impact. Listen to the latest episodes.',
-    canonical: `${SITE_URL}/podcast`,
-    og: {
-      type: 'website',
-      title: 'Caffeinated Connections Podcast',
-      description:
-        'Caleb McCartney sits down with creators and industry pros over coffee to explore how ideas turn into impact.',
-      image: PODCAST_IMAGE,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Caffeinated Connections Podcast',
-      description:
-        'Caleb McCartney sits down with creators and industry pros over coffee to explore how ideas turn into impact.',
-      image: PODCAST_IMAGE,
-    },
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'PodcastSeries',
-      name: 'Caffeinated Connections',
-      description:
-        'Where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact.',
-      url: 'https://mcc-cal.com/podcast',
-      image: PODCAST_IMAGE,
-      author: {
-        '@type': 'Person',
-        name: 'Caleb McCartney',
-        url: 'https://mcc-cal.com/about',
-      },
-      webFeed: 'https://media.rss.com/cafeconnectpod/feed.xml',
-      inLanguage: 'en',
-      availableOnDevice: [
-        { '@type': 'ListItem', name: 'Spotify', url: SPOTIFY_SHOW },
-        { '@type': 'ListItem', name: 'Apple Podcasts', url: APPLE_SHOW },
-      ],
-    },
-  });
-
   const { data: episodes = [], isLoading, error } = usePodcastFeed();
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [toast, setToast] = useState<string | null>(null);
@@ -72,6 +32,83 @@ export default function PodcastPage() {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const shownEpisodes = useMemo(() => episodes.slice(0, visible), [episodes, visible]);
+
+  const podcastJsonLd = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'PodcastSeries',
+        '@id': `${SITE_URL}/podcast#series`,
+        name: 'Caffeinated Connections',
+        description:
+          'Where Caleb sits down with creators and industry pros over coffee to explore how ideas turn into impact, with guest standards and accessible listening options.',
+        url: `${SITE_URL}/podcast`,
+        image: PODCAST_IMAGE,
+        author: {
+          '@type': 'Person',
+          name: 'Caleb McCartney',
+          url: `${SITE_URL}/about`,
+        },
+        webFeed: 'https://media.rss.com/cafeconnectpod/feed.xml',
+        inLanguage: 'en',
+        availableOnDevice: [
+          { '@type': 'ListItem', name: 'Spotify', url: SPOTIFY_SHOW },
+          { '@type': 'ListItem', name: 'Apple Podcasts', url: APPLE_SHOW },
+        ],
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/podcast#episodes`,
+        name: 'Caffeinated Connections episodes',
+        itemListElement: shownEpisodes.slice(0, 12).map((ep, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'PodcastEpisode',
+            name: ep.title,
+            url: ep.platformUrl || ep.link || `${SITE_URL}/podcast`,
+            datePublished: ep.pubDate || undefined,
+            description: stripHtml(ep.description).slice(0, 300) || undefined,
+            episodeNumber: ep.episodeNumber || undefined,
+            partOfSeries: { '@id': `${SITE_URL}/podcast#series` },
+            isAccessibleForFree: true,
+            associatedMedia: ep.audioUrl
+              ? {
+                  '@type': 'MediaObject',
+                  contentUrl: ep.audioUrl,
+                  encodingFormat: 'audio/mpeg',
+                }
+              : undefined,
+            transcript: ep.transcripts?.[0]?.url,
+          },
+        })),
+      },
+    ],
+  }), [shownEpisodes]);
+
+  usePageMeta({
+    title: 'Caffeinated Connections Podcast | Caleb McCartney',
+    description:
+      'Listen to Caffeinated Connections, where Caleb McCartney sits down with creators and industry pros over coffee, with guest standards, transcripts when available, and clear listening links.',
+    canonical: `${SITE_URL}/podcast`,
+    og: {
+      type: 'website',
+      title: 'Caffeinated Connections Podcast',
+      description:
+        'Conversations with creators and industry pros, with guest standards, transcripts when available, and clear listening links.',
+      image: PODCAST_IMAGE,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Caffeinated Connections Podcast',
+      description:
+        'Conversations with creators and industry pros, with guest standards, transcripts when available, and clear listening links.',
+      image: PODCAST_IMAGE,
+    },
+    jsonLd: podcastJsonLd,
+  });
 
   const showToast = useCallback((msg: string) => {
     setToast(msg);
@@ -99,6 +136,12 @@ export default function PodcastPage() {
     audio.addEventListener('loadedmetadata', () => {
       setPlayerState(s => ({ ...s, duration: audio.duration }));
     });
+    audio.addEventListener('play', () => {
+      setPlayerState(s => ({ ...s, playing: true, loading: false }));
+    });
+    audio.addEventListener('pause', () => {
+      setPlayerState(s => ({ ...s, playing: false }));
+    });
     audio.addEventListener('timeupdate', () => {
       setPlayerState(s => ({ ...s, currentTime: audio.currentTime, duration: audio.duration }));
     });
@@ -123,14 +166,12 @@ export default function PodcastPage() {
     }
   }
 
-  function npSeek(e: React.MouseEvent<HTMLDivElement>) {
+  function npSeek(e: React.ChangeEvent<HTMLInputElement>) {
     if (!audioRef.current || !isFinite(playerState.duration)) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    audioRef.current.currentTime = ((e.clientX - rect.left) / rect.width) * playerState.duration;
+    audioRef.current.currentTime = Number(e.currentTarget.value);
   }
 
   const currentEp = episodes.find(e => e.guid === currentGuid);
-  const shownEpisodes = episodes.slice(0, visible);
 
   const featuredPicks = Object.entries(FEATURED)
     .map(([key, meta]) => {
@@ -141,6 +182,10 @@ export default function PodcastPage() {
 
   const npPct = isFinite(playerState.duration) && playerState.duration > 0
     ? Math.min(100, (playerState.currentTime / playerState.duration) * 100) : 0;
+  const npSeekMax = isFinite(playerState.duration) && playerState.duration > 0
+    ? Math.floor(playerState.duration) : 0;
+  const npSeekValue = isFinite(playerState.currentTime)
+    ? Math.min(Math.floor(playerState.currentTime), npSeekMax) : 0;
 
   return (
     <Layout>
@@ -187,6 +232,71 @@ export default function PodcastPage() {
             </div>
           </section>
         )}
+
+        {/* Guest & Legal Standards */}
+        <section aria-labelledby="pod-standards-title">
+          <details className="pod-standards">
+            <summary className="pod-standards-summary">
+              <span>
+                <span className="pod-start-title">Guest & Legal Standards</span>
+                <span className="pod-standards-title" id="pod-standards-title">Clear expectations for every conversation</span>
+                <span className="pod-standards-preview">
+                  Consent, attribution, accessibility, disclosures, and outside resources.
+                </span>
+              </span>
+              <span className="pod-standards-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div className="pod-standards-content">
+              <p className="pod-standards-intro">
+                Caffeinated Connections is built for open creative conversation, with practical guardrails for
+                consent, attribution, accessibility, and outside resources.
+              </p>
+              <div className="pod-standards-grid">
+                <article className="pod-standard-item">
+                  <h3>Recording consent</h3>
+                  <p>Guests are told when recording begins, and published episodes come from recorded sessions with participant consent.</p>
+                </article>
+                <article className="pod-standard-item">
+                  <h3>Guest release</h3>
+                  <p>Booking a recording means the conversation may be edited, published, promoted, clipped, and archived as part of the show.</p>
+                </article>
+                <article className="pod-standard-item">
+                  <h3>Outside media</h3>
+                  <p>Guests should only bring music, clips, images, readings, or other resources they own, have licensed, or can responsibly discuss.</p>
+                </article>
+                <article className="pod-standard-item">
+                  <h3>Disclosure</h3>
+                  <p>Paid placements, affiliate links, gifted products, or other material connections will be disclosed near the relevant episode or link.</p>
+                </article>
+                <article className="pod-standard-item">
+                  <h3>Accessibility</h3>
+                  <p>Transcripts are linked when available, and the player is designed to work with keyboard and assistive technology controls.</p>
+                </article>
+                <article className="pod-standard-item">
+                  <h3>Corrections</h3>
+                  <p>Questions, correction requests, or rights concerns can be sent to <a href="mailto:contact@mcc-cal.com">contact@mcc-cal.com</a>.</p>
+                </article>
+              </div>
+              <div className="pod-standards-footer">
+                <p>
+                  External listening platforms such as Spotify, Apple Podcasts, and RSS.com have their own terms and privacy practices.
+                  Site policies live at <Link to="/policies-legal">Policies & Legal</Link>.
+                </p>
+                <div className="pod-resource-links" aria-label="Podcast standards references">
+                  <a href="https://www.ftc.gov/business-guidance/resources/com-disclosures-how-make-effective-disclosures-digital-advertising" target="_blank" rel="noopener noreferrer">
+                    FTC disclosures
+                  </a>
+                  <a href="https://www.w3.org/WAI/WCAG21/Understanding/audio-only-and-video-only-prerecorded" target="_blank" rel="noopener noreferrer">
+                    Audio accessibility
+                  </a>
+                  <a href="https://podcasting2.org/docs/podcast-namespace/tags/transcript" target="_blank" rel="noopener noreferrer">
+                    Transcript standard
+                  </a>
+                </div>
+              </div>
+            </div>
+          </details>
+        </section>
 
         {/* Episodes */}
         {isLoading ? (
@@ -254,9 +364,19 @@ export default function PodcastPage() {
             </button>
           </div>
         </div>
-        <div className="pod-np-progress" onClick={npSeek}>
-          <div className="pod-np-fill" style={{ width: `${npPct}%` }} />
-        </div>
+        <input
+          className="pod-np-progress"
+          type="range"
+          min="0"
+          max={npSeekMax}
+          step="1"
+          value={npSeekValue}
+          onChange={npSeek}
+          disabled={npSeekMax === 0}
+          aria-label={currentEp ? `Seek ${currentEp.title}` : 'Seek current episode'}
+          aria-valuetext={`${formatTime(playerState.currentTime)} / ${formatTime(playerState.duration)}`}
+          style={{ '--pod-progress-pct': `${npPct}%` } as React.CSSProperties}
+        />
       </div>
 
       {/* Toast */}

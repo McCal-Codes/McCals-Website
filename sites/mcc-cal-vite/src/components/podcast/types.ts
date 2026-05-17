@@ -8,8 +8,21 @@ export interface Episode {
   description: string;
   pubDate: string;
   link: string;
+  platformUrl?: string;
   audioUrl: string;
   image?: string;
+  duration?: string;
+  episodeNumber?: string;
+  episodeType?: string;
+  explicit?: boolean;
+  transcripts?: EpisodeTranscript[];
+}
+
+export interface EpisodeTranscript {
+  url: string;
+  type: string;
+  language?: string;
+  rel?: string;
 }
 
 export interface FeaturedMeta {

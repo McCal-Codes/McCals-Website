@@ -14,11 +14,38 @@ interface EpisodeCardProps {
   onToast: (msg: string) => void;
 }
 
+function formatEpisodeDuration(value?: string): string | null {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  let totalSeconds = Number(trimmed);
+  if (!Number.isFinite(totalSeconds)) {
+    const parts = trimmed.split(':').map(part => Number(part));
+    if (parts.some(part => !Number.isFinite(part))) return trimmed;
+    totalSeconds = parts.reduce((total, part) => (total * 60) + part, 0);
+  }
+
+  const totalMinutes = Math.max(1, Math.round(totalSeconds / 60));
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  if (hours > 0 && minutes > 0) return `${hours} hr ${minutes} min`;
+  if (hours > 0) return `${hours} hr`;
+  return `${totalMinutes} min`;
+}
+
 export function EpisodeCard({ episode, currentlyPlayingGuid, onPlay, audioRef, playerState, onToast }: EpisodeCardProps) {
   const isActive = currentlyPlayingGuid === episode.guid;
   const guest = extractGuest(episode.title);
   const newEp = isNew(episode.pubDate);
   const desc = stripHtml(episode.description).slice(0, 220);
+  const transcript = episode.transcripts?.[0];
+  const duration = formatEpisodeDuration(episode.duration);
+  const episodeMeta = [
+    episode.episodeNumber ? `Episode ${episode.episodeNumber}` : null,
+    episode.episodeType ? episode.episodeType.replace(/^\w/, c => c.toUpperCase()) : null,
+    duration,
+  ].filter(Boolean);
 
   return (
     <article className="pod-card">
@@ -41,6 +68,14 @@ export function EpisodeCard({ episode, currentlyPlayingGuid, onPlay, audioRef, p
         </div>
         <h3 className="pod-card-title">{episode.title}</h3>
         {guest && <p className="pod-card-guest">Guest: {guest}</p>}
+        {(episodeMeta.length > 0 || episode.explicit) && (
+          <p className="pod-card-detail">
+            {episodeMeta.join(' · ')}
+            {episode.explicit && (
+              <span className="pod-card-badge pod-card-badge-explicit">Explicit</span>
+            )}
+          </p>
+        )}
         <p className="pod-card-desc">{desc}{desc.length >= 220 ? '…' : ''}</p>
       </div>
 
@@ -53,9 +88,14 @@ export function EpisodeCard({ episode, currentlyPlayingGuid, onPlay, audioRef, p
       />
 
       <div className="pod-card-footer">
-        <a href={episode.link} target="_blank" rel="noopener noreferrer" className="pod-link-btn">
+        <a href={episode.platformUrl || episode.link} target="_blank" rel="noopener noreferrer" className="pod-link-btn">
           Listen
         </a>
+        {transcript && (
+          <a href={transcript.url} target="_blank" rel="noopener noreferrer" className="pod-link-btn">
+            Transcript
+          </a>
+        )}
         <a href={SPOTIFY_SHOW} target="_blank" rel="noopener noreferrer" className="pod-link-btn spotify">
           Spotify
         </a>

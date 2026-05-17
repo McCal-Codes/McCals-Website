@@ -20,14 +20,15 @@ export function AudioPlayer({ episode, isCurrentlyPlaying, onPlay, audioRef, pla
     else audioRef.current?.play();
   }
 
-  function handleSeek(e: React.MouseEvent<HTMLDivElement>) {
+  function handleSeek(e: React.ChangeEvent<HTMLInputElement>) {
     if (!audioRef.current || !isFinite(duration) || duration === 0) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    audioRef.current.currentTime = ((e.clientX - rect.left) / rect.width) * duration;
+    audioRef.current.currentTime = Number(e.currentTarget.value);
   }
 
   const pct = active && isFinite(duration) && duration > 0
     ? Math.min(100, (currentTime / duration) * 100) : 0;
+  const seekMax = active && isFinite(duration) && duration > 0 ? Math.floor(duration) : 0;
+  const seekValue = active && isFinite(currentTime) ? Math.min(Math.floor(currentTime), seekMax) : 0;
 
   const timeLabel = active
     ? `${formatTime(currentTime)} / ${formatTime(duration)}`
@@ -57,16 +58,19 @@ export function AudioPlayer({ episode, isCurrentlyPlaying, onPlay, audioRef, pla
             <p className="pod-time-label">{timeLabel}</p>
           </div>
         </div>
-        <div
+        <input
           className="pod-progress"
-          onClick={handleSeek}
-          role="progressbar"
-          aria-valuenow={Math.round(pct)}
-          aria-valuemin={0}
-          aria-valuemax={100}
-        >
-          <div className="pod-progress-fill" style={{ width: `${pct}%` }} />
-        </div>
+          type="range"
+          min="0"
+          max={seekMax}
+          step="1"
+          value={seekValue}
+          onChange={handleSeek}
+          disabled={!active || seekMax === 0}
+          aria-label={`Seek ${episode.title}`}
+          aria-valuetext={timeLabel}
+          style={{ '--pod-progress-pct': `${pct}%` } as React.CSSProperties}
+        />
       </div>
     </div>
   );
