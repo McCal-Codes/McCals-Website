@@ -52,7 +52,7 @@ Set these in your repository settings: **Settings → Secrets and variables → 
 ```bash
 # Get from .env file (or generate new one)
 grep WEBHOOK_SECRET .env
-# Example: WEBHOOK_SECRET=676bc3e3485ef38f6a7ce9c8ed090432b907ebd7a7fdab9c1fba7b82f5840c8d
+# Example: WEBHOOK_SECRET=<generated-webhook-secret>
 ```
 
 **Purpose:** Authenticates GitHub Actions requests to Cloudflare webhook endpoints

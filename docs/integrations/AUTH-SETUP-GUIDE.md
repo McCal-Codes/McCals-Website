@@ -51,7 +51,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 Add to `.env`:
 ```bash
-JWT_SECRET=a3b8c9d2e4f5g6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5
+JWT_SECRET=<generated-jwt-secret>
 ```
 
 ### 3. WEBHOOK_SECRET (Webhook Verification)
@@ -61,14 +61,14 @@ Generate a separate secret for webhook authentication (same process as JWT_SECRE
 ```bash
 # Using OpenSSL
 openssl rand -hex 32
-# Output: x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m6n7o8p9q0r1s2t3u4v5w6x7y8
+# Output: <generated-webhook-secret>
 
 # Or reuse the method above with node/python
 ```
 
 Add to `.env`:
 ```bash
-WEBHOOK_SECRET=x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m6n7o8p9q0r1s2t3u4v5w6x7y8
+WEBHOOK_SECRET=<generated-webhook-secret>
 ```
 
 ### 4. BLOG_AUTHORS (Author Credentials)
@@ -266,7 +266,7 @@ curl -X POST "$WORKER_URL/api/v1/blog/auth/login" \
 
 # Test posts (with token from login response)
 curl "$WORKER_URL/api/v1/blog/posts" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN_HERE"
+  -H "Authorization: Bearer <jwt-token>"
 ```
 
 ---

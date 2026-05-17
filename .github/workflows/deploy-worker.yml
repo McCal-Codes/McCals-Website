@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'tools/cloudflare/*.js'
+      - 'tools/cloudflare/wrangler.toml'
 
 jobs:
   deploy-worker:

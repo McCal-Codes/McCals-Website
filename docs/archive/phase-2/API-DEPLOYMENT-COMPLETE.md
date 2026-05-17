@@ -54,7 +54,7 @@
 ## Your Credentials (For GitHub Secrets)
 
 ```
-CLOUDFLARE_API_TOKEN=bZ9xgH9Qu4FiuMq3tjn4GvtfpPk3D3yqcjMDQRpF
+CLOUDFLARE_API_TOKEN=<cloudflare-api-token>
 CLOUDFLARE_ACCOUNT_ID=2ac16bbf295c2dacf6e2d7c135c8ebdb
 ```
 
@@ -66,7 +66,7 @@ CLOUDFLARE_ACCOUNT_ID=2ac16bbf295c2dacf6e2d7c135c8ebdb
 
 1. Go to: https://github.com/McCal-Codes/McCals-Website/settings/secrets/actions
 2. Click **New repository secret**
-3. Add `CLOUDFLARE_API_TOKEN` = `bZ9xgH9Qu4FiuMq3tjn4GvtfpPk3D3yqcjMDQRpF`
+3. Add `CLOUDFLARE_API_TOKEN` using the generated token value from Cloudflare
 4. Click **New repository secret**
 5. Add `CLOUDFLARE_ACCOUNT_ID` = `2ac16bbf295c2dacf6e2d7c135c8ebdb`
 
@@ -103,7 +103,7 @@ npm run dev
 
 ```bash
 cd src/api
-export CLOUDFLARE_API_TOKEN="bZ9xgH9Qu4FiuMq3tjn4GvtfpPk3D3yqcjMDQRpF"
+export CLOUDFLARE_API_TOKEN="<cloudflare-api-token>"
 export CLOUDFLARE_ACCOUNT_ID="2ac16bbf295c2dacf6e2d7c135c8ebdb"
 npm run deploy
 ```
