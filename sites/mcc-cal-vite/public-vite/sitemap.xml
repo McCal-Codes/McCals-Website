@@ -56,12 +56,6 @@
   </url>
 
   <url>
-    <loc>https://mcc-cal.com/video</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
     <loc>https://mcc-cal.com/events</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -113,12 +107,6 @@
     <loc>https://mcc-cal.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://mcc-cal.com/design-systems</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
 
   <url>

@@ -8,7 +8,6 @@ export type StaticRouteKey =
   | 'journalism'
   | 'portraits'
   | 'nature'
-  | 'video'
   | 'events'
   | 'concerts'
   | 'blog'
@@ -17,9 +16,9 @@ export type StaticRouteKey =
   | 'bookPodcast'
   | 'grabCoffee'
   | 'faq'
-  | 'designSystems'
   | 'projects'
   | 'terranova'
+  | 'accessibility'
   | 'policiesLegal';
 
 export interface StaticPageRoute {

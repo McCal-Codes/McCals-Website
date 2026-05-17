@@ -20,18 +20,6 @@ const PROJECTS = [
     desc: 'A terrain generation studio for Hytale, focused on procedural systems and creator tooling.',
   },
   {
-    to: '/design-systems',
-    label: 'Systems',
-    title: 'Design Systems',
-    desc: 'Component libraries, visual language, interface patterns, and reusable product foundations.',
-  },
-  {
-    to: '/abridged',
-    label: 'Product',
-    title: 'Abridged',
-    desc: 'A compact reading and portfolio experiment built around simpler long-form discovery.',
-  },
-  {
     to: '/roadmap',
     label: 'Notes',
     title: 'Roadmap',
@@ -42,7 +30,8 @@ const PROJECTS = [
 const ProjectsPage = () => {
   usePageMeta({
     title: 'Projects | Caleb McCartney',
-    description: 'Artwork, tools, apps, and design work by Caleb McCartney, including Letting Me Go, TerraNova, design systems, Abridged, and the site roadmap.',
+    description:
+      'Artwork, tools, apps, and design work by Caleb McCartney, including Letting Me Go, TerraNova, and the site roadmap.',
     canonical: `${SITE_URL}/projects`,
     og: {
       type: 'website',
@@ -78,7 +67,7 @@ const ProjectsPage = () => {
           <h1>Artwork, tools, and experiments.</h1>
           <p>
             A small index of public work outside the main photography galleries, including thesis
-            projects, product experiments, design systems, and notes on what is being built next.
+            projects, creator tooling, and notes on what is being built next.
           </p>
         </header>
 

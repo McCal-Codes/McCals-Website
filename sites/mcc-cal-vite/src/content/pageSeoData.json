@@ -8,7 +8,12 @@
     "imagePath": "/images/social/homepage-og.jpg",
     "imageAlt": "A farmer works in a garden during a Boyd Station documentary photojournalism assignment.",
     "imageName": "Boyd Station documentary photography by Caleb McCartney",
-    "keywords": ["Pittsburgh photographer", "Pittsburgh photojournalist", "political photojournalist", "event coverage"]
+    "keywords": [
+      "Pittsburgh photographer",
+      "Pittsburgh photojournalist",
+      "political photojournalist",
+      "event coverage"
+    ]
   },
   "about": {
     "route": "/about",
@@ -52,7 +57,11 @@
     "imagePath": "/images/social/homepage-og.jpg",
     "imageAlt": "A documentary photograph from Caleb McCartney's featured photography portfolio.",
     "imageName": "Featured photography by Caleb McCartney",
-    "keywords": ["featured photography", "photography portfolio", "Pittsburgh photographer portfolio"]
+    "keywords": [
+      "featured photography",
+      "photography portfolio",
+      "Pittsburgh photographer portfolio"
+    ]
   },
   "lettingMeGo": {
     "route": "/letting-me-go",
@@ -63,7 +72,12 @@
     "imagePath": "/images/bfa-thesis/exhibition-show/webp/one-nation-divided-hero.webp",
     "imageAlt": "Installation view from the Letting Me Go BFA thesis exhibition.",
     "imageName": "Letting Me Go exhibition installation",
-    "keywords": ["Letting Me Go", "BFA thesis exhibition", "Caleb McCartney thesis", "photography exhibition"]
+    "keywords": [
+      "Letting Me Go",
+      "BFA thesis exhibition",
+      "Caleb McCartney thesis",
+      "photography exhibition"
+    ]
   },
   "journalism": {
     "route": "/journalism",
@@ -85,7 +99,11 @@
     "imagePath": "/images/social/portraits-og.jpg",
     "imageAlt": "Studio portrait of Logan Spiker by Caleb McCartney.",
     "imageName": "Studio portrait photography",
-    "keywords": ["headshot photographer Pittsburgh", "portrait photographer Pittsburgh", "professional headshots"]
+    "keywords": [
+      "headshot photographer Pittsburgh",
+      "portrait photographer Pittsburgh",
+      "professional headshots"
+    ]
   },
   "nature": {
     "route": "/nature",
@@ -98,17 +116,6 @@
     "imageName": "Pittsburgh bridge landscape photography",
     "keywords": ["nature photography", "landscape photography", "Pittsburgh landscape photography"]
   },
-  "video": {
-    "route": "/video",
-    "title": "Video Production Services | McCal Media",
-    "description": "Video production services for events, interviews, documentaries, promotional content, and story-driven brand projects in Pittsburgh.",
-    "ogTitle": "Video Production Services | McCal Media",
-    "ogDescription": "Professional video coverage for events, interviews, documentary projects, and promotional storytelling.",
-    "imagePath": "/brand/abridged-icon.png",
-    "imageAlt": "McCal Media brand mark for video production services.",
-    "imageName": "McCal Media video production",
-    "keywords": ["video production Pittsburgh", "event videography", "documentary video"]
-  },
   "events": {
     "route": "/events",
     "title": "Pittsburgh Event Photographer | Caleb McCartney",
@@ -118,7 +125,11 @@
     "imagePath": "/images/social/events-og.jpg",
     "imageAlt": "Guests sing along under bright club lights during a Howl at the Moon event.",
     "imageName": "Howl at the Moon event photography",
-    "keywords": ["event photographer Pittsburgh", "corporate event photography", "conference photographer"]
+    "keywords": [
+      "event photographer Pittsburgh",
+      "corporate event photography",
+      "conference photographer"
+    ]
   },
   "concerts": {
     "route": "/concerts",
@@ -207,17 +218,6 @@
     "imageAlt": "Caleb McCartney, Pittsburgh photographer, for McCal Media FAQ.",
     "imageName": "McCal Media photography FAQ",
     "keywords": ["photography FAQ", "McCal Media booking", "photography licensing"]
-  },
-  "designSystems": {
-    "route": "/design-systems",
-    "title": "Design Systems and UI Components | McCal Media",
-    "description": "Design systems, component libraries, UI patterns, and front-end implementation support for consistent digital products.",
-    "ogTitle": "Design Systems and UI Components",
-    "ogDescription": "Scalable component libraries, UI patterns, and design system implementation for digital products.",
-    "imagePath": "/brand/abridged-icon.png",
-    "imageAlt": "McCal Media mark representing design systems work.",
-    "imageName": "McCal Media design systems",
-    "keywords": ["design systems", "UI components", "component library", "front-end implementation"]
   },
   "projects": {
     "route": "/projects",

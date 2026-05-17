@@ -16,11 +16,8 @@ const FeaturedWorkPage = lazy(() => import('./pages/featured-work'));
 const JournalismPage = lazy(() => import('./pages/journalism'));
 const NaturePage = lazy(() => import('./pages/nature'));
 const PortraitsPage = lazy(() => import('./pages/portraits'));
-const VideoPage = lazy(() => import('./pages/video'));
-const AbridgedPage = lazy(() => import('./pages/abridged'));
 const ProjectsPage = lazy(() => import('./pages/projects'));
 const RoadmapPage = lazy(() => import('./pages/roadmap'));
-const DesignSystemsPage = lazy(() => import('./pages/design-systems'));
 const ChangelogPage = lazy(() => import('./pages/changelog'));
 const ShowcasePage = lazy(() => import('./pages/showcase'));
 const ApiTestPage = lazy(() => import('./pages/api-test'));
@@ -45,7 +42,6 @@ const staticRouteComponents = {
   journalism: JournalismPage,
   portraits: PortraitsPage,
   nature: NaturePage,
-  video: VideoPage,
   events: EventsPage,
   concerts: ConcertsPage,
   blog: BlogPage,
@@ -54,7 +50,6 @@ const staticRouteComponents = {
   bookPodcast: BookPodcastPage,
   grabCoffee: GrabCoffeePage,
   faq: FAQPage,
-  designSystems: DesignSystemsPage,
   projects: ProjectsPage,
   terranova: TerranovaPage,
   accessibility: AccessibilityPage,
@@ -64,12 +59,14 @@ const staticRouteComponents = {
 // Simple fallback for page loading state
 function PageLoader() {
   return (
-    <div style={{ 
-      minHeight: '50vh', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center' 
-    }}>
+    <div
+      style={{
+        minHeight: '50vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <span>Loading...</span>
     </div>
   );
@@ -104,7 +101,6 @@ const router = createBrowserRouter([
       { path: '/one-nation-divided', element: <Navigate to="/letting-me-go" replace /> },
       { path: '/authors/:authorId', element: <AuthorsPage /> },
       { path: '/blog/:slug', element: <BlogPage /> },
-      { path: '/abridged', element: <AbridgedPage /> },
       { path: '/roadmap', element: <RoadmapPage /> },
       ...(import.meta.env.DEV
         ? [
