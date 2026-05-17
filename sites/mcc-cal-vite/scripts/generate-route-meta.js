@@ -6,6 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, '..');
 const distRoot = path.join(appRoot, 'dist');
 const pageSeoPath = path.join(appRoot, 'src', 'content', 'pageSeoData.json');
+const blogManifestPath = path.join(appRoot, 'public-vite', 'content', 'blog-static', 'blog-manifest.json');
 const siteUrl = (process.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
 function escapeAttr(value) {
@@ -22,6 +23,14 @@ function escapeRegex(value) {
 
 function absoluteUrl(value) {
   return /^https?:\/\//i.test(value) ? value : `${siteUrl}${value.startsWith('/') ? value : `/${value}`}`;
+}
+
+function blogImagePath(post) {
+  const image = post.leadImage || post.leadImageFallback;
+  if (!image) return '/brand/abridged-icon.png';
+  if (/^https?:\/\//i.test(image) || image.startsWith('/')) return image;
+  if (image.startsWith(`posts/${post.slug}/`)) return `/content/blog-static/${image}`;
+  return `/content/blog-static/posts/${post.slug}/${image.replace(/^\.?\//, '')}`;
 }
 
 function setTitle(html, title) {
@@ -57,6 +66,7 @@ function applyRouteMeta(indexHtml, entry) {
 
   html = setMeta(html, 'name="description"', 'content', entry.description);
   html = setLink(html, 'canonical', url);
+  html = setMeta(html, 'property="og:type"', 'content', entry.ogType || 'website');
   html = setMeta(html, 'property="og:title"', 'content', entry.ogTitle);
   html = setMeta(html, 'property="og:description"', 'content', entry.ogDescription);
   html = setMeta(html, 'property="og:url"', 'content', url);
@@ -70,27 +80,49 @@ function applyRouteMeta(indexHtml, entry) {
   return html;
 }
 
+export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } }) {
+  const staticEntries = Object.values(pageSeo).filter((entry) => entry.route !== '/');
+  const blogEntries = (blogManifest.posts || [])
+    .filter((post) => post.published)
+    .map((post) => ({
+      route: `/blog/${post.slug}`,
+      title: `${post.title} | McCal Media`,
+      description: post.excerpt || 'Photojournalism and field reporting from McCal Media.',
+      ogType: 'article',
+      ogTitle: post.title,
+      ogDescription: post.excerpt || 'Photojournalism and field reporting from McCal Media.',
+      imagePath: blogImagePath(post),
+      imageAlt: post.leadImageAlt || `${post.title} lead image`,
+    }));
+
+  return [...staticEntries, ...blogEntries];
+}
+
 async function generateRouteMeta() {
-  const [indexHtml, pageSeoRaw] = await Promise.all([
+  const [indexHtml, pageSeoRaw, blogManifestRaw] = await Promise.all([
     fs.readFile(path.join(distRoot, 'index.html'), 'utf8'),
     fs.readFile(pageSeoPath, 'utf8'),
+    fs.readFile(blogManifestPath, 'utf8').catch(() => '{"posts":[]}'),
   ]);
   const pageSeo = JSON.parse(pageSeoRaw);
-  const routeEntries = Object.entries(pageSeo).filter(([, entry]) => entry.route !== '/');
+  const blogManifest = JSON.parse(blogManifestRaw);
+  const routeEntries = buildRouteMetaEntries({ pageSeo, blogManifest });
 
   await Promise.all(
-    routeEntries.map(async ([key, entry]) => {
+    routeEntries.map(async (entry) => {
       const routeDir = path.join(distRoot, entry.route.replace(/^\//, ''));
       await fs.mkdir(routeDir, { recursive: true });
       await fs.writeFile(path.join(routeDir, 'index.html'), applyRouteMeta(indexHtml, entry));
-      return key;
+      return entry.route;
     }),
   );
 
   console.log(`Generated route meta for ${routeEntries.length} pages`);
 }
 
-generateRouteMeta().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  generateRouteMeta().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}

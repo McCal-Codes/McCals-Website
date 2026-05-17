@@ -5,7 +5,7 @@ import { Camera, Video, Film, Settings, CheckCircle, Play } from 'lucide-react';
 import { videoServices, videoEquipment, videoProcess } from '@/data/video-services';
 
 const VideoPage = () => {
-  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mccalmedia.com').replace(/\/$/, '');
+  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
   usePageMeta({
     title: 'Video Production Services | McCal Media',

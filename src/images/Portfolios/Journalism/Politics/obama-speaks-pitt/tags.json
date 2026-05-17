@@ -1,9 +1,13 @@
 {
-  "tags": ["Politics", "Published Work", "Presidential Campaign"],
+  "tags": [
+    "Politics",
+    "Published Work",
+    "Presidential Campaign"
+  ],
   "published": true,
   "date": "2024-10-10",
-  "description": "Barack Obama speaks at University of Pittsburgh rally",
-  "caption": "Obama campaign event at Pittsburgh",
+  "description": "Former President Barack Obama campaigns for Democratic presidential nominee Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024.",
+  "caption": "Former President Barack Obama campaigns for Democratic presidential nominee Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024. (Photo by Caleb McCartney)",
   "outlet": "The Point Park Globe",
   "outletUrl": "https://ppuglobe.com",
   "articleUrl": "",

@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
           <div className="mcc-footer__legal">
             <div>&copy; <span>{year}</span> Caleb McCartney. All rights reserved.</div>
             <div className="mcc-footer__links">
-              <a href="/accessibility">Accessibility & Cookies</a>
+              <a href="/accessibility">Accessibility & Cookie Policy</a>
             </div>
           </div>
         </footer>

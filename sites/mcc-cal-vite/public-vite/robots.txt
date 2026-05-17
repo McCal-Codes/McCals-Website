@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 
 Disallow: /api/
-Disallow: /abridged
 Disallow: /showcase
 Disallow: /api-test
 Disallow: /changelog

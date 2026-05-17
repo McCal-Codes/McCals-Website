@@ -16,6 +16,10 @@ export interface PortfolioGroup {
   dateISO?: string;
   category?: string;
   tags?: string[];
+  featuredRank?: number;
+  featuredDescription?: string;
+  featuredCover?: string;
+  sourcePath?: string;
   /** Whether any image in this group has been published to an outlet */
   published?: boolean;
   outletName?: string;

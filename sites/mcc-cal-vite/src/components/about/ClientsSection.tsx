@@ -126,8 +126,8 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
           target="_blank"
           rel="noopener noreferrer"
           className={styles.clientLink}
-          title={`View work with ${client.name} ↗`}
-          aria-label={`View published work with ${client.name} (opens in new tab)`}
+          title={`View related work or organization site for ${client.name}`}
+          aria-label={`View related work or organization site for ${client.name} (opens in new tab)`}
         >
           {cardContent}
           <span className={styles.externalIndicator} aria-hidden="true">
@@ -152,8 +152,8 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
       <Link
         to={linkUrl}
         className={styles.clientLink}
-        title={`View work with ${client.name}`}
-        aria-label={`View published work with ${client.name}`}
+        title={`View related work or organization site for ${client.name}`}
+        aria-label={`View related work or organization site for ${client.name}`}
       >
         {cardContent}
       </Link>
@@ -252,10 +252,11 @@ export function ClientsSection({
   return (
     <section className={`${styles.clients} ${className}`} aria-labelledby="clients-heading">
       <div className={`${styles.sectionHeading} ${styles.centered}`}>
-        <p className={styles.eyebrow}>Trusted by leading brands</p>
-        <h2 id="clients-heading">Editorial, academic, nonprofit, and brand partners.</h2>
+        <p className={styles.eyebrow}>Selected work relationships</p>
+        <h2 id="clients-heading">Clients, publications, schools, and organizations.</h2>
         <p className={styles.clientsSubtitle}>
-          Click any logo to view published work. Multiple publications are randomly selected.
+          A sample of organizations Caleb has photographed for, collaborated with, or been published by.
+          Select a logo to view related work or the organization&apos;s site.
         </p>
       </div>
 
@@ -309,6 +310,12 @@ export function ClientsSection({
           </ul>
         </div>
       )}
+
+      <p className={styles.clientsLegalNote}>
+        Logos are shown to identify work relationships, publications, or assignments. All marks remain
+        the property of their respective owners. Display does not imply sponsorship, endorsement, or
+        official vendor status unless separately stated.
+      </p>
 
       {/* Stats section */}
       <div className={`${styles.stats} ${styles.statsClients}`} aria-label="Business stats">
