@@ -4,7 +4,7 @@ import styles from './design-systems.module.css';
 import { Palette, Layers, Zap, Code, Smartphone, Monitor, CheckCircle, ArrowRight } from 'lucide-react';
 
 const DesignSystemsPage = () => {
-  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mccalmedia.com').replace(/\/$/, '');
+  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
   usePageMeta({
     title: 'Design Systems & UI Components | McCal Media',

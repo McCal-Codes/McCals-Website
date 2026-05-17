@@ -9,13 +9,13 @@ import PageErrorBoundary from '@/components/ErrorBoundaries/PageErrorBoundary';
 import { featuredWork, services } from '@/data/abridged-data';
 
 const AbridgedPage = () => {
-  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mccalmedia.com').replace(/\/$/, '');
+  const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
   usePageMeta({
     title: 'Abridged Portfolio | McCal Media',
     description: 'A curated selection of my best photography work. Quick portfolio overview featuring concert photography, portraits, events, and documentary projects.',
     canonical: `${SITE_URL}/abridged`,
-    robots: 'index, follow',
+    robots: 'noindex, follow',
     og: {
       type: 'website',
       title: 'Abridged Portfolio | McCal Media',
