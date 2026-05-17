@@ -2,9 +2,9 @@
   "home": {
     "route": "/",
     "title": "Pittsburgh Photographer | Caleb McCartney | McCal Media",
-    "description": "Pittsburgh photographer Caleb McCartney creates photojournalism, event coverage, concert photography, portraits, and documentary imagery.",
+    "description": "Pittsburgh photographer Caleb McCartney creates photojournalism, political coverage, event coverage, concert photography, and documentary imagery.",
     "ogTitle": "Pittsburgh Photographer | Caleb McCartney",
-    "ogDescription": "Photojournalism, event coverage, concert photography, and documentary imagery by Pittsburgh photographer Caleb McCartney.",
+    "ogDescription": "Photojournalism, political coverage, event coverage, concert photography, and documentary imagery by Pittsburgh photographer Caleb McCartney.",
     "imagePath": "/images/social/homepage-og.jpg",
     "imageAlt": "A farmer works in a garden during a Boyd Station documentary photojournalism assignment.",
     "imageName": "Boyd Station documentary photography by Caleb McCartney",

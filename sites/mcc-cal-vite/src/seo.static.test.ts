@@ -47,4 +47,14 @@ describe('static SEO metadata', () => {
 
     expect(pageSources).not.toContain('https://mccalmedia.com');
   });
+
+  it('keeps the source homepage sharing head aligned with home SEO data', () => {
+    const indexSource = readFileSync(resolve(__dirname, '..', 'index.html'), 'utf8');
+    const home = pageSeo.home;
+
+    expect(indexSource).toContain(`<meta name="description" content="${home.description}"`);
+    expect(indexSource).toContain(`<meta property="og:description" content="${home.ogDescription}"`);
+    expect(indexSource).toContain(`<meta name="twitter:description" content="${home.ogDescription}"`);
+    expect(indexSource).not.toMatch(/XXX|TODO|PLACEHOLDER|mccalmedia\.com/i);
+  });
 });
