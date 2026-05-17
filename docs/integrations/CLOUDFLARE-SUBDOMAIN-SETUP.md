@@ -105,7 +105,7 @@ curl -X POST "https://api.mcc-cal.com/api/v1/blog/auth/login" \
 **Expected response:**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token": "<jwt-token>",
   "author": {
     "id": "author-1",
     "username": "mccal",

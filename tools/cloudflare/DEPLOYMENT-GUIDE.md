@@ -161,7 +161,7 @@ Content-Type: application/json
 
 # Response:
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token": "<jwt-token>",
   "author": {
     "id": "mccal",
     "username": "mccal",

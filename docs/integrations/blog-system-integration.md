@@ -280,7 +280,7 @@ curl -X POST http://localhost:8787/api/v1/blog/auth/login \
   -d '{"username":"mccal","password":"your-password"}'
 
 # Save token from response
-TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+TOKEN="<jwt-token>"
 
 # Create post
 curl -X POST http://localhost:8787/api/v1/blog/posts \

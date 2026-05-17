@@ -16,11 +16,11 @@ Add these to your `.env` file:
 ```env
 # Supabase (PostgreSQL database)
 VITE_SUPABASE_URL=https://lrppdtruasrabctqkzcs.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxycHBkdHJ1YXNyYWJjdHFremNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MDUxMjksImV4cCI6MjA5Mjk4MTEyOX0.bbO2BBNyOraatSoxjyl_5fXjU-Q16ShloS1y2ICVWkQ
+VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
 ```
 
-**⚠️ IMPORTANT**: The `SUPABASE_SERVICE_ROLE_KEY` is private and should NEVER be committed to git. Get it from:
+**Important**: Keep actual Supabase keys in local or deployment environment variables. The `SUPABASE_SERVICE_ROLE_KEY` is private and should NEVER be committed to git. Get it from:
 Supabase Dashboard → Project Settings → API → service_role key
 
 ## Database Schema
