@@ -47,6 +47,8 @@ interface UseGoogleReviewsOptions {
   featuredOnly?: boolean;
 }
 
+const isLocalBuildPreview = import.meta.env.PROD && import.meta.env.VITE_VERCEL_ENV === 'development';
+
 export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
   const { maxResults = 8, featuredOnly = false } = options;
   const [reviews, setReviews] = useState<GoogleReview[]>([]);
@@ -98,16 +100,18 @@ export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
           }
         }
 
-        // Fallback to API testimonials endpoint
-        const response = await fetch(`/api/testimonials?limit=${maxResults}${featuredOnly ? '&featured=true' : ''}`);
+        if (!isLocalBuildPreview) {
+          // Fallback to API testimonials endpoint
+          const response = await fetch(`/api/testimonials?limit=${maxResults}${featuredOnly ? '&featured=true' : ''}`);
 
-        if (response.ok) {
-          const data = await response.json();
-          if (data.testimonials?.length > 0) {
-            setTestimonials(data.testimonials);
-            setSource('google-api');
-            setLoading(false);
-            return;
+          if (response.ok) {
+            const data = await response.json();
+            if (data.testimonials?.length > 0) {
+              setTestimonials(data.testimonials);
+              setSource('google-api');
+              setLoading(false);
+              return;
+            }
           }
         }
 

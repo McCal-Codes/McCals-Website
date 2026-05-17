@@ -29,4 +29,25 @@ describe('critical public routes', () => {
       assertSitemapPathHasAppRoute(appSource, p);
     }
   });
+
+  it('keeps local legacy redirects aligned with deployment redirects', () => {
+    const appPath = resolve(__dirname, 'App.tsx');
+    const appSource = readFileSync(appPath, 'utf8');
+
+    expect(appSource).toContain("path: '/schedule'");
+    expect(appSource).toContain('to="/grab-a-coffee"');
+    expect(appSource).toContain("path: '/contact'");
+    expect(appSource).toContain('to="/contact-us"');
+  });
+
+  it('keeps primary public pages semantically headed', () => {
+    const homeSource = readFileSync(resolve(__dirname, 'components', 'HeroCarousel.lazy.tsx'), 'utf8');
+    const featuredSource = readFileSync(
+      resolve(__dirname, 'components', 'portfolios', 'FeaturedPortfolio.tsx'),
+      'utf8',
+    );
+
+    expect(homeSource).toMatch(/<h1\b/);
+    expect(featuredSource).toMatch(/<h1\b/);
+  });
 });

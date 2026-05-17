@@ -57,7 +57,6 @@ export const GalleryFigure = memo(function GalleryFigure({
           alt={alt}
           sizes={sizes}
           loading={loading}
-          onError={(error) => console.error('Gallery image failed to load:', error)}
         />
       </div>
       <figcaption className={styles.galleryFigcaption} id={`${figureId || id}-caption`}>

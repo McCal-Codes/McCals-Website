@@ -1,4 +1,5 @@
 import React from 'react';
+import { logError } from '@/utils/logger';
 import ErrorBoundary from './ErrorBoundary';
 import styles from './PageErrorBoundary.module.css';
 
@@ -46,7 +47,7 @@ const PageErrorBoundary: React.FC<PageErrorBoundaryProps> = ({
           <div className={styles.quickLinks}>
             <a href="/" className={styles.link}>Home</a>
             <a href="/about" className={styles.link}>About</a>
-            <a href="/contact" className={styles.link}>Contact</a>
+            <a href="/contact-us" className={styles.link}>Contact</a>
           </div>
         </div>
       </div>
@@ -57,8 +58,7 @@ const PageErrorBoundary: React.FC<PageErrorBoundaryProps> = ({
     <ErrorBoundary 
       fallback={fallback}
       onError={(error, errorInfo) => {
-        // Log page-specific errors
-        console.error(`Error in ${pageName} page:`, {
+        logError(`Error in ${pageName} page:`, {
           error: error.message,
           stack: error.stack,
           componentStack: errorInfo.componentStack,

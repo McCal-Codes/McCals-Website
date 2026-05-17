@@ -306,7 +306,9 @@ export default async function handler(req, res) {
   // Development mode: return mock booking without external services
   const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
   if (isDev) {
-    console.log('[schedule/book] DEV MODE: Mock booking created - book.js:309', { eventTypeId, date, time, requester: requester.name });
+    if (process.env.DEBUG_BOOKING === '1') {
+      console.log('[schedule/book] DEV MODE: Mock booking created - book.js:309', { eventTypeId, date, time, requester: requester.name });
+    }
     
     const startDateTime = new Date(`${date}T${time}`);
     const endDateTime = new Date(startDateTime);

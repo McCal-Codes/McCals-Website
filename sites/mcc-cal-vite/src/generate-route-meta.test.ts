@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildRouteMetaEntries } from '../scripts/generate-route-meta.js';
+import { buildRouteMetaEntries, routeOutputPaths } from '../scripts/generate-route-meta.js';
 
 describe('generate-route-meta', () => {
   it('builds static HTML metadata entries for static pages and published blog posts', () => {
@@ -54,5 +54,14 @@ describe('generate-route-meta', () => {
       imagePath: '/content/blog-static/posts/published-story/images/lead.jpg',
       imageAlt: 'Published story image alt',
     });
+  });
+
+  it('writes nested and clean-url HTML paths for public routes', () => {
+    expect(routeOutputPaths('/blog')).toEqual(['blog/index.html', 'blog.html']);
+    expect(routeOutputPaths('/blog/published-story')).toEqual([
+      'blog/published-story/index.html',
+      'blog/published-story.html',
+    ]);
+    expect(routeOutputPaths('/')).toEqual(['index.html']);
   });
 });

@@ -10,8 +10,12 @@ import { inject } from '@vercel/analytics';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
 
+const isVercelRuntime = import.meta.env.VITE_VERCEL_ENV !== 'development';
+
 // Initialize Vercel Analytics for route tracking
-inject();
+if (isVercelRuntime) {
+  inject();
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,7 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
-      <SpeedInsights />
+      {isVercelRuntime && <SpeedInsights />}
     </QueryClientProvider>
   </React.StrictMode>,
 );

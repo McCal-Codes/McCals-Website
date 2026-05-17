@@ -20,6 +20,7 @@
     "manifest:dry-run": "node scripts/manifest/enhanced-manifest-generator.js --auto --dry",
     "manifest:events": "node scripts/manifest/generate-events-manifest.js --root src/images/Portfolios/Events --force",
     "manifest:journalism": "node scripts/manifest/generate-journalism-manifest-v2.js",
+    "audit:journalism-captions": "node scripts/audit/audit-journalism-captions.js",
     "// WATCH": "--- File Watchers ---",
     "watch": "node scripts/watchers/watch-auto-manifest.js",
     "// OPTIMIZE": "--- Image Optimization ---",

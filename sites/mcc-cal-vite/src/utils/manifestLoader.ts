@@ -93,19 +93,19 @@ export async function loadManifestFromAPI<T>(
 /**
  * Load multiple manifests in parallel
  */
-export async function loadManifests<T extends Record<string, any>>(
+export async function loadManifests<T extends Record<string, unknown> = Record<string, unknown>>(
   types: string[],
   apiUrl?: string,
   options?: ManifestLoaderOptions
-): Promise<Record<string, any>> {
+): Promise<T> {
   const baseUrl = apiUrl || import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
 
-  const results: Record<string, any> = {};
+  const results: Record<string, unknown> = {};
   const errors: Record<string, Error> = {};
 
   const promises = types.map(async (type) => {
     try {
-      const data = await loadManifestFromAPI<any>(type, baseUrl, options);
+      const data = await loadManifestFromAPI<unknown>(type, baseUrl, options);
       results[type] = data;
     } catch (error) {
       errors[type] = error as Error;

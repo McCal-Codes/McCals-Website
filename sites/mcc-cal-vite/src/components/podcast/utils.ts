@@ -3,7 +3,7 @@
  */
 
 import type { Episode, EpisodeTranscript } from './types';
-import { FEED_URL, PODCAST_IMAGE, CACHE_KEY, CACHE_TTL } from './constants';
+import { FEED_URL, PODCAST_IMAGE, CACHE_KEY, CACHE_TTL, FALLBACK } from './constants';
 
 export function extractGuest(title: string): string {
   const m = title.match(/with\s+([^|–—:-]+)$/i) || title.match(/[–—-]\s*with\s+([^|:-]+)$/i);
@@ -86,6 +86,11 @@ export function setCache(episodes: Episode[]) {
 
 export async function fetchFeed(): Promise<Episode[]> {
   const isDev = import.meta.env.DEV;
+  const isLocalBuildPreview = !isDev && import.meta.env.VITE_VERCEL_ENV === 'development';
+
+  if (isLocalBuildPreview) {
+    return normalizeEpisodes(FALLBACK);
+  }
 
   if (!isDev) {
     try {

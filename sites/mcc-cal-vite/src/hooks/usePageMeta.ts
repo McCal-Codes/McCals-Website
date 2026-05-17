@@ -57,7 +57,7 @@ function setLink(rel: string, href: string) {
   el.href = href;
 }
 
-function setJsonLd(id: string, data: object) {
+function setJsonLdText(id: string, data: string) {
   let el = document.getElementById(id) as HTMLScriptElement | null;
   if (!el) {
     el = document.createElement('script');
@@ -65,11 +65,17 @@ function setJsonLd(id: string, data: object) {
     el.type = 'application/ld+json';
     document.head.appendChild(el);
   }
-  el.textContent = JSON.stringify(data);
+  el.textContent = data;
 }
 
 export function usePageMeta(meta: PageMeta) {
   const jsonLd = meta.jsonLd ? JSON.stringify(meta.jsonLd) : '';
+  const hasOpenGraph =
+    Boolean(meta.og?.type) ||
+    Boolean(meta.og?.title) ||
+    Boolean(meta.og?.description) ||
+    Boolean(meta.og?.image) ||
+    Boolean(meta.og?.imageAlt);
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -84,7 +90,7 @@ export function usePageMeta(meta: PageMeta) {
     setOptionalMeta('og:description', meta.og?.description, 'property');
     setOptionalMeta('og:image', meta.og?.image, 'property');
     setOptionalMeta('og:image:alt', meta.og?.imageAlt, 'property');
-    setOptionalMeta('og:url', meta.og ? meta.canonical : undefined, 'property');
+    setOptionalMeta('og:url', hasOpenGraph ? meta.canonical : undefined, 'property');
 
     setOptionalMeta('twitter:card', meta.twitter?.card);
     setOptionalMeta('twitter:title', meta.twitter?.title);
@@ -92,8 +98,8 @@ export function usePageMeta(meta: PageMeta) {
     setOptionalMeta('twitter:image', meta.twitter?.image);
     setOptionalMeta('twitter:image:alt', meta.twitter?.imageAlt);
 
-    if (meta.jsonLd) {
-      setJsonLd('page-json-ld', meta.jsonLd);
+    if (jsonLd) {
+      setJsonLdText('page-json-ld', jsonLd);
     }
 
     return () => {
@@ -111,6 +117,7 @@ export function usePageMeta(meta: PageMeta) {
     meta.og?.description,
     meta.og?.image,
     meta.og?.imageAlt,
+    hasOpenGraph,
     meta.twitter?.card,
     meta.twitter?.title,
     meta.twitter?.description,

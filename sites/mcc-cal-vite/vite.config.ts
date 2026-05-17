@@ -1,4 +1,4 @@
-import { defineConfig, Plugin } from 'vite';
+import { defineConfig, type Connect, type Plugin, type ViteDevServer } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { resolve } from 'path';
@@ -60,8 +60,8 @@ function copyPublicSkipDeadFolder(): Plugin {
 // Plugin to serve portfolio images from src/images during dev
 const servePortfolioImages = () => ({
   name: 'serve-portfolio-images',
-  configureServer(server: any) {
-    server.middlewares.use('/src/images/Portfolios', (req: any, res: any, next: any) => {
+  configureServer(server: ViteDevServer) {
+    server.middlewares.use('/src/images/Portfolios', (req: Connect.IncomingMessage, res, next) => {
       try {
         // Skip if URL has query parameters (Vite internal requests)
         if (req.url?.includes('?')) {
@@ -133,7 +133,6 @@ export default defineConfig(({ command }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
           'router-vendor': ['react-router-dom'],
           'query-vendor': ['@tanstack/react-query'],
         },

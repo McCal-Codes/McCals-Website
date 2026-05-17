@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { adaptNature } from './nature';
+import { adaptNature } from './nature-adapter';
 
 describe('adaptNature', () => {
   it('uses prebuilt nature thumbs for card covers while keeping full-size lightbox images', () => {

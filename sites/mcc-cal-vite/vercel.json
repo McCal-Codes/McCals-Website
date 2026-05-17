@@ -2,6 +2,7 @@
   "framework": "vite",
   "buildCommand": "npm ci && npm run build",
   "outputDirectory": "dist",
+  "cleanUrls": true,
   "images": {
     "sizes": [160, 256, 320, 360, 384, 480, 540, 640, 720, 750, 828, 960, 1080, 1200, 1280, 1440, 1600, 1920, 2048, 3840],
     "localPatterns": [
@@ -27,11 +28,11 @@
   "redirects": [
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/schedule", "destination": "/grab-a-coffee", "permanent": true },
-    { "source": "/accessibility", "destination": "/policies-legal#accessibility", "permanent": true }
+    { "source": "/contact", "destination": "/contact-us", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/:path*", "destination": "/index.html" }
   ],
   "headers": [
     {

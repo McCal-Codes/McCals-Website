@@ -1,7 +1,11 @@
 /* McCal Navigation — React port of live widget v2.0.6 */
 
 :root {
-  --mcc-nav-height: 0px;
+  --mcc-nav-height: calc(
+    clamp(32px, 7vw, 72px) + clamp(16px, 3vw, 28px) +
+    (clamp(1.35rem, 2.6vw, 1.9rem) * 1.2) +
+    env(safe-area-inset-top, 0px)
+  );
   --mcc-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --panel-blur: 32px;
   --chip: rgba(255, 255, 255, 0.08);
@@ -21,7 +25,6 @@
 }
 
 html, body { overflow-x: hidden; }
-body { padding-top: var(--mcc-nav-height); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
@@ -80,6 +83,7 @@ body { padding-top: var(--mcc-nav-height); }
 .mcc-nav__brand a {
   font-family: 'Libre Baskerville', Georgia, serif;
   font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  line-height: 1.2;
   font-weight: 600;
   color: #ffffff;
   text-decoration: none;
@@ -304,6 +308,13 @@ body { padding-top: var(--mcc-nav-height); }
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
+  :root {
+    --mcc-nav-height: calc(
+      clamp(26px, 8vw, 48px) + clamp(12px, 4vw, 24px) + 46px +
+      env(safe-area-inset-top, 0px)
+    );
+  }
+
   .mcc-nav {
     padding: clamp(26px, 8vw, 48px) clamp(24px, 8vw, 40px) clamp(12px, 4vw, 24px);
   }

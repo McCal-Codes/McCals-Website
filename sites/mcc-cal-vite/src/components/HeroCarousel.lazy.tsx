@@ -11,7 +11,6 @@ import {
 
 const DESKTOP_BREAKPOINT = 769;
 const SLIDE_DURATION = 8000;
-const HEIGHT_MULTIPLIER = 1.12;
 
 const normalizeFP = (fp?: HeroFocalPoint) => {
   if (!fp) return null;
@@ -78,33 +77,6 @@ const HeroCarousel: React.FC = () => {
   const currentSlide = slides[currentSlideIndex];
   const imageLoaded = imageStatus.src === currentSlide?.image && imageStatus.loaded;
   const imageError = imageStatus.src === currentSlide?.image && imageStatus.error;
-
-  // Match the original homepage carousel: the hero should start behind the fixed nav.
-  useEffect(() => {
-    const previousPaddingTop = document.body.style.paddingTop;
-    document.body.style.paddingTop = '0';
-
-    return () => {
-      document.body.style.paddingTop = previousPaddingTop;
-    };
-  }, []);
-
-  useEffect(() => {
-    const syncHeight = () => {
-      const hero = heroRef.current;
-      if (!hero) return;
-
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 800;
-      hero.style.setProperty('--mcc-hero-vh', `${Math.round(viewportHeight * HEIGHT_MULTIPLIER)}px`);
-    };
-
-    syncHeight();
-    window.addEventListener('resize', syncHeight, { passive: true });
-
-    return () => {
-      window.removeEventListener('resize', syncHeight);
-    };
-  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrentSlideIndex((prev) => (prev + 1) % slides.length);

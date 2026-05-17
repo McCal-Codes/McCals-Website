@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { adaptPortraits } from './portraits';
+import { adaptPortraits } from './portraits-adapter';
 
 describe('adaptPortraits', () => {
   it('flattens portrait albums into session cards with category metadata', () => {

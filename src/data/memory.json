@@ -1,38 +1,287 @@
-{"type":"entity","name":"Header","entityType":"Component","observations":["Primary site navigation component","Located in src/components/Header.tsx","Uses React hooks for state management","Responsive mobile menu included"]}
-{"type":"entity","name":"PortfolioGallery","entityType":"Component","observations":["Displays photo portfolios from JSON manifests","Lazy loads images for performance","Supports lightbox view on click","Responsive grid layout via Tailwind"]}
-{"type":"entity","name":"Footer","entityType":"Component","observations":["Site footer with links and copyright","Social media links included"]}
-{"type":"entity","name":"concert-manifest","entityType":"Manifest","observations":["JSON file at src/data/concert-manifest.json","Contains concert photo portfolio entries","Referenced by PortfolioGallery component","Format: {eventName, slug, dateDisplay, images[], tags[]}"]}
-{"type":"entity","name":"events-manifest","entityType":"Manifest","observations":["JSON file at src/data/events-manifest.json","Contains general event photo entries","Referenced by PortfolioGallery component"]}
-{"type":"entity","name":"journalism-manifest","entityType":"Manifest","observations":["JSON file at src/data/journalism-manifest.json","Contains photojournalism portfolio entries","Referenced by PortfolioGallery component"]}
-{"type":"entity","name":"portfolio-manifest","entityType":"Manifest","observations":["Master manifest at src/data/portfolio-manifest.json","Aggregates all category manifests","Used for site-wide portfolio navigation"]}
-{"type":"entity","name":"GitHub Pages","entityType":"DeploymentTarget","observations":["Primary deployment target","Builds from gh-pages branch","Subdirectory deploy requires base path config in vite.config.ts","Free hosting via GitHub"]}
-{"type":"entity","name":"Vercel","entityType":"DeploymentTarget","observations":["Secondary deployment target with staging support","Auto-deploys from main/dev/staging branches","Preview URLs for each branch","Environment variables managed in dashboard"]}
-{"type":"entity","name":"PortfolioCard","entityType":"ReactComponent","observations":["Displays single portfolio group as clickable card","Located in src/components/portfolio/PortfolioCard.tsx","Props: group (PortfolioGroup), onOpen, onCopyLink","Features: lazy-loaded cover image, photo count badge, published indicator","Accessibility: keyboard navigable (Enter/Space), ARIA labels","Animation: IntersectionObserver for staggered entrance","Uses pf-card CSS class prefix"]}
-{"type":"entity","name":"PortfolioGrid","entityType":"ReactComponent","observations":["Main portfolio display component with grid layout","Located in src/components/portfolio/PortfolioGrid.tsx","Props: groups (PortfolioGroup[]), initialCount, batchSize","Features: lazy load more, lightbox integration, copy link toast","Lazy loads PortfolioLightbox via React.lazy()","Manages visible item count state","Uses pf-grid CSS class"]}
-{"type":"entity","name":"PortfolioLightbox","entityType":"ReactComponent","observations":["Full-screen image viewer for portfolio groups","Located in src/components/portfolio/PortfolioLightbox.tsx","Props: group (PortfolioGroup | null), onClose","Features: keyboard navigation (Escape, arrows), scroll gallery","Accessibility: role=dialog, aria-label, focus trap","Lazy loads images conditionally (first 2 eager, rest lazy)","Uses pf-lightbox CSS class prefix"]}
-{"type":"entity","name":"PortfolioFilters","entityType":"ReactComponent","observations":["Filter buttons for portfolio categories/years","Located in src/components/portfolio/PortfolioFilters.tsx","Props: filters (string[]), active, onChange","Features: All filter + dynamic year/category buttons","Accessibility: aria-pressed for active state","Uses pf-filters and pf-filter-btn CSS classes"]}
-{"type":"entity","name":"useManifest","entityType":"Hook","observations":["Custom hook for fetching JSON portfolio manifests","Located in src/components/portfolio/useManifest.ts","Features: 30min client-side caching, error handling","Returns: { data, status, error }","Exports imageUrl builders for all portfolio types","Supports: concert, events, journalism, portrait, nature, featured manifests"]}
-{"type":"entity","name":"imageUrl","entityType":"Utility","observations":["Object with URL builder functions for portfolio images","Located in src/components/portfolio/useManifest.ts","Methods: journalism(), concert(), events(), portrait(), nature(), featured()","Uses jsDelivr CDN in production: cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main","Uses local paths in development (IS_DEV check)","Base path: src/images/Portfolios"]}
-{"type":"entity","name":"usePageMeta","entityType":"Hook","observations":["Hook for setting page SEO meta tags and JSON-LD","Located in src/hooks/usePageMeta.ts","Supports: title, description, canonical, OpenGraph, Twitter cards, JSON-LD","Dynamically creates/updates meta tags in document head","Cleanup: restores previous title on unmount, removes JSON-LD script"]}
-{"type":"relation","from":"PortfolioGallery","to":"concert-manifest","relationType":"reads"}
-{"type":"relation","from":"PortfolioGallery","to":"events-manifest","relationType":"reads"}
-{"type":"relation","from":"PortfolioGallery","to":"journalism-manifest","relationType":"reads"}
-{"type":"relation","from":"PortfolioGallery","to":"portfolio-manifest","relationType":"reads"}
-{"type":"relation","from":"portfolio-manifest","to":"concert-manifest","relationType":"aggregates"}
-{"type":"relation","from":"portfolio-manifest","to":"events-manifest","relationType":"aggregates"}
-{"type":"relation","from":"portfolio-manifest","to":"journalism-manifest","relationType":"aggregates"}
-{"type":"relation","from":"Header","to":"PortfolioGallery","relationType":"navigates_to"}
-{"type":"relation","from":"GitHub Pages","to":"portfolio-manifest","relationType":"deploys"}
-{"type":"relation","from":"GitHub Pages","to":"PortfolioGallery","relationType":"deploys"}
-{"type":"relation","from":"Vercel","to":"portfolio-manifest","relationType":"deploys"}
-{"type":"relation","from":"Vercel","to":"PortfolioGallery","relationType":"deploys"}
-{"type":"relation","from":"PortfolioGrid","to":"PortfolioCard","relationType":"renders"}
-{"type":"relation","from":"PortfolioGrid","to":"useManifest","relationType":"uses_hook"}
-{"type":"relation","from":"PortfolioCard","to":"PortfolioLightbox","relationType":"triggers"}
-{"type":"relation","from":"PortfolioGrid","to":"usePageMeta","relationType":"uses_hook"}
-{"type":"relation","from":"useManifest","to":"imageUrl","relationType":"exports"}
-{"type":"relation","from":"PortfolioFilters","to":"PortfolioGrid","relationType":"filters_data_for"}
-{"type":"relation","from":"PortfolioCard","to":"PortfolioGroup","relationType":"receives_props_from"}
-{"type":"relation","from":"PortfolioLightbox","to":"PortfolioGroup","relationType":"receives_props_from"}
-{"type":"relation","from":"PortfolioLightbox","to":"usePageMeta","relationType":"uses_hook"}
-{"type":"relation","from":"usePageMeta","to":"JSON-LD","relationType":"generates"}
+{
+  "entities": {
+    "Header": {
+      "name": "Header",
+      "entityType": "Component",
+      "observations": [
+        "Primary site navigation component",
+        "Located in src/components/Header.tsx",
+        "Uses React hooks for state management",
+        "Responsive mobile menu included"
+      ]
+    },
+    "PortfolioGallery": {
+      "name": "PortfolioGallery",
+      "entityType": "Component",
+      "observations": [
+        "Displays photo portfolios from JSON manifests",
+        "Lazy loads images for performance",
+        "Supports lightbox view on click",
+        "Responsive grid layout via Tailwind"
+      ]
+    },
+    "Footer": {
+      "name": "Footer",
+      "entityType": "Component",
+      "observations": [
+        "Site footer with links and copyright",
+        "Social media links included"
+      ]
+    },
+    "concert-manifest": {
+      "name": "concert-manifest",
+      "entityType": "Manifest",
+      "observations": [
+        "JSON file at src/data/concert-manifest.json",
+        "Contains concert photo portfolio entries",
+        "Referenced by PortfolioGallery component",
+        "Format: {eventName, slug, dateDisplay, images[], tags[]}"
+      ]
+    },
+    "events-manifest": {
+      "name": "events-manifest",
+      "entityType": "Manifest",
+      "observations": [
+        "JSON file at src/data/events-manifest.json",
+        "Contains general event photo entries",
+        "Referenced by PortfolioGallery component"
+      ]
+    },
+    "journalism-manifest": {
+      "name": "journalism-manifest",
+      "entityType": "Manifest",
+      "observations": [
+        "JSON file at src/data/journalism-manifest.json",
+        "Contains photojournalism portfolio entries",
+        "Referenced by PortfolioGallery component"
+      ]
+    },
+    "portfolio-manifest": {
+      "name": "portfolio-manifest",
+      "entityType": "Manifest",
+      "observations": [
+        "Master manifest at src/data/portfolio-manifest.json",
+        "Aggregates all category manifests",
+        "Used for site-wide portfolio navigation"
+      ]
+    },
+    "GitHub Pages": {
+      "name": "GitHub Pages",
+      "entityType": "DeploymentTarget",
+      "observations": [
+        "Primary deployment target",
+        "Builds from gh-pages branch",
+        "Subdirectory deploy requires base path config in vite.config.ts",
+        "Free hosting via GitHub"
+      ]
+    },
+    "Vercel": {
+      "name": "Vercel",
+      "entityType": "DeploymentTarget",
+      "observations": [
+        "Secondary deployment target with staging support",
+        "Auto-deploys from main/dev/staging branches",
+        "Preview URLs for each branch",
+        "Environment variables managed in dashboard"
+      ]
+    },
+    "PortfolioCard": {
+      "name": "PortfolioCard",
+      "entityType": "ReactComponent",
+      "observations": [
+        "Displays single portfolio group as clickable card",
+        "Located in src/components/portfolio/PortfolioCard.tsx",
+        "Props: group (PortfolioGroup), onOpen, onCopyLink",
+        "Features: lazy-loaded cover image, photo count badge, published indicator",
+        "Accessibility: keyboard navigable (Enter/Space), ARIA labels",
+        "Animation: IntersectionObserver for staggered entrance",
+        "Uses pf-card CSS class prefix"
+      ]
+    },
+    "PortfolioGrid": {
+      "name": "PortfolioGrid",
+      "entityType": "ReactComponent",
+      "observations": [
+        "Main portfolio display component with grid layout",
+        "Located in src/components/portfolio/PortfolioGrid.tsx",
+        "Props: groups (PortfolioGroup[]), initialCount, batchSize",
+        "Features: lazy load more, lightbox integration, copy link toast",
+        "Lazy loads PortfolioLightbox via React.lazy()",
+        "Manages visible item count state",
+        "Uses pf-grid CSS class"
+      ]
+    },
+    "PortfolioLightbox": {
+      "name": "PortfolioLightbox",
+      "entityType": "ReactComponent",
+      "observations": [
+        "Full-screen image viewer for portfolio groups",
+        "Located in src/components/portfolio/PortfolioLightbox.tsx",
+        "Props: group (PortfolioGroup | null), onClose",
+        "Features: keyboard navigation (Escape, arrows), scroll gallery",
+        "Accessibility: role=dialog, aria-label, focus trap",
+        "Lazy loads images conditionally (first 2 eager, rest lazy)",
+        "Uses pf-lightbox CSS class prefix"
+      ]
+    },
+    "PortfolioFilters": {
+      "name": "PortfolioFilters",
+      "entityType": "ReactComponent",
+      "observations": [
+        "Filter buttons for portfolio categories/years",
+        "Located in src/components/portfolio/PortfolioFilters.tsx",
+        "Props: filters (string[]), active, onChange",
+        "Features: All filter + dynamic year/category buttons",
+        "Accessibility: aria-pressed for active state",
+        "Uses pf-filters and pf-filter-btn CSS classes"
+      ]
+    },
+    "useManifest": {
+      "name": "useManifest",
+      "entityType": "Hook",
+      "observations": [
+        "Custom hook for fetching JSON portfolio manifests",
+        "Located in src/components/portfolio/useManifest.ts",
+        "Features: 30min client-side caching, error handling",
+        "Returns: { data, status, error }",
+        "Exports imageUrl builders for all portfolio types",
+        "Supports: concert, events, journalism, portrait, nature, featured manifests"
+      ]
+    },
+    "imageUrl": {
+      "name": "imageUrl",
+      "entityType": "Utility",
+      "observations": [
+        "Object with URL builder functions for portfolio images",
+        "Located in src/components/portfolio/useManifest.ts",
+        "Methods: journalism(), concert(), events(), portrait(), nature(), featured()",
+        "Uses jsDelivr CDN in production: cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main",
+        "Uses local paths in development (IS_DEV check)",
+        "Base path: src/images/Portfolios"
+      ]
+    },
+    "usePageMeta": {
+      "name": "usePageMeta",
+      "entityType": "Hook",
+      "observations": [
+        "Hook for setting page SEO meta tags and JSON-LD",
+        "Located in src/hooks/usePageMeta.ts",
+        "Supports: title, description, canonical, OpenGraph, Twitter cards, JSON-LD",
+        "Dynamically creates/updates meta tags in document head",
+        "Cleanup: restores previous title on unmount, removes JSON-LD script"
+      ]
+    }
+  },
+  "relations": [
+    {
+      "from": "PortfolioGallery",
+      "to": "concert-manifest",
+      "relationType": "reads"
+    },
+    {
+      "from": "PortfolioGallery",
+      "to": "events-manifest",
+      "relationType": "reads"
+    },
+    {
+      "from": "PortfolioGallery",
+      "to": "journalism-manifest",
+      "relationType": "reads"
+    },
+    {
+      "from": "PortfolioGallery",
+      "to": "portfolio-manifest",
+      "relationType": "reads"
+    },
+    {
+      "from": "portfolio-manifest",
+      "to": "concert-manifest",
+      "relationType": "aggregates"
+    },
+    {
+      "from": "portfolio-manifest",
+      "to": "events-manifest",
+      "relationType": "aggregates"
+    },
+    {
+      "from": "portfolio-manifest",
+      "to": "journalism-manifest",
+      "relationType": "aggregates"
+    },
+    {
+      "from": "Header",
+      "to": "PortfolioGallery",
+      "relationType": "navigates_to"
+    },
+    {
+      "from": "GitHub Pages",
+      "to": "portfolio-manifest",
+      "relationType": "deploys"
+    },
+    {
+      "from": "GitHub Pages",
+      "to": "PortfolioGallery",
+      "relationType": "deploys"
+    },
+    {
+      "from": "Vercel",
+      "to": "portfolio-manifest",
+      "relationType": "deploys"
+    },
+    {
+      "from": "Vercel",
+      "to": "PortfolioGallery",
+      "relationType": "deploys"
+    },
+    {
+      "from": "PortfolioGrid",
+      "to": "PortfolioCard",
+      "relationType": "renders"
+    },
+    {
+      "from": "PortfolioGrid",
+      "to": "useManifest",
+      "relationType": "uses_hook"
+    },
+    {
+      "from": "PortfolioCard",
+      "to": "PortfolioLightbox",
+      "relationType": "triggers"
+    },
+    {
+      "from": "PortfolioGrid",
+      "to": "usePageMeta",
+      "relationType": "uses_hook"
+    },
+    {
+      "from": "useManifest",
+      "to": "imageUrl",
+      "relationType": "exports"
+    },
+    {
+      "from": "PortfolioFilters",
+      "to": "PortfolioGrid",
+      "relationType": "filters_data_for"
+    },
+    {
+      "from": "PortfolioCard",
+      "to": "PortfolioGroup",
+      "relationType": "receives_props_from"
+    },
+    {
+      "from": "PortfolioLightbox",
+      "to": "PortfolioGroup",
+      "relationType": "receives_props_from"
+    },
+    {
+      "from": "PortfolioLightbox",
+      "to": "usePageMeta",
+      "relationType": "uses_hook"
+    },
+    {
+      "from": "usePageMeta",
+      "to": "JSON-LD",
+      "relationType": "generates"
+    }
+  ]
+}

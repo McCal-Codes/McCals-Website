@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 import type { Database } from './database.types';
+import { logWarning } from '@/utils/logger';
 
 // Client-side Supabase client (anon key, limited permissions via RLS)
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -52,7 +54,7 @@ export function subscribeToAvailability(
   callback: (payload: { new: Record<string, unknown>; old: Record<string, unknown>; eventType: string }) => void
 ) {
   if (!isSupabaseConfigured()) {
-    console.warn('Supabase not configured, realtime subscriptions disabled - supabase.ts:55');
+    logWarning('Supabase not configured, realtime subscriptions disabled');
     return null;
   }
 
@@ -77,7 +79,7 @@ export function subscribeToAvailability(
 }
 
 // Unsubscribe helper
-export function unsubscribeFromAvailability(channel: any) {
+export function unsubscribeFromAvailability(channel: RealtimeChannel | null) {
   if (channel) {
     supabase.removeChannel(channel);
   }

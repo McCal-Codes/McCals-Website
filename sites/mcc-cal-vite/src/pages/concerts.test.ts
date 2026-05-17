@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { adaptConcerts } from './concerts';
+import { adaptConcerts } from './concerts-adapter';
 
 describe('adaptConcerts', () => {
   it('keeps each show as its own card while preserving concert metadata', () => {

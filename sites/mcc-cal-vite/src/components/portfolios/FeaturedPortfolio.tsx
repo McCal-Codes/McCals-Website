@@ -391,7 +391,7 @@ export default function FeaturedPortfolio() {
       <header className={portfolioStyles.pfFeaturedHeader}>
         <div className={portfolioStyles.pfFeaturedHeaderCopy}>
           <p className={portfolioStyles.pfFeaturedDeck}>Latest Curated Edit</p>
-          <h2 className={portfolioStyles.pfHeading}>Featured Work</h2>
+          <h1 className={portfolioStyles.pfHeading}>Featured Work</h1>
           <p className={portfolioStyles.pfSubheading}>
             Recent concert, event, and photojournalism work, edited for range, pace, and the moments that hold up.
           </p>

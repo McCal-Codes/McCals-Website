@@ -80,6 +80,16 @@ function applyRouteMeta(indexHtml, entry) {
   return html;
 }
 
+export function routeOutputPaths(route) {
+  if (route === '/') return ['index.html'];
+
+  const cleanRoute = route.replace(/^\//, '').replace(/\/$/, '');
+  return [
+    path.join(cleanRoute, 'index.html'),
+    `${cleanRoute}.html`,
+  ];
+}
+
 export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } }) {
   const staticEntries = Object.values(pageSeo).filter((entry) => entry.route !== '/');
   const blogEntries = (blogManifest.posts || [])
@@ -109,11 +119,15 @@ async function generateRouteMeta() {
   const routeEntries = buildRouteMetaEntries({ pageSeo, blogManifest });
 
   await Promise.all(
-    routeEntries.map(async (entry) => {
-      const routeDir = path.join(distRoot, entry.route.replace(/^\//, ''));
-      await fs.mkdir(routeDir, { recursive: true });
-      await fs.writeFile(path.join(routeDir, 'index.html'), applyRouteMeta(indexHtml, entry));
-      return entry.route;
+    routeEntries.flatMap((entry) => {
+      const routeHtml = applyRouteMeta(indexHtml, entry);
+
+      return routeOutputPaths(entry.route).map(async (outputPath) => {
+        const targetPath = path.join(distRoot, outputPath);
+        await fs.mkdir(path.dirname(targetPath), { recursive: true });
+        await fs.writeFile(targetPath, routeHtml);
+        return outputPath;
+      });
     }),
   );
 

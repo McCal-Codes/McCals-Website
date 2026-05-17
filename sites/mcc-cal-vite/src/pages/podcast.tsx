@@ -9,6 +9,7 @@ import {
   SPOTIFY_SHOW,
   APPLE_SHOW,
   FEATURED,
+  FALLBACK,
   PAGE_SIZE,
   type PlayerState,
   extractGuest,
@@ -173,12 +174,20 @@ export default function PodcastPage() {
 
   const currentEp = episodes.find(e => e.guid === currentGuid);
 
-  const featuredPicks = Object.entries(FEATURED)
+  const featuredPicksFromEpisodes = Object.entries(FEATURED)
     .map(([key, meta]) => {
       const ep = episodes.find(e => e.guid === key || slugify(e.guid) === key);
       return ep ? { ep, meta } : null;
     })
     .filter((x): x is { ep: typeof episodes[number]; meta: typeof FEATURED[string] } => x !== null);
+  const featuredPicks = featuredPicksFromEpisodes.length > 0
+    ? featuredPicksFromEpisodes
+    : Object.entries(FEATURED)
+        .map(([key, meta]) => {
+          const ep = FALLBACK.find(e => e.guid === key || slugify(e.guid) === key);
+          return ep ? { ep, meta } : null;
+        })
+        .filter((x): x is { ep: typeof FALLBACK[number]; meta: typeof FEATURED[string] } => x !== null);
 
   const npPct = isFinite(playerState.duration) && playerState.duration > 0
     ? Math.min(100, (playerState.currentTime / playerState.duration) * 100) : 0;

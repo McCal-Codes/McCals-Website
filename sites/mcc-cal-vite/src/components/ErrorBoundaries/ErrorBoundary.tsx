@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
+import { logError } from '@/utils/logger';
 import styles from './ErrorBoundary.module.css';
 
 interface ErrorBoundaryProps {
@@ -29,8 +30,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       errorInfo,
     });
 
-    // Log error to monitoring service
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    logError('ErrorBoundary caught an error:', error, errorInfo);
     
     // Call custom error handler if provided
     if (this.props.onError) {

@@ -6,6 +6,7 @@ import { usePageMeta } from '@/hooks/usePageMeta';
 import { useReadingProgress } from '@/hooks/useReadingProgress';
 import { injectCriticalCSS } from '@/utils/criticalCSS';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { logError, logWarning } from '@/utils/logger';
 
 // Dynamic import for PDFViewer to reduce initial bundle size
 const PDFViewer = lazy(() => import('@/components/PDFViewer').then(module => ({ default: module.PDFViewer })));
@@ -33,12 +34,12 @@ function validateSiteUrl(url: string): string {
     const parsed = new URL(url);
     // Only allow https protocol and specific allowed domains
     if (parsed.protocol !== 'https:') {
-      console.warn('SITE_URL must use https protocol, falling back to default');
+      logWarning('SITE_URL must use https protocol, falling back to default');
       return 'https://mcc-cal.com';
     }
     return url.replace(/\/$/, '');
   } catch {
-    console.warn('Invalid SITE_URL, falling back to default');
+    logWarning('Invalid SITE_URL, falling back to default');
     return 'https://mcc-cal.com';
   }
 }
@@ -331,10 +332,7 @@ const TRAIL_IMAGE_MAP = new Map(
 function trailPhoto(id: TrailImage['id']) {
   const frame = TRAIL_IMAGE_MAP.get(id);
   if (!frame) {
-    // Log to console only in development
-    if (import.meta.env.DEV) {
-      console.error(`Unknown trail frame: ${id}`);
-    }
+    logError(`Unknown trail frame: ${id}`);
     // Return cached fallback image data (data URI - always available)
     return {
       ...FALLBACK_IMAGE_DATA,
@@ -1148,4 +1146,3 @@ const OneNationDividedPage = () => {
 };
 
 export default OneNationDividedPage;
-

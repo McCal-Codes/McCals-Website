@@ -147,10 +147,10 @@ const HomePage = () => {
   });
 
   return (
-    <div className="site-layout pt-0">
+    <div className="site-layout site-layout--home pt-0">
       <Nav />
       <main className="site-main mt-0">
-        <Suspense fallback={<div className="hero-carousel-skeleton" style={{ height: '70vh', background: 'linear-gradient(135deg, #1f2937 0%, #374151 100%)' }} />}>
+        <Suspense fallback={<div className="hero-carousel-skeleton" style={{ height: '112svh', background: 'linear-gradient(135deg, #1f2937 0%, #374151 100%)' }} />}>
           <HeroCarousel />
         </Suspense>
       </main>

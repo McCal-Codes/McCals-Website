@@ -63,9 +63,18 @@ body {
   display: flex;
   flex-direction: column;
 }
+.site-layout--standard {
+  padding-top: var(--mcc-nav-height);
+}
+.site-layout--home {
+  padding-top: 0;
+}
 .site-main {
   flex: 1 0 auto;
   margin-top: clamp(0px, -2vw, -20px);
+}
+.site-layout--standard .site-main {
+  min-height: calc(100svh - var(--mcc-nav-height));
 }
 .site-container {
   max-width: 1140px;

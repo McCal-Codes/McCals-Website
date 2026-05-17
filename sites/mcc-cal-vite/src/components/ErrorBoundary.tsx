@@ -1,5 +1,6 @@
 import { Component, type ReactNode } from 'react';
 import { track } from '@vercel/analytics/react';
+import { logError } from '@/utils/logger';
 
 interface Props {
   children: ReactNode;
@@ -26,10 +27,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Log to console in development
-    if (import.meta.env.DEV) {
-      console.error('ErrorBoundary caught an error:', error, errorInfo);
-    }
+    logError('ErrorBoundary caught an error:', error, errorInfo);
 
     // Track error with Vercel Analytics in production
     if (!import.meta.env.DEV) {

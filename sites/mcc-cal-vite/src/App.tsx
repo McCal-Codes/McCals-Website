@@ -3,6 +3,7 @@ import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-rou
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
+import PodcastPage from './pages/podcast';
 
 // Lazy load pages for code splitting
 const HomePage = lazy(() => import('./pages/index'));
@@ -15,7 +16,6 @@ const FeaturedWorkPage = lazy(() => import('./pages/featured-work'));
 const JournalismPage = lazy(() => import('./pages/journalism'));
 const NaturePage = lazy(() => import('./pages/nature'));
 const PortraitsPage = lazy(() => import('./pages/portraits'));
-const PodcastPage = lazy(() => import('./pages/podcast'));
 const VideoPage = lazy(() => import('./pages/video'));
 const AbridgedPage = lazy(() => import('./pages/abridged'));
 const ProjectsPage = lazy(() => import('./pages/projects'));
@@ -99,6 +99,8 @@ const router = createBrowserRouter([
           element: <RouteComponent />,
         };
       }),
+      { path: '/contact', element: <Navigate to="/contact-us" replace /> },
+      { path: '/schedule', element: <Navigate to="/grab-a-coffee" replace /> },
       { path: '/one-nation-divided', element: <Navigate to="/letting-me-go" replace /> },
       { path: '/authors/:authorId', element: <AuthorsPage /> },
       { path: '/blog/:slug', element: <BlogPage /> },

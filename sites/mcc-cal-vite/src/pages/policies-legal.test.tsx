@@ -6,7 +6,7 @@ import PoliciesLegalPage from './policies-legal';
 describe('PoliciesLegalPage', () => {
   it('includes graduation event and third-party mark notices in legal terms', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
         <PoliciesLegalPage />
       </MemoryRouter>,
     );

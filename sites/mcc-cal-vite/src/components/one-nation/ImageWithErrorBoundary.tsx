@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { useState } from 'react';
+import { logError } from '@/utils/logger';
 import styles from '@/pages/one-nation-divided.module.css';
 
 type ImageWithErrorBoundaryProps = {
@@ -43,7 +44,7 @@ export function ImageWithErrorBoundary({
     setHasError(true);
     setIsLoading(false);
     onError?.(error);
-    console.error('Image load error:', error);
+    logError('Image load error:', error);
   };
 
   if (hasError) {

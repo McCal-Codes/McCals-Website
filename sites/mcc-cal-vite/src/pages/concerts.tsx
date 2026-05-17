@@ -1,52 +1,16 @@
 import { useMemo, useState } from 'react';
 import { Layout } from '@/components';
-import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, imageUrl, portfolioStyles } from '@/components/portfolio';
+import { ConcertArtistSupport, PortfolioFilters, PortfolioGrid, sortPortfolioGroups, useManifest, portfolioStyles } from '@/components/portfolio';
 import EmptyState from '@/components/portfolio/EmptyState';
 import PortfolioSkeleton from '@/components/LoadingStates/PortfolioSkeleton';
-import type { PortfolioGroup } from '@/components/portfolio/types';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { generateSeoImageSchema, getPageSeo } from '@/content/pageSeo';
 import { generatePageGraph, generatePhotographyProviderSchema, generatePhotographyServiceSchema } from '@/utils/jsonLd';
+import { adaptConcerts, type ConcertManifest } from './concerts-adapter';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const ALL = 'All';
 const PAGE_SEO = getPageSeo('concerts', SITE_URL);
-
-interface ConcertBand {
-  bandName: string;
-  relativeFolderPath: string;
-  dateDisplay?: string;
-  concertDate?: { iso?: string };
-  totalImages: number;
-  images: string[];
-}
-
-interface ConcertManifest {
-  bands: ConcertBand[];
-}
-
-export function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
-  return manifest.bands.map((band) => {
-    const images = band.images.map((filename) => ({
-      url: imageUrl.concert(band.relativeFolderPath, filename),
-      filename,
-      alt: `${band.bandName} concert photo`,
-    }));
-
-    return {
-      id: `${band.relativeFolderPath}-${band.bandName}`
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-|-$/g, ''),
-      title: band.bandName,
-      dateDisplay: band.dateDisplay,
-      dateISO: band.concertDate?.iso,
-      category: 'Concert',
-      images,
-      coverImage: images[0],
-    };
-  });
-}
 
 export default function ConcertsPage() {
   const { data, status, error } = useManifest<ConcertManifest>('concerts');

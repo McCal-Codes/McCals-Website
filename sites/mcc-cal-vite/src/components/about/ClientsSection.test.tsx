@@ -26,7 +26,7 @@ describe('ClientsSection', () => {
 
   it('uses factual relationship copy and non-endorsement language', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
         <ClientsSection clientList={testClients} />
       </MemoryRouter>,
     );

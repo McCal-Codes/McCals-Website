@@ -2,6 +2,7 @@
  * Changelog Tracker
  * Automatically tracks widget updates and generates changelog entries
  */
+import { logWarning } from './logger';
 
 export interface ChangelogEntry {
   timestamp: string;
@@ -29,9 +30,7 @@ export function getChangelog(): ChangelogEntry[] {
     const stored = localStorage.getItem(CHANGELOG_STORAGE_KEY);
     return stored ? JSON.parse(stored) : [];
   } catch {
-    if (import.meta.env.DEV) {
-      console.warn('Failed to read changelog from localStorage');
-    }
+    logWarning('Failed to read changelog from localStorage');
     return [];
   }
 }
@@ -46,15 +45,16 @@ export function addChangelogEntry(
   notes?: string
 ): ChangelogEntry {
   const now = new Date();
+  const dateFormatOptions: Intl.DateTimeFormatOptions = {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  };
   const entry: ChangelogEntry = {
     timestamp: now.toISOString(),
-    date: now.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    } as any),
+    date: now.toLocaleDateString('en-US', dateFormatOptions),
     widget,
     version,
     action,
@@ -69,9 +69,7 @@ export function addChangelogEntry(
       const trimmed = changelog.slice(0, MAX_ENTRIES);
       localStorage.setItem(CHANGELOG_STORAGE_KEY, JSON.stringify(trimmed));
     } catch {
-      if (import.meta.env.DEV) {
-        console.warn('Failed to write changelog to localStorage');
-      }
+      logWarning('Failed to write changelog to localStorage');
     }
   }
 
@@ -86,9 +84,7 @@ export function clearChangelog(): void {
     try {
       localStorage.removeItem(CHANGELOG_STORAGE_KEY);
     } catch {
-      if (import.meta.env.DEV) {
-        console.warn('Failed to clear changelog');
-      }
+      logWarning('Failed to clear changelog');
     }
   }
 }
