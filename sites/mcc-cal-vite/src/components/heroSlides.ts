@@ -33,6 +33,20 @@ export interface HeroSeoImage {
 
 export const FAVORITE_HERO_SLIDES: HeroSlide[] = [
   {
+    title: 'Pittsburgh',
+    meta: 'Pittsburgh',
+    image: imageUrl.nature('Landscapes/Downtown Pittsburgh', 'IMGP7209.jpg'),
+    href: '/nature',
+    links: [
+      { url: '/nature', label: 'Nature' },
+      { url: '/featured-work', label: 'Featured Work' },
+    ],
+    cta: 'Pittsburgh',
+    alt: 'A large, steel truss bridge spans over a body of water at sunset, with trees and buildings visible below and in the background.',
+    focalPointMobile: { x: 0.6175632360483595, y: 0.464 },
+    focalPointDesktop: { x: 0.5, y: 0.5 },
+  },
+  {
     title: 'Politics',
     meta: 'Politics',
     image: imageUrl.journalism(
@@ -65,20 +79,6 @@ export const FAVORITE_HERO_SLIDES: HeroSlide[] = [
     alt: 'A farmer works in a garden during a Boyd Station photojournalism assignment.',
     focalPointMobile: { x: 0.54, y: 0.38 },
     focalPointDesktop: { x: 0.46, y: 0.5 },
-  },
-  {
-    title: 'Pittsburgh',
-    meta: 'Pittsburgh',
-    image: imageUrl.nature('Landscapes/Downtown Pittsburgh', 'IMGP7209.jpg'),
-    href: '/nature',
-    links: [
-      { url: '/nature', label: 'Nature' },
-      { url: '/featured-work', label: 'Featured Work' },
-    ],
-    cta: 'Pittsburgh',
-    alt: 'A large, steel truss bridge spans over a body of water at sunset, with trees and buildings visible below and in the background.',
-    focalPointMobile: { x: 0.6175632360483595, y: 0.464 },
-    focalPointDesktop: { x: 0.5, y: 0.5 },
   },
   {
     title: 'Portraits',
