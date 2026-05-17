@@ -221,6 +221,13 @@ function getCaptionForImage(captions, filename) {
     if (captions[alternate]) return captions[alternate];
   }
 
+  const normalizedFilename = filename.replace(/\./g, '').toLowerCase();
+  for (const [captionFilename, caption] of Object.entries(captions)) {
+    if (captionFilename.replace(/\./g, '').toLowerCase() === normalizedFilename) {
+      return caption;
+    }
+  }
+
   return null;
 }
 

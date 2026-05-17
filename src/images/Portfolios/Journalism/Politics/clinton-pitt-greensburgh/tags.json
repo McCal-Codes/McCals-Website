@@ -1,12 +1,16 @@
 {
-  "tags": ["Politics", "Published Work", "Presidential Campaign"],
+  "tags": [
+    "Politics",
+    "Published Work",
+    "Presidential Campaign"
+  ],
   "published": true,
   "date": "2024-10-29",
-  "description": "Hillary Clinton speaks at University of Pittsburgh Greensburg rally",
-  "caption": "Clinton campaign event at Pitt Greensburg",
+  "description": "Former President Bill Clinton campaigns for Democratic presidential nominee Kamala Harris at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024.",
+  "caption": "Former President Bill Clinton campaigns for Democratic presidential nominee Kamala Harris at the University of Pittsburgh at Greensburg in Greensburg, Pa., Oct. 29, 2024. (Photo by Caleb McCartney)",
   "outlet": "New York Post",
   "outletUrl": "https://nypost.com",
   "articleUrl": "",
-  "articleTitle": "Hillary Clinton Rallies Pittsburgh Voters",
+  "articleTitle": "Bill Clinton campaigns in Western Pennsylvania",
   "publishedDate": "2024-10-29"
 }
