@@ -196,7 +196,7 @@ const AccessibilityPage = () => {
   // Reading time calculation
   useEffect(() => {
     if (mainRef.current) {
-      const text = mainRef.current.innerText;
+      const text = mainRef.current.innerText ?? mainRef.current.textContent ?? '';
       const wordsPerMinute = 200;
       const minutes = Math.ceil(text.split(/\s+/).length / wordsPerMinute);
       setReadingTime(`Est. ${minutes} min read`);
@@ -258,6 +258,19 @@ const AccessibilityPage = () => {
       };
     }
   }, [navOpen]);
+
+  // Native hash scrolling can run before this lazy route finishes rendering.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const targetId = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+    if (!targetId) return;
+
+    document.getElementById(targetId)?.scrollIntoView({
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  }, []);
 
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
