@@ -69,4 +69,22 @@ describe('PortfolioCard', () => {
 
     expect(screen.getByText('2')).toBeInTheDocument();
   });
+
+  it('renders detail tags without repeating the category', () => {
+    render(
+      <PortfolioCard
+        group={{
+          ...mockGroup,
+          category: 'Graduation',
+          tags: ['Graduation', 'Commencement', 'University Event'],
+        }}
+        onOpen={() => {}}
+        onCopyLink={() => {}}
+      />
+    );
+
+    expect(screen.getByText('Commencement', { hidden: true })).toBeInTheDocument();
+    expect(screen.getByText('University Event', { hidden: true })).toBeInTheDocument();
+    expect(screen.getAllByText('Graduation', { hidden: true })).toHaveLength(1);
+  });
 });

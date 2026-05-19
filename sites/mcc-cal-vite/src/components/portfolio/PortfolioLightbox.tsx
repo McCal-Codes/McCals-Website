@@ -145,6 +145,9 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     group.images[0]?.description ??
     group.coverImage.caption ??
     group.images[0]?.caption;
+  const visibleTags = (group.tags ?? []).filter(
+    (tag) => tag.toLowerCase() !== group.category?.toLowerCase(),
+  );
   const zoomPercent = Math.round(zoom * 100);
 
   return (
@@ -312,6 +315,16 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
                 ) : (
                   <span>Published in {group.outletName}</span>
                 )}
+              </div>
+            )}
+
+            {visibleTags.length > 0 && (
+              <div className={portfolioStyles.pfCardTags}>
+                {visibleTags.map((tag) => (
+                  <span key={tag} className={portfolioStyles.pfCardTag}>
+                    {tag}
+                  </span>
+                ))}
               </div>
             )}
           </div>

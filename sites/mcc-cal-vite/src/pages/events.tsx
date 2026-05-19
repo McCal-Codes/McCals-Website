@@ -17,6 +17,7 @@ interface EventItem {
   title?: string;
   eventName: string;
   category?: string;
+  tags?: string[];
   dateDisplay?: string;
   dateISO?: string;
   folderPath?: string;
@@ -48,6 +49,7 @@ function adaptEvents(manifest: EventsManifest): PortfolioGroup[] {
       dateDisplay: item.dateDisplay,
       dateISO: item.dateISO,
       category: item.category,
+      tags: item.tags,
       images,
       coverImage: images[0],
     };

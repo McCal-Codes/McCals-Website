@@ -19,13 +19,12 @@
 .bio,
 .reviews,
 .clients,
-.fieldKit {
+.fieldKit,
+.sponsorSupport {
   --about-bg-glass: rgba(20, 20, 20, 0.7);
   --about-bg-glass-heavy: rgba(12, 12, 12, 0.88);
   --about-panel-border: rgba(255, 255, 255, 0.08);
-  --about-panel-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 24px 48px rgba(0, 0, 0, 0.28);
+  --about-panel-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 24px 48px rgba(0, 0, 0, 0.28);
   --about-text-primary: #f2efeb;
   --about-text-secondary: #d7d0c9;
   --about-text-muted: #9d948d;
@@ -263,7 +262,9 @@
   height: 18px;
   fill: currentColor;
   opacity: 0.85;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
   flex-shrink: 0;
 }
 
@@ -421,7 +422,9 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .stat:hover {
@@ -536,7 +539,7 @@
     padding: 0 16px;
     box-sizing: border-box;
   }
-  
+
   .testimonialCard {
     padding: 24px;
     gap: 16px;
@@ -588,11 +591,7 @@
   margin: 0;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
   backdrop-filter: blur(10px);
   box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.15),
@@ -879,6 +878,94 @@
   text-align: center;
 }
 
+/* ============================================
+   Sponsor Support
+   ============================================ */
+
+.sponsorSupport {
+  display: grid;
+  grid-template-columns: clamp(108px, 12vw, 132px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(16px, 3vw, 24px);
+  max-width: 760px;
+  margin: 22px auto 0;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.sponsorLogoWrap {
+  display: grid;
+  place-items: center;
+  min-height: 126px;
+  padding: 12px clamp(12px, 2vw, 18px) 12px 0;
+  border-right: 1px solid var(--about-line);
+  opacity: 1;
+}
+
+.sponsorLogoSurface {
+  display: grid;
+  place-items: center;
+  width: 106px;
+  aspect-ratio: 687 / 863;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.sponsorLogo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sponsorCopy {
+  display: grid;
+  gap: 8px;
+}
+
+.sponsorCopy .eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+
+.sponsorCopy h3 {
+  margin: 0;
+  color: var(--about-text-primary);
+  font-size: 1rem;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+
+.sponsorCopy p:not(.eyebrow) {
+  max-width: 66ch;
+  margin: 0;
+  color: var(--about-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.58;
+}
+
+.sponsorLink {
+  justify-self: start;
+  margin-top: 0;
+  color: var(--about-accent-strong);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s ease;
+}
+
+.sponsorLink:hover,
+.sponsorLink:focus-visible {
+  color: var(--about-text-primary);
+  outline: none;
+}
+
 /* Enhanced Client Cards */
 .clientCard {
   flex: 0 0 176px;
@@ -896,12 +983,7 @@
   background:
     radial-gradient(circle at 18% 14%, rgb(var(--client-accent) / 0.28), transparent 42%),
     radial-gradient(circle at 94% 86%, rgb(var(--client-accent-secondary) / 0.2), transparent 46%),
-    linear-gradient(
-      145deg,
-      #090909 0%,
-      #171717 58%,
-      rgb(var(--client-accent) / 0.14) 100%
-    );
+    linear-gradient(145deg, #090909 0%, #171717 58%, rgb(var(--client-accent) / 0.14) 100%);
   box-shadow:
     0 10px 26px rgba(0, 0, 0, 0.26),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -1004,8 +1086,7 @@
   object-fit: contain;
   border-radius: var(--client-logo-radius);
   transition: all 0.3s ease;
-  filter:
-    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.16))
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.16))
     drop-shadow(0 10px 16px rgba(0, 0, 0, 0.16));
 }
 
@@ -1190,13 +1271,13 @@
 :global(body[data-theme='light']) .bio,
 :global(body[data-theme='light']) .reviews,
 :global(body[data-theme='light']) .clients,
-:global(body[data-theme='light']) .fieldKit {
+:global(body[data-theme='light']) .fieldKit,
+:global(body[data-theme='light']) .sponsorSupport {
   --about-bg-glass: rgba(255, 251, 247, 0.9);
   --about-bg-glass-heavy: rgba(255, 255, 255, 0.96);
   --about-panel-border: rgba(90, 67, 47, 0.1);
   --about-panel-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
-    0 18px 34px rgba(74, 52, 34, 0.08);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4), 0 18px 34px rgba(74, 52, 34, 0.08);
   --about-text-primary: #1e1a16;
   --about-text-secondary: #4f4236;
   --about-text-muted: #7f6d5d;
@@ -1210,12 +1291,28 @@
 :global(body[data-theme='light']) .menuPanel,
 :global(body[data-theme='light']) .stat,
 :global(body[data-theme='light']) .reviewCard,
-:global(body[data-theme='light']) .fieldKitCard {
+:global(body[data-theme='light']) .fieldKitCard,
+:global(body[data-theme='light']) .sponsorSupport,
+:global(body[data-theme='light']) .sponsorLogoWrap {
   border-color: rgba(90, 67, 47, 0.1);
 }
 
 :global(body[data-theme='light']) .fieldKitCard {
   background: rgba(90, 67, 47, 0.035);
+}
+
+:global(body[data-theme='light']) .sponsorSupport {
+  background: rgba(90, 67, 47, 0.025);
+}
+
+:global(body[data-theme='light']) .sponsorLogoSurface {
+  border-color: rgba(90, 67, 47, 0.12);
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: 0 10px 24px rgba(74, 52, 34, 0.1);
+}
+
+:global(body[data-theme='light']) .sponsorLogo {
+  content: url('/about/sponsors/scrimshaw-media-logo.png');
 }
 
 :global(body[data-theme='light']) .fieldKitCard:hover {
@@ -1244,12 +1341,7 @@
   background:
     radial-gradient(circle at 16% 12%, rgb(var(--client-accent) / 0.28), transparent 42%),
     radial-gradient(circle at 96% 88%, rgb(var(--client-accent-secondary) / 0.2), transparent 46%),
-    linear-gradient(
-      145deg,
-      #090909 0%,
-      #171717 58%,
-      rgb(var(--client-accent) / 0.14) 100%
-    );
+    linear-gradient(145deg, #090909 0%, #171717 58%, rgb(var(--client-accent) / 0.14) 100%);
   box-shadow: 0 14px 30px rgba(74, 52, 34, 0.18);
 }
 
@@ -1272,8 +1364,7 @@
 
 :global(body[data-theme='light']) .clientImageWrapper img {
   transition: all 0.3s ease;
-  filter:
-    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.16))
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.16))
     drop-shadow(0 10px 16px rgba(0, 0, 0, 0.16));
 }
 
@@ -1298,25 +1389,25 @@
     flex: 0 0 100%;
     padding: 0 16px;
   }
-  
+
   .testimonialsCarousel {
     margin: 0 -16px;
     padding: 0 16px;
   }
-  
+
   .testimonials {
     padding: 20px 16px;
   }
-  
+
   .testimonialsHeader {
     gap: 8px;
     margin-bottom: 20px;
   }
-  
+
   .testimonialsHeader h2 {
     font-size: 1.5rem;
   }
-  
+
   .testimonialsSubtitle {
     font-size: 1rem;
   }
@@ -1485,38 +1576,38 @@
     animation-duration: 12s;
     gap: 14px;
   }
-  
+
   /* Testimonials carousel mobile */
   .testimonialSlide {
     flex: 0 0 100%;
     padding: 0 16px;
   }
-  
+
   .carouselArrow {
     width: 44px;
     height: 44px;
     min-height: 44px;
   }
-  
+
   .carouselArrow svg {
     width: 20px;
     height: 20px;
   }
-  
+
   .carouselArrowPrev {
     left: 4px;
   }
-  
+
   .carouselArrowNext {
     right: 4px;
   }
-  
+
   .testimonialCard {
     padding: 20px;
     gap: 16px;
     border-radius: 16px;
   }
-  
+
   .testimonialHeader {
     gap: 16px;
     margin-bottom: 12px;
@@ -1538,26 +1629,63 @@
   .testimonialRole {
     font-size: 0.9rem;
   }
-  
+
   .testimonialQuote {
     font-size: 1rem;
     line-height: 1.6;
   }
-  
+
   .testimonialsHeader h2 {
     font-size: 1.5rem;
   }
-  
+
   .testimonialsSubtitle {
     font-size: 1rem;
   }
-  
+
   .testimonials {
     padding: 20px 16px;
   }
-  
+
   .clients {
     padding: 20px 16px;
+  }
+
+  .sponsorSupport {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 16px;
+  }
+
+  .sponsorLogoWrap {
+    justify-items: start;
+    width: 100%;
+    min-height: 0;
+    padding: 0 0 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--about-line);
+    opacity: 1;
+  }
+
+  .sponsorLogoSurface {
+    width: 88px;
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .sponsorCopy {
+    display: grid;
+    gap: 7px;
+  }
+
+  .sponsorCopy .eyebrow {
+    font-size: 0.66rem;
+    letter-spacing: 0.11em;
+  }
+
+  .sponsorCopy h3 {
+    font-size: 0.95rem;
   }
 
   .fieldKit {
@@ -1572,46 +1700,46 @@
   .fieldKitGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .bio {
     padding: 20px 16px;
   }
-  
+
   .bioGrid {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
   }
-  
+
   .bioPhoto {
     order: -1;
     margin: 0 auto 8px;
     justify-self: center;
   }
-  
+
   .photoWrapper {
     width: 180px;
     height: 225px;
     margin: 0 auto;
     aspect-ratio: 4 / 5;
   }
-  
+
   .photoWrapper img {
     opacity: 1;
     transform: scale(1);
   }
-  
+
   .bioContent {
     gap: 16px;
     text-align: center;
   }
-  
+
   .bioContent h1 {
     font-size: 1.5rem;
     line-height: 1.3;
   }
-  
+
   .bioText p {
     font-size: 1rem;
     line-height: 1.7;
@@ -1721,7 +1849,11 @@
     border-radius: 12px;
     background:
       radial-gradient(circle at 16% 12%, rgb(var(--client-accent) / 0.28), transparent 42%),
-      radial-gradient(circle at 96% 88%, rgb(var(--client-accent-secondary) / 0.2), transparent 46%),
+      radial-gradient(
+        circle at 96% 88%,
+        rgb(var(--client-accent-secondary) / 0.2),
+        transparent 46%
+      ),
       linear-gradient(145deg, #090909 0%, #171717 58%, rgb(var(--client-accent) / 0.14) 100%);
     border: 1px solid rgb(var(--client-accent) / 0.42);
   }
@@ -1729,14 +1861,17 @@
   .clientsGrid .clientCard.darkLogo {
     background:
       radial-gradient(circle at 18% 18%, rgb(var(--client-accent) / 0.28), transparent 42%),
-      radial-gradient(circle at 92% 84%, rgb(var(--client-accent-secondary) / 0.22), transparent 46%),
+      radial-gradient(
+        circle at 92% 84%,
+        rgb(var(--client-accent-secondary) / 0.22),
+        transparent 46%
+      ),
       linear-gradient(145deg, #050505 0%, #151515 58%, #0a0a0a 100%);
   }
 
   .clientsGrid .clientImageWrapper img {
     max-height: min(var(--client-logo-max-height), 70px);
-    filter:
-      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.16))
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.16))
       drop-shadow(0 10px 16px rgba(0, 0, 0, 0.16));
   }
 

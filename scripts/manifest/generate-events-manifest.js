@@ -167,6 +167,38 @@ async function exists(target) {
   }
 }
 
+async function loadEventMetadata(eventDir) {
+  const metadataPath = path.join(eventDir, 'tags.json');
+
+  if (!(await exists(metadataPath))) {
+    return null;
+  }
+
+  try {
+    const content = await fsp.readFile(metadataPath, 'utf8');
+    return JSON.parse(content);
+  } catch (error) {
+    console.warn(
+      '[WARN] Invalid event tags metadata: - generate-events-manifest.js',
+      path.relative(process.cwd(), metadataPath),
+      error && error.message,
+    );
+    return null;
+  }
+}
+
+function normaliseTags(tags) {
+  if (!Array.isArray(tags)) return [];
+
+  return [
+    ...new Set(
+      tags
+        .map((tag) => String(tag).trim())
+        .filter(Boolean),
+    ),
+  ];
+}
+
 async function main() {
   const argv = process.argv.slice(2);
   const rootFlag = argv.indexOf('--root');
@@ -200,6 +232,7 @@ async function main() {
     if (!files.length) continue;
 
     const eventName = titleCase(dir);
+    const metadata = await loadEventMetadata(path.join(absRoot, dir));
     const folderSegments = [];
     if (relativeRoot && relativeRoot !== '' && relativeRoot !== '.') {
       folderSegments.push(relativeRoot);
@@ -225,9 +258,16 @@ async function main() {
     const dateSource = override ? override.dateSource : dateInfo.source;
     const dateConfidence = override ? override.dateConfidence : dateInfo.confidence;
 
+    const category =
+      typeof metadata?.category === 'string' && metadata.category.trim()
+        ? metadata.category.trim()
+        : deriveCategory(dir);
+    const tags = normaliseTags([category, ...normaliseTags(metadata?.tags)]);
+
     const eventEntry = {
       eventName,
-      category: deriveCategory(dir),
+      category,
+      tags,
       dateDisplay,
       dateISO: dateInfo.iso,
       date: {
@@ -274,6 +314,7 @@ async function main() {
       title: e.eventName,
       eventName: e.eventName,
       category: e.category,
+      tags: e.tags,
       dateDisplay: e.dateDisplay,
       dateISO: e.dateISO,
       date: e.date,
@@ -301,15 +342,20 @@ async function main() {
     '[OK] Wrote manifest (v' + manifestVersion + '): - generate-events-manifest.js:225',
     path.relative(process.cwd(), outFile),
   );
-  try {
-    await notify('events', {
-      path: outFile,
-      written: true,
-      generatedAt,
-      totalEvents: manifest.totalEvents,
-    });
-  } catch (err) {
-    console.warn('Failed to notify manifest webhook (events):', err && err.message);
+  const canonicalRoot = path.resolve(DEFAULT_ROOT);
+  const shouldNotify =
+    absRoot === canonicalRoot || String(process.env.MANIFEST_WEBHOOK_ALWAYS).toLowerCase() === 'true';
+  if (shouldNotify) {
+    try {
+      await notify('events', {
+        path: outFile,
+        written: true,
+        generatedAt,
+        totalEvents: manifest.totalEvents,
+      });
+    } catch (err) {
+      console.warn('Failed to notify manifest webhook (events):', err && err.message);
+    }
   }
 }
 

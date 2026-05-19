@@ -43,16 +43,49 @@ describe('ClientsSection', () => {
       ),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Logos are shown to identify work relationships, publications, or assignments/i),
+      screen.getByText(
+        /Logos are shown to identify work relationships, publications, or assignments/i,
+      ),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Display does not imply sponsorship, endorsement, or official vendor status/i),
+      screen.getByText(
+        /Display does not imply sponsorship, endorsement, or official vendor status/i,
+      ),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        name: 'Supported by Scrimshaw Media',
+      }),
+    ).toBeInTheDocument();
+    const sponsorLogo = screen.getByRole('img', { name: 'Scrimshaw Media logo.' });
+    expect(sponsorLogo).toHaveAttribute(
+      'src',
+      '/about/sponsors/scrimshaw-media-logo-inverse.png',
+    );
+    expect(
+      screen.getByText(
+        /McCal Media is proudly supported by Scrimshaw Media, a Pittsburgh-based media company/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', {
+        name: 'Visit Scrimshaw Media',
+      }),
+    ).toHaveAttribute('href', 'https://www.scrimshawphoto.com/');
 
     expect(
       screen.getByRole('link', {
         name: /View related work or organization site for Example University/i,
       }),
     ).toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('heading', { name: 'Supported by Scrimshaw Media' })
+        .compareDocumentPosition(
+          screen.getByRole('link', {
+            name: /View related work or organization site for Example University/i,
+          }),
+        ) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 });

@@ -90,6 +90,9 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
     e.stopPropagation();
     onCopyLink(group.id);
   };
+  const visibleTags = (group.tags ?? []).filter(
+    (tag) => tag.toLowerCase() !== group.category?.toLowerCase(),
+  );
 
   return (
     <article
@@ -152,6 +155,15 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
           )}
           {group.coverImage.caption && (
             <p className={portfolioStyles.pfCaptionRailDescription}>{group.coverImage.caption}</p>
+          )}
+          {visibleTags.length > 0 && (
+            <div className={portfolioStyles.pfCardTags}>
+              {visibleTags.map((tag) => (
+                <span key={tag} className={portfolioStyles.pfCardTag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
           )}
         </div>
       </div>

@@ -15,6 +15,7 @@ interface EventImage {
 interface EventItem {
   eventName: string;
   category?: string;
+  tags?: string[];
   dateDisplay?: string;
   dateISO?: string;
   images: EventImage[];
@@ -42,6 +43,7 @@ function normalise(events: EventItem[]): PortfolioGroup[] {
       dateDisplay: event.dateDisplay,
       dateISO: event.dateISO,
       category: event.category,
+      tags: event.tags,
       images,
       coverImage: images[0],
     };
