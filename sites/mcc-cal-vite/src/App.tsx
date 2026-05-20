@@ -3,10 +3,10 @@ import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-rou
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
+import HomePage from './pages/index';
 import PodcastPage from './pages/podcast';
 
 // Lazy load pages for code splitting
-const HomePage = lazy(() => import('./pages/index'));
 const AboutPage = lazy(() => import('./pages/about'));
 const AuthorsPage = lazy(() => import('./pages/authors'));
 const BlogPage = lazy(() => import('./pages/blog'));
@@ -60,14 +60,37 @@ const staticRouteComponents = {
 function PageLoader() {
   return (
     <div
+      aria-live="polite"
       style={{
-        minHeight: '50vh',
+        minHeight: '100svh',
+        paddingTop: 'var(--mcc-nav-height)',
+        background: 'var(--mcc-bg-elevated)',
+        color: 'var(--mcc-fg)',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'column',
       }}
     >
-      <span>Loading...</span>
+      <div
+        className="mcc-nav-shell"
+        aria-hidden="true"
+        style={{
+          minHeight: 'var(--mcc-nav-height)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        role="status"
+        style={{
+          minHeight: 'calc(100svh - var(--mcc-nav-height))',
+          display: 'flex',
+          flex: '1 0 auto',
+          padding: '0 clamp(20px, 4vw, 28px)',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <span>Loading...</span>
+      </div>
     </div>
   );
 }

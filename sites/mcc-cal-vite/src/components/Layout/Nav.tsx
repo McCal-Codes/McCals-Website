@@ -1,5 +1,5 @@
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   PROJECT_NAV_ITEMS,
   WORK_NAV_ITEMS,
@@ -35,10 +35,12 @@ const Nav: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateHeight = () => {
       const h = navRef.current?.getBoundingClientRect().height || 0;
-      document.documentElement.style.setProperty('--mcc-nav-height', `${h}px`);
+      if (h > 0) {
+        document.documentElement.style.setProperty('--mcc-nav-height', `${h}px`);
+      }
     };
     updateHeight();
     window.addEventListener('load', updateHeight, { passive: true });
