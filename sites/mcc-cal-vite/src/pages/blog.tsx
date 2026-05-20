@@ -180,7 +180,9 @@ export default function BlogPage() {
               All stories
             </Link>
 
-            {postLoading && <div className="blog-status">Loading story...</div>}
+            {postLoading && !resolvedDocumentPost && (
+              <div className="blog-status">Loading story...</div>
+            )}
 
             {!postLoading && (postError || !resolvedDocumentPost) && (
               <div className="blog-message blog-message--error">
@@ -188,7 +190,7 @@ export default function BlogPage() {
               </div>
             )}
 
-            {!postLoading && resolvedDocumentPost && (
+            {resolvedDocumentPost && (
               <>
                 <header className="story__header">
                   {resolvedDocumentPost.category && (
