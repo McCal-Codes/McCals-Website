@@ -23,6 +23,19 @@ describe('imageOptimization', () => {
     );
   });
 
+  it('routes about and blog content images through the Vercel image optimizer', () => {
+    expect(getOptimizedImageUrl('/about/caleb-mccartney-photo.jpg', { width: 640 })).toBe(
+      '/_vercel/image?url=%2Fabout%2Fcaleb-mccartney-photo.jpg&q=80&w=640',
+    );
+    expect(
+      getOptimizedImageUrl('/content/blog-static/posts/fear-of-emotion/images/lead.jpg', {
+        width: 960,
+      }),
+    ).toBe(
+      '/_vercel/image?url=%2Fcontent%2Fblog-static%2Fposts%2Ffear-of-emotion%2Fimages%2Flead.jpg&q=80&w=960',
+    );
+  });
+
   it('keeps every generated responsive portfolio width allowed by Vercel', () => {
     const vercelConfig = JSON.parse(
       readFileSync(resolve(process.cwd(), 'vercel.json'), 'utf8'),
@@ -45,6 +58,12 @@ describe('imageOptimization', () => {
 
     expect(vercelConfig.images?.sizes).toEqual(
       expect.arrayContaining(generatedPortfolioWidths),
+    );
+    expect(vercelConfig.images?.localPatterns).toEqual(
+      expect.arrayContaining([
+        { pathname: '^/about/.*$', search: '' },
+        { pathname: '^/content/blog-static/.*$', search: '' },
+      ]),
     );
   });
 });

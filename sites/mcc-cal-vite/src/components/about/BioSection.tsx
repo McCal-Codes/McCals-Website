@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '@/utils/imageOptimization';
 import { stats } from './aboutData';
 import styles from './about-sections.module.css';
 
@@ -16,6 +17,14 @@ export function BioSection({ className = '' }: BioSectionProps) {
   const [imageError, setImageError] = useState(false);
   const contactMenuRef = useRef<HTMLDivElement>(null);
   const documentsMenuRef = useRef<HTMLDivElement>(null);
+  const aboutImageSrc = useMemo(
+    () => getOptimizedImageUrl(ABOUT_IMAGE, { width: 640, quality: 82 }),
+    [],
+  );
+  const aboutImageSrcSet = useMemo(
+    () => getResponsiveImageSrcSet(ABOUT_IMAGE, [320, 480, 640]),
+    [],
+  );
 
   // Close menus on outside click
   useEffect(() => {
@@ -62,9 +71,12 @@ export function BioSection({ className = '' }: BioSectionProps) {
           <div className={`${styles.photoWrapper} ${imageLoaded ? styles.loaded : ''}`}>
             {!imageError ? (
               <img
-                src={ABOUT_IMAGE}
+                src={aboutImageSrc}
+                srcSet={aboutImageSrcSet}
+                sizes="(max-width: 640px) 180px, min(30vw, 320px)"
                 alt="Black-and-white portrait of Caleb McCartney."
                 loading="eager"
+                decoding="sync"
                 fetchPriority="high"
                 onLoad={() => setImageLoaded(true)}
                 onError={() => setImageError(true)}

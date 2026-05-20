@@ -10,7 +10,11 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
 
 const enableVercelAnalytics = import.meta.env.PROD && import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS === 'true';
-const enableSpeedInsights = import.meta.env.PROD && import.meta.env.VITE_ENABLE_VERCEL_SPEED_INSIGHTS !== 'false';
+const isVercelRuntime = ['preview', 'production'].includes(
+  import.meta.env.VITE_VERCEL_ENV ?? '',
+);
+const enableSpeedInsights =
+  import.meta.env.PROD && isVercelRuntime && import.meta.env.VITE_ENABLE_VERCEL_SPEED_INSIGHTS !== 'false';
 
 // Initialize Vercel Analytics for route tracking
 if (enableVercelAnalytics) {

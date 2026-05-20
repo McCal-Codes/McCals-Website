@@ -37,6 +37,9 @@ export default function StoryCard({ post, author, variant = 'default' }: StoryCa
               className="blog-lead__img"
               loading="eager"
               fetchPriority="high"
+              optimizedWidth={1280}
+              sizes="(max-width: 760px) 100vw, 66vw"
+              srcSetWidths={[640, 960, 1280, 1600]}
               placeholderClassName="blog-card__placeholder"
             />
           ) : (
@@ -65,6 +68,9 @@ export default function StoryCard({ post, author, variant = 'default' }: StoryCa
               alt={post.leadImageAlt || post.title}
               className="blog-sidebar__thumb"
               loading="lazy"
+              optimizedWidth={320}
+              sizes="96px"
+              srcSetWidths={[160, 320]}
               placeholderClassName="blog-sidebar__thumb blog-sidebar__thumb--placeholder"
             />
           ) : (
@@ -98,6 +104,9 @@ export default function StoryCard({ post, author, variant = 'default' }: StoryCa
             alt={post.leadImageAlt || post.title}
             className="blog-card__image"
             loading="lazy"
+            optimizedWidth={640}
+            sizes="(max-width: 760px) 100vw, 33vw"
+            srcSetWidths={[320, 480, 640, 960]}
             placeholderClassName="blog-card__placeholder"
           />
         ) : (

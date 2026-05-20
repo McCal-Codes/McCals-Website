@@ -12,6 +12,7 @@
     "build": "tsc -b && node scripts/generate-social-images.js && vite build && node scripts/generate-route-meta.js",
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist",
+    "perf:budget": "node scripts/check-performance-budget.js",
     "test": "vitest run",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",

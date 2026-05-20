@@ -210,6 +210,9 @@ export default function BlogPage() {
                       className="story__lead-image"
                       loading="eager"
                       fetchPriority="high"
+                      optimizedWidth={1440}
+                      sizes="(max-width: 760px) 100vw, min(100vw, 920px)"
+                      srcSetWidths={[640, 960, 1280, 1440, 1600]}
                       placeholderClassName="blog-card__placeholder"
                     />
                     {resolvedDocumentPost.leadImageCaption && (
