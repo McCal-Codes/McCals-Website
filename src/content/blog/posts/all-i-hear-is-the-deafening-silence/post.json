@@ -7,7 +7,7 @@
   "excerpt": "A short thesis fragment about fear, ego, and the noise that remains after being broken down.",
   "leadImage": "images/lead.jpg",
   "leadImageAlt": "Night landscape of Seneca Rocks under a dark sky in West Virginia.",
-  "leadImageCaption": "Night landscape of Seneca Rocks in West Virginia.",
+  "leadImageCaption": "Seneca Rocks rises under a dark sky in Pendleton County, W.Va. (Photo by Caleb McCartney)",
   "published": true,
   "tags": [
     "Thesis",
@@ -15,10 +15,19 @@
     "Fear",
     "Identity"
   ],
+  "sources": [
+    {
+      "citation": "Substance Abuse and Mental Health Services Administration. (n.d.). Trauma and violence: What is trauma and its effects? Retrieved May 20, 2026, from https://www.samhsa.gov/find-help/trauma",
+      "title": "Trauma and Violence: What Is Trauma and Its Effects?",
+      "url": "https://www.samhsa.gov/find-help/trauma",
+      "publisher": "Substance Abuse and Mental Health Services Administration",
+      "accessedDate": "2026-05-20"
+    }
+  ],
   "body": [
     {
       "type": "text",
-      "content": "Looking back, I hear nothing but the teeth clattering beyond my years. My first year was nothing but confined fear of what was to come of my ego. My existence was thwarted beyond recognition, to the point of being broken down to the core of my being."
+      "content": "Looking back, I hear the teeth clattering beyond my years. My first year was shaped by confined fear and by the threat of what might happen to my ego if I let it show too much. My existence felt thwarted beyond recognition, broken down to the core of who I was trying to become."
     }
   ]
 }

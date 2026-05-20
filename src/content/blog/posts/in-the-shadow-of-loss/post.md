@@ -8,27 +8,38 @@ excerpt: "After several deaths in quick succession, grief stopped arriving as a 
 leadImage: "images/lead.jpg"
 leadImageFallback: "images/lead.jpg"
 leadImageAlt: "A red-roof barn sits beyond a fence line in a quiet hillside landscape."
-leadImageCaption: "A quiet hillside and weathered barn hold the frame in soft evening light."
+leadImageCaption: "A red-roof barn sits beyond a fence line in soft evening light. (Photo by Caleb McCartney)"
 published: true
 tags:
   - Death
   - Emotional
   - Loss
+sources:
+  - citation: "Stroebe, M., & Schut, H. (1999). The dual process model of coping with bereavement: Rationale and description. Death Studies, 23(3), 197-224. https://doi.org/10.1080/074811899201046"
+    title: "The Dual Process Model of Coping with Bereavement"
+    url: "https://www.tandfonline.com/doi/abs/10.1080/074811899201046"
+    publisher: "Death Studies"
+    publishedDate: "1999"
+  - citation: "Stroebe, M., & Schut, H. (2010). The dual process model of coping with bereavement: A decade on. Omega: Journal of Death and Dying, 61(4), 273-289. https://doi.org/10.2190/OM.61.4.b"
+    title: "The Dual Process Model of Coping with Bereavement: A Decade On"
+    url: "https://pubmed.ncbi.nlm.nih.gov/21058610/"
+    publisher: "Omega: Journal of Death and Dying"
+    publishedDate: "2010"
 ---
 
-Honestly, it's been a journey through not just one or two but numerous deaths within a short span of a year and a half. While I understand that death is inevitable as we grow older, nothing could have prepared me for this. As it all began to unfold, the grieving process for one loved one was quickly overshadowed by another loss, making the already unforgiving process even more difficult. Creating this piece allowed me to honestly confront what death means to me and explore my relationship with it. Experiencing one death is hard enough, but enduring multiple losses in such a brief period diminishes one's ability to cope with the turmoil that comes from losing these relationships.
+It has been a journey through not just one or two deaths, but numerous deaths within a year and a half. I understand that death is inevitable as we grow older, but nothing prepared me for this. As it began to unfold, the grieving process for one loved one was quickly overshadowed by another loss, making an already unforgiving process even more difficult. Creating this piece gave me a way to confront what death means to me and to examine my relationship with it. Experiencing one death is hard enough. Enduring several in such a brief period diminishes a person's ability to cope with the turmoil that comes from losing those relationships.
 
 This exploration of death and grief through my art led to moments of profound connection, like when I found myself in the photo studio speaking with my significant other's father, who is represented by the golden prayer hands in the image. It is strange how quickly we give objects human weight once they become tied to the people we miss.
 
-As I continued to delve into this deeply personal project, navigating my relationship with death, I never anticipated that I would experience yet another loss while still creating it.
+As I continued this deeply personal project, navigating my relationship with death, I never anticipated that I would experience yet another loss while still creating it.
 
-It was a day like any other. I woke up with plans to meet a friend for coffee, where we would talk about his involvement in this project. There is something strange about death: it catches you off guard even when you are not expecting it and leaves you with an unsettling sense of powerlessness. Mid-conversation at the coffee shop, I got a call. "Hell-" I barely began to say before I was interrupted: "Great Grandma passed in her sleep last night." When I heard those words, it was as if a looming shadow appeared behind me, placing a heavy weight in my hands. Without hesitation, I took it and sat quietly with the burden while the shadow lingered, waiting for my reaction, whether I would break down or set it aside as I had with the other losses in my life.
+It was a day like any other. I woke up with plans to meet a friend for coffee, where we would talk about his involvement in this project. There is something strange about death: it catches you off guard even when you are not expecting it and leaves you with an unsettling sense of powerlessness. Mid-conversation at the coffee shop, I got a call. "Hello," I barely began to say before I was interrupted: "Great Grandma passed in her sleep last night." When I heard those words, it was as if a shadow appeared behind me, placing a heavy weight in my hands. Without hesitation, I took it and sat quietly with the burden while the shadow lingered, waiting for my reaction, whether I would break down or set it aside as I had with the other losses in my life.
 
 > Death catches you off guard, even when you are not expecting it, and leaves you with an unsettling sense of powerlessness.
 
-As the wheels of my car slowly roll into the funeral home's parking lot, gravel crunching audibly heard and felt through the pedals, I turn behind as if someone said my name. That same tall looming shadow is sitting there; he taps me and hands me that weight, and this foreboding silence occurs in my voice as if there was nothing right I could say despite my great-grandmother's death.
+As the wheels of my car slowly rolled into the funeral home's parking lot, gravel crunching beneath the tires and vibrating through the pedals, I turned as if someone had said my name. That same looming shadow was there. It tapped me and handed me the weight again. A foreboding silence entered my voice, as if there was nothing right I could say after my great-grandmother's death.
 
-Acceptance is perhaps the hardest challenge in grief: coming to terms with the reality that death is beyond our control. As I entered the funeral home, a profound sense of melancholy settled over me. I found myself seated before the coffin, hesitating to look inside. When I finally did, I saw her lying there, devoid of life. The vibrant humor and energy that once animated her were gone, replaced by a weight that seemed to pin me in place.
+Acceptance may be the hardest challenge in grief: coming to terms with the reality that death is beyond our control. Bereavement researchers Margaret Stroebe and Henk Schut describe grief as a process that moves between confronting loss and trying to restore daily life, rather than a clean sequence of stages. That felt accurate as I entered the funeral home. A profound melancholy settled over me. I found myself seated before the coffin, hesitating to look inside. When I finally did, I saw her lying there, devoid of life. The vibrant humor and energy that once animated her were gone, replaced by a weight that seemed to pin me in place.
 
 Amid that suffocating grief, I felt an urgent need to move, to find some way to process the torrent of emotion rushing through me. Instinctively, I reached for my camera and began to walk. There was no plan and no clear subject in mind, only the compulsion to capture something that might contain what I was feeling. It was as if I were trying to distill the chaos into a frame.
 

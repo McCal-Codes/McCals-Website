@@ -7,7 +7,7 @@ category: "Thesis"
 excerpt: "A poem about trauma, myth, and the way the body carries what language struggles to name."
 leadImage: "images/lead.jpg"
 leadImageAlt: "Studio portrait from a commercial mock shoot with Danny Herz."
-leadImageCaption: "Studio portrait from a commercial mock shoot with Danny Herz, Aug. 28, 2024."
+leadImageCaption: "Danny Herz sits for a studio portrait during a commercial mock shoot in Pittsburgh, Pa., Aug. 28, 2024. (Photo by Caleb McCartney)"
 published: true
 tags:
   - Thesis
@@ -15,9 +15,20 @@ tags:
   - Trauma
   - Memory
   - Myth
+sources:
+  - citation: "Substance Abuse and Mental Health Services Administration. (n.d.). Trauma and violence: What is trauma and its effects? Retrieved May 20, 2026, from https://www.samhsa.gov/find-help/trauma"
+    title: "Trauma and Violence: What Is Trauma and Its Effects?"
+    url: "https://www.samhsa.gov/find-help/trauma"
+    publisher: "Substance Abuse and Mental Health Services Administration"
+    accessedDate: "2026-05-20"
+  - citation: "National Institute of Mental Health. (n.d.). Coping with traumatic events. National Institutes of Health. Retrieved May 20, 2026, from https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events"
+    title: "Coping With Traumatic Events"
+    url: "https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events"
+    publisher: "National Institute of Mental Health"
+    accessedDate: "2026-05-20"
 ---
 
-As someone who has lived through the trauma of sexual coercion, and through having "no" treated as if it were never said at all, this piece sits uncomfortably close to me. The body remembers what other people dismiss. Trauma leaves marks that are not always visible, but that does not make them any less real. These bruises do not fade easily. Memory serves us at its worst when it keeps returning with the same ruthless force.
+As someone who has lived through the trauma of sexual coercion, and through having "no" treated as if it were never said at all, this piece sits uncomfortably close to me. The body remembers what other people dismiss. Trauma can leave marks that are not always visible, but that does not make them any less real. These bruises do not fade easily. Memory serves us at its worst when it keeps returning with the same ruthless force.
 
 ```
 Fingers on my body

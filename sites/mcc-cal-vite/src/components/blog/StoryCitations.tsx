@@ -52,16 +52,16 @@ export default function StoryCitations({ sources }: StoryCitationsProps) {
   return (
     <details className="story__citations">
       <summary className="story__citations-summary">
-        <span>Citations</span>
+        <span>Sources</span>
         <span>{citations.length}</span>
       </summary>
       <div className="story__citations-panel">
         <div className="story__citations-actions">
           <p className="story__citations-intro">
-            Expand, copy, or cite directly from the list below.
+            Review the supporting sources and copy the formatted list when needed.
           </p>
           <button type="button" className="story__citations-copy" onClick={copyCitations}>
-            Copy citations
+            Copy sources
           </button>
           {copyState === 'copied' && (
             <span className="story__citations-status" role="status" aria-live="polite">

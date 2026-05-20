@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-20T12:23:55.208Z",
+  "generated": "2026-05-20T15:50:50.456Z",
   "total": 9,
   "posts": [
     {
@@ -9,16 +9,32 @@
       "authorId": "mccal",
       "date": "2025-06-12",
       "category": "Feature",
-      "excerpt": "A few days in Boyd Station, Kentucky, reveal a place shaped by meadows, repair work, porch light, and the easy patience of people who do not need to announce themselves.",
+      "excerpt": "A few days in Boyd Station, Ky., reveal a place shaped by meadows, repair work, porch light and the easy patience of people who do not need to announce themselves.",
       "leadImage": "posts/boyd-station-community-feature/images/lead.jpg",
       "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., beneath a glowing red neon sign, June 12, 2025.",
-      "leadImageCaption": "Musicians perform at the Aeolian Music Hall, Boyd Station, Ky., June 12, 2025.",
+      "leadImageCaption": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., June 12, 2025. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Feature",
         "Community",
         "Rural Life",
         "Photojournalism"
+      ],
+      "sources": [
+        {
+          "citation": "Boyd's Station. (n.d.). Mission & history. Retrieved May 20, 2026, from https://www.boydsstation.org/bigpicture",
+          "title": "Mission & History",
+          "url": "https://www.boydsstation.org/bigpicture",
+          "publisher": "Boyd's Station",
+          "accessedDate": "2026-05-20"
+        },
+        {
+          "citation": "Boyd's Station. (n.d.). Place & Space Creative Residence. Retrieved May 20, 2026, from https://www.boydsstation.org/about-place-and-space",
+          "title": "Place & Space Creative Residence",
+          "url": "https://www.boydsstation.org/about-place-and-space",
+          "publisher": "Boyd's Station",
+          "accessedDate": "2026-05-20"
+        }
       ],
       "authorName": "Caleb McCartney",
       "leadImageFallback": null,
@@ -34,7 +50,7 @@
       "leadImage": "posts/the-capitalist-contradiction/images/lead.jpg",
       "leadImageFallback": "posts/the-capitalist-contradiction/images/lead.jpg",
       "leadImageAlt": "Former President Barack Obama speaks to a crowd during a campaign rally in Pittsburgh.",
-      "leadImageCaption": "Former President Barack Obama speaks during a campaign rally in Pittsburgh on Oct. 10, 2024.",
+      "leadImageCaption": "Former President Barack Obama speaks during a campaign rally in Pittsburgh, Pa., Oct. 10, 2024. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Politics",
@@ -52,7 +68,7 @@
         }
       ],
       "authorName": "Caleb McCartney",
-      "readingTime": 3
+      "readingTime": 2
     },
     {
       "slug": "a-conversation-with-myself",
@@ -63,7 +79,7 @@
       "excerpt": "A dream record about self-judgment, subconscious warning, and the strange intimacy of talking to yourself.",
       "leadImage": "posts/a-conversation-with-myself/images/lead.jpg",
       "leadImageAlt": "Editorial portrait from an Ignite Studios session with Jay Thompson.",
-      "leadImageCaption": "Editorial portrait from an Ignite Studios session with Jay Thompson, Nov. 18, 2023.",
+      "leadImageCaption": "Jay Thompson sits for an editorial portrait during an Ignite Studios session in Pittsburgh, Pa., Nov. 18, 2023. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Thesis",
@@ -71,6 +87,15 @@
         "Reflection",
         "Self",
         "Memory"
+      ],
+      "sources": [
+        {
+          "citation": "National Institute of Neurological Disorders and Stroke. (n.d.). Brain basics: Understanding sleep. National Institutes of Health. Retrieved May 20, 2026, from https://www.ninds.nih.gov/health-information/public-education/brain-basics/brain-basics-understanding-sleep",
+          "title": "Brain Basics: Understanding Sleep",
+          "url": "https://www.ninds.nih.gov/health-information/public-education/brain-basics/brain-basics-understanding-sleep",
+          "publisher": "National Institute of Neurological Disorders and Stroke",
+          "accessedDate": "2026-05-20"
+        }
       ],
       "authorName": "Caleb McCartney",
       "leadImageFallback": null,
@@ -85,7 +110,7 @@
       "excerpt": "A reflection on emotional suppression, childhood conditioning, and learning to accept difficult feelings.",
       "leadImage": "posts/fear-of-emotion/images/lead.jpg",
       "leadImageAlt": "Studio portrait from a session with Helen Wise.",
-      "leadImageCaption": "Studio portrait from a session with Helen Wise, May 28, 2024.",
+      "leadImageCaption": "Helen Wise sits for a studio portrait in Pittsburgh, Pa., May 28, 2024. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Thesis",
@@ -93,6 +118,22 @@
         "Family",
         "Acceptance",
         "Healing"
+      ],
+      "sources": [
+        {
+          "citation": "Gross, J. J. (1998). Antecedent- and response-focused emotion regulation: Divergent consequences for experience, expression, and physiology. Journal of Personality and Social Psychology, 74(1), 224-237. https://doi.org/10.1037/0022-3514.74.1.224",
+          "title": "Antecedent- and Response-Focused Emotion Regulation",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9457784/",
+          "publisher": "Journal of Personality and Social Psychology",
+          "publishedDate": "1998"
+        },
+        {
+          "citation": "National Institute of Mental Health. (n.d.). Coping with traumatic events. National Institutes of Health. Retrieved May 20, 2026, from https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events",
+          "title": "Coping With Traumatic Events",
+          "url": "https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events",
+          "publisher": "National Institute of Mental Health",
+          "accessedDate": "2026-05-20"
+        }
       ],
       "authorName": "Caleb McCartney",
       "leadImageFallback": null,
@@ -107,13 +148,22 @@
       "excerpt": "A wilted rose, a closed closet, and the emotional logic of dissociation.",
       "leadImage": "posts/living-breathing-dying/images/lead.jpg",
       "leadImageAlt": "Close-up nature photograph of flowers and foliage.",
-      "leadImageCaption": "Close-up photograph from the Flowers and Plants archive.",
+      "leadImageCaption": "Flowers and foliage fill the frame in a close-up nature photograph. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Thesis",
         "Dissociation",
         "Isolation",
         "Decay"
+      ],
+      "sources": [
+        {
+          "citation": "Substance Abuse and Mental Health Services Administration. (n.d.). Trauma and violence: What is trauma and its effects? Retrieved May 20, 2026, from https://www.samhsa.gov/find-help/trauma",
+          "title": "Trauma and Violence: What Is Trauma and Its Effects?",
+          "url": "https://www.samhsa.gov/find-help/trauma",
+          "publisher": "Substance Abuse and Mental Health Services Administration",
+          "accessedDate": "2026-05-20"
+        }
       ],
       "authorName": "Caleb McCartney",
       "leadImageFallback": null,
@@ -128,13 +178,22 @@
       "excerpt": "A short thesis fragment about fear, ego, and the noise that remains after being broken down.",
       "leadImage": "posts/all-i-hear-is-the-deafening-silence/images/lead.jpg",
       "leadImageAlt": "Night landscape of Seneca Rocks under a dark sky in West Virginia.",
-      "leadImageCaption": "Night landscape of Seneca Rocks in West Virginia.",
+      "leadImageCaption": "Seneca Rocks rises under a dark sky in Pendleton County, W.Va. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Thesis",
         "Silence",
         "Fear",
         "Identity"
+      ],
+      "sources": [
+        {
+          "citation": "Substance Abuse and Mental Health Services Administration. (n.d.). Trauma and violence: What is trauma and its effects? Retrieved May 20, 2026, from https://www.samhsa.gov/find-help/trauma",
+          "title": "Trauma and Violence: What Is Trauma and Its Effects?",
+          "url": "https://www.samhsa.gov/find-help/trauma",
+          "publisher": "Substance Abuse and Mental Health Services Administration",
+          "accessedDate": "2026-05-20"
+        }
       ],
       "authorName": "Caleb McCartney",
       "leadImageFallback": null,
@@ -149,7 +208,7 @@
       "excerpt": "A poem about trauma, myth, and the way the body carries what language struggles to name.",
       "leadImage": "posts/body-remembers/images/lead.jpg",
       "leadImageAlt": "Studio portrait from a commercial mock shoot with Danny Herz.",
-      "leadImageCaption": "Studio portrait from a commercial mock shoot with Danny Herz, Aug. 28, 2024.",
+      "leadImageCaption": "Danny Herz sits for a studio portrait during a commercial mock shoot in Pittsburgh, Pa., Aug. 28, 2024. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Thesis",
@@ -157,6 +216,22 @@
         "Trauma",
         "Memory",
         "Myth"
+      ],
+      "sources": [
+        {
+          "citation": "Substance Abuse and Mental Health Services Administration. (n.d.). Trauma and violence: What is trauma and its effects? Retrieved May 20, 2026, from https://www.samhsa.gov/find-help/trauma",
+          "title": "Trauma and Violence: What Is Trauma and Its Effects?",
+          "url": "https://www.samhsa.gov/find-help/trauma",
+          "publisher": "Substance Abuse and Mental Health Services Administration",
+          "accessedDate": "2026-05-20"
+        },
+        {
+          "citation": "National Institute of Mental Health. (n.d.). Coping with traumatic events. National Institutes of Health. Retrieved May 20, 2026, from https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events",
+          "title": "Coping With Traumatic Events",
+          "url": "https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events",
+          "publisher": "National Institute of Mental Health",
+          "accessedDate": "2026-05-20"
+        }
       ],
       "authorName": "Caleb McCartney",
       "leadImageFallback": null,
@@ -171,14 +246,23 @@
       "excerpt": "A memory of being handed a controller becomes an essay about pressure, control, and the simple moments that still cut through the noise.",
       "leadImage": "posts/player-one/images/lead.jpg",
       "leadImageFallback": "posts/player-one/images/lead.jpg",
-      "leadImageAlt": "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Kentucky.",
-      "leadImageCaption": "A boy holds a sparkler with an adult beside him in Boyd Station, Ky., June 9, 2025.",
+      "leadImageAlt": "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Ky.",
+      "leadImageCaption": "A boy holds a sparkler as an adult stands nearby in Boyd Station, Ky., June 9, 2025. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Emotional",
         "Control",
         "Family",
         "Expectations"
+      ],
+      "sources": [
+        {
+          "citation": "National Institute of Mental Health. (n.d.). Coping with traumatic events. National Institutes of Health. Retrieved May 20, 2026, from https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events",
+          "title": "Coping With Traumatic Events",
+          "url": "https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events",
+          "publisher": "National Institute of Mental Health",
+          "accessedDate": "2026-05-20"
+        }
       ],
       "authorName": "Caleb McCartney",
       "readingTime": 2
@@ -193,12 +277,28 @@
       "leadImage": "posts/in-the-shadow-of-loss/images/lead.jpg",
       "leadImageFallback": "posts/in-the-shadow-of-loss/images/lead.jpg",
       "leadImageAlt": "A red-roof barn sits beyond a fence line in a quiet hillside landscape.",
-      "leadImageCaption": "A quiet hillside and weathered barn hold the frame in soft evening light.",
+      "leadImageCaption": "A red-roof barn sits beyond a fence line in soft evening light. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Death",
         "Emotional",
         "Loss"
+      ],
+      "sources": [
+        {
+          "citation": "Stroebe, M., & Schut, H. (1999). The dual process model of coping with bereavement: Rationale and description. Death Studies, 23(3), 197-224. https://doi.org/10.1080/074811899201046",
+          "title": "The Dual Process Model of Coping with Bereavement",
+          "url": "https://www.tandfonline.com/doi/abs/10.1080/074811899201046",
+          "publisher": "Death Studies",
+          "publishedDate": "1999"
+        },
+        {
+          "citation": "Stroebe, M., & Schut, H. (2010). The dual process model of coping with bereavement: A decade on. Omega: Journal of Death and Dying, 61(4), 273-289. https://doi.org/10.2190/OM.61.4.b",
+          "title": "The Dual Process Model of Coping with Bereavement: A Decade On",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21058610/",
+          "publisher": "Omega: Journal of Death and Dying",
+          "publishedDate": "2010"
+        }
       ],
       "authorName": "Caleb McCartney",
       "readingTime": 3
