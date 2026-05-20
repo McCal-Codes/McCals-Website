@@ -28,6 +28,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   const [activeGroup, setActiveGroup] = useState<PortfolioGroup | null>(null);
   const [toastVisible, setToastVisible] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const shown = groups.slice(0, visible);
   const remaining = Math.max(0, groups.length - visible);
@@ -40,6 +41,16 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
     clearTimeout(toastTimer.current);
     setToastVisible(true);
     toastTimer.current = setTimeout(() => setToastVisible(false), 2200);
+  }, []);
+
+  const handleOpen = useCallback((group: PortfolioGroup) => {
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setActiveGroup(group);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setActiveGroup(null);
+    window.setTimeout(() => openerRef.current?.focus(), 0);
   }, []);
 
   if (groups.length === 0) {
@@ -57,7 +68,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
           <PortfolioCard
             key={group.id}
             group={group}
-            onOpen={setActiveGroup}
+            onOpen={handleOpen}
             onCopyLink={handleCopyLink}
             imageSizes={cardImageSizes}
             imageLoading={index < eagerCount ? 'eager' : 'lazy'}
@@ -72,7 +83,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
           <PortfolioLightbox
             key={activeGroup.id}
             group={activeGroup}
-            onClose={() => setActiveGroup(null)}
+            onClose={handleClose}
           />
         </Suspense>
       )}

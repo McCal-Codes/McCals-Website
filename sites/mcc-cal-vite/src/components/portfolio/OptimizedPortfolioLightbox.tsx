@@ -139,15 +139,11 @@ const OptimizedPortfolioLightbox: FC<OptimizedPortfolioLightboxProps> = ({ group
               <p className={portfolioStyles.pfCaptionRailDescription}>{summaryText}</p>
             )}
 
-            {group.published && group.outletName && (
+            {group.articleUrl && group.outletName && (
               <div className={portfolioStyles.pfLightboxOutlet}>
-                {group.articleUrl ? (
-                  <a href={group.articleUrl} target="_blank" rel="noopener noreferrer">
-                    Published in {group.outletName} →
-                  </a>
-                ) : (
-                  <span>Published in {group.outletName}</span>
-                )}
+                <a href={group.articleUrl} target="_blank" rel="noopener noreferrer">
+                  Published in {group.outletName} →
+                </a>
               </div>
             )}
           </div>

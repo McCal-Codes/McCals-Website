@@ -1283,10 +1283,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: clamp(10px, 1.2vh, 14px);
   width: min(1220px, 96vw);
-  max-height: 94vh;
+  height: min(94vh, 1040px);
+  max-height: calc(100vh - 48px);
   outline: none;
+  overflow: hidden;
 }
 
 .pfLightboxToolbar {
@@ -1357,50 +1359,90 @@
 
 .pfLightboxStage {
   position: relative;
+  flex: 1 1 auto;
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr) 48px;
   align-items: center;
   gap: 12px;
-  min-height: min(68vh, 760px);
+  min-height: 0;
 }
 
 .pfLightboxImageScroller {
   min-width: 0;
-  min-height: min(62vh, 720px);
-  max-height: 72vh;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
   display: grid;
   place-items: center;
-  overflow: auto;
+  overflow: hidden;
   overscroll-behavior: contain;
   border-radius: 14px;
   scrollbar-gutter: stable;
 }
 
 .pfLightboxImageScroller[data-zoomed='true'] {
+  overflow: auto;
   place-items: start center;
   cursor: move;
 }
 
 .pfLightboxImageFrame {
-  width: min(100%, 1100px);
-  min-height: min(62vh, 720px);
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
   display: grid;
   place-items: center;
-  overflow: visible;
+  overflow: hidden;
   border-radius: 14px;
-  background-color: rgba(255,255,255,0.04);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+    rgba(9, 9, 10, 0.84);
+}
+
+.pfLightboxImageFrame[data-loaded='false'] {
+  width: min(100%, 980px);
+  min-height: min(58vh, 640px);
+}
+
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxImageFrame {
+  width: min(100%, 1100px);
+  max-width: none;
+  overflow: visible;
+}
+
+.pfLightboxImageLoading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: inherit;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .pfLightboxImg {
   max-width: 100%;
-  max-height: 68vh;
+  max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
   border-radius: 14px;
   display: block;
   margin: auto;
+  opacity: 0;
   transform-origin: center;
+  transition: opacity 0.22s ease;
+}
+
+.pfLightboxImageFrame[data-loaded='true'] .pfLightboxImg {
+  opacity: 1;
 }
 
 .pfLightboxNavBtn {
@@ -1428,57 +1470,127 @@
 
 .pfLightboxThumbs {
   display: flex;
-  gap: 8px;
-  max-width: min(100%, 940px);
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 940px);
+  min-height: 78px;
   margin: 0 auto;
-  padding: 2px 2px 8px;
+  padding: 8px;
   overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  background: rgba(0,0,0,0.24);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  scroll-padding-inline: 8px;
   scrollbar-width: thin;
 }
 
 .pfLightboxThumb {
   flex: 0 0 auto;
-  width: 72px;
-  height: 50px;
+  width: 86px;
+  aspect-ratio: 4 / 3;
+  height: auto;
   padding: 0;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
   cursor: pointer;
-  opacity: 0.58;
+  opacity: 0.66;
   overflow: hidden;
-  transition: opacity 0.2s, border-color 0.2s, transform 0.2s;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .pfLightboxThumb:hover,
-.pfLightboxThumb:focus-visible,
-.pfLightboxThumb[aria-current='true'] {
+.pfLightboxThumb:focus-visible {
   opacity: 1;
-  border-color: rgba(255,255,255,0.72);
+  border-color: rgba(255,255,255,0.42);
+}
+
+.pfLightboxThumb:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.7);
+  outline-offset: 3px;
 }
 
 .pfLightboxThumb[aria-current='true'] {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.88);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.12),
+    0 10px 24px rgba(0,0,0,0.24);
   transform: translateY(-1px);
 }
 
-.pfLightboxThumbFrame,
-.pfLightboxThumbImg {
+.pfLightboxThumbFrame {
+  display: grid;
+  place-items: center;
   width: 100%;
   height: 100%;
-  border-radius: 6px;
+  border-radius: 9px;
+  background-color: rgba(8,8,10,0.86);
+  background-size: cover;
 }
 
 .pfLightboxThumbImg {
   display: block;
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 9px;
+  object-fit: contain;
+  background: #0b0b0d;
 }
 
 .pfLightboxCaption {
   text-align: center;
   color: #fff;
-  max-width: 760px;
+  max-width: min(920px, calc(100vw - 48px));
   margin-inline: auto;
-  padding: 0 8px;
+  padding: 2px clamp(12px, 2vw, 20px) 0;
+}
+
+.pfLightboxCaption .pfCaptionRail {
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 12px);
+}
+
+.pfLightboxCaption .pfCaptionRailTitle {
+  max-width: 42ch;
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  line-height: 1.18;
+}
+
+.pfLightboxCaption .pfCaptionRailMeta {
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 4px;
+  margin-top: 2px;
+}
+
+.pfLightboxCaption .pfCaptionRailDescription {
+  max-width: 72ch;
+  margin: 0 auto;
+  line-height: 1.58;
+  opacity: 0.78;
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+}
+
+.pfLightboxCaption .pfCardTags {
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.pfLightboxCaption .pfCardTag {
+  padding: 4px 9px;
+  font-size: 0.7rem;
 }
 
 .pfLightboxTitle {
@@ -1507,28 +1619,56 @@
 }
 
 .pfLightboxDescription {
-  margin: 0 0 8px;
+  max-width: 78ch;
+  margin: 2px auto 0;
   color: #e5e5e5;
-  font-size: 0.88rem;
-  line-height: 1.5;
+  font-size: clamp(0.9rem, 1.1vw, 0.98rem);
+  line-height: 1.64;
 }
 
 .pfLightboxOutlet {
-  margin: 10px 0 0;
-  padding: 10px 14px;
-  border-radius: 8px;
-  background: rgba(95, 177, 137, 0.1);
-  border: 1px solid rgba(95, 177, 137, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  margin: 2px auto 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.78);
 }
 
-.pfLightboxOutlet a {
-  color: #5fb189;
+.pfLightboxOutletLabel {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pfLightboxOutletLink {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.pfLightboxOutletLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
-.pfLightboxOutlet a:hover { text-decoration: underline; }
+.pfLightboxOutletLink:hover,
+.pfLightboxOutletLink:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  outline: none;
+}
 
 .pfLightboxClose {
   border-color: rgba(255,255,255,0.28);
@@ -1547,6 +1687,7 @@
 
   .pfLightboxDialog {
     width: 100%;
+    height: 96vh;
     max-height: 96vh;
   }
 
@@ -1567,12 +1708,20 @@
 
   .pfLightboxStage {
     grid-template-columns: 1fr;
-    min-height: 54vh;
+    min-height: 0;
   }
 
-  .pfLightboxImageScroller,
+  .pfLightboxImageScroller {
+    min-height: 0;
+  }
+
   .pfLightboxImageFrame {
-    min-height: 54vh;
+    width: fit-content;
+  }
+
+  .pfLightboxImageFrame[data-loaded='false'] {
+    width: 100%;
+    min-height: min(42vh, 420px);
   }
 
   .pfLightboxNavBtn {
@@ -1598,8 +1747,31 @@
   }
 
   .pfLightboxThumb {
-    width: 60px;
-    height: 42px;
+    width: 70px;
+  }
+
+  .pfLightboxCaption {
+    max-width: 100%;
+    padding-inline: 2px;
+  }
+
+  .pfLightboxCaption .pfCaptionRail {
+    gap: 8px;
+  }
+
+  .pfLightboxCaption .pfCaptionRailTitle {
+    font-size: 1.05rem;
+    line-height: 1.22;
+  }
+
+  .pfLightboxDescription,
+  .pfLightboxCaption .pfCaptionRailDescription {
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .pfLightboxCaption .pfCardTags {
+    gap: 6px;
   }
 }
 

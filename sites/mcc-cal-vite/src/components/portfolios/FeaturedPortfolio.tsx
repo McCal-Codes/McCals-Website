@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo, useState } from 'react';
+import { lazy, Suspense, useCallback, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import OptimizedImage from '@/components/OptimizedImage';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
@@ -344,6 +344,7 @@ export default function FeaturedPortfolio() {
   const { data, status, error } = useManifest<FeaturedManifest>('featured');
   const [activeFilter, setActiveFilter] = useState(ALL);
   const [activeGroup, setActiveGroup] = useState<PortfolioGroup | null>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const groups = useMemo(() => {
     if (!data?.items) return [];
@@ -385,6 +386,16 @@ export default function FeaturedPortfolio() {
       };
     });
   }, [groups]);
+
+  const handleOpen = useCallback((group: PortfolioGroup) => {
+    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setActiveGroup(group);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setActiveGroup(null);
+    window.setTimeout(() => openerRef.current?.focus(), 0);
+  }, []);
 
   return (
     <div className={`${portfolioStyles.pfRoot} ${portfolioStyles.pfFeaturedRoot}`}>
@@ -432,7 +443,7 @@ export default function FeaturedPortfolio() {
                 group={featuredStories[0]}
                 variant="lead"
                 loading="eager"
-                onOpen={setActiveGroup}
+                onOpen={handleOpen}
               />
               {featuredStories.length > 1 && (
                 <div className={portfolioStyles.pfFeaturedSupportStack}>
@@ -442,7 +453,7 @@ export default function FeaturedPortfolio() {
                       group={group}
                       variant="support"
                       loading="eager"
-                      onOpen={setActiveGroup}
+                      onOpen={handleOpen}
                     />
                   ))}
                 </div>
@@ -482,7 +493,7 @@ export default function FeaturedPortfolio() {
           <PortfolioLightbox
             key={activeGroup.id}
             group={activeGroup}
-            onClose={() => setActiveGroup(null)}
+            onClose={handleClose}
           />
         </Suspense>
       )}

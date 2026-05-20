@@ -7,8 +7,12 @@ import {
   useState,
   type FC,
 } from 'react';
-import { ChevronLeft, ChevronRight, RotateCcw, X, ZoomIn, ZoomOut } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, RotateCcw, X, ZoomIn, ZoomOut } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
+import {
+  getOptimizedImageUrl,
+  getResponsiveImageSrcSet,
+} from '@/utils/imageOptimization';
 import type { PortfolioGroup } from './types';
 import { portfolioStyles } from './index';
 
@@ -23,10 +27,13 @@ const ZOOM_STEP = 0.5;
 
 const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const activeThumbRef = useRef<HTMLButtonElement | null>(null);
   const titleId = useId();
   const descriptionId = useId();
   const [activeIndex, setActiveIndex] = useState(0);
   const [zoom, setZoom] = useState(MIN_ZOOM);
+  const [loadedImage, setLoadedImage] = useState({ filename: '', loaded: false });
   const isOpen = group !== null;
   const imageCount = group?.images.length ?? 0;
   const hasMultiple = imageCount > 1;
@@ -35,21 +42,20 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     if (!group) return null;
     return group.images[activeIndex] ?? group.coverImage;
   }, [activeIndex, group]);
+  const imageLoaded = loadedImage.loaded && loadedImage.filename === activeImage?.filename;
 
   // Lock scroll and hide nav while open.
   useEffect(() => {
-    if (isOpen) {
-      document.documentElement.classList.add('pf-lb-open');
-      document.body.style.overflow = 'hidden';
-      dialogRef.current?.focus();
-    } else {
-      document.documentElement.classList.remove('pf-lb-open');
-      document.body.style.overflow = '';
-    }
+    if (!isOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.documentElement.classList.add('pf-lb-open');
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.focus();
 
     return () => {
       document.documentElement.classList.remove('pf-lb-open');
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
 
@@ -89,7 +95,29 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     (event: KeyboardEvent) => {
       if (!isOpen) return;
 
-      if (event.key === 'Escape') {
+      if (event.key === 'Tab') {
+        const focusable = Array.from(
+          dialogRef.current?.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ) ?? [],
+        ).filter((element) => element.offsetParent !== null);
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (!first || !last) {
+          event.preventDefault();
+          dialogRef.current?.focus();
+          return;
+        }
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      } else if (event.key === 'Escape') {
         onClose();
       } else if (event.key === 'ArrowRight' || event.key === 'PageDown') {
         event.preventDefault();
@@ -123,6 +151,14 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   }, [handleKeyDown]);
 
   useEffect(() => {
+    activeThumbRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  }, [activeIndex]);
+
+  useEffect(() => {
     if (!group || !activeImage || imageCount < 2) return;
 
     const neighborImages = [
@@ -132,23 +168,32 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
 
     neighborImages.forEach((image) => {
       const preload = new Image();
-      preload.src = image.url;
+      preload.decoding = 'async';
+      preload.src = getOptimizedImageUrl(image.url, { width: 1920 });
     });
   }, [activeImage, activeIndex, group, imageCount]);
 
   if (!group || !activeImage) return null;
 
-  const activeCaption = activeImage.caption ?? activeImage.description;
-  const summaryText =
-    activeImage.description ??
-    group.coverImage.description ??
-    group.images[0]?.description ??
+  const fallbackCaption =
     group.coverImage.caption ??
-    group.images[0]?.caption;
+    group.coverImage.description ??
+    group.images[0]?.caption ??
+    group.images[0]?.description;
+  const displayCaption = activeImage.caption ?? activeImage.description ?? fallbackCaption;
   const visibleTags = (group.tags ?? []).filter(
-    (tag) => tag.toLowerCase() !== group.category?.toLowerCase(),
+    (tag) => {
+      const normalizedTag = tag.toLowerCase();
+
+      return (
+        normalizedTag !== group.category?.toLowerCase() &&
+        !(group.published && normalizedTag === 'published work')
+      );
+    },
   );
   const zoomPercent = Math.round(zoom * 100);
+  const activeImageSrc = getOptimizedImageUrl(activeImage.url, { width: 1920 });
+  const activeImageSrcSet = getResponsiveImageSrcSet(activeImage.url, [640, 1080, 1440, 1920]);
 
   return (
     <div
@@ -156,7 +201,7 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
       aria-modal="true"
       role="dialog"
       aria-labelledby={titleId}
-      aria-describedby={summaryText ? descriptionId : undefined}
+      aria-describedby={displayCaption ? descriptionId : undefined}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -224,27 +269,38 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
           )}
 
           <div className={portfolioStyles.pfLightboxImageScroller} data-zoomed={zoom > MIN_ZOOM ? 'true' : 'false'}>
-            <OptimizedImage
+            <div
               key={activeImage.filename}
-              src={activeImage.url}
-              alt={activeImage.alt ?? `${group.title}, photo ${activeIndex + 1}`}
-              frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfLightboxImageFrame}`}
-              imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfLightboxImg}`}
-              loading="eager"
-              decoding="async"
-              optimizedWidth={1920}
-              srcSetWidths={[640, 1080, 1440, 1920]}
-              sizes="100vw"
-              style={
-                zoom > MIN_ZOOM
-                  ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
-                  : undefined
-              }
-              onDoubleClick={() => {
-                setZoom((currentZoom) => (currentZoom === MIN_ZOOM ? 2 : MIN_ZOOM));
-              }}
-              draggable={false}
-            />
+              className={portfolioStyles.pfLightboxImageFrame}
+              data-loaded={imageLoaded ? 'true' : 'false'}
+            >
+              {!imageLoaded && (
+                <div className={portfolioStyles.pfLightboxImageLoading} role="status" aria-live="polite">
+                  <span className={portfolioStyles.pfSpinner} aria-hidden="true" />
+                  <span>Loading photo</span>
+                </div>
+              )}
+              <img
+                ref={imageRef}
+                src={activeImageSrc}
+                srcSet={activeImageSrcSet}
+                sizes="(max-width: 720px) calc(100vw - 28px), 1100px"
+                alt={activeImage.alt ?? `${group.title}, photo ${activeIndex + 1}`}
+                className={portfolioStyles.pfLightboxImg}
+                loading="eager"
+                decoding="async"
+                style={
+                  zoom > MIN_ZOOM
+                    ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
+                    : undefined
+                }
+                onLoad={() => setLoadedImage({ filename: activeImage.filename, loaded: true })}
+                onDoubleClick={() => {
+                  setZoom((currentZoom) => (currentZoom === MIN_ZOOM ? 2 : MIN_ZOOM));
+                }}
+                draggable={false}
+              />
+            </div>
           </div>
 
           {hasMultiple && (
@@ -264,6 +320,7 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
             {group.images.map((img, index) => (
               <button
                 key={img.filename}
+                ref={index === activeIndex ? activeThumbRef : undefined}
                 type="button"
                 className={portfolioStyles.pfLightboxThumb}
                 aria-label={`Show photo ${index + 1}`}
@@ -298,23 +355,27 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
               </p>
             )}
 
-            {activeCaption && (
-              <p className={portfolioStyles.pfLightboxDescription}>{activeCaption}</p>
+            {displayCaption && (
+              <p id={descriptionId} className={portfolioStyles.pfLightboxDescription}>
+                {displayCaption}
+              </p>
             )}
 
-            {summaryText && summaryText !== activeCaption && (
-              <p id={descriptionId} className={portfolioStyles.pfCaptionRailDescription}>{summaryText}</p>
-            )}
-
-            {group.published && group.outletName && (
-              <div className={portfolioStyles.pfLightboxOutlet}>
-                {group.articleUrl ? (
-                  <a href={group.articleUrl} target="_blank" rel="noopener noreferrer">
-                    Published in {group.outletName} →
-                  </a>
-                ) : (
-                  <span>Published in {group.outletName}</span>
-                )}
+            {group.articleUrl && group.outletName && (
+              <div
+                className={portfolioStyles.pfLightboxOutlet}
+                aria-label={`Published, view story on ${group.outletName}`}
+              >
+                <span className={portfolioStyles.pfLightboxOutletLabel}>Published</span>
+                <a
+                  href={group.articleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={portfolioStyles.pfLightboxOutletLink}
+                >
+                  View story on {group.outletName}
+                  <ExternalLink aria-hidden="true" size={13} strokeWidth={2.4} />
+                </a>
               </div>
             )}
 
