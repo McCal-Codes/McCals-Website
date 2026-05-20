@@ -84,6 +84,11 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* Prevent unexpected horizontal overflow in some browsers/layouts */
+  box-sizing: border-box;
+  min-width: 0; /* allow flex children to shrink instead of forcing parent's width */
+  width: 100%;
+  max-width: 100%;
 }
 
 .bioPhoto {
@@ -169,7 +174,8 @@
 
 @media (min-width: 1024px) {
   .bio {
-    padding: 28px;
+    align-items: center;
+    text-align: center;
   }
 
   .bioGrid {
@@ -180,11 +186,24 @@
   .bioContent {
     justify-items: center;
     width: 100%;
+    max-width: 60ch;
+    padding-inline: clamp(12px, 2vw, 36px);
+  }
+
+  /* Desktop refinements: slightly larger photo, tighter text measure, and pleasant spacing */
+  .bioPhoto {
+    width: clamp(220px, 22vw, 380px);
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-inline: auto;
   }
 
   .bioText {
     justify-items: center;
     max-width: 42rem;
+    font-size: clamp(1rem, 1.02vw, 1.0625rem);
+    line-height: 1.5;
   }
 
   .bioText p {
@@ -193,6 +212,104 @@
 
   .stats {
     width: min(100%, 560px);
+  }
+}
+
+/* Tablet-specific refinements (landscape phones / tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .bioGrid {
+    gap: 22px;
+  }
+
+  .bioPhoto {
+    width: clamp(200px, 30vw, 360px);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    margin-inline: auto;
+  }
+
+  .bioContent {
+    padding-inline: clamp(10px, 4vw, 32px);
+    max-width: 64ch;
+  }
+
+  .bioText {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    max-width: 58ch;
+  }
+
+  .actions {
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    margin-inline: auto;
+  }
+}
+
+/* Tablet safety fixes: prevent unexpected large margins/overflows that cause UI glitches */
+@media (min-width: 680px) and (max-width: 1100px) {
+  figure,
+  .bioPhoto,
+  .photoWrapper {
+    margin: 0 auto;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .clientCarousel,
+  .testimonialsViewport,
+  .testimonialsCarousel {
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .clientTrack,
+  .testimonialsTrack {
+    min-width: 0;
+    box-sizing: border-box;
+    /* disable continuous scrolling on medium widths to avoid layout overflow and reset transforms */
+    animation: none !important;
+    animation-play-state: paused !important;
+    transform: none !important;
+  }
+}
+
+/* At tablet sizes, make carousel tracks wrap instead of being long single rows */
+@media (min-width: 680px) and (max-width: 1100px) {
+  .clientTrack {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Make sure the track is visually reset to the start on wrap layouts */
+  .clientTrack {
+    transform: translateX(0) !important;
+  }
+
+  .clientTrack > li {
+    flex: 0 0 calc(33.333% - 12px);
+    max-width: calc(33.333% - 12px);
+  }
+
+  .testimonialsTrack {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .testimonialPage,
+  .testimonialCard {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Reduce the fade overlays on smaller screens so they don't visually hide logos */
+@media (max-width: 1100px) {
+  .clientCarousel::before,
+  .clientCarousel::after {
+    width: 36px;
   }
 }
 

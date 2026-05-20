@@ -79,6 +79,16 @@ export const fieldKit: FieldKitCategory[] = [
     icon: 'editing',
     items: ['Capture One', 'Photo Mechanic', 'Photoshop as needed'],
   },
+  {
+    category: 'Accessories',
+    icon: 'camera',
+    items: [
+      'Tripods & monopods',
+      'Spare batteries & chargers',
+      'Camera straps & protective cases',
+      'Memory cards (SD / CFexpress) & readers',
+    ],
+  },
 ];
 
 export const testimonials: Testimonial[] = [

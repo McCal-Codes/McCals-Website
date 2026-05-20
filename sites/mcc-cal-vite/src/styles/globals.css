@@ -179,6 +179,17 @@ body[data-theme="light"] .mcc-nav.is-home:not(.is-scrolled) {
 }
 
 :root {
+  /* Typographic system */
+  --type-sans: 'Inter', 'Helvetica Neue', Arial, system-ui, -apple-system, "Segoe UI", 'Noto Sans', sans-serif;
+  --type-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --base-font-size: 16px; /* used as a reference - keep 100% on html for accessibility */
+  --base-line-height: 1.6;
+  --scale-1: 0.875rem; /* small */
+  --scale-2: 1rem;     /* body */
+  --scale-3: 1.125rem; /* lead */
+  --scale-4: 1.5rem;   /* subheading */
+  --scale-5: clamp(2rem, 4vw, 3rem); /* h1-ish */
+  --scale-6: clamp(1.25rem, 2.5vw, 2rem); /* h2-ish */
   /* Base neutrals - harmonized taupe palette */
   /* Background depth layers - subtle hierarchy */
   --mcc-bg: #050506;              /* Deepest - page background */
@@ -247,6 +258,38 @@ body[data-theme="light"] .mcc-nav.is-home:not(.is-scrolled) {
   --mcc-control-height: 40px;
   --mcc-z-top: 2147483647;
 }
+
+/* Base typographic defaults (best-practice accessible defaults) */
+html { font-size: 100%; }
+body {
+  font-family: var(--type-sans);
+  font-size: var(--scale-2);
+  line-height: var(--base-line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings: use serif for display when available, with responsive sizing */
+h1, .h1 {
+  font-family: var(--type-serif);
+  font-weight: 700;
+  font-size: var(--scale-5);
+  line-height: 1.05;
+  margin: 0 0 0.5rem 0;
+}
+h2, .h2 {
+  font-family: var(--type-serif);
+  font-weight: 600;
+  font-size: var(--scale-6);
+  line-height: 1.12;
+  margin: 0 0 0.6rem 0;
+}
+h3 { font-size: 1.25rem; line-height: 1.2; margin: 0 0 0.5rem 0; }
+p { font-size: clamp(1rem, 1.1vw, 1.125rem); margin: 0 0 1rem 0; }
+
+/* Improve readable measure */
+article, .site-container, .ss-about-section { max-width: 70ch; }
+
 
 /* === Legacy Widget Utility Classes (consolidated) === */
 [class^='mcc-'], [class*=' mcc-'] {

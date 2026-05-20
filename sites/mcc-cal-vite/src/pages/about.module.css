@@ -33,18 +33,46 @@
   .aboutPage {
     padding-top: clamp(56px, 6vw, 76px);
   }
-
+  /* Keep the about page stacked (single-column) on desktop as well
+     to match the mobile stacked layout the user requested. This
+     forces a single-column flow so the photo stacks above the content. */
   .aboutShell {
-    grid-template-columns: minmax(360px, 30%) 1fr;
+    grid-template-columns: 1fr;
     gap: clamp(32px, 3vw, 44px);
     align-items: start;
+    /* Constrain width on large screens and center content for a more refined desktop look */
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline: clamp(16px, 4vw, 48px);
+  }
+}
+
+/* Tablet adjustments: maintain stacked flow but improve spacing and scale */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .aboutShell {
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 3vw, 40px);
+    max-width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline: clamp(16px, 4vw, 40px);
+  }
+  /* Prevent horizontal overflow on mid sizes caused by carousels and transforms */
+  .aboutPage {
+    overflow-x: hidden;
   }
 }
 
 @media (min-width: 1280px) {
+  /* Keep stacked layout at larger widths as well */
   .aboutShell {
-    grid-template-columns: 420px 1fr;
+    grid-template-columns: 1fr;
     gap: 36px;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline: clamp(20px, 4vw, 56px);
   }
 }
 
