@@ -10,6 +10,9 @@ import { portfolioStyles } from '../portfolio';
 
 interface EventImage {
   path: string; // full repo-relative path: "src/images/Portfolios/Events/..."
+  caption?: string;
+  description?: string;
+  alt?: string;
 }
 
 interface EventItem {
@@ -34,7 +37,9 @@ function normalise(events: EventItem[]): PortfolioGroup[] {
     const images = event.images.map((img) => ({
       url: imageUrl.event(img.path),
       filename: img.path.split('/').pop() ?? img.path,
-      alt: `${event.eventName} — photo`,
+      caption: img.caption,
+      description: img.description,
+      alt: img.alt ?? img.caption ?? img.description ?? `${event.eventName} photo`,
     }));
 
     return {

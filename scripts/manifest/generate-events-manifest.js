@@ -187,6 +187,54 @@ async function loadEventMetadata(eventDir) {
   }
 }
 
+async function loadCaptions(eventDir) {
+  const captionsPath = path.join(eventDir, 'captions.json');
+
+  if (!(await exists(captionsPath))) {
+    return null;
+  }
+
+  try {
+    const content = await fsp.readFile(captionsPath, 'utf8');
+    return JSON.parse(content);
+  } catch (error) {
+    console.warn(
+      '[WARN] Invalid event captions metadata: - generate-events-manifest.js',
+      path.relative(process.cwd(), captionsPath),
+      error && error.message,
+    );
+    return null;
+  }
+}
+
+function getCaptionForImage(captions, filename) {
+  if (!captions) return null;
+  if (captions[filename]) return captions[filename];
+
+  const extension = path.extname(filename);
+  const basename = path.basename(filename, extension);
+  const alternateExtensions = ['.webp', '.jpg', '.jpeg', '.png', '.avif'];
+
+  for (const alternateExtension of alternateExtensions) {
+    const alternate = `${basename}${alternateExtension}`;
+    if (captions[alternate]) return captions[alternate];
+  }
+
+  for (const [captionFilename, caption] of Object.entries(captions)) {
+    const captionBasename = path.basename(captionFilename, path.extname(captionFilename));
+    if (captionBasename === basename) return caption;
+  }
+
+  return null;
+}
+
+function textOrUndefined(value) {
+  if (typeof value !== 'string') return undefined;
+
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}
+
 function normaliseTags(tags) {
   if (!Array.isArray(tags)) return [];
 
@@ -232,7 +280,9 @@ async function main() {
     if (!files.length) continue;
 
     const eventName = titleCase(dir);
-    const metadata = await loadEventMetadata(path.join(absRoot, dir));
+    const eventDir = path.join(absRoot, dir);
+    const metadata = await loadEventMetadata(eventDir);
+    const captions = await loadCaptions(eventDir);
     const folderSegments = [];
     if (relativeRoot && relativeRoot !== '' && relativeRoot !== '.') {
       folderSegments.push(relativeRoot);
@@ -250,9 +300,21 @@ async function main() {
       };
     }
 
-    const images = files.map((file) => ({
-      path: path.posix.join(rootDir.replace(/^.*?src\//, 'src/'), dir, file),
-    }));
+    const images = files.map((file) => {
+      const perImage = getCaptionForImage(captions, file) || {};
+      const image = {
+        path: path.posix.join(rootDir.replace(/^.*?src\//, 'src/'), dir, file),
+      };
+      const caption = textOrUndefined(perImage.caption);
+      const description = textOrUndefined(perImage.description);
+      const alt = textOrUndefined(perImage.alt);
+
+      if (caption) image.caption = caption;
+      if (description) image.description = description;
+      if (alt) image.alt = alt;
+
+      return image;
+    });
 
     const dateDisplay = override ? override.dateDisplay : dateInfo.display;
     const dateSource = override ? override.dateSource : dateInfo.source;

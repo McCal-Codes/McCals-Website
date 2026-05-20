@@ -21,7 +21,12 @@ interface EventItem {
   dateDisplay?: string;
   dateISO?: string;
   folderPath?: string;
-  images: { path: string }[];
+  images: {
+    path: string;
+    caption?: string;
+    description?: string;
+    alt?: string;
+  }[];
 }
 
 interface EventsManifest {
@@ -40,7 +45,9 @@ function adaptEvents(manifest: EventsManifest): PortfolioGroup[] {
       return {
         url: imageUrl.event(img.path),
         filename,
-        alt: `${name}${photoNum}`,
+        caption: img.caption,
+        description: img.description,
+        alt: img.alt ?? img.caption ?? img.description ?? `${name}${photoNum}`,
       };
     });
     return {
