@@ -29,6 +29,8 @@ export interface BlogManifestPost {
   excerpt?: string;
   leadImage?: string | null;
   leadImageFallback?: string | null;
+  leadImageWidth?: number;
+  leadImageHeight?: number;
   leadImageAlt?: string;
   leadImageCaption?: string;
   published?: boolean;

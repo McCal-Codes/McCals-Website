@@ -6,6 +6,8 @@ date: "2024-11-30"
 category: "Thesis"
 excerpt: "A dream record about self-judgment, subconscious warning, and the strange intimacy of talking to yourself."
 leadImage: "images/lead.jpg"
+leadImageWidth: 1442
+leadImageHeight: 2160
 leadImageAlt: "Editorial portrait from an Ignite Studios session with Jay Thompson."
 leadImageCaption: "Jay Thompson sits for an editorial portrait during an Ignite Studios session in Pittsburgh, Pa., Nov. 18, 2023. (Photo by Caleb McCartney)"
 published: true

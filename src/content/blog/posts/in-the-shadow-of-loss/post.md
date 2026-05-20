@@ -7,6 +7,8 @@ category: "Personal"
 excerpt: "After several deaths in quick succession, grief stopped arriving as a single event and became the atmosphere around everything else."
 leadImage: "images/lead.jpg"
 leadImageFallback: "images/lead.jpg"
+leadImageWidth: 3200
+leadImageHeight: 2134
 leadImageAlt: "A red-roof barn sits beyond a fence line in a quiet hillside landscape."
 leadImageCaption: "A red-roof barn sits beyond a fence line in soft evening light. (Photo by Caleb McCartney)"
 published: true

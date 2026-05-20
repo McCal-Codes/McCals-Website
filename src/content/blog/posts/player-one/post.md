@@ -7,6 +7,8 @@ category: "Personal"
 excerpt: "A memory of being handed a controller becomes an essay about pressure, control, and the simple moments that still cut through the noise."
 leadImage: "images/lead.jpg"
 leadImageFallback: "images/lead.jpg"
+leadImageWidth: 3839
+leadImageHeight: 2554
 leadImageAlt: "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Ky."
 leadImageCaption: "A boy holds a sparkler as an adult stands nearby in Boyd Station, Ky., June 9, 2025. (Photo by Caleb McCartney)"
 published: true

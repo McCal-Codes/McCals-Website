@@ -6,6 +6,8 @@ date: "2024-08-21"
 category: "Thesis"
 excerpt: "A poem about trauma, myth, and the way the body carries what language struggles to name."
 leadImage: "images/lead.jpg"
+leadImageWidth: 1367
+leadImageHeight: 2048
 leadImageAlt: "Studio portrait from a commercial mock shoot with Danny Herz."
 leadImageCaption: "Danny Herz sits for a studio portrait during a commercial mock shoot in Pittsburgh, Pa., Aug. 28, 2024. (Photo by Caleb McCartney)"
 published: true

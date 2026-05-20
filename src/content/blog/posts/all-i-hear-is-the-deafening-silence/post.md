@@ -6,6 +6,8 @@ date: "2024-09-03"
 category: "Thesis"
 excerpt: "A short thesis fragment about fear, ego, and the noise that remains after being broken down."
 leadImage: "images/lead.jpg"
+leadImageWidth: 3200
+leadImageHeight: 1800
 leadImageAlt: "Night landscape of Seneca Rocks under a dark sky in West Virginia."
 leadImageCaption: "Seneca Rocks rises under a dark sky in Pendleton County, W.Va. (Photo by Caleb McCartney)"
 published: true

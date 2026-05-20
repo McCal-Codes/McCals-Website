@@ -7,6 +7,8 @@ category: "Politics"
 excerpt: "A look at how late capitalism repackages control as freedom, style, and self-invention."
 leadImage: "images/lead.jpg"
 leadImageFallback: "images/lead.jpg"
+leadImageWidth: 1080
+leadImageHeight: 720
 leadImageAlt: "Former President Barack Obama speaks to a crowd during a campaign rally in Pittsburgh."
 leadImageCaption: "Former President Barack Obama speaks during a campaign rally in Pittsburgh, Pa., Oct. 10, 2024. (Photo by Caleb McCartney)"
 published: true

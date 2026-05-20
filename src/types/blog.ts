@@ -13,6 +13,8 @@ export interface BlogPost {
   category?: string;
   excerpt?: string;
   leadImage?: string | null;
+  leadImageWidth?: number;
+  leadImageHeight?: number;
   leadImageAlt?: string;
   leadImageCaption?: string;
   published?: boolean;

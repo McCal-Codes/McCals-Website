@@ -212,6 +212,8 @@ export default function BlogPage() {
                       className="story__lead-image"
                       loading="eager"
                       fetchPriority="high"
+                      width={resolvedDocumentPost.leadImageWidth}
+                      height={resolvedDocumentPost.leadImageHeight}
                       optimizedWidth={1440}
                       sizes="(max-width: 760px) 100vw, min(100vw, 920px)"
                       srcSetWidths={[640, 960, 1280, 1440, 1600]}
