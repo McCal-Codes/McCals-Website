@@ -81,7 +81,7 @@
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.5.0",
+    "globals": "^17.6.0",
     "http-server": "^14.1.1",
     "husky": "^9.1.7",
     "lighthouse": "^13.1.0",
