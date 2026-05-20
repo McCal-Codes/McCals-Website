@@ -9,10 +9,11 @@ import { inject } from '@vercel/analytics';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
 
-const isVercelRuntime = import.meta.env.VITE_VERCEL_ENV !== 'development';
+const enableVercelAnalytics = import.meta.env.PROD && import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS === 'true';
+const enableSpeedInsights = import.meta.env.PROD && import.meta.env.VITE_ENABLE_VERCEL_SPEED_INSIGHTS !== 'false';
 
 // Initialize Vercel Analytics for route tracking
-if (isVercelRuntime) {
+if (enableVercelAnalytics) {
   inject();
 }
 
@@ -41,7 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
-      {isVercelRuntime && <SpeedInsights />}
+      {enableSpeedInsights && <SpeedInsights />}
     </QueryClientProvider>
   </React.StrictMode>,
 );
