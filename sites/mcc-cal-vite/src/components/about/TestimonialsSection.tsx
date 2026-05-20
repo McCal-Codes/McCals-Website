@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useGoogleReviews, staticLinkedInReviews, type GoogleReview, type LinkedInReview } from '@/hooks/useGoogleReviews';
-import { useState, useEffect, useCallback, memo, useMemo } from 'react';
+import { useState, useEffect, useCallback, memo, useMemo, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import styles from './about-sections.module.css';
 
 interface TestimonialsSectionProps {
@@ -102,6 +102,7 @@ const TestimonialCard = memo(function TestimonialCard({
 
 const AUTO_ADVANCE_INTERVAL = 6000; // 6 seconds
 const MOBILE_COLLAPSED_TESTIMONIAL_COUNT = 2;
+const TESTIMONIAL_CAROUSEL_MIN_WIDTH = 900;
 
 export function TestimonialsSection({ className = '' }: TestimonialsSectionProps) {
   // Fetch live Google reviews (with fallback to static data)
@@ -126,40 +127,52 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
       return hashA - hashB;
     });
   }, [allTestimonials]);
+  const desktopPages = useMemo(() => {
+    const pages: UnifiedTestimonial[][] = [];
+
+    for (let index = 0; index < shuffledTestimonials.length; index += 2) {
+      pages.push(shuffledTestimonials.slice(index, index + 2));
+    }
+
+    return pages;
+  }, [shuffledTestimonials]);
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === 'undefined') return false;
-    return window.innerWidth < 768;
+    return window.innerWidth < TESTIMONIAL_CAROUSEL_MIN_WIDTH;
   });
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Handle resize for mobile detection with passive listener
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < TESTIMONIAL_CAROUSEL_MIN_WIDTH);
     };
     window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const totalSlides = isMobile ? shuffledTestimonials.length : Math.ceil(shuffledTestimonials.length / 2);
+  const totalSlides = isMobile ? shuffledTestimonials.length : desktopPages.length;
+  const activeSlideIndex = totalSlides > 0 ? Math.min(currentIndex, totalSlides - 1) : 0;
 
   const nextSlide = useCallback(() => {
+    if (totalSlides === 0) return;
     setCurrentIndex((prev) => (prev + 1) % totalSlides);
   }, [totalSlides]);
 
   const prevSlide = useCallback(() => {
+    if (totalSlides === 0) return;
     setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   }, [totalSlides]);
 
   const goToSlide = useCallback((index: number) => {
-    setCurrentIndex(index);
-  }, []);
+    setCurrentIndex(Math.min(Math.max(index, 0), Math.max(totalSlides - 1, 0)));
+  }, [totalSlides]);
 
   // Keyboard navigation for carousel
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (isMobile) return;
     switch (e.key) {
       case 'ArrowLeft':
@@ -180,11 +193,6 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
         break;
     }
   }, [isMobile, prevSlide, nextSlide, goToSlide, totalSlides]);
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
 
   // Auto-advance (only on desktop and when tab is visible)
   useEffect(() => {
@@ -219,6 +227,17 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
       aria-labelledby="testimonials-heading"
       onMouseEnter={() => !isMobile && setIsPaused(true)}
       onMouseLeave={() => !isMobile && setIsPaused(false)}
+      onFocus={() => !isMobile && setIsPaused(true)}
+      onBlur={(event) => {
+        const nextFocusedElement = event.relatedTarget;
+
+        if (
+          !isMobile &&
+          (!(nextFocusedElement instanceof Node) || !event.currentTarget.contains(nextFocusedElement))
+        ) {
+          setIsPaused(false);
+        }
+      }}
     >
       <div className={styles.testimonialsHeader}>
         <p className={styles.eyebrow}>Client testimonials</p>
@@ -232,8 +251,8 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
       </div>
 
       {/* Screen reader announcements for slide changes */}
-      <div aria-live="polite" aria-atomic="true" className="sr-only">
-        {`Showing testimonial ${currentIndex + 1} of ${totalSlides}`}
+      <div aria-live="polite" aria-atomic="true" className={styles.srOnly}>
+        {`Showing testimonial page ${activeSlideIndex + 1} of ${totalSlides}`}
       </div>
 
       {/* Mobile: Expandable stacked layout */}
@@ -273,16 +292,32 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
           aria-roledescription="carousel"
           aria-label="Client testimonials"
           tabIndex={0}
+          onKeyDown={handleKeyDown}
         >
-          <div 
-            className={styles.testimonialsTrack}
-            style={{ transform: `translateX(-${currentIndex * 50}%)` }}
-          >
-            {shuffledTestimonials.map((item, index) => (
-              <div key={`${item.name}-${index}`} className={styles.testimonialSlide}>
-                <TestimonialCard testimonial={item} isActive={index === currentIndex} />
-              </div>
-            ))}
+          <div className={styles.testimonialsViewport}>
+            <div
+              className={styles.testimonialsTrack}
+              style={{ transform: `translateX(-${activeSlideIndex * 100}%)` }}
+            >
+              {desktopPages.map((page, pageIndex) => (
+                <div
+                  key={page.map((item) => item.name).join('-')}
+                  className={styles.testimonialPage}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`Testimonial page ${pageIndex + 1} of ${totalSlides}`}
+                  aria-hidden={pageIndex !== activeSlideIndex}
+                >
+                  {page.map((item, itemIndex) => (
+                    <TestimonialCard
+                      key={`${item.name}-${itemIndex}`}
+                      testimonial={item}
+                      isActive={pageIndex === activeSlideIndex}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Navigation Arrows */}
@@ -310,10 +345,10 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
             {Array.from({ length: totalSlides }).map((_, index) => (
               <button
                 key={index}
-                className={`${styles.carouselDot} ${index === currentIndex ? styles.activeDot : ''}`}
+                className={`${styles.carouselDot} ${index === activeSlideIndex ? styles.activeDot : ''}`}
                 onClick={() => goToSlide(index)}
-                aria-label={`Go to testimonial ${index + 1}`}
-                aria-current={index === currentIndex ? 'true' : undefined}
+                aria-label={`Go to testimonial page ${index + 1}`}
+                aria-current={index === activeSlideIndex ? 'true' : undefined}
               />
             ))}
           </div>

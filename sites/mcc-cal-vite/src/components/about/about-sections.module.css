@@ -91,6 +91,9 @@
   margin: 0;
   display: grid;
   place-items: center;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 320px);
 }
 
 .bioPhoto::before {
@@ -164,6 +167,35 @@
   font-size: 0.9rem;
 }
 
+@media (min-width: 1024px) {
+  .bio {
+    padding: 28px;
+  }
+
+  .bioGrid {
+    align-items: center;
+    text-align: center;
+  }
+
+  .bioContent {
+    justify-items: center;
+    width: 100%;
+  }
+
+  .bioText {
+    justify-items: center;
+    max-width: 42rem;
+  }
+
+  .bioText p {
+    max-width: 58ch;
+  }
+
+  .stats {
+    width: min(100%, 560px);
+  }
+}
+
 .bioText strong {
   color: var(--about-text-primary);
 }
@@ -189,6 +221,8 @@
   gap: 10px;
   width: min(100%, 560px);
   margin-top: 16px;
+  margin-inline: auto;
+  justify-self: center;
 }
 
 /* Ensure menu panels aren't clipped */
@@ -517,27 +551,35 @@
 /* Testimonials Carousel */
 .testimonialsCarousel {
   position: relative;
-  overflow: hidden;
+  display: grid;
+  gap: 18px;
+  overflow: visible;
   margin-bottom: 24px;
-  padding: 0 12px;
+  padding: 0 clamp(46px, 5vw, 70px);
+}
+
+.testimonialsViewport {
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .testimonialsTrack {
   display: flex;
+  align-items: stretch;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.testimonialSlide {
-  flex: 0 0 50%;
-  padding: 0 12px;
+.testimonialPage {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.5vw, 32px);
   box-sizing: border-box;
 }
 
 @media (min-width: 1024px) {
-  .testimonialSlide {
-    flex: 0 0 50%;
-    padding: 0 16px;
-    box-sizing: border-box;
+  .testimonialPage {
+    gap: 32px;
   }
 
   .testimonialCard {
@@ -551,9 +593,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow-y: auto;
-  max-height: 60vh;
-  padding-right: 8px;
 }
 
 .testimonialsStack .testimonialCard {
@@ -563,32 +602,109 @@
 .carouselDots {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin-top: 12px;
+  justify-self: center;
+  gap: 8px;
 }
 
 .carouselDot {
-  width: 6px;
-  height: 6px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
   cursor: pointer;
-  transition: all 0.3s ease;
   padding: 0;
+  display: inline-grid;
+  place-items: center;
+  transition: transform 0.2s ease;
+}
+
+.carouselDot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+  transition:
+    width 0.24s ease,
+    background 0.24s ease,
+    opacity 0.24s ease;
+}
+
+.carouselDot:hover,
+.carouselDot:focus-visible {
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.carouselDot:hover::before,
+.carouselDot:focus-visible::before {
+  background: rgba(255, 255, 255, 0.54);
 }
 
 .activeDot {
+  border-radius: 999px;
+}
+
+.activeDot::before {
+  width: 18px;
   background: var(--about-accent);
-  width: 16px;
-  border-radius: 3px;
+}
+
+.carouselArrow {
+  position: absolute;
+  top: calc(50% - 20px);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.46);
+  color: var(--about-text-primary);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateY(-50%);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.carouselArrow:hover,
+.carouselArrow:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+  transform: translateY(-50%) scale(1.03);
+}
+
+.carouselArrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.carouselArrowPrev {
+  left: 4px;
+}
+
+.carouselArrowNext {
+  right: 4px;
 }
 
 .testimonialCard {
-  display: block;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
   padding: 24px;
   margin: 0;
+  height: 100%;
+  box-sizing: border-box;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
@@ -611,7 +727,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .testimonialAvatar {
@@ -678,11 +794,12 @@
   color: #ffd700;
   font-size: 1.1rem;
   letter-spacing: 0.15em;
-  margin: -8px 0 12px;
+  margin: -2px 0 0;
 }
 
 .testimonialQuote {
-  margin: 0 0 12px;
+  flex: 1;
+  margin: 0;
   color: var(--about-text-secondary);
   font-size: 0.85rem;
   line-height: 1.5;
@@ -693,7 +810,7 @@
 }
 
 .testimonialFooter {
-  padding-top: 10px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -884,12 +1001,12 @@
 
 .sponsorSupport {
   display: grid;
-  grid-template-columns: clamp(108px, 12vw, 132px) minmax(0, 1fr);
+  grid-template-columns: clamp(112px, 12vw, 136px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(16px, 3vw, 24px);
-  max-width: 760px;
-  margin: 22px auto 0;
-  padding: 18px 20px;
+  gap: clamp(20px, 3vw, 28px);
+  max-width: 820px;
+  margin: 24px auto 34px;
+  padding: 20px 22px;
   border: 1px solid rgba(255, 255, 255, 0.075);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.025);
@@ -898,8 +1015,9 @@
 .sponsorLogoWrap {
   display: grid;
   place-items: center;
-  min-height: 126px;
-  padding: 12px clamp(12px, 2vw, 18px) 12px 0;
+  align-self: stretch;
+  min-height: 132px;
+  padding: 8px clamp(14px, 2vw, 20px) 8px 0;
   border-right: 1px solid var(--about-line);
   opacity: 1;
 }
@@ -907,7 +1025,7 @@
 .sponsorLogoSurface {
   display: grid;
   place-items: center;
-  width: 106px;
+  width: clamp(92px, 8vw, 108px);
   aspect-ratio: 687 / 863;
   padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.085);
@@ -917,15 +1035,22 @@
 }
 
 .sponsorLogo {
+  grid-area: 1 / 1;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
+.sponsorLogoStandard {
+  display: none;
+}
+
 .sponsorCopy {
   display: grid;
-  gap: 8px;
+  align-content: center;
+  gap: 9px;
+  min-width: 0;
 }
 
 .sponsorCopy .eyebrow {
@@ -951,7 +1076,7 @@
 
 .sponsorLink {
   justify-self: start;
-  margin-top: 0;
+  margin-top: 2px;
   color: var(--about-accent-strong);
   font-size: 0.76rem;
   font-weight: 600;
@@ -1311,8 +1436,12 @@
   box-shadow: 0 10px 24px rgba(74, 52, 34, 0.1);
 }
 
-:global(body[data-theme='light']) .sponsorLogo {
-  content: url('/about/sponsors/scrimshaw-media-logo.png');
+:global(body[data-theme='light']) .sponsorLogoInverse {
+  display: none;
+}
+
+:global(body[data-theme='light']) .sponsorLogoStandard {
+  display: block;
 }
 
 :global(body[data-theme='light']) .fieldKitCard:hover {
@@ -1654,12 +1783,12 @@
   .sponsorSupport {
     grid-template-columns: 1fr;
     gap: 12px;
-    margin-top: 18px;
+    margin: 18px auto 26px;
     padding: 16px;
   }
 
   .sponsorLogoWrap {
-    justify-items: start;
+    justify-items: center;
     width: 100%;
     min-height: 0;
     padding: 0 0 12px;
@@ -1676,7 +1805,13 @@
 
   .sponsorCopy {
     display: grid;
+    justify-items: center;
     gap: 7px;
+    text-align: center;
+  }
+
+  .sponsorLink {
+    justify-self: center;
   }
 
   .sponsorCopy .eyebrow {

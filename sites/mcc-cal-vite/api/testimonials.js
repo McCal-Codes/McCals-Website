@@ -39,8 +39,8 @@ export default async function handler(req, res) {
       const { data: testimonials, error } = await query;
       
       if (error) {
-        console.error('[testimonials] Database error:', error);
-        res.status(500).json({ error: 'Failed to load testimonials' });
+        console.warn('[testimonials] Database unavailable, using client fallback:', error.message);
+        res.status(200).json({ testimonials: [], source: 'supabase-error' });
         return;
       }
       

@@ -48,6 +48,8 @@ interface UseGoogleReviewsOptions {
 }
 
 const isLocalBuildPreview = import.meta.env.PROD && import.meta.env.VITE_VERCEL_ENV === 'development';
+const shouldFetchTestimonialsApi =
+  import.meta.env.PROD || import.meta.env.VITE_ENABLE_TESTIMONIALS_API === 'true';
 
 export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
   const { maxResults = 8, featuredOnly = false } = options;
@@ -100,7 +102,7 @@ export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
           }
         }
 
-        if (!isLocalBuildPreview) {
+        if (!isLocalBuildPreview && shouldFetchTestimonialsApi) {
           // Fallback to API testimonials endpoint
           const response = await fetch(`/api/testimonials?limit=${maxResults}${featuredOnly ? '&featured=true' : ''}`);
 
