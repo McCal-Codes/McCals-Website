@@ -48,8 +48,7 @@ interface UseGoogleReviewsOptions {
 }
 
 const isLocalBuildPreview = import.meta.env.PROD && import.meta.env.VITE_VERCEL_ENV === 'development';
-const shouldFetchTestimonialsApi =
-  import.meta.env.PROD || import.meta.env.VITE_ENABLE_TESTIMONIALS_API === 'true';
+const shouldFetchTestimonialsApi = import.meta.env.VITE_ENABLE_TESTIMONIALS_API === 'true';
 
 export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
   const { maxResults = 8, featuredOnly = false } = options;

@@ -27,7 +27,6 @@ const memoryCache = new Map<string, CacheEntry<unknown>>();
 
 // Use local images in development, CDN in production
 const IS_DEV = import.meta.env.DEV;
-const IS_LOCAL_BUILD_PREVIEW = !IS_DEV && import.meta.env.VITE_VERCEL_ENV === 'development';
 
 function encodeURIPath(path: string): string {
   return path.split('/').map(encodeURIComponent).join('/');
@@ -90,7 +89,7 @@ async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<
   const apiUrl = `/api/manifests/${type}`;
   const staticFile = getManifestFile(type);
 
-  if ((IS_DEV || IS_LOCAL_BUILD_PREVIEW) && staticFile) {
+  if (staticFile) {
     return fetchStaticManifestJson<T>(staticFile, signal);
   }
 
