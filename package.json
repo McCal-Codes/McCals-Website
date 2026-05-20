@@ -34,6 +34,7 @@
     "todo": "code updates/todo.md || open updates/todo.md",
     "// BUNDLE": "--- Bundle Analysis ---",
     "analyze": "cd sites/mcc-cal-vite && npx vite-bundle-visualizer",
+    "perf:budget": "cd sites/mcc-cal-vite && npm run perf:budget",
     "// QUALITY": "--- Code Quality ---",
     "quality:check": "npm run lint && npm run test:e2e && npm run ci:check",
     "lint": "eslint . --max-warnings=50",

@@ -552,6 +552,8 @@
 }
 
 .story__citations {
+  box-sizing: border-box;
+  min-width: 0;
   border: 1px solid rgba(202, 194, 186, 0.14);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.02);
@@ -563,6 +565,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
   padding: 18px 20px;
   cursor: pointer;
   font-size: 0.92rem;
@@ -579,20 +584,29 @@
 .story__citations-panel {
   display: grid;
   gap: 18px;
-  padding: 0 20px 20px;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 clamp(14px, 4vw, 20px) clamp(16px, 4vw, 20px);
   border-top: 1px solid rgba(202, 194, 186, 0.12);
+  overflow-wrap: anywhere;
 }
 
 .story__citations-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
   gap: 10px 16px;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
   padding-top: 18px;
 }
 
 .story__citations-intro {
   margin: 0;
+  min-width: 0;
+  max-width: 100%;
   color: rgba(232, 232, 232, 0.72);
   line-height: 1.7;
 }
@@ -612,6 +626,9 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
+  justify-self: start;
+  max-width: 100%;
+  white-space: normal;
 }
 
 .story__citations-copy:hover {
@@ -619,6 +636,7 @@
 }
 
 .story__citations-status {
+  min-width: 0;
   color: rgba(202, 194, 186, 0.74);
   font-size: 0.82rem;
   font-weight: 700;
@@ -633,14 +651,27 @@
 .story__citations-list {
   display: grid;
   gap: 14px;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
   margin: 0;
-  padding: 0 0 0 20px;
+  padding: 0 0 0 clamp(18px, 5vw, 24px);
 }
 
 .story__citations-item p {
   margin: 0;
+  min-width: 0;
   color: rgba(238, 238, 238, 0.88);
   line-height: 1.8;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (min-width: 640px) {
+  .story__citations-actions {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
 }
 
 .story__author-card {

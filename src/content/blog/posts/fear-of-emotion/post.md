@@ -7,7 +7,7 @@ category: "Thesis"
 excerpt: "A reflection on emotional suppression, childhood conditioning, and learning to accept difficult feelings."
 leadImage: "images/lead.jpg"
 leadImageAlt: "Studio portrait from a session with Helen Wise."
-leadImageCaption: "Studio portrait from a session with Helen Wise, May 28, 2024."
+leadImageCaption: "Helen Wise sits for a studio portrait in Pittsburgh, Pa., May 28, 2024. (Photo by Caleb McCartney)"
 published: true
 tags:
   - Thesis
@@ -15,9 +15,20 @@ tags:
   - Family
   - Acceptance
   - Healing
+sources:
+  - citation: "Gross, J. J. (1998). Antecedent- and response-focused emotion regulation: Divergent consequences for experience, expression, and physiology. Journal of Personality and Social Psychology, 74(1), 224-237. https://doi.org/10.1037/0022-3514.74.1.224"
+    title: "Antecedent- and Response-Focused Emotion Regulation"
+    url: "https://pubmed.ncbi.nlm.nih.gov/9457784/"
+    publisher: "Journal of Personality and Social Psychology"
+    publishedDate: "1998"
+  - citation: "National Institute of Mental Health. (n.d.). Coping with traumatic events. National Institutes of Health. Retrieved May 20, 2026, from https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events"
+    title: "Coping With Traumatic Events"
+    url: "https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events"
+    publisher: "National Institute of Mental Health"
+    accessedDate: "2026-05-20"
 ---
 
-Feelings are natural parts of being alive. I was taught to hide them away because someone could always use them against me, and for a long time that meant my parents. That sense that these parts of me were wrong because someone else said so did real damage. I learned to put on the mask, even when I wanted to break it into a million shattered pieces. My ability to process emotion was interrupted early, and moving past those moments never felt like an option I had been given.
+Feelings are natural parts of being alive. I was taught to hide them because someone could always use them against me, and for a long time that meant my parents. The belief that these parts of me were wrong because someone else said so did real damage. I learned to put on the mask, even when I wanted to break it into pieces. My ability to process emotion was interrupted early, and moving past those moments never felt like an option I had been given.
 
 Even now, processing those emotions has only really become necessary because avoidance eventually turns into frustration. It is easy to lose a relationship with difficult and uncomfortable emotions, especially when the people around you treat them as weaknesses or despise them outright.
 
@@ -25,6 +36,6 @@ The emotions I experience, which loom inside this thesis work, become abrasive t
 
 Those feelings were often inaccessible, held hostage, and kept beyond my reach even while they seemed to gasp for breath. They were consumed by my inability to imagine life beyond the immediate moment. Who was I, and what relationships did I want? What gave my life meaning without access to those inhibited emotions, and why had they been preserved so far outside my understanding?
 
-All feelings serve a purpose regardless of the social rules placed on them. Without healthy role modeling for what to do with loneliness, anger, grief, or shame, those emotions can follow us into adulthood in ways that hurt and confuse us. No matter how uncomfortable they are, they remain valid. They belong to us, not to whoever finds them inconvenient.
+Research on emotion regulation has long distinguished between changing how we understand a feeling and simply suppressing its outward expression (Gross, 1998). That distinction matters here. Hiding an emotion may keep a room calm for a few minutes, but it does not teach the body what to do with loneliness, anger, grief or shame. Without healthy role modeling, those feelings can follow us into adulthood in ways that hurt and confuse us. No matter how uncomfortable they are, they remain valid. They belong to us, not to whoever finds them inconvenient.
 
 Living in fear of emotion is a brutal way to live. These struggles deserve attention instead of avoidance, because avoidance is a stranger to acceptance. Try not to escape, hide, or outrun what is difficult. Make space to pause. Acceptance is not easy, but it creates the possibility of understanding, and understanding creates a different kind of control.

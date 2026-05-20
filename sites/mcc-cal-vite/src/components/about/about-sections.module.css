@@ -34,6 +34,41 @@
   --about-surface: rgba(255, 255, 255, 0.04);
 }
 
+.bio,
+.testimonials,
+.clients,
+.fieldKit {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.bioGrid,
+.bioContent,
+.bioText,
+.actions,
+.stats,
+.testimonialsHeader,
+.testimonialsCarousel,
+.testimonialsViewport,
+.testimonialsTrack,
+.testimonialPage,
+.testimonialCard,
+.trustBadges,
+.clientCarousel,
+.clientTrack,
+.clientsGrid,
+.clientCard,
+.sponsorSupport,
+.sponsorCopy,
+.fieldKitHeader,
+.fieldKitGrid,
+.fieldKitCard {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
 /* ============================================
    Shared Styles (Eyebrow, Section Headings)
    ============================================ */
@@ -83,6 +118,7 @@
 .bioGrid {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   /* Prevent unexpected horizontal overflow in some browsers/layouts */
   box-sizing: border-box;
@@ -104,11 +140,14 @@
 .bioPhoto::before {
   content: '';
   position: absolute;
+  inset: 50% auto auto 50%;
   width: 82%;
   height: 82%;
   border-radius: 999px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 70%);
   filter: blur(36px);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 
 .photoWrapper {
@@ -128,6 +167,7 @@
 }
 
 .photoWrapper img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -149,7 +189,12 @@
 
 .bioContent {
   display: grid;
+  justify-items: center;
   gap: 10px;
+  width: 100%;
+  max-width: 68ch;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .bioContent h1 {
@@ -162,7 +207,11 @@
 
 .bioText {
   display: grid;
+  justify-items: center;
   gap: 12px;
+  max-width: 62ch;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .bioText p {
@@ -170,6 +219,7 @@
   color: var(--about-text-secondary);
   line-height: 1.6;
   font-size: 0.9rem;
+  text-wrap: pretty;
 }
 
 @media (min-width: 1024px) {
@@ -264,44 +314,9 @@
     max-width: 100%;
   }
 
-  .clientTrack,
   .testimonialsTrack {
     min-width: 0;
     box-sizing: border-box;
-    /* disable continuous scrolling on medium widths to avoid layout overflow and reset transforms */
-    animation: none !important;
-    animation-play-state: paused !important;
-    transform: none !important;
-  }
-}
-
-/* At tablet sizes, make carousel tracks wrap instead of being long single rows */
-@media (min-width: 680px) and (max-width: 1100px) {
-  .clientTrack {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  /* Make sure the track is visually reset to the start on wrap layouts */
-  .clientTrack {
-    transform: translateX(0) !important;
-  }
-
-  .clientTrack > li {
-    flex: 0 0 calc(33.333% - 12px);
-    max-width: calc(33.333% - 12px);
-  }
-
-  .testimonialsTrack {
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  .testimonialPage,
-  .testimonialCard {
-    flex: 0 0 100%;
-    width: 100%;
-    max-width: 100%;
   }
 }
 
@@ -334,9 +349,9 @@
 
 .actions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 10px;
-  width: min(100%, 560px);
+  width: min(100%, 440px);
   margin-top: 16px;
   margin-inline: auto;
   justify-self: center;
@@ -385,7 +400,6 @@
 
 /* Primary action - solid light style, distinct from dropdowns */
 .actionPrimary {
-  grid-column: 1 / -1;
   color: #1a1a1a;
   background: linear-gradient(135deg, #f5f0eb 0%, #e8e2dc 100%);
   border-color: transparent;
@@ -469,6 +483,7 @@
   flex: 1;
   min-width: 0;
   overflow: visible;
+  width: 100%;
 }
 
 /* Menu wrapper button fills container */
@@ -563,12 +578,16 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  width: min(100%, 560px);
   margin-top: 10px;
+  margin-inline: auto;
 }
 
 .stat {
   display: grid;
+  justify-items: center;
   gap: 4px;
+  min-width: 0;
   padding: 12px 10px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -595,6 +614,8 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .statsClients {
@@ -672,24 +693,28 @@
   gap: 18px;
   overflow: visible;
   margin-bottom: 24px;
+  width: min(100%, 820px);
+  margin-inline: auto;
   padding: 0 clamp(46px, 5vw, 70px);
 }
 
 .testimonialsViewport {
   overflow: hidden;
   border-radius: 16px;
+  width: 100%;
 }
 
 .testimonialsTrack {
   display: flex;
   align-items: stretch;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
 
 .testimonialPage {
   flex: 0 0 100%;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: clamp(20px, 2.5vw, 32px);
   box-sizing: border-box;
 }
@@ -709,10 +734,12 @@
 .testimonialsStack {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
 }
 
 .testimonialsStack .testimonialCard {
+  width: min(100%, 720px);
   flex-shrink: 0;
 }
 
@@ -961,6 +988,7 @@
 /* Trust Badges - Third Party Validation */
 .trustBadges {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 32px;
   margin: 24px 0;
@@ -1055,9 +1083,10 @@
 
 .clientsSubtitle {
   max-width: 56ch;
-  margin: 0;
+  margin: 0 auto;
   color: var(--about-text-muted);
   font-size: 0.8rem;
+  text-align: center;
 }
 
 /* Modern Client Carousel */
@@ -1065,6 +1094,7 @@
   position: relative;
   overflow: hidden;
   padding: 24px 12px;
+  width: 100%;
 }
 
 /* Gradient fade edges - wider and softer */
@@ -1091,12 +1121,17 @@
 
 .clientTrack {
   display: flex;
+  flex-wrap: nowrap;
   gap: 18px;
   list-style: none;
   margin: 0;
   padding: 10px 0;
+  width: max-content;
+  min-width: max-content;
+  max-width: none;
   transform: translateZ(0);
   animation: scroll var(--scroll-duration, 30s) linear infinite;
+  will-change: transform;
 }
 
 .clientTrack:hover {
@@ -1118,7 +1153,8 @@
 
 .sponsorSupport {
   display: grid;
-  grid-template-columns: clamp(112px, 12vw, 136px) minmax(0, 1fr);
+  grid-template-columns: 1fr;
+  justify-items: center;
   align-items: center;
   gap: clamp(20px, 3vw, 28px);
   max-width: 820px;
@@ -1132,10 +1168,12 @@
 .sponsorLogoWrap {
   display: grid;
   place-items: center;
-  align-self: stretch;
+  align-self: center;
   min-height: 132px;
-  padding: 8px clamp(14px, 2vw, 20px) 8px 0;
-  border-right: 1px solid var(--about-line);
+  width: min(100%, 180px);
+  padding: 0 0 16px;
+  border-right: 0;
+  border-bottom: 1px solid var(--about-line);
   opacity: 1;
 }
 
@@ -1165,9 +1203,11 @@
 
 .sponsorCopy {
   display: grid;
+  justify-items: center;
   align-content: center;
   gap: 9px;
   min-width: 0;
+  text-align: center;
 }
 
 .sponsorCopy .eyebrow {
@@ -1192,7 +1232,7 @@
 }
 
 .sponsorLink {
-  justify-self: start;
+  justify-self: center;
   margin-top: 2px;
   color: var(--about-accent-strong);
   font-size: 0.76rem;
@@ -1211,6 +1251,7 @@
 /* Enhanced Client Cards */
 .clientCard {
   flex: 0 0 176px;
+  max-width: 176px;
   height: 128px;
   display: flex;
   align-items: center;
@@ -1399,9 +1440,11 @@
 
 .fieldKitHeader {
   display: grid;
+  justify-items: center;
   gap: 10px;
   max-width: 62ch;
-  margin-bottom: 22px;
+  margin: 0 auto 22px;
+  text-align: center;
 }
 
 .fieldKitHeader h2 {
@@ -1421,8 +1464,10 @@
 
 .fieldKitGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 12px;
+  width: min(100%, 760px);
+  margin-inline: auto;
 }
 
 .fieldKitCard {
@@ -1637,8 +1682,8 @@
   }
 
   .testimonialsCarousel {
-    margin: 0 -16px;
-    padding: 0 16px;
+    margin: 0 auto;
+    padding: 0;
   }
 
   .testimonials {
@@ -1671,7 +1716,7 @@
   }
 
   .actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 10px;
   }
 
@@ -1684,10 +1729,6 @@
 
   .menuWrapper {
     flex: 1;
-  }
-
-  .actionPrimary {
-    grid-column: 1 / -1;
   }
 
   .menuPanel {
@@ -2002,6 +2043,7 @@
     align-items: stretch;
     gap: 12px;
     margin-top: 16px;
+    width: 100%;
   }
 
   .stats {
@@ -2021,6 +2063,17 @@
 
   .stat span {
     font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .stats {
+    grid-template-columns: 1fr;
+    width: min(100%, 240px);
+  }
+
+  .stat span {
+    overflow-wrap: normal;
   }
 }
 
@@ -2075,15 +2128,17 @@
 /* Mobile client grid */
 .clientsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .clientsGrid .clientCard {
   flex: none;
+  max-width: none;
   width: 100%;
   height: 88px;
   padding: 12px 14px;

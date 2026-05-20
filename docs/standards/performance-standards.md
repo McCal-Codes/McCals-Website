@@ -134,6 +134,26 @@ font:
 - [ ] Track regression alerts
 - [ ] Regular performance audits
 
+### Vite App Budget Check
+
+For the maintained public app in `sites/mcc-cal-vite`, run the budget check against a production preview:
+
+```bash
+cd sites/mcc-cal-vite
+npm run build
+npm run preview -- --host 127.0.0.1 --port 4173
+npm run perf:budget
+```
+
+To check a deployed URL:
+
+```bash
+cd sites/mcc-cal-vite
+PERFORMANCE_BASE_URL=https://www.mcc-cal.com npm run perf:budget
+```
+
+Current budget checks cover `/`, `/about`, and `/blog/fear-of-emotion` at mobile and desktop sizes. They fail on CLS over `0.1`, LCP over `2.5s`, FCP over `1.8s`, horizontal overflow, failed responses, console errors/warnings, and route-specific JS/CSS/image payload budgets.
+
 ## Performance Tools & Resources
 
 ### Development Tools

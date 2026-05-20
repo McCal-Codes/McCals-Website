@@ -6,7 +6,9 @@
   "images": {
     "sizes": [160, 256, 320, 360, 384, 480, 540, 640, 720, 750, 828, 960, 1080, 1200, 1280, 1440, 1600, 1920, 2048, 3840],
     "localPatterns": [
+      { "pathname": "^/about/.*$", "search": "" },
       { "pathname": "^/assets/.*$", "search": "" },
+      { "pathname": "^/content/blog-static/.*$", "search": "" },
       { "pathname": "^/images/.*$", "search": "" }
     ],
     "remotePatterns": [

@@ -104,3 +104,18 @@ npm run analyze
 2. [ ] Invite team members as Viewers
 3. [ ] Configure Slack notifications
 4. [ ] Review analytics dashboard after next deployment
+
+## 2026 Site Health Additions
+
+### Already wired in the repo
+- **Speed Insights**: Enabled only in Vercel preview and production runtimes so local production previews do not log `/_vercel/speed-insights/script.js` 404 noise.
+- **Image Optimization**: Vercel Image Optimization is configured for `/assets`, `/images`, `/about`, and `/content/blog-static` assets. Blog lead/card images and the About portrait should route through `/_vercel/image` in Vercel preview and production.
+- **Performance budgets**: Run `npm run perf:budget` after starting `npm run preview -- --host 127.0.0.1 --port 4173` from `sites/mcc-cal-vite`. To check a deployed URL, run `PERFORMANCE_BASE_URL=https://www.mcc-cal.com npm run perf:budget`.
+
+### Dashboard / Vercel settings to review
+- **Vercel Toolbar for previews**: Enable for preview deployments and use its layout shift, interaction timing, and accessibility tools during visual QA.
+- **Observability**: Monitor Function latency and errors for `/api/contact`, `/api/quote`, `/api/schedule/*`, `/api/podcast-feed`, `/api/testimonials`, and `/api/manifests/*`.
+- **Firewall / WAF**: Add managed rules and rate-limit rules for write-heavy endpoints, especially contact, quote, and booking APIs.
+- **Deployment Protection**: Protect preview deployments before client review or major content changes.
+- **Skew Protection**: Confirm it is enabled for the project so clients do not keep stale JavaScript across deployments.
+- **Cron Jobs**: Consider a later cache-warming or smoke-check cron for podcast, manifest, and scheduling endpoints.

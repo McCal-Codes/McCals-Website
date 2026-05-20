@@ -7,22 +7,30 @@ category: "Personal"
 excerpt: "A memory of being handed a controller becomes an essay about pressure, control, and the simple moments that still cut through the noise."
 leadImage: "images/lead.jpg"
 leadImageFallback: "images/lead.jpg"
-leadImageAlt: "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Kentucky."
-leadImageCaption: "A boy holds a sparkler with an adult beside him in Boyd Station, Ky., June 9, 2025."
+leadImageAlt: "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Ky."
+leadImageCaption: "A boy holds a sparkler as an adult stands nearby in Boyd Station, Ky., June 9, 2025. (Photo by Caleb McCartney)"
 published: true
 tags:
   - Emotional
   - Control
   - Family
   - Expectations
+sources:
+  - citation: "National Institute of Mental Health. (n.d.). Coping with traumatic events. National Institutes of Health. Retrieved May 20, 2026, from https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events"
+    title: "Coping With Traumatic Events"
+    url: "https://www.nimh.nih.gov/health/topics/coping-with-traumatic-events"
+    publisher: "National Institute of Mental Health"
+    accessedDate: "2026-05-20"
 ---
 
-There is this weird omnipresence in my life, where I was practically expected to know how to play a video game in everyday life. I was no more than 5 years old when I was handed a controller for my dad's original Xbox. There is a sentiment and more nuanced meaning behind that, but we will get there. Regarding a controller, at 5 years old, I was expected to have "control" over something outside of myself, and I barely had much to begin with. When a sudden loss of control becomes overwhelming, these moments paralyse my body. Even though someone can hand me a controller at any moment, and I can use it better than the majority, you take me back to when I wasn't always looked at to maintain some semblance of "control," I will turn to no more than Medusa's example.
+There is a strange omnipresence in my life, as if I was expected to know how to play a video game before I knew how to move through the rest of the world. I was no more than 5 years old when I was handed a controller for my dad's original Xbox. There is a more complicated meaning behind that object, but it begins simply: at 5 years old, I was expected to have "control" over something outside myself when I barely had much control to begin with.
 
-High expectations have always worried me. Only when I was getting bullied and my grades dropped did anyone think to ask if I was okay. Even then it felt inconvenient to them, as if my worth could be measured by a report card and whatever I managed to retain on command. Passing a test is one thing, but using what school teaches in daily life is another. If you have access to knowledge and choose not to learn, you waste what was given. Then again, gatekeeping exists too. That is a topic for another day, but the tension is still there.
+When a sudden loss of control becomes overwhelming, these moments can paralyze my body. Someone can hand me a controller at any moment, and I can use it well. But take me back to when I was expected to maintain control without being given the room to be a child, and I become stone-still, caught inside the old myth of being looked at until I cannot move.
 
-That same controller is on my mind. That same week, my parents expected me to be an adult. I was left home alone for the first and not the last time, which made me a little hesitant and worried. Afterwards, I made a snack, did homework, and watched TV. My parents felt terrible, yet I wasn't sure what they did that was wrong, as if I was the one thrown off by their reaction.
+High expectations have always worried me. Only when I was being bullied and my grades dropped did anyone think to ask if I was OK. Even then it felt inconvenient, as if my worth could be measured by a report card and whatever I managed to retain on command. Passing a test is one thing. Using what school teaches in daily life is another.
 
-> Even in the darkest moments, there was something to intrigue me - simple, but always enough.
+That same controller is still on my mind. That week, my parents expected me to be an adult. I was left home alone for the first time, though not the last, and I remember feeling hesitant and worried. Afterward, I made a snack, did homework and watched TV. My parents felt terrible, yet I was not sure what they had done wrong. Their reaction made me feel as if I was the one who had misunderstood the moment.
 
-There has always been an emphasis on light in my life; even in the darkest moments, there was something to intrigue me, simple but always appreciative. When I was younger, my grandparent's front door entrance had a beautiful glass-style door, and when light rays in the morning shone through that glass, the rays would cast rainbows on the old, tattered, but still somewhat luxurious rug. It is a kind of rug with many designs and a sense of weight. These rays traced upon this rug in a way that danced in my mind even so young. Still, to this day, I can recount the contentment and appreciation for such an observation. The warmth of the sun's rays and the texture of that new but old rug are simple pleasures. I miss being so far away from such simple moments.
+> Even in the darkest moments, there was something simple enough to hold my attention.
+
+There has always been an emphasis on light in my life. Even in the darkest moments, something simple could still intrigue me. When I was younger, my grandparent's front door had a beautiful glass panel, and when morning light came through it, the rays cast small rainbows across an old, tattered and still somehow luxurious rug. The rug had many designs and a sense of weight. The light moved across it in a way that danced in my mind, even when I was young. I can still remember the contentment of noticing it. The warmth of the sun, the texture of that old rug and the quiet of the room were simple pleasures. I miss being close to moments like that.

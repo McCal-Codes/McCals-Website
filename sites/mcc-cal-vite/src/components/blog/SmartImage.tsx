@@ -3,6 +3,7 @@
  */
 
 import { useState } from 'react';
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '@/utils/imageOptimization';
 
 interface SmartImageProps {
   src?: string | null;
@@ -14,6 +15,9 @@ interface SmartImageProps {
   placeholderClassName?: string;
   width?: number;
   height?: number;
+  optimizedWidth?: number;
+  sizes?: string;
+  srcSetWidths?: number[];
 }
 
 export default function SmartImage({
@@ -26,6 +30,9 @@ export default function SmartImage({
   placeholderClassName,
   width,
   height,
+  optimizedWidth,
+  sizes,
+  srcSetWidths,
 }: SmartImageProps) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
   const currentSrc = src && failedSrc !== src
@@ -38,12 +45,18 @@ export default function SmartImage({
     return placeholderClassName ? <div className={placeholderClassName} /> : null;
   }
 
+  const optimizedSrc = getOptimizedImageUrl(currentSrc, { width: optimizedWidth });
+  const responsiveSrcSet = getResponsiveImageSrcSet(currentSrc, srcSetWidths);
+
   return (
     <img
-      src={currentSrc}
+      src={optimizedSrc}
+      srcSet={responsiveSrcSet}
+      sizes={sizes}
       alt={alt}
       className={className}
       loading={loading}
+      decoding={loading === 'eager' ? 'sync' : 'async'}
       fetchPriority={fetchPriority}
       width={width}
       height={height}

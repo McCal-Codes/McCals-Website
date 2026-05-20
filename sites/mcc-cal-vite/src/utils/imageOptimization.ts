@@ -2,7 +2,12 @@ const SQUARESPACE_IMAGE_HOST = 'images.squarespace-cdn.com';
 const JSDELIVR_IMAGE_HOST = 'cdn.jsdelivr.net';
 const ABSOLUTE_URL_RE = /^(?:[a-z][a-z0-9+.-]*:)?\/\//i;
 const OPTIMIZABLE_REMOTE_HOSTS = new Set([SQUARESPACE_IMAGE_HOST, JSDELIVR_IMAGE_HOST]);
-const OPTIMIZABLE_LOCAL_PATHS = [/^\/images\/.+/i, /^\/assets\/.+/i];
+const OPTIMIZABLE_LOCAL_PATHS = [
+  /^\/about\/.+/i,
+  /^\/assets\/.+/i,
+  /^\/content\/blog-static\/.+/i,
+  /^\/images\/.+/i,
+];
 const VERCEL_IMAGE_PATH = '/_vercel/image';
 const DEFAULT_QUALITY = 80;
 

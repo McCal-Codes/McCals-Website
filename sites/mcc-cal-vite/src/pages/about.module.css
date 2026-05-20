@@ -19,12 +19,16 @@
   --about-surface: rgba(255, 255, 255, 0.04);
   padding: clamp(40px, 8vw, 100px) 0 clamp(80px, 12vw, 140px);
   color: var(--about-text-primary);
+  overflow-x: clip;
 }
 
 .aboutShell {
   display: grid;
   gap: clamp(28px, 4vw, 48px);
-  max-width: 1400px;
+  justify-items: center;
+  box-sizing: border-box;
+  width: min(100%, 1180px);
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 clamp(16px, 5vw, 60px);
 }
@@ -33,17 +37,13 @@
   .aboutPage {
     padding-top: clamp(56px, 6vw, 76px);
   }
-  /* Keep the about page stacked (single-column) on desktop as well
-     to match the mobile stacked layout the user requested. This
-     forces a single-column flow so the photo stacks above the content. */
   .aboutShell {
     grid-template-columns: 1fr;
     gap: clamp(32px, 3vw, 44px);
-    align-items: start;
-    /* Constrain width on large screens and center content for a more refined desktop look */
-    max-width: 1180px;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: center;
+    justify-items: center;
+    width: min(100%, 1120px);
+    max-width: 1120px;
     padding-inline: clamp(16px, 4vw, 48px);
   }
 }
@@ -53,25 +53,19 @@
   .aboutShell {
     grid-template-columns: 1fr;
     gap: clamp(28px, 3vw, 40px);
-    max-width: 980px;
-    margin-left: auto;
-    margin-right: auto;
+    justify-items: center;
+    width: min(100%, 920px);
+    max-width: 920px;
     padding-inline: clamp(16px, 4vw, 40px);
-  }
-  /* Prevent horizontal overflow on mid sizes caused by carousels and transforms */
-  .aboutPage {
-    overflow-x: hidden;
   }
 }
 
 @media (min-width: 1280px) {
-  /* Keep stacked layout at larger widths as well */
   .aboutShell {
     grid-template-columns: 1fr;
     gap: 36px;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
+    width: min(100%, 1120px);
+    max-width: 1120px;
     padding-inline: clamp(20px, 4vw, 56px);
   }
 }
@@ -79,7 +73,12 @@
 .aboutContent {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: clamp(22px, 3vw, 32px);
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  max-width: 1040px;
 }
 
 @media (min-width: 1024px) {
@@ -92,7 +91,10 @@
 .aboutPanel {
   position: relative;
   overflow: visible;
-  border-radius: 20px;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  border-radius: 12px;
   border: 1px solid var(--about-panel-border);
   background:
     radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.06), transparent 40%),
@@ -115,12 +117,15 @@
 @media (max-width: 1023px) {
   .aboutShell {
     grid-template-columns: 1fr;
+    justify-items: center;
     gap: 16px;
     padding: 0 16px;
-    max-width: 100%;
+    width: min(100%, 720px);
+    max-width: 720px;
   }
   
   .aboutContent {
+    align-items: center;
     gap: 16px;
   }
   
@@ -130,6 +135,19 @@
 }
 
 @media (max-width: 640px) {
+  .aboutPage {
+    padding-inline: 0;
+  }
+
+  .aboutShell {
+    padding-inline: 0;
+    width: 100%;
+  }
+
+  .aboutContent {
+    width: 100%;
+  }
+
   .aboutPanel {
     border-radius: 12px;
   }

@@ -7,7 +7,7 @@
   "excerpt": "A wilted rose, a closed closet, and the emotional logic of dissociation.",
   "leadImage": "images/lead.jpg",
   "leadImageAlt": "Close-up nature photograph of flowers and foliage.",
-  "leadImageCaption": "Close-up photograph from the Flowers and Plants archive.",
+  "leadImageCaption": "Flowers and foliage fill the frame in a close-up nature photograph. (Photo by Caleb McCartney)",
   "published": true,
   "tags": [
     "Thesis",
@@ -15,22 +15,31 @@
     "Isolation",
     "Decay"
   ],
+  "sources": [
+    {
+      "citation": "Substance Abuse and Mental Health Services Administration. (n.d.). Trauma and violence: What is trauma and its effects? Retrieved May 20, 2026, from https://www.samhsa.gov/find-help/trauma",
+      "title": "Trauma and Violence: What Is Trauma and Its Effects?",
+      "url": "https://www.samhsa.gov/find-help/trauma",
+      "publisher": "Substance Abuse and Mental Health Services Administration",
+      "accessedDate": "2026-05-20"
+    }
+  ],
   "body": [
     {
       "type": "text",
-      "content": "In my thesis, the rose symbolizes how something living can bloom and become vibrant when it is properly cared for. But the rose in these images is wilted and rough. It does not resemble the version of a rose that usually comes to mind. I wanted to use a living thing to stand in for that same emotional destruction, the feeling of forgetting myself and questioning myself until I am practically dead. It can be read from inside that experience."
+      "content": "In my thesis, the rose symbolizes how something living can bloom and become vibrant when it is cared for. But the rose in these images is wilted and rough. It does not resemble the version of a rose that usually comes to mind. I wanted to use a living thing to stand in for emotional destruction, the feeling of forgetting myself and questioning myself until I feel nearly absent from my own life. It can be read from inside that experience."
     },
     {
       "type": "text",
-      "content": "The wilted flower on my carpet is starving for water and potential, yet never granted the benefit of life. It sits in harsh light, expected to go nowhere, and nowhere will it go."
+      "content": "The wilted flower on my carpet is starving for water and potential, yet never granted the benefit of care. It sits in harsh light, expected to go nowhere, and nowhere will it go."
     },
     {
       "type": "text",
-      "content": "In isolation, one can feel invisible, worse than nobody, as if even the possibility of existence has been hollowed out. That absence is what the empty shirt and pants point toward: the hollowness I was left with when I no longer had myself inside that pit of dissociation. There is darkness, always, and a closed sense of hope. I had less reason to push myself even though there was no movement regardless, worse than a treadmill, and I was far less forgiving."
+      "content": "In isolation, a person can feel invisible, worse than nobody, as if even the possibility of existence has been hollowed out. That absence is what the empty shirt and pants point toward: the hollowness I was left with when I no longer had myself inside that pit of dissociation. There is darkness, always, and a closed sense of hope. Movement becomes difficult when the mind is already somewhere else."
     },
     {
       "type": "text",
-      "content": "The light and the closet share a sense of permanence and exclusion. A person can be controlled by modifying the source; that closed door obscures the light, and fear becomes its own form of control. The truth always felt like it was only a cracked door away, yet still shrouded in looming darkness."
+      "content": "The light and the closet share a sense of permanence and exclusion. A person can be controlled by modifying the source of what they are allowed to see; that closed door obscures the light, and fear becomes its own form of control. The truth always felt like it was only a cracked door away, yet still shrouded in darkness."
     }
   ]
 }
