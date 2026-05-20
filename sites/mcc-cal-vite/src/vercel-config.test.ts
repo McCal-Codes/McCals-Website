@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 type VercelConfig = {
   buildCommand?: string;
+  installCommand?: string;
   outputDirectory?: string;
   cleanUrls?: boolean;
   redirects?: Array<{ source: string; destination: string; permanent: boolean }>;
@@ -21,6 +22,7 @@ function readConfig(path: string): VercelConfig {
 function comparableConfig(config: VercelConfig) {
   const rest = { ...config };
   delete rest.buildCommand;
+  delete rest.installCommand;
   delete rest.outputDirectory;
   return rest;
 }

@@ -1,6 +1,7 @@
 {
   "framework": "vite",
-  "buildCommand": "cd sites/mcc-cal-vite && npm ci && npm run build",
+  "installCommand": "cd sites/mcc-cal-vite && npm ci",
+  "buildCommand": "cd sites/mcc-cal-vite && npm run build",
   "outputDirectory": "sites/mcc-cal-vite/dist",
   "cleanUrls": true,
   "images": {
