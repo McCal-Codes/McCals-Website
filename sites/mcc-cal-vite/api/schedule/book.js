@@ -8,6 +8,7 @@ import { applyRateLimit } from '../_lib/rate-limit.js';
 import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 import { applyCors } from '../_lib/cors.js';
 import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
+import { captureApiException } from '../_lib/sentry.js';
 
 // Lazy-initialize Resend client to handle missing API key gracefully
 let resendClient = null;
@@ -17,6 +18,7 @@ function getResendClient() {
       resendClient = new Resend(process.env.RESEND_API_KEY);
     } catch (err) {
       console.error('Failed to initialize Resend client: - book.js:19', err.message);
+      captureApiException(err, { route: 'schedule/book', operation: 'init_resend' });
     }
   }
   return resendClient;
@@ -253,6 +255,7 @@ async function sendConfirmationEmail(booking, config) {
     });
   } catch (err) {
     console.error('[sendConfirmationEmail] Failed to send email: - book.js:255', err instanceof Error ? err.message : err);
+    captureApiException(err, { route: 'schedule/book', operation: 'send_confirmation_email' });
     // Don't throw - booking should succeed even if email fails
   }
 }
@@ -379,6 +382,7 @@ export default async function handler(req, res) {
       
       if (dbError) {
         console.error('[schedule/book] Mock booking DB error: - book.js:379', dbError);
+        captureApiException(dbError, { route: 'schedule/book', operation: 'insert_mock_booking' });
       } else {
         bookingId = bookingRecord?.id;
       }
@@ -400,6 +404,7 @@ export default async function handler(req, res) {
     // Send email notification (don't await, let it run async)
     sendConfirmationEmail(mockBooking, config).catch(err => {
       console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
+      captureApiException(err, { route: 'schedule/book', operation: 'send_mock_confirmation_email' });
     });
     
     res.status(200).json({
@@ -464,6 +469,7 @@ export default async function handler(req, res) {
       
       if (dbError) {
         console.error('[schedule/book] Database error saving booking: - book.js:464', dbError);
+        captureApiException(dbError, { route: 'schedule/book', operation: 'insert_booking' });
       } else {
         bookingId = bookingRecord?.id;
 
@@ -479,6 +485,7 @@ export default async function handler(req, res) {
 
         if (slotError) {
           console.error('[schedule/book] Failed to mark slot unavailable: - book.js:479', slotError);
+          captureApiException(slotError, { route: 'schedule/book', operation: 'mark_slot_unavailable' });
           // Log for monitoring but don't fail the booking - calendar event is already created
           // Consider: add to monitoring/alerting system for manual cleanup
         }
@@ -498,6 +505,7 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('[schedule/book] Booking creation failed: - book.js:498', err);
+    captureApiException(err, { route: 'schedule/book', operation: 'create_booking' });
     res.status(500).json({ error: 'Failed to create booking. Please try again.' });
   }
 }

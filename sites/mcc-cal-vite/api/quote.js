@@ -2,6 +2,7 @@ import { Resend } from 'resend';
 import { applyRateLimit } from './_lib/rate-limit.js';
 import { quoteSchema, safeParseBody } from './_lib/validation.js';
 import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
+import { captureApiException } from './_lib/sentry.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -94,6 +95,7 @@ export default async function handler(req, res) {
 
     if (dbError) {
       console.error('[quote] Database error:', dbError);
+      captureApiException(dbError, { route: 'quote', operation: 'insert_quote_request' });
     } else {
       quoteId = quote?.id;
     }
@@ -143,6 +145,7 @@ export default async function handler(req, res) {
       });
     } catch (err) {
       console.error('[quote] Email error:', err);
+      captureApiException(err, { route: 'quote', operation: 'send_quote_email' });
       if (quoteId) {
         res.status(200).json({ ok: true, id: quoteId, emailError: true });
         return;
