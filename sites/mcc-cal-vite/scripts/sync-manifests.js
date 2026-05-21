@@ -63,10 +63,11 @@ if (!fs.existsSync(BLOG_SRC)) {
   runNodeScript(BLOG_VALIDATE_SCRIPT);
   runNodeScript(BLOG_MANIFEST_SCRIPT, ['--skip-notify']);
   runNodeScript(BLOG_FEED_SCRIPT);
-  runNodeScript(SITEMAP_SCRIPT);
 
   fs.mkdirSync(path.dirname(BLOG_DEST), { recursive: true });
   fs.mkdirSync(BLOG_DEST, { recursive: true });
   fs.cpSync(BLOG_SRC, BLOG_DEST, { recursive: true, force: true });
   console.log('Synced: content/blog-static');
+
+  runNodeScript(SITEMAP_SCRIPT);
 }
