@@ -85,7 +85,7 @@ export function routeOutputPaths(route) {
 
   const cleanRoute = route.replace(/^\//, '').replace(/\/$/, '');
   return [
-    path.join(cleanRoute, 'index.html'),
+    `${cleanRoute}/index.html`,
     `${cleanRoute}.html`,
   ];
 }

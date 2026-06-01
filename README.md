@@ -12,9 +12,9 @@ This repository contains the source code and documentation for the McCal Media w
 
 ## Project Structure
 
-- `sites/mcc-cal-vite/` — **Production site** (Vite-based, main public site)
-- `sites/dev.mcc-cal.com/` — **Dev/Preview site** (Next.js, for local development and previews)
-- `src/` — Shared source code (images, data, API, widgets [archived])
+- `sites/mcc-cal-vite/` — **Production site** (Vite + React, main public site)
+- `sites/mcc-cal-admin/` — **Admin console** (Vite + React, Vercel auth and admin APIs)
+- `src/` — Shared source content and assets, including portfolio images and blog content
 - `docs/` — Documentation, standards, and migration notes
 - `scripts/` — Build, manifest, and utility scripts
 
@@ -26,6 +26,7 @@ This repository contains the source code and documentation for the McCal Media w
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
 - `npm run test:e2e` - Run end-to-end tests
+- `cd sites/mcc-cal-vite && npm run test:run` - Run public app unit/API tests
 
 **Code Quality:**
 - TypeScript for type safety
@@ -41,12 +42,12 @@ This repository contains the source code and documentation for the McCal Media w
 
 ## Sites
 
-- **Production Site (`sites/mcc-cal-vite`)**: The main site, built with Vite. All new content and features are developed here.
-- **Dev/Preview Site (`sites/dev.mcc-cal.com`)**: Next.js-based preview and development harness. Use for local development, previews, and testing before production deployment.
+- **Production Site (`sites/mcc-cal-vite`)**: The main site, built with Vite. All new public content and features are developed here.
+- **Admin Console (`sites/mcc-cal-admin`)**: Internal operations app for health, bookings, content, and settings surfaces.
 
 ## Legacy Widgets (Archived)
 
-Legacy widget code and documentation are archived. Widgets remain available for Squarespace/CDN embedding, but all new development is focused on the Vite site. See `src/widgets/` and `docs/standards/widget-reference.md` for legacy details.
+Legacy widget code and documentation are archived. All new public-site development is focused on the Vite site.
 
 ## Documentation
 
@@ -56,9 +57,9 @@ Legacy widget code and documentation are archived. Widgets remain available for 
 
 ## Development Workflow
 
-- Run `npm install` and `npm run dev` in `mcc-cal-vite/` for the main site
-- Use `sites/dev.mcc-cal.com/` for preview/testing as needed
-- Legacy widget validation: `npm run validate:widgets` (rarely needed)
+- Run `npm install` at the repo root, then `npm run dev` for the main site
+- Use `npm run dev:admin` for the admin console
+- Use `npm run dev:api` for the local public-site API shim, or `cd sites/mcc-cal-vite && npm run dev:vercel` when testing Vercel Functions
 - Run manifest/image scripts as needed for portfolio updates
 
 ### Blog Workflow
@@ -77,8 +78,9 @@ Legacy widget code and documentation are archived. Widgets remain available for 
 
 ## Deployment
 
-- Production site (`mcc-cal-vite`) is deployed via Vercel or static hosting
-- Legacy widgets are published via jsDelivr CDN for Squarespace embedding (archived)
+- Production site (`sites/mcc-cal-vite`) is deployed via Vercel or static hosting.
+- Admin console (`sites/mcc-cal-admin`) is deployed separately with noindex headers.
+- Manifest CDN publishing remains in this repo. Cloudflare Worker/API deployment should happen from the companion API repository when that source is available.
 
 ## Contributing
 
@@ -98,22 +100,22 @@ Manifest workflows notify the API (if secrets set) so caches can be warmed autom
 
 ---
 
-## ✅ Widget Validation & Continuous Integration
+## Legacy Widget Notes
 
-All Squarespace widgets are automatically validated for standards compliance (namespace wrapper, inline CSS/JS, version attribute).
+Squarespace-era widgets are no longer the active development surface. Keep new work in the Vite app unless a legacy embed specifically needs maintenance.
 
 ### Widget Release
 
 We use tag-based releases for deploying widgets to Squarespace via jsDelivr:
 
 - Tag format: `widget-name@MAJOR.MINOR.PATCH` (e.g., `interactive-thesis@0.4.0`)
-- Pre-publish CI: On tag push, `.github/workflows/prepublish-widget-release.yml` runs preflight, HTML validation, and manifest dry-run, then uploads reports.
+- Pre-publish CI: archived widget workflows live under `.github/workflows/archive/`.
 - CDN pattern: `https://cdn.jsdelivr.net/gh/<owner>/<repo>@<tag>/<path-to-versioned-html>`
 - Example: `https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html`
 
 
 
-Fixing validation errors:
+Fixing archived widget validation errors:
 
 1. Run locally: `node scripts/utils/validate-widget-html.js`
 2. Read error output for offending files.
@@ -172,7 +174,7 @@ Image SEO: `docs/standards/image-seo-standards.md`
 2. Paste into a Squarespace Code Block
 3. Adjust data attributes (see widget README)
 4. Regenerate manifests after adding images
-5. Validate: `npm run validate:widgets`
+5. Validate with the relevant archived/manual widget validator if restoring widget work
 
 ## Important Notes
 
@@ -182,7 +184,7 @@ Security & recovery events: `docs/important-notes/` (latest: 2025-10-09-secret-r
 - **Blog Feed** (`src/widgets/blog-feed/`) - External blog integration _(in development)_
 - **Nature Portfolio** (`src/widgets/nature-portfolio/`) - Nature photography displays _(in development)_
 
-### Using Widgets in Squarespace
+### Archived Widgets in Squarespace
 
 1. Navigate to `src/widgets/[widget-name]/versions/`
 2. Copy the latest version HTML file (e.g., `v4.1.0.html`)
@@ -205,8 +207,7 @@ Common scripts:
 
 - `npm run dev` — Start the local dev server
 - `npm run build` — Build the test site
-- `npm run serve` — Serve the built site
-- `npm run validate:widgets` — Validate widget structure
+- `npm run preview` — Preview the built public site
 - `npm run repo:health` — Repository health checks
 - `npm run lint` — ESLint
 - `npm run test` — Playwright tests
@@ -216,8 +217,8 @@ Quick task aliases:
 | Script                       | What it does                                   |
 | ---------------------------- | ---------------------------------------------- |
 | `npm run ai:preflight:short` | Fast context/standards preflight (no writes)   |
-| `npm run dev`                | Serve local demo site at http://localhost:3000 |
-| `npm run validate:widgets`   | Validate widget HTML structure (no writes)     |
+| `npm run dev`                | Serve the public Vite site at http://localhost:5173 |
+| `npm run dev:admin`          | Serve the admin console at http://localhost:4310 |
 | `npm run manifest:dry-run`   | Dry-run manifest generation (no writes)        |
 | `npm run repo:health`        | Clean + preflight + large-file scan            |
 

@@ -132,9 +132,27 @@ export default defineConfig(({ command }) => ({
     sourcemap: 'hidden',
     rollupOptions: {
       output: {
-        manualChunks: {
-          'router-vendor': ['react-router-dom'],
-          'query-vendor': ['@tanstack/react-query'],
+        manualChunks(id) {
+          const normalizedId = id.replace(/\\/g, '/');
+          if (!normalizedId.includes('/node_modules/')) return undefined;
+          if (
+            normalizedId.includes('/node_modules/react/') ||
+            normalizedId.includes('/node_modules/react-dom/') ||
+            normalizedId.includes('/node_modules/scheduler/')
+          ) {
+            return 'react-vendor';
+          }
+          if (
+            normalizedId.includes('/node_modules/react-router-dom/') ||
+            normalizedId.includes('/node_modules/react-router/') ||
+            normalizedId.includes('/node_modules/@remix-run/router/')
+          ) {
+            return 'router-vendor';
+          }
+          if (normalizedId.includes('/node_modules/@tanstack/react-query/')) {
+            return 'query-vendor';
+          }
+          return undefined;
         },
       },
     },

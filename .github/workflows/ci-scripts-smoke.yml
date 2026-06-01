@@ -33,7 +33,3 @@ jobs:
 
       - name: Run minimal smoke tests
         run: npm run ci:smoke-test
-
-      - name: Archive duplicates (optional)
-        if: false
-        run: npm run ci:archive-duplicates

@@ -15,6 +15,13 @@ export interface ChangelogEntry {
 
 const CHANGELOG_STORAGE_KEY = 'dev-site-changelog';
 const MAX_ENTRIES = 50;
+const DATE_OPTIONS: Intl.DateTimeFormatOptions = {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+};
 
 /**
  * Check if we're in browser environment
@@ -45,16 +52,9 @@ export function addChangelogEntry(
   notes?: string
 ): ChangelogEntry {
   const now = new Date();
-  const dateFormatOptions: Intl.DateTimeFormatOptions = {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  };
   const entry: ChangelogEntry = {
     timestamp: now.toISOString(),
-    date: now.toLocaleDateString('en-US', dateFormatOptions),
+    date: now.toLocaleDateString('en-US', DATE_OPTIONS),
     widget,
     version,
     action,

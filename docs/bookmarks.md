@@ -16,14 +16,13 @@ This is a curated “jump list” for the most important files in this repo.
 - [Completed work log](../updates/completed.md)
 - [Repository changelog](../CHANGELOG.md)
 
-## Widget development
+## Active apps
 
-- [Widgets directory](../src/widgets/)
-- [Widgets documentation index](./widgets/index.md)
-- [Widget status workflow guide](../src/widgets/widget-status-guide.md)
-- [Widget standards (full)](./standards/widget-standards.md)
-- [Widget quick checklist](./standards/widget-reference.md)
-- [Widget development methodology](./standards/widget-development.md)
+- [Public Vite app](../sites/mcc-cal-vite/)
+- [Public app routes](../sites/mcc-cal-vite/src/App.tsx)
+- [Public route metadata](../sites/mcc-cal-vite/src/config/public-routes.js)
+- [Admin console](../sites/mcc-cal-admin/)
+- [Admin app routes](../sites/mcc-cal-admin/src/App.tsx)
 - [Performance standards (Lighthouse reference)](./standards/performance-standards.md)
 - [Accessibility patterns (WCAG 2.1 AA reference)](./standards/accessibility-patterns.md)
 - [Image SEO standards](./standards/image-seo-standards.md)
@@ -35,22 +34,16 @@ This is a curated “jump list” for the most important files in this repo.
 - [Manifest scripts](../scripts/manifest/)
 - [Manifest watchers](../scripts/watchers/)
 
-## API / Worker / auth
+## API / auth
 
-- [API source](../src/api/)
-- [API docs](../src/api/README.md)
+- [Public Vercel functions](../sites/mcc-cal-vite/api/)
+- [Admin Vercel functions](../sites/mcc-cal-admin/api/)
 - [API deployment guide](./deployment/API-DEPLOYMENT-GUIDE.md)
 - [Auth setup guide (JWT/webhooks)](./integrations/AUTH-SETUP-GUIDE.md)
-
-## Dev sites
-
-- [Next.js dev site (dev.mcc-cal.com)](../sites/dev.mcc-cal.com/)
-- [Dev site deployment guide](../sites/dev.mcc-cal.com/DEPLOYMENT-GUIDE.md)
 
 ## CI / automation
 
 - [GitHub workflows](../.github/workflows/)
-- [Prepublish widget release workflow](../.github/workflows/prepublish-widget-release.yml)
 - [Manifest automation action](../.github/actions/notify-manifest-webhook/)
 
 ## VS Code: bookmarking important spots (extension)

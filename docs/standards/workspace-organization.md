@@ -6,7 +6,7 @@
 
 **Internal Admin App:** The internal operations console lives in `sites/mcc-cal-admin/` and should be treated as a separate Vercel project with its own deployment protection, environment variables, and validation workflow. It is not part of the public site runtime.
 
-**Development/Preview Site:** The `dev.mcc-cal.com` site (Next.js, in `sites/dev.mcc-cal.com/`) is for development, preview, and integration testing only. It is not the production runtime and should not be referenced as the main site in standards or documentation.
+**Local Preview:** Use `npm run dev`, `npm run dev:admin`, and `npm run preview` for current local development and build validation. The historical `sites/dev.mcc-cal.com/` preview app is not present in this checkout.
 
 **Legacy Widgets:** Widget-centric workflows and standards are now considered legacy. Only update widget docs or workflows if maintaining backward compatibility or for archival purposes. All new work should focus on the Vite site.
 
