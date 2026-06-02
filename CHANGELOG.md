@@ -7,6 +7,7 @@
 - Fixed GitHub Actions guard scripts to use the `github.rest.issues` namespace required by `actions/github-script@v9`.
 - Compacted the Auto-Generate Manifests matrix output before writing to `$GITHUB_OUTPUT`.
 - Added individual root manifest script aliases for nature, portrait, featured, and universal portfolio generators so the Auto-Generate Manifests workflow can run each matrix job.
+- Fixed the reusable commit-and-push action to parse multiline file lists before staging generated manifest artifacts.
 - Updated the Gitleaks checkout to use full history for commit range scans.
 - Adjusted the events page manifest test to read the tracked static events manifest fixture.
 

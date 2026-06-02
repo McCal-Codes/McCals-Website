@@ -112,6 +112,7 @@ Guardrails:
 
 - 2026-06-02: CI guard maintenance should keep `actions/github-script@v9` issue calls under `github.rest.issues`, grant `issues: write` to PR-commenting guards, keep Gitleaks checkouts deep enough for commit range scans, and use tracked static manifest fixtures in Vite tests.
 - 2026-06-02: Auto-Generate Manifests matrix entries should map to explicit root npm aliases (`manifest:nature`, `manifest:portrait`, `manifest:featured`, `manifest:universal`, etc.) instead of inline generator paths.
+- 2026-06-02: Reusable composite actions should parse multiline inputs before shell loops; do not interpolate multiline `files:` blocks directly into `for` statements.
 
 - 2026-03-30: Added a Markdown-first blog workflow under `src/content/blog/`. `post.md` is now the preferred authored source, `post.json` is generated for runtime compatibility, and Google Docs import now writes Markdown to support gradual migration off Docs.
 
