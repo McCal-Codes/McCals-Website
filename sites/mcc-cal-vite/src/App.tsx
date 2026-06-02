@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
+import RouteAwareSpeedInsights from './components/RouteAwareSpeedInsights';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
 import HomePage from './pages/index';
 import PodcastPage from './pages/podcast';
@@ -99,6 +100,7 @@ function AppShell() {
   return (
     <>
       <PreviewBanner />
+      <RouteAwareSpeedInsights />
       <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
           <Outlet />

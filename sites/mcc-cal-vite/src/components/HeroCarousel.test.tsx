@@ -42,5 +42,13 @@ describe('HeroCarousel', () => {
       'aria-current',
       'false',
     );
+
+    const firstImage = within(carousel).getByRole('img', { name: /steel truss bridge/i });
+    expect(firstImage).toHaveAttribute('loading', 'eager');
+    expect(firstImage).toHaveAttribute('fetchpriority', 'high');
+    expect(firstImage).toHaveAttribute('decoding', 'async');
+    expect(firstImage).toHaveAttribute('sizes', '100vw');
+    expect(firstImage).toHaveAttribute('width', '1920');
+    expect(firstImage).toHaveAttribute('height', '1280');
   });
 });

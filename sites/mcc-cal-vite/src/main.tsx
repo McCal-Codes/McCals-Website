@@ -6,15 +6,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { inject } from '@vercel/analytics';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
 
 const enableVercelAnalytics = import.meta.env.PROD && import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS === 'true';
-const isVercelRuntime = ['preview', 'production'].includes(
-  import.meta.env.VITE_VERCEL_ENV ?? '',
-);
-const enableSpeedInsights =
-  import.meta.env.PROD && isVercelRuntime && import.meta.env.VITE_ENABLE_VERCEL_SPEED_INSIGHTS !== 'false';
 
 // Initialize Vercel Analytics for route tracking
 if (enableVercelAnalytics) {
@@ -46,7 +40,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
-      {enableSpeedInsights && <SpeedInsights />}
     </QueryClientProvider>
   </React.StrictMode>,
 );

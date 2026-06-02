@@ -26,6 +26,25 @@
     <meta name="twitter:creator" content="@mcc_cal" />
     <meta name="theme-color" content="#0a0a0a" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <script>
+      // Preload the deterministic first homepage hero image only on deployed hosts.
+      (function () {
+        try {
+          if (/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname)) return;
+          var base = '/_vercel/image?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FMcCal-Codes%2FMcCals-Website%40main%2Fsrc%2Fimages%2FPortfolios%2FNature%2FLandscapes%2FDowntown%2520Pittsburgh%2FIMGP7209.jpg&q=80&w=';
+          var widths = [640, 960, 1280, 1600, 1920, 2560];
+          var link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = base + '1920';
+          link.setAttribute('imagesrcset', widths.map(function (width) {
+            return base + width + ' ' + width + 'w';
+          }).join(', '));
+          link.setAttribute('imagesizes', '100vw');
+          document.head.appendChild(link);
+        } catch (e) {}
+      })();
+    </script>
     <!-- Schema.org Organization -->
     <script type="application/ld+json">
     {

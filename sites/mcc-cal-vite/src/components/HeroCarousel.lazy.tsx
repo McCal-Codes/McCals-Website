@@ -8,9 +8,16 @@ import {
   type HeroSlide,
   type HeroSlideVariant,
 } from './heroSlides';
+import {
+  getOptimizedImageUrl,
+  getResponsiveImageSrcSet,
+} from '@/utils/imageOptimization';
 
 const DESKTOP_BREAKPOINT = 769;
 const SLIDE_DURATION = 8000;
+const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2560];
+const HERO_IMAGE_SIZES = '100vw';
+const HERO_OPTIMIZED_WIDTH = 1920;
 
 const normalizeFP = (fp?: HeroFocalPoint) => {
   if (!fp) return null;
@@ -174,12 +181,37 @@ const HeroCarousel: React.FC = () => {
   }, [currentSlide]);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || slides.length < 2) return;
+    if (typeof window === 'undefined' || slides.length < 2 || !imageLoaded) return;
 
     const nextSlideImage = slides[(currentSlideIndex + 1) % slides.length];
-    const image = new Image();
-    image.src = nextSlideImage.image;
-  }, [currentSlideIndex, slides]);
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+    let timeoutId: number | undefined;
+    let idleId: number | undefined;
+
+    const preload = () => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = getOptimizedImageUrl(nextSlideImage.image, { width: HERO_OPTIMIZED_WIDTH });
+    };
+
+    if (idleWindow.requestIdleCallback) {
+      idleId = idleWindow.requestIdleCallback(preload, { timeout: 1800 });
+    } else {
+      timeoutId = window.setTimeout(preload, 900);
+    }
+
+    return () => {
+      if (idleId !== undefined && idleWindow.cancelIdleCallback) {
+        idleWindow.cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== undefined) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, [currentSlideIndex, imageLoaded, slides]);
 
   const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'ArrowLeft') {
@@ -200,6 +232,14 @@ const HeroCarousel: React.FC = () => {
   const objectPosition = useMemo(() => {
     return currentSlide ? resolveObjectPosition(currentSlide, isDesktop) : '50% 50%';
   }, [currentSlide, isDesktop]);
+  const currentImageSrc = useMemo(
+    () => (currentSlide ? getOptimizedImageUrl(currentSlide.image, { width: HERO_OPTIMIZED_WIDTH }) : ''),
+    [currentSlide],
+  );
+  const currentImageSrcSet = useMemo(
+    () => (currentSlide ? getResponsiveImageSrcSet(currentSlide.image, HERO_IMAGE_WIDTHS) : undefined),
+    [currentSlide],
+  );
 
   const handleImageLoad = () => {
     setImageStatus({
@@ -260,7 +300,9 @@ const HeroCarousel: React.FC = () => {
           <img
             ref={imageRef}
             key={currentSlide.image}
-            src={currentSlide.image}
+            src={currentImageSrc}
+            srcSet={currentImageSrcSet}
+            sizes={HERO_IMAGE_SIZES}
             alt={currentSlide.alt}
             className={`${styles.heroImage} ${imageLoaded ? styles.loaded : ''}`}
             style={{ objectPosition }}
@@ -268,6 +310,9 @@ const HeroCarousel: React.FC = () => {
             onError={handleImageError}
             loading="eager"
             fetchPriority="high"
+            decoding="async"
+            width={1920}
+            height={1280}
           />
         )}
 

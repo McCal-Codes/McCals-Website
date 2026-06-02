@@ -1,16 +1,31 @@
 import { useCallback, useId, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import styles from './forms.module.css';
 
 const MIN_SUBMIT_DELAY_MS = 2500;
+const SUBJECT_OPTIONS = [
+  'General inquiry',
+  'Photography services',
+  'Editorial assignment',
+  'Event coverage',
+  'Corporate / brand',
+  'Other',
+];
+
+function normalizeInitialSubject(value: string | null): string {
+  if (!value) return '';
+  const match = SUBJECT_OPTIONS.find((option) => option.toLowerCase() === value.toLowerCase());
+  return match ?? '';
+}
 
 export function ContactForm() {
   const honeypotId = useId();
+  const [searchParams] = useSearchParams();
   const [loadedAt] = useState(() => Date.now());
   const [honeypot, setHoneypot] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
+  const [subject, setSubject] = useState(() => normalizeInitialSubject(searchParams.get('subject')));
   const [message, setMessage] = useState('');
   const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -68,7 +83,7 @@ export function ContactForm() {
 
         setBanner({
           type: 'success',
-          text: "Thanks — your message is on its way. We'll get back to you soon.",
+          text: "Thanks, your message is on its way. We'll get back to you soon.",
         });
         reset();
       } catch {
@@ -174,11 +189,9 @@ export function ContactForm() {
               }}
             >
               <option value="">Select a topic…</option>
-              <option value="General inquiry">General inquiry</option>
-              <option value="Photography services">Photography services</option>
-              <option value="Event coverage">Event coverage</option>
-              <option value="Corporate / brand">Corporate / brand</option>
-              <option value="Other">Other</option>
+              {SUBJECT_OPTIONS.map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
             </select>
           </div>
 
