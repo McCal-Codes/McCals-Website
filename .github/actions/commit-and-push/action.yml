@@ -43,12 +43,16 @@ runs:
       id: commit
       if: steps.check.outputs.has_changes == 'true'
       shell: bash
+      env:
+        FILES_INPUT: ${{ inputs.files }}
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Actions"
         
-        # Add specified files (suppress errors for non-existent files)
-        for file in ${{ inputs.files }}; do
+        # Add specified files (suppress errors for non-existent files).
+        # The input may be provided as a multiline block or whitespace-separated list.
+        printf '%s\n' "$FILES_INPUT" | tr '[:space:]' '\n' | while IFS= read -r file; do
+          [[ -z "$file" ]] && continue
           git add "$file" 2>/dev/null || true
         done
         
