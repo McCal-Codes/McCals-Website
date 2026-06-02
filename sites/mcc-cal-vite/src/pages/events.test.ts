@@ -11,9 +11,8 @@ function loadEventsManifest(): EventsManifest {
     __dirname,
     '..',
     '..',
-    'api',
+    'public-vite',
     'manifests',
-    'data',
     'events-manifest.json',
   );
 
