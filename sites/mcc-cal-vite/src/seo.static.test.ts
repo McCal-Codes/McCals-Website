@@ -37,6 +37,7 @@ describe('static SEO metadata', () => {
   });
 
   it('uses the canonical mcc-cal.com host in SEO fallbacks', () => {
+    const legacyHost = ['https://mccalmedia', 'com'].join('.');
     const pageSources = [
       resolve(__dirname, 'pages', 'abridged.tsx'),
       resolve(__dirname, 'pages', 'design-systems.tsx'),
@@ -45,7 +46,7 @@ describe('static SEO metadata', () => {
       .map((file) => readFileSync(file, 'utf8'))
       .join('\n');
 
-    expect(pageSources).not.toContain('https://mccalmedia.com');
+    expect(pageSources).not.toContain(legacyHost);
   });
 
   it('keeps the source homepage sharing head aligned with home SEO data', () => {

@@ -199,6 +199,18 @@
   gap: 8px;
 }
 
+.heroSrOnly {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 .heroLinks {
   display: flex;
   flex-wrap: wrap;
@@ -315,29 +327,51 @@
 .heroDots {
   position: absolute;
   left: 50%;
-  bottom: 14px;
+  bottom: 2px;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
 }
 
 .heroDot {
-  width: 14px;
-  height: 2px;
+  position: relative;
+  width: 20px;
+  height: 24px;
   border: 0;
   padding: 0;
-  background: rgba(255, 255, 255, 0.35);
+  background: transparent;
   cursor: pointer;
 }
 
-.heroDotActive,
-.active {
+.heroDot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  transform: translate(-50%, -50%);
+}
+
+.heroDot:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.88);
+  outline-offset: 4px;
+}
+
+.heroDotActive::before,
+.active::before {
   background: rgba(255, 255, 255, 0.95);
 }
 
 @media (max-width: 768px) {
+  .heroWidget,
+  .heroCarousel {
+    --mcc-hero-vh: 100svh;
+  }
+
   .heroCaption,
   .heroContent {
     bottom: clamp(46px, 13vw, 64px);
@@ -360,7 +394,7 @@
   }
 
   .heroDots {
-    bottom: 18px;
+    bottom: 6px;
   }
 }
 

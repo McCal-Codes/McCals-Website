@@ -25,7 +25,7 @@ node scripts/seo/generate-sitemap.js
 
 **Environment Variables**:
 - `API_BASE` - API server URL (default: `http://localhost:3001`)
-- `SITE_URL` - Production site URL (default: `https://mccalmedia.com`)
+- `SITE_URL` - Production site URL (default: `https://mcc-cal.com`)
 
 **Output**: `dist/sitemap.xml`
 
@@ -40,12 +40,12 @@ node scripts/seo/generate-sitemap.js
 **Example output**:
 ```xml
 <url>
-  <loc>https://mccalmedia.com/concerts/funky-lamp</loc>
+  <loc>https://mcc-cal.com/concerts/funky-lamp</loc>
   <lastmod>2024-01-15</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
   <image:image>
-    <image:loc>https://mccalmedia.com/images/Portfolios/Concert/Funky%20Lamp/January%202024/240115_001.jpg</image:loc>
+    <image:loc>https://mcc-cal.com/images/Portfolios/Concert/Funky%20Lamp/January%202024/240115_001.jpg</image:loc>
     <image:title>Funky Lamp - January 15, 2024</image:title>
     <image:caption>Mr. Smalls Theatre</image:caption>
   </image:image>
@@ -68,7 +68,7 @@ node scripts/seo/generate-structured-data.js
 
 **Environment Variables**:
 - `API_BASE` - API server URL (default: `http://localhost:3001`)
-- `SITE_URL` - Production site URL (default: `https://mccalmedia.com`)
+- `SITE_URL` - Production site URL (default: `https://mcc-cal.com`)
 
 **Output**: `dist/structured-data/*.json`
 
@@ -93,7 +93,7 @@ node scripts/seo/generate-structured-data.js
   "@type": "ImageGallery",
   "name": "Concert Photography Portfolio",
   "description": "Professional concert photography by Caleb McCartney...",
-  "url": "https://mccalmedia.com/concerts",
+  "url": "https://mcc-cal.com/concerts",
   "image": ["https://...", "https://..."],
   "author": {
     "@type": "Person",
@@ -202,7 +202,7 @@ find dist/structured-data -name '*.json' | wc -l
 **Google Search Console**:
 ```bash
 # Manual ping
-curl "https://www.google.com/ping?sitemap=https://mccalmedia.com/sitemap.xml"
+curl "https://www.google.com/ping?sitemap=https://mcc-cal.com/sitemap.xml"
 ```
 
 **Bing Webmaster Tools**:
@@ -210,7 +210,7 @@ curl "https://www.google.com/ping?sitemap=https://mccalmedia.com/sitemap.xml"
 # Requires API key
 curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"siteUrl":"https://mccalmedia.com","urlList":["https://mccalmedia.com/sitemap.xml"]}'
+  -d '{"siteUrl":"https://mcc-cal.com","urlList":["https://mcc-cal.com/sitemap.xml"]}'
 ```
 
 ### Using in Widgets

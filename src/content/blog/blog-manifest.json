@@ -1,20 +1,20 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-20T16:41:48.991Z",
+  "generated": "2026-06-02T13:56:29.376Z",
   "total": 9,
   "posts": [
     {
       "slug": "boyd-station-community-feature",
-      "title": "Three Days in Boyd Station",
+      "title": "Three Days With Boyd's Station",
       "authorId": "mccal",
       "date": "2025-06-12",
       "category": "Feature",
-      "excerpt": "A few days in Boyd Station, Ky., reveal a place shaped by meadows, repair work, porch light and the easy patience of people who do not need to announce themselves.",
+      "excerpt": "A June 2025 photo essay from Cynthiana, Ky., documents community life around Boyd's Station, an arts and journalism residency project in Harrison County.",
       "leadImage": "posts/boyd-station-community-feature/images/lead.jpg",
       "leadImageWidth": 3840,
       "leadImageHeight": 2555,
-      "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., beneath a glowing red neon sign, June 12, 2025.",
-      "leadImageCaption": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., June 12, 2025. (Photo by Caleb McCartney)",
+      "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Cynthiana, Ky., beneath a glowing red neon sign, June 12, 2025.",
+      "leadImageCaption": "Musicians perform at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Feature",
@@ -262,8 +262,8 @@
       "leadImageFallback": "posts/player-one/images/lead.jpg",
       "leadImageWidth": 3839,
       "leadImageHeight": 2554,
-      "leadImageAlt": "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Ky.",
-      "leadImageCaption": "A boy holds a sparkler as an adult stands nearby in Boyd Station, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+      "leadImageAlt": "An adult stands beside a boy holding a glowing sparkler at dusk in Cynthiana, Ky.",
+      "leadImageCaption": "A boy holds a sparkler as an adult stands nearby in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [
         "Emotional",

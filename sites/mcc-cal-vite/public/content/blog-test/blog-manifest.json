@@ -1,18 +1,18 @@
 {
   "version": "1.0.0",
-  "generated": "2026-03-31T10:51:12.651Z",
+  "generated": "2026-06-01T22:25:43.798Z",
   "total": 1,
   "posts": [
     {
       "slug": "boyd-station-community-feature",
-      "title": "Three Days in Boyd Station",
+      "title": "Three Days With Boyd's Station",
       "authorId": "mccal",
       "date": "2025-06-12",
       "category": "Feature",
-      "excerpt": "A small Kentucky community reveals itself through wildflower meadows, a vintage truck restoration, and a late-night set at the Aeolian Music Hall.",
+      "excerpt": "A June 2025 photo essay from Cynthiana, Ky., documents community life around Boyd's Station, an arts and journalism residency project in Harrison County.",
       "leadImage": "posts/boyd-station-community-feature/images/lead.jpg",
-      "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., beneath a glowing red neon sign, June 12, 2025.",
-      "leadImageCaption": "Musicians perform at the Aeolian Music Hall, Boyd Station, Ky., June 12, 2025.",
+      "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Cynthiana, Ky., beneath a glowing red neon sign, June 12, 2025.",
+      "leadImageCaption": "Musicians perform at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)",
       "published": true,
       "tags": [],
       "authorName": "Caleb McCartney",

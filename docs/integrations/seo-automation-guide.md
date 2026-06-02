@@ -98,7 +98,7 @@ The workflow uses these defaults (override in workflow file if needed):
 
 ```yaml
 API_BASE: http://localhost:3001
-SITE_URL: https://mccalmedia.com
+SITE_URL: https://mcc-cal.com
 ```
 
 ### Customization
@@ -189,7 +189,7 @@ jq empty dist/structured-data/*.json # Should validate JSON
 1. **Verify ownership** at [Google Search Console](https://search.google.com/search-console)
 2. **Add sitemap**: 
    - Go to Sitemaps section
-   - Enter: `https://mccalmedia.com/sitemap.xml`
+   - Enter: `https://mcc-cal.com/sitemap.xml`
    - Click Submit
 3. **Monitor**: Check Coverage report for indexing status
 
@@ -200,7 +200,7 @@ jq empty dist/structured-data/*.json # Should validate JSON
 1. **Verify ownership** at [Bing Webmaster Tools](https://www.bing.com/webmasters)
 2. **Add sitemap**: 
    - Go to Sitemaps section
-   - Enter: `https://mccalmedia.com/sitemap.xml`
+   - Enter: `https://mcc-cal.com/sitemap.xml`
    - Click Submit
 3. **Optional automation**:
    - Get API key from Bing Webmaster
@@ -211,7 +211,7 @@ jq empty dist/structured-data/*.json # Should validate JSON
 
 **Google Rich Results Test:**
 1. Go to https://search.google.com/test/rich-results
-2. Enter: `https://mccalmedia.com/concerts` (or other portfolio)
+2. Enter: `https://mcc-cal.com/concerts` (or other portfolio)
 3. Paste structured data from `dist/structured-data/concert-schema.json`
 4. Click "Test Code"
 5. Should see: ✅ ImageGallery with images
@@ -254,7 +254,7 @@ In Google Search Console:
 - **Commit organized photos**: Follow naming conventions (YYMMDD prefixes)
 - **Run manifests before pushing**: `npm run manifest:generate`
 - **Check workflow success**: Monitor Actions tab after big photo batches
-- **Verify sitemap periodically**: Visit `https://mccalmedia.com/sitemap.xml`
+- **Verify sitemap periodically**: Visit `https://mcc-cal.com/sitemap.xml`
 
 ### Don'ts ❌
 
@@ -350,7 +350,7 @@ After setup, verify:
 - [ ] Workflow runs successfully (check Actions tab)
 - [ ] `dist/sitemap.xml` exists and has content
 - [ ] `dist/structured-data/*.json` files exist
-- [ ] Sitemap accessible at https://mccalmedia.com/sitemap.xml
+- [ ] Sitemap accessible at https://mcc-cal.com/sitemap.xml
 - [ ] Google Search Console shows submitted sitemap
 - [ ] Rich Results Test validates structured data
 - [ ] New photos trigger automatic updates
