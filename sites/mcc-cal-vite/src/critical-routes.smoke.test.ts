@@ -14,6 +14,34 @@ function assertSitemapPathHasAppRoute(appSource: string, path: string): void {
   expect(appSource).toContain('STATIC_PAGE_ROUTES.map');
 }
 
+function readJson<T>(path: string): T {
+  return JSON.parse(readFileSync(path, 'utf8')) as T;
+}
+
+interface VercelRedirect {
+  source: string;
+  destination: string;
+  permanent?: boolean;
+}
+
+interface VercelConfig {
+  redirects?: VercelRedirect[];
+}
+
+function expectRedirect(
+  redirects: VercelRedirect[] | undefined,
+  source: string,
+  destination: string,
+): void {
+  expect(redirects).toContainEqual(
+    expect.objectContaining({
+      source,
+      destination,
+      permanent: true,
+    }),
+  );
+}
+
 describe('critical public routes', () => {
   it('renders static routes from shared source in App.tsx', () => {
     const appPath = resolve(__dirname, 'App.tsx');
@@ -49,5 +77,22 @@ describe('critical public routes', () => {
 
     expect(homeSource).toMatch(/<h1\b/);
     expect(featuredSource).toMatch(/<h1\b/);
+  });
+
+  it('keeps stale indexed portfolio URLs redirected in both Vercel configs', () => {
+    const rootConfig = readJson<VercelConfig>(resolve(__dirname, '..', '..', '..', 'vercel.json'));
+    const appConfig = readJson<VercelConfig>(resolve(__dirname, '..', 'vercel.json'));
+
+    for (const config of [rootConfig, appConfig]) {
+      expectRedirect(config.redirects, '/event', '/events');
+      expectRedirect(config.redirects, '/featured', '/featured-work');
+    }
+  });
+
+  it('does not expose placeholder phone data in static organization JSON-LD', () => {
+    const indexSource = readFileSync(resolve(__dirname, '..', 'index.html'), 'utf8');
+
+    expect(indexSource).toContain('contact@mcc-cal.com');
+    expect(indexSource).not.toContain('+1-412-XXX-XXXX');
   });
 });

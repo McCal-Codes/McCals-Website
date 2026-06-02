@@ -18,7 +18,7 @@ const response = await fetch('/api/v1/manifests/concert');
 const { data } = await response.json();
 
 const urls = data.bands.map(band => ({
-  loc: `https://mccalmedia.com/concerts/${slugify(band.bandName)}`,
+  loc: `https://mcc-cal.com/concerts/${slugify(band.bandName)}`,
   lastmod: band.concertDate?.iso || data.generated,
   changefreq: 'weekly',
   priority: 0.8,
@@ -50,7 +50,7 @@ const schema = {
   "@type": "ImageGallery",
   "name": "Concert Photography Portfolio",
   "description": "Professional live music photography",
-  "url": "https://mccalmedia.com/concerts",
+  "url": "https://mcc-cal.com/concerts",
   "author": {
     "@type": "Person",
     "name": "Caleb McCartney",
@@ -139,7 +139,7 @@ const recentBands = data.bands.filter(band => {
 // Submit to Google Indexing API
 for (const band of recentBands) {
   await notifyGoogleIndexing({
-    url: `https://mccalmedia.com/concerts/${slugify(band.bandName)}`,
+    url: `https://mcc-cal.com/concerts/${slugify(band.bandName)}`,
     type: 'URL_UPDATED'
   });
 }
@@ -173,7 +173,7 @@ async function generateSitemap() {
     
     // Add portfolio page
     urls.push({
-      loc: `https://mccalmedia.com/${type}`,
+      loc: `https://mcc-cal.com/${type}`,
       lastmod: data.generated,
       changefreq: 'weekly',
       priority: 0.9
@@ -183,7 +183,7 @@ async function generateSitemap() {
     const items = data.bands || data.events || data.albums || data.collections || [];
     items.forEach(item => {
       urls.push({
-        loc: `https://mccalmedia.com/${type}/${slugify(item.bandName || item.title)}`,
+        loc: `https://mcc-cal.com/${type}/${slugify(item.bandName || item.title)}`,
         lastmod: item.concertDate?.iso || data.generated,
         changefreq: 'monthly',
         priority: 0.7
@@ -213,11 +213,11 @@ async function generateStructuredData(type) {
     "@context": "https://schema.org",
     "@type": type === 'concert' ? "ImageGallery" : "Collection",
     "name": `${capitalize(type)} Photography Portfolio`,
-    "url": `https://mccalmedia.com/${type}`,
+    "url": `https://mcc-cal.com/${type}`,
     "author": {
       "@type": "Person",
       "name": "Caleb McCartney",
-      "url": "https://mccalmedia.com"
+      "url": "https://mcc-cal.com"
     },
     // ... rest of schema
   };
@@ -244,7 +244,7 @@ export async function getMetaTags(type, id) {
     title: item?.title || `${capitalize(type)} Portfolio | McCal Media`,
     description: item?.description || `Professional ${type} photography...`,
     ogImage: item?.coverImage || data.items?.[0]?.coverImage,
-    canonical: `https://mccalmedia.com/${type}${id ? `/${id}` : ''}`
+    canonical: `https://mcc-cal.com/${type}${id ? `/${id}` : ''}`
   };
 }
 ```
@@ -317,11 +317,11 @@ jobs:
 
 ```bash
 # Google Search Console
-curl -X POST https://www.google.com/webmasters/tools/ping?sitemap=https://mccalmedia.com/sitemap.xml
+curl -X POST https://www.google.com/webmasters/tools/ping?sitemap=https://mcc-cal.com/sitemap.xml
 
 # Bing Webmaster Tools  
 curl -X POST "https://www.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=YOUR_KEY" \
-  -d '{"siteUrl":"https://mccalmedia.com","urlList":["https://mccalmedia.com/sitemap.xml"]}'
+  -d '{"siteUrl":"https://mcc-cal.com","urlList":["https://mcc-cal.com/sitemap.xml"]}'
 ```
 
 ---

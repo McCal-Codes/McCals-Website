@@ -17,6 +17,7 @@
 - **CI / Vercel parity:** GitHub `vercel-deployment-checks.yml` runs the public app build (`tsc -b` plus Vite), root ESLint, TypeScript check, and Vitest through `sites/mcc-cal-vite` `test:run`. Vercel project build command should stay aligned with `sites/mcc-cal-vite/vercel.json` (`npm run build`).
 - **Dependencies:** Dependabot watches npm at repo root and at `sites/mcc-cal-vite`; review grouped dev-dependency PRs together.
 - **Observability:** Production site uses Vercel Analytics and Speed Insights (`@vercel/analytics`, `@vercel/speed-insights`); expand only if you need deeper client error telemetry.
+- **Public API source:** Public Vercel Functions live under `sites/mcc-cal-vite/api`; do not recreate `sites/mcc-cal-vite/src/pages/api` re-export shims.
 - New public routes should be added to `sites/mcc-cal-vite/src/config/public-routes.js` so routing and `sites/mcc-cal-vite/scripts/generate-sitemap.js` stay in sync.
 - Legacy Squarespace-era widgets and related material are archived under `admin/_archived/`; CodeQL is configured to ignore that tree (see `.github/codeql/codeql-config.yml`).
 - Blog slugs used for listings and cross-links are driven by `src/content/blog/blog-manifest.json` at the repo root.

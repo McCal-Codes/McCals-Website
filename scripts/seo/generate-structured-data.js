@@ -20,7 +20,7 @@ const exifParser = require('exif-parser');
 
 const ROOT = path.resolve(__dirname, '../..');
 const API_BASE = process.env.API_BASE || 'http://localhost:3001';
-const SITE_URL = process.env.SITE_URL || 'https://mccalmedia.com';
+const SITE_URL = process.env.SITE_URL || 'https://mcc-cal.com';
 const OUTPUT_DIR = path.join(ROOT, 'dist/structured-data');
 
 const PORTFOLIOS = ['concert', 'events', 'journalism', 'portrait'];
