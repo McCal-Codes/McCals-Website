@@ -1,35 +1,92 @@
 version: 2
 updates:
-  # Enable version updates for npm
-  - package-ecosystem: "npm"
-    directory: "/"
+  # Root workspace dependencies and repo tooling
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
     labels:
-      - "dependencies"
-      - "automated"
-    open-pull-requests-limit: 10
+      - 'dependencies'
+      - 'automated'
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'deps'
+      prefix-development: 'deps-dev'
+      include: 'scope'
     groups:
-      dev-dependencies:
+      root-dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
         patterns:
-          - "@types/*"
-          - "eslint*"
-          - "prettier*"
-          - "husky"
-          - "lint-staged"
+          - '*'
+      root-production-patches:
+        dependency-type: 'production'
+        update-types:
+          - 'patch'
+        patterns:
+          - '*'
     ignore:
-      - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "react-dom"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
 
-  # Enable version updates for GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  # Active public app dependencies
+  - package-ecosystem: 'npm'
+    directory: '/sites/mcc-cal-vite'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:30'
     labels:
-      - "dependencies"
-      - "ci-cd"
+      - 'dependencies'
+      - 'automated'
+      - 'public-app'
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'deps'
+      prefix-development: 'deps-dev'
+      include: 'scope'
+    groups:
+      public-app-dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+        patterns:
+          - '*'
+      public-app-production-patches:
+        dependency-type: 'production'
+        update-types:
+          - 'patch'
+        patterns:
+          - '*'
+    ignore:
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
+
+  # GitHub Actions workflow dependencies
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '10:00'
+    labels:
+      - 'dependencies'
+      - 'ci-cd'
+      - 'automated'
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
