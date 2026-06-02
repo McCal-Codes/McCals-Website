@@ -1,12 +1,15 @@
 {
   "version": "2.6.4",
-  "generated": "2026-05-14T00:18:07.915Z",
+  "generated": "2026-06-02T14:32:02.219Z",
   "generatedBy": "events-manifest-generator",
   "totalEvents": 29,
   "events": [
     {
       "eventName": "Pittsburgh Social Club",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "November 2025",
       "dateISO": "2025-11-14",
       "date": {
@@ -95,6 +98,9 @@
     {
       "eventName": "Love's A Game",
       "category": "Theatre",
+      "tags": [
+        "Theatre"
+      ],
       "dateDisplay": "November 2025",
       "dateISO": "2025-11-06",
       "date": {
@@ -261,6 +267,9 @@
     {
       "eventName": "Inclusivity Event PRSSA",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "October 2025",
       "dateISO": "2025-10-25",
       "date": {
@@ -424,6 +433,9 @@
     {
       "eventName": "Howl At The Moon",
       "category": "Performance Art",
+      "tags": [
+        "Performance Art"
+      ],
       "dateDisplay": "October 2025",
       "dateISO": "2025-10-24",
       "date": {
@@ -764,6 +776,9 @@
     {
       "eventName": "Pennhills Reunion 5",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "September 2025",
       "dateISO": "2025-09-13",
       "date": {
@@ -975,6 +990,9 @@
     {
       "eventName": "Yinzers Meet Hike",
       "category": "General",
+      "tags": [
+        "General"
+      ],
       "dateDisplay": "September 2025",
       "dateISO": "2025-09-06",
       "date": {
@@ -1087,6 +1105,9 @@
     {
       "eventName": "Pittsburgh Honky Tonk",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "August 2025",
       "dateISO": "2025-08-23",
       "date": {
@@ -1385,6 +1406,9 @@
     {
       "eventName": "Union Officers Conf 2025",
       "category": "Conference",
+      "tags": [
+        "Conference"
+      ],
       "dateDisplay": "July 2025",
       "dateISO": "2025-07-20",
       "date": {
@@ -1527,6 +1551,9 @@
     {
       "eventName": "Bob Fryer Golf Outing",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "July 2025",
       "dateISO": "2025-07-19",
       "date": {
@@ -1666,6 +1693,9 @@
     {
       "eventName": "CMU Business Graduation",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "May 2025",
       "dateISO": "2025-05-11",
       "date": {
@@ -1718,6 +1748,9 @@
     {
       "eventName": "The Rooney Rule",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2025",
       "dateISO": "2025-04-17",
       "date": {
@@ -1992,6 +2025,9 @@
     {
       "eventName": "Guy Hates Musicals",
       "category": "Theatre",
+      "tags": [
+        "Theatre"
+      ],
       "dateDisplay": "March 2025",
       "dateISO": "2025-03-19",
       "date": {
@@ -2509,6 +2545,9 @@
     {
       "eventName": "Drag At Carnegie Coffee",
       "category": "Journalism",
+      "tags": [
+        "Journalism"
+      ],
       "dateDisplay": "March 2025",
       "dateISO": "2025-03-09",
       "date": {
@@ -2573,6 +2612,9 @@
     {
       "eventName": "Pitt Winter Grad 2024",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "December 2024",
       "dateISO": "2024-12-18",
       "date": {
@@ -2799,6 +2841,9 @@
     {
       "eventName": "Point Park Winter Grad 2024",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "December 2024",
       "dateISO": "2024-12-14",
       "date": {
@@ -2968,6 +3013,9 @@
     {
       "eventName": "Browns Tailgate",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "December 2024",
       "dateISO": "2024-12-08",
       "date": {
@@ -3266,6 +3314,9 @@
     {
       "eventName": "Ravens Tailgate",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "November 2024",
       "dateISO": "2024-11-16",
       "date": {
@@ -3582,6 +3633,9 @@
     {
       "eventName": "Dance For A Cause",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "October 2024",
       "dateISO": "2024-10-18",
       "date": {
@@ -3694,6 +3748,9 @@
     {
       "eventName": "Penn State Fayette Dance Recital 2024",
       "category": "Dance",
+      "tags": [
+        "Dance"
+      ],
       "dateDisplay": "July 2024",
       "dateISO": "2024-07-22",
       "date": {
@@ -3968,6 +4025,9 @@
     {
       "eventName": "Myron Cope Awards 2024",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "June 2024",
       "dateISO": "2024-06-02",
       "date": {
@@ -4008,6 +4068,9 @@
     {
       "eventName": "Point Park Spring Graduation 2024",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "April 2024",
       "dateISO": "2024-04-27",
       "date": {
@@ -4297,6 +4360,9 @@
     {
       "eventName": "Pennsylvania Media Awards 24",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2024",
       "dateISO": "2024-04-16",
       "date": {
@@ -4355,6 +4421,9 @@
     {
       "eventName": "Franks Script Reading",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "November 2023",
       "dateISO": "2023-11-10",
       "date": {
@@ -4395,6 +4464,9 @@
     {
       "eventName": "The Space Upstairs",
       "category": "Dance",
+      "tags": [
+        "Dance"
+      ],
       "dateDisplay": "September 2023",
       "dateISO": "2023-09-01",
       "date": {
@@ -4769,6 +4841,9 @@
     {
       "eventName": "PicklesBurgh",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "July 2023",
       "dateISO": "2023-07-22",
       "date": {
@@ -4854,6 +4929,9 @@
     {
       "eventName": "Bond Party 2023",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2023",
       "dateISO": "2023-04-11",
       "date": {
@@ -4936,6 +5014,9 @@
     {
       "eventName": "Back To School Bash",
       "category": "Event",
+      "tags": [
+        "Event"
+      ],
       "dateDisplay": "January 2022",
       "dateISO": "2022-01-15",
       "date": {
@@ -5160,6 +5241,9 @@
     {
       "eventName": "Growing Up",
       "category": "Theatre",
+      "tags": [
+        "Theatre"
+      ],
       "dateDisplay": "December 2021",
       "dateISO": "2021-12-01",
       "date": {
@@ -5234,6 +5318,9 @@
     {
       "eventName": "Denver Robotics Convention",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2019",
       "dateISO": "2019-04-15",
       "date": {
@@ -5278,6 +5365,9 @@
       "title": "Pittsburgh Social Club",
       "eventName": "Pittsburgh Social Club",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "November 2025",
       "dateISO": "2025-11-14",
       "date": {
@@ -5365,6 +5455,9 @@
       "title": "Love's A Game",
       "eventName": "Love's A Game",
       "category": "Theatre",
+      "tags": [
+        "Theatre"
+      ],
       "dateDisplay": "November 2025",
       "dateISO": "2025-11-06",
       "date": {
@@ -5530,6 +5623,9 @@
       "title": "Inclusivity Event PRSSA",
       "eventName": "Inclusivity Event PRSSA",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "October 2025",
       "dateISO": "2025-10-25",
       "date": {
@@ -5692,6 +5788,9 @@
       "title": "Howl At The Moon",
       "eventName": "Howl At The Moon",
       "category": "Performance Art",
+      "tags": [
+        "Performance Art"
+      ],
       "dateDisplay": "October 2025",
       "dateISO": "2025-10-24",
       "date": {
@@ -6031,6 +6130,9 @@
       "title": "Pennhills Reunion 5",
       "eventName": "Pennhills Reunion 5",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "September 2025",
       "dateISO": "2025-09-13",
       "date": {
@@ -6241,6 +6343,9 @@
       "title": "Yinzers Meet Hike",
       "eventName": "Yinzers Meet Hike",
       "category": "General",
+      "tags": [
+        "General"
+      ],
       "dateDisplay": "September 2025",
       "dateISO": "2025-09-06",
       "date": {
@@ -6352,6 +6457,9 @@
       "title": "Pittsburgh Honky Tonk",
       "eventName": "Pittsburgh Honky Tonk",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "August 2025",
       "dateISO": "2025-08-23",
       "date": {
@@ -6649,6 +6757,9 @@
       "title": "Union Officers Conf 2025",
       "eventName": "Union Officers Conf 2025",
       "category": "Conference",
+      "tags": [
+        "Conference"
+      ],
       "dateDisplay": "July 2025",
       "dateISO": "2025-07-20",
       "date": {
@@ -6790,6 +6901,9 @@
       "title": "Bob Fryer Golf Outing",
       "eventName": "Bob Fryer Golf Outing",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "July 2025",
       "dateISO": "2025-07-19",
       "date": {
@@ -6928,6 +7042,9 @@
       "title": "CMU Business Graduation",
       "eventName": "CMU Business Graduation",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "May 2025",
       "dateISO": "2025-05-11",
       "date": {
@@ -6979,6 +7096,9 @@
       "title": "The Rooney Rule",
       "eventName": "The Rooney Rule",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2025",
       "dateISO": "2025-04-17",
       "date": {
@@ -7252,6 +7372,9 @@
       "title": "Guy Hates Musicals",
       "eventName": "Guy Hates Musicals",
       "category": "Theatre",
+      "tags": [
+        "Theatre"
+      ],
       "dateDisplay": "March 2025",
       "dateISO": "2025-03-19",
       "date": {
@@ -7768,6 +7891,9 @@
       "title": "Drag At Carnegie Coffee",
       "eventName": "Drag At Carnegie Coffee",
       "category": "Journalism",
+      "tags": [
+        "Journalism"
+      ],
       "dateDisplay": "March 2025",
       "dateISO": "2025-03-09",
       "date": {
@@ -7831,6 +7957,9 @@
       "title": "Pitt Winter Grad 2024",
       "eventName": "Pitt Winter Grad 2024",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "December 2024",
       "dateISO": "2024-12-18",
       "date": {
@@ -8056,6 +8185,9 @@
       "title": "Point Park Winter Grad 2024",
       "eventName": "Point Park Winter Grad 2024",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "December 2024",
       "dateISO": "2024-12-14",
       "date": {
@@ -8224,6 +8356,9 @@
       "title": "Browns Tailgate",
       "eventName": "Browns Tailgate",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "December 2024",
       "dateISO": "2024-12-08",
       "date": {
@@ -8521,6 +8656,9 @@
       "title": "Ravens Tailgate",
       "eventName": "Ravens Tailgate",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "November 2024",
       "dateISO": "2024-11-16",
       "date": {
@@ -8836,6 +8974,9 @@
       "title": "Dance For A Cause",
       "eventName": "Dance For A Cause",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "October 2024",
       "dateISO": "2024-10-18",
       "date": {
@@ -8947,6 +9088,9 @@
       "title": "Penn State Fayette Dance Recital 2024",
       "eventName": "Penn State Fayette Dance Recital 2024",
       "category": "Dance",
+      "tags": [
+        "Dance"
+      ],
       "dateDisplay": "July 2024",
       "dateISO": "2024-07-22",
       "date": {
@@ -9220,6 +9364,9 @@
       "title": "Myron Cope Awards 2024",
       "eventName": "Myron Cope Awards 2024",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "June 2024",
       "dateISO": "2024-06-02",
       "date": {
@@ -9259,6 +9406,9 @@
       "title": "Point Park Spring Graduation 2024",
       "eventName": "Point Park Spring Graduation 2024",
       "category": "Graduation",
+      "tags": [
+        "Graduation"
+      ],
       "dateDisplay": "April 2024",
       "dateISO": "2024-04-27",
       "date": {
@@ -9547,6 +9697,9 @@
       "title": "Pennsylvania Media Awards 24",
       "eventName": "Pennsylvania Media Awards 24",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2024",
       "dateISO": "2024-04-16",
       "date": {
@@ -9604,6 +9757,9 @@
       "title": "Franks Script Reading",
       "eventName": "Franks Script Reading",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "November 2023",
       "dateISO": "2023-11-10",
       "date": {
@@ -9643,6 +9799,9 @@
       "title": "The Space Upstairs",
       "eventName": "The Space Upstairs",
       "category": "Dance",
+      "tags": [
+        "Dance"
+      ],
       "dateDisplay": "September 2023",
       "dateISO": "2023-09-01",
       "date": {
@@ -10015,6 +10174,9 @@
       "title": "PicklesBurgh",
       "eventName": "PicklesBurgh",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "July 2023",
       "dateISO": "2023-07-22",
       "date": {
@@ -10099,6 +10261,9 @@
       "title": "Bond Party 2023",
       "eventName": "Bond Party 2023",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2023",
       "dateISO": "2023-04-11",
       "date": {
@@ -10180,6 +10345,9 @@
       "title": "Back To School Bash",
       "eventName": "Back To School Bash",
       "category": "Event",
+      "tags": [
+        "Event"
+      ],
       "dateDisplay": "January 2022",
       "dateISO": "2022-01-15",
       "date": {
@@ -10402,6 +10570,9 @@
       "title": "Growing Up",
       "eventName": "Growing Up",
       "category": "Theatre",
+      "tags": [
+        "Theatre"
+      ],
       "dateDisplay": "December 2021",
       "dateISO": "2021-12-01",
       "date": {
@@ -10474,6 +10645,9 @@
       "title": "Denver Robotics Convention",
       "eventName": "Denver Robotics Convention",
       "category": "Corporate",
+      "tags": [
+        "Corporate"
+      ],
       "dateDisplay": "April 2019",
       "dateISO": "2019-04-15",
       "date": {
