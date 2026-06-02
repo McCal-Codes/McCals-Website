@@ -9,8 +9,8 @@ leadImage: "images/lead.jpg"
 leadImageFallback: "images/lead.jpg"
 leadImageWidth: 3839
 leadImageHeight: 2554
-leadImageAlt: "An adult stands beside a boy holding a glowing sparkler at dusk in Boyd Station, Ky."
-leadImageCaption: "A boy holds a sparkler as an adult stands nearby in Boyd Station, Ky., June 9, 2025. (Photo by Caleb McCartney)"
+leadImageAlt: "An adult stands beside a boy holding a glowing sparkler at dusk in Cynthiana, Ky."
+leadImageCaption: "A boy holds a sparkler as an adult stands nearby in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)"
 published: true
 tags:
   - Emotional
