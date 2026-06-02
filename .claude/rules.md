@@ -33,6 +33,7 @@ This repository uses Windsurf workflows for consistent development practices. Wo
 - **Active app**: The actively maintained public app for this monorepo lives under `sites/mcc-cal-vite` (Vite + React; lazy routes in `App.tsx`, SEO via `usePageMeta`).
 - **CI / Vercel parity**: GitHub `vercel-deployment-checks.yml` runs the public app build (`tsc -b` plus Vite), root ESLint, TypeScript check, and Vitest through `sites/mcc-cal-vite` `test:run`. Vercel project build command should stay aligned with `sites/mcc-cal-vite/vercel.json` (`npm run build`).
 - **CI guard maintenance**: GitHub Script v9 workflow scripts should call issue endpoints through `github.rest.issues`; PR-commenting guards need `issues: write`. Gitleaks jobs need enough checkout history (`fetch-depth: 0`) for commit range scans.
+- **Manifest CI aliases**: Auto-Generate Manifests matrix entries call individual root npm scripts such as `manifest:nature`, `manifest:portrait`, `manifest:featured`, and `manifest:universal`; keep those aliases aligned with `scripts/manifest/`.
 - **Dependencies**: Dependabot watches npm at repo root and at `sites/mcc-cal-vite`; review grouped dev-dependency PRs together.
 - **Observability**: Production site uses Vercel Analytics and Speed Insights (`@vercel/analytics`, `@vercel/speed-insights`); expand only if you need deeper client error telemetry.
 - **Public API source**: Public Vercel Functions live under `sites/mcc-cal-vite/api`; do not recreate `sites/mcc-cal-vite/src/pages/api` re-export shims.
