@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-06-02
+
+### CI / Workflow Stability
+
+- Fixed GitHub Actions guard scripts to use the `github.rest.issues` namespace required by `actions/github-script@v9`.
+- Compacted the Auto-Generate Manifests matrix output before writing to `$GITHUB_OUTPUT`.
+- Updated the Gitleaks checkout to use full history for commit range scans.
+- Adjusted the events page manifest test to read the tracked static events manifest fixture.
+
 ## 2026-04-24
 
 ### SEO Enhancements & Open Graph Images

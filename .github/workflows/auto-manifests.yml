@@ -100,7 +100,8 @@ jobs:
             fi
           fi
           
-          echo "matrix={\"portfolio\":$PORTFOLIOS}" >> $GITHUB_OUTPUT
+          PORTFOLIOS=$(echo "$PORTFOLIOS" | jq -c '.')
+          echo "matrix={\"portfolio\":$PORTFOLIOS}" >> "$GITHUB_OUTPUT"
           echo "📋 Will process portfolios: $PORTFOLIOS"
 
       - name: Check if optimization needed
