@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { applyRateLimit } from './_lib/rate-limit.js';
+import { applyRateLimit } from './_lib/rate-limit-redis.js';
 import { quoteSchema, safeParseBody } from './_lib/validation.js';
 import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const rateLimit = applyRateLimit(req, res, QUOTE_RATE_LIMIT);
+  const rateLimit = await applyRateLimit(req, res, QUOTE_RATE_LIMIT);
   if (!rateLimit.allowed) {
     res.status(429).json({ error: 'Too many quote requests. Please try again later.' });
     return;

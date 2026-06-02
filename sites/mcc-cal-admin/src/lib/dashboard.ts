@@ -79,7 +79,7 @@ export async function loadDashboardSnapshot(): Promise<DashboardSnapshot> {
 export const PHASE_ONE_MODULES = [
   {
     title: 'Scheduling operations',
-    detail: 'Read KV-backed bookings, inspect conflicts, and stage cancel or reschedule actions behind admin-only APIs.',
+    detail: 'Read Supabase-backed bookings, inspect conflicts, and stage cancel or reschedule actions behind admin-only APIs.',
   },
   {
     title: 'Manifest and cache controls',

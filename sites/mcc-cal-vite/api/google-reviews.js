@@ -1,4 +1,4 @@
-import { applyRateLimit } from './_lib/rate-limit.js';
+import { applyRateLimit } from './_lib/rate-limit-redis.js';
 import { applyCors } from './_lib/cors.js';
 
 const REVIEWS_RATE_LIMIT = {
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   }
 
   // Apply rate limiting
-  const rateLimit = applyRateLimit(req, res, REVIEWS_RATE_LIMIT);
+  const rateLimit = await applyRateLimit(req, res, REVIEWS_RATE_LIMIT);
   if (!rateLimit.allowed) {
     res.status(429).json({ error: 'Too many requests. Please try again later.' });
     return;

@@ -266,6 +266,7 @@ export default async function handler(req, res) {
     console.warn('[schedule/availability] Google Calendar credentials not configured, returning mock availability');
     // Return mock availability (same as dev mode)
     const days = [];
+    const supabaseBookedSlots = await getSupabaseBookedSlots(start, end);
     
     // Parse dates in UTC to avoid timezone issues
     const parseDateUTC = (dateStr) => {
@@ -291,6 +292,16 @@ export default async function handler(req, res) {
             slotEnd.setUTCMinutes(slotTime.getUTCMinutes() + config.durationMinutes);
             if (slotEnd.getUTCHours() > config.workingHours.end || 
                 (slotEnd.getUTCHours() === config.workingHours.end && slotEnd.getUTCMinutes() > 0)) {
+              continue;
+            }
+
+            const conflicts = supabaseBookedSlots.some((busy) => {
+              const busyStart = new Date(busy.start);
+              const busyEnd = new Date(busy.end);
+              return slotTime < busyEnd && slotEnd > busyStart;
+            });
+
+            if (conflicts) {
               continue;
             }
             
