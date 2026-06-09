@@ -1,5 +1,6 @@
 import { defineConfig, type Connect, type Plugin, type ViteDevServer } from 'vite';
 import react from '@vitejs/plugin-react';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { resolve } from 'path';
 import fs from 'fs';
@@ -10,6 +11,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PUBLIC_DIR = resolve(__dirname, './public-vite');
 const SKIP_DIR_NAME = 'one-nation-divided';
+const shouldUploadSentrySourceMaps = Boolean(
+  process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT,
+);
+const sentryRelease = process.env.VERCEL_GIT_COMMIT_SHA
+  ? `mcc-cal-vite@${process.env.VERCEL_GIT_COMMIT_SHA}`
+  : undefined;
 
 /**
  * Production build only: copy `public-vite` into `dist` but never enter a folder named `one-nation-divided`
@@ -117,6 +124,17 @@ export default defineConfig(({ command }) => ({
       brotliSize: true,
       filename: 'dist/stats.html',
     }),
+    command === 'build' &&
+      shouldUploadSentrySourceMaps &&
+      sentryVitePlugin({
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        release: sentryRelease ? { name: sentryRelease } : undefined,
+        sourcemaps: {
+          filesToDeleteAfterUpload: ['dist/**/*.map'],
+        },
+      }),
     command === 'build' && copyPublicSkipDeadFolder(),
   ].filter(Boolean) as Plugin[],
   /** `vite build` uses a manual public copy so a locked `one-nation-divided` tree cannot abort the build. */
@@ -129,7 +147,7 @@ export default defineConfig(({ command }) => ({
   build: {
     // 'hidden' generates sourcemaps for error tracking (e.g. Sentry)
     // without exposing them publicly in the browser DevTools
-    sourcemap: 'hidden',
+    sourcemap: shouldUploadSentrySourceMaps ? 'hidden' : false,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -160,6 +178,9 @@ export default defineConfig(({ command }) => ({
   define: {
     'import.meta.env.VITE_VERCEL_ENV': JSON.stringify(
       process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development'
+    ),
+    'import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA': JSON.stringify(
+      process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.VITE_VERCEL_GIT_COMMIT_SHA ?? ''
     ),
   },
   server: {

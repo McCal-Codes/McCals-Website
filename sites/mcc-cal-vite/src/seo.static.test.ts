@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -57,5 +57,27 @@ describe('static SEO metadata', () => {
     expect(indexSource).toContain(`<meta property="og:description" content="${home.ogDescription}"`);
     expect(indexSource).toContain(`<meta name="twitter:description" content="${home.ogDescription}"`);
     expect(indexSource).not.toMatch(/XXX|TODO|PLACEHOLDER|mccalmedia\.com/i);
+  });
+
+  it('keeps browser-discovered public assets available', () => {
+    const publicDir = resolve(__dirname, '..', 'public-vite');
+    const expectedAssets = [
+      'brand/favicon.svg',
+      'brand/favicon-dark.svg',
+      'brand/favicon-light-32x32.png',
+      'brand/favicon-dark-32x32.png',
+      'brand/favicon-light-16x16.png',
+      'brand/favicon-dark-16x16.png',
+      'brand/apple-touch-icon.png',
+      'brand/web-app-manifest-192x192.png',
+      'brand/web-app-manifest-512x512.png',
+      'images/social/homepage-og.jpg',
+      'og.png',
+      'site.webmanifest',
+    ];
+
+    for (const asset of expectedAssets) {
+      expect(existsSync(resolve(publicDir, asset)), `${asset} should exist`).toBe(true);
+    }
   });
 });

@@ -1,9 +1,11 @@
+import './instrument';
 import './styles/globals.css';
 import './styles/nav.css';
 import './styles/footer.css';
 import '@/components/portfolio/portfolio-global.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import * as Sentry from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { inject } from '@vercel/analytics';
 import App from './App';
@@ -36,7 +38,11 @@ try {
   // localStorage can be unavailable in restricted browser contexts.
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')!, {
+  onUncaughtError: Sentry.reactErrorHandler(),
+  onCaughtError: Sentry.reactErrorHandler(),
+  onRecoverableError: Sentry.reactErrorHandler(),
+}).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />

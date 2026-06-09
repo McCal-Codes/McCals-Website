@@ -1,8 +1,8 @@
 {
   "version": "2.6.4",
-  "generated": "2026-06-02T19:24:01.496Z",
+  "generated": "2026-06-04T16:12:13.492Z",
   "generatedBy": "events-manifest-generator",
-  "totalEvents": 29,
+  "totalEvents": 31,
   "events": [
     {
       "eventName": "Pittsburgh Social Club",
@@ -1691,6 +1691,224 @@
       "totalImages": 40
     },
     {
+      "eventName": "Golden Quills 2025",
+      "category": "Published",
+      "tags": [
+        "Published",
+        "awards",
+        "Western PA Press Club",
+        "media",
+        "event photography"
+      ],
+      "dateDisplay": "May 2025",
+      "dateISO": "2025-05-28",
+      "date": {
+        "year": 2025,
+        "month": 5,
+        "day": 28,
+        "monthName": "May",
+        "iso": "2025-05-28",
+        "display": "May 2025"
+      },
+      "dateSource": "filename:250528_Golden Quills _CAL8086.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8086.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8102.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8140.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8156.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8161.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8182.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8195.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8215.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8229.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8233.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8278.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8324.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8330.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8350.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8355.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8370.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8420.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8432.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8447.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8459.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8478.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8498.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8516.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8529.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8542.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8547.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8559.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8613.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8628.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8640.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8651.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8653.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        }
+      ],
+      "totalImages": 32
+    },
+    {
       "eventName": "CMU Business Graduation",
       "category": "Graduation",
       "tags": [
@@ -1744,6 +1962,248 @@
         }
       ],
       "totalImages": 11
+    },
+    {
+      "eventName": "Point Park Graduation 2025",
+      "category": "Graduation",
+      "tags": [
+        "Graduation",
+        "commencement",
+        "Point Park University",
+        "higher education",
+        "event photography"
+      ],
+      "dateDisplay": "April 2025",
+      "dateISO": "2025-04-26",
+      "date": {
+        "year": 2025,
+        "month": 4,
+        "day": 26,
+        "monthName": "April",
+        "iso": "2025-04-26",
+        "display": "April 2025"
+      },
+      "dateSource": "filename:250426_Point Park Graduation 2025_CAL9067.jpg",
+      "dateConfidence": "high",
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9067.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9100.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9156.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9197.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9247.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9307.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9321.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9346.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9362.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9402.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9420.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9440.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9449.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9500.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9508.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9557.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9597.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9667.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9684.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9715.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9753.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9764.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9774.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9796.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9831.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9853.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9872.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9917.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9946.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9986.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10008.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10017.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10039.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10060.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10085.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10137.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        }
+      ],
+      "totalImages": 36
     },
     {
       "eventName": "The Rooney Rule",
@@ -7039,6 +7499,223 @@
       "folderPath": "Events/Bob Fryer Golf Outing"
     },
     {
+      "title": "Golden Quills 2025",
+      "eventName": "Golden Quills 2025",
+      "category": "Published",
+      "tags": [
+        "Published",
+        "awards",
+        "Western PA Press Club",
+        "media",
+        "event photography"
+      ],
+      "dateDisplay": "May 2025",
+      "dateISO": "2025-05-28",
+      "date": {
+        "year": 2025,
+        "month": 5,
+        "day": 28,
+        "monthName": "May",
+        "iso": "2025-05-28",
+        "display": "May 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8086.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8102.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8140.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8156.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8161.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8182.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8195.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8215.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8229.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8233.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8278.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8324.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8330.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8350.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8355.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8370.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8420.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8432.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8447.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8459.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8478.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8498.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8516.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8529.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8542.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8547.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8559.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8613.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8628.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8640.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8651.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        },
+        {
+          "path": "src/images/Portfolios/Events/golden-quills-2025/250528_Golden Quills _CAL8653.jpg",
+          "caption": "Guests and presenters attend the Golden Quills awards program, May 28, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from the Golden Quills awards program, including reception conversations, audience moments, speakers and award presentations.",
+          "alt": "Guests, presenters and attendees at the Golden Quills awards program."
+        }
+      ],
+      "folderPath": "Events/golden-quills-2025"
+    },
+    {
       "title": "CMU Business Graduation",
       "eventName": "CMU Business Graduation",
       "category": "Graduation",
@@ -7091,6 +7768,247 @@
         }
       ],
       "folderPath": "Events/CMU-Business-Graduation"
+    },
+    {
+      "title": "Point Park Graduation 2025",
+      "eventName": "Point Park Graduation 2025",
+      "category": "Graduation",
+      "tags": [
+        "Graduation",
+        "commencement",
+        "Point Park University",
+        "higher education",
+        "event photography"
+      ],
+      "dateDisplay": "April 2025",
+      "dateISO": "2025-04-26",
+      "date": {
+        "year": 2025,
+        "month": 4,
+        "day": 26,
+        "monthName": "April",
+        "iso": "2025-04-26",
+        "display": "April 2025"
+      },
+      "images": [
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9067.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9100.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9156.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9197.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9247.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9307.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9321.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9346.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9362.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9402.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9420.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9440.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9449.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9500.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9508.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9557.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9597.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9667.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9684.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9715.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9753.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9764.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9774.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9796.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9831.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9853.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9872.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9917.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9946.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL9986.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10008.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10017.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10039.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10060.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10085.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        },
+        {
+          "path": "src/images/Portfolios/Events/point-park-graduation-2025/250426_Point Park Graduation 2025_CAL10137.jpg",
+          "caption": "Graduates and ceremony participants gather during Point Park University's spring commencement in Pittsburgh, Pa., April 26, 2025. (Photo by Caleb McCartney)",
+          "description": "Selected coverage from Point Park University's spring commencement, including graduates, speakers, audience members and ceremony details.",
+          "alt": "Graduates and ceremony participants at Point Park University's spring commencement."
+        }
+      ],
+      "folderPath": "Events/point-park-graduation-2025"
     },
     {
       "title": "The Rooney Rule",
