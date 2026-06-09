@@ -131,6 +131,18 @@ export const clients: Client[] = [
     logoTheme: { accent: '255 255 255', accentSecondary: '80 80 80', maxHeight: 58 },
     category: 'media',
     website: 'https://pittsburghmagazine.com',
+    publications: [
+      {
+        url: 'https://www.pittsburghmagazine.com/point-park-university-plans-to-purchase-former-ywca-building-to-increase-student-housing-add-amenities-downtown-pittsburgh-wood-street/',
+        title: 'Point Park University YWCA building photo credit',
+        date: '2025',
+      },
+      {
+        url: 'https://www.pittsburghmagazine.com/pittsburghs-downtown-ywca-300-new-apartments-project-stalled/',
+        title: 'Downtown YWCA redevelopment photo credit',
+        date: '2025',
+      },
+    ],
   },
   {
     id: 'point-park-university',
@@ -283,6 +295,28 @@ export const clients: Client[] = [
     logoTheme: { accent: '137 176 157', accentSecondary: '101 130 103', maxHeight: 72 },
     category: 'media',
     website: 'https://www.pghmediapartnership.org/',
+    publications: [
+      {
+        url: 'https://technical.ly/civics/track-police-data-pdap-tool/',
+        title: 'PDAP access tool photo credit',
+        date: '2025',
+      },
+      {
+        url: 'https://technical.ly/civics/pittsburgh-energy-summit-protest/',
+        title: 'Pennsylvania AI protest photo credit',
+        date: '2025',
+      },
+      {
+        url: 'https://www.spotlightpa.org/news/2025/08/ai-chatgpt-shapiro-pennsylvania-government-environment/',
+        title: 'Pennsylvania government AI photo credit',
+        date: '2025',
+      },
+      {
+        url: 'https://www.wesa.fm/development-transportation/2025-06-07/ywca-downtown-redevelopment-stalled-lawsuit',
+        title: 'Downtown YWCA lawsuit photo credit',
+        date: '2025',
+      },
+    ],
   },
   {
     id: 'pittsburgh-union-progress',
@@ -292,6 +326,18 @@ export const clients: Client[] = [
     logoTheme: { accent: '255 193 31', accentSecondary: '24 24 24' },
     category: 'editorial',
     website: 'https://www.unionprogress.com/',
+    publications: [
+      {
+        url: 'https://www.unionprogress.com/2025/05/27/from-the-next-generation-newsroom-pittsburgh-aims-to-fix-more-battered-sidewalks/',
+        title: 'Sidewalk repair photo credit',
+        date: '2025',
+      },
+      {
+        url: 'https://www.unionprogress.com/2024/12/01/just-no-addictions-professionals-say-proposed-rules-change-could-harm-problem-bettors/',
+        title: 'Problem bettors rules photo credit',
+        date: '2024',
+      },
+    ],
   },
   {
     id: 'triblive',
@@ -301,6 +347,14 @@ export const clients: Client[] = [
     logoTheme: { accent: '216 33 46', accentSecondary: '35 35 35' },
     category: 'editorial',
     website: 'https://triblive.com/',
+    publications: [
+      { url: 'https://triblive.com/', title: 'Fern Hollow photo assignment', date: '2026' },
+      { url: 'https://triblive.com/', title: 'Washington Street photo assignment', date: '2026' },
+      { url: 'https://triblive.com/', title: 'Aleppo Siren photo assignment', date: '2026' },
+      { url: 'https://triblive.com/', title: 'Herbst House photo assignment', date: '2026' },
+      { url: 'https://triblive.com/', title: 'QVSD Prom photo assignment', date: '2026' },
+      { url: 'https://triblive.com/', title: 'Baseball Lights photo assignment', date: '2026' },
+    ],
   },
   {
     id: 'center-for-media-innovation',

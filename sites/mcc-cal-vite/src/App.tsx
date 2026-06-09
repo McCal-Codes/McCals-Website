@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react';
+import * as Sentry from '@sentry/react';
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -21,6 +22,7 @@ const RoadmapPage = lazy(() => import('./pages/roadmap'));
 const ChangelogPage = lazy(() => import('./pages/changelog'));
 const ShowcasePage = lazy(() => import('./pages/showcase'));
 const ApiTestPage = lazy(() => import('./pages/api-test'));
+const SentryExamplePage = lazy(() => import('./pages/sentry-example-page'));
 const ContactUsPage = lazy(() => import('./pages/contact-us'));
 const RequestAQuotePage = lazy(() => import('./pages/request-a-quote'));
 const GrabCoffeePage = lazy(() => import('./pages/grab-a-coffee'));
@@ -108,7 +110,11 @@ function AppShell() {
   );
 }
 
-const router = createBrowserRouter([
+const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouterV6(createBrowserRouter);
+const enableSentryExamplePage =
+  import.meta.env.DEV || import.meta.env.VITE_ENABLE_SENTRY_TEST_PAGE === 'true';
+
+const router = sentryCreateBrowserRouter([
   {
     element: <AppShell />,
     children: [
@@ -131,6 +137,9 @@ const router = createBrowserRouter([
             { path: '/api-test', element: <ApiTestPage /> },
             { path: '/changelog', element: <ChangelogPage /> },
           ]
+        : []),
+      ...(enableSentryExamplePage
+        ? [{ path: '/sentry-example-page', element: <SentryExamplePage /> }]
         : []),
       { path: '*', element: <NotFoundPage /> },
     ],

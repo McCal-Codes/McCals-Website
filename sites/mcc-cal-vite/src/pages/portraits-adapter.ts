@@ -7,6 +7,8 @@ interface PortraitAlbum {
   folderPath: string;
   totalImages: number;
   images: string[];
+  tags?: string[];
+  imageMetadata?: PortraitImageMetadataMap;
 }
 
 interface PortraitItem {
@@ -17,6 +19,7 @@ interface PortraitItem {
   tags: string[];
   albums?: PortraitAlbum[];
   looseImages?: string[];
+  imageMetadata?: PortraitImageMetadataMap;
 }
 
 export interface PortraitManifest {
@@ -26,6 +29,14 @@ export interface PortraitManifest {
   totalImages: number;
   collections: PortraitItem[];
 }
+
+interface PortraitImageMetadata {
+  caption?: string;
+  description?: string;
+  alt?: string;
+}
+
+type PortraitImageMetadataMap = Record<string, PortraitImageMetadata>;
 
 function inferDateFromFilename(filename: string): Date | null {
   const eightDigitMatch = filename.match(/(?:^|[^0-9])(\d{4})(\d{2})(\d{2})(?=[^0-9]|$)/);
@@ -70,6 +81,37 @@ function summarizeSessionDate(images: string[]): Pick<PortfolioGroup, 'dateDispl
   };
 }
 
+function mergeTags(...tagSets: Array<string[] | undefined>): string[] {
+  const tags = tagSets.flatMap((tagSet) => tagSet ?? []);
+
+  return [
+    ...new Map(
+      tags
+        .map((tag) => tag.trim())
+        .filter(Boolean)
+        .map((tag) => [tag.toLowerCase(), tag] as const),
+    ).values(),
+  ];
+}
+
+function getImageMetadata(
+  imageMetadata: PortraitImageMetadataMap | undefined,
+  rawFilename: string,
+): PortraitImageMetadata | undefined {
+  if (!imageMetadata) {
+    return undefined;
+  }
+
+  const basename = rawFilename.split('/').pop() ?? rawFilename;
+
+  return imageMetadata[rawFilename] ?? imageMetadata[basename];
+}
+
+function textOrUndefined(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  return trimmed || undefined;
+}
+
 function createSessionGroup(
   category: string,
   tags: string[],
@@ -77,6 +119,7 @@ function createSessionGroup(
   sessionPath: string,
   sessionImages: string[],
   useBasenamePaths = false,
+  imageMetadata?: PortraitImageMetadataMap,
 ): PortfolioGroup | null {
   if (sessionImages.length === 0) {
     return null;
@@ -84,10 +127,17 @@ function createSessionGroup(
 
   const images = sessionImages.map((rawFilename, index) => {
     const filename = useBasenamePaths ? rawFilename.split('/').pop() ?? rawFilename : rawFilename;
+    const metadata = getImageMetadata(imageMetadata, rawFilename);
+    const caption = textOrUndefined(metadata?.caption);
+    const description = textOrUndefined(metadata?.description);
+    const alt = textOrUndefined(metadata?.alt);
+
     return {
       url: imageUrl.portrait(sessionPath, filename),
       filename: rawFilename.split('/').pop() ?? rawFilename,
-      alt: `${sessionTitle}, ${category.toLowerCase()} portrait image ${index + 1}`,
+      alt: alt ?? `${sessionTitle}, ${category.toLowerCase()} portrait image ${index + 1}`,
+      ...(caption ? { caption } : {}),
+      ...(description ? { description } : {}),
     };
   });
 
@@ -95,7 +145,7 @@ function createSessionGroup(
     id: generateId(sessionTitle, category),
     title: sessionTitle,
     category,
-    tags: tags.filter((tag) => tag !== 'portrait'),
+    tags: tags.filter((tag) => tag.toLowerCase() !== 'portrait'),
     images,
     coverImage: images[0],
     ...summarizeSessionDate(sessionImages),
@@ -109,11 +159,12 @@ export function adaptPortraits(manifest: PortraitManifest): PortfolioGroup[] {
           .map((album) =>
             createSessionGroup(
               item.collectionName,
-              item.tags,
+              mergeTags(album.tags?.length ? album.tags : item.tags),
               album.albumName,
               album.folderPath,
               album.images,
               true,
+              album.imageMetadata,
             ),
           )
           .filter((group): group is PortfolioGroup => group !== null)
@@ -130,6 +181,8 @@ export function adaptPortraits(manifest: PortraitManifest): PortfolioGroup[] {
       item.collectionName,
       item.folderPath,
       looseImages,
+      false,
+      item.imageMetadata,
     );
 
     return fallbackGroup ? [fallbackGroup] : [];
