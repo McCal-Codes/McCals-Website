@@ -5,12 +5,14 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import { resolve } from 'path';
 import fs from 'fs';
 import path from 'path';
+import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PUBLIC_DIR = resolve(__dirname, './public-vite');
 const SKIP_DIR_NAME = 'one-nation-divided';
+const PUBLIC_COPY_TIMEOUT_MS = Number(process.env.PUBLIC_COPY_TIMEOUT_MS ?? 5_000);
 const shouldUploadSentrySourceMaps = Boolean(
   process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT,
 );
@@ -24,6 +26,7 @@ const sentryRelease = process.env.VERCEL_GIT_COMMIT_SHA
  */
 function copyPublicSkipDeadFolder(): Plugin {
   let outDirAbs = '';
+  const skippedAssets: string[] = [];
 
   const walk = (fromRoot: string, toRoot: string, rel: string) => {
     const dir = rel ? path.join(fromRoot, rel) : fromRoot;
@@ -42,12 +45,22 @@ function copyPublicSkipDeadFolder(): Plugin {
       const relNext = rel ? path.join(rel, ent.name) : ent.name;
       const srcPath = path.join(fromRoot, relNext);
       const destPath = path.join(toRoot, relNext);
+      if (ent.name.endsWith('.drive-stuck')) {
+        continue;
+      }
       if (ent.isDirectory()) {
         fs.mkdirSync(destPath, { recursive: true });
         walk(fromRoot, toRoot, relNext);
       } else {
         fs.mkdirSync(path.dirname(destPath), { recursive: true });
-        fs.copyFileSync(srcPath, destPath);
+        const result = spawnSync('/bin/cp', ['-p', srcPath, destPath], {
+          stdio: 'ignore',
+          timeout: PUBLIC_COPY_TIMEOUT_MS,
+        });
+        if (result.error || result.status !== 0) {
+          fs.rmSync(destPath, { force: true });
+          skippedAssets.push(relNext);
+        }
       }
     }
   };
@@ -59,7 +72,15 @@ function copyPublicSkipDeadFolder(): Plugin {
       outDirAbs = path.resolve(config.root, config.build.outDir);
     },
     closeBundle() {
+      if (PUBLIC_COPY_TIMEOUT_MS <= 0) {
+        this.warn('Skipped public-vite copy because PUBLIC_COPY_TIMEOUT_MS=0');
+        return;
+      }
+      skippedAssets.length = 0;
       walk(PUBLIC_DIR, outDirAbs, '');
+      for (const rel of skippedAssets) {
+        this.warn(`Skipped public asset that could not be copied: ${rel}`);
+      }
     },
   };
 }

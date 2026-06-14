@@ -2,6 +2,7 @@ import { useEffect, useRef, type FC } from 'react';
 import OptimizedImage from '@/components/OptimizedImage';
 import type { PortfolioGroup } from './types';
 import { portfolioStyles } from './index';
+import ProtectedPortfolioImage from './ProtectedPortfolioImage';
 
 /**
  * Props for the PortfolioCard component
@@ -129,19 +130,22 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
         </button>
       )}
 
-      <OptimizedImage
-        src={group.coverImage.url}
-        alt={group.coverImage.alt ?? group.title}
-        frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfCardImageFrame}`}
-        imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfCardImage}`}
-        loading={imageLoading}
-        decoding="async"
-        optimizedWidth={640}
-        srcSetWidths={[320, 480, 640, 960]}
-        sizes={imageSizes ?? '(max-width: 600px) calc(100vw - 40px), (max-width: 900px) 50vw, 33vw'}
-        width={400}
-        height={300}
-      />
+      <ProtectedPortfolioImage>
+        <OptimizedImage
+          src={group.coverImage.url}
+          alt={group.coverImage.alt ?? group.title}
+          frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfCardImageFrame}`}
+          imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfCardImage}`}
+          loading={imageLoading}
+          decoding="async"
+          optimizedWidth={640}
+          srcSetWidths={[320, 480, 640, 960]}
+          sizes={imageSizes ?? '(max-width: 600px) calc(100vw - 40px), (max-width: 900px) 50vw, 33vw'}
+          width={400}
+          height={300}
+          draggable={false}
+        />
+      </ProtectedPortfolioImage>
 
       <div className={portfolioStyles.pfCardOverlay} aria-hidden="true">
         <div className={portfolioStyles.pfCaptionRail}>

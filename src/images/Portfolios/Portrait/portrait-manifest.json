@@ -1,13 +1,13 @@
 {
   "version": "1.0.0",
-  "generated": "2026-06-04T16:12:13.461Z",
+  "generated": "2026-05-13T21:09:45.676Z",
   "totalCollections": 5,
-  "totalImages": 132,
+  "totalImages": 104,
   "collections": [
     {
       "collectionName": "Editorial",
       "folderPath": "Editorial",
-      "totalImages": 89,
+      "totalImages": 61,
       "images": [
         "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8204.jpg",
         "Annie Victoria/231118_Super Shoot @ Ignite Studios__CAL8340 1.jpg",
@@ -69,35 +69,7 @@
         "Lucha 2024/240517_Lucha's Graduation Shoot_1602_CAL_Compressed.jpg",
         "Lucha 2024/240517_Lucha's Graduation Shoot_1605_CAL_Compressed.jpg",
         "Lucha 2024/240517_Lucha's Graduation Shoot_1607_CAL_Compressed.jpg",
-        "Michael McCartney/240331_Michael McCartney_614.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL899_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL906_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL908_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL910_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL937_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL942_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL948_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL951_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL953_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL960_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL966_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL975_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL979_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL986_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL991_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL997_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL999_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1004_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1026_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1058_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1060_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1064_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1069_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1074_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1078_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1080_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1082_webuse.jpg",
-        "Sam Rose/251115 Samantha Rose_CAL1085_webuse.jpg"
+        "Michael McCartney/240331_Michael McCartney_614.jpg"
       ],
       "tags": [
         "portrait",
@@ -207,190 +179,6 @@
           "images": [
             "Michael McCartney/240331_Michael McCartney_614.jpg"
           ]
-        },
-        {
-          "albumName": "Sam Rose",
-          "folderPath": "Editorial/Sam Rose",
-          "totalImages": 28,
-          "images": [
-            "Sam Rose/251115 Samantha Rose_CAL899_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL906_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL908_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL910_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL937_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL942_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL948_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL951_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL953_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL960_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL966_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL975_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL979_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL986_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL991_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL997_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL999_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1004_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1026_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1058_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1060_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1064_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1069_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1074_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1078_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1080_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1082_webuse.jpg",
-            "Sam Rose/251115 Samantha Rose_CAL1085_webuse.jpg"
-          ],
-          "tags": [
-            "editorial",
-            "portrait",
-            "model",
-            "creative portrait",
-            "outdoor portrait"
-          ],
-          "imageMetadata": {
-            "251115 Samantha Rose_CAL899_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL906_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL908_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL910_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL937_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL942_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL948_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL951_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL953_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL960_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL966_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL975_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL979_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL986_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL991_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL997_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL999_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1004_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1026_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1058_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1060_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1064_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1069_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1074_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1078_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1080_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1082_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            },
-            "251115 Samantha Rose_CAL1085_webuse.jpg": {
-              "caption": "Sam Rose poses for an outdoor editorial portrait session, Nov. 15, 2025. (Photo by Caleb McCartney)",
-              "description": "Selected outdoor editorial portraits of Sam Rose with sunglasses and a red shoulder bag against architectural and greenery backdrops.",
-              "alt": "Sam Rose poses outdoors for an editorial portrait."
-            }
-          }
         }
       ],
       "looseImages": []

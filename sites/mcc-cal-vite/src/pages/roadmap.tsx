@@ -102,6 +102,30 @@ const RoadmapPage = () => {
           </div>
         </section>
 
+        <section className={styles.platformEvolution}>
+          <div className={styles.sectionHeader}>
+            <Rocket className={styles.sectionIcon} />
+            <h2>Platform Evolution</h2>
+            <p>
+              How the current site foundation grows into booking, client operations,
+              automation, and a broader creative platform.
+            </p>
+          </div>
+          <figure className={styles.diagramFigure}>
+            <div className={styles.diagramShell}>
+              <img
+                src="/images/diagrams/roadmap-platform-evolution.svg"
+                alt="A roadmap diagram showing McCal Media moving from foundation complete to service expansion, client operations, automation layer, and creative platform."
+                className={styles.diagramImage}
+                loading="lazy"
+              />
+            </div>
+            <figcaption className={styles.diagramCaption}>
+              The roadmap connects public services with the operational tools needed to support them as the studio grows.
+            </figcaption>
+          </figure>
+        </section>
+
         <section className={styles.features}>
           <div className={styles.sectionHeader}>
             <Zap className={styles.sectionIcon} />

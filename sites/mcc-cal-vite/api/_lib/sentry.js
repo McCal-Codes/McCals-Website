@@ -31,7 +31,7 @@ export function initSentry() {
   return true;
 }
 
-export function captureApiException(error, context = {}) {
+export async function captureApiException(error, context = {}) {
   if (!initSentry()) {
     return;
   }
@@ -46,4 +46,7 @@ export function captureApiException(error, context = {}) {
     scope.setContext('api', context);
     Sentry.captureException(error);
   });
+
+  // Flush before the serverless function exits so envelopes are not dropped.
+  await Sentry.flush(2000);
 }

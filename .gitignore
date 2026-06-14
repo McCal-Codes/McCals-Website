@@ -1,7 +1,15 @@
-# AI-related scripts and Copilot instructions (local only)
+# AI tool config files (local only — not committed)
 scripts/utils/ai-*.js
 src/api/scripts/utils/ai-*.js
 .github/copilot-instructions.md
+.github/codex-instructions.md
+.github/canvas-instructions.md
+.github/chatmodes/
+.github/workflows/copilot-instructions-guardian.yml
+AGENTS.md
+.claude/
+.claw/
+.planning/
 .windsurf/
 .cursor/
 agent-transcripts/

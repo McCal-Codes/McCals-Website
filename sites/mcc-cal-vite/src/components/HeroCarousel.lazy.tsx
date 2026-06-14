@@ -69,7 +69,7 @@ const HeroCarousel: React.FC = () => {
   });
   const heroRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof window.setInterval> | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   const slides = useMemo(() => getInitialSlides(), []);

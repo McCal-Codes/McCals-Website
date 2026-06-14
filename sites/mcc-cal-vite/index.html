@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- Resource hints: warm up connections to image CDNs (LCP) and analytics origins.
+         preconnect for render-critical image hosts; dns-prefetch for non-critical async services. -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://images.squarespace-cdn.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://images.squarespace-cdn.com" />
+    <link rel="dns-prefetch" href="https://media.rss.com" />
     <title>Pittsburgh Photographer | Caleb McCartney | McCal Media</title>
     <meta name="description" content="Pittsburgh photographer Caleb McCartney creates photojournalism, political coverage, event coverage, concert photography, and documentary imagery." />
     <meta name="author" content="Caleb McCartney" />

@@ -1,8 +1,6 @@
-name: AI instructions preflight (daily)
+name: AI instructions preflight
 
 on:
-  schedule:
-    - cron: '15 9 * * *' # daily at 09:15 UTC
   workflow_dispatch:
 
 permissions:

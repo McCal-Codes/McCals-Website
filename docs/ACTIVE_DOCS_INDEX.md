@@ -13,6 +13,7 @@ Use these docs first, and treat `docs/archive/` as historical reference only.
 ## Public Site (`sites/mcc-cal-vite`)
 
 - `docs/workflows/content-publishing.md` - authored vs generated content pipeline
+- `docs/workflows/portfolio-manifest-pipeline.md` - portfolio source to manifest/CDN/cache pipeline
 - `docs/standards/ui-patterns.md` - active UI implementation patterns
 - `docs/standards/performance-standards.md` - performance guardrails
 - `docs/standards/accessibility-patterns.md` - accessibility implementation guide

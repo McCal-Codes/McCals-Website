@@ -136,6 +136,9 @@ jobs:
       - name: Run TypeScript Check
         run: cd sites/mcc-cal-vite && npx tsc -b --noEmit
 
+      - name: Run TypeScript Check (test files)
+        run: cd sites/mcc-cal-vite && npm run typecheck:test
+
       - name: Notify Vercel - TypeScript
         if: always()
         uses: actions/github-script@v9

@@ -73,7 +73,7 @@ export default async function handler(req, res) {
 
     if (dbError) {
       console.error('[contact] Database error: - contact.js:74', dbError);
-      captureApiException(dbError, { route: 'contact', operation: 'insert_contact_submission' });
+      await captureApiException(dbError, { route: 'contact', operation: 'insert_contact_submission' });
       // Continue to try sending email even if DB save fails
     } else {
       submissionId = submission?.id;
@@ -103,7 +103,7 @@ export default async function handler(req, res) {
       });
     } catch (err) {
       console.error('[contact] Email error: - contact.js:103', err);
-      captureApiException(err, { route: 'contact', operation: 'send_contact_email' });
+      await captureApiException(err, { route: 'contact', operation: 'send_contact_email' });
       // Don't fail the request if email fails but DB succeeded
       if (submissionId) {
         res.status(200).json({ ok: true, id: submissionId, emailError: true });

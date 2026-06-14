@@ -1,0 +1,8 @@
+[allowlist]
+description = "Project-level Gitleaks allowlist"
+
+# Example/template files contain placeholder values, not real credentials.
+paths = [
+  '''.env\.example$''',
+  '''\.env\.example\..*$''',
+]

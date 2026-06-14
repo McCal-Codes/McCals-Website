@@ -46,7 +46,6 @@ try {
 
 ReactDOM.createRoot(document.getElementById('root')!, {
   onUncaughtError: Sentry.reactErrorHandler(),
-  onCaughtError: Sentry.reactErrorHandler(),
   onRecoverableError: Sentry.reactErrorHandler(),
 }).render(
   <React.StrictMode>
