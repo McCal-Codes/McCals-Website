@@ -22,6 +22,19 @@ interface PageMeta {
   jsonLd?: object;
 }
 
+function withPreviewDirectives(robots?: string) {
+  const directives = (robots || '')
+    .split(',')
+    .map((directive) => directive.trim())
+    .filter(Boolean);
+
+  if (!directives.some((directive) => directive.startsWith('max-image-preview:'))) {
+    directives.push('max-image-preview:large');
+  }
+
+  return directives.join(', ');
+}
+
 function setMeta(name: string, content: string, attr: 'name' | 'property' = 'name') {
   let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
   if (!el) {
@@ -83,7 +96,7 @@ export function usePageMeta(meta: PageMeta) {
     document.title = meta.title;
     setMeta('description', meta.description);
     setLink('canonical', meta.canonical);
-    setOptionalMeta('robots', meta.robots);
+    setOptionalMeta('robots', withPreviewDirectives(meta.robots));
 
     setOptionalMeta('og:type', meta.og?.type, 'property');
     setOptionalMeta('og:title', meta.og?.title, 'property');
