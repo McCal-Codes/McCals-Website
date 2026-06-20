@@ -114,3 +114,4 @@ updates/*-plan.json
 updates/*-albums.json
 .vercel
 .env*.local
+.env*
