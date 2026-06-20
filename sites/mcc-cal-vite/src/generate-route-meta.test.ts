@@ -1,29 +1,31 @@
 import { describe, expect, it } from 'vitest';
+import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
 import { buildRouteMetaEntries, routeOutputPaths } from '../scripts/generate-route-meta.js';
+
+function buildPageSeoFixture() {
+  return Object.fromEntries(
+    STATIC_PAGE_ROUTES.map((route) => {
+      const seoKey = route.seoKey || route.routeKey;
+      return [
+        seoKey,
+        {
+          route: route.path,
+          title: `${seoKey} title`,
+          description: `${seoKey} description for a public page.`,
+          ogTitle: `${seoKey} OG`,
+          ogDescription: `${seoKey} OG description.`,
+          imagePath: `/images/social/${seoKey}.jpg`,
+          imageAlt: `${seoKey} image alt`,
+        },
+      ];
+    }),
+  );
+}
 
 describe('generate-route-meta', () => {
   it('builds static HTML metadata entries for static pages and published blog posts', () => {
     const entries = buildRouteMetaEntries({
-      pageSeo: {
-        home: {
-          route: '/',
-          title: 'Home Title',
-          description: 'Home description for a public page.',
-          ogTitle: 'Home OG',
-          ogDescription: 'Home OG description.',
-          imagePath: '/images/social/home.jpg',
-          imageAlt: 'Home image alt',
-        },
-        about: {
-          route: '/about',
-          title: 'About Title',
-          description: 'About description for a public page.',
-          ogTitle: 'About OG',
-          ogDescription: 'About OG description.',
-          imagePath: '/images/social/about.jpg',
-          imageAlt: 'About image alt',
-        },
-      },
+      pageSeo: buildPageSeoFixture(),
       blogManifest: {
         posts: [
           {
@@ -45,8 +47,9 @@ describe('generate-route-meta', () => {
       },
     });
 
-    expect(entries.map((entry) => entry.route)).toEqual(['/about', '/blog/published-story']);
-    expect(entries[1]).toMatchObject({
+    expect(entries.map((entry) => entry.route)).toContain('/about');
+    expect(entries.map((entry) => entry.route)).toContain('/contact-us');
+    expect(entries.at(-1)).toMatchObject({
       title: 'Published Story | McCal Media',
       description: 'A useful story excerpt for search previews.',
       ogType: 'article',

@@ -12,7 +12,7 @@ import { captureApiException } from '../_lib/sentry.js';
 
 // Lazy-initialize Resend client to handle missing API key gracefully
 let resendClient = null;
-function getResendClient() {
+async function getResendClient() {
   if (!resendClient && process.env.RESEND_API_KEY) {
     try {
       resendClient = new Resend(process.env.RESEND_API_KEY);
@@ -185,7 +185,7 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
 }
 
 async function sendConfirmationEmail(booking, config) {
-  const resend = getResendClient();
+  const resend = await getResendClient();
   if (!resend) {
     console.warn('[sendConfirmationEmail] Resend not configured, skipping email - book.js:188');
     return;
@@ -402,7 +402,7 @@ export default async function handler(req, res) {
     };
     
     // Send email notification (don't await, let it run async)
-    sendConfirmationEmail(mockBooking, config).catch(err => {
+    sendConfirmationEmail(mockBooking, config).catch(async (err) => {
       console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
       await captureApiException(err, { route: 'schedule/book', operation: 'send_mock_confirmation_email' });
     });

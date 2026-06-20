@@ -54,6 +54,18 @@ const AlertCircleIcon = ({ size = 16 }: { size?: number }) => (
 );
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const COOKIE_CONSENT_KEY = 'mccal_cookie_consent';
+const COOKIE_CONSENT_DATE_KEY = 'mccal_consent_date';
+
+function getLocalStorageSafe() {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
 
 // Types
 interface NavItem {
@@ -178,8 +190,8 @@ const AccessibilityPage = () => {
 
   // Cookie consent state
   const [cookiePreferences, setCookiePreferences] = useState<Record<string, boolean>>(() => {
-    if (typeof window === 'undefined') return {};
-    const saved = localStorage.getItem('mccal_cookie_consent');
+    const storage = getLocalStorageSafe();
+    const saved = storage?.getItem(COOKIE_CONSENT_KEY);
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -325,8 +337,9 @@ const AccessibilityPage = () => {
   };
 
   const savePreferences = (prefs: Record<string, boolean>) => {
-    localStorage.setItem('mccal_cookie_consent', JSON.stringify(prefs));
-    localStorage.setItem('mccal_consent_date', new Date().toISOString());
+    const storage = getLocalStorageSafe();
+    storage?.setItem(COOKIE_CONSENT_KEY, JSON.stringify(prefs));
+    storage?.setItem(COOKIE_CONSENT_DATE_KEY, new Date().toISOString());
     setShowSaveConfirmation(true);
     setTimeout(() => setShowSaveConfirmation(false), 3000);
   };
