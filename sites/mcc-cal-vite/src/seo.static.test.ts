@@ -56,6 +56,9 @@ describe('static SEO metadata', () => {
     expect(indexSource).toContain(`<meta name="description" content="${home.description}"`);
     expect(indexSource).toContain(`<meta property="og:description" content="${home.ogDescription}"`);
     expect(indexSource).toContain(`<meta name="twitter:description" content="${home.ogDescription}"`);
+    expect(indexSource).toContain('<meta name="robots" content="max-image-preview:large"');
+    expect(indexSource).toContain('<meta property="og:image:width" content="1200"');
+    expect(indexSource).toContain('<meta property="og:image:height" content="630"');
     expect(indexSource).not.toMatch(/XXX|TODO|PLACEHOLDER|mccalmedia\.com/i);
   });
 

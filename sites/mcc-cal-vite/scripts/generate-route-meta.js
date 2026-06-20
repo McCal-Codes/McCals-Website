@@ -8,6 +8,9 @@ const distRoot = path.join(appRoot, 'dist');
 const pageSeoPath = path.join(appRoot, 'src', 'content', 'pageSeoData.json');
 const blogManifestPath = path.join(appRoot, 'public-vite', 'content', 'blog-static', 'blog-manifest.json');
 const siteUrl = (process.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+const DEFAULT_OG_IMAGE_WIDTH = '1200';
+const DEFAULT_OG_IMAGE_HEIGHT = '630';
+const DEFAULT_OG_IMAGE_TYPE = 'image/jpeg';
 
 function escapeAttr(value) {
   return String(value)
@@ -23,6 +26,16 @@ function escapeRegex(value) {
 
 function absoluteUrl(value) {
   return /^https?:\/\//i.test(value) ? value : `${siteUrl}${value.startsWith('/') ? value : `/${value}`}`;
+}
+
+function inferImageType(image, explicitType) {
+  if (explicitType) return explicitType;
+
+  const pathname = String(image || '').split(/[?#]/)[0].toLowerCase();
+  if (pathname.endsWith('.png')) return 'image/png';
+  if (pathname.endsWith('.webp')) return 'image/webp';
+  if (pathname.endsWith('.gif')) return 'image/gif';
+  return DEFAULT_OG_IMAGE_TYPE;
 }
 
 function blogImagePath(post) {
@@ -72,6 +85,9 @@ function applyRouteMeta(indexHtml, entry) {
   html = setMeta(html, 'property="og:url"', 'content', url);
   html = setMeta(html, 'property="og:image"', 'content', image);
   html = setMeta(html, 'property="og:image:alt"', 'content', entry.imageAlt);
+  html = setMeta(html, 'property="og:image:width"', 'content', entry.imageWidth || DEFAULT_OG_IMAGE_WIDTH);
+  html = setMeta(html, 'property="og:image:height"', 'content', entry.imageHeight || DEFAULT_OG_IMAGE_HEIGHT);
+  html = setMeta(html, 'property="og:image:type"', 'content', inferImageType(entry.imagePath, entry.imageType));
   html = setMeta(html, 'name="twitter:title"', 'content', entry.ogTitle);
   html = setMeta(html, 'name="twitter:description"', 'content', entry.ogDescription);
   html = setMeta(html, 'name="twitter:image"', 'content', image);
