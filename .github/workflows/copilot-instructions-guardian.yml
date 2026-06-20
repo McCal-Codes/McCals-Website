@@ -1,0 +1,143 @@
+---
+name: Copilot Instructions Guardian
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+    paths:
+      - 'package.json'
+      - 'dev-server.js'
+      - 'scripts/**'
+      - 'src/site/**'
+      - 'src/widgets/**'
+      - 'docs/**'
+      - '.github/workflows/**'
+      - '.github/copilot-instructions.md'
+      - '.github/canvas-instructions.md'
+      - '.github/codex-instructions.md'
+      - 'README.md'
+      - 'docs/README.md'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check:
+    name: Ensure instructions updated
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: false
+          fetch-depth: 0
+
+      - name: Detect changed files
+        id: changed
+        run: |
+          set -euo pipefail
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.sha }}"
+          echo "Comparing $BASE_SHA...$HEAD_SHA"
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | tr '\n' ' ')
+          echo "changed_files=$CHANGED" >> $GITHUB_OUTPUT
+          # Detect if any instruction docs were changed (any file matching .github/*instructions*.md)
+          if echo "$CHANGED" | grep -E -q "\.github/.*instructions.*\.md"; then
+            # instructions were changed → no update required by this guard
+            echo "needs_update=false" >> $GITHUB_OUTPUT
+          else
+            # instructions were not changed → we expect the PR to update them when core files changed
+            echo "needs_update=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Guard and optionally comment / fail
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const needsUpdate = `${{ steps.changed.outputs.needs_update }}` === 'true';
+            if (needsUpdate) {
+              const { data: labels } = await github.issues.listLabelsOnIssue({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+              });
+              const bypassLabels = new Set(['skip-copilot-instructions', 'docs-acknowledged']);
+              const hasBypass = labels.some(l => bypassLabels.has(l.name));
+              if (!hasBypass) {
+                const changed = `${{ steps.changed.outputs.changed_files }}`.split(' ').filter(Boolean);
+                const header = '⚠️ Copilot instructions reminder';
+                const body = [
+                  'The PR changes core repo behavior/files but `.github/copilot-instructions.md` was not updated.',
+                  '',
+                  '**Changed files (subset):**',
+                  '```',
+                  changed.slice(0, 30).join('\n'),
+                  '```',
+                  '',
+                  'Please review and update instruction docs under `.github/` (e.g., copilot/canvas/codex instructions) so AI agents stay accurate.',
+                  '',
+                  'Bypass: add label `docs-acknowledged` or `skip-copilot-instructions` to this PR.'
+                ].join('\n');
+                const { data: comments } = await github.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                });
+                const already = comments.some(c => c.user.type === 'Bot' && c.body && c.body.includes('Copilot instructions reminder'));
+                if (!already) {
+                  await github.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: context.issue.number,
+                    body: `### ${header}\n\n${body}`,
+                  });
+                }
+                core.setFailed("Copilot instructions not updated. Please edit .github/copilot-instructions.md or add the 'docs-acknowledged' label to bypass.");
+              }
+            }
+
+      - name: Require CHANGELOG when instructions change
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const changed = `${{ steps.changed.outputs.changed_files }}`.split(' ').filter(Boolean);
+            const instructionDocsChanged = changed.some(f => /\.github\/.*instructions.*\.md$/.test(f));
+            const changelogChanged = changed.includes('CHANGELOG.md') || changed.includes('docs/CHANGELOG.md');
+            if (instructionDocsChanged && !changelogChanged) {
+              const { data: labels } = await github.issues.listLabelsOnIssue({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+              });
+              const bypassLabels = new Set(['skip-copilot-instructions', 'docs-acknowledged']);
+              const hasBypass = labels.some(l => bypassLabels.has(l.name));
+              const note = [
+                'This PR updates instruction docs under `.github/` (e.g., copilot/canvas/codex) but no CHANGELOG entry was found.',
+                '',
+                'Please add an entry to `CHANGELOG.md` describing the update to the Copilot instructions (e.g., under a Docs/Meta section).',
+                'You can bypass with label `docs-acknowledged` if intentional.'
+              ].join('\n');
+              const { data: comments } = await github.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+              });
+              const already = comments.some(c => c.user.type === 'Bot' && c.body && c.body.includes('updates `.github/copilot-instructions.md`'));
+              if (!already) {
+                await github.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: `### 📝 CHANGELOG required for Copilot instructions\n\n${note}`,
+                });
+              }
+              if (!hasBypass) {
+                core.setFailed('Copilot instructions changed without CHANGELOG update.');
+              }
+            }
+
