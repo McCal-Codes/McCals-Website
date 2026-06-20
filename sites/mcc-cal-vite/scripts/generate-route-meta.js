@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { STATIC_PAGE_ROUTES } from '../src/config/public-routes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, '..');
@@ -23,6 +24,10 @@ function escapeRegex(value) {
 
 function absoluteUrl(value) {
   return /^https?:\/\//i.test(value) ? value : `${siteUrl}${value.startsWith('/') ? value : `/${value}`}`;
+}
+
+function removeManagedImagePreloads(html) {
+  return html.replace(/\s*<link[^>]+data-route-image-preload=["'][^"']+["'][^>]*>\n?/gi, '');
 }
 
 function blogImagePath(post) {
@@ -62,7 +67,8 @@ function setLink(html, rel, href) {
 function applyRouteMeta(indexHtml, entry) {
   const url = absoluteUrl(entry.route);
   const image = absoluteUrl(entry.imagePath);
-  let html = setTitle(indexHtml, entry.title);
+  let html = removeManagedImagePreloads(indexHtml);
+  html = setTitle(html, entry.title);
 
   html = setMeta(html, 'name="description"', 'content', entry.description);
   html = setLink(html, 'canonical', url);
@@ -91,7 +97,20 @@ export function routeOutputPaths(route) {
 }
 
 export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } }) {
-  const staticEntries = Object.values(pageSeo).filter((entry) => entry.route !== '/');
+  const staticEntries = STATIC_PAGE_ROUTES
+    .filter((route) => route.path !== '/')
+    .map((route) => {
+      const seoKey = route.seoKey || route.routeKey;
+      const entry = pageSeo[seoKey];
+      if (!entry) {
+        throw new Error(`Missing page SEO entry for route "${route.path}" (${seoKey})`);
+      }
+
+      return {
+        ...entry,
+        route: route.path,
+      };
+    });
   const blogEntries = (blogManifest.posts || [])
     .filter((post) => post.published)
     .map((post) => ({

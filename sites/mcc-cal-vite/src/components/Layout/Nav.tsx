@@ -12,6 +12,14 @@ const Link = React.forwardRef<HTMLAnchorElement, React.ComponentProps<typeof Rou
 );
 Link.displayName = 'ViewTransitionLink';
 
+function getSubmenuHiddenState(isMobile: boolean, isOpen: boolean) {
+  if (isMobile) {
+    return !isOpen;
+  }
+
+  return undefined;
+}
+
 const Nav: React.FC = () => {
   const { pathname } = useLocation();
   const navRef = useRef<HTMLElement>(null);
@@ -171,6 +179,8 @@ const Nav: React.FC = () => {
                 id="mcc-nav-submenu-work"
                 role="menu"
                 aria-label="Work submenu"
+                aria-hidden={getSubmenuHiddenState(isMobile, workSubmenuOpen)}
+                hidden={getSubmenuHiddenState(isMobile, workSubmenuOpen)}
                 style={isMobile ? { display: workSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
                 {WORK_NAV_ITEMS.map((item) => (
@@ -229,6 +239,8 @@ const Nav: React.FC = () => {
                 id="mcc-nav-submenu-projects"
                 role="menu"
                 aria-label="Projects submenu"
+                aria-hidden={getSubmenuHiddenState(isMobile, projectsSubmenuOpen)}
+                hidden={getSubmenuHiddenState(isMobile, projectsSubmenuOpen)}
                 style={isMobile ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
                 {PROJECT_NAV_ITEMS.map((item) => (

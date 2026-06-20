@@ -2,8 +2,9 @@ import { Suspense, lazy } from 'react';
 import * as Sentry from '@sentry/react';
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
+import RouteAnalytics from './components/RouteAnalytics';
 import ErrorBoundary from './components/ErrorBoundary';
-import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
+import { LEGACY_ROUTE_REDIRECTS, STATIC_PAGE_ROUTES } from './config/public-routes.js';
 import HomePage from './pages/index';
 import PodcastPage from './pages/podcast';
 
@@ -101,6 +102,7 @@ function AppShell() {
   return (
     <>
       <PreviewBanner />
+      <RouteAnalytics />
       <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
           <Outlet />
@@ -125,9 +127,10 @@ const router = sentryCreateBrowserRouter([
           element: <RouteComponent />,
         };
       }),
-      { path: '/contact', element: <Navigate to="/contact-us" replace /> },
-      { path: '/schedule', element: <Navigate to="/grab-a-coffee" replace /> },
-      { path: '/one-nation-divided', element: <Navigate to="/letting-me-go" replace /> },
+      ...LEGACY_ROUTE_REDIRECTS.map((route) => ({
+        path: route.from,
+        element: <Navigate to={route.to} replace />,
+      })),
       { path: '/authors/:authorId', element: <AuthorsPage /> },
       { path: '/blog/:slug', element: <BlogPage /> },
       { path: '/roadmap', element: <RoadmapPage /> },
