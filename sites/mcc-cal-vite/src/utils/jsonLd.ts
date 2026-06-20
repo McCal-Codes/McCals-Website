@@ -8,6 +8,9 @@
 import type { PortfolioGroup, PortfolioImage } from '../components/portfolio/types';
 
 const SITE_ROOT = 'https://mcc-cal.com';
+const GOOGLE_BUSINESS_PROFILE_URL = 'https://www.google.com/search?kgmid=/g/11krrndw6s&q=McCal+Media';
+const MC_CAL_LOGO = `${SITE_ROOT}/brand/logo-mark.svg`;
+const MC_CAL_EMAIL = 'contact@mcc-cal.com';
 const PITTSBURGH_AREA_SERVED = {
   '@type': 'City',
   name: 'Pittsburgh',
@@ -15,6 +18,12 @@ const PITTSBURGH_AREA_SERVED = {
     '@type': 'State',
     name: 'Pennsylvania',
   },
+};
+const PITTSBURGH_POSTAL_ADDRESS = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Pittsburgh',
+  addressRegion: 'PA',
+  addressCountry: 'US',
 };
 
 const MC_CAL_PERSON = {
@@ -25,10 +34,20 @@ const MC_CAL_PERSON = {
 };
 
 const MC_CAL_ORGANIZATION = {
-  '@type': 'Organization',
+  '@type': 'LocalBusiness',
   '@id': `${SITE_ROOT}#organization`,
   name: 'McCal Media',
   url: SITE_ROOT,
+  logo: MC_CAL_LOGO,
+  email: MC_CAL_EMAIL,
+  address: PITTSBURGH_POSTAL_ADDRESS,
+  areaServed: PITTSBURGH_AREA_SERVED,
+  hasMap: GOOGLE_BUSINESS_PROFILE_URL,
+  sameAs: [
+    GOOGLE_BUSINESS_PROFILE_URL,
+    'https://www.instagram.com/mcc_cal',
+    'https://www.linkedin.com/in/calebmccartney',
+  ],
 };
 
 // ============================================================================
@@ -85,16 +104,27 @@ export function generatePersonSchema(): object {
 export function generatePhotographyProviderSchema(description?: string): object {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'LocalBusiness',
     '@id': `${SITE_ROOT}#organization`,
     name: 'McCal Media',
     url: SITE_ROOT,
+    logo: MC_CAL_LOGO,
+    email: MC_CAL_EMAIL,
     description:
       description ||
       'Pittsburgh photography business led by Caleb McCartney for events, concerts, headshots, and commercial storytelling.',
+    address: PITTSBURGH_POSTAL_ADDRESS,
     areaServed: PITTSBURGH_AREA_SERVED,
     founder: MC_CAL_PERSON,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: MC_CAL_EMAIL,
+      url: `mailto:${MC_CAL_EMAIL}`,
+    },
+    hasMap: GOOGLE_BUSINESS_PROFILE_URL,
     sameAs: [
+      GOOGLE_BUSINESS_PROFILE_URL,
       'https://www.instagram.com/mcc_cal',
       'https://www.linkedin.com/in/calebmccartney',
     ],

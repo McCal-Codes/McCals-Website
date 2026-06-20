@@ -93,6 +93,10 @@ describe('critical public routes', () => {
     const indexSource = readFileSync(resolve(__dirname, '..', 'index.html'), 'utf8');
 
     expect(indexSource).toContain('contact@mcc-cal.com');
+    expect(indexSource).toContain('"@type": "LocalBusiness"');
+    expect(indexSource).toContain('kgmid=/g/11krrndw6s');
     expect(indexSource).not.toContain('+1-412-XXX-XXXX');
+    expect(indexSource).not.toContain('"telephone"');
+    expect(indexSource).not.toContain('openingHoursSpecification');
   });
 });

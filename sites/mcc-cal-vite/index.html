@@ -49,14 +49,16 @@
         } catch (e) {}
       })();
     </script>
-    <!-- Schema.org Organization -->
+    <!-- Schema.org LocalBusiness -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "LocalBusiness",
+      "@id": "https://mcc-cal.com#organization",
       "name": "McCal Media",
       "url": "https://mcc-cal.com",
       "logo": "https://mcc-cal.com/brand/logo-mark.svg",
+      "email": "contact@mcc-cal.com",
       "description": "Pittsburgh photographer Caleb McCartney creates photojournalism, political coverage, event coverage, concert photography, and documentary imagery.",
       "founder": {
         "@type": "Person",
@@ -71,9 +73,20 @@
         "url": "mailto:contact@mcc-cal.com"
       },
       "sameAs": [
+        "https://www.google.com/search?kgmid=/g/11krrndw6s&q=McCal+Media",
         "https://twitter.com/mcc_cal",
-        "https://www.instagram.com/mcc_cal"
+        "https://www.instagram.com/mcc_cal",
+        "https://www.linkedin.com/in/calebmccartney"
       ],
+      "hasMap": "https://www.google.com/search?kgmid=/g/11krrndw6s&q=McCal+Media",
+      "areaServed": {
+        "@type": "City",
+        "name": "Pittsburgh",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "Pennsylvania"
+        }
+      },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Pittsburgh",
