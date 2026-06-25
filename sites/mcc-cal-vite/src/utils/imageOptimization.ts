@@ -1,7 +1,10 @@
 const SQUARESPACE_IMAGE_HOST = 'images.squarespace-cdn.com';
 const JSDELIVR_IMAGE_HOST = 'cdn.jsdelivr.net';
+const R2_IMAGE_HOST = import.meta.env.VITE_R2_PUBLIC_URL
+  ? (() => { try { return new URL(import.meta.env.VITE_R2_PUBLIC_URL).hostname; } catch { return null; } })()
+  : null;
 const ABSOLUTE_URL_RE = /^(?:[a-z][a-z0-9+.-]*:)?\/\//i;
-const OPTIMIZABLE_REMOTE_HOSTS = new Set([SQUARESPACE_IMAGE_HOST, JSDELIVR_IMAGE_HOST]);
+const OPTIMIZABLE_REMOTE_HOSTS = new Set([SQUARESPACE_IMAGE_HOST, JSDELIVR_IMAGE_HOST, ...(R2_IMAGE_HOST ? [R2_IMAGE_HOST] : [])]);
 const OPTIMIZABLE_LOCAL_PATHS = [
   /^\/about\/.+/i,
   /^\/assets\/.+/i,

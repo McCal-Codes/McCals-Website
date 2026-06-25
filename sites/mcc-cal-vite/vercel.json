@@ -23,6 +23,12 @@
         "hostname": "cdn.jsdelivr.net",
         "port": "",
         "pathname": "^/gh/McCal-Codes/McCals-Website@main/src/images/Portfolios/.*$"
+      },
+      {
+        "protocol": "https",
+        "hostname": "**.r2.dev",
+        "port": "",
+        "pathname": "^/.*$"
       }
     ],
     "formats": ["image/avif", "image/webp"]
