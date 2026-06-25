@@ -85,7 +85,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/plugin-transform-optional-chaining": "^7.28.6",
-    "@babel/preset-env": "^8.0.2",
+    "@babel/preset-env": "^7.29.5",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.61.0",
     "@types/react": "^18.3.28",
