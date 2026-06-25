@@ -174,7 +174,7 @@ const HeroCarousel: React.FC = () => {
     link.rel = 'preload';
     link.as = 'image';
     link.href = nextSrc;
-    const srcset = getResponsiveImageSrcSet(nextSrc, [640, 960, 1280, 1920, 2560]);
+    const srcset = getResponsiveImageSrcSet(nextSrc, [640, 960, 1280, 1920, 3840]);
     if (srcset) {
       link.setAttribute('imagesrcset', srcset);
       link.setAttribute('imagesizes', '100vw');
@@ -244,7 +244,7 @@ const HeroCarousel: React.FC = () => {
             ref={imageRef}
             key={currentSlide.image}
             src={currentSlide.image}
-            srcSet={getResponsiveImageSrcSet(currentSlide.image, [640, 960, 1280, 1920, 2560])}
+            srcSet={getResponsiveImageSrcSet(currentSlide.image, [640, 960, 1280, 1920, 3840])}
             sizes="100vw"
             alt={currentSlide.alt}
             className={`${styles.heroImage} ${imageLoaded ? styles.loaded : ''}`}
