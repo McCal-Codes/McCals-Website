@@ -1,7 +1,5 @@
 import { Nav, Footer } from '@/components';
-import { lazy, Suspense } from 'react';
-
-const HeroCarousel = lazy(() => import('@/components/HeroCarousel.lazy'));
+import HeroCarousel from '@/components/HeroCarousel.lazy';
 import {
   HOMEPAGE_HERO_IMAGE_SEO_ENTRIES,
   HOMEPAGE_HERO_SOCIAL_IMAGE,
@@ -150,9 +148,7 @@ const HomePage = () => {
     <div className="site-layout site-layout--home pt-0">
       <Nav />
       <main className="site-main mt-0">
-        <Suspense fallback={<div className="hero-carousel-skeleton" style={{ height: '112svh', background: 'linear-gradient(135deg, #1f2937 0%, #374151 100%)' }} />}>
-          <HeroCarousel />
-        </Suspense>
+        <HeroCarousel />
       </main>
       <Footer />
     </div>

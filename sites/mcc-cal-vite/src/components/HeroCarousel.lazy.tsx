@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './heroCarousel.module.css';
+import { getResponsiveImageSrcSet } from '../utils/imageOptimization';
 import {
   FAVORITE_HERO_SLIDES,
   HERO_IMAGE_VARIANTS,
@@ -160,6 +161,31 @@ const HeroCarousel: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextSlide, prevSlide]);
 
+  const hasPreloadedNext = useRef(false);
+
+  useEffect(() => {
+    if (!imageLoaded || hasPreloadedNext.current || slides.length < 2) return;
+    hasPreloadedNext.current = true;
+
+    const nextSrc = slides[1]?.image;
+    if (!nextSrc) return;
+
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = nextSrc;
+    const srcset = getResponsiveImageSrcSet(nextSrc, [640, 960, 1280, 1920, 2560]);
+    if (srcset) {
+      link.setAttribute('imagesrcset', srcset);
+      link.setAttribute('imagesizes', '100vw');
+    }
+    document.head.appendChild(link);
+
+    return () => {
+      if (document.head.contains(link)) document.head.removeChild(link);
+    };
+  }, [imageLoaded, slides]);
+
   const objectPosition = useMemo(() => {
     return currentSlide ? resolveObjectPosition(currentSlide, isDesktop) : '50% 50%';
   }, [currentSlide, isDesktop]);
@@ -218,6 +244,8 @@ const HeroCarousel: React.FC = () => {
             ref={imageRef}
             key={currentSlide.image}
             src={currentSlide.image}
+            srcSet={getResponsiveImageSrcSet(currentSlide.image, [640, 960, 1280, 1920, 2560])}
+            sizes="100vw"
             alt={currentSlide.alt}
             className={`${styles.heroImage} ${imageLoaded ? styles.loaded : ''}`}
             style={{ objectPosition }}
