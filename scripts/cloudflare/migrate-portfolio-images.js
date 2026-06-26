@@ -17,12 +17,22 @@
  *   SUPABASE_SERVICE_ROLE_KEY=xxx
  *
  * R2 setup (Cloudflare dashboard):
- *   1. Create R2 bucket named "portfolio-images" (or whatever R2_BUCKET is set to)
- *   2. Enable public access or attach a custom domain
+ *   1. Create R2 bucket "portfolio-images"
+ *   2. For PRODUCTION: attach a custom domain (R2 → bucket → Settings → Custom Domains).
+ *      The r2.dev URL is rate-limited and intended for development only.
+ *      Custom domain unlocks Cloudflare Cache, WAF, Smart Tiered Cache, bot management.
  *   3. Create an R2 API token with "Object Read & Write" permission on that bucket
  *
- * Vercel transforms are applied automatically after migration — images are served
- * via /_vercel/image?url={r2-url}&w={width}&q=80.
+ * Best practices applied:
+ *   - Cache-Control: public, max-age=31536000, immutable set on every R2 object
+ *   - Content-Disposition: inline set on every object (browser renders, not downloads)
+ *   - Custom metadata (x-amz-meta-*) stored on object for self-describing assets
+ *   - Resume support: already-uploaded storage_paths are skipped (safe to re-run)
+ *   - JPEG→WebP conversion via sharp at quality 82
+ *   - Concurrent uploads (default 8, tune with --concurrency=N)
+ *
+ * Vercel Image Optimization applies width/format transforms at delivery time via
+ * /_vercel/image?url={r2-public-url}&w={width}&q=80.
  */
 
 'use strict';
@@ -43,6 +53,7 @@ const viteRequire = createRequire(path.join(VITE_DIR, 'package.json'));
 
 const sharp = rootRequire('sharp');
 const { createClient } = viteRequire('@supabase/supabase-js');
+const ws = viteRequire('ws');
 const dotenv = viteRequire('dotenv');
 
 dotenv.config({ path: path.join(VITE_DIR, '.env.local') });
@@ -68,6 +79,7 @@ const args = Object.fromEntries(
 const PORTFOLIO = args.portfolio;
 const DRY_RUN = !!args['dry-run'];
 const CONCURRENCY = parseInt(args.concurrency || '8', 10);
+const LIMIT = args.limit ? parseInt(args.limit, 10) : null;
 
 const VALID_PORTFOLIOS = ['journalism', 'concert', 'portrait', 'events', 'nature'];
 
@@ -102,26 +114,34 @@ function getSigningKey(secret, dateStamp) {
   return hmac(kService, 'aws4_request');
 }
 
-async function r2Put(storagePath, bodyBuffer, contentType) {
+async function r2Put(storagePath, bodyBuffer, contentType, customMeta = {}) {
   const host = `${CF_ACCOUNT_ID}.r2.cloudflarestorage.com`;
-  // Encode each path segment, preserve slashes
   const encodedKey = storagePath.split('/').map(encodeURIComponent).join('/');
   const url = `https://${host}/${R2_BUCKET}/${encodedKey}`;
 
   const now = new Date();
-  // yyyymmddTHHMMSSZ
   const amzDate = now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const dateStamp = amzDate.slice(0, 8);
 
   const bodyHash = sha256Hex(bodyBuffer);
   const canonicalUri = `/${R2_BUCKET}/${encodedKey}`;
-  const canonicalHeaders = [
-    `content-type:${contentType}`,
-    `host:${host}`,
-    `x-amz-content-sha256:${bodyHash}`,
-    `x-amz-date:${amzDate}`,
-  ].join('\n') + '\n';
-  const signedHeaders = 'content-type;host;x-amz-content-sha256;x-amz-date';
+
+  // Build sorted header map (canonical headers must be sorted alphabetically)
+  const metaHeaders = Object.fromEntries(
+    Object.entries(customMeta).map(([k, v]) => [`x-amz-meta-${k}`, String(v)])
+  );
+  const allHeaders = {
+    'cache-control': 'public, max-age=31536000, immutable',
+    'content-disposition': 'inline',
+    'content-type': contentType,
+    'host': host,
+    'x-amz-content-sha256': bodyHash,
+    'x-amz-date': amzDate,
+    ...metaHeaders,
+  };
+  const sortedKeys = Object.keys(allHeaders).sort();
+  const canonicalHeaders = sortedKeys.map(k => `${k}:${allHeaders[k]}`).join('\n') + '\n';
+  const signedHeaders = sortedKeys.join(';');
 
   const canonicalRequest = `PUT\n${canonicalUri}\n\n${canonicalHeaders}\n${signedHeaders}\n${bodyHash}`;
   const credentialScope = `${dateStamp}/auto/s3/aws4_request`;
@@ -129,18 +149,11 @@ async function r2Put(storagePath, bodyBuffer, contentType) {
 
   const signingKey = getSigningKey(R2_SECRET_KEY, dateStamp);
   const signature = crypto.createHmac('sha256', signingKey).update(stringToSign).digest('hex');
-
   const authorization = `AWS4-HMAC-SHA256 Credential=${R2_ACCESS_KEY}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
 
   const response = await fetch(url, {
     method: 'PUT',
-    headers: {
-      'Content-Type': contentType,
-      'Host': host,
-      'x-amz-content-sha256': bodyHash,
-      'x-amz-date': amzDate,
-      'Authorization': authorization,
-    },
+    headers: { ...allHeaders, 'Authorization': authorization },
     body: bodyBuffer,
   });
 
@@ -280,7 +293,7 @@ function buildImageList(portfolioType) {
 
 // --- Process single image ---
 
-async function processImage(entry, supabase, portfolioType, index, total) {
+async function processImage(entry, supabase, portfolioType, index, total, alreadyDone = new Set()) {
   const { localPath, storagePath, collectionName, filename, altText, caption, tags } = entry;
   const logPrefix = `[${index + 1}/${total}]`;
 
@@ -289,12 +302,20 @@ async function processImage(entry, supabase, portfolioType, index, total) {
     return { status: 'skipped' };
   }
 
+  // Derive the final storage path (JPEG→WebP rename) before the skip check
+  const isJpegCheck = /\.(jpg|jpeg)$/i.test(filename);
+  const finalStoragePathCheck = isJpegCheck ? storagePath.replace(/\.(jpg|jpeg)$/i, '.webp') : storagePath;
+  if (alreadyDone.has(finalStoragePathCheck)) {
+    process.stdout.write(`${logPrefix} SKIP (already uploaded): ${finalStoragePathCheck}\n`);
+    return { status: 'skipped' };
+  }
+
   try {
     const rawBuffer = fs.readFileSync(localPath);
     const sharpInstance = sharp(rawBuffer);
     const metadata = await sharpInstance.metadata();
 
-    const isJpeg = /\.(jpg|jpeg)$/i.test(filename);
+    const isJpeg = isJpegCheck;
     let imageBuffer, mimeType, finalFilename, finalStoragePath;
 
     if (isJpeg) {
@@ -316,8 +337,12 @@ async function processImage(entry, supabase, portfolioType, index, total) {
       return { status: 'dry-run', storagePath: finalStoragePath };
     }
 
-    // Upload to R2
-    await r2Put(finalStoragePath, imageBuffer, mimeType);
+    // Upload to R2 with Cache-Control + custom metadata on the object itself
+    await r2Put(finalStoragePath, imageBuffer, mimeType, {
+      'portfolio-type': portfolioType,
+      'collection': collectionName,
+      ...(altText ? { 'alt-text': altText } : {}),
+    });
 
     // Upsert metadata to Supabase
     const { error: dbError } = await supabase
@@ -354,8 +379,10 @@ async function processImage(entry, supabase, portfolioType, index, total) {
 async function main() {
   console.log(`\nPortfolio: ${PORTFOLIO}${DRY_RUN ? '  (DRY RUN — no writes)' : `  → R2 bucket: ${R2_BUCKET}`}\n`);
 
-  const images = buildImageList(PORTFOLIO);
-  console.log(`Found ${images.length} images in manifest\n`);
+  const allImages = buildImageList(PORTFOLIO);
+  const images = LIMIT ? allImages.slice(0, LIMIT) : allImages;
+  const limitNote = LIMIT ? `  (limited to ${LIMIT}/${allImages.length})` : '';
+  console.log(`Found ${allImages.length} images in manifest${limitNote}\n`);
 
   if (DRY_RUN) {
     for (let i = 0; i < images.length; i++) {
@@ -365,14 +392,29 @@ async function main() {
     return;
   }
 
-  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
+    realtime: { transport: ws },
+  });
+
+  // Load already-migrated paths so we can skip them (resume support)
+  process.stdout.write('Checking for already-migrated images...\n');
+  const { data: existing } = await supabase
+    .from('portfolio_images')
+    .select('storage_path')
+    .eq('portfolio_type', PORTFOLIO);
+  const alreadyDone = new Set((existing || []).map(r => r.storage_path));
+  if (alreadyDone.size > 0) {
+    process.stdout.write(`Skipping ${alreadyDone.size} already-uploaded images\n\n`);
+  } else {
+    process.stdout.write('No existing uploads found — starting fresh\n\n');
+  }
 
   const counts = { ok: 0, skipped: 0, error: 0 };
   let index = 0;
 
   const tasks = images.map(entry => async () => {
     const i = index++;
-    const result = await processImage(entry, supabase, PORTFOLIO, i, images.length);
+    const result = await processImage(entry, supabase, PORTFOLIO, i, images.length, alreadyDone);
     counts[result.status === 'ok' ? 'ok' : result.status === 'skipped' ? 'skipped' : 'error']++;
     return result;
   });
