@@ -118,7 +118,11 @@
     linear-gradient(110deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)),
     #151515;
   background-size: 220% 100%;
-  animation: heroSkeleton 1.4s ease-in-out infinite;
+  /* Start invisible; fade in after 200ms so cached/fast images never flash the shimmer */
+  opacity: 0;
+  animation:
+    heroSkeletonReveal 150ms ease-out 200ms forwards,
+    heroSkeleton 1.4s ease-in-out 350ms infinite;
 }
 
 .imageError {
@@ -422,6 +426,10 @@
     transition: none !important;
     animation: none !important;
   }
+}
+
+@keyframes heroSkeletonReveal {
+  to { opacity: 1; }
 }
 
 @keyframes heroSkeleton {

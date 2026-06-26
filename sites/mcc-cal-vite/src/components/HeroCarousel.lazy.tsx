@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState, useMemo } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './heroCarousel.module.css';
 import { getResponsiveImageSrcSet } from '../utils/imageOptimization';
@@ -229,19 +229,20 @@ const HeroCarousel: React.FC = () => {
     };
   }, []);
 
-  // A cached image can complete before React receives onLoad after a slide change.
-  // Keep the visible state keyed to the current URL so stale load/reset events cannot blank the slide.
-  useEffect(() => {
+  // If the image is already in the browser cache, mark it loaded BEFORE the first paint
+  // so the hero never shows a dark frame. useLayoutEffect fires synchronously after DOM
+  // commit but before the browser paints, so setState here avoids any visible flash.
+  useLayoutEffect(() => {
     if (!currentSlide) return;
-
     const image = imageRef.current;
-    if (!image?.complete) return;
-
-    setImageStatus({
-      src: currentSlide.image,
-      loaded: image.naturalWidth > 0,
-      error: image.naturalWidth === 0,
-    });
+    if (!image) return;
+    if (image.complete) {
+      setImageStatus({
+        src: currentSlide.image,
+        loaded: image.naturalWidth > 0,
+        error: image.naturalWidth === 0,
+      });
+    }
   }, [currentSlide]);
 
   // Keyboard navigation
