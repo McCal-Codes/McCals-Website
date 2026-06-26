@@ -51,17 +51,17 @@ function mapDbSlide(row: DbSlide): HeroSlide {
   };
 }
 
-async function fetchHeroSlides(): Promise<{ slides: HeroSlide[]; variants: Record<string, HeroSlideVariant[]> } | null> {
+async function fetchHeroSlides(signal?: AbortSignal): Promise<{ slides: HeroSlide[]; variants: Record<string, HeroSlideVariant[]> } | null> {
   if (!SUPABASE_URL || !SUPABASE_ANON) return null;
   try {
     const [slidesRes, variantsRes] = await Promise.all([
       fetch(
         `${SUPABASE_URL}/rest/v1/hero_slides?is_active=eq.true&order=sort_order.asc`,
-        { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` } }
+        { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }, signal }
       ),
       fetch(
         `${SUPABASE_URL}/rest/v1/hero_slide_variants?order=slide_cta.asc,sort_order.asc`,
-        { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` } }
+        { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }, signal }
       ),
     ]);
     if (!slidesRes.ok) return null;
@@ -157,11 +157,10 @@ const HeroCarousel: React.FC = () => {
 
   useEffect(() => {
     let cancelled = false;
-    const timeout = window.setTimeout(() => {
-      // Abort the fetch after 5s — keep showing static slides
-    }, 5000);
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 5000);
 
-    fetchHeroSlides().then(data => {
+    fetchHeroSlides(controller.signal).then(data => {
       if (cancelled || !data || data.slides.length === 0) return;
       clearTimeout(timeout);
       setSlides(getInitialSlides(data.slides, data.variants));
@@ -169,7 +168,7 @@ const HeroCarousel: React.FC = () => {
       setCurrentSlideIndex(prev => Math.min(prev, data.slides.length - 1));
     });
 
-    return () => { cancelled = true; clearTimeout(timeout); };
+    return () => { cancelled = true; clearTimeout(timeout); controller.abort(); };
   }, []);
 
   const currentSlide = slides[currentSlideIndex];
@@ -265,7 +264,8 @@ const HeroCarousel: React.FC = () => {
     if (!imageLoaded || hasPreloadedNext.current || slides.length < 2) return;
     hasPreloadedNext.current = true;
 
-    const nextSrc = slides[1]?.image;
+    const nextIdx = (currentSlideIndex + 1) % slides.length;
+    const nextSrc = slides[nextIdx]?.image;
     if (!nextSrc) return;
 
     const link = document.createElement('link');
@@ -282,13 +282,14 @@ const HeroCarousel: React.FC = () => {
     return () => {
       if (document.head.contains(link)) document.head.removeChild(link);
     };
-  }, [imageLoaded, slides]);
+  }, [imageLoaded, slides, currentSlideIndex]);
 
   const objectPosition = useMemo(() => {
     return currentSlide ? resolveObjectPosition(currentSlide, isDesktop) : '50% 50%';
   }, [currentSlide, isDesktop]);
 
   const handleImageLoad = () => {
+    if (!currentSlide) return;
     setImageStatus({
       src: currentSlide.image,
       loaded: true,
@@ -297,6 +298,7 @@ const HeroCarousel: React.FC = () => {
   };
 
   const handleImageError = () => {
+    if (!currentSlide) return;
     setImageStatus({
       src: currentSlide.image,
       loaded: false,

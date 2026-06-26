@@ -252,7 +252,7 @@ async function withConcurrency(tasks, limit) {
 }
 
 function slugify(s) {
-  return s.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
 }
 
 function safeFilename(f) { return f.replace(/\s+/g, '_'); }
@@ -388,8 +388,6 @@ async function main() {
 
   if (counts.ok > 0) {
     console.log(`\nLive at  : ${R2_PUBLIC_URL}/${PORTFOLIO}/${collectionSlug}/`);
-    const dashboardBase = (SUPABASE_URL || '').replace('supabase.co', 'supabase.com').replace('https://', 'https://supabase.com/dashboard/project/').replace('.supabase.com/dashboard', '');
-    const missingAlt = counts.ok - (counts.ok); // recalculated below if needed
     console.log(`\nTo add missing alt text and captions:`);
     console.log(`  Supabase → Table Editor → portfolio_images`);
     console.log(`  Filter: portfolio_type = ${PORTFOLIO} AND collection_name = ${COLLECTION}`);
