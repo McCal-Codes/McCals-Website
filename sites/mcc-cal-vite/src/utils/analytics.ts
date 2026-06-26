@@ -1,32 +1,23 @@
-import { inject } from '@vercel/analytics';
 import { track } from '@vercel/analytics/react';
 
 const isProduction = import.meta.env.PROD;
-const isVercelRuntime = ['preview', 'production'].includes(import.meta.env.VITE_VERCEL_ENV ?? '');
 
+// Both @vercel/analytics and @vercel/speed-insights auto-detect the Vercel runtime
+// and are no-ops when running outside Vercel (local builds, CI). Only gate on PROD
+// so events are suppressed in dev without disabling the components entirely.
 export function isWebsiteAnalyticsEnabled(): boolean {
-  return isProduction && import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS === 'true';
+  return isProduction;
 }
 
 export function isSpeedInsightsEnabled(): boolean {
-  return (
-    isProduction &&
-    isVercelRuntime &&
-    import.meta.env.VITE_ENABLE_VERCEL_SPEED_INSIGHTS !== 'false'
-  );
-}
-
-export function injectWebsiteAnalytics(): void {
-  if (isWebsiteAnalyticsEnabled()) {
-    inject();
-  }
+  return isProduction;
 }
 
 export function trackWebsiteEvent(
   eventName: string,
   payload?: Record<string, string | number | boolean | null | undefined>,
 ): void {
-  if (!isWebsiteAnalyticsEnabled()) {
+  if (!isProduction) {
     return;
   }
 

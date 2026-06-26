@@ -7,11 +7,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import * as Sentry from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
-import { injectWebsiteAnalytics, isSpeedInsightsEnabled } from '@/utils/analytics';
-
-injectWebsiteAnalytics();
+import { isSpeedInsightsEnabled, isWebsiteAnalyticsEnabled } from '@/utils/analytics';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +40,7 @@ ReactDOM.createRoot(document.getElementById('root')!, {
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
+      {isWebsiteAnalyticsEnabled() && <Analytics />}
       {isSpeedInsightsEnabled() && <SpeedInsights />}
     </QueryClientProvider>
   </React.StrictMode>,
