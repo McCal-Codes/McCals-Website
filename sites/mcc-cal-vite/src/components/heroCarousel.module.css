@@ -304,12 +304,12 @@
 
 .heroArrowPrev,
 .prev {
-  left: 3vw;
+  left: clamp(12px, 3vw, 80px);
 }
 
 .heroArrowNext,
 .next {
-  right: 3vw;
+  right: clamp(12px, 3vw, 80px);
 }
 
 .heroDots {
@@ -337,6 +337,33 @@
   background: rgba(255, 255, 255, 0.95);
 }
 
+/* Wide screens — wider content well, cap hero at 100svh */
+@media (min-width: 1440px) {
+  .heroContent,
+  .heroCaption {
+    width: min(100%, 900px);
+  }
+}
+
+@media (min-width: 2560px) {
+  .heroCarousel,
+  .heroShell,
+  .hero,
+  .heroViewport,
+  .heroTrack,
+  .heroSlide {
+    max-height: 100svh;
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  .heroContent,
+  .heroCaption {
+    width: min(100%, 1100px);
+  }
+}
+
+/* Tablet / mobile */
 @media (max-width: 768px) {
   .heroCaption,
   .heroContent {
@@ -351,16 +378,40 @@
 
   .heroArrowPrev,
   .prev {
-    left: 10px;
+    left: clamp(8px, 2.5vw, 16px);
   }
 
   .heroArrowNext,
   .next {
-    right: 10px;
+    right: clamp(8px, 2.5vw, 16px);
   }
 
   .heroDots {
     bottom: 18px;
+  }
+}
+
+/* Very small phones (iPhone SE, 375px and below) */
+@media (max-width: 390px) {
+  .heroArrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .heroArrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .heroCta,
+  .heroButton {
+    font-size: 0.68rem;
+    padding: 0.5rem 1.1rem;
+  }
+
+  .heroDots {
+    gap: 5px;
+    bottom: 14px;
   }
 }
 
