@@ -11,6 +11,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PUBLIC_DIR = resolve(__dirname, './public-vite');
 const SKIP_DIR_NAME = 'one-nation-divided';
+const PUBLIC_COPY_TIMEOUT_MS = Number(process.env.PUBLIC_COPY_TIMEOUT_MS ?? 5_000);
+const vercelEnv = process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development';
+const resolvedSiteUrl =
+  vercelEnv === 'production'
+    ? 'https://mcc-cal.com'
+    : (process.env.VITE_SITE_URL ?? 'https://mcc-cal.com').replace(/\/$/, '');
 const shouldUploadSentrySourceMaps = Boolean(
   process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT,
 );
@@ -176,9 +182,8 @@ export default defineConfig(({ command }) => ({
     },
   },
   define: {
-    'import.meta.env.VITE_VERCEL_ENV': JSON.stringify(
-      process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development'
-    ),
+    'import.meta.env.VITE_SITE_URL': JSON.stringify(resolvedSiteUrl),
+    'import.meta.env.VITE_VERCEL_ENV': JSON.stringify(vercelEnv),
     'import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA': JSON.stringify(
       process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.VITE_VERCEL_GIT_COMMIT_SHA ?? ''
     ),

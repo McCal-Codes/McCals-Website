@@ -17,6 +17,7 @@ export type StaticRouteKey =
   | 'grabCoffee'
   | 'faq'
   | 'projects'
+  | 'roadmap'
   | 'terranova'
   | 'accessibility'
   | 'policiesLegal';

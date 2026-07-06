@@ -22,11 +22,11 @@ export default tseslint.config(
       ...tseslint.configs.recommended,
     ],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.browser,
       parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 2024,
+        ecmaVersion: 2025,
         sourceType: 'module',
       },
     },
@@ -78,7 +78,7 @@ export default tseslint.config(
     files: ['**/*.{js,jsx}'],
     extends: [js.configs.recommended],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.browser,
     },
     plugins: {
@@ -126,7 +126,7 @@ export default tseslint.config(
   {
     files: ['*.config.{js,mjs,cjs}'],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.node,
     },
     rules: {
@@ -142,7 +142,7 @@ export default tseslint.config(
       'src/content/**/*.js',
     ],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.node,
     },
     rules: {

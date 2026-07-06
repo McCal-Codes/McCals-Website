@@ -230,6 +230,17 @@
     "imageName": "McCal Media projects",
     "keywords": ["McCal Media projects", "photography projects", "creative technology"]
   },
+  "roadmap": {
+    "route": "/roadmap",
+    "title": "Roadmap | McCal Media",
+    "description": "Future plans and development roadmap for McCal Media. Upcoming features, services, and projects in photography, videography, and digital media.",
+    "ogTitle": "Roadmap | McCal Media",
+    "ogDescription": "Future plans and development roadmap for photography and media services.",
+    "imagePath": "/brand/abridged-icon.png",
+    "imageAlt": "McCal Media brand mark for the roadmap page.",
+    "imageName": "McCal Media roadmap",
+    "keywords": ["McCal Media roadmap", "upcoming features", "photography services roadmap"]
+  },
   "terranova": {
     "route": "/terranova",
     "title": "Terranova Creative Work | McCal Media",

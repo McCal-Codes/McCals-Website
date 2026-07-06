@@ -145,10 +145,10 @@ export function QuoteRequestForm() {
         }
       }
       if (s === 3) {
-        if (!state.intended_use) err.intended_use = 'Required';
-        if (!state.duration) err.duration = 'Required';
-        if (!state.geographic) err.geographic = 'Required';
-        if (!state.budget) err.budget = 'Required';
+        if (!state.intended_use) err.intended_use = 'Choose an intended use';
+        if (!state.duration) err.duration = 'Choose a duration of use';
+        if (!state.geographic) err.geographic = 'Choose a geographic scope';
+        if (!state.budget) err.budget = 'Choose a budget range';
       }
       setFieldErrors(err);
       return Object.keys(err).length === 0;
@@ -313,7 +313,7 @@ export function QuoteRequestForm() {
             <div className={`${styles.step} ${step === 1 ? styles.stepActive : ''}`} aria-hidden={step !== 1}>
               <div>
                 <h2 className={styles.sectionTitle}>
-                  <span>01</span> Contact details
+                  Contact details
                 </h2>
                 <div className={`${styles.row} ${styles.row2}`}>
                   <div className={styles.field}>
@@ -387,7 +387,7 @@ export function QuoteRequestForm() {
             <div className={`${styles.step} ${step === 2 ? styles.stepActive : ''}`} aria-hidden={step !== 2}>
               <div>
                 <h2 className={styles.sectionTitle}>
-                  <span>02</span> Project details
+                  Project details
                 </h2>
                 <div className={styles.field}>
                   <label htmlFor="quote-service">
@@ -532,7 +532,7 @@ export function QuoteRequestForm() {
 
               <div>
                 <h2 className={styles.sectionTitle}>
-                  <span>03</span> Deliverables
+                  Deliverables
                 </h2>
                 <div className={styles.checkboxGrid}>
                   {DELIVERABLE_OPTIONS.map((opt) => (
@@ -565,7 +565,7 @@ export function QuoteRequestForm() {
             <div className={`${styles.step} ${step === 3 ? styles.stepActive : ''}`} aria-hidden={step !== 3}>
               <div>
                 <h2 className={styles.sectionTitle}>
-                  <span>04</span> Licensing &amp; usage
+                  Licensing &amp; usage
                 </h2>
                 <div className={`${styles.row} ${styles.row2}`}>
                   <div className={styles.field}>
@@ -621,7 +621,7 @@ export function QuoteRequestForm() {
               </div>
               <div>
                 <h2 className={styles.sectionTitle}>
-                  <span>05</span> Budget &amp; timeline
+                  Budget &amp; timeline
                 </h2>
                 <div className={`${styles.row} ${styles.row2}`}>
                   <div className={styles.field}>

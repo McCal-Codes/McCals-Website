@@ -318,6 +318,22 @@ article, .site-container, .ss-about-section { max-width: 70ch; }
   white-space: nowrap !important;
   border: 0 !important;
 }
+.mcc-skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.75rem 1.25rem;
+  background: var(--accent, #e8e8e8);
+  color: #0b0b0d;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: top 0.15s ease-in-out;
+}
+.mcc-skip-link:focus {
+  top: 1rem;
+}
 .mcc-btn {
   display: inline-flex;
   align-items: center;

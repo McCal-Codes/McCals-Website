@@ -54,6 +54,7 @@ const staticRouteComponents = {
   grabCoffee: GrabCoffeePage,
   faq: FAQPage,
   projects: ProjectsPage,
+  roadmap: RoadmapPage,
   terranova: TerranovaPage,
   accessibility: AccessibilityPage,
   policiesLegal: PoliciesLegalPage,
@@ -132,7 +133,6 @@ const router = sentryCreateBrowserRouter([
       { path: '/one-nation-divided', element: <Navigate to="/letting-me-go" replace /> },
       { path: '/authors/:authorId', element: <AuthorsPage /> },
       { path: '/blog/:slug', element: <BlogPage /> },
-      { path: '/roadmap', element: <RoadmapPage /> },
       ...(import.meta.env.DEV
         ? [
             { path: '/showcase', element: <ShowcasePage /> },

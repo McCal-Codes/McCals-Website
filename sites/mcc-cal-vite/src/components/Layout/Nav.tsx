@@ -136,9 +136,9 @@ const Nav: React.FC = () => {
                   to="/featured-work"
                   aria-current={isWorkNavPath ? 'page' : undefined}
                   onClick={(e) => {
-                    if (isMobile) {
+                    if (isMobile && !workSubmenuOpen) {
                       e.preventDefault();
-                      setWorkSubmenuOpen((v) => !v);
+                      setWorkSubmenuOpen(true);
                     }
                   }}
                 >
@@ -169,7 +169,6 @@ const Nav: React.FC = () => {
               <ul
                 className="mcc-nav__submenu"
                 id="mcc-nav-submenu-work"
-                role="menu"
                 aria-label="Work submenu"
                 style={isMobile ? { display: workSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
@@ -177,7 +176,6 @@ const Nav: React.FC = () => {
                   <li key={item.to}>
                     <Link
                       to={item.to}
-                      role="menuitem"
                       aria-current={isActiveNavItem(pathname, item) ? 'page' : undefined}
                     >
                       {item.label}
@@ -194,9 +192,9 @@ const Nav: React.FC = () => {
                   to="/projects"
                   aria-current={isProjectsNavPath(pathname) ? 'page' : undefined}
                   onClick={(e) => {
-                    if (isMobile) {
+                    if (isMobile && !projectsSubmenuOpen) {
                       e.preventDefault();
-                      setProjectsSubmenuOpen((v) => !v);
+                      setProjectsSubmenuOpen(true);
                     }
                   }}
                 >
@@ -227,7 +225,6 @@ const Nav: React.FC = () => {
               <ul
                 className="mcc-nav__submenu"
                 id="mcc-nav-submenu-projects"
-                role="menu"
                 aria-label="Projects submenu"
                 style={isMobile ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
@@ -235,7 +232,6 @@ const Nav: React.FC = () => {
                   <li key={item.to}>
                     <Link
                       to={item.to}
-                      role="menuitem"
                       aria-current={isActiveNavItem(pathname, item) ? 'page' : undefined}
                     >
                       {item.label}

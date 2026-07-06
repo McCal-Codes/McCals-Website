@@ -22,6 +22,7 @@ export const STATIC_PAGE_ROUTES = [
   { path: '/grab-a-coffee', routeKey: 'grabCoffee', changefreq: 'monthly', priority: '0.7' },
   { path: '/faq', routeKey: 'faq', changefreq: 'monthly', priority: '0.6' },
   { path: '/projects', routeKey: 'projects', changefreq: 'monthly', priority: '0.6' },
+  { path: '/roadmap', routeKey: 'roadmap', changefreq: 'monthly', priority: '0.5' },
   { path: '/terranova', routeKey: 'terranova', changefreq: 'monthly', priority: '0.5' },
   { path: '/accessibility', routeKey: 'accessibility', changefreq: 'yearly', priority: '0.3' },
   { path: '/policies-legal', routeKey: 'policiesLegal', changefreq: 'yearly', priority: '0.3' },
