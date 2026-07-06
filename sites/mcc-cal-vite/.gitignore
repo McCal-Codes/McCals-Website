@@ -10,7 +10,6 @@ public-vite/content/blog-static/
 
 .vercel
 .env*.local
-src/pages/api/dist/
 
 .env*.local
 .vercel

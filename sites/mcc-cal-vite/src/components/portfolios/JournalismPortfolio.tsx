@@ -29,6 +29,7 @@ interface JournalismEvent {
   outlet?: string | null;
   outletUrl?: string | null;
   articleUrl?: string | null;
+  publishedDate?: string | null;
   images: JournalismImage[];
 }
 
@@ -48,7 +49,7 @@ function normalise(events: JournalismEvent[]): PortfolioGroup[] {
       filename: img.filename,
       caption: img.caption,
       description: img.description,
-      alt: img.caption ?? `${event.eventName} — ${img.filename}`,
+      alt: img.caption ?? `${event.eventName}, ${img.filename}`,
     }));
 
     return {
@@ -71,6 +72,22 @@ function normalise(events: JournalismEvent[]): PortfolioGroup[] {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const ALL = 'All';
+const PUBLISHED = 'Published';
+
+const editorialProof = [
+  {
+    label: 'Beats',
+    value: 'Politics, civic events, features, sports',
+  },
+  {
+    label: 'Deadline',
+    value: 'Same-day selects, AP-style captions, clean assignment handoff',
+  },
+  {
+    label: 'Availability',
+    value: 'Pittsburgh based, Washington, D.C. editorial readiness',
+  },
+];
 
 function isPoliticianCoverage(title: string): boolean {
   if (/protest/i.test(title)) return false;
@@ -89,22 +106,31 @@ export default function JournalismPortfolio() {
   const filters = useMemo(() => {
     if (!groups.length) return [];
     const cats = Array.from(new Set(groups.map((g) => g.category).filter(Boolean))) as string[];
-    return [ALL, ...cats];
+    return [ALL, PUBLISHED, ...cats];
   }, [groups]);
 
   const filtered = useMemo(() => {
     if (activeFilter === ALL) return groups;
+    if (activeFilter === PUBLISHED) {
+      return groups.filter((g) => g.published);
+    }
     if (activeFilter === 'Politics') {
       return groups.filter((g) => g.category === 'Politics' && isPoliticianCoverage(g.title));
     }
     return groups.filter((g) => g.category === activeFilter);
   }, [groups, activeFilter]);
 
+  const publishedWork = useMemo(
+    () => groups.filter((group) => group.published).slice(0, 3),
+    [groups],
+  );
+
   return (
     <div className={portfolioStyles.pfRoot}>
       <h2 className={portfolioStyles.pfHeading}>Photojournalism</h2>
       <p className={portfolioStyles.pfSubheading}>
-        Documentary, community, sports, and assignment coverage. Use the filters to browse by category or view published work.
+        Politics, civic events, community stories, and sports, edited for captions,
+        context, and deadline handoff.
       </p>
 
       {status === 'loading' && (
@@ -141,6 +167,43 @@ export default function JournalismPortfolio() {
                 onChange={setActiveFilter}
               />
               <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
+              <dl className={portfolioStyles.pfEditorialProof} aria-label="Editorial proof points">
+                {editorialProof.map((item) => (
+                  <div key={item.label} className={portfolioStyles.pfEditorialProofItem}>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              {publishedWork.length > 0 && (
+                <section className={portfolioStyles.pfPublishedStrip} aria-labelledby="published-work-heading">
+                  <div className={portfolioStyles.pfPublishedStripHeader}>
+                    <p className={portfolioStyles.pfPublishedStripEyebrow}>Published proof</p>
+                    <h3 id="published-work-heading">Recent published work</h3>
+                  </div>
+                  <div className={portfolioStyles.pfPublishedList}>
+                    {publishedWork.map((group) => {
+                      const outlet = group.outletName ?? 'Published outlet';
+                      const destination = group.articleUrl || group.outletUrl;
+                      return (
+                        <article key={group.id} className={portfolioStyles.pfPublishedItem}>
+                          <p className={portfolioStyles.pfPublishedOutlet}>
+                            {destination ? (
+                              <a href={destination} target="_blank" rel="noopener noreferrer">
+                                {outlet}
+                              </a>
+                            ) : (
+                              outlet
+                            )}
+                          </p>
+                          <h4>{group.title}</h4>
+                          <p>{[group.dateDisplay, group.category].filter(Boolean).join(', ')}</p>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
             </>
           )}
         </>

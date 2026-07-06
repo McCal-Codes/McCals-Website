@@ -4,7 +4,7 @@
  */
 
 import { Resend } from 'resend';
-import { applyRateLimit } from '../_lib/rate-limit.js';
+import { applyRateLimit } from '../_lib/rate-limit-redis.js';
 import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 import { applyCors } from '../_lib/cors.js';
 import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
@@ -184,6 +184,35 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
   });
 }
 
+async function checkSupabaseBookingConflict(date, time, durationMinutes) {
+  if (!isSupabaseConfigured()) {
+    return false;
+  }
+
+  const supabase = getServiceClient();
+  const { data: bookings, error } = await supabase
+    .from('bookings')
+    .select('booking_time, duration_minutes')
+    .eq('booking_date', date)
+    .neq('status', 'cancelled');
+
+  if (error) {
+    console.error('[schedule/book] Supabase conflict check failed: - book.js:184', error);
+    return false;
+  }
+
+  const requestStart = new Date(`${date}T${time}`);
+  const requestEnd = new Date(requestStart);
+  requestEnd.setMinutes(requestStart.getMinutes() + durationMinutes);
+
+  return (bookings || []).some((booking) => {
+    const bookedStart = new Date(`${date}T${booking.booking_time || '00:00:00'}`);
+    const bookedEnd = new Date(bookedStart);
+    bookedEnd.setMinutes(bookedStart.getMinutes() + (booking.duration_minutes || 60));
+    return requestStart < bookedEnd && requestEnd > bookedStart;
+  });
+}
+
 async function sendConfirmationEmail(booking, config) {
   const resend = await getResendClient();
   if (!resend) {
@@ -329,7 +358,7 @@ export default async function handler(req, res) {
   }
 
   // Production mode with rate limiting
-  const rateLimit = applyRateLimit(req, res, BOOKING_RATE_LIMIT);
+  const rateLimit = await applyRateLimit(req, res, BOOKING_RATE_LIMIT);
   if (!rateLimit.allowed) {
     res.status(429).json({ error: 'Too many booking attempts. Please try again later.' });
     return;
@@ -338,6 +367,12 @@ export default async function handler(req, res) {
   if (!process.env.RESEND_API_KEY) {
     console.error('[schedule/book] RESEND_API_KEY not set - book.js:334');
     res.status(503).json({ error: 'Email service not configured' });
+    return;
+  }
+
+  const hasSupabaseConflict = await checkSupabaseBookingConflict(date, time, durationMinutes);
+  if (hasSupabaseConflict) {
+    res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
     return;
   }
 

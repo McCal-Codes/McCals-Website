@@ -4,6 +4,7 @@ import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-rou
 import PreviewBanner from './components/PreviewBanner';
 import RouteAnalytics from './components/RouteAnalytics';
 import ErrorBoundary from './components/ErrorBoundary';
+import RouteAwareSpeedInsights from './components/RouteAwareSpeedInsights';
 import { LEGACY_ROUTE_REDIRECTS, STATIC_PAGE_ROUTES } from './config/public-routes.js';
 import HomePage from './pages/index';
 import PodcastPage from './pages/podcast';
@@ -104,6 +105,7 @@ function AppShell() {
     <>
       <PreviewBanner />
       <RouteAnalytics />
+      <RouteAwareSpeedInsights />
       <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
           <Outlet />

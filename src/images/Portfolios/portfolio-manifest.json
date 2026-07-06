@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-14T00:18:36.459Z",
+  "generated": "2026-06-20T21:49:33.366Z",
   "totalPortfolios": 5,
-  "totalItems": 66,
-  "totalImages": 2401,
+  "totalItems": 70,
+  "totalImages": 2496,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -17,16 +17,16 @@
       "totalImages": 366
     },
     "Events": {
-      "count": 29,
-      "totalImages": 1571
+      "count": 31,
+      "totalImages": 1639
     },
     "Journalism": {
-      "count": 15,
-      "totalImages": 402
+      "count": 17,
+      "totalImages": 419
     },
     "Nature": {
       "count": 2,
-      "totalImages": 37
+      "totalImages": 47
     },
     "Portrait": {
       "count": 3,
@@ -34,6 +34,73 @@
     }
   },
   "items": [
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Fern Hollow Nature Center Groundbreaking",
+      "folderPath": "Journalism/Documentary/Fern Hollow Nature Center Groundbreaking",
+      "dateDisplay": "May 5, 2026",
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "monthName": "May",
+        "day": 5,
+        "iso": "2026-05-05",
+        "display": "May 5, 2026"
+      },
+      "totalImages": 7,
+      "images": [
+        "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
+        "260505 Fern Hollow Groundbreaking_SEW-FernHollow008_webuse.webp",
+        "260505 Fern Hollow Groundbreaking_SEW-FernHollow011_webuse.webp",
+        "260505 Fern Hollow Groundbreaking_SEW-FernHollow014_webuse.webp",
+        "260505 Fern Hollow Groundbreaking_SEW-FernHollow019_webuse.webp",
+        "260505 Fern Hollow Groundbreaking_SEW-FernHollow023_webuse.webp",
+        "260505 Fern Hollow Groundbreaking_SEW-FernHollow026_webuse.webp"
+      ],
+      "coverImage": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
+      "tags": [
+        "Documentary",
+        "Events",
+        "Published Work"
+      ],
+      "published": true
+    },
+    {
+      "type": "Journalism",
+      "category": "Journalism",
+      "name": "Sewickley ICE Prayer Service",
+      "folderPath": "Journalism/Documentary/Sewickley ICE Prayer Service",
+      "dateDisplay": "March 27, 2026",
+      "date": {
+        "year": 2026,
+        "month": 3,
+        "monthName": "March",
+        "day": 27,
+        "iso": "2026-03-27",
+        "display": "March 27, 2026"
+      },
+      "totalImages": 10,
+      "images": [
+        "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers05_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers08_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers09_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers12_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers14_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers17_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers29_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers32_webuse.webp",
+        "260327 ICE Prayer Service_SEW-ICE-prayers33_webuse.webp"
+      ],
+      "coverImage": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp",
+      "tags": [
+        "Documentary",
+        "Events",
+        "Published Work"
+      ],
+      "published": true
+    },
     {
       "type": "Nature",
       "category": "Nature Photography",
@@ -50,13 +117,20 @@
         "description": "Fallback to current year",
         "display": "January 2026"
       },
-      "totalImages": 3,
+      "totalImages": 10,
       "images": [
+        "CAL_4406.jpg",
+        "CAL_4420.jpg",
+        "CAL_4466.jpg",
         "IMGP2605.jpg",
         "IMGP2654.jpg",
-        "IMGP8504.jpg"
+        "IMGP6841.jpg",
+        "IMGP6886.jpg",
+        "IMGP8504.jpg",
+        "IMGP9549.jpg",
+        "IMGP9551.jpg"
       ],
-      "coverImage": "IMGP2605.jpg"
+      "coverImage": "CAL_4406.jpg"
     },
     {
       "type": "Concert",
@@ -1479,7 +1553,8 @@
       ],
       "coverImage": "250715_CMU Trump Protest_CAL1091-min.jpg",
       "tags": [
-        "Politics"
+        "Politics",
+        "Protest"
       ],
       "published": false
     },
@@ -1628,6 +1703,59 @@
     {
       "type": "Events",
       "category": "Event Photography",
+      "name": "Golden Quills 2025",
+      "folderPath": "Events/golden-quills-2025",
+      "dateDisplay": "May 2025",
+      "date": {
+        "year": 2025,
+        "month": 5,
+        "day": 28,
+        "monthName": "May",
+        "iso": "2025-05-28",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)",
+        "display": "May 2025"
+      },
+      "totalImages": 32,
+      "images": [
+        "250528_Golden Quills _CAL8086.jpg",
+        "250528_Golden Quills _CAL8102.jpg",
+        "250528_Golden Quills _CAL8140.jpg",
+        "250528_Golden Quills _CAL8156.jpg",
+        "250528_Golden Quills _CAL8161.jpg",
+        "250528_Golden Quills _CAL8182.jpg",
+        "250528_Golden Quills _CAL8195.jpg",
+        "250528_Golden Quills _CAL8215.jpg",
+        "250528_Golden Quills _CAL8229.jpg",
+        "250528_Golden Quills _CAL8233.jpg",
+        "250528_Golden Quills _CAL8278.jpg",
+        "250528_Golden Quills _CAL8324.jpg",
+        "250528_Golden Quills _CAL8330.jpg",
+        "250528_Golden Quills _CAL8350.jpg",
+        "250528_Golden Quills _CAL8355.jpg",
+        "250528_Golden Quills _CAL8370.jpg",
+        "250528_Golden Quills _CAL8420.jpg",
+        "250528_Golden Quills _CAL8432.jpg",
+        "250528_Golden Quills _CAL8447.jpg",
+        "250528_Golden Quills _CAL8459.jpg",
+        "250528_Golden Quills _CAL8478.jpg",
+        "250528_Golden Quills _CAL8498.jpg",
+        "250528_Golden Quills _CAL8516.jpg",
+        "250528_Golden Quills _CAL8529.jpg",
+        "250528_Golden Quills _CAL8542.jpg",
+        "250528_Golden Quills _CAL8547.jpg",
+        "250528_Golden Quills _CAL8559.jpg",
+        "250528_Golden Quills _CAL8613.jpg",
+        "250528_Golden Quills _CAL8628.jpg",
+        "250528_Golden Quills _CAL8640.jpg",
+        "250528_Golden Quills _CAL8651.jpg",
+        "250528_Golden Quills _CAL8653.jpg"
+      ],
+      "coverImage": "250528_Golden Quills _CAL8086.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
       "name": "CMU Business Graduation",
       "folderPath": "Events/CMU-Business-Graduation",
       "dateDisplay": "May 2025",
@@ -1656,6 +1784,63 @@
         "250511_CMU-Business-Graduation-_CAL6697-1280.jpg"
       ],
       "coverImage": "250511_CMU-Business-Graduation-_CAL6485-1280.jpg"
+    },
+    {
+      "type": "Events",
+      "category": "Event Photography",
+      "name": "Point Park Graduation 2025",
+      "folderPath": "Events/point-park-graduation-2025",
+      "dateDisplay": "April 2025",
+      "date": {
+        "year": 2025,
+        "month": 4,
+        "day": 26,
+        "monthName": "April",
+        "iso": "2025-04-26",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)",
+        "display": "April 2025"
+      },
+      "totalImages": 36,
+      "images": [
+        "250426_Point Park Graduation 2025_CAL10008.jpg",
+        "250426_Point Park Graduation 2025_CAL10017.jpg",
+        "250426_Point Park Graduation 2025_CAL10039.jpg",
+        "250426_Point Park Graduation 2025_CAL10060.jpg",
+        "250426_Point Park Graduation 2025_CAL10085.jpg",
+        "250426_Point Park Graduation 2025_CAL10137.jpg",
+        "250426_Point Park Graduation 2025_CAL9067.jpg",
+        "250426_Point Park Graduation 2025_CAL9100.jpg",
+        "250426_Point Park Graduation 2025_CAL9156.jpg",
+        "250426_Point Park Graduation 2025_CAL9197.jpg",
+        "250426_Point Park Graduation 2025_CAL9247.jpg",
+        "250426_Point Park Graduation 2025_CAL9307.jpg",
+        "250426_Point Park Graduation 2025_CAL9321.jpg",
+        "250426_Point Park Graduation 2025_CAL9346.jpg",
+        "250426_Point Park Graduation 2025_CAL9362.jpg",
+        "250426_Point Park Graduation 2025_CAL9402.jpg",
+        "250426_Point Park Graduation 2025_CAL9420.jpg",
+        "250426_Point Park Graduation 2025_CAL9440.jpg",
+        "250426_Point Park Graduation 2025_CAL9449.jpg",
+        "250426_Point Park Graduation 2025_CAL9500.jpg",
+        "250426_Point Park Graduation 2025_CAL9508.jpg",
+        "250426_Point Park Graduation 2025_CAL9557.jpg",
+        "250426_Point Park Graduation 2025_CAL9597.jpg",
+        "250426_Point Park Graduation 2025_CAL9667.jpg",
+        "250426_Point Park Graduation 2025_CAL9684.jpg",
+        "250426_Point Park Graduation 2025_CAL9715.jpg",
+        "250426_Point Park Graduation 2025_CAL9753.jpg",
+        "250426_Point Park Graduation 2025_CAL9764.jpg",
+        "250426_Point Park Graduation 2025_CAL9774.jpg",
+        "250426_Point Park Graduation 2025_CAL9796.jpg",
+        "250426_Point Park Graduation 2025_CAL9831.jpg",
+        "250426_Point Park Graduation 2025_CAL9853.jpg",
+        "250426_Point Park Graduation 2025_CAL9872.jpg",
+        "250426_Point Park Graduation 2025_CAL9917.jpg",
+        "250426_Point Park Graduation 2025_CAL9946.jpg",
+        "250426_Point Park Graduation 2025_CAL9986.jpg"
+      ],
+      "coverImage": "250426_Point Park Graduation 2025_CAL10008.jpg"
     },
     {
       "type": "Events",
@@ -2013,7 +2198,8 @@
       ],
       "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg",
       "tags": [
-        "Politics"
+        "Politics",
+        "Protest"
       ],
       "published": false
     },
@@ -2526,7 +2712,8 @@
       ],
       "coverImage": "241104_kamala-pgh-eve_CAL3538.jpg",
       "tags": [
-        "Politics"
+        "Politics",
+        "Presidential Campaign"
       ],
       "published": false
     },
@@ -2687,7 +2874,8 @@
       ],
       "coverImage": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
       "tags": [
-        "Politics"
+        "Politics",
+        "Presidential Campaign"
       ],
       "published": false
     },
@@ -2745,7 +2933,8 @@
       ],
       "coverImage": "241012_JD Vance in Johnstown_CAL3495.webp",
       "tags": [
-        "Politics"
+        "Politics",
+        "Presidential Campaign"
       ],
       "published": false
     },
@@ -2858,7 +3047,8 @@
       ],
       "coverImage": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.webp",
       "tags": [
-        "Politics"
+        "Politics",
+        "Presidential Campaign"
       ],
       "published": false
     },
@@ -2882,7 +3072,8 @@
       ],
       "coverImage": "050924_Tim_Walz_Erie_PA.png",
       "tags": [
-        "Politics"
+        "Politics",
+        "Presidential Campaign"
       ],
       "published": false
     },
@@ -3625,61 +3816,6 @@
       "coverImage": "230411_Cock Tail Hour - James Bond Event_843_Published.webp"
     },
     {
-      "type": "Nature",
-      "category": "Nature Photography",
-      "name": "Landscapes",
-      "folderPath": "Nature/Landscapes/Downtown Pittsburgh",
-      "dateDisplay": "October 2022",
-      "date": {
-        "year": 2022,
-        "month": 10,
-        "day": 19,
-        "monthName": "October",
-        "iso": "2022-10-19",
-        "source": "yymmdd_solid",
-        "description": "YYMMDD (from start of filename)",
-        "display": "October 2022"
-      },
-      "totalImages": 34,
-      "images": [
-        "221019_Street_2021_IMGP9302.jpg",
-        "230505_untitled__CAL4020-Edit.jpg",
-        "230509_untitled__CAL4122.jpg",
-        "230704_Pitt_Fireworks__CAL2048.jpg",
-        "230704_Pitt_Fireworks__CAL2085.jpg",
-        "230704_Pitt_Fireworks__CAL2091.jpg",
-        "230704_Pitt_Fireworks__CAL2093.jpg",
-        "230704_Pitt_Fireworks__CAL2146.jpg",
-        "230729_dowtown_night_market__CAL4713.jpg",
-        "230828_Point Park PR_1971_CAL_Compressed.jpg",
-        "231004_Point_Park_Sunrise_CAL4701.jpg",
-        "231004_Point_Park_Sunrise_CAL4703.jpg",
-        "231004_Point_Park_Sunrise_CAL4704.jpg",
-        "231004_Point_Park_Sunrise_CAL4708.jpg",
-        "240827_PPU Ad_1849_CAL_Compressed.jpg",
-        "CAL00530.jpg",
-        "CAL00605.jpg",
-        "CAL00609-Enhanced-NR.jpg",
-        "CAL00661.jpg",
-        "CAL01777-2.jpg",
-        "CAL01842.jpg",
-        "CAL_9190.jpg",
-        "CAL_9211.jpg",
-        "CAL_9262.jpg",
-        "CAL_9297.jpg",
-        "CAL_9587.jpg",
-        "CAL_9619.jpg",
-        "CAL_9721.jpg",
-        "CAL_9734.jpg",
-        "IMGP1517.jpg",
-        "IMGP7209.jpg",
-        "IMGP9168.jpg",
-        "IMGP9240.jpg",
-        "IMGP9246.jpg"
-      ],
-      "coverImage": "221019_Street_2021_IMGP9302.jpg"
-    },
-    {
       "type": "Events",
       "category": "Event Photography",
       "name": "Back To School Bash",
@@ -3810,6 +3946,64 @@
       ],
       "coverImage": "_CAL5514.jpg",
       "dateNotes": "Per user: Growing Up event occurred December 2021"
+    },
+    {
+      "type": "Nature",
+      "category": "Nature Photography",
+      "name": "Landscapes",
+      "folderPath": "Nature/Landscapes/Downtown Pittsburgh",
+      "dateDisplay": "August 2020",
+      "date": {
+        "year": 2020,
+        "month": 8,
+        "day": 5,
+        "monthName": "August",
+        "iso": "2020-08-05",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)",
+        "display": "August 2020"
+      },
+      "totalImages": 37,
+      "images": [
+        "200805_Riverfront_Golden_Hour_DSC02724_1.jpg",
+        "211028_Downtown_Fire_Escape_IMGP7594.jpg",
+        "211028_Pittsburgh_Sunset_IMGP7702.jpg",
+        "221019_Street_2021_IMGP9302.jpg",
+        "230505_untitled__CAL4020-Edit.jpg",
+        "230509_untitled__CAL4122.jpg",
+        "230704_Pitt_Fireworks__CAL2048.jpg",
+        "230704_Pitt_Fireworks__CAL2085.jpg",
+        "230704_Pitt_Fireworks__CAL2091.jpg",
+        "230704_Pitt_Fireworks__CAL2093.jpg",
+        "230704_Pitt_Fireworks__CAL2146.jpg",
+        "230729_dowtown_night_market__CAL4713.jpg",
+        "230828_Point Park PR_1971_CAL_Compressed.jpg",
+        "231004_Point_Park_Sunrise_CAL4701.jpg",
+        "231004_Point_Park_Sunrise_CAL4703.jpg",
+        "231004_Point_Park_Sunrise_CAL4704.jpg",
+        "231004_Point_Park_Sunrise_CAL4708.jpg",
+        "240827_PPU Ad_1849_CAL_Compressed.jpg",
+        "CAL00530.jpg",
+        "CAL00605.jpg",
+        "CAL00609-Enhanced-NR.jpg",
+        "CAL00661.jpg",
+        "CAL01777-2.jpg",
+        "CAL01842.jpg",
+        "CAL_9190.jpg",
+        "CAL_9211.jpg",
+        "CAL_9262.jpg",
+        "CAL_9297.jpg",
+        "CAL_9587.jpg",
+        "CAL_9619.jpg",
+        "CAL_9721.jpg",
+        "CAL_9734.jpg",
+        "IMGP1517.jpg",
+        "IMGP7209.jpg",
+        "IMGP9168.jpg",
+        "IMGP9240.jpg",
+        "IMGP9246.jpg"
+      ],
+      "coverImage": "200805_Riverfront_Golden_Hour_DSC02724_1.jpg"
     },
     {
       "type": "Events",

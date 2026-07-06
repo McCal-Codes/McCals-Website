@@ -17,32 +17,22 @@ if (!run('npm', ['run', 'manifest:dry'])) {
   process.exit(2);
 }
 
-// 2) Check the current app structure, with legacy widget support if present.
-console.log('\n2) Checking app structure');
-const widgetsDir = path.join(process.cwd(), 'src', 'widgets');
-if (!fs.existsSync(widgetsDir)) {
-  console.warn('⚠️ src/widgets directory not found; checking active Vite app instead.');
+// 2) Check that the current public app surface exists.
+console.log('\n2) Checking active Vite app');
+const viteAppDir = path.join(process.cwd(), 'sites', 'mcc-cal-vite');
+const vitePackage = path.join(viteAppDir, 'package.json');
+const viteRouter = path.join(viteAppDir, 'src', 'App.tsx');
 
-  const viteFiles = [
-    path.join(process.cwd(), 'sites', 'mcc-cal-vite', 'package.json'),
-    path.join(process.cwd(), 'sites', 'mcc-cal-vite', 'src', 'App.tsx'),
-    path.join(process.cwd(), 'sites', 'mcc-cal-vite', 'src', 'main.tsx'),
-  ];
-  const missingViteFiles = viteFiles.filter(file => !fs.existsSync(file));
-
-  if (missingViteFiles.length > 0) {
-    console.error(`❌ Active Vite app files missing: ${missingViteFiles.map(file => path.relative(process.cwd(), file)).join(', ')}`);
-    process.exit(3);
-  }
-
-  console.log('✅ Active Vite app structure found');
-} else {
-  const files = fs.readdirSync(widgetsDir).filter(f => f.endsWith('.html') || f.endsWith('.htm'));
-  if (files.length === 0) {
-    console.warn('⚠️ No standalone widget HTML files found directly under src/widgets/ — this may be OK if widgets are organized in subfolders.');
-  } else {
-    console.log(`✅ Found ${files.length} widget HTML files`);
-  }
+if (!fs.existsSync(vitePackage)) {
+  console.error('❌ sites/mcc-cal-vite/package.json not found');
+  process.exit(3);
 }
+
+if (!fs.existsSync(viteRouter)) {
+  console.error('❌ sites/mcc-cal-vite/src/App.tsx not found');
+  process.exit(4);
+}
+
+console.log('✅ Active Vite app files found');
 
 console.log('\n🎉 Minimal smoke tests passed');

@@ -24,6 +24,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
   pull-requests: write
 
 jobs:
@@ -32,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: false
           fetch-depth: 0
@@ -61,7 +62,7 @@ jobs:
           script: |
             const needsUpdate = `${{ steps.changed.outputs.needs_update }}` === 'true';
             if (needsUpdate) {
-              const { data: labels } = await github.issues.listLabelsOnIssue({
+              const { data: labels } = await github.rest.issues.listLabelsOnIssue({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
@@ -83,14 +84,14 @@ jobs:
                   '',
                   'Bypass: add label `docs-acknowledged` or `skip-copilot-instructions` to this PR.'
                 ].join('\n');
-                const { data: comments } = await github.issues.listComments({
+                const { data: comments } = await github.rest.issues.listComments({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: context.issue.number,
                 });
                 const already = comments.some(c => c.user.type === 'Bot' && c.body && c.body.includes('Copilot instructions reminder'));
                 if (!already) {
-                  await github.issues.createComment({
+                  await github.rest.issues.createComment({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     issue_number: context.issue.number,
@@ -109,7 +110,7 @@ jobs:
             const instructionDocsChanged = changed.some(f => /\.github\/.*instructions.*\.md$/.test(f));
             const changelogChanged = changed.includes('CHANGELOG.md') || changed.includes('docs/CHANGELOG.md');
             if (instructionDocsChanged && !changelogChanged) {
-              const { data: labels } = await github.issues.listLabelsOnIssue({
+              const { data: labels } = await github.rest.issues.listLabelsOnIssue({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
@@ -122,14 +123,14 @@ jobs:
                 'Please add an entry to `CHANGELOG.md` describing the update to the Copilot instructions (e.g., under a Docs/Meta section).',
                 'You can bypass with label `docs-acknowledged` if intentional.'
               ].join('\n');
-              const { data: comments } = await github.issues.listComments({
+              const { data: comments } = await github.rest.issues.listComments({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
               });
               const already = comments.some(c => c.user.type === 'Bot' && c.body && c.body.includes('updates `.github/copilot-instructions.md`'));
               if (!already) {
-                await github.issues.createComment({
+                await github.rest.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: context.issue.number,

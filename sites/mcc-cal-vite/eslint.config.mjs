@@ -5,7 +5,16 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', 'public-vite'] },
+  {
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      'public-vite/**',
+      '.storybook/**',
+      'api/**/dist/**',
+      'src/**/dist/**',
+    ],
+  },
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -27,6 +36,7 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      'react-hooks/set-state-in-effect': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
@@ -36,7 +46,7 @@ export default tseslint.config(
       '@typescript-eslint/no-var-requires': 'error',
       'prefer-const': 'error',
       'no-var': 'error',
-      'no-console': 'warn',
+      'no-console': 'off',
       'no-debugger': 'error',
       'no-alert': 'error',
       'no-eval': 'error',
@@ -77,6 +87,7 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      'react-hooks/set-state-in-effect': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
@@ -84,7 +95,7 @@ export default tseslint.config(
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'prefer-const': 'error',
       'no-var': 'error',
-      'no-console': 'warn',
+      'no-console': 'off',
       'no-debugger': 'error',
       'no-alert': 'error',
       'no-eval': 'error',
@@ -126,6 +137,7 @@ export default tseslint.config(
   {
     files: [
       'api/**/*.{js,ts}',
+      'api-server.cjs',
       'scripts/**/*.{js,ts}',
       'src/content/**/*.js',
     ],

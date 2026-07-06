@@ -36,7 +36,9 @@
   "redirects": [
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/schedule", "destination": "/grab-a-coffee", "permanent": true },
-    { "source": "/contact", "destination": "/contact-us", "permanent": true }
+    { "source": "/contact", "destination": "/contact-us", "permanent": true },
+    { "source": "/event", "destination": "/events", "permanent": true },
+    { "source": "/featured", "destination": "/featured-work", "permanent": true }
   ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },

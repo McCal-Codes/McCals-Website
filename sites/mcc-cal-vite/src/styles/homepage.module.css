@@ -13,6 +13,153 @@
   gap: clamp(44px, 7vw, 84px);
 }
 
+.editorialBand {
+  background: #060608;
+  border-top: 1px solid rgba(246, 241, 234, 0.08);
+  border-bottom: 1px solid rgba(246, 241, 234, 0.08);
+}
+
+.editorialBandInner {
+  box-sizing: border-box;
+  width: min(100%, 1480px);
+  margin: 0 auto;
+  padding: clamp(30px, 4vw, 50px) clamp(18px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+
+.editorialBandLead {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.editorialBandEyebrow,
+.editorialBandProof dt {
+  margin: 0;
+  color: rgba(244, 239, 232, 0.62);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.editorialBandTitle {
+  margin: 0;
+  color: #f8f4ee;
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: clamp(1.35rem, 2.3vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.editorialBandText {
+  margin: 0;
+  max-width: 42rem;
+  color: rgba(244, 239, 232, 0.72);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.editorialBandProof {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0;
+  padding: 2px 0 2px clamp(18px, 2vw, 30px);
+  border-left: 1px solid rgba(246, 241, 234, 0.18);
+}
+
+.editorialBandProofItem {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(130px, 0.38fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: baseline;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(246, 241, 234, 0.1);
+  text-align: left;
+}
+
+.editorialBandProofItem:last-child {
+  border-bottom: 0;
+}
+
+.editorialBandProof dd {
+  margin: 0;
+  color: rgba(248, 244, 238, 0.9);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.editorialBandActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 9px;
+  margin-top: 4px;
+}
+
+.editorialBandPrimary,
+.editorialBandSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 42px;
+  padding: 0.55rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(248, 244, 238, 0.32);
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.editorialBandPrimary {
+  color: #f8f4ee;
+}
+
+.editorialBandSecondary {
+  color: rgba(248, 244, 238, 0.76);
+  border-bottom-color: rgba(248, 244, 238, 0.2);
+}
+
+.editorialBandPrimary:hover,
+.editorialBandPrimary:focus-visible,
+.editorialBandSecondary:hover,
+.editorialBandSecondary:focus-visible {
+  border-bottom-color: rgba(248, 244, 238, 0.78);
+  color: #f8f4ee;
+  outline: none;
+}
+
+.editorialBandPrimary:focus-visible,
+.editorialBandSecondary:focus-visible {
+  outline: 1px solid rgba(248, 244, 238, 0.5);
+  outline-offset: 5px;
+}
+
+.editorialBandPrimary svg,
+.editorialBandSecondary svg {
+  transition: transform 0.2s ease;
+}
+
+.editorialBandPrimary:hover svg,
+.editorialBandPrimary:focus-visible svg,
+.editorialBandSecondary:hover svg,
+.editorialBandSecondary:focus-visible svg {
+  transform: translateX(2px);
+}
+
 .section {
   display: grid;
   gap: 22px;
@@ -397,6 +544,24 @@
 }
 
 @media (max-width: 980px) {
+  .editorialBandInner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .editorialBandProof {
+    grid-template-columns: 1fr;
+  }
+
+  .editorialBandProofItem {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .editorialBandActions {
+    justify-content: flex-start;
+  }
+
   .featuredGrid,
   .blogGrid {
     grid-template-columns: 1fr;
@@ -414,6 +579,20 @@
 @media (max-width: 720px) {
   .homeInner {
     padding: 34px 16px 80px;
+  }
+
+  .editorialBandInner {
+    padding: 26px 16px 30px;
+  }
+
+  .editorialBandActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .editorialBandPrimary,
+  .editorialBandSecondary {
+    justify-content: space-between;
   }
 
   .sectionHeader {

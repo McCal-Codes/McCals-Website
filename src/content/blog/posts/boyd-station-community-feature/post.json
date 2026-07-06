@@ -1,15 +1,15 @@
 {
   "slug": "boyd-station-community-feature",
-  "title": "Three Days in Boyd Station",
+  "title": "Three Days With Boyd's Station",
   "authorId": "mccal",
   "date": "2025-06-12",
   "category": "Feature",
-  "excerpt": "A few days in Boyd Station, Ky., reveal a place shaped by meadows, repair work, porch light and the easy patience of people who do not need to announce themselves.",
+  "excerpt": "A June 2025 photo essay from Cynthiana, Ky., documents community life around Boyd's Station, an arts and journalism residency project in Harrison County.",
   "leadImage": "images/lead.jpg",
   "leadImageWidth": 3840,
   "leadImageHeight": 2555,
-  "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., beneath a glowing red neon sign, June 12, 2025.",
-  "leadImageCaption": "Musicians perform at the Aeolian Music Hall in Boyd Station, Ky., June 12, 2025. (Photo by Caleb McCartney)",
+  "leadImageAlt": "Musicians perform at the Aeolian Music Hall in Cynthiana, Ky., beneath a glowing red neon sign, June 12, 2025.",
+  "leadImageCaption": "Musicians perform at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)",
   "published": true,
   "tags": [
     "Feature",
@@ -36,17 +36,17 @@
   "body": [
     {
       "type": "text",
-      "content": "The road into Boyd Station, Ky., narrows past a grain elevator and a cluster of brick storefronts before the land opens into rolling pasture. The village is small, historic and closely tied to Boyd's Station, a nonprofit arts and journalism residency program in Harrison County. It is a place that reveals itself slowly. Nothing there strains for attention."
+      "content": "Boyd's Station is not a separate town so much as a project rooted in Cynthiana, Ky., where an arts and journalism residency draws photographers, writers and community storytellers into Harrison County. Over three days in June 2025, the work moved through storefronts, farms, kitchens, roadside repairs and a late-night set at the Aeolian Music Hall."
     },
     {
       "type": "text",
-      "content": "I arrived on a Monday evening in early June. The last light cut long across a wildflower meadow on the edge of town, white and pink blossoms thick in the foreground, the hills going soft green behind them. Two men were already down by the water, one threading a fly line with the focused quiet of long habit."
+      "content": "A Monday evening in early June opened along a wildflower meadow on the edge of town. White and pink blossoms filled the foreground, and the hills softened green behind them. Two men were already down by the water, one threading a fly line with the focused quiet of long habit."
     },
     {
       "type": "image",
       "src": "images/meadow.jpg",
-      "alt": "Wildflowers bloom across a hillside meadow at Boyd Station, Ky., June 9, 2025.",
-      "caption": "Wildflowers bloom across a hillside meadow at Boyd Station, Ky., June 9, 2025. (Photo by Caleb McCartney)"
+      "alt": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., June 9, 2025.",
+      "caption": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)"
     },
     {
       "type": "text",
@@ -54,13 +54,13 @@
     },
     {
       "type": "text",
-      "content": "The next morning I walked the main strip. One shop window read, in clean white block letters: A BEAUTIFUL PLACE TO BE. Inside another, a woman with her arms crossed smiled across a glass case packed with ornate lamps, gilded vases, and framed portraits. Artisan soaps, tea tree, peppermint, sat in damask-wrapped rows near the door."
+      "content": "The next morning, the main strip carried the slower rhythm of a small Kentucky town. One shop window read, in clean white block letters: A BEAUTIFUL PLACE TO BE. Inside another, a woman with her arms crossed smiled across a glass case packed with ornate lamps, gilded vases and framed portraits. Artisan soaps, tea tree, peppermint, sat in damask-wrapped rows near the door."
     },
     {
       "type": "image",
       "src": "images/shopkeeper.jpg",
-      "alt": "A shopkeeper stands among antiques and artwork inside a shop at Boyd Station, Ky., June 10, 2025.",
-      "caption": "A shopkeeper stands among antiques and framed artwork in Boyd Station, Ky., June 10, 2025. (Photo by Caleb McCartney)"
+      "alt": "A shopkeeper stands among antiques and artwork inside a shop in Cynthiana, Ky., June 10, 2025.",
+      "caption": "A shopkeeper stands among antiques and framed artwork in Cynthiana, Ky., June 10, 2025. (Photo by Caleb McCartney)"
     },
     {
       "type": "text",
@@ -72,13 +72,13 @@
     },
     {
       "type": "text",
-      "content": "On the second afternoon I rode out to a working farm on the edge of town. A man in a gray shirt and white cap moved along a row of vegetable seedlings, crouching to press a stem gently back into the soil. Two ranchers in matching cowboy hats stood at the pasture fence watching cattle graze. No one seemed interested in rushing the day along."
+      "content": "On the second afternoon, coverage moved to a working farm on the edge of town. A man in a gray shirt and white cap moved along a row of vegetable seedlings, crouching to press a stem gently back into the soil. Two ranchers in matching cowboy hats stood at the pasture fence watching cattle graze. No one seemed interested in rushing the day along."
     },
     {
       "type": "image",
       "src": "images/farmer.jpg",
-      "alt": "A farmer tends seedlings in a vegetable garden at Boyd Station, Ky., June 10, 2025.",
-      "caption": "A farmer tends vegetable seedlings at dusk in Boyd Station, Ky., June 10, 2025. (Photo by Caleb McCartney)"
+      "alt": "A farmer tends seedlings in a vegetable garden in Cynthiana, Ky., June 10, 2025.",
+      "caption": "A farmer tends vegetable seedlings at dusk in Cynthiana, Ky., June 10, 2025. (Photo by Caleb McCartney)"
     },
     {
       "type": "text",
@@ -87,12 +87,12 @@
     {
       "type": "image",
       "src": "images/music-hall.jpg",
-      "alt": "Three musicians perform at the Aeolian Music Hall, Boyd Station, Ky., June 12, 2025.",
-      "caption": "A trio performs at the Aeolian Music Hall in Boyd Station, Ky., June 12, 2025. (Photo by Caleb McCartney)"
+      "alt": "Three musicians perform at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025.",
+      "caption": "A trio performs at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)"
     },
     {
       "type": "text",
-      "content": "I drove out the same road I came in on. The grain elevator was dark. The wildflower meadow had disappeared into the night. Boyd Station had given me three days and asked for nothing in return. That felt true to the place."
+      "content": "By the end of the third day, the work was less about identifying a single place called Boyd Station than about seeing how Boyd's Station connected photographers, hosts and neighbors across Cynthiana. The photographs hold that network in small pieces: a meadow, a shop window, a garden row, a truck dashboard and a stage lit red after dark."
     }
   ]
 }

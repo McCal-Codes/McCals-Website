@@ -1,197 +1,202 @@
-name: Auto-Update SEO Assets
+name: SEO Auto Update
 
 concurrency:
   group: seo-auto-update-${{ github.ref }}
   cancel-in-progress: true
 
 on:
-  # Trigger when portfolio images change
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
+      - 'src/content/blog/**'
       - 'src/images/Portfolios/**'
-      - 'src/api/routes/manifests.js'
+      - 'scripts/blog/**'
       - 'scripts/manifest/**'
-  
-  # Allow manual trigger
+      - 'sites/mcc-cal-vite/scripts/**'
+      - 'sites/mcc-cal-vite/src/config/public-routes.js'
+      - 'sites/mcc-cal-vite/src/content/pageSeoData.json'
+      - '.github/workflows/seo-auto-update.yml'
   workflow_dispatch:
-    inputs:
-      force:
-        description: 'Force regeneration even if no changes detected'
-        required: false
-        default: 'false'
+
+permissions:
+  contents: write
+  actions: read
 
 jobs:
   update-seo:
+    name: Update SEO assets
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 10
+
+    env:
+      APP_DIR: sites/mcc-cal-vite
+      APP_SITEMAP: sites/mcc-cal-vite/dist/sitemap.xml
+      SOURCE_SITEMAP: sites/mcc-cal-vite/public-vite/sitemap.xml
+      SITE_URL: ${{ secrets.SITE_URL || 'https://mcc-cal.com' }}
+      API_BASE: ${{ secrets.API_BASE_URL || 'https://api.mcc-cal.com' }}
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          submodules: false
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '20.19'
           cache: 'npm'
-      
-      - name: Install dependencies
+          cache-dependency-path: |
+            package-lock.json
+            sites/mcc-cal-vite/package-lock.json
+
+      - name: Install root dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
-      
-      - name: Generate manifests
+
+      - name: Install public app dependencies
+        run: cd "$APP_DIR" && npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Generate portfolio manifests
         run: npm run manifest:generate
-        continue-on-error: false
-      
-      - name: Verify API is accessible
+
+      - name: Verify API availability
         run: |
-          echo "Using production API for SEO generation..."
-          curl -sf ${{ secrets.API_BASE_URL || 'https://api.mcc-cal.com' }}/api/v1/health || echo "Warning: API health check failed, continuing anyway"
-      
-      - name: Generate sitemap
-        run: npm run seo:sitemap
-        env:
-          API_BASE: ${{ secrets.API_BASE_URL || 'https://api.mcc-cal.com' }}
-          SITE_URL: ${{ secrets.SITE_URL || 'https://mcc-cal.com' }}
-      
-      - name: Generate structured data
-        run: npm run seo:schema
-        env:
-          API_BASE: ${{ secrets.API_BASE_URL || 'https://api.mcc-cal.com' }}
-          SITE_URL: ${{ secrets.SITE_URL || 'https://mcc-cal.com' }}
-      
-      - name: Validate generated files
+          API_BASE_NO_SLASH="${API_BASE%/}"
+          echo "Checking API at ${API_BASE_NO_SLASH}"
+          curl -sf "${API_BASE_NO_SLASH}/api/v1/health" || echo "Warning: API health check failed, continuing with static generation"
+
+      - name: Build public app SEO output
+        run: cd "$APP_DIR" && npm run build
+
+      - name: Validate generated sitemap
         run: |
-          echo "Checking generated files..."
-          
-          # Check sitemap exists and is valid XML
-          if [ ! -f dist/sitemap.xml ]; then
-            echo "❌ Sitemap not generated"
+          SITE_URL_NO_SLASH="${SITE_URL%/}"
+
+          if [ ! -f "$SOURCE_SITEMAP" ]; then
+            echo "Source sitemap not found: $SOURCE_SITEMAP"
             exit 1
           fi
-          
-          # Basic XML validation
-          if ! grep -q '<?xml version="1.0"' dist/sitemap.xml; then
-            echo "❌ Invalid sitemap XML"
+
+          if [ ! -f "$APP_SITEMAP" ]; then
+            echo "Built sitemap not found: $APP_SITEMAP"
             exit 1
           fi
-          
-          # Count URLs in sitemap
-          URL_COUNT=$(grep -c '<loc>' dist/sitemap.xml || echo "0")
-          echo "✓ Sitemap contains $URL_COUNT URLs"
-          
-          if [ "$URL_COUNT" -lt 5 ]; then
-            echo "⚠️  Warning: Sitemap has fewer than 5 URLs"
-          fi
-          
-          # Check structured data
-          if [ ! -d dist/structured-data ]; then
-            echo "❌ Structured data directory not created"
+
+          if ! grep -q '<?xml version="1.0"' "$APP_SITEMAP"; then
+            echo "Built sitemap missing XML declaration"
             exit 1
           fi
-          
-          SCHEMA_COUNT=$(find dist/structured-data -name '*.json' | wc -l)
-          echo "✓ Generated $SCHEMA_COUNT schema files"
-          
-          # Validate JSON
-          for file in dist/structured-data/*.json; do
-            if ! jq empty "$file" 2>/dev/null; then
-              echo "❌ Invalid JSON: $file"
-              exit 1
-            fi
-          done
-          
-          echo "✅ All SEO assets validated successfully"
-      
-      - name: Check for changes
+
+          STALE_DOMAIN='mccalmedia[.]com'
+          if grep -Eq "$STALE_DOMAIN" "$SOURCE_SITEMAP" "$APP_SITEMAP"; then
+            echo "Sitemap contains the legacy site domain"
+            exit 1
+          fi
+
+          if ! grep -Fq "$SITE_URL_NO_SLASH" "$APP_SITEMAP"; then
+            echo "Built sitemap does not contain canonical site URL: $SITE_URL_NO_SLASH"
+            exit 1
+          fi
+
+          URL_COUNT=$(grep -c '<loc>' "$APP_SITEMAP" || echo "0")
+          echo "Validated $URL_COUNT sitemap URLs for $SITE_URL_NO_SLASH"
+
+      - name: Check for generated changes
         id: changes
         run: |
-          if git diff --quiet dist/sitemap.xml dist/structured-data/; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No changes detected in SEO assets"
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "Changes detected in SEO assets"
-          fi
-      
-      - name: Commit and push changes
-        if: steps.changes.outputs.changed == 'true' || github.event.inputs.force == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          
-          git add dist/sitemap.xml dist/structured-data/
-          
-          # Get summary of changes
-          URL_COUNT=$(grep -c '<loc>' dist/sitemap.xml || echo "0")
-          SCHEMA_COUNT=$(find dist/structured-data -name '*.json' | wc -l)
-          
-          git commit -m "chore: update SEO assets [automated]
+          GENERATED_PATHS=(
+            "src/content/blog"
+            "src/images/Portfolios"
+            "$APP_DIR/public-vite/images/social"
+            "$APP_DIR/public-vite/manifests"
+            "$APP_DIR/public-vite/sitemap.xml"
+          )
 
-          - Sitemap: $URL_COUNT URLs
-          - Structured data: $SCHEMA_COUNT schemas
-          - Generated: $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)
-          - Trigger: ${{ github.event_name }}"
-          
-          git push
-      
+          if [ -z "$(git status --porcelain -- "${GENERATED_PATHS[@]}")" ]; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No SEO changes detected"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "SEO changes detected:"
+            git status --short -- "${GENERATED_PATHS[@]}"
+          fi
+
+      - name: Commit SEO updates
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          GENERATED_PATHS=(
+            "src/content/blog"
+            "src/images/Portfolios"
+            "$APP_DIR/public-vite/images/social"
+            "$APP_DIR/public-vite/manifests"
+            "$APP_DIR/public-vite/sitemap.xml"
+          )
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          git add -- "${GENERATED_PATHS[@]}"
+
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit after staging"
+            exit 0
+          fi
+
+          URL_COUNT=$(grep -c '<loc>' "$SOURCE_SITEMAP" || echo "0")
+          MANIFEST_COUNT=$(find "$APP_DIR/public-vite/manifests" -name '*.json' | wc -l)
+
+          git commit \
+            -m "chore: update SEO assets [automated]" \
+            -m "Sitemap: $URL_COUNT URLs" \
+            -m "Public manifests: $MANIFEST_COUNT files" \
+            -m "Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" \
+            -m "Trigger: ${{ github.event_name }}"
+
+      - name: Push changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: git push
+
       - name: Submit sitemap to search engines
-        if: steps.changes.outputs.changed == 'true' || github.event.inputs.force == 'true'
+        if: steps.changes.outputs.has_changes == 'true'
+        continue-on-error: true
         run: |
-          echo "🌐 Submitting sitemap to search engines..."
-          
-          # Google Search Console
-          curl -X GET "https://www.google.com/ping?sitemap=https://mccalmedia.com/sitemap.xml" \
-            || echo "⚠️  Google submission may have failed (this is normal if not yet verified)"
-          
-          # Note: Bing requires API key - add BING_WEBMASTER_KEY to secrets if needed
-          # curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${{ secrets.BING_WEBMASTER_KEY }}" \
-          #   -d '{"siteUrl":"https://mccalmedia.com","urlList":["https://mccalmedia.com/sitemap.xml"]}'
-          
-          echo "✅ Sitemap submission complete"
-      
-      - name: Summary
-        if: always()
+          SITE_URL_NO_SLASH="${SITE_URL%/}"
+          SITEMAP_URL="${SITE_URL_NO_SLASH}/sitemap.xml"
+
+          echo "Submitting sitemap: $SITEMAP_URL"
+          curl -s "https://www.google.com/ping?sitemap=${SITEMAP_URL}" || true
+
+          # Bing removed unauthenticated ping submissions. Keep this log as the
+          # reminder to use Bing Webmaster Tools or IndexNow when configured.
+          echo "Bing sitemap submission should be handled through Bing Webmaster Tools or IndexNow: $SITEMAP_URL"
+
+      - name: Create summary
         run: |
+          SITE_URL_NO_SLASH="${SITE_URL%/}"
+          URL_COUNT=$(grep -c '<loc>' "$APP_SITEMAP" 2>/dev/null || echo "0")
+          SOURCE_URL_COUNT=$(grep -c '<loc>' "$SOURCE_SITEMAP" 2>/dev/null || echo "0")
+          MANIFEST_COUNT=$(find "$APP_DIR/public-vite/manifests" -name '*.json' 2>/dev/null | wc -l)
+
           echo "## SEO Update Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
-          if [ -f dist/sitemap.xml ]; then
-            URL_COUNT=$(grep -c '<loc>' dist/sitemap.xml || echo "0")
-            IMG_COUNT=$(grep -c '<image:loc>' dist/sitemap.xml || echo "0")
-            echo "- ✅ **Sitemap**: $URL_COUNT URLs, $IMG_COUNT images" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- ❌ **Sitemap**: Generation failed" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          if [ -d dist/structured-data ]; then
-            SCHEMA_COUNT=$(find dist/structured-data -name '*.json' | wc -l)
-            echo "- ✅ **Structured Data**: $SCHEMA_COUNT schema files" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- ❌ **Structured Data**: Generation failed" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          if [ "${{ steps.changes.outputs.changed }}" == "true" ]; then
-            echo "- 📤 **Status**: Changes committed and pushed" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- ℹ️  **Status**: No changes detected" >> $GITHUB_STEP_SUMMARY
-          fi
-          
+          echo "- Canonical site URL: $SITE_URL_NO_SLASH" >> $GITHUB_STEP_SUMMARY
+          echo "- Source sitemap URLs: $SOURCE_URL_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "- Built sitemap URLs: $URL_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "- Public manifest files: $MANIFEST_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "- Changes committed: ${{ steps.changes.outputs.has_changes }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Next Steps:**" >> $GITHUB_STEP_SUMMARY
-          echo "1. Verify sitemap at https://mccalmedia.com/sitemap.xml" >> $GITHUB_STEP_SUMMARY
-          echo "2. Test structured data: https://search.google.com/test/rich-results" >> $GITHUB_STEP_SUMMARY
-          echo "3. Monitor indexing in Google Search Console" >> $GITHUB_STEP_SUMMARY
-      
-      - name: Upload artifacts
-        if: always()
+          echo "### Generated Files" >> $GITHUB_STEP_SUMMARY
+          echo "- \`$SOURCE_SITEMAP\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`$APP_SITEMAP\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`$APP_DIR/public-vite/manifests/*.json\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload SEO artifacts
         uses: actions/upload-artifact@v7
+        if: always()
         with:
-          name: seo-assets-${{ github.sha }}
+          name: seo-assets
           path: |
-            dist/sitemap.xml
-            dist/structured-data/
+            sites/mcc-cal-vite/dist/sitemap.xml
+            sites/mcc-cal-vite/public-vite/sitemap.xml
+            sites/mcc-cal-vite/public-vite/manifests/*.json
           retention-days: 30

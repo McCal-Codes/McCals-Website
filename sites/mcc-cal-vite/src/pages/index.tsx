@@ -1,4 +1,6 @@
 import { Nav, Footer } from '@/components';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Send } from 'lucide-react';
 import HeroCarousel from '@/components/HeroCarousel.lazy';
 import {
   HOMEPAGE_HERO_IMAGE_SEO_ENTRIES,
@@ -13,6 +15,7 @@ import {
   generatePhotographyServiceSchema,
   generateWebSiteSchema,
 } from '@/utils/jsonLd';
+import styles from '@/styles/homepage.module.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 const PAGE_SEO = getPageSeo('home', SITE_URL);
@@ -72,6 +75,59 @@ const HOMEPAGE_SCHEMA = {
     'Photojournalism',
   ],
 };
+
+const editorialHighlights = [
+  {
+    label: 'Published assignments',
+    value: 'TribLive, New York Post, The Globe',
+  },
+  {
+    label: 'Field workflow',
+    value: 'Same-day selects, AP-style captions, clean delivery',
+  },
+  {
+    label: 'Availability',
+    value: 'Pittsburgh based with Washington, D.C. editorial readiness',
+  },
+];
+
+function HomeEditorialBand() {
+  return (
+    <section className={styles.editorialBand} aria-labelledby="home-editorial-title">
+      <div className={styles.editorialBandInner}>
+        <div className={styles.editorialBandLead}>
+          <p className={styles.editorialBandEyebrow}>Editorial work</p>
+          <h2 id="home-editorial-title" className={styles.editorialBandTitle}>
+            Photojournalism with publication rhythm.
+          </h2>
+          <p className={styles.editorialBandText}>
+            Politics, civic events, community stories, and features edited for captions,
+            context, and deadline handoff.
+          </p>
+          <div className={styles.editorialBandActions}>
+            <Link to="/journalism" className={styles.editorialBandPrimary}>
+              <span>View journalism</span>
+              <ArrowRight size={15} strokeWidth={2.1} aria-hidden="true" />
+            </Link>
+            <Link to="/contact-us?subject=Editorial%20assignment" className={styles.editorialBandSecondary}>
+              <span>Editorial assignment</span>
+              <Send size={14} strokeWidth={2} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+
+        <dl className={styles.editorialBandProof}>
+          {editorialHighlights.map((item) => (
+            <div key={item.label} className={styles.editorialBandProofItem}>
+              <dt>{item.label}</dt>
+              <dd>{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  );
+}
 
 const HomePage = () => {
   usePageMeta({
@@ -149,6 +205,7 @@ const HomePage = () => {
       <Nav />
       <main className="site-main mt-0">
         <HeroCarousel />
+        <HomeEditorialBand />
       </main>
       <Footer />
     </div>

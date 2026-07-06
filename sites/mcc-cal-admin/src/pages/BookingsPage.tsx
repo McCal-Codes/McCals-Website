@@ -212,7 +212,7 @@ export default function BookingsPage() {
             label="Total bookings"
             value={summary.total}
             tone="success"
-            detail="All time bookings in KV storage"
+            detail="All time bookings in Supabase"
           />
           <MetricCard
             label="Confirmed"

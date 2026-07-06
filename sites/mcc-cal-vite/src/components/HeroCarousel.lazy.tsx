@@ -9,6 +9,10 @@ import {
   type HeroSlide,
   type HeroSlideVariant,
 } from './heroSlides';
+import {
+  getOptimizedImageUrl,
+  getResponsiveImageSrcSet,
+} from '@/utils/imageOptimization';
 
 // ── Supabase slide fetch ──────────────────────────────────────────────────────
 // Fetches active slides from hero_slides table. Falls back silently to the
@@ -88,6 +92,9 @@ async function fetchHeroSlides(signal?: AbortSignal): Promise<{ slides: HeroSlid
 
 const DESKTOP_BREAKPOINT = 769;
 const SLIDE_DURATION = 8000;
+const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2560];
+const HERO_IMAGE_SIZES = '100vw';
+const HERO_OPTIMIZED_WIDTH = 1920;
 
 const normalizeFP = (fp?: HeroFocalPoint) => {
   if (!fp) return null;
@@ -140,7 +147,10 @@ interface ImageStatus {
 
 const HeroCarousel: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isPointerPaused, setIsPointerPaused] = useState(false);
+  const [isFocusPaused, setIsFocusPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isDocumentVisible, setIsDocumentVisible] = useState(true);
   const [isDesktop, setIsDesktop] = useState(false);
   const [imageStatus, setImageStatus] = useState<ImageStatus>({
     src: '',
@@ -174,6 +184,7 @@ const HeroCarousel: React.FC = () => {
   const currentSlide = slides[currentSlideIndex];
   const imageLoaded = imageStatus.src === currentSlide?.image && imageStatus.loaded;
   const imageError = imageStatus.src === currentSlide?.image && imageStatus.error;
+  const isPaused = isPointerPaused || isFocusPaused || prefersReducedMotion || !isDocumentVisible;
 
   const nextSlide = useCallback(() => {
     setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
@@ -204,6 +215,29 @@ const HeroCarousel: React.FC = () => {
       }
     };
   }, [isPaused, nextSlide, slides.length]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('matchMedia' in window)) return;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncPreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    syncPreference();
+    mediaQuery.addEventListener('change', syncPreference);
+
+    return () => mediaQuery.removeEventListener('change', syncPreference);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const syncVisibility = () => setIsDocumentVisible(document.visibilityState !== 'hidden');
+
+    syncVisibility();
+    document.addEventListener('visibilitychange', syncVisibility);
+
+    return () => document.removeEventListener('visibilitychange', syncVisibility);
+  }, []);
 
   // Responsive detection
   useEffect(() => {
@@ -244,18 +278,47 @@ const HeroCarousel: React.FC = () => {
     }
   }, [currentSlide]);
 
-  // Keyboard navigation
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        prevSlide();
-      } else if (e.key === 'ArrowRight') {
-        nextSlide();
-      }
+    if (typeof window === 'undefined' || slides.length < 2 || !imageLoaded) return;
+
+    const nextSlideImage = slides[(currentSlideIndex + 1) % slides.length];
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+    let timeoutId: number | undefined;
+    let idleId: number | undefined;
+
+    const preload = () => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = getOptimizedImageUrl(nextSlideImage.image, { width: HERO_OPTIMIZED_WIDTH });
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    if (idleWindow.requestIdleCallback) {
+      idleId = idleWindow.requestIdleCallback(preload, { timeout: 1800 });
+    } else {
+      timeoutId = window.setTimeout(preload, 900);
+    }
+
+    return () => {
+      if (idleId !== undefined && idleWindow.cancelIdleCallback) {
+        idleWindow.cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== undefined) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, [currentSlideIndex, imageLoaded, slides]);
+
+  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      prevSlide();
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      nextSlide();
+    }
   }, [nextSlide, prevSlide]);
 
   const hasPreloadedNext = useRef(false);
@@ -284,9 +347,23 @@ const HeroCarousel: React.FC = () => {
     };
   }, [imageLoaded, slides, currentSlideIndex]);
 
+  const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+      setIsFocusPaused(false);
+    }
+  }, []);
+
   const objectPosition = useMemo(() => {
     return currentSlide ? resolveObjectPosition(currentSlide, isDesktop) : '50% 50%';
   }, [currentSlide, isDesktop]);
+  const currentImageSrc = useMemo(
+    () => (currentSlide ? getOptimizedImageUrl(currentSlide.image, { width: HERO_OPTIMIZED_WIDTH }) : ''),
+    [currentSlide],
+  );
+  const currentImageSrcSet = useMemo(
+    () => (currentSlide ? getResponsiveImageSrcSet(currentSlide.image, HERO_IMAGE_WIDTHS) : undefined),
+    [currentSlide],
+  );
 
   const handleImageLoad = () => {
     if (!currentSlide) return;
@@ -311,7 +388,7 @@ const HeroCarousel: React.FC = () => {
       <div className={styles.heroCarousel}>
         <div className={styles.heroSlide} style={{ backgroundColor: '#1f2937' }}>
           <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>Loading...</h1>
+            <p className={styles.heroTitle}>Loading...</p>
           </div>
         </div>
       </div>
@@ -322,8 +399,14 @@ const HeroCarousel: React.FC = () => {
     <div
       ref={heroRef}
       className={styles.heroCarousel}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      role="region"
+      aria-label="Featured photography"
+      aria-roledescription="carousel"
+      onMouseEnter={() => setIsPointerPaused(true)}
+      onMouseLeave={() => setIsPointerPaused(false)}
+      onFocus={() => setIsFocusPaused(true)}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
     >
       <div className={styles.heroSlide}>
         {/* Loading skeleton */}
@@ -343,9 +426,9 @@ const HeroCarousel: React.FC = () => {
           <img
             ref={imageRef}
             key={currentSlide.image}
-            src={currentSlide.image}
-            srcSet={getResponsiveImageSrcSet(currentSlide.image, [640, 960, 1280, 1920, 3840])}
-            sizes="100vw"
+            src={currentImageSrc}
+            srcSet={currentImageSrcSet}
+            sizes={HERO_IMAGE_SIZES}
             alt={currentSlide.alt}
             className={`${styles.heroImage} ${imageLoaded ? styles.loaded : ''}`}
             style={{ objectPosition }}
@@ -353,10 +436,16 @@ const HeroCarousel: React.FC = () => {
             onError={handleImageError}
             loading="eager"
             fetchPriority="high"
+            decoding="async"
+            width={1920}
+            height={1280}
           />
         )}
 
         <div className={styles.heroContent}>
+          <h1 className={styles.heroSrOnly}>
+            Pittsburgh photographer Caleb McCartney
+          </h1>
           <Link to={currentSlide.href} className={styles.heroButton} aria-label={`View ${currentSlide.cta}`}>
             {currentSlide.cta}
           </Link>
@@ -369,9 +458,10 @@ const HeroCarousel: React.FC = () => {
           {slides.map((_, index) => (
             <button
               key={index}
+              type="button"
               className={`${styles.heroDot} ${index === currentSlideIndex ? styles.active : ''}`}
               onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={`Go to ${slides[index]?.title ?? `slide ${index + 1}`}`}
               aria-current={index === currentSlideIndex ? 'true' : 'false'}
             />
           ))}
@@ -382,20 +472,22 @@ const HeroCarousel: React.FC = () => {
       {slides.length > 1 && (
         <>
           <button
+            type="button"
             className={`${styles.heroArrow} ${styles.prev}`}
             onClick={prevSlide}
             aria-label="Previous slide"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
           <button
+            type="button"
             className={`${styles.heroArrow} ${styles.next}`}
             onClick={nextSlide}
             aria-label="Next slide"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>

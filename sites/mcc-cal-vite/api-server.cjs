@@ -9,6 +9,17 @@ require('dotenv').config();
 
 const app = express();
 const PORT = 3001;
+const handlers = {
+  availability: import('./api/schedule/availability.js'),
+  book: import('./api/schedule/book.js'),
+  contact: import('./api/contact.js'),
+  quote: import('./api/quote.js'),
+};
+
+async function runHandler(loader, req, res) {
+  const mod = await loader;
+  return mod.default(req, res);
+}
 
 app.use(cors());
 app.use(express.json());
@@ -18,28 +29,20 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', env: process.env.NODE_ENV || 'development' });
 });
 
-// API Routes
-const availabilityHandler = require('./src/pages/api/schedule/availability.js');
-const bookHandler = require('./src/pages/api/schedule/book.js');
-
 app.get('/api/schedule/availability', async (req, res) => {
-  await availabilityHandler.default(req, res);
+  await runHandler(handlers.availability, req, res);
 });
 
 app.post('/api/schedule/book', async (req, res) => {
-  await bookHandler.default(req, res);
+  await runHandler(handlers.book, req, res);
 });
 
-// Contact and Quote routes (existing APIs)
-const contactHandler = require('./src/pages/api/contact.js');
-const quoteHandler = require('./src/pages/api/quote.js');
-
 app.post('/api/contact', async (req, res) => {
-  await contactHandler.default(req, res);
+  await runHandler(handlers.contact, req, res);
 });
 
 app.post('/api/quote', async (req, res) => {
-  await quoteHandler.default(req, res);
+  await runHandler(handlers.quote, req, res);
 });
 
 app.listen(PORT, () => {

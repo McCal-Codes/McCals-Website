@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { applyRateLimit } from './_lib/rate-limit.js';
+import { applyRateLimit } from './_lib/rate-limit-redis.js';
 import { contactSchema, safeParseBody } from './_lib/validation.js';
 import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 import { captureApiException } from './_lib/sentry.js';
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const rateLimit = applyRateLimit(req, res, CONTACT_RATE_LIMIT);
+  const rateLimit = await applyRateLimit(req, res, CONTACT_RATE_LIMIT);
   if (!rateLimit.allowed) {
     res.status(429).json({ error: 'Too many contact requests. Please try again later.' });
     return;

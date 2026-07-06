@@ -7,8 +7,10 @@ import { logWarning } from '@/utils/logger';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+type SupabaseClient = ReturnType<typeof createClient<Database>>;
+
 // Lazy-initialized Supabase client to prevent errors when env vars not set
-let supabaseClient: ReturnType<typeof createClient<Database>> | null = null;
+let supabaseClient: SupabaseClient | null = null;
 
 function getSupabaseClient() {
   if (!supabaseClient && supabaseUrl && supabaseAnonKey) {
@@ -18,7 +20,7 @@ function getSupabaseClient() {
 }
 
 // Export a proxy that lazily initializes the client on first access
-export const supabase = new Proxy({} as ReturnType<typeof createClient<Database>>, {
+export const supabase = new Proxy({} as SupabaseClient, {
   get(_target, prop) {
     const client = getSupabaseClient();
     if (!client) {
