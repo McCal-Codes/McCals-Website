@@ -91,7 +91,7 @@ async function fetchHeroSlides(signal?: AbortSignal): Promise<{ slides: HeroSlid
 
 const DESKTOP_BREAKPOINT = 769;
 const SLIDE_DURATION = 8000;
-const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2560];
+const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2048];
 const HERO_IMAGE_SIZES = '100vw';
 const HERO_OPTIMIZED_WIDTH = 1920;
 
