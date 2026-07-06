@@ -8,7 +8,16 @@ const appRoot = path.resolve(__dirname, '..');
 const distRoot = path.join(appRoot, 'dist');
 const pageSeoPath = path.join(appRoot, 'src', 'content', 'pageSeoData.json');
 const blogManifestPath = path.join(appRoot, 'public-vite', 'content', 'blog-static', 'blog-manifest.json');
-const siteUrl = (process.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+export function resolveSiteUrl(env = process.env) {
+  const vercelEnv = env.VERCEL_ENV || env.VITE_VERCEL_ENV || 'development';
+  if (vercelEnv === 'production') {
+    return 'https://mcc-cal.com';
+  }
+
+  return (env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+}
+
+const siteUrl = resolveSiteUrl();
 
 function escapeAttr(value) {
   return String(value)

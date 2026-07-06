@@ -46,8 +46,8 @@ export default [
       },
       parserOptions: {
         ...js.configs.recommended.languageOptions?.parserOptions,
-        ecmaVersion: 2022,
-        sourceType: "script",
+        ecmaVersion: 2025,
+        sourceType: "module",
         allowHashBang: true,
       },
     },

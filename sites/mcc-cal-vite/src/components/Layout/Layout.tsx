@@ -8,9 +8,13 @@ import { Analytics } from '@vercel/analytics/react';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="site-layout site-layout--standard">
+    <a href="#main-content" className="mcc-skip-link">
+      Skip to main content
+    </a>
+
     <Nav />
 
-    <main className="site-main">
+    <main id="main-content" className="site-main">
       <div className="site-container">{children}</div>
     </main>
 

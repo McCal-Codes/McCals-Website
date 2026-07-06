@@ -31,7 +31,7 @@ export function ContactForm() {
       setBanner(null);
 
       if (!consent) {
-        setBanner({ type: 'error', text: 'Please accept the privacy policy to continue.' });
+        setBanner({ type: 'error', text: 'Please accept the policies & legal information to continue.' });
         return;
       }
 

@@ -211,6 +211,17 @@
   </url>
 
   <url>
+    <loc>https://mcc-cal.com/roadmap</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
+      <image:title>Roadmap | McCal Media</image:title>
+      <image:caption>McCal Media brand mark for the roadmap page.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://mcc-cal.com/terranova</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
