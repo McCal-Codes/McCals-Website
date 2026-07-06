@@ -11,7 +11,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PUBLIC_DIR = resolve(__dirname, './public-vite');
 const SKIP_DIR_NAME = 'one-nation-divided';
-const PUBLIC_COPY_TIMEOUT_MS = Number(process.env.PUBLIC_COPY_TIMEOUT_MS ?? 5_000);
 const vercelEnv = process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development';
 const resolvedSiteUrl =
   vercelEnv === 'production'
