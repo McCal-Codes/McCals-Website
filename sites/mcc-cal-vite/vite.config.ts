@@ -207,9 +207,6 @@ export default defineConfig(({ command }) => ({
     'import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA': JSON.stringify(
       process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.VITE_VERCEL_GIT_COMMIT_SHA ?? ''
     ),
-    'import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA': JSON.stringify(
-      process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.VITE_VERCEL_GIT_COMMIT_SHA ?? ''
-    ),
   },
   server: {
     proxy: {

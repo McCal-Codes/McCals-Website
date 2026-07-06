@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './heroCarousel.module.css';
-import { getResponsiveImageSrcSet } from '../utils/imageOptimization';
 import {
   FAVORITE_HERO_SLIDES,
   HERO_IMAGE_VARIANTS,
