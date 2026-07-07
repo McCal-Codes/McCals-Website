@@ -22,6 +22,36 @@ const DEFAULT_OG_IMAGE_WIDTH = '1200';
 const DEFAULT_OG_IMAGE_HEIGHT = '630';
 const DEFAULT_OG_IMAGE_TYPE = 'image/jpeg';
 
+/**
+ * @typedef {object} BlogManifestPost
+ * @property {string} slug
+ * @property {string} title
+ * @property {string=} excerpt
+ * @property {string=} leadImage
+ * @property {string=} leadImageFallback
+ * @property {string=} leadImageAlt
+ * @property {boolean=} published
+ */
+
+/**
+ * @typedef {object} BlogManifest
+ * @property {BlogManifestPost[]=} posts
+ */
+
+/**
+ * @typedef {object} PageSeoEntry
+ * @property {string} route
+ * @property {string} title
+ * @property {string} description
+ * @property {string} ogTitle
+ * @property {string} ogDescription
+ * @property {string} imagePath
+ * @property {string} imageAlt
+ * @property {string=} imageWidth
+ * @property {string=} imageHeight
+ * @property {string=} imageType
+ */
+
 function escapeAttr(value) {
   return String(value)
     .replace(/&/g, '&amp;')
@@ -121,6 +151,9 @@ export function routeOutputPaths(route) {
   ];
 }
 
+/**
+ * @param {{ pageSeo: Record<string, PageSeoEntry>, blogManifest?: BlogManifest }} input
+ */
 export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } }) {
   const staticEntries = STATIC_PAGE_ROUTES
     .filter((route) => route.path !== '/')

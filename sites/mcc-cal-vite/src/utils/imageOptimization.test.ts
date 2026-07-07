@@ -39,7 +39,12 @@ describe('imageOptimization', () => {
   it('keeps every generated responsive portfolio width allowed by Vercel', () => {
     const vercelConfig = JSON.parse(
       readFileSync(resolve(process.cwd(), 'vercel.json'), 'utf8'),
-    ) as { images?: { sizes?: number[] } };
+    ) as {
+      images?: {
+        sizes?: number[];
+        localPatterns?: Array<{ pathname: string; search: string }>;
+      };
+    };
     const generatedPortfolioWidths = [
       160,
       320,

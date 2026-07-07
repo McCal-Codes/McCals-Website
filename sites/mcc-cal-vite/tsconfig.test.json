@@ -1,8 +1,15 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "api/**/*.js",
+    "scripts/**/*.js",
+    "../mcc-cal-admin/api/_lib/bookings-data.js"
+  ],
   "exclude": []
 }

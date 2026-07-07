@@ -38,9 +38,7 @@ describe('PortfolioCard', () => {
       />
     );
 
-    expect(
-      screen.getByText(/January 2025/, { hidden: true })
-    ).toBeInTheDocument();
+    expect(screen.getByText(/January 2025/)).toBeInTheDocument();
   });
 
   it('has accessible role and keyboard support', () => {
@@ -124,8 +122,8 @@ describe('PortfolioCard', () => {
       />
     );
 
-    expect(screen.getByText('Commencement', { hidden: true })).toBeInTheDocument();
-    expect(screen.getByText('University Event', { hidden: true })).toBeInTheDocument();
-    expect(screen.getAllByText('Graduation', { hidden: true })).toHaveLength(1);
+    expect(screen.getByText('Commencement')).toBeInTheDocument();
+    expect(screen.getByText('University Event')).toBeInTheDocument();
+    expect(screen.getAllByText('Graduation')).toHaveLength(1);
   });
 });
