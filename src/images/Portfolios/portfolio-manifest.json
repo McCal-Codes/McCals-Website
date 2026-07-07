@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "generated": "2026-06-20T21:49:33.366Z",
+  "generated": "2026-07-07T17:37:35.479Z",
   "totalPortfolios": 5,
   "totalItems": 70,
-  "totalImages": 2496,
+  "totalImages": 2499,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -26,7 +26,7 @@
     },
     "Nature": {
       "count": 2,
-      "totalImages": 47
+      "totalImages": 50
     },
     "Portrait": {
       "count": 3,
@@ -3963,11 +3963,14 @@
         "description": "YYMMDD (from start of filename)",
         "display": "August 2020"
       },
-      "totalImages": 37,
+      "totalImages": 40,
       "images": [
         "200805_Riverfront_Golden_Hour_DSC02724_1.jpg",
+        "200805_Riverfront_Golden_Hour_DSC02724_1_webuse.webp",
         "211028_Downtown_Fire_Escape_IMGP7594.jpg",
+        "211028_Downtown_Fire_Escape_IMGP7594_webuse.webp",
         "211028_Pittsburgh_Sunset_IMGP7702.jpg",
+        "211028_Pittsburgh_Sunset_IMGP7702_webuse.webp",
         "221019_Street_2021_IMGP9302.jpg",
         "230505_untitled__CAL4020-Edit.jpg",
         "230509_untitled__CAL4122.jpg",
