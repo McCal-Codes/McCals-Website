@@ -1,7 +1,7 @@
 import { Component, type ReactNode } from 'react';
 import * as Sentry from '@sentry/react';
-import { track } from '@vercel/analytics/react';
 import { logError } from '@/utils/logger';
+import { trackWebsiteEvent } from '@/utils/analytics';
 
 interface Props {
   children: ReactNode;
@@ -27,6 +27,12 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error };
   }
 
+  override componentDidUpdate(prevProps: Props) {
+    if (this.state.hasError && prevProps.children !== this.props.children) {
+      this.setState({ hasError: false, error: undefined });
+    }
+  }
+
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     logError('ErrorBoundary caught an error:', error, errorInfo);
     Sentry.captureException(error, {
@@ -37,13 +43,10 @@ export class ErrorBoundary extends Component<Props, State> {
       },
     });
 
-    // Track error with Vercel Analytics in production
-    if (!import.meta.env.DEV) {
-      track('error_boundary_caught', {
-        error: error.message,
-        componentStack: errorInfo.componentStack,
-      });
-    }
+    trackWebsiteEvent('error_boundary_caught', {
+      error: error.message,
+      componentStack: errorInfo.componentStack,
+    });
   }
 
   override render() {

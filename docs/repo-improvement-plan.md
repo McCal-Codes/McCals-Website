@@ -1,47 +1,78 @@
 # Repository Improvement Plan
 
-This plan translates the high-level improvement goals for **McCals-Website** into actionable steps. It is organized into quick wins (do now), near-term priorities (1–2 weeks), and medium-term initiatives (2–4 weeks). Owners and checkpoints can be assigned in follow-up issues.
+> **Last updated:** 2026-06-14  
+> **Architecture:** Vite/React 19 SPA (`sites/mcc-cal-vite`) — the widget-era `src/widgets/` architecture described in older versions of this doc has been retired.
 
-## Goals
-- Strengthen documentation and contributor guidance so newcomers can reliably set up, contribute, and release changes.
-- Raise accessibility and semantic HTML quality to meet WCAG AA and modern SEO expectations.
-- Modernize CSS/JS structure for maintainability, consistency, and performance.
-- Improve performance and resource loading to reduce LCP/TBT and avoid regressions.
-- Standardize automation (CI, templates, dependency hygiene) to keep quality high over time.
+This plan tracks ongoing improvement work organized by priority. Historical point-in-time audit reports live in `docs/archive/`.
 
-## Quick Wins (Do Now)
-- **README refresh**: Add clear setup, run, and deploy instructions plus a short architecture map (widgets, dev server, scripts). **Status:** Done.
-- **Contributing hygiene**: Update `CONTRIBUTING.md` with branching, testing, and review expectations; link to lint/test scripts. **Status:** Done.
-- **Code of Conduct check**: Confirm `CODE_OF_CONDUCT.md` exists, is referenced from README, and matches GitHub community standards. **Status:** Done.
-- **Git ignore audit**: Verify `.gitignore` covers `node_modules/`, `.DS_Store`, `.env*`, `logs/`, `reports/`, and build outputs; add missing patterns. **Status:** Done.
-- **Resource hints**: Add `<link rel="preconnect">`/`<link rel="dns-prefetch">` for critical domains in site layouts/templates.
-- **Defer/async scripts**: Ensure non-critical scripts load with `defer` or `async` where safe.
+---
 
-## Near-Term Priorities (1–2 Weeks)
-- **Semantic & accessibility audit**:
-  - Replace non-semantic wrappers with `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>` where appropriate.
-  - Enforce logical heading order and ARIA labels for nav, toggles, dialogs, and forms.
-  - Add `loading="lazy"` and explicit dimensions to images; ensure alt text coverage.
-  - Run axe-core (Firefox/Playwright) and save reports to `reports/axe-firefox-results.json` and `reports/axe-firefox-widget-report.html`; summarize findings.
-- **CSS modularization**:
-  - Establish shared tokens/variables (colors, spacing, typography) via Tailwind config or CSS variables.
-  - Extract shared widget styles into `src/widgets/_shared/site-widgets.css` with opt-out guidance.
-  - Adopt a naming convention (BEM or utility-first) and document in README/CONTRIBUTING.
-- **JavaScript modernization**: Convert remaining `var` usage to `let/const`, prefer strict equality, and centralize utility helpers; avoid inline scripts.
-- **Performance checklist**: Add a lightweight checklist (LCP, CLS, TBT, font loading, caching) to PR template and release steps.
-- **CI coverage**: Add lint (`npm run lint`), tests (`npm run test` or Playwright subset), and accessibility audit jobs to GitHub Actions; gate on PRs.
+## Active priorities
 
-## Medium-Term Initiatives (2–4 Weeks)
-- **Automated widget validation**: Build small unit/integration harness for widgets and wire into CI; capture artifacts in `reports/`.
-- **Dependency governance**: Enable Dependabot (npm) with weekly cadence; add security advisories scanning.
-- **Templates & metadata**: Add PR template, issue templates (bug report, feature request), and ensure LICENSE/README link to them.
-- **Performance hardening**: Implement image pipeline (WebP/AVIF, responsive sources), cache headers for assets, and preload critical CSS/JS.
-- **Legacy/active version policy enforcement**: Add CI guard to ensure no more than two active versions per widget directory and archive legacy versions under `src/widgets/_archived/`.
-- **Monitoring hooks**: Add optional Lighthouse/Calibre runs on staging or scheduled basis; track metrics over time.
+### H1 — Git history bloat (~3.3 GB, ~3,795 images tracked)
+Image binaries under `src/images/Portfolios/` are the single largest problem. The CDN migration infrastructure already exists (`scripts/migrate-to-r2.js`, `docs/cdn-migration-plan.md`, and `vercel.json` already references `cdn.jsdelivr.net/gh/...`).
 
-## Execution Notes
-- Use small, incremental PRs tied to this plan; keep commit messages descriptive (what/why) and under 50 characters in the subject.
-- Update `updates/todo.md` as items land (reference this plan and link the relevant PRs).
-- Keep accessibility and performance reports versioned in `reports/`; avoid committing large binary artifacts.
-- Re-run `npm run ai:preflight:short` (or equivalent) before merging substantial structural changes.
+Steps:
+1. Run `scripts/migrate-to-r2.js` to push portfolio images to R2/CDN.
+2. Update app to load images from CDN; smoke test.
+3. Add `src/images/Portfolios/**` to `.gitignore`.
+4. Purge blobs from history with `git filter-repo`; coordinate force-push; all collaborators re-clone.
+5. `git gc --aggressive --prune=now` after rewrite.
+6. Delete leftover `.git-rewrite/`.
 
+### H2 — Repo on Google Drive
+Move working clone to a plain local path (`~/dev/McCals-Website`). This unblocks the `copyPublicSkipDeadFolder` workaround retirement and eliminates file-locking issues that corrupt `.git`.
+
+---
+
+## Build & config
+
+| Item | Status | Notes |
+|---|---|---|
+| Delete dead `.eslintrc.json` (legacy format silently ignored by ESLint 9+) | **Pending local run** | `rm .eslintrc.json` |
+| Remove unused root `react`/`react-dom`/`@types/react*` deps | ✅ Done 2026-06-14 | Root is Node tooling; React lives in `sites/mcc-cal-vite` |
+| Add `tsconfig.test.json` + `typecheck:test` script | ✅ Done 2026-06-14 | Excludes cleared so test files are typechecked |
+| npm workspaces (or explicit per-package doc) | Open | Root has `"workspaces": null`; five separate package.jsons |
+| Wire `typecheck:test` into CI `vercel-deployment-checks.yml` | ✅ Done 2026-06-14 | Step added to `typecheck` job |
+
+---
+
+## Performance & SEO
+
+| Item | Status | Notes |
+|---|---|---|
+| `preconnect`/`dns-prefetch` resource hints | ✅ Done 2026-06-14 | jsDelivr + Squarespace image CDNs |
+| Font `preload` in `index.html` | Open | Needs build-time hash injection; static preload would double-download |
+| Bundle analysis — split Sentry chunk | Open | Run `ANALYZE=true npm run build` first |
+| Move toward nonce/hash CSP (drop `unsafe-inline`) | Open | Low priority until above lands |
+
+---
+
+## Testing & quality
+
+| Item | Status | Notes |
+|---|---|---|
+| Vitest coverage thresholds | ✅ Done 2026-06-14 | Baselines set; ratchet up after measuring |
+| `test:coverage` script | ✅ Done 2026-06-14 | `npm run test:coverage` in `sites/mcc-cal-vite` |
+| Wire `typecheck:test` into CI | ✅ Done 2026-06-14 | See build & config above |
+
+---
+
+## Docs & workflows
+
+| Item | Status | Notes |
+|---|---|---|
+| Archive old root-level audit/plan reports | ✅ Done 2026-06-14 | Moved to `docs/archive/` |
+| WORKFLOWS.md inventory | ✅ Done 2026-06-14 | Full inventory with purpose, trigger, and consolidation notes |
+| Disable dead cron jobs | ✅ Done 2026-06-14 | `playwright-performance` auto-trigger removed (widget-era paths); `ai-preflight-daily` cron removed (dispatch-only) |
+| Remove `eslint.config.mjs` ignore for `src/widgets/**/versions/**` | Open | Stale widget-era ignore path |
+
+---
+
+## Retired (widget-era) items
+
+The following items referenced `src/widgets/`, `_shared/site-widgets.css`, and a widget version policy. Those concepts no longer apply — the product is the Vite/React SPA in `sites/mcc-cal-vite`.
+
+- Widget CSS modularization / BEM naming
+- Widget version policy enforcement CI guard
+- Widget unit/integration harness

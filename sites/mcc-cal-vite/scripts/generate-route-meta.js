@@ -1,16 +1,56 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { STATIC_PAGE_ROUTES } from '../src/config/public-routes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, '..');
 const distRoot = path.join(appRoot, 'dist');
 const pageSeoPath = path.join(appRoot, 'src', 'content', 'pageSeoData.json');
 const blogManifestPath = path.join(appRoot, 'public-vite', 'content', 'blog-static', 'blog-manifest.json');
-const siteUrl = (process.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+export function resolveSiteUrl(env = process.env) {
+  const vercelEnv = env.VERCEL_ENV || env.VITE_VERCEL_ENV || 'development';
+  if (vercelEnv === 'production') {
+    return 'https://mcc-cal.com';
+  }
+
+  return (env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+}
+
+const siteUrl = resolveSiteUrl();
 const DEFAULT_OG_IMAGE_WIDTH = '1200';
 const DEFAULT_OG_IMAGE_HEIGHT = '630';
 const DEFAULT_OG_IMAGE_TYPE = 'image/jpeg';
+
+/**
+ * @typedef {object} BlogManifestPost
+ * @property {string} slug
+ * @property {string} title
+ * @property {string=} excerpt
+ * @property {string=} leadImage
+ * @property {string=} leadImageFallback
+ * @property {string=} leadImageAlt
+ * @property {boolean=} published
+ */
+
+/**
+ * @typedef {object} BlogManifest
+ * @property {BlogManifestPost[]=} posts
+ */
+
+/**
+ * @typedef {object} PageSeoEntry
+ * @property {string} route
+ * @property {string} title
+ * @property {string} description
+ * @property {string} ogTitle
+ * @property {string} ogDescription
+ * @property {string} imagePath
+ * @property {string} imageAlt
+ * @property {string=} imageWidth
+ * @property {string=} imageHeight
+ * @property {string=} imageType
+ */
 
 function escapeAttr(value) {
   return String(value)
@@ -26,6 +66,10 @@ function escapeRegex(value) {
 
 function absoluteUrl(value) {
   return /^https?:\/\//i.test(value) ? value : `${siteUrl}${value.startsWith('/') ? value : `/${value}`}`;
+}
+
+function removeManagedImagePreloads(html) {
+  return html.replace(/\s*<link[^>]+data-route-image-preload=["'][^"']+["'][^>]*>\n?/gi, '');
 }
 
 function inferImageType(image, explicitType) {
@@ -75,7 +119,8 @@ function setLink(html, rel, href) {
 function applyRouteMeta(indexHtml, entry) {
   const url = absoluteUrl(entry.route);
   const image = absoluteUrl(entry.imagePath);
-  let html = setTitle(indexHtml, entry.title);
+  let html = removeManagedImagePreloads(indexHtml);
+  html = setTitle(html, entry.title);
 
   html = setMeta(html, 'name="description"', 'content', entry.description);
   html = setLink(html, 'canonical', url);
@@ -106,8 +151,24 @@ export function routeOutputPaths(route) {
   ];
 }
 
+/**
+ * @param {{ pageSeo: Record<string, PageSeoEntry>, blogManifest?: BlogManifest }} input
+ */
 export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } }) {
-  const staticEntries = Object.values(pageSeo).filter((entry) => entry.route !== '/');
+  const staticEntries = STATIC_PAGE_ROUTES
+    .filter((route) => route.path !== '/')
+    .map((route) => {
+      const seoKey = route.seoKey || route.routeKey;
+      const entry = pageSeo[seoKey];
+      if (!entry) {
+        throw new Error(`Missing page SEO entry for route "${route.path}" (${seoKey})`);
+      }
+
+      return {
+        ...entry,
+        route: route.path,
+      };
+    });
   const blogEntries = (blogManifest.posts || [])
     .filter((post) => post.published)
     .map((post) => ({

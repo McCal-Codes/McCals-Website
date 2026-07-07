@@ -1,4 +1,5 @@
 import pageSeoData from './pageSeoData.json';
+import { getStaticRouteBySeoKey } from '@/config/public-routes.js';
 
 export interface PageSeoEntry {
   route: string;
@@ -31,10 +32,13 @@ export function withSiteUrl(siteUrl: string, path: string): string {
 
 export function getPageSeo(key: PageSeoKey, siteUrl: string): ResolvedPageSeoEntry {
   const entry = PAGE_SEO[key];
+  const route = getStaticRouteBySeoKey(key);
+  const canonicalPath = route?.path || entry.route;
 
   return {
     ...entry,
-    url: withSiteUrl(siteUrl, entry.route),
+    route: canonicalPath,
+    url: withSiteUrl(siteUrl, canonicalPath),
     image: withSiteUrl(siteUrl, entry.imagePath),
   };
 }

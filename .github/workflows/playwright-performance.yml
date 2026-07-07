@@ -1,13 +1,9 @@
 name: Widget Performance (Playwright Scaffold)
 
+# Auto-trigger disabled: src/widgets/ and src/site/ are retired widget-era paths.
+# Run manually if needed via workflow_dispatch.
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'src/widgets/**'
-      - 'src/site/**'
-      - 'scripts/utils/perf-widgets.js'
-      - '.github/workflows/playwright-performance.yml'
 
 jobs:
   perf:

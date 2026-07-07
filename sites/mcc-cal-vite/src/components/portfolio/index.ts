@@ -14,6 +14,7 @@ export { default as PortfolioFilters } from './PortfolioFilters';
 export { default as PortfolioGrid } from './PortfolioGrid';
 export { default as PortfolioLightbox } from './PortfolioLightbox';
 export { default as PortfolioLoadMore } from './PortfolioLoadMore';
+export { default as ProtectedPortfolioImage } from './ProtectedPortfolioImage';
 export { default as ConcertArtistSupport } from './ConcertArtistSupport';
 export { useManifest, imageUrl } from './useManifest';
 export { sortPortfolioGroups, comparePortfolioGroupsByDateDesc } from './sortGroups';

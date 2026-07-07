@@ -60,6 +60,8 @@ export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
   const [source, setSource] = useState<'supabase' | 'google-api' | 'fallback'>('fallback');
 
   useEffect(() => {
+    let mounted = true;
+
     const fetchReviews = async () => {
       setLoading(true);
       setError(null);
@@ -94,9 +96,11 @@ export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
               date: t.created_at,
             }));
 
-            setTestimonials(formatted);
-            setSource('supabase');
-            setLoading(false);
+            if (mounted) {
+              setTestimonials(formatted);
+              setSource('supabase');
+              setLoading(false);
+            }
             return;
           }
         }
@@ -108,30 +112,37 @@ export function useGoogleReviews(options: UseGoogleReviewsOptions = {}) {
           if (response.ok) {
             const data = await response.json();
             if (data.testimonials?.length > 0) {
-              setTestimonials(data.testimonials);
-              setSource('google-api');
-              setLoading(false);
+              if (mounted) {
+                setTestimonials(data.testimonials);
+                setSource('google-api');
+                setLoading(false);
+              }
               return;
             }
           }
         }
 
         // Final fallback: static data
-        setReviews(staticGoogleReviews.slice(0, maxResults));
-        setUsingFallback(true);
-        setSource('fallback');
+        if (mounted) {
+          setReviews(staticGoogleReviews.slice(0, maxResults));
+          setUsingFallback(true);
+          setSource('fallback');
+        }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        // Use fallback on error
-        setReviews(staticGoogleReviews.slice(0, maxResults));
-        setUsingFallback(true);
-        setSource('fallback');
+        if (mounted) {
+          setError(err instanceof Error ? err.message : 'Unknown error');
+          // Use fallback on error
+          setReviews(staticGoogleReviews.slice(0, maxResults));
+          setUsingFallback(true);
+          setSource('fallback');
+        }
       } finally {
-        setLoading(false);
+        if (mounted) setLoading(false);
       }
     };
 
     fetchReviews();
+    return () => { mounted = false; };
   }, [maxResults, featuredOnly]);
 
   return { 

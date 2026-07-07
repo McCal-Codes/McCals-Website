@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-06-14
+
+### Sentry Observability & Repository Hygiene
+
+- Added Sentry error/performance monitoring to frontend (`src/instrument.ts`, `src/lib/sentry-config.ts`) and API routes (`api/_lib/sentry.js`).
+- Fixed `captureApiException` to be async with `Sentry.flush(2000)` so envelopes are not dropped when Vercel serverless functions terminate. Updated all API call sites to `await` the helper.
+- Removed duplicate `onCaughtError: Sentry.reactErrorHandler()` from `main.tsx`; `ErrorBoundary.componentDidCatch` is the single capture path for boundary-caught errors.
+- Added `preconnect`/`dns-prefetch` resource hints for CDN origins in `index.html`.
+- Added Vitest coverage thresholds and `test:coverage` script.
+- Created `tsconfig.test.json` and `typecheck:test` script so test files are included in TypeScript type-checking.
+- Removed unused `react`/`react-dom`/`@types/react*` from root `package.json`.
+- Moved audit reports to `docs/archive/`; rewrote `docs/repo-improvement-plan.md` for current Vite architecture.
+- Added `.gitleaks.toml` to allowlist `.env.example` template files.
+
 ## 2026-06-02
 
 ### CI / Workflow Stability

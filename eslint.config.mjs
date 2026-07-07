@@ -21,9 +21,6 @@ export default [
       // Bundled/build outputs
       "thesis/interactive/**",
 
-      // Some widgets ship legacy/versioned JS bundles; keep repo-wide lint focused on maintained source
-      "src/widgets/**/versions/**/*.js",
-
       // Nested/duplicated source trees (historical packaging artifacts)
       "src/api/src/**",
 
@@ -49,8 +46,8 @@ export default [
       },
       parserOptions: {
         ...js.configs.recommended.languageOptions?.parserOptions,
-        ecmaVersion: 2022,
-        sourceType: "script",
+        ecmaVersion: 2025,
+        sourceType: "module",
         allowHashBang: true,
       },
     },

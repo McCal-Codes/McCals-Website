@@ -4,10 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
 import pageSeoData from './content/pageSeoData.json';
+import type { PageSeoEntry } from './content/pageSeo';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-type PageSeoRecord = Record<string, { route: string; title: string; description: string; imagePath: string }>;
+type PageSeoRecord = Record<string, PageSeoEntry>;
 
 const pageSeo = pageSeoData as PageSeoRecord;
 

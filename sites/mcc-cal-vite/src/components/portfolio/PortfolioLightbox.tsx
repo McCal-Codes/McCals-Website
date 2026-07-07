@@ -15,6 +15,7 @@ import {
 } from '@/utils/imageOptimization';
 import type { PortfolioGroup } from './types';
 import { portfolioStyles } from './index';
+import ProtectedPortfolioImage from './ProtectedPortfolioImage';
 
 interface PortfolioLightboxProps {
   group: PortfolioGroup | null;
@@ -280,26 +281,30 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
                   <span>Loading photo</span>
                 </div>
               )}
-              <img
-                ref={imageRef}
-                src={activeImageSrc}
-                srcSet={activeImageSrcSet}
-                sizes="(max-width: 720px) calc(100vw - 28px), 1100px"
-                alt={activeImage.alt ?? `${group.title}, photo ${activeIndex + 1}`}
-                className={portfolioStyles.pfLightboxImg}
-                loading="eager"
-                decoding="async"
-                style={
-                  zoom > MIN_ZOOM
-                    ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
-                    : undefined
-                }
-                onLoad={() => setLoadedImage({ filename: activeImage.filename, loaded: true })}
+              <ProtectedPortfolioImage
+                className={portfolioStyles.pfLightboxProtectedImage}
                 onDoubleClick={() => {
                   setZoom((currentZoom) => (currentZoom === MIN_ZOOM ? 2 : MIN_ZOOM));
                 }}
-                draggable={false}
-              />
+              >
+                <img
+                  ref={imageRef}
+                  src={activeImageSrc}
+                  srcSet={activeImageSrcSet}
+                  sizes="(max-width: 720px) calc(100vw - 28px), 1100px"
+                  alt={activeImage.alt ?? `${group.title}, photo ${activeIndex + 1}`}
+                  className={portfolioStyles.pfLightboxImg}
+                  loading="eager"
+                  decoding="async"
+                  style={
+                    zoom > MIN_ZOOM
+                      ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
+                      : undefined
+                  }
+                  onLoad={() => setLoadedImage({ filename: activeImage.filename, loaded: true })}
+                  draggable={false}
+                />
+              </ProtectedPortfolioImage>
             </div>
           </div>
 
@@ -327,17 +332,20 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
                 aria-current={index === activeIndex ? 'true' : undefined}
                 onClick={() => selectImage(index)}
               >
-                <OptimizedImage
-                  src={img.url}
-                  alt=""
-                  frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfLightboxThumbFrame}`}
-                  imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfLightboxThumbImg}`}
-                  loading="lazy"
-                  decoding="async"
-                  optimizedWidth={160}
-                  width={96}
-                  height={64}
-                />
+                <ProtectedPortfolioImage className={portfolioStyles.pfLightboxThumbProtectedImage}>
+                  <OptimizedImage
+                    src={img.url}
+                    alt=""
+                    frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfLightboxThumbFrame}`}
+                    imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfLightboxThumbImg}`}
+                    loading="lazy"
+                    decoding="async"
+                    optimizedWidth={160}
+                    width={96}
+                    height={64}
+                    draggable={false}
+                  />
+                </ProtectedPortfolioImage>
               </button>
             ))}
           </div>

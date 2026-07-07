@@ -61,6 +61,15 @@ Legacy widget code and documentation are archived. All new public-site developme
 - Use `npm run dev:admin` for the admin console
 - Use `npm run dev:api` for the local public-site API shim, or `cd sites/mcc-cal-vite && npm run dev:vercel` when testing Vercel Functions
 - Run manifest/image scripts as needed for portfolio updates
+- CDN-hosted manifests (no API required): see [docs/manifest-cdn.md](docs/manifest-cdn.md) for jsDelivr URLs and the publish workflow.
+- End-to-end portfolio manifest pipeline: see [docs/workflows/portfolio-manifest-pipeline.md](docs/workflows/portfolio-manifest-pipeline.md).
+
+### CI webhook notifications for manifests
+
+Manifest workflows notify the API (if secrets set) so caches can be warmed automatically.
+
+- Composite action: `/.github/actions/notify-manifest-webhook` centralizes webhook logic.
+- Secrets required: `MANIFEST_WEBHOOK_URL` (or `MANIFEST_WEBHOOK_BASE`) and `WEBHOOK_SECRET`. If absent, notification step is skipped safely.
 
 ### Blog Workflow
 
@@ -89,14 +98,6 @@ This is a personal project. No outside contributors are accepted at this time.
 ## License
 
 See [LICENSE](LICENSE) for details.
-- CDN-hosted manifests (no API required): see [docs/manifest-cdn.md](docs/manifest-cdn.md) for jsDelivr URLs and the publish workflow.
-
-### CI webhook notifications for manifests
-
-Manifest workflows notify the API (if secrets set) so caches can be warmed automatically.
-
-- Composite action: `/.github/actions/notify-manifest-webhook` centralizes webhook logic.
-- Secrets required: `MANIFEST_WEBHOOK_URL` (or `MANIFEST_WEBHOOK_BASE`) and `WEBHOOK_SECRET`. If absent, notification step is skipped safely.
 
 ---
 

@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { SITEMAP_STATIC_PATHS } from './config/public-routes.js';
+import { LEGACY_ROUTE_REDIRECTS, SITEMAP_STATIC_PATHS } from './config/public-routes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -62,10 +62,13 @@ describe('critical public routes', () => {
     const appPath = resolve(__dirname, 'App.tsx');
     const appSource = readFileSync(appPath, 'utf8');
 
-    expect(appSource).toContain("path: '/schedule'");
-    expect(appSource).toContain('to="/grab-a-coffee"');
-    expect(appSource).toContain("path: '/contact'");
-    expect(appSource).toContain('to="/contact-us"');
+    expect(appSource).toContain('LEGACY_ROUTE_REDIRECTS.map');
+    expect(LEGACY_ROUTE_REDIRECTS).toEqual(
+      expect.arrayContaining([
+        { from: '/schedule', to: '/grab-a-coffee' },
+        { from: '/contact', to: '/contact-us' },
+      ]),
+    );
   });
 
   it('keeps primary public pages semantically headed', () => {

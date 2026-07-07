@@ -14,7 +14,20 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types"],
+    "paths": {
+      "path/posix": ["./node_modules/@types/node/path.d.ts"],
+      "path/win32": ["./node_modules/@types/node/path.d.ts"],
+      "perf_hooks": ["./node_modules/@types/node/perf_hooks.d.ts"],
+      "punycode": ["./node_modules/@types/node/punycode.d.ts"],
+      "stream": ["./node_modules/@types/node/stream.d.ts"],
+      "stream/consumers": ["./node_modules/@types/node/stream/consumers.d.ts"],
+      "stream/promises": ["./node_modules/@types/node/stream/promises.d.ts"],
+      "stream/web": ["./node_modules/@types/node/stream/web.d.ts"],
+      "string_decoder": ["./node_modules/@types/node/string_decoder.d.ts"]
+    }
   },
   "include": ["vite.config.ts"]
 }

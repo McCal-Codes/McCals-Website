@@ -12,6 +12,14 @@ const Link = React.forwardRef<HTMLAnchorElement, React.ComponentProps<typeof Rou
 );
 Link.displayName = 'ViewTransitionLink';
 
+function getSubmenuHiddenState(isMobile: boolean, isOpen: boolean) {
+  if (isMobile) {
+    return !isOpen;
+  }
+
+  return undefined;
+}
+
 const Nav: React.FC = () => {
   const { pathname } = useLocation();
   const navRef = useRef<HTMLElement>(null);
@@ -136,9 +144,9 @@ const Nav: React.FC = () => {
                   to="/featured-work"
                   aria-current={isWorkNavPath ? 'page' : undefined}
                   onClick={(e) => {
-                    if (isMobile) {
+                    if (isMobile && !workSubmenuOpen) {
                       e.preventDefault();
-                      setWorkSubmenuOpen((v) => !v);
+                      setWorkSubmenuOpen(true);
                     }
                   }}
                 >
@@ -169,15 +177,15 @@ const Nav: React.FC = () => {
               <ul
                 className="mcc-nav__submenu"
                 id="mcc-nav-submenu-work"
-                role="menu"
                 aria-label="Work submenu"
+                aria-hidden={getSubmenuHiddenState(isMobile, workSubmenuOpen)}
+                hidden={getSubmenuHiddenState(isMobile, workSubmenuOpen)}
                 style={isMobile ? { display: workSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
                 {WORK_NAV_ITEMS.map((item) => (
                   <li key={item.to}>
                     <Link
                       to={item.to}
-                      role="menuitem"
                       aria-current={isActiveNavItem(pathname, item) ? 'page' : undefined}
                     >
                       {item.label}
@@ -194,9 +202,9 @@ const Nav: React.FC = () => {
                   to="/projects"
                   aria-current={isProjectsNavPath(pathname) ? 'page' : undefined}
                   onClick={(e) => {
-                    if (isMobile) {
+                    if (isMobile && !projectsSubmenuOpen) {
                       e.preventDefault();
-                      setProjectsSubmenuOpen((v) => !v);
+                      setProjectsSubmenuOpen(true);
                     }
                   }}
                 >
@@ -227,15 +235,15 @@ const Nav: React.FC = () => {
               <ul
                 className="mcc-nav__submenu"
                 id="mcc-nav-submenu-projects"
-                role="menu"
                 aria-label="Projects submenu"
+                aria-hidden={getSubmenuHiddenState(isMobile, projectsSubmenuOpen)}
+                hidden={getSubmenuHiddenState(isMobile, projectsSubmenuOpen)}
                 style={isMobile ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
                 {PROJECT_NAV_ITEMS.map((item) => (
                   <li key={item.to}>
                     <Link
                       to={item.to}
-                      role="menuitem"
                       aria-current={isActiveNavItem(pathname, item) ? 'page' : undefined}
                     >
                       {item.label}

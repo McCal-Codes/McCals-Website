@@ -1,136 +1,257 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
     <loc>https://mcc-cal.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/homepage-og.jpg</image:loc>
+      <image:title>Pittsburgh Photographer | Caleb McCartney</image:title>
+      <image:caption>A farmer works in a garden during a Boyd Station documentary photojournalism assignment.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>About Caleb McCartney | McCal Media</image:title>
+      <image:caption>Portrait of Pittsburgh photographer Caleb McCartney.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/contact-us</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Contact McCal Media</image:title>
+      <image:caption>Portrait of Caleb McCartney, founder of McCal Media.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/request-a-quote</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Request a Photography Quote | McCal Media</image:title>
+      <image:caption>Caleb McCartney with a camera, available for photography assignments.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/featured-work</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/homepage-og.jpg</image:loc>
+      <image:title>Featured Photography Portfolio | Caleb McCartney</image:title>
+      <image:caption>A documentary photograph from Caleb McCartney&apos;s featured photography portfolio.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/letting-me-go</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/bfa-thesis/exhibition-show/webp/one-nation-divided-hero.webp</image:loc>
+      <image:title>Letting Me Go | Caleb McCartney</image:title>
+      <image:caption>Installation view from the Letting Me Go BFA thesis exhibition.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/journalism</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/journalism-og.jpg</image:loc>
+      <image:title>Photojournalism Portfolio | Caleb McCartney</image:title>
+      <image:caption>Former President Barack Obama speaks to supporters at a campaign rally in Pittsburgh.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/portraits</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/portraits-og.jpg</image:loc>
+      <image:title>Pittsburgh Headshot Photographer | Caleb McCartney</image:title>
+      <image:caption>Studio portrait of Logan Spiker by Caleb McCartney.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/nature</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/nature-og.jpg</image:loc>
+      <image:title>Nature Photography | Caleb McCartney</image:title>
+      <image:caption>A steel truss bridge spans a Pittsburgh river at sunset.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/events</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/events-og.jpg</image:loc>
+      <image:title>Pittsburgh Event Photographer | Caleb McCartney</image:title>
+      <image:caption>Guests sing along under bright club lights during a Howl at the Moon event.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/concerts</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/concerts-og.jpg</image:loc>
+      <image:title>Pittsburgh Concert Photographer | Caleb McCartney</image:title>
+      <image:caption>Heading North performs under red and blue club lighting at Bottle Rocket.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/journalism-og.jpg</image:loc>
+      <image:title>Field Notes Blog | McCal Media</image:title>
+      <image:caption>Campaign rally photograph representing McCal Media field reporting.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/authors</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Authors | McCal Media</image:title>
+      <image:caption>Portrait of Caleb McCartney, McCal Media author and photographer.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/authors/mccal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Caleb McCartney Author Profile</image:title>
+      <image:caption>Portrait of Caleb McCartney.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/podcast</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
+      <image:title>Podcast | McCal Media</image:title>
+      <image:caption>McCal Media podcast brand artwork.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/book-a-podcast</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
+      <image:title>Book a Podcast Session | McCal Media</image:title>
+      <image:caption>McCal Media mark for podcast booking.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/grab-a-coffee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Grab a Coffee | McCal Media</image:title>
+      <image:caption>Portrait of Caleb McCartney for coffee chat scheduling.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Photography FAQ | McCal Media</image:title>
+      <image:caption>Caleb McCartney, Pittsburgh photographer, for McCal Media FAQ.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/projects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/images/social/homepage-og.jpg</image:loc>
+      <image:title>Projects | McCal Media</image:title>
+      <image:caption>Documentary photography representing McCal Media projects.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://mcc-cal.com/roadmap</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
+      <image:title>Roadmap | McCal Media</image:title>
+      <image:caption>McCal Media brand mark for the roadmap page.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/terranova</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
+      <image:title>Terranova | McCal Media</image:title>
+      <image:caption>McCal Media mark for the Terranova creative project.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/accessibility</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
+      <image:title>Accessibility Statement | McCal Media</image:title>
+      <image:caption>McCal Media brand mark for accessibility information.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://mcc-cal.com/policies-legal</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
+      <image:title>Policies and Legal | McCal Media</image:title>
+      <image:caption>McCal Media brand mark for policies and legal information.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -138,6 +259,11 @@
     <lastmod>2025-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/boyd-station-community-feature/images/lead.jpg</image:loc>
+      <image:title>Three Days With Boyd&apos;s Station</image:title>
+      <image:caption>Musicians perform at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -145,6 +271,11 @@
     <lastmod>2025-01-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/the-capitalist-contradiction/images/lead.jpg</image:loc>
+      <image:title>The Capitalist Contradiction</image:title>
+      <image:caption>Former President Barack Obama speaks during a campaign rally in Pittsburgh, Pa., Oct. 10, 2024. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -152,6 +283,11 @@
     <lastmod>2024-11-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/a-conversation-with-myself/images/lead.jpg</image:loc>
+      <image:title>A Conversation with Myself</image:title>
+      <image:caption>Jay Thompson sits for an editorial portrait during an Ignite Studios session in Pittsburgh, Pa., Nov. 18, 2023. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -159,6 +295,11 @@
     <lastmod>2024-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/fear-of-emotion/images/lead.jpg</image:loc>
+      <image:title>Fear of Emotion</image:title>
+      <image:caption>Helen Wise sits for a studio portrait in Pittsburgh, Pa., May 28, 2024. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -166,6 +307,11 @@
     <lastmod>2024-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/living-breathing-dying/images/lead.jpg</image:loc>
+      <image:title>Living, Breathing, Dying</image:title>
+      <image:caption>Flowers and foliage fill the frame in a close-up nature photograph. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -173,6 +319,11 @@
     <lastmod>2024-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/all-i-hear-is-the-deafening-silence/images/lead.jpg</image:loc>
+      <image:title>All I Hear Is the Deafening Silence</image:title>
+      <image:caption>Seneca Rocks rises under a dark sky in Pendleton County, W.Va. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -180,6 +331,11 @@
     <lastmod>2024-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/body-remembers/images/lead.jpg</image:loc>
+      <image:title>The Body Remembers</image:title>
+      <image:caption>Danny Herz sits for a studio portrait during a commercial mock shoot in Pittsburgh, Pa., Aug. 28, 2024. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -187,6 +343,11 @@
     <lastmod>2024-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/player-one/images/lead.jpg</image:loc>
+      <image:title>Player One</image:title>
+      <image:caption>A boy holds a sparkler as an adult stands nearby in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -194,6 +355,11 @@
     <lastmod>2024-08-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mcc-cal.com/posts/in-the-shadow-of-loss/images/lead.jpg</image:loc>
+      <image:title>In the Shadow of Loss</image:title>
+      <image:caption>A red-roof barn sits beyond a fence line in soft evening light. (Photo by Caleb McCartney)</image:caption>
+    </image:image>
   </url>
 
 </urlset>

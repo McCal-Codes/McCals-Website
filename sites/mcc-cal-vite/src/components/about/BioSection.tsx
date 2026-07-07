@@ -206,6 +206,17 @@ export function BioSection({ className = '' }: BioSectionProps) {
                   </svg>
                   Resume
                 </a>
+                <a
+                  href="/downloads/caleb-mccartney-cv.pdf"
+                  download
+                  className={styles.menuItem}
+                  role="menuitem"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
+                    <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v2H8v-2zm0 4h5v2H8v-2z" />
+                  </svg>
+                  CV
+                </a>
                 <Link to="/roadmap" className={styles.menuItem} role="menuitem">
                   <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
                     <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />

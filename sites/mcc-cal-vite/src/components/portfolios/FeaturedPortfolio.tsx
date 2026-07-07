@@ -7,6 +7,7 @@ import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
 import { portfolioStyles } from '../portfolio';
+import ProtectedPortfolioImage from '../portfolio/ProtectedPortfolioImage';
 
 const PortfolioLightbox = lazy(() => import('../portfolio/PortfolioLightbox'));
 
@@ -298,19 +299,22 @@ function FeaturedStoryCard({
         aria-label={`Open ${group.title} gallery`}
         onClick={() => onOpen(group)}
       >
-        <OptimizedImage
-          src={group.coverImage.url}
-          alt={group.coverImage.alt ?? group.title}
-          frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
-          imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
-          loading={loading}
-          decoding="async"
-          optimizedWidth={variant === 'lead' ? 1280 : 720}
-          srcSetWidths={variant === 'lead' ? [640, 960, 1280, 1600] : [360, 540, 720, 960]}
-          sizes={variant === 'lead' ? '(max-width: 980px) calc(100vw - 40px), 58vw' : '(max-width: 980px) calc(100vw - 40px), 28vw'}
-          width={variant === 'lead' ? 980 : 460}
-          height={variant === 'lead' ? 620 : 310}
-        />
+        <ProtectedPortfolioImage className={portfolioStyles.pfFeaturedStoryProtectedImage}>
+          <OptimizedImage
+            src={group.coverImage.url}
+            alt={group.coverImage.alt ?? group.title}
+            frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
+            imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
+            loading={loading}
+            decoding="async"
+            optimizedWidth={variant === 'lead' ? 1280 : 720}
+            srcSetWidths={variant === 'lead' ? [640, 960, 1280, 1600] : [360, 540, 720, 960]}
+            sizes={variant === 'lead' ? '(max-width: 980px) calc(100vw - 40px), 58vw' : '(max-width: 980px) calc(100vw - 40px), 28vw'}
+            width={variant === 'lead' ? 980 : 460}
+            height={variant === 'lead' ? 620 : 310}
+            draggable={false}
+          />
+        </ProtectedPortfolioImage>
       </button>
 
       <div className={portfolioStyles.pfFeaturedStoryCopy}>

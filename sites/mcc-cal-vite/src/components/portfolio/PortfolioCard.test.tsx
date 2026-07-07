@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 import PortfolioCard from './PortfolioCard';
 import type { PortfolioGroup } from './types';
 
@@ -38,9 +38,7 @@ describe('PortfolioCard', () => {
       />
     );
 
-    expect(
-      screen.getByText(/January 2025/, { hidden: true })
-    ).toBeInTheDocument();
+    expect(screen.getByText(/January 2025/)).toBeInTheDocument();
   });
 
   it('has accessible role and keyboard support', () => {
@@ -56,6 +54,47 @@ describe('PortfolioCard', () => {
       name: /View Test Concert photos/i,
     });
     expect(card).toHaveAttribute('tabIndex', '0');
+  });
+
+  it('opens the portfolio from click and keyboard interactions', () => {
+    const onOpen = vi.fn();
+
+    render(
+      <PortfolioCard
+        group={mockGroup}
+        onOpen={onOpen}
+        onCopyLink={() => {}}
+      />
+    );
+
+    const card = screen.getByRole('button', {
+      name: /View Test Concert photos/i,
+    });
+
+    fireEvent.click(card);
+    fireEvent.keyDown(card, { key: 'Enter' });
+    fireEvent.keyDown(card, { key: ' ' });
+
+    expect(onOpen).toHaveBeenCalledTimes(3);
+    expect(onOpen).toHaveBeenCalledWith(mockGroup);
+  });
+
+  it('prevents casual save interactions on the protected image layer', () => {
+    render(
+      <PortfolioCard
+        group={mockGroup}
+        onOpen={() => {}}
+        onCopyLink={() => {}}
+      />
+    );
+
+    const protectionLayer = screen.getByTestId('portfolio-image-protection');
+    const coverImage = screen.getByAltText('Test concert photo 1');
+
+    expect(protectionLayer).toHaveAttribute('aria-hidden', 'true');
+    expect(coverImage).toHaveAttribute('draggable', 'false');
+    expect(fireEvent.contextMenu(protectionLayer)).toBe(false);
+    expect(fireEvent.dragStart(protectionLayer)).toBe(false);
   });
 
   it('displays image count correctly', () => {
@@ -83,8 +122,8 @@ describe('PortfolioCard', () => {
       />
     );
 
-    expect(screen.getByText('Commencement', { hidden: true })).toBeInTheDocument();
-    expect(screen.getByText('University Event', { hidden: true })).toBeInTheDocument();
-    expect(screen.getAllByText('Graduation', { hidden: true })).toHaveLength(1);
+    expect(screen.getByText('Commencement')).toBeInTheDocument();
+    expect(screen.getByText('University Event')).toBeInTheDocument();
+    expect(screen.getAllByText('Graduation')).toHaveLength(1);
   });
 });

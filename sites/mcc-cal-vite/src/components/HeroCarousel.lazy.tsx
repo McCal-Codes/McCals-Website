@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useCallback, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './heroCarousel.module.css';
 import {
@@ -13,9 +13,85 @@ import {
   getResponsiveImageSrcSet,
 } from '@/utils/imageOptimization';
 
+// ── Supabase slide fetch ──────────────────────────────────────────────────────
+// Fetches active slides from hero_slides table. Falls back silently to the
+// hardcoded FAVORITE_HERO_SLIDES if Supabase is unreachable or returns nothing.
+
+const SUPABASE_URL  = import.meta.env.VITE_SUPABASE_URL  as string | undefined;
+const SUPABASE_ANON = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const R2_BASE       = (import.meta.env.VITE_R2_PUBLIC_URL as string | undefined ?? '').replace(/\/$/, '');
+
+interface DbSlide {
+  title: string; meta: string | null; href: string; cta: string;
+  links: { url: string; label?: string }[] | null;
+  image_url: string; storage_path: string | null; alt_text: string;
+  focal_point_mobile_x: number; focal_point_mobile_y: number;
+  focal_point_desktop_x: number; focal_point_desktop_y: number;
+  sort_order: number;
+}
+interface DbVariant {
+  slide_cta: string; image_url: string; storage_path: string | null; alt_text: string;
+  focal_point_mobile_x: number; focal_point_mobile_y: number;
+  focal_point_desktop_x: number; focal_point_desktop_y: number;
+}
+
+function resolveUrl(imageUrl: string, storagePath: string | null): string {
+  if (storagePath && R2_BASE) return `${R2_BASE}/${storagePath}`;
+  return imageUrl;
+}
+
+function mapDbSlide(row: DbSlide): HeroSlide {
+  return {
+    title: row.title,
+    meta:  row.meta ?? row.title,
+    href:  row.href,
+    cta:   row.cta,
+    links: row.links ?? [],
+    image: resolveUrl(row.image_url, row.storage_path),
+    alt:   row.alt_text,
+    focalPointMobile:  { x: row.focal_point_mobile_x,  y: row.focal_point_mobile_y  },
+    focalPointDesktop: { x: row.focal_point_desktop_x, y: row.focal_point_desktop_y },
+  };
+}
+
+async function fetchHeroSlides(signal?: AbortSignal): Promise<{ slides: HeroSlide[]; variants: Record<string, HeroSlideVariant[]> } | null> {
+  if (!SUPABASE_URL || !SUPABASE_ANON) return null;
+  try {
+    const [slidesRes, variantsRes] = await Promise.all([
+      fetch(
+        `${SUPABASE_URL}/rest/v1/hero_slides?is_active=eq.true&order=sort_order.asc`,
+        { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }, signal }
+      ),
+      fetch(
+        `${SUPABASE_URL}/rest/v1/hero_slide_variants?order=slide_cta.asc,sort_order.asc`,
+        { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }, signal }
+      ),
+    ]);
+    if (!slidesRes.ok) return null;
+    const dbSlides: DbSlide[] = await slidesRes.json();
+    const dbVariants: DbVariant[] = variantsRes.ok ? await variantsRes.json() : [];
+    if (!Array.isArray(dbSlides) || dbSlides.length === 0) return null;
+
+    const slides = dbSlides.map(mapDbSlide);
+    const variants: Record<string, HeroSlideVariant[]> = {};
+    for (const v of dbVariants) {
+      if (!variants[v.slide_cta]) variants[v.slide_cta] = [];
+      variants[v.slide_cta].push({
+        image: resolveUrl(v.image_url, v.storage_path),
+        alt:   v.alt_text,
+        focalPointMobile:  { x: v.focal_point_mobile_x,  y: v.focal_point_mobile_y  },
+        focalPointDesktop: { x: v.focal_point_desktop_x, y: v.focal_point_desktop_y },
+      });
+    }
+    return { slides, variants };
+  } catch {
+    return null;
+  }
+}
+
 const DESKTOP_BREAKPOINT = 769;
 const SLIDE_DURATION = 8000;
-const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2560];
+const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2048];
 const HERO_IMAGE_SIZES = '100vw';
 const HERO_OPTIMIZED_WIDTH = 1920;
 
@@ -40,10 +116,10 @@ const getBaseVariant = (slide: HeroSlide): HeroSlideVariant => ({
   focalPointDesktop: slide.focalPointDesktop,
 });
 
-const resolveSlideVariant = (slide: HeroSlide): HeroSlide => {
+const resolveSlideVariant = (slide: HeroSlide, variantPool = HERO_IMAGE_VARIANTS): HeroSlide => {
   const options: [HeroSlideVariant, ...HeroSlideVariant[]] = [
     getBaseVariant(slide),
-    ...(HERO_IMAGE_VARIANTS[slide.cta] ?? []),
+    ...(variantPool[slide.cta] ?? []),
   ];
   const selected = options[Math.floor(Math.random() * options.length)] ?? options[0];
 
@@ -53,10 +129,13 @@ const resolveSlideVariant = (slide: HeroSlide): HeroSlide => {
   };
 };
 
-const getInitialSlides = () => {
-  return FAVORITE_HERO_SLIDES.map((slide, index) => (
-    index === 0 ? slide : resolveSlideVariant(slide)
-  ));
+const getInitialSlides = (
+  sourceSlides = FAVORITE_HERO_SLIDES,
+  variantPool: Record<string, HeroSlideVariant[]> = HERO_IMAGE_VARIANTS,
+) => {
+  return sourceSlides.map((slide, index) =>
+    index === 0 ? slide : resolveSlideVariant(slide, variantPool)
+  );
 };
 
 interface ImageStatus {
@@ -79,10 +158,27 @@ const HeroCarousel: React.FC = () => {
   });
   const heroRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof window.setInterval> | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
-  const slides = useMemo(() => getInitialSlides(), []);
+  // Start immediately with hardcoded slides; replace with Supabase data if it arrives
+  const [slides, setSlides] = useState<HeroSlide[]>(() => getInitialSlides());
+
+  useEffect(() => {
+    let cancelled = false;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 5000);
+
+    fetchHeroSlides(controller.signal).then(data => {
+      if (cancelled || !data || data.slides.length === 0) return;
+      clearTimeout(timeout);
+      setSlides(getInitialSlides(data.slides, data.variants));
+      // Clamp index in case new slide count is smaller
+      setCurrentSlideIndex(prev => Math.min(prev, data.slides.length - 1));
+    });
+
+    return () => { cancelled = true; clearTimeout(timeout); controller.abort(); };
+  }, []);
 
   const currentSlide = slides[currentSlideIndex];
   const imageLoaded = imageStatus.src === currentSlide?.image && imageStatus.loaded;
@@ -165,19 +261,20 @@ const HeroCarousel: React.FC = () => {
     };
   }, []);
 
-  // A cached image can complete before React receives onLoad after a slide change.
-  // Keep the visible state keyed to the current URL so stale load/reset events cannot blank the slide.
-  useEffect(() => {
+  // If the image is already in the browser cache, mark it loaded BEFORE the first paint
+  // so the hero never shows a dark frame. useLayoutEffect fires synchronously after DOM
+  // commit but before the browser paints, so setState here avoids any visible flash.
+  useLayoutEffect(() => {
     if (!currentSlide) return;
-
     const image = imageRef.current;
-    if (!image?.complete) return;
-
-    setImageStatus({
-      src: currentSlide.image,
-      loaded: image.naturalWidth > 0,
-      error: image.naturalWidth === 0,
-    });
+    if (!image) return;
+    if (image.complete) {
+      setImageStatus({
+        src: currentSlide.image,
+        loaded: image.naturalWidth > 0,
+        error: image.naturalWidth === 0,
+      });
+    }
   }, [currentSlide]);
 
   useEffect(() => {
@@ -223,6 +320,32 @@ const HeroCarousel: React.FC = () => {
     }
   }, [nextSlide, prevSlide]);
 
+  const hasPreloadedNext = useRef(false);
+
+  useEffect(() => {
+    if (!imageLoaded || hasPreloadedNext.current || slides.length < 2) return;
+    hasPreloadedNext.current = true;
+
+    const nextIdx = (currentSlideIndex + 1) % slides.length;
+    const nextSrc = slides[nextIdx]?.image;
+    if (!nextSrc) return;
+
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = nextSrc;
+    const srcset = getResponsiveImageSrcSet(nextSrc, [640, 960, 1280, 1920, 3840]);
+    if (srcset) {
+      link.setAttribute('imagesrcset', srcset);
+      link.setAttribute('imagesizes', '100vw');
+    }
+    document.head.appendChild(link);
+
+    return () => {
+      if (document.head.contains(link)) document.head.removeChild(link);
+    };
+  }, [imageLoaded, slides, currentSlideIndex]);
+
   const handleBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
       setIsFocusPaused(false);
@@ -242,6 +365,7 @@ const HeroCarousel: React.FC = () => {
   );
 
   const handleImageLoad = () => {
+    if (!currentSlide) return;
     setImageStatus({
       src: currentSlide.image,
       loaded: true,
@@ -250,6 +374,7 @@ const HeroCarousel: React.FC = () => {
   };
 
   const handleImageError = () => {
+    if (!currentSlide) return;
     setImageStatus({
       src: currentSlide.image,
       loaded: false,

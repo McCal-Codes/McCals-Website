@@ -56,6 +56,8 @@ If you want, I can add a CI job to automatically publish the Worker and set the 
 
 Use this flow to serve manifest JSON over CDN without running the API.
 
+For the end-to-end source, generator, sync, CDN, and webhook map, see [Portfolio Manifest Pipeline](workflows/portfolio-manifest-pipeline.md).
+
 ## How it works
 
 - GitHub Action `Publish Manifests to CDN` builds manifests and pushes them to branch `manifests-cdn` plus a tag (e.g., `manifests-202511241230`).
