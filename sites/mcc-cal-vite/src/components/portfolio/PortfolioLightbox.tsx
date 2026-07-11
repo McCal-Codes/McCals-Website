@@ -2,10 +2,12 @@ import {
   useCallback,
   useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
   type FC,
+  type PointerEvent as ReactPointerEvent,
 } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink, RotateCcw, X, ZoomIn, ZoomOut } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -25,16 +27,44 @@ interface PortfolioLightboxProps {
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 2.5;
 const ZOOM_STEP = 0.5;
+const SWIPE_THRESHOLD_PX = 48;
+/* Must stay a subset of vercel.json images.sizes — the optimizer 400s any other width. */
+const LIGHTBOX_SRCSET_WIDTHS = [640, 1080, 1440, 1920];
+const LIGHTBOX_SIZES = '(max-width: 720px) calc(100vw - 28px), 1100px';
+
+interface ImageStatus {
+  filename: string;
+  loaded: boolean;
+  error: boolean;
+}
+
+interface DragState {
+  pointerId: number;
+  pointerType: string;
+  startX: number;
+  startY: number;
+  scrollLeft: number;
+  scrollTop: number;
+}
 
 const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const activeThumbRef = useRef<HTMLButtonElement | null>(null);
+  const dragRef = useRef<DragState | null>(null);
+  const prevZoomRef = useRef(MIN_ZOOM);
+  const zoomFocalRef = useRef<{ x: number; y: number } | null>(null);
   const titleId = useId();
   const descriptionId = useId();
   const [activeIndex, setActiveIndex] = useState(0);
   const [zoom, setZoom] = useState(MIN_ZOOM);
-  const [loadedImage, setLoadedImage] = useState({ filename: '', loaded: false });
+  const [isDragging, setIsDragging] = useState(false);
+  const [retryKey, setRetryKey] = useState(0);
+  const [imageStatus, setImageStatus] = useState<ImageStatus>({
+    filename: '',
+    loaded: false,
+    error: false,
+  });
   const isOpen = group !== null;
   const imageCount = group?.images.length ?? 0;
   const hasMultiple = imageCount > 1;
@@ -43,7 +73,8 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     if (!group) return null;
     return group.images[activeIndex] ?? group.coverImage;
   }, [activeIndex, group]);
-  const imageLoaded = loadedImage.loaded && loadedImage.filename === activeImage?.filename;
+  const imageLoaded = imageStatus.loaded && imageStatus.filename === activeImage?.filename;
+  const imageFailed = imageStatus.error && imageStatus.filename === activeImage?.filename;
 
   // Lock scroll and hide nav while open.
   useEffect(() => {
@@ -90,6 +121,31 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   const resetZoom = useCallback(() => {
     setZoom(MIN_ZOOM);
   }, []);
+
+  const retryImage = useCallback(() => {
+    setImageStatus({ filename: '', loaded: false, error: false });
+    setRetryKey((key) => key + 1);
+  }, []);
+
+  // Keep the point the viewer was looking at (or the double-clicked point)
+  // stable when the zoom level changes, instead of snapping to the top.
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current;
+    const previousZoom = prevZoomRef.current;
+    prevZoomRef.current = zoom;
+    const focal = zoomFocalRef.current;
+    zoomFocalRef.current = null;
+
+    if (!scroller || zoom === previousZoom || zoom <= MIN_ZOOM) return;
+
+    const rect = scroller.getBoundingClientRect();
+    const focalX = focal ? focal.x - rect.left : scroller.clientWidth / 2;
+    const focalY = focal ? focal.y - rect.top : scroller.clientHeight / 2;
+    const factor = zoom / previousZoom;
+
+    scroller.scrollLeft = (scroller.scrollLeft + focalX) * factor - focalX;
+    scroller.scrollTop = (scroller.scrollTop + focalY) * factor - focalY;
+  }, [zoom]);
 
   // Keyboard: Escape, arrows, Home/End, and +/- zoom.
   const handleKeyDown = useCallback(
@@ -159,6 +215,9 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     });
   }, [activeIndex]);
 
+  // Warm the browser cache for the neighboring photos using the exact
+  // srcset/sizes the visible <img> uses, so the candidate the browser
+  // preloads is the one it will actually render on next/previous.
   useEffect(() => {
     if (!group || !activeImage || imageCount < 2) return;
 
@@ -170,9 +229,81 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
     neighborImages.forEach((image) => {
       const preload = new Image();
       preload.decoding = 'async';
+      const srcset = getResponsiveImageSrcSet(image.url, LIGHTBOX_SRCSET_WIDTHS);
+      if (srcset) {
+        preload.srcset = srcset;
+        preload.sizes = LIGHTBOX_SIZES;
+      }
       preload.src = getOptimizedImageUrl(image.url, { width: 1920 });
     });
   }, [activeImage, activeIndex, group, imageCount]);
+
+  // Pointer interactions on the stage: mouse drag pans while zoomed;
+  // a horizontal touch swipe (while not zoomed) navigates prev/next.
+  const handlePointerDown = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      const scroller = scrollerRef.current;
+      if (!scroller) return;
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+      dragRef.current = {
+        pointerId: event.pointerId,
+        pointerType: event.pointerType,
+        startX: event.clientX,
+        startY: event.clientY,
+        scrollLeft: scroller.scrollLeft,
+        scrollTop: scroller.scrollTop,
+      };
+
+      if (zoom > MIN_ZOOM && event.pointerType === 'mouse') {
+        scroller.setPointerCapture(event.pointerId);
+        setIsDragging(true);
+      }
+    },
+    [zoom],
+  );
+
+  const handlePointerMove = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      const drag = dragRef.current;
+      const scroller = scrollerRef.current;
+      if (!drag || !scroller || drag.pointerId !== event.pointerId) return;
+
+      if (zoom > MIN_ZOOM && drag.pointerType === 'mouse') {
+        scroller.scrollLeft = drag.scrollLeft - (event.clientX - drag.startX);
+        scroller.scrollTop = drag.scrollTop - (event.clientY - drag.startY);
+      }
+    },
+    [zoom],
+  );
+
+  const handlePointerEnd = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      const drag = dragRef.current;
+      if (!drag || drag.pointerId !== event.pointerId) return;
+      dragRef.current = null;
+      setIsDragging(false);
+
+      const deltaX = event.clientX - drag.startX;
+      const deltaY = event.clientY - drag.startY;
+      const isSwipe =
+        zoom === MIN_ZOOM &&
+        drag.pointerType !== 'mouse' &&
+        hasMultiple &&
+        event.type !== 'pointercancel' &&
+        Math.abs(deltaX) > SWIPE_THRESHOLD_PX &&
+        Math.abs(deltaX) > Math.abs(deltaY) * 1.5;
+
+      if (isSwipe) {
+        if (deltaX < 0) {
+          showNext();
+        } else {
+          showPrevious();
+        }
+      }
+    },
+    [hasMultiple, showNext, showPrevious, zoom],
+  );
 
   if (!group || !activeImage) return null;
 
@@ -194,7 +325,11 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   );
   const zoomPercent = Math.round(zoom * 100);
   const activeImageSrc = getOptimizedImageUrl(activeImage.url, { width: 1920 });
-  const activeImageSrcSet = getResponsiveImageSrcSet(activeImage.url, [640, 1080, 1440, 1920]);
+  const activeImageSrcSet = getResponsiveImageSrcSet(activeImage.url, LIGHTBOX_SRCSET_WIDTHS);
+  /* While zoomed, widen `sizes` so the browser upgrades to a sharper candidate. */
+  const activeImageSizes = zoom > MIN_ZOOM ? `${Math.round(1100 * zoom)}px` : LIGHTBOX_SIZES;
+  const zoomOutDisabled = zoom <= MIN_ZOOM;
+  const zoomInDisabled = zoom >= MAX_ZOOM;
 
   return (
     <div
@@ -220,8 +355,10 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
               type="button"
               className={portfolioStyles.pfLightboxIconBtn}
               aria-label="Zoom out"
-              onClick={zoomOut}
-              disabled={zoom <= MIN_ZOOM}
+              aria-disabled={zoomOutDisabled}
+              onClick={() => {
+                if (!zoomOutDisabled) zoomOut();
+              }}
             >
               <ZoomOut aria-hidden="true" size={18} />
             </button>
@@ -232,8 +369,10 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
               type="button"
               className={portfolioStyles.pfLightboxIconBtn}
               aria-label="Zoom in"
-              onClick={zoomIn}
-              disabled={zoom >= MAX_ZOOM}
+              aria-disabled={zoomInDisabled}
+              onClick={() => {
+                if (!zoomInDisabled) zoomIn();
+              }}
             >
               <ZoomIn aria-hidden="true" size={18} />
             </button>
@@ -241,8 +380,10 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
               type="button"
               className={portfolioStyles.pfLightboxIconBtn}
               aria-label="Reset zoom"
-              onClick={resetZoom}
-              disabled={zoom === MIN_ZOOM}
+              aria-disabled={zoomOutDisabled}
+              onClick={() => {
+                if (!zoomOutDisabled) resetZoom();
+              }}
             >
               <RotateCcw aria-hidden="true" size={17} />
             </button>
@@ -269,42 +410,70 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
             </button>
           )}
 
-          <div className={portfolioStyles.pfLightboxImageScroller} data-zoomed={zoom > MIN_ZOOM ? 'true' : 'false'}>
+          <div
+            ref={scrollerRef}
+            className={portfolioStyles.pfLightboxImageScroller}
+            data-zoomed={zoom > MIN_ZOOM ? 'true' : 'false'}
+            data-dragging={isDragging ? 'true' : 'false'}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerEnd}
+            onPointerCancel={handlePointerEnd}
+          >
             <div
-              key={activeImage.filename}
+              key={`${activeImage.filename}#${retryKey}`}
               className={portfolioStyles.pfLightboxImageFrame}
               data-loaded={imageLoaded ? 'true' : 'false'}
             >
-              {!imageLoaded && (
+              {!imageLoaded && !imageFailed && (
                 <div className={portfolioStyles.pfLightboxImageLoading} role="status" aria-live="polite">
                   <span className={portfolioStyles.pfSpinner} aria-hidden="true" />
                   <span>Loading photo</span>
                 </div>
               )}
-              <ProtectedPortfolioImage
-                className={portfolioStyles.pfLightboxProtectedImage}
-                onDoubleClick={() => {
-                  setZoom((currentZoom) => (currentZoom === MIN_ZOOM ? 2 : MIN_ZOOM));
-                }}
-              >
-                <img
-                  ref={imageRef}
-                  src={activeImageSrc}
-                  srcSet={activeImageSrcSet}
-                  sizes="(max-width: 720px) calc(100vw - 28px), 1100px"
-                  alt={activeImage.alt ?? `${group.title}, photo ${activeIndex + 1}`}
-                  className={portfolioStyles.pfLightboxImg}
-                  loading="eager"
-                  decoding="async"
-                  style={
-                    zoom > MIN_ZOOM
-                      ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
-                      : undefined
-                  }
-                  onLoad={() => setLoadedImage({ filename: activeImage.filename, loaded: true })}
-                  draggable={false}
-                />
-              </ProtectedPortfolioImage>
+              {imageFailed && (
+                <div className={portfolioStyles.pfLightboxImageError} role="alert">
+                  <span>This photo could not be loaded.</span>
+                  <button
+                    type="button"
+                    className={portfolioStyles.pfLightboxRetryBtn}
+                    onClick={retryImage}
+                  >
+                    Try again
+                  </button>
+                </div>
+              )}
+              {!imageFailed && (
+                <ProtectedPortfolioImage
+                  className={portfolioStyles.pfLightboxProtectedImage}
+                  onDoubleClick={(event) => {
+                    zoomFocalRef.current = { x: event.clientX, y: event.clientY };
+                    setZoom((currentZoom) => (currentZoom === MIN_ZOOM ? 2 : MIN_ZOOM));
+                  }}
+                >
+                  <img
+                    src={activeImageSrc}
+                    srcSet={activeImageSrcSet}
+                    sizes={activeImageSizes}
+                    alt={activeImage.alt ?? `${group.title}, photo ${activeIndex + 1}`}
+                    className={portfolioStyles.pfLightboxImg}
+                    loading="eager"
+                    decoding="async"
+                    style={
+                      zoom > MIN_ZOOM
+                        ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
+                        : undefined
+                    }
+                    onLoad={() =>
+                      setImageStatus({ filename: activeImage.filename, loaded: true, error: false })
+                    }
+                    onError={() =>
+                      setImageStatus({ filename: activeImage.filename, loaded: false, error: true })
+                    }
+                    draggable={false}
+                  />
+                </ProtectedPortfolioImage>
+              )}
             </div>
           </div>
 
@@ -321,7 +490,7 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
         </div>
 
         {hasMultiple && (
-          <div className={portfolioStyles.pfLightboxThumbs} aria-label="Choose photo">
+          <div className={portfolioStyles.pfLightboxThumbs} role="group" aria-label="Choose photo">
             {group.images.map((img, index) => (
               <button
                 key={img.filename}

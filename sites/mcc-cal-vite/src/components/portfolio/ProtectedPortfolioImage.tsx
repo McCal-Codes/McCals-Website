@@ -1,11 +1,11 @@
-import type { FC, ReactNode } from 'react';
+import type { FC, MouseEvent, ReactNode } from 'react';
 import portfolioStyles from './portfolio.module.css';
 
 interface ProtectedPortfolioImageProps {
   children: ReactNode;
   className?: string;
   overlayClassName?: string;
-  onDoubleClick?: () => void;
+  onDoubleClick?: (event: MouseEvent<HTMLSpanElement>) => void;
 }
 
 const ProtectedPortfolioImage: FC<ProtectedPortfolioImageProps> = ({

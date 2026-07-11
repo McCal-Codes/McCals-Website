@@ -90,6 +90,17 @@ fresh GitHub clone.
 let git/GitHub be the sync mechanism. A local `npm run build` succeeding on the Drive copy
 proves nothing about completeness.
 
+**Epilogue (2026-07-11):** The first "local" replacement clone went to `~/Documents` — which
+turned out to be iCloud-synced too (macOS Desktop & Documents sync was on), and with the disk
+at 95% full, Optimize Mac Storage began evicting file contents (`dataless` flag on `.git`
+files). Symptoms escalated from slow test runs (1,400s wall-clock) to `git commit` hanging
+indefinitely on a blocked filesystem read — with `git status`/`log` still working, which made
+it look like anything but the disk. Diagnosis that worked: `GIT_TRACE_PERFORMANCE=1` showed
+the stall after "refresh index", then `ls -laO .git/` revealed `dataless` flags and
+`brctl status` confirmed "Desktop & Documents: current=YES". On macOS, `~/Desktop` and
+`~/Documents` are NOT plain local paths; use something like `~/dev` for working clones, and
+watch disk pressure — eviction aggressiveness scales with it.
+
 ## 6. Vercel Production Branch was the feature branch, not main
 
 **Symptom:** While debugging a "preview," its deployment record showed `target: production`
