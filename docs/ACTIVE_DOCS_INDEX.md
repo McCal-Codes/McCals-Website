@@ -13,6 +13,7 @@ Use these docs first, and treat `docs/archive/` as historical reference only.
 ## Public Site (`sites/mcc-cal-vite`)
 
 - `docs/workflows/content-publishing.md` - authored vs generated content pipeline
+- `docs/workflows/local-first-website-workflow.md` - local-first branches, commits, verification, and test server workflow
 - `docs/workflows/portfolio-image-import.md` - **upload a new shoot** via add-shoot.js (R2 + Supabase, no git needed)
 - `docs/workflows/portfolio-manifest-pipeline.md` - legacy git-based portfolio pipeline (pre-2026)
 - `docs/standards/ui-patterns.md` - active UI implementation patterns

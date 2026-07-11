@@ -16,6 +16,7 @@ Welcome to the comprehensive documentation for McCal's Website project. This doc
 Step-by-step guides for content creation and management:
 - `workflows/portfolio-image-import.md` - How to add new portfolio images
 - `workflows/portfolio-manifest-pipeline.md` - How portfolio sources become site manifests, CDN publishes, and webhook refreshes
+- `workflows/local-first-website-workflow.md` - Local-first branches, commits, verification, and test server workflow
 - `journalism-import-workflow.md` - Process for importing journalism content
 - `event-portfolio-ingest.md` - Event portfolio content ingestion
 
@@ -75,6 +76,7 @@ Archived documentation and completed project records:
 ### Common Tasks
 - **Adding new photos**: `workflows/portfolio-image-import.md`
 - **Understanding manifests**: `workflows/portfolio-manifest-pipeline.md`
+- **Local-first site work**: `workflows/local-first-website-workflow.md`
 - **Planning the internal admin app**: `runbooks/vercel-admin-console.md`
 - **Deploying changes**: `deployment/DEPLOY-CHEATSHEET.md`
 - **File naming**: `standards/date-naming.md`
