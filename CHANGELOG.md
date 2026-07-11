@@ -40,6 +40,12 @@
 
 ## 2026-07-11
 
+### Supabase Schema Tracking & Image Width Guard
+
+- Mirrored all four live-database migrations into `supabase/migrations/` (initial schema, RLS policies, portfolio_images, hero_slides) so the repo is the source of truth; removed the stale, never-applied `20260625000000_portfolio_images.sql` duplicate.
+- Added `20260711000000_tighten_public_form_table_policies.sql` dropping the over-permissive anon policies on `contact_submissions` and `quote_requests` (anon SELECT `USING (true)` exposed submitted PII to anyone with the public anon key; anon INSERT bypassed the API's spam protections). Not yet applied to the live database.
+- Added `imageWidths.static.test.ts`: every image width requested from Vercel's Image Optimization API must be in `vercel.json`'s `images.sizes` allowlist, preventing the hero-slideshow "Image unavailable" bug class.
+
 ### Portfolio Lightbox Fixes & Polish
 
 - Added an error state with a retry button when a lightbox photo fails to load (previously the loading spinner spun indefinitely).
