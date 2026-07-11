@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-07-11
+
+### Portfolio Lightbox Fixes & Polish
+
+- Added an error state with a retry button when a lightbox photo fails to load (previously the loading spinner spun indefinitely).
+- Neighbor-photo preloading now uses the same `srcset`/`sizes` as the visible image so the browser cache hits on next/previous.
+- Zooming keeps the viewed point stable (was snapping to the top of the image); double-click zooms toward the clicked point.
+- Added mouse drag-to-pan while zoomed and horizontal touch-swipe navigation when not zoomed.
+- Sharper image while zoomed: `sizes` scales with the zoom factor so a larger srcset candidate is fetched.
+- Zoom buttons use `aria-disabled` instead of `disabled` at their bounds so keyboard focus stays inside the dialog.
+- `role="group"` on the thumbnail strip, `96dvh` dialog height on mobile, removed a dead ref.
+- Added `PortfolioLightbox` unit tests (error/retry, zoom bounds, keyboard navigation, swipe, Escape).
+
 ## 2026-06-14
 
 ### Sentry Observability & Repository Hygiene
