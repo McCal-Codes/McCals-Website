@@ -65,6 +65,14 @@ describe('PortfolioLightbox', () => {
     expect(getStageImage()).toBeInTheDocument();
   });
 
+  it('fits the active image without forcing both dimensions and changing its aspect ratio', () => {
+    render(<PortfolioLightbox group={group} onClose={() => {}} />);
+
+    const image = getStageImage();
+
+    expect(image).toHaveStyle({ width: '100%', height: 'auto' });
+  });
+
   it('keeps zoom buttons focusable at their bounds via aria-disabled instead of disabled', () => {
     render(<PortfolioLightbox group={group} onClose={() => {}} />);
 

@@ -6,6 +6,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
   type FC,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
@@ -60,6 +61,8 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   const [zoom, setZoom] = useState(MIN_ZOOM);
   const [isDragging, setIsDragging] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
+  const [imageAspectRatio, setImageAspectRatio] = useState<number | null>(null);
+  const [stageAspectRatio, setStageAspectRatio] = useState<number | null>(null);
   const [imageStatus, setImageStatus] = useState<ImageStatus>({
     filename: '',
     loaded: false,
@@ -75,6 +78,8 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   }, [activeIndex, group]);
   const imageLoaded = imageStatus.loaded && imageStatus.filename === activeImage?.filename;
   const imageFailed = imageStatus.error && imageStatus.filename === activeImage?.filename;
+  const shouldFitByHeight =
+    imageAspectRatio !== null && stageAspectRatio !== null && imageAspectRatio < stageAspectRatio;
 
   // Lock scroll and hide nav while open.
   useEffect(() => {
@@ -124,8 +129,39 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
 
   const retryImage = useCallback(() => {
     setImageStatus({ filename: '', loaded: false, error: false });
+    setImageAspectRatio(null);
     setRetryKey((key) => key + 1);
   }, []);
+
+  useEffect(() => {
+    setImageAspectRatio(null);
+  }, [activeImage?.filename]);
+
+  useLayoutEffect(() => {
+    if (!isOpen) return undefined;
+
+    const scroller = scrollerRef.current;
+    if (!scroller) return undefined;
+
+    const updateStageAspectRatio = () => {
+      const rect = scroller.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        setStageAspectRatio(rect.width / rect.height);
+      }
+    };
+
+    updateStageAspectRatio();
+
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', updateStageAspectRatio);
+      return () => window.removeEventListener('resize', updateStageAspectRatio);
+    }
+
+    const observer = new ResizeObserver(updateStageAspectRatio);
+    observer.observe(scroller);
+
+    return () => observer.disconnect();
+  }, [isOpen]);
 
   // Keep the point the viewer was looking at (or the double-clicked point)
   // stable when the zoom level changes, instead of snapping to the top.
@@ -328,6 +364,19 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
   const activeImageSrcSet = getResponsiveImageSrcSet(activeImage.url, LIGHTBOX_SRCSET_WIDTHS);
   /* While zoomed, widen `sizes` so the browser upgrades to a sharper candidate. */
   const activeImageSizes = zoom > MIN_ZOOM ? `${Math.round(1100 * zoom)}px` : LIGHTBOX_SIZES;
+  const activeImageStyle: CSSProperties = shouldFitByHeight
+    ? {
+        height: zoom > MIN_ZOOM ? `${zoom * 100}%` : '100%',
+        width: 'auto',
+        maxWidth: zoom > MIN_ZOOM ? 'none' : '100%',
+        maxHeight: zoom > MIN_ZOOM ? 'none' : '100%',
+      }
+    : {
+        width: zoom > MIN_ZOOM ? `${zoom * 100}%` : '100%',
+        height: 'auto',
+        maxWidth: zoom > MIN_ZOOM ? 'none' : '100%',
+        maxHeight: zoom > MIN_ZOOM ? 'none' : '100%',
+      };
   const zoomOutDisabled = zoom <= MIN_ZOOM;
   const zoomInDisabled = zoom >= MAX_ZOOM;
 
@@ -459,14 +508,14 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({ group, onClose }) => {
                     className={portfolioStyles.pfLightboxImg}
                     loading="eager"
                     decoding="async"
-                    style={
-                      zoom > MIN_ZOOM
-                        ? { width: `${zoom * 100}%`, maxWidth: 'none', maxHeight: 'none' }
-                        : undefined
-                    }
-                    onLoad={() =>
-                      setImageStatus({ filename: activeImage.filename, loaded: true, error: false })
-                    }
+                    style={activeImageStyle}
+                    onLoad={(event) => {
+                      const { naturalWidth, naturalHeight } = event.currentTarget;
+                      if (naturalWidth > 0 && naturalHeight > 0) {
+                        setImageAspectRatio(naturalWidth / naturalHeight);
+                      }
+                      setImageStatus({ filename: activeImage.filename, loaded: true, error: false });
+                    }}
                     onError={() =>
                       setImageStatus({ filename: activeImage.filename, loaded: false, error: true })
                     }
