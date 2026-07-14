@@ -13,6 +13,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = resolve(__dirname, './public-vite');
 const SKIP_DIR_NAME = 'one-nation-divided';
 const PUBLIC_COPY_TIMEOUT_MS = Number(process.env.PUBLIC_COPY_TIMEOUT_MS ?? 5_000);
+const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
 const vercelEnv = process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development';
 const resolvedSiteUrl =
   vercelEnv === 'production'
@@ -90,6 +91,10 @@ function copyPublicSkipDeadFolder(): Plugin {
   };
 }
 
+function encodeUrlPath(urlPath: string): string {
+  return urlPath.split('/').map(encodeURIComponent).join('/');
+}
+
 // Plugin to serve portfolio images from src/images during dev
 const servePortfolioImages = () => ({
   name: 'serve-portfolio-images',
@@ -131,7 +136,12 @@ const servePortfolioImages = () => ({
           res.setHeader('Cache-Control', 'public, max-age=3600');
           fs.createReadStream(filePath).pipe(res);
         } else {
-          next();
+          const portfolioPath = decodedUrl.replace(/^\/+/, '');
+          const cdnUrl = `${REPO_CDN_BASE}/src/images/Portfolios/${encodeUrlPath(portfolioPath)}`;
+          res.statusCode = 302;
+          res.setHeader('Location', cdnUrl);
+          res.setHeader('Cache-Control', 'no-store');
+          res.end();
         }
       } catch {
         next();
