@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-07-14
+
+### Portfolio Lightbox Local Image Loading
+
+- Fixed local Vite development for sparse checkouts by redirecting missing portfolio image files to the repo CDN instead of returning HTML to the lightbox.
+- Preserved natural image aspect ratios in the lightbox by fitting loaded images to the available stage by width or height.
+
 ## 2026-07-11
 
 ### Portfolio Lightbox Fixes & Polish
