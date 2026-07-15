@@ -180,6 +180,11 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
 }
 
 const ALL = 'All';
+
+interface ActiveLightbox {
+  group: PortfolioGroup;
+  initialIndex: number;
+}
 const FILTER_ORDER = ['Concert', 'Events', 'Journalism'];
 
 function shortCategory(cat: string) {
@@ -321,7 +326,6 @@ function FeaturedStoryCard({
         <p className={portfolioStyles.pfFeaturedStoryMeta}>
           <span>{label}</span>
           {group.dateDisplay && <span>{group.dateDisplay}</span>}
-          <span>{group.images.length} photos</span>
         </p>
         <h3 className={portfolioStyles.pfFeaturedStoryTitle}>{group.title}</h3>
         {description && (
@@ -347,7 +351,7 @@ function FeaturedStoryCard({
 export default function FeaturedPortfolio() {
   const { data, status, error } = useManifest<FeaturedManifest>('featured');
   const [activeFilter, setActiveFilter] = useState(ALL);
-  const [activeGroup, setActiveGroup] = useState<PortfolioGroup | null>(null);
+  const [activeLightbox, setActiveLightbox] = useState<ActiveLightbox | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
 
   const groups = useMemo(() => {
@@ -393,12 +397,16 @@ export default function FeaturedPortfolio() {
 
   const handleOpen = useCallback((group: PortfolioGroup) => {
     openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    setActiveGroup(group);
+    setActiveLightbox({ group, initialIndex: 0 });
   }, []);
 
   const handleClose = useCallback(() => {
-    setActiveGroup(null);
+    setActiveLightbox(null);
     window.setTimeout(() => openerRef.current?.focus(), 0);
+  }, []);
+
+  const handleLightboxGroupChange = useCallback((group: PortfolioGroup, initialIndex: number) => {
+    setActiveLightbox({ group, initialIndex });
   }, []);
 
   return (
@@ -475,6 +483,7 @@ export default function FeaturedPortfolio() {
               groups={gridGroups}
               initialCount={9}
               batchSize={6}
+              wideInitialCount={12}
               gridClassName={portfolioStyles.pfFeaturedGrid}
               cardImageSizes="(max-width: 600px) calc(100vw - 40px), (max-width: 980px) 50vw, 31vw"
               eagerCount={3}
@@ -492,11 +501,14 @@ export default function FeaturedPortfolio() {
         </>
       )}
 
-      {activeGroup && (
+      {activeLightbox && (
         <Suspense fallback={null}>
           <PortfolioLightbox
-            key={activeGroup.id}
-            group={activeGroup}
+            key={`${activeLightbox.group.id}-${activeLightbox.initialIndex}`}
+            group={activeLightbox.group}
+            collection={filtered}
+            initialIndex={activeLightbox.initialIndex}
+            onChangeGroup={handleLightboxGroupChange}
             onClose={handleClose}
           />
         </Suspense>

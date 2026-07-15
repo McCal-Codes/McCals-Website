@@ -80,4 +80,28 @@ describe('adaptNature', () => {
     });
     expect(groups[4]?.dateDisplay).toBeUndefined();
   });
+
+  it('maps webuse nature images to the matching prebuilt thumbnail names', () => {
+    const groups = adaptNature({
+      version: '1',
+      generated: '2026-05-14T00:00:00.000Z',
+      totalCollections: 1,
+      collections: [
+        {
+          collectionName: 'Downtown Pittsburgh',
+          folderPath: 'Landscapes/Downtown Pittsburgh',
+          totalImages: 1,
+          images: ['200805_Riverfront_Golden_Hour_DSC02724_1_webuse.webp'],
+          tags: ['landscape'],
+        },
+      ],
+    });
+
+    expect(groups[0]?.coverImage.url).toContain(
+      '/Nature/thumbs/Landscapes/Downtown Pittsburgh/200805_Riverfront_Golden_Hour_DSC02724_1.webp',
+    );
+    expect(groups[0]?.images[0]?.url).toContain(
+      '/Nature/Landscapes/Downtown Pittsburgh/200805_Riverfront_Golden_Hour_DSC02724_1_webuse.webp',
+    );
+  });
 });

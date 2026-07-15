@@ -4,10 +4,19 @@
    ============================================================ */
 
 /* --- Layout --- */
+:global(.site-container):has(.pfRoot) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+}
+
 .pfRoot {
-  max-width: 1600px;
+  box-sizing: border-box;
+  width: min(calc(100% - clamp(32px, 3.5vw, 96px)), 1840px);
+  max-width: none;
   margin: 60px auto;
-  padding: 40px 20px;
+  padding: clamp(32px, 4vw, 48px) 0;
   text-align: center;
   position: relative;
 }
@@ -172,18 +181,18 @@
 }
 
 .pfFeaturedRoot {
-  max-width: 1440px;
+  max-width: 1720px;
   margin-top: 44px;
   padding-top: 30px;
 }
 
 .pfFeaturedHeader {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.72fr);
-  gap: 36px;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.58fr);
+  gap: clamp(24px, 4vw, 52px);
   align-items: end;
   margin: 0 auto 34px;
-  max-width: 1160px;
+  max-width: 1280px;
   text-align: left;
 }
 
@@ -218,19 +227,19 @@
 .pfFeaturedStats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .pfFeaturedStat {
   display: flex;
   min-width: 0;
-  min-height: 104px;
+  min-height: 74px;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 16px;
+  padding: 12px;
   border: 1px solid rgba(255,255,255,0.11);
   border-radius: 14px;
-  background: rgba(255,255,255,0.035);
+  background: rgba(255,255,255,0.025);
   color: var(--fg);
   text-decoration: none;
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
@@ -245,7 +254,7 @@
 }
 
 .pfFeaturedStatValue {
-  font-size: 1.45rem;
+  font-size: 1.28rem;
   font-weight: 800;
   line-height: 1;
 }
@@ -265,17 +274,14 @@
 }
 
 .pfFeaturedStatMeta {
-  margin-top: 4px;
-  color: var(--fg);
-  font-size: 0.78rem;
-  opacity: 0.62;
+  display: none;
 }
 
 .pfFeaturedEditorial {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.86fr);
-  gap: 18px;
-  max-width: 1160px;
+  grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.72fr);
+  gap: clamp(16px, 2vw, 24px);
+  max-width: 1280px;
   margin: 0 auto 30px;
   text-align: left;
 }
@@ -299,11 +305,11 @@
 }
 
 .pfFeaturedStoryLead {
-  min-height: 620px;
+  min-height: clamp(460px, 40vw, 560px);
 }
 
 .pfFeaturedStorySupport {
-  min-height: 301px;
+  min-height: clamp(248px, 20vw, 271px);
 }
 
 .pfFeaturedStoryImageButton {
@@ -328,8 +334,8 @@
   z-index: 2;
   border-radius: inherit;
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.3) 42%, rgba(0,0,0,0.88) 100%),
-    linear-gradient(90deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.03) 58%);
+    linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.22) 46%, rgba(0,0,0,0.84) 100%),
+    linear-gradient(90deg, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.02) 62%);
   pointer-events: none;
 }
 
@@ -370,14 +376,15 @@
   flex-direction: column;
   justify-content: flex-end;
   align-self: end;
-  gap: 10px;
-  max-width: 680px;
-  padding: 26px;
+  gap: 9px;
+  max-width: min(680px, 84%);
+  padding: clamp(22px, 3vw, 34px);
   color: #fff;
   pointer-events: none;
 }
 
 .pfFeaturedStorySupport .pfFeaturedStoryCopy {
+  max-width: 90%;
   padding: 20px;
 }
 
@@ -401,13 +408,13 @@
 .pfFeaturedStoryTitle {
   margin: 0;
   color: #fff;
-  font-size: 2rem;
+  font-size: clamp(2rem, 3.2vw, 3rem);
   font-weight: 800;
   line-height: 1.08;
 }
 
 .pfFeaturedStorySupport .pfFeaturedStoryTitle {
-  font-size: 1.22rem;
+  font-size: clamp(1.14rem, 1.7vw, 1.36rem);
   line-height: 1.16;
 }
 
@@ -417,11 +424,15 @@
   color: rgba(255,255,255,0.84);
   font-size: 0.98rem;
   line-height: 1.55;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .pfFeaturedStorySupport .pfFeaturedStoryDescription {
-  display: -webkit-box;
-  overflow: hidden;
+  display: none;
   font-size: 0.86rem;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -432,7 +443,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 2px;
   pointer-events: auto;
 }
 
@@ -475,9 +486,9 @@
 }
 
 .pfFeaturedGrid {
-  max-width: 1160px;
+  max-width: 1560px;
   margin-inline: auto;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(320px, 22vw, 420px)), 1fr));
 }
 
 .pfFeaturedCategoryNote {
@@ -516,12 +527,16 @@
   }
 
   .pfFeaturedStoryLead {
-    min-height: 560px;
+    min-height: min(68vh, 660px);
   }
 
   .pfFeaturedSupportStack {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: none;
+  }
+
+  .pfFeaturedStorySupport {
+    min-height: 420px;
   }
 
   .pfFeaturedGrid {
@@ -571,16 +586,17 @@
   }
 
   .pfFeaturedStatMeta {
-    font-size: 0.66rem;
+    display: none;
   }
 
   .pfFeaturedStoryLead,
   .pfFeaturedStorySupport {
-    min-height: 430px;
+    min-height: 460px;
   }
 
   .pfFeaturedStoryCopy,
   .pfFeaturedStorySupport .pfFeaturedStoryCopy {
+    max-width: 100%;
     padding: 18px;
   }
 
@@ -592,6 +608,8 @@
 
   .pfFeaturedStoryDescription {
     font-size: 0.9rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .pfFeaturedStoryActions {
@@ -599,9 +617,12 @@
     flex-direction: column;
   }
 
-  .pfFeaturedStoryButton,
-  .pfFeaturedStoryLink {
+  .pfFeaturedStoryButton {
     width: 100%;
+  }
+
+  .pfFeaturedStoryLink {
+    display: none;
   }
 }
 
@@ -904,8 +925,8 @@
 /* --- Portfolio grid --- */
 .pfGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(340px, 24vw, 460px)), 1fr));
+  gap: clamp(20px, 1.8vw, 32px);
   align-items: start;
   text-align: left;
   margin-bottom: 32px;
@@ -922,6 +943,18 @@
 @media (max-width: 600px) {
   .pfGrid {
     grid-template-columns: 1fr;
+  }
+
+  .pfCardOverlay {
+    padding: 14px;
+  }
+
+  .pfCardOverlay .pfCaptionRailDescription {
+    display: none;
+  }
+
+  .pfCardOverlay .pfCardTags {
+    display: none;
   }
 }
 
@@ -967,13 +1000,13 @@
 }
 
 .pfPortraitGrid {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(300px, 20vw, 380px)), 1fr));
+  gap: clamp(20px, 1.8vw, 30px);
 }
 
 .pfConcertGrid {
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(320px, 21vw, 410px)), 1fr));
+  gap: clamp(20px, 1.8vw, 30px);
 }
 
 .pfConcertGrid .pfCardImageFrame,
@@ -999,8 +1032,8 @@
 }
 
 .pfNatureGrid {
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(340px, 24vw, 460px)), 1fr));
+  gap: clamp(22px, 2vw, 34px);
 }
 
 .pfNatureGrid .pfCardImageFrame,
@@ -1015,6 +1048,7 @@
 
   .pfConcertGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 
   .pfPortraitGrid {
@@ -1085,6 +1119,13 @@
   display: block;
   border-radius: inherit;
   background: transparent;
+}
+
+.pfFeaturedStory .pfFeaturedStoryProtectedImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: inherit;
 }
 
 .pfBlurImageFrame {
@@ -1205,8 +1246,8 @@
   color: inherit;
   opacity: 0.92;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1586,7 +1627,7 @@
 }
 
 .pfLightboxImageScroller[data-zoomed='false'] {
-  touch-action: pan-y;
+  touch-action: auto;
 }
 
 .pfLightboxImageScroller[data-zoomed='true'] {
@@ -1609,6 +1650,7 @@
   place-items: center;
   overflow: hidden;
   border-radius: 14px;
+  touch-action: none;
   background:
     linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
     rgba(9, 9, 10, 0.84);
@@ -1625,12 +1667,48 @@
   overflow: visible;
 }
 
+.pfLightboxImageFrame[data-loaded='true'][data-fit='height'] {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+}
+
+.pfLightboxImageFrame[data-loaded='true'][data-fit='width'] {
+  width: min(100%, 1100px);
+  height: auto;
+  max-height: 100%;
+}
+
 .pfLightboxProtectedImage {
+  position: absolute;
+  inset: 0;
   display: grid;
   place-items: center;
   width: 100%;
   height: 100%;
   min-height: 0;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxProtectedImage {
+  place-items: start center;
+}
+
+.pfLightboxImageScroller[data-zoomed='false'] .pfLightboxProtectedImage,
+.pfLightboxImageScroller[data-zoomed='false'] .pfLightboxProtectedImage .pfProtectedImageShield,
+.pfLightboxImageScroller[data-zoomed='false'] .pfLightboxImg {
+  cursor: zoom-in;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxProtectedImage,
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxProtectedImage .pfProtectedImageShield,
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxImg {
+  cursor: zoom-out;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxProtectedImage,
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxProtectedImage .pfProtectedImageShield,
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxImg {
+  cursor: grabbing;
 }
 
 .pfLightboxImageLoading {
@@ -1811,6 +1889,7 @@
 .pfLightboxCaption {
   text-align: center;
   color: #fff;
+  width: min(100%, 920px);
   max-width: min(920px, calc(100vw - 48px));
   margin-inline: auto;
   padding: 2px clamp(12px, 2vw, 20px) 0;
@@ -2037,6 +2116,47 @@
 
   .pfLightboxCaption .pfCardTags {
     gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pfFeaturedStat,
+  .pfFeaturedStoryImage,
+  .pfFilterBtn,
+  .pfArtistSupportToggle,
+  .pfArtistSupportClose,
+  .pfBlurImageFrame::before,
+  .pfBlurImage,
+  .pfCard,
+  .pfCard img,
+  .pfCardOverlay,
+  .pfCardAnchor,
+  .pfLoadMoreBtn,
+  .pfLightboxIconBtn,
+  .pfLightboxRetryBtn,
+  .pfLightboxImg,
+  .pfLightboxNavBtn,
+  .pfLightboxThumb,
+  .pfLightboxOutletLink,
+  .pfToast {
+    transition: none;
+  }
+
+  .pfSpinner {
+    animation: none;
+  }
+
+  .pfFeaturedStory:hover .pfFeaturedStoryImage,
+  .pfFeaturedStory:focus-within .pfFeaturedStoryImage,
+  .pfCard:hover img,
+  .pfCard:hover .pfCardAnchor,
+  .pfCard:focus-within .pfCardAnchor,
+  .pfLightboxIconBtn:hover:not(:disabled):not([aria-disabled='true']),
+  .pfLightboxIconBtn:focus-visible,
+  .pfLightboxNavBtn:hover,
+  .pfLightboxNavBtn:focus-visible,
+  .pfLightboxThumb[aria-current='true'] {
+    transform: none;
   }
 }
 
