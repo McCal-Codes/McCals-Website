@@ -1,3 +1,12 @@
+## 2026-07-15 — Portfolio Lightbox And Gallery Polish
+
+- Refined portfolio gallery layouts so larger screens use more of the available canvas while mobile remains one column.
+- Improved lightbox image sizing, zoom gestures, scroll behavior, and cross-album navigation for portfolio browsing.
+- Simplified featured work and card caption density to keep the portfolio pages easier to scan.
+- Fixed Nature portfolio thumbnail URL normalization for `_webuse` images and covered the path mapping with a focused test.
+
+---
+
 ## 2026-04-06 — Vite Site Migration
 
 - **Major Architecture Shift**: Migrated from Squarespace widget-based architecture to Vite-based static site
