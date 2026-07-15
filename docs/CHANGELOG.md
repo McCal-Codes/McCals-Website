@@ -4,6 +4,7 @@
 - Improved lightbox image sizing, zoom gestures, scroll behavior, and cross-album navigation for portfolio browsing.
 - Simplified featured work and card caption density to keep the portfolio pages easier to scan.
 - Fixed Nature portfolio thumbnail URL normalization for `_webuse` images and covered the path mapping with a focused test.
+- Changed the lightweight script smoke workflow to use a shallow checkout so PR checks do not stall on full repository history.
 
 ---
 
