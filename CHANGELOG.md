@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-15
+
+### Local Website Workflow
+
+- Added a local-first website workflow covering non-Drive checkouts, human-readable branch names, local verification, local site testing, and PR preview gates.
+
 ## 2026-07-14
 
 ### Portfolio Lightbox Local Image Loading

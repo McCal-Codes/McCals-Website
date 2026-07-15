@@ -66,7 +66,7 @@ git diff --check
 git diff
 ```
 
-Run targeted checks for touched files before committing. Keep generated artifacts separate from logic or config changes unless the generated files are required to verify the same change.
+Run targeted checks for touched files before committing. Keep build artifacts separate from logic or config changes unless those files are required to verify the same change.
 
 Use intent-first commit messages:
 
