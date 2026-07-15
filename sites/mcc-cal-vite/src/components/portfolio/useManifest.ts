@@ -155,7 +155,7 @@ export const imageUrl = {
 
   /** nature thumbs: prebuilt webp thumbnails mirrored under Portfolios/Nature/thumbs/ */
   natureThumb(folderPath: string, filename: string): string {
-    const thumbFilename = filename.replace(/\.[^.]+$/, '.webp');
+    const thumbFilename = filename.replace(/_webuse(?=\.[^.]+$)/i, '').replace(/\.[^.]+$/, '.webp');
     const path = `${PORTFOLIOS_BASE}/Nature/thumbs/${folderPath}/${thumbFilename}`;
     return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
