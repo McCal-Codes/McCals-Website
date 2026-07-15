@@ -8,6 +8,15 @@
 
 ---
 
+## 2026-07-15: Podcast Page And Dependabot Noise Reduction
+
+- Widened the podcast page container so episode cards can use a real desktop grid while staying single column on mobile.
+- Hardened podcast playback cleanup so audio stops when the page unmounts and playback errors reset the player cleanly.
+- Added a clipboard fallback for podcast episode sharing in browsers where the async clipboard API is unavailable.
+- Reduced future Dependabot branch noise with lower open PR limits, weekly local-time schedules, cooldown windows, and disabled automatic rebasing for version-update PRs.
+
+---
+
 ## 2026-04-06 — Vite Site Migration
 
 - **Major Architecture Shift**: Migrated from Squarespace widget-based architecture to Vite-based static site

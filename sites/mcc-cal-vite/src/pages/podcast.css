@@ -20,7 +20,17 @@
 }
 
 .pod-page {
-  padding: clamp(80px, 12vw, 140px) 0 80px;
+  width: 100%;
+  padding: clamp(80px, 12vw, 140px) 0 128px;
+}
+
+.site-container:has(.pod-page) {
+  max-width: min(1180px, calc(100vw - clamp(32px, 8vw, 96px)));
+}
+
+.pod-page :where(a, button, input):focus-visible {
+  outline: 2px solid var(--mcc-accent, #b8b0aa);
+  outline-offset: 3px;
 }
 
 /* ── Header ─────────────────────────────────────────────── */
@@ -290,8 +300,9 @@
 /* ── Episodes Grid ───────────────────────────────────────── */
 .pod-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 24px;
+  align-items: stretch;
 }
 
 /* ── Episode Card ────────────────────────────────────────── */
@@ -299,6 +310,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  height: 100%;
   border: 0.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.03);
@@ -551,6 +563,7 @@
   gap: 8px;
   flex-wrap: wrap;
   align-items: center;
+  margin-top: auto;
 }
 
 .pod-link-btn {
@@ -668,9 +681,11 @@
 /* ── Now Playing Bar ─────────────────────────────────────── */
 .pod-now-playing {
   position: fixed;
-  left: 12px;
-  right: 12px;
+  left: 50%;
+  width: calc(100vw - 24px);
+  max-width: 760px;
   bottom: 12px;
+  transform: translateX(-50%);
   background: rgba(18, 18, 22, 0.95);
   border: 0.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 18px;
@@ -684,8 +699,8 @@
   animation: pod-np-in 0.25s ease;
 }
 @keyframes pod-np-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 .pod-now-playing.hidden {
   display: none;
@@ -833,6 +848,9 @@
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 640px) {
+  .site-container:has(.pod-page) {
+    max-width: calc(100vw - 32px);
+  }
   .pod-grid {
     grid-template-columns: 1fr;
   }

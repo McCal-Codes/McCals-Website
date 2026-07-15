@@ -6,6 +6,22 @@ interface ShareButtonProps {
   onToast: (msg: string) => void;
 }
 
+function copyWithTextarea(value: string): boolean {
+  const textarea = document.createElement('textarea');
+  textarea.value = value;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    return document.execCommand('copy');
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+
 export function ShareButton({ episode, onToast }: ShareButtonProps) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -26,11 +42,27 @@ export function ShareButton({ episode, onToast }: ShareButtonProps) {
     };
   }, [open]);
 
-  function copyLink() {
+  async function copyLink() {
     const url = episode.link || window.location.href;
-    navigator.clipboard.writeText(url)
-      .then(() => { onToast('Link copied!'); setOpen(false); })
-      .catch(() => { onToast('Could not copy'); setOpen(false); });
+    try {
+      let copied = false;
+      if (navigator.clipboard?.writeText && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(url);
+          copied = true;
+        } catch {
+          copied = false;
+        }
+      }
+      if (!copied && !copyWithTextarea(url)) {
+        throw new Error('Fallback copy failed');
+      }
+      onToast('Link copied');
+    } catch {
+      onToast('Could not copy link');
+    } finally {
+      setOpen(false);
+    }
   }
 
   function shareX() {
