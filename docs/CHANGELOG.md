@@ -1,3 +1,10 @@
+## 2026-07-15: Site Bugfix Pass
+
+- Added a semantic page-level heading to the Photojournalism portfolio.
+- Made Blog static content requests fail promptly into a cleaner message state when local blog files are unavailable.
+
+---
+
 ## 2026-07-15 — Portfolio Lightbox And Gallery Polish
 
 - Refined portfolio gallery layouts so larger screens use more of the available canvas while mobile remains one column.

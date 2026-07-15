@@ -127,7 +127,7 @@ export default function JournalismPortfolio() {
 
   return (
     <div className={portfolioStyles.pfRoot}>
-      <h2 className={portfolioStyles.pfHeading}>Photojournalism</h2>
+      <h1 className={portfolioStyles.pfHeading}>Photojournalism</h1>
       <p className={portfolioStyles.pfSubheading}>
         Politics, civic events, community stories, and sports, edited for captions,
         context, and deadline handoff.

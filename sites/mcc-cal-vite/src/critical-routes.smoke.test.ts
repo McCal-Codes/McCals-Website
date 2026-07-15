@@ -77,9 +77,14 @@ describe('critical public routes', () => {
       resolve(__dirname, 'components', 'portfolios', 'FeaturedPortfolio.tsx'),
       'utf8',
     );
+    const journalismSource = readFileSync(
+      resolve(__dirname, 'components', 'portfolios', 'JournalismPortfolio.tsx'),
+      'utf8',
+    );
 
     expect(homeSource).toMatch(/<h1\b/);
     expect(featuredSource).toMatch(/<h1\b/);
+    expect(journalismSource).toMatch(/<h1\b/);
   });
 
   it('keeps stale indexed portfolio URLs redirected in both Vercel configs', () => {

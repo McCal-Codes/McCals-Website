@@ -127,7 +127,9 @@ export default function BlogPage() {
       <div className="blog-page">
         {manifestLoading && <div className="blog-status">Loading stories...</div>}
         {!manifestLoading && manifestError && (
-          <div className="blog-message blog-message--error">Failed to load the blog manifest: {manifestError.message}</div>
+          <div className="blog-message blog-message--error" role="alert">
+            Stories are temporarily unavailable. Please try again later.
+          </div>
         )}
 
         {!manifestLoading && !manifestError && !slug && (
