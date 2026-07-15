@@ -44,6 +44,7 @@ export function useBlogManifest() {
     queryKey: blogKeys.manifest(),
     queryFn: fetchManifest,
     staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: false,
   });
 }
 
@@ -52,6 +53,7 @@ export function useBlogAuthors() {
     queryKey: blogKeys.authors(),
     queryFn: fetchAuthors,
     staleTime: 1000 * 60 * 5,
+    retry: false,
   });
 }
 
@@ -61,6 +63,7 @@ export function useBlogPost(slug: string | undefined) {
     queryFn: () => fetchPost(slug!),
     enabled: !!slug,
     staleTime: 1000 * 60 * 5,
+    retry: false,
   });
 }
 

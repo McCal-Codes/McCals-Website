@@ -89,7 +89,7 @@ describe('JournalismPortfolio', () => {
   it('keeps the grid path while adding compact editorial proof', () => {
     render(<JournalismPortfolio />);
 
-    expect(screen.getByRole('heading', { name: 'Photojournalism' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Photojournalism' })).toBeInTheDocument();
     expect(screen.getByLabelText('Editorial proof points')).toHaveTextContent(
       'Same-day selects, AP-style captions, clean assignment handoff',
     );

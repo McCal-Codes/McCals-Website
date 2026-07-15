@@ -1,3 +1,10 @@
+## 2026-07-15: Site Bugfix Pass
+
+- Added a semantic page-level heading to the Photojournalism portfolio.
+- Made Blog static content requests fail promptly into a cleaner message state when local blog files are unavailable.
+
+---
+
 ## 2026-07-15 — Portfolio Lightbox And Gallery Polish
 
 - Refined portfolio gallery layouts so larger screens use more of the available canvas while mobile remains one column.
@@ -5,6 +12,15 @@
 - Simplified featured work and card caption density to keep the portfolio pages easier to scan.
 - Fixed Nature portfolio thumbnail URL normalization for `_webuse` images and covered the path mapping with a focused test.
 - Changed lightweight PR guard workflows to use shallow checkouts so checks do not stall on full repository history.
+
+---
+
+## 2026-07-15: Podcast Page And Dependabot Noise Reduction
+
+- Widened the podcast page container so episode cards can use a real desktop grid while staying single column on mobile.
+- Hardened podcast playback cleanup so audio stops when the page unmounts and playback errors reset the player cleanly.
+- Added a clipboard fallback for podcast episode sharing in browsers where the async clipboard API is unavailable.
+- Reduced future Dependabot branch noise with lower open PR limits, weekly local-time schedules, cooldown windows, and disabled automatic rebasing for version-update PRs.
 
 ---
 
