@@ -30,7 +30,7 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/next": "^4.17.1",
     "@vercel/speed-insights": "^2.0.0",
-    "autoprefixer": "^10.4.27",
+    "autoprefixer": "^10.5.2",
     "lucide-react": "^1.14.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
