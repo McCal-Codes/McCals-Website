@@ -62,7 +62,7 @@
     "express": "^5.2.1",
     "globals": "^17.6.0",
     "jsdom": "^25.0.1",
-    "postcss": "^8.5.15",
+    "postcss": "^8.5.25",
     "rollup-plugin-visualizer": "^7.0.1",
     "sharp": "^0.35.2",
     "tailwindcss": "^4.3.1",
