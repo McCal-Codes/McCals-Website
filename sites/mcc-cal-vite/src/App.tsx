@@ -22,7 +22,6 @@ const JournalismPage = lazy(() => import('./pages/journalism'));
 const NaturePage = lazy(() => import('./pages/nature'));
 const PortraitsPage = lazy(() => import('./pages/portraits'));
 const ProjectsPage = lazy(() => import('./pages/projects'));
-const RoadmapPage = lazy(() => import('./pages/roadmap'));
 const ChangelogPage = lazy(() => import('./pages/changelog'));
 const ShowcasePage = lazy(() => import('./pages/showcase'));
 const ApiTestPage = lazy(() => import('./pages/api-test'));
@@ -34,7 +33,6 @@ const BookPodcastPage = lazy(() => import('./pages/book-a-podcast'));
 const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
 const FAQPage = lazy(() => import('./pages/faq'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
-const TerranovaPage = lazy(() => import('./pages/terranova'));
 const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
 
@@ -57,8 +55,6 @@ const staticRouteComponents = {
   grabCoffee: GrabCoffeePage,
   faq: FAQPage,
   projects: ProjectsPage,
-  roadmap: RoadmapPage,
-  terranova: TerranovaPage,
   accessibility: AccessibilityPage,
   policiesLegal: PoliciesLegalPage,
 } as const;

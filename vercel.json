@@ -35,6 +35,12 @@
     "formats": ["image/avif", "image/webp"]
   },
   "redirects": [
+    {
+      "source": "/terranova",
+      "destination": "https://dev.mcc-cal.com/projects/terranova",
+      "permanent": true
+    },
+    { "source": "/roadmap", "destination": "https://dev.mcc-cal.com/roadmap", "permanent": true },
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/schedule", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/contact", "destination": "/contact-us", "permanent": true },

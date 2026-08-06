@@ -40,7 +40,6 @@ describe('static SEO metadata', () => {
   it('uses the canonical mcc-cal.com host in SEO fallbacks', () => {
     const legacyHost = ['https://mccalmedia', 'com'].join('.');
     const pageSources = [
-      resolve(__dirname, 'pages', 'abridged.tsx'),
       resolve(__dirname, 'pages', 'design-systems.tsx'),
       resolve(__dirname, 'pages', 'video.tsx'),
     ]

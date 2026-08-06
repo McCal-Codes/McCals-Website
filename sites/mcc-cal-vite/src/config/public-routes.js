@@ -92,20 +92,6 @@ export const STATIC_PAGE_ROUTES = [
   { path: '/faq', routeKey: 'faq', seoKey: 'faq', changefreq: 'monthly', priority: '0.6' },
   { path: '/projects', routeKey: 'projects', seoKey: 'projects', changefreq: 'monthly', priority: '0.6' },
   {
-    path: '/roadmap',
-    routeKey: 'roadmap',
-    seoKey: 'roadmap',
-    changefreq: 'monthly',
-    priority: '0.5',
-  },
-  {
-    path: '/terranova',
-    routeKey: 'terranova',
-    seoKey: 'terranova',
-    changefreq: 'monthly',
-    priority: '0.5',
-  },
-  {
     path: '/accessibility',
     routeKey: 'accessibility',
     seoKey: 'accessibility',

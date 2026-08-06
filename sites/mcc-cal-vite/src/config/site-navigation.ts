@@ -27,8 +27,6 @@ export const PROJECT_NAV_ITEMS = [
     exact: true,
     legacyPaths: ['/one-nation-divided'],
   },
-  { label: 'TerraNova', to: '/terranova', exact: true },
-  { label: 'Roadmap', to: '/roadmap', exact: true },
 ] as const satisfies readonly SiteNavItem[];
 
 export const FOOTER_NAV_SECTIONS = [

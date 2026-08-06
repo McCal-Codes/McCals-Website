@@ -13,17 +13,21 @@ const PROJECTS = [
     title: 'Letting Me Go',
     desc: 'BFA thesis work on campaign-trail photography, political anxiety, shadow, and polarization.',
   },
+];
+
+// Software work moved to its own publication at dev.mcc-cal.com. These are external.
+const DEV_PROJECTS = [
   {
-    to: '/terranova',
+    href: 'https://dev.mcc-cal.com/projects/terranova',
     label: 'Tooling',
     title: 'TerraNova',
     desc: 'A terrain generation studio for Hytale, focused on procedural systems and creator tooling.',
   },
   {
-    to: '/roadmap',
+    href: 'https://dev.mcc-cal.com/roadmap',
     label: 'Notes',
     title: 'Roadmap',
-    desc: 'A public view of what is being built, refined, and considered next for the site and studio.',
+    desc: 'A public view of what is being built, refined, and considered next across development projects.',
   },
 ];
 
@@ -86,7 +90,35 @@ const ProjectsPage = () => {
           ))}
         </section>
 
+        <section className={styles.projectList} aria-label="Development projects">
+          {DEV_PROJECTS.map((project) => (
+            <a
+              className={styles.projectLink}
+              key={project.href}
+              href={project.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className={styles.projectLabel}>{project.label}</span>
+              <span className={styles.projectText}>
+                <span className={styles.projectTitle}>{project.title}</span>
+                <span className={styles.projectDescription}>{project.desc}</span>
+              </span>
+              <span className={styles.projectArrow} aria-hidden="true">
+                <ArrowRight size={18} strokeWidth={1.8} />
+              </span>
+            </a>
+          ))}
+        </section>
+
         <aside className={styles.note}>
+          <p>
+            Software projects, build notes, and development history live on the technical site at{' '}
+            <a href="https://dev.mcc-cal.com" target="_blank" rel="noreferrer">
+              dev.mcc-cal.com
+            </a>
+            .
+          </p>
           <p>
             Looking for photography work instead? Start with the curated portfolio or request a
             quote for a specific assignment.
