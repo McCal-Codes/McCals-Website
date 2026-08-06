@@ -25,6 +25,25 @@
 - Restored `fetch-depth: 0` on the Copilot Instructions Guardian checkout. It had been set to `2`, but the job diffs `base.sha...head.sha` and a shallow clone does not contain the base commit, so the guard failed with `fatal: bad object <base sha>` on every pull request rather than actually checking anything.
 - Made the Dependabot auto-approve step non-fatal. It fails with `GitHub Actions is not permitted to approve pull requests` unless the repository setting is enabled, which was reporting a red check on every bot PR.
 
+## 2026-08-06
+
+### Technical Portfolio at dev.mcc-cal.com
+
+- Added `sites/mcc-cal-dev`, a standalone Vite + React app for the technical product portfolio. Separate Vercel project, own design system, own CSP, mirroring the `sites/mcc-cal-admin` precedent. Software work is no longer presented through a layout built for photographs.
+- Design system built on the McCal Media brand palette (Business Marketing Kit): warm charcoal ground, bone text, no accent chroma. Two values are interpolated rather than taken from the kit, both documented in `src/styles/tokens.css`: `--bg` extends the ramp darker for a screen ground, and `--dim` replaces the kit's `5B5553`, which is only 2.4:1 on the page background and fails AA at the metadata size.
+- Typography is Plus Jakarta Sans with IBM Plex Mono for metadata, both self-hosted as woff2 under `public/fonts/`. `font-src 'self'` means no external font host can load.
+- Content is a typed schema in `src/content/`. Adding a project is one entry in `projects.ts`; the index row, route, metadata table, and sticky section nav all derive from it. Projects without a written case study render an index row with no link rather than a page of filler.
+- Status is communicated by shape and text, never color alone (`StatusMarker`). Preview slots for captures that do not exist yet reserve the aspect ratio and say "capture pending" instead of showing stock imagery.
+- Fixed a latent scrollspy bug in `SectionNav`: the IntersectionObserver callback read only the `entries` delta, which goes stale when one scroll batches several section changes together. It now accumulates intersecting ids and re-derives the topmost. Not verified in a live browser, see below.
+
+### Migrated TerraNova, Roadmap, and Abridgd off the photography site
+
+- Removed `/terranova` and `/roadmap` from `sites/mcc-cal-vite`: routes, `public-routes.js`, `site-navigation.ts`, `pageSeoData.json`, and the page sources. Prerendered route meta drops from 31 to 29 pages.
+- Added permanent cross-domain redirects for both paths to `dev.mcc-cal.com`, in the root and app `vercel.json` (kept in sync per `vercel-config.test.ts`).
+- Deleted the orphaned, unrouted `abridged.tsx`, `abridged.module.css`, `styles/abridged.css`, and `data/abridged-data.ts`. Updated `seo.static.test.ts`, which read the deleted page.
+- `/projects` now lists the software work as external links to `dev.mcc-cal.com`; the About bio menu's Roadmap link points there too.
+- The dev site's roadmap deliberately did not carry over most of `roadmap-data.ts`. That content was a photography-business roadmap (service launches, client portal, marketplace, AI features) and does not belong in a technical publication. Only the software work that actually shipped or is actually queued survived.
+
 ## 2026-07-15
 
 ### Local Website Workflow
