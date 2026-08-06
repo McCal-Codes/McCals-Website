@@ -131,23 +131,34 @@
 }
 
 .release {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
   padding-top: 1.25rem;
   border-top: var(--rule);
 }
 
 .releaseVersion {
   color: var(--text);
-  margin-right: 1rem;
+  transition: color var(--dur) var(--ease);
+}
+
+.releaseVersion:hover {
+  color: var(--accent);
 }
 
 .releaseDate {
   color: var(--dim);
 }
 
-.releaseSummary {
-  margin-top: 0.4rem;
-  font-size: var(--step-small);
-  color: var(--muted);
+.releaseTag {
+  color: var(--dim);
+}
+
+.empty {
+  margin-top: 1.5rem;
+  color: var(--dim);
 }
 
 /* --- Responsive --------------------------------------------------------- */

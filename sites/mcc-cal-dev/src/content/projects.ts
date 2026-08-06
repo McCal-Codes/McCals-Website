@@ -1,7 +1,9 @@
 import type { Project } from './types';
 
 /**
- * The project index. Array order is display order.
+ * The project index. Array order is display order. The slug also keys into
+ * `github.json`, so anything measurable (version, releases, languages, license,
+ * last push) is pulled rather than written here.
  *
  * A project with an empty `sections` array renders as an index row with no
  * case-study link. That is the honest state for work that does not yet have a
@@ -12,25 +14,17 @@ export const PROJECTS: Project[] = [
     index: '01',
     slug: 'terranova',
     title: 'TerraNova',
-    purpose: 'Visual tooling for Hytale world generation.',
+    purpose: 'An offline design studio for Hytale World Generation V2.',
     pitch:
-      'Build Hytale terrain by connecting nodes instead of editing JSON, and watch the world change as you drag the numbers.',
+      'Build Hytale terrain by connecting nodes instead of editing JSON, and watch the world change as you drag the numbers. Works entirely offline.',
     audience: 'For Hytale world builders',
     status: 'active-alpha',
-    stack: ['TypeScript', 'Tauri', 'Rust'],
-    version: 'v0.5',
-    build: '2026.08',
-    updated: '04 Aug 2026',
     meta: {
       type: 'Desktop application',
-      role: 'Contributor (systems, tooling, UI)',
+      role: 'Developer',
       platform: ['Windows', 'macOS', 'Linux'],
-      source: 'open-source',
-      started: '2026',
-      repo: {
-        label: 'HyperSystems-Development/TerraNova',
-        href: 'https://github.com/HyperSystems-Development/TerraNova',
-      },
+      started: 'March 2026',
+      frameworks: ['Tauri', 'Vite'],
     },
     preview: {
       alt: 'TerraNova node graph editor with a live terrain preview.',
@@ -47,7 +41,7 @@ export const PROJECTS: Project[] = [
         body: [
           'Hytale world generation is configured through JSON templates. The format is expressive, and it is also unforgiving: a template is a deeply nested description of noise fields, curve transforms, and terrain combinators, and nothing about reading it tells you what the terrain will look like.',
           'The practical workflow before TerraNova was to edit the JSON, restart a server, fly around, and guess at which number to change. Iteration cost was measured in minutes per attempt, which is high enough that most creators stop exploring and settle for whatever they got early.',
-          'TerraNova is built inside HyperSystems Development as an open-source desktop application. I contribute on systems, tooling, and interface.',
+          'TerraNova is an offline desktop studio for that work. It is open source under LGPL-2.1, and it also exists as a mirror under the HyperSystems Development organisation.',
         ],
       },
       {
@@ -55,9 +49,7 @@ export const PROJECTS: Project[] = [
         label: 'Problem',
         heading: 'Problem',
         kind: 'list',
-        body: [
-          'Three things make hand-authored worldgen templates hard, and they compound:',
-        ],
+        body: ['Three things make hand-authored worldgen templates hard, and they compound:'],
         items: [
           'The template is a graph, but JSON presents it as a tree. Nodes that feed several consumers appear once and are referenced by name, so the actual data flow is invisible in the file.',
           'Feedback is detached from the edit. The result of a change appears in a different process, after a restart, at a location you have to navigate to.',
@@ -71,7 +63,7 @@ export const PROJECTS: Project[] = [
         kind: 'prose',
         body: [
           'TerraNova treats the template as what it already is: a directed graph. Noise generators, curve transforms, and terrain combinators are nodes; the connections between them are the data flow that JSON was hiding.',
-          'Editing happens in the graph. The preview renders from the same graph, so the feedback loop closes inside one window. Export writes the JSON, and the Bridge plugin hot-reloads it into a running Hytale server, which removes the restart from the loop entirely.',
+          'Editing happens in the graph. The preview renders from the same graph, so the feedback loop closes inside one window, on one machine, with no server involved. Export writes the JSON, and the Bridge plugin hot-reloads it into a running Hytale server when you want to see it in place.',
           'Validation runs against the Hytale worldgen schema before export rather than after, so schema errors are attributable to a node while you are still looking at it.',
         ],
       },
@@ -123,41 +115,9 @@ export const PROJECTS: Project[] = [
         id: 'development',
         label: 'Development',
         heading: 'Development history',
-        kind: 'timeline',
+        kind: 'releases',
         body: [
-          'TerraNova is in alpha and shipping on a regular cadence. The entries below are the releases that changed how the tool is used, not every build.',
-        ],
-        timeline: [
-          {
-            marker: 'Alpha 3',
-            date: '2026',
-            title: 'Node graph editor',
-            detail: 'Replaced hand-edited JSON with a visual graph as the primary authoring surface.',
-          },
-          {
-            marker: 'Alpha 4',
-            date: '2026',
-            title: 'Bridge plugin',
-            detail: 'Hot-reload into a running Hytale server, removing the restart from the iteration loop.',
-          },
-          {
-            marker: 'Alpha 4.x',
-            date: '2026',
-            title: 'Pre-export schema validation',
-            detail: 'Templates are checked against the Hytale worldgen schema before they leave the editor.',
-          },
-          {
-            marker: 'Alpha 4.x',
-            date: '2026',
-            title: 'Preview rewrite',
-            detail: 'Preview moved onto the generation core so what you see matches what exports.',
-          },
-          {
-            marker: 'Alpha 5',
-            date: 'In progress',
-            title: 'Preview accuracy and density-field inspection',
-            current: true,
-          },
+          'Published releases, newest first. This list is pulled from the repository rather than written here, so it cannot drift from what actually shipped.',
         ],
       },
       {
@@ -179,7 +139,7 @@ export const PROJECTS: Project[] = [
         heading: 'Next milestone',
         kind: 'prose',
         body: [
-          'Alpha 5 is about trusting the preview. That means narrowing the gap between the preview renderer and the generation core, and making density fields inspectable so the numbers behind a piece of terrain can be read directly rather than inferred from its shape.',
+          'The alpha channel is where the work is happening. The current thread is trusting the preview: narrowing the gap between the preview renderer and the generation core, and making density fields inspectable so the numbers behind a piece of terrain can be read directly rather than inferred from its shape.',
         ],
       },
     ],
@@ -193,14 +153,13 @@ export const PROJECTS: Project[] = [
     pitch:
       'Read your local news and actually reach the end of it. No infinite feed, no national stories crowding out the ones near you.',
     audience: 'For people who want to stay local and stop scrolling',
-    status: 'active-development',
-    stack: ['React Native', 'Expo'],
+    status: 'prototype',
     meta: {
       type: 'Mobile application',
       role: 'Developer / Product designer',
       platform: ['iOS', 'Android'],
-      source: 'private',
-      started: '2026',
+      started: 'January 2026',
+      frameworks: ['React Native', 'Expo'],
     },
     preview: {
       alt: 'Abridgd reading view showing a finite daily set of local stories.',
@@ -233,10 +192,11 @@ export const PROJECTS: Project[] = [
       {
         id: 'next',
         label: 'Next',
-        heading: 'Next milestone',
+        heading: 'Where it stands',
         kind: 'prose',
         body: [
-          'Current work is reworking the information architecture and offline behavior: what gets kept on device, what happens at the boundary between a cached set and a stale one, and how the app says that plainly instead of failing quietly.',
+          'The reading model works and the app runs. Active work is paused: the repository has been untouched for months, and the status above says prototype rather than claiming otherwise.',
+          'When it resumes, the open thread is information architecture and offline behaviour: what is kept on device, what happens at the edge of a cached set, and how the app says so instead of failing quietly.',
         ],
       },
     ],
@@ -244,20 +204,24 @@ export const PROJECTS: Project[] = [
 
   {
     index: '03',
-    slug: 'field-kit',
-    title: 'Field Kit',
-    purpose: 'Local-first ingest and triage for photographic work.',
+    slug: 'void-ledger',
+    title: 'Void Ledger',
+    purpose: 'Local-first Baro Ki’Teer planning for Warframe.',
     pitch:
-      'Get cards off a shoot and onto disk without wondering whether everything made it. Nothing leaves the machine.',
-    audience: 'For photographers back from a shoot',
-    status: 'prototype',
-    stack: ['TypeScript', 'Node'],
+      'Work out what to buy before the trader arrives, on your own machine, with your own inventory. Nothing is uploaded anywhere.',
+    audience: 'For Warframe players who plan ahead',
+    status: 'active-development',
     meta: {
-      type: 'Desktop tooling',
+      type: 'Desktop application',
       role: 'Developer',
-      platform: ['macOS'],
-      source: 'private',
-      started: '2026',
+      platform: ['Windows'],
+      started: 'July 2026',
+    },
+    preview: {
+      alt: 'Void Ledger planning view listing Baro Ki’Teer inventory against owned items.',
+      width: 1600,
+      height: 1000,
+      callouts: [],
     },
     sections: [],
   },
@@ -265,17 +229,16 @@ export const PROJECTS: Project[] = [
   {
     index: '04',
     slug: 'experiments',
-    title: 'Experiments',
-    purpose: 'Smaller tools and prototypes that do not warrant a case study.',
-    pitch: 'Things I built to answer a question, kept around because they still work.',
+    title: 'Other work',
+    purpose: 'Smaller tools, mods, and client sites.',
+    pitch:
+      'Publication tooling, a Hytale worldgen mod about the uncanny valley, and a handful of sites built for other people.',
     status: 'research',
-    stack: ['Various'],
     meta: {
       type: 'Assorted',
       role: 'Developer',
       platform: ['Various'],
-      source: 'private',
-      started: '2026',
+      started: '2024',
     },
     sections: [],
   },

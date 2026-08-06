@@ -63,16 +63,15 @@ export const ROADMAP: RoadmapGroup[] = [
       {
         marker: 'TerraNova',
         date: 'In progress',
-        title: 'Alpha 5',
+        title: 'Alpha channel',
         detail: 'Preview accuracy and inspectable density fields.',
         current: true,
       },
       {
-        marker: 'Abridgd',
+        marker: 'Void Ledger',
         date: 'In progress',
-        title: 'Information architecture and offline behavior',
-        detail:
-          'What is kept on device, what happens at the edge of a cached set, and how the app says so.',
+        title: 'Planning view',
+        detail: 'Local inventory matching against trader stock. Nothing released yet.',
         current: true,
       },
     ],
@@ -83,11 +82,11 @@ export const ROADMAP: RoadmapGroup[] = [
     summary: 'Committed to, not yet started. Nothing here is a promise about a date.',
     entries: [
       {
-        marker: 'Field Kit',
-        date: 'Queued',
-        title: 'Ingest safety model',
+        marker: 'Abridgd',
+        date: 'Paused',
+        title: 'Information architecture and offline behaviour',
         detail:
-          'Decide the guarantees before writing the tool: what it will never delete, and how it proves a copy landed.',
+          'What is kept on device, what happens at the edge of a cached set, and how the app says so. The repository has been idle for months; this resumes when it resumes.',
       },
       {
         marker: 'This site',

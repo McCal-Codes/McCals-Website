@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Project } from '@/content/types';
+import { getRepo } from '@/content/github';
 import StatusMarker from './StatusMarker';
 import PreviewFrame from './PreviewFrame';
 import styles from './IndexRow.module.css';
@@ -21,6 +22,13 @@ interface IndexRowProps {
 export default function IndexRow({ project }: IndexRowProps) {
   const hasCaseStudy = project.sections.length > 0;
   const headingId = `project-${project.slug}`;
+  const repo = getRepo(project.slug);
+
+  // Measured languages first, then frameworks the language stats cannot see.
+  const stack = [
+    ...(repo?.languages.map((language) => language.name) ?? []),
+    ...(project.meta.frameworks ?? []),
+  ];
 
   return (
     <article className={styles.row} aria-labelledby={headingId}>
@@ -55,7 +63,9 @@ export default function IndexRow({ project }: IndexRowProps) {
 
           <div className={styles.facts}>
             <StatusMarker status={project.status} />
-            <p className={`${styles.stack} meta`}>{project.stack.join(' / ')}</p>
+            {stack.length > 0 && (
+              <p className={`${styles.stack} meta`}>{stack.join(' / ')}</p>
+            )}
           </div>
         </div>
 

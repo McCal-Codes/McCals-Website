@@ -35,21 +35,24 @@ export const STATUS_PRESENTATION: Record<ProjectStatus, StatusPresentation> = {
 
 /* -- Project metadata ---------------------------------------------------- */
 
-export type SourceModel = 'open-source' | 'source-available' | 'private';
-
-export const SOURCE_LABEL: Record<SourceModel, string> = {
-  'open-source': 'Open source',
-  'source-available': 'Source available',
-  private: 'Private',
-};
-
+/**
+ * Hand-written project facts only.
+ *
+ * Anything GitHub can measure is deliberately absent: license, current version,
+ * release history, languages, last push, and whether the source is public all come
+ * from `github.json` via `github.ts`. If a field could be looked up, it does not
+ * belong here.
+ */
 export interface ProjectMeta {
   type: string;
   role: string;
   platform: string[];
-  source: SourceModel;
   started: string;
-  repo?: { label: string; href: string };
+  /**
+   * Frameworks and runtimes the language stats cannot see (Tauri, Expo, and the
+   * like). Rendered after the measured languages, never instead of them.
+   */
+  frameworks?: string[];
 }
 
 /* -- Section content types ----------------------------------------------- */
@@ -102,12 +105,6 @@ export interface TimelineEntry {
   current?: boolean;
 }
 
-export interface Release {
-  version: string;
-  date: string;
-  summary: string;
-  href?: string;
-}
 
 /* -- Sections ------------------------------------------------------------ */
 
@@ -126,7 +123,6 @@ export interface CaseStudySection {
   diagram?: DiagramSpec;
   shots?: AnnotatedShot[];
   timeline?: TimelineEntry[];
-  releases?: Release[];
 }
 
 /* -- Project ------------------------------------------------------------- */
@@ -146,12 +142,7 @@ export interface Project {
   /** Who it is for. Short. */
   audience?: string;
   status: ProjectStatus;
-  /** Uppercased in the UI. e.g. ['TypeScript', 'Tauri', 'Rust']. */
-  stack: string[];
   meta: ProjectMeta;
-  version?: string;
-  build?: string;
-  updated?: string;
   preview?: AnnotatedShot;
   sections: CaseStudySection[];
 }
@@ -174,10 +165,3 @@ export interface ActivityEntry {
   detail: string;
 }
 
-export interface Repository {
-  name: string;
-  href: string;
-  description: string;
-  /** Shown as a mono tag. */
-  license?: string;
-}

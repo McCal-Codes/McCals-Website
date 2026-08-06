@@ -1,5 +1,3 @@
-import type { Repository } from './types';
-
 export const SITE = {
   name: 'McCal Development',
   shortName: 'McCal Dev',
@@ -26,19 +24,6 @@ export const NAV = [
 export const EXTERNAL_NAV = [{ label: 'GitHub', href: SITE.github }] as const;
 
 /**
- * Listed by name only. `src/data/private-repo-metadata.json` in the repository root
- * is still a bootstrap placeholder with every statistic at zero, so there are no
- * star, fork, or commit counts here. Numbers go in when they come from real data.
+ * The open-source footer block is generated from `github.json` rather than listed
+ * here. See `SiteFooter`.
  */
-export const REPOSITORIES: Repository[] = [
-  {
-    name: 'HyperSystems-Development/TerraNova',
-    href: 'https://github.com/HyperSystems-Development/TerraNova',
-    description: 'Visual worldgen tooling for Hytale. Contributor.',
-  },
-  {
-    name: 'McCal-Codes/McCals-Website',
-    href: 'https://github.com/McCal-Codes/McCals-Website',
-    description: 'The monorepo behind mcc-cal.com and this site.',
-  },
-];

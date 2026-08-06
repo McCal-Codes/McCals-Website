@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "sync:github": "node scripts/sync-github.js",
+    "sync:github:dry": "node scripts/sync-github.js --dry-run",
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist",
     "typecheck": "tsc -b"

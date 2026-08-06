@@ -1,0 +1,145 @@
+{
+  "generatedBy": "sites/mcc-cal-dev/scripts/sync-github.js",
+  "generatedAt": "2026-08-06T19:41:28.114Z",
+  "repos": [
+    {
+      "slug": "terranova",
+      "owner": "McCal-Codes",
+      "repo": "TerraNova",
+      "fullName": "McCal-Codes/TerraNova",
+      "url": "https://github.com/McCal-Codes/TerraNova",
+      "private": false,
+      "description": "Offline design studio for Hytale World Generation V2",
+      "homepage": "",
+      "license": "LGPL-2.1",
+      "topics": [],
+      "languages": [
+        {
+          "name": "TypeScript",
+          "percent": 90
+        },
+        {
+          "name": "Rust",
+          "percent": 7
+        }
+      ],
+      "createdAt": "2026-03-10",
+      "pushedAt": "2026-06-29",
+      "defaultBranch": "main",
+      "stars": 4,
+      "forks": 0,
+      "latestRelease": {
+        "tag": "v0.1.8-alpha.4",
+        "name": "TerraNova v0.1.8-alpha.4",
+        "date": "2026-06-21",
+        "prerelease": true,
+        "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.4"
+      },
+      "releases": [
+        {
+          "tag": "v0.1.8-alpha.4",
+          "name": "TerraNova v0.1.8-alpha.4",
+          "date": "2026-06-21",
+          "prerelease": true,
+          "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.4"
+        },
+        {
+          "tag": "v0.1.8-alpha.3",
+          "name": "TerraNova v0.1.8-alpha.3",
+          "date": "2026-06-16",
+          "prerelease": true,
+          "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.3"
+        },
+        {
+          "tag": "v0.1.8-alpha-channel",
+          "name": "TerraNova alpha update channel",
+          "date": "2026-06-11",
+          "prerelease": false,
+          "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha-channel"
+        },
+        {
+          "tag": "v0.1.8-alpha.2",
+          "name": "TerraNova v0.1.8-alpha.2",
+          "date": "2026-06-11",
+          "prerelease": true,
+          "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.2"
+        },
+        {
+          "tag": "v0.1.8-alpha.1",
+          "name": "TerraNova v0.1.8-alpha.1",
+          "date": "2026-06-11",
+          "prerelease": true,
+          "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.1"
+        }
+      ]
+    },
+    {
+      "slug": "abridgd",
+      "owner": "McCal-Codes",
+      "repo": "abridgd",
+      "fullName": "McCal-Codes/abridgd",
+      "url": "https://github.com/McCal-Codes/abridgd",
+      "private": false,
+      "description": "",
+      "homepage": "",
+      "license": null,
+      "topics": [],
+      "languages": [
+        {
+          "name": "TypeScript",
+          "percent": 96
+        }
+      ],
+      "createdAt": "2026-01-12",
+      "pushedAt": "2026-03-23",
+      "defaultBranch": "master",
+      "stars": 1,
+      "forks": 0,
+      "latestRelease": {
+        "tag": "v1.4.0",
+        "name": "v1.4.0",
+        "date": "2026-03-23",
+        "prerelease": false,
+        "url": "https://github.com/McCal-Codes/abridgd/releases/tag/v1.4.0"
+      },
+      "releases": [
+        {
+          "tag": "v1.4.0",
+          "name": "v1.4.0",
+          "date": "2026-03-23",
+          "prerelease": false,
+          "url": "https://github.com/McCal-Codes/abridgd/releases/tag/v1.4.0"
+        }
+      ]
+    },
+    {
+      "slug": "void-ledger",
+      "owner": "McCal-Codes",
+      "repo": "void-ledger",
+      "fullName": "McCal-Codes/void-ledger",
+      "url": "https://github.com/McCal-Codes/void-ledger",
+      "private": false,
+      "description": "Local-first Warframe Baro Ki'Teer planning app for Windows",
+      "homepage": "",
+      "license": "Apache-2.0",
+      "topics": [],
+      "languages": [
+        {
+          "name": "TypeScript",
+          "percent": 93
+        },
+        {
+          "name": "JavaScript",
+          "percent": 5
+        }
+      ],
+      "createdAt": "2026-07-02",
+      "pushedAt": "2026-07-02",
+      "defaultBranch": "main",
+      "stars": 0,
+      "forks": 0,
+      "latestRelease": null,
+      "releases": []
+    }
+  ]
+}

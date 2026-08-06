@@ -20,11 +20,11 @@ export const NOTES: BuildNote[] = [
     hook: 'Local news is finite. An interface that pretends otherwise is lying about the day.',
   },
   {
-    slug: 'safe-local-photo-ingest',
-    title: 'Designing safe local photo-ingest workflows',
+    slug: 'local-first-data-model',
+    title: 'Designing a local-first data model that survives being wrong',
     date: '2026-07-05',
-    project: 'Field Kit',
-    hook: 'Every ingest tool is one bad assumption away from being a deletion tool.',
+    project: 'Void Ledger',
+    hook: 'Local-first means the cache is the product. Getting the invalidation wrong is not a bug, it is a lie.',
   },
 ];
 

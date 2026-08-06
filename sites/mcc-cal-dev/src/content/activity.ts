@@ -8,11 +8,11 @@ export const ACTIVITY: ActivityEntry[] = [
   {
     project: 'TerraNova',
     slug: 'terranova',
-    detail: 'Preparing Alpha 5 and refining preview accuracy.',
+    detail: 'Working the alpha channel toward a preview you can trust, and making density fields inspectable.',
   },
   {
-    project: 'Abridgd',
-    slug: 'abridgd',
-    detail: 'Reworking information architecture and offline behavior.',
+    project: 'Void Ledger',
+    slug: 'void-ledger',
+    detail: 'Building out the planning view against a local inventory. No releases cut yet.',
   },
 ];

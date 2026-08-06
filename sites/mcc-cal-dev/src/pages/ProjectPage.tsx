@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { getProject } from '@/content/projects';
+import { formatDate, getRepo } from '@/content/github';
 import type { CaseStudySection } from '@/content/types';
 import AnnotatedShot from '@/components/AnnotatedShot';
 import Diagram from '@/components/Diagram';
@@ -13,7 +14,12 @@ import VersionBadge from '@/components/VersionBadge';
 import { useDocumentMeta } from '@/lib/useDocumentTitle';
 import styles from './ProjectPage.module.css';
 
-function SectionBody({ section }: { section: CaseStudySection }) {
+function SectionBody({ section, slug }: { section: CaseStudySection; slug: string }) {
+  const repo = getRepo(slug);
+  // A releases section renders the repository's published releases. There is no
+  // hand-written fallback on purpose: if nothing shipped, the section says so.
+  const releases = section.kind === 'releases' ? (repo?.releases ?? []) : [];
+
   return (
     <>
       {section.body && <Prose paragraphs={section.body} />}
@@ -37,17 +43,30 @@ function SectionBody({ section }: { section: CaseStudySection }) {
         <Timeline entries={section.timeline} />
       )}
 
-      {section.kind === 'releases' && section.releases && (
-        <ul className={styles.releases}>
-          {section.releases.map((release) => (
-            <li className={styles.release} key={release.version}>
-              <span className={`${styles.releaseVersion} meta`}>{release.version}</span>
-              <span className={`${styles.releaseDate} meta`}>{release.date}</span>
-              <p className={styles.releaseSummary}>{release.summary}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      {section.kind === 'releases' &&
+        (releases.length > 0 ? (
+          <ul className={styles.releases}>
+            {releases.map((release) => (
+              <li className={styles.release} key={release.tag}>
+                <a
+                  className={`${styles.releaseVersion} meta`}
+                  href={release.url}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  {release.tag}
+                  <span aria-hidden="true"> ↗</span>
+                </a>
+                <span className={`${styles.releaseDate} meta`}>{formatDate(release.date)}</span>
+                {release.prerelease && (
+                  <span className={`${styles.releaseTag} meta`}>Pre-release</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={`${styles.empty} meta`}>No published releases yet</p>
+        ))}
     </>
   );
 }
@@ -55,6 +74,11 @@ function SectionBody({ section }: { section: CaseStudySection }) {
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProject(slug) : undefined;
+  const repo = project ? getRepo(project.slug) : undefined;
+  const stack = [
+    ...(repo?.languages.map((language) => language.name) ?? []),
+    ...(project?.meta.frameworks ?? []),
+  ];
 
   useDocumentMeta(project ? project.title : 'Not found', project?.purpose);
 
@@ -83,13 +107,12 @@ export default function ProjectPage() {
 
               <div className={styles.facts}>
                 <StatusMarker status={project.status} />
-                <p className={`${styles.stack} meta`}>{project.stack.join(' / ')}</p>
+                {stack.length > 0 && <p className={`${styles.stack} meta`}>{stack.join(' / ')}</p>}
               </div>
 
               <VersionBadge
-                build={project.build}
-                updated={project.updated}
-                version={project.version}
+                updated={repo ? formatDate(repo.pushedAt) : undefined}
+                version={repo?.latestRelease?.tag}
               />
             </div>
 
@@ -104,11 +127,7 @@ export default function ProjectPage() {
         </div>
       </header>
 
-      <SectionNav
-        repoHref={project.meta.repo?.href}
-        sections={project.sections}
-        title={project.title}
-      />
+      <SectionNav repoHref={repo?.url} sections={project.sections} title={project.title} />
 
       <div className="shell">
         {project.sections.map((section, i) => (
@@ -128,7 +147,7 @@ export default function ProjectPage() {
             </div>
 
             <div className={styles.sectionBody}>
-              <SectionBody section={section} />
+              <SectionBody section={section} slug={project.slug} />
             </div>
           </section>
         ))}
