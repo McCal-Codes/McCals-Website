@@ -1,0 +1,122 @@
+.row {
+  padding: clamp(2.25rem, 5vw, 3.75rem) 0;
+  border-top: var(--rule);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+/* No capture to show, so the text takes the full width rather than leaving a hole. */
+.bodyTextOnly {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.index {
+  display: flex;
+  /* Baseline, not center: the audience line wraps to two lines on narrow screens
+     and the number should stay level with the first of them. */
+  align-items: baseline;
+  color: var(--dim);
+}
+
+.indexSep {
+  flex: none;
+  align-self: center;
+  width: 1.5rem;
+  height: 1px;
+  margin-inline: 0.75rem;
+  background: var(--border-strong);
+}
+
+.audience {
+  color: var(--dim);
+}
+
+.title {
+  margin-top: 0.9rem;
+  font-size: var(--step-h2);
+}
+
+.pitch {
+  max-width: 40ch;
+  margin-top: 0.75rem;
+  font-size: var(--step-h3);
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 1.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: var(--step-meta);
+  font-weight: 500;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--text);
+  transition:
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.cta:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.arrow {
+  transition: transform var(--dur) var(--ease);
+}
+
+.cta:hover .arrow {
+  transform: translateX(0.25em);
+}
+
+.pending {
+  margin-top: 1.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid transparent;
+  color: var(--dim);
+}
+
+/* The technical layer. Present, but underneath the product line. */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem 1.75rem;
+  margin-top: 1.75rem;
+}
+
+.stack {
+  color: var(--dim);
+}
+
+.previewCell {
+  min-width: 0;
+}
+
+@media (max-width: 60rem) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .previewCell {
+    order: -1;
+  }
+}

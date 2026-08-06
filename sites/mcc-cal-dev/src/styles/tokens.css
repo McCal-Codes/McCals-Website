@@ -1,0 +1,83 @@
+/*
+  Design system for dev.mcc-cal.com
+
+  Colors are the McCal Media brand palette (Business Marketing Kit / Color Palette),
+  mapped to interface roles in ramp order:
+
+    272423  panel
+    302C2C  panel raised
+    363230  border
+    5B5553  border strong
+    B8B0AA  muted text
+    CAC2BA  primary text
+
+  Two values are interpolated rather than taken from the kit, both for contrast:
+    --bg   #171514  extends the ramp darker, because a screen ground needs more
+                    depth than a print ground
+    --dim  #8A827C  sits between 5B5553 and B8B0AA. The kit's 5B5553 is only
+                    2.4:1 on --bg, which fails AA at the metadata size where
+                    this token is used most.
+
+  The brand carries no accent color. Emphasis is bone at full strength against
+  muted text, plus weight and rules. Status is never color alone: see StatusMarker,
+  where shape and label carry the meaning and color is decoration.
+
+  Three-tier typographic hierarchy, enforced by component:
+    1. Large sans display headings
+    2. Compact sans body
+    3. Uppercase mono metadata
+*/
+
+:root {
+  color-scheme: dark;
+
+  /* Surface depth */
+  --bg: #171514;
+  --panel: #272423;
+  --panel-raised: #302c2c;
+
+  /* Text */
+  --text: #cac2ba;
+  --muted: #b8b0aa;
+  --dim: #8a827c;
+
+  /* Lines */
+  --border: #363230;
+  --border-strong: #5b5553;
+
+  /* Emphasis. One family only. */
+  --accent: #e8e2d9;
+  --accent-dim: #b8b0aa;
+  --accent-fg: #171514;
+  --accent-wash: rgba(232, 226, 217, 0.1);
+
+  /* Type */
+  --font-sans: 'Jakarta', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Plex Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', monospace;
+
+  --step-display: clamp(2.25rem, 5.5vw, 4rem);
+  --step-h2: clamp(1.625rem, 3vw, 2.375rem);
+  --step-h3: clamp(1.125rem, 1.5vw, 1.375rem);
+  --step-body: 1.0625rem;
+  --step-small: 0.9375rem;
+  --step-meta: 0.75rem;
+
+  --tracking-meta: 0.1em;
+  --leading-tight: 1.12;
+  --leading-body: 1.7;
+
+  /* Layout */
+  --measure: 68ch;
+  --gutter: clamp(20px, 4vw, 48px);
+  --shell-max: 1240px;
+  --rule: 1px solid var(--border);
+  /* The sticky header height. SectionNav pins directly below it. */
+  --header-height: 3.25rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 180ms;
+
+  /* The technical grid. Kept near-invisible on purpose. */
+  --grid-cell: 64px;
+}

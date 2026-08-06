@@ -1,0 +1,54 @@
+.figure {
+  margin: 2rem 0 0;
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 34rem;
+}
+
+.step {
+  display: contents;
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.25rem;
+  background: var(--panel);
+  border: var(--rule);
+  border-left: 2px solid var(--accent-dim);
+}
+
+.nodeLabel {
+  font-family: var(--font-mono);
+  font-size: var(--step-small);
+  color: var(--text);
+}
+
+.nodeNote {
+  color: var(--dim);
+}
+
+.edge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+}
+
+.arrow {
+  font-family: var(--font-mono);
+  font-size: var(--step-small);
+  line-height: 1;
+  color: var(--border-strong);
+}
+
+.edgeLabel {
+  color: var(--dim);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
