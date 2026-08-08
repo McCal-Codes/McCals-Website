@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-08
+
+### Dependabot Automation Unblocked
+
+- Exempted Dependabot from the `require-changelog` guard: the bot never edits `CHANGELOG.md`, so the check could only ever fail and hold its PRs out of the auto-merge queue. Human PRs are still enforced.
+- Exempted Dependabot from the Copilot Instructions Guardian: dependency bumps match its `package.json` / `scripts/**` / `.github/workflows/**` paths filter but never change the repo behavior those instruction docs describe.
+- Made the Dependabot auto-approve step non-fatal. It fails with `GitHub Actions is not permitted to approve pull requests` unless the repository setting is enabled, which was reporting a red check on every bot PR.
+
 ## 2026-07-15
 
 ### Local Website Workflow

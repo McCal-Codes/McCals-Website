@@ -33,7 +33,14 @@ jobs:
             steps.metadata.outputs.update-type == 'version-update:semver-minor' &&
             steps.metadata.outputs.dependency-type != 'direct:production'
           )
-        run: gh pr review --approve "$PR_URL" --body "$REVIEW_BODY"
+        # Approval fails with "GitHub Actions is not permitted to approve pull
+        # requests" unless Settings > Actions > General > "Allow GitHub Actions to
+        # create and approve pull requests" is enabled. Treat that as a notice
+        # rather than a job failure, so the PR does not show a red check.
+        run: |
+          if ! gh pr review --approve "$PR_URL" --body "$REVIEW_BODY"; then
+            echo "::notice::Could not auto-approve. Enable 'Allow GitHub Actions to create and approve pull requests' in Settings > Actions > General."
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}

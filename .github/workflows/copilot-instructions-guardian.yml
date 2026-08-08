@@ -30,6 +30,10 @@ permissions:
 jobs:
   check:
     name: Ensure instructions updated
+    # Dependency bumps touch package.json / lockfiles under the paths filter above
+    # but never change repo behavior that instruction docs describe, so this guard
+    # only ever blocks Dependabot's auto-merge queue. Human PRs are still enforced.
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
