@@ -12,6 +12,9 @@ permissions:
 
 jobs:
   require-changelog:
+    # Dependabot never edits CHANGELOG.md, so this guard can only ever fail on its
+    # PRs and block the auto-merge queue. Human PRs are still enforced.
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
