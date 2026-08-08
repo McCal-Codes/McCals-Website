@@ -5,7 +5,7 @@ import './styles/footer.css';
 import '@/components/portfolio/portfolio-global.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import * as Sentry from '@sentry/react';
+import { reactErrorHandler } from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { inject } from '@vercel/analytics';
 import App from './App';
@@ -39,8 +39,8 @@ try {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!, {
-  onUncaughtError: Sentry.reactErrorHandler(),
-  onRecoverableError: Sentry.reactErrorHandler(),
+  onUncaughtError: reactErrorHandler(),
+  onRecoverableError: reactErrorHandler(),
 }).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

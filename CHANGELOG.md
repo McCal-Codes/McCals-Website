@@ -2,6 +2,22 @@
 
 ## 2026-08-08
 
+### Critical-Path Bundle Diet
+
+- Cut blocking JavaScript on the public site from ~222 KB to ~174 KB gzip (-21%). The site is a client-rendered SPA, so nothing paints until that JS lands — this moves FCP, TBT, and INP directly, and LCP as a knock-on.
+- Session Replay (rrweb, 41 KB gzip) no longer ships in the critical path. It was listed in `Sentry.init`'s `integrations`, which put it in the entry chunk; it now loads through a dynamic import after the `load` event. Imported from `@sentry/replay` rather than `@sentry/react` on purpose — the latter is already in the static graph, so a dynamic import of it resolves to the same module and Rollup has nothing to split off. Added `@sentry/replay` as an explicit dependency pinned to the SDK version.
+- Not using Sentry's `lazyLoadIntegration()`: it fetches from Sentry's CDN, which the `script-src` CSP in `vercel.json` blocks.
+- Replaced `import * as Sentry` with named imports in `main.tsx`, `App.tsx`, `instrument.ts`, and `ErrorBoundary.tsx`. Namespace imports defeat tree-shaking and pulled the full SDK into whatever chunk referenced them.
+- Added a `sentry-vendor` chunk, and pinned the replay packages to their own `sentry-replay` chunk — `@sentry/browser` statically re-exports `replayIntegration`, so without an explicit rule Rollup folded rrweb back into the eager chunk.
+- Lazy-loaded `PodcastPage`, which was the one route imported eagerly in `App.tsx` and therefore shipped to every visitor on every route. `HomePage` stays eager because it is the LCP route.
+- Entry chunk: 129.8 KB gzip to 25.7 KB.
+
+### Performance Budget Actually Runs
+
+- `check-performance-budget.js` counted only resources with `initiatorType === 'script'`, which is the entry chunk alone. Vite emits vendor chunks as `<link rel="modulepreload">` (initiatorType `link`), so roughly 150 KB of blocking JS was invisible to the budget. Now matched on the URL instead.
+- The check ignores `/_vercel/*` responses, which are served by Vercel's edge and always 404 against a local `vite preview` — that alone failed every route.
+- Repointed `playwright-performance.yml` at `npm run perf:budget` and re-enabled it on PRs touching `sites/mcc-cal-vite/**`. It had been disabled and still aimed at the retired `src/widgets/` paths, so the budget was never enforced.
+
 ### Dependabot Automation Unblocked
 
 - Exempted Dependabot from the `require-changelog` guard: the bot never edits `CHANGELOG.md`, so the check could only ever fail and hold its PRs out of the auto-merge queue. Human PRs are still enforced.
