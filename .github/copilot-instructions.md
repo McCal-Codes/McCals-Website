@@ -118,7 +118,7 @@ Critical-path budget for `sites/mcc-cal-vite`:
 
 ## Recent updates
 
-- 2026-08-08: The performance budget is enforced again. `playwright-performance.yml` runs `perf:budget` on PRs touching `sites/mcc-cal-vite/**`; it had been disabled and aimed at the retired `src/widgets/` paths. Note that `ci-validate-workflows.js` and `ci-validate-scripts.js` grep workflow files for `scripts/*.js` and resolve every hit from the repo root — do not name an app-relative script path in a workflow, even inside a comment.
+- 2026-08-08: The performance budget is enforced again. `playwright-performance.yml` runs `perf:budget` on PRs touching `sites/mcc-cal-vite/**`; it had been disabled and aimed at the retired `src/widgets/` paths.
 - 2026-08-08: Dependabot is exempt from `require-changelog` and the Copilot Instructions Guardian. Both could only ever fail on bot PRs, which kept the auto-merge queue from draining. Keep the `dependabot[bot]` job-level guards in place when editing those workflows.
 
 - 2026-06-02: CI guard maintenance should keep `actions/github-script@v9` issue calls under `github.rest.issues`, grant `issues: write` to PR-commenting guards, keep Gitleaks checkouts deep enough for commit range scans, and use tracked static manifest fixtures in Vite tests.

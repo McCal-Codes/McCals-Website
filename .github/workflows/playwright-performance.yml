@@ -3,10 +3,6 @@ name: Performance Budget
 # Guards the public Vite app against critical-path regressions. Runs the app's
 # `perf:budget` npm script, which asserts the CLS / LCP / FCP / JS / CSS / image
 # budgets against a production build served by `vite preview`.
-#
-# The comment avoids spelling out the checker's path: ci-validate-workflows.js
-# greps workflows for `scripts/*.js` and resolves every hit from the repo root,
-# so naming an app-relative script here reads as a missing file.
 
 on:
   pull_request:
