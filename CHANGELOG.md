@@ -2,6 +2,13 @@
 
 ## 2026-08-09
 
+### CSP Blocked Every Client-Side Supabase Call
+
+- `connect-src` never listed the Supabase origin, so every browser-side Supabase request was refused by CSP in production. Two features were affected and both fail silently to a fallback, which is why nothing looked broken: hero slides in `HeroCarousel`, and Google reviews in `TestimonialsSection` on `/about`. Added `https://*.supabase.co` to both `vercel.json` files.
+- Added `csp-connect-src.test.ts`, asserting every origin the bundle actually fetches from is permitted, that both configs agree, and that the directive is not opened to a bare wildcard. The bug was invisible without a test precisely because the call sites degrade quietly.
+- Found by loading the pull request's Vercel preview in a browser and reading the console, which is also how the hash-based `script-src` change was confirmed safe.
+- Note: the `mccal-media` Supabase project is currently paused, so these two features stay on their fallbacks until it is resumed. The CSP fix means they will work once it is, rather than being blocked a second way.
+
 ### Sentry Off the Critical Path
 
 - Blocking JavaScript on the public site drops from ~175 KB to ~118 KB gzip, and from ~222 KB before this week's work — a 47% cut overall. Nothing paints on a client-rendered SPA until that JS lands.
