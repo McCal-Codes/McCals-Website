@@ -22,6 +22,7 @@
 
 - Exempted Dependabot from the `require-changelog` guard: the bot never edits `CHANGELOG.md`, so the check could only ever fail and hold its PRs out of the auto-merge queue. Human PRs are still enforced.
 - Exempted Dependabot from the Copilot Instructions Guardian: dependency bumps match its `package.json` / `scripts/**` / `.github/workflows/**` paths filter but never change the repo behavior those instruction docs describe.
+- Restored `fetch-depth: 0` on the Copilot Instructions Guardian checkout. It had been set to `2`, but the job diffs `base.sha...head.sha` and a shallow clone does not contain the base commit, so the guard failed with `fatal: bad object <base sha>` on every pull request rather than actually checking anything.
 - Made the Dependabot auto-approve step non-fatal. It fails with `GitHub Actions is not permitted to approve pull requests` unless the repository setting is enabled, which was reporting a red check on every bot PR.
 
 ## 2026-07-15
