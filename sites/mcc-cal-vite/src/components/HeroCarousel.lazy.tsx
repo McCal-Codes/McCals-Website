@@ -174,11 +174,15 @@ const HeroCarousel: React.FC = () => {
   useEffect(() => {
     let cancelled = false;
     const controller = new AbortController();
-    let timeout: ReturnType<typeof window.setTimeout> | null = null;
+    // Bare setTimeout, matching the setInterval call below. `window.setTimeout`
+    // returns `number` under the DOM lib but `ReturnType<typeof window.setTimeout>`
+    // resolves to `Timeout` once @types/node is in scope, so the two disagree under
+    // tsconfig.test.json.
+    let timeout: ReturnType<typeof setTimeout> | null = null;
 
     const run = () => {
       if (cancelled) return;
-      timeout = window.setTimeout(() => controller.abort(), 5000);
+      timeout = setTimeout(() => controller.abort(), 5000);
 
       fetchHeroSlides(controller.signal)
         .then(data => {
