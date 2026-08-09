@@ -43,6 +43,7 @@
 - Deleted the orphaned, unrouted `abridged.tsx`, `abridged.module.css`, `styles/abridged.css`, and `data/abridged-data.ts`. Updated `seo.static.test.ts`, which read the deleted page.
 - `/projects` now lists the software work as external links to `dev.mcc-cal.com`; the About bio menu's Roadmap link points there too.
 - The dev site's roadmap deliberately did not carry over most of `roadmap-data.ts`. That content was a photography-business roadmap (service launches, client portal, marketplace, AI features) and does not belong in a technical publication. Only the software work that actually shipped or is actually queued survived.
+- Fixed a false positive in `ci-validate-workflows.js` and `ci-validate-scripts.js`. Both matched script references with a bare `scripts/...` pattern and resolved the result from the repo root, so an app-relative path like `sites/mcc-cal-dev/scripts/sync-github.js` had its leading directories chopped off and was reported as a missing file. They now match the full path.
 
 ## 2026-07-15
 

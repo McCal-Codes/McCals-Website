@@ -25,7 +25,11 @@ function gatherWorkflowFiles() {
 
 function extractScriptPathsFromText(text) {
   const results = new Set();
-  const re = /scripts\/[\w\-\/._]+\.js/g;
+  // Leading directory segments are part of the match. A workflow or package script
+  // may legitimately reference an app-relative path such as
+  // sites/mcc-cal-dev/scripts/sync-github.js; matching only the `scripts/...` tail
+  // would resolve it from the repo root and report an existing file as missing.
+  const re = /(?<![\w\-.])(?:[\w\-.]+\/)*scripts\/[\w\-\/._]+\.js/g;
   let m;
   while ((m = re.exec(text)) !== null) {
     results.add(m[0]);
