@@ -1,16 +1,18 @@
 import { Suspense, lazy } from 'react';
-import * as Sentry from '@sentry/react';
+import { wrapCreateBrowserRouterV6 } from '@sentry/react';
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
 import RouteAnalytics from './components/RouteAnalytics';
 import ErrorBoundary from './components/ErrorBoundary';
 import RouteAwareSpeedInsights from './components/RouteAwareSpeedInsights';
 import { LEGACY_ROUTE_REDIRECTS, STATIC_PAGE_ROUTES } from './config/public-routes.js';
+// HomePage stays eager: it is the LCP route, so a second round trip for its chunk
+// would delay the hero. Every other route is split.
 import HomePage from './pages/index';
-import PodcastPage from './pages/podcast';
 
 // Lazy load pages for code splitting
 const AboutPage = lazy(() => import('./pages/about'));
+const PodcastPage = lazy(() => import('./pages/podcast'));
 const AuthorsPage = lazy(() => import('./pages/authors'));
 const BlogPage = lazy(() => import('./pages/blog'));
 const ConcertsPage = lazy(() => import('./pages/concerts'));
@@ -115,7 +117,7 @@ function AppShell() {
   );
 }
 
-const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouterV6(createBrowserRouter);
+const sentryCreateBrowserRouter = wrapCreateBrowserRouterV6(createBrowserRouter);
 const enableSentryExamplePage =
   import.meta.env.DEV || import.meta.env.VITE_ENABLE_SENTRY_TEST_PAGE === 'true';
 

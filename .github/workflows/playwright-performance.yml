@@ -1,12 +1,19 @@
-name: Widget Performance (Playwright Scaffold)
+name: Performance Budget
 
-# Auto-trigger disabled: src/widgets/ and src/site/ are retired widget-era paths.
-# Run manually if needed via workflow_dispatch.
+# Guards the public Vite app against critical-path regressions. Runs the app's
+# `perf:budget` npm script, which asserts the CLS / LCP / FCP / JS / CSS / image
+# budgets against a production build served by `vite preview`.
+
 on:
+  pull_request:
+    paths:
+      - 'sites/mcc-cal-vite/**'
+      - '.github/workflows/playwright-performance.yml'
   workflow_dispatch:
 
 jobs:
   perf:
+    name: Performance budget
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,19 +26,32 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            sites/mcc-cal-vite/package-lock.json
 
-      - name: Install dependencies
+      # `playwright` is a root devDependency; check-performance-budget.js lives in
+      # the app but resolves it by walking up to the root node_modules.
+      - name: Install root dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Install app dependencies
+        working-directory: sites/mcc-cal-vite
+        run: npm ci --prefer-offline --no-audit --no-fund
 
-      - name: Run performance scaffold
-        run: node scripts/utils/perf-widgets.js
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
 
-      - name: Upload performance reports
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: widget-performance-reports
-          path: test-results/*
+      - name: Build
+        working-directory: sites/mcc-cal-vite
+        run: npm run build
+
+      - name: Serve production build
+        working-directory: sites/mcc-cal-vite
+        run: |
+          npm run preview -- --port 4173 --host 127.0.0.1 &
+          npx --yes wait-on http://127.0.0.1:4173 --timeout 60000
+
+      - name: Check performance budget
+        working-directory: sites/mcc-cal-vite
+        run: npm run perf:budget

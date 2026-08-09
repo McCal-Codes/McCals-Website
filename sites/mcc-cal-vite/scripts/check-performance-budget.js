@@ -54,14 +54,19 @@ async function measureRoute(browser, route, viewportName, viewport) {
   const consoleIssues = [];
   const failedResponses = [];
 
+  // `/_vercel/*` is served by Vercel's edge, not by the app. It always 404s against
+  // a local `vite preview`, which would otherwise fail every route in this check.
+  const isEdgeOnlyPath = (url) => new URL(url).pathname.startsWith('/_vercel/');
+
   page.on('console', (message) => {
-    if (['warning', 'error'].includes(message.type())) {
-      consoleIssues.push(`${message.type()}: ${message.text()}`);
-    }
+    if (!['warning', 'error'].includes(message.type())) return;
+    const url = message.location()?.url;
+    if (url && isEdgeOnlyPath(url)) return;
+    consoleIssues.push(`${message.type()}: ${message.text()}`);
   });
 
   page.on('response', (response) => {
-    if (response.status() >= 400) {
+    if (response.status() >= 400 && !isEdgeOnlyPath(response.url())) {
       failedResponses.push(`${response.status()} ${response.url()}`);
     }
   });
@@ -107,8 +112,11 @@ async function measureRoute(browser, route, viewportName, viewport) {
 
   const metrics = await page.evaluate(() => {
     const resources = performance.getEntriesByType('resource');
+    // Match on the URL rather than initiatorType: Vite emits vendor chunks as
+    // `<link rel="modulepreload">`, which reports initiatorType 'link', so a
+    // script-only filter counted the entry chunk and missed every vendor chunk.
     const jsBytes = resources
-      .filter((resource) => resource.initiatorType === 'script')
+      .filter((resource) => /\.js($|\?)/.test(resource.name))
       .reduce((sum, resource) => sum + (resource.transferSize || 0), 0);
     const cssBytes = resources
       .filter((resource) => resource.initiatorType === 'link' && /\.css($|\?)/.test(resource.name))

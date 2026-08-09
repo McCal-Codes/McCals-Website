@@ -40,7 +40,10 @@ jobs:
         uses: actions/checkout@v7
         with:
           submodules: false
-          fetch-depth: 2
+          # Needs full history: the diff below is base.sha...head.sha, and a shallow
+          # clone does not contain the base commit. With fetch-depth 2 this failed
+          # with "fatal: bad object <base sha>" on every pull request.
+          fetch-depth: 0
 
       - name: Detect changed files
         id: changed

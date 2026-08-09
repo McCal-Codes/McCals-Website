@@ -72,6 +72,14 @@ Guardrails:
 - Defer non-critical JS.
 - Treat performance and accessibility regressions as bugs.
 
+Critical-path budget for `sites/mcc-cal-vite`:
+
+- The app is a client-rendered SPA, so every byte of blocking JS delays first paint. Keep total blocking JS under the 200 KB gzip budget; it currently sits near 174 KB, so there is not much headroom.
+- `npm run perf:budget` enforces this against a production build and runs in CI on PRs touching `sites/mcc-cal-vite/**`. Run it locally before proposing bundle-affecting changes.
+- Third-party SDKs belong off the critical path. Sentry Session Replay loads through a dynamic import after the `load` event; do not move it back into `Sentry.init`'s `integrations`.
+- Prefer named imports over `import * as X` for large SDKs — namespace imports defeat tree-shaking.
+- Route components are lazy-loaded. `HomePage` is the deliberate exception because it is the LCP route.
+
 ## 7) Widget conventions
 
 - Keep selectors scoped to widget namespace.
@@ -109,6 +117,9 @@ Guardrails:
 - `docs/standards/code-annotations.md`
 
 ## Recent updates
+
+- 2026-08-08: The performance budget is enforced again. `playwright-performance.yml` runs `perf:budget` on PRs touching `sites/mcc-cal-vite/**`; it had been disabled and aimed at the retired `src/widgets/` paths.
+- 2026-08-08: Dependabot is exempt from `require-changelog` and the Copilot Instructions Guardian. Both could only ever fail on bot PRs, which kept the auto-merge queue from draining. Keep the `dependabot[bot]` job-level guards in place when editing those workflows.
 
 - 2026-06-02: CI guard maintenance should keep `actions/github-script@v9` issue calls under `github.rest.issues`, grant `issues: write` to PR-commenting guards, keep Gitleaks checkouts deep enough for commit range scans, and use tracked static manifest fixtures in Vite tests.
 - 2026-06-02: Auto-Generate Manifests matrix entries should map to explicit root npm aliases (`manifest:nature`, `manifest:portrait`, `manifest:featured`, `manifest:universal`, etc.) instead of inline generator paths.

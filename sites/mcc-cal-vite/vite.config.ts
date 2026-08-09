@@ -206,6 +206,21 @@ export default defineConfig(({ command }) => ({
           if (normalizedId.includes('/node_modules/@tanstack/react-query/')) {
             return 'query-vendor';
           }
+          if (normalizedId.includes('/node_modules/@sentry/')) {
+            // Session Replay is rrweb, the heaviest dependency in the app. It is
+            // loaded through a dynamic import in src/instrument.ts, but @sentry/browser
+            // also statically re-exports `replayIntegration`, so Rollup would otherwise
+            // fold it back into the chunk the entry depends on. Pinning it to its own
+            // chunk keeps it off the critical path.
+            if (
+              normalizedId.includes('/node_modules/@sentry/replay/') ||
+              normalizedId.includes('/node_modules/@sentry/replay-canvas/') ||
+              normalizedId.includes('/node_modules/@sentry/feedback/')
+            ) {
+              return 'sentry-replay';
+            }
+            return 'sentry-vendor';
+          }
           return undefined;
         },
       },
