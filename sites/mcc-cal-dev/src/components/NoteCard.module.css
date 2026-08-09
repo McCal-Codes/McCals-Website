@@ -1,0 +1,34 @@
+.card {
+  padding: 1.5rem 0;
+  border-top: var(--rule);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.date {
+  color: var(--dim);
+}
+
+.project {
+  color: var(--accent-dim);
+}
+
+.title {
+  font-size: var(--step-h3);
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+.hook {
+  margin-top: 0.4rem;
+  max-width: var(--measure);
+  font-size: var(--step-small);
+  color: var(--muted);
+  text-wrap: pretty;
+}

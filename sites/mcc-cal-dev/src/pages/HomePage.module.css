@@ -1,0 +1,182 @@
+/* --- Intro -------------------------------------------------------------- */
+
+.intro {
+  padding-block: clamp(4rem, 12vw, 9rem) clamp(3.5rem, 9vw, 7rem);
+}
+
+.eyebrow {
+  color: var(--accent);
+}
+
+.display {
+  max-width: 18ch;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: var(--step-display);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.lede {
+  max-width: 54ch;
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: var(--step-h3);
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.focus {
+  max-width: 52ch;
+  margin-top: 1rem;
+  font-size: var(--step-small);
+  color: var(--dim);
+  text-wrap: pretty;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-meta);
+  font-weight: 500;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition:
+    background var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.primary:hover {
+  background: var(--accent-dim);
+}
+
+.secondary {
+  border-color: var(--border-strong);
+  color: var(--muted);
+}
+
+.secondary:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* --- Index -------------------------------------------------------------- */
+
+.index {
+  padding-block: clamp(2rem, 5vw, 3rem) clamp(3rem, 8vw, 5rem);
+}
+
+.indexHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 3rem;
+}
+
+.sectionHeading {
+  font-size: var(--step-h3);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sectionNote {
+  max-width: 44ch;
+  font-size: var(--step-small);
+  color: var(--dim);
+  text-wrap: pretty;
+}
+
+.rows {
+  margin-top: 1.5rem;
+  border-bottom: var(--rule);
+}
+
+/* --- Currently ---------------------------------------------------------- */
+
+.blockHeading {
+  padding-bottom: 1rem;
+  border-bottom: var(--rule);
+  color: var(--text);
+}
+
+.currently {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.activity {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 1.75rem;
+}
+
+.activityProject {
+  font-size: var(--step-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  transition: color var(--dur) var(--ease);
+}
+
+.activityProject:hover {
+  color: var(--accent);
+}
+
+.activityDetail {
+  margin-top: 0.4rem;
+  max-width: 40ch;
+  font-size: var(--step-small);
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* --- Notes -------------------------------------------------------------- */
+
+.notes {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.notesHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.notesHead .blockHeading {
+  flex: 1;
+}
+
+.allNotes {
+  flex: none;
+  padding-bottom: 1rem;
+  border-bottom: var(--rule);
+  color: var(--dim);
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease);
+}
+
+.allNotes:hover {
+  color: var(--accent);
+}
+
+.noteList {
+  margin-top: 0.5rem;
+}
