@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getCanonicalPath, getStaticRouteByPath } from '@/config/public-routes.js';
 import { trackWebsiteEvent } from '@/utils/analytics';
+import { setRouteName } from '@/lib/sentry-lazy';
+import { getSpeedInsightsRoute } from '@/utils/speedInsightsRoutes';
 
 function resolveAnalyticsRoute(pathname: string) {
   const staticRoute = getStaticRouteByPath(pathname);
@@ -41,6 +43,11 @@ export default function RouteAnalytics() {
   const lastTrackedRef = useRef<string | null>(null);
 
   useEffect(() => {
+    // Keeps Sentry transactions named by route pattern instead of concrete URL.
+    // Runs on every navigation, including repeats, since a repeat visit still
+    // opens a new transaction.
+    setRouteName(getSpeedInsightsRoute(location.pathname));
+
     const trackingKey = `${location.pathname}${location.search}`;
     if (lastTrackedRef.current === trackingKey) {
       return;

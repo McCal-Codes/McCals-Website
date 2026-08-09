@@ -164,20 +164,47 @@ const HeroCarousel: React.FC = () => {
   // Start immediately with hardcoded slides; replace with Supabase data if it arrives
   const [slides, setSlides] = useState<HeroSlide[]>(() => getInitialSlides());
 
+  // Slide 0 of FAVORITE_HERO_SLIDES is what index.html preloads, and it is the LCP
+  // element. Fetching Supabase slides during first paint could replace slide 0 with
+  // a different image, throwing that preload away and restarting LCP after a full
+  // round trip. So the fetch waits for the `load` event: by then the preloaded hero
+  // has painted and LCP is settled, and swapping in database-managed slides after
+  // that costs nothing. Running it here rather than not at all keeps the slides
+  // editable from the database.
   useEffect(() => {
     let cancelled = false;
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 5000);
+    let timeout: ReturnType<typeof window.setTimeout> | null = null;
 
-    fetchHeroSlides(controller.signal).then(data => {
-      if (cancelled || !data || data.slides.length === 0) return;
-      clearTimeout(timeout);
-      setSlides(getInitialSlides(data.slides, data.variants));
-      // Clamp index in case new slide count is smaller
-      setCurrentSlideIndex(prev => Math.min(prev, data.slides.length - 1));
-    });
+    const run = () => {
+      if (cancelled) return;
+      timeout = window.setTimeout(() => controller.abort(), 5000);
 
-    return () => { cancelled = true; clearTimeout(timeout); controller.abort(); };
+      fetchHeroSlides(controller.signal)
+        .then(data => {
+          if (timeout !== null) clearTimeout(timeout);
+          if (cancelled || !data || data.slides.length === 0) return;
+          setSlides(getInitialSlides(data.slides, data.variants));
+          // Clamp index in case new slide count is smaller
+          setCurrentSlideIndex(prev => Math.min(prev, data.slides.length - 1));
+        })
+        .catch(() => {
+          if (timeout !== null) clearTimeout(timeout);
+        });
+    };
+
+    if (document.readyState === 'complete') {
+      run();
+    } else {
+      window.addEventListener('load', run, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('load', run);
+      if (timeout !== null) clearTimeout(timeout);
+      controller.abort();
+    };
   }, []);
 
   const currentSlide = slides[currentSlideIndex];

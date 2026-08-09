@@ -1,14 +1,17 @@
-import './instrument';
 import './styles/globals.css';
 import './styles/nav.css';
 import './styles/footer.css';
 import '@/components/portfolio/portfolio-global.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { reactErrorHandler } from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { inject } from '@vercel/analytics';
 import App from './App';
+import { captureError, installErrorBufferAndDeferSentry } from '@/lib/sentry-lazy';
+
+// Buffers errors immediately and loads the Sentry SDK after first paint, so its
+// ~57 kB gzip is not in the critical path. Must run before anything that can throw.
+installErrorBufferAndDeferSentry();
 
 const enableVercelAnalytics = import.meta.env.PROD && import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS === 'true';
 
@@ -39,8 +42,8 @@ try {
 }
 
 ReactDOM.createRoot(document.getElementById('root')!, {
-  onUncaughtError: reactErrorHandler(),
-  onRecoverableError: reactErrorHandler(),
+  onUncaughtError: (error) => captureError(error),
+  onRecoverableError: (error) => captureError(error),
 }).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

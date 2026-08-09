@@ -1,5 +1,5 @@
 import { Component, type ReactNode } from 'react';
-import { captureException } from '@sentry/react';
+import { captureError } from '@/lib/sentry-lazy';
 import { logError } from '@/utils/logger';
 import { trackWebsiteEvent } from '@/utils/analytics';
 
@@ -35,13 +35,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     logError('ErrorBoundary caught an error:', error, errorInfo);
-    captureException(error, {
-      contexts: {
-        react: {
-          componentStack: errorInfo.componentStack,
-        },
-      },
-    });
+    captureError(error, { componentStack: errorInfo.componentStack });
 
     trackWebsiteEvent('error_boundary_caught', {
       error: error.message,
