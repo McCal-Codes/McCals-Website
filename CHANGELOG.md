@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-09
+
+### Sentry Off the Critical Path
+
+- Blocking JavaScript on the public site drops from ~175 KB to ~118 KB gzip, and from ~222 KB before this week's work — a 47% cut overall. Nothing paints on a client-rendered SPA until that JS lands.
+- The Sentry SDK (~57 KB gzip) no longer loads synchronously. `src/lib/sentry-lazy.ts` installs `error` / `unhandledrejection` handlers immediately, queues anything they catch, then loads and initializes the SDK after the `load` event and replays the queue into it. Boot-time errors are still reported; they just arrive slightly later.
+- The queue is bounded at 20 entries so an error loop during boot cannot grow it without limit.
+- `instrument.ts` now exports `initSentry()` instead of running on import, so nothing in the critical path statically depends on it.
+- Dropped `wrapCreateBrowserRouterV6`. It has to run at module scope to build the router, which forced the whole SDK into the entry chunk. Route-pattern transaction names — the main thing it provided — are now set from `RouteAnalytics` using the same `getSpeedInsightsRoute` helper Speed Insights already uses, so Sentry still sees `/blog/[slug]` rather than one transaction per post.
+- When no Sentry DSN is configured the SDK is never fetched at all. Previously a DSN-less build still downloaded it.
+- Ratcheted the `jsKb` performance budget from 200 to 150 now that there is real headroom. A budget far above actual usage catches nothing.
+
+### Hero Preload No Longer Discarded
+
+- `HeroCarousel` fetched Supabase slides on mount and could replace slide 0 — the LCP element that `index.html` preloads — throwing the preload away and restarting LCP after a full round trip. The fetch now waits for the `load` event, so the preloaded hero paints first and database-managed slides swap in afterwards at no cost.
+- Fixed the fetch's timeout handling: `clearTimeout` only ran on success, so a failed request left a pending abort timer for the rest of the component's life.
+
+### Content Security Policy Hardened
+
+- `script-src` no longer allows `'unsafe-inline'`. The two inline scripts in `index.html` (theme-flash prevention, hero preload) are allowed by SHA-256 hash instead, closing the main XSS gap in an otherwise strong header set.
+- Added `csp-inline-hashes.test.ts`, which recomputes the hashes from `index.html` and fails if either config drifts, if `'unsafe-inline'` returns, or if a hash is left behind for a deleted script. Without it, editing an inline script would silently break the page in production.
+- Verified in a browser against a server enforcing the production CSP: both inline scripts execute, no violations are reported, and an inline script whose hash is not allowlisted is correctly blocked.
+
 ## 2026-08-08
 
 ### Critical-Path Bundle Diet
