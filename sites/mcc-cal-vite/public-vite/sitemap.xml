@@ -3,8 +3,6 @@
 
   <url>
     <loc>https://mcc-cal.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/homepage-og.jpg</image:loc>
       <image:title>Pittsburgh Photographer | Caleb McCartney</image:title>
@@ -14,8 +12,6 @@
 
   <url>
     <loc>https://mcc-cal.com/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
       <image:title>About Caleb McCartney | McCal Media</image:title>
@@ -25,8 +21,6 @@
 
   <url>
     <loc>https://mcc-cal.com/contact-us</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
       <image:title>Contact McCal Media</image:title>
@@ -36,8 +30,6 @@
 
   <url>
     <loc>https://mcc-cal.com/request-a-quote</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
       <image:title>Request a Photography Quote | McCal Media</image:title>
@@ -47,8 +39,7 @@
 
   <url>
     <loc>https://mcc-cal.com/featured-work</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-08-09</lastmod>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/homepage-og.jpg</image:loc>
       <image:title>Featured Photography Portfolio | Caleb McCartney</image:title>
@@ -58,8 +49,6 @@
 
   <url>
     <loc>https://mcc-cal.com/letting-me-go</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/images/bfa-thesis/exhibition-show/webp/one-nation-divided-hero.webp</image:loc>
       <image:title>Letting Me Go | Caleb McCartney</image:title>
@@ -69,8 +58,7 @@
 
   <url>
     <loc>https://mcc-cal.com/journalism</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-05-17</lastmod>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/journalism-og.jpg</image:loc>
       <image:title>Photojournalism Portfolio | Caleb McCartney</image:title>
@@ -80,8 +68,7 @@
 
   <url>
     <loc>https://mcc-cal.com/portraits</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-08-09</lastmod>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/portraits-og.jpg</image:loc>
       <image:title>Pittsburgh Headshot Photographer | Caleb McCartney</image:title>
@@ -91,8 +78,7 @@
 
   <url>
     <loc>https://mcc-cal.com/nature</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-08-09</lastmod>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/nature-og.jpg</image:loc>
       <image:title>Nature Photography | Caleb McCartney</image:title>
@@ -102,8 +88,7 @@
 
   <url>
     <loc>https://mcc-cal.com/events</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-08-09</lastmod>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/events-og.jpg</image:loc>
       <image:title>Pittsburgh Event Photographer | Caleb McCartney</image:title>
@@ -113,8 +98,7 @@
 
   <url>
     <loc>https://mcc-cal.com/concerts</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-08-09</lastmod>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/concerts-og.jpg</image:loc>
       <image:title>Pittsburgh Concert Photographer | Caleb McCartney</image:title>
@@ -124,8 +108,6 @@
 
   <url>
     <loc>https://mcc-cal.com/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/journalism-og.jpg</image:loc>
       <image:title>Field Notes Blog | McCal Media</image:title>
@@ -135,8 +117,6 @@
 
   <url>
     <loc>https://mcc-cal.com/authors</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
       <image:title>Authors | McCal Media</image:title>
@@ -146,8 +126,6 @@
 
   <url>
     <loc>https://mcc-cal.com/authors/mccal</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
       <image:title>Caleb McCartney Author Profile</image:title>
@@ -157,8 +135,6 @@
 
   <url>
     <loc>https://mcc-cal.com/podcast</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
       <image:title>Podcast | McCal Media</image:title>
@@ -168,8 +144,6 @@
 
   <url>
     <loc>https://mcc-cal.com/book-a-podcast</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
       <image:title>Book a Podcast Session | McCal Media</image:title>
@@ -179,8 +153,6 @@
 
   <url>
     <loc>https://mcc-cal.com/grab-a-coffee</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
       <image:title>Grab a Coffee | McCal Media</image:title>
@@ -190,8 +162,6 @@
 
   <url>
     <loc>https://mcc-cal.com/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
       <image:title>Photography FAQ | McCal Media</image:title>
@@ -201,8 +171,6 @@
 
   <url>
     <loc>https://mcc-cal.com/projects</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/images/social/homepage-og.jpg</image:loc>
       <image:title>Projects | McCal Media</image:title>
@@ -212,8 +180,6 @@
 
   <url>
     <loc>https://mcc-cal.com/accessibility</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
       <image:title>Accessibility Statement | McCal Media</image:title>
@@ -223,8 +189,6 @@
 
   <url>
     <loc>https://mcc-cal.com/policies-legal</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
       <image:title>Policies and Legal | McCal Media</image:title>
@@ -235,8 +199,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/boyd-station-community-feature</loc>
     <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/boyd-station-community-feature/images/lead.jpg</image:loc>
       <image:title>Three Days With Boyd&apos;s Station</image:title>
@@ -247,8 +209,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/the-capitalist-contradiction</loc>
     <lastmod>2025-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/the-capitalist-contradiction/images/lead.jpg</image:loc>
       <image:title>The Capitalist Contradiction</image:title>
@@ -259,8 +219,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/a-conversation-with-myself</loc>
     <lastmod>2024-11-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/a-conversation-with-myself/images/lead.jpg</image:loc>
       <image:title>A Conversation with Myself</image:title>
@@ -271,8 +229,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/fear-of-emotion</loc>
     <lastmod>2024-10-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/fear-of-emotion/images/lead.jpg</image:loc>
       <image:title>Fear of Emotion</image:title>
@@ -283,8 +239,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/living-breathing-dying</loc>
     <lastmod>2024-10-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/living-breathing-dying/images/lead.jpg</image:loc>
       <image:title>Living, Breathing, Dying</image:title>
@@ -295,8 +249,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/all-i-hear-is-the-deafening-silence</loc>
     <lastmod>2024-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/all-i-hear-is-the-deafening-silence/images/lead.jpg</image:loc>
       <image:title>All I Hear Is the Deafening Silence</image:title>
@@ -307,8 +259,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/body-remembers</loc>
     <lastmod>2024-08-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/body-remembers/images/lead.jpg</image:loc>
       <image:title>The Body Remembers</image:title>
@@ -319,8 +269,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/player-one</loc>
     <lastmod>2024-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/player-one/images/lead.jpg</image:loc>
       <image:title>Player One</image:title>
@@ -331,8 +279,6 @@
   <url>
     <loc>https://mcc-cal.com/blog/in-the-shadow-of-loss</loc>
     <lastmod>2024-08-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <image:image>
       <image:loc>https://mcc-cal.com/posts/in-the-shadow-of-loss/images/lead.jpg</image:loc>
       <image:title>In the Shadow of Loss</image:title>

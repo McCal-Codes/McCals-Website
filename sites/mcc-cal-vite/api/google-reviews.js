@@ -7,8 +7,24 @@ const REVIEWS_RATE_LIMIT = {
   windowMs: 60 * 1000, // 1 minute
 };
 
+/**
+ * Successful responses are cached at the edge. Google reviews change on the order of
+ * weeks, and every origin miss is a billed Google Places API call, so serving most
+ * traffic from cache cuts both latency and cost.
+ *
+ * Only the success path gets this — errors, rate-limit rejections, and the
+ * not-configured response keep `no-store` so a transient failure is not pinned at
+ * the edge for an hour.
+ *
+ * `max-age=0` keeps browsers revalidating while `s-maxage` lets the CDN serve, so a
+ * newly published review appears within the hour rather than being stuck in
+ * someone's browser cache.
+ */
+const SUCCESS_CACHE_CONTROL = 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400';
+const NO_CACHE = 'no-store, max-age=0';
+
 export default async function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store, max-age=0');
+  res.setHeader('Cache-Control', NO_CACHE);
   if (applyCors(req, res, { methods: 'GET, OPTIONS' })) {
     return;
   }
@@ -66,6 +82,7 @@ export default async function handler(req, res) {
         profile_photo_url: review.authorAttribution?.photoUri || null,
       }));
 
+    res.setHeader('Cache-Control', SUCCESS_CACHE_CONTROL);
     res.status(200).json({
       result: {
         reviews,
