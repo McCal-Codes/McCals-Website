@@ -2,6 +2,28 @@
 
 ## 2026-08-11
 
+### Photographs Now Carry Their Own Rights and Captions
+
+- The published photographs carried no copyright, creator, credit or rights statement at all, and `scripts/optimize-images.js` was stripping whatever the originals had — sharp discards metadata unless told otherwise. Embedded metadata is the only attribution that survives an image being copied off the site.
+- `scripts/optimize-images.js` now calls `withMetadata()`. Verified by running a control image with full licensing tags through the exact pipeline settings: all fields were destroyed before, all survive now.
+- Added `scripts/metadata/embed-image-rights.js`, which writes IPTC/XMP rights fields via exiftool. sharp cannot do this — it exposes IPTC blocks as opaque buffers.
+- Fields follow the IPTC Photo Metadata Standard and the five Google reads for Google Images: Creator, Credit Line and Copyright Notice for attribution, plus Web Statement of Rights and Licensor URL to enable the Licensable badge. Written to XMP, IIM and EXIF so tools that read only one still find them.
+- Credit uses the AP form `Caleb McCartney/McCal Media`. The parenthetical `(Photo by …)` stays in caption text, where AP puts it.
+- Images are declared `digitalCapture` under the IPTC DigitalSourceType vocabulary — an explicit assertion of original photography rather than generated imagery. Applied only to real photographs.
+- Journalism images additionally receive their AP-style caption, headline, capture date, publishing outlet and keywords from the journalism manifest. Other portfolios get rights fields only; they have no caption data, and inventing captions would put false statements in the files.
+- Applied to the 531 journalism images (529 written). Scoped deliberately: these images are committed without Git LFS, so stamping rewrites every blob permanently — roughly 1.1 GB for all five portfolios against a 2.4 GB `.git`. The remaining portfolios are a separate decision.
+- The script is idempotent, skipping files that already carry the current Web Statement, so it can run on a schedule without rewriting thousands of binaries each pass.
+
+### Structured Data Can Finally Earn the Licensable Badge
+
+- `generateImageObjectSchema` emitted `contentUrl` and `author` but not `license`, which Google explicitly requires for badge eligibility. It now emits `license`, `acquireLicensePage`, `creditText`, `copyrightNotice` and `creator`, pointing at the existing `/policies-legal#license` and `/request-a-quote` pages.
+- Added `image-rights-parity.test.ts`, asserting the page's JSON-LD and the metadata embedded in the files claim the same creator, credit, copyright and licensing URLs. Two sources of rights data that disagree would be worse than one.
+- The missing-`license` failure is silent — attribution still renders, the badge simply never appears — so it is now covered by a test rather than left to be noticed.
+
+### Two Mislabelled Image Files
+
+- `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` are JPEGs with a `.png` extension. Browsers sniff content so they display correctly, but they are served with the wrong Content-Type and exiftool cannot write metadata to them. Reported by name rather than silently skipped; fixing them means renaming and regenerating the manifests that reference them.
+
 ### Every Page Can Now Render Without a Browser
 
 - `Nav` read `window.innerWidth` inside a `useState` initializer, which runs during render. Because `Nav` is on every page, that single line made the entire app impossible to render outside a browser — the blocker for prerendering, which is the change that would lift both LCP and the site's structured-data coverage.

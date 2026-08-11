@@ -142,6 +142,12 @@ async function optimizeImage(filePath) {
       });
     }
 
+    // sharp discards all metadata unless told otherwise. Without this, optimization
+    // strips the IPTC/XMP rights fields embedded by scripts/metadata/embed-image-rights.js
+    // — the copyright, creator and licensing statement that travel with a photograph
+    // when it is copied off the site.
+    pipeline = pipeline.withMetadata();
+
     const tempPath = `${filePath}.tmp`;
     await pipeline.toFile(tempPath);
 
