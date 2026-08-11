@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-10
+
+### Sitemap Dates Crawlers Can Trust
+
+- 21 of 30 sitemap URLs carried no `lastmod`. That is the one sitemap signal Google still acts on — it schedules recrawls from it — and Google drops the signal entirely for sites that report it inaccurately.
+- Portfolio routes now take their `lastmod` from the `generated` stamp inside the manifest that renders them. That is the truthful answer for pages whose content changes when photos are added, and far better than the page component, which barely ever changes.
+- Removed `changefreq` and `priority` from every entry. Google has said for years that it ignores both.
+- Deriving dates from git turned out to be a trap: the repository is a shallow clone, so `git log` reports the boundary commit for every older file and would have dated roughly 20 pages identically. The generator now detects a shallow clone and omits the date rather than emitting a same-date-for-everything lie.
+- Dates already published in the committed sitemap are carried forward when they cannot be recomputed. The SEO Auto Update workflow checks out full history and can date the static content pages; without carry-forward, Vercel's shallow build would drop that work on every deploy.
+- Added `sitemap.static.test.ts`: every public route is listed, no `changefreq`/`priority`, all dates ISO-formatted, none in the future, portfolio routes always dated, and a guard against every entry sharing one date — the exact symptom of a bad date source.
+
+### Read-Only API Routes Cached at the Edge
+
+- `google-reviews` sent `no-store` on every response, so each request was a billed Google Places API call. Successful responses are now cached at the edge for an hour with a day of `stale-while-revalidate`.
+- `testimonials` sent `public, max-age=300`, which pins a copy in each visitor's browser where no deploy can clear it. Now `max-age=0` with `s-maxage=3600`, so browsers revalidate and the CDN does the serving.
+- Errors, rate-limit rejections, and the empty-array fallbacks are deliberately not given the success TTL. Caching "reviews unavailable" for an hour would outlast the blip that caused it. The degraded testimonials response gets 60 seconds instead.
+- `podcast-feed` and `manifests/[type]` were already correctly cached and are unchanged.
+- Added `api-cache-headers.test.ts`, which asserts the read-only routes set an edge TTL, that no route pins a long browser `max-age`, that degraded responses are cached far more briefly than real data, and that `contact` and `quote` are never edge-cached.
+
 ## 2026-08-09
 
 ### CSP Blocked Every Client-Side Supabase Call
