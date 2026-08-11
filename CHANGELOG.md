@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-11
+
+### Every Page Can Now Render Without a Browser
+
+- `Nav` read `window.innerWidth` inside a `useState` initializer, which runs during render. Because `Nav` is on every page, that single line made the entire app impossible to render outside a browser — the blocker for prerendering, which is the change that would lift both LCP and the site's structured-data coverage.
+- Fixed with a guarded lazy initializer. The resize effect now also runs on mount, so the desktop default is corrected immediately rather than only when the viewport happens to change — previously nothing re-evaluated it after the initial render.
+- Added `ssr-safety.test.tsx`, which renders nine pages with no DOM present and asserts each produces real markup rather than an empty shell. It runs in the node environment on purpose: under the project's jsdom default, `window` exists and the suite would pass without testing anything.
+- Guarded the `matchMedia` mock in the shared test setup so suites can opt into the node environment without the setup file failing before any test runs.
+- Verified by reintroducing the original line and confirming the suite fails.
+
+### Dynamic OG Images: Investigated and Dropped
+
+- The roadmap proposed generating per-page Open Graph images, on the premise that every blog post shared one image. That premise was wrong. `generate-route-meta.js` already gives each post its own lead photograph — 10 distinct images across the posts — and each portfolio has a purpose-made social card.
+- For a photography site the real photograph is a better share image than a generated text card, so building this would have been a downgrade. Recorded here so the idea is not revisited from the same false premise.
+
 ## 2026-08-10
 
 ### Sitemap Dates Crawlers Can Trust
