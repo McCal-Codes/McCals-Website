@@ -202,11 +202,38 @@
   </url>
 
   <url>
+    <loc>https://mcc-cal.com/licensing</loc>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Image Licensing | McCal Media</image:title>
+      <image:caption>Portrait of Pittsburgh photographer Caleb McCartney.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://mcc-cal.com/privacy</loc>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Privacy &amp; Cookies | McCal Media</image:title>
+      <image:caption>McCal Media brand mark for privacy information.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://mcc-cal.com/terms</loc>
+    <image:image>
+      <image:loc>https://mcc-cal.com/about/caleb-mccartney-photo.jpg</image:loc>
+      <image:title>Terms &amp; Conditions | McCal Media</image:title>
+      <image:caption>McCal Media brand mark for terms and conditions.</image:caption>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://mcc-cal.com/policies-legal</loc>
     <lastmod>2026-05-17</lastmod>
     <image:image>
       <image:loc>https://mcc-cal.com/brand/abridged-icon.png</image:loc>
-      <image:title>Policies and Legal | McCal Media</image:title>
+      <image:title>Policies &amp; Legal | McCal Media</image:title>
       <image:caption>McCal Media brand mark for policies and legal information.</image:caption>
     </image:image>
   </url>

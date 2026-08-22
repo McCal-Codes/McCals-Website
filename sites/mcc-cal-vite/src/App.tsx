@@ -30,6 +30,9 @@ const RequestAQuotePage = lazy(() => import('./pages/request-a-quote'));
 const GrabCoffeePage = lazy(() => import('./pages/grab-a-coffee'));
 const BookPodcastPage = lazy(() => import('./pages/book-a-podcast'));
 const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
+const LicensingPage = lazy(() => import('./pages/licensing'));
+const PrivacyPage = lazy(() => import('./pages/privacy'));
+const TermsPage = lazy(() => import('./pages/terms'));
 const FAQPage = lazy(() => import('./pages/faq'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
@@ -56,6 +59,9 @@ const staticRouteComponents = {
   projects: ProjectsPage,
   accessibility: AccessibilityPage,
   policiesLegal: PoliciesLegalPage,
+  licensing: LicensingPage,
+  privacy: PrivacyPage,
+  terms: TermsPage,
 } as const;
 
 // Simple fallback for page loading state

@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-12
+
+### One Legal Page Became Three
+
+- `policies-legal.tsx` was 1,075 lines holding 30 sections, and its own navigation already admitted what it was: License, Privacy Policy, Cookie Policy, Terms & Conditions. Four documents sharing one URL. A client could not be sent the terms without being sent everything, and none of the documents could be found on its own.
+- Split into `/licensing`, `/privacy` (privacy and cookies together) and `/terms` (the 24-subsection client agreement). `/policies-legal` stays as an index — it is linked from the footer, FAQ, podcast page and contact form, and it keeps the old `#license`, `#privacy` and `#terms` anchors so external fragment links still land somewhere useful. Fragments never reach the server, so they cannot be redirected.
+- Extracted `components/legal/LegalDocument.tsx`: table of contents with scrollspy and search, reading time, reading-progress bar, and the mobile drawer. All three documents share it, and it builds as its own chunk rather than being duplicated three times.
+- Wrote the licensing page properly rather than moving it. The old License section was a single paragraph; the new page covers what a licence grants, the four dimensions that scope one, editorial versus commercial use, releases, credit requirements, what is not permitted, and what to do about an image already published without a licence.
+- Added the `license` property to `generateImageObjectSchema`, alongside `acquireLicensePage`, `creditText`, `copyrightNotice` and `creator`. Google requires `license` for the Licensable badge and its absence fails silently — attribution still renders, the badge simply never appears.
+
+### Fixes Found While Splitting
+
+- The effective date was rendered from `new Date()`, so every legal document told every reader its terms had changed today. `LegalDocument` now requires the date as a prop, because it is a factual claim about a document rather than something to compute.
+- The terms page had an `h2` reading "Terms & Conditions" directly under an `h1` reading "Terms & Conditions". Correct when it was one document among four; redundant now. It reads "Overview", which is what the table of contents has always called it.
+- The prerendered title said "Policies and Legal" while the page set "Policies & Legal" at runtime. Crawlers see the prerendered one; they now agree.
+- The contact form's consent checkbox linked to the combined page for what is a privacy and terms agreement. It now names and links both.
+- The footer listed a single "Policies & Legal" entry; it lists Licensing, Privacy and Terms, which is what people look for.
+
+
 ## 2026-08-11
 
 ### Every Page Can Now Render Without a Browser

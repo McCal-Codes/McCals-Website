@@ -305,9 +305,9 @@
   },
   "policiesLegal": {
     "route": "/policies-legal",
-    "title": "Policies and Legal | McCal Media",
+    "title": "Policies & Legal | McCal Media",
     "description": "Review McCal Media policies for terms, licensing, privacy, copyright, accessibility, image use, and client project agreements.",
-    "ogTitle": "Policies and Legal | McCal Media",
+    "ogTitle": "Policies & Legal | McCal Media",
     "ogDescription": "Terms, licensing, copyright, privacy, image use, and client agreement policies for McCal Media.",
     "imagePath": "/brand/abridged-icon.png",
     "imageAlt": "McCal Media brand mark for policies and legal information.",
@@ -317,6 +317,56 @@
       "photography licensing",
       "copyright policy",
       "terms"
+    ]
+  },
+  "licensing": {
+    "route": "/licensing",
+    "title": "Image Licensing | McCal Media",
+    "description": "Usage rights for photography by Caleb McCartney. How licences are scoped, editorial and commercial use, credit requirements, and how to license an image.",
+    "ogTitle": "Image Licensing | McCal Media",
+    "ogDescription": "How to license photography by Caleb McCartney — scope, credit, and editorial versus commercial use.",
+    "imagePath": "/about/caleb-mccartney-photo.jpg",
+    "imageAlt": "Portrait of Pittsburgh photographer Caleb McCartney.",
+    "imageName": "McCal Media image licensing",
+    "keywords": [
+      "image licensing",
+      "photo licensing",
+      "photography usage rights",
+      "editorial licensing",
+      "Pittsburgh photographer licensing",
+      "stock photo licence"
+    ]
+  },
+  "privacy": {
+    "route": "/privacy",
+    "title": "Privacy & Cookies | McCal Media",
+    "description": "How McCal Media collects, uses, and protects personal information, and how cookies are used on this site.",
+    "ogTitle": "Privacy & Cookies | McCal Media",
+    "ogDescription": "How McCal Media handles personal data and cookies.",
+    "imagePath": "/about/caleb-mccartney-photo.jpg",
+    "imageAlt": "McCal Media brand mark for privacy information.",
+    "imageName": "McCal Media privacy policy",
+    "keywords": [
+      "privacy policy",
+      "cookie policy",
+      "data handling",
+      "McCal Media privacy"
+    ]
+  },
+  "terms": {
+    "route": "/terms",
+    "title": "Terms & Conditions | McCal Media",
+    "description": "Service terms for McCal Media photography: consultation, cost and fees, intellectual property, cancellations, liability, and governing law.",
+    "ogTitle": "Terms & Conditions | McCal Media",
+    "ogDescription": "Service terms and client agreement for McCal Media photography.",
+    "imagePath": "/about/caleb-mccartney-photo.jpg",
+    "imageAlt": "McCal Media brand mark for terms and conditions.",
+    "imageName": "McCal Media terms and conditions",
+    "keywords": [
+      "terms and conditions",
+      "photography contract",
+      "client agreement",
+      "service terms"
     ]
   }
 }
