@@ -220,7 +220,7 @@ const TRAIL_IMAGES: TrailImage[] = [
   {
     id: 'erie-night',
     folderPath: 'Politics/tim-walz-erie',
-    filename: '050924_Tim_Walz_Erie_PA.png',
+    filename: '050924_Tim_Walz_Erie_PA.jpg',
     width: 1024,
     height: 683,
     alt:
