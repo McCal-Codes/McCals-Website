@@ -8,6 +8,40 @@
 import type { PortfolioGroup, PortfolioImage } from '../components/portfolio/types';
 
 const SITE_ROOT = 'https://mcc-cal.com';
+
+/**
+ * Rights values for image structured data.
+ *
+ * Google reads five fields to attribute and license an image. `license` is the one
+ * that gates the "Licensable" badge — without it the others display attribution but
+ * the badge never appears, which is a silent failure.
+ *
+ * These must match what scripts/metadata/embed-image-rights.js writes into the files
+ * themselves, or the page and the photograph will claim different rights. Enforced by
+ * image-rights-parity.test.ts.
+ */
+export const IMAGE_RIGHTS = {
+  creator: 'Caleb McCartney',
+  creditText: 'Caleb McCartney/McCal Media',
+  copyrightNotice: 'Copyright Caleb McCartney / McCal Media. All rights reserved.',
+  license: `${SITE_ROOT}/policies-legal#license`,
+  acquireLicensePage: `${SITE_ROOT}/request-a-quote`,
+} as const;
+
+/** The rights block every ImageObject we emit should carry. */
+export function imageRightsProperties() {
+  return {
+    creator: {
+      '@type': 'Person',
+      name: IMAGE_RIGHTS.creator,
+      url: `${SITE_ROOT}/about`,
+    },
+    creditText: IMAGE_RIGHTS.creditText,
+    copyrightNotice: IMAGE_RIGHTS.copyrightNotice,
+    license: IMAGE_RIGHTS.license,
+    acquireLicensePage: IMAGE_RIGHTS.acquireLicensePage,
+  };
+}
 const GOOGLE_BUSINESS_PROFILE_URL = 'https://www.google.com/search?kgmid=/g/11krrndw6s&q=McCal+Media';
 const MC_CAL_LOGO = `${SITE_ROOT}/brand/logo-mark.svg`;
 const MC_CAL_EMAIL = 'contact@mcc-cal.com';
@@ -213,8 +247,9 @@ export function generateImageObjectSchema(
     description: image.caption || image.description,
     author: {
       '@type': 'Person',
-      name: 'Caleb McCartney',
+      name: IMAGE_RIGHTS.creator,
     },
+    ...imageRightsProperties(),
     url,
   };
 }
