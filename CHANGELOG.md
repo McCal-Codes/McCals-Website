@@ -18,8 +18,41 @@
 - The contact form's consent checkbox linked to the combined page for what is a privacy and terms agreement. It now names and links both.
 - The footer listed a single "Policies & Legal" entry; it lists Licensing, Privacy and Terms, which is what people look for.
 
+### Three Published Assignments Now Carry Their Credit
+
+- `Trump Returns Butler`, `Kamala Speaks Erie` and `Tim Walz Erie` were all marked `published: false` with no outlet, so they were absent from the "Recent published work" strip and carried no publication credit anywhere. All three ran in The Globe, Point Park University's student-run paper. Credited in each event's `tags.json`, which is where event metadata lives, following the worked example in `Fern Hollow Nature Center Groundbreaking`.
+- Published events go from 4 to 7 of 17. Once these images are re-stamped, `IPTC:Source` will carry the outlet the way the Fern Hollow frames already do.
+- `articleUrl` is left empty on all three: the direct links are not something that can be derived, and a wrong URL in structured data is worse than an absent one.
+
+### Two Files Were Lying About Their Format
+
+- `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` were JPEGs with a `.png` extension. Browsers sniff content so they displayed correctly, which is why this went unnoticed — but they were served with the wrong Content-Type, and `exiftool` cannot write rights metadata to a file whose extension contradicts its contents.
+- Renamed to `.jpg` with `git mv`, caption keys updated, and every manifest that referenced them regenerated. This mattered more than it looked: the Tim Walz event has exactly one image, and that file was it.
+
 
 ## 2026-08-11
+
+### Photographs Now Carry Their Own Rights and Captions
+
+- The published photographs carried no copyright, creator, credit or rights statement at all, and `scripts/optimize-images.js` was stripping whatever the originals had — sharp discards metadata unless told otherwise. Embedded metadata is the only attribution that survives an image being copied off the site.
+- `scripts/optimize-images.js` now calls `withMetadata()`. Verified by running a control image with full licensing tags through the exact pipeline settings: all fields were destroyed before, all survive now.
+- Added `scripts/metadata/embed-image-rights.js`, which writes IPTC/XMP rights fields via exiftool. sharp cannot do this — it exposes IPTC blocks as opaque buffers.
+- Fields follow the IPTC Photo Metadata Standard and the five Google reads for Google Images: Creator, Credit Line and Copyright Notice for attribution, plus Web Statement of Rights and Licensor URL to enable the Licensable badge. Written to XMP, IIM and EXIF so tools that read only one still find them.
+- Credit uses the AP form `Caleb McCartney/McCal Media`. The parenthetical `(Photo by …)` stays in caption text, where AP puts it.
+- Images are declared `digitalCapture` under the IPTC DigitalSourceType vocabulary — an explicit assertion of original photography rather than generated imagery. Applied only to real photographs.
+- Journalism images additionally receive their AP-style caption, headline, capture date, publishing outlet and keywords from the journalism manifest. Other portfolios get rights fields only; they have no caption data, and inventing captions would put false statements in the files.
+- Applied to the 531 journalism images (529 written). Scoped deliberately: these images are committed without Git LFS, so stamping rewrites every blob permanently — roughly 1.1 GB for all five portfolios against a 2.4 GB `.git`. The remaining portfolios are a separate decision.
+- The script is idempotent, skipping files that already carry the current Web Statement, so it can run on a schedule without rewriting thousands of binaries each pass.
+
+### Structured Data Can Finally Earn the Licensable Badge
+
+- `generateImageObjectSchema` emitted `contentUrl` and `author` but not `license`, which Google explicitly requires for badge eligibility. It now emits `license`, `acquireLicensePage`, `creditText`, `copyrightNotice` and `creator`, pointing at the existing `/policies-legal#license` and `/request-a-quote` pages.
+- Added `image-rights-parity.test.ts`, asserting the page's JSON-LD and the metadata embedded in the files claim the same creator, credit, copyright and licensing URLs. Two sources of rights data that disagree would be worse than one.
+- The missing-`license` failure is silent — attribution still renders, the badge simply never appears — so it is now covered by a test rather than left to be noticed.
+
+### Two Mislabelled Image Files
+
+- `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` are JPEGs with a `.png` extension. Browsers sniff content so they display correctly, but they are served with the wrong Content-Type and exiftool cannot write metadata to them. Reported by name rather than silently skipped; fixing them means renaming and regenerating the manifests that reference them.
 
 ### Every Page Can Now Render Without a Browser
 

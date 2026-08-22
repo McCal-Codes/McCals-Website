@@ -4,7 +4,13 @@
   "caption": "Vice President Kamala Harris, the Democratic presidential nominee, campaigns Oct. 14, 2024, at Erie Insurance Arena in Erie, Pa. (Photo by Caleb McCartney)",
   "tags": [
     "Politics",
-    "Presidential Campaign"
+    "Presidential Campaign",
+    "Published Work"
   ],
-  "published": false
+  "published": true,
+  "outlet": "The Globe",
+  "outletUrl": "https://ppuglobe.com",
+  "articleTitle": "Harris campaigns in Erie",
+  "articleUrl": "",
+  "publishedDate": "2024-10-14"
 }

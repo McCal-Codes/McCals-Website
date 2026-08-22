@@ -4,7 +4,13 @@
   "caption": "Republican presidential nominee Donald Trump campaigns Oct. 5, 2024, at the Butler Farm Show grounds in Butler, Pa. (Photo by Caleb McCartney)",
   "tags": [
     "Politics",
-    "Presidential Campaign"
+    "Presidential Campaign",
+    "Published Work"
   ],
-  "published": false
+  "published": true,
+  "outlet": "The Globe",
+  "outletUrl": "https://ppuglobe.com",
+  "articleTitle": "Trump returns to Butler",
+  "articleUrl": "",
+  "publishedDate": "2024-10-05"
 }
