@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-12
+
+### Three Published Assignments Now Carry Their Credit
+
+- `Trump Returns Butler`, `Kamala Speaks Erie` and `Tim Walz Erie` were all marked `published: false` with no outlet, so they were absent from the "Recent published work" strip and carried no publication credit anywhere. All three ran in The Globe, Point Park University's student-run paper. Credited in each event's `tags.json`, which is where event metadata lives, following the worked example in `Fern Hollow Nature Center Groundbreaking`.
+- Published events go from 4 to 7 of 17. Once these images are re-stamped, `IPTC:Source` will carry the outlet the way the Fern Hollow frames already do.
+- `articleUrl` is left empty on all three: the direct links are not something that can be derived, and a wrong URL in structured data is worse than an absent one.
+
+### Two Files Were Lying About Their Format
+
+- `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` were JPEGs with a `.png` extension. Browsers sniff content so they displayed correctly, which is why this went unnoticed — but they were served with the wrong Content-Type, and `exiftool` cannot write rights metadata to a file whose extension contradicts its contents.
+- Renamed to `.jpg` with `git mv`, caption keys updated, and every manifest that referenced them regenerated. This mattered more than it looked: the Tim Walz event has exactly one image, and that file was it.
+
+
 ## 2026-08-11
 
 ### Every Page Can Now Render Without a Browser
