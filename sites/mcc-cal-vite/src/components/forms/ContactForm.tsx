@@ -226,10 +226,14 @@ export function ContactForm() {
             />
             <span>
               I agree to the{' '}
-              <Link to="/policies-legal" className={styles.privacyLink}>
-                policies &amp; legal information
+              <Link to="/privacy" className={styles.privacyLink}>
+                privacy policy
               </Link>{' '}
-              and consent to being contacted about this inquiry.{' '}
+              and{' '}
+              <Link to="/terms" className={styles.privacyLink}>
+                terms
+              </Link>
+              , and consent to being contacted about this inquiry.{' '}
               <span className={styles.required}>*</span>
             </span>
           </label>

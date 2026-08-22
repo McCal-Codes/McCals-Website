@@ -62,7 +62,9 @@ export const FOOTER_NAV_SECTIONS = [
       { label: 'Podcast', to: '/podcast' },
       { label: 'Authors', to: '/authors' },
       { label: 'FAQs', to: '/faq' },
-      { label: 'Policies & Legal', to: '/policies-legal' },
+      { label: 'Licensing', to: '/licensing' },
+      { label: 'Privacy', to: '/privacy' },
+      { label: 'Terms', to: '/terms' },
     ],
   },
 ] as const satisfies readonly FooterNavSection[];

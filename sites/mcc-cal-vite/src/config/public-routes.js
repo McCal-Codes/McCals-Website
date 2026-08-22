@@ -99,6 +99,27 @@ export const STATIC_PAGE_ROUTES = [
     priority: '0.3',
   },
   {
+    path: '/licensing',
+    routeKey: 'licensing',
+    seoKey: 'licensing',
+    changefreq: 'yearly',
+    priority: '0.6',
+  },
+  {
+    path: '/privacy',
+    routeKey: 'privacy',
+    seoKey: 'privacy',
+    changefreq: 'yearly',
+    priority: '0.5',
+  },
+  {
+    path: '/terms',
+    routeKey: 'terms',
+    seoKey: 'terms',
+    changefreq: 'yearly',
+    priority: '0.5',
+  },
+  {
     path: '/policies-legal',
     routeKey: 'policiesLegal',
     seoKey: 'policiesLegal',

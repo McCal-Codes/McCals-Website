@@ -18,6 +18,9 @@ export type StaticRouteKey =
   | 'faq'
   | 'projects'
   | 'accessibility'
+  | 'licensing'
+  | 'privacy'
+  | 'terms'
   | 'policiesLegal';
 
 export type StaticRouteSeoKey = StaticRouteKey | 'authorMccal';
