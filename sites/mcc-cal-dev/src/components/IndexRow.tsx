@@ -62,7 +62,7 @@ export default function IndexRow({ project }: IndexRowProps) {
           )}
 
           <div className={styles.facts}>
-            <StatusMarker status={project.status} />
+            <StatusMarker slug={project.slug} status={project.status} />
             {stack.length > 0 && (
               <p className={`${styles.stack} meta`}>{stack.join(' / ')}</p>
             )}

@@ -198,3 +198,12 @@ samp {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Sections receive focus when jumped to, for keyboard and screen-reader parity.
+ * They are not interactive, so the focus ring would be noise.
+ */
+section:focus,
+section:focus-visible {
+  outline: none;
+}

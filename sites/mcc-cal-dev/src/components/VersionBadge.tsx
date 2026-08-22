@@ -2,15 +2,13 @@ import styles from './VersionBadge.module.css';
 
 interface VersionBadgeProps {
   version?: string;
-  build?: string;
   updated?: string;
 }
 
 /** Version markers. Renders nothing when there is nothing real to show. */
-export default function VersionBadge({ version, build, updated }: VersionBadgeProps) {
+export default function VersionBadge({ version, updated }: VersionBadgeProps) {
   const parts = [
     version,
-    build ? `Build ${build}` : null,
     updated ? `Updated ${updated}` : null,
   ].filter((part): part is string => Boolean(part));
 

@@ -27,13 +27,22 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(here, '..', 'src', 'content', 'github.json');
 
 /**
- * Repositories to track, keyed by the project slug in projects.ts.
- * A slug with no entry here simply renders without live data.
+ * Repositories to track, keyed by slug.
+ *
+ * Product slugs come from projects.ts; website slugs come from the `repoSlug`
+ * field in websites.ts. Both are validated by scripts/validate-content.js, which
+ * fails the build if a slug referenced in content has no entry here — the
+ * alternative is a link that silently never renders.
  */
 const TARGETS = [
+  // Products.
   { slug: 'terranova', owner: 'McCal-Codes', repo: 'TerraNova', releases: true },
   { slug: 'abridgd', owner: 'McCal-Codes', repo: 'abridgd', releases: true },
   { slug: 'void-ledger', owner: 'McCal-Codes', repo: 'void-ledger', releases: true },
+
+  // Websites that have public source. No releases: sites ship continuously.
+  { slug: 'allegheny-hyp-club', owner: 'McCal-Codes', repo: 'allegheny-hyp-club' },
+  { slug: 'divine-eyth', owner: 'McCal-Codes', repo: 'divine-eyth-website' },
 ];
 
 function headers() {

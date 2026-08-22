@@ -247,8 +247,3 @@ export const PROJECTS: Project[] = [
 export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((project) => project.slug === slug);
 }
-
-/** Projects with a written case study, and therefore a route. */
-export const PROJECTS_WITH_CASE_STUDIES = PROJECTS.filter(
-  (project) => project.sections.length > 0,
-);

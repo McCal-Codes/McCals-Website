@@ -1,6 +1,6 @@
 {
   "generatedBy": "sites/mcc-cal-dev/scripts/sync-sites.js",
-  "generatedAt": "2026-08-22T18:12:08.382Z",
+  "generatedAt": "2026-08-22T18:23:52.616Z",
   "sites": [
     {
       "slug": "courtroom-kyle",
@@ -11,7 +11,7 @@
       "title": "Courtroom Kyle | supreme court and legal news blog",
       "description": "Courtroom Kyle is a supreme court and legal news blog dedicated to unraveling the complexities of court cases and keeping you informed about the latest developments in U.S. law and its impact on society.",
       "detectedPlatform": "Wix",
-      "preview": "/site-previews/courtroom-kyle.png",
+      "preview": "/site-previews/courtroom-kyle.jpg",
       "checkedAt": "2026-08-22",
       "previewSource": "screenshot"
     },
@@ -24,7 +24,7 @@
       "title": "The Allegheny HYP Club | Pittsburgh's Premier Private Club",
       "description": "Pittsburgh",
       "detectedPlatform": null,
-      "preview": "/site-previews/allegheny-hyp-club.png",
+      "preview": "/site-previews/allegheny-hyp-club.jpg",
       "checkedAt": "2026-08-22",
       "previewSource": "screenshot"
     },

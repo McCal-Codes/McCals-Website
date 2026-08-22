@@ -160,7 +160,29 @@ async function downloadPreview(slug, imageUrl, pageUrl) {
   await fs.mkdir(IMAGE_DIR, { recursive: true });
   const filename = `${slug}.${extension}`;
   await fs.writeFile(path.join(IMAGE_DIR, filename), buffer);
+  await removeStalePreviews(slug, filename);
   return { path: `/site-previews/${filename}`, bytes: buffer.byteLength };
+}
+
+/**
+ * Deletes previous previews for a slug that are not the file just written.
+ *
+ * Without this, switching format (or a site's og:image changing type) leaves the
+ * old file orphaned in public/ forever, shipped on every deploy.
+ */
+async function removeStalePreviews(slug, keepFilename) {
+  let entries;
+  try {
+    entries = await fs.readdir(IMAGE_DIR);
+  } catch {
+    return;
+  }
+
+  await Promise.all(
+    entries
+      .filter((name) => name.startsWith(`${slug}.`) && name !== keepFilename)
+      .map((name) => fs.rm(path.join(IMAGE_DIR, name), { force: true })),
+  );
 }
 
 /**
@@ -189,6 +211,10 @@ async function captureScreenshot(slug, url) {
     });
     const page = await context.newPage();
 
+    // Third-party sites are untrusted input. Nothing here should be able to
+    // prompt, navigate us away, or block the capture on a dialog.
+    page.on('dialog', (dialog) => dialog.dismiss().catch(() => {}));
+
     // Deliberately not 'networkidle': hosted builders (Wix in particular) poll
     // analytics forever, so the network never goes idle and the wait always times
     // out. Wait for load, then give the page a fixed settle budget instead.
@@ -209,8 +235,18 @@ async function captureScreenshot(slug, url) {
     await page.waitForTimeout(3000);
 
     await fs.mkdir(IMAGE_DIR, { recursive: true });
-    const filename = `${slug}.png`;
-    await page.screenshot({ path: path.join(IMAGE_DIR, filename), type: 'png' });
+
+    // JPEG, not PNG. A 2x screenshot of a photographic page is several hundred
+    // kilobytes as PNG and roughly a quarter of that as JPEG, with no visible
+    // difference at the size these render.
+    const filename = `${slug}.jpg`;
+    await page.screenshot({
+      path: path.join(IMAGE_DIR, filename),
+      type: 'jpeg',
+      quality: 82,
+    });
+
+    await removeStalePreviews(slug, filename);
 
     const { size } = await fs.stat(path.join(IMAGE_DIR, filename));
     return { path: `/site-previews/${filename}`, bytes: size };

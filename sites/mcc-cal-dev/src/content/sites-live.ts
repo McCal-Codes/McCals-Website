@@ -33,8 +33,6 @@ interface SitesData {
 
 const live = data as SitesData;
 
-export const SITES_CHECKED_AT = live.generatedAt;
-
 export function getLiveSite(slug: string): LiveSite | undefined {
   return live.sites.find((site) => site.slug === slug);
 }

@@ -73,7 +73,18 @@ export function monthsSincePush(repo: GithubRepo | undefined, now = new Date()):
   if (!repo || !repo.pushedAt) return null;
   const pushed = new Date(`${repo.pushedAt}T00:00:00Z`);
   if (Number.isNaN(pushed.getTime())) return null;
-  return Math.floor((now.getTime() - pushed.getTime()) / (1000 * 60 * 60 * 24 * 30.44));
+
+  // Calendar months, not elapsed-days / 30.44. Dividing by an average month
+  // undercounts: a full year comes out as eleven months, and this number is
+  // rendered to the reader.
+  let months =
+    (now.getUTCFullYear() - pushed.getUTCFullYear()) * 12 +
+    (now.getUTCMonth() - pushed.getUTCMonth());
+
+  // The final month has not completed until the day-of-month is reached.
+  if (now.getUTCDate() < pushed.getUTCDate()) months -= 1;
+
+  return Math.max(0, months);
 }
 
 /** '29 Jun 2026' from '2026-06-29'. */
