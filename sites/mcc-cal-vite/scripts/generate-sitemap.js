@@ -170,16 +170,122 @@ function absoluteUrl(value) {
 function urlEntry({ loc, lastmod, images = [] }) {
   const lines = [`  <url>`, `    <loc>${loc}</loc>`];
   if (lastmod) lines.push(`    <lastmod>${lastmod}</lastmod>`);
+  // <image:loc> is the only image tag Google still reads. It removed
+  // <image:caption>, <image:title>, <image:license> and <image:geo_location> from
+  // its documentation, so emitting them implies coverage that does not exist.
   for (const image of images) {
     if (!image.loc) continue;
     lines.push('    <image:image>');
     lines.push(`      <image:loc>${escapeXml(image.loc)}</image:loc>`);
-    if (image.title) lines.push(`      <image:title>${escapeXml(image.title)}</image:title>`);
-    if (image.caption) lines.push(`      <image:caption>${escapeXml(image.caption)}</image:caption>`);
     lines.push('    </image:image>');
   }
   lines.push(`  </url>`);
   return lines.join('\n');
+}
+
+/**
+ * Portfolio images, per route, for the image sitemap.
+ *
+ * Google names image sitemaps as the way to surface "images your site reaches with
+ * JavaScript code" — which is exactly this site. The portfolios render client-side,
+ * so a crawler that does not execute JavaScript sees none of the photographs. Before
+ * this, the sitemap listed one image per page: the Open Graph card.
+ *
+ * URLs are built the same way the app builds them (see `imageUrl` in
+ * src/components/portfolio/useManifest.ts). If the two ever disagree the sitemap
+ * points at images that do not exist, which is worse than listing none.
+ */
+const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
+const PORTFOLIOS_BASE = 'src/images/Portfolios';
+
+/** Google allows 1,000 images per <url>; staying well under leaves room to grow. */
+const MAX_IMAGES_PER_URL = 500;
+
+function encodeURIPath(value) {
+  return value.split('/').map(encodeURIComponent).join('/');
+}
+
+function cdnUrl(repoRelativePath) {
+  return `${REPO_CDN_BASE}/${encodeURIPath(repoRelativePath)}`;
+}
+
+function readManifest(fileName) {
+  const file = path.join(MANIFEST_DIR, fileName);
+  if (!fs.existsSync(file)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Each portfolio stores image paths differently, so each needs its own reader
+ * rather than one clever generic walk that would silently produce wrong URLs.
+ */
+const PORTFOLIO_IMAGE_READERS = {
+  '/journalism': () => {
+    const manifest = readManifest('journalism-manifest.json');
+    return (manifest?.events ?? []).flatMap((event) =>
+      (event.images ?? [])
+        .map((image) => image.filename || image.path)
+        .filter(Boolean)
+        .map((filename) => `${PORTFOLIOS_BASE}/Journalism/${event.folderPath}/${filename}`),
+    );
+  },
+  '/nature': () => {
+    const manifest = readManifest('nature-manifest.json');
+    return (manifest?.collections ?? []).flatMap((collection) =>
+      (collection.images ?? [])
+        .filter((image) => typeof image === 'string')
+        .map((filename) => `${PORTFOLIOS_BASE}/Nature/${collection.folderPath}/${filename}`),
+    );
+  },
+  '/portraits': () => {
+    const manifest = readManifest('portrait-manifest.json');
+    return (manifest?.collections ?? []).flatMap((collection) =>
+      (collection.images ?? [])
+        .filter((image) => typeof image === 'string')
+        .map((filename) => `${PORTFOLIOS_BASE}/Portrait/${collection.folderPath}/${filename}`),
+    );
+  },
+  '/concerts': () => {
+    const manifest = readManifest('concert-manifest.json');
+    return (manifest?.bands ?? []).flatMap((band) =>
+      (band.images ?? [])
+        .filter((image) => typeof image === 'string')
+        // relativeFolderPath already includes "Concert/<band>/<month>".
+        .map((filename) => `${PORTFOLIOS_BASE}/${band.relativeFolderPath}/${filename}`),
+    );
+  },
+  '/events': () => {
+    const manifest = readManifest('events-manifest.json');
+    return (manifest?.events ?? []).flatMap((event) =>
+      // Events already store a full repo-relative path.
+      (event.images ?? []).map((image) => image?.path).filter(Boolean),
+    );
+  },
+};
+
+const droppedByRoute = [];
+
+/** Absolute image URLs for a route, deduped and capped. */
+function portfolioImagesFor(routePath) {
+  const read = PORTFOLIO_IMAGE_READERS[routePath];
+  if (!read) return [];
+
+  let paths;
+  try {
+    paths = read();
+  } catch {
+    return [];
+  }
+
+  const unique = [...new Set(paths)];
+  if (unique.length > MAX_IMAGES_PER_URL) {
+    droppedByRoute.push({ routePath, listed: MAX_IMAGES_PER_URL, dropped: unique.length - MAX_IMAGES_PER_URL });
+  }
+  return unique.slice(0, MAX_IMAGES_PER_URL).map((repoPath) => ({ loc: cdnUrl(repoPath) }));
 }
 
 const entries = [];
@@ -191,15 +297,12 @@ for (const route of STATIC_PAGE_ROUTES) {
     urlEntry({
       loc: `${SITE_URL}${route.path}`,
       lastmod: lastmodForRoute(route),
-      images: seo
-        ? [
-            {
-              loc: absoluteUrl(seo.imagePath),
-              title: seo.ogTitle || seo.title,
-              caption: seo.imageAlt,
-            },
-          ]
-        : [],
+      images: (() => {
+        const portfolio = portfolioImagesFor(route.path);
+        if (portfolio.length > 0) return portfolio;
+        // Non-portfolio routes still list their Open Graph image.
+        return seo ? [{ loc: absoluteUrl(seo.imagePath) }] : [];
+      })(),
     })
   );
 }
@@ -212,13 +315,7 @@ if (fs.existsSync(MANIFEST)) {
       loc: `${SITE_URL}/blog/${post.slug}`,
       // Authored publication date — the most trustworthy signal available.
       lastmod: toSitemapDate(post.updated || post.date),
-      images: [
-        {
-          loc: absoluteUrl(post.leadImage || post.leadImageFallback),
-          title: post.title,
-          caption: post.leadImageCaption || post.leadImageAlt || post.excerpt,
-        },
-      ],
+      images: [{ loc: absoluteUrl(post.leadImage || post.leadImageFallback) }],
     }));
   }
   console.log(`Sitemap: added ${posts.filter(p => p.published).length} blog posts`);
@@ -241,6 +338,14 @@ fs.writeFileSync(OUT, xml, 'utf8');
 const withLastmod = entries.filter((entry) => entry.includes('<lastmod>')).length;
 console.log(`Sitemap: written to ${path.relative(process.cwd(), OUT)} (${entries.length} URLs)`);
 console.log(`Sitemap: ${withLastmod}/${entries.length} URLs carry a trustworthy lastmod`);
+
+const imageCount = (xml.match(/<image:image>/g) ?? []).length;
+console.log(`Sitemap: ${imageCount} images listed`);
+for (const { routePath, listed, dropped } of droppedByRoute) {
+  console.warn(
+    `Sitemap: ${routePath} has more images than the per-URL cap; listed ${listed}, dropped ${dropped}.`,
+  );
+}
 if (carriedForward > 0) {
   console.log(`Sitemap: ${carriedForward} lastmod values carried forward from the committed sitemap`);
 }
