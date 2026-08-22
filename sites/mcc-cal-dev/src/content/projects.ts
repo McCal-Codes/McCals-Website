@@ -230,9 +230,9 @@ export const PROJECTS: Project[] = [
     index: '04',
     slug: 'experiments',
     title: 'Other work',
-    purpose: 'Smaller tools, mods, and client sites.',
+    purpose: 'Smaller tools, mods, and publication software.',
     pitch:
-      'Publication tooling, a Hytale worldgen mod about the uncanny valley, and a handful of sites built for other people.',
+      'Publication tooling for a literary magazine, and a Hytale worldgen mod about the uncanny valley.',
     status: 'research',
     meta: {
       type: 'Assorted',

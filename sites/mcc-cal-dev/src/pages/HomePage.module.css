@@ -180,3 +180,16 @@
 .noteList {
   margin-top: 0.5rem;
 }
+
+.websites {
+  padding-block: var(--section-gap);
+  border-top: var(--rule);
+}
+
+/* Auto-fit keeps single-column on narrow screens without a media query. */
+.siteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 2.5rem 2rem;
+  margin-top: 3rem;
+}

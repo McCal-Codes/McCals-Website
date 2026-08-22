@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { ACTIVITY } from '@/content/activity';
 import { NOTES } from '@/content/notes';
 import { PROJECTS } from '@/content/projects';
+import { WEBSITES } from '@/content/websites';
 import { SITE } from '@/content/site';
 import IndexRow from '@/components/IndexRow';
+import WebsiteCard from '@/components/WebsiteCard';
 import NoteCard from '@/components/NoteCard';
 import { useDocumentMeta } from '@/lib/useDocumentTitle';
 import styles from './HomePage.module.css';
@@ -46,7 +48,7 @@ export default function HomePage() {
               What I am building
             </h2>
             <p className={styles.sectionNote}>
-              Four projects, in the order I started them. Each one has a write-up when
+              My own projects, in the order I started them. Each one has a write-up when
               there is something worth writing.
             </p>
           </div>
@@ -54,6 +56,27 @@ export default function HomePage() {
           <div className={styles.rows}>
             {PROJECTS.map((project) => (
               <IndexRow key={project.slug} project={project} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="websites-heading" className={styles.websites} id="websites">
+        <div className="shell">
+          <div className={styles.indexHead}>
+            <h2 className={styles.sectionHeading} id="websites-heading">
+              Sites I have built for other people
+            </h2>
+            <p className={styles.sectionNote}>
+              Client and commission work. Some have source to read and some do not,
+              because they were built on hosted platforms. What matters here is that
+              they are live.
+            </p>
+          </div>
+
+          <div className={styles.siteGrid}>
+            {WEBSITES.map((site) => (
+              <WebsiteCard key={site.slug} site={site} />
             ))}
           </div>
         </div>

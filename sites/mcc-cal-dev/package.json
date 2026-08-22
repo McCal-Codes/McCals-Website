@@ -8,6 +8,10 @@
     "build": "tsc -b && vite build",
     "sync:github": "node scripts/sync-github.js",
     "sync:github:dry": "node scripts/sync-github.js --dry-run",
+    "sync:sites": "node scripts/sync-sites.js",
+    "sync:sites:shots": "node scripts/sync-sites.js --shots",
+    "sync:sites:dry": "node scripts/sync-sites.js --dry-run",
+    "sync": "npm run sync:github && npm run sync:sites",
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist",
     "typecheck": "tsc -b"

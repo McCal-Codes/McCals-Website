@@ -41,16 +41,32 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node sites/mcc-cal-dev/scripts/sync-github.js
 
+      - name: Sync live website metadata
+        # Client sites are third-party hosts we do not control. The script already
+        # keeps the previous record on failure, so a site being down must not fail
+        # the job either.
+        continue-on-error: true
+        run: node sites/mcc-cal-dev/scripts/sync-sites.js
+
       - name: Detect changes
         id: diff
+        env:
+          TRACKED: >-
+            sites/mcc-cal-dev/src/content/github.json
+            sites/mcc-cal-dev/src/content/sites.json
+            sites/mcc-cal-dev/public/site-previews
         run: |
-          # generatedAt changes on every run, so compare everything except that line.
-          if git diff --quiet -- sites/mcc-cal-dev/src/content/github.json; then
+          # generatedAt and checkedAt change on every run. Treat a diff made up
+          # only of those as no change, so the workflow does not commit noise.
+          # shellcheck disable=SC2086
+          if git diff --quiet -- $TRACKED && [ -z "$(git status --porcelain -- $TRACKED)" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-          elif [ -z "$(git diff -U0 -- sites/mcc-cal-dev/src/content/github.json \
-              | grep -E '^[+-] ' | grep -v '"generatedAt"')" ]; then
+          elif [ -z "$(git diff -U0 -- $TRACKED \
+              | grep -E '^[+-] ' \
+              | grep -vE '"(generatedAt|checkedAt)"')" ] \
+              && [ -z "$(git status --porcelain -- $TRACKED | grep '^??')" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            git checkout -- sites/mcc-cal-dev/src/content/github.json
+            git checkout -- $TRACKED
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
@@ -60,8 +76,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sites/mcc-cal-dev/src/content/github.json
-          git commit -m "chore: refresh dev portfolio repository metadata"
+          git add sites/mcc-cal-dev/src/content/github.json \
+                  sites/mcc-cal-dev/src/content/sites.json \
+                  sites/mcc-cal-dev/public/site-previews
+          git commit -m "chore: refresh dev portfolio repository and site metadata"
           git push
 
       - name: Summary

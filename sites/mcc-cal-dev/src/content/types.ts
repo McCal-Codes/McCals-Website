@@ -147,6 +147,41 @@ export interface Project {
   sections: CaseStudySection[];
 }
 
+/* -- Websites ------------------------------------------------------------ */
+
+/**
+ * A site built for someone else.
+ *
+ * Deliberately not a `Project`. A product is proved by its repository — source,
+ * releases, license. A website is proved by being live and looking right, and
+ * several of these have no repository at all because they were built on hosted
+ * platforms. Different evidence, so a different type.
+ *
+ * Everything observable (title, description, preview image, whether it still
+ * resolves) is pulled by `scripts/sync-sites.js`. Only role and the one-line
+ * description of the work are written by hand, because no crawler can infer them.
+ */
+export interface Website {
+  /** Two-digit index within the websites list. */
+  index: string;
+  slug: string;
+  /** Display name. The live <title> is usually too long to use directly. */
+  name: string;
+  url: string;
+  /** What the site is for, in plain language. One sentence. */
+  purpose: string;
+  /**
+   * What you actually did. Required, and never guessed: an unverifiable claim of
+   * credit is the one thing a portfolio cannot afford to get wrong.
+   */
+  role: string;
+  /** How it is built. For hosted platforms this is the platform name. */
+  platform: string;
+  /** Optional repository slug, keyed into github.json. Absent for hosted sites. */
+  repoSlug?: string;
+  year: string;
+}
+
 /* -- Other content ------------------------------------------------------- */
 
 export interface BuildNote {
