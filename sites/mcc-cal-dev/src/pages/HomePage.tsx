@@ -81,6 +81,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {ACTIVITY.length > 0 && (
       <section aria-labelledby="currently-heading" className={styles.currently}>
         <div className="shell">
           <h2 className={`${styles.blockHeading} meta`} id="currently-heading">
@@ -99,7 +100,9 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+      )}
 
+      {NOTES.length > 0 && (
       <section aria-labelledby="notes-heading" className={styles.notes}>
         <div className="shell">
           <div className={styles.notesHead}>
@@ -118,6 +121,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      )}
     </>
   );
 }

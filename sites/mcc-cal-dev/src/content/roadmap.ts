@@ -4,8 +4,8 @@ import type { TimelineEntry } from './types';
  * Development roadmap.
  *
  * This deliberately did NOT carry over most of `sites/mcc-cal-vite/src/data/roadmap-data.ts`.
- * That file was a photography-business roadmap: service launches, client portals, marketplace
- * plans, and a set of AI features. None of it belongs in a technical publication, and the
+ * That file was a photography-business roadmap: service launches, client portals, and
+ * marketplace plans. None of it belongs in a technical publication, and the
  * vaguer entries ("Global expansion planning", "Maintain the highest quality standards")
  * are exactly the kind of claim this site is built to avoid.
  *
@@ -44,7 +44,7 @@ export const ROADMAP: RoadmapGroup[] = [
         date: 'July 2026',
         title: 'Site audit and remediation',
         detail:
-          'Nine issues found and fixed across one cycle, each with a regression guard. Canonical URLs, direct-load routing, and image sizing are now covered by tests.',
+          'Canonical URLs, direct-load routing, and image sizing are covered by tests.',
       },
       {
         marker: '2026.08',

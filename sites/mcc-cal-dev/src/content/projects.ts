@@ -39,9 +39,9 @@ export const PROJECTS: Project[] = [
         heading: 'Context',
         kind: 'prose',
         body: [
-          'Hytale world generation is configured through JSON templates. The format is expressive, and it is also unforgiving: a template is a deeply nested description of noise fields, curve transforms, and terrain combinators, and nothing about reading it tells you what the terrain will look like.',
-          'The practical workflow before TerraNova was to edit the JSON, restart a server, fly around, and guess at which number to change. Iteration cost was measured in minutes per attempt, which is high enough that most creators stop exploring and settle for whatever they got early.',
-          'TerraNova is an offline desktop studio for that work. It is open source under LGPL-2.1, and it also exists as a mirror under the HyperSystems Development organisation.',
+          'Hytale world generation V2 is configured through JSON: density types, material providers, curves, patterns, positions, and props. Reading that file does not tell you what the terrain will look like.',
+          'The workflow without it is to edit the JSON, load it on a server, look around, and guess at which number to change next.',
+          'TerraNova is an offline desktop studio for that work: a visual node editor, a live terrain preview, and validated export, with no server involved. It is open source under LGPL-2.1.',
         ],
       },
       {
@@ -51,9 +51,9 @@ export const PROJECTS: Project[] = [
         kind: 'list',
         body: ['Three things make hand-authored worldgen templates hard, and they compound:'],
         items: [
-          'The template is a graph, but JSON presents it as a tree. Nodes that feed several consumers appear once and are referenced by name, so the actual data flow is invisible in the file.',
-          'Feedback is detached from the edit. The result of a change appears in a different process, after a restart, at a location you have to navigate to.',
-          'Invalid templates fail late. A schema mistake surfaces as a server-side error well after the edit that caused it, with no pointer back to the offending node.',
+          'Structure is hard to see. The relationships between parts of a generator are easier to follow as a diagram than as nesting.',
+          'Feedback is detached from the edit. The result appears on a server, after a load, somewhere you have to travel to.',
+          'Mistakes surface late, away from the edit that caused them.',
         ],
       },
       {
@@ -62,9 +62,9 @@ export const PROJECTS: Project[] = [
         heading: 'System',
         kind: 'prose',
         body: [
-          'TerraNova treats the template as what it already is: a directed graph. Noise generators, curve transforms, and terrain combinators are nodes; the connections between them are the data flow that JSON was hiding.',
-          'Editing happens in the graph. The preview renders from the same graph, so the feedback loop closes inside one window, on one machine, with no server involved. Export writes the JSON, and the Bridge plugin hot-reloads it into a running Hytale server when you want to see it in place.',
-          'Validation runs against the Hytale worldgen schema before export rather than after, so schema errors are attributable to a node while you are still looking at it.',
+          'TerraNova treats the generator as a graph. Density types, curves, materials, and the rest become nodes, and the connections between them are the structure the JSON was hiding.',
+          'Editing happens in the graph. The preview renders from the same graph, so the feedback loop closes inside one window, on one machine, with no server involved. Export writes an asset pack; Bridge then syncs the file you have open into a server mod folder, for iterating without exporting the whole pack again.',
+          'Validation runs continuously rather than at export, so an error is attributable to the node that caused it while you are still looking at it.',
         ],
       },
       {
@@ -73,20 +73,18 @@ export const PROJECTS: Project[] = [
         heading: 'Interface',
         kind: 'shots',
         body: [
-          'The window is three panes: the graph you are editing, the terrain that graph produces, and the parameters of whatever is selected. Nothing is behind a mode switch, because the point is to see the cause and the effect at the same time.',
+          'The node editor covers the V2 type set, with auto-layout, a minimap, search, and undo history that names what it is undoing. Preview is a 2D heatmap with contour lines and cross-sections, or a 3D voxel heightfield.',
+          'A comparison view puts before and after side by side, so an edit can be judged against what it replaced rather than from memory. Validation runs continuously, and errors appear as badges on the node that caused them.',
         ],
         shots: [
           {
-            alt: 'TerraNova editor with the node graph, live terrain preview, and inspector visible at once.',
+            alt: 'TerraNova node editor with a live terrain preview.',
             width: 1600,
             height: 1000,
-            caption: 'The editor. Graph, preview, and inspector share one window.',
-            callouts: [
-              { index: '01', label: 'Node graph', x: 26, y: 42 },
-              { index: '02', label: 'Live preview', x: 66, y: 34 },
-              { index: '03', label: 'Inspector', x: 88, y: 56 },
-              { index: '04', label: 'Validation strip', x: 50, y: 88 },
-            ],
+            caption: 'The editor.',
+            // Callouts wait for a real capture. Numbering positions on an image
+            // that does not exist would be inventing a layout.
+            callouts: [],
           },
         ],
       },
@@ -96,19 +94,19 @@ export const PROJECTS: Project[] = [
         heading: 'Architecture',
         kind: 'diagram',
         body: [
-          'The editor is TypeScript in a Tauri shell. Generation and preview rendering are Rust, because the preview has to keep up with a parameter being dragged. Export and validation sit between them, and the Bridge plugin carries the result into a live server.',
+          'The editor is TypeScript in a Tauri shell. Density and volume evaluation run in web workers, and the Rust side carries noise, preview probing, schema handling, and Bridge.',
         ],
         diagram: {
           description:
-            'A five-stage pipeline. The node graph editor feeds the generation core, which feeds the preview renderer. The graph also feeds schema validation, which produces the JSON export, which the Bridge plugin hot-reloads into a running Hytale server.',
+            'A five-stage pipeline. The node graph editor feeds density and volume workers, which call into the Rust noise and preview-probe code. The graph also feeds continuous schema validation, and export writes an asset pack that Bridge can sync into a server mod folder.',
           nodes: [
-            { id: 'graph', label: 'Node graph editor', note: 'TypeScript / Tauri' },
-            { id: 'core', label: 'Generation core', note: 'Rust' },
-            { id: 'preview', label: 'Preview renderer', note: 'Rust' },
-            { id: 'validate', label: 'Schema validation', note: 'Pre-export' },
-            { id: 'bridge', label: 'Bridge plugin', note: 'Hot-reload into a live server' },
+            { id: 'graph', label: 'Node graph editor', note: 'TypeScript / React' },
+            { id: 'workers', label: 'Density and volume workers', note: 'Web workers' },
+            { id: 'core', label: 'Noise and preview probe', note: 'Rust, via Tauri' },
+            { id: 'validate', label: 'Schema validation', note: 'Continuous' },
+            { id: 'bridge', label: 'Export and Bridge sync', note: 'Into a server mod folder' },
           ],
-          edgeLabels: ['graph state', 'height + density fields', 'export request', 'validated .json'],
+          edgeLabels: ['graph state', 'sample requests', 'diagnostics', 'asset pack'],
         },
       },
       {
@@ -125,21 +123,10 @@ export const PROJECTS: Project[] = [
         label: 'Limitations',
         heading: 'Limitations',
         kind: 'list',
-        body: ['Known and accepted, as of the current alpha:'],
+        body: ['Known and documented, as of the current alpha:'],
         items: [
-          'The preview approximates. It is close enough to make decisions from, and it is not a substitute for loading the world.',
-          'The Bridge plugin requires a server you control. There is no path for hot-reloading into a server you are only a player on.',
-          'Very large graphs slow the editor before they slow generation. The bottleneck is graph layout, not terrain.',
-          'Hytale itself is a moving target. Schema changes upstream can invalidate templates that were valid at export time.',
-        ],
-      },
-      {
-        id: 'next',
-        label: 'Next',
-        heading: 'Next milestone',
-        kind: 'prose',
-        body: [
-          'The alpha channel is where the work is happening. The current thread is trusting the preview: narrowing the gap between the preview renderer and the generation core, and making density fields inspectable so the numbers behind a piece of terrain can be read directly rather than inferred from its shape.',
+          'The macOS build is not signed with an Apple Developer certificate, so macOS blocks it on first launch and it has to be opened past the warning.',
+          'Bridge syncs the file you have open, not the whole project. The full asset pack has to be exported at least once first.',
         ],
       },
     ],
@@ -217,7 +204,7 @@ export const PROJECTS: Project[] = [
     title: 'Void Ledger',
     purpose: 'Local-first Baro Ki’Teer planning for Warframe.',
     pitch:
-      'Work out what to buy before the trader arrives, on your own machine, with your own inventory. Nothing is uploaded anywhere.',
+      'Plan what to buy before the trader arrives. Runs locally on Windows.',
     audience: 'For Warframe players who plan ahead',
     status: 'active-development',
     meta: {
