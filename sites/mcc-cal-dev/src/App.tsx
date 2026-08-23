@@ -1,4 +1,4 @@
-import { Outlet, RouterProvider, ScrollRestoration, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import SiteFooter from './components/SiteFooter';
 import SiteHeader from './components/SiteHeader';
 import { useHashScroll } from './lib/useHashScroll';
@@ -22,7 +22,6 @@ function Shell() {
         <Outlet />
       </main>
       <SiteFooter />
-      <ScrollRestoration />
     </>
   );
 }
