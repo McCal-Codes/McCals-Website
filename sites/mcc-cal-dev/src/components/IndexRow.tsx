@@ -58,7 +58,7 @@ export default function IndexRow({ project }: IndexRowProps) {
               </span>
             </Link>
           ) : (
-            <p className={`${styles.pending} meta`}>Write-up in progress</p>
+            <p className={`${styles.pending} meta`}>Case study coming soon</p>
           )}
 
           <div className={styles.facts}>

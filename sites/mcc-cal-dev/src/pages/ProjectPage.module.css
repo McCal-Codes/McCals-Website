@@ -190,3 +190,9 @@
 .betaBlock {
   margin-top: 2.5rem;
 }
+
+.comingSoon {
+  padding-block: var(--section-gap);
+  color: var(--dim);
+  border-top: var(--rule);
+}
