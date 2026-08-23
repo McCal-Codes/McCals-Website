@@ -4,15 +4,17 @@ export const SITE = {
   url: 'https://dev.mcc-cal.com',
   person: 'Caleb McCartney',
   /** The headline. Written as a person, not as a positioning statement. */
-  headline: 'I build the tools I wanted to exist.',
+  headline: 'Careful persistence.',
   intro:
-    'I am a photographer who writes software. Most of what I build starts as a workflow that was worse than it needed to be, usually my own, and turns into an application other people end up using.',
+    'I learn how to do it, then I apply those lessons learned. Or shall we call them happy little accidents: failures.',
   /** One line under the intro. Concrete, so the headline does not float. */
   focus:
-    'Desktop tooling, mobile applications, and the systems underneath them. For photographers, media workflows, and game-development communities.',
+    'I am versatile in many skills, but I do just about anything I put my mind to. No matter if it is coding, photographing, or a trade I need to pick up, I am always willing to learn.',
   github: 'https://github.com/McCal-Codes',
   /** The editorial photography portfolio. Same person, different medium. */
   portfolio: 'https://mcc-cal.com',
+  /** Tips. Empty until the real URL is supplied; nothing renders without it. */
+  kofi: '',
 } as const;
 
 export const NAV = [

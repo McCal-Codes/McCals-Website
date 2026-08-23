@@ -6,7 +6,7 @@ import styles from './PageShell.module.css';
 export default function AboutPage() {
   useDocumentMeta(
     'About',
-    'Caleb McCartney builds open-source applications and development tools, and works as an editorial photographer.',
+    'I learn how to do it, then I apply those lessons learned. Careful persistence, across code, photography, and whatever trade comes next.',
   );
 
   return (
@@ -21,8 +21,10 @@ export default function AboutPage() {
       <div className={`${styles.body} shell`}>
         <Prose
           paragraphs={[
-            'I build software for creative and technical work: desktop tooling, mobile applications, and the systems that sit underneath them. Most of it starts because a workflow I depend on is worse than it needs to be.',
-            'The projects here are real and in progress. Where something is a prototype, it says prototype. Where a case study has not been written, the index says so rather than linking to a page of filler.',
+            'I build because if it exists, I want to edit it or make it my own. That comes from my creative side. Once I hopped into programming it opened so many new avenues to get what I want, or at least customize it. And who knows, help people too.',
+            'Open source is seriously slept on.',
+            'I do not want to charge for any of these projects, though I am happy to accept tips.',
+            'Anyone who is interested is welcome here. I do not discriminate when it comes to our collective interests.',
             'I also work as an editorial photographer. That work lives on a separate site, because it is a different medium and deserves a different system.',
           ]}
         />
@@ -34,6 +36,11 @@ export default function AboutPage() {
           <a className={styles.link} href={SITE.portfolio} rel="noreferrer" target="_blank">
             Photography portfolio<span aria-hidden="true"> ↗</span>
           </a>
+          {SITE.kofi && (
+            <a className={styles.link} href={SITE.kofi} rel="noreferrer" target="_blank">
+              Tips on Ko-fi<span aria-hidden="true"> ↗</span>
+            </a>
+          )}
         </div>
       </div>
     </>
