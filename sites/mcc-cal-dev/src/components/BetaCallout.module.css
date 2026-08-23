@@ -1,5 +1,6 @@
 .callout {
   padding: 2rem;
+  border-radius: var(--radius-lg);
   background: var(--panel);
   border: var(--rule);
 }
@@ -30,6 +31,7 @@
 
 .action {
   display: inline-block;
+  border-radius: var(--radius);
   margin-top: 1.5rem;
   padding: 0.7rem 1.4rem;
   font: inherit;
@@ -73,7 +75,9 @@
 }
 
 .meter {
-  height: 2px;
+  height: 4px;
+  border-radius: 999px;
+  overflow: hidden;
   margin-top: 0.5rem;
   max-width: 22rem;
   background: var(--border);
@@ -81,6 +85,7 @@
 
 .fill {
   display: block;
+  border-radius: 999px;
   height: 100%;
   background: var(--accent);
 }

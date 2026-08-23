@@ -3,6 +3,7 @@
   width: 100%;
   overflow: hidden;
   background: var(--panel);
+  border-radius: var(--radius-lg);
   border: var(--rule);
 }
 

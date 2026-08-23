@@ -178,6 +178,15 @@ export interface BetaProgram {
    * Apple's: a public link would allow 10,000.
    */
   testers?: { taken: number; cap: number };
+  /**
+   * Where someone goes once `testers.taken` reaches `cap`.
+   *
+   * A mailto is deliberate: it needs no third-party form service, collects
+   * nothing on our side, and works the day it is set. Swap in a hosted form URL
+   * later if the volume ever justifies one. Absent means a full beta simply says
+   * it is full.
+   */
+  waitlist?: { href: string; label: string };
 }
 
 /* -- Websites ------------------------------------------------------------ */

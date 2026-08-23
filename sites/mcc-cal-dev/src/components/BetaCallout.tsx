@@ -12,13 +12,15 @@ interface BetaCalloutProps {
 /**
  * The beta enrolment area.
  *
- * Two states from one shape. With a TestFlight link it invites people in; without
- * one it says the beta is not open yet. The version shown alongside is pulled from
- * the repository rather than written here, so the banner cannot advertise a build
- * that does not exist.
+ * Three states from one shape. With a TestFlight link and room left it invites
+ * people in; once the count reaches the cap it says so and offers the waitlist if
+ * there is one; with no link at all it reads as coming soon. There is deliberately
+ * no state where a control exists but does nothing.
  */
 export default function BetaCallout({ beta, title, slug }: BetaCalloutProps) {
-  const open = Boolean(beta.testFlightUrl);
+  const full = Boolean(beta.testers && beta.testers.taken >= beta.testers.cap);
+  // A full beta is not an open one, however valid the link still is.
+  const open = Boolean(beta.testFlightUrl) && !full;
 
   return (
     <aside aria-labelledby={`beta-${slug}`} className={styles.callout}>
@@ -27,11 +29,15 @@ export default function BetaCallout({ beta, title, slug }: BetaCalloutProps) {
         <span aria-hidden="true" className={styles.marker}>
           {open ? '●' : '○'}
         </span>
-        {open ? 'Open for testers' : 'Not taking testers yet'}
+        {open ? 'Open for testers' : full ? 'Beta is full' : 'Not taking testers yet'}
       </p>
 
       <h2 className={styles.heading} id={`beta-${slug}`}>
-        {open ? `Test ${title} before it ships` : `${title} opens for testing soon`}
+        {open
+          ? `Test ${title} before it ships`
+          : full
+            ? `The ${title} beta is full`
+            : `${title} opens for testing soon`}
       </h2>
 
       <p className={styles.blurb}>{beta.blurb}</p>
@@ -69,10 +75,16 @@ export default function BetaCallout({ beta, title, slug }: BetaCalloutProps) {
           Join the TestFlight beta
           <span aria-hidden="true"> ↗</span>
         </a>
+      ) : full && beta.waitlist ? (
+        <a className={styles.action} href={beta.waitlist.href}>
+          {beta.waitlist.label}
+        </a>
       ) : (
         // No button at all rather than a disabled one. A control that cannot be
         // used is an invitation to click something that does nothing.
-        <p className={`${styles.pending} meta`}>Invitations open when the next build ships</p>
+        <p className={`${styles.pending} meta`}>
+          {full ? 'Every place is taken' : 'Invitations open when the next build ships'}
+        </p>
       )}
 
       {beta.note && <p className={styles.note}>{beta.note}</p>}
