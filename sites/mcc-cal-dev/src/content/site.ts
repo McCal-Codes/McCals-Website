@@ -13,8 +13,8 @@ export const SITE = {
   github: 'https://github.com/McCal-Codes',
   /** The editorial photography portfolio. Same person, different medium. */
   portfolio: 'https://mcc-cal.com',
-  /** Tips. Empty until the real URL is supplied; nothing renders without it. */
-  kofi: '',
+  /** Tips. The link renders only when this is set. */
+  kofi: 'https://ko-fi.com/mccal',
 } as const;
 
 export const NAV = [
