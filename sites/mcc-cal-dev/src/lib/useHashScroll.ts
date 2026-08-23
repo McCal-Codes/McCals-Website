@@ -38,7 +38,7 @@ export function useHashScroll() {
       if (!target) return;
 
       // Focus first, scroll second. A smooth scroll is asynchronous, and calling
-      // focus() while one is in flight aborts it — even with preventScroll set.
+      // focus() while one is in flight aborts it, even with preventScroll set.
       //
       // tabindex -1 makes a non-interactive section focusable without adding it
       // to the tab order, so keyboard and screen-reader users land where sighted
@@ -51,8 +51,8 @@ export function useHashScroll() {
 
     jump(reduced ? 'instant' : 'smooth');
 
-    // On a cold load the page is still settling — web fonts swap in and images
-    // resolve — which moves the target out from under the scroll we just did.
+    // On a cold load the page is still settling. Web fonts swap in and images
+    // resolve, which moves the target out from under the scroll we just did.
     // Correct once everything has loaded. Same-session navigations are already
     // settled and skip this entirely.
     if (document.readyState === 'complete') return;

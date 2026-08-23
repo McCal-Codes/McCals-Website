@@ -3,6 +3,7 @@ import { getProject } from '@/content/projects';
 import { formatDate, getRepo } from '@/content/github';
 import type { CaseStudySection } from '@/content/types';
 import AnnotatedShot from '@/components/AnnotatedShot';
+import BetaCallout from '@/components/BetaCallout';
 import Diagram from '@/components/Diagram';
 import MetaTable from '@/components/MetaTable';
 import PreviewFrame from '@/components/PreviewFrame';
@@ -124,6 +125,12 @@ export default function ProjectPage() {
           <div className={styles.metaBlock}>
             <MetaTable project={project} />
           </div>
+
+          {project.beta && (
+            <div className={styles.betaBlock}>
+              <BetaCallout beta={project.beta} slug={project.slug} title={project.title} />
+            </div>
+          )}
         </div>
       </header>
 

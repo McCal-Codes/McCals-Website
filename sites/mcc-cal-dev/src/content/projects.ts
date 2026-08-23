@@ -169,6 +169,13 @@ export const PROJECTS: Project[] = [
       height: 1500,
       callouts: [],
     },
+    beta: {
+      // Set testFlightUrl to open enrolment. Until then this renders as coming
+      // soon rather than as a button that goes nowhere.
+      blurb:
+        'Abridgd runs on iPhone through TestFlight. Testing it means reading Pittsburgh news on it for a week and telling me where it got in the way.',
+      note: 'Pittsburgh coverage only, for now. iPhone only at the moment: Expo means the app already runs on Android, but I have not learned enough about shipping there to put a build in anyone else’s hands. That is the plan for late 2026 or early 2027.',
+    },
     sections: [
       {
         id: 'context',
@@ -178,7 +185,7 @@ export const PROJECTS: Project[] = [
         body: [
           'Local news apps inherited the infinite feed from social platforms, where the goal is to never end. Local news has the opposite property: on any given day there is a finite amount of it, and a reader can actually get to the end.',
           'Abridgd is built around that. The day has a bottom, and reaching it is the point.',
-          'It starts with one city. Coverage is drawn from Pittsburgh outlets — WESA, Kidsburgh, and the beats that a city actually follows, including the Pirates, the Penguins, and Pitt — rather than from a national wire with a regional filter applied to it.',
+          'It starts with one city. Coverage is drawn from Pittsburgh outlets: WESA, Kidsburgh, and the beats a city actually follows, including the Pirates, the Penguins, and Pitt. Not a national wire with a regional filter applied to it.',
         ],
       },
       {

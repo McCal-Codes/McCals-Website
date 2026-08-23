@@ -147,7 +147,28 @@ export interface Project {
   status: ProjectStatus;
   meta: ProjectMeta;
   preview?: AnnotatedShot;
+  /** Present when the project is testable before public release. */
+  beta?: BetaProgram;
   sections: CaseStudySection[];
+}
+
+/* -- Beta programme ------------------------------------------------------ */
+
+/**
+ * An invitation to test a project before it is publicly available.
+ *
+ * One shape, two states, decided by whether `testFlightUrl` is set. With a link
+ * it is an enrolment call to action; without one it reads as coming soon. There
+ * is deliberately no third state where a button exists but goes nowhere, because
+ * a dead beta link costs more trust than saying "not yet".
+ */
+export interface BetaProgram {
+  /** Public TestFlight link. Absent means enrolment is not open. */
+  testFlightUrl?: string;
+  /** What a tester gets, in one line. */
+  blurb: string;
+  /** What testing actually involves. Sets expectations before someone signs up. */
+  note?: string;
 }
 
 /* -- Websites ------------------------------------------------------------ */
@@ -155,7 +176,7 @@ export interface Project {
 /**
  * A site built for someone else.
  *
- * Deliberately not a `Project`. A product is proved by its repository — source,
+ * Deliberately not a `Project`. A product is proved by its repository: source,
  * releases, license. A website is proved by being live and looking right, and
  * several of these have no repository at all because they were built on hosted
  * platforms. Different evidence, so a different type.
