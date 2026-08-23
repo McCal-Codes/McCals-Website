@@ -222,22 +222,6 @@ export const PROJECTS: Project[] = [
     sections: [],
   },
 
-  {
-    index: '04',
-    slug: 'experiments',
-    title: 'Other work',
-    purpose: 'Smaller tools, mods, and publication software.',
-    pitch:
-      'Publication tooling for a literary magazine, and a Hytale worldgen mod about the uncanny valley.',
-    status: 'research',
-    meta: {
-      type: 'Assorted',
-      role: 'Developer',
-      platform: ['Various'],
-      started: '2024',
-    },
-    sections: [],
-  },
 ];
 
 export function getProject(slug: string): Project | undefined {
