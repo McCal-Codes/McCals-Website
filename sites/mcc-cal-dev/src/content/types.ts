@@ -15,6 +15,7 @@
 export type ProjectStatus =
   | 'active-alpha'
   | 'active-development'
+  | 'beta'
   | 'prototype'
   | 'research'
   | 'archived';
@@ -28,6 +29,8 @@ export interface StatusPresentation {
 export const STATUS_PRESENTATION: Record<ProjectStatus, StatusPresentation> = {
   'active-alpha': { glyph: '●', label: 'Active alpha' },
   'active-development': { glyph: '●', label: 'Active development' },
+  /** Shipped to real testers, not yet publicly listed. */
+  beta: { glyph: '◐', label: 'In beta' },
   prototype: { glyph: '○', label: 'Prototype' },
   research: { glyph: '□', label: 'Research' },
   archived: { glyph: '×', label: 'Archived' },

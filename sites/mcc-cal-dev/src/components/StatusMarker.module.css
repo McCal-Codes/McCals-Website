@@ -26,8 +26,13 @@
 }
 
 .active-alpha,
-.active-development {
+.active-development,
+.beta {
   color: var(--text);
+}
+
+.beta .glyph {
+  color: var(--accent);
 }
 
 .prototype .glyph,

@@ -149,15 +149,17 @@ export const PROJECTS: Project[] = [
     index: '02',
     slug: 'abridgd',
     title: 'Abridgd',
-    purpose: 'Finite local-news reading.',
+    purpose: 'A calm, local-first news reader for Pittsburgh.',
     pitch:
-      'Read your local news and actually reach the end of it. No infinite feed, no national stories crowding out the ones near you.',
-    audience: 'For people who want to stay local and stop scrolling',
-    status: 'prototype',
+      'Read what happened in Pittsburgh today and actually reach the end of it. No infinite feed, no national stories crowding out the ones down the street.',
+    audience: 'For Pittsburgh readers who want to catch up and stop',
+    status: 'beta',
     meta: {
       type: 'Mobile application',
       role: 'Developer / Product designer',
-      platform: ['iOS', 'Android'],
+      // iOS-first, and iOS-only in distribution: builds ship through TestFlight.
+      // Expo means it runs on Android, but nothing is published there.
+      platform: ['iOS'],
       started: 'January 2026',
       frameworks: ['React Native', 'Expo'],
     },
@@ -176,6 +178,7 @@ export const PROJECTS: Project[] = [
         body: [
           'Local news apps inherited the infinite feed from social platforms, where the goal is to never end. Local news has the opposite property: on any given day there is a finite amount of it, and a reader can actually get to the end.',
           'Abridgd is built around that. The day has a bottom, and reaching it is the point.',
+          'It starts with one city. Coverage is drawn from Pittsburgh outlets — WESA, Kidsburgh, and the beats that a city actually follows, including the Pirates, the Penguins, and Pitt — rather than from a national wire with a regional filter applied to it.',
         ],
       },
       {
@@ -195,8 +198,8 @@ export const PROJECTS: Project[] = [
         heading: 'Where it stands',
         kind: 'prose',
         body: [
-          'The reading model works and the app runs. Active work is paused: the repository has been untouched for months, and the status above says prototype rather than claiming otherwise.',
-          'When it resumes, the open thread is information architecture and offline behaviour: what is kept on device, what happens at the edge of a cached set, and how the app says so instead of failing quietly.',
+          'Version 1.4.0 is in TestFlight. It reads real Pittsburgh feeds, keeps saved articles and reading position on the device, and has light and dark themes with reader controls. That is a working app, not a demo.',
+          'Active work is paused, which the commit history shows and there is no point dressing up. The open thread when it resumes is information architecture and offline behaviour: what is kept on device, what happens at the edge of a cached set, and how the app says so instead of failing quietly.',
         ],
       },
     ],
