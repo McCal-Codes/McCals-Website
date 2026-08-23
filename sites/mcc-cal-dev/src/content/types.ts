@@ -169,6 +169,15 @@ export interface BetaProgram {
   blurb: string;
   /** What testing actually involves. Sets expectations before someone signs up. */
   note?: string;
+  /**
+   * How full the beta is.
+   *
+   * Apple publishes no public endpoint for this, so `taken` is maintained by
+   * hand from App Store Connect. It is a real count or it is absent; there is no
+   * estimate. `cap` is whatever limit Caleb has set for himself, which is not
+   * Apple's: a public link would allow 10,000.
+   */
+  testers?: { taken: number; cap: number };
 }
 
 /* -- Websites ------------------------------------------------------------ */

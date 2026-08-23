@@ -36,6 +36,29 @@ export default function BetaCallout({ beta, title, slug }: BetaCalloutProps) {
 
       <p className={styles.blurb}>{beta.blurb}</p>
 
+      {beta.testers && (
+        <div className={styles.capacity}>
+          <p className={`${styles.count} meta`}>
+            {beta.testers.taken.toLocaleString()} of{' '}
+            {beta.testers.cap.toLocaleString()} places taken
+          </p>
+          {/*
+            Decoration only. The sentence above already carries the number, so a
+            screen reader gets the information without the bar being announced.
+          */}
+          <div aria-hidden="true" className={styles.meter}>
+            <span
+              className={styles.fill}
+              style={{
+                // Floor at a hairline so a near-empty beta still reads as a bar
+                // rather than as an empty track.
+                width: `${Math.max(0.75, Math.min(100, (beta.testers.taken / beta.testers.cap) * 100))}%`,
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {open ? (
         <a
           className={styles.action}

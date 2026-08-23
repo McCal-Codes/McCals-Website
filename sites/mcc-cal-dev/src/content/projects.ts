@@ -157,11 +157,14 @@ export const PROJECTS: Project[] = [
       callouts: [],
     },
     beta: {
-      // Set testFlightUrl to open enrolment. Until then this renders as coming
-      // soon rather than as a button that goes nowhere.
+      testFlightUrl: 'https://testflight.apple.com/join/W15tgNJY',
+      // 100 is a self-imposed ceiling, not Apple's: a public link allows 10,000.
+      // Maintained by hand from App Store Connect, the only place the count
+      // exists. Update it when it moves; a stale number is worse than none.
+      testers: { taken: 2, cap: 100 },
       blurb:
         'Abridgd runs on iPhone through TestFlight. Testing it means reading Pittsburgh news on it for a week and telling me where it got in the way.',
-      note: 'Pittsburgh coverage only, and iPhone only. Android is on the roadmap for late 2026 or early 2027.',
+      note: 'Pittsburgh coverage only, and iPhone only. Android is planned for late 2026 or early 2027.',
     },
     sections: [
       {
