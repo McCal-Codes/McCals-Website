@@ -4,14 +4,6 @@
   border: var(--rule);
 }
 
-.head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-}
-
 .eyebrow {
   display: inline-flex;
   align-items: baseline;
@@ -21,10 +13,6 @@
 
 .marker {
   color: var(--accent);
-}
-
-.version {
-  color: var(--dim);
 }
 
 .heading {

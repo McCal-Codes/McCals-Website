@@ -48,7 +48,7 @@ export default function HomePage() {
               What I am building
             </h2>
             <p className={styles.sectionNote}>
-              My own projects, in the order I started them. Each one has a write-up when
+              My own projects, in the order I started them. Each has a write-up when
               there is something worth writing.
             </p>
           </div>
@@ -68,9 +68,8 @@ export default function HomePage() {
               Sites I have built for other people
             </h2>
             <p className={styles.sectionNote}>
-              Client and commission work. Some have source to read and some do not,
-              because they were built on hosted platforms. What matters here is that
-              they are live.
+              Client and commission work. Some have source to read, some do not.
+              What matters is that they are live.
             </p>
           </div>
 

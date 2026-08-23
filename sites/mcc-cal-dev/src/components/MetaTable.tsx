@@ -60,7 +60,11 @@ export default function MetaTable({ project }: MetaTableProps) {
       });
     }
 
-    rows.push({ term: 'Last push', value: formatDate(repo.pushedAt), live: true });
+    // Only when it adds something. A release cut on the day of the last commit
+    // would otherwise print the same date twice, one row apart.
+    if (repo.pushedAt && repo.pushedAt !== repo.latestRelease?.date) {
+      rows.push({ term: 'Last push', value: formatDate(repo.pushedAt), live: true });
+    }
     rows.push({ term: 'Repository', value: repo.fullName, href: repo.url, live: true });
   }
 

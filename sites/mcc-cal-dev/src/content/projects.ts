@@ -151,7 +151,7 @@ export const PROJECTS: Project[] = [
     title: 'Abridgd',
     purpose: 'A calm, local-first news reader for Pittsburgh.',
     pitch:
-      'Read what happened in Pittsburgh today and actually reach the end of it. No infinite feed, no national stories crowding out the ones down the street.',
+      'Read what happened in Pittsburgh today and reach the end of it. No infinite feed, no national stories crowding out the ones down the street.',
     audience: 'For Pittsburgh readers who want to catch up and stop',
     status: 'beta',
     meta: {
@@ -174,7 +174,7 @@ export const PROJECTS: Project[] = [
       // soon rather than as a button that goes nowhere.
       blurb:
         'Abridgd runs on iPhone through TestFlight. Testing it means reading Pittsburgh news on it for a week and telling me where it got in the way.',
-      note: 'Pittsburgh coverage only, for now. iPhone only at the moment: Expo means the app already runs on Android, but I have not learned enough about shipping there to put a build in anyone else’s hands. That is the plan for late 2026 or early 2027.',
+      note: 'Pittsburgh coverage only, and iPhone only. Android is on the roadmap for late 2026 or early 2027.',
     },
     sections: [
       {
@@ -183,9 +183,8 @@ export const PROJECTS: Project[] = [
         heading: 'Context',
         kind: 'prose',
         body: [
-          'Local news apps inherited the infinite feed from social platforms, where the goal is to never end. Local news has the opposite property: on any given day there is a finite amount of it, and a reader can actually get to the end.',
-          'Abridgd is built around that. The day has a bottom, and reaching it is the point.',
-          'It starts with one city. Coverage is drawn from Pittsburgh outlets: WESA, Kidsburgh, and the beats a city actually follows, including the Pirates, the Penguins, and Pitt. Not a national wire with a regional filter applied to it.',
+          'Local news apps inherited the infinite feed from social platforms, where the goal is to never end. Local news is the opposite: on any given day there is a finite amount of it. The day has a bottom, and reaching it is the point.',
+          'It starts with one city. Coverage comes from Pittsburgh outlets: WESA, Kidsburgh, and the beats a city follows, including the Pirates, the Penguins, and Pitt.',
         ],
       },
       {
@@ -196,7 +195,7 @@ export const PROJECTS: Project[] = [
         items: [
           'An infinite feed cannot tell you that you are caught up, so it never lets you stop deliberately.',
           'Ranking by engagement pushes local coverage under national coverage, because national stories always win on volume.',
-          'Reading happens in places without a connection. An app that assumes the network fails exactly when it is being used.',
+          'Reading happens where there is no signal. An app that assumes otherwise breaks exactly when someone is trying to use it.',
         ],
       },
       {
@@ -205,8 +204,8 @@ export const PROJECTS: Project[] = [
         heading: 'Where it stands',
         kind: 'prose',
         body: [
-          'Version 1.4.0 is in TestFlight. It reads real Pittsburgh feeds, keeps saved articles and reading position on the device, and has light and dark themes with reader controls. That is a working app, not a demo.',
-          'Active work is paused, which the commit history shows and there is no point dressing up. The open thread when it resumes is information architecture and offline behaviour: what is kept on device, what happens at the edge of a cached set, and how the app says so instead of failing quietly.',
+          'The current build is in TestFlight: real Pittsburgh feeds, saved articles, reading position, light and dark themes, reader controls. A working app, not a demo.',
+          'Work is paused, which the commit history already shows. When it resumes, the open thread is offline behaviour: what is kept on device, what happens at the edge of a cached set, and how the app says so instead of failing quietly.',
         ],
       },
     ],

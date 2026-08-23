@@ -85,15 +85,14 @@ export const ROADMAP: RoadmapGroup[] = [
         marker: 'Abridgd',
         date: 'Paused',
         title: 'Information architecture and offline behaviour',
-        detail:
-          'What is kept on device, what happens at the edge of a cached set, and how the app says so. The repository has been idle for months; this resumes when it resumes.',
+        detail: 'Offline behaviour and how the app reports it. Resumes when the app does.',
       },
       {
         marker: 'Abridgd',
         date: 'Late 2026 or early 2027',
         title: 'Android testing',
         detail:
-          'The app already runs on Android, because Expo builds for both. Distributing there is a different skill from building there, and I have not learned it yet. The date is an estimate, not a commitment.',
+          'Expo already builds for Android. Distributing there is a different skill, and I have not learned it yet. The date is an estimate.',
       },
       {
         marker: 'This site',
