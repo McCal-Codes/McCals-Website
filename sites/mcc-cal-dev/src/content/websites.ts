@@ -47,8 +47,11 @@ export const WEBSITES: Website[] = [
     slug: 'divine-eyth',
     name: 'Divine Eyth',
     url: '',
-    purpose: 'A personal site for a musician.',
-    role: ROLE_PENDING,
+    // Divine is a private individual, not a company. Her name and the fact that
+    // this is her professional site are already public in the repository; the
+    // relationship behind the commission is not, and does not belong here.
+    purpose: 'A personal site for Divine Eyth: resume, skills, and background.',
+    role: 'Design and build',
     platform: 'React / TypeScript / Vite',
     repoSlug: 'divine-eyth',
     year: '2026',
