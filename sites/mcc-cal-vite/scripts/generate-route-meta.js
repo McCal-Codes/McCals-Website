@@ -122,6 +122,10 @@ function applyRouteMeta(indexHtml, entry) {
   let html = removeManagedImagePreloads(indexHtml);
   html = setTitle(html, entry.title);
 
+  if (entry.robots) {
+    html = setMeta(html, 'name="robots"', 'content', entry.robots);
+  }
+
   html = setMeta(html, 'name="description"', 'content', entry.description);
   html = setLink(html, 'canonical', url);
   html = setMeta(html, 'property="og:type"', 'content', entry.ogType || 'website');
@@ -140,6 +144,29 @@ function applyRouteMeta(indexHtml, entry) {
 
   return html;
 }
+
+/**
+ * Routes that are registered in the router but deliberately excluded from
+ * STATIC_PAGE_ROUTES (not in nav/footer/sitemap, disallowed in robots.txt).
+ * They still need a pre-rendered static HTML file: this site's Vercel
+ * deployment serves every real page as its own static file, found via
+ * cleanUrls filesystem matching, rather than through the SPA catch-all
+ * rewrite - a path with no matching file 404s before the rewrite is ever
+ * consulted. Every other route works because it's pre-rendered; these need
+ * the same treatment to actually load in production.
+ */
+const HIDDEN_ROUTES = [
+  {
+    route: '/links',
+    title: 'Caleb McCartney | McCal Media',
+    description: 'Contact links and social profiles for Caleb McCartney.',
+    robots: 'noindex, nofollow, max-image-preview:large',
+    ogTitle: 'Caleb McCartney',
+    ogDescription: 'Contact links and social profiles for Caleb McCartney.',
+    imagePath: '/about/caleb-mccartney-photo.jpg',
+    imageAlt: 'Caleb McCartney',
+  },
+];
 
 export function routeOutputPaths(route) {
   if (route === '/') return ['index.html'];
@@ -194,9 +221,10 @@ async function generateRouteMeta() {
   const pageSeo = JSON.parse(pageSeoRaw);
   const blogManifest = JSON.parse(blogManifestRaw);
   const routeEntries = buildRouteMetaEntries({ pageSeo, blogManifest });
+  const allEntries = [...routeEntries, ...HIDDEN_ROUTES];
 
   await Promise.all(
-    routeEntries.flatMap((entry) => {
+    allEntries.flatMap((entry) => {
       const routeHtml = applyRouteMeta(indexHtml, entry);
 
       return routeOutputPaths(entry.route).map(async (outputPath) => {
@@ -208,7 +236,9 @@ async function generateRouteMeta() {
     }),
   );
 
-  console.log(`Generated route meta for ${routeEntries.length} pages`);
+  console.log(
+    `Generated route meta for ${routeEntries.length} pages (+ ${HIDDEN_ROUTES.length} hidden route${HIDDEN_ROUTES.length === 1 ? '' : 's'})`,
+  );
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
