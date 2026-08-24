@@ -114,6 +114,12 @@
       "headers": [
         { "key": "X-Robots-Tag", "value": "index, follow" }
       ]
+    },
+    {
+      "source": "/links",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
     }
   ]
 }

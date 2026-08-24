@@ -31,6 +31,16 @@ function resolveAnalyticsRoute(pathname: string) {
     };
   }
 
+  // Registered in the router but deliberately excluded from STATIC_PAGE_ROUTES
+  // (not discoverable, not indexed) - still a real route, not an unmapped one.
+  if (pathname === '/links') {
+    return {
+      routeKey: 'links',
+      canonicalPath: '/links',
+      pageType: 'hidden',
+    };
+  }
+
   return {
     routeKey: 'unmapped',
     canonicalPath: getCanonicalPath(pathname),
