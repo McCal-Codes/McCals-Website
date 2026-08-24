@@ -34,6 +34,7 @@ const LicensingPage = lazy(() => import('./pages/licensing'));
 const PrivacyPage = lazy(() => import('./pages/privacy'));
 const TermsPage = lazy(() => import('./pages/terms'));
 const FAQPage = lazy(() => import('./pages/faq'));
+const LinksPage = lazy(() => import('./pages/links'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
@@ -142,6 +143,9 @@ const router = createBrowserRouter([
       })),
       { path: '/authors/:authorId', element: <AuthorsPage /> },
       { path: '/blog/:slug', element: <BlogPage /> },
+      // Hidden tap-card page: intentionally not in STATIC_PAGE_ROUTES/nav/sitemap,
+      // reachable only by whoever has the direct URL (the NFC card).
+      { path: '/links', element: <LinksPage /> },
       ...(import.meta.env.DEV
         ? [
             { path: '/showcase', element: <ShowcasePage /> },
