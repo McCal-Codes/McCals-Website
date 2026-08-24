@@ -2,6 +2,13 @@
 
 ## 2026-08-24
 
+### A Hidden Tap-Card Page for the Physical NFC Card
+
+- Added `/links`: a standalone, Linktree-style page reachable only by direct URL, built for a physical NFC business card. Not in nav, footer, or the sitemap, and disallowed in `robots.txt`.
+- Registered unconditionally in the router rather than behind the existing DEV-only pattern used by `/showcase`, `/api-test`, and `/changelog`, since this page has to work in production for the physical tag to work.
+- Includes a "Save My Contact" vCard download (a static `.vcf` file rather than a JS-generated blob, more reliable across iOS/Android "save contact" flows) and a `links_page_view` analytics event keyed off `?src=` on the URL, so taps from the physical card are distinguishable from any other way someone reaches the link.
+- Layout is entirely built off the site's existing `--mcc-*` CSS custom properties, so dark/light mode work without extra code, and sizing uses `clamp()` tied to viewport height so the card fits common phone screens without scrolling.
+
 ### React Router and shell-quote Security Patches
 
 - Bumped `react-router-dom` to 6.30.6 to close GHSA-jjmj-jmhj-qwj2, an open redirect that could be turned into XSS, present in 6.30.2 through 6.30.4.
