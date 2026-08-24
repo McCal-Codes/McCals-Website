@@ -1,5 +1,6 @@
 {
   "framework": "vite",
+  "installCommand": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
