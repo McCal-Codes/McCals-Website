@@ -2,6 +2,10 @@
 
 ## 2026-08-24
 
+### Work Phone Number on the Contact Card
+
+- Added a `TEL;TYPE=WORK,VOICE` field to `caleb-mccartney.vcf`, the vCard downloaded from the "Save My Contact" button on `/links`.
+
 ### /links Was 404ing in Production
 
 - Every route on this site is served as its own pre-rendered static HTML file (found via Vercel's cleanUrls filesystem matching); the `/:path*` -> `/index.html` SPA catch-all rewrite is never actually reached for a real request, confirmed by testing a nonexistent path and a nonexistent author slug - both 404 the same way `/links` did. `/links` was the first route ever deliberately left out of static pre-rendering (to keep it off the sitemap), so it was the first to hit this.
