@@ -74,12 +74,16 @@
     animation-delay: 0.6s;
   }
 
-  .socialRow {
+  .linkButton:nth-of-type(4) {
     animation-delay: 0.68s;
   }
 
-  .portfolioLink {
+  .socialRow {
     animation-delay: 0.76s;
+  }
+
+  .portfolioLink {
+    animation-delay: 0.84s;
   }
 }
 

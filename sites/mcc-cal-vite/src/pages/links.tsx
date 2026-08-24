@@ -7,6 +7,7 @@ import styles from './links.module.css';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
 const LINK_STACK = [
+  { label: 'Join the News App Beta', href: 'https://testflight.apple.com/join/W15tgNJY', internal: false },
   { label: 'Grab a Coffee', href: '/grab-a-coffee', internal: true },
   { label: 'Book a Podcast', href: '/book-a-podcast', internal: true },
   { label: 'Email Me', href: 'mailto:contact@mcc-cal.com', internal: false },
@@ -63,17 +64,27 @@ export default function LinksPage() {
         </a>
 
         <nav className={styles.linkStack} aria-label="Contact links">
-          {LINK_STACK.map((link) =>
-            link.internal ? (
-              <Link key={link.href} to={link.href} className={styles.linkButton}>
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.href} href={link.href} className={styles.linkButton}>
+          {LINK_STACK.map((link) => {
+            if (link.internal) {
+              return (
+                <Link key={link.href} to={link.href} className={styles.linkButton}>
+                  {link.label}
+                </Link>
+              );
+            }
+
+            const opensNewTab = link.href.startsWith('http');
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className={styles.linkButton}
+                {...(opensNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
                 {link.label}
               </a>
-            ),
-          )}
+            );
+          })}
         </nav>
 
         <div className={styles.socialRow} aria-label="Social profiles">

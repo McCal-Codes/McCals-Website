@@ -7,6 +7,10 @@
 - Every route on this site is served as its own pre-rendered static HTML file (found via Vercel's cleanUrls filesystem matching); the `/:path*` -> `/index.html` SPA catch-all rewrite is never actually reached for a real request, confirmed by testing a nonexistent path and a nonexistent author slug - both 404 the same way `/links` did. `/links` was the first route ever deliberately left out of static pre-rendering (to keep it off the sitemap), so it was the first to hit this.
 - `scripts/generate-route-meta.js` now also pre-renders a small `HIDDEN_ROUTES` list (currently just `/links`) with the same mechanism as every other page, still entirely separate from `STATIC_PAGE_ROUTES`/the sitemap. `applyRouteMeta` gained an optional `robots` field to bake `noindex, nofollow` into the static file itself, on top of the existing `X-Robots-Tag` header.
 
+### A TestFlight Link on the Tap Card
+
+- Added "Join the News App Beta" to `/links`, pointing at the TestFlight enrollment link. It's an external destination, so it opens in a new tab like the social icons already do, unlike the existing internal links (`Grab a Coffee`, `Book a Podcast`) which stay in-app.
+
 ### A Hidden Tap-Card Page for the Physical NFC Card
 
 - Added `/links`: a standalone, Linktree-style page reachable only by direct URL, built for a physical NFC business card. Not in nav, footer, or the sitemap, and disallowed in `robots.txt`.
