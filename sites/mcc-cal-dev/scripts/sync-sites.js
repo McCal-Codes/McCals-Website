@@ -82,21 +82,44 @@ async function fetchWithRetry(url, init) {
   }
 }
 
+const HTML_ENTITIES = {
+  '&amp;': '&',
+  '&lt;': '<',
+  '&gt;': '>',
+  '&quot;': '"',
+  '&apos;': "'",
+  '&#39;': "'",
+  '&#039;': "'",
+  '&nbsp;': ' ',
+};
+
+/**
+ * Decodes HTML entities in one pass.
+ *
+ * Chained replaces double-unescape. Turning &amp; into & first means the literal
+ * text "&amp;lt;" becomes "&lt;" and then "<", which is not what the document
+ * said. One regex with one lookup decodes each entity exactly once.
+ */
 function decodeEntities(value) {
   return value
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#0?39;/g, "'")
-    .replace(/&apos;/g, "'")
-    .replace(/&nbsp;/g, ' ')
+    .replace(/&(?:amp|lt|gt|quot|apos|nbsp|#0?39);/g, (entity) => HTML_ENTITIES[entity] ?? entity)
     .trim();
+}
+
+/**
+ * Escapes every regex metacharacter so a key matches literally.
+ *
+ * The previous version escaped colons and nothing else, which was both
+ * incomplete and unnecessary: a colon is not a metacharacter, while a backslash
+ * or a dot is.
+ */
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /** Reads a meta tag by property or name, with the attribute order either way round. */
 function readMeta(html, key) {
-  const escaped = key.replace(/[:]/g, '\\:');
+  const escaped = escapeRegExp(key);
   const patterns = [
     new RegExp(
       `<meta[^>]+(?:property|name)=["']${escaped}["'][^>]+content=["']([^"']*)["']`,
