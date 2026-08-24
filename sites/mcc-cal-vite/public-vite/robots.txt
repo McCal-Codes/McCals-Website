@@ -5,6 +5,5 @@ Disallow: /api/
 Disallow: /showcase
 Disallow: /api-test
 Disallow: /changelog
-Disallow: /links
 
 Sitemap: https://mcc-cal.com/sitemap.xml

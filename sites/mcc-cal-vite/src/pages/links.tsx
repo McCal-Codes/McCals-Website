@@ -49,7 +49,7 @@ export default function LinksPage() {
     <main className={styles.page}>
       <div className={styles.card}>
         <img
-          src="/about/caleb-mccartney-photo.jpg"
+          src="/about/caleb-mccartney-photo.webp"
           alt="Caleb McCartney"
           width={112}
           height={112}
