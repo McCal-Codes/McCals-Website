@@ -2,6 +2,10 @@
 
 ## 2026-08-24
 
+### A TestFlight Link on the Tap Card
+
+- Added "Join the News App Beta" to `/links`, pointing at the TestFlight enrollment link. It's an external destination, so it opens in a new tab like the social icons already do, unlike the existing internal links (`Grab a Coffee`, `Book a Podcast`) which stay in-app.
+
 ### A Hidden Tap-Card Page for the Physical NFC Card
 
 - Added `/links`: a standalone, Linktree-style page reachable only by direct URL, built for a physical NFC business card. Not in nav, footer, or the sitemap, and disallowed in `robots.txt`.
