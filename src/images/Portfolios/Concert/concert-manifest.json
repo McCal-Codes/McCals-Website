@@ -1,6 +1,6 @@
 {
   "version": "1.1.0",
-  "generated": "2026-08-24T18:26:29.759Z",
+  "generated": "2026-08-26T15:09:49.464Z",
   "generatedBy": "generate-concert-manifest.js",
   "totalBands": 25,
   "bands": [
@@ -507,7 +507,7 @@
       },
       "dateSource": "folder:September 2025",
       "dateConfidence": "medium",
-      "totalImages": 17,
+      "totalImages": 13,
       "images": [
         "250927_Bellueve Music Festival_CAL6199_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6212_webuse.jpg",
@@ -515,17 +515,13 @@
         "250927_Bellueve Music Festival_CAL6224_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6234_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6249_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6249_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6269_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6274_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6274_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6277_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6277_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6284_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6290_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6296_webuse.jpg",
-        "250927_Bellueve Music Festival_CAL6302_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6302_webuse.jpg"
+        "250927_Bellueve Music Festival_CAL6302_webuse 1.jpg"
       ]
     },
     {
@@ -544,7 +540,7 @@
       },
       "dateSource": "folder:September 2025",
       "dateConfidence": "medium",
-      "totalImages": 30,
+      "totalImages": 28,
       "images": [
         "250927_Bellueve Music Festival_CAL6311_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6319_webuse.jpg",
@@ -561,7 +557,6 @@
         "250927_Bellueve Music Festival_CAL6421_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6422_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6426_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6426_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6432_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6434_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6436_webuse.jpg",
@@ -571,7 +566,6 @@
         "250927_Bellueve Music Festival_CAL6464_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6466_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6469_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6469_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6471_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6472_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6477_webuse.jpg",
@@ -594,21 +588,16 @@
       },
       "dateSource": "folder:September 2025",
       "dateConfidence": "medium",
-      "totalImages": 26,
+      "totalImages": 20,
       "images": [
         "250927_Bellueve Music Festival_CAL6043_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6043_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6051_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6051_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6054_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6054_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6057_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6060_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6061_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6061_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6062_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6064_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6064_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6073_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6077_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6108_webuse.jpg",
@@ -617,7 +606,6 @@
         "250927_Bellueve Music Festival_CAL6141_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6143_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6148_webuse 1.jpg",
-        "250927_Bellueve Music Festival_CAL6148_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6162_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6167_webuse.jpg",
         "250927_Bellueve Music Festival_CAL6169_webuse.jpg",
@@ -853,7 +841,7 @@
       },
       "dateSource": "folder:August 2025",
       "dateConfidence": "medium",
-      "totalImages": 19,
+      "totalImages": 17,
       "images": [
         "250820_Haven Block Party_CAL3635.jpg",
         "250820_Haven Block Party_CAL3665.jpg",
@@ -862,9 +850,7 @@
         "250820_Haven Block Party_CAL3673.jpg",
         "250820_Haven Block Party_CAL3674.jpg",
         "250820_Haven Block Party_CAL3680 1.jpg",
-        "250820_Haven Block Party_CAL3680.jpg",
         "250820_Haven Block Party_CAL3687 1.jpg",
-        "250820_Haven Block Party_CAL3687.jpg",
         "250820_Haven Block Party_CAL3698.jpg",
         "250820_Haven Block Party_CAL3706.jpg",
         "250820_Haven Block Party_CAL3719.jpg",
@@ -2667,7 +2653,7 @@
       },
       "dateSource": "folder:September 2025",
       "dateConfidence": "medium",
-      "totalImages": 17,
+      "totalImages": 13,
       "images": [
         {
           "filename": "250927_Bellueve Music Festival_CAL6199_webuse.jpg",
@@ -2694,10 +2680,6 @@
           "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6249_webuse 1.jpg"
         },
         {
-          "filename": "250927_Bellueve Music Festival_CAL6249_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6249_webuse.jpg"
-        },
-        {
           "filename": "250927_Bellueve Music Festival_CAL6269_webuse.jpg",
           "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6269_webuse.jpg"
         },
@@ -2706,16 +2688,8 @@
           "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6274_webuse 1.jpg"
         },
         {
-          "filename": "250927_Bellueve Music Festival_CAL6274_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6274_webuse.jpg"
-        },
-        {
           "filename": "250927_Bellueve Music Festival_CAL6277_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6277_webuse 1.jpg"
-        },
-        {
-          "filename": "250927_Bellueve Music Festival_CAL6277_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6277_webuse.jpg"
         },
         {
           "filename": "250927_Bellueve Music Festival_CAL6284_webuse.jpg",
@@ -2732,10 +2706,6 @@
         {
           "filename": "250927_Bellueve Music Festival_CAL6302_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6302_webuse 1.jpg"
-        },
-        {
-          "filename": "250927_Bellueve Music Festival_CAL6302_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Big Slime/September 2025/250927_Bellueve Music Festival_CAL6302_webuse.jpg"
         }
       ]
     },
@@ -2757,7 +2727,7 @@
       },
       "dateSource": "folder:September 2025",
       "dateConfidence": "medium",
-      "totalImages": 30,
+      "totalImages": 28,
       "images": [
         {
           "filename": "250927_Bellueve Music Festival_CAL6311_webuse.jpg",
@@ -2820,10 +2790,6 @@
           "path": "src/images/Portfolios/Concert/Brahctopus/September 2025/250927_Bellueve Music Festival_CAL6426_webuse 1.jpg"
         },
         {
-          "filename": "250927_Bellueve Music Festival_CAL6426_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Brahctopus/September 2025/250927_Bellueve Music Festival_CAL6426_webuse.jpg"
-        },
-        {
           "filename": "250927_Bellueve Music Festival_CAL6432_webuse.jpg",
           "path": "src/images/Portfolios/Concert/Brahctopus/September 2025/250927_Bellueve Music Festival_CAL6432_webuse.jpg"
         },
@@ -2858,10 +2824,6 @@
         {
           "filename": "250927_Bellueve Music Festival_CAL6469_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Brahctopus/September 2025/250927_Bellueve Music Festival_CAL6469_webuse 1.jpg"
-        },
-        {
-          "filename": "250927_Bellueve Music Festival_CAL6469_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Brahctopus/September 2025/250927_Bellueve Music Festival_CAL6469_webuse.jpg"
         },
         {
           "filename": "250927_Bellueve Music Festival_CAL6471_webuse.jpg",
@@ -2899,31 +2861,19 @@
       },
       "dateSource": "folder:September 2025",
       "dateConfidence": "medium",
-      "totalImages": 26,
+      "totalImages": 20,
       "images": [
         {
           "filename": "250927_Bellueve Music Festival_CAL6043_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6043_webuse 1.jpg"
         },
         {
-          "filename": "250927_Bellueve Music Festival_CAL6043_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6043_webuse.jpg"
-        },
-        {
           "filename": "250927_Bellueve Music Festival_CAL6051_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6051_webuse 1.jpg"
         },
         {
-          "filename": "250927_Bellueve Music Festival_CAL6051_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6051_webuse.jpg"
-        },
-        {
           "filename": "250927_Bellueve Music Festival_CAL6054_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6054_webuse 1.jpg"
-        },
-        {
-          "filename": "250927_Bellueve Music Festival_CAL6054_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6054_webuse.jpg"
         },
         {
           "filename": "250927_Bellueve Music Festival_CAL6057_webuse.jpg",
@@ -2938,20 +2888,12 @@
           "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6061_webuse 1.jpg"
         },
         {
-          "filename": "250927_Bellueve Music Festival_CAL6061_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6061_webuse.jpg"
-        },
-        {
           "filename": "250927_Bellueve Music Festival_CAL6062_webuse.jpg",
           "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6062_webuse.jpg"
         },
         {
           "filename": "250927_Bellueve Music Festival_CAL6064_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6064_webuse 1.jpg"
-        },
-        {
-          "filename": "250927_Bellueve Music Festival_CAL6064_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6064_webuse.jpg"
         },
         {
           "filename": "250927_Bellueve Music Festival_CAL6073_webuse.jpg",
@@ -2984,10 +2926,6 @@
         {
           "filename": "250927_Bellueve Music Festival_CAL6148_webuse 1.jpg",
           "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6148_webuse 1.jpg"
-        },
-        {
-          "filename": "250927_Bellueve Music Festival_CAL6148_webuse.jpg",
-          "path": "src/images/Portfolios/Concert/Funky Lamp/September 2025/250927_Bellueve Music Festival_CAL6148_webuse.jpg"
         },
         {
           "filename": "250927_Bellueve Music Festival_CAL6162_webuse.jpg",
@@ -3471,7 +3409,7 @@
       },
       "dateSource": "folder:August 2025",
       "dateConfidence": "medium",
-      "totalImages": 19,
+      "totalImages": 17,
       "images": [
         {
           "filename": "250820_Haven Block Party_CAL3635.jpg",
@@ -3502,16 +3440,8 @@
           "path": "src/images/Portfolios/Concert/Wild Blue Yonder/August 2025/250820_Haven Block Party_CAL3680 1.jpg"
         },
         {
-          "filename": "250820_Haven Block Party_CAL3680.jpg",
-          "path": "src/images/Portfolios/Concert/Wild Blue Yonder/August 2025/250820_Haven Block Party_CAL3680.jpg"
-        },
-        {
           "filename": "250820_Haven Block Party_CAL3687 1.jpg",
           "path": "src/images/Portfolios/Concert/Wild Blue Yonder/August 2025/250820_Haven Block Party_CAL3687 1.jpg"
-        },
-        {
-          "filename": "250820_Haven Block Party_CAL3687.jpg",
-          "path": "src/images/Portfolios/Concert/Wild Blue Yonder/August 2025/250820_Haven Block Party_CAL3687.jpg"
         },
         {
           "filename": "250820_Haven Block Party_CAL3698.jpg",

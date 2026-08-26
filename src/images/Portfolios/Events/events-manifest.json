@@ -1,6 +1,6 @@
 {
   "version": "2.6.4",
-  "generated": "2026-08-24T18:26:36.002Z",
+  "generated": "2026-08-26T15:09:55.658Z",
   "generatedBy": "events-manifest-generator",
   "totalEvents": 31,
   "events": [
@@ -3649,9 +3649,6 @@
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6761 1.webp"
         },
         {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6761.webp"
-        },
-        {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6763.webp"
         },
         {
@@ -3665,9 +3662,6 @@
         },
         {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6769 1.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6769.webp"
         },
         {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6770.webp"
@@ -3721,9 +3715,6 @@
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6814 1.webp"
         },
         {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6814.webp"
-        },
-        {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6816.webp"
         },
         {
@@ -3754,9 +3745,6 @@
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6859 1.webp"
         },
         {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6859.webp"
-        },
-        {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6861.webp"
         },
         {
@@ -3769,7 +3757,7 @@
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6866.webp"
         }
       ],
-      "totalImages": 93
+      "totalImages": 89
     },
     {
       "eventName": "Ravens Tailgate",
@@ -9448,9 +9436,6 @@
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6761 1.webp"
         },
         {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6761.webp"
-        },
-        {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6763.webp"
         },
         {
@@ -9464,9 +9449,6 @@
         },
         {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6769 1.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6769.webp"
         },
         {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6770.webp"
@@ -9520,9 +9502,6 @@
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6814 1.webp"
         },
         {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6814.webp"
-        },
-        {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6816.webp"
         },
         {
@@ -9551,9 +9530,6 @@
         },
         {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6859 1.webp"
-        },
-        {
-          "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6859.webp"
         },
         {
           "path": "src/images/Portfolios/Events/browns-tailgate/241208_browns-tailgate_CAL6861.webp"
