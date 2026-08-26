@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "type": "featured",
-  "generated": "2026-08-24T18:26:54.808Z",
+  "generated": "2026-08-26T14:14:38.445Z",
   "generatedBy": "enhanced-featured-manifest-generator",
   "sources": [
     "concert-manifest.json",
@@ -9,7 +9,7 @@
     "journalism-manifest.json"
   ],
   "totalItems": 12,
-  "totalImages": 476,
+  "totalImages": 455,
   "categories": [
     "Concert Photography",
     "Events Photography",
@@ -1556,14 +1556,8 @@
         "source": "metadata"
       },
       "dateDisplay": "undefined undefined",
-      "totalImages": 43,
+      "totalImages": 22,
       "images": [
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
-          "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
-          "path": "250802_Brentwood Yard Sale _CAL2643-min.jpg"
-        },
         {
           "filename": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
           "caption": "Vendors staff their table at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
@@ -1595,22 +1589,10 @@
           "path": "250802_Brentwood Yard Sale _CAL2650-min.jpg"
         },
         {
-          "filename": "250802_Brentwood Yard Sale _CAL2651-min.jpg",
-          "caption": "A vendor stands at her table in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "A female vendor stands at her table in front of the historic brick Brentwood Area Historical Society building, with its green-trimmed windows and patriotic decoration visible above the entrance, at the annual yard sale.",
-          "path": "250802_Brentwood Yard Sale _CAL2651-min.jpg"
-        },
-        {
           "filename": "250802_Brentwood Yard Sale _CAL2654-min.jpg",
           "caption": "Rings are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "description": "Rows of rings in various styles arranged on a dark display surface at a vendor table at the Brentwood Area Historical Society yard sale.",
           "path": "250802_Brentwood Yard Sale _CAL2654-min.jpg"
-        },
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2657-min.jpg",
-          "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
-          "path": "250802_Brentwood Yard Sale _CAL2657-min.jpg"
         },
         {
           "filename": "250802_Brentwood Yard Sale _CAL2660-min.jpg",
@@ -1635,18 +1617,6 @@
           "caption": "A shopper examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "description": "Two women interact at a vendor table under tree shade at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed between them and other booths visible in the background.",
           "path": "250802_Brentwood Yard Sale _CAL2678-min.jpg"
-        },
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2681-min.jpg",
-          "caption": "Shoppers browse vendor tables in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Wide view of the Brentwood Area Historical Society yard sale showing multiple white-clothed vendor tables on the lawn, shoppers browsing, and the large red-brick historical society building visible behind the event grounds.",
-          "path": "250802_Brentwood Yard Sale _CAL2681-min.jpg"
-        },
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2682-min.jpg",
-          "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
-          "path": "250802_Brentwood Yard Sale _CAL2682-min.jpg"
         },
         {
           "filename": "250802_Brentwood Yard Sale _CAL2683-min.jpg",
@@ -1679,46 +1649,10 @@
           "path": "250802_Brentwood Yard Sale _CAL2691-min.jpg"
         },
         {
-          "filename": "250802_Brentwood Yard Sale _CAL2693-min.jpg",
-          "caption": "Decorative glassware is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Decorative glassware and vases are displayed on a vendor table under a shade tent at the Brentwood Area Historical Society yard sale, with shoppers browsing nearby booths and the brick historical society building visible behind.",
-          "path": "250802_Brentwood Yard Sale _CAL2693-min.jpg"
-        },
-        {
           "filename": "250802_yardsale_CAL2643-min.webp",
           "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
           "path": "250802_yardsale_CAL2643-min.webp"
-        },
-        {
-          "filename": "250802_yardsale_CAL2644-min.jpg",
-          "caption": "Vendors staff their table at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Two female vendors stand behind a table at their booth at the Brentwood Area Historical Society yard sale, with clothing and purple fabric merchandise displayed in the foreground and event signage behind them.",
-          "path": "250802_yardsale_CAL2644-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2646-min.jpg",
-          "caption": "A vendor examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "A vendor in a red jacket leans over items on their table at the Brentwood Area Historical Society yard sale, with other shoppers and a large tree trunk visible in the background.",
-          "path": "250802_yardsale_CAL2646-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2647-min.jpg",
-          "caption": "Wicker baskets and handbags are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Close-up of merchandise on a vendor table at the Brentwood Area Historical Society yard sale, featuring wicker baskets, white handbags, and textiles, with other booths and shoppers visible in the background.",
-          "path": "250802_yardsale_CAL2647-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2649-min.jpg",
-          "caption": "A vendor arranges merchandise under a tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "A vendor organizes items including wicker baskets and textiles on a table under a blue tent at the Brentwood Area Historical Society yard sale, with other shoppers, buildings, and trees visible around them.",
-          "path": "250802_yardsale_CAL2649-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2650-min.jpg",
-          "caption": "Beaded jewelry is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Close-up detail of multi-colored beaded necklaces on display at a vendor table at the Brentwood Area Historical Society yard sale.",
-          "path": "250802_yardsale_CAL2650-min.jpg"
         },
         {
           "filename": "250802_yardsale_CAL2651-min.webp",
@@ -1727,46 +1661,16 @@
           "path": "250802_yardsale_CAL2651-min.webp"
         },
         {
-          "filename": "250802_yardsale_CAL2654-min.jpg",
-          "caption": "Rings are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Rows of rings in various styles arranged on a dark display surface at a vendor table at the Brentwood Area Historical Society yard sale.",
-          "path": "250802_yardsale_CAL2654-min.jpg"
-        },
-        {
           "filename": "250802_yardsale_CAL2657-min.webp",
           "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
           "path": "250802_yardsale_CAL2657-min.webp"
         },
         {
-          "filename": "250802_yardsale_CAL2660-min.jpg",
-          "caption": "Shoppers browse glassware under a tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Two female shoppers examine decorative glass items under the shade of an old tree at the Brentwood Area Historical Society yard sale, with other vendors and shoppers visible in the background.",
-          "path": "250802_yardsale_CAL2660-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2666-min.jpg",
-          "caption": "A vendor sorts merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "A person in a green vest leans over items at a vendor table at the Brentwood Area Historical Society yard sale, organizing goods with other booths and shoppers visible behind them.",
-          "path": "250802_yardsale_CAL2666-min.jpg"
-        },
-        {
           "filename": "250802_yardsale_CAL2670-min.jpg",
           "caption": "A vendor displays antique kitchenware at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "description": "A vendor in a mint-colored shirt stands at her booth at the Brentwood Area Historical Society yard sale, holding an item alongside a prominent decorative wooden spoon or paddle on display, with trees and other vendors behind her.",
           "path": "250802_yardsale_CAL2670-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2674-min.jpg",
-          "caption": "Vintage ceramics are on sale at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "White ceramic pitchers and mugs with metal handles are displayed on a vendor table at the Brentwood Area Historical Society yard sale, alongside a small decorative house figurine with a red roof.",
-          "path": "250802_yardsale_CAL2674-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2678-min.jpg",
-          "caption": "A shopper examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Two women interact at a vendor table under tree shade at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed between them and other booths visible in the background.",
-          "path": "250802_yardsale_CAL2678-min.jpg"
         },
         {
           "filename": "250802_yardsale_CAL2681-min.webp",
@@ -1779,36 +1683,6 @@
           "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
           "path": "250802_yardsale_CAL2682-min.webp"
-        },
-        {
-          "filename": "250802_yardsale_CAL2683-min.jpg",
-          "caption": "Shoppers look through merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Vendor items including clothing and decorative objects are on display at the Brentwood Area Historical Society yard sale, with the historical society's brick building forming the backdrop and shoppers browsing nearby.",
-          "path": "250802_yardsale_CAL2683-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2685-min.jpg",
-          "caption": "A shopper moves through the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "A female shopper in a black graphic t-shirt and crossbody bag walks through the Brentwood Area Historical Society yard sale, with a borough ordinance sign and parked vehicles visible behind the vendor booths.",
-          "path": "250802_yardsale_CAL2685-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2687-min.jpg",
-          "caption": "Shoppers crowd a vendor tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Multiple vendors and shoppers gather under a large green canopy tent at the Brentwood Area Historical Society yard sale, with merchandise on tables and vehicles and buildings visible in the background.",
-          "path": "250802_yardsale_CAL2687-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2690-min.jpg",
-          "caption": "Shoppers fill the lawn at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Wide view of the well-attended Brentwood Area Historical Society yard sale showing white-clothed tables, shoppers, vendor tents, and the brick historical society building with patriotic bunting, vehicles, and large trees.",
-          "path": "250802_yardsale_CAL2690-min.jpg"
-        },
-        {
-          "filename": "250802_yardsale_CAL2691-min.jpg",
-          "caption": "Shoppers browse antiques and collectibles in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "description": "Multiple female shoppers browse merchandise on white-clothed tables in front of the historic brick Brentwood Area Historical Society building, with patriotic bunting visible on the facade and various decorative goods displayed across the vendor spaces.",
-          "path": "250802_yardsale_CAL2691-min.jpg"
         },
         {
           "filename": "250802_yardsale_CAL2693-min.webp",
@@ -1835,12 +1709,7 @@
       },
       "type": "Journalism",
       "id": "Historic Yard Sale 0825",
-      "coverImage": {
-        "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
-        "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-        "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
-        "path": "250802_Brentwood Yard Sale _CAL2643-min.jpg"
-      },
+      "coverImage": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
       "featuredRank": 9,
       "featuredDescription": "Community documentary work grounded in small details, local color, and everyday exchange.",
       "featuredCover": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
