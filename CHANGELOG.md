@@ -22,6 +22,12 @@
 - Includes a "Save My Contact" vCard download (a static `.vcf` file rather than a JS-generated blob, more reliable across iOS/Android "save contact" flows) and a `links_page_view` analytics event keyed off `?src=` on the URL, so taps from the physical card are distinguishable from any other way someone reaches the link.
 - Layout is entirely built off the site's existing `--mcc-*` CSS custom properties, so dark/light mode work without extra code, and sizing uses `clamp()` tied to viewport height so the card fits common phone screens without scrolling.
 
+### React Router and shell-quote Security Patches
+
+- Bumped `react-router-dom` to 6.30.6 to close GHSA-jjmj-jmhj-qwj2, an open redirect that could be turned into XSS, present in 6.30.2 through 6.30.4.
+- Pinned `shell-quote` to 1.9.0+ in this site's own lockfile (already fixed at the repo root by an earlier Dependabot PR), closing a quadratic-complexity denial of service pulled in transitively through `concurrently`.
+- Two other open `react-router` advisories only have a fix in v7, a major version bump touching every file that imports `react-router-dom`. Reviewed both: one only affects apps doing manual SSR hydration, which this is not; the other requires attacker-controlled input reaching a navigation target, and nothing in this codebase builds a `Link`/`navigate` target from user input. Dismissed on GitHub with recorded reasoning rather than forcing an unrelated major upgrade.
+
 ## 2026-08-12
 
 ### One Legal Page Became Three
