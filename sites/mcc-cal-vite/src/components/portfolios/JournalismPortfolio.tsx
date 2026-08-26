@@ -49,7 +49,7 @@ function normalise(events: JournalismEvent[]): PortfolioGroup[] {
       filename: img.filename,
       caption: img.caption,
       description: img.description,
-      alt: img.caption ?? `${event.eventName}, ${img.filename}`,
+      alt: img.caption ?? event.eventName,
     }));
 
     return {
@@ -85,7 +85,7 @@ const editorialProof = [
   },
   {
     label: 'Availability',
-    value: 'Pittsburgh based, Washington, D.C. editorial readiness',
+    value: 'Pittsburgh based, available for Washington, D.C. assignments',
   },
 ];
 
@@ -161,12 +161,6 @@ export default function JournalismPortfolio() {
             />
           ) : (
             <>
-              <PortfolioFilters
-                filters={filters}
-                active={activeFilter}
-                onChange={setActiveFilter}
-              />
-              <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
               <dl className={portfolioStyles.pfEditorialProof} aria-label="Editorial proof points">
                 {editorialProof.map((item) => (
                   <div key={item.label} className={portfolioStyles.pfEditorialProofItem}>
@@ -204,6 +198,12 @@ export default function JournalismPortfolio() {
                   </div>
                 </section>
               )}
+              <PortfolioFilters
+                filters={filters}
+                active={activeFilter}
+                onChange={setActiveFilter}
+              />
+              <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
             </>
           )}
         </>

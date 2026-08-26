@@ -170,15 +170,17 @@ export default function TermsPage() {
           </h3>
           <p>
             If the Contractor does not receive payment from the Client within fourteen calendar days
-            of any payment date, the Client will be charged a late fee of 1.5% of the outstanding
-            amount per day that the Contractor does not receive it.
+            of any payment date, the Client will be charged a late fee equal to 1.5% of the original
+            outstanding amount for each day that the Contractor does not receive it. This fee does
+            not compound &mdash; it is calculated only on the original amount owed, not on
+            previously accrued late fees.
           </p>
           <ul>
             <li>
               <strong>For example:</strong> The Client owes the Contractor $1000 due on April 1 and
               fails to pay by April 14th. On April 15th, the Client owes the Contractor $1015. On
-              April 16th, the Client owes the Contractor $1030.23. On April 17th, the Client owes
-              the Contractor $1045.68, and so on.
+              April 16th, the Client owes the Contractor $1030. On April 17th, the Client owes
+              the Contractor $1045, and so on.
             </li>
           </ul>
         </section>
@@ -208,7 +210,7 @@ export default function TermsPage() {
           </h3>
           <p>
             The Client shall provide the Contractor access to the accounts no later than 48 hours
-            before the day after the day of service. Via: [Software / Email]
+            before the day after the day of service.
           </p>
         </section>
 

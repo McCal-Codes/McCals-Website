@@ -21,8 +21,20 @@ function isUsableImageEntry(entry) {
   return IMAGE_EXTENSION_RE.test(name) && !basename.startsWith('.') && !basename.startsWith('._');
 }
 
+const FRAME_NUMBER_RE = /CAL\d+/i;
+
 function baseImageKey(entry) {
   return imageEntryName(entry).replace(/\\/g, '/').replace(IMAGE_EXTENSION_RE, '').toLowerCase();
+}
+
+// Same shoot is sometimes re-exported under different filename conventions
+// (e.g. "Brentwood Yard Sale_CAL2643-min.jpg" vs "yardsale_CAL2643-min.webp").
+// The CAL#### frame number McCal's tooling assigns per shoot is a much more
+// reliable identity key than the full filename when present.
+function frameImageKey(entry) {
+  const name = imageEntryName(entry);
+  const match = name.match(FRAME_NUMBER_RE);
+  return match ? match[0].toUpperCase() : baseImageKey(entry);
 }
 
 function choosePreferredImage(current, candidate) {
@@ -44,7 +56,7 @@ function dedupeImageEntries(entries) {
   for (const entry of entries || []) {
     if (!isUsableImageEntry(entry)) continue;
 
-    const key = baseImageKey(entry);
+    const key = frameImageKey(entry);
     const existing = selected.get(key);
     selected.set(key, existing ? choosePreferredImage(existing, entry) : entry);
   }

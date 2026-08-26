@@ -150,8 +150,8 @@ export default function AboutPage() {
           <BioSection className={styles.aboutPanel} />
           <div className={styles.aboutContent}>
             <TestimonialsSection className={styles.aboutPanel} />
-            <GearSection className={styles.aboutPanel} />
             <ClientsSection className={styles.aboutPanel} duplicates={3} />
+            <GearSection className={styles.aboutPanel} />
           </div>
         </div>
       </div>
