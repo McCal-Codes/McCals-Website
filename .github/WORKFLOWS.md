@@ -1,6 +1,6 @@
 # Workflows: organization & best practices
 
-**Last updated:** 2026-06-14
+**Last updated:** 2026-08-26
 
 This document describes the active workflows in `.github/workflows/` and the conventions that govern them.
 
@@ -68,7 +68,7 @@ This document describes the active workflows in `.github/workflows/` and the con
 | File | Purpose |
 |---|---|
 | `ai-preflight-daily.yml` | Run AI instructions preflight check on demand (was daily cron — disabled 2026-06-14) |
-| `playwright-performance.yml` | Widget performance scaffold — **widget-era, effectively retired** (auto-trigger removed 2026-06-14; `workflow_dispatch` retained for reference) |
+| `playwright-performance.yml` (titled "Performance Budget") | **Active, not dispatch-only** — this entry is stale. It runs on every PR touching `sites/mcc-cal-vite/**`, asserting CLS/LCP/FCP/JS/CSS/image budgets against a production build. It is not widget-related; the 2026-06-14 removal was of an actual widget-path trigger that predates this file's current form. Move to "Core CI" above if this stays a required PR gate. |
 | `test-notify-manifest-webhook.yml` | Test manifest webhook notification |
 
 ---
@@ -77,4 +77,4 @@ This document describes the active workflows in `.github/workflows/` and the con
 
 - **`nightly-smoke-test` vs `playwright-smoke`** run an hour apart and test different things (Node script vs browser); intentionally separate.
 - **`lint-scripts` vs `ci-scripts-smoke`** overlap on script validation; `lint-scripts` is path-filtered (only fires on `scripts/**` changes) while `ci-scripts-smoke` runs on all PRs and does more. Both are intentional.
-- **`playwright-performance`** is retained for manual use but its auto-trigger (on `src/widgets/**`) was removed since those paths are retired.
+- **`playwright-performance`** (see "Dispatch-only" above) is misfiled — it's actually an active `pull_request`-triggered gate on `sites/mcc-cal-vite/**`, not dispatch-only. Move it to "Core CI" once confirmed as a required check.
