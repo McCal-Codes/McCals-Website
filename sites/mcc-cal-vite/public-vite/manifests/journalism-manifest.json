@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "generated": "2026-08-22T18:26:36.269Z",
   "totalEvents": 17,
-  "totalImages": 419,
+  "totalImages": 359,
   "categories": [
     "Documentary",
     "Events",
@@ -497,18 +497,8 @@
         "source": "metadata"
       },
       "dateDisplay": "August 2, 2025",
-      "totalImages": 43,
+      "totalImages": 22,
       "images": [
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
-          "path": "250802_Brentwood Yard Sale _CAL2643-min.jpg",
-          "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
-          "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
         {
           "filename": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
           "path": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
@@ -560,30 +550,10 @@
           ]
         },
         {
-          "filename": "250802_Brentwood Yard Sale _CAL2651-min.jpg",
-          "path": "250802_Brentwood Yard Sale _CAL2651-min.jpg",
-          "description": "A female vendor stands at her table in front of the historic brick Brentwood Area Historical Society building, with its green-trimmed windows and patriotic decoration visible above the entrance, at the annual yard sale.",
-          "caption": "A vendor stands at her table in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_Brentwood Yard Sale _CAL2654-min.jpg",
           "path": "250802_Brentwood Yard Sale _CAL2654-min.jpg",
           "description": "Rows of rings in various styles arranged on a dark display surface at a vendor table at the Brentwood Area Historical Society yard sale.",
           "caption": "Rings are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2657-min.jpg",
-          "path": "250802_Brentwood Yard Sale _CAL2657-min.jpg",
-          "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
-          "caption": "Vendors chat under the shade of a large tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -624,26 +594,6 @@
           "path": "250802_Brentwood Yard Sale _CAL2678-min.jpg",
           "description": "Two women interact at a vendor table under tree shade at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed between them and other booths visible in the background.",
           "caption": "A shopper examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2681-min.jpg",
-          "path": "250802_Brentwood Yard Sale _CAL2681-min.jpg",
-          "description": "Wide view of the Brentwood Area Historical Society yard sale showing multiple white-clothed vendor tables on the lawn, shoppers browsing, and the large red-brick historical society building visible behind the event grounds.",
-          "caption": "Shoppers browse vendor tables in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_Brentwood Yard Sale _CAL2682-min.jpg",
-          "path": "250802_Brentwood Yard Sale _CAL2682-min.jpg",
-          "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
-          "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -700,70 +650,10 @@
           ]
         },
         {
-          "filename": "250802_Brentwood Yard Sale _CAL2693-min.jpg",
-          "path": "250802_Brentwood Yard Sale _CAL2693-min.jpg",
-          "description": "Decorative glassware and vases are displayed on a vendor table under a shade tent at the Brentwood Area Historical Society yard sale, with shoppers browsing nearby booths and the brick historical society building visible behind.",
-          "caption": "Decorative glassware is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2643-min.webp",
           "path": "250802_yardsale_CAL2643-min.webp",
           "description": "Wide overhead view of the Brentwood Area Historical Society yard sale, showing vendor tables under blue and green shade tents with shoppers browsing across the grounds, a brick building, and large trees visible in the background.",
           "caption": "Vendors and shoppers fill the grounds of the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2644-min.jpg",
-          "path": "250802_yardsale_CAL2644-min.jpg",
-          "description": "Two female vendors stand behind a table at their booth at the Brentwood Area Historical Society yard sale, with clothing and purple fabric merchandise displayed in the foreground and event signage behind them.",
-          "caption": "Vendors staff their table at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2646-min.jpg",
-          "path": "250802_yardsale_CAL2646-min.jpg",
-          "description": "A vendor in a red jacket leans over items on their table at the Brentwood Area Historical Society yard sale, with other shoppers and a large tree trunk visible in the background.",
-          "caption": "A vendor examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2647-min.jpg",
-          "path": "250802_yardsale_CAL2647-min.jpg",
-          "description": "Close-up of merchandise on a vendor table at the Brentwood Area Historical Society yard sale, featuring wicker baskets, white handbags, and textiles, with other booths and shoppers visible in the background.",
-          "caption": "Wicker baskets and handbags are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2649-min.jpg",
-          "path": "250802_yardsale_CAL2649-min.jpg",
-          "description": "A vendor organizes items including wicker baskets and textiles on a table under a blue tent at the Brentwood Area Historical Society yard sale, with other shoppers, buildings, and trees visible around them.",
-          "caption": "A vendor arranges merchandise under a tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2650-min.jpg",
-          "path": "250802_yardsale_CAL2650-min.jpg",
-          "description": "Close-up detail of multi-colored beaded necklaces on display at a vendor table at the Brentwood Area Historical Society yard sale.",
-          "caption": "Beaded jewelry is displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -780,16 +670,6 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2654-min.jpg",
-          "path": "250802_yardsale_CAL2654-min.jpg",
-          "description": "Rows of rings in various styles arranged on a dark display surface at a vendor table at the Brentwood Area Historical Society yard sale.",
-          "caption": "Rings are displayed at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2657-min.webp",
           "path": "250802_yardsale_CAL2657-min.webp",
           "description": "Two women converse under the canopy of a large tree at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed on the table between them.",
@@ -800,50 +680,10 @@
           ]
         },
         {
-          "filename": "250802_yardsale_CAL2660-min.jpg",
-          "path": "250802_yardsale_CAL2660-min.jpg",
-          "description": "Two female shoppers examine decorative glass items under the shade of an old tree at the Brentwood Area Historical Society yard sale, with other vendors and shoppers visible in the background.",
-          "caption": "Shoppers browse glassware under a tree at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2666-min.jpg",
-          "path": "250802_yardsale_CAL2666-min.jpg",
-          "description": "A person in a green vest leans over items at a vendor table at the Brentwood Area Historical Society yard sale, organizing goods with other booths and shoppers visible behind them.",
-          "caption": "A vendor sorts merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250802_yardsale_CAL2670-min.jpg",
           "path": "250802_yardsale_CAL2670-min.jpg",
           "description": "A vendor in a mint-colored shirt stands at her booth at the Brentwood Area Historical Society yard sale, holding an item alongside a prominent decorative wooden spoon or paddle on display, with trees and other vendors behind her.",
           "caption": "A vendor displays antique kitchenware at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2674-min.jpg",
-          "path": "250802_yardsale_CAL2674-min.jpg",
-          "description": "White ceramic pitchers and mugs with metal handles are displayed on a vendor table at the Brentwood Area Historical Society yard sale, alongside a small decorative house figurine with a red roof.",
-          "caption": "Vintage ceramics are on sale at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2678-min.jpg",
-          "path": "250802_yardsale_CAL2678-min.jpg",
-          "description": "Two women interact at a vendor table under tree shade at the Brentwood Area Historical Society yard sale, with glass and ceramic items displayed between them and other booths visible in the background.",
-          "caption": "A shopper examines merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -864,56 +704,6 @@
           "path": "250802_yardsale_CAL2682-min.webp",
           "description": "Decorative items, baskets, and glassware are displayed on vendor tables in front of the Brentwood Area Historical Society building, with multiple shoppers browsing and trees providing shade at the annual sale.",
           "caption": "Shoppers browse merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2683-min.jpg",
-          "path": "250802_yardsale_CAL2683-min.jpg",
-          "description": "Vendor items including clothing and decorative objects are on display at the Brentwood Area Historical Society yard sale, with the historical society's brick building forming the backdrop and shoppers browsing nearby.",
-          "caption": "Shoppers look through merchandise at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2685-min.jpg",
-          "path": "250802_yardsale_CAL2685-min.jpg",
-          "description": "A female shopper in a black graphic t-shirt and crossbody bag walks through the Brentwood Area Historical Society yard sale, with a borough ordinance sign and parked vehicles visible behind the vendor booths.",
-          "caption": "A shopper moves through the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2687-min.jpg",
-          "path": "250802_yardsale_CAL2687-min.jpg",
-          "description": "Multiple vendors and shoppers gather under a large green canopy tent at the Brentwood Area Historical Society yard sale, with merchandise on tables and vehicles and buildings visible in the background.",
-          "caption": "Shoppers crowd a vendor tent at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2690-min.jpg",
-          "path": "250802_yardsale_CAL2690-min.jpg",
-          "description": "Wide view of the well-attended Brentwood Area Historical Society yard sale showing white-clothed tables, shoppers, vendor tents, and the brick historical society building with patriotic bunting, vehicles, and large trees.",
-          "caption": "Shoppers fill the lawn at the Brentwood Area Historical Society annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250802_yardsale_CAL2691-min.jpg",
-          "path": "250802_yardsale_CAL2691-min.jpg",
-          "description": "Multiple female shoppers browse merchandise on white-clothed tables in front of the historic brick Brentwood Area Historical Society building, with patriotic bunting visible on the facade and various decorative goods displayed across the vendor spaces.",
-          "caption": "Shoppers browse antiques and collectibles in front of the Brentwood Area Historical Society building during the annual yard sale, Brentwood, Pa., Aug. 2, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -1372,7 +1162,7 @@
         "source": "metadata"
       },
       "dateDisplay": "July 4, 2025",
-      "totalImages": 51,
+      "totalImages": 28,
       "images": [
         {
           "filename": "250704_Brentwood 4th of July_CAL9762-min.jpg",
@@ -1395,16 +1185,6 @@
           ]
         },
         {
-          "filename": "250704_Brentwood 4th of July_CAL9766-min.jpg",
-          "path": "250704_Brentwood 4th of July_CAL9766-min.jpg",
-          "description": "A large group stands together under yellow umbrellas on a paved area at the Brentwood Fourth of July event, with picnic tables and shade structures visible nearby.",
-          "caption": "Residents gather under yellow umbrellas at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_Brentwood 4th of July_CAL9768-min.jpg",
           "path": "250704_Brentwood 4th of July_CAL9768-min.jpg",
           "description": "A middle-aged man in a blue Under Armour shirt stands with arms crossed in front of green foliage at the Brentwood Fourth of July event.",
@@ -1419,16 +1199,6 @@
           "path": "250704_Brentwood 4th of July_CAL9781-min.jpg",
           "description": "A young child wearing star-patterned patriotic shorts sits with an adult on a bench at sunset, pointing upward excitedly as the evening program begins at the Brentwood Fourth of July celebration.",
           "caption": "A child points skyward as fireworks begin during the Brentwood Fourth of July celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9790-min.jpg",
-          "path": "250704_Brentwood 4th of July_CAL9790-min.jpg",
-          "description": "Two young women sit on a blue platform bench at golden hour during the Brentwood Fourth of July event, with trees and utility poles in the background.",
-          "caption": "Attendees sit on a bench at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -1469,16 +1239,6 @@
           "path": "250704_Brentwood 4th of July_CAL9820-min.jpg",
           "description": "Two players leap toward a basketball on an outdoor court during the Brentwood Fourth of July event, with a blue barrier fence and trees in the background.",
           "caption": "Players jump for a basketball during a pickup game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_Brentwood 4th of July_CAL9827-min.jpg",
-          "path": "250704_Brentwood 4th of July_CAL9827-min.jpg",
-          "description": "A basketball is captured mid-flight above the court during a pickup game at the Brentwood Fourth of July event, with spectators visible in the background.",
-          "caption": "A player shoots during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -1595,36 +1355,6 @@
           ]
         },
         {
-          "filename": "250704_Brentwood 4th of July_CAL9895-min.jpg",
-          "path": "250704_Brentwood 4th of July_CAL9895-min.jpg",
-          "description": "A group poses together for a photo during the Brentwood Fourth of July community event.",
-          "caption": "A group poses for a photo during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9762-min.jpg",
-          "path": "250704_brentwood4th_CAL9762-min.jpg",
-          "description": "Two young people wearing leis stand at the Brentwood Fourth of July community event. The person on the left wears a white t-shirt and blue lei; the person on the right wears a dark Nike shirt and cap.",
-          "caption": "Attendees wear patriotic accessories at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9763-min.jpg",
-          "path": "250704_brentwood4th_CAL9763-min.jpg",
-          "description": "View through a chain-link fence at a community pool facility during the Brentwood Fourth of July event, with trees and sky visible beyond.",
-          "caption": "A chain-link fence borders the community pool at Brentwood's Fourth of July celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9766-min.webp",
           "path": "250704_brentwood4th_CAL9766-min.webp",
           "description": "A large group stands together under yellow umbrellas on a paved area at the Brentwood Fourth of July event, with picnic tables and shade structures visible nearby.",
@@ -1635,60 +1365,10 @@
           ]
         },
         {
-          "filename": "250704_brentwood4th_CAL9768-min.jpg",
-          "path": "250704_brentwood4th_CAL9768-min.jpg",
-          "description": "A middle-aged man in a blue Under Armour shirt stands with arms crossed in front of green foliage at the Brentwood Fourth of July event.",
-          "caption": "A man stands at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9781-min.jpg",
-          "path": "250704_brentwood4th_CAL9781-min.jpg",
-          "description": "A young child wearing star-patterned patriotic shorts sits with an adult on a bench at sunset, pointing upward excitedly as the evening program begins at the Brentwood Fourth of July celebration.",
-          "caption": "A child points skyward as fireworks begin during the Brentwood Fourth of July celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9790-min.webp",
           "path": "250704_brentwood4th_CAL9790-min.webp",
           "description": "Two young women sit on a blue platform bench at golden hour during the Brentwood Fourth of July event, with trees and utility poles in the background.",
           "caption": "Attendees sit on a bench at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9806-min.jpg",
-          "path": "250704_brentwood4th_CAL9806-min.jpg",
-          "description": "Two young men with curly reddish hair smile in front of a chain-link tennis court fence at the Brentwood Fourth of July event, with a blue court surface visible behind them.",
-          "caption": "Players pose near the basketball courts at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9810-min.jpg",
-          "path": "250704_brentwood4th_CAL9810-min.jpg",
-          "description": "A young man in a graphic t-shirt and red shorts sits on a blue bench at the Brentwood Fourth of July event.",
-          "caption": "A participant rests courtside at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9815-min.jpg",
-          "path": "250704_brentwood4th_CAL9815-min.jpg",
-          "description": "A young person in a dark hoodie is photographed in portrait style against blurred green foliage at the Brentwood Fourth of July event.",
-          "caption": "A resident attends the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -1725,40 +1405,10 @@
           ]
         },
         {
-          "filename": "250704_brentwood4th_CAL9820-min.jpg",
-          "path": "250704_brentwood4th_CAL9820-min.jpg",
-          "description": "Two players leap toward a basketball on an outdoor court during the Brentwood Fourth of July event, with a blue barrier fence and trees in the background.",
-          "caption": "Players jump for a basketball during a pickup game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9827-min.webp",
           "path": "250704_brentwood4th_CAL9827-min.webp",
           "description": "A basketball is captured mid-flight above the court during a pickup game at the Brentwood Fourth of July event, with spectators visible in the background.",
           "caption": "A player shoots during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9833-min.jpg",
-          "path": "250704_brentwood4th_CAL9833-min.jpg",
-          "description": "A shirtless young man dribbles the ball on a blue outdoor court during the Brentwood Fourth of July pickup basketball game, with other players and a brick building visible behind him.",
-          "caption": "A player dribbles during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9837-min.jpg",
-          "path": "250704_brentwood4th_CAL9837-min.jpg",
-          "description": "A young man in a white t-shirt stands with hands at his sides against a blurred tree background at the Brentwood Fourth of July event.",
-          "caption": "A young man stands near the basketball court during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -1775,100 +1425,10 @@
           ]
         },
         {
-          "filename": "250704_brentwood4th_CAL9840-min.jpg",
-          "path": "250704_brentwood4th_CAL9840-min.jpg",
-          "description": "Multiple players move across a blue-and-white outdoor court during the Brentwood Fourth of July pickup basketball game, with spectators along the edges and green foliage framing the scene.",
-          "caption": "Residents compete in a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9843-min.jpg",
-          "path": "250704_brentwood4th_CAL9843-min.jpg",
-          "description": "A young person in a red cap and white shirt raises both hands in a celebratory gesture at the Brentwood Fourth of July community event, with trees and a building behind them.",
-          "caption": "A resident reacts during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9849-min.jpg",
-          "path": "250704_brentwood4th_CAL9849-min.jpg",
-          "description": "A group of young people stand courtside watching the pickup basketball game at the Brentwood Fourth of July event, with trees, fencing, and buildings visible in the background.",
-          "caption": "Spectators watch the pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9851-min.jpg",
-          "path": "250704_brentwood4th_CAL9851-min.jpg",
-          "description": "A player raises a water bottle to drink between possessions during the Brentwood Fourth of July pickup basketball game, photographed against a blurred green fence.",
-          "caption": "A player takes a water break during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "250704_brentwood4th_CAL9862-min.jpg",
           "path": "250704_brentwood4th_CAL9862-min.jpg",
           "description": "A young man in a black graphic t-shirt looks to the side in a candid shot against a blurred green background at the Brentwood Fourth of July event.",
           "caption": "A young man gestures during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9866-min.jpg",
-          "path": "250704_brentwood4th_CAL9866-min.jpg",
-          "description": "A group of approximately a dozen young people pose together for a photo at the Brentwood Fourth of July event, several wearing patriotic face paint and colorful casual clothing.",
-          "caption": "Residents gather for a group photo at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9867-min.jpg",
-          "path": "250704_brentwood4th_CAL9867-min.jpg",
-          "description": "A player drives toward the basket while a defender raises both arms during a pickup basketball game at the Brentwood Fourth of July community event.",
-          "caption": "A player drives toward the basket during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9874-min.jpg",
-          "path": "250704_brentwood4th_CAL9874-min.jpg",
-          "description": "Players and spectators gather near a chain-link fence during a pickup basketball game at the Brentwood Fourth of July community event.",
-          "caption": "Players gather near the fence during a pickup basketball game at the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9882-min.jpg",
-          "path": "250704_brentwood4th_CAL9882-min.jpg",
-          "description": "A player drinks from a water bottle courtside during the Brentwood Fourth of July community event.",
-          "caption": "A player drinks from a water bottle during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "250704_brentwood4th_CAL9886-min.jpg",
-          "path": "250704_brentwood4th_CAL9886-min.jpg",
-          "description": "A player in a black jersey waits courtside during the Brentwood Fourth of July community event.",
-          "caption": "A player waits courtside during the Brentwood Fourth of July community celebration, Brentwood, Pa., July 4, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -1911,6 +1471,66 @@
       "dateDisplay": "June 9, 2025",
       "totalImages": 43,
       "images": [
+        {
+          "filename": "6-9-25_Caleb McCartney_014-min.jpg",
+          "path": "6-9-25_Caleb McCartney_014-min.jpg",
+          "description": "Low-angle view across a wildflower meadow at golden hour, with white and pink blossoms filling the foreground and rolling green hills, trees, and a pale blue sky stretching toward the horizon.",
+          "caption": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_021-min.jpg",
+          "path": "6-9-25_Caleb McCartney_021-min.jpg",
+          "description": "An older man in a gray long-sleeve shirt and tan cap ties a fishing rig while a younger man in an orange sweater and Pittsburgh Pirates cap watches closely, both standing on a grassy hillside at dusk.",
+          "caption": "Two men prepare a fishing line at dusk in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_120-min.jpg",
+          "path": "6-9-25_Caleb McCartney_120-min.jpg",
+          "description": "A boy in a blue t-shirt and cap swings a lit sparkler, producing a bright flare and swirl of smoke in the foreground, with a faint moon visible above dark tree silhouettes and a lit outbuilding in the background.",
+          "caption": "A boy swings a sparkler in the night sky in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_134 1-min.jpg",
+          "path": "6-9-25_Caleb McCartney_134 1-min.jpg",
+          "description": "Close alternate frame of an adult and boy holding a sparkler together in the near-dark; the warm glow of the sparkler lights their hands and faces against a blue dusk sky.",
+          "caption": "A boy watches a sparkler burn in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_134-min.jpg",
+          "path": "6-9-25_Caleb McCartney_134-min.jpg",
+          "description": "An adult in a brown hoodie stands beside a boy in a blue t-shirt and flag-patch cap as the boy holds a glowing sparkler in his cupped hands, illuminating both their faces against a deep blue twilight sky and tree silhouettes.",
+          "caption": "A boy holds a sparkler with an adult in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_152-min.jpg",
+          "path": "6-9-25_Caleb McCartney_152-min.jpg",
+          "description": "A young person in a blue t-shirt and tan cap holds a sparkler at arm's length, tracing a glowing arc through the dark night air, with trails of sparks and smoke visible against a black background.",
+          "caption": "A youth waves a sparkler in an arc in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
         {
           "filename": "6-10-25_Caleb McCartney_210-min.jpg",
           "path": "6-10-25_Caleb McCartney_210-min.jpg",
@@ -2276,66 +1896,6 @@
           "path": "6-12-25_Caleb McCartney_579-min.jpg",
           "description": "Viewed from behind the silhouetted audience, two performers, a woman in a hat and floral dress and a man in a red cowboy hat, play guitars on a small stage with the red neon 'Aeolian Music Hall' sign glowing between them.",
           "caption": "Musicians perform for a crowd at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_014-min.jpg",
-          "path": "6-9-25_Caleb McCartney_014-min.jpg",
-          "description": "Low-angle view across a wildflower meadow at golden hour, with white and pink blossoms filling the foreground and rolling green hills, trees, and a pale blue sky stretching toward the horizon.",
-          "caption": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_021-min.jpg",
-          "path": "6-9-25_Caleb McCartney_021-min.jpg",
-          "description": "An older man in a gray long-sleeve shirt and tan cap ties a fishing rig while a younger man in an orange sweater and Pittsburgh Pirates cap watches closely, both standing on a grassy hillside at dusk.",
-          "caption": "Two men prepare a fishing line at dusk in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_120-min.jpg",
-          "path": "6-9-25_Caleb McCartney_120-min.jpg",
-          "description": "A boy in a blue t-shirt and cap swings a lit sparkler, producing a bright flare and swirl of smoke in the foreground, with a faint moon visible above dark tree silhouettes and a lit outbuilding in the background.",
-          "caption": "A boy swings a sparkler in the night sky in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_134 1-min.jpg",
-          "path": "6-9-25_Caleb McCartney_134 1-min.jpg",
-          "description": "Close alternate frame of an adult and boy holding a sparkler together in the near-dark; the warm glow of the sparkler lights their hands and faces against a blue dusk sky.",
-          "caption": "A boy watches a sparkler burn in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_134-min.jpg",
-          "path": "6-9-25_Caleb McCartney_134-min.jpg",
-          "description": "An adult in a brown hoodie stands beside a boy in a blue t-shirt and flag-patch cap as the boy holds a glowing sparkler in his cupped hands, illuminating both their faces against a deep blue twilight sky and tree silhouettes.",
-          "caption": "A boy holds a sparkler with an adult in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_152-min.jpg",
-          "path": "6-9-25_Caleb McCartney_152-min.jpg",
-          "description": "A young person in a blue t-shirt and tan cap holds a sparkler at arm's length, tracing a glowing arc through the dark night air, with trails of sparks and smoke visible against a black background.",
-          "caption": "A youth waves a sparkler in an arc in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -3057,30 +2617,8 @@
         "source": "metadata"
       },
       "dateDisplay": "October 14, 2024",
-      "totalImages": 52,
+      "totalImages": 37,
       "images": [
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3741 1.jpg",
-          "description": "A wide view shows supporters gathered for a campaign rally with Vice President Kamala Harris at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "A wide view shows supporters gathered for a campaign rally with Vice President Kamala Harris at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3741.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3741.jpg",
-          "description": "A wide view shows supporters gathered for a campaign rally with Vice President Kamala Harris at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "A wide view shows supporters gathered for a campaign rally with Vice President Kamala Harris at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
         {
           "filename": "141024_Kamala Speaks at Erie_CAL3752.jpg",
           "path": "141024_Kamala Speaks at Erie_CAL3752.jpg",
@@ -3104,54 +2642,10 @@
           ]
         },
         {
-          "filename": "141024_Kamala Speaks at Erie_CAL3757 1.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3757 1.jpg",
-          "description": "Supporters hold Kamala Harris signs in the crowd before a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Supporters hold Kamala Harris signs in the crowd before a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3757.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3757.jpg",
-          "description": "Supporters hold Kamala Harris signs in the crowd before a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Supporters hold Kamala Harris signs in the crowd before a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
           "filename": "141024_Kamala Speaks at Erie_CAL3763.jpg",
           "path": "141024_Kamala Speaks at Erie_CAL3763.jpg",
           "description": "A child sits alone in an upper section before a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "caption": "A child sits alone in an upper section before a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3766 1.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3766 1.jpg",
-          "description": "Pennsylvania Gov. Josh Shapiro waves during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Pennsylvania Gov. Josh Shapiro waves during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3766.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3766.jpg",
-          "description": "Pennsylvania Gov. Josh Shapiro waves during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Pennsylvania Gov. Josh Shapiro waves during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "tags": [
             "Politics",
             "Presidential Campaign",
@@ -3174,28 +2668,6 @@
           "path": "141024_Kamala Speaks at Erie_CAL3797.jpg",
           "description": "Pennsylvania Gov. Josh Shapiro gestures while speaking during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "caption": "Pennsylvania Gov. Josh Shapiro gestures while speaking during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3804 1.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3804 1.jpg",
-          "description": "Supporters sit beside a Puerto Rican flag during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Supporters sit beside a Puerto Rican flag during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3804.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3804.jpg",
-          "description": "Supporters sit beside a Puerto Rican flag during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Supporters sit beside a Puerto Rican flag during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "tags": [
             "Politics",
             "Presidential Campaign",
@@ -3240,28 +2712,6 @@
           "path": "141024_Kamala Speaks at Erie_CAL3849.jpg",
           "description": "Supporters hold Harris-Walz signs during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "caption": "Supporters hold Harris-Walz signs during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3851 1.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3851 1.jpg",
-          "description": "A supporter raises a \"vote\" sign above the crowd during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "A supporter raises a \"vote\" sign above the crowd during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL3851.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL3851.jpg",
-          "description": "A supporter raises a \"vote\" sign above the crowd during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "A supporter raises a \"vote\" sign above the crowd during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "tags": [
             "Politics",
             "Presidential Campaign",
@@ -3390,17 +2840,6 @@
           ]
         },
         {
-          "filename": "141024_Kamala Speaks at Erie_CAL4115.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL4115.jpg",
-          "description": "Vice President Kamala Harris speaks during a campaign rally at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris speaks during a campaign rally at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
           "filename": "141024_Kamala Speaks at Erie_CAL4175.webp",
           "path": "141024_Kamala Speaks at Erie_CAL4175.webp",
           "description": "Vice President Kamala Harris gestures while speaking during a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
@@ -3467,32 +2906,10 @@
           ]
         },
         {
-          "filename": "141024_Kamala Speaks at Erie_CAL4248.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL4248.jpg",
-          "description": "Vice President Kamala Harris speaks in front of an Erie backdrop during a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris speaks in front of an Erie backdrop during a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
           "filename": "141024_Kamala Speaks at Erie_CAL4255.webp",
           "path": "141024_Kamala Speaks at Erie_CAL4255.webp",
           "description": "Vice President Kamala Harris leans toward the lectern during a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "caption": "Vice President Kamala Harris leans toward the lectern during a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "141024_Kamala Speaks at Erie_CAL6948.jpg",
-          "path": "141024_Kamala Speaks at Erie_CAL6948.jpg",
-          "description": "A supporter holds a Harris-Walz sign during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "A supporter holds a Harris-Walz sign during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "tags": [
             "Politics",
             "Presidential Campaign",
@@ -3592,28 +3009,6 @@
           "path": "241014_Kamala Speaks at Erie_CAL3851.webp",
           "description": "A supporter raises a \"vote\" sign above the crowd during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "caption": "A supporter raises a \"vote\" sign above the crowd during a campaign rally with Vice President Kamala Harris in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "241014_Kamala Speaks at Erie_CAL4115.webp",
-          "path": "241014_Kamala Speaks at Erie_CAL4115.webp",
-          "description": "Vice President Kamala Harris speaks during a campaign rally at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris speaks during a campaign rally at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "241014_Kamala Speaks at Erie_CAL4248.webp",
-          "path": "241014_Kamala Speaks at Erie_CAL4248.webp",
-          "description": "Vice President Kamala Harris speaks in front of an Erie backdrop during a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
-          "caption": "Vice President Kamala Harris speaks in front of an Erie backdrop during a campaign rally in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
           "tags": [
             "Politics",
             "Presidential Campaign",
@@ -4307,7 +3702,7 @@
         "source": "metadata"
       },
       "dateDisplay": "October 5, 2024",
-      "totalImages": 45,
+      "totalImages": 44,
       "images": [
         {
           "filename": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.webp",
@@ -4787,17 +4182,6 @@
           "path": "051024_Trump_Rally_Attendee_Butler_PA.jpg",
           "description": "An attendee stands at former President Donald Trump's campaign rally in Butler, Pa., Oct. 5, 2024. (Photo by Caleb McCartney)",
           "caption": "An attendee stands at former President Donald Trump's campaign rally in Butler, Pa., Oct. 5, 2024. (Photo by Caleb McCartney)",
-          "tags": [
-            "Politics",
-            "Presidential Campaign",
-            "Published Work"
-          ]
-        },
-        {
-          "filename": "051024_Trump_Returns_Butler_PA_CAL2649.webp",
-          "path": "051024_Trump_Returns_Butler_PA_CAL2649.webp",
-          "description": "Former President Donald Trump waves from the stage during a campaign rally in Butler, Pa., Oct. 5, 2024. (Photo by Caleb McCartney)",
-          "caption": "Former President Donald Trump waves from the stage during a campaign rally in Butler, Pa., Oct. 5, 2024. (Photo by Caleb McCartney)",
           "tags": [
             "Politics",
             "Presidential Campaign",

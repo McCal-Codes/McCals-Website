@@ -89,7 +89,7 @@ export default function JournalismPage() {
         jobTitle: 'Photojournalist',
         worksFor: {
           '@type': 'Organization',
-          name: 'The Globe',
+          name: 'McCal Media',
         },
       },
       image: portfolioImages,

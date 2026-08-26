@@ -87,7 +87,7 @@ const editorialHighlights = [
   },
   {
     label: 'Availability',
-    value: 'Pittsburgh based with Washington, D.C. editorial readiness',
+    value: 'Pittsburgh based, available for Washington, D.C. assignments',
   },
 ];
 

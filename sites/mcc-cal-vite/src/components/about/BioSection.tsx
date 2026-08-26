@@ -130,7 +130,6 @@ export function BioSection({ className = '' }: BioSectionProps) {
                 id="contact-menu-button"
                 className={styles.actionButton}
                 aria-expanded={contactMenuOpen}
-                aria-haspopup="menu"
                 aria-controls="contact-menu"
                 onClick={handleContactClick}
               >
@@ -146,11 +145,10 @@ export function BioSection({ className = '' }: BioSectionProps) {
               <div
                 id="contact-menu"
                 className={`${styles.menuPanel} ${contactMenuOpen ? styles.open : ''}`}
-                role="menu"
                 aria-labelledby="contact-menu-button"
                 hidden={!contactMenuOpen}
               >
-                <Link to="/contact-us" className={styles.menuItem} role="menuitem">
+                <Link to="/contact-us" className={styles.menuItem}>
                   <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
                     <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.5l-8 5-8-5V6h16zm-8 7L4 8v10h16V8l-8 5z" />
                   </svg>
@@ -159,7 +157,6 @@ export function BioSection({ className = '' }: BioSectionProps) {
                 <Link
                   to="/grab-a-coffee"
                   className={styles.menuItem}
-                  role="menuitem"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
                     <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z" />
@@ -175,7 +172,6 @@ export function BioSection({ className = '' }: BioSectionProps) {
                 id="documents-menu-button"
                 className={styles.actionButton}
                 aria-expanded={documentsMenuOpen}
-                aria-haspopup="menu"
                 aria-controls="documents-menu"
                 onClick={handleDocumentsClick}
               >
@@ -191,7 +187,6 @@ export function BioSection({ className = '' }: BioSectionProps) {
               <div
                 id="documents-menu"
                 className={`${styles.menuPanel} ${documentsMenuOpen ? styles.open : ''}`}
-                role="menu"
                 aria-labelledby="documents-menu-button"
                 hidden={!documentsMenuOpen}
               >
@@ -199,7 +194,6 @@ export function BioSection({ className = '' }: BioSectionProps) {
                   href="/downloads/caleb-mccartney-resume.pdf"
                   download
                   className={styles.menuItem}
-                  role="menuitem"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
                     <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v2H8v-2zm0 4h8v2H8v-2z" />
@@ -210,24 +204,11 @@ export function BioSection({ className = '' }: BioSectionProps) {
                   href="/downloads/caleb-mccartney-cv.pdf"
                   download
                   className={styles.menuItem}
-                  role="menuitem"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
                     <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v2H8v-2zm0 4h5v2H8v-2z" />
                   </svg>
                   CV
-                </a>
-                <a
-                  href="https://dev.mcc-cal.com/roadmap"
-                  className={styles.menuItem}
-                  role="menuitem"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.menuIcon}>
-                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
-                  </svg>
-                  Roadmap
                 </a>
               </div>
             </div>
