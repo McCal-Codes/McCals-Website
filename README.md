@@ -114,15 +114,6 @@ We use tag-based releases for deploying widgets to Squarespace via jsDelivr:
 - CDN pattern: `https://cdn.jsdelivr.net/gh/<owner>/<repo>@<tag>/<path-to-versioned-html>`
 - Example: `https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@interactive-thesis@0.4.0/src/widgets/interactive-thesis/versions/v0.4-thesis-blog-format.html`
 
-
-
-Fixing archived widget validation errors:
-
-1. Run locally: `node scripts/utils/validate-widget-html.js`
-2. Read error output for offending files.
-3. Update HTML per `docs/standards/widget-standards.md`.
-4. Commit & push; CI re-validates.
-
 ## 🆕 Recent Organizational Highlights
 
 - Test files consolidated under `tests/`
