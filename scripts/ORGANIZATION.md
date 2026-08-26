@@ -26,13 +26,12 @@ Unreferenced script files (detected by `node scripts/utils/find-unreferenced-scr
 - scripts/utils/logo-downloader.js
 - scripts/utils/refresh-concerts.js
 
-Archived 2025-12-06 (Phase 2 cleanup):
+Archived 2025-12-06 (Phase 2 cleanup), later deleted 2026-08-26 as confirmed-dead duplicates/superseded files:
 
-- scripts/utils/auto-check-todo.js → scripts/\_archived/auto-check-todo.js
-- scripts/utils/date-overrides.js → scripts/\_archived/date-overrides.js
-- scripts/utils/find-latest-widget-versions.js → scripts/\_archived/find-latest-widget-versions.js
-- scripts/utils/shared-date-parsing.js → scripts/\_archived/shared-date-parsing.js
-- scripts/watchers/auto-manifest-updater.js → scripts/\_archived/auto-manifest-updater.js
+- scripts/utils/date-overrides.js and scripts/utils/shared-date-parsing.js were archived as duplicates, but active copies under scripts/utils/ (required by the manifest generators) were never actually removed — only the stray `_archived/` duplicates existed to delete.
+- scripts/utils/find-latest-widget-versions.js → deleted (operated on the now-removed src/widgets/ directory)
+- scripts/watchers/auto-manifest-updater.js → deleted (replaced by watch-auto-manifest.js)
+- scripts/utils/auto-check-todo.js was archived here too, but it was still `require()`'d by scripts/utils/ai-finalize-session.js — archiving it had silently broken `npm run ai:finalize`. Restored to scripts/utils/ 2026-08-26.
 
 Recently archived (2025-11-03):
 

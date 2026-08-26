@@ -25,8 +25,10 @@ Last updated: 2025-11-19
 
 ## Recent Archives
 
-- `generate-cdn-snippets.js` (archived 2025-12-06): Not referenced by npm scripts or other code. Moved from scripts/utils/ to \_archived/ for historical reference. See docs/standards/workspace-organization.md for archival policy.
-- `auto-check-todo.js`, `date-overrides.js`, `find-latest-widget-versions.js`, `shared-date-parsing.js` (archived 2025-12-06): Not referenced by npm scripts/workflows; superseded by manifest generators and standards docs.
-- `auto-manifest-updater.js` (archived 2025-12-06): Replaced by `watch-auto-manifest.js` and per-portfolio watchers.
 - `validate-widgets.js` (archived 2026-03-05): Superseded by `scripts/utils/validate-widget-html.js` and no longer referenced by npm scripts/workflows.
 - `generate-subfolder-manifests-from-aggregate.js` (archived 2026-03-05): Legacy migration helper for re-creating per-folder `manifest.json` files. Archived to align with aggregated-manifest policy and avoid reintroducing per-folder workflows.
+
+## Deleted (no longer present, listed for history)
+
+- `generate-cdn-snippets.js`, `date-overrides.js`, `find-latest-widget-versions.js`, `shared-date-parsing.js`, `auto-manifest-updater.js`, `deploy.js`, `generate-universal-manifest.js` — deleted 2026-08-26 as confirmed-dead duplicates/superseded files with no references anywhere in the repo.
+- `auto-check-todo.js` — deleted from this folder 2026-08-26, but restored to `scripts/utils/` rather than removed: it was still `require()`'d by `scripts/utils/ai-finalize-session.js`, so archiving it had silently broken `npm run ai:finalize`.
