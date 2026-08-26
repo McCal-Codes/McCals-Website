@@ -1,6 +1,6 @@
 {
   "generatedBy": "sites/mcc-cal-dev/scripts/sync-github.js",
-  "generatedAt": "2026-08-26T06:37:57.295Z",
+  "generatedAt": "2026-08-26T19:07:20.308Z",
   "repos": [
     {
       "slug": "terranova",
@@ -91,18 +91,25 @@
         }
       ],
       "createdAt": "2026-01-12",
-      "pushedAt": "2026-08-25",
+      "pushedAt": "2026-08-26",
       "defaultBranch": "master",
       "stars": 1,
       "forks": 0,
       "latestRelease": {
-        "tag": "v1.4.0",
-        "name": "v1.4.0",
-        "date": "2026-03-23",
+        "tag": "v1.5.0",
+        "name": "v1.5.0",
+        "date": "2026-08-26",
         "prerelease": false,
-        "url": "https://github.com/McCal-Codes/abridgd/releases/tag/v1.4.0"
+        "url": "https://github.com/McCal-Codes/abridgd/releases/tag/v1.5.0"
       },
       "releases": [
+        {
+          "tag": "v1.5.0",
+          "name": "v1.5.0",
+          "date": "2026-08-26",
+          "prerelease": false,
+          "url": "https://github.com/McCal-Codes/abridgd/releases/tag/v1.5.0"
+        },
         {
           "tag": "v1.4.0",
           "name": "v1.4.0",
