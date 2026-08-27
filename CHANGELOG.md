@@ -2,6 +2,11 @@
 
 ## 2026-08-27
 
+### Dead Redirects and www/apex Duplicate Indexing
+
+- A fresh Search Console export showed `/terranova` and `/roadmap` both indexed and both 308-redirecting to `https://dev.mcc-cal.com/...`, a host that no longer resolves at all - anyone (including Googlebot) following either link hit a dead connection. Neither path has any matching content anywhere in the current codebase, so both redirect rules were removed outright rather than pointed somewhere new.
+- The same export showed `www.mcc-cal.com` and `mcc-cal.com` both serving identical 200 responses with no redirect between them - confirmed via `curl`, same etag/last-modified on both. Google had indexed several pages (`/projects`, `/request-a-quote`, `/letting-me-go`) under the `www.` variant specifically, splitting ranking signal for the same content across two URLs. Added a host-matched redirect (`www.mcc-cal.com/*` -> `mcc-cal.com/*`, 308) in both `vercel.json` files, consolidating to the bare domain since that's what `VITE_SITE_URL`, canonical tags, and every JSON-LD `@id`/`url` already assume.
+
 ### SEO Keywording and On-Page Copy
 
 - The `keywords` arrays in `pageSeoData.json` only ever fed the `ImageObject` JSON-LD, never a `<meta name="keywords">` tag (Google ignores that tag anyway, and `usePageMeta.ts` never set one). Meanwhile the actual rendered copy on Portraits, Events, Concerts, and Journalism was 20-45 words per page - an H1 and one intro sentence before the portfolio grid - so several already-declared target terms (corporate headshots, LinkedIn headshots, conference photographer, documentary photographer, live music photographer, etc.) existed only in meta/structured data, not in anything a visitor or crawler actually reads.

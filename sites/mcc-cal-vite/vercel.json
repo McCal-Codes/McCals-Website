@@ -35,11 +35,11 @@
   },
   "redirects": [
     {
-      "source": "/terranova",
-      "destination": "https://dev.mcc-cal.com/projects/terranova",
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.mcc-cal.com" }],
+      "destination": "https://mcc-cal.com/:path*",
       "permanent": true
     },
-    { "source": "/roadmap", "destination": "https://dev.mcc-cal.com/roadmap", "permanent": true },
     { "source": "/grab-coffee", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/schedule", "destination": "/grab-a-coffee", "permanent": true },
     { "source": "/contact", "destination": "/contact-us", "permanent": true },
