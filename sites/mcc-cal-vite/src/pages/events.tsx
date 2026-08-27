@@ -81,8 +81,9 @@ export default function EventsPage() {
         </p>
         <h1 className={portfolioStyles.pfHeading}>Corporate Events, Conferences & Community Coverage</h1>
         <p className={portfolioStyles.pfIntro}>
-          On-location event photography for conferences, nonprofit fundraisers, campus programs,
-          launches, and brand activations across Pittsburgh and Western Pennsylvania.
+          As a Pittsburgh corporate event photographer and conference photographer, I provide
+          on-location coverage for conferences, nonprofit fundraisers, campus programs, launches, and
+          brand activations across Pittsburgh and Western Pennsylvania.
         </p>
 
         {status === 'loading' && (

@@ -12,7 +12,8 @@
       "Pittsburgh photographer",
       "Pittsburgh photojournalist",
       "political photojournalist",
-      "event coverage"
+      "event coverage",
+      "Pittsburgh photographer for hire"
     ]
   },
   "about": {
@@ -104,22 +105,28 @@
     "keywords": [
       "photojournalism",
       "political photography",
-      "Pittsburgh photojournalist"
+      "Pittsburgh photojournalist",
+      "documentary photographer Pittsburgh",
+      "editorial photographer"
     ]
   },
   "portraits": {
     "route": "/portraits",
-    "title": "Pittsburgh Headshot Photographer | Caleb McCartney",
-    "description": "Pittsburgh headshot photographer for professional headshots, portrait sessions, editorial portraits, and brand-forward personal imagery.",
-    "ogTitle": "Pittsburgh Headshot Photographer | Caleb McCartney",
-    "ogDescription": "Professional headshots, portraits, and editorial sessions by Caleb McCartney in Pittsburgh.",
+    "title": "Pittsburgh Corporate Headshot Photographer | Caleb McCartney",
+    "description": "Pittsburgh headshot photographer for corporate headshots, LinkedIn headshots, personal branding portraits, and executive and editorial sessions.",
+    "ogTitle": "Pittsburgh Corporate & LinkedIn Headshot Photographer",
+    "ogDescription": "Corporate headshots, LinkedIn headshots, personal branding portraits, and editorial sessions by Caleb McCartney in Pittsburgh.",
     "imagePath": "/images/social/portraits-og.jpg",
     "imageAlt": "Studio portrait of Logan Spiker by Caleb McCartney.",
     "imageName": "Studio portrait photography",
     "keywords": [
       "headshot photographer Pittsburgh",
       "portrait photographer Pittsburgh",
-      "professional headshots"
+      "professional headshots",
+      "corporate headshots Pittsburgh",
+      "LinkedIn headshots",
+      "personal branding photography",
+      "executive headshots"
     ]
   },
   "nature": {
@@ -142,14 +149,15 @@
     "title": "Pittsburgh Event Photographer | Caleb McCartney",
     "description": "Pittsburgh event photographer for corporate events, conferences, nonprofit gatherings, campus programs, and branded activations.",
     "ogTitle": "Pittsburgh Event Photographer | Caleb McCartney",
-    "ogDescription": "Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.",
+    "ogDescription": "Pittsburgh corporate event photographer and conference photographer for live documentation, conferences, and branded activations.",
     "imagePath": "/images/social/events-og.jpg",
     "imageAlt": "Guests sing along under bright club lights during a Howl at the Moon event.",
     "imageName": "Howl at the Moon event photography",
     "keywords": [
       "event photographer Pittsburgh",
       "corporate event photography",
-      "conference photographer"
+      "conference photographer",
+      "corporate event photographer Pittsburgh"
     ]
   },
   "concerts": {
@@ -164,7 +172,9 @@
     "keywords": [
       "concert photographer Pittsburgh",
       "live music photography",
-      "venue photography"
+      "venue photography",
+      "live music photographer",
+      "Pittsburgh music photographer"
     ]
   },
   "blog": {
