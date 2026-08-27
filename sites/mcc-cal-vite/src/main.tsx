@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { inject } from '@vercel/analytics';
 import App from './App';
 import { captureError, installErrorBufferAndDeferSentry } from '@/lib/sentry-lazy';
+import { installGa4 } from '@/utils/ga4';
 
 // Buffers errors immediately and loads the Sentry SDK after first paint, so its
 // ~57 kB gzip is not in the critical path. Must run before anything that can throw.
@@ -19,6 +20,9 @@ const enableVercelAnalytics = import.meta.env.PROD && import.meta.env.VITE_ENABL
 if (enableVercelAnalytics) {
   inject();
 }
+
+// Initialize GA4 (no-ops unless VITE_ENABLE_GA and VITE_GA_MEASUREMENT_ID are set)
+installGa4();
 
 const queryClient = new QueryClient({
   defaultOptions: {

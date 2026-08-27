@@ -1,4 +1,5 @@
 import { track } from '@vercel/analytics/react';
+import { gaEvent, isGa4Enabled } from './ga4';
 
 const isProduction = import.meta.env.PROD;
 
@@ -22,4 +23,8 @@ export function trackWebsiteEvent(
   }
 
   track(eventName, payload);
+
+  if (isGa4Enabled()) {
+    gaEvent(eventName, payload);
+  }
 }
