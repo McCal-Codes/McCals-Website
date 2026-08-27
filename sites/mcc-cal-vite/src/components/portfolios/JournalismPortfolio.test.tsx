@@ -101,7 +101,7 @@ describe('JournalismPortfolio', () => {
     expect(grid).toHaveTextContent('Community Feature');
 
     const proof = screen.getByLabelText('Editorial proof points');
-    expect(grid.compareDocumentPosition(proof) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(proof.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('filters to published work without replacing the portfolio grid', async () => {

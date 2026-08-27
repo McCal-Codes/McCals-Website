@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-27
+
+### SEO Keywording and On-Page Copy
+
+- The `keywords` arrays in `pageSeoData.json` only ever fed the `ImageObject` JSON-LD, never a `<meta name="keywords">` tag (Google ignores that tag anyway, and `usePageMeta.ts` never set one). Meanwhile the actual rendered copy on Portraits, Events, Concerts, and Journalism was 20-45 words per page - an H1 and one intro sentence before the portfolio grid - so several already-declared target terms (corporate headshots, LinkedIn headshots, conference photographer, documentary photographer, live music photographer, etc.) existed only in meta/structured data, not in anything a visitor or crawler actually reads.
+- Added the missing competitor-validated long-tail terms to `pageSeoData.json` (title/description/OG copy tweaked on Portraits and Events to work one in directly) and wove the same phrases into the real intro paragraphs on all four thin portfolio pages, plus the matching JSON-LD service `keywords` arrays.
+- Added 3 service-discovery and pricing-intent FAQ entries (corporate/LinkedIn headshots, event/conference pricing, travel) to `faq.tsx`, which automatically feed the existing `FAQPage` schema - the prior 7 questions were all logistics (turnaround, backups, releases), the exact gap AI Overview/AEO citations tend to reward.
+- Flagged `docs/standards/seo-starter-guide.md` as outdated: it was written for the retired Squarespace site (Squarespace admin UI, its auto-sitemap) and no longer describes how SEO works in the current Vite/React implementation.
+
+### GA4 Alongside Vercel Analytics
+
+- Added `src/utils/ga4.ts`: a lazy `gtag.js` loader gated behind `VITE_ENABLE_GA` + `VITE_GA_MEASUREMENT_ID`, with `send_page_view: false` since `RouteAnalytics` already fires a `page_view` event on every SPA navigation - letting gtag's own automatic pageview through too would have double-counted the first page.
+- `trackWebsiteEvent` now forwards every event to both Vercel Analytics and GA4 from the one existing call site, rather than wiring GA4 as a separate parallel tracker.
+- CSP updated in both `vercel.json` files (root and site - a test enforces they stay identical) to allow `googletagmanager.com`, `google-analytics.com`, and `analytics.google.com`.
+
 ## 2026-08-24
 
 ### Work Phone Number on the Contact Card

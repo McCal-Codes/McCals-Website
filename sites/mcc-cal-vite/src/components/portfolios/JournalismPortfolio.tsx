@@ -129,8 +129,9 @@ export default function JournalismPortfolio() {
     <div className={portfolioStyles.pfRoot}>
       <h1 className={portfolioStyles.pfHeading}>Photojournalism</h1>
       <p className={portfolioStyles.pfSubheading}>
-        Politics, civic events, community stories, and sports, edited for captions,
-        context, and deadline handoff.
+        A Pittsburgh photojournalist and documentary photographer covering politics, civic events,
+        community stories, and sports for editorial clients, edited for captions, context, and
+        deadline handoff.
       </p>
 
       {status === 'loading' && (

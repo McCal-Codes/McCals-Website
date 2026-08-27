@@ -68,7 +68,7 @@ export default function PortraitsPage() {
         {
           alternateName: ['Pittsburgh Headshot Photographer', 'Professional Headshots'],
           category: 'Headshot photographer',
-          keywords: ['headshot photographer pittsburgh', 'professional headshots pittsburgh', 'business headshots'],
+          keywords: ['headshot photographer pittsburgh', 'professional headshots pittsburgh', 'business headshots', 'corporate headshots pittsburgh', 'linkedin headshots', 'executive headshots'],
         },
       ),
       generatePhotographyServiceSchema(
@@ -93,9 +93,10 @@ export default function PortraitsPage() {
         </p>
         <h1 className={portfolioStyles.pfHeading}>Portraits & Headshots</h1>
         <p className={portfolioStyles.pfIntro}>
-          On-location headshot and portrait photography for executives, creatives, teams, and
-          editorial stories, organized by session so visitors can move from the first impression to
-          the full gallery without wading through unrelated shoots.
+          On-location corporate headshots, LinkedIn headshots, and personal branding portraits for
+          executives, creatives, and teams, plus editorial portrait sessions, organized by session so
+          visitors can move from the first impression to the full gallery without wading through
+          unrelated shoots.
         </p>
 
         {status === 'success' && (
