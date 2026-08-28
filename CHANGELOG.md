@@ -2,6 +2,12 @@
 
 ## 2026-08-27
 
+### Blog/Portfolio Cross-Linking and a Photojournalism Excerpt Rewrite
+
+- Field Notes and the portfolio pages (Portraits/Events/Concerts/Journalism) had zero links between them in either direction - confirmed by grepping both for cross-references. Most Field Notes posts are personal/thesis essays with no real tie to the photography services, so rather than a generic "related posts" rule, added an explicit lookup (`RELATED_PORTFOLIO_LINKS` in `blog.tsx`) linking the two posts that are actually photojournalism-relevant ("Three Days With Boyd's Station", "The Capitalist Contradiction") to `/journalism`, rendered as a small "More From the Field" block. Added the reciprocal link from the Journalism portfolio page's intro copy back to `/blog`.
+- Rewrote the excerpt on "Three Days With Boyd's Station" (the one post that's a genuine documentary-photography piece) to open with "documentary photography and photojournalism" instead of just "photo essay" - this excerpt is what drives the post's meta description. Left the personal/thesis posts' copy untouched; forcing photography keywords into essays about grief, dreams, or trauma would misrepresent the content.
+- Adding a `Link` to `JournalismPortfolio.tsx` surfaced a pre-existing gap in its test: the component had never needed react-router context before, so `JournalismPortfolio.test.tsx` wasn't wrapped in a `MemoryRouter`. Fixed by wrapping both test renders, matching the pattern already used in `HeroCarousel.test.tsx`.
+
 ### Dead Redirects and www/apex Duplicate Indexing
 
 - A fresh Search Console export showed `/terranova` and `/roadmap` both indexed and both 308-redirecting to `https://dev.mcc-cal.com/...`, a host that no longer resolves at all - anyone (including Googlebot) following either link hit a dead connection. Neither path has any matching content anywhere in the current codebase, so both redirect rules were removed outright rather than pointed somewhere new.

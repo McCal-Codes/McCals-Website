@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
 import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import type { PortfolioGroup } from '../portfolio/types';
@@ -131,7 +132,11 @@ export default function JournalismPortfolio() {
       <p className={portfolioStyles.pfSubheading}>
         A Pittsburgh photojournalist and documentary photographer covering politics, civic events,
         community stories, and sports for editorial clients, edited for captions, context, and
-        deadline handoff.
+        deadline handoff. Read the reporting behind some of this work in{' '}
+        <Link to="/blog" className={portfolioStyles.pfInlineLink}>
+          Field Notes
+        </Link>
+        .
       </p>
 
       {status === 'loading' && (
