@@ -180,6 +180,18 @@
   line-height: 1.65;
 }
 
+.pfInlineLink {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.9;
+}
+
+.pfInlineLink:hover,
+.pfInlineLink:focus-visible {
+  opacity: 1;
+}
+
 .pfFeaturedRoot {
   max-width: 1720px;
   margin-top: 44px;

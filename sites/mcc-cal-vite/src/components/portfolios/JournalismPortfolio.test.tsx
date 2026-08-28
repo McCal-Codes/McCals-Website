@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import JournalismPortfolio from './JournalismPortfolio';
 
@@ -87,7 +88,11 @@ afterEach(() => {
 
 describe('JournalismPortfolio', () => {
   it('keeps the grid path while adding compact editorial proof', () => {
-    render(<JournalismPortfolio />);
+    render(
+      <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <JournalismPortfolio />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByRole('heading', { level: 1, name: 'Photojournalism' })).toBeInTheDocument();
     expect(screen.getByLabelText('Editorial proof points')).toHaveTextContent(
@@ -106,7 +111,11 @@ describe('JournalismPortfolio', () => {
 
   it('filters to published work without replacing the portfolio grid', async () => {
     const user = userEvent.setup();
-    render(<JournalismPortfolio />);
+    render(
+      <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <JournalismPortfolio />
+      </MemoryRouter>,
+    );
 
     await user.click(screen.getByRole('tab', { name: 'Published' }));
 

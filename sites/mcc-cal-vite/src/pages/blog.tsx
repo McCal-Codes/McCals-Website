@@ -19,6 +19,14 @@ import './blog.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
 
+// Manual cross-links between Field Notes posts and the matching portfolio section.
+// Not every post has a matching gallery (most are personal/thesis essays), so this
+// stays an explicit lookup rather than a generic category rule.
+const RELATED_PORTFOLIO_LINKS: Record<string, { href: string; label: string }> = {
+  'boyd-station-community-feature': { href: '/journalism', label: 'View the photojournalism portfolio' },
+  'the-capitalist-contradiction': { href: '/journalism', label: 'View the photojournalism portfolio' },
+};
+
 export default function BlogPage() {
   const { slug } = useParams<{ slug?: string }>();
   const {
@@ -231,6 +239,26 @@ export default function BlogPage() {
 
                 <StoryBody slug={resolvedDocumentPost.slug} post={resolvedDocumentPost} />
                 <StoryCitations sources={resolvedDocumentPost.sources} />
+
+                {RELATED_PORTFOLIO_LINKS[resolvedDocumentPost.slug] && (
+                  <section className="story__author-card" aria-labelledby="related-portfolio-heading">
+                    <div className="story__author-copy">
+                      <p className="blog-kicker" id="related-portfolio-heading">More From the Field</p>
+                      <p className="story__author-bio">
+                        This story is part of Caleb McCartney&rsquo;s ongoing photojournalism work in Pittsburgh
+                        and beyond.
+                      </p>
+                      <div className="story__author-actions">
+                        <Link
+                          to={RELATED_PORTFOLIO_LINKS[resolvedDocumentPost.slug].href}
+                          className="story__author-link"
+                        >
+                          {RELATED_PORTFOLIO_LINKS[resolvedDocumentPost.slug].label}
+                        </Link>
+                      </div>
+                    </div>
+                  </section>
+                )}
 
                 {(resolvedAuthor.avatar || resolvedAuthor.bio) && (
                   <section className="story__author-card" aria-labelledby="story-author-heading">
