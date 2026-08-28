@@ -35,6 +35,12 @@
   },
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.mcc-cal.com" }],
+      "destination": "https://mcc-cal.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.mcc-cal.com" }],
       "destination": "https://mcc-cal.com/:path*",
