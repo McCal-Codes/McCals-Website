@@ -23,7 +23,7 @@
     "build-storybook": "storybook build -c .storybook"
   },
   "dependencies": {
-    "@sentry/node": "^10.53.1",
+    "@sentry/node": "^10.64.0",
     "@sentry/react": "^10.59.0",
     "@sentry/replay": "^10.59.0",
     "@supabase/supabase-js": "^2.105.1",
