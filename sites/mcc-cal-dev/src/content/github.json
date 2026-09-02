@@ -1,6 +1,6 @@
 {
   "generatedBy": "sites/mcc-cal-dev/scripts/sync-github.js",
-  "generatedAt": "2026-09-01T18:36:03.998Z",
+  "generatedAt": "2026-09-02T06:49:38.136Z",
   "repos": [
     {
       "slug": "terranova",
@@ -16,11 +16,11 @@
       "languages": [
         {
           "name": "TypeScript",
-          "percent": 90
+          "percent": 89
         },
         {
           "name": "Rust",
-          "percent": 7
+          "percent": 8
         }
       ],
       "createdAt": "2026-03-10",
@@ -29,13 +29,20 @@
       "stars": 4,
       "forks": 0,
       "latestRelease": {
-        "tag": "v0.1.8-alpha.4",
-        "name": "TerraNova v0.1.8-alpha.4",
-        "date": "2026-06-21",
+        "tag": "v0.1.8-alpha.6",
+        "name": "TerraNova v0.1.8-alpha.6",
+        "date": "2026-09-01",
         "prerelease": true,
-        "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.4"
+        "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.6"
       },
       "releases": [
+        {
+          "tag": "v0.1.8-alpha.6",
+          "name": "TerraNova v0.1.8-alpha.6",
+          "date": "2026-09-01",
+          "prerelease": true,
+          "url": "https://github.com/McCal-Codes/TerraNova/releases/tag/v0.1.8-alpha.6"
+        },
         {
           "tag": "v0.1.8-alpha.4",
           "name": "TerraNova v0.1.8-alpha.4",
@@ -91,14 +98,14 @@
         }
       ],
       "createdAt": "2026-01-12",
-      "pushedAt": "2026-08-26",
+      "pushedAt": "2026-09-01",
       "defaultBranch": "master",
       "stars": 1,
       "forks": 0,
       "latestRelease": {
         "tag": "v1.5.0",
         "name": "v1.5.0",
-        "date": "2026-08-26",
+        "date": "2026-09-01",
         "prerelease": false,
         "url": "https://github.com/McCal-Codes/abridgd/releases/tag/v1.5.0"
       },
@@ -106,7 +113,7 @@
         {
           "tag": "v1.5.0",
           "name": "v1.5.0",
-          "date": "2026-08-26",
+          "date": "2026-09-01",
           "prerelease": false,
           "url": "https://github.com/McCal-Codes/abridgd/releases/tag/v1.5.0"
         },
