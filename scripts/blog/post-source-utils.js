@@ -385,14 +385,20 @@ function serializeMarkdownPost(post) {
 
   lines.push(FRONTMATTER_DELIMITER, '');
 
-  const bodyBlocks = Array.isArray(post.body) ? post.body : [];
-  const bodySections = bodyBlocks.map((block) => serializeBodyBlock(block)).filter(Boolean);
+  const bodyText = bodyToMarkdown(post.body);
 
-  if (bodySections.length) {
-    lines.push(bodySections.join('\n\n'));
+  if (bodyText) {
+    lines.push(bodyText);
   }
 
   return `${lines.join('\n').trimEnd()}\n`;
+}
+
+// Reverse of markdownToBody — reconstructs editable markdown-lite text from
+// stored body blocks (used by the admin blog editor to pre-fill the textarea).
+function bodyToMarkdown(body) {
+  const blocks = Array.isArray(body) ? body : [];
+  return blocks.map((block) => serializeBodyBlock(block)).filter(Boolean).join('\n\n');
 }
 
 function serializeBodyBlock(block) {
@@ -426,6 +432,7 @@ function serializeBodyBlock(block) {
 module.exports = {
   extractFrontmatter,
   markdownToBody,
+  bodyToMarkdown,
   parseMarkdownPost,
   serializeMarkdownPost,
 };
