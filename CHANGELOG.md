@@ -100,7 +100,7 @@
 
 ### Structured Data Can Finally Earn the Licensable Badge
 
-- `generateImageObjectSchema` emitted `contentUrl` and `author` but not `license`, which Google explicitly requires for badge eligibility. It now emits `license`, `acquireLicensePage`, `creditText`, `copyrightNotice` and `creator`, pointing at the existing `/policies-legal#license` and `/request-a-quote` pages.
+- `generateImageObjectSchema` emitted `contentUrl` and `author` but not `license`, which Google explicitly requires for badge eligibility. It now emits `license`, `acquireLicensePage`, `creditText`, `copyrightNotice` and `creator`, pointing at `/licensing` and `/request-a-quote`.
 - Added `image-rights-parity.test.ts`, asserting the page's JSON-LD and the metadata embedded in the files claim the same creator, credit, copyright and licensing URLs. Two sources of rights data that disagree would be worse than one.
 - The missing-`license` failure is silent — attribution still renders, the badge simply never appears — so it is now covered by a test rather than left to be noticed.
 

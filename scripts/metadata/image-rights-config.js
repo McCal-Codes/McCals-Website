@@ -31,7 +31,7 @@ export const COPYRIGHT_NOTICE = `Copyright ${CREATOR} / ${ORGANISATION}. All rig
  * Web Statement of Rights. Google requires a resolvable URL here for the Licensable
  * badge, and it must describe the terms rather than sell the image.
  */
-export const WEB_STATEMENT = `${SITE_URL}/policies-legal#license`;
+export const WEB_STATEMENT = `${SITE_URL}/licensing`;
 
 /** Where someone goes to actually license a photograph. Drives "Get this image on:". */
 export const LICENSOR_URL = `${SITE_URL}/request-a-quote`;

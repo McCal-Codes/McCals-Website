@@ -24,7 +24,7 @@ export const IMAGE_RIGHTS = {
   creator: 'Caleb McCartney',
   creditText: 'Caleb McCartney/McCal Media',
   copyrightNotice: 'Copyright Caleb McCartney / McCal Media. All rights reserved.',
-  license: `${SITE_ROOT}/policies-legal#license`,
+  license: `${SITE_ROOT}/licensing`,
   acquireLicensePage: `${SITE_ROOT}/request-a-quote`,
 } as const;
 
