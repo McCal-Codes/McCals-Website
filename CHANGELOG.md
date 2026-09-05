@@ -40,6 +40,9 @@
 ### A TestFlight Link on the Tap Card
 
 - Added "Join the News App Beta" to `/links`, pointing at the TestFlight enrollment link. It's an external destination, so it opens in a new tab like the social icons already do, unlike the existing internal links (`Grab a Coffee`, `Book a Podcast`) which stay in-app.
+### mcc-cal-dev's Vercel Builds Were Downloading Browsers They Never Use
+
+- Every deploy of `sites/mcc-cal-dev` took ~20 minutes because installing `playwright` (a devDependency used only by the local, manual `sync:sites:shots` screenshot script) triggers a postinstall download of Chromium, Firefox, and WebKit - well over a gigabyte - on every cold build container. The actual `build` script never touches Playwright. Set `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1` on the install step in `vercel.json`; confirmed `npm ci` drops to ~2s and the build still succeeds.
 
 ### A Hidden Tap-Card Page for the Physical NFC Card
 
