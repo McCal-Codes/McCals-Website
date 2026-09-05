@@ -1,6 +1,9 @@
 import { requireAdminSession } from '../../_lib/auth.js';
 import { headR2Object } from '../../_lib/r2.js';
-import { upsertPortfolioImages } from '../../_lib/portfolio-images-data.js';
+import {
+  getCollectionPlacement,
+  upsertPortfolioImages,
+} from '../../_lib/portfolio-images-data.js';
 import { slugify } from '../../_lib/slug.js';
 
 const VALID_PORTFOLIO_TYPES = ['journalism', 'concert', 'portrait', 'events', 'nature'];
@@ -66,18 +69,32 @@ export default async function handler(req, res) {
     let inserted = 0;
 
     if (confirmed.length) {
-      const rows = confirmed.map((result, index) => ({
+      const { existingSortOrder, nextSortOrder } = await getCollectionPlacement(
+        portfolioType,
+        collectionName,
+      );
+
+      // Genuinely new files append after whatever the album already holds; a
+      // file that is already here keeps the position it has, so re-uploading a
+      // corrected frame does not jump it to the end.
+      let appendCursor = nextSortOrder;
+
+      const rows = confirmed.map((result) => ({
         portfolio_type: portfolioType,
         collection_name: collectionName,
         storage_path: result.storagePath,
         filename: result.filename,
-        alt_text: null,
-        caption: null,
-        tags: [],
-        is_featured: false,
-        sort_order: index,
+        sort_order: existingSortOrder.has(result.storagePath)
+          ? existingSortOrder.get(result.storagePath)
+          : appendCursor++,
       }));
 
+      // alt_text, caption, tags and is_featured are deliberately absent. The
+      // upsert resolves conflicts with merge-duplicates, which overwrites every
+      // column present in the payload — sending empty defaults here wiped the
+      // captions and tags off any image that was re-uploaded. Omitted, the
+      // column defaults apply to new rows and existing editorial metadata
+      // survives untouched.
       const upserted = await upsertPortfolioImages(rows);
       inserted = Array.isArray(upserted) ? upserted.length : rows.length;
     }
