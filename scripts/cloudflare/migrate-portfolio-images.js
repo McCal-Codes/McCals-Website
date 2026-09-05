@@ -199,6 +199,21 @@ function safeFilename(filename) {
   return filename.replace(/\s+/g, '_');
 }
 
+// R2 object metadata is sent as a raw HTTP header value, which rejects non-ASCII and
+// control characters (smart quotes, em dashes, etc. from IPTC captions crash the whole
+// upload). Normalize common typography, then strip anything outside printable ASCII —
+// the full-fidelity caption still goes to Supabase untouched, this is metadata-only.
+function sanitizeHeaderValue(s) {
+  return s
+    .normalize('NFKD')
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/[–—]/g, '-')
+    .replace(/ /g, ' ')
+    .replace(/[^\x20-\x7E]/g, '')
+    .trim();
+}
+
 function readManifest(name) {
   return JSON.parse(fs.readFileSync(path.join(MANIFESTS_DIR, `${name}-manifest.json`), 'utf8'));
 }
@@ -341,7 +356,7 @@ async function processImage(entry, supabase, portfolioType, index, total, alread
     await r2Put(finalStoragePath, imageBuffer, mimeType, {
       'portfolio-type': portfolioType,
       'collection': collectionName,
-      ...(altText ? { 'alt-text': altText } : {}),
+      ...(altText ? { 'alt-text': sanitizeHeaderValue(altText).slice(0, 200) } : {}),
     });
 
     // Upsert metadata to Supabase
