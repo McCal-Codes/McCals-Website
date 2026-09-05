@@ -1,6 +1,7 @@
-import React, { useEffect, useLayoutEffect, useRef, useCallback, useState, useMemo } from 'react';
+import React, { lazy, Suspense, useEffect, useLayoutEffect, useRef, useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './heroCarousel.module.css';
+import { shouldEnableHeroShader } from './hero/heroShaderSupport';
 import {
   FAVORITE_HERO_SLIDES,
   HERO_IMAGE_VARIANTS,
@@ -89,6 +90,10 @@ async function fetchHeroSlides(signal?: AbortSignal): Promise<{ slides: HeroSlid
   }
 }
 
+// Split out so neither the component nor three.js is in the homepage's initial
+// chunk. Nothing here is fetched until the hero image has already painted.
+const HeroShaderTransition = lazy(() => import('./hero/HeroShaderTransition'));
+
 const DESKTOP_BREAKPOINT = 769;
 const SLIDE_DURATION = 8000;
 const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2048];
@@ -102,11 +107,17 @@ const normalizeFP = (fp?: HeroFocalPoint) => {
 };
 
 
-const resolveObjectPosition = (slide: HeroSlide, isDesktop: boolean) => {
+const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
+
+const resolveFocalPoint = (slide: HeroSlide, isDesktop: boolean) => {
   const mobile = normalizeFP(slide.focalPointMobile);
   const desktop = normalizeFP(slide.focalPointDesktop);
-  const fp = isDesktop ? desktop || mobile : mobile || desktop;
-  return fp ? `${(fp.x * 100).toFixed(4)}% ${(fp.y * 100).toFixed(4)}%` : '50% 50%';
+  return (isDesktop ? desktop || mobile : mobile || desktop) ?? DEFAULT_FOCAL_POINT;
+};
+
+const resolveObjectPosition = (slide: HeroSlide, isDesktop: boolean) => {
+  const fp = resolveFocalPoint(slide, isDesktop);
+  return `${(fp.x * 100).toFixed(4)}% ${(fp.y * 100).toFixed(4)}%`;
 };
 
 const getBaseVariant = (slide: HeroSlide): HeroSlideVariant => ({
@@ -214,6 +225,19 @@ const HeroCarousel: React.FC = () => {
   const currentSlide = slides[currentSlideIndex];
   const imageLoaded = imageStatus.src === currentSlide?.image && imageStatus.loaded;
   const imageError = imageStatus.src === currentSlide?.image && imageStatus.error;
+
+  // The WebGL layer is decided only after the first hero image has painted, so
+  // neither the capability probe nor the three.js chunk competes with LCP.
+  const [shaderEnabled, setShaderEnabled] = useState(false);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setShaderEnabled(false);
+      return;
+    }
+    if (!imageLoaded) return;
+    setShaderEnabled(shouldEnableHeroShader());
+  }, [imageLoaded, prefersReducedMotion]);
   const isPaused = isPointerPaused || isFocusPaused || prefersReducedMotion || !isDocumentVisible;
 
   const nextSlide = useCallback(() => {
@@ -386,6 +410,10 @@ const HeroCarousel: React.FC = () => {
   const objectPosition = useMemo(() => {
     return currentSlide ? resolveObjectPosition(currentSlide, isDesktop) : '50% 50%';
   }, [currentSlide, isDesktop]);
+  const focalPoint = useMemo(
+    () => (currentSlide ? resolveFocalPoint(currentSlide, isDesktop) : DEFAULT_FOCAL_POINT),
+    [currentSlide, isDesktop],
+  );
   const currentImageSrc = useMemo(
     () => (currentSlide ? getOptimizedImageUrl(currentSlide.image, { width: HERO_OPTIMIZED_WIDTH }) : ''),
     [currentSlide],
@@ -394,6 +422,13 @@ const HeroCarousel: React.FC = () => {
     () => (currentSlide ? getResponsiveImageSrcSet(currentSlide.image, HERO_IMAGE_WIDTHS) : undefined),
     [currentSlide],
   );
+  // Mirrors the <link rel="preload"> the carousel already emits, so the WebGL
+  // layer has the next photograph on the GPU before the slide advances.
+  const nextImageSrc = useMemo(() => {
+    if (slides.length < 2) return undefined;
+    const next = slides[(currentSlideIndex + 1) % slides.length];
+    return next ? getOptimizedImageUrl(next.image, { width: HERO_OPTIMIZED_WIDTH }) : undefined;
+  }, [slides, currentSlideIndex]);
 
   const handleImageLoad = () => {
     if (!currentSlide) return;
@@ -470,6 +505,18 @@ const HeroCarousel: React.FC = () => {
             width={1920}
             height={1280}
           />
+        )}
+
+        {/* Sits over the <img>, which stays in the DOM as the LCP element, the
+            accessible content, and the fallback if WebGL is unavailable. */}
+        {shaderEnabled && !imageError && (
+          <Suspense fallback={null}>
+            <HeroShaderTransition
+              src={currentImageSrc}
+              preloadSrc={nextImageSrc}
+              focal={focalPoint}
+            />
+          </Suspense>
         )}
 
         <div className={styles.heroContent}>
