@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-09-05
+
+### The Sitemap Now Lists the Photographs
+
+- The portfolios render client-side, so a crawler that does not execute JavaScript saw none of the work. The sitemap listed exactly one image per page — the Open Graph card. It now emits portfolio images per route, building URLs the same way the app does so the two cannot drift apart and point at files that do not exist.
+- Dropped `<image:title>`, `<image:caption>`, `<image:license>` and `<image:geo_location>`. Google removed them from its documentation and reads only `<image:loc>`; emitting the rest implied coverage that was not there.
+- The per-URL cap was 500 against a protocol ceiling of 1,000, which was silently discarding 87 concert frames — unreachable to exactly the crawlers this sitemap exists for. Raised to the real limit: 1,577 image entries becomes 2,164, and concerts is complete at 587. Events still trims, at 1,635, but that is now the protocol's limit rather than an arbitrary one.
+
 ## 2026-08-27
 
 ### Blog/Portfolio Cross-Linking and a Photojournalism Excerpt Rewrite
