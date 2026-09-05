@@ -5,6 +5,7 @@ import { AuthSessionContext, loadAuthSession, type AuthSessionState } from '@/li
 
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
 const BookingsPage = lazy(() => import('@/pages/BookingsPage'));
+const AlbumsPage = lazy(() => import('@/pages/AlbumsPage'));
 const OpsPage = lazy(() => import('@/pages/OpsPage'));
 const ContentPage = lazy(() => import('@/pages/ContentPage'));
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'));
@@ -41,6 +42,7 @@ function ProtectedRoutes() {
       <Routes>
         <Route path="/" element={<DashboardPage />} />
         <Route path="/bookings" element={<BookingsPage />} />
+        <Route path="/albums" element={<AlbumsPage />} />
         <Route path="/operations" element={<OpsPage />} />
         <Route path="/content" element={<ContentPage />} />
         <Route path="/settings" element={<SettingsPage />} />

@@ -54,6 +54,33 @@
 - Pinned `shell-quote` to 1.9.0+ in this site's own lockfile (already fixed at the repo root by an earlier Dependabot PR), closing a quadratic-complexity denial of service pulled in transitively through `concurrently`.
 - Two other open `react-router` advisories only have a fix in v7, a major version bump touching every file that imports `react-router-dom`. Reviewed both: one only affects apps doing manual SSR hydration, which this is not; the other requires attacker-controlled input reaching a navigation target, and nothing in this codebase builds a `Link`/`navigate` target from user input. Dismissed on GitHub with recorded reasoning rather than forcing an unrelated major upgrade.
 
+### The Dev Site Now Only Says What It Can Prove
+
+- Most of what came off this pass was writing that sounded specific and was invented. TerraNova's version read `v0.5` with a build number and an update date; it is `v0.1.8-alpha.4`, released 2026-06-21. Its repository link pointed at the HyperSystems mirror, last pushed in March, rather than `McCal-Codes/TerraNova`, which is where the work happens. Abridgd was marked private and is public.
+- Every TerraNova limitation was made up: preview accuracy, a graph-layout bottleneck, upstream schema churn, and a Bridge constraint. Replaced with the two the project documents: the macOS build is unsigned and gets blocked on first launch, and Bridge syncs the open file rather than the whole project. Bridge does not hot-reload either; it syncs into a server mod folder after the pack has been exported once.
+- The three-pane layout, the inspector, and the "validation strip" were not features. They were a layout I pictured while writing. Callouts are empty until a real capture exists to annotate.
+- Removed three build notes that had titles, dates, and no bodies. They read as published essays that were never written. Removed a "currently working on" block that no repository supports, a "nine issues found and fixed" count with no source, and void-ledger claims about reading your inventory and uploading nothing, neither of which is documented.
+- Case studies are marked coming soon. The facts in them were sourced from the projects' own READMEs, but the sentences were not Caleb's, and holding them is better than leaving someone else's voice under his name.
+
+### Facts Are Pulled, Not Typed
+
+- `scripts/sync-github.js` pulls repository, languages, releases, and licence into `github.json`. `ProjectMeta` no longer has fields for any of it, so those facts cannot be hand-written and cannot drift from the repository.
+- `scripts/sync-sites.js` does the same for websites: title, description, platform fingerprint, and a rendered Playwright screenshot. Images are stored locally rather than hotlinked, which keeps the CSP at `connect-src 'self'`, survives a client redesign, and does not bill their bandwidth for our traffic.
+- Both outputs are committed and read at build time. Builds stay deterministic and work offline, and a client site going down cannot break one.
+- `scripts/validate-content.js` runs as part of the build and fails it when a slug in a `.ts` content file has no matching record in a synced `.json`. TypeScript cannot see that class of bug: a mistyped `repoSlug` type-checks and silently renders a missing link. It caught exactly that on two websites.
+
+### A Websites Section, Because a Site Is Not a Project
+
+- A product is proved by its repository. A website is proved by being live, and two of these have no repository at all because they were built on hosted platforms. Different evidence, so a separate content type rather than a strained fit.
+- Cards state whether a site is currently reachable rather than hiding it. A site that has come down is a fact about the work.
+- The beta area on Abridgd has three states from one shape, decided by whether a TestFlight link is set and whether the tester count has reached its cap. There is deliberately no state where a control exists but goes nowhere.
+
+### Routing and Deployment
+
+- Every route but `/` returned 404 on the deployed site. `cleanUrls` 308-redirects `/index.html` to `/`, which is exactly where the SPA fallback rewrite pointed, so the fallback could never resolve. The photography site carries the same rewrite and is unaffected because it builds from the repo root rather than a Root Directory.
+- Hash navigation did nothing. React Router intercepts `<Link to="/#index">` and skips the browser's fragment scroll, and adding a hook alongside `<ScrollRestoration>` made it worse by racing it. `useHashScroll` now owns scroll position. Focus is moved before the scroll, not after, because `focus()` aborts an in-flight smooth scroll even with `preventScroll` set.
+- Fixed two CodeQL findings in `sync-sites.js`. Entity decoding chained replaces with `&amp;` first, so the literal text `&amp;lt;` decoded twice into `<`; it is now a single pass with a lookup. Regex escaping covered colons and nothing else, which was both incomplete and pointless, since a colon is not a metacharacter and a backslash is.
+
 ## 2026-08-12
 
 ### One Legal Page Became Three
@@ -82,7 +109,6 @@
 
 - `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` were JPEGs with a `.png` extension. Browsers sniff content so they displayed correctly, which is why this went unnoticed — but they were served with the wrong Content-Type, and `exiftool` cannot write rights metadata to a file whose extension contradicts its contents.
 - Renamed to `.jpg` with `git mv`, caption keys updated, and every manifest that referenced them regenerated. This mattered more than it looked: the Tim Walz event has exactly one image, and that file was it.
-
 
 ## 2026-08-11
 

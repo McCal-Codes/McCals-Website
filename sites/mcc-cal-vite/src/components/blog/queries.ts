@@ -1,20 +1,18 @@
 /**
- * React Query hooks for blog data fetching
+ * React Query hooks for blog data fetching. Post/manifest data comes from
+ * Supabase (blog_posts, written through the admin app); authors stay in the
+ * static authors.json.
  */
 
 import { useQuery } from '@tanstack/react-query';
-import type {
-  BlogAuthor,
-  BlogAuthorsFile,
-  BlogManifest,
-  BlogPostDocument,
-} from '@/types/blog';
-import {
-  BLOG_BASE,
-  DEFAULT_AUTHOR_ID,
-  FALLBACK_AUTHOR,
-  fetchJson,
-} from './utils';
+import type { BlogAuthor, BlogAuthorsFile, BlogManifest, BlogPostDocument } from '@/types/blog';
+import { fetchBlogManifestFromSupabase as fetchManifest, fetchBlogPostFromSupabase as fetchPost } from '@/lib/blog-data';
+import { BLOG_BASE, DEFAULT_AUTHOR_ID, FALLBACK_AUTHOR, fetchJson } from './utils';
+
+async function fetchAuthors(): Promise<BlogAuthor[]> {
+  const data = await fetchJson<BlogAuthorsFile>(`${BLOG_BASE}/authors.json`);
+  return Array.isArray(data.authors) ? data.authors : [];
+}
 
 // Query keys
 export const blogKeys = {
@@ -23,20 +21,6 @@ export const blogKeys = {
   authors: () => [...blogKeys.all, 'authors'] as const,
   post: (slug: string) => [...blogKeys.all, 'post', slug] as const,
 };
-
-// Fetch functions
-async function fetchManifest(): Promise<BlogManifest> {
-  return fetchJson<BlogManifest>(`${BLOG_BASE}/blog-manifest.json`);
-}
-
-async function fetchAuthors(): Promise<BlogAuthor[]> {
-  const data = await fetchJson<BlogAuthorsFile>(`${BLOG_BASE}/authors.json`);
-  return Array.isArray(data.authors) ? data.authors : [];
-}
-
-async function fetchPost(slug: string): Promise<BlogPostDocument> {
-  return fetchJson<BlogPostDocument>(`${BLOG_BASE}/posts/${slug}/post.json`);
-}
 
 // React Query hooks
 export function useBlogManifest() {

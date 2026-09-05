@@ -377,6 +377,14 @@ code {
   color: var(--bad);
 }
 
+.status-badge--success {
+  color: var(--good);
+}
+
+.status-badge--error {
+  color: var(--bad);
+}
+
 .code-table__row code {
   min-width: 260px;
   padding: 0.15rem 0;
@@ -481,6 +489,178 @@ code {
 .inline-error {
   margin: 0;
   color: var(--bad);
+}
+
+/* Albums: tabs, upload form, manage grid */
+
+.tab-strip {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5rem;
+}
+
+.tab-strip__button {
+  padding: 0.55rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab-strip__button.is-active {
+  border-color: var(--line);
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.form-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.form-field__label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.form-field input[type='text'],
+.form-field select {
+  min-height: 2.6rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.form-row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.dropzone {
+  display: grid;
+  place-items: center;
+  gap: 0.4rem;
+  padding: 2.2rem 1rem;
+  border: 1px dashed var(--line);
+  border-radius: 1rem;
+  background: var(--bg-soft);
+  color: var(--text-muted);
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone.is-active {
+  border-color: var(--brand);
+  color: var(--text);
+}
+
+.upload-file-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.upload-file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.upload-file-row__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-file-row__size {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.album-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.album-tile {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.album-tile__count {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.image-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.image-card {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.9rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.image-card__thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.7rem;
+  background: var(--bg-soft);
+}
+
+.image-card__fields {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.image-card__fields input[type='text'] {
+  min-height: 2.3rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: 0.86rem;
+}
+
+.image-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.checkbox-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
 }
 
 @keyframes pulse {

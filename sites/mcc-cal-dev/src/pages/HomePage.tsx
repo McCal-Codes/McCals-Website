@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { ACTIVITY } from '@/content/activity';
 import { NOTES } from '@/content/notes';
 import { PROJECTS } from '@/content/projects';
+import { WEBSITES } from '@/content/websites';
 import { SITE } from '@/content/site';
 import IndexRow from '@/components/IndexRow';
+import WebsiteCard from '@/components/WebsiteCard';
 import NoteCard from '@/components/NoteCard';
 import { useDocumentMeta } from '@/lib/useDocumentTitle';
 import styles from './HomePage.module.css';
@@ -46,7 +48,7 @@ export default function HomePage() {
               What I am building
             </h2>
             <p className={styles.sectionNote}>
-              Four projects, in the order I started them. Each one has a write-up when
+              My own projects, in the order I started them. Each has a write-up when
               there is something worth writing.
             </p>
           </div>
@@ -59,6 +61,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section aria-labelledby="websites-heading" className={styles.websites} id="websites">
+        <div className="shell">
+          <div className={styles.indexHead}>
+            <h2 className={styles.sectionHeading} id="websites-heading">
+              Sites I have built for other people
+            </h2>
+            <p className={styles.sectionNote}>
+              Client and commission work. Some have source to read, some do not.
+              What matters is that they are live.
+            </p>
+          </div>
+
+          <div className={styles.siteGrid}>
+            {WEBSITES.map((site) => (
+              <WebsiteCard key={site.slug} site={site} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {ACTIVITY.length > 0 && (
       <section aria-labelledby="currently-heading" className={styles.currently}>
         <div className="shell">
           <h2 className={`${styles.blockHeading} meta`} id="currently-heading">
@@ -77,7 +100,9 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+      )}
 
+      {NOTES.length > 0 && (
       <section aria-labelledby="notes-heading" className={styles.notes}>
         <div className="shell">
           <div className={styles.notesHead}>
@@ -96,6 +121,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      )}
     </>
   );
 }

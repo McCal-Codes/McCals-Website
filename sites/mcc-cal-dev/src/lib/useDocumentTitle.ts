@@ -9,7 +9,7 @@ import { SITE } from '@/content/site';
  */
 export function useDocumentMeta(title: string, description?: string) {
   useEffect(() => {
-    document.title = title === SITE.name ? title : `${title} — ${SITE.shortName}`;
+    document.title = title === SITE.name ? title : `${title} · ${SITE.shortName}`;
 
     if (!description) return;
     const tag = document.querySelector('meta[name="description"]');

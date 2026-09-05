@@ -74,6 +74,14 @@
   /* The sticky header height. SectionNav pins directly below it. */
   --header-height: 3.25rem;
 
+  /*
+   * Radius scale. Small on controls, larger on panels and media, so a surface
+   * reads as softer the more area it covers.
+   */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+
   /* Motion */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 180ms;

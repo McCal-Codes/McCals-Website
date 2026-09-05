@@ -19,6 +19,7 @@
   gap: 0.35rem;
   padding: 1rem 1.25rem;
   background: var(--panel);
+  border-radius: var(--radius);
   border: var(--rule);
   border-left: 2px solid var(--accent-dim);
 }

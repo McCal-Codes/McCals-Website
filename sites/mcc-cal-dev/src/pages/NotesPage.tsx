@@ -23,9 +23,11 @@ export default function NotesPage() {
       </header>
 
       <div className={`${styles.body} shell`}>
-        {NOTES.map((note) => (
-          <NoteCard key={note.slug} note={note} />
-        ))}
+        {NOTES.length > 0 ? (
+          NOTES.map((note) => <NoteCard key={note.slug} note={note} />)
+        ) : (
+          <p className="meta">No notes published yet</p>
+        )}
       </div>
     </>
   );

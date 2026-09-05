@@ -30,13 +30,21 @@ npm install
 npm run dev
 ```
 
-If you later add Vercel Functions to this app and want to test them locally:
+This app already has Vercel Functions (`api/`) for auth, bookings, and album upload/management. To test any of that locally, link the project once:
+
+```bash
+vercel link
+```
+
+Then run:
 
 ```bash
 npm run dev:vercel
 ```
 
-Use `npm run dev:vercel` for auth work. Plain `npm run dev` is only for UI-only changes because the login flow and session endpoints live in `api/`.
+Use `npm run dev:vercel` for auth, bookings, or album work — it serves `/api` alongside the Vite dev server. Plain `npm run dev` is only for UI-only changes, since the login flow and every data-backed page depend on `api/` routes that plain Vite doesn't serve.
+
+Copy `.env.example` to `.env` (picked up automatically by `vercel dev`) and fill in the required values before testing anything auth- or data-backed — without them the app just shows the setup checklist.
 
 ## Required Vercel setup
 

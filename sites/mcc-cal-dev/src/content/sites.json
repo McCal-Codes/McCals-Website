@@ -1,0 +1,39 @@
+{
+  "generatedBy": "sites/mcc-cal-dev/scripts/sync-sites.js",
+  "generatedAt": "2026-08-22T18:23:52.616Z",
+  "sites": [
+    {
+      "slug": "courtroom-kyle",
+      "url": "https://www.courtroomkyle.com/",
+      "reachable": true,
+      "status": 200,
+      "resolvedUrl": "https://www.courtroomkyle.com/",
+      "title": "Courtroom Kyle | supreme court and legal news blog",
+      "description": "Courtroom Kyle is a supreme court and legal news blog dedicated to unraveling the complexities of court cases and keeping you informed about the latest developments in U.S. law and its impact on society.",
+      "detectedPlatform": "Wix",
+      "preview": "/site-previews/courtroom-kyle.jpg",
+      "checkedAt": "2026-08-22",
+      "previewSource": "screenshot"
+    },
+    {
+      "slug": "allegheny-hyp-club",
+      "url": "https://allegheny-hyp-club.vercel.app",
+      "reachable": true,
+      "status": 200,
+      "resolvedUrl": "https://allegheny-hyp-club.vercel.app/",
+      "title": "The Allegheny HYP Club | Pittsburgh's Premier Private Club",
+      "description": "Pittsburgh",
+      "detectedPlatform": null,
+      "preview": "/site-previews/allegheny-hyp-club.jpg",
+      "checkedAt": "2026-08-22",
+      "previewSource": "screenshot"
+    },
+    {
+      "slug": "divine-eyth",
+      "url": null,
+      "reachable": false,
+      "note": "No live URL on record.",
+      "checkedAt": "2026-08-22"
+    }
+  ]
+}

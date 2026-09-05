@@ -1,14 +1,16 @@
-import { Outlet, RouterProvider, ScrollRestoration, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import SiteFooter from './components/SiteFooter';
 import SiteHeader from './components/SiteHeader';
+import { useHashScroll } from './lib/useHashScroll';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import NotesPage from './pages/NotesPage';
 import ProjectPage from './pages/ProjectPage';
-import RoadmapPage from './pages/RoadmapPage';
 
 function Shell() {
+  useHashScroll();
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -19,7 +21,6 @@ function Shell() {
         <Outlet />
       </main>
       <SiteFooter />
-      <ScrollRestoration />
     </>
   );
 }
@@ -31,7 +32,6 @@ const router = createBrowserRouter([
       { path: '/', element: <HomePage /> },
       { path: '/projects/:slug', element: <ProjectPage /> },
       { path: '/notes', element: <NotesPage /> },
-      { path: '/roadmap', element: <RoadmapPage /> },
       { path: '/about', element: <AboutPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],

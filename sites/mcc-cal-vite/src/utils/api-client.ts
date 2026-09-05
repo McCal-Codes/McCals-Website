@@ -5,6 +5,7 @@
 
 import { getLiveSiteFeaturedFallback } from '@/content/liveSiteFallbacks';
 import type { HomeFeaturedItem } from '@/content/liveSiteFallbacks';
+import { fetchBlogManifestFromSupabase } from '@/lib/blog-data';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://api.mcc-cal.com';
 const BLOG_BASE = '/content/blog-static';
@@ -70,7 +71,7 @@ export interface BlogAuthorsFile {
 export interface BlogManifestPost {
   slug: string;
   title: string;
-  authorId: string;
+  authorId?: string;
   authorName?: string | null;
   date: string;
   category?: string;
@@ -268,7 +269,8 @@ export async function fetchManifest(type: string): Promise<Manifest> {
 }
 
 /**
- * Fetch blog authors
+ * Fetch blog authors (still the static authors.json — unchanged by the
+ * blog_posts migration, see lib/blog-data.ts).
  */
 export async function fetchBlogAuthors(blogBase: string = BLOG_BASE): Promise<BlogAuthor[]> {
   const data = await fetchJson<BlogAuthorsFile>(`${trimTrailingSlash(blogBase)}/authors.json`);
@@ -276,10 +278,12 @@ export async function fetchBlogAuthors(blogBase: string = BLOG_BASE): Promise<Bl
 }
 
 /**
- * Fetch the generated blog manifest
+ * Fetch the blog manifest from Supabase's blog_posts table. `blogBase` is
+ * accepted for backward compatibility with existing callers but is unused
+ * for the manifest itself (still used below for asset URL resolution).
  */
-export async function fetchBlogManifest(blogBase: string = BLOG_BASE): Promise<BlogManifest> {
-  return fetchJson<BlogManifest>(`${trimTrailingSlash(blogBase)}/blog-manifest.json`);
+export async function fetchBlogManifest(_blogBase: string = BLOG_BASE): Promise<BlogManifest> {
+  return fetchBlogManifestFromSupabase();
 }
 
 /**
@@ -295,7 +299,11 @@ export async function fetchBlogPosts(blogBase: string = BLOG_BASE): Promise<Blog
 }
 
 /**
- * Fetch a single blog post document by slug
+ * Fetch a single blog post document by slug. Only reachable today via the
+ * /showcase demo page (utils/useAPI.ts's useBlogPost), not any production
+ * route — still reads the legacy static post.json rather than Supabase,
+ * since new posts written through the admin app don't have one. Not worth
+ * fixing for a page nothing in production links to.
  */
 export async function fetchBlogPost(slug: string, blogBase: string = BLOG_BASE): Promise<BlogPost> {
   if (!slug) {

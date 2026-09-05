@@ -26,8 +26,13 @@
 }
 
 .active-alpha,
-.active-development {
+.active-development,
+.beta {
   color: var(--text);
+}
+
+.beta .glyph {
+  color: var(--accent);
 }
 
 .prototype .glyph,
@@ -36,5 +41,17 @@
 }
 
 .archived {
+  color: var(--dim);
+}
+
+.wrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+}
+
+/* Stated plainly, not styled as an alarm. It is a fact, not a warning. */
+.dormant {
   color: var(--dim);
 }

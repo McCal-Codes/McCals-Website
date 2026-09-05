@@ -3,6 +3,7 @@ import { getProject } from '@/content/projects';
 import { formatDate, getRepo } from '@/content/github';
 import type { CaseStudySection } from '@/content/types';
 import AnnotatedShot from '@/components/AnnotatedShot';
+import BetaCallout from '@/components/BetaCallout';
 import Diagram from '@/components/Diagram';
 import MetaTable from '@/components/MetaTable';
 import PreviewFrame from '@/components/PreviewFrame';
@@ -82,9 +83,10 @@ export default function ProjectPage() {
 
   useDocumentMeta(project ? project.title : 'Not found', project?.purpose);
 
-  // A project without a case study has no page. The index row does not link here,
-  // so reaching this state means a hand-typed URL.
-  if (!project || project.sections.length === 0) {
+  // A page needs a reason to exist: a written case study, or something live to
+  // act on, such as an open beta. With neither, the index row does not link here
+  // and reaching this state means a hand-typed URL.
+  if (!project || (project.sections.length === 0 && !project.beta)) {
     return <Navigate replace to="/" />;
   }
 
@@ -106,7 +108,7 @@ export default function ProjectPage() {
               <p className={styles.purpose}>{project.purpose}</p>
 
               <div className={styles.facts}>
-                <StatusMarker status={project.status} />
+                <StatusMarker slug={project.slug} status={project.status} />
                 {stack.length > 0 && <p className={`${styles.stack} meta`}>{stack.join(' / ')}</p>}
               </div>
 
@@ -124,10 +126,24 @@ export default function ProjectPage() {
           <div className={styles.metaBlock}>
             <MetaTable project={project} />
           </div>
+
+          {project.beta && (
+            <div className={styles.betaBlock}>
+              <BetaCallout beta={project.beta} slug={project.slug} title={project.title} />
+            </div>
+          )}
         </div>
       </header>
 
-      <SectionNav repoHref={repo?.url} sections={project.sections} title={project.title} />
+      {project.sections.length > 0 && (
+        <SectionNav repoHref={repo?.url} sections={project.sections} title={project.title} />
+      )}
+
+      {project.sections.length === 0 && (
+        <div className="shell">
+          <p className={`${styles.comingSoon} meta`}>Case study coming soon</p>
+        </div>
+      )}
 
       <div className="shell">
         {project.sections.map((section, i) => (

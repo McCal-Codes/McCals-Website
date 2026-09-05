@@ -15,6 +15,7 @@
 export type ProjectStatus =
   | 'active-alpha'
   | 'active-development'
+  | 'beta'
   | 'prototype'
   | 'research'
   | 'archived';
@@ -28,6 +29,8 @@ export interface StatusPresentation {
 export const STATUS_PRESENTATION: Record<ProjectStatus, StatusPresentation> = {
   'active-alpha': { glyph: '●', label: 'Active alpha' },
   'active-development': { glyph: '●', label: 'Active development' },
+  /** Shipped to real testers, not yet publicly listed. */
+  beta: { glyph: '◐', label: 'In beta' },
   prototype: { glyph: '○', label: 'Prototype' },
   research: { glyph: '□', label: 'Research' },
   archived: { glyph: '×', label: 'Archived' },
@@ -144,7 +147,81 @@ export interface Project {
   status: ProjectStatus;
   meta: ProjectMeta;
   preview?: AnnotatedShot;
+  /** Present when the project is testable before public release. */
+  beta?: BetaProgram;
   sections: CaseStudySection[];
+}
+
+/* -- Beta programme ------------------------------------------------------ */
+
+/**
+ * An invitation to test a project before it is publicly available.
+ *
+ * One shape, two states, decided by whether `testFlightUrl` is set. With a link
+ * it is an enrolment call to action; without one it reads as coming soon. There
+ * is deliberately no third state where a button exists but goes nowhere, because
+ * a dead beta link costs more trust than saying "not yet".
+ */
+export interface BetaProgram {
+  /** Public TestFlight link. Absent means enrolment is not open. */
+  testFlightUrl?: string;
+  /** What a tester gets, in one line. */
+  blurb: string;
+  /** What testing actually involves. Sets expectations before someone signs up. */
+  note?: string;
+  /**
+   * How full the beta is.
+   *
+   * Apple publishes no public endpoint for this, so `taken` is maintained by
+   * hand from App Store Connect. It is a real count or it is absent; there is no
+   * estimate. `cap` is whatever limit Caleb has set for himself, which is not
+   * Apple's: a public link would allow 10,000.
+   */
+  testers?: { taken: number; cap: number };
+  /**
+   * Where someone goes once `testers.taken` reaches `cap`.
+   *
+   * A mailto is deliberate: it needs no third-party form service, collects
+   * nothing on our side, and works the day it is set. Swap in a hosted form URL
+   * later if the volume ever justifies one. Absent means a full beta simply says
+   * it is full.
+   */
+  waitlist?: { href: string; label: string };
+}
+
+/* -- Websites ------------------------------------------------------------ */
+
+/**
+ * A site built for someone else.
+ *
+ * Deliberately not a `Project`. A product is proved by its repository: source,
+ * releases, license. A website is proved by being live and looking right, and
+ * several of these have no repository at all because they were built on hosted
+ * platforms. Different evidence, so a different type.
+ *
+ * Everything observable (title, description, preview image, whether it still
+ * resolves) is pulled by `scripts/sync-sites.js`. Only role and the one-line
+ * description of the work are written by hand, because no crawler can infer them.
+ */
+export interface Website {
+  /** Two-digit index within the websites list. */
+  index: string;
+  slug: string;
+  /** Display name. The live <title> is usually too long to use directly. */
+  name: string;
+  url: string;
+  /** What the site is for, in plain language. One sentence. */
+  purpose: string;
+  /**
+   * What you actually did. Required, and never guessed: an unverifiable claim of
+   * credit is the one thing a portfolio cannot afford to get wrong.
+   */
+  role: string;
+  /** How it is built. For hosted platforms this is the platform name. */
+  platform: string;
+  /** Optional repository slug, keyed into github.json. Absent for hosted sites. */
+  repoSlug?: string;
+  year: string;
 }
 
 /* -- Other content ------------------------------------------------------- */

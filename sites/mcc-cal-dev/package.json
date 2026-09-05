@@ -5,12 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/validate-content.js && tsc -b && vite build",
     "sync:github": "node scripts/sync-github.js",
     "sync:github:dry": "node scripts/sync-github.js --dry-run",
+    "sync:sites": "node scripts/sync-sites.js",
+    "sync:sites:shots": "node scripts/sync-sites.js --shots",
+    "sync:sites:dry": "node scripts/sync-sites.js --dry-run",
+    "sync": "npm run sync:github && npm run sync:sites",
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "validate": "node scripts/validate-content.js"
   },
   "dependencies": {
     "react": "^19.2.7",
@@ -33,6 +38,7 @@
     "postcss": "^8.5.15",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.61.1",
-    "vite": "^6.4.2"
+    "vite": "^6.4.2",
+    "playwright": "^1.61.1"
   }
 }
