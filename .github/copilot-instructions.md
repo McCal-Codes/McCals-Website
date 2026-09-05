@@ -56,6 +56,8 @@ Useful commands:
 - Prefer/consume **aggregated manifests** per portfolio (for example: `concert-manifest.json`, `events-manifest.json`, `journalism-manifest.json`, `portrait-manifest.json`, `nature-manifest.json`, `portfolio-manifest.json`).
 - Avoid reintroducing per-folder `manifest.json` workflows unless a migration explicitly requires it.
 - If schema changes, update generator scripts, app/API consumers, CI/workflows, and docs together.
+- **Journalism is dual-sourced.** The committed `journalism-manifest.json` holds everything shot before the admin uploader existed; shoots uploaded through the admin app live in Supabase `portfolio_images` and are merged in at fetch time by `useManifest`. Treat the static manifest as the floor: it alone must always be enough to render, so the Supabase leg is time-bounded and every failure falls back to static-only rather than surfacing an error.
+- R2 object metadata is sent as raw HTTP header values, which reject non-ASCII. Sanitise captions before attaching them to an upload; the full-fidelity text belongs in Supabase, not the header.
 
 ## 6) Performance + accessibility doctrine
 

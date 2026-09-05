@@ -7,11 +7,10 @@ const supabaseMocks = vi.hoisted(() => ({
 
 function createQueryBuilder() {
   const builder: Record<string, unknown> = {};
-  const chain = (methodName: string) =>
-    vi.fn((..._args: unknown[]) => {
-      void methodName;
-      return builder;
-    });
+  // The name is passed at each call site to document which method is being
+  // stubbed; the stub itself only ever returns the builder so the chain
+  // continues. Underscore-prefixed so it is not flagged as unused.
+  const chain = (_methodName: string) => vi.fn((..._args: unknown[]) => builder);
   builder.select = chain('select');
   builder.eq = chain('eq');
   builder.order = chain('order');

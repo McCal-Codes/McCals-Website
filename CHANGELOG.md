@@ -17,6 +17,13 @@
 - Every hero image request now uses one credentials mode. The `<img>`, the `rel=preload` in `index.html`, the idle preloader, and the WebGL texture fetch all set `crossorigin=anonymous`; a CORS and a no-CORS request for the same URL are separate cache entries, so mixing them downloaded each photograph twice. The texture also samples the exact variant the browser resolved from `srcSet` rather than a fixed 1920px URL, which was a second copy on every phone.
 - `check-performance-budget.js` no longer fails on GL driver *performance* hints. Headless CI renders WebGL in software and reports things like "GPU stall due to ReadPixels" that say nothing about the site; genuine WebGL errors still fail the budget.
 
+### Journalism Reads From Supabase As Well As the Manifest
+
+- Shoots uploaded through the admin app land in Supabase, while the committed manifest holds everything shot before that existed. `useManifest` now fetches both for the journalism portfolio and merges them, so a new upload appears without regenerating and committing a manifest. Images may carry a pre-built R2 URL that bypasses path construction; static entries are untouched.
+- The static manifest is treated as the floor, not a fallback of last resort. The Supabase leg is bounded at five seconds, because a request that *hangs* rather than fails would otherwise hold the gallery on a skeleton until the browser's own socket timeout — minutes — despite every photograph needed to render having already arrived. An unexpected manifest shape falls back to static-only instead of throwing, and an abort from navigating away is no longer logged as though the data layer failed.
+- R2 rejects non-ASCII in object metadata headers, so a single smart quote or em dash in an IPTC caption failed an entire upload. Typography is normalised to ASCII and the rest dropped for the header only; Supabase still gets the caption in full.
+- `.env*` is now ignored in the vite app so local credentials cannot be staged.
+
 ## 2026-08-27
 
 ### Blog/Portfolio Cross-Linking and a Photojournalism Excerpt Rewrite
