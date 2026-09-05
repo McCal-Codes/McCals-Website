@@ -83,6 +83,13 @@ export async function fetchSupabaseJournalismEvents(
       };
     });
   } catch (error) {
+    // An abort is the caller navigating away or timing us out, not a fault.
+    // Logging it would emit a warning on every ordinary departure from the
+    // journalism page and bury the failures that do matter.
+    const aborted =
+      signal?.aborted || (error instanceof Error && error.name === 'AbortError');
+    if (aborted) return [];
+
     logWarning(`Supabase journalism fetch threw: ${error instanceof Error ? error.message : String(error)}`);
     return [];
   }
