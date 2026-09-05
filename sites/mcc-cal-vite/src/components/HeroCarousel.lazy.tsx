@@ -1,12 +1,14 @@
-import React, { useEffect, useLayoutEffect, useRef, useCallback, useState, useMemo } from 'react';
+import React, { lazy, Suspense, useEffect, useLayoutEffect, useRef, useCallback, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './heroCarousel.module.css';
+import { shouldEnableHeroShader } from './hero/heroShaderSupport';
 import {
   FAVORITE_HERO_SLIDES,
   HERO_IMAGE_VARIANTS,
   type HeroFocalPoint,
   type HeroSlide,
   type HeroSlideVariant,
+  type HeroViewport,
 } from './heroSlides';
 import {
   getOptimizedImageUrl,
@@ -89,6 +91,10 @@ async function fetchHeroSlides(signal?: AbortSignal): Promise<{ slides: HeroSlid
   }
 }
 
+// Split out so neither the component nor three.js is in the homepage's initial
+// chunk. Nothing here is fetched until the hero image has already painted.
+const HeroShaderTransition = lazy(() => import('./hero/HeroShaderTransition'));
+
 const DESKTOP_BREAKPOINT = 769;
 const SLIDE_DURATION = 8000;
 const HERO_IMAGE_WIDTHS = [640, 960, 1280, 1600, 1920, 2048];
@@ -102,11 +108,17 @@ const normalizeFP = (fp?: HeroFocalPoint) => {
 };
 
 
-const resolveObjectPosition = (slide: HeroSlide, isDesktop: boolean) => {
+const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
+
+const resolveFocalPoint = (slide: HeroSlide, isDesktop: boolean) => {
   const mobile = normalizeFP(slide.focalPointMobile);
   const desktop = normalizeFP(slide.focalPointDesktop);
-  const fp = isDesktop ? desktop || mobile : mobile || desktop;
-  return fp ? `${(fp.x * 100).toFixed(4)}% ${(fp.y * 100).toFixed(4)}%` : '50% 50%';
+  return (isDesktop ? desktop || mobile : mobile || desktop) ?? DEFAULT_FOCAL_POINT;
+};
+
+const resolveObjectPosition = (slide: HeroSlide, isDesktop: boolean) => {
+  const fp = resolveFocalPoint(slide, isDesktop);
+  return `${(fp.x * 100).toFixed(4)}% ${(fp.y * 100).toFixed(4)}%`;
 };
 
 const getBaseVariant = (slide: HeroSlide): HeroSlideVariant => ({
@@ -114,13 +126,36 @@ const getBaseVariant = (slide: HeroSlide): HeroSlideVariant => ({
   alt: slide.alt,
   focalPointMobile: slide.focalPointMobile,
   focalPointDesktop: slide.focalPointDesktop,
+  viewport: slide.viewport,
 });
 
-const resolveSlideVariant = (slide: HeroSlide, variantPool = HERO_IMAGE_VARIANTS): HeroSlide => {
-  const options: [HeroSlideVariant, ...HeroSlideVariant[]] = [
-    getBaseVariant(slide),
-    ...(variantPool[slide.cta] ?? []),
-  ];
+const getViewport = (isDesktop: boolean): HeroViewport => (isDesktop ? 'desktop' : 'mobile');
+
+/**
+ * Narrows a variant pool to the frames composed for the current hero shape.
+ * An untagged variant suits either, so it always stays in.
+ *
+ * Falls back to the unfiltered pool if tagging leaves nothing: a slide whose
+ * frames are all tagged for the other breakpoint should still show a
+ * photograph rather than nothing at all.
+ */
+export const variantsForViewport = (
+  options: HeroSlideVariant[],
+  viewport: HeroViewport,
+): HeroSlideVariant[] => {
+  const matching = options.filter((option) => !option.viewport || option.viewport === viewport);
+  return matching.length > 0 ? matching : options;
+};
+
+const resolveSlideVariant = (
+  slide: HeroSlide,
+  variantPool = HERO_IMAGE_VARIANTS,
+  isDesktop = false,
+): HeroSlide => {
+  const options = variantsForViewport(
+    [getBaseVariant(slide), ...(variantPool[slide.cta] ?? [])],
+    getViewport(isDesktop),
+  );
   const selected = options[Math.floor(Math.random() * options.length)] ?? options[0];
 
   return {
@@ -132,16 +167,28 @@ const resolveSlideVariant = (slide: HeroSlide, variantPool = HERO_IMAGE_VARIANTS
 const getInitialSlides = (
   sourceSlides = FAVORITE_HERO_SLIDES,
   variantPool: Record<string, HeroSlideVariant[]> = HERO_IMAGE_VARIANTS,
+  isDesktop = false,
 ) => {
   return sourceSlides.map((slide, index) =>
-    index === 0 ? slide : resolveSlideVariant(slide, variantPool)
+    // Slide 0 is what index.html preloads and is the LCP element, so it is
+    // never re-picked; its own frame has to work at both sizes.
+    index === 0 ? slide : resolveSlideVariant(slide, variantPool, isDesktop)
   );
 };
+
+const getIsDesktop = () =>
+  typeof window !== 'undefined' && window.innerWidth >= DESKTOP_BREAKPOINT;
 
 interface ImageStatus {
   src: string;
   loaded: boolean;
   error: boolean;
+  /**
+   * The URL the browser actually resolved from srcSet/sizes, which is usually
+   * a narrower variant than `src`. The WebGL layer must sample this exact URL
+   * or it downloads a second, larger copy of every hero photograph.
+   */
+  currentSrc: string;
 }
 
 const HeroCarousel: React.FC = () => {
@@ -150,11 +197,12 @@ const HeroCarousel: React.FC = () => {
   const [isFocusPaused, setIsFocusPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isDocumentVisible, setIsDocumentVisible] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(getIsDesktop);
   const [imageStatus, setImageStatus] = useState<ImageStatus>({
     src: '',
     loaded: false,
     error: false,
+    currentSrc: '',
   });
   const heroRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -162,7 +210,13 @@ const HeroCarousel: React.FC = () => {
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   // Start immediately with hardcoded slides; replace with Supabase data if it arrives
-  const [slides, setSlides] = useState<HeroSlide[]>(() => getInitialSlides());
+  const [slideSource, setSlideSource] = useState<{
+    slides: HeroSlide[];
+    variants: Record<string, HeroSlideVariant[]>;
+  }>(() => ({ slides: FAVORITE_HERO_SLIDES, variants: HERO_IMAGE_VARIANTS }));
+  const [slides, setSlides] = useState<HeroSlide[]>(() =>
+    getInitialSlides(FAVORITE_HERO_SLIDES, HERO_IMAGE_VARIANTS, getIsDesktop()),
+  );
 
   // Slide 0 of FAVORITE_HERO_SLIDES is what index.html preloads, and it is the LCP
   // element. Fetching Supabase slides during first paint could replace slide 0 with
@@ -188,7 +242,7 @@ const HeroCarousel: React.FC = () => {
         .then(data => {
           if (timeout !== null) clearTimeout(timeout);
           if (cancelled || !data || data.slides.length === 0) return;
-          setSlides(getInitialSlides(data.slides, data.variants));
+          setSlideSource({ slides: data.slides, variants: data.variants });
           // Clamp index in case new slide count is smaller
           setCurrentSlideIndex(prev => Math.min(prev, data.slides.length - 1));
         })
@@ -211,9 +265,36 @@ const HeroCarousel: React.FC = () => {
     };
   }, []);
 
+  // Re-pick variants when the slide source changes or the hero crosses the
+  // breakpoint, so a desktop frame is never left on a phone-shaped hero.
+  // Skipped on mount: the initial state already picked for this breakpoint,
+  // and re-running here would swap the hero image immediately after paint.
+  const hasPickedRef = useRef(false);
+
+  useEffect(() => {
+    if (!hasPickedRef.current) {
+      hasPickedRef.current = true;
+      return;
+    }
+    setSlides(getInitialSlides(slideSource.slides, slideSource.variants, isDesktop));
+  }, [slideSource, isDesktop]);
+
   const currentSlide = slides[currentSlideIndex];
   const imageLoaded = imageStatus.src === currentSlide?.image && imageStatus.loaded;
   const imageError = imageStatus.src === currentSlide?.image && imageStatus.error;
+
+  // The WebGL layer is decided only after the first hero image has painted, so
+  // neither the capability probe nor the three.js chunk competes with LCP.
+  const [shaderEnabled, setShaderEnabled] = useState(false);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setShaderEnabled(false);
+      return;
+    }
+    if (!imageLoaded) return;
+    setShaderEnabled(shouldEnableHeroShader());
+  }, [imageLoaded, prefersReducedMotion]);
   const isPaused = isPointerPaused || isFocusPaused || prefersReducedMotion || !isDocumentVisible;
 
   const nextSlide = useCallback(() => {
@@ -304,6 +385,7 @@ const HeroCarousel: React.FC = () => {
         src: currentSlide.image,
         loaded: image.naturalWidth > 0,
         error: image.naturalWidth === 0,
+        currentSrc: image.currentSrc || image.src,
       });
     }
   }, [currentSlide]);
@@ -322,6 +404,10 @@ const HeroCarousel: React.FC = () => {
     const preload = () => {
       const image = new Image();
       image.decoding = 'async';
+      // Must match the <img> and the rel=preload: a request in a different
+      // credentials mode is a separate cache entry, so the warmed bytes go
+      // unused and the browser fetches the photograph again.
+      image.crossOrigin = 'anonymous';
       image.src = getOptimizedImageUrl(nextSlideImage.image, { width: HERO_OPTIMIZED_WIDTH });
     };
 
@@ -364,6 +450,7 @@ const HeroCarousel: React.FC = () => {
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
+    link.crossOrigin = 'anonymous';
     link.href = nextSrc;
     const srcset = getResponsiveImageSrcSet(nextSrc, [640, 960, 1280, 1920, 3840]);
     if (srcset) {
@@ -386,6 +473,10 @@ const HeroCarousel: React.FC = () => {
   const objectPosition = useMemo(() => {
     return currentSlide ? resolveObjectPosition(currentSlide, isDesktop) : '50% 50%';
   }, [currentSlide, isDesktop]);
+  const focalPoint = useMemo(
+    () => (currentSlide ? resolveFocalPoint(currentSlide, isDesktop) : DEFAULT_FOCAL_POINT),
+    [currentSlide, isDesktop],
+  );
   const currentImageSrc = useMemo(
     () => (currentSlide ? getOptimizedImageUrl(currentSlide.image, { width: HERO_OPTIMIZED_WIDTH }) : ''),
     [currentSlide],
@@ -395,12 +486,14 @@ const HeroCarousel: React.FC = () => {
     [currentSlide],
   );
 
-  const handleImageLoad = () => {
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
     if (!currentSlide) return;
+    const image = event.currentTarget;
     setImageStatus({
       src: currentSlide.image,
       loaded: true,
       error: false,
+      currentSrc: image.currentSrc || image.src,
     });
   };
 
@@ -410,6 +503,7 @@ const HeroCarousel: React.FC = () => {
       src: currentSlide.image,
       loaded: false,
       error: true,
+      currentSrc: '',
     });
   };
 
@@ -464,12 +558,21 @@ const HeroCarousel: React.FC = () => {
             style={{ objectPosition }}
             onLoad={handleImageLoad}
             onError={handleImageError}
+            crossOrigin="anonymous"
             loading="eager"
             fetchPriority="high"
             decoding="async"
             width={1920}
             height={1280}
           />
+        )}
+
+        {/* Sits over the <img>, which stays in the DOM as the LCP element, the
+            accessible content, and the fallback if WebGL is unavailable. */}
+        {shaderEnabled && !imageError && (
+          <Suspense fallback={null}>
+            <HeroShaderTransition src={imageStatus.currentSrc} focal={focalPoint} />
+          </Suspense>
         )}
 
         <div className={styles.heroContent}>
