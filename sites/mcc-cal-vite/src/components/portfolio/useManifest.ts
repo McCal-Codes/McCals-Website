@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { UseManifestResult } from './types';
+import { fetchSupabaseJournalismEvents, mergeJournalismEvents } from './journalismSupabaseSource';
 
 const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
 const PORTFOLIOS_BASE = 'src/images/Portfolios';
@@ -85,12 +86,65 @@ async function fetchStaticManifestJson<T>(
   return parseJsonResponse<T>(response, staticUrl);
 }
 
+interface JournalismLikeManifest {
+  events: { eventName: string }[];
+  categories?: string[];
+}
+
+/**
+ * How long the gallery will wait on Supabase before rendering without it. The
+ * static manifest has already resolved by this point and holds everything
+ * needed to draw the page, so the merge is an enhancement and must never be
+ * what the visitor is waiting for. A failing request returns quickly; a
+ * *hanging* one — a paused project, a stalled socket, a captive portal — would
+ * otherwise hold the page on a skeleton until the browser's own socket
+ * timeout, which can be minutes.
+ */
+const SUPABASE_MERGE_TIMEOUT_MS = 5000;
+
+async function mergeJournalismWithSupabase<T>(staticData: T, signal: AbortSignal): Promise<T> {
+  const manifest = staticData as unknown as JournalismLikeManifest;
+
+  // staticData is cast from an unvalidated fetch response. If it is not the
+  // shape we expect, fall back to it untouched rather than throwing: the
+  // journalism page degrading to static-only content is the whole point.
+  if (!Array.isArray(manifest.events)) return staticData;
+
+  const controller = new AbortController();
+  const abortMerge = () => controller.abort();
+
+  if (signal.aborted) {
+    controller.abort();
+  } else {
+    signal.addEventListener('abort', abortMerge, { once: true });
+  }
+
+  const timeout = setTimeout(abortMerge, SUPABASE_MERGE_TIMEOUT_MS);
+
+  try {
+    const supabaseEvents = await fetchSupabaseJournalismEvents(controller.signal);
+    if (supabaseEvents.length === 0) return staticData;
+
+    return {
+      ...manifest,
+      events: mergeJournalismEvents(manifest.events, supabaseEvents),
+    } as unknown as T;
+  } finally {
+    clearTimeout(timeout);
+    signal.removeEventListener('abort', abortMerge);
+  }
+}
+
 async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<T> {
   const apiUrl = `/api/manifests/${type}`;
   const staticFile = getManifestFile(type);
 
   if (staticFile) {
-    return fetchStaticManifestJson<T>(staticFile, signal);
+    const staticData = await fetchStaticManifestJson<T>(staticFile, signal);
+    if (type.toLowerCase() === 'journalism') {
+      return mergeJournalismWithSupabase(staticData, signal);
+    }
+    return staticData;
   }
 
   let apiError: unknown;
