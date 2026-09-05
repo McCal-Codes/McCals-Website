@@ -14,6 +14,7 @@ import PortfolioSkeleton from '../LoadingStates/PortfolioSkeleton';
 interface JournalismImage {
   filename: string;
   path: string;
+  url?: string; // pre-built URL (e.g. R2/Supabase-sourced); bypasses imageUrl.journalism() when present
   description?: string;
   caption?: string;
   tags?: string[];
@@ -46,7 +47,7 @@ import { generateId } from '@/utils/portfolio-ids';
 function normalise(events: JournalismEvent[]): PortfolioGroup[] {
   return events.map((event) => {
     const images = event.images.map((img) => ({
-      url: imageUrl.journalism(event.folderPath, img.path),
+      url: img.url ?? imageUrl.journalism(event.folderPath, img.path),
       filename: img.filename,
       caption: img.caption,
       description: img.description,

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { UseManifestResult } from './types';
+import { fetchSupabaseJournalismEvents, mergeJournalismEvents } from './journalismSupabaseSource';
 
 const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
 const PORTFOLIOS_BASE = 'src/images/Portfolios';
@@ -85,12 +86,32 @@ async function fetchStaticManifestJson<T>(
   return parseJsonResponse<T>(response, staticUrl);
 }
 
+interface JournalismLikeManifest {
+  events: { eventName: string }[];
+  categories?: string[];
+}
+
+async function mergeJournalismWithSupabase<T>(staticData: T, signal: AbortSignal): Promise<T> {
+  const manifest = staticData as unknown as JournalismLikeManifest;
+  const supabaseEvents = await fetchSupabaseJournalismEvents(signal);
+  if (supabaseEvents.length === 0) return staticData;
+
+  return {
+    ...manifest,
+    events: mergeJournalismEvents(manifest.events, supabaseEvents),
+  } as unknown as T;
+}
+
 async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<T> {
   const apiUrl = `/api/manifests/${type}`;
   const staticFile = getManifestFile(type);
 
   if (staticFile) {
-    return fetchStaticManifestJson<T>(staticFile, signal);
+    const staticData = await fetchStaticManifestJson<T>(staticFile, signal);
+    if (type.toLowerCase() === 'journalism') {
+      return mergeJournalismWithSupabase(staticData, signal);
+    }
+    return staticData;
   }
 
   let apiError: unknown;
