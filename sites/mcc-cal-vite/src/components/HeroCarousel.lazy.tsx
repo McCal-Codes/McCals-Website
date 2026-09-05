@@ -183,6 +183,12 @@ interface ImageStatus {
   src: string;
   loaded: boolean;
   error: boolean;
+  /**
+   * The URL the browser actually resolved from srcSet/sizes, which is usually
+   * a narrower variant than `src`. The WebGL layer must sample this exact URL
+   * or it downloads a second, larger copy of every hero photograph.
+   */
+  currentSrc: string;
 }
 
 const HeroCarousel: React.FC = () => {
@@ -196,6 +202,7 @@ const HeroCarousel: React.FC = () => {
     src: '',
     loaded: false,
     error: false,
+    currentSrc: '',
   });
   const heroRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -378,6 +385,7 @@ const HeroCarousel: React.FC = () => {
         src: currentSlide.image,
         loaded: image.naturalWidth > 0,
         error: image.naturalWidth === 0,
+        currentSrc: image.currentSrc || image.src,
       });
     }
   }, [currentSlide]);
@@ -438,6 +446,7 @@ const HeroCarousel: React.FC = () => {
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
+    link.crossOrigin = 'anonymous';
     link.href = nextSrc;
     const srcset = getResponsiveImageSrcSet(nextSrc, [640, 960, 1280, 1920, 3840]);
     if (srcset) {
@@ -472,20 +481,15 @@ const HeroCarousel: React.FC = () => {
     () => (currentSlide ? getResponsiveImageSrcSet(currentSlide.image, HERO_IMAGE_WIDTHS) : undefined),
     [currentSlide],
   );
-  // Mirrors the <link rel="preload"> the carousel already emits, so the WebGL
-  // layer has the next photograph on the GPU before the slide advances.
-  const nextImageSrc = useMemo(() => {
-    if (slides.length < 2) return undefined;
-    const next = slides[(currentSlideIndex + 1) % slides.length];
-    return next ? getOptimizedImageUrl(next.image, { width: HERO_OPTIMIZED_WIDTH }) : undefined;
-  }, [slides, currentSlideIndex]);
 
-  const handleImageLoad = () => {
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
     if (!currentSlide) return;
+    const image = event.currentTarget;
     setImageStatus({
       src: currentSlide.image,
       loaded: true,
       error: false,
+      currentSrc: image.currentSrc || image.src,
     });
   };
 
@@ -495,6 +499,7 @@ const HeroCarousel: React.FC = () => {
       src: currentSlide.image,
       loaded: false,
       error: true,
+      currentSrc: '',
     });
   };
 
@@ -549,6 +554,7 @@ const HeroCarousel: React.FC = () => {
             style={{ objectPosition }}
             onLoad={handleImageLoad}
             onError={handleImageError}
+            crossOrigin="anonymous"
             loading="eager"
             fetchPriority="high"
             decoding="async"
@@ -561,11 +567,7 @@ const HeroCarousel: React.FC = () => {
             accessible content, and the fallback if WebGL is unavailable. */}
         {shaderEnabled && !imageError && (
           <Suspense fallback={null}>
-            <HeroShaderTransition
-              src={currentImageSrc}
-              preloadSrc={nextImageSrc}
-              focal={focalPoint}
-            />
+            <HeroShaderTransition src={imageStatus.currentSrc} focal={focalPoint} />
           </Suspense>
         )}
 

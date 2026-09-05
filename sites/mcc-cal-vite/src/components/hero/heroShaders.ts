@@ -8,12 +8,17 @@
  */
 
 export const HERO_VERTEX_SHADER = /* glsl */ `
+  // Declared explicitly: unlike three, ogl prepends nothing to a shader, so
+  // the attributes its Triangle geometry supplies have to be named here.
+  attribute vec2 position;
+  attribute vec2 uv;
+
   varying vec2 vUv;
 
   void main() {
     vUv = uv;
-    // The geometry is already a clip-space quad, so no camera transform.
-    gl_Position = vec4(position.xy, 0.0, 1.0);
+    // The geometry already covers clip space, so there is no camera transform.
+    gl_Position = vec4(position, 0.0, 1.0);
   }
 `;
 
@@ -75,8 +80,6 @@ export const HERO_FRAGMENT_SHADER = /* glsl */ `
     return total;
   }
 
-  // Prefixed because three prepends its own shader chunks, which already
-  // define a luminance() with a different parameter qualifier.
   float heroLuminance(vec3 color) {
     return dot(color, vec3(0.2126, 0.7152, 0.0722));
   }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type * as THREE_NS from 'three';
+import type { Renderer, Program, Mesh, Texture, OGLRenderingContext } from 'ogl';
 import { HERO_FRAGMENT_SHADER, HERO_VERTEX_SHADER } from './heroShaders';
 import { computeFrame, type HeroFocalPoint } from './heroFraming';
 import styles from './heroShaderTransition.module.css';
@@ -7,11 +7,6 @@ import styles from './heroShaderTransition.module.css';
 interface HeroShaderTransitionProps {
   /** The exact URL the underlying <img> is showing, so the texture is a cache hit. */
   src: string;
-  /**
-   * The slide after this one. Uploaded to the GPU while the browser is idle so
-   * that advancing does not sit on the previous photograph waiting for a decode.
-   */
-  preloadSrc?: string;
   focal: HeroFocalPoint;
   durationMs?: number;
   /** Raised once the canvas has a frame on screen, and again if it gives up. */
@@ -19,10 +14,10 @@ interface HeroShaderTransitionProps {
 }
 
 interface HeroEngine {
-  THREE: typeof THREE_NS;
-  renderer: THREE_NS.WebGLRenderer;
-  material: THREE_NS.ShaderMaterial;
-  loader: THREE_NS.TextureLoader;
+  renderer: Renderer;
+  program: Program;
+  mesh: Mesh;
+  gl: OGLRenderingContext;
   render: () => void;
 }
 
@@ -47,28 +42,47 @@ function ease(t: number): number {
 }
 
 /**
+ * Decodes an image for texture upload. `crossOrigin` is required even for
+ * same-origin URLs here: without it a cross-origin response taints the canvas
+ * and WebGL refuses to sample it.
+ */
+function loadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.crossOrigin = 'anonymous';
+    image.decoding = 'async';
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error(`hero texture failed to load: ${url}`));
+    image.src = url;
+  });
+}
+
+/**
  * A WebGL layer that dissolves between hero photographs and lays grain and a
  * vignette over them.
  *
  * It is strictly additive. The <img> beneath it keeps rendering the current
  * slide, stays the LCP element, and remains the only thing search engines and
  * screen readers see; this canvas is aria-hidden and fades in only once it has
- * drawn a frame. Any failure — no context, a texture that will not load, a lost
- * context — unmounts the canvas and leaves the original carousel intact.
+ * drawn a frame. Any failure — no context, a program that will not link, a
+ * texture that cannot be sampled, a lost context — unmounts the canvas and
+ * leaves the original carousel intact.
+ *
+ * Built on ogl rather than three: this draws one fullscreen triangle with a
+ * hand-written shader, which is about 3% of three's API for 5% of its weight.
  */
 export default function HeroShaderTransition({
   src,
-  preloadSrc,
   focal,
   durationMs = DEFAULT_DURATION_MS,
   onReadyChange,
 }: HeroShaderTransitionProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const texturesRef = useRef(new Map<string, THREE_NS.Texture>());
+  const texturesRef = useRef(new Map<string, Texture>());
   const frameRef = useRef<number | null>(null);
 
-  // The renderer and its scene graph are mutated constantly by the render loop,
-  // so they live in a ref rather than state; `engineReady` is the render-safe
+  // The renderer and its program are mutated constantly by the render loop, so
+  // they live in a ref rather than state; `engineReady` is the render-safe
   // signal that the effects below can start using it.
   const engineRef = useRef<HeroEngine | null>(null);
   const [engineReady, setEngineReady] = useState(false);
@@ -97,56 +111,59 @@ export default function HeroShaderTransition({
    *
    * The cache is a plain Map used as an LRU: Map preserves insertion order, so
    * re-inserting on a hit moves an entry to the back and the oldest entries sit
-   * at the front. Textures currently bound to the material are never evicted.
+   * at the front. Textures currently bound to the program are never evicted.
    */
-  const acquireTexture = useCallback(
-    async (url: string): Promise<THREE_NS.Texture | null> => {
-      const engine = engineRef.current;
-      if (!engine) return null;
+  const acquireTexture = useCallback(async (url: string): Promise<Texture | null> => {
+    const engine = engineRef.current;
+    if (!engine) return null;
 
-      const cache = texturesRef.current;
+    const cache = texturesRef.current;
 
-      const cached = cache.get(url);
-      if (cached) {
-        cache.delete(url);
-        cache.set(url, cached);
-        return cached;
-      }
+    const cached = cache.get(url);
+    if (cached) {
+      cache.delete(url);
+      cache.set(url, cached);
+      return cached;
+    }
 
-      let texture: THREE_NS.Texture;
-      try {
-        texture = await engine.loader.loadAsync(url);
-      } catch {
-        return null;
-      }
+    let image: HTMLImageElement;
+    try {
+      image = await loadImage(url);
+    } catch {
+      return null;
+    }
 
-      // NoColorSpace, deliberately. Marking the texture sRGB makes WebGL2
-      // upload it as SRGB8_ALPHA8 and decode to linear in hardware on sample,
-      // but a raw ShaderMaterial gets none of three's output-encoding chunks,
-      // so nothing converts back and every photograph renders about a gamma
-      // too dark. Keeping the texture untagged means the shader works in the
-      // same sRGB space the <img> underneath is displayed in, and the canvas
-      // matches it pixel for pixel.
-      texture.colorSpace = engine.THREE.NoColorSpace;
-      texture.minFilter = engine.THREE.LinearFilter;
-      texture.magFilter = engine.THREE.LinearFilter;
-      texture.generateMipmaps = false;
-      cache.set(url, texture);
+    const { Texture: OglTexture } = await import('ogl');
+    const { gl } = engine;
 
-      const { uFrom, uTo } = engine.material.uniforms;
-      const inUse = new Set([uFrom.value, uTo.value]);
+    // No colour management anywhere in this pipeline, deliberately. ogl uploads
+    // the bytes as they are and the shader writes them straight back out, so
+    // the canvas matches the <img> underneath it exactly. Tagging the texture
+    // sRGB would make WebGL2 decode to linear on sample with nothing to encode
+    // it back, and every photograph would render about a gamma too dark.
+    const texture = new OglTexture(gl, {
+      image,
+      generateMipmaps: false,
+      minFilter: gl.LINEAR,
+      magFilter: gl.LINEAR,
+    });
 
-      for (const [key, value] of cache) {
-        if (cache.size <= MAX_CACHED_TEXTURES) break;
-        if (inUse.has(value) || value === texture) continue;
-        value.dispose();
-        cache.delete(key);
-      }
+    cache.set(url, texture);
 
-      return texture;
-    },
-    [],
-  );
+    const inUse = new Set([
+      engine.program.uniforms.uFrom.value,
+      engine.program.uniforms.uTo.value,
+    ]);
+
+    for (const [key, value] of cache) {
+      if (cache.size <= MAX_CACHED_TEXTURES) break;
+      if (inUse.has(value) || value === texture) continue;
+      if (value.texture) gl.deleteTexture(value.texture);
+      cache.delete(key);
+    }
+
+    return texture;
+  }, []);
 
   // ── Scene setup ───────────────────────────────────────────────────────────
   useEffect(() => {
@@ -163,76 +180,76 @@ export default function HeroShaderTransition({
       setFailed(true);
     };
 
-    // three is ~150KB gzipped, so it is imported here rather than at module
-    // scope: this effect runs after the hero <img> has already painted, which
-    // keeps the library out of the homepage's initial bundle and off the LCP
-    // critical path entirely.
-    import('three')
-      .then((THREE) => {
+    // Imported here rather than at module scope so the WebGL code stays out of
+    // the homepage's initial bundle: this effect runs only after the hero <img>
+    // has painted, keeping it off the LCP critical path entirely.
+    import('ogl')
+      .then(({ Renderer: OglRenderer, Program: OglProgram, Mesh: OglMesh, Triangle }) => {
         if (cancelled) return;
 
-        const renderer = new THREE.WebGLRenderer({
+        const renderer = new OglRenderer({
           canvas,
-          antialias: false,
           alpha: false,
+          antialias: false,
+          depth: false,
+          dpr: Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO),
           powerPreference: 'low-power',
         });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO));
-        // Pass the shader's output through untouched. Textures are uploaded
-        // untagged (see acquireTexture), so the whole pipeline stays in sRGB
-        // and the canvas matches the <img> it covers exactly.
-        renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
-        // A program that fails to compile still renders — as black — which
-        // would blank the photograph the canvas is sitting on. Treat it as a
-        // hard failure so the layer unmounts and the <img> shows through.
-        renderer.debug.onShaderError = () => setFailed(true);
+        const gl = renderer.gl as HeroEngine['gl'];
 
-        const scene = new THREE.Scene();
-        const camera = new THREE.Camera();
-
-        const material = new THREE.ShaderMaterial({
-          vertexShader: HERO_VERTEX_SHADER,
-          fragmentShader: HERO_FRAGMENT_SHADER,
+        const program = new OglProgram(gl, {
+          vertex: HERO_VERTEX_SHADER,
+          fragment: HERO_FRAGMENT_SHADER,
           depthTest: false,
           depthWrite: false,
+          cullFace: false,
           uniforms: {
             uFrom: { value: null },
             uTo: { value: null },
-            uFromFrame: { value: new THREE.Vector4(1, 1, 0, 0) },
-            uToFrame: { value: new THREE.Vector4(1, 1, 0, 0) },
+            uFromFrame: { value: new Float32Array([1, 1, 0, 0]) },
+            uToFrame: { value: new Float32Array([1, 1, 0, 0]) },
             uProgress: { value: 1 },
             uTime: { value: 0 },
             uGrain: { value: GRAIN_STRENGTH },
             uVignette: { value: VIGNETTE_STRENGTH },
-            uResolution: { value: new THREE.Vector2(1, 1) },
+            uResolution: { value: new Float32Array([1, 1]) },
           },
         });
 
-        const geometry = new THREE.PlaneGeometry(2, 2);
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.frustumCulled = false;
-        scene.add(mesh);
+        // ogl warns on a failed compile but does not always throw, and a
+        // program that never linked still renders — as black — which would
+        // blank the photograph the canvas sits on. Check explicitly.
+        if (!gl.getProgramParameter(program.program, gl.LINK_STATUS)) {
+          setFailed(true);
+          return;
+        }
 
-        const loader = new THREE.TextureLoader();
-        loader.setCrossOrigin('anonymous');
+        // One fullscreen triangle rather than a quad: no diagonal seam, and one
+        // fewer vertex to transform.
+        const mesh = new OglMesh(gl, { geometry: new Triangle(gl), program });
 
         canvas.addEventListener('webglcontextlost', handleContextLost);
 
         disposeEngine = () => {
           canvas.removeEventListener('webglcontextlost', handleContextLost);
-          geometry.dispose();
-          material.dispose();
-          renderer.dispose();
-          renderer.forceContextLoss();
+          gl.getExtension('WEBGL_lose_context')?.loseContext();
         };
 
         engineRef.current = {
-          THREE,
           renderer,
-          material,
-          loader,
-          render: () => renderer.render(scene, camera),
+          program,
+          mesh,
+          gl,
+          // ogl binds sampler uniforms by dereferencing them, so a render
+          // before the first texture is assigned throws on a null uFrom/uTo.
+          // The sizing effect renders as soon as the canvas is measured, which
+          // is before any image has decoded, so the guard belongs here rather
+          // than at each call site.
+          render: () => {
+            if (!program.uniforms.uTo.value || !program.uniforms.uFrom.value) return;
+            renderer.render({ scene: mesh });
+          },
         };
         setEngineReady(true);
       })
@@ -248,10 +265,15 @@ export default function HeroShaderTransition({
         cancelAnimationFrame(frameRef.current);
         frameRef.current = null;
       }
+
+      const gl = engineRef.current?.gl;
+      for (const texture of textures.values()) {
+        if (gl && texture.texture) gl.deleteTexture(texture.texture);
+      }
+      textures.clear();
+
       disposeEngine?.();
       engineRef.current = null;
-      for (const texture of textures.values()) texture.dispose();
-      textures.clear();
     };
   }, []);
 
@@ -265,19 +287,24 @@ export default function HeroShaderTransition({
       const { clientWidth, clientHeight } = canvas;
       if (!clientWidth || !clientHeight) return;
 
-      engine.renderer.setSize(clientWidth, clientHeight, false);
-      engine.material.uniforms.uResolution.value.set(clientWidth, clientHeight);
+      engine.renderer.setSize(clientWidth, clientHeight);
+      // setSize writes inline pixel width/height onto the canvas, which would
+      // override the stylesheet's 100%/100% and stop it tracking the hero box.
+      canvas.style.width = '';
+      canvas.style.height = '';
+
+      engine.program.uniforms.uResolution.value.set([clientWidth, clientHeight]);
 
       // Reframe both textures: a resize changes the cover crop.
       for (const [textureKey, frameKey] of [
         ['uFrom', 'uFromFrame'],
         ['uTo', 'uToFrame'],
       ] as const) {
-        const texture = engine.material.uniforms[textureKey].value as THREE_NS.Texture | null;
+        const texture = engine.program.uniforms[textureKey].value as Texture | null;
         const image = texture?.image as { width: number; height: number } | undefined;
         if (!image) continue;
 
-        engine.material.uniforms[frameKey].value.fromArray(
+        engine.program.uniforms[frameKey].value.set(
           computeFrame(image.width, image.height, clientWidth, clientHeight, focalRef.current),
         );
       }
@@ -314,7 +341,7 @@ export default function HeroShaderTransition({
         return;
       }
 
-      const { uniforms } = engine.material;
+      const { uniforms } = engine.program;
       const image = texture.image as { width: number; height: number };
       const frame = computeFrame(
         image.width,
@@ -324,18 +351,18 @@ export default function HeroShaderTransition({
         focalRef.current,
       );
 
-      const previous = uniforms.uTo.value as THREE_NS.Texture | null;
+      const previous = uniforms.uTo.value as Texture | null;
       const isFirstFrame = previous === null;
 
       uniforms.uFrom.value = previous ?? texture;
-      uniforms.uFromFrame.value.copy(uniforms.uToFrame.value);
+      uniforms.uFromFrame.value.set(uniforms.uToFrame.value);
       uniforms.uTo.value = texture;
-      uniforms.uToFrame.value.fromArray(frame);
+      uniforms.uToFrame.value.set(frame);
 
       // The very first texture appears without a dissolve — there is nothing to
       // dissolve from, and animating here would fight the <img> fade-in.
       if (isFirstFrame) {
-        uniforms.uFromFrame.value.fromArray(frame);
+        uniforms.uFromFrame.value.set(frame);
         uniforms.uProgress.value = 1;
         engine.render();
         if (!cancelled) setReady(true);
@@ -376,44 +403,6 @@ export default function HeroShaderTransition({
     };
   }, [src, engineReady, durationMs, failed, acquireTexture]);
 
-  // ── Next-slide prewarm ────────────────────────────────────────────────────
-  // Without this the canvas holds the previous photograph while the incoming
-  // one decodes, so the caption and dots change before the image does. Decode
-  // during idle time instead, after the current slide has settled.
-  useEffect(() => {
-    if (!engineReady || failed || !preloadSrc || preloadSrc === src) return;
-    if (texturesRef.current.has(preloadSrc)) return;
-
-    let cancelled = false;
-
-    const idleWindow = window as Window & {
-      requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number;
-      cancelIdleCallback?: (handle: number) => void;
-    };
-
-    const warm = () => {
-      if (cancelled) return;
-      // A prewarm failure is not fatal: the slide effect will retry this URL
-      // when it actually becomes current, and decide about failing then.
-      acquireTexture(preloadSrc).catch(() => {});
-    };
-
-    let idleId: number | undefined;
-    let timeoutId: number | undefined;
-
-    if (idleWindow.requestIdleCallback) {
-      idleId = idleWindow.requestIdleCallback(warm, { timeout: 2000 });
-    } else {
-      timeoutId = window.setTimeout(warm, 1200);
-    }
-
-    return () => {
-      cancelled = true;
-      if (idleId !== undefined) idleWindow.cancelIdleCallback?.(idleId);
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
-    };
-  }, [engineReady, preloadSrc, src, failed, acquireTexture]);
-
   // Land an in-flight dissolve on its final frame when the tab is hidden, so
   // returning to it never shows a transition frozen half-way.
   useEffect(() => {
@@ -424,7 +413,7 @@ export default function HeroShaderTransition({
 
       cancelAnimationFrame(frameRef.current);
       frameRef.current = null;
-      engine.material.uniforms.uProgress.value = 1;
+      engine.program.uniforms.uProgress.value = 1;
       engine.render();
     };
 
