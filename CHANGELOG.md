@@ -8,6 +8,15 @@
 - Dropped `<image:title>`, `<image:caption>`, `<image:license>` and `<image:geo_location>`. Google removed them from its documentation and reads only `<image:loc>`; emitting the rest implied coverage that was not there.
 - The per-URL cap was 500 against a protocol ceiling of 1,000, which was silently discarding 87 concert frames — unreachable to exactly the crawlers this sitemap exists for. Raised to the real limit: 1,577 image entries becomes 2,164, and concerts is complete at 587. Events still trims, at 1,635, but that is now the protocol's limit rather than an arbitrary one.
 
+### The Hero Dissolves Between Frames, and Picks the Right One
+
+- The hero cut between slides by swapping the `<img>` outright: skeleton, then a fade-in. It now dissolves on the GPU — both photographs sampled together and mixed across a swept noise threshold, pushed slightly apart at the midpoint so the change reads as a shift rather than a crossfade. Midtone-weighted film grain and a soft vignette are applied in the same pass, deliberately restrained: this sits over Caleb's own grading.
+- The layer is additive only. The `<img>` stays in the DOM as the LCP element, the accessible content, and what crawlers see; the canvas is `aria-hidden` and fades in once it has drawn. Every failure path unmounts it and leaves the original carousel — no WebGL context, a program that will not link, a texture that cannot be sampled, a lost context. It declines to run at all under `prefers-reduced-motion`, Save-Data, a slow `effectiveType`, or `deviceMemory` under 4GB.
+- Built on `ogl`, not three.js. This draws one fullscreen triangle from a hand-written shader, which was roughly 3% of three's API for 181KB gzip. The `ogl` chunk is 14KB — a 167KB saving — and is still fetched only after the hero has painted, so the homepage's entry chunk is unchanged.
+- A 2:3 studio portrait showed barely half its height across the desktop hero, and the square Logan frame lost a third of its own. Hero variants can now be tagged with the shape they were composed for, and selection filters to the current breakpoint: the 3:2 Liam frames carry the desktop band, the 2:3 Logan and Helen frames carry the phone column. Letterboxing portraits over a blurred copy of themselves was tried first and rejected — it works, but it is a music-player convention and reads as filler on a photographer's own site.
+- Every hero image request now uses one credentials mode. The `<img>`, the `rel=preload` in `index.html`, the idle preloader, and the WebGL texture fetch all set `crossorigin=anonymous`; a CORS and a no-CORS request for the same URL are separate cache entries, so mixing them downloaded each photograph twice. The texture also samples the exact variant the browser resolved from `srcSet` rather than a fixed 1920px URL, which was a second copy on every phone.
+- `check-performance-budget.js` no longer fails on GL driver *performance* hints. Headless CI renders WebGL in software and reports things like "GPU stall due to ReadPixels" that say nothing about the site; genuine WebGL errors still fail the budget.
+
 ## 2026-08-27
 
 ### Blog/Portfolio Cross-Linking and a Photojournalism Excerpt Rewrite
@@ -93,7 +102,6 @@
 
 - `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` were JPEGs with a `.png` extension. Browsers sniff content so they displayed correctly, which is why this went unnoticed — but they were served with the wrong Content-Type, and `exiftool` cannot write rights metadata to a file whose extension contradicts its contents.
 - Renamed to `.jpg` with `git mv`, caption keys updated, and every manifest that referenced them regenerated. This mattered more than it looked: the Tim Walz event has exactly one image, and that file was it.
-
 
 ## 2026-08-11
 

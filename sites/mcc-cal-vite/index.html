@@ -47,6 +47,10 @@
           var link = document.createElement('link');
           link.rel = 'preload';
           link.as = 'image';
+          // The hero <img> requests with crossorigin=anonymous, so this must
+          // too or the preload is discarded for a credentials-mode mismatch
+          // and the LCP image is downloaded twice.
+          link.crossOrigin = 'anonymous';
           link.href = base + '1920';
           link.setAttribute('imagesrcset', widths.map(function (width) {
             return base + width + ' ' + width + 'w';

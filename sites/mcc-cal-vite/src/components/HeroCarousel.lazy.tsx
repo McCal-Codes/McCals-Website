@@ -404,6 +404,10 @@ const HeroCarousel: React.FC = () => {
     const preload = () => {
       const image = new Image();
       image.decoding = 'async';
+      // Must match the <img> and the rel=preload: a request in a different
+      // credentials mode is a separate cache entry, so the warmed bytes go
+      // unused and the browser fetches the photograph again.
+      image.crossOrigin = 'anonymous';
       image.src = getOptimizedImageUrl(nextSlideImage.image, { width: HERO_OPTIMIZED_WIDTH });
     };
 

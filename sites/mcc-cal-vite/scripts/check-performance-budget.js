@@ -58,10 +58,19 @@ async function measureRoute(browser, route, viewportName, viewport) {
   // a local `vite preview`, which would otherwise fail every route in this check.
   const isEdgeOnlyPath = (url) => new URL(url).pathname.startsWith('/_vercel/');
 
+  // Performance hints emitted by the GL driver itself, not by page code. Headless
+  // CI renders WebGL in software, where compositing the hero canvas reports things
+  // like "GPU stall due to ReadPixels" that say nothing about the site and do not
+  // occur on real hardware. Only the Performance category is ignored, so genuine
+  // WebGL errors still fail the budget.
+  const isGlDriverPerformanceHint = (text) =>
+    /^\[\.WebGL-[^\]]*\]GL Driver Message \(\w+, Performance,/.test(text);
+
   page.on('console', (message) => {
     if (!['warning', 'error'].includes(message.type())) return;
     const url = message.location()?.url;
     if (url && isEdgeOnlyPath(url)) return;
+    if (isGlDriverPerformanceHint(message.text())) return;
     consoleIssues.push(`${message.type()}: ${message.text()}`);
   });
 
