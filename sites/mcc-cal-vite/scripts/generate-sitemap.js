@@ -198,8 +198,14 @@ function urlEntry({ loc, lastmod, images = [] }) {
 const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
 const PORTFOLIOS_BASE = 'src/images/Portfolios';
 
-/** Google allows 1,000 images per <url>; staying well under leaves room to grow. */
-const MAX_IMAGES_PER_URL = 500;
+/**
+ * The sitemap protocol's own ceiling. Held at the limit rather than below it:
+ * this sitemap exists because the portfolios render client-side and a crawler
+ * that does not run JavaScript sees none of the photographs, so an image
+ * dropped here is an image that cannot be found at all. At 500 the concerts
+ * gallery silently lost 87 frames.
+ */
+const MAX_IMAGES_PER_URL = 1000;
 
 function encodeURIPath(value) {
   return value.split('/').map(encodeURIComponent).join('/');
