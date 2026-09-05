@@ -5,11 +5,25 @@ export interface HeroFocalPoint {
   y: number;
 }
 
+/**
+ * Which hero shape a frame was composed for.
+ *
+ * The hero is a wide band on a desktop and a tall column on a phone, and one
+ * frame rarely reads well as both: a 2:3 studio portrait shows barely half its
+ * height across a desktop hero, while a wide landscape loses its subject on a
+ * phone. Tagging a variant restricts it to the shape it suits, so each
+ * breakpoint gets a frame chosen for it rather than a compromise crop.
+ *
+ * Leave it off when a frame works either way, which most reportage does.
+ */
+export type HeroViewport = 'mobile' | 'desktop';
+
 export interface HeroSlideVariant {
   image: string;
   alt: string;
   focalPointMobile?: HeroFocalPoint;
   focalPointDesktop?: HeroFocalPoint;
+  viewport?: HeroViewport;
 }
 
 export interface HeroSlide extends HeroSlideVariant {
@@ -83,16 +97,20 @@ export const FAVORITE_HERO_SLIDES: HeroSlide[] = [
   {
     title: 'Portraits',
     meta: 'Portraits',
-    image: imageUrl.portrait('Studio/Logan Spiker', 'Studio with logan0066.jpg'),
+    image: imageUrl.portrait(
+      'Studio/Liam Sulivan',
+      '250425_Excused Chao\u2019s with Liam _CAL3563-min.jpg',
+    ),
     href: '/portraits',
     links: [
       { url: '/portraits', label: 'Portraits' },
       { url: '/portraits', label: 'Portrait Gallery' },
     ],
     cta: 'Portraits',
-    alt: 'Studio portrait of Logan Spiker.',
-    focalPointMobile: { x: 0.52, y: 0.42 },
+    alt: 'Studio portrait of Liam Sulivan.',
+    focalPointMobile: { x: 0.5, y: 0.42 },
     focalPointDesktop: { x: 0.5, y: 0.5 },
+    viewport: 'desktop',
   },
   {
     title: 'Corporate',
@@ -306,23 +324,41 @@ export const HERO_IMAGE_VARIANTS: Record<string, HeroSlideVariant[]> = {
     },
   ],
   Portraits: [
+    // Desktop: 3:2 frames that fill the wide band without losing the subject.
     {
-      image: imageUrl.portrait('Studio/Logan Spiker', 'Studio with logan0066.jpg'),
-      alt: 'Studio portrait of Logan Spiker.',
-      focalPointMobile: { x: 0.52, y: 0.42 },
-      focalPointDesktop: { x: 0.5, y: 0.5 },
+      image: imageUrl.portrait(
+        'Studio/Liam Sulivan',
+        '250425_Excused Chao\u2019s with Liam _CAL3562-min.jpg',
+      ),
+      alt: 'Studio portrait of Liam Sulivan.',
+      focalPointMobile: { x: 0.5, y: 0.4 },
+      focalPointDesktop: { x: 0.5, y: 0.46 },
+      viewport: 'desktop',
     },
     {
-      image: imageUrl.portrait('Studio/Liam Sulivan', '250425_Excused Chao’s with Liam _CAL3563-min.jpg'),
+      image: imageUrl.portrait(
+        'Studio/Liam Sulivan',
+        '250425_Excused Chao\u2019s with Liam _CAL3554-min.jpg',
+      ),
       alt: 'Studio portrait of Liam Sulivan.',
+      focalPointMobile: { x: 0.5, y: 0.4 },
+      focalPointDesktop: { x: 0.5, y: 0.46 },
+      viewport: 'desktop',
+    },
+    // Mobile: 2:3 frames, which the tall column shows almost entire.
+    {
+      image: imageUrl.portrait('Studio/Logan Spiker', 'Studio with logan0060.jpg'),
+      alt: 'Studio portrait of Logan Spiker.',
       focalPointMobile: { x: 0.52, y: 0.38 },
-      focalPointDesktop: { x: 0.5, y: 0.5 },
+      focalPointDesktop: { x: 0.5, y: 0.42 },
+      viewport: 'mobile',
     },
     {
       image: imageUrl.portrait('Studio/Helen Wise', '240528_Helen Wise_1639_CAL_Compressed.jpg'),
       alt: 'Studio portrait of Helen Wise.',
       focalPointMobile: { x: 0.48, y: 0.36 },
-      focalPointDesktop: { x: 0.5, y: 0.5 },
+      focalPointDesktop: { x: 0.5, y: 0.4 },
+      viewport: 'mobile',
     },
   ],
   Corporate: [

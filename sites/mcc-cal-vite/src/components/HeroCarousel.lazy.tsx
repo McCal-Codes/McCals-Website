@@ -8,6 +8,7 @@ import {
   type HeroFocalPoint,
   type HeroSlide,
   type HeroSlideVariant,
+  type HeroViewport,
 } from './heroSlides';
 import {
   getOptimizedImageUrl,
@@ -125,13 +126,36 @@ const getBaseVariant = (slide: HeroSlide): HeroSlideVariant => ({
   alt: slide.alt,
   focalPointMobile: slide.focalPointMobile,
   focalPointDesktop: slide.focalPointDesktop,
+  viewport: slide.viewport,
 });
 
-const resolveSlideVariant = (slide: HeroSlide, variantPool = HERO_IMAGE_VARIANTS): HeroSlide => {
-  const options: [HeroSlideVariant, ...HeroSlideVariant[]] = [
-    getBaseVariant(slide),
-    ...(variantPool[slide.cta] ?? []),
-  ];
+const getViewport = (isDesktop: boolean): HeroViewport => (isDesktop ? 'desktop' : 'mobile');
+
+/**
+ * Narrows a variant pool to the frames composed for the current hero shape.
+ * An untagged variant suits either, so it always stays in.
+ *
+ * Falls back to the unfiltered pool if tagging leaves nothing: a slide whose
+ * frames are all tagged for the other breakpoint should still show a
+ * photograph rather than nothing at all.
+ */
+export const variantsForViewport = (
+  options: HeroSlideVariant[],
+  viewport: HeroViewport,
+): HeroSlideVariant[] => {
+  const matching = options.filter((option) => !option.viewport || option.viewport === viewport);
+  return matching.length > 0 ? matching : options;
+};
+
+const resolveSlideVariant = (
+  slide: HeroSlide,
+  variantPool = HERO_IMAGE_VARIANTS,
+  isDesktop = false,
+): HeroSlide => {
+  const options = variantsForViewport(
+    [getBaseVariant(slide), ...(variantPool[slide.cta] ?? [])],
+    getViewport(isDesktop),
+  );
   const selected = options[Math.floor(Math.random() * options.length)] ?? options[0];
 
   return {
@@ -143,11 +167,17 @@ const resolveSlideVariant = (slide: HeroSlide, variantPool = HERO_IMAGE_VARIANTS
 const getInitialSlides = (
   sourceSlides = FAVORITE_HERO_SLIDES,
   variantPool: Record<string, HeroSlideVariant[]> = HERO_IMAGE_VARIANTS,
+  isDesktop = false,
 ) => {
   return sourceSlides.map((slide, index) =>
-    index === 0 ? slide : resolveSlideVariant(slide, variantPool)
+    // Slide 0 is what index.html preloads and is the LCP element, so it is
+    // never re-picked; its own frame has to work at both sizes.
+    index === 0 ? slide : resolveSlideVariant(slide, variantPool, isDesktop)
   );
 };
+
+const getIsDesktop = () =>
+  typeof window !== 'undefined' && window.innerWidth >= DESKTOP_BREAKPOINT;
 
 interface ImageStatus {
   src: string;
@@ -161,7 +191,7 @@ const HeroCarousel: React.FC = () => {
   const [isFocusPaused, setIsFocusPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isDocumentVisible, setIsDocumentVisible] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(getIsDesktop);
   const [imageStatus, setImageStatus] = useState<ImageStatus>({
     src: '',
     loaded: false,
@@ -173,7 +203,13 @@ const HeroCarousel: React.FC = () => {
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   // Start immediately with hardcoded slides; replace with Supabase data if it arrives
-  const [slides, setSlides] = useState<HeroSlide[]>(() => getInitialSlides());
+  const [slideSource, setSlideSource] = useState<{
+    slides: HeroSlide[];
+    variants: Record<string, HeroSlideVariant[]>;
+  }>(() => ({ slides: FAVORITE_HERO_SLIDES, variants: HERO_IMAGE_VARIANTS }));
+  const [slides, setSlides] = useState<HeroSlide[]>(() =>
+    getInitialSlides(FAVORITE_HERO_SLIDES, HERO_IMAGE_VARIANTS, getIsDesktop()),
+  );
 
   // Slide 0 of FAVORITE_HERO_SLIDES is what index.html preloads, and it is the LCP
   // element. Fetching Supabase slides during first paint could replace slide 0 with
@@ -199,7 +235,7 @@ const HeroCarousel: React.FC = () => {
         .then(data => {
           if (timeout !== null) clearTimeout(timeout);
           if (cancelled || !data || data.slides.length === 0) return;
-          setSlides(getInitialSlides(data.slides, data.variants));
+          setSlideSource({ slides: data.slides, variants: data.variants });
           // Clamp index in case new slide count is smaller
           setCurrentSlideIndex(prev => Math.min(prev, data.slides.length - 1));
         })
@@ -221,6 +257,20 @@ const HeroCarousel: React.FC = () => {
       controller.abort();
     };
   }, []);
+
+  // Re-pick variants when the slide source changes or the hero crosses the
+  // breakpoint, so a desktop frame is never left on a phone-shaped hero.
+  // Skipped on mount: the initial state already picked for this breakpoint,
+  // and re-running here would swap the hero image immediately after paint.
+  const hasPickedRef = useRef(false);
+
+  useEffect(() => {
+    if (!hasPickedRef.current) {
+      hasPickedRef.current = true;
+      return;
+    }
+    setSlides(getInitialSlides(slideSource.slides, slideSource.variants, isDesktop));
+  }, [slideSource, isDesktop]);
 
   const currentSlide = slides[currentSlideIndex];
   const imageLoaded = imageStatus.src === currentSlide?.image && imageStatus.loaded;
