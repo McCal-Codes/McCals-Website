@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-09-08
+
+### The Calendar Event Would Have Broken Booking, Not Completed It
+
+- Adding Google Calendar credentials was the last step to making bookings land on a real calendar. It would instead have broken them. The event carried `attendees: [{ email: requester.email }]`, and Google refuses that from a service account without Domain-Wide Delegation. The refusal is not survivable: `createCalendarEvent` throws on a non-OK response and the throw escapes before the Supabase insert and before both confirmation emails, so every booking would have lost its record and its emails along with the calendar entry. Bookings work today only because the credentials are absent and the handler takes the mock path.
+- The requester is not left without a calendar entry. Their confirmation already carries an RFC 5545 invite as an attachment and an Add to Google Calendar link, and the attachment sets `METHOD:REQUEST` so mail clients treat it as an invitation. What is given up against Domain-Wide Delegation is RSVP tracking; what is avoided is granting a service account the right to impersonate users across the whole Workspace domain in order to run a booking form.
+- `calendar-event.static.test.ts` pins it. The field is an easy one to re-add while reading the code, and the failure only appears once credentials exist, which is the worst time to find out. Verified by re-adding the field and watching the guard fail.
+- The token request asked for the full `calendar` scope, which permits sharing and permanently deleting entire calendars, for a route that creates one event and lists events to check conflicts. It now asks for `calendar.events`. Google's guidance is to choose the most narrowly focused scope available.
+
+
 ## 2026-09-07
 
 ### Consent Decides Whether Anything Is Measured, and Now Something Is
