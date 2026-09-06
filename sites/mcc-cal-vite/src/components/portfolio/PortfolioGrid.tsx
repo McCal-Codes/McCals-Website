@@ -3,6 +3,8 @@ import type { PortfolioGroup } from './types';
 import PortfolioCard from './PortfolioCard';
 import PortfolioLoadMore from './PortfolioLoadMore';
 import { portfolioStyles } from './index';
+import { useLocation } from 'react-router-dom';
+import { trackImageView } from '@/utils/funnel';
 
 // Lazy load lightbox - only loaded when user clicks an image
 const PortfolioLightbox = lazy(() => import('./PortfolioLightbox'));
@@ -54,6 +56,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   );
   const [visible, setVisible] = useState(() => getResponsiveInitialCount(initialCount, resolvedWideInitialCount));
   const [activeLightbox, setActiveLightbox] = useState<ActiveLightbox | null>(null);
+  const gallery = useLocation().pathname.replace(/^\//, '') || 'home';
   const [toastVisible, setToastVisible] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const openerRef = useRef<HTMLElement | null>(null);
@@ -105,10 +108,17 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
     toastTimer.current = setTimeout(() => setToastVisible(false), 2200);
   }, []);
 
-  const handleOpen = useCallback((group: PortfolioGroup) => {
-    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    setActiveLightbox({ group, initialIndex: 0 });
-  }, []);
+  const handleOpen = useCallback(
+    (group: PortfolioGroup) => {
+      // The route is the gallery, so no prop threading is needed to say which
+      // one this is. The group id is the same public slug the manifest exposes.
+      trackImageView(gallery, group.id);
+      openerRef.current =
+        document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      setActiveLightbox({ group, initialIndex: 0 });
+    },
+    [gallery],
+  );
 
   const handleClose = useCallback(() => {
     setActiveLightbox(null);

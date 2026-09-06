@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import styles from './forms.module.css';
+import { trackFormError, trackFormStart, trackFormStep, trackLead } from '@/utils/funnel';
 
 const DRAFT_KEY = 'mcc_quote_draft_v2';
 
@@ -101,6 +102,12 @@ export function QuoteRequestForm() {
 
   const isEvent = state.service_type === 'Event Photography';
 
+  // Fires once on mount so the funnel has a denominator: without a "reached the
+  // form" event there is nothing to measure submissions against.
+  useEffect(() => {
+    trackFormStart('quote');
+  }, []);
+
   useEffect(() => {
     const t = window.setTimeout(() => saveDraft(state), 400);
     return () => window.clearTimeout(t);
@@ -158,13 +165,19 @@ export function QuoteRequestForm() {
 
   const goNext = useCallback(() => {
     if (!validateStep(step)) return;
-    setStep((prev) => Math.min(prev + 1, totalSteps));
+    const next = Math.min(step + 1, totalSteps);
+    // Recorded per step: a single submit event cannot show which of the three
+    // steps a visitor abandoned, and this form saves drafts, so drop-off is real.
+    trackFormStep('quote', next, 'forward');
+    setStep(next);
   }, [step, totalSteps, validateStep]);
 
   const goBack = useCallback(() => {
     setFieldErrors({});
-    setStep((prev) => Math.max(prev - 1, 1));
-  }, []);
+    const previous = Math.max(step - 1, 1);
+    trackFormStep('quote', previous, 'back');
+    setStep(previous);
+  }, [step]);
 
   const submit = useCallback(
     async (e: React.FormEvent) => {
@@ -215,12 +228,18 @@ export function QuoteRequestForm() {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
 
         if (!res.ok) {
+          trackFormError('quote', String(res.status));
           setBanner({
             type: 'error',
             text: data.error || 'Could not send your request. Try again.',
           });
           return;
         }
+
+        trackLead('quote', {
+          service_type: state.service_type || 'unspecified',
+          budget: state.budget || 'unspecified',
+        });
 
         try {
           localStorage.removeItem(DRAFT_KEY);
@@ -234,6 +253,7 @@ export function QuoteRequestForm() {
         setState(defaultState());
         setStep(1);
       } catch {
+        trackFormError('quote', 'network');
         setBanner({
           type: 'error',
           text: 'Network error. Email contact@mcc-cal.com if this keeps happening.',

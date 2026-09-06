@@ -8,6 +8,7 @@ import type {
 import { getBookingTypeById } from '../config/bookingTypes';
 import { getRequesterTimezone, OWNER_TIMEZONE } from '../utils/timezone';
 import type { Booking } from '../types/booking';
+import { trackBookingStep, trackFormError, trackLead } from '@/utils/funnel';
 import { formatDateForInput, addDays } from '../utils/dateHelpers';
 
 interface UseBookingReturn {
@@ -85,6 +86,7 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
   }, [state.selectedEventType, reloadKey]);
 
   const selectDate = useCallback((date: string) => {
+    trackBookingStep(eventTypeId, 'date_selected');
     setState((prev) => ({
       ...prev,
       step: 'selecting-time',
@@ -92,16 +94,17 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
       selectedTime: null,
       error: null,
     }));
-  }, []);
+  }, [eventTypeId]);
 
   const selectTime = useCallback((time: string) => {
+    trackBookingStep(eventTypeId, 'time_selected');
     setState((prev) => ({
       ...prev,
       step: 'entering-details',
       selectedTime: time,
       error: null,
     }));
-  }, []);
+  }, [eventTypeId]);
 
   const submitBookingDetails = useCallback(async (info: RequesterInfo, hpField = '') => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
@@ -154,6 +157,9 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
         ownerTimezone: OWNER_TIMEZONE,
       };
 
+      trackBookingStep(eventTypeId, 'confirmed');
+      trackLead('booking', { booking_type: eventTypeId });
+
       setState((prev) => ({
         ...prev,
         step: 'confirmed',
@@ -162,13 +168,14 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
         requesterInfo: info,
       }));
     } catch (err) {
+      trackFormError('booking', err instanceof Error ? err.message.slice(0, 60) : 'unknown');
       setState((prev) => ({
         ...prev,
         isLoading: false,
         error: err instanceof Error ? err.message : 'Failed to create booking',
       }));
     }
-  }, [state.selectedEventType, state.selectedDate, state.selectedTime]);
+  }, [eventTypeId, state.selectedEventType, state.selectedDate, state.selectedTime]);
 
   const goBack = useCallback(() => {
     setState((prev) => {
