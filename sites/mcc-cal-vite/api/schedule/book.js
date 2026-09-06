@@ -9,7 +9,7 @@ import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 import { applyCors } from '../_lib/cors.js';
 import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
 import { captureApiException } from '../_lib/sentry.js';
-import { BOOKING_CONFIGS } from '../_lib/booking-config.js';
+import { BOOKING_CONFIGS, resolveLocation } from '../_lib/booking-config.js';
 import { buildBookingEmails } from '../_lib/booking-emails.js';
 import { OWNER_TIMEZONE, ownerWallTimeToUtc } from '../_lib/timezone.js';
 import { buildManageUrl, createManageToken } from '../_lib/booking-token.js';
@@ -86,8 +86,12 @@ async function getAccessToken() {
 }
 
 async function createCalendarEvent(accessToken, bookingData) {
-  const { eventTypeId, date, time, durationMinutes, requester } = bookingData;
+  const { eventTypeId, date, time, durationMinutes, requester, locationMode, locationDetail } =
+    bookingData;
   const config = BOOKING_CONFIGS[eventTypeId];
+  // The calendar event must carry the same address the emails do, or an
+  // in-person booking shows "Google Meet" on the day.
+  const location = resolveLocation(config, locationMode, locationDetail);
 
   const startDateTime = ownerWallTimeToUtc(date, time);
   const endDateTime = new Date(startDateTime);
@@ -104,7 +108,7 @@ async function createCalendarEvent(accessToken, bookingData) {
       dateTime: endDateTime.toISOString(),
       timeZone: requester.timezone || 'America/New_York',
     },
-    location: config.location,
+    location: location.label,
     attendees: [{ email: requester.email }],
     reminders: {
       useDefault: false,
@@ -218,22 +222,28 @@ async function sendConfirmationEmail(
     requesterTimezone,
     manageUrl,
     ownerEmail: TO_EMAIL,
+    location,
   });
 
   try {
     await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: booking.requester.email,
+      replyTo: TO_EMAIL,
       subject: emails.requester.subject,
       attachments: emails.attachments,
       html: emails.requester.html,
+      text: emails.requester.text,
     });
 
     await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: TO_EMAIL,
+      // Replying to the notification reaches the person who booked.
+      replyTo: emails.owner.replyTo,
       subject: emails.owner.subject,
       attachments: emails.attachments,
+      html: emails.owner.html,
       text: emails.owner.text,
     });
   } catch (err) {
@@ -266,7 +276,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { eventTypeId, date, time, durationMinutes, requester, requesterTimezone } = parsed.data;
+  const { eventTypeId, date, time, durationMinutes, requester, requesterTimezone, locationMode, locationDetail } = parsed.data;
 
   // Validation
   if (!eventTypeId || !date || !time || !durationMinutes || !requester?.name || !requester?.email) {
@@ -293,6 +303,9 @@ export default async function handler(req, res) {
   // link refer to the same token; the raw value is never persisted.
   const manageToken = createManageToken();
   const manageUrl = buildManageUrl(manageToken.token);
+
+  // Virtual unless the requester asked to meet in person and said where.
+  const location = resolveLocation(config, locationMode, locationDetail);
 
   // Development mode: return mock booking without external services
   const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
@@ -367,6 +380,7 @@ export default async function handler(req, res) {
           booking_time: time,
           duration_minutes: durationMinutes,
           notes: requester.notes || null,
+          location: location.label,
           status: 'confirmed',
           deposit_paid: false,
           total_amount: null,
@@ -456,6 +470,7 @@ export default async function handler(req, res) {
           booking_time: time,
           duration_minutes: durationMinutes,
           notes: requester.notes || null,
+          location: location.label,
           status: 'confirmed',
           deposit_paid: false,
           total_amount: null,

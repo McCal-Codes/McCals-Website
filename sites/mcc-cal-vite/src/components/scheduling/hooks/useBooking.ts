@@ -7,7 +7,7 @@ import type {
 } from '../types/booking';
 import { getBookingTypeById } from '../config/bookingTypes';
 import { getRequesterTimezone, OWNER_TIMEZONE } from '../utils/timezone';
-import type { Booking } from '../types/booking';
+import type { Booking, LocationMode } from '../types/booking';
 import { trackBookingStep, trackFormError, trackLead } from '@/utils/funnel';
 import { formatDateForInput, addDays } from '../utils/dateHelpers';
 
@@ -15,7 +15,11 @@ interface UseBookingReturn {
   state: BookingState;
   selectDate: (date: string) => void;
   selectTime: (time: string) => void;
-  submitBookingDetails: (info: RequesterInfo, hpField?: string) => Promise<void>;
+  submitBookingDetails: (
+    info: RequesterInfo,
+    hpField?: string,
+    place?: { locationMode: LocationMode; locationDetail: string },
+  ) => Promise<void>;
   goBack: () => void;
   reset: () => void;
   availability: DayAvailability[];
@@ -106,7 +110,11 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
     }));
   }, [eventTypeId]);
 
-  const submitBookingDetails = useCallback(async (info: RequesterInfo, hpField = '') => {
+  const submitBookingDetails = useCallback(async (
+    info: RequesterInfo,
+    hpField = '',
+    place?: { locationMode: LocationMode; locationDetail: string },
+  ) => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     // An HTTP failure is classified at the point it happens and then rethrown,
@@ -131,9 +139,12 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
           requester: info,
           requesterTimezone,
           // Honeypot. The server drops the request when this is non-empty, so
-          // the name has to match what it reads (`hp_field`) — the form used to
+          // the name has to match what it reads (`hp_field`). The form used to
           // call it `website` and never sent it, leaving nothing to check.
           hp_field: hpField,
+          // Absent means virtual, which the server treats as the default.
+          locationMode: place?.locationMode,
+          locationDetail: place?.locationDetail || undefined,
         }),
       });
 
@@ -148,8 +159,8 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
         throw new Error(data.error || 'Failed to create booking');
       }
 
-      // The API returns only what the calendar owns — id, start, end and
-      // eventLink — while `Booking` (and ConfirmationView) also need the date,
+      // The API returns only what the calendar owns: id, start, end and
+      // eventLink, while `Booking` (and ConfirmationView) also need the date,
       // time and requester. Reading those straight off `data.booking` left
       // `requester` undefined, so the confirmation screen threw on
       // `booking.requester.notes` and every successful booking ended in the
@@ -165,6 +176,10 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
         createdAt: new Date().toISOString(),
         requesterTimezone,
         ownerTimezone: OWNER_TIMEZONE,
+        location:
+          place?.locationMode === 'in-person' && place.locationDetail
+            ? place.locationDetail
+            : state.selectedEventType!.location,
       };
 
       trackBookingStep(eventTypeId, 'confirmed');

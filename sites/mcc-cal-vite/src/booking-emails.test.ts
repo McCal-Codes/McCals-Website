@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildBookingEmails } from '../api/_lib/booking-emails.js';
-import { BOOKING_CONFIGS } from '../api/_lib/booking-config.js';
+import { BOOKING_CONFIGS, resolveLocation } from '../api/_lib/booking-config.js';
 
 const config = BOOKING_CONFIGS['book-podcast'];
 
@@ -40,7 +40,7 @@ describe('booking confirmation emails', () => {
     });
 
     expect(owner.text).toContain('9:00 AM EDT');
-    expect(owner.text).toContain('Their timezone: America/Los_Angeles');
+    expect(owner.text).toContain('Their local time: 6:00 AM PDT (America/Los_Angeles)');
     expect(owner.text).toContain('6:00 AM PDT');
   });
 
@@ -53,7 +53,9 @@ describe('booking confirmation emails', () => {
 
     expect(requester.html).toContain('Book a Podcast Recording');
     expect(requester.html).toContain('60 minutes');
-    expect(requester.html).toContain('Virtual (Zoom or Google Meet)');
+    // Both parts are sent; the text alternative must carry the same facts.
+    expect(requester.text).toContain('Book a Podcast Recording');
+    expect(requester.html).toContain('Zoom or Google Meet');
     expect(requester.html).toContain('Excited to chat');
     expect(owner.text).toContain('Excited to chat');
   });
@@ -128,5 +130,57 @@ describe('booking confirmation emails', () => {
     });
 
     expect(requester.html).not.toContain('Your notes:');
+  });
+});
+
+describe('in-person bookings', () => {
+  it('falls back to virtual when in person is chosen without an address', () => {
+    // Better quietly virtual than a calendar entry that says "in person" and
+    // gives nowhere to go.
+    expect(resolveLocation(config, 'in-person', '   ')).toEqual({
+      label: config.location,
+      isInPerson: false,
+    });
+    expect(resolveLocation(config, 'in-person', undefined).isInPerson).toBe(false);
+  });
+
+  it('uses the supplied address when meeting in person', () => {
+    expect(resolveLocation(config, 'in-person', '  Commonplace Coffee, Pittsburgh  ')).toEqual({
+      label: 'Commonplace Coffee, Pittsburgh',
+      isInPerson: true,
+    });
+  });
+
+  it('ignores an address when the booking is virtual', () => {
+    expect(resolveLocation(config, 'virtual', 'Somewhere else').isInPerson).toBe(false);
+  });
+
+  it('puts the address in both emails and the calendar invite', () => {
+    const place = { label: 'Commonplace Coffee, Pittsburgh', isInPerson: true };
+    const { requester, owner, invite } = buildBookingEmails({
+      booking: makeBooking(),
+      config,
+      ownerEmail: 'contact@mcc-cal.com',
+      location: place,
+    });
+
+    expect(requester.html).toContain('Commonplace Coffee, Pittsburgh');
+    expect(requester.text).toContain('Commonplace Coffee, Pittsburgh');
+    expect(owner.html).toContain('In person');
+    // The calendar entry is what gets looked at on the day.
+    expect(invite).toContain('LOCATION:Commonplace Coffee');
+  });
+
+  it('tells the owner travel is involved, and does not claim so otherwise', () => {
+    const inPerson = buildBookingEmails({
+      booking: makeBooking(), config, ownerEmail: 'c@mcc-cal.com',
+      location: { label: 'Somewhere real', isInPerson: true },
+    });
+    expect(inPerson.owner.text).toContain('travel required');
+
+    const virtual = buildBookingEmails({
+      booking: makeBooking(), config, ownerEmail: 'c@mcc-cal.com',
+    });
+    expect(virtual.owner.text).not.toContain('travel required');
   });
 });

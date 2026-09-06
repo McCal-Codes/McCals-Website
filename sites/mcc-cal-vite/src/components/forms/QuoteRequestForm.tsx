@@ -248,7 +248,7 @@ export function QuoteRequestForm() {
         }
         setBanner({
           type: 'success',
-          text: "Thanks — your quote request was received. We'll follow up shortly.",
+          text: "Thanks, your quote request was received. We'll follow up shortly.",
         });
         setState(defaultState());
         setStep(1);
@@ -522,7 +522,7 @@ export function QuoteRequestForm() {
                     className={styles.input}
                     value={state.location}
                     onChange={(ev) => update('location', ev.target.value)}
-                    placeholder="Pittsburgh, PA — venue name"
+                    placeholder="Pittsburgh, PA (venue name)"
                   />
                 </div>
                 <div className={styles.field}>

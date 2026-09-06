@@ -10,7 +10,7 @@
  * decision, not an oversight: the consent UI lives only on the accessibility
  * page and there is no site-wide banner, so defaulting to denied would silence
  * analytics for every visitor who never opens that page. Serving EU visitors
- * properly requires a banner and an opt-in default — see the accessibility
+ * properly requires a banner and an opt-in default. See the accessibility
  * statement issue.
  */
 
@@ -48,7 +48,7 @@ export function readConsentPreferences(): ConsentPreferences | null {
 
 /**
  * True unless the visitor has explicitly turned analytics off. Absent or
- * unreadable preferences count as granted — see the note above.
+ * unreadable preferences count as granted. See the note above.
  */
 export function hasAnalyticsConsent(): boolean {
   const preferences = readConsentPreferences();

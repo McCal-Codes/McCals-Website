@@ -41,7 +41,7 @@ export function installGa4(): void {
   window.gtag = gtag;
 
   // Consent Mode v2. Google requires the default state to be declared before
-  // any tag loads or updates consent — setting it later has no effect. This
+  // any tag loads or updates consent. Setting it later has no effect. This
   // site runs no advertising, so every ad_* signal stays denied permanently.
   gtag('consent', 'default', {
     ad_storage: 'denied',

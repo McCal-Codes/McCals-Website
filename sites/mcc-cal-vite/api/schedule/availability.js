@@ -113,7 +113,7 @@ async function getSupabaseBookedSlots(startDate, endDate) {
   return (bookings || []).map(booking => {
     // booking_time is stored as owner-timezone wall clock (schedule/book.js
     // writes the slot's `time` straight through), so it must be converted the
-    // same way rather than read as UTC — otherwise conflict detection is off
+    // same way rather than read as UTC, otherwise conflict detection is off
     // by the zone offset and double-bookings slip through.
     const start = ownerWallTimeToUtc(booking.booking_date, booking.booking_time || '00:00:00');
     const end = new Date(start.getTime() + (booking.duration_minutes || 60) * 60_000);
@@ -219,7 +219,7 @@ export default async function handler(req, res) {
    * configured for that weekday, each carrying the notice period of the window
    * it came from.
    *
-   * Returns an empty array when the day is closed — no rule covers that
+   * Returns an empty array when the day is closed, no rule covers that
    * weekday, or a blackout range hits it. Windows may overlap (free time
    * either side of a shift often abuts it), so starts are de-duplicated, and
    * where two windows offer the same start the shorter notice wins.

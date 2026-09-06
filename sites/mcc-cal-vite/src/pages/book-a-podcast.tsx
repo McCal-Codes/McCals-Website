@@ -8,7 +8,7 @@ import { ConfirmationView } from '@/components/scheduling/components/Confirmatio
 import { getBookingType } from '@/components/scheduling/config/bookingTypes';
 import { PODCAST_IMAGE } from '@/components/podcast/constants';
 import { formatDateWithTimezone, getRequesterTimezone } from '@/components/scheduling/utils/timezone';
-import type { DayAvailability, RequesterInfo } from '@/components/scheduling/types/booking';
+import type { DayAvailability, LocationMode, RequesterInfo } from '@/components/scheduling/types/booking';
 import '@/styles/scheduling.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
@@ -55,8 +55,12 @@ export default function BookPodcastPage() {
     ? formatDateWithTimezone(state.selectedDate, requesterTimezone, 'full')
     : '';
 
-  const handleSubmit = async (info: RequesterInfo, hpField: string) => {
-    await submitBookingDetails(info, hpField);
+  const handleSubmit = async (
+    info: RequesterInfo,
+    hpField: string,
+    place: { locationMode: LocationMode; locationDetail: string },
+  ) => {
+    await submitBookingDetails(info, hpField, place);
   };
 
   const renderStepIndicator = () => {
@@ -149,6 +153,8 @@ export default function BookPodcastPage() {
             onBack={goBack}
             isLoading={state.isLoading}
             eventName={BOOKING_TYPE.name}
+            defaultLocation={BOOKING_TYPE.location}
+            allowInPerson={BOOKING_TYPE.allowInPerson}
             dateDisplay={dateDisplay}
             timeDisplay={state.selectedTime || ''}
             formLabels={BOOKING_TYPE.formLabels}

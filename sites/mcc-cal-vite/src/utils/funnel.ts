@@ -1,8 +1,8 @@
 /**
  * Conversion funnel instrumentation.
  *
- * Before this, three events fired site-wide — page_view, error_boundary_caught
- * and links_page_view — and none of them on a revenue path. There was no way to
+ * Before this, three events fired site-wide (page_view, error_boundary_caught
+ * and links_page_view), and none of them on a revenue path. There was no way to
  * see which galleries produce enquiries or where the three-step quote form
  * loses people, even though it saves drafts to localStorage and abandonment is
  * demonstrably real.
@@ -38,7 +38,7 @@ export function trackFormStart(formName: string): void {
 
 /**
  * A step transition inside a multi-step form. The quote form's drop-off is
- * invisible without this — a single submit event cannot show which step lost
+ * invisible without this. A single submit event cannot show which step lost
  * the visitor.
  */
 export function trackFormStep(formName: string, step: number, direction: 'forward' | 'back'): void {
@@ -51,8 +51,8 @@ export function trackFormError(formName: string, reason: string): void {
 }
 
 /**
- * A gallery opened in the lightbox. The identifier is the group's own id — the
- * same public slug the manifest already exposes — rather than a filename or a
+ * A gallery opened in the lightbox. The identifier is the group's own id, the
+ * same public slug the manifest already exposes, rather than a filename or a
  * full URL.
  */
 export function trackImageView(gallery: string, imageId: string): void {

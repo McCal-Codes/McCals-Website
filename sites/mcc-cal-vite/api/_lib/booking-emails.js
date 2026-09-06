@@ -2,28 +2,23 @@
  * Builds the two booking confirmation messages and the calendar invite.
  *
  * Pure and separate from sending, so the content can be asserted and previewed
- * without a Resend key, a verified domain, or a real inbox — none of which are
+ * without a Resend key, a verified domain, or a real inbox, none of which are
  * available in tests or local development.
+ *
+ * Both messages carry an HTML part and a plain-text alternative. Sending
+ * HTML-only scores worse with spam filters and leaves nothing for clients that
+ * refuse to render it.
  */
 
-import { buildBookingIcs } from './ics.js';
+import { buildBookingIcs, buildGoogleCalendarUrl } from './ics.js';
 import { OWNER_TIMEZONE } from './timezone.js';
-
-/** Minimal HTML escaping for values that originate with the requester. */
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
+import { button, detailPanel, detailRow, linkRow, noteBlock, renderEmail } from './email-template.js';
 
 /**
  * Renders a date and time in an explicit zone.
  *
  * Without `timeZone` these fall back to the runtime's zone, which is UTC on
- * Vercel — so someone who booked 9:00 AM Eastern in the UI was emailed
+ * Vercel, so someone who booked 9:00 AM Eastern in the UI was emailed
  * "1:00 PM UTC" and the message contradicted the page they had just used.
  */
 function inZone(startDate, zone) {
@@ -40,6 +35,12 @@ function inZone(startDate, zone) {
       minute: '2-digit',
       hour12: true,
       timeZoneName: 'short',
+      timeZone: zone,
+    }),
+    short: startDate.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
       timeZone: zone,
     }),
   };
@@ -67,8 +68,8 @@ function inZone(startDate, zone) {
  *   ownerName?: string,
  * }} input
  * @returns {{
- *   requester: { subject: string, html: string },
- *   owner: { subject: string, text: string },
+ *   requester: { subject: string, html: string, text: string },
+ *   owner: { subject: string, html: string, text: string, replyTo: string },
  *   invite: string,
  *   attachments: Array<{ filename: string, content: Buffer }>,
  * }}
@@ -80,18 +81,24 @@ export function buildBookingEmails({
   manageUrl = null,
   ownerEmail,
   ownerName = 'Caleb McCartney',
+  location = null,
 }) {
+  // Falls back to the type's default so callers that predate in-person
+  // bookings keep working.
+  const place = location ?? { label: config.location, isInPerson: false };
+  const whereLabel = place.isInPerson ? 'Address' : 'Where';
   const startDate = new Date(booking.start.dateTime);
   const forRequester = inZone(startDate, requesterTimezone);
   const forOwner = inZone(startDate, OWNER_TIMEZONE);
-
   const notes = booking.requester.notes;
+
+  const sameZone = forRequester.time === forOwner.time;
 
   const invite = buildBookingIcs({
     uid: `${booking.id}@mcc-cal.com`,
     start: booking.start.dateTime,
     end: booking.end.dateTime,
-    summary: `${config.name} — ${booking.requester.name}`,
+    summary: `${config.name}: ${booking.requester.name}`,
     description: [
       config.name,
       notes ? `Notes: ${notes}` : '',
@@ -99,7 +106,7 @@ export function buildBookingEmails({
     ]
       .filter(Boolean)
       .join('\n'),
-    location: config.location,
+    location: place.label,
     organizerName: ownerName,
     organizerEmail: ownerEmail,
     attendeeName: booking.requester.name,
@@ -110,67 +117,131 @@ export function buildBookingEmails({
   // The same invite goes to both parties so the event lands in each calendar.
   const attachments = [{ filename: 'booking.ics', content: Buffer.from(invite, 'utf-8') }];
 
-  const html = `
-        <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #1a1a1a;">${escapeHtml(config.confirmationTitle)}</h1>
-          <p>Hi ${escapeHtml(booking.requester.name)},</p>
-          <p>Your ${escapeHtml(config.name.toLowerCase())} is confirmed for:</p>
-          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 0;"><strong>Type:</strong> ${escapeHtml(config.name)}</p>
-            <p style="margin: 8px 0 0;"><strong>Date:</strong> ${escapeHtml(forRequester.date)}</p>
-            <p style="margin: 8px 0 0;"><strong>Time:</strong> ${escapeHtml(forRequester.time)}</p>
-            <p style="margin: 8px 0 0;"><strong>Duration:</strong> ${config.durationMinutes} minutes</p>
-            <p style="margin: 8px 0 0;"><strong>Location:</strong> ${escapeHtml(config.location)}</p>
-            ${notes ? `<p style="margin: 8px 0 0;"><strong>Your notes:</strong> ${escapeHtml(notes)}</p>` : ''}
-          </div>
-          <p>${escapeHtml(config.confirmationMessage)}</p>
-          <p style="color: #666; font-size: 14px;">
-            A calendar invitation is attached to this email.
-          </p>
-          ${
-            manageUrl
-              ? `<p style="margin-top: 30px;">
-            <a href="${escapeHtml(manageUrl)}" style="display: inline-block; padding: 10px 18px; border-radius: 6px; background: #1a1a1a; color: #fff; text-decoration: none;">
-              Reschedule or cancel
-            </a>
-          </p>
-          <p style="color: #666; font-size: 13px;">
-            That link is personal to this booking — please don't forward it.
-          </p>`
-              : ''
-          }
-          <p style="margin-top: 30px; color: #666; font-size: 14px;">
-            Questions? Reply to this email or contact me at ${escapeHtml(ownerEmail)}
-          </p>
-        </div>
-      `;
+  // Apple Mail and Outlook add the event straight from the .ics attachment;
+  // Gmail does not, so Google users get an explicit link instead.
+  const googleCalendarUrl = buildGoogleCalendarUrl({
+    start: booking.start.dateTime,
+    end: booking.end.dateTime,
+    summary: `${config.name} with ${ownerName}`,
+    description: config.emailMessage || config.confirmationMessage,
+    location: place.label,
+  });
 
-  const text = [
-    `New booking received!`,
-    ``,
-    `=== BOOKING DETAILS ===`,
-    `Type: ${config.name}`,
-    `Date: ${forOwner.date}`,
-    `Time: ${forOwner.time}`,
+  // ---- To the person who booked -------------------------------------------
+
+  const requesterHtml = renderEmail({
+    preheader: `${forRequester.short} at ${forRequester.time} · ${place.label}`,
+    eyebrow: 'Confirmed',
+    heading: config.confirmationTitle,
+    // Not "your book a podcast recording is booked". The configured names are
+    // noun phrases that read badly inside a sentence, so the type goes in the
+    // panel where it belongs rather than being forced into the greeting.
+    intro: `Hi ${booking.requester.name}, you're confirmed. Here are the details.`,
+    body: [
+      detailPanel(
+        [
+          detailRow('Type', config.name),
+          detailRow('When', `${forRequester.date}`),
+          detailRow('Time', forRequester.time),
+          detailRow('Duration', `${config.durationMinutes} minutes`),
+          detailRow(whereLabel, place.label),
+          place.isInPerson ? detailRow('Format', 'In person') : '',
+        ].join(''),
+      ),
+      noteBlock('Your notes', notes),
+      `<tr><td style="padding:0 0 22px;color:#1a1a1a;font-size:15px;line-height:1.55;">${config.emailMessage || config.confirmationMessage}</td></tr>`,
+      button(manageUrl, 'Reschedule or cancel'),
+      linkRow(googleCalendarUrl, 'Add to Google Calendar', '(or use the attached invite)'),
+    ].join(''),
+    footnote: manageUrl
+      ? `A calendar invitation is attached. That reschedule link is personal to this booking &mdash; please don't forward it. Questions? Just reply to this email.`
+      : `A calendar invitation is attached. Questions? Just reply to this email.`,
+  });
+
+  const requesterText = [
+    config.confirmationTitle,
+    '',
+    `Hi ${booking.requester.name}, you're confirmed. Here are the details.`,
+    '',
+    `Type:     ${config.name}`,
+    `When:     ${forRequester.date}`,
+    `Time:     ${forRequester.time}`,
     `Duration: ${config.durationMinutes} minutes`,
-    `Location: ${config.location}`,
-    ``,
-    `=== CONTACT ===`,
-    `Name: ${booking.requester.name}`,
+    `${place.isInPerson ? 'Address:  ' : 'Where:    '}${place.label}`,
+    notes ? `\nYour notes: ${notes}` : '',
+    '',
+    config.emailMessage || config.confirmationMessage,
+    manageUrl ? `\nReschedule or cancel: ${manageUrl}\n(personal to this booking, please don't forward it)` : '',
+    '',
+    `Add to Google Calendar: ${googleCalendarUrl}`,
+    'A calendar invitation is also attached. Questions? Just reply to this email.',
+  ]
+    .filter((line) => line !== '')
+    .join('\n');
+
+  // ---- To Caleb -----------------------------------------------------------
+  //
+  // Written to be read on a phone in a few seconds: who, when, and how to
+  // reply. The subject carries the date so the inbox list alone is useful.
+
+  const ownerHtml = renderEmail({
+    preheader: `${booking.requester.name}, ${forOwner.short}, ${forOwner.time}`,
+    eyebrow: 'New booking',
+    heading: `${booking.requester.name} booked a session`,
+    intro: `${forOwner.date} at ${forOwner.time}.`,
+    body: [
+      detailPanel(
+        [
+          detailRow('Type', config.name),
+          detailRow('When', `${forOwner.date}, ${forOwner.time}`),
+          detailRow('Duration', `${config.durationMinutes} minutes`),
+          detailRow(whereLabel, place.label),
+          place.isInPerson ? detailRow('Format', 'In person, travel required') : '',
+          detailRow('Name', booking.requester.name),
+          detailRow('Email', booking.requester.email),
+          // Only worth the line when the two actually differ.
+          sameZone ? '' : detailRow('Their time', `${forRequester.time} (${requesterTimezone})`),
+        ].join(''),
+      ),
+      noteBlock('What they said', notes),
+      button(`mailto:${booking.requester.email}`, `Email ${booking.requester.name.split(' ')[0]}`),
+      linkRow(googleCalendarUrl, 'Add to Google Calendar', '(or use the attached invite)'),
+    ].join(''),
+    footnote: `The calendar invitation is attached. Booked ${new Date().toLocaleString('en-US', { timeZone: OWNER_TIMEZONE })}.`,
+  });
+
+  const ownerText = [
+    `${booking.requester.name} booked: ${config.name}`,
+    '',
+    `When:     ${forOwner.date}, ${forOwner.time}`,
+    `Duration: ${config.durationMinutes} minutes`,
+    `${place.isInPerson ? 'Address:  ' : 'Where:    '}${place.label}`,
+    place.isInPerson ? 'Format:   In person, travel required' : '',
+    '',
+    `Name:  ${booking.requester.name}`,
     `Email: ${booking.requester.email}`,
-    `Their timezone: ${requesterTimezone}`,
-    `Their local time: ${forRequester.date} at ${forRequester.time}`,
-    ``,
-    `=== NOTES ===`,
-    notes || 'No notes provided',
-    ``,
-    `Google Calendar Event: ${booking.eventLink || 'Created'}`,
-    `Submitted: ${new Date().toISOString()}`,
-  ].join('\n');
+    sameZone ? '' : `Their local time: ${forRequester.time} (${requesterTimezone})`,
+    notes ? `\nWhat they said:\n${notes}` : '\nNo notes provided.',
+    '',
+    booking.eventLink ? `Calendar event: ${booking.eventLink}` : '',
+  ]
+    .filter((line) => line !== '')
+    .join('\n');
 
   return {
-    requester: { subject: config.confirmationTitle, html },
-    owner: { subject: `[Booking] ${config.name} - ${booking.requester.name}`, text },
+    requester: {
+      subject: config.confirmationTitle,
+      html: requesterHtml,
+      text: requesterText,
+    },
+    owner: {
+      // Date in the subject so the inbox list is scannable without opening.
+      subject: `${config.name}: ${booking.requester.name}, ${forOwner.short} ${forOwner.time}`,
+      html: ownerHtml,
+      text: ownerText,
+      // Replying goes straight to the person who booked.
+      replyTo: booking.requester.email,
+    },
     invite,
     attachments,
   };

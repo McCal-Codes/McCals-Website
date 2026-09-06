@@ -182,7 +182,7 @@ const HIDDEN_ROUTES = [
 /**
  * Meta for the generated 404.html. It is served for whatever path the visitor
  * asked for, so `route` is only used to derive a self-referential /404
- * canonical — matching what not-found.tsx sets at runtime. `noindex, nofollow`
+ * canonical, matching what not-found.tsx sets at runtime. `noindex, nofollow`
  * is what actually keeps it out of the index.
  */
 const NOT_FOUND_ENTRY = {
@@ -267,7 +267,7 @@ async function generateRouteMeta() {
 
   // Vercel serves /404.html for any path that matches no file. Without it a
   // mistyped or retired URL gets Vercel's bare "NOT_FOUND" text and the app
-  // never boots, so the site's own 404 page — which exists and is routed —
+  // never boots, so the site's own 404 page, which exists and is routed -
   // could never actually render.
   await fs.writeFile(
     path.join(distRoot, '404.html'),

@@ -49,6 +49,11 @@ export const bookingSchema = z.object({
   // it was declared here zod stripped it, so confirmation emails had no way to
   // show the requester their own local time.
   requesterTimezone: z.string().optional(),
+  // Where the session happens. Absent means virtual, which is the default for
+  // every booking type. The address is capped because it is free text that
+  // ends up in a calendar event and an email.
+  locationMode: z.enum(['virtual', 'in-person']).optional(),
+  locationDetail: z.string().max(200).optional(),
   // Honeypot field - should never be filled by legitimate users
   hp_field: z.string().optional(),
 });
