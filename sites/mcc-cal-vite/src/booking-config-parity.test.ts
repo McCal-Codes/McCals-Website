@@ -4,9 +4,9 @@ import { BOOKING_TYPES } from '@/components/scheduling/config/bookingTypes';
 
 /**
  * The client and the server each carry their own booking configuration, and
- * nothing at runtime reconciles them. When they drifted apart — the client
+ * nothing at runtime reconciles them. When they drifted apart, the client
  * offering 60-minute podcast recordings while the server demanded at least
- * 90 — every submission to /api/schedule/book returned a 400 and the booking
+ * 90, every submission to /api/schedule/book returned a 400 and the booking
  * page was silently dead.
  *
  * These assertions are the reconciliation. They follow the same config-parity
@@ -37,8 +37,8 @@ describe('booking config parity between client and server', () => {
       }
 
       // Mirrors the range check in api/schedule/book.js. Note the server's
-      // durationMinutes is a *minimum*, so a client value below it is rejected
-      // — that is the exact failure this test exists to prevent.
+      // durationMinutes is a *minimum*, so a client value below it is rejected.
+      // That is the exact failure this test exists to prevent.
       expect(
         type.durationMinutes,
         `Client sends ${type.durationMinutes}min for "${id}" but the server ` +

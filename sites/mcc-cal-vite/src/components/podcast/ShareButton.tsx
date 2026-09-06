@@ -66,7 +66,7 @@ export function ShareButton({ episode, onToast }: ShareButtonProps) {
   }
 
   function shareX() {
-    const text = encodeURIComponent(`"${episode.title}" — Caffeinated Connections Podcast`);
+    const text = encodeURIComponent(`"${episode.title}", Caffeinated Connections Podcast`);
     const url = encodeURIComponent(episode.link || window.location.href);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'noopener');
     setOpen(false);

@@ -78,7 +78,7 @@ describe('image width allowlist', () => {
   it('every requested image width is in vercel.json images.sizes', () => {
     const usages = findWidthUsages();
     // If this drops to zero the regexes have drifted from the codebase and
-    // the guard is silently dead — fail loudly instead.
+    // the guard is silently dead, fail loudly instead.
     expect(usages.length).toBeGreaterThan(0);
 
     const violations = usages.flatMap(({ file, context, widths }) =>

@@ -1,6 +1,6 @@
 /*
  * The previous version referenced --color-text-primary and friends, which this
- * site does not define, so it fell back to #1a1a1a — near-black text on the
+ * site does not define, so it fell back to #1a1a1a, near-black text on the
  * near-black background whenever the site's theme and the OS theme disagreed.
  * These use the real --mcc-* tokens, which follow the site's own theme.
  */

@@ -34,7 +34,7 @@ interface LegalDocumentProps {
    * The date these terms took effect, as `YYYY-MM-DD`.
    *
    * Required rather than derived from `new Date()`, which is what the combined
-   * policies page used to do — that rendered today's date on every visit, telling
+   * policies page used to do, that rendered today's date on every visit, telling
    * every reader the terms had just changed. An effective date is a factual claim
    * about a document and has to be stated, not computed.
    */

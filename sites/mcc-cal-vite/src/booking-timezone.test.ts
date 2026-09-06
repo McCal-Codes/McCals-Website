@@ -4,7 +4,7 @@ import { ownerWallTimeToUtc, getZoneWallParts, OWNER_TIMEZONE } from '../api/_li
 /**
  * Booking slots are wall-clock times in the owner's zone. They used to be
  * turned into instants with `new Date(\`${date}T${time}\`)`, which resolves
- * against the *runtime's* zone — correct on a laptop in New York, four hours
+ * against the *runtime's* zone, correct on a laptop in New York, four hours
  * wrong on Vercel, where the runtime is UTC. Every calendar event, conflict
  * check and confirmation email was affected, and none of it was reproducible
  * locally.

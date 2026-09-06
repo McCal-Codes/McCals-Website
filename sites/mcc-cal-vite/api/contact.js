@@ -7,8 +7,8 @@ import { sendEmailOrThrow } from './_lib/email.js';
 import { buildContactEmail } from './_lib/enquiry-emails.js';
 
 // Lazy-initialize Resend, matching schedule/book.js. Constructing it at module
-// scope throws when RESEND_API_KEY is absent, which takes down the whole module
-//, the endpoint stops responding rather than degrading to "stored, not
+// scope throws when RESEND_API_KEY is absent, which takes down the whole
+// module: the endpoint stops responding rather than degrading to "stored, not
 // emailed", and the local API server cannot boot at all without secrets.
 let resendClient = null;
 function getResendClient() {

@@ -15,8 +15,8 @@ const OUT = path.resolve(__dirname, '..', 'public-vite', 'sitemap.xml');
 const PAGE_SEO = pageSeoData;
 
 /**
- * `lastmod` is the only sitemap signal Google still acts on — it schedules recrawls
- * from it — and it drops the signal entirely for sites that report it inaccurately.
+ * `lastmod` is the only sitemap signal Google still acts on, it schedules recrawls
+ * from it, and it drops the signal entirely for sites that report it inaccurately.
  * So every date below has to be one we can actually stand behind, and a route with
  * no trustworthy date gets no `lastmod` rather than a guess.
  *
@@ -27,7 +27,7 @@ const PAGE_SEO = pageSeoData;
 /**
  * Portfolio routes render from a generated manifest, so the manifest's own
  * `generated` stamp is the truthful answer for when that page's content last
- * changed — far better than the page component, which barely ever changes.
+ * changed, far better than the page component, which barely ever changes.
  */
 const ROUTE_MANIFESTS = {
   '/journalism': 'journalism-manifest.json',
@@ -187,7 +187,7 @@ function urlEntry({ loc, lastmod, images = [] }) {
  * Portfolio images, per route, for the image sitemap.
  *
  * Google names image sitemaps as the way to surface "images your site reaches with
- * JavaScript code" — which is exactly this site. The portfolios render client-side,
+ * JavaScript code", which is exactly this site. The portfolios render client-side,
  * so a crawler that does not execute JavaScript sees none of the photographs. Before
  * this, the sitemap listed one image per page: the Open Graph card.
  *
@@ -319,7 +319,7 @@ if (fs.existsSync(MANIFEST)) {
     if (!post.published) continue;
     entries.push(urlEntry({
       loc: `${SITE_URL}/blog/${post.slug}`,
-      // Authored publication date — the most trustworthy signal available.
+      // Authored publication date: the most trustworthy signal available.
       lastmod: toSitemapDate(post.updated || post.date),
       images: [{ loc: absoluteUrl(post.leadImage || post.leadImageFallback) }],
     }));

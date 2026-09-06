@@ -14,7 +14,7 @@ import type { PortfolioImage } from '@/components/portfolio/types';
  * photograph make different claims about who owns the work and how to license it.
  *
  * These tests pin both to the same values, and check the field Google actually
- * requires is present — `license` gates the Licensable badge, and omitting it fails
+ * requires is present, `license` gates the Licensable badge, and omitting it fails
  * silently: attribution still renders, the badge just never appears.
  */
 

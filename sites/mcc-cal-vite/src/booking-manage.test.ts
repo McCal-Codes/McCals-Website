@@ -35,7 +35,7 @@ interface BookingRow {
 /**
  * Minimal stand-in for the PostgREST builder, backed by an in-memory array so
  * updates are observable. Only the shapes schedule/manage.js actually calls are
- * implemented — anything else should fail loudly rather than silently pass.
+ * implemented, anything else should fail loudly rather than silently pass.
  */
 function supabaseStub(rows: BookingRow[]) {
   return {

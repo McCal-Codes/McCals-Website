@@ -36,7 +36,7 @@ describe('adaptNature', () => {
 
     expect(groups).toHaveLength(5);
     expect(groups[0]).toMatchObject({
-      title: 'Downtown Pittsburgh — Fireworks',
+      title: 'Downtown Pittsburgh, Fireworks',
       category: 'Landscapes',
       dateDisplay: 'July 2023',
       dateISO: '2023-07',
@@ -54,27 +54,27 @@ describe('adaptNature', () => {
       alt: 'Fireworks bloom over Pittsburgh at night.',
     });
     expect(groups[1]).toMatchObject({
-      title: 'Downtown Pittsburgh — Sunrise',
+      title: 'Downtown Pittsburgh, Sunrise',
       category: 'Landscapes',
       dateDisplay: 'October 2023',
       dateISO: '2023-10',
       tags: ['landscape'],
     });
     expect(groups[2]).toMatchObject({
-      title: 'Downtown Pittsburgh — Point Park',
+      title: 'Downtown Pittsburgh, Point Park',
       category: 'Landscapes',
       tags: ['landscape'],
     });
     expect(groups[2]?.dateDisplay).toBeUndefined();
     expect(groups[3]).toMatchObject({
-      title: 'Downtown Pittsburgh — Night Market',
+      title: 'Downtown Pittsburgh, Night Market',
       category: 'Landscapes',
       dateDisplay: 'July 2023',
       dateISO: '2023-07',
       tags: ['landscape'],
     });
     expect(groups[4]).toMatchObject({
-      title: 'Downtown Pittsburgh — City Selects',
+      title: 'Downtown Pittsburgh, City Selects',
       category: 'Landscapes',
       tags: ['landscape'],
     });

@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
  * HeroCarousel, Google reviews in TestimonialsSection). `connect-src` omitted the
  * Supabase origin, so every one of those requests was blocked by CSP in production.
  *
- * Nothing looked broken because both call sites fall back silently — the failure was
+ * Nothing looked broken because both call sites fall back silently, the failure was
  * only visible as console errors. These tests assert each origin the client actually
  * calls is permitted, so a missing entry fails here instead of degrading in the wild.
  */

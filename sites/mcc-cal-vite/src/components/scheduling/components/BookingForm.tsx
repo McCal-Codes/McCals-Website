@@ -264,7 +264,7 @@ export function BookingForm({
                   </span>
                 ) : (
                   <span id="location-hint" className="scheduling-char-count">
-                    A name is enough — I&apos;ll confirm the exact spot by email.
+                    A name is enough, I&apos;ll confirm the exact spot by email.
                   </span>
                 )}
               </div>

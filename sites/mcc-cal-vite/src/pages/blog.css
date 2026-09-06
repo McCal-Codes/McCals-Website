@@ -1,5 +1,5 @@
 /* ============================================================
-   BLOG PAGE — shared shell
+   BLOG PAGE, shared shell
    ============================================================ */
 
 .blog-page {
@@ -143,7 +143,7 @@
   line-height: 1.75;
 }
 
-/* Sidebar (right column) — stacked secondary stories */
+/* Sidebar (right column), stacked secondary stories */
 
 .blog-sidebar {
   display: grid;
@@ -219,7 +219,7 @@
 }
 
 /* ============================================================
-   MORE STORIES — grid section
+   MORE STORIES, grid section
    ============================================================ */
 
 .blog-grid-section {
@@ -266,7 +266,7 @@
 }
 
 /* ============================================================
-   BLOG CARD (grid variant — no variant prop)
+   BLOG CARD (grid variant, no variant prop)
    ============================================================ */
 
 .blog-card {
@@ -413,7 +413,7 @@
 }
 
 /* ============================================================
-   STORY DETAIL — all .story__* rules preserved exactly
+   STORY DETAIL, all .story__* rules preserved exactly
    ============================================================ */
 
 .story {
