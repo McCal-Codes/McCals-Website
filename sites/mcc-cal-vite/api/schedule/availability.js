@@ -10,6 +10,7 @@ import {
   loadAvailabilityRules,
   isBlackedOut,
   meetsNoticePeriod,
+  buildSlotCandidates,
 } from '../_lib/availability-rules.js';
 
 /** Minutes from midnight as an owner-timezone wall clock string, e.g. 570 -> "09:30". */
@@ -225,25 +226,7 @@ export default async function handler(req, res) {
    */
   const slotCandidatesFor = (dateStr, weekday, durationMinutes) => {
     if (isBlackedOut(dateStr, rules.blackouts)) return [];
-
-    const byMinute = new Map();
-    for (const window of rules.byWeekday.get(weekday) ?? []) {
-      for (
-        let minuteOfDay = window.startMinute;
-        minuteOfDay + durationMinutes <= window.endMinute;
-        minuteOfDay += 30
-      ) {
-        const existing = byMinute.get(minuteOfDay);
-        if (!existing || window.minNoticeHours < existing.minNoticeHours) {
-          byMinute.set(minuteOfDay, {
-            minuteOfDay,
-            minNoticeHours: window.minNoticeHours,
-          });
-        }
-      }
-    }
-
-    return [...byMinute.values()].sort((a, b) => a.minuteOfDay - b.minuteOfDay);
+    return buildSlotCandidates(rules.byWeekday.get(weekday), durationMinutes);
   };
 
   // Development mode: return mock availability

@@ -108,6 +108,43 @@ export async function loadAvailabilityRules(bookingType, start, end) {
   }
 }
 
+/**
+ * Flattens every window configured for a weekday into candidate slot starts.
+ *
+ * Windows may abut or overlap — free time either side of a day-job shift often
+ * touches it — so starts are de-duplicated, and where two windows offer the
+ * same start the shorter notice wins. A start is only a candidate if the whole
+ * booking fits inside its window.
+ *
+ * Pure, and exported for testing: this is the logic that decides what a visitor
+ * is offered, and it is worth asserting directly rather than only through the
+ * handler.
+ *
+ * @param {Array<{startMinute:number,endMinute:number,minNoticeHours:number}>|undefined} windows
+ *   Undefined for a weekday with no rules, which is simply a closed day.
+ * @param {number} durationMinutes
+ * @param {number} [stepMinutes]
+ * @returns {Array<{minuteOfDay:number, minNoticeHours:number}>} sorted by time
+ */
+export function buildSlotCandidates(windows, durationMinutes, stepMinutes = 30) {
+  const byMinute = new Map();
+
+  for (const window of windows ?? []) {
+    for (
+      let minuteOfDay = window.startMinute;
+      minuteOfDay + durationMinutes <= window.endMinute;
+      minuteOfDay += stepMinutes
+    ) {
+      const existing = byMinute.get(minuteOfDay);
+      if (!existing || window.minNoticeHours < existing.minNoticeHours) {
+        byMinute.set(minuteOfDay, { minuteOfDay, minNoticeHours: window.minNoticeHours });
+      }
+    }
+  }
+
+  return [...byMinute.values()].sort((a, b) => a.minuteOfDay - b.minuteOfDay);
+}
+
 /** True when `dateStr` (YYYY-MM-DD) falls inside any blackout range. */
 export function isBlackedOut(dateStr, blackouts) {
   return blackouts.some((range) => dateStr >= range.startsOn && dateStr <= range.endsOn);
