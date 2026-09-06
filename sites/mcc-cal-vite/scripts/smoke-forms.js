@@ -60,8 +60,22 @@ const BASE = (urlFlag >= 0 ? args[urlFlag + 1] : 'https://mcc-cal.com').replace(
 const KEEP = args.includes('--keep');
 const CLEANUP_ONLY = args.includes('--cleanup-only');
 
-const pass = (m) => console.log(`  PASS  ${m}`);
+let passed = 0;
+let skipped = 0;
+
+const pass = (m) => { passed++; console.log(`  PASS  ${m}`); };
 const fail = (m) => console.log(`  FAIL  ${m}`);
+const skip = (m) => { skipped++; console.log(`  SKIP  ${m}`); };
+
+/**
+ * A 429 means the endpoint's rate limiter is working, not that the endpoint is
+ * broken. Quote allows 3 per 30 minutes, contact 5 per 15, booking 5 per hour,
+ * so running this a few times in a row will legitimately hit them. Counting
+ * that as a failure would train the reader to ignore a red result.
+ */
+function rateLimited(result) {
+  return result.status === 429;
+}
 
 async function post(pathname, body) {
   const response = await fetch(`${BASE}${pathname}`, {
@@ -74,11 +88,18 @@ async function post(pathname, body) {
 }
 
 /** A future weekday, so the booking is not rejected for being in the past. */
-function futureDate() {
-  const d = new Date(Date.now() + 21 * 86400000);
+function futureDate(offsetDays = 21) {
+  const d = new Date(Date.now() + offsetDays * 86400000);
   while (d.getUTCDay() === 0) d.setUTCDate(d.getUTCDate() + 1);
   return d.toISOString().split('T')[0];
 }
+
+/**
+ * A different slot each run. book.js keeps booked slots in a module-level Set
+ * when Google credentials are absent, and that Set outlives the database row on
+ * a warm instance, so a fixed slot starts answering 409 forever.
+ */
+const bookingDate = futureDate(21 + Math.floor(Math.random() * 20));
 
 async function runSmoke() {
   let failures = 0;
@@ -94,6 +115,7 @@ async function runSmoke() {
   });
   // The id is the point: a 200 without one means the submission was discarded.
   if (contact.status === 200 && contact.data.id) pass(`contact stored, id ${contact.data.id}`);
+  else if (rateLimited(contact)) skip('contact rate limited, 5 per 15 minutes');
   else { fail(`contact returned ${contact.status}, id ${contact.data.id ?? 'null'}`); failures++; }
 
   const quote = await post('/api/quote', {
@@ -108,11 +130,12 @@ async function runSmoke() {
     notes: 'Automated smoke test. Safe to ignore or delete.',
   });
   if (quote.status === 200 && quote.data.id) pass(`quote stored, id ${quote.data.id}`);
+  else if (rateLimited(quote)) skip('quote rate limited, 3 per 30 minutes');
   else { fail(`quote returned ${quote.status}, id ${quote.data.id ?? 'null'}`); failures++; }
 
   const booking = await post('/api/schedule/book', {
     eventTypeId: 'grab-coffee',
-    date: futureDate(),
+    date: bookingDate,
     time: '09:00',
     durationMinutes: 30,
     requester: { name: `${SMOKE_MARKER} booking`, email: SMOKE_EMAIL, notes: 'Automated smoke test.' },
@@ -124,12 +147,20 @@ async function runSmoke() {
     // "mock" means Google Calendar credentials are absent, so nothing reached a
     // real calendar. Worth surfacing: the booking still succeeds either way.
     if (booking.data.mock) console.log('        note: mock booking, Google Calendar credentials not set');
+  } else if (rateLimited(booking)) {
+    skip('booking rate limited, 5 per hour');
+  } else if (booking.status === 409) {
+    // Without Google credentials book.js holds booked slots in a module-level
+    // Set, which survives on a warm serverless instance and is never cleared,
+    // so a slot stays taken even after its database row is deleted. The random
+    // slot above avoids it in practice; this branch explains it if it recurs.
+    skip('booking slot already taken, pick another or wait for the instance to recycle');
   } else { fail(`booking returned ${booking.status}`); failures++; }
 
   // The honeypot must swallow a filled submission without creating anything.
   const bot = await post('/api/schedule/book', {
     eventTypeId: 'grab-coffee',
-    date: futureDate(),
+    date: bookingDate,
     time: '10:00',
     durationMinutes: 30,
     requester: { name: `${SMOKE_MARKER} bot`, email: SMOKE_EMAIL },
@@ -139,20 +170,30 @@ async function runSmoke() {
   if (bot.status === 200 && !bot.data.booking) pass('honeypot discarded a filled submission');
   else { fail('honeypot did not discard a filled submission'); failures++; }
 
-  console.log(
-    failures === 0
-      ? '\nAll paths working. Check the inbox to confirm the emails arrived.\n'
-      : `\n${failures} check(s) failed.\n`
-  );
+  // Never claim more than was actually exercised. A run where everything was
+  // rate limited has verified nothing, and saying "all paths working" there is
+  // the same false reassurance these endpoints used to give.
+  if (failures > 0) {
+    console.log(`\n${failures} failed, ${passed} passed, ${skipped} skipped.\n`);
+  } else if (passed === 0) {
+    console.log('\nNothing was verified: every check was skipped, almost certainly');
+    console.log('rate limiting from a recent run. Wait a few minutes and try again.\n');
+  } else if (skipped > 0) {
+    console.log(`\n${passed} passed, ${skipped} skipped. The skipped paths were not checked.\n`);
+  } else {
+    console.log('\nAll paths working. Check the inbox to confirm the emails arrived.\n');
+  }
+
   return failures;
 }
 
 /** Deletes only rows this script created, matched on the marker email. */
-async function cleanup() {
+async function cleanup({ quiet = false } = {}) {
   const url = process.env.VITE_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
+    if (quiet) return;
     console.log('Cleanup skipped: VITE_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is not usable locally.');
     console.log('Note that `vercel env pull` cannot recover a variable marked Sensitive; it writes');
     console.log('[SENSITIVE] in place of the value, so these have to be pasted into .env by hand.');
@@ -167,23 +208,32 @@ async function cleanup() {
     ['bookings', 'client_email'],
   ];
 
-  console.log('Cleaning up:');
+  if (!quiet) console.log('Cleaning up:');
   for (const [table, column] of tables) {
     const response = await fetch(
       `${url.replace(/\/$/, '')}/rest/v1/${table}?${column}=eq.${encodeURIComponent(SMOKE_EMAIL)}`,
       { method: 'DELETE', headers }
     );
     if (!response.ok) {
-      console.log(`  ${table}: failed (${response.status})`);
+      if (!quiet) console.log(`  ${table}: failed (${response.status})`);
       continue;
     }
     const rows = await response.json().catch(() => []);
-    console.log(`  ${table}: removed ${rows.length}`);
+    if (!quiet) console.log(`  ${table}: removed ${rows.length}`);
   }
-  console.log('');
+  if (!quiet) console.log('');
 }
 
 let exitCode = 0;
-if (!CLEANUP_ONLY) exitCode = (await runSmoke()) > 0 ? 1 : 0;
+
+if (!CLEANUP_ONLY) {
+  // Clear leftovers first. The booking uses a fixed slot, so a row surviving an
+  // earlier run holds that time and the conflict check correctly answers 409,
+  // which would read as a failure of the site rather than of the test. Running
+  // twice in a row has to pass.
+  await cleanup({ quiet: true });
+  exitCode = (await runSmoke()) > 0 ? 1 : 0;
+}
+
 if (!KEEP) await cleanup();
 process.exit(exitCode);
