@@ -9,8 +9,8 @@ import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 import { applyCors } from '../_lib/cors.js';
 import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
 import { captureApiException } from '../_lib/sentry.js';
-import { BOOKING_CONFIGS } from '../_lib/booking-config.js';
-import { buildBookingIcs } from '../_lib/ics.js';
+import { BOOKING_CONFIGS, resolveLocation } from '../_lib/booking-config.js';
+import { buildBookingEmails } from '../_lib/booking-emails.js';
 import { OWNER_TIMEZONE, ownerWallTimeToUtc } from '../_lib/timezone.js';
 import { buildManageUrl, createManageToken } from '../_lib/booking-token.js';
 import { sendEmailOrThrow } from '../_lib/email.js';
@@ -86,8 +86,12 @@ async function getAccessToken() {
 }
 
 async function createCalendarEvent(accessToken, bookingData) {
-  const { eventTypeId, date, time, durationMinutes, requester } = bookingData;
+  const { eventTypeId, date, time, durationMinutes, requester, locationMode, locationDetail } =
+    bookingData;
   const config = BOOKING_CONFIGS[eventTypeId];
+  // The calendar event must carry the same address the emails do, or an
+  // in-person booking shows "Google Meet" on the day.
+  const location = resolveLocation(config, locationMode, locationDetail);
 
   const startDateTime = ownerWallTimeToUtc(date, time);
   const endDateTime = new Date(startDateTime);
@@ -104,7 +108,7 @@ async function createCalendarEvent(accessToken, bookingData) {
       dateTime: endDateTime.toISOString(),
       timeZone: requester.timezone || 'America/New_York',
     },
-    location: config.location,
+    location: location.label,
     attendees: [{ email: requester.email }],
     reminders: {
       useDefault: false,
@@ -206,140 +210,45 @@ async function sendConfirmationEmail(
 ) {
   const resend = await getResendClient();
   if (!resend) {
-    console.warn('[sendConfirmationEmail] Resend not configured, skipping email - book.js:188');
+    console.warn('[sendConfirmationEmail] Resend not configured, skipping email');
     return;
   }
 
-  const startDate = new Date(booking.start.dateTime);
-
-  // Format in an explicit timezone. Without one these fall back to the server's
-  // zone, which is UTC on Vercel — so a client who booked 9:00 AM EDT in the UI
-  // was emailed "1:00 PM UTC" and the two disagreed.
-  const inZone = (zone) => ({
-    date: startDate.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      timeZone: zone,
-    }),
-    time: startDate.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-      timeZoneName: 'short',
-      timeZone: zone,
-    }),
+  // Message construction lives in _lib/booking-emails.js so it can be asserted
+  // and previewed without a Resend key or a real inbox.
+  const emails = buildBookingEmails({
+    booking,
+    config,
+    requesterTimezone,
+    manageUrl,
+    ownerEmail: TO_EMAIL,
+    location,
   });
-
-  const forRequester = inZone(requesterTimezone);
-  const forOwner = inZone(OWNER_TIMEZONE);
-  const dateDisplay = forRequester.date;
-  const timeDisplay = forRequester.time;
-
-  const icsDescription = [
-    config.name,
-    booking.requester.notes ? `Notes: ${booking.requester.notes}` : '',
-    `Booked by ${booking.requester.name} (${booking.requester.email})`,
-  ]
-    .filter(Boolean)
-    .join('\n');
-
-  const invite = buildBookingIcs({
-    uid: `${booking.id}@mcc-cal.com`,
-    start: booking.start.dateTime,
-    end: booking.end.dateTime,
-    summary: `${config.name} — ${booking.requester.name}`,
-    description: icsDescription,
-    location: config.location,
-    organizerName: 'Caleb McCartney',
-    organizerEmail: TO_EMAIL,
-    attendeeName: booking.requester.name,
-    attendeeEmail: booking.requester.email,
-    url: booking.eventLink,
-  });
-
-  // Same invite for both parties, so the event lands in each calendar.
-  const attachments = [
-    { filename: 'booking.ics', content: Buffer.from(invite, 'utf-8') },
-  ];
 
   try {
-    // Send to user
     await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: booking.requester.email,
-      subject: config.confirmationTitle,
-      attachments,
-      html: `
-        <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #1a1a1a;">${config.confirmationTitle}</h1>
-          <p>Hi ${booking.requester.name},</p>
-          <p>Your ${config.name.toLowerCase()} is confirmed for:</p>
-          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 0;"><strong>Type:</strong> ${config.name}</p>
-            <p style="margin: 8px 0 0;"><strong>Date:</strong> ${dateDisplay}</p>
-            <p style="margin: 8px 0 0;"><strong>Time:</strong> ${timeDisplay}</p>
-            <p style="margin: 8px 0 0;"><strong>Duration:</strong> ${config.durationMinutes} minutes</p>
-            <p style="margin: 8px 0 0;"><strong>Location:</strong> ${config.location}</p>
-            ${booking.requester.notes ? `<p style="margin: 8px 0 0;"><strong>Your notes:</strong> ${booking.requester.notes}</p>` : ''}
-          </div>
-          <p>${config.confirmationMessage}</p>
-          <p style="color: #666; font-size: 14px;">
-            A calendar invitation is attached to this email.
-          </p>
-          ${
-            manageUrl
-              ? `<p style="margin-top: 30px;">
-            <a href="${manageUrl}" style="display: inline-block; padding: 10px 18px; border-radius: 6px; background: #1a1a1a; color: #fff; text-decoration: none;">
-              Reschedule or cancel
-            </a>
-          </p>
-          <p style="color: #666; font-size: 13px;">
-            That link is personal to this booking — please don't forward it.
-          </p>`
-              : ''
-          }
-          <p style="margin-top: 30px; color: #666; font-size: 14px;">
-            Questions? Reply to this email or contact me at ${TO_EMAIL}
-          </p>
-        </div>
-      `,
+      replyTo: TO_EMAIL,
+      subject: emails.requester.subject,
+      attachments: emails.attachments,
+      html: emails.requester.html,
+      text: emails.requester.text,
     });
 
-    // Send notification to admin
     await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: TO_EMAIL,
-      subject: `[Booking] ${config.name} - ${booking.requester.name}`,
-      attachments,
-      text: [
-        `New booking received!`,
-        ``,
-        `=== BOOKING DETAILS ===`,
-        `Type: ${config.name}`,
-        `Date: ${forOwner.date}`,
-        `Time: ${forOwner.time}`,
-        `Duration: ${config.durationMinutes} minutes`,
-        `Location: ${config.location}`,
-        ``,
-        `=== CONTACT ===`,
-        `Name: ${booking.requester.name}`,
-        `Email: ${booking.requester.email}`,
-        `Their timezone: ${requesterTimezone}`,
-        `Their local time: ${forRequester.date} at ${forRequester.time}`,
-        ``,
-        `=== NOTES ===`,
-        booking.requester.notes || 'No notes provided',
-        ``,
-        `Google Calendar Event: ${booking.eventLink || 'Created'}`,
-        `Submitted: ${new Date().toISOString()}`,
-      ].join('\n'),
+      // Replying to the notification reaches the person who booked.
+      replyTo: emails.owner.replyTo,
+      subject: emails.owner.subject,
+      attachments: emails.attachments,
+      html: emails.owner.html,
+      text: emails.owner.text,
     });
   } catch (err) {
-    console.error('[sendConfirmationEmail] Failed to send email: - book.js:255', err instanceof Error ? err.message : err);
+    console.error('[sendConfirmationEmail] Failed to send email:', err instanceof Error ? err.message : err);
     await captureApiException(err, { route: 'schedule/book', operation: 'send_confirmation_email' });
-    // Don't throw - booking should succeed even if email fails
   }
 }
 
@@ -367,7 +276,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { eventTypeId, date, time, durationMinutes, requester, requesterTimezone } = parsed.data;
+  const { eventTypeId, date, time, durationMinutes, requester, requesterTimezone, locationMode, locationDetail } = parsed.data;
 
   // Validation
   if (!eventTypeId || !date || !time || !durationMinutes || !requester?.name || !requester?.email) {
@@ -394,6 +303,9 @@ export default async function handler(req, res) {
   // link refer to the same token; the raw value is never persisted.
   const manageToken = createManageToken();
   const manageUrl = buildManageUrl(manageToken.token);
+
+  // Virtual unless the requester asked to meet in person and said where.
+  const location = resolveLocation(config, locationMode, locationDetail);
 
   // Development mode: return mock booking without external services
   const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
@@ -468,6 +380,7 @@ export default async function handler(req, res) {
           booking_time: time,
           duration_minutes: durationMinutes,
           notes: requester.notes || null,
+          location: location.label,
           status: 'confirmed',
           deposit_paid: false,
           total_amount: null,
@@ -557,6 +470,7 @@ export default async function handler(req, res) {
           booking_time: time,
           duration_minutes: durationMinutes,
           notes: requester.notes || null,
+          location: location.label,
           status: 'confirmed',
           deposit_paid: false,
           total_amount: null,

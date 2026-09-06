@@ -8,7 +8,7 @@ const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replac
 /**
  * Where to send someone who landed on nothing. A 404 is usually a stale link
  * or a typo, so the useful response is the shortest route back to whatever
- * they were probably after — not a single "return home" and a dead end.
+ * they were probably after, not a single "return home" and a dead end.
  */
 const DESTINATIONS = [
   { to: '/featured-work', label: 'Featured work', hint: 'A cross-section of recent shoots' },

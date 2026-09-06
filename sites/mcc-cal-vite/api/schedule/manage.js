@@ -4,7 +4,7 @@
  * Backs the link in confirmation emails: look up a booking by its manage
  * token, then cancel it or move it to a different slot. The token is the only
  * credential (see api/_lib/booking-token.js), so every response is written to
- * avoid confirming anything to someone holding a wrong token — an unknown,
+ * avoid confirming anything to someone holding a wrong token, an unknown,
  * expired and already-cancelled token all produce the same generic failure.
  */
 

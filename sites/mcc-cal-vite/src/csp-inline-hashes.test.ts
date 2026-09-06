@@ -64,13 +64,13 @@ describe('CSP inline script hashes', () => {
   it.each(CONFIG_PATHS)('allows every inline script in %s', (configPath) => {
     const directive = scriptSrcDirective(configPath);
     for (const hash of hashes) {
-      expect(directive, `script-src is missing '${hash}' — update it after editing index.html`).toContain(hash);
+      expect(directive, `script-src is missing '${hash}', update it after editing index.html`).toContain(hash);
     }
   });
 
   it.each(CONFIG_PATHS)('does not fall back to unsafe-inline in %s', (configPath) => {
     // Browsers ignore 'unsafe-inline' once a hash is present, so leaving it in would
-    // be misleading rather than permissive — and it would mask a stale hash.
+    // be misleading rather than permissive, and it would mask a stale hash.
     expect(scriptSrcDirective(configPath)).not.toContain("'unsafe-inline'");
   });
 

@@ -6,7 +6,7 @@ import PoliciesLegalPage from './policies-legal';
 /**
  * The hub replaced a 1,075-line page that held every legal document at once. Its job
  * now is to route people onward, and to keep the old `#license`, `#privacy` and
- * `#terms` fragments landing somewhere useful — those are linked from outside the
+ * `#terms` fragments landing somewhere useful, those are linked from outside the
  * site and cannot be redirected, because fragments never reach the server.
  */
 describe('PoliciesLegalPage (hub)', () => {

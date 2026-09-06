@@ -1,12 +1,12 @@
 /**
  * Timezone helpers for the booking API.
  *
- * Slot times (`"09:00"`) are wall-clock times in the *owner's* zone — that is
+ * Slot times (`"09:00"`) are wall-clock times in the *owner's* zone, that is
  * what the client's `TimeSlot` type documents and what the availability
  * endpoint generates. Turning one into an instant with
  * `new Date(\`${date}T${time}\`)` is wrong: a date-time string with no offset
  * is interpreted in the *runtime's* zone. That happens to be correct on a
- * laptop in New York and wrong on Vercel, where the runtime is UTC — a 9:00 AM
+ * laptop in New York and wrong on Vercel, where the runtime is UTC, a 9:00 AM
  * Eastern booking became 09:00Z, i.e. 5:00 AM Eastern, and the calendar event,
  * the conflict check and the confirmation email were all four hours early.
  *

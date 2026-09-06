@@ -96,7 +96,7 @@ interface JournalismLikeManifest {
  * static manifest has already resolved by this point and holds everything
  * needed to draw the page, so the merge is an enhancement and must never be
  * what the visitor is waiting for. A failing request returns quickly; a
- * *hanging* one — a paused project, a stalled socket, a captive portal — would
+ * *hanging* one, a paused project, a stalled socket, a captive portal, would
  * otherwise hold the page on a skeleton until the browser's own socket
  * timeout, which can be minutes.
  */
@@ -174,7 +174,7 @@ async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<
 }
 
 /**
- * Image URL builders — one per manifest type.
+ * Image URL builders, one per manifest type.
  * Each matches the exact path pattern its manifest uses.
  */
 export const imageUrl = {
@@ -214,7 +214,7 @@ export const imageUrl = {
     return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);
   },
 
-  /** featured: mixed types — same as concert, uses relativeFolderPath */
+  /** featured: mixed types, same as concert, uses relativeFolderPath */
   featured(relativeFolderPath: string, filename: string): string {
     const path = `${PORTFOLIOS_BASE}/${relativeFolderPath}/${filename}`;
     return IS_DEV ? toLocalUrl(path) : toGithubUrl(path);

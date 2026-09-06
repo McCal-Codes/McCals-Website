@@ -860,3 +860,47 @@
     animation: none !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   In-person / online choice
+   -------------------------------------------------------------------------- */
+
+.scheduling-location {
+  border: 1px solid var(--mcc-line);
+  border-radius: 10px;
+  padding: 1rem 1.1rem 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.scheduling-location legend {
+  padding: 0 0.4rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--mcc-fg);
+}
+
+.scheduling-location__option {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  cursor: pointer;
+}
+
+.scheduling-location__option input {
+  /* Keeps the control aligned with the first line of a wrapping label. */
+  position: relative;
+  top: 0.15rem;
+  flex: none;
+}
+
+.scheduling-location__hint {
+  color: var(--mcc-fg-muted);
+  font-size: 0.9375rem;
+}
+
+/* The address field only appears once in-person is chosen, so it needs its own
+   breathing room inside the fieldset rather than the form's default rhythm. */
+.scheduling-location .scheduling-form-field {
+  margin: 0.5rem 0 0.25rem;
+}

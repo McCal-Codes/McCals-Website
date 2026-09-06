@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
     // Sentry already has the full error and component stack, with PII scrubbing
     // and masking configured. Sending the same text to GA4 would push
-    // unscrubbed message content — which can contain URLs, ids or user input —
+    // unscrubbed message content, which can contain URLs, ids or user input,
     // into an analytics product configured for none of that, and componentStack
     // would blow past GA4's 100-character parameter limit anyway. A stable name
     // is all that is needed to see how often this happens.
@@ -73,7 +73,7 @@ export class ErrorBoundary extends Component<Props, State> {
         >
           <h2 style={{ marginBottom: '1rem' }}>Something went wrong</h2>
           <p style={{ color: 'var(--mcc-fg-muted)', marginBottom: '1.5rem', maxWidth: '46ch' }}>
-            This part of the page failed to load. Refreshing usually fixes it — if it keeps
+            This part of the page failed to load. Refreshing usually fixes it. If it keeps
             happening, I&apos;d like to know.
           </p>
           <div

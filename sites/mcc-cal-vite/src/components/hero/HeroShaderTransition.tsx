@@ -64,8 +64,8 @@ function loadImage(url: string): Promise<HTMLImageElement> {
  * It is strictly additive. The <img> beneath it keeps rendering the current
  * slide, stays the LCP element, and remains the only thing search engines and
  * screen readers see; this canvas is aria-hidden and fades in only once it has
- * drawn a frame. Any failure — no context, a program that will not link, a
- * texture that cannot be sampled, a lost context — unmounts the canvas and
+ * drawn a frame. Any failure, no context, a program that will not link, a
+ * texture that cannot be sampled, a lost context, unmounts the canvas and
  * leaves the original carousel intact.
  *
  * Built on ogl rather than three: this draws one fullscreen triangle with a
@@ -106,7 +106,7 @@ export default function HeroShaderTransition({
 
   /**
    * Returns a GPU texture for `url`, decoding it if it is not already cached.
-   * Resolves to null when the image cannot be sampled — almost always a
+   * Resolves to null when the image cannot be sampled, almost always a
    * cross-origin file served without CORS headers.
    *
    * The cache is a plain Map used as an LRU: Map preserves insertion order, so
@@ -218,7 +218,7 @@ export default function HeroShaderTransition({
         });
 
         // ogl warns on a failed compile but does not always throw, and a
-        // program that never linked still renders — as black — which would
+        // program that never linked still renders, as black, which would
         // blank the photograph the canvas sits on. Check explicitly.
         if (!gl.getProgramParameter(program.program, gl.LINK_STATUS)) {
           setFailed(true);
@@ -359,7 +359,7 @@ export default function HeroShaderTransition({
       uniforms.uTo.value = texture;
       uniforms.uToFrame.value.set(frame);
 
-      // The very first texture appears without a dissolve — there is nothing to
+      // The very first texture appears without a dissolve, there is nothing to
       // dissolve from, and animating here would fight the <img> fade-in.
       if (isFirstFrame) {
         uniforms.uFromFrame.value.set(frame);

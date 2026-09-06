@@ -5,8 +5,8 @@
  * them meant a deploy. They now live in `availability_rules` /
  * `availability_blackouts` (see supabase/migrations/20260906120000).
  *
- * A weekday can have several windows — a day-job shift in the middle leaves a
- * morning and an evening — and each window carries its own notice period, so
+ * A weekday can have several windows: a day-job shift in the middle leaves a
+ * morning and an evening. Each window carries its own notice period, so
  * hours that need a shift swapped can still be offered further out instead of
  * being closed entirely.
  *
@@ -75,7 +75,7 @@ export async function loadAvailabilityRules(bookingType, start, end) {
 
     if (rulesResult.error) throw rulesResult.error;
 
-    // No rows configured for this type is not an error — it means "never
+    // No rows configured for this type is not an error. It means "never
     // set up", so use the schedule that shipped before the table existed.
     if (!rulesResult.data?.length) return buildDefaults(bookingType);
 
@@ -111,8 +111,8 @@ export async function loadAvailabilityRules(bookingType, start, end) {
 /**
  * Flattens every window configured for a weekday into candidate slot starts.
  *
- * Windows may abut or overlap — free time either side of a day-job shift often
- * touches it — so starts are de-duplicated, and where two windows offer the
+ * Windows may abut or overlap, since free time either side of a day-job shift
+ * often touches it. Starts are de-duplicated, and where two windows offer the
  * same start the shorter notice wins. A start is only a candidate if the whole
  * booking fits inside its window.
  *

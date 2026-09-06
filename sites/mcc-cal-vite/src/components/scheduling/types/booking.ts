@@ -36,6 +36,8 @@ export interface RequesterInfo {
   notes?: string;
 }
 
+export type LocationMode = 'virtual' | 'in-person';
+
 export interface Booking {
   id: string;
   eventTypeId: string;
@@ -47,6 +49,8 @@ export interface Booking {
   createdAt: string; // ISO timestamp
   requesterTimezone: string;
   ownerTimezone: string;
+  /** Where it happens: the type's default, or the address for an in-person booking. */
+  location?: string;
 }
 
 export interface TimeSlot {

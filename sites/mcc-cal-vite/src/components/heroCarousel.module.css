@@ -1,4 +1,4 @@
-/* McCal Hero Carousel — ported from widget v1.3.14 */
+/* McCal Hero Carousel, ported from widget v1.3.14 */
 
 .heroWidget,
 .heroCarousel,
@@ -370,7 +370,7 @@
   background: rgba(255, 255, 255, 0.95);
 }
 
-/* Wide screens — wider content well, cap hero at 100svh */
+/* Wide screens, wider content well, cap hero at 100svh */
 @media (min-width: 1440px) {
   .heroContent,
   .heroCaption {

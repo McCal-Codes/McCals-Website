@@ -33,7 +33,7 @@ function normalise(collections: PortraitCollection[]): PortfolioGroup[] {
         // imageUrl.portrait handles this transparently since it joins folderPath + filename
         url: imageUrl.portrait(collection.folderPath, filename),
         filename: filename.split('/').pop() ?? filename,
-        alt: `${collection.collectionName} — ${filename.split('/').pop() ?? filename}`,
+        alt: `${collection.collectionName}, ${filename.split('/').pop() ?? filename}`,
       }));
 
       return {

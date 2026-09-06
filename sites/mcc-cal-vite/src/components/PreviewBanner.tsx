@@ -25,7 +25,7 @@ export default function PreviewBanner() {
       role="status"
       aria-label="Preview deployment indicator"
     >
-      ⚡ PREVIEW DEPLOYMENT — not indexed, not production
+      ⚡ PREVIEW DEPLOYMENT, not indexed, not production
     </div>
   );
 }

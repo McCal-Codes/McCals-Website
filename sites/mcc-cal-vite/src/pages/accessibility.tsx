@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import { notifyConsentChanged } from '@/lib/consent';
+import { applyConsentToGa4 } from '@/utils/ga4';
 import './accessibility.css';
 
 // Icon components (inline SVG to avoid external dependency)
@@ -340,6 +342,11 @@ const AccessibilityPage = () => {
     const storage = getLocalStorageSafe();
     storage?.setItem(COOKIE_CONSENT_KEY, JSON.stringify(prefs));
     storage?.setItem(COOKIE_CONSENT_DATE_KEY, new Date().toISOString());
+
+    // Make the choice real. Until this call existed the preferences were
+    // written and never read, so rejecting analytics changed nothing.
+    notifyConsentChanged();
+    applyConsentToGa4();
     setShowSaveConfirmation(true);
     setTimeout(() => setShowSaveConfirmation(false), 3000);
   };

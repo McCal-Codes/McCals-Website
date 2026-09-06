@@ -3,8 +3,8 @@
  *
  * Written by hand rather than pulled from a package: a single VEVENT is a
  * small, stable spec, and this keeps a dependency out of the serverless
- * bundle. The pieces that are easy to get wrong — CRLF line endings, text
- * escaping, and folding long lines — are handled below.
+ * bundle. The pieces that are easy to get wrong, CRLF line endings, text
+ * escaping, and folding long lines, are handled below.
  */
 
 /** RFC 5545 §3.3.11: escape backslash, semicolon, comma and newline in TEXT values. */

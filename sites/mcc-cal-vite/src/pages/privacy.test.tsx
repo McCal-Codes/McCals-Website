@@ -5,7 +5,7 @@ import PrivacyPage from './privacy';
 
 /**
  * The cookie disclosure moved here when the combined policies page was split. These
- * assertions came with it — they were previously part of the policies-legal test.
+ * assertions came with it, they were previously part of the policies-legal test.
  */
 describe('PrivacyPage', () => {
   it('links out to the accessibility and cookie policy', () => {

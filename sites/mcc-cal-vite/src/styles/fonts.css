@@ -1,6 +1,6 @@
-/* Self-hosted fonts — replaces Google Fonts external requests */
+/* Self-hosted fonts, replaces Google Fonts external requests */
 
-/* Inter — latin, regular */
+/* Inter, latin, regular */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -12,7 +12,7 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Inter — latin, semibold */
+/* Inter, latin, semibold */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -24,7 +24,7 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Inter — latin, bold */
+/* Inter, latin, bold */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -36,7 +36,7 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Fraunces — latin, variable weight 500–700 */
+/* Fraunces, latin, variable weight 500–700 */
 @font-face {
   font-family: 'Fraunces';
   font-style: normal;

@@ -4,7 +4,7 @@ import { sendEmailOrThrow } from '../api/_lib/email.js';
 /**
  * Resend resolves with `{ data, error }` instead of rejecting when the API
  * refuses a message, so a plain `await resend.emails.send(...)` inside a
- * try/catch silently swallowed every failure — an unverified sending domain,
+ * try/catch silently swallowed every failure, an unverified sending domain,
  * an exhausted quota, a bad key. The enquiry looked emailed and was not.
  */
 describe('sendEmailOrThrow', () => {

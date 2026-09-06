@@ -6,7 +6,7 @@
  * looks safe and is not: an unverified sending domain
  * (`invalid_from_address`), an exhausted quota (`daily_quota_exceeded`) or a
  * bad key all resolve normally and the catch block never runs. Every failure
- * was therefore invisible — the booking or enquiry appeared to have been
+ * was therefore invisible: the booking or enquiry appeared to have been
  * emailed when nothing was sent.
  *
  * This converts that into a thrown error so the existing catch blocks, which
@@ -17,7 +17,7 @@ export async function sendEmailOrThrow(resend, payload) {
 
   if (error) {
     const detail = [error.name, error.message].filter(Boolean).join(': ');
-    const failure = new Error(`Resend refused the email — ${detail || 'unknown error'}`);
+    const failure = new Error(`Resend refused the email - ${detail || 'unknown error'}`);
     failure.code = error.name;
     throw failure;
   }

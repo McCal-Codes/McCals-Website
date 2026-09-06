@@ -11,7 +11,7 @@ import { describe, expect, it } from 'vitest';
  * server-side render would do.
  *
  * The failure this catches is cheap to introduce and expensive to find later:
- * reading `window` or `document` while rendering — most often in a `useState`
+ * reading `window` or `document` while rendering, most often in a `useState`
  * initializer, which looks like setup but runs on every render. A single
  * `useState(window.innerWidth <= 768)` in the shared Nav was enough to make every
  * page in the app unrenderable outside a browser.
@@ -66,7 +66,7 @@ describe('server-side rendering safety', () => {
     const html = renderPage(Page, route);
     const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 
-    // A component can render without throwing and still emit nothing useful — for
+    // A component can render without throwing and still emit nothing useful, for
     // example if its content is gated behind a browser-only check.
     expect(text.length, `${route} rendered almost no text`).toBeGreaterThan(200);
   });

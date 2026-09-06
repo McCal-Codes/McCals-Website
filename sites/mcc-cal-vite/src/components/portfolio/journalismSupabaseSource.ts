@@ -32,7 +32,7 @@ function deriveCategory(tags: string[]): string {
 /**
  * Fetches journalism images uploaded via the R2/Supabase pipeline and shapes
  * them into the same event/image structure the static manifest produces.
- * Never throws — a Supabase outage or misconfiguration should never break
+ * Never throws, a Supabase outage or misconfiguration should never break
  * the journalism page, it should just fall back to static-only content.
  */
 export async function fetchSupabaseJournalismEvents(
@@ -107,7 +107,7 @@ function normalizeEventName(name: string): string {
  * Merges Supabase-sourced journalism events with the static-manifest events.
  * When a static event's name matches a Supabase collection (same event,
  * different pipeline), the static entry is dropped in favor of the Supabase
- * one — Supabase is the more current, more complete source going forward.
+ * one, Supabase is the more current, more complete source going forward.
  */
 export function mergeJournalismEvents<T extends { eventName: string }>(
   staticEvents: T[],

@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 /**
  * Read-only API routes are served from Vercel's CDN so that repeat visitors do not
- * cost a function invocation — and, for google-reviews, do not cost a billed Google
+ * cost a function invocation, and, for google-reviews, do not cost a billed Google
  * Places call.
  *
  * The rule these tests protect is the one that is easy to get wrong: a degraded or

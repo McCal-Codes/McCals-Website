@@ -37,7 +37,7 @@ const PINCH_ZOOM_THRESHOLD_RATIO = 0.04;
 const WHEEL_NAVIGATION_THRESHOLD_PX = 42;
 const WHEEL_NAVIGATION_COOLDOWN_MS = 380;
 const WHEEL_ZOOM_DELTA_FOR_DOUBLE = 120;
-/* Must stay a subset of vercel.json images.sizes — the optimizer 400s any other width. */
+/* Must stay a subset of vercel.json images.sizes, the optimizer 400s any other width. */
 const LIGHTBOX_SRCSET_WIDTHS = [640, 1080, 1440, 1920];
 const LIGHTBOX_SIZES = '(max-width: 720px) calc(100vw - 28px), 1100px';
 

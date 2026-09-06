@@ -71,7 +71,7 @@ export function ConfirmationView({
 
         <div className="scheduling-confirmation-detail">
           <span className="scheduling-confirmation-label">Location</span>
-          <span className="scheduling-confirmation-value">{bookingType.location}</span>
+          <span className="scheduling-confirmation-value">{booking.location || bookingType.location}</span>
         </div>
 
         {booking.requester.notes && (

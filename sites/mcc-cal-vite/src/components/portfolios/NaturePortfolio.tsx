@@ -51,7 +51,7 @@ function normalise(collections: NatureCollection[]): PortfolioGroup[] {
             image.alt ??
             image.caption ??
             image.description ??
-            `${collection.collectionName} — photo ${index + 1}`,
+            `${collection.collectionName}, photo ${index + 1}`,
         };
       });
 

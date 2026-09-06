@@ -27,7 +27,7 @@ function normalise(bands: ConcertBand[]): PortfolioGroup[] {
     const images = band.images.map((filename) => ({
       url: imageUrl.concert(band.relativeFolderPath, filename),
       filename,
-      alt: `${band.bandName} — ${filename}`,
+      alt: `${band.bandName}, ${filename}`,
     }));
 
     return {

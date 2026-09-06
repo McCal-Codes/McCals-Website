@@ -19,7 +19,7 @@ type QueuedError = {
 
 /**
  * Whether Sentry is configured at all. `sentry-config` is a few pure functions with
- * no dependency on the SDK, so consulting it here is free — and it lets us skip
+ * no dependency on the SDK, so consulting it here is free, and it lets us skip
  * downloading ~98 kB of SDK entirely when there is no DSN (local preview, forks,
  * any build without Sentry env vars).
  */
@@ -39,7 +39,7 @@ let pendingRouteName: string | null = null;
  *
  * This replaces what `wrapCreateBrowserRouterV6` used to do. That wrapper had to be
  * called at module scope to build the router, which forced the whole SDK into the
- * entry chunk — the exact cost this module exists to avoid. Route names are set
+ * entry chunk, the exact cost this module exists to avoid. Route names are set
  * here instead, from the same helper Speed Insights already uses.
  *
  * Calls made before the SDK loads are held and applied once it is ready.
@@ -88,7 +88,7 @@ function drainQueue() {
 
 /**
  * Loads and initializes the SDK, then replays anything captured while it was in
- * flight. Idempotent — concurrent callers share one load.
+ * flight. Idempotent, concurrent callers share one load.
  */
 export function loadSentry(): Promise<void> {
   if (loading) return loading;

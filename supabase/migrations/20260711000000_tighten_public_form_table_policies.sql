@@ -9,7 +9,7 @@
 -- sites/mcc-cal-vite/api/) or authenticated admin users, so the anon
 -- policies are dropped entirely. No client code references these tables.
 --
--- NOTE: not yet applied to the live database as of this commit — apply via
+-- NOTE: not yet applied to the live database as of this commit, apply via
 -- the Supabase SQL editor or `supabase db push` (both form tables were
 -- empty at the time this was written, so nothing had leaked).
 

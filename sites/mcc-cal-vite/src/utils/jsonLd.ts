@@ -13,7 +13,7 @@ const SITE_ROOT = 'https://mcc-cal.com';
  * Rights values for image structured data.
  *
  * Google reads five fields to attribute and license an image. `license` is the one
- * that gates the "Licensable" badge — without it the others display attribution but
+ * that gates the "Licensable" badge, without it the others display attribution but
  * the badge never appears, which is a silent failure.
  *
  * These must match what scripts/metadata/embed-image-rights.js writes into the files

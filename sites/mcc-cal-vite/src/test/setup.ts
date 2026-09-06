@@ -31,7 +31,7 @@ global.ResizeObserver = class ResizeObserver {
 
 // Mock matchMedia. Guarded because this setup file also runs for suites that opt into
 // the node environment (`// @vitest-environment node`) to check rendering without a
-// DOM — there, `window` genuinely does not exist and touching it would fail the whole
+// DOM, there, `window` genuinely does not exist and touching it would fail the whole
 // suite before a single test ran.
 if (typeof window !== 'undefined') {
   Object.defineProperty(window, 'matchMedia', {
