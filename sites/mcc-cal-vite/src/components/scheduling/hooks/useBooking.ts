@@ -6,14 +6,15 @@ import type {
   RequesterInfo,
 } from '../types/booking';
 import { getBookingTypeById } from '../config/bookingTypes';
-import { getRequesterTimezone } from '../utils/timezone';
+import { getRequesterTimezone, OWNER_TIMEZONE } from '../utils/timezone';
+import type { Booking } from '../types/booking';
 import { formatDateForInput, addDays } from '../utils/dateHelpers';
 
 interface UseBookingReturn {
   state: BookingState;
   selectDate: (date: string) => void;
   selectTime: (time: string) => void;
-  submitBookingDetails: (info: RequesterInfo) => Promise<void>;
+  submitBookingDetails: (info: RequesterInfo, hpField?: string) => Promise<void>;
   goBack: () => void;
   reset: () => void;
   availability: DayAvailability[];
@@ -37,6 +38,12 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
   const [availability, setAvailability] = useState<DayAvailability[]>([]);
   const [isLoadingAvailability, setIsLoadingAvailability] = useState(false);
   const [availabilityError, setAvailabilityError] = useState<string | null>(null);
+
+  // `getInitialState` resolves the event type back to the same module-level
+  // object from BOOKING_TYPES, so after reset() the effect below sees an
+  // unchanged dependency and never refetches. This counter gives it something
+  // that actually changes, so "book another" repopulates the calendar.
+  const [reloadKey, setReloadKey] = useState(0);
 
   // Fetch availability when event type is selected
   useEffect(() => {
@@ -75,7 +82,7 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
     };
 
     fetchAvailability();
-  }, [state.selectedEventType]);
+  }, [state.selectedEventType, reloadKey]);
 
   const selectDate = useCallback((date: string) => {
     setState((prev) => ({
@@ -96,7 +103,7 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
     }));
   }, []);
 
-  const submitBookingDetails = useCallback(async (info: RequesterInfo) => {
+  const submitBookingDetails = useCallback(async (info: RequesterInfo, hpField = '') => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
     try {
@@ -115,6 +122,10 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
           durationMinutes: state.selectedEventType!.durationMinutes,
           requester: info,
           requesterTimezone,
+          // Honeypot. The server drops the request when this is non-empty, so
+          // the name has to match what it reads (`hp_field`) — the form used to
+          // call it `website` and never sent it, leaving nothing to check.
+          hp_field: hpField,
         }),
       });
 
@@ -124,10 +135,29 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
         throw new Error(data.error || 'Failed to create booking');
       }
 
+      // The API returns only what the calendar owns — id, start, end and
+      // eventLink — while `Booking` (and ConfirmationView) also need the date,
+      // time and requester. Reading those straight off `data.booking` left
+      // `requester` undefined, so the confirmation screen threw on
+      // `booking.requester.notes` and every successful booking ended in the
+      // error boundary. Compose it from the state we already hold instead.
+      const confirmedBooking: Booking = {
+        id: data.booking?.id ?? '',
+        eventTypeId: state.selectedEventType!.id,
+        date: state.selectedDate!,
+        time: state.selectedTime!,
+        durationMinutes: state.selectedEventType!.durationMinutes,
+        requester: info,
+        status: 'confirmed',
+        createdAt: new Date().toISOString(),
+        requesterTimezone,
+        ownerTimezone: OWNER_TIMEZONE,
+      };
+
       setState((prev) => ({
         ...prev,
         step: 'confirmed',
-        confirmedBooking: data.booking,
+        confirmedBooking,
         isLoading: false,
         requesterInfo: info,
       }));
@@ -166,6 +196,7 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
     setState(getInitialState(eventTypeId));
     setAvailability([]);
     setAvailabilityError(null);
+    setReloadKey((key) => key + 1);
   }, [eventTypeId]);
 
   return {

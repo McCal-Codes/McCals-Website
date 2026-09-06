@@ -198,29 +198,52 @@ describe('public API behavior', () => {
   });
 
   it('removes Supabase bookings from fallback availability slots', async () => {
-    apiMocks.isSupabaseConfigured.mockReturnValue(true);
-    apiMocks.getServiceClient.mockReturnValue(
-      bookingSelectClient([
-        {
-          booking_date: '2026-04-20',
-          booking_time: '09:00',
-          duration_minutes: 30,
-        },
-      ]),
-    );
-    const { default: availabilityHandler } = await import('../api/schedule/availability.js');
-    const req = {
-      method: 'GET',
-      headers: { origin: 'https://mcc-cal.com' },
-      query: { eventType: 'grab-coffee', start: '2026-04-20', end: '2026-04-20' },
-    };
-    const res = createMockRes();
+    // The clock is frozen rather than using a hardcoded calendar date: slots
+    // must now clear a minimum-notice period, so a fixed date silently rots
+    // into the past and the endpoint correctly returns nothing. 2026-04-13 is
+    // a Monday; the queried day is a week later, clearing the 24h notice on
+    // free windows without needing the 14-day shift notice.
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-04-13T12:00:00.000Z'));
 
-    await availabilityHandler(req as never, res as never);
+    try {
+      apiMocks.isSupabaseConfigured.mockReturnValue(true);
+      apiMocks.getServiceClient.mockReturnValue(
+        bookingSelectClient([
+          {
+            booking_date: '2026-04-20',
+            booking_time: '09:00',
+            duration_minutes: 30,
+          },
+        ]),
+      );
+      const { default: availabilityHandler } = await import('../api/schedule/availability.js');
+      const req = {
+        method: 'GET',
+        headers: { origin: 'https://mcc-cal.com' },
+        query: { eventType: 'grab-coffee', start: '2026-04-20', end: '2026-04-20' },
+      };
+      const res = createMockRes();
 
-    const slots = (res.body as { days: Array<{ slots: Array<{ time: string }> }> }).days[0].slots;
-    expect(res.statusCode).toBe(200);
-    expect(slots.some((slot) => slot.time === '2026-04-20T09:00:00.000Z')).toBe(false);
+      await availabilityHandler(req as never, res as never);
+
+      expect(res.statusCode).toBe(200);
+
+      const { days } = res.body as {
+        days: Array<{ date: string; slots: Array<{ time: string }> }>;
+      };
+      expect(days).toHaveLength(1);
+
+      // Slot times are owner-timezone wall clock ("09:00"), not ISO instants.
+      const slots = days[0].slots;
+      expect(slots.length).toBeGreaterThan(0);
+      expect(slots.some((slot) => slot.time === '09:00')).toBe(false);
+      // A neighbouring slot outside the booked half hour still stands, so the
+      // assertion above is exclusion and not an empty result.
+      expect(slots.some((slot) => slot.time === '11:00')).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('blocks production booking requests that overlap existing Supabase bookings', async () => {

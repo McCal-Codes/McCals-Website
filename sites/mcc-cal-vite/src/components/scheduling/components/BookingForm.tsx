@@ -9,7 +9,8 @@ interface FormLabels {
 }
 
 interface BookingFormProps {
-  onSubmit: (info: RequesterInfo) => void;
+  /** `hpField` is the honeypot value; the server rejects the booking when it is non-empty. */
+  onSubmit: (info: RequesterInfo, hpField: string) => void;
   onBack: () => void;
   isLoading: boolean;
   eventName: string;
@@ -46,6 +47,9 @@ export function BookingForm({
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  // Honeypot. Kept out of `formData` so it is never validated, and never
+  // mistaken for something to persist alongside the requester's details.
+  const [hpField, setHpField] = useState('');
 
   const validateField = useCallback((name: keyof RequesterInfo, value: string): string | undefined => {
     switch (name) {
@@ -108,10 +112,10 @@ export function BookingForm({
       setTouched({ name: true, email: true, notes: true });
 
       if (!hasErrors) {
-        onSubmit(formData);
+        onSubmit(formData, hpField);
       }
     },
-    [formData, onSubmit, validateField]
+    [formData, hpField, onSubmit, validateField]
   );
 
   return (
@@ -126,10 +130,11 @@ export function BookingForm({
         <div className="scheduling-honeypot" aria-hidden="true">
           <input
             type="text"
-            name="website"
+            name="hp_field"
             tabIndex={-1}
             autoComplete="off"
-            onChange={() => {}}
+            value={hpField}
+            onChange={(e) => setHpField(e.target.value)}
           />
         </div>
 

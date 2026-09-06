@@ -35,6 +35,7 @@ const PrivacyPage = lazy(() => import('./pages/privacy'));
 const TermsPage = lazy(() => import('./pages/terms'));
 const FAQPage = lazy(() => import('./pages/faq'));
 const LinksPage = lazy(() => import('./pages/links'));
+const ManageBookingPage = lazy(() => import('./pages/manage-booking'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
@@ -146,6 +147,11 @@ const router = createBrowserRouter([
       // Hidden tap-card page: intentionally not in STATIC_PAGE_ROUTES/nav/sitemap,
       // reachable only by whoever has the direct URL (the NFC card).
       { path: '/links', element: <LinksPage /> },
+      // Reached only from the token link in a confirmation email: kept out of
+      // STATIC_PAGE_ROUTES (so out of nav and the sitemap) but pre-rendered via
+      // HIDDEN_ROUTES in generate-route-meta.js, since a path with no matching
+      // file 404s before the SPA rewrite is consulted.
+      { path: '/manage-booking', element: <ManageBookingPage /> },
       ...(import.meta.env.DEV
         ? [
             { path: '/showcase', element: <ShowcasePage /> },
