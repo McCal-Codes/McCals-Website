@@ -66,6 +66,7 @@ function inZone(startDate, zone) {
  *   manageUrl?: string | null,
  *   ownerEmail: string,
  *   ownerName?: string,
+ *   location?: { label: string, isInPerson: boolean } | null,
  * }} input
  * @returns {{
  *   requester: { subject: string, html: string, text: string },

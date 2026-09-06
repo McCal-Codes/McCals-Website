@@ -77,6 +77,27 @@ function loadDraft(): Partial<QuoteFormState> | null {
   }
 }
 
+/**
+ * Whether a draft holds anything the visitor actually typed.
+ *
+ * The autosave runs on every change, including the reset that "Start over"
+ * performs, so an empty draft is written back moments later. Without this the
+ * restored-draft notice would reappear on every later visit with nothing behind
+ * it. Only the free-text identity fields count: the rest have defaults.
+ */
+function draftHasContent(draft: Partial<QuoteFormState> | null): boolean {
+  if (!draft) return false;
+  return Boolean(
+    draft.name?.trim() ||
+      draft.email?.trim() ||
+      draft.phone?.trim() ||
+      draft.organization?.trim() ||
+      draft.project_date ||
+      draft.location?.trim() ||
+      draft.notes?.trim(),
+  );
+}
+
 function saveDraft(state: QuoteFormState) {
   try {
     localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
@@ -89,13 +110,30 @@ export function QuoteRequestForm() {
   const hpId = useId();
   const [step, setStep] = useState(1);
   const [honeypot, setHoneypot] = useState('');
+  // Whether this session started from a saved draft. A returning visitor was
+  // previously shown their old answers with no indication of where they came
+  // from and no way to clear them, which reads as a broken form rather than a
+  // convenience.
+  const [restoredDraft, setRestoredDraft] = useState(() => draftHasContent(loadDraft()));
   const [state, setState] = useState<QuoteFormState>(() => {
     const draft = loadDraft();
     return draft ? { ...defaultState(), ...draft, deliverables: draft.deliverables?.length ? draft.deliverables : ['Edited Photos'] } : defaultState();
   });
+
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [banner, setBanner] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const startOver = useCallback(() => {
+    try {
+      localStorage.removeItem(DRAFT_KEY);
+    } catch {
+      /* ignore */
+    }
+    setState(defaultState());
+    setFieldErrors({});
+    setStep(1);
+    setRestoredDraft(false);
+  }, []);
 
   const totalSteps = 3;
   const progress = (step / totalSteps) * 100;
@@ -306,7 +344,16 @@ export function QuoteRequestForm() {
           </p>
         </header>
 
-        {banner && (
+        {restoredDraft && !banner && (
+        <div className={styles.draftNotice} role="status">
+          <span>We kept your answers from last time.</span>
+          <button type="button" onClick={startOver} className={styles.draftNoticeAction}>
+            Start over
+          </button>
+        </div>
+      )}
+
+      {banner && (
           <div
             className={`${styles.message} ${styles.messageVisible} ${banner.type === 'success' ? styles.success : styles.error}`}
             role={banner.type === 'success' ? 'status' : 'alert'}
