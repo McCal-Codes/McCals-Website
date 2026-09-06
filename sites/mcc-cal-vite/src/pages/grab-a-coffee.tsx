@@ -7,7 +7,7 @@ import { BookingForm } from '@/components/scheduling/components/BookingForm';
 import { ConfirmationView } from '@/components/scheduling/components/ConfirmationView';
 import { getBookingType } from '@/components/scheduling/config/bookingTypes';
 import { formatDateWithTimezone, getRequesterTimezone } from '@/components/scheduling/utils/timezone';
-import type { DayAvailability, RequesterInfo } from '@/components/scheduling/types/booking';
+import type { DayAvailability, LocationMode, RequesterInfo } from '@/components/scheduling/types/booking';
 import '@/styles/scheduling.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
@@ -54,8 +54,12 @@ export default function GrabCoffeePage() {
     ? formatDateWithTimezone(state.selectedDate, requesterTimezone, 'full')
     : '';
 
-  const handleSubmit = async (info: RequesterInfo, hpField: string) => {
-    await submitBookingDetails(info, hpField);
+  const handleSubmit = async (
+    info: RequesterInfo,
+    hpField: string,
+    place: { locationMode: LocationMode; locationDetail: string },
+  ) => {
+    await submitBookingDetails(info, hpField, place);
   };
 
   const renderStepIndicator = () => {
@@ -148,6 +152,8 @@ export default function GrabCoffeePage() {
             onBack={goBack}
             isLoading={state.isLoading}
             eventName={BOOKING_TYPE.name}
+            defaultLocation={BOOKING_TYPE.location}
+            allowInPerson={BOOKING_TYPE.allowInPerson}
             dateDisplay={dateDisplay}
             timeDisplay={state.selectedTime || ''}
             formLabels={BOOKING_TYPE.formLabels}
@@ -216,7 +222,8 @@ export default function GrabCoffeePage() {
                   <span className="scheduling-event-indicator" />
                   <h3 className="scheduling-event-name">{BOOKING_TYPE.name}</h3>
                 </div>
-                <p className="scheduling-event-description">{BOOKING_TYPE.description}</p>
+                {/* The page header already carries the description; repeating it
+                    here pushed the first field further down for no new information. */}
                 <div className="scheduling-event-meta">
                   <span className="scheduling-event-duration">
                     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
@@ -228,7 +235,9 @@ export default function GrabCoffeePage() {
                     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                     </svg>
-                    {BOOKING_TYPE.location}
+                    {BOOKING_TYPE.allowInPerson
+                      ? `${BOOKING_TYPE.location}, or in person`
+                      : BOOKING_TYPE.location}
                   </span>
                 </div>
               </div>

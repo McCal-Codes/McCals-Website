@@ -9,12 +9,19 @@ import { inject } from '@vercel/analytics';
 import App from './App';
 import { captureError, installErrorBufferAndDeferSentry } from '@/lib/sentry-lazy';
 import { installGa4 } from '@/utils/ga4';
+import { hasAnalyticsConsent } from '@/lib/consent';
 
 // Buffers errors immediately and loads the Sentry SDK after first paint, so its
 // ~57 kB gzip is not in the critical path. Must run before anything that can throw.
 installErrorBufferAndDeferSentry();
 
-const enableVercelAnalytics = import.meta.env.PROD && import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS === 'true';
+// Analytics only loads when the visitor has not turned it off. Previously both
+// of these ran unconditionally, so the accessibility page's "Reject all" was
+// decorative.
+const enableVercelAnalytics =
+  import.meta.env.PROD &&
+  import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS === 'true' &&
+  hasAnalyticsConsent();
 
 // Initialize Vercel Analytics for route tracking
 if (enableVercelAnalytics) {

@@ -1,8 +1,8 @@
-/* Podcast Page — native Vite styles */
+/* Podcast Page, native Vite styles */
 
-/* ── Dev indicator — toggled by [data-dev] on .pod-page (never ships in prod) ── */
+/* ── Dev indicator, toggled by [data-dev] on .pod-page (never ships in prod) ── */
 .pod-page[data-dev]::before {
-  content: '⚡ DEV — ' attr(data-feed-status);
+  content: '⚡ DEV, ' attr(data-feed-status);
   position: fixed;
   top: 8px;
   right: 8px;

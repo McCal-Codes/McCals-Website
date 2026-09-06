@@ -122,8 +122,8 @@ function AppShell() {
 
 // Plain createBrowserRouter, not Sentry's wrapCreateBrowserRouterV6. The wrapper
 // has to run at module scope to build the router, which pulls the whole SDK into
-// the entry chunk and blocks first paint. Route-pattern transaction names — the
-// main thing the wrapper bought us — are set from RouteAnalytics instead.
+// the entry chunk and blocks first paint. Route-pattern transaction names, the
+// main thing the wrapper bought us, are set from RouteAnalytics instead.
 const enableSentryExamplePage =
   import.meta.env.DEV || import.meta.env.VITE_ENABLE_SENTRY_TEST_PAGE === 'true';
 

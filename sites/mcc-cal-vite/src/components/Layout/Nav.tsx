@@ -121,7 +121,7 @@ const Nav: React.FC = () => {
         aria-label="Primary navigation"
       >
         <div className="mcc-nav__brand">
-          <Link to="/" title="Home — Caleb McCartney" aria-label="Home — Caleb McCartney">
+          <Link to="/" title="Home, Caleb McCartney" aria-label="Home, Caleb McCartney">
             Caleb McCartney
           </Link>
         </div>

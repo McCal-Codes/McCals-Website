@@ -30,7 +30,7 @@ alter table public.availability_blackouts
 
 -- No two active windows for the same booking type and weekday may overlap.
 -- int4range is half-open, so a window ending at 10:00 and another starting at
--- 10:00 are adjacent rather than overlapping — which is exactly how a shift
+-- 10:00 are adjacent rather than overlapping, which is exactly how a shift
 -- butts up against the free time either side of it.
 alter table public.availability_rules
   drop constraint if exists availability_rules_no_overlap;

@@ -4,10 +4,11 @@ import { contactSchema, safeParseBody } from './_lib/validation.js';
 import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 import { captureApiException } from './_lib/sentry.js';
 import { sendEmailOrThrow } from './_lib/email.js';
+import { buildContactEmail } from './_lib/enquiry-emails.js';
 
 // Lazy-initialize Resend, matching schedule/book.js. Constructing it at module
-// scope throws when RESEND_API_KEY is absent, which takes down the whole module
-// — the endpoint stops responding rather than degrading to "stored, not
+// scope throws when RESEND_API_KEY is absent, which takes down the whole
+// module: the endpoint stops responding rather than degrading to "stored, not
 // emailed", and the local API server cannot boot at all without secrets.
 let resendClient = null;
 function getResendClient() {
@@ -59,7 +60,7 @@ export default async function handler(req, res) {
 
   const { name, email, subject, message, consent, contact_loaded_at } = parsed.data;
 
-  // Timing check (required client timestamp — blocks drive-by scripted posts)
+  // Timing check (required client timestamp, blocks drive-by scripted posts)
   const loadedAt = Number(contact_loaded_at);
   if (!Number.isFinite(loadedAt)) {
     res.status(400).json({ error: 'Invalid request.' });
@@ -99,23 +100,14 @@ export default async function handler(req, res) {
   const resend = getResendClient();
   if (resend) {
     try {
+      const mail = buildContactEmail({ name, email, subject, message, consent, submissionId });
       await sendEmailOrThrow(resend, {
         from: FROM_EMAIL,
         to: TO_EMAIL,
-        replyTo: email,
-        subject: `[Contact] ${subject} — from ${name}`,
-        text: [
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Subject: ${subject}`,
-          ``,
-          `Message:`,
-          message,
-          ``,
-          `Consent: ${consent ? 'Yes' : 'No'}`,
-          submissionId ? `Submission ID: ${submissionId}` : '',
-          `Submitted: ${new Date().toISOString()}`,
-        ].join('\n'),
+        replyTo: mail.replyTo,
+        subject: mail.subject,
+        html: mail.html,
+        text: mail.text,
       });
     } catch (err) {
       console.error('[contact] Email error: - contact.js:103', err);

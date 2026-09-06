@@ -367,3 +367,41 @@
 .fullWidth {
   grid-column: 1 / -1;
 }
+
+/* Draft restored from a previous visit. Sits above the form so it is read
+   before the pre-filled fields are, rather than explaining them afterwards. */
+.draftNotice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--mcc-line);
+  border-radius: 8px;
+  background: var(--mcc-chip);
+  color: var(--mcc-fg-muted);
+  font-size: 0.9375rem;
+}
+
+.draftNoticeAction {
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  color: var(--mcc-fg);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.draftNoticeAction:hover {
+  color: var(--mcc-accent);
+}
+
+.draftNoticeAction:focus-visible {
+  outline: 2px solid var(--mcc-focus, #7dd3fc);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

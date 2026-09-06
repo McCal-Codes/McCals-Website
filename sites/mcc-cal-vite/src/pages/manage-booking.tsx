@@ -190,7 +190,7 @@ export default function ManageBookingPage() {
 
       {mode === 'cancelled' && (
         <p className="scheduling-step-description" role="status">
-          This booking is cancelled. Nothing further is needed — if you&apos;d like to rebook,{' '}
+          This booking is cancelled. If you&apos;d like to rebook,{' '}
           <Link to="/grab-a-coffee">pick a new time</Link>.
         </p>
       )}

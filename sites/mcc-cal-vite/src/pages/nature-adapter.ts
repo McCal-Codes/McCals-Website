@@ -122,22 +122,22 @@ function splitLandscapeCollection(item: NatureItem): NatureGroupSource[] {
   }> = [
     {
       key: 'fireworks',
-      title: `${item.collectionName} — Fireworks`,
+      title: `${item.collectionName}, Fireworks`,
       matcher: /fireworks/i,
     },
     {
       key: 'sunrise',
-      title: `${item.collectionName} — Sunrise`,
+      title: `${item.collectionName}, Sunrise`,
       matcher: /sunrise/i,
     },
     {
       key: 'point-park',
-      title: `${item.collectionName} — Point Park`,
+      title: `${item.collectionName}, Point Park`,
       matcher: /point[_\s-]*park|ppu ad/i,
     },
     {
       key: 'night-market',
-      title: `${item.collectionName} — Night Market`,
+      title: `${item.collectionName}, Night Market`,
       matcher: /night[_\s-]*market/i,
     },
   ];
@@ -175,7 +175,7 @@ function splitLandscapeCollection(item: NatureItem): NatureGroupSource[] {
 
   if (selects.length > 0) {
     groupedCollections.push({
-      title: `${item.collectionName} — City Selects`,
+      title: `${item.collectionName}, City Selects`,
       folderPath: item.folderPath,
       images: selects,
       category,

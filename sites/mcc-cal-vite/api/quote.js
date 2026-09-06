@@ -4,10 +4,11 @@ import { quoteSchema, safeParseBody } from './_lib/validation.js';
 import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 import { captureApiException } from './_lib/sentry.js';
 import { sendEmailOrThrow } from './_lib/email.js';
+import { buildQuoteEmail } from './_lib/enquiry-emails.js';
 
 // Lazy-initialize Resend, matching schedule/book.js. Constructing it at module
-// scope throws when RESEND_API_KEY is absent, which takes down the whole module
-// — the endpoint stops responding rather than degrading to "stored, not
+// scope throws when RESEND_API_KEY is absent, which takes down the whole
+// module: the endpoint stops responding rather than degrading to "stored, not
 // emailed", and the local API server cannot boot at all without secrets.
 let resendClient = null;
 function getResendClient() {
@@ -120,44 +121,38 @@ export default async function handler(req, res) {
   const resend = getResendClient();
   if (resend) {
     try {
+      const mail = buildQuoteEmail({
+        name,
+        email,
+        serviceType: service_type,
+        projectDate: project_date,
+        budget,
+        intendedUse: intended_use,
+        duration,
+        geographic,
+        deliverables: `${deliverables}${body.other_deliverables ? `, ${body.other_deliverables}` : ''}`,
+        details: {
+          phone: body.phone,
+          organization: body.organization,
+          location: body.location,
+          setting: body.setting,
+          attendees: body.attendees,
+          times:
+            body.start_time || body.end_time
+              ? `${body.start_time || '--'} to ${body.end_time || '--'}`
+              : undefined,
+          timeline: body.timeline,
+        },
+        notes: body.notes,
+        quoteId,
+      });
       await sendEmailOrThrow(resend, {
         from: FROM_EMAIL,
         to: TO_EMAIL,
-        replyTo: email,
-        subject: `[Quote Request] ${service_type} — from ${name}`,
-        text: [
-          `=== CONTACT ===`,
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Phone: ${body.phone || 'N/A'}`,
-          `Organization: ${body.organization || 'N/A'}`,
-          ``,
-          `=== PROJECT ===`,
-          `Service: ${service_type}`,
-          `Date: ${project_date}`,
-          `Time: ${body.start_time || '--'} to ${body.end_time || '--'}`,
-          `Location: ${body.location || 'N/A'}`,
-          `Setting: ${body.setting || 'N/A'}`,
-          `Attendees: ${body.attendees || 'N/A'}`,
-          ``,
-          `=== DELIVERABLES ===`,
-          `${deliverables}${body.other_deliverables ? `, ${body.other_deliverables}` : ''}`,
-          ``,
-          `=== LICENSING ===`,
-          `Intended Use: ${intended_use}`,
-          `Duration: ${duration}`,
-          `Geographic Scope: ${geographic}`,
-          ``,
-          `=== BUDGET ===`,
-          `Budget: ${budget}`,
-          `Timeline: ${body.timeline || 'N/A'}`,
-          ``,
-          `=== NOTES ===`,
-          body.notes || 'No additional notes',
-          quoteId ? `Quote ID: ${quoteId}` : '',
-          ``,
-          `Submitted: ${new Date().toISOString()}`,
-        ].join('\n'),
+        replyTo: mail.replyTo,
+        subject: mail.subject,
+        html: mail.html,
+        text: mail.text,
       });
     } catch (err) {
       console.error('[quote] Email error:', err);

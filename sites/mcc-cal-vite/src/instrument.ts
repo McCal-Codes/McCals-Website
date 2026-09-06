@@ -14,7 +14,7 @@ import { getSentryBrowserConfig } from './lib/sentry-config';
 
 /**
  * Initializes Sentry. Exported rather than run on import so that nothing in the
- * critical path statically depends on this module — `lib/sentry-lazy.ts` pulls it
+ * critical path statically depends on this module, `lib/sentry-lazy.ts` pulls it
  * in dynamically after first paint, which keeps the SDK out of the entry chunk.
  *
  * Idempotent: repeated calls after the first are ignored.

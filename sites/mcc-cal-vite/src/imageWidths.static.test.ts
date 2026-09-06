@@ -53,6 +53,12 @@ function findWidthUsages(): WidthUsage[] {
     { regex: /getOptimizedImageUrl\([^)]*\{\s*width:\s*(\d+)/g, label: 'getOptimizedImageUrl call' },
     // <OptimizedImage optimizedWidth={160} .../>
     { regex: /optimizedWidth=\{(\d+)\}/g, label: 'optimizedWidth prop' },
+    // srcSetWidths={[320, 480]} and, importantly, the ternary form
+    // srcSetWidths={cond ? [640, 960] : [360, 540]}. The earlier patterns only
+    // matched a bare array, so a width written in a branch slipped past the
+    // guard entirely, which is precisely the 400 this test exists to prevent.
+    { regex: /srcSetWidths=\{[^}]*?\[([\d,\s]+)\]/g, label: 'srcSetWidths prop' },
+    { regex: /srcSetWidths=\{[^}]*?\[[\d,\s]+\]\s*:\s*\[([\d,\s]+)\]/g, label: 'srcSetWidths ternary branch' },
   ];
 
   for (const file of collectSourceFiles(join(appRoot, 'src'))) {
@@ -78,7 +84,7 @@ describe('image width allowlist', () => {
   it('every requested image width is in vercel.json images.sizes', () => {
     const usages = findWidthUsages();
     // If this drops to zero the regexes have drifted from the codebase and
-    // the guard is silently dead — fail loudly instead.
+    // the guard is silently dead, fail loudly instead.
     expect(usages.length).toBeGreaterThan(0);
 
     const violations = usages.flatMap(({ file, context, widths }) =>

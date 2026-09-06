@@ -14,6 +14,8 @@ export interface ExtendedEventType extends EventType {
   pageDescription: string;
   confirmationTitle: string;
   confirmationMessage: string;
+  /** Whether this type can be booked in person as well as remotely. */
+  allowInPerson?: boolean;
   formLabels: {
     namePlaceholder: string;
     emailPlaceholder: string;
@@ -31,14 +33,15 @@ export const BOOKING_TYPES: Record<string, ExtendedEventType> = {
     description: 'A casual 30-minute conversation to connect, ask questions, or explore potential collaborations over a virtual coffee. No pressure, just good conversation.',
     durationMinutes: 30,
     color: '#c9a86c',
-    location: 'Virtual (Google Meet)',
+    location: 'Google Meet',
+    allowInPerson: true,
     maxPerDay: 4,
     headerClass: 'scheduling-header--coffee',
     displayClass: 'scheduling-event-display--coffee',
     pageTitle: 'Grab a Coffee | Caleb McCartney',
     pageDescription: 'Schedule a casual virtual coffee chat with Caleb McCartney to connect, ask questions, or explore potential collaborations.',
-    confirmationTitle: 'Coffee chat booked!',
-    confirmationMessage: "Looking forward to our conversation. I've sent a confirmation to your email with the meeting details.",
+    confirmationTitle: 'Coffee chat booked',
+    confirmationMessage: "Looking forward to it. A confirmation is on its way to your email.",
     formLabels: {
       namePlaceholder: 'Your name',
       emailPlaceholder: 'your@email.com',
@@ -54,14 +57,15 @@ export const BOOKING_TYPES: Record<string, ExtendedEventType> = {
     description: 'Schedule a 60-minute recording session for the Caffeinated Connections podcast. We\'ll have a great conversation about your work, creative process, and the stories behind what you do.',
     durationMinutes: 60,
     color: '#7dd3fc',
-    location: 'Virtual (Zoom or Google Meet)',
+    location: 'Zoom or Google Meet',
+    allowInPerson: true,
     maxPerDay: 2,
     headerClass: 'scheduling-header--podcast',
     displayClass: 'scheduling-event-display--podcast',
     pageTitle: 'Book a Podcast Recording | Caffeinated Connections',
     pageDescription: 'Schedule a podcast recording session with Caleb McCartney for Caffeinated Connections. Share your story and connect with listeners.',
-    confirmationTitle: 'Podcast session booked!',
-    confirmationMessage: "We're all set to record. I've sent you a confirmation with details and a few tips to prepare for our conversation.",
+    confirmationTitle: 'Podcast session booked',
+    confirmationMessage: "We're all set to record. A confirmation is on its way to your email.",
     formLabels: {
       namePlaceholder: 'Your full name',
       emailPlaceholder: 'your@email.com',

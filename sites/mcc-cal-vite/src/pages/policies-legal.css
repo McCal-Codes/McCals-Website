@@ -846,7 +846,7 @@ body[data-theme="light"] .policy-page-wrapper {
 /* ── Hub layout ──────────────────────────────────────────────────────────────
    The policies route is now an index pointing at /licensing, /privacy and
    /terms rather than a document itself, so it has no table of contents and no
-   reading chrome — just the three cards. */
+   reading chrome, just the three cards. */
 
 .policy-site--hub {
   display: block;

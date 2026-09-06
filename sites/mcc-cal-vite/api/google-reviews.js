@@ -12,7 +12,7 @@ const REVIEWS_RATE_LIMIT = {
  * weeks, and every origin miss is a billed Google Places API call, so serving most
  * traffic from cache cuts both latency and cost.
  *
- * Only the success path gets this — errors, rate-limit rejections, and the
+ * Only the success path gets this. Errors, rate-limit rejections, and the
  * not-configured response keep `no-store` so a transient failure is not pinned at
  * the edge for an hour.
  *
