@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-09-07
+
+### Consent Decides Whether Anything Is Measured, and Now Something Is
+
+- The accessibility page wrote cookie preferences to localStorage and nothing ever read them. `installGa4()` ran unconditionally from `main.tsx`, Vercel Analytics alongside it, so "Reject All" changed nothing while being presented as a working control. A shared `lib/consent.ts` is now read by the GA4 bootstrap, the analytics init and every event call, and a decision applies immediately rather than on the next page load. GA4 is configured with Consent Mode v2, whose default state has to be declared before any tag loads; the site runs no advertising, so every ad signal stays denied.
+- The default with no choice recorded is granted. That is deliberate: the consent UI exists only on the accessibility page and there is no site-wide banner, so denying by default would silence analytics for every visitor who never opens that page. Serving EU visitors properly needs a banner and an opt-in default.
+- Three events fired site-wide before this and none on a revenue path, so there was no way to see which galleries produce enquiries or where the three-step quote form loses people. `utils/funnel.ts` wires the contact form, the quote form's individual steps, the booking flow and lightbox opens. Submissions use `generate_lead`, GA4's recommended event, which populates the Lead acquisition report rather than sitting in a custom bucket.
+
+### Emails People Can Read, and a Location That Might Not Be a Video Call
+
+- Notification emails were plain-text dumps of section headers. All four messages now share a layout built for mail clients rather than browsers: table layout, because Outlook renders through Word's HTML engine; inline styles, because Gmail strips style blocks on forward; 600px, no web fonts, no background images. Every message carries a plain-text alternative, which HTML-only mail was scored down for lacking.
+- Subject lines carry enough to triage from the inbox list, and replies reach the person who wrote in rather than the no-reply sender. Booking notifications previously had no reply path at all.
+- Sessions can be booked in person, with an address that reaches the calendar event, both emails and the .ics attachment. Choosing in person without giving an address is refused on the client and falls back to a video call on the server, because a calendar entry reading "in person" and nothing else is worse than a quietly virtual one.
+- Apple Mail and Outlook add events from the .ics attachment but Gmail does not, so both messages now carry a Google Calendar link as well.
+- `confirmationMessage` said "I've sent a confirmation to your email with the meeting details" inside the confirmation email, talking about itself. The client also held its own copy of the confirmation title and message, drifted from the server's, and the confirmation screen showed the booking type's default location rather than where the session was actually booked.
+- The quote form restored a saved draft silently, so a returning visitor met their old answers with no explanation and no way to clear them. It now says so, with a way to start over.
+
+### Vercel Spend
+
+- Three Vercel projects rebuilt on every push with no Ignored Build Step, so a change touching only the main site spent minutes rebuilding the admin and dev projects. Each now builds only when its own directory changed.
+- Image optimization is billed per transformation, cache read and cache write, charged on every cache miss and stale. `minimumCacheTTL` was unset, so a variant was re-transformed on every revalidation rather than once a month. `qualities` was unset, which mattered more than cost: `/_vercel/image` is public, so every distinct `q=` value produced its own billable cache entry and the query string could be walked indefinitely. Both are now pinned, and `sizes` dropped the five widths nothing requests.
+- `imageWidths.static.test.ts` exists to stop a width reaching the optimizer that is not allowlisted, after a 2560w srcset entry once shipped as "Image unavailable". Its patterns only matched a bare array, so the ternary in `FeaturedPortfolio.tsx` was invisible to it and three production widths had never been checked. Verified by injecting a bad width and watching the guard fail.
+
+
 ## 2026-09-06
 
 ### Booking Works Again, and Availability Is Something You Can Edit
