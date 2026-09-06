@@ -28,13 +28,23 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const SMOKE_MARKER = '[smoke]';
 const SMOKE_EMAIL = 'smoke-test@mcc-cal.com';
 
+/**
+ * `vercel env pull` writes values wrapped in double quotes, and writes the
+ * literal string `[SENSITIVE]` for any variable marked sensitive rather than
+ * its value. Both have to be handled or the placeholder is mistaken for a real
+ * secret and fails later as a confusing "Invalid URL".
+ */
 function loadEnv() {
   for (const file of ['.env.local', '.env']) {
     try {
       const raw = readFileSync(path.join(here, '..', file), 'utf8');
       for (const line of raw.split('\n')) {
         const match = /^([A-Z0-9_]+)=(.*)$/.exec(line.trim());
-        if (match && !process.env[match[1]]) process.env[match[1]] = match[2].trim();
+        if (!match) continue;
+
+        const value = match[2].trim().replace(/^["'](.*)["']$/, '$1');
+        if (!value || value === '[SENSITIVE]') continue;
+        if (!process.env[match[1]]) process.env[match[1]] = value;
       }
     } catch {
       // Absent file is fine; cleanup simply reports that it cannot run.
@@ -143,8 +153,10 @@ async function cleanup() {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
-    console.log('Cleanup skipped: VITE_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY missing from .env.');
-    console.log(`Delete rows where the email is ${SMOKE_EMAIL} in the Supabase dashboard.\n`);
+    console.log('Cleanup skipped: VITE_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is not usable locally.');
+    console.log('Note that `vercel env pull` cannot recover a variable marked Sensitive; it writes');
+    console.log('[SENSITIVE] in place of the value, so these have to be pasted into .env by hand.');
+    console.log(`Otherwise, delete rows where the email is ${SMOKE_EMAIL} in the Supabase dashboard.\n`);
     return;
   }
 
