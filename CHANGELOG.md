@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-09-10
+
+### A Photograph Too Large for the CDN to Serve
+
+- `Nature/Flowers & Plants/IMGP9549.jpg` was 24.3 MB. jsDelivr refuses anything over 20 MB, so it answered 403 while its 17.5 MB sibling in the same folder answered 200. It is listed in both `nature-manifest.json` and `portfolio-manifest.json`, so `/nature` had a permanently broken image and nothing reported it.
+- Fifteen Nature images are now bounded at 2048px on the long edge at quality 80, which is what the rest of the site already uses: Portrait and Concert both sit at a median 2048px and about 250 KB, and Nature was simply never put through the optimiser. The 24.3 MB frame is now 229 KB at 2048x1258. Across the folder that is 144 MB less to serve, and the EXIF, IPTC, XMP and ICC data survives, so the embedded copyright and licensing statement still travel with each photograph.
+- `optimize-images.js` gained `--max-edge=N`, which bounds the long edge for both orientations. The existing 3840x2160 box quietly penalised portrait frames: a 4000x6016 image fits inside it only by dropping to 1436x2160, roughly half the resolution a landscape from the same camera would keep. The default is unchanged, so no other portfolio moves.
+- A guard in `repo-data-integrity.test.ts` now fails on any portfolio image over 5 MB. The ceiling is 5 rather than 20 because 20 only catches the file that has already broken, and at 250 KB typical, anything near 5 MB has skipped the optimiser and is costing visitors bandwidth long before it costs them the picture. Verified by planting a 6 MB file and watching it fail.
+- This reclaims the bytes for visitors immediately. It does not shrink the repository, since the previous versions stay in history until the rewrite in #265.
+
+
 ## 2026-09-09
 
 ### A Repeatable Way to Check the Forms Actually Work
