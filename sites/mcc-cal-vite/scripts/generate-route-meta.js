@@ -166,7 +166,36 @@ const HIDDEN_ROUTES = [
     imagePath: '/about/caleb-mccartney-photo.jpg',
     imageAlt: 'Caleb McCartney',
   },
+  {
+    // Reached only from the token link in a confirmation email.
+    route: '/manage-booking',
+    title: 'Manage your booking | Caleb McCartney',
+    description: 'Reschedule or cancel your booking.',
+    robots: 'noindex, nofollow',
+    ogTitle: 'Manage your booking',
+    ogDescription: 'Reschedule or cancel your booking.',
+    imagePath: '/about/caleb-mccartney-photo.jpg',
+    imageAlt: 'Caleb McCartney',
+  },
 ];
+
+/**
+ * Meta for the generated 404.html. It is served for whatever path the visitor
+ * asked for, so `route` is only used to derive a self-referential /404
+ * canonical — matching what not-found.tsx sets at runtime. `noindex, nofollow`
+ * is what actually keeps it out of the index.
+ */
+const NOT_FOUND_ENTRY = {
+  route: '/404',
+  title: 'Page Not Found | McCal Media',
+  description:
+    'The page you are looking for does not exist. Explore McCal Media for photography, podcast, and creative content.',
+  robots: 'noindex, nofollow',
+  ogTitle: 'Page Not Found | McCal Media',
+  ogDescription: 'The page you are looking for does not exist.',
+  imagePath: '/about/caleb-mccartney-photo.jpg',
+  imageAlt: 'Caleb McCartney',
+};
 
 export function routeOutputPaths(route) {
   if (route === '/') return ['index.html'];
@@ -234,6 +263,15 @@ async function generateRouteMeta() {
         return outputPath;
       });
     }),
+  );
+
+  // Vercel serves /404.html for any path that matches no file. Without it a
+  // mistyped or retired URL gets Vercel's bare "NOT_FOUND" text and the app
+  // never boots, so the site's own 404 page — which exists and is routed —
+  // could never actually render.
+  await fs.writeFile(
+    path.join(distRoot, '404.html'),
+    applyRouteMeta(indexHtml, NOT_FOUND_ENTRY),
   );
 
   console.log(
