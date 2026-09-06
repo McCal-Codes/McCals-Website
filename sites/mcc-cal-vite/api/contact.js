@@ -3,6 +3,7 @@ import { applyRateLimit } from './_lib/rate-limit-redis.js';
 import { contactSchema, safeParseBody } from './_lib/validation.js';
 import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 import { captureApiException } from './_lib/sentry.js';
+import { sendEmailOrThrow } from './_lib/email.js';
 
 // Lazy-initialize Resend, matching schedule/book.js. Constructing it at module
 // scope throws when RESEND_API_KEY is absent, which takes down the whole module
@@ -98,7 +99,7 @@ export default async function handler(req, res) {
   const resend = getResendClient();
   if (resend) {
     try {
-      await resend.emails.send({
+      await sendEmailOrThrow(resend, {
         from: FROM_EMAIL,
         to: TO_EMAIL,
         replyTo: email,

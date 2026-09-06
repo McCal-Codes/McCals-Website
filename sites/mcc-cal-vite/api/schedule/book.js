@@ -13,6 +13,7 @@ import { BOOKING_CONFIGS } from '../_lib/booking-config.js';
 import { buildBookingIcs } from '../_lib/ics.js';
 import { OWNER_TIMEZONE, ownerWallTimeToUtc } from '../_lib/timezone.js';
 import { buildManageUrl, createManageToken } from '../_lib/booking-token.js';
+import { sendEmailOrThrow } from '../_lib/email.js';
 
 // Lazy-initialize Resend client to handle missing API key gracefully
 let resendClient = null;
@@ -265,7 +266,7 @@ async function sendConfirmationEmail(
 
   try {
     // Send to user
-    await resend.emails.send({
+    await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: booking.requester.email,
       subject: config.confirmationTitle,
@@ -307,7 +308,7 @@ async function sendConfirmationEmail(
     });
 
     // Send notification to admin
-    await resend.emails.send({
+    await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: TO_EMAIL,
       subject: `[Booking] ${config.name} - ${booking.requester.name}`,
