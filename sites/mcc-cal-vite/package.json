@@ -13,6 +13,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern dist",
     "perf:budget": "node scripts/check-performance-budget.js",
+    "smoke:forms": "node scripts/smoke-forms.js",
+    "smoke:forms:local": "node scripts/smoke-forms.js --url http://localhost:5173",
     "test": "vitest run",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
