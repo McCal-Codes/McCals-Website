@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-09-09
+
+### A Repeatable Way to Check the Forms Actually Work
+
+- `npm run smoke:forms` posts to the contact, quote and booking endpoints against production, or `--url` against a preview or localhost, and reports what happened. It checks the returned id rather than the status code, because that is the thing these endpoints were lying about: contact and quote answered 200 with "Message received" for months while the function was crashing on load, and later while neither Supabase nor Resend was configured. An id only comes back when a row was really written.
+- It also fills the booking honeypot and asserts nothing is created, and says so when a booking comes back mock, which means Google Calendar credentials are absent and nothing reached a real calendar.
+- Everything it creates is sent from a fixed marker address, so `--cleanup-only` deletes exactly what the script made and nothing a visitor submitted. Cleanup needs `SUPABASE_SERVICE_ROLE_KEY` in `.env`; without it the script says so and prints what to remove rather than failing silently.
+
+
 ## 2026-09-08
 
 ### The Calendar Event Would Have Broken Booking, Not Completed It
