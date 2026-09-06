@@ -47,7 +47,11 @@ async function getAccessToken() {
   const header = { alg: 'RS256', typ: 'JWT' };
   const claim = {
     iss: SERVICE_ACCOUNT_EMAIL,
-    scope: 'https://www.googleapis.com/auth/calendar',
+    // calendar.events, not the full `calendar` scope. This route creates an
+    // event and reads events to check for conflicts; the full scope also
+    // permits sharing and permanently deleting entire calendars, which Google
+    // classes as highly sensitive and nothing here needs.
+    scope: 'https://www.googleapis.com/auth/calendar.events',
     aud: 'https://oauth2.googleapis.com/token',
     iat: now,
     exp: now + 3600,
@@ -99,7 +103,9 @@ async function createCalendarEvent(accessToken, bookingData) {
 
   const event = {
     summary: `${config.name} - ${requester.name}`,
-    description: `Booking with ${requester.name}\n\nEmail: ${requester.email}\n\nNotes: ${requester.notes || 'No notes provided'}`,
+    description: `Booking with ${requester.name}\n\nEmail: ${requester.email}\n\nNotes: ${
+      requester.notes || 'No notes provided'
+    }`,
     start: {
       dateTime: startDateTime.toISOString(),
       timeZone: requester.timezone || 'America/New_York',
@@ -109,7 +115,15 @@ async function createCalendarEvent(accessToken, bookingData) {
       timeZone: requester.timezone || 'America/New_York',
     },
     location: location.label,
-    attendees: [{ email: requester.email }],
+    // The requester is deliberately not added as an attendee. Google rejects
+    // that from a service account without Domain-Wide Delegation, and the
+    // whole booking would fail with it: createCalendarEvent throws, so the
+    // Supabase row and both emails would be lost along with the event.
+    //
+    // They are not left without a calendar entry. The confirmation email
+    // carries an RFC 5545 .ics attachment and an Add to Google Calendar link,
+    // which is how they add it. This event exists to hold the slot on Caleb's
+    // calendar and to make the conflict check meaningful.
     reminders: {
       useDefault: false,
       overrides: [
