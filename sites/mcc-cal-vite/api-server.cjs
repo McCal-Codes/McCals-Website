@@ -12,6 +12,7 @@ const PORT = 3001;
 const handlers = {
   availability: import('./api/schedule/availability.js'),
   book: import('./api/schedule/book.js'),
+  manage: import('./api/schedule/manage.js'),
   contact: import('./api/contact.js'),
   quote: import('./api/quote.js'),
 };
@@ -35,6 +36,16 @@ app.get('/api/schedule/availability', async (req, res) => {
 
 app.post('/api/schedule/book', async (req, res) => {
   await runHandler(handlers.book, req, res);
+});
+
+// Vercel routes by file path in production; this shim needs each method wired
+// explicitly, and self-service management reads on GET and acts on POST.
+app.get('/api/schedule/manage', async (req, res) => {
+  await runHandler(handlers.manage, req, res);
+});
+
+app.post('/api/schedule/manage', async (req, res) => {
+  await runHandler(handlers.manage, req, res);
 });
 
 app.post('/api/contact', async (req, res) => {

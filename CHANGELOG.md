@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-09-06
+
+### Booking Works Again, and Availability Is Something You Can Edit
+
+- `/book-a-podcast` returned 400 on every submission: the page offered a 60-minute session while the server refused anything under 90. There were three copies of the booking configuration — two routes and the client — and they had drifted. They are now one module, with a parity test asserting the duration the client sends falls inside the range the server accepts, because this class of bug is invisible until someone tries to book.
+- Fixing that exposed four more, each of which would have blocked the flow on its own. The grid filtered slots on `slot.available` while the API sent `{ time, display }`, so every date on both booking pages read "No available times." The confirmation screen read `booking.requester`, which no API response has ever returned, so a successful booking rendered the error boundary — the calendar event was created, the emails sent, and the visitor was shown "Something went wrong." The block labelled "Date & Time" never rendered the time.
+- Slot times were parsed as `new Date(\`${date}T${time}\`)`, which resolves against the *runtime's* zone. That is correct on a laptop in Eastern and four hours wrong on Vercel, where the runtime is UTC: a 9:00 AM booking was written to the calendar at 5:00 AM. The conversion is now explicit, and the tests assert absolute instants either side of both daylight-saving transitions so they cannot pass by coincidence. The same bug is fixed in conflict detection, where it meant double-bookings could slip through.
+- The booking honeypot used three different field names across the form, the request and the server, and was never sent at all; spam protection was the rate limit alone. "Book another" left the calendar empty, because resetting restored an identical object reference and the availability effect had nothing to react to.
+- Working hours were hardcoded, so changing when you could be booked meant a deploy. They now live in Supabase. A weekday holds any number of windows, since a day job in the middle of the day leaves a morning and an evening rather than one block, and each window carries its own notice period — free time bookable tomorrow, hours that need a shift swapped offered only two weeks out. Overlaps are prevented by a `btree_gist` exclusion constraint rather than application checks. Every failure path falls back to the previous hardcoded schedule instead of showing an empty calendar.
+- Confirmation emails now carry an RFC 5545 invite that lands in both calendars, and a link that lets the requester reschedule or cancel without an exchange of emails. That link is the only credential, so it is treated like a password reset: 256 bits from a CSPRNG, only the SHA-256 hash stored, and unknown, expired and malformed tokens are answered identically so the endpoint cannot be probed.
+- Emails were formatted without an explicit timezone, so a client who booked 9:00 AM Eastern was sent "1:00 PM UTC" and the message contradicted the page they had just used. Requester-supplied values were also interpolated straight into the HTML, so a booker could put markup in their notes and have it render in the inbox.
+
+### The Contact Form Was Returning 500
+
+- `contact.js` and `quote.js` constructed the Resend client at module scope, which throws when `RESEND_API_KEY` is absent. The environment variable was never set in production, so the function failed to initialise and **every contact and quote submission returned `FUNCTION_INVOCATION_FAILED`**. `schedule/book.js` already initialised lazily, which is why bookings validated correctly while the other two did not. All three now share that pattern and degrade to "stored, not emailed" rather than falling over.
+- The Resend SDK resolves with `{ data, error }` rather than rejecting, so `await resend.emails.send(...)` inside a `try/catch` never entered the catch on an API error. A rejected send — an unverified domain, an exhausted quota, a revoked key — reported success and logged nothing.
+
+### The 404 Page Could Not Render
+
+- Vercel serves `404.html` for a path matching no file, and the build never emitted one. Because this deployment resolves pages by filesystem match, a mistyped or retired URL got Vercel's own `NOT_FOUND` text and the app never booted, so the site's 404 page — which exists, and is routed — was unreachable.
+- Its stylesheet referenced `--color-text-primary` and similar, none of which this site defines, so it fell back to `#1a1a1a`: near-black text on the near-black background whenever the site's theme and the OS theme disagreed. The page was also a dead end with a single "Return home"; a 404 is usually a stale link, so it now shows the path that was asked for and offers the destinations someone is most likely to have wanted.
+- The error boundary sent `error.message` and the full component stack to GA4. Sentry already captures both with PII scrubbing configured, GA4 has none of that, and the component stack exceeds its parameter limit regardless. Its body copy was `#666` on the dark background — 3.37:1 — so the one message a visitor reads when the site has already broken was itself unreadable.
+
+
 ## 2026-09-05
 
 ### The Sitemap Now Lists the Photographs

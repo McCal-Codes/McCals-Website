@@ -37,9 +37,14 @@ export class ErrorBoundary extends Component<Props, State> {
     logError('ErrorBoundary caught an error:', error, errorInfo);
     captureError(error, { componentStack: errorInfo.componentStack });
 
+    // Sentry already has the full error and component stack, with PII scrubbing
+    // and masking configured. Sending the same text to GA4 would push
+    // unscrubbed message content — which can contain URLs, ids or user input —
+    // into an analytics product configured for none of that, and componentStack
+    // would blow past GA4's 100-character parameter limit anyway. A stable name
+    // is all that is needed to see how often this happens.
     trackWebsiteEvent('error_boundary_caught', {
-      error: error.message,
-      componentStack: errorInfo.componentStack,
+      error_name: error.name || 'Error',
     });
   }
 
@@ -49,43 +54,72 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
+      // Colours come from the site's own tokens rather than literals: the old
+      // #666 on the dark background measured 3.37:1, so the one message a
+      // visitor reads when the site has already broken was itself unreadable.
       return (
-        <div style={{ 
-          padding: '2rem', 
-          textAlign: 'center',
-          minHeight: '50vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+        <div
+          role="alert"
+          style={{
+            padding: '2rem',
+            textAlign: 'center',
+            minHeight: '50vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--mcc-fg)',
+          }}
+        >
           <h2 style={{ marginBottom: '1rem' }}>Something went wrong</h2>
-          <p style={{ color: '#666', marginBottom: '1.5rem' }}>
-            We apologize for the inconvenience. Please try refreshing the page.
+          <p style={{ color: 'var(--mcc-fg-muted)', marginBottom: '1.5rem', maxWidth: '46ch' }}>
+            This part of the page failed to load. Refreshing usually fixes it — if it keeps
+            happening, I&apos;d like to know.
           </p>
-          <button 
-            onClick={() => window.location.reload()}
+          <div
             style={{
-              padding: '0.75rem 1.5rem',
-              background: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.75rem',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            Refresh Page
-          </button>
+            <button
+              onClick={() => window.location.reload()}
+              style={{
+                padding: '0.75rem 1.5rem',
+                background: 'var(--mcc-accent)',
+                color: 'var(--mcc-bg)',
+                border: 'none',
+                borderRadius: '6px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              Refresh page
+            </button>
+            {/* Plain anchors: the router itself may be the thing that failed. */}
+            <a href="/" style={{ color: 'var(--mcc-fg-muted)', padding: '0.75rem 1rem' }}>
+              Go home
+            </a>
+            <a href="/contact-us" style={{ color: 'var(--mcc-fg-muted)', padding: '0.75rem 1rem' }}>
+              Report this
+            </a>
+          </div>
           {import.meta.env.DEV && this.state.error && (
-            <pre style={{ 
-              marginTop: '2rem', 
-              padding: '1rem', 
-              background: '#f5f5f5',
-              borderRadius: '4px',
-              textAlign: 'left',
-              maxWidth: '100%',
-              overflow: 'auto'
-            }}>
+            <pre
+              style={{
+                marginTop: '2rem',
+                padding: '1rem',
+                background: 'var(--mcc-chip)',
+                border: '1px solid var(--mcc-line)',
+                borderRadius: '4px',
+                textAlign: 'left',
+                maxWidth: '100%',
+                overflow: 'auto',
+              }}
+            >
               {this.state.error.toString()}
             </pre>
           )}

@@ -55,8 +55,8 @@ export default function BookPodcastPage() {
     ? formatDateWithTimezone(state.selectedDate, requesterTimezone, 'full')
     : '';
 
-  const handleSubmit = async (info: RequesterInfo) => {
-    await submitBookingDetails(info);
+  const handleSubmit = async (info: RequesterInfo, hpField: string) => {
+    await submitBookingDetails(info, hpField);
   };
 
   const renderStepIndicator = () => {

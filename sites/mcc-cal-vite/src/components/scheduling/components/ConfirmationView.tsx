@@ -1,6 +1,10 @@
 import type { Booking } from '../types/booking';
 import type { ExtendedEventType } from '../config/bookingTypes';
-import { formatDateWithTimezone, getTimezoneDisplayName } from '../utils/timezone';
+import {
+  formatDateWithTimezone,
+  formatTimeInTimezone,
+  getTimezoneDisplayName,
+} from '../utils/timezone';
 
 interface ConfirmationViewProps {
   booking: Booking;
@@ -16,6 +20,14 @@ export function ConfirmationView({
   onBookAnother,
 }: ConfirmationViewProps) {
   const formattedDate = formatDateWithTimezone(booking.date, requesterTimezone, 'full');
+  // The block is labelled "Date & Time" but only ever rendered the date, so a
+  // requester never saw the hour they had just booked.
+  const formattedTime = formatTimeInTimezone(
+    booking.date,
+    booking.time,
+    booking.ownerTimezone,
+    requesterTimezone
+  );
   const timezoneDisplay = getTimezoneDisplayName(requesterTimezone);
 
   return (
@@ -44,7 +56,7 @@ export function ConfirmationView({
         <div className="scheduling-confirmation-detail">
           <span className="scheduling-confirmation-label">Date & Time</span>
           <span className="scheduling-confirmation-value">
-            {formattedDate}
+            {formattedDate} at {formattedTime}
             <br />
             <span className="scheduling-confirmation-timezone">{timezoneDisplay}</span>
           </span>

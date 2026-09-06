@@ -4,28 +4,25 @@
  */
 import { applyCors } from '../_lib/cors.js';
 import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
+import { BOOKING_CONFIGS, buildTimeSlot } from '../_lib/booking-config.js';
+import { OWNER_TIMEZONE, ownerWallTimeToUtc } from '../_lib/timezone.js';
+import {
+  loadAvailabilityRules,
+  isBlackedOut,
+  meetsNoticePeriod,
+  buildSlotCandidates,
+} from '../_lib/availability-rules.js';
+
+/** Minutes from midnight as an owner-timezone wall clock string, e.g. 570 -> "09:30". */
+function minuteOfDayToHhmm(minuteOfDay) {
+  const hour = Math.floor(minuteOfDay / 60);
+  const minute = minuteOfDay % 60;
+  return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+}
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
-
-// Booking type configurations with duration ranges
-const BOOKING_CONFIGS = {
-  'grab-coffee': {
-    durationMinutes: 30,
-    maxDurationMinutes: 60,
-    maxPerDay: 4,
-    bufferMinutes: 15,
-    workingHours: { start: 9, end: 17 }, // 9 AM - 5 PM
-  },
-  'book-podcast': {
-    durationMinutes: 90,
-    maxDurationMinutes: 120,
-    maxPerDay: 2,
-    bufferMinutes: 30,
-    workingHours: { start: 9, end: 20 }, // 9 AM - 8 PM
-  },
-};
 
 async function getAccessToken() {
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
@@ -114,10 +111,12 @@ async function getSupabaseBookedSlots(startDate, endDate) {
   }
 
   return (bookings || []).map(booking => {
-    // Parse as UTC to ensure consistency with Google Calendar API timestamps
-    const start = new Date(`${booking.booking_date}T${booking.booking_time || '00:00:00'}Z`);
-    const end = new Date(start);
-    end.setUTCMinutes(start.getUTCMinutes() + (booking.duration_minutes || 60));
+    // booking_time is stored as owner-timezone wall clock (schedule/book.js
+    // writes the slot's `time` straight through), so it must be converted the
+    // same way rather than read as UTC — otherwise conflict detection is off
+    // by the zone offset and double-bookings slip through.
+    const start = ownerWallTimeToUtc(booking.booking_date, booking.booking_time || '00:00:00');
+    const end = new Date(start.getTime() + (booking.duration_minutes || 60) * 60_000);
     return {
       start: start.toISOString(),
       end: end.toISOString(),
@@ -125,24 +124,22 @@ async function getSupabaseBookedSlots(startDate, endDate) {
   });
 }
 
-function generateTimeSlots(date, config, busyTimes) {
+/**
+ * @param {Array<{minuteOfDay: number, minNoticeHours: number}>} candidates
+ *   Slot starts for this day, already flattened across every configured window
+ *   and filtered to those that fit the booking duration.
+ */
+function generateTimeSlots(date, config, busyTimes, candidates) {
   const slots = [];
-  const { durationMinutes, workingHours, bufferMinutes } = config;
+  const { durationMinutes, bufferMinutes } = config;
 
-  const startHour = workingHours.start;
-  const endHour = workingHours.end;
+  for (const { minuteOfDay, minNoticeHours } of candidates) {
+    {
+      const slotStart = ownerWallTimeToUtc(date, minuteOfDayToHhmm(minuteOfDay));
+      const slotEnd = new Date(slotStart.getTime() + durationMinutes * 60_000);
 
-  // Generate slots every 30 minutes
-  for (let hour = startHour; hour < endHour; hour++) {
-    for (const minute of [0, 30]) {
-      const slotStart = new Date(date);
-      slotStart.setHours(hour, minute, 0, 0);
-
-      const slotEnd = new Date(slotStart);
-      slotEnd.setMinutes(slotStart.getMinutes() + durationMinutes);
-
-      // Don't generate slots that go past working hours
-      if (slotEnd.getHours() > endHour || (slotEnd.getHours() === endHour && slotEnd.getMinutes() > 0)) {
+      // Day-job hours are offered only far enough ahead to swap a shift.
+      if (!meetsNoticePeriod(slotStart, minNoticeHours)) {
         continue;
       }
 
@@ -161,14 +158,19 @@ function generateTimeSlots(date, config, busyTimes) {
       });
 
       if (!conflicts) {
-        slots.push({
-          time: slotStart.toISOString(),
-          display: slotStart.toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true,
-          }),
-        });
+        // Slot times are wall-clock in the owner's zone, not the runtime's.
+        slots.push(
+          buildTimeSlot(
+            Math.floor(minuteOfDay / 60),
+            minuteOfDay % 60,
+            slotStart.toLocaleTimeString('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+              timeZone: OWNER_TIMEZONE,
+            })
+          )
+        );
       }
     }
   }
@@ -207,6 +209,26 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Editable weekly windows and blackout dates. Falls back to the previously
+  // hardcoded schedule if Supabase is unset or the query fails, so the booking
+  // calendar never goes blank because of a database problem.
+  const rules = await loadAvailabilityRules(eventType, start, end);
+
+  /**
+   * Candidate slot starts for a calendar day, flattened across every window
+   * configured for that weekday, each carrying the notice period of the window
+   * it came from.
+   *
+   * Returns an empty array when the day is closed — no rule covers that
+   * weekday, or a blackout range hits it. Windows may overlap (free time
+   * either side of a shift often abuts it), so starts are de-duplicated, and
+   * where two windows offer the same start the shorter notice wins.
+   */
+  const slotCandidatesFor = (dateStr, weekday, durationMinutes) => {
+    if (isBlackedOut(dateStr, rules.blackouts)) return [];
+    return buildSlotCandidates(rules.byWeekday.get(weekday), durationMinutes);
+  };
+
   // Development mode: return mock availability
   const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
   if (isDev) {
@@ -216,33 +238,35 @@ export default async function handler(req, res) {
     const endDate = new Date(end);
 
     while (current <= endDate) {
-      const dayOfWeek = current.getDay();
-      if (dayOfWeek !== 0) { // Skip Sundays only, allow Saturdays
-        const dateStr = current.toISOString().split('T')[0];
+      const dateStr = current.toISOString().split('T')[0];
+      const candidates = slotCandidatesFor(dateStr, current.getDay(), config.durationMinutes);
+      if (candidates.length) {
         const slots = [];
-        
-        // Generate mock slots every 30 minutes
-        for (let hour = config.workingHours.start; hour < config.workingHours.end; hour++) {
-          for (const minute of [0, 30]) {
-            const slotTime = new Date(current);
-            slotTime.setHours(hour, minute, 0, 0);
-            
-            // Check if slot would end past working hours
-            const slotEnd = new Date(slotTime);
-            slotEnd.setMinutes(slotTime.getMinutes() + config.durationMinutes);
-            if (slotEnd.getHours() > config.workingHours.end || 
-                (slotEnd.getHours() === config.workingHours.end && slotEnd.getMinutes() > 0)) {
+
+        for (const { minuteOfDay, minNoticeHours } of candidates) {
+          {
+            // The loop counter is owner-timezone wall time, so build the
+            // instant through the same converter the booking endpoint uses.
+            const hhmm = minuteOfDayToHhmm(minuteOfDay);
+            const slotTime = ownerWallTimeToUtc(dateStr, hhmm);
+
+            // Day-job hours are offered only far enough ahead to swap a shift.
+            if (!meetsNoticePeriod(slotTime, minNoticeHours)) {
               continue;
             }
-            
-            slots.push({
-              time: slotTime.toISOString(),
-              display: slotTime.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true,
-              }),
-            });
+
+            slots.push(
+              buildTimeSlot(
+                Math.floor(minuteOfDay / 60),
+                minuteOfDay % 60,
+                slotTime.toLocaleTimeString('en-US', {
+                  hour: 'numeric',
+                  minute: '2-digit',
+                  hour12: true,
+                  timeZone: OWNER_TIMEZONE,
+                })
+              )
+            );
           }
         }
         
@@ -278,20 +302,18 @@ export default async function handler(req, res) {
     const endDate = parseDateUTC(end);
 
     while (current <= endDate) {
-      const dayOfWeek = current.getUTCDay();
-      if (dayOfWeek !== 0) { // Skip Sundays (0 = Sunday in UTC)
-        const dateStr = current.toISOString().split('T')[0];
+      const dateStr = current.toISOString().split('T')[0];
+      const candidates = slotCandidatesFor(dateStr, current.getUTCDay(), config.durationMinutes);
+      if (candidates.length) {
         const slots = [];
-        
-        for (let hour = config.workingHours.start; hour < config.workingHours.end; hour++) {
-          for (const minute of [0, 30]) {
-            const slotTime = new Date(current);
-            slotTime.setUTCHours(hour, minute, 0, 0);
-            
-            const slotEnd = new Date(slotTime);
-            slotEnd.setUTCMinutes(slotTime.getUTCMinutes() + config.durationMinutes);
-            if (slotEnd.getUTCHours() > config.workingHours.end || 
-                (slotEnd.getUTCHours() === config.workingHours.end && slotEnd.getUTCMinutes() > 0)) {
+
+        for (const { minuteOfDay, minNoticeHours } of candidates) {
+          {
+            const hhmm = minuteOfDayToHhmm(minuteOfDay);
+            const slotTime = ownerWallTimeToUtc(dateStr, hhmm);
+
+            const slotEnd = new Date(slotTime.getTime() + config.durationMinutes * 60_000);
+            if (!meetsNoticePeriod(slotTime, minNoticeHours)) {
               continue;
             }
 
@@ -305,15 +327,18 @@ export default async function handler(req, res) {
               continue;
             }
             
-            slots.push({
-              time: slotTime.toISOString(),
-              display: slotTime.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true,
-                timeZone: 'UTC',
-              }),
-            });
+            slots.push(
+              buildTimeSlot(
+                Math.floor(minuteOfDay / 60),
+                minuteOfDay % 60,
+                slotTime.toLocaleTimeString('en-US', {
+                  hour: 'numeric',
+                  minute: '2-digit',
+                  hour12: true,
+                  timeZone: 'UTC',
+                })
+              )
+            );
           }
         }
         
@@ -347,10 +372,10 @@ export default async function handler(req, res) {
     const endDate = new Date(end);
 
     while (current <= endDate) {
-      const dayOfWeek = current.getDay();
-      if (dayOfWeek !== 0) { // Skip Sundays only, allow Saturdays
-        const dateStr = current.toISOString().split('T')[0];
-        const slots = generateTimeSlots(dateStr, config, busyTimes);
+      const dateStr = current.toISOString().split('T')[0];
+      const candidates = slotCandidatesFor(dateStr, current.getDay(), config.durationMinutes);
+      if (candidates.length) {
+        const slots = generateTimeSlots(dateStr, config, busyTimes, candidates);
 
         if (slots.length > 0) {
           days.push({

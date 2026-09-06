@@ -3,8 +3,23 @@ import { applyRateLimit } from './_lib/rate-limit-redis.js';
 import { contactSchema, safeParseBody } from './_lib/validation.js';
 import { getServiceClient, isSupabaseConfigured } from './_lib/supabase-server.js';
 import { captureApiException } from './_lib/sentry.js';
+import { sendEmailOrThrow } from './_lib/email.js';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy-initialize Resend, matching schedule/book.js. Constructing it at module
+// scope throws when RESEND_API_KEY is absent, which takes down the whole module
+// — the endpoint stops responding rather than degrading to "stored, not
+// emailed", and the local API server cannot boot at all without secrets.
+let resendClient = null;
+function getResendClient() {
+  if (!resendClient && process.env.RESEND_API_KEY) {
+    try {
+      resendClient = new Resend(process.env.RESEND_API_KEY);
+    } catch (err) {
+      console.error('Failed to initialize Resend client: - contact.js', err.message);
+    }
+  }
+  return resendClient;
+}
 
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'contact@mcc-cal.com';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'noreply@mcc-cal.com';
@@ -81,9 +96,10 @@ export default async function handler(req, res) {
   }
 
   // Send email notification
-  if (process.env.RESEND_API_KEY) {
+  const resend = getResendClient();
+  if (resend) {
     try {
-      await resend.emails.send({
+      await sendEmailOrThrow(resend, {
         from: FROM_EMAIL,
         to: TO_EMAIL,
         replyTo: email,
