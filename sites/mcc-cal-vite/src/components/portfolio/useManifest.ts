@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { UseManifestResult } from './types';
 import { fetchSupabaseJournalismEvents, mergeJournalismEvents } from './journalismSupabaseSource';
+import { fetchSupabaseNatureCollections, mergeNatureCollections } from './natureSupabaseSource';
 
 const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
 const PORTFOLIOS_BASE = 'src/images/Portfolios';
@@ -86,9 +87,23 @@ async function fetchStaticManifestJson<T>(
   return parseJsonResponse<T>(response, staticUrl);
 }
 
-interface JournalismLikeManifest {
-  events: { eventName: string }[];
-  categories?: string[];
+/**
+ * Describes how one gallery folds its Supabase-published shoots into the static
+ * manifest. Galleries disagree about what the group array is called and what
+ * names its entries by, so that is data here rather than a branch: `events`
+ * keyed by `eventName` for journalism, `collections` keyed by `collectionName`
+ * for nature.
+ */
+interface SupabaseMergeSpec<Row> {
+  /** Key on the manifest holding the array of shoots. */
+  groupKey: string;
+  fetch: (signal: AbortSignal) => Promise<Row[]>;
+  /**
+   * `staticGroups` is deliberately `unknown[]`: it comes from a fetched JSON
+   * body that nothing validates, so each merge asserts the shape it needs at
+   * the registry below rather than this type pretending it was checked.
+   */
+  merge: (staticGroups: unknown[], rows: Row[]) => unknown[];
 }
 
 /**
@@ -102,13 +117,18 @@ interface JournalismLikeManifest {
  */
 const SUPABASE_MERGE_TIMEOUT_MS = 5000;
 
-async function mergeJournalismWithSupabase<T>(staticData: T, signal: AbortSignal): Promise<T> {
-  const manifest = staticData as unknown as JournalismLikeManifest;
+async function applySupabaseMerge<T, Row>(
+  spec: SupabaseMergeSpec<Row>,
+  staticData: T,
+  signal: AbortSignal,
+): Promise<T> {
+  const manifest = staticData as unknown as Record<string, unknown>;
+  const staticGroups = manifest?.[spec.groupKey];
 
   // staticData is cast from an unvalidated fetch response. If it is not the
   // shape we expect, fall back to it untouched rather than throwing: the
-  // journalism page degrading to static-only content is the whole point.
-  if (!Array.isArray(manifest.events)) return staticData;
+  // gallery degrading to static-only content is the whole point.
+  if (!Array.isArray(staticGroups)) return staticData;
 
   const controller = new AbortController();
   const abortMerge = () => controller.abort();
@@ -122,18 +142,72 @@ async function mergeJournalismWithSupabase<T>(staticData: T, signal: AbortSignal
   const timeout = setTimeout(abortMerge, SUPABASE_MERGE_TIMEOUT_MS);
 
   try {
-    const supabaseEvents = await fetchSupabaseJournalismEvents(controller.signal);
-    if (supabaseEvents.length === 0) return staticData;
+    const rows = await spec.fetch(controller.signal);
+    if (rows.length === 0) return staticData;
 
     return {
       ...manifest,
-      events: mergeJournalismEvents(manifest.events, supabaseEvents),
+      [spec.groupKey]: spec.merge(staticGroups, rows),
     } as unknown as T;
+  } catch {
+    // The sources swallow their own failures and return [], so this should be
+    // unreachable. It is here because the alternative is not a degraded
+    // gallery, it is a thrown manifest fetch and an error page: the static
+    // content is already in hand at this point, and losing it to an enhancement
+    // that failed would invert the whole point of merging.
+    return staticData;
   } finally {
     clearTimeout(timeout);
     signal.removeEventListener('abort', abortMerge);
   }
 }
+
+/**
+ * Which galleries consult Supabase, keyed by the type string callers pass to
+ * `useManifest`. Aliases are listed explicitly: `photojournalism` resolves to
+ * the journalism manifest, and before this was a table it was compared against
+ * the literal 'journalism', so the alias silently skipped the merge and showed
+ * a staler gallery than `/journalism` did.
+ *
+ * A gallery absent from this table simply renders its static manifest, which is
+ * what makes adding one a contained change.
+ */
+const SUPABASE_MERGES: Record<
+  string,
+  <T>(staticData: T, signal: AbortSignal) => Promise<T>
+> = {
+  journalism: (staticData, signal) =>
+    applySupabaseMerge(
+      {
+        groupKey: 'events',
+        fetch: fetchSupabaseJournalismEvents,
+        merge: (groups, rows) => mergeJournalismEvents(groups as { eventName: string }[], rows),
+      },
+      staticData,
+      signal,
+    ),
+  photojournalism: (staticData, signal) =>
+    applySupabaseMerge(
+      {
+        groupKey: 'events',
+        fetch: fetchSupabaseJournalismEvents,
+        merge: (groups, rows) => mergeJournalismEvents(groups as { eventName: string }[], rows),
+      },
+      staticData,
+      signal,
+    ),
+  nature: (staticData, signal) =>
+    applySupabaseMerge(
+      {
+        groupKey: 'collections',
+        fetch: fetchSupabaseNatureCollections,
+        merge: (groups, rows) =>
+          mergeNatureCollections(groups as { collectionName: string }[], rows),
+      },
+      staticData,
+      signal,
+    ),
+};
 
 async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<T> {
   const apiUrl = `/api/manifests/${type}`;
@@ -141,10 +215,8 @@ async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<
 
   if (staticFile) {
     const staticData = await fetchStaticManifestJson<T>(staticFile, signal);
-    if (type.toLowerCase() === 'journalism') {
-      return mergeJournalismWithSupabase(staticData, signal);
-    }
-    return staticData;
+    const merge = SUPABASE_MERGES[type.toLowerCase()];
+    return merge ? merge(staticData, signal) : staticData;
   }
 
   let apiError: unknown;

@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-09-10
+
+### Nature Albums Now Publish Without a Build
+
+- Uploading a shoot cost a full production build. The photographs were already fetched at runtime, but the manifest listing them was baked into the deployment, so `seo-auto-update` had to regenerate it and commit it back into the app directory before anything appeared. Journalism was the exception: it read Supabase at runtime and published with no build at all. Nature now does the same.
+- What gated it was a single string. `useManifest` compared the requested type against the literal `'journalism'`, so every other gallery skipped the merge, and so did the `photojournalism` alias, which quietly rendered a staler gallery than `/journalism` did. That comparison is now a table of galleries, and the alias is in it.
+- Reads are paged. The previous query was a single unpaged `select('*')`, and PostgREST caps a response at its configured maximum, 1000 by default, without reporting an error: the gallery simply renders fewer photographs than were uploaded. The events portfolio already holds 1,635 images, so an unpaged read would have dropped roughly 600 of them the moment that gallery was wired up. A page that comes back short ends the loop, so the fix holds whatever the server's limit turns out to be. A page that errors discards what came before it, because half a gallery that looks whole is worse than falling back to the static manifest that still has all of it. Verified by reintroducing the unpaged read and watching the guard fail.
+- The select lists the nine columns the galleries read instead of `*`, which was pulling focal points, dimensions and migration bookkeeping into every visitor's payload.
+- Supabase images carry their own R2 address, and the nature adapter now uses it. It previously built a jsDelivr path from the collection's folder name, and a Supabase collection has no folder on disk, so a published shoot would have 404'd on every frame. Covers were the same story in miniature: only the static pipeline writes thumbnails under `Nature/thumbs/`, so a Supabase collection keeps its full image as the cover rather than pointing at a file that was never generated.
+- `alt_text` arrives as `alt` rather than `description`. The adapter resolves alt as `alt ?? caption ?? description`, so mapped to description it would have sat behind the caption and a screen reader would have read the caption instead of the text written to be the alt. Lightroom fills both, and they say different things.
+- A merge that fails now returns the static manifest instead of throwing. The static content is already in hand by the time the merge runs, so letting an enhancement's failure become an error page inverts the point of merging. Verified by removing the guard and watching all three wiring tests report an errored gallery.
+- Collection names are compared with case and punctuation ignored, so a shoot published under "Flowers and Plants" replaces the "Flowers & Plants" folder rather than appearing beside it.
+- Nothing is migrated. Static collections with no Supabase counterpart are untouched, and with no nature rows uploaded yet the gallery renders exactly as before: verified in the browser at 11 collections, no broken images and no console errors, with journalism unchanged beside it.
+- `docs/workflows/portfolio-image-import.md` claimed uploads to any portfolio go live with no deploy. That was only ever true for journalism. It now says which galleries read Supabase and which still need wiring.
+
+
 ## 2026-09-09
 
 ### A Repeatable Way to Check the Forms Actually Work

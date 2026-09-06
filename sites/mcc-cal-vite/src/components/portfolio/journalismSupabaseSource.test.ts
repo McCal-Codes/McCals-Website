@@ -14,6 +14,9 @@ function createQueryBuilder() {
   builder.select = chain('select');
   builder.eq = chain('eq');
   builder.order = chain('order');
+  // Reads are paged, so the chain ends in .range(). Without this stub the call
+  // resolves to undefined and every fetch quietly returns nothing.
+  builder.range = chain('range');
   builder.abortSignal = chain('abortSignal');
   builder.then = (
     resolve: (value: typeof supabaseMocks.queryResult) => void,

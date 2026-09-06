@@ -1,9 +1,5 @@
-import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { getR2ImageUrl } from '@/utils/r2ImageUrl';
-import { logWarning } from '@/utils/logger';
-import type { Database } from '@/lib/database.types';
-
-type PortfolioImageRow = Database['public']['Tables']['portfolio_images']['Row'];
+import { fetchPortfolioRows, groupRowsByCollection } from './supabasePortfolioRows';
 
 export interface SupabaseJournalismImage {
   filename: string;
@@ -38,61 +34,26 @@ function deriveCategory(tags: string[]): string {
 export async function fetchSupabaseJournalismEvents(
   signal?: AbortSignal,
 ): Promise<SupabaseJournalismEvent[]> {
-  if (!isSupabaseConfigured()) return [];
+  const rows = await fetchPortfolioRows('journalism', signal);
+  if (rows.length === 0) return [];
 
-  try {
-    const query = supabase
-      .from('portfolio_images')
-      .select('*')
-      .eq('portfolio_type', 'journalism')
-      .order('collection_name', { ascending: true })
-      .order('sort_order', { ascending: true });
-
-    const { data, error } = signal ? await query.abortSignal(signal) : await query;
-
-    if (error || !data) {
-      logWarning(`Supabase journalism query failed: ${error?.message ?? 'no data returned'}`);
-      return [];
-    }
-
-    const byCollection = new Map<string, PortfolioImageRow[]>();
-    for (const row of data as PortfolioImageRow[]) {
-      const bucket = byCollection.get(row.collection_name);
-      if (bucket) {
-        bucket.push(row);
-      } else {
-        byCollection.set(row.collection_name, [row]);
-      }
-    }
-
-    return Array.from(byCollection.entries()).map(([collectionName, rows]) => {
-      const tags = Array.from(new Set(rows.flatMap((row) => row.tags ?? [])));
-      return {
-        eventName: collectionName,
-        category: deriveCategory(tags),
-        folderPath: collectionName,
-        tags,
-        published: true,
-        images: rows.map((row) => ({
-          filename: row.filename,
-          path: row.filename,
-          url: getR2ImageUrl(row.storage_path),
-          caption: row.caption ?? undefined,
-          description: row.alt_text ?? undefined,
-        })),
-      };
-    });
-  } catch (error) {
-    // An abort is the caller navigating away or timing us out, not a fault.
-    // Logging it would emit a warning on every ordinary departure from the
-    // journalism page and bury the failures that do matter.
-    const aborted =
-      signal?.aborted || (error instanceof Error && error.name === 'AbortError');
-    if (aborted) return [];
-
-    logWarning(`Supabase journalism fetch threw: ${error instanceof Error ? error.message : String(error)}`);
-    return [];
-  }
+  return Array.from(groupRowsByCollection(rows).entries()).map(([collectionName, group]) => {
+    const tags = Array.from(new Set(group.flatMap((row) => row.tags ?? [])));
+    return {
+      eventName: collectionName,
+      category: deriveCategory(tags),
+      folderPath: collectionName,
+      tags,
+      published: true,
+      images: group.map((row) => ({
+        filename: row.filename,
+        path: row.filename,
+        url: getR2ImageUrl(row.storage_path),
+        caption: row.caption ?? undefined,
+        description: row.alt_text ?? undefined,
+      })),
+    };
+  });
 }
 
 function normalizeEventName(name: string): string {

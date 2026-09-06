@@ -1,6 +1,8 @@
 # Portfolio Image Import Guide
 
-How to add new photo shoots to any portfolio. Images go live immediately — no git commit, no deploy needed.
+How to add new photo shoots to a portfolio.
+
+**Which galleries publish this way.** Journalism and Nature read Supabase at runtime, so a shoot uploaded here is live immediately with no git commit and no deploy. Concert, Portrait and Events accept uploads but do not read them back yet: their galleries still render from the static manifest, so a shoot uploaded for one of those will not appear until they are wired up too. See issue #280.
 
 ---
 
@@ -78,7 +80,9 @@ Any image without a Lightroom caption will have blank `alt_text` and `caption` i
 2. Filter: `portfolio_type = journalism` AND `collection_name = Steel Strike 2026`
 3. Edit the `alt_text` and `caption` columns directly in the table
 
-Changes are live immediately — no deploy.
+Changes are live immediately, with no deploy, for the galleries that read Supabase at runtime. Galleries still on the static manifest will not show the edit.
+
+A shoot that already exists in the static manifest under the same name is replaced by the Supabase copy rather than shown twice, so re-publishing an existing collection is safe. Names are compared with punctuation and case ignored, so "Flowers & Plants" and "Flowers and Plants" count as the same shoot.
 
 ---
 
