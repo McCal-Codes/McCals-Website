@@ -109,6 +109,11 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
   const submitBookingDetails = useCallback(async (info: RequesterInfo, hpField = '') => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
+    // An HTTP failure is classified at the point it happens and then rethrown,
+    // so the catch must not report it a second time. The thrown message is the
+    // server's own text, which makes it useless to test against.
+    let errorReported = false;
+
     try {
       const requesterTimezone = getRequesterTimezone();
       
@@ -135,6 +140,11 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
       const data = await response.json();
 
       if (!response.ok) {
+        // Classified by status rather than by the server's message: that text
+        // is unbounded and server-controlled, and analytics is the wrong place
+        // for it. Sentry already has the detail.
+        errorReported = true;
+        trackFormError('booking', `http_${response.status}`);
         throw new Error(data.error || 'Failed to create booking');
       }
 
@@ -168,7 +178,9 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
         requesterInfo: info,
       }));
     } catch (err) {
-      trackFormError('booking', err instanceof Error ? err.message.slice(0, 60) : 'unknown');
+      if (!errorReported) {
+        trackFormError('booking', 'network');
+      }
       setState((prev) => ({
         ...prev,
         isLoading: false,
