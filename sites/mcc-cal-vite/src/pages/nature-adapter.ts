@@ -224,9 +224,9 @@ export function adaptNature(manifest: NatureManifest): PortfolioGroup[] {
             caption: image.caption,
             description: image.description,
             alt:
-              image.alt ??
-              image.caption ??
-              image.description ??
+              image.alt ||
+              image.caption ||
+              image.description ||
               `${groupSource.title}, nature image ${index + 1}`,
           };
         });

@@ -133,3 +133,54 @@ describe('adaptNature with a Supabase-published collection', () => {
     expect(group.images[0].url).toContain('CAL_0682.jpg');
   });
 });
+
+describe('empty metadata does not become an empty alt', () => {
+  /**
+   * `add-shoot.js:178-181` writes empty strings, not nulls, when a file carries
+   * no IPTC or XMP:
+   *
+   *   const caption = iptc.caption || xmp.caption || '';
+   *   const altText = caption || headline || '';
+   *
+   * That is the common case for a straight Lightroom export. Mapped with `??`,
+   * which only falls through on null and undefined, the empty string survives
+   * all the way to the img element, and a screen reader announces the
+   * photograph as decorative. The generated fallback never fires.
+   */
+  it('falls back to a generated alt when alt_text and caption are blank', () => {
+    const manifest = {
+      version: '1.0.0',
+      generated: '2026-09-10T00:00:00.000Z',
+      totalCollections: 1,
+      collections: [
+        supabaseCollection({
+          collectionName: 'Steel Strike 2026',
+          images: [
+            {
+              filename: 'a.webp',
+              url: 'https://images.mcc-cal.com/nature/steel/a.webp',
+              caption: '',
+              alt: '',
+            },
+          ],
+        }),
+      ],
+    } as unknown as NatureManifest;
+
+    const [group] = adaptNature(manifest);
+
+    expect(group.images[0].alt).not.toBe('');
+    expect(group.images[0].alt).toContain('Steel Strike 2026');
+  });
+
+  it('still prefers real alt text when it is present', () => {
+    const [group] = adaptNature({
+      version: '1.0.0',
+      generated: '2026-09-10T00:00:00.000Z',
+      totalCollections: 1,
+      collections: [supabaseCollection()],
+    } as unknown as NatureManifest);
+
+    expect(group.images[0].alt).toBe('A line of workers silhouetted against stacks');
+  });
+});

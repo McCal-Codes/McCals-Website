@@ -49,8 +49,8 @@ export async function fetchSupabaseJournalismEvents(
         filename: row.filename,
         path: row.filename,
         url: getR2ImageUrl(row.storage_path),
-        caption: row.caption ?? undefined,
-        description: row.alt_text ?? undefined,
+        caption: row.caption || undefined,
+        description: row.alt_text || undefined,
       })),
     };
   });

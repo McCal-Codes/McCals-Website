@@ -56,8 +56,8 @@ export async function fetchSupabaseNatureCollections(
     images: group.map((row) => ({
       filename: row.filename,
       url: getR2ImageUrl(row.storage_path),
-      caption: row.caption ?? undefined,
-      alt: row.alt_text ?? undefined,
+      caption: row.caption || undefined,
+      alt: row.alt_text || undefined,
     })),
   }));
 }
