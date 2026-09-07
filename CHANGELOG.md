@@ -33,6 +33,15 @@
 
 ## 2026-09-07
 
+### The Technical Portfolio Moved Out
+
+- `sites/mcc-cal-dev` shared nothing with this repository: no code, no configuration, no lockfile. It kept its own Vercel project and consumed one of the three builds every push triggers. It now lives in [`McCal-Codes/mccal-codes.github.io`](https://github.com/McCal-Codes/mccal-codes.github.io) with its history intact, published to GitHub Pages, and the Vercel project is retired.
+- `dev.mcc-cal.com` is retired with it. The extracted site serves from `mccal-codes.github.io`, which needs no base path, so nothing in the app had to be rewritten to move.
+- Pages has no rewrite mechanism, so the new repository pre-renders one page per route instead of serving every deep link under an HTTP 404. It cannot set response headers either, so the Content-Security-Policy is a meta tag now and `X-Frame-Options`, `Permissions-Policy` and `Cross-Origin-Opener-Policy` are simply gone. That loss is written down in the new repository's README rather than assumed to have carried over.
+- The `Sync Dev Portfolio GitHub Data` workflow moved too. Its twice-daily commit now lands in the repository it belongs to.
+- `docs/runbooks/vercel-dev-portfolio.md` is a forwarding note rather than a deletion, and it records that its own claim about `/terranova` and `/roadmap` 308 redirects was never true, so the claim is not recovered from history and believed.
+- Removed three `.vscode` tasks pointing at `sites/dev.mcc-cal.com`, a path this checkout never had, and dropped the retired domain from the Cloudflare worker's allowed origins.
+
 ### Consent Decides Whether Anything Is Measured, and Now Something Is
 
 - The accessibility page wrote cookie preferences to localStorage and nothing ever read them. `installGa4()` ran unconditionally from `main.tsx`, Vercel Analytics alongside it, so "Reject All" changed nothing while being presented as a working control. A shared `lib/consent.ts` is now read by the GA4 bootstrap, the analytics init and every event call, and a decision applies immediately rather than on the next page load. GA4 is configured with Consent Mode v2, whose default state has to be declared before any tag loads; the site runs no advertising, so every ad signal stays denied.
