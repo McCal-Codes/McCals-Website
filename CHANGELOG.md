@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-09-11
+
+### Published Credits Live On the Album, Not in a Strip Above It
+
+- `/journalism` carried a "Published proof" strip above the filters, repeating the title, date and outlet of three albums that were already on the page. The credit now appears only where it belongs, at the bottom of the album's own lightbox, so nothing is duplicated and the credit travels with the work rather than sitting in a separate list.
+- The lightbox credit used to require `articleUrl`. Only one of the seven published albums has a direct article link; the other six carry just the outlet. So the strip, which linked `articleUrl || outletUrl`, was the only thing crediting them, and removing it without this change would have credited one album and silently dropped six. The lightbox now falls back to the outlet, and says which it is: "View story on TribLive" when the link reaches the article, plain "TribLive" when it only reaches the masthead. Sending a reader to a homepage under "View story" promises a story it does not reach.
+- The "Published" badge on the album cards is gone. It was rendered *instead of* the copy-link button, so the seven published albums were the only ones a visitor could not copy a link to. All albums now have that button.
+- The "Published" filter chip stays. It is a useful way to see the published work as a set, and it is what a test already relies on.
+- Around 2.7 KB of CSS for the strip and the badge went with them, along with a rule that positioned an element that no longer exists.
+
+
 ## 2026-09-10
 
 ### The Accessibility Statement Said Things the Code Did Not Do

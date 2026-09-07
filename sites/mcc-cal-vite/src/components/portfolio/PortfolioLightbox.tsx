@@ -678,6 +678,18 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
     group.images[0]?.caption ??
     group.images[0]?.description;
   const displayCaption = activeImage.caption ?? activeImage.description ?? fallbackCaption;
+
+  /**
+   * The published-work strip that used to sit above the journalism grid linked
+   * `articleUrl || outletUrl`. Only one of the seven published albums carries a
+   * direct article link; the rest have just the outlet. Requiring `articleUrl`
+   * here would therefore credit one album and silently drop six.
+   *
+   * The label distinguishes the two, because sending someone to a masthead
+   * homepage under "View story" promises a story it does not reach.
+   */
+  const outletDestination = group.articleUrl || group.outletUrl;
+  const hasDirectArticle = Boolean(group.articleUrl);
   const visibleTags = (group.tags ?? []).filter(
     (tag) => {
       const normalizedTag = tag.toLowerCase();
@@ -959,21 +971,29 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
               </p>
             )}
 
-            {group.articleUrl && group.outletName && (
+            {group.outletName && (
               <div
                 className={portfolioStyles.pfLightboxOutlet}
-                aria-label={`Published, view story on ${group.outletName}`}
+                aria-label={
+                  hasDirectArticle
+                    ? `Published, view story on ${group.outletName}`
+                    : `Published by ${group.outletName}`
+                }
               >
                 <span className={portfolioStyles.pfLightboxOutletLabel}>Published</span>
-                <a
-                  href={group.articleUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={portfolioStyles.pfLightboxOutletLink}
-                >
-                  View story on {group.outletName}
-                  <ExternalLink aria-hidden="true" size={13} strokeWidth={2.4} />
-                </a>
+                {outletDestination ? (
+                  <a
+                    href={outletDestination}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={portfolioStyles.pfLightboxOutletLink}
+                  >
+                    {hasDirectArticle ? `View story on ${group.outletName}` : group.outletName}
+                    <ExternalLink aria-hidden="true" size={13} strokeWidth={2.4} />
+                  </a>
+                ) : (
+                  <span className={portfolioStyles.pfLightboxOutletLink}>{group.outletName}</span>
+                )}
               </div>
             )}
 
