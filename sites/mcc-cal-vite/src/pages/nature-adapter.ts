@@ -19,6 +19,13 @@ export interface NatureManifest {
 interface NatureImageMetadata {
   filename: string;
   path?: string;
+  /**
+   * Set only by the Supabase pipeline, where the file already lives on R2 and
+   * its address is known. `imageUrl.nature()` builds a jsDelivr path out of the
+   * collection's folder name, and a Supabase collection has no such folder, so
+   * constructing one from its display name would 404.
+   */
+  url?: string;
   caption?: string;
   description?: string;
   alt?: string;
@@ -35,6 +42,7 @@ function normalizeNatureImage(image: NatureImageEntry): NatureImageMetadata {
   return {
     filename: image.filename || image.path || '',
     path: image.path,
+    url: image.url,
     caption: image.caption,
     description: image.description,
     alt: image.alt,
@@ -211,22 +219,27 @@ export function adaptNature(manifest: NatureManifest): PortfolioGroup[] {
           const image = normalizeNatureImage(entry);
 
           return {
-            url: imageUrl.nature(groupSource.folderPath, image.filename),
+            url: image.url ?? imageUrl.nature(groupSource.folderPath, image.filename),
             filename: image.filename,
             caption: image.caption,
             description: image.description,
             alt:
-              image.alt ??
-              image.caption ??
-              image.description ??
+              image.alt ||
+              image.caption ||
+              image.description ||
               `${groupSource.title}, nature image ${index + 1}`,
           };
         });
 
-        const coverFilename = normalizeNatureImage(groupSource.images[0]).filename;
+        // Only the static pipeline generates thumbnails, under
+        // Nature/thumbs/<folder>/. A Supabase collection has none, so it keeps
+        // its full R2 image as the cover rather than pointing at a file that
+        // was never created.
+        const coverSource = normalizeNatureImage(groupSource.images[0]);
         const coverImage = {
           ...images[0],
-          url: imageUrl.natureThumb(groupSource.folderPath, coverFilename),
+          url:
+            coverSource.url ?? imageUrl.natureThumb(groupSource.folderPath, coverSource.filename),
         };
 
         return {
