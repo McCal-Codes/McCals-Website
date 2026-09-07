@@ -3,6 +3,7 @@
  * Returns available time slots for booking
  */
 import { applyCors } from '../_lib/cors.js';
+import { applyRateLimit } from '../_lib/rate-limit-redis.js';
 import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
 import { BOOKING_CONFIGS, buildTimeSlot } from '../_lib/booking-config.js';
 import { OWNER_TIMEZONE, ownerWallTimeToUtc } from '../_lib/timezone.js';
@@ -19,6 +20,18 @@ function minuteOfDayToHhmm(minuteOfDay) {
   const minute = minuteOfDay % 60;
   return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
 }
+
+/**
+ * Every uncached request here becomes a Google Calendar events.list call, so an
+ * unthrottled endpoint spends someone else's quota and our function minutes. The
+ * limit is set well above real use: the booking widget fetches once per month
+ * view, so even a visitor clicking quickly through a year stays inside it.
+ */
+const AVAILABILITY_RATE_LIMIT = {
+  route: 'schedule-availability',
+  limit: 60,
+  windowMs: 60 * 1000,
+};
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -186,6 +199,12 @@ export default async function handler(req, res) {
 
   if (req.method !== 'GET') {
     res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  const rateLimit = await applyRateLimit(req, res, AVAILABILITY_RATE_LIMIT);
+  if (!rateLimit.allowed) {
+    res.status(429).json({ error: 'Too many requests. Please try again in a moment.' });
     return;
   }
 
