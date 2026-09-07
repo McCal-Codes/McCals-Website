@@ -267,7 +267,10 @@ function sanitizeHeaderValue(s) {
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, '"')
     .replace(/[–—]/g, '-')
-    .replace(/ /g, ' ')
+    // Written as an escape rather than the literal character: eslint's
+    // no-irregular-whitespace flags the literal, and a non-breaking space is
+    // invisible in a diff, which is exactly what you do not want in a regex.
+    .replace(/\u00A0/g, ' ')
     .replace(/[^\x20-\x7E]/g, '')
     .trim();
 }

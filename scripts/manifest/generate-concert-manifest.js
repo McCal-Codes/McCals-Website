@@ -16,6 +16,7 @@ const { detectDateFromImages } = require('../utils/shared-date-parsing.js');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
 const { notify } = require('../utils/manifest-webhook');
 const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 
 const CONCERT_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Concert');
 const MANIFEST_OUTPUT = path.join(CONCERT_BASE, 'concert-manifest.json');
@@ -323,20 +324,18 @@ async function generateMasterManifest() {
 
     // Write the master manifest (idempotent)
     try {
-      const content = JSON.stringify(masterManifest, null, 2) + '\n';
-      let writeIt = true;
-      if (await exists(MANIFEST_OUTPUT)) {
-        const existing = await fs.readFile(MANIFEST_OUTPUT, 'utf8');
-        if (existing === content) writeIt = false;
-      }
-      // Honor --force flag
+      // This compared the whole serialised file, timestamp included, so it never
+      // matched and the "idempotent" write always fired. writeManifestIfChanged
+      // ignores the timestamp, which is what makes the claim true.
       const FORCE = process.argv.includes('--force');
       if (FORCE) {
         console.log('⚡ --force provided: will overwrite master manifest even if unchanged');
-        writeIt = true;
       }
+      const writeIt = await writeManifestIfChanged(MANIFEST_OUTPUT, masterManifest, {
+        serialize: (value) => JSON.stringify(value, null, 2) + '\n',
+        force: FORCE,
+      });
       if (writeIt) {
-        await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
         success(`Generated master manifest: ${MANIFEST_OUTPUT}`);
         success(
           `Processed ${processedBands.length} bands with ${processedBands.reduce((total, band) => total + band.totalImages, 0)} total images`,
