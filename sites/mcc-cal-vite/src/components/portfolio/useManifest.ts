@@ -107,10 +107,10 @@ interface SupabaseMergeSpec<Row> {
 }
 
 /**
- * How long the gallery will wait on Supabase before rendering without it. The
- * static manifest has already resolved by this point and holds everything
- * needed to draw the page, so the merge is an enhancement and must never be
- * what the visitor is waiting for. A failing request returns quickly; a
+ * How long to keep trying Supabase in the background before giving up. The
+ * gallery has already rendered from the static manifest by this point, so this
+ * bounds a background upgrade rather than a visitor's wait. A failing request
+ * returns quickly; a
  * *hanging* one, a paused project, a stalled socket, a captive portal, would
  * otherwise hold the page on a skeleton until the browser's own socket
  * timeout, which can be minutes.
@@ -209,14 +209,37 @@ const SUPABASE_MERGES: Record<
     ),
 };
 
+/**
+ * Applies a gallery's Supabase merge, if it has one. Returns null when the
+ * gallery does not read Supabase, when nothing changed, or when the caller went
+ * away, so the hook can skip a pointless re-render.
+ *
+ * Deliberately not part of `fetchManifestJson`. The static manifest holds
+ * everything needed to draw the page, so it goes to the visitor the moment it
+ * arrives and this runs afterwards. Folding the merge into the fetch made the
+ * gallery hold a skeleton until Supabase answered, which is the thing the
+ * timeout below was only ever bounding rather than preventing.
+ */
+async function enhanceManifest<T>(
+  type: string,
+  staticData: T,
+  signal: AbortSignal,
+): Promise<T | null> {
+  const merge = SUPABASE_MERGES[type.toLowerCase()];
+  if (!merge) return null;
+
+  const merged = await merge(staticData, signal);
+  if (signal.aborted || merged === staticData) return null;
+
+  return merged;
+}
+
 async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<T> {
   const apiUrl = `/api/manifests/${type}`;
   const staticFile = getManifestFile(type);
 
   if (staticFile) {
-    const staticData = await fetchStaticManifestJson<T>(staticFile, signal);
-    const merge = SUPABASE_MERGES[type.toLowerCase()];
-    return merge ? merge(staticData, signal) : staticData;
+    return fetchStaticManifestJson<T>(staticFile, signal);
   }
 
   let apiError: unknown;
@@ -318,11 +341,21 @@ export function useManifest<T>(type: string): UseManifestResult<T> {
       setStatus('loading');
       setError(null);
 
-      fetchManifestJson<T>(type, controller.signal)
+      const activeController = controller;
+
+      fetchManifestJson<T>(type, activeController.signal)
         .then((json) => {
+          // The page can be drawn now. Anything Supabase adds is an upgrade
+          // applied below, never something the visitor waits for.
           memoryCache.set(type, { data: json, fetchedAt: Date.now() });
           setData(json);
           setStatus('success');
+
+          return enhanceManifest<T>(type, json, activeController.signal).then((merged) => {
+            if (!merged || activeController.signal.aborted) return;
+            memoryCache.set(type, { data: merged, fetchedAt: Date.now() });
+            setData(merged);
+          });
         })
         .catch((err) => {
           if (err.name === 'AbortError') return;

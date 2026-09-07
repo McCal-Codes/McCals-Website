@@ -104,4 +104,45 @@ describe('useManifest Supabase merge wiring', () => {
 
     expect(data?.collections.map((c) => c.collectionName)).toEqual(['Wildlife']);
   });
+
+  /**
+   * The merge is an enhancement, so it must never be what a visitor waits for.
+   * Before this, `fetchManifestJson` awaited the merge and the hook only
+   * reported success once it settled, so an unreachable Supabase held every
+   * dual-sourced gallery on a skeleton until the 5 second timeout fired. The
+   * static manifest is already in hand at that point; there is no reason to
+   * withhold it.
+   */
+  it('renders the static manifest while the merge is still in flight', async () => {
+    // Never settles, standing in for a paused project or a stalled socket.
+    sources.fetchNature.mockReturnValue(new Promise(() => {}));
+
+    const { useManifest } = await import('./useManifest');
+    const { result } = renderHook(() => useManifest<typeof NATURE_MANIFEST>('nature'));
+
+    await waitFor(() => expect(result.current.status).toBe('success'), { timeout: 1000 });
+    expect(result.current.data?.collections.map((c) => c.collectionName)).toEqual(['Wildlife']);
+  });
+
+  it('upgrades to the merged manifest once the merge resolves', async () => {
+    let release: (value: unknown) => void = () => {};
+    sources.fetchNature.mockReturnValue(new Promise((resolve) => { release = resolve; }));
+
+    const { useManifest } = await import('./useManifest');
+    const { result } = renderHook(() => useManifest<typeof NATURE_MANIFEST>('nature'));
+
+    await waitFor(() => expect(result.current.status).toBe('success'), { timeout: 1000 });
+    expect(result.current.data?.collections).toHaveLength(1);
+
+    release([publishedCollection]);
+
+    await waitFor(
+      () =>
+        expect(result.current.data?.collections.map((c) => c.collectionName)).toEqual([
+          'Wildlife',
+          'Steel Strike 2026',
+        ]),
+      { timeout: 1000 },
+    );
+  });
 });
