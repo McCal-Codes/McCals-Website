@@ -63,6 +63,14 @@ const CLEANUP_ONLY = args.includes('--cleanup-only');
 let passed = 0;
 let skipped = 0;
 
+/**
+ * Google event ids created by this run. Once real credentials are configured a
+ * booking is no longer a mock: it writes an event to the live calendar, and
+ * deleting the Supabase row leaves that event behind. Every run would otherwise
+ * add another "Grab a Coffee - [smoke] booking" to a real calendar.
+ */
+const createdCalendarEvents = [];
+
 const pass = (m) => { passed++; console.log(`  PASS  ${m}`); };
 const fail = (m) => console.log(`  FAIL  ${m}`);
 const skip = (m) => { skipped++; console.log(`  SKIP  ${m}`); };
@@ -146,7 +154,11 @@ async function runSmoke() {
     pass(`booking created, id ${booking.data.booking.id}`);
     // "mock" means Google Calendar credentials are absent, so nothing reached a
     // real calendar. Worth surfacing: the booking still succeeds either way.
-    if (booking.data.mock) console.log('        note: mock booking, Google Calendar credentials not set');
+    if (booking.data.mock) {
+      console.log('        note: mock booking, Google Calendar credentials not set');
+    } else if (booking.data.booking.calendarId) {
+      createdCalendarEvents.push(booking.data.booking.calendarId);
+    }
   } else if (rateLimited(booking)) {
     skip('booking rate limited, 5 per hour');
   } else if (booking.status === 409) {
@@ -187,6 +199,67 @@ async function runSmoke() {
   return failures;
 }
 
+
+/**
+ * Removes the calendar events this run created. Uses the same service account
+ * the booking endpoint does, read from .env, so it can only run where those
+ * credentials are available. When they are not, it says exactly what to delete
+ * by hand rather than leaving the operator to discover the leftovers later.
+ */
+async function cleanupCalendarEvents({ quiet = false } = {}) {
+  if (createdCalendarEvents.length === 0) return;
+
+  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+  const rawKey = process.env.GOOGLE_PRIVATE_KEY;
+  const calendarId = process.env.GOOGLE_CALENDAR_ID || 'primary';
+
+  if (!email || !rawKey) {
+    console.log('\nThis run created real calendar events and cannot remove them:');
+    for (const id of createdCalendarEvents) console.log(`  event ${id}`);
+    console.log('Set GOOGLE_SERVICE_ACCOUNT_EMAIL and GOOGLE_PRIVATE_KEY in .env to have');
+    console.log('cleanup handle this, or delete them from the calendar by hand.\n');
+    return;
+  }
+
+  const privateKey = rawKey.replace(/\\n/g, '\n');
+  const crypto = await import('crypto');
+  const now = Math.floor(Date.now() / 1000);
+  const encode = (obj) => Buffer.from(JSON.stringify(obj)).toString('base64url');
+  const signingInput = `${encode({ alg: 'RS256', typ: 'JWT' })}.${encode({
+    iss: email,
+    scope: 'https://www.googleapis.com/auth/calendar.events',
+    aud: 'https://oauth2.googleapis.com/token',
+    iat: now,
+    exp: now + 3600,
+  })}`;
+  const signature = crypto.createSign('RSA-SHA256').update(signingInput).sign(privateKey, 'base64url');
+
+  const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion: `${signingInput}.${signature}`,
+    }),
+  });
+
+  if (!tokenResponse.ok) {
+    console.log(`  calendar: auth failed (${tokenResponse.status}), events left in place`);
+    return;
+  }
+
+  const { access_token: accessToken } = await tokenResponse.json();
+  for (const id of createdCalendarEvents) {
+    const response = await fetch(
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events/${id}`,
+      { method: 'DELETE', headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    // 410 means it was already gone, which is a success for our purposes.
+    const ok = response.ok || response.status === 410;
+    if (!quiet) console.log(`  calendar event ${id}: ${ok ? 'removed' : `failed (${response.status})`}`);
+  }
+}
+
 /** Deletes only rows this script created, matched on the marker email. */
 async function cleanup({ quiet = false } = {}) {
   const url = process.env.VITE_SUPABASE_URL;
@@ -221,6 +294,8 @@ async function cleanup({ quiet = false } = {}) {
     const rows = await response.json().catch(() => []);
     if (!quiet) console.log(`  ${table}: removed ${rows.length}`);
   }
+  await cleanupCalendarEvents({ quiet });
+
   if (!quiet) console.log('');
 }
 

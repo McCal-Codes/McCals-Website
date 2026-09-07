@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-09-12
+
+### The Smoke Test Cleans Up the Calendar It Now Writes To
+
+- Configuring Google Calendar credentials changed what `npm run smoke:forms` does. The booking check used to take the mock path and touch nothing outside Supabase; it now writes a real event to the Podcast Bookings calendar. Cleanup removed the database row and left the event, so every run added another "Grab a Coffee - [smoke] booking" to a live calendar. Six had accumulated during the work that configured the credentials.
+- Cleanup now deletes the events the run created, using the same service account the booking endpoint uses, read from `.env`. A 410 counts as success, since the event being already gone is the outcome we wanted.
+- Without those credentials locally it prints the event ids it could not remove rather than exiting quietly, matching how the script already handles a missing Supabase key. The point of this script is that a green result means something, so it should never imply it tidied up when it did not.
+
+
 ## 2026-09-11
 
 ### Booking Confirmation Emails Have Never Sent, and Google Credentials Turned That Into a 500
