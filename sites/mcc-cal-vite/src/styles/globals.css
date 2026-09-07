@@ -1,8 +1,5 @@
 /* Global styles for Self-Hosted Photography site */
 @import './fonts.css';
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 body {
   margin: 0;
