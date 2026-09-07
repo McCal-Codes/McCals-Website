@@ -40,7 +40,6 @@ const LinkIcon = () => (
  * Features:
  * - Lazy-loaded cover image
  * - Photo count badge
- * - Published status indicator
  * - Link copying functionality
  * - Keyboard accessibility (Enter/Space to open)
  * - Staggered entrance animation via IntersectionObserver
@@ -98,7 +97,7 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
   return (
     <article
       ref={cardRef}
-      className={`${portfolioStyles.pfCard}${group.published ? ` ${portfolioStyles.pfCardPublishedState}` : ''}`}
+      className={portfolioStyles.pfCard}
       id={group.id}
       role="button"
       tabIndex={0}
@@ -112,23 +111,15 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
         <span>{group.images.length}</span>
       </div>
 
-      {/* Published badge (shown instead of anchor when published) */}
-      {group.published ? (
-        <div className={portfolioStyles.pfCardPublished} aria-label="Published work">
-          <span className={portfolioStyles.pfCardPublishedDot} />
-          <span className={portfolioStyles.pfCardPublishedLabel}>Published</span>
-        </div>
-      ) : (
-        <button
-          type="button"
-          className={portfolioStyles.pfCardAnchor}
-          title="Copy link to this item"
-          aria-label="Copy link"
-          onClick={handleAnchorClick}
-        >
-          <LinkIcon />
-        </button>
-      )}
+      <button
+        type="button"
+        className={portfolioStyles.pfCardAnchor}
+        title="Copy link to this item"
+        aria-label="Copy link"
+        onClick={handleAnchorClick}
+      >
+        <LinkIcon />
+      </button>
 
       <ProtectedPortfolioImage>
         <OptimizedImage

@@ -11,6 +11,15 @@
 - The lint config is why this was invisible. `eslint.config.mjs` applied `globals.browser` to every `.js` file and node globals to `api/**` on top, and flat config merges those rather than replacing, so `location`, `document` and `window` were all defined inside server code and `no-undef` never fired. Server paths are excluded from the browser block now and carry the recommended rules themselves. Verified with a probe file: `'location' is not defined` is an error again.
 - One legitimate exception: `scripts/check-performance-budget.js` drives Playwright, and its `page.evaluate` and `page.addInitScript` callbacks really do run in the browser, so that file keeps both global sets.
 
+### Published Credits Live On the Album, Not in a Strip Above It
+
+- `/journalism` carried a "Published proof" strip above the filters, repeating the title, date and outlet of three albums that were already on the page. The credit now appears only where it belongs, at the bottom of the album's own lightbox, so nothing is duplicated and the credit travels with the work rather than sitting in a separate list.
+- The lightbox credit used to require `articleUrl`. Only one of the seven published albums has a direct article link; the other six carry just the outlet. So the strip, which linked `articleUrl || outletUrl`, was the only thing crediting them, and removing it without this change would have credited one album and silently dropped six. The lightbox now falls back to the outlet, and says which it is: "View story on TribLive" when the link reaches the article, plain "TribLive" when it only reaches the masthead. Sending a reader to a homepage under "View story" promises a story it does not reach.
+- Four of the six missing article links were found and verified, so five of the seven published albums now reach the actual story rather than a masthead. Each was confirmed to carry the byline before being recorded: the TribLive groundbreaking piece credits "Caleb McCartney | For tribLive" in a photo caption and describes the May 5 ceremony the album covers, and the three Point Park Globe pieces were taken from the author archive and each checked for the name in the page. The remaining two stay outlet-only and are correct as they are: the New York Post blocks automated access so the Clinton piece could not be verified, and no Globe article exists for Tim Walz in Erie.
+- The "Published" badge on the album cards is gone. It was rendered *instead of* the copy-link button, so the seven published albums were the only ones a visitor could not copy a link to. All albums now have that button.
+- The "Published" filter chip stays. It is a useful way to see the published work as a set, and it is what a test already relies on.
+- Around 2.7 KB of CSS for the strip and the badge went with them, along with a rule that positioned an element that no longer exists.
+
 
 ## 2026-09-10
 

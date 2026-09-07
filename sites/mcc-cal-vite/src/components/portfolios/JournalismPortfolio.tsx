@@ -122,11 +122,6 @@ export default function JournalismPortfolio() {
     return groups.filter((g) => g.category === activeFilter);
   }, [groups, activeFilter]);
 
-  const publishedWork = useMemo(
-    () => groups.filter((group) => group.published).slice(0, 3),
-    [groups],
-  );
-
   return (
     <div className={portfolioStyles.pfRoot}>
       <h1 className={portfolioStyles.pfHeading}>Photojournalism</h1>
@@ -176,35 +171,6 @@ export default function JournalismPortfolio() {
                   </div>
                 ))}
               </dl>
-              {publishedWork.length > 0 && (
-                <section className={portfolioStyles.pfPublishedStrip} aria-labelledby="published-work-heading">
-                  <div className={portfolioStyles.pfPublishedStripHeader}>
-                    <p className={portfolioStyles.pfPublishedStripEyebrow}>Published proof</p>
-                    <h3 id="published-work-heading">Recent published work</h3>
-                  </div>
-                  <div className={portfolioStyles.pfPublishedList}>
-                    {publishedWork.map((group) => {
-                      const outlet = group.outletName ?? 'Published outlet';
-                      const destination = group.articleUrl || group.outletUrl;
-                      return (
-                        <article key={group.id} className={portfolioStyles.pfPublishedItem}>
-                          <p className={portfolioStyles.pfPublishedOutlet}>
-                            {destination ? (
-                              <a href={destination} target="_blank" rel="noopener noreferrer">
-                                {outlet}
-                              </a>
-                            ) : (
-                              outlet
-                            )}
-                          </p>
-                          <h4>{group.title}</h4>
-                          <p>{[group.dateDisplay, group.category].filter(Boolean).join(', ')}</p>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </section>
-              )}
               <PortfolioFilters
                 filters={filters}
                 active={activeFilter}

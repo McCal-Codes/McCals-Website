@@ -87,7 +87,7 @@ afterEach(() => {
 });
 
 describe('JournalismPortfolio', () => {
-  it('keeps the grid path while adding compact editorial proof', () => {
+  it('keeps the grid and editorial proof, without a duplicate published strip', () => {
     render(
       <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
         <JournalismPortfolio />
@@ -98,7 +98,9 @@ describe('JournalismPortfolio', () => {
     expect(screen.getByLabelText('Editorial proof points')).toHaveTextContent(
       'Same-day selects, AP-style captions, clean assignment handoff',
     );
-    expect(screen.getByRole('heading', { name: 'Recent published work' })).toBeInTheDocument();
+    // The published credit lives on the album itself now, at the bottom of the
+    // lightbox, rather than being duplicated in a strip above the grid.
+    expect(screen.queryByRole('heading', { name: 'Recent published work' })).toBeNull();
     expect(screen.getByRole('tab', { name: 'Published' })).toBeInTheDocument();
 
     const grid = screen.getByTestId('journalism-grid');
