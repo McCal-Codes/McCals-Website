@@ -2,6 +2,19 @@
 
 ## 2026-09-12
 
+### Three API Routes Nothing Called Were Live in Production
+
+- `api/pdf-proxy.ts` fetched whatever URL a caller put in `?url=` and returned the bytes as `application/pdf`, with `Access-Control-Allow-Origin: *` and a one year immutable cache. No allowlist, no scheme check, no size cap, no rate limit. Confirmed live before removal: a request naming `example.com` came back 200 with that site's HTML served as a PDF from our domain. Anything fetched through it would have been attributable to mcc-cal.com and pinned at the edge for a year, and the whole body was read into memory first.
+- `api/schedule/availability-enhanced.js` and `api/schedule/book-enhanced.js` were earlier forks of the two booking endpoints, carrying their own hardcoded copy of `BOOKING_CONFIGS` from before that moved into `_lib`. Neither knew about blackout dates, notice periods or the owner timezone handling, and `book-enhanced` wrote a real Google Calendar event without recording the booking in Supabase, so anything booked through it would have been invisible to the reschedule and cancel flow. Both answered from their own handler code in production, so they were reachable, just not by us.
+- Nothing in the repository referenced any of the three. That is what made them a problem rather than clutter: a route stops being reviewed the moment it stops being called, but Vercel keeps deploying every file under `api/` regardless.
+- `api/_lib/rate-limit.js` went too. It was a second, unused rate limiter sitting beside the one every endpoint actually imports.
+
+### The Availability Endpoint Now Says No
+
+- `api/schedule/availability.js` was the one public endpoint with no rate limit, and it is the one that turns each request into a Google Calendar `events.list` call. It sets `no-store`, so nothing was absorbed at the edge either: every request reached the origin and spent quota that is not ours to give away. Limited to 60 per minute per caller, which is far above real use, since the booking widget fetches once per month view.
+- Two static tests now hold the line. One asserts every file under `api/` is referenced somewhere in `src/`, by fetch URL or by direct import, so an unreachable route cannot go live unnoticed again. The other asserts every route either calls the rate limiter or sets an `s-maxage`, the two ways an endpoint can bound how much origin work a caller can demand.
+- The second test was wrong on its first pass: it searched for the name `applyRateLimit`, which the import line satisfies, so a file that imported the limiter and never called it went green. It matches the call now. Both tests were confirmed to fail on purpose, one against a planted unreferenced route and one against the rate limit removed again.
+
 ### Tailwind Was Configured and Never Ran
 
 - `postcss.config.js` loaded only autoprefixer, so `@tailwind base; @tailwind components; @tailwind utilities;` shipped verbatim into the production stylesheet, where a browser skips an at-rule it does not recognise. The installed `tailwindcss` was v4, whose entry point is `@import "tailwindcss"`, so even with the plugin loaded those v3 directives would have produced nothing.
