@@ -2,6 +2,19 @@
 
 ## 2026-09-12
 
+### Every Manifest Rebuild Looked Like a Change, and Bought a Second Production Build
+
+- The generators stamped `generated: new Date().toISOString()` on every run, so a manifest rebuilt from unchanged photographs still came out different. `seo-auto-update.yml` regenerates the manifests after a merge and commits whatever changed. It already checked for changes before committing, but the check always passed, because the timestamp always moved.
+- That commit lands inside `sites/mcc-cal-vite`, which is the Vercel root directory, so it satisfied `ignoreCommand` and triggered a second full production build across the projects, for a diff of one line per file. Around a quarter of merges to main carried a `chore: update SEO assets [automated]` commit doing exactly this.
+- There is a second cost. `generate-sitemap.js` reads `generated` and publishes it as the page's `<lastmod>`, so the sitemap told search engines that every gallery had been modified today, every day. A lastmod that is always current carries no information and is discounted accordingly.
+- One shared `writeManifestIfChanged` now backs all eight generators. It compares the new manifest against the file on disk with the timestamp fields blanked on both sides, and writes only when something else differs. Keeping the old timestamp is also the more truthful value: the manifest describes the same photographs it described before, so the date it was actually assembled is the date to keep.
+- Two generators already claimed to do this. `generate-concert-manifest.js` and `generate-portrait-manifest.js` both compared the whole serialised file, timestamp included, under a comment saying "idempotent", so neither ever matched and the guarded write always fired. `generate-nature-manifest.js` did it correctly, but only for its per-collection `metadata.generated`, never for the aggregate. That correct version is what this generalises.
+- The webhook notification now reports whether a write actually happened rather than always saying `written: true`.
+- Proven both ways. On `main`, one full `npm run manifest:generate` with no source changes dirties seven manifests. With this, two consecutive full runs leave the working tree clean.
+- `scripts/cloudflare/add-shoot.js` carried a literal non-breaking space inside a regex, which is an error under `no-irregular-whitespace` and so broke `npm run lint:scripts` for any change under `scripts/`. Written as `\u00A0` now, which is the same character and visible in a diff. Behaviour confirmed unchanged.
+
+## 2026-09-12
+
 ### Contact Messages and Quote Requests Were Publicly Readable
 
 - `contact_submissions` and `quote_requests` each carried a policy named "Public can view own ..." that was `FOR SELECT TO anon USING (true)`. There is no "own" in it: the condition is simply true, so the public anon key that ships inside the client bundle could read every row, with names, email addresses and message bodies. Proven before the fix by seeding a row and reading it back over the REST API with nothing but that key.

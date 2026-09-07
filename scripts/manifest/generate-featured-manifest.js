@@ -25,6 +25,7 @@ const path = require('path');
 const { detectDateFromImages, formatDisplayDate, createFallbackDate } = require('../utils/shared-date-parsing.js');
 const { notify } = require('../utils/manifest-webhook');
 const { dedupeImageEntries, imageEntryName } = require('../utils/image-manifest-dedupe.js');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 
 const PORTFOLIOS_BASE = path.join(process.cwd(), 'src', 'images', 'Portfolios');
 const OUTPUT_MANIFEST = path.join(PORTFOLIOS_BASE, 'featured-manifest.json');
@@ -559,10 +560,11 @@ async function generateFeaturedManifest() {
     };
 
     // Write featured manifest
-    const content = JSON.stringify(featuredManifest, null, 2) + '\n';
-    await fs.writeFile(OUTPUT_MANIFEST, content, 'utf-8');
+    const written = await writeManifestIfChanged(OUTPUT_MANIFEST, featuredManifest, {
+      serialize: (value) => JSON.stringify(value, null, 2) + '\n',
+    });
     try {
-      await notify('featured', { path: OUTPUT_MANIFEST, written: true });
+      await notify('featured', { path: OUTPUT_MANIFEST, written });
     } catch (err) {
       console.warn('Failed to notify manifest webhook (featured):', err && err.message);
     }

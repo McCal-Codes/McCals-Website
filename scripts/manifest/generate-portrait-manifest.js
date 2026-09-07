@@ -11,6 +11,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { notify } = require('../utils/manifest-webhook');
 const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 
 // Configuration
 const BASE_PORTRAIT = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Portrait');
@@ -324,23 +325,21 @@ async function scanAndGenerateManifests() {
 
   // Write aggregated portrait manifest (idempotent)
   try {
-    const content = JSON.stringify(portraitManifest, null, 2) + '\n';
     // Honor --force CLI flag to always overwrite
     const FORCE = process.argv.includes('--force');
-    let writeIt = true;
-    if (!FORCE && (await exists(MANIFEST_OUTPUT))) {
-      const existing = await fs.readFile(MANIFEST_OUTPUT, 'utf8');
-      if (existing === content) writeIt = false;
-    }
     if (FORCE) {
       console.log(
         '⚡ force provided: will overwrite aggregated manifest even if unchanged - generate-portrait-manifest.js:225',
       );
     }
+    // The previous check compared the whole serialised file, timestamp and all,
+    // so it never matched and the "idempotent" write always fired.
+    const writeIt = await writeManifestIfChanged(MANIFEST_OUTPUT, portraitManifest, {
+      serialize: (value) => JSON.stringify(value, null, 2) + '\n',
+      atomic: true,
+      force: FORCE,
+    });
     if (writeIt) {
-      const tmpFile = `${MANIFEST_OUTPUT}.tmp`;
-      await fs.writeFile(tmpFile, content, 'utf8');
-      await fs.rename(tmpFile, MANIFEST_OUTPUT);
       console.log('\n📊 Summary: - generate-portrait-manifest.js:230');
       console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:231`);
       console.log(
