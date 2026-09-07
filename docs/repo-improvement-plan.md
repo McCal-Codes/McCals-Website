@@ -32,7 +32,7 @@ Steps:
 | Delete dead `.eslintrc.json` (legacy format silently ignored by ESLint 9+) | ✅ Done 2026-08-26 | Verified `npx eslint` still lints cleanly on flat config alone |
 | Remove unused root `react`/`react-dom`/`@types/react*` deps | ✅ Done 2026-06-14 | Root is Node tooling; React lives in `sites/mcc-cal-vite` |
 | Add `tsconfig.test.json` + `typecheck:test` script | ✅ Done 2026-06-14 | Excludes cleared so test files are typechecked |
-| npm workspaces | **Documented, not adopted** 2026-08-26 | Each of the 5 packages (`mccal-media-website`, `mcc-cal-vite`, `mcc-cal-admin`, `mcc-cal-dev`, `@mccal/mcp-server`, `mccals-importer`) deploys independently — 3 as separate Vercel projects, each pointed at its package via a distinct `rootDirectory`. Workspaces would require reconfiguring each project's install step to still produce an isolated build, for little benefit at this repo's size. Five separate lockfiles (and five Dependabot manifests) is the accepted tradeoff of that deployment shape, not an oversight. |
+| npm workspaces | **Documented, not adopted** 2026-08-26 | Each of the 5 packages (`mccal-media-website`, `mcc-cal-vite`, `mcc-cal-admin`, `@mccal/mcp-server`, `mccals-importer`) deploys independently — 2 as separate Vercel projects, each pointed at its package via a distinct `rootDirectory`. Workspaces would require reconfiguring each project's install step to still produce an isolated build, for little benefit at this repo's size. Separate lockfiles (and separate Dependabot manifests) is the accepted tradeoff of that deployment shape, not an oversight. |
 | Wire `typecheck:test` into CI `vercel-deployment-checks.yml` | ✅ Done 2026-06-14 | Step added to `typecheck` job |
 
 ---

@@ -1,59 +1,22 @@
-# Runbook: dev.mcc-cal.com (technical portfolio)
+# Runbook: technical portfolio (moved)
 
-The technical product portfolio at `sites/mcc-cal-dev`. Separate Vercel project, separate
-domain, separate design system. See `sites/mcc-cal-dev/README.md` for the app itself.
+The technical product portfolio no longer lives in this repository. It was
+extracted, with its history, to [`McCal-Codes/mccal-codes.github.io`][repo] and
+is published at <https://mccal-codes.github.io> by GitHub Actions.
 
-## Why it is a separate project
+[repo]: https://github.com/McCal-Codes/mccal-codes.github.io
 
-The photography app (`sites/mcc-cal-vite`) defines its design tokens in a global `:root` block
-in `src/styles/globals.css`. Anything sharing that app inherits taupe, gold, and Fraunces. The
-dev site is a different medium with a different system, so it gets its own build, its own CSP,
-and its own deploy cadence. This mirrors `sites/mcc-cal-admin`.
+- The Vercel project `mcc-cal-dev` was retired.
+- `dev.mcc-cal.com` was retired with it. The domain no longer resolves.
+- The `Sync Dev Portfolio GitHub Data` workflow moved to the new repository.
 
-## Blocking prerequisite: release the domain
+Operational detail now lives in that repository's `README.md`, including the
+response headers GitHub Pages cannot set.
 
-**`dev.mcc-cal.com` is currently the photography site's preview/testing domain.** Pointing it
-at the new project without releasing it first will break preview, and mis-scoping the
-environment variable afterwards is what caused the July 2026 site-wide canonical-URL
-regression (`docs/learned/audit-remediation-and-deploy-pipeline-pitfalls.md`, section 1).
+## Correction
 
-Order of operations:
-
-1. In the **photography** Vercel project, remove `dev.mcc-cal.com` from its domains.
-2. Move preview to Vercel's generated preview URLs, or add `preview.mcc-cal.com`.
-3. Update `VITE_SITE_URL` in that project's **Preview** environment to match.
-   Production is unaffected: `vite.config.ts` and `scripts/generate-route-meta.js` both
-   hardcode `https://mcc-cal.com` whenever `VERCEL_ENV === 'production'`, ignoring
-   `VITE_SITE_URL`. Do not remove that guard.
-4. Verify with `curl -s https://mcc-cal.com/about | grep canonical` before continuing.
-
-## Create the project
-
-1. New Vercel project, root directory `sites/mcc-cal-dev`.
-2. Framework preset: Vite. Build command and output directory come from
-   `sites/mcc-cal-dev/vercel.json` (`npm run build` → `dist`).
-3. Add `dev.mcc-cal.com` as a domain.
-4. No environment variables are required. The app has no API surface and fetches nothing
-   at runtime.
-
-## Redirects from the photography site
-
-`/terranova` and `/roadmap` are permanent (308) cross-domain redirects to the new site. They
-are declared in **both** `vercel.json` at the repo root and `sites/mcc-cal-vite/vercel.json`.
-`src/vercel-config.test.ts` asserts the two files stay in sync, so edit both or the test fails.
-
-## CSP
-
-`font-src 'self'` and `img-src 'self' data:`. There is no CDN and no external font host. All
-five woff2 files are vendored under `public/fonts/`. If a future change needs an external
-origin, add it to `vercel.json` deliberately rather than loosening the policy.
-
-## CI
-
-`.github/workflows/vercel-deployment-checks.yml` covers `sites/mcc-cal-vite` only, matching
-how `sites/mcc-cal-admin` is handled. Add a job for this app once it stabilizes. Until then,
-run locally before pushing:
-
-```bash
-cd sites/mcc-cal-dev && npm run build && npm run lint
-```
+Earlier revisions of this runbook described `/terranova` and `/roadmap` as 308
+redirects declared in both `vercel.json` files, kept in sync by a test at
+`src/vercel-config.test.ts`. No such redirects were ever present in either file
+and that test never existed. The claim is recorded here only so it is not
+recovered from git history and believed.
