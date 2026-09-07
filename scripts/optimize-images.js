@@ -18,8 +18,24 @@ const PORTFOLIOS_BASE = path.join(__dirname, '../src/images/Portfolios');
 
 // Optimization settings
 const JPEG_QUALITY = 80;
-const MAX_WIDTH = 3840; // 4K max
-const MAX_HEIGHT = 2160;
+let MAX_WIDTH = 3840; // 4K max
+let MAX_HEIGHT = 2160;
+
+/**
+ * `--max-edge=N` bounds the *long* edge instead of fitting inside a landscape
+ * box. The default 3840x2160 box quietly penalises portrait orientation: a
+ * 4000x6016 frame fits inside it only by dropping to 1436x2160, so portraits
+ * come out at roughly half the resolution of landscapes shot on the same body.
+ * Passing --max-edge treats both orientations alike.
+ *
+ * Most of the site already sits at 2048px on the long edge and around 250 KB
+ * per image, so `--max-edge=2048` is what brings a portfolio into line with the
+ * rest rather than inventing a new size.
+ */
+function applyMaxEdge(pixels) {
+  MAX_WIDTH = pixels;
+  MAX_HEIGHT = pixels;
+}
 
 const CACHE_FILE = path.join(__dirname, '../.cache/image-optimization-cache.json');
 
@@ -236,14 +252,31 @@ Arguments:
   portfolio    Portfolio to optimize (Concert, Portrait, Nature, etc.)
                If omitted, optimizes all portfolios
   --clear-cache   Clear the optimization cache and re-process all
+  --max-edge=N    Bound the long edge at N pixels, both orientations alike.
+                  Without it the default 3840x2160 box is used, which limits a
+                  portrait frame to 2160 on its long edge while allowing a
+                  landscape 3840. Most of the site sits at 2048.
 
 Examples:
   node scripts/optimize-images.js Concert
   node scripts/optimize-images.js Portrait
+  node scripts/optimize-images.js Nature --max-edge=2048
   node scripts/optimize-images.js --clear-cache
   node scripts/optimize-images.js
 `);
     process.exit(0);
+  }
+
+  const maxEdgeArg = args.find((arg) => arg.startsWith('--max-edge='));
+  if (maxEdgeArg) {
+    const pixels = Number.parseInt(maxEdgeArg.split('=')[1], 10);
+    if (!Number.isFinite(pixels) || pixels < 256) {
+      console.error('\n--max-edge needs a pixel count of at least 256, e.g. --max-edge=2048\n');
+      process.exit(1);
+    }
+    applyMaxEdge(pixels);
+    log(`Bounding the long edge at ${pixels}px`);
+    args.splice(args.indexOf(maxEdgeArg), 1);
   }
 
   // Handle --clear-cache

@@ -11,6 +11,15 @@
 - The conformance posture itself was already honest, "partially conformant" and "we aim to conform", so it was left alone.
 - `accessibility-policy.test.ts` keeps it from drifting again. It reads the source, collects every storage key the app declares, and compares both directions: a key the code writes but the page omits fails, and a key the page publishes that no code declares fails. Comparing against the declarations rather than searching the source matters, because the inventory lives in `src/` too, so a text search finds the listing itself and passes vacuously. That self-reference is how three fictional keys survived. Verified by reintroducing `mccal_theme` and watching both halves go red.
 
+### A Photograph Too Large for the CDN to Serve
+
+- `Nature/Flowers & Plants/IMGP9549.jpg` was 24.3 MB. jsDelivr refuses anything over 20 MB, so it answered 403 while its 17.5 MB sibling in the same folder answered 200, and the Vercel optimiser in front of it answered 502 at every width because it cannot fetch what the origin refuses. The image is genuinely broken, though it is easy to miss: it is ninth of ten inside one collection, and the galleries only ever show collection covers, so nothing reaches it without opening that lightbox and paging most of the way through. Checking the site will not reveal it.
+- The everyday cost was the larger one. `CAL_4406.jpg`, the cover of that same collection, is 15.8 MB and returns 200, so it never errored; it just meant every visitor to `/nature` triggered an image transform against a 15.8 MB source. Across the ten oversized files that is 140 MB of origin fetches feeding the optimiser. The 403 was the loud symptom, not the main problem.
+- Fifteen Nature images are now bounded at 2048px on the long edge at quality 80, which is what the rest of the site already uses: Portrait and Concert both sit at a median 2048px and about 250 KB, and Nature was simply never put through the optimiser. The 24.3 MB frame is now 229 KB at 2048x1258. Across the folder that is 144 MB less to serve, and the EXIF, IPTC, XMP and ICC data survives, so the embedded copyright and licensing statement still travel with each photograph.
+- `optimize-images.js` gained `--max-edge=N`, which bounds the long edge for both orientations. The existing 3840x2160 box quietly penalised portrait frames: a 4000x6016 image fits inside it only by dropping to 1436x2160, roughly half the resolution a landscape from the same camera would keep. The default is unchanged, so no other portfolio moves.
+- A guard in `repo-data-integrity.test.ts` now fails on any portfolio image over 5 MB. The ceiling is 5 rather than 20 because 20 only catches the file that has already broken, and at 250 KB typical, anything near 5 MB has skipped the optimiser and is costing visitors bandwidth long before it costs them the picture. Verified by planting a 6 MB file and watching it fail.
+- This reclaims the bytes for visitors immediately. It does not shrink the repository, since the previous versions stay in history until the rewrite in #265.
+
 
 ## 2026-09-09
 
