@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "generated": "2026-08-22T18:26:36.269Z",
+  "generated": "2026-09-07T15:11:22.253Z",
   "totalEvents": 17,
   "totalImages": 359,
   "categories": [
@@ -131,15 +131,15 @@
         "caption": "Fern Hollow Nature Center groundbreaking in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
         "outlet": "TribLive",
         "outletUrl": "https://triblive.com",
-        "articleUrl": "",
-        "articleTitle": "Fern Hollow Nature Center groundbreaking",
-        "publishedDate": "2026-05-05"
+        "articleUrl": "https://triblive.com/local/sewickley/fern-hollow-nature-center-breaks-ground-on-renovation/",
+        "articleTitle": "Fern Hollow Nature Center breaks ground on renovation",
+        "publishedDate": "2026-05-14"
       },
       "outlet": "TribLive",
       "outletUrl": "https://triblive.com",
-      "articleUrl": "",
-      "articleTitle": "Fern Hollow Nature Center groundbreaking",
-      "publishedDate": "2026-05-05"
+      "articleUrl": "https://triblive.com/local/sewickley/fern-hollow-nature-center-breaks-ground-on-renovation/",
+      "articleTitle": "Fern Hollow Nature Center breaks ground on renovation",
+      "publishedDate": "2026-05-14"
     },
     {
       "eventName": "Sewickley ICE Prayer Service",
@@ -1472,66 +1472,6 @@
       "totalImages": 43,
       "images": [
         {
-          "filename": "6-9-25_Caleb McCartney_014-min.jpg",
-          "path": "6-9-25_Caleb McCartney_014-min.jpg",
-          "description": "Low-angle view across a wildflower meadow at golden hour, with white and pink blossoms filling the foreground and rolling green hills, trees, and a pale blue sky stretching toward the horizon.",
-          "caption": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_021-min.jpg",
-          "path": "6-9-25_Caleb McCartney_021-min.jpg",
-          "description": "An older man in a gray long-sleeve shirt and tan cap ties a fishing rig while a younger man in an orange sweater and Pittsburgh Pirates cap watches closely, both standing on a grassy hillside at dusk.",
-          "caption": "Two men prepare a fishing line at dusk in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_120-min.jpg",
-          "path": "6-9-25_Caleb McCartney_120-min.jpg",
-          "description": "A boy in a blue t-shirt and cap swings a lit sparkler, producing a bright flare and swirl of smoke in the foreground, with a faint moon visible above dark tree silhouettes and a lit outbuilding in the background.",
-          "caption": "A boy swings a sparkler in the night sky in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_134 1-min.jpg",
-          "path": "6-9-25_Caleb McCartney_134 1-min.jpg",
-          "description": "Close alternate frame of an adult and boy holding a sparkler together in the near-dark; the warm glow of the sparkler lights their hands and faces against a blue dusk sky.",
-          "caption": "A boy watches a sparkler burn in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_134-min.jpg",
-          "path": "6-9-25_Caleb McCartney_134-min.jpg",
-          "description": "An adult in a brown hoodie stands beside a boy in a blue t-shirt and flag-patch cap as the boy holds a glowing sparkler in his cupped hands, illuminating both their faces against a deep blue twilight sky and tree silhouettes.",
-          "caption": "A boy holds a sparkler with an adult in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
-          "filename": "6-9-25_Caleb McCartney_152-min.jpg",
-          "path": "6-9-25_Caleb McCartney_152-min.jpg",
-          "description": "A young person in a blue t-shirt and tan cap holds a sparkler at arm's length, tracing a glowing arc through the dark night air, with trails of sparks and smoke visible against a black background.",
-          "caption": "A youth waves a sparkler in an arc in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
-          "tags": [
-            "Documentary",
-            "Events"
-          ]
-        },
-        {
           "filename": "6-10-25_Caleb McCartney_210-min.jpg",
           "path": "6-10-25_Caleb McCartney_210-min.jpg",
           "description": "Close-up of a detailed hand-carved wooden bust of a figure wearing an ornate traditional headdress, set against a blurred colorful abstract painting in the background of an antique and curiosity shop.",
@@ -1896,6 +1836,66 @@
           "path": "6-12-25_Caleb McCartney_579-min.jpg",
           "description": "Viewed from behind the silhouetted audience, two performers, a woman in a hat and floral dress and a man in a red cowboy hat, play guitars on a small stage with the red neon 'Aeolian Music Hall' sign glowing between them.",
           "caption": "Musicians perform for a crowd at the Aeolian Music Hall in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_014-min.jpg",
+          "path": "6-9-25_Caleb McCartney_014-min.jpg",
+          "description": "Low-angle view across a wildflower meadow at golden hour, with white and pink blossoms filling the foreground and rolling green hills, trees, and a pale blue sky stretching toward the horizon.",
+          "caption": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_021-min.jpg",
+          "path": "6-9-25_Caleb McCartney_021-min.jpg",
+          "description": "An older man in a gray long-sleeve shirt and tan cap ties a fishing rig while a younger man in an orange sweater and Pittsburgh Pirates cap watches closely, both standing on a grassy hillside at dusk.",
+          "caption": "Two men prepare a fishing line at dusk in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_120-min.jpg",
+          "path": "6-9-25_Caleb McCartney_120-min.jpg",
+          "description": "A boy in a blue t-shirt and cap swings a lit sparkler, producing a bright flare and swirl of smoke in the foreground, with a faint moon visible above dark tree silhouettes and a lit outbuilding in the background.",
+          "caption": "A boy swings a sparkler in the night sky in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_134 1-min.jpg",
+          "path": "6-9-25_Caleb McCartney_134 1-min.jpg",
+          "description": "Close alternate frame of an adult and boy holding a sparkler together in the near-dark; the warm glow of the sparkler lights their hands and faces against a blue dusk sky.",
+          "caption": "A boy watches a sparkler burn in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_134-min.jpg",
+          "path": "6-9-25_Caleb McCartney_134-min.jpg",
+          "description": "An adult in a brown hoodie stands beside a boy in a blue t-shirt and flag-patch cap as the boy holds a glowing sparkler in his cupped hands, illuminating both their faces against a deep blue twilight sky and tree silhouettes.",
+          "caption": "A boy holds a sparkler with an adult in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+          "tags": [
+            "Documentary",
+            "Events"
+          ]
+        },
+        {
+          "filename": "6-9-25_Caleb McCartney_152-min.jpg",
+          "path": "6-9-25_Caleb McCartney_152-min.jpg",
+          "description": "A young person in a blue t-shirt and tan cap holds a sparkler at arm's length, tracing a glowing arc through the dark night air, with trails of sparks and smoke visible against a black background.",
+          "caption": "A youth waves a sparkler in an arc in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
           "tags": [
             "Documentary",
             "Events"
@@ -3040,15 +3040,15 @@
         "published": true,
         "outlet": "The Globe",
         "outletUrl": "https://ppuglobe.com",
-        "articleTitle": "Harris campaigns in Erie",
-        "articleUrl": "",
-        "publishedDate": "2024-10-14"
+        "articleTitle": "Kamala Harris campaigns in Erie",
+        "articleUrl": "https://ppuglobe.com/2024/10/kamala-harris-campaigns-in-erie/",
+        "publishedDate": "2024-10-16"
       },
       "outlet": "The Globe",
       "outletUrl": "https://ppuglobe.com",
-      "articleUrl": "",
-      "articleTitle": "Harris campaigns in Erie",
-      "publishedDate": "2024-10-14"
+      "articleUrl": "https://ppuglobe.com/2024/10/kamala-harris-campaigns-in-erie/",
+      "articleTitle": "Kamala Harris campaigns in Erie",
+      "publishedDate": "2024-10-16"
     },
     {
       "eventName": "Jdvance Johnstown",
@@ -3678,15 +3678,15 @@
         "caption": "Former President Barack Obama campaigns for Democratic presidential nominee Kamala Harris at the University of Pittsburgh in Pittsburgh, Pa., Oct. 10, 2024. (Photo by Caleb McCartney)",
         "outlet": "The Point Park Globe",
         "outletUrl": "https://ppuglobe.com",
-        "articleUrl": "",
-        "articleTitle": "Obama rallies Pittsburgh voters",
-        "publishedDate": "2024-10-10"
+        "articleUrl": "https://ppuglobe.com/2024/10/obama-rallies-for-harris-in-pittsburgh/",
+        "articleTitle": "Obama rallies for Harris in Pittsburgh",
+        "publishedDate": "2024-10-16"
       },
       "outlet": "The Point Park Globe",
       "outletUrl": "https://ppuglobe.com",
-      "articleUrl": "",
-      "articleTitle": "Obama rallies Pittsburgh voters",
-      "publishedDate": "2024-10-10"
+      "articleUrl": "https://ppuglobe.com/2024/10/obama-rallies-for-harris-in-pittsburgh/",
+      "articleTitle": "Obama rallies for Harris in Pittsburgh",
+      "publishedDate": "2024-10-16"
     },
     {
       "eventName": "Trump Returns Butler",
@@ -4202,15 +4202,15 @@
         "published": true,
         "outlet": "The Globe",
         "outletUrl": "https://ppuglobe.com",
-        "articleTitle": "Trump returns to Butler",
-        "articleUrl": "",
-        "publishedDate": "2024-10-05"
+        "articleTitle": "Trump revisits fairground where he was nearly killed",
+        "articleUrl": "https://ppuglobe.com/2024/10/trump-revisits-fairground-where-he-was-nearly-killed/",
+        "publishedDate": "2024-10-09"
       },
       "outlet": "The Globe",
       "outletUrl": "https://ppuglobe.com",
-      "articleUrl": "",
-      "articleTitle": "Trump returns to Butler",
-      "publishedDate": "2024-10-05"
+      "articleUrl": "https://ppuglobe.com/2024/10/trump-revisits-fairground-where-he-was-nearly-killed/",
+      "articleTitle": "Trump revisits fairground where he was nearly killed",
+      "publishedDate": "2024-10-09"
     },
     {
       "eventName": "Tim Walz Erie",
