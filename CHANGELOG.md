@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-09-11
+
+### Booking Confirmation Emails Have Never Sent, and Google Credentials Turned That Into a 500
+
+- `sendConfirmationEmail` passed `location` into `buildBookingEmails`, but `location` was only ever declared inside `createCalendarEvent` and inside the request handler. In the module-scoped function it was a free variable, so every call threw `ReferenceError: location is not defined` before a single message was built. This arrived with the in-person location option.
+- Nothing reported it. The mock booking path calls the function with `.catch()` attached, so the throw was swallowed, the endpoint answered 200, and the booking was stored. Only the emails were missing, silently, on every booking since that feature landed.
+- Adding Google Calendar credentials exposed it as an outage. The real path awaited the same call without a catch, so the throw reached the handler's catch and answered 500, after the calendar event and the Supabase row had both been written. The booking existed; the visitor was told it failed; a retry then hit the conflict check against the event the first attempt created.
+- `location` is a parameter now, passed from both call sites, and the real path catches a failed email the way the mock path already did. A booking that reached the calendar and the database must not report failure because a message did not go out.
+- The lint config is why this was invisible. `eslint.config.mjs` applied `globals.browser` to every `.js` file and node globals to `api/**` on top, and flat config merges those rather than replacing, so `location`, `document` and `window` were all defined inside server code and `no-undef` never fired. Server paths are excluded from the browser block now and carry the recommended rules themselves. Verified with a probe file: `'location' is not defined` is an error again.
+- One legitimate exception: `scripts/check-performance-budget.js` drives Playwright, and its `page.evaluate` and `page.addInitScript` callbacks really do run in the browser, so that file keeps both global sets.
+
+
 ## 2026-09-10
 
 ### The Accessibility Statement Said Things the Code Did Not Do

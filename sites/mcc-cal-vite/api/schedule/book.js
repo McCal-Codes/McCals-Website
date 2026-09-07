@@ -220,7 +220,8 @@ async function sendConfirmationEmail(
   booking,
   config,
   requesterTimezone = OWNER_TIMEZONE,
-  manageUrl = null
+  manageUrl = null,
+  location = null
 ) {
   const resend = await getResendClient();
   if (!resend) {
@@ -426,7 +427,7 @@ export default async function handler(req, res) {
     };
     
     // Send email notification (don't await, let it run async)
-    sendConfirmationEmail(mockBooking, config, requesterTimezone, manageUrl).catch(async (err) => {
+    sendConfirmationEmail(mockBooking, config, requesterTimezone, manageUrl, location).catch(async (err) => {
       console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
       await captureApiException(err, { route: 'schedule/book', operation: 'send_mock_confirmation_email' });
     });
@@ -519,7 +520,21 @@ export default async function handler(req, res) {
       }
     }
 
-    await sendConfirmationEmail(booking, config, requesterTimezone, manageUrl);
+    // Deliberately not fatal. By this point the calendar event exists and the
+    // Supabase row is written, so throwing here would answer 500 for a booking
+    // that was in fact confirmed: the visitor retries, and the second attempt
+    // hits the conflict check against the event the first one created. The
+    // mock path already treated a failed email this way; the real path did not,
+    // which is why adding Google credentials turned every booking into a 500.
+    await sendConfirmationEmail(booking, config, requesterTimezone, manageUrl, location).catch(
+      async (err) => {
+        console.error('[schedule/book] Failed to send confirmation email:', err);
+        await captureApiException(err, {
+          route: 'schedule/book',
+          operation: 'send_confirmation_email',
+        });
+      }
+    );
 
     res.status(200).json({
       booking: {
