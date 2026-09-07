@@ -59,9 +59,18 @@ function findWidthUsages(): WidthUsage[] {
     // guard entirely, which is precisely the 400 this test exists to prevent.
     { regex: /srcSetWidths=\{[^}]*?\[([\d,\s]+)\]/g, label: 'srcSetWidths prop' },
     { regex: /srcSetWidths=\{[^}]*?\[[\d,\s]+\]\s*:\s*\[([\d,\s]+)\]/g, label: 'srcSetWidths ternary branch' },
+    // The inline hero preload in index.html: `var widths = [640, 960, ...]`.
+    { regex: /var\s+widths\s*=\s*\[([\d,\s]+)\]/g, label: 'inline preload widths' },
   ];
 
-  for (const file of collectSourceFiles(join(appRoot, 'src'))) {
+  // index.html is scanned alongside src/ because it carries its own inline
+  // preload srcset. The guard previously walked only src/**/*.tsx, so the
+  // homepage hero preload sat outside it entirely and reintroduced the exact
+  // 2560 width this test was written to prevent. It shipped, and
+  // /_vercel/image answered 400 for every wide viewport.
+  const files = [...collectSourceFiles(join(appRoot, 'src')), join(appRoot, 'index.html')];
+
+  for (const file of files) {
     const source = readFileSync(file, 'utf8');
     for (const { regex, label } of patterns) {
       for (const match of source.matchAll(regex)) {
@@ -94,5 +103,25 @@ describe('image width allowlist', () => {
     );
 
     expect(violations).toEqual([]);
+  });
+
+  /**
+   * The hero preload is inline in index.html, and every route is prerendered
+   * from that same file, so a preload without a pathname check ships on all
+   * of them. It did: /events, /contact-us and /terms each fetched a 217 KB
+   * homepage image at the highest priority that they never render, competing
+   * with their own LCP candidate.
+   */
+  it('scopes the homepage hero preload to the homepage', () => {
+    const html = readFileSync(join(appRoot, 'index.html'), 'utf8');
+    const preload = html.slice(html.indexOf('rel = \'preload\''));
+
+    expect(html).toContain("rel = 'preload'");
+    expect(
+      /location\.pathname\s*!==\s*'\/'/.test(html),
+      'index.html preloads the homepage hero without checking location.pathname, ' +
+        'so it runs on every prerendered route',
+    ).toBe(true);
+    expect(preload.length).toBeGreaterThan(0);
   });
 });
