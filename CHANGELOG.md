@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-09-10
+
+### The Accessibility Statement Said Things the Code Did Not Do
+
+- The page reported its own effective and last assessed dates as `new Date()`, so it told every visitor it had been assessed that same day, forever. A conformance claim that is always current is not a claim. Both are now pinned to a fixed date that gets bumped by hand when the site is genuinely reviewed, and the JSON-LD `dateModified` was doing the same thing to search engines and is pinned to match.
+- The cookie inventory listed `mccal_session`, `mccal_consent` and `mccal_theme`. None of the three existed anywhere in the codebase. The five keys the site really writes, `mccal_cookie_consent`, `mccal_consent_date`, `mcc-theme`, `mcc_quote_draft_v2` and `podcast-feed-v2.5`, went undeclared, as did `dev-site-changelog`, which visitors pick up because `/changelog` is a public route. All six are listed now.
+- The page also framed everything as cookies when this site sets none of its own. A search for `document.cookie` returns nothing; everything under our own name is local storage, which stays on the device and is never sent with a request. The inventory says which is which, and durations now read "until cleared" rather than inventing an expiry. The analytics rows dropped `_gid` and `_gat`, which belong to Universal Analytics, in favour of the `_ga` and `_ga_<id>` pair GA4 actually sets, and only once analytics consent is granted.
+- It claimed testing with Axe DevTools, Lighthouse, NVDA and VoiceOver. There is no axe dependency in the project, the only Lighthouse workflow sits in `.github/workflows/archive/`, and the one axe workflow cannot fire or fail (#264). The assessment section now describes what is actually done and says plainly that automated checks are not yet running on every change, rather than claiming coverage that does not exist.
+- The conformance posture itself was already honest, "partially conformant" and "we aim to conform", so it was left alone.
+- `accessibility-policy.test.ts` keeps it from drifting again. It reads the source, collects every storage key the app declares, and compares both directions: a key the code writes but the page omits fails, and a key the page publishes that no code declares fails. Comparing against the declarations rather than searching the source matters, because the inventory lives in `src/` too, so a text search finds the listing itself and passes vacuously. That self-reference is how three fictional keys survived. Verified by reintroducing `mccal_theme` and watching both halves go red.
+
+
 ## 2026-09-09
 
 ### A Repeatable Way to Check the Forms Actually Work

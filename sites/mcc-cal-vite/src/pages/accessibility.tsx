@@ -3,7 +3,17 @@ import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { notifyConsentChanged } from '@/lib/consent';
 import { applyConsentToGa4 } from '@/utils/ga4';
+import {
+  cookieCategories,
+  LAST_REVIEWED,
+  LAST_REVIEWED_DISPLAY,
+} from '@/data/accessibility-policy';
 import './accessibility.css';
+
+const prefersReducedMotion = () => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
 
 // Icon components (inline SVG to avoid external dependency)
 const CheckIcon = ({ size = 16 }: { size?: number }) => (
@@ -81,61 +91,6 @@ interface NavSection {
   items: NavItem[];
 }
 
-interface CookieCategory {
-  id: string;
-  name: string;
-  description: string;
-  required: boolean;
-  cookies: CookieInfo[];
-}
-
-interface CookieInfo {
-  name: string;
-  provider: string;
-  purpose: string;
-  duration: string;
-}
-
-// Prefers reduced motion check
-const prefersReducedMotion = () => {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
-
-// Cookie data
-const cookieCategories: CookieCategory[] = [
-  {
-    id: 'essential',
-    name: 'Essential',
-    description: 'Required for the website to function properly. Cannot be disabled.',
-    required: true,
-    cookies: [
-      { name: 'mccal_session', provider: 'McCal Media', purpose: 'Session management and security', duration: 'Session' },
-      { name: 'mccal_consent', provider: 'McCal Media', purpose: 'Stores cookie consent preferences', duration: '1 year' },
-    ],
-  },
-  {
-    id: 'functional',
-    name: 'Functional',
-    description: 'Enable enhanced functionality and personalization.',
-    required: false,
-    cookies: [
-      { name: 'mccal_theme', provider: 'McCal Media', purpose: 'Remember theme preference (light/dark)', duration: '1 year' },
-    ],
-  },
-  {
-    id: 'analytics',
-    name: 'Analytics',
-    description: 'Help us understand how visitors interact with our website.',
-    required: false,
-    cookies: [
-      { name: '_ga', provider: 'Google Analytics', purpose: 'Distinguish unique users', duration: '2 years' },
-      { name: '_gid', provider: 'Google Analytics', purpose: 'Distinguish unique users', duration: '24 hours' },
-      { name: '_gat', provider: 'Google Analytics', purpose: 'Throttle request rate', duration: '1 minute' },
-    ],
-  },
-];
-
 const AccessibilityPage = () => {
   usePageMeta({
     title: 'Accessibility & Cookie Policy | McCal Media',
@@ -167,7 +122,9 @@ const AccessibilityPage = () => {
         url: SITE_URL,
       },
       datePublished: '2025-01-27',
-      dateModified: new Date().toISOString().split('T')[0],
+      // Was `new Date()`, which told search engines the policy changed every day
+      // it was crawled. Same pin as the date shown on the page.
+      dateModified: LAST_REVIEWED,
       inLanguage: 'en-US',
       isPartOf: {
         '@type': 'WebSite',
@@ -180,13 +137,6 @@ const AccessibilityPage = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [readingTime, setReadingTime] = useState('Calculating...');
-  const [effectiveDate] = useState(
-    new Date().toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-    })
-  );
   const [activeSection, setActiveSection] = useState('');
   const [progress, setProgress] = useState(0);
 
@@ -483,7 +433,7 @@ const AccessibilityPage = () => {
                 </p>
                 <div className="header-meta">
                   <span className="badge eff" aria-label="Effective date">
-                    Effective <time dateTime={new Date().toISOString().split('T')[0]}>{effectiveDate}</time>
+                    Effective <time dateTime={LAST_REVIEWED}>{LAST_REVIEWED_DISPLAY}</time>
                   </span>
                   <span className="badge reading-time" id="readingTime">
                     {readingTime}
@@ -660,8 +610,15 @@ const AccessibilityPage = () => {
                 </p>
                 <p>
                   Cookies can be "persistent" (stored until they expire or you delete them) or 
-                  "session" cookies (deleted when you close your browser). They can be set by the 
+                  "session" cookies (deleted when you close your browser). They can be set by the
                   website you are visiting (first-party cookies) or by third parties (third-party cookies).
+                </p>
+                <p>
+                  To be specific about this site: we set no cookies of our own. The entries listed
+                  under McCal Media below are kept in your browser's local storage, which stays on
+                  your device, is never sent to us with a request, and lasts until you clear your
+                  browsing data. The only real cookies are Google Analytics', and those are set only
+                  if you allow analytics.
                 </p>
 
                 <div className="cookie-types-grid">
@@ -901,21 +858,32 @@ const AccessibilityPage = () => {
                   We assess the accessibility of our website through the following methods:
                 </p>
                 <ul>
-                  <li>Automated testing using Axe DevTools and Lighthouse</li>
-                  <li>Manual keyboard navigation testing</li>
-                  <li>Screen reader testing with NVDA and VoiceOver</li>
-                  <li>Regular accessibility audits and code reviews</li>
+                  <li>Manual keyboard navigation testing of interactive components</li>
+                  <li>
+                    Review against the WCAG 2.2 Level AA success criteria as pages and components
+                    are built
+                  </li>
+                  <li>Browser and operating system accessibility tools during development</li>
+                  <li>Reports from visitors, through the contact routes below</li>
                 </ul>
+                <p>
+                  We do not currently run automated accessibility checks on every change, and we
+                  have not commissioned a third-party audit. Adding automated checks to our build
+                  pipeline is planned work, and this section will be updated when that lands rather
+                  than before.
+                </p>
                 <p className="assessment-date">
-                  <strong>Last assessed:</strong> {effectiveDate}
+                  <strong>Last assessed:</strong>{' '}
+                  <time dateTime={LAST_REVIEWED}>{LAST_REVIEWED_DISPLAY}</time>
                 </p>
               </section>
 
               {/* Page Footer */}
               <footer className="page-footer">
                 <p className="note">
-                  This accessibility statement and cookie policy were last updated on {effectiveDate}. 
-                  Changes to this policy will be posted on this page.
+                  This accessibility statement and cookie policy were last updated on{' '}
+                  <time dateTime={LAST_REVIEWED}>{LAST_REVIEWED_DISPLAY}</time>. Changes to this
+                  policy will be posted on this page.
                 </p>
               </footer>
             </main>
