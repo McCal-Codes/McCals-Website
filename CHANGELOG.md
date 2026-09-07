@@ -2,6 +2,21 @@
 
 ## 2026-09-12
 
+### Tailwind Was Configured and Never Ran
+
+- `postcss.config.js` loaded only autoprefixer, so `@tailwind base; @tailwind components; @tailwind utilities;` shipped verbatim into the production stylesheet, where a browser skips an at-rule it does not recognise. The installed `tailwindcss` was v4, whose entry point is `@import "tailwindcss"`, so even with the plugin loaded those v3 directives would have produced nothing.
+- The cost was not the dead config. Class names like `mt-8`, `text-sm` and `opacity-70` sat on live pages doing nothing: the booking error on `/book-a-podcast` and `/grab-a-coffee` was meant to be small and dimmed with space above it, and the gallery error text on `/events`, `/concerts`, `/nature` and `/portraits` likewise. None of it applied, and nothing in the build said so.
+- Turning Tailwind on was the wrong repair. `@tailwind base` is preflight, a global reset that would have restyled every page at once. This site is styled with CSS modules and hand written stylesheets, so the fix was to finish removing a tool that was never wired up. The inert class names are gone, which is not a visual change: they were doing nothing before and they are doing nothing now. The spacing and type they were reaching for can be written properly, deliberately, as a separate change.
+- Two guards: no stylesheet may carry a `@tailwind` directive, and no component may use a Tailwind utility class, so a class that would silently do nothing cannot be added back. Both confirmed to fail on purpose.
+
+### Two Routes That Could Not Be Reached
+
+- `/showcase` and `/api-test` are registered in `App.tsx` and code split into their own chunks, but neither appears in `STATIC_PAGE_ROUTES`, so no HTML is prerendered for them and both return 404 in production. They have been unreachable demo pages carrying most of the site's Tailwind usage.
+- `src/components/ui/` held `ImageSpinner` and `VercelImage`, imported by nothing outside that directory.
+- `@vercel/next` was a production dependency of a Vite single page app, referenced nowhere. `api/_lib/rate-limit.js` was a second, unused rate limiter beside the one every endpoint imports; it went with the API cleanup.
+
+## 2026-09-12
+
 ### Contact Messages and Quote Requests Were Publicly Readable
 
 - `contact_submissions` and `quote_requests` each carried a policy named "Public can view own ..." that was `FOR SELECT TO anon USING (true)`. There is no "own" in it: the condition is simply true, so the public anon key that ships inside the client bundle could read every row, with names, email addresses and message bodies. Proven before the fix by seeding a row and reading it back over the REST API with nothing but that key.

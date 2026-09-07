@@ -126,7 +126,7 @@ export default function PortraitsPage() {
         {status === 'error' && (
           <div className={portfolioStyles.pfError}>
             <span>Failed to load portraits portfolio.</span>
-            <span className="text-xs opacity-70">{error}</span>
+            <span>{error}</span>
           </div>
         )}
 

@@ -22,8 +22,6 @@ const NaturePage = lazy(() => import('./pages/nature'));
 const PortraitsPage = lazy(() => import('./pages/portraits'));
 const ProjectsPage = lazy(() => import('./pages/projects'));
 const ChangelogPage = lazy(() => import('./pages/changelog'));
-const ShowcasePage = lazy(() => import('./pages/showcase'));
-const ApiTestPage = lazy(() => import('./pages/api-test'));
 const SentryExamplePage = lazy(() => import('./pages/sentry-example-page'));
 const ContactUsPage = lazy(() => import('./pages/contact-us'));
 const RequestAQuotePage = lazy(() => import('./pages/request-a-quote'));
@@ -154,8 +152,6 @@ const router = createBrowserRouter([
       { path: '/manage-booking', element: <ManageBookingPage /> },
       ...(import.meta.env.DEV
         ? [
-            { path: '/showcase', element: <ShowcasePage /> },
-            { path: '/api-test', element: <ApiTestPage /> },
             { path: '/changelog', element: <ChangelogPage /> },
           ]
         : []),

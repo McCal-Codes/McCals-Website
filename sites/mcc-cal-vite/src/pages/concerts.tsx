@@ -93,7 +93,7 @@ export default function ConcertsPage() {
         {status === 'error' && (
           <div className={portfolioStyles.pfError}>
             <span>Failed to load concerts.</span>
-            <span className="text-xs opacity-70">{error}</span>
+            <span>{error}</span>
           </div>
         )}
 
