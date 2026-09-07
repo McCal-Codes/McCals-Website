@@ -79,6 +79,9 @@ Guardrails:
 - Prefer native `<img>` for primary images; progressively enhance after first paint.
 - Defer non-critical JS.
 - Treat performance and accessibility regressions as bugs.
+- **Portfolio images belong at 2048px on the long edge, around 250 KB.** That is what Portrait and Concert already are, so it is the house size rather than a target. Bring a folder into line with `node scripts/optimize-images.js <Portfolio> --max-edge=2048`; the flag bounds both orientations, where the default 3840x2160 box limits a portrait frame to 2160 while allowing a landscape 3840.
+- **Nothing tracked under `src/images/Portfolios/` may exceed 5 MB**, enforced by `repo-data-integrity.test.ts`. jsDelivr refuses to serve anything over 20 MB and jsDelivr is the CDN for every gallery, so an oversized file is a permanently broken image with no error anywhere. The ceiling is 5 rather than 20 because 20 only catches the file that has already broken.
+- `optimize-images.js` calls `withMetadata()`. Keep it: without it, sharp strips the IPTC/XMP copyright and licensing fields that travel with a photograph.
 
 Critical-path budget for `sites/mcc-cal-vite`:
 
