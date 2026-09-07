@@ -2,6 +2,17 @@
 
 ## 2026-09-12
 
+### Every Page Was Preloading the Homepage Hero, at a Width Vercel Rejects
+
+- The hero preload inline in `index.html` guarded only on hostname, never on path. Every route is prerendered from that same file, so the preload shipped on all 70 of them. Confirmed in production: `/events`, `/contact-us` and `/terms` each carried it. A visitor to any of those fetched a 217 KB homepage photograph at the highest priority the browser has, never displayed it, and let it compete with that page's real LCP image for bandwidth and connections.
+- Its width list also ended in 2560, which is not in `images.sizes` in `vercel.json`. Confirmed live: `w=1920` and `w=2048` return 200, `w=2560` returns 400. So on any viewport wide enough to select that candidate the preload was discarded and the hero downloaded a second time.
+- The 2560 width is a repeat. `imageWidths.static.test.ts` was written to prevent exactly this and names the case in its own docstring, but it only walked `src/` for `.ts` and `.tsx`, so the one file carrying an inline srcset was the one file it could not see. It now scans `index.html` too and understands the `var widths = [...]` form. Verified by reintroducing 2560 and watching it fail.
+- A second guard asserts the preload still checks `location.pathname`, so the scope cannot regress silently either.
+- Editing that inline script changed its SHA-256, and the content security policy in both `vercel.json` files still pinned the old one. The existing CSP hash test caught it, which is the only reason this did not ship as a policy that blocks its own preload. Both files updated.
+
+
+## 2026-09-12
+
 ### The Smoke Test Cleans Up the Calendar It Now Writes To
 
 - Configuring Google Calendar credentials changed what `npm run smoke:forms` does. The booking check used to take the mock path and touch nothing outside Supabase; it now writes a real event to the Podcast Bookings calendar. Cleanup removed the database row and left the event, so every run added another "Grab a Coffee - [smoke] booking" to a live calendar. Six had accumulated during the work that configured the credentials.
