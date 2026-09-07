@@ -115,7 +115,6 @@
     "postcss": "^8.5.26",
     "prettier": "^3.9.6",
     "sharp": "^0.35.4",
-    "tailwindcss": "^4.3.3",
     "typescript-eslint": "^8.67.0"
   },
   "engines": {

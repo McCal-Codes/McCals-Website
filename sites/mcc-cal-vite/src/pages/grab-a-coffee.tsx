@@ -185,9 +185,9 @@ export default function GrabCoffeePage() {
               <h1 className="scheduling-title">{BOOKING_TYPE.name}</h1>
               <p className="scheduling-subtitle">{BOOKING_TYPE.description}</p>
             </header>
-            <div className="scheduling-error mt-8" role="alert">
+            <div className="scheduling-error" role="alert">
               <p>Scheduling is temporarily unavailable.</p>
-              <p className="text-sm opacity-80 mt-2">
+              <p>
                 Please email me directly at <a href="mailto:contact@mcc-cal.com">contact@mcc-cal.com</a> to grab a coffee.
               </p>
             </div>
