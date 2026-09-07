@@ -2,6 +2,14 @@
 
 ## 2026-09-12
 
+### Contact Messages and Quote Requests Were Publicly Readable
+
+- `contact_submissions` and `quote_requests` each carried a policy named "Public can view own ..." that was `FOR SELECT TO anon USING (true)`. There is no "own" in it: the condition is simply true, so the public anon key that ships inside the client bundle could read every row, with names, email addresses and message bodies. Proven before the fix by seeding a row and reading it back over the REST API with nothing but that key.
+- The matching anon `INSERT` policies let anything write directly to those tables, bypassing the honeypot, the timing check and the rate limiting in `api/contact.js` and `api/quote.js` entirely.
+- A migration fixing this was written on 2026-07-11 and never applied. Its own header said so, in a note that had been true for two months. The fix existed, was reviewed and was committed; the one step that mattered was skipped, and nothing checked.
+- Applied now. Anon `SELECT` returns `[]`, anon `INSERT` returns 401, and `portfolio_images` still returns 200 so the galleries are untouched. All three form endpoints were re-tested against production afterwards and still store, still email and still discard honeypot submissions, because every legitimate write goes through the service role, which bypasses row level security.
+- Both tables held zero rows the whole time, so nothing real was ever exposed. That is luck rather than design.
+
 ### Every Page Was Preloading the Homepage Hero, at a Width Vercel Rejects
 
 - The hero preload inline in `index.html` guarded only on hostname, never on path. Every route is prerendered from that same file, so the preload shipped on all 70 of them. Confirmed in production: `/events`, `/contact-us` and `/terms` each carried it. A visitor to any of those fetched a 217 KB homepage photograph at the highest priority the browser has, never displayed it, and let it compete with that page's real LCP image for bandwidth and connections.

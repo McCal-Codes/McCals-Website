@@ -9,9 +9,17 @@
 -- sites/mcc-cal-vite/api/) or authenticated admin users, so the anon
 -- policies are dropped entirely. No client code references these tables.
 --
--- NOTE: not yet applied to the live database as of this commit, apply via
--- the Supabase SQL editor or `supabase db push` (both form tables were
--- empty at the time this was written, so nothing had leaked).
+-- APPLIED to the live database on 2026-09-12. It sat unapplied for two
+-- months while this note said so, which is the only reason the exposure
+-- survived: the fix was written, reviewed and committed, and then the one
+-- step that mattered never happened.
+--
+-- Confirmed before applying, using the public anon key that ships in the
+-- client bundle: a SELECT against contact_submissions returned a seeded row
+-- in full, name, email, subject and message. Confirmed after: the same
+-- request returns [], anon INSERT returns 401, and portfolio_images still
+-- returns 200 so the galleries are unaffected. Both form tables held zero
+-- rows throughout, so nothing real was ever readable.
 
 drop policy if exists "Public can view own contact submission" on public.contact_submissions;
 drop policy if exists "Public can submit contact forms" on public.contact_submissions;
