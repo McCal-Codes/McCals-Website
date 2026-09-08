@@ -3,12 +3,15 @@ name: No AI Attribution
 
 # This repository does not carry AI co-author trailers or "generated with"
 # advertisements in its history. That convention was held by memory alone, and
-# tooling defaults to adding them, so one forgotten trailer lands in history
+# tooling adds them by default, so one forgotten trailer lands in history
 # permanently. Local hooks cannot be the guarantee: they are opt-in and
 # --no-verify skips them.
 #
-# Deliberately installs nothing. It reads git and runs one Node script, so it
-# adds seconds rather than a full npm ci to every pull request.
+# Commit messages come from the API rather than from git. The obvious
+# implementation checks a base..head range, which needs the base commit and so
+# `fetch-depth: 0` — and this repository carries 2.5 GB of history, so that
+# clone dominated everything else the job did. `fetch-depth: 1` fetches the
+# script and nothing more.
 
 on:
   pull_request:
@@ -16,6 +19,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   check:
@@ -26,9 +30,19 @@ jobs:
         uses: actions/checkout@v7
         with:
           submodules: false
-          # The commit range below is base..head, and a shallow clone does not
-          # contain the base commit.
-          fetch-depth: 0
+          fetch-depth: 1
+
+      - name: Collect commit messages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/commits" \
+            --paginate --jq '.[].commit.message' > commit-messages.txt
+          # An empty file would let the check pass without reading anything, so
+          # prove there was something to read.
+          test -s commit-messages.txt
 
       - name: Collect pull request title and body
         env:
@@ -39,8 +53,5 @@ jobs:
           # script, so a title containing shell metacharacters cannot run.
           printf '%s\n\n%s\n' "$PR_TITLE" "$PR_BODY" > pr-text.txt
 
-      - name: Check commits and pull request text
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: node scripts/ci/check-no-ai-attribution.js "$BASE_SHA" "$HEAD_SHA" pr-text.txt
+      - name: Check for AI attribution
+        run: node scripts/ci/check-no-ai-attribution.js --files commit-messages.txt pr-text.txt

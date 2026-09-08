@@ -11,8 +11,14 @@
  * them. This runs in CI, needs no install, and reads only git.
  *
  * Usage:
- *   node scripts/ci/check-no-ai-attribution.js <base-sha> <head-sha> [extra-text-file]
+ *   node scripts/ci/check-no-ai-attribution.js --files a.txt b.txt
  *   node scripts/ci/check-no-ai-attribution.js --text "some text"
+ *   node scripts/ci/check-no-ai-attribution.js <base-sha> <head-sha> [text-file]
+ *
+ * CI uses --files, reading commit messages fetched from the API. It does not
+ * use the git range mode, because that needs the base commit and so a full
+ * clone, and this repository carries 2.5 GB of history. The range mode stays
+ * for local use, where the history is already on disk.
  */
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -70,6 +76,23 @@ function main() {
 
   if (args[0] === '--text') {
     violations.push(...findViolations(args.slice(1).join(' '), 'text'));
+  } else if (args[0] === '--files') {
+    const files = args.slice(1);
+    if (files.length === 0) {
+      console.error('--files needs at least one path.');
+      process.exitCode = 2;
+      return;
+    }
+    for (const file of files) {
+      if (!fs.existsSync(file)) {
+        // A missing input means the check did not actually run over what it
+        // claims to cover, which must not read as a pass.
+        console.error(`Expected input file is missing: ${file}`);
+        process.exitCode = 2;
+        return;
+      }
+      violations.push(...findViolations(fs.readFileSync(file, 'utf8'), file));
+    }
   } else {
     const [base, head, extraFile] = args;
     if (!base || !head) {
