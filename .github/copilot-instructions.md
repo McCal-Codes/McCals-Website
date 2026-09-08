@@ -16,10 +16,11 @@ Purpose: fast, safe, and consistent edits for the `McCals-Website` workspace.
 - Legacy widgets, when maintained, must remain self-contained HTML and should not overwrite older version files.
 - Do not edit `dist/**` manually.
 - Do not commit secrets, tokens, private keys, or plaintext credentials.
-- Do not include AI tool names or attribution in commit messages, co-author lines, or code comments.
+- Do not include AI tool names or attribution in commit messages, co-author lines, PR bodies, issues, or code comments. **This is enforced**, not merely preferred: `.github/workflows/no-ai-attribution.yml` fails any pull request whose commits or text carry a `Co-Authored-By` naming an AI agent, a vendor no-reply address, a "generated with" advertisement, or a robot marker. `.githooks/commit-msg` rejects the same locally. Both run `scripts/ci/check-no-ai-attribution.js`.
 - Use standard code annotations: `TODO`, `FIXME`, `BUG`, `SECURITY`, `NOTE`, `A11Y`, etc.
 - **This site does not use Tailwind.** It was configured and never ran: `postcss.config.js` loads only autoprefixer, so the directives shipped as literal text into the stylesheet and every utility class did nothing. It has been removed. Style with CSS modules or the existing hand written stylesheets; a class like `mt-8` or `text-sm` will silently have no effect, and a static test now rejects one.
 - **A route only exists if it is in `STATIC_PAGE_ROUTES`.** Registering it in `App.tsx` gets it into the bundle but not into the prerender, and Vercel serves 404 for a path with no generated HTML. `/showcase` and `/api-test` sat that way and were removed. Adding a page means both.
+- **Changelog entries go in `changelog.d/`, one file per pull request, not in `CHANGELOG.md`.** Everyone editing the top of one file meant any two open PRs conflicted by construction, and each resolution cost a second full round of CI and Vercel builds. Write the `###` heading and bullets only; `scripts/changelog/assemble.js` adds the date and folds the fragments in at release. Run it by hand, never in CI: an automated commit into the deploy root is what produced the doubled production build fixed in #292.
 - If adding a code `TODO:`, also track it in `updates/todo.md` (or move to completed tracking when finished).
 
 ## 3) Source map (high signal)

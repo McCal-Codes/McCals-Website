@@ -33,5 +33,9 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps --prefer-offline --no-audit --no-fund
 
-      - name: Validate script references
-        run: npm run ci:validate-scripts
+      # This workflow is named "Lint Scripts" and did not lint. It ran
+      # `ci:validate-scripts`, which is the same command ci-scripts-smoke.yml
+      # already runs, so scripts/ went unlinted in CI while two runners did one
+      # another's work. `npm run lint:scripts` was defined and invoked nowhere.
+      - name: Lint scripts
+        run: npm run lint:scripts

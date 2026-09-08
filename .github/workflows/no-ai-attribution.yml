@@ -1,0 +1,57 @@
+---
+name: No AI Attribution
+
+# This repository does not carry AI co-author trailers or "generated with"
+# advertisements in its history. That convention was held by memory alone, and
+# tooling adds them by default, so one forgotten trailer lands in history
+# permanently. Local hooks cannot be the guarantee: they are opt-in and
+# --no-verify skips them.
+#
+# Commit messages come from the API rather than from git. The obvious
+# implementation checks a base..head range, which needs the base commit and so
+# `fetch-depth: 0` — and this repository carries 2.5 GB of history, so that
+# clone dominated everything else the job did. `fetch-depth: 1` fetches the
+# script and nothing more.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check:
+    name: Ensure no AI attribution
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: false
+          fetch-depth: 1
+
+      - name: Collect commit messages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/commits" \
+            --paginate --jq '.[].commit.message' > commit-messages.txt
+          # An empty file would let the check pass without reading anything, so
+          # prove there was something to read.
+          test -s commit-messages.txt
+
+      - name: Collect pull request title and body
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # Written through the environment rather than interpolated into the
+          # script, so a title containing shell metacharacters cannot run.
+          printf '%s\n\n%s\n' "$PR_TITLE" "$PR_BODY" > pr-text.txt
+
+      - name: Check for AI attribution
+        run: node scripts/ci/check-no-ai-attribution.js --files commit-messages.txt pr-text.txt

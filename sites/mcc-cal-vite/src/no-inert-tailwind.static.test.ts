@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 
 /**
@@ -70,6 +70,34 @@ describe('no half-wired Tailwind', () => {
     for (const manifest of ['package.json', '../../package.json']) {
       const pkg = JSON.parse(readFileSync(resolve(siteRoot, manifest), 'utf8'));
       expect({ ...pkg.dependencies, ...pkg.devDependencies }).not.toHaveProperty('tailwindcss');
+    }
+  });
+
+  /**
+   * The dependency check above passed while the repo root still carried a
+   * `tailwind.config.js` and a `postcss.config.js` naming `tailwindcss` as a
+   * plugin. Removing a dependency that a config still references turns any
+   * PostCSS run there into "Cannot find module 'tailwindcss'". It stayed latent
+   * only because nothing runs PostCSS at the root.
+   *
+   * So checking the manifests is not enough: a tool is gone when nothing asks
+   * for it either, and that is what this pins.
+   */
+  it('no PostCSS config still asks for the tailwind plugin', () => {
+    const configs = ['postcss.config.js', '../../postcss.config.js']
+      .map((rel) => resolve(siteRoot, rel))
+      .filter((file) => existsSync(file));
+
+    expect(configs.length).toBeGreaterThan(1);
+
+    for (const file of configs) {
+      expect(readFileSync(file, 'utf8')).not.toMatch(/^\s*(?:'|")?tailwindcss(?:'|")?\s*:/m);
+    }
+  });
+
+  it('no tailwind config file survives', () => {
+    for (const rel of ['tailwind.config.js', '../../tailwind.config.js']) {
+      expect(existsSync(resolve(siteRoot, rel))).toBe(false);
     }
   });
 });

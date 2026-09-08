@@ -34,7 +34,7 @@ jobs:
           echo "$CHANGED" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           # Files that do NOT require changelog entries (docs-only/meta tweaks)
-          EXEMPT_REGEX="^(CHANGELOG\.md|docs/CHANGELOG\.md|\.github/ISSUE_TEMPLATE/|\.github/PULL_REQUEST_TEMPLATE\.md|\.github/.*instructions.*\.md|updates/|docs/standards/.*|docs/integrations/.*|docs/widgets/.*|docs/README\.md|README\.md|LICENSE|\.gitignore|\.vscode/|\.github/workflows/validate-workflows\.yml)$"
+          EXEMPT_REGEX="^(CHANGELOG\.md|docs/CHANGELOG\.md|\.github/ISSUE_TEMPLATE/|\.github/PULL_REQUEST_TEMPLATE\.md|\.github/.*instructions.*\.md|updates/|docs/standards/.*|docs/integrations/.*|docs/widgets/.*|docs/README\.md|README\.md|LICENSE|\.gitignore|\.vscode/|\.github/workflows/validate-workflows\.yml|changelog\.d/README\.md)$"
           NEEDS_CHANGELOG=false
           while IFS= read -r file; do
             [ -z "$file" ] && continue
@@ -52,7 +52,16 @@ jobs:
         with:
           script: |
             const changed = `${{ steps.detect.outputs.changed_files }}`.split(/\r?\n/).filter(Boolean);
-            const hasChangelog = changed.some(f => f === 'CHANGELOG.md' || f === 'docs/CHANGELOG.md');
+            // A fragment under changelog.d/ satisfies this the same way editing
+            // CHANGELOG.md does. Fragments exist so two open pull requests stop
+            // colliding on the same lines at the top of one file; see
+            // changelog.d/README.md. README.md there documents the convention
+            // and is not itself an entry.
+            const hasChangelog = changed.some(f =>
+              f === 'CHANGELOG.md' ||
+              f === 'docs/CHANGELOG.md' ||
+              (f.startsWith('changelog.d/') && f.endsWith('.md') && f !== 'changelog.d/README.md')
+            );
             if (hasChangelog) {
               core.info('Changelog present.');
               return;
@@ -70,7 +79,8 @@ jobs:
             const note = [
               'This PR changes files that typically require a CHANGELOG entry, but no changelog file was modified.',
               '',
-              'Please add a brief entry to `CHANGELOG.md` (Docs/Meta or relevant date section).',
+              'Add a fragment at `changelog.d/<your-branch>.md` describing the change. See `changelog.d/README.md`.',
+              'Editing `CHANGELOG.md` directly still counts, but a fragment will not conflict with other open PRs.',
               'To override intentionally, add label `skip-changelog` or `docs-acknowledged`.'
             ].join('\n');
             await github.rest.issues.createComment({
