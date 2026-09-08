@@ -1,0 +1,46 @@
+---
+name: No AI Attribution
+
+# This repository does not carry AI co-author trailers or "generated with"
+# advertisements in its history. That convention was held by memory alone, and
+# tooling defaults to adding them, so one forgotten trailer lands in history
+# permanently. Local hooks cannot be the guarantee: they are opt-in and
+# --no-verify skips them.
+#
+# Deliberately installs nothing. It reads git and runs one Node script, so it
+# adds seconds rather than a full npm ci to every pull request.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Ensure no AI attribution
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: false
+          # The commit range below is base..head, and a shallow clone does not
+          # contain the base commit.
+          fetch-depth: 0
+
+      - name: Collect pull request title and body
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # Written through the environment rather than interpolated into the
+          # script, so a title containing shell metacharacters cannot run.
+          printf '%s\n\n%s\n' "$PR_TITLE" "$PR_BODY" > pr-text.txt
+
+      - name: Check commits and pull request text
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/ci/check-no-ai-attribution.js "$BASE_SHA" "$HEAD_SHA" pr-text.txt

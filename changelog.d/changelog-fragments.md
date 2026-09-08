@@ -14,3 +14,10 @@
 
 - #291 removed the `tailwindcss` dependency from both packages and the site's config, but the repo root kept a `tailwind.config.js` and a `postcss.config.js` naming `tailwindcss` as a plugin. A dependency removed while a config still asks for it turns any PostCSS run there into "Cannot find module". Nothing runs PostCSS at the root, which is the only reason this was latent rather than broken.
 - The guard from #291 passed it, because it checked the manifests and not the configs. A tool is gone when nothing asks for it either, so the guard now checks both, and refuses a surviving tailwind config file. Both additions were confirmed to fail on purpose.
+
+### AI Attribution Is Now Enforced Rather Than Remembered
+
+- The convention that no commit, pull request or issue carries an AI co-author trailer or a "generated with" advertisement was held by memory alone. Tooling adds them by default, so one forgotten trailer lands in history permanently and cannot be removed without rewriting it.
+- `.github/workflows/no-ai-attribution.yml` now fails any pull request whose commits, title or body carry one. It installs nothing, reading only git and a single Node script, so it adds seconds rather than an `npm ci`. `.githooks/commit-msg` rejects the same locally for faster feedback; both call `scripts/ci/check-no-ai-attribution.js`, so they cannot drift apart.
+- Tested against the repository's real history rather than invented strings. It passes the last twenty commits on `main`, correctly passes the commit containing "regenerated with only a new timestamp" that a naive grep flagged, and correctly fails a real attributed commit on an old branch. Prose that merely discusses AI, Claude or generated files is untouched; only the machine-inserted credit is rejected.
+- `main` was audited and is clean: no attributed commit is an ancestor of it, and no pull request or issue body carries one. The attributed commits that do exist sit only on stale Dependabot branches cut from an older history, so squash merging keeps them out. Do not merge those with a merge commit.
