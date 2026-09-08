@@ -96,7 +96,10 @@ export default async function handler(req, res) {
     }
   }
 
+  const stored = submissionId !== null;
+
   // Send email notification
+  let emailed = false;
   const resend = getResendClient();
   if (resend) {
     try {
@@ -109,22 +112,43 @@ export default async function handler(req, res) {
         html: mail.html,
         text: mail.text,
       });
+      emailed = true;
     } catch (err) {
       console.error('[contact] Email error: - contact.js:103', err);
       await captureApiException(err, { route: 'contact', operation: 'send_contact_email' });
-      // Don't fail the request if email fails but DB succeeded
-      if (submissionId) {
-        res.status(200).json({ ok: true, id: submissionId, emailError: true });
-        return;
-      }
     }
   } else {
     console.warn('[contact] RESEND_API_KEY not set, skipping email notification - contact.js:111');
   }
 
-  res.status(200).json({ 
-    ok: true, 
+  // The response has to say what actually happened. This used to answer 200
+  // "Message received. Thank you for contacting us!" whenever it reached the
+  // end, including when the row was never written and the mail never sent, so a
+  // visitor was thanked for a message that reached nobody and the form then
+  // cleared their text. scripts/smoke-forms.js exists because that exact shape
+  // ran for months undetected.
+  if (!stored && !emailed) {
+    console.error('[contact] Submission reached neither the database nor email');
+    await captureApiException(new Error('Contact submission was neither stored nor emailed'), {
+      route: 'contact',
+      operation: 'deliver_contact_submission',
+    });
+    res.status(503).json({
+      error: `We could not record your message. Please email ${TO_EMAIL} directly.`,
+      stored: false,
+      emailed: false,
+    });
+    return;
+  }
+
+  res.status(200).json({
+    ok: true,
     id: submissionId,
-    message: 'Message received. Thank you for contacting us!'
+    stored,
+    emailed,
+    // Stored but not sent is still a real receipt: the enquiry is on record and
+    // will be seen. Saying so is honest without alarming the visitor.
+    emailError: !emailed || undefined,
+    message: 'Message received. Thank you for contacting us!',
   });
 }

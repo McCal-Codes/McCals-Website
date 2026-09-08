@@ -1,0 +1,7 @@
+### The Contact and Quote Forms Thanked You for Messages That Reached Nobody
+
+- Both endpoints ended with `200 { ok: true, message: 'Message received. Thank you for contacting us!' }` whenever control reached the last line, including when the Supabase row was never written and the email never sent. `ContactForm` then cleared the field on success, so the visitor's text was gone as well.
+- Two ways in. The email `catch` returned early only `if (submissionId)`, so an unconfigured database plus a failing send fell straight through. And with `RESEND_API_KEY` unset the `else` branch only logged a warning and fell through too, which is the live shape whenever that key is absent.
+- The response now says what happened. Both endpoints track whether the submission was stored and whether it was emailed. Neither means `503` with the direct address to write to instead; either one means `200`, because a stored enquiry is on record and will be seen. The client already handled a non-ok response correctly, showing the message and leaving the form filled, so nothing changed there.
+- A total failure is now also reported to Sentry rather than being indistinguishable from success.
+- Ten tests pin all five states across both endpoints, and every one of them fails against the previous handlers. `scripts/smoke-forms.js` was written for exactly this shape and records in its own header that it ran undetected for months; it is still referenced by no workflow, because scheduling it needs a Supabase service role key in CI, which is a decision worth making deliberately.
