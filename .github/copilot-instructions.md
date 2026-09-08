@@ -20,6 +20,7 @@ Purpose: fast, safe, and consistent edits for the `McCals-Website` workspace.
 - Use standard code annotations: `TODO`, `FIXME`, `BUG`, `SECURITY`, `NOTE`, `A11Y`, etc.
 - **This site does not use Tailwind.** It was configured and never ran: `postcss.config.js` loads only autoprefixer, so the directives shipped as literal text into the stylesheet and every utility class did nothing. It has been removed. Style with CSS modules or the existing hand written stylesheets; a class like `mt-8` or `text-sm` will silently have no effect, and a static test now rejects one.
 - **A route only exists if it is in `STATIC_PAGE_ROUTES`.** Registering it in `App.tsx` gets it into the bundle but not into the prerender, and Vercel serves 404 for a path with no generated HTML. `/showcase` and `/api-test` sat that way and were removed. Adding a page means both.
+- **Changelog entries go in `changelog.d/`, one file per pull request, not in `CHANGELOG.md`.** Everyone editing the top of one file meant any two open PRs conflicted by construction, and each resolution cost a second full round of CI and Vercel builds. Write the `###` heading and bullets only; `scripts/changelog/assemble.js` adds the date and folds the fragments in at release. Run it by hand, never in CI: an automated commit into the deploy root is what produced the doubled production build fixed in #292.
 - If adding a code `TODO:`, also track it in `updates/todo.md` (or move to completed tracking when finished).
 
 ## 3) Source map (high signal)
