@@ -1,0 +1,13 @@
+# Two checks, in the order that gives the clearest failure.
+
+# 1. AI attribution. This repository carries none; see
+#    .github/workflows/no-ai-attribution.yml, which is the enforcing copy.
+node scripts/ci/check-no-ai-attribution.js --text "$(cat "$1")" || exit 1
+
+# 2. Conventional Commits.
+#
+#    Local commits are squashed on merge, so this is not what protects main's
+#    history: the pull request title becomes the commit subject
+#    (squash_merge_commit_title = COMMIT_OR_PR_TITLE). CI lints that title. This
+#    is here so the habit is formed where the message is written.
+npx --no-install commitlint --edit "$1"
