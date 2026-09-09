@@ -101,7 +101,10 @@ describe('JournalismPortfolio', () => {
     // The published credit lives on the album itself now, at the bottom of the
     // lightbox, rather than being duplicated in a strip above the grid.
     expect(screen.queryByRole('heading', { name: 'Recent published work' })).toBeNull();
-    expect(screen.getByRole('tab', { name: 'Published' })).toBeInTheDocument();
+    // A button, not a tab. The filters carried role="tab" inside a role="tablist"
+    // while having none of what that contract requires, and set aria-pressed,
+    // which is not allowed on role="tab". They are toggle buttons.
+    expect(screen.getByRole('button', { name: 'Published' })).toBeInTheDocument();
 
     const grid = screen.getByTestId('journalism-grid');
     expect(grid).toHaveTextContent('Election Night Watch');
@@ -119,7 +122,7 @@ describe('JournalismPortfolio', () => {
       </MemoryRouter>,
     );
 
-    await user.click(screen.getByRole('tab', { name: 'Published' }));
+    await user.click(screen.getByRole('button', { name: 'Published' }));
 
     const grid = screen.getByTestId('journalism-grid');
     expect(grid).toHaveTextContent('Election Night Watch');

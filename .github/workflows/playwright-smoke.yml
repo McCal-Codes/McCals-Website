@@ -47,14 +47,12 @@ jobs:
           mkdir -p reports/playwright
           npx playwright test tests/playwright --reporter=list,html --workers=1
 
-      - name: Run axe-core (Firefox) against staging URL
-        env:
-          STAGING_URL: ${{ secrets.STAGING_URL }}
-        run: |
-          if [ -z "$STAGING_URL" ]; then
-            echo "Skipping axe audit: STAGING_URL secret not set."; exit 0; fi
-          npx playwright install firefox
-          node scripts/a11y/axe-firefox.js "$STAGING_URL"
+      # The axe step that was here has moved to a11y-axe-firefox.yml, which runs
+      # on pull requests against a build it makes itself. This one depended on a
+      # STAGING_URL secret and exited 0 when it was unset, so on most nights it
+      # scanned nothing and said nothing, and its output was written to disk and
+      # never uploaded. Two copies of a scan, one of them silent, is worse than
+      # one that runs.
 
       - name: Upload Playwright artifacts
         uses: actions/upload-artifact@v7
