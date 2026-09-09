@@ -68,33 +68,58 @@ jobs:
       - name: Install Playwright Firefox
         run: npx playwright install --with-deps firefox
 
-      - name: Build and serve the site
-        if: github.event.inputs.target-url == ''
-        run: |
-          set -euo pipefail
-          cd sites/mcc-cal-vite
-          npm ci --prefer-offline --no-audit --no-fund
-          npm run build
-          npx vite preview --port 4173 --strictPort &
-          # Wait for it rather than sleeping a guessed number of seconds.
-          for _ in $(seq 1 30); do
-            if curl -sf -o /dev/null http://127.0.0.1:4173/; then exit 0; fi
-            sleep 1
-          done
-          echo "Preview server did not come up" >&2
-          exit 1
-
-      - name: Scan
+      - name: Build, serve and scan
+        id: scan
         env:
           TARGET_URL: ${{ github.event.inputs.target-url }}
         run: |
           set -euo pipefail
-          node scripts/a11y/axe-firefox.js --base-url "${TARGET_URL:-http://127.0.0.1:4173}"
+
+          if [ -n "${TARGET_URL}" ]; then
+            node scripts/a11y/axe-firefox.js --base-url "${TARGET_URL}"
+            exit $?
+          fi
+
+          cd sites/mcc-cal-vite
+          npm ci --prefer-offline --no-audit --no-fund
+          npm run build
+
+          # What was observed: vite printed "Local: http://localhost:4173/" and
+          # the readiness probe against http://127.0.0.1:4173/ then timed out for
+          # the full 30 seconds, so the scan never ran. The likeliest cause is
+          # the runner resolving localhost to ::1 while the probe asked for IPv4,
+          # but that was not reproducible locally, so this does not rely on the
+          # diagnosis: the host is pinned, and the probe below tries both names.
+          npx vite preview --host 127.0.0.1 --port 4173 --strictPort &
+          PREVIEW_PID=$!
+          # Serving and scanning in one step, so the server's life is the step's
+          # life. A background process started in one step and used in another
+          # is not something to rely on.
+          trap 'kill "${PREVIEW_PID}" 2>/dev/null || true' EXIT
+
+          ready=
+          for _ in $(seq 1 30); do
+            for host in 127.0.0.1 localhost; do
+              if curl -sf -o /dev/null "http://${host}:4173/"; then ready="${host}"; break 2; fi
+            done
+            sleep 1
+          done
+          if [ -z "${ready}" ]; then
+            echo "Preview server answered on neither 127.0.0.1 nor localhost:4173" >&2
+            # Say what it did print, so the next person is not guessing either.
+            ss -tlnp 2>/dev/null | grep 4173 || true
+            exit 1
+          fi
+          echo "Preview server ready on ${ready}:4173"
+
+          cd "${GITHUB_WORKSPACE}"
+          node scripts/a11y/axe-firefox.js --base-url "http://${ready}:4173"
 
       - name: Upload reports
-        # Always, so a failing scan's report is available; but only these two
-        # files, both written by the run that just happened.
-        if: always()
+        # Whether the scan passed or failed, but not when it never ran: a
+        # missing report then is correct, and erroring on it buries the real
+        # failure under a second one.
+        if: always() && steps.scan.outcome != 'skipped'
         uses: actions/upload-artifact@v7
         with:
           name: axe-reports
