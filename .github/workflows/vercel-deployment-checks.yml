@@ -91,6 +91,12 @@ jobs:
       - name: Run ESLint
         run: cd sites/mcc-cal-vite && npm run lint
 
+      # Added to this job rather than its own, so it reuses the install above
+      # instead of adding a fifth npm ci to every pull request. knip reports
+      # source files nothing can reach; twenty-eight had accumulated.
+      - name: Check for dead code
+        run: cd sites/mcc-cal-vite && npm run deadcode
+
       - name: Notify Vercel - Lint
         if: always()
         uses: actions/github-script@v9
