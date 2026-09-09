@@ -118,6 +118,9 @@ export default async function handler(req, res) {
   }
 
   // Send email notification
+  const stored = quoteId !== null;
+
+  let emailed = false;
   const resend = getResendClient();
   if (resend) {
     try {
@@ -154,21 +157,39 @@ export default async function handler(req, res) {
         html: mail.html,
         text: mail.text,
       });
+      emailed = true;
     } catch (err) {
       console.error('[quote] Email error:', err);
       await captureApiException(err, { route: 'quote', operation: 'send_quote_email' });
-      if (quoteId) {
-        res.status(200).json({ ok: true, id: quoteId, emailError: true });
-        return;
-      }
     }
   } else {
     console.warn('[quote] RESEND_API_KEY not set, skipping email');
   }
 
-  res.status(200).json({ 
-    ok: true, 
+  // See the note in api/contact.js. This answered 200 "Quote request received"
+  // whenever it reached the end, including when nothing was stored and nothing
+  // was sent, promising a reply within 24 to 48 hours for a request that
+  // reached nobody.
+  if (!stored && !emailed) {
+    console.error('[quote] Request reached neither the database nor email');
+    await captureApiException(new Error('Quote request was neither stored nor emailed'), {
+      route: 'quote',
+      operation: 'deliver_quote_request',
+    });
+    res.status(503).json({
+      error: `We could not record your request. Please email ${TO_EMAIL} directly.`,
+      stored: false,
+      emailed: false,
+    });
+    return;
+  }
+
+  res.status(200).json({
+    ok: true,
     id: quoteId,
-    message: 'Quote request received. We will respond within 24-48 hours.'
+    stored,
+    emailed,
+    emailError: !emailed || undefined,
+    message: 'Quote request received. We will respond within 24-48 hours.',
   });
 }
