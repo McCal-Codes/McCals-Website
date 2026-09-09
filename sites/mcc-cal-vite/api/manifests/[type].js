@@ -45,7 +45,13 @@ export default function handler(req, res) {
     return;
   }
 
-  const mapping = TYPE_MAP[type.toLowerCase()];
+  // Object.hasOwn, not a truthiness check on the lookup. TYPE_MAP is a plain
+  // object literal, so TYPE_MAP['constructor'] and TYPE_MAP['__proto__'] are
+  // inherited and truthy, passing the guard below. `mapping` was then a
+  // function rather than a string, and path.resolve threw a TypeError outside
+  // the try further down, crashing the function instead of answering 400.
+  const key = type.toLowerCase();
+  const mapping = Object.hasOwn(TYPE_MAP, key) ? TYPE_MAP[key] : undefined;
   if (!mapping) {
     res
       .status(400)

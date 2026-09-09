@@ -27,6 +27,13 @@ function minuteOfDayToHhmm(minuteOfDay) {
  * limit is set well above real use: the booking widget fetches once per month
  * view, so even a visitor clicking quickly through a year stays inside it.
  */
+/**
+ * Widest span a single request may ask for. The calendar UI renders a month and
+ * fetches that month, so 62 days covers a month view plus the neighbouring days
+ * some views spill into, with room to spare.
+ */
+const MAX_RANGE_DAYS = 62;
+
 const AVAILABILITY_RATE_LIMIT = {
   route: 'schedule-availability',
   limit: 60,
@@ -225,6 +232,23 @@ export default async function handler(req, res) {
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
   if (!dateRegex.test(start) || !dateRegex.test(end)) {
     res.status(400).json({ error: 'Invalid date format. Use YYYY-MM-DD' });
+    return;
+  }
+
+  // The shape was checked but never the span. Below, this walks one day at a
+  // time generating slots, and asks Google for the whole window in a single
+  // events.list. `?start=2020-01-01&end=2999-12-31` was accepted, which is a
+  // six figure loop and a millennium wide calendar query, at 60 requests a
+  // minute. The booking widget only ever asks for one month.
+  const rangeDays = (Date.parse(`${end}T00:00:00Z`) - Date.parse(`${start}T00:00:00Z`)) / 86400000;
+  if (!Number.isFinite(rangeDays) || rangeDays < 0) {
+    res.status(400).json({ error: 'The end date must not be before the start date.' });
+    return;
+  }
+  if (rangeDays > MAX_RANGE_DAYS) {
+    res.status(400).json({
+      error: `Date range too large. Ask for ${MAX_RANGE_DAYS} days or fewer.`,
+    });
     return;
   }
 

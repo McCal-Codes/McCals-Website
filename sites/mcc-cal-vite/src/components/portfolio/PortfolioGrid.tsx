@@ -59,7 +59,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   );
   const [activeLightbox, setActiveLightbox] = useState<ActiveLightbox | null>(null);
   const gallery = useLocation().pathname.replace(/^\//, '') || 'home';
-  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const openerRef = useRef<HTMLElement | null>(null);
 
@@ -104,13 +104,34 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
     };
   }, [groups.length, initialCount, resolvedWideInitialCount]);
 
-  const handleCopyLink = useCallback((id: string) => {
-    const url = `${window.location.origin}${window.location.pathname}#${id}`;
-    navigator.clipboard?.writeText(url).catch(() => {});
+  const showToast = useCallback((message: string) => {
     clearTimeout(toastTimer.current);
-    setToastVisible(true);
-    toastTimer.current = setTimeout(() => setToastVisible(false), 2200);
+    setToastMessage(message);
+    toastTimer.current = setTimeout(() => setToastMessage(null), 2200);
   }, []);
+
+  const handleCopyLink = useCallback(
+    (id: string) => {
+      const url = `${window.location.origin}${window.location.pathname}#${id}`;
+
+      // The toast used to fire unconditionally. Optional chaining meant no
+      // clipboard API produced no promise at all, and a rejected write was
+      // swallowed by an empty catch, so "Link copied" appeared in both cases
+      // and the visitor was told something that had not happened. The API is
+      // absent over plain http and the write is refused without a user gesture
+      // or permission, so neither case is hypothetical.
+      const write = navigator.clipboard?.writeText(url);
+      if (!write) {
+        showToast('Could not copy. Copy the address bar instead.');
+        return;
+      }
+      write.then(
+        () => showToast('Link copied'),
+        () => showToast('Could not copy. Copy the address bar instead.'),
+      );
+    },
+    [showToast],
+  );
 
   const handleOpen = useCallback(
     (group: PortfolioGroup) => {
@@ -176,11 +197,11 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
       )}
 
       <div
-        className={`${portfolioStyles.pfToast}${toastVisible ? ` ${portfolioStyles.pfToastShow}` : ''}`}
+        className={`${portfolioStyles.pfToast}${toastMessage ? ` ${portfolioStyles.pfToastShow}` : ''}`}
         aria-live="polite"
         aria-atomic="true"
       >
-        Link copied
+        {toastMessage}
       </div>
     </>
   );

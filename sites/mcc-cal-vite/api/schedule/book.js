@@ -489,7 +489,14 @@ export default async function handler(req, res) {
       return;
     }
 
-    const calendarEvent = await createCalendarEvent(accessToken, req.body);
+    // parsed.data, not req.body. The handler validates into `parsed` at the top
+    // and every other use reads from it, including the conflict check just
+    // above, but this one call took the raw body. So the booking that got
+    // created was not the booking that was checked, and zod's bounds were
+    // bypassed on exactly the fields that end up in a calendar event:
+    // locationDetail is capped at 200 for that reason, and durationMinutes is
+    // added to a Date with setMinutes.
+    const calendarEvent = await createCalendarEvent(accessToken, parsed.data);
 
     const config = BOOKING_CONFIGS[eventTypeId];
     const booking = {
