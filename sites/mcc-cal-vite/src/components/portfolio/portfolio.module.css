@@ -159,19 +159,22 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 12px;
-  border: 1px solid rgba(255,255,255,0.11);
+  border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 14px;
-  background: rgba(255,255,255,0.025);
+  background: rgba(255, 255, 255, 0.025);
   color: var(--fg);
   text-decoration: none;
-  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
 }
 
 .pfFeaturedStat:hover,
 .pfFeaturedStat:focus-visible {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.24);
-  background: rgba(255,255,255,0.06);
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
 }
 
@@ -221,8 +224,8 @@
   min-height: 100%;
   overflow: hidden;
   border-radius: 16px;
-  background: rgba(255,255,255,0.035);
-  box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
   isolation: isolate;
 }
 
@@ -256,8 +259,13 @@
   z-index: 2;
   border-radius: inherit;
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.22) 46%, rgba(0,0,0,0.84) 100%),
-    linear-gradient(90deg, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.02) 62%);
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(0, 0, 0, 0.22) 46%,
+      rgba(0, 0, 0, 0.84) 100%
+    ),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.02) 62%);
   pointer-events: none;
 }
 
@@ -282,7 +290,9 @@
 
 .pfFeaturedStoryImage {
   object-fit: cover;
-  transition: transform 0.42s ease, filter 0.42s ease;
+  transition:
+    transform 0.42s ease,
+    filter 0.42s ease;
 }
 
 .pfFeaturedStory:hover .pfFeaturedStoryImage,
@@ -315,7 +325,7 @@
   flex-wrap: wrap;
   gap: 8px 12px;
   margin: 0;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255, 255, 255, 0.78);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -343,7 +353,7 @@
 .pfFeaturedStoryDescription {
   max-width: 620px;
   margin: 0;
-  color: rgba(255,255,255,0.84);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 0.98rem;
   line-height: 1.55;
   display: -webkit-box;
@@ -386,15 +396,15 @@
 }
 
 .pfFeaturedStoryButton {
-  border: 1px solid rgba(255,255,255,0.88);
-  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   color: #080808;
   cursor: pointer;
 }
 
 .pfFeaturedStoryLink {
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.28);
   color: #fff;
   text-decoration: none;
 }
@@ -417,9 +427,9 @@
   max-width: 1160px;
   margin: 22px auto 0;
   padding: 22px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
-  background: rgba(255,255,255,0.035);
+  background: rgba(255, 255, 255, 0.035);
   color: var(--fg);
   text-align: center;
 }
@@ -559,11 +569,11 @@
 .pfPortraitMetric {
   padding: 18px 20px;
   border-radius: 22px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
-    rgba(0,0,0,0.18);
-  box-shadow: 0 18px 48px rgba(0,0,0,0.16);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(0, 0, 0, 0.18);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -619,7 +629,9 @@
 }
 
 @keyframes pf-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* --- Filters --- */
@@ -632,33 +644,38 @@
 }
 
 .pfFilterBtn {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--fg);
   padding: 10px 20px;
   border-radius: 999px;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 600;
-  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .pfFilterBtn:hover {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
 .pfFilterBtn[aria-pressed='true'],
 .pfFilterBtnActive {
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   color: #0a0a0a;
-  border-color: rgba(255,255,255,0.95);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 /* --- Concert Artist Support --- */
@@ -674,35 +691,38 @@
   min-height: 44px;
   padding: 11px 20px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--fg);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .pfArtistSupportToggle:hover {
   transform: translateY(-2px);
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .pfArtistSupportPanel {
   margin-top: 16px;
   padding: 22px;
   border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
-    rgba(0,0,0,0.2);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   text-align: left;
-  box-shadow: 0 18px 48px rgba(0,0,0,0.16);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
 }
 
 .pfArtistSupportPanelHeader {
@@ -733,17 +753,19 @@
   min-height: 38px;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   background: transparent;
   color: var(--fg);
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .pfArtistSupportClose:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.28);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .pfArtistSupportList {
@@ -757,8 +779,8 @@
 .pfArtistSupportItem {
   padding: 18px;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .pfArtistSupportItemHeader {
@@ -795,7 +817,7 @@
   min-height: 36px;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.92);
+  background: rgba(255, 255, 255, 0.92);
   color: #0a0a0a;
   text-decoration: none;
   font-size: 0.82rem;
@@ -813,13 +835,13 @@
   min-height: 152px;
   border: 0;
   border-radius: 14px;
-  background: rgba(0,0,0,0.28);
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .pfArtistSupportPlaceholder {
   padding: 18px;
   border-radius: 14px;
-  border: 1px dashed rgba(255,255,255,0.14);
+  border: 1px dashed rgba(255, 255, 255, 0.14);
   color: var(--fg);
   opacity: 0.72;
   font-size: 0.88rem;
@@ -1093,7 +1115,9 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: inherit;
-  transition: transform 0.35s, filter 0.35s;
+  transition:
+    transform 0.35s,
+    filter 0.35s;
 }
 
 .pfCard .pfCardImage {
@@ -1200,10 +1224,10 @@
   /* Stronger gradient for better text contrast on light/bright photos */
   background: linear-gradient(
     180deg,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.4) 50%,
-    rgba(0,0,0,0.85) 85%,
-    rgba(0,0,0,0.95) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.85) 85%,
+    rgba(0, 0, 0, 0.95) 100%
   );
   color: #fff;
   border-radius: inherit;
@@ -1226,9 +1250,9 @@
   color: #fff;
   /* Multi-layer text shadow for maximum contrast on varied backgrounds */
   text-shadow:
-    0 0 20px rgba(0,0,0,0.8),
-    0 2px 4px rgba(0,0,0,0.9),
-    0 1px 2px rgba(0,0,0,0.8);
+    0 0 20px rgba(0, 0, 0, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.8);
   letter-spacing: -0.01em;
 }
 
@@ -1236,8 +1260,8 @@
   margin: 2px 0 0;
   font-size: 0.72rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.9);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   display: flex;
@@ -1253,11 +1277,11 @@
   margin: 8px 0 0;
   font-size: 0.85rem;
   font-weight: 400;
-  color: rgba(255,255,255,0.95);
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.45;
   text-shadow:
-    0 0 15px rgba(0,0,0,0.7),
-    0 1px 3px rgba(0,0,0,0.8);
+    0 0 15px rgba(0, 0, 0, 0.7),
+    0 1px 3px rgba(0, 0, 0, 0.8);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -1266,6 +1290,39 @@
 }
 
 /* Card badges */
+/*
+ * The card's primary control.
+ *
+ * The card used to be an <article role="button" tabindex="0"> that contained
+ * the copy-link <button>, which axe reports as nested-interactive: a control
+ * must not contain focusable descendants, and a screen reader user met two
+ * overlapping controls with no way to tell them apart. The article is a plain
+ * container now and this button carries the action, stretched over the card.
+ *
+ * z-index 2 puts it above the image and level with the overlay, which is
+ * pointer-events: none, and below .pfCardAnchor at 3 so the copy button stays
+ * clickable.
+ */
+.pfCardOpen {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.pfCardOpen:focus-visible {
+  outline: 2px solid var(--accent, #b8b0aa);
+  outline-offset: -4px;
+  border-radius: 16px;
+}
+
 .pfCardAnchor {
   position: absolute;
   top: 8px;
@@ -1275,15 +1332,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s,
+    background 0.2s,
+    border-color 0.2s;
   z-index: 3;
   pointer-events: auto;
 }
@@ -1295,7 +1356,7 @@
 }
 
 .pfCardAnchor:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   border-color: #fff;
 }
 
@@ -1311,13 +1372,13 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(6px);
   padding: 5px 8px;
   border-radius: 999px;
   font-size: 0.68rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.06em;
   pointer-events: none;
   z-index: 2;
@@ -1341,8 +1402,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   color: var(--fg);
   font-size: 0.72rem;
@@ -1352,17 +1413,20 @@
   cursor: pointer;
   padding: 12px 24px;
   backdrop-filter: blur(8px);
-  transition: background 0.24s, border-color 0.24s, transform 0.24s;
+  transition:
+    background 0.24s,
+    border-color 0.24s,
+    transform 0.24s;
 }
 
 .pfLoadMoreBtn:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 
 .pfLoadMoreRemaining {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 3px 8px;
   border-radius: 999px;
   font-size: 0.68rem;
@@ -1375,7 +1439,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.92);
+  background: rgba(0, 0, 0, 0.92);
   z-index: var(--mcc-z-top);
   padding: 24px;
   backdrop-filter: blur(10px);
@@ -1417,9 +1481,9 @@
 .pfLightboxCounter {
   min-width: 64px;
   padding: 8px 12px;
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
-  background: rgba(0,0,0,0.42);
+  background: rgba(0, 0, 0, 0.42);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1432,20 +1496,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  background: rgba(0,0,0,0.48);
+  background: rgba(0, 0, 0, 0.48);
   color: #fff;
   cursor: pointer;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: background 0.2s, border-color 0.2s, transform 0.2s, opacity 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s,
+    opacity 0.2s;
 }
 
 .pfLightboxIconBtn:hover:not(:disabled):not([aria-disabled='true']),
 .pfLightboxIconBtn:focus-visible {
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.34);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.34);
   transform: translateY(-1px);
 }
 
@@ -1458,7 +1526,7 @@
 .pfLightboxZoomValue {
   min-width: 54px;
   padding: 0 4px;
-  color: rgba(255,255,255,0.84);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 0.76rem;
   font-weight: 700;
   text-align: center;
@@ -1514,7 +1582,7 @@
   border-radius: 14px;
   touch-action: none;
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
     rgba(9, 9, 10, 0.84);
 }
 
@@ -1568,7 +1636,9 @@
 }
 
 .pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxProtectedImage,
-.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxProtectedImage .pfProtectedImageShield,
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true']
+  .pfLightboxProtectedImage
+  .pfProtectedImageShield,
 .pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxImg {
   cursor: grabbing;
 }
@@ -1581,9 +1651,9 @@
   place-content: center;
   justify-items: center;
   gap: 10px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: inherit;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1599,29 +1669,31 @@
   gap: 14px;
   min-height: min(42vh, 420px);
   padding: 32px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.82rem;
 }
 
 .pfLightboxRetryBtn {
   padding: 8px 18px;
-  border: 1px solid rgba(255,255,255,0.34);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 999px;
-  background: rgba(0,0,0,0.48);
+  background: rgba(0, 0, 0, 0.48);
   color: #fff;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .pfLightboxRetryBtn:hover,
 .pfLightboxRetryBtn:focus-visible {
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .pfLightboxImg {
@@ -1648,20 +1720,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   color: #fff;
   cursor: pointer;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
 }
 
 .pfLightboxNavBtn:hover,
 .pfLightboxNavBtn:focus-visible {
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.34);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.34);
   transform: translateY(-1px);
 }
 
@@ -1675,10 +1750,10 @@
   padding: 8px;
   overflow-x: auto;
   overflow-y: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
-  background: rgba(0,0,0,0.24);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  background: rgba(0, 0, 0, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   scroll-padding-inline: 8px;
   scrollbar-width: thin;
 }
@@ -1689,13 +1764,13 @@
   aspect-ratio: 4 / 3;
   height: auto;
   padding: 0;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   cursor: pointer;
   opacity: 0.66;
   overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
   transition:
     opacity 0.2s ease,
     border-color 0.2s ease,
@@ -1706,20 +1781,20 @@
 .pfLightboxThumb:hover,
 .pfLightboxThumb:focus-visible {
   opacity: 1;
-  border-color: rgba(255,255,255,0.42);
+  border-color: rgba(255, 255, 255, 0.42);
 }
 
 .pfLightboxThumb:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.7);
+  outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: 3px;
 }
 
 .pfLightboxThumb[aria-current='true'] {
   opacity: 1;
-  border-color: rgba(255,255,255,0.88);
+  border-color: rgba(255, 255, 255, 0.88);
   box-shadow:
-    0 0 0 3px rgba(255,255,255,0.12),
-    0 10px 24px rgba(0,0,0,0.24);
+    0 0 0 3px rgba(255, 255, 255, 0.12),
+    0 10px 24px rgba(0, 0, 0, 0.24);
   transform: translateY(-1px);
 }
 
@@ -1729,7 +1804,7 @@
   width: 100%;
   height: 100%;
   border-radius: 9px;
-  background-color: rgba(8,8,10,0.86);
+  background-color: rgba(8, 8, 10, 0.86);
   background-size: cover;
 }
 
@@ -1839,13 +1914,13 @@
   margin: 2px auto 0;
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.055);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: rgba(255,255,255,0.78);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .pfLightboxOutletLabel {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.66rem;
   font-weight: 750;
   letter-spacing: 0.08em;
@@ -1853,7 +1928,7 @@
 }
 
 .pfLightboxOutletLink {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -1875,13 +1950,13 @@
 }
 
 .pfLightboxClose {
-  border-color: rgba(255,255,255,0.28);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .pfLightboxClose:hover:not(:disabled),
 .pfLightboxClose:focus-visible {
-  background: rgba(0,0,0,0.88);
-  border-color: rgba(255,255,255,0.65);
+  background: rgba(0, 0, 0, 0.88);
+  border-color: rgba(255, 255, 255, 0.65);
 }
 
 @media (max-width: 720px) {
@@ -2035,11 +2110,13 @@
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   opacity: 0;
   pointer-events: none;
   z-index: calc(var(--mcc-z-top) + 2);
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 
 .pfToastShow {

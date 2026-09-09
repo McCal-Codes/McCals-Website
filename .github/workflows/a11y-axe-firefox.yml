@@ -1,68 +1,104 @@
-name: Accessibility — axe (Playwright/Firefox)
+---
+name: Accessibility — axe
+
+# What this used to be, and why each part is gone:
+#
+#   - Its pull_request paths filter named src/widgets/** and src/site/**, and
+#     neither directory exists. No code change could trigger it.
+#   - The script exited non-zero only when axe itself threw, so violations were
+#     written to JSON and the job went green.
+#   - It injected axe from a CDN at run time, so a cdnjs outage was the only
+#     realistic way it went red.
+#   - It scanned one URL, from a secret, and skipped silently when that secret
+#     was unset. The upload step had no matching condition, so it published
+#     three report files regardless. Two of the three were never written by any
+#     script: they were committed in November 2025 and re-uploaded on every run
+#     as though they were results.
+#
+# It now builds the site, serves it, and scans several routes against that
+# build. No secret, so no silent skip, and nothing to be stale.
 
 on:
-  push:
-    branches: [ 'staging' ]
   pull_request:
     paths:
-      - 'src/widgets/**'
-      - 'src/site/**'
+      - 'sites/mcc-cal-vite/src/**'
+      - 'sites/mcc-cal-vite/index.html'
+      - 'scripts/a11y/**'
       - '.github/workflows/a11y-axe-firefox.yml'
   workflow_dispatch:
     inputs:
       target-url:
-        description: 'Page URL to scan (required for manual runs)'
-        required: true
+        description: 'Scan a deployed URL instead of a local build'
+        required: false
+
+permissions:
+  contents: read
 
 jobs:
   axe-audit:
-    name: Run axe (Playwright/Firefox) and upload results
+    name: Scan for accessibility violations
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
         with:
           submodules: false
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: '20.19'
           cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            sites/mcc-cal-vite/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install root dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
 
-      - name: Install Playwright Firefox runtime
-        run: npx playwright install firefox
+      - name: Cache Playwright browsers
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-firefox-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-firefox-
 
-      - name: Ensure TARGET_URL
-        id: ensure_target_url
+      - name: Install Playwright Firefox
+        run: npx playwright install --with-deps firefox
+
+      - name: Build and serve the site
+        if: github.event.inputs.target-url == ''
+        run: |
+          set -euo pipefail
+          cd sites/mcc-cal-vite
+          npm ci --prefer-offline --no-audit --no-fund
+          npm run build
+          npx vite preview --port 4173 --strictPort &
+          # Wait for it rather than sleeping a guessed number of seconds.
+          for _ in $(seq 1 30); do
+            if curl -sf -o /dev/null http://127.0.0.1:4173/; then exit 0; fi
+            sleep 1
+          done
+          echo "Preview server did not come up" >&2
+          exit 1
+
+      - name: Scan
         env:
-          STAGING_URL: ${{ secrets.STAGING_URL }}
+          TARGET_URL: ${{ github.event.inputs.target-url }}
         run: |
-          if [ -n "${{ github.event.inputs.target-url }}" ]; then
-            TARGET_URL='${{ github.event.inputs.target-url }}'
-          else
-            TARGET_URL="$STAGING_URL"
-          fi
-          if [ -z "${TARGET_URL}" ]; then
-            echo "Skipping axe audit: TARGET_URL/STAGING_URL not set."; echo "skip=true" >> $GITHUB_OUTPUT; exit 0;
-          fi
-          echo "TARGET_URL=${TARGET_URL}" > target_url.env
-
-      - name: Run axe-firefox audit
-        if: steps.ensure_target_url.outputs.skip != 'true'
-        run: |
-          . ./target_url.env
-          echo "Running axe audit against: ${TARGET_URL}"
-          node scripts/a11y/axe-firefox.js "${TARGET_URL}"
+          set -euo pipefail
+          node scripts/a11y/axe-firefox.js --base-url "${TARGET_URL:-http://127.0.0.1:4173}"
 
       - name: Upload reports
+        # Always, so a failing scan's report is available; but only these two
+        # files, both written by the run that just happened.
+        if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: axe-firefox-reports
+          name: axe-reports
           path: |
             reports/axe-firefox-results.json
-            reports/axe-firefox-widget-report.html
             reports/axe-firefox-summary.md
+          if-no-files-found: error

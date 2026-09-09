@@ -91,6 +91,7 @@
   "author": "McCal Media",
   "license": "MIT",
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/plugin-transform-optional-chaining": "^7.28.6",
     "@babel/preset-env": "^7.29.2",
