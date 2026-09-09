@@ -30,7 +30,8 @@ async function getResendClient() {
 }
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
+const PRIVATE_KEY =
+  process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'contact@mcc-cal.com';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'noreply@mcc-cal.com';
 const BOOKING_RATE_LIMIT = {
@@ -57,8 +58,7 @@ async function getAccessToken() {
     exp: now + 3600,
   };
 
-  const base64UrlEncode = (obj) =>
-    Buffer.from(JSON.stringify(obj)).toString('base64url');
+  const base64UrlEncode = (obj) => Buffer.from(JSON.stringify(obj)).toString('base64url');
 
   const headerB64 = base64UrlEncode(header);
   const claimB64 = base64UrlEncode(claim);
@@ -142,7 +142,7 @@ async function createCalendarEvent(accessToken, bookingData) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(event),
-    }
+    },
   );
 
   if (!response.ok) {
@@ -157,7 +157,7 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
   const startDateTime = ownerWallTimeToUtc(date, time);
   const endDateTime = new Date(startDateTime);
   endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
-  
+
   // Add 30 min buffer (max buffer between booking types)
   const checkStart = new Date(startDateTime);
   checkStart.setMinutes(checkStart.getMinutes() - 30);
@@ -168,7 +168,7 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
     `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?timeMin=${checkStart.toISOString()}&timeMax=${checkEnd.toISOString()}&singleEvents=true`,
     {
       headers: { Authorization: `Bearer ${accessToken}` },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -178,7 +178,7 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
 
   const data = await response.json();
   const events = data.items || [];
-  
+
   // Check if any event overlaps with our slot
   return events.some((event) => {
     const eventStart = new Date(event.start?.dateTime || `${event.start?.date}T00:00:00`);
@@ -221,7 +221,7 @@ async function sendConfirmationEmail(
   config,
   requesterTimezone = OWNER_TIMEZONE,
   manageUrl = null,
-  location = null
+  location = null,
 ) {
   const resend = await getResendClient();
   if (!resend) {
@@ -262,8 +262,14 @@ async function sendConfirmationEmail(
       text: emails.owner.text,
     });
   } catch (err) {
-    console.error('[sendConfirmationEmail] Failed to send email:', err instanceof Error ? err.message : err);
-    await captureApiException(err, { route: 'schedule/book', operation: 'send_confirmation_email' });
+    console.error(
+      '[sendConfirmationEmail] Failed to send email:',
+      err instanceof Error ? err.message : err,
+    );
+    await captureApiException(err, {
+      route: 'schedule/book',
+      operation: 'send_confirmation_email',
+    });
   }
 }
 
@@ -291,7 +297,16 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { eventTypeId, date, time, durationMinutes, requester, requesterTimezone, locationMode, locationDetail } = parsed.data;
+  const {
+    eventTypeId,
+    date,
+    time,
+    durationMinutes,
+    requester,
+    requesterTimezone,
+    locationMode,
+    locationDetail,
+  } = parsed.data;
 
   // Validation
   if (!eventTypeId || !date || !time || !durationMinutes || !requester?.name || !requester?.email) {
@@ -307,8 +322,8 @@ export default async function handler(req, res) {
   // Validate duration is within allowed range
   const config = BOOKING_CONFIGS[eventTypeId];
   if (durationMinutes < config.durationMinutes || durationMinutes > config.maxDurationMinutes) {
-    res.status(400).json({ 
-      error: `Duration must be between ${config.durationMinutes} and ${config.maxDurationMinutes} minutes` 
+    res.status(400).json({
+      error: `Duration must be between ${config.durationMinutes} and ${config.maxDurationMinutes} minutes`,
     });
     return;
   }
@@ -323,16 +338,22 @@ export default async function handler(req, res) {
   const location = resolveLocation(config, locationMode, locationDetail);
 
   // Development mode: return mock booking without external services
-  const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+  const isDev =
+    !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
   if (isDev) {
     if (process.env.DEBUG_BOOKING === '1') {
-      console.log('[schedule/book] DEV MODE: Mock booking created - book.js:309', { eventTypeId, date, time, requester: requester.name });
+      console.log('[schedule/book] DEV MODE: Mock booking created - book.js:309', {
+        eventTypeId,
+        date,
+        time,
+        requester: requester.name,
+      });
     }
-    
+
     const startDateTime = ownerWallTimeToUtc(date, time);
     const endDateTime = new Date(startDateTime);
     endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
-    
+
     res.status(200).json({
       booking: {
         id: `dev-mock-${Date.now()}`,
@@ -359,28 +380,32 @@ export default async function handler(req, res) {
 
   const hasSupabaseConflict = await checkSupabaseBookingConflict(date, time, durationMinutes);
   if (hasSupabaseConflict) {
-    res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
+    res
+      .status(409)
+      .json({ error: 'This time slot is no longer available. Please select another time.' });
     return;
   }
 
   // If Google credentials missing, create mock booking
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
     console.warn('[schedule/book] Google credentials not set, creating mock booking - book.js:341');
-    
+
     const slotKey = `${date}:${time}`;
-    
+
     if (mockBookings.has(slotKey)) {
-      res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
+      res
+        .status(409)
+        .json({ error: 'This time slot is no longer available. Please select another time.' });
       return;
     }
-    
+
     const startDateTime = ownerWallTimeToUtc(date, time);
     const endDateTime = new Date(startDateTime);
     endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
-    
+
     // Mark slot as booked
     mockBookings.add(slotKey);
-    
+
     // Save to Supabase even for mock bookings (for testing)
     let bookingId = null;
     if (isSupabaseConfigured()) {
@@ -404,15 +429,18 @@ export default async function handler(req, res) {
         })
         .select('id')
         .single();
-      
+
       if (dbError) {
         console.error('[schedule/book] Mock booking DB error: - book.js:379', dbError);
-        await captureApiException(dbError, { route: 'schedule/book', operation: 'insert_mock_booking' });
+        await captureApiException(dbError, {
+          route: 'schedule/book',
+          operation: 'insert_mock_booking',
+        });
       } else {
         bookingId = bookingRecord?.id;
       }
     }
-    
+
     // Send email notification even for mock bookings
     const mockBooking = {
       id: `mock-${Date.now()}`,
@@ -425,13 +453,18 @@ export default async function handler(req, res) {
       },
       eventLink: '#mock-booking',
     };
-    
+
     // Send email notification (don't await, let it run async)
-    sendConfirmationEmail(mockBooking, config, requesterTimezone, manageUrl, location).catch(async (err) => {
-      console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
-      await captureApiException(err, { route: 'schedule/book', operation: 'send_mock_confirmation_email' });
-    });
-    
+    sendConfirmationEmail(mockBooking, config, requesterTimezone, manageUrl, location).catch(
+      async (err) => {
+        console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
+        await captureApiException(err, {
+          route: 'schedule/book',
+          operation: 'send_mock_confirmation_email',
+        });
+      },
+    );
+
     res.status(200).json({
       booking: {
         id: bookingId || mockBooking.id,
@@ -446,14 +479,16 @@ export default async function handler(req, res) {
 
   try {
     const accessToken = await getAccessToken();
-    
+
     // Check for conflicts before booking
     const hasConflict = await checkForConflicts(accessToken, date, time, durationMinutes);
     if (hasConflict) {
-      res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
+      res
+        .status(409)
+        .json({ error: 'This time slot is no longer available. Please select another time.' });
       return;
     }
-    
+
     const calendarEvent = await createCalendarEvent(accessToken, req.body);
 
     const config = BOOKING_CONFIGS[eventTypeId];
@@ -473,7 +508,7 @@ export default async function handler(req, res) {
     let bookingId = null;
     if (isSupabaseConfigured()) {
       const supabase = getServiceClient();
-      
+
       // Insert booking record
       const { data: bookingRecord, error: dbError } = await supabase
         .from('bookings')
@@ -494,7 +529,7 @@ export default async function handler(req, res) {
         })
         .select('id')
         .single();
-      
+
       if (dbError) {
         console.error('[schedule/book] Database error saving booking: - book.js:464', dbError);
         await captureApiException(dbError, { route: 'schedule/book', operation: 'insert_booking' });
@@ -512,8 +547,14 @@ export default async function handler(req, res) {
           .eq('slot_time', time);
 
         if (slotError) {
-          console.error('[schedule/book] Failed to mark slot unavailable: - book.js:479', slotError);
-          await captureApiException(slotError, { route: 'schedule/book', operation: 'mark_slot_unavailable' });
+          console.error(
+            '[schedule/book] Failed to mark slot unavailable: - book.js:479',
+            slotError,
+          );
+          await captureApiException(slotError, {
+            route: 'schedule/book',
+            operation: 'mark_slot_unavailable',
+          });
           // Log for monitoring but don't fail the booking - calendar event is already created
           // Consider: add to monitoring/alerting system for manual cleanup
         }
@@ -533,7 +574,7 @@ export default async function handler(req, res) {
           route: 'schedule/book',
           operation: 'send_confirmation_email',
         });
-      }
+      },
     );
 
     res.status(200).json({

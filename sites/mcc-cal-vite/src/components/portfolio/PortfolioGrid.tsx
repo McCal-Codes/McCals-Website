@@ -54,7 +54,9 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
     () => Math.max(initialCount, wideInitialCount ?? initialCount + 6),
     [initialCount, wideInitialCount],
   );
-  const [visible, setVisible] = useState(() => getResponsiveInitialCount(initialCount, resolvedWideInitialCount));
+  const [visible, setVisible] = useState(() =>
+    getResponsiveInitialCount(initialCount, resolvedWideInitialCount),
+  );
   const [activeLightbox, setActiveLightbox] = useState<ActiveLightbox | null>(null);
   const gallery = useLocation().pathname.replace(/^\//, '') || 'home';
   const [toastVisible, setToastVisible] = useState(false);
@@ -69,7 +71,9 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
   useEffect(() => {
     const updateVisibleCount = () => {
       const nextVisible = getResponsiveInitialCount(initialCount, resolvedWideInitialCount);
-      setVisible((currentVisible) => Math.min(groups.length, Math.max(currentVisible, nextVisible)));
+      setVisible((currentVisible) =>
+        Math.min(groups.length, Math.max(currentVisible, nextVisible)),
+      );
     };
 
     updateVisibleCount();
@@ -131,7 +135,11 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({
 
   if (groups.length === 0) {
     return (
-      <div className={`${portfolioStyles.pfGrid}${gridClassName ? ` ${gridClassName}` : ''}`} role="status" aria-live="polite">
+      <div
+        className={`${portfolioStyles.pfGrid}${gridClassName ? ` ${gridClassName}` : ''}`}
+        role="status"
+        aria-live="polite"
+      >
         <p>No portfolio items found.</p>
       </div>
     );

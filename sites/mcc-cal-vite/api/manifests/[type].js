@@ -47,7 +47,9 @@ export default function handler(req, res) {
 
   const mapping = TYPE_MAP[type.toLowerCase()];
   if (!mapping) {
-    res.status(400).json({ error: `Unknown manifest type: ${type}`, available: Object.keys(TYPE_MAP) });
+    res
+      .status(400)
+      .json({ error: `Unknown manifest type: ${type}`, available: Object.keys(TYPE_MAP) });
     return;
   }
 
@@ -60,10 +62,11 @@ export default function handler(req, res) {
       baseDir,
       manifestPath: path.resolve(baseDir, mapping),
     }))
-    .find((candidate) => (
-      candidate.manifestPath.startsWith(candidate.baseDir) &&
-      fs.existsSync(candidate.manifestPath)
-    ))?.manifestPath;
+    .find(
+      (candidate) =>
+        candidate.manifestPath.startsWith(candidate.baseDir) &&
+        fs.existsSync(candidate.manifestPath),
+    )?.manifestPath;
 
   if (!manifestPath) {
     res.status(404).json({ error: `Manifest not found: ${type}` });
@@ -74,7 +77,10 @@ export default function handler(req, res) {
     const content = fs.readFileSync(manifestPath, 'utf-8');
     const manifest = JSON.parse(content);
     res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
+    res.setHeader(
+      'Cache-Control',
+      'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
+    );
     res.status(200).json(manifest);
   } catch {
     res.status(500).json({ error: 'Error reading manifest' });
