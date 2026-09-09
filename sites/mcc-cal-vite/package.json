@@ -21,7 +21,7 @@
     "test:ui": "vitest --ui",
     "typecheck": "tsc -b",
     "typecheck:test": "tsc -p tsconfig.test.json --noEmit",
-    "deadcode": "knip",
+    "deadcode": "knip --include files",
     "deadcode:all": "knip"
   },
   "dependencies": {
