@@ -27,6 +27,13 @@ function minuteOfDayToHhmm(minuteOfDay) {
  * limit is set well above real use: the booking widget fetches once per month
  * view, so even a visitor clicking quickly through a year stays inside it.
  */
+/**
+ * Widest span a single request may ask for. The calendar UI renders a month and
+ * fetches that month, so 62 days covers a month view plus the neighbouring days
+ * some views spill into, with room to spare.
+ */
+const MAX_RANGE_DAYS = 62;
+
 const AVAILABILITY_RATE_LIMIT = {
   route: 'schedule-availability',
   limit: 60,
@@ -35,7 +42,8 @@ const AVAILABILITY_RATE_LIMIT = {
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
+const PRIVATE_KEY =
+  process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
 
 async function getAccessToken() {
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
@@ -52,8 +60,7 @@ async function getAccessToken() {
     exp: now + 3600,
   };
 
-  const base64UrlEncode = (obj) =>
-    Buffer.from(JSON.stringify(obj)).toString('base64url');
+  const base64UrlEncode = (obj) => Buffer.from(JSON.stringify(obj)).toString('base64url');
 
   const headerB64 = base64UrlEncode(header);
   const claimB64 = base64UrlEncode(claim);
@@ -90,7 +97,7 @@ async function getBusyTimes(accessToken, startDate, endDate) {
     `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?timeMin=${startDate}T00:00:00Z&timeMax=${endDate}T23:59:59Z&singleEvents=true`,
     {
       headers: { Authorization: `Bearer ${accessToken}` },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -123,7 +130,7 @@ async function getSupabaseBookedSlots(startDate, endDate) {
     return [];
   }
 
-  return (bookings || []).map(booking => {
+  return (bookings || []).map((booking) => {
     // booking_time is stored as owner-timezone wall clock (schedule/book.js
     // writes the slot's `time` straight through), so it must be converted the
     // same way rather than read as UTC, otherwise conflict detection is off
@@ -181,8 +188,8 @@ function generateTimeSlots(date, config, busyTimes, candidates) {
               minute: '2-digit',
               hour12: true,
               timeZone: OWNER_TIMEZONE,
-            })
-          )
+            }),
+          ),
         );
       }
     }
@@ -228,6 +235,23 @@ export default async function handler(req, res) {
     return;
   }
 
+  // The shape was checked but never the span. Below, this walks one day at a
+  // time generating slots, and asks Google for the whole window in a single
+  // events.list. `?start=2020-01-01&end=2999-12-31` was accepted, which is a
+  // six figure loop and a millennium wide calendar query, at 60 requests a
+  // minute. The booking widget only ever asks for one month.
+  const rangeDays = (Date.parse(`${end}T00:00:00Z`) - Date.parse(`${start}T00:00:00Z`)) / 86400000;
+  if (!Number.isFinite(rangeDays) || rangeDays < 0) {
+    res.status(400).json({ error: 'The end date must not be before the start date.' });
+    return;
+  }
+  if (rangeDays > MAX_RANGE_DAYS) {
+    res.status(400).json({
+      error: `Date range too large. Ask for ${MAX_RANGE_DAYS} days or fewer.`,
+    });
+    return;
+  }
+
   // Editable weekly windows and blackout dates. Falls back to the previously
   // hardcoded schedule if Supabase is unset or the query fails, so the booking
   // calendar never goes blank because of a database problem.
@@ -249,7 +273,8 @@ export default async function handler(req, res) {
   };
 
   // Development mode: return mock availability
-  const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+  const isDev =
+    !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
   if (isDev) {
     const config = BOOKING_CONFIGS[eventType];
     const days = [];
@@ -283,12 +308,12 @@ export default async function handler(req, res) {
                   minute: '2-digit',
                   hour12: true,
                   timeZone: OWNER_TIMEZONE,
-                })
-              )
+                }),
+              ),
             );
           }
         }
-        
+
         if (slots.length > 0) {
           days.push({
             date: dateStr,
@@ -306,17 +331,19 @@ export default async function handler(req, res) {
 
   // Check if Google Calendar credentials are configured
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
-    console.warn('[schedule/availability] Google Calendar credentials not configured, returning mock availability');
+    console.warn(
+      '[schedule/availability] Google Calendar credentials not configured, returning mock availability',
+    );
     // Return mock availability (same as dev mode)
     const days = [];
     const supabaseBookedSlots = await getSupabaseBookedSlots(start, end);
-    
+
     // Parse dates in UTC to avoid timezone issues
     const parseDateUTC = (dateStr) => {
       const [year, month, day] = dateStr.split('-').map(Number);
       return new Date(Date.UTC(year, month - 1, day));
     };
-    
+
     const current = parseDateUTC(start);
     const endDate = parseDateUTC(end);
 
@@ -345,7 +372,7 @@ export default async function handler(req, res) {
             if (conflicts) {
               continue;
             }
-            
+
             slots.push(
               buildTimeSlot(
                 Math.floor(minuteOfDay / 60),
@@ -355,12 +382,12 @@ export default async function handler(req, res) {
                   minute: '2-digit',
                   hour12: true,
                   timeZone: 'UTC',
-                })
-              )
+                }),
+              ),
             );
           }
         }
-        
+
         if (slots.length > 0) {
           days.push({
             date: dateStr,
@@ -381,7 +408,7 @@ export default async function handler(req, res) {
     const accessToken = await getAccessToken();
     const calendarBusyTimes = await getBusyTimes(accessToken, start, end);
     const supabaseBookedSlots = await getSupabaseBookedSlots(start, end);
-    
+
     // Merge both sources of busy times
     const busyTimes = [...calendarBusyTimes, ...supabaseBookedSlots];
 
