@@ -1,0 +1,85 @@
+---
+name: PR Conventions
+
+# Two conventions this repository holds, checked in one job so it costs one
+# runner rather than two.
+#
+# 1. No AI attribution. No commit, pull request or issue carries an AI
+#    co-author trailer or a "generated with" advertisement. Tooling adds them by
+#    default, so one forgotten trailer lands in history permanently.
+#
+# 2. Conventional Commits, on the pull request title. Merges here are squashes
+#    and the repository's squash_merge_commit_title is COMMIT_OR_PR_TITLE, so
+#    the pull request title is the subject that lands on main. Linting local
+#    commit messages alone would not protect history, because those are squashed
+#    away. .husky/commit-msg lints them anyway, for feedback where the message
+#    is written.
+#
+# Commit messages come from the API rather than from git. Checking a base..head
+# range needs the base commit and therefore fetch-depth: 0, and this
+# repository's .git is 2.5 GB, so that clone dominated the job.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check:
+    name: Check pull request conventions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: false
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20.19'
+
+      - name: Collect commit messages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/commits" \
+            --paginate --jq '.[].commit.message' > commit-messages.txt
+          # An empty file would let the check pass without reading anything.
+          test -s commit-messages.txt
+
+      - name: Collect pull request title and body
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # Written through the environment rather than interpolated into the
+          # script, so a title containing shell metacharacters cannot run.
+          printf '%s\n\n%s\n' "$PR_TITLE" "$PR_BODY" > pr-text.txt
+          printf '%s\n' "$PR_TITLE" > pr-title.txt
+
+      - name: Check for AI attribution
+        run: node scripts/ci/check-no-ai-attribution.js --files commit-messages.txt pr-text.txt
+
+      - name: Install commitlint
+        # Only the two packages the config needs, rather than the root npm ci,
+        # which installs playwright and sharp among others.
+        run: npm install --no-save --no-audit --no-fund --no-progress @commitlint/cli @commitlint/config-conventional
+
+      - name: Check pull request title is a Conventional Commit
+        run: |
+          set -euo pipefail
+          if ! npx --no-install commitlint --config commitlint.config.js < pr-title.txt; then
+            echo ""
+            echo "The pull request title becomes the commit subject on main, because" >&2
+            echo "merges here are squashes. Retitle it, for example:" >&2
+            echo "  fix(booking): stop the confirmation email throwing" >&2
+            echo "  chore: remove the dependencies nothing imports" >&2
+            exit 1
+          fi
