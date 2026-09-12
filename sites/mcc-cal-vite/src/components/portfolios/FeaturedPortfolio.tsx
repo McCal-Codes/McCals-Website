@@ -221,7 +221,11 @@ export default function FeaturedPortfolio() {
   } | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
 
-  const frames = useMemo(() => (data?.frames ? prepare(data.frames) : []), [data]);
+  // A manifest that loaded but has no frames[] is not an empty selection. It is a
+  // document in another shape, such as the albums-shaped manifest this page used
+  // to read, and saying "no photographs are selected" about it would be false.
+  const unreadable = status === 'success' && !Array.isArray(data?.frames);
+  const frames = useMemo(() => (Array.isArray(data?.frames) ? prepare(data.frames) : []), [data]);
   const rows = useMemo(() => toRows(frames), [frames]);
   const groups = useMemo(() => frames.map((frame) => frame.group), [frames]);
 
@@ -258,13 +262,15 @@ export default function FeaturedPortfolio() {
         </div>
       )}
 
-      {status === 'error' && (
+      {(status === 'error' || unreadable) && (
         <div className={portfolioStyles.pfSelectedError} role="alert">
           <p className={portfolioStyles.pfSelectedErrorTitle}>
             The selected work could not be loaded.
           </p>
           <p className={portfolioStyles.pfSelectedErrorBody}>
-            {error ?? 'The manifest did not load.'}
+            {unreadable
+              ? 'This page was updated since your browser last loaded it. Try again to load the current selection.'
+              : (error ?? 'The manifest did not load.')}
           </p>
           <div className={portfolioStyles.pfSelectedErrorActions}>
             <button
@@ -308,7 +314,7 @@ export default function FeaturedPortfolio() {
         </div>
       )}
 
-      {status === 'success' && frames.length === 0 && (
+      {status === 'success' && !unreadable && frames.length === 0 && (
         <p className={portfolioStyles.pfSelectedEmpty}>
           No photographs are selected yet. Add frames to scripts/manifest/featured-curation.json.
         </p>

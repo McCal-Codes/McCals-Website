@@ -11,7 +11,7 @@ vi.stubEnv('DEV', false);
 
 const { getOptimizedImageUrl, getResponsiveImageSrcSet } =
   await import('./utils/imageOptimization');
-const { imageUrl } = await import('./components/portfolio/useManifest');
+const { imageUrl, getStaticManifestUrl } = await import('./components/portfolio/useManifest');
 const {
   WIDE_SRCSET_WIDTHS,
   WIDE_SIZES,
@@ -87,5 +87,44 @@ describe('selected-work preload url matches what the page requests', () => {
 
   it('uses the sizes attribute the wide frames actually render with', () => {
     expect(WIDE_SIZES).toBe('(max-width: 900px) calc(100vw - 40px), min(1100px, 92vw)');
+  });
+});
+
+describe('the page and the prerenderer describe the same manifest', () => {
+  const prerenderer = readFileSync(
+    resolve(__dirname, '..', 'scripts', 'generate-route-meta.js'),
+    'utf8',
+  );
+
+  it('reads the built featured manifest, not the curation file', () => {
+    // Nothing in the build regenerates the manifest from featured-curation.json, so
+    // a curation edit committed without regenerating left the preload and the
+    // ImageObjects describing a sequence the page did not render.
+    expect(prerenderer).toMatch(/['"]manifests['"],\s*['"]featured-manifest\.json['"]/);
+    expect(prerenderer).not.toMatch(/featured-curation\.json['"]\s*\)/);
+    expect(prerenderer).not.toMatch(/path\.join\([^)]*['"]featured-curation\.json['"]/);
+  });
+});
+
+describe('versioned manifest urls', () => {
+  it('versions the featured manifest url by the schema its generator writes', () => {
+    // A browser may serve /manifests/* stale for a day. A new query string is a new
+    // cache key, so new code cannot be answered with a document in the old shape.
+    const served = JSON.parse(
+      readFileSync(
+        resolve(__dirname, '..', 'public-vite', 'manifests', 'featured-manifest.json'),
+        'utf8',
+      ),
+    ) as { version: string; frames?: unknown[] };
+    const major = Number.parseInt(served.version.split('.')[0], 10);
+
+    expect(Array.isArray(served.frames)).toBe(true);
+    expect(getStaticManifestUrl('featured')).toBe(`/manifests/featured-manifest.json?v=${major}`);
+  });
+
+  it('leaves manifests whose schema has not changed on their plain url', () => {
+    expect(getStaticManifestUrl('journalism')).toBe('/manifests/journalism-manifest.json');
+    expect(getStaticManifestUrl('events')).toBe('/manifests/events-manifest.json');
+    expect(getStaticManifestUrl('nope')).toBeUndefined();
   });
 });

@@ -22,15 +22,8 @@ const blogManifestPath = path.join(
   'blog-static',
   'blog-manifest.json',
 );
-const curationPath = path.join(
-  appRoot,
-  '..',
-  '..',
-  'scripts',
-  'manifest',
-  'featured-curation.json',
-);
 const SELECTED_WORK_ROUTE = '/featured-work';
+const featuredManifestPath = path.join(distRoot, 'manifests', 'featured-manifest.json');
 export function resolveSiteUrl(env = process.env) {
   const vercelEnv = env.VERCEL_ENV || env.VITE_VERCEL_ENV || 'development';
   if (vercelEnv === 'production') {
@@ -399,17 +392,26 @@ export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } })
 }
 
 async function generateRouteMeta() {
-  const [indexHtml, pageSeoRaw, blogManifestRaw, curationRaw] = await Promise.all([
+  const [indexHtml, pageSeoRaw, blogManifestRaw, featuredManifestRaw] = await Promise.all([
     fs.readFile(path.join(distRoot, 'index.html'), 'utf8'),
     fs.readFile(pageSeoPath, 'utf8'),
     fs.readFile(blogManifestPath, 'utf8').catch(() => '{"posts":[]}'),
-    // Read straight from the curation file, the same input the manifest generator
-    // uses, so the preloaded frame is the one the page will actually render first.
-    fs.readFile(curationPath, 'utf8').catch(() => '{"frames":[]}'),
+    // The featured manifest as it sits in this build's output, which is the exact
+    // file /featured-work fetches. Not featured-curation.json: nothing in the build
+    // regenerates the manifest from it (sync-manifests.js copies, it never runs
+    // manifest:featured), so a curation edit committed without regenerating left
+    // the two disagreeing. Reproduced before this change: moving a frame to the
+    // top of the curation file made the HTML preload that frame while the page
+    // still rendered the manifest's lead, and emit ImageObjects for a sequence the
+    // page did not show. Describing dist from dist cannot drift that way.
+    fs.readFile(featuredManifestPath, 'utf8').catch(() => '{"frames":[]}'),
   ]);
   const pageSeo = JSON.parse(pageSeoRaw);
   const blogManifest = JSON.parse(blogManifestRaw);
-  const selectedFrames = JSON.parse(curationRaw).frames ?? [];
+  // An older manifest without frames[] yields no preload and no ImageObjects,
+  // rather than a guess.
+  const featuredManifest = JSON.parse(featuredManifestRaw);
+  const selectedFrames = Array.isArray(featuredManifest.frames) ? featuredManifest.frames : [];
   const routeEntries = buildRouteMetaEntries({ pageSeo, blogManifest });
   const allEntries = [...routeEntries, ...HIDDEN_ROUTES];
 

@@ -33,7 +33,7 @@ const manifestState = vi.hoisted(() => ({
     status: 'success',
     error: null,
     data: { frames: [] as unknown[] },
-  } as { status: string; error: string | null; data: { frames: unknown[] } | null },
+  } as { status: string; error: string | null; data: Record<string, unknown> | null },
 }));
 
 vi.mock('../portfolio/useManifest', () => ({
@@ -201,6 +201,22 @@ describe('FeaturedPortfolio', () => {
     const alert = screen.getByRole('alert');
     expect(alert).toHaveTextContent('could not be loaded');
     expect(within(alert).getByRole('button', { name: /try again/i })).toBeInTheDocument();
+  });
+
+  it('treats a manifest in the old albums shape as unreadable, not as an empty selection', () => {
+    // vercel.json lets a browser serve /manifests/* stale for up to a day, so the
+    // first visit after a deploy can hand this page last week's items[] document.
+    // Reading that as zero frames told the visitor nothing was selected.
+    manifestState.value = {
+      status: 'success',
+      error: null,
+      data: { version: '2.0.0', type: 'featured', items: [{ title: 'An album', images: [] }] },
+    };
+    renderPage();
+
+    expect(screen.getByRole('alert')).toHaveTextContent('could not be loaded');
+    expect(screen.queryByText(/no photographs are selected yet/i)).toBeNull();
+    expect(screen.queryAllByRole('group')).toHaveLength(0);
   });
 
   it('says so when nothing is curated yet', () => {

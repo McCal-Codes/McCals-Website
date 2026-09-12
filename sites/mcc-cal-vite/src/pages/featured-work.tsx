@@ -18,7 +18,8 @@ const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replac
  * Portfolios tree, so every share of this page requested a 404.
  *
  * The per-photograph ImageObject entries are emitted into the prerendered HTML by
- * scripts/generate-route-meta.js, which reads the curation file at build time.
+ * scripts/generate-route-meta.js, which reads the built featured-manifest.json, the
+ * same file this page fetches, so the two cannot describe different sequences.
  * That puts them in the page as served rather than injecting them after
  * hydration, and it is what makes the photographs eligible for Google's
  * Licensable badge. This block stays with what describes the page itself.
