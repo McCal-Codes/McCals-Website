@@ -39,7 +39,6 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const sharp = require('sharp');
 const { notify } = require('../utils/manifest-webhook');
 const { writeManifestIfChanged } = require('./write-manifest.js');
 
@@ -132,13 +131,32 @@ async function readCuration() {
 }
 
 /**
+ * Intrinsic width and height, read with sharp.
+ *
+ * sharp is required here, where it is used, rather than at the top of the file.
+ * Node resolves this file's modules upward from the repository root, and the
+ * app's unit test job installs only sites/mcc-cal-vite, so in CI there is no
+ * root node_modules and a top-level require made the whole module unloadable:
+ * the tests for its date and path checks failed before any of them ran. Locally
+ * it went unnoticed because resolution climbed out of the worktree and found
+ * the main checkout's copy.
+ */
+async function probeDimensions(absolutePath) {
+  const sharp = require('sharp');
+  const metadata = await sharp(absolutePath).metadata();
+  return { width: metadata.width, height: metadata.height };
+}
+
+/**
  * Checks every frame before reporting, so one run tells you about all of the
  * broken entries instead of stopping at the first.
  *
  * `base` is where frame paths are resolved from. It defaults to the portfolio
- * tree under the working directory; tests pass the repository's own.
+ * tree under the working directory; tests pass the repository's own. `probe`
+ * reads a file's dimensions and defaults to sharp; tests pass their own so they
+ * do not depend on a native module the test job does not install.
  */
-async function resolveFrames(curated, base = PORTFOLIOS_BASE) {
+async function resolveFrames(curated, base = PORTFOLIOS_BASE, probe = probeDimensions) {
   const problems = [];
   const resolved = [];
 
@@ -164,8 +182,7 @@ async function resolveFrames(curated, base = PORTFOLIOS_BASE) {
     const absolute = path.join(base, frame.path);
     let dimensions;
     try {
-      const metadata = await sharp(absolute).metadata();
-      dimensions = { width: metadata.width, height: metadata.height };
+      dimensions = await probe(absolute);
     } catch (err) {
       problems.push(`${at} does not resolve on disk: ${frame.path} (${err.message})`);
       continue;

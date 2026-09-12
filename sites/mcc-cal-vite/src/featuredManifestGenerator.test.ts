@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { createRequire } from 'node:module';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -14,6 +14,13 @@ import { describe, expect, it } from 'vitest';
  * manifest-idempotence.test.ts; this is the only unit test runner in the
  * repository. The generator runs only when invoked as a script, so requiring it
  * here does not write the real manifest.
+ *
+ * These tests never load sharp. The unit test job installs only
+ * sites/mcc-cal-vite, and Node resolves the generator's modules from the
+ * repository root, where CI has no node_modules; a top-level require('sharp')
+ * failed this whole file there before a single case ran. So resolveFrames takes
+ * a probe, and the one below checks the real portfolio tree for existence, which
+ * is what "does this curated path resolve" means, and reports fixed dimensions.
  */
 const repoRoot = resolve(__dirname, '..', '..', '..');
 const portfoliosBase = join(repoRoot, 'src', 'images', 'Portfolios');
@@ -23,10 +30,23 @@ type Frame = Record<string, unknown>;
 const { resolveFrames, formatFrameDate, isRealCalendarDate } = require(
   join(repoRoot, 'scripts', 'manifest', 'generate-featured-manifest.js'),
 ) as {
-  resolveFrames: (frames: Frame[], base?: string) => Promise<Array<Record<string, unknown>>>;
+  resolveFrames: (
+    frames: Frame[],
+    base?: string,
+    probe?: (absolutePath: string) => Promise<{ width: number; height: number }>,
+  ) => Promise<Array<Record<string, unknown>>>;
   formatFrameDate: (iso: string) => string;
   isRealCalendarDate: (iso: unknown) => boolean;
 };
+
+const PROBED = { width: 3246, height: 2160 };
+
+async function probe(absolutePath: string) {
+  if (!existsSync(absolutePath)) {
+    throw new Error(`Input file is missing: ${absolutePath}`);
+  }
+  return PROBED;
+}
 
 const REAL_FRAME = 'Journalism/Politics/cmu-trump-protest/250715_CMU Trump Protest_CAL1573-min.jpg';
 
@@ -73,23 +93,23 @@ describe('formatFrameDate', () => {
 });
 
 describe('resolveFrames', () => {
-  it('resolves a real frame with the dimensions the layout needs', async () => {
-    const [resolved] = await resolveFrames([frame()], portfoliosBase);
+  it('carries the probed dimensions and the AP date into the frame', async () => {
+    const [resolved] = await resolveFrames([frame()], portfoliosBase, probe);
 
-    expect(resolved.width).toBe(3246);
-    expect(resolved.height).toBe(2160);
+    expect(resolved.width).toBe(PROBED.width);
+    expect(resolved.height).toBe(PROBED.height);
     expect(resolved.dateDisplay).toBe('July 15, 2025');
   });
 
   it('fails on an impossible date rather than publishing it', async () => {
-    await expect(resolveFrames([frame({ date: '2025-02-31' })], portfoliosBase)).rejects.toThrow(
-      /2025-02-31, which is not a real day/,
-    );
+    await expect(
+      resolveFrames([frame({ date: '2025-02-31' })], portfoliosBase, probe),
+    ).rejects.toThrow(/2025-02-31, which is not a real day/);
   });
 
   it('fails on a path that does not resolve rather than emitting a url that 404s', async () => {
     await expect(
-      resolveFrames([frame({ path: 'Journalism/nope/missing.jpg' })], portfoliosBase),
+      resolveFrames([frame({ path: 'Journalism/nope/missing.jpg' })], portfoliosBase, probe),
     ).rejects.toThrow(/does not resolve on disk: Journalism\/nope\/missing\.jpg/);
   });
 
@@ -102,6 +122,7 @@ describe('resolveFrames', () => {
         frame(),
       ],
       portfoliosBase,
+      probe,
     );
 
     await expect(run).rejects.toThrow(/^3 problems in /);
@@ -123,5 +144,18 @@ describe('the committed curation file', () => {
 
     expect(curation.frames.length).toBeGreaterThan(0);
     expect(impossible).toEqual([]);
+  });
+});
+
+describe('the generator can be loaded without sharp', () => {
+  it('requires sharp only inside the probe that uses it', () => {
+    const source = readFileSync(
+      join(repoRoot, 'scripts', 'manifest', 'generate-featured-manifest.js'),
+      'utf8',
+    );
+    // A require at column zero runs at load time. That is the line that made this
+    // file unloadable in CI, where sharp cannot be resolved from the repository root.
+    expect(source).not.toMatch(/^const\s+\w+\s*=\s*require\(['"]sharp['"]\)/m);
+    expect(source).toMatch(/async function probeDimensions[\s\S]*?require\(['"]sharp['"]\)/);
   });
 });
