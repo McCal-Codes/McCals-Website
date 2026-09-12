@@ -23,3 +23,5 @@ sites/mcc-cal-vite/api/manifests/data/
 src/content/blog/blog-manifest.json
 src/content/blog/feed.json
 src/content/blog/feed.xml
+
+sites/mcc-cal-vite/scripts/social-images.inputs.json
