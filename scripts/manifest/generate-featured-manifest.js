@@ -88,6 +88,25 @@ function formatFrameDate(iso) {
   return `${AP_MONTHS[month - 1]} ${day}, ${year}`;
 }
 
+/**
+ * True only for a day that exists. The YYYY-MM-DD pattern checks shape, and
+ * shape alone let "2025-13-01" through to render as "undefined 1, 2025" and
+ * "2025-02-31" through as a plausible "Feb. 31, 2025": the same kind of broken
+ * date display this generator was rewritten to retire. Date.UTC rolls an
+ * impossible day into the next month, so a date is real exactly when it reads
+ * back unchanged.
+ */
+function isRealCalendarDate(iso) {
+  if (typeof iso !== 'string' || !ISO_DATE.test(iso)) return false;
+  const [year, month, day] = iso.split('-').map(Number);
+  const parsed = new Date(Date.UTC(year, month - 1, day));
+  return (
+    parsed.getUTCFullYear() === year &&
+    parsed.getUTCMonth() === month - 1 &&
+    parsed.getUTCDate() === day
+  );
+}
+
 async function readCuration() {
   let raw;
   try {
@@ -115,8 +134,11 @@ async function readCuration() {
 /**
  * Checks every frame before reporting, so one run tells you about all of the
  * broken entries instead of stopping at the first.
+ *
+ * `base` is where frame paths are resolved from. It defaults to the portfolio
+ * tree under the working directory; tests pass the repository's own.
  */
-async function resolveFrames(curated) {
+async function resolveFrames(curated, base = PORTFOLIOS_BASE) {
   const problems = [];
   const resolved = [];
 
@@ -134,7 +156,12 @@ async function resolveFrames(curated) {
       continue;
     }
 
-    const absolute = path.join(PORTFOLIOS_BASE, frame.path);
+    if (!isRealCalendarDate(frame.date)) {
+      problems.push(`${at} (${frame.path}) has the date ${frame.date}, which is not a real day.`);
+      continue;
+    }
+
+    const absolute = path.join(base, frame.path);
     let dimensions;
     try {
       const metadata = await sharp(absolute).metadata();
@@ -220,8 +247,11 @@ async function generateFeaturedManifest() {
   );
 }
 
-if (process.argv.includes('--help') || process.argv.includes('-h')) {
-  console.log(`
+// Runs only as a script, so tests can require the validation without generating
+// the real manifest as a side effect.
+if (require.main === module) {
+  if (process.argv.includes('--help') || process.argv.includes('-h')) {
+    console.log(`
 Selected-work manifest generator
 
   Builds src/images/Portfolios/featured-manifest.json from
@@ -234,16 +264,20 @@ Selected-work manifest generator
   page needs to reserve space before the image loads.
 
   The build fails if a curated path does not resolve on disk, or if a frame has
-  no date in YYYY-MM-DD form. A frame with no caption is a warning, not an error.
+  no date that is a real day in YYYY-MM-DD form. A frame with no caption is a
+  warning, not an error.
 
 Usage:
   node scripts/manifest/generate-featured-manifest.js
   npm run manifest:featured
 `);
-  process.exit(0);
+    process.exit(0);
+  }
+
+  generateFeaturedManifest().catch((err) => {
+    console.error(`❌ ${err.message}`);
+    process.exit(1);
+  });
 }
 
-generateFeaturedManifest().catch((err) => {
-  console.error(`❌ ${err.message}`);
-  process.exit(1);
-});
+module.exports = { resolveFrames, formatFrameDate, isRealCalendarDate };
