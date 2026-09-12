@@ -11,7 +11,15 @@ const PUBLIC_DEST = path.resolve(__dirname, '..', 'public-vite', 'manifests');
 const BLOG_SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'content', 'blog');
 const BLOG_POSTS_DIR = path.join(BLOG_SRC, 'posts');
 const BLOG_DEST = path.resolve(__dirname, '..', 'public-vite', 'content', 'blog-static');
-const BLOG_COMPILE_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'compile-post-sources.js');
+const BLOG_COMPILE_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'blog',
+  'compile-post-sources.js',
+);
 const BLOG_VALIDATE_SCRIPT = path.resolve(
   __dirname,
   '..',
@@ -21,9 +29,38 @@ const BLOG_VALIDATE_SCRIPT = path.resolve(
   'blog',
   'validate-blog-content.js',
 );
-const BLOG_MANIFEST_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'manifest', 'generate-blog-manifest.js');
-const BLOG_FEED_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'generate-blog-feed.js');
-const SITEMAP_SCRIPT = path.resolve(__dirname, 'generate-sitemap.js');
+const BLOG_MANIFEST_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'manifest',
+  'generate-blog-manifest.js',
+);
+const BLOG_FEED_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'blog',
+  'generate-blog-feed.js',
+);
+// Lives at the repository root, not beside this file, like the blog scripts
+// above. Pointing it at __dirname made every run of this script die at its last
+// step with MODULE_NOT_FOUND, which also took out `npm run dev` and
+// `npm run build`, because both run it from a pre hook. It resolves its own
+// paths from its own __dirname, so it needs no particular cwd.
+const SITEMAP_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'seo',
+  'generate-sitemap.js',
+);
 const BLOG_GENERATED_FILES = [
   path.join(BLOG_SRC, 'blog-manifest.json'),
   path.join(BLOG_SRC, 'feed.json'),
@@ -35,8 +72,10 @@ const COPY_TIMEOUT_MS = Number.parseInt(
 );
 const SCRIPT_TIMEOUT_MS = Number.parseInt(process.env.SYNC_SCRIPT_TIMEOUT_MS || '120000', 10);
 const SKIP_BLOG = String(process.env.SYNC_SKIP_BLOG || '').toLowerCase() === 'true';
-const FORCE_BLOG_COMPILE = String(process.env.SYNC_FORCE_BLOG_COMPILE || '').toLowerCase() === 'true';
-const FORCE_BLOG_SCRIPTS = String(process.env.SYNC_FORCE_BLOG_SCRIPTS || '').toLowerCase() === 'true';
+const FORCE_BLOG_COMPILE =
+  String(process.env.SYNC_FORCE_BLOG_COMPILE || '').toLowerCase() === 'true';
+const FORCE_BLOG_SCRIPTS =
+  String(process.env.SYNC_FORCE_BLOG_SCRIPTS || '').toLowerCase() === 'true';
 
 const FILES = [
   ['Concert/concert-manifest.json', 'concert-manifest.json'],
@@ -54,7 +93,8 @@ fs.mkdirSync(PUBLIC_DEST, { recursive: true });
 function runNodeScript(scriptPath, args = []) {
   execFileSync(process.execPath, [scriptPath, ...args], {
     stdio: 'inherit',
-    timeout: Number.isFinite(SCRIPT_TIMEOUT_MS) && SCRIPT_TIMEOUT_MS > 0 ? SCRIPT_TIMEOUT_MS : 120000,
+    timeout:
+      Number.isFinite(SCRIPT_TIMEOUT_MS) && SCRIPT_TIMEOUT_MS > 0 ? SCRIPT_TIMEOUT_MS : 120000,
   });
 }
 
@@ -129,7 +169,11 @@ function isCurrentCopy(srcStat, destPath) {
   if (!fs.existsSync(destPath)) return false;
 
   const destStat = fs.statSync(destPath);
-  return destStat.isFile() && destStat.size === srcStat.size && destStat.mtimeMs >= srcStat.mtimeMs - 1000;
+  return (
+    destStat.isFile() &&
+    destStat.size === srcStat.size &&
+    destStat.mtimeMs >= srcStat.mtimeMs - 1000
+  );
 }
 
 function copyFileWithTimeout(srcPath, destPath, { rootPath, label }) {

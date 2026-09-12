@@ -22,7 +22,15 @@ function collectSourceFiles(dir: string, files: string[] = []): string[] {
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
       collectSourceFiles(full, files);
-    } else if (/\.(ts|tsx)$/.test(entry) && !/\.test\.(ts|tsx)$/.test(entry)) {
+    } else if (
+      // .js and .jsx are scanned too. The selected-work widths live in
+      // src/config/selected-work-image.js so the prerenderer can import them from
+      // Node, and a walker restricted to TypeScript stopped seeing them the moment
+      // they moved, leaving the widths this guard exists to police unpoliced.
+      /\.(ts|tsx|js|jsx)$/.test(entry) &&
+      !/\.test\.(ts|tsx|js|jsx)$/.test(entry) &&
+      !/\.d\.ts$/.test(entry)
+    ) {
       files.push(full);
     }
   }
@@ -46,19 +54,37 @@ function findWidthUsages(): WidthUsage[] {
   const usages: WidthUsage[] = [];
   const patterns: Array<{ regex: RegExp; label: string }> = [
     // getResponsiveImageSrcSet(src, [640, 960, ...])
-    { regex: /getResponsiveImageSrcSet\([^,)]+,\s*\[([\d,\s]+)\]/g, label: 'getResponsiveImageSrcSet call' },
+    {
+      regex: /getResponsiveImageSrcSet\([^,)]+,\s*\[([\d,\s]+)\]/g,
+      label: 'getResponsiveImageSrcSet call',
+    },
     // const FOO_WIDTHS = [640, 960, ...]
     { regex: /_WIDTHS\s*=\s*\[([\d,\s]+)\]/g, label: 'width constant' },
     // getOptimizedImageUrl(src, { width: 1920 })
-    { regex: /getOptimizedImageUrl\([^)]*\{\s*width:\s*(\d+)/g, label: 'getOptimizedImageUrl call' },
+    {
+      regex: /getOptimizedImageUrl\([^)]*\{\s*width:\s*(\d+)/g,
+      label: 'getOptimizedImageUrl call',
+    },
     // <OptimizedImage optimizedWidth={160} .../>
     { regex: /optimizedWidth=\{(\d+)\}/g, label: 'optimizedWidth prop' },
+    // optimizedWidth={cond ? 1280 : 960}. The pattern above only matches a bare
+    // number, so a width written in a branch slipped past the guard entirely.
+    // That is the same hole already closed for srcSetWidths below, and it was
+    // open again here: a 2560 in the consequent passed this test.
+    { regex: /optimizedWidth=\{[^}]*?\?\s*(\d+)/g, label: 'optimizedWidth ternary consequent' },
+    {
+      regex: /optimizedWidth=\{[^}]*?\?\s*\d+\s*:\s*(\d+)/g,
+      label: 'optimizedWidth ternary alternate',
+    },
     // srcSetWidths={[320, 480]} and, importantly, the ternary form
     // srcSetWidths={cond ? [640, 960] : [360, 540]}. The earlier patterns only
     // matched a bare array, so a width written in a branch slipped past the
     // guard entirely, which is precisely the 400 this test exists to prevent.
     { regex: /srcSetWidths=\{[^}]*?\[([\d,\s]+)\]/g, label: 'srcSetWidths prop' },
-    { regex: /srcSetWidths=\{[^}]*?\[[\d,\s]+\]\s*:\s*\[([\d,\s]+)\]/g, label: 'srcSetWidths ternary branch' },
+    {
+      regex: /srcSetWidths=\{[^}]*?\[[\d,\s]+\]\s*:\s*\[([\d,\s]+)\]/g,
+      label: 'srcSetWidths ternary branch',
+    },
     // The inline hero preload in index.html: `var widths = [640, 960, ...]`.
     { regex: /var\s+widths\s*=\s*\[([\d,\s]+)\]/g, label: 'inline preload widths' },
   ];
@@ -114,7 +140,7 @@ describe('image width allowlist', () => {
    */
   it('scopes the homepage hero preload to the homepage', () => {
     const html = readFileSync(join(appRoot, 'index.html'), 'utf8');
-    const preload = html.slice(html.indexOf('rel = \'preload\''));
+    const preload = html.slice(html.indexOf("rel = 'preload'"));
 
     expect(html).toContain("rel = 'preload'");
     expect(

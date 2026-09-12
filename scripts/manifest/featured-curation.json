@@ -1,77 +1,133 @@
 {
-  "description": "Hand-tuned ordering and cover choices for the featured portfolio. The generator falls back to automatic newest-per-category selection for anything not listed here.",
-  "items": [
+  "$comment": "The selected-work page, in this order. Every frame here appears on /featured-work; nothing else does. Add, remove and reorder freely. path is relative to src/images/Portfolios at the repository root. caption is yours to write, in the AP style used by the journalism sidecars: who, what, where, when, then credit. An empty caption is allowed and the generator warns about it; a path that does not resolve fails the build. album is the gallery route the frame came from, or an empty string for no link. Add an optional alt only when the photograph needs describing beyond what the caption already says, because a caption and an alt that repeat each other are read out twice.",
+  "frames": [
     {
-      "type": "Concert",
-      "title": "Horseburner",
-      "sourcePath": "Concert/Horseburner/December 2025",
-      "rank": 1,
-      "description": "A high-impact live set led by color, motion, and close stage presence.",
-      "coverImage": "251206 Riffmas 3_CAL2540_webuse.jpg"
+      "path": "Journalism/Politics/cmu-trump-protest/250715_CMU Trump Protest_CAL1573-min.jpg",
+      "title": "Protest near Carnegie Mellon",
+      "caption": "A demonstrator stands near Pittsburgh police in riot gear during a protest in the Oakland neighborhood of Pittsburgh, Pa., July 15, 2025. Demonstrators marched against the Pennsylvania Energy and Innovation Summit at Carnegie Mellon University, where President Donald Trump announced $92 billion in energy and artificial intelligence investments in the state. (Photo by Caleb McCartney)",
+      "date": "2025-07-15",
+      "category": "Photojournalism",
+      "album": "/journalism"
     },
     {
-      "type": "Journalism",
-      "title": "Brentwood Vs Springdale",
-      "sourcePath": "Documentary/Brentwood vs Springdale",
-      "rank": 2,
-      "description": "Friday-night assignment coverage with action, atmosphere, and community texture.",
-      "coverImage": "250912_Brentwood vs Springdale_CAL5175-min.jpg"
+      "path": "Journalism/Politics/trump-returns-butler/051024 Caleb McCartney_Trump Returns to Butler PA_CAL2494.webp",
+      "title": "Trump Returns to Butler",
+      "caption": "A supporter wears an ear bandage reading “Fight! Fight! Fight!” before former President Donald Trump's rally at the Butler Farm Show fairgrounds in Butler, Pa., Oct. 5, 2024. Trump returned to the site where a gunman grazed his ear on July 13, and where he raised his fist and repeated the phrase as agents pulled him from the stage. (Photo by Caleb McCartney)",
+      "date": "2024-10-05",
+      "category": "Photojournalism",
+      "album": "/journalism"
     },
     {
-      "type": "Events",
-      "title": "Pittsburgh Social Club",
-      "sourcePath": "Events/Pittsburgh Social Club",
-      "rank": 3,
-      "description": "Warm, social event coverage built around faces, movement, and the room’s energy.",
-      "coverImage": "src/images/Portfolios/Events/Pittsburgh Social Club/251115 PGH Social Club at Avalon_CAL881_webuse.jpg"
+      "path": "Journalism/Events/Pro Palestine Protest at Pitt/240430_Pro Palestine Protest at Pitt_CAL1501_webuse.jpg",
+      "title": "Pro-Palestinian Protest at Pitt",
+      "caption": "Demonstrators gather during a pro-Palestinian protest at the University of Pittsburgh in Pittsburgh, Pa., April 28, 2024. Pittsburgh police moved protesters off the university's lawn that evening and two people were charged with trespassing. (Photo by Caleb McCartney)",
+      "date": "2024-04-28",
+      "category": "Photojournalism",
+      "album": "/journalism"
     },
     {
-      "type": "Journalism",
-      "title": "Cmu Trump Protest",
-      "sourcePath": "Politics/cmu-trump-protest",
-      "rank": 4,
-      "description": "Political documentary work that keeps the setting, gestures, and public response in frame.",
-      "coverImage": "250715_CMU Trump Protest_CAL1091-min.jpg"
+      "path": "Selected/20240929_trump-rally-erie_CAL2157.webp",
+      "title": "Trump Rally, Erie",
+      "caption": "A supporter dressed as Uncle Sam wheels a larger-than-life cutout of former President Donald Trump past vendor tents before his rally at the Bayfront Convention Center in Erie, Pa., Sept. 29, 2024. (Photo by Caleb McCartney)",
+      "date": "2024-09-29",
+      "category": "Photojournalism",
+      "album": ""
     },
     {
-      "type": "Events",
-      "title": "Love's A Game",
-      "sourcePath": "Events/Love's A Game",
-      "rank": 5,
-      "description": "Theatrical coverage with intimate blocking, expressive light, and clean narrative beats.",
-      "coverImage": "src/images/Portfolios/Events/Love's A Game/251106 Love’s A Game - Ghostlight_CAL197_webuse.webp"
+      "path": "Selected/20240905_tim-walz-erie_618.webp",
+      "title": "Tim Walz Rally, Erie",
+      "caption": "Minnesota Gov. Tim Walz, the Democratic vice presidential nominee, greets supporters at a campaign rally at Highmark Amphitheater in Erie, Pa., Sept. 5, 2024. (Photo by Caleb McCartney)",
+      "date": "2024-09-05",
+      "category": "Photojournalism",
+      "album": "/journalism"
     },
     {
-      "type": "Concert",
-      "title": "Heading North",
-      "sourcePath": "Concert/Heading North/November 2025",
-      "rank": 6,
-      "description": "A close, saturated live set with sweat, reach, and crowd-facing performance rhythm.",
-      "coverImage": "251101 Headed North - Bottle Rocket_CAL3_webuse.jpg"
+      "path": "Selected/20240913_kamala-johnstown-arrival_1999.webp",
+      "title": "Harris Arrives in Johnstown",
+      "caption": "Vice President Kamala Harris greets onlookers on the tarmac after arriving on Air Force Two at John Murtha Johnstown-Cambria County Airport in Johnstown, Pa., Sept. 13, 2024. More than 400 invited guests met her at the airport before she continued to downtown Johnstown. (Photo by Caleb McCartney)",
+      "date": "2024-09-13",
+      "category": "Photojournalism",
+      "album": ""
     },
     {
-      "type": "Events",
-      "title": "Inclusivity Event PRSSA",
-      "sourcePath": "Events/Inclusivity Event - PRSSA",
-      "rank": 7,
-      "description": "Professional programming coverage with speakers, panels, attendees, and usable recap frames.",
-      "coverImage": "src/images/Portfolios/Events/Inclusivity Event - PRSSA/251025 PRSSA Workplace Inclusivity_CAL7937_webuse.webp"
+      "path": "Journalism/Politics/kamala-pittsburgh/241104_kamala-pgh-eve_CAL4421.jpg",
+      "title": "Election Eve, Rankin",
+      "caption": "Vice President Kamala Harris waits in the wings as supporters raise signs during a campaign rally at the Carrie Blast Furnaces National Historic Landmark in Rankin, Pa., Nov. 4, 2024. The rally on the eve of the election drew about 15,000 people. (Photo by Caleb McCartney)",
+      "date": "2024-11-04",
+      "category": "Photojournalism",
+      "album": "/journalism"
     },
     {
-      "type": "Concert",
-      "title": "Star Viper",
-      "sourcePath": "Concert/Star Viper/December 2025",
-      "rank": 8,
-      "description": "Dense concert coverage with strong silhouettes, red light, and direct performance moments.",
-      "coverImage": "251206 Riffmas 3_CAL2872_webuse.jpg"
+      "path": "Journalism/Politics/kamala-speaks-erie/141024_Kamala Speaks at Erie_CAL3804 1.jpg",
+      "title": "Harris Rally, Erie",
+      "caption": "Supporters watch from the stands, behind red, white and blue bunting, during a campaign rally with Vice President Kamala Harris at Erie Insurance Arena in Erie, Pa., Oct. 14, 2024. (Photo by Caleb McCartney)",
+      "date": "2024-10-14",
+      "category": "Photojournalism",
+      "album": "/journalism"
     },
     {
-      "type": "Journalism",
-      "title": "Historic Yard Sale 0825",
-      "sourcePath": "Documentary/historic-yard-sale-0825",
-      "rank": 9,
-      "description": "Community documentary work grounded in small details, local color, and everyday exchange.",
-      "coverImage": "250802_Brentwood Yard Sale _CAL2643-min.jpg"
+      "path": "Journalism/Politics/jdvance-johnstown/241012_JD Vance in Johnstown_CAL3636.webp",
+      "title": "JD Vance Rally, Johnstown",
+      "caption": "Supporters raise their hands as Republican vice presidential nominee JD Vance speaks at a campaign rally at JWF Industries in Johnstown, Pa., Oct. 12, 2024. (Photo by Caleb McCartney)",
+      "date": "2024-10-12",
+      "category": "Photojournalism",
+      "album": "/journalism"
+    },
+    {
+      "path": "Journalism/Documentary/Sewickley ICE Prayer Service/260327 ICE Prayer Service_SEW-ICE-prayers29_webuse.webp",
+      "title": "Sewickley ICE Prayer Service",
+      "caption": "The Rev. Hannah Loughman embraces Ana Paula de Araujo Pinto, the mother of Maria Paula de Araujo Guedes, 6, during a healing service at Sewickley United Methodist Church in Sewickley, Pa., March 27, 2026. (Photo by Caleb McCartney)",
+      "date": "2026-03-27",
+      "category": "Photojournalism",
+      "album": "/journalism"
+    },
+    {
+      "path": "Journalism/Politics/kamala-pittsburgh/241104_kamala-pgh-eve_CAL4655.jpg",
+      "title": "Election Eve, Rankin",
+      "caption": "A child watches from the crowd during a campaign rally with Vice President Kamala Harris at the Carrie Blast Furnaces National Historic Landmark in Rankin, Pa., Nov. 4, 2024. (Photo by Caleb McCartney)",
+      "date": "2024-11-04",
+      "category": "Photojournalism",
+      "album": "/journalism"
+    },
+    {
+      "path": "Journalism/Documentary/Fern Hollow Nature Center Groundbreaking/260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
+      "title": "Fern Hollow Groundbreaking",
+      "caption": "Fern Hollow Nature Center volunteers Lauren Massy and Kim Eckman prepare the refreshment table before a groundbreaking ceremony for the center's renovation and expansion in Sewickley, Pa., May 5, 2026. (Photo by Caleb McCartney)",
+      "date": "2026-05-05",
+      "category": "Photojournalism",
+      "album": "/journalism"
+    },
+    {
+      "path": "Selected/20250609_kentucky_134.webp",
+      "title": "Boyd's Station, Cynthiana",
+      "caption": "A boy holds a sparkler after dark as an adult stands beside him in Cynthiana, Ky., June 9, 2025. (Photo by Caleb McCartney)",
+      "date": "2025-06-09",
+      "category": "Photojournalism",
+      "album": ""
+    },
+    {
+      "path": "Selected/20250610_kentucky_320.webp",
+      "title": "Boyd's Station, Cynthiana",
+      "caption": "A farmer tends vegetable seedlings at dusk in Cynthiana, Ky., June 10, 2025. (Photo by Caleb McCartney)",
+      "date": "2025-06-10",
+      "category": "Photojournalism",
+      "album": ""
+    },
+    {
+      "path": "Selected/20250612_kentucky_406.webp",
+      "title": "Boyd's Station, Cynthiana",
+      "caption": "A man changes a tire along a roadside as a woman stands beside the car in Cynthiana, Ky., June 12, 2025. (Photo by Caleb McCartney)",
+      "date": "2025-06-12",
+      "category": "Photojournalism",
+      "album": ""
+    },
+    {
+      "path": "Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL999.jpg",
+      "title": "The Guy Who Didn't Like Musicals",
+      "caption": "Cast members perform during a staging of the musical “The Guy Who Didn't Like Musicals” in Pittsburgh, Pa., March 19, 2025. (Photo by Caleb McCartney)",
+      "date": "2025-03-19",
+      "category": "Events",
+      "album": "/events"
     }
   ]
 }

@@ -1,0 +1,70 @@
+/**
+ * Single source of truth for how /featured-work requests its photographs.
+ *
+ * Two places need these values and they must agree exactly:
+ *
+ *   FeaturedPortfolio.tsx renders the <img srcset sizes>.
+ *   scripts/generate-route-meta.js emits a <link rel="preload" imagesrcset imagesizes>
+ *   into the prerendered HTML so the first photograph is discoverable before the
+ *   183 KB of JavaScript and the manifest round trip that would otherwise have to
+ *   finish before its URL is even known.
+ *
+ * A preload whose candidate list differs from the img's makes the browser fetch a
+ * second, unused image at high priority, which is worse than no preload at all.
+ * Keeping the numbers here, rather than copied into both files, is what stops that.
+ *
+ * Every width must also appear in vercel.json's `images.sizes`. The optimizer
+ * answers 400 for any other `w=`, which is the failure imageWidths.static.test.ts
+ * exists to catch; it reads the `_WIDTHS` constants below by name.
+ */
+
+/** Full-column frames. */
+export const WIDE_SRCSET_WIDTHS = [640, 960, 1280, 1600, 1920];
+
+/** Frames that sit two to a row, so roughly half the column. */
+export const PAIR_SRCSET_WIDTHS = [480, 640, 960, 1280];
+
+export const WIDE_SIZES = '(max-width: 900px) calc(100vw - 40px), min(1100px, 92vw)';
+export const PAIR_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1200px) 46vw, 540px';
+
+/** What the browser should fetch first, and at what width, for the lead frame. */
+export const LEAD_OPTIMIZED_WIDTH = 1280;
+
+/** Matches DEFAULT_QUALITY in src/utils/imageOptimization.ts. */
+export const IMAGE_QUALITY = 80;
+
+/** Matches VERCEL_IMAGE_PATH in src/utils/imageOptimization.ts. */
+export const VERCEL_IMAGE_PATH = '/_vercel/image';
+
+/** Matches REPO_CDN_BASE in src/components/portfolio/useManifest.ts. */
+export const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
+
+/** Matches PORTFOLIOS_BASE in src/components/portfolio/useManifest.ts. */
+export const PORTFOLIOS_BASE = 'src/images/Portfolios';
+
+/**
+ * The CDN url for a curated frame, from its path relative to PORTFOLIOS_BASE.
+ * Mirrors imageUrl.featured() plus toGithubUrl(), which encode each path segment
+ * separately so a folder name with spaces survives.
+ */
+export function frameCdnUrl(pathRelativeToPortfolios) {
+  const repoPath = `${PORTFOLIOS_BASE}/${pathRelativeToPortfolios}`;
+  const encoded = repoPath.split('/').map(encodeURIComponent).join('/');
+  return `${REPO_CDN_BASE}/${encoded}`;
+}
+
+/**
+ * The optimizer url for one candidate. Mirrors getOptimizedImageUrl() for a
+ * jsDelivr source in the Vercel runtime. selectedWorkPreload.test.ts asserts
+ * this stays identical to that function's output.
+ */
+export function optimizedFrameUrl(cdnUrl, width, quality = IMAGE_QUALITY) {
+  const params = new URLSearchParams({ url: cdnUrl, q: String(quality) });
+  if (width) params.set('w', String(width));
+  return `${VERCEL_IMAGE_PATH}?${params.toString()}`;
+}
+
+/** The candidate list for one frame, in the same order the img builds it. */
+export function frameSrcSet(cdnUrl, widths) {
+  return widths.map((width) => `${optimizedFrameUrl(cdnUrl, width)} ${width}w`).join(', ');
+}
