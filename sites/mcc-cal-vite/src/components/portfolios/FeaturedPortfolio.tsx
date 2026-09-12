@@ -15,6 +15,7 @@ import {
   WIDE_SIZES,
   PAIR_SIZES,
   LEAD_OPTIMIZED_WIDTH,
+  WIDE_MIN_SOURCE_WIDTH,
 } from '@/config/selected-work-image';
 
 const PortfolioLightbox = lazy(() => import('../portfolio/PortfolioLightbox'));
@@ -118,8 +119,14 @@ function prepare(frames: FeaturedFrame[]): PreparedFrame[] {
 }
 
 /**
- * One wide frame, then two paired, repeating. An odd frame left at the end
- * becomes a wide row rather than a lonely half-width one.
+ * One wide frame, then two paired, repeating, in the curated order. An odd frame
+ * left at the end becomes a wide row rather than a lonely half-width one.
+ *
+ * A frame is only given a wide row if it has the pixels for one. When the frame
+ * due a wide row is narrower than WIDE_MIN_SOURCE_WIDTH it is paired with the next
+ * frame instead, and the wide row passes to the frame after that. The sequence is
+ * never reordered: which photograph follows which is the curator's decision, and
+ * the layout adapts around it.
  */
 function toRows(frames: PreparedFrame[]): Row[] {
   const rows: Row[] = [];
@@ -127,6 +134,13 @@ function toRows(frames: PreparedFrame[]): Row[] {
   let wide = true;
 
   while (index < frames.length) {
+    const hasPartner = index + 1 < frames.length;
+    if (wide && frames[index].width < WIDE_MIN_SOURCE_WIDTH && hasPartner) {
+      rows.push({ variant: 'pair', frames: [frames[index], frames[index + 1]] });
+      index += 2;
+      // The pair took this turn, so the next row is wide.
+      continue;
+    }
     if (wide) {
       rows.push({ variant: 'wide', frames: [frames[index]] });
       index += 1;
@@ -172,6 +186,9 @@ function SelectedFigure({ frame, variant, priority, onOpen }: SelectedFigureProp
       <button
         type="button"
         className={portfolioStyles.pfSelectedImageButton}
+        // Never wider than the photograph itself, so a frame that ends up in a row
+        // wider than its pixels is shown at its own size rather than enlarged.
+        style={{ maxWidth: `${frame.width}px` }}
         aria-label={`Open ${frame.title || 'this photograph'} larger`}
         onClick={() => onOpen(frame)}
       >

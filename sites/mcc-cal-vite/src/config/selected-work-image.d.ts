@@ -2,6 +2,7 @@ export const WIDE_SRCSET_WIDTHS: readonly number[];
 export const PAIR_SRCSET_WIDTHS: readonly number[];
 export const WIDE_SIZES: string;
 export const PAIR_SIZES: string;
+export const WIDE_MIN_SOURCE_WIDTH: number;
 export const LEAD_OPTIMIZED_WIDTH: number;
 export const IMAGE_QUALITY: number;
 export const VERCEL_IMAGE_PATH: string;

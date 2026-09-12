@@ -34,6 +34,16 @@ export const PAIR_SRCSET_WIDTHS = [480, 640, 960, 1280];
 export const WIDE_SIZES = '(max-width: 900px) calc(100vw - 40px), min(1100px, 92vw)';
 export const PAIR_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1200px) 46vw, 540px';
 
+/**
+ * The narrowest photograph allowed a full-width row. That row renders up to 1100
+ * CSS pixels (WIDE_SIZES), so a narrower source is enlarged and softened there.
+ * 1600 fills it at about one and a half times, the density the wide candidates
+ * are chosen for. A narrower frame is paired instead, where the column is about
+ * half as wide. Checked against the committed selection: frames of 1080 and 640
+ * pixels had been landing in wide rows.
+ */
+export const WIDE_MIN_SOURCE_WIDTH = 1600;
+
 /** What the browser should fetch first, and at what width, for the lead frame. */
 export const LEAD_OPTIMIZED_WIDTH = 1280;
 

@@ -112,6 +112,82 @@ describe('FeaturedPortfolio', () => {
     expect(counts).toEqual([1, 2, 1, 1]);
   });
 
+  function rowsOf(container: HTMLElement) {
+    const rows: Element[] = [];
+    for (const figure of Array.from(container.querySelectorAll('figure'))) {
+      const row = figure.parentElement;
+      if (row && !rows.includes(row)) rows.push(row);
+    }
+    return rows.map((row) =>
+      Array.from(row.querySelectorAll('figure')).map(
+        (figure) => figure.querySelector('p')?.textContent ?? '',
+      ),
+    );
+  }
+
+  it('pairs a frame too narrow for a wide row with the next, keeping the order', () => {
+    setFrames([
+      frame({ path: 'a/1.jpg', caption: 'F1' }),
+      frame({ path: 'a/2.jpg', caption: 'F2' }),
+      frame({ path: 'a/3.jpg', caption: 'F3' }),
+      frame({ path: 'a/4.jpg', caption: 'F4', width: 640, height: 426 }),
+      frame({ path: 'a/5.jpg', caption: 'F5' }),
+      frame({ path: 'a/6.jpg', caption: 'F6' }),
+    ]);
+    const { container } = renderPage();
+
+    // F4 was due the second wide row. It pairs with F5 instead, and F6 takes the wide row.
+    expect(rowsOf(container)).toEqual([['F1'], ['F2', 'F3'], ['F4', 'F5'], ['F6']]);
+  });
+
+  it('never gives a wide row to an undersized frame that has a partner, on the committed widths', () => {
+    // The widths of the committed selection, in order. Before this, frames of 1080,
+    // 640 and 1080 pixels landed in wide rows that render up to 1100 CSS pixels.
+    const widths = [
+      3246, 7703, 2400, 2400, 2400, 2400, 1080, 3240, 1080, 640, 1080, 2400, 2400, 2400, 2400, 1080,
+    ];
+    setFrames(
+      widths.map((width, i) =>
+        frame({
+          path: `a/${i}.jpg`,
+          caption: `F${i + 1}`,
+          width,
+          height: Math.round(width * 0.66),
+        }),
+      ),
+    );
+    const { container } = renderPage();
+    const rows = rowsOf(container);
+
+    expect(rows.flat()).toEqual(widths.map((_, i) => `F${i + 1}`));
+    rows.forEach((row, rowIndex) => {
+      const isLast = rowIndex === rows.length - 1;
+      if (row.length === 1 && !isLast) {
+        expect(widths[Number(row[0].slice(1)) - 1]).toBeGreaterThanOrEqual(1600);
+      }
+    });
+  });
+
+  it('caps every photograph at its own width, so a leftover narrow frame is not enlarged', () => {
+    setFrames([
+      frame({ path: 'a/1.jpg', caption: 'F1' }),
+      frame({ path: 'a/2.jpg', caption: 'F2' }),
+      frame({ path: 'a/3.jpg', caption: 'F3' }),
+      frame({ path: 'a/4.jpg', caption: 'F4', width: 640, height: 426 }),
+    ]);
+    const { container } = renderPage();
+
+    // F4 has no partner, so it keeps a row to itself, drawn no wider than 640px.
+    expect(rowsOf(container).at(-1)).toEqual(['F4']);
+    const buttons = Array.from(container.querySelectorAll('figure button'));
+    expect(buttons.map((button) => (button as HTMLElement).style.maxWidth)).toEqual([
+      '2400px',
+      '2400px',
+      '2400px',
+      '640px',
+    ]);
+  });
+
   it('labels each figure by its own caption', () => {
     renderPage();
     const figure = screen.getByRole('group');
