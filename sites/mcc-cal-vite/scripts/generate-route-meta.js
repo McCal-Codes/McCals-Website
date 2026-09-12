@@ -10,6 +10,7 @@ import {
   frameSrcSet,
   optimizedFrameUrl,
 } from '../src/config/selected-work-image.js';
+import { repoCdnBase } from '../src/config/repo-cdn.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, '..');
@@ -144,17 +145,23 @@ function removeManagedJsonLd(html) {
  * The removal half of this feature already existed in removeManagedImagePreloads
  * above; nothing had ever emitted the link it strips.
  */
-function buildImagePreload(route, frames) {
+export function buildImagePreload(route, frames, cdnBase = repoCdnBase(process.env)) {
   if (route !== SELECTED_WORK_ROUTE) return null;
   const lead = frames[0];
   if (!lead?.path) return null;
 
-  const cdnUrl = frameCdnUrl(lead.path);
+  const cdnUrl = frameCdnUrl(lead.path, cdnBase);
+  const srcSet = frameSrcSet(cdnUrl, WIDE_SRCSET_WIDTHS);
+  // A preview reads photographs from its own commit, which the optimizer does not
+  // serve, so its img has a plain src and no srcset. The preload matches that
+  // rather than advertising candidates the page will never request.
+  const candidates = srcSet
+    ? ` imagesrcset="${escapeAttr(srcSet)}" imagesizes="${escapeAttr(WIDE_SIZES)}"`
+    : '';
   return (
     `<link rel="preload" as="image" fetchpriority="high"` +
     ` href="${escapeAttr(optimizedFrameUrl(cdnUrl, LEAD_OPTIMIZED_WIDTH))}"` +
-    ` imagesrcset="${escapeAttr(frameSrcSet(cdnUrl, WIDE_SRCSET_WIDTHS))}"` +
-    ` imagesizes="${escapeAttr(WIDE_SIZES)}"` +
+    candidates +
     ` data-route-image-preload="${escapeAttr(route)}" />`
   );
 }
@@ -171,12 +178,12 @@ function buildImagePreload(route, frames) {
  * Emitted here rather than from usePageMeta so it is in the HTML as served
  * instead of injected after hydration.
  */
-function buildJsonLd(route, frames, siteRoot) {
+function buildJsonLd(route, frames, siteRoot, cdnBase = repoCdnBase(process.env)) {
   if (route !== SELECTED_WORK_ROUTE || frames.length === 0) return null;
 
   const graph = frames.map((frame) => ({
     '@type': 'ImageObject',
-    contentUrl: frameCdnUrl(frame.path),
+    contentUrl: frameCdnUrl(frame.path, cdnBase),
     name: frame.title || 'Selected work',
     description: frame.caption || undefined,
     datePublished: frame.date || undefined,

@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import type { UseManifestResult } from './types';
+import { repoCdnBase } from '@/config/repo-cdn';
 import { fetchSupabaseJournalismEvents, mergeJournalismEvents } from './journalismSupabaseSource';
 import { fetchSupabaseNatureCollections, mergeNatureCollections } from './natureSupabaseSource';
 
-const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
+// `main` in production, the deployment's own commit in a preview. See repo-cdn.js.
+const REPO_CDN_BASE = repoCdnBase(import.meta.env);
 const PORTFOLIOS_BASE = 'src/images/Portfolios';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes, matching widget behaviour
 const MANIFEST_FILE_MAP: Record<string, string> = {

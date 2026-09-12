@@ -13,10 +13,17 @@
  * second, unused image at high priority, which is worse than no preload at all.
  * Keeping the numbers here, rather than copied into both files, is what stops that.
  *
+ * The CDN base and the optimizer allowlist come from repo-cdn.js, shared with
+ * useManifest.ts and imageOptimization.ts, so a preview and its prerendered
+ * preload agree on which commit a photograph is read from and whether it goes
+ * through the optimizer at all.
+ *
  * Every width must also appear in vercel.json's `images.sizes`. The optimizer
  * answers 400 for any other `w=`, which is the failure imageWidths.static.test.ts
  * exists to catch; it reads the `_WIDTHS` constants below by name.
  */
+
+import { isOptimizableCdnUrl, repoCdnBase } from './repo-cdn.js';
 
 /** Full-column frames. */
 export const WIDE_SRCSET_WIDTHS = [640, 960, 1280, 1600, 1920];
@@ -36,9 +43,6 @@ export const IMAGE_QUALITY = 80;
 /** Matches VERCEL_IMAGE_PATH in src/utils/imageOptimization.ts. */
 export const VERCEL_IMAGE_PATH = '/_vercel/image';
 
-/** Matches REPO_CDN_BASE in src/components/portfolio/useManifest.ts. */
-export const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
-
 /** Matches PORTFOLIOS_BASE in src/components/portfolio/useManifest.ts. */
 export const PORTFOLIOS_BASE = 'src/images/Portfolios';
 
@@ -47,24 +51,30 @@ export const PORTFOLIOS_BASE = 'src/images/Portfolios';
  * Mirrors imageUrl.featured() plus toGithubUrl(), which encode each path segment
  * separately so a folder name with spaces survives.
  */
-export function frameCdnUrl(pathRelativeToPortfolios) {
+export function frameCdnUrl(pathRelativeToPortfolios, cdnBase = repoCdnBase()) {
   const repoPath = `${PORTFOLIOS_BASE}/${pathRelativeToPortfolios}`;
   const encoded = repoPath.split('/').map(encodeURIComponent).join('/');
-  return `${REPO_CDN_BASE}/${encoded}`;
+  return `${cdnBase}/${encoded}`;
 }
 
 /**
  * The optimizer url for one candidate. Mirrors getOptimizedImageUrl() for a
- * jsDelivr source in the Vercel runtime. selectedWorkPreload.test.ts asserts
- * this stays identical to that function's output.
+ * jsDelivr source in the Vercel runtime, including returning a url the optimizer
+ * would reject unchanged. selectedWorkPreload.test.ts asserts this stays
+ * identical to that function's output in production and in a preview.
  */
 export function optimizedFrameUrl(cdnUrl, width, quality = IMAGE_QUALITY) {
+  if (!isOptimizableCdnUrl(cdnUrl)) return cdnUrl;
   const params = new URLSearchParams({ url: cdnUrl, q: String(quality) });
   if (width) params.set('w', String(width));
   return `${VERCEL_IMAGE_PATH}?${params.toString()}`;
 }
 
-/** The candidate list for one frame, in the same order the img builds it. */
+/**
+ * The candidate list for one frame, in the same order the img builds it, or
+ * undefined where the optimizer cannot serve the url and the img has no srcset.
+ */
 export function frameSrcSet(cdnUrl, widths) {
+  if (!isOptimizableCdnUrl(cdnUrl)) return undefined;
   return widths.map((width) => `${optimizedFrameUrl(cdnUrl, width)} ${width}w`).join(', ');
 }
