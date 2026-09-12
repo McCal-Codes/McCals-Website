@@ -1,0 +1,27 @@
+# Generated data files, left in the shape their generator writes.
+#
+# These are produced by scripts/manifest/*.js and scripts/blog/*.js with
+# JSON.stringify at two spaces, and they are committed from CI, where the
+# pre-commit hook does not run. So prettier has never formatted them, and the
+# committed shape is the generator's shape.
+#
+# Formatting them locally would put the committed file permanently at odds with
+# its generator: prettier collapses short arrays onto one line, the generator
+# expands them again, and seo-auto-update.yml regenerates after every merge and
+# commits whatever differs. That is a second full production build of every
+# Vercel project, forever, for a whitespace disagreement. Verified before adding
+# this: `prettier --check` reports all six manifests in this change as needing
+# edits, while `git show HEAD:<file>` is the generator's formatting.
+#
+# Hand-edited data is deliberately not listed. captions.json files, date
+# overrides and tags.json are written by people and should be formatted.
+
+src/images/Portfolios/**/*-manifest.json
+sites/mcc-cal-vite/public-vite/manifests/
+sites/mcc-cal-vite/api/manifests/data/
+
+src/content/blog/blog-manifest.json
+src/content/blog/feed.json
+src/content/blog/feed.xml
+
+sites/mcc-cal-vite/scripts/social-images.inputs.json

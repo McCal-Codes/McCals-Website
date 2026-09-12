@@ -1,6 +1,6 @@
 {
   "version": "2.6.4",
-  "generated": "2026-09-07T18:54:17.043Z",
+  "generated": "2026-09-12T17:35:22.500Z",
   "generatedBy": "events-manifest-generator",
   "totalEvents": 31,
   "events": [
@@ -2937,7 +2937,9 @@
           "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL985.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL999.jpg"
+          "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL999.jpg",
+          "caption": "Cast members perform during a staging of the musical “The Guy Who Didn't Like Musicals” in Pittsburgh, Pa., March 19, 2025. (Photo by Caleb McCartney)",
+          "description": "Cast members perform during a staging of the musical “The Guy Who Didn't Like Musicals” in Pittsburgh, Pa., March 19, 2025. (Photo by Caleb McCartney)"
         },
         {
           "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1006.jpg"
@@ -8728,7 +8730,9 @@
           "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL985.jpg"
         },
         {
-          "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL999.jpg"
+          "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL999.jpg",
+          "caption": "Cast members perform during a staging of the musical “The Guy Who Didn't Like Musicals” in Pittsburgh, Pa., March 19, 2025. (Photo by Caleb McCartney)",
+          "description": "Cast members perform during a staging of the musical “The Guy Who Didn't Like Musicals” in Pittsburgh, Pa., March 19, 2025. (Photo by Caleb McCartney)"
         },
         {
           "path": "src/images/Portfolios/Events/guy-hates-musicals/250319 A Guy Who Hates Musicals - Ghostlight_CAL1006.jpg"
