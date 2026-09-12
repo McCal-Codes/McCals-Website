@@ -47,20 +47,6 @@ const BLOG_FEED_SCRIPT = path.resolve(
   'blog',
   'generate-blog-feed.js',
 );
-// Lives at the repository root, not beside this file, like the blog scripts
-// above. Pointing it at __dirname made every run of this script die at its last
-// step with MODULE_NOT_FOUND, which also took out `npm run dev` and
-// `npm run build`, because both run it from a pre hook. It resolves its own
-// paths from its own __dirname, so it needs no particular cwd.
-const SITEMAP_SCRIPT = path.resolve(
-  __dirname,
-  '..',
-  '..',
-  '..',
-  'scripts',
-  'seo',
-  'generate-sitemap.js',
-);
 const BLOG_GENERATED_FILES = [
   path.join(BLOG_SRC, 'blog-manifest.json'),
   path.join(BLOG_SRC, 'feed.json'),
@@ -282,5 +268,26 @@ if (SKIP_BLOG) {
     `Synced: content/blog-static (${totals.copied} copied, ${totals.skipped} skipped, ${totals.failed} failed)`,
   );
 
-  runNodeScript(SITEMAP_SCRIPT);
+  // No sitemap step here on purpose.
+  //
+  // This used to call `generate-sitemap.js` resolved beside this file, where no
+  // such file exists, so every run died with MODULE_NOT_FOUND at its last step.
+  // That also killed `npm run dev`, which reaches this script through a predev
+  // hook, and it went unnoticed because `prebuild` is
+  // `node scripts/sync-manifests.js || echo 'Sync skipped'`.
+  //
+  // Pointing it at the real generator, scripts/seo/generate-sitemap.js, is not
+  // the fix. That generator writes to the repository-root dist/sitemap.xml,
+  // which nothing serves. The sitemap the app actually serves is
+  // public-vite/sitemap.xml, which sitemap.static.test.ts asserts against and
+  // which no script in this repository writes: the generator has zero
+  // references to public-vite, and seo-auto-update.yml only validates, stages
+  // and uploads it. Calling the generator here would have printed a successful
+  // sitemap step while refreshing a file no one reads, which is worse than the
+  // crash it replaced, because a crash at least tells the truth.
+  //
+  // Making the served sitemap generated is a real fix and a separate one: the
+  // root generator emits 103 urls against the 33 in the committed file, so
+  // adopting it changes what ships to search engines and deserves its own
+  // review rather than arriving inside an unrelated change.
 }

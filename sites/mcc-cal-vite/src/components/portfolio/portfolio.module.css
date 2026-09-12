@@ -1715,9 +1715,33 @@
   max-width: 46ch;
 }
 
-/* A portrait frame in a pair is capped so it cannot tower over its partner. */
+/*
+ * A portrait frame is bounded by height rather than width, so it cannot tower
+ * over the landscape frame beside it.
+ *
+ * The cap belongs on the image, with width auto, not on the frame.
+ * .pfBlurImageFrame is overflow:hidden, so capping the frame's height crops the
+ * bottom of the photograph rather than scaling it down intact. Measured with a
+ * 1080x1620 frame curated into both slots before this was written: the wide row
+ * rendered the image 1100x1650 inside a 1100x702 frame, losing 948px of the
+ * picture, and the paired row lost 153px. The frame then shrinks to the image so
+ * the blur placeholder does not show down either side of it.
+ */
 .pfSelectedFigurePortrait .pfSelectedImageFrame {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.pfSelectedFigurePortrait .pfSelectedImage {
+  width: auto;
+  max-width: 100%;
   max-height: 78vh;
+}
+
+/* A full-column portrait has the whole row to itself, so it can run taller. */
+.pfSelectedFigureWide.pfSelectedFigurePortrait .pfSelectedImage {
+  max-height: 86vh;
 }
 
 .pfSelectedImageButton {
@@ -1852,7 +1876,10 @@
     gap: clamp(40px, 9vw, 64px);
   }
 
-  .pfSelectedFigurePortrait .pfSelectedImageFrame {
+  /* One column, so a portrait is already bounded by the viewport width. */
+  .pfSelectedFigurePortrait .pfSelectedImage,
+  .pfSelectedFigureWide.pfSelectedFigurePortrait .pfSelectedImage {
+    width: 100%;
     max-height: none;
   }
 }

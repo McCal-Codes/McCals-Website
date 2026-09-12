@@ -93,14 +93,48 @@ function absoluteUrl(value) {
     : `${siteUrl}${value.startsWith('/') ? value : `/${value}`}`;
 }
 
+/**
+ * Strips a tag this script manages, repeatedly, until the html stops changing.
+ *
+ * One pass is not enough on principle: removing a run of text can bring the
+ * characters on either side of it together into a fresh match, so a single
+ * `replace` can leave behind exactly the markup it was meant to delete. CodeQL
+ * flags that as js/incomplete-multi-character-sanitization, and it is right to.
+ * Looping to a fixed point is the remediation the rule asks for, and it costs
+ * one extra pass over a file we already hold in memory.
+ *
+ * The bound is there so a pattern that could ever match its own output cannot
+ * spin here; hitting it means the pattern is wrong, so it says so rather than
+ * returning half-cleaned html.
+ */
+function removeAllMatches(html, pattern, label) {
+  const MAX_PASSES = 20;
+  let current = html;
+
+  for (let pass = 0; pass < MAX_PASSES; pass += 1) {
+    const next = current.replace(pattern, '');
+    if (next === current) return next;
+    current = next;
+  }
+
+  throw new Error(
+    `removeAllMatches did not reach a fixed point for ${label} after ${MAX_PASSES} passes`,
+  );
+}
+
 function removeManagedImagePreloads(html) {
-  return html.replace(/\s*<link[^>]+data-route-image-preload=["'][^"']+["'][^>]*>\n?/gi, '');
+  return removeAllMatches(
+    html,
+    /\s*<link[^>]+data-route-image-preload=["'][^"']*["'][^>]*>\n?/gi,
+    'data-route-image-preload',
+  );
 }
 
 function removeManagedJsonLd(html) {
-  return html.replace(
-    /\s*<script[^>]+data-route-json-ld=["'][^"']+["'][^>]*>[\s\S]*?<\/script>\n?/gi,
-    '',
+  return removeAllMatches(
+    html,
+    /\s*<script[^>]+data-route-json-ld=["'][^"']*["'][^>]*>[\s\S]*?<\/script\s*>\n?/gi,
+    'data-route-json-ld',
   );
 }
 
