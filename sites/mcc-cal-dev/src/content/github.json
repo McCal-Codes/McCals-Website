@@ -1,6 +1,6 @@
 {
   "generatedBy": "sites/mcc-cal-dev/scripts/sync-github.js",
-  "generatedAt": "2026-09-16T18:35:04.419Z",
+  "generatedAt": "2026-09-24T18:40:44.108Z",
   "repos": [
     {
       "slug": "terranova",
@@ -87,7 +87,7 @@
       "fullName": "McCal-Codes/abridgd",
       "url": "https://github.com/McCal-Codes/abridgd",
       "private": false,
-      "description": "",
+      "description": "A calm, local-first news reader for Pittsburgh. Built to make local news feel finite, readable, and worth returning to.",
       "homepage": "",
       "license": null,
       "topics": [],
