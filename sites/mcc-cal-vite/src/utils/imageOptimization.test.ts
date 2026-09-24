@@ -17,6 +17,14 @@ describe('imageOptimization', () => {
     );
   });
 
+  it('serves a jsDelivr photograph at any ref but main directly, since the optimizer allowlist is main only', () => {
+    const atCommit =
+      'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@983944237f3d958cf775489fb761ea141fbed63b/src/images/Portfolios/Selected/photo.webp';
+
+    expect(getOptimizedImageUrl(atCommit, { width: 640 })).toBe(atCommit);
+    expect(getResponsiveImageSrcSet(atCommit, [640, 960])).toBeUndefined();
+  });
+
   it('builds a responsive srcset for optimizable local images', () => {
     expect(getResponsiveImageSrcSet('/images/portraits-og.jpg', [384, 640])).toBe(
       '/_vercel/image?url=%2Fimages%2Fportraits-og.jpg&q=80&w=384 384w, /_vercel/image?url=%2Fimages%2Fportraits-og.jpg&q=80&w=640 640w',
@@ -46,24 +54,10 @@ describe('imageOptimization', () => {
       };
     };
     const generatedPortfolioWidths = [
-      160,
-      320,
-      360,
-      480,
-      540,
-      640,
-      720,
-      960,
-      1080,
-      1280,
-      1440,
-      1600,
-      1920,
+      160, 320, 360, 480, 540, 640, 720, 960, 1080, 1280, 1440, 1600, 1920,
     ];
 
-    expect(vercelConfig.images?.sizes).toEqual(
-      expect.arrayContaining(generatedPortfolioWidths),
-    );
+    expect(vercelConfig.images?.sizes).toEqual(expect.arrayContaining(generatedPortfolioWidths));
     expect(vercelConfig.images?.localPatterns).toEqual(
       expect.arrayContaining([
         { pathname: '^/about/.*$', search: '' },
