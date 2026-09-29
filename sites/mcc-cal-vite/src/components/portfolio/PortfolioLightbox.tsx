@@ -10,12 +10,17 @@ import {
   type FC,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
-import { ChevronLeft, ChevronRight, ExternalLink, RotateCcw, X, ZoomIn, ZoomOut } from 'lucide-react';
-import OptimizedImage from '@/components/OptimizedImage';
 import {
-  getOptimizedImageUrl,
-  getResponsiveImageSrcSet,
-} from '@/utils/imageOptimization';
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  RotateCcw,
+  X,
+  ZoomIn,
+  ZoomOut,
+} from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '@/utils/imageOptimization';
 import type { PortfolioGroup } from './types';
 import { portfolioStyles } from './index';
 import ProtectedPortfolioImage from './ProtectedPortfolioImage';
@@ -75,11 +80,11 @@ interface PinchState {
   startZoom: number;
 }
 
-const clampZoom = (value: number) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Number(value.toFixed(2))));
+const clampZoom = (value: number) =>
+  Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Number(value.toFixed(2))));
 
-const getPinchDistance = (first: PointerPosition, second: PointerPosition) => (
-  Math.hypot(second.x - first.x, second.y - first.y)
-);
+const getPinchDistance = (first: PointerPosition, second: PointerPosition) =>
+  Math.hypot(second.x - first.x, second.y - first.y);
 
 const getPinchMidpoint = (first: PointerPosition, second: PointerPosition) => ({
   x: (first.x + second.x) / 2,
@@ -152,11 +157,22 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
     () => collection?.filter((item) => item.images.length > 0) ?? [],
     [collection],
   );
-  const activeCollectionIndex = group ? activeCollection.findIndex((item) => item.id === group.id) : -1;
+  const activeCollectionIndex = group
+    ? activeCollection.findIndex((item) => item.id === group.id)
+    : -1;
   const canNavigateAdjacentGroups =
     Boolean(onChangeGroup) && activeCollection.length > 1 && activeCollectionIndex >= 0;
   const hasMultiple = imageCount > 1;
   const hasNavigation = hasMultiple || canNavigateAdjacentGroups;
+
+  // An album counts its own images. A single-image group opened out of a
+  // collection, which is how /featured-work shows one photograph at a time,
+  // counts its place in that collection instead, so the toolbar reads "4 / 16"
+  // rather than "1 / 1" on every frame. With no collection to count, activeCollection
+  // is empty and activeCollectionIndex is -1, so that case keeps counting images.
+  const countsCollection = !hasMultiple && canNavigateAdjacentGroups;
+  const counterPosition = countsCollection ? activeCollectionIndex + 1 : activeIndex + 1;
+  const counterTotal = countsCollection ? activeCollection.length : Math.max(imageCount, 1);
 
   const activeImage = useMemo(() => {
     if (!group) return null;
@@ -208,7 +224,10 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
 
       if (!nextGroup) return false;
 
-      onChangeGroup(nextGroup, direction === 'previous' ? Math.max(0, nextGroup.images.length - 1) : 0);
+      onChangeGroup(
+        nextGroup,
+        direction === 'previous' ? Math.max(0, nextGroup.images.length - 1) : 0,
+      );
       return true;
     },
     [activeCollection, activeCollectionIndex, canNavigateAdjacentGroups, onChangeGroup],
@@ -273,11 +292,14 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
     setIsDragging(false);
   }, [group, initialIndex]);
 
-  useEffect(() => () => {
-    if (wheelNavigationTimerRef.current !== null) {
-      window.clearTimeout(wheelNavigationTimerRef.current);
-    }
-  }, []);
+  useEffect(
+    () => () => {
+      if (wheelNavigationTimerRef.current !== null) {
+        window.clearTimeout(wheelNavigationTimerRef.current);
+      }
+    },
+    [],
+  );
 
   useLayoutEffect(() => {
     if (!isOpen) return undefined;
@@ -292,12 +314,12 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
           width: Math.round(rect.width),
           height: Math.round(rect.height),
         };
-        setStageSize((currentStageSize) => (
+        setStageSize((currentStageSize) =>
           currentStageSize?.width === nextStageSize.width &&
           currentStageSize.height === nextStageSize.height
             ? currentStageSize
-            : nextStageSize
-        ));
+            : nextStageSize,
+        );
       }
     };
 
@@ -526,9 +548,8 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
       const drag = dragRef.current;
       const pinch = pinchRef.current;
       const isCancel = event.type === 'pointercancel';
-      const wasPinching = event.pointerType === 'touch' && (
-        pinch !== null || touchPointersRef.current.size > 1
-      );
+      const wasPinching =
+        event.pointerType === 'touch' && (pinch !== null || touchPointersRef.current.size > 1);
 
       releasePointer(event.currentTarget, event.pointerId);
 
@@ -690,24 +711,29 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
    */
   const outletDestination = group.articleUrl || group.outletUrl;
   const hasDirectArticle = Boolean(group.articleUrl);
-  const visibleTags = (group.tags ?? []).filter(
-    (tag) => {
-      const normalizedTag = tag.toLowerCase();
+  const visibleTags = (group.tags ?? []).filter((tag) => {
+    const normalizedTag = tag.toLowerCase();
 
-      return (
-        normalizedTag !== group.category?.toLowerCase() &&
-        !(group.published && normalizedTag === 'published work')
-      );
-    },
-  );
+    return (
+      normalizedTag !== group.category?.toLowerCase() &&
+      !(group.published && normalizedTag === 'published work')
+    );
+  });
   const zoomPercent = Math.round(zoom * 100);
   const activeImageSrc = getOptimizedImageUrl(activeImage.url, { width: 1920 });
   const activeImageSrcSet = getResponsiveImageSrcSet(activeImage.url, LIGHTBOX_SRCSET_WIDTHS);
   /* While zoomed, widen `sizes` so the browser upgrades to a sharper candidate. */
   const activeImageSizes = zoom > MIN_ZOOM ? `${Math.round(1100 * zoom)}px` : LIGHTBOX_SIZES;
-  const activeImageFit = imageAspectRatio === null ? 'pending' : shouldFitByHeight ? 'height' : 'width';
+  const activeImageFit =
+    imageAspectRatio === null ? 'pending' : shouldFitByHeight ? 'height' : 'width';
   const activeImageOrientation =
-    imageAspectRatio === null ? 'pending' : isPortraitImage ? 'portrait' : imageAspectRatio > 1 ? 'landscape' : 'square';
+    imageAspectRatio === null
+      ? 'pending'
+      : isPortraitImage
+        ? 'portrait'
+        : imageAspectRatio > 1
+          ? 'landscape'
+          : 'square';
   const activeImageFrameSize =
     imageAspectRatio !== null && stageSize !== null
       ? shouldFitByHeight
@@ -734,13 +760,21 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
         };
   const activeImageStyle: CSSProperties = shouldFitByHeight
     ? {
-        height: activeImageFrameSize ? `${activeImageFrameSize.height * zoom}px` : zoom > MIN_ZOOM ? `${zoom * 100}%` : '100%',
+        height: activeImageFrameSize
+          ? `${activeImageFrameSize.height * zoom}px`
+          : zoom > MIN_ZOOM
+            ? `${zoom * 100}%`
+            : '100%',
         width: 'auto',
         maxWidth: zoom > MIN_ZOOM ? 'none' : '100%',
         maxHeight: zoom > MIN_ZOOM ? 'none' : '100%',
       }
     : {
-        width: activeImageFrameSize ? `${activeImageFrameSize.width * zoom}px` : zoom > MIN_ZOOM ? `${zoom * 100}%` : '100%',
+        width: activeImageFrameSize
+          ? `${activeImageFrameSize.width * zoom}px`
+          : zoom > MIN_ZOOM
+            ? `${zoom * 100}%`
+            : '100%',
         height: 'auto',
         maxWidth: zoom > MIN_ZOOM ? 'none' : '100%',
         maxHeight: zoom > MIN_ZOOM ? 'none' : '100%',
@@ -762,9 +796,9 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
       <div ref={dialogRef} className={portfolioStyles.pfLightboxDialog} tabIndex={-1}>
         <div className={portfolioStyles.pfLightboxToolbar}>
           <div className={portfolioStyles.pfLightboxCounter} aria-live="polite">
-            <span>{activeIndex + 1}</span>
+            <span>{counterPosition}</span>
             <span aria-hidden="true">/</span>
-            <span>{imageCount}</span>
+            <span>{counterTotal}</span>
           </div>
 
           <div className={portfolioStyles.pfLightboxControls}>
@@ -850,14 +884,22 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
               data-fit={activeImageFit}
               data-orientation={activeImageOrientation}
               style={activeImageFrameStyle}
-              title={zoom > MIN_ZOOM ? 'Double-click or pinch to zoom out' : 'Double-click or pinch to zoom in'}
+              title={
+                zoom > MIN_ZOOM
+                  ? 'Double-click or pinch to zoom out'
+                  : 'Double-click or pinch to zoom in'
+              }
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerEnd}
               onPointerCancel={handlePointerEnd}
             >
               {!imageLoaded && !imageFailed && (
-                <div className={portfolioStyles.pfLightboxImageLoading} role="status" aria-live="polite">
+                <div
+                  className={portfolioStyles.pfLightboxImageLoading}
+                  role="status"
+                  aria-live="polite"
+                >
                   <span className={portfolioStyles.pfSpinner} aria-hidden="true" />
                   <span>Loading photo</span>
                 </div>
@@ -896,7 +938,11 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
                       if (naturalWidth > 0 && naturalHeight > 0) {
                         setImageAspectRatio(naturalWidth / naturalHeight);
                       }
-                      setImageStatus({ filename: activeImage.filename, loaded: true, error: false });
+                      setImageStatus({
+                        filename: activeImage.filename,
+                        loaded: true,
+                        error: false,
+                      });
                     }}
                     onError={() =>
                       setImageStatus({ filename: activeImage.filename, loaded: false, error: true })
@@ -955,12 +1001,16 @@ const PortfolioLightbox: FC<PortfolioLightboxProps> = ({
 
         <div className={portfolioStyles.pfLightboxCaption}>
           <div className={portfolioStyles.pfCaptionRail}>
-            <h3 id={titleId} className={portfolioStyles.pfCaptionRailTitle}>{group.title}</h3>
+            <h3 id={titleId} className={portfolioStyles.pfCaptionRailTitle}>
+              {group.title}
+            </h3>
 
             {(group.dateDisplay || group.category) && (
               <p className={portfolioStyles.pfCaptionRailMeta}>
                 {group.dateDisplay && <span>{group.dateDisplay}</span>}
-                {group.dateDisplay && group.category && <span className={portfolioStyles.pfCaptionRailMetaSeparator}>•</span>}
+                {group.dateDisplay && group.category && (
+                  <span className={portfolioStyles.pfCaptionRailMetaSeparator}>•</span>
+                )}
                 {group.category && <span>{group.category}</span>}
               </p>
             )}

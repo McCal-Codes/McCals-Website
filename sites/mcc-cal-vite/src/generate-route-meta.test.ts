@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
-import { buildRouteMetaEntries, routeOutputPaths } from '../scripts/generate-route-meta.js';
+import {
+  buildImagePreload,
+  buildRouteMetaEntries,
+  routeOutputPaths,
+} from '../scripts/generate-route-meta.js';
+import { repoCdnBase } from './config/repo-cdn.js';
 
 function buildPageSeoFixture() {
   return Object.fromEntries(
@@ -66,5 +71,38 @@ describe('generate-route-meta', () => {
       'blog/published-story.html',
     ]);
     expect(routeOutputPaths('/')).toEqual(['index.html']);
+  });
+});
+
+describe('the /featured-work lead preload', () => {
+  const SHA = '983944237f3d958cf775489fb761ea141fbed63b';
+  const frames = [{ path: 'Selected/20250609_kentucky_134.webp' }];
+
+  it('preloads optimizer candidates in production', () => {
+    const html = buildImagePreload(
+      '/featured-work',
+      frames,
+      repoCdnBase({ VERCEL_ENV: 'production' }),
+    );
+
+    expect(html).toContain('href="/_vercel/image?url=');
+    expect(html).toContain('imagesrcset="');
+    expect(html).toContain('%40main%2F');
+  });
+
+  it('preloads the photograph straight from its commit in a preview, with no candidates', () => {
+    const html = buildImagePreload(
+      '/featured-work',
+      frames,
+      repoCdnBase({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_SHA: SHA }),
+    );
+
+    expect(html).toContain(`href="https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@${SHA}/`);
+    expect(html).not.toContain('_vercel/image');
+    expect(html).not.toContain('imagesrcset');
+  });
+
+  it('emits nothing for any other route', () => {
+    expect(buildImagePreload('/journalism', frames)).toBeNull();
   });
 });
