@@ -118,7 +118,7 @@
     "playwright": "^1.59.1",
     "postcss": "^8.5.26",
     "prettier": "^3.9.6",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "typescript-eslint": "^8.67.0"
   },
   "engines": {
