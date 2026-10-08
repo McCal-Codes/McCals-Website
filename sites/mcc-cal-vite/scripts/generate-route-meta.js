@@ -2,12 +2,29 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { STATIC_PAGE_ROUTES } from '../src/config/public-routes.js';
+import {
+  WIDE_SRCSET_WIDTHS,
+  WIDE_SIZES,
+  LEAD_OPTIMIZED_WIDTH,
+  frameCdnUrl,
+  frameSrcSet,
+  optimizedFrameUrl,
+} from '../src/config/selected-work-image.js';
+import { repoCdnBase } from '../src/config/repo-cdn.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appRoot = path.resolve(__dirname, '..');
 const distRoot = path.join(appRoot, 'dist');
 const pageSeoPath = path.join(appRoot, 'src', 'content', 'pageSeoData.json');
-const blogManifestPath = path.join(appRoot, 'public-vite', 'content', 'blog-static', 'blog-manifest.json');
+const blogManifestPath = path.join(
+  appRoot,
+  'public-vite',
+  'content',
+  'blog-static',
+  'blog-manifest.json',
+);
+const SELECTED_WORK_ROUTE = '/featured-work';
+const featuredManifestPath = path.join(distRoot, 'manifests', 'featured-manifest.json');
 export function resolveSiteUrl(env = process.env) {
   const vercelEnv = env.VERCEL_ENV || env.VITE_VERCEL_ENV || 'development';
   if (vercelEnv === 'production') {
@@ -65,17 +82,132 @@ function escapeRegex(value) {
 }
 
 function absoluteUrl(value) {
-  return /^https?:\/\//i.test(value) ? value : `${siteUrl}${value.startsWith('/') ? value : `/${value}`}`;
+  return /^https?:\/\//i.test(value)
+    ? value
+    : `${siteUrl}${value.startsWith('/') ? value : `/${value}`}`;
+}
+
+/**
+ * Strips a tag this script manages, repeatedly, until the html stops changing.
+ *
+ * One pass is not enough on principle: removing a run of text can bring the
+ * characters on either side of it together into a fresh match, so a single
+ * `replace` can leave behind exactly the markup it was meant to delete. CodeQL
+ * flags that as js/incomplete-multi-character-sanitization, and it is right to.
+ * Looping to a fixed point is the remediation the rule asks for, and it costs
+ * one extra pass over a file we already hold in memory.
+ *
+ * The bound is there so a pattern that could ever match its own output cannot
+ * spin here; hitting it means the pattern is wrong, so it says so rather than
+ * returning half-cleaned html.
+ */
+function removeAllMatches(html, pattern, label) {
+  const MAX_PASSES = 20;
+  let current = html;
+
+  for (let pass = 0; pass < MAX_PASSES; pass += 1) {
+    const next = current.replace(pattern, '');
+    if (next === current) return next;
+    current = next;
+  }
+
+  throw new Error(
+    `removeAllMatches did not reach a fixed point for ${label} after ${MAX_PASSES} passes`,
+  );
 }
 
 function removeManagedImagePreloads(html) {
-  return html.replace(/\s*<link[^>]+data-route-image-preload=["'][^"']+["'][^>]*>\n?/gi, '');
+  return removeAllMatches(
+    html,
+    /\s*<link[^>]+data-route-image-preload=["'][^"']*["'][^>]*>\n?/gi,
+    'data-route-image-preload',
+  );
+}
+
+function removeManagedJsonLd(html) {
+  return removeAllMatches(
+    html,
+    /\s*<script[^>]+data-route-json-ld=["'][^"']*["'][^>]*>[\s\S]*?<\/script\s*>\n?/gi,
+    'data-route-json-ld',
+  );
+}
+
+/**
+ * The lead photograph of /featured-work, preloaded.
+ *
+ * Nothing in the prerendered HTML used to reference any photograph on this page,
+ * so the browser had to download and run the app, fetch featured-manifest.json,
+ * and only then learn the first image's url. This closes that gap: the candidate
+ * list and sizes are the same ones FeaturedPortfolio.tsx gives the img, imported
+ * from one module so they cannot drift into preloading an image the page then
+ * declines to use.
+ *
+ * The removal half of this feature already existed in removeManagedImagePreloads
+ * above; nothing had ever emitted the link it strips.
+ */
+export function buildImagePreload(route, frames, cdnBase = repoCdnBase(process.env)) {
+  if (route !== SELECTED_WORK_ROUTE) return null;
+  const lead = frames[0];
+  if (!lead?.path) return null;
+
+  const cdnUrl = frameCdnUrl(lead.path, cdnBase);
+  const srcSet = frameSrcSet(cdnUrl, WIDE_SRCSET_WIDTHS);
+  // A preview reads photographs from its own commit, which the optimizer does not
+  // serve, so its img has a plain src and no srcset. The preload matches that
+  // rather than advertising candidates the page will never request.
+  const candidates = srcSet
+    ? ` imagesrcset="${escapeAttr(srcSet)}" imagesizes="${escapeAttr(WIDE_SIZES)}"`
+    : '';
+  return (
+    `<link rel="preload" as="image" fetchpriority="high"` +
+    ` href="${escapeAttr(optimizedFrameUrl(cdnUrl, LEAD_OPTIMIZED_WIDTH))}"` +
+    candidates +
+    ` data-route-image-preload="${escapeAttr(route)}" />`
+  );
+}
+
+/**
+ * One ImageObject per curated photograph, in the served HTML.
+ *
+ * Google's image licensing documentation requires the type to be ImageObject,
+ * requires contentUrl to say which image the metadata belongs to, and requires
+ * `license` for the Licensable badge, with acquireLicensePage recommended. The
+ * page previously emitted a hand written CollectionPage and no ImageObject at
+ * all, so none of its photographs were eligible.
+ *
+ * Emitted here rather than from usePageMeta so it is in the HTML as served
+ * instead of injected after hydration.
+ */
+function buildJsonLd(route, frames, siteRoot, cdnBase = repoCdnBase(process.env)) {
+  if (route !== SELECTED_WORK_ROUTE || frames.length === 0) return null;
+
+  const graph = frames.map((frame) => ({
+    '@type': 'ImageObject',
+    contentUrl: frameCdnUrl(frame.path, cdnBase),
+    name: frame.title || 'Selected work',
+    description: frame.caption || undefined,
+    datePublished: frame.date || undefined,
+    creator: { '@type': 'Person', name: 'Caleb McCartney', url: `${siteRoot}/about` },
+    creditText: 'Caleb McCartney/McCal Media',
+    copyrightNotice: 'Copyright Caleb McCartney / McCal Media. All rights reserved.',
+    license: `${siteRoot}/licensing`,
+    acquireLicensePage: `${siteRoot}/request-a-quote`,
+  }));
+
+  const payload = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+
+  // </script> inside JSON would close the tag early; < is the only character that
+  // can do that, and escaping it keeps the JSON valid.
+  const safe = payload.replace(/</g, '\\u003c');
+  return `<script type="application/ld+json" data-route-json-ld="${escapeAttr(route)}">${safe}</script>`;
 }
 
 function inferImageType(image, explicitType) {
   if (explicitType) return explicitType;
 
-  const pathname = String(image || '').split(/[?#]/)[0].toLowerCase();
+  const pathname = String(image || '')
+    .split(/[?#]/)[0]
+    .toLowerCase();
   if (pathname.endsWith('.png')) return 'image/png';
   if (pathname.endsWith('.webp')) return 'image/webp';
   if (pathname.endsWith('.gif')) return 'image/gif';
@@ -96,7 +228,10 @@ function setTitle(html, title) {
 
 function setMeta(html, selector, attr, value) {
   const escapedValue = escapeAttr(value);
-  const pattern = new RegExp(`(<meta\\s+${escapeRegex(selector)}[^>]*\\s${attr}=["'])[^"']*(["'][^>]*>)`, 'i');
+  const pattern = new RegExp(
+    `(<meta\\s+${escapeRegex(selector)}[^>]*\\s${attr}=["'])[^"']*(["'][^>]*>)`,
+    'i',
+  );
 
   if (pattern.test(html)) {
     return html.replace(pattern, `$1${escapedValue}$2`);
@@ -107,7 +242,10 @@ function setMeta(html, selector, attr, value) {
 
 function setLink(html, rel, href) {
   const escapedHref = escapeAttr(href);
-  const pattern = new RegExp(`(<link\\s+rel=["']${rel}["'][^>]*\\shref=["'])[^"']*(["'][^>]*>)`, 'i');
+  const pattern = new RegExp(
+    `(<link\\s+rel=["']${rel}["'][^>]*\\shref=["'])[^"']*(["'][^>]*>)`,
+    'i',
+  );
 
   if (pattern.test(html)) {
     return html.replace(pattern, `$1${escapedHref}$2`);
@@ -116,10 +254,10 @@ function setLink(html, rel, href) {
   return html.replace('</head>', `    <link rel="${rel}" href="${escapedHref}" />\n  </head>`);
 }
 
-function applyRouteMeta(indexHtml, entry) {
+function applyRouteMeta(indexHtml, entry, selectedFrames = []) {
   const url = absoluteUrl(entry.route);
   const image = absoluteUrl(entry.imagePath);
-  let html = removeManagedImagePreloads(indexHtml);
+  let html = removeManagedJsonLd(removeManagedImagePreloads(indexHtml));
   html = setTitle(html, entry.title);
 
   if (entry.robots) {
@@ -134,13 +272,37 @@ function applyRouteMeta(indexHtml, entry) {
   html = setMeta(html, 'property="og:url"', 'content', url);
   html = setMeta(html, 'property="og:image"', 'content', image);
   html = setMeta(html, 'property="og:image:alt"', 'content', entry.imageAlt);
-  html = setMeta(html, 'property="og:image:width"', 'content', entry.imageWidth || DEFAULT_OG_IMAGE_WIDTH);
-  html = setMeta(html, 'property="og:image:height"', 'content', entry.imageHeight || DEFAULT_OG_IMAGE_HEIGHT);
-  html = setMeta(html, 'property="og:image:type"', 'content', inferImageType(entry.imagePath, entry.imageType));
+  html = setMeta(
+    html,
+    'property="og:image:width"',
+    'content',
+    entry.imageWidth || DEFAULT_OG_IMAGE_WIDTH,
+  );
+  html = setMeta(
+    html,
+    'property="og:image:height"',
+    'content',
+    entry.imageHeight || DEFAULT_OG_IMAGE_HEIGHT,
+  );
+  html = setMeta(
+    html,
+    'property="og:image:type"',
+    'content',
+    inferImageType(entry.imagePath, entry.imageType),
+  );
   html = setMeta(html, 'name="twitter:title"', 'content', entry.ogTitle);
   html = setMeta(html, 'name="twitter:description"', 'content', entry.ogDescription);
   html = setMeta(html, 'name="twitter:image"', 'content', image);
   html = setMeta(html, 'name="twitter:image:alt"', 'content', entry.imageAlt);
+
+  const head = [
+    buildImagePreload(entry.route, selectedFrames),
+    buildJsonLd(entry.route, selectedFrames, siteUrl),
+  ].filter(Boolean);
+
+  if (head.length > 0) {
+    html = html.replace('</head>', `    ${head.join('\n    ')}\n  </head>`);
+  }
 
   return html;
 }
@@ -201,30 +363,25 @@ export function routeOutputPaths(route) {
   if (route === '/') return ['index.html'];
 
   const cleanRoute = route.replace(/^\//, '').replace(/\/$/, '');
-  return [
-    `${cleanRoute}/index.html`,
-    `${cleanRoute}.html`,
-  ];
+  return [`${cleanRoute}/index.html`, `${cleanRoute}.html`];
 }
 
 /**
  * @param {{ pageSeo: Record<string, PageSeoEntry>, blogManifest?: BlogManifest }} input
  */
 export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } }) {
-  const staticEntries = STATIC_PAGE_ROUTES
-    .filter((route) => route.path !== '/')
-    .map((route) => {
-      const seoKey = route.seoKey || route.routeKey;
-      const entry = pageSeo[seoKey];
-      if (!entry) {
-        throw new Error(`Missing page SEO entry for route "${route.path}" (${seoKey})`);
-      }
+  const staticEntries = STATIC_PAGE_ROUTES.filter((route) => route.path !== '/').map((route) => {
+    const seoKey = route.seoKey || route.routeKey;
+    const entry = pageSeo[seoKey];
+    if (!entry) {
+      throw new Error(`Missing page SEO entry for route "${route.path}" (${seoKey})`);
+    }
 
-      return {
-        ...entry,
-        route: route.path,
-      };
-    });
+    return {
+      ...entry,
+      route: route.path,
+    };
+  });
   const blogEntries = (blogManifest.posts || [])
     .filter((post) => post.published)
     .map((post) => ({
@@ -242,19 +399,32 @@ export function buildRouteMetaEntries({ pageSeo, blogManifest = { posts: [] } })
 }
 
 async function generateRouteMeta() {
-  const [indexHtml, pageSeoRaw, blogManifestRaw] = await Promise.all([
+  const [indexHtml, pageSeoRaw, blogManifestRaw, featuredManifestRaw] = await Promise.all([
     fs.readFile(path.join(distRoot, 'index.html'), 'utf8'),
     fs.readFile(pageSeoPath, 'utf8'),
     fs.readFile(blogManifestPath, 'utf8').catch(() => '{"posts":[]}'),
+    // The featured manifest as it sits in this build's output, which is the exact
+    // file /featured-work fetches. Not featured-curation.json: nothing in the build
+    // regenerates the manifest from it (sync-manifests.js copies, it never runs
+    // manifest:featured), so a curation edit committed without regenerating left
+    // the two disagreeing. Reproduced before this change: moving a frame to the
+    // top of the curation file made the HTML preload that frame while the page
+    // still rendered the manifest's lead, and emit ImageObjects for a sequence the
+    // page did not show. Describing dist from dist cannot drift that way.
+    fs.readFile(featuredManifestPath, 'utf8').catch(() => '{"frames":[]}'),
   ]);
   const pageSeo = JSON.parse(pageSeoRaw);
   const blogManifest = JSON.parse(blogManifestRaw);
+  // An older manifest without frames[] yields no preload and no ImageObjects,
+  // rather than a guess.
+  const featuredManifest = JSON.parse(featuredManifestRaw);
+  const selectedFrames = Array.isArray(featuredManifest.frames) ? featuredManifest.frames : [];
   const routeEntries = buildRouteMetaEntries({ pageSeo, blogManifest });
   const allEntries = [...routeEntries, ...HIDDEN_ROUTES];
 
   await Promise.all(
     allEntries.flatMap((entry) => {
-      const routeHtml = applyRouteMeta(indexHtml, entry);
+      const routeHtml = applyRouteMeta(indexHtml, entry, selectedFrames);
 
       return routeOutputPaths(entry.route).map(async (outputPath) => {
         const targetPath = path.join(distRoot, outputPath);
@@ -269,13 +439,15 @@ async function generateRouteMeta() {
   // mistyped or retired URL gets Vercel's bare "NOT_FOUND" text and the app
   // never boots, so the site's own 404 page, which exists and is routed -
   // could never actually render.
-  await fs.writeFile(
-    path.join(distRoot, '404.html'),
-    applyRouteMeta(indexHtml, NOT_FOUND_ENTRY),
-  );
+  await fs.writeFile(path.join(distRoot, '404.html'), applyRouteMeta(indexHtml, NOT_FOUND_ENTRY));
 
   console.log(
     `Generated route meta for ${routeEntries.length} pages (+ ${HIDDEN_ROUTES.length} hidden route${HIDDEN_ROUTES.length === 1 ? '' : 's'})`,
+  );
+  console.log(
+    selectedFrames.length > 0
+      ? `  ${SELECTED_WORK_ROUTE}: preloaded the lead frame and emitted ${selectedFrames.length} ImageObject entries`
+      : `  ${SELECTED_WORK_ROUTE}: no curated frames found, emitted no preload or ImageObject`,
   );
 }
 
