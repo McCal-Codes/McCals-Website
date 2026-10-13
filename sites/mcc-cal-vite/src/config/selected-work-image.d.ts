@@ -1,0 +1,12 @@
+export const WIDE_SRCSET_WIDTHS: readonly number[];
+export const PAIR_SRCSET_WIDTHS: readonly number[];
+export const WIDE_SIZES: string;
+export const PAIR_SIZES: string;
+export const WIDE_MIN_SOURCE_WIDTH: number;
+export const LEAD_OPTIMIZED_WIDTH: number;
+export const IMAGE_QUALITY: number;
+export const VERCEL_IMAGE_PATH: string;
+export const PORTFOLIOS_BASE: string;
+export function frameCdnUrl(pathRelativeToPortfolios: string, cdnBase?: string): string;
+export function optimizedFrameUrl(cdnUrl: string, width?: number, quality?: number): string;
+export function frameSrcSet(cdnUrl: string, widths: readonly number[]): string | undefined;

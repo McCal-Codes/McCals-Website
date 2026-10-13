@@ -11,7 +11,15 @@ const PUBLIC_DEST = path.resolve(__dirname, '..', 'public-vite', 'manifests');
 const BLOG_SRC = path.resolve(__dirname, '..', '..', '..', 'src', 'content', 'blog');
 const BLOG_POSTS_DIR = path.join(BLOG_SRC, 'posts');
 const BLOG_DEST = path.resolve(__dirname, '..', 'public-vite', 'content', 'blog-static');
-const BLOG_COMPILE_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'compile-post-sources.js');
+const BLOG_COMPILE_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'blog',
+  'compile-post-sources.js',
+);
 const BLOG_VALIDATE_SCRIPT = path.resolve(
   __dirname,
   '..',
@@ -21,9 +29,24 @@ const BLOG_VALIDATE_SCRIPT = path.resolve(
   'blog',
   'validate-blog-content.js',
 );
-const BLOG_MANIFEST_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'manifest', 'generate-blog-manifest.js');
-const BLOG_FEED_SCRIPT = path.resolve(__dirname, '..', '..', '..', 'scripts', 'blog', 'generate-blog-feed.js');
-const SITEMAP_SCRIPT = path.resolve(__dirname, 'generate-sitemap.js');
+const BLOG_MANIFEST_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'manifest',
+  'generate-blog-manifest.js',
+);
+const BLOG_FEED_SCRIPT = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'scripts',
+  'blog',
+  'generate-blog-feed.js',
+);
 const BLOG_GENERATED_FILES = [
   path.join(BLOG_SRC, 'blog-manifest.json'),
   path.join(BLOG_SRC, 'feed.json'),
@@ -35,8 +58,10 @@ const COPY_TIMEOUT_MS = Number.parseInt(
 );
 const SCRIPT_TIMEOUT_MS = Number.parseInt(process.env.SYNC_SCRIPT_TIMEOUT_MS || '120000', 10);
 const SKIP_BLOG = String(process.env.SYNC_SKIP_BLOG || '').toLowerCase() === 'true';
-const FORCE_BLOG_COMPILE = String(process.env.SYNC_FORCE_BLOG_COMPILE || '').toLowerCase() === 'true';
-const FORCE_BLOG_SCRIPTS = String(process.env.SYNC_FORCE_BLOG_SCRIPTS || '').toLowerCase() === 'true';
+const FORCE_BLOG_COMPILE =
+  String(process.env.SYNC_FORCE_BLOG_COMPILE || '').toLowerCase() === 'true';
+const FORCE_BLOG_SCRIPTS =
+  String(process.env.SYNC_FORCE_BLOG_SCRIPTS || '').toLowerCase() === 'true';
 
 const FILES = [
   ['Concert/concert-manifest.json', 'concert-manifest.json'],
@@ -54,7 +79,8 @@ fs.mkdirSync(PUBLIC_DEST, { recursive: true });
 function runNodeScript(scriptPath, args = []) {
   execFileSync(process.execPath, [scriptPath, ...args], {
     stdio: 'inherit',
-    timeout: Number.isFinite(SCRIPT_TIMEOUT_MS) && SCRIPT_TIMEOUT_MS > 0 ? SCRIPT_TIMEOUT_MS : 120000,
+    timeout:
+      Number.isFinite(SCRIPT_TIMEOUT_MS) && SCRIPT_TIMEOUT_MS > 0 ? SCRIPT_TIMEOUT_MS : 120000,
   });
 }
 
@@ -129,7 +155,11 @@ function isCurrentCopy(srcStat, destPath) {
   if (!fs.existsSync(destPath)) return false;
 
   const destStat = fs.statSync(destPath);
-  return destStat.isFile() && destStat.size === srcStat.size && destStat.mtimeMs >= srcStat.mtimeMs - 1000;
+  return (
+    destStat.isFile() &&
+    destStat.size === srcStat.size &&
+    destStat.mtimeMs >= srcStat.mtimeMs - 1000
+  );
 }
 
 function copyFileWithTimeout(srcPath, destPath, { rootPath, label }) {
@@ -238,5 +268,26 @@ if (SKIP_BLOG) {
     `Synced: content/blog-static (${totals.copied} copied, ${totals.skipped} skipped, ${totals.failed} failed)`,
   );
 
-  runNodeScript(SITEMAP_SCRIPT);
+  // No sitemap step here on purpose.
+  //
+  // This used to call `generate-sitemap.js` resolved beside this file, where no
+  // such file exists, so every run died with MODULE_NOT_FOUND at its last step.
+  // That also killed `npm run dev`, which reaches this script through a predev
+  // hook, and it went unnoticed because `prebuild` is
+  // `node scripts/sync-manifests.js || echo 'Sync skipped'`.
+  //
+  // Pointing it at the real generator, scripts/seo/generate-sitemap.js, is not
+  // the fix. That generator writes to the repository-root dist/sitemap.xml,
+  // which nothing serves. The sitemap the app actually serves is
+  // public-vite/sitemap.xml, which sitemap.static.test.ts asserts against and
+  // which no script in this repository writes: the generator has zero
+  // references to public-vite, and seo-auto-update.yml only validates, stages
+  // and uploads it. Calling the generator here would have printed a successful
+  // sitemap step while refreshing a file no one reads, which is worse than the
+  // crash it replaced, because a crash at least tells the truth.
+  //
+  // Making the served sitemap generated is a real fix and a separate one: the
+  // root generator emits 103 urls against the 33 in the committed file, so
+  // adopting it changes what ships to search engines and deserves its own
+  // review rather than arriving inside an unrelated change.
 }
