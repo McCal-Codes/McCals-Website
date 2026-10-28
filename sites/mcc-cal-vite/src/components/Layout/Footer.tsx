@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                   aria-labelledby={headingId}
                   key={section.title}
                 >
-                  <h4 id={headingId}>{section.title}</h4>
+                  <h2 id={headingId}>{section.title}</h2>
                   <ul className="mcc-footer__list">
                     {section.links.map((link) => (
                       <li key={link.to}>
@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
               );
             })}
             <section className="mcc-footer__section" aria-labelledby="footer-follow">
-              <h4 id="footer-follow">Follow</h4>
+              <h2 id="footer-follow">Follow</h2>
               <div className="mcc-footer__social">
                 <a
                   href="https://www.facebook.com/mccalphotography"
