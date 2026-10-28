@@ -45,7 +45,9 @@ const sourceText = listSourceFiles(SRC_DIR)
 
 /** api/schedule/book.js -> /api/schedule/book, api/manifests/[type].js -> /api/manifests/ */
 function routePath(file: string): string {
-  const rel = relative(API_DIR, file).replace(/\.(js|ts)$/, '');
+  const rel = relative(API_DIR, file)
+    .replace(/\\/g, '/')
+    .replace(/\.(js|ts)$/, '');
   // A dynamic segment is filled in at the call site, so match only up to it.
   return `/api/${rel.replace(/\[[^\]]+\].*$/, '')}`;
 }
