@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "entry": ["api/**/*.{js,ts}", "scripts/generate-social-images.js"],
+  "entry": ["api/**/*.{js,ts}", "scripts/generate-social-images.js", "scripts/generate-sitemap.js"],
   "project": ["src/**/*.{ts,tsx,js,jsx}", "scripts/**/*.js", "api/**/*.{js,ts}"],
   "ignore": ["src/config/public-routes.d.ts"],
   "ignoreDependencies": ["autoprefixer", "postcss"],
