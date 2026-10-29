@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createManageToken, hashManageToken } from '../api/_lib/booking-token.js';
 
 const apiMocks = vi.hoisted(() => ({
@@ -121,7 +121,7 @@ function bookingRow(overrides: Partial<BookingRow> = {}): BookingRow {
 
 async function callManage(
   req: Record<string, unknown>,
-  rows: BookingRow[]
+  rows: BookingRow[],
 ): Promise<ReturnType<typeof createMockRes>> {
   apiMocks.getServiceClient.mockReturnValue(supabaseStub(rows) as never);
   const { default: handler } = await import('../api/schedule/manage.js');
@@ -132,8 +132,16 @@ async function callManage(
 
 describe('self-service booking management', () => {
   beforeEach(() => {
+    // The fixtures use fixed October 2026 dates, and the handler refuses slots in
+    // the past, so pin the clock instead of letting the suite expire.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-10-10T12:00:00Z'));
     apiMocks.applyRateLimit.mockClear();
     apiMocks.isSupabaseConfigured.mockReturnValue(true);
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it('rejects an unknown token without revealing that it is unknown', async () => {
@@ -203,7 +211,7 @@ describe('self-service booking management', () => {
 
     const res = await callManage(
       { method: 'POST', body: { token, action: 'reschedule', date: '2026-10-20', time: '14:30' } },
-      rows
+      rows,
     );
 
     expect(res.statusCode).toBe(409);
@@ -217,7 +225,7 @@ describe('self-service booking management', () => {
 
     const res = await callManage(
       { method: 'POST', body: { token, action: 'reschedule', date: '2020-01-01', time: '09:00' } },
-      rows
+      rows,
     );
 
     expect(res.statusCode).toBe(400);
@@ -230,7 +238,7 @@ describe('self-service booking management', () => {
 
     const res = await callManage(
       { method: 'POST', body: { token, action: 'reschedule', date: '2026-10-22', time: '11:00' } },
-      rows
+      rows,
     );
 
     expect(res.statusCode).toBe(200);
@@ -245,7 +253,7 @@ describe('self-service booking management', () => {
 
     const res = await callManage(
       { method: 'POST', body: { token, action: 'reschedule', date: '2026-10-22', time: '11:00' } },
-      rows
+      rows,
     );
 
     expect(res.statusCode).toBe(409);

@@ -16,7 +16,14 @@
   transform: translateX(-50%);
   margin: 0 !important;
   color: #f5f5f5;
-  font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    Inter,
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
 }
 
 .heroCarousel {
@@ -30,7 +37,14 @@
   margin: 0 !important;
   overflow: hidden;
   color: #f5f5f5;
-  font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    Inter,
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   background: #050506;
   transform: translateX(-50%);
 }
@@ -103,7 +117,7 @@
 
 .heroImage {
   opacity: 0;
-  transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1);
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .loaded {
@@ -115,7 +129,12 @@
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(110deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)),
+    linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0)
+    ),
     #151515;
   background-size: 220% 100%;
   /* Start invisible; fade in after 200ms so cached/fast images never flash the shimmer */
@@ -265,7 +284,10 @@
   cursor: pointer;
   position: relative;
   z-index: 10;
-  transition: background 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  transition:
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .heroCta:hover,
@@ -297,7 +319,10 @@
   padding: 0;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s cubic-bezier(0.16,1,0.3,1);
+  transition:
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .heroArrow svg {
@@ -341,7 +366,7 @@
 
 .heroDot {
   position: relative;
-  width: 20px;
+  width: 24px;
   height: 24px;
   border: 0;
   padding: 0;
@@ -463,7 +488,9 @@
 }
 
 @keyframes heroSkeletonReveal {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes heroSkeleton {

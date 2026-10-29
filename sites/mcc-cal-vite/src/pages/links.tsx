@@ -8,6 +8,7 @@ const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replac
 
 const LINK_STACK = [
   { label: 'Join the News App Beta', href: 'https://testflight.apple.com/join/W15tgNJY', internal: false },
+  { label: 'Folio Launcher for Android', href: 'https://foliolauncher.com', internal: false },
   { label: 'Grab a Coffee', href: '/grab-a-coffee', internal: true },
   { label: 'Book a Podcast', href: '/book-a-podcast', internal: true },
   { label: 'Email Me', href: 'mailto:contact@mcc-cal.com', internal: false },

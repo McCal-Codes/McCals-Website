@@ -43,6 +43,8 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests (chromium)
+        env:
+          TEST_BASE_URL: https://mcc-cal.com
         run: |
           mkdir -p reports/playwright
           npx playwright test tests/playwright --reporter=list,html --workers=1
