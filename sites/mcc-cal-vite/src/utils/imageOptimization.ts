@@ -1,10 +1,22 @@
+import { isOptimizableCdnUrl } from '@/config/repo-cdn';
+
 const SQUARESPACE_IMAGE_HOST = 'images.squarespace-cdn.com';
 const JSDELIVR_IMAGE_HOST = 'cdn.jsdelivr.net';
 const R2_IMAGE_HOST = import.meta.env.VITE_R2_PUBLIC_URL
-  ? (() => { try { return new URL(import.meta.env.VITE_R2_PUBLIC_URL).hostname; } catch { return null; } })()
+  ? (() => {
+      try {
+        return new URL(import.meta.env.VITE_R2_PUBLIC_URL).hostname;
+      } catch {
+        return null;
+      }
+    })()
   : null;
 const ABSOLUTE_URL_RE = /^(?:[a-z][a-z0-9+.-]*:)?\/\//i;
-const OPTIMIZABLE_REMOTE_HOSTS = new Set([SQUARESPACE_IMAGE_HOST, JSDELIVR_IMAGE_HOST, ...(R2_IMAGE_HOST ? [R2_IMAGE_HOST] : [])]);
+const OPTIMIZABLE_REMOTE_HOSTS = new Set([
+  SQUARESPACE_IMAGE_HOST,
+  JSDELIVR_IMAGE_HOST,
+  ...(R2_IMAGE_HOST ? [R2_IMAGE_HOST] : []),
+]);
 const OPTIMIZABLE_LOCAL_PATHS = [
   /^\/about\/.+/i,
   /^\/assets\/.+/i,
@@ -49,10 +61,19 @@ function serializeImageUrl(url: URL, isRelative: boolean): string {
   return `${url.pathname}${url.search}${url.hash}`;
 }
 
-export function getOptimizedImageUrl(
-  src: string,
-  options: ImageOptimizationOptions = {},
-): string {
+/**
+ * Whether Vercel's optimizer will fetch this remote url. For jsDelivr that is a
+ * path decision as well as a host one: vercel.json allows only
+ * `@main/src/images/Portfolios/`, so a url at any other ref, such as the commit
+ * a preview deployment reads its photographs from, would be rejected by the
+ * optimizer. It is served straight from jsDelivr instead.
+ */
+function isOptimizableRemoteUrl(url: URL): boolean {
+  if (!OPTIMIZABLE_REMOTE_HOSTS.has(url.hostname)) return false;
+  return url.hostname !== JSDELIVR_IMAGE_HOST || isOptimizableCdnUrl(url.toString());
+}
+
+export function getOptimizedImageUrl(src: string, options: ImageOptimizationOptions = {}): string {
   const parsed = parseImageUrl(src);
   if (!parsed) return src;
 
@@ -72,8 +93,9 @@ export function getOptimizedImageUrl(
     return src;
   }
 
-  const isOptimizableRemote = OPTIMIZABLE_REMOTE_HOSTS.has(url.hostname);
-  const isOptimizableLocal = isRelative && OPTIMIZABLE_LOCAL_PATHS.some((pattern) => pattern.test(url.pathname));
+  const isOptimizableRemote = isOptimizableRemoteUrl(url);
+  const isOptimizableLocal =
+    isRelative && OPTIMIZABLE_LOCAL_PATHS.some((pattern) => pattern.test(url.pathname));
 
   if (!isOptimizableRemote && !isOptimizableLocal) {
     return src;
@@ -100,9 +122,10 @@ export function getResponsiveImageSrcSet(src: string, widths: number[] = []): st
     return undefined;
   }
 
-  const isOptimizableRemote = OPTIMIZABLE_REMOTE_HOSTS.has(parsed.url.hostname);
+  const isOptimizableRemote = isOptimizableRemoteUrl(parsed.url);
   const isOptimizableLocal =
-    parsed.isRelative && OPTIMIZABLE_LOCAL_PATHS.some((pattern) => pattern.test(parsed.url.pathname));
+    parsed.isRelative &&
+    OPTIMIZABLE_LOCAL_PATHS.some((pattern) => pattern.test(parsed.url.pathname));
 
   if (!isOptimizableRemote && !isOptimizableLocal) {
     return undefined;
@@ -112,9 +135,7 @@ export function getResponsiveImageSrcSet(src: string, widths: number[] = []): st
     return undefined;
   }
 
-  return widths
-    .map((width) => `${getOptimizedImageUrl(src, { width })} ${width}w`)
-    .join(', ');
+  return widths.map((width) => `${getOptimizedImageUrl(src, { width })} ${width}w`).join(', ');
 }
 
 function hashString(value: string): number {
