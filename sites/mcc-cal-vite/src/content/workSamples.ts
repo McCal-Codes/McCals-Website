@@ -129,8 +129,8 @@ export const workSampleSections: WorkSampleSection[] = [
       {
         "src": "/images/work-samples/news-03.jpg",
         "width": 1800,
-        "height": 1200,
-        "caption": "Demonstrators hold a banner reading \"USA-Israel hands off Lebanon\" outside the Cathedral of Learning during a protest at the University of Pittsburgh on Sept. 25, 2024.",
+        "height": 1198,
+        "caption": "Pittsburgh police officers in riot gear watch as demonstrators carrying an Indivisible Pittsburgh banner march near Carnegie Mellon University during a protest tied to the Energy and Innovation Summit in Pittsburgh on July 15, 2025.",
         "credit": "Photo by Caleb McCartney"
       },
       {
@@ -193,7 +193,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/news-12.jpg",
         "width": 1800,
         "height": 1200,
-        "caption": "Actress Scarlett Johansson speaks at a canvass launch for the Harris campaign in Pittsburgh on Nov. 3, 2024.",
+        "caption": "Supporters cheer during a campaign rally for Vice President Kamala Harris at Erie Insurance Arena in Erie on Oct. 14, 2024.",
         "credit": "Photo by Caleb McCartney"
       }
     ]
