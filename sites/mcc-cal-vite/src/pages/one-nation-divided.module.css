@@ -1159,6 +1159,17 @@ body[data-theme='light'] .artistStatementPanel {
   opacity: 0.86;
 }
 
+.galleryNote {
+  margin: 0.6rem 0 0;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--lmgo-accent);
+  font-family: var(--lmgo-body);
+  font-size: 0.92rem;
+  line-height: 1.62;
+  color: var(--lmgo-fg);
+  opacity: 0.85;
+}
+
 .galleryCredit {
   margin: 0.75rem 0 0;
   font-family: var(--lmgo-body);

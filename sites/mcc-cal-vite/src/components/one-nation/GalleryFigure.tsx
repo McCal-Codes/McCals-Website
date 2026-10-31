@@ -11,8 +11,7 @@ type GalleryFigureProps = {
   alt: string;
   sceneCaption: string;
   gallery: GalleryPlacement;
-  field: { kicker: string; title: string };
-  // Note: body property removed as it's not used in GalleryFigure
+  field: { kicker: string; title: string; body?: string[] };
   sizes?: string;
   loading?: 'lazy' | 'eager';
   figureId?: string;
@@ -28,7 +27,6 @@ export const GalleryFigure = memo(function GalleryFigure({
   sceneCaption,
   gallery,
   field,
-  // Note: field.body is not used in this component
   sizes = '(min-width: 1120px) 1100px, (min-width: 700px) 50vw, calc(100vw - 2.5rem)',
   loading = 'lazy',
   figureId,
@@ -63,6 +61,11 @@ export const GalleryFigure = memo(function GalleryFigure({
         <span className={styles.galleryFigcaptionKicker}>{field.kicker}</span>
         <span className={styles.galleryFigcaptionTitle}>{field.title}</span>
         <p className={styles.gallerySceneCaption}>{sceneCaption}</p>
+        {field.body?.map((paragraph) => (
+          <p key={paragraph} className={styles.galleryNote}>
+            {paragraph}
+          </p>
+        ))}
         <p className={styles.galleryCredit}>{credit || 'Photo by Caleb McCartney'}</p>
       </figcaption>
     </figure>

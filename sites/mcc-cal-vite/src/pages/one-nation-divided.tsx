@@ -11,7 +11,6 @@ import { logError, logWarning } from '@/utils/logger';
 // Dynamic import for PDFViewer to reduce initial bundle size
 const PDFViewer = lazy(() => import('@/components/PDFViewer').then(module => ({ default: module.PDFViewer })));
 import GalleryFigure from '@/components/one-nation/GalleryFigure';
-import { FieldNoteCard } from '@/components/one-nation/FieldNoteCard';
 import { ProseSection } from '@/components/one-nation/ProseSection';
 import { ThemedLink } from '@/components/one-nation/ThemedLink';
 import { TableOfContents } from '@/components/one-nation/TableOfContents';
@@ -66,7 +65,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 2000,
     alt: 'Caleb McCartney stands with his grandparents next to political artwork installations during the One Nation Divided exhibition opening at Artists Image Resource.',
     sceneCaption:
-      `Caleb McCartney, who is 5 feet 10 inches tall, stands with his grandparents beside 30-by-30-inch works from One Nation Divided at Artists Image Resource in Pittsburgh, ${EXHIBITION_DATE}. The photograph shows the physical scale of the pieces in relation to the artist and his family. (Photo by Caleb McCartney)`,
+      `Caleb McCartney, who is 5 feet 10 inches tall, stands with his grandparents beside 30-by-30-inch works from One Nation Divided. (Photo by Caleb McCartney)`,
     gallery: { large: true },
     field: {
       kicker: 'Personal',
@@ -83,7 +82,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 2000,
     alt: 'Large 30" by 30" political artwork mounted on white gallery wall with bold text and imagery, part of the One Nation Divided exhibition.',
     sceneCaption:
-      `A 30" by 30" work from One Nation Divided displayed at Artists Image Resource in Pittsburgh, ${EXHIBITION_DATE}. The large format allows the layered political imagery to command attention and space. (Photo by Caleb McCartney)`,
+      `A 30" by 30" work from One Nation Divided. (Photo by Caleb McCartney)`,
     gallery: { large: true },
     field: {
       kicker: 'Work',
@@ -100,7 +99,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 1421,
     alt: 'Cropped view of Caleb McCartney’s One Nation Divided artist statement mounted on a gallery wall.',
     sceneCaption:
-      `Artist statement detail displayed at One Nation Divided exhibition, Artists Image Resource, Pittsburgh, ${EXHIBITION_DATE}. The statement contextualizes the photographic work within the broader thesis research, and the full text appears as readable HTML on this page. (Photo by Caleb McCartney)`,
+      `The artist statement, mounted on the gallery wall. (Photo by Caleb McCartney)`,
     gallery: { centered: true },
     field: {
       kicker: 'Statement',
@@ -117,7 +116,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 2000,
     alt: 'Series of smaller framed political portraits showing individual candidates, displayed as part of the One Nation Divided exhibition.',
     sceneCaption:
-      `Smaller candidate portraits from One Nation Divided at Artists Image Resource, Pittsburgh, ${EXHIBITION_DATE}. These intimate frames suggest that political figures are not everything—they exist because of people, not the other way around. (Photo by Caleb McCartney)`,
+      `Smaller candidate portraits from One Nation Divided. (Photo by Caleb McCartney)`,
     gallery: {},
     field: {
       kicker: 'Context',
@@ -134,7 +133,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 1464,
     alt: 'Close view of a polarized political graphic with campaign imagery and overlapping text.',
     sceneCaption:
-      `A polarized political graphic from One Nation Divided is shown at Artists Image Resource in Pittsburgh, ${EXHIBITION_DATE}. The image compresses campaign imagery, text and color into one visual field. (Photo by Caleb McCartney)`,
+      `A polarized political graphic from One Nation Divided. (Photo by Caleb McCartney)`,
     gallery: {},
     field: {
       kicker: 'Work',
@@ -151,7 +150,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 1464,
     alt: 'Gallery wall with polarized political works arranged in a linear sequence.',
     sceneCaption:
-      `Works from One Nation Divided are arranged in sequence along a gallery wall at Artists Image Resource in Pittsburgh, ${EXHIBITION_DATE}. (Photo by Caleb McCartney)`,
+      `Works are arranged in sequence along a gallery wall. (Photo by Caleb McCartney)`,
     gallery: {},
     field: {
       kicker: 'Installation',
@@ -168,7 +167,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 1464,
     alt: 'Visitors discuss works during the One Nation Divided exhibition opening at Artists Image Resource.',
     sceneCaption:
-      `Visitors talk near works from One Nation Divided during the opening at Artists Image Resource in Pittsburgh, ${EXHIBITION_DATE}. (Photo by Caleb McCartney)`,
+      `Visitors talk near the works during the opening. (Photo by Caleb McCartney)`,
     gallery: { centered: true },
     field: {
       kicker: 'Opening',
@@ -185,7 +184,7 @@ const EXHIBITION_IMAGES: DisplayImage[] = [
     height: 1464,
     alt: 'Final exhibition wall with political graphics installed under gallery lighting and visitors in the background.',
     sceneCaption:
-      `The final wall of One Nation Divided is installed under gallery lighting at Artists Image Resource in Pittsburgh, ${EXHIBITION_DATE}, with visitors in the background. (Photo by Caleb McCartney)`,
+      `The final wall is installed under gallery lighting, with visitors in the background. (Photo by Caleb McCartney)`,
     gallery: { large: true },
     field: {
       kicker: 'Installation',
@@ -232,7 +231,7 @@ const TRAIL_IMAGES: TrailImage[] = [
       kicker: 'Erie',
       title: 'Filed at 3 a.m.',
       body: [
-        'This frame is Walz in Erie on Sept. 5, 2024. The longer memory of another Erie night is the filing deadline, the drive home, and the body finally forcing me to stop.',
+        'The longer memory of another Erie night is the filing deadline, the drive home, and the body finally forcing me to stop.',
       ],
     },
   },
@@ -243,9 +242,9 @@ const TRAIL_IMAGES: TrailImage[] = [
     width: 1080,
     height: 720,
     alt:
-      'Supporters wait behind metal barricades near a Pitt sign before a campaign rally at the University of Pittsburgh in Pittsburgh, Pa.',
+      'Supporters wait behind metal barricades near a Pitt sign before a campaign rally at the University of Pittsburgh.',
     sceneCaption:
-      'Supporters wait outside a campaign rally with former President Barack Obama Oct. 10, 2024, at the University of Pittsburgh in Pittsburgh, Pa. The campus setting placed the assignment inside the everyday movement of students, city traffic, and campaign logistics. (Photo by Caleb McCartney)',
+      'Supporters wait outside a campaign rally with former President Barack Obama Oct. 10, 2024, at the University of Pittsburgh. (Photo by Caleb McCartney)',
     gallery: {},
     field: {
       kicker: 'Pittsburgh',
@@ -262,9 +261,9 @@ const TRAIL_IMAGES: TrailImage[] = [
     width: 1080,
     height: 720,
     alt:
-      'Former President Barack Obama smiles from a campaign podium with a Harris-Walz sign and a crowd behind him at the University of Pittsburgh in Pittsburgh, Pa.',
+      'Former President Barack Obama smiles from a campaign podium with a Harris-Walz sign and a crowd behind him at the University of Pittsburgh.',
     sceneCaption:
-      'Former President Barack Obama smiles from the stage during a campaign rally Oct. 10, 2024, at the University of Pittsburgh in Pittsburgh, Pa. The frame was made from the photographer pit as campaign staging, teleprompter glass, and crowd response converged in one view. (Photo by Caleb McCartney)',
+      'Former President Barack Obama smiles from the stage during a campaign rally Oct. 10, 2024, at the University of Pittsburgh. The frame was made from the photographer pit. (Photo by Caleb McCartney)',
     gallery: { large: true },
     field: {
       kicker: 'Pittsburgh',
@@ -281,9 +280,9 @@ const TRAIL_IMAGES: TrailImage[] = [
     width: 1080,
     height: 721,
     alt:
-      'Supporters cheer during a campaign rally with former President Barack Obama at the University of Pittsburgh in Pittsburgh, Pa.',
+      'Supporters cheer during a campaign rally with former President Barack Obama at the University of Pittsburgh.',
     sceneCaption:
-      'Supporters cheer during a campaign rally with former President Barack Obama Oct. 10, 2024, at the University of Pittsburgh in Pittsburgh, Pa. Faces, phones, campaign buttons, and local sports gear fold national politics into a specific Pittsburgh crowd. (Photo by Caleb McCartney)',
+      'Supporters cheer during a campaign rally with former President Barack Obama Oct. 10, 2024, at the University of Pittsburgh. Faces, phones, campaign buttons, and local sports gear fold national politics into a specific Pittsburgh crowd. (Photo by Caleb McCartney)',
     gallery: {},
     field: {
       kicker: 'Pittsburgh',
@@ -302,7 +301,7 @@ const TRAIL_IMAGES: TrailImage[] = [
     alt:
       'Republican vice presidential nominee J.D. Vance speaks at a campaign podium with a raised finger; a U.S. flag and bleachers of supporters are behind him in Johnstown, Pa.',
     sceneCaption:
-      'Republican vice presidential nominee J.D. Vance speaks Oct. 12, 2024, in Johnstown, Pa., with one hand raised at a podium branded for the Trump-Vance ticket. A large U.S. flag hangs behind him while supporters fill the bleachers, with heads and shoulders in the foreground emphasizing the view from inside the press area.',
+      'Republican vice presidential nominee J.D. Vance speaks Oct. 12, 2024, in Johnstown, Pa., with one hand raised at a podium branded for the Trump-Vance ticket. A large U.S. flag hangs behind him while supporters fill the bleachers.',
     gallery: { large: true },
     field: {
       kicker: 'Johnstown',
@@ -318,8 +317,8 @@ const ARTIST_STATEMENT = {
   name: 'Caleb McCartney',
   title: 'One Nation Divided',
   body: [
-    'Today’s politics feel like a constant tug-of-war between hope and fear, where everyone is desperate for change, yet fractures keep growing. I stand amid these tensions, pointing my lens at moments of raw energy—justice, power, and recognition.',
-    'Photographing them isn’t just about documentation; it’s where I wrestle with my anxieties, guided by Carl Jung’s idea of the “shadow.” I notice a collective longing in those quiet moments between speeches, when silence lingers, and we can finally let go of our debates—if only for a second. We all want something more, even though we chase it in scattered ways.',
+    'Today’s politics feel like a constant tug-of-war between hope and fear, where everyone is desperate for change, yet fractures keep growing. I stand amid these tensions, pointing my lens at moments of raw energy: justice, power, and recognition.',
+    'Photographing them isn’t just about documentation; it’s where I wrestle with my anxieties, guided by Carl Jung’s idea of the “shadow.” I notice a collective longing in those quiet moments between speeches, when silence lingers, and we can finally let go of our debates, if only for a second. We all want something more, even though we chase it in scattered ways.',
     'Over time, this process has forced me to see the fragile seams that bind us together and break us apart. Through my work, I’m trying to capture not just the slogans or the cheers but the more profound questions about who we are and why we’re so uneasy in this fractured yet hopeful landscape.',
   ],
 };
@@ -827,11 +826,11 @@ const OneNationDividedPage = () => {
               Exhibition at AIR
             </h2>
             <p className={styles.galleryIntro}>
-              <strong>One Nation Divided</strong> was the BFA thesis exhibition at{' '}
+              My BFA thesis project, <strong>One Nation Divided</strong>, was shown in the exhibition <strong>Letting Me Go</strong> at{' '}
               <a href="https://www.artistsimageresource.org/" target="_blank" rel="noopener noreferrer">
                 Artists Image Resource
               </a>
-              , Pittsburgh. The show was titled <strong>Letting Me Go</strong>. These photographs document the exhibition installation and selected works from the show. Captions below stay descriptive and neutral.
+              , Pittsburgh, on {EXHIBITION_DATE}. These photographs document the installation and selected works. Captions stay descriptive and neutral.
             </p>
           </div>
           <section className={styles.artistStatementPanel} aria-labelledby="artist-statement-heading">
@@ -845,7 +844,7 @@ const OneNationDividedPage = () => {
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <p className={styles.artistStatementNote}>
-                The color palette in the polarized images deliberately embodies the hex codes of the American flag—specifically #B22234 (Old Glory Red), #FFFFFF (White), and #3C3B6E (Old Glory Blue)—referencing both national symbolism and a collective nostalgia for the "good ol' times" of the nuclear family. These colors, while not officially assigned meaning when the flag was adopted in 1777, have come to represent valor, purity, and vigilance (Charles Thomson, 1782, as cited in Britannica). Drawing from the tritone and pop art aesthetic that emerged in the 1950s-60s—an era when artists like Warhol and Lichtenstein appropriated consumer imagery while grappling with underlying nuclear anxieties—this work becomes my interpretation of a shared cultural longing. As art historians note, Pop art both celebrated and critiqued the American Dream, presenting "commodity as both subject and object" while exposing underlying ideological frameworks in mass media (Hamilton, 1956; Pop art thesis, 2024). This piece channels that abrupt visual energy into something that speaks for itself.
+                The color palette in the polarized images deliberately embodies the hex codes of the American flag, specifically #B22234 (Old Glory Red), #FFFFFF (White), and #3C3B6E (Old Glory Blue), referencing both national symbolism and a collective nostalgia for the "good ol' times" of the nuclear family. These colors, while not officially assigned meaning when the flag was adopted in 1777, have come to represent valor, purity, and vigilance (Charles Thomson, 1782, as cited in Britannica). Drawing from the tritone and pop art aesthetic that emerged in the 1950s and 60s, an era when artists like Warhol and Lichtenstein appropriated consumer imagery while grappling with underlying nuclear anxieties. This work becomes my interpretation of a shared cultural longing. As art historians note, Pop art both celebrated and critiqued the American Dream, presenting "commodity as both subject and object" while exposing underlying ideological frameworks in mass media (Hamilton, 1956; Pop art thesis, 2024). This piece channels that abrupt visual energy into something that speaks for itself.
               </p>
             </div>
           </section>
@@ -922,33 +921,6 @@ const OneNationDividedPage = () => {
           </ErrorBoundary>
         </section>
 
-        <section className={styles.fieldNotesSection} aria-labelledby="field-notes-heading">
-          <div className={styles.fieldNotesInner}>
-            <p className={styles.sectionLabel}>Notebook</p>
-            <h2 id="field-notes-heading" className={styles.fieldNotesTitle}>
-              Field notes
-            </h2>
-            <p className={styles.fieldNotesLead}>
-              Short notes for the works and install views in{' '}
-              <ThemedLink href="#exhibition-gallery-heading">
-                Exhibition at AIR
-              </ThemedLink>
-              .
-            </p>
-            <div className={styles.fieldNotesGrid}>
-              {EXHIBITION_IMAGES.map((frame) => (
-                <FieldNoteCard
-                  key={frame.id}
-                  id={frame.id}
-                  kicker={frame.field.kicker}
-                  title={frame.field.title}
-                  body={frame.field.body}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className={styles.gallerySection} aria-labelledby="along-the-trail-heading">
           <div className={styles.galleryHeader}>
             <p className={styles.sectionLabel}>VII</p>
@@ -981,33 +953,6 @@ const OneNationDividedPage = () => {
                 figureId={id === 'erie-night' ? 'trail-erie-photo' : undefined}
               />
             ))}
-          </div>
-        </section>
-
-        <section className={styles.fieldNotesSection} aria-labelledby="trail-notes-heading">
-          <div className={styles.fieldNotesInner}>
-            <p className={styles.sectionLabel}>Notebook</p>
-            <h2 id="trail-notes-heading" className={styles.fieldNotesTitle}>
-              Trail notes
-            </h2>
-            <p className={styles.fieldNotesLead}>
-              Short notes for the trail photographs in{' '}
-              <ThemedLink href="#along-the-trail-heading">
-                Along the trail
-              </ThemedLink>
-              .
-            </p>
-            <div className={styles.fieldNotesGrid}>
-              {TRAIL_IMAGES.map((frame) => (
-                <FieldNoteCard
-                  key={frame.id}
-                  id={frame.id}
-                  kicker={frame.field.kicker}
-                  title={frame.field.title}
-                  body={frame.field.body}
-                />
-              ))}
-            </div>
           </div>
         </section>
 
