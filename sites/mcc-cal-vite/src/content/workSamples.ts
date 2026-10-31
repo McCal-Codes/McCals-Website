@@ -154,7 +154,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/people-01.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Maria Paula de Araujo Guedes (6) hugging Stitch plush alongside her family at the Sewickley United Methodist Church on March 27, 2026.",
+        "caption": "Maria Paula de Araújo Guedes (6) hugging Stitch plush alongside her family at the Sewickley United Methodist Church on March 27, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -432,7 +432,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/healing-01.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Members of the Sewickley community gather for a healing service for Maria Paula de Araujo Guedes at Sewickley United Methodist Church on March 27, 2026.",
+        "caption": "Members of the Sewickley community gather for a healing service for Maria Paula de Araújo Guedes at Sewickley United Methodist Church on March 27, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -446,21 +446,21 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/healing-03.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Members of the Araujo Guedes family lead Maria to the steps at the front of Sewickley United Methodist Church on March 27, 2026.",
+        "caption": "Members of the Araújo Guedes family lead Maria to the steps at the front of Sewickley United Methodist Church on March 27, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
         "src": "/images/work-samples/healing-04.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Maria Paula de Araujo Guedes, 6, hugs a Stitch plush toy as Pastor Hannah Loughman speaks with her family during a healing service at Sewickley United Methodist Church on March 27, 2026.",
+        "caption": "Maria Paula de Araújo Guedes, 6, hugs a Stitch plush toy as Pastor Hannah Loughman speaks with her family during a healing service at Sewickley United Methodist Church on March 27, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
         "src": "/images/work-samples/healing-05.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Pastor Hannah Loughman blesses Breno Araujo Guedes, 17, Maria's brother, during a healing service at Sewickley United Methodist Church on March 27, 2026.",
+        "caption": "Pastor Hannah Loughman blesses Breno Araújo Guedes, 17, Maria's brother, during a healing service at Sewickley United Methodist Church on March 27, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -474,7 +474,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/healing-07.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Colin McRoberts, chaplain of the Allegheny County Jail, Paul Leone, a retired Disciples of Christ pastor, and Hannah Loughman bless Maria Paula de Araujo Guedes and her family at Sewickley United Methodist Church on March 27, 2026.",
+        "caption": "Colin McRoberts, chaplain of the Allegheny County Jail, Paul Leone, a retired Disciples of Christ pastor, and Hannah Loughman bless Maria Paula de Araújo Guedes and her family at Sewickley United Methodist Church on March 27, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {

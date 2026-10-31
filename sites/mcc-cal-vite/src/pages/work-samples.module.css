@@ -187,3 +187,54 @@
   color: var(--mcc-fg-muted);
   font-size: 0.86rem;
 }
+
+.essay {
+  padding-top: clamp(1.25rem, 3vw, 1.75rem);
+  border-top: 1px solid var(--mcc-line);
+  scroll-margin-top: 5rem;
+}
+
+.essaySummary {
+  display: grid;
+  gap: 0.25rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.essaySummary::-webkit-details-marker {
+  display: none;
+}
+
+.essayTitle {
+  color: var(--mcc-accent-strong);
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  font-weight: 650;
+  line-height: 1.15;
+}
+
+.essayTitle::after {
+  content: ' +';
+}
+
+.essay[open] .essayTitle::after {
+  content: ' 2';
+}
+
+.essayMeta {
+  color: var(--mcc-fg-muted);
+  font-size: 0.9rem;
+}
+
+.essaySummary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--mcc-accent) 54%, transparent);
+  outline-offset: 4px;
+}
+
+.essayBlurb {
+  max-width: 44rem;
+  margin: 1rem 0 1.75rem;
+  color: var(--mcc-fg-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}

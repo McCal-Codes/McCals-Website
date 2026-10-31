@@ -1,9 +1,24 @@
+import { useEffect } from 'react';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { workSampleSections } from '@/content/workSamples';
 import styles from './work-samples.module.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+
+const essaySections = workSampleSections.filter((section) => section.layout === 'stack');
+const photoSections = workSampleSections.filter((section) => section.layout !== 'stack');
+
+// Open the essay a link points to, so #essay and the cover cards land on visible photos.
+const openEssayFromHash = () => {
+  const id = window.location.hash.slice(1);
+  if (!id) return;
+  const target = document.getElementById(id);
+  if (target instanceof HTMLDetailsElement) {
+    target.open = true;
+    target.scrollIntoView();
+  }
+};
 
 const WorkSamplesPage = () => {
   usePageMeta({
@@ -13,6 +28,12 @@ const WorkSamplesPage = () => {
     canonical: `${SITE_URL}/work-samples`,
     robots: 'noindex, nofollow',
   });
+
+  useEffect(() => {
+    openEssayFromHash();
+    window.addEventListener('hashchange', openEssayFromHash);
+    return () => window.removeEventListener('hashchange', openEssayFromHash);
+  }, []);
 
   return (
     <Layout>
@@ -46,13 +67,13 @@ const WorkSamplesPage = () => {
           })}
         </nav>
 
-        {workSampleSections.map((section) => (
+        {photoSections.map((section) => (
           <section className={styles.section} id={section.id} key={section.id}>
             <header className={styles.sectionHeader}>
               <h2>{section.title}</h2>
               <p>{section.blurb}</p>
             </header>
-            <div className={section.layout === 'stack' ? styles.stack : styles.grid}>
+            <div className={styles.grid}>
               {section.items.map((image) => (
                 <figure className={styles.figure} key={image.src}>
                   <img
@@ -70,6 +91,33 @@ const WorkSamplesPage = () => {
               ))}
             </div>
           </section>
+        ))}
+
+        {essaySections.map((section) => (
+          <details className={styles.essay} id={section.id} key={section.id}>
+            <summary className={styles.essaySummary}>
+              <span className={styles.essayTitle}>{section.title}</span>
+              <span className={styles.essayMeta}>{section.items.length} photos. Tap to read.</span>
+            </summary>
+            <p className={styles.essayBlurb}>{section.blurb}</p>
+            <div className={styles.stack}>
+              {section.items.map((image) => (
+                <figure className={styles.figure} key={image.src}>
+                  <img
+                    src={image.src}
+                    width={image.width}
+                    height={image.height}
+                    alt={image.caption}
+                    decoding="async"
+                  />
+                  <figcaption>
+                    {image.caption}
+                    <span className={styles.credit}>{image.credit}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </details>
         ))}
 
         <footer className={styles.footer}>
