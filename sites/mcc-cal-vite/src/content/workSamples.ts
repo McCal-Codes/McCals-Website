@@ -129,8 +129,8 @@ export const workSampleSections: WorkSampleSection[] = [
       {
         "src": "/images/work-samples/news-03.jpg",
         "width": 1800,
-        "height": 1200,
-        "caption": "Demonstrators hold a banner reading \"USA-Israel hands off Lebanon\" outside the Cathedral of Learning during a protest at the University of Pittsburgh on Sept. 25, 2024.",
+        "height": 1198,
+        "caption": "Pittsburgh police officers in riot gear watch as demonstrators carrying an Indivisible Pittsburgh banner march near Carnegie Mellon University during a protest tied to the Energy and Innovation Summit in Pittsburgh on July 15, 2025.",
         "credit": "Photo by Caleb McCartney"
       },
       {
@@ -193,7 +193,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/news-12.jpg",
         "width": 1800,
         "height": 1200,
-        "caption": "Actress Scarlett Johansson speaks at a canvass launch for the Harris campaign in Pittsburgh on Nov. 3, 2024.",
+        "caption": "Supporters cheer during a campaign rally for Vice President Kamala Harris at Erie Insurance Arena in Erie on Oct. 14, 2024.",
         "credit": "Photo by Caleb McCartney"
       }
     ]
@@ -260,9 +260,9 @@ export const workSampleSections: WorkSampleSection[] = [
       },
       {
         "src": "/images/work-samples/people-04.jpg",
-        "width": 1198,
-        "height": 1800,
-        "caption": "A painting inspired by a historic photo of the Sewickley Bridge is displayed above the fireplace in Shelley Davies Wygant and Jeffrey Wygant’s home on Orris Road on Tuesday, May 19, 2026, in Sewickley. The original photo shows the bridge before its final span was put in place.",
+        "width": 1800,
+        "height": 1198,
+        "caption": "A Quaker Valley High School homecoming queen is embraced after being crowned at halftime of a football game at Chuck Knox Stadium in Leetsdale on Oct. 2, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -275,8 +275,8 @@ export const workSampleSections: WorkSampleSection[] = [
       {
         "src": "/images/work-samples/people-06.jpg",
         "width": 1800,
-        "height": 1800,
-        "caption": "A Sewickley Academy graduate receives a gift from a school leader during commencement on June 5, 2026.",
+        "height": 1198,
+        "caption": "A Sewickley Academy graduate poses with his parents outside the school after commencement in Sewickley on June 5, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -288,13 +288,6 @@ export const workSampleSections: WorkSampleSection[] = [
       },
       {
         "src": "/images/work-samples/people-08.jpg",
-        "width": 1080,
-        "height": 1623,
-        "caption": "A performer in a sequined gown poses beside a doorway during a drag show at Carnegie Coffee on March 9, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/people-09.jpg",
         "width": 1080,
         "height": 719,
         "caption": "A performer in a suit and red tie raises both arms as the audience watches during a drag show at Carnegie Coffee on March 9, 2025.",
@@ -308,7 +301,7 @@ export const workSampleSections: WorkSampleSection[] = [
     "short": "Civic",
     "blurb": "Sidewalks, local government and public events, 2025 to 2026.",
     "layout": "grid",
-    "cover": 8,
+    "cover": 6,
     "items": [
       {
         "src": "/images/work-samples/civic-01.jpg",
@@ -335,53 +328,39 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/civic-04.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "A handwritten \"Closed\" notice hangs in a window of the Downtown YWCA building in Pittsburgh on May 2, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/civic-05.jpg",
-        "width": 1800,
-        "height": 1198,
         "caption": "A pedestrian walks along Hegner Way between businesses Tuesday, June 23, 2026, in Sewickley.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
-        "src": "/images/work-samples/civic-06.jpg",
+        "src": "/images/work-samples/civic-05.jpg",
         "width": 1800,
         "height": 1198,
         "caption": "A vehicle sits along the newly reconstructed Washington Street on April 7, 2026, in Leetsdale, Pa.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
-        "src": "/images/work-samples/civic-07.jpg",
+        "src": "/images/work-samples/civic-06.jpg",
         "width": 1800,
         "height": 1198,
         "caption": "Leetsdale Councilman Robert Benedict speaks while standing along Washington Street on April 7, 2026, in Leetsdale, Pa.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
-        "src": "/images/work-samples/civic-08.jpg",
-        "width": 1198,
-        "height": 1800,
-        "caption": "Leetsdale Councilman Robert Benedict stands along Washington Street following reconstruction work on April 7, 2026, in Leetsdale, Pa.",
-        "credit": "Photo by Caleb McCartney for TribLive"
-      },
-      {
-        "src": "/images/work-samples/civic-09.jpg",
+        "src": "/images/work-samples/civic-07.jpg",
         "width": 1800,
         "height": 1198,
         "caption": "A veteran stands with the POW/MIA flag during the dedication of the Leet Township Veterans Memorial at the Leet Township Municipal Complex in Fair Oaks on Saturday, July 25, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
-        "src": "/images/work-samples/civic-10.jpg",
+        "src": "/images/work-samples/civic-08.jpg",
         "width": 1800,
         "height": 1800,
         "caption": "A Leetsdale firefighter stands in dress uniform during the dedication of the Leet Township Veterans Memorial at the Leet Township Municipal Complex in Fair Oaks on Saturday, July 25, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
-        "src": "/images/work-samples/civic-11.jpg",
+        "src": "/images/work-samples/civic-09.jpg",
         "width": 1800,
         "height": 1198,
         "caption": "Ceremonial shovels await participants during a groundbreaking ceremony for Fern Hollow Nature Center's major renovation and expansion project on Tuesday, May 5, 2026, in Sewickley.",
@@ -395,14 +374,14 @@ export const workSampleSections: WorkSampleSection[] = [
     "short": "Sports",
     "blurb": "High school football, college volleyball and historical fencing.",
     "layout": "grid",
-    "cover": 6,
+    "cover": 0,
     "items": [
       {
         "src": "/images/work-samples/sports-01.jpg",
-        "width": 1443,
-        "height": 1800,
-        "caption": "Seneca Valley's Riley Sannes (5) hits Norwin's Carson Miller (9) as the ball sails past along the sideline in a football game Friday, Oct. 23, 2026, at Seneca Valley's NexTier Stadium.",
-        "credit": "Photo by Caleb McCartney for the Butler Eagle"
+        "width": 1800,
+        "height": 1200,
+        "caption": "Point Park University and Fisher players fight for a loose ball during a men's basketball game on Nov. 3, 2023.",
+        "credit": "Photo by Caleb McCartney"
       },
       {
         "src": "/images/work-samples/sports-02.jpg",
@@ -422,32 +401,18 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/sports-04.jpg",
         "width": 1080,
         "height": 719,
-        "caption": "A Brentwood High School player looks downfield as a Springdale defender closes in during a football game on Sept. 12, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/sports-05.jpg",
-        "width": 1080,
-        "height": 719,
         "caption": "A color guard member spins a flag during a halftime performance at a Brentwood football game on Sept. 12, 2025.",
         "credit": "Photo by Caleb McCartney"
       },
       {
-        "src": "/images/work-samples/sports-06.jpg",
+        "src": "/images/work-samples/sports-05.jpg",
         "width": 1800,
         "height": 1198,
         "caption": "Two fencers raise their swords in a clash during a historical fencing event hosted by Hilt and Helm on Jan. 20, 2026.",
         "credit": "Photo by Caleb McCartney"
       },
       {
-        "src": "/images/work-samples/sports-07.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Two fencers lunge with crossed swords during a historical fencing event hosted by Hilt and Helm on Jan. 20, 2026.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/sports-08.jpg",
+        "src": "/images/work-samples/sports-06.jpg",
         "width": 1800,
         "height": 1286,
         "caption": "Point Park players go up for a block at the net during a women's volleyball match on Nov. 4, 2023.",
