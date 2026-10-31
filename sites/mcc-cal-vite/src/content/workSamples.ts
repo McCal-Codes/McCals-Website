@@ -18,93 +18,6 @@ export interface WorkSampleSection {
 
 export const workSampleSections: WorkSampleSection[] = [
   {
-    "id": "essay",
-    "title": "Photo essay: Three Days With Boyd's Station",
-    "short": "Boyd's Station",
-    "blurb": "Cynthiana, Ky., June 2025. I spent a few days in Harrison County, Kentucky, with Boyd's Station, an arts and journalism project that invites photographers to document everyday life.",
-    "layout": "stack",
-    "cover": 3,
-    "items": [
-      {
-        "src": "/images/work-samples/boyd-01.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., on June 9, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-02.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Photographer Jeff Swensen, left, and his son Michael Swensen tie fishing line beside a pond at dusk in Cynthiana, Ky., on June 9, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-03.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Two people stand on a gravel path overlooking a pasture where cattle graze in Cynthiana, Ky., on June 10, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-04.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Aldo Farmer's father tends vegetable seedlings at the family farm in Cynthiana, Ky., on June 10, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-05.jpg",
-        "width": 1800,
-        "height": 1200,
-        "caption": "Aldo Farmer casts a fishing line into a pond at dusk on the family farm in Cynthiana, Ky., on June 9, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-06.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Aldo Farmer holds a sparkler as a parent looks on after dark at the family farm in Cynthiana, Ky., on June 9, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-07.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Aldo Farmer swings a lit sparkler at the family farm in Cynthiana, Ky., on June 9, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-08.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "A shopkeeper stands among antiques and framed artwork inside a shop in Cynthiana, Ky., on June 10, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-09.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "A man looks into the cab of a vintage truck as a woman sits in the passenger seat on a street in Cynthiana, Ky., on June 10, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-10.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "A storefront window in Cynthiana, Ky., reads \"A beautiful place to be,\" on June 10, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      },
-      {
-        "src": "/images/work-samples/boyd-11.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "A musician performs at the Aeolian Music Hall in Cynthiana, Ky., on June 12, 2025.",
-        "credit": "Photo by Caleb McCartney"
-      }
-    ]
-  },
-  {
     "id": "news",
     "title": "News and Politics",
     "short": "News",
@@ -241,7 +154,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/people-01.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Maria Paula de Araujo Guedes (6) hugging Stitch plush alongside her family at the Sewickley United Methodist Church on March 27, 2026.",
+        "caption": "Maria Paula de Araújo Guedes (6) hugging Stitch plush alongside her family at the Sewickley United Methodist Church on March 27, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -417,6 +330,173 @@ export const workSampleSections: WorkSampleSection[] = [
         "height": 1286,
         "caption": "Point Park players go up for a block at the net during a women's volleyball match on Nov. 4, 2023.",
         "credit": "Photo by Caleb McCartney"
+      }
+    ]
+  },
+  {
+    "id": "essay",
+    "title": "Photo essay: Three Days With Boyd's Station",
+    "short": "Boyd's Station",
+    "blurb": "Cynthiana, Ky., June 2025. I spent a few days in Harrison County, Kentucky, with Boyd's Station, an arts and journalism project that invites photographers to document everyday life.",
+    "layout": "stack",
+    "cover": 3,
+    "items": [
+      {
+        "src": "/images/work-samples/boyd-01.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Wildflowers bloom across a hillside meadow in Cynthiana, Ky., on June 9, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-02.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Photographer Jeff Swensen, left, and his son Michael Swensen tie fishing line beside a pond at dusk in Cynthiana, Ky., on June 9, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-03.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Two people stand on a gravel path overlooking a pasture where cattle graze in Cynthiana, Ky., on June 10, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-04.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Aldo Farmer's father tends vegetable seedlings at the family farm in Cynthiana, Ky., on June 10, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-05.jpg",
+        "width": 1800,
+        "height": 1200,
+        "caption": "Aldo Farmer casts a fishing line into a pond at dusk on the family farm in Cynthiana, Ky., on June 9, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-06.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Aldo Farmer holds a sparkler as a parent looks on after dark at the family farm in Cynthiana, Ky., on June 9, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-07.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Aldo Farmer swings a lit sparkler at the family farm in Cynthiana, Ky., on June 9, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-08.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "A shopkeeper stands among antiques and framed artwork inside a shop in Cynthiana, Ky., on June 10, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-09.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "A man looks into the cab of a vintage truck as a woman sits in the passenger seat on a street in Cynthiana, Ky., on June 10, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-10.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "A storefront window in Cynthiana, Ky., reads \"A beautiful place to be,\" on June 10, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      },
+      {
+        "src": "/images/work-samples/boyd-11.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "A musician performs at the Aeolian Music Hall in Cynthiana, Ky., on June 12, 2025.",
+        "credit": "Photo by Caleb McCartney"
+      }
+    ]
+  },
+  {
+    "id": "healing",
+    "title": "Photo essay: A Healing Service in Sewickley",
+    "short": "Healing service",
+    "blurb": "Sewickley, Pa., March 2026. Clergy, school staff and neighbors gathered at Sewickley United Methodist Church for a healing service for Maria Paula de Araujo Guedes, 6, and her family. Photographed for TribLive.",
+    "layout": "stack",
+    "cover": 3,
+    "items": [
+      {
+        "src": "/images/work-samples/healing-01.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Members of the Sewickley community gather for a healing service for Maria Paula de Araújo Guedes at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-02.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Pastor Hannah Loughman speaks as a photo is projected on the screen behind her during a healing service at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-03.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Members of the Araújo Guedes family lead Maria to the steps at the front of Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-04.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Maria Paula de Araújo Guedes, 6, hugs a Stitch plush toy as Pastor Hannah Loughman speaks with her family during a healing service at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-05.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Pastor Hannah Loughman blesses Breno Araújo Guedes, 17, Maria's brother, during a healing service at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-06.jpg",
+        "width": 1800,
+        "height": 1197,
+        "caption": "Pastor Hannah Loughman blesses Maria's mother during a healing service at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-07.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Colin McRoberts, chaplain of the Allegheny County Jail, Paul Leone, a retired Disciples of Christ pastor, and Hannah Loughman bless Maria Paula de Araújo Guedes and her family at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-08.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Pastor Hannah Loughman embraces Maria's mother during a healing service at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-09.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Leah Lindenfelser, Maria's school guidance counselor, reassures Maria and her family at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
+      },
+      {
+        "src": "/images/work-samples/healing-10.jpg",
+        "width": 1800,
+        "height": 1198,
+        "caption": "Maria's mother sits in a pew at Sewickley United Methodist Church on March 27, 2026.",
+        "credit": "Photo by Caleb McCartney for TribLive"
       }
     ]
   }
