@@ -31,6 +31,7 @@ const FAQPage = lazy(() => import('./pages/faq'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const TerranovaPage = lazy(() => import('./pages/terranova'));
 const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
+const WorkSamplesPage = lazy(() => import('./pages/work-samples'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
 
 const staticRouteComponents = {
@@ -127,6 +128,8 @@ const router = createBrowserRouter([
       { path: '/authors/:authorId', element: <AuthorsPage /> },
       { path: '/blog/:slug', element: <BlogPage /> },
       { path: '/roadmap', element: <RoadmapPage /> },
+      // Unlisted: shared by link for applications. Not in navigation or the sitemap.
+      { path: '/work-samples', element: <WorkSamplesPage /> },
       ...(import.meta.env.DEV
         ? [
             { path: '/showcase', element: <ShowcasePage /> },
