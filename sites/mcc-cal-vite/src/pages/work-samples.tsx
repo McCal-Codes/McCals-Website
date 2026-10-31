@@ -29,6 +29,7 @@ const WorkSamplesPage = () => {
           <div className={styles.links}>
             <a href="/downloads/caleb-mccartney-resume-photojournalism.pdf">Resume (PDF)</a>
             <a href="/downloads/caleb-mccartney-portfolio.pdf">Portfolio with captions (PDF)</a>
+            <a href="#essay">Photo essays</a>
             <a href="mailto:contact@mcc-cal.com">contact@mcc-cal.com</a>
           </div>
         </header>
